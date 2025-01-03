@@ -1,12 +1,18 @@
-import {FC} from 'react';
+import {FC, useContext} from 'react';
+import HeaderTitle from "@/common/components/page/HeaderTitle.tsx";
+import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
 
 const HomePage: FC = () => {
+    const authUserDetails = useContext(AuthContext);
+    console.log(authUserDetails);
+
     return (
-        <div>
-            <h1 className="pl-2 text-3xl">
-                Homepage
-            </h1>
-        </div>
+        <PageFlexWrapper>
+            <header>
+                <HeaderTitle>Homepage</HeaderTitle>
+            </header>
+        </PageFlexWrapper>
     );
 };
 

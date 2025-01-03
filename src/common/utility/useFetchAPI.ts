@@ -14,7 +14,7 @@ export default async function useFetchAPI<T = any>(params: useFetchAPIParams): P
     const fetchOptions: RequestInit = {
         method,
         credentials: "include",
-        headers: { ContentType: "application/json" },
+        headers: { "Content-Type": "application/json" },
         ...(data ? {body: JSON.stringify(data)} : {}),
     };
 
@@ -25,7 +25,7 @@ export default async function useFetchAPI<T = any>(params: useFetchAPIParams): P
         result = await response.json();
     } catch (error: unknown) {
         console.error("Error in Fetch: ", error);
-        throw new FetchError({message: `${response.status} ${response.statusText}`});
+        throw new FetchError({message: `${response.status} ${response.statusText}`, errors: []});
     }
 
     return {response, result};

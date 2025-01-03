@@ -1,12 +1,12 @@
 import {FC} from 'react';
 import {Bounce, ToastContainer} from "react-toastify";
-import {Outlet} from "react-router-dom";
+import AuthGuard from "@/common/guards/AuthGuard.tsx";
 
 const AdminLayout: FC = () => {
     const currentYear = (new Date()).getFullYear();
 
     return (
-        <main className="flex flex-col space-y-1 p-3 min-h-screen">
+        <main className="flex flex-col space-y-1 p-3 w-full h-screen">
             <header className="flex justify-between items-center">
                 <h1 className="dotgothic16-regular text-3xl">
                     Noovies MRS
@@ -22,8 +22,8 @@ const AdminLayout: FC = () => {
                 </div>
             </header>
 
-            <section className="offside-regular px-2 py-5 flex-1">
-                <Outlet/>
+            <section className="flex-1 offside-regular w-full px-2 py-5">
+                <AuthGuard />
 
                 <ToastContainer
                     position="bottom-center"
@@ -39,6 +39,8 @@ const AdminLayout: FC = () => {
                     transition={Bounce}
                 />
             </section>
+
+
 
             <footer className="dotgothic16-regular text-center text-neutral-500">
                 <span className="text-sm">

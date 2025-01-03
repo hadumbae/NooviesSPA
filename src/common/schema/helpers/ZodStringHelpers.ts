@@ -9,8 +9,14 @@ export const IDString = z
     .length(24, "ID String must be exactly 24 characters.");
 
 export const EmailString = RequiredString
-    .email({message: "Invalid email address."});
+    .email({message: "Must be an email address."});
 
 export const URLString = z
     .string()
     .url({message: "Must be a valid URL."});
+
+/**
+ * Types
+ */
+
+export type ObjectId = z.infer<typeof IDString>;
