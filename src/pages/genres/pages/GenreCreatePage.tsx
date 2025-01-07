@@ -16,7 +16,7 @@ const GenreCreatePage: FC = () => {
         <PageFlexWrapper>
             <header>
                 <HeaderTitle>Create Genre</HeaderTitle>
-                <HeaderDescription>Create your genres here. Fill in the details and click on `Submit` to continue.</HeaderDescription>
+                <HeaderDescription>Create genres here. Fill in the details and click on `Submit` to continue.</HeaderDescription>
             </header>
 
             <section>

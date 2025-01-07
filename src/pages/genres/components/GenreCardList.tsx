@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 import GenreListCard from "@/pages/genres/components/GenreListCard.tsx";
+import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 interface Props {
     genres: Genre[];
@@ -8,11 +9,10 @@ interface Props {
 }
 
 const GenreCardList: FC<Props> = ({genres, onGenreDelete}) => {
-
     if (genres.length === 0) {
-        return <div className='h-full flex flex-col justify-center items-center'>
+        return <PageCenter>
             <span className="text-neutral-500">There are no genres.</span>
-        </div>
+        </PageCenter>;
     }
 
     return (

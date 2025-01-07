@@ -2,7 +2,7 @@ import {z} from "zod";
 import {IDString, ObjectId, RequiredString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {ZodType} from "zod";
 
-export default interface IGenre {
+export interface IGenre {
     readonly _id: ObjectId;
     name: string;
     description: string;
@@ -23,4 +23,7 @@ export const GenreSchema: ZodType<IGenre> = z.object({
         .array(z.union([IDString, z.any()])),
 });
 
+export const GenreArraySchema = z.array(GenreSchema);
+
 export type Genre = z.infer<typeof GenreSchema>;
+export type GenreArray = z.infer<typeof GenreArraySchema>;

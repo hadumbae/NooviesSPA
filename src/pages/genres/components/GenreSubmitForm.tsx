@@ -1,12 +1,15 @@
 import {FC} from 'react';
 import {Form} from "@/common/components/ui/form.tsx";
-import useGenreForm from "@/pages/genres/hooks/useGenreForm.ts";
-import useGenreSubmitMutation from "@/pages/genres/hooks/useGenreSubmitMutation.ts";
-import {GenreSubmit} from "@/pages/genres/schema/GenreSubmitSchema.ts";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
-import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
+
+import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
+
+import useGenreSubmitForm from "@/pages/genres/hooks/useGenreSubmitForm.ts";
+import useGenreSubmitMutation from "@/pages/genres/hooks/useGenreSubmitMutation.ts";
+
+import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
+import {GenreSubmit} from "@/pages/genres/schema/GenreSubmitSchema.ts";
 
 interface Props {
     genre?: Genre;
@@ -14,8 +17,8 @@ interface Props {
 }
 
 const GenreSubmitForm: FC<Props> = ({genre, onGenreSubmit}) => {
-    const form = useGenreForm({genre});
-    const {mutate} = useGenreSubmitMutation({form, onSubmit: onGenreSubmit});
+    const form = useGenreSubmitForm({genre});
+    const {mutate} = useGenreSubmitMutation({form, _id: genre?._id, onSubmit: onGenreSubmit});
 
     const onSubmit = (values: GenreSubmit) => {
         console.log("Values: ", values);

@@ -11,7 +11,7 @@ const parseResponseData = <
     const {data: parseData, errors} = safeParseSchema<TSchema, TData>({schema, data});
 
     if (errors) throw new FetchError({message: "Received Invalid Data.", errors});
-    if (!parseData) throw new FetchError({message: "Data is unexpectedly empty."});
+    if (!parseData) throw new FetchError({message: "Data is unexpectedly empty.", errors: []});
 
     return parseData!;
 }

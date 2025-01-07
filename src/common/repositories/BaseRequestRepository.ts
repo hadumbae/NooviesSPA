@@ -5,7 +5,7 @@ import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
 import QueryFilters from "@/common/type/QueryFilters.ts";
 
 export interface IRequestRepository {
-    getAll(params: { queries: QueryFilters }): Promise<FetchReturns>;
+    getAll(params: { filters: QueryFilters }): Promise<FetchReturns>;
 
     get(params: { _id: string }): Promise<FetchReturns>;
 
@@ -19,8 +19,8 @@ export interface IRequestRepository {
 }
 
 export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IRequestRepository => ({
-    async getAll({queries = {}}: { queries: Record<string, any> }): Promise<FetchReturns> {
-        const url = buildQueryURL({baseURL: baseURL, path: "all", queries});
+    async getAll({filters = {}}: { filters: Record<string, any> }): Promise<FetchReturns> {
+        const url = buildQueryURL({baseURL: baseURL, path: "all", queries: filters});
         return useFetchAPI({url, method: "GET"});
     },
 
