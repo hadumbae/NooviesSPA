@@ -11,12 +11,12 @@ interface Props {
     genre: Genre;
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link",
     className?: string,
-    onGenreDelete: () => void,
+    onDelete: () => void,
 }
 
-const GenreOptions: FC<Props> = ({genre, variant = "default", className = "", onGenreDelete}) => {
+const GenreOptions: FC<Props> = ({genre, variant = "default", className = "", onDelete}) => {
     const {_id} = genre;
-    const {mutate, isPending, isSuccess} = useGenreDeleteMutation({onGenreDelete});
+    const {mutate, isPending, isSuccess} = useGenreDeleteMutation({onDelete});
 
     const deleteGenre = () => {
         mutate({_id});

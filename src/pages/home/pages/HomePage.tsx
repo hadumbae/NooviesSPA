@@ -1,5 +1,5 @@
 import {FC, useContext} from 'react';
-import HeaderTitle from "@/common/components/page/HeaderTitle.tsx";
+import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
 

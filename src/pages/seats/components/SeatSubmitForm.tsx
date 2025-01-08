@@ -1,16 +1,20 @@
 import {FC, useEffect, useRef} from 'react';
+
+import {cn} from "@/common/lib/utils.ts";
+import {Form} from "@/common/components/ui/form.tsx";
+import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
+import {Button} from "@/common/components/ui/button.tsx";
+
+import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
+
+import ScreenHookFormCombobox from "@/pages/screens/components/ScreenHookFormCombobox.tsx";
+import SeatTypeHookFormCombobox from "@/pages/seats/components/SeatTypeHookFormCombobox.tsx";
+import TheatreHookFormCombobox from "@/pages/theatres/components/TheatreHookFormCombobox.tsx";
+
+import {SeatSubmit} from "@/pages/seats/schema/SeatSubmitSchema.ts";
 import useSeatSubmitForm from "@/pages/seats/hooks/useSeatSubmitForm.ts";
 import useSeatSubmitMutation from "@/pages/seats/hooks/useSeatSubmitMutation.ts";
-import {SeatSubmit} from "@/pages/seats/schema/SeatSubmitSchema.ts";
-import {Form} from "@/common/components/ui/form.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import SeatTypeHookFormCombobox from "@/pages/seats/components/SeatTypeHookFormCombobox.tsx";
-import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
-import TheatreHookFormCombobox from "@/pages/theatres/components/TheatreHookFormCombobox.tsx";
-import ScreenHookFormCombobox from "@/pages/screens/components/ScreenHookFormCombobox.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
 
 interface Props {
     className?: string;
@@ -41,6 +45,7 @@ const SeatSubmitForm: FC<Props> = ({className, seat, onSubmit}) => {
     }, [theatre]);
 
     const onFormSubmit = (values: SeatSubmit) => {
+        console.log("Seat Submit Values: ", values);
         mutate(values);
     }
 
@@ -79,11 +84,20 @@ const SeatSubmitForm: FC<Props> = ({className, seat, onSubmit}) => {
                     min={0}
                 />
 
-                <TheatreHookFormCombobox form={form} name="theatre" label="Theatre" />
+                <TheatreHookFormCombobox
+                    form={form}
+                    name="theatre"
+                    label="Theatre"
+                />
 
                 {
                     theatre &&
-                    <ScreenHookFormCombobox form={form} name="screen" label="Screen" filters={{theatre}} />
+                    <ScreenHookFormCombobox
+                        form={form}
+                        name="screen"
+                        label="Screen"
+                        filters={{theatre}}
+                    />
                 }
 
                 <Button

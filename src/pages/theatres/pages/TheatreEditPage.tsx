@@ -5,9 +5,8 @@ import useFetchTheatre from "@/pages/theatres/hooks/useFetchTheatre.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/PageError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import HeaderTitle from "@/common/components/page/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/HeaderDescription.tsx";
 import TheatreSubmitForm from "@/pages/theatres/components/TheatreSubmitForm.tsx";
+import TheatreEditHeader from "@/pages/theatres/components/headers/TheatreEditHeader.tsx";
 
 const TheatreEditPage: FC = () => {
     const navigate = useNavigate();
@@ -22,16 +21,9 @@ const TheatreEditPage: FC = () => {
     if (isPending) return <PageLoader />;
     if (isError) return <PageError error={error} />
 
-    const {name} = theatre;
-
     return (
         <PageFlexWrapper>
-            <header>
-                <HeaderTitle>{name}</HeaderTitle>
-                <HeaderDescription>
-                    Edit the theatre ({name}) here. Click on 'Submit' to proceed.
-                </HeaderDescription>
-            </header>
+            <TheatreEditHeader theatre={theatre} />
 
             <section>
                 <TheatreSubmitForm theatre={theatre} onSubmit={() => onSubmit()} />

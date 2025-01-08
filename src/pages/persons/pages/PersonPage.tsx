@@ -4,8 +4,8 @@ import useFetchPersonParams from "@/pages/persons/hooks/useFetchPersonParams.ts"
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/PageError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import HeaderTitle from "@/common/components/page/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/HeaderDescription.tsx";
+import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
+import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {format} from "date-fns";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
 import PersonOptions from "@/pages/persons/components/PersonOptions.tsx";

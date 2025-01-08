@@ -6,21 +6,20 @@ import {toast} from "react-toastify";
 import {FetchError} from "@/common/type/error/FetchError.ts";
 
 interface IUseDeleteGenreMutationParams {
-    onGenreDelete: () => void,
+    onDelete: () => void,
 }
 
 export default function useGenreDeleteMutation(params: IUseDeleteGenreMutationParams) {
-    const {onGenreDelete} = params;
+    const {onDelete} = params;
 
     const deleteGenre = async ({_id}: {_id: ObjectId}) => {
-        await useFetchErrorHandler({
-            fetchQueryFn: () => GenreRepository.delete({_id}),
-        });
+        const fetchQueryFn = () => GenreRepository.delete({_id});
+        await useFetchErrorHandler({fetchQueryFn});
     }
 
     const onSuccess = () => {
         toast.success("Genre deleted.");
-        onGenreDelete();
+        onDelete();
     }
 
     const onError = (error: Error | FetchError) => {

@@ -5,9 +5,8 @@ import useFetchScreen from "@/pages/screens/hooks/useFetchScreen.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/PageError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import HeaderTitle from "@/common/components/page/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/HeaderDescription.tsx";
 import ScreenSubmitForm from "@/pages/screens/components/ScreenSubmitForm.tsx";
+import ScreenEditHeader from "@/pages/screens/components/headers/ScreenEditHeader.tsx";
 
 const ScreenEditPage: FC = () => {
     const navigate = useNavigate();
@@ -21,16 +20,9 @@ const ScreenEditPage: FC = () => {
     if (isPending) return <PageLoader />;
     if (isError) return <PageError error={error} />
 
-    const {name} = screen;
-    
     return (
         <PageFlexWrapper>
-            <header>
-                <HeaderTitle>{name}</HeaderTitle>
-                <HeaderDescription>
-                    Edit the screen ({name}) here. Click on 'Submit' to proceed.
-                </HeaderDescription>
-            </header>
+            <ScreenEditHeader screen={screen} />
 
             <section>
                 <ScreenSubmitForm screen={screen} onSubmit={() => onSubmit()} />

@@ -24,7 +24,8 @@ const GenreListCard: FC<Props> = ({genre, onGenreDelete}) => {
 
                 <GenreOptions
                     genre={genre}
-                    onGenreDelete={onGenreDelete}
+                    onDelete={onGenreDelete}
+                    variant="outline"
                 />
             </CardContent>
         </Card>
