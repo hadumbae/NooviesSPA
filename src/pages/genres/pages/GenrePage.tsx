@@ -1,12 +1,14 @@
+// TODO - Movies By Genre
 import {FC, ReactElement} from 'react';
 import useFetchGenre from "@/pages/genres/hooks/useFetchGenre.ts";
 import useFetchGenreParams from "@/pages/genres/hooks/useFetchGenreParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/PageError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import TextQuote from "@/common/components/text/TextQuote.tsx";
 import GenreDetailsHeader from "@/pages/genres/components/headers/GenreDetailsHeader.tsx";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
+import PageSection from "@/common/components/page/PageSection.tsx";
+import useTitle from "@/common/hooks/document/useTitle.ts";
+import GenreDescriptionCard from "@/pages/genres/components/cards/GenreDescriptionCard.tsx";
 
 /**
  * A React component that serves as a page for displaying detailed information
@@ -28,28 +30,27 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
  * @returns {React.ReactElement} The genre details page.
  */
 const GenrePage: FC = (): ReactElement => {
+    useTitle("Genre Details");
+
     const {genreID} = useFetchGenreParams();
     const {data: genre, isPending, isError, error} = useFetchGenre({_id: genreID!});
+
+    useTitle(genre?.name);
 
     if (isPending) return <PageLoader />
     if (isError) return  <PageError error={error} />
 
-    const {description} = genre;
-
     return (
         <PageFlexWrapper>
-            {/* Header */}
             <GenreDetailsHeader genre={genre} />
 
-            {/*Description*/}
-            <section>
-                <TextQuote>{description}</TextQuote>
-            </section>
+            <PageSection title="Description">
+                <GenreDescriptionCard genre={genre} />
+            </PageSection>
 
-            {/* TODO Paginated Movies */}
-            <section>
-                <HeaderTitle className="text-xl">Movies TODO</HeaderTitle>
-            </section>
+            <PageSection title="Movies">
+                Movies By Genre
+            </PageSection>
         </PageFlexWrapper>
     );
 };

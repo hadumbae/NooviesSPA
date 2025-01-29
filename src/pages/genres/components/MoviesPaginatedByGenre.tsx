@@ -21,7 +21,7 @@ interface Props {
  * that users can navigate through the list of movies easily,
  * based on the selected genre.
  */
-const MoviesPaginatedByGenre: FC<Props> = ({genre}) => {
+const MoviesPaginatedByGenre: FC<Props> = ({genre}: Props) => {
     console.log(genre);
 
     return (

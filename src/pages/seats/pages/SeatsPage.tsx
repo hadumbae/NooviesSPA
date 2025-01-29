@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import usePaginationSearchParams from "@/common/hooks/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/PageError.tsx";
 import {useFetchPaginatedSeats} from "@/pages/seats/hooks/useFetchPaginatedSeats.ts";

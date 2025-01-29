@@ -1,12 +1,12 @@
 import {GenreSubmit} from "@/pages/genres/schema/GenreSubmitSchema.ts";
 import {useMutation} from "@tanstack/react-query";
-import useFetchErrorHandler from "@/common/utility/useFetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
 import {UseFormReturn} from "react-hook-form";
-import parseResponseData from "@/common/utility/parseResponseData.ts";
+import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 import {Genre, GenreSchema} from "@/pages/genres/schema/GenreSchema.ts";
 import {toast} from "react-toastify";
-import mutationErrorHandler from "@/common/utility/forms/mutationFormErrorHandler.ts";
+import mutationErrorHandler from "@/common/handlers/mutation/MutationFormErrorHandler.ts";
 
 export default function useGenreSubmitMutation(
     {_id, form, onSubmit}: {_id?: string, form: UseFormReturn<GenreSubmit>, onSubmit?: (genre: Genre) => void}

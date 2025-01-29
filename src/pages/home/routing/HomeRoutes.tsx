@@ -1,10 +1,10 @@
 import HomePage from "../pages/HomePage.tsx";
-import AdminLayout from "@/common/layout/AdminLayout.tsx";
+import BaseLayout from "@/common/layout/BaseLayout.tsx";
 
 export default [
     {
         path: "/",
-        element: <AdminLayout />,
+        element: <BaseLayout />,
         children: [
             {path: "/", element: <HomePage />},
         ]

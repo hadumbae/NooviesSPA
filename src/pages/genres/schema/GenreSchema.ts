@@ -1,14 +1,11 @@
-import {z} from "zod";
-import {IDString, ObjectId, RequiredString} from "@/common/schema/helpers/ZodStringHelpers.ts";
-import {ZodType} from "zod";
+import {z, ZodType} from "zod";
+import {IDString, RequiredString} from "@/common/schema/helpers/ZodStringHelpers.ts";
+import IGenre from "@/pages/genres/interfaces/IGenre.ts";
 
-export interface IGenre {
-    readonly _id: ObjectId;
-    name: string;
-    description: string;
-    movies: (ObjectId | any)[];
-}
-
+/**
+ * Zod schema for validating a `Genre` object. This schema defines
+ * the structure and validation rules for a `Genre` object.
+ */
 export const GenreSchema: ZodType<IGenre> = z.object({
     _id: IDString,
 
@@ -23,7 +20,19 @@ export const GenreSchema: ZodType<IGenre> = z.object({
         .array(z.union([IDString, z.any()])),
 });
 
+/**
+ * Zod schema for validating an array of `Genre` objects.
+ * This schema defines the structure and validation rules
+ * for an array of `Genre` objects.
+ */
 export const GenreArraySchema = z.array(GenreSchema);
 
+/**
+ * Represents a single genre object, inferred from `GenreSchema`.
+ */
 export type Genre = z.infer<typeof GenreSchema>;
+
+/**
+ * Represents an array of genre objects, inferred from `GenreArraySchema`.
+ */
 export type GenreArray = z.infer<typeof GenreArraySchema>;

@@ -4,8 +4,8 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {format} from "date-fns";
 import PersonOptions from "@/pages/persons/components/PersonOptions.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import TextQuote from "@/common/components/text/TextQuote.tsx";
 import {Link} from "react-router-dom";
+import PersonBiographyCollapsible from "@/pages/persons/components/PersonBiographyCollapsible.tsx";
 
 interface Props {
     person: Person;
@@ -41,7 +41,8 @@ const PersonListCard: FC<Props> = ({person, onPersonDelete}) => {
                 <Separator />
 
                 <div>
-                    <TextQuote>{biography}</TextQuote>
+                    {/*<TextQuote>{biography}</TextQuote>*/}
+                    <PersonBiographyCollapsible text={biography} />
                 </div>
             </CardContent>
         </Card>

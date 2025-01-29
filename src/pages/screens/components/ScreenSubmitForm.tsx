@@ -8,7 +8,7 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ScreenSubmit} from "@/pages/screens/schema/ScreenSubmitSchema.ts";
 import ScreenTypeHookFormCombobox from "@/pages/screens/components/ScreenTypeHookFormCombobox.tsx";
-import TheatreHookFormCombobox from "@/pages/theatres/components/TheatreHookFormCombobox.tsx";
+import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 
 interface Props {
     className?: string;
@@ -34,7 +34,7 @@ const ScreenSubmitForm: FC<Props> = ({className, screen, onSubmit}) => {
                 <HookFormInput name="name" label="Name" control={form.control} />
                 <HookFormInput name="capacity" label="Capacity" control={form.control} type="number" min={0} />
                 <ScreenTypeHookFormCombobox form={form} name="screenType" label="Screen Type" />
-                <TheatreHookFormCombobox form={form} name="theatre" label="Theatre" />
+                <TheatreHookFormSelect form={form} name="theatre" label="Theatre" />
 
                 <Button
                     type="submit"

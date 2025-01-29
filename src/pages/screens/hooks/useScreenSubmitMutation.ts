@@ -1,7 +1,7 @@
 import {UseFormReturn} from "react-hook-form";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
 import {ScreenSchema} from "@/pages/screens/schema/ScreenSchema.ts";
-import mutationFormSubmitHandler from "@/common/utility/forms/mutationFormSubmitHandler.ts";
+import mutationFormSubmitHandler from "@/common/handlers/mutation/MutationFormSubmitHandler.ts";
 import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
 import {ScreenSubmit} from "@/pages/screens/schema/ScreenSubmitSchema.ts";
 

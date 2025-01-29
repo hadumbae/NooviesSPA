@@ -5,6 +5,7 @@ import {TableOfContents} from "lucide-react";
 import GenreOptions from "@/pages/genres/components/GenreOptions.tsx";
 import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 import {useNavigate} from "react-router-dom";
+import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 
 interface Props {
     genre: Genre;
@@ -20,7 +21,10 @@ const GenreDetailsHeader: FC<Props> = ({genre}) => {
 
     return (
         <header className="flex justify-between items-center">
-            <HeaderTitle>Genre | {name}</HeaderTitle>
+            <div>
+                <HeaderTitle>{name}</HeaderTitle>
+                <HeaderDescription>Genre</HeaderDescription>
+            </div>
 
             <div className="space-x-2 flex items-center">
                 <HeaderLink to="/admin/genres">

@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import ThreeDotsLoader from "@/common/loaders/ThreeDotsLoader.tsx";
+import ThreeDotsLoader from "@/common/components/loaders/ThreeDotsLoader.tsx";
 import {cn} from "@/common/lib/utils.ts";
 
 interface Props {

@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import useFetchPaginatedGenres from "@/pages/genres/hooks/useFetchPaginatedGenres.ts";
-import usePaginationSearchParams from "@/common/hooks/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
@@ -9,10 +9,13 @@ import {Plus} from "lucide-react";
 import {Link} from "react-router-dom";
 import {cn} from "@/common/lib/utils.ts";
 import PageError from "@/common/components/page/PageError.tsx";
-import GenreCardList from "@/pages/genres/components/GenreCardList.tsx";
+import GenreCardList from "@/pages/genres/components/cards/GenreCardList.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import useTitle from "@/common/hooks/document/useTitle.ts";
 
 const GenresPage: FC = () => {
+    useTitle("Genres");
+
     const {page, perPage} = usePaginationSearchParams();
     const {data, isPending, isError, error, refetch} = useFetchPaginatedGenres({page, perPage, queries: {}});
 

@@ -1,23 +1,33 @@
 import {useMutation} from "@tanstack/react-query";
-import {AuthUserDetails} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
+import {AuthUserDetails, AuthUserDetailsSchema} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
 import {toast} from "react-toastify";
-import AuthService from "@/pages/auth/service/AuthService.ts";
 import {UserLoginData} from "@/pages/auth/schema/AuthLoginSchema.ts";
-import {FetchError} from "@/common/type/error/FetchError.ts";
+import {FetchError} from "@/common/errors/FetchError.ts";
 import {UseFormReturn} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
+import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
+import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 
 export default function useAuthLoginSubmitMutation({form}: {form: UseFormReturn<UserLoginData>}) {
     const navigate = useNavigate();
 
     const submitLoginData = async (data: UserLoginData) => {
-        return await AuthService.login(data);
+        const action = () => AuthRepository.login(data);
+        const schema = AuthUserDetailsSchema;
+
+        const {result} = await useFetchErrorHandler({fetchQueryFn: action});
+        return parseResponseData({schema, data: result});
     }
 
     const onSuccess = (authUser: AuthUserDetails) => {
         toast.success("Logged in.");
         localStorage.setItem("authUser", JSON.stringify(authUser));
-        navigate("/")
+
+        const path = sessionStorage.getItem("redirectPath");
+        path && sessionStorage.removeItem("redirectPath");
+
+        navigate(path || "/");
     }
 
     const onError = (error: Error) => {

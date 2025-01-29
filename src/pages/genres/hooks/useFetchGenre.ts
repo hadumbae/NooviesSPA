@@ -1,6 +1,6 @@
 import {Genre, GenreSchema} from "@/pages/genres/schema/GenreSchema.ts";
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
-import useFetchSchemaData from "@/common/hooks/useFetchSchemaData.ts";
+import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
 
 export default function useFetchGenre({_id}: { _id: string }) {
     const action = () => GenreRepository.get({_id});

@@ -1,7 +1,7 @@
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import QueryFilters from "@/common/type/QueryFilters.ts";
-import useFetchErrorHandler from "@/common/utility/useFetchErrorHandler.ts";
-import parseResponseData from "@/common/utility/parseResponseData.ts";
+import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 import {PersonArraySchema, Persons} from "@/pages/persons/schema/PersonSchema.ts";
 import {useQuery} from "@tanstack/react-query";
 

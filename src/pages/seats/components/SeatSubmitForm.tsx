@@ -8,9 +8,9 @@ import {Button} from "@/common/components/ui/button.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
 
-import ScreenHookFormCombobox from "@/pages/screens/components/ScreenHookFormCombobox.tsx";
+import ScreenHookFormSelect from "@/pages/screens/components/ScreenHookFormSelect.tsx";
 import SeatTypeHookFormCombobox from "@/pages/seats/components/SeatTypeHookFormCombobox.tsx";
-import TheatreHookFormCombobox from "@/pages/theatres/components/TheatreHookFormCombobox.tsx";
+import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 
 import {SeatSubmit} from "@/pages/seats/schema/SeatSubmitSchema.ts";
 import useSeatSubmitForm from "@/pages/seats/hooks/useSeatSubmitForm.ts";
@@ -84,16 +84,16 @@ const SeatSubmitForm: FC<Props> = ({className, seat, onSubmit}) => {
                     min={0}
                 />
 
-                <TheatreHookFormCombobox
-                    form={form}
+                <TheatreHookFormSelect
+                    control={form.control}
                     name="theatre"
                     label="Theatre"
                 />
 
                 {
                     theatre &&
-                    <ScreenHookFormCombobox
-                        form={form}
+                    <ScreenHookFormSelect
+                        control={form.control}
                         name="screen"
                         label="Screen"
                         filters={{theatre}}

@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import useTheatreDeleteMutation from "@/pages/theatres/hooks/useTheatreDeleteMutation.ts";
+import useTheatreDeleteMutation from "@/pages/theatres/hooks/mutations/useTheatreDeleteMutation.ts";
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";

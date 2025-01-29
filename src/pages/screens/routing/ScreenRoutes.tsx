@@ -1,4 +1,4 @@
-import AdminLayout from "@/common/layout/AdminLayout.tsx";
+import BaseLayout from "@/common/layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
 import ScreensPage from "@/pages/screens/pages/ScreensPage.tsx";
 import ScreenCreatePage from "@/pages/screens/pages/ScreenCreatePage.tsx";
@@ -8,7 +8,7 @@ import ScreenPage from "@/pages/screens/pages/ScreenPage.tsx";
 export default [
     {
         path: '/admin/screens',
-        element: <AdminLayout />,
+        element: <BaseLayout />,
         errorElement: <ErrorPage />,
         children: [
             {path: "/admin/screens", element: <ScreensPage />},

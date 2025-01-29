@@ -5,8 +5,8 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {Plus} from "lucide-react";
 import TheatreCardList from "@/pages/theatres/components/TheatreCardList.tsx";
-import usePaginationSearchParams from "@/common/hooks/usePaginationSearchParams.ts";
-import {useFetchPaginatedTheatres} from "@/pages/theatres/hooks/useFetchPaginatedTheatres.ts";
+import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
+import {useFetchPaginatedTheatres} from "@/pages/theatres/hooks/queries/useFetchPaginatedTheatres.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/PageError.tsx";
 

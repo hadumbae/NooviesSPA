@@ -1,8 +1,8 @@
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {useMutation} from "@tanstack/react-query";
-import {FetchError} from "@/common/type/error/FetchError.ts";
+import {FetchError} from "@/common/errors/FetchError.ts";
 import {toast} from "react-toastify";
-import useFetchErrorHandler from "@/common/utility/useFetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 
 interface Params {

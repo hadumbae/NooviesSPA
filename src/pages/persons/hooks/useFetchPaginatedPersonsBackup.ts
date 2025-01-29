@@ -1,8 +1,8 @@
 import {QueryFilters, useQuery} from "@tanstack/react-query";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import filterNullAttributes from "@/common/utility/filterNullAttributes.ts";
-import useFetchErrorHandler from "@/common/utility/useFetchErrorHandler.ts";
-import parseResponseData from "@/common/utility/parseResponseData.ts";
+import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 import {PaginatedPersons, PaginatedPersonsSchema} from "@/pages/persons/schema/PersonPaginationSchema.ts";
 
 export default function useFetchPaginatedPersons(

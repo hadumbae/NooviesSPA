@@ -4,7 +4,7 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {Plus} from "lucide-react";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import usePaginationSearchParams from "@/common/hooks/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/PageError.tsx";
 import {useFetchPaginatedScreens} from "@/pages/screens/hooks/useFetchPaginatedScreens.ts";

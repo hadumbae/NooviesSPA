@@ -3,10 +3,10 @@ import {PersonSubmit} from "@/pages/persons/schema/PersonSubmitSchema.ts";
 import {Person, PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
 import {useMutation} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import mutationErrorHandler from "@/common/utility/forms/mutationFormErrorHandler.ts";
+import mutationErrorHandler from "@/common/handlers/mutation/MutationFormErrorHandler.ts";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
-import useFetchErrorHandler from "@/common/utility/useFetchErrorHandler.ts";
-import parseResponseData from "@/common/utility/parseResponseData.ts";
+import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 
 interface IUsePersonSubmitMutation {
     _id?: string;

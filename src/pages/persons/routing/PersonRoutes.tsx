@@ -1,4 +1,4 @@
-import AdminLayout from "@/common/layout/AdminLayout.tsx";
+import BaseLayout from "@/common/layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
 import PersonsPage from "@/pages/persons/pages/PersonsPage.tsx";
 import PersonCreatePage from "@/pages/persons/pages/PersonCreatePage.tsx";
@@ -9,7 +9,7 @@ import PersonEditProfileImagePage from "@/pages/persons/pages/PersonEditProfileI
 export default [
     {
         path: '/admin/persons',
-        element: <AdminLayout />,
+        element: <BaseLayout />,
         errorElement: <ErrorPage />,
         children: [
             {path: "/admin/persons", element: <PersonsPage />},

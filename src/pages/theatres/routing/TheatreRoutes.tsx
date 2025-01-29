@@ -1,4 +1,4 @@
-import AdminLayout from "@/common/layout/AdminLayout.tsx";
+import BaseLayout from "@/common/layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
 import TheatresPage from "@/pages/theatres/pages/TheatresPage.tsx";
 import TheatreCreatePage from "@/pages/theatres/pages/TheatreCreatePage.tsx";
@@ -8,7 +8,7 @@ import TheatreEditPage from "@/pages/theatres/pages/TheatreEditPage.tsx";
 export default [
     {
         path: '/admin/theatres',
-        element: <AdminLayout />,
+        element: <BaseLayout />,
         errorElement: <ErrorPage />,
         children: [
             {path: "/admin/theatres", element: <TheatresPage />},

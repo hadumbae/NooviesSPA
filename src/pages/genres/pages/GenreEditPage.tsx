@@ -7,11 +7,16 @@ import PageError from "@/common/components/page/PageError.tsx";
 import GenreSubmitForm from "@/pages/genres/components/GenreSubmitForm.tsx";
 import {useNavigate} from "react-router-dom";
 import GenreEditHeader from "@/pages/genres/components/headers/GenreEditHeader.tsx";
+import useTitle from "@/common/hooks/document/useTitle.ts";
 
 const GenreEditPage: FC = () => {
+    useTitle("Edit Genre")
+
     const navigate = useNavigate();
     const {genreID} = useFetchGenreParams();
     const {data: genre, isPending, isError, error} = useFetchGenre({_id: genreID!});
+
+    useTitle(genre && `Edit ${genre.name}`)
 
     if (isPending) return <PageLoader/>;
     if (isError) return <PageError error={error}/>

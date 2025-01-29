@@ -1,5 +1,5 @@
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
-import useFetchSchemaData from "@/common/hooks/useFetchSchemaData.ts";
+import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
 import {Seat, SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 

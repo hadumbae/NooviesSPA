@@ -5,7 +5,7 @@ interface Props {
     className?: string;
 }
 
-const PageCenter: FC<PropsWithChildren<Props>> = ({children, className = ""}) => {
+const PageCenter: FC<PropsWithChildren<Props>> = ({children, className}) => {
     return (
         <div className={cn(
             'h-full',

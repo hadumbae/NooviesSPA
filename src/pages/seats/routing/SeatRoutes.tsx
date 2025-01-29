@@ -1,4 +1,4 @@
-import AdminLayout from "@/common/layout/AdminLayout.tsx";
+import BaseLayout from "@/common/layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
 import SeatsPage from "@/pages/seats/pages/SeatsPage.tsx";
 import SeatCreatePage from "@/pages/seats/pages/SeatCreatePage.tsx";
@@ -8,7 +8,7 @@ import SeatPage from "@/pages/seats/pages/SeatPage.tsx";
 export default [
     {
         path: '/admin/seats',
-        element: <AdminLayout />,
+        element: <BaseLayout />,
         errorElement: <ErrorPage />,
         children: [
             {path: "/admin/seats", element: <SeatsPage />},

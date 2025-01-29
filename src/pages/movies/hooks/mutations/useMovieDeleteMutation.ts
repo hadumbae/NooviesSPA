@@ -1,0 +1,31 @@
+import {useMutation} from "@tanstack/react-query";
+import {FetchError} from "@/common/errors/FetchError.ts";
+import {toast} from "react-toastify";
+import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
+import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
+
+interface Params {
+    onDelete: () => void;
+}
+
+export default function useMovieDeleteMutation({onDelete}: Params) {
+    const mutationKey = ["delete_single_movie"];
+
+    const mutationFn = async ({_id}: {_id: ObjectId}) => {
+        const fetchQueryFn = () => MovieRepository.delete({_id});
+        await useFetchErrorHandler({fetchQueryFn});
+    }
+
+    const onSuccess = () => {
+        toast.success("Movie deleted.");
+        onDelete();
+    };
+
+    const onError = (error: Error | FetchError) => {
+        const {message = "Oops. Something went wrong. Please try again."} = error;
+        toast.error(message);
+    }
+
+    return useMutation({mutationKey, mutationFn, onSuccess, onError});
+}

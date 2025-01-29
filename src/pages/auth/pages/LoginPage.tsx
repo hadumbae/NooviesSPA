@@ -5,6 +5,9 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import AuthLoginForm from "@/pages/auth/components/AuthLoginForm.tsx";
 
 const LoginPage: FC = () => {
+    const path = sessionStorage.getItem("redirectPath");
+    console.log(path);
+
     return (
         <PageFlexWrapper>
             <header>

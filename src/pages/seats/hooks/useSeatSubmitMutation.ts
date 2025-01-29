@@ -1,5 +1,5 @@
 import {UseFormReturn} from "react-hook-form";
-import mutationFormSubmitHandler from "@/common/utility/forms/mutationFormSubmitHandler.ts";
+import mutationFormSubmitHandler from "@/common/handlers/mutation/MutationFormSubmitHandler.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import {Seat, SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
 import {SeatSubmit} from "@/pages/seats/schema/SeatSubmitSchema.ts";

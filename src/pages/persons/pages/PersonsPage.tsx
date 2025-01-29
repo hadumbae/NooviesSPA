@@ -3,7 +3,7 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import PersonCardList from "@/pages/persons/components/PersonCardList.tsx";
-import usePaginationSearchParams from "@/common/hooks/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import useFetchPaginatedPersons from "@/pages/persons/hooks/useFetchPaginatedPersons.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/PageError.tsx";
