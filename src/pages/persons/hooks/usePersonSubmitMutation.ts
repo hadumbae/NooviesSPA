@@ -5,7 +5,7 @@ import {useMutation} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import mutationErrorHandler from "@/common/handlers/mutation/MutationFormErrorHandler.ts";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
-import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 
 interface IUsePersonSubmitMutation {

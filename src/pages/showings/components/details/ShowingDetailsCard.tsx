@@ -3,7 +3,8 @@ import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {format} from "date-fns";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
-import useValidatePopulatedShowing from "@/pages/showings/hooks/validation/useValidatePopulatedShowing.ts";
+import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/ShowingPopulatedSchema.ts";
 
 interface Props {
     showing: Showing;
@@ -11,7 +12,13 @@ interface Props {
 
 const ShowingDetailsCard: FC<Props> = ({showing}) => {
     const {startTime, endTime, ticketPrice, language, subtitleLanguages, isSpecialEvent} = showing;
-    const {movie, screen, theatre} = useValidatePopulatedShowing(showing);
+    const populatedShowing = useValidateData<typeof ShowingPopulatedSchema, PopulatedShowing>({
+        schema: ShowingPopulatedSchema,
+        data: showing,
+        message: "[ShowingDetailsCard] Invalid `Populated Showing`"
+    });
+
+    const {movie, screen, theatre} = populatedShowing!;
 
     const {_id: movieID, title: movieTitle} = movie;
     const {_id: screenID, name: screenName} = screen;

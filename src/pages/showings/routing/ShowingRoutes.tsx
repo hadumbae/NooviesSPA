@@ -6,7 +6,7 @@ import ShowingPage from "@/pages/showings/pages/ShowingPage.tsx";
 import ShowingSeatingPage from "@/pages/seatmap/pages/ShowingSeatingPage.tsx";
 import ShowingSeatMapEditPage from "@/pages/seatmap/pages/ShowingSeatMapEditPage.tsx";
 import ShowingSeatMapCreatePage from "@/pages/seatmap/pages/ShowingSeatMapCreatePage.tsx";
-import ComponentErrorHandler from "@/common/handlers/component/ComponentErrorHandler.tsx";
+import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 
 export default [
     {

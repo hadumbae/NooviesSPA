@@ -1,6 +1,6 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import {useQuery} from "@tanstack/react-query";
-import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
 import filterNullAttributes from "@/common/utility/filterNullAttributes.ts";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";

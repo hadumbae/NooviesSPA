@@ -16,7 +16,7 @@ const HeaderLink: FC<PropsWithChildren<Props>> = ({children, variant = "outline"
             to={to}
             className={cn(
                 buttonVariants({variant}),
-                "p-2",
+                "text-neutral-400 hover:text-black p-2",
                 className
             )}
         >

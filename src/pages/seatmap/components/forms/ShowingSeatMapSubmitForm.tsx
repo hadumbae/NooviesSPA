@@ -4,41 +4,41 @@ import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import {SeatMapSubmit} from "@/pages/seatmap/schema/SeatMapSubmitSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import SeatHookFormSelect from "@/pages/seats/components/SeatHookFormSelect.tsx";
 import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
-import useValidatePopulatedShowing from "@/pages/showings/hooks/validation/useValidatePopulatedShowing.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import useSeatMapSubmitMutation from "@/pages/seatmap/hooks/mutations/useSeatMapSubmitMutation.ts";
+import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
+import ShowingSeatHookFormSelect from "@/pages/seatmap/components/forms/ShowingSeatHookFormSelect.tsx";
 
 interface Props {
     showing: Showing;
     seatMap?: SeatMap;
+    onSubmit?: (seatMap: SeatMap) => void;
 }
 
-const ShowingSeatMapSubmitForm: FC<Props> = ({showing, seatMap}) => {
-    const populatedShowing = useValidatePopulatedShowing(showing);
-    const {theatre: {_id: theatreID}} = populatedShowing;
-
+const ShowingSeatMapSubmitForm: FC<Props> = ({showing, seatMap, onSubmit}) => {
     const form = useShowingSeatMapSubmitForm({showing, seatMap});
+    const {mutate} = useSeatMapSubmitMutation({form, onSubmit, seatMap});
+
+    const {_id: showingID} = showing;
 
     const onFormSubmit = (values: SeatMapSubmit) => {
-        console.log(values);
+        console.log("[Seat Map Submit] Values :", values);
+        mutate(values);
     }
-
-    const {formState: {errors}} = form;
-    console.log(errors);
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-5">
-                {/*seat*/}
-                <SeatHookFormSelect
+                <ShowingSeatHookFormSelect
                     name="seat"
                     label="Seat"
-                    filters={{theatre: theatreID}}
+                    placeholder="Select a seat."
+                    description="The seat to be reserved."
+                    showingID={showingID}
                     control={form.control}
                 />
 
-                {/*price*/}
                 <HookFormInput
                     name="price"
                     label="Price"
@@ -46,11 +46,11 @@ const ShowingSeatMapSubmitForm: FC<Props> = ({showing, seatMap}) => {
                     description="The price of the seat."
                 />
 
-                {/*isAvailable*/}
-                {/*isReserved*/}
-
-
-
+                <HookFormCheckbox
+                    name="isAvailable"
+                    label="Is Available"
+                    control={form.control}
+                />
 
                 <Button type="submit" className="w-full bg-primary">
                     Submit

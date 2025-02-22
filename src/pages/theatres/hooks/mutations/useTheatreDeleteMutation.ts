@@ -1,7 +1,7 @@
 import {useMutation} from "@tanstack/react-query";
-import {FetchError} from "@/common/errors/FetchError.ts";
+import {ParseError} from "@/common/errors/ParseError.ts";
 import {toast} from "react-toastify";
-import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.ts";
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 
@@ -22,7 +22,7 @@ export default function useTheatreDeleteMutation({onDelete}: Params) {
         onDelete();
     };
 
-    const onError = (error: Error | FetchError) => {
+    const onError = (error: Error | ParseError) => {
         const {message = "Oops. Something went wrong. Please try again."} = error;
         toast.error(message);
     }

@@ -2,11 +2,11 @@ import {useMutation} from "@tanstack/react-query";
 import {AuthUserDetails, AuthUserDetailsSchema} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
 import {toast} from "react-toastify";
 import {UserLoginData} from "@/pages/auth/schema/AuthLoginSchema.ts";
-import {FetchError} from "@/common/errors/FetchError.ts";
+import {ParseError} from "@/common/errors/ParseError.ts";
 import {UseFormReturn} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
-import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 
 export default function useAuthLoginSubmitMutation({form}: {form: UseFormReturn<UserLoginData>}) {
@@ -31,7 +31,7 @@ export default function useAuthLoginSubmitMutation({form}: {form: UseFormReturn<
     }
 
     const onError = (error: Error) => {
-        if (error instanceof FetchError) {
+        if (error instanceof ParseError) {
             for (let validationError of error.errors) {
                 console.log(validationError);
                 const {path, message} = validationError;

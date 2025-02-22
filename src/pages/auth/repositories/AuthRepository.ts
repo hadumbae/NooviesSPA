@@ -1,7 +1,7 @@
 import {UserRegisterData} from "@/pages/auth/schema/AuthRegisterSchema.ts";
 import {UserLoginData} from "@/pages/auth/schema/AuthLoginSchema.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
-import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
 

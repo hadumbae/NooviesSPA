@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Outlet} from "react-router-dom";
 
-const AuthLayout: FC = () => {
+const AdminLayout: FC = () => {
     const currentYear = (new Date()).getFullYear();
 
     return (
@@ -25,4 +25,4 @@ const AuthLayout: FC = () => {
     );
 };
 
-export default AuthLayout;
+export default AdminLayout;

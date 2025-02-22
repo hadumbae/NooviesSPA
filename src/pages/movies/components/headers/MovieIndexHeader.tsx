@@ -7,10 +7,10 @@ import {Plus} from "lucide-react";
 const MovieIndexHeader: FC = () => {
     return (
         <header className="flex justify-between items-center">
-            <div>
+            <section>
                 <HeaderTitle>Movies</HeaderTitle>
-                <HeaderDescription></HeaderDescription>
-            </div>
+                <HeaderDescription>Registered movies.</HeaderDescription>
+            </section>
 
             <HeaderLink to="/admin/movies/create">
                 <Plus />

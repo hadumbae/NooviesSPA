@@ -5,13 +5,15 @@ import {PaginatedScreens, PaginatedScreenSchema} from "@/pages/screens/schema/Sc
 import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
 
 export const useFetchPaginatedScreens = (
-    {page, perPage, filters = {}}: {page: number, perPage: number, filters?: QueryFilters}
+    params: {page: number, perPage: number, populate: boolean, filters?: QueryFilters}
 ) => {
+    const {page, perPage, populate = false, filters = {}} = params;
+
     const filteredQueries = filterNullAttributes(filters);
 
     const queryKey = "fetch_paginated_screens";
     const schema = PaginatedScreenSchema;
-    const action = () => ScreenRepository.paginated({queries: {page, perPage, filteredQueries}});
+    const action = () => ScreenRepository.paginated({populate, filters: {page, perPage, filteredQueries}});
 
     return useFetchSchemaData<typeof PaginatedScreenSchema, PaginatedScreens>({queryKey, schema, action});
 }

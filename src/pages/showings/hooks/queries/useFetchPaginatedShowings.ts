@@ -1,8 +1,8 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import filterNullAttributes from "@/common/utility/filterNullAttributes.ts";
-import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
-import {PaginatedShowings, PaginatedShowingSchema} from "@/pages/showings/schema/ShowingPaginationSchema.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
+import handleFetchError from "@/common/handlers/query/handleFetchError.ts";
+import useQueryWithRedirect from "@/common/hooks/errors/useQueryWithRedirect.ts";
 
 interface Params {
     page: number,
@@ -19,13 +19,19 @@ export const useFetchPaginatedShowings = (params: Params) => {
         filters = {},
     } = params;
 
+    const queryKey = ["fetch_paginated_showings"];
+
     const filteredQueries = filterNullAttributes(filters);
+    const paginatedFilters = {filteredQueries, page, perPage};
 
-    const queryKey = "fetch_paginated_showings";
-    const schema = PaginatedShowingSchema;
+    const fetchPaginatedShowings = async () => {
+        const action = () => ShowingRepository.paginated({filters: paginatedFilters, populate});
+        const {result} = await handleFetchError({fetchQueryFn: action});
+        return result;
+    }
 
-    const paginatedFilters = {filteredQueries, page, perPage, populate};
-    const action = () => ShowingRepository.paginated({filters: paginatedFilters});
-
-    return useFetchSchemaData<typeof schema, PaginatedShowings>({queryKey, schema, action});
+    return useQueryWithRedirect({
+        queryKey,
+        queryFn: fetchPaginatedShowings,
+    });
 }

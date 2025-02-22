@@ -5,6 +5,9 @@ import {Loader} from "lucide-react";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import {SeatArray, SeatArraySchema} from "@/pages/seats/schema/SeatSchema.ts";
+import ErrorMessage from "@/common/components/text/ErrorMessage.tsx";
 
 interface Props<T extends FieldValues> {
     name: Path<T>,
@@ -16,17 +19,23 @@ interface Props<T extends FieldValues> {
     isMulti?: boolean,
 }
 
-const SeatHookFormSelect = <T extends FieldValues>(
-    props: Props<T>
-) => {
+const SeatHookFormSelect = <T extends FieldValues>(props: Props<T>) => {
     const {isMulti = false, filters = {}} = props
     const {data, isPending, isError, error} = useFetchAllSeats({filters});
 
-    if (isPending) return <Loader className="animate-spin" />;
-    if (isError) return <span>{error!.message || "Unknown Error"}</span>;
+    const seats = useValidateData<typeof SeatArraySchema, SeatArray>({
+        message: "[SeatHookFormSelect] Invalid `Seat` Data.",
+        schema: SeatArraySchema,
+        isPending,
+        data,
+    });
 
-    const options = data.map(
-        ({_id, row, seatNumber}): ReactSelectOption => ({value: _id, label: `${seatNumber} (Row ${row})`})
+    if (isPending) return <Loader className="animate-spin" />;
+    if (isError) return <ErrorMessage error={error} />;
+
+    const options = seats!.map(
+        ({_id, row, seatNumber}): ReactSelectOption =>
+            ({value: _id, label: `Seat ${seatNumber} (Row ${row})`})
     );
 
     return (

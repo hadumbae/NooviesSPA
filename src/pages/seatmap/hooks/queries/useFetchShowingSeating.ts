@@ -19,5 +19,9 @@ export default function useFetchShowingSeating(params: Params) {
     const schema = PaginatedSeatMapSchema;
     const action = () => SeatMapShowingRepository.fetchShowingSeatMap({showingID, page, perPage, filters});
 
-    return useFetchSchemaData<typeof schema, PaginatedSeatMaps>({queryKey, schema, action});
+    return useFetchSchemaData<typeof schema, PaginatedSeatMaps>({
+        queryKey,
+        schema,
+        action,
+    });
 }

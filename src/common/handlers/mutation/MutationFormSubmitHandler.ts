@@ -6,7 +6,7 @@ import {ZodType} from "zod";
 import {IRequestRepository} from "@/common/repositories/BaseRequestRepository.ts";
 
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
-import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import mutationErrorHandler from "@/common/handlers/mutation/MutationFormErrorHandler.ts";
 
 interface Params<TData, TSchema extends ZodType, TSubmit extends FieldValues> {

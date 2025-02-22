@@ -3,7 +3,7 @@ import MoviesPage from "@/pages/movies/pages/MoviesPage.tsx";
 import MovieCreatePage from "@/pages/movies/pages/MovieCreatePage.tsx";
 import MovieEditPage from "@/pages/movies/pages/MovieEditPage.tsx";
 import MoviePage from "@/pages/movies/pages/MoviePage.tsx";
-import ComponentErrorHandler from "@/common/handlers/component/ComponentErrorHandler.tsx";
+import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 
 export default [
     {

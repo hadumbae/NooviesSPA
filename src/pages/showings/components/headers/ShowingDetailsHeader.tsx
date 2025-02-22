@@ -7,7 +7,8 @@ import {TableOfContents} from "lucide-react";
 import ShowingOptions from "@/pages/showings/components/ShowingOptions.tsx";
 import {useNavigate} from "react-router-dom";
 import {Button} from "@/common/components/ui/button.tsx";
-import useValidatePopulatedShowing from "@/pages/showings/hooks/validation/useValidatePopulatedShowing.ts";
+import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/ShowingPopulatedSchema.ts";
 
 interface Props {
     showing: Showing;
@@ -16,8 +17,13 @@ interface Props {
 const ShowingDetailsHeader: FC<Props> = ({showing}) => {
     const navigate = useNavigate();
 
-    const parsedShowing = useValidatePopulatedShowing(showing);
-    const {movie, screen, theatre} = parsedShowing;
+    const populatedShowing = useValidateData<typeof ShowingPopulatedSchema, PopulatedShowing>({
+        data: showing,
+        schema: ShowingPopulatedSchema,
+        message: "[ShowingDetailsHeader] Invalid `Populated Showing` Data",
+    });
+
+    const {movie, screen, theatre} = populatedShowing!;
 
     const {title: movieTitle, releaseDate} = movie;
     const {name: screenName} = screen;

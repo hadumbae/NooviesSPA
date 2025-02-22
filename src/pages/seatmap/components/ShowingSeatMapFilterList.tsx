@@ -1,8 +1,9 @@
 import {FC} from 'react';
 import useFetchShowingSeating from "@/pages/seatmap/hooks/queries/useFetchShowingSeating.ts";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
-import {Loader} from "lucide-react";
 import ShowingSeatMapCard from "@/pages/seatmap/components/ShowingSeatMapCard.tsx";
+import QueryErrorHandler from "@/common/components/errors/QueryErrorHandler.tsx";
+import CenteredLoader from "@/common/components/loaders/CenteredLoader.tsx";
 
 interface Props {
     showingID: string;
@@ -12,10 +13,8 @@ const ShowingSeatMapFilterList: FC<Props> = ({showingID}) => {
     const {page, perPage} = usePaginationSearchParams({page: "1", perPage: "25"});
     const {data, isPending, isError, error, refetch} = useFetchShowingSeating({showingID, page, perPage});
 
-    if (isError) return <span>{error?.message || "Oops. Something went wrong!"}</span>
-    if (isPending) return <div className="flex justify-center">
-        <Loader className="animate-spin" />
-    </div>;
+    if (isPending) return <CenteredLoader />;
+    if (isError) return <QueryErrorHandler error={error} />;
 
     const {items: seatMaps} = data;
 

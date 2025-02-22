@@ -12,12 +12,14 @@ import ScreenCardList from "@/pages/screens/components/ScreenCardList.tsx";
 
 const ScreensPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams();
-    const {data, isPending, isError, error, refetch} = useFetchPaginatedScreens({page, perPage});
+    const {data, isPending, isError, error, refetch} = useFetchPaginatedScreens({page, perPage, populate: true});
 
     if (isPending) return <PageLoader />;
     if (isError) return <PageError error={error} />
 
     const {items: screens} = data;
+
+    console.log(screens);
 
     const onDelete = () => {
         refetch();

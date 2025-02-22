@@ -13,9 +13,8 @@ interface Props {
 }
 
 const ShowingListCard: FC<Props> = ({showing, onShowingDelete}) => {
-    const populatedShowing = useValidatePopulatedShowing(showing);
-    const {startTime, endTime} = showing;
-    const {_id, movie, theatre, screen} = populatedShowing;
+    const populatedShowing = useValidatePopulatedShowing({showing});
+    const {_id, startTime, endTime, movie, theatre, screen} = populatedShowing!;
 
     const {name: theatreName} = theatre;
     const {name: screenName} = screen;

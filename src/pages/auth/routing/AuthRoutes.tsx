@@ -1,4 +1,4 @@
-import AuthLayout from "@/common/layout/AuthLayout.tsx";
+import AdminLayout from "@/common/layout/AdminLayout.tsx";
 import LoginPage from "@/pages/auth/pages/LoginPage.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
 import RegisterPage from "@/pages/auth/pages/RegisterPage.tsx";
@@ -7,7 +7,7 @@ import LogoutPage from "@/pages/auth/pages/LogoutPage.tsx";
 export default [
     {
         path: "/auth",
-        element: <AuthLayout />,
+        element: <AdminLayout />,
         errorElement: <ErrorPage />,
         children: [
             {path: "/auth/register", element: <RegisterPage />},

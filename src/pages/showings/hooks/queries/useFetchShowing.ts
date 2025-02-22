@@ -1,15 +1,21 @@
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
-import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
-import {Showing, ShowingSchema} from "@/pages/showings/schema/ShowingSchema.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
-import {QueryFilters} from "@tanstack/react-query";
+import useQueryWithRedirect from "@/common/hooks/errors/useQueryWithRedirect.ts";
+import handleFetchError from "@/common/handlers/query/handleFetchError.ts";
 
-export default function useFetchShowing(params: { _id: ObjectId, populate?: boolean, filters?: QueryFilters }) {
+export default function useFetchShowing(params: { _id: ObjectId, populate?: boolean }) {
     const {_id, populate = false} = params;
 
-    const queryKey = "fetch_single_showing";
-    const schema = ShowingSchema;
-    const action = () => ShowingRepository.get({_id, populate});
 
-    return useFetchSchemaData<typeof ShowingSchema, Showing>({queryKey, schema, action});
+    const queryKey = "fetch_single_showing";
+    const fetchData = async () => {
+        const action = () => ShowingRepository.get({_id, populate});
+        const {result} = await handleFetchError({fetchQueryFn: action});
+        return result;
+    }
+
+    return useQueryWithRedirect({
+        queryKey: [queryKey],
+        queryFn: fetchData,
+    });
 }

@@ -4,15 +4,15 @@ import './index.css'
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RegisterRoutes from "./common/routing/RegisterRoutes.tsx";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {QueryClientProvider} from "@tanstack/react-query";
 import AuthProvider from "@/pages/auth/context/AuthProvider.tsx";
+import ReactQueryClient from "@/config/ReactQueryClient.ts";
 
 const router = createBrowserRouter(RegisterRoutes);
-const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={ReactQueryClient}>
           <AuthProvider>
             <RouterProvider router={router} />
           </AuthProvider>

@@ -1,6 +1,6 @@
 import {useMutation} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import SeatMapShowingRepository from "@/pages/seatmap/repositories/SeatMapShowingRepository.ts";
 
 interface Params {

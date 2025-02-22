@@ -1,7 +1,7 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
-import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 import {SeatArray, SeatArraySchema} from "@/pages/seats/schema/SeatSchema.ts";

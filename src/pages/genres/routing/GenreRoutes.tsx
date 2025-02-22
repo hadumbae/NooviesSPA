@@ -4,7 +4,7 @@ import GenreCreatePage from "@/pages/genres/pages/GenreCreatePage.tsx";
 import GenreEditPage from "@/pages/genres/pages/GenreEditPage.tsx";
 import GenrePage from "@/pages/genres/pages/GenrePage.tsx";
 import AuthLoader from "@/common/routing/loaders/AuthLoader.ts";
-import ComponentErrorHandler from "@/common/handlers/component/ComponentErrorHandler.tsx";
+import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 
 export default [
     {

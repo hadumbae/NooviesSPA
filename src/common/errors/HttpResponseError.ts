@@ -1,12 +1,17 @@
 export default class HttpResponseError extends Error {
-    public response: Response;
+    public readonly response: Response;
+    public readonly model?: string;
 
-    constructor({message, response}: { message?: string, response: Response }) {
+    constructor(params: { message?: string, response: Response, model?: string }) {
+        const {message, response, model} = params;
+
         super(message);
 
         if (Error.captureStackTrace) Error.captureStackTrace(this, HttpResponseError);
 
         this.response = response;
+        this.model = model;
+
         this.name = this.constructor.name;
     }
 

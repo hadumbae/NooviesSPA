@@ -1,5 +1,5 @@
 import {ZodTypeAny} from "zod";
-import {FetchError} from "@/common/errors/FetchError.ts";
+import {ParseError} from "@/common/errors/ParseError.ts";
 import safeParseSchema from "@/common/utility/safeParseSchema.ts";
 
 const parseResponseData = <
@@ -10,8 +10,11 @@ const parseResponseData = <
 ): TData => {
     const {data: parseData, errors} = safeParseSchema<TSchema, TData>({schema, data});
 
-    if (errors) throw new FetchError({message: "Received Invalid Data.", errors});
-    if (!parseData) throw new FetchError({message: "Data is unexpectedly empty.", errors: []});
+    if (errors) {
+        throw new ParseError({message: "Received Invalid Data.", errors});
+    }
+
+    if (!parseData) throw new ParseError({message: "Data is unexpectedly empty.", errors: []});
 
     return parseData!;
 }

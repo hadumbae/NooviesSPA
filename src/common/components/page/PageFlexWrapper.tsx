@@ -1,8 +1,16 @@
 import {FC, PropsWithChildren} from 'react';
+import {cn} from "@/common/lib/utils.ts";
 
-const PageFlexWrapper: FC<PropsWithChildren> = ({children}) => {
+interface Props {
+    className?: string;
+}
+
+const PageFlexWrapper: FC<PropsWithChildren<Props>> = ({children, className}) => {
     return (
-        <section className="h-full flex flex-col space-y-5">
+        <section className={cn(
+            "h-full flex flex-col space-y-5",
+            className,
+        )}>
             {children}
         </section>
     );

@@ -2,16 +2,11 @@ import {FC} from 'react';
 import useFetchPaginatedGenres from "@/pages/genres/hooks/useFetchPaginatedGenres.ts";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {buttonVariants} from "@/common/components/ui/button.tsx";
-import {Plus} from "lucide-react";
-import {Link} from "react-router-dom";
-import {cn} from "@/common/lib/utils.ts";
 import PageError from "@/common/components/page/PageError.tsx";
 import GenreCardList from "@/pages/genres/components/cards/GenreCardList.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
+import GenreIndexHeader from "@/pages/genres/components/headers/GenreIndexHeader.tsx";
 
 const GenresPage: FC = () => {
     useTitle("Genres");
@@ -26,19 +21,7 @@ const GenresPage: FC = () => {
 
     return (
         <PageFlexWrapper>
-            <header className="flex justify-between items-center">
-                <div>
-                    <HeaderTitle>Genres</HeaderTitle>
-                    <HeaderDescription>The genres of the movies.</HeaderDescription>
-                </div>
-
-                <Link
-                    className={cn(buttonVariants({variant: "outline"}), "p-2")}
-                    to="/admin/genres/create"
-                >
-                    <Plus />
-                </Link>
-            </header>
+            <GenreIndexHeader />
 
             <section className="flex-1 space-y-3">
                 <GenreCardList genres={genres} onGenreDelete={() => refetch()} />

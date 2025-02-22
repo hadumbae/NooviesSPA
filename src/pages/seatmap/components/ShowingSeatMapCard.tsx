@@ -21,9 +21,8 @@ const ShowingSeatMapCard: FC<Props> = ({seatMap, onUpdate, onDelete}) => {
         <Card>
             <CardContent className="p-4 space-y-5">
                 <div className="flex justify-between items-center">
-                    {/*Seat Number*/}
                     <span className="font-bold">{seatNumber}</span>
-                    {/*Options*/}
+
                     <ShowingSeatMapCardOptions
                         variant="outline"
                         seatMap={seatMap}
@@ -43,11 +42,11 @@ const ShowingSeatMapCard: FC<Props> = ({seatMap, onUpdate, onDelete}) => {
                 </div>
 
                 <div className="flex justify-between">
-                    <div className="text-sm flex justify-between items-center">
+                    <div className="text-[12px] flex justify-between items-center">
                         <span>Available</span>
                         <Dot className={cn(isAvailable ? "text-green-500" : "text-red-500")} />
                     </div>
-                    <div className="text-sm flex justify-between items-center">
+                    <div className="text-[12px] flex justify-between items-center">
                         <span>Reserved</span>
                         <Dot className={isReserved ? "text-green-500" : "text-red-500"} />
                     </div>

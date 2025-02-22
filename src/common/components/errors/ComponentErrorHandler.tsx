@@ -1,10 +1,13 @@
 import {FC} from 'react';
 import {useNavigate, useRouteError} from "react-router-dom";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
+import useHttpResponseErrorHandler from "@/common/hooks/errors/useHttpResponseErrorHandler.ts";
 
 const ComponentErrorHandler: FC = () => {
     const navigate = useNavigate();
     const error = useRouteError();
+
+    useHttpResponseErrorHandler(error);
 
     if (!(error instanceof Error)) {
         navigate("/error");

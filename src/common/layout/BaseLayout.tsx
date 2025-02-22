@@ -14,6 +14,12 @@ const BaseLayout: FC = () => {
 
     return (
         <SidebarProvider>
+            {
+                isAuthenticated
+                    ? <AdminSidebar />
+                    : <GuestSidebar />
+            }
+
             <main className="flex flex-col space-y-1 p-3 w-full h-screen">
                 <header className="flex justify-between items-center">
                     <LayoutTitle text="Noovies MRS" />
@@ -24,12 +30,6 @@ const BaseLayout: FC = () => {
 
                     <SidebarTrigger />
                 </header>
-
-                {
-                    isAuthenticated
-                        ? <AdminSidebar />
-                        : <GuestSidebar />
-                }
 
                 <section className="flex-1 offside-regular w-full px-2 py-5">
                     <Outlet />
@@ -48,8 +48,6 @@ const BaseLayout: FC = () => {
                         transition={Bounce}
                     />
                 </section>
-
-
 
                 <footer className="dotgothic16-regular text-center text-neutral-500">
                     <span className="text-sm">

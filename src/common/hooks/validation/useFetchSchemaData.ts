@@ -1,8 +1,9 @@
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import {UseQueryResult} from "@tanstack/react-query";
+import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 import fetchReturns from "@/common/type/fetch/FetchReturns.ts";
 import {ZodType} from "zod";
+import useQueryWithRedirect from "@/common/hooks/errors/useQueryWithRedirect.ts";
 
 interface Props<TSchema extends ZodType, TReturnData> {
     queryKey: string,
@@ -21,7 +22,7 @@ export default function useFetchSchemaData<
         return parseResponseData<TSchema, TReturnData>({schema, data});
     };
 
-    return useQuery<TReturnData>({
+    return useQueryWithRedirect({
         queryKey: [queryKey],
         queryFn: fetchData,
     });

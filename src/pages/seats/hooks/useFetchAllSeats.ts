@@ -1,14 +1,21 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
-import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
-import {SeatArray, SeatArraySchema} from "@/pages/seats/schema/SeatSchema.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
+import handleFetchError from "@/common/handlers/query/handleFetchError.ts";
+import useQueryWithRedirect from "@/common/hooks/errors/useQueryWithRedirect.ts";
 
 export default function useFetchAllSeats(
     {filters = {}, populate = false}: {filters?: QueryFilters, populate?: boolean} = {}
 ) {
     const queryKey = "fetch_all_seats";
-    const schema = SeatArraySchema;
-    const action = () => SeatRepository.getAll({filters, populate});
 
-    return useFetchSchemaData<typeof SeatArraySchema, SeatArray>({schema, action, queryKey});
+    const fetchSeatsWithFilter = async () => {
+        const action = () => SeatRepository.getAll({filters, populate});
+        const {result} = await handleFetchError({fetchQueryFn: action});
+        return result;
+    }
+
+    return useQueryWithRedirect({
+        queryKey: [queryKey],
+        queryFn: fetchSeatsWithFilter,
+    });
 }

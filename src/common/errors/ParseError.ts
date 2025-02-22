@@ -1,12 +1,12 @@
 import {ZodIssue} from "zod";
 
-export class FetchError extends Error {
+export class ParseError extends Error {
     errors: ZodIssue[];
     
     constructor({message, errors}: {message?: string, errors: ZodIssue[]}) {
         super(message);
 
-        if (Error.captureStackTrace) Error.captureStackTrace(this, FetchError);
+        if (Error.captureStackTrace) Error.captureStackTrace(this, ParseError);
 
         this.name = this.constructor.name;
         this.errors = errors;

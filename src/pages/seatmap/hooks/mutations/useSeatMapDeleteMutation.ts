@@ -2,7 +2,7 @@
 
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import SeatMapRepository from "@/pages/seatmap/repositories/SeatMapRepository.ts";
 
 interface Params {

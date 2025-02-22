@@ -10,7 +10,8 @@ interface Props {
 }
 
 const ShowingSeatingHeader: FC<Props> = ({showing}) => {
-    const {movie, screen, theatre} = useValidatePopulatedShowing(showing);
+    const populatedShowing = useValidatePopulatedShowing({showing});
+    const {movie, screen, theatre} = populatedShowing!;
 
     const {title: movieTitle, releaseDate} = movie;
     const {name: screenName} = screen;

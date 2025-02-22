@@ -1,5 +1,5 @@
 import {useMutation} from "@tanstack/react-query";
-import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import SeatMapShowingRepository from "@/pages/seatmap/repositories/SeatMapShowingRepository.ts";
 import {SeatMap, SeatMapSchema} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";

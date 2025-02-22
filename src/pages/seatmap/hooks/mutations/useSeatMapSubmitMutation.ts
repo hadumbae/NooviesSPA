@@ -1,16 +1,21 @@
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {SeatMapSubmit} from "@/pages/seatmap/schema/SeatMapSubmitSchema.ts";
 import {SeatMap, SeatMapSchema} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import SeatMapRepository from "@/pages/seatmap/repositories/SeatMapRepository.ts";
-import useFetchErrorHandler from "@/common/handlers/query/FetchErrorHandler.ts";
+import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
+import {toast} from "react-toastify";
+import MutationFormErrorHandler from "@/common/handlers/mutation/MutationFormErrorHandler.ts";
+import {UseFormReturn} from "react-hook-form";
 
 interface Params {
+    form: UseFormReturn<SeatMapSubmit>;
     seatMap?: SeatMap;
+    onSubmit?: (seatMap: SeatMap) => void
 }
 
-export default function useSeatMapSubmitMutation(params?: Params) {
-    const {seatMap} = params || {};
+export default function useSeatMapSubmitMutation(params: Params): UseMutationResult<SeatMap, Error, SeatMapSubmit> {
+    const {form, seatMap, onSubmit} = params;
 
     const mutationKey = ['submit_single_seat_map'];
 
@@ -24,9 +29,12 @@ export default function useSeatMapSubmitMutation(params?: Params) {
         return parseResponseData<typeof SeatMapSchema, SeatMap>({schema: SeatMapSchema, data: result});
     };
 
-    const onSuccess = () => {};
+    const onSuccess = (seatMap: SeatMap) => {
+        toast.success("Success! Seat Map submitted.");
+        onSubmit && onSubmit(seatMap);
+    };
 
-    const onError = () => {};
+    const onError = MutationFormErrorHandler({form});
 
     return useMutation({
         mutationKey,
