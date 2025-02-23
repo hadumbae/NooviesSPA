@@ -1,11 +1,13 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
-import {TableOfContents} from "lucide-react";
-import GenreOptions from "@/pages/genres/components/GenreOptions.tsx";
+import {Loader, Pencil, TableOfContents, Trash} from "lucide-react";
 import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 import {useNavigate} from "react-router-dom";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
+import useGenreDeleteMutation from "@/pages/genres/hooks/useGenreDeleteMutation.ts";
+import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
+import {cn} from "@/common/lib/utils.ts";
 
 interface Props {
     genre: Genre;
@@ -19,23 +21,45 @@ const GenreDetailsHeader: FC<Props> = ({genre}) => {
         navigate("/admin/genres")
     }
 
+    const {_id} = genre;
+    const {mutate, isPending, isSuccess} = useGenreDeleteMutation({onDelete});
+
+    const isDisabled = isPending || isSuccess;
+
+    const deleteGenre = () => {
+        mutate({_id});
+    }
+
     return (
-        <header className="flex justify-between items-center">
-            <div>
+        <header className={cn(
+            "flex",
+            "max-md:flex-col",
+            "md:justify-between md:items-center"
+        )}>
+            <section>
                 <HeaderTitle>{name}</HeaderTitle>
                 <HeaderDescription>Genre</HeaderDescription>
-            </div>
+            </section>
 
-            <div className="space-x-2 flex items-center">
-                <HeaderLink to="/admin/genres">
-                    <TableOfContents/>
+            <section className="space-x-2 flex justify-end items-center">
+                <HeaderLink variant="link" to="/admin/genres">
+                    <TableOfContents /> Index
                 </HeaderLink>
 
-                <GenreOptions
-                    variant="outline" className="p-2"
-                    genre={genre} onDelete={onDelete}
-                />
-            </div>
+                <HeaderLink variant="link" to={`/admin/genres/edit/${_id}`}>
+                    <Pencil /> Edit
+                </HeaderLink>
+
+                <HeaderButton variant="link" disabled={isDisabled} onClick={deleteGenre}>
+                    {
+                        (isDisabled)
+                            ? <Loader className="animate-spin" />
+                            : <>
+                                <Trash /> Delete
+                            </>
+                    }
+                </HeaderButton>
+            </section>
         </header>
     );
 };

@@ -12,8 +12,8 @@ const GenreIndexHeader: FC = () => {
                 <HeaderDescription>The genres of the movies.</HeaderDescription>
             </section>
 
-            <HeaderLink to="/admin/genres/create">
-                <Plus/>
+            <HeaderLink variant="link" to="/admin/genres/create">
+                <Plus/> Create
             </HeaderLink>
         </header>
     );

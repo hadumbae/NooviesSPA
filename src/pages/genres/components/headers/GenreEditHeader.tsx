@@ -1,11 +1,10 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {Link} from "react-router-dom";
-import {cn} from "@/common/lib/utils.ts";
-import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {Search, TableOfContents} from "lucide-react";
 import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
+import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
+import {cn} from "@/common/lib/utils.ts";
 
 interface Props {
     genre: Genre;
@@ -15,26 +14,27 @@ const GenreEditHeader: FC<Props> = ({genre}) => {
     const {_id, name} = genre;
 
     return (
-        <header className="flex justify-between items-center">
-            <div>
+        <header className={cn(
+            "flex",
+            "max-md:flex-col",
+            "md:justify-between md:items-center",
+        )}>
+            <section>
                 <HeaderTitle>Edit | {name}</HeaderTitle>
                 <HeaderDescription>
                     Edit the genre `{name}` here.
                 </HeaderDescription>
-            </div>
+            </section>
 
-            <div className="flex items-center space-x-4">
-                <Link to="/admin/genres"
-                      className={cn(buttonVariants({variant: "outline"}), "p-4")}
-                >
-                    <TableOfContents/>
-                </Link>
-                <Link to={`/admin/genres/get/${_id}`}
-                      className={cn(buttonVariants({variant: "outline"}), "p-4")}
-                >
-                    <Search/>
-                </Link>
-            </div>
+            <section className="flex space-x-2 justify-end items-center">
+                <HeaderLink variant="link" to="/admin/genres">
+                    <TableOfContents /> Index
+                </HeaderLink>
+
+                <HeaderLink variant="link" to={`/admin/genres/get/${_id}`}>
+                    <Search /> Genre
+                </HeaderLink>
+            </section>
         </header>
     );
 };
