@@ -1,10 +1,9 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import PersonSubmitForm from "@/pages/persons/components/PersonSubmitForm.tsx";
 import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import {useNavigate} from "react-router-dom";
+import PersonCreateHeader from "@/pages/persons/components/headers/PersonCreateHeader.tsx";
 
 const PersonCreatePage: FC = () => {
     const navigate = useNavigate();
@@ -14,10 +13,7 @@ const PersonCreatePage: FC = () => {
 
     return (
         <PageFlexWrapper>
-            <header>
-                <HeaderTitle>Create Person</HeaderTitle>
-                <HeaderDescription>Record people here. Fill in the details and click on `Submit` to continue.</HeaderDescription>
-            </header>
+            <PersonCreateHeader />
 
             <section>
                 <PersonSubmitForm onSubmit={onSubmit} />
