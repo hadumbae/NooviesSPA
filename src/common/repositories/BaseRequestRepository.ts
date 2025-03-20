@@ -40,7 +40,7 @@ export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IRe
 
     async get(params: { _id: ObjectId, populate?: boolean }): Promise<FetchReturns> {
         const {_id, populate} = params;
-        const queries = {...(populate !== undefined && {populate})};
+        const queries = {...(populate && {populate})};
 
         const url = buildQueryURL({baseURL: baseURL, path: `get/${_id}`, queries});
         return useFetchAPI({url, method: "GET"});
@@ -48,7 +48,7 @@ export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IRe
 
     async create(params: { data: Record<string, any>, populate?: boolean }) {
         const {data, populate} = params;
-        const queries = {...(populate !== undefined && {populate})};
+        const queries = {...(populate && {populate})};
 
         const url = buildQueryURL({baseURL: baseURL, path: "create", queries});
         return useFetchAPI({url: url, method: "POST", data});
@@ -56,7 +56,7 @@ export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IRe
 
     async update(params: { _id: string, data: Record<string, any>, populate?: boolean }) {
         const {_id, data, populate = false} = params;
-        const queries = {...(populate !== undefined && {populate})};
+        const queries = {...(populate && {populate})};
 
         const url = buildQueryURL({baseURL: baseURL, path: `update/${_id}`, queries});
         return useFetchAPI({url: url, method: "PATCH", data});

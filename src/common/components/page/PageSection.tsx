@@ -9,7 +9,7 @@ interface Props {
 
 const PageSection: FC<PropsWithChildren<Props>> = ({children, className, title}) => {
     return (
-        <section>
+        <section className="space-y-2">
             {title && <HeaderSubtitle>{title}</HeaderSubtitle>}
             <div className={cn("space-y-3", className)}>
                 {children}

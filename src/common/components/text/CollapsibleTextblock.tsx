@@ -16,13 +16,11 @@ const CollapsibleTextblock: FC<Props> = ({text}) => {
             onOpenChange={setIsOpen}
         >
             <CollapsibleTrigger className="flex justify-between items-center w-full">
-                <span>Biography</span>
+                <span>{isOpen ? "Show Less" : "Show More"}</span>
                 {isOpen ? <ChevronUp /> : <ChevronDown />}
             </CollapsibleTrigger>
 
-            <CollapsibleContent
-                className="text-justify"
-            >
+            <CollapsibleContent className="text-justify">
                 {text}
             </CollapsibleContent>
         </Collapsible>
