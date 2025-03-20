@@ -11,7 +11,7 @@ const TheatreDetailsCard: FC<Props> = ({theatre}) => {
     const {
         name,
         location,
-        numberOfSeats,
+        seatCapacity,
         screens,
         seats,
     } = theatre;
@@ -27,7 +27,7 @@ const TheatreDetailsCard: FC<Props> = ({theatre}) => {
                 <DetailsCardSpan label="Location" text={location} />
 
                 <div className="flex justify-between items-center">
-                    <DetailsCardSpan label="Seat Capacity" text={`${numberOfSeats} seats`} />
+                    <DetailsCardSpan label="Seat Capacity" text={`${seatCapacity} seats`} />
                     <DetailsCardSpan label="Registered Screens" text={`${screenNum} screens`} />
                     <DetailsCardSpan label="Registered Seats" text={`${seatNum} seats`} />
                 </div>

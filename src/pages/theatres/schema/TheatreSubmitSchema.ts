@@ -12,7 +12,7 @@ export const TheatreSubmitSchema: ZodType<ITheatreSubmit> = z.object({
         .min(1, "Required.")
         .max(255, "Must be 255 characters or less."),
 
-    numberOfSeats: z
+    seatCapacity: z
         .union([z.literal(""), RequiredNumber])
         .refine(num => num !== "", {message: "Required."})
         .refine(num => num >= 0, {message: "Must be 0 or greater."}),

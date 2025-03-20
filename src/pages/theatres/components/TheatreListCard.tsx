@@ -10,7 +10,7 @@ interface Props {
 }
 
 const TheatreListCard: FC<Props>  = ({theatre, onDelete}) => {
-    const {_id, name, location, numberOfSeats, seats, screens} = theatre;
+    const {_id, name, location, seatCapacity, seats, screens} = theatre;
 
     return (
         <Card>
@@ -25,7 +25,7 @@ const TheatreListCard: FC<Props>  = ({theatre, onDelete}) => {
                 <div className="flex justify-between items-center">
                     <div className="flex flex-col">
                         <span className="text-[12px] text-neutral-500">Capacity</span>
-                        <span className="font-bold">{numberOfSeats}</span>
+                        <span className="font-bold">{seatCapacity}</span>
                     </div>
 
                     <div className="flex flex-col">

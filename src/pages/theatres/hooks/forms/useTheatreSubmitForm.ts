@@ -10,7 +10,7 @@ export default function useTheatreSubmitForm(params?: {theatre?: Theatre}) {
     const defaultValues: TheatreSubmit = {
         name: "",
         location: "",
-        numberOfSeats: "",
+        seatCapacity: "",
     }
 
     return useForm<TheatreSubmit>({

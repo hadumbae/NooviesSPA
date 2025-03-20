@@ -34,7 +34,7 @@ const TheatreSubmitForm: FC<Props> = ({theatre, onSubmit, className}) => {
                 <HookFormInput name="location" label="Location" control={form.control} />
 
                 <HookFormInput
-                    name="numberOfSeats"
+                    name="seatCapacity"
                     label="Number Of Seats"
                     type="number"
                     min={0}

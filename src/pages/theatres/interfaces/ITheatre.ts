@@ -6,7 +6,7 @@ export default interface ITheatre {
     _id: ObjectId,
     name: string,
     location: string,
-    numberOfSeats: number,
+    seatCapacity: number,
     screens: (ObjectId | IScreen)[],
     seats: (ObjectId | ISeat)[],
 }

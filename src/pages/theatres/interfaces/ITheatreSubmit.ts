@@ -1,5 +1,5 @@
 export default interface ITheatreSubmit {
     name: string,
     location: string,
-    numberOfSeats: number | "",
+    seatCapacity: number | "",
 }
