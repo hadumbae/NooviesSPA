@@ -6,7 +6,7 @@ import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 export default function useFetchMovie({_id}: { _id: ObjectId }) {
     const queryKey = "fetch_single_movie";
     const schema = MovieSchema;
-    const action = () => MovieRepository.get({_id});
+    const action = () => MovieRepository.get({_id, populate: true});
 
     return useFetchSchemaData<typeof MovieSchema, Movie>({queryKey, schema, action});
 }

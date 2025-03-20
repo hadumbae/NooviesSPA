@@ -11,10 +11,15 @@ import MovieDetailsCard from "@/pages/movies/components/details/MovieDetailsCard
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import CollapsibleTextblock from "@/common/components/text/CollapsibleTextblock.tsx";
+import useTitle from "@/common/hooks/document/useTitle.ts";
 
 const MoviePage: FC = () => {
+    useTitle("Movie Details");
+
     const {movieID} = useFetchMovieParams();
     const {data: movie, isPending, isError, error} = useFetchMovie({_id: movieID!});
+
+    useTitle(movie?.title);
 
     if (isPending) return <PageLoader />
     if (isError) return <PageError error={error} />
@@ -38,7 +43,7 @@ const MoviePage: FC = () => {
             </PageSection>
 
             <PageSection title="Directors">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-2">
                     {directors.map(
                         (director) => <MoviePersonAvatarCard
                             key={(director as Person)._id}
