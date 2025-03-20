@@ -1,11 +1,13 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
-import {TableOfContents} from "lucide-react";
-import TheatreOptions from "@/pages/theatres/components/TheatreOptions.tsx";
+import {Pencil, TableOfContents, Trash} from "lucide-react";
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {useNavigate} from "react-router-dom";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
+import {cn} from "@/common/lib/utils.ts";
+import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
+import useTheatreDeleteMutation from "@/pages/theatres/hooks/mutations/useTheatreDeleteMutation.ts";
+import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 
 interface Props {
     theatre: Theatre;
@@ -13,28 +15,39 @@ interface Props {
 
 const TheatreDetailsHeader: FC<Props> = ({theatre}) => {
     const navigate = useNavigate();
-    const navigateToIndex = () => {
-        navigate("/admin/theatres");
+    const {_id, name} = theatre;
+
+    const {mutate, isPending, isSuccess} = useTheatreDeleteMutation({onDelete: () => navigate("/admin/theatres")});
+    const isDisabled = isPending || isSuccess;
+
+    const deleteTheatre = () => {
+        mutate({_id});
     }
 
-    const {name} = theatre;
-
     return (
-        <header className="flex justify-between items-center">
-            <div>
+        <header className={cn(
+            "flex",
+            "max-md:flex-col",
+            "md:justify-between md:items-center",
+        )}>
+            <section>
                 <HeaderTitle>{name}</HeaderTitle>
                 <HeaderDescription>Theatre</HeaderDescription>
-            </div>
+            </section>
 
-            <div className="flex items-center space-x-2">
-                <Button className="p-2" variant="outline" onClick={navigateToIndex}>
-                    <TableOfContents/>
-                </Button>
+            <section className="space-x-2 flex justify-end items-center ">
+                <HeaderLink variant="link" to="/admin/theatres">
+                    <TableOfContents /> Index
+                </HeaderLink>
 
-                <TheatreOptions variant="outline" className="p-2"
-                    theatre={theatre} onDelete={navigateToIndex}
-                />
-            </div>
+                <HeaderLink variant="link" to={`/admin/theatres/edit/${_id}`}>
+                    <Pencil /> Edit
+                </HeaderLink>
+
+                <HeaderButton variant="link" onClick={deleteTheatre} disabled={isDisabled}>
+                    <Trash /> Delete
+                </HeaderButton>
+            </section>
         </header>
     );
 };

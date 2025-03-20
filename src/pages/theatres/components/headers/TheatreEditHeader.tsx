@@ -4,6 +4,7 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {Search, TableOfContents} from "lucide-react";
+import {cn} from "@/common/lib/utils.ts";
 
 interface Props {
     theatre: Theatre;
@@ -13,20 +14,24 @@ const TheatreEditHeader: FC<Props> = ({theatre}) => {
     const {_id, name} = theatre
 
     return (
-        <header className="flex justify-between items-center">
-            <div>
+        <header className={cn(
+            "flex",
+            "max-md:flex-col",
+            "md:justify-between md:items-center"
+        )}>
+            <section>
                 <HeaderTitle>{name}</HeaderTitle>
                 <HeaderDescription>Edit the theatre ({name}) here.</HeaderDescription>
-            </div>
+            </section>
 
-            <div className="space-x-2">
-                <HeaderLink to="/admin/theatres">
-                    <TableOfContents/>
+            <section className="space-x-2 flex justify-end items-center">
+                <HeaderLink variant="link" to="/admin/theatres">
+                    <TableOfContents/> Index
                 </HeaderLink>
-                <HeaderLink to={`/admin/theatres/get/${_id}`}>
-                    <Search/>
+                <HeaderLink variant="link" to={`/admin/theatres/get/${_id}`}>
+                    <Search/> Details
                 </HeaderLink>
-            </div>
+            </section>
         </header>
     );
 };
