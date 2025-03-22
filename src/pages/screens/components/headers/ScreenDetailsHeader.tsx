@@ -3,10 +3,12 @@ import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
-import {TableOfContents} from "lucide-react";
-import ScreenOptions from "@/pages/screens/components/ScreenOptions.tsx";
+import {Pencil, TableOfContents, Trash} from "lucide-react";
 import {useNavigate} from "react-router-dom";
-import {Button} from "@/common/components/ui/button.tsx";
+import {cn} from "@/common/lib/utils.ts";
+import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
+import useScreenDeleteMutation from "@/pages/screens/hooks/useScreenDeleteMutation.ts";
+import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 
 interface Props {
     screen: Screen;
@@ -14,36 +16,39 @@ interface Props {
 
 const ScreenDetailsHeader: FC<Props> = ({screen}) => {
     const navigate = useNavigate();
-    const navigateToIndex = () => {
-        navigate("/admin/screens");
-    }
 
-    const {name, screenType, theatre} = screen;
+    const {_id, name, screenType, theatre} = screen;
     const theatreName = (theatre as Theatre).name;
 
+    const {mutate, isPending, isSuccess} = useScreenDeleteMutation({onDelete: () => navigate("/admin/screens")});
+    const isDisabled = isPending || isSuccess;
+
+    const deleteScreen = () => mutate({_id});
+
     return (
-        <header className="flex justify-between items-center">
-            <div>
+        <header className={cn(
+            "flex",
+            "max-md:flex-col",
+            "md:justify-between md:items-center",
+        )}>
+            <section>
                 <HeaderTitle>{name} | {screenType}</HeaderTitle>
                 <HeaderDescription>Screen at {theatreName}.</HeaderDescription>
-            </div>
+            </section>
 
-            <div className="space-x-2">
-                <Button
-                    className="p-2"
-                    variant="outline"
-                    onClick={navigateToIndex}
-                >
-                    <TableOfContents/>
-                </Button>
+            <section className="space-x-2 flex justify-end items-center">
+                <HeaderLink variant="link" to="/admin/screens">
+                    <TableOfContents/> Index
+                </HeaderLink>
 
-                <ScreenOptions
-                    screen={screen}
-                    onDelete={navigateToIndex}
-                    variant="outline"
-                    className="p-2"
-                />
-            </div>
+                <HeaderLink variant="link" to={`/admin/screens/edit/${_id}`}>
+                    <Pencil /> Edit
+                </HeaderLink>
+
+                <HeaderButton variant="link" onClick={deleteScreen} disabled={isDisabled}>
+                    <Trash /> Delete
+                </HeaderButton>
+            </section>
         </header>
     );
 };

@@ -1,12 +1,9 @@
 import {FC} from 'react';
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
-import {TableOfContents} from "lucide-react";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import ScreenSubmitForm from "@/pages/screens/components/ScreenSubmitForm.tsx";
 import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
 import {useNavigate} from "react-router-dom";
+import ScreenCreateHeader from "@/pages/screens/components/headers/ScreenCreateHeader.tsx";
 
 
 const ScreenCreatePage: FC = () => {
@@ -17,16 +14,7 @@ const ScreenCreatePage: FC = () => {
 
     return (
         <PageFlexWrapper>
-            <header className="flex justify-between items-center">
-                <div>
-                    <HeaderTitle>Create Screen</HeaderTitle>
-                    <HeaderDescription>Enter details and press on `Submit` to create screens.</HeaderDescription>
-                </div>
-
-                <HeaderLink to="/admin/screens">
-                    <TableOfContents />
-                </HeaderLink>
-            </header>
+            <ScreenCreateHeader />
 
             <section>
                 <ScreenSubmitForm onSubmit={onSubmit} />

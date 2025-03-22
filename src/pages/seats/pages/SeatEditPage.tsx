@@ -7,11 +7,16 @@ import {useNavigate} from "react-router-dom";
 import useFetchSeatParams from "@/pages/seats/hooks/useFetchSeatParams.ts";
 import useFetchSeat from "@/pages/seats/hooks/useFetchSeat.ts";
 import SeatEditHeader from "@/pages/seats/components/headers/SeatEditHeader.tsx";
+import useTitle from "@/common/hooks/document/useTitle.ts";
 
 const SeatEditPage: FC = () => {
+    useTitle("Edit Seat")
+
     const navigate = useNavigate();
     const {seatID} = useFetchSeatParams();
     const {data: seat, isPending, isError, error} = useFetchSeat({_id: seatID!});
+
+    useTitle(`${seat?.row} | ${seat?.seatNumber}`)
 
     const onSubmit = () => {
         navigate(`/admin/seats/get/${seat && seat._id}`);

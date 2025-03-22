@@ -1,12 +1,13 @@
 import {FC} from 'react';
 import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
-import SeatOptions from "@/pages/seats/components/SeatOptions.tsx";
 import {useNavigate} from "react-router-dom";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
-import {TableOfContents} from "lucide-react";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Pencil, TableOfContents, Trash} from "lucide-react";
+import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
+import useSeatDeleteMutation from "@/pages/seats/hooks/useSeatDeleteMutation.ts";
+import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 
 interface Props {
     seat: Seat;
@@ -14,13 +15,14 @@ interface Props {
 
 const SeatDetailsHeader: FC<Props> = ({seat}) => {
     const navigate = useNavigate();
-    const {row, seatNumber, theatre} = seat;
+    const {_id, row, seatNumber, theatre} = seat;
 
     const theatreName = (theatre as Theatre).name;
 
-    const navigateToIndex = () => {
-        navigate("/admin/seats");
-    }
+    const {mutate, isPending, isSuccess} = useSeatDeleteMutation({onDelete: () => navigate("/admin/seats")});
+
+    const isDisabled = isPending || isSuccess;
+    const deleteSeat = () => mutate({_id});
 
     return (
         <header className="flex justify-between items-center">
@@ -29,22 +31,19 @@ const SeatDetailsHeader: FC<Props> = ({seat}) => {
                 <HeaderDescription>Seat At {theatreName}</HeaderDescription>
             </div>
 
-            <div className="space-x-2">
-                <Button
-                    className="p-2"
-                    variant="outline"
-                    onClick={navigateToIndex}
-                >
-                    <TableOfContents/>
-                </Button>
+            <section className="space-x-2 flex justify-end items-center">
+                <HeaderLink variant="link" to="/admin/seats">
+                    <TableOfContents/> Index
+                </HeaderLink>
 
-                <SeatOptions
-                    seat={seat}
-                    onDelete={navigateToIndex}
-                    className="p-2"
-                    variant="outline"
-                />
-            </div>
+                <HeaderLink variant="link" to={`/admin/seats/edit/${_id}`}>
+                    <Pencil /> Edit
+                </HeaderLink>
+
+                <HeaderButton variant="link" onClick={deleteSeat} disabled={isDisabled}>
+                    <Trash /> Delete
+                </HeaderButton>
+            </section>
         </header>
     );
 };

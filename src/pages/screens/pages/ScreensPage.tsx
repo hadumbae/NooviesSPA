@@ -1,16 +1,16 @@
 import {FC} from 'react';
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
-import {Plus} from "lucide-react";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/PageError.tsx";
 import {useFetchPaginatedScreens} from "@/pages/screens/hooks/useFetchPaginatedScreens.ts";
 import ScreenCardList from "@/pages/screens/components/ScreenCardList.tsx";
+import useTitle from "@/common/hooks/document/useTitle.ts";
+import ScreenIndexHeader from "@/pages/screens/components/headers/ScreenIndexHeader.tsx";
 
 const ScreensPage: FC = () => {
+    useTitle("Screens")
+
     const {page, perPage} = usePaginationSearchParams();
     const {data, isPending, isError, error, refetch} = useFetchPaginatedScreens({page, perPage, populate: true});
 
@@ -19,24 +19,11 @@ const ScreensPage: FC = () => {
 
     const {items: screens} = data;
 
-    console.log(screens);
-
-    const onDelete = () => {
-        refetch();
-    }
+    const onDelete = () => refetch();
 
     return (
         <PageFlexWrapper>
-            <header className="flex justify-between items-center">
-                <div>
-                    <HeaderTitle>Screens</HeaderTitle>
-                    <HeaderDescription>The screens where the movies will be shown.</HeaderDescription>
-                </div>
-
-                <HeaderLink to="/admin/screens/create">
-                    <Plus />
-                </HeaderLink>
-            </header>
+            <ScreenIndexHeader />
 
             <section>
                 <ScreenCardList screens={screens} onDelete={onDelete} />

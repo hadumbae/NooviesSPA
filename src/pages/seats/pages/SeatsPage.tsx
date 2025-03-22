@@ -16,9 +16,7 @@ const SeatsPage: FC = () => {
 
     const {totalItems, items: seats} = data;
 
-    const onDelete = () => {
-        refetch();
-    }
+    const onDelete = () => refetch();
 
     return (
         <PageFlexWrapper>
