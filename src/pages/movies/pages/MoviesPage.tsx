@@ -4,7 +4,7 @@ import MovieIndexHeader from "@/pages/movies/components/headers/MovieIndexHeader
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import {useFetchPaginatedMovies} from "@/pages/movies/hooks/queries/useFetchPaginatedMovies.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import MovieCardList from "@/pages/movies/components/MovieCardList.tsx";
 
 const MoviesPage: FC = () => {

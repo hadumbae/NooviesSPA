@@ -2,7 +2,7 @@ import {FC} from 'react';
 import useFetchPaginatedGenres from "@/pages/genres/hooks/useFetchPaginatedGenres.ts";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import GenreCardList from "@/pages/genres/components/cards/GenreCardList.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";

@@ -4,7 +4,7 @@ import MovieEditHeader from "@/pages/movies/components/headers/MovieEditHeader.t
 import useFetchMovieParams from "@/pages/movies/hooks/params/useFetchMovieParams.ts";
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import {useNavigate} from "react-router-dom";
 import {Movie} from "@/pages/movies/schema/MovieSchema.ts";
 import MovieSubmitForm from "@/pages/movies/components/MovieSubmitForm.tsx";

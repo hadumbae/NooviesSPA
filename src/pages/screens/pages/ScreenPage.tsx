@@ -3,7 +3,7 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import useFetchScreenParams from "@/pages/screens/hooks/useFetchScreenParams.ts";
 import useFetchScreen from "@/pages/screens/hooks/useFetchScreen.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import ScreenDetailsHeader from "@/pages/screens/components/headers/ScreenDetailsHeader.tsx";
 import ScreenDetailsCard from "@/pages/screens/components/ScreenDetailsCard.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";

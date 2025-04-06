@@ -4,7 +4,7 @@ import SeatDetailsHeader from "@/pages/seats/components/headers/SeatDetailsHeade
 import useFetchSeatParams from "@/pages/seats/hooks/useFetchSeatParams.ts";
 import useFetchSeat from "@/pages/seats/hooks/useFetchSeat.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import SeatDetailsCard from "@/pages/seats/components/SeatDetailsCard.tsx";
 
 const SeatPage: FC = () => {

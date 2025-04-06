@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import useFetchTheatreParams from "@/pages/theatres/hooks/params/useFetchTheatreParams.ts";
 import useFetchTheatre from "@/pages/theatres/hooks/queries/useFetchTheatre.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import TheatreSubmitForm from "@/pages/theatres/components/TheatreSubmitForm.tsx";
 import TheatreEditHeader from "@/pages/theatres/components/headers/TheatreEditHeader.tsx";

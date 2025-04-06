@@ -4,7 +4,7 @@ import MovieDetailsHeader from "@/pages/movies/components/headers/MovieDetailsHe
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
 import useFetchMovieParams from "@/pages/movies/hooks/params/useFetchMovieParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import MoviePersonAvatarCard from "@/pages/movies/components/person/MoviePersonAvatarCard.tsx";
 import MovieDetailsCard from "@/pages/movies/components/details/MovieDetailsCard.tsx";

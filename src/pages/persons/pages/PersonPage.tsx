@@ -2,7 +2,7 @@ import {FC} from 'react';
 import useFetchPerson from "@/pages/persons/hooks/useFetchPerson.ts";
 import useFetchPersonParams from "@/pages/persons/hooks/useFetchPersonParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
 import PersonDetailsHeader from "@/pages/persons/components/headers/PersonDetailsHeader.tsx";

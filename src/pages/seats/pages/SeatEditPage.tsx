@@ -2,7 +2,7 @@ import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import SeatSubmitForm from "@/pages/seats/components/SeatSubmitForm.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import {useNavigate} from "react-router-dom";
 import useFetchSeatParams from "@/pages/seats/hooks/useFetchSeatParams.ts";
 import useFetchSeat from "@/pages/seats/hooks/useFetchSeat.ts";

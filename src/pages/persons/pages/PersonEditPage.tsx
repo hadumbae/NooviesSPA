@@ -2,7 +2,7 @@ import {FC} from 'react';
 import useFetchPersonParams from "@/pages/persons/hooks/useFetchPersonParams.ts";
 import useFetchPerson from "@/pages/persons/hooks/useFetchPerson.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import PersonSubmitForm from "@/pages/persons/components/PersonSubmitForm.tsx";
 import {useNavigate} from "react-router-dom";

@@ -3,7 +3,7 @@ import {FC, ReactElement} from 'react';
 import useFetchGenre from "@/pages/genres/hooks/useFetchGenre.ts";
 import useFetchGenreParams from "@/pages/genres/hooks/useFetchGenreParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import GenreDetailsHeader from "@/pages/genres/components/headers/GenreDetailsHeader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";

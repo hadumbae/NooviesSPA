@@ -4,7 +4,7 @@ import ShowingEditHeader from "@/pages/showings/components/headers/ShowingEditHe
 import useFetchShowingParams from "@/pages/showings/hooks/params/useFetchShowingParams.ts";
 import useFetchShowing from "@/pages/showings/hooks/queries/useFetchShowing.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import {useNavigate} from "react-router-dom";
 import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
 import ShowingSubmitForm from "@/pages/showings/components/ShowingSubmitForm.tsx";

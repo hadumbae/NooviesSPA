@@ -4,7 +4,7 @@ import TheatreCardList from "@/pages/theatres/components/TheatreCardList.tsx";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import {useFetchPaginatedTheatres} from "@/pages/theatres/hooks/queries/useFetchPaginatedTheatres.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import TheatreIndexHeader from "@/pages/theatres/components/headers/TheatreIndexHeader.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 

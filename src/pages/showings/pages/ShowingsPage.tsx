@@ -4,7 +4,7 @@ import ShowingIndexHeader from "@/pages/showings/components/headers/ShowingIndex
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import {useFetchPaginatedShowings} from "@/pages/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import ShowingCardList from "@/pages/showings/components/ShowingCardList.tsx";
 import useShowingQueryErrorHandler from "@/pages/showings/hooks/errors/useShowingQueryErrorHandler.ts";
 import useValidateData from "@/common/hooks/validation/useValidateData.ts";
