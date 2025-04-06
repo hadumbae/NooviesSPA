@@ -1,10 +1,10 @@
 import {FC, PropsWithChildren} from 'react';
 import {cn} from "@/common/lib/utils.ts";
-import ButtonVariants from "@/common/type/ui/ButtonVariants.ts";
+import ButtonVariant from "@/common/type/ui/ButtonVariant.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 
 interface Props {
-    variant?: ButtonVariants;
+    variant?: ButtonVariant;
     className?: string;
     onClick?: () => void;
     disabled?: boolean;
