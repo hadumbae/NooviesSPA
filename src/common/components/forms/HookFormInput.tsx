@@ -20,9 +20,10 @@ interface Props {
     type?: string;
     min?: number;
     max?: number;
+    disabled?: boolean;
 }
 
-const HookFormInput: FC<Props> = ({name, label, description, placeholder, control, step, type, min, max}) => {
+const HookFormInput: FC<Props> = ({name, label, description, placeholder, control, step, type, min, max, disabled}) => {
     return (
         <FormField
             control={control}
@@ -37,6 +38,7 @@ const HookFormInput: FC<Props> = ({name, label, description, placeholder, contro
                         min={min}
                         max={max}
                         placeholder={placeholder || label}
+                        disabled={disabled}
                         {...field}
                     />
                 </FormControl>

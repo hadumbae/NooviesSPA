@@ -16,11 +16,12 @@ interface Props<TSubmit extends FieldValues> {
     description?: string;
     placeholder?: string;
     control: Control<TSubmit>;
+    isDisabled?: boolean;
     options: ReactSelectOption[];
 }
 
 const HookFormSelect = <TSubmit extends FieldValues>(
-    {name, label, description, control, placeholder = "Select an option.", options}: Props<TSubmit>
+    {name, label, description, control, isDisabled, placeholder = "Select an option.", options}: Props<TSubmit>
 ) => {
     return (
         <Controller
@@ -35,6 +36,7 @@ const HookFormSelect = <TSubmit extends FieldValues>(
                         value={options.find(o => o.value === field.value) || {label: placeholder, value: undefined}}
                         onChange={(val) => field.onChange(val?.value)}
                         placeholder={placeholder}
+                        isDisabled={isDisabled}
                     />
                 </FormControl>
 

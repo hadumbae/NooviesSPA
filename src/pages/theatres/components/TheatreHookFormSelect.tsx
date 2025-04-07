@@ -13,11 +13,12 @@ interface Props<TSubmit extends FieldValues> {
     placeholder?: string;
     control: Control<TSubmit>,
     isMulti?: boolean;
+    isDisabled?: boolean;
     filters?: QueryFilters,
 }
 
 const TheatreHookFormSelect = <TSubmit extends FieldValues>(props: Props<TSubmit>) => {
-    const {isMulti = false, filters = {}} = props
+    const {isDisabled, isMulti = false, filters = {}} = props
     const {data: theatres, isPending, isError, error} = useFetchAllTheatres({filters});
 
     if (isPending) return <Loader className="animate-spin" />;
@@ -29,8 +30,8 @@ const TheatreHookFormSelect = <TSubmit extends FieldValues>(props: Props<TSubmit
 
     return (
         isMulti
-            ? <HookFormMultiSelect<TSubmit> options={options} {...props} />
-            : <HookFormSelect<TSubmit> options={options} {...props} />
+            ? <HookFormMultiSelect<TSubmit> isDisabled={isDisabled} options={options} {...props} />
+            : <HookFormSelect<TSubmit> isDisabled={isDisabled} options={options} {...props} />
     );
 };
 

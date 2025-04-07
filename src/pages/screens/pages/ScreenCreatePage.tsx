@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import ScreenSubmitForm from "@/pages/screens/components/ScreenSubmitForm.tsx";
+import ScreenSubmitFormContainer from "@/pages/screens/components/forms/ScreenSubmitFormContainer.tsx";
 import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
 import {useNavigate} from "react-router-dom";
 import ScreenCreateHeader from "@/pages/screens/components/headers/ScreenCreateHeader.tsx";
@@ -17,7 +17,7 @@ const ScreenCreatePage: FC = () => {
             <ScreenCreateHeader />
 
             <section>
-                <ScreenSubmitForm onSubmit={onSubmit} />
+                <ScreenSubmitFormContainer onSubmit={onSubmit} />
             </section>
         </PageFlexWrapper>
     );

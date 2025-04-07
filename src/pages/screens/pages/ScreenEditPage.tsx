@@ -3,9 +3,9 @@ import {useNavigate} from "react-router-dom";
 import useFetchScreenParams from "@/pages/screens/hooks/useFetchScreenParams.ts";
 import useFetchScreen from "@/pages/screens/hooks/useFetchScreen.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/PageError.tsx";
+import PageError from "@/common/components/page/errors/PageError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import ScreenSubmitForm from "@/pages/screens/components/ScreenSubmitForm.tsx";
+import ScreenSubmitFormContainer from "@/pages/screens/components/forms/ScreenSubmitFormContainer.tsx";
 import ScreenEditHeader from "@/pages/screens/components/headers/ScreenEditHeader.tsx";
 
 const ScreenEditPage: FC = () => {
@@ -25,7 +25,7 @@ const ScreenEditPage: FC = () => {
             <ScreenEditHeader screen={screen} />
 
             <section>
-                <ScreenSubmitForm screen={screen} onSubmit={() => onSubmit()} />
+                <ScreenSubmitFormContainer screen={screen} onSubmit={() => onSubmit()} />
             </section>
         </PageFlexWrapper>
     );

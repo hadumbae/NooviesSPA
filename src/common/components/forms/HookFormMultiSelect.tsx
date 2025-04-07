@@ -11,11 +11,12 @@ interface Props<TSubmit extends FieldValues> {
     description?: string;
     placeholder?: string;
     control: Control<TSubmit>;
+    isDisabled?: boolean;
     options: ReactSelectOption[];
 }
 
 const HookFormMultiSelect = <TSubmit extends FieldValues>(
-    {name, label, description, control, placeholder, options = []}: Props<TSubmit>
+    {name, label, description, control, placeholder, isDisabled, options = []}: Props<TSubmit>
 ) => {
     return (
         <Controller
@@ -31,6 +32,7 @@ const HookFormMultiSelect = <TSubmit extends FieldValues>(
                         value={options.filter(v => field.value.includes(v.value))}
                         onChange={value => field.onChange(value.map(v => v.value))}
                         placeholder={placeholder}
+                        isDisabled={isDisabled}
                     />
                 </FormControl>
 

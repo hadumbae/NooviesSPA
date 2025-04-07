@@ -28,7 +28,6 @@ interface Props<T extends FieldValues> {
     label: string,
     placeholder?: string,
     description?: string,
-
 }
 
 const HookFormCombobox = <T extends FieldValues,>(

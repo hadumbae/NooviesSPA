@@ -11,7 +11,7 @@ export const useFetchPaginatedTheatres = (
 
     const queryKey = "fetch_paginated_theatres";
     const schema = PaginatedTheatreSchema;
-    const action = () => TheatreRepository.paginated({queries: {page, perPage, filteredQueries}});
+    const action = () => TheatreRepository.paginated({filters: {page, perPage, filteredQueries}});
 
     return useFetchSchemaData<typeof schema, PaginatedTheatres>({queryKey, schema, action});
 }
