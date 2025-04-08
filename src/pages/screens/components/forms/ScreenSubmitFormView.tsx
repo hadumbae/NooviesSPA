@@ -8,7 +8,7 @@ import {ScreenSubmit} from "@/pages/screens/schema/ScreenSubmitSchema.ts";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
-import ScreenTypeHookFormSelect from "@/pages/screens/components/ScreenTypeHookFormSelect.tsx";
+import ScreenTypeHookFormSelect from "@/pages/screens/components/inputs/ScreenTypeHookFormSelect.tsx";
 
 interface Props {
     className?: string;

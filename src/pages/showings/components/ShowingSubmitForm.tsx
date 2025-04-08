@@ -10,7 +10,7 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import LanguageHookFormSelect from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
 import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
-import ScreenHookFormSelect from "@/pages/screens/components/ScreenHookFormSelect.tsx";
+import ScreenHookFormSelect from "@/pages/screens/components/inputs/ScreenHookFormSelect.tsx";
 import MovieHookFormSelect from "@/pages/movies/components/ui/MovieHookFormSelect.tsx";
 import {ShowingSubmit} from "@/pages/showings/schema/ShowingSubmitSchema.ts";
 

@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {cn} from "@/common/lib/utils.ts";
 
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
@@ -12,6 +11,7 @@ import TheatreScreenCardList from "@/pages/theatres/components/screens/TheatreSc
 import useFetchTheatreParams from "@/pages/theatres/hooks/params/useFetchTheatreParams.ts";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import useFetchTheatreAndScreens from "@/pages/theatres/hooks/queries/useFetchTheatreAndScreens.ts";
+import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 const TheatreScreensPage: FC = () => {
     const { theatreID } = useFetchTheatreParams();
@@ -26,19 +26,24 @@ const TheatreScreensPage: FC = () => {
     if (isPending) return <PageLoader />;
     if (isError) return <PageError error={error} />;
 
-    const onScreenAdd = () => {
-        refetchScreens();
-    }
+    const hasScreens = (screens || []).length > 0;
+    const onScreenChange = () => refetchScreens();
 
     return (
         <PageFlexWrapper>
-            <TheatreScreensIndexHeader theatre={theatre!} onScreenSubmit={onScreenAdd} />
+            <TheatreScreensIndexHeader theatre={theatre!} onScreenSubmit={onScreenChange} />
 
-            <PageSection title="Screens" className={cn("")}>
-                <div className="grid grid-cols-1 gap-3">
-                    <TheatreScreenCardList screens={screens!} />
-                </div>
-            </PageSection>
+            {
+                hasScreens
+                    ? <PageSection>
+                        <section className="grid grid-cols-1 gap-3">
+                            <TheatreScreenCardList screens={screens!} onDelete={onScreenChange}/>
+                        </section>
+                    </PageSection>
+                    : <PageCenter>
+                        <span className="text-neutral-400 select-none">There Are No Screens</span>
+                    </PageCenter>
+            }
 
         </PageFlexWrapper>
     );

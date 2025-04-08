@@ -3,16 +3,17 @@ import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
 import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 
-import {Link} from "react-router-dom";
-import {Link as LinkIcon} from "lucide-react";
+import {Link as LinkIcon, Trash} from "lucide-react";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
+import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 
 interface Props {
     screen: Screen;
+    onDelete?: () => void
 }
 
-const TheatreScreenCard: FC<Props> = ({screen}) => {
+const TheatreScreenCard: FC<Props> = ({screen, onDelete}) => {
     const {_id, name, screenType, capacity, seats} = screen;
 
     const screenCapacity = `${capacity} seats`;
@@ -24,16 +25,23 @@ const TheatreScreenCard: FC<Props> = ({screen}) => {
                 <CardTitle className="flex justify-between items-center">
                     <span>{name}</span>
 
-                    <Link
-                        to={`/admin/screens/get/${_id}`}
-                        className={cn(
-                            buttonVariants({variant: "outline", size: "sm"}),
-                            "px-2 h-6",
-                            "text-neutral-400"
-                        )}
-                    >
-                        <LinkIcon /> Details
-                    </Link>
+                    <section className="flex items-center space-x-2 text-neutral-500">
+                        <ButtonLink
+                            to={`/admin/screens/get/${_id}`}
+                            variant="outline"
+                            size="sm"
+                        >
+                            <LinkIcon /> Details
+                        </ButtonLink>
+
+                        <ScreenDeleteWarningDialog
+                            className={buttonVariants({variant: "outline", size: "sm"})}
+                            screen={screen}
+                            onDelete={onDelete}
+                        >
+                            <Trash /> Delete
+                        </ScreenDeleteWarningDialog>
+                    </section>
                 </CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">

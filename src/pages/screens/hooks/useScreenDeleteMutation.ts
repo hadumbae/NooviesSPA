@@ -6,10 +6,10 @@ import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
 
 interface Params {
-    onDelete: () => void;
+    onDelete?: () => void;
 }
 
-export default function useScreenDeleteMutation({onDelete}: Params) {
+export default function useScreenDeleteMutation({onDelete}: Params = {}) {
     const mutationKey = ["delete_single_screen"];
 
     const mutationFn = async ({_id}: {_id: ObjectId}) => {
@@ -19,7 +19,7 @@ export default function useScreenDeleteMutation({onDelete}: Params) {
 
     const onSuccess = () => {
         toast.success("Screen deleted.");
-        onDelete();
+        onDelete && onDelete();
     };
 
     const onError = (error: Error | ParseError) => {

@@ -4,13 +4,14 @@ import TheatreScreenCard from "@/pages/theatres/components/screens/TheatreScreen
 
 interface Props {
     screens: Screen[];
+    onDelete?: () => void;
 }
 
-const TheatreScreenCardList: FC<Props> = ({screens}) => {
+const TheatreScreenCardList: FC<Props> = ({screens, onDelete}) => {
     return (
         <>
             {screens.map(
-                (screen) => <TheatreScreenCard key={screen._id} screen={screen} />
+                (screen) => <TheatreScreenCard key={screen._id} screen={screen} onDelete={onDelete} />
             )}
         </>
     );
