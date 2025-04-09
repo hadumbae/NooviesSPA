@@ -9,6 +9,8 @@ import ShowingCardList from "@/pages/showings/components/ShowingCardList.tsx";
 import useShowingQueryErrorHandler from "@/pages/showings/hooks/errors/useShowingQueryErrorHandler.ts";
 import useValidateData from "@/common/hooks/validation/useValidateData.ts";
 import {PaginatedShowings, PaginatedShowingSchema} from "@/pages/showings/schema/ShowingPaginationSchema.ts";
+import PageSection from "@/common/components/page/PageSection.tsx";
+import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 const ShowingsPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams({perPage: "25"});
@@ -23,19 +25,25 @@ const ShowingsPage: FC = () => {
     if (isPending) return <PageLoader />;
     if (isError) return <PageError error={error} />;
 
-    const {items: showings} = paginatedShowings!;
+    const onShowingDelete = () => refetch();
 
-    const onDelete = () => {
-        refetch();
-    }
+    const {items: showings} = paginatedShowings!;
+    const hasShowings = (showings || []).length > 0;
 
     return (
         <PageFlexWrapper>
             <ShowingIndexHeader />
 
-            <section className="space-y-2">
-                <ShowingCardList showings={showings} onShowingDelete={onDelete} />
-            </section>
+            {
+                hasShowings
+                    ? <PageSection>
+                        <ShowingCardList showings={showings} onShowingDelete={onShowingDelete} />
+                    </PageSection>
+                    : <PageCenter>
+                        <span className="text-neutral-400 select-none">There Are No Showings</span>
+                    </PageCenter>
+            }
+
         </PageFlexWrapper>
     );
 };

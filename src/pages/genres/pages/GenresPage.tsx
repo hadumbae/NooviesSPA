@@ -7,6 +7,8 @@ import GenreCardList from "@/pages/genres/components/cards/GenreCardList.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import GenreIndexHeader from "@/pages/genres/components/headers/GenreIndexHeader.tsx";
+import PageSection from "@/common/components/page/PageSection.tsx";
+import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 const GenresPage: FC = () => {
     useTitle("Genres");
@@ -18,14 +20,24 @@ const GenresPage: FC = () => {
     if (isError) return <PageError error={error} />
 
     const {items: genres} = data;
+    const hasGenres = (genres || []).length > 0;
+
+    const onGenreDelete = () => refetch();
 
     return (
         <PageFlexWrapper>
             <GenreIndexHeader />
 
-            <section className="flex-1 space-y-3">
-                <GenreCardList genres={genres} onGenreDelete={() => refetch()} />
-            </section>
+            {
+                hasGenres
+                    ? <PageSection>
+                        <GenreCardList genres={genres} onGenreDelete={onGenreDelete} />
+                    </PageSection>
+                    : <PageCenter>
+                        <span className="text-neutral-400 select-none">There Are No Genres</span>
+                    </PageCenter>
+            }
+
         </PageFlexWrapper>
     );
 };

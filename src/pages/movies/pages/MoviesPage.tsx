@@ -6,6 +6,8 @@ import {useFetchPaginatedMovies} from "@/pages/movies/hooks/queries/useFetchPagi
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import MovieCardList from "@/pages/movies/components/MovieCardList.tsx";
+import PageSection from "@/common/components/page/PageSection.tsx";
+import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 const MoviesPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams({perPage: "25"});
@@ -14,19 +16,25 @@ const MoviesPage: FC = () => {
     if (isPending) return <PageLoader />;
     if (isError) return <PageError error={error} />;
 
-    const {items: movies} = data;
+    const onDelete = () => refetch();
 
-    const onDelete = () => {
-        refetch();
-    }
+    const {items: movies} = data;
+    const hasMovies = (movies || []).length > 0;
 
     return (
         <PageFlexWrapper>
             <MovieIndexHeader />
 
-            <section className="space-y-2">
-                <MovieCardList movies={movies} onMovieDelete={onDelete} />
-            </section>
+            {
+                hasMovies
+                    ? <PageSection>
+                        <MovieCardList movies={movies} onMovieDelete={onDelete} />
+                    </PageSection>
+                    : <PageCenter>
+                        <span className="text-neutral-400 select-none">There Are No Movies</span>
+                    </PageCenter>
+            }
+
         </PageFlexWrapper>
     );
 };

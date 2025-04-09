@@ -6,6 +6,8 @@ import useFetchPaginatedPersons from "@/pages/persons/hooks/useFetchPaginatedPer
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import PersonIndexHeader from "@/pages/persons/components/headers/PersonIndexHeader.tsx";
+import PageSection from "@/common/components/page/PageSection.tsx";
+import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 const PersonsPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams();
@@ -15,17 +17,23 @@ const PersonsPage: FC = () => {
     if (isError) return <PageError error={error} />;
 
     const {items: persons} = data;
+    const hasPersons = (persons || []).length > 0;
+
+    const onPersonDelete = () => refetch();
 
     return (
         <PageFlexWrapper>
             <PersonIndexHeader />
 
-            <section className="flex-1 space-y-3">
-                <PersonCardList
-                    persons={persons}
-                    onPersonDelete={() => refetch()}
-                />
-            </section>
+            {
+                !hasPersons
+                    ? <PageSection>
+                        <PersonCardList persons={persons} onPersonDelete={onPersonDelete} />
+                    </PageSection>
+                    : <PageCenter>
+                        <span className="text-neutral-400 select-none">There Are No Movies</span>
+                    </PageCenter>
+            }
         </PageFlexWrapper>
     );
 };
