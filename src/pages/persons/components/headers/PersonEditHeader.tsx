@@ -16,7 +16,7 @@ const PersonEditHeader: FC<Props> = ({person}) => {
     return (
         <header className={cn(
             "flex",
-            "max-md:flex-col",
+            "max-md:flex-col max-md:space-y-2",
             "md:justify-between md:items-center",
         )}>
             <section>

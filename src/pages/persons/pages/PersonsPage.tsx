@@ -26,14 +26,15 @@ const PersonsPage: FC = () => {
             <PersonIndexHeader />
 
             {
-                !hasPersons
+                hasPersons
                     ? <PageSection>
                         <PersonCardList persons={persons} onPersonDelete={onPersonDelete} />
                     </PageSection>
                     : <PageCenter>
-                        <span className="text-neutral-400 select-none">There Are No Movies</span>
+                        <span className="text-neutral-400 select-none">There Are No People</span>
                     </PageCenter>
             }
+
         </PageFlexWrapper>
     );
 };

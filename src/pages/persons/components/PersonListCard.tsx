@@ -3,9 +3,7 @@ import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {format} from "date-fns";
 import PersonOptions from "@/pages/persons/components/PersonOptions.tsx";
-import {Separator} from "@/common/components/ui/separator.tsx";
 import {Link} from "react-router-dom";
-import PersonBiographyCollapsible from "@/pages/persons/components/PersonBiographyCollapsible.tsx";
 
 interface Props {
     person: Person;
@@ -13,7 +11,7 @@ interface Props {
 }
 
 const PersonListCard: FC<Props> = ({person, onPersonDelete}) => {
-    const {_id, name, biography, dob, nationality} = person;
+    const {_id, name, dob, nationality} = person;
     const formattedDOB = format(dob, "dd MMM, yyyy");
 
     return (
@@ -36,13 +34,6 @@ const PersonListCard: FC<Props> = ({person, onPersonDelete}) => {
                         person={person}
                         onPersonDelete={onPersonDelete}
                     />
-                </div>
-
-                <Separator />
-
-                <div>
-                    {/*<TextQuote>{biography}</TextQuote>*/}
-                    <PersonBiographyCollapsible text={biography} />
                 </div>
             </CardContent>
         </Card>

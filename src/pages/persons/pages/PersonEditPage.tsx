@@ -8,6 +8,7 @@ import PersonSubmitForm from "@/pages/persons/components/PersonSubmitForm.tsx";
 import {useNavigate} from "react-router-dom";
 import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import PersonEditHeader from "@/pages/persons/components/headers/PersonEditHeader.tsx";
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
 
 const PersonEditPage: FC = () => {
     const navigate = useNavigate();
@@ -25,9 +26,11 @@ const PersonEditPage: FC = () => {
         <PageFlexWrapper>
             <PersonEditHeader person={person} />
 
-            <section>
-                <PersonSubmitForm onSubmit={onEdit} person={person} />
-            </section>
+            <Card>
+                <CardContent className="p-3">
+                    <PersonSubmitForm onSubmit={onEdit} person={person} />
+                </CardContent>
+            </Card>
         </PageFlexWrapper>
     );
 };
