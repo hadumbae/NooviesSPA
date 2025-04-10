@@ -6,6 +6,8 @@ import PageError from "@/common/components/page/errors/PageError.tsx";
 import {useFetchPaginatedSeats} from "@/pages/seats/hooks/useFetchPaginatedSeats.ts";
 import SeatCardList from "@/pages/seats/components/SeatCardList.tsx";
 import SeatListHeader from "@/pages/seats/components/headers/SeatListHeader.tsx";
+import PageSection from "@/common/components/page/PageSection.tsx";
+import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 const SeatsPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams();
@@ -14,27 +16,26 @@ const SeatsPage: FC = () => {
     if (isPending) return <PageLoader/>;
     if (isError) return <PageError error={error}/>
 
-    const {totalItems, items: seats} = data;
-
     const onDelete = () => refetch();
+
+    const {items: seats} = data;
+    const hasSeats = (seats || []).length > 0;
 
     return (
         <PageFlexWrapper>
-            {/* Header */}
             <SeatListHeader/>
 
-            {/* Cards */}
-            <section>
-                <SeatCardList seats={seats} onDelete={onDelete}/>
-            </section>
+            {
+                hasSeats
+                    ? <PageSection>
+                        <SeatCardList seats={seats} onDelete={onDelete}/>
+                    </PageSection>
+                    : <PageCenter>
+                        <span className="text-neutral-400 select-none">There Are No Seats</span>
+                    </PageCenter>
+            }
 
             {/* TODO Pagination */}
-            {
-                totalItems > perPage &&
-                <section>
-                    TODO Pagination
-                </section>
-            }
         </PageFlexWrapper>
     );
 };

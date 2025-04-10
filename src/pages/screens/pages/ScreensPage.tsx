@@ -7,6 +7,8 @@ import {useFetchPaginatedScreens} from "@/pages/screens/hooks/useFetchPaginatedS
 import ScreenCardList from "@/pages/screens/components/ScreenCardList.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import ScreenIndexHeader from "@/pages/screens/components/headers/ScreenIndexHeader.tsx";
+import PageSection from "@/common/components/page/PageSection.tsx";
+import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 const ScreensPage: FC = () => {
     useTitle("Screens")
@@ -17,17 +19,25 @@ const ScreensPage: FC = () => {
     if (isPending) return <PageLoader />;
     if (isError) return <PageError error={error} />
 
-    const {items: screens} = data;
-
     const onDelete = () => refetch();
+
+    const {items: screens} = data;
+    const hasScreens = (screens || []).length > 0;
 
     return (
         <PageFlexWrapper>
             <ScreenIndexHeader />
 
-            <section>
-                <ScreenCardList screens={screens} onDelete={onDelete} />
-            </section>
+            {
+                hasScreens
+                    ? <PageSection>
+                        <ScreenCardList screens={screens} onDelete={onDelete} />
+                    </PageSection>
+                    : <PageCenter>
+                        <span className="text-neutral-400 select-none">There Are No Screens</span>
+                    </PageCenter>
+            }
+
         </PageFlexWrapper>
     );
 };

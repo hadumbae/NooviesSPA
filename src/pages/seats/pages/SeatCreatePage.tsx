@@ -4,6 +4,7 @@ import SeatSubmitForm from "@/pages/seats/components/SeatSubmitForm.tsx";
 import {useNavigate} from "react-router-dom";
 import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
 import SeatCreateHeader from "@/pages/seats/components/headers/SeatCreateHeader.tsx";
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
 
 const SeatCreatePage: FC = () => {
     const navigate = useNavigate();
@@ -16,9 +17,11 @@ const SeatCreatePage: FC = () => {
         <PageFlexWrapper>
             <SeatCreateHeader />
 
-            <section>
-                <SeatSubmitForm onSubmit={onSubmit} />
-            </section>
+            <Card>
+                <CardContent className="p-3">
+                    <SeatSubmitForm onSubmit={onSubmit} />
+                </CardContent>
+            </Card>
         </PageFlexWrapper>
     );
 };

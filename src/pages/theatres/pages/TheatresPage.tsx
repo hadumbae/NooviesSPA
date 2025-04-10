@@ -7,6 +7,8 @@ import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import TheatreIndexHeader from "@/pages/theatres/components/headers/TheatreIndexHeader.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
+import PageSection from "@/common/components/page/PageSection.tsx";
+import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 const TheatresPage: FC = () => {
     useTitle("Theatre Index")
@@ -18,15 +20,23 @@ const TheatresPage: FC = () => {
     if (isError) return <PageError error={error} />
 
     const {items: theatres} = data;
+    const hasTheatres = (theatres || []).length > 0;
+
     const onDelete = () => refetch();
 
     return (
         <PageFlexWrapper>
             <TheatreIndexHeader />
 
-            <section className="space-y-4">
-                <TheatreCardList theatres={theatres} onDelete={onDelete} />
-            </section>
+            {
+                hasTheatres
+                    ? <PageSection>
+                        <TheatreCardList theatres={theatres} onDelete={onDelete} />
+                    </PageSection>
+                    : <PageCenter>
+                        <span className="text-neutral-400 select-none">There Are No Theatres</span>
+                    </PageCenter>
+            }
         </PageFlexWrapper>
     );
 };
