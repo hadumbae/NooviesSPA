@@ -34,9 +34,9 @@ export default function usePersonSubmitMutation({_id, form, onSubmit}: IUsePerso
     }
 
     const onSuccess = (person: Person) => {
-        console.log("NONL");
         const message = `Person ${_id ? "updated" : "created"} successfully.`;
         toast.success(message);
+
         onSubmit(person);
     }
 

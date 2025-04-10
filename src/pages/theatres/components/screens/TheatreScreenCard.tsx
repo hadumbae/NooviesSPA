@@ -14,7 +14,9 @@ interface Props {
 }
 
 const TheatreScreenCard: FC<Props> = ({screen, onDelete}) => {
-    const {_id, name, screenType, capacity, seats} = screen;
+    const {_id, name, screenType, capacity, seats, showings} = screen;
+
+    console.log(showings);
 
     const screenCapacity = `${capacity} seats`;
     const numberOfSeats = `${seats.length} seats`;
