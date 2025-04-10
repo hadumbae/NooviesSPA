@@ -5,6 +5,7 @@ import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {ScreenTypeEnum} from "@/pages/screens/schema/ScreenTypeEnum.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
+import {ShowingSchema} from "@/pages/showings/schema/ShowingSchema.ts";
 
 export const ScreenSchema: ZodType<IScreen> = z.object({
     _id: IDString,
@@ -23,6 +24,9 @@ export const ScreenSchema: ZodType<IScreen> = z.object({
 
     seats: z
         .array(z.union([IDString, z.lazy(() => SeatSchema)])),
+
+    showings: z
+        .array(z.union([IDString, z.lazy(() => ShowingSchema)])),
 });
 
 export const ScreenArraySchema = z.array(ScreenSchema);
