@@ -27,6 +27,8 @@ export default z.object({
         .nonempty({message: "Must not be empty."}),
 
     isSpecialEvent: RequiredBoolean
-        .optional()
-        .default(false),
+        .optional(),
+
+    isActive: RequiredBoolean
+        .optional(),
 });

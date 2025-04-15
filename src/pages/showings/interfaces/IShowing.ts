@@ -12,6 +12,7 @@ export default interface IShowing {
     ticketPrice: number,
     language: string,
     subtitleLanguages: string[],
+    isActive?: boolean,
     isSpecialEvent?: boolean,
 
     movie: ObjectId | IMovie,
