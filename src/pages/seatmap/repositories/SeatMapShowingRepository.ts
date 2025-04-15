@@ -4,10 +4,11 @@ import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
 import SeatMapFilters from "@/pages/seatmap/types/SeatMapFilters.ts";
 
 interface ShowingSeatMapParams {
-    showingID: string,
-    page: number,
-    perPage: number,
-    filters: SeatMapFilters
+    showingID: string;
+    page: number;
+    perPage: number;
+    filters?: SeatMapFilters;
+    populate?: boolean;
 }
 
 export interface IShowingSeatMapRepository {
@@ -43,12 +44,12 @@ const SeatMapShowingRepository: IShowingSeatMapRepository = {
     },
 
     async fetchShowingSeatMap(params: ShowingSeatMapParams): Promise<FetchReturns> {
-        const {showingID, page, perPage, filters} = params;
+        const {showingID, page, perPage, filters = {}, populate = false} = params;
 
         const url = buildQueryURL({
             baseURL: this.baseURL,
             path: `showing/${showingID}/seating/get`,
-            queries: {page, perPage, ...filters},
+            queries: {page, perPage, populate, ...filters},
         });
 
         return useFetchAPI({url, method: "GET"});

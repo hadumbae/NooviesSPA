@@ -8,6 +8,22 @@ interface Params<TSchema extends ZodTypeAny> {
     message?: string;
 }
 
+/**
+ * Validates unknown data against a provided Zod schema and returns the parsed result.
+ *
+ * @typeParam TSchema - A Zod schema used for validation.
+ * @typeParam TReturn - The expected return type after successful validation.
+ *
+ * @param params - An object containing:
+ * - `data`: The unknown data to validate.
+ * - `schema`: The Zod schema to validate against.
+ * - `isPending` (optional): A flag indicating if the data is still loading; if true, validation is skipped.
+ * - `message` (optional): A custom error message to use if validation fails.
+ *
+ * @returns The validated and parsed data as `TReturn` if validation succeeds; otherwise, returns `null` if `data` is falsy or `isPending` is true.
+ *
+ * @throws {@link ParseError} If validation fails, throws a `ParseError` containing the validation errors.
+ */
 export default function useValidateData<TSchema extends ZodTypeAny, TReturn>(params: Params<TSchema>): TReturn | null {
     const {data, schema, isPending, message} = params;
     if (!data || isPending) return null;

@@ -1,15 +1,19 @@
-import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
 import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/ShowingPopulatedSchema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
 
-interface Params {
-    showing: Showing | null;
-    isPending?: boolean;
-}
-
-export default function useValidatePopulatedShowing({showing, isPending}: Params): PopulatedShowing | null {
-    if (!showing || isPending) return null;
-
+/**
+ * Validates that the provided showing object includes all required populated relations.
+ *
+ * @param showing - The input object expected to represent a populated showing with necessary relations.
+ * @returns The validated `PopulatedShowing` instance.
+ * @throws {ParseError} If the input does not conform to the `ShowingPopulatedSchema`, a `ParseError` is thrown containing validation errors.
+ *
+ * @example
+ * ```ts
+ * const validatedShowing = useValidatePopulatedShowing(rawShowing);
+ * ```
+ */
+export default function useValidatePopulatedShowing(showing: any): PopulatedShowing {
     const result = ShowingPopulatedSchema.safeParse(showing);
 
     if (!result.success) {

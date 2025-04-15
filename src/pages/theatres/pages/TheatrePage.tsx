@@ -36,9 +36,7 @@ const TheatrePage: FC = () => {
 
             {/* Details */}
 
-            <PageSection>
-                <TheatreDetailsCard theatre={theatre!} />
-            </PageSection>
+            <TheatreDetailsCard theatre={theatre!} />
 
             {/* Screens */}
 
