@@ -5,7 +5,7 @@ import {ShowingSubmit, ShowingSubmitSchema} from "@/pages/showings/schema/Showin
 import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
 import {format} from "date-fns";
 
-export default function useShowingSubmitForm(params?: {showing?: Showing}) {
+export default function useShowingSubmitForm(params?: { showing?: Showing }) {
     const {showing} = params || {};
 
     const defaultValues: ShowingSubmit = {
@@ -13,8 +13,11 @@ export default function useShowingSubmitForm(params?: {showing?: Showing}) {
         endTime: "",
         ticketPrice: "",
         language: "",
+
         subtitleLanguages: [],
+
         isSpecialEvent: false,
+        isActive: true,
 
         movie: undefined,
         theatre: undefined,
@@ -24,9 +27,11 @@ export default function useShowingSubmitForm(params?: {showing?: Showing}) {
     const startTime = showing ? format(showing.startTime, "yyyy-MM-dd'T'hh:mm") : "";
     const endTime = showing?.endTime ? format(showing.endTime, "yyyy-MM-dd'T'hh:mm") : "";
 
-    const movie = showing ? convertObjectsToIDs(showing.movie) : defaultValues.movie;
-    const theatre = showing ? convertObjectsToIDs(showing.theatre) : defaultValues.theatre;
-    const screen = showing ? convertObjectsToIDs(showing.screen) : defaultValues.screen;
+    const relations = {
+        movie: showing ? convertObjectsToIDs(showing.movie) : defaultValues.movie,
+        theatre: showing ? convertObjectsToIDs(showing.theatre) : defaultValues.theatre,
+        screen: showing ? convertObjectsToIDs(showing.screen) : defaultValues.screen
+    }
 
     return useForm<ShowingSubmit>({
         resolver: zodResolver(ShowingSubmitSchema),
@@ -35,9 +40,7 @@ export default function useShowingSubmitForm(params?: {showing?: Showing}) {
             ...(showing ? showing : {}),
             startTime,
             endTime,
-            movie,
-            theatre,
-            screen,
+            ...relations,
         },
     });
 }
