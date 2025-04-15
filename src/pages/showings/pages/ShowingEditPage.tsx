@@ -7,12 +7,13 @@ import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import {useNavigate} from "react-router-dom";
 import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
-import ShowingSubmitForm from "@/pages/showings/components/ShowingSubmitForm.tsx";
+import ShowingSubmitFormContainer from "@/pages/showings/components/forms/ShowingSubmitFormContainer.tsx";
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
 
 const ShowingEditPage: FC = () => {
     const navigate = useNavigate();
     const {showingID} = useFetchShowingParams();
-    const {data: showing, isPending, isError, error} = useFetchShowing({_id: showingID!});
+    const {data: showing, isPending, isError, error} = useFetchShowing({_id: showingID!, populate: true});
 
     if (isPending) return <PageLoader />;
     if (isError) return <PageError error={error} />;
@@ -24,7 +25,12 @@ const ShowingEditPage: FC = () => {
     return (
         <PageFlexWrapper>
             <ShowingEditHeader showing={showing} />
-            <ShowingSubmitForm onSubmit={onSubmit} showing={showing} />
+
+            <Card>
+                <CardContent className="p-3">
+                    <ShowingSubmitFormContainer onSubmit={onSubmit} showing={showing} />
+                </CardContent>
+            </Card>
         </PageFlexWrapper>
     );
 };

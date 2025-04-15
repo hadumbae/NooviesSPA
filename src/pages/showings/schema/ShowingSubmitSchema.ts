@@ -30,8 +30,10 @@ export const ShowingSubmitSchema: ZodType<IShowingSubmit> = z.object({
         .nonempty({message: "Must not be empty."}),
 
     isSpecialEvent: RequiredBoolean
-        .optional()
-        .default(false),
+        .optional(),
+
+    isActive: RequiredBoolean
+        .optional(),
 
     movie: IDString,
     theatre: IDString,
