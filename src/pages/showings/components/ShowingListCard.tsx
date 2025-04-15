@@ -4,9 +4,9 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import ShowingOptions from "@/pages/showings/components/ShowingOptions.tsx";
 import {Link} from "react-router-dom";
 import {format} from "date-fns";
-import HoverLink from "@/common/components/navigation/HoverLink.tsx";
 import useValidateData from "@/common/hooks/validation/useValidateData.ts";
 import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/ShowingPopulatedSchema.ts";
+import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 
 interface Props {
     showing: Showing;
@@ -44,7 +44,8 @@ const ShowingListCard: FC<Props> = ({showing, onShowingDelete}) => {
                     <ShowingOptions
                         showing={showing}
                         onDelete={onShowingDelete}
-                        variant="outline"
+                        variant="link"
+                        className="text-neutral-400 hover:text-black"
                     />
                 </div>
 
@@ -55,12 +56,13 @@ const ShowingListCard: FC<Props> = ({showing, onShowingDelete}) => {
                         {startingTime} {endingTime && ` | ${endingTime}`}
                     </span>
 
-                    <HoverLink
+                    <ButtonLink
                         to={`/admin/showings/get/${showing._id}/seating`}
-                        className="text-[12px] text-neutral-500"
+                        size="sm"
+                        className="text-neutral-400 hover:text-black"
                     >
                         Seating
-                    </HoverLink>
+                    </ButtonLink>
                 </div>
 
 

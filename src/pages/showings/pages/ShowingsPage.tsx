@@ -18,8 +18,8 @@ const ShowingsPage: FC = () => {
 
     useShowingQueryErrorHandler(error);
 
-    if (isPending) return <PageLoader />;
-    if (isError) return <PageError error={error} />;
+    if (isPending) return <PageLoader/>;
+    if (isError) return <PageError error={error}/>;
 
     const paginatedShowings = useValidateData<typeof PaginatedShowingSchema, PaginatedShowings>(
         {schema: PaginatedShowingSchema, data, isPending}
@@ -32,12 +32,12 @@ const ShowingsPage: FC = () => {
 
     return (
         <PageFlexWrapper>
-            <ShowingIndexHeader />
+            <ShowingIndexHeader/>
 
             {
                 hasShowings
                     ? <PageSection className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-2">
-                        <ShowingCardList showings={showings} onShowingDelete={onShowingDelete} />
+                        <ShowingCardList showings={showings} onShowingDelete={onShowingDelete}/>
                     </PageSection>
                     : <PageCenter>
                         <span className="text-neutral-400 select-none">There Are No Showings</span>
