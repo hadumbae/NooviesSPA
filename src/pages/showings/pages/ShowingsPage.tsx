@@ -14,21 +14,21 @@ import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 const ShowingsPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams({perPage: "25"});
-    const {data, isPending, isError, error, refetch} = useFetchPaginatedShowings({page, perPage});
+    const {data, isPending, isError, error, refetch} = useFetchPaginatedShowings({page, perPage, populate: true});
 
     useShowingQueryErrorHandler(error);
+
+    if (isPending) return <PageLoader />;
+    if (isError) return <PageError error={error} />;
 
     const paginatedShowings = useValidateData<typeof PaginatedShowingSchema, PaginatedShowings>(
         {schema: PaginatedShowingSchema, data, isPending}
     );
 
-    if (isPending) return <PageLoader />;
-    if (isError) return <PageError error={error} />;
-
-    const onShowingDelete = () => refetch();
-
     const {items: showings} = paginatedShowings!;
+
     const hasShowings = (showings || []).length > 0;
+    const onShowingDelete = () => refetch();
 
     return (
         <PageFlexWrapper>
@@ -36,7 +36,7 @@ const ShowingsPage: FC = () => {
 
             {
                 hasShowings
-                    ? <PageSection>
+                    ? <PageSection className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-2">
                         <ShowingCardList showings={showings} onShowingDelete={onShowingDelete} />
                     </PageSection>
                     : <PageCenter>

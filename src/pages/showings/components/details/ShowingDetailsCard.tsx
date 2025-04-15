@@ -11,7 +11,7 @@ interface Props {
 }
 
 const ShowingDetailsCard: FC<Props> = ({showing}) => {
-    const {startTime, endTime, ticketPrice, language, subtitleLanguages, isSpecialEvent} = showing;
+    const {startTime, endTime, ticketPrice, language, subtitleLanguages, isActive, isSpecialEvent} = showing;
     const populatedShowing = useValidateData<typeof ShowingPopulatedSchema, PopulatedShowing>({
         schema: ShowingPopulatedSchema,
         data: showing,
@@ -32,29 +32,30 @@ const ShowingDetailsCard: FC<Props> = ({showing}) => {
     return (
         <Card>
             <CardContent className="p-4 flex flex-col space-y-6">
-                <div className="flex justify-between items-center">
+                <section className="flex justify-between items-center">
                     <DetailsCardSpan label="Movie" text={movieTitle} to={`/admin/movies/get/${movieID}`} />
-                </div>
+                </section>
 
-                <div className="flex space-x-5 items-center">
+                <section className="flex space-x-5 items-center">
                     <DetailsCardSpan label="Screen" text={screenName} to={`/admin/screens/get/${screenID}`} />
                     <DetailsCardSpan label="Theatre" text={theatreName} to={`/admin/theatres/get/${theatreID}`} />
-                </div>
+                </section>
 
-                <div className="flex justify-between items-center">
+                <section className="flex justify-between items-center">
                     <DetailsCardSpan label="Start Time" text={formattedStartTime} />
                     <DetailsCardSpan label="End Time" text={formattedEndTime} />
                     <DetailsCardSpan label="Base Price" text={`$${ticketPrice}`} />
-                </div>
+                </section>
 
-                <div className="flex space-x-5 items-center">
+                <section className="flex space-x-5 items-center">
                     <DetailsCardSpan label="Language" text={language} />
                     <DetailsCardSpan label="Subtitles" text={subtitles} />
-                </div>
+                </section>
 
-                <div className="flex space-x-5 items-center">
+                <section className="flex space-x-5 items-center">
+                    <DetailsCardSpan label="Is Active?" text={isActive ? "Yes" : "No"} />
                     <DetailsCardSpan label="Is Special Event?" text={isSpecialEvent ? "Yes" : "No"} />
-                </div>
+                </section>
             </CardContent>
         </Card>
     );

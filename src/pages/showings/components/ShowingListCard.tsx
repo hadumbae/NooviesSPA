@@ -5,7 +5,8 @@ import ShowingOptions from "@/pages/showings/components/ShowingOptions.tsx";
 import {Link} from "react-router-dom";
 import {format} from "date-fns";
 import HoverLink from "@/common/components/navigation/HoverLink.tsx";
-import useValidatePopulatedShowing from "@/pages/showings/hooks/validation/useValidatePopulatedShowing.ts";
+import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/ShowingPopulatedSchema.ts";
 
 interface Props {
     showing: Showing;
@@ -13,7 +14,12 @@ interface Props {
 }
 
 const ShowingListCard: FC<Props> = ({showing, onShowingDelete}) => {
-    const populatedShowing = useValidatePopulatedShowing({showing});
+    const populatedShowing = useValidateData<typeof ShowingPopulatedSchema, PopulatedShowing>({
+        data: showing,
+        schema: ShowingPopulatedSchema,
+        message: "Invalid `Populated Showing` Data"
+    });
+
     const {_id, startTime, endTime, movie, theatre, screen} = populatedShowing!;
 
     const {name: theatreName} = theatre;

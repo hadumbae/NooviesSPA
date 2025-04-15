@@ -2,34 +2,38 @@ import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import useFetchShowingParams from "@/pages/showings/hooks/params/useFetchShowingParams.ts";
-import useFetchShowing from "@/pages/showings/hooks/queries/useFetchShowing.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import ShowingSeatingHeader from "@/pages/showings/components/headers/ShowingSeatingHeader.tsx";
 import ShowingSeatMapFilterList from "@/pages/seatmap/components/ShowingSeatMapFilterList.tsx";
-import ShowingSeatingSubHeader from "@/pages/showings/components/headers/ShowingSeatingSubHeader.tsx";
 import useShowingQueryErrorHandler from "@/pages/showings/hooks/errors/useShowingQueryErrorHandler.ts";
-import useValidatePopulatedShowing from "@/pages/showings/hooks/validation/useValidatePopulatedShowing.ts";
+import useFetchShowingWithSeating from "@/pages/showings/hooks/queries/seating/useFetchShowingWithSeating.ts";
 
 const ShowingSeatingPage: FC = () => {
     const {showingID} = useFetchShowingParams();
-    const {data, isPending, isError, error} = useFetchShowing({_id: showingID!, populate: true});
+    const {query, isPending, isError, error} = useFetchShowingWithSeating({showingID: showingID!, populate: true});
 
     useShowingQueryErrorHandler(error);
-    const showing = useValidatePopulatedShowing({showing: data, isPending});
 
-    if (isPending || !showing) return <PageLoader />;
+    if (isPending) return <PageLoader />;
     if (isError) return <PageError error={error}/>;
+
+    const {showing: {data: showing}, seating: seatingQuery} = query;
+
+
+    const {items: seating} = seatingQuery.data!;
+    const refetchSeating = seatingQuery.refetch;
 
     return (
         <PageFlexWrapper>
-            <div className="space-y-2">
-                <ShowingSeatingHeader showing={showing} />
-                <ShowingSeatingSubHeader showing={showing} />
-            </div>
+            <ShowingSeatingHeader showing={showing!} />
 
-            <PageSection title="Seats">
-                <ShowingSeatMapFilterList showingID={showing._id} />
+            <PageSection title="Seats" className="grid grid-cols-1 gap-4">
+                <ShowingSeatMapFilterList
+                    seating={seating}
+                    onUpdate={() => refetchSeating()}
+                    onDelete={() => refetchSeating()}
+                />
             </PageSection>
         </PageFlexWrapper>
     );
