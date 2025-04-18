@@ -1,6 +1,6 @@
 import {z, ZodType} from "zod";
 import {SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
-import {ShowingSchema} from "@/pages/showings/schema/ShowingSchema.ts";
+import {ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import IPopulatedSeatMap from "@/pages/seatmap/interfaces/IPopulatedSeatMap.ts";
 import SeatMapBaseSchema from "@/pages/seatmap/schema/SeatMapBaseSchema.ts";
 

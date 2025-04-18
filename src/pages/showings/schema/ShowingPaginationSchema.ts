@@ -1,6 +1,6 @@
 import {z} from "zod";
 import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
-import {ShowingSchema} from "@/pages/showings/schema/ShowingSchema.ts";
+import {ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 
 /**
  * Zod schema for validating a paginated response of showings.

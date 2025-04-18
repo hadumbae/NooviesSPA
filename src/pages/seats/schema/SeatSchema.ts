@@ -5,7 +5,7 @@ import {SeatTypeEnum} from "@/pages/seats/schema/SeatTypeEnum.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
-import {ScreenSchema} from "@/pages/screens/schema/ScreenSchema.ts";
+import {ScreenSchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
 
 export const SeatSchema: ZodType<ISeat> = z.object({
     _id: IDString,

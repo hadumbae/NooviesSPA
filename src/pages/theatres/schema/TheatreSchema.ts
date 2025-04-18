@@ -2,7 +2,7 @@ import {z, ZodType} from "zod";
 import ITheatre from "@/pages/theatres/interfaces/ITheatre.ts";
 import {IDString, RequiredString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
-import {ScreenSchema} from "@/pages/screens/schema/ScreenSchema.ts";
+import {ScreenSchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import {SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
 
 export const TheatreSchema: ZodType<ITheatre> = z.object({
