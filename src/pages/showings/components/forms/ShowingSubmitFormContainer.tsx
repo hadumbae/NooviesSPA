@@ -1,6 +1,6 @@
 import {FC, useEffect, useRef} from 'react';
 
-import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
+import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import useShowingSubmitForm from "@/pages/showings/hooks/forms/useShowingSubmitForm.ts";
 import useShowingSubmitMutation from "@/pages/showings/hooks/mutations/useShowingSubmitMutation.ts";
 

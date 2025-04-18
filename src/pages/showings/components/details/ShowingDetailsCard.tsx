@@ -1,10 +1,10 @@
 import {FC} from 'react';
-import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
+import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {format} from "date-fns";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import useValidateData from "@/common/hooks/validation/useValidateData.ts";
-import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/ShowingPopulatedSchema.ts";
+import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/populated/ShowingPopulatedSchema.ts";
 
 interface Props {
     showing: Showing;

@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
+import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import ShowingListCard from "@/pages/showings/components/ShowingListCard.tsx";
 
 interface Props {

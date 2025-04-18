@@ -10,7 +10,7 @@ import {useNavigate} from "react-router-dom";
 import {SeatMap, SeatMapSchema} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import useShowingSeatMapQueryErrorHandler from "@/pages/seatmap/hooks/errors/useShowingSeatMapQueryErrorHandler.ts";
 import useValidateData from "@/common/hooks/validation/useValidateData.ts";
-import {Showing, ShowingSchema} from "@/pages/showings/schema/ShowingSchema.ts";
+import {Showing, ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import useFetchShowingAndSeatMap from "@/pages/seatmap/hooks/queries/useFetchShowingAndSeatMap.ts";
 
 const ShowingSeatMapEditPage: FC = () => {

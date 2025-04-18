@@ -10,7 +10,7 @@ import ShowingSeatMapSubmitForm from "@/pages/seatmap/components/forms/ShowingSe
 import {useNavigate} from "react-router-dom";
 import useShowingQueryErrorHandler from "@/pages/showings/hooks/errors/useShowingQueryErrorHandler.ts";
 import useValidateData from "@/common/hooks/validation/useValidateData.ts";
-import {Showing, ShowingSchema} from "@/pages/showings/schema/ShowingSchema.ts";
+import {Showing, ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 
 const ShowingSeatMapCreatePage: FC = () => {
     const navigate = useNavigate();

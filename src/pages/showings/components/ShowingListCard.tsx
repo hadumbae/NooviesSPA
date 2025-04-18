@@ -1,11 +1,11 @@
 import {FC} from 'react';
-import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
+import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import ShowingOptions from "@/pages/showings/components/ShowingOptions.tsx";
 import {Link} from "react-router-dom";
 import {format} from "date-fns";
 import useValidateData from "@/common/hooks/validation/useValidateData.ts";
-import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/ShowingPopulatedSchema.ts";
+import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/populated/ShowingPopulatedSchema.ts";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 
 interface Props {

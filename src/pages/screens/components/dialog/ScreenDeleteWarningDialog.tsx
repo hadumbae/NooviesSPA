@@ -1,5 +1,5 @@
 import {FC, PropsWithChildren} from 'react';
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 
 import {
     AlertDialog,
@@ -12,7 +12,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/common/components/ui/alert-dialog"
-import useScreenDeleteMutation from "@/pages/screens/hooks/useScreenDeleteMutation.ts";
+import useScreenDeleteMutation from "@/pages/screens/hooks/mutations/useScreenDeleteMutation.ts";
 import {Loader} from "lucide-react";
 
 interface Props {

@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";

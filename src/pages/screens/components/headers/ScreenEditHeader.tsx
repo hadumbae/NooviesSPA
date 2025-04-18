@@ -3,7 +3,7 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {Search, TableOfContents} from "lucide-react";
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 
 interface Props {

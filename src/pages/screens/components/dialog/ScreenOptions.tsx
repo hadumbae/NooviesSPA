@@ -1,6 +1,6 @@
 import {FC} from 'react';
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
-import useScreenDeleteMutation from "@/pages/screens/hooks/useScreenDeleteMutation.ts";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
+import useScreenDeleteMutation from "@/pages/screens/hooks/mutations/useScreenDeleteMutation.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";

@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
@@ -7,7 +7,7 @@ import {Pencil, TableOfContents, Trash} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import {cn} from "@/common/lib/utils.ts";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
-import useScreenDeleteMutation from "@/pages/screens/hooks/useScreenDeleteMutation.ts";
+import useScreenDeleteMutation from "@/pages/screens/hooks/mutations/useScreenDeleteMutation.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 
 interface Props {

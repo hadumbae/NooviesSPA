@@ -1,7 +1,7 @@
 import {Control, FieldValues, Path} from "react-hook-form";
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import {Loader} from "lucide-react";
-import useFetchAllScreens from "@/pages/screens/hooks/useFetchAllScreens.ts";
+import useFetchAllScreens from "@/pages/screens/hooks/queries/useFetchAllScreens.ts";
 import {useEffect} from "react";
 import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";

@@ -4,7 +4,7 @@ import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import {SeatMapSubmit} from "@/pages/seatmap/schema/SeatMapSubmitSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
+import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import useSeatMapSubmitMutation from "@/pages/seatmap/hooks/mutations/useSeatMapSubmitMutation.ts";
 import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";

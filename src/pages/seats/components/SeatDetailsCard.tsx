@@ -3,7 +3,7 @@ import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 
 interface Props {
     seat: Seat;

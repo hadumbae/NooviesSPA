@@ -1,7 +1,7 @@
 import {FC} from 'react';
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
-import useScreenSubmitForm from "@/pages/screens/hooks/useScreenSubmitForm.ts";
-import useScreenSubmitMutation from "@/pages/screens/hooks/useScreenSubmitMutation.ts";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
+import useScreenSubmitForm from "@/pages/screens/hooks/forms/useScreenSubmitForm.ts";
+import useScreenSubmitMutation from "@/pages/screens/hooks/mutations/useScreenSubmitMutation.ts";
 import {ScreenSubmit} from "@/pages/screens/schema/ScreenSubmitSchema.ts";
 import ScreenSubmitFormView from "@/pages/screens/components/forms/ScreenSubmitFormView.tsx";
 

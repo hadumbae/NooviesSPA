@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import ScreenListCard from "@/pages/screens/components/ScreenListCard.tsx";
 
 interface Props {

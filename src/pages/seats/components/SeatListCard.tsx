@@ -3,7 +3,7 @@ import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Link} from "react-router-dom";
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import SeatOptions from "@/pages/seats/components/SeatOptions.tsx";
 
 interface Props {

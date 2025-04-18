@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
+import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import {Popover, PopoverContent, PopoverTrigger} from '@/common/components/ui/popover';
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {Ellipsis, Loader} from "lucide-react";

@@ -2,7 +2,7 @@ import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import ShowingCreateHeader from "@/pages/showings/components/headers/ShowingCreateHeader.tsx";
 import ShowingSubmitFormContainer from "@/pages/showings/components/forms/ShowingSubmitFormContainer.tsx";
-import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
+import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import {useNavigate} from "react-router-dom";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 

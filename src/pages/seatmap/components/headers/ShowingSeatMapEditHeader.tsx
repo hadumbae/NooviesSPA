@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
+import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import {format} from "date-fns";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";

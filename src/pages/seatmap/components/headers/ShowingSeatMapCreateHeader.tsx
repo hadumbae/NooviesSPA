@@ -1,12 +1,12 @@
 import {FC} from 'react';
-import {Showing} from "@/pages/showings/schema/ShowingSchema.ts";
+import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import {format} from "date-fns";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Link} from "lucide-react";
 import HoverLink from "@/common/components/navigation/HoverLink.tsx";
 import useValidateData from "@/common/hooks/validation/useValidateData.ts";
-import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/ShowingPopulatedSchema.ts";
+import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/populated/ShowingPopulatedSchema.ts";
 
 interface Props {
     showing: Showing;
