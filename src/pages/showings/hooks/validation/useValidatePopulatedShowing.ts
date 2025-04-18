@@ -1,4 +1,4 @@
-import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/ShowingPopulatedSchema.ts";
+import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/populated/ShowingPopulatedSchema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
 
 /**

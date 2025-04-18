@@ -1,7 +1,7 @@
 import {UseFormReturn} from "react-hook-form";
 import mutationFormSubmitHandler from "@/common/handlers/mutation/MutationFormSubmitHandler.ts";
 import {ShowingSubmit} from "@/pages/showings/schema/ShowingSubmitSchema.ts";
-import {Showing, ShowingSchema} from "@/pages/showings/schema/ShowingSchema.ts";
+import {Showing, ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
 
 interface Params {
