@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import TheatreScreenPreviewCard from "@/pages/theatres/components/screens/TheatreScreenPreviewCard.tsx";
-import {Screen} from "@/pages/screens/schema/ScreenSchema";
+import TheatreScreenPreviewCard from "@/pages/theatres/components/screens/preview/TheatreScreenPreviewCard.tsx";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 
 interface Props {
     screens: Screen[];

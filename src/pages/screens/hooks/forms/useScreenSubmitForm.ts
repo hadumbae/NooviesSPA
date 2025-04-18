@@ -1,6 +1,6 @@
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts"
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts"
 import {ScreenSubmit, ScreenSubmitSchema} from "@/pages/screens/schema/ScreenSubmitSchema.ts";
 import {ScreenType} from "@/pages/screens/schema/ScreenTypeEnum.ts";
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";

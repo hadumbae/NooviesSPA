@@ -1,24 +1,12 @@
 import {z, ZodType} from "zod";
 import {IScreen} from "@/pages/screens/interfaces/IScreen.ts";
-import {IDString, RequiredString} from "@/common/schema/helpers/ZodStringHelpers.ts";
-import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
-import {ScreenTypeEnum} from "@/pages/screens/schema/ScreenTypeEnum.ts";
+import {IDString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
-import {ShowingSchema} from "@/pages/showings/schema/ShowingSchema.ts";
+import {ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
+import {ScreenBaseSchema} from "@/pages/screens/schema/base/ScreenBaseSchema.ts";
 
-export const ScreenSchema: ZodType<IScreen> = z.object({
-    _id: IDString,
-
-    name: RequiredString
-        .min(1, "Required.")
-        .max(255, "Name must be 255 characters or less."),
-
-    capacity: RequiredNumber
-        .gt(0, "Capacity must be greater than 0"),
-
-    screenType: ScreenTypeEnum,
-
+export const ScreenSchema: ZodType<IScreen> = ScreenBaseSchema.extend({
     theatre: z
         .union([IDString, z.lazy(() => TheatreSchema)]),
 

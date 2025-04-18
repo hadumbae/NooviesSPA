@@ -1,9 +1,9 @@
 import {z, ZodType} from 'zod';
-import IPopulatedShowing from "@/pages/showings/interfaces/IPopulatedShowing.ts";
+import IPopulatedShowing from "@/pages/showings/interfaces/populated/IPopulatedShowing.ts";
 import {MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
-import {ScreenSchema} from "@/pages/screens/schema/ScreenSchema.ts";
+import {ScreenSchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
-import ShowingBaseSchema from "@/pages/showings/schema/ShowingBaseSchema.ts";
+import ShowingBaseSchema from "@/pages/showings/schema/base/ShowingBaseSchema.ts";
 import {SeatMapSchema} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 
 export const ShowingPopulatedSchema: ZodType<IPopulatedShowing> = ShowingBaseSchema.extend({

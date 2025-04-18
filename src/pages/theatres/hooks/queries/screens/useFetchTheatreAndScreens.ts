@@ -1,18 +1,18 @@
 import useFetchTheatre from "@/pages/theatres/hooks/queries/useFetchTheatre.ts";
-import {useFetchPaginatedScreens} from "@/pages/screens/hooks/useFetchPaginatedScreens.ts";
+import useFetchPaginatedTheatreScreens from "@/pages/screens/hooks/queries/useFetchPaginatedTheatreScreens.ts";
 
 interface Params {
     theatreID: string;
     page?: number;
     perPage?: number;
-    populate?: boolean;
+    showingsPerScreen?: number;
 }
 
-export default function useFetchTheatreAndScreens({theatreID, page = 1, perPage = 10, populate = false}: Params) {
-    const filters = {theatre: theatreID};
+export default function useFetchTheatreAndScreens(params: Params) {
+    const {theatreID, page = 1, perPage = 10, showingsPerScreen = 3} = params;
 
     const theatreQuery = useFetchTheatre({_id: theatreID});
-    const screenQuery = useFetchPaginatedScreens({page, perPage, filters, populate});
+    const screenQuery = useFetchPaginatedTheatreScreens({theatreID, page, perPage, showingsPerScreen});
 
     const isPending = [theatreQuery, screenQuery].some(query => query.isPending);
     const isError = [theatreQuery, screenQuery].some(query => query.isError);

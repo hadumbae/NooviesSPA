@@ -1,11 +1,11 @@
 import {z, ZodType} from "zod";
 import {IDString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
-import {ScreenSchema} from "@/pages/screens/schema/ScreenSchema.ts";
+import {ScreenSchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import {MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
 import IShowing from "@/pages/showings/interfaces/IShowing.ts";
 import {SeatMapSchema} from "@/pages/seatmap/schema/SeatMapSchema.ts";
-import ShowingBaseSchema from "@/pages/showings/schema/ShowingBaseSchema.ts";
+import ShowingBaseSchema from "@/pages/showings/schema/base/ShowingBaseSchema.ts";
 
 /**
  * Zod schema for validating a `Showing` object.
