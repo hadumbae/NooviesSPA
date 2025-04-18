@@ -10,28 +10,27 @@ import TheatreScreenCardList from "@/pages/theatres/components/screens/TheatreSc
 
 import useFetchTheatreParams from "@/pages/theatres/hooks/params/useFetchTheatreParams.ts";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
-import useFetchTheatreAndScreens from "@/pages/theatres/hooks/queries/useFetchTheatreAndScreens.ts";
+import useFetchTheatreAndScreens from "@/pages/theatres/hooks/queries/screens/useFetchTheatreAndScreens.ts";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 const TheatreScreensPage: FC = () => {
-    const { theatreID } = useFetchTheatreParams();
+    const {theatreID} = useFetchTheatreParams();
     const {page, perPage} = usePaginationSearchParams({perPage: "10"});
 
     const {theatre, screens, isPending, isError, error, refetchScreens} = useFetchTheatreAndScreens({
         page, perPage,
         theatreID: theatreID!,
-        populate: true
     });
 
-    if (isPending) return <PageLoader />;
-    if (isError) return <PageError error={error} />;
+    if (isPending) return <PageLoader/>;
+    if (isError) return <PageError error={error}/>;
 
     const hasScreens = (screens || []).length > 0;
     const onScreenChange = () => refetchScreens();
 
     return (
         <PageFlexWrapper>
-            <TheatreScreensIndexHeader theatre={theatre!} onScreenSubmit={onScreenChange} />
+            <TheatreScreensIndexHeader theatre={theatre!} onScreenSubmit={onScreenChange}/>
 
             {
                 hasScreens

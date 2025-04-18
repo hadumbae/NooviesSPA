@@ -1,5 +1,5 @@
 import {FC, PropsWithChildren, useState} from 'react';
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 
 import { Button } from "@/common/components/ui/button"
 import {

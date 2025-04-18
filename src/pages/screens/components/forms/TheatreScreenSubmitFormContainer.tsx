@@ -1,10 +1,10 @@
 import {FC} from 'react';
-import useScreenSubmitForm from "@/pages/screens/hooks/useScreenSubmitForm.ts";
-import useScreenSubmitMutation from "@/pages/screens/hooks/useScreenSubmitMutation.ts";
+import useScreenSubmitForm from "@/pages/screens/hooks/forms/useScreenSubmitForm.ts";
+import useScreenSubmitMutation from "@/pages/screens/hooks/mutations/useScreenSubmitMutation.ts";
 import {ScreenSubmit} from "@/pages/screens/schema/ScreenSubmitSchema.ts";
 import ScreenSubmitFormView from "@/pages/screens/components/forms/ScreenSubmitFormView.tsx";
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 
 interface Props {
     theatreID: ObjectId;

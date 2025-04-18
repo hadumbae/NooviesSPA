@@ -1,9 +1,9 @@
 import {FC} from 'react';
-import TheatreScreensPreviewList from "@/pages/theatres/components/screens/TheatreScreensPreviewList.tsx";
+import TheatreScreensPreviewList from "@/pages/theatres/components/screens/preview/TheatreScreensPreviewList.tsx";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {ChevronRight, Plus} from "lucide-react";
 import PageSection from "@/common/components/page/PageSection.tsx";
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
+import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {cn} from "@/common/lib/utils.ts";
 

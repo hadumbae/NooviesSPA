@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {Screen} from "@/pages/screens/schema/ScreenSchema.ts";
 import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 
@@ -7,16 +6,16 @@ import {Link as LinkIcon, Trash} from "lucide-react";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
+import {TheatreScreen} from "@/pages/screens/schema/theatre/TheatreScreenSchema.ts";
+import TheatreScreenShowingAccordion from "@/pages/theatres/components/screens/accordion/TheatreScreenShowingAccordion.tsx";
 
 interface Props {
-    screen: Screen;
+    screen: TheatreScreen;
     onDelete?: () => void
 }
 
 const TheatreScreenCard: FC<Props> = ({screen, onDelete}) => {
     const {_id, name, screenType, capacity, seats, showings} = screen;
-
-    console.log(showings);
 
     const screenCapacity = `${capacity} seats`;
     const numberOfSeats = `${seats.length} seats`;
@@ -54,8 +53,17 @@ const TheatreScreenCard: FC<Props> = ({screen, onDelete}) => {
                 </section>
 
                 <section>
-                    <span className="text-[12px] text-neutral-500 uppercase">Showings</span>
-                    {/*#TODO Showings*/}
+                    <span className="text-[12px] text-neutral-500 uppercase">Recent Showings</span>
+
+                    {
+                        showings.length > 0
+                            ? <TheatreScreenShowingAccordion showings={showings} />
+                            : <div className="flex justify-center">
+                                <span className="text-neutral-400 text-[12px] select-none">
+                                    There Are No Active Showings
+                                </span>
+                            </div>
+                    }
                 </section>
             </CardContent>
         </Card>
