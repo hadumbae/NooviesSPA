@@ -33,9 +33,7 @@ const AuthRepository: IAuthRepository = {
 
     async logout(): Promise<FetchReturns> {
         const url = buildQueryURL({baseURL: this.baseURL, path: "logout"});
-        const action = () => useFetchAPI({url, method: "POST"});
-
-        return useFetchErrorHandler({fetchQueryFn: action});
+        return useFetchAPI({url, method: "POST"});
     }
 };
 
