@@ -18,6 +18,7 @@ const AuthLoginForm: FC<Props> = ({className}) => {
     const {mutate, isPending} = useAuthLoginSubmitMutation({form});
 
     const onSubmit = (values: UserLoginData) => {
+        console.log("Logging In...");
         mutate(values);
     }
 

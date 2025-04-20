@@ -1,28 +1,24 @@
-import {FieldValues, Path, UseFormReturn} from "react-hook-form";
-import {ZodParseErrorResponse, ZodParseErrorResponseSchema} from "@/common/schema/ZodParseErrorResponseSchema.ts";
+import {ZodParseErrorResponseSchema} from "@/common/schema/ZodParseErrorResponseSchema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {ParseError} from "@/common/errors/ParseError.ts";
+import {ZodIssue} from "zod";
 
 export default {
-    validateFormErrorResponse<TFieldValues extends FieldValues>(params: {
-        form: UseFormReturn<TFieldValues>,
+    validateFormErrorResponse(params: {
         errorResponse: Response,
         errorData: any,
     }) {
-        const {form, errorResponse, errorData} = params;
+        const {errorResponse, errorData} = params;
+        let parseResult = ZodParseErrorResponseSchema.safeParse(errorData);
 
-        try {
-            const parsedResponse: ZodParseErrorResponse = ZodParseErrorResponseSchema.parse(errorData);
-            const {errors} = parsedResponse;
-
-            errors.forEach((error) => {
-                const {path, message} = error;
-                form.setError(path.join(".") as Path<TFieldValues>, {message});
-            });
-        } catch (e: any) {
+        if (!parseResult.success) {
             throw new HttpResponseError({
                 response: errorResponse,
                 message: "An error occurred in processing form-related errors."
-            })
+            });
         }
+
+        const {data: errorReturns} = parseResult;
+        throw new ParseError({errors: errorReturns.errors as ZodIssue[]});
     }
 }

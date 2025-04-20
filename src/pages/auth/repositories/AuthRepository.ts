@@ -1,7 +1,6 @@
 import {UserRegisterData} from "@/pages/auth/schema/AuthRegisterSchema.ts";
 import {UserLoginData} from "@/pages/auth/schema/AuthLoginSchema.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
-import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
 
@@ -23,10 +22,7 @@ const AuthRepository: IAuthRepository = {
 
     async login(data: UserLoginData): Promise<FetchReturns> {
         const url = buildQueryURL({baseURL: this.baseURL, path: "login"});
-        const fetchQueryFn = () => useFetchAPI({url, method: "POST", data});
-        const message = "Failed to login. Please try again.";
-
-        return useFetchErrorHandler({fetchQueryFn, message});
+        return useFetchAPI({url, method: "POST", data});
     },
 
     logout(): Promise<FetchReturns> {

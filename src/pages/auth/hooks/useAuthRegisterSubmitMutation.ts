@@ -3,9 +3,10 @@ import {UserRegisterData} from "@/pages/auth/schema/AuthRegisterSchema.ts";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
-import {UseFormReturn} from "react-hook-form";
+import {Path, UseFormReturn} from "react-hook-form";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import ValidationService from "@/common/services/validation/ValidationService.ts";
+import {ParseError} from "@/common/errors/ParseError.ts";
 
 export default function useAuthRegisterSubmitMutation({form}: { form: UseFormReturn<UserRegisterData> }) {
     const navigate = useNavigate();
@@ -18,8 +19,7 @@ export default function useAuthRegisterSubmitMutation({form}: { form: UseFormRet
         }
 
         if (response.status === 400) {
-            return ValidationService.validateFormErrorResponse<UserRegisterData>({
-                form,
+            return ValidationService.validateFormErrorResponse({
                 errorData: result,
                 errorResponse: response
             });
@@ -35,7 +35,12 @@ export default function useAuthRegisterSubmitMutation({form}: { form: UseFormRet
     };
 
     const onError = (error: Error) => {
-        console.error(error);
+        if (error instanceof ParseError) {
+            for (let validationError of error.errors) {
+                const {path, message} = validationError;
+                form.setError(path.join(".") as Path<UserRegisterData>, {type: "manual", message});
+            }
+        }
     }
 
     return useMutation({

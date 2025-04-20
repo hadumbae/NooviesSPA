@@ -6,18 +6,32 @@ import {ParseError} from "@/common/errors/ParseError.ts";
 import {UseFormReturn} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
-import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
-import parseResponseData from "@/common/utility/query/parseResponseData.ts";
+import ValidationService from "@/common/services/validation/ValidationService.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
-export default function useAuthLoginSubmitMutation({form}: {form: UseFormReturn<UserLoginData>}) {
+export default function useAuthLoginSubmitMutation({form}: { form: UseFormReturn<UserLoginData> }) {
     const navigate = useNavigate();
 
     const submitLoginData = async (data: UserLoginData) => {
-        const action = () => AuthRepository.login(data);
-        const schema = AuthUserDetailsSchema;
+        const {response, result} = await AuthRepository.login(data);
 
-        const {result} = await useFetchErrorHandler({fetchQueryFn: action});
-        return parseResponseData({schema, data: result});
+        console.log("Response: ", response.status);
+        console.log("Result: ", result);
+
+        if (response.status === 200) {
+            const parsedResult = AuthUserDetailsSchema.safeParse(result);
+            if (!parsedResult.success) throw new HttpResponseError({message: "Invalid Login API Response.", response});
+            return parsedResult.data;
+        }
+
+        if (response.status === 400) {
+            return ValidationService.validateFormErrorResponse({errorResponse: response, errorData: result});
+        }
+
+        throw new HttpResponseError({
+            message: "Oops. Something went wrong trying to log in. Please try again.",
+            response
+        });
     }
 
     const onSuccess = (authUser: AuthUserDetails) => {
