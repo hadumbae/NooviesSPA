@@ -10,15 +10,10 @@ import {useNavigate} from "react-router-dom";
 const AuthRegisterForm: FC = () => {
     const navigate = useNavigate();
     const form = useAuthRegisterForm();
-    const {mutate} = useAuthRegisterSubmitMutation();
+    const {mutate} = useAuthRegisterSubmitMutation({form});
 
-    const onSubmit = (values: UserRegisterData) => {
-        mutate(values);
-    }
-
-    const redirectToLogin = () => {
-        navigate("/auth/login");
-    }
+    const onSubmit = (values: UserRegisterData) => mutate(values);
+    const redirectToLogin = () => navigate("/auth/login");
 
     return (
         <Form {...form}>

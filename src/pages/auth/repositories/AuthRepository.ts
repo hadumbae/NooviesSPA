@@ -15,12 +15,10 @@ interface IAuthRepository {
 const AuthRepository: IAuthRepository = {
     baseURL: `${import.meta.env.VITE_API_URL}/auth`,
 
-    async register(data: UserRegisterData): Promise<FetchReturns> {
+    register(data: UserRegisterData): Promise<FetchReturns> {
         const url = buildQueryURL({baseURL: this.baseURL, path: "register"})
-        const fetchQueryFn = () => useFetchAPI({url, method: "POST", data});
-        const message = "Failed to register. Please try again.";
-
-        return await useFetchErrorHandler({fetchQueryFn, message});
+        return useFetchAPI({url, method: "POST", data});
+        // const message = "Failed to register. Please try again.";
     },
 
     async login(data: UserLoginData): Promise<FetchReturns> {
@@ -31,7 +29,7 @@ const AuthRepository: IAuthRepository = {
         return useFetchErrorHandler({fetchQueryFn, message});
     },
 
-    async logout(): Promise<FetchReturns> {
+    logout(): Promise<FetchReturns> {
         const url = buildQueryURL({baseURL: this.baseURL, path: "logout"});
         return useFetchAPI({url, method: "POST"});
     }

@@ -1,6 +1,6 @@
 import {ZodTypeAny} from "zod";
 import {ParseError} from "@/common/errors/ParseError.ts";
-import safeParseSchema from "@/common/utility/safeParseSchema.ts";
+import safeParseSchema from "@/common/utility/validation/safeParseSchema.ts";
 
 interface Params<TSchema> {
     schema: TSchema;

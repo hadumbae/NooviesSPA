@@ -1,6 +1,8 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import AuthRegisterForm from "@/pages/auth/components/AuthRegisterForm.tsx";
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import RegisterHeader from "@/pages/auth/components/headers/RegisterHeader.tsx";
 
 // Jane Doe
 // jane@doe.com
@@ -9,13 +11,14 @@ import AuthRegisterForm from "@/pages/auth/components/AuthRegisterForm.tsx";
 const RegisterPage: FC = () => {
     return (
         <PageFlexWrapper>
-            <header>
-                <h1 className="text-2xl font-bold">Register</h1>
-                <span className="text-neutral-500 text-sm">Enter your details below to create an account.</span>
-            </header>
+            <RegisterHeader />
 
             <section>
-                <AuthRegisterForm />
+                <Card>
+                    <CardContent className="p-3">
+                        <AuthRegisterForm />
+                    </CardContent>
+                </Card>
             </section>
         </PageFlexWrapper>
     );
