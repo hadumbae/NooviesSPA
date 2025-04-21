@@ -3,7 +3,7 @@ import {AuthUserDetails, AuthUserDetailsSchema} from "@/pages/auth/schema/AuthUs
 import {toast} from "react-toastify";
 import {UserLoginData} from "@/pages/auth/schema/AuthLoginSchema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
-import {UseFormReturn} from "react-hook-form";
+import {Path, UseFormReturn} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
 import ValidationService from "@/common/services/validation/ValidationService.ts";
@@ -14,9 +14,6 @@ export default function useAuthLoginSubmitMutation({form}: { form: UseFormReturn
 
     const submitLoginData = async (data: UserLoginData) => {
         const {response, result} = await AuthRepository.login(data);
-
-        console.log("Response: ", response.status);
-        console.log("Result: ", result);
 
         if (response.status === 200) {
             const parsedResult = AuthUserDetailsSchema.safeParse(result);
@@ -47,9 +44,8 @@ export default function useAuthLoginSubmitMutation({form}: { form: UseFormReturn
     const onError = (error: Error) => {
         if (error instanceof ParseError) {
             for (let validationError of error.errors) {
-                console.log(validationError);
                 const {path, message} = validationError;
-                form.setError(path.join(".") as any, {type: "manual", message});
+                form.setError(path.join(".") as Path<UserLoginData>, {type: "manual", message});
             }
         }
     }
