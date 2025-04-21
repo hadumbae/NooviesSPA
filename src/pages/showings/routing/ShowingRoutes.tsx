@@ -7,47 +7,50 @@ import ShowingSeatingPage from "@/pages/seatmap/pages/ShowingSeatingPage.tsx";
 import ShowingSeatMapEditPage from "@/pages/seatmap/pages/ShowingSeatMapEditPage.tsx";
 import ShowingSeatMapCreatePage from "@/pages/seatmap/pages/ShowingSeatMapCreatePage.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
+import {RouteObject} from "react-router-dom";
 
-export default [
+const routes: RouteObject[] = [
     {
         path: '/admin/showings',
-        element: <BaseLayout />,
+        element: <BaseLayout/>,
         children: [
             {
                 path: "/admin/showings",
-                element: <ShowingsPage />,
-                errorElement: <ComponentErrorHandler />,
+                element: <ShowingsPage/>,
+                errorElement: <ComponentErrorHandler/>,
             },
             {
                 path: "/admin/showings/create",
-                element: <ShowingCreatePage />,
-                errorElement: <ComponentErrorHandler />,
+                element: <ShowingCreatePage/>,
+                errorElement: <ComponentErrorHandler/>,
             },
             {
                 path: "/admin/showings/get/:showingID",
-                element: <ShowingPage />,
-                errorElement: <ComponentErrorHandler />,
+                element: <ShowingPage/>,
+                errorElement: <ComponentErrorHandler/>,
             },
             {
                 path: "/admin/showings/edit/:showingID",
-                element: <ShowingEditPage />,
-                errorElement: <ComponentErrorHandler />,
+                element: <ShowingEditPage/>,
+                errorElement: <ComponentErrorHandler/>,
             },
             {
                 path: "/admin/showings/get/:showingID/seating",
-                element: <ShowingSeatingPage />,
-                errorElement: <ComponentErrorHandler />,
+                element: <ShowingSeatingPage/>,
+                errorElement: <ComponentErrorHandler/>,
             },
             {
                 path: "/admin/showings/create/:showingID/seating",
-                element: <ShowingSeatMapCreatePage />,
-                errorElement: <ComponentErrorHandler />,
+                element: <ShowingSeatMapCreatePage/>,
+                errorElement: <ComponentErrorHandler/>,
             },
             {
                 path: "/admin/showings/edit/:showingID/seating/:seatMapID",
-                element: <ShowingSeatMapEditPage />,
-                errorElement: <ComponentErrorHandler />,
+                element: <ShowingSeatMapEditPage/>,
+                errorElement: <ComponentErrorHandler/>,
             },
         ],
     }
 ];
+
+export default routes;

@@ -15,6 +15,10 @@ module.exports = {
   			offside: [
   				'Offside',
   				'sans-serif'
+  			],
+			playwriteRoCursive: [
+  				'Playwrite RO',
+  				'sans-serif'
   			]
   		},
   		borderRadius: {

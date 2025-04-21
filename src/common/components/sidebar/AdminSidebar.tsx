@@ -12,7 +12,6 @@ import AdminAuthSidebarGroup from "@/common/components/sidebar/admin/AdminAuthSi
 const AdminSidebar: FC = () => {
     return (
         <Sidebar>
-
             <SidebarHeader>
                 Noovies
             </SidebarHeader>

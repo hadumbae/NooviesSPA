@@ -1,24 +1,17 @@
 import {FC} from 'react';
 import {Bounce, ToastContainer} from "react-toastify";
 import {SidebarProvider, SidebarTrigger} from "@/common/components/ui/sidebar.tsx";
-import AdminSidebar from "@/common/components/sidebar/AdminSidebar.tsx";
 import LayoutTitle from "@/common/components/layout/LayoutTitle.tsx";
 import LayoutBreakpointIndicator from "@/common/components/layout/LayoutBreakpointIndicator.tsx";
-import Cookies from "js-cookie";
-import GuestSidebar from "@/common/components/sidebar/GuestSidebar.tsx";
 import {Outlet} from "react-router-dom";
+import BaseSidebar from "@/common/components/layout/BaseSidebar.tsx";
 
 const BaseLayout: FC = () => {
     const currentYear = (new Date()).getFullYear();
-    const isAuthenticated = Cookies.get("hasAuthToken");
 
     return (
         <SidebarProvider>
-            {
-                isAuthenticated
-                    ? <AdminSidebar />
-                    : <GuestSidebar />
-            }
+            <BaseSidebar />
 
             <main className="flex flex-col space-y-1 p-3 w-full h-screen">
                 <header className="flex justify-between items-center">
