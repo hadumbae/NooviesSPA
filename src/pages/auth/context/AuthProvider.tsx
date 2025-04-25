@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 
 const AuthProvider: FC<PropsWithChildren> = ({children}) => {
     const details = useContext(AuthContext)
-    const [authUserDetails, setAuthUserDetails] = useState<AuthUserDetails | undefined>();
+    const [authUserDetails, setAuthUserDetails] = useState<AuthUserDetails | null | undefined>();
 
     useEffect(() => {
         const hasToken = Cookies.get("hasAuthToken");
@@ -15,7 +15,7 @@ const AuthProvider: FC<PropsWithChildren> = ({children}) => {
             setAuthUserDetails(item ? JSON.parse(item) : details);
         } else {
             localStorage.removeItem("authUser");
-            setAuthUserDetails(undefined);
+            setAuthUserDetails(null);
         }
     }, []);
 
