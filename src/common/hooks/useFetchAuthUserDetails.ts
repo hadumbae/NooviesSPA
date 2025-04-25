@@ -15,9 +15,6 @@ export default function useFetchAuthUserDetails(): AuthUserDetails {
         if (authUserDetails === undefined) return;
         const parsedResult = AuthUserDetailsSchema.safeParse(authUserDetails);
 
-        console.log("Auth User Details: ", authUserDetails);
-        console.log("Parsed Success: ", parsedResult.success);
-
         if (parsedResult.success) {
             setParsedData(parsedResult.data);
         } else {
