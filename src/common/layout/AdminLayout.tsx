@@ -1,5 +1,6 @@
 import {FC} from 'react';
 import {Outlet} from "react-router-dom";
+import {Bounce, ToastContainer} from "react-toastify";
 
 const AdminLayout: FC = () => {
     const currentYear = (new Date()).getFullYear();
@@ -14,6 +15,20 @@ const AdminLayout: FC = () => {
 
             <section className="offside-regular px-2 py-5 flex-1">
                 <Outlet/>
+
+                <ToastContainer
+                    position="bottom-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick={false}
+                    rtl={false}
+                    pauseOnFocusLoss={false}
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    transition={Bounce}
+                />
             </section>
 
             <footer className="dotgothic16-regular text-center text-neutral-500">
