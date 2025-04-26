@@ -1,19 +1,20 @@
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
 import RequestMethod from "@/common/type/RequestMethod.ts";
 
-export interface useFetchAPIParams {
+export interface useFetchAPIParams<TData> {
     url: string;
     method: RequestMethod;
-    data?: Record<string, unknown>;
+    data?: TData;
 }
 
-export default async function useFetchAPI<T = any>(params: useFetchAPIParams): Promise<FetchReturns<T>> {
+export default async function useFetchAPI<TData = any, TReturns = any>(params: useFetchAPIParams<TData>): Promise<FetchReturns<TReturns>> {
+
     const {url, method, data} = params;
 
     const fetchOptions: RequestInit = {
         method,
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type": "application/json"},
         ...(data ? {body: JSON.stringify(data)} : {}),
     };
 
