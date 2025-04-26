@@ -17,10 +17,9 @@ const AuthRepository: IAuthRepository = {
     register(data: UserRegisterData): Promise<FetchReturns> {
         const url = buildQueryURL({baseURL: this.baseURL, path: "register"})
         return useFetchAPI({url, method: "POST", data});
-        // const message = "Failed to register. Please try again.";
     },
 
-    async login(data: UserLoginData): Promise<FetchReturns> {
+    login(data: UserLoginData): Promise<FetchReturns> {
         const url = buildQueryURL({baseURL: this.baseURL, path: "login"});
         return useFetchAPI({url, method: "POST", data});
     },
@@ -28,7 +27,7 @@ const AuthRepository: IAuthRepository = {
     logout(): Promise<FetchReturns> {
         const url = buildQueryURL({baseURL: this.baseURL, path: "logout"});
         return useFetchAPI({url, method: "POST"});
-    }
+    },
 };
 
 export default AuthRepository;
