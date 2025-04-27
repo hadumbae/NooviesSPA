@@ -8,9 +8,12 @@ import {useNavigate} from "react-router-dom";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
 import ValidationService from "@/common/services/validation/ValidationService.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {useContext} from "react";
+import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
 
 export default function useAuthLoginSubmitMutation({form}: { form: UseFormReturn<UserLoginData> }) {
     const navigate = useNavigate();
+    const authContext = useContext(AuthContext);
 
     const submitLoginData = async (data: UserLoginData) => {
         const {response, result} = await AuthRepository.login(data);
@@ -33,10 +36,15 @@ export default function useAuthLoginSubmitMutation({form}: { form: UseFormReturn
 
     const onSuccess = (authUser: AuthUserDetails) => {
         toast.success("Logged in.");
-        localStorage.setItem("authUser", JSON.stringify(authUser));
 
         const path = sessionStorage.getItem("redirectPath");
         path && sessionStorage.removeItem("redirectPath");
+
+        localStorage.setItem("authUser", JSON.stringify(authUser));
+        if (authContext) {
+            authContext.setUser(authUser);
+            authContext.setLogout(false);
+        }
 
         navigate(path || "/");
     }

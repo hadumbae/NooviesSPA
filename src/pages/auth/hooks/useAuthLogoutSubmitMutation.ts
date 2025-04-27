@@ -3,14 +3,18 @@ import {toast} from "react-toastify";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
 import handleFetchError from "@/common/handlers/query/handleFetchError.ts";
 import {useNavigate} from "react-router-dom";
+import {useContext} from "react";
+import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
 
 interface Params {
     onLogout?: () => void;
 }
 
 export default function useAuthLogoutSubmitMutation(params?: Params) {
-    const {onLogout} = params || {};
     const navigate = useNavigate();
+    const authContext = useContext(AuthContext);
+
+    const {onLogout} = params || {};
 
     const mutationKey = ["submit_logout"];
 
@@ -20,15 +24,20 @@ export default function useAuthLogoutSubmitMutation(params?: Params) {
     }
 
     const onSuccess = () => {
-        toast.success("Logged out!");
 
         localStorage.removeItem("authUser");
         sessionStorage.removeItem("redirectPath");
 
-        navigate("/");
-        window.location.reload();
+        if (authContext) {
+            authContext.setUser(null);
+            authContext.setLogout(true);
+        }
 
+        toast.success("Logged out!");
+        navigate("/");
         onLogout && onLogout();
+
+
     };
 
     const onError = (error: Error) => {
