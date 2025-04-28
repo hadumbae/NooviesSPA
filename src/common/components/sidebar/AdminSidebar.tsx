@@ -7,7 +7,7 @@ import {
 
 import AdminTheatreSidebarGroup from "@/common/components/sidebar/admin/AdminTheatreSidebarGroup.tsx";
 import AdminMovieSidebarGroup from "@/common/components/sidebar/admin/AdminMovieSidebarGroup.tsx";
-import AdminAuthSidebarGroup from "@/common/components/sidebar/admin/AdminAuthSidebarGroup.tsx";
+import AdminAuthSidebarGroup from "@/common/components/sidebar/auth/AuthSidebarGroup.tsx";
 
 const AdminSidebar: FC = () => {
     return (

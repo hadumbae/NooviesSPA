@@ -7,10 +7,10 @@ import ClientSidebar from "@/common/components/sidebar/ClientSidebar.tsx";
 
 const BaseSidebar: FC = () => {
     const isAuthenticated = Cookies.get("hasAuthToken");
-    const authUserDetails = useContext(AuthContext);
+    const authContext = useContext(AuthContext);
 
-    if (isAuthenticated && authUserDetails) {
-        const {isAdmin} = authUserDetails;
+    if (isAuthenticated && authContext) {
+        const {isAdmin = false} = authContext.user || {};
 
         if (isAdmin) {
             return <AdminSidebar />
