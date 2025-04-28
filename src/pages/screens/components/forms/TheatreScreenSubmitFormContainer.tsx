@@ -16,7 +16,7 @@ const TheatreScreenSubmitFormContainer: FC<Props> = ({theatreID, onSubmit, class
     const form = useScreenSubmitForm({defaultValues: {theatre: theatreID}});
     const mutation = useScreenSubmitMutation({form, onSubmit});
 
-    const onFormSubmit = (values: ScreenSubmit) => {
+    const submitHandler = (values: ScreenSubmit) => {
         console.log("Theatre Screen Submit Values: ", values);
         mutation.mutate(values);
         form.reset();
@@ -28,7 +28,7 @@ const TheatreScreenSubmitFormContainer: FC<Props> = ({theatreID, onSubmit, class
         <ScreenSubmitFormView
             form={form}
             mutation={mutation}
-            onFormSubmit={onFormSubmit}
+            submitHandler={submitHandler}
             className={className}
             options={options}
         />
