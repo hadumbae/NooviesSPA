@@ -24,7 +24,6 @@ export default function useAuthLogoutSubmitMutation(params?: Params) {
     }
 
     const onSuccess = () => {
-
         localStorage.removeItem("authUser");
         sessionStorage.removeItem("redirectPath");
 
@@ -36,8 +35,6 @@ export default function useAuthLogoutSubmitMutation(params?: Params) {
         toast.success("Logged out!");
         navigate("/");
         onLogout && onLogout();
-
-
     };
 
     const onError = (error: Error) => {

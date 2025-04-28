@@ -2,28 +2,24 @@ import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
-import {AuthUserDetails, AuthUserDetailsSchema} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
+import {AuthUserDetails} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
 
-export default function useFetchAuthUserDetails(): AuthUserDetails {
+export default function useFetchAuthUserDetails(): AuthUserDetails | null {
     const navigate = useNavigate();
-    const authUserDetails = useContext(AuthContext)
+    const authContext = useContext(AuthContext)
 
-    const [parsedData, setParsedData] = useState<AuthUserDetails | null>(null);
-
+    const [authDetails, setAuthDetails] = useState<AuthUserDetails | null>(null);
 
     useEffect(() => {
-        if (authUserDetails === undefined) return;
-        const parsedResult = AuthUserDetailsSchema.safeParse(authUserDetails);
+        if (!authContext || authContext.logout) return;
 
-        if (parsedResult.success) {
-            setParsedData(parsedResult.data);
+        if (authContext.user) {
+            setAuthDetails(authContext.user);
         } else {
-            console.log("Here?")
             toast.error("You must be logged in!");
             navigate("/auth/login", {state: {showLoginError: true}});
         }
-    }, [authUserDetails, navigate]);
+    }, [authContext, navigate]);
 
-
-    return parsedData!;
+    return authDetails;
 }
