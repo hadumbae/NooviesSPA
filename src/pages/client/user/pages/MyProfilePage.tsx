@@ -11,16 +11,32 @@ import ClientRecentFavouritesListContainer
     from "@/pages/client/user/components/profile/ClientRecentFavouritesListContainer.tsx";
 import ClientRecentReviewsListContainer
     from "@/pages/client/user/components/profile/ClientRecentReviewsListContainer.tsx";
+import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
+import UpdateUserPasswordFormContainer from "@/pages/client/user/components/forms/UpdateUserPasswordFormContainer.tsx";
 
 const MyProfilePage: FC = () => {
     const authUserDetails = useFetchAuthUserDetails();
-    console.log(authUserDetails);
 
     if (!authUserDetails) return <PageLoader />;
+
+    const {user: userID} = authUserDetails;
 
     return (
         <PageFlexWrapper>
             <MyProfileHeader authUser={authUserDetails} />
+
+            <Separator />
+
+            <PageSection title="Update My Password">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Update Your Password</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <UpdateUserPasswordFormContainer userID={userID} />
+                    </CardContent>
+                </Card>
+            </PageSection>
 
             <Separator />
 
