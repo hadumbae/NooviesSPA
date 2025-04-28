@@ -14,7 +14,7 @@ interface Props {
     className?: string;
     form: UseFormReturn<ScreenSubmit>;
     mutation: UseMutationResult<Screen, Error, ScreenSubmit>;
-    onFormSubmit: SubmitHandler<ScreenSubmit>;
+    submitHandler: SubmitHandler<ScreenSubmit>;
     options?: {
         hideTheatre?: boolean;
         disableTheatre?: boolean;
@@ -23,7 +23,7 @@ interface Props {
     }
 }
 
-const ScreenSubmitFormContainer: FC<Props> = ({form, mutation, onFormSubmit, className, options}) => {
+const ScreenSubmitFormContainer: FC<Props> = ({form, mutation, submitHandler, className, options}) => {
     const {isPending} = mutation;
 
     const {hideTheatre, disableTheatre, hideScreenType, disableScreenType} = options || {};
@@ -31,7 +31,7 @@ const ScreenSubmitFormContainer: FC<Props> = ({form, mutation, onFormSubmit, cla
     return (
         <Form {...form}>
             <form
-                onSubmit={form.handleSubmit(onFormSubmit)}
+                onSubmit={form.handleSubmit(submitHandler)}
                 className={cn("space-y-4", className)}
             >
                 <HookFormInput

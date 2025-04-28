@@ -24,7 +24,7 @@ const ScreenSubmitFormContainer: FC<Props> = ({screen, onSubmit, className}) => 
         <ScreenSubmitFormView
             form={form}
             mutation={mutation}
-            onFormSubmit={onFormSubmit}
+            submitHandler={onFormSubmit}
             className={className}
         />
     );
