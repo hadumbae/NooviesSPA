@@ -1,19 +1,19 @@
 import {z} from "zod";
-import {EmailString, RequiredString} from "@/common/schema/helpers/ZodStringHelpers.ts";
+import {EmailString, TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
 
 export const UserRegisterSchema = z.object({
-    name: RequiredString
+    name: TrimmedStringSchema
         .min(3, "Name must be at least 3 characters.")
         .max(255, "Name must not be more than 255 characters."),
 
     email: EmailString
         .max(255, "Email must not be more than 255 characters."),
 
-    password: RequiredString
+    password: TrimmedStringSchema
         .min(16, "Password must be at least 16 characters.")
         .max(255, "Password must not be more than 255 characters."),
 
-    confirm: RequiredString
+    confirm: TrimmedStringSchema
         .min(16, "Confirm must be at least 16 characters.")
         .max(255, "Confirm must not be more than 255 characters."),
 }).superRefine((values, ctx) => {

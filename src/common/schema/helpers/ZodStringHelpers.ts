@@ -1,6 +1,6 @@
 import {z} from "zod";
 
-export const RequiredString = z
+export const TrimmedStringSchema = z
     .string({required_error: "Required", invalid_type_error: "Must be a valid string."})
     .trim();
 
@@ -12,7 +12,7 @@ export const RefinedIDString = z
     .union([z.undefined(), IDString])
     .refine((id) => !!id, {message: "Required."});
 
-export const EmailString = RequiredString
+export const EmailString = TrimmedStringSchema
     .email({message: "Must be an email address."});
 
 export const URLString = z

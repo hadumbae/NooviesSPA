@@ -1,16 +1,16 @@
 import {z, ZodType} from "zod";
 import ISeatSubmit from "@/pages/seats/interfaces/ISeatSubmit.ts";
-import {RefinedIDString, RequiredString} from "@/common/schema/helpers/ZodStringHelpers.ts";
+import {RefinedIDString, TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {SeatTypeEnum} from "@/pages/seats/schema/SeatTypeEnum.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 
 export const SeatSubmitSchema: ZodType<ISeatSubmit> = z.object({
-    row: RequiredString
+    row: TrimmedStringSchema
         .min(1, "Required.")
         .max(50, "Must be 50 characters or less."),
 
-    seatNumber: RequiredString
+    seatNumber: TrimmedStringSchema
         .min(1, "Required.")
         .max(50, "Must be 50 characters or less."),
 

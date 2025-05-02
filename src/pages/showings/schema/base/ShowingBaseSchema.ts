@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {IDString, RequiredString} from "@/common/schema/helpers/ZodStringHelpers.ts";
+import {IDString, TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {CoercedDate} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
@@ -20,10 +20,10 @@ export default z.object({
     ticketPrice: RequiredNumber
         .gt(0, "Must be greater than 0"),
 
-    language: RequiredString,
+    language: TrimmedStringSchema,
 
     subtitleLanguages: z
-        .array(RequiredString)
+        .array(TrimmedStringSchema)
         .nonempty({message: "Must not be empty."}),
 
     isSpecialEvent: RequiredBoolean

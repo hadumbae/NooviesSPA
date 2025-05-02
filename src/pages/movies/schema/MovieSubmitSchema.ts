@@ -1,6 +1,6 @@
 import {z, ZodType} from "zod";
 import IMovieSubmit from "@/pages/movies/interfaces/IMovieSubmit.ts";
-import {IDString, RequiredString, URLString} from "@/common/schema/helpers/ZodStringHelpers.ts";
+import {IDString, TrimmedStringSchema, URLString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {CoercedDate} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 
@@ -12,11 +12,11 @@ import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
  * for data submitted when creating or updating a movie.
  */
 export const MovieSubmitSchema: ZodType<IMovieSubmit> = z.object({
-    title: RequiredString
+    title: TrimmedStringSchema
         .min(1, "Title must be at least 1 character long.")
         .max(1000, "Title must be 1000 characters or less."),
 
-    description: RequiredString
+    description: TrimmedStringSchema
         .trim()
         .max(2000, "Description must be 2000 characters or less."),
 
@@ -37,11 +37,11 @@ export const MovieSubmitSchema: ZodType<IMovieSubmit> = z.object({
         .refine(price => price > 0, {message: "Must be greater than 0."}),
 
     languages: z
-        .array(RequiredString)
+        .array(TrimmedStringSchema)
         .optional(),
 
     subtitles: z
-        .array(RequiredString)
+        .array(TrimmedStringSchema)
         .optional(),
 
     trailerURL: z

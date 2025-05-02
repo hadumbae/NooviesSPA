@@ -1,6 +1,6 @@
 import {z, ZodType} from "zod";
 import ISeat from "@/pages/seats/interfaces/ISeat.ts";
-import {IDString, RequiredString} from "@/common/schema/helpers/ZodStringHelpers.ts";
+import {IDString, TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {SeatTypeEnum} from "@/pages/seats/schema/SeatTypeEnum.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
@@ -10,11 +10,11 @@ import {ScreenSchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
 export const SeatSchema: ZodType<ISeat> = z.object({
     _id: IDString,
 
-    row: RequiredString
+    row: TrimmedStringSchema
         .min(1, "Required.")
         .max(50, "Must be 50 characters or less."),
 
-    seatNumber: RequiredString
+    seatNumber: TrimmedStringSchema
         .min(1, "Required.")
         .max(50, "Must be 50 characters or less."),
 

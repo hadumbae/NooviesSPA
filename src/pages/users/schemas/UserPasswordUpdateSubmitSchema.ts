@@ -1,5 +1,5 @@
 import {z, ZodType} from "zod";
-import {RequiredString} from "@/common/schema/helpers/ZodStringHelpers.ts";
+import {TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import IUserPasswordUpdate from "@/pages/users/interfaces/IUserPasswordUpdate.ts";
 
 /**
@@ -21,7 +21,7 @@ export const UserPasswordUpdateSubmitSchema: ZodType<IUserPasswordUpdate> = z
          * - Must be at least 16 characters.
          * - Must not exceed 255 characters.
          */
-        password: RequiredString
+        password: TrimmedStringSchema
             .min(16, "Must be at least 16 characters.")
             .max(255, "Must not be more than 255 characters."),
 
@@ -30,7 +30,7 @@ export const UserPasswordUpdateSubmitSchema: ZodType<IUserPasswordUpdate> = z
          *
          * Should match the `password` field exactly.
          */
-        confirm: RequiredString,
+        confirm: TrimmedStringSchema,
     })
     .refine(
         passwords => passwords.password === passwords.confirm,
