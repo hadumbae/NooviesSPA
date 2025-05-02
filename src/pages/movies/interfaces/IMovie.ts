@@ -10,7 +10,7 @@ export default interface IMovie {
     genres: (ObjectId | IGenre)[],
     directors: (ObjectId | IPerson)[],
     cast: (ObjectId | IPerson)[],
-    releaseDate: Date,
+    releaseDate: string,
     durationInMinutes: number,
     languages: string[],
     subtitles: string[],

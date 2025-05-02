@@ -1,0 +1,17 @@
+import BaseLayout from "@/common/layout/BaseLayout.tsx";
+import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
+import MoviesByGenreClientPage from "@/pages/movies/pages/client/MoviesByGenreClientPage.tsx";
+
+export default [
+    {
+        path: "/browse",
+        element: <BaseLayout/>,
+        children: [
+            {
+                path: "/browse/movies",
+                element: <MoviesByGenreClientPage/>,
+                errorElement: <ComponentErrorHandler/>,
+            }
+        ]
+    }
+];

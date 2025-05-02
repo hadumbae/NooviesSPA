@@ -1,8 +1,8 @@
 import BaseLayout from "@/common/layout/BaseLayout.tsx";
-import MoviesPage from "@/pages/movies/pages/MoviesPage.tsx";
-import MovieCreatePage from "@/pages/movies/pages/MovieCreatePage.tsx";
-import MovieEditPage from "@/pages/movies/pages/MovieEditPage.tsx";
-import MoviePage from "@/pages/movies/pages/MoviePage.tsx";
+import MoviesPage from "@/pages/movies/pages/admin/MoviesPage.tsx";
+import MovieCreatePage from "@/pages/movies/pages/admin/MovieCreatePage.tsx";
+import MovieEditPage from "@/pages/movies/pages/admin/MovieEditPage.tsx";
+import MoviePage from "@/pages/movies/pages/admin/MoviePage.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 
 export default [

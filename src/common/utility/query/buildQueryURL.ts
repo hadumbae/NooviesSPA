@@ -1,4 +1,4 @@
-import filterNullAttributes from "@/common/utility/filterNullAttributes.ts";
+import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 
 interface IBuildQueryURL {
     baseURL: string;
@@ -10,7 +10,7 @@ export default function buildQueryURL ({baseURL, path, queries}: IBuildQueryURL)
     const url = new URL(`${baseURL}/${path}`);
 
     if (queries) {
-        const filteredQueries = filterNullAttributes(queries);
+        const filteredQueries = filterEmptyAttributes(queries);
 
         Object.keys(filteredQueries).forEach((key: string) => {
             if (filteredQueries[key] !== undefined) {

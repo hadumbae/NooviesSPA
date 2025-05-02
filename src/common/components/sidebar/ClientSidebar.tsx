@@ -3,6 +3,7 @@ import {Sidebar, SidebarContent, SidebarHeader} from "@/common/components/ui/sid
 import ClientProfileSidebarGroup from "@/common/components/sidebar/client/ClientProfileSidebarGroup.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import AuthSidebarGroup from "@/common/components/sidebar/auth/AuthSidebarGroup.tsx";
+import ClientMovieSidebarGroup from "@/common/components/sidebar/client/ClientMovieSidebarGroup.tsx";
 
 const ClientSidebar: FC = () => {
     return (
@@ -16,6 +17,12 @@ const ClientSidebar: FC = () => {
 
                 <section>
                     <ClientProfileSidebarGroup />
+                </section>
+
+                <Separator />
+
+                <section>
+                    <ClientMovieSidebarGroup />
                 </section>
 
                 <Separator />

@@ -3,7 +3,7 @@ import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
 import QueryFilters from "@/common/type/QueryFilters.ts";
-import filterNullAttributes from "@/common/utility/filterNullAttributes.ts";
+import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 
 type PaginatedFilters = { page: number, perPage: number } & QueryFilters;
 
@@ -24,7 +24,7 @@ export interface IRequestRepository {
 export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IRequestRepository => ({
     async getAll(params?: { filters?: QueryFilters, populate?: boolean }): Promise<FetchReturns> {
         const {filters = {}, populate} = params || {};
-        const queries = filterNullAttributes({...filters, populate});
+        const queries = filterEmptyAttributes({...filters, populate});
 
         const url = buildQueryURL({baseURL: baseURL, path: "all", queries});
         return useFetchAPI({url, method: "GET"});
@@ -32,7 +32,7 @@ export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IRe
 
     async paginated(params: { filters: PaginatedFilters, populate?: boolean }) {
         const {filters, populate} = params;
-        const queries = filterNullAttributes({...filters, populate});
+        const queries = filterEmptyAttributes({...filters, populate});
 
         const url = buildQueryURL({baseURL: baseURL, path: "paginated", queries});
         return useFetchAPI({url, method: "GET"});

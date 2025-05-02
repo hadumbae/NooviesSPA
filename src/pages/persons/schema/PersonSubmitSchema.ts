@@ -1,7 +1,7 @@
 import {z, ZodType} from "zod";
 import {IPersonSubmit} from "@/pages/persons/interfaces/IPersonSubmit.ts";
 import {TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
-import {CoercedDate} from "@/common/schema/helpers/ZodDateHelpers.ts";
+import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {CountryEnum} from "@/common/schema/helpers/ZodEnumHelpers.ts";
 
 export const PersonSubmitSchema: ZodType<IPersonSubmit> = z.object({
@@ -13,7 +13,7 @@ export const PersonSubmitSchema: ZodType<IPersonSubmit> = z.object({
         .min(1, "Required.")
         .max(1000, "Must be 1000 characters or less."),
 
-    dob: CoercedDate,
+    dob: CoercedDateSchema,
 
     nationality: CountryEnum,
 });

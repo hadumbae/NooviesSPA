@@ -1,6 +1,6 @@
 import {z, ZodType} from "zod";
 import {IDString} from "@/common/schema/helpers/ZodStringHelpers.ts";
-import {CoercedDate} from "@/common/schema/helpers/ZodDateHelpers.ts";
+import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import IShowingSubmit from "@/pages/showings/interfaces/IShowingSubmit.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
@@ -15,10 +15,10 @@ import {LanguageEnum} from "@/common/schema/LanguageEnum.ts";
  */
 export const ShowingSubmitSchema: ZodType<IShowingSubmit> = z.object({
     startTime: z
-        .union([z.literal(""), CoercedDate])
+        .union([z.literal(""), CoercedDateSchema])
         .refine((date) => date !== "", {message: "Required."}),
 
-    endTime: CoercedDate.optional(),
+    endTime: CoercedDateSchema.optional(),
 
     ticketPrice: RequiredNumber
         .gt(0, "Must be greater than 0"),

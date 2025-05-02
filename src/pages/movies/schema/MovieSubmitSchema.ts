@@ -1,7 +1,7 @@
 import {z, ZodType} from "zod";
 import IMovieSubmit from "@/pages/movies/interfaces/IMovieSubmit.ts";
 import {IDString, TrimmedStringSchema, URLString} from "@/common/schema/helpers/ZodStringHelpers.ts";
-import {CoercedDate} from "@/common/schema/helpers/ZodDateHelpers.ts";
+import {DateStringSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 
 
@@ -29,7 +29,7 @@ export const MovieSubmitSchema: ZodType<IMovieSubmit> = z.object({
     cast: z
         .array(IDString),
 
-    releaseDate: CoercedDate,
+    releaseDate: DateStringSchema,
 
     durationInMinutes: z
         .union([z.literal(""), RequiredNumber])

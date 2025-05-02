@@ -6,15 +6,16 @@ import ScreenRoutes from "@/pages/screens/routing/ScreenRoutes.tsx";
 import SeatRoutes from "@/pages/seats/routing/SeatRoutes.tsx";
 import TheatreRoutes from "@/pages/theatres/routing/TheatreRoutes.tsx";
 import ShowingRoutes from "@/pages/showings/routing/ShowingRoutes.tsx";
-import MovieRoutes from "@/pages/movies/routing/MovieRoutes.tsx";
+import AdminMovieRoutes from "@/pages/movies/routing/AdminMovieRoutes.tsx";
 import SystemRoutes from "@/common/routing/SystemRoutes.tsx";
 import {RouteObject} from "react-router-dom";
 import UserProfileRoutes from "@/pages/client/user/routing/UserProfileRoutes.tsx";
+import ClientMovieRoutes from "@/pages/movies/routing/ClientMovieRoutes.tsx";
 
 const adminRoutes = [
     ...GenreRoutes,
     ...PersonRoutes,
-    ...MovieRoutes,
+    ...AdminMovieRoutes,
 
     ...ScreenRoutes,
     ...SeatRoutes,
@@ -23,7 +24,8 @@ const adminRoutes = [
 ];
 
 const clientRoutes: RouteObject[] = [
-        ...UserProfileRoutes,
+    ...UserProfileRoutes,
+    ...ClientMovieRoutes,
 ];
 
 export default [

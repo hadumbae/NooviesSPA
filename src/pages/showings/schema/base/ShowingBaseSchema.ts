@@ -1,6 +1,6 @@
 import {z} from "zod";
 import {IDString, TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
-import {CoercedDate} from "@/common/schema/helpers/ZodDateHelpers.ts";
+import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 
@@ -13,9 +13,9 @@ export default z.object({
     _id: IDString
         .readonly(),
 
-    startTime: CoercedDate,
+    startTime: CoercedDateSchema,
 
-    endTime: CoercedDate,
+    endTime: CoercedDateSchema,
 
     ticketPrice: RequiredNumber
         .gt(0, "Must be greater than 0"),
