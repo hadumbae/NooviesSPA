@@ -1,6 +1,6 @@
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {TheatreScreenRepository} from "@/pages/theatres/repositories/TheatreScreenRepository.ts";
-import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
+import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {
     PaginatedTheatreScreens,
     PaginatedTheatreScreenSchema
@@ -21,5 +21,5 @@ export default function useFetchPaginatedTheatreScreens(params: UseFetchTheatreS
     const schema = PaginatedTheatreScreenSchema;
     const action = () => TheatreScreenRepository.fetchTheatreScreens({theatreID, queries});
 
-    return useFetchSchemaData<typeof PaginatedTheatreScreenSchema, PaginatedTheatreScreens>({queryKey, schema, action});
+    return useFetchValidatedDataWithRedirect<typeof PaginatedTheatreScreenSchema, PaginatedTheatreScreens>({queryKey, schema, action});
 }

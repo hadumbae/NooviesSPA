@@ -1,5 +1,5 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
-import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
+import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {UseQueryResult} from "@tanstack/react-query";
 import {ShowingArray, ShowingArraySchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
@@ -26,5 +26,5 @@ export default function useFetchAllShowings(params?: {filters?: QueryFilters}): 
     const schema = ShowingArraySchema;
     const action = () => ShowingRepository.getAll({filters});
 
-    return useFetchSchemaData<typeof schema, ShowingArray>({schema, action, queryKey});
+    return useFetchValidatedDataWithRedirect<typeof schema, ShowingArray>({schema, action, queryKey});
 }

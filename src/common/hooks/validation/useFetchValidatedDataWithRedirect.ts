@@ -27,10 +27,7 @@ interface Props<TSchema extends ZodType, TReturnData> {
  *
  * @returns {UseQueryResult<TReturnData>} - The result of the query, including the data, loading state, and error information.
  */
-export default function useFetchSchemaData<
-    TSchema extends ZodType,
-    TReturnData,
->(
+export default function useFetchValidatedDataWithRedirect<TSchema extends ZodType, TReturnData>(
     {schema, action, queryKey}: Props<TSchema, TReturnData>
 ): UseQueryResult<TReturnData> {
     const fetchData = async () => {

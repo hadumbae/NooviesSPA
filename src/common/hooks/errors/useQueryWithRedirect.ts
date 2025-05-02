@@ -26,8 +26,6 @@ export default function useQueryWithRedirect<TData, TError extends Error>({query
     const {pathname, search, hash} = useLocation();
     const currentURL = new URL(`${window.origin}${pathname}${search}${hash}`);
 
-    console.log("[useQueryWithRedirect]", currentURL);
-
     const query = useQuery<TData, TError>({queryKey, queryFn});
     const {isError, error} = query;
 

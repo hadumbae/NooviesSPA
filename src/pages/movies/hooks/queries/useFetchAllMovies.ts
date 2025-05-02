@@ -1,5 +1,5 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
-import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
+import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {MovieArray, MovieArraySchema} from "@/pages/movies/schema/MovieSchema.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import {UseQueryResult} from "@tanstack/react-query";
@@ -26,5 +26,5 @@ export default function useFetchAllMovies(params?: {filters?: QueryFilters}): Us
     const schema = MovieArraySchema;
     const action = () => MovieRepository.getAll({filters});
 
-    return useFetchSchemaData<typeof schema, MovieArray>({schema, action, queryKey});
+    return useFetchValidatedDataWithRedirect<typeof schema, MovieArray>({schema, action, queryKey});
 }

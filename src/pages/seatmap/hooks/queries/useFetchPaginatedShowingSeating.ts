@@ -1,4 +1,4 @@
-import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
+import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import SeatMapShowingRepository from "@/pages/seatmap/repositories/SeatMapShowingRepository.ts";
 
 import SeatMapFilters from "@/pages/seatmap/types/SeatMapFilters.ts";
@@ -45,7 +45,7 @@ export default function useFetchPaginatedShowingSeating(params: Params) {
     const schema = PaginatedSeatMapSchema;
     const action = () => SeatMapShowingRepository.fetchShowingSeatMap({showingID, page, perPage, filters});
 
-    return useFetchSchemaData<typeof schema, PaginatedSeatMaps>({
+    return useFetchValidatedDataWithRedirect<typeof schema, PaginatedSeatMaps>({
         queryKey,
         schema,
         action,

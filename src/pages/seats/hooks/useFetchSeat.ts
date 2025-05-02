@@ -1,5 +1,5 @@
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
-import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
+import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {Seat, SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 
@@ -8,5 +8,5 @@ export default function useFetchSeat({_id}: { _id: ObjectId }) {
     const schema = SeatSchema;
     const action = () => SeatRepository.get({_id, populate: true});
 
-    return useFetchSchemaData<typeof SeatSchema, Seat>({queryKey, schema, action});
+    return useFetchValidatedDataWithRedirect<typeof SeatSchema, Seat>({queryKey, schema, action});
 }

@@ -1,5 +1,5 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
-import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
+import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {TheatreArray, TheatreArraySchema} from "@/pages/theatres/schema/TheatreSchema.ts";
 import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.ts";
 
@@ -10,5 +10,5 @@ export default function useFetchAllTheatres(params?: {filters?: QueryFilters}) {
     const schema = TheatreArraySchema;
     const action = () => TheatreRepository.getAll({filters});
 
-    return useFetchSchemaData<typeof schema, TheatreArray>({schema, action, queryKey});
+    return useFetchValidatedDataWithRedirect<typeof schema, TheatreArray>({schema, action, queryKey});
 }

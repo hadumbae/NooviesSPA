@@ -1,17 +1,17 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
-import filterNullAttributes from "@/common/utility/filterNullAttributes.ts";
-import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
+import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {PaginatedSeats, PaginatedSeatSchema} from "@/pages/seats/schema/SeatPaginationSchema.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 
 export const useFetchPaginatedSeats = (
     {page, perPage, filters = {}}: {page: number, perPage: number, filters?: QueryFilters}
 ) => {
-    const filteredQueries = filterNullAttributes(filters);
+    const filteredQueries = filterEmptyAttributes(filters);
 
     const queryKey = "fetch_paginated_seats";
     const schema = PaginatedSeatSchema;
-    const action = () => SeatRepository.paginated({queries: {page, perPage, filteredQueries}});
+    const action = () => SeatRepository.paginated({filters: {page, perPage, filteredQueries}});
 
-    return useFetchSchemaData<typeof PaginatedSeatSchema, PaginatedSeats>({queryKey, schema, action});
+    return useFetchValidatedDataWithRedirect<typeof PaginatedSeatSchema, PaginatedSeats>({queryKey, schema, action});
 }

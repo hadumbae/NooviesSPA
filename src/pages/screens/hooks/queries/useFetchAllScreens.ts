@@ -1,6 +1,6 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
-import useFetchSchemaData from "@/common/hooks/validation/useFetchSchemaData.ts";
+import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {ScreenArray, ScreenArraySchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
 
 export default function useFetchAllScreens(params?: {filters?: QueryFilters}) {
@@ -10,5 +10,5 @@ export default function useFetchAllScreens(params?: {filters?: QueryFilters}) {
     const schema = ScreenArraySchema;
     const action = () => ScreenRepository.getAll({filters});
 
-    return useFetchSchemaData<typeof ScreenArraySchema, ScreenArray>({schema, action, queryKey});
+    return useFetchValidatedDataWithRedirect<typeof ScreenArraySchema, ScreenArray>({schema, action, queryKey});
 }

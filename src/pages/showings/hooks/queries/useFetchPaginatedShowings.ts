@@ -1,5 +1,5 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
-import filterNullAttributes from "@/common/utility/filterNullAttributes.ts";
+import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
 import handleFetchError from "@/common/handlers/query/handleFetchError.ts";
 import useQueryWithRedirect from "@/common/hooks/errors/useQueryWithRedirect.ts";
@@ -21,7 +21,7 @@ export const useFetchPaginatedShowings = (params: Params) => {
 
     const queryKey = ["fetch_paginated_showings"];
 
-    const filteredQueries = filterNullAttributes(filters);
+    const filteredQueries = filterEmptyAttributes(filters);
     const paginatedFilters = {filteredQueries, page, perPage};
 
     const fetchPaginatedShowings = async () => {
