@@ -3,9 +3,9 @@ import IMovie from "@/pages/movies/interfaces/IMovie.ts";
 import {IDString, TrimmedStringSchema, URLString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {GenreSchema} from "@/pages/genres/schema/GenreSchema.ts";
 import {PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
-import {CoercedDate} from "@/common/schema/helpers/ZodDateHelpers.ts";
+import {DateStringSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
-import {CloudinaryImageObject} from "@/common/schema/CloudinaryImageObject.ts";
+import {CloudinaryImageObject} from "@/common/schema/objects/CloudinaryImageObject.ts";
 
 /**
  * Zod schema for validating a `Movie` object.
@@ -32,7 +32,7 @@ export const MovieSchema: ZodType<IMovie> = z.object({
     cast: z
         .array(z.union([IDString, z.lazy(() => PersonSchema)])),
 
-    releaseDate: CoercedDate,
+    releaseDate: DateStringSchema,
 
     durationInMinutes: RequiredNumber
         .gt(0, "Must be greater than 0."),

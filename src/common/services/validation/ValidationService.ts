@@ -1,4 +1,4 @@
-import {ZodParseErrorResponseSchema} from "@/common/schema/ZodParseErrorResponseSchema.ts";
+import {ZodParseErrorResponseSchema} from "@/common/schema/responses/ZodParseErrorResponseSchema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import {ZodIssue} from "zod";

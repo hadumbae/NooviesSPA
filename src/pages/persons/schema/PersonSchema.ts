@@ -2,7 +2,7 @@ import {z, type ZodType} from 'zod';
 import IPerson from "@/pages/persons/interfaces/IPerson.ts";
 import {IDString, TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {CountryEnum} from "@/common/schema/helpers/ZodEnumHelpers.ts";
-import {CloudinaryImageObject} from "@/common/schema/CloudinaryImageObject.ts";
+import {CloudinaryImageObject} from "@/common/schema/objects/CloudinaryImageObject.ts";
 import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 
 export const PersonSchema: ZodType<IPerson> = z.object({

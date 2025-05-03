@@ -4,7 +4,7 @@ import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import IShowingSubmit from "@/pages/showings/interfaces/IShowingSubmit.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
-import {LanguageEnum} from "@/common/schema/LanguageEnum.ts";
+import {LanguageEnum} from "@/common/schema/enums/LanguageEnum.ts";
 
 
 /**
