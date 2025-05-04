@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Movie} from "@/pages/movies/schema/MovieSchema.ts";
-import MovieListCard from "@/pages/movies/components/MovieListCard.tsx";
+import MovieListCard from "@/pages/movies/components/list/MovieListCard.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 interface Props {

@@ -1,12 +1,14 @@
 import {FC} from 'react';
+import {cn} from "@/common/lib/utils.ts";
 
 interface Props {
     text: string;
+    className?: string;
 }
 
-const LayoutTitle: FC<Props> = ({text}) => {
+const LayoutTitle: FC<Props> = ({text, className}) => {
     return (
-        <h1 className="dotgothic16-regular text-3xl">
+        <h1 className={cn("dotgothic16-regular text-xl", className)}>
             {text}
         </h1>
     );

@@ -25,6 +25,7 @@ export default <TSchema extends ZodTypeAny, TData = any>(params : Params<TSchema
     const {data: parseData, errors} = safeParseSchema<TSchema, TData>({schema, data});
 
     if (errors) {
+        console.error("Failed To Parse Data: ", errors);
         throw new ParseError({message: "Received Invalid Data.", errors});
     }
 

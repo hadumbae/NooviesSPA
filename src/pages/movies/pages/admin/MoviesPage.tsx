@@ -5,7 +5,7 @@ import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearch
 import {useFetchPaginatedMovies} from "@/pages/movies/hooks/queries/useFetchPaginatedMovies.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
-import MovieCardList from "@/pages/movies/components/MovieCardList.tsx";
+import MovieCardList from "@/pages/movies/components/list/MovieCardList.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 

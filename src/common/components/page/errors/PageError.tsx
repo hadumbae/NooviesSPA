@@ -18,6 +18,22 @@ interface Props {
 const PageError: FC<Props> = ({error, message, header = "ERROR", to, linkText}) => {
     useHttpResponseErrorHandler(error);
 
+    if (error instanceof ParseError) {
+        const {errors} = error;
+        return (
+            <PageCenter className="space-y-6">
+                <h1 className="dotgothic16-regular text-[100px]">{header}</h1>
+                <h2 className="text-neutral-500">Received Invalid Data.</h2>
+
+                <ol className="list-disc text-sm text-neutral-400">
+                    {errors.map((e, index) => <li key={index}>
+                        [{e.path.join(".")}] {e.message}
+                    </li>)}
+                </ol>
+            </PageCenter>
+        );
+    }
+
     return (
         <PageCenter className="space-y-2">
             <h1 className="dotgothic16-regular text-[100px]">{header}</h1>
