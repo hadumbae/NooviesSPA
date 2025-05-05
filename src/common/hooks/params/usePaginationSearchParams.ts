@@ -1,11 +1,12 @@
 import {useSearchParams} from "react-router-dom";
 import {paginationSearchParamSchema} from "@/common/schema/PaginationSearchParamsSchema.ts";
+import updateSearchParams from "@/common/utility/params/updateSearchParams.ts";
 
 export default function usePaginationSearchParams(
-    params?: { page?: string, perPage?: string }
+    params?: { page?: string | number, perPage?: string | number },
 ) {
     // Set Values
-    const defaultValues = { page: params?.page || "1",  perPage: params?.perPage || "100"};
+    const defaultValues = {page: params?.page?.toString() || "1", perPage: params?.perPage?.toString() || "100"};
     const [searchParams, setSearchParams] = useSearchParams(defaultValues);
 
     // Validate Params
@@ -22,11 +23,13 @@ export default function usePaginationSearchParams(
     const {page, perPage} = parsedParams.data;
 
     const setPage = (newPage: number | string) => {
-        setSearchParams({...searchParams, page: newPage.toString()});
+        const newSearchParams = updateSearchParams({searchParams, updateValues: {page: newPage.toString()}})
+        setSearchParams(newSearchParams);
     }
 
     const setPerPage = (newPerPage: number | string) => {
-        setSearchParams({...searchParams, perPage: newPerPage.toString()});
+        const newSearchParams = updateSearchParams({searchParams, updateValues: {perPage: newPerPage.toString()}})
+        setSearchParams(newSearchParams);
     }
 
     return {
