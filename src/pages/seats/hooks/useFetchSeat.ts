@@ -3,10 +3,10 @@ import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetc
 import {Seat, SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 
-export default function useFetchSeat({_id}: { _id: ObjectId }) {
-    const queryKey = "fetch_single_seat";
+export default function useFetchSeat({_id, populate = false}: { _id: ObjectId, populate?: boolean }) {
+    const queryKey = ["fetch_single_seat", {_id, populate}];
     const schema = SeatSchema;
-    const action = () => SeatRepository.get({_id, populate: true});
+    const action = () => SeatRepository.get({_id, populate});
 
     return useFetchValidatedDataWithRedirect<typeof SeatSchema, Seat>({queryKey, schema, action});
 }

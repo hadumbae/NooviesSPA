@@ -17,7 +17,7 @@ export default function useFetchPaginatedTheatreScreens(params: UseFetchTheatreS
     const {theatreID, page = 1, perPage = 10, showingsPerScreen = 3} = params;
     const queries = {page, perPage, showingsPerScreen};
 
-    const queryKey = "fetch_theatre_screens";
+    const queryKey = ["fetch_theatre_screens", queries];
     const schema = PaginatedTheatreScreenSchema;
     const action = () => TheatreScreenRepository.fetchTheatreScreens({theatreID, queries});
 

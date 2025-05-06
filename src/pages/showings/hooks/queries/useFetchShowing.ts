@@ -1,7 +1,7 @@
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
-import useQueryWithRedirect from "@/common/hooks/errors/useQueryWithRedirect.ts";
-import handleFetchError from "@/common/handlers/query/handleFetchError.ts";
+import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
+import {Showing, ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 
 /**
  * Custom hook to fetch a single showing's data by its ID.
@@ -21,15 +21,9 @@ import handleFetchError from "@/common/handlers/query/handleFetchError.ts";
 export default function useFetchShowing(params: { _id: ObjectId, populate?: boolean }) {
     const {_id, populate = false} = params;
 
-    const queryKey = "fetch_single_showing";
-    const fetchData = async () => {
-        const action = () => ShowingRepository.get({_id, populate});
-        const {result} = await handleFetchError({fetchQueryFn: action});
-        return result;
-    }
+    const queryKey = ["fetch_single_showing", {_id, populate}];
+    const schema = ShowingSchema;
+    const action = () => ShowingRepository.get({_id, populate});
 
-    return useQueryWithRedirect({
-        queryKey: [queryKey],
-        queryFn: fetchData,
-    });
+    return useFetchValidatedDataWithRedirect<typeof ShowingSchema, Showing>({queryKey, schema, action});
 }

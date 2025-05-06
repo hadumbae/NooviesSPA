@@ -5,13 +5,13 @@ import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetc
 import {UseQueryResult} from "@tanstack/react-query";
 
 export default function useFetchAllGenres(
-    params?: { filters?: QueryFilters, populate?: string[] }
+    params?: { filters?: QueryFilters, populate?: boolean }
 ): UseQueryResult<GenreArray> {
-    const {filters = {}} = params || {};
+    const {filters = {}, populate = false} = params || {};
 
-    const queryKey = "fetch_all_genres";
+    const queryKey = ["fetch_all_genres", {filters, populate}];
     const schema = GenreArraySchema;
-    const action = () => GenreRepository.getAll({filters});
+    const action = () => GenreRepository.getAll({filters, populate});
 
     return useFetchValidatedDataWithRedirect<typeof schema, GenreArray>({queryKey, schema, action});
 }

@@ -9,7 +9,7 @@ export const useFetchPaginatedTheatres = (
 ) => {
     const filteredQueries = filterEmptyAttributes(filters);
 
-    const queryKey = "fetch_paginated_theatres";
+    const queryKey = ["fetch_paginated_theatres", {page, perPage, filters: filteredQueries}];
     const schema = PaginatedTheatreSchema;
     const action = () => TheatreRepository.paginated({filters: {page, perPage, filteredQueries}});
 

@@ -17,7 +17,7 @@ export default function useFetchPaginatedMoviesWithData(params: IPaginatedMovieP
     const {page, perPage, query, sort} = params;
     const filteredQuery = filterEmptyAttributes({...query, ...sort});
 
-    const queryKey = "fetch_paginated_movies_with_data";
+    const queryKey = ["fetch_paginated_movies_with_data", {page, perPage, query: filteredQuery}];
     const schema = PaginatedMovieSchema;
     const action = () => MovieQueryRepository.fetchPaginatedMoviesWithData({page, perPage, queries: filteredQuery});
 

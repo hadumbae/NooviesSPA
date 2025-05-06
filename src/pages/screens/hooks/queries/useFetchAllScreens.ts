@@ -6,7 +6,7 @@ import {ScreenArray, ScreenArraySchema} from "@/pages/screens/schema/base/Screen
 export default function useFetchAllScreens(params?: {filters?: QueryFilters}) {
     const {filters = {}} = params || {};
 
-    const queryKey = "fetch_all_screens";
+    const queryKey = ["fetch_all_screens", filters];
     const schema = ScreenArraySchema;
     const action = () => ScreenRepository.getAll({filters});
 

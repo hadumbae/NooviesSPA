@@ -3,6 +3,7 @@ import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetc
 import {UseQueryResult} from "@tanstack/react-query";
 import {ShowingArray, ShowingArraySchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
+import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 
 /**
  * Custom hook to fetch all showings from the API with optional filters.
@@ -19,12 +20,15 @@ import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.t
  * @returns {UseQueryResult<ShowingArray>} - Query result object containing the fetched showings,
  * loading status, error details, and other utilities from the TanStack Query library.
  */
-export default function useFetchAllShowings(params?: {filters?: QueryFilters}): UseQueryResult<ShowingArray> {
-    const {filters = {}} = params || {};
+export default function useFetchAllShowings(
+    params?: { populate?: boolean, filters?: QueryFilters }
+): UseQueryResult<ShowingArray> {
+    const {populate = false, filters = {}} = params || {};
+    const filteredQueries = filterEmptyAttributes(filters);
 
-    const queryKey = "fetch_all_showings";
+    const queryKey = ["fetch_all_showings", {populate, filters: filteredQueries}];
     const schema = ShowingArraySchema;
-    const action = () => ShowingRepository.getAll({filters});
+    const action = () => ShowingRepository.getAll({filters, populate});
 
     return useFetchValidatedDataWithRedirect<typeof schema, ShowingArray>({schema, action, queryKey});
 }

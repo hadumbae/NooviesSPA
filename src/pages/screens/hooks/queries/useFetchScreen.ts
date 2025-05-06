@@ -4,7 +4,7 @@ import {ScreenSchema, Screen} from "@/pages/screens/schema/base/ScreenSchema.ts"
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 
 export default function useFetchScreen({_id}: { _id: ObjectId }) {
-    const queryKey = "fetch_single_screen";
+    const queryKey = ["fetch_single_screen", {_id}];
     const schema = ScreenSchema;
     const action = () => ScreenRepository.get({_id, populate: true});
 

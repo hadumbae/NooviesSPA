@@ -22,7 +22,7 @@ import {UseQueryResult} from "@tanstack/react-query";
 export default function useFetchAllMovies(params?: {filters?: QueryFilters}): UseQueryResult<MovieArray> {
     const {filters = {}} = params || {};
 
-    const queryKey = "fetch_all_movies";
+    const queryKey = ["fetch_all_movies", {filters}];
     const schema = MovieArraySchema;
     const action = () => MovieRepository.getAll({filters});
 

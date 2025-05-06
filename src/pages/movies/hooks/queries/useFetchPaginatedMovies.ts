@@ -9,7 +9,7 @@ export const useFetchPaginatedMovies = (
 ) => {
     const filteredQueries = filterEmptyAttributes(filters);
 
-    const queryKey = "fetch_paginated_movies";
+    const queryKey = ["fetch_paginated_movies", {page, perPage, filters: filteredQueries}];
     const schema = PaginatedMovieSchema;
     const action = () => MovieRepository.paginated({filters: {page, perPage, filteredQueries}});
 

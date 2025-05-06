@@ -1,4 +1,4 @@
-import {UseQueryResult} from "@tanstack/react-query";
+import {QueryKey, UseQueryResult} from "@tanstack/react-query";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 import fetchReturns from "@/common/type/fetch/FetchReturns.ts";
@@ -6,7 +6,7 @@ import {ZodType} from "zod";
 import useQueryWithRedirect from "@/common/hooks/errors/useQueryWithRedirect.ts";
 
 interface Props<TSchema extends ZodType, TReturnData> {
-    queryKey: string,
+    queryKey: QueryKey,
     schema: TSchema;
     action: () => Promise<fetchReturns<TReturnData>>;
 }
@@ -35,8 +35,5 @@ export default function useFetchValidatedDataWithRedirect<TSchema extends ZodTyp
         return parseResponseData<TSchema, TReturnData>({schema, data});
     };
 
-    return useQueryWithRedirect({
-        queryKey: [queryKey],
-        queryFn: fetchData,
-    });
+    return useQueryWithRedirect({queryKey, queryFn: fetchData});
 }

@@ -1,18 +1,12 @@
 import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import SeatMapRepository from "@/pages/seatmap/repositories/SeatMapRepository.ts";
-import useQueryWithRedirect from "@/common/hooks/errors/useQueryWithRedirect.ts";
-import handleFetchError from "@/common/handlers/query/handleFetchError.ts";
+import {SeatMap, SeatMapSchema} from "@/pages/seatmap/schema/SeatMapSchema.ts";
+import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 
 export default function useFetchSeatMap({_id, populate}: {_id: ObjectId, populate?: boolean}) {
-    const queryKey = "fetch_single_seat_map";
-    const fetchSeatMap = async () => {
-        const action = () => SeatMapRepository.get({_id: _id, populate});
-        const {result} = await handleFetchError({fetchQueryFn: action});
-        return result;
-    }
+    const queryKey = ["fetch_single_seat_map", {_id, populate}];
+    const action = () => SeatMapRepository.get({_id: _id, populate});
+    const schema = SeatMapSchema;
 
-    return useQueryWithRedirect({
-        queryKey: [queryKey],
-        queryFn: fetchSeatMap,
-    });
+    return useFetchValidatedDataWithRedirect<typeof SeatMapSchema, SeatMap>({queryKey, action, schema});
 }

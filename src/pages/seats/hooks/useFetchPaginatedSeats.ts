@@ -9,7 +9,7 @@ export const useFetchPaginatedSeats = (
 ) => {
     const filteredQueries = filterEmptyAttributes(filters);
 
-    const queryKey = "fetch_paginated_seats";
+    const queryKey = ["fetch_paginated_seats", {page, perPage, filters: filteredQueries}];
     const schema = PaginatedSeatSchema;
     const action = () => SeatRepository.paginated({filters: {page, perPage, filteredQueries}});
 

@@ -3,6 +3,7 @@ import SeatMapShowingRepository from "@/pages/seatmap/repositories/SeatMapShowin
 
 import SeatMapFilters from "@/pages/seatmap/types/SeatMapFilters.ts";
 import {PaginatedSeatMaps, PaginatedSeatMapSchema} from "@/pages/seatmap/schema/SeatMapPaginationSchema.ts";
+import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 
 
 interface Params {
@@ -40,14 +41,16 @@ interface Params {
  */
 export default function useFetchPaginatedShowingSeating(params: Params) {
     const {showingID, page = 1, perPage = 50, filters = {}} = params;
+    const filteredQueries = filterEmptyAttributes(filters)
 
-    const queryKey = "fetch_showing_seating";
+    const queryKey = ["fetch_showing_seating", {showingID, page, perPage, filters: filteredQueries}];
     const schema = PaginatedSeatMapSchema;
-    const action = () => SeatMapShowingRepository.fetchShowingSeatMap({showingID, page, perPage, filters});
-
-    return useFetchValidatedDataWithRedirect<typeof schema, PaginatedSeatMaps>({
-        queryKey,
-        schema,
-        action,
+    const action = () => SeatMapShowingRepository.fetchShowingSeatMap({
+        showingID,
+        page,
+        perPage,
+        filters: filteredQueries
     });
+
+    return useFetchValidatedDataWithRedirect<typeof schema, PaginatedSeatMaps>({queryKey, schema, action});
 }

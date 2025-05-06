@@ -12,7 +12,7 @@ const ShowingSeatRepository: IShowingSeatRepository = {
     baseURL: `${import.meta.env.VITE_API_URL}/api/v1/admin/showings`,
 
     async fetchSeatsForShowing(
-        params: { showingID: ObjectId, populate: boolean, mapped: boolean }
+        params: { showingID: ObjectId, populate?: boolean, mapped?: boolean }
     ): Promise<FetchReturns> {
         const {showingID, populate = false, mapped = false} = params;
 
