@@ -8,20 +8,6 @@
  *
  * @param data - An object containing key-value pairs to be filtered.
  * @returns A new object with all properties that had empty values removed.
- *
- * @example
- * ```ts
- * const input = {
- *   name: '',
- *   age: 0,
- *   subscribed: false,
- *   email: null,
- *   phone: undefined,
- * };
- *
- * const result = filterEmptyAttributes(input);
- * // result: { age: 0, subscribed: false }
- * ```
  */
 export default function filterEmptyAttributes(data: Record<string, any>) {
     return Object.fromEntries(

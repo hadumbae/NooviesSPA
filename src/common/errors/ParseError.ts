@@ -6,6 +6,9 @@ import {ZodIssue} from "zod";
  * @extends Error
  */
 export class ParseError extends Error {
+    /* The raw data. */
+    raw: unknown;
+
     /** Array of Zod issues encountered during parsing. */
     errors: ZodIssue[];
 
@@ -16,13 +19,14 @@ export class ParseError extends Error {
      * @param {string} [params.message] - Optional error message.
      * @param {ZodIssue[]} params.errors - Array of Zod issues encountered during parsing.
      */
-    constructor({message, errors}: {message?: string, errors: ZodIssue[]}) {
+    constructor({message, errors, raw}: {message?: string, raw?: unknown, errors: ZodIssue[]}) {
         super(message);
 
         if (Error.captureStackTrace) Error.captureStackTrace(this, ParseError);
 
         this.name = this.constructor.name;
         this.errors = errors;
+        this.raw = raw;
     }
 
     /**
