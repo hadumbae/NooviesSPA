@@ -1,5 +1,4 @@
-import {z, ZodType} from "zod";
-import IMovie from "@/pages/movies/interfaces/IMovie.ts";
+import {z} from "zod";
 import {IDString, TrimmedStringSchema, URLString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {GenreSchema} from "@/pages/genres/schema/GenreSchema.ts";
 import {PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
@@ -12,7 +11,7 @@ import {CloudinaryImageObject} from "@/common/schema/objects/CloudinaryImageObje
  *
  * This schema defines the structure and validation rules for a `Movie` object.
  */
-export const MovieSchema: ZodType<IMovie> = z.object({
+export const MovieSchema = z.object({
     _id: IDString.readonly(),
 
     title: TrimmedStringSchema
