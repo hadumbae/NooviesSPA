@@ -1,9 +1,9 @@
 import {z} from "zod";
-import {TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {ZodParseIssueSchema} from "@/common/schema/errors/ZodParseIssueSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 
 export const ZodParseErrorResponseSchema = z.object({
-    message: TrimmedStringSchema,
+    message: NonEmptyStringSchema,
     errors: z.array(ZodParseIssueSchema).length(1, "Must have at least one issue."),
 });
 

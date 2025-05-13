@@ -1,7 +1,7 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import ITheatre from "@/pages/theatres/interfaces/ITheatre.ts";
 import {IScreen} from "@/pages/screens/interfaces/IScreen.ts";
 import {SeatType} from "@/pages/seats/schema/SeatTypeEnum.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 export default interface ISeat {
     readonly _id: ObjectId

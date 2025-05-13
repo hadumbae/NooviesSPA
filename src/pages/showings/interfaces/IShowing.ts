@@ -1,8 +1,8 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import IMovie from "@/pages/movies/interfaces/IMovie.ts";
 import ITheatre from "@/pages/theatres/interfaces/ITheatre.ts";
 import {IScreen} from "@/pages/screens/interfaces/IScreen.ts";
 import ISeatMap from "@/pages/seatmap/interfaces/ISeatMap.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 /**
  * Represents a movie showing within a theatre.

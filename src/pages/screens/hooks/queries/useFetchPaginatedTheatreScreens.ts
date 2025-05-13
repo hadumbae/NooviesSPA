@@ -1,10 +1,10 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {TheatreScreenRepository} from "@/pages/theatres/repositories/TheatreScreenRepository.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {
     PaginatedTheatreScreens,
     PaginatedTheatreScreenSchema
 } from "@/pages/screens/schema/theatre/TheatreScreenPaginationSchema.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface UseFetchTheatreScreensParams {
     theatreID: ObjectId;

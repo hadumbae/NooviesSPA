@@ -4,8 +4,8 @@ import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.t
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
 import ErrorMessage from "@/common/components/text/ErrorMessage.tsx";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import useFetchSeatsForShowing from "@/pages/showings/hooks/queries/useFetchSeatsForShowing.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface Props<T extends FieldValues> {
     name: Path<T>,

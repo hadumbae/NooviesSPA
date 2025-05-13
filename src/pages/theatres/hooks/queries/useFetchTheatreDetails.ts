@@ -1,7 +1,7 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import useFetchTheatre from "@/pages/theatres/hooks/queries/useFetchTheatre.ts";
 import {useFetchPaginatedScreens} from "@/pages/screens/hooks/queries/useFetchPaginatedScreens.ts";
 import {useFetchPaginatedShowings} from "@/pages/showings/hooks/queries/useFetchPaginatedShowings.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface Params {
     theatreID: ObjectId;

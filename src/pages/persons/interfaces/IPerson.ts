@@ -1,5 +1,5 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import ICloudinaryImage from "@/common/interfaces/ICloudinaryImage.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 export default interface IPerson {
     readonly _id: ObjectId,

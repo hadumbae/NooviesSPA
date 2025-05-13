@@ -1,10 +1,10 @@
 import {z, ZodType} from "zod";
-import {IDString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
 import {ScreenBaseSchema} from "@/pages/screens/schema/base/ScreenBaseSchema.ts";
 import {ShowingWithMovieSchema} from "@/pages/showings/schema/populated/ShowingWithMovieSchema.ts";
 import ITheatreScreen from "@/pages/screens/interfaces/ITheatreScreen.ts";
+import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 
 /**
  * Schema for a theatre screen, extending the base screen schema with additional properties:
@@ -16,8 +16,8 @@ import ITheatreScreen from "@/pages/screens/interfaces/ITheatreScreen.ts";
  * This schema is used to validate and infer the `ITheatreScreen` type.
  */
 export const TheatreScreenSchema: ZodType<ITheatreScreen> = ScreenBaseSchema.extend({
-    theatre: z.union([IDString, z.lazy(() => TheatreSchema)]),
-    seats: z.array(z.union([IDString, z.lazy(() => SeatSchema)])),
+    theatre: z.union([IDStringSchema, z.lazy(() => TheatreSchema)]),
+    seats: z.array(z.union([IDStringSchema, z.lazy(() => SeatSchema)])),
     showings: z.array(z.lazy(() => ShowingWithMovieSchema)),
 });
 

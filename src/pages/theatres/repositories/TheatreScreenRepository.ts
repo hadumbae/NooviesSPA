@@ -1,7 +1,7 @@
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface IFetchTheatreScreensParams {
     theatreID: ObjectId;

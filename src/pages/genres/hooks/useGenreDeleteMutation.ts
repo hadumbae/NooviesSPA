@@ -1,9 +1,9 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {useMutation} from "@tanstack/react-query";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
 import {toast} from "react-toastify";
 import {ParseError} from "@/common/errors/ParseError.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface IUseDeleteGenreMutationParams {
     onDelete: () => void,

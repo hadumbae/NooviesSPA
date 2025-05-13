@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {IDString, ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {toast} from "react-toastify";
 import {useEffect, useMemo} from "react";
+import {IDStringSchema, ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 /**
  * Custom hook to read and validate a `movieID` route parameter, with optional redirection on failure.
@@ -25,7 +25,7 @@ export default function useFetchMovieBrowseParams(params?: { navigateLink?: stri
     const {movieID} = useParams<{ movieID: ObjectId }>();
 
     const parsedMovieID = useMemo(() => {
-        const {success, data} = IDString.safeParse(movieID);
+        const {success, data} = IDStringSchema.safeParse(movieID);
         return success && data ? data : undefined;
     }, [movieID]);
 

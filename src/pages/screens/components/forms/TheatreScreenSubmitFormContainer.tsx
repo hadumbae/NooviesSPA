@@ -3,8 +3,8 @@ import useScreenSubmitForm from "@/pages/screens/hooks/forms/useScreenSubmitForm
 import useScreenSubmitMutation from "@/pages/screens/hooks/mutations/useScreenSubmitMutation.ts";
 import {ScreenSubmit} from "@/pages/screens/schema/ScreenSubmitSchema.ts";
 import ScreenSubmitFormView from "@/pages/screens/components/forms/ScreenSubmitFormView.tsx";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface Props {
     theatreID: ObjectId;

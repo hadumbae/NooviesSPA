@@ -1,9 +1,9 @@
 import {useMutation} from "@tanstack/react-query";
 import {UserPasswordUpdateSubmit} from "@/pages/users/schemas/UserPasswordUpdateSubmitSchema.ts";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import UserRepository from "@/pages/users/repositories/UserRepository.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {toast} from "react-toastify";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface IParams {
     userID: ObjectId;

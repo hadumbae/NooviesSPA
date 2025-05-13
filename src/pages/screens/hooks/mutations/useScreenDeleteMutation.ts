@@ -1,9 +1,9 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {useMutation} from "@tanstack/react-query";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import {toast} from "react-toastify";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface Params {
     onDelete?: () => void;

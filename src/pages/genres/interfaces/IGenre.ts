@@ -1,4 +1,4 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 export default interface IGenre {
     readonly _id: ObjectId;

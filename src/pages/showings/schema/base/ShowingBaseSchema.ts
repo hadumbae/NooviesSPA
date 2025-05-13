@@ -1,8 +1,9 @@
 import {z} from "zod";
-import {IDString, TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 
 /**
  * Zod schema for validating a `Showing` object.
@@ -10,7 +11,7 @@ import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
  * This schema defines the structure and validation rules for a `Showing` object.
  */
 export default z.object({
-    _id: IDString
+    _id: IDStringSchema
         .readonly(),
 
     startTime: CoercedDateSchema,
@@ -20,10 +21,10 @@ export default z.object({
     ticketPrice: RequiredNumber
         .gt(0, "Must be greater than 0"),
 
-    language: TrimmedStringSchema,
+    language: NonEmptyStringSchema,
 
     subtitleLanguages: z
-        .array(TrimmedStringSchema)
+        .array(NonEmptyStringSchema)
         .nonempty({message: "Must not be empty."}),
 
     isSpecialEvent: RequiredBoolean

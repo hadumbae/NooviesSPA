@@ -1,12 +1,13 @@
 import {z} from "zod";
-import {IDString, TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {ScreenTypeEnum} from "@/pages/screens/schema/ScreenTypeEnum.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 
 export const ScreenBaseSchema = z.object({
-    _id: IDString,
+    _id: IDStringSchema,
 
-    name: TrimmedStringSchema
+    name: NonEmptyStringSchema
         .min(1, "Required.")
         .max(255, "Name must be 255 characters or less."),
 

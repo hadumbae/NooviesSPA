@@ -1,8 +1,8 @@
 import {z, ZodType} from "zod";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
-import {RefinedIDString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import ISeatMapSubmit from "@/pages/seatmap/interfaces/ISeatMapSubmit.ts";
+import {RefinedIDStringSchema} from "@/common/schema/strings/RefinedIDStringSchema.ts";
 
 /**
  * Zod schema for validating `SeatMap` submission data.
@@ -24,9 +24,9 @@ export const SeatMapSubmitSchema: ZodType<ISeatMapSubmit> = z.object({
         .refine((price) => price !== "", {message: "Required."})
         .refine((price) => price > 0, {message: "Must be 0 or greater."}),
 
-    seat: RefinedIDString,
+    seat: RefinedIDStringSchema,
 
-    showing: RefinedIDString,
+    showing: RefinedIDStringSchema,
 });
 
 /**

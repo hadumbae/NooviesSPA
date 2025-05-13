@@ -1,11 +1,11 @@
 import {z, ZodType} from "zod";
-import {IDString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {ScreenSchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import {MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
 import IShowing from "@/pages/showings/interfaces/IShowing.ts";
 import {SeatMapSchema} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import ShowingBaseSchema from "@/pages/showings/schema/base/ShowingBaseSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 
 /**
  * Zod schema for validating a `Showing` object.
@@ -14,16 +14,16 @@ import ShowingBaseSchema from "@/pages/showings/schema/base/ShowingBaseSchema.ts
  */
 export const ShowingSchema: ZodType<IShowing> = ShowingBaseSchema.extend({
     movie: z
-        .union([IDString, z.lazy(() => MovieSchema)]),
+        .union([IDStringSchema, z.lazy(() => MovieSchema)]),
 
     theatre: z
-        .union([IDString, z.lazy(() => TheatreSchema)]),
+        .union([IDStringSchema, z.lazy(() => TheatreSchema)]),
 
     screen: z
-        .union([IDString, z.lazy(() => ScreenSchema)]),
+        .union([IDStringSchema, z.lazy(() => ScreenSchema)]),
 
     seating: z
-        .array(z.union([IDString, z.lazy(() => SeatMapSchema)])),
+        .array(z.union([IDStringSchema, z.lazy(() => SeatMapSchema)])),
 });
 
 /**

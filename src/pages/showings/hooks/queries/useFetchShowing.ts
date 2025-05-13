@@ -1,7 +1,7 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {Showing, ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 /**
  * Custom hook to fetch a single showing's data by its ID.

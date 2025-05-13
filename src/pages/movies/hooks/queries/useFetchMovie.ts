@@ -1,7 +1,7 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {Movie, MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 export default function useFetchMovie({_id}: { _id: ObjectId }) {
     const queryKey = ["fetch_single_movie", {_id}];

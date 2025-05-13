@@ -1,20 +1,21 @@
 import {z, ZodType} from "zod";
 import ISeat from "@/pages/seats/interfaces/ISeat.ts";
-import {IDString, TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {SeatTypeEnum} from "@/pages/seats/schema/SeatTypeEnum.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {ScreenSchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 
 export const SeatSchema: ZodType<ISeat> = z.object({
-    _id: IDString,
+    _id: IDStringSchema,
 
-    row: TrimmedStringSchema
+    row: NonEmptyStringSchema
         .min(1, "Required.")
         .max(50, "Must be 50 characters or less."),
 
-    seatNumber: TrimmedStringSchema
+    seatNumber: NonEmptyStringSchema
         .min(1, "Required.")
         .max(50, "Must be 50 characters or less."),
 
@@ -26,10 +27,10 @@ export const SeatSchema: ZodType<ISeat> = z.object({
         .gte(0, "Must be 0 or greater."),
 
     theatre: z
-        .union([IDString, z.lazy(() => TheatreSchema)]),
+        .union([IDStringSchema, z.lazy(() => TheatreSchema)]),
 
     screen: z
-        .union([IDString, z.lazy(() => ScreenSchema)]),
+        .union([IDStringSchema, z.lazy(() => ScreenSchema)]),
 });
 
 export const SeatArraySchema = z.array(SeatSchema);

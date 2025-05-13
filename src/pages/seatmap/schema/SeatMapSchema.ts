@@ -1,9 +1,9 @@
 import {z, ZodType} from "zod";
 import ISeatMap from "@/pages/seatmap/interfaces/ISeatMap.ts";
-import {IDString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
 import {ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import SeatMapBaseSchema from "@/pages/seatmap/schema/SeatMapBaseSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 
 /**
  * Zod schema for validating a `SeatMap` object.
@@ -13,13 +13,13 @@ import SeatMapBaseSchema from "@/pages/seatmap/schema/SeatMapBaseSchema.ts";
 export const SeatMapSchema: ZodType<ISeatMap> = SeatMapBaseSchema.extend({
     seat: z
         .union([
-            IDString,
+            IDStringSchema,
             z.lazy(() => SeatSchema),
         ]),
 
     showing: z
         .union([
-            IDString,
+            IDStringSchema,
             z.lazy(() => ShowingSchema),
         ]),
 });

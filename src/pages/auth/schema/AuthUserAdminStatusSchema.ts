@@ -1,9 +1,9 @@
 import {z} from "zod";
-import {IDString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
+import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 
 export const AuthUserAdminStatusSchema = z.object({
-    userID: IDString,
+    userID: IDStringSchema,
     isAdmin: RequiredBoolean,
 });
 

@@ -1,10 +1,12 @@
 import {z} from "zod";
-import {IDString, TrimmedStringSchema, URLString} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {GenreSchema} from "@/pages/genres/schema/GenreSchema.ts";
 import {PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
 import {DateStringSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {CloudinaryImageObject} from "@/common/schema/objects/CloudinaryImageObject.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
 
 /**
  * Zod schema for validating a `Movie` object.
@@ -12,24 +14,24 @@ import {CloudinaryImageObject} from "@/common/schema/objects/CloudinaryImageObje
  * This schema defines the structure and validation rules for a `Movie` object.
  */
 export const MovieSchema = z.object({
-    _id: IDString.readonly(),
+    _id: IDStringSchema.readonly(),
 
-    title: TrimmedStringSchema
+    title: NonEmptyStringSchema
         .min(1, "Title must be at least 1 character long.")
         .max(1000, "Title must be 1000 characters or less."),
 
-    description: TrimmedStringSchema
+    description: NonEmptyStringSchema
         .trim()
         .max(2000, "Description must be 2000 characters or less."),
 
     genres: z
-        .array(z.union([IDString, z.lazy(() => GenreSchema)])),
+        .array(z.union([IDStringSchema, z.lazy(() => GenreSchema)])),
 
     directors: z
-        .array(z.union([IDString,z.lazy(() => PersonSchema)])),
+        .array(z.union([IDStringSchema,z.lazy(() => PersonSchema)])),
 
     cast: z
-        .array(z.union([IDString, z.lazy(() => PersonSchema)])),
+        .array(z.union([IDStringSchema, z.lazy(() => PersonSchema)])),
 
     releaseDate: DateStringSchema,
 
@@ -37,22 +39,22 @@ export const MovieSchema = z.object({
         .gt(0, "Must be greater than 0."),
 
     languages: z
-        .array(TrimmedStringSchema),
+        .array(NonEmptyStringSchema),
 
     subtitles: z
-        .array(TrimmedStringSchema),
+        .array(NonEmptyStringSchema),
 
     posterImage: z.union([z.null(), CloudinaryImageObject]),
 
     trailerURL: z
-        .union([z.null(), URLString])
+        .union([z.null(), URLStringSchema])
         .optional(),
 
     price: RequiredNumber
         .gte(0, "Must be 0 or greater."),
 
     showings: z
-        .array(z.union([IDString, z.any()])),
+        .array(z.union([IDStringSchema, z.any()])),
 });
 
 /**

@@ -1,9 +1,9 @@
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 type PaginatedFilters = { page: number, perPage: number } & QueryFilters;
 

@@ -1,19 +1,20 @@
 import {z} from "zod";
-import {EmailString, TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {EmailStringSchema} from "@/common/schema/strings/EmailStringSchema.ts";
 
 export const UserRegisterSchema = z.object({
-    name: TrimmedStringSchema
+    name: NonEmptyStringSchema
         .min(3, "Name must be at least 3 characters.")
         .max(255, "Name must not be more than 255 characters."),
 
-    email: EmailString
+    email: EmailStringSchema
         .max(255, "Email must not be more than 255 characters."),
 
-    password: TrimmedStringSchema
+    password: NonEmptyStringSchema
         .min(16, "Password must be at least 16 characters.")
         .max(255, "Password must not be more than 255 characters."),
 
-    confirm: TrimmedStringSchema
+    confirm: NonEmptyStringSchema
         .min(16, "Confirm must be at least 16 characters.")
         .max(255, "Confirm must not be more than 255 characters."),
 }).superRefine((values, ctx) => {

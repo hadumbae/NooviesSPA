@@ -2,8 +2,8 @@ import {useMutation} from "@tanstack/react-query";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import {toast} from "react-toastify";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface Params {
     onDelete: () => void;

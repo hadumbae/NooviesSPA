@@ -1,5 +1,6 @@
 import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
+
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 export default function useGenerateMovieGenreString({genres}: {genres: (Genre | ObjectId)[]}): string {
     if (!Array.isArray(genres)) throw new Error("[Genre String] Invalid Genre Array");

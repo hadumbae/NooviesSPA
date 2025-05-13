@@ -1,9 +1,9 @@
 import useFetchShowing from "@/pages/showings/hooks/queries/useFetchShowing.ts";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import useFetchPaginatedShowingSeating from "@/pages/seatmap/hooks/queries/useFetchPaginatedShowingSeating.ts";
 import {UseQueryResult} from "@tanstack/react-query";
 import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import {PaginatedSeatMaps} from "@/pages/seatmap/schema/SeatMapPaginationSchema.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface useFetchShowingWithSeatingReturns {
     query: {showing: UseQueryResult<Showing, Error>, seating: UseQueryResult<PaginatedSeatMaps, Error>};

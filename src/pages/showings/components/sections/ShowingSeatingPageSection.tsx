@@ -3,10 +3,10 @@ import ShowingSeatMapCompactList from "@/pages/showings/components/seatmap/Showi
 import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import {Link} from "react-router-dom";
 import PageSection from "@/common/components/page/PageSection.tsx";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {Plus} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface ShowingSeatingPageSectionProps {
     seating: SeatMap[];

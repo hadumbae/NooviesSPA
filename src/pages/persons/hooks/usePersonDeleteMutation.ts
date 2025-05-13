@@ -1,9 +1,9 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {toast} from "react-toastify";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface IUsePersonDeleteMutationParams {
     onDelete: () => void;

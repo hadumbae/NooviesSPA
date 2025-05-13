@@ -22,7 +22,8 @@ import {
 } from "@/common/components/ui/drawer"
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import TheatreScreenSubmitFormContainer from "@/pages/screens/components/forms/TheatreScreenSubmitFormContainer.tsx";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
+
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface Props {
     theatreID: ObjectId;

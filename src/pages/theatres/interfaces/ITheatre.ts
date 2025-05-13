@@ -1,6 +1,6 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {IScreen} from "@/pages/screens/interfaces/IScreen.ts";
 import ISeat from "@/pages/seats/interfaces/ISeat.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 export default interface ITheatre {
     _id: ObjectId,

@@ -1,10 +1,10 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import MovieFavouriteRepository from "@/pages/movies/repositories/MovieFavouriteRepository.ts";
 import {Movie, MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {toast} from "react-toastify";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import parseData from "@/common/utility/validation/parseData.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface AddFavouriteParams {
     movieID: ObjectId;

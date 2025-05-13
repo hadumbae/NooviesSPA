@@ -1,9 +1,9 @@
 import {FC} from 'react';
 import useUpdateUserPasswordForm from "@/pages/users/hooks/form/useUpdateUserPasswordForm.ts";
 import useUpdateUserPasswordSubmitMutation from "@/pages/users/hooks/mutations/useUpdateUserPasswordSubmitMutation.ts";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {UserPasswordUpdateSubmit} from "@/pages/users/schemas/UserPasswordUpdateSubmitSchema.ts";
 import UpdateUserPasswordFormView from "@/pages/client/user/components/forms/UpdateUserPasswordFormView.tsx";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface UpdateUserPasswordFormContainerProps {
     userID: ObjectId;

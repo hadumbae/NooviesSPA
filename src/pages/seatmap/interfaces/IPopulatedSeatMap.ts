@@ -1,6 +1,6 @@
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import ISeat from "@/pages/seats/interfaces/ISeat.ts";
 import IShowing from "@/pages/showings/interfaces/IShowing.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 export default interface IPopulatedSeatMap {
     readonly _id: ObjectId;

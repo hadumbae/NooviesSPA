@@ -3,9 +3,9 @@ import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import {AuthUserAdminStatus, AuthUserAdminStatusSchema} from "@/pages/auth/schema/AuthUserAdminStatusSchema.ts";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {AuthUserDetails, AuthUserDetailsSchema} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
 import Cookies from "js-cookie";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface IAuthService {
     baseURL: string;

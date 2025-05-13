@@ -1,18 +1,19 @@
 import {z, type ZodType} from 'zod';
 import IPerson from "@/pages/persons/interfaces/IPerson.ts";
-import {IDString, TrimmedStringSchema} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {CountryEnum} from "@/common/schema/helpers/ZodEnumHelpers.ts";
 import {CloudinaryImageObject} from "@/common/schema/objects/CloudinaryImageObject.ts";
 import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 
 export const PersonSchema: ZodType<IPerson> = z.object({
-    _id: IDString.readonly(),
+    _id: IDStringSchema.readonly(),
 
-    name: TrimmedStringSchema
+    name: NonEmptyStringSchema
         .min(3, "Must be at least 3 characters.")
         .max(255, "Name must not be more than 255 characters."),
 
-    biography: TrimmedStringSchema
+    biography: NonEmptyStringSchema
         .min(1, "Required.")
         .max(1000, "Must be 1000 characters or less."),
 
@@ -24,7 +25,7 @@ export const PersonSchema: ZodType<IPerson> = z.object({
         .union([z.null(), CloudinaryImageObject.readonly()]),
 
     movies: z
-        .array(z.union([IDString, z.any()])),
+        .array(z.union([IDStringSchema, z.any()])),
 });
 
 export const PersonArraySchema = z.array(PersonSchema);

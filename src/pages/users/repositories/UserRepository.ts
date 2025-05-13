@@ -1,8 +1,8 @@
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
-import {ObjectId} from "@/common/schema/helpers/ZodStringHelpers.ts";
 import {UserPasswordUpdateSubmit} from "@/pages/users/schemas/UserPasswordUpdateSubmitSchema.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface IUserRepository {
     baseURL: string;
