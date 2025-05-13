@@ -3,7 +3,7 @@ import MovieFavouriteRepository from "@/pages/movies/repositories/MovieFavourite
 import {Movie, MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {toast} from "react-toastify";
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import parseData from "@/common/utility/validation/parseData.ts";
 
 interface AddFavouriteParams {
@@ -13,16 +13,20 @@ interface AddFavouriteParams {
 }
 
 export default function useAddMovieToFavouritesMutation({movieID, onSuccess, onError}: AddFavouriteParams) {
+    const queryClient = useQueryClient();
     const mutationKey = ["add_movie_to_favourite", {movieID}];
 
-    const addToFavourites = async ({movieID}: { movieID: ObjectId }) => {
+    const addToFavourites = async () => {
         const {response, result} = await MovieFavouriteRepository.addToFavourites({movieID});
         if (response.status === 200) return parseData({schema: MovieSchema, data: result});
         throw new HttpResponseError({response, message: "Oops. Something went wrong!"});
     }
 
-    const onMutateSuccess = (movie: Movie) => {
-        toast.success("Movie Added To User's Favourites.");
+    const onMutateSuccess = async (movie: Movie) => {
+        await queryClient.invalidateQueries({queryKey: ["fetch_movie_and_related_showings", {movieID}]});
+        console.log("Cleared!");
+
+        toast.success("Movie Added To User's Favourites");
         onSuccess && onSuccess(movie);
     }
 

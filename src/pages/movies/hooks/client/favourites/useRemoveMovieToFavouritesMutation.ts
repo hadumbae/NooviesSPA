@@ -3,7 +3,7 @@ import MovieFavouriteRepository from "@/pages/movies/repositories/MovieFavourite
 import {Movie, MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {toast} from "react-toastify";
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import parseData from "@/common/utility/validation/parseData.ts";
 
 interface RemoveFavouriteParams {
@@ -13,6 +13,7 @@ interface RemoveFavouriteParams {
 }
 
 export default function useRemoveMovieToFavouritesMutation({movieID, onSuccess, onError}: RemoveFavouriteParams) {
+    const queryClient = useQueryClient();
     const mutationKey = ["remove_movie_to_favourite", {movieID}];
 
     const removeFromFavourites = async () => {
@@ -21,8 +22,10 @@ export default function useRemoveMovieToFavouritesMutation({movieID, onSuccess, 
         throw new HttpResponseError({response, message: "Oops. Something went wrong!"});
     }
 
-    const onMutateSuccess = (movie: Movie) => {
-        toast.success("Movie Removed From User's Favourites.");
+    const onMutateSuccess = async (movie: Movie) => {
+        await queryClient.invalidateQueries({queryKey: ["fetch_movie_and_related_showings", {movieID}]});
+
+        toast.success("Movie Removed From User's Favourites");
         onSuccess && onSuccess(movie);
     }
 
