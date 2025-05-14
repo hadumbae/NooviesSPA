@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MovieCreateHeader from "@/pages/movies/components/headers/MovieCreateHeader.tsx";
-import MovieSubmitForm from "@/pages/movies/components/MovieSubmitForm.tsx";
+import MovieSubmitFormContainer from "@/pages/movies/components/admin/forms/MovieSubmitFormContainer.tsx";
 import {Movie} from "@/pages/movies/schema/MovieSchema.ts";
 import {useNavigate} from "react-router-dom";
 
@@ -16,7 +16,7 @@ const MovieCreatePage: FC = () => {
             <MovieCreateHeader />
 
             <section>
-                <MovieSubmitForm onSubmit={onSubmit} />
+                <MovieSubmitFormContainer onSubmit={onSubmit} />
             </section>
         </PageFlexWrapper>
     );

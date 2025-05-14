@@ -13,10 +13,10 @@ interface DetailsProps {
 }
 
 const MovieBrowseDetails: FC<DetailsProps> = ({movie}) => {
-    const {_id, description, genres, durationInMinutes, isFavourite} = movie;
+    const {_id, synopsis, genres, runtime, isFavourite} = movie;
 
     const genreString = (genres as Genre[]).map((genre) => genre.name).join(", ");
-    const timeString = formatDuration(durationInMinutes);
+    const timeString = formatDuration(runtime);
 
     const addMutation = useAddMovieToFavouritesMutation({movieID: _id});
     const removeMutation = useRemoveMovieToFavouritesMutation({movieID: _id});
@@ -50,7 +50,7 @@ const MovieBrowseDetails: FC<DetailsProps> = ({movie}) => {
                 </section>
 
                 <section>
-                    <p>{description}</p>
+                    <p>{synopsis}</p>
                 </section>
 
                 <section>

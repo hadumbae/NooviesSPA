@@ -13,8 +13,8 @@ import {z} from "zod";
  *   - `"Must Not Be An Empty String"` if the string is empty.
  */
 export const NonEmptyStringSchema = z
-    .string({required_error: "Required", invalid_type_error: "Must be a valid string."})
-    .min(1, "Must Not Be An Empty String")
+    .string({required_error: "Required", invalid_type_error: "Must be a string."})
+    .min(1, "Required")
     .trim();
 
 /**

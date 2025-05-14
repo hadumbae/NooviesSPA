@@ -25,8 +25,8 @@ import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema
  * ```
  */
 export const RefinedNumberSchema = z
-    .union([z.undefined(), RequiredNumberSchema])
-    .refine((value) => value !== undefined && !isNaN(value), {message: "Required."});
+    .union([z.undefined(), z.literal(""), RequiredNumberSchema])
+    .refine((value) => value !== undefined && value !== "" && !isNaN(value), {message: "Required."});
 
 /**
  * A TypeScript type representing a number validated via {@link RefinedNumberSchema}.

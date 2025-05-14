@@ -11,7 +11,7 @@ import PageCenter from "@/common/components/page/PageCenter.tsx";
 
 const MoviesPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams({perPage: "25"});
-    const {data, isPending, isError, error, refetch} = useFetchPaginatedMovies({page, perPage});
+    const {data, isPending, isError, error, refetch} = useFetchPaginatedMovies({page, perPage, populate: true});
 
     if (isPending) return <PageLoader />;
     if (isError) return <PageError error={error} />;

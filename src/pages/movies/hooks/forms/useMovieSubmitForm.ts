@@ -9,20 +9,23 @@ export default function useMovieSubmitForm(params?: {movie?: Movie}) {
 
     const defaultValues: MovieSubmit = {
         title: "",
+        originalTitle: "",
+        tagline: "",
+        country: "",
         synopsis: "",
         genres: [],
         staff: [],
         cast: [],
-        releaseDate: undefined,
+        releaseDate: "",
         runtime: "",
+        originalLanguage: "",
         languages: [],
         subtitles: [],
         trailerURL: "",
-        price: "",
     }
 
     let genres = movie?.genres.map(convertObjectsToIDs) || defaultValues.genres;
-    let directors = movie?.directors.map(convertObjectsToIDs) || defaultValues.staff;
+    let staff = movie?.staff.map(convertObjectsToIDs) || defaultValues.staff;
     let cast = movie?.cast.map(convertObjectsToIDs) || defaultValues.cast;
 
     return useForm<MovieSubmit>({
@@ -31,7 +34,7 @@ export default function useMovieSubmitForm(params?: {movie?: Movie}) {
             ...defaultValues,
             ...(movie ? movie : {}),
             genres,
-            staff: directors,
+            staff,
             cast,
         },
     });

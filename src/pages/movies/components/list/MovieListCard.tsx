@@ -4,7 +4,8 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import MovieOptions from "@/pages/movies/components/MovieOptions.tsx";
 import {Link} from "react-router-dom";
 import {format} from "date-fns";
-import useGenerateMovieGenreString from "@/pages/movies/hooks/utility/useGenerateMovieGenreString.ts";
+import generateGenreString from "@/pages/movies/utility/generateGenreString.ts";
+import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 
 interface Props {
     movie: Movie;
@@ -12,10 +13,12 @@ interface Props {
 }
 
 const MovieListCard: FC<Props> = ({movie, onMovieDelete}) => {
-    const {_id, title, genres, releaseDate, durationInMinutes} = movie;
+    const {_id, title, genres, releaseDate, runtime} = movie;
+
+    console.log(genres);
 
     const formattedDate = format(releaseDate, "yyyy");
-    const genreString = useGenerateMovieGenreString({genres});
+    const genreString = generateGenreString(genres as Genre[]);
 
     return (
         <Card>
@@ -29,7 +32,7 @@ const MovieListCard: FC<Props> = ({movie, onMovieDelete}) => {
                     </Link>
 
                     <span>
-                        {genreString} | {durationInMinutes} mins {formattedDate && ` | ${formattedDate}`}
+                        {genreString} | {runtime} mins {formattedDate && ` | ${formattedDate}`}
                     </span>
                 </div>
 

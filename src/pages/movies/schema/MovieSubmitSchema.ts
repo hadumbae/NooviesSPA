@@ -1,9 +1,9 @@
 import {z} from "zod";
-import {DateStringSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
-import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
+import {RefinedDateStringSchema} from "@/common/schema/dates/RefinedDateStringSchema.ts";
+import {RefinedNumberSchema} from "@/common/schema/numbers/RefinedNumberSchema.ts";
 
 /**
  * Zod schema for validating `Movie` submission data.
@@ -29,21 +29,19 @@ export const MovieSubmitSchema = z.object({
         .trim()
         .max(2000, "Must be 2000 characters or less."),
 
-    genres: z
-        .array(IDStringSchema),
+    genres: z.array(IDStringSchema),
 
-    staff: z
-        .array(IDStringSchema),
+    staff: z.array(IDStringSchema),
 
-    cast: z
-        .array(IDStringSchema),
+    cast: z.array(IDStringSchema),
 
-    releaseDate: DateStringSchema,
+    releaseDate: RefinedDateStringSchema,
 
-    runtime: z
-        .union([z.literal(""), RequiredNumberSchema])
-        .refine(runtime => runtime !== "", {message: "Required."})
-        .refine(runtime => runtime > 0, {message: "Must be greater than 0."}),
+    runtime: RefinedNumberSchema
+        .refine(
+            runtime => runtime && runtime > 0,
+            {message: "Must be greater than 0."}
+        ),
 
     originalLanguage: NonEmptyStringSchema
         .max(10, "Must be 10 characters or less."),
@@ -59,11 +57,6 @@ export const MovieSubmitSchema = z.object({
     trailerURL: z
         .union([z.null(), URLStringSchema])
         .optional(),
-
-    price: z
-        .union([z.literal(""), RequiredNumberSchema])
-        .refine(price => price !== "", {message: "Required."})
-        .refine(price => price > 0, {message: "Must be 0 or greater."}),
 });
 
 /**

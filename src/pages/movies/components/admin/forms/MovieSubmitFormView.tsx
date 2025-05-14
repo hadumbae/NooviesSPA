@@ -1,35 +1,28 @@
 import {FC} from 'react';
 import {Form} from "@/common/components/ui/form.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
-
-import {Movie} from "@/pages/movies/schema/MovieSchema.ts";
-import useMovieSubmitForm from "@/pages/movies/hooks/forms/useMovieSubmitForm.ts";
-import useMovieSubmitMutation from "@/pages/movies/hooks/mutations/useMovieSubmitMutation.ts";
-
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import HookFormDatePicker from "@/common/components/forms/HookFormDatePicker.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
-import LanguageHookFormSelect from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
 import GenreHookFormSelect from "@/pages/genres/components/form/GenreHookFormSelect.tsx";
 import PersonHookFormSelect from "@/pages/persons/components/form/PersonHookFormSelect.tsx";
+import LanguageHookFormSelect from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
+import {SubmitHandler, UseFormReturn} from "react-hook-form";
+import {MovieSubmit} from "@/pages/movies/schema/MovieSubmitSchema.ts";
+import {UseMutationResult} from "@tanstack/react-query";
+import {Movie} from "@/pages/movies/schema/MovieSchema.ts";
 
-interface Props {
-    movie?: Movie;
-    onSubmit: (movie: Movie) => void
+interface ViewProps {
+    form: UseFormReturn<MovieSubmit>;
+    submitHandler: SubmitHandler<MovieSubmit>;
+    mutation: UseMutationResult<Movie, Error, MovieSubmit>;
 }
 
-const MovieSubmitForm: FC<Props> = ({movie, onSubmit}) => {
-    const form = useMovieSubmitForm({movie});
-    const {mutate, isPending, isSuccess} = useMovieSubmitMutation({form, _id: movie?._id, onSubmit});
-
-    const onFormSubmit = (values:any) => {
-        console.log("Movie Submit Value: ", values);
-        mutate(values);
-    }
+const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation}) => {
+    const {isPending, isSuccess} = mutation;
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-3">
+            <form onSubmit={form.handleSubmit(submitHandler)} className="space-y-3">
                 <HookFormInput
                     name="title"
                     label="Title"
@@ -37,11 +30,32 @@ const MovieSubmitForm: FC<Props> = ({movie, onSubmit}) => {
                     description="The title of the movie."
                 />
 
-                <HookFormTextArea
-                    name="description"
-                    label="Description"
+                <HookFormInput
+                    name="originalTitle"
+                    label="Original Title"
                     control={form.control}
-                    description="A short description of the movie."
+                    description="The original title of the movie."
+                />
+
+                <HookFormInput
+                    name="tagline"
+                    label="Tagline"
+                    control={form.control}
+                    description="The tagline of the movie."
+                />
+
+                <HookFormInput
+                    name="country"
+                    label="Country"
+                    control={form.control}
+                    description="The country of origin of the movie."
+                />
+
+                <HookFormTextArea
+                    name="synopsis"
+                    label="Synopsis"
+                    control={form.control}
+                    description="A short synopsis of the movie."
                 />
 
                 <GenreHookFormSelect
@@ -53,11 +67,11 @@ const MovieSubmitForm: FC<Props> = ({movie, onSubmit}) => {
                 />
 
                 <PersonHookFormSelect
-                    name="directors"
-                    label="Directors"
+                    name="staff"
+                    label="Staff"
                     control={form.control}
                     isMulti={true}
-                    description="The directors of the movie."
+                    description="The staff of the movie."
                 />
 
                 <PersonHookFormSelect
@@ -68,22 +82,30 @@ const MovieSubmitForm: FC<Props> = ({movie, onSubmit}) => {
                     description="The cast of the movie."
                 />
 
-                {/*releaseDate*/}
-                <HookFormDatePicker
+                <HookFormInput
                     name="releaseDate"
                     label="Release Date"
                     control={form.control}
+                    type="date"
                     description="The initial release date of the movie."
                 />
 
                 <HookFormInput
-                    name="durationInMinutes"
+                    name="runtime"
                     label="Duration In Minutes"
                     control={form.control}
                     description="The duration of the movie in minutes."
                     type="number"
                     min={1}
                     step={1}
+                />
+
+                <LanguageHookFormSelect
+                    name="originalLanguage"
+                    label="Original Language"
+                    control={form.control}
+                    isMulti={false}
+                    description="The original language of the movie."
                 />
 
                 <LanguageHookFormSelect
@@ -109,16 +131,6 @@ const MovieSubmitForm: FC<Props> = ({movie, onSubmit}) => {
                     description="The full URL of the movie's trailer, e.g. `https://google.com`."
                 />
 
-                <HookFormInput
-                    name="price"
-                    label="Price"
-                    control={form.control}
-                    description="The base price of the movie."
-                    type="number"
-                    min={1}
-                    step={0.01}
-                />
-
                 <Button
                     type="submit"
                     variant="default"
@@ -132,4 +144,4 @@ const MovieSubmitForm: FC<Props> = ({movie, onSubmit}) => {
     );
 };
 
-export default MovieSubmitForm;
+export default MovieSubmitFormView;

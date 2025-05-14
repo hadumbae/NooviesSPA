@@ -20,7 +20,7 @@ const MovieDetailsClientPage: FC = () => {
     if (isError) return <PageError error={error}/>;
 
     const {movie} = data;
-    const {directors, cast} = movie;
+    const {staff, cast} = movie;
 
     return (
         <section
@@ -59,7 +59,7 @@ const MovieDetailsClientPage: FC = () => {
                     <h2 className="sr-only">Staff And Cast</h2>
 
                     <MoviePersonPreviewListContainer
-                        directors={directors as Person[]}
+                        staff={staff as Person[]}
                         cast={cast as Person[]}
                     />
                 </section>

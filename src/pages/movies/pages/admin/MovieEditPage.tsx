@@ -7,7 +7,7 @@ import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import {useNavigate} from "react-router-dom";
 import {Movie} from "@/pages/movies/schema/MovieSchema.ts";
-import MovieSubmitForm from "@/pages/movies/components/MovieSubmitForm.tsx";
+import MovieSubmitFormContainer from "@/pages/movies/components/admin/forms/MovieSubmitFormContainer.tsx";
 
 const MovieEditPage: FC = () => {
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ const MovieEditPage: FC = () => {
         <PageFlexWrapper>
             <MovieEditHeader movie={movie} />
 
-            <MovieSubmitForm onSubmit={onSubmit} movie={movie} />
+            <MovieSubmitFormContainer onSubmit={onSubmit} movie={movie} />
         </PageFlexWrapper>
     );
 };

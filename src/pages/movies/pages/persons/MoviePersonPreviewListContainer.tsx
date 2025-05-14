@@ -4,19 +4,19 @@ import MoviePersonPreviewCard from "@/pages/movies/pages/persons/MoviePersonPrev
 
 interface ContainerProps {
     cast: Person[];
-    directors: Person[];
+    staff: Person[];
 }
 
-const MoviePersonPreviewListContainer: FC<ContainerProps> = ({cast, directors}) => {
+const MoviePersonPreviewListContainer: FC<ContainerProps> = ({cast, staff}) => {
     return (
         <section className="space-y-5">
-            <h1 className="sr-only">Casts & Directors</h1>
+            <h1 className="sr-only">Casts & Staff</h1>
 
             <section className="space-y-1">
-                <h1 className="font-bold">Directors</h1>
+                <h1 className="font-bold">Staff</h1>
 
                 <div className="grid grid-cols-2 gap-2">
-                    {directors.map(
+                    {staff.map(
                         (person) => <MoviePersonPreviewCard key={person._id} person={person}/>
                     )}
                 </div>

@@ -4,14 +4,21 @@ import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetc
 import {PaginatedMovies, PaginatedMovieSchema} from "@/pages/movies/schema/MoviePaginationSchema.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 
+interface FetchParams {
+    page: number,
+    perPage: number,
+    filters?: QueryFilters,
+    populate?: boolean
+}
+
 export const useFetchPaginatedMovies = (
-    {page, perPage, filters = {}}: {page: number, perPage: number, filters?: QueryFilters}
+    {page, perPage, filters = {}, populate = false}: FetchParams
 ) => {
     const filteredQueries = filterEmptyAttributes(filters);
 
-    const queryKey = ["fetch_paginated_movies", {page, perPage, filters: filteredQueries}];
+    const queryKey = ["fetch_paginated_movies", {page, perPage, populate, filters: filteredQueries}];
     const schema = PaginatedMovieSchema;
-    const action = () => MovieRepository.paginated({filters: {page, perPage, filteredQueries}});
+    const action = () => MovieRepository.paginated({populate, filters: {page, perPage, filteredQueries}});
 
     return useFetchValidatedDataWithRedirect<typeof schema, PaginatedMovies>({queryKey, schema, action});
 }

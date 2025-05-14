@@ -24,7 +24,7 @@ const MoviePage: FC = () => {
     if (isPending) return <PageLoader />
     if (isError) return <PageError error={error} />
 
-    const {description, directors, cast} = movie;
+    const {synopsis, staff, cast} = movie;
 
     return (
         <PageFlexWrapper>
@@ -37,14 +37,14 @@ const MoviePage: FC = () => {
             <PageSection title="Synopsis">
                 <Card>
                     <CardContent className="p-4">
-                        <CollapsibleTextblock text={description} />
+                        <CollapsibleTextblock text={synopsis} />
                     </CardContent>
                 </Card>
             </PageSection>
 
-            <PageSection title="Directors">
+            <PageSection title="Staff">
                 <div className="grid grid-cols-2 gap-2">
-                    {directors.map(
+                    {staff.map(
                         (director) => <MoviePersonAvatarCard
                             key={(director as Person)._id}
                             person={director as Person}

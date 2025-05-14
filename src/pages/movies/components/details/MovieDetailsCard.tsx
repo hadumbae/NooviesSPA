@@ -3,7 +3,7 @@ import {Movie} from "@/pages/movies/schema/MovieSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import {format} from "date-fns";
-import useGenerateMovieDurationString from "@/pages/movies/hooks/utility/useGenerateMovieDurationString.ts";
+import formatDuration from "@/common/utility/formatDuration.ts";
 
 interface Props {
     movie: Movie;
@@ -12,15 +12,14 @@ interface Props {
 const MovieDetailsCard: FC<Props> = ({movie}) => {
     const {
         releaseDate,
-        durationInMinutes,
+        runtime,
         languages,
         subtitles,
         trailerURL,
-        price,
     } = movie;
 
     const formattedDate = format(releaseDate, "dd MMM, yyyy");
-    const movieDuration = useGenerateMovieDurationString({minutes: durationInMinutes});
+    const movieDuration = formatDuration(runtime);
     const languageString = languages.join(", ");
     const subtitleString = subtitles.join(", ");
 
@@ -31,7 +30,6 @@ const MovieDetailsCard: FC<Props> = ({movie}) => {
                     <DetailsCardSpan label="Release Date" text={formattedDate} />
                     <DetailsCardSpan label="Duration" text={movieDuration} />
                     <DetailsCardSpan label="Trailer" text={trailerURL ? "Link" : "None"} to={trailerURL} />
-                    <DetailsCardSpan label="Price" text={`$${price}`} />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">

@@ -33,7 +33,7 @@ export const MovieSchema = z.object({
 
     synopsis: NonEmptyStringSchema
         .trim()
-        .max(2000, "Description must be 2000 characters or less."),
+        .max(2000, "synopsis must be 2000 characters or less."),
 
     genres: z.array(
         z.union([IDStringSchema, z.lazy(() => GenreSchema)]),
@@ -60,6 +60,7 @@ export const MovieSchema = z.object({
     subtitles: z.array(NonEmptyStringSchema),
 
     posterImage: z.union([
+        z.undefined(),
         z.null(),
         CloudinaryImageObject,
     ]),
