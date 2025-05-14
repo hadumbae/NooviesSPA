@@ -1,7 +1,7 @@
 import {z, ZodType} from "zod";
 import ITheatreSubmit from "@/pages/theatres/interfaces/ITheatreSubmit.ts";
-import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
 
 export const TheatreSubmitSchema: ZodType<ITheatreSubmit> = z.object({
     name: NonEmptyStringSchema
@@ -13,7 +13,7 @@ export const TheatreSubmitSchema: ZodType<ITheatreSubmit> = z.object({
         .max(255, "Must be 255 characters or less."),
 
     seatCapacity: z
-        .union([z.literal(""), RequiredNumber])
+        .union([z.literal(""), RequiredNumberSchema])
         .refine(num => num !== "", {message: "Required."})
         .refine(num => num >= 0, {message: "Must be 0 or greater."}),
 });

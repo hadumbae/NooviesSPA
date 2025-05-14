@@ -1,9 +1,9 @@
 import {z} from "zod";
 import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
-import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
 
 /**
  * Zod schema for validating a `Showing` object.
@@ -18,7 +18,7 @@ export default z.object({
 
     endTime: CoercedDateSchema,
 
-    ticketPrice: RequiredNumber
+    ticketPrice: RequiredNumberSchema
         .gt(0, "Must be greater than 0"),
 
     language: NonEmptyStringSchema,

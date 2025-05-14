@@ -2,11 +2,11 @@ import {z, ZodType} from "zod";
 import ISeat from "@/pages/seats/interfaces/ISeat.ts";
 import {SeatTypeEnum} from "@/pages/seats/schema/SeatTypeEnum.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
-import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {ScreenSchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
 
 export const SeatSchema: ZodType<ISeat> = z.object({
     _id: IDStringSchema,
@@ -23,7 +23,7 @@ export const SeatSchema: ZodType<ISeat> = z.object({
 
     isAvailable: RequiredBoolean,
 
-    priceMultiplier: RequiredNumber
+    priceMultiplier: RequiredNumberSchema
         .gte(0, "Must be 0 or greater."),
 
     theatre: z

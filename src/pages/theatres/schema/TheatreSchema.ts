@@ -1,10 +1,10 @@
 import {z, ZodType} from "zod";
 import ITheatre from "@/pages/theatres/interfaces/ITheatre.ts";
-import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {ScreenSchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import {SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
 
 export const TheatreSchema: ZodType<ITheatre> = z.object({
     _id: IDStringSchema.readonly(),
@@ -17,7 +17,7 @@ export const TheatreSchema: ZodType<ITheatre> = z.object({
         .min(1, "Required.")
         .max(255, "Must be 255 characters or less."),
 
-    seatCapacity: RequiredNumber
+    seatCapacity: RequiredNumberSchema
         .gte(0, "Must be equal or greater than 0."),
 
     screens: z.array(z.union([

@@ -1,10 +1,10 @@
 import {z, ZodType} from "zod";
-import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {ScreenTypeEnum} from "@/pages/screens/schema/ScreenTypeEnum.ts";
 import {IScreenSubmit} from "@/pages/screens/interfaces/IScreenSubmit.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {EmptyStringSchema} from "@/common/schema/strings/EmptyStringSchema.ts";
+import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
 
 export const ScreenSubmitSchema: ZodType<IScreenSubmit> = z.object({
     name: NonEmptyStringSchema
@@ -12,7 +12,7 @@ export const ScreenSubmitSchema: ZodType<IScreenSubmit> = z.object({
         .max(255, "Name must be 255 characters or less."),
 
     capacity: z
-        .union([EmptyStringSchema, RequiredNumber])
+        .union([EmptyStringSchema, RequiredNumberSchema])
         .refine((isNum) => isNum !== "", {message: "Required"})
         .refine((num) => num >= 0, {message: "Must be 0 or greater."}),
 

@@ -1,9 +1,9 @@
 import {z} from "zod";
-import {TotalItemsNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {GenreSchema} from "@/pages/genres/schema/GenreSchema.ts";
+import {TotalItemsNumberSchema} from "@/common/schema/numbers/TotalItemsNumberSchema.ts";
 
 export const PaginatedGenresSchema = z.object({
-    totalItems: TotalItemsNumber,
+    totalItems: TotalItemsNumberSchema,
     items: z.array(z.lazy(() => GenreSchema)),
 });
 

@@ -1,10 +1,10 @@
 import {z, ZodType} from "zod";
 import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
-import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import IShowingSubmit from "@/pages/showings/interfaces/IShowingSubmit.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {LanguageEnum} from "@/common/schema/enums/LanguageEnum.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
 
 
 /**
@@ -20,7 +20,7 @@ export const ShowingSubmitSchema: ZodType<IShowingSubmit> = z.object({
 
     endTime: CoercedDateSchema.optional(),
 
-    ticketPrice: RequiredNumber
+    ticketPrice: RequiredNumberSchema
         .gt(0, "Must be greater than 0"),
 
     language: LanguageEnum,
