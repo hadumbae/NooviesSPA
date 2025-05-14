@@ -1,11 +1,9 @@
-import {z, ZodType} from "zod";
-import IMovieSubmit from "@/pages/movies/interfaces/IMovieSubmit.ts";
+import {z} from "zod";
 import {DateStringSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
-import {RequiredNumber} from "@/common/schema/helpers/ZodNumberHelpers.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
-
+import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
 
 /**
  * Zod schema for validating `Movie` submission data.
@@ -13,19 +11,28 @@ import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
  * This schema defines the structure and constraints
  * for data submitted when creating or updating a movie.
  */
-export const MovieSubmitSchema: ZodType<IMovieSubmit> = z.object({
+export const MovieSubmitSchema = z.object({
     title: NonEmptyStringSchema
-        .min(1, "Title must be at least 1 character long.")
-        .max(1000, "Title must be 1000 characters or less."),
+        .max(1000, "Must be 1000 characters or less."),
 
-    description: NonEmptyStringSchema
+    originalTitle: NonEmptyStringSchema
+        .max(1000, "Must be 1000 characters or less."),
+
+    tagline: NonEmptyStringSchema
+        .max(100, "Must be 100 characters or less.")
+        .optional(),
+
+    country: NonEmptyStringSchema
+        .max(100, "Must be 100 characters or less."),
+
+    synopsis: NonEmptyStringSchema
         .trim()
-        .max(2000, "Description must be 2000 characters or less."),
+        .max(2000, "Must be 2000 characters or less."),
 
     genres: z
         .array(IDStringSchema),
 
-    directors: z
+    staff: z
         .array(IDStringSchema),
 
     cast: z
@@ -33,10 +40,13 @@ export const MovieSubmitSchema: ZodType<IMovieSubmit> = z.object({
 
     releaseDate: DateStringSchema,
 
-    durationInMinutes: z
-        .union([z.literal(""), RequiredNumber])
-        .refine(price => price !== "", {message: "Required."})
-        .refine(price => price > 0, {message: "Must be greater than 0."}),
+    runtime: z
+        .union([z.literal(""), RequiredNumberSchema])
+        .refine(runtime => runtime !== "", {message: "Required."})
+        .refine(runtime => runtime > 0, {message: "Must be greater than 0."}),
+
+    originalLanguage: NonEmptyStringSchema
+        .max(10, "Must be 10 characters or less."),
 
     languages: z
         .array(NonEmptyStringSchema)
@@ -51,7 +61,7 @@ export const MovieSubmitSchema: ZodType<IMovieSubmit> = z.object({
         .optional(),
 
     price: z
-        .union([z.literal(""), RequiredNumber])
+        .union([z.literal(""), RequiredNumberSchema])
         .refine(price => price !== "", {message: "Required."})
         .refine(price => price > 0, {message: "Must be 0 or greater."}),
 });

@@ -1,8 +1,8 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
-import {MovieArray, MovieArraySchema} from "@/pages/movies/schema/MovieSchema.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import {UseQueryResult} from "@tanstack/react-query";
+import {MovieArray, MovieArraySchema} from "@/pages/movies/schema/MovieArraySchema.ts";
 
 /**
  * Custom hook to fetch all movies from the API with optional filters.
