@@ -24,7 +24,6 @@ export default function useAddMovieToFavouritesMutation({movieID, onSuccess, onE
 
     const onMutateSuccess = async (movie: Movie) => {
         await queryClient.invalidateQueries({queryKey: ["fetch_movie_and_related_showings", {movieID}]});
-        console.log("Cleared!");
 
         toast.success("Movie Added To User's Favourites");
         onSuccess && onSuccess(movie);
