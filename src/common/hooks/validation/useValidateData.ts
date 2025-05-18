@@ -1,44 +1,71 @@
 import {ZodTypeAny} from "zod";
 import {ParseError} from "@/common/errors/ParseError.ts";
 
+/**
+ * Parameters for the `useValidateData` hook.
+ *
+ * @template TSchema - A Zod schema used to validate the incoming data.
+ */
 interface Params<TSchema extends ZodTypeAny> {
+    /** The raw input data to validate. */
     data: unknown;
+
+    /** A Zod schema that defines the shape and constraints of the expected data. */
     schema: TSchema;
-    isPending?: boolean;
+
+    /** Optional error message to override the default when validation fails. */
     message?: string;
 }
 
 /**
- * Validates unknown data against a provided Zod schema and returns the parsed result.
+ * The result returned from `useValidateData`, containing either parsed data or an error.
  *
- * @typeParam TSchema - A Zod schema used for validation.
- * @typeParam TReturn - The expected return type after successful validation.
- *
- * @param params - An object containing:
- * - `data`: The unknown data to validate.
- * - `schema`: The Zod schema to validate against.
- * - `isPending` (optional): A flag indicating if the data is still loading; if true, validation is skipped.
- * - `message` (optional): A custom error message to use if validation fails.
- *
- * @returns The validated and parsed data as `TReturn` if validation succeeds; otherwise, returns `null` if `data` is falsy or `isPending` is true.
- *
- * @throws {@link ParseError} If validation fails, throws a `ParseError` containing the validation errors.
+ * @template TReturn - The inferred and validated data shape.
  */
-export default function useValidateData<TSchema extends ZodTypeAny, TReturn>(params: Params<TSchema>): TReturn | null {
-    const {data, schema, isPending, message} = params;
-    if (!data || isPending) return null;
+interface ParseDataReturns<TReturn> {
+    /** The validated data, or `null` if validation failed. */
+    data: TReturn | null;
 
-    const result = schema.safeParse(data);
-
-    if (!result.success) {
-        const errorMessage = "Invalid Data.";
-        const errors = result.error.errors;
-
-        throw new ParseError({message: message || errorMessage, errors});
-    }
-
-    return result.data as TReturn;
+    /** A `ParseError` if validation failed, otherwise `null`. */
+    error: Error | null;
 }
 
-// http://localhost:3000/admin/showings/get/679e5e1990f92f78e185bc86/seating
-// http://localhost:3000/admin/showings/get/6789271603a6405ee63710f9/seating
+/**
+ * Validates arbitrary input data against a Zod schema and returns either
+ * the parsed value or a structured `ParseError`.
+ *
+ * This hook is useful for ensuring data from external sources (e.g., API responses,
+ * local storage, form values) conforms to expected shapes.
+ *
+ * @template TSchema - A Zod schema used for validation.
+ * @template TReturn - The type derived from the schema.
+ *
+ * @param params - An object containing the data to validate, schema, and optional custom error message.
+ *
+ * @returns An object with either the validated `data` or a `ParseError`.
+ *
+ * @example
+ * ```ts
+ * const result = useValidateData({
+ *   data: apiResponse,
+ *   schema: UserSchema,
+ *   message: "Failed to validate user data."
+ * });
+ *
+ * if (result.error) {
+ *   console.error(result.error.message);
+ * } else {
+ *   console.log("Validated user:", result.data);
+ * }
+ * ```
+ */
+export default function useValidateData<TSchema extends ZodTypeAny, TReturn>(
+    {data, schema, message}: Params<TSchema>
+): ParseDataReturns<TReturn> {
+    const {data: parsedData, success, error} = schema.safeParse(data);
+
+    return {
+        data: success ? parsedData : null,
+        error: !success ? new ParseError({message: message || "Invalid Data.", errors: error.errors, raw: data}) : null,
+    };
+}
