@@ -1,8 +1,8 @@
 import {UseFormReturn} from "react-hook-form";
 import mutationFormSubmitHandler from "@/common/handlers/mutation/MutationFormSubmitHandler.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
-import {Movie, MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
-import {MovieSubmit} from "@/pages/movies/schema/MovieSubmitSchema.ts";
+import {Movie, MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
+import {MovieSubmit} from "@/pages/movies/schema/form/MovieSubmitSchema.ts";
 
 interface Params {
     _id?: string,

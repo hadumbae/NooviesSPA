@@ -1,7 +1,7 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
-import {PaginatedMovies, PaginatedMovieSchema} from "@/pages/movies/schema/MoviePaginationSchema.ts";
+import {PaginatedMovies, PaginatedMovieSchema} from "@/pages/movies/schema/model/MoviePaginationSchema.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 
 interface FetchParams {

@@ -14,7 +14,7 @@ const PersonIndexHeader: FC = () => {
         )}>
             <section>
                 <HeaderTitle>Persons</HeaderTitle>
-                <HeaderDescription>The the actors and staff behind movies.</HeaderDescription>
+                <HeaderDescription>The the actors and crew behind movies.</HeaderDescription>
             </section>
 
             <section className="flex justify-end items-center">

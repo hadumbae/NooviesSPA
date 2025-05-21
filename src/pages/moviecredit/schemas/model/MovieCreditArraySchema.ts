@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {MovieCreditSchema} from "@/pages/moviecredit/schemas/MovieCreditSchema.ts";
+import {MovieCreditSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 
 /**
  * Zod schema for validating an array of movie credit objects.

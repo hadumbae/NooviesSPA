@@ -2,7 +2,7 @@ import {z, ZodType} from "zod";
 import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import IShowingSubmit from "@/pages/showings/interfaces/IShowingSubmit.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
-import {LanguageEnum} from "@/common/schema/enums/LanguageEnum.ts";
+import {LanguageEnum} from "@/common/schema/enums/languages/LanguageEnum.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
 

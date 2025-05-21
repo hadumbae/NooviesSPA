@@ -6,7 +6,7 @@ import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import {useNavigate} from "react-router-dom";
-import {Movie} from "@/pages/movies/schema/MovieSchema.ts";
+import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import MovieSubmitFormContainer from "@/pages/movies/components/admin/forms/MovieSubmitFormContainer.tsx";
 
 const MovieEditPage: FC = () => {

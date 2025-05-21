@@ -1,6 +1,6 @@
 import {z} from "zod";
 import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
-import {MovieCreditSchema} from "@/pages/moviecredit/schemas/MovieCreditSchema.ts";
+import {MovieCreditSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 
 /**
  * Zod schema for a paginated response of movie credit entries.

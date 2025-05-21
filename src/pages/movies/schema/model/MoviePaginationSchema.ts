@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
+import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
 
 /**

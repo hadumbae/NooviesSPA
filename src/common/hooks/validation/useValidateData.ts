@@ -1,4 +1,4 @@
-import {ZodTypeAny} from "zod";
+import {z, ZodTypeAny} from "zod";
 import {ParseError} from "@/common/errors/ParseError.ts";
 
 /**
@@ -38,7 +38,6 @@ interface ParseDataReturns<TReturn> {
  * local storage, form values) conforms to expected shapes.
  *
  * @template TSchema - A Zod schema used for validation.
- * @template TReturn - The type derived from the schema.
  *
  * @param params - An object containing the data to validate, schema, and optional custom error message.
  *
@@ -59,13 +58,15 @@ interface ParseDataReturns<TReturn> {
  * }
  * ```
  */
-export default function useValidateData<TSchema extends ZodTypeAny, TReturn>(
+export default function useValidateData<TSchema extends ZodTypeAny>(
     {data, schema, message}: Params<TSchema>
-): ParseDataReturns<TReturn> {
+): ParseDataReturns<z.infer<TSchema>> {
     const {data: parsedData, success, error} = schema.safeParse(data);
 
     return {
         data: success ? parsedData : null,
-        error: !success ? new ParseError({message: message || "Invalid Data.", errors: error.errors, raw: data}) : null,
+        error: !success
+            ? new ParseError({message: message || "Invalid Data.", errors: error.errors, raw: data})
+            : null,
     };
 }

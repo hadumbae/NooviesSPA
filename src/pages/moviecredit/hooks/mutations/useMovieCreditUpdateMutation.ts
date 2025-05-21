@@ -1,8 +1,8 @@
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {MovieCredit} from "@/pages/moviecredit/schemas/MovieCreditSchema.ts";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
-import {MovieCreditSubmit} from "@/pages/moviecredit/schemas/MovieCreditSubmitSchema.ts";
+import {MovieCreditSubmit} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
 import {toast} from "react-toastify";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 

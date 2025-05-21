@@ -1,4 +1,4 @@
-import {PaginatedMovies, PaginatedMovieSchema} from "@/pages/movies/schema/MoviePaginationSchema.ts";
+import {PaginatedMovies, PaginatedMovieSchema} from "@/pages/movies/schema/model/MoviePaginationSchema.ts";
 import MovieQueryRepository from "@/pages/movies/repositories/MovieQueryRepository.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";

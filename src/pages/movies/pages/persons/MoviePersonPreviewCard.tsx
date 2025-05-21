@@ -1,24 +1,49 @@
 import {FC} from 'react';
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Link} from "react-router-dom";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
+import {InvalidParamError} from "@/common/errors/InvalidParamError.ts";
 
 interface PreviewCardProps {
-    person: Person;
+    credit: MovieCredit;
 }
 
-const MoviePersonPreviewCard: FC<PreviewCardProps> = ({person}) => {
-    const {name} = person;
+const MoviePersonPreviewCard: FC<PreviewCardProps> = ({credit}) => {
+    // TODO Update Movie Person To Movie Credit
+    const {roleType} = credit;
 
-    return (
-        <Card>
-            <CardContent className="p-3">
-                <Link to={"/"}>
-                    {name}
-                </Link>
-            </CardContent>
-        </Card>
-    );
+    if (roleType !== "CREW" && roleType !== "CAST") {
+        throw new InvalidParamError({
+            data: credit,
+            message: `Credit with invalid role type. [Role Type: ${roleType}]`,
+        });
+    }
+
+    if (roleType === "CREW") {
+        const {job} = credit;
+        return (
+            <Card>
+                <CardContent className="p-3">
+                    <Link to={"/"}>
+                        {job}
+                    </Link>
+                </CardContent>
+            </Card>
+        );
+    }
+
+    if (roleType === "CAST") {
+        const {billingOrder, characterName} = credit;
+        return (
+            <Card>
+                <CardContent className="p-3">
+                    <Link to={"/"}>
+                        {billingOrder}: {characterName}
+                    </Link>
+                </CardContent>
+            </Card>
+        );
+    }
 };
 
 export default MoviePersonPreviewCard;

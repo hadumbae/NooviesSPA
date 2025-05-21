@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
+import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
 
 /**
  * Zod schema for validating an array of `Movie` object.

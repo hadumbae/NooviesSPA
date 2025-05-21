@@ -1,33 +1,33 @@
-import {MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
-import {z} from "zod";
+import {RawMovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
+import {z, ZodType} from "zod";
+import IFavouriteMovie from "@/pages/movies/interfaces/IFavouriteMovie.ts";
 
 /**
- * A Zod schema that extends {@link MovieSchema} by adding a boolean `isFavourite` flag.
+ * A Zod schema that extends the base {@link RawMovieSchema} with additional
+ * fields used to represent a user's favourited movie.
  *
- * @remarks
- * - This is useful for representing a user-specific view of a movie,
- *   such as in a personalized watchlist or favorites UI.
- * - The `isFavourite` property indicates whether the current user has marked this movie as a favorite.
- *
- * @example
- * ```ts
- * FavouriteMovieSchema.parse({
- *   title: "Inception",
- *   year: 2010,
- *   director: "Christopher Nolan",
- *   isFavourite: true
- * });
- * ```
+ * This raw version does not yet enforce full runtime type safety via {@link ZodType},
+ * and is typically used for schema composition.
  */
-export const FavouriteMovieSchema = MovieSchema.extend({
+export const RawFavouriteMovieSchema = RawMovieSchema.extend({
+    /**
+     * Indicates whether the movie has been marked as a favourite by the user.
+     */
     isFavourite: z.boolean(),
 });
 
 /**
- * A TypeScript type representing a movie with an additional `isFavourite` flag.
+ * A fully-typed Zod schema representing a user's favourited movie,
+ * conforming to the {@link IFavouriteMovie} interface.
  *
- * @remarks
- * - Inferred from {@link FavouriteMovieSchema}.
- * - Includes all properties of {@link IMovie} plus a required `isFavourite: boolean`.
+ * Casts the {@link RawFavouriteMovieSchema} to a {@link ZodType} to support
+ * circular references and enforce structural typing against the `IFavouriteMovie` contract.
+ */
+export const FavouriteMovieSchema = RawFavouriteMovieSchema as ZodType<IFavouriteMovie>;
+
+/**
+ * TypeScript type inferred from {@link FavouriteMovieSchema}.
+ *
+ * Represents the runtime-validated structure of a favourited movie object.
  */
 export type FavouriteMovie = z.infer<typeof FavouriteMovieSchema>;

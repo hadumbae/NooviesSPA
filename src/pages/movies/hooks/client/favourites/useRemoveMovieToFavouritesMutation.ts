@@ -1,5 +1,5 @@
 import MovieFavouriteRepository from "@/pages/movies/repositories/MovieFavouriteRepository.ts";
-import {Movie, MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
+import {Movie, MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {toast} from "react-toastify";
 import {useMutation, useQueryClient} from "@tanstack/react-query";

@@ -1,6 +1,6 @@
 import {FC} from 'react';
 
-import {Movie} from "@/pages/movies/schema/MovieSchema.ts";
+import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import useMovieSubmitForm from "@/pages/movies/hooks/forms/useMovieSubmitForm.ts";
 import useMovieSubmitMutation from "@/pages/movies/hooks/mutations/useMovieSubmitMutation.ts";
 import MovieSubmitFormView from "@/pages/movies/components/admin/forms/MovieSubmitFormView.tsx";

@@ -1,5 +1,5 @@
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {MovieCredit, MovieCreditSchema} from "@/pages/moviecredit/schemas/MovieCreditSchema.ts";
+import {MovieCredit, MovieCreditSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 

@@ -3,13 +3,12 @@ import {Form} from "@/common/components/ui/form.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import GenreHookFormSelect from "@/pages/genres/components/form/GenreHookFormSelect.tsx";
-import PersonHookFormSelect from "@/pages/persons/components/form/PersonHookFormSelect.tsx";
 import LanguageHookFormSelect from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
-import {MovieSubmit} from "@/pages/movies/schema/MovieSubmitSchema.ts";
+import {MovieSubmit} from "@/pages/movies/schema/form/MovieSubmitSchema.ts";
 import {UseMutationResult} from "@tanstack/react-query";
-import {Movie} from "@/pages/movies/schema/MovieSchema.ts";
+import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 
 interface ViewProps {
     form: UseFormReturn<MovieSubmit>;
@@ -64,22 +63,6 @@ const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation}) => 
                     control={form.control}
                     isMulti={true}
                     description="The genre(s) of the movie."
-                />
-
-                <PersonHookFormSelect
-                    name="staff"
-                    label="Staff"
-                    control={form.control}
-                    isMulti={true}
-                    description="The staff of the movie."
-                />
-
-                <PersonHookFormSelect
-                    name="cast"
-                    label="Cast"
-                    control={form.control}
-                    isMulti={true}
-                    description="The cast of the movie."
                 />
 
                 <HookFormInput

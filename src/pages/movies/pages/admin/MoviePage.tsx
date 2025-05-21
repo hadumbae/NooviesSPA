@@ -5,8 +5,6 @@ import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
 import useFetchMovieParams from "@/pages/movies/hooks/params/useFetchMovieParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
-import MoviePersonAvatarCard from "@/pages/movies/components/person/MoviePersonAvatarCard.tsx";
 import MovieDetailsCard from "@/pages/movies/components/details/MovieDetailsCard.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
@@ -24,7 +22,7 @@ const MoviePage: FC = () => {
     if (isPending) return <PageLoader />
     if (isError) return <PageError error={error} />
 
-    const {synopsis, staff, cast} = movie;
+    const {synopsis} = movie;
 
     return (
         <PageFlexWrapper>
@@ -42,26 +40,12 @@ const MoviePage: FC = () => {
                 </Card>
             </PageSection>
 
-            <PageSection title="Staff">
-                <div className="grid grid-cols-2 gap-2">
-                    {staff.map(
-                        (director) => <MoviePersonAvatarCard
-                            key={(director as Person)._id}
-                            person={director as Person}
-                            role="Director"
-                        />)}
-                </div>
+            <PageSection title="Crew">
+                {/*TODO Crew Movie Credit Component*/}
             </PageSection>
 
             <PageSection title="Cast">
-                <div className="grid grid-cols-2 gap-4">
-                    {cast.map(
-                        (actor) => <MoviePersonAvatarCard
-                            key={(actor as Person)._id}
-                            person={actor as Person}
-                            role="Cast"
-                        />)}
-                </div>
+                {/*TODO Crew Movie Credit Component*/}
             </PageSection>
         </PageFlexWrapper>
     );

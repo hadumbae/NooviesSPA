@@ -1,8 +1,8 @@
-import {MovieCreditBaseSchema} from "@/pages/moviecredit/schemas/MovieCreditBaseSchema.ts";
+import {MovieCreditBaseSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditBaseSchema.ts";
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/PositiveNumberSchema.ts";
-import {MovieSchema} from "@/pages/movies/schema/MovieSchema.ts";
+import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
 
 const MovieCreditObjectSchema = MovieCreditBaseSchema.extend({

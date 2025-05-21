@@ -1,29 +1,37 @@
-import {MovieCreditBaseSchema} from "@/pages/moviecredit/schemas/MovieCreditBaseSchema.ts";
+import {MovieCreditBaseSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditBaseSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-import {z} from "zod";
+import {z, ZodType} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/PositiveNumberSchema.ts";
+import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
+import {PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
+import {IMovieCredit} from "@/pages/moviecredit/interfaces/IMovieCredit.ts";
 
-const MovieCreditWriteSchema = MovieCreditBaseSchema.extend({movie: IDStringSchema, person: IDStringSchema});
+const MovieCreditReadSchema = MovieCreditBaseSchema.extend({
+    _id: IDStringSchema.readonly(),
+    movie: z.union([IDStringSchema, z.lazy(() => MovieSchema)], {message: "Invalid Movie Type."}),
+    person: z.union([IDStringSchema, z.lazy(() => PersonSchema)], {message: "Invalid Person Type."}),
+});
 
-const CrewSchema = MovieCreditWriteSchema.extend({
+const CrewSchema = MovieCreditReadSchema.extend({
     roleType: z.literal("CREW"),
     job: NonEmptyStringSchema,
 }).omit({characterName: true, billingOrder: true});
 
-const CastSchema = MovieCreditWriteSchema.extend({
+const CastSchema = MovieCreditReadSchema.extend({
     roleType: z.literal("CAST"),
     characterName: NonEmptyStringSchema,
     billingOrder: PositiveNumberSchema,
 }).omit({job: true});
 
 /**
- * Schema for submitting a movie credit, either as cast or crew.
+ * Schema representing a validated movie credit, either as cast or crew.
  *
  * This is a discriminated union schema based on the `roleType` field, extending `MovieCreditBaseSchema`.
- * It adds the associated `movie` and `person` references, and includes role-specific requirements.
+ * It includes common credit metadata along with structured distinctions for cast and crew roles.
  *
  * Common Fields (from `MovieCreditBaseSchema` and extended):
+ * - `_id`: A read-only string ID.
  * - `movie`: Either a string ID or a full `MovieSchema` object. Represents the associated movie.
  * - `person`: Either a string ID or a full `PersonSchema` object. Represents the credited person.
  * - `notes`: Optional. Freeform annotation or remarks about the credit.
@@ -45,12 +53,12 @@ const CastSchema = MovieCreditWriteSchema.extend({
  *   - `characterName`: Omitted.
  *   - `billingOrder`: Omitted.
  */
-export const MovieCreditSubmitSchema = z.discriminatedUnion("roleType", [CrewSchema, CastSchema]);
+export const MovieCreditSchema: ZodType<IMovieCredit> = z.discriminatedUnion("roleType", [CrewSchema, CastSchema]);
 
 /**
- * Type representing the shape of valid movie credit submission data,
- * inferred from the `MovieCreditSubmitSchema`.
+ * Type representing a validated movie credit object,
+ * inferred from the `MovieCreditSchema`.
  *
- * This union type supports either a `CAST` or `CREW` credit structure as described above.
+ * This union type supports either a `CAST` or `CREW` credit structure.
  */
-export type MovieCreditSubmit = z.infer<typeof MovieCreditSubmitSchema>;
+export type MovieCredit = z.infer<typeof MovieCreditSchema>;

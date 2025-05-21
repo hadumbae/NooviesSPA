@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Movie} from "@/pages/movies/schema/MovieSchema.ts";
+import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import MovieOptions from "@/pages/movies/components/MovieOptions.tsx";
 import {Link} from "react-router-dom";

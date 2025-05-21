@@ -1,24 +1,24 @@
 import {FC} from 'react';
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import MoviePersonPreviewCard from "@/pages/movies/pages/persons/MoviePersonPreviewCard.tsx";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 
 interface ContainerProps {
-    cast: Person[];
-    staff: Person[];
+    cast: MovieCredit[];
+    crew: MovieCredit[];
 }
 
-const MoviePersonPreviewListContainer: FC<ContainerProps> = ({cast, staff}) => {
+const MoviePersonPreviewListContainer: FC<ContainerProps> = ({cast, crew}) => {
+    // TODO Update Person To Movie Credit
+
     return (
         <section className="space-y-5">
-            <h1 className="sr-only">Casts & Staff</h1>
+            <h1 className="sr-only">Casts & Crew</h1>
 
             <section className="space-y-1">
-                <h1 className="font-bold">Staff</h1>
+                <h1 className="font-bold">Crew</h1>
 
                 <div className="grid grid-cols-2 gap-2">
-                    {staff.map(
-                        (person) => <MoviePersonPreviewCard key={person._id} person={person}/>
-                    )}
+                    {crew.map((credit) => <MoviePersonPreviewCard key={credit._id} credit={credit}/>)}
                 </div>
             </section>
 
@@ -26,9 +26,7 @@ const MoviePersonPreviewListContainer: FC<ContainerProps> = ({cast, staff}) => {
                 <h1 className="font-bold">Cast</h1>
 
                 <div className="grid grid-cols-2 gap-2">
-                    {cast.map(
-                        (person) => <MoviePersonPreviewCard key={person._id} person={person}/>
-                    )}
+                    {cast.map((credit) => <MoviePersonPreviewCard key={credit._id} credit={credit}/>)}
                 </div>
             </section>
         </section>

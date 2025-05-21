@@ -6,9 +6,8 @@ import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import useFetchFavouriteMovieAndRelatedShowings
     from "@/pages/movies/hooks/client/favourites/useFetchFavouriteMovieAndRelatedShowings.ts";
-import MoviePersonPreviewListContainer from "@/pages/movies/pages/persons/MoviePersonPreviewListContainer.tsx";
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
+import MoviePersonPreviewListContainer from "@/pages/movies/pages/persons/MoviePersonPreviewListContainer.tsx";
 
 const MovieDetailsClientPage: FC = () => {
     const movieID = useFetchMovieBrowseParams();
@@ -20,7 +19,7 @@ const MovieDetailsClientPage: FC = () => {
     if (isError) return <PageError error={error}/>;
 
     const {movie} = data;
-    const {staff, cast} = movie;
+    const {crew, cast} = movie;
 
     return (
         <section
@@ -54,13 +53,15 @@ const MovieDetailsClientPage: FC = () => {
                     <h2 className="sr-only">Movie Details</h2>
                 </section>
 
-                {/*Staff And Cast*/}
+                {/*Crew And Cast*/}
                 <section>
-                    <h2 className="sr-only">Staff And Cast</h2>
+                    <h2 className="sr-only">Crew And Cast</h2>
+
+                    {/*TODO Crew and Cast Component*/}
 
                     <MoviePersonPreviewListContainer
-                        staff={staff as Person[]}
-                        cast={cast as Person[]}
+                        crew={crew}
+                        cast={cast}
                     />
                 </section>
             </PageSection>

@@ -3,7 +3,7 @@ import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditR
 import {
     MovieCreditPaginationSchema,
     PaginatedMovieCredit
-} from "@/pages/moviecredit/schemas/MovieCreditPaginationSchema.ts";
+} from "@/pages/moviecredit/schemas/model/paginated/MovieCreditPaginationSchema.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 
 /**

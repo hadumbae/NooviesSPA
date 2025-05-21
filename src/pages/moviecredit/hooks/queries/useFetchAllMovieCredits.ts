@@ -1,4 +1,4 @@
-import {MovieCreditArray, MovieCreditArraySchema} from "@/pages/moviecredit/schemas/MovieCreditArraySchema.ts";
+import {MovieCreditArray, MovieCreditArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditArraySchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import QueryFilters from "@/common/type/QueryFilters.ts";
