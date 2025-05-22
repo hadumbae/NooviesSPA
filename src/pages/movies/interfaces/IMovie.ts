@@ -3,6 +3,7 @@ import IGenre from "@/pages/genres/interfaces/IGenre.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {IMovieCredit} from "@/pages/moviecredit/interfaces/IMovieCredit.ts";
 import {ISO6391Code} from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
+import {ISO3166Alpha2Code} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
 
 /**
  * Represents a movie entity, including metadata, cast, crew, and related media.
@@ -32,7 +33,7 @@ export default interface IMovie {
     /**
      * Country of origin or production.
      */
-    country: string;
+    country: ISO3166Alpha2Code;
 
     /**
      * Brief summary or description of the movie's plot.

@@ -7,6 +7,7 @@ import {RefinedNumberSchema} from "@/common/schema/numbers/RefinedNumberSchema.t
 import {MovieBaseSchema} from "@/pages/movies/schema/model/MovieBaseSchema.ts";
 import {ISO6391CodeEnum} from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
 import unionWithEmptyString from "@/common/utility/schemas/unionWithEmptyString.ts";
+import {ISO3166Alpha2CodeEnum} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
 
 /**
  * Schema for validating movie submissions (e.g. from forms or API inputs).
@@ -45,9 +46,16 @@ export const MovieSubmitSchema = MovieBaseSchema.extend({
     ),
 
     /**
+     * The ISO 3166-1 alpha-2 country code representing the country where the movie was primarily produced.
+     *
+     * This should be a valid two-letter uppercase country code (e.g., "US", "FR", "JP").
+     */
+    country: unionWithEmptyString({schema: ISO3166Alpha2CodeEnum, disallowEmptyString: true}),
+
+    /**
      * The ISO 639-1 language code of the movie's original language.
      */
-    originalLanguage: unionWithEmptyString({schema: ISO6391CodeEnum}),
+    originalLanguage: unionWithEmptyString({schema: ISO6391CodeEnum, disallowEmptyString: true}),
 
     /**
      * Optional list of spoken languages for the movie (as non-empty strings).

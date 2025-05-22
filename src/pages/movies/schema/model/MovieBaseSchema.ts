@@ -5,6 +5,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema
 import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
 import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
 import {ISO6391CodeEnum} from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
+import {ISO3166Alpha2CodeEnum} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
 
 export const MovieBaseSchema = z.object({
     /**
@@ -23,9 +24,11 @@ export const MovieBaseSchema = z.object({
     tagline: NonEmptyStringSchema.max(100, "Must be 100 characters or less.").optional(),
 
     /**
-     * The country where the movie was produced.
+     * The ISO 3166-1 alpha-2 country code representing the country where the movie was primarily produced.
+     *
+     * This should be a valid two-letter uppercase country code (e.g., "US", "FR", "JP").
      */
-    country: NonEmptyStringSchema.max(100, "Must be 100 characters or less."),
+    country: ISO3166Alpha2CodeEnum,
 
     /**
      * A longer description or synopsis of the movie's plot.
