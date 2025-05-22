@@ -8,28 +8,22 @@ export default function useMovieSubmitForm(params?: {movie?: Movie}) {
     const {movie} = params || {};
 
     const defaultValues: MovieSubmit = {
-        title: "",
-        originalTitle: "",
-        tagline: "",
-        country: "",
-        synopsis: "",
-        genres: [],
-        releaseDate: "",
-        runtime: "",
-        originalLanguage: "",
-        languages: [],
-        subtitles: [],
-        trailerURL: "",
-    }
-
-    let genres = movie?.genres.map(convertObjectsToIDs) || defaultValues.genres;
+        title: movie ? movie.title : "",
+        originalTitle: movie ? movie.originalTitle : "",
+        tagline: movie ? movie.tagline : "",
+        country: movie ? movie.country : "",
+        synopsis: movie ? movie.synopsis : "",
+        genres: movie ? movie.genres.map(convertObjectsToIDs) : [],
+        releaseDate: movie ? movie.releaseDate : "",
+        runtime: movie ? movie.runtime : "",
+        originalLanguage: movie ? movie.originalLanguage : "",
+        languages: movie ? movie.languages : [],
+        subtitles: movie ? movie.subtitles : [],
+        trailerURL: movie ? movie.trailerURL : "",
+    };
 
     return useForm<MovieSubmit>({
         resolver: zodResolver(MovieSubmitSchema),
-        defaultValues: {
-            ...defaultValues,
-            ...(movie ? movie : {}),
-            genres,
-        },
+        defaultValues,
     });
 }
