@@ -4,6 +4,7 @@ import {Control} from "react-hook-form";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
+import ISO6391CodeConstant from "@/common/constants/languages/ISO6391CodeConstant.ts";
 
 interface Props {
     // The name of the form field. Used to register the input with react-hook-form.
@@ -33,7 +34,10 @@ interface Props {
  * @returns A JSX element for language selection in a hook-form-controlled environment.
  */
 const LanguageHookFormSelect: FC<Props> = (props) => {
-    const options = ISO6391LanguageConstant.map(({code, name}): ReactSelectOption => ({value: code, label: name}));
+    const options = ISO6391CodeConstant.map((code): ReactSelectOption => ({
+        value: code,
+        label: ISO6391LanguageConstant[code]
+    }));
 
     return (
         props.isMulti
