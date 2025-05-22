@@ -1,30 +1,28 @@
 /**
- * Represents an object containing a unique identifier.
- *
- * This interface is commonly used to type objects that include an `_id` field,
- * such as Mongoose documents or references to database entities.
+ * Represents any object that contains an `_id` field.
  */
 interface HasID {
-    /**
-     * The unique identifier for the object.
-     */
     _id: string;
 }
 
 /**
- * Extracts the `_id` string from a Mongoose document or returns the ObjectId string directly.
+ * Extracts the `_id` string from an object or returns the input directly if it's already a string.
  *
- * @param obj - The input value, which can be:
- * - An object containing an `_id` field (e.g., a Mongoose document).
- * - A string representing an ObjectId.
- * - `undefined`.
+ * This utility is helpful in APIs or components that accept either a full object with an `_id` or just the `_id` itself.
  *
- * @returns The extracted ObjectId string if available; otherwise, returns `undefined`.
+ * @param obj - An object with an `_id` property or a string representing the ID.
+ * @returns The extracted ID as a string.
+ *
+ * @example
+ * ```ts
+ * getIdFromObject({ _id: "abc123" }); // returns "abc123"
+ * getIdFromObject("xyz789");         // returns "xyz789"
+ * ```
  */
-export default (obj: HasID | string | undefined): string | undefined => {
+export default (obj: HasID | string): string => {
     if (obj != null && typeof obj === "object" && "_id" in obj) {
         return (obj as {_id: string})._id;
     }
 
-    return obj as string | undefined;
+    return obj as string;
 }

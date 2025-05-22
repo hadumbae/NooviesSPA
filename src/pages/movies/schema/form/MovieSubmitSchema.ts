@@ -5,6 +5,8 @@ import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
 import {RefinedDateStringSchema} from "@/common/schema/dates/RefinedDateStringSchema.ts";
 import {RefinedNumberSchema} from "@/common/schema/numbers/RefinedNumberSchema.ts";
 import {MovieBaseSchema} from "@/pages/movies/schema/model/MovieBaseSchema.ts";
+import {ISO6391CodeEnum} from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
+import unionWithEmptyString from "@/common/utility/schemas/unionWithEmptyString.ts";
 
 /**
  * Schema for validating movie submissions (e.g. from forms or API inputs).
@@ -41,6 +43,11 @@ export const MovieSubmitSchema = MovieBaseSchema.extend({
         runtime => runtime && runtime > 0,
         { message: "Must be greater than 0." }
     ),
+
+    /**
+     * The ISO 639-1 language code of the movie's original language.
+     */
+    originalLanguage: unionWithEmptyString({schema: ISO6391CodeEnum}),
 
     /**
      * Optional list of spoken languages for the movie (as non-empty strings).
