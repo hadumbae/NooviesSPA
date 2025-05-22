@@ -9,6 +9,7 @@ import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {MovieSubmit} from "@/pages/movies/schema/form/MovieSubmitSchema.ts";
 import {UseMutationResult} from "@tanstack/react-query";
 import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
+import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 
 interface ViewProps {
     form: UseFormReturn<MovieSubmit>;
@@ -43,10 +44,11 @@ const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation}) => 
                     description="The tagline of the movie."
                 />
 
-                <HookFormInput
+                <CountryHookFormSelect
                     name="country"
                     label="Country"
                     control={form.control}
+                    isMulti={false}
                     description="The country of origin of the movie."
                 />
 

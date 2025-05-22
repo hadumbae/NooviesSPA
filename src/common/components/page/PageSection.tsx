@@ -40,7 +40,7 @@ const PageSection: FC<PropsWithChildren<PageSectionProps>> = ({children, classNa
             {title && <HeaderSubtitle>{title}</HeaderSubtitle>}
             {srTitle && <h1 className="sr-only">{srTitle}</h1>}
 
-            <div className={cn("space-y-3", className)}>
+            <div className={cn(className)}>
                 {children}
             </div>
         </section>
