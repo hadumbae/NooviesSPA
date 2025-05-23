@@ -10,6 +10,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import CollapsibleTextblock from "@/common/components/text/CollapsibleTextblock.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
+import MovieDetailsBreadcrumb from "@/pages/movies/components/headers/admin/details/MovieDetailsBreadcrumb.tsx";
 
 const MoviePage: FC = () => {
     useTitle("Movie Details");
@@ -26,6 +27,8 @@ const MoviePage: FC = () => {
 
     return (
         <PageFlexWrapper>
+            <MovieDetailsBreadcrumb />
+
             <MovieDetailsHeader movie={movie} />
 
             <section>

@@ -3,7 +3,7 @@ import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {format} from "date-fns";
-import {Pencil, TableOfContents, Trash} from "lucide-react";
+import {Pencil, Trash} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import {cn} from "@/common/lib/utils.ts";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
@@ -38,10 +38,6 @@ const MovieDetailsHeader: FC<Props> = ({movie}) => {
             </section>
 
             <section className="space-x-2 flex justify-end items-center">
-                <HeaderLink variant="link" to="/admin/movies">
-                    <TableOfContents /> Index
-                </HeaderLink>
-
                 <HeaderLink variant="link" to={`/admin/movies/edit/${_id}`}>
                     <Pencil /> Edit
                 </HeaderLink>
