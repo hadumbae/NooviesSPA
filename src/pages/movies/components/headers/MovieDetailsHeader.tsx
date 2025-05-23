@@ -17,7 +17,7 @@ interface Props {
 const MovieDetailsHeader: FC<Props> = ({movie}) => {
     const navigate = useNavigate();
 
-    const {_id, title, releaseDate} = movie;
+    const {_id, title, releaseDate, tagline} = movie;
     const formattedDate = releaseDate && format(releaseDate, "yyyy");
 
     const {mutate: deleteMovie, isPending, isSuccess} = useMovieDeleteMutation({
@@ -33,10 +33,8 @@ const MovieDetailsHeader: FC<Props> = ({movie}) => {
             "md:justify-between md:items-center"
         )}>
             <section>
-                <HeaderTitle>{title}</HeaderTitle>
-                <HeaderDescription>
-                    Movie {formattedDate && ` | ${formattedDate}`}
-                </HeaderDescription>
+                <HeaderTitle>{title} ({formattedDate})</HeaderTitle>
+                <HeaderDescription>{tagline}</HeaderDescription>
             </section>
 
             <section className="space-x-2 flex justify-end items-center">

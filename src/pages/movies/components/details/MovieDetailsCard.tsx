@@ -1,41 +1,68 @@
 import {FC} from 'react';
 import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
-import {format} from "date-fns";
 import formatDuration from "@/common/utility/formatDuration.ts";
+import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
+import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
+import {Badge} from "@/common/components/ui/badge.tsx";
+import LabelContent from "@/common/components/LabelContent.tsx";
+import {Link} from "react-router-dom";
+import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
 
 interface Props {
     movie: Movie;
 }
 
 const MovieDetailsCard: FC<Props> = ({movie}) => {
-    const {
-        releaseDate,
-        runtime,
-        languages,
-        subtitles,
-        trailerURL,
-    } = movie;
+    const {originalTitle, originalLanguage, country, runtime, trailerURL, genres, languages, subtitles} = movie;
 
-    const formattedDate = format(releaseDate, "dd MMM, yyyy");
     const movieDuration = formatDuration(runtime);
-    const languageString = languages.join(", ");
-    const subtitleString = subtitles.join(", ");
+    const countryName = ISO3166Alpha2CountryConstant[country];
+    const originalLanguageName = ISO6391LanguageConstant[originalLanguage];
+
+    const genreBadges = (genres as Genre[]).map(
+        ({_id, name}) => <Badge key={_id} variant="outline">{name}</Badge>
+    );
+
+    const languageBadges = subtitles.map(
+        (language) => <Badge key={language} variant="outline">{ISO6391LanguageConstant[language]}</Badge>
+    );
+
+    const subtitleBadges = subtitles.map(
+        (subtitle) => <Badge key={subtitle} variant="outline">{ISO6391LanguageConstant[subtitle]}</Badge>
+    );
 
     return (
         <Card>
-            <CardContent className="p-4 flex flex-col space-y-6">
-                <div className="flex justify-between items-center">
-                    <DetailsCardSpan label="Release Date" text={formattedDate} />
-                    <DetailsCardSpan label="Duration" text={movieDuration} />
-                    <DetailsCardSpan label="Trailer" text={trailerURL ? "Link" : "None"} to={trailerURL} />
-                </div>
+            <CardContent className="p-4 space-y-3">
+                <LabelContent label="Original Title" orientation="horizontal">{originalTitle}</LabelContent>
 
-                <div className="grid grid-cols-2 gap-4">
-                    <DetailsCardSpan label="Languages" text={languageString} />
-                    <DetailsCardSpan label="Subtitles" text={subtitleString} />
-                </div>
+                <LabelContent label="Country" orientation="horizontal">{countryName}</LabelContent>
+
+                <LabelContent label="Original Language" orientation="horizontal">{originalLanguageName}</LabelContent>
+
+                <LabelContent label="Runtime" orientation="horizontal">{movieDuration}</LabelContent>
+
+                <LabelContent label="Trailer" orientation="horizontal">
+                    {
+                        trailerURL ?
+                            <Link to={trailerURL} className="text-neutral-500 hover:underline hover:text-black">
+                                Link
+                            </Link> : "None"
+                    }
+                </LabelContent>
+
+                <LabelContent label="Genres" orientation="horizontal" classNames={{content: "space-x-2"}}>
+                    {genres.length > 0 ? genreBadges : "None"}
+                </LabelContent>
+
+                <LabelContent label="Languages" orientation="horizontal" classNames={{content: "space-x-2"}}>
+                    {languages.length > 0 ? languageBadges : "None"}
+                </LabelContent>
+
+                <LabelContent label="Subtitles" orientation="horizontal" classNames={{content: "space-x-2"}}>
+                    {subtitles.length > 0 ? subtitleBadges : "None"}
+                </LabelContent>
             </CardContent>
         </Card>
     );
