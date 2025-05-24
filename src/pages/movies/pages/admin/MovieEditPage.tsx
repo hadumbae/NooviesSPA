@@ -8,7 +8,7 @@ import PageError from "@/common/components/page/errors/PageError.tsx";
 import {useNavigate} from "react-router-dom";
 import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import MovieSubmitFormContainer from "@/pages/movies/components/admin/forms/MovieSubmitFormContainer.tsx";
-import MovieEditBreadcrumb from "@/pages/movies/components/headers/admin/details/MovieEditBreadcrumb.tsx";
+import MovieEditBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MovieEditBreadcrumb.tsx";
 
 const MovieEditPage: FC = () => {
     const navigate = useNavigate();
