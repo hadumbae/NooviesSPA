@@ -4,35 +4,41 @@ import MovieDetailsHeader from "@/pages/movies/components/headers/MovieDetailsHe
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
 import useFetchMovieParams from "@/pages/movies/hooks/params/useFetchMovieParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/errors/PageError.tsx";
 import MovieDetailsCard from "@/pages/movies/components/details/MovieDetailsCard.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import CollapsibleTextblock from "@/common/components/text/CollapsibleTextblock.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import MovieDetailsBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MovieDetailsBreadcrumb.tsx";
+import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
+import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
+import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 
 const MoviePage: FC = () => {
     useTitle("Movie Details");
 
     const {movieID} = useFetchMovieParams();
-    const {data: movie, isPending, isError, error} = useFetchMovie({_id: movieID!});
+
+    const {data, isPending, isError, error} = useFetchMovie({_id: movieID!});
+    const {data: movie, error: parseError} = useValidateData({isPending, data, schema: MovieSchema});
 
     useTitle(movie?.title);
 
-    if (isPending) return <PageLoader />
-    if (isError) return <PageError error={error} />
+    if (isPending) return <PageLoader />;
+    if (isError) return <PageHTTPError error={error} />;
+    if (parseError) return <PageParseError error={parseError} />;
 
-    const {synopsis} = movie;
+    const {synopsis} = movie!;
 
     return (
         <PageFlexWrapper>
             <MovieDetailsBreadcrumb />
 
-            <MovieDetailsHeader movie={movie} />
+            <MovieDetailsHeader movie={movie!} />
 
             <section>
-                <MovieDetailsCard movie={movie} />
+                <MovieDetailsCard movie={movie!} />
             </section>
 
             <PageSection title="Synopsis">

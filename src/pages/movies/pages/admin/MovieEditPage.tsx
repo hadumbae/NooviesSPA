@@ -4,19 +4,24 @@ import MovieEditHeader from "@/pages/movies/components/headers/MovieEditHeader.t
 import useFetchMovieParams from "@/pages/movies/hooks/params/useFetchMovieParams.ts";
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/errors/PageError.tsx";
 import {useNavigate} from "react-router-dom";
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
+import {Movie, MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
 import MovieSubmitFormContainer from "@/pages/movies/components/admin/forms/MovieSubmitFormContainer.tsx";
 import MovieEditBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MovieEditBreadcrumb.tsx";
+import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
+import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 
 const MovieEditPage: FC = () => {
     const navigate = useNavigate();
     const {movieID} = useFetchMovieParams();
-    const {data: movie, isPending, isError, error} = useFetchMovie({_id: movieID!});
+
+    const {data, isPending, isError, error} = useFetchMovie({_id: movieID!});
+    const {data: movie, error: parseError} = useValidateData({isPending, data, schema: MovieSchema});
 
     if (isPending) return <PageLoader />;
-    if (isError) return <PageError error={error} />;
+    if (isError) return <PageHTTPError error={error} />;
+    if (parseError) return <PageParseError error={parseError} />;
 
     const onSubmit = (movie: Movie) => {
         navigate(`/admin/movies/get/${movie._id}`);
@@ -24,11 +29,11 @@ const MovieEditPage: FC = () => {
 
     return (
         <PageFlexWrapper>
-            <MovieEditBreadcrumb movie={movie} />
+            <MovieEditBreadcrumb movie={movie!} />
 
-            <MovieEditHeader movie={movie} />
+            <MovieEditHeader movie={movie!} />
 
-            <MovieSubmitFormContainer onSubmit={onSubmit} movie={movie} />
+            <MovieSubmitFormContainer onSubmit={onSubmit} movie={movie!} />
         </PageFlexWrapper>
     );
 };
