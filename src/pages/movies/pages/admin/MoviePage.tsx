@@ -18,9 +18,11 @@ import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 const MoviePage: FC = () => {
     useTitle("Movie Details");
 
-    const {movieID} = useFetchMovieParams();
+    const movieParams = useFetchMovieParams();
+    if (!movieParams) return <PageLoader />;
 
-    const {data, isPending, isError, error} = useFetchMovie({_id: movieID!});
+    const {movieID} = movieParams;
+    const {data, isPending, isError, error} = useFetchMovie({_id: movieID, populate: true});
     const {data: movie, error: parseError} = useValidateData({isPending, data, schema: MovieSchema});
 
     useTitle(movie?.title);

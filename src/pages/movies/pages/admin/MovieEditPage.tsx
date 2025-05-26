@@ -14,9 +14,11 @@ import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 
 const MovieEditPage: FC = () => {
     const navigate = useNavigate();
-    const {movieID} = useFetchMovieParams();
+    const movieParams = useFetchMovieParams();
+    if (!movieParams) return <PageLoader />;
 
-    const {data, isPending, isError, error} = useFetchMovie({_id: movieID!});
+    const {movieID} = movieParams;
+    const {data, isPending, isError, error} = useFetchMovie({_id: movieID});
     const {data: movie, error: parseError} = useValidateData({isPending, data, schema: MovieSchema});
 
     if (isPending) return <PageLoader />;
