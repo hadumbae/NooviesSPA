@@ -1,10 +1,7 @@
-import QueryFilters from "@/common/type/QueryFilters.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
-import {
-    MovieCreditPaginationSchema,
-    PaginatedMovieCredit
-} from "@/pages/moviecredit/schemas/model/paginated/MovieCreditPaginationSchema.ts";
-import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
+import {MovieCreditFilters} from "@/pages/moviecredit/schemas/filters/MovieCreditFilterSchema.ts";
+import {useQuery} from "@tanstack/react-query";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**
  * Props for fetching paginated movie credit data.
@@ -17,38 +14,54 @@ interface PaginatedProps {
     perPage?: number;
 
     /** Optional filter criteria to apply to the movie credit query. */
-    filters?: QueryFilters;
+    filters?: MovieCreditFilters;
 
     /** Whether to populate related data in the response. Defaults to false. */
     populate?: boolean;
 }
 
 /**
- * React hook to fetch and validate paginated movie credit data from the API.
+ * A React Query hook to fetch paginated movie credits from the repository.
  *
- * This hook wraps the `MovieCreditRepository.paginated` call with client-side validation using
- * the {@link MovieCreditPaginationSchema}. It automatically redirects on validation failure.
- *
- * The returned data includes:
- * - `totalItems`: Total number of movie credits matching the query.
- * - `items`: The array of movie credit entries for the current page.
- *
- * It uses `useFetchValidatedDataWithRedirect`, which handles data fetching, caching,
- * Zod-based validation, and redirecting on schema mismatch.
+ * Wraps `MovieCreditRepository.paginated` with `useQuery` and automatically
+ * handles page, per-page, filters, and population options.
  *
  * @param params - Pagination and filtering options.
- * @returns A query result with validated `PaginatedMovieCredit` data.
+ * @returns A React Query result containing the paginated movie credit data.
+ *
+ * @example
+ * ```tsx
+ * const query = useFetchPaginatedMovieCredit({
+ *   page: 2,
+ *   perPage: 20,
+ *   filters: { name: "Christopher" },
+ *   populate: true
+ * });
+ * ```
  */
 export default function useFetchPaginatedMovieCredit(params: PaginatedProps) {
     const {page = 1, perPage = 10, filters = {}, populate = false} = params;
 
     const queryKey = ["fetch_paginated_movie_credits", {page, perPage, filters, populate}];
-    const schema = MovieCreditPaginationSchema;
-    const action = () => MovieCreditRepository.paginated({populate, filters: {page, perPage, ...filters}});
 
-    return useFetchValidatedDataWithRedirect<typeof MovieCreditPaginationSchema, PaginatedMovieCredit>({
+    const action = async () => {
+        const {response, result} = await MovieCreditRepository.paginated({
+            populate,
+            filters: {page, perPage, ...filters}
+        });
+
+        if (!response.ok) {
+            throw new HttpResponseError({
+                response,
+                message: "Failed to fetch movie credits. Please try again.",
+            });
+        }
+
+        return result;
+    }
+
+    return useQuery({
         queryKey,
-        schema,
-        action,
+        queryFn: action,
     });
 }
