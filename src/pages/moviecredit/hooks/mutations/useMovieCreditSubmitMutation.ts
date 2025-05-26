@@ -38,10 +38,10 @@ interface SubmitParams {
  * @returns A `react-query` mutation object for submitting a {@link MovieCreditSubmit} payload.
  */
 export default function useMovieCreditSubmitMutation(
-    params: SubmitParams
+    params?: SubmitParams
 ): UseMutationResult<MovieCredit, Error, MovieCreditSubmit> {
     const queryClient = useQueryClient();
-    const {onSubmit, onFail, successToast, errorToast, populate = false} = params;
+    const {onSubmit, onFail, successToast, errorToast, populate = false} = params || {};
 
     const mutationKey = ["submit_single_movie_credit"];
 
