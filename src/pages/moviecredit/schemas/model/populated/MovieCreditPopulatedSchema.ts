@@ -1,11 +1,14 @@
 import {MovieCreditBaseSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditBaseSchema.ts";
-import {z} from "zod";
+import {z, ZodType} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/PositiveNumberSchema.ts";
 import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
+import {IPopulatedMovieCredit} from "@/pages/moviecredit/interfaces/IPopulatedMovieCredit.ts";
+import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 
 const MovieCreditObjectSchema = MovieCreditBaseSchema.extend({
+    _id: IDStringSchema.readonly(),
     movie: z.lazy(() => MovieSchema, {message: "Invalid Movie Type."}),
     person: z.lazy(() => PersonSchema, {message: "Invalid Person Type."}),
 });
@@ -27,29 +30,14 @@ const CastSchema = MovieCreditObjectSchema.extend({
  * This version of the credit schema assumes the `movie` and `person` fields are populated
  * with full objects (`MovieSchema` and `PersonSchema`, respectively), rather than IDs.
  *
- * Common Fields (from `MovieCreditBaseSchema` and extended):
- * - `movie`: Required. A full `MovieSchema` object.
- * - `person`: Required. A full `PersonSchema` object.
- * - `notes`: Optional. Freeform annotation or remarks about the credit.
- * - `uncredited`: Optional. Boolean indicating the person was not officially credited.
- * - `voiceOnly`: Optional. Boolean indicating a voice-only performance.
- * - `cameo`: Optional. Boolean indicating a cameo appearance.
- * - `motionCapture`: Optional. Boolean indicating performance via motion capture.
+ * @remarks
+ * This schema is a discriminated union of two variants:
+ * - **Crew**: Represents a crew member with a `roleType` of `"CREW"` and includes a `job` field.
+ * - **Cast**: Represents a cast member with a `roleType` of `"CAST"` and includes `characterName` and `billingOrder` fields.
  *
- * Variants:
- * - **CAST**
- *   - `roleType`: `"CAST"`
- *   - `characterName`: Required. Name of the character portrayed.
- *   - `billingOrder`: Required. Positive number indicating the billing sequence in credits.
- *   - `job`: Omitted.
- *
- * - **CREW**
- *   - `roleType`: `"CREW"`
- *   - `job`: Required. Specific crew job title (e.g., "Composer", "Editor").
- *   - `characterName`: Omitted.
- *   - `billingOrder`: Omitted.
+ * The schema extends `MovieCreditBaseSchema` by adding identifiers for the movie and person, as well as a read-only `_id` field.
  */
-export const MovieCreditPopulatedSchema = z.discriminatedUnion("roleType", [CrewSchema, CastSchema]);
+export const MovieCreditPopulatedSchema: ZodType<IPopulatedMovieCredit> = z.discriminatedUnion("roleType", [CrewSchema, CastSchema]);
 
 /**
  * Type representing a fully populated movie credit object,
