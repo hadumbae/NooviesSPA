@@ -1,6 +1,7 @@
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
+    MovieCreditFormValues,
     MovieCreditSubmit,
     MovieCreditSubmitSchema
 } from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
@@ -12,51 +13,19 @@ interface SubmitParams {
     presetValues?: Partial<MovieCreditSubmit>
 }
 
-export default function useMovieCreditSubmitForm(params?: SubmitParams): UseFormReturn<MovieCreditSubmit> {
+export default function useMovieCreditSubmitForm(params?: SubmitParams): UseFormReturn<MovieCreditFormValues> {
     const {credit, presetValues} = params || {};
 
-    // Base Values
-
     const baseValues = {
-        roleType: undefined,
-        movie: getDefaultValue({
-            preset: presetValues?.movie,
-            data: credit?.movie,
-            fallback: undefined,
-        }),
-        person: getDefaultValue({
-            preset: presetValues?.person,
-            data: credit?.movie,
-            fallback: undefined,
-        }),
-        notes: getDefaultValue({
-            preset: presetValues?.notes,
-            data: credit?.notes,
-            fallback: ""
-        }),
-        uncredited: getDefaultValue({
-            preset: presetValues?.uncredited,
-            data: credit?.uncredited,
-            fallback: false,
-        }),
-        voiceOnly: getDefaultValue({
-            preset: presetValues?.voiceOnly,
-            data: credit?.voiceOnly,
-            fallback: false,
-        }),
-        cameo: getDefaultValue({
-            preset: presetValues?.cameo,
-            data: credit?.cameo,
-            fallback: false,
-        }),
-        motionCapture: getDefaultValue({
-            preset: presetValues?.motionCapture,
-            data: credit?.motionCapture,
-            fallback: false,
-        }),
+        roleType: "" as "" | "CREW" | "CAST",
+        movie: getDefaultValue({preset: presetValues?.movie, data: credit?.movie, fallback: undefined}),
+        person: getDefaultValue({preset: presetValues?.person, data: credit?.movie, fallback: undefined}),
+        notes: getDefaultValue({preset: presetValues?.notes, data: credit?.notes, fallback: ""}),
+        uncredited: getDefaultValue({preset: presetValues?.uncredited, data: credit?.uncredited, fallback: false}),
+        voiceOnly: getDefaultValue({preset: presetValues?.voiceOnly, data: credit?.voiceOnly, fallback: false}),
+        cameo: getDefaultValue({preset: presetValues?.cameo, data: credit?.cameo, fallback: false}),
+        motionCapture: getDefaultValue({preset: presetValues?.motionCapture, data: credit?.motionCapture, fallback: false}),
     };
-
-    // Cast & Crew
 
     const crewValues = {
         job: getDefaultValue({
@@ -83,16 +52,16 @@ export default function useMovieCreditSubmitForm(params?: SubmitParams): UseForm
         preset: presetValues?.roleType,
         data: credit?.roleType,
         fallback: baseValues["roleType"]
-    })
+    });
 
-    // useForm
+    const defaultValues = {
+        ...baseValues,
+        ...(roleType === "CREW" && crewValues),
+        ...(roleType === "CAST" && castValues)
+    } as MovieCreditFormValues;
 
-    return useForm<MovieCreditSubmit>({
+    return useForm<MovieCreditFormValues>({
         resolver: zodResolver(MovieCreditSubmitSchema),
-        defaultValues: {
-            ...baseValues,
-            ...(roleType === "CREW" && crewValues),
-            ...(roleType === "CAST" && castValues)
-        },
+        defaultValues,
     });
 }
