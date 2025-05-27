@@ -1,30 +1,60 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
-import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
-import {UseQueryResult} from "@tanstack/react-query";
-import {MovieArray, MovieArraySchema} from "@/pages/movies/schema/model/MovieArraySchema.ts";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {MovieArray} from "@/pages/movies/schema/model/MovieArraySchema.ts";
 
 /**
- * Custom hook to fetch all movies from the API with optional filters.
- *
- * This hook integrates with a schema-based data fetching system, ensuring
- * the response matches the expected structure defined by `MovieArraySchema`.
- * It returns the fetched data, loading state, error state, and other query-related utilities.
- *
- * @function useFetchAllMovies
- *
- * @param {object} [params] - Optional parameters for fetching movies.
- * @param {QueryFilters} [params.filters] - Optional filters to apply to the movie query.
- *
- * @returns {UseQueryResult<MovieArray>} - Query result object containing the fetched movies,
- * loading status, error details, and other utilities from the TanStack Query library.
+ * Optional parameters for fetching a list of movies.
  */
-export default function useFetchAllMovies(params?: {filters?: QueryFilters}): UseQueryResult<MovieArray> {
-    const {filters = {}} = params || {};
+type FetchParams = {
+    /**
+     * Filters to apply to the movie query. Can include arbitrary fields based on backend support.
+     */
+    filters?: QueryFilters;
 
-    const queryKey = ["fetch_all_movies", {filters}];
-    const schema = MovieArraySchema;
-    const action = () => MovieRepository.getAll({filters});
+    /**
+     * Whether to populate reference fields with related documents (e.g., genres, cast).
+     * Defaults to `false`.
+     */
+    populate?: boolean;
 
-    return useFetchValidatedDataWithRedirect<typeof schema, MovieArray>({schema, action, queryKey});
+    /**
+     * Whether to include virtual fields defined on the movie model.
+     * Defaults to `false`.
+     */
+    virtuals?: boolean;
+};
+
+/**
+ * React hook to fetch all movies using React Query.
+ *
+ * Wraps the `MovieRepository.getAll` method and provides caching, error handling,
+ * and state management via `useQuery`.
+ *
+ * @param params - Optional fetch parameters including filters, population, and virtual fields.
+ * @returns A `UseQueryResult` containing the movie array and query status.
+ *
+ * @example
+ * ```ts
+ * const { data: movies, isLoading, error } = useFetchAllMovies({
+ *   filters: { genre: "sci-fi" },
+ *   populate: true,
+ * });
+ * ```
+ */
+export default function useFetchAllMovies(params?: FetchParams): UseQueryResult<MovieArray> {
+    const {filters = {}, populate = false, virtuals = false} = params || {};
+
+    const queryKey = ["fetch_all_movies", {filters, populate, virtuals}];
+    const fetchMovies = async () => {
+        const {result, response} = await MovieRepository.getAll({populate, virtuals, filters});
+        if (!response.ok) throw new HttpResponseError({response, message: "Failed to fetch movies."});
+        return result;
+    }
+
+    return useQuery({
+        queryKey,
+        queryFn: fetchMovies,
+    });
 }

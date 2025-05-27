@@ -28,7 +28,4 @@ export const PersonSchema: ZodType<IPerson> = z.object({
         .array(z.union([IDStringSchema, z.any()])),
 });
 
-export const PersonArraySchema = z.array(PersonSchema);
-
 export type Person = z.infer<typeof PersonSchema>;
-export type Persons = z.infer<typeof PersonArraySchema>;
