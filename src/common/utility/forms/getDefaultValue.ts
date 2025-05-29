@@ -1,46 +1,24 @@
 /**
- * Represents the parameters used to determine a default value.
+ * Returns the first non-nullish (`null` or `undefined`) value from the provided arguments.
  *
- * @typeParam TData - The type of the primary data values (`preset` and `data`).
- * @typeParam TFallback - The type of the fallback value.
- */
-interface ValueParams<TData, TFallback> {
-    /**
-     * An optional preset value that takes precedence if provided.
-     */
-    preset?: TData;
-
-    /**
-     * An optional data value used if `preset` is undefined.
-     */
-    data?: TData;
-
-    /**
-     * A fallback value used if both `preset` and `data` are undefined.
-     */
-    fallback: TFallback;
-}
-
-/**
- * Determines the effective value by selecting the first defined value among `preset`, `data`, and `fallback`.
+ * This utility is useful for resolving default values where `preset` takes priority over `data`,
+ * and `fallback` acts as a final fallback if both are nullish.
  *
- * @typeParam TData - The type of the primary data values (`preset` and `data`).
- * @typeParam TFallback - The type of the fallback value.
+ * @template TData - The primary data type being checked.
+ * @template TFallback - The type of the fallback value.
  *
- * @param values - An object containing `preset`, `data`, and `fallback` values.
- * @returns The first defined value among `preset`, `data`, and `fallback`.
+ * @param preset - A preset value that takes the highest priority if defined.
+ * @param data - A secondary value used if `preset` is nullish.
+ * @param fallback - A fallback value used if both `preset` and `data` are nullish.
+ *
+ * @returns The first non-nullish value among `preset`, `data`, or `fallback`.
  *
  * @example
- * ```typescript
- * const result = getDefaultValue({
- *   preset: undefined,
- *   data: "value",
- *   fallback: "default"
- * });
- * // result is "value"
+ * ```ts
+ * getDefaultValue(undefined, "hello", "default"); // returns "hello"
+ * getDefaultValue(null, null, 42); // returns 42
  * ```
  */
-export default function getDefaultValue<TData, TFallback>(values: ValueParams<TData, TFallback>): TData | TFallback {
-    const {preset, data, fallback} = values;
+export default function getDefaultValue<TData, TFallback>(preset: TData, data: TData, fallback: TFallback): TData | TFallback {
     return preset ?? data ?? fallback;
 }
