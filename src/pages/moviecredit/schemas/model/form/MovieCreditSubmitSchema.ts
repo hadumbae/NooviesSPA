@@ -1,57 +1,42 @@
-import {MovieCreditBaseSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditBaseSchema.ts";
 import {z} from "zod";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/PositiveNumberSchema.ts";
-import unionWithEmptyString from "@/common/utility/schemas/unionWithEmptyString.ts";
-import {RefinedIDStringSchema} from "@/common/schema/strings/RefinedIDStringSchema.ts";
-
-const MovieCreditWriteSchema = MovieCreditBaseSchema.extend({
-    movie: RefinedIDStringSchema,
-    person: RefinedIDStringSchema,
-    notes: unionWithEmptyString({schema: NonEmptyStringSchema.optional()}),
-});
-
-const EmptySchema = MovieCreditWriteSchema.extend({
-    roleType: z.literal(""),
-}).omit({job: true, characterName: true, billingOrder: true});
-
-const CrewSchema = MovieCreditWriteSchema.extend({
-    roleType: z.literal("CREW"),
-    job: unionWithEmptyString({schema: NonEmptyStringSchema, disallowEmptyString: true}),
-}).omit({characterName: true, billingOrder: true});
-
-const CastSchema = MovieCreditWriteSchema.extend({
-    roleType: z.literal("CAST"),
-    characterName: unionWithEmptyString({schema: NonEmptyStringSchema, disallowEmptyString: true}),
-    billingOrder: unionWithEmptyString({schema: PositiveNumberSchema, disallowEmptyString: true}),
-}).omit({job: true});
+import {MovieCreditSubmitCrewSchema} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitCrewSchema.ts";
+import {MovieCreditFormCastSchema} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitCastSchema.ts";
+import {MovieCreditSubmitEmptySchema} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitEmptySchema.ts";
 
 /**
- * A Zod schema that defines form-level validation for a movie credit input,
- * using a discriminated union on the `roleType` field.
+ * Zod discriminated union schema used to represent the various types of movie credit form submissions.
  *
- * - `roleType` can be "CAST", "CREW", or an empty string.
- * - Enforces field presence and types based on the role type:
- *   - "CAST" requires `characterName` and `billingOrder`.
- *   - "CREW" requires `job`.
- *   - Empty role omits both.
+ * @remarks
+ * This schema allows the form to dynamically validate one of three possible variants based on the `roleType` discriminator:
+ * - `""` → Empty form (used when no roleType is selected yet)
+ * - `"CREW"` → Crew-specific form input (requires `job`)
+ * - `"CAST"` → Cast-specific form input (requires `characterName` and `billingOrder`)
  *
- * Uses `MovieCreditBaseSchema` as a foundation and extends with specific fields.
+ * It is intended for general form binding and validation before final submission.
+ *
+ * @see MovieCreditSubmitSchema — for stricter validation that disallows the empty variant
  */
-export const MovieCreditFormSchema = z.discriminatedUnion("roleType", [EmptySchema, CrewSchema, CastSchema]);
+export const MovieCreditFormSchema = z.discriminatedUnion(
+    "roleType",
+    [MovieCreditSubmitEmptySchema, MovieCreditSubmitCrewSchema, MovieCreditFormCastSchema],
+);
 
 /**
- * Type representing the form input values derived from `MovieCreditFormSchema`.
+ * Inferred TypeScript type from {@link MovieCreditFormSchema}, representing all possible movie credit form values.
  *
- * Used for working with validated movie credit data on the frontend.
+ * @remarks
+ * This includes union variants for `CAST`, `CREW`, and the initial unselected (empty) state.
  */
 export type MovieCreditFormValues = z.infer<typeof MovieCreditFormSchema>;
 
 /**
- * A stricter version of `MovieCreditFormSchema` for submission,
- * refining the schema to disallow empty `roleType` values.
+ * Refined schema for submitting movie credit data.
  *
- * Ensures the user has explicitly selected a role before submitting the form.
+ * @remarks
+ * This schema builds on {@link MovieCreditFormSchema} but **excludes** the empty state (`roleType: ""`).
+ * Used for final form validation before making API requests or mutations.
+ *
+ * Ensures that the user has selected either `"CAST"` or `"CREW"` as a valid role type.
  */
 export const MovieCreditSubmitSchema = MovieCreditFormSchema.refine(
     data => data.roleType !== "",
@@ -59,8 +44,9 @@ export const MovieCreditSubmitSchema = MovieCreditFormSchema.refine(
 );
 
 /**
- * Type representing the validated, ready-to-submit movie credit data.
+ * Inferred TypeScript type from {@link MovieCreditSubmitSchema}, representing validated movie credit submissions.
  *
- * Used after form-level validation and refinement for actual submission logic.
+ * @remarks
+ * Unlike {@link MovieCreditFormValues}, this type guarantees a non-empty `roleType`.
  */
 export type MovieCreditSubmit = z.infer<typeof MovieCreditSubmitSchema>;
