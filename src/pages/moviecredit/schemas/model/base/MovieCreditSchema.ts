@@ -4,11 +4,13 @@ import {z, ZodType} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/PositiveNumberSchema.ts";
 import {IMovieCredit} from "@/pages/moviecredit/interfaces/IMovieCredit.ts";
+import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
+import {PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
 
 const MovieCreditReadSchema = MovieCreditBaseSchema.extend({
     _id: IDStringSchema.readonly(),
-    movie: IDStringSchema,
-    person: IDStringSchema,
+    movie: z.union([IDStringSchema, z.lazy(() => MovieSchema)]),
+    person: z.union([IDStringSchema, z.lazy(() => PersonSchema)]),
 });
 
 const CrewSchema = MovieCreditReadSchema.extend({

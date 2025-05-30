@@ -1,5 +1,5 @@
 import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
-import {MovieCreditPopulatedSchema} from "@/pages/moviecredit/schemas/model/populated/MovieCreditPopulatedSchema.ts";
+import {MovieCreditPopulatedSchema} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedSchema.ts";
 import {z} from "zod";
 
 /**
