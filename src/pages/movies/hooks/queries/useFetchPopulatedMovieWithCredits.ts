@@ -6,7 +6,7 @@ import useValidateData from "@/common/hooks/validation/useValidateData.ts";
 import {
     MovieCreditPopulatedPaginationSchema
 } from "@/pages/moviecredit/schemas/model/paginated/MovieCreditPopulatedPaginationSchema.ts";
-import {MoviePopulatedSchema} from "@/pages/movies/schema/model/MoviePopulatedSchema.ts";
+import {MovieWithDataSchema} from "@/pages/movies/schema/model/populated/MovieWithDataSchema.ts";
 
 interface FetchParams {
     _id: ObjectId;
@@ -22,7 +22,7 @@ export default function useFetchPopulatedMovieWithCredits(params: FetchParams) {
     // Query
 
     const movieQuery = useFetchMovie({_id, virtuals, populate: true});
-    const creditQuery = useFetchPaginatedMovieCredit({page, perPage, filters: creditFilters, populate: true});
+    const creditQuery = useFetchPaginatedMovieCredit({page, perPage, filters: {...creditFilters, movie: _id}, populate: true});
     const queries = [movieQuery, creditQuery];
 
     const isPending = queries.some((query) => query.isPending);
@@ -31,10 +31,10 @@ export default function useFetchPopulatedMovieWithCredits(params: FetchParams) {
 
     // Validation
 
-    const movieValidation = useValidateData<typeof MoviePopulatedSchema>({
+    const movieValidation = useValidateData<typeof MovieWithDataSchema>({
         isPending,
         data: movieQuery.data,
-        schema: MoviePopulatedSchema,
+        schema: MovieWithDataSchema,
     });
 
     const creditValidation = useValidateData<typeof MovieCreditPopulatedPaginationSchema>({

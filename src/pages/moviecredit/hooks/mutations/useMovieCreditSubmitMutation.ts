@@ -1,5 +1,7 @@
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {MovieCreditSubmit} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
+import {
+    MovieCreditSubmit
+} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {toast} from "react-toastify";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
@@ -46,8 +48,11 @@ export default function useMovieCreditSubmitMutation(
     const mutationKey = ["submit_single_movie_credit"];
 
     const submitData = async (values: MovieCreditSubmit) => {
+        console.log("Movie Credit Submit: ", values);
+
         const {response, result} = await MovieCreditRepository.create({data: values, populate});
         if (!response.ok) throw new HttpResponseError({response});
+
         return result;
     }
 
