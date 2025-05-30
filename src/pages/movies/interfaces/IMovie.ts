@@ -1,111 +1,103 @@
 import ICloudinaryImage from "@/common/interfaces/ICloudinaryImage.ts";
 import IGenre from "@/pages/genres/interfaces/IGenre.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {IMovieCredit} from "@/pages/moviecredit/interfaces/IMovieCredit.ts";
 import {ISO6391Code} from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
 import {ISO3166Alpha2Code} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
+import IShowing from "@/pages/showings/interfaces/IShowing.ts";
 
 /**
- * Represents a movie entity, including metadata, cast, crew, and related media.
+ * Represents a movie object with optional population of genres and showings.
+ *
+ * @remarks
+ * This interface is used in contexts where a movie's associated fields
+ * (e.g., `genres`, `showings`) may be either populated objects or raw `ObjectId` references.
  */
 export default interface IMovie {
     /**
-     * Unique identifier for the movie (typically a MongoDB ObjectId).
-     * @readonly
+     * Unique MongoDB ObjectId identifying the movie.
+     * This field is read-only.
      */
     readonly _id: ObjectId;
 
     /**
-     * Public-facing title of the movie.
+     * Localized or display title of the movie.
      */
     title: string;
 
     /**
-     * Original title of the movie, in its native language.
+     * Original title of the movie, typically in the original language.
      */
     originalTitle: string;
 
     /**
-     * Optional tagline or marketing slogan for the movie.
+     * Optional marketing tagline associated with the movie.
      */
     tagline?: string;
 
     /**
-     * Country of origin or production.
+     * ISO 3166-1 alpha-2 country code where the movie was produced.
      */
     country: ISO3166Alpha2Code;
 
     /**
-     * Brief summary or description of the movie's plot.
+     * Full synopsis or summary description of the movie.
      */
     synopsis: string;
 
     /**
      * List of genres associated with the movie.
      *
-     * Can include either genre IDs or fully populated {@link IGenre} objects.
+     * @remarks
+     * May contain either `ObjectId` references or fully populated `IGenre` objects.
      */
     genres: (ObjectId | IGenre)[];
 
     /**
-     * Optional list of crew members involved in the production.
-     *
-     * Can be either credit IDs or full {@link IMovieCredit} objects.
-     */
-    crew?: (ObjectId | IMovieCredit)[];
-
-    /**
-     * Optional list of cast members featured in the movie.
-     *
-     * Can be either credit IDs or full {@link IMovieCredit} objects.
-     */
-    cast?: (ObjectId | IMovieCredit)[];
-
-    /**
-     * Release date in ISO string format (YYYY-MM-DD).
+     * ISO 8601 formatted release date (e.g., "2025-11-15").
      */
     releaseDate: string;
 
     /**
-     * Runtime in minutes.
+     * Runtime of the movie in minutes.
      */
     runtime: number;
 
     /**
-     * ISO 639-1 language code of the movie's original language.
-     *
-     * @see {@link ISO6391Code}
+     * ISO 639-1 language code representing the original spoken language.
      */
     originalLanguage: ISO6391Code;
 
     /**
-     * List of available spoken language codes.
-     *
-     * @see {@link ISO6391Code}
+     * List of ISO 639-1 language codes for all audio languages included in the film.
      */
     languages: ISO6391Code[];
 
     /**
-     * List of available subtitle language codes.
-     *
-     * @see {@link ISO6391Code}
+     * List of ISO 639-1 language codes for available subtitle languages.
      */
     subtitles: ISO6391Code[];
 
     /**
-     * Optional poster image data, typically from Cloudinary.
+     * Optional Cloudinary-hosted poster image metadata for the movie.
      *
-     * @see {@link ICloudinaryImage}
+     * @remarks
+     * May be `null` if the movie has no poster image uploaded.
      */
     posterImage?: ICloudinaryImage | null;
 
     /**
-     * Optional trailer URL (e.g. YouTube link).
+     * Optional URL linking to a trailer for the movie.
+     *
+     * @remarks
+     * May be `null` if no trailer is available.
      */
     trailerURL?: string | null;
 
     /**
-     * List of showings, either as ObjectId references or full objects.
+     * List of showings scheduled for this movie.
+     *
+     * @remarks
+     * May contain either `ObjectId` references or fully populated `IShowing` objects.
      */
-    showings: (ObjectId | any)[];
+    showings: (ObjectId | IShowing)[];
 }

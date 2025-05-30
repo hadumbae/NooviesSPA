@@ -3,51 +3,45 @@ import {GenreSchema} from "@/pages/genres/schema/GenreSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import {MovieBaseSchema} from "@/pages/movies/schema/model/MovieBaseSchema.ts";
-import {MovieCreditSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 import IMovie from "@/pages/movies/interfaces/IMovie.ts";
 
+/**
+ * A Zod schema representing a movie with potentially unpopulated or partially populated references.
+ *
+ * @remarks
+ * This schema extends the base movie schema and adds the `_id`, `genres`, and `showings` fields.
+ *
+ * - `genres` is an array of either string IDs or fully populated genre objects.
+ * - `showings` is an array of either string IDs or fully populated showing objects.
+ *
+ * These unions allow the schema to validate both raw database documents (with IDs)
+ * and hydrated/populated objects returned from queries with Mongoose `.populate()` or custom aggregations.
+ */
 export const RawMovieSchema = MovieBaseSchema.extend({
-    /**
-     * Unique, read-only identifier for the movie (typically a MongoDB ObjectId as a string).
-     */
+    /** Unique, read-only identifier for the movie document. */
     _id: IDStringSchema.readonly(),
 
-    /**
-     * List of genres associated with the movie.
-     *
-     * Can be either genre IDs (as strings) or full genre objects.
-     */
+    /** Array of genre references, which may be raw ObjectId strings or populated genre objects. */
     genres: z.array(z.union([IDStringSchema, z.lazy(() => GenreSchema)])),
 
-    /**
-     * Optional array of crew members involved in the movie's production.
-     *
-     * Can be either movie credit IDs or full `MovieCreditSchema` objects.
-     */
-    crew: z.array(z.union([IDStringSchema, z.lazy(() => MovieCreditSchema)])).optional(),
-
-    /**
-     * Optional array of cast members who performed in the movie.
-     *
-     * Can be either movie credit IDs or full `MovieCreditSchema` objects.
-     */
-    cast: z.array(z.union([IDStringSchema, z.lazy(() => MovieCreditSchema)])).optional(),
-
-    /**
-     * Array of showings where the movie is or will be screened.
-     *
-     * Can include either showing IDs or full `ShowingSchema` objects.
-     */
+    /** Array of showing references, which may be raw ObjectId strings or populated showing objects. */
     showings: z.array(z.union([IDStringSchema, z.lazy(() => ShowingSchema)])),
 });
 
+/**
+ * A strongly typed Zod schema conforming to the `IMovie` interface.
+ *
+ * @remarks
+ * This cast enforces compatibility between the `RawMovieSchema` and the app's domain interface for movies.
+ * It assumes that the schema shape is already aligned with the expected type structure in `IMovie`.
+ */
 export const MovieSchema = RawMovieSchema as ZodType<IMovie>;
 
 /**
- * Inferred TypeScript type from `MovieSchema`.
+ * The inferred TypeScript type from the validated `MovieSchema`.
  *
- * This type reflects the validated shape of a movie object, combining all
- * fields from `MovieBaseSchema` and the extended schema above.
+ * This represents a movie object that may contain a mix of ID strings and fully populated documents
+ * for `genres` and `showings`.
  */
 export type Movie = z.infer<typeof MovieSchema>;
 
