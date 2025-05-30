@@ -3,11 +3,10 @@ import {toast} from "react-toastify";
 import {useMutation} from "@tanstack/react-query";
 import {ZodType} from "zod";
 
-import {IRequestRepository} from "@/common/repositories/BaseRequestRepository.ts";
-
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import mutationErrorHandler from "@/common/handlers/mutation/MutationFormErrorHandler.ts";
+import {IRequestRepository} from "@/common/interfaces/IRequestRepository.ts";
 
 interface Params<TData, TSchema extends ZodType, TSubmit extends FieldValues> {
     _id?: string,
