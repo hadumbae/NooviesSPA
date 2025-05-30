@@ -42,16 +42,20 @@ const PageParseError: FC<ParseProps> = (params) => {
     const {header, message, error} = params;
     if (!error || !(error instanceof ParseError)) return <PageError {...params} />
 
-    const {errors} = error;
-    const headerText = header || "Failed To Parse Data";
+    const {errors, raw} = error;
+    const headerText = header || "Failed To Validate Data";
     const messageText = message || "Received Invalid Data";
+
+    console.error("Failed To Parse Data:");
+    console.error("Raw: ", raw);
+    console.error("Issues: ", error.errors);
 
     return (
         <PageCenter className="space-y-6">
-            <TriangleAlert className="text-neutral-500"/>
+            <TriangleAlert className="text-neutral-500" size={100}/>
 
-            <section className="space-y-2">
-                <h1 className="dotgothic16-regular text-[100px]">{headerText}</h1>
+            <section className="flex flex-col justify-center items-center space-y-2">
+                <h1 className="dotgothic16-regular text-3xl">{headerText}</h1>
                 <h2 className="text-neutral-500">{messageText}</h2>
             </section>
 
