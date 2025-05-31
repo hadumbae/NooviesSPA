@@ -9,7 +9,9 @@ import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import MoviePersonListBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MoviePersonListBreadcrumb.tsx";
 import MoviePeopleHeader from "@/pages/movies/components/headers/admin/MoviePeopleHeader.tsx";
-import MoviePeopleListPageSection from "@/pages/movies/components/admin/sections/MoviePeopleListPageSection.tsx";
+import PageSection from "@/common/components/page/PageSection.tsx";
+import MoviePersonSubmitFormContainer from "@/pages/movies/components/admin/credits/forms/MoviePersonSubmitFormContainer.tsx";
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
 
 interface PeoplePageProps {
     roleType: RoleType;
@@ -33,8 +35,9 @@ const MoviePeoplePage: FC<PeoplePageProps> = ({roleType}) => {
     if (isError) return <PageHTTPError error={queryError} />;
     if (parseError) return <PageParseError error={parseError} />;
 
-    const {movie, credits: paginatedCredits} = data;
-    const {items: credits} = paginatedCredits!;
+    const {movie} = data;
+
+    const formPresetValues = {roleType, movie: movieID};
 
     return (
         <PageFlexWrapper className="space-y-6">
@@ -45,14 +48,16 @@ const MoviePeoplePage: FC<PeoplePageProps> = ({roleType}) => {
             </section>
 
 
-            <section className="grid grid-cols-3">
+            <section className="grid max-md:grid-cols-1 md:grid-cols-3 gap-4">
                 <h1 className="sr-only">Credits</h1>
 
-                <section>
-                    <h1 className="sr-only">Form</h1>
-                </section>
-
-                <MoviePeopleListPageSection roleType={roleType} credits={credits} />
+                <PageSection title="Add Credits" srTitle="Credit Form">
+                    <Card>
+                        <CardContent className="p-4">
+                            <MoviePersonSubmitFormContainer movieID={movieID} presetValues={formPresetValues} />
+                        </CardContent>
+                    </Card>
+                </PageSection>
             </section>
         </PageFlexWrapper>
     );

@@ -76,16 +76,17 @@ const MovieCreditSubmitFormView: FC<ViewProps> = (params) => {
             <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-5")}>
 
                 {
-                    activeFields["roleType"] &&
-                    <RoleTypeRadioGroup
-                        form={form}
-                        name="roleType"
-                        label="Role Type"
-                        className="flex flex-row justify-start space-x-5"
-                    />
+                    activeFields["roleType"] && <>
+                        <RoleTypeRadioGroup
+                            form={form}
+                            name="roleType"
+                            label="Role Type"
+                            className="flex flex-row justify-start space-x-5"
+                        />
+                        <Separator/>
+                    </>
                 }
 
-                <Separator/>
 
                 {
                     activeFields["movie"] &&
