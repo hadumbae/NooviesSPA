@@ -69,10 +69,10 @@ const PageHTTPError: FC<ErrorProps> = (params) => {
 
     return (
         <PageCenter className="space-y-6">
-            <TriangleAlert className="text-neutral-500"/>
+            <TriangleAlert className="text-neutral-500" size={100} />
 
-            <section className="space-y-2">
-                <h1 className="dotgothic16-regular text-[100px]">{mainText}</h1>
+            <section className="flex flex-col justify-center items-center space-y-2">
+                <h1 className="dotgothic16-regular text-3xl">{mainText}</h1>
                 <h2 className="text-neutral-500">{subText}</h2>
             </section>
         </PageCenter>
