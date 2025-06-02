@@ -1,8 +1,9 @@
 import {FC} from 'react';
 import {RoleType} from "@/pages/moviecredit/schemas/enums/RoleTypeEnumSchema.ts";
-import MovieCrewDetailsCard from "@/pages/movies/components/admin/credits/MovieCrewDetailsCard.tsx";
-import {PopulatedMovieCredit} from "@/pages/moviecredit/schemas/model/populated/MovieCreditPopulatedSchema.ts";
-import MovieCastDetailsCard from "@/pages/movies/components/admin/credits/MovieCastDetailsCard.tsx";
+import {PopulatedMovieCredit} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedSchema.ts";
+import PageSection from "@/common/components/page/PageSection.tsx";
+import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
+import MoviePersonDetailsCard from "@/pages/movies/components/admin/credits/cards/MoviePersonDetailsCard.tsx";
 
 interface SectionProps {
     roleType: RoleType;
@@ -10,18 +11,17 @@ interface SectionProps {
 }
 
 const MoviePeopleListPageSection: FC<SectionProps> = ({roleType, credits}) => {
+    const displayRoleType = convertToTitleCase(roleType);
+
     if (credits.length === 0) {
-        return <section>
-            <h1 className="sr-only">Credits</h1>
+        return <PageSection title={displayRoleType} srTitle="Credits" className="text-center">
             <span className="select-none text-neutral-400">No Credits</span>
-        </section>;
+        </PageSection>;
     }
 
-    return <section>
-        <h1 className="sr-only">Credits</h1>
-        {roleType === "CREW" && credits.map(credit => <MovieCrewDetailsCard credit={credit}/>)}
-        {roleType === "CAST" && credits.map(credit => <MovieCastDetailsCard credit={credit}/>)}
-    </section>;
+    return <PageSection title={displayRoleType} srTitle="Credits">
+        {credits.map(credit => <MoviePersonDetailsCard key={credit._id} credit={credit}/>)}
+    </PageSection>;
 };
 
 export default MoviePeopleListPageSection;

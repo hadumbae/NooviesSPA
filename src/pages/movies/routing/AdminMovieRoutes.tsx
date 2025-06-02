@@ -5,7 +5,8 @@ import MovieEditPage from "@/pages/movies/pages/admin/MovieEditPage.tsx";
 import MoviePage from "@/pages/movies/pages/admin/MoviePage.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import {RouteObject} from "react-router-dom";
-import MoviePeoplePage from "@/pages/movies/pages/admin/MoviePeoplePage.tsx";
+import MoviePeoplePage from "@/pages/movies/pages/admin/credits/MoviePeoplePage.tsx";
+import MoviePersonEditPage from "@/pages/movies/pages/admin/credits/MoviePersonEditPage.tsx";
 
 const routes: RouteObject[] = [
     {
@@ -44,6 +45,11 @@ const routes: RouteObject[] = [
             {
                 path: "/admin/movies/get/:movieID/people/crew",
                 element: <MoviePeoplePage roleType="CREW" />,
+                errorElement: <ComponentErrorHandler />,
+            },
+            {
+                path: "/admin/movies/get/:movieID/people/edit/:creditID",
+                element: <MoviePersonEditPage />,
                 errorElement: <ComponentErrorHandler />,
             }
         ],

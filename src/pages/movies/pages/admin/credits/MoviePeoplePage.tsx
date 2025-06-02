@@ -12,6 +12,7 @@ import MoviePeopleHeader from "@/pages/movies/components/headers/admin/MoviePeop
 import PageSection from "@/common/components/page/PageSection.tsx";
 import MoviePersonSubmitFormContainer from "@/pages/movies/components/admin/credits/forms/MoviePersonSubmitFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import MoviePeopleListPageSection from "@/pages/movies/components/admin/sections/MoviePeopleListPageSection.tsx";
 
 interface PeoplePageProps {
     roleType: RoleType;
@@ -31,13 +32,15 @@ const MoviePeoplePage: FC<PeoplePageProps> = ({roleType}) => {
         creditFilters: {roleType},
     });
 
+    const formPresetValues = {roleType, movie: movieID};
+
     if (isPending) return <PageLoader />;
     if (isError) return <PageHTTPError error={queryError} />;
     if (parseError) return <PageParseError error={parseError} />;
 
-    const {movie} = data;
+    const {movie, credits: paginatedCredits} = data;
 
-    const formPresetValues = {roleType, movie: movieID};
+    const {items: credits} = paginatedCredits!;
 
     return (
         <PageFlexWrapper className="space-y-6">
@@ -58,6 +61,8 @@ const MoviePeoplePage: FC<PeoplePageProps> = ({roleType}) => {
                         </CardContent>
                     </Card>
                 </PageSection>
+
+                <MoviePeopleListPageSection roleType={roleType} credits={credits} />
             </section>
         </PageFlexWrapper>
     );
