@@ -21,8 +21,9 @@ export interface IMovieCreditBase {
 
     /**
      * Optional notes or comments about the credit.
+     * Can be null.
      */
-    notes?: string;
+    notes?: string | null;
 
     /**
      * Job title or position held by the crew member.

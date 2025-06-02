@@ -25,7 +25,7 @@ import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
  */
 export const MovieCreditBaseSchema = z.object({
     roleType: RoleTypeEnumSchema,
-    notes: NonEmptyStringSchema.optional(),
+    notes: NonEmptyStringSchema.nullable().optional(),
 
     job: NonEmptyStringSchema.optional(),
 

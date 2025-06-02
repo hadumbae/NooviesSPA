@@ -1,8 +1,7 @@
 import {MovieCreditBaseSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditBaseSchema.ts";
 import {RefinedIDStringSchema} from "@/common/schema/strings/RefinedIDStringSchema.ts";
-import unionWithEmptyString from "@/common/utility/schemas/unionWithEmptyString.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {z} from "zod";
+import {NulledStringSchema} from "@/common/schema/strings/NulledStringSchema.ts";
 
 /**
  * Zod schema used for validating core data required to create or update a movie credit entry.
@@ -30,7 +29,7 @@ import {z} from "zod";
 export const MovieCreditFormBaseSchema = MovieCreditBaseSchema.extend({
     movie: RefinedIDStringSchema,
     person: RefinedIDStringSchema,
-    notes: unionWithEmptyString({schema: NonEmptyStringSchema.optional()}),
+    notes: NulledStringSchema,
 });
 
 /**

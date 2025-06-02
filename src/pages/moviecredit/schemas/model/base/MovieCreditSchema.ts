@@ -1,9 +1,8 @@
 import {MovieCreditBaseSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditBaseSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-import {z, ZodType} from "zod";
+import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/PositiveNumberSchema.ts";
-import {IMovieCredit} from "@/pages/moviecredit/interfaces/IMovieCredit.ts";
 import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
 
@@ -34,7 +33,7 @@ const CastSchema = MovieCreditReadSchema.extend({
  *
  * The schema extends `MovieCreditBaseSchema` by adding identifiers for the movie and person, as well as a read-only `_id` field.
  */
-export const MovieCreditSchema: ZodType<IMovieCredit> = z.discriminatedUnion("roleType", [CrewSchema, CastSchema]);
+export const MovieCreditSchema = z.discriminatedUnion("roleType", [CrewSchema, CastSchema]);
 
 
 /**

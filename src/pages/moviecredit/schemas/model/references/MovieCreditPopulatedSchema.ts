@@ -1,10 +1,9 @@
 import {MovieCreditBaseSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditBaseSchema.ts";
-import {z, ZodType} from "zod";
+import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/PositiveNumberSchema.ts";
 import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
-import {IPopulatedMovieCredit} from "@/pages/moviecredit/interfaces/IPopulatedMovieCredit.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 
 const MovieCreditObjectSchema = MovieCreditBaseSchema.extend({
@@ -37,7 +36,7 @@ const CastSchema = MovieCreditObjectSchema.extend({
  *
  * The schema extends `MovieCreditBaseSchema` by adding identifiers for the movie and person, as well as a read-only `_id` field.
  */
-export const MovieCreditPopulatedSchema: ZodType<IPopulatedMovieCredit> = z.discriminatedUnion("roleType", [CrewSchema, CastSchema]);
+export const MovieCreditPopulatedSchema = z.discriminatedUnion("roleType", [CrewSchema, CastSchema]);
 
 /**
  * Type representing a fully populated movie credit object,
