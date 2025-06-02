@@ -48,9 +48,12 @@ export default function useMovieCreditUpdateMutation(
 
     const mutationKey = ["update_single_movie_credit", {_id}];
 
-    const updateMovieCredit = async (data: MovieCreditSubmit) => {
-        const {response, result} = await MovieCreditRepository.update({_id, data, populate});
+    const updateMovieCredit = async (values: MovieCreditSubmit) => {
+        console.log("Movie Credit Update: ", values);
+
+        const {response, result} = await MovieCreditRepository.update({_id, data: values, populate});
         if (!response.ok) throw new HttpResponseError({response});
+
         return result;
     }
 
@@ -64,7 +67,7 @@ export default function useMovieCreditUpdateMutation(
         await Promise.all(queryKeys.map(key =>
             queryClient.invalidateQueries({queryKey: [key], exact: false})));
 
-        toast.success(successToast || "Updated movie credit successfully.");
+        toast.success(successToast || "Updated successfully.");
         onSubmit && onSubmit(credit);
     }
 

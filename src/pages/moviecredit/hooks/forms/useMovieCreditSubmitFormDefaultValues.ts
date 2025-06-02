@@ -19,7 +19,7 @@ export default function useMovieCreditSubmitFormDefaultValues(params?: Generatio
 
     const baseValues = {
         movie: getDefaultValue(presetValues?.movie, credit?.movie, undefined),
-        person: getDefaultValue(presetValues?.person, credit?.movie, undefined),
+        person: getDefaultValue(presetValues?.person, credit?.person, undefined),
         notes: getDefaultValue(presetValues?.notes, credit?.notes, ""),
         uncredited: getDefaultValue(presetValues?.uncredited, credit?.uncredited, false),
         voiceOnly: getDefaultValue(presetValues?.voiceOnly, credit?.voiceOnly, false),

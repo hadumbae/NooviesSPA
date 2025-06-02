@@ -32,7 +32,7 @@ import MovieCreditSubmitFormCastFieldset
 
 interface ViewProps<TKey = keyof Partial<MovieCreditFormBaseValues>> {
     form: UseFormReturn<MovieCreditFormValues>;
-    submitHandler: SubmitHandler<MovieCreditFormValues>
+    submitHandler: SubmitHandler<MovieCreditFormValues>;
     mutation: UseMutationResult<MovieCredit, Error, MovieCreditSubmit>;
 
     movies: Movie[];
@@ -74,7 +74,6 @@ const MovieCreditSubmitFormView: FC<ViewProps> = (params) => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-5")}>
-
                 {
                     activeFields["roleType"] && <>
                         <RoleTypeRadioGroup
@@ -116,23 +115,22 @@ const MovieCreditSubmitFormView: FC<ViewProps> = (params) => {
                 }
 
                 {
-                    roleType === "CAST" &&
-                    <MovieCreditSubmitFormCastFieldset form={form} activeFields={activeCastFields}/>
+                    roleType === "CAST" && <>
+                        <MovieCreditSubmitFormCastFieldset form={form} activeFields={activeCastFields}/>
+                        <Separator/>
+                        <MovieCreditSubmitFormFlagsFieldset
+                            form={form}
+                            className="grid grid-cols-2 gap-2"
+                            activeFields={activeFields}
+                        />
+                    </>
                 }
 
-                <Separator/>
-
-                <MovieCreditSubmitFormFlagsFieldset
-                    form={form}
-                    className="grid grid-cols-2 gap-2"
-                    activeFields={activeFields}
-                />
-
-                <Separator/>
-
                 {
-                    activeFields["notes"] &&
-                    <HookFormTextArea name="notes" label="Notes" control={form.control}/>
+                    activeFields["notes"] && <>
+                        <Separator/>
+                        <HookFormTextArea name="notes" label="Notes" control={form.control}/>
+                    </>
                 }
 
                 <section className="grid grid-cols-4 gap-2">
