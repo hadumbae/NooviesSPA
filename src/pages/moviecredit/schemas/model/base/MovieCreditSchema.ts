@@ -15,13 +15,13 @@ const MovieCreditReadSchema = MovieCreditBaseSchema.extend({
 const CrewSchema = MovieCreditReadSchema.extend({
     roleType: z.literal("CREW"),
     job: NonEmptyStringSchema,
-}).omit({characterName: true, billingOrder: true});
+});
 
 const CastSchema = MovieCreditReadSchema.extend({
     roleType: z.literal("CAST"),
     characterName: NonEmptyStringSchema,
     billingOrder: PositiveNumberSchema,
-}).omit({job: true});
+});
 
 /**
  * Schema representing a movie credit, discriminated by the `roleType` field.

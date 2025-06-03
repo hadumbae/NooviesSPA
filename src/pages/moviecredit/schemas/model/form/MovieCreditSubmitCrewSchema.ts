@@ -8,8 +8,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema
  *
  * @remarks
  * This schema extends the `MovieCreditWriteSchema` by specifying a fixed `roleType` of `"CREW"` and
- * requiring a valid non-empty `job` field. The `characterName` and `billingOrder` fields, which are
- * specific to acting roles, are explicitly omitted.
+ * requiring a valid non-empty `job` field. 
  *
  * The `job` field uses a utility schema (`unionWithEmptyString`) that supports temporary empty string values
  * during form input, while disallowing them during actual validation if `disallowEmptyString` is set to `true`.
@@ -28,7 +27,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema
 export const MovieCreditSubmitCrewSchema = MovieCreditFormBaseSchema.extend({
     roleType: z.literal("CREW"),
     job: unionWithEmptyString({schema: NonEmptyStringSchema, disallowEmptyString: true}),
-}).omit({characterName: true, billingOrder: true});
+});
 
 /**
  * Inferred TypeScript type for the crew role form values, based on {@link MovieCreditSubmitCrewSchema}.

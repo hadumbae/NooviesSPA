@@ -15,13 +15,13 @@ const MovieCreditObjectSchema = MovieCreditBaseSchema.extend({
 const CrewSchema = MovieCreditObjectSchema.extend({
     roleType: z.literal("CREW"),
     job: NonEmptyStringSchema,
-}).omit({characterName: true, billingOrder: true});
+});
 
 const CastSchema = MovieCreditObjectSchema.extend({
     roleType: z.literal("CAST"),
     characterName: NonEmptyStringSchema,
     billingOrder: PositiveNumberSchema,
-}).omit({job: true});
+});
 
 /**
  * Schema representing a fully populated movie credit, either as cast or crew.

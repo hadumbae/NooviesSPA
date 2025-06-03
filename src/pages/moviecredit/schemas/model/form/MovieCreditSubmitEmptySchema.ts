@@ -12,8 +12,6 @@ import {z} from "zod";
  *
  * Specifically:
  * - It extends the base schema with a fixed `roleType` literal of an empty string (`""`).
- * - It omits the `job`, `characterName`, and `billingOrder` fields,
- *   which are typically required for actor or crew roles.
  *
  * This schema can be used for:
  * - Default form states
@@ -22,4 +20,4 @@ import {z} from "zod";
  */
 export const MovieCreditSubmitEmptySchema = MovieCreditFormBaseSchema.extend({
     roleType: z.literal(""),
-}).omit({job: true, characterName: true, billingOrder: true});
+});

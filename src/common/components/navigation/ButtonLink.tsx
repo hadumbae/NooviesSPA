@@ -14,7 +14,11 @@ interface Props {
 
 const ButtonLink: FC<PropsWithChildren<Props>> = ({children, className, to, variant = "link", size = "default"}) => {
     return (
-        <Link to={to} className={cn(buttonVariants({variant, size}), className)}>
+        <Link to={to} className={cn(
+            buttonVariants({variant, size}),
+            "text-neutral-400 hover:text-black",
+            className,
+        )}>
             {children}
         </Link>
     );

@@ -29,7 +29,7 @@ interface fetchProps {
 export default function useFetchAllMovieCredits({populate = false, filters = {}}: fetchProps) {
     const queryKey = ["fetch_all_movie_credits", {populate, filters}];
     const schema = MovieCreditArraySchema;
-    const action = () => MovieCreditRepository.getAll({filters});
+    const action = () => MovieCreditRepository.getAll({filters, populate});
 
     return useFetchValidatedDataWithRedirect<typeof MovieCreditArraySchema, MovieCreditArray>({
         queryKey,

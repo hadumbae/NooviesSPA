@@ -1,10 +1,9 @@
-import {z, ZodType} from "zod";
+import {z} from "zod";
 import {GenreSchema} from "@/pages/genres/schema/GenreSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import {MovieBaseSchema} from "@/pages/movies/schema/model/MovieBaseSchema.ts";
 import {MovieCreditSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
-import IMovieWithData from "@/pages/movies/interfaces/IMovieWithData.ts";
 
 /**
  * A Zod schema representing a fully populated movie document that includes:
@@ -54,7 +53,8 @@ export const RawMovieWithDataSchema = MovieBaseSchema.extend({
  * @remarks
  * This schema is explicitly typed to match the `IMovieWithData` interface.
  */
-export const MovieWithDataSchema = RawMovieWithDataSchema as ZodType<IMovieWithData>;
+// export const MovieWithDataSchema = RawMovieWithDataSchema as ZodType<IMovieWithData>;
+export const MovieWithDataSchema = RawMovieWithDataSchema;
 
 /**
  * TypeScript type representing a fully populated movie object with genre,

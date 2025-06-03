@@ -13,8 +13,6 @@ import {PositiveNumberSchema} from "@/common/schema/numbers/PositiveNumberSchema
  * - `characterName`: required non-empty string (but allows temporary empty string during input)
  * - `billingOrder`: required positive number (also temporarily allows empty string during input)
  *
- * The `job` field, which is only relevant for crew roles, is explicitly omitted.
- *
  * This schema improves form UX by enabling empty string handling during user input, while enforcing strict validation before submission.
  *
  * @example
@@ -32,7 +30,7 @@ export const MovieCreditFormCastSchema = MovieCreditFormBaseSchema.extend({
     roleType: z.literal("CAST"),
     characterName: unionWithEmptyString({schema: NonEmptyStringSchema, disallowEmptyString: true}),
     billingOrder: unionWithEmptyString({schema: PositiveNumberSchema, disallowEmptyString: true}),
-}).omit({job: true});
+});
 
 
 /**

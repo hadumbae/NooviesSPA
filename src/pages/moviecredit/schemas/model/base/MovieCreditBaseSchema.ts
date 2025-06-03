@@ -1,8 +1,6 @@
 import {z} from "zod";
 
-import {RoleTypeEnumSchema} from "@/pages/moviecredit/schemas/enums/RoleTypeEnumSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/PositiveNumberSchema.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 
 /**
@@ -24,14 +22,7 @@ import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
  * - `motionCapture`: Optional. Boolean indicating the role involved motion capture.
  */
 export const MovieCreditBaseSchema = z.object({
-    roleType: RoleTypeEnumSchema,
     notes: NonEmptyStringSchema.nullable().optional(),
-
-    job: NonEmptyStringSchema.optional(),
-
-    characterName: NonEmptyStringSchema.optional(),
-    billingOrder: PositiveNumberSchema.optional(),
-
     uncredited: RequiredBoolean.optional(),
     voiceOnly: RequiredBoolean.optional(),
     cameo: RequiredBoolean.optional(),
