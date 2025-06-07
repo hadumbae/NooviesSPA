@@ -1,34 +1,31 @@
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {MovieCredit, MovieCreditSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
-import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
+import {useQuery} from "@tanstack/react-query";
+import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
 
-/**
- * Props for fetching a single movie credit.
- */
-interface fetchProps {
-    /** The unique identifier of the movie credit to fetch. */
+type FetchParams = {
     _id: ObjectId;
-
-    /** Whether to populate related data in the response. Defaults to false. */
     populate?: boolean;
 }
 
-/**
- * React hook to fetch and validate a single movie credit entry.
- *
- * Fetches one movie credit document from the backend using its `_id`, and validates
- * the result using {@link MovieCreditSchema}. Automatically redirects on validation failure.
- *
- * @param params - Object containing the movie credit ID and an optional populate flag.
- * @returns A query result containing a validated {@link MovieCredit} object.
- */
-export default function useFetchMovieCredit(params: fetchProps) {
+
+export default function useFetchMovieCredit(params: FetchParams) {
     const {_id, populate = false} = params;
 
     const queryKey = ["fetch_movie_credit", {_id, populate}];
-    const schema = MovieCreditSchema;
-    const action = () => MovieCreditRepository.get({_id, populate});
+    const action = async () => {
+        const {response, result} = await MovieCreditRepository.get({_id, populate});
 
-    return useFetchValidatedDataWithRedirect<typeof MovieCreditSchema, MovieCredit>({queryKey, schema, action});
+        if (!response.ok) {
+            const message = "Failed to fetch movie credit. Please try again.";
+            throwResponseError({response, result, message});
+        }
+
+        return result;
+    }
+
+    return useQuery({
+        queryKey,
+        queryFn: action,
+    });
 }

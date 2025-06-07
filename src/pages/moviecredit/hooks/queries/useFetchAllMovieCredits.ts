@@ -1,7 +1,7 @@
-import {MovieCreditArray, MovieCreditArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditArraySchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
-import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import QueryFilters from "@/common/type/QueryFilters.ts";
+import {useQuery} from "@tanstack/react-query";
+import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
 
 /**
  * Props for fetching all movie credits.
@@ -28,12 +28,16 @@ interface fetchProps {
  */
 export default function useFetchAllMovieCredits({populate = false, filters = {}}: fetchProps) {
     const queryKey = ["fetch_all_movie_credits", {populate, filters}];
-    const schema = MovieCreditArraySchema;
-    const action = () => MovieCreditRepository.getAll({filters, populate});
+    const action = async () => {
+        const {response, result} = await MovieCreditRepository.getAll({filters, populate});
 
-    return useFetchValidatedDataWithRedirect<typeof MovieCreditArraySchema, MovieCreditArray>({
-        queryKey,
-        schema,
-        action,
-    });
+        if (!response.ok) {
+            const message = "Failed to fetch movie credits. Please try again.";
+            throwResponseError({response, result, message});
+        }
+
+        return result;
+    }
+
+    return useQuery({queryKey, queryFn: action});
 }

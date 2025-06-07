@@ -1,7 +1,7 @@
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {MovieCreditFilters} from "@/pages/moviecredit/schemas/filters/MovieCreditFilterSchema.ts";
 import {useQuery} from "@tanstack/react-query";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
 
 /**
  * Props for fetching paginated movie credit data.
@@ -47,14 +47,12 @@ export default function useFetchPaginatedMovieCredit(params: PaginatedProps) {
     const action = async () => {
         const {response, result} = await MovieCreditRepository.paginated({
             populate,
-            filters: {page, perPage, ...filters}
+            filters: {page, perPage, ...filters},
         });
 
         if (!response.ok) {
-            throw new HttpResponseError({
-                response,
-                message: "Failed to fetch movie credits. Please try again.",
-            });
+            const message = "Failed to fetch movie credits. Please try again.";
+            throwResponseError({response, result, message});
         }
 
         return result;
