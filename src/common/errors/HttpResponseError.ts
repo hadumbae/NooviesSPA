@@ -9,6 +9,11 @@ export default class HttpResponseError extends Error {
     public readonly response: Response;
 
     /**
+     * The payload associated with this error.
+     */
+    public readonly payload?: unknown;
+
+    /**
      * The name of the data model related to the error, if applicable.
      */
     public readonly model?: string;
@@ -19,16 +24,18 @@ export default class HttpResponseError extends Error {
      * @param params - The parameters for initializing the error.
      * @param params.message - Optional. A descriptive message for the error.
      * @param params.response - The HTTP response that triggered the error.
+     * @param params.payload - Optional. The payload related to the error.
      * @param params.model - Optional. The name of the data model related to the error.
      */
-    constructor(params: { message?: string, response: Response, model?: string }) {
-        const {message, response, model} = params;
+    constructor(params: { message?: string, response: Response, payload?: unknown, model?: string }) {
+        const {message, response, model, payload} = params;
 
         super(message);
 
         if (Error.captureStackTrace) Error.captureStackTrace(this, HttpResponseError);
 
         this.response = response;
+        this.payload = payload;
         this.model = model;
 
         this.name = this.constructor.name;
