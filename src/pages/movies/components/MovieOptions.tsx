@@ -11,7 +11,7 @@ interface Props {
     movie: Movie;
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link",
     className?: string,
-    onDelete: () => void,
+    onDelete?: () => void,
 }
 
 const MovieOptions: FC<Props> = ({movie, variant = "default", className = "", onDelete}) => {

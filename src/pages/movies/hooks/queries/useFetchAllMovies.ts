@@ -1,8 +1,8 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {MovieArray} from "@/pages/movies/schema/model/MovieArraySchema.ts";
+import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
 
 /**
  * Optional parameters for fetching a list of movies.
@@ -49,7 +49,12 @@ export default function useFetchAllMovies(params?: FetchParams): UseQueryResult<
     const queryKey = ["fetch_all_movies", {filters, populate, virtuals}];
     const fetchMovies = async () => {
         const {result, response} = await MovieRepository.getAll({populate, virtuals, filters});
-        if (!response.ok) throw new HttpResponseError({response, message: "Failed to fetch movies."});
+
+        if (!response.ok) {
+            const message = "Failed to fetch movies.";
+            throwResponseError({response, result, message});
+        }
+
         return result;
     }
 

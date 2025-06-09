@@ -7,10 +7,10 @@ import {format} from "date-fns";
 
 interface Props {
     movie: Movie;
-    onMovieDelete: () => void;
+    onDelete?: () => void;
 }
 
-const MovieIndexCard: FC<Props> = ({movie, onMovieDelete}) => {
+const MovieIndexCard: FC<Props> = ({movie, onDelete}) => {
     const {_id, title, originalTitle, releaseDate} = movie;
     const formattedDate = format(releaseDate, "yyyy");
 
@@ -25,7 +25,7 @@ const MovieIndexCard: FC<Props> = ({movie, onMovieDelete}) => {
                     <span>{originalTitle}</span>
                 </section>
 
-                <MovieOptions movie={movie} onDelete={onMovieDelete} variant="outline" />
+                <MovieOptions movie={movie} onDelete={onDelete} variant="outline" />
             </CardContent>
         </Card>
     );

@@ -4,22 +4,25 @@ import MovieIndexHeader from "@/pages/movies/components/headers/MovieIndexHeader
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import {useFetchPaginatedMovies} from "@/pages/movies/hooks/queries/useFetchPaginatedMovies.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/errors/PageError.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import MovieIndexCard from "@/pages/movies/components/list/MovieIndexCard.tsx";
+import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import {PaginatedMovieSchema} from "@/pages/movies/schema/model/pagination/MoviePaginationSchema.ts";
+import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
+import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 
 const MoviesPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams({perPage: "25"});
-    const {data, isPending, isError, error, refetch} = useFetchPaginatedMovies({page, perPage, populate: true});
+    const {data, isPending, isError, error: queryError} = useFetchPaginatedMovies({page, perPage, populate: true});
+    const {data: paginatedMovies, error: parseError} = useValidateData({schema: PaginatedMovieSchema, data, isPending});
 
     if (isPending) return <PageLoader/>;
-    if (isError) return <PageError error={error}/>;
+    if (isError) return <PageHTTPError error={queryError}/>;
+    if (parseError) return <PageParseError error={parseError}/>;
 
-    const onDelete = () => refetch();
-
-    const {items: movies} = data;
+    const {items: movies} = paginatedMovies!;
     const hasMovies = (movies || []).length > 0;
 
     return (
@@ -29,11 +32,7 @@ const MoviesPage: FC = () => {
             {
                 hasMovies
                     ? <PageSection srTitle="List Of Movies" className="space-y-3">
-                        {
-                            movies.map(
-                                (movie: Movie) => <MovieIndexCard movie={movie} key={movie._id} onMovieDelete={onDelete}/>
-                            )
-                        }
+                        {movies.map((movie: Movie) => <MovieIndexCard movie={movie} key={movie._id} />)}
                     </PageSection>
                     : <PageCenter>
                         <span className="text-neutral-400 select-none">

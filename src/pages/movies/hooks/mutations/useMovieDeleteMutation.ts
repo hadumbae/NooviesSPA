@@ -7,7 +7,7 @@ import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface Params {
-    onDelete: () => void;
+    onDelete?: () => void;
 }
 
 export default function useMovieDeleteMutation({onDelete}: Params) {
@@ -20,7 +20,7 @@ export default function useMovieDeleteMutation({onDelete}: Params) {
 
     const onSuccess = () => {
         toast.success("Movie deleted.");
-        onDelete();
+        onDelete && onDelete();
     };
 
     const onError = (error: Error | ParseError) => {
