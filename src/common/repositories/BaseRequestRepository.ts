@@ -5,18 +5,18 @@ import QueryFilters from "@/common/type/QueryFilters.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import PaginatedFilters from "@/common/type/PaginatedFilters.ts";
-import {IRequestRepository} from "@/common/interfaces/IRequestRepository.ts";
+import {IBaseRequestRepository} from "@/common/interfaces/IBaseRequestRepository.ts";
 
 /**
  * Creates a standardized HTTP request repository for a given base URL.
  *
- * This factory function returns an object implementing the {@link IRequestRepository} interface,
+ * This factory function returns an object implementing the {@link IBaseRequestRepository} interface,
  * providing generic CRUD operations and query utilities for interacting with a RESTful API.
  *
  * All methods internally construct URLs using query parameters and send requests via `useFetchAPI`.
  *
  * @param baseURL - The base API endpoint to which resource-specific paths will be appended.
- * @returns An object implementing {@link IRequestRepository}, with methods to query, create, update, and delete resources.
+ * @returns An object implementing {@link IBaseRequestRepository}, with methods to query, create, update, and delete resources.
  *
  * @example
  * ```ts
@@ -24,7 +24,7 @@ import {IRequestRepository} from "@/common/interfaces/IRequestRepository.ts";
  * const { result } = await UserRepository.getAll({ populate: true });
  * ```
  */
-export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IRequestRepository => ({
+export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IBaseRequestRepository => ({
     /**
      * Fetches all resources optionally filtered and enriched with virtual/populated fields.
      */
@@ -100,5 +100,15 @@ export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IRe
 
         const url = buildQueryURL({ baseURL: baseURL, path: `delete/${_id}` });
         return useFetchAPI({ url: url, method: "DELETE" });
+    },
+
+    async query(
+        params: { populate?: boolean; virtuals?: boolean, filters: QueryFilters }
+    ): Promise<FetchReturns> {
+        const { populate, virtuals, filters } = params;
+        const queries = filterEmptyAttributes({ ...filters, populate, virtuals });
+
+        const url = buildQueryURL({ baseURL: baseURL, path: `query`, queries });
+        return useFetchAPI({ url, method: "GET" });
     },
 })

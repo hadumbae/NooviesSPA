@@ -10,7 +10,7 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
  * All methods return a `Promise` resolving to a {@link FetchReturns} object
  * containing both the raw `Response` and the typed result data.
  */
-export interface IRequestRepository {
+export interface IBaseRequestRepository {
     /**
      * Retrieves all matching documents.
      *
@@ -80,4 +80,7 @@ export interface IRequestRepository {
      * @returns A promise resolving to {@link FetchReturns}.
      */
     delete(params: { _id: ObjectId }): Promise<FetchReturns>;
+
+    query(params: { filters: QueryFilters; populate?: boolean; virtuals?: boolean }): Promise<FetchReturns>;
+
 }
