@@ -21,11 +21,9 @@ export const PersonSchema: ZodType<IPerson> = z.object({
 
     nationality: CountryEnum,
 
-    profileImage: z
-        .union([z.null(), CloudinaryImageObject.readonly()]),
+    profileImage: CloudinaryImageObject.nullable().optional(),
 
-    movies: z
-        .array(z.union([IDStringSchema, z.any()])),
+    movies: z.array(z.union([IDStringSchema, z.any()])),
 });
 
 export type Person = z.infer<typeof PersonSchema>;

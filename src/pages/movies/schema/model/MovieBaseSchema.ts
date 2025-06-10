@@ -67,9 +67,9 @@ export const MovieBaseSchema = z.object({
     /**
      * The poster image for the movie, stored as a Cloudinary image object.
      *
-     * Can be null or undefined if no poster is available.
+     * Can be null or undefined if no poster is available. Defaults to null.
      */
-    posterImage: CloudinaryImageObject.optional().nullable(),
+    posterImage: CloudinaryImageObject.optional().nullable().default(null),
 
     /**
      * A URL to the movie's trailer.
