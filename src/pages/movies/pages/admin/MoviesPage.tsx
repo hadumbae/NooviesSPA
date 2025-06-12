@@ -2,7 +2,6 @@ import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MovieIndexHeader from "@/pages/movies/components/headers/MovieIndexHeader.tsx";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
-import {useFetchPaginatedMovies} from "@/pages/movies/hooks/queries/useFetchPaginatedMovies.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
@@ -12,10 +11,11 @@ import useValidateData from "@/common/hooks/validation/useValidateData.ts";
 import {PaginatedMovieSchema} from "@/pages/movies/schema/model/pagination/MoviePaginationSchema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
+import useFetchMovieQuery from "@/pages/movies/hooks/queries/useFetchMovieQuery.ts";
 
 const MoviesPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams({perPage: "25"});
-    const {data, isPending, isError, error: queryError} = useFetchPaginatedMovies({page, perPage, populate: true});
+    const {data, isPending, isError, error: queryError} = useFetchMovieQuery({populate: true, paginated: true, page, perPage});
     const {data: paginatedMovies, error: parseError} = useValidateData({schema: PaginatedMovieSchema, data, isPending});
 
     if (isPending) return <PageLoader/>;

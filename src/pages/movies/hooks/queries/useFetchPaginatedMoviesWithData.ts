@@ -1,7 +1,7 @@
 import {PaginatedMovies} from "@/pages/movies/schema/model/pagination/MoviePaginationSchema.ts";
 import MovieQueryRepository from "@/pages/movies/repositories/MovieQueryRepository.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
-import {MovieQueryParams} from "@/pages/movies/schema/queries/MovieQueryParamSchema.ts";
+import {MovieFilterQuery} from "@/pages/movies/schema/queries/MovieFilterQuerySchema.ts";
 import {MovieSortParams} from "@/pages/movies/schema/queries/MovieSortParamSchema.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
@@ -17,7 +17,7 @@ type IPaginatedMovieParams = {
     perPage: number;
 
     /** Query filters for narrowing down results (e.g., title, genre). */
-    query: MovieQueryParams;
+    query: MovieFilterQuery;
 
     /** Sorting options (e.g., by release date or title). */
     sort: MovieSortParams;

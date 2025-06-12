@@ -1,66 +1,46 @@
-import QueryFilters from "@/common/type/QueryFilters.ts";
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {PaginatedMovies} from "@/pages/movies/schema/model/pagination/MoviePaginationSchema.ts";
+import {RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 
 /**
- * Parameters for fetching paginated movie data.
+ * Parameters for fetching a specific page of movie results.
  *
- * @property page - The current page number to fetch.
- * @property perPage - The number of items to retrieve per page.
- * @property filters - Optional filter parameters to refine the query. Empty values are stripped.
- * @property populate - Whether to populate related documents (e.g., genres, cast).
+ * Extends {@link RequestOptions} to include pagination-specific properties.
  */
-type FetchParams = {
-    /** The current page number (starts from 1) */
+type FetchParams = RequestOptions & {
+    /** The page number to retrieve (1-indexed). */
     page: number;
-    /** Number of items to retrieve per page */
+
+    /** The number of items to retrieve per page. */
     perPage: number;
-    /** Optional filters to apply to the query */
-    filters?: QueryFilters;
-    /** Whether to populate related fields in the response */
-    populate?: boolean;
 }
 
+
 /**
- * React Query hook for fetching a paginated list of movies with optional filters and population.
+ * Custom React Query hook to fetch a paginated list of movies.
  *
- * This hook uses `@tanstack/react-query`'s `useQuery` to fetch paginated movie data from the backend.
- * It supports filtering, population of related data, and automatic query key memoization.
+ * Uses the `MovieRepository.paginated()` method under the hood to retrieve
+ * movies based on the provided `page`, `perPage`, and optional flags like
+ * `populate` and `virtuals`. The result is cached and managed by React Query.
  *
- * @param params - Parameters for fetching movies.
- * @param params.page - The current page number (starting from 1).
- * @param params.perPage - Number of movies to retrieve per page.
- * @param params.filters - Optional object of filters to apply to the query (e.g., by title, genre).
- * @param params.populate - Whether to populate related fields (e.g., cast, director).
+ * If the response is not OK, it throws a standardized response error using
+ * `throwResponseError`.
  *
- * @returns A `UseQueryResult` object containing the paginated movie data and React Query state.
- *
- * @example
- * ```ts
- * const { data, isLoading, error } = useFetchPaginatedMovies({
- *   page: 1,
- *   perPage: 10,
- *   filters: { title: "Matrix" },
- *   populate: true,
- * });
- * ```
+ * @param params - The parameters for pagination and data shaping.
+ * @returns A `UseQueryResult` containing `PaginatedMovies` or error/loading state.
  */
 export const useFetchPaginatedMovies = (params: FetchParams): UseQueryResult<PaginatedMovies> => {
-    const {page, perPage, filters = {}, populate = false} = params;
-    const filteredQueries = filterEmptyAttributes(filters);
+    const {page, perPage, populate = false, virtuals = false} = params;
 
-    const queryKey = [
-        "fetch_paginated_movies",
-        {page, perPage, populate, filters: filteredQueries},
-    ];
+    const queryKey = ["fetch_paginated_movies", {page, perPage, populate, virtuals}] as const;
 
-    const action = async () => {
+    const fetchPaginatedMovies = async () => {
         const {response, result} = await MovieRepository.paginated({
             populate,
-            filters: {page, perPage, filteredQueries}
+            virtuals,
+            filters: {page, perPage}
         });
 
         if (!response.ok) {
@@ -73,6 +53,6 @@ export const useFetchPaginatedMovies = (params: FetchParams): UseQueryResult<Pag
 
     return useQuery({
         queryKey,
-        queryFn: action,
+        queryFn: fetchPaginatedMovies,
     });
 }

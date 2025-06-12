@@ -1,11 +1,13 @@
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
-import QueryFilters from "@/common/type/QueryFilters.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import PaginatedFilters from "@/common/type/PaginatedFilters.ts";
 import {IBaseRequestRepository} from "@/common/interfaces/IBaseRequestRepository.ts";
+import {
+    CreateEntityParams, DeleteEntityParams, EntityQueryParams,
+    GetEntitiesParams, GetEntityByIDParams,
+    GetPaginatedEntitiesParams, UpdateEntityParams
+} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 
 /**
  * Creates a standardized HTTP request repository for a given base URL.
@@ -28,87 +30,73 @@ export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IBa
     /**
      * Fetches all resources optionally filtered and enriched with virtual/populated fields.
      */
-    async getAll(
-        params?: { filters?: QueryFilters; populate?: boolean; virtuals?: boolean }
-    ): Promise<FetchReturns> {
-        const { filters = {}, populate, virtuals } = params || {};
-        const queries = filterEmptyAttributes({ ...filters, populate, virtuals });
+    async getAll(params?: GetEntitiesParams): Promise<FetchReturns> {
+        const {filters = {}, populate, virtuals} = params || {};
+        const queries = filterEmptyAttributes({...filters, populate, virtuals});
 
-        const url = buildQueryURL({ baseURL: baseURL, path: "all", queries });
-        return useFetchAPI({ url, method: "GET" });
+        const url = buildQueryURL({baseURL: baseURL, path: "all", queries});
+        return useFetchAPI({url, method: "GET"});
     },
 
     /**
      * Fetches resources using paginated filters.
      */
-    async paginated(
-        params: { filters: PaginatedFilters; populate?: boolean; virtuals?: boolean }
-    ): Promise<FetchReturns> {
-        const { filters, populate, virtuals } = params;
-        const queries = filterEmptyAttributes({ ...filters, populate, virtuals });
+    async paginated(params: GetPaginatedEntitiesParams): Promise<FetchReturns> {
+        const {filters, populate, virtuals} = params;
+        const queries = filterEmptyAttributes({...filters, populate, virtuals});
 
-        const url = buildQueryURL({ baseURL: baseURL, path: "paginated", queries });
-        return useFetchAPI({ url, method: "GET" });
+        const url = buildQueryURL({baseURL: baseURL, path: "paginated", queries});
+        return useFetchAPI({url, method: "GET"});
     },
 
     /**
      * Fetches a single resource by its unique ID.
      */
-    async get(
-        params: { _id: ObjectId; populate?: boolean; virtuals?: boolean }
-    ): Promise<FetchReturns> {
-        const { _id, populate, virtuals } = params;
-        const queries = filterEmptyAttributes({ populate, virtuals });
+    async get(params: GetEntityByIDParams): Promise<FetchReturns> {
+        const {_id, populate, virtuals} = params;
+        const queries = filterEmptyAttributes({populate, virtuals});
 
-        const url = buildQueryURL({ baseURL: baseURL, path: `get/${_id}`, queries });
-        return useFetchAPI({ url, method: "GET" });
+        const url = buildQueryURL({baseURL: baseURL, path: `get/${_id}`, queries});
+        return useFetchAPI({url, method: "GET"});
     },
 
     /**
      * Creates a new resource with optional population and virtual fields in the response.
      */
-    async create(
-        params: { data: Record<string, any>; populate?: boolean; virtuals?: boolean }
-    ): Promise<FetchReturns> {
-        const { data, populate, virtuals } = params;
-        const queries = filterEmptyAttributes({ populate, virtuals });
+    async create(params: CreateEntityParams): Promise<FetchReturns> {
+        const {data, populate, virtuals} = params;
+        const queries = filterEmptyAttributes({populate, virtuals});
 
-        const url = buildQueryURL({ baseURL: baseURL, path: "create", queries });
-        return useFetchAPI({ url: url, method: "POST", data });
+        const url = buildQueryURL({baseURL: baseURL, path: "create", queries});
+        return useFetchAPI({url: url, method: "POST", data});
     },
 
     /**
      * Updates an existing resource identified by `_id`, with optional population and virtuals in response.
      */
-    async update(
-        params: { _id: string; data: Record<string, any>; populate?: boolean; virtuals?: boolean }
-    ): Promise<FetchReturns> {
-        const { _id, data, populate, virtuals } = params;
-        const queries = filterEmptyAttributes({ populate, virtuals });
+    async update(params: UpdateEntityParams): Promise<FetchReturns> {
+        const {_id, data, populate, virtuals} = params;
+        const queries = filterEmptyAttributes({populate, virtuals});
 
-        const url = buildQueryURL({ baseURL: baseURL, path: `update/${_id}`, queries });
-        return useFetchAPI({ url: url, method: "PATCH", data });
+        const url = buildQueryURL({baseURL: baseURL, path: `update/${_id}`, queries});
+        return useFetchAPI({url: url, method: "PATCH", data});
     },
 
     /**
      * Deletes a resource by its unique ID.
      */
-    async delete(
-        params: { _id: string }
-    ): Promise<FetchReturns> {
-        const { _id } = params;
+    async delete(params: DeleteEntityParams): Promise<FetchReturns> {
+        const {_id} = params;
 
-        const url = buildQueryURL({ baseURL: baseURL, path: `delete/${_id}` });
-        return useFetchAPI({ url: url, method: "DELETE" });
+        const url = buildQueryURL({baseURL: baseURL, path: `delete/${_id}`});
+        return useFetchAPI({url: url, method: "DELETE"});
     },
 
-    async query(
-        params: { populate?: boolean; virtuals?: boolean, filters: QueryFilters }
-    ): Promise<FetchReturns> {
-        const { populate, virtuals, filters } = params;
-        const queries = filterEmptyAttributes({ ...filters, populate, virtuals });
+    async query(params: EntityQueryParams): Promise<FetchReturns> {
+        const {queries} = params;
+        const filteredQueries = filterEmptyAttributes(queries);
 
-        const url = buildQueryURL({ baseURL: baseURL, path: `query`, queries });
-        return useFetchAPI({ url, method: "GET" });
+        const url = buildQueryURL({baseURL: baseURL, path: `query`, queries: filteredQueries});
+        return useFetchAPI({url, method: "GET"});
     },
 })
