@@ -6,7 +6,7 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface IUsePersonDeleteMutationParams {
-    onDelete: () => void;
+    onDelete?: () => void;
 }
 
 export default function usePersonDeleteMutation({onDelete}: IUsePersonDeleteMutationParams) {
@@ -21,7 +21,7 @@ export default function usePersonDeleteMutation({onDelete}: IUsePersonDeleteMuta
         await queryClient.invalidateQueries({queryKey: ['fetch_single_person']});
 
         toast.success("Person deleted successfully.");
-        onDelete();
+        onDelete && onDelete();
     }
 
     const onError = (error: Error | ParseError) => {

@@ -7,10 +7,10 @@ import {Link} from "react-router-dom";
 
 interface Props {
     person: Person;
-    onPersonDelete: () => void;
+    onDelete?: () => void;
 }
 
-const PersonListCard: FC<Props> = ({person, onPersonDelete}) => {
+const PersonListCard: FC<Props> = ({person, onDelete}) => {
     const {_id, name, dob, nationality} = person;
     const formattedDOB = format(dob, "dd MMM, yyyy");
 
@@ -32,7 +32,7 @@ const PersonListCard: FC<Props> = ({person, onPersonDelete}) => {
                     <PersonOptions
                         variant="link"
                         person={person}
-                        onPersonDelete={onPersonDelete}
+                        onDelete={onDelete}
                     />
                 </div>
             </CardContent>

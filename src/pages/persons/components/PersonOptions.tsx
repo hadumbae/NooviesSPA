@@ -11,12 +11,12 @@ interface Props {
     person: Person;
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link",
     className?: string,
-    onPersonDelete: () => void;
+    onDelete?: () => void;
 }
 
-const PersonOptions: FC<Props> = ({person, variant = "default", className = "", onPersonDelete}) => {
+const PersonOptions: FC<Props> = ({person, variant = "default", className, onDelete}) => {
     const {_id} = person;
-    const {mutate, isPending, isSuccess} = usePersonDeleteMutation({onDelete: onPersonDelete});
+    const {mutate, isPending, isSuccess} = usePersonDeleteMutation({onDelete: onDelete});
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
