@@ -2,7 +2,7 @@ import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {useNavigate} from "react-router-dom";
-import {Loader, Pencil, TableOfContents, Trash} from "lucide-react";
+import {Image, Loader, Pencil, Trash} from "lucide-react";
 import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import {format} from "date-fns";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
@@ -43,8 +43,8 @@ const PersonDetailsHeader: FC<Props> = ({person}) => {
             </section>
 
             <section className="flex justify-end items-center space-x-2">
-                <HeaderLink variant="link" to="/admin/persons">
-                    <TableOfContents/> Index
+                <HeaderLink variant="link" to={`/admin/persons/get/${_id}/images/profile`}>
+                    <Image /> Image
                 </HeaderLink>
 
                 <HeaderLink variant="link" to={`/admin/persons/edit/${_id}`}>
