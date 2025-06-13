@@ -30,7 +30,7 @@ export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IBa
     /**
      * Fetches all resources optionally filtered and enriched with virtual/populated fields.
      */
-    async getAll(params?: GetEntitiesParams): Promise<FetchReturns> {
+    async getAll<TResult = unknown>(params?: GetEntitiesParams): Promise<FetchReturns<TResult>> {
         const {filters = {}, populate, virtuals} = params || {};
         const queries = filterEmptyAttributes({...filters, populate, virtuals});
 
@@ -41,7 +41,7 @@ export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IBa
     /**
      * Fetches resources using paginated filters.
      */
-    async paginated(params: GetPaginatedEntitiesParams): Promise<FetchReturns> {
+    async paginated<TResult = unknown>(params: GetPaginatedEntitiesParams): Promise<FetchReturns<TResult>> {
         const {filters, populate, virtuals} = params;
         const queries = filterEmptyAttributes({...filters, populate, virtuals});
 
@@ -52,7 +52,7 @@ export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IBa
     /**
      * Fetches a single resource by its unique ID.
      */
-    async get(params: GetEntityByIDParams): Promise<FetchReturns> {
+    async get<TResult = unknown>(params: GetEntityByIDParams): Promise<FetchReturns<TResult>> {
         const {_id, populate, virtuals} = params;
         const queries = filterEmptyAttributes({populate, virtuals});
 
@@ -63,7 +63,7 @@ export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IBa
     /**
      * Creates a new resource with optional population and virtual fields in the response.
      */
-    async create(params: CreateEntityParams): Promise<FetchReturns> {
+    async create<TResult = unknown>(params: CreateEntityParams): Promise<FetchReturns<TResult>> {
         const {data, populate, virtuals} = params;
         const queries = filterEmptyAttributes({populate, virtuals});
 
@@ -74,7 +74,7 @@ export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IBa
     /**
      * Updates an existing resource identified by `_id`, with optional population and virtuals in response.
      */
-    async update(params: UpdateEntityParams): Promise<FetchReturns> {
+    async update<TResult = unknown>(params: UpdateEntityParams): Promise<FetchReturns<TResult>> {
         const {_id, data, populate, virtuals} = params;
         const queries = filterEmptyAttributes({populate, virtuals});
 
@@ -85,14 +85,14 @@ export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IBa
     /**
      * Deletes a resource by its unique ID.
      */
-    async delete(params: DeleteEntityParams): Promise<FetchReturns> {
+    async delete<TResult = unknown>(params: DeleteEntityParams): Promise<FetchReturns<TResult>> {
         const {_id} = params;
 
         const url = buildQueryURL({baseURL: baseURL, path: `delete/${_id}`});
         return useFetchAPI({url: url, method: "DELETE"});
     },
 
-    async query(params: EntityQueryParams): Promise<FetchReturns> {
+    async query<TResult = unknown>(params: EntityQueryParams): Promise<FetchReturns<TResult>> {
         const {queries} = params;
         const filteredQueries = filterEmptyAttributes(queries);
 

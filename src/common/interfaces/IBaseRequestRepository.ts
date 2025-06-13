@@ -20,7 +20,7 @@ export interface IBaseRequestRepository {
      * @param params - Optional query parameters such as filters and population flags.
      * @returns A promise resolving to {@link FetchReturns}.
      */
-    getAll(params?: GetEntitiesParams): Promise<FetchReturns>;
+    getAll<TResult = unknown>(params?: GetEntitiesParams): Promise<FetchReturns<TResult>>;
 
     /**
      * Retrieves a single entity by its unique `_id`.
@@ -28,7 +28,7 @@ export interface IBaseRequestRepository {
      * @param params - Object containing the `_id` and optional query flags.
      * @returns A promise resolving to {@link FetchReturns}.
      */
-    get(params: GetEntityByIDParams): Promise<FetchReturns>;
+    get<TResult = unknown>(params: GetEntityByIDParams): Promise<FetchReturns<TResult>>;
 
     /**
      * Retrieves entities in a paginated format.
@@ -36,7 +36,7 @@ export interface IBaseRequestRepository {
      * @param params - Object containing pagination filters and optional flags.
      * @returns A promise resolving to {@link FetchReturns}.
      */
-    paginated(params: GetPaginatedEntitiesParams): Promise<FetchReturns>;
+    paginated<TResult = unknown>(params: GetPaginatedEntitiesParams): Promise<FetchReturns<TResult>>;
 
     /**
      * Creates a new entity.
@@ -44,7 +44,7 @@ export interface IBaseRequestRepository {
      * @param params - Object containing the entity data and optional query flags.
      * @returns A promise resolving to {@link FetchReturns}.
      */
-    create(params: CreateEntityParams): Promise<FetchReturns>;
+    create<TResult = unknown>(params: CreateEntityParams): Promise<FetchReturns<TResult>>;
 
     /**
      * Updates an existing entity by its `_id`.
@@ -52,7 +52,7 @@ export interface IBaseRequestRepository {
      * @param params - Object containing the `_id`, updated data, and optional flags.
      * @returns A promise resolving to {@link FetchReturns}.
      */
-    update(params: UpdateEntityParams): Promise<FetchReturns>;
+    update<TResult = unknown>(params: UpdateEntityParams): Promise<FetchReturns<TResult>>;
 
     /**
      * Deletes an entity by its `_id`.
@@ -60,7 +60,7 @@ export interface IBaseRequestRepository {
      * @param params - Object containing the `_id` of the entity to delete.
      * @returns A promise resolving to {@link FetchReturns}.
      */
-    delete(params: DeleteEntityParams): Promise<FetchReturns>;
+    delete<TResult = unknown>(params: DeleteEntityParams): Promise<FetchReturns<TResult>>;
 
     /**
      * Executes an advanced entity-level query.
@@ -68,5 +68,5 @@ export interface IBaseRequestRepository {
      * @param params - Object containing filters, projections, and additional options.
      * @returns A promise resolving to {@link FetchReturns}.
      */
-    query(params: EntityQueryParams): Promise<FetchReturns>;
+    query<TResult = unknown>(params: EntityQueryParams): Promise<FetchReturns<TResult>>;
 }
