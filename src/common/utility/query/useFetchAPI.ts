@@ -1,25 +1,26 @@
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
 import RequestMethod from "@/common/type/RequestMethod.ts";
 
-export interface useFetchAPIParams<TData> {
+interface useFetchAPIParams<TData> {
     url: string;
     method: RequestMethod;
     data?: TData;
 }
 
-export default async function useFetchAPI<TData = any, TReturns = any>(params: useFetchAPIParams<TData>): Promise<FetchReturns<TReturns>> {
-
+export default async function useFetchAPI<TData = unknown, TReturns = unknown>(params: useFetchAPIParams<TData>): Promise<FetchReturns<TReturns>> {
     const {url, method, data} = params;
 
-    const fetchOptions: RequestInit = {
-        method,
-        credentials: "include",
-        headers: {"Content-Type": "application/json"},
-        ...(data ? {body: JSON.stringify(data)} : {}),
-    };
+    const isFormData = typeof FormData !== "undefined" && data instanceof FormData;
 
-    const response = await fetch(url, fetchOptions);
-    let result: any;
+    const credentials: RequestCredentials | undefined = "include";
+    const headers: HeadersInit | undefined = isFormData ? undefined : {"Content-Type": "application/json"}
+    const body: BodyInit | undefined = isFormData
+        ? (data as FormData)
+        : (data ? JSON.stringify(data) : undefined);
+
+    const response = await fetch(url, {method, credentials, headers, body});
+
+    let result: TReturns;
 
     try {
         result = await response.json();
