@@ -1,6 +1,6 @@
 import {z} from "zod";
 import {DateStringSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
-import {CloudinaryImageObject} from "@/common/schema/objects/CloudinaryImageObject.ts";
+import {CloudinaryImageObjectSchema} from "@/common/schema/objects/CloudinaryImageObjectSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
 import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
@@ -69,7 +69,7 @@ export const MovieBaseSchema = z.object({
      *
      * Can be null or undefined if no poster is available. Defaults to null.
      */
-    posterImage: CloudinaryImageObject.optional().nullable().default(null),
+    posterImage: CloudinaryImageObjectSchema.optional().nullable().default(null),
 
     /**
      * A URL to the movie's trailer.

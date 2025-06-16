@@ -1,6 +1,6 @@
 import {z, ZodType} from 'zod';
 import {CountryEnum} from "@/common/schema/helpers/ZodEnumHelpers.ts";
-import {CloudinaryImageObject} from "@/common/schema/objects/CloudinaryImageObject.ts";
+import {CloudinaryImageObjectSchema} from "@/common/schema/objects/CloudinaryImageObjectSchema.ts";
 import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
@@ -46,7 +46,7 @@ export const PersonBaseRawSchema = z.object({
     /**
      * An optional Cloudinary-hosted profile image object.
      */
-    profileImage: CloudinaryImageObject
+    profileImage: CloudinaryImageObjectSchema
         .nullable()
         .optional(),
 });
