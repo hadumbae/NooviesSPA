@@ -1,4 +1,3 @@
-import {FC} from 'react';
 import {UseMutationResult} from "@tanstack/react-query";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {RefreshCw} from "lucide-react";
@@ -15,7 +14,6 @@ import {
     MovieCreditSubmit
 } from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
 import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
-import {MovieCreditFormBaseValues} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitBaseSchema.ts";
 
 import generateReactSelectOptions from "@/common/utility/forms/generateReactSelectOptions.ts";
 
@@ -29,8 +27,13 @@ import MovieCreditSubmitFormFlagsFieldset
     from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormFlagsFieldset.tsx";
 import MovieCreditSubmitFormCastFieldset
     from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormCastFieldset.tsx";
+import {FC} from "react";
+import UnionKeys from "@/common/type/schema/UnionKeys.ts";
 
-interface ViewProps<TKey = keyof Partial<MovieCreditFormBaseValues>> {
+
+type MovieCreditKeys = UnionKeys<MovieCreditFormValues>;
+
+interface ViewProps {
     form: UseFormReturn<MovieCreditFormValues>;
     submitHandler: SubmitHandler<MovieCreditFormValues>;
     mutation: UseMutationResult<MovieCredit, Error, MovieCreditSubmit>;
@@ -38,7 +41,7 @@ interface ViewProps<TKey = keyof Partial<MovieCreditFormBaseValues>> {
     movies: Movie[];
     persons: Person[];
 
-    disableFields?: TKey[];
+    disableFields?: MovieCreditKeys[];
 }
 
 const MovieCreditSubmitFormView: FC<ViewProps> = (params) => {
@@ -62,9 +65,9 @@ const MovieCreditSubmitFormView: FC<ViewProps> = (params) => {
         motionCapture: !disableFields.includes("motionCapture"),
     };
 
-    const activeCrewFields = {
+    const activeCrewFields = roleType === "CREW" ? {
         job: !disableFields.includes("job"),
-    };
+    } : undefined;
 
     const activeCastFields = {
         characterName: !disableFields.includes("characterName"),
