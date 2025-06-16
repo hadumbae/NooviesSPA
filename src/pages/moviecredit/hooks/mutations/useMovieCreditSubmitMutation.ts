@@ -4,8 +4,8 @@ import {
 } from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {toast} from "react-toastify";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
+import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
 
 /**
  * Parameters for configuring the movie credit submit mutation.
@@ -47,13 +47,12 @@ export default function useMovieCreditSubmitMutation(
 
     const mutationKey = ["submit_single_movie_credit"];
 
-    const submitData = async (values: MovieCreditSubmit) => {
-        console.log("Movie Credit Submit: ", values);
+    const submitMovieCreditData = async (values: MovieCreditSubmit) => {
+        console.log("Movie Credit Submit Values: ", values);
 
-        const {response, result} = await MovieCreditRepository.create({data: values, populate});
-        if (!response.ok) throw new HttpResponseError({response});
-
-        return result;
+        return handleAPIResponse({
+            action: () => MovieCreditRepository.create<MovieCredit>({data: values, populate}),
+        });
     }
 
     const onSuccess = async (credit: MovieCredit) => {
@@ -62,8 +61,7 @@ export default function useMovieCreditSubmitMutation(
             "fetch_paginated_movie_credits",
         ];
 
-        await Promise.all(queryKeys.map(key =>
-            queryClient.invalidateQueries({queryKey: [key], exact: false})));
+        await Promise.all(queryKeys.map(key => queryClient.invalidateQueries({queryKey: [key], exact: false})));
 
         toast.success(successToast || "Created movie credit successfully.");
         onSubmit && onSubmit(credit);
@@ -76,7 +74,7 @@ export default function useMovieCreditSubmitMutation(
 
     return useMutation({
         mutationKey,
-        mutationFn: submitData,
+        mutationFn: submitMovieCreditData,
         onSuccess,
         onError,
     });
