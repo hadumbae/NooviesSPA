@@ -8,9 +8,14 @@ import PersonDetailsHeader from "@/pages/persons/components/headers/PersonDetail
 import useValidateData from "@/common/hooks/validation/useValidateData.ts";
 import {PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
+import PersonDetailsBreadcrumbs from "@/pages/persons/components/breadcrumbs/admin/PersonDetailsBreadcrumbs.tsx";
 
 const PersonPage: FC = () => {
-    const {personID} = useFetchPersonParams();
+    const urlParams = useFetchPersonParams();
+    if (!urlParams) return <PageLoader />;
+
+    const {personID} = urlParams;
+
     const {data, isPending, isError, error: queryError} = useFetchPerson({_id: personID!});
     const {data: person, error: parseError} = useValidateData({data, isPending, schema: PersonSchema});
 
@@ -18,10 +23,11 @@ const PersonPage: FC = () => {
     if (isError) return <PageHTTPError error={queryError} />
     if (parseError) return <PageHTTPError error={parseError} />
 
-    const {biography} = person!;
+    const {name, biography} = person!;
 
     return (
         <PageFlexWrapper>
+            <PersonDetailsBreadcrumbs name={name} />
             <PersonDetailsHeader person={person!} />
 
             <section className="px-10">

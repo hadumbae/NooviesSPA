@@ -2,33 +2,41 @@ import {FC} from 'react';
 import useFetchPersonParams from "@/pages/persons/hooks/useFetchPersonParams.ts";
 import useFetchPerson from "@/pages/persons/hooks/useFetchPerson.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/errors/PageError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import PersonSubmitForm from "@/pages/persons/components/PersonSubmitForm.tsx";
 import {useNavigate} from "react-router-dom";
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
+import {Person, PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
 import PersonEditHeader from "@/pages/persons/components/headers/PersonEditHeader.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
+import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 
 const PersonEditPage: FC = () => {
     const navigate = useNavigate();
-    const {personID} = useFetchPersonParams();
-    const {data: person, isPending, isError, error} = useFetchPerson({_id: personID!});
+    const urlParams = useFetchPersonParams();
+    if (!urlParams) return <PageLoader />;
+
+    const {personID} = urlParams;
+
+    const {data, isPending, isError, error: queryError} = useFetchPerson({_id: personID});
+    const {data: person, error: parseError} = useValidateData({isPending, data, schema: PersonSchema});
+
+    if (isPending) return <PageLoader />
+    if (isError) return <PageHTTPError error={queryError} />
+    if (parseError) return <PageParseError error={parseError} />
 
     const onEdit = (person: Person) => {
         navigate(`/admin/persons/get/${person._id}`);
     }
 
-    if (isPending) return <PageLoader />
-    if (isError) return <PageError error={error} />
-
     return (
         <PageFlexWrapper>
-            <PersonEditHeader person={person} />
+            <PersonEditHeader person={person!} />
 
             <Card>
                 <CardContent className="p-3">
-                    <PersonSubmitForm onSubmit={onEdit} person={person} />
+                    <PersonSubmitForm onSubmit={onEdit} person={person!} />
                 </CardContent>
             </Card>
         </PageFlexWrapper>
