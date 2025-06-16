@@ -1,29 +1,37 @@
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
-import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
-import {Showing, ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {useQuery} from "@tanstack/react-query";
+import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
+import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
 
 /**
- * Custom hook to fetch a single showing's data by its ID.
+ * React Query hook to fetch a single showing by its ID.
  *
- * @param params - The parameters for fetching the showing data.
- * @param params._id - The unique identifier of the showing to fetch.
- * @param [params.populate=false] - Whether to populate related data (default is false).
+ * This hook retrieves detailed showing data from the backend,
+ * optionally with populated references (e.g., related models like film or room).
  *
- * @returns A query result object containing the fetched showing data.
+ * @param params - Parameters for fetching the showing
+ * @param params._id - The ObjectId of the showing to fetch
+ * @param params.populate - Whether to populate referenced fields (default: `false`)
  *
- * @throws {@link ParseError} If the fetched data is invalid according to the schema.
+ * @returns A React Query result object containing the showing data, loading and error states, etc.
  *
- * @remarks
- * This hook utilizes `useQueryWithRedirect` to fetch the showing data and handle any errors.
- * If the data is invalid, a `ParseError` is thrown.
+ * @example
+ * ```ts
+ * const { data, isLoading, error } = useFetchShowing({ _id: someId, populate: true });
+ * ```
  */
-export default function useFetchShowing(params: { _id: ObjectId, populate?: boolean }) {
+export default function useFetchShowing(params: FetchByIDParams) {
     const {_id, populate = false} = params;
 
     const queryKey = ["fetch_single_showing", {_id, populate}];
-    const schema = ShowingSchema;
-    const action = () => ShowingRepository.get({_id, populate});
 
-    return useFetchValidatedDataWithRedirect<typeof ShowingSchema, Showing>({queryKey, schema, action});
+    const fetchShowing = useQueryFnHandler({
+       action: () => ShowingRepository.get({_id, populate}),
+       errorMessage: "Failed to fetch showing data. Please try again.",
+    });
+
+    return useQuery({
+        queryKey,
+        queryFn: fetchShowing,
+    });
 }

@@ -1,12 +1,35 @@
-import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
-import {Theatre, TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
 import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {useQuery} from "@tanstack/react-query";
+import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
+import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
+import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
 
-export default function useFetchTheatre({_id, populate = false}: { _id: ObjectId, populate?: boolean }) {
+/**
+ * React Query hook to fetch a single theatre by its ObjectId.
+ *
+ * Retrieves detailed theatre data from the backend, optionally
+ * populating referenced fields (such as rooms or address).
+ *
+ * @param _id - The ObjectId of the theatre to fetch
+ * @param populate - Whether to populate related fields (optional, defaults to `false`)
+ *
+ * @returns A React Query result object containing the theatre data, loading status, and error state.
+ *
+ * @example
+ * ```ts
+ * const { data, isLoading, error } = useFetchTheatre({ _id: someId, populate: true });
+ * ```
+ */
+export default function useFetchTheatre({_id, populate = false}: FetchByIDParams) {
     const queryKey = ["fetch_single_theatre", {_id, populate}];
-    const schema = TheatreSchema;
-    const action = () => TheatreRepository.get({_id, populate});
 
-    return useFetchValidatedDataWithRedirect<typeof TheatreSchema, Theatre>({queryKey, schema, action});
+    const action = useQueryFnHandler<Theatre>({
+        action: () => TheatreRepository.get({_id, populate}),
+        errorMessage: "Failed to fetch theatre data. Please try again.",
+    });
+
+    return useQuery({
+        queryKey,
+        queryFn: action,
+    });
 }
