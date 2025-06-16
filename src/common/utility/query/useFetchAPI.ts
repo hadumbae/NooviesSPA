@@ -1,5 +1,6 @@
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
 import RequestMethod from "@/common/type/RequestMethod.ts";
+import JSONParseError from "@/common/errors/JSONParseError.ts";
 
 interface useFetchAPIParams<TData> {
     url: string;
@@ -26,7 +27,7 @@ export default async function useFetchAPI<TData = unknown, TReturns = unknown>(p
         result = await response.json();
     } catch (error: unknown) {
         console.error("Error in Fetch: ", error);
-        throw new Error(`${response.status} ${response.statusText}`);
+        throw new JSONParseError({status: response.status, raw: await response.text()});
     }
 
     return {response, result};
