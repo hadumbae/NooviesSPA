@@ -2,6 +2,7 @@ import {z, type ZodType} from 'zod';
 import IPerson from "@/pages/persons/interfaces/IPerson.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {PersonBaseRawSchema} from "@/pages/persons/schema/PersonBaseSchema.ts";
+import {MovieCreditSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 
 /**
  * Zod schema defining validation rules for a person object,
@@ -16,7 +17,7 @@ export const PersonRawSchema = PersonBaseRawSchema.extend({
      * An array of movie references associated with the person.
      * Each item can be either a string ID or a populated movie object.
      */
-    movies: z.array(z.union([IDStringSchema, z.any()])),
+    movies: z.array(z.union([IDStringSchema, z.lazy(() => MovieCreditSchema)])),
 });
 
 /**
@@ -25,7 +26,7 @@ export const PersonRawSchema = PersonBaseRawSchema.extend({
  * This schema ensures validation aligns with the expected shape
  * of a complete person entity including related movies.
  */
-export const PersonSchema = PersonRawSchema satisfies ZodType<IPerson>;
+export const PersonSchema = PersonRawSchema as ZodType<IPerson>;
 
 /**
  * The inferred TypeScript type from {@link PersonSchema}.

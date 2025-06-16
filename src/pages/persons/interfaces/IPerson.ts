@@ -1,20 +1,18 @@
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import IPersonBase from "@/pages/persons/interfaces/IPersonBase.ts";
-import IMovie from "@/pages/movies/interfaces/IMovie.ts";
+import {IMovieCredit} from "@/pages/moviecredit/interfaces/IMovieCredit.ts";
 
 /**
- * Extends the base person structure with a list of associated movies.
+ * Represents a person with basic attributes and associated movies.
  *
- * This interface is useful for hydrated entities where the person may have
- * references to movie documents, or populated movie data.
+ * This interface extends {@link IPersonBase} and includes a `movies` field
+ * that may contain either references (`ObjectId`) or partially/full populated
+ * {@link IMovieCredit} objects, depending on the request options used.
  */
 export default interface IPerson extends IPersonBase {
     /**
-     * A list of movies the person is associated with (e.g., as actor, director).
-     *
-     * Each entry can be either:
-     * - An {@link ObjectId} referencing a movie (unpopulated)
-     * - A fully populated {@link IMovie} object
+     * An array of movie credits associated with the person.
+     * Items may be raw `ObjectId`s or populated `IMovieCredit` objects.
      */
-    movies: (ObjectId | IMovie)[];
+    movies: (ObjectId | IMovieCredit)[];
 }
