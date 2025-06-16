@@ -7,6 +7,7 @@ import {
     BreadcrumbList, BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
+import {Link} from "react-router-dom";
 
 interface CrumbProps {
     personID: ObjectId;
@@ -18,16 +19,20 @@ const PersonImageDetailsBreadcrumbs: FC<CrumbProps> = ({personID, name}) => {
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <BreadcrumbLink href={"/admin/persons"}>
-                        Persons
+                    <BreadcrumbLink asChild>
+                        <Link to="/admin/persons">
+                            Persons
+                        </Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
                 <BreadcrumbSeparator />
 
                 <BreadcrumbItem>
-                    <BreadcrumbLink href={`/admin/persons/get/${personID}`}>
-                        Person Details {name && ` | ${name}`}
+                    <BreadcrumbLink asChild>
+                        <Link to={`/admin/persons/get/${personID}`}>
+                            Person Details {name && ` | ${name}`}
+                        </Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

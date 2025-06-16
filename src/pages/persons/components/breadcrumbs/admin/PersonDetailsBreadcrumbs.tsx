@@ -6,6 +6,7 @@ import {
     BreadcrumbList, BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
+import {Link} from "react-router-dom";
 
 interface PersonalDetailsProps {
     name: string;
@@ -16,7 +17,11 @@ const PersonDetailsBreadcrumbs: FC<PersonalDetailsProps> = ({name}) => {
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <BreadcrumbLink href={"/admin/persons"}>Persons</BreadcrumbLink>
+                    <BreadcrumbLink asChild>
+                        <Link to="/admin/persons">
+                            Persons
+                        </Link>
+                    </BreadcrumbLink>
                 </BreadcrumbItem>
 
                 <BreadcrumbSeparator />
