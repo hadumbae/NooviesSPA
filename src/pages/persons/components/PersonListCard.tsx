@@ -4,6 +4,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {format} from "date-fns";
 import PersonOptions from "@/pages/persons/components/PersonOptions.tsx";
 import {Link} from "react-router-dom";
+import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
 
 interface Props {
     person: Person;
@@ -11,14 +12,23 @@ interface Props {
 }
 
 const PersonListCard: FC<Props> = ({person, onDelete}) => {
-    const {_id, name, dob, nationality} = person;
+    const {_id, name, dob, nationality, profileImage} = person;
     const formattedDOB = format(dob, "dd MMM, yyyy");
 
     return (
         <Card>
             <CardContent className="p-4 space-y-3">
-                <div className="flex justify-between items-center">
-                    <div className="flex flex-col">
+                <div className="flex items-center space-x-5">
+                    {
+                        profileImage
+                        && <CloudinaryAvatarImage
+                            personName={name}
+                            image={profileImage}
+                            className="h-16 w-16"
+                        />
+                    }
+
+                    <div className="flex-grow flex flex-col">
                         <Link
                             className="font-bold text-lg hover:underline"
                             to={`/admin/persons/get/${_id}`}
