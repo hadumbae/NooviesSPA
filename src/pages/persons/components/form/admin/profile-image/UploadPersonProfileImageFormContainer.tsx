@@ -5,7 +5,7 @@ import usePersonProfileImageSubmitMutation
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {PersonProfileImageSubmitObject} from "@/pages/persons/schema/admin/PersonProfileImageSubmitSchema.ts";
 import UploadPersonProfileImageFormView
-    from "@/pages/persons/components/form/admin/UploadPersonProfileImageFormView.tsx";
+    from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormView.tsx";
 
 interface ContainerProps {
     personID: ObjectId;
