@@ -12,7 +12,7 @@ interface ErrorProps {
      * The error object to display.
      * Supports generic Error, HttpResponseError, and ParseError.
      */
-    error: Error;
+    error?: Error | null;
 
     /**
      * An optional message to override the default error message.

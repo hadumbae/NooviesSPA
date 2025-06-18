@@ -1,0 +1,51 @@
+import useFetchAllPersons from "@/pages/persons/hooks/useFetchAllPersons.ts";
+import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
+import {PersonArray, PersonArraySchema} from "@/pages/persons/schema/PersonArraySchema.ts";
+import useFetchAllMovies from "@/pages/movies/hooks/queries/useFetchAllMovies.ts";
+import {MovieArray, MovieArraySchema} from "@/pages/movies/schema/model/MovieArraySchema.ts";
+import {
+    UseFetchMoviesAndPersonsParams
+} from "@/pages/moviecredit/hooks/queries/movies-and-credits/useFetchMoviesAndPersonsParams.ts";
+import {
+    UseFetchMoviesAndPersonsReturns
+} from "@/pages/moviecredit/hooks/queries/movies-and-credits/UseFetchMoviesAndPersonsReturns.ts";
+
+export default function useFetchMoviesAndPersons(
+    params: UseFetchMoviesAndPersonsParams
+): UseFetchMoviesAndPersonsReturns<MovieArray, PersonArray> {
+    const {personFilters = {}, movieFilters = {}, populate = false, virtuals = false} = params;
+
+    // Queries
+
+    const movieQuery = useFetchAllMovies({populate, virtuals, filters: movieFilters});
+    const personQuery = useFetchAllPersons({populate, virtuals, filters: personFilters});
+    const queries = [movieQuery, personQuery];
+
+    const isPending = queries.some(({isPending}) => isPending);
+    const isError = queries.some(({isError}) => isError);
+    const queryError = queries.find(({isError}) => isError)?.error ?? null;
+
+    // Validation
+
+    const movieValidation = useValidateData({isPending, schema: MovieArraySchema, data: movieQuery.data});
+    const personValidation = useValidateData({isPending, schema: PersonArraySchema, data: personQuery.data});
+
+    const parseSuccess = movieValidation.success && personValidation.success;
+    const baseReturns = {isPending, isError, queryError};
+
+    if (!parseSuccess) {
+        return {
+            ...baseReturns,
+            parseSuccess: false,
+            parseError: movieValidation.error ?? personValidation.error ?? null,
+            data: {movies: null, persons: null},
+        };
+    }
+
+    return {
+        ...baseReturns,
+        parseSuccess: true,
+        parseError: null,
+        data: {movies: movieValidation.data, persons: personValidation.data},
+    };
+}

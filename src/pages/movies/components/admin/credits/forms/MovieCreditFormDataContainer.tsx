@@ -7,10 +7,10 @@ import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSch
 import MovieCreditSubmitFormView from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormView.tsx";
 import {Loader} from "lucide-react";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
-import useFetchMoviesAndPersons from "@/pages/moviecredit/hooks/queries/movies-and-persons/useFetchMoviesAndPersons.ts";
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
+import useFetchMoviesAndPersons from "@/pages/moviecredit/hooks/queries/movies-and-credits/useFetchMoviesAndPersons.ts";
 
 interface ContainerProps {
     form: UseFormReturn<MovieCreditFormValues>;
@@ -36,11 +36,11 @@ const MovieCreditFormDataContainer: FC<ContainerProps> = (params) => {
     } = params;
 
     const inputQuery = useFetchMoviesAndPersons({populate, virtuals, movieFilters, personFilters});
-    const {data, isPending, isError, queryError, parseError} = inputQuery;
+    const {data, isPending, isError, queryError, parseSuccess, parseError} = inputQuery;
 
     if (isPending) return <Loader className="animate-spin"/>;
-    if (isError) return <ErrorMessageDisplay error={queryError!}/>;
-    if (parseError) return <ErrorMessageDisplay error={parseError}/>;
+    if (isError) return <ErrorMessageDisplay error={queryError}/>;
+    if (!parseSuccess) return <ErrorMessageDisplay error={parseError}/>;
 
     const {movies, persons} = data;
 
