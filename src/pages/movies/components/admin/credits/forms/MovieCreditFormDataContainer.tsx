@@ -7,7 +7,7 @@ import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSch
 import MovieCreditSubmitFormView from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormView.tsx";
 import {Loader} from "lucide-react";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
-import useFetchMoviesAndPersons from "@/pages/moviecredit/hooks/queries/useFetchMoviesAndPersons.ts";
+import useFetchMoviesAndPersons from "@/pages/moviecredit/hooks/queries/movies-and-persons/useFetchMoviesAndPersons.ts";
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";

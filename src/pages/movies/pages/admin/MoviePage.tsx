@@ -12,7 +12,7 @@ import MovieDetailsBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import MovieDetailsCreditPageSection from "@/pages/movies/components/admin/sections/MovieDetailsCreditPageSection.tsx";
-import useFetchMovieWithCredits from "@/pages/movies/hooks/queries/useFetchMovieWithCredits.ts";
+import useFetchMovieWithCredits from "@/pages/movies/hooks/queries/movie-with-credits/useFetchMovieWithCredits.ts";
 
 const MoviePage: FC = () => {
     useTitle("Movie Details");
@@ -21,30 +21,29 @@ const MoviePage: FC = () => {
     if (!movieParams) return <PageLoader />;
 
     const {movieID} = movieParams;
-    const {data: {movie, cast, crew}, isPending, isError, errors} = useFetchMovieWithCredits({
+    const {data, isPending, isError, queryError, parseSuccess, parseError} = useFetchMovieWithCredits({
         movieID,
         populateMovie: true,
         creditFilters: {limit: 6}
     });
 
-    useTitle(movie?.title);
-
-    const {query: queryError, parse: parseError} = errors;
+    useTitle(data?.movie?.title);
 
     if (isPending) return <PageLoader />;
     if (isError) return <PageHTTPError error={queryError} />;
-    if (parseError) return <PageParseError error={parseError} />;
+    if (!parseSuccess) return <PageParseError error={parseError} />;
 
-    const {_id, synopsis} = movie!;
+    const {movie, cast, crew} = data;
+    const {_id, synopsis} = movie;
 
     return (
         <PageFlexWrapper>
             <MovieDetailsBreadcrumb />
 
-            <MovieDetailsHeader movie={movie!} />
+            <MovieDetailsHeader movie={movie} />
 
             <section>
-                <MovieDetailsCard movie={movie!} />
+                <MovieDetailsCard movie={movie} />
             </section>
 
             <PageSection title="Synopsis">
@@ -55,9 +54,9 @@ const MoviePage: FC = () => {
                 </Card>
             </PageSection>
 
-            <MovieDetailsCreditPageSection movieID={_id} roleType="CREW" credits={crew!} />
+            <MovieDetailsCreditPageSection movieID={_id} roleType="CREW" credits={crew} />
 
-            <MovieDetailsCreditPageSection movieID={_id} roleType="CAST" credits={cast!} />
+            <MovieDetailsCreditPageSection movieID={_id} roleType="CAST" credits={cast} />
         </PageFlexWrapper>
     );
 };
