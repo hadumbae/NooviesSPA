@@ -1,7 +1,12 @@
 import {ParseError} from "@/common/errors/ParseError.ts";
 import {FieldValues, UseFormReturn} from "react-hook-form";
 
-export default <T extends FieldValues>({form}: {form: UseFormReturn<T>}) => (error: Error) => {
+type HandlerParams<TForm extends FieldValues> = {
+    form: UseFormReturn<TForm>;
+    onError?: (error: Error) => void;
+}
+
+export default <TForm extends FieldValues>({form, onError}: HandlerParams<TForm>) => (error: Error) => {
     if (error instanceof ParseError) {
         console.error("Zod Parsing Errors: ", error.errors);
 
@@ -10,4 +15,6 @@ export default <T extends FieldValues>({form}: {form: UseFormReturn<T>}) => (err
             form.setError(path.join(".") as any, {type: "manual", message});
         }
     }
+
+    onError && onError(error);
 }

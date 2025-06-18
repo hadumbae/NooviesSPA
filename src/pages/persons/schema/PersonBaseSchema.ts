@@ -1,10 +1,10 @@
 import {z, ZodType} from 'zod';
-import {CountryEnum} from "@/common/schema/helpers/ZodEnumHelpers.ts";
 import {CloudinaryImageObjectSchema} from "@/common/schema/objects/CloudinaryImageObjectSchema.ts";
-import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
+import {DateStringSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import IPersonBase from "@/pages/persons/interfaces/IPersonBase.ts";
+import {ISO3166Alpha2CodeEnum} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
 
 /**
  * Zod schema defining the raw validation rules for a base person object.
@@ -36,12 +36,12 @@ export const PersonBaseRawSchema = z.object({
     /**
      * The person's date of birth. Accepts and coerces various date formats.
      */
-    dob: CoercedDateSchema,
+    dob: DateStringSchema,
 
     /**
      * The person's nationality, validated against a predefined set of country values.
      */
-    nationality: CountryEnum,
+    nationality: ISO3166Alpha2CodeEnum,
 
     /**
      * An optional Cloudinary-hosted profile image object.

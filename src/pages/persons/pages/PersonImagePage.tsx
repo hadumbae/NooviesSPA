@@ -12,7 +12,7 @@ import PersonImageDetailsBreadcrumbs
 import PersonProfileImageHeader from "@/pages/persons/components/headers/PersonProfileImageHeader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import UploadPersonProfileImageFormContainer
-    from "@/pages/persons/components/form/admin/UploadPersonProfileImageFormContainer.tsx";
+    from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormContainer.tsx";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 
 const PersonImagePage: FC = () => {

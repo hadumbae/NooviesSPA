@@ -14,5 +14,5 @@ export default interface IPerson extends IPersonBase {
      * An array of movie credits associated with the person.
      * Items may be raw `ObjectId`s or populated `IMovieCredit` objects.
      */
-    movies: (ObjectId | IMovieCredit)[];
+    movies?: (ObjectId | IMovieCredit)[];
 }

@@ -17,7 +17,7 @@ export const PersonRawSchema = PersonBaseRawSchema.extend({
      * An array of movie references associated with the person.
      * Each item can be either a string ID or a populated movie object.
      */
-    movies: z.array(z.union([IDStringSchema, z.lazy(() => MovieCreditSchema)])),
+    movies: z.array(z.union([IDStringSchema, z.lazy(() => MovieCreditSchema)])).optional(),
 });
 
 /**

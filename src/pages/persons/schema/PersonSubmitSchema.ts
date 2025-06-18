@@ -1,8 +1,8 @@
 import {z, ZodType} from "zod";
-import {IPersonSubmit} from "@/pages/persons/interfaces/IPersonSubmit.ts";
-import {CoercedDateSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
-import {CountryEnum} from "@/common/schema/helpers/ZodEnumHelpers.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {ISO3166Alpha2CodeEnum} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
+import {CoercedDateStringSchema} from "@/common/schema/dates/CoercedDateStringSchema.ts";
+import {IPersonSubmit} from "@/pages/persons/interfaces/IPersonSubmit.ts";
 
 export const PersonSubmitSchema: ZodType<IPersonSubmit> = z.object({
     name: NonEmptyStringSchema
@@ -13,9 +13,9 @@ export const PersonSubmitSchema: ZodType<IPersonSubmit> = z.object({
         .min(1, "Required.")
         .max(1000, "Must be 1000 characters or less."),
 
-    dob: CoercedDateSchema,
+    dob: CoercedDateStringSchema,
 
-    nationality: CountryEnum,
+    nationality: z.union([z.literal(""), ISO3166Alpha2CodeEnum]).refine((v) => v, {message: "Required."}),
 });
 
 export type PersonSubmit = z.infer<typeof PersonSubmitSchema>;

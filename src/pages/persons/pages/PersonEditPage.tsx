@@ -3,7 +3,7 @@ import useFetchPersonParams from "@/pages/persons/hooks/useFetchPersonParams.ts"
 import useFetchPerson from "@/pages/persons/hooks/useFetchPerson.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import PersonSubmitForm from "@/pages/persons/components/PersonSubmitForm.tsx";
+import PersonSubmitFormContainer from "@/pages/persons/components/form/admin/submit/PersonSubmitFormContainer.tsx";
 import {useNavigate} from "react-router-dom";
 import {Person, PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
 import PersonEditHeader from "@/pages/persons/components/headers/PersonEditHeader.tsx";
@@ -22,9 +22,9 @@ const PersonEditPage: FC = () => {
     const {data, isPending, isError, error: queryError} = useFetchPerson({_id: personID});
     const {data: person, error: parseError} = useValidateData({isPending, data, schema: PersonSchema});
 
-    if (isPending) return <PageLoader />
-    if (isError) return <PageHTTPError error={queryError} />
-    if (parseError) return <PageParseError error={parseError} />
+    if (isPending) return <PageLoader />;
+    if (isError) return <PageHTTPError error={queryError} />;
+    if (parseError) return <PageParseError error={parseError} />;
 
     const onEdit = (person: Person) => {
         navigate(`/admin/persons/get/${person._id}`);
@@ -36,7 +36,7 @@ const PersonEditPage: FC = () => {
 
             <Card>
                 <CardContent className="p-3">
-                    <PersonSubmitForm onSubmit={onEdit} person={person!} />
+                    <PersonSubmitFormContainer onSubmit={onEdit} isEditing={true} person={person!} />
                 </CardContent>
             </Card>
         </PageFlexWrapper>

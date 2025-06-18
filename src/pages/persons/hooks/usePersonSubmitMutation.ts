@@ -5,42 +5,48 @@ import {useMutation} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import mutationErrorHandler from "@/common/handlers/mutation/MutationFormErrorHandler.ts";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
-import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
-import parseResponseData from "@/common/utility/query/parseResponseData.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
 
-interface IUsePersonSubmitMutation {
-    _id?: string;
+export type PersonSubmitParams = {
     form: UseFormReturn<PersonSubmit>;
-    onSubmit: (person: Person) => void;
-}
+    onSubmitSuccess?: (person: Person) => void;
+    onSubmitError?: (error: Error) => void;
+} & (| {
+    isEditing: true;
+    _id: ObjectId;
+} | {
+    isEditing?: false;
+    _id?: never;
+});
 
-export default function usePersonSubmitMutation({_id, form, onSubmit}: IUsePersonSubmitMutation) {
+
+export default function usePersonSubmitMutation(params: PersonSubmitParams) {
+    const {form, onSubmitSuccess, onSubmitError, isEditing, _id} = params;
     const submitPersonData = async (data: PersonSubmit) => {
 
         const repository = PersonRepository;
-        const action = _id
-            ? () => repository.update({_id, data})
-            : () => repository.create({data});
+        const action = isEditing
+            ? () => repository.update<Person>({_id, data})
+            : () => repository.create<Person>({data});
 
-        const {result} = await useFetchErrorHandler({fetchQueryFn: action});
-        const parsed = parseResponseData<typeof PersonSchema, Person>({
-            schema: PersonSchema,
-            data: result,
-        });
-
-        console.log("Parsed: ", parsed);
-
-        return parsed;
+        return handleAPIResponse({action: () => action()});
     }
 
-    const onSuccess = (person: Person) => {
-        const message = `Person ${_id ? "updated" : "created"} successfully.`;
+    const onSuccess = (data: unknown) => {
+        const {success, data: person} = PersonSchema.safeParse(data);
+
+        if (!success) {
+            toast.error("Invalid response. Please try again.")
+        }
+
+        const message = `Person ${isEditing ? "updated" : "created"} successfully.`;
         toast.success(message);
 
-        onSubmit(person);
+        onSubmitSuccess && onSubmitSuccess(person!);
     }
 
-    const onError = mutationErrorHandler({form});
+    const onError = mutationErrorHandler({form, onError: onSubmitError});
 
     return useMutation({
         mutationKey: ['single_person_submit'],
