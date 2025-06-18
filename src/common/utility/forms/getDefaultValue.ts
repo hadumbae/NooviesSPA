@@ -19,6 +19,6 @@
  * getDefaultValue(null, null, 42); // returns 42
  * ```
  */
-export default function getDefaultValue<TData, TFallback>(preset: TData, data: TData, fallback: TFallback): TData | TFallback {
+export default function getDefaultValue<TData, TFallback>(preset: TData | undefined | null, data: TData | undefined | null, fallback: TFallback): TData | TFallback {
     return preset ?? data ?? fallback;
 }
