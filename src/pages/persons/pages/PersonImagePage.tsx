@@ -3,7 +3,7 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import useFetchPerson from "@/pages/persons/hooks/useFetchPerson.ts";
 import useFetchPersonParams from "@/pages/persons/hooks/useFetchPersonParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {PersonPopulatedSchema} from "@/pages/persons/schema/PersonPopulatedSchema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
@@ -22,7 +22,7 @@ const PersonImagePage: FC = () => {
     const {personID} = urlParams;
 
     const {data, isPending, isError, error: queryError} = useFetchPerson({_id: personID, populate: true});
-    const {data: person, error: parseError} = useValidateData({
+    const {success, data: person, error: parseError} = useValidateData({
         data,
         isPending,
         schema: PersonPopulatedSchema,
@@ -31,7 +31,7 @@ const PersonImagePage: FC = () => {
 
     if (isPending) return <PageLoader/>;
     if (isError) return <PageHTTPError error={queryError}/>;
-    if (parseError || !person) return <PageParseError error={parseError}/>;
+    if (!success) return <PageParseError error={parseError}/>;
 
     const {_id, name} = person;
 

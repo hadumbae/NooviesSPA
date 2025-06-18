@@ -6,7 +6,7 @@ import PersonIndexHeader from "@/pages/persons/components/headers/PersonIndexHea
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import useFetchPersonQuery from "@/pages/persons/hooks/useFetchPersonQuery.ts";
-import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {PaginatedPersonsSchema} from "@/pages/persons/schema/PersonPaginationSchema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
@@ -21,18 +21,18 @@ const PersonsPage: FC = () => {
         perPage,
     });
 
-    const {data: paginatedPersons, error: parseError} = useValidateData({
+    const {success, data: paginatedPersons, error: parseError} = useValidateData({
         data,
         isPending,
         schema: PaginatedPersonsSchema,
         message: "Invalid Data Returned FROM API."
-    })
+    });
 
     if (isPending) return <PageLoader/>;
     if (isError) return <PageHTTPError error={error}/>;
-    if (parseError) return <PageParseError error={parseError}/>;
+    if (!success) return <PageParseError error={parseError}/>;
 
-    const {items: persons} = paginatedPersons!;
+    const {items: persons} = paginatedPersons;
     const hasPersons = (persons || []).length > 0;
 
     return (

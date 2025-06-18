@@ -2,7 +2,7 @@ import {FC} from 'react';
 import useFetchMoviePersonParams from "@/pages/movies/hooks/params/useFetchMoviePersonParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import useFetchMovieCredit from "@/pages/moviecredit/hooks/queries/useFetchMovieCredit.ts";
-import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
@@ -25,13 +25,17 @@ const MoviePersonEditPage: FC = () => {
     const {creditID} = params;
 
     const {data, isPending, isError, error: queryError} = useFetchMovieCredit({_id: creditID, populate: true});
-    const {data: credit, error: parseError} = useValidateData({schema: MovieCreditPopulatedSchema, data, isPending});
+    const {success, data: credit, error: parseError} = useValidateData({
+        schema: MovieCreditPopulatedSchema,
+        data,
+        isPending
+    });
 
     if (isPending) return <PageLoader/>;
     if (isError) return <PageHTTPError error={queryError}/>;
-    if (parseError) return <PageParseError error={parseError}/>;
+    if (!success) return <PageParseError error={parseError}/>;
 
-    const {roleType, movie: {_id: movieID, title, releaseDate}} = credit!;
+    const {roleType, movie: {_id: movieID, title, releaseDate}} = credit;
     const formattedReleaseDate = format(releaseDate, "yyyy");
     const movieTitle = `${title} (${formattedReleaseDate})`;
 
@@ -47,7 +51,7 @@ const MoviePersonEditPage: FC = () => {
             <section className="space-y-2">
                 <h1 className="sr-only">Header</h1>
                 <MoviePersonEditBreadcrumb movieID={movieID} movieTitle={movieTitle} roleType={roleType}/>
-                <MoviePersonEditHeader credit={credit!}/>
+                <MoviePersonEditHeader credit={credit}/>
             </section>
 
 
@@ -55,7 +59,7 @@ const MoviePersonEditPage: FC = () => {
                 <Card>
                     <CardContent className="p-4">
                         <MoviePersonUpdateFormContainer
-                            credit={credit!}
+                            credit={credit}
                             populate={false}
                             onSubmit={onSubmit}
                         />

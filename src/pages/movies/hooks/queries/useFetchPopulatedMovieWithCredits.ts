@@ -2,7 +2,7 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {MovieCreditFilters} from "@/pages/moviecredit/schemas/filters/MovieCreditFilterSchema.ts";
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
 import useFetchPaginatedMovieCredit from "@/pages/moviecredit/hooks/queries/useFetchPaginatedMovieCredit.ts";
-import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {
     MovieCreditPopulatedPaginationSchema
 } from "@/pages/moviecredit/schemas/model/paginated/MovieCreditPopulatedPaginationSchema.ts";
@@ -43,6 +43,7 @@ export default function useFetchPopulatedMovieWithCredits(params: FetchParams) {
         schema: MovieCreditPopulatedPaginationSchema,
     });
 
+    const parseSuccess = movieValidation.success && creditValidation.success;
     const parseError = movieValidation.error ?? creditValidation.error ?? null;
 
     return {
@@ -50,6 +51,7 @@ export default function useFetchPopulatedMovieWithCredits(params: FetchParams) {
         isPending,
         isError,
         queryError,
+        parseSuccess,
         parseError,
     };
 }

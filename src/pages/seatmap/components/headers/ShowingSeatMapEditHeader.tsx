@@ -3,7 +3,7 @@ import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import {format} from "date-fns";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {Link} from "lucide-react";
+import {Link, TriangleAlert} from "lucide-react";
 import HoverLink from "@/common/components/navigation/HoverLink.tsx";
 import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import useValidateShowingAndSeatMap from "@/pages/seatmap/hooks/validation/useValidateShowingAndSeatMap.ts";
@@ -16,10 +16,19 @@ interface Props {
 const ShowingSeatMapEditHeader: FC<Props> = ({showing, seatMap}) => {
     // Seating Subtitle
 
-    const {showing: populatedShowing, seatMap: populatedSeatMap} = useValidateShowingAndSeatMap({showing, seatMap});
+    const {data, error, success} = useValidateShowingAndSeatMap({showing, seatMap});
 
-    const {seat: {seatNumber, row}} = populatedSeatMap;
-    const {_id, movie: {title, releaseDate}} = populatedShowing;
+    if (!success) {
+        return <header className="flex space-x-5 items-center text-red-500">
+            <TriangleAlert />
+            <span>{error?.message || "Something went wrong! Please try again!"}</span>
+        </header>
+    }
+
+    const {showing: parsedShowing, seatMap: parsedSeatMap} = data;
+
+    const {seat: {seatNumber, row}} = parsedSeatMap!;
+    const {_id, movie: {title, releaseDate}} = parsedShowing!;
     const formattedReleaseDate = format(releaseDate, "yyyy");
 
     return (

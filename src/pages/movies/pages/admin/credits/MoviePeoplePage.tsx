@@ -24,7 +24,7 @@ const MoviePeoplePage: FC<PeoplePageProps> = ({roleType}) => {
     if (!movieParams) return <PageLoader />;
 
     const {movieID} = movieParams;
-    const {data, isPending, isError, queryError, parseError} = useFetchPopulatedMovieWithCredits({
+    const {data, isPending, isError, queryError, parseSuccess, parseError} = useFetchPopulatedMovieWithCredits({
         _id: movieID,
         page,
         perPage,
@@ -36,10 +36,9 @@ const MoviePeoplePage: FC<PeoplePageProps> = ({roleType}) => {
 
     if (isPending) return <PageLoader />;
     if (isError) return <PageHTTPError error={queryError} />;
-    if (parseError) return <PageParseError error={parseError} />;
+    if (!parseSuccess) return <PageParseError error={parseError} />;
 
     const {movie, credits: paginatedCredits} = data;
-
     const {items: credits} = paginatedCredits!;
 
     return (

@@ -1,6 +1,6 @@
 import useFetchAllPersons from "@/pages/persons/hooks/useFetchAllPersons.ts";
 import QueryFilters from "@/common/type/QueryFilters.ts";
-import useValidateData from "@/common/hooks/validation/useValidateData.ts";
+import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {PersonArraySchema} from "@/pages/persons/schema/PersonArraySchema.ts";
 import useFetchAllMovies from "@/pages/movies/hooks/queries/useFetchAllMovies.ts";
 import {MovieArraySchema} from "@/pages/movies/schema/model/MovieArraySchema.ts";
