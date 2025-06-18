@@ -10,6 +10,7 @@ import {cn} from "@/common/lib/utils.ts";
 import usePersonDeleteMutation from "@/pages/persons/hooks/usePersonDeleteMutation.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
+import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
 
 interface Props {
     person: Person;
@@ -19,7 +20,9 @@ const PersonDetailsHeader: FC<Props> = ({person}) => {
     const navigate = useNavigate();
 
     const {_id, name, dob, nationality, profileImage} = person;
+
     const formattedDOB = format(dob, "dd MMM, yyyy");
+    const formattedNationality = ISO3166Alpha2CountryConstant[nationality];
 
     const {mutate, isPending, isSuccess} = usePersonDeleteMutation({
         onDelete: () => navigate("/admin/persons")
@@ -39,7 +42,7 @@ const PersonDetailsHeader: FC<Props> = ({person}) => {
                 <CloudinaryAvatarImage personName={name} image={profileImage} />
                 <div className="flex flex-col justify-center">
                     <HeaderTitle>{name}</HeaderTitle>
-                    <HeaderDescription>{formattedDOB} | {nationality}</HeaderDescription>
+                    <HeaderDescription>{formattedDOB} | {formattedNationality}</HeaderDescription>
                 </div>
             </section>
 

@@ -5,6 +5,7 @@ import {format} from "date-fns";
 import PersonOptions from "@/pages/persons/components/PersonOptions.tsx";
 import {Link} from "react-router-dom";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
+import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
 
 interface Props {
     person: Person;
@@ -13,7 +14,9 @@ interface Props {
 
 const PersonListCard: FC<Props> = ({person, onDelete}) => {
     const {_id, name, dob, nationality, profileImage} = person;
+
     const formattedDOB = format(dob, "dd MMM, yyyy");
+    const formattedNationality = ISO3166Alpha2CountryConstant[nationality];
 
     return (
         <Card>
@@ -32,7 +35,7 @@ const PersonListCard: FC<Props> = ({person, onDelete}) => {
                         {name}
                     </Link>
 
-                    <span className="text-sm text-neutral-500">{formattedDOB} | {nationality}</span>
+                    <span className="text-sm text-neutral-500">{formattedDOB} | {formattedNationality}</span>
                 </div>
 
                 <PersonOptions
