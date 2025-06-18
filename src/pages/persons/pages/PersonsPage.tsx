@@ -33,7 +33,7 @@ const PersonsPage: FC = () => {
     if (!success) return <PageParseError error={parseError}/>;
 
     const {items: persons} = paginatedPersons;
-    const hasPersons = (persons || []).length > 0;
+    const hasPersons = persons.length > 0;
 
     return (
         <PageFlexWrapper>
@@ -41,7 +41,7 @@ const PersonsPage: FC = () => {
 
             {
                 hasPersons
-                    ? <PageSection>
+                    ? <PageSection className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {persons.map((person) => <PersonListCard key={person._id} person={person}/>)}
                     </PageSection>
                     : <PageCenter>

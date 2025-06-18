@@ -19,7 +19,7 @@ const MoviePeopleListPageSection: FC<SectionProps> = ({roleType, credits}) => {
         </PageSection>;
     }
 
-    return <PageSection title={displayRoleType} srTitle="Credits">
+    return <PageSection title={displayRoleType} srTitle="Credits" className="space-y-3">
         {credits.map(credit => <MoviePersonDetailsCard key={credit._id} credit={credit}/>)}
     </PageSection>;
 };

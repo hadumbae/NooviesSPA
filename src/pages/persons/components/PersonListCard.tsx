@@ -17,34 +17,29 @@ const PersonListCard: FC<Props> = ({person, onDelete}) => {
 
     return (
         <Card>
-            <CardContent className="p-4 space-y-3">
-                <div className="flex items-center space-x-5">
-                    {
-                        profileImage
-                        && <CloudinaryAvatarImage
-                            personName={name}
-                            image={profileImage}
-                            className="h-16 w-16"
-                        />
-                    }
+            <CardContent className="p-4 h-full flex items-center space-x-2">
+                <CloudinaryAvatarImage
+                    personName={name}
+                    image={profileImage}
+                    className="h-16 w-16"
+                />
 
-                    <div className="flex-grow flex flex-col">
-                        <Link
-                            className="font-bold text-lg hover:underline"
-                            to={`/admin/persons/get/${_id}`}
-                        >
-                            {name}
-                        </Link>
+                <div className="flex-grow flex flex-col">
+                    <Link
+                        className="font-bold text-lg hover:underline"
+                        to={`/admin/persons/get/${_id}`}
+                    >
+                        {name}
+                    </Link>
 
-                        <span className="text-sm text-neutral-500">{formattedDOB} | {nationality}</span>
-                    </div>
-
-                    <PersonOptions
-                        variant="link"
-                        person={person}
-                        onDelete={onDelete}
-                    />
+                    <span className="text-sm text-neutral-500">{formattedDOB} | {nationality}</span>
                 </div>
+
+                <PersonOptions
+                    variant="link"
+                    person={person}
+                    onDelete={onDelete}
+                />
             </CardContent>
         </Card>
     );
