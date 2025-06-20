@@ -1,11 +1,13 @@
 import {Control, FieldValues, Path} from "react-hook-form";
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import {Loader} from "lucide-react";
-import useFetchAllScreens from "@/pages/screens/hooks/queries/useFetchAllScreens.ts";
-import {useEffect} from "react";
 import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
+import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
+import {ScreenArraySchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
+import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
+import useFetchScreens from "@/pages/screens/hooks/queries/useFetchScreens.ts";
 
 interface Props<TSubmit extends FieldValues> {
     name: Path<TSubmit>,
@@ -21,20 +23,20 @@ const ScreenHookFormSelect = <TSubmit extends FieldValues>(
     props: Props<TSubmit>
 ) => {
     const {isMulti = false, filters = {}} = props
-    const {data: screens, isPending, isError, error, refetch} = useFetchAllScreens({filters});
+    const {data, isPending, isError, error: queryError} = useFetchScreens(filters);
+    const {success, data: screens, error: parseError} = useValidateData({
+        data,
+        isPending,
+        schema: ScreenArraySchema,
+        message: "Invalid Data Parsed. Please Try Again."
+    });
 
-    useEffect(() => {
-        refetch();
-    }, [filters]);
-
-    if (isPending) return <Loader className="animate-spin" />;
-    if (isError) return <span>{error!.message || "Unknown Error"}</span>;
+    if (isPending) return <Loader className="animate-spin"/>;
+    if (isError) return <ErrorMessageDisplay error={queryError}/>;
+    if (!success) return <ErrorMessageDisplay error={parseError}/>;
 
     const options: ReactSelectOption[] = screens.map(
-        (screen): ReactSelectOption => ({
-            value: screen._id,
-            label: `${screen.name} (${screen.screenType})`,
-        }),
+        ({_id, name, screenType}): ReactSelectOption => ({value: _id, label: `${name} (${screenType})`}),
     );
 
     return (

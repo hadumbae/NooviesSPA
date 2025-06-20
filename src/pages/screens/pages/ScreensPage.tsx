@@ -2,36 +2,51 @@ import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/errors/PageError.tsx";
-import {useFetchPaginatedScreens} from "@/pages/screens/hooks/queries/useFetchPaginatedScreens.ts";
-import ScreenCardList from "@/pages/screens/components/ScreenCardList.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import ScreenIndexHeader from "@/pages/screens/components/headers/ScreenIndexHeader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
+import useFetchScreens from "@/pages/screens/hooks/queries/useFetchScreens.ts";
+import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
+import {PaginatedScreenSchema} from "@/pages/screens/schema/ScreenPaginationSchema.ts";
+import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
+import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
+import ScreenListCard from "@/pages/screens/components/ScreenListCard.tsx";
 
 const ScreensPage: FC = () => {
     useTitle("Screens")
 
     const {page, perPage} = usePaginationSearchParams();
-    const {data, isPending, isError, error, refetch} = useFetchPaginatedScreens({page, perPage, populate: true});
 
-    if (isPending) return <PageLoader />;
-    if (isError) return <PageError error={error} />
+    const {data, isPending, isError, error: queryError} = useFetchScreens({
+        page,
+        perPage,
+        paginated: true,
+        populate: true
+    });
 
-    const onDelete = () => refetch();
+    const {success, data: paginatedScreens, error: parseError} = useValidateData({
+        data,
+        isPending,
+        schema: PaginatedScreenSchema,
+        message: "Invalid Movie Data.",
+    });
 
-    const {items: screens} = data;
+    if (isPending) return <PageLoader/>;
+    if (isError) return <PageHTTPError error={queryError}/>
+    if (!success) return <PageParseError error={parseError}/>
+
+    const {items: screens} = paginatedScreens;
     const hasScreens = (screens || []).length > 0;
 
     return (
         <PageFlexWrapper>
-            <ScreenIndexHeader />
+            <ScreenIndexHeader/>
 
             {
                 hasScreens
                     ? <PageSection>
-                        <ScreenCardList screens={screens} onDelete={onDelete} />
+                        {screens.map((screen) => <ScreenListCard key={screen._id} screen={screen}/>)}
                     </PageSection>
                     : <PageCenter>
                         <span className="text-neutral-400 select-none">There Are No Screens</span>

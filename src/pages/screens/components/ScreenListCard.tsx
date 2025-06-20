@@ -7,7 +7,7 @@ import ScreenOptions from "@/pages/screens/components/dialog/ScreenOptions.tsx";
 
 interface Props {
     screen: Screen;
-    onDelete: () => void;
+    onDelete?: () => void;
 }
 
 const ScreenListCard: FC<Props>  = ({screen, onDelete}) => {

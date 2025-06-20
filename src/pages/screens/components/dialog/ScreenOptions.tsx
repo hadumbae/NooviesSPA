@@ -11,7 +11,7 @@ interface Props {
     screen: Screen;
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link",
     className?: string,
-    onDelete: () => void,
+    onDelete?: () => void,
 }
 
 

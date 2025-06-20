@@ -1,46 +1,43 @@
 import {FC} from 'react';
 import useFetchTheatreParams from "@/pages/theatres/hooks/params/useFetchTheatreParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/errors/PageError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import TheatreDetailsHeader from "@/pages/theatres/components/headers/TheatreDetailsHeader.tsx";
 import TheatreDetailsCard from "@/pages/theatres/components/TheatreDetailsCard.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
-import useFetchTheatreDetails from "@/pages/theatres/hooks/queries/useFetchTheatreDetails.ts";
+import useFetchTheatreDetails from "@/pages/theatres/hooks/queries/details/theatre-details/useFetchTheatreDetails.ts";
 import TheatreScreensPageSection from "@/pages/theatres/components/sections/TheatreScreensPageSection.tsx";
+import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
+import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
+import {EntityPaginatedQuery} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 
 const TheatrePage: FC = () => {
     const {theatreID} = useFetchTheatreParams();
-    const {
-        theatre,
-        paginatedScreens,
-        paginatedShowings,
-        isPending,
-        isError,
-        error
-    } = useFetchTheatreDetails({theatreID: theatreID!, screen: {perPage: 6}});
+    const pagination = {screen: {paginated: true, page: 1, perPage: 6} as EntityPaginatedQuery};
 
-    if (isPending) return <PageLoader />;
-    if (isError) return <PageError error={error} />;
+    const theatreDetails = useFetchTheatreDetails({theatreID: theatreID!, pagination});
+    const {data, isPending, isError, queryError, parseSuccess, parseError} = theatreDetails;
 
-    if (!theatre) {
-        return <PageError header="404" message="Theatre Not Found!" to="/admin/theatres" linkText="Go To Index"/>;
-    }
+    if (isPending) return <PageLoader/>;
+    if (isError) return <PageHTTPError error={queryError}/>;
+    if (!parseSuccess) return <PageParseError error={parseError} />;
+
+    const {theatre, screens: paginatedScreens, showings: paginatedShowings} = data;
 
     const {items: screens} = paginatedScreens!;
     const {items: showings} = paginatedShowings!;
 
     return (
         <PageFlexWrapper>
-            <TheatreDetailsHeader theatre={theatre!} />
+            <TheatreDetailsHeader theatre={theatre!}/>
 
             {/* Details */}
 
-            <TheatreDetailsCard theatre={theatre!} />
+            <TheatreDetailsCard theatre={theatre!}/>
 
             {/* Screens */}
 
-            <TheatreScreensPageSection screens={screens} theatreID={theatre._id} />
+            <TheatreScreensPageSection screens={screens} theatreID={theatre._id}/>
 
             {/* Showings */}
 

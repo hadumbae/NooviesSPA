@@ -1,4 +1,4 @@
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import {toast} from "react-toastify";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
@@ -11,14 +11,17 @@ interface Params {
 
 export default function useScreenDeleteMutation({onDelete}: Params = {}) {
     const mutationKey = ["delete_single_screen"];
+    const queryClient = useQueryClient();
 
     const mutationFn = async ({_id}: {_id: ObjectId}) => {
         const fetchQueryFn = () => ScreenRepository.delete({_id});
         await useFetchErrorHandler({fetchQueryFn});
     }
 
-    const onSuccess = () => {
+    const onSuccess = async () => {
         toast.success("Screen deleted.");
+        await queryClient.invalidateQueries({queryKey: ["fetch_screen_by_query"], exact: false});
+
         onDelete && onDelete();
     };
 
