@@ -17,7 +17,7 @@ type FetchProps = RequestOptions & {
  * @param params - The person ID and optional request options (`populate`, `virtuals`).
  * @returns A React Query result with raw person data or error information.
  */
-export default function useFetchPerson(params: FetchProps): UseQueryResult<unknown> {
+export default function useFetchPerson(params: FetchProps): UseQueryResult<unknown, Error> {
     const {_id, populate = false, virtuals = false, limit} = params;
 
     const queryKey = ["fetch_single_person", {_id, populate, virtuals, limit}] as const;
