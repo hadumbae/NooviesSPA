@@ -11,12 +11,12 @@ import useValidateData from "@/common/hooks/validation/use-validate-data/useVali
 import {PaginatedMovieSchema} from "@/pages/movies/schema/model/pagination/MoviePaginationSchema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
-import useFetchMovieQuery from "@/pages/movies/hooks/queries/useFetchMovieQuery.ts";
+import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
 
 const MoviesPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams({perPage: "25"});
 
-    const {data, isPending, isError, error: queryError} = useFetchMovieQuery({
+    const {data, isPending, isError, error: queryError} = useFetchMovies({
         populate: true,
         paginated: true,
         page,
