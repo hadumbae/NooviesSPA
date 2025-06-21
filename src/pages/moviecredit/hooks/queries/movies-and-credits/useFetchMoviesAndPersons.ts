@@ -1,7 +1,5 @@
-import useFetchAllPersons from "@/pages/persons/hooks/useFetchAllPersons.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {PersonArray, PersonArraySchema} from "@/pages/persons/schema/PersonArraySchema.ts";
-import useFetchAllMovies from "@/pages/movies/hooks/queries/useFetchAllMovies.ts";
 import {MovieArray, MovieArraySchema} from "@/pages/movies/schema/model/MovieArraySchema.ts";
 import {
     UseFetchMoviesAndPersonsParams
@@ -9,6 +7,8 @@ import {
 import {
     UseFetchMoviesAndPersonsReturns
 } from "@/pages/moviecredit/hooks/queries/movies-and-credits/UseFetchMoviesAndPersonsReturns.ts";
+import useFetchPersons from "@/pages/persons/hooks/fetch/useFetchPersons.ts";
+import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
 
 export default function useFetchMoviesAndPersons(
     params: UseFetchMoviesAndPersonsParams
@@ -17,8 +17,8 @@ export default function useFetchMoviesAndPersons(
 
     // Queries
 
-    const movieQuery = useFetchAllMovies({populate, virtuals, filters: movieFilters});
-    const personQuery = useFetchAllPersons({populate, virtuals, filters: personFilters});
+    const movieQuery = useFetchMovies({populate, virtuals, ...movieFilters});
+    const personQuery = useFetchPersons({populate, virtuals, ...personFilters});
     const queries = [movieQuery, personQuery];
 
     const isPending = queries.some(({isPending}) => isPending);

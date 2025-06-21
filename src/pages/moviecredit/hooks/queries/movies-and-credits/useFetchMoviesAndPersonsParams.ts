@@ -1,8 +1,8 @@
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
+import {PersonFilterQuery} from "@/pages/persons/schema/queries/PersonFilterQuerySchema.ts";
+import {MovieFilterQuery} from "@/pages/movies/schema/queries/MovieFilterQuerySchema.ts";
 
 export type UseFetchMoviesAndPersonsParams = RequestOptions & {
-    personFilters?: Partial<Person>;
-    movieFilters?: Partial<Movie>;
+    personFilters?: PersonFilterQuery;
+    movieFilters?: MovieFilterQuery;
 }
