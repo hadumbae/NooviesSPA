@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
-import useSeatDeleteMutation from "@/pages/seats/hooks/useSeatDeleteMutation.ts";
+import useSeatDeleteMutation from "@/pages/seats/hooks/mutations/useSeatDeleteMutation.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
@@ -11,7 +11,7 @@ interface Props {
     seat: Seat;
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link",
     className?: string,
-    onDelete: () => void,
+    onDelete?: () => void,
 }
 
 const SeatOptions: FC<Props> = ({seat, variant = "default", className = "", onDelete}) => {

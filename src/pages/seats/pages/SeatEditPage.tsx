@@ -2,19 +2,28 @@ import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import SeatSubmitForm from "@/pages/seats/components/SeatSubmitForm.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageError from "@/common/components/page/errors/PageError.tsx";
 import {useNavigate} from "react-router-dom";
-import useFetchSeatParams from "@/pages/seats/hooks/useFetchSeatParams.ts";
-import useFetchSeat from "@/pages/seats/hooks/useFetchSeat.ts";
+import useFetchSeatParams from "@/pages/seats/hooks/params/useFetchSeatParams.ts";
+import useFetchSeat from "@/pages/seats/hooks/fetch/useFetchSeat.ts";
 import SeatEditHeader from "@/pages/seats/components/headers/SeatEditHeader.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
+import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
+import {SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
+import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
+import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 
 const SeatEditPage: FC = () => {
     useTitle("Edit Seat")
 
     const navigate = useNavigate();
     const {seatID} = useFetchSeatParams();
-    const {data: seat, isPending, isError, error} = useFetchSeat({_id: seatID!});
+    const {data, isPending, isError, error: queryError} = useFetchSeat({_id: seatID!});
+    const {data: seat, error: parseError, success} = useValidateData({
+        data,
+        isPending,
+        schema: SeatSchema,
+        message: "Invalid Seat Data.",
+    });
 
     useTitle(`${seat?.row} | ${seat?.seatNumber}`)
 
@@ -22,8 +31,9 @@ const SeatEditPage: FC = () => {
         navigate(`/admin/seats/get/${seat && seat._id}`);
     }
 
-    if (isPending) return <PageLoader />;
-    if (isError) return <PageError error={error} />
+    if (isPending) return <PageLoader/>;
+    if (isError) return <PageHTTPError error={queryError}/>;
+    if (!success) return <PageParseError error={parseError}/>;
 
     return (
         <PageFlexWrapper>

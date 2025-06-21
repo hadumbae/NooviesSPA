@@ -8,7 +8,7 @@ import SeatOptions from "@/pages/seats/components/SeatOptions.tsx";
 
 interface Props {
     seat: Seat;
-    onDelete: () => void;
+    onDelete?: () => void;
 }
 
 const SeatListCard: FC<Props>  = ({seat, onDelete}) => {

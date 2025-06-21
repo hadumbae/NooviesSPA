@@ -1,11 +1,13 @@
 import {Control, FieldValues, Path} from "react-hook-form";
-import useFetchAllSeats from "@/pages/seats/hooks/useFetchAllSeats.ts";
-import QueryFilters from "@/common/type/QueryFilters.ts";
 import {Loader} from "lucide-react";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
-import ErrorMessage from "@/common/components/text/ErrorMessage.tsx";
+import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
+import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
+import {SeatArraySchema} from "@/pages/seats/schema/SeatSchema.ts";
+import useFetchSeats from "@/pages/seats/hooks/fetch/useFetchSeats.ts";
+import {SeatFilterQuery} from "@/pages/seats/schema/queries/SeatFilterQuerySchema.ts";
 
 interface Props<T extends FieldValues> {
     name: Path<T>,
@@ -13,16 +15,23 @@ interface Props<T extends FieldValues> {
     description?: string,
     placeholder?: string,
     control: Control<T>,
-    filters?: QueryFilters,
+    filters?: SeatFilterQuery,
     isMulti?: boolean,
 }
 
 const SeatHookFormSelect = <T extends FieldValues>(props: Props<T>) => {
     const {isMulti = false, filters = {}} = props
-    const {data: seats, isPending, isError, error} = useFetchAllSeats({filters});
+    const {data, isPending, isError, error: queryError} = useFetchSeats(filters);
+    const {data: seats, error: parseError, success} = useValidateData({
+        data,
+        isPending,
+        schema: SeatArraySchema,
+        message: "Failed to fetch seats. Please try again.",
+    });
 
-    if (isPending) return <Loader className="animate-spin" />;
-    if (isError) return <ErrorMessage error={error} />;
+    if (isPending) return <Loader className="animate-spin"/>;
+    if (isError) return <ErrorMessageDisplay error={queryError}/>;
+    if (!success) return <ErrorMessageDisplay error={parseError}/>;
 
     const options = seats.map(
         ({_id, row, seatNumber}): ReactSelectOption =>

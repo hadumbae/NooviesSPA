@@ -6,7 +6,7 @@ import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface Params {
-    onDelete: () => void;
+    onDelete?: () => void;
 }
 
 export default function useSeatDeleteMutation({onDelete}: Params) {
@@ -19,7 +19,7 @@ export default function useSeatDeleteMutation({onDelete}: Params) {
 
     const onSuccess = () => {
         toast.success("Seat deleted.");
-        onDelete();
+        onDelete && onDelete();
     };
 
     const onError = (error: Error | ParseError) => {

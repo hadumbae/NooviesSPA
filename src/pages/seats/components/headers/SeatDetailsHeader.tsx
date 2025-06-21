@@ -6,7 +6,7 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {Pencil, TableOfContents, Trash} from "lucide-react";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
-import useSeatDeleteMutation from "@/pages/seats/hooks/useSeatDeleteMutation.ts";
+import useSeatDeleteMutation from "@/pages/seats/hooks/mutations/useSeatDeleteMutation.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 
 interface Props {

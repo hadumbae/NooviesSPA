@@ -13,8 +13,8 @@ import SeatTypeHookFormCombobox from "@/pages/seats/components/SeatTypeHookFormC
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 
 import {SeatSubmit} from "@/pages/seats/schema/SeatSubmitSchema.ts";
-import useSeatSubmitForm from "@/pages/seats/hooks/useSeatSubmitForm.ts";
-import useSeatSubmitMutation from "@/pages/seats/hooks/useSeatSubmitMutation.ts";
+import useSeatSubmitForm from "@/pages/seats/hooks/forms/useSeatSubmitForm.ts";
+import useSeatSubmitMutation from "@/pages/seats/hooks/mutations/useSeatSubmitMutation.ts";
 
 interface Props {
     className?: string;
