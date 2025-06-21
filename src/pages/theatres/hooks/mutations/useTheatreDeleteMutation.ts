@@ -7,7 +7,7 @@ import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.t
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface Params {
-    onDelete: () => void;
+    onDelete?: () => void;
 }
 
 export default function useTheatreDeleteMutation({onDelete}: Params) {
@@ -20,7 +20,7 @@ export default function useTheatreDeleteMutation({onDelete}: Params) {
 
     const onSuccess = () => {
         toast.success("Theatre deleted.");
-        onDelete();
+        onDelete && onDelete();
     };
 
     const onError = (error: Error | ParseError) => {

@@ -6,7 +6,7 @@ import TheatreOptions from "@/pages/theatres/components/TheatreOptions.tsx";
 
 interface Props {
     theatre: Theatre;
-    onDelete: () => void;
+    onDelete?: () => void;
 }
 
 const TheatreListCard: FC<Props>  = ({theatre, onDelete}) => {
@@ -19,7 +19,7 @@ const TheatreListCard: FC<Props>  = ({theatre, onDelete}) => {
                     <Link to={`/admin/theatres/get/${_id}`} className="text-lg font-bold hover:underline">
                         {name}
                     </Link>
-                    <TheatreOptions theatre={theatre} onDelete={onDelete} variant="outline" />
+                    <TheatreOptions theatre={theatre} variant="outline" onDelete={onDelete} />
                 </div>
 
                 <div className="flex justify-between items-center">

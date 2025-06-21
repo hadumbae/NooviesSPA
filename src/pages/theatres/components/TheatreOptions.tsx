@@ -11,16 +11,14 @@ interface Props {
     theatre: Theatre;
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link",
     className?: string,
-    onDelete: () => void,
+    onDelete?: () => void,
 }
 
 const TheatreOptions: FC<Props> = ({theatre, variant = "default", className = "", onDelete}) => {
     const {_id} = theatre;
     const {mutate, isPending, isSuccess} = useTheatreDeleteMutation({onDelete});
 
-    const deleteTheatre = () => {
-        mutate({_id});
-    }
+    const deleteTheatre = () => mutate({_id});
 
     return (
         <Popover>
