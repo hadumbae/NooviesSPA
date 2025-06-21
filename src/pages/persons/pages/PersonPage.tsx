@@ -1,30 +1,29 @@
 import {FC} from 'react';
-import useFetchPerson from "@/pages/persons/hooks/useFetchPerson.ts";
-import useFetchPersonParams from "@/pages/persons/hooks/useFetchPersonParams.ts";
+import useFetchPersonParams from "@/pages/persons/hooks/params/admin/useFetchPersonParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
 import PersonDetailsHeader from "@/pages/persons/components/headers/PersonDetailsHeader.tsx";
-import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PersonDetailsBreadcrumbs from "@/pages/persons/components/breadcrumbs/admin/PersonDetailsBreadcrumbs.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
+import useFetchPersonDetails from "@/pages/persons/hooks/fetch/admin/fetch-person-details/useFetchPersonDetails.ts";
 
 const PersonPage: FC = () => {
     const urlParams = useFetchPersonParams();
     if (!urlParams) return <PageLoader />;
 
     const {personID} = urlParams;
-
-    const {data, isPending, isError, error: queryError} = useFetchPerson({_id: personID!});
-    const {success, data: person, error: parseError} = useValidateData({data, isPending, schema: PersonSchema});
+    const {data, isPending, isError, queryError, parseError, parseSuccess} = useFetchPersonDetails({_id: personID});
 
     if (isPending) return <PageLoader />
     if (isError) return <PageHTTPError error={queryError} />
-    if (!success) return <PageParseError error={parseError} />
+    if (!parseSuccess) return <PageParseError error={parseError} />
 
-    const {name, biography} = person;
+    const {person, movieCredits} = data;
+
+    const {name, biography} = person!;
+    console.log(movieCredits);
 
     return (
         <PageFlexWrapper>

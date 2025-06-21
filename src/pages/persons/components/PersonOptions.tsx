@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
 import {Person} from "@/pages/persons/schema/PersonSchema.ts";
-import usePersonDeleteMutation from "@/pages/persons/hooks/usePersonDeleteMutation.ts";
+import usePersonDeleteMutation from "@/pages/persons/hooks/mutations/admin/usePersonDeleteMutation.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";

@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Person} from "@/pages/persons/schema/PersonSchema.ts";
-import usePersonSubmitForm from "@/pages/persons/hooks/usePersonSubmitForm.ts";
-import usePersonSubmitMutation, {PersonSubmitParams} from "@/pages/persons/hooks/usePersonSubmitMutation.ts";
+import usePersonSubmitForm from "@/pages/persons/hooks/forms/admin/usePersonSubmitForm.ts";
+import usePersonSubmitMutation, {PersonSubmitParams} from "@/pages/persons/hooks/mutations/admin/usePersonSubmitMutation.ts";
 import {PersonSubmit} from "@/pages/persons/schema/PersonSubmitSchema.ts";
 import PersonSubmitFormView from "@/pages/persons/components/form/admin/submit/PersonSubmitFormView.tsx";
 

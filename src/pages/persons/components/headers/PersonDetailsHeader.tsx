@@ -7,7 +7,7 @@ import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import {format} from "date-fns";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import usePersonDeleteMutation from "@/pages/persons/hooks/usePersonDeleteMutation.ts";
+import usePersonDeleteMutation from "@/pages/persons/hooks/mutations/admin/usePersonDeleteMutation.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";

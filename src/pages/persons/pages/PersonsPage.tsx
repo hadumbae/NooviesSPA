@@ -5,7 +5,7 @@ import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PersonIndexHeader from "@/pages/persons/components/headers/PersonIndexHeader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
-import useFetchPersonQuery from "@/pages/persons/hooks/useFetchPersonQuery.ts";
+import useFetchPersons from "@/pages/persons/hooks/fetch/useFetchPersons.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {PaginatedPersonsSchema} from "@/pages/persons/schema/PersonPaginationSchema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
@@ -15,12 +15,7 @@ import PersonListCard from "@/pages/persons/components/PersonListCard.tsx";
 const PersonsPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams();
 
-    const {data, isPending, isError, error} = useFetchPersonQuery({
-        paginated: true,
-        page,
-        perPage,
-    });
-
+    const {data, isPending, isError, error} = useFetchPersons({paginated: true, page, perPage});
     const {success, data: paginatedPersons, error: parseError} = useValidateData({
         data,
         isPending,
@@ -41,7 +36,7 @@ const PersonsPage: FC = () => {
 
             {
                 hasPersons
-                    ? <PageSection className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    ? <PageSection className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         {persons.map((person) => <PersonListCard key={person._id} person={person}/>)}
                     </PageSection>
                     : <PageCenter>
