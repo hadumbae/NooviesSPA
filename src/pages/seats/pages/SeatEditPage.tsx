@@ -27,20 +27,20 @@ const SeatEditPage: FC = () => {
 
     useTitle(`${seat?.row} | ${seat?.seatNumber}`)
 
-    const onSubmit = () => {
-        navigate(`/admin/seats/get/${seat && seat._id}`);
-    }
-
     if (isPending) return <PageLoader/>;
     if (isError) return <PageHTTPError error={queryError}/>;
     if (!success) return <PageParseError error={parseError}/>;
+
+    const onSubmit = () => {
+        navigate(`/admin/seats/get/${seat && seat._id}`);
+    }
 
     return (
         <PageFlexWrapper>
             <SeatEditHeader seat={seat} />
 
             <section>
-                <SeatSubmitFormContainer seat={seat} onSubmitSuccess={() => onSubmit()} />
+                <SeatSubmitFormContainer isEditing={true} seat={seat} onSubmitSuccess={onSubmit} />
             </section>
         </PageFlexWrapper>
     );
