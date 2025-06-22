@@ -1,10 +1,10 @@
 import {FC} from 'react';
 import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import ShowingSeatMapCardOptions from "@/pages/seatmap/components/ShowingSeatMapCardOptions.tsx";
 import DetailsCardBooleanIndicator from "@/common/components/text/DetailsCardBooleanIndicator.tsx";
+import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 
 interface Props {
     seatMap: SeatMap;

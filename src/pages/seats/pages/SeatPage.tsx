@@ -6,7 +6,7 @@ import useFetchSeat from "@/pages/seats/hooks/fetch/useFetchSeat.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import SeatDetailsCard from "@/pages/seats/components/SeatDetailsCard.tsx";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
+import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 

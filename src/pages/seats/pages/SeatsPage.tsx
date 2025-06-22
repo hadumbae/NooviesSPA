@@ -7,10 +7,10 @@ import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import useFetchSeats from "@/pages/seats/hooks/fetch/useFetchSeats.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {PaginatedSeatSchema} from "@/pages/seats/schema/SeatPaginationSchema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import SeatListCard from "@/pages/seats/components/SeatListCard.tsx";
+import {PaginatedSeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 
 const SeatsPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams();

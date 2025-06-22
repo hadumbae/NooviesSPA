@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
 import {useNavigate} from "react-router-dom";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
@@ -8,6 +7,7 @@ import {Pencil, TableOfContents, Trash} from "lucide-react";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import useSeatDeleteMutation from "@/pages/seats/hooks/mutations/useSeatDeleteMutation.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
+import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 
 interface Props {
     seat: Seat;

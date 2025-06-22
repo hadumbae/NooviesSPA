@@ -1,7 +1,7 @@
 import {z, ZodType} from "zod";
 import ITheatre from "@/pages/theatres/interfaces/ITheatre.ts";
 import {ScreenSchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
-import {SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
+import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";

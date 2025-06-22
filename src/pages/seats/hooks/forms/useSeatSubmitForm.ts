@@ -1,35 +1,34 @@
-import {useForm} from "react-hook-form";
+import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {SeatSubmit, SeatSubmitSchema} from "@/pages/seats/schema/SeatSubmitSchema.ts";
-import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
+import {SeatFormSchema} from "@/pages/seats/schema/form/SeatForm.schema.ts";
 
+import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
+import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
+import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 
-export default function useSeatSubmitForm(params?: {seat?: Seat}) {
-    const {seat} = params || {};
-    const defaultValues: SeatSubmit = {
-        row: "",
-        seatNumber: "",
-        seatType: undefined,
-        isAvailable: false,
-        priceMultiplier: "",
-        screen: undefined,
-        theatre: undefined,
+type SeatFormParams = {
+    presetValues?: Partial<SeatForm>;
+    seat?: Seat
+}
+
+export default function useSeatSubmitForm(params?: SeatFormParams): UseFormReturn<SeatFormValues> {
+    const {presetValues, seat} = params || {};
+
+    const theatre = typeof seat?.theatre === "string" ? seat.theatre : seat?.theatre?._id;
+    const screen = typeof seat?.screen === "string" ? seat.screen : seat?.screen?._id;
+
+    const defaultValues: SeatFormValues = {
+        row: getDefaultValue(presetValues?.row, seat?.row, ""),
+        seatNumber: getDefaultValue(presetValues?.seatNumber, seat?.seatNumber, ""),
+        seatType: getDefaultValue(presetValues?.seatType, seat?.seatType, undefined),
+        isAvailable: getDefaultValue(presetValues?.isAvailable, seat?.isAvailable, false),
+        priceMultiplier: getDefaultValue(presetValues?.priceMultiplier, seat?.priceMultiplier, undefined),
+        screen: getDefaultValue(presetValues?.screen, screen, undefined),
+        theatre: getDefaultValue(presetValues?.theatre, theatre, undefined),
     }
 
-    let theatre = undefined;
-    let screen = undefined;
-    if (seat) {
-        theatre = typeof seat.theatre === "string" ? seat.theatre : seat.theatre._id;
-        screen = typeof seat.screen === "string" ? seat.screen : seat.screen._id;
-    }
-
-    return useForm<SeatSubmit>({
-        resolver: zodResolver(SeatSubmitSchema),
-        defaultValues: {
-            ...defaultValues,
-            ...(seat || {}),
-            theatre,
-            screen,
-        },
+    return useForm<SeatFormValues>({
+        resolver: zodResolver(SeatFormSchema),
+        defaultValues,
     });
 }

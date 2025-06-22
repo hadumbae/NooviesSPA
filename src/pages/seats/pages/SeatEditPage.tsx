@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import SeatSubmitForm from "@/pages/seats/components/SeatSubmitForm.tsx";
+import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import {useNavigate} from "react-router-dom";
 import useFetchSeatParams from "@/pages/seats/hooks/params/useFetchSeatParams.ts";
@@ -8,7 +8,7 @@ import useFetchSeat from "@/pages/seats/hooks/fetch/useFetchSeat.ts";
 import SeatEditHeader from "@/pages/seats/components/headers/SeatEditHeader.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {SeatSchema} from "@/pages/seats/schema/SeatSchema.ts";
+import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 
@@ -40,7 +40,7 @@ const SeatEditPage: FC = () => {
             <SeatEditHeader seat={seat} />
 
             <section>
-                <SeatSubmitForm seat={seat} onSubmit={() => onSubmit()} />
+                <SeatSubmitFormContainer seat={seat} onSubmitSuccess={() => onSubmit()} />
             </section>
         </PageFlexWrapper>
     );

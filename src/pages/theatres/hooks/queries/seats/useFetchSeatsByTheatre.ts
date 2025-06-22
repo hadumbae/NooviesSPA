@@ -3,8 +3,9 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
-import {SeatArray, SeatArraySchema} from "@/pages/seats/schema/SeatSchema.ts";
+import {SeatArraySchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";
 
 export default function useFetchSeatsByTheatre(
     {theatreID, queries = {}}: {theatreID: ObjectId, queries?: QueryFilters}

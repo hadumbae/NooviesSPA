@@ -5,9 +5,10 @@ import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {SeatArraySchema} from "@/pages/seats/schema/SeatSchema.ts";
+import {SeatArraySchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import useFetchSeats from "@/pages/seats/hooks/fetch/useFetchSeats.ts";
-import {SeatFilterQuery} from "@/pages/seats/schema/queries/SeatFilterQuerySchema.ts";
+
+import {SeatQueryFilters} from "@/pages/seats/schema/queries/SeatFilter.types.ts";
 
 interface Props<T extends FieldValues> {
     name: Path<T>,
@@ -15,7 +16,7 @@ interface Props<T extends FieldValues> {
     description?: string,
     placeholder?: string,
     control: Control<T>,
-    filters?: SeatFilterQuery,
+    filters?: SeatQueryFilters,
     isMulti?: boolean,
 }
 

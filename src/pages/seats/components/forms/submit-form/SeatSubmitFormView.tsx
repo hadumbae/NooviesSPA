@@ -1,8 +1,7 @@
-import {FC, useEffect, useRef} from 'react';
+import {FC} from 'react';
 
 import {cn} from "@/common/lib/utils.ts";
 import {Form} from "@/common/components/ui/form.tsx";
-import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
@@ -12,57 +11,28 @@ import ScreenHookFormSelect from "@/pages/screens/components/inputs/ScreenHookFo
 import SeatTypeHookFormCombobox from "@/pages/seats/components/SeatTypeHookFormCombobox.tsx";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 
-import {SeatSubmit} from "@/pages/seats/schema/SeatSubmitSchema.ts";
-import useSeatSubmitForm from "@/pages/seats/hooks/forms/useSeatSubmitForm.ts";
-import useSeatSubmitMutation from "@/pages/seats/hooks/mutations/useSeatSubmitMutation.ts";
+import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
+import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SubmitHandler, UseFormReturn} from "react-hook-form";
+import {UseMutationResult} from "@tanstack/react-query";
 
-interface Props {
+type FormProps = {
     className?: string;
-    seat?: Seat;
-    onSubmit: (seat: Seat) => void;
-}
+    form: UseFormReturn<SeatFormValues>;
+    mutation: UseMutationResult<Seat, Error, SeatForm>
+    submitHandler: SubmitHandler<SeatFormValues>
+};
 
-const SeatSubmitForm: FC<Props> = ({className, seat, onSubmit}) => {
-    const form = useSeatSubmitForm({seat});
-    const {mutate, isPending, isSuccess} = useSeatSubmitMutation({form, onSubmit, _id: seat?._id});
-
+const SeatSubmitFormView: FC<FormProps> = ({className, form, mutation, submitHandler}) => {
     const theatre = form.watch("theatre");
-    const isFirstRender = useRef<boolean>(false);
-    const isSecondRender = useRef<boolean>(false);
-
-    useEffect(() => {
-        if (isFirstRender.current) {
-            isFirstRender.current = false;
-            return;
-        }
-
-        if (isSecondRender.current) {
-            isSecondRender.current = false;
-            return;
-        }
-
-        form.resetField("screen");
-    }, [theatre]);
-
-    const onFormSubmit = (values: SeatSubmit) => {
-        console.log("Seat Submit Values: ", values);
-        mutate(values);
-    }
+    const {isPending, isSuccess} = mutation;
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onFormSubmit)} className={cn("space-y-4", className)}>
-                <HookFormInput
-                    name="row"
-                    label="Row"
-                    control={form.control}
-                />
+            <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-4", className)}>
+                <HookFormInput name="row" label="Row" control={form.control}/>
 
-                <HookFormInput
-                    name="seatNumber"
-                    label="Seat Number"
-                    control={form.control}
-                />
+                <HookFormInput name="seatNumber" label="Seat Number" control={form.control}/>
 
                 <SeatTypeHookFormCombobox
                     form={form}
@@ -113,4 +83,4 @@ const SeatSubmitForm: FC<Props> = ({className, seat, onSubmit}) => {
     );
 };
 
-export default SeatSubmitForm;
+export default SeatSubmitFormView;

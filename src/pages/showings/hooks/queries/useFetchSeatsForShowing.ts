@@ -1,7 +1,8 @@
 import ShowingSeatRepository from "@/pages/showings/repositories/ShowingSeatRepository.ts";
-import {SeatArray, SeatArraySchema} from "@/pages/seats/schema/SeatSchema.ts";
+import {SeatArraySchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";
 
 interface Params {
     showingID: ObjectId;

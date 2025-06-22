@@ -1,11 +1,11 @@
 import {FC} from 'react';
-import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
 import useSeatDeleteMutation from "@/pages/seats/hooks/mutations/useSeatDeleteMutation.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {Ellipsis} from "lucide-react";
 import {Link} from "react-router-dom";
+import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 
 interface Props {
     seat: Seat;

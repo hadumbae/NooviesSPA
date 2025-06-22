@@ -1,10 +1,10 @@
 import {FC} from 'react';
-import {Seat} from "@/pages/seats/schema/SeatSchema.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {Search, TableOfContents} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
+import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 
 interface Props {
     seat: Seat;
