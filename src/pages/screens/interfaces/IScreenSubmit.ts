@@ -1,4 +1,4 @@
-import {ScreenType} from "@/pages/screens/schema/ScreenTypeEnum.ts";
+import {ScreenType} from "@/pages/screens/schema/ScreenType.enum.ts";
 
 export interface IScreenSubmit{
     name: string,

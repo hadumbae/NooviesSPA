@@ -8,10 +8,10 @@ import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import useFetchScreens from "@/pages/screens/hooks/queries/useFetchScreens.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {PaginatedScreenSchema} from "@/pages/screens/schema/ScreenPaginationSchema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import ScreenListCard from "@/pages/screens/components/ScreenListCard.tsx";
+import {PaginatedScreenSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 
 const ScreensPage: FC = () => {
     useTitle("Screens")

@@ -1,10 +1,11 @@
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts"
-import {ScreenSubmit, ScreenSubmitSchema} from "@/pages/screens/schema/ScreenSubmitSchema.ts";
-import {ScreenType} from "@/pages/screens/schema/ScreenTypeEnum.ts";
+import {ScreenFormSchema} from "@/pages/screens/schema/forms/ScreenForm.schema.ts";
+import {ScreenType} from "@/pages/screens/schema/ScreenType.enum.ts";
 
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {ScreenForm} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 
 interface Params {
     screen?: Screen;
@@ -19,7 +20,7 @@ interface Params {
 export default function useScreenSubmitForm(params: Params) {
     const {screen, defaultValues = {}} = params || {};
 
-    let initialValues: ScreenSubmit = {
+    let initialValues: ScreenForm = {
         ...{name: "", capacity: "", screenType: undefined, theatre: undefined},
         ...defaultValues,
     };
@@ -29,8 +30,8 @@ export default function useScreenSubmitForm(params: Params) {
         initialValues = {...screen, theatre};
     }
 
-    return useForm<ScreenSubmit>({
-        resolver: zodResolver(ScreenSubmitSchema),
+    return useForm<ScreenForm>({
+        resolver: zodResolver(ScreenFormSchema),
         defaultValues: initialValues,
     });
 }

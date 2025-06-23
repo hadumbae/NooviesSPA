@@ -1,9 +1,9 @@
 import {FC} from 'react';
 import TheatreScreenCard from "@/pages/theatres/components/screens/TheatreScreenCard.tsx";
-import {TheatreScreen} from "@/pages/screens/schema/theatre/TheatreScreenSchema.ts";
+import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 
 interface Props {
-    screens: TheatreScreen[];
+    screens: ScreenDetails[];
     onDelete?: () => void;
 }
 

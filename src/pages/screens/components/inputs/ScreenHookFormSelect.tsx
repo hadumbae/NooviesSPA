@@ -5,7 +5,7 @@ import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {ScreenArraySchema} from "@/pages/screens/schema/base/ScreenSchema.ts";
+import {ScreenArraySchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import useFetchScreens from "@/pages/screens/hooks/queries/useFetchScreens.ts";
 

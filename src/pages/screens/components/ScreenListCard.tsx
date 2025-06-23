@@ -1,9 +1,9 @@
 import {FC} from 'react';
-import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Link} from "react-router-dom";
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import ScreenOptions from "@/pages/screens/components/dialog/ScreenOptions.tsx";
+import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 
 interface Props {
     screen: Screen;

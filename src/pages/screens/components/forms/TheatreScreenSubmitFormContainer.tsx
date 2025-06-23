@@ -1,10 +1,10 @@
 import {FC} from 'react';
 import useScreenSubmitForm from "@/pages/screens/hooks/forms/useScreenSubmitForm.ts";
 import useScreenSubmitMutation from "@/pages/screens/hooks/mutations/useScreenSubmitMutation.ts";
-import {ScreenSubmit} from "@/pages/screens/schema/ScreenSubmitSchema.ts";
 import ScreenSubmitFormView from "@/pages/screens/components/forms/ScreenSubmitFormView.tsx";
-import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {ScreenForm} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 
 interface Props {
     theatreID: ObjectId;
@@ -16,7 +16,7 @@ const TheatreScreenSubmitFormContainer: FC<Props> = ({theatreID, onSubmit, class
     const form = useScreenSubmitForm({defaultValues: {theatre: theatreID}});
     const mutation = useScreenSubmitMutation({form, onSubmit});
 
-    const submitHandler = (values: ScreenSubmit) => {
+    const submitHandler = (values: ScreenForm) => {
         console.log("Theatre Screen Submit Values: ", values);
         mutation.mutate(values);
         form.reset();

@@ -3,7 +3,6 @@ import useFetchScreens from "@/pages/screens/hooks/queries/useFetchScreens.ts";
 import useFetchShowings from "@/pages/showings/hooks/queries/useFetchShowings.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
-import {PaginatedScreenSchema} from "@/pages/screens/schema/ScreenPaginationSchema.ts";
 
 import {
     FetchTheatreDetailsParams
@@ -12,6 +11,7 @@ import {
     FetchTheatreDetailsReturns
 } from "@/pages/theatres/hooks/queries/details/theatre-details/FetchTheatreDetailsReturns.ts";
 import {PaginatedShowingSchema} from "@/pages/showings/schema/ShowingPaginationSchema.ts";
+import {PaginatedScreenSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 
 export default function useFetchTheatreDetails(params: FetchTheatreDetailsParams): FetchTheatreDetailsReturns {
     const {theatreID, pagination: {screen: screenPagination = {}, showing: showingPagination = {}}} = params;

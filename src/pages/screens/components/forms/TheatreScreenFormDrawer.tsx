@@ -1,5 +1,4 @@
 import {FC, PropsWithChildren, useState} from 'react';
-import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 
 import { Button } from "@/common/components/ui/button"
 import {
@@ -24,6 +23,7 @@ import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import TheatreScreenSubmitFormContainer from "@/pages/screens/components/forms/TheatreScreenSubmitFormContainer.tsx";
 
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 
 interface Props {
     theatreID: ObjectId;

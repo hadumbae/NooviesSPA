@@ -1,11 +1,11 @@
 import {FC} from 'react';
-import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import useScreenDeleteMutation from "@/pages/screens/hooks/mutations/useScreenDeleteMutation.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {Ellipsis} from "lucide-react";
 import {Link} from "react-router-dom";
+import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 
 interface Props {
     screen: Screen;

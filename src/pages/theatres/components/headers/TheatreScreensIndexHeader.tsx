@@ -7,7 +7,8 @@ import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {Plus, Search} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import TheatreScreenFormDrawer from "@/pages/screens/components/forms/TheatreScreenFormDrawer.tsx";
-import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
+
+import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 
 interface Props {
     theatre: Theatre;

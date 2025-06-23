@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
@@ -9,6 +8,7 @@ import {cn} from "@/common/lib/utils.ts";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import useScreenDeleteMutation from "@/pages/screens/hooks/mutations/useScreenDeleteMutation.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
+import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 
 interface Props {
     screen: Screen;

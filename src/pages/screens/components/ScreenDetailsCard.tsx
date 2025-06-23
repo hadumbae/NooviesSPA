@@ -1,8 +1,8 @@
 import {FC} from 'react';
-import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
+import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 
 
 interface Props {

@@ -3,9 +3,9 @@ import TheatreScreensPreviewList from "@/pages/theatres/components/screens/previ
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {ChevronRight, Plus} from "lucide-react";
 import PageSection from "@/common/components/page/PageSection.tsx";
-import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 
 interface Props {
     screens: Screen[];

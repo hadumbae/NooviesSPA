@@ -1,9 +1,9 @@
 import {FC} from 'react';
-import {Screen} from "@/pages/screens/schema/base/ScreenSchema.ts";
 import useScreenSubmitForm from "@/pages/screens/hooks/forms/useScreenSubmitForm.ts";
 import useScreenSubmitMutation from "@/pages/screens/hooks/mutations/useScreenSubmitMutation.ts";
-import {ScreenSubmit} from "@/pages/screens/schema/ScreenSubmitSchema.ts";
 import ScreenSubmitFormView from "@/pages/screens/components/forms/ScreenSubmitFormView.tsx";
+import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {ScreenForm} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 
 interface Props {
     screen?: Screen;
@@ -15,7 +15,7 @@ const ScreenSubmitFormContainer: FC<Props> = ({screen, onSubmit, className}) => 
     const form = useScreenSubmitForm({screen});
     const mutation = useScreenSubmitMutation({form, onSubmit, _id: screen?._id});
 
-    const onFormSubmit = (values: ScreenSubmit) => {
+    const onFormSubmit = (values: ScreenForm) => {
         console.log("Screen Submit Values: ", values);
         mutation.mutate(values);
     }

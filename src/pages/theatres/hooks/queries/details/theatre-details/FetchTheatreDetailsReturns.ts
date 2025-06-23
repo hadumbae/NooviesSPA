@@ -1,6 +1,6 @@
 import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
-import {PaginatedScreens} from "@/pages/screens/schema/ScreenPaginationSchema.ts";
 import {PaginatedShowings} from "@/pages/showings/schema/ShowingPaginationSchema.ts";
+import {PaginatedScreens} from "@/pages/screens/schema/screen/Screen.types.ts";
 
 type ValidDetailReturns = {
     parseSuccess: true,

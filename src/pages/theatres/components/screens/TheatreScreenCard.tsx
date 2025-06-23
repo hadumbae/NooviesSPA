@@ -6,11 +6,11 @@ import {Link as LinkIcon, Trash} from "lucide-react";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
-import {TheatreScreen} from "@/pages/screens/schema/theatre/TheatreScreenSchema.ts";
 import TheatreScreenShowingAccordion from "@/pages/theatres/components/screens/accordion/TheatreScreenShowingAccordion.tsx";
+import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 
 interface Props {
-    screen: TheatreScreen;
+    screen: ScreenDetails;
     onDelete?: () => void
 }
 
