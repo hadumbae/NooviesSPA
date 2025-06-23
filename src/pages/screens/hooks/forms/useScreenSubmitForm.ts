@@ -1,37 +1,32 @@
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {ScreenFormSchema} from "@/pages/screens/schema/forms/ScreenForm.schema.ts";
-import {ScreenType} from "@/pages/screens/schema/ScreenType.enum.ts";
 
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
-import {ScreenForm} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
+import {ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
+import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 
 interface Params {
     screen?: Screen;
-    defaultValues?: {
-        name?: string,
-        capacity?: number,
-        screenType?: ScreenType,
-        theatre?: ObjectId
-    }
+    presetValues?: Partial<ScreenFormValues>;
 }
 
 export default function useScreenSubmitForm(params: Params) {
-    const {screen, defaultValues = {}} = params || {};
+    const {screen, presetValues = {}} = params || {};
 
-    let initialValues: ScreenForm = {
-        ...{name: "", capacity: "", screenType: undefined, theatre: undefined},
-        ...defaultValues,
+    const theatre = typeof screen?.theatre === "string"
+        ? screen.theatre
+        : screen?.theatre?._id;
+
+    let defaultValues: ScreenFormValues = {
+        name: getDefaultValue(presetValues.name, screen?.name, ""),
+        capacity: getDefaultValue(presetValues.capacity, screen?.capacity, undefined),
+        screenType: getDefaultValue(presetValues.screenType, screen?.screenType, undefined),
+        theatre: getDefaultValue(presetValues.theatre, theatre, undefined),
     };
 
-    if (screen) {
-        const theatre = typeof screen.theatre === "string" ? screen.theatre : screen.theatre._id;
-        initialValues = {...screen, theatre};
-    }
-
-    return useForm<ScreenForm>({
+    return useForm<ScreenFormValues>({
         resolver: zodResolver(ScreenFormSchema),
-        defaultValues: initialValues,
+        defaultValues,
     });
 }

@@ -13,7 +13,7 @@ interface Props {
 }
 
 const TheatreScreenSubmitFormContainer: FC<Props> = ({theatreID, onSubmit, className}) => {
-    const form = useScreenSubmitForm({defaultValues: {theatre: theatreID}});
+    const form = useScreenSubmitForm({presetValues: {theatre: theatreID}});
     const mutation = useScreenSubmitMutation({form, onSubmit});
 
     const submitHandler = (values: ScreenForm) => {
