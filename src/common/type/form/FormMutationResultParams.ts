@@ -1,12 +1,14 @@
-import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
-export type FormMutationResultParams = {
+export type FormMutationOnSubmitParams<TData = any> = {
     successMessage?: string;
-    onSubmitSuccess?: (seat: Seat) => void;
+    onSubmitSuccess?: (data: TData) => void;
     errorMessage?: string;
     onSubmitError?: (error: Error) => void;
-} & ( | {
+}
+
+export type FormMutationResultParams<TData = any> = FormMutationOnSubmitParams<TData>
+& (| {
     isEditing: true;
     _id: ObjectId;
 } | {

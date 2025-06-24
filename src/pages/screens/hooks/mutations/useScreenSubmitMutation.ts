@@ -1,31 +1,59 @@
 import {UseFormReturn} from "react-hook-form";
-import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
-import {ScreenSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
-import mutationFormSubmitHandler from "@/common/handlers/mutation/MutationFormSubmitHandler.ts";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
-import {ScreenForm} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
+import {ScreenForm, ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
+import {FormMutationResultParams} from "@/common/type/form/FormMutationResultParams.ts";
+import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
+import {toast} from "react-toastify";
+import {useMutation} from "@tanstack/react-query";
+import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
+import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
+import {ScreenSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
+import {ParseError} from "@/common/errors/ParseError.ts";
 
-interface Params {
-    _id?: string,
-    form: UseFormReturn<ScreenForm>,
+export type ScreenSubmitMutationParams = FormMutationResultParams<Screen> & {
+    form: UseFormReturn<ScreenFormValues>,
     onSubmit?: (screen: Screen) => void,
 }
 
 export default function useScreenSubmitMutation(
-    {_id, form, onSubmit}: Params
+    {_id, form, isEditing, onSubmitSuccess, onSubmitError, successMessage, errorMessage}: ScreenSubmitMutationParams
 ) {
-    const repository = ScreenRepository;
-    const entityName = "Screen";
     const mutationKey = ['submit_screen_data'];
-    const schema = ScreenSchema;
 
-    return mutationFormSubmitHandler<Screen, typeof ScreenSchema, ScreenForm>({
-        _id,
-        repository,
-        entityName,
+    const submitScreenData = async (values: ScreenForm) => {
+        const action = isEditing
+            ? () => ScreenRepository.update({_id, data: values})
+            : () => ScreenRepository.create({data: values});
+
+        const returnData = await handleAPIResponse({action, errorMessage: "Failed to submit data. Please try again."});
+        const {success, data: parsedData, error} = ScreenSchema.safeParse(returnData);
+
+        if (!success) {
+            toast.error("Invalid data returned.");
+            throw new ParseError({errors: error?.errors, message: "Invalid Screen Data."});
+        }
+
+        return parsedData;
+    }
+
+    const onSuccess = async (screen: Screen) => {
+        const message = isEditing ? "Screen updated successfully." : "Screen created successfully.";
+        toast.success(successMessage || message)
+
+        onSubmitSuccess && onSubmitSuccess(screen);
+    }
+
+    const onError = (error: Error) => {
+        toast.error(errorMessage || "Something went wrong. Please try again.");
+
+        handleFormSubmitError({form, error});
+        onSubmitError && onSubmitError(error);
+    }
+
+    return useMutation({
         mutationKey,
-        form,
-        schema,
-        onSubmit,
+        mutationFn: submitScreenData,
+        onSuccess,
+        onError,
     });
 }

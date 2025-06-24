@@ -20,10 +20,11 @@ import {
     DrawerTrigger,
 } from "@/common/components/ui/drawer"
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
-import TheatreScreenSubmitFormContainer from "@/pages/screens/components/forms/TheatreScreenSubmitFormContainer.tsx";
 
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
+import ScreenSubmitFormContainer from "@/pages/screens/components/forms/ScreenSubmitFormContainer.tsx";
+import {ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 
 interface Props {
     theatreID: ObjectId;
@@ -33,6 +34,9 @@ interface Props {
 const TheatreScreenFormDrawer: FC<PropsWithChildren<Props>> = ({children, theatreID, onSubmit}) => {
     const [open, setOpen] = useState<boolean>(false);
     const isDesktop = !useIsMobile();
+
+    const presetValues = {theatre: theatreID};
+    const disableFields: (keyof ScreenFormValues)[] = ["theatre"];
 
     const onScreenAdd = (screen: Screen) => {
         onSubmit(screen);
@@ -52,7 +56,8 @@ const TheatreScreenFormDrawer: FC<PropsWithChildren<Props>> = ({children, theatr
                     </DialogHeader>
 
                     {/* Contents */}
-                    <TheatreScreenSubmitFormContainer theatreID={theatreID} onSubmit={onScreenAdd} />
+                    {/*<TheatreScreenSubmitFormContainer theatreID={theatreID} onSubmit={onScreenAdd} />*/}
+                    <ScreenSubmitFormContainer onSubmitSuccess={onScreenAdd} presetValues={presetValues} disableFields={disableFields} />;
 
                 </DialogContent>
             </Dialog>
@@ -72,7 +77,9 @@ const TheatreScreenFormDrawer: FC<PropsWithChildren<Props>> = ({children, theatr
                 </DrawerHeader>
 
                 {/* Contents */}
-                <TheatreScreenSubmitFormContainer theatreID={theatreID} onSubmit={onScreenAdd} className="px-4" />
+                {/*<TheatreScreenSubmitFormContainer theatreID={theatreID} onSubmit={onScreenAdd} className="px-4" />*/}
+                <ScreenSubmitFormContainer onSubmitSuccess={onScreenAdd} presetValues={presetValues} disableFields={disableFields} className="px-4" />;
+
 
                 <DrawerFooter className="pt-2">
                     <DrawerClose asChild>

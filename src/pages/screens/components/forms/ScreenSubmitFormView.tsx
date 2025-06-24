@@ -8,25 +8,27 @@ import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
 import ScreenTypeHookFormSelect from "@/pages/screens/components/inputs/ScreenTypeHookFormSelect.tsx";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
-import {ScreenForm} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
+import {ScreenForm, ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 
 interface Props {
     className?: string;
-    form: UseFormReturn<ScreenForm>;
+    form: UseFormReturn<ScreenFormValues>;
     mutation: UseMutationResult<Screen, Error, ScreenForm>;
-    submitHandler: SubmitHandler<ScreenForm>;
-    options?: {
-        hideTheatre?: boolean;
-        disableTheatre?: boolean;
-        hideScreenType?: boolean;
-        disableScreenType?: boolean;
-    }
+    submitHandler: SubmitHandler<ScreenFormValues>;
+    disableFields?: (keyof ScreenFormValues)[];
 }
 
-const ScreenSubmitFormContainer: FC<Props> = ({form, mutation, submitHandler, className, options}) => {
+const ScreenSubmitFormView: FC<Props> = (params) => {
+    const {form, mutation, submitHandler, className, disableFields = []} = params;
+
     const {isPending} = mutation;
 
-    const {hideTheatre, disableTheatre, hideScreenType, disableScreenType} = options || {};
+    const activeFields = {
+        name: !disableFields.includes("name"),
+        capacity: !disableFields.includes("capacity"),
+        screenType: !disableFields.includes("screenType"),
+        theatre: !disableFields.includes("theatre"),
+    };
 
     return (
         <Form {...form}>
@@ -34,37 +36,43 @@ const ScreenSubmitFormContainer: FC<Props> = ({form, mutation, submitHandler, cl
                 onSubmit={form.handleSubmit(submitHandler)}
                 className={cn("space-y-4", className)}
             >
-                <HookFormInput
-                    name="name"
-                    label="Name"
-                    disabled={isPending}
-                    control={form.control}
-                />
-
-                <HookFormInput
-                    name="capacity"
-                    label="Capacity"
-                    disabled={isPending}
-                    control={form.control}
-                    type="number"
-                    min={0}
-                />
+                {
+                    activeFields["name"] &&
+                    <HookFormInput
+                        name="name"
+                        label="Name"
+                        disabled={isPending}
+                        control={form.control}
+                    />
+                }
 
                 {
-                    !hideScreenType &&
+                    activeFields["capacity"] &&
+                    <HookFormInput
+                        name="capacity"
+                        label="Capacity"
+                        disabled={isPending}
+                        control={form.control}
+                        type="number"
+                        min={0}
+                    />
+                }
+
+                {
+                    activeFields["screenType"] &&
                     <ScreenTypeHookFormSelect
                         control={form.control}
-                        isDisabled={isPending || disableScreenType}
+                        isDisabled={isPending}
                         name="screenType"
                         label="Screen Type"
                     />
                 }
 
                 {
-                    !hideTheatre &&
+                    activeFields["theatre"] &&
                     <TheatreHookFormSelect
                         control={form.control}
-                        isDisabled={isPending || disableTheatre}
+                        isDisabled={isPending}
                         name="theatre"
                         label="Theatre"
                     />
@@ -83,4 +91,4 @@ const ScreenSubmitFormContainer: FC<Props> = ({form, mutation, submitHandler, cl
     );
 };
 
-export default ScreenSubmitFormContainer;
+export default ScreenSubmitFormView;

@@ -17,7 +17,7 @@ const ScreenCreatePage: FC = () => {
             <ScreenCreateHeader />
 
             <section>
-                <ScreenSubmitFormContainer onSubmit={onSubmit} />
+                <ScreenSubmitFormContainer onSubmitSuccess={onSubmit} />
             </section>
         </PageFlexWrapper>
     );
