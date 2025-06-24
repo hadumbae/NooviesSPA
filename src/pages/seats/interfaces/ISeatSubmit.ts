@@ -7,7 +7,7 @@ export default interface ISeatSubmit {
     seatNumber: string,
     seatType?: SeatType,
     isAvailable: boolean,
-    priceMultiplier: number | "",
+    priceMultiplier: number,
     theatre?: ObjectId;
     screen?: ObjectId;
 }

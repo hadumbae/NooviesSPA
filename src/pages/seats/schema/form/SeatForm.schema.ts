@@ -1,11 +1,11 @@
-import {z, ZodType} from "zod";
-import ISeatSubmit from "@/pages/seats/interfaces/ISeatSubmit.ts";
+import {z, ZodType, ZodTypeDef} from "zod";
 import {SeatTypeEnum} from "@/pages/seats/schema/SeatType.enum.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/NonNegativeNumberSchema.ts";
+import {CleanedNonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
+import ISeatSubmit from "@/pages/seats/interfaces/ISeatSubmit.ts";
 
 /**
  * Zod schema representing the raw form values before transformation or validation.
@@ -36,28 +36,37 @@ export const SeatFormValuesSchema = z.object({
 });
 
 /**
- * Zod schema for validated seat form submission.
+ * Zod schema that validates and transforms the seat form input
+ * into structured values suitable for processing or storage.
  *
- * This schema is built on top of `SeatFormValuesSchema` and transforms
- * the starter values into their strictly validated forms.
+ * Compared to `SeatFormValuesSchema`, this version applies concrete constraints:
+ * - `row` and `seatNumber`: non-empty strings, max 50 characters
+ * - `seatType`: enum-validated value
+ * - `isAvailable`: strictly `true` or `false`
+ * - `priceMultiplier`: coerced and cleaned non-negative number
+ * - `theatre` and `screen`: ID strings
  *
- * This is used to validate the final form submission after input sanitization.
- * It enforces:
- * - non-empty and length-limited strings for `row` and `seatNumber`
- * - strict `SeatTypeEnum` for seat type
- * - required boolean for availability
- * - non-negative number for price multiplier
- * - valid ID strings for `theatre` and `screen`
- *
- * This schema is explicitly typed to `ISeatSubmit`.
+ * Use this for validating processed form values before submission or storage.
  */
-export const SeatFormSchema: ZodType<ISeatSubmit> = SeatFormValuesSchema.extend({
+export const SeatFormRawSchema = SeatFormValuesSchema.extend({
     row: NonEmptyStringSchema.max(50, "Must be 50 characters or less."),
     seatNumber: NonEmptyStringSchema.max(50, "Must be 50 characters or less."),
     seatType: SeatTypeEnum,
     isAvailable: RequiredBoolean,
-    priceMultiplier: NonNegativeNumberSchema,
+    priceMultiplier: CleanedNonNegativeNumberSchema,
     theatre: IDStringSchema,
     screen: IDStringSchema,
 });
+
+/**
+ * Strongly-typed Zod schema representing a complete, validated `ISeatSubmit` object.
+ *
+ * This schema:
+ * - Validates `unknown` input (e.g., from an HTML form)
+ * - Outputs an object conforming to the `ISeatSubmit` TypeScript interface
+ * - Allows use of `z.preprocess`-based fields like `CleanedNonNegativeNumberSchema`
+ *
+ * Useful as a final parsing step before consuming form input in business logic.
+ */
+export const SeatFormSchema = SeatFormRawSchema as ZodType<ISeatSubmit, ZodTypeDef, unknown>;
 

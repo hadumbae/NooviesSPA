@@ -1,6 +1,6 @@
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/NonNegativeNumberSchema.ts";
+import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 
 /**
  * Zod schema for validating screen filter query parameters.
