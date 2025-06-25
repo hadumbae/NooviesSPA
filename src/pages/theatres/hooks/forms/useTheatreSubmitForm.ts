@@ -1,22 +1,27 @@
-import {useForm} from "react-hook-form";
+import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {TheatreFormSchema} from "@/pages/theatres/schema/forms/TheatreForm.schema.ts";
 
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
-import {TheatreForm} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
+import {TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
+import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 
+type FormParams = {
+    theatre?: TheatreDetails;
+    presetValues?: Partial<TheatreFormValues>;
+}
 
-export default function useTheatreSubmitForm(params?: {theatre?: TheatreDetails}) {
-    const {theatre = {}} = params || {};
+export default function useTheatreSubmitForm(params?: FormParams): UseFormReturn<TheatreFormValues> {
+    const {theatre, presetValues} = params || {};
 
-    const defaultValues: TheatreForm = {
-        name: "",
-        location: "",
-        seatCapacity: "",
+    const defaultValues: TheatreFormValues = {
+        name: getDefaultValue(presetValues?.name, theatre?.name, ""),
+        location: getDefaultValue(presetValues?.location, theatre?.location, ""),
+        seatCapacity: getDefaultValue(presetValues?.seatCapacity, theatre?.seatCapacity, ""),
     }
 
-    return useForm<TheatreForm>({
+    return useForm<TheatreFormValues>({
         resolver: zodResolver(TheatreFormSchema),
-        defaultValues: {...defaultValues, ...theatre},
+        defaultValues,
     });
 }
