@@ -4,7 +4,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema
 import {SeatTypeEnum} from "@/pages/seats/schema/SeatType.enum.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
-import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
+import {TheatreSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import {ScreenSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 import ISeat from "@/pages/seats/interfaces/ISeat.ts";
 import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";

@@ -1,24 +1,24 @@
 import {FC} from 'react';
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import useTheatreSubmitForm from "@/pages/theatres/hooks/forms/useTheatreSubmitForm.ts";
 import useTheatreSubmitMutation from "@/pages/theatres/hooks/mutations/useTheatreSubmitMutation.ts";
-import {TheatreSubmit} from "@/pages/theatres/schema/TheatreSubmitSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {TheatreForm} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 
 interface Props {
     className?: string;
-    theatre?: Theatre;
-    onSubmit: (theatre: Theatre) => void;
+    theatre?: TheatreDetails;
+    onSubmit: (theatre: TheatreDetails) => void;
 }
 
 const TheatreSubmitForm: FC<Props> = ({theatre, onSubmit, className}) => {
     const form = useTheatreSubmitForm({theatre});
     const {mutate, isPending, isSuccess} = useTheatreSubmitMutation({form, onSubmit, _id: theatre?._id});
 
-    const onFormSubmit = (values: TheatreSubmit) => {
+    const onFormSubmit = (values: TheatreForm) => {
         console.log("Theatre Create Values : ", values);
         mutate(values);
     }

@@ -1,11 +1,11 @@
 import {FC} from 'react';
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Link} from "react-router-dom";
 import TheatreOptions from "@/pages/theatres/components/TheatreOptions.tsx";
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 interface Props {
-    theatre: Theatre;
+    theatre: TheatreDetails;
     onDelete?: () => void;
 }
 

@@ -2,7 +2,7 @@ import useFetchTheatre from "@/pages/theatres/hooks/queries/useFetchTheatre.ts";
 import useFetchScreens from "@/pages/screens/hooks/queries/useFetchScreens.ts";
 import useFetchShowings from "@/pages/showings/hooks/queries/useFetchShowings.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
+import {TheatreSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 
 import {
     FetchTheatreDetailsParams

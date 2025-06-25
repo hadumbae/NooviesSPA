@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
@@ -9,9 +8,10 @@ import {Button} from "@/common/components/ui/button.tsx";
 import TheatreScreenFormDrawer from "@/pages/screens/components/forms/TheatreScreenFormDrawer.tsx";
 
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 interface Props {
-    theatre: Theatre;
+    theatre: TheatreDetails;
     onScreenSubmit: (screen: Screen) => void;
 }
 

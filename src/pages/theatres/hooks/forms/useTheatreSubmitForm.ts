@@ -1,20 +1,22 @@
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {TheatreSubmit, TheatreSubmitSchema} from "@/pages/theatres/schema/TheatreSubmitSchema.ts";
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
+import {TheatreFormSchema} from "@/pages/theatres/schema/forms/TheatreForm.schema.ts";
+
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {TheatreForm} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 
 
-export default function useTheatreSubmitForm(params?: {theatre?: Theatre}) {
+export default function useTheatreSubmitForm(params?: {theatre?: TheatreDetails}) {
     const {theatre = {}} = params || {};
 
-    const defaultValues: TheatreSubmit = {
+    const defaultValues: TheatreForm = {
         name: "",
         location: "",
         seatCapacity: "",
     }
 
-    return useForm<TheatreSubmit>({
-        resolver: zodResolver(TheatreSubmitSchema),
+    return useForm<TheatreForm>({
+        resolver: zodResolver(TheatreFormSchema),
         defaultValues: {...defaultValues, ...theatre},
     });
 }

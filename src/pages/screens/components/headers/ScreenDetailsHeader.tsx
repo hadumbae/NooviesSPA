@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {Pencil, TableOfContents, Trash} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import {cn} from "@/common/lib/utils.ts";
@@ -9,6 +8,7 @@ import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import useScreenDeleteMutation from "@/pages/screens/hooks/mutations/useScreenDeleteMutation.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 interface Props {
     screen: Screen;
@@ -18,7 +18,7 @@ const ScreenDetailsHeader: FC<Props> = ({screen}) => {
     const navigate = useNavigate();
 
     const {_id, name, screenType, theatre} = screen;
-    const theatreName = (theatre as Theatre).name;
+    const theatreName = (theatre as TheatreDetails).name;
 
     const {mutate, isPending, isSuccess} = useScreenDeleteMutation({onDelete: () => navigate("/admin/screens")});
     const isDisabled = isPending || isSuccess;

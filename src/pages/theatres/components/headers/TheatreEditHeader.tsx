@@ -1,13 +1,13 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {Search, TableOfContents} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 interface Props {
-    theatre: Theatre;
+    theatre: TheatreDetails;
 }
 
 const TheatreEditHeader: FC<Props> = ({theatre}) => {

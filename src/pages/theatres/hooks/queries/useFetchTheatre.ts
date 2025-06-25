@@ -1,8 +1,8 @@
 import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.ts";
 import {useQuery} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 /**
  * React Query hook to fetch a single theatre by its ObjectId.
@@ -23,7 +23,7 @@ import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
 export default function useFetchTheatre({_id, populate = false}: FetchByIDParams) {
     const queryKey = ["fetch_single_theatre", {_id, populate}];
 
-    const action = useQueryFnHandler<Theatre>({
+    const action = useQueryFnHandler<TheatreDetails>({
         action: () => TheatreRepository.get({_id, populate}),
         errorMessage: "Failed to fetch theatre data. Please try again.",
     });

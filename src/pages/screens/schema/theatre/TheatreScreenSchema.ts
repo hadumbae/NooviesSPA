@@ -1,5 +1,5 @@
 import {z, ZodType} from "zod";
-import {TheatreSchema} from "@/pages/theatres/schema/TheatreSchema.ts";
+import {TheatreSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import {ShowingWithMovieSchema} from "@/pages/showings/schema/populated/ShowingWithMovieSchema.ts";
 import ITheatreScreen from "@/pages/screens/interfaces/ITheatreScreen.ts";

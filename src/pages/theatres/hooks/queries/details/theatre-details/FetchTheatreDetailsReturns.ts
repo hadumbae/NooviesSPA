@@ -1,12 +1,12 @@
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {PaginatedShowings} from "@/pages/showings/schema/ShowingPaginationSchema.ts";
 import {PaginatedScreens} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 type ValidDetailReturns = {
     parseSuccess: true,
     parseError: null,
     data: {
-        theatre: Theatre,
+        theatre: TheatreDetails,
         screens: PaginatedScreens,
         showings: PaginatedShowings,
     }

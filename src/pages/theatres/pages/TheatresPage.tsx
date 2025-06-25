@@ -8,10 +8,10 @@ import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import useFetchTheatres from "@/pages/theatres/hooks/queries/query/fetch-by-query/useFetchTheatres.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {PaginatedTheatreSchema} from "@/pages/theatres/schema/TheatrePaginationSchema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import TheatreListCard from "@/pages/theatres/components/TheatreListCard.tsx";
+import {PaginatedTheatreSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 
 const TheatresPage: FC = () => {
     useTitle("Theatre Index")

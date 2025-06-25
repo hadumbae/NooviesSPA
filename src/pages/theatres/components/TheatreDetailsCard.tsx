@@ -1,10 +1,10 @@
 import {FC} from 'react';
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 interface Props {
-    theatre: Theatre;
+    theatre: TheatreDetails;
 }
 
 const TheatreDetailsCard: FC<Props> = ({theatre}) => {

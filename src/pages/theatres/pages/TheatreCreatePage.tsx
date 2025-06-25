@@ -5,12 +5,12 @@ import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {TableOfContents} from "lucide-react";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {useNavigate} from "react-router-dom";
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import TheatreSubmitForm from "@/pages/theatres/components/TheatreSubmitForm.tsx";
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 const TheatreCreatePage: FC = () => {
     const navigate = useNavigate();
-    const onSubmit = (theatre: Theatre) => {
+    const onSubmit = (theatre: TheatreDetails) => {
         navigate(`/admin/theatres/get/${theatre._id}`);
     }
 

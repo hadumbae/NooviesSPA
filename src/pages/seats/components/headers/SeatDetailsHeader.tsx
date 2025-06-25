@@ -2,12 +2,12 @@ import {FC} from 'react';
 import {useNavigate} from "react-router-dom";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {Pencil, TableOfContents, Trash} from "lucide-react";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import useSeatDeleteMutation from "@/pages/seats/hooks/mutations/useSeatDeleteMutation.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 interface Props {
     seat: Seat;
@@ -17,7 +17,7 @@ const SeatDetailsHeader: FC<Props> = ({seat}) => {
     const navigate = useNavigate();
     const {_id, row, seatNumber, theatre} = seat;
 
-    const theatreName = (theatre as Theatre).name;
+    const theatreName = (theatre as TheatreDetails).name;
 
     const {mutate, isPending, isSuccess} = useSeatDeleteMutation({onDelete: () => navigate("/admin/seats")});
 

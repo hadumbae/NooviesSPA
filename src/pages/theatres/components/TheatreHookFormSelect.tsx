@@ -6,7 +6,7 @@ import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
 import useFetchTheatres from "@/pages/theatres/hooks/queries/query/fetch-by-query/useFetchTheatres.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {TheatreArraySchema} from "@/pages/theatres/schema/TheatreSchema.ts";
+import {TheatreArraySchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 
 interface Props<TSubmit extends FieldValues> {

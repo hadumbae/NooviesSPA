@@ -1,9 +1,9 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Link} from "react-router-dom";
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import ScreenOptions from "@/pages/screens/components/dialog/ScreenOptions.tsx";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 interface Props {
     screen: Screen;
@@ -12,7 +12,7 @@ interface Props {
 
 const ScreenListCard: FC<Props>  = ({screen, onDelete}) => {
     const {_id, name, capacity, screenType, theatre, seats} = screen;
-    const theatreName = (theatre as Theatre).name;
+    const theatreName = (theatre as TheatreDetails).name;
 
     return (
         <Card>

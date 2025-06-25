@@ -1,16 +1,16 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import {Pencil, TableOfContents, Trash} from "lucide-react";
-import {Theatre} from "@/pages/theatres/schema/TheatreSchema.ts";
 import {useNavigate} from "react-router-dom";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import useTheatreDeleteMutation from "@/pages/theatres/hooks/mutations/useTheatreDeleteMutation.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
+import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 interface Props {
-    theatre: Theatre;
+    theatre: TheatreDetails;
 }
 
 const TheatreDetailsHeader: FC<Props> = ({theatre}) => {
