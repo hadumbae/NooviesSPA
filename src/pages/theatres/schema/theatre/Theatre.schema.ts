@@ -1,12 +1,11 @@
 import {z, ZodType} from "zod";
 import ITheatre from "@/pages/theatres/interfaces/ITheatre.ts";
-import {ScreenSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
-import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
 import ITheatreDetails from "@/pages/theatres/interfaces/ITheatreDetails.ts";
 import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
+import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 
 /**
  * Base schema for a theatre object, representing core properties
@@ -27,15 +26,21 @@ export const TheatreRawSchema = z.object({
 });
 
 /**
- * Extended schema for a theatre that includes associated screen and seat data.
- * Screens and seats can be represented by either ID strings or full schema objects.
+ * Extended schema for a theatre that includes aggregated detail fields,
+ * such as screen count, seat count, and number of upcoming showings.
+ *
+ * This version is typically used for list views or dashboards where
+ * full screen/seat data isn't needed, just summarized numbers.
  */
 export const TheatreDetailsRawSchema = TheatreRawSchema.extend({
-    /** Array of screen references or full screen objects for the theatre */
-    screens: z.array(z.union([IDStringSchema, z.lazy(() => ScreenSchema)])),
+    /** Total number of screens in the theatre. */
+    screenCount: NonNegativeNumberSchema,
 
-    /** Array of seat references or full seat objects for the theatre */
-    seats: z.array(z.union([IDStringSchema, z.lazy(() => SeatSchema)])),
+    /** Total number of seats in the theatre. */
+    seatCount: NonNegativeNumberSchema,
+
+    /** Number of showings scheduled in the future at this theatre. */
+    futureShowingCount: NonNegativeNumberSchema,
 });
 
 /**
@@ -55,6 +60,14 @@ export const TheatreArraySchema = z.array(TheatreSchema);
 
 /**
  * Zod schema for paginated theatre data, used for endpoints returning
- * results with pagination metadata (e.g., total count, pages).
+ * a list of basic theatre entries along with pagination metadata
+ * (e.g., total count, current page, total pages).
  */
 export const PaginatedTheatreSchema = generatePaginationSchema(TheatreSchema);
+
+/**
+ * Zod schema for paginated detailed theatre data, used for endpoints returning
+ * a list of theatres with full detail (including screens and seats),
+ * along with pagination metadata.
+ */
+export const PaginatedTheatreDetailsSchema = generatePaginationSchema(TheatreDetailsSchema);
