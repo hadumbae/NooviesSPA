@@ -10,6 +10,7 @@ import TheatreScreensPageSection from "@/pages/theatres/components/sections/Thea
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import {EntityPaginatedQuery} from "@/common/type/repositories/EntityRequestParamTypes.ts";
+import TheatreDetailsBreadcrumbs from "@/pages/theatres/components/breadcrumbs/admin/TheatreDetailsBreadcrumbs.tsx";
 
 const TheatrePage: FC = () => {
     const {theatreID} = useFetchTheatreParams();
@@ -29,6 +30,8 @@ const TheatrePage: FC = () => {
 
     return (
         <PageFlexWrapper>
+            <TheatreDetailsBreadcrumbs theatreName={theatre.name} />
+
             <TheatreDetailsHeader theatre={theatre}/>
 
             {/* Details */}

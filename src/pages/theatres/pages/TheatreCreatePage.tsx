@@ -1,12 +1,12 @@
 import {FC} from 'react';
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
-import {TableOfContents} from "lucide-react";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {useNavigate} from "react-router-dom";
 import TheatreSubmitFormContainer from "@/pages/theatres/components/forms/TheatreSubmitFormContainer.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import PageSection from "@/common/components/page/PageSection.tsx";
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import TheatreCreateHeader from "@/pages/theatres/components/headers/TheatreCreateHeader.tsx";
+import TheatreCreateBreadcrumbs from "@/pages/theatres/components/breadcrumbs/admin/TheatreCreateBreadcrumbs.tsx";
 
 const TheatreCreatePage: FC = () => {
     const navigate = useNavigate();
@@ -16,20 +16,16 @@ const TheatreCreatePage: FC = () => {
 
     return (
         <PageFlexWrapper>
-            <header className="flex justify-between items-center">
-                <div>
-                    <HeaderTitle>Create Theatre</HeaderTitle>
-                    <HeaderDescription>Enter details and press on `Submit` to create theatres.</HeaderDescription>
-                </div>
+            <TheatreCreateBreadcrumbs />
+            <TheatreCreateHeader />
 
-                <HeaderLink to="/admin/theatres">
-                    <TableOfContents />
-                </HeaderLink>
-            </header>
-
-            <section>
-                <TheatreSubmitFormContainer onSubmitSuccess={onSubmit} />
-            </section>
+            <PageSection srTitle="Theatre Create Form">
+                <Card>
+                    <CardContent className="p-4">
+                        <TheatreSubmitFormContainer onSubmitSuccess={onSubmit} />
+                    </CardContent>
+                </Card>
+            </PageSection>
         </PageFlexWrapper>
     );
 };

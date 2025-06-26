@@ -2,12 +2,12 @@ import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {TheatreFormSchema} from "@/pages/theatres/schema/forms/TheatreForm.schema.ts";
 
-import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import {TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 
 type FormParams = {
-    theatre?: TheatreDetails;
+    theatre?: Theatre;
     presetValues?: Partial<TheatreFormValues>;
 }
 

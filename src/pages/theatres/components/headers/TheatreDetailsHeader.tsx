@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import {Pencil, TableOfContents, Trash} from "lucide-react";
+import {Pencil, Trash} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {cn} from "@/common/lib/utils.ts";
@@ -36,10 +36,6 @@ const TheatreDetailsHeader: FC<Props> = ({theatre}) => {
             </section>
 
             <section className="space-x-2 flex justify-end items-center ">
-                <HeaderLink variant="link" to="/admin/theatres">
-                    <TableOfContents /> Index
-                </HeaderLink>
-
                 <HeaderLink variant="link" to={`/admin/theatres/edit/${_id}`}>
                     <Pencil /> Edit
                 </HeaderLink>

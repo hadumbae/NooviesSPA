@@ -46,7 +46,7 @@ const TheatresPage: FC = () => {
 
             {
                 hasTheatres
-                    ? <PageSection>
+                    ? <PageSection className="grid grid-cols-1 gap-4">
                         {theatres.map((theatre) => <TheatreListCard key={theatre._id} theatre={theatre} />)}
                     </PageSection>
                     : <PageCenter>

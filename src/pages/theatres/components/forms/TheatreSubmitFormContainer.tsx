@@ -3,7 +3,7 @@ import useTheatreSubmitForm from "@/pages/theatres/hooks/forms/useTheatreSubmitF
 import useTheatreSubmitMutation, {
     TheatreSubmitMutationParams
 } from "@/pages/theatres/hooks/mutations/useTheatreSubmitMutation.ts";
-import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import {TheatreForm, TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import TheatreSubmitFormView from "@/pages/theatres/components/forms/TheatreSubmitFormView.tsx";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
@@ -14,7 +14,7 @@ type Props = FormMutationOnSubmitParams & {
     presetValues?: Partial<TheatreFormValues>;
 } & ( | {
     isEditing: true;
-    theatre: TheatreDetails;
+    theatre: Theatre;
 } | {
     isEditing?: false;
     theatre?: never;
