@@ -29,11 +29,11 @@ const TheatrePage: FC = () => {
 
     return (
         <PageFlexWrapper>
-            <TheatreDetailsHeader theatre={theatre!}/>
+            <TheatreDetailsHeader theatre={theatre}/>
 
             {/* Details */}
 
-            <TheatreDetailsCard theatre={theatre!}/>
+            <TheatreDetailsCard theatre={theatre}/>
 
             {/* Screens */}
 

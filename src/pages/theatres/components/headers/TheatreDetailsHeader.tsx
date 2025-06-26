@@ -7,10 +7,10 @@ import {cn} from "@/common/lib/utils.ts";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import useTheatreDeleteMutation from "@/pages/theatres/hooks/mutations/useTheatreDeleteMutation.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
-import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 interface Props {
-    theatre: TheatreDetails;
+    theatre: Theatre;
 }
 
 const TheatreDetailsHeader: FC<Props> = ({theatre}) => {

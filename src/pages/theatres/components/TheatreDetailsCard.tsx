@@ -12,12 +12,11 @@ const TheatreDetailsCard: FC<Props> = ({theatre}) => {
         name,
         location,
         seatCapacity,
-        screens,
-        seats,
+        screenCount,
+        seatCount,
+        futureShowingCount,
     } = theatre;
 
-    const screenNum = screens.length;
-    const seatNum = seats.length;
 
     return (
         <Card>
@@ -28,8 +27,9 @@ const TheatreDetailsCard: FC<Props> = ({theatre}) => {
 
                 <div className="flex justify-between items-center">
                     <DetailsCardSpan label="Seat Capacity" text={`${seatCapacity} seats`} />
-                    <DetailsCardSpan label="Registered Screens" text={`${screenNum} screens`} />
-                    <DetailsCardSpan label="Registered Seats" text={`${seatNum} seats`} />
+                    <DetailsCardSpan label="Registered Screens" text={`${screenCount} screens`} />
+                    <DetailsCardSpan label="Registered Seats" text={`${seatCount} seats`} />
+                    <DetailsCardSpan label="Upcoming Showings" text={`${futureShowingCount} showings`} />
                 </div>
             </CardContent>
         </Card>

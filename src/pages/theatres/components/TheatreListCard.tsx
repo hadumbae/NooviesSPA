@@ -10,7 +10,15 @@ interface Props {
 }
 
 const TheatreListCard: FC<Props>  = ({theatre, onDelete}) => {
-    const {_id, name, location, seatCapacity, seats, screens} = theatre;
+    const {
+        _id,
+        name,
+        location,
+        seatCapacity,
+        seatCount,
+        screenCount,
+        futureShowingCount,
+    } = theatre;
 
     return (
         <Card>
@@ -25,17 +33,22 @@ const TheatreListCard: FC<Props>  = ({theatre, onDelete}) => {
                 <div className="flex justify-between items-center">
                     <div className="flex flex-col">
                         <span className="text-[12px] text-neutral-500">Capacity</span>
-                        <span className="font-bold">{seatCapacity}</span>
+                        <span className="font-bold">{seatCapacity} seats</span>
                     </div>
 
                     <div className="flex flex-col">
-                        <span className="text-[12px] text-neutral-500">Seats</span>
-                        <span className="font-bold">{seats.length}</span>
+                        <span className="text-[12px] text-neutral-500">Registered Seats</span>
+                        <span className="font-bold">{seatCount} seats</span>
                     </div>
 
                     <div className="flex flex-col">
                         <span className="text-[12px] text-neutral-500">Screens</span>
-                        <span className="font-bold">{screens.length}</span>
+                        <span className="font-bold">{screenCount} screens</span>
+                    </div>
+
+                    <div className="flex flex-col">
+                        <span className="text-[12px] text-neutral-500">Showings</span>
+                        <span className="font-bold">{futureShowingCount} showings</span>
                     </div>
                 </div>
 

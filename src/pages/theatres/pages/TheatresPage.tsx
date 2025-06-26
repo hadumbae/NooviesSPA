@@ -11,17 +11,25 @@ import useValidateData from "@/common/hooks/validation/use-validate-data/useVali
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import TheatreListCard from "@/pages/theatres/components/TheatreListCard.tsx";
-import {PaginatedTheatreSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
+import {PaginatedTheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 
 const TheatresPage: FC = () => {
     useTitle("Theatre Index")
 
     const {page, perPage} = usePaginationSearchParams();
-    const {data, isPending, isError, error: queryError} = useFetchTheatres({paginated: true, page, perPage});
+
+    const {data, isPending, isError, error: queryError} = useFetchTheatres({
+        virtuals: true,
+        populate: true,
+        paginated: true,
+        page,
+        perPage,
+    });
+
     const {data: paginatedTheatres, success, error: parseError} = useValidateData({
         isPending,
         data,
-        schema: PaginatedTheatreSchema,
+        schema: PaginatedTheatreDetailsSchema,
         message: "Invalid Theatre Data.",
     });
 

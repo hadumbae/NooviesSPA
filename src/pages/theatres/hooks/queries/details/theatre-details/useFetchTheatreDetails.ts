@@ -2,7 +2,7 @@ import useFetchTheatre from "@/pages/theatres/hooks/queries/useFetchTheatre.ts";
 import useFetchScreens from "@/pages/screens/hooks/queries/useFetchScreens.ts";
 import useFetchShowings from "@/pages/showings/hooks/queries/useFetchShowings.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {TheatreSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
+import {TheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 
 import {
     FetchTheatreDetailsParams
@@ -23,7 +23,7 @@ export default function useFetchTheatreDetails(params: FetchTheatreDetailsParams
 
     // Fetch
 
-    const theatreQuery = useFetchTheatre({_id: theatreID});
+    const theatreQuery = useFetchTheatre({_id: theatreID, populate: true, virtuals: true});
     const screenQuery = useFetchScreens({...baseQueries, paginated, page: screenPage, perPage: screenPerPage});
     const showingQuery = useFetchShowings({...baseQueries, paginated, page: showingPage, perPage: showingPerPage});
 
@@ -40,7 +40,7 @@ export default function useFetchTheatreDetails(params: FetchTheatreDetailsParams
     const theatreValidation = useValidateData({
         isPending,
         data: theatreQuery.data,
-        schema: TheatreSchema,
+        schema: TheatreDetailsSchema,
         message: "Invalid Theatre Data."
     });
 
