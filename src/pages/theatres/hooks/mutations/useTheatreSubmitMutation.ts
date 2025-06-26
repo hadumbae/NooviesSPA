@@ -2,19 +2,21 @@ import {UseFormReturn} from "react-hook-form";
 import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
-import {TheatreForm} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
+import {TheatreForm, TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import {FormMutationResultParams} from "@/common/type/form/FormMutationResultParams.ts";
 import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
 import {toast} from "react-toastify";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 
-type TheatreSubmitMutationParams = FormMutationResultParams & {
-    form: UseFormReturn<TheatreForm>;
+export type TheatreSubmitMutationParams = FormMutationResultParams & {
+    form: UseFormReturn<TheatreFormValues>;
 }
 
-export default function useTheatreSubmitMutation(params: TheatreSubmitMutationParams) {
+export default function useTheatreSubmitMutation(
+    params: TheatreSubmitMutationParams
+): UseMutationResult<Theatre, Error, TheatreForm> {
     const {
         successMessage,
         onSubmitSuccess,
@@ -26,6 +28,7 @@ export default function useTheatreSubmitMutation(params: TheatreSubmitMutationPa
     } = params;
 
     const mutationKey = ['submit_theatre_data'];
+    const queryClient = useQueryClient();
 
     const submitTheatreData = async (values: TheatreForm) => {
         const action = isEditing
@@ -43,9 +46,11 @@ export default function useTheatreSubmitMutation(params: TheatreSubmitMutationPa
         return parsedData;
     }
 
-    const onSuccess = (theatre: Theatre) => {
+    const onSuccess = async (theatre: Theatre) => {
         const message = isEditing ? "Theatre updated." : "Theatre created.";
         toast.success(successMessage || message);
+
+        await queryClient.invalidateQueries({queryKey: ["fetch_theatres_by_query"], exact: false});
 
         onSubmitSuccess && onSubmitSuccess(theatre);
     }
@@ -58,9 +63,9 @@ export default function useTheatreSubmitMutation(params: TheatreSubmitMutationPa
     }
 
     return useMutation({
-       mutationKey,
-       mutationFn: submitTheatreData,
-       onSuccess,
-       onError,
+        mutationKey,
+        mutationFn: submitTheatreData,
+        onSuccess,
+        onError,
     });
 }

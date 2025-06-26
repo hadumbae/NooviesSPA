@@ -5,7 +5,7 @@ import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {TableOfContents} from "lucide-react";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {useNavigate} from "react-router-dom";
-import TheatreSubmitForm from "@/pages/theatres/components/TheatreSubmitForm.tsx";
+import TheatreSubmitFormContainer from "@/pages/theatres/components/forms/TheatreSubmitFormContainer.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 const TheatreCreatePage: FC = () => {
@@ -28,7 +28,7 @@ const TheatreCreatePage: FC = () => {
             </header>
 
             <section>
-                <TheatreSubmitForm onSubmit={onSubmit} />
+                <TheatreSubmitFormContainer onSubmitSuccess={onSubmit} />
             </section>
         </PageFlexWrapper>
     );

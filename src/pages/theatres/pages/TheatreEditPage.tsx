@@ -5,7 +5,7 @@ import useFetchTheatre from "@/pages/theatres/hooks/queries/useFetchTheatre.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import TheatreSubmitForm from "@/pages/theatres/components/TheatreSubmitForm.tsx";
+import TheatreSubmitFormContainer from "@/pages/theatres/components/forms/TheatreSubmitFormContainer.tsx";
 import TheatreEditHeader from "@/pages/theatres/components/headers/TheatreEditHeader.tsx";
 
 const TheatreEditPage: FC = () => {
@@ -26,7 +26,7 @@ const TheatreEditPage: FC = () => {
             <TheatreEditHeader theatre={theatre} />
 
             <section>
-                <TheatreSubmitForm theatre={theatre} onSubmit={() => onSubmit()} />
+                <TheatreSubmitFormContainer isEditing={true} theatre={theatre} onSubmitSuccess={onSubmit} />
             </section>
         </PageFlexWrapper>
     );
