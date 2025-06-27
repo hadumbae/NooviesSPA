@@ -4,9 +4,9 @@ import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
 import {useQuery} from "@tanstack/react-query";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
 
-type FetchQueries = RequestOptions & EntityPaginatedQuery & ScreenFilterQuery;
+export type FetchScreenQueries = RequestOptions & EntityPaginatedQuery & ScreenFilterQuery;
 
-export default function useFetchScreens(queries: FetchQueries) {
+export default function useFetchScreens(queries: FetchScreenQueries) {
     const queryKey = ["fetch_screen_by_query", queries] as const;
 
     const queryAction = async () => {

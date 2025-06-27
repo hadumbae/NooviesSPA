@@ -1,5 +1,6 @@
 import {z} from "zod";
 import {
+    PaginatedScreenDetailsSchema,
     PaginatedScreenSchema,
     ScreenArraySchema,
     ScreenDetailsSchema,
@@ -33,7 +34,15 @@ export type ScreenDetails = z.infer<typeof ScreenDetailsSchema>;
 /**
  * Represents the TypeScript type inferred from `PaginatedScreenSchema`.
  *
- * This type is used to enforce the structure of paginated screen data
- * throughout the application.
+ * This type is used to enforce the structure of paginated basic screen data,
+ * including metadata and an array of `Screen` items.
  */
 export type PaginatedScreens = z.infer<typeof PaginatedScreenSchema>;
+
+/**
+ * Represents the TypeScript type inferred from `PaginatedScreenDetailsSchema`.
+ *
+ * This type is used to handle paginated detailed screen data,
+ * where each screen includes expanded info like theatre, seat count, and showings.
+ */
+export type PaginatedScreenDetails = z.infer<typeof PaginatedScreenDetailsSchema>;

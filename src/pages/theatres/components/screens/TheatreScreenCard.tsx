@@ -2,12 +2,12 @@ import {FC} from 'react';
 import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 
-import {Link as LinkIcon, Trash} from "lucide-react";
+import {Search, Trash} from "lucide-react";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
-import TheatreScreenShowingAccordion from "@/pages/theatres/components/screens/accordion/TheatreScreenShowingAccordion.tsx";
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {Link} from "react-router-dom";
 
 interface Props {
     screen: ScreenDetails;
@@ -15,24 +15,23 @@ interface Props {
 }
 
 const TheatreScreenCard: FC<Props> = ({screen, onDelete}) => {
-    const {_id, name, screenType, capacity, seats, showings} = screen;
-
-    const screenCapacity = `${capacity} seats`;
-    const numberOfSeats = `${seats.length} seats`;
+    const {_id, name, screenType, capacity, seatCount, futureShowingCount} = screen;
 
     return (
         <Card>
-            <CardHeader>
+            <CardHeader className="p-5">
                 <CardTitle className="flex justify-between items-center">
-                    <span>{name}</span>
+                    <Link
+                        to={`/admin/screens/get/${_id}`}
+                        className="hover:underline hover:underline-offset-4"
+                        target="_blank"
+                    >
+                        {name}
+                    </Link>
 
                     <section className="flex items-center space-x-2 text-neutral-500">
-                        <ButtonLink
-                            to={`/admin/screens/get/${_id}`}
-                            variant="outline"
-                            size="sm"
-                        >
-                            <LinkIcon /> Details
+                        <ButtonLink to={`/admin/screens/get/${_id}`} variant="outline" size="sm">
+                            <Search />
                         </ButtonLink>
 
                         <ScreenDeleteWarningDialog
@@ -40,30 +39,17 @@ const TheatreScreenCard: FC<Props> = ({screen, onDelete}) => {
                             screen={screen}
                             onDelete={onDelete}
                         >
-                            <Trash /> Delete
+                            <Trash/>
                         </ScreenDeleteWarningDialog>
                     </section>
                 </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
+
+            <CardContent className="space-y-2 p-5 pt-0">
                 <section className="grid grid-cols-3 gap-1">
-                    <DetailsCardSpan label="Screen Type" text={screenType} />
-                    <DetailsCardSpan label="Capacity" text={screenCapacity} />
-                    <DetailsCardSpan label="Registered Seats" text={numberOfSeats} />
-                </section>
-
-                <section>
-                    <span className="text-[12px] text-neutral-500 uppercase">Recent Showings</span>
-
-                    {
-                        showings.length > 0
-                            ? <TheatreScreenShowingAccordion showings={showings} />
-                            : <div className="flex justify-center">
-                                <span className="text-neutral-400 text-[12px] select-none">
-                                    There Are No Active Showings
-                                </span>
-                            </div>
-                    }
+                    <DetailsCardSpan label="Screen Type" text={screenType}/>
+                    <DetailsCardSpan label="Seats / Capacity" text={`${seatCount} / ${capacity} seats`}/>
+                    <DetailsCardSpan label="Upcoming Showings" text={`${futureShowingCount} showings`}/>
                 </section>
             </CardContent>
         </Card>

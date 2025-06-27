@@ -2,8 +2,7 @@ import {FC} from 'react';
 import {cn} from "@/common/lib/utils.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
-import {Plus, Search} from "lucide-react";
+import {Plus} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import TheatreScreenFormDrawer from "@/pages/screens/components/forms/TheatreScreenFormDrawer.tsx";
 
@@ -12,11 +11,11 @@ import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 interface Props {
     theatre: TheatreDetails;
-    onScreenSubmit: (screen: Screen) => void;
+    onScreenSubmit?: (screen: Screen) => void;
 }
 
 const TheatreScreensIndexHeader: FC<Props> = ({theatre, onScreenSubmit}) => {
-    const {_id, name} = theatre;
+    const {name} = theatre;
 
     return (
         <header className={cn("flex", "justify-between items-center")}>
@@ -26,11 +25,7 @@ const TheatreScreensIndexHeader: FC<Props> = ({theatre, onScreenSubmit}) => {
             </section>
 
             <section className="flex justify-end items-center">
-                <HeaderLink variant="link" to={`/admin/theatres/get/${_id}`}>
-                    <Search /> Theatre
-                </HeaderLink>
-
-                <TheatreScreenFormDrawer theatreID={theatre._id} onSubmit={onScreenSubmit}>
+                <TheatreScreenFormDrawer theatreID={theatre._id} onSubmitSuccess={onScreenSubmit}>
                     <Button variant="link" className="text-neutral-400 hover:text-black p-2">
                         <Plus /> Screen
                     </Button>

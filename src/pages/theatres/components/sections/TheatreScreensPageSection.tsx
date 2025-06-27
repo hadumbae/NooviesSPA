@@ -4,11 +4,11 @@ import {ChevronRight, Plus} from "lucide-react";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import TheatreScreenPreviewCard from "@/pages/theatres/components/screens/preview/TheatreScreenPreviewCard.tsx";
 
 interface Props {
-    screens: Screen[];
+    screens: ScreenDetails[];
     theatreID: ObjectId;
 }
 

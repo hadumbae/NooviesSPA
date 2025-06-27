@@ -34,15 +34,11 @@ const TheatrePage: FC = () => {
 
             <TheatreDetailsHeader theatre={theatre}/>
 
-            {/* Details */}
-
-            <TheatreDetailsCard theatre={theatre}/>
-
-            {/* Screens */}
+            <PageSection srTitle="Theatre Details Card">
+                <TheatreDetailsCard theatre={theatre}/>
+            </PageSection>
 
             <TheatreScreensPageSection screens={screens} theatreID={theatre._id}/>
-
-            {/* Showings */}
 
             <PageSection title="Showings">
                 {/* TODO Paginated Showings */}

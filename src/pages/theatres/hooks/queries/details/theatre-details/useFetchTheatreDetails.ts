@@ -4,15 +4,35 @@ import useFetchShowings from "@/pages/showings/hooks/queries/useFetchShowings.ts
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {TheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 
+import {PaginatedShowingSchema} from "@/pages/showings/schema/ShowingPaginationSchema.ts";
+import {PaginatedScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
+
 import {
     FetchTheatreDetailsParams
 } from "@/pages/theatres/hooks/queries/details/theatre-details/FetchTheatreDetailsParams.ts";
+
 import {
     FetchTheatreDetailsReturns
 } from "@/pages/theatres/hooks/queries/details/theatre-details/FetchTheatreDetailsReturns.ts";
-import {PaginatedShowingSchema} from "@/pages/showings/schema/ShowingPaginationSchema.ts";
-import {PaginatedScreenSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 
+/**
+ * Composite React Query hook that fetches full theatre details including:
+ * - Theatre metadata (with virtuals and population)
+ * - Paginated screens
+ * - Paginated showings
+ *
+ * It also performs schema validation using Zod to ensure response integrity.
+ * Returns both query and validation state, unified into a single object.
+ *
+ * @param params - Parameters including the theatre ID and pagination config for screens and showings.
+ * @returns An object containing:
+ * - `isPending`: Whether any of the queries are still loading
+ * - `isError`: Whether any of the queries failed
+ * - `queryError`: First query error encountered, if any
+ * - `parseSuccess`: Whether all queries passed validation
+ * - `parseError`: Combined validation error, if any
+ * - `data`: Parsed result or nulls if invalid
+ */
 export default function useFetchTheatreDetails(params: FetchTheatreDetailsParams): FetchTheatreDetailsReturns {
     const {theatreID, pagination: {screen: screenPagination = {}, showing: showingPagination = {}}} = params;
 
@@ -21,13 +41,28 @@ export default function useFetchTheatreDetails(params: FetchTheatreDetailsParams
     const {page: screenPage = 1, perPage: screenPerPage = 10} = screenPagination;
     const {page: showingPage = 1, perPage: showingPerPage = 10} = showingPagination;
 
-    // Fetch
-
-    const theatreQuery = useFetchTheatre({_id: theatreID, populate: true, virtuals: true});
-    const screenQuery = useFetchScreens({...baseQueries, paginated, page: screenPage, perPage: screenPerPage});
-    const showingQuery = useFetchShowings({...baseQueries, paginated, page: showingPage, perPage: showingPerPage});
-
     // Queries
+    const theatreQuery = useFetchTheatre({
+        _id: theatreID,
+        populate: true,
+        virtuals: true,
+    });
+
+    const screenQuery = useFetchScreens({
+        ...baseQueries,
+        paginated,
+        page: screenPage,
+        perPage: screenPerPage,
+        populate: true,
+        virtuals: true
+    });
+
+    const showingQuery = useFetchShowings({
+        ...baseQueries,
+        paginated,
+        page: showingPage,
+        perPage: showingPerPage,
+    });
 
     const queries = [theatreQuery, screenQuery, showingQuery];
 
@@ -47,7 +82,7 @@ export default function useFetchTheatreDetails(params: FetchTheatreDetailsParams
     const screenValidation = useValidateData({
         isPending,
         data: screenQuery.data,
-        schema: PaginatedScreenSchema,
+        schema: PaginatedScreenDetailsSchema,
         message: "Invalid Screen Data."
     });
 
@@ -55,7 +90,7 @@ export default function useFetchTheatreDetails(params: FetchTheatreDetailsParams
         isPending,
         data: showingQuery.data,
         schema: PaginatedShowingSchema,
-        message: "Invalid Screen Data."
+        message: "Invalid Showing Data."
     });
 
     const parseSuccess = theatreValidation.success && screenValidation.success && showingValidation.success;

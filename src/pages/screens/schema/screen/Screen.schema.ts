@@ -1,68 +1,87 @@
 import {z, ZodType} from "zod";
 import {IScreen} from "@/pages/screens/interfaces/IScreen.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
-import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
-import {ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
 import {ScreenTypeEnum} from "@/pages/screens/schema/ScreenType.enum.ts";
 import {IScreenDetails} from "@/pages/screens/interfaces/IScreenDetails.ts";
 import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
-import {ShowingPopulatedSchema} from "@/pages/showings/schema/populated/ShowingPopulatedSchema.ts";
+import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 
 /**
- * Base Zod schema for a Screen — core properties only.
+ * Base schema for a screen object.
+ *
+ * Contains fundamental screen fields: ID, name, capacity, and screen type.
  */
 export const ScreenBaseSchema = z.object({
+    /** Unique identifier for the screen */
     _id: IDStringSchema,
+
+    /** Human-readable screen name, required and max 255 characters */
     name: NonEmptyStringSchema.min(1, "Required.").max(255, "Name must be 255 characters or less."),
+
+    /** Total seating capacity; must be greater than 0 */
     capacity: RequiredNumberSchema.gt(0, "Capacity must be greater than 0"),
+
+    /** Enum representing the type of screen (e.g., standard, IMAX, 3D) */
     screenType: ScreenTypeEnum,
 });
 
 /**
- * Zod schema for screens when theatre may be embedded or referenced,
- * and seats/showings may be optional.
+ * Schema for a screen object including its theatre reference.
+ *
+ * Theatre may be represented as an ID or a full theatre object.
  */
 export const ScreenRawSchema = ScreenBaseSchema.extend({
+    /** Reference to the theatre the screen belongs to */
     theatre: z.union([IDStringSchema, z.lazy(() => TheatreSchema)]),
-    seats: z.array(z.lazy(() => SeatSchema)).optional(),
-    showings: z.array(z.lazy(() => ShowingSchema)).optional(),
 });
 
 /**
- * Zod schema for fully detailed screens.
- * Theatre, seats, and showings are all required and fully populated.
+ * Schema for a detailed screen object including enriched data.
+ *
+ * This includes the fully populated theatre, seat count, and number of upcoming showings.
  */
 export const ScreenDetailsRawSchema = ScreenBaseSchema.extend({
+    /** Fully populated theatre object */
     theatre: z.lazy(() => TheatreSchema),
-    seats: z.array(z.lazy(() => SeatSchema)),
-    showings: z.array(z.lazy(() => ShowingPopulatedSchema)),
+
+    /** Total number of seats in the screen */
+    seatCount: NonNegativeNumberSchema,
+
+    /** Number of future showings scheduled for the screen */
+    futureShowingCount: NonNegativeNumberSchema,
 });
 
 /**
- * Zod schema + TS type for minimal Screen (no relationships).
+ * Zod schema for validating basic screen data (`IScreen`).
  */
 export const ScreenSchema = ScreenRawSchema as ZodType<IScreen>;
 
 /**
- * Zod schema validating an array of basic screens.
- * Useful for endpoints returning multiple screens.
+ * Zod schema for an array of screen objects.
  */
 export const ScreenArraySchema = z.array(ScreenSchema);
 
 /**
- * Zod schema + TS type for Screen with full details.
- * Includes theatre, seats, and showings.
+ * Zod schema for validating detailed screen data (`IScreenDetails`),
+ * including populated theatre, seat count, and future showings.
  */
 export const ScreenDetailsSchema = ScreenDetailsRawSchema as ZodType<IScreenDetails>;
 
 /**
- * Zod schema for validating a paginated response of screens.
+ * Paginated Zod schema for basic screen data.
  *
- * This schema defines the structure of paginated screen data received
- * from an API. It includes the total number of items and the list of screens
- * on the current page.
+ * Includes pagination metadata (e.g., total count, page number)
+ * and an array of `ScreenSchema` items representing individual screens.
  */
 export const PaginatedScreenSchema = generatePaginationSchema(ScreenSchema);
+
+/**
+ * Paginated Zod schema for detailed screen data.
+ *
+ * Similar to `PaginatedScreenSchema` but uses `ScreenDetailsSchema` to include
+ * richer information such as theatre, seat count, and future showing count.
+ */
+export const PaginatedScreenDetailsSchema = generatePaginationSchema(ScreenDetailsSchema);
