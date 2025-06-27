@@ -20,15 +20,15 @@ const TheatreDetailsCard: FC<Props> = ({theatre}) => {
 
     return (
         <Card>
-            <CardContent className="p-4 flex flex-col space-y-5">
+            <CardContent className="p-4 flex flex-col space-y-4">
                 <DetailsCardSpan label="Name" text={name} />
 
                 <DetailsCardSpan label="Location" text={location} />
 
-                <div className="flex justify-between items-center">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <DetailsCardSpan label="Seat Capacity" text={`${seatCapacity} seats`} />
-                    <DetailsCardSpan label="Registered Screens" text={`${screenCount} screens`} />
                     <DetailsCardSpan label="Registered Seats" text={`${seatCount} seats`} />
+                    <DetailsCardSpan label="Registered Screens" text={`${screenCount} screens`} />
                     <DetailsCardSpan label="Upcoming Showings" text={`${futureShowingCount} showings`} />
                 </div>
             </CardContent>

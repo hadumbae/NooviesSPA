@@ -1,11 +1,11 @@
 import {FC} from 'react';
-import TheatreScreensPreviewList from "@/pages/theatres/components/screens/preview/TheatreScreensPreviewList.tsx";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {ChevronRight, Plus} from "lucide-react";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
+import TheatreScreenPreviewCard from "@/pages/theatres/components/screens/preview/TheatreScreenPreviewCard.tsx";
 
 interface Props {
     screens: Screen[];
@@ -15,14 +15,17 @@ interface Props {
 const TheatreScreensPageSection: FC<Props> = ({screens, theatreID}) => {
     if (screens.length > 0) {
         return (
-            <PageSection title="Screens">
-                <section className="grid grid-cols-2 gap-3">
-                    <TheatreScreensPreviewList screens={screens}/>
+            <PageSection title="Screens" className="space-y-3">
+                <section className="grid grid-cols-1 gap-3">
+                    {screens.map(screen => <TheatreScreenPreviewCard key={screen._id} screen={screen}/>)}
                 </section>
 
                 <section className="flex justify-end items-center">
-                    <ButtonLink className="text-gray-400 hover:text-black" to={`/admin/theatres/get/${theatreID}/screens`}>
-                        <ChevronRight /> More Details
+                    <ButtonLink
+                        className="text-gray-400 hover:text-black"
+                        to={`/admin/theatres/get/${theatreID}/screens`}
+                    >
+                        <ChevronRight/> More Details
                     </ButtonLink>
                 </section>
             </PageSection>
@@ -45,7 +48,7 @@ const TheatreScreensPageSection: FC<Props> = ({screens, theatreID}) => {
                     to={`/admin/theatres/get/${theatreID}/screens`}
                     size="sm"
                 >
-                    <Plus /> Add Screens
+                    <Plus/> Add Screens
                 </ButtonLink>
             </section>
         </PageSection>
