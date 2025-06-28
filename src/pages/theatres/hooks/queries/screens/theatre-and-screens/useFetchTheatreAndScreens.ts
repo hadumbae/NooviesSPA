@@ -35,19 +35,28 @@ export default function useFetchTheatreAndScreens(
     // Query
 
     const theatreQuery = useFetchTheatre({_id: theatreID, virtuals: true, populate: true});
-    const screenQuery = useFetchScreens(screenQueryParams);
+    const paginatedScreenQuery = useFetchScreens(screenQueryParams);
 
-    const isPending = theatreQuery.isPending || screenQuery.isPending;
-    const isError = theatreQuery.isPending || screenQuery.isPending;
-    const queryError = [theatreQuery, screenQuery].find(query => query.error)?.error ?? null;
+    const isPending = theatreQuery.isPending || paginatedScreenQuery.isPending;
+    const isError = theatreQuery.isPending || paginatedScreenQuery.isPending;
+    const queryError = [theatreQuery, paginatedScreenQuery].find(query => query.error)?.error ?? null;
 
     // Validation
 
-    const theatreValidation = useValidateData({isPending, data: theatreQuery.data, schema: TheatreDetailsSchema});
-    const screenValidation = useValidateData({isPending, data: screenQuery.data, schema: PaginatedScreenDetailsSchema});
+    const theatreValidation = useValidateData({
+        isPending,
+        data: theatreQuery.data,
+        schema: TheatreDetailsSchema,
+    });
 
-    const parseSuccess = theatreValidation.success && screenValidation.success;
-    const parseError = theatreValidation.error ?? screenValidation.error ?? null;
+    const paginatedScreenValidation = useValidateData({
+        isPending,
+        data: paginatedScreenQuery.data,
+        schema: PaginatedScreenDetailsSchema,
+    });
+
+    const parseSuccess = theatreValidation.success && paginatedScreenValidation.success;
+    const parseError = theatreValidation.error ?? paginatedScreenValidation.error ?? null;
 
     // Returns
 
@@ -63,7 +72,7 @@ export default function useFetchTheatreAndScreens(
     }
 
     return {
-        data: {theatre: theatreValidation.data, screens: screenValidation.data},
+        data: {theatre: theatreValidation.data, screens: paginatedScreenValidation.data},
         parseSuccess: true,
         parseError: null,
         ...baseReturns,

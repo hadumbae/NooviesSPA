@@ -15,7 +15,7 @@ interface Props {
 }
 
 const TheatreScreenCard: FC<Props> = ({screen, onDelete}) => {
-    const {_id, name, screenType, capacity, seatCount, futureShowingCount} = screen;
+    const {_id, theatre, name, screenType, capacity, seatCount, futureShowingCount} = screen;
 
     return (
         <Card>
@@ -30,7 +30,11 @@ const TheatreScreenCard: FC<Props> = ({screen, onDelete}) => {
                     </Link>
 
                     <section className="flex items-center space-x-2 text-neutral-500">
-                        <ButtonLink to={`/admin/screens/get/${_id}`} variant="outline" size="sm">
+                        <ButtonLink
+                            to={`/admin/theatres/get/${theatre._id}/screen/${_id}`}
+                            variant="outline"
+                            size="sm"
+                        >
                             <Search />
                         </ButtonLink>
 

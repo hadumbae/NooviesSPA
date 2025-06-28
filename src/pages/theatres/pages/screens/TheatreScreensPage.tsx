@@ -4,7 +4,7 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 
-import TheatreScreensIndexHeader from "@/pages/theatres/components/headers/TheatreScreensIndexHeader.tsx";
+import TheatreScreensIndexHeader from "@/pages/theatres/components/headers/admin/screens/TheatreScreensIndexHeader.tsx";
 
 import useFetchTheatreParams from "@/pages/theatres/hooks/params/useFetchTheatreParams.ts";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
@@ -14,15 +14,18 @@ import PageCenter from "@/common/components/page/PageCenter.tsx";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import TheatreScreensIndexBreadcrumbs
-    from "@/pages/theatres/components/breadcrumbs/admin/TheatreScreensIndexBreadcrumbs.tsx";
+    from "@/pages/theatres/components/breadcrumbs/admin/screens/TheatreScreensIndexBreadcrumbs.tsx";
 import TheatreScreenCard from "@/pages/theatres/components/screens/TheatreScreenCard.tsx";
 
 const TheatreScreensPage: FC = () => {
-    const {theatreID: _id} = useFetchTheatreParams();
+    const urlParams = useFetchTheatreParams();
+    if (!urlParams) return <PageLoader />;
+
+    const {theatreID} = urlParams;
     const {page, perPage} = usePaginationSearchParams({perPage: "10"});
 
     const {data, isPending, isError, queryError, parseError, parseSuccess} = useFetchTheatreAndScreens({
-        theatreID: _id!,
+        theatreID,
         screenOptions: {page, perPage},
     });
 
@@ -32,14 +35,14 @@ const TheatreScreensPage: FC = () => {
 
     const {theatre, screens: paginatedScreens} = data;
 
-    const {_id: theatreID, name: theatreName} = theatre;
+    const {_id, name: theatreName} = theatre;
     const {items: screens} = paginatedScreens;
 
     const hasScreens = screens.length > 0;
 
     return (
         <PageFlexWrapper>
-            <TheatreScreensIndexBreadcrumbs theatreID={theatreID} theatreName={theatreName}/>
+            <TheatreScreensIndexBreadcrumbs theatreID={_id} theatreName={theatreName}/>
             <TheatreScreensIndexHeader theatre={theatre!}/>
 
             {
