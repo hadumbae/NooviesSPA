@@ -19,10 +19,11 @@ import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
  * const { data, isLoading, error } = useFetchScreen({ _id: someId, populate: true });
  * ```
  */
-export default function useFetchScreen({_id, populate = false}: FetchByIDParams) {
-    const queryKey = ["fetch_single_screen", {_id, populate}];
+export default function useFetchScreen({_id, ...fetchOptions}: FetchByIDParams) {
+    const queryKey = ["fetch_single_screen", {_id, ...fetchOptions}];
+
     const fetchScreen = useQueryFnHandler({
-        action: () => ScreenRepository.get({_id, populate}),
+        action: () => ScreenRepository.get({_id, ...fetchOptions}),
         errorMessage: "Failed to fetch screen data. Please try again.",
     })
 

@@ -16,6 +16,11 @@ export const NonNegativeNumberSchema = z
     .number({required_error: "Required.", invalid_type_error: "Must be a number."})
     .nonnegative({message: "Must be at least 0."});
 
+export const CoercedNonNegativeNumberSchema = z
+    .coerce
+    .number({required_error: "Required.", invalid_type_error: "Must be a number."})
+    .nonnegative({message: "Must be at least 0."});
+
 /**
  * Zod schema for validating a required non-negative number.
  *

@@ -4,7 +4,7 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 
-import TheatreScreensIndexHeader from "@/pages/theatres/components/headers/admin/screens/TheatreScreensIndexHeader.tsx";
+import TheatreScreensIndexHeader from "@/pages/screens/components/theatre-screens/admin/headers/TheatreScreensIndexHeader.tsx";
 
 import useFetchTheatreParams from "@/pages/theatres/hooks/params/useFetchTheatreParams.ts";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
@@ -14,7 +14,7 @@ import PageCenter from "@/common/components/page/PageCenter.tsx";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import TheatreScreensIndexBreadcrumbs
-    from "@/pages/theatres/components/breadcrumbs/admin/screens/TheatreScreensIndexBreadcrumbs.tsx";
+    from "@/pages/screens/components/theatre-screens/admin/breadcrumbs/TheatreScreensIndexBreadcrumbs.tsx";
 import TheatreScreenCard from "@/pages/theatres/components/screens/TheatreScreenCard.tsx";
 
 const TheatreScreensPage: FC = () => {
