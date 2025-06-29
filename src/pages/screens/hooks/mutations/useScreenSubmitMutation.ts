@@ -4,7 +4,7 @@ import {ScreenForm, ScreenFormValues} from "@/pages/screens/schema/forms/ScreenF
 import {FormMutationResultParams} from "@/common/type/form/FormMutationResultParams.ts";
 import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
 import {toast} from "react-toastify";
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
 import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
 import {ScreenSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
@@ -18,6 +18,7 @@ export type ScreenSubmitMutationParams = FormMutationResultParams<Screen> & {
 export default function useScreenSubmitMutation(
     {_id, form, isEditing, onSubmitSuccess, onSubmitError, successMessage, errorMessage}: ScreenSubmitMutationParams
 ) {
+    const queryClient = useQueryClient();
     const mutationKey = ['submit_screen_data'];
 
     const submitScreenData = async (values: ScreenForm) => {
@@ -37,6 +38,8 @@ export default function useScreenSubmitMutation(
     }
 
     const onSuccess = async (screen: Screen) => {
+        await queryClient.invalidateQueries({queryKey: ["fetch_screen_by_query"], exact: false});
+
         const message = isEditing ? "Screen updated successfully." : "Screen created successfully.";
         toast.success(successMessage || message)
 
