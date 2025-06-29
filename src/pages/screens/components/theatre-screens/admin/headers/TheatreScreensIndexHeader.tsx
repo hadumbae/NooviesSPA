@@ -20,7 +20,7 @@ const TheatreScreensIndexHeader: FC<Props> = ({theatre, onScreenSubmit}) => {
     return (
         <header className={cn("flex", "justify-between items-center")}>
             <section>
-                <HeaderTitle>{name}</HeaderTitle>
+                <HeaderTitle>{name} | Screens</HeaderTitle>
                 <HeaderDescription>Theatre's Screens</HeaderDescription>
             </section>
 

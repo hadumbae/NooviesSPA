@@ -1,10 +1,10 @@
 import {FC} from 'react';
 
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import PageSection from "@/common/components/page/PageSection.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 
-import TheatreScreensIndexHeader from "@/pages/screens/components/theatre-screens/admin/headers/TheatreScreensIndexHeader.tsx";
+import TheatreScreensIndexHeader
+    from "@/pages/screens/components/theatre-screens/admin/headers/TheatreScreensIndexHeader.tsx";
 
 import useFetchTheatreParams from "@/pages/theatres/hooks/params/useFetchTheatreParams.ts";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
@@ -15,14 +15,15 @@ import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import TheatreScreensIndexBreadcrumbs
     from "@/pages/screens/components/theatre-screens/admin/breadcrumbs/TheatreScreensIndexBreadcrumbs.tsx";
-import TheatreScreenCard from "@/pages/theatres/components/screens/TheatreScreenCard.tsx";
+import TheatreScreenPageSection
+    from "@/pages/screens/components/theatre-screens/admin/page-sections/TheatreScreenPageSection.tsx";
 
 const TheatreScreensPage: FC = () => {
     const urlParams = useFetchTheatreParams();
-    if (!urlParams) return <PageLoader />;
+    if (!urlParams) return <PageLoader/>;
 
     const {theatreID} = urlParams;
-    const {page, perPage} = usePaginationSearchParams({perPage: "10"});
+    const {page, perPage} = usePaginationSearchParams({perPage: "20"});
 
     const {data, isPending, isError, queryError, parseError, parseSuccess} = useFetchTheatreAndScreens({
         theatreID,
@@ -36,7 +37,7 @@ const TheatreScreensPage: FC = () => {
     const {theatre, screens: paginatedScreens} = data;
 
     const {_id, name: theatreName} = theatre;
-    const {items: screens} = paginatedScreens;
+    const {items: screens, totalItems} = paginatedScreens;
 
     const hasScreens = screens.length > 0;
 
@@ -47,11 +48,16 @@ const TheatreScreensPage: FC = () => {
 
             {
                 hasScreens
-                    ? <PageSection className="grid grid-cols-1 gap-3">
-                        {screens.map((screen) => <TheatreScreenCard key={screen._id} screen={screen}/>)}
-                    </PageSection>
+                    ? <TheatreScreenPageSection
+                        screens={screens}
+                        page={page}
+                        perPage={perPage}
+                        totalItems={totalItems}
+                    />
                     : <PageCenter>
-                        <span className="text-neutral-400 select-none">There Are No Screens</span>
+                        <span className="text-neutral-400 select-none">
+                            There Are No Screens
+                        </span>
                     </PageCenter>
             }
 

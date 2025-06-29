@@ -1,4 +1,4 @@
-import {FC, PropsWithChildren} from 'react';
+import {FC, HTMLAttributeAnchorTarget, PropsWithChildren} from 'react';
 import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {Link, To} from "react-router-dom";
@@ -10,15 +10,21 @@ interface Props {
     className?: string;
     variant?: ButtonVariant;
     size?: ButtonSize;
+    target?:  HTMLAttributeAnchorTarget;
 }
 
-const ButtonLink: FC<PropsWithChildren<Props>> = ({children, className, to, variant = "link", size = "default"}) => {
+const ButtonLink: FC<PropsWithChildren<Props>> = (
+    {children, className, to, target, variant = "link", size = "default"}
+) => {
     return (
-        <Link to={to} className={cn(
-            buttonVariants({variant, size}),
-            "text-neutral-400 hover:text-black",
-            className,
-        )}>
+        <Link
+            to={to}
+            target={target}
+            className={cn(
+                buttonVariants({variant, size}),
+                "text-neutral-400 hover:text-black",
+                className,
+            )}>
             {children}
         </Link>
     );
