@@ -1,4 +1,4 @@
-import {ZodObject, ZodRawShape} from "zod";
+import {z, ZodObject, ZodRawShape} from "zod";
 
 type ParseParams<TObject extends ZodRawShape> = {
     schema: ZodObject<TObject>;
@@ -7,12 +7,12 @@ type ParseParams<TObject extends ZodRawShape> = {
 
 export default function fetchParsedSearchParams<TObject extends ZodRawShape>(
     params: ParseParams<TObject>
-): Record<string, any> {
+): z.infer<ZodObject<TObject>> {
     const {schema, raw} = params;
 
     const defaultValues = schema.parse({});
     const schemaShape = schema.shape;
-    const parsedParams = {} as Record<string, any>;
+    const parsedParams = {} as z.infer<ZodObject<TObject>>;
 
     for (const key in schemaShape) {
         const validator = schemaShape[key];

@@ -1,6 +1,6 @@
 import {z} from "zod";
 import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
-import {ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
+import {ShowingDetailsSchema, ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
 
 /**
  * Zod schema for validating a paginated response of showings.
@@ -10,6 +10,7 @@ import {ShowingSchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
  * on the current page.
  */
 export const PaginatedShowingSchema = generatePaginationSchema(ShowingSchema);
+export const PaginatedShowingDetailsSchema = generatePaginationSchema(ShowingDetailsSchema);
 
 /**
  * Represents the TypeScript type inferred from `PaginatedShowingsSchema`.
@@ -18,3 +19,5 @@ export const PaginatedShowingSchema = generatePaginationSchema(ShowingSchema);
  * throughout the application.
  */
 export type PaginatedShowings = z.infer<typeof PaginatedShowingSchema>;
+export type PaginatedShowingDetails = z.infer<typeof PaginatedShowingDetailsSchema>;
+

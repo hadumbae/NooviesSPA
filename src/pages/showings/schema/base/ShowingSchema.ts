@@ -26,6 +26,13 @@ export const ShowingSchema: ZodType<IShowing> = ShowingBaseSchema.extend({
         .array(z.union([IDStringSchema, z.lazy(() => SeatMapSchema)])),
 });
 
+export const ShowingDetailsSchema = ShowingBaseSchema.extend({
+    movie: z.lazy(() => MovieSchema),
+    theatre: z.lazy(() => TheatreSchema),
+    screen: z.lazy(() => ScreenSchema),
+    seating: z.array(z.lazy(() => SeatMapSchema)),
+});
+
 /**
  * Zod schema for validating an array of `Showing` object.
  *
@@ -38,6 +45,7 @@ export const ShowingArraySchema = z.array(ShowingSchema);
  * Represents a single `Showing` object, inferred from `ShowingSchema`.
  */
 export type Showing = z.infer<typeof ShowingSchema>;
+export type ShowingDetails = z.infer<typeof ShowingDetailsSchema>;
 
 /**
  * Represents an array of `Showing` object, inferred from `ShowingArraySchema`.
