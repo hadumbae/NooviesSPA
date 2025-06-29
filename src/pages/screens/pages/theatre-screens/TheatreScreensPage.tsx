@@ -23,7 +23,7 @@ const TheatreScreensPage: FC = () => {
     if (!urlParams) return <PageLoader/>;
 
     const {theatreID} = urlParams;
-    const {page, perPage} = usePaginationSearchParams({perPage: "20"});
+    const {page, perPage, setPage} = usePaginationSearchParams({perPage: "20"});
 
     const {data, isPending, isError, queryError, parseError, parseSuccess} = useFetchTheatreAndScreens({
         theatreID,
@@ -53,6 +53,7 @@ const TheatreScreensPage: FC = () => {
                         page={page}
                         perPage={perPage}
                         totalItems={totalItems}
+                        setPage={setPage}
                     />
                     : <PageCenter>
                         <span className="text-neutral-400 select-none">
