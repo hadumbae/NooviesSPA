@@ -1,36 +1,30 @@
 import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.ts";
-import {useQuery} from "@tanstack/react-query";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
-import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 /**
- * React Query hook to fetch detailed theatre data by ID.
+ * React Query hook for fetching a single theatre by its ID.
  *
- * Uses `react-query` to manage the fetch state, caching, and background updates
- * for a single theatre's full detail, including optional population and virtuals.
+ * @template TData - The expected shape of the returned theatre data.
  *
- * @param _id - The unique string ID of the theatre to fetch.
- * @param requestOptions - Optional flags and parameters to control the response shape:
- * - `populate`: Whether to populate referenced documents (e.g., seats, screens).
- * - `virtuals`: Whether to include virtual properties in the response.
- * - `limit`: Optional limit on number of records (not commonly used for single fetch).
+ * @param {_id, ...requestOptions} - Parameters used to fetch the theatre.
+ *  - `_id`: The ID of the theatre to fetch.
+ *  - `requestOptions`: Additional options forwarded to the repository method (e.g. headers or context).
  *
- * @returns A React Query result object with the theatre data, loading status, error, etc.
+ * @returns A {@link UseQueryResult} object containing the theatre data, loading state, and error state.
  *
  * @example
  * ```ts
- * const { data, isLoading } = useFetchTheatre({
- *   _id: "64abc123ef5678...",
- *   populate: true,
- *   virtuals: true
- * });
+ * const { data, isLoading, error } = useFetchTheatre<TheatreDetails>({ _id: "abc123" });
  * ```
  */
-export default function useFetchTheatre({_id, ...requestOptions}: FetchByIDParams) {
+export default function useFetchTheatre<TData>(
+    {_id, ...requestOptions}: FetchByIDParams
+): UseQueryResult<TData> {
     const queryKey = ["fetch_single_theatre", {_id, ...requestOptions}];
 
-    const action = useQueryFnHandler<TheatreDetails>({
+    const action = useQueryFnHandler<TData>({
         action: () => TheatreRepository.get({_id, ...requestOptions}),
         errorMessage: "Failed to fetch theatre data. Please try again.",
     });
