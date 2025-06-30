@@ -22,6 +22,9 @@ type Props = FormMutationOnSubmitParams<Screen> & {
 
 const ScreenSubmitFormContainer: FC<Props> = (params) => {
     const {className, isEditing, screen, presetValues, disableFields, ...mutationOptions} = params;
+
+    console.log("Screen", screen);
+
     const form = useScreenSubmitForm({screen, presetValues});
 
     const mutationParams: ScreenSubmitMutationParams = isEditing

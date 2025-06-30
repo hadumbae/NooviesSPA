@@ -15,20 +15,27 @@ type PageSectionProps = {
 const TheatreScreenPageSection: FC<PageSectionProps> = ({screens, page, perPage, setPage, totalItems}) => {
     const hasPagination = totalItems > perPage;
 
-    return (
-        <PageSection srTitle="Screens Page Section" className="space-y-5">
-            <section>
-                <h1 className="sr-only">Paginated Screens</h1>
+    console.log("Total Items", totalItems);
+    console.log("Per Page", perPage);
+    console.log("Has Pagination", hasPagination);
 
-                <TheatreScreenAccordion screens={screens} />
+    return (
+        <PageSection srTitle="Screens Page Section" className="space-y-5 md:flex md:flex-col md:items-center">
+            <section className="md:w-1/2">
+                <h1 className="sr-only">Paginated Screens</h1>
+                <TheatreScreenAccordion screens={screens}/>
             </section>
 
             {
                 hasPagination &&
                 <section>
                     <h1 className="sr-only">Pagination</h1>
-
-                    <EllipsisPaginationButtons page={page} perPage={perPage} totalItems={totalItems} setPage={setPage}/>
+                    <EllipsisPaginationButtons
+                        page={page}
+                        perPage={perPage}
+                        totalItems={totalItems}
+                        setPage={setPage}
+                    />
                 </section>
             }
         </PageSection>

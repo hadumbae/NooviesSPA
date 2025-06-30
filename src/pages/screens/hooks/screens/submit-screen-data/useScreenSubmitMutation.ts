@@ -38,7 +38,7 @@ export default function useScreenSubmitMutation(
     }
 
     const onSuccess = async (screen: Screen) => {
-        await queryClient.invalidateQueries({queryKey: ["fetch_screen_by_query"], exact: false});
+        await queryClient.invalidateQueries({queryKey: ["fetch_screens_by_query"], exact: false});
 
         const message = isEditing ? "Screen updated successfully." : "Screen created successfully.";
         toast.success(successMessage || message)

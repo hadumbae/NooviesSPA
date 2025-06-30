@@ -23,7 +23,7 @@ const TheatreScreensPage: FC = () => {
     if (!urlParams) return <PageLoader/>;
 
     const {theatreID} = urlParams;
-    const {page, perPage, setPage} = usePaginationSearchParams({perPage: "20"});
+    const {page, perPage, setPage} = usePaginationSearchParams({perPage: "10"});
 
     const {data, isPending, isError, queryError, parseError, parseSuccess} = useFetchTheatreAndScreens({
         theatreID,

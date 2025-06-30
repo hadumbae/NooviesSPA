@@ -29,16 +29,22 @@ import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultP
 
 type FormDrawerProps = FormMutationOnSubmitParams<Screen> & {
     theatreID: ObjectId;
-}
+} & (
+    | { isEditing: true, screen: Screen }
+    | { isEditing?: false, screen?: never }
+);
 
-const TheatreScreenFormDrawer: FC<PropsWithChildren<FormDrawerProps>> = ({children, theatreID, ...formOptions}) => {
+const TheatreScreenFormDrawer: FC<PropsWithChildren<FormDrawerProps>> = (params) => {
     const [open, setOpen] = useState<boolean>(false);
     const isDesktop = !useIsMobile();
 
-    const {onSubmitSuccess} = formOptions;
+    const {children, theatreID, ...formOptions} = params
+    const {isEditing, screen, onSubmitSuccess} = formOptions;
 
     const presetValues = {theatre: theatreID};
     const disableFields: (keyof ScreenFormValues)[] = ["theatre"];
+
+    const title = isEditing ? `Edit | ${screen.name}` : "Add Screens";
 
     const onScreenAdd = (screen: Screen) => {
         setOpen(false);
@@ -51,7 +57,7 @@ const TheatreScreenFormDrawer: FC<PropsWithChildren<FormDrawerProps>> = ({childr
                 <DialogTrigger asChild>{children}</DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
-                        <DialogTitle>Add Screens</DialogTitle>
+                        <DialogTitle>{title}</DialogTitle>
                         <DialogDescription>Add new screens for the theatre here.</DialogDescription>
                     </DialogHeader>
 
@@ -69,20 +75,20 @@ const TheatreScreenFormDrawer: FC<PropsWithChildren<FormDrawerProps>> = ({childr
     return (
         <Drawer open={open} onOpenChange={setOpen} fadeFromIndex={0} snapPoints={[]}
         >
-            <DrawerTrigger asChild>
-                {children}
-            </DrawerTrigger>
+            <DrawerTrigger asChild>{children}</DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader className="text-left">
-                    <DrawerTitle>Add Screens</DrawerTitle>
+                    <DrawerTitle>{title}</DrawerTitle>
                     <DrawerDescription>Add new screens for the theatre here.</DrawerDescription>
                 </DrawerHeader>
 
-                {/* Contents */}
-                {/*<TheatreScreenSubmitFormContainer theatreID={theatreID} onSubmit={onScreenAdd} className="px-4" />*/}
-                <ScreenSubmitFormContainer onSubmitSuccess={onScreenAdd} presetValues={presetValues}
-                                           disableFields={disableFields} className="px-4"/>;
-
+                <ScreenSubmitFormContainer
+                    {...formOptions}
+                    onSubmitSuccess={onScreenAdd}
+                    presetValues={presetValues}
+                    disableFields={disableFields}
+                    className="px-4"
+                />;
 
                 <DrawerFooter className="pt-2">
                     <DrawerClose asChild>

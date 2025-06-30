@@ -20,7 +20,7 @@ export default function useScreenDeleteMutation({onDelete}: Params = {}) {
 
     const onSuccess = async () => {
         toast.success("Screen deleted.");
-        await queryClient.invalidateQueries({queryKey: ["fetch_screen_by_query"], exact: false});
+        await queryClient.invalidateQueries({queryKey: ["fetch_screens_by_query"], exact: false});
 
         onDelete && onDelete();
     };

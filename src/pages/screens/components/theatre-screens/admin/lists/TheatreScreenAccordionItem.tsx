@@ -1,12 +1,14 @@
 import {FC} from 'react';
-import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {Screen, ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {AccordionContent, AccordionItem, AccordionTrigger} from "@/common/components/ui/accordion.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
-import {Search, Trash} from "lucide-react";
+import {Pencil, Search, Trash} from "lucide-react";
 import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
-import {buttonVariants} from "@/common/components/ui/button.tsx";
+import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import TheatreScreenFormDrawer
+    from "@/pages/screens/components/theatre-screens/admin/forms/TheatreScreenFormDrawer.tsx";
 
 type ScreenItemProps = {
     screen: ScreenDetails;
@@ -14,6 +16,8 @@ type ScreenItemProps = {
 
 const TheatreScreenAccordionItem: FC<ScreenItemProps> = ({screen}) => {
     const {_id, name, screenType, seatCount, capacity, futureShowingCount, theatre} = screen;
+
+    const simpleScreen: Screen = {...screen, theatre: theatre._id};
 
     return (
         <AccordionItem key={_id} value={`item-${_id}`}>
@@ -39,6 +43,12 @@ const TheatreScreenAccordionItem: FC<ScreenItemProps> = ({screen}) => {
                     >
                         <Search/> Details
                     </ButtonLink>
+
+                    <TheatreScreenFormDrawer theatreID={theatre._id} isEditing={true} screen={simpleScreen}>
+                        <Button variant="outline" size="sm" className="text-neutral-400 hover:text-black">
+                            <Pencil /> Editing
+                        </Button>
+                    </TheatreScreenFormDrawer>
 
                     <ScreenDeleteWarningDialog
                         screen={screen}

@@ -7,7 +7,7 @@ import {ScreenQueryFilters} from "@/pages/screens/schema/queries/ScreenQuery.typ
 export type FetchScreenQueries = RequestOptions & EntityPaginatedQuery & ScreenQueryFilters;
 
 export default function useFetchScreens(queries: FetchScreenQueries) {
-    const queryKey = ["fetch_screen_by_query", queries] as const;
+    const queryKey = ["fetch_screens_by_query", queries] as const;
 
     const queryAction = async () => {
         console.log("Screen Queries: ", queries);
