@@ -1,9 +1,9 @@
 import BaseLayout from "@/common/layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
-import ScreensPage from "@/pages/screens/pages/ScreensPage.tsx";
-import ScreenCreatePage from "@/pages/screens/pages/ScreenCreatePage.tsx";
-import ScreenEditPage from "@/pages/screens/pages/ScreenEditPage.tsx";
-import ScreenPage from "@/pages/screens/pages/ScreenPage.tsx";
+import ScreensPage from "@/pages/screens/pages/screens/admin/ScreensPage.tsx";
+import ScreenCreatePage from "@/pages/screens/pages/screens/admin/ScreenCreatePage.tsx";
+import ScreenEditPage from "@/pages/screens/pages/screens/admin/ScreenEditPage.tsx";
+import ScreenPage from "@/pages/screens/pages/screens/admin/ScreenPage.tsx";
 
 export default [
     {
