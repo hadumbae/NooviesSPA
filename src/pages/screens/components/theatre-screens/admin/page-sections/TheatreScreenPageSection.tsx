@@ -13,19 +13,24 @@ type PageSectionProps = {
 }
 
 const TheatreScreenPageSection: FC<PageSectionProps> = ({screens, page, perPage, setPage, totalItems}) => {
+    const hasPagination = totalItems > perPage;
+
     return (
-        <PageSection srTitle="Screens Page Section">
+        <PageSection srTitle="Screens Page Section" className="space-y-5">
             <section>
                 <h1 className="sr-only">Paginated Screens</h1>
 
                 <TheatreScreenAccordion screens={screens} />
             </section>
 
-            <section>
-                <h1 className="sr-only">Pagination</h1>
+            {
+                hasPagination &&
+                <section>
+                    <h1 className="sr-only">Pagination</h1>
 
-                <EllipsisPaginationButtons page={page} perPage={perPage} totalItems={totalItems} setPage={setPage} />
-            </section>
+                    <EllipsisPaginationButtons page={page} perPage={perPage} totalItems={totalItems} setPage={setPage}/>
+                </section>
+            }
         </PageSection>
     );
 };
