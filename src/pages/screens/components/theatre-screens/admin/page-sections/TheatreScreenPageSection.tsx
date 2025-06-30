@@ -1,8 +1,11 @@
 import {FC} from 'react';
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
-import TheatreScreenAccordion from "@/pages/screens/components/theatre-screens/admin/lists/TheatreScreenAccordion.tsx";
 import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
+import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+import TheatreScreenListTable from "@/pages/screens/components/theatre-screens/admin/lists/TheatreScreenListTable.tsx";
+import TheatreScreenDetailsDrawer
+    from "@/pages/screens/components/theatre-screens/admin/lists/TheatreScreenDetailsDrawer.tsx";
 
 type PageSectionProps = {
     screens: ScreenDetails[];
@@ -13,17 +16,21 @@ type PageSectionProps = {
 }
 
 const TheatreScreenPageSection: FC<PageSectionProps> = ({screens, page, perPage, setPage, totalItems}) => {
+    const isDesktop = !useIsMobile();
     const hasPagination = totalItems > perPage;
-
-    console.log("Total Items", totalItems);
-    console.log("Per Page", perPage);
-    console.log("Has Pagination", hasPagination);
 
     return (
         <PageSection srTitle="Screens Page Section" className="space-y-5 md:flex md:flex-col md:items-center">
-            <section className="md:w-1/2">
+            <section className="md:w-5/6">
                 <h1 className="sr-only">Paginated Screens</h1>
-                <TheatreScreenAccordion screens={screens}/>
+
+                {
+                    isDesktop
+                        ? <TheatreScreenListTable screens={screens}/>
+                        : <div className="grid grid-cols-1 gap-2">
+                            {screens.map(screen => <TheatreScreenDetailsDrawer screen={screen} />)}
+                        </div>
+                }
             </section>
 
             {
