@@ -50,6 +50,8 @@ const TheatreScreenPage: FC = () => {
                 screen={screen}
             />
 
+            {activeTab}
+
             <PageSection title="Seating" srTitle="Screen Seats">
 
             </PageSection>

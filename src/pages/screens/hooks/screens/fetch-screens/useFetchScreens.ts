@@ -1,10 +1,10 @@
-import {ScreenFilterQuery} from "@/pages/screens/schema/queries/ScreenFilterQuerySchema.ts";
 import {EntityPaginatedQuery, RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
 import {useQuery} from "@tanstack/react-query";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
+import {ScreenQueryFilters} from "@/pages/screens/schema/queries/ScreenQuery.types.ts";
 
-export type FetchScreenQueries = RequestOptions & EntityPaginatedQuery & ScreenFilterQuery;
+export type FetchScreenQueries = RequestOptions & EntityPaginatedQuery & ScreenQueryFilters;
 
 export default function useFetchScreens(queries: FetchScreenQueries) {
     const queryKey = ["fetch_screen_by_query", queries] as const;
