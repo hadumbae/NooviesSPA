@@ -6,7 +6,7 @@ import {Button} from "@/common/components/ui/button.tsx";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
-import ScreenTypeHookFormSelect from "@/pages/screens/components/inputs/ScreenTypeHookFormSelect.tsx";
+import ScreenTypeHookFormSelect from "@/pages/screens/components/submit-form/ScreenTypeHookFormSelect.tsx";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {ScreenForm, ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 

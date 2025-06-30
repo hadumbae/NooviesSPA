@@ -4,7 +4,7 @@ import useFetchScreenParams from "@/pages/screens/hooks/screens/params/useFetchS
 import useFetchScreen from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreen.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import ScreenSubmitFormContainer from "@/pages/screens/components/forms/ScreenSubmitFormContainer.tsx";
+import ScreenSubmitFormContainer from "@/pages/screens/components/submit-form/ScreenSubmitFormContainer.tsx";
 import ScreenEditHeader from "@/pages/screens/components/headers/ScreenEditHeader.tsx";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {ScreenSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";

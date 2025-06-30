@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import ScreenSubmitFormContainer from "@/pages/screens/components/forms/ScreenSubmitFormContainer.tsx";
+import ScreenSubmitFormContainer from "@/pages/screens/components/submit-form/ScreenSubmitFormContainer.tsx";
 import {useNavigate} from "react-router-dom";
 import ScreenCreateHeader from "@/pages/screens/components/headers/ScreenCreateHeader.tsx";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";

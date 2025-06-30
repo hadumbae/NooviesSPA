@@ -3,7 +3,7 @@ import useScreenSubmitForm from "@/pages/screens/hooks/screens/submit-screen-dat
 import useScreenSubmitMutation, {
     ScreenSubmitMutationParams
 } from "@/pages/screens/hooks/screens/submit-screen-data/useScreenSubmitMutation.ts";
-import ScreenSubmitFormView from "@/pages/screens/components/forms/ScreenSubmitFormView.tsx";
+import ScreenSubmitFormView from "@/pages/screens/components/submit-form/ScreenSubmitFormView.tsx";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {ScreenForm, ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";

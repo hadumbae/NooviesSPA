@@ -1,6 +1,6 @@
 import {FC, PropsWithChildren, useState} from 'react';
 
-import {Button} from "@/common/components/ui/button"
+import {Button} from "@/common/components/ui/button.tsx"
 import {
     Dialog,
     DialogContent,
@@ -8,7 +8,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/common/components/ui/dialog"
+} from "@/common/components/ui/dialog.tsx"
 import {
     Drawer,
     DrawerClose,
@@ -18,12 +18,12 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from "@/common/components/ui/drawer"
+} from "@/common/components/ui/drawer.tsx"
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
-import ScreenSubmitFormContainer from "@/pages/screens/components/forms/ScreenSubmitFormContainer.tsx";
+import ScreenSubmitFormContainer from "@/pages/screens/components/submit-form/ScreenSubmitFormContainer.tsx";
 import {ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 

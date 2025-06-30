@@ -10,25 +10,27 @@ import useFetchScreens from "@/pages/screens/hooks/screens/fetch-screens/useFetc
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
-import ScreenListCard from "@/pages/screens/components/ScreenListCard.tsx";
-import {PaginatedScreenSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
+import ScreenListCard from "@/pages/screens/components/lists/ScreenListCard.tsx";
+import {PaginatedScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
+import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
 
 const ScreensPage: FC = () => {
     useTitle("Screens")
 
-    const {page, perPage} = usePaginationSearchParams();
+    const {page, perPage, setPage} = usePaginationSearchParams({perPage: 15});
 
     const {data, isPending, isError, error: queryError} = useFetchScreens({
         page,
         perPage,
         paginated: true,
+        virtuals: true,
         populate: true
     });
 
     const {success, data: paginatedScreens, error: parseError} = useValidateData({
         data,
         isPending,
-        schema: PaginatedScreenSchema,
+        schema: PaginatedScreenDetailsSchema,
         message: "Invalid Movie Data.",
     });
 
@@ -36,7 +38,8 @@ const ScreensPage: FC = () => {
     if (isError) return <PageHTTPError error={queryError}/>
     if (!success) return <PageParseError error={parseError}/>
 
-    const {items: screens} = paginatedScreens;
+    const {items: screens, totalItems} = paginatedScreens;
+
     const hasScreens = (screens || []).length > 0;
 
     return (
@@ -45,8 +48,15 @@ const ScreensPage: FC = () => {
 
             {
                 hasScreens
-                    ? <PageSection>
+                    ? <PageSection className="space-y-5">
                         {screens.map((screen) => <ScreenListCard key={screen._id} screen={screen}/>)}
+
+                        <EllipsisPaginationButtons
+                            page={page}
+                            perPage={perPage}
+                            totalItems={totalItems}
+                            setPage={setPage}
+                        />
                     </PageSection>
                     : <PageCenter>
                         <span className="text-neutral-400 select-none">There Are No Screens</span>

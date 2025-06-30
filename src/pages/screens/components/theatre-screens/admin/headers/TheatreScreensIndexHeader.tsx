@@ -4,7 +4,7 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Plus} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
-import TheatreScreenFormDrawer from "@/pages/screens/components/forms/TheatreScreenFormDrawer.tsx";
+import TheatreScreenFormDrawer from "@/pages/screens/components/theatre-screens/admin/forms/TheatreScreenFormDrawer.tsx";
 
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
