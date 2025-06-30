@@ -6,7 +6,7 @@ import useTitle from "@/common/hooks/document/useTitle.ts";
 import ScreenIndexHeader from "@/pages/screens/components/headers/ScreenIndexHeader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
-import useFetchScreens from "@/pages/screens/hooks/queries/useFetchScreens.ts";
+import useFetchScreens from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreens.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";

@@ -11,7 +11,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/common/components/ui/alert-dialog"
-import useScreenDeleteMutation from "@/pages/screens/hooks/mutations/useScreenDeleteMutation.ts";
+import useScreenDeleteMutation from "@/pages/screens/hooks/screens/delete-screens/useScreenDeleteMutation.ts";
 import {Loader} from "lucide-react";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 

@@ -7,7 +7,7 @@ import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {ScreenArraySchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
-import useFetchScreens from "@/pages/screens/hooks/queries/useFetchScreens.ts";
+import useFetchScreens from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreens.ts";
 
 interface Props<TSubmit extends FieldValues> {
     name: Path<TSubmit>,
