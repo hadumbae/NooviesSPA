@@ -1,5 +1,5 @@
 import {SeatsByRowForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
 import SeatSubmitRepository from "@/pages/seats/repositories/seat-submit-repository/SeatSubmitRepository.ts";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
@@ -16,6 +16,8 @@ type SubmitMutationParams = FormMutationOnSubmitParams<unknown> & {
 export default function useSeatsByRowSubmitMutation(
     {form, successMessage, onSubmitSuccess, errorMessage, onSubmitError, validationSchema}: SubmitMutationParams
 ): UseMutationResult<unknown, Error, SeatsByRowForm> {
+    const queryClient = useQueryClient();
+
     const submitData = async (data: SeatsByRowForm) => {
         const action = () => SeatSubmitRepository.submitSeatsByRow({data});
 
@@ -30,8 +32,14 @@ export default function useSeatsByRowSubmitMutation(
         return parsedData;
     }
 
-    const onSuccess = (data: unknown) => {
+    const onSuccess = async (data: unknown) => {
         toast.success(successMessage ?? "Seats created successfully.");
+
+        await Promise.all([
+            queryClient.invalidateQueries({queryKey: ["fetch_seats_by_query"], exact: false}),
+            queryClient.invalidateQueries({queryKey: ["fetch_screen_seats_by_row"], exact: false}),
+        ]);
+
         onSubmitSuccess && onSubmitSuccess(data);
     }
 

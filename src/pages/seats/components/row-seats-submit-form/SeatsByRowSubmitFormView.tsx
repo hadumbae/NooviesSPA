@@ -11,10 +11,7 @@ import ScreenHookFormSelect from "@/pages/screens/components/submit-form/ScreenH
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import SeatTypeHookFormCombobox from "@/pages/seats/components/SeatTypeHookFormCombobox.tsx";
 import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
-
-// TODO
-// [] Interface
-// [] Disable Fields / Active Fields
+import {Loader} from "lucide-react";
 
 type FormViewProps = {
     form: UseFormReturn<SeatsByRowFormValues>;
@@ -25,7 +22,7 @@ type FormViewProps = {
 }
 
 const SeatsByRowSubmitFormView: FC<FormViewProps> = ({form, mutation, disableFields, submitHandler, className}) => {
-    const {data, isPending} = mutation;
+    const {isPending} = mutation;
 
     const activeFields = {
         row: !disableFields?.includes("row"),
@@ -41,96 +38,74 @@ const SeatsByRowSubmitFormView: FC<FormViewProps> = ({form, mutation, disableFie
     const theatre = form.watch("theatre");
     const hasTheatre = theatre !== null && theatre !== undefined && theatre !== "";
 
-    console.log("Data : ", data);
-
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-4", className)}>
-                {
-                    activeFields["theatre"] &&
-                    <TheatreHookFormSelect
-                        name="theatre"
-                        label="Theatre"
-                        control={form.control}
-                    />
-                }
+                <fieldset className="grid grid-cols-1 gap-4">
+                    {
+                        activeFields["theatre"] &&
+                        <TheatreHookFormSelect name="theatre" label="Theatre" control={form.control}/>
+                    }
 
-                {
-                    (hasTheatre && activeFields["screen"]) &&
-                    <ScreenHookFormSelect
-                        name="screen"
-                        label="Screen"
-                        filters={{theatre}}
-                        control={form.control}
-                    />
-                }
+                    {
+                        (hasTheatre && activeFields["screen"]) &&
+                        <ScreenHookFormSelect name="screen" label="Screen" filters={{theatre}} control={form.control}/>
+                    }
+                </fieldset>
 
-                {
-                    activeFields["row"] &&
-                    <HookFormInput
-                        name="row"
-                        label="Row"
-                        control={form.control}
-                    />
-                }
+                <fieldset className="grid grid-cols-2 gap-4">
+                    {
+                        activeFields["row"] &&
+                        <HookFormInput name="row" label="Row" control={form.control}/>
+                    }
 
-                {
-                    activeFields["y"] &&
-                    <HookFormInput
-                        name="y"
-                        label="Row (Y Coordinate)"
-                        type="number"
-                        min={1}
-                        step={1}
-                        control={form.control}
-                    />
-                }
+                    {
+                        activeFields["y"] &&
+                        <HookFormInput
+                            name="y"
+                            label="Y-Axis"
+                            type="number"
+                            min={1}
+                            step={1}
+                            control={form.control}
+                        />
+                    }
+                </fieldset>
 
-                {
-                    activeFields["numberOfSeats"] &&
-                    <HookFormInput
-                        name="numberOfSeats"
-                        label="Number Of Seats"
-                        type="number"
-                        min={1}
-                        step={1}
-                        control={form.control}
-                    />
-                }
+                <fieldset className="grid grid-cols-2 gap-4">
+                    {
+                        activeFields["numberOfSeats"] &&
+                        <HookFormInput
+                            name="numberOfSeats"
+                            label="Number Of Seats"
+                            type="number"
+                            min={1}
+                            step={1}
+                            control={form.control}
+                        />
+                    }
+
+                    {
+                        activeFields["priceMultiplier"] &&
+                        <HookFormInput name="priceMultiplier" label="Price Multiplier" control={form.control}/>
+                    }
+                </fieldset>
+
 
                 {
                     activeFields["seatType"] &&
-                    <SeatTypeHookFormCombobox
-                        form={form}
-                        name="seatType"
-                        label="Seat Type"
-                    />
+                    <SeatTypeHookFormCombobox form={form} name="seatType" label="Seat Type"/>
                 }
+
+
 
                 {
                     activeFields["priceMultiplier"] &&
-                    <HookFormInput
-                        name="priceMultiplier"
-                        label="Price Multiplier"
-                        control={form.control}
-                    />
+                    <HookFormCheckbox name="isAvailable" label="Is Available?" control={form.control}/>
                 }
 
-                {
-                    activeFields["priceMultiplier"] &&
-                    <HookFormCheckbox
-                        name="isAvailable"
-                        label="Is Available?"
-                        control={form.control}
-                    />
-                }
-
-                <Button
-                    variant="default"
-                    disabled={isPending}
-                    className="w-full bg-primary"
-                >
-                    Submit
+                <Button variant="default" disabled={isPending} className="w-full bg-primary">
+                    {isPending ? <Loader/> : "Submit"}
                 </Button>
             </form>
         </Form>
