@@ -1,4 +1,4 @@
-import {PositiveNumber} from "@/common/schema/numbers/PositiveNumberSchema.ts";
+import {PositiveNumber} from "@/common/schema/numbers/positive-number/PositiveNumber.types.ts";
 
 /**
  * Represents metadata for an image stored on Cloudinary.
