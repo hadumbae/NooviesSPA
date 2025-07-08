@@ -2,7 +2,7 @@ import {MovieCreditFormBaseSchema} from "@/pages/moviecredit/schemas/model/form/
 import {z} from "zod";
 import unionWithEmptyString from "@/common/utility/schemas/unionWithEmptyString.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/PositiveNumberSchema.ts";
+import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 
 /**
  * Zod schema for validating form values when submitting a cast (actor/actress) role in a movie credit form.

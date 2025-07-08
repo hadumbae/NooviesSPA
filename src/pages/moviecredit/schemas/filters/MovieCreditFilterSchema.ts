@@ -3,7 +3,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {RoleTypeEnumSchema} from "@/pages/moviecredit/schemas/enums/RoleTypeEnumSchema.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/PositiveNumberSchema.ts";
+import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 
 /**
  * Schema for validating query parameters used to filter movie credits.
