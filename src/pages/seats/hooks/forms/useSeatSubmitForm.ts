@@ -4,10 +4,10 @@ import {SeatFormSchema} from "@/pages/seats/schema/form/SeatForm.schema.ts";
 
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
-import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 
 type SeatFormParams = {
-    presetValues?: Partial<SeatForm>;
+    presetValues?: Partial<SeatFormValues>;
     seat?: Seat
 }
 
