@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import TheatreScreenDetailsBreadcrumbs
-    from "@/pages/screens/components/theatre-screens/admin/breadcrumbs/TheatreScreenDetailsBreadcrumbs.tsx";
+    from "@/pages/screens/components/theatre-screen/admin/breadcrumbs/TheatreScreenDetailsBreadcrumbs.tsx";
 import useFetchTheatreScreenParams from "@/pages/theatres/hooks/params/useFetchTheatreScreenParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import useTheatreScreenDetailQueries
@@ -9,26 +9,17 @@ import useTheatreScreenDetailQueries
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import TheatreScreenDetailsHeader
-    from "@/pages/screens/components/theatre-screens/admin/headers/TheatreScreenDetailsHeader.tsx";
-import PageSection from "@/common/components/page/PageSection.tsx";
-import useTheatreScreenSearchParams from "@/pages/screens/hooks/theatre-screens/params/useTheatreScreenSearchParams.ts";
+    from "@/pages/screens/components/theatre-screen/admin/headers/TheatreScreenDetailsHeader.tsx";
 import useValidateTheatreScreenDetails
     from "@/pages/theatres/hooks/queries/screens/theatre-screen-details/useValidateTheatreScreenDetails.ts";
+import TheatreScreenPageTabs from "@/pages/screens/components/theatre-screen/admin/tabs/TheatreScreenPageTabs.tsx";
 
 const TheatreScreenPage: FC = () => {
     const urlParams = useFetchTheatreScreenParams();
     if (!urlParams) return <PageLoader/>;
 
     const {theatreID, screenID} = urlParams;
-    const {searchParams} = useTheatreScreenSearchParams();
-    const {activeTab, ...paginationOptions} = searchParams;
-
-    const {queries, isPending, isError, error: queryError} = useTheatreScreenDetailQueries({
-        theatreID,
-        screenID,
-        paginationOptions
-    });
-
+    const {queries, isPending, isError, error: queryError} = useTheatreScreenDetailQueries({theatreID, screenID});
     const {data, success, error: parseError} = useValidateTheatreScreenDetails({isPending, queries});
 
     if (isPending) return <PageLoader/>;
@@ -50,11 +41,10 @@ const TheatreScreenPage: FC = () => {
                 screen={screen}
             />
 
-            {activeTab}
-
-            <PageSection title="Seating" srTitle="Screen Seats">
-
-            </PageSection>
+            <TheatreScreenPageTabs
+                theatreID={theatre._id}
+                screenID={screen._id}
+            />
         </PageFlexWrapper>
     );
 };

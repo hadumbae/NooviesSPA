@@ -1,7 +1,7 @@
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {DateStringSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/PositiveNumberSchema.ts";
+import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
 

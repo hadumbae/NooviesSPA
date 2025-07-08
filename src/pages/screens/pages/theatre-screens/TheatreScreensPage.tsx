@@ -34,12 +34,13 @@ const TheatreScreensPage: FC = () => {
     if (isError) return <PageHTTPError error={queryError}/>;
     if (!parseSuccess) return <PageParseError error={parseError}/>;
 
-    const {theatre, screens: paginatedScreens} = data;
-
+    const {theatre, screens: {items: screens, totalItems: totalScreens}} = data;
     const {_id, name: theatreName} = theatre;
-    const {items: screens, totalItems} = paginatedScreens;
+
 
     const hasScreens = screens.length > 0;
+    const totalPages = Math.ceil(totalScreens / perPage);
+    if (page > totalPages) setPage(totalPages);
 
     return (
         <PageFlexWrapper>
@@ -52,7 +53,7 @@ const TheatreScreensPage: FC = () => {
                         screens={screens}
                         page={page}
                         perPage={perPage}
-                        totalItems={totalItems}
+                        totalItems={totalScreens}
                         setPage={setPage}
                     />
                     : <PageCenter>
