@@ -12,9 +12,10 @@ import SeatTypeHookFormCombobox from "@/pages/seats/components/SeatTypeHookFormC
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
-import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 
 type FormProps = {
     className?: string;

@@ -5,8 +5,9 @@ import useSeatSubmitMutation, {
     SeatSubmitMutationFormParams
 } from "@/pages/seats/hooks/mutations/useSeatSubmitMutation.ts";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
-import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import SeatSubmitFormView from "@/pages/seats/components/forms/submit-form/SeatSubmitFormView.tsx";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 
 type FormProps = {
     className?: string;
