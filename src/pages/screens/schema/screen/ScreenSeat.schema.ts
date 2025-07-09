@@ -25,6 +25,15 @@ export const SeatsByRowSchema = SeatsByRowBaseSchema.extend({
 });
 
 /**
+ * Schema representing an array of {@link SeatsByRowSchema}.
+ * Used when multiple rows of seats need to be validated together.
+ */
+export const SeatsByRowArraySchema = z.array(
+    SeatsByRowSchema,
+    {message: "Must be an array of seats by row."},
+);
+
+/**
  * Schema representing a group of seats in a row,
  * where each seat is represented as a {@link SeatDetails} with full details.
  * Includes the row identifier, number of seats, and an array of detailed seats.
@@ -35,3 +44,12 @@ export const SeatDetailsByRowSchema = SeatsByRowBaseSchema.extend({
         {message: "Must be an array of seats with details."},
     ),
 });
+
+/**
+ * Schema representing an array of {@link SeatDetailsByRowSchema}.
+ * Used when multiple rows of fully detailed seats need to be validated together.
+ */
+export const SeatDetailsByRowArraySchema = z.array(
+    SeatDetailsByRowSchema,
+    {message: "Must be an array of seats by row."},
+);
