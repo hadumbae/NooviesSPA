@@ -9,7 +9,7 @@ import {Button} from "@/common/components/ui/button.tsx";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 import ScreenHookFormSelect from "@/pages/screens/components/submit-form/ScreenHookFormSelect.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import SeatTypeHookFormCombobox from "@/pages/seats/components/SeatTypeHookFormCombobox.tsx";
+import SeatTypeHookFormCombobox from "@/pages/seats/components/forms/inputs/SeatTypeHookFormCombobox.tsx";
 import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
 import {Loader} from "lucide-react";
 

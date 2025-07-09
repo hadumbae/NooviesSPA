@@ -8,7 +8,7 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
 
 import ScreenHookFormSelect from "@/pages/screens/components/submit-form/ScreenHookFormSelect.tsx";
-import SeatTypeHookFormCombobox from "@/pages/seats/components/SeatTypeHookFormCombobox.tsx";
+import SeatTypeHookFormCombobox from "@/pages/seats/components/forms/inputs/SeatTypeHookFormCombobox.tsx";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";

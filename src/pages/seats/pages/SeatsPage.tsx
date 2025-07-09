@@ -9,7 +9,7 @@ import useFetchSeats from "@/pages/seats/hooks/fetch/useFetchSeats.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
-import SeatListCard from "@/pages/seats/components/SeatListCard.tsx";
+import SeatListCard from "@/pages/seats/components/seats/admin/SeatListCard.tsx";
 import {PaginatedSeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 
 const SeatsPage: FC = () => {

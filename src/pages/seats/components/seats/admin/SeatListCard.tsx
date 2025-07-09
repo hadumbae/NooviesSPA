@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Link} from "react-router-dom";
-import SeatOptions from "@/pages/seats/components/SeatOptions.tsx";
+import SeatOptions from "@/pages/seats/components/seats/admin/SeatOptions.tsx";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
