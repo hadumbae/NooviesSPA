@@ -1,12 +1,9 @@
-"use client"
-
 import * as React from "react"
 import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
 import { cn } from "@/common/lib/utils"
-import {DialogTitle} from "@radix-ui/react-dialog";
 
 const Sheet = SheetPrimitive.Root
 
@@ -59,8 +56,6 @@ const SheetContent = React.forwardRef<
   SheetContentProps
 >(({ side = "right", className, children, ...props }, ref) => (
   <SheetPortal>
-      <DialogTitle className="sr-only">Sheet</DialogTitle>
-      <SheetDescription className="sr-only">Description</SheetDescription>
     <SheetOverlay />
     <SheetPrimitive.Content
       ref={ref}
