@@ -5,6 +5,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {CleanedNonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import {UndefinedStringSchema} from "@/common/schema/strings/UndefinedStringSchema.ts";
 
 /**
  * Base schema for a seat form.
@@ -40,7 +41,7 @@ export const SeatFormBaseSchema = z.object({
  */
 export const SeatFormSchema = SeatFormBaseSchema.extend({
     seatNumber: CleanedPositiveNumberSchema,
-    seatLabel: NonEmptyStringSchema.optional(),
+    seatLabel: UndefinedStringSchema,
     x: CleanedPositiveNumberSchema.optional(),
 });
 
