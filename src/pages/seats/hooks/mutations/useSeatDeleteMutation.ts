@@ -1,15 +1,15 @@
-import {useMutation} from "@tanstack/react-query";
+import  {useMutation, useQueryClient} from "@tanstack/react-query";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import {toast} from "react-toastify";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 
-interface Params {
-    onDelete?: () => void;
-}
+export default function useSeatDeleteMutation(params: FormMutationOnSubmitParams = {}) {
+    const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
 
-export default function useSeatDeleteMutation({onDelete}: Params) {
+    const queryClient = useQueryClient();
     const mutationKey = ["delete_single_seat"];
 
     const mutationFn = async ({_id}: {_id: ObjectId}) => {
@@ -17,14 +17,21 @@ export default function useSeatDeleteMutation({onDelete}: Params) {
         await useFetchErrorHandler({fetchQueryFn});
     }
 
-    const onSuccess = () => {
-        toast.success("Seat deleted.");
-        onDelete && onDelete();
+    const onSuccess = async () => {
+        toast.success(successMessage ?? "Seat deleted.");
+
+        await Promise.all([
+            queryClient.invalidateQueries({queryKey: ["fetch_seats_by_query"], exact: false}),
+            queryClient.invalidateQueries({queryKey: ["fetch_screen_seats_by_row"], exact: false}),
+        ]);
+
+        onSubmitSuccess && onSubmitSuccess();
     };
 
     const onError = (error: Error | ParseError) => {
-        const {message = "Oops. Something went wrong. Please try again."} = error;
-        toast.error(message);
+        const {message} = error;
+        toast.error(errorMessage ?? message ?? "Oops. Something went wrong. Please try again.");
+        onSubmitError && onSubmitError(error);
     }
 
     return useMutation({mutationKey, mutationFn, onSuccess, onError});

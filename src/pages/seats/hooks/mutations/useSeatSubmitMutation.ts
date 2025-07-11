@@ -2,7 +2,7 @@ import {UseFormReturn} from "react-hook-form";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {FormMutationResultParams} from "@/common/type/form/FormMutationResultParams.ts";
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
 import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import {toast} from "react-toastify";
@@ -26,6 +26,7 @@ export default function useSeatSubmitMutation(params: SeatSubmitMutationFormPara
         onSubmitError,
     } = params;
 
+    const queryClient = useQueryClient();
     const mutationKey = ['submit_seat_data'];
 
     const submitSeatData = async (values: SeatForm) => {
@@ -44,8 +45,13 @@ export default function useSeatSubmitMutation(params: SeatSubmitMutationFormPara
         return parsedData;
     }
 
-    const onSuccess = (seat: Seat) => {
+    const onSuccess = async (seat: Seat) => {
         toast.success(successMessage || `Seat ${isEditing ? "updated" : "created"} successfully.`);
+
+        await Promise.all([
+            queryClient.invalidateQueries({queryKey: ["fetch_seats_by_query"], exact: false}),
+            queryClient.invalidateQueries({queryKey: ["fetch_screen_seats_by_row"], exact: false}),
+        ]);
 
         onSubmitSuccess && onSubmitSuccess(seat);
     }

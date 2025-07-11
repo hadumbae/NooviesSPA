@@ -19,13 +19,16 @@ export default function useSeatSubmitForm(params?: SeatFormParams): UseFormRetur
 
     const defaultValues: SeatFormValues = {
         row: getDefaultValue(presetValues?.row, seat?.row, ""),
+        seatLabel: getDefaultValue(presetValues?.seatLabel, seat?.seatLabel, ""),
         seatNumber: getDefaultValue(presetValues?.seatNumber, seat?.seatNumber, ""),
         seatType: getDefaultValue(presetValues?.seatType, seat?.seatType, undefined),
         isAvailable: getDefaultValue(presetValues?.isAvailable, seat?.isAvailable, false),
         priceMultiplier: getDefaultValue(presetValues?.priceMultiplier, seat?.priceMultiplier, undefined),
+        x: getDefaultValue(presetValues?.x, seat?.x, ""),
+        y: getDefaultValue(presetValues?.y, seat?.y, ""),
         screen: getDefaultValue(presetValues?.screen, screen, undefined),
         theatre: getDefaultValue(presetValues?.theatre, theatre, undefined),
-    }
+    };
 
     return useForm<SeatFormValues>({
         resolver: zodResolver(SeatFormSchema),
