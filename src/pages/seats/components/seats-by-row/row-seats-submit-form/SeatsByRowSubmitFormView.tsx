@@ -9,9 +9,9 @@ import {Button} from "@/common/components/ui/button.tsx";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 import ScreenHookFormSelect from "@/pages/screens/components/submit-form/ScreenHookFormSelect.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import SeatTypeHookFormCombobox from "@/pages/seats/components/forms/inputs/SeatTypeHookFormCombobox.tsx";
 import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
 import {Loader} from "lucide-react";
+import SeatTypeHookFormSelect from "@/pages/seats/components/forms/inputs/SeatTypeHookFormSelect.tsx";
 
 type FormViewProps = {
     form: UseFormReturn<SeatsByRowFormValues>;
@@ -41,67 +41,84 @@ const SeatsByRowSubmitFormView: FC<FormViewProps> = ({form, mutation, disableFie
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-4", className)}>
-                <fieldset className="grid grid-cols-1 gap-4">
-                    {
-                        activeFields["theatre"] &&
-                        <TheatreHookFormSelect name="theatre" label="Theatre" control={form.control}/>
-                    }
+                {
+                    activeFields["theatre"] &&
+                    <TheatreHookFormSelect
+                        name="theatre"
+                        label="Theatre"
+                        control={form.control}
+                    />
+                }
 
-                    {
-                        (hasTheatre && activeFields["screen"]) &&
-                        <ScreenHookFormSelect name="screen" label="Screen" filters={{theatre}} control={form.control}/>
-                    }
-                </fieldset>
+                {
+                    (hasTheatre && activeFields["screen"]) &&
+                    <ScreenHookFormSelect
+                        name="screen"
+                        label="Screen"
+                        filters={{theatre}}
+                        control={form.control}
+                    />
+                }
 
-                <fieldset className="grid grid-cols-2 gap-4">
-                    {
-                        activeFields["row"] &&
-                        <HookFormInput name="row" label="Row" control={form.control}/>
-                    }
+                {
+                    activeFields["row"] &&
+                    <HookFormInput
+                        name="row"
+                        label="Row"
+                        control={form.control}
+                    />
+                }
 
-                    {
-                        activeFields["y"] &&
-                        <HookFormInput
-                            name="y"
-                            label="Y-Axis"
-                            type="number"
-                            min={1}
-                            step={1}
-                            control={form.control}
-                        />
-                    }
-                </fieldset>
+                {
+                    activeFields["y"] &&
+                    <HookFormInput
+                        name="y"
+                        label="Y-Axis"
+                        type="number"
+                        min={1}
+                        step={1}
+                        control={form.control}
+                    />
+                }
 
-                <fieldset className="grid grid-cols-2 gap-4">
-                    {
-                        activeFields["numberOfSeats"] &&
-                        <HookFormInput
-                            name="numberOfSeats"
-                            label="Number Of Seats"
-                            type="number"
-                            min={1}
-                            step={1}
-                            control={form.control}
-                        />
-                    }
+                {
+                    activeFields["numberOfSeats"] &&
+                    <HookFormInput
+                        name="numberOfSeats"
+                        label="Number Of Seats"
+                        type="number"
+                        min={1}
+                        step={1}
+                        control={form.control}
+                    />
+                }
 
-                    {
-                        activeFields["priceMultiplier"] &&
-                        <HookFormInput name="priceMultiplier" label="Price Multiplier" control={form.control}/>
-                    }
-                </fieldset>
-
+                {
+                    activeFields["priceMultiplier"] &&
+                    <HookFormInput
+                        name="priceMultiplier"
+                        label="Price Multiplier"
+                        control={form.control}
+                    />
+                }
 
                 {
                     activeFields["seatType"] &&
-                    <SeatTypeHookFormCombobox form={form} name="seatType" label="Seat Type"/>
+                    <SeatTypeHookFormSelect
+                        name="seatType"
+                        label="Seat Type"
+                        control={form.control}
+                    />
                 }
-
 
 
                 {
                     activeFields["priceMultiplier"] &&
-                    <HookFormCheckbox name="isAvailable" label="Is Available?" control={form.control}/>
+                    <HookFormCheckbox
+                        name="isAvailable"
+                        label="Is Available?"
+                        control={form.control}
+                    />
                 }
 
                 <Button variant="default" disabled={isPending} className="w-full bg-primary">

@@ -8,23 +8,26 @@ import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import SeatSubmitFormView from "@/pages/seats/components/forms/submit-form/SeatSubmitFormView.tsx";
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
+import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 
-type FormProps = {
-    className?: string;
-    onSubmitSuccess?: (seat: Seat) => void;
-    onSubmitError?: (error: Error) => void;
-} & (| {
+type FormEditingProps = {
     isEditing: true;
     seat: Seat;
 } | {
     isEditing?: false;
     seat?: never;
-});
+};
+
+type FormProps = FormMutationOnSubmitParams<unknown> & {
+    className?: string;
+    presetValues?: Partial<SeatFormValues>;
+    disableFields?: (keyof SeatFormValues)[];
+} & (| FormEditingProps);
 
 const SeatSubmitFormContainer: FC<FormProps> = (params) => {
-    const {className, isEditing, seat, ...formOptions} = params;
+    const {className, isEditing, seat, presetValues, disableFields, ...formOptions} = params;
 
-    const form = useSeatSubmitForm({seat});
+    const form = useSeatSubmitForm({seat, presetValues});
 
     const mutationParams: SeatSubmitMutationFormParams = isEditing
         ? {isEditing: true, form, _id: seat._id, ...formOptions}
@@ -60,6 +63,7 @@ const SeatSubmitFormContainer: FC<FormProps> = (params) => {
             form={form}
             mutation={mutation}
             submitHandler={onFormSubmit}
+            disableFields={disableFields}
         />
     );
 };
