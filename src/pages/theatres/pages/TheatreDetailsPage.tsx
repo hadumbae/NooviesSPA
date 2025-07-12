@@ -12,8 +12,11 @@ import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import {EntityPaginatedQuery} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import TheatreDetailsBreadcrumbs from "@/pages/theatres/components/breadcrumbs/admin/TheatreDetailsBreadcrumbs.tsx";
 
-const TheatrePage: FC = () => {
-    const {theatreID} = useFetchTheatreParams();
+const TheatreDetailsPage: FC = () => {
+    const urlParams = useFetchTheatreParams();
+    if (!urlParams) return <PageLoader />
+
+    const {theatreID} = urlParams;
     const pagination = {screen: {paginated: true, page: 1, perPage: 6} as EntityPaginatedQuery};
 
     const theatreDetails = useFetchTheatreDetails({theatreID: theatreID!, pagination});
@@ -48,4 +51,4 @@ const TheatrePage: FC = () => {
     );
 };
 
-export default TheatrePage;
+export default TheatreDetailsPage;
