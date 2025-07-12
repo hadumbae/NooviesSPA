@@ -7,7 +7,7 @@ import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
  *
  * Used when both `theatreID` and `screenID` are required to reference a screen.
  */
-export const TheatreScreenParamsSchema = z.object({
+export const ScreenDetailsParamsSchema = z.object({
     /**
      * Unique identifier for the theatre.
      */
@@ -24,7 +24,7 @@ export const TheatreScreenParamsSchema = z.object({
  *
  * This includes pagination for both seat listings and showings, as well as tab selection.
  */
-export const TheatreScreenSearchParamsSchema = z.object({
+export const ScreenDetailsSearchParamsSchema = z.object({
     /**
      * Specifies which tab should be active in the UI.
      *
