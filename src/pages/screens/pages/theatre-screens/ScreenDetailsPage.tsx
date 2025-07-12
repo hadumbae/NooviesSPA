@@ -12,13 +12,20 @@ import TheatreScreenDetailsHeader
     from "@/pages/screens/components/theatre-screen/admin/headers/TheatreScreenDetailsHeader.tsx";
 import useValidateTheatreScreenDetails
     from "@/pages/theatres/hooks/queries/screens/theatre-screen-details/useValidateTheatreScreenDetails.ts";
-import TheatreScreenPageTabs from "@/pages/screens/components/theatre-screen/admin/tabs/TheatreScreenPageTabs.tsx";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
+import ScreenSeatsByRowCard
+    from "@/pages/screens/components/theatre-screen/admin/tabs/ScreenSeatsByRowCard.tsx";
+import TheatreScreenPageShowingsTab
+    from "@/pages/screens/components/theatre-screen/admin/tabs/TheatreScreenPageShowingsTab.tsx";
+import useTheatreScreenSearchParams from "@/pages/screens/hooks/theatre-screens/params/useTheatreScreenSearchParams.ts";
 
-const TheatreScreenPage: FC = () => {
+const ScreenDetailsPage: FC = () => {
     const urlParams = useFetchTheatreScreenParams();
     if (!urlParams) return <PageLoader/>;
 
     const {theatreID, screenID} = urlParams;
+    const {searchParams, setActiveTab} = useTheatreScreenSearchParams({activeTab: "seats"});
+
     const {queries, isPending, isError, error: queryError} = useTheatreScreenDetailQueries({theatreID, screenID});
     const {data, success, error: parseError} = useValidateTheatreScreenDetails({isPending, queries});
 
@@ -26,12 +33,13 @@ const TheatreScreenPage: FC = () => {
     if (isError) return <PageHTTPError error={queryError}/>;
     if (!success) return <PageParseError error={parseError}/>;
 
+    const {activeTab, showingPage, showingsPerPage} = searchParams;
     const {theatre, screen} = data;
 
     return (
         <PageFlexWrapper>
             <TheatreScreenDetailsBreadcrumbs
-                theatreID={theatre._id}
+                theatreID={theatreID}
                 theatreName={theatre.name}
                 screenName={screen.name}
             />
@@ -41,12 +49,29 @@ const TheatreScreenPage: FC = () => {
                 screen={screen}
             />
 
-            <TheatreScreenPageTabs
-                theatreID={theatre._id}
-                screenID={screen._id}
-            />
+            <Tabs defaultValue={activeTab} onValueChange={(v) => setActiveTab(v)}>
+                <section className="flex justify-center">
+                    <TabsList>
+                        <TabsTrigger value="seats">Seats</TabsTrigger>
+                        <TabsTrigger value="showings">Showings</TabsTrigger>
+                    </TabsList>
+                </section>
+
+                <TabsContent value="seats">
+                    <ScreenSeatsByRowCard
+                        theatreID={theatreID}
+                        screenID={screenID}
+                    />
+                </TabsContent>
+
+                <TheatreScreenPageShowingsTab
+                    tabValue="showings"
+                    page={showingPage}
+                    perPage={showingsPerPage}
+                />
+            </Tabs>
         </PageFlexWrapper>
     );
 };
 
-export default TheatreScreenPage;
+export default ScreenDetailsPage;
