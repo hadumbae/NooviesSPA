@@ -56,8 +56,8 @@ const TheatreScreenDetailsDrawer: FC<DrawerProps> = ({screen}) => {
                             More Details
                         </Link>
 
-                        <DrawerClose>
-                            <Button variant="outline" className="w-full">
+                        <DrawerClose asChild>
+                            <Button variant="outline">
                                 <CircleX />
                             </Button>
                         </DrawerClose>
