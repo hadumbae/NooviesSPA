@@ -1,10 +1,10 @@
 import {FC} from 'react';
 import {useNavigate} from "react-router-dom";
-import useFetchTheatreParams from "@/pages/theatres/hooks/params/useFetchTheatreParams.ts";
+import useFetchTheatreDetailsParams from "@/pages/theatres/hooks/theatre-details/useFetchTheatreDetailsParams.ts";
 import useFetchTheatre from "@/pages/theatres/hooks/queries/useFetchTheatre.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import TheatreSubmitFormContainer from "@/pages/theatres/components/forms/TheatreSubmitFormContainer.tsx";
+import TheatreSubmitFormContainer from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormContainer.tsx";
 import TheatreEditHeader from "@/pages/theatres/components/headers/TheatreEditHeader.tsx";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {TheatreSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
@@ -16,7 +16,10 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 
 const TheatreEditPage: FC = () => {
     const navigate = useNavigate();
-    const {theatreID} = useFetchTheatreParams();
+    const urlParams = useFetchTheatreDetailsParams();
+     if (!urlParams) return <PageLoader />;
+
+     const {theatreID} = urlParams;
 
     const {data, isPending, isError, error: queryError} = useFetchTheatre({_id: theatreID!});
     const {success, data: theatre, error: parseError} = useValidateData({

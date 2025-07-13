@@ -5,7 +5,7 @@ import useTheatreSubmitMutation, {
 } from "@/pages/theatres/hooks/mutations/useTheatreSubmitMutation.ts";
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import {TheatreForm, TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
-import TheatreSubmitFormView from "@/pages/theatres/components/forms/TheatreSubmitFormView.tsx";
+import TheatreSubmitFormView from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormView.tsx";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 
 type Props = FormMutationOnSubmitParams & {

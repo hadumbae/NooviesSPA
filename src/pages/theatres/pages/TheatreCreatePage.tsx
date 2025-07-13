@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {useNavigate} from "react-router-dom";
-import TheatreSubmitFormContainer from "@/pages/theatres/components/forms/TheatreSubmitFormContainer.tsx";
+import TheatreSubmitFormContainer from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormContainer.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
