@@ -1,12 +1,12 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-toastify";
-import {TheatreParamSchema} from "@/pages/theatres/schema/params/TheatreParams.schema.ts";
+import {TheatreDetailsParamSchema} from "@/pages/theatres/schema/params/TheatreDetailsParams.schema.ts";
 import {useEffect} from "react";
 
-export default function useFetchTheatreParams() {
+export default function useFetchTheatreDetailsParams() {
     const navigate = useNavigate();
     const urlParams = useParams<{ theatreID: string, screenID: string }>();
-    const {data, success} = TheatreParamSchema.safeParse(urlParams);
+    const {data, success} = TheatreDetailsParamSchema.safeParse(urlParams);
 
     useEffect(
         () => {
