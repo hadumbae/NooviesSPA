@@ -41,17 +41,7 @@ const TheatreScreenDetailsBreadcrumbs: FC<DetailsBreadcrumbs> = ({theatreID, the
                 <BreadcrumbSeparator />
 
                 <BreadcrumbItem>
-                    <BreadcrumbLink asChild>
-                        <Link to={`/admin/theatres/get/${theatreID}/screens`}>
-                            Screens
-                        </Link>
-                    </BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbSeparator />
-
-                <BreadcrumbItem>
-                    <BreadcrumbPage>{screenName ?? "Screen Details"}</BreadcrumbPage>
+                    <BreadcrumbPage>{screenName ?? "Screen Details"} | Screen</BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>
