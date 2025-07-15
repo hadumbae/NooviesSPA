@@ -1,35 +1,35 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import {toast} from "react-toastify";
-import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.ts";
 
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
+import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
 
-interface Params {
-    onDelete?: () => void;
-}
+export default function useTheatreDeleteMutation(options: FormMutationOnSubmitParams) {
+    const {successMessage, onSubmitSuccess, errorMessage, onSubmitError} = options;
 
-export default function useTheatreDeleteMutation({onDelete}: Params) {
     const mutationKey = ["delete_single_theatre"];
     const queryClient = useQueryClient();
 
-    const mutationFn = async ({_id}: {_id: ObjectId}) => {
-        const fetchQueryFn = () => TheatreRepository.delete({_id});
-        await useFetchErrorHandler({fetchQueryFn});
+    const mutationFn = async ({_id}: { _id: ObjectId }) => {
+        await handleAPIResponse({
+            action: () => TheatreRepository.delete({_id}),
+            errorMessage: "Failed to delete theatre data. Please try again.",
+        });
     }
 
     const onSuccess = async () => {
-        toast.success("Theatre deleted.");
-
+        toast.success(successMessage ?? "Theatre deleted.");
         await queryClient.invalidateQueries({queryKey: ["fetch_theatres_by_query"], exact: false});
-
-        onDelete && onDelete();
+        onSubmitSuccess && onSubmitSuccess();
     };
 
     const onError = (error: Error | ParseError) => {
         const {message = "Oops. Something went wrong. Please try again."} = error;
-        toast.error(message);
+        toast.error(errorMessage ?? message);
+        onSubmitError && onSubmitError(error);
     }
 
     return useMutation({mutationKey, mutationFn, onSuccess, onError});

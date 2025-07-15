@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import {Pencil, Trash} from "lucide-react";
-import {useNavigate} from "react-router-dom";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
@@ -12,16 +11,11 @@ import TheatreDeleteWarningDialog
 
 interface Props {
     theatre: Theatre;
+    onDelete?: () => void;
 }
 
-const TheatreDetailsHeader: FC<Props> = ({theatre}) => {
-    const navigate = useNavigate();
+const TheatreDetailsHeader: FC<Props> = ({onDelete, theatre}) => {
     const {_id, name} = theatre;
-
-    const onDelete = () => {
-        console.log("To Delete")
-        navigate("/admin/theatres")
-    }
 
     return (
         <header className={cn(
@@ -41,7 +35,7 @@ const TheatreDetailsHeader: FC<Props> = ({theatre}) => {
                     </Button>
                 </TheatreSubmitFormPanel>
 
-                <TheatreDeleteWarningDialog theatreID={_id} onDelete={onDelete}>
+                <TheatreDeleteWarningDialog theatreID={_id} onSubmitSuccess={onDelete}>
                     <Button variant="link" className="text-neutral-400 hover:text-black">
                         <Trash/> Delete
                     </Button>
