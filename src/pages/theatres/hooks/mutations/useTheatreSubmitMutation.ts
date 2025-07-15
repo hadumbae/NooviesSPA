@@ -10,7 +10,7 @@ import {ParseError} from "@/common/errors/ParseError.ts";
 import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 
-export type TheatreSubmitMutationParams = FormMutationResultParams & {
+export type TheatreSubmitMutationParams = FormMutationResultParams<Theatre> & {
     form: UseFormReturn<TheatreFormValues>;
 }
 
@@ -50,7 +50,10 @@ export default function useTheatreSubmitMutation(
         const message = isEditing ? "Theatre updated." : "Theatre created.";
         toast.success(successMessage || message);
 
-        await queryClient.invalidateQueries({queryKey: ["fetch_theatres_by_query"], exact: false});
+        await Promise.all([
+            queryClient.invalidateQueries({queryKey: ["fetch_single_theatre"], exact: false}),
+            queryClient.invalidateQueries({queryKey: ["fetch_theatres_by_query"], exact: false}),
+        ]);
 
         onSubmitSuccess && onSubmitSuccess(theatre);
     }

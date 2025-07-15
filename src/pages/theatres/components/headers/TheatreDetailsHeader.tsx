@@ -4,10 +4,11 @@ import {Pencil, Trash} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
-import useTheatreDeleteMutation from "@/pages/theatres/hooks/mutations/useTheatreDeleteMutation.ts";
-import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import TheatreSubmitFormPanel from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormPanel.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
+import TheatreDeleteWarningDialog
+    from "@/pages/theatres/components/theatres/delete-theatre/TheatreDeleteWarningDialog.tsx";
 
 interface Props {
     theatre: Theatre;
@@ -17,11 +18,9 @@ const TheatreDetailsHeader: FC<Props> = ({theatre}) => {
     const navigate = useNavigate();
     const {_id, name} = theatre;
 
-    const {mutate, isPending, isSuccess} = useTheatreDeleteMutation({onDelete: () => navigate("/admin/theatres")});
-    const isDisabled = isPending || isSuccess;
-
-    const deleteTheatre = () => {
-        mutate({_id});
+    const onDelete = () => {
+        console.log("To Delete")
+        navigate("/admin/theatres")
     }
 
     return (
@@ -36,13 +35,18 @@ const TheatreDetailsHeader: FC<Props> = ({theatre}) => {
             </section>
 
             <section className="space-x-2 flex justify-end items-center ">
-                <HeaderLink variant="link" to={`/admin/theatres/edit/${_id}`}>
-                    <Pencil /> Edit
-                </HeaderLink>
+                <TheatreSubmitFormPanel isEditing={true} theatre={theatre}>
+                    <Button variant="link" className="text-neutral-400 hover:text-black">
+                        <Pencil/> Edit
+                    </Button>
+                </TheatreSubmitFormPanel>
 
-                <HeaderButton variant="link" onClick={deleteTheatre} disabled={isDisabled}>
-                    <Trash /> Delete
-                </HeaderButton>
+                <TheatreDeleteWarningDialog theatreID={_id} onDelete={onDelete}>
+                    <Button variant="link" className="text-neutral-400 hover:text-black">
+                        <Trash/> Delete
+                    </Button>
+                </TheatreDeleteWarningDialog>
+
             </section>
         </header>
     );
