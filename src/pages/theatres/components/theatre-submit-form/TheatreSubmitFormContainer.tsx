@@ -8,7 +8,7 @@ import {TheatreForm, TheatreFormValues} from "@/pages/theatres/schema/forms/Thea
 import TheatreSubmitFormView from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormView.tsx";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 
-type Props = FormMutationOnSubmitParams & {
+type Props = FormMutationOnSubmitParams<Theatre> & {
     className?: string;
     disableFields?: (keyof TheatreFormValues)[];
     presetValues?: Partial<TheatreFormValues>;
