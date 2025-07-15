@@ -2,7 +2,8 @@ import {z, ZodType} from "zod";
 import ITheatreSubmit from "@/pages/theatres/interfaces/ITheatreSubmit.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
-import {CleanedNonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import FormInputValidationService from "@/common/services/FormInputValidationService.ts";
 
 /**
  * Schema for raw form input values for the theatre form.
@@ -28,13 +29,16 @@ export const TheatreFormValuesSchema = z.object({
  */
 export const TheatreFormRawSchema = z.object({
     /** Validated theatre name, max 255 characters */
-    name: NonEmptyStringSchema.max(255, "Must be 255 characters or less."),
+    name: NonEmptyStringSchema
+        .max(255, "Must be 255 characters or less."),
 
     /** Validated theatre location, max 255 characters */
-    location: NonEmptyStringSchema.max(255, "Must be 255 characters or less."),
+    location: NonEmptyStringSchema
+        .max(255, "Must be 255 characters or less."),
 
-    /** Validated non-negative seat capacity number */
-    seatCapacity: CleanedNonNegativeNumberSchema,
+    /** Validated seat capacity: cleaned number >= 0, max 2500 */
+    seatCapacity: FormInputValidationService
+        .cleanNumberInput(NonNegativeNumberSchema.max(2500, "Must be 2500 or less.")),
 });
 
 /**
