@@ -1,6 +1,10 @@
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
+import {ErrorResponseSchema} from "@/common/schema/responses/ErrorResponse.schema.ts";
+
+type HandlerParams = { fetchQueryFn: () => Promise<FetchReturns>, message?: string }
+
 /**
  * Executes a fetch function and handles HTTP errors by throwing an `HttpResponseError` if the response is not OK.
  *
@@ -13,13 +17,20 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
  * @throws {HttpResponseError} Throws an `HttpResponseError` if the HTTP response status is not OK (i.e., not in the range 200–299).
  */
 const HandleFetchError = async (
-    {fetchQueryFn, message}: {fetchQueryFn: () => Promise<FetchReturns>, message?: string}
+    params: HandlerParams
 ): Promise<FetchReturns> => {
+    const {message, fetchQueryFn} = params;
     const {response, result} = await fetchQueryFn();
 
     if (!response.ok) {
-        const {message: resultMessage = "Error. Please try again."} = result;
-        throw new HttpResponseError({response, message: message || resultMessage});
+        let errorMessage = message ?? "Error. Please try again.";
+
+        if (!message) {
+            const {data, success} = ErrorResponseSchema.safeParse(result);
+            if (success) errorMessage = data?.message;
+        }
+
+        throw new HttpResponseError({response, message: errorMessage});
     }
 
     return {

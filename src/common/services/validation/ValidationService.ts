@@ -1,7 +1,7 @@
-import {ZodParseErrorResponseSchema} from "@/common/schema/responses/ZodParseErrorResponseSchema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import {ZodIssue} from "zod";
+import {ParseErrorResponseSchema} from "@/common/schema/responses/ErrorResponse.schema.ts";
 
 export default {
     validateFormErrorResponse(params: {
@@ -9,7 +9,7 @@ export default {
         errorData: any,
     }) {
         const {errorResponse, errorData} = params;
-        let parseResult = ZodParseErrorResponseSchema.safeParse(errorData);
+        let parseResult = ParseErrorResponseSchema.safeParse(errorData);
 
         if (!parseResult.success) {
             throw new HttpResponseError({

@@ -1,7 +1,7 @@
-import {ZodParseErrorResponseSchema} from "@/common/schema/responses/ZodParseErrorResponseSchema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import {ZodIssue} from "zod";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {ParseErrorResponseSchema} from "@/common/schema/responses/ErrorResponse.schema.ts";
 
 type ThrowParams = {
     /** The failed HTTP response (e.g., from fetch) */
@@ -30,7 +30,7 @@ export default function throwResponseError(params: ThrowParams): never | void {
     if (response.ok) return;
 
     if (response.status === 400) {
-        const {success, data: parsedResult} = ZodParseErrorResponseSchema.safeParse(result);
+        const {success, data: parsedResult} = ParseErrorResponseSchema.safeParse(result);
 
         if (!success) throw new Error("Invalid Error Response.");
 
