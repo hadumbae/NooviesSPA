@@ -12,6 +12,7 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui/sheet.tsx";
+import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 
 type FormPanelEditingProps = {
     isEditing: true;
@@ -21,7 +22,7 @@ type FormPanelEditingProps = {
     theatre?: never;
 };
 
-type FormPanelProps = FormMutationOnSubmitParams & {
+type FormPanelProps = FormMutationOnSubmitParams<Theatre> & {
     children?: ReactNode;
     className?: string;
     presetValues?: Partial<TheatreFormValues>;
@@ -36,24 +37,26 @@ const TheatreSubmitFormPanel: FC<FormPanelProps> = (params) => {
     const sheetTitle = `${isEditing ? "Update" : "Create"} Theatre`;
     const sheetDescription = `${isEditing ? "Update" : "Create"} theatres by submitting data.`;
 
-    const closeOnSuccess = () => {
+    const closeOnSuccess = (theatre?: Theatre) => {
         setOpen(false);
-        onSubmitSuccess && onSubmitSuccess();
+        onSubmitSuccess && onSubmitSuccess(theatre);
     }
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>{children ? children : "Open"}</SheetTrigger>
-            <SheetContent>
+            <SheetContent className="flex flex-col">
                 <SheetHeader>
                     <SheetTitle>{sheetTitle}</SheetTitle>
                     <SheetDescription>{sheetDescription}</SheetDescription>
                 </SheetHeader>
 
-                <TheatreSubmitFormContainer
-                    {...formParams}
-                    onSubmitSuccess={closeOnSuccess}
-                />
+                <ScrollArea className="flex-grow px-1">
+                    <TheatreSubmitFormContainer
+                        {...formParams}
+                        onSubmitSuccess={closeOnSuccess}
+                    />
+                </ScrollArea>
             </SheetContent>
         </Sheet>
     );

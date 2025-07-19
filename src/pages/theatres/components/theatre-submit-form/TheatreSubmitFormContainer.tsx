@@ -32,7 +32,7 @@ const TheatreSubmitFormContainer: FC<Props> = (params) => {
     const mutation = useTheatreSubmitMutation(mutationParams);
 
     const onFormSubmit = (values: TheatreFormValues) => {
-        console.log("Theatre Create Values : ", values);
+        console.log("Theatre Submit Values : ", values);
         mutation.mutate(values as TheatreForm);
     }
 

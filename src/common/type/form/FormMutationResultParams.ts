@@ -28,7 +28,7 @@ export type FormMutationOnSubmitParams<
      *
      * @param data - The submitted data returned by the operation.
      */
-    onSubmitSuccess?: (data: TData) => void;
+    onSubmitSuccess?: (data?: TData) => void;
 
     /**
      * Optional message to display when the form submission fails.
@@ -40,7 +40,7 @@ export type FormMutationOnSubmitParams<
      *
      * @param error - The error object passed from the failure.
      */
-    onSubmitError?: (error: TError) => void;
+    onSubmitError?: (error?: TError) => void;
 };
 
 /**
