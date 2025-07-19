@@ -1,61 +1,36 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {Link} from "react-router-dom";
-import TheatreOptions from "@/pages/theatres/components/TheatreOptions.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
+import {Search} from "lucide-react";
+import getAddressString from "@/common/utility/location/getAddressString.ts";
 
 interface Props {
     theatre: TheatreDetails;
-    onDelete?: () => void;
 }
 
-const TheatreListCard: FC<Props>  = ({theatre, onDelete}) => {
-    const {
-        _id,
-        name,
-        location,
-        seatCapacity,
-        seatCount,
-        screenCount,
-        futureShowingCount,
-    } = theatre;
+const TheatreListCard: FC<Props> = ({theatre}) => {
+    const {_id, name, location} = theatre;
+    const addressString = getAddressString(location);
+
 
     return (
         <Card>
-            <CardContent className="flex flex-col space-y-2 p-4">
-                <div className="flex justify-between">
-                    <Link to={`/admin/theatres/get/${_id}`} className="text-lg font-bold hover:underline">
-                        {name}
-                    </Link>
-                    <TheatreOptions theatre={theatre} variant="outline" onDelete={onDelete} />
-                </div>
+            <CardContent className="grid grid-cols-3 p-4">
+                <section className="col-span-2 space-y-1">
+                        <h1 className="text-xl font-extrabold">{name}</h1>
+                        <h2 className="text-neutral-400 text-sm">{addressString}</h2>
+                </section>
 
-                <div className="flex justify-between items-center">
-                    <div className="flex flex-col">
-                        <span className="text-[12px] text-neutral-500">Capacity</span>
-                        <span className="font-bold">{seatCapacity} seats</span>
-                    </div>
+                <section className="flex justify-end items-center">
+                    <ButtonLink
+                        to={`/admin/theatres/get/${_id}`}
+                        variant="outline"
+                    >
+                        <Search />
+                    </ButtonLink>
+                </section>
 
-                    <div className="flex flex-col">
-                        <span className="text-[12px] text-neutral-500">Registered Seats</span>
-                        <span className="font-bold">{seatCount} seats</span>
-                    </div>
-
-                    <div className="flex flex-col">
-                        <span className="text-[12px] text-neutral-500">Screens</span>
-                        <span className="font-bold">{screenCount} screens</span>
-                    </div>
-
-                    <div className="flex flex-col">
-                        <span className="text-[12px] text-neutral-500">Showings</span>
-                        <span className="font-bold">{futureShowingCount} showings</span>
-                    </div>
-                </div>
-
-                <div className="flex-1 flex flex-col">
-                    <span className="text-[12px] text-neutral-500">Location</span>
-                    <span className="font-bold">{location}</span>
-                </div>
             </CardContent>
         </Card>
     );
