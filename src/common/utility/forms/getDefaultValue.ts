@@ -4,6 +4,7 @@
  * This utility is useful for resolving default values where `preset` takes priority over `data`,
  * and `fallback` acts as a final fallback if both are nullish.
  *
+ * @template TPreset - The preset data type being checked.
  * @template TData - The primary data type being checked.
  * @template TFallback - The type of the fallback value.
  *
@@ -19,6 +20,8 @@
  * getDefaultValue(null, null, 42); // returns 42
  * ```
  */
-export default function getDefaultValue<TData, TFallback>(preset: TData | undefined | null, data: TData | undefined | null, fallback: TFallback): TData | TFallback {
+export default function getDefaultValue<TPreset, TData, TFallback>(
+    preset: TPreset | undefined | null, data: TData | undefined | null, fallback: TFallback
+): TPreset | TData | TFallback {
     return preset ?? data ?? fallback;
 }

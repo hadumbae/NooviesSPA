@@ -1,9 +1,9 @@
-import {z, ZodType} from "zod";
-import ITheatreSubmit from "@/pages/theatres/interfaces/ITheatreSubmit.ts";
+import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import FormInputValidationService from "@/common/services/FormInputValidationService.ts";
+import {LocationFormSchema, LocationFormValueSchema} from "@/common/schema/location/LocationForm.schema.ts";
 
 /**
  * Schema for raw form input values for the theatre form.
@@ -15,7 +15,7 @@ export const TheatreFormValuesSchema = z.object({
     name: FormStarterValueSchema,
 
     /** Theatre location form value as entered by the user */
-    location: FormStarterValueSchema,
+    location: LocationFormValueSchema,
 
     /** Theatre seat capacity form value as entered by the user */
     seatCapacity: FormStarterValueSchema,
@@ -27,22 +27,15 @@ export const TheatreFormValuesSchema = z.object({
  * non-empty strings with max length for name/location,
  * and a cleaned non-negative number for seat capacity.
  */
-export const TheatreFormRawSchema = z.object({
+export const TheatreFormSchema = z.object({
     /** Validated theatre name, max 255 characters */
     name: NonEmptyStringSchema
         .max(255, "Must be 255 characters or less."),
 
     /** Validated theatre location, max 255 characters */
-    location: NonEmptyStringSchema
-        .max(255, "Must be 255 characters or less."),
+    location: LocationFormSchema,
 
     /** Validated seat capacity: cleaned number >= 0, max 2500 */
     seatCapacity: FormInputValidationService
         .cleanNumberInput(NonNegativeNumberSchema.max(2500, "Must be 2500 or less.")),
 });
-
-/**
- * Zod schema representing a fully validated theatre submit object
- * conforming to the `ITheatreSubmit` interface.
- */
-export const TheatreFormSchema = TheatreFormRawSchema as ZodType<ITheatreSubmit>;

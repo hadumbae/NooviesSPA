@@ -27,6 +27,8 @@ interface CountryProps {
 
     /** Determines whether the select input allows multiple selections. */
     isMulti: boolean;
+
+    className?: string;
 }
 
 /**

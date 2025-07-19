@@ -9,6 +9,7 @@ import {Control, Controller, FieldValues, Path} from "react-hook-form";
 import Select from "react-select";
 import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
 import HookFormErrorMessage from "@/common/components/forms/HookFormErrorMessage.tsx";
+import {cn} from "@/common/lib/utils.ts";
 
 interface Props<TSubmit extends FieldValues> {
     name: Path<TSubmit>,
@@ -18,16 +19,26 @@ interface Props<TSubmit extends FieldValues> {
     control: Control<TSubmit>;
     isDisabled?: boolean;
     options: ReactSelectOption[];
+    className?: string;
 }
 
-const HookFormSelect = <TSubmit extends FieldValues>(
-    {name, label, description, control, isDisabled, placeholder = "Select an option.", options}: Props<TSubmit>
-) => {
+const HookFormSelect = <TSubmit extends FieldValues>(props: Props<TSubmit>) => {
+    const {
+        name,
+        label,
+        description,
+        className,
+        control,
+        isDisabled,
+        placeholder = "Select an option.",
+        options,
+    } = props;
+
     return (
         <Controller
             control={control}
             name={name}
-            render={({field, fieldState: {error}}) => <FormItem>
+            render={({field, fieldState: {error}}) => <FormItem className={cn(className)}>
                 <FormLabel>{label}</FormLabel>
 
                 <FormControl>

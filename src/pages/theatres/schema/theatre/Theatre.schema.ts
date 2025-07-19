@@ -1,73 +1,72 @@
-import {z, ZodType} from "zod";
-import ITheatre from "@/pages/theatres/interfaces/ITheatre.ts";
+import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
-import ITheatreDetails from "@/pages/theatres/interfaces/ITheatreDetails.ts";
 import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import {LocationSchema} from "@/common/schema/location/Location.schema.ts";
 
 /**
- * Base schema for a theatre object, representing core properties
- * such as ID, name, location, and seat capacity.
+ * 🎭 Base schema for a theatre object.
+ *
+ * Represents a single theatre with its identifying and core data fields.
+ * Typically used for detailed API responses or documents.
  */
-export const TheatreRawSchema = z.object({
-    /** Unique identifier for the theatre (read-only string ID) */
+export const TheatreSchema = z.object({
+    /** Unique identifier of the theatre (MongoDB ObjectId as string). */
     _id: IDStringSchema.readonly(),
 
-    /** Name of the theatre; required and limited to 255 characters */
-    name: NonEmptyStringSchema.min(1, "Required.").max(255, "Must be 255 characters or less."),
+    /** Name of the theatre (max 255 characters). */
+    name: NonEmptyStringSchema.max(255, "Must be 255 characters or less."),
 
-    /** Location of the theatre; required and limited to 255 characters */
-    location: NonEmptyStringSchema.min(1, "Required.").max(255, "Must be 255 characters or less."),
+    /** Location of the theatre (latitude/longitude, city, etc.). */
+    location: LocationSchema,
 
-    /** Total seating capacity of the theatre; must be 0 or greater */
-    seatCapacity: RequiredNumberSchema.gte(0, "Must be equal or greater than 0."),
+    /** Total seating capacity of the theatre (must be ≥ 0). */
+    seatCapacity: NonNegativeNumberSchema,
 });
 
 /**
- * Extended schema for a theatre that includes aggregated detail fields,
- * such as screen count, seat count, and number of upcoming showings.
+ * 🪄 Extended schema for a theatre including aggregate summary fields.
  *
- * This version is typically used for list views or dashboards where
- * full screen/seat data isn't needed, just summarized numbers.
+ * Adds computed fields like number of screens, total seats,
+ * and count of upcoming showings. Useful for dashboards or list views
+ * where full detailed child objects are unnecessary.
  */
-export const TheatreDetailsRawSchema = TheatreRawSchema.extend({
+export const TheatreDetailsSchema = TheatreSchema.extend({
     /** Total number of screens in the theatre. */
     screenCount: NonNegativeNumberSchema,
 
     /** Total number of seats in the theatre. */
     seatCount: NonNegativeNumberSchema,
 
-    /** Number of showings scheduled in the future at this theatre. */
+    /** Number of scheduled future showings in the theatre. */
     futureShowingCount: NonNegativeNumberSchema,
 });
 
 /**
- * Zod schema for validating `ITheatre` objects, based on the base theatre structure.
- */
-export const TheatreSchema = TheatreRawSchema as ZodType<ITheatre>;
-
-/**
- * Zod schema for validating `ITheatreDetails` objects, including screens and seats.
- */
-export const TheatreDetailsSchema = TheatreDetailsRawSchema as ZodType<ITheatreDetails>;
-
-/**
- * Zod schema for validating an array of theatres.
+ * 🎬 Schema for validating an array of theatres.
+ *
+ * Typically used when the API returns a list of theatre objects
+ * without pagination metadata.
  */
 export const TheatreArraySchema = z.array(TheatreSchema);
 
 /**
- * Zod schema for paginated theatre data, used for endpoints returning
- * a list of basic theatre entries along with pagination metadata
- * (e.g., total count, current page, total pages).
+ * 📄 Schema for paginated theatre data.
+ *
+ * Represents a paginated response containing a list of base theatre entries
+ * and pagination metadata like `totalCount`, `page`, and `pageSize`.
+ *
+ * Useful for endpoints returning a page of theatres.
  */
 export const PaginatedTheatreSchema = generatePaginationSchema(TheatreSchema);
 
 /**
- * Zod schema for paginated detailed theatre data, used for endpoints returning
- * a list of theatres with full detail (including screens and seats),
- * along with pagination metadata.
+ * 📊 Schema for paginated detailed theatre data.
+ *
+ * Similar to {@link PaginatedTheatreSchema} but includes
+ * aggregated detail fields (screens, seats, future showings) per theatre.
+ *
+ * Useful for admin dashboards or detailed listings.
  */
 export const PaginatedTheatreDetailsSchema = generatePaginationSchema(TheatreDetailsSchema);

@@ -4,6 +4,7 @@ import {Control, Controller, FieldValues, Path} from "react-hook-form";
 import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
 import {FormControl, FormDescription, FormItem, FormLabel} from "@/common/components/ui/form.tsx";
 import HookFormErrorMessage from "@/common/components/forms/HookFormErrorMessage.tsx";
+import {cn} from "@/common/lib/utils.ts";
 
 interface Props<TSubmit extends FieldValues> {
     name: Path<TSubmit>,
@@ -13,16 +14,17 @@ interface Props<TSubmit extends FieldValues> {
     control: Control<TSubmit>;
     isDisabled?: boolean;
     options: ReactSelectOption[];
+    className?: string;
 }
 
 const HookFormMultiSelect = <TSubmit extends FieldValues>(
-    {name, label, description, control, placeholder, isDisabled, options = []}: Props<TSubmit>
+    {name, label, description, control, placeholder, isDisabled, className, options = []}: Props<TSubmit>
 ) => {
     return (
         <Controller
             control={control}
             name={name}
-            render={({field, fieldState: {error}}) => <FormItem>
+            render={({field, fieldState: {error}}) => <FormItem className={cn(className)}>
                 <FormLabel>{label}</FormLabel>
 
                 <FormControl>
