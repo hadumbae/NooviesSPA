@@ -3,6 +3,10 @@ import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
+import {Plus, Trash} from "lucide-react";
+import {useNavigate} from "react-router-dom";
+import ScreenDeleteWarningDialog from "@/pages/screens/components/screens/ScreenDeleteWarningDialog.tsx";
 
 type DetailsHeader = {
     theatre: TheatreDetails;
@@ -10,17 +14,32 @@ type DetailsHeader = {
 };
 
 const TheatreScreenDetailsHeader: FC<DetailsHeader> = ({theatre, screen}) => {
-    const {name: theatreName} = theatre;
-    const {name: screenName} = screen;
+    const navigate = useNavigate();
+
+    const {_id: theatreID, name: theatreName} = theatre;
+    const {_id: screenID, name: screenName} = screen;
+
+    const onDelete = () => {
+        navigate(`/admin/theatres/get/${theatreID}`);
+    }
 
     return (
-        <header>
-            <HeaderTitle>
-                {screenName} Details
-            </HeaderTitle>
-            <HeaderDescription>
-                Screen at {theatreName}. Handle seats and showings here.
-            </HeaderDescription>
+        <header className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <section>
+                <HeaderTitle>{screenName} Details</HeaderTitle>
+                <HeaderDescription>Screen at {theatreName}. Handle seats and showings here.</HeaderDescription>
+            </section>
+            <section className="text-right">
+                <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
+                    <Plus/> Seat
+                </Button>
+
+                <ScreenDeleteWarningDialog screenID={screenID} onSubmitSuccess={onDelete}>
+                    <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
+                        <Trash/> Delete
+                    </Button>
+                </ScreenDeleteWarningDialog>
+            </section>
         </header>
     );
 };

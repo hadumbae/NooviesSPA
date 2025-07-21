@@ -3,11 +3,11 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/c
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 
 import {Search, Trash} from "lucide-react";
-import {buttonVariants} from "@/common/components/ui/button.tsx";
-import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {Link} from "react-router-dom";
+import ScreenDeleteWarningDialog from "@/pages/screens/components/screens/ScreenDeleteWarningDialog.tsx";
 
 interface Props {
     screen: ScreenDetails;
@@ -38,12 +38,10 @@ const TheatreScreenCard: FC<Props> = ({screen, onDelete}) => {
                             <Search />
                         </ButtonLink>
 
-                        <ScreenDeleteWarningDialog
-                            className={buttonVariants({variant: "outline", size: "sm"})}
-                            screen={screen}
-                            onDelete={onDelete}
-                        >
-                            <Trash/>
+                        <ScreenDeleteWarningDialog screenID={_id} screenName={name} onSubmitSuccess={onDelete}>
+                            <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
+                                <Trash/> Delete
+                            </Button>
                         </ScreenDeleteWarningDialog>
                     </section>
                 </CardTitle>

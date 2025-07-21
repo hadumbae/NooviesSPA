@@ -1,33 +1,57 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {ParseError} from "@/common/errors/ParseError.ts";
 import {toast} from "react-toastify";
-import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
+import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
 
-interface Params {
-    onDelete?: () => void;
-}
+/**
+ * React hook that returns a mutation for deleting a single screen by its `_id`.
+ *
+ * This hook integrates with React Query (`useMutation`) and wraps the delete operation
+ * provided by `ScreenRepository.delete`, handles API responses, shows success/error
+ * toasts, and invalidates the relevant screen query cache on success.
+ *
+ * ### Usage:
+ * ```tsx
+ * const deleteMutation = useScreenDeleteMutation();
+ * deleteMutation.mutate({ _id: 'abc123' });
+ * ```
+ *
+ * @param params - Optional configuration object:
+ *  - `onSubmitSuccess`: Callback called after a successful delete.
+ *  - `onSubmitError`: Callback called if an error occurs.
+ *  - `successMessage`: Custom success toast message (default: `"Screen deleted."`).
+ *  - `errorMessage`: Custom error toast message (default: error.message or fallback string).
+ *
+ * @returns A `useMutation` result object from React Query,
+ * which includes `.mutate`, `.mutateAsync`, `.isLoading`, etc.
+ *
+ * @see {@link ScreenRepository.delete}
+ * @see {@link handleAPIResponse}
+ */
+export default function useScreenDeleteMutation(params: FormMutationOnSubmitParams = {}) {
+    const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
 
-export default function useScreenDeleteMutation({onDelete}: Params = {}) {
     const mutationKey = ["delete_single_screen"];
     const queryClient = useQueryClient();
 
-    const mutationFn = async ({_id}: {_id: ObjectId}) => {
-        const fetchQueryFn = () => ScreenRepository.delete({_id});
-        await useFetchErrorHandler({fetchQueryFn});
+    const mutationFn = async ({_id}: { _id: ObjectId }) => {
+        await handleAPIResponse({
+            action: () => ScreenRepository.delete({_id}),
+            errorMessage: "Failed to delete screen data. Please try again.",
+        });
     }
 
     const onSuccess = async () => {
-        toast.success("Screen deleted.");
+        toast.success(successMessage ?? "Screen deleted.");
         await queryClient.invalidateQueries({queryKey: ["fetch_screens_by_query"], exact: false});
-
-        onDelete && onDelete();
+        onSubmitSuccess && onSubmitSuccess();
     };
 
-    const onError = (error: Error | ParseError) => {
-        const {message = "Oops. Something went wrong. Please try again."} = error;
-        toast.error(message);
+    const onError = (error: Error) => {
+        toast.error(errorMessage ?? error.message ?? "Something went wrong. Please try again.");
+        onSubmitError && onSubmitError(error);
     }
 
     return useMutation({mutationKey, mutationFn, onSuccess, onError});
