@@ -10,6 +10,10 @@ import {cn} from "@/common/lib/utils.ts";
 import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
 import TheatreScreenDetailsDrawer
     from "@/pages/screens/components/theatre-screens/admin/lists/TheatreScreenDetailsDrawer.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
+import ScreenSubmitFormPanel from "@/pages/screens/components/submit-form/ScreenSubmitFormPanel.tsx";
+import {Plus} from "lucide-react";
+import {ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 
 type OverviewTabProps = {
     className?: string;
@@ -18,6 +22,11 @@ type OverviewTabProps = {
     perPage: number;
     setPage: (val: string | number) => void;
 }
+
+const panelInfo = {
+    title: "Add Seat",
+    description: "Submit Screen Data",
+};
 
 const TheatreScreensOverviewTab: FC<OverviewTabProps> = ({className, theatreID, page, perPage, setPage}) => {
     const {data, isPending, isError, error: queryError} = useFetchScreens({
@@ -43,20 +52,34 @@ const TheatreScreensOverviewTab: FC<OverviewTabProps> = ({className, theatreID, 
     const {totalItems, items: screens} = paginatedScreens;
     const hasScreens = isArray(screens) && screens.length > 0;
 
+    const presetValues = {theatre: theatreID};
+    const disableFields: (keyof ScreenFormValues)[] = ["theatre"];
+
+    const formPanel = (
+        <ScreenSubmitFormPanel presetValues={presetValues} disableFields={disableFields} {...panelInfo}>
+            <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
+                <Plus/> Add Screens
+            </Button>
+        </ScreenSubmitFormPanel>
+    );
+
     if (!hasScreens) {
-        return <div className="flex justify-center items-center text-neutral-400">
-            <span className="select-none">There Are No Seats</span>
+        return <div className="flex flex-col justify-center items-center space-y-8">
+            <span className="select-none text-neutral-400">There Are No Seats</span>
+            {formPanel}
         </div>
     }
 
     return (
         <div className="space-y-5">
+            <section className="grid grid-cols-2 gap-2">
+                <h1 className="font-bold">Screens</h1>
+                <div className="text-right"> {formPanel} </div>
+            </section>
+
             <section className={cn("grid grid-cols-1 gap-3", className)}>
                 <h1 className="sr-only">Screen list</h1>
-                {screens.map((screen) => <TheatreScreenDetailsDrawer
-                    key={`screen-overview-tab-${screen._id}`}
-                    screen={screen}
-                />)}
+                {screens.map((screen) => <TheatreScreenDetailsDrawer key={screen._id} screen={screen}/>)}
             </section>
 
             <EllipsisPaginationButtons
