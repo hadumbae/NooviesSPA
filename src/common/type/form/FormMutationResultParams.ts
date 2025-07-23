@@ -2,11 +2,11 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {ZodTypeAny} from "zod";
 
 /**
- * Parameters for form mutation submission handling.
+ * Parameters related to form submission mutation handling.
  *
- * @template TData - Type of data returned on successful submission.
- * @template TError - Type of error passed to `onSubmitError`.
- * @template TSchema - Zod schema type used to validate input.
+ * @template TData - The type of data expected on successful submission.
+ * @template TError - The type of error expected on submission failure.
+ * @template TSchema - The Zod schema type used for validation.
  */
 export type FormMutationOnSubmitParams<
     TData = unknown,
@@ -14,59 +14,74 @@ export type FormMutationOnSubmitParams<
     TSchema extends ZodTypeAny = ZodTypeAny
 > = {
     /**
-     * Optional Zod schema used to validate form values at runtime.
+     * Optional Zod schema to validate form data before submission.
      */
     validationSchema?: TSchema;
 
     /**
-     * Optional message to display when the form submission succeeds.
+     * Optional success message displayed after a successful submission.
      */
     successMessage?: string;
 
     /**
-     * Callback invoked when submission succeeds.
-     *
-     * @param data - The submitted data returned by the operation.
+     * Callback invoked when form submission succeeds.
+     * @param data - The optional data returned on success.
      */
     onSubmitSuccess?: (data?: TData) => void;
 
     /**
-     * Optional message to display when the form submission fails.
+     * Optional error message displayed after a failed submission.
      */
     errorMessage?: string;
 
     /**
-     * Callback invoked when submission fails.
-     *
-     * @param error - The error object passed from the failure.
+     * Callback invoked when form submission fails.
+     * @param error - The optional error object returned on failure.
      */
     onSubmitError?: (error?: TError) => void;
 };
 
 /**
- * Extended form mutation parameters including editing mode controls.
+ * Parameters indicating whether the form is in editing mode.
  *
- * Extends {@link FormMutationOnSubmitParams} with properties to handle
- * edit mode. Enforces that `_id` is present when `isEditing` is true,
- * and omitted otherwise.
+ * When `isEditing` is true, an `_id` must be provided representing
+ * the entity being edited.
  *
- * @template TData - Type returned on successful submission.
- * @template TError - Type of error passed to `onSubmitError`.
- * @template TSchema - Zod schema type for runtime input validation.
+ * When `isEditing` is false or undefined, no `_id` should be present.
+ */
+export type FormMutationEditingParams =
+    {
+        /**
+         * Flag indicating the form is in editing mode.
+         */
+        isEditing: true;
+
+        /**
+         * The unique identifier of the entity being edited.
+         */
+        _id: ObjectId;
+    } | {
+        /**
+         * Flag indicating the form is not in editing mode (default).
+         */
+        isEditing?: false;
+
+        /**
+         * No `_id` should be present when not editing.
+         */
+        _id?: never;
+};
+
+/**
+ * Complete parameters for a form mutation, combining submission
+ * handling and editing mode parameters.
+ *
+ * @template TData - The type of data expected on successful submission.
+ * @template TError - The type of error expected on submission failure.
+ * @template TSchema - The Zod schema type used for validation.
  */
 export type FormMutationResultParams<
     TData = unknown,
     TError = Error,
     TSchema extends ZodTypeAny = ZodTypeAny
-> = FormMutationOnSubmitParams<TData, TError, TSchema> & (
-    | {
-    /** Indicates the form is in “edit existing item” mode. */
-    isEditing: true;
-    /** Identifier of the item being edited. Required when `isEditing` is true. */
-    _id: ObjectId;
-} | {
-    /** Indicates the form is *not* in edit mode (new item). */
-    isEditing?: false;
-    /** `_id` must not be provided when not editing. */
-    _id?: never;
-});
+> = FormMutationOnSubmitParams<TData, TError, TSchema> & (| FormMutationEditingParams);
