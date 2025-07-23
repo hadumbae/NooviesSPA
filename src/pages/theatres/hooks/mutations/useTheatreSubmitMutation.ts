@@ -3,16 +3,19 @@ import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.t
 import {TheatreSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import {TheatreForm, TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
-import {FormMutationResultParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {
+    FormMutationEditingParams,
+    FormMutationOnSubmitParams,
+} from "@/common/type/form/FormMutationResultParams.ts";
 import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
 import {toast} from "react-toastify";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 
-export type TheatreSubmitMutationParams = FormMutationResultParams<Theatre> & {
-    form: UseFormReturn<TheatreFormValues>;
-}
+export type TheatreSubmitMutationParams = Omit<FormMutationOnSubmitParams<Theatre>, "onSubmitSuccess"> &
+    { form: UseFormReturn<TheatreFormValues>, onSubmitSuccess?: (theatre: Theatre) => void } &
+    (| FormMutationEditingParams);
 
 export default function useTheatreSubmitMutation(
     params: TheatreSubmitMutationParams
@@ -35,7 +38,11 @@ export default function useTheatreSubmitMutation(
             ? () => TheatreRepository.update({_id, data: values})
             : () => TheatreRepository.create({data: values});
 
-        const returnData = await handleAPIResponse({action, errorMessage: "Failed to submit data. Please try again."});
+        const returnData = await handleAPIResponse({
+            action,
+            errorMessage: "Failed to submit data. Please try again.",
+        });
+
         const {success, data: parsedData, error} = TheatreSchema.safeParse(returnData);
 
         if (!success) {

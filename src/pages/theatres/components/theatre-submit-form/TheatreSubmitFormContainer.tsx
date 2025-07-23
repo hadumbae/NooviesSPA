@@ -8,19 +8,19 @@ import {TheatreForm, TheatreFormValues} from "@/pages/theatres/schema/forms/Thea
 import TheatreSubmitFormView from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormView.tsx";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 
-type Props = FormMutationOnSubmitParams<Theatre> & {
+type SubmitEditProps = (
+    { isEditing: true, theatre: Theatre } |
+    { isEditing?: false, theatre?: never }
+);
+
+type SubmitFormProps = Omit<FormMutationOnSubmitParams<Theatre>, "onSubmitSuccess"> & {
     className?: string;
     disableFields?: (keyof TheatreFormValues)[];
     presetValues?: Partial<TheatreFormValues>;
-} & ( | {
-    isEditing: true;
-    theatre: Theatre;
-} | {
-    isEditing?: false;
-    theatre?: never;
-});
+    onSubmitSuccess?: (theatre: Theatre) => void;
+} & SubmitEditProps;
 
-const TheatreSubmitFormContainer: FC<Props> = (params) => {
+const TheatreSubmitFormContainer: FC<SubmitFormProps> = (params) => {
     const {isEditing, theatre, disableFields, presetValues, className, ...mutationOptions} = params;
 
     const form = useTheatreSubmitForm({theatre, presetValues});

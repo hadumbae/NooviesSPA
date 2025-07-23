@@ -10,6 +10,7 @@ import TheatreCreateBreadcrumbs from "@/pages/theatres/components/breadcrumbs/ad
 
 const TheatreCreatePage: FC = () => {
     const navigate = useNavigate();
+
     const onSubmit = (theatre: Theatre) => {
         navigate(`/admin/theatres/get/${theatre._id}`);
     }
