@@ -13,9 +13,13 @@ import {ParseError} from "@/common/errors/ParseError.ts";
 import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 
-export type TheatreSubmitMutationParams = Omit<FormMutationOnSubmitParams<Theatre>, "onSubmitSuccess"> &
-    { form: UseFormReturn<TheatreFormValues>, onSubmitSuccess?: (theatre: Theatre) => void } &
-    (| FormMutationEditingParams);
+export type TheatreSubmitMutationParams =
+    Omit<FormMutationOnSubmitParams<Theatre>, "onSubmitSuccess"> &
+    FormMutationEditingParams &
+    {
+        form: UseFormReturn<TheatreFormValues>,
+        onSubmitSuccess?: (theatre: Theatre) => void,
+    };
 
 export default function useTheatreSubmitMutation(
     params: TheatreSubmitMutationParams

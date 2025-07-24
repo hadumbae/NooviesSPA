@@ -49,27 +49,26 @@ export type FormMutationOnSubmitParams<
  *
  * When `isEditing` is false or undefined, no `_id` should be present.
  */
-export type FormMutationEditingParams =
-    {
-        /**
-         * Flag indicating the form is in editing mode.
-         */
-        isEditing: true;
+export type FormMutationEditingParams = | {
+    /**
+     * Flag indicating the form is in editing mode.
+     */
+    isEditing: true;
 
-        /**
-         * The unique identifier of the entity being edited.
-         */
-        _id: ObjectId;
-    } | {
-        /**
-         * Flag indicating the form is not in editing mode (default).
-         */
-        isEditing?: false;
+    /**
+     * The unique identifier of the entity being edited.
+     */
+    _id: ObjectId;
+} | {
+    /**
+     * Flag indicating the form is not in editing mode (default).
+     */
+    isEditing?: false;
 
-        /**
-         * No `_id` should be present when not editing.
-         */
-        _id?: never;
+    /**
+     * No `_id` should be present when not editing.
+     */
+    _id?: never;
 };
 
 /**
@@ -84,4 +83,4 @@ export type FormMutationResultParams<
     TData = unknown,
     TError = Error,
     TSchema extends ZodTypeAny = ZodTypeAny
-> = FormMutationOnSubmitParams<TData, TError, TSchema> & (| FormMutationEditingParams);
+> = FormMutationOnSubmitParams<TData, TError, TSchema> & FormMutationEditingParams;
