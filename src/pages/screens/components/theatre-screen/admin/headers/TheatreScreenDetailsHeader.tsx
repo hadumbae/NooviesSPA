@@ -7,6 +7,8 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {Plus, Trash} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import ScreenDeleteWarningDialog from "@/pages/screens/components/screens/ScreenDeleteWarningDialog.tsx";
+import SeatSubmitFormPanel from "@/pages/seats/components/forms/submit-form/SeatSubmitFormPanel.tsx";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 
 type DetailsHeader = {
     theatre: TheatreDetails;
@@ -19,9 +21,25 @@ const TheatreScreenDetailsHeader: FC<DetailsHeader> = ({theatre, screen}) => {
     const {_id: theatreID, name: theatreName} = theatre;
     const {_id: screenID, name: screenName} = screen;
 
-    const onDelete = () => {
-        navigate(`/admin/theatres/get/${theatreID}`);
-    }
+    const onDelete = () => navigate(`/admin/theatres/get/${theatreID}`);
+    const presetValues = {theatre: theatreID, screen: screenID};
+    const disableFields: (keyof SeatFormValues)[] = ["theatre", "screen"];
+
+    const seatFormPanel = (
+        <SeatSubmitFormPanel presetValues={presetValues} disableFields={disableFields}>
+            <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
+                <Plus/> Seat
+            </Button>
+        </SeatSubmitFormPanel>
+    );
+
+    const screenDeleteDialog = (
+        <ScreenDeleteWarningDialog screenID={screenID} onSubmitSuccess={onDelete}>
+            <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
+                <Trash/> Delete
+            </Button>
+        </ScreenDeleteWarningDialog>
+    );
 
     return (
         <header className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -30,15 +48,8 @@ const TheatreScreenDetailsHeader: FC<DetailsHeader> = ({theatre, screen}) => {
                 <HeaderDescription>Screen at {theatreName}. Handle seats and showings here.</HeaderDescription>
             </section>
             <section className="text-right">
-                <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
-                    <Plus/> Seat
-                </Button>
-
-                <ScreenDeleteWarningDialog screenID={screenID} onSubmitSuccess={onDelete}>
-                    <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
-                        <Trash/> Delete
-                    </Button>
-                </ScreenDeleteWarningDialog>
+                {seatFormPanel}
+                {screenDeleteDialog}
             </section>
         </header>
     );
