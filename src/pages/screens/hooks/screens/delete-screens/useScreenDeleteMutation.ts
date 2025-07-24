@@ -5,32 +5,11 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
 
-/**
- * React hook that returns a mutation for deleting a single screen by its `_id`.
- *
- * This hook integrates with React Query (`useMutation`) and wraps the delete operation
- * provided by `ScreenRepository.delete`, handles API responses, shows success/error
- * toasts, and invalidates the relevant screen query cache on success.
- *
- * ### Usage:
- * ```tsx
- * const deleteMutation = useScreenDeleteMutation();
- * deleteMutation.mutate({ _id: 'abc123' });
- * ```
- *
- * @param params - Optional configuration object:
- *  - `onSubmitSuccess`: Callback called after a successful delete.
- *  - `onSubmitError`: Callback called if an error occurs.
- *  - `successMessage`: Custom success toast message (default: `"Screen deleted."`).
- *  - `errorMessage`: Custom error toast message (default: error.message or fallback string).
- *
- * @returns A `useMutation` result object from React Query,
- * which includes `.mutate`, `.mutateAsync`, `.isLoading`, etc.
- *
- * @see {@link ScreenRepository.delete}
- * @see {@link handleAPIResponse}
- */
-export default function useScreenDeleteMutation(params: FormMutationOnSubmitParams = {}) {
+type MutationParams = Omit<FormMutationOnSubmitParams, "onSubmitSuccess"> & {
+    onSubmitSuccess?: () => void;
+}
+
+export default function useScreenDeleteMutation(params: MutationParams = {}) {
     const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
 
     const mutationKey = ["delete_single_screen"];

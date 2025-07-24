@@ -1,7 +1,10 @@
 import {UseFormReturn} from "react-hook-form";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
-import {FormMutationResultParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {
+    FormMutationEditingParams,
+    FormMutationOnSubmitParams,
+} from "@/common/type/form/FormMutationResultParams.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
 import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
@@ -11,9 +14,13 @@ import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 
-export type SeatSubmitMutationFormParams = FormMutationResultParams & {
-    form: UseFormReturn<SeatFormValues>,
-}
+export type SeatSubmitMutationFormParams =
+    Omit<FormMutationOnSubmitParams, "onSubmitSuccess"> &
+    FormMutationEditingParams &
+    {
+        form: UseFormReturn<SeatFormValues>;
+        onSubmitSuccess?: (seat: Seat) => void;
+    };
 
 export default function useSeatSubmitMutation(params: SeatSubmitMutationFormParams): UseMutationResult<Seat, Error, SeatForm> {
     const {

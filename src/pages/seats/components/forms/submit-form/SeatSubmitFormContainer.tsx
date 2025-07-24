@@ -10,19 +10,15 @@ import SeatSubmitFormView from "@/pages/seats/components/forms/submit-form/SeatS
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 
-type FormEditingProps = {
-    isEditing: true;
-    seat: Seat;
-} | {
-    isEditing?: false;
-    seat?: never;
-};
-
-type FormProps = FormMutationOnSubmitParams<unknown> & {
-    className?: string;
-    presetValues?: Partial<SeatFormValues>;
-    disableFields?: (keyof SeatFormValues)[];
-} & (| FormEditingProps);
+type FormProps =
+    Omit<FormMutationOnSubmitParams<Seat>, "onSubmitSuccess"> &
+    (| { isEditing: true, seat: Seat } | { isEditing?: false, seat?: never }) &
+    {
+        className?: string;
+        presetValues?: Partial<SeatFormValues>;
+        disableFields?: (keyof SeatFormValues)[];
+        onSubmitSuccess?: (seat: Seat) => void;
+    };
 
 const SeatSubmitFormContainer: FC<FormProps> = (params) => {
     const {className, isEditing, seat, presetValues, disableFields, ...formOptions} = params;
