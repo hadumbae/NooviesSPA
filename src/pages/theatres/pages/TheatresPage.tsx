@@ -6,7 +6,7 @@ import useTitle from "@/common/hooks/document/useTitle.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import useFetchTheatres from "@/pages/theatres/hooks/queries/query/fetch-by-query/useFetchTheatres.ts";
-import TheatreListCard from "@/pages/theatres/components/TheatreListCard.tsx";
+import TheatreIndexCard from "@/pages/theatres/components/index-page/TheatreIndexCard.tsx";
 import {PaginatedTheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
@@ -33,7 +33,7 @@ const TheatresPage: FC = () => {
 
                     const hasTheatreSection = (
                         <PageSection className="grid grid-cols-1 gap-4">
-                            {theatres.map((theatre) => <TheatreListCard key={theatre._id} theatre={theatre}/>)}
+                            {theatres.map((theatre) => <TheatreIndexCard key={theatre._id} theatre={theatre}/>)}
                         </PageSection>
                     );
 
