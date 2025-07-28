@@ -17,12 +17,11 @@ const TheatreDetailsCard: FC<Props> = ({theatre}) => {
 
     return (
         <Card>
-            <CardContent className="p-4 flex flex-col space-y-5">
+            <CardContent className="p-4 flex flex-col gap-7">
                 <section>
                     <h1 className="font-extrabold uppercase">General Details</h1>
                     <Separator/>
                 </section>
-
 
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                     <section className="col-span-2 lg:col-span-4">
@@ -33,7 +32,6 @@ const TheatreDetailsCard: FC<Props> = ({theatre}) => {
                     <DetailsCardSpan label="Screens" text={`${screenCount} screens`}/>
                     <DetailsCardSpan label="Upcoming Showings" text={`${futureShowingCount} showings`}/>
                 </div>
-
 
                 <section>
                     <h1 className="font-extrabold uppercase">Location</h1>

@@ -29,6 +29,30 @@ const TheatreDetailsPage: FC = () => {
     const navigate = useNavigate();
     const onDelete = () => navigate("/admin/theatres");
 
+    const theatreTabs = (
+        <Tabs defaultValue={activeTab ?? "screens"} className="h-full">
+            <section className="flex justify-center">
+                <TabsList>
+                    <TabsTrigger value="screens">Screens</TabsTrigger>
+                    <TabsTrigger value="showings">Showings</TabsTrigger>
+                </TabsList>
+            </section>
+
+            <TabsContent value="screens" className="h-full py-5">
+                <TheatreScreensOverviewTab
+                    theatreID={theatreID}
+                    page={screenPage}
+                    perPage={screenPerPage}
+                    setPage={setScreenPage}
+                />
+            </TabsContent>
+
+            <TabsContent value="showings">
+                Showings
+            </TabsContent>
+        </Tabs>
+    );
+
     return (
         <QueryBoundary query={query}>
             <ValidatedQueryBoundary query={query} schema={TheatreDetailsSchema} message={"Invalid theatre data."}>
@@ -41,25 +65,7 @@ const TheatreDetailsPage: FC = () => {
                             <TheatreDetailsCard theatre={theatre}/>
                         </PageSection>
 
-                        <Tabs defaultValue={activeTab ?? "screens"} className="h-full">
-                            <section className="flex justify-center">
-                                <TabsList>
-                                    <TabsTrigger value="screens">Screens</TabsTrigger>
-                                    <TabsTrigger value="showings">Showings</TabsTrigger>
-                                </TabsList>
-                            </section>
-
-                            <TabsContent value="screens" className="h-full py-5">
-                                <TheatreScreensOverviewTab
-                                    theatreID={theatreID}
-                                    page={screenPage}
-                                    perPage={screenPerPage}
-                                    setPage={setScreenPage}
-                                />
-                            </TabsContent>
-
-                            <TabsContent value="showings">Showings</TabsContent>
-                        </Tabs>
+                        {theatreTabs}
 
                     </PageFlexWrapper>
                 )}

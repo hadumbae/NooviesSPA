@@ -52,7 +52,7 @@ const TheatreSubmitFormView: FC<TheatreSubmitFormViewProps> = (params) => {
                             activeFields["seatCapacity"] &&
                             <HookFormInput
                                 name="seatCapacity"
-                                label="Number Of Seats"
+                                label="Number Of Seats (Capacity)"
                                 type="number"
                                 min={0}
                                 control={form.control}
