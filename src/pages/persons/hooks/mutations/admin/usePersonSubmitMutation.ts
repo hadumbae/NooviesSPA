@@ -6,7 +6,7 @@ import {toast} from "react-toastify";
 import mutationErrorHandler from "@/common/handlers/mutation/MutationFormErrorHandler.ts";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
+import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 
 export type PersonSubmitParams = {
     form: UseFormReturn<PersonSubmit>;
@@ -30,7 +30,7 @@ export default function usePersonSubmitMutation(params: PersonSubmitParams) {
             ? () => repository.update<Person>({_id, data})
             : () => repository.create<Person>({data});
 
-        return handleAPIResponse({action: () => action()});
+        return handleQueryResponse({action: () => action()});
     }
 
     const onSuccess = (data: unknown) => {

@@ -1,40 +1,54 @@
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
-import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
+import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 
 /**
- * Parameters for `useQueryFnHandler`.
+ * Parameters for {@link useQueryFnHandler}.
  *
- * @template TReturns - The expected return type of the API call.
- * @property action - A function that performs the API request and returns a `FetchReturns` object.
- * @property errorMessage - Optional custom error message shown if the response is not OK.
+ * @template TReturns - Type of the successful response payload.
  */
 type HandleParams<TReturns = unknown> = {
+    /**
+     * The async function that performs the fetch or API request.
+     * Must return a {@link FetchReturns} object containing:
+     * - `response` - the raw `Response` object.
+     * - `result` - the parsed response body.
+     */
     action: () => Promise<FetchReturns<TReturns>>;
+
+    /**
+     * Optional custom error message to use if the response is not OK.
+     * Defaults to `"Failed to fetch data. Please try again."`.
+     */
     errorMessage?: string;
-}
+};
 
 /**
- * Wraps an asynchronous API action with built-in response validation and error handling.
+ * A small utility that wraps an API call into a query function
+ * compatible with React Query.
  *
- * Designed to be passed directly into `queryFn` in `useQuery` from React Query,
- * this function ensures failed requests throw structured errors using `handleAPIResponse`.
+ * This function:
+ * - Wraps the `action` inside {@link handleQueryResponse}.
+ * - Automatically throws `HttpResponseError` or `ParseError` when needed.
+ * - Returns a function suitable for passing to React Query's `queryFn`.
  *
- * @template TReturns - The type of data expected from the API response.
- * @param params - The API call and optional custom error message.
- * @returns An async function suitable for use as a React Query `queryFn`.
+ * @template TReturns - Type of the successful response payload.
+ *
+ * @param params - {@link HandleParams} containing the action and optional error message.
+ *
+ * @returns A function that can be passed directly to React Query's `queryFn`.
  *
  * @example
  * ```ts
- * const queryFn = useQueryFnHandler({
- *   action: () => UserRepository.getById({ _id }),
- *   errorMessage: "Failed to load user profile",
+ * const userQuery = useQuery({
+ *   queryKey: ["user", userId],
+ *   queryFn: useQueryFnHandler({
+ *     action: () => fetchUser(userId),
+ *     errorMessage: "Failed to load user."
+ *   })
  * });
- *
- * useQuery({ queryKey: ["user", _id], queryFn });
  * ```
  */
 export default function useQueryFnHandler<TReturns = unknown>(params: HandleParams<TReturns>) {
     const {action, errorMessage} = params;
-
-    return async () => handleAPIResponse<TReturns>({action, errorMessage});
+    return async () => handleQueryResponse<TReturns>({action, errorMessage});
 }

@@ -5,7 +5,7 @@ import {
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {toast} from "react-toastify";
 import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
-import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
+import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 
 /**
  * Parameters for configuring the movie credit submit mutation.
@@ -50,7 +50,7 @@ export default function useMovieCreditSubmitMutation(
     const submitMovieCreditData = async (values: MovieCreditSubmit) => {
         console.log("Movie Credit Submit Values: ", values);
 
-        return handleAPIResponse({
+        return handleQueryResponse({
             action: () => MovieCreditRepository.create<MovieCredit>({data: values, populate}),
         });
     }

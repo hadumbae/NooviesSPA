@@ -6,7 +6,7 @@ import {
     FormMutationOnSubmitParams,
 } from "@/common/type/form/FormMutationResultParams.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
+import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import {toast} from "react-toastify";
 import {ParseError} from "@/common/errors/ParseError.ts";
@@ -41,7 +41,7 @@ export default function useSeatSubmitMutation(params: SeatSubmitMutationFormPara
             ? () => SeatRepository.update({_id, data: values})
             : () => SeatRepository.create({data: values});
 
-        const returnData = await handleAPIResponse({action, errorMessage: "Failed to submit data. Please try again."});
+        const returnData = await handleQueryResponse({action, errorMessage: "Failed to submit data. Please try again."});
         const {success, data: parsedData, error} = SeatSchema.safeParse(returnData);
 
         if (!success) {

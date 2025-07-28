@@ -7,7 +7,7 @@ import {
     FormMutationEditingParams,
     FormMutationOnSubmitParams,
 } from "@/common/type/form/FormMutationResultParams.ts";
-import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
+import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import {toast} from "react-toastify";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
@@ -42,7 +42,7 @@ export default function useTheatreSubmitMutation(
             ? () => TheatreRepository.update({_id, data: values})
             : () => TheatreRepository.create({data: values});
 
-        const returnData = await handleAPIResponse({
+        const returnData = await handleQueryResponse({
             action,
             errorMessage: "Failed to submit data. Please try again.",
         });

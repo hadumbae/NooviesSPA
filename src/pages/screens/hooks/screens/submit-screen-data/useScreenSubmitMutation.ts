@@ -6,7 +6,7 @@ import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.
 import {toast} from "react-toastify";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
-import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
+import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import {ScreenSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
 
@@ -26,7 +26,7 @@ export default function useScreenSubmitMutation(
             ? () => ScreenRepository.update({_id, data: values})
             : () => ScreenRepository.create({data: values});
 
-        const returnData = await handleAPIResponse({action, errorMessage: "Failed to submit data. Please try again."});
+        const returnData = await handleQueryResponse({action, errorMessage: "Failed to submit data. Please try again."});
         const {success, data: parsedData, error} = ScreenSchema.safeParse(returnData);
 
         if (!success) {

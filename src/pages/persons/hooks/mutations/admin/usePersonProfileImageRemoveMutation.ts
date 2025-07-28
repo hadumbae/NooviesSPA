@@ -2,7 +2,7 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {PersonImageRepository} from "@/pages/persons/repositories/PersonImageRepository.ts";
 import {RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
-import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
+import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import {toast} from "react-toastify";
 
 type ImageSubmitParams = RequestOptions & {
@@ -20,7 +20,7 @@ export default function usePersonProfileImageRemoveMutation(params: ImageSubmitP
     const mutationKey = ["remove_person_profile_image", {_id}] as const;
 
     const removeImage = async () => {
-        return handleAPIResponse({
+        return handleQueryResponse({
             action: () => PersonImageRepository.removeProfileImage({personID: _id, ...options})
         });
     }

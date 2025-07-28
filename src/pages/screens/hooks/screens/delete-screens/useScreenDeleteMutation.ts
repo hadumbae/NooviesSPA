@@ -3,7 +3,7 @@ import {toast} from "react-toastify";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
-import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
+import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 
 type MutationParams = Omit<FormMutationOnSubmitParams, "onSubmitSuccess"> & {
     onSubmitSuccess?: () => void;
@@ -16,7 +16,7 @@ export default function useScreenDeleteMutation(params: MutationParams = {}) {
     const queryClient = useQueryClient();
 
     const mutationFn = async ({_id}: { _id: ObjectId }) => {
-        await handleAPIResponse({
+        await handleQueryResponse({
             action: () => ScreenRepository.delete({_id}),
             errorMessage: "Failed to delete screen data. Please try again.",
         });

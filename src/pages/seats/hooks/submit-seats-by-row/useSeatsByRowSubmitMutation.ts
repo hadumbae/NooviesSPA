@@ -1,6 +1,6 @@
 import {SeatsByRowForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
+import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import SeatSubmitRepository from "@/pages/seats/repositories/seat-submit-repository/SeatSubmitRepository.ts";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {toast} from "react-toastify";
@@ -21,7 +21,7 @@ export default function useSeatsByRowSubmitMutation(
     const submitData = async (data: SeatsByRowForm) => {
         const action = () => SeatSubmitRepository.submitSeatsByRow({data});
 
-        const result = await handleAPIResponse({action, errorMessage: "Failed to submit seat data. Please try again."});
+        const result = await handleQueryResponse({action, errorMessage: "Failed to submit seat data. Please try again."});
         const {data: parsedData, success, error} = validateAPIResponse({
             data: result,
             schema: validationSchema,

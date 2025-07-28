@@ -3,7 +3,7 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {PersonImageRepository} from "@/pages/persons/repositories/PersonImageRepository.ts";
 import {RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import {PersonProfileImageSubmitObject} from "@/pages/persons/schema/admin/PersonProfileImageSubmitSchema.ts";
-import handleAPIResponse from "@/common/utility/query/handleAPIResponse.ts";
+import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import {toast} from "react-toastify";
 
 type ImageSubmitParams = RequestOptions & {
@@ -24,7 +24,7 @@ export default function usePersonProfileImageSubmitMutation(params: ImageSubmitP
         const formData = new FormData();
         formData.append("profileImage", data.profileImage);
 
-        return handleAPIResponse({
+        return handleQueryResponse({
             action: () => PersonImageRepository.uploadProfileImage({personID: _id, data: formData, ...options})
         });
     }
