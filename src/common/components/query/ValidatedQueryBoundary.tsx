@@ -1,86 +1,127 @@
 import {UseQueryResult} from "@tanstack/react-query";
 import {z, ZodTypeAny} from "zod";
 import validateQuery from "@/common/hooks/validation/validate-query/validateQuery.ts";
-import {ReactNode} from "react";
+import {ComponentType, ReactNode} from "react";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-
+import {ParseError} from "@/common/errors/ParseError.ts";
 
 /**
  * Props for {@link ValidatedQueryBoundary}.
  *
- * @template TData - Raw data type returned by the React Query.
- * @template TError - Error type returned by the React Query. Must extend {@link Error}.
- * @template TSchema - Zod schema type used for validation.
+ * @template TSchema - The Zod schema type used to validate the query's data.
  */
-export type ValidatedQueryBoundaryProps<
-    TData = unknown,
-    TError extends Error = Error,
-    TSchema extends ZodTypeAny = ZodTypeAny
-> = {
+export type ValidatedQueryBoundaryProps<TSchema extends ZodTypeAny = ZodTypeAny> = {
     /**
-     * Render prop function called with the validated data.
+     * Render function that receives validated data.
+     * Will only be called if validation succeeds.
      *
-     * Receives data validated against the provided Zod schema.
-     *
-     * @param data - The validated data of type inferred from the schema.
-     * @returns React nodes to render.
+     * @param data - The validated data, typed according to the provided schema.
+     * @returns A ReactNode to render.
      */
     children: (data: z.infer<TSchema>) => ReactNode;
 
     /**
-     * The React Query result object to validate.
-     *
-     * Contains query status and fetched data.
+     * The query result object from `useQuery` or a similar hook.
+     * Its `data` will be validated against the provided schema.
      */
-    query: UseQueryResult<TData, TError>;
+    query: UseQueryResult;
 
     /**
-     * Zod schema against which to validate the query's data.
+     * The Zod schema to validate the query's `data` against.
+     * Validation will ensure data matches the expected structure before rendering children.
      */
     schema: TSchema;
 
     /**
-     * Optional custom error message used if validation fails.
+     * Optional custom error message shown if validation fails.
+     * Defaults to a generic "Invalid Data." message.
      */
     message?: string;
+
+    /**
+     * If `true`, the loader will be displayed during background refetching
+     * when there is no existing data yet.
+     * Defaults to `false`.
+     */
+    loaderOnFetch?: boolean;
+
+    /**
+     * Optional loader component to display during pending states.
+     * Defaults to {@link PageLoader}.
+     */
+    loaderComponent?: ComponentType;
+
+    /**
+     * Optional error component to display if validation fails.
+     * Defaults to {@link PageParseError}.
+     *
+     * The component will receive:
+     * - `error`: A {@link ParseError} with validation details.
+     * - `message`: An optional message passed from props.
+     */
+    errorComponent?: ComponentType<{ error: ParseError; message?: string }>;
 };
 
 /**
- * React component that validates a React Query result using a Zod schema.
+ * A boundary component that validates a React Query's result against a Zod schema
+ * before rendering its children.
  *
- * Renders an error component if the query errors, is pending, or
- * if the data fails validation. Otherwise renders children with validated data.
+ * This component:
+ * - Shows a loader while the query is pending (and optionally during background fetch).
+ * - Validates query data using the provided Zod schema.
+ * - Shows an error component if validation fails.
+ * - Renders its children only when validation succeeds.
  *
- * @template TData - Raw data type returned by the React Query.
- * @template TError - Error type returned by the React Query. Must extend {@link Error}.
- * @template TSchema - Zod schema type used for validation.
+ * @template TSchema - The Zod schema type used to validate the query's data.
  *
- * @param props - Props containing query, schema, children render prop, and optional error message.
+ * @param props - See {@link ValidatedQueryBoundaryProps}.
  *
- * @returns React node(s) representing either loading/error state or children with validated data.
+ * @returns The loader, error component, or children depending on query state and validation result.
  *
  * @example
  * ```tsx
+ * const schema = z.object({
+ *   id: z.number(),
+ *   name: z.string(),
+ * });
+ *
+ * const query = useQuery(...);
+ *
  * <ValidatedQueryBoundary
  *   query={query}
- *   schema={MyZodSchema}
- *   message="Invalid data received."
+ *   schema={schema}
+ *   message="Invalid user data"
  * >
- *   {(validatedData) => <DisplayComponent data={validatedData} />}
+ *   {(data) => <UserProfile user={data} />}
  * </ValidatedQueryBoundary>
  * ```
  */
-const ValidatedQueryBoundary = <TData = unknown, TError extends Error = Error, TSchema extends ZodTypeAny = ZodTypeAny>(
-    props: ValidatedQueryBoundaryProps<TData, TError, TSchema>
+const ValidatedQueryBoundary = <TSchema extends ZodTypeAny = ZodTypeAny>(
+    props: ValidatedQueryBoundaryProps<TSchema>
 ) => {
-    const {children, query, schema, message} = props;
+    const {
+        children,
+        query,
+        schema,
+        message,
+        loaderOnFetch = false,
+        loaderComponent: Loader = PageLoader,
+        errorComponent: Error = PageParseError,
+    } = props;
 
-    const {isPending} = query;
+    const {data: queryData, isPending, isFetching} = query;
     const {success, error, data} = validateQuery({query, schema, message});
 
-    if (isPending) return <PageLoader/>;
-    if (!success) return <PageParseError error={error} message={message}/>;
+    if (isPending || (loaderOnFetch && isFetching && !queryData)) {
+        console.log("Data is loading...")
+        return <Loader/>;
+    }
+
+    if (!success) {
+        console.log("An Error Occurred. Validation failed...");
+        return <Error error={error as ParseError} message={message}/>;
+    }
 
     return (
         <>

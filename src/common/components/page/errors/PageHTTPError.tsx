@@ -1,51 +1,67 @@
 import {FC} from 'react';
-import {ParseError} from "@/common/errors/ParseError.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import {TriangleAlert} from "lucide-react";
 
 /**
- * Props for the `PageHTTPError` component.
- *
- * These props allow customization of the error display, or passing in a specific `HttpResponseError`
- * to render context-aware messaging based on HTTP status codes.
+ * Props for the {@link PageHTTPError} component.
  */
-interface ErrorProps {
+type PageHTTPErrorProps = {
     /**
-     * Optional override for the default main error header.
+     * Optional header text displayed as the main error title.
+     * Defaults to a status-specific message (e.g., `"Not Found"` for `404`).
      */
     header?: string;
 
     /**
-     * Optional override for the default subtitle or error message.
+     * Optional message displayed below the header.
+     * Defaults to either:
+     * - A status-specific explanation, or
+     * - The error's `message` property, or
+     * - `"HTTP Code: <status>"` if no other message is available.
      */
     message?: string;
 
     /**
-     * The error object to display. If this is not an instance of `HttpResponseError`,
-     * the component will fall back to rendering a generic `PageError`.
+     * The HTTP error instance containing the HTTP response status and message.
+     * If the provided error is not an {@link HttpResponseError}, the component
+     * will fall back to rendering {@link PageError}.
      */
-    error?: Error | ParseError | HttpResponseError | null;
-}
+    error: HttpResponseError;
+};
 
 /**
- * `PageHTTPError` is a React component that displays detailed, user-friendly messages
- * for `HttpResponseError` instances. It maps specific HTTP status codes (e.g. 404, 500)
- * to corresponding titles and descriptions, and falls back to a general error layout if the
- * error type is unrecognized.
+ * A page-level error component that displays an HTTP response error.
  *
- * If the error is not an instance of `HttpResponseError`, it renders a more generic `PageError`.
+ * This component:
+ * - Falls back to {@link PageError} if the provided error is not an {@link HttpResponseError}.
+ * - Maps HTTP status codes (400–504) to descriptive titles and subtitles.
+ * - Defaults to `"A Network Error Occurred"` if no mapping is available.
+ * - Displays a centered layout with an icon, header, and descriptive message.
  *
- * This component is intended for use in full-page network error states.
+ * @param params - See {@link PageHTTPErrorProps}.
  *
- * @param params - Object containing optional `header`, `message`, and an `error`.
- * @returns A React element rendering the error page.
+ * @returns A centered error page with an HTTP status-specific header and message.
+ *
+ * @example
+ * ```tsx
+ * try {
+ *   await fetchData();
+ * } catch (err) {
+ *   if (err instanceof HttpResponseError) {
+ *     return <PageHTTPError error={err} />;
+ *   }
+ * }
+ * ```
  */
-const PageHTTPError: FC<ErrorProps> = (params) => {
+const PageHTTPError: FC<PageHTTPErrorProps> = (params) => {
     const {error, message, header} = params;
 
-    if (!error || !(error instanceof HttpResponseError)) return <PageError {...params} />
+    if (!error || !(error instanceof HttpResponseError)) {
+        return <PageError {...params} />;
+    }
+
     const {response: {status}, message: errorMessage} = error;
 
     const statusText: Record<number, { text: string, subtitle: string }> = {

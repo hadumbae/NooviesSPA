@@ -1,3 +1,5 @@
+import {ParseError} from "@/common/errors/ParseError.ts";
+
 /**
  * Represents a successful validation result.
  *
@@ -37,7 +39,7 @@ type InvalidParseDataResults = {
     /**
      * The error describing why validation failed.
      */
-    error: Error;
+    error: Error | ParseError;
 };
 
 /**

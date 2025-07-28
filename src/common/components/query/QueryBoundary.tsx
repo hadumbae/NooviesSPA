@@ -1,61 +1,107 @@
-import {FC, PropsWithChildren} from 'react';
+import {ComponentType, ReactNode} from 'react';
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import {UseQueryResult} from "@tanstack/react-query";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**
  * Props for the {@link QueryBoundary} component.
  *
- * @template TData - Type of the data returned by the query.
- * @template TError - Type of the error returned by the query.
+ * @template TData - Type of the query's `data` property.
  */
-type QueryBoundaryProps<TData = unknown, TError = Error> = {
+type QueryBoundaryProps<TData = unknown> = {
     /**
-     * The query result object from `useQuery` or similar, containing
-     * loading, error, and data state.
+     * Content to render when the query succeeds.
+     * Can be:
+     * - A React node, or
+     * - A render function receiving the query's `data`.
+     *
+     * @example
+     * ```tsx
+     * <QueryBoundary query={query}>
+     *   {(data) => <UserProfile user={data} />}
+     * </QueryBoundary>
+     * ```
      */
-    query: UseQueryResult<TData, TError>;
+    children: ReactNode | ((data: TData) => ReactNode);
+
+    /**
+     * The query result from `useQuery` or similar hook.
+     * The error type is expected to be {@link HttpResponseError}.
+     */
+    query: UseQueryResult<TData, HttpResponseError>;
+
+    /**
+     * If `true`, shows the loader during background refetching
+     * when no data is currently available.
+     * Defaults to `false`.
+     */
+    loaderOnFetch?: boolean;
+
+    /**
+     * Optional custom loader component.
+     * Defaults to {@link PageLoader}.
+     */
+    loaderComponent?: ComponentType;
+
+    /**
+     * Optional custom error component.
+     * Defaults to {@link PageHTTPError}.
+     *
+     * The component will receive:
+     * - `error`: The {@link HttpResponseError} instance.
+     * - `message`: An optional error message.
+     */
+    errorComponent?: ComponentType<{ error: HttpResponseError; message?: string }>;
 };
 
 /**
- * A boundary component that handles loading and error states of a React Query.
+ * A boundary component for handling loading and error states of a React Query.
  *
- * This component renders:
- * - a {@link PageLoader} if the query is still loading (`isPending`)
- * - a {@link PageHTTPError} if the query errored (`isError`)
- * - the `children` only if the query succeeded
+ * This component:
+ * - Shows a loader while the query is pending (and optionally during background fetch).
+ * - Renders an error component if the query fails.
+ * - Renders children when the query succeeds.
  *
- * Useful to wrap a section of a page that depends on an async query.
+ * @template TData - Type of the query's `data` property.
+ *
+ * @param params - See {@link QueryBoundaryProps}.
+ *
+ * @returns Loader, error component, or children based on the query's status.
  *
  * @example
  * ```tsx
- * <QueryBoundary query={query}>
- *   <YourContent data={query.data} />
+ * const query = useQuery(...);
+ *
+ * <QueryBoundary query={query} loaderOnFetch>
+ *   {(data) => <UserProfile user={data} />}
  * </QueryBoundary>
  * ```
- *
- * @template TData - Type of the data returned by the query.
- * @template TError - Type of the error returned by the query.
  */
-const QueryBoundary: FC<PropsWithChildren<QueryBoundaryProps>> = (params) => {
-    const {children, query} = params;
-    const {isPending, isError, error} = query;
+const QueryBoundary = <TData = unknown>(
+    params: QueryBoundaryProps<TData>
+) => {
+    const {
+        children,
+        query: {data, isPending, isFetching, isError, error},
+        loaderOnFetch = false,
+        loaderComponent: Loader = PageLoader,
+        errorComponent: Error = PageHTTPError
+    } = params;
 
-    console.log("Query Data: ", {isPending, isError, error});
-
-    if (isPending) {
+    if (isPending || (loaderOnFetch && isFetching && !data)) {
         console.log("Page is loading...")
-        return <PageLoader/>;
+        return <Loader/>;
     }
 
     if (isError) {
         console.log("An Error Occurred.");
-        return <PageHTTPError error={error}/>;
+        return <Error error={error!}/>;
     }
 
     return (
         <>
-            {children}
+            {typeof children === "function" ? children(data!) : children}
         </>
     );
 };

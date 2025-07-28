@@ -1,46 +1,63 @@
-import {FC} from 'react';
 import {ParseError} from "@/common/errors/ParseError.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import {TriangleAlert} from "lucide-react";
+import {ZodIssue} from "zod";
 
 /**
- * Props for the `PageParseError` component.
- *
- * This interface defines the optional values used to customize the parse error display.
+ * Props for the {@link PageParseError} component.
  */
-interface ParseProps {
+type ParseProps = {
     /**
-     * Optional header text to override the default title.
+     * Optional header text displayed above the error details.
+     * Defaults to `"Failed To Validate Data"`.
      */
     header?: string;
 
     /**
-     * Optional message text to override the default description.
+     * Optional message displayed below the header.
+     * Defaults to `"Received Invalid Data"`.
      */
     message?: string;
 
     /**
-     * The error object to display. If not a `ParseError`, the fallback `PageError` will be shown.
+     * The parse error instance containing validation issues and raw data.
+     * If the provided error is not a {@link ParseError}, the component will
+     * fall back to rendering {@link PageError}.
      */
-    error?: Error | ParseError | HttpResponseError | null;
+    error: ParseError;
 }
 
 /**
- * `PageParseError` is a UI component that displays structured information
- * about data parsing errors (typically from schema validation).
+ * A page-level error display for failed schema validation.
  *
- * If the provided error is not an instance of `ParseError`, it falls back to rendering a generic `PageError`.
+ * This component:
+ * - Falls back to {@link PageError} if the provided error is not a {@link ParseError}.
+ * - Displays a warning icon, header, and message.
+ * - Lists validation issues from the associated {@link ParseError}.
+ * - Logs raw data and issues to the console for debugging.
  *
- * This component is intended for use in full-page error displays.
+ * @param params - See {@link ParseProps}.
  *
- * @param params - Object containing optional `header`, `message`, and `error`.
- * @returns A React element that visually represents the parse error.
+ * @returns A centered page error view with validation details.
+ *
+ * @example
+ * ```tsx
+ * try {
+ *   // some data validation logic...
+ * } catch (err) {
+ *   if (err instanceof ParseError) {
+ *     return <PageParseError error={err} />;
+ *   }
+ * }
+ * ```
  */
-const PageParseError: FC<ParseProps> = (params) => {
+const PageParseError = (params: ParseProps) => {
     const {header, message, error} = params;
-    if (!error || !(error instanceof ParseError)) return <PageError {...params} />
+
+    if (!error || !(error instanceof ParseError)) {
+        return <PageError {...params} />;
+    }
 
     const {errors, raw} = error;
     const headerText = header || "Failed To Validate Data";
@@ -49,6 +66,12 @@ const PageParseError: FC<ParseProps> = (params) => {
     console.error("Failed To Parse Data:");
     console.error("Raw: ", raw);
     console.error("Issues: ", error.errors);
+
+    const issueMap = (e: ZodIssue) => (
+        <li key={`${e.path.join(".")}-${e.message}`}>
+            [{e.path.join(".")}] {e.message}
+        </li>
+    );
 
     return (
         <PageCenter className="space-y-6">
@@ -60,9 +83,7 @@ const PageParseError: FC<ParseProps> = (params) => {
             </section>
 
             <ol className="list-disc text-sm text-neutral-400">
-                {errors.map((e) => <li key={`${e.path.join(".")}-${e.message}`}>
-                    [{e.path.join(".")}] {e.message}
-                </li>)}
+                {errors.map(issueMap)}
             </ol>
         </PageCenter>
     );
