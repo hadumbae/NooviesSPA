@@ -5,55 +5,60 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
 
 /**
- * Props for the `ErrorMessageDisplay` component.
+ * Props for the {@link ErrorMessageDisplay} component.
  */
-interface ErrorProps {
+type ErrorProps = {
     /**
      * The error object to display.
-     * Supports generic Error, HttpResponseError, and ParseError.
+     * Can be a generic `Error`, a `ParseError`, or an `HttpResponseError`.
+     * If `null` or `undefined`, a generic message will be shown.
      */
-    error?: Error | null;
+    error?: Error | ParseError | HttpResponseError | null;
 
     /**
-     * An optional message to override the default error message.
+     * Optional override message to display instead of the error's message.
      */
     displayMessage?: string;
 
     /**
-     * Optional CSS class names to apply to the root element.
+     * Optional additional CSS class names to apply to the container.
      */
     className?: string;
 
     /**
-     * Optional function name or context for logging purposes.
-     * Will be printed to the console if `logToConsole` is true.
+     * Optional name of the function or component where the error was caught.
+     * If provided and `logToConsole` is `true`, this will be logged to the console.
      */
     fnName?: string;
 
     /**
-     * Layout direction for the error message and icon.
-     * Defaults to "horizontal".
+     * Layout orientation of the component.
+     * - `"horizontal"` (default): icon and message side-by-side.
+     * - `"vertical"`: icon above the message with spacing.
      */
     orientation?: "horizontal" | "vertical";
 
     /**
-     * Whether to log details to the browser console.
+     * Whether to log error details to the console.
      * Defaults to `true`.
      */
     logToConsole?: boolean;
-}
+};
 
 /**
- * `ErrorMessageDisplay` is a reusable React component that renders a formatted error message,
- * optionally logging debugging info to the console.
- * It supports multiple error types and visual layout options.
+ * A component to display an error message with an alert icon.
  *
- * @param error - The error object to display.
- * @param displayMessage - Optional message to override the default.
- * @param className - Optional additional CSS classes.
- * @param fnName - Optional function name for logging context.
- * @param orientation - Layout orientation ("horizontal" or "vertical").
- * @param logToConsole - If true, logs error details to the console.
+ * This component:
+ * - Displays detailed error information for `HttpResponseError` and `ParseError` instances.
+ * - Logs error details to the console if `logToConsole` is enabled.
+ * - Supports customizable layout orientation and message override.
+ *
+ * @param props - {@link ErrorProps}
+ *
+ * @example
+ * ```tsx
+ * <ErrorMessageDisplay error={someError} fnName="MyComponent" />
+ * ```
  */
 const ErrorMessageDisplay: FC<ErrorProps> = ({error, displayMessage, className, fnName, orientation, logToConsole = true}) => {
     let errorMessage = error?.message ?? "Something Went Wrong.";
