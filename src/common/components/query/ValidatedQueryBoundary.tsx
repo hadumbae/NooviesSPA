@@ -60,7 +60,7 @@ export type ValidatedQueryBoundaryProps<TSchema extends ZodTypeAny = ZodTypeAny>
      * - `error`: A {@link ParseError} with validation details.
      * - `message`: An optional message passed from props.
      */
-    errorComponent?: ComponentType<{ error: ParseError; message?: string }>;
+    errorComponent?: ComponentType<{ error: Error; message?: string }>;
 };
 
 /**

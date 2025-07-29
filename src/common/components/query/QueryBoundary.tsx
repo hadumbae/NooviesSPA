@@ -42,7 +42,7 @@ type QueryBoundaryProps<TData = unknown> = {
      * - `HttpResponseError` will be handled by {@link PageHTTPError}.
      * - All other errors will be handled by {@link PageError}.
      */
-    errorComponent?: ComponentType<{ error: HttpResponseError; message?: string }>;
+    errorComponent?: ComponentType<{ error: Error; message?: string }>;
 };
 
 /**
