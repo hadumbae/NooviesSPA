@@ -7,11 +7,11 @@ import {
     FormMutationEditingParams,
     FormMutationOnSubmitParams,
 } from "@/common/type/form/FormMutationResultParams.ts";
-import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import {toast} from "react-toastify";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 
 export type TheatreSubmitMutationParams =
     Omit<FormMutationOnSubmitParams<Theatre>, "onSubmitSuccess"> &
@@ -42,7 +42,7 @@ export default function useTheatreSubmitMutation(
             ? () => TheatreRepository.update({_id, data: values})
             : () => TheatreRepository.create({data: values});
 
-        const returnData = await handleQueryResponse({
+        const returnData = await handleMutationResponse({
             action,
             errorMessage: "Failed to submit data. Please try again.",
         });

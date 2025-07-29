@@ -5,7 +5,7 @@ import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.t
 
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
-import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
+import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 
 export default function useTheatreDeleteMutation(options: FormMutationOnSubmitParams) {
     const {successMessage, onSubmitSuccess, errorMessage, onSubmitError} = options;
@@ -14,7 +14,7 @@ export default function useTheatreDeleteMutation(options: FormMutationOnSubmitPa
     const queryClient = useQueryClient();
 
     const mutationFn = async ({_id}: { _id: ObjectId }) => {
-        await handleQueryResponse({
+        await handleMutationResponse({
             action: () => TheatreRepository.delete({_id}),
             errorMessage: "Failed to delete theatre data. Please try again.",
         });
