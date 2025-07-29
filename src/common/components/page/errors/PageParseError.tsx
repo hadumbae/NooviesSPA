@@ -3,60 +3,67 @@ import PageCenter from "@/common/components/page/PageCenter.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import {TriangleAlert} from "lucide-react";
 import {ZodIssue} from "zod";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 
 /**
- * Props for the {@link PageParseError} component.
+ * Props for {@link PageParseError}.
  */
 type ParseProps = {
     /**
-     * Optional header text displayed above the error details.
-     * Defaults to `"Failed To Validate Data"`.
+     * Optional custom header to display above the error message.
+     * Defaults to `"Failed To Validate Data"` if not provided.
      */
     header?: string;
 
     /**
-     * Optional message displayed below the header.
-     * Defaults to `"Received Invalid Data"`.
+     * Optional custom message to display under the header.
+     * Defaults to `"Received Invalid Data"` if not provided.
      */
     message?: string;
 
     /**
-     * The parse error instance containing validation issues and raw data.
-     * If the provided error is not a {@link ParseError}, the component will
-     * fall back to rendering {@link PageError}.
+     * The error that triggered this page.
+     * Ideally, this should be a {@link ParseError},
+     * but {@link HttpResponseError} or a generic `Error` (or `null`)
+     * are accepted for flexibility.
+     *
+     * - If the error is a `ParseError`, a validation details view is rendered.
+     * - If the error is an `HttpResponseError`, rendering falls back to {@link PageHTTPError}.
+     * - For all other errors, rendering falls back to {@link PageError}.
      */
-    error: ParseError;
-}
+    error: ParseError | HttpResponseError | Error | null;
+};
 
 /**
- * A page-level error display for failed schema validation.
+ * A page-level component for rendering parsing/validation errors.
  *
- * This component:
- * - Falls back to {@link PageError} if the provided error is not a {@link ParseError}.
- * - Displays a warning icon, header, and message.
- * - Lists validation issues from the associated {@link ParseError}.
- * - Logs raw data and issues to the console for debugging.
+ * - When provided with a {@link ParseError}, it displays a structured
+ *   list of validation issues (`ZodIssue[]`) along with optional header/message.
+ * - When provided with a {@link HttpResponseError}, it delegates to {@link PageHTTPError}.
+ * - When provided with any other `Error` (or `null`), it falls back to {@link PageError}.
  *
- * @param params - See {@link ParseProps}.
- *
- * @returns A centered page error view with validation details.
+ * This component is primarily used to surface errors from schema validation (Zod)
+ * when parsing server responses or API data.
  *
  * @example
  * ```tsx
- * try {
- *   // some data validation logic...
- * } catch (err) {
- *   if (err instanceof ParseError) {
- *     return <PageParseError error={err} />;
- *   }
- * }
+ * <PageParseError error={new ParseError({ errors: zodIssues, raw: rawData })} />
+ *
+ * <PageParseError
+ *   header="Custom Parse Error"
+ *   message="The data format was unexpected."
+ *   error={null}
+ * />
  * ```
  */
 const PageParseError = (params: ParseProps) => {
     const {header, message, error} = params;
 
     if (!error || !(error instanceof ParseError)) {
-        return <PageError {...params} />;
+        return error instanceof HttpResponseError
+            ? <PageHTTPError {...params} />
+            : <PageError {...params} />;
     }
 
     const {errors, raw} = error;
@@ -66,12 +73,6 @@ const PageParseError = (params: ParseProps) => {
     console.error("Failed To Parse Data:");
     console.error("Raw: ", raw);
     console.error("Issues: ", error.errors);
-
-    const issueMap = (e: ZodIssue) => (
-        <li key={`${e.path.join(".")}-${e.message}`}>
-            [{e.path.join(".")}] {e.message}
-        </li>
-    );
 
     return (
         <PageCenter className="space-y-6">
@@ -83,7 +84,11 @@ const PageParseError = (params: ParseProps) => {
             </section>
 
             <ol className="list-disc text-sm text-neutral-400">
-                {errors.map(issueMap)}
+                {errors.map((e: ZodIssue) =>
+                    <li key={`${e.path.join(".")}-${e.message}`}>
+                        [{e.path.join(".")}] {e.message}
+                    </li>
+                )}
             </ol>
         </PageCenter>
     );
