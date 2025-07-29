@@ -3,10 +3,11 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import ScreenSeatRepository from "@/pages/screens/repositories/ScreenSeatRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {SeatsByRow} from "@/pages/screens/schema/screen/ScreenSeat.types.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 export default function useFetchScreenSeatsByRow<TReturns = SeatsByRow>(
     {_id, ...queries}: FetchByIDParams
-): UseQueryResult<TReturns, Error> {
+): UseQueryResult<TReturns, HttpResponseError> {
     const queryKey = ["fetch_screen_seats_by_row", {_id, ...queries}];
 
     const fetchSeats = useQueryFnHandler({

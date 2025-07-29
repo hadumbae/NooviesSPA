@@ -2,6 +2,7 @@ import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**
  * React Query hook for fetching a single screen by its ID.
@@ -20,7 +21,7 @@ import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
  */
 export default function useFetchScreen<TData>(
     {_id, ...fetchOptions}: FetchByIDParams
-): UseQueryResult<TData> {
+): UseQueryResult<TData, HttpResponseError> {
     const queryKey = ["fetch_single_screen", {_id, ...fetchOptions}];
 
     const fetchScreen = useQueryFnHandler<TData>({
