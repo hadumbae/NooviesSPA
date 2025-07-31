@@ -2,12 +2,12 @@ import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {Loader, Pencil, TableOfContents, Trash} from "lucide-react";
-import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 import {useNavigate} from "react-router-dom";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import useGenreDeleteMutation from "@/pages/genres/hooks/useGenreDeleteMutation.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 interface Props {
     genre: Genre;

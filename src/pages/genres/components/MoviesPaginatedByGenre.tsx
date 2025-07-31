@@ -1,5 +1,6 @@
 import {FC} from 'react';
-import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
+
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 interface Props {
     genre: Genre;

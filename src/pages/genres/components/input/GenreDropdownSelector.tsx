@@ -6,9 +6,9 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/common/components/ui/dropdown-menu.tsx";
-import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import useFetchMovieBrowseQueryParams from "@/pages/movies/hooks/params/useFetchMovieBrowseQueryParams.ts";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 interface DropdownProps {
     genres: Genre[];

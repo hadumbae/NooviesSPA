@@ -16,8 +16,8 @@ const GenresPage: FC = () => {
     const {page, perPage} = usePaginationSearchParams();
     const {data, isPending, isError, error, refetch} = useFetchPaginatedGenres({page, perPage, queries: {}});
 
-    if (isPending) return <PageLoader />
-    if (isError) return <PageError error={error} />
+    if (isPending) return <PageLoader />;
+    if (isError) return <PageError error={error} />;
 
     const {items: genres} = data;
     const hasGenres = (genres || []).length > 0;

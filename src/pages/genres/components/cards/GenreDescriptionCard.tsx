@@ -1,7 +1,7 @@
 import {FC} from 'react';
-import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 interface Props {
     genre: Genre;

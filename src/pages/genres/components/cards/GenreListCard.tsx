@@ -1,8 +1,8 @@
 import {FC} from 'react';
-import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import GenreOptions from "@/pages/genres/components/GenreOptions.tsx";
 import {Link} from "react-router-dom";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 interface Props {
     genre: Genre;

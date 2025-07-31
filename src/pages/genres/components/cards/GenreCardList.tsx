@@ -1,6 +1,6 @@
 import {FC} from 'react';
-import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 import GenreListCard from "@/pages/genres/components/cards/GenreListCard.tsx";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 interface Props {
     genres: Genre[];

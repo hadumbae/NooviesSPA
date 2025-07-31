@@ -4,7 +4,9 @@ import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
-import {PaginatedGenres, PaginatedGenresSchema} from "@/pages/genres/schema/GenrePaginationSchema.ts";
+
+import {PaginatedGenresSchema} from "@/pages/genres/schema/genre/Genre.schema.ts";
+import {PaginatedGenres} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 export default function useFetchPaginatedGenres(
     {page, perPage, queries}: {page: number, perPage: number, queries: QueryFilters}

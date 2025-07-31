@@ -2,9 +2,9 @@ import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Search, TableOfContents} from "lucide-react";
-import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 interface Props {
     genre: Genre;

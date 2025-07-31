@@ -1,8 +1,8 @@
 import {useSearchParams} from "react-router-dom";
 import {MovieFilterQuerySchema} from "@/pages/movies/schema/queries/MovieFilterQuerySchema.ts";
-import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import updateSearchParams from "@/common/utility/params/updateSearchParams.ts";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 export default function useFetchMovieBrowseQueryParams({genres}: { genres: Genre[] }) {
     // Setup

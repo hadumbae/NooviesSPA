@@ -1,11 +1,11 @@
 import {FC} from 'react';
-import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 import {Popover, PopoverContent, PopoverTrigger} from '@/common/components/ui/popover';
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {Ellipsis} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import useGenreDeleteMutation from "@/pages/genres/hooks/useGenreDeleteMutation.ts";
 import {Link} from "react-router-dom";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 interface Props {
     genre: Genre;

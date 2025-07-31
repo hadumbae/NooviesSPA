@@ -1,12 +1,12 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
 import formatDuration from "@/common/utility/formatDuration.ts";
 import {FavouriteMovie} from "@/pages/movies/schema/client/favourites/FavouriteMovieSchema.ts";
 import FavouritesButton from "@/common/components/buttons/FavouritesButton.tsx";
 import useAddMovieToFavouritesMutation from "@/pages/movies/hooks/client/favourites/useAddMovieToFavouritesMutation.ts";
 import useRemoveMovieToFavouritesMutation
     from "@/pages/movies/hooks/client/favourites/useRemoveMovieToFavouritesMutation.ts";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 interface DetailsProps {
     movie: FavouriteMovie;

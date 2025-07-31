@@ -1,9 +1,9 @@
 import ICloudinaryImage from "@/common/interfaces/ICloudinaryImage.ts";
-import IGenre from "@/pages/genres/interfaces/IGenre.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {ISO6391Code} from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
 import {ISO3166Alpha2Code} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
 import IShowing from "@/pages/showings/interfaces/IShowing.ts";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 /**
  * Represents a movie object with optional population of genres and showings.
@@ -50,7 +50,7 @@ export default interface IMovie {
      * @remarks
      * May contain either `ObjectId` references or fully populated `IGenre` objects.
      */
-    genres: (ObjectId | IGenre)[];
+    genres: (ObjectId | Genre)[];
 
     /**
      * ISO 8601 formatted release date (e.g., "2025-11-15").

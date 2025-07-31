@@ -1,23 +1,24 @@
-import {GenreSubmit} from "@/pages/genres/schema/GenreSubmitSchema.ts";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
 import {UseFormReturn} from "react-hook-form";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
-import {Genre, GenreSchema} from "@/pages/genres/schema/GenreSchema.ts";
+import {GenreSchema} from "@/pages/genres/schema/genre/Genre.schema.ts";
 import {toast} from "react-toastify";
 import MutationErrorHandler from "@/common/handlers/mutation/MutationFormErrorHandler.ts";
+import {GenreForm} from "@/pages/genres/schema/form/GenreForm.types.ts";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 interface Params {
     _id?: string,
-    form: UseFormReturn<GenreSubmit>,
+    form: UseFormReturn<GenreForm>,
     onSubmit?: (genre: Genre) => void,
 }
 
 export default function useGenreSubmitMutation(
     {_id, form, onSubmit}: Params
-): UseMutationResult<Genre, Error, GenreSubmit> {
-    const submitGenre = async (values: GenreSubmit) => {
+): UseMutationResult<Genre, Error, GenreForm> {
+    const submitGenre = async (values: GenreForm) => {
         const action = _id
             ? () => GenreRepository.update({_id, data: values})
             : () => GenreRepository.create({data: values})

@@ -8,8 +8,8 @@ import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import useGenreSubmitForm from "@/pages/genres/hooks/useGenreSubmitForm.ts";
 import useGenreSubmitMutation from "@/pages/genres/hooks/useGenreSubmitMutation.ts";
 
-import {Genre} from "@/pages/genres/schema/GenreSchema.ts";
-import {GenreSubmit} from "@/pages/genres/schema/GenreSubmitSchema.ts";
+import {GenreForm} from "@/pages/genres/schema/form/GenreForm.types.ts";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 interface Props {
     genre?: Genre;
@@ -20,7 +20,7 @@ const GenreSubmitForm: FC<Props> = ({genre, onGenreSubmit}) => {
     const form = useGenreSubmitForm({genre});
     const {mutate} = useGenreSubmitMutation({form, _id: genre?._id, onSubmit: onGenreSubmit});
 
-    const onSubmit = (values: GenreSubmit) => {
+    const onSubmit = (values: GenreForm) => {
         console.log("Values: ", values);
         mutate(values);
     };

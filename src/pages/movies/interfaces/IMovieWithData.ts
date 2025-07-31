@@ -1,41 +1,37 @@
-import IGenre from "@/pages/genres/interfaces/IGenre.ts";
 import IShowing from "@/pages/showings/interfaces/IShowing.ts";
 import IMovie from "@/pages/movies/interfaces/IMovie.ts";
 import {IMovieCredit} from "@/pages/moviecredit/interfaces/IMovieCredit.ts";
+import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 /**
- * Represents a fully populated movie object with related entities.
+ * **IMovieWithData**
  *
- * @remarks
- * This interface extends {@link IMovie} but assumes that related fields have been fully populated.
- * Specifically, the `genres` and `showings` fields contain full objects rather than IDs,
- * and the `crew` and `cast` fields contain virtual Mongoose relationships.
+ * Extended movie interface that includes related data.
  *
- * This is typically used when the movie data has been enriched with related records,
- * such as in admin views or API responses where full entity data is needed.
+ * Extends {@link IMovie} and adds:
+ * - `genres`: Associated genres.
+ * - `showings`: Scheduled showings for the movie.
+ * - `crew`: Crew members (credits).
+ * - `cast`: Cast members (credits).
  */
 export default interface IMovieWithData extends IMovie {
     /**
-     * Fully populated list of genres associated with the movie.
-     *
-     * @override
+     * List of genres associated with the movie.
      */
-    genres: IGenre[];
+    genres: Genre[];
 
     /**
-     * Fully populated list of showings associated with the movie.
-     *
-     * @override
+     * Showings where this movie is scheduled.
      */
     showings: IShowing[];
 
     /**
-     * Virtual field populated by Mongoose containing all crew member credits for the movie.
+     * Crew credits (e.g., director, writers).
      */
     crew: IMovieCredit[];
 
     /**
-     * Virtual field populated by Mongoose containing all cast member credits for the movie.
+     * Cast credits (e.g., actors).
      */
     cast: IMovieCredit[];
 }
