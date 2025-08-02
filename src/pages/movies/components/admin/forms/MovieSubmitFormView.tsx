@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {Form} from "@/common/components/ui/form.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
-import GenreHookFormSelect from "@/pages/genres/components/form/GenreHookFormSelect.tsx";
+import GenreHookFormSelect from "@/pages/genres/components/input/GenreHookFormSelect.tsx";
 import LanguageHookFormSelect from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
