@@ -82,7 +82,12 @@ export default function useGenreSubmitMutation(
 
     const onSuccess = async (genre: Genre) => {
         toast.success(successMessage ?? `Genre ${isEditing ? "Updated" : "Created"}`);
-        await queryClient.invalidateQueries({queryKey: ["fetch_genres_by_query"], exact: false});
+
+        await Promise.all([
+            queryClient.invalidateQueries({queryKey: ["fetch_single_genre"], exact: false}),
+            queryClient.invalidateQueries({queryKey: ["fetch_genres_by_query"], exact: false}),
+        ]);
+
         onSubmitSuccess && onSubmitSuccess(genre);
     }
 
