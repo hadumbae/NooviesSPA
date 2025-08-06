@@ -73,8 +73,7 @@ export default function useGenreDeleteMutation(params: DeleteMutationParams) {
     }
 
     const onError = (error: unknown) => {
-        toast.error(errorMessage ?? "Oops. Failed to delete genre. Please try again.");
-        handleMutationResponseError(error);
+        handleMutationResponseError({error, errorMessage});
         onSubmitError && onSubmitError(error);
     }
 

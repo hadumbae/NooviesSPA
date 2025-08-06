@@ -92,8 +92,7 @@ export default function useGenreSubmitMutation(
     }
 
     const onError = (error: Error) => {
-        toast.error(errorMessage ?? "Something went wrong. Please try again.");
-        handleMutationFormError({form, error});
+        handleMutationFormError({form, error, fallbackMessage: errorMessage});
         onSubmitError && onSubmitError(error);
     }
 
