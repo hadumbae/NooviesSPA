@@ -5,10 +5,33 @@ import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import getAddressString from "@/common/utility/location/getAddressString.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 
+/**
+ * Props for the {@link TheatreDetailsCard} component.
+ */
 interface Props {
+    /**
+     * Theatre details object containing general information
+     * such as name, seating capacity, and location.
+     */
     theatre: TheatreDetails;
 }
 
+/**
+ * Displays detailed information about a theatre, including
+ * general details (name, seats, screens, upcoming showings)
+ * and location details (address, timezone, postal code, coordinates).
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <TheatreDetailsCard theatre={theatreData} />
+ * ```
+ *
+ * @param {Props} props - The props object.
+ * @param {TheatreDetails} props.theatre - The theatre details to display.
+ *
+ * @returns {JSX.Element} A card containing theatre information.
+ */
 const TheatreDetailsCard: FC<Props> = ({theatre}) => {
     const {name, location, seatCapacity, screenCount, seatCount, futureShowingCount} = theatre;
     const {timezone, postalCode, coordinates} = location;
