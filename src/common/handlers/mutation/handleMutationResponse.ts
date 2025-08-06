@@ -64,7 +64,7 @@ export default async function handleMutationResponse<TReturns = unknown>(params:
     if (!response.ok) {
         const message = errorMessage || "Submitting data failed. Please try again.";
 
-        if (response.status === 400) {
+        if (response.status === 422) {
             const {success, data: parsedResult} = ParseErrorResponseSchema.safeParse(result);
             if (!success) throw new Error("Submitting data failed. Invalid Error Response.");
 
