@@ -1,8 +1,7 @@
 import BaseLayout from "@/common/layout/BaseLayout.tsx";
 import GenresPage from "@/pages/genres/pages/GenresPage.tsx";
 import GenreCreatePage from "@/pages/genres/pages/GenreCreatePage.tsx";
-import GenreEditPage from "@/pages/genres/pages/GenreEditPage.tsx";
-import GenrePage from "@/pages/genres/pages/GenrePage.tsx";
+import GenreDetailsPage from "@/pages/genres/pages/GenreDetailsPage.tsx";
 import AuthLoader from "@/common/routing/loaders/AuthLoader.ts";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 
@@ -24,12 +23,7 @@ export default [
             },
             {
                 path: "/admin/genres/get/:genreID",
-                element: <GenrePage />,
-                errorElement: <ComponentErrorHandler />,
-            },
-            {
-                path: "/admin/genres/edit/:genreID",
-                element: <GenreEditPage />,
+                element: <GenreDetailsPage />,
                 errorElement: <ComponentErrorHandler />,
             },
         ],
