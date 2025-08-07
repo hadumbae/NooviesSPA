@@ -7,6 +7,7 @@ import {
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
 import {Link} from "react-router-dom";
+import usePaginationLocationState from "@/common/hooks/params/usePaginationLocationState.ts";
 
 /**
  * Props for the {@link GenreDetailsBreadcrumbs} component.
@@ -35,12 +36,14 @@ type BreadcrumbProps = {
  * @returns {JSX.Element} A breadcrumb navigation bar for genre details.
  */
 const GenreDetailsBreadcrumbs: FC<BreadcrumbProps> = ({genreName}) => {
+    const {data: state} = usePaginationLocationState();
+
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to="/admin/genres">All Genres</Link>
+                        <Link to="/admin/genres" state={state ?? {}}>All Genres</Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
