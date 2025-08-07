@@ -1,5 +1,5 @@
 import BaseLayout from "@/common/layout/BaseLayout.tsx";
-import GenresPage from "@/pages/genres/pages/GenresPage.tsx";
+import GenreIndexPage from "@/pages/genres/pages/GenreIndexPage.tsx";
 import GenreCreatePage from "@/pages/genres/pages/GenreCreatePage.tsx";
 import GenreDetailsPage from "@/pages/genres/pages/GenreDetailsPage.tsx";
 import AuthLoader from "@/common/routing/loaders/AuthLoader.ts";
@@ -13,7 +13,7 @@ export default [
         children: [
             {
                 path: "/admin/genres",
-                element: <GenresPage />,
+                element: <GenreIndexPage />,
                 errorElement: <ComponentErrorHandler />,
             },
             {
