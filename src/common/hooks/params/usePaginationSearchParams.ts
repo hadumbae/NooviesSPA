@@ -6,7 +6,7 @@ export default function usePaginationSearchParams(
     params?: { page?: string | number, perPage?: string | number },
 ) {
     // Set Values
-    const defaultValues = {page: params?.page?.toString() || "1", perPage: params?.perPage?.toString() || "100"};
+    const defaultValues = {page: params?.page?.toString() || "1", perPage: params?.perPage?.toString() || "10"};
     const [searchParams, setSearchParams] = useSearchParams(defaultValues);
 
     // Validate Params
