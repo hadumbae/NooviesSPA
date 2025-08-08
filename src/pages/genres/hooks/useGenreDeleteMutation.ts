@@ -54,7 +54,7 @@ export default function useGenreDeleteMutation(params: DeleteMutationParams) {
     const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
     const queryClient = useQueryClient();
 
-    const deleteGenre = async ({_id}: {_id: ObjectId}) => {
+    const deleteGenre = async ({_id}: { _id: ObjectId }) => {
         await handleMutationResponse({
             action: () => GenreRepository.delete({_id}),
             errorMessage: "Failed to delete genre. Please try again.",
@@ -62,13 +62,8 @@ export default function useGenreDeleteMutation(params: DeleteMutationParams) {
     }
 
     const onSuccess = async () => {
-        toast.success(successMessage && "Genre deleted.");
-
-        await Promise.all([
-            queryClient.invalidateQueries({queryKey: ["fetch_single_genre"], exact: false}),
-            queryClient.invalidateQueries({queryKey: ["fetch_genres_by_query"], exact: false}),
-        ]);
-
+        toast.success(successMessage ?? "Genre deleted.");
+        await queryClient.invalidateQueries({queryKey: ["fetch_genres_by_query"], exact: false});
         onSubmitSuccess && onSubmitSuccess();
     }
 
