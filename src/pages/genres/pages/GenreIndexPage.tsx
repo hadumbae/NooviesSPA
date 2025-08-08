@@ -13,6 +13,7 @@ import {GenreDetails, PaginatedGenreDetails} from "@/pages/genres/schema/genre/G
 import GenreIndexCard from "@/pages/genres/components/cards/GenreIndexCard.tsx";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import usePaginationLocationState from "@/common/hooks/params/usePaginationLocationState.ts";
+import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
 
 const GenreIndexPage: FC = () => {
     useTitle("Genres");
@@ -20,7 +21,7 @@ const GenreIndexPage: FC = () => {
     const isMobile = useIsMobile();
 
     const {data: paginationState} = usePaginationLocationState();
-    const {page, perPage} = usePaginationSearchParams(paginationState ?? {page: 1, perPage: 25});
+    const {page, perPage, setPage} = usePaginationSearchParams(paginationState ?? {page: 1, perPage: 25});
 
     const query = useFetchGenres({virtuals: true, populate: true, paginated: true, page, perPage});
 
@@ -28,11 +29,11 @@ const GenreIndexPage: FC = () => {
         <QueryBoundary query={query}>
             <ValidatedQueryBoundary query={query} schema={PaginatedGenreDetailsSchema}>
                 {(paginatedGenres: PaginatedGenreDetails) => {
-                    const {items: genres} = paginatedGenres;
+                    const {totalItems, items: genres} = paginatedGenres;
                     const hasGenres = (genres || []).length > 0;
 
                     const genreSection = (
-                        <PageSection className="grid grid-cols-2 gap-2">
+                        <PageSection className="grid grid-cols-2 md:grid-cols-3 gap-2">
                             {genres.map((genre: GenreDetails) => (
                                 <GenreIndexCard
                                     orientation={isMobile ? "vertical" : 'horizontal'}
@@ -49,10 +50,21 @@ const GenreIndexPage: FC = () => {
                         </PageCenter>
                     );
 
+                    const paginationButtons = (
+                        (totalItems > perPage) &&
+                        <EllipsisPaginationButtons
+                            page={page}
+                            perPage={perPage}
+                            totalItems={totalItems}
+                            setPage={setPage}
+                        />
+                    );
+
                     return (
                         <PageFlexWrapper>
                             <GenreIndexHeader/>
                             {hasGenres ? genreSection : emptySection}
+                            {paginationButtons}
                         </PageFlexWrapper>
                     );
                 }}
