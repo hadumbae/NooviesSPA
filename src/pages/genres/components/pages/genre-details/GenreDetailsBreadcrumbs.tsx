@@ -8,6 +8,7 @@ import {
 } from "@/common/components/ui/breadcrumb.tsx";
 import {Link} from "react-router-dom";
 import usePaginationLocationState from "@/common/hooks/params/usePaginationLocationState.ts";
+import convertToQueryParams from "@/common/utility/query/convertToQueryParams.ts";
 
 /**
  * Props for the {@link GenreDetailsBreadcrumbs} component.
@@ -37,13 +38,14 @@ type BreadcrumbProps = {
  */
 const GenreDetailsBreadcrumbs: FC<BreadcrumbProps> = ({genreName}) => {
     const {data: state} = usePaginationLocationState();
+    const query = convertToQueryParams(state);
 
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to="/admin/genres" state={state ?? {}}>All Genres</Link>
+                        <Link to={`/admin/genres?${query.toString()}`}>All Genres</Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

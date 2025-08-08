@@ -28,9 +28,7 @@ const GenreCreateBreadcrumbs: FC = () => {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to="/admin/genres">
-                            Index
-                        </Link>
+                        <Link to="/admin/genres">All Genres</Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
