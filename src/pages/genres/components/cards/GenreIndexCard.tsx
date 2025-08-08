@@ -43,16 +43,15 @@ const GenreIndexCard: FC<IndexProps> = ({genre, orientation = "horizontal"}) => 
     const navigate = useNavigate();
     const {_id, name, movieCount} = genre;
 
-    const {page, perPage} = usePaginationSearchParams();
+    const {page, perPage, hasValidParams} = usePaginationSearchParams();
 
     const flexClasses = orientation === "horizontal"
         ? "flex justify-between items-center"
         : "flex flex-col items-center";
 
     const openGenre = () => {
-        navigate(`/admin/genres/get/${_id}`, {
-            state: {page, perPage},
-        });
+        const state = hasValidParams ? {page, perPage} : {};
+        navigate(`/admin/genres/get/${_id}`, {state});
     }
 
     return (
