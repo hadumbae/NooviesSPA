@@ -3,10 +3,11 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {EntityPaginatedQuery, RequestOptions,} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 type QueryParams = RequestOptions & EntityPaginatedQuery & PersonFilterQuery;
 
-export default function useFetchPersons(queries: QueryParams): UseQueryResult<unknown> {
+export default function useFetchPersons(queries: QueryParams): UseQueryResult<unknown, HttpResponseError> {
     const queryKey = ["fetch_person_by_query", queries] as const;
 
     const fetchPersons = useQueryFnHandler({

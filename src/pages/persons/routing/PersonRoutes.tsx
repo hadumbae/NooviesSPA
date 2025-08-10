@@ -1,6 +1,6 @@
 import BaseLayout from "@/common/layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
-import PersonsPage from "@/pages/persons/pages/PersonsPage.tsx";
+import PersonIndexPage from "@/pages/persons/pages/PersonIndexPage.tsx";
 import PersonCreatePage from "@/pages/persons/pages/PersonCreatePage.tsx";
 import PersonPage from "@/pages/persons/pages/PersonPage.tsx";
 import PersonEditPage from "@/pages/persons/pages/PersonEditPage.tsx";
@@ -12,7 +12,7 @@ export default [
         element: <BaseLayout />,
         errorElement: <ErrorPage />,
         children: [
-            {path: "/admin/persons", element: <PersonsPage />},
+            {path: "/admin/persons", element: <PersonIndexPage />},
             {path: "/admin/persons/create", element: <PersonCreatePage />},
             {path: "/admin/persons/get/:personID", element: <PersonPage />},
             {path: "/admin/persons/get/:personID/images/profile", element: <PersonImagePage />},
