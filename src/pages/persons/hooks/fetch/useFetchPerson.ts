@@ -3,6 +3,7 @@ import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 type FetchProps = RequestOptions & {
     _id: ObjectId,
@@ -17,7 +18,7 @@ type FetchProps = RequestOptions & {
  * @param params - The person ID and optional request options (`populate`, `virtuals`).
  * @returns A React Query result with raw person data or error information.
  */
-export default function useFetchPerson(params: FetchProps): UseQueryResult<unknown, Error> {
+export default function useFetchPerson(params: FetchProps): UseQueryResult<unknown, HttpResponseError> {
     const {_id, populate = false, virtuals = false, limit} = params;
 
     const queryKey = ["fetch_single_person", {_id, populate, virtuals, limit}] as const;

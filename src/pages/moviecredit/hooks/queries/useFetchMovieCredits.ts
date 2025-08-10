@@ -3,6 +3,7 @@ import {MovieCreditFilters} from "@/pages/moviecredit/schemas/filters/MovieCredi
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**
  * Combined query parameters for fetching movie credits.
@@ -24,7 +25,7 @@ type FetchQueries = RequestOptions & EntityPaginatedQuery & MovieCreditFilters;
  * @param queries - Combined parameters for pagination, filtering, and request control.
  * @returns A `useQuery` result object including status, data, and error handling.
  */
-export default function useFetchMovieCredits(queries: FetchQueries): UseQueryResult<unknown, Error> {
+export default function useFetchMovieCredits(queries: FetchQueries): UseQueryResult<unknown, HttpResponseError> {
     const queryKey = ["fetch_movie_credits_by_query", queries];
 
     const fetchMovieCredits = useQueryFnHandler({
