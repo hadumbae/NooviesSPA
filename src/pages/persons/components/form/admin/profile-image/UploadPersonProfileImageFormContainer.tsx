@@ -3,9 +3,9 @@ import usePersonProfileImageSubmitForm from "@/pages/persons/hooks/forms/admin/u
 import usePersonProfileImageSubmitMutation
     from "@/pages/persons/hooks/mutations/admin/usePersonProfileImageSubmitMutation.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {PersonProfileImageSubmitObject} from "@/pages/persons/schema/admin/PersonProfileImageSubmitSchema.ts";
 import UploadPersonProfileImageFormView
     from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormView.tsx";
+import {PersonProfileImageForm} from "@/pages/persons/schema/forms/PersonForm.types.ts";
 
 interface ContainerProps {
     personID: ObjectId;
@@ -19,7 +19,7 @@ const UploadPersonProfileImageFormContainer: FC<ContainerProps> = ({personID}) =
     const form = usePersonProfileImageSubmitForm();
     const mutation = usePersonProfileImageSubmitMutation({_id: personID});
 
-    const submitImage = (values: PersonProfileImageSubmitObject) => {
+    const submitImage = (values: PersonProfileImageForm) => {
         mutation.mutate(values);
     }
 

@@ -1,8 +1,9 @@
 import {useForm} from "react-hook-form";
-import {PersonSubmit, PersonSubmitSchema} from "@/pages/persons/schema/PersonSubmitSchema.ts";
+import {PersonFormSchema} from "@/pages/persons/schema/forms/PersonForm.schema.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
+import {Person} from "@/pages/persons/schema/person/Person.types.ts";
+import {PersonForm} from "@/pages/persons/schema/forms/PersonForm.types.ts";
 
 /**
  * Parameters for configuring the `usePersonSubmitForm` hook.
@@ -35,15 +36,15 @@ type PersonSubmitParams = {
 export default function usePersonSubmitForm(params?: PersonSubmitParams) {
     const {presetValues = {}, person} = params || {};
 
-    const defaultValues: PersonSubmit = {
+    const defaultValues: PersonForm = {
         name: getDefaultValue(presetValues.name, person?.name, "")!,
         biography: getDefaultValue(presetValues.biography, person?.biography, "")!,
         dob: getDefaultValue(presetValues.dob, person?.dob, "")!,
         nationality: getDefaultValue(presetValues.nationality, person?.nationality, ""),
     };
 
-    return useForm<PersonSubmit>({
-        resolver: zodResolver(PersonSubmitSchema),
+    return useForm<PersonForm>({
+        resolver: zodResolver(PersonFormSchema),
         defaultValues,
     });
 }

@@ -1,9 +1,9 @@
 import {FC} from 'react';
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
 import getInitials from "@/common/utility/getInitials.ts";
 import {Link} from "react-router-dom";
+import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 
 interface Props {
     person: Person,

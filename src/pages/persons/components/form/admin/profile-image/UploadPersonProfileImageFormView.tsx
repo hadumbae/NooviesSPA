@@ -1,16 +1,16 @@
 import {FC} from 'react';
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
-import {PersonProfileImageSubmitObject} from "@/pages/persons/schema/admin/PersonProfileImageSubmitSchema.ts";
 import {UseMutationResult} from "@tanstack/react-query";
 import {Form} from "@/common/components/ui/form.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Loader} from "lucide-react";
 import HookFormFileInput from "@/common/components/forms/HookFormFileInput.tsx";
+import {PersonProfileImageForm} from "@/pages/persons/schema/forms/PersonForm.types.ts";
 
-type ViewProps<TForm = UseFormReturn<PersonProfileImageSubmitObject>> = {
+type ViewProps<TForm = UseFormReturn<PersonProfileImageForm>> = {
     form: TForm;
-    submitHandler: SubmitHandler<PersonProfileImageSubmitObject>;
-    mutation: UseMutationResult<any, Error, PersonProfileImageSubmitObject>
+    submitHandler: SubmitHandler<PersonProfileImageForm>;
+    mutation: UseMutationResult<any, Error, PersonProfileImageForm>
 }
 
 const UploadPersonProfileImageFormView: FC<ViewProps> = ({form, submitHandler, mutation}) => {

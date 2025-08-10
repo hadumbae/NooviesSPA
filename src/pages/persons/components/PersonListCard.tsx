@@ -1,11 +1,11 @@
 import {FC} from 'react';
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {format} from "date-fns";
 import PersonOptions from "@/pages/persons/components/PersonOptions.tsx";
 import {Link} from "react-router-dom";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
+import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 
 interface Props {
     person: Person;

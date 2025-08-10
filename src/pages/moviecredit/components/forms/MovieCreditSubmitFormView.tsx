@@ -7,7 +7,6 @@ import {Form} from "@/common/components/ui/form.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {
     MovieCreditFormValues,
@@ -29,6 +28,7 @@ import MovieCreditSubmitFormCastFieldset
     from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormCastFieldset.tsx";
 import {FC} from "react";
 import UnionKeys from "@/common/type/schema/UnionKeys.ts";
+import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 
 
 type MovieCreditKeys = UnionKeys<MovieCreditFormValues>;

@@ -3,7 +3,6 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {useNavigate} from "react-router-dom";
 import {Image, Loader, Pencil, Trash} from "lucide-react";
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import {format} from "date-fns";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
@@ -11,6 +10,7 @@ import usePersonDeleteMutation from "@/pages/persons/hooks/mutations/admin/usePe
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
+import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 
 interface Props {
     person: Person;

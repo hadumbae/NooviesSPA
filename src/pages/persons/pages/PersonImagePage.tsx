@@ -4,7 +4,6 @@ import useFetchPerson from "@/pages/persons/hooks/fetch/useFetchPerson.ts";
 import useFetchPersonParams from "@/pages/persons/hooks/params/admin/useFetchPersonParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {PersonPopulatedSchema} from "@/pages/persons/schema/PersonPopulatedSchema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import PersonImageDetailsBreadcrumbs
@@ -14,6 +13,7 @@ import PageSection from "@/common/components/page/PageSection.tsx";
 import UploadPersonProfileImageFormContainer
     from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormContainer.tsx";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
+import {PersonDetailsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 
 const PersonImagePage: FC = () => {
     const urlParams = useFetchPersonParams();
@@ -25,7 +25,7 @@ const PersonImagePage: FC = () => {
     const {success, data: person, error: parseError} = useValidateData({
         data,
         isPending,
-        schema: PersonPopulatedSchema,
+        schema: PersonDetailsSchema,
         message: "API Response Validation Failed.",
     });
 

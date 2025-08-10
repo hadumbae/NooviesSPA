@@ -3,8 +3,8 @@ import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
-import {PersonSchema} from "@/pages/persons/schema/PersonSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {PersonSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 
 const MovieCreditObjectSchema = MovieCreditBaseSchema.extend({
     _id: IDStringSchema.readonly(),

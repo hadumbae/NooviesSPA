@@ -5,10 +5,10 @@ import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import {Loader} from "lucide-react";
 import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
 import useFetchPersons from "@/pages/persons/hooks/fetch/useFetchPersons.ts";
-import {PersonFilterQuery} from "@/pages/persons/schema/queries/PersonFilterQuerySchema.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {PersonArraySchema} from "@/pages/persons/schema/PersonArraySchema.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
+import {PersonArraySchema} from "@/pages/persons/schema/person/Person.schema.ts";
+import {PersonQueryFilters} from "@/pages/persons/schema/queries/PersonFilter.types.ts";
 
 interface Props {
     name: string,
@@ -16,7 +16,7 @@ interface Props {
     description?: string;
     placeholder?: string;
     control: Control<any>;
-    filters?: PersonFilterQuery;
+    filters?: PersonQueryFilters;
     isMulti?: boolean;
 }
 

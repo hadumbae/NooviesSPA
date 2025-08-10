@@ -1,10 +1,10 @@
 import {FC} from 'react';
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Search} from "lucide-react";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 
 interface Props {
     person: Person;

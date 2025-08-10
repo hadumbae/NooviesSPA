@@ -2,9 +2,9 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {PersonImageRepository} from "@/pages/persons/repositories/PersonImageRepository.ts";
 import {RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
-import {PersonProfileImageSubmitObject} from "@/pages/persons/schema/admin/PersonProfileImageSubmitSchema.ts";
 import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import {toast} from "react-toastify";
+import {PersonProfileImageForm} from "@/pages/persons/schema/forms/PersonForm.types.ts";
 
 type ImageSubmitParams = RequestOptions & {
     _id: ObjectId,
@@ -20,7 +20,7 @@ export default function usePersonProfileImageSubmitMutation(params: ImageSubmitP
 
     const mutationKey = ["submit_person_profile_image", {_id}] as const;
 
-    const uploadImage = async (data: PersonProfileImageSubmitObject) => {
+    const uploadImage = async (data: PersonProfileImageForm) => {
         const formData = new FormData();
         formData.append("profileImage", data.profileImage);
 

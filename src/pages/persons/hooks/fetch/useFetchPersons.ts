@@ -1,17 +1,17 @@
-import {PersonFilterQuery} from "@/pages/persons/schema/queries/PersonFilterQuerySchema.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {EntityPaginatedQuery, RequestOptions,} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {PersonQueryFilters} from "@/pages/persons/schema/queries/PersonFilter.types.ts";
 
 /**
  * Combined query parameters type for fetching persons, including:
  * - Request options like population, virtuals, and limits ({@link RequestOptions})
  * - Pagination parameters like page and perPage ({@link EntityPaginatedQuery})
- * - Person-specific filters such as _id, name, nationality ({@link PersonFilterQuery})
+ * - Person-specific filters such as _id, name, nationality ({@link PersonQueryFilters})
  */
-type QueryParams = RequestOptions & EntityPaginatedQuery & PersonFilterQuery;
+type QueryParams = RequestOptions & EntityPaginatedQuery & PersonQueryFilters;
 
 /**
  * Hook to fetch a paginated list of persons filtered by various query parameters.
@@ -30,7 +30,7 @@ type QueryParams = RequestOptions & EntityPaginatedQuery & PersonFilterQuery;
  * This type is a combination of:
  * - {@link RequestOptions} — controls population, virtual fields, and result limits
  * - {@link EntityPaginatedQuery} — pagination settings such as page number and page size
- * - {@link PersonFilterQuery} — filters specific to the person entity like `_id`, `name`, and `nationality`
+ * - {@link PersonQueryFilters} — filters specific to the person entity like `_id`, `name`, and `nationality`
  *
  * @returns A React Query {@link UseQueryResult} containing the fetched data or an {@link HttpResponseError} on failure.
  *

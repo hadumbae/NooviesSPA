@@ -1,5 +1,4 @@
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {PersonArray, PersonArraySchema} from "@/pages/persons/schema/PersonArraySchema.ts";
 import {MovieArray, MovieArraySchema} from "@/pages/movies/schema/model/MovieArraySchema.ts";
 import {
     UseFetchMoviesAndPersonsParams
@@ -9,6 +8,8 @@ import {
 } from "@/pages/moviecredit/hooks/queries/movies-and-credits/UseFetchMoviesAndPersonsReturns.ts";
 import useFetchPersons from "@/pages/persons/hooks/fetch/useFetchPersons.ts";
 import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
+import {PersonArraySchema} from "@/pages/persons/schema/person/Person.schema.ts";
+import {PersonArray} from "@/pages/persons/schema/person/Person.types.ts";
 
 export default function useFetchMoviesAndPersons(
     params: UseFetchMoviesAndPersonsParams

@@ -1,11 +1,11 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import PersonSubmitFormContainer from "@/pages/persons/components/form/admin/submit/PersonSubmitFormContainer.tsx";
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import {useNavigate} from "react-router-dom";
 import PersonCreateHeader from "@/pages/persons/components/headers/PersonCreateHeader.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PersonCreateBreadcrumbs from "@/pages/persons/components/breadcrumbs/admin/PersonCreateBreadcrumbs.tsx";
+import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 
 const PersonCreatePage: FC = () => {
     const navigate = useNavigate();

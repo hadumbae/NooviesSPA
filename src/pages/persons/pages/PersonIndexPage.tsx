@@ -5,12 +5,13 @@ import PersonIndexHeader from "@/pages/persons/components/headers/PersonIndexHea
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import useFetchPersons from "@/pages/persons/hooks/fetch/useFetchPersons.ts";
-import {PaginatedPersons, PaginatedPersonsSchema} from "@/pages/persons/schema/PersonPaginationSchema.ts";
 import PersonListCard from "@/pages/persons/components/PersonListCard.tsx";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import usePaginationLocationState from "@/common/hooks/params/usePaginationLocationState.ts";
 import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
+import {PaginatedPersonsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
+import {PaginatedPersons} from "@/pages/persons/schema/person/Person.types.ts";
 
 const PersonIndexPage: FC = () => {
     const {data: paginationState} = usePaginationLocationState();

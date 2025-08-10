@@ -1,7 +1,5 @@
 import {FC} from 'react';
-import {Person} from "@/pages/persons/schema/PersonSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
-import {PersonSubmit} from "@/pages/persons/schema/PersonSubmitSchema.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
@@ -9,12 +7,14 @@ import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
 import {cn} from "@/common/lib/utils.ts";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
+import {Person} from "@/pages/persons/schema/person/Person.types.ts";
+import {PersonForm} from "@/pages/persons/schema/forms/PersonForm.types.ts";
 
 interface Props {
-    form: UseFormReturn<PersonSubmit>;
-    submitHandler: SubmitHandler<PersonSubmit>;
-    mutation: UseMutationResult<Person, Error, PersonSubmit>;
-    disableFields?: (keyof PersonSubmit)[]
+    form: UseFormReturn<PersonForm>;
+    submitHandler: SubmitHandler<PersonForm>;
+    mutation: UseMutationResult<Person, Error, PersonForm>;
+    disableFields?: (keyof PersonForm)[]
     className?: string
 }
 
