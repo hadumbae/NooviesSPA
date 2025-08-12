@@ -18,9 +18,7 @@ const PersonDetailsBreadcrumbs: FC<PersonalDetailsProps> = ({name}) => {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to="/admin/persons">
-                            Persons
-                        </Link>
+                        <Link to="/admin/persons">All Persons</Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
