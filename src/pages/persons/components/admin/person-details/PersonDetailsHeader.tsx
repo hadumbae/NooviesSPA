@@ -7,8 +7,8 @@ import {cn} from "@/common/lib/utils.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
 import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
-import PersonDetailsOptionDropdown
-    from "@/pages/persons/components/admin/person-details/PersonDetailsOptionDropdown.tsx";
+import PersonDetailsOptions
+    from "@/pages/persons/components/admin/person-details/PersonDetailsOptions.tsx";
 
 interface Props {
     person: Person | PersonDetails;
@@ -29,11 +29,11 @@ const PersonDetailsHeader: FC<Props> = ({person}) => {
             </section>
 
             <section className="flex justify-end items-center space-x-2">
-                <PersonDetailsOptionDropdown person={person}>
+                <PersonDetailsOptions person={person}>
                     <HeaderButton variant="outline">
                         <EllipsisIcon />
                     </HeaderButton>
-                </PersonDetailsOptionDropdown>
+                </PersonDetailsOptions>
             </section>
         </header>
     );
