@@ -60,7 +60,7 @@ type ErrorParams = {
 export default function handleMutationResponseError({error, errorMessage}: ErrorParams) {
     if (error instanceof ParseError) {
         const {message, errors, raw} = error;
-        toast(errorMessage ?? message ?? "Invalid data returned. Please try again.");
+        toast.error(errorMessage ?? message ?? "Invalid data returned. Please try again.");
 
         console.group("ParseError Details");
         console.error("Validation Issues: ", errors);
