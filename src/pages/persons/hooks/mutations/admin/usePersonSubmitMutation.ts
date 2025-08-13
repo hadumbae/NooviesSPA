@@ -1,5 +1,5 @@
 import {UseFormReturn} from "react-hook-form";
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import {PersonSchema} from "@/pages/persons/schema/person/Person.schema.ts";
@@ -84,6 +84,8 @@ export default function usePersonSubmitMutation(
         errorMessage,
     } = params;
 
+    const queryClient = useQueryClient();
+
     const submitPersonData = async (data: PersonForm) => {
         const action = isEditing
             ? () => PersonRepository.update<Person>({_id, data})
@@ -104,9 +106,15 @@ export default function usePersonSubmitMutation(
         return person;
     }
 
-    const onSuccess = (person: Person) => {
+    const onSuccess = async (person: Person) => {
         const message = `Person ${isEditing ? "updated" : "created"} successfully.`;
         toast.success(successMessage ?? message);
+
+        await Promise.all([
+            queryClient.invalidateQueries({queryKey: ["fetch_single_person"], exact: false}),
+            queryClient.invalidateQueries({queryKey: ["fetch_person_by_query"], exact: false}),
+        ]);
+
         onSubmitSuccess?.(person);
     }
 
