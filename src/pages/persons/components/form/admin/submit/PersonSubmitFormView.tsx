@@ -8,16 +8,65 @@ import {UseMutationResult} from "@tanstack/react-query";
 import {cn} from "@/common/lib/utils.ts";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
-import {PersonForm} from "@/pages/persons/schema/forms/PersonForm.types.ts";
+import {PersonForm, PersonFormValues} from "@/pages/persons/schema/forms/PersonForm.types.ts";
 
+/**
+ * Props for the {@link PersonSubmitFormView} component.
+ */
 interface Props {
-    form: UseFormReturn<PersonForm>;
-    submitHandler: SubmitHandler<PersonForm>;
-    mutation: UseMutationResult<Person, Error, PersonForm>;
-    disableFields?: (keyof PersonForm)[]
-    className?: string
+    /**
+     * The `react-hook-form` instance controlling the `PersonFormValues` state.
+     */
+    form: UseFormReturn<PersonFormValues>;
+
+    /**
+     * Callback invoked when the form is submitted.
+     *
+     * Receives validated form values as the first parameter.
+     */
+    submitHandler: SubmitHandler<PersonFormValues>;
+
+    /**
+     * The mutation object returned from `usePersonSubmitMutation`.
+     * Used to manage submit state (loading, errors, etc.).
+     */
+    mutation: UseMutationResult<Person, unknown, PersonForm>;
+
+    /**
+     * Optional list of field names to disable from rendering.
+     * Fields in this array will not be displayed.
+     */
+    disableFields?: (keyof PersonFormValues)[];
+
+    /**
+     * Optional custom CSS class name to apply to the `<form>` element.
+     */
+    className?: string;
 }
 
+/**
+ * Presentational component for rendering a form to create or update a `Person`.
+ *
+ * - Renders form fields conditionally based on `disableFields`.
+ * - Uses reusable `HookForm*` components tied into `react-hook-form`.
+ * - Displays a submit button that is disabled while the mutation is pending.
+ *
+ * @param form - The form instance returned by `usePersonSubmitForm`.
+ * @param submitHandler - Function to handle form submission.
+ * @param mutation - Mutation state and functions from `usePersonSubmitMutation`.
+ * @param className - Optional CSS class for styling the `<form>` container.
+ * @param disableFields - Optional array of field names to hide.
+ *
+ * @example
+ * ```tsx
+ * <PersonSubmitFormView
+ *   form={form}
+ *   submitHandler={handleSubmit}
+ *   mutation={mutation}
+ *   disableFields={["dob", "nationality"]}
+ * />
+ * ```
+ */
 const PersonSubmitFormView: FC<Props> = ({form, submitHandler, mutation, className, disableFields = []}) => {
     const {isPending} = mutation;
 
