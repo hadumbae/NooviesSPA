@@ -14,16 +14,14 @@ const PersonCreateBreadcrumbs: FC = () => {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to="/admin/persons">
-                            Index
-                        </Link>
+                        <Link to="/admin/persons">All Persons</Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
                 <BreadcrumbSeparator />
 
                 <BreadcrumbItem>
-                    <BreadcrumbPage>Create</BreadcrumbPage>
+                    <BreadcrumbPage>Create Person</BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>

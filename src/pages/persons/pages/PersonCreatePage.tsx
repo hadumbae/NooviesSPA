@@ -6,24 +6,29 @@ import PersonCreateHeader from "@/pages/persons/components/headers/PersonCreateH
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PersonCreateBreadcrumbs from "@/pages/persons/components/breadcrumbs/admin/PersonCreateBreadcrumbs.tsx";
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
+import PageSection from "@/common/components/page/PageSection.tsx";
 
 const PersonCreatePage: FC = () => {
     const navigate = useNavigate();
+
     const onSubmit = (person: Person) => {
         navigate(`/admin/persons/get/${person._id}`);
     };
 
     return (
         <PageFlexWrapper>
-            <PersonCreateBreadcrumbs />
+            <PageSection srTitle="Person Create Header">
+                <PersonCreateBreadcrumbs/>
+                <PersonCreateHeader/>
+            </PageSection>
 
-            <PersonCreateHeader />
-
-            <Card>
-                <CardContent className="p-4">
-                    <PersonSubmitFormContainer onSubmit={onSubmit} />
-                </CardContent>
-            </Card>
+            <PageSection srTitle="Person Create Form">
+                <Card>
+                    <CardContent className="p-4">
+                        <PersonSubmitFormContainer onSubmitSuccess={onSubmit}/>
+                    </CardContent>
+                </Card>
+            </PageSection>
 
         </PageFlexWrapper>
     );
