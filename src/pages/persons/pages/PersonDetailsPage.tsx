@@ -17,6 +17,24 @@ import {PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
 import PersonDetailsCard from "@/pages/persons/components/admin/person-details/PersonDetailsCard.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 
+/**
+ * Page component displaying a `Person`'s details and a preview of their movie credits.
+ *
+ * Features:
+ * - Fetches a `Person` by ID from URL parameters using {@link useFetchPersonParams} and {@link useFetchPerson}.
+ * - Fetches a subset of the person's movie credits using {@link useFetchMovieCredits}.
+ * - Uses {@link CombinedQueryBoundary} and {@link CombinedValidatedQueryBoundary} for asynchronous data fetching and validation.
+ * - Displays breadcrumbs, a header, personal details card, and a list of movie credits.
+ *
+ * Validation:
+ * - Person data validated using {@link PersonDetailsSchema}.
+ * - Movie credits validated using {@link MovieCreditPopulatedArraySchema}.
+ *
+ * @example
+ * ```tsx
+ * <PersonDetailsPage />
+ * ```
+ */
 const PersonDetailsPage: FC = () => {
     const urlParams = useFetchPersonParams();
     if (!urlParams) return <PageLoader/>;
