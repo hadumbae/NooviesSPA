@@ -3,9 +3,6 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import useFetchPerson from "@/pages/persons/hooks/fetch/useFetchPerson.ts";
 import useFetchPersonParams from "@/pages/persons/hooks/params/admin/useFetchPersonParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
-import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import PersonImageDetailsBreadcrumbs
     from "@/pages/persons/components/breadcrumbs/admin/PersonImageDetailsBreadcrumbs.tsx";
 import PersonProfileImageHeader from "@/pages/persons/components/headers/PersonProfileImageHeader.tsx";
@@ -14,47 +11,63 @@ import UploadPersonProfileImageFormContainer
     from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormContainer.tsx";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import {PersonDetailsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
+import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
+import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
+import {PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
 
+/**
+ * Page component for managing a `Person`'s profile images.
+ *
+ * Features:
+ * - Fetches a `Person` by ID from URL parameters.
+ * - Validates API response using {@link PersonDetailsSchema}.
+ * - Displays breadcrumbs and profile image header.
+ * - Includes a card section for uploading a new profile image using {@link UploadPersonProfileImageFormContainer}.
+ *
+ * Uses {@link QueryBoundary} and {@link ValidatedQueryBoundary} for async data fetching and validation.
+ *
+ * @example
+ * ```tsx
+ * <PersonImagePage />
+ * ```
+ */
 const PersonImagePage: FC = () => {
     const urlParams = useFetchPersonParams();
     if (!urlParams) return <PageLoader/>;
 
     const {personID} = urlParams;
-
-    const {data, isPending, isError, error: queryError} = useFetchPerson({_id: personID, populate: true});
-    const {success, data: person, error: parseError} = useValidateData({
-        data,
-        isPending,
-        schema: PersonDetailsSchema,
-        message: "API Response Validation Failed.",
-    });
-
-    if (isPending) return <PageLoader/>;
-    if (isError) return <PageHTTPError error={queryError}/>;
-    if (!success) return <PageParseError error={parseError}/>;
-
-    const {_id, name} = person;
+    const query = useFetchPerson({_id: personID, populate: true, virtuals: true});
 
     return (
-        <PageFlexWrapper className="space-y-5">
-            <header className="space-y-5">
-                <PersonImageDetailsBreadcrumbs personID={_id} name={name}/>
-                <PersonProfileImageHeader name={name}/>
-            </header>
+        <QueryBoundary query={query}>
+            <ValidatedQueryBoundary query={query} schema={PersonDetailsSchema} message="API Response Validation Failed.">
+                {(person: PersonDetails) => {
+                    const {_id, name} = person;
 
-            <PageSection>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Upload Images</CardTitle>
-                        <CardDescription>Select an image and click on `Submit`.</CardDescription>
-                    </CardHeader>
+                    return (
+                        <PageFlexWrapper className="space-y-5">
+                            <header className="space-y-5">
+                                <PersonImageDetailsBreadcrumbs personID={_id} name={name}/>
+                                <PersonProfileImageHeader name={name}/>
+                            </header>
 
-                    <CardContent>
-                        <UploadPersonProfileImageFormContainer personID={personID}/>
-                    </CardContent>
-                </Card>
-            </PageSection>
-        </PageFlexWrapper>
+                            <PageSection>
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>Upload Images</CardTitle>
+                                        <CardDescription>Select an image and click on `Submit`.</CardDescription>
+                                    </CardHeader>
+
+                                    <CardContent>
+                                        <UploadPersonProfileImageFormContainer personID={personID}/>
+                                    </CardContent>
+                                </Card>
+                            </PageSection>
+                        </PageFlexWrapper>
+                    );
+                }}
+            </ValidatedQueryBoundary>
+        </QueryBoundary>
     );
 };
 

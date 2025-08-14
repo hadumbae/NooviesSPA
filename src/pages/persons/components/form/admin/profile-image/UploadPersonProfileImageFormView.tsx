@@ -5,16 +5,54 @@ import {Form} from "@/common/components/ui/form.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Loader} from "lucide-react";
 import HookFormFileInput from "@/common/components/forms/HookFormFileInput.tsx";
-import {PersonProfileImageForm} from "@/pages/persons/schema/forms/PersonForm.types.ts";
+import {PersonProfileImageForm, PersonProfileImageFormValues} from "@/pages/persons/schema/forms/PersonForm.types.ts";
 
-type ViewProps<TForm = UseFormReturn<PersonProfileImageForm>> = {
+/**
+ * Props for {@link UploadPersonProfileImageFormView}.
+ *
+ * @template TForm - The type of the react-hook-form instance. Defaults to {@link UseFormReturn} for {@link PersonProfileImageFormValues}.
+ */
+type ViewProps<TForm = UseFormReturn<PersonProfileImageFormValues>> = {
+    /**
+     * The react-hook-form instance controlling the profile image form.
+     */
     form: TForm;
-    submitHandler: SubmitHandler<PersonProfileImageForm>;
-    mutation: UseMutationResult<any, Error, PersonProfileImageForm>
-}
 
+    /**
+     * Handler invoked when the form is submitted.
+     *
+     * @param values - The current form values of type {@link PersonProfileImageFormValues}.
+     */
+    submitHandler: SubmitHandler<PersonProfileImageFormValues>;
+
+    /**
+     * The mutation object returned by the profile image submission hook.
+     * Used to determine submission state (`isPending`) and trigger mutations.
+     */
+    mutation: UseMutationResult<any, unknown, PersonProfileImageForm>;
+};
+
+/**
+ * Form view for uploading a profile image for a `Person`.
+ *
+ * Renders:
+ * - A file input for the profile image.
+ * - A submit button that displays a loading spinner while the mutation is pending.
+ *
+ * @param props - {@link ViewProps}
+ *
+ * @example
+ * ```tsx
+ * <UploadPersonProfileImageFormView
+ *   form={form}
+ *   submitHandler={handleSubmit}
+ *   mutation={mutation}
+ * />
+ * ```
+ */
 const UploadPersonProfileImageFormView: FC<ViewProps> = ({form, submitHandler, mutation}) => {
     const {isPending} = mutation;
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(submitHandler)} className="space-y-4">

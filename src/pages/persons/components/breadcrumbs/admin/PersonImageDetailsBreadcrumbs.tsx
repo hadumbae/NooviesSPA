@@ -9,20 +9,43 @@ import {
 } from "@/common/components/ui/breadcrumb.tsx";
 import {Link} from "react-router-dom";
 
-interface CrumbProps {
+/**
+ * Props for {@link PersonImageDetailsBreadcrumbs}.
+ */
+type CrumbProps = {
+    /**
+     * The ID of the person for constructing links.
+     */
     personID: ObjectId;
+
+    /**
+     * The display name of the person.
+     */
     name: string;
 }
 
+/**
+ * Breadcrumb navigation component for the profile image page of a `Person`.
+ *
+ * Renders:
+ * - A link to "All Persons"
+ * - A link to the specific person's details page
+ * - A current page indicator for "Profile Image"
+ *
+ * @param props - {@link CrumbProps}
+ *
+ * @example
+ * ```tsx
+ * <PersonImageDetailsBreadcrumbs personID={person._id} name={person.name} />
+ * ```
+ */
 const PersonImageDetailsBreadcrumbs: FC<CrumbProps> = ({personID, name}) => {
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to="/admin/persons">
-                            Persons
-                        </Link>
+                        <Link to="/admin/persons">All Persons</Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -30,9 +53,7 @@ const PersonImageDetailsBreadcrumbs: FC<CrumbProps> = ({personID, name}) => {
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to={`/admin/persons/get/${personID}`}>
-                            Person Details {name && ` | ${name}`}
-                        </Link>
+                        <Link to={`/admin/persons/get/${personID}`}>Person Details {name && ` | ${name}`}</Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
