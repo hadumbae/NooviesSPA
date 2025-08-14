@@ -1,16 +1,20 @@
 import {z} from "zod";
 
 /**
- * Zod schema representing valid starter values for form fields.
+ * Zod schema representing the allowed starter values for a form field.
  *
- * This union allows for primitive values that are commonly used
- * as default or initial values in form inputs. These include:
+ * This schema is used to initialize form fields with default values before
+ * user input. It allows a flexible set of types to cover common starter values:
  *
- * - `string`: for text inputs
- * - `number`: for number inputs
- * - `boolean`: for checkboxes and toggles
- * - `null`: for optional fields with no value yet
- * - `undefined`: for fields not yet set or controlled
+ * - `string` — typical for text inputs
+ * - `number` — for numeric inputs
+ * - `boolean` — for checkboxes or toggles
+ * - `null` / `undefined` — to represent empty or uninitialized fields
+ * - `File` — to allow starter values that may already include a file object
+ *
+ * This ensures that form fields are correctly typed for initialization while
+ * still being compatible with eventual validation and transformation to the
+ * final payload type.
  */
 export const FormStarterValueSchema = z.union([
     z.string(),
@@ -18,6 +22,7 @@ export const FormStarterValueSchema = z.union([
     z.boolean(),
     z.null(),
     z.undefined(),
+    z.instanceof(File),
 ]);
 
 /**
