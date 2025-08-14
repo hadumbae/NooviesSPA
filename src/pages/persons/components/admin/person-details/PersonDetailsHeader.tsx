@@ -9,14 +9,21 @@ import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarIm
 import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
 import PersonDetailsOptions
     from "@/pages/persons/components/admin/person-details/PersonDetailsOptions.tsx";
+import {useNavigate} from "react-router-dom";
 
-interface Props {
+type HeaderProps = {
     person: Person | PersonDetails;
 }
 
-const PersonDetailsHeader: FC<Props> = ({person}) => {
+const PersonDetailsHeader: FC<HeaderProps> = ({person}) => {
+    const navigate = useNavigate();
+
     const {name, dob, profileImage} = person;
     const formattedDOB = format(dob, "dd MMM, yyyy");
+
+    const onDelete = () => {
+        navigate("/admin/persons");
+    }
 
     return (
         <header className={cn("flex justify-between items-center")}>
@@ -29,7 +36,7 @@ const PersonDetailsHeader: FC<Props> = ({person}) => {
             </section>
 
             <section className="flex justify-end items-center space-x-2">
-                <PersonDetailsOptions person={person}>
+                <PersonDetailsOptions person={person} onDeleteProps={{onSubmitSuccess: onDelete}}>
                     <HeaderButton variant="outline">
                         <EllipsisIcon />
                     </HeaderButton>

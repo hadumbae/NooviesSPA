@@ -34,12 +34,12 @@ type OnPersonDeleteProps = Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | 
     /**
      * Callback fired when a person is successfully deleted.
      */
-    onSubmitSuccess: () => void;
+    onSubmitSuccess?: () => void;
     /**
      * Callback fired when an error occurs while deleting.
      * @param error - The error encountered.
      */
-    onSubmitError: (error: unknown) => void;
+    onSubmitError?: (error: unknown) => void;
 };
 
 /**
