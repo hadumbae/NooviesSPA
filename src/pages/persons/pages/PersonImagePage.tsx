@@ -13,7 +13,8 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/commo
 import {PersonDetailsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import {PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
+import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
+import {useNavigate} from "react-router-dom";
 
 /**
  * Page component for managing a `Person`'s profile images.
@@ -40,9 +41,15 @@ const PersonImagePage: FC = () => {
 
     return (
         <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={PersonDetailsSchema} message="API Response Validation Failed.">
+            <ValidatedQueryBoundary query={query} schema={PersonDetailsSchema}
+                                    message="API Response Validation Failed.">
                 {(person: PersonDetails) => {
+                    const navigate = useNavigate();
                     const {_id, name} = person;
+
+                    const onUpdate = (person: Person) => {
+                        navigate(`/admin/persons/get/${person._id}`);
+                    }
 
                     return (
                         <PageFlexWrapper className="space-y-5">
@@ -59,7 +66,10 @@ const PersonImagePage: FC = () => {
                                     </CardHeader>
 
                                     <CardContent>
-                                        <UploadPersonProfileImageFormContainer personID={personID}/>
+                                        <UploadPersonProfileImageFormContainer
+                                            personID={personID}
+                                            onSubmitSuccess={onUpdate}
+                                        />
                                     </CardContent>
                                 </Card>
                             </PageSection>
