@@ -3,6 +3,7 @@ import {MovieFilterQuery} from "@/pages/movies/schema/queries/MovieFilterQuerySc
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**
  * Combined query parameters for fetching movie data.
@@ -23,7 +24,7 @@ type QueryParams = RequestOptions & EntityPaginatedQuery & MovieFilterQuery;
  * @param queries - The combined query parameters for request options, pagination, and filters.
  * @returns A `UseQueryResult` containing status, data, and error metadata for the query.
  */
-export default function useFetchMovies(queries: QueryParams): UseQueryResult<unknown> {
+export default function useFetchMovies(queries: QueryParams): UseQueryResult<unknown, HttpResponseError> {
     const queryKey = ["fetch_movies_by_query", queries] as const;
 
     const fetchMovies = useQueryFnHandler({

@@ -1,25 +1,50 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {Plus} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
+import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
+import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
+import {useNavigate} from "react-router-dom";
 
+/**
+ * `MovieIndexHeader` is the header section for the movie index page.
+ *
+ * @remarks
+ * This component:
+ * - Displays the page title ("Movies") and description ("Registered movies.")
+ * - Provides a "Create" button that navigates to the movie creation page.
+ * - Persists pagination state (`page` and `perPage`) when navigating
+ *   if the current URL contains valid pagination parameters.
+ *
+ * @example
+ * ```tsx
+ * <MovieIndexHeader />
+ * ```
+ *
+ * @component
+ * @returns {JSX.Element} The rendered movie index header.
+ */
 const MovieIndexHeader: FC = () => {
+    const navigate = useNavigate();
+    const {page, perPage, hasValidParams} = usePaginationSearchParams();
+
+    const navigateToCreate = () => {
+        const state = hasValidParams ? {page, perPage} : {};
+        navigate("/admin/movies/create", {state});
+    };
+
     return (
-        <header className={cn(
-            "flex",
-            "justify-between items-center",
-        )}>
+        <header className={cn("flex justify-between items-center")}>
             <section>
                 <HeaderTitle>Movies</HeaderTitle>
                 <HeaderDescription>Registered movies.</HeaderDescription>
             </section>
 
             <section className="flex justify-end items-center">
-                <HeaderLink variant="link" to="/admin/movies/create">
-                    <Plus /> Create
-                </HeaderLink>
+                <HeaderButton variant="link" onClick={navigateToCreate}>
+                    <Plus/> Create
+                </HeaderButton>
             </section>
         </header>
     );

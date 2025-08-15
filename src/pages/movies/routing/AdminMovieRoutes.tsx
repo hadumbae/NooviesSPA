@@ -1,5 +1,5 @@
 import BaseLayout from "@/common/layout/BaseLayout.tsx";
-import MoviesPage from "@/pages/movies/pages/admin/MoviesPage.tsx";
+import MovieIndexPage from "@/pages/movies/pages/admin/MovieIndexPage.tsx";
 import MovieCreatePage from "@/pages/movies/pages/admin/MovieCreatePage.tsx";
 import MovieEditPage from "@/pages/movies/pages/admin/MovieEditPage.tsx";
 import MoviePage from "@/pages/movies/pages/admin/MoviePage.tsx";
@@ -17,7 +17,7 @@ const routes: RouteObject[] = [
 
             {
                 path: "/admin/movies",
-                element: <MoviesPage />,
+                element: <MovieIndexPage />,
                 errorElement: <ComponentErrorHandler />,
             },
             {
