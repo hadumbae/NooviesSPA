@@ -1,7 +1,7 @@
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {
     PopulatedMovieCreditArray
 } from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedArraySchema.ts";
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 /**
  * Result returned when parsing succeeds.

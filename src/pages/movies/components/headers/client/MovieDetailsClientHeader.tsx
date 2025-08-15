@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {format} from "date-fns";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
@@ -7,6 +6,7 @@ import {Link, useLocation} from "react-router-dom";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {TableOfContents} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 interface headerProps {
     movie: Movie;

@@ -1,6 +1,6 @@
 import {FC} from 'react';
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import MovieClientBrowseCard from "@/pages/movies/components/list/MovieClientBrowseCard.tsx";
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 interface BrowseListProps {
     movies: Movie[];

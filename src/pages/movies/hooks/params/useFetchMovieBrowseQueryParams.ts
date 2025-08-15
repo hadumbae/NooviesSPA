@@ -1,5 +1,5 @@
 import {useSearchParams} from "react-router-dom";
-import {MovieFilterQuerySchema} from "@/pages/movies/schema/queries/MovieFilterQuerySchema.ts";
+import {MovieQueryFilterSchema} from "@/pages/movies/schema/queries/MovieFilter.schema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import updateSearchParams from "@/common/utility/params/updateSearchParams.ts";
 import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
@@ -22,7 +22,7 @@ export default function useFetchMovieBrowseQueryParams({genres}: { genres: Genre
     };
 
     // Parsing
-    const {data: query, success, error} = MovieFilterQuerySchema.safeParse(queryParams);
+    const {data: query, success, error} = MovieQueryFilterSchema.safeParse(queryParams);
     if (!success) {
         throw new ParseError({message: "Invalid Query Parameters In URL", errors: error?.issues || []});
     }

@@ -1,7 +1,7 @@
 import {z, ZodType} from "zod";
 import {TheatreSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import {ScreenSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
-import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
+import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {SeatMapSchema} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import ShowingBaseSchema from "@/pages/showings/schema/base/ShowingBaseSchema.ts";
 import IShowingWithMovie from "@/pages/showings/interfaces/populated/IShowingWithMovie.ts";

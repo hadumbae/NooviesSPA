@@ -5,12 +5,13 @@ import useFetchMovieParams from "@/pages/movies/hooks/params/useFetchMovieParams
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import {useNavigate} from "react-router-dom";
-import {Movie, MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
+import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import MovieSubmitFormContainer from "@/pages/movies/components/admin/forms/MovieSubmitFormContainer.tsx";
 import MovieEditBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MovieEditBreadcrumb.tsx";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 const MovieEditPage: FC = () => {
     const navigate = useNavigate();

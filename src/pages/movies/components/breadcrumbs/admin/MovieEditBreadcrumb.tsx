@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -7,6 +6,7 @@ import {
     BreadcrumbList, BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 interface EditProps {
     movie: Movie;

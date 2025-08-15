@@ -1,12 +1,13 @@
 import {useSearchParams} from "react-router-dom";
-import {MovieSortParams, MovieSortParamSchema} from "@/pages/movies/schema/queries/MovieSortParamSchema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import updateSearchParams from "@/common/utility/params/updateSearchParams.ts";
+import {MovieQuerySortSchema} from "@/pages/movies/schema/queries/MovieFilter.schema.ts";
+import {MovieQuerySorts} from "@/pages/movies/schema/queries/MovieFilter.types.ts";
 
 interface SortParamReturns {
     rawSort: Partial<Record<string, string>>
-    sort: MovieSortParams;
-    setMovieSortParams: (values: MovieSortParams) => void;
+    sort: MovieQuerySorts;
+    setMovieSortParams: (values: MovieQuerySorts) => void;
 }
 
 export default function useFetchMovieBrowseSortParams(): SortParamReturns {
@@ -24,7 +25,7 @@ export default function useFetchMovieBrowseSortParams(): SortParamReturns {
     };
 
     // Parsing
-    const {data: sort, success, error} = MovieSortParamSchema.safeParse(sortParams);
+    const {data: sort, success, error} = MovieQuerySortSchema.safeParse(sortParams);
     if (!success) {
         throw new ParseError({
             message: "Invalid Sort Parameters In URL",
@@ -33,7 +34,7 @@ export default function useFetchMovieBrowseSortParams(): SortParamReturns {
     }
 
     // Function
-    const setMovieSortParams = (values: MovieSortParams) => {
+    const setMovieSortParams = (values: MovieQuerySorts) => {
         const updateValues = {releaseDateSort: values.sortByReleaseDate, titleSort: values.sortByTitle};
         const newSearchParams = updateSearchParams({searchParams, updateValues});
         setSearchParams(newSearchParams);

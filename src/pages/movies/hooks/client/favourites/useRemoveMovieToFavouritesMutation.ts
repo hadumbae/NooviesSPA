@@ -1,10 +1,11 @@
 import MovieFavouriteRepository from "@/pages/movies/repositories/MovieFavouriteRepository.ts";
-import {Movie, MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
+import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {toast} from "react-toastify";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import parseData from "@/common/utility/validation/parseData.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 interface RemoveFavouriteParams {
     movieID: ObjectId;

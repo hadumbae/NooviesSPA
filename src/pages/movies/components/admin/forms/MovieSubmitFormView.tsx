@@ -6,15 +6,15 @@ import GenreHookFormSelect from "@/pages/genres/components/input/GenreHookFormSe
 import LanguageHookFormSelect from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
-import {MovieSubmit} from "@/pages/movies/schema/form/MovieSubmitSchema.ts";
 import {UseMutationResult} from "@tanstack/react-query";
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {MovieForm} from "@/pages/movies/schema/form/MovieForm.types.ts";
 
 interface ViewProps {
-    form: UseFormReturn<MovieSubmit>;
-    submitHandler: SubmitHandler<MovieSubmit>;
-    mutation: UseMutationResult<Movie, Error, MovieSubmit>;
+    form: UseFormReturn<MovieForm>;
+    submitHandler: SubmitHandler<MovieForm>;
+    mutation: UseMutationResult<Movie, Error, MovieForm>;
 }
 
 const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation}) => {

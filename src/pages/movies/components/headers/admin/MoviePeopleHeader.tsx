@@ -1,12 +1,12 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {RoleType} from "@/pages/moviecredit/schemas/enums/RoleTypeEnumSchema.ts";
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Link} from "react-router-dom";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 interface HeaderProps {
     movie: Movie;

@@ -1,7 +1,7 @@
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
 import useFetchAllMovieCredits from "@/pages/moviecredit/hooks/queries/useFetchAllMovieCredits.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
+import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {
     MovieCreditPopulatedArraySchema
 } from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedArraySchema.ts";

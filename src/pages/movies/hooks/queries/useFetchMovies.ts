@@ -1,16 +1,16 @@
 import {EntityPaginatedQuery, RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
-import {MovieFilterQuery} from "@/pages/movies/schema/queries/MovieFilterQuerySchema.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {MovieQueryFilters} from "@/pages/movies/schema/queries/MovieFilter.types.ts";
 
 /**
  * Combined query parameters for fetching movie data.
  *
  * This includes pagination info, general request options, and movie-specific filter criteria.
  */
-type QueryParams = RequestOptions & EntityPaginatedQuery & MovieFilterQuery;
+type QueryParams = RequestOptions & EntityPaginatedQuery & MovieQueryFilters;
 
 /**
  * React hook to fetch paginated, filtered movie data.

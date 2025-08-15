@@ -1,8 +1,9 @@
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {PaginatedMovies} from "@/pages/movies/schema/model/pagination/MoviePaginationSchema.ts";
 import {RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
+
+import {PaginatedMovies} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 /**
  * Parameters for fetching a specific page of movie results.

@@ -8,8 +8,8 @@ import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {MovieArraySchema} from "@/pages/movies/schema/model/MovieArraySchema.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
+import {MovieArraySchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 
 /**
  * Props for the `TheatreHookFormSelect` component.

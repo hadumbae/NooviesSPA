@@ -1,11 +1,11 @@
 import {FC} from 'react';
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {Popover, PopoverContent, PopoverTrigger} from '@/common/components/ui/popover';
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {Ellipsis} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import useMovieDeleteMutation from "@/pages/movies/hooks/mutations/useMovieDeleteMutation.ts";
 import {Link} from "react-router-dom";
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 interface Props {
     movie: Movie;

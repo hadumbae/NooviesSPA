@@ -1,15 +1,15 @@
-import {RawMovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
+import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {z, ZodType} from "zod";
 import IFavouriteMovie from "@/pages/movies/interfaces/IFavouriteMovie.ts";
 
 /**
- * A Zod schema that extends the base {@link RawMovieSchema} with additional
+ * A Zod schema that extends the base {@link MovieSchema} with additional
  * fields used to represent a user's favourited movie.
  *
  * This raw version does not yet enforce full runtime type safety via {@link ZodType},
  * and is typically used for schema composition.
  */
-export const RawFavouriteMovieSchema = RawMovieSchema.extend({
+export const RawFavouriteMovieSchema = MovieSchema.extend({
     /**
      * Indicates whether the movie has been marked as a favourite by the user.
      */

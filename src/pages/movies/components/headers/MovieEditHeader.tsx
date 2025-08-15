@@ -1,7 +1,8 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
+
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 interface Props {
     movie: Movie;

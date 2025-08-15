@@ -4,13 +4,13 @@ import MovieIndexHeader from "@/pages/movies/components/headers/MovieIndexHeader
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import MovieIndexCard from "@/pages/movies/components/list/MovieIndexCard.tsx";
-import {PaginatedMovies, PaginatedMovieSchema} from "@/pages/movies/schema/model/pagination/MoviePaginationSchema.ts";
 import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
 import usePaginationLocationState from "@/common/hooks/params/usePaginationLocationState.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
+import {Movie, PaginatedMovies} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {PaginatedMovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 
 /**
  * `MovieIndexPage` displays a paginated list of movies

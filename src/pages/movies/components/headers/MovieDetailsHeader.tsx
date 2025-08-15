@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {format} from "date-fns";
@@ -9,6 +8,7 @@ import {cn} from "@/common/lib/utils.ts";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import useMovieDeleteMutation from "@/pages/movies/hooks/mutations/useMovieDeleteMutation.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 interface Props {
     movie: Movie;

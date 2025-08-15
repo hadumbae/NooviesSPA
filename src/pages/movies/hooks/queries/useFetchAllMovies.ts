@@ -1,8 +1,9 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {MovieArray} from "@/pages/movies/schema/model/MovieArraySchema.ts";
 import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
+
+import {MovieArray} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 /**
  * Optional parameters for fetching a list of movies.

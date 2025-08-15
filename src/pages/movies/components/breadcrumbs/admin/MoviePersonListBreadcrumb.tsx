@@ -7,8 +7,8 @@ import {
     BreadcrumbList, BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 interface PersonListBreadcrumbProps {
     movie: Movie;

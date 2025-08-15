@@ -2,7 +2,7 @@ import {MovieCreditBaseSchema} from "@/pages/moviecredit/schemas/model/base/Movi
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
+import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {PersonSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 

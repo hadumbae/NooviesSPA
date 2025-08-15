@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {Movie} from "@/pages/movies/schema/model/MovieSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import formatDuration from "@/common/utility/formatDuration.ts";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
@@ -8,6 +7,7 @@ import LabelContent from "@/common/components/LabelContent.tsx";
 import {Link} from "react-router-dom";
 import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
 import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
+import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 interface Props {
     movie: Movie;

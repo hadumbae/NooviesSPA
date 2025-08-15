@@ -3,7 +3,7 @@ import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {z, ZodType} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {MovieSchema} from "@/pages/movies/schema/model/MovieSchema.ts";
+import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {IMovieCredit} from "@/pages/moviecredit/interfaces/IMovieCredit.ts";
 import {PersonSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 

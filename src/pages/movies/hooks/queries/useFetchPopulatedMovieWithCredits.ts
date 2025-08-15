@@ -6,7 +6,7 @@ import useValidateData from "@/common/hooks/validation/use-validate-data/useVali
 import {
     MovieCreditPopulatedPaginationSchema
 } from "@/pages/moviecredit/schemas/model/paginated/MovieCreditPopulatedPaginationSchema.ts";
-import {MovieWithDataSchema} from "@/pages/movies/schema/model/populated/MovieWithDataSchema.ts";
+import {MovieWithDataSchema} from "@/pages/movies/schema/admin/populated/MovieWithDataSchema.ts";
 
 interface FetchParams {
     _id: ObjectId;
