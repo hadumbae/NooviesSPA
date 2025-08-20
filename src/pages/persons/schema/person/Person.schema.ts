@@ -1,12 +1,12 @@
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {DateStringSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
 import {ISO3166Alpha2CodeEnum} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
 import {CloudinaryImageObjectSchema} from "@/common/schema/objects/CloudinaryImageObjectSchema.ts";
 import {MovieCreditSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {TotalItemsNumberSchema} from "@/common/schema/numbers/TotalItemsNumberSchema.ts";
+import {ParsedUTCDayOnlyDateStringSchema} from "@/common/schema/dates/ParsedUTCDayOnlyDateStringSchema.ts";
 
 /**
  * Represents a person in the system.
@@ -24,7 +24,7 @@ export const PersonSchema = z.object({
         .max(1000, "Must be 1000 characters or less."),
 
     /** Date of birth as an ISO 8601 date string. */
-    dob: DateStringSchema,
+    dob: ParsedUTCDayOnlyDateStringSchema,
 
     /** Nationality of the person as an ISO 3166-1 alpha-2 country code. */
     nationality: ISO3166Alpha2CodeEnum,

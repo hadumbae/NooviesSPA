@@ -1,8 +1,8 @@
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {ISO3166Alpha2CodeEnum} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
-import {CoercedDateStringSchema} from "@/common/schema/dates/CoercedDateStringSchema.ts";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
+import {NonFutureDateStringSchema} from "@/common/schema/dates/NonFutureDateStringSchema.ts";
 
 /**
  * Schema for the raw form values entered when creating or editing a Person entity.
@@ -36,13 +36,13 @@ export const PersonFormValuesSchema = z.object({
  * ### Validation Rules
  * - `name` — Required, non-empty string, max 255 chars.
  * - `biography` — Required, non-empty string, max 1000 chars.
- * - `dob` — Must be a valid date string, coerced if possible.
+ * - `dob` — Must be a valid date string, of a date not in the future.
  * - `nationality` — Must match one of the ISO 3166-1 alpha-2 codes.
  */
 export const PersonFormSchema = z.object({
     name: NonEmptyStringSchema.max(255, "Name must not be more than 255 characters."),
     biography: NonEmptyStringSchema.max(1000, "Must be 1000 characters or less."),
-    dob: CoercedDateStringSchema,
+    dob: NonFutureDateStringSchema,
     nationality: ISO3166Alpha2CodeEnum,
 });
 
