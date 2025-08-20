@@ -5,7 +5,7 @@ import PersonIndexHeader from "@/pages/persons/components/headers/PersonIndexHea
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import useFetchPersons from "@/pages/persons/hooks/fetch/useFetchPersons.ts";
-import PersonListCard from "@/pages/persons/components/PersonListCard.tsx";
+import PersonIndexCard from "@/pages/persons/components/PersonIndexCard.tsx";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import usePaginationLocationState from "@/common/hooks/params/usePaginationLocationState.ts";
@@ -32,7 +32,7 @@ const PersonIndexPage: FC = () => {
 
                         const personSection = (
                             <PageSection className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                {persons.map((person) => <PersonListCard key={person._id} person={person}/>)}
+                                {persons.map((person) => <PersonIndexCard key={person._id} person={person}/>)}
                             </PageSection>
                         );
 
