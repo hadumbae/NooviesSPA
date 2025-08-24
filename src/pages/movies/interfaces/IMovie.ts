@@ -55,7 +55,7 @@ export default interface IMovie {
     /**
      * ISO 8601 formatted release date (e.g., "2025-11-15").
      */
-    releaseDate: string;
+    releaseDate: Date;
 
     /**
      * Runtime of the movie in minutes.

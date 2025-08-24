@@ -1,33 +1,42 @@
-import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
-import {z, ZodType} from "zod";
-import IFavouriteMovie from "@/pages/movies/interfaces/IFavouriteMovie.ts";
+import {z} from "zod";
+import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
+import {ExtendedMovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 
 /**
- * A Zod schema that extends the base {@link MovieSchema} with additional
- * fields used to represent a user's favourited movie.
+ * Schema for a movie with user-specific favourite status.
  *
- * This raw version does not yet enforce full runtime type safety via {@link ZodType},
- * and is typically used for schema composition.
+ * Extends {@link ExtendedMovieSchema} by adding:
+ * - `isFavourite`: A required boolean indicating whether the movie is marked as a favourite by the user.
  */
-export const RawFavouriteMovieSchema = MovieSchema.extend({
-    /**
-     * Indicates whether the movie has been marked as a favourite by the user.
-     */
-    isFavourite: z.boolean(),
+export const FavouriteMovieSchema = ExtendedMovieSchema.extend({
+    /** Whether the movie is marked as a favourite by the user. */
+    isFavourite: RequiredBoolean,
 });
 
 /**
- * A fully-typed Zod schema representing a user's favourited movie,
- * conforming to the {@link IFavouriteMovie} interface.
+ * Inferred TypeScript type for {@link FavouriteMovieSchema}.
  *
- * Casts the {@link RawFavouriteMovieSchema} to a {@link ZodType} to support
- * circular references and enforce structural typing against the `IFavouriteMovie` contract.
- */
-export const FavouriteMovieSchema = RawFavouriteMovieSchema as ZodType<IFavouriteMovie>;
-
-/**
- * TypeScript type inferred from {@link FavouriteMovieSchema}.
+ * Represents a movie with all base movie fields plus the `isFavourite` flag.
  *
- * Represents the runtime-validated structure of a favourited movie object.
+ * @example
+ * ```ts
+ * const fav: FavouriteMovie = {
+ *   _id: "abc123",
+ *   title: "Inception",
+ *   originalTitle: "Inception",
+ *   tagline: "Your mind is the scene of the crime.",
+ *   country: "US",
+ *   synopsis: "A thief who steals corporate secrets...",
+ *   releaseDate: "2010-07-16",
+ *   isReleased: true,
+ *   runtime: 148,
+ *   originalLanguage: "en",
+ *   languages: ["en"],
+ *   subtitles: ["en", "es"],
+ *   isAvailable: true,
+ *   genres: ["sci-fi", "thriller"],
+ *   isFavourite: true
+ * };
+ * ```
  */
 export type FavouriteMovie = z.infer<typeof FavouriteMovieSchema>;

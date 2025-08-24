@@ -4,90 +4,114 @@ import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {ISO3166Alpha2CodeEnum} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
-import {DateStringSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
-import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
 import {ISO6391CodeEnum} from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
 import {CloudinaryImageObjectSchema} from "@/common/schema/objects/CloudinaryImageObjectSchema.ts";
 import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
 import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
+import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
+import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {ParsedUTCDayOnlyDateStringSchema} from "@/common/schema/dates/ParsedUTCDayOnlyDateStringSchema.ts";
 
 /**
  * Base schema for a movie object.
- * Includes all the essential properties required to create or edit a movie.
+ * Defines core movie fields including titles, synopsis, runtime, language, and availability.
  */
 export const MovieBaseSchema = z.object({
-    /** Movie title (max 1000 characters) */
-    title: NonEmptyStringSchema.max(1000, "Must be 1000 characters or less."),
-
-    /** Original title of the movie (max 1000 characters) */
-    originalTitle: NonEmptyStringSchema.max(1000, "Must be 1000 characters or less."),
-
-    /** Optional tagline for the movie (max 100 characters) */
+    /** Display title of the movie (max 250 characters). */
+    title: NonEmptyStringSchema.max(250, "Must be 250 characters or less."),
+    /** Original (untranslated) title of the movie (max 250 characters). */
+    originalTitle: NonEmptyStringSchema.max(250, "Must be 250 characters or less."),
+    /** Optional tagline or slogan (max 100 characters). */
     tagline: NonEmptyStringSchema.max(100, "Must be 100 characters or less.").optional(),
-
-    /** Country of origin, represented by ISO 3166-1 alpha-2 code */
+    /** ISO 3166-1 alpha-2 country code representing the production country. */
     country: ISO3166Alpha2CodeEnum,
-
-    /** Movie synopsis (max 2000 characters) */
+    /** Synopsis or description (max 2000 characters). */
     synopsis: NonEmptyStringSchema.max(2000, "synopsis must be 2000 characters or less."),
-
-    /** Release date as a string (YYYY-MM-DD) */
-    releaseDate: DateStringSchema,
-
-    /** Runtime in minutes, must be greater than 0 */
-    runtime: RequiredNumberSchema.gt(0, "Must be greater than 0."),
-
-    /** Original language of the movie (ISO 639-1 code) */
+    /** Release date in parsed UTC day-only format (optional, nullable). */
+    releaseDate: ParsedUTCDayOnlyDateStringSchema.optional().nullable(),
+    /** Whether the movie has been released. */
+    isReleased: RequiredBoolean,
+    /** Runtime of the movie in minutes (must be positive). */
+    runtime: PositiveNumberSchema,
+    /** ISO 639-1 code of the original language. */
     originalLanguage: ISO6391CodeEnum,
-
-    /** List of languages available in the movie (ISO 639-1 codes) */
+    /** Languages available for the movie (ISO 639-1 codes). */
     languages: z.array(ISO6391CodeEnum),
-
-    /** List of subtitle languages (ISO 639-1 codes) */
+    /** Available subtitle languages (ISO 639-1 codes). */
     subtitles: z.array(ISO6391CodeEnum),
-
-    /** Optional poster image object, can be null */
-    posterImage: CloudinaryImageObjectSchema.optional().nullable().default(null),
-
-    /** Optional trailer URL, can be null */
+    /** Optional Cloudinary poster image object (nullable). */
+    posterImage: CloudinaryImageObjectSchema.optional().nullable(),
+    /** Optional trailer URL (nullable). */
     trailerURL: URLStringSchema.optional().nullable(),
+    /** Whether the movie is currently available (e.g., for streaming). */
+    isAvailable: RequiredBoolean,
 });
 
 /**
- * Schema representing a movie with references to genre IDs.
- * Extends MovieBaseSchema.
+ * Extended movie schema with identifiers and genre references.
  */
-export const MovieSchema = MovieBaseSchema.extend({
-    /** Unique identifier of the movie */
+export const ExtendedMovieSchema = MovieBaseSchema.extend({
+    /** Unique string identifier for the movie. */
     _id: IDStringSchema.readonly(),
-
-    /** Array of genre IDs associated with the movie */
-    genres: z.array(IDStringSchema, { message: "Must be an array of genre references." }),
+    /** Array of genre IDs associated with the movie. */
+    genres: z.array(IDStringSchema, {message: "Must be an array of genre references."}),
 });
 
 /**
- * Schema for detailed movie information.
- * Includes genre objects and showing count.
+ * Extended movie schema with full genre objects and showing count.
  */
-export const MovieDetailsSchema = MovieBaseSchema.extend({
-    /** Unique identifier of the movie */
+export const ExtendedMovieDetailsSchema = MovieBaseSchema.extend({
+    /** Unique string identifier for the movie. */
     _id: IDStringSchema.readonly(),
-
-    /** Array of full genre objects associated with the movie */
-    genres: z.array(z.lazy(() => GenreSchema), { message: "Must be an array of genres." }),
-
-    /** Number of showings for this movie */
+    /** Array of full genre objects associated with the movie. */
+    genres: z.array(z.lazy(() => GenreSchema), {message: "Must be an array of genres."}),
+    /** Number of showings (non-negative). */
     showingCount: NonNegativeNumberSchema,
 });
 
-/** Schema for an array of movies */
+/**
+ * Refinement function ensuring that a release date is required if the movie is marked as released.
+ *
+ * @param values - The object being validated.
+ * @param ctx - Zod refinement context used to add validation issues.
+ */
+const dateIfReleased = (values: any, ctx: z.RefinementCtx) => {
+    const {releaseDate, isReleased} = values;
+    if (isReleased && (releaseDate === undefined || releaseDate === null)) {
+        ctx.addIssue({
+            code: "custom",
+            path: ["releaseDate"],
+            message: "Required if released.",
+        });
+    }
+};
+
+/**
+ * Movie schema with refinement that requires release date if `isReleased` is true.
+ */
+export const MovieSchema = ExtendedMovieSchema.superRefine(dateIfReleased);
+
+/**
+ * Detailed movie schema with refinement that requires release date if `isReleased` is true.
+ */
+export const MovieDetailsSchema = ExtendedMovieDetailsSchema.superRefine(dateIfReleased);
+
+/**
+ * Array of `MovieSchema` objects.
+ */
 export const MovieArraySchema = z.array(MovieSchema);
 
-/** Schema for an array of detailed movie objects */
+/**
+ * Array of `MovieDetailsSchema` objects.
+ */
 export const MovieDetailsArraySchema = z.array(MovieDetailsSchema);
 
-/** Schema for paginated results of movies */
+/**
+ * Paginated result schema for movies using `MovieSchema`.
+ */
 export const PaginatedMovieSchema = generatePaginationSchema(MovieSchema);
 
-/** Schema for paginated results of detailed movies */
+/**
+ * Paginated result schema for movies using `MovieDetailsSchema`.
+ */
 export const PaginatedMovieDetailsSchema = generatePaginationSchema(MovieDetailsSchema);

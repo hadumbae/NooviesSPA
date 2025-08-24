@@ -1,79 +1,102 @@
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
-import {RefinedDateStringSchema} from "@/common/schema/dates/RefinedDateStringSchema.ts";
 import {ISO6391CodeEnum} from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
-import {ISO3166Alpha2CodeEnum} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
 import {MovieBaseSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
+import {NonFutureDateStringSchema} from "@/common/schema/dates/NonFutureDateStringSchema.ts";
+import {UndefinedEmptyStringLiteralSchema} from "@/common/schema/strings/UndefinedEmptyStringLiteralSchema.ts";
 
 /**
- * Schema representing raw movie form values as they are initially entered in the UI.
- *
- * These values may not yet be validated or normalized into their final formats
- * and are typically used for form state handling.
+ * Schema representing the raw values used in the movie form.
+ * Includes starter values and optional arrays for languages, subtitles, and genres.
  */
 export const MovieFormValuesSchema = z.object({
-    /** Movie's localized display title. */
+    /** The main title of the movie */
     title: FormStarterValueSchema,
-    /** Movie's original, unlocalized title. */
+    /** The original title (if different) */
     originalTitle: FormStarterValueSchema,
-    /** Optional tagline or promotional phrase for the movie. */
+    /** The tagline of the movie */
     tagline: FormStarterValueSchema,
-    /** Country code or name (free-form until validated). */
+    /** Country of production */
     country: FormStarterValueSchema,
-    /** Short plot synopsis or description. */
+    /** Synopsis or summary of the movie */
     synopsis: FormStarterValueSchema,
-    /** Release date string (raw form value, not yet refined). */
+    /** Release date of the movie */
     releaseDate: FormStarterValueSchema,
-    /** Runtime in minutes (raw form value). */
+    /** Whether the movie has been released */
+    isReleased: FormStarterValueSchema,
+    /** Runtime of the movie in minutes */
     runtime: FormStarterValueSchema,
-    /** ISO 639-1 language code for the movie's original language (raw). */
+    /** Original language code of the movie */
     originalLanguage: FormStarterValueSchema,
-    /** Optional trailer URL, may be `null` or empty string in the form. */
+    /** Optional URL to the movie trailer */
     trailerURL: FormStarterValueSchema.optional().nullable(),
-    /** Array of spoken languages in ISO 639-1 format. */
+    /** Array of spoken languages in ISO 639-1 codes */
     languages: z.array(ISO6391CodeEnum),
-    /** Array of available subtitle languages in ISO 639-1 format. */
+    /** Array of subtitle languages in ISO 639-1 codes */
     subtitles: z.array(ISO6391CodeEnum),
-    /** Array of genre IDs associated with the movie. */
+    /** Array of genre IDs */
     genres: z.array(IDStringSchema),
+    /** Whether the movie is currently available */
+    isAvailable: FormStarterValueSchema,
 });
 
 /**
- * Schema representing the fully validated and normalized movie form data.
+ * Schema for validating a movie form.
+ * Extends `MovieBaseSchema` and adds specific constraints for the form:
+ * - `genres` must be an array of valid IDs.
+ * - `releaseDate` must be either a valid non-future date or empty if the movie is not released.
+ * - `runtime` must be a positive number.
+ * - Optional arrays for `languages` and `subtitles`.
+ * - `trailerURL` is preprocessed to normalize empty strings, null, or undefined to null.
  *
- * This schema extends {@link MovieBaseSchema} with stricter formats and constraints
- * suitable for saving to a database or sending to an API.
+ * The `superRefine` enforces that `releaseDate` is required if `isReleased` is true.
  */
 export const MovieFormSchema = MovieBaseSchema.extend({
-    /** Array of genre IDs (validated as non-empty strings). */
-    genres: z.array(IDStringSchema),
-    /** Movie release date in refined, validated date string format (YYYY-MM-DD). */
-    releaseDate: RefinedDateStringSchema,
-    /** Runtime in minutes (must be a positive integer). */
+    /** Array of genre IDs */
+    genres: z.array(IDStringSchema, {message: "Must be an array of genre IDs."}),
+
+    /**
+     * The release date of the movie.
+     * - Must be a non-future date string if provided.
+     * - Can be undefined or an empty string if the movie is not released.
+     */
+    releaseDate: z.union(
+        [UndefinedEmptyStringLiteralSchema, NonFutureDateStringSchema],
+        {message: "Must be a non-future date or empty."},
+    ),
+
+    /** Runtime of the movie in minutes */
     runtime: CleanedPositiveNumberSchema,
-    /** Country of origin as an ISO 3166-1 alpha-2 code. */
-    country: ISO3166Alpha2CodeEnum,
-    /** Original language as an ISO 639-1 code. */
-    originalLanguage: ISO6391CodeEnum,
-    /** Optional array of spoken languages (ISO 639-1 codes). */
+
+    /** Array of spoken language ISO 639-1 codes (optional) */
     languages: z.array(ISO6391CodeEnum).optional(),
-    /** Optional array of subtitle languages (ISO 639-1 codes). */
+
+    /** Array of subtitle language ISO 639-1 codes (optional) */
     subtitles: z.array(ISO6391CodeEnum).optional(),
+
     /**
      * Optional trailer URL.
-     * - Empty strings, `null`, or `undefined` are converted to `null`.
-     * - Otherwise must be a valid URL string.
+     * Empty strings, null, or undefined are normalized to null.
      */
     trailerURL: z.preprocess(
-        (value: unknown) => (
+        (value: unknown) =>
             (typeof value === "string" && value.trim() === "") ||
             value === null ||
-            value === undefined
-        ) ? null : value,
+            value === undefined ? null : value,
         URLStringSchema.optional().nullable(),
     ),
-});
+}).superRefine((values, ctx) => {
+    const {releaseDate, isReleased} = values;
 
+    // Enforce that releaseDate is present if the movie is marked as released
+    if (isReleased && (releaseDate === undefined || releaseDate === null || releaseDate === "")) {
+        ctx.addIssue({
+            code: "custom",
+            path: ["releaseDate"],
+            message: "Required if released.",
+        });
+    }
+});
