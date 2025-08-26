@@ -1,11 +1,12 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import MovieCreateHeader from "@/pages/movies/components/headers/MovieCreateHeader.tsx";
-import MovieSubmitFormContainer from "@/pages/movies/components/admin/forms/MovieSubmitFormContainer.tsx";
+import MovieCreateHeader from "@/pages/movies/components/pages/admin/create-movie/MovieCreateHeader.tsx";
+import MovieSubmitFormContainer from "@/pages/movies/components/forms/MovieSubmitFormContainer.tsx";
 import {useNavigate} from "react-router-dom";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import MovieCreateBreadcrumbs from "@/pages/movies/components/pages/admin/create-movie/MovieCreateBreadcrumbs.tsx";
 
 /**
  * Page component for creating a new movie in the admin interface.
@@ -29,7 +30,7 @@ const MovieCreatePage: FC = () => {
      *
      * @param movie - The newly created movie object.
      */
-    const onSuccess = ({ _id }: Movie) => {
+    const onSuccess = ({_id}: Movie) => {
         navigate(`/admin/movies/get/${_id}`);
     };
 
@@ -39,7 +40,10 @@ const MovieCreatePage: FC = () => {
     return (
         <PageFlexWrapper>
             {/* Page header */}
-            <MovieCreateHeader />
+            <section>
+                <MovieCreateBreadcrumbs/>
+                <MovieCreateHeader/>
+            </section>
 
             {/* Movie form section */}
             <PageSection srTitle="Movie Create Form">
