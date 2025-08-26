@@ -9,8 +9,8 @@ import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
 import usePaginationLocationState from "@/common/hooks/params/usePaginationLocationState.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import {Movie, PaginatedMovies} from "@/pages/movies/schema/movie/Movie.types.ts";
-import {PaginatedMovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
+import {MovieDetails, PaginatedMovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {PaginatedMovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 
 /**
  * `MovieIndexPage` displays a paginated list of movies
@@ -41,18 +41,18 @@ const MovieIndexPage: FC = () => {
     const {data: paginationState} = usePaginationLocationState();
     const {page, perPage} = usePaginationSearchParams(paginationState ?? {page: 1, perPage: 25});
 
-    const query = useFetchMovies({populate: true, paginated: true, page, perPage});
+    const query = useFetchMovies({populate: true, virtuals: true, paginated: true, page, perPage});
 
     return (
         <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={PaginatedMovieSchema}>
-                {(paginatedMovies: PaginatedMovies) => {
+            <ValidatedQueryBoundary query={query} schema={PaginatedMovieDetailsSchema}>
+                {(paginatedMovies: PaginatedMovieDetails) => {
                     const {items: movies} = paginatedMovies;
                     const hasMovies = (movies || []).length > 0;
 
                     const movieSection = (
                         <PageSection srTitle="List Of Movies" className="space-y-3">
-                            {movies.map((movie: Movie) => <MovieIndexCard movie={movie} key={movie._id}/>)}
+                            {movies.map((movie: MovieDetails) => <MovieIndexCard movie={movie} key={movie._id}/>)}
                         </PageSection>
                     );
 
