@@ -2,85 +2,97 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {ZodTypeAny} from "zod";
 
 /**
- * Parameters related to form submission mutation handling.
+ * Parameters for configuring a form mutation submission.
  *
- * @template TData - The type of data expected on successful submission.
- * @template TError - The type of error expected on submission failure.
+ * @template TData - The type of the data returned on a successful submit.
  * @template TSchema - The Zod schema type used for validation.
  */
-export type FormMutationOnSubmitParams<
-    TData = unknown,
-    TError = Error,
-    TSchema extends ZodTypeAny = ZodTypeAny
-> = {
+export type FormMutationOnSubmitParams<TData = unknown, TSchema extends ZodTypeAny = ZodTypeAny> = {
     /**
-     * Optional Zod schema to validate form data before submission.
+     * Zod validation schema to validate form input before submission.
      */
     validationSchema?: TSchema;
 
     /**
-     * Optional success message displayed after a successful submission.
+     * Optional success message to display when the submission succeeds.
      */
     successMessage?: string;
 
     /**
-     * Callback invoked when form submission succeeds.
-     * @param data - The optional data returned on success.
+     * Callback fired when the submission succeeds.
+     *
+     * @param data - The returned data from the mutation.
      */
-    onSubmitSuccess?: (data?: TData) => void;
+    onSubmitSuccess?: (data: TData) => void;
 
     /**
-     * Optional error message displayed after a failed submission.
+     * Optional error message to display when the submission fails.
      */
     errorMessage?: string;
 
     /**
-     * Callback invoked when form submission fails.
-     * @param error - The optional error object returned on failure.
+     * Callback fired when the submission fails.
+     *
+     * @param error - The error thrown during submission.
      */
-    onSubmitError?: (error?: TError) => void;
+    onSubmitError?: (error: unknown) => void;
 };
 
 /**
- * Parameters indicating whether the form is in editing mode.
- *
- * When `isEditing` is true, an `_id` must be provided representing
- * the entity being edited.
- *
- * When `isEditing` is false or undefined, no `_id` should be present.
+ * Parameters for configuring a delete mutation submission.
  */
-export type FormMutationEditingParams = | {
+export type OnDeleteMutationParams = {
     /**
-     * Flag indicating the form is in editing mode.
+     * Optional success message to display when the deletion succeeds.
      */
+    successMessage?: string;
+
+    /**
+     * Callback fired when the deletion succeeds.
+     */
+    onDeleteSuccess?: () => void;
+
+    /**
+     * Optional error message to display when the deletion fails.
+     */
+    errorMessage?: string;
+
+    /**
+     * Callback fired when the deletion fails.
+     *
+     * @param error - The error thrown during deletion.
+     */
+    onDeleteError?: (error: unknown) => void;
+};
+
+/**
+ * Parameters describing whether a form mutation is creating or editing a record.
+ *
+ * - If `isEditing: true`, an `_id` must be provided.
+ * - If omitted or `isEditing: false`, `_id` must not be set.
+ */
+export type FormMutationEditingParams =
+    | {
+    /** Indicates the form is in editing mode. */
     isEditing: true;
 
-    /**
-     * The unique identifier of the entity being edited.
-     */
+    /** The unique identifier of the record being edited. */
     _id: ObjectId;
 } | {
-    /**
-     * Flag indicating the form is not in editing mode (default).
-     */
+    /** Indicates the form is in create mode (default). */
     isEditing?: false;
 
-    /**
-     * No `_id` should be present when not editing.
-     */
+    /** Not allowed in create mode. */
     _id?: never;
 };
 
 /**
- * Complete parameters for a form mutation, combining submission
- * handling and editing mode parameters.
+ * Combination of form submission parameters and editing state.
  *
- * @template TData - The type of data expected on successful submission.
- * @template TError - The type of error expected on submission failure.
+ * @template TData - The type of the data returned on a successful submit.
  * @template TSchema - The Zod schema type used for validation.
  */
 export type FormMutationResultParams<
     TData = unknown,
-    TError = Error,
     TSchema extends ZodTypeAny = ZodTypeAny
-> = FormMutationOnSubmitParams<TData, TError, TSchema> & FormMutationEditingParams;
+> = FormMutationOnSubmitParams<TData, TSchema> & FormMutationEditingParams;
