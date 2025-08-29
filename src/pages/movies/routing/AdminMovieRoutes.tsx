@@ -1,8 +1,7 @@
 import BaseLayout from "@/common/layout/BaseLayout.tsx";
 import MovieIndexPage from "@/pages/movies/pages/admin/MovieIndexPage.tsx";
 import MovieCreatePage from "@/pages/movies/pages/admin/MovieCreatePage.tsx";
-import MovieEditPage from "@/pages/movies/pages/admin/MovieEditPage.tsx";
-import MoviePage from "@/pages/movies/pages/admin/MoviePage.tsx";
+import MovieDetailsPage from "@/pages/movies/pages/admin/MovieDetailsPage.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import {RouteObject} from "react-router-dom";
 import MoviePeoplePage from "@/pages/movies/pages/admin/credits/MoviePeoplePage.tsx";
@@ -27,12 +26,7 @@ const routes: RouteObject[] = [
             },
             {
                 path: "/admin/movies/get/:movieID",
-                element: <MoviePage />,
-                errorElement: <ComponentErrorHandler />,
-            },
-            {
-                path: "/admin/movies/edit/:movieID",
-                element: <MovieEditPage />,
+                element: <MovieDetailsPage />,
                 errorElement: <ComponentErrorHandler />,
             },
 
