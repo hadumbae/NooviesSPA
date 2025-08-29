@@ -16,29 +16,19 @@ interface Props {
 
 const MovieOptions: FC<Props> = ({movie, variant = "default", className = "", onDelete}) => {
     const {_id} = movie;
-    const {mutate, isPending, isSuccess} = useMovieDeleteMutation({onDelete});
-
-    const deleteMovie = () => {
-        mutate({_id});
-    }
+    const {mutate, isPending, isSuccess} = useMovieDeleteMutation({onDeleteSuccess: onDelete});
+    const deleteMovie = () => mutate({_id});
 
     return (
         <Popover>
-
             <PopoverTrigger asChild>
-                <Button
-                    variant={variant}
-                    className={cn(className)}
-                >
-                    <Ellipsis />
+                <Button variant={variant} className={cn(className)}>
+                    <Ellipsis/>
                 </Button>
             </PopoverTrigger>
 
             <PopoverContent className="w-40 flex flex-col p-0">
-                <Link
-                    className={buttonVariants({variant: "link"})}
-                    to={`/admin/movies/edit/${_id}`}
-                >
+                <Link className={buttonVariants({variant: "link"})} to={`/admin/movies/edit/${_id}`}>
                     Edit
                 </Link>
 
@@ -51,7 +41,6 @@ const MovieOptions: FC<Props> = ({movie, variant = "default", className = "", on
                     Delete
                 </Button>
             </PopoverContent>
-
         </Popover>
     );
 };
