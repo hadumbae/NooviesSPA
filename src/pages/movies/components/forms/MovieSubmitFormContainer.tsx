@@ -2,7 +2,7 @@ import {FC} from 'react';
 
 import useMovieSubmitForm from "@/pages/movies/hooks/forms/useMovieSubmitForm.ts";
 import useMovieSubmitMutation, {MovieSubmitParams} from "@/pages/movies/hooks/mutations/useMovieSubmitMutation.ts";
-import MovieSubmitFormView from "@/pages/movies/components/admin/forms/MovieSubmitFormView.tsx";
+import MovieSubmitFormView from "@/pages/movies/components/forms/MovieSubmitFormView.tsx";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {MovieFormValues} from "@/pages/movies/schema/form/MovieForm.types.ts";
