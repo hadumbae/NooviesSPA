@@ -13,7 +13,7 @@ import {
  * Each method returns a `Promise` resolving to a {@link FetchReturns}
  * object, containing both the raw HTTP `Response` and the typed result data.
  */
-export interface IBaseRequestRepository {
+export interface IRequestRepository {
     /**
      * Retrieves all matching entities.
      *

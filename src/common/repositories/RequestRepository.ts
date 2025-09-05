@@ -2,7 +2,7 @@ import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
-import {IBaseRequestRepository} from "@/common/interfaces/IBaseRequestRepository.ts";
+import {IRequestRepository} from "@/common/interfaces/IRequestRepository.ts";
 import {
     CreateEntityParams, DeleteEntityParams, EntityQueryParams,
     GetEntitiesParams, GetEntityByIDParams,
@@ -12,21 +12,21 @@ import {
 /**
  * Creates a standardized HTTP request repository for a given base URL.
  *
- * This factory function returns an object implementing the {@link IBaseRequestRepository} interface,
+ * This factory function returns an object implementing the {@link IRequestRepository} interface,
  * providing generic CRUD operations and query utilities for interacting with a RESTful API.
  *
  * All methods internally construct URLs using query parameters and send requests via `useFetchAPI`.
  *
  * @param baseURL - The base API endpoint to which resource-specific paths will be appended.
- * @returns An object implementing {@link IBaseRequestRepository}, with methods to query, create, update, and delete resources.
+ * @returns An object implementing {@link IRequestRepository}, with methods to query, create, update, and delete resources.
  *
  * @example
  * ```ts
- * const UserRepository = createBaseRequestRepository({ baseURL: "/api/users" });
+ * const UserRepository = createRequestRepository({ baseURL: "/api/users" });
  * const { result } = await UserRepository.getAll({ populate: true });
  * ```
  */
-export const createBaseRequestRepository = ({baseURL}: { baseURL: string }): IBaseRequestRepository => ({
+export const createRequestRepository = ({baseURL}: { baseURL: string }): IRequestRepository => ({
     /**
      * Fetches all resources optionally filtered and enriched with virtual/populated fields.
      */

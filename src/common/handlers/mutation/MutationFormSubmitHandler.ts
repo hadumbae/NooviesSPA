@@ -6,11 +6,11 @@ import {ZodType} from "zod";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import mutationErrorHandler from "@/common/handlers/mutation/MutationFormErrorHandler.ts";
-import {IBaseRequestRepository} from "@/common/interfaces/IBaseRequestRepository.ts";
+import {IRequestRepository} from "@/common/interfaces/IRequestRepository.ts";
 
 interface Params<TData, TSchema extends ZodType, TSubmit extends FieldValues> {
     _id?: string,
-    repository: IBaseRequestRepository,
+    repository: IRequestRepository,
 
     entityName: string,
     mutationKey: unknown[],
