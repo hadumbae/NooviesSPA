@@ -72,19 +72,38 @@ export const RoleTypeFormValuesSchema = z.object({
  * ```
  */
 export const RoleTypeFormSchema = z.object({
-    /** Role name, required, max length 150. */
+    /**
+     * Role name, required, must be a non-empty string.
+     *
+     * - Maximum length: 150 characters.
+     * - Error message if too long: `"Must be 150 characters or less."`
+     */
     roleName: NonEmptyStringSchema
         .max(150, {message: "Must be 150 characters or less."}),
 
-    /** Department value, must be either `"CAST"` or `"CREW"`. */
-    department: RoleTypeDepartmentEnumSchema,
+    /**
+     * Department value, required.
+     *
+     * - Must be `"CAST"` or `"CREW"`.
+     * - Empty string (`""`) is not allowed at validation time.
+     */
+    department: z
+        .union([z.literal(""), RoleTypeDepartmentEnumSchema], {message: "Invalid value. Must be a string."})
+        .refine(val => val !== "", {message: "Required."}),
 
     /**
-     * Optional description of the role.
-     * If not a string, it will be transformed into `undefined`.
+     * Optional description field.
+     *
+     * - Must be a string (if provided).
+     * - Maximum length: 1000 characters.
+     * - Empty string or non-string values are transformed to `undefined`.
      */
-    description: NonEmptyStringSchema
+    description: z
+        .string({required_error: "Required.", invalid_type_error: "Must be a string."})
         .max(1000, {message: "Must be 1000 characters or less."})
         .optional()
-        .transform((val) => (typeof val === "string" ? val : undefined)),
+        .transform((val) => {
+            if (typeof val !== "string" || val === "") return undefined;
+            return val;
+        }),
 });
