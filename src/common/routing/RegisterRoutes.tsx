@@ -11,10 +11,12 @@ import SystemRoutes from "@/common/routing/SystemRoutes.tsx";
 import {RouteObject} from "react-router-dom";
 import UserProfileRoutes from "@/pages/client/user/routing/UserProfileRoutes.tsx";
 import ClientMovieRoutes from "@/pages/movies/routing/ClientMovieRoutes.tsx";
+import RoleTypeRoutes from "@/pages/roletype/routing/RoleTypeRoutes.tsx";
 
 const adminRoutes = [
     ...GenreRoutes,
     ...PersonRoutes,
+    ...RoleTypeRoutes,
     ...AdminMovieRoutes,
 
     ...ScreenRoutes,
