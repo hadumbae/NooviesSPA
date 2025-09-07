@@ -9,30 +9,41 @@ import {
 import {Link} from "react-router-dom";
 import {TableOfContents} from "lucide-react";
 
-const AdminMovieSidebarGroup: FC = () => {
+const AdminSetupSidebarGroup: FC = () => {
     return (
         <SidebarGroup>
-            <SidebarGroupLabel>Movies</SidebarGroupLabel>
+            <SidebarGroupLabel>Setup</SidebarGroupLabel>
             <SidebarGroupContent>
                 <SidebarMenu>
-                    {/* Movies */}
+                    {/* Genres */}
 
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
-                            <Link to="/admin/movies">
+                            <Link to="/admin/genres">
                                 <TableOfContents />
-                                <span>Movies</span>
+                                <span>Genres</span>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
 
-                    {/* Showing */}
+                    {/* Persons */}
 
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
-                            <Link to="/admin/showings">
+                            <Link to="/admin/persons">
                                 <TableOfContents />
-                                <span>Showings</span>
+                                <span>Persons</span>
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+
+                    {/* RoleTypes */}
+
+                    <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                            <Link to="/admin/roletypes/list">
+                                <TableOfContents />
+                                <span>Role Types</span>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -42,4 +53,4 @@ const AdminMovieSidebarGroup: FC = () => {
     );
 };
 
-export default AdminMovieSidebarGroup;
+export default AdminSetupSidebarGroup;
