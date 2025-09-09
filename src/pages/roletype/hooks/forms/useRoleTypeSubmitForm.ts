@@ -1,9 +1,9 @@
-import {RoleTypeFormValues} from "@/pages/roletype/schema/forms/RoleTypeForm.types.ts";
+import {RoleTypeFormValues} from "@/pages/roletype/schema/submit-form/RoleTypeForm.types.ts";
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {RoleTypeFormSchema} from "@/pages/roletype/schema/forms/RoleTypeForm.schema.ts";
+import {RoleTypeFormSchema} from "@/pages/roletype/schema/submit-form/RoleTypeForm.schema.ts";
 
 /**
  * Parameters for initializing the `useRoleTypeSubmitForm` hook.

@@ -1,6 +1,6 @@
 import {FormMutationEditingParams, FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {UseFormReturn} from "react-hook-form";
-import {RoleTypeForm, RoleTypeFormValues} from "@/pages/roletype/schema/forms/RoleTypeForm.types.ts";
+import {RoleTypeForm, RoleTypeFormValues} from "@/pages/roletype/schema/submit-form/RoleTypeForm.types.ts";
 import RoleTypeRepository from "@/pages/roletype/repositories/RoleTypeRepository.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
@@ -52,8 +52,6 @@ export default function useRoleTypeSubmitMutation(
     const queryClient = useQueryClient();
 
     const submitRoleTypeData = async (values: RoleTypeForm) => {
-        console.log("Values: ", values);
-
         const action = isEditing
             ? () => RoleTypeRepository.update({_id, data: values})
             : () => RoleTypeRepository.create({data: values});
@@ -77,7 +75,7 @@ export default function useRoleTypeSubmitMutation(
     const onSuccess = (roleType: RoleType) => {
         const actionDisplay = isEditing ? "updated" : "created"
 
-        toast.success(successMessage ?? `Role Type data ${actionDisplay} successfully.`);
+        toast.success(successMessage ?? `Role Type ${actionDisplay} successfully.`);
         onSubmitSuccess?.(roleType);
     }
 

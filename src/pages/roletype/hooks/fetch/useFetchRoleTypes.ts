@@ -1,5 +1,5 @@
 import {EntityPaginatedQuery, RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
-import {RoleTypeQueryOptions} from "@/pages/roletype/schema/filters/RoleTypeFilters.types.ts";
+import {RoleTypeQueryOptions} from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import RoleTypeRepository from "@/pages/roletype/repositories/RoleTypeRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
