@@ -17,6 +17,11 @@ export default function fetchParsedSearchParams<TObject extends ZodRawShape>(
     for (const key in schemaShape) {
         const validator = schemaShape[key];
         const {success, data} = validator.safeParse(raw[key]);
+
+        if ((success && data === undefined) || (!success && defaultValues[key] === undefined)) {
+            continue;
+        }
+
         parsedParams[key] = success ? data : defaultValues[key];
     }
 
