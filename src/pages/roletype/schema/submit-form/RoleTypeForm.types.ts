@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {RoleTypeFormSchema, RoleTypeFormValuesSchema} from "@/pages/roletype/schema/forms/RoleTypeForm.schema.ts";
+import {RoleTypeFormSchema, RoleTypeFormValuesSchema} from "@/pages/roletype/schema/submit-form/RoleTypeForm.schema.ts";
 
 /**
  * TypeScript type inferred from {@link RoleTypeFormValuesSchema}.

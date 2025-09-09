@@ -1,9 +1,17 @@
 import {z} from "zod";
 import {
-    RoleTypeQueryFiltersSchema,
+    RoleTypeQueryFiltersSchema, RoleTypeQueryOptionsFormValuesSchema,
     RoleTypeQueryOptionsSchema,
     RoleTypeQuerySortsSchema
-} from "@/pages/roletype/schema/filters/RoleTypeFilters.schema.ts";
+} from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.schema.ts";
+
+/**
+ * TypeScript type inferred from {@link RoleTypeQueryOptionsFormValuesSchema}.
+ *
+ * Represents the values used to initialize the RoleType query form.
+ * All fields are optional and can start as empty strings or default values.
+ */
+export type RoleTypeQueryOptionsFormValues = z.infer<typeof RoleTypeQueryOptionsFormValuesSchema>;
 
 /**
  * TypeScript type inferred from {@link RoleTypeQueryFiltersSchema}.
