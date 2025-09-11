@@ -1,13 +1,13 @@
 import {FC} from 'react';
-import {RoleType} from "@/pages/moviecredit/schemas/enums/RoleTypeEnumSchema.ts";
-import {PopulatedMovieCredit} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedSchema.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 import MoviePersonDetailsCard from "@/pages/movies/components/admin/credits/cards/MoviePersonDetailsCard.tsx";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 
 interface SectionProps {
-    roleType: RoleType;
-    credits: PopulatedMovieCredit[];
+    roleType: RoleTypeDepartment;
+    credits: MovieCreditDetails[];
 }
 
 const MoviePeopleListPageSection: FC<SectionProps> = ({roleType, credits}) => {

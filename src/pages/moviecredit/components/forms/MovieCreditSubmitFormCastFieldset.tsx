@@ -2,10 +2,10 @@ import {FC} from 'react';
 import {UseFormReturn} from "react-hook-form";
 import {
     MovieCreditFormValues,
-} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
+} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {MovieCreditFormCastValues} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitCastSchema.ts";
+import {MovieCreditFormCastValues} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitCastSchema.ts";
 
 interface FieldsetProps<TKey extends string = keyof MovieCreditFormCastValues> {
     form: UseFormReturn<MovieCreditFormValues>;

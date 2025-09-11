@@ -2,8 +2,7 @@ import {FC} from 'react';
 import {
     MovieCreditFormValues,
     MovieCreditSubmit
-} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
+} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitSchema.ts";
 import MovieCreditSubmitFormView from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormView.tsx";
 import {Loader} from "lucide-react";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
@@ -11,6 +10,7 @@ import QueryFilters from "@/common/type/QueryFilters.ts";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
 import useFetchMoviesAndPersons from "@/pages/moviecredit/hooks/queries/movies-and-credits/useFetchMoviesAndPersons.ts";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 interface ContainerProps {
     form: UseFormReturn<MovieCreditFormValues>;

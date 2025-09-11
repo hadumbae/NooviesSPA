@@ -4,11 +4,11 @@ import {
     MovieCreditFormValues,
     MovieCreditSubmit,
     MovieCreditSubmitSchema
-} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
+} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitSchema.ts";
 import useMovieCreditSubmitFormDefaultValues
     from "@/pages/moviecredit/hooks/forms/useMovieCreditSubmitFormDefaultValues.ts";
 import {useEffect, useRef} from "react";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 interface SubmitParams {
     credit?: MovieCredit;

@@ -4,10 +4,11 @@ import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ParamError} from "@/common/errors/ParamError.ts";
-import {PopulatedMovieCredit} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedSchema.ts";
+
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 interface HeaderProps {
-    credit: PopulatedMovieCredit;
+    credit: MovieCreditDetails;
 }
 
 const MoviePersonEditHeader: FC<HeaderProps> = ({credit}) => {

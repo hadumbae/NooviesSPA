@@ -1,6 +1,5 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import {RoleType} from "@/pages/moviecredit/schemas/enums/RoleTypeEnumSchema.ts";
 import useFetchMovieParams from "@/pages/movies/hooks/params/useFetchMovieParams.ts";
 import useFetchPopulatedMovieWithCredits from "@/pages/movies/hooks/queries/useFetchPopulatedMovieWithCredits.ts";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
@@ -13,9 +12,10 @@ import PageSection from "@/common/components/page/PageSection.tsx";
 import MoviePersonSubmitFormContainer from "@/pages/movies/components/admin/credits/forms/MoviePersonSubmitFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import MoviePeopleListPageSection from "@/pages/movies/components/admin/sections/MoviePeopleListPageSection.tsx";
+import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 
 interface PeoplePageProps {
-    roleType: RoleType;
+    roleType: RoleTypeDepartment;
 }
 
 const MoviePeoplePage: FC<PeoplePageProps> = ({roleType}) => {

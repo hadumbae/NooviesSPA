@@ -1,4 +1,4 @@
-import {MovieCreditFormBaseSchema} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitBaseSchema.ts";
+import {MovieCreditFormBaseSchema} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitBaseSchema.ts";
 import {z} from "zod";
 
 

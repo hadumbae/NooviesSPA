@@ -1,7 +1,7 @@
 import {z} from "zod";
-import {MovieCreditSubmitCrewSchema} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitCrewSchema.ts";
-import {MovieCreditFormCastSchema} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitCastSchema.ts";
-import {MovieCreditSubmitEmptySchema} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitEmptySchema.ts";
+import {MovieCreditSubmitCrewSchema} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitCrewSchema.ts";
+import {MovieCreditFormCastSchema} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitCastSchema.ts";
+import {MovieCreditSubmitEmptySchema} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitEmptySchema.ts";
 
 /**
  * Zod discriminated union schema used to represent the various types of movie credit form submissions.

@@ -1,10 +1,10 @@
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
-import {MovieCreditSubmit} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
+import {MovieCreditSubmit} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitSchema.ts";
 import {toast} from "react-toastify";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 /**
  * Parameters for updating a movie credit.

@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {RoleType} from "@/pages/moviecredit/schemas/enums/RoleTypeEnumSchema.ts";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -9,10 +8,11 @@ import {
 } from "@/common/components/ui/breadcrumb.tsx";
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 
 interface PersonListBreadcrumbProps {
     movie: Movie;
-    roleType: RoleType;
+    roleType: RoleTypeDepartment;
 }
 
 const MoviePersonListBreadcrumb: FC<PersonListBreadcrumbProps> = ({movie, roleType}) => {

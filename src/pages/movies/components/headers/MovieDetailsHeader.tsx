@@ -2,13 +2,13 @@ import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {format} from "date-fns";
-import {Pencil, Trash} from "lucide-react";
+import {Contact, Pencil, Trash} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import MovieSubmitFormPanel from "@/pages/movies/components/forms/MovieSubmitFormPanel.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import MovieDeleteWarningDialog from "@/pages/movies/components/dialog/MovieDeleteWarningDialog.tsx";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 interface Props {
     /** The movie object containing details to display in the header. */
@@ -35,10 +35,10 @@ interface Props {
  * <MovieDetailsHeader movie={myMovie} />
  * ```
  */
-const MovieDetailsHeader: FC<Props> = ({ movie }) => {
+const MovieDetailsHeader: FC<Props> = ({movie}) => {
     const navigate = useNavigate();
 
-    const { _id, title, releaseDate, tagline } = movie;
+    const {_id, title, releaseDate, tagline} = movie;
     const formattedDate = releaseDate && format(releaseDate, "yyyy");
 
     /** Callback fired after movie is successfully deleted. Navigates back to movies list. */
@@ -47,7 +47,7 @@ const MovieDetailsHeader: FC<Props> = ({ movie }) => {
     return (
         <header className={cn(
             "flex",
-            "max-md:flex-col",
+            "max-md:flex-col max-md:space-y-2",
             "md:justify-between md:items-center"
         )}>
             <section>
@@ -55,7 +55,27 @@ const MovieDetailsHeader: FC<Props> = ({ movie }) => {
                 <HeaderDescription>{tagline}</HeaderDescription>
             </section>
 
-            <section className="space-x-2 flex justify-end items-center">
+            <section className="space-x-0 flex justify-end items-center">
+                <Link
+                    to={`/admin/movies/get/${_id}/people/cast`}
+                    className={cn(
+                        buttonVariants({variant: "link"}),
+                        "text-neutral-400 hover:text-black"
+                    )}
+                >
+                    <Contact/> Cast
+                </Link>
+
+                <Link
+                    to={`/admin/movies/get/${_id}/people/crew`}
+                    className={cn(
+                        buttonVariants({variant: "link"}),
+                        "text-neutral-400 hover:text-black"
+                    )}
+                >
+                    <Contact/> Crew
+                </Link>
+
                 <MovieSubmitFormPanel isEditing={true} movie={movie}>
                     <Button variant="link" className="text-neutral-400 hover:text-black">
                         <Pencil/> Edit
@@ -64,7 +84,7 @@ const MovieDetailsHeader: FC<Props> = ({ movie }) => {
 
                 <MovieDeleteWarningDialog movieID={_id} onDeleteSuccess={onMovieDelete}>
                     <Button variant="link" className="text-neutral-400 hover:text-black">
-                        <Trash /> Delete
+                        <Trash/> Delete
                     </Button>
                 </MovieDeleteWarningDialog>
             </section>

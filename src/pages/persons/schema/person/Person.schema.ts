@@ -3,10 +3,10 @@ import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {ISO3166Alpha2CodeEnum} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
 import {CloudinaryImageObjectSchema} from "@/common/schema/objects/CloudinaryImageObjectSchema.ts";
-import {MovieCreditSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {TotalItemsNumberSchema} from "@/common/schema/numbers/TotalItemsNumberSchema.ts";
 import {ParsedUTCDayOnlyDateStringSchema} from "@/common/schema/dates/ParsedUTCDayOnlyDateStringSchema.ts";
+import {MovieCreditSchema} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
 
 /**
  * Represents a person in the system.

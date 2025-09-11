@@ -1,11 +1,11 @@
 import {FC} from 'react';
 import {CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import MoviePersonCardOptions from "@/pages/movies/components/admin/credits/cards/MoviePersonCardOptions.tsx";
-import {PopulatedMovieCredit} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedSchema.ts";
 import {ParamError} from "@/common/errors/ParamError.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 interface CastProps {
-    credit: PopulatedMovieCredit;
+    credit: MovieCreditDetails;
 }
 
 const MoviePersonDetailsCardCrewHeader: FC<CastProps> = ({credit}) => {

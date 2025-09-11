@@ -1,11 +1,11 @@
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {
     MovieCreditSubmit
-} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
+} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitSchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {toast} from "react-toastify";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 /**
  * Parameters for configuring the movie credit submit mutation.

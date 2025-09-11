@@ -9,13 +9,12 @@ import useFetchMovieCredits from "@/pages/moviecredit/hooks/queries/useFetchMovi
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
 import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-import {
-    MovieCreditPopulatedArraySchema, PopulatedMovieCreditArray
-} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedArraySchema.ts";
 import {PersonDetailsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import {PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
 import PersonDetailsCard from "@/pages/persons/components/admin/person-details/PersonDetailsCard.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
+import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
+import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 /**
  * Page component displaying a `Person`'s details and a preview of their movie credits.
@@ -28,7 +27,7 @@ import PageSection from "@/common/components/page/PageSection.tsx";
  *
  * Validation:
  * - Person data validated using {@link PersonDetailsSchema}.
- * - Movie credits validated using {@link MovieCreditPopulatedArraySchema}.
+ * - Movie credits validated using {@link MovieCreditDetailsArraySchema}.
  *
  * @example
  * ```tsx
@@ -47,16 +46,15 @@ const PersonDetailsPage: FC = () => {
     const queries = [personQuery, creditQuery];
     const validationQueries: CombinedSchemaQuery[] = [
         {key: "person", query: personQuery, schema: PersonDetailsSchema},
-        {key: "credits", query: creditQuery, schema: MovieCreditPopulatedArraySchema},
+        {key: "credits", query: creditQuery, schema: MovieCreditDetailsArraySchema},
     ];
 
     return (
         <CombinedQueryBoundary queries={queries}>
             <CombinedValidatedQueryBoundary queries={validationQueries}>
                 {(data) => {
-                    const {person, credits} = data as { person: PersonDetails, credits: PopulatedMovieCreditArray };
+                    const {person, credits} = data as { person: PersonDetails, credits: MovieCreditDetailsArray };
                     const {name} = person;
-                    console.log("Credits: ", credits);
 
                     return (
                         <PageFlexWrapper>

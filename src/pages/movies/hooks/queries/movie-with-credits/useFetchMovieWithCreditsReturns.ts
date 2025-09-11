@@ -1,7 +1,5 @@
-import {
-    PopulatedMovieCreditArray
-} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedArraySchema.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 /**
  * Result returned when parsing succeeds.
@@ -16,8 +14,8 @@ type ValidDataResults = {
     // Validated and parsed movie and credit data.
     data: {
         movie: Movie;
-        crew: PopulatedMovieCreditArray;
-        cast: PopulatedMovieCreditArray;
+        crew: MovieCreditDetailsArray;
+        cast: MovieCreditDetailsArray;
     };
 };
 

@@ -4,8 +4,8 @@ import {UseFormReturn} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {
     MovieCreditFormValues,
-} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
-import {MovieCreditFormBaseValues} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitBaseSchema.ts";
+} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitSchema.ts";
+import {MovieCreditFormBaseValues} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitBaseSchema.ts";
 
 interface FlagsProps<TKey extends string = keyof MovieCreditFormBaseValues> {
     form: UseFormReturn<MovieCreditFormValues>;

@@ -1,16 +1,16 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import {RoleType} from "@/pages/moviecredit/schemas/enums/RoleTypeEnumSchema.ts";
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Link} from "react-router-dom";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 
 interface HeaderProps {
     movie: Movie;
-    roleType: RoleType;
+    roleType: RoleTypeDepartment;
 }
 
 const MoviePeopleHeader: FC<HeaderProps> = ({movie, roleType}) => {

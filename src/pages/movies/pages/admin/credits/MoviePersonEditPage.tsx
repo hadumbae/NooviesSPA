@@ -8,14 +8,14 @@ import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import MoviePersonEditHeader from "@/pages/movies/components/headers/admin/MoviePersonEditHeader.tsx";
-import {MovieCreditPopulatedSchema} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedSchema.ts";
 import MoviePersonUpdateFormContainer
     from "@/pages/movies/components/admin/credits/forms/MoviePersonUpdateFormContainer.tsx";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 import {useNavigate} from "react-router-dom";
 import MoviePersonEditBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MoviePersonEditBreadcrumb.tsx";
 import {format} from "date-fns";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {MovieCreditDetailsSchema} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 const MoviePersonEditPage: FC = () => {
     const navigate = useNavigate();
@@ -26,7 +26,7 @@ const MoviePersonEditPage: FC = () => {
 
     const {data, isPending, isError, error: queryError} = useFetchMovieCredit({_id: creditID, populate: true});
     const {success, data: credit, error: parseError} = useValidateData({
-        schema: MovieCreditPopulatedSchema,
+        schema: MovieCreditDetailsSchema,
         data,
         isPending
     });

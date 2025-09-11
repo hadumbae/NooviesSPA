@@ -3,15 +3,14 @@ import useMovieCreditSubmitForm from "@/pages/moviecredit/hooks/forms/useMovieCr
 import {
     MovieCreditFormValues,
     MovieCreditSubmit
-} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
-import {PopulatedMovieCredit} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedSchema.ts";
+} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitSchema.ts";
 import useMovieCreditUpdateMutation from "@/pages/moviecredit/hooks/mutations/useMovieCreditUpdateMutation.ts";
 import MovieCreditFormDataContainer
     from "@/pages/movies/components/admin/credits/forms/MovieCreditFormDataContainer.tsx";
+import {MovieCredit, MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 interface ContainerProps {
-    credit: PopulatedMovieCredit;
+    credit: MovieCreditDetails;
     populate?: boolean;
 
     onSubmit?: (credit: MovieCredit) => void;

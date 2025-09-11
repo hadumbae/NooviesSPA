@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Link} from "react-router-dom";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
 import {InvalidParamError} from "@/common/errors/InvalidParamError.ts";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 interface PreviewCardProps {
     credit: MovieCredit;

@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import MoviePersonPreviewCard from "@/pages/movies/pages/persons/MoviePersonPreviewCard.tsx";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
+
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 interface ContainerProps {
     cast: MovieCredit[];

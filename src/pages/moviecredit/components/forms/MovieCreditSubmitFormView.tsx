@@ -10,8 +10,7 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     MovieCreditFormValues,
     MovieCreditSubmit
-} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
+} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitSchema.ts";
 
 import generateReactSelectOptions from "@/common/utility/forms/generateReactSelectOptions.ts";
 
@@ -29,6 +28,7 @@ import {FC} from "react";
 import UnionKeys from "@/common/type/schema/UnionKeys.ts";
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 
 type MovieCreditKeys = UnionKeys<MovieCreditFormValues>;

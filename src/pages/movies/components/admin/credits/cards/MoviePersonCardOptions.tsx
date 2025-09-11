@@ -2,10 +2,11 @@ import {FC} from 'react';
 import useMovieCreditDeleteMutation from "@/pages/moviecredit/hooks/mutations/useMovieCreditDeleteMutation.ts";
 import MovieCreditOptionsDropdown from "@/pages/moviecredit/components/dropdowns/MovieCreditOptionsDropdown.tsx";
 import {useNavigate} from "react-router-dom";
-import {PopulatedMovieCredit} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedSchema.ts";
+
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 interface OptionsProps {
-    credit: PopulatedMovieCredit;
+    credit: MovieCreditDetails;
 }
 
 const MoviePersonCardOptions: FC<OptionsProps> = ({credit}) => {

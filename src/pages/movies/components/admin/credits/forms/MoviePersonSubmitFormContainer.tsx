@@ -3,12 +3,12 @@ import useMovieCreditSubmitForm from "@/pages/moviecredit/hooks/forms/useMovieCr
 import {
     MovieCreditFormValues,
     MovieCreditSubmit
-} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
+} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitSchema.ts";
 import useMovieCreditSubmitMutation from "@/pages/moviecredit/hooks/mutations/useMovieCreditSubmitMutation.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import MovieCreditFormDataContainer
     from "@/pages/movies/components/admin/credits/forms/MovieCreditFormDataContainer.tsx";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 interface ContainerProps {
     movieID: ObjectId;

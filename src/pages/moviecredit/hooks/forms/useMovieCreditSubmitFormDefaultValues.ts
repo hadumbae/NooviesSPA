@@ -2,10 +2,10 @@ import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 import {
     MovieCreditFormValues,
     MovieCreditSubmit
-} from "@/pages/moviecredit/schemas/model/form/MovieCreditSubmitSchema.ts";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/base/MovieCreditSchema.ts";
+} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitSchema.ts";
 import {useRef} from "react";
 import {isEqual} from "lodash";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 type GenerationParams = {
     credit?: MovieCredit;

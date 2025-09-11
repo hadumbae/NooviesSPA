@@ -1,7 +1,7 @@
-import {MovieCreditBaseSchema} from "@/pages/moviecredit/schemas/model/base/MovieCreditBaseSchema.ts";
 import {RefinedIDStringSchema} from "@/common/schema/strings/RefinedIDStringSchema.ts";
 import {z} from "zod";
 import {NulledStringSchema} from "@/common/schema/strings/NulledStringSchema.ts";
+import {MovieCreditBaseSchema} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
 
 /**
  * Zod schema used for validating core data required to create or update a movie credit entry.

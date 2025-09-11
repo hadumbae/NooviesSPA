@@ -3,16 +3,17 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import {ChevronRight} from "lucide-react";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
-import {RoleType} from "@/pages/moviecredit/schemas/enums/RoleTypeEnumSchema.ts";
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 import MovieDetailsPersonListPreviewCard
     from "@/pages/movies/components/admin/credits/cards/MovieDetailsPersonListPreviewCard.tsx";
-import {PopulatedMovieCredit} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedSchema.ts";
+
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 
 interface CreditProps {
     movieID: ObjectId;
-    roleType: RoleType;
-    credits: PopulatedMovieCredit[];
+    roleType: RoleTypeDepartment;
+    credits: MovieCreditDetails[];
 }
 
 const MovieDetailsCreditPageSection: FC<CreditProps> = ({movieID, roleType, credits}) => {

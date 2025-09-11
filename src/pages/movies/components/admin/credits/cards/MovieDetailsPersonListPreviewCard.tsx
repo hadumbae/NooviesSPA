@@ -1,12 +1,12 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {PopulatedMovieCredit} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedSchema.ts";
 import {ParamError} from "@/common/errors/ParamError.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {Link} from "react-router-dom";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
 interface DetailsProp {
-    credit: PopulatedMovieCredit;
+    credit: MovieCreditDetails;
     className?: string;
 }
 

@@ -1,7 +1,7 @@
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
-import {MovieCreditFilters} from "@/pages/moviecredit/schemas/filters/MovieCreditFilterSchema.ts";
 import {useQuery} from "@tanstack/react-query";
 import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
+import {MovieCreditQueryFilters} from "@/pages/moviecredit/schemas/filters/MovieCreditQueryOptions.types.ts";
 
 /**
  * Props for fetching paginated movie credit data.
@@ -14,7 +14,7 @@ interface PaginatedProps {
     perPage?: number;
 
     /** Optional filter criteria to apply to the movie credit query. */
-    filters?: MovieCreditFilters;
+    filters?: MovieCreditQueryFilters;
 
     /** Whether to populate related data in the response. Defaults to false. */
     populate?: boolean;

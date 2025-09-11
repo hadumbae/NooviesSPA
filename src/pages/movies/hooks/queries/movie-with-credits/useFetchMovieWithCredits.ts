@@ -3,14 +3,12 @@ import useFetchAllMovieCredits from "@/pages/moviecredit/hooks/queries/useFetchA
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {
-    MovieCreditPopulatedArraySchema
-} from "@/pages/moviecredit/schemas/model/references/MovieCreditPopulatedArraySchema.ts";
-import {
     useFetchMovieWithCreditsParams
 } from "@/pages/movies/hooks/queries/movie-with-credits/useFetchMovieWithCreditsParams.ts";
 import {
     UseFetchMovieWithCreditsReturns
 } from "@/pages/movies/hooks/queries/movie-with-credits/useFetchMovieWithCreditsReturns.ts";
+import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
 
 /**
  * Fetches a movie and its associated crew and cast data, then validates each using defined Zod schemas.
@@ -44,8 +42,8 @@ export default function useFetchMovieWithCredits(params: useFetchMovieWithCredit
     // Validations
 
     const movieValidation = useValidateData({data: movieQuery.data, schema: MovieSchema, isPending});
-    const crewValidation = useValidateData({data: crewQuery.data, schema: MovieCreditPopulatedArraySchema, isPending});
-    const castValidation = useValidateData({data: castQuery.data, schema: MovieCreditPopulatedArraySchema, isPending});
+    const crewValidation = useValidateData({data: crewQuery.data, schema: MovieCreditDetailsArraySchema, isPending});
+    const castValidation = useValidateData({data: castQuery.data, schema: MovieCreditDetailsArraySchema, isPending});
     const validations = [movieValidation, crewValidation, castValidation];
 
     const parseSuccess = movieValidation.success && crewValidation.success && castValidation.success;
