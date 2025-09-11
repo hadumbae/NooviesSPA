@@ -89,9 +89,9 @@ const CastSchema = MovieCreditExtendedSchema.extend(CastSharedFields);
  * Extended schema with full objects for movie, person, and role type.
  */
 const MovieCreditDetailsExtendedSchema = MovieCreditBaseSchema.extend({
-    movie: MovieSchema,
-    person: PersonSchema,
-    roleType: RoleTypeSchema,
+    movie: z.lazy(() => MovieSchema),
+    person: z.lazy(() => PersonSchema),
+    roleType: z.lazy(() => RoleTypeSchema),
 });
 
 /** Schema for CREW credits with full objects. */
