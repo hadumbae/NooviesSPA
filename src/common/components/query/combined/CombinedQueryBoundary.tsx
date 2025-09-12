@@ -7,12 +7,17 @@ import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 /**
  * Props for the {@link CombinedQueryBoundary} component.
  *
+ * This component aggregates multiple TanStack Query results and handles:
+ * - Displaying a loader while queries are pending,
+ * - Showing an error component if any query fails,
+ * - Passing the combined query data to children once all queries succeed.
+ *
  * @typeParam TData - The type of aggregated data returned to `children`.
- * By default, it will be an array of the `.data` values from all queries.
+ * By default, it is inferred as an array of `.data` values from all queries.
  */
 type CombinedQueryBoundaryProps<TData = unknown> = {
     /**
-     * The content to render once all queries succeed.
+     * Content to render once all queries succeed.
      * - Can be a static React node.
      * - Or a render function that receives aggregated query data (usually an array of results).
      */
@@ -28,24 +33,37 @@ type CombinedQueryBoundaryProps<TData = unknown> = {
     queries: UseQueryResult<unknown, HttpResponseError>[];
 
     /**
-     * Whether to display the loader when background refetching (`isFetching`) is in progress.
+     * If true, displays the loader during background refetching (`isFetching`).
      * Defaults to `false`.
      */
     loaderOnFetch?: boolean;
 
     /**
-     * Custom loader component to render during loading states.
+     * Custom loader component to render while queries are loading.
      * Defaults to {@link PageLoader}.
+     *
+     * The component receives an optional `className` prop that can be used
+     * for styling.
      */
-    loaderComponent?: ComponentType;
+    loaderComponent?: ComponentType<{ className?: string }>;
+
+    /** Optional className applied to the loader component. */
+    loaderClassName?: string;
 
     /**
      * Custom error component to render if any query encounters an error.
      * Defaults to {@link PageHTTPError}.
      *
-     * Receives the first encountered error object.
+     * Receives the first encountered error object via `error` prop.
      */
-    errorComponent?: ComponentType<{ error?: Error | null; message?: string }>;
+    errorComponent?: ComponentType<{
+        error?: Error | null;
+        message?: string;
+        className?: string;
+    }>;
+
+    /** Optional className applied to the error component. */
+    errorClassName?: string;
 };
 
 /**
@@ -76,7 +94,9 @@ const CombinedQueryBoundary = (params: CombinedQueryBoundaryProps) => {
         queries,
         loaderOnFetch = false,
         loaderComponent: Loader = PageLoader,
+        loaderClassName,
         errorComponent: ErrorComponent = PageHTTPError,
+        errorClassName,
     } = params;
 
     const hasNoData = queries.some(q => !q.data);
@@ -87,12 +107,12 @@ const CombinedQueryBoundary = (params: CombinedQueryBoundaryProps) => {
 
     if (isPending || (loaderOnFetch && isFetching && hasNoData)) {
         console.log("Page is loading...")
-        return <Loader/>;
+        return <Loader className={loaderClassName}/>;
     }
 
     if (isError) {
         console.log("An Error Occurred.");
-        return <ErrorComponent error={error}/>;
+        return <ErrorComponent error={error} className={errorClassName}/>;
     }
 
     const data = queries.map(q => q.data);

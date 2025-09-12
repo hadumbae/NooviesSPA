@@ -36,7 +36,9 @@ const CombinedValidatedQueryBoundary = <TQueries extends CombinedSchemaQuery[] =
         message,
         loaderOnFetch = false,
         loaderComponent: Loader = PageLoader,
+        loaderClassName,
         errorComponent: ErrorComponent = PageParseError,
+        errorClassName,
     } = props;
 
     const hasData = queries.every(q => q.query.data != null);
@@ -44,7 +46,7 @@ const CombinedValidatedQueryBoundary = <TQueries extends CombinedSchemaQuery[] =
     const isFetching = queries.some(q => q.query.isFetching);
 
     if (isPending || (loaderOnFetch && isFetching && !hasData)) {
-        return <Loader/>;
+        return <Loader className={loaderClassName} />;
     }
 
     let parseError: ParseError | Error | null = null;
@@ -63,7 +65,11 @@ const CombinedValidatedQueryBoundary = <TQueries extends CombinedSchemaQuery[] =
     }
 
     if (parseError) {
-        return <ErrorComponent error={parseError} message={message}/>;
+        return <ErrorComponent
+            className={errorClassName}
+            error={parseError}
+            message={message}
+        />;
     }
 
     return children(parsedData);

@@ -49,10 +49,10 @@ export type CombinedQueryData<TQueries extends CombinedSchemaQuery[] = CombinedS
  * Props for a component that validates multiple queries with Zod
  * before rendering children.
  *
- * The boundary will:
- * - Run all queries in `queries`
- * - Validate their data with the provided schemas
- * - Render loader, error, or children depending on state
+ * The boundary component will:
+ * - Execute all queries in `queries`
+ * - Validate their data using the provided Zod schemas
+ * - Render a loader, an error component, or the children function depending on query state
  *
  * @template TQueries - A tuple or array of `CombinedSchemaQuery` objects.
  */
@@ -60,8 +60,8 @@ export type CombinedValidatedQueryBoundaryProps<
     TQueries extends CombinedSchemaQuery[] = CombinedSchemaQuery[]
 > = {
     /**
-     * Render function that receives the combined validated data
-     * as an object keyed by each query's `key`.
+     * Render function that receives the combined validated data as an object keyed
+     * by each query's `key`.
      */
     children: (data: CombinedQueryData<TQueries>) => ReactNode;
 
@@ -75,8 +75,15 @@ export type CombinedValidatedQueryBoundaryProps<
     loaderOnFetch?: boolean;
 
     /** Optional custom component to render while loading. */
-    loaderComponent?: ComponentType;
+    loaderComponent?: ComponentType<{ className?: string }>;
+
+    /** Optional className for the loader component. */
+    loaderClassName?: string;
 
     /** Optional custom component to render when an error occurs. */
-    errorComponent?: ComponentType<{ error: Error; message?: string }>;
+    errorComponent?: ComponentType<{ error: Error | null; message?: string; className?: string }>;
+
+
+    /** Optional className for the error component. */
+    errorClassName?: string;
 };
