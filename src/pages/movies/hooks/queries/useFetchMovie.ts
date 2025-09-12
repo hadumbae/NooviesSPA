@@ -47,6 +47,7 @@ export default function useFetchMovie<TData = unknown>(
         _id,
         populate = false,
         virtuals = false,
+        enabled = true,
         staleTime = 1000 * 60,
         initialData,
         placeholderData = (previousData: TData | undefined) => previousData,
@@ -62,6 +63,7 @@ export default function useFetchMovie<TData = unknown>(
     return useQuery({
         queryKey,
         queryFn: fetchMovie,
+        enabled,
         staleTime,
         initialData,
         placeholderData,
