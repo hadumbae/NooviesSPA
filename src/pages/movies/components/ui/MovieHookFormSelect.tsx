@@ -69,7 +69,7 @@ interface Props<TSubmit extends FieldValues> {
  */
 const TheatreHookFormSelect = <TSubmit extends FieldValues>(props: Props<TSubmit>) => {
     const {isMulti = false, filters = {}} = props
-    const {data, isPending, isError, error: queryError} = useFetchMovies(filters);
+    const {data, isPending, isError, error: queryError} = useFetchMovies({queries: filters});
     const {success, error: parseError, data: movies} = useValidateData({
         data,
         isPending,

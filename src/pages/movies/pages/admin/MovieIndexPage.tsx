@@ -11,6 +11,7 @@ import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {MovieDetails, PaginatedMovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {PaginatedMovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
+import {EntityPaginatedQuery} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 
 /**
  * `MovieIndexPage` displays a paginated list of movies
@@ -41,7 +42,8 @@ const MovieIndexPage: FC = () => {
     const {data: paginationState} = usePaginationLocationState();
     const {page, perPage} = usePaginationSearchParams(paginationState ?? {page: 1, perPage: 25});
 
-    const query = useFetchMovies({populate: true, virtuals: true, paginated: true, page, perPage});
+    const paginationQueries: EntityPaginatedQuery = {paginated: true, page, perPage};
+    const query = useFetchMovies({queries: {populate: true, virtuals: true, ...paginationQueries}});
 
     return (
         <QueryBoundary query={query}>

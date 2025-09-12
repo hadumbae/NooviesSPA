@@ -1,41 +1,87 @@
-import {EntityPaginatedQuery, RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
+import { EntityPaginatedQuery, RequestOptions } from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {MovieQueryFilters} from "@/pages/movies/schema/queries/MovieFilter.types.ts";
+import { MovieQueryFilters } from "@/pages/movies/schema/queries/MovieFilter.types.ts";
+import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
 
 /**
  * Combined query parameters for fetching movie data.
  *
- * This includes pagination info, general request options, and movie-specific filter criteria.
+ * @template TData The expected type of the data returned by the query.
  */
-type QueryParams = RequestOptions & EntityPaginatedQuery & MovieQueryFilters;
+export type QueryParams<TData = unknown> = {
+    /**
+     * Combined parameters for the query.
+     * @see {@link RequestOptions}
+     * @see {@link EntityPaginatedQuery}
+     * @see {@link MovieQueryFilters}
+     */
+    queries: RequestOptions & EntityPaginatedQuery & MovieQueryFilters;
+
+    /**
+     * Optional settings to customize the behavior of the query.
+     * @see {@link UseQueryOptions}
+     */
+    options?: UseQueryOptions<TData>;
+};
 
 /**
  * React hook to fetch paginated, filtered movie data.
  *
- * This hook uses `react-query` to manage caching, loading states, and background updates.
- * It internally calls `MovieRepository.query` and wraps it with `useQueryFnHandler` to
- * standardize error handling.
+ * @template TData The expected type of the data returned by the query. Can be an array or object.
  *
- * A unique query key is generated from the `queries` parameter to enable effective caching.
+ * @param params - Object containing query parameters and query options.
+ * @param params.queries - Combined parameters for the query.
+ * @param params.options - Optional settings for the query.
+ *   @see {@link UseQueryOptions#enabled}
+ *   @see {@link UseQueryOptions#staleTime}
+ *   @see {@link UseQueryOptions#initialData}
+ *   @see {@link UseQueryOptions#placeholderData}
  *
- * @param queries - The combined query parameters for request options, pagination, and filters.
- * @returns A `UseQueryResult` containing status, data, and error metadata for the query.
+ * @returns A {@link UseQueryResult} containing:
+ *   - `data` – The fetched movie data (or undefined initially)
+ *   - `error` – An {@link HttpResponseError} if the query fails
+ *   - Status flags like `isLoading`, `isFetching`, `isError`, etc.
+ *
+ * @example
+ * ```ts
+ * const { data, isLoading, error } = useFetchMovies<Movie[]>({
+ *   queries: { page: 1, limit: 10, populate: true },
+ *   options: { staleTime: 1000 * 30 }
+ * });
+ * if (isLoading) return <Spinner />;
+ * if (error) return <div>{error.message}</div>;
+ * return <MovieList movies={data} />;
+ * ```
  */
-export default function useFetchMovies(queries: QueryParams): UseQueryResult<unknown, HttpResponseError> {
+export default function useFetchMovies<TData = unknown>(
+    params: QueryParams<TData>
+): UseQueryResult<TData, HttpResponseError> {
+    const {
+        queries,
+        options: {
+            enabled = true,
+            staleTime = 1000 * 60,
+            placeholderData = (previousData: TData | undefined) => previousData,
+            initialData,
+        } = {},
+    } = params;
+
     const queryKey = ["fetch_movies_by_query", queries] as const;
 
     const fetchMovies = useQueryFnHandler({
-        action: () => MovieRepository.query({queries}),
+        action: () => MovieRepository.query({ queries }),
         errorMessage: "Failed to fetch movie data. Please try again."
     });
 
     return useQuery({
         queryKey,
         queryFn: fetchMovies,
-        staleTime: 1000 * 60,
-        placeholderData: (previousData) => previousData,
+        enabled,
+        staleTime,
+        placeholderData,
+        initialData,
     });
 }
