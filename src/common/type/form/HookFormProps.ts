@@ -38,7 +38,7 @@ export type FormContainerEditingProps<TEntity> =
  *
  * @remarks
  * Combines:
- * - `FormMutationOnSubmitParams<TModel>` (without `validationSchema`) for mutation callbacks.
+ * - `FormMutationOnSubmitParams<TModel>` for mutation callbacks.
  * - `FormContainerEditingProps<TEntity>` to indicate editing or creation mode.
  * - Optional UI/form props:
  *   - `disableFields`: array of keys from `TFormValues` to disable in the UI.
@@ -48,7 +48,7 @@ export type FormContainerProps<
     TModel,
     TEntity,
     TFormValues extends FieldValues,
-> = Omit<FormMutationOnSubmitParams<TModel>, "validationSchema"> &
+> = FormMutationOnSubmitParams<TModel> &
     FormContainerEditingProps<TEntity> &
     {
         /**
