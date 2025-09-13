@@ -18,7 +18,7 @@ export type QueryParams<TData = unknown> = {
      * @see {@link EntityPaginatedQuery}
      * @see {@link MovieQueryFilters}
      */
-    queries: RequestOptions & EntityPaginatedQuery & MovieQueryFilters;
+    queries?: RequestOptions & EntityPaginatedQuery & MovieQueryFilters;
 
     /**
      * Optional settings to customize the behavior of the query.
@@ -57,17 +57,17 @@ export type QueryParams<TData = unknown> = {
  * ```
  */
 export default function useFetchMovies<TData = unknown>(
-    params: QueryParams<TData>
+    params?: QueryParams<TData>
 ): UseQueryResult<TData, HttpResponseError> {
     const {
-        queries,
+        queries = {},
         options: {
             enabled = true,
             staleTime = 1000 * 60,
             placeholderData = (previousData: TData | undefined) => previousData,
             initialData,
         } = {},
-    } = params;
+    } = params || {};
 
     const queryKey = ["fetch_movies_by_query", queries] as const;
 

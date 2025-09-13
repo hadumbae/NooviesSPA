@@ -10,6 +10,8 @@ import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSc
  * All fields are optional, allowing partial filter criteria.
  */
 export const MovieQueryFilterSchema = z.object({
+    /** Unique movie identifier (e.g. MongoDB ObjectId as string). */
+    _id: IDStringSchema.optional(),
     /** Partial or full movie title to filter by (non-empty string). */
     title: NonEmptyStringSchema.optional(),
     /** Exact release date to filter by (YYYY-MM-DD format). */
