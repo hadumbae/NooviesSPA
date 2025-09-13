@@ -1,75 +1,75 @@
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
+import {OnDeleteMutationParams} from "@/common/type/form/FormMutationResultParams.ts";
+import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
+import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
 
 /**
- * Parameters for the `useMovieCreditDeleteMutation` hook.
- */
-interface deleteParams {
-    /** The ID of the movie credit to delete. */
-    _id: ObjectId;
-
-    /** Optional callback executed after successful deletion. */
-    onSubmit?: () => void;
-
-    /** Optional callback executed if the deletion fails. */
-    onFail?: (error: Error) => void;
-
-    /** Optional custom toast message shown on successful deletion. */
-    successToast?: string;
-
-    /** Optional custom toast message shown on deletion failure. */
-    errorToast?: string;
-}
-
-/**
- * A custom mutation hook that deletes a movie credit using the provided `_id`.
- * On success, it invalidates relevant movie credit-related queries and triggers optional callbacks and toast messages.
+ * A custom React hook that manages the deletion of a single movie credit
+ * using **React Query's `useMutation`**.
  *
- * @param params - Configuration object containing the `_id` to delete and optional callbacks/messages.
- * @returns A TanStack `useMutation` result that manages the deletion state and actions.
+ * This hook handles:
+ * - Executing the delete request through `MovieCreditRepository`.
+ * - Providing toast notifications for success and error states.
+ * - Invalidating relevant queries so cached movie credit data stays fresh.
+ * - Calling user-provided callbacks on success, error, and settlement.
+ *
+ * @param params - Parameters for handling mutation events.
+ * @param params.onDeleteSuccess - Optional callback executed after a successful deletion.
+ * @param params.onDeleteError - Optional callback executed if the deletion fails.
+ * @param params.successMessage - Optional custom message shown in a toast on success.
+ * @param params.errorMessage - Optional custom message shown in a toast on error.
+ *
+ * @returns A React Query `useMutation` result object for deleting a movie credit.
  *
  * @example
- * ```ts
- * const mutation = useMovieCreditDeleteMutation({
- *   _id: "abc123",
- *   onSubmit: () => console.log("Deleted!"),
- *   errorToast: "Could not delete movie credit."
+ * ```tsx
+ * const { mutate: deleteMovieCredit, isLoading } = useMovieCreditDeleteMutation({
+ *   onDeleteSuccess: () => console.log("Deleted successfully!"),
+ *   onDeleteError: (err) => console.error("Delete failed", err),
+ *   successMessage: "Movie credit removed!",
+ *   errorMessage: "Unable to delete movie credit."
  * });
  *
- * mutation.mutate();
+ * // Usage
+ * deleteMovieCredit({ _id: someMovieCreditId });
  * ```
  */
-export default function useMovieCreditDeleteMutation(params: deleteParams) {
+export default function useMovieCreditDeleteMutation(params?: OnDeleteMutationParams) {
     const queryClient = useQueryClient();
-    const {_id, onSubmit, onFail, successToast, errorToast} = params;
+    const {onDeleteSuccess, onDeleteError, successMessage, errorMessage} = params || {};
 
-    const mutationKey = ["delete_single_movie_credit", {_id}];
+    const mutationKey = ["delete_single_movie_credit"];
 
-    const deleteMovieCredit = async () => {
-        const {response} = await MovieCreditRepository.delete({_id});
-        if (!response.ok) throw new HttpResponseError({response});
+    const deleteMovieCredit = async ({_id}: { _id: ObjectId }) => {
+        await handleMutationResponse({
+            action: () => MovieCreditRepository.delete({_id}),
+            errorMessage: "Failed to delete movie credit. Please try again.",
+        });
     }
 
     const onSuccess = async () => {
+        toast.success(successMessage ?? "Deleted movie credit.");
+        onDeleteSuccess?.();
+    }
+
+    const onError = (error: Error) => {
+        const fallbackMessage = errorMessage ?? "Failed to delete movie credit. Please try again.";
+        handleMutationResponseError({error, errorMessage: fallbackMessage});
+        onDeleteError?.(error);
+    }
+
+    const onSettled = async () => {
         const queryKeys = [
-            "fetch_movie_credit",
             "fetch_all_movie_credits",
             "fetch_paginated_movie_credits",
         ];
 
-        await Promise.all(queryKeys.map(key =>
-            queryClient.invalidateQueries({queryKey: [key], exact: false})));
-
-        toast.success(successToast || "Deleted movie credit.");
-        onSubmit && onSubmit();
-    }
-
-    const onError = (error: Error) => {
-        toast.error(errorToast || "Failed to delete movie credit. Please try again.")
-        onFail && onFail(error);
+        await Promise.all(
+            queryKeys.map(key => queryClient.invalidateQueries({queryKey: [key], exact: false}))
+        );
     }
 
     return useMutation({
@@ -77,5 +77,6 @@ export default function useMovieCreditDeleteMutation(params: deleteParams) {
         mutationFn: deleteMovieCredit,
         onSuccess,
         onError,
+        onSettled,
     });
 }
