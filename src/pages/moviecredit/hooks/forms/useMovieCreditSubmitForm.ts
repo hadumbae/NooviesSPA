@@ -1,40 +1,29 @@
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {
-    MovieCreditFormValues,
-    MovieCreditSubmit,
-    MovieCreditSubmitSchema
-} from "@/pages/moviecredit/schemas/form/MovieCreditSubmitSchema.ts";
-import useMovieCreditSubmitFormDefaultValues
-    from "@/pages/moviecredit/hooks/forms/useMovieCreditSubmitFormDefaultValues.ts";
-import {useEffect, useRef} from "react";
 import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 
-interface SubmitParams {
+import {MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
+import {MovieCreditFormSchema} from "@/pages/moviecredit/schemas/form/MovieCreditForm.schema.ts";
+import useMovieCreditSubmitFormDefaultValues
+    from "@/pages/moviecredit/hooks/forms/useMovieCreditSubmitFormDefaultValues.ts";
+import {useEffect} from "react";
+
+type SubmitParams = {
     credit?: MovieCredit;
-    presetValues?: Partial<MovieCreditSubmit>;
+    presetValues?: Partial<MovieCreditFormValues>;
 }
 
 export default function useMovieCreditSubmitForm(params?: SubmitParams): UseFormReturn<MovieCreditFormValues> {
-    const {credit, presetValues} = params || {};
-
-    const defaultValues = useMovieCreditSubmitFormDefaultValues({credit, presetValues});
+    const defaultValues = useMovieCreditSubmitFormDefaultValues(params);
 
     const form = useForm<MovieCreditFormValues>({
-        resolver: zodResolver(MovieCreditSubmitSchema),
+        resolver: zodResolver(MovieCreditFormSchema),
         defaultValues,
     });
 
-    const skipRender = useRef<boolean>(true);
-
     useEffect(() => {
-        if (skipRender.current) {
-            skipRender.current = false;
-            return;
-        }
-
         form.reset(defaultValues);
-    }, [defaultValues, form]);
+    }, [defaultValues, form])
 
     return form;
 }
