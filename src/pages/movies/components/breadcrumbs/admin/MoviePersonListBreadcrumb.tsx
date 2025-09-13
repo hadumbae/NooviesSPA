@@ -9,15 +9,18 @@ import {
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {format} from "date-fns";
 
 interface PersonListBreadcrumbProps {
     movie: Movie;
-    roleType: RoleTypeDepartment;
+    department: RoleTypeDepartment;
 }
 
-const MoviePersonListBreadcrumb: FC<PersonListBreadcrumbProps> = ({movie, roleType}) => {
-    const {_id} = movie;
-    const parsedRoleType = convertToTitleCase(roleType);
+const MoviePersonListBreadcrumb: FC<PersonListBreadcrumbProps> = ({movie, department}) => {
+    const {_id, title, releaseDate} = movie;
+
+    const parsedDepartment = convertToTitleCase(department);
+    const parsedReleaseDate = releaseDate ? `(${format(releaseDate, "yyyy")})` : "";
 
     return (
         <Breadcrumb>
@@ -29,13 +32,13 @@ const MoviePersonListBreadcrumb: FC<PersonListBreadcrumbProps> = ({movie, roleTy
                 <BreadcrumbSeparator />
 
                 <BreadcrumbItem>
-                    <BreadcrumbLink href={`/admin/movies/get/${_id}`}>Movie Details</BreadcrumbLink>
+                    <BreadcrumbLink href={`/admin/movies/get/${_id}`}>{`${title} ${parsedReleaseDate}`}</BreadcrumbLink>
                 </BreadcrumbItem>
 
                 <BreadcrumbSeparator />
 
                 <BreadcrumbItem>
-                    <BreadcrumbPage>{parsedRoleType}</BreadcrumbPage>
+                    <BreadcrumbPage>{parsedDepartment}</BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>
