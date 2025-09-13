@@ -3,14 +3,16 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {MovieCreditQueryFilters} from "@/pages/moviecredit/schemas/filters/MovieCreditQueryOptions.types.ts";
+import {
+    MovieCreditQueryOptions
+} from "@/pages/moviecredit/schemas/filters/MovieCreditQueryOptions.types.ts";
 
 /**
  * Combined query parameters for fetching movie credits.
  *
  * Includes pagination, request options, and filter parameters specific to movie credits.
  */
-type FetchQueries = RequestOptions & EntityPaginatedQuery & MovieCreditQueryFilters;
+type FetchQueries = RequestOptions & EntityPaginatedQuery & MovieCreditQueryOptions;
 
 /**
  * React hook to fetch paginated and filtered movie credit data.
