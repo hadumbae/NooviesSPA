@@ -12,7 +12,7 @@ type ErrorProps = {
      * The error object to display.
      * Can be a generic `Error`, a `ParseError`, or an `HttpResponseError`.
      */
-    error: Error | ParseError | HttpResponseError;
+    error?: Error | null | undefined;
 
     /**
      * Optional override message to display instead of the error's message.
@@ -60,7 +60,7 @@ type ErrorProps = {
  * ```
  */
 const ErrorMessageDisplay: FC<ErrorProps> = ({error, displayMessage, className, fnName, orientation, logToConsole = true}) => {
-    let errorMessage = error.message ?? "Something Went Wrong.";
+    let errorMessage = error?.message ?? "Something Went Wrong.";
 
     if (logToConsole && fnName) {
         console.error(`Error Caught In ${fnName}`);
