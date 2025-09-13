@@ -24,7 +24,7 @@ export const MovieCreditQueryFiltersSchema = z.object({
     department: RoleTypeDepartmentEnumSchema.optional(),
     name: NonEmptyStringSchema.min(3, {message: "Must be at least 3 characters."}).max(255, {message: "Must be 255 characters or less."}).optional(),
     title: NonEmptyStringSchema.max(255, {message: "Must be 255 characters or less."}).optional(),
-    displayRoleName: NonEmptyStringSchema.max(150, {message: "Must be 150 characters or less."}),
+    displayRoleName: NonEmptyStringSchema.max(150, {message: "Must be 150 characters or less."}).optional(),
     creditedAs: NonEmptyStringSchema.max(150, {message: "Must be 150 characters or less."}).optional(),
     characterName: NonEmptyStringSchema.optional(),
     billingOrder: PositiveNumberSchema.optional(),
