@@ -10,21 +10,7 @@ import {PersonSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import {RoleTypeSchema} from "@/pages/roletype/schema/model/RoleType.schema.ts";
 import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
 import generateArraySchema from "@/common/utility/validation/generateArraySchema.ts";
-
-/**
- * Zod schema representing a boolean that **must always be `false`**.
- */
-const FalseForCrewSchema = z.literal(false, {
-    message: "Must be `false` for `CREW` credits.",
-});
-
-/**
- * Zod schema representing a value that **must be undefined**.
- */
-const UndefinedForCrewSchema = z.undefined({
-    invalid_type_error: "Must be `undefined`.",
-    message: "Must be `undefined` for `CREW` credits.",
-});
+import {FalseForCrewSchema, UndefinedForCrewSchema} from "@/pages/moviecredit/schemas/MovieCreditCrewSchema.ts";
 
 /**
  * Base schema for a movie credit.
