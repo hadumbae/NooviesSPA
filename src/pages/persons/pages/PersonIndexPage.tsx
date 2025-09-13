@@ -17,7 +17,7 @@ const PersonIndexPage: FC = () => {
     const {data: paginationState} = usePaginationLocationState();
     const {page, perPage, setPage} = usePaginationSearchParams(paginationState ?? {page: 1, perPage: 20});
 
-    const query = useFetchPersons({paginated: true, page, perPage});
+    const query = useFetchPersons({queries: {paginated: true, page, perPage}});
 
     return (
         <QueryBoundary query={query}>

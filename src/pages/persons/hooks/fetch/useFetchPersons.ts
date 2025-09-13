@@ -18,7 +18,7 @@ import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
  * - {@link UseQueryOptions} — optional query behavior settings such as `staleTime`, `enabled`, `initialData`, and `placeholderData`
  */
 export type QueryParams<TData = unknown> = {
-    queries: RequestOptions & EntityPaginatedQuery & PersonQueryFilters;
+    queries?: RequestOptions & EntityPaginatedQuery & PersonQueryFilters;
     options?: UseQueryOptions<TData>;
 };
 
@@ -67,17 +67,17 @@ export type QueryParams<TData = unknown> = {
  * ```
  */
 export default function useFetchPersons<TData = unknown>(
-    params: QueryParams<TData>
+    params?: QueryParams<TData>
 ): UseQueryResult<TData, HttpResponseError> {
     const {
-        queries,
+        queries = {},
         options: {
             enabled = true,
             staleTime = 1000 * 60,
             placeholderData = (previousData: TData | undefined) => previousData,
             initialData
         } = {}
-    } = params;
+    } = params || {};
 
     const queryKey = ["fetch_person_by_query", queries] as const;
 
