@@ -17,7 +17,9 @@ import useRoleTypeQueryOptionSearchParams
 const RoleTypeListPage: FC = () => {
     const {searchParams: queryOptions} = useRoleTypeQueryOptionSearchParams();
     const {page, perPage, setPage} = usePaginationSearchParams({page: 1, perPage: 25});
-    const query = useFetchRoleTypes({paginated: true, page, perPage, ...queryOptions});
+    const query = useFetchRoleTypes({
+        queries: {paginated: true, page, perPage, ...queryOptions}
+    });
 
     return (
         <QueryBoundary query={query}>

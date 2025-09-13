@@ -1,26 +1,30 @@
-import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
+import { FetchByIDParams } from "@/common/type/query/FetchByIDParams.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import RoleTypeRepository from "@/pages/roletype/repositories/RoleTypeRepository.ts";
-import {useQuery} from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+
+type FetchParams<TData = unknown> = FetchByIDParams & UseQueryOptions<TData>;
 
 /**
- * Custom React hook to fetch a single `RoleType` by its unique identifier.
+ * Fetch a single {@link RoleType} by its unique ID using React Query.
  *
- * This hook uses React Query internally and provides:
- * - Caching and automatic re-fetching
- * - Placeholder data support
- * - Error handling via {@link useQueryFnHandler}
+ * @template TData - The expected type of the returned role type.
  *
  * @param params - Parameters for fetching a role type by ID.
- *   Includes:
- *   - `_id`: The unique identifier of the role type.
- *   - `populate` (optional): Whether to populate referenced documents.
- *   - `virtuals` (optional): Whether to include virtual properties in the result.
+ * @param params._id - {@link FetchByIDParams._id} The unique identifier of the role type.
+ * @param params.populate - {@link FetchByIDParams.populate} Optional. Whether to populate referenced documents.
+ * @param params.virtuals - {@link FetchByIDParams.virtuals} Optional. Whether to include virtual properties.
+ * @param params.enabled - {@link UseQueryOptions.enabled} Optional. Whether the query should automatically run.
+ * @param params.staleTime - {@link UseQueryOptions.staleTime} Optional. Duration in milliseconds before the query is considered stale.
+ * @param params.initialData - {@link UseQueryOptions.initialData} Optional. Initial data for the query before fetching.
+ * @param params.placeholderData - {@link UseQueryOptions.placeholderData} Optional. Placeholder data returned while the query is fetching.
  *
- * @returns A React Query `useQuery` result object containing:
- *  - `data` - The fetched role type (or placeholder/previous data)
- *  - `error` - Any fetch errors
- *  - `isLoading` / `isFetching` - Query state flags
+ * @returns A {@link UseQueryResult} containing:
+ *  - `data` — The fetched {@link RoleType} (or placeholder/initial data)
+ *  - `error` — Any {@link HttpResponseError} from the fetch
+ *  - `isLoading` / `isFetching` — Query state flags
  *
  * @example
  * ```ts
@@ -36,25 +40,36 @@ import {useQuery} from "@tanstack/react-query";
  * ```
  *
  * @remarks
- * - The hook automatically caches the fetched role type using React Query.
- * - If the fetch fails, a toast or error handling mechanism can be triggered
- *   via `useQueryFnHandler`.
- * - The query is considered fresh for 1 minute (`staleTime: 60_000`).
+ * - Uses {@link useQueryFnHandler} to handle fetch errors with a consistent message.
+ * - Automatically caches the fetched role type using React Query.
+ * - Query is considered fresh for 60 seconds (`staleTime: 1000 * 60`).
  */
-export default function useFetchRoleType(params: FetchByIDParams) {
-    const {_id, populate, virtuals} = params;
+export default function useFetchRoleType<TData = unknown>(
+    params: FetchParams<TData>
+): UseQueryResult<TData, HttpResponseError> {
+    const {
+        _id,
+        populate,
+        virtuals,
+        enabled = true,
+        staleTime = 1000 * 60,
+        placeholderData = (previousData: TData | undefined) => previousData,
+        initialData,
+    } = params;
 
     const queryKey = ["fetch_single_role_type_by_id", params];
 
     const fetchRoleType = useQueryFnHandler({
-        action: () => RoleTypeRepository.get({_id, populate, virtuals}),
+        action: () => RoleTypeRepository.get({ _id, populate, virtuals }),
         errorMessage: "Failed to fetch role type. Please try again.",
     });
 
     return useQuery({
         queryKey,
         queryFn: fetchRoleType,
-        staleTime: 1000 * 60,
-        placeholderData: (previousData) => previousData,
+        staleTime,
+        placeholderData,
+        initialData,
+        enabled,
     });
 }

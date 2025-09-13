@@ -1,44 +1,68 @@
-import {EntityPaginatedQuery, RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
-import {RoleTypeQueryOptions} from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
+import { EntityPaginatedQuery, RequestOptions } from "@/common/type/repositories/EntityRequestParamTypes.ts";
+import { RoleTypeQueryOptions } from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import RoleTypeRepository from "@/pages/roletype/repositories/RoleTypeRepository.ts";
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
 
 /**
- * Parameters for fetching role types via `useFetchRoleTypes`.
+ * Parameters for fetching role types via {@link useFetchRoleTypes}.
  *
  * Combines:
- * - Request options (`populate`, `virtuals`, `limit`)
- * - Pagination settings (`paginated`, `page`, `perPage`)
- * - RoleType-specific query filters and sorts (`roleName`, `department`, etc.)
+ * - {@link RequestOptions} — controls population, virtual fields, and result limits
+ * - {@link EntityPaginatedQuery} — pagination settings (`paginated`, `page`, `perPage`)
+ * - {@link RoleTypeQueryOptions} — role type-specific filters and sorts (`roleName`, `department`, etc.)
+ *
+ * @template TData - The expected shape of the fetched data.
  */
-type FetchParams = RequestOptions & EntityPaginatedQuery & RoleTypeQueryOptions;
+type FetchParams<TData = unknown> = {
+    queries?: RequestOptions & EntityPaginatedQuery & RoleTypeQueryOptions;
+    options?: UseQueryOptions<TData>;
+};
 
 /**
- * Custom React hook to fetch `RoleType` records using the provided query parameters.
+ * React Query hook to fetch `RoleType` records using optional filters, sorts, and pagination.
  *
- * @param queries - Parameters controlling filters, sorts, pagination, and request options.
+ * @template TData - The type of the returned role type data (e.g., array or paginated object).
  *
- * @returns A React Query `useQuery` result containing:
- * - `data` - The fetched role types (may be undefined initially).
- * - `error` - Any error that occurred during fetch.
- * - `isLoading` / `isFetching` - Query loading states.
+ * @param params - Optional object containing `queries` and `options`.
+ * @param params.queries - Filters, sorts, pagination, and request options.
+ * @param params.options - {@link UseQueryOptions} to control caching, initial data, and query behavior.
+ *
+ * @returns A {@link UseQueryResult} containing the fetched role types or an {@link HttpResponseError}.
  *
  * @example
  * ```ts
  * const { data, isLoading, error } = useFetchRoleTypes({
- *   paginated: true,
- *   page: 1,
- *   perPage: 10,
- *   roleName: "Actor",
- *   department: "CAST",
- *   populate: true,
- *   virtuals: false
+ *   queries: {
+ *     paginated: true,
+ *     page: 1,
+ *     perPage: 10,
+ *     roleName: "Actor",
+ *     department: "CAST",
+ *     populate: true,
+ *     virtuals: false
+ *   },
+ *   options: {
+ *     staleTime: 60000
+ *   }
  * });
  * ```
  */
-export default function useFetchRoleTypes(queries: FetchParams): UseQueryResult<unknown, HttpResponseError> {
+export default function useFetchRoleTypes<TData = unknown>(
+    params?: FetchParams<TData>
+): UseQueryResult<TData, HttpResponseError> {
+    const {
+        queries = {},
+        options: {
+            enabled = true,
+            staleTime = 1000 * 60,
+            placeholderData = (previousData: TData | undefined) => previousData,
+            initialData
+        } = {},
+    } = params || {};
+
     const queryKey = ["fetch_role_types_by_query", queries];
 
     const fetchRoleType = useQueryFnHandler({
@@ -49,7 +73,9 @@ export default function useFetchRoleTypes(queries: FetchParams): UseQueryResult<
     return useQuery({
         queryKey,
         queryFn: fetchRoleType,
-        staleTime: 1000 * 60, // 1 minute
-        placeholderData: (previousData) => previousData,
+        staleTime,
+        placeholderData,
+        initialData,
+        enabled,
     });
 }
