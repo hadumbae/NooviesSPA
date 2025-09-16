@@ -8,14 +8,45 @@ import {MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCredi
 import {EntityOptionProps} from "@/common/type/EntityOptionProps.ts";
 import MovieCreditDeleteWarningDialog from "@/pages/moviecredit/components/dialog/MovieCreditDeleteWarningDialog.tsx";
 
+/**
+ * Props for `MovieCreditOptions` component.
+ *
+ * Combines:
+ * - {@link EntityOptionProps} for handling edit and delete actions
+ * - Optional `children` to provide a custom trigger element for the popover
+ */
 type OptionsProps = EntityOptionProps<MovieCredit, MovieCredit, MovieCreditFormValues> & {
-    children?: ReactNode
+    /**
+     * Optional custom trigger element for opening the options popover.
+     * Defaults to a button with an ellipsis icon.
+     */
+    children?: ReactNode;
 };
 
+/**
+ * A component that renders edit/delete options for a single movie credit.
+ *
+ * Features:
+ * - Popover trigger button (customizable via `children`)
+ * - Edit action via `MovieCreditSubmitFormPanel`
+ * - Delete action via `MovieCreditDeleteWarningDialog`
+ *
+ * @example
+ * ```tsx
+ * <MovieCreditOptions
+ *   entity={credit}
+ *   onSubmit={{ onSubmitSuccess: handleUpdate }}
+ *   onDelete={{ onDeleteSuccess: handleDelete }}
+ * />
+ * ```
+ *
+ * @param props - Configuration including entity, edit/delete handlers, and optional custom trigger.
+ */
 const MovieCreditOptions: FC<OptionsProps> = (props) => {
     const {children, onSubmit, onDelete, entity} = props;
     const {_id} = entity;
 
+    // Default popover trigger if no children are provided
     const defaultButton = (
         <Button variant="outline">
             <Ellipsis/>
