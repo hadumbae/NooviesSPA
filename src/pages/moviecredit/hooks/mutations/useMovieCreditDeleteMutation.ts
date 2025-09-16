@@ -7,34 +7,27 @@ import handleMutationResponse from "@/common/handlers/mutation/handleMutationRes
 import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
 
 /**
- * A custom React hook that manages the deletion of a single movie credit
- * using **React Query's `useMutation`**.
+ * React Query mutation hook for deleting a movie credit.
  *
- * This hook handles:
- * - Executing the delete request through `MovieCreditRepository`.
- * - Providing toast notifications for success and error states.
- * - Invalidating relevant queries so cached movie credit data stays fresh.
- * - Calling user-provided callbacks on success, error, and settlement.
+ * Provides built-in handling for:
+ * - Executing the delete API call
+ * - Displaying success/error toasts
+ * - Triggering optional callbacks (`onDeleteSuccess`, `onDeleteError`)
+ * - Invalidating cached queries for movie credits
  *
- * @param params - Parameters for handling mutation events.
- * @param params.onDeleteSuccess - Optional callback executed after a successful deletion.
- * @param params.onDeleteError - Optional callback executed if the deletion fails.
- * @param params.successMessage - Optional custom message shown in a toast on success.
- * @param params.errorMessage - Optional custom message shown in a toast on error.
- *
- * @returns A React Query `useMutation` result object for deleting a movie credit.
+ * @param params - Optional configuration for success/error messages and callbacks.
+ * @returns A React Query mutation object for deleting a movie credit.
  *
  * @example
  * ```tsx
- * const { mutate: deleteMovieCredit, isLoading } = useMovieCreditDeleteMutation({
- *   onDeleteSuccess: () => console.log("Deleted successfully!"),
+ * const deleteMutation = useMovieCreditDeleteMutation({
+ *   successMessage: "Movie credit deleted!",
+ *   errorMessage: "Unable to delete credit.",
+ *   onDeleteSuccess: () => console.log("Deleted successfully"),
  *   onDeleteError: (err) => console.error("Delete failed", err),
- *   successMessage: "Movie credit removed!",
- *   errorMessage: "Unable to delete movie credit."
  * });
  *
- * // Usage
- * deleteMovieCredit({ _id: someMovieCreditId });
+ * deleteMutation.mutate({ _id: "abc123" });
  * ```
  */
 export default function useMovieCreditDeleteMutation(params?: OnDeleteMutationParams) {
@@ -43,34 +36,48 @@ export default function useMovieCreditDeleteMutation(params?: OnDeleteMutationPa
 
     const mutationKey = ["delete_single_movie_credit"];
 
+    /**
+     * Executes the delete request against the repository.
+     *
+     * @param _id - The unique identifier of the movie credit to delete.
+     */
     const deleteMovieCredit = async ({_id}: { _id: ObjectId }) => {
         await handleMutationResponse({
             action: () => MovieCreditRepository.delete({_id}),
             errorMessage: "Failed to delete movie credit. Please try again.",
         });
-    }
+    };
 
+    /**
+     * Success handler:
+     * - Shows a success toast
+     * - Fires the optional `onDeleteSuccess` callback
+     */
     const onSuccess = async () => {
         toast.success(successMessage ?? "Deleted movie credit.");
         onDeleteSuccess?.();
-    }
+    };
 
+    /**
+     * Error handler:
+     * - Shows an error toast
+     * - Fires the optional `onDeleteError` callback
+     *
+     * @param error - The error thrown during deletion.
+     */
     const onError = (error: Error) => {
         const fallbackMessage = errorMessage ?? "Failed to delete movie credit. Please try again.";
         handleMutationResponseError({error, errorMessage: fallbackMessage});
         onDeleteError?.(error);
-    }
+    };
 
+    /**
+     * Settled handler:
+     * - Invalidates queries for movie credits to refresh the list
+     */
     const onSettled = async () => {
-        const queryKeys = [
-            "fetch_all_movie_credits",
-            "fetch_paginated_movie_credits",
-        ];
-
-        await Promise.all(
-            queryKeys.map(key => queryClient.invalidateQueries({queryKey: [key], exact: false}))
-        );
-    }
+        await queryClient.invalidateQueries({queryKey: ["fetch_movie_credits_by_query"], exact: false});
+    };
 
     return useMutation({
         mutationKey,
