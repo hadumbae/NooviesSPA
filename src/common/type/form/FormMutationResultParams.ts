@@ -66,6 +66,28 @@ export type OnDeleteMutationParams = {
 };
 
 /**
+ * Parameters that describe whether a form is in editing mode and,
+ * if so, the entity being edited.
+ *
+ * @template TEntity - The shape of the entity being edited.
+ */
+export type FormEditingParams<TEntity = any> =
+    | {
+    /** Indicates the form is in editing mode. */
+    isEditing: true;
+
+    /** The entity instance currently being edited. */
+    entity: TEntity;
+} | {
+    /** Indicates the form is in create mode (default). */
+    isEditing?: false;
+
+    /** Entity is not provided in create mode. */
+    entity?: never;
+};
+
+
+/**
  * Parameters describing whether a form mutation is creating or editing a record.
  *
  * - If `isEditing: true`, an `_id` must be provided.

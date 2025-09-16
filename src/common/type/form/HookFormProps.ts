@@ -1,106 +1,106 @@
 import {FieldValues, SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {FormEditingParams, FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 
 /**
- * Props describing the editing state of a form container.
+ * Optional configuration for a form’s UI behavior.
  *
- * Used to differentiate between create and edit modes.
- *
- * @template TEntity - The type of the entity being edited.
- *
- * @remarks
- * - When `isEditing` is `true`, an `entity` must be provided.
- * - When `isEditing` is `false` or omitted, `entity` must not be set.
+ * @template TFormValues - Type of the form values managed by React Hook Form. Must extend `FieldValues`.
  */
-export type FormContainerEditingProps<TEntity> =
-    | {
-    /** Indicates that the form is in editing mode. */
-    isEditing: true;
+export type FormOptions<TFormValues extends FieldValues> = {
+    /**
+     * Array of form field keys to disable in the UI.
+     *
+     * This is useful for preventing editing of specific fields
+     * depending on context (e.g., when updating an entity).
+     *
+     * @example
+     * ```ts
+     * disableFields: ['roleName', 'description']
+     * ```
+     */
+    disableFields?: (keyof TFormValues)[];
 
-    /** The entity to edit, used to populate the form. */
-    entity: TEntity;
-} | {
-    /** Indicates that the form is in create mode (default). */
-    isEditing?: false;
-
-    /** Entity cannot be provided in create mode. */
-    entity?: never;
+    /**
+     * Initial values used to prefill the form.
+     *
+     * Only the provided fields will be set. Useful for edit forms
+     * where partial data should populate the inputs initially.
+     */
+    presetValues?: Partial<TFormValues>;
 };
 
 /**
- * Props for a generic form container component that orchestrates form state,
- * optional preset values, field disabling, and submission mutation.
+ * Props for a generic form container component that orchestrates:
+ *
+ * - Form state and validation
+ * - Handling create vs. edit mode
+ * - Submission callbacks and messages
+ * - Optional UI field configuration (disable/preset values)
  *
  * @template TModel - Type of data returned by the submission mutation (e.g., created/updated entity).
- * @template TEntity - Optional entity type to edit (used when `isEditing` is `true`).
+ * @template TEntity - Entity type to edit (required if `isEditing` is `true`).
  * @template TFormValues - Type of the form values managed by React Hook Form. Must extend `FieldValues`.
  *
  * @remarks
  * Combines:
- * - `FormMutationOnSubmitParams<TModel>` for mutation callbacks.
- * - `FormContainerEditingProps<TEntity>` to indicate editing or creation mode.
- * - Optional UI/form props:
- *   - `disableFields`: array of keys from `TFormValues` to disable in the UI.
- *   - `presetValues`: object to prefill the form fields.
+ * - {@link FormMutationOnSubmitParams} for mutation callbacks and messages.
+ * - {@link FormEditingParams} to indicate create or edit mode.
+ * - {@link FormOptions} for optional UI-level behavior.
  */
 export type FormContainerProps<
     TModel,
     TEntity,
     TFormValues extends FieldValues,
 > = FormMutationOnSubmitParams<TModel> &
-    FormContainerEditingProps<TEntity> &
-    {
-        /**
-         * Optional array of form field keys to disable in the UI.
-         *
-         * Example: `['roleName', 'description']`
-         */
-        disableFields?: (keyof TFormValues)[];
-
-        /**
-         * Optional object of form field values to prefill the form.
-         *
-         * Only the fields specified will be set initially.
-         */
-        presetValues?: Partial<TFormValues>;
-    };
+    FormEditingParams<TEntity> &
+    FormOptions<TFormValues>;
 
 /**
- * Props for a generic form view component that integrates React Hook Form with React Query mutations.
+ * Props for a generic form view component that integrates:
  *
- * @template TModel - The type of the data returned by the mutation.
- * @template TForm - The type of the form data sent to the mutation.
- * @template TFormValues - The type of the form values managed by React Hook Form. Must extend `FieldValues`.
+ * - React Hook Form (form state & validation)
+ * - React Query (mutations)
+ * - Optional UI controls (field disabling, submit button text)
+ *
+ * @template TModel - Type of the data returned by the mutation (e.g., entity or API response).
+ * @template TForm - Type of the payload submitted to the mutation (often matches TFormValues).
+ * @template TFormValues - Type of the form values managed by React Hook Form. Must extend `FieldValues`.
  */
-export type FormViewProps<TModel, TForm, TFormValues extends FieldValues> = {
+export type FormViewProps<TModel, TForm, TFormValues extends FieldValues> =
+    Omit<FormOptions<TFormValues>, "presetValues"> & {
     /**
-     * The `useForm` hook return object from React Hook Form.
-     * Provides methods and state for managing the form.
+     * The React Hook Form instance.
+     *
+     * Provides access to form state, validation, and utility methods
+     * such as `register`, `handleSubmit`, and `watch`.
      */
     form: UseFormReturn<TFormValues>;
 
     /**
      * Function to handle form submission.
-     * @see {@link SubmitHandler} from React Hook Form.
+     *
+     * Typically passed to `form.handleSubmit` from React Hook Form.
+     *
+     * @see {@link SubmitHandler}
      */
     submitHandler: SubmitHandler<TFormValues>;
 
     /**
-     * Mutation object from React Query used to perform async operations
-     * (e.g., sending form data to a server).
-     * @see {@link UseMutationResult} from React Query.
+     * React Query mutation object responsible for executing
+     * the asynchronous submit action (e.g., API request).
+     *
+     * Provides state (`isLoading`, `isError`, etc.) and methods
+     * (`mutate`, `reset`) to control the mutation.
+     *
+     * @see {@link UseMutationResult}
      */
     mutation: UseMutationResult<TModel, unknown, TForm>;
 
     /**
-     * Optional array of field names (keys of `TFormValues`) that should be disabled in the form.
-     */
-    disableFields?: (keyof TFormValues)[];
-
-    /**
-     * Optional text to display on the form submit button.
+     * Text displayed on the form’s submit button.
+     *
      * Defaults to an empty string if not provided.
      */
     submitButtonText?: string;
-}
+};
