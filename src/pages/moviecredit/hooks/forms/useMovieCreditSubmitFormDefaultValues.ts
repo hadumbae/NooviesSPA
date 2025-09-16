@@ -19,21 +19,21 @@ export default function useMovieCreditSubmitFormDefaultValues(params?: DefaultPa
     const baseValues = {
         movie: getDefaultValue(presetValues?.movie, credit?.movie, undefined),
         person: getDefaultValue(presetValues?.person, credit?.person, undefined),
-        roleType: getDefaultValue(presetValues?.roleType, credit?.person, undefined),
+        roleType: getDefaultValue(presetValues?.roleType, credit?.roleType, undefined),
         displayRoleName: getDefaultValue(presetValues?.displayRoleName, credit?.displayRoleName, ""),
         notes: getDefaultValue(presetValues?.notes, credit?.notes, ""),
     };
 
     const crewValues = {
-        creditedAs: "",
-        characterName: "",
-        billingOrder: "",
-        isPrimary: false,
-        uncredited: false,
-        voiceOnly: false,
-        cameo: false,
-        motionCapture: false,
-        archiveFootage: false,
+        creditedAs: undefined,
+        characterName: undefined,
+        billingOrder: undefined,
+        isPrimary: undefined,
+        uncredited: undefined,
+        voiceOnly: undefined,
+        cameo: undefined,
+        motionCapture: undefined,
+        archiveFootage: undefined,
     };
 
     const castValues = {
