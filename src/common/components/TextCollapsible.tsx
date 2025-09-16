@@ -1,4 +1,4 @@
-import {FC, ReactNode, useState} from 'react';
+import {FC, ReactNode, useEffect, useState} from 'react';
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui/collapsible.tsx";
 import {ChevronDown, ChevronRight} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
@@ -13,6 +13,10 @@ type TextProps = {
 const TextCollapsible: FC<TextProps> = (props) => {
     const {children, defaultOpen = false, triggerText, className} = props;
     const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
+
+    useEffect(() => {
+        setIsOpen(defaultOpen ?? false);
+    }, [defaultOpen])
 
     const triggerIcon = isOpen ? <ChevronDown/> : <ChevronRight/>;
     const triggerDisplay = `${isOpen ? "Close " : "Open "} ${triggerText}`;
