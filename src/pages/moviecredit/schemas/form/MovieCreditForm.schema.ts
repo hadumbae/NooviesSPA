@@ -1,15 +1,19 @@
-import { z } from "zod";
-import { FormStarterValueSchema } from "@/common/schema/form/FormStarterValueSchema.ts";
-import { RefinedIDStringSchema } from "@/common/schema/strings/RefinedIDStringSchema.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import { CleanedPositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import { RequiredBoolean } from "@/common/schema/helpers/ZodBooleanHelpers.ts";
-import { FalseForCrewSchema, UndefinedForCrewSchema } from "@/pages/moviecredit/schemas/MovieCreditCrewSchema.ts";
+import {z} from "zod";
+import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
+import {RefinedIDStringSchema} from "@/common/schema/strings/RefinedIDStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {
+    PositiveNumberSchema
+} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
+import {UndefinedForCrewSchema} from "@/pages/moviecredit/schemas/MovieCreditCrewSchema.ts";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 
 /**
- * Schema representing the **form values** for a movie credit.
- * All fields are initially represented as `FormStarterValueSchema` (placeholder/initial value).
+ * Schema representing the **raw form values** for a movie credit.
+ *
+ * - Each field is initially a `FormStarterValueSchema` (placeholder / initial value).
+ * - Used mainly for capturing unprocessed form state before validation/refinement.
  */
 export const MovieCreditFormValuesSchema = z.object({
     movie: FormStarterValueSchema,
@@ -30,76 +34,107 @@ export const MovieCreditFormValuesSchema = z.object({
 });
 
 /**
- * Base schema for a movie credit form.
- * Fields are preprocessed and validated for proper types and lengths.
+ * Base schema for a **movie credit form**.
+ *
+ * Provides core fields common to both CAST and CREW credits.
+ * Includes preprocessing of empty strings → `undefined`
+ * and enforces validation rules (IDs, max lengths).
  */
 export const MovieCreditFormBaseSchema = z.object({
-    /** Movie ID */
+    /** Unique ID of the movie. */
     movie: RefinedIDStringSchema,
-    /** Person ID */
+    /** Unique ID of the person. */
     person: RefinedIDStringSchema,
-    /** Role type ID */
+    /** Role type identifier (links to role categories). */
     roleType: RefinedIDStringSchema,
-    /** Optional display name for the role */
+    /** Optional display name for the credited role. */
     displayRoleName: preprocessEmptyStringToUndefined(
-        NonEmptyStringSchema.max(150, { message: "Must be 150 characters or less." }).optional()
+        NonEmptyStringSchema.max(150, {message: "Must be 150 characters or less."}).optional()
     ),
-    /** Optional notes for the credit */
+    /** Alternative credited name (optional). */
+    creditedAs: preprocessEmptyStringToUndefined(
+        NonEmptyStringSchema.max(150, {message: "Must be 150 characters or less."}).optional()
+    ),
+    /** Optional free-form notes for the credit. */
     notes: preprocessEmptyStringToUndefined(
-        NonEmptyStringSchema.max(1000, { message: "Must be 1000 characters or less." }).optional()
+        NonEmptyStringSchema.max(1000, {message: "Must be 1000 characters or less."}).optional()
     ),
 });
 
 /**
- * Schema for submitting a **CREW** movie credit.
- * Enforces crew-specific rules:
- * - `department` must be `"CREW"`.
- * - Several fields must be `false` or `undefined`.
+ * Schema for a **CREW movie credit submission**.
+ *
+ * - Enforces `department = "CREW"`.
+ * - CAST-specific fields (e.g. `characterName`) are disallowed (`UndefinedForCrewSchema`).
  */
 export const MovieCreditSubmitCrewSchema = MovieCreditFormBaseSchema.extend({
-    department: z.literal("CREW", { required_error: "Required.", message: "Must be `CREW`." }),
-    billingOrder: preprocessEmptyStringToUndefined(UndefinedForCrewSchema),
-    characterName: preprocessEmptyStringToUndefined(UndefinedForCrewSchema),
-    creditedAs: preprocessEmptyStringToUndefined(UndefinedForCrewSchema),
-    isPrimary: FalseForCrewSchema,
-    uncredited: FalseForCrewSchema,
-    voiceOnly: FalseForCrewSchema,
-    cameo: FalseForCrewSchema,
-    motionCapture: FalseForCrewSchema,
-    archiveFootage: FalseForCrewSchema,
+    department: z.literal("CREW", {required_error: "Required.", message: "Must be `CREW`."}),
+    billingOrder: UndefinedForCrewSchema,
+    characterName: UndefinedForCrewSchema,
+    isPrimary: UndefinedForCrewSchema,
+    uncredited: UndefinedForCrewSchema,
+    voiceOnly: UndefinedForCrewSchema,
+    cameo: UndefinedForCrewSchema,
+    motionCapture: UndefinedForCrewSchema,
+    archiveFootage: UndefinedForCrewSchema,
 });
 
 /**
- * Shared schema fields for CAST credits.
+ * Shared CAST-only fields for movie credits.
+ *
+ * These are added on top of {@link MovieCreditFormBaseSchema} when
+ * creating a CAST credit form.
  */
 const castSharedFields = {
-    department: z.literal("CAST", { required_error: "Required.", message: "Must be `CAST`." }),
-    characterName: NonEmptyStringSchema.max(150, { message: "Must be 150 characters or less." }),
-    billingOrder: CleanedPositiveNumberSchema,
-    creditedAs: preprocessEmptyStringToUndefined(
-        NonEmptyStringSchema.max(150, { message: "Must be 150 characters or less." }).optional()
+    /** Department must always be `"CAST"`. */
+    department: z.literal("CAST", {required_error: "Required.", message: "Must be `CAST`."}),
+    /** Character name as displayed in credits (required). */
+    characterName: NonEmptyStringSchema.max(150, {message: "Must be 150 characters or less."}),
+    /** Billing order for the role (positive number, optional, strings coerced). */
+    billingOrder: z.preprocess(
+        (val) => {
+            if (typeof val !== "number" && !(typeof val === "string" && val !== "") ) return undefined;
+
+            const num = Number(val);
+            return !isNaN(num) ? num : undefined;
+        },
+        PositiveNumberSchema.optional(),
     ),
+    /** Whether the role is considered the actor's *primary* role. */
     isPrimary: RequiredBoolean.optional(),
+    /** Whether the actor is uncredited. */
     uncredited: RequiredBoolean.optional(),
+    /** Whether the role is voice-only. */
     voiceOnly: RequiredBoolean.optional(),
+    /** Whether the role is a cameo. */
     cameo: RequiredBoolean.optional(),
+    /** Whether the role involves motion capture. */
     motionCapture: RequiredBoolean.optional(),
+    /** Whether the role uses archive footage. */
     archiveFootage: RequiredBoolean.optional(),
 };
 
 /**
- * Schema for CAST credits using **only shared fields**.
+ * Schema for a **CAST-only credit**.
+ *
+ * Contains only the CAST-specific fields without base fields like `movie`/`person`.
+ * Useful for form components that only deal with CAST data.
  */
 export const MovieCreditFormCastOnlySchema = z.object(castSharedFields);
 
 /**
- * Schema for a CAST movie credit including base fields and shared fields.
+ * Schema for a **CAST credit**.
+ *
+ * Extends {@link MovieCreditFormBaseSchema} with CAST-specific fields.
  */
 export const MovieCreditFormCastSchema = MovieCreditFormBaseSchema.extend(castSharedFields);
 
 /**
  * Discriminated union schema for movie credits.
- * Validates either a CREW credit or a CAST credit based on `department`.
+ *
+ * - Accepts either a **CREW** credit ({@link MovieCreditSubmitCrewSchema})
+ *   or a **CAST** credit ({@link MovieCreditFormCastSchema}).
+ * - Discrimination key: `department`.
  */
 export const MovieCreditFormSchema = z.discriminatedUnion("department", [
     MovieCreditSubmitCrewSchema,
