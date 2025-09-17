@@ -6,8 +6,8 @@ import PageLoader from "@/common/components/page/PageLoader.tsx";
 import MoviePersonListBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MoviePersonListBreadcrumb.tsx";
 import MoviePeopleHeader from "@/pages/movies/components/headers/admin/MoviePeopleHeader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
-import MoviePersonSubmitFormContainer
-    from "@/pages/movies/components/admin/credits/forms/MoviePersonSubmitFormContainer.tsx";
+import MovieCreditSubmitFormContainer
+    from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
@@ -26,16 +26,64 @@ import {
 import {MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import TextCollapsible from "@/common/components/TextCollapsible.tsx";
 import MoviePersonDetailsCard from "@/pages/movies/components/admin/credits/cards/MoviePersonDetailsCard.tsx";
+import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 
+/**
+ * Props for {@link MoviePeoplePage}.
+ *
+ * @interface PeoplePageProps
+ */
 type PeoplePageProps = {
+    /**
+     * The department of credits to display and manage on this page.
+     *
+     * - `CAST`: For actor/actress credits.
+     * - `CREW`: For crew credits (e.g., director, editor).
+     */
     department: RoleTypeDepartment;
 };
 
+/**
+ * Validated data returned by the page's queries.
+ *
+ * @interface ValidatedDataType
+ */
 type ValidatedDataType = {
+    /** The movie entity */
     movie: Movie;
-    credits: PaginatedMovieCreditDetails;
-}
 
+    /** Paginated movie credits for the selected department */
+    credits: PaginatedMovieCreditDetails;
+};
+
+/**
+ * Page component displaying movie people (CAST or CREW) for a specific movie.
+ *
+ * Handles:
+ * - Fetching movie data via {@link useFetchMovie}.
+ * - Fetching paginated credits via {@link useFetchMovieCredits}.
+ * - Validating queries with {@link CombinedValidatedQueryBoundary} and schemas:
+ *   - {@link MovieSchema}
+ *   - {@link PaginatedMovieCreditDetailsSchema}
+ * - Rendering the credit submission form via {@link MovieCreditSubmitFormContainer}.
+ * - Displaying a list of credits via {@link MoviePersonDetailsCard}.
+ * - Conditional layout for mobile vs desktop using {@link useIsMobile}.
+ *
+ * @param {PeoplePageProps} props - Props specifying the department of credits to show.
+ *
+ * @returns A React functional component rendering the movie credits page.
+ *
+ * @remarks
+ * - Uses `PageFlexWrapper`, `PageSection`, and other UI components for layout.
+ * - Pre-populates credit submission form with `department` and `movieID`.
+ * - Disables `department` and `movie` fields in the form to prevent editing.
+ * - Conditionally renders "No Credits" message if the movie has no credits.
+ *
+ * @example
+ * ```tsx
+ * <MoviePeoplePage department="CAST" />
+ * ```
+ */
 const MoviePeoplePage: FC<PeoplePageProps> = ({department}) => {
     const movieParams = useFetchMovieParams();
     const {page, perPage} = usePaginationSearchParams();
@@ -68,12 +116,13 @@ const MoviePeoplePage: FC<PeoplePageProps> = ({department}) => {
                 {(data) => {
                     const {movie, credits: {items: credits}} = data as ValidatedDataType;
 
+                    const isDesktop = !useIsMobile();
                     const hasCredits = credits.length > 0;
 
                     const hasCreditsSection = (
-                      <div className="space-y-3">
-                          {credits.map(credit => <MoviePersonDetailsCard key={credit._id} credit={credit}/>)}
-                      </div>
+                        <div className="grid max-md:grid-cols-1 md:grid-cols-2 gap-4">
+                            {credits.map(credit => <MoviePersonDetailsCard key={credit._id} credit={credit}/>)}
+                        </div>
                     );
 
                     const hasNoCreditsSection = (
@@ -92,14 +141,14 @@ const MoviePeoplePage: FC<PeoplePageProps> = ({department}) => {
                                 <MoviePeopleHeader movie={movie!} roleType={department}/>
                             </section>
 
-                            <section className="grid max-md:grid-cols-1 md:grid-cols-3 gap-4">
+                            <section className="grid max-md:grid-cols-1 md:grid-cols-3 md:gap-4 gap-6">
                                 <h1 className="sr-only">Credits</h1>
 
                                 <PageSection title="Add Credits" srTitle="Credit Form">
-                                    <TextCollapsible triggerText="Form" defaultOpen={true} className="py-2">
+                                    <TextCollapsible triggerText="Form" defaultOpen={isDesktop} className="py-2">
                                         <Card>
                                             <CardContent className="p-4">
-                                                <MoviePersonSubmitFormContainer
+                                                <MovieCreditSubmitFormContainer
                                                     presetValues={presetValues}
                                                     disableFields={disableFields}
                                                 />
@@ -108,9 +157,11 @@ const MoviePeoplePage: FC<PeoplePageProps> = ({department}) => {
                                     </TextCollapsible>
                                 </PageSection>
 
-                                <PageSection title="Credits" srTitle="Credit List">
-                                    {hasCredits ? hasCreditsSection : hasNoCreditsSection}
-                                </PageSection>
+                                <section className="md:col-span-2">
+                                    <PageSection title="Credits" srTitle="Credit List" className="md:col-span-2">
+                                        {hasCredits ? hasCreditsSection : hasNoCreditsSection}
+                                    </PageSection>
+                                </section>
                             </section>
                         </PageFlexWrapper>
                     );
@@ -121,73 +172,3 @@ const MoviePeoplePage: FC<PeoplePageProps> = ({department}) => {
 };
 
 export default MoviePeoplePage;
-
-// import {FC} from 'react';
-// import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-// import useFetchMovieParams from "@/pages/movies/hooks/params/useFetchMovieParams.ts";
-// import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
-// import PageLoader from "@/common/components/page/PageLoader.tsx";
-// import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
-// import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
-// import MoviePersonListBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MoviePersonListBreadcrumb.tsx";
-// import MoviePeopleHeader from "@/pages/movies/components/headers/admin/MoviePeopleHeader.tsx";
-// import PageSection from "@/common/components/page/PageSection.tsx";
-// import MoviePersonSubmitFormContainer from "@/pages/movies/components/admin/credits/forms/MoviePersonSubmitFormContainer.tsx";
-// import {Card, CardContent} from "@/common/components/ui/card.tsx";
-// import MoviePeopleListPageSection from "@/pages/movies/components/admin/sections/MoviePeopleListPageSection.tsx";
-// import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
-//
-// interface PeoplePageProps {
-//     roleType: RoleTypeDepartment;
-// }
-//
-// const MoviePeoplePage: FC<PeoplePageProps> = ({roleType}) => {
-//     const movieParams = useFetchMovieParams();
-//     const {page, perPage} = usePaginationSearchParams();
-//     if (!movieParams) return <PageLoader />;
-//
-//     const {movieID} = movieParams;
-//     const {data, isPending, isError, queryError, parseSuccess, parseError} = useFetchPopulatedMovieWithCredits({
-//         _id: movieID,
-//         page,
-//         perPage,
-//         virtuals: false,
-//         creditFilters: {roleType},
-//     });
-//
-//     const formPresetValues = {roleType, movie: movieID};
-//
-//     if (isPending) return <PageLoader />;
-//     if (isError) return <PageHTTPError error={queryError} />;
-//     if (!parseSuccess) return <PageParseError error={parseError} />;
-//
-//     const {movie, credits: paginatedCredits} = data;
-//     const {items: credits} = paginatedCredits!;
-//
-//     return (
-//         <PageFlexWrapper className="space-y-6">
-//             <section className="space-y-2">
-//                 <h1 className="sr-only">Header</h1>
-//                 <MoviePersonListBreadcrumb movie={movie!} roleType={roleType} />
-//                 <MoviePeopleHeader movie={movie!} roleType={roleType} />
-//             </section>
-//
-//
-//             <section className="grid max-md:grid-cols-1 md:grid-cols-3 gap-4">
-//                 <h1 className="sr-only">Credits</h1>
-//
-//                 <PageSection title="Add Credits" srTitle="Credit Form">
-//                     <Card>
-//                         <CardContent className="p-4">
-//                             <MoviePersonSubmitFormContainer movieID={movieID} presetValues={formPresetValues} />
-//                         </CardContent>
-//                     </Card>
-//                 </PageSection>
-//
-//                 <MoviePeopleListPageSection roleType={roleType} credits={credits} />
-//             </section>
-//         </PageFlexWrapper>
-//     );
-// };
-//
-// export default MoviePeoplePage;
