@@ -52,11 +52,19 @@ const MovieDetailsPage: FC = () => {
 
                     return (
                         <PageFlexWrapper>
-                            <MovieDetailsBreadcrumb />
-                            <MovieDetailsHeader movie={simplifiedMovie} />
+                            <section>
+                                <h1 className="sr-only">Movie Details Header</h1>
+                                <MovieDetailsBreadcrumb />
+                                <MovieDetailsHeader movie={simplifiedMovie} />
+                            </section>
 
                             <section>
+                                <h1 className="sr-only">Movie Details Card</h1>
                                 <MovieDetailsCard movie={movie} />
+                            </section>
+
+                            <section>
+                                Movie Credit
                             </section>
                         </PageFlexWrapper>
                     );
