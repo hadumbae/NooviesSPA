@@ -1,11 +1,10 @@
-import {SeatsByRowForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatsByRowForm, SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import SeatSubmitRepository from "@/pages/seats/repositories/seat-submit-repository/SeatSubmitRepository.ts";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {toast} from "react-toastify";
 import {UseFormReturn} from "react-hook-form";
-import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
 import validateAPIResponse from "@/common/utility/query/validateAPIResponse.ts";
 

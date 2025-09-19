@@ -10,7 +10,8 @@ import {
 } from "@/common/components/ui/sheet.tsx";
 import SeatsByRowSubmitFormContainer
     from "@/pages/seats/components/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormContainer.tsx";
-import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
+
+import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 
 type PanelProps = FormMutationOnSubmitParams & {
     presetValues?: Partial<SeatsByRowFormValues>;

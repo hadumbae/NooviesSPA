@@ -11,10 +11,9 @@ import ScreenHookFormSelect from "@/pages/screens/components/submit-form/ScreenH
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
-import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 import SeatTypeHookFormSelect from "@/pages/seats/components/forms/inputs/SeatTypeHookFormSelect.tsx";
 
 type FormProps = {

@@ -8,7 +8,8 @@ import {Plus, Trash} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import ScreenDeleteWarningDialog from "@/pages/screens/components/screens/ScreenDeleteWarningDialog.tsx";
 import SeatSubmitFormPanel from "@/pages/seats/components/forms/submit-form/SeatSubmitFormPanel.tsx";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
+
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 
 type DetailsHeader = {
     theatre: TheatreDetails;

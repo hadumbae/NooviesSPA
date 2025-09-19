@@ -1,10 +1,9 @@
 import {FC} from 'react';
-import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 import useSeatsByRowSubmitForm from "@/pages/seats/hooks/submit-seats-by-row/useSeatsByRowSubmitForm.ts";
 import useSeatsByRowSubmitMutation from "@/pages/seats/hooks/submit-seats-by-row/useSeatsByRowSubmitMutation.ts";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import SeatsByRowSubmitFormView from "@/pages/seats/components/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormView.tsx";
-import {SeatsByRowForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatsByRowForm, SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 
 type FormContainerProps = FormMutationOnSubmitParams<unknown> & {
     presetValues?: Partial<SeatsByRowFormValues>;

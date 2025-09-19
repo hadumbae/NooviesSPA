@@ -1,8 +1,7 @@
 import {FC} from 'react';
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
-import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 import {UseMutationResult} from "@tanstack/react-query";
-import {SeatsByRowForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatsByRowForm, SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {Button} from "@/common/components/ui/button.tsx";

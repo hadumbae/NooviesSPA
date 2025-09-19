@@ -1,6 +1,6 @@
 import {UseFormReturn} from "react-hook-form";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
-import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {
     FormMutationEditingParams,
     FormMutationOnSubmitParams,
@@ -12,7 +12,6 @@ import {toast} from "react-toastify";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 
 export type SeatSubmitMutationFormParams =
     Omit<FormMutationOnSubmitParams, "onSubmitSuccess"> &

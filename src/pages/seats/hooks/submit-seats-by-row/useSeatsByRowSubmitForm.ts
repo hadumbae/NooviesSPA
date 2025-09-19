@@ -1,8 +1,8 @@
-import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {SeatsByRowFormSchema} from "@/pages/seats/schema/form/SeatForm.schema.ts";
+import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 
 type SubmitFormParams = {
     presetValues?: Partial<SeatsByRowFormValues>;

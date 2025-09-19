@@ -9,9 +9,9 @@ import {
 } from "@/common/components/ui/sheet.tsx";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 
 type PanelEditingProps =
     | { isEditing: true, seat: Seat }

@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
-import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 import {Accordion} from "@/common/components/ui/accordion.tsx";
 import useFetchScreenSeatsByRow from "@/pages/screens/hooks/screen-seats/useFetchScreenSeatsByRow.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
@@ -15,6 +14,7 @@ import {Plus} from "lucide-react";
 import SeatsByRowSubmitFormPanel
     from "@/pages/seats/components/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormPanel.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 
 /**
  * Props for the {@link ScreenSeatsByRowCard} component.

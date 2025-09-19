@@ -12,8 +12,8 @@ import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/co
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValues.types.ts";
 import DeleteSeatWarning from "@/pages/seats/components/delete-seats/DeleteSeatWarning.tsx";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 
 type ScreenProps = {
     className?: string;
