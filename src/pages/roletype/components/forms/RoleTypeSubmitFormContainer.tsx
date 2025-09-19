@@ -47,6 +47,12 @@ type SubmitFormProps = FormContainerProps<RoleType, RoleType, RoleTypeFormValues
  */
 const RoleTypeSubmitFormContainer: FC<SubmitFormProps> = (props) => {
     const {entity, presetValues, isEditing, disableFields, className, ...mutationProps} = props;
+    const {onSubmitSuccess} = mutationProps;
+
+    const resetOnSuccess = (data: RoleType) => {
+        form.reset();
+        onSubmitSuccess?.(data);
+    }
 
     /** Initialize the form with preset values or existing entity data */
     const form = useRoleTypeSubmitForm({presetValues, roleType: entity});
@@ -56,7 +62,7 @@ const RoleTypeSubmitFormContainer: FC<SubmitFormProps> = (props) => {
         ? {isEditing: true, _id: entity._id}
         : {isEditing: false};
 
-    const mutationParams = {...isEditingParams, form, ...mutationProps};
+    const mutationParams = {...isEditingParams, form, ...mutationProps, onSubmitSuccess: resetOnSuccess};
 
     /** Set up the mutation hook for RoleType submission */
     const mutation = useRoleTypeSubmitMutation(mutationParams);
@@ -71,8 +77,6 @@ const RoleTypeSubmitFormContainer: FC<SubmitFormProps> = (props) => {
 
         const {mutate} = mutation;
         mutate(values as RoleTypeForm);
-
-        form.reset();
     };
 
     return (
