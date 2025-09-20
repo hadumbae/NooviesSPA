@@ -8,7 +8,7 @@ import useValidateData from "@/common/hooks/validation/use-validate-data/useVali
 import {SeatArraySchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import useFetchSeats from "@/pages/seats/hooks/fetch/useFetchSeats.ts";
 
-import {SeatQueryFilters} from "@/pages/seats/schema/queries/SeatFilter.types.ts";
+import {SeatQueryFilters} from "@/pages/seats/schema/queries/SeatQueryOption.types.ts";
 
 interface Props<T extends FieldValues> {
     name: Path<T>,

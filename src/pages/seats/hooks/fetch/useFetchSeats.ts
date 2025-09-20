@@ -2,7 +2,7 @@ import {EntityPaginatedQuery, RequestOptions} from "@/common/type/repositories/E
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {SeatQueryFilters} from "@/pages/seats/schema/queries/SeatFilter.types.ts";
+import {SeatQueryFilters} from "@/pages/seats/schema/queries/SeatQueryOption.types.ts";
 
 type FetchQueries = RequestOptions & EntityPaginatedQuery & SeatQueryFilters;
 
