@@ -34,16 +34,16 @@ export const ScreenQueryFiltersSchema = z.object({
  */
 export const ScreenQuerySortsSchema = z.object({
     /** Sort by screen name */
-    name: MongooseSortOrderSchema.optional(),
+    sortByName: MongooseSortOrderSchema.optional(),
 
     /** Sort by screen capacity */
-    capacity: MongooseSortOrderSchema.optional(),
+    sortByCapacity: MongooseSortOrderSchema.optional(),
 
     /** Sort by screen type */
-    screenType: MongooseSortOrderSchema.optional(),
+    sortByScreenType: MongooseSortOrderSchema.optional(),
 
     /** Sort by creation date */
-    createdAt: MongooseSortOrderSchema.optional(),
+    sortByCreatedAt: MongooseSortOrderSchema.optional(),
 });
 
 /**
