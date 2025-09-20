@@ -16,25 +16,25 @@ export type ValidatedQueryBoundaryProps<TSchema extends ZodTypeAny = ZodTypeAny>
      * Render function that receives validated data.
      * Will only be called if validation succeeds.
      *
-     * @param data - The validated data, typed according to the provided schema.
+     * @param data - The validated query data, typed according to the provided schema.
      * @returns A ReactNode to render.
      */
     children: (data: z.infer<TSchema>) => ReactNode;
 
     /**
-     * The query result object from `useQuery` or a similar hook.
+     * The query result object from `useQuery` or a similar React Query hook.
      * Its `data` will be validated against the provided schema.
      */
     query: UseQueryResult;
 
     /**
-     * The Zod schema to validate the query's `data` against.
-     * Validation will ensure data matches the expected structure before rendering children.
+     * The Zod schema used to validate the query's `data`.
+     * Ensures that the data matches the expected structure before rendering children.
      */
     schema: TSchema;
 
     /**
-     * Optional custom error message shown if validation fails.
+     * Optional custom error message displayed if validation fails.
      * Defaults to a generic "Invalid Data." message.
      */
     message?: string;
@@ -47,7 +47,7 @@ export type ValidatedQueryBoundaryProps<TSchema extends ZodTypeAny = ZodTypeAny>
     loaderOnFetch?: boolean;
 
     /**
-     * Optional loader component to display during pending states.
+     * Optional loader component to display while the query is pending.
      * Defaults to {@link PageLoader}.
      */
     loaderComponent?: ComponentType;
@@ -56,20 +56,20 @@ export type ValidatedQueryBoundaryProps<TSchema extends ZodTypeAny = ZodTypeAny>
      * Optional error component to display if validation fails.
      * Defaults to {@link PageParseError}.
      *
-     * The component will receive:
+     * The component receives:
      * - `error`: A {@link ParseError} with validation details.
-     * - `message`: An optional message passed from props.
+     * - `message`: Optional custom message passed from props.
      */
-    errorComponent?: ComponentType<{ error: Error; message?: string }>;
+    errorComponent?: ComponentType<{ error?: Error | null; message?: string }>;
 };
 
 /**
- * A boundary component that validates a React Query's result against a Zod schema
+ * A boundary component that validates a React Query result against a Zod schema
  * before rendering its children.
  *
  * This component:
- * - Shows a loader while the query is pending (and optionally during background fetch).
- * - Validates query data using the provided Zod schema.
+ * - Displays a loader while the query is pending (or optionally during background fetch).
+ * - Validates the query's `data` using the provided Zod schema.
  * - Shows an error component if validation fails.
  * - Renders its children only when validation succeeds.
  *
@@ -77,7 +77,8 @@ export type ValidatedQueryBoundaryProps<TSchema extends ZodTypeAny = ZodTypeAny>
  *
  * @param props - See {@link ValidatedQueryBoundaryProps}.
  *
- * @returns The loader, error component, or children depending on query state and validation result.
+ * @returns The loader, error component, or children depending on the query state
+ *          and validation result.
  *
  * @example
  * ```tsx
@@ -114,20 +115,16 @@ const ValidatedQueryBoundary = <TSchema extends ZodTypeAny = ZodTypeAny>(
     const {success, error, data} = validateQuery({query, schema, message});
 
     if (isPending || (loaderOnFetch && isFetching && !queryData)) {
-        console.log("Data is loading...")
-        return <Loader/>;
+        console.log("Data is loading...");
+        return <Loader />;
     }
 
     if (!success) {
-        console.log("An Error Occurred. Validation failed...");
-        return <Error error={error as ParseError} message={message}/>;
+        console.log("An error occurred. Validation failed...");
+        return <Error error={error as ParseError} message={message} />;
     }
 
-    return (
-        <>
-            {children(data)}
-        </>
-    );
+    return <>{children(data)}</>;
 };
 
 export default ValidatedQueryBoundary;
