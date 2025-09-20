@@ -4,6 +4,7 @@ import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import getAddressString from "@/common/utility/location/getAddressString.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Props for the {@link TheatreDetailsCard} component.
@@ -46,29 +47,31 @@ const TheatreDetailsCard: FC<Props> = ({theatre}) => {
                     <Separator/>
                 </section>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                    <section className="col-span-2 lg:col-span-4">
-                        <DetailsCardSpan label="Name" text={name}/>
-                    </section>
-                    <DetailsCardSpan label="Seats" text={`${seatCount} seats`}/>
-                    <DetailsCardSpan label="Seat Capacity" text={`${seatCapacity} seats`}/>
-                    <DetailsCardSpan label="Screens" text={`${screenCount} screens`}/>
-                    <DetailsCardSpan label="Upcoming Showings" text={`${futureShowingCount} showings`}/>
-                </div>
+                <section className="space-y-4">
+                    <DetailsCardSpan label="Name" text={name}/>
+
+                    <div className={cn("grid grid-cols-2 gap-4", "2xl:grid-cols-4")}>
+                        <DetailsCardSpan label="Seats" text={`${seatCount} seats`}/>
+                        <DetailsCardSpan label="Seat Capacity" text={`${seatCapacity} seats`}/>
+                        <DetailsCardSpan label="Screens" text={`${screenCount} screens`}/>
+                        <DetailsCardSpan label="Upcoming Showings" text={`${futureShowingCount} showings`}/>
+                    </div>
+                </section>
 
                 <section>
                     <h1 className="font-extrabold uppercase">Location</h1>
                     <Separator/>
                 </section>
 
-                <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div className="col-span-2 lg:col-span-4">
-                        <DetailsCardSpan label="Address" text={address}/>
+                <section className="space-y-4">
+                    <DetailsCardSpan label="Address" text={address}/>
+
+                    <div className={cn("grid grid-cols-2 gap-4", "2xl:grid-cols-4")}>
+                        <DetailsCardSpan label="Timezone" text={timezone}/>
+                        <DetailsCardSpan label="Postal Code" text={postalCode ?? "-"}/>
+                        <DetailsCardSpan label="Longitude" text={coordinates?.coordinates[0] ?? "-"}/>
+                        <DetailsCardSpan label="Latitude" text={coordinates?.coordinates[1] ?? "-"}/>
                     </div>
-                    <DetailsCardSpan label="Timezone" text={timezone}/>
-                    <DetailsCardSpan label="Postal Code" text={postalCode ?? "-"}/>
-                    <DetailsCardSpan label="Longitude" text={coordinates?.coordinates[0] ?? "-"}/>
-                    <DetailsCardSpan label="Latitude" text={coordinates?.coordinates[1] ?? "-"}/>
                 </section>
             </CardContent>
         </Card>
