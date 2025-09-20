@@ -1,7 +1,7 @@
 import {EntityPaginatedQuery, RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
-import {ScreenQueryFilters} from "@/pages/screens/schema/queries/ScreenQuery.types.ts";
+import {ScreenQueryOptions} from "@/pages/screens/schema/queries/ScreenQueryOptions.types.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 
@@ -11,9 +11,9 @@ import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts"
  * This combines:
  * - {@link RequestOptions} (controls population, virtuals, and limits)
  * - {@link EntityPaginatedQuery} (optional pagination)
- * - {@link ScreenQueryFilters} (domain-specific filters for screens)
+ * - {@link ScreenQueryOptions} (domain-specific filters for screens)
  */
-export type FetchScreenQueries = RequestOptions & EntityPaginatedQuery & ScreenQueryFilters;
+export type FetchScreenQueries = RequestOptions & EntityPaginatedQuery & ScreenQueryOptions;
 
 /**
  * React Query hook for fetching screens from the repository
