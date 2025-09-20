@@ -15,70 +15,66 @@ import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {PaginatedScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
+import {ScreenQueryOptions} from "@/pages/screens/schema/queries/ScreenQueryOptions.types.ts";
 
-type OverviewTabProps = {
-    /**
-     * Optional CSS class name for customizing layout or styling.
-     */
-    className?: string;
-
-    /**
-     * The unique theatre identifier whose screens are being displayed.
-     */
+/**
+ * Props for the `TheatreScreensOverviewTab` component.
+ */
+export type OverviewTabProps = {
+    /** The ID of the theatre whose screens are being displayed */
     theatreID: ObjectId;
 
-    /**
-     * The current pagination page index (1-based).
-     */
+    /** Current page number for pagination */
     page: number;
 
-    /**
-     * The number of items (screens) per page.
-     */
+    /** Number of items to display per page */
     perPage: number;
 
-    /**
-     * Setter function to update the current page (used by pagination controls).
-     *
-     * @param val - A numeric page index or string (from input event).
-     */
+    /** Callback to update the current page number */
     setPage: (val: string | number) => void;
-};
 
-const panelInfo = {
-    title: "Add Seat",
-    description: "Submit Screen Data",
+    /** Optional query filters and sorts to apply when fetching screens */
+    queries?: ScreenQueryOptions;
+
+    /** Optional CSS class overrides */
+    className?: {
+        container?: string;
+        list?: string;
+    };
 };
 
 /**
- * `TheatreScreensOverviewTab` renders a paginated list of screens for a specific theatre.
+ * Information for the screen submission form panel.
+ */
+const panelInfo = {
+    title: "Add Screen",
+    description: "Add screen data for theatre.",
+};
+
+/**
+ * Component for displaying an overview of screens for a theatre.
  *
- * - Fetches screens via {@link useFetchScreens} using the provided theatre ID and pagination settings.
- * - Wraps the query in {@link QueryBoundary} and {@link ValidatedQueryBoundary} to handle loading, error, and schema validation.
- * - Displays either:
- *   - An empty state with an "Add Screens" button if no screens exist, or
- *   - A list of {@link TheatreScreenDetailsDrawer} entries with pagination.
+ * - Fetches paginated screens for a given theatre ID.
+ * - Handles loading and validation via `QueryBoundary` and `ValidatedQueryBoundary`.
+ * - Displays a list of screens with `TheatreScreenDetailsDrawer`.
+ * - Includes pagination controls and a form panel to add new screens.
  *
- * @component
- *
- * @param {OverviewTabProps} props - Component props.
- * @param {string} [props.className] - Optional class for layout customization.
- * @param {ObjectId} props.theatreID - Theatre ID to query screens for.
- * @param {number} props.page - Current pagination page.
- * @param {number} props.perPage - Number of screens to display per page.
- * @param {(val: string | number) => void} props.setPage - Function to update the current page.
+ * @param props - Props controlling theatre ID, pagination, queries, and styling
+ * @returns JSX element rendering the screens overview tab
  *
  * @example
  * ```tsx
  * <TheatreScreensOverviewTab
- *   theatreID="64f28b..."
+ *   theatreID="64f123abc1234567890abcdef"
  *   page={1}
  *   perPage={10}
- *   setPage={(newPage) => setPage(newPage)}
+ *   setPage={setPage}
  * />
  * ```
  */
-const TheatreScreensOverviewTab: FC<OverviewTabProps> = ({className, theatreID, page, perPage, setPage}) => {
+const TheatreScreensOverviewTab: FC<OverviewTabProps> = (props) => {
+    const {theatreID, page, perPage, setPage, className, queries} = props;
+
     const screenQuery = useFetchScreens({
         theatre: theatreID,
         paginated: true,
@@ -86,6 +82,7 @@ const TheatreScreensOverviewTab: FC<OverviewTabProps> = ({className, theatreID, 
         populate: true,
         page,
         perPage,
+        ...queries
     });
 
     return (
@@ -104,11 +101,7 @@ const TheatreScreensOverviewTab: FC<OverviewTabProps> = ({className, theatreID, 
                     const disableFields: (keyof ScreenFormValues)[] = ["theatre"];
 
                     const formPanel = (
-                        <ScreenSubmitFormPanel
-                            presetValues={presetValues}
-                            disableFields={disableFields}
-                            {...panelInfo}
-                        >
+                        <ScreenSubmitFormPanel presetValues={presetValues} disableFields={disableFields} {...panelInfo}>
                             <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
                                 <Plus/> Add Screens
                             </Button>
@@ -117,21 +110,24 @@ const TheatreScreensOverviewTab: FC<OverviewTabProps> = ({className, theatreID, 
 
                     if (!hasScreens) {
                         return (
-                            <div className="flex flex-col justify-center items-center space-y-8">
-                                <span className="select-none text-neutral-400">There Are No Seats</span>
+                            <div className={cn(
+                                "flex flex-col justify-center items-center space-y-8",
+                                className?.container
+                            )}>
+                                <span className="select-none text-neutral-400">No Registered Screens</span>
                                 {formPanel}
                             </div>
                         );
                     }
 
                     return (
-                        <div className="space-y-5">
+                        <div className={cn("space-y-5", className?.container)}>
                             <section className="grid grid-cols-2 gap-2">
                                 <h1 className="font-bold">Screens</h1>
                                 <div className="text-right"> {formPanel} </div>
                             </section>
 
-                            <section className={cn("grid grid-cols-1 gap-3", className)}>
+                            <section className={cn("grid grid-cols-1 gap-3", className?.list)}>
                                 <h1 className="sr-only">Screen list</h1>
                                 {screens.map((screen) =>
                                     <TheatreScreenDetailsDrawer
@@ -141,12 +137,15 @@ const TheatreScreensOverviewTab: FC<OverviewTabProps> = ({className, theatreID, 
                                 )}
                             </section>
 
-                            <EllipsisPaginationButtons
-                                page={page}
-                                perPage={perPage}
-                                setPage={setPage}
-                                totalItems={totalItems}
-                            />
+                            {
+                                totalItems > perPage &&
+                                <EllipsisPaginationButtons
+                                    page={page}
+                                    perPage={perPage}
+                                    setPage={setPage}
+                                    totalItems={totalItems}
+                                />
+                            }
                         </div>
                     );
                 }}
