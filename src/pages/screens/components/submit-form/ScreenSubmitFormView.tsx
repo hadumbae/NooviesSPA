@@ -1,28 +1,60 @@
-import {FC} from 'react';
-import {Form} from "@/common/components/ui/form.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import { FC } from 'react';
+import { Form } from "@/common/components/ui/form.tsx";
+import { cn } from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
+import { Button } from "@/common/components/ui/button.tsx";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
-import {SubmitHandler, UseFormReturn} from "react-hook-form";
-import {UseMutationResult} from "@tanstack/react-query";
 import ScreenTypeHookFormSelect from "@/pages/screens/components/submit-form/ScreenTypeHookFormSelect.tsx";
-import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
-import {ScreenForm, ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
+import { Screen } from "@/pages/screens/schema/screen/Screen.types.ts";
+import { ScreenForm, ScreenFormValues } from "@/pages/screens/schema/forms/ScreenForm.types.ts";
+import { FormViewProps } from "@/common/type/form/HookFormProps.ts";
 
-interface Props {
+/**
+ * Props for the `ScreenSubmitFormView` component.
+ *
+ * Combines generic form view props with optional styling and
+ * UI-level field control.
+ */
+type ViewProps = FormViewProps<Screen, ScreenForm, ScreenFormValues> & {
+    /** Optional CSS class names to apply to the form container */
     className?: string;
-    form: UseFormReturn<ScreenFormValues>;
-    mutation: UseMutationResult<Screen, Error, ScreenForm>;
-    submitHandler: SubmitHandler<ScreenFormValues>;
+
+    /** Optional array of form field keys to disable */
     disableFields?: (keyof ScreenFormValues)[];
-}
+};
 
-const ScreenSubmitFormView: FC<Props> = (params) => {
-    const {form, mutation, submitHandler, className, disableFields = []} = params;
+/**
+ * Form view component for submitting or editing a `Screen` entity.
+ *
+ * Renders form fields using React Hook Form and supports:
+ * - Disabling specific fields via `disableFields`
+ * - Submitting data via a React Query mutation
+ * - Showing loading state on the submit button while the mutation is pending
+ *
+ * @param params - Props controlling form behavior, mutation, and UI
+ * @param params.form - React Hook Form instance for managing form state and validation
+ * @param params.mutation - React Query mutation object for handling form submission
+ * @param params.submitHandler - Function called when the form is submitted
+ * @param params.className - Optional CSS class applied to the form wrapper
+ * @param params.submitButtonText - Optional text for the submit button (default: `"Submit"`)
+ * @param params.disableFields - Optional array of field keys to disable
+ * @returns A fully controlled form view component for screens
+ *
+ * @example
+ * ```tsx
+ * <ScreenSubmitFormView
+ *   form={form}
+ *   mutation={mutation}
+ *   submitHandler={onSubmit}
+ *   disableFields={['theatre']}
+ * />
+ * ```
+ */
+const ScreenSubmitFormView: FC<ViewProps> = (params) => {
+    const { form, mutation, submitHandler, className, submitButtonText = "Submit", disableFields = [] } = params;
+    const { isPending } = mutation;
 
-    const {isPending} = mutation;
-
+    // Determine which fields should be active based on `disableFields`
     const activeFields = {
         name: !disableFields.includes("name"),
         capacity: !disableFields.includes("capacity"),
@@ -36,18 +68,16 @@ const ScreenSubmitFormView: FC<Props> = (params) => {
                 onSubmit={form.handleSubmit(submitHandler)}
                 className={cn("space-y-4", className)}
             >
-                {
-                    activeFields["name"] &&
+                {activeFields["name"] && (
                     <HookFormInput
                         name="name"
                         label="Name"
                         disabled={isPending}
                         control={form.control}
                     />
-                }
+                )}
 
-                {
-                    activeFields["capacity"] &&
+                {activeFields["capacity"] && (
                     <HookFormInput
                         name="capacity"
                         label="Capacity"
@@ -56,27 +86,25 @@ const ScreenSubmitFormView: FC<Props> = (params) => {
                         type="number"
                         min={0}
                     />
-                }
+                )}
 
-                {
-                    activeFields["screenType"] &&
+                {activeFields["screenType"] && (
                     <ScreenTypeHookFormSelect
                         control={form.control}
                         isDisabled={isPending}
                         name="screenType"
                         label="Screen Type"
                     />
-                }
+                )}
 
-                {
-                    activeFields["theatre"] &&
+                {activeFields["theatre"] && (
                     <TheatreHookFormSelect
                         control={form.control}
                         isDisabled={isPending}
                         name="theatre"
                         label="Theatre"
                     />
-                }
+                )}
 
                 <Button
                     type="submit"
@@ -84,7 +112,7 @@ const ScreenSubmitFormView: FC<Props> = (params) => {
                     className="w-full bg-primary"
                     disabled={isPending}
                 >
-                    Submit
+                    {submitButtonText}
                 </Button>
             </form>
         </Form>
