@@ -1,38 +1,93 @@
-import  {useMutation, useQueryClient} from "@tanstack/react-query";
-import {ParseError} from "@/common/errors/ParseError.ts";
-import {toast} from "react-toastify";
-import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
+import { useMutation, UseMutationResult, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
+import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
+import { OnDeleteMutationParams } from "@/common/type/form/FormMutationResultParams.ts";
+import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
+import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 
-export default function useSeatDeleteMutation(params: FormMutationOnSubmitParams = {}) {
-    const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
+/**
+ * A custom hook for deleting a seat record using React Query.
+ *
+ * Features:
+ * - Accepts optional success and error messages.
+ * - Supports optional callbacks for success or error handling.
+ * - Automatically invalidates related queries to keep the UI synchronized.
+ *
+ * @param params - Optional configuration object for messages and callbacks.
+ * @returns A `UseMutationResult<void, unknown, {_id: ObjectId}>` from React Query.
+ *
+ * @example
+ * ```ts
+ * const deleteSeatMutation = useSeatDeleteMutation({
+ *   successMessage: "Seat successfully deleted!",
+ *   errorMessage: "Could not delete seat.",
+ *   onDeleteSuccess: () => console.log("Seat deleted successfully."),
+ *   onDeleteError: (error) => console.error(error),
+ * });
+ *
+ * // Delete a seat by its ID:
+ * deleteSeatMutation.mutate({ _id: "1234567890abcdef" });
+ * ```
+ */
+export default function useSeatDeleteMutation(
+    params: OnDeleteMutationParams = {}
+): UseMutationResult<void, unknown, { _id: ObjectId }> {
+    const { onDeleteSuccess, onDeleteError, successMessage, errorMessage } = params;
 
     const queryClient = useQueryClient();
     const mutationKey = ["delete_single_seat"];
 
-    const mutationFn = async ({_id}: {_id: ObjectId}) => {
-        const fetchQueryFn = () => SeatRepository.delete({_id});
-        await useFetchErrorHandler({fetchQueryFn});
-    }
-
-    const onSuccess = async () => {
-        toast.success(successMessage ?? "Seat deleted.");
-
-        await Promise.all([
-            queryClient.invalidateQueries({queryKey: ["fetch_seats_by_query"], exact: false}),
-            queryClient.invalidateQueries({queryKey: ["fetch_screen_seats_by_row"], exact: false}),
-        ]);
-
-        onSubmitSuccess && onSubmitSuccess();
+    /**
+     * Function to perform the deletion of a seat.
+     *
+     * @param args - Object containing the `_id` of the seat to delete.
+     * @throws Throws an error if the deletion fails.
+     */
+    const mutationFn = async ({ _id }: { _id: ObjectId }) => {
+        await handleMutationResponse({
+            action: () => SeatRepository.delete({ _id }),
+            errorMessage: "Failed to delete seat. Please try again.",
+        });
     };
 
-    const onError = (error: Error | ParseError) => {
-        const {message} = error;
-        toast.error(errorMessage ?? message ?? "Oops. Something went wrong. Please try again.");
-        onSubmitError && onSubmitError(error);
-    }
+    /**
+     * Called when the deletion succeeds.
+     * Displays a toast notification and calls the optional success callback.
+     */
+    const onSuccess = () => {
+        toast.success(successMessage ?? "Seat deleted.");
+        onDeleteSuccess?.();
+    };
 
-    return useMutation({mutationKey, mutationFn, onSuccess, onError});
+    /**
+     * Called when the deletion fails.
+     * Handles the error with `handleMutationResponseError` and calls the optional error callback.
+     *
+     * @param error - The error thrown during deletion.
+     */
+    const onError = (error: unknown) => {
+        const fallbackMessage = errorMessage ?? "Failed to delete seat. Please try again.";
+        handleMutationResponseError({ error, errorMessage: fallbackMessage });
+        onDeleteError?.(error);
+    };
+
+    /**
+     * Called after the mutation is settled (either success or error).
+     * Invalidates related queries to refresh seat data in the UI.
+     */
+    const onSettled = async () => {
+        const keys = ["fetch_seats_by_query", "fetch_screen_seats_by_row"];
+        await Promise.all(
+            keys.map((key) => queryClient.invalidateQueries({ queryKey: [key], exact: false }))
+        );
+    };
+
+    return useMutation({
+        mutationKey,
+        mutationFn,
+        onSuccess,
+        onError,
+        onSettled,
+    });
 }
