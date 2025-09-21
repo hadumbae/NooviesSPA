@@ -21,20 +21,20 @@ export const SeatFormValuesSchema = z.object({
     screen: FormStarterValueSchema,
     /** Row identifier (starter value, may be empty) */
     row: FormStarterValueSchema,
+    /** Seat number (starter value, may be empty) */
+    seatNumber: FormStarterValueSchema,
+    /** Seat label (starter value, may be empty) */
+    seatLabel: FormStarterValueSchema,
     /** Seat type (starter value, may be empty) */
     seatType: FormStarterValueSchema,
     /** Seat availability (starter value, may be empty) */
     isAvailable: FormStarterValueSchema,
     /** Price multiplier (starter value, may be empty) */
     priceMultiplier: FormStarterValueSchema,
-    /** Y coordinate for seat placement (starter value, may be empty) */
-    y: FormStarterValueSchema,
-    /** Seat number (starter value, may be empty) */
-    seatNumber: FormStarterValueSchema,
-    /** Seat label (starter value, may be empty) */
-    seatLabel: FormStarterValueSchema,
     /** X coordinate for seat placement (starter value, may be empty) */
     x: FormStarterValueSchema,
+    /** Y coordinate for seat placement (starter value, may be empty) */
+    y: FormStarterValueSchema,
 });
 
 /**
@@ -52,13 +52,13 @@ export const SeatFormSchema = z.object({
     theatre: IDStringSchema,
     screen: IDStringSchema,
     row: NonEmptyStringSchema.max(10, "Must be 10 characters or less."),
+    seatNumber: CleanedPositiveNumberSchema,
+    seatLabel: UndefinedStringSchema,
     seatType: SeatTypeEnum,
     isAvailable: RequiredBoolean,
     priceMultiplier: CleanedPositiveNumberSchema,
-    y: CleanedPositiveNumberSchema,
-    seatNumber: CleanedPositiveNumberSchema,
-    seatLabel: UndefinedStringSchema,
     x: CleanedPositiveNumberSchema,
+    y: CleanedPositiveNumberSchema,
 });
 
 /**
