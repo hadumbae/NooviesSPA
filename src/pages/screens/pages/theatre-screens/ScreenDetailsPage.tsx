@@ -7,10 +7,8 @@ import PageLoader from "@/common/components/page/PageLoader.tsx";
 import TheatreScreenDetailsHeader
     from "@/pages/screens/components/theatre-screen/admin/headers/TheatreScreenDetailsHeader.tsx";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
-import ScreenSeatsByRowCard
-    from "@/pages/screens/components/theatre-screen/admin/tabs/ScreenSeatsByRowCard.tsx";
-import TheatreScreenPageShowingsTab
-    from "@/pages/screens/components/theatre-screen/admin/tabs/TheatreScreenPageShowingsTab.tsx";
+import TheatreScreenSeatsByRowCard
+    from "@/pages/screens/components/theatre-screen/admin/lists/TheatreScreenSeatsByRowCard.tsx";
 import useTheatreScreenSearchParams from "@/pages/screens/hooks/theatre-screens/params/useTheatreScreenSearchParams.ts";
 import useFetchTheatre from "@/pages/theatres/hooks/queries/useFetchTheatre.ts";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
@@ -22,6 +20,22 @@ import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedVa
 import {TheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import {ScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 
+/**
+ * Page component displaying detailed information for a specific theatre screen.
+ *
+ * Includes:
+ * - Breadcrumb navigation for the theatre and screen
+ * - Header with screen details and action buttons
+ * - Tabs for viewing seats and showings
+ * - Seats tab renders `TheatreScreenSeatsByRowCard` for seat management
+ * - Showings tab displays pagination info for screen showings
+ *
+ * Fetches theatre and screen data using `useFetchTheatre` and `useFetchScreen` hooks,
+ * and validates them with Zod schemas via `CombinedValidatedQueryBoundary`.
+ *
+ * @component
+ * @returns A JSX element rendering the full screen details page.
+ */
 const ScreenDetailsPage: FC = () => {
     const urlParams = useFetchTheatreScreenParams();
     if (!urlParams) return <PageLoader/>;
@@ -42,20 +56,22 @@ const ScreenDetailsPage: FC = () => {
         <CombinedQueryBoundary queries={[theatreQuery, screenQuery]}>
             <CombinedValidatedQueryBoundary queries={validationQueries}>
                 {(data) => {
-                    const {theatre, screen} = data as {theatre: TheatreDetails, screen: ScreenDetails};
+                    const {theatre, screen} = data as { theatre: TheatreDetails; screen: ScreenDetails };
 
                     return (
                         <PageFlexWrapper>
-                            <TheatreScreenDetailsBreadcrumbs
-                                theatreID={theatreID}
-                                theatreName={theatre.name}
-                                screenName={screen.name}
-                            />
+                            <section className="space-y-1">
+                                <TheatreScreenDetailsBreadcrumbs
+                                    theatreID={theatreID}
+                                    theatreName={theatre.name}
+                                    screenName={screen.name}
+                                />
 
-                            <TheatreScreenDetailsHeader
-                                theatre={theatre}
-                                screen={screen}
-                            />
+                                <TheatreScreenDetailsHeader
+                                    theatre={theatre}
+                                    screen={screen}
+                                />
+                            </section>
 
                             <Tabs defaultValue={activeTab} onValueChange={(v) => setActiveTab(v)}>
                                 <section className="flex justify-center">
@@ -66,17 +82,14 @@ const ScreenDetailsPage: FC = () => {
                                 </section>
 
                                 <TabsContent value="seats">
-                                    <ScreenSeatsByRowCard
-                                        theatreID={theatreID}
-                                        screenID={screenID}
-                                    />
+                                    <TheatreScreenSeatsByRowCard theatreID={theatreID} screenID={screenID}/>
                                 </TabsContent>
 
-                                <TheatreScreenPageShowingsTab
-                                    tabValue="showings"
-                                    page={showingPage}
-                                    perPage={showingsPerPage}
-                                />
+                                <TabsContent value="showings">
+                                    <p>Showings</p>
+                                    <p>Page : {showingPage}</p>
+                                    <p>Per Page : {showingsPerPage}</p>
+                                </TabsContent>
                             </Tabs>
                         </PageFlexWrapper>
                     );
