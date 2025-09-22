@@ -1,6 +1,4 @@
 import {FC} from 'react';
-import {SubmitHandler, UseFormReturn} from "react-hook-form";
-import {UseMutationResult} from "@tanstack/react-query";
 import {SeatsByRowForm, SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {cn} from "@/common/lib/utils.ts";
@@ -11,23 +9,15 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
 import {Loader} from "lucide-react";
 import SeatTypeHookFormSelect from "@/pages/seats/components/forms/inputs/SeatTypeHookFormSelect.tsx";
-import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";
+import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
+import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 
 /**
  * Props for the {@link SeatsByRowSubmitFormView} component.
  */
-type FormViewProps = {
-    /** React Hook Form instance controlling the form state. */
-    form: UseFormReturn<SeatsByRowFormValues>;
-
-    /** React Query mutation responsible for submitting seat data. */
-    mutation: UseMutationResult<SeatArray, unknown, SeatsByRowForm>;
-
+type ViewProps = FormViewProps<Seat[], SeatsByRowForm, SeatsByRowFormValues> & {
     /** Optional array of form field keys to disable in the UI. */
     disableFields?: (keyof SeatsByRowFormValues)[];
-
-    /** Callback function executed on form submission. */
-    submitHandler: SubmitHandler<SeatsByRowFormValues>;
 
     /** Optional CSS class applied to the form wrapper. */
     className?: string;
@@ -52,7 +42,7 @@ type FormViewProps = {
  *
  * Displays a submit button with a loading state while mutation is pending.
  *
- * @param props - {@link FormViewProps}
+ * @param props - {@link ViewProps}
  *
  * @example
  * ```tsx
@@ -65,7 +55,7 @@ type FormViewProps = {
  * />
  * ```
  */
-const SeatsByRowSubmitFormView: FC<FormViewProps> = (props) => {
+const SeatsByRowSubmitFormView: FC<ViewProps> = (props) => {
     const {form, disableFields, submitHandler, className, mutation: {isPending}} = props;
 
     const activeFields = {

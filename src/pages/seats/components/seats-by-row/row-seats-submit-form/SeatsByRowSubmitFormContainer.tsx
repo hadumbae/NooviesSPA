@@ -33,7 +33,7 @@ type ContainerProps =
  * - Managing the mutation for form submission.
  * - Passing props and submit handler to {@link SeatsByRowSubmitFormView}.
  *
- * @param params - Props including mutation options, form UI configuration, and optional className.
+ * @param props - Props including mutation options, form UI configuration, and optional className.
  *
  * @example
  * ```tsx
@@ -45,8 +45,8 @@ type ContainerProps =
  * />
  * ```
  */
-const SeatsByRowSubmitFormContainer: FC<ContainerProps> = (params) => {
-    const {presetValues, disableFields, className, ...options} = params;
+const SeatsByRowSubmitFormContainer: FC<ContainerProps> = (props) => {
+    const {presetValues, disableFields, className, ...options} = props;
 
     const form = useSeatsByRowSubmitForm({presetValues});
     const mutation = useSeatsByRowSubmitMutation({form, ...options});
