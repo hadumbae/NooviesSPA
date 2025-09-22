@@ -1,26 +1,60 @@
 import {FC} from 'react';
 import useSeatsByRowSubmitForm from "@/pages/seats/hooks/submit-seats-by-row/useSeatsByRowSubmitForm.ts";
 import useSeatsByRowSubmitMutation from "@/pages/seats/hooks/submit-seats-by-row/useSeatsByRowSubmitMutation.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
-import SeatsByRowSubmitFormView from "@/pages/seats/components/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormView.tsx";
+import SeatsByRowSubmitFormView
+    from "@/pages/seats/components/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormView.tsx";
 import {SeatsByRowForm, SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {FormOptions} from "@/common/type/form/HookFormProps.ts";
+import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";
+import logger from "@/common/utility/logger/logger.ts";
 
-type FormContainerProps = FormMutationOnSubmitParams<unknown> & {
-    presetValues?: Partial<SeatsByRowFormValues>;
-    disableFields?: (keyof SeatsByRowFormValues)[];
-    className?: string;
-}
+/**
+ * Props for the SeatsByRowSubmitFormContainer component.
+ *
+ * Combines:
+ * - Mutation submission parameters (excluding `validationSchema`) via {@link FormMutationOnSubmitParams}.
+ * - Optional form UI configuration via {@link FormOptions}.
+ * - Optional CSS class for styling.
+ */
+type ContainerProps =
+    Omit<FormMutationOnSubmitParams<SeatArray>, "validationSchema"> &
+    FormOptions<SeatsByRowFormValues> &
+    {
+        /** Optional CSS class applied to the container wrapper. */
+        className?: string;
+    };
 
-const SeatsByRowSubmitFormContainer: FC<FormContainerProps> = (params) => {
+/**
+ * Container component for submitting seats by row.
+ *
+ * Handles:
+ * - Initializing the React Hook Form instance for seat rows.
+ * - Managing the mutation for form submission.
+ * - Passing props and submit handler to {@link SeatsByRowSubmitFormView}.
+ *
+ * @param params - Props including mutation options, form UI configuration, and optional className.
+ *
+ * @example
+ * ```tsx
+ * <SeatsByRowSubmitFormContainer
+ *   presetValues={{ numberOfSeats: 5 }}
+ *   disableFields={['row']}
+ *   successMessage="Seats submitted successfully!"
+ *   errorMessage="Failed to submit seats."
+ * />
+ * ```
+ */
+const SeatsByRowSubmitFormContainer: FC<ContainerProps> = (params) => {
     const {presetValues, disableFields, className, ...options} = params;
 
     const form = useSeatsByRowSubmitForm({presetValues});
     const mutation = useSeatsByRowSubmitMutation({form, ...options});
 
     const onFormSubmit = (values: SeatsByRowFormValues) => {
-        console.log("[Seats By Row] Form Values: ", values);
+        logger.log("[Seats By Row] Form Values: ", values);
         mutation.mutate(values as SeatsByRowForm);
-    }
+    };
 
     return (
         <SeatsByRowSubmitFormView

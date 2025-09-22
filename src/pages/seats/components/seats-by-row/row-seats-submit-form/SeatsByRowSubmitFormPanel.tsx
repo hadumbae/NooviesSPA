@@ -1,5 +1,5 @@
-import {FC, PropsWithChildren, useState} from 'react';
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
+import { FC, PropsWithChildren, useState } from 'react';
+import { FormMutationOnSubmitParams } from "@/common/type/form/FormMutationResultParams.ts";
 import {
     Sheet,
     SheetContent,
@@ -10,22 +10,49 @@ import {
 } from "@/common/components/ui/sheet.tsx";
 import SeatsByRowSubmitFormContainer
     from "@/pages/seats/components/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormContainer.tsx";
+import { SeatsByRowFormValues } from "@/pages/seats/schema/form/SeatForm.types.ts";
+import { FormOptions } from "@/common/type/form/HookFormProps.ts";
+import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
 
-import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
-
-type PanelProps = FormMutationOnSubmitParams & {
-    presetValues?: Partial<SeatsByRowFormValues>;
-    disableFields?: (keyof SeatsByRowFormValues)[];
+/**
+ * Props for SeatsByRowSubmitFormPanel.
+ *
+ * Combines:
+ * - Form mutation callbacks (`onSubmitSuccess`, `onSubmitError`, etc.)
+ * - Optional UI behavior: `presetValues` to prefill the form, `disableFields` to disable inputs.
+ * - Optional CSS className for styling.
+ */
+type PanelProps =
+    FormMutationOnSubmitParams<Seat[]> &
+    FormOptions<SeatsByRowFormValues> & {
+    /** Optional CSS class for the root container */
     className?: string;
-}
+};
 
+/**
+ * SeatsByRowSubmitFormPanel
+ *
+ * A slide-over panel (Sheet) component for creating multiple seats by row.
+ *
+ * Features:
+ * - Opens a Sheet with a form for creating multiple seats.
+ * - Closes automatically on successful submission.
+ * - Passes mutation callbacks, preset values, and UI options to the internal form container.
+ *
+ * @param params - Panel props combining mutation callbacks, UI options, and optional children.
+ */
 const SeatsByRowSubmitFormPanel: FC<PropsWithChildren<PanelProps>> = (params) => {
-    const {children, presetValues, disableFields, className, onSubmitSuccess, ...options} = params;
+    const { children, presetValues, disableFields, className, onSubmitSuccess, ...options } = params;
     const [open, setOpen] = useState<boolean>(false);
 
-    const closeOnSuccess = () => {
+    /**
+     * Closes the panel and triggers the `onSubmitSuccess` callback after successful submission.
+     *
+     * @param seats - The array of newly created Seat entities
+     */
+    const closeOnSuccess = (seats: Seat[]) => {
         setOpen(false);
-        onSubmitSuccess && onSubmitSuccess();
+        onSubmitSuccess?.(seats);
     }
 
     return (
@@ -44,7 +71,6 @@ const SeatsByRowSubmitFormPanel: FC<PropsWithChildren<PanelProps>> = (params) =>
                     onSubmitSuccess={closeOnSuccess}
                     {...options}
                 />
-
             </SheetContent>
         </Sheet>
     );
