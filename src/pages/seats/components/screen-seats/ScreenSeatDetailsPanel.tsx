@@ -15,27 +15,58 @@ import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/
 import DeleteSeatWarning from "@/pages/seats/components/delete-seats/DeleteSeatWarning.tsx";
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 
+/**
+ * Props for the {@link ScreenSeatDetailsPanel} component.
+ */
 type ScreenProps = {
+    /** Optional CSS class for the trigger button or wrapper element. */
     className?: string;
-    seat: Seat;
-}
 
+    /** The seat object to display details for and edit/delete. */
+    seat: Seat;
+};
+
+/**
+ * A panel that displays detailed information about a seat and allows editing or deleting it.
+ *
+ * The panel opens in a sheet triggered by the provided children or a default button.
+ * Includes:
+ * - Seat title and type
+ * - Availability, coordinates, and price multiplier
+ * - Accordion for editing or deleting the seat
+ *
+ * @component
+ * @param props - Component props.
+ * @param props.seat - The seat object to display and manage.
+ * @param props.className - Optional CSS classes for styling the trigger element.
+ * @param props.children - Optional trigger element; defaults to a "Open" button.
+ *
+ * @returns A JSX element rendering a sheet with seat details and actions.
+ */
 const ScreenSeatDetailsPanel: FC<PropsWithChildren<ScreenProps>> = ({children, className, seat}) => {
     const [open, setOpen] = useState<boolean>(false);
     const [value, setValue] = useState<string>("");
 
     const {_id, row, seatNumber, seatLabel, seatType, isAvailable, x, y, priceMultiplier} = seat;
 
+    /** Display title for the seat: label if available, otherwise row+number. */
     const seatTitle = seatLabel ? seatLabel : `${row}${seatNumber}`;
+
+    /** Text representing the seat's availability. */
     const availability = isAvailable ? "Available" : "Unavailable";
+
+    /** Text representing the seat coordinates or fallback if missing. */
     const coordinates = x && y ? `X${x}, Y${y}` : "No coordinates";
 
+    /** Fields to disable in the edit form. */
     const disableFields: (keyof SeatFormValues)[] = ["theatre", "screen"];
 
+    /** Callback fired when the seat edit form successfully submits. */
     const onEdit = () => {
-        setValue("");
-    }
+        setValue(""); // Collapse the accordion after editing
+    };
 
+    /** Callback fired when the seat is deleted; closes the sheet. */
     const onDelete = async () => setOpen(false);
 
     return (
@@ -81,7 +112,5 @@ const ScreenSeatDetailsPanel: FC<PropsWithChildren<ScreenProps>> = ({children, c
         </Sheet>
     );
 };
-
-
 
 export default ScreenSeatDetailsPanel;

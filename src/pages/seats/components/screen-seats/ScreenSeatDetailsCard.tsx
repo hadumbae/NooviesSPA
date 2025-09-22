@@ -1,27 +1,40 @@
-import {FC} from 'react';
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
-import SeatRowDetailsScreen
-    from "@/pages/seats/components/screen-seats/ScreenSeatDetailsPanel.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
+import { FC } from 'react';
+import { Card, CardContent } from "@/common/components/ui/card.tsx";
+import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
+import ScreenSeatDetailsPanel from "@/pages/seats/components/screen-seats/ScreenSeatDetailsPanel.tsx";
+import { Button } from "@/common/components/ui/button.tsx";
 
+/**
+ * Props for the {@link ScreenSeatDetailsCard} component.
+ */
 type CardProps = {
+    /** The seat object to display details for. */
     seat: Seat;
+
+    /** Optional additional CSS classes for the card. */
     className?: string;
-}
+};
 
-// [X] seatNumber
-// [X] seatLabel
-// [X] seatType
-// [] isAvailable
-// [] x
-// [] y
-// [] priceMultiplier
+/**
+ * Displays a card with information about a single seat.
+ *
+ * Shows the seat's row, number, label, type, and availability.
+ * Also includes a button to open a detailed view of the seat via `SeatRowDetailsScreen`.
+ *
+ * @component
+ * @param props - Component props.
+ * @param props.seat - The seat object to display.
+ * @param props.className - Optional additional CSS classes for styling the card.
+ *
+ * @returns A JSX element representing a seat card.
+ */
+const ScreenSeatDetailsCard: FC<CardProps> = ({ seat, className }) => {
+    const { row, seatNumber, seatLabel, seatType, isAvailable } = seat;
 
-const ScreenSeatDetailsCard: FC<CardProps> = ({seat, className}) => {
-    const {row, seatNumber, seatLabel, seatType, isAvailable} = seat;
+    /** Title to display for the seat (uses label if available, otherwise row+number). */
+    const seatTitle = seatLabel ? seatLabel : `${row}${seatNumber}`;
 
-    const seatTitle = seatLabel ? seatLabel : `${row}${seatNumber}`
+    /** Availability status of the seat. */
     const availability = isAvailable ? "Available" : "Not Available";
 
     return (
@@ -32,14 +45,15 @@ const ScreenSeatDetailsCard: FC<CardProps> = ({seat, className}) => {
                     <span className="text-sm italic">{seatType} | {availability}</span>
                 </section>
 
-                <SeatRowDetailsScreen seat={seat}>
+                <ScreenSeatDetailsPanel seat={seat}>
                     <Button
-                        variant="outline" size="sm"
+                        size="sm"
+                        variant="outline"
                         className="text-neutral-400 hover:text-black w-full"
                     >
                         Details
                     </Button>
-                </SeatRowDetailsScreen>
+                </ScreenSeatDetailsPanel>
             </CardContent>
         </Card>
     );

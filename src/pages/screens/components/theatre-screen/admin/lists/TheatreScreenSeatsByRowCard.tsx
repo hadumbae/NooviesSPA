@@ -17,7 +17,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 
 /**
- * Props for the {@link ScreenSeatsByRowCard} component.
+ * Props for the {@link TheatreScreenSeatsByRowCard} component.
  */
 type SeatCardProps = {
     /**
@@ -43,7 +43,7 @@ type SeatCardProps = {
  * @component
  * @param props - Props including `theatreID` and `screenID` to fetch and render seat rows.
  */
-const ScreenSeatsByRowCard: FC<SeatCardProps> = ({theatreID, screenID}) => {
+const TheatreScreenSeatsByRowCard: FC<SeatCardProps> = ({theatreID, screenID}) => {
     const {data, isPending, isError, error: queryError} = useFetchScreenSeatsByRow({_id: screenID, populate: false});
 
     const {data: rows, success, error: parseError} = useValidateData({
@@ -102,4 +102,4 @@ const ScreenSeatsByRowCard: FC<SeatCardProps> = ({theatreID, screenID}) => {
     );
 };
 
-export default ScreenSeatsByRowCard;
+export default TheatreScreenSeatsByRowCard;
