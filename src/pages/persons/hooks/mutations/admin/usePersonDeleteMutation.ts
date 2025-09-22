@@ -66,7 +66,7 @@ export default function usePersonDeleteMutation(params: MutationParams) {
 
     const onError = (error: unknown) => {
         toast.error(errorMessage ?? "Failed to delete person. Please try again.");
-        handleMutationResponseError({error, errorMessage});
+        handleMutationResponseError({error, displayMessage: errorMessage});
         onSubmitError && onSubmitError(error);
     }
 

@@ -119,8 +119,8 @@ export default function usePersonSubmitMutation(
     }
 
     const onError = (error: unknown) => {
-        const fallbackMessage = errorMessage ?? "Failed to submit person data. Please try again.";
-        handleMutationFormError({form, error, fallbackMessage});
+        const displayMessage = errorMessage ?? "Failed to submit person data. Please try again.";
+        handleMutationFormError({form, error, displayMessage});
         onSubmitError?.(error);
     };
 

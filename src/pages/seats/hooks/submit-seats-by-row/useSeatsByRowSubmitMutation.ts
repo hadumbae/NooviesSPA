@@ -1,14 +1,14 @@
-import { SeatsByRowForm, SeatsByRowFormValues } from "@/pages/seats/schema/form/SeatForm.types.ts";
-import { useMutation, UseMutationResult, useQueryClient } from "@tanstack/react-query";
+import {SeatsByRowForm, SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import SeatSubmitRepository from "@/pages/seats/repositories/seat-submit-repository/SeatSubmitRepository.ts";
-import { FormMutationOnSubmitParams } from "@/common/type/form/FormMutationResultParams.ts";
-import { toast } from "react-toastify";
-import { UseFormReturn } from "react-hook-form";
+import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {toast} from "react-toastify";
+import {UseFormReturn} from "react-hook-form";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
-import { SeatArraySchema } from "@/pages/seats/schema/seat/Seat.schema.ts";
+import {SeatArraySchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
-import { SeatArray } from "@/pages/seats/schema/seat/Seat.types.ts";
+import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";
 
 /**
  * Parameters for the {@link useSeatsByRowSubmitMutation} hook.
@@ -45,19 +45,19 @@ type SubmitMutationParams = FormMutationOnSubmitParams<SeatArray> & {
  * ```
  */
 export default function useSeatsByRowSubmitMutation(
-    { form, successMessage, onSubmitSuccess, errorMessage, onSubmitError }: SubmitMutationParams
+    {form, successMessage, onSubmitSuccess, errorMessage, onSubmitError}: SubmitMutationParams
 ): UseMutationResult<SeatArray, unknown, SeatsByRowForm> {
     const queryClient = useQueryClient();
 
     const submitData = async (data: SeatsByRowForm) => {
-        const action = () => SeatSubmitRepository.submitSeatsByRow({ data });
+        const action = () => SeatSubmitRepository.submitSeatsByRow({data});
 
         const returnData = await handleMutationResponse({
             action,
             errorMessage: "Failed to submit seat data. Please try again.",
         });
 
-        const { data: parsedData, success, error } = validateData({
+        const {data: parsedData, success, error} = validateData({
             data: returnData,
             schema: SeatArraySchema,
             message: "Invalid data received. Please try again.",
@@ -73,15 +73,15 @@ export default function useSeatsByRowSubmitMutation(
     };
 
     const onError = (error: unknown) => {
-        const fallbackMessage = errorMessage ?? "Oops. Something went wrong. Please try again.";
-        handleMutationFormError({ error, form, fallbackMessage });
+        const displayMessage = errorMessage ?? "Oops. Something went wrong. Please try again.";
+        handleMutationFormError({error, form, displayMessage});
         onSubmitError?.(error);
     };
 
     const onSettled = async () => {
         await Promise.all([
-            queryClient.invalidateQueries({ queryKey: ["fetch_seats_by_query"], exact: false }),
-            queryClient.invalidateQueries({ queryKey: ["fetch_screen_seats_by_row"], exact: false }),
+            queryClient.invalidateQueries({queryKey: ["fetch_seats_by_query"], exact: false}),
+            queryClient.invalidateQueries({queryKey: ["fetch_screen_seats_by_row"], exact: false}),
         ]);
     };
 

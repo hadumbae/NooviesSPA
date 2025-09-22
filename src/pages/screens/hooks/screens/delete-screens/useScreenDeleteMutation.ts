@@ -69,8 +69,8 @@ export default function useScreenDeleteMutation(
      * @param error - The error thrown during deletion
      */
     const onError = (error: unknown) => {
-        const fallbackMessage = errorMessage ?? "Something went wrong. Please try again.";
-        handleMutationResponseError({error, errorMessage: fallbackMessage});
+        const displayMessage = errorMessage ?? "Something went wrong. Please try again.";
+        handleMutationResponseError({error, displayMessage});
         onDeleteError?.(error);
     };
 
@@ -79,10 +79,7 @@ export default function useScreenDeleteMutation(
      * Invalidates queries related to screen listings to keep cache consistent.
      */
     const onSettled = async () => {
-        await queryClient.invalidateQueries({
-            queryKey: ["fetch_screens_by_query"],
-            exact: false,
-        });
+        await queryClient.invalidateQueries({queryKey: ["fetch_screens_by_query"], exact: false});
     };
 
     return useMutation({

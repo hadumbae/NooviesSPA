@@ -82,8 +82,8 @@ export default function useRoleTypeSubmitMutation(
     const onError = (error: unknown) => {
         const actionDisplay = isEditing ? "update" : "create";
 
-        const fallbackMessage = errorMessage ?? `Failed to ${actionDisplay} role type. Please try again.`
-        handleMutationFormError({form, error, fallbackMessage});
+        const displayMessage = errorMessage ?? `Failed to ${actionDisplay} role type. Please try again.`
+        handleMutationFormError({form, error, displayMessage});
         onSubmitError?.(error);
     }
 

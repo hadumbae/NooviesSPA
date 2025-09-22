@@ -122,7 +122,7 @@ export default function useMovieCreditSubmitMutation(
         const actionDisplay = isEditing ? "update" : "create";
         const fallbackMessage =
             errorMessage ?? `Failed to ${actionDisplay} movie credit. Please try again.`;
-        handleMutationFormError({ form, error, fallbackMessage });
+        handleMutationFormError({ form, error, displayMessage: fallbackMessage });
         onSubmitError?.(error);
     };
 

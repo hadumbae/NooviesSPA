@@ -68,7 +68,7 @@ export default function useGenreDeleteMutation(params: DeleteMutationParams) {
     }
 
     const onError = (error: unknown) => {
-        handleMutationResponseError({error, errorMessage});
+        handleMutationResponseError({error, displayMessage: errorMessage});
         onSubmitError && onSubmitError(error);
     }
 

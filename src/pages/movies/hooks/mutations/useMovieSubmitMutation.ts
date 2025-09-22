@@ -89,7 +89,7 @@ export default function useMovieSubmitMutation(
 
     const onError = (error: unknown) => {
         const fallbackMessage = errorMessage ?? "Failed to submit movie data. Please try again.";
-        handleMutationFormError({error, form, fallbackMessage})
+        handleMutationFormError({error, form, displayMessage: fallbackMessage})
         onSubmitError?.(error);
     }
 

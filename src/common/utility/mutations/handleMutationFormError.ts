@@ -1,6 +1,7 @@
 import {FieldValues, Path, UseFormReturn} from "react-hook-form";
 import {FormValidationError} from "@/common/errors/FormValidationError.ts";
 import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
+import logger from "@/common/utility/logger/logger.ts";
 
 /**
  * Parameters for {@link handleMutationFormError}.
@@ -16,42 +17,50 @@ type FormErrorParams<TFormValues extends FieldValues> = {
     /**
      * The error object thrown during the mutation or form submission.
      *
-     * This can be:
-     * - A {@link FormValidationError} representing validation errors that should
-     *   be applied to the form fields.
-     * - Any other error type, which will be delegated to
-     *   {@link handleMutationResponseError}.
+     * Can be:
+     * - A {@link FormValidationError} containing validation issues for specific fields.
+     * - Any other error type, which will be delegated to {@link handleMutationResponseError}.
      */
     error: unknown;
 
     /**
-     * Optional fallback message to display if the error does not have a
-     * specific message.
+     * Optional fallback message to display if the error does not have a specific message.
+     *
+     * This is passed to {@link handleMutationResponseError} for non-validation errors.
      */
-    fallbackMessage?: string;
+    displayMessage?: string;
 };
 
 /**
  * Handles errors that occur during form mutation or submission.
  *
- * If the error is a {@link FormValidationError}, this function:
- * - Extracts the validation issues.
- * - Maps error paths to form field names compatible with React Hook Form.
- * - Sets manual errors on the corresponding form fields.
+ * - If the error is a {@link FormValidationError}:
+ *   - Extracts validation issues.
+ *   - Maps error paths to form field names compatible with React Hook Form.
+ *   - Sets manual errors on the corresponding form fields using `form.setError`.
  *
- * If the error is not a {@link FormValidationError}, it delegates handling
- * to {@link handleMutationResponseError}, optionally passing a fallback message.
+ * - If the error is not a {@link FormValidationError}, delegates handling
+ *   to {@link handleMutationResponseError}, optionally passing a fallback message.
  *
  * @template TFormValues - The shape of the form values managed by React Hook Form.
  * @param {FormErrorParams<TFormValues>} params - Parameters including the form, error, and optional fallback message.
+ *
+ * @example
+ * ```ts
+ * try {
+ *   await submitSeatForm(data);
+ * } catch (error) {
+ *   handleMutationFormError({ form, error, displayMessage: "Failed to submit seat." });
+ * }
+ * ```
  */
 export default function handleMutationFormError<TFormValues extends FieldValues>(
-    {form, error, fallbackMessage}: FormErrorParams<TFormValues>
+    {form, error, displayMessage}: FormErrorParams<TFormValues>
 ) {
     if (error instanceof FormValidationError) {
-        const {errors} = error;
+        logger.error("Form Validation Failed: ", error.errors);
 
-        for (let validationError of errors) {
+        for (let validationError of error.errors) {
             const {path, message} = validationError;
 
             const formPath = path
@@ -64,5 +73,5 @@ export default function handleMutationFormError<TFormValues extends FieldValues>
         return;
     }
 
-    handleMutationResponseError({error, errorMessage: fallbackMessage});
+    handleMutationResponseError({error, displayMessage});
 }

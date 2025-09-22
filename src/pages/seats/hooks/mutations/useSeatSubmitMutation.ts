@@ -1,14 +1,14 @@
-import { UseFormReturn } from "react-hook-form";
+import {UseFormReturn} from "react-hook-form";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
-import { SeatForm, SeatFormValues } from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {
     FormMutationEditingParams,
     FormMutationOnSubmitParams,
 } from "@/common/type/form/FormMutationResultParams.ts";
-import { useMutation, UseMutationResult, useQueryClient } from "@tanstack/react-query";
-import { SeatSchema } from "@/pages/seats/schema/seat/Seat.schema.ts";
-import { toast } from "react-toastify";
-import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
+import {toast} from "react-toastify";
+import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import logger from "@/common/utility/logger/logger.ts";
@@ -92,15 +92,15 @@ export default function useSeatSubmitMutation(
      */
     const submitSeatData = async (values: SeatForm) => {
         const action = isEditing
-            ? () => SeatRepository.update({ _id, data: values })
-            : () => SeatRepository.create({ data: values });
+            ? () => SeatRepository.update({_id, data: values})
+            : () => SeatRepository.create({data: values});
 
         const returnData = await handleMutationResponse({
             action,
             errorMessage: "Failed to submit data. Please try again.",
         });
 
-        const { success, data: parsedData, error } = validateData({
+        const {success, data: parsedData, error} = validateData({
             data: returnData,
             schema: SeatSchema,
             message: "Invalid data returned. Please try again.",
@@ -131,8 +131,8 @@ export default function useSeatSubmitMutation(
      * @param error - The error thrown during the mutation.
      */
     const onError = (error: Error) => {
-        const fallbackMessage = errorMessage ?? "Failed to submit seat data. Please try again.";
-        handleMutationFormError({ form, error, fallbackMessage });
+        const displayMessage = errorMessage ?? "Failed to submit seat data. Please try again.";
+        handleMutationFormError({form, error, displayMessage});
         onSubmitError && onSubmitError(error);
     };
 
@@ -142,7 +142,7 @@ export default function useSeatSubmitMutation(
      */
     const onSettled = async () => {
         const keys = ["fetch_seats_by_query", "fetch_screen_seats_by_row"];
-        await Promise.all(keys.map((key) => queryClient.invalidateQueries({ queryKey: [key], exact: false })));
+        await Promise.all(keys.map((key) => queryClient.invalidateQueries({queryKey: [key], exact: false})));
     };
 
     return useMutation({

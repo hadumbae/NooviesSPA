@@ -67,7 +67,7 @@ export default function useMovieCreditDeleteMutation(params?: OnDeleteMutationPa
      */
     const onError = (error: Error) => {
         const fallbackMessage = errorMessage ?? "Failed to delete movie credit. Please try again.";
-        handleMutationResponseError({error, errorMessage: fallbackMessage});
+        handleMutationResponseError({error, displayMessage: fallbackMessage});
         onDeleteError?.(error);
     };
 

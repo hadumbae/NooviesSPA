@@ -38,8 +38,8 @@ export default function useRoleTypeDeleteMutation(params: OnDeleteMutationParams
     };
 
     const onError = (error: unknown) => {
-        const fallbackMessage = errorMessage ?? "";
-        handleMutationResponseError({error, errorMessage: fallbackMessage});
+        const displayMessage = errorMessage ?? "";
+        handleMutationResponseError({error, displayMessage});
         onDeleteError?.(error);
     };
 

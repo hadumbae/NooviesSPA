@@ -112,8 +112,8 @@ export default function usePersonProfileImageSubmitMutation(params: ImageSubmitP
     }
 
     const onError = (error: unknown) => {
-        const message = errorMessage ?? "Failed to submit profile image. An error occurred. Please try again.";
-        handleMutationFormError({form, error, fallbackMessage: message});
+        const displayMessage = errorMessage ?? "Failed to submit profile image. An error occurred. Please try again.";
+        handleMutationFormError({form, error, displayMessage});
         onSubmitError && onSubmitError(error);
     }
 

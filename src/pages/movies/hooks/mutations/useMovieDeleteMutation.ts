@@ -73,7 +73,7 @@ export default function useMovieDeleteMutation(params?: OnDeleteMutationParams) 
      */
     const onError = (error: unknown) => {
         const fallbackMessage = errorMessage ?? "Oops. Something went wrong. Please try again.";
-        handleMutationResponseError({error, errorMessage: fallbackMessage});
+        handleMutationResponseError({error, displayMessage: fallbackMessage});
         onDeleteError?.(error);
     };
 

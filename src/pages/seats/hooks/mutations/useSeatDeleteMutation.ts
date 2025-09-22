@@ -1,8 +1,8 @@
-import { useMutation, UseMutationResult, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import {toast} from "react-toastify";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
-import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
-import { OnDeleteMutationParams } from "@/common/type/form/FormMutationResultParams.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {OnDeleteMutationParams} from "@/common/type/form/FormMutationResultParams.ts";
 import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 
@@ -33,7 +33,7 @@ import handleMutationResponse from "@/common/handlers/mutation/handleMutationRes
 export default function useSeatDeleteMutation(
     params: OnDeleteMutationParams = {}
 ): UseMutationResult<void, unknown, { _id: ObjectId }> {
-    const { onDeleteSuccess, onDeleteError, successMessage, errorMessage } = params;
+    const {onDeleteSuccess, onDeleteError, successMessage, errorMessage} = params;
 
     const queryClient = useQueryClient();
     const mutationKey = ["delete_single_seat"];
@@ -44,9 +44,9 @@ export default function useSeatDeleteMutation(
      * @param args - Object containing the `_id` of the seat to delete.
      * @throws Throws an error if the deletion fails.
      */
-    const mutationFn = async ({ _id }: { _id: ObjectId }) => {
+    const mutationFn = async ({_id}: { _id: ObjectId }) => {
         await handleMutationResponse({
-            action: () => SeatRepository.delete({ _id }),
+            action: () => SeatRepository.delete({_id}),
             errorMessage: "Failed to delete seat. Please try again.",
         });
     };
@@ -67,8 +67,8 @@ export default function useSeatDeleteMutation(
      * @param error - The error thrown during deletion.
      */
     const onError = (error: unknown) => {
-        const fallbackMessage = errorMessage ?? "Failed to delete seat. Please try again.";
-        handleMutationResponseError({ error, errorMessage: fallbackMessage });
+        const displayMessage = errorMessage ?? "Failed to delete seat. Please try again.";
+        handleMutationResponseError({error, displayMessage});
         onDeleteError?.(error);
     };
 
@@ -79,7 +79,7 @@ export default function useSeatDeleteMutation(
     const onSettled = async () => {
         const keys = ["fetch_seats_by_query", "fetch_screen_seats_by_row"];
         await Promise.all(
-            keys.map((key) => queryClient.invalidateQueries({ queryKey: [key], exact: false }))
+            keys.map((key) => queryClient.invalidateQueries({queryKey: [key], exact: false}))
         );
     };
 

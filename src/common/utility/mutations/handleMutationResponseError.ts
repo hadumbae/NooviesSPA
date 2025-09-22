@@ -1,5 +1,6 @@
-import {ParseError} from "@/common/errors/ParseError.ts";
-import {toast} from "react-toastify";
+import { ParseError } from "@/common/errors/ParseError.ts";
+import { toast } from "react-toastify";
+import logger from "@/common/utility/logger/logger.ts";
 
 /**
  * Parameters for {@link handleMutationResponseError}.
@@ -11,7 +12,7 @@ type ErrorParams = {
     /**
      * The error instance or value thrown during the mutation or API operation.
      *
-     * This can be:
+     * Can be:
      * - A {@link ParseError} instance (indicating validation failure).
      * - A standard {@link Error} instance (indicating runtime or operational error).
      * - Any other value (treated as an unknown error).
@@ -21,62 +22,61 @@ type ErrorParams = {
     /**
      * Optional override for the toast notification message.
      *
-     * If not provided:
-     * - {@link ParseError} will use its own `message` if available.
-     * - Standard {@link Error} will use its `message` property.
-     * - Otherwise, a generic fallback message will be used.
+     * If omitted:
+     * - {@link ParseError} will use a default "Invalid data returned" message.
+     * - Standard {@link Error} will use a default "Something went wrong" message.
+     * - Unknown errors will use a generic fallback message.
      */
-    errorMessage?: string;
+    displayMessage?: string;
 };
 
 /**
  * Handles and reports errors that occur during mutation operations such as API calls or data submissions.
  *
- * This function:
- * - Detects if the error is a {@link ParseError} (validation error) and logs detailed validation issues.
- * - Detects if the error is a standard {@link Error} and logs the error message.
- * - Falls back to a generic message if the error is unknown.
- *
- * Notifications are displayed to the user using `react-toastify`.
+ * Behavior:
+ * - If the error is a {@link ParseError}:
+ *   - Displays a toast notification (or `displayMessage` if provided).
+ *   - Logs detailed validation issues (`message` and `raw` data) to the console.
+ * - If the error is a standard {@link Error}:
+ *   - Displays a toast notification (or `displayMessage` if provided).
+ *   - Logs the error object to the console.
+ * - If the error is unknown:
+ *   - Displays a generic toast notification.
+ *   - Logs the unknown error object to the console.
  *
  * @param {ErrorParams} params - Parameters containing the error and optional custom message.
  * @param {unknown} params.error - The error instance or value to handle.
- * @param {string} [params.errorMessage] - Optional override for the toast message.
+ * @param {string} [params.displayMessage] - Optional override for the toast notification.
  *
  * @remarks
  * - {@link ParseError} instances should contain `message`, `errors` (validation details), and `raw` (original data).
- * - Logs additional debug information to the console for developers.
- * - Designed for client-side use in mutation handlers (e.g., React Query `onError` callbacks).
+ * - Designed for client-side usage in mutation handlers, such as React Query `onError` callbacks.
  *
  * @example
  * ```ts
  * try {
  *   await createGenre(data);
  * } catch (error) {
- *   handleMutationResponseError({ error, errorMessage: "Failed to create genre." });
+ *   handleMutationResponseError({ error, displayMessage: "Failed to create genre." });
  * }
  * ```
  */
-export default function handleMutationResponseError({error, errorMessage}: ErrorParams) {
+export default function handleMutationResponseError({ error, displayMessage }: ErrorParams) {
     if (error instanceof ParseError) {
-        const {message, errors, raw} = error;
-        toast.error(errorMessage ?? message ?? "Invalid data returned. Please try again.");
+        const { message, raw } = error;
 
-        console.group("ParseError Details");
-        console.error("Validation Issues: ", errors);
-        console.error("Raw Data: ", raw);
-        console.groupEnd();
+        toast.error(displayMessage ?? "Invalid data returned. Please try again.");
+        logger.error("Failed To Validate Data: ", message ?? "NO_ERROR_MSG");
+        logger.error("Failed To Validate Data (RAW): ", raw ?? "NO_ERROR_RAW");
 
         return;
     }
 
     if (error instanceof Error) {
-        const {message} = error;
-        toast.error(errorMessage ?? message ?? "Oops. Something went wrong. Please try again.");
-        console.log("Mutation Error: ", error);
+        toast.error(displayMessage ?? "Oops. Something went wrong. Please try again.");
+        logger.error("Error In Mutation: ", error);
     } else {
         toast.error("An unknown error occurred. Please try again.");
-        console.error("Unknown Error: ", error);
+        logger.error("Unknown Error In Mutation: ", error);
     }
-
 }

@@ -92,7 +92,7 @@ export default function useGenreSubmitMutation(
     }
 
     const onError = (error: Error) => {
-        handleMutationFormError({form, error, fallbackMessage: errorMessage});
+        handleMutationFormError({form, error, displayMessage: errorMessage});
         onSubmitError && onSubmitError(error);
     }
 
