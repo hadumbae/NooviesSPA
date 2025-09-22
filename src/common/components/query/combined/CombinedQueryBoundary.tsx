@@ -106,12 +106,10 @@ const CombinedQueryBoundary = (params: CombinedQueryBoundaryProps) => {
     const error = queries.find((q) => q.error)?.error ?? null;
 
     if (isPending || (loaderOnFetch && isFetching && hasNoData)) {
-        console.log("Page is loading...")
         return <Loader className={loaderClassName}/>;
     }
 
     if (isError) {
-        console.log("An Error Occurred.");
         return <ErrorComponent error={error} className={errorClassName}/>;
     }
 

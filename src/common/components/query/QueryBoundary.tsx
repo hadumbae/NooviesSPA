@@ -70,12 +70,10 @@ const QueryBoundary = <TData = unknown>(params: QueryBoundaryProps<TData>) => {
     } = params;
 
     if (isPending || (loaderOnFetch && isFetching && !data)) {
-        console.log("Page is loading...")
         return <Loader/>;
     }
 
     if (isError) {
-        console.log("An Error Occurred.");
         return <ErrorComponent error={error}/>;
     }
 
