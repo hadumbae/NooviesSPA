@@ -57,7 +57,7 @@ const SeatsByRowSubmitFormPanel: FC<PropsWithChildren<PanelProps>> = (params) =>
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger>{children ? children : "Open"}</SheetTrigger>
+            <SheetTrigger asChild>{children ? children : "Open"}</SheetTrigger>
             <SheetContent>
                 <SheetHeader>
                     <SheetTitle>Add Seats By Row</SheetTitle>
