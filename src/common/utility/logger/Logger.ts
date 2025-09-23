@@ -1,3 +1,5 @@
+import {LogPayload} from "@/common/utility/logger/Logger.types.ts";
+
 /**
  * Indicates whether the app is running in development mode.
  * Derived from `VITE_DEV_MODE` environment variable.
@@ -9,26 +11,6 @@ const isDev = import.meta.env.VITE_DEV_MODE === 'true';
  * regardless of environment. Derived from `VITE_LOG_TO_CONSOLE`.
  */
 const isLoggingToConsole = import.meta.env.VITE_LOG_TO_CONSOLE === 'true';
-
-/**
- * Additional metadata to attach to a log entry.
- * Keys should be descriptive, and values may be of any type.
- */
-type LogContext = Record<string, unknown>;
-
-/**
- * Structure of the data passed to logger methods.
- */
-type LogPayload = {
-    /** Human-readable message to log. */
-    msg: string;
-
-    /** Optional structured context to enrich the log. */
-    context?: LogContext;
-
-    /** Optional error to include stack trace and message. */
-    error?: Error;
-};
 
 /**
  * Formats a log payload into a structured object suitable for console logging.
