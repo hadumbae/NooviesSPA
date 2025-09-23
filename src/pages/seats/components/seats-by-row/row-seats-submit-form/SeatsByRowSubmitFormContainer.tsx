@@ -7,7 +7,7 @@ import {SeatsByRowForm, SeatsByRowFormValues} from "@/pages/seats/schema/form/Se
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";
-import logger from "@/common/utility/logger/logger.ts";
+import Logger from "@/common/utility/logger/Logger.ts";
 
 /**
  * Props for the SeatsByRowSubmitFormContainer component.
@@ -52,7 +52,7 @@ const SeatsByRowSubmitFormContainer: FC<ContainerProps> = (props) => {
     const mutation = useSeatsByRowSubmitMutation({form, ...options});
 
     const onFormSubmit = (values: SeatsByRowFormValues) => {
-        logger.log("[Seats By Row] Form Values: ", values);
+        Logger.log({msg: "[Seats By Row] Form Values", context: {values}});
         mutation.mutate(values as SeatsByRowForm);
     };
 

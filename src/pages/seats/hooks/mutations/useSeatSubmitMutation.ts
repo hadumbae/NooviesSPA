@@ -11,7 +11,7 @@ import {toast} from "react-toastify";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import logger from "@/common/utility/logger/logger.ts";
+import Logger from "@/common/utility/logger/Logger.ts";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
 
 /**
@@ -107,7 +107,7 @@ export default function useSeatSubmitMutation(
         });
 
         if (!success) {
-            logger.error("Invalid data received on fetch request: ", returnData);
+            Logger.error({msg: "Invalid data received on fetch request", context: {raw: returnData}});
             throw error;
         }
 

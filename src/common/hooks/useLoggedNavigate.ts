@@ -1,5 +1,5 @@
 import {NavigateOptions, To, useLocation, useNavigate} from "react-router-dom";
-import logger from "@/common/utility/logger/logger.ts";
+import Logger from "@/common/utility/logger/Logger.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 
 /**
@@ -68,14 +68,14 @@ export default function useLoggedNavigate() {
 
         if (typeof to === "number") {
             // Delta (history) navigation
-            logger.log("Router Navigation (DELTA):", {delta: to, ...messageObject});
+            Logger.log({msg: "Router Navigation (DELTA):", context: {delta: to, ...messageObject}});
             navigate(to);
         } else {
             // Path-based navigation
             const path = typeof to === "string" ? to : to.pathname;
             const {state, replace} = options ?? {};
 
-            logger.log("Router Navigation:", {to: path, state, replace, ...messageObject});
+            Logger.log({msg: "Router Navigation:", context: {to: path, state, replace, ...messageObject}});
             navigate(to, options);
         }
     }

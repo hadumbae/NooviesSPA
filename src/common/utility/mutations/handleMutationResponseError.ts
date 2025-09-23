@@ -1,6 +1,7 @@
-import { ParseError } from "@/common/errors/ParseError.ts";
-import { toast } from "react-toastify";
-import logger from "@/common/utility/logger/logger.ts";
+import {ParseError} from "@/common/errors/ParseError.ts";
+import {toast} from "react-toastify";
+import Logger from "@/common/utility/logger/Logger.ts";
+import buildContext from "@/common/utility/logger/buildLoggerContext.ts";
 
 /**
  * Parameters for {@link handleMutationResponseError}.
@@ -61,22 +62,26 @@ type ErrorParams = {
  * }
  * ```
  */
-export default function handleMutationResponseError({ error, displayMessage }: ErrorParams) {
+export default function handleMutationResponseError({error, displayMessage}: ErrorParams) {
     if (error instanceof ParseError) {
-        const { message, raw } = error;
+        const context = buildContext([
+            {key: "message", value: displayMessage},
+            {key: "raw", value: error.raw},
+        ]);
 
         toast.error(displayMessage ?? "Invalid data returned. Please try again.");
-        logger.error("Failed To Validate Data: ", message ?? "NO_ERROR_MSG");
-        logger.error("Failed To Validate Data (RAW): ", raw ?? "NO_ERROR_RAW");
+        Logger.error({msg: "Failed To Validate Data", context, error});
 
         return;
     }
 
     if (error instanceof Error) {
+        const context = buildContext([{key: "message", value: displayMessage}])
+
         toast.error(displayMessage ?? "Oops. Something went wrong. Please try again.");
-        logger.error("Error In Mutation: ", error);
+        Logger.error({msg: "Error In Mutation:", error, context})
     } else {
         toast.error("An unknown error occurred. Please try again.");
-        logger.error("Unknown Error In Mutation: ", error);
+        Logger.error({msg: "Unknown Error In Mutation", context: {error: error}});
     }
 }

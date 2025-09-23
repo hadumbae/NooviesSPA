@@ -1,7 +1,7 @@
 import {FieldValues, Path, UseFormReturn} from "react-hook-form";
 import {FormValidationError} from "@/common/errors/FormValidationError.ts";
 import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
-import logger from "@/common/utility/logger/logger.ts";
+import Logger from "@/common/utility/logger/Logger.ts";
 
 /**
  * Parameters for {@link handleMutationFormError}.
@@ -58,9 +58,11 @@ export default function handleMutationFormError<TFormValues extends FieldValues>
     {form, error, displayMessage}: FormErrorParams<TFormValues>
 ) {
     if (error instanceof FormValidationError) {
-        logger.error("Form Validation Failed: ", error.errors);
+        const {errors} = error;
 
-        for (let validationError of error.errors) {
+        Logger.error({msg: "Form Validation Failed: ", context: {errors}});
+
+        for (let validationError of errors) {
             const {path, message} = validationError;
 
             const formPath = path
