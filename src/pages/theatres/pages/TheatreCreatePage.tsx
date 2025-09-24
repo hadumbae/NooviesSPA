@@ -1,18 +1,22 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import {useNavigate} from "react-router-dom";
 import TheatreSubmitFormContainer from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormContainer.tsx";
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import TheatreCreateHeader from "@/pages/theatres/components/headers/TheatreCreateHeader.tsx";
 import TheatreCreateBreadcrumbs from "@/pages/theatres/components/breadcrumbs/admin/TheatreCreateBreadcrumbs.tsx";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 const TheatreCreatePage: FC = () => {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
 
     const onSubmit = (theatre: Theatre) => {
-        navigate(`/admin/theatres/get/${theatre._id}`);
+        navigate({
+            to: `/admin/theatres/get/${theatre._id}`,
+            component: TheatreCreatePage.name,
+            message: "Navigation on theatre creation."
+        });
     }
 
     return (

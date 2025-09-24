@@ -1,7 +1,8 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 import {useEffect, useMemo} from "react";
 import {IDStringSchema, ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 /**
  * Custom hook to read and validate a `movieID` route parameter, with optional redirection on failure.
@@ -21,7 +22,7 @@ import {IDStringSchema, ObjectId} from "@/common/schema/strings/IDStringSchema.t
 export default function useFetchMovieBrowseParams(params?: { navigateLink?: string }): ObjectId | undefined {
     const {navigateLink} = params || {};
 
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const {movieID} = useParams<{ movieID: ObjectId }>();
 
     const parsedMovieID = useMemo(() => {
@@ -32,7 +33,12 @@ export default function useFetchMovieBrowseParams(params?: { navigateLink?: stri
     useEffect(() => {
         if (!parsedMovieID) {
             toast.error("Oops. We couldn't find the movie!");
-            navigate(navigateLink ?? "/browse/movies");
+
+            navigate({
+                to: navigateLink ?? "/browse/movies",
+                component: useFetchMovieBrowseParams.name,
+                message: "Failed to fetch movie ID. It either does not exist or is invalid.",
+            });
         }
     }, [parsedMovieID, navigate, navigateLink]);
 

@@ -1,11 +1,11 @@
 import {FC, PropsWithChildren, useState} from 'react';
 import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
 import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
-import {useNavigate} from "react-router-dom";
 import PersonDeleteWarningDialog from "@/pages/persons/components/admin/dialog/PersonDeleteWarningDialog.tsx";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import PersonSubmitFormPanel from "@/pages/persons/components/form/admin/submit/PersonSubmitFormPanel.tsx";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 /**
  * Props for handling the editing of a person.
@@ -87,7 +87,7 @@ type PopoverProps = {
 const PersonDetailsOptions: FC<PropsWithChildren<PopoverProps>> = (params) => {
     const [open, setOpen] = useState<boolean>(false);
 
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const {children, person, onEditProps, onDeleteProps} = params;
     const {_id, name} = person;
 
@@ -95,7 +95,11 @@ const PersonDetailsOptions: FC<PropsWithChildren<PopoverProps>> = (params) => {
      * Navigate to the profile image update page for the person.
      */
     const updateProfileImage = () => {
-        navigate(`/admin/persons/get/${person._id}/images/profile`);
+        navigate({
+            to: `/admin/persons/get/${person._id}/images/profile`,
+            component: PersonDetailsOptions.name,
+            message: "Navigate to page to update person's profile image.",
+        });
     };
 
     /**

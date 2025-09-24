@@ -2,9 +2,9 @@ import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {GenreDetails} from "@/pages/genres/schema/genre/Genre.types.ts";
 import {Clapperboard} from "lucide-react";
-import {useNavigate} from "react-router-dom";
 import {cn} from "@/common/lib/utils.ts";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 /**
  * Props for the `GenreIndexCard` component.
@@ -40,7 +40,7 @@ type IndexProps = {
  * ```
  */
 const GenreIndexCard: FC<IndexProps> = ({genre, orientation = "horizontal"}) => {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const {_id, name, movieCount} = genre;
 
     const {page, perPage, hasValidParams} = usePaginationSearchParams();
@@ -51,7 +51,11 @@ const GenreIndexCard: FC<IndexProps> = ({genre, orientation = "horizontal"}) => 
 
     const openGenre = () => {
         const state = hasValidParams ? {page, perPage} : {};
-        navigate(`/admin/genres/get/${_id}`, {state});
+        navigate({
+            to: `/admin/genres/get/${_id}`,
+            component: GenreIndexCard.name,
+            options: {state},
+        });
     }
 
     return (

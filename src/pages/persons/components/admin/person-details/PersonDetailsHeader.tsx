@@ -9,20 +9,24 @@ import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarIm
 import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
 import PersonDetailsOptions
     from "@/pages/persons/components/admin/person-details/PersonDetailsOptions.tsx";
-import {useNavigate} from "react-router-dom";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 type HeaderProps = {
     person: Person | PersonDetails;
 }
 
 const PersonDetailsHeader: FC<HeaderProps> = ({person}) => {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
 
     const {name, dob, profileImage} = person;
     const formattedDOB = format(dob, "dd MMM, yyyy");
 
     const onDelete = () => {
-        navigate("/admin/persons");
+        navigate({
+            to: "/admin/persons",
+            component: PersonDetailsHeader.name,
+            message: "Navigation on person deletion."
+        });
     }
 
     return (

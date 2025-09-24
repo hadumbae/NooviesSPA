@@ -1,7 +1,8 @@
 import {IDStringSchema, ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 import {toast} from "react-toastify";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 /**
  * Custom React hook to safely retrieve and validate the `roleTypeID` route parameter.
@@ -27,14 +28,19 @@ import {toast} from "react-toastify";
  * - Displays a toast notification to inform the user of the error.
  */
 export default function useFetchRoleTypeParams(): ObjectId | null {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const { roleTypeID } = useParams<{ roleTypeID: ObjectId }>();
     const { success, data } = IDStringSchema.safeParse(roleTypeID);
 
     useEffect(() => {
         if (!success || !data) {
             toast.error("Invalid Role Type ID.");
-            navigate("/admin/roletypes");
+            navigate({
+                level: "warn",
+                to: "/admin/roletypes",
+                component: useFetchRoleTypeParams.name,
+                message: "Failed to fetch ID for role type. ID either does not exist or is invalid.",
+            });
         }
     }, [success, data, navigate]);
 

@@ -5,7 +5,7 @@ import {Plus} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
-import {useNavigate} from "react-router-dom";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 /**
  * `MovieIndexHeader` is the header section for the movie index page.
@@ -26,12 +26,17 @@ import {useNavigate} from "react-router-dom";
  * @returns {JSX.Element} The rendered movie index header.
  */
 const MovieIndexHeader: FC = () => {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const {page, perPage, hasValidParams} = usePaginationSearchParams();
 
     const navigateToCreate = () => {
         const state = hasValidParams ? {page, perPage} : {};
-        navigate("/admin/movies/create", {state});
+        navigate({
+            to: "/admin/movies/create",
+            options: {state},
+            component: MovieIndexHeader.name,
+            message: "Navigate to movie creation form.",
+        });
     };
 
     return (

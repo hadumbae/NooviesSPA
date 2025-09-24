@@ -1,13 +1,19 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {toast} from "react-toastify";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 export default function useFetchGenreParams() {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const {genreID} = useParams<{genreID: string}>();
 
     if (!genreID) {
         toast.error("Invalid Genre ID");
-        navigate(`/admin/genres`);
+
+        navigate({
+            to: `/admin/genres`,
+            component: useFetchGenreParams.name,
+            message: "Failed to fetch genre ID. The ID may be missing or invalid.",
+        });
     }
 
     return {

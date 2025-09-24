@@ -1,10 +1,12 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {IDStringSchema, ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {useEffect, useRef} from "react";
 import {toast} from "react-toastify";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useFetchMovieBrowseParams from "@/pages/movies/hooks/params/client/useFetchMovieBrowseParams.ts";
 
 export default function useFetchMoviePersonParams(): {movieID: ObjectId, creditID: ObjectId} | null {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
 
     const hasNavigated = useRef<boolean>(false);
     const {movieID, creditID} = useParams();
@@ -19,7 +21,12 @@ export default function useFetchMoviePersonParams(): {movieID: ObjectId, creditI
             toast.error("Invalid Movie ID.");
             hasNavigated.current = true;
 
-            navigate("/admin/movies");
+            navigate({
+                to: "/admin/movies",
+                component: useFetchMovieBrowseParams.name,
+                message: "Failed to fetch movie ID. The ID either does not exist or is not valid.",
+            });
+
             return;
         }
 
@@ -27,7 +34,12 @@ export default function useFetchMoviePersonParams(): {movieID: ObjectId, creditI
             toast.error("No valid ID  for person found.");
             hasNavigated.current = true;
 
-            navigate(`/admin/movies/get/${parsedMovieID}`);
+            navigate({
+                to: `/admin/movies/get/${parsedMovieID}`,
+                component: useFetchMovieBrowseParams.name,
+                message: "Failed to fetch credit ID. Movie ID exists, but credit ID is missing or invalid.",
+            });
+
             return;
         }
     }, [movieSuccess, parsedMovieID, creditSuccess, parsedCreditID]);

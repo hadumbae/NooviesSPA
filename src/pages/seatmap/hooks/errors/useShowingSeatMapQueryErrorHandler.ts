@@ -1,9 +1,9 @@
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 export default function useShowingSeatMapQueryErrorHandler(error?: Error | null) {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
 
     useEffect(() => {
         if (!(error instanceof HttpResponseError)) return;
@@ -13,7 +13,12 @@ export default function useShowingSeatMapQueryErrorHandler(error?: Error | null)
         console.error("HTTP RESPONSE ERROR: ", status, message);
 
         if (status === 404) {
-            navigate("/admin/showings");
+            navigate({
+                level: "error",
+                to: "/admin/showings",
+                component: useShowingSeatMapQueryErrorHandler.name,
+                message: "Navigation due to 404 HTTP error.",
+            });
         }
     }, [error]);
 }

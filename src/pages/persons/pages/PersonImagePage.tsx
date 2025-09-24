@@ -14,7 +14,7 @@ import {PersonDetailsSchema} from "@/pages/persons/schema/person/Person.schema.t
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
-import {useNavigate} from "react-router-dom";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 /**
  * Page component for managing a `Person`'s profile images.
@@ -44,11 +44,14 @@ const PersonImagePage: FC = () => {
             <ValidatedQueryBoundary query={query} schema={PersonDetailsSchema}
                                     message="API Response Validation Failed.">
                 {(person: PersonDetails) => {
-                    const navigate = useNavigate();
+                    const navigate = useLoggedNavigate();
                     const {_id, name} = person;
 
                     const onUpdate = (person: Person) => {
-                        navigate(`/admin/persons/get/${person._id}`);
+                        navigate({
+                            to: `/admin/persons/get/${person._id}`,
+                            message: "Navigation on successful update to person's profile image.",
+                        });
                     }
 
                     return (

@@ -4,15 +4,15 @@ import {toast} from "react-toastify";
 import {UserLoginData} from "@/pages/auth/schema/AuthLoginSchema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import {Path, UseFormReturn} from "react-hook-form";
-import {useNavigate} from "react-router-dom";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
 import ValidationService from "@/common/services/validation/ValidationService.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {useContext} from "react";
 import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 export default function useAuthLoginSubmitMutation({form}: { form: UseFormReturn<UserLoginData> }) {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const authContext = useContext(AuthContext);
 
     const submitLoginData = async (data: UserLoginData) => {
@@ -46,7 +46,7 @@ export default function useAuthLoginSubmitMutation({form}: { form: UseFormReturn
             authContext.setLogout(false);
         }
 
-        navigate(path || "/");
+        navigate({to: path || "/", component: useAuthLoginSubmitMutation.name});
     }
 
     const onError = (error: Error) => {

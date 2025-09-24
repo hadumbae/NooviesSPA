@@ -1,8 +1,8 @@
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import RouterService from "@/common/services/RouterService.ts";
-import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import {useEffect} from "react";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 /**
  * TODO
@@ -11,7 +11,7 @@ import {useEffect} from "react";
  */
 
 export default function useHttpResponseErrorHandler(error: unknown) {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     if (!(error instanceof HttpResponseError)) return;
 
     useEffect(() => {
@@ -23,7 +23,11 @@ export default function useHttpResponseErrorHandler(error: unknown) {
             const targetURL = new URL(url);
             RouterService.setRedirectPath(targetURL);
 
-            navigate("/auth/login");
+            navigate({
+                to: "/auth/login",
+                message: "Unauthorized!",
+                component: useHttpResponseErrorHandler.name,
+            });
         }
     }, []);
 }

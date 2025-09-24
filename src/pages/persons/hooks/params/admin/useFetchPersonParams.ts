@@ -1,7 +1,8 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 import {useEffect} from "react";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 type FetchParams = {
     /**
@@ -21,7 +22,7 @@ type FetchParams = {
  * @returns An object containing the validated `personID`, or `null` if invalid.
  */
 export default function useFetchPersonParams(params?: FetchParams) {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const {navigateLink = "/admin/persons"} = params || {};
 
     const { personID } = useParams<{personID: string}>();
@@ -30,7 +31,11 @@ export default function useFetchPersonParams(params?: FetchParams) {
     useEffect(() => {
         if (!success) {
             toast.error("Invalid Person Identifier. Please try again.");
-            navigate(navigateLink);
+            navigate({
+                level: "warn",
+                to: navigateLink,
+                message: "Failed to fetch person ID. ID either does not exist or is invalid.",
+            });
         }
     }, [navigate, navigateLink, success, data]);
 

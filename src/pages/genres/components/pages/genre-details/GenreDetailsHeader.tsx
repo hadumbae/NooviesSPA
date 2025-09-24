@@ -6,19 +6,23 @@ import {cn} from "@/common/lib/utils.ts";
 import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 import GenreDeleteWarningDialog from "@/pages/genres/components/dialog/GenreDeleteWarningDialog.tsx";
-import {useNavigate} from "react-router-dom";
 import GenreSubmitFormPanel from "@/pages/genres/components/form/GenreSubmitFormPanel.tsx";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 interface Props {
     genre: Genre;
 }
 
 const GenreDetailsHeader: FC<Props> = ({genre}) => {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const {_id, name} = genre;
 
     const onDelete = () => {
-        navigate("/admin/genres")
+        navigate({
+            to: "/admin/genres",
+            component: GenreDetailsHeader.name,
+            message: "Navigate on genre deletion."
+        })
     }
 
     const editDialog = (

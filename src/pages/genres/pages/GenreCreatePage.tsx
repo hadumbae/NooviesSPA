@@ -1,11 +1,11 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import GenreSubmitFormContainer from "@/pages/genres/components/form/GenreSubmitFormContainer.tsx";
-import {useNavigate} from "react-router-dom";
 import GenreCreateHeader from "@/pages/genres/components/pages/create-genre/GenreCreateHeader.tsx";
 import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import GenreCreateBreadcrumbs from "@/pages/genres/components/pages/create-genre/GenreCreateBreadcrumbs.tsx";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 /**
  * Page component for creating a new genre.
@@ -25,9 +25,13 @@ import GenreCreateBreadcrumbs from "@/pages/genres/components/pages/create-genre
  * ```
  */
 const GenreCreatePage: FC = () => {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const onGenreSubmit = (genre: Genre) => {
-        navigate(`/admin/genres/get/${genre._id}`);
+        navigate({
+            to: `/admin/genres/get/${genre._id}`,
+            component: GenreCreatePage.name,
+            message: "Navigate on genre creation.",
+        });
     }
 
     return (

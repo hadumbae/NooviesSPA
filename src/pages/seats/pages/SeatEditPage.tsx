@@ -2,7 +2,6 @@ import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import {useNavigate} from "react-router-dom";
 import useFetchSeatParams from "@/pages/seats/hooks/params/useFetchSeatParams.ts";
 import useFetchSeat from "@/pages/seats/hooks/fetch/useFetchSeat.ts";
 import SeatEditHeader from "@/pages/seats/components/headers/SeatEditHeader.tsx";
@@ -11,11 +10,12 @@ import useValidateData from "@/common/hooks/validation/use-validate-data/useVali
 import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 const SeatEditPage: FC = () => {
     useTitle("Edit Seat")
 
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const {seatID} = useFetchSeatParams();
     const {data, isPending, isError, error: queryError} = useFetchSeat({_id: seatID!});
     const {data: seat, error: parseError, success} = useValidateData({
@@ -32,7 +32,11 @@ const SeatEditPage: FC = () => {
     if (!success) return <PageParseError error={parseError}/>;
 
     const onSubmit = () => {
-        navigate(`/admin/seats/get/${seat && seat._id}`);
+        navigate({
+            to: `/admin/seats/get/${seat && seat._id}`,
+            component: SeatEditPage.name,
+            message: "Navigation on seat creation.",
+        });
     }
 
     return (

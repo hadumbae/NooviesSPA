@@ -1,7 +1,8 @@
 import {FC} from 'react';
-import {useNavigate, useRouteError} from "react-router-dom";
+import {useRouteError} from "react-router-dom";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import useHttpResponseErrorHandler from "@/common/hooks/errors/useHttpResponseErrorHandler.ts";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 /**
  * ComponentErrorHandler
@@ -35,7 +36,7 @@ import useHttpResponseErrorHandler from "@/common/hooks/errors/useHttpResponseEr
  * ```
  */
 const ComponentErrorHandler: FC = () => {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const error = useRouteError();
 
     // Delegate HTTP errors (status codes, network failures) to the custom hook
@@ -43,7 +44,7 @@ const ComponentErrorHandler: FC = () => {
 
     // Non-Error values (e.g. plain objects) get redirected to a catch-all error page
     if (!(error instanceof Error)) {
-        navigate("/error");
+        navigate({to: "/error", component: ComponentErrorHandler.name});
         return null;
     }
 

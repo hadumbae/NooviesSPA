@@ -2,11 +2,11 @@ import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MovieCreateHeader from "@/pages/movies/components/pages/admin/create-movie/MovieCreateHeader.tsx";
 import MovieSubmitFormContainer from "@/pages/movies/components/forms/MovieSubmitFormContainer.tsx";
-import {useNavigate} from "react-router-dom";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import MovieCreateBreadcrumbs from "@/pages/movies/components/pages/admin/create-movie/MovieCreateBreadcrumbs.tsx";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 /**
  * Page component for creating a new movie in the admin interface.
@@ -22,7 +22,7 @@ import MovieCreateBreadcrumbs from "@/pages/movies/components/pages/admin/create
  * ```
  */
 const MovieCreatePage: FC = () => {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
 
     /**
      * Callback executed when a movie is successfully created.
@@ -31,7 +31,11 @@ const MovieCreatePage: FC = () => {
      * @param movie - The newly created movie object.
      */
     const onSuccess = ({_id}: Movie) => {
-        navigate(`/admin/movies/get/${_id}`);
+        navigate({
+            to: `/admin/movies/get/${_id}`,
+            component: MovieCreatePage.name,
+            message: "Navigation on movie creation."
+        });
     };
 
     const successMessage = "Movie created successfully.";

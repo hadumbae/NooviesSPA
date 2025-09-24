@@ -8,7 +8,8 @@ import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import MovieSubmitFormPanel from "@/pages/movies/components/forms/MovieSubmitFormPanel.tsx";
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import MovieDeleteWarningDialog from "@/pages/movies/components/dialog/MovieDeleteWarningDialog.tsx";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 interface Props {
     /** The movie object containing details to display in the header. */
@@ -36,13 +37,19 @@ interface Props {
  * ```
  */
 const MovieDetailsHeader: FC<Props> = ({movie}) => {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
 
     const {_id, title, releaseDate, tagline} = movie;
     const formattedDate = releaseDate && format(releaseDate, "yyyy");
 
     /** Callback fired after movie is successfully deleted. Navigates back to movies list. */
-    const onMovieDelete = () => navigate("/admin/movies");
+    const onMovieDelete = () => {
+        navigate({
+            to: "/admin/movies",
+            component: MovieDetailsHeader.name,
+            message: "Navigate on movie deletion.",
+        });
+    }
 
     return (
         <header className={cn(

@@ -5,15 +5,15 @@ import {UserRegisterData} from "@/pages/auth/schema/AuthRegisterSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import {useNavigate} from "react-router-dom";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 const AuthRegisterForm: FC = () => {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const form = useAuthRegisterForm();
     const {mutate} = useAuthRegisterSubmitMutation({form});
 
     const onSubmit = (values: UserRegisterData) => mutate(values);
-    const redirectToLogin = () => navigate("/auth/login");
+    const redirectToLogin = () => navigate({to: "/auth/login", component: AuthRegisterForm.name});
 
     return (
         <Form {...form}>

@@ -5,15 +5,15 @@ import {Form} from "@/common/components/ui/form.tsx";
 import {UserLoginData} from "@/pages/auth/schema/AuthLoginSchema.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import {useNavigate} from "react-router-dom";
 import {cn} from "@/common/lib/utils.ts";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 interface Props {
     className?: string;
 }
 
 const AuthLoginForm: FC<Props> = ({className}) => {
-    const navigate = useNavigate();
+    const navigate = useLoggedNavigate();
     const form = useAuthLoginForm();
     const {mutate, isPending} = useAuthLoginSubmitMutation({form});
 
@@ -23,7 +23,10 @@ const AuthLoginForm: FC<Props> = ({className}) => {
     }
 
     const redirectToRegister = () => {
-        navigate("/auth/register");
+        navigate({
+            to: "/auth/register",
+            component: AuthLoginForm.name,
+        });
     }
 
     return (
