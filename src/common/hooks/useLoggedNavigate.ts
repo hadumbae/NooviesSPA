@@ -1,14 +1,17 @@
 import {NavigateOptions, To, useLocation, useNavigate} from "react-router-dom";
 import Logger from "@/common/utility/logger/Logger.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import {LoggerFunction} from "@/common/utility/logger/Logger.types.ts";
 
 /**
  * Optional parameters for logging navigation events.
- */
-export type LoggingMessageParams = {
-    /** The name of the component where navigation originates */
+ *
+ */export type LoggingMessageParams = {
+    /** The logging level (function name) to use from the `Logger` object. */
+    level?: LoggerFunction;
+    /** Name of the component from which the navigation originates. */
     component?: string;
-    /** Optional message providing additional context for the log */
+    /** Additional descriptive message for the log. */
     message?: string;
 };
 
@@ -61,21 +64,21 @@ export default function useLoggedNavigate() {
     function loggedNavigate(params: ToNavigateParams): void;
     function loggedNavigate(params: DeltaNavigateParams): void;
     function loggedNavigate(params: CombinedNavigateParams): void {
-        const {to, options, component, message} = params;
+        const {to, options, component, message, level = "log"} = params;
 
         // Filter out undefined logging attributes for cleaner logs
         const messageObject = filterEmptyAttributes({from, component, message});
 
         if (typeof to === "number") {
             // Delta (history) navigation
-            Logger.log({msg: "Router Navigation (DELTA):", context: {delta: to, ...messageObject}});
+            Logger[level]({msg: "Router Navigation (DELTA):", context: {delta: to, ...messageObject}});
             navigate(to);
         } else {
             // Path-based navigation
             const path = typeof to === "string" ? to : to.pathname;
             const {state, replace} = options ?? {};
 
-            Logger.log({msg: "Router Navigation:", context: {to: path, state, replace, ...messageObject}});
+            Logger[level]({msg: "Router Navigation:", context: {to: path, state, replace, ...messageObject}});
             navigate(to, options);
         }
     }
