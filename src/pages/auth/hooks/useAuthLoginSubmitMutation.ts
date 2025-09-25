@@ -1,62 +1,97 @@
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {AuthUserDetails, AuthUserDetailsSchema} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
 import {toast} from "react-toastify";
-import {UserLoginData} from "@/pages/auth/schema/AuthLoginSchema.ts";
-import {ParseError} from "@/common/errors/ParseError.ts";
-import {Path, UseFormReturn} from "react-hook-form";
+import {UseFormReturn} from "react-hook-form";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
-import ValidationService from "@/common/services/validation/ValidationService.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {useContext} from "react";
-import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
+import useSetAuthUser from "@/pages/auth/hooks/authUser/useSetAuthUser.ts";
+import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
+import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import {UserLoginData} from "@/pages/auth/schema/form/AuthForm.types.ts";
 
-export default function useAuthLoginSubmitMutation({form}: { form: UseFormReturn<UserLoginData> }) {
-    const navigate = useLoggedNavigate();
-    const authContext = useContext(AuthContext);
+/**
+ * Parameters for `useAuthLoginSubmitMutation`.
+ */
+export type SubmitMutationParams = Omit<FormMutationOnSubmitParams<AuthUserDetails>, "validationSchema"> & {
+    /** React Hook Form instance managing the login form. */
+    form: UseFormReturn<UserLoginData>;
+};
 
+/**
+ * Custom React hook for handling login form submission with validation and API integration.
+ *
+ * This hook integrates:
+ * - Form validation with `react-hook-form`.
+ * - API request to log in the user.
+ * - Validation of the API response against `AuthUserDetailsSchema`.
+ * - Success and error handling, including toast notifications.
+ * - Updating the authenticated user state.
+ *
+ * @param params - Configuration parameters including the form instance, optional callbacks, and messages.
+ * @returns A `react-query` mutation object for login submission.
+ *
+ * @example
+ * ```ts
+ * const loginMutation = useAuthLoginSubmitMutation({
+ *   form,
+ *   successMessage: "Welcome back!",
+ *   onSubmitSuccess: (user) => console.log("Logged in user:", user),
+ * });
+ *
+ * loginMutation.mutate({email: "user@example.com", password: "secret"});
+ * ```
+ */
+export default function useAuthLoginSubmitMutation(
+    params: SubmitMutationParams
+): UseMutationResult<AuthUserDetails, unknown, UserLoginData> {
+    const {form, onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
+    const setAuthUser = useSetAuthUser();
+
+    /**
+     * Submits login data to the Auth API and validates the response.
+     *
+     * @param data - The login form data containing email and password.
+     * @returns The validated authenticated user details.
+     * @throws Will throw an error if the API response is invalid or login fails.
+     */
     const submitLoginData = async (data: UserLoginData) => {
-        const {response, result} = await AuthRepository.login(data);
-
-        if (response.status === 200) {
-            const parsedResult = AuthUserDetailsSchema.safeParse(result);
-            if (!parsedResult.success) throw new HttpResponseError({message: "Invalid Login API Response.", response});
-            return parsedResult.data;
-        }
-
-        if (response.status === 400) {
-            return ValidationService.validateFormErrorResponse({errorResponse: response, errorData: result});
-        }
-
-        throw new HttpResponseError({
-            message: "Oops. Something went wrong trying to log in. Please try again.",
-            response
+        const returnData = handleMutationResponse({
+            action: () => AuthRepository.login(data),
+            errorMessage: "Failed to login. Please try again.",
         });
-    }
 
+        const {data: parsedData, success, error} = validateData({
+            data: returnData,
+            schema: AuthUserDetailsSchema,
+            message: "Invalid Login API Response."
+        });
+
+        if (!success) throw error;
+        return parsedData;
+    };
+
+    /**
+     * Handles a successful login mutation.
+     *
+     * @param authUser - The authenticated user details returned by the API.
+     */
     const onSuccess = (authUser: AuthUserDetails) => {
-        toast.success("Logged in.");
+        toast.success(successMessage ?? "Logged in.");
+        setAuthUser({authUser});
+        onSubmitSuccess?.(authUser);
+    };
 
-        const path = sessionStorage.getItem("redirectPath");
-        path && sessionStorage.removeItem("redirectPath");
-
-        localStorage.setItem("authUser", JSON.stringify(authUser));
-        if (authContext) {
-            authContext.setUser(authUser);
-            authContext.setLogout(false);
-        }
-
-        navigate({to: path || "/", component: useAuthLoginSubmitMutation.name});
-    }
-
-    const onError = (error: Error) => {
-        if (error instanceof ParseError) {
-            for (let validationError of error.errors) {
-                const {path, message} = validationError;
-                form.setError(path.join(".") as Path<UserLoginData>, {type: "manual", message});
-            }
-        }
-    }
+    /**
+     * Handles a failed login mutation.
+     *
+     * @param error - The error thrown during login submission.
+     */
+    const onError = (error: unknown) => {
+        const displayMessage = errorMessage ?? "Failed to login. Please try again.";
+        handleMutationFormError({form, error, displayMessage});
+        onSubmitError?.(error);
+    };
 
     return useMutation({
         mutationKey: ['submit_login_data'],
