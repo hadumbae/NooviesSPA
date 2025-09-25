@@ -8,7 +8,7 @@ import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
 
 type FetchParams<TData = unknown> = {
     queries: RequestOptions & EntityPaginatedQuery & SeatQueryFilters,
-    options: UseQueryOptions<TData>
+    options?: UseQueryOptions<TData>
 };
 
 /**
@@ -69,7 +69,7 @@ export default function useFetchSeats<TData = unknown>(
         staleTime = 1000 * 60,
         placeholderData = (previousData: TData | undefined) => previousData,
         initialData,
-    } = options;
+    } = options || {};
 
     const fetchSeats = useQueryFnHandler({
         action: () => SeatRepository.query({ queries }),
