@@ -60,7 +60,7 @@ export default function handleMutationFormError<TFormValues extends FieldValues>
     if (error instanceof FormValidationError) {
         const {errors} = error;
 
-        Logger.error({msg: "Form Validation Failed: ", context: {errors}});
+        Logger.error({msg: "Form Validation Failed: ", error, context: {errors}});
 
         for (let validationError of errors) {
             const {path, message} = validationError;
