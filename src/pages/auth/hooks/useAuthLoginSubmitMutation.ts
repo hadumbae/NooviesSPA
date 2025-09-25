@@ -56,7 +56,7 @@ export default function useAuthLoginSubmitMutation(
      * @throws Will throw an error if the API response is invalid or login fails.
      */
     const submitLoginData = async (data: UserLoginData) => {
-        const returnData = handleMutationResponse({
+        const returnData = await handleMutationResponse({
             action: () => AuthRepository.login(data),
             errorMessage: "Failed to login. Please try again.",
         });
