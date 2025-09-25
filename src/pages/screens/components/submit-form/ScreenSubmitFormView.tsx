@@ -4,7 +4,7 @@ import { cn } from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import { Button } from "@/common/components/ui/button.tsx";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
-import ScreenTypeHookFormSelect from "@/pages/screens/components/submit-form/ScreenTypeHookFormSelect.tsx";
+import ScreenTypeHookFormSelect from "@/pages/screens/components/submit-form/inputs/ScreenTypeHookFormSelect.tsx";
 import { Screen } from "@/pages/screens/schema/screen/Screen.types.ts";
 import { ScreenForm, ScreenFormValues } from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 import { FormViewProps } from "@/common/type/form/HookFormProps.ts";

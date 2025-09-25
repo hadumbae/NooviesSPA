@@ -7,7 +7,7 @@ import {Button} from "@/common/components/ui/button.tsx";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {Link} from "react-router-dom";
-import ScreenDeleteWarningDialog from "@/pages/screens/components/screens/ScreenDeleteWarningDialog.tsx";
+import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 
 interface Props {
     screen: ScreenDetails;

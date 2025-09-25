@@ -8,7 +8,7 @@ import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPa
 import TheatreScreenDetailsDrawer
     from "@/pages/screens/components/theatre-screens/admin/lists/TheatreScreenDetailsDrawer.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import ScreenSubmitFormPanel from "@/pages/screens/components/submit-form/ScreenSubmitFormPanel.tsx";
+import ScreenSubmitFormPanel from "@/pages/screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
 import {Plus} from "lucide-react";
 import {ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";

@@ -5,7 +5,7 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import { Button } from "@/common/components/ui/button.tsx";
 import { Plus, Trash } from "lucide-react";
-import ScreenDeleteWarningDialog from "@/pages/screens/components/screens/ScreenDeleteWarningDialog.tsx";
+import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 import SeatSubmitFormPanel from "@/pages/seats/components/forms/submit-form/SeatSubmitFormPanel.tsx";
 
 import { SeatFormValues } from "@/pages/seats/schema/form/SeatForm.types.ts";

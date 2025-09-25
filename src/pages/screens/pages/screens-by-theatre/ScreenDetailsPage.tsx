@@ -9,7 +9,7 @@ import TheatreScreenDetailsHeader
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import TheatreScreenSeatsByRowCard
     from "@/pages/screens/components/theatre-screen/admin/lists/TheatreScreenSeatsByRowCard.tsx";
-import useTheatreScreenSearchParams from "@/pages/screens/hooks/theatre-screens/params/useTheatreScreenSearchParams.ts";
+import useTheatreScreenSearchParams from "@/pages/screens/hooks/screens-by-theatres/params/useTheatreScreenSearchParams.ts";
 import useFetchTheatre from "@/pages/theatres/hooks/queries/useFetchTheatre.ts";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import useFetchScreen from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreen.ts";

@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import {Accordion} from "@/common/components/ui/accordion.tsx";
-import useFetchScreenSeatsByRow from "@/pages/screens/hooks/screen-seats/useFetchScreenSeatsByRow.ts";
+import useFetchScreenSeatsByRow from "@/pages/screens/hooks/screens-and-seats/useFetchScreenSeatsByRow.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {SeatsByRowArraySchema} from "@/pages/screens/schema/screen/ScreenSeat.schema.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";

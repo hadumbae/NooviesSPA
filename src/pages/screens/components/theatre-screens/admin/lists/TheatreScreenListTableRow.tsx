@@ -6,7 +6,7 @@ import TheatreScreenFormDrawer
     from "@/pages/screens/components/theatre-screens/admin/forms/TheatreScreenFormDrawer.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
-import ScreenDeleteWarningDialog from "@/pages/screens/components/screens/ScreenDeleteWarningDialog.tsx";
+import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 
 type RowProps = {
     screen: ScreenDetails;
