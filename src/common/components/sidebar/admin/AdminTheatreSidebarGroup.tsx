@@ -26,17 +26,6 @@ const AdminTheatreSidebarGroup: FC = () => {
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
-
-                    {/* Screens */}
-
-                    <SidebarMenuItem>
-                        <SidebarMenuButton asChild>
-                            <Link to="/admin/screens">
-                                <TableOfContents />
-                                <span>Screens</span>
-                            </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>
