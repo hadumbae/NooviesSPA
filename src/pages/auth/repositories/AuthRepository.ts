@@ -1,8 +1,7 @@
-import {UserRegisterData} from "@/pages/auth/schema/AuthRegisterSchema.ts";
-import {UserLoginData} from "@/pages/auth/schema/AuthLoginSchema.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import {UserLoginData, UserRegisterData} from "@/pages/auth/schema/form/AuthForm.types.ts";
 
 interface IAuthRepository {
     baseURL: string;
