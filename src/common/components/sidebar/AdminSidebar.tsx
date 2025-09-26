@@ -5,7 +5,6 @@ import {
     SidebarContent, SidebarHeader,
 } from "@/common/components/ui/sidebar"
 
-import AdminTheatreSidebarGroup from "@/common/components/sidebar/admin/AdminTheatreSidebarGroup.tsx";
 import AdminMovieSidebarGroup from "@/common/components/sidebar/admin/AdminMovieSidebarGroup.tsx";
 import AdminAuthSidebarGroup from "@/common/components/sidebar/auth/AuthSidebarGroup.tsx";
 import AdminSetupSidebarGroup from "@/common/components/sidebar/admin/AdminSetupSidebarGroup.tsx";
@@ -18,10 +17,9 @@ const AdminSidebar: FC = () => {
             </SidebarHeader>
 
             <SidebarContent>
-                <AdminAuthSidebarGroup />
                 <AdminSetupSidebarGroup />
                 <AdminMovieSidebarGroup />
-                <AdminTheatreSidebarGroup />
+                <AdminAuthSidebarGroup />
             </SidebarContent>
 
         </Sidebar>

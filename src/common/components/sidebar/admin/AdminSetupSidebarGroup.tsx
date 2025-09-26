@@ -47,6 +47,17 @@ const AdminSetupSidebarGroup: FC = () => {
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
+
+                    {/* Theatres */}
+
+                    <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                            <Link to="/admin/theatres">
+                                <TableOfContents />
+                                <span>Theatres</span>
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>

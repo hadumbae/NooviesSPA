@@ -11,12 +11,7 @@ const BaseSidebar: FC = () => {
 
     if (isAuthenticated && authContext) {
         const {isAdmin = false} = authContext.user || {};
-
-        if (isAdmin) {
-            return <AdminSidebar />
-        } else {
-            return <ClientSidebar />
-        }
+        return isAdmin ? <AdminSidebar /> : <ClientSidebar />;
     }
 
     return (
