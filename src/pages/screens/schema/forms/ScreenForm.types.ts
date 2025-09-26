@@ -1,22 +1,16 @@
-import {z} from "zod";
-import {ScreenFormSchema, ScreenFormValuesSchema} from "@/pages/screens/schema/forms/ScreenForm.schema.ts";
+import { z } from "zod";
+import { ScreenFormSchema, ScreenFormValuesSchema } from "@/pages/screens/schema/forms/ScreenForm.schema.ts";
 
 /**
- * Type representing the initial form values for creating or editing a screen.
- *
- * This type is inferred from {@link ScreenFormValuesSchema} and is typically used
- * to define the default values passed into a form component.
- *
- * All fields are generic form starter values, suitable for unvalidated user input.
+ * Type representing the initial values of a screen form.
+ * Mirrors the structure defined by `ScreenFormValuesSchema`.
+ * Typically used for form state management (defaults, optional values).
  */
 export type ScreenFormValues = z.infer<typeof ScreenFormValuesSchema>;
 
 /**
- * Type representing the validated shape of submitted screen form data.
- *
- * This type is inferred from {@link ScreenFormSchema} and ensures that
- * all form fields meet the expected validation rules before submission.
- *
- * Matches the structure defined in the {@link IScreenSubmit} interface.
+ * Type representing a validated screen form submission.
+ * Mirrors the structure defined by `ScreenFormSchema`.
+ * Ensures all required fields are correctly typed and constrained.
  */
 export type ScreenForm = z.infer<typeof ScreenFormSchema>;

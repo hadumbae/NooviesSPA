@@ -1,53 +1,42 @@
-import {z, ZodType, ZodTypeDef} from "zod";
-import {ScreenTypeEnum} from "@/pages/screens/schema/ScreenType.enum.ts";
-import {IScreenSubmit} from "@/pages/screens/interfaces/IScreenSubmit.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
-import {CleanedNonNegativeNumberSchema,} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import { z } from "zod";
+import { ScreenTypeEnum } from "@/pages/screens/schema/ScreenType.enum.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
+import { FormStarterValueSchema } from "@/common/schema/form/FormStarterValueSchema.ts";
+import { CleanedNonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 
 /**
- * Zod schema for the initial values used in a screen creation or edit form.
- *
- * This schema is typically used in React form libraries like React Hook Form or Formik
- * to initialize form fields before user interaction. All fields accept generic form starter values.
- *
- * Fields:
- * - `name`: Initial value for the screen name field.
- * - `capacity`: Initial value for the seating capacity.
- * - `screenType`: Initial value for the type of screen (e.g. IMAX, Standard).
- * - `theatre`: Initial value for the theatre association.
+ * Schema representing the initial form values for a screen.
+ * All fields are wrapped in `FormStarterValueSchema` to support optional default values.
  */
 export const ScreenFormValuesSchema = z.object({
+    /** Initial value for the screen name */
     name: FormStarterValueSchema,
+
+    /** Initial value for the screen capacity */
     capacity: FormStarterValueSchema,
+
+    /** Initial value for the screen type */
     screenType: FormStarterValueSchema,
+
+    /** Initial value for the associated theatre ID */
     theatre: FormStarterValueSchema,
 });
 
 /**
- * Zod schema for validated and cleaned screen form values,
- * enforcing stricter constraints suitable for submission or processing.
- *
- * Fields:
- * - `name`: Non-empty string, max 255 characters.
- * - `capacity`: Non-negative number, cleaned/coerced from input.
- * - `screenType`: Must be a valid `ScreenTypeEnum` value.
- * - `theatre`: Valid ID string for associated theatre.
+ * Schema for validating a screen form submission.
+ * Ensures all required fields are correctly typed and constrained.
  */
-export const ScreenFormRawSchema = z.object({
+export const ScreenFormSchema = z.object({
+    /** Name of the screen (max 255 characters) */
     name: NonEmptyStringSchema.max(255, "Must be 255 characters or less."),
+
+    /** Capacity of the screen (non-negative number) */
     capacity: CleanedNonNegativeNumberSchema,
+
+    /** Type of screen (e.g., IMAX, Standard, 3D) */
     screenType: ScreenTypeEnum,
+
+    /** Associated theatre ID */
     theatre: IDStringSchema,
 });
-
-/**
- * Strongly-typed Zod schema matching the `IScreenSubmit` interface,
- * representing the fully validated and typed screen form data.
- *
- * Input type is `unknown` to allow preprocessing of raw form input,
- * while output conforms exactly to `IScreenSubmit`.
- */
-export const ScreenFormSchema = ScreenFormRawSchema as ZodType<IScreenSubmit, ZodTypeDef, unknown>;
-

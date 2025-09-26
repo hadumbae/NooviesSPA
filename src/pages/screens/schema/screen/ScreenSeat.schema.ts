@@ -1,55 +1,45 @@
-import {z} from "zod";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {SeatDetailsSchema, SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
+import { z } from "zod";
+import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import { SeatDetailsSchema, SeatSchema } from "@/pages/seats/schema/seat/Seat.schema.ts";
 
 /**
- * Base schema representing a group of seats in a single row.
- * Contains the row identifier and the number of seats in that row.
+ * Schema representing seats grouped by a single row.
  */
-export const SeatsByRowBaseSchema = z.object({
+export const SeatsByRowSchema = z.object({
+    /** Identifier or label for the row (e.g., "A", "B") */
     row: NonEmptyStringSchema,
-    numberOfSeats: PositiveNumberSchema,
-});
 
-/**
- * Schema representing a group of seats in a row,
- * where each seat is represented as a {@link Seat}.
- * Includes the row identifier, number of seats, and an array of seats.
- */
-export const SeatsByRowSchema = SeatsByRowBaseSchema.extend({
+    /** Total number of seats in this row */
+    numberOfSeats: PositiveNumberSchema,
+
+    /** Array of seats in this row */
     seats: z.array(
         z.lazy(() => SeatSchema),
-        {message: "Must be an array of seats."},
+        { message: "Must be an array of seats." }
     ),
 });
 
 /**
- * Schema representing an array of {@link SeatsByRowSchema}.
- * Used when multiple rows of seats need to be validated together.
+ * Schema representing detailed seats grouped by a single row.
+ * Extends `SeatsByRowSchema` with detailed seat information.
  */
-export const SeatsByRowArraySchema = z.array(
-    SeatsByRowSchema,
-    {message: "Must be an array of seats by row."},
-);
-
-/**
- * Schema representing a group of seats in a row,
- * where each seat is represented as a {@link SeatDetails} with full details.
- * Includes the row identifier, number of seats, and an array of detailed seats.
- */
-export const SeatDetailsByRowSchema = SeatsByRowBaseSchema.extend({
+export const SeatDetailsByRowSchema = SeatsByRowSchema.extend({
+    /** Array of seat details in this row */
     seats: z.array(
         z.lazy(() => SeatDetailsSchema),
-        {message: "Must be an array of seats with details."},
+        { message: "Must be an array of seats with details." }
     ),
 });
 
-/**
- * Schema representing an array of {@link SeatDetailsByRowSchema}.
- * Used when multiple rows of fully detailed seats need to be validated together.
- */
+/** Array of `SeatsByRowSchema` objects */
+export const SeatsByRowArraySchema = z.array(
+    SeatsByRowSchema,
+    { message: "Must be an array of seats by row." }
+);
+
+/** Array of `SeatDetailsByRowSchema` objects */
 export const SeatDetailsByRowArraySchema = z.array(
     SeatDetailsByRowSchema,
-    {message: "Must be an array of seats by row."},
+    { message: "Must be an array of seats by row." }
 );

@@ -1,4 +1,4 @@
-import {z} from "zod";
+import { z } from "zod";
 import {
     SeatDetailsByRowArraySchema,
     SeatDetailsByRowSchema,
@@ -7,29 +7,25 @@ import {
 } from "@/pages/screens/schema/screen/ScreenSeat.schema.ts";
 
 /**
- * Type representing a group of seats in a single row.
- * Includes row identifier, number of seats, and an array of {@link Seat} objects.
- * Inferred from {@link SeatsByRowSchema}.
+ * Type representing a row of seats.
+ * Mirrors the structure defined by `SeatsByRowSchema`.
  */
 export type SeatsByRow = z.infer<typeof SeatsByRowSchema>;
 
 /**
- * Type representing an array of {@link SeatsByRow}.
- * Used when multiple rows of seats are grouped together.
- * Inferred from {@link SeatsByRowArraySchema}.
- */
-export type SeatsByRowArray = z.infer<typeof SeatsByRowArraySchema>;
-
-/**
- * Type representing a group of seats in a single row with full seat details.
- * Includes row identifier, number of seats, and an array of {@link SeatDetails} objects.
- * Inferred from {@link SeatDetailsByRowSchema}.
+ * Type representing a row of seats with detailed seat information.
+ * Mirrors the structure defined by `SeatDetailsByRowSchema`.
  */
 export type SeatDetailsByRow = z.infer<typeof SeatDetailsByRowSchema>;
 
 /**
- * Type representing an array of {@link SeatDetailsByRow}.
- * Used when multiple rows of fully detailed seats are grouped together.
- * Inferred from {@link SeatDetailsByRowArraySchema}.
+ * Type representing multiple rows of seats.
+ * Mirrors the structure defined by `SeatsByRowArraySchema`.
+ */
+export type SeatsByRowArray = z.infer<typeof SeatsByRowArraySchema>;
+
+/**
+ * Type representing multiple rows of seats with detailed seat information.
+ * Mirrors the structure defined by `SeatDetailsByRowArraySchema`.
  */
 export type SeatDetailsByRowArray = z.infer<typeof SeatDetailsByRowArraySchema>;
