@@ -6,16 +6,21 @@ import Logger from "@/common/utility/logger/Logger.ts";
  * Use these to classify the type of event being logged.
  */
 export type LogType =
-    /** General-purpose log entry. */
+/** General-purpose log entry. */
     "GENERAL" |
-    /** Informational messages. */
+    /** Informational messages about normal operations. */
     "INFO" |
     /** Warnings that may require attention. */
     "WARNING" |
-    /** Error messages indicating failure or exceptions. */
+    /** Error messages indicating failures or exceptions. */
     "ERROR" |
+    /** Logs related to network fetch operations. */
+    "FETCH" |
+    /** Logs related to data processing or state updates. */
+    "DATA" |
     /** Logs related to navigation or page transitions. */
     "NAVIGATION";
+
 
 /**
  * Additional metadata to attach to a log entry.

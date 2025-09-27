@@ -68,22 +68,22 @@ export default async function useFetchAPI<TData = unknown, TReturns = unknown>(
             : JSON.stringify(data)
         : undefined;
 
-    Logger.log({msg: "Fetching data: ", context: {funcName, url, method, headers, body}});
+    Logger.log({msg: "Fetching data: ", type: "FETCH", context: {funcName, url, method, headers, body}});
 
     let response: Response;
     try {
         response = await fetch(url, {credentials: "include", method, headers, body, signal});
     } catch (error: unknown) {
         error instanceof Error
-            ? Logger.error({msg: "Fetch request failed.", context: {funcName}, error})
-            : Logger.error({msg: "Fetch request failed.", context: {funcName, error}});
+            ? Logger.error({msg: "Fetch request failed.", type: "ERROR", context: {funcName}, error})
+            : Logger.error({msg: "Fetch request failed.", type: "ERROR", context: {funcName, error}});
 
         throw error;
     }
 
     const raw = await response.text();
     if (!response.ok) {
-        Logger.warn({msg: `HTTP ERROR: ${response.status}`, context: {funcName, response_text: raw}});
+        Logger.warn({msg: `HTTP ERROR: ${response.status}`, type: "ERROR", context: {funcName, response_text: raw}});
         throw new HttpResponseError({response, message: raw});
     }
 
@@ -91,7 +91,7 @@ export default async function useFetchAPI<TData = unknown, TReturns = unknown>(
     try {
         result = JSON.parse(raw) as TReturns;
     } catch (error: unknown) {
-        Logger.error({msg: "Failed to parse JSON.", context: {funcName, response_text: raw}});
+        Logger.error({msg: "Failed to parse JSON.", type: "ERROR", context: {funcName, response_text: raw}});
         throw new JSONParseError({raw, status: response.status});
     }
 
