@@ -11,7 +11,7 @@ import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import {format} from "date-fns";
-import {Link} from "react-router-dom";
+import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 
 /**
  * Props for the {@link MoviePersonListBreadcrumb} component.
@@ -55,7 +55,12 @@ const MoviePersonListBreadcrumb: FC<PersonListBreadcrumbProps> = ({movie, depart
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to={"/admin/movies"}>All Movies</Link>
+                        <LoggedLink
+                            to="/admin/movies"
+                            component={MoviePersonListBreadcrumb.name}
+                        >
+                            All Movies
+                        </LoggedLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -63,9 +68,12 @@ const MoviePersonListBreadcrumb: FC<PersonListBreadcrumbProps> = ({movie, depart
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to={`/admin/movies/get/${_id}`}>
+                        <LoggedLink
+                            to={`/admin/movies/get/${_id}`}
+                            component={MoviePersonListBreadcrumb.name}
+                        >
                             {`${title} ${parsedReleaseDate}`}
-                        </Link>
+                        </LoggedLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

@@ -6,7 +6,7 @@ import {
     BreadcrumbList, BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import {Link} from "react-router-dom";
+import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 
 /**
  * `MovieCreateBreadcrumbs` is a breadcrumb navigation component
@@ -27,7 +27,12 @@ const MovieCreateBreadcrumbs: FC = () => {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to="/admin/movies">All Movies</Link>
+                        <LoggedLink
+                            to="/admin/movies"
+                            component={MovieCreateBreadcrumbs.name}
+                        >
+                            All Movies
+                        </LoggedLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
