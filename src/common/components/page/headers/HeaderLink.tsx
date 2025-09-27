@@ -1,19 +1,26 @@
 import {FC, PropsWithChildren} from 'react';
 import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
-import {Link} from "react-router-dom";
+import {To} from "react-router-dom";
 import ButtonVariant from "@/common/type/ui/ButtonVariant.ts";
+import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 
 interface Props {
+    to: To;
+    message?: string
     variant?: ButtonVariant;
     className?: string;
-    to: string;
+    component?: string
 }
 
-const HeaderLink: FC<PropsWithChildren<Props>> = ({children, variant = "outline", to, className = ""}) => {
+const HeaderLink: FC<PropsWithChildren<Props>> = (props) => {
+    const {children, to, message, component, variant = "outline", className = ""} = props
+
     return (
-        <Link
+        <LoggedLink
             to={to}
+            component={component}
+            message={message}
             className={cn(
                 buttonVariants({variant}),
                 "text-neutral-400 hover:text-black p-2",
@@ -21,7 +28,7 @@ const HeaderLink: FC<PropsWithChildren<Props>> = ({children, variant = "outline"
             )}
         >
             {children}
-        </Link>
+        </LoggedLink>
     );
 };
 
