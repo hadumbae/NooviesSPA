@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import MovieDetailsHeader from "@/pages/movies/components/headers/MovieDetailsHeader.tsx";
+import MovieDetailsHeader from "@/pages/movies/components/headers/admin/MovieDetailsHeader.tsx";
 import useFetchMovieParams from "@/pages/movies/hooks/params/useFetchMovieParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import MovieDetailsCard from "@/pages/movies/components/details/MovieDetailsCard.tsx";

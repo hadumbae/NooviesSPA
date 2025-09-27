@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import MovieIndexHeader from "@/pages/movies/components/headers/MovieIndexHeader.tsx";
+import MovieIndexHeader from "@/pages/movies/components/headers/admin/MovieIndexHeader.tsx";
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
