@@ -71,7 +71,12 @@ export default function useLoggedNavigate() {
 
         if (typeof to === "number") {
             // Delta (history) navigation
-            Logger[level]({msg: "Router Navigation (DELTA):", context: {delta: to, ...messageObject}});
+            Logger[level]({
+                msg: "Router Navigation (DELTA):",
+                type: "NAVIGATION",
+                context: {delta: to, ...messageObject}
+            });
+
             navigate(to);
         } else {
             // Path-based navigation
@@ -79,7 +84,12 @@ export default function useLoggedNavigate() {
             const {state, replace} = options ?? {};
             const filteredContext = filterEmptyAttributes({to: path, state, replace, ...messageObject});
 
-            Logger[level]({msg: "Router Navigation:", context: filteredContext});
+            Logger[level]({
+                msg: "Router Navigation:",
+                type: "NAVIGATION",
+                context: filteredContext,
+            });
+
             navigate(to, options);
         }
     }

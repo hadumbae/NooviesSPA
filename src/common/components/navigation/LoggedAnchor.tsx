@@ -89,6 +89,7 @@ const LoggedAnchor: FC<AnchorProps> = (props) => {
 
         buildStandardLog({
             level,
+            type: "NAVIGATION",
             msg: "Anchor Navigation",
             component,
             context,
