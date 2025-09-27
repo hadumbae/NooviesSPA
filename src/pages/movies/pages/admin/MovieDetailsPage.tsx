@@ -79,8 +79,6 @@ const MovieDetailsPage: FC = () => {
                     const {movie, credits} = data as MovieWithData;
                     const simplifiedMovie = simplifyMovieDetails(movie);
 
-                    console.log("Credits: ", credits);
-
                     return (
                         <PageFlexWrapper>
                             <section>
