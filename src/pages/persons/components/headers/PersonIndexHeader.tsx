@@ -18,7 +18,12 @@ const PersonIndexHeader: FC = () => {
             </section>
 
             <section className="flex justify-end items-center">
-                <HeaderLink variant="link" to="/admin/persons/create">
+                <HeaderLink
+                    variant="link"
+                    to="/admin/persons/create"
+                    component={PersonIndexHeader.name}
+                    message="Navigate to form for creating persons."
+                >
                     <Plus/> Create
                 </HeaderLink>
             </section>
