@@ -77,8 +77,9 @@ export default function useLoggedNavigate() {
             // Path-based navigation
             const path = typeof to === "string" ? to : to.pathname;
             const {state, replace} = options ?? {};
+            const filteredContext = filterEmptyAttributes({to: path, state, replace, ...messageObject});
 
-            Logger[level]({msg: "Router Navigation:", context: {to: path, state, replace, ...messageObject}});
+            Logger[level]({msg: "Router Navigation:", context: filteredContext});
             navigate(to, options);
         }
     }
