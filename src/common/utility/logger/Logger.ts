@@ -2,34 +2,50 @@ import {LogPayload} from "@/common/utility/logger/Logger.types.ts";
 
 /**
  * Indicates whether the app is running in development mode.
- * Derived from `VITE_DEV_MODE` environment variable.
+ *
+ * Derived from the `VITE_DEV_MODE` environment variable.
  */
 const isDev = import.meta.env.VITE_DEV_MODE === 'true';
 
 /**
  * Indicates whether logs should always be written to the console,
- * regardless of environment. Derived from `VITE_LOG_TO_CONSOLE`.
+ * regardless of environment.
+ *
+ * Derived from the `VITE_LOG_TO_CONSOLE` environment variable.
  */
 const isLoggingToConsole = import.meta.env.VITE_LOG_TO_CONSOLE === 'true';
 
 /**
  * Formats a log payload into a structured object suitable for console logging.
  *
- * The returned object always includes a `time` property containing the current
- * UTC timestamp in ISO 8601 format. If provided, the payload's `context` and
- * `error` fields are also included.
+ * @remarks
+ * - Always includes a `time` property in ISO 8601 UTC format.
+ * - Includes optional `context` metadata.
+ * - Converts `error` to a plain object with `message` and `stack` fields.
  *
- * - `time` uses `Date.prototype.toISOString()`, ensuring a timezone-independent
- *   universal timestamp (UTC).
- * - `context` is attached under the `context` key if present.
- * - `error` is converted into a plain object with `message` and `stack` fields.
+ * @param payload - The log payload containing optional `context`, `error`, and `type`.
+ * @returns A structured object with `time`, optional `context`, `error`, and `type`.
  *
- * @param payload - The log payload containing optional `context` and `error`.
- * @returns A structured object with `time`, optional `context`, and optional `error`.
+ * @example
+ * ```ts
+ * formatContext({
+ *   type: "ERROR",
+ *   msg: "Failed to fetch data",
+ *   context: { userId: "123" },
+ *   error: new Error("Network failure")
+ * });
+ * // {
+ * //   type: "ERROR",
+ * //   time: "2025-09-27T09:32:00.000Z",
+ * //   context: { userId: "123" },
+ * //   error: { message: "Network failure", stack: "..." }
+ * // }
+ * ```
  */
-const formatContext = ({context, error}: LogPayload) => {
+const formatContext = ({context, error, type = "GENERAL"}: LogPayload) => {
     return {
-        time: (new Date()).toISOString(),
+        type,
+        time: new Date().toISOString(),
         context: context ?? {},
         error: error
             ? {message: error.message, stack: error.stack}
@@ -39,15 +55,22 @@ const formatContext = ({context, error}: LogPayload) => {
 
 /**
  * A simple environment-aware logger.
- * - In development or when `VITE_LOG_TO_CONSOLE` is true,
- *   it logs all messages to the console.
+ *
+ * @remarks
+ * - In development (`VITE_DEV_MODE=true`) or when `VITE_LOG_TO_CONSOLE=true`, logs all messages to the console.
  * - Error logs are always output regardless of environment.
+ * - Supports structured logging with optional `context` and `error`.
  */
 const Logger = {
     /**
      * Logs an informational message.
      *
      * @param payload - The log payload containing message, context, and/or error.
+     *
+     * @example
+     * ```ts
+     * Logger.log({ msg: "User logged in", context: { userId: "123" } });
+     * ```
      */
     log: (payload: LogPayload) => {
         const {msg} = payload;
@@ -58,6 +81,11 @@ const Logger = {
      * Logs a warning message.
      *
      * @param payload - The log payload containing message, context, and/or error.
+     *
+     * @example
+     * ```ts
+     * Logger.warn({ msg: "API response delayed", context: { endpoint: "/users" } });
+     * ```
      */
     warn: (payload: LogPayload) => {
         const {msg} = payload;
@@ -68,6 +96,11 @@ const Logger = {
      * Logs a debug message.
      *
      * @param payload - The log payload containing message, context, and/or error.
+     *
+     * @example
+     * ```ts
+     * Logger.debug({ msg: "Component state updated", context: { component: "Dashboard" } });
+     * ```
      */
     debug: (payload: LogPayload) => {
         const {msg} = payload;
@@ -75,13 +108,25 @@ const Logger = {
     },
 
     /**
-     * Logs an error message. Always outputs to console.
+     * Logs an error message.
+     *
+     * @remarks
+     * - Always outputs to console regardless of environment.
      *
      * @param payload - The log payload containing message, context, and/or error.
+     *
+     * @example
+     * ```ts
+     * Logger.error({
+     *   msg: "Failed to fetch user data",
+     *   context: { userId: "123" },
+     *   error: new Error("Network request failed")
+     * });
+     * ```
      */
     error: (payload: LogPayload) => {
         const {msg} = payload;
-        console.error("[ERROR] ", msg, formatContext(payload));
+        console.error("[ERROR]", msg, formatContext(payload));
     },
 };
 
