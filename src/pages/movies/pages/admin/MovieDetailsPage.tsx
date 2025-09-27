@@ -7,11 +7,24 @@ import MovieDetailsCard from "@/pages/movies/components/details/MovieDetailsCard
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import MovieDetailsBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MovieDetailsBreadcrumb.tsx";
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import simplifyMovieDetails from "@/pages/movies/utility/simplifyMovieDetails.ts";
+import useFetchMovieCredits from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
+import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
+import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
+import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
+import {
+    MovieCreditDetailsArraySchema,
+} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
+import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import PageSection from "@/common/components/page/PageSection.tsx";
+import MovieDetailsCreditOverview from "@/pages/movies/components/details/MovieDetailsCreditOverview.tsx";
+
+type MovieWithData = {
+    movie: MovieDetails,
+    credits: MovieCreditDetailsArray,
+};
 
 /**
  * Page component that renders detailed information about a specific movie.
@@ -37,40 +50,60 @@ const MovieDetailsPage: FC = () => {
 
     // Fetch movie parameters from URL (e.g., movie ID)
     const movieParams = useFetchMovieParams();
-    if (!movieParams) return <PageLoader />;
+    if (!movieParams) return <PageLoader/>;
 
-    const { movieID } = movieParams;
+    const {movieID} = movieParams;
 
     // Fetch movie data, including populated references and virtual fields
-    const query = useFetchMovie({ _id: movieID, populate: true, virtuals: true });
+    const movieQuery = useFetchMovie({_id: movieID, populate: true, virtuals: true});
+
+    const creditQuery = useFetchMovieCredits({
+        movie: movieID,
+        populate: true,
+        virtuals: true,
+        limit: 6,
+        department: "CAST",
+        sortByBillingOrder: "asc",
+    });
+
+    const queries = [movieQuery, creditQuery];
+    const validationQueries: CombinedSchemaQuery[] = [
+        {query: movieQuery, key: "movie", schema: MovieDetailsSchema},
+        {query: creditQuery, key: "credits", schema: MovieCreditDetailsArraySchema},
+    ];
 
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={MovieDetailsSchema}>
-                {(movie: MovieDetails) => {
+        <CombinedQueryBoundary queries={queries}>
+            <CombinedValidatedQueryBoundary queries={validationQueries}>
+                {(data) => {
+                    const {movie, credits} = data as MovieWithData;
                     const simplifiedMovie = simplifyMovieDetails(movie);
+
+                    console.log("Credits: ", credits);
 
                     return (
                         <PageFlexWrapper>
                             <section>
                                 <h1 className="sr-only">Movie Details Header</h1>
-                                <MovieDetailsBreadcrumb />
-                                <MovieDetailsHeader movie={simplifiedMovie} />
+                                <MovieDetailsBreadcrumb/>
+                                <MovieDetailsHeader movie={simplifiedMovie}/>
                             </section>
 
-                            <section>
-                                <h1 className="sr-only">Movie Details Card</h1>
-                                <MovieDetailsCard movie={movie} />
-                            </section>
+                            <PageSection srTitle="Movie Details Card">
+                                <MovieDetailsCard movie={movie}/>
+                            </PageSection>
 
-                            <section>
-                                Movie Credit
-                            </section>
+                            <PageSection srTitle="Movie Credits Overview">
+                                <MovieDetailsCreditOverview
+                                    movieID={movie._id}
+                                    credits={credits}
+                                />
+                            </PageSection>
                         </PageFlexWrapper>
                     );
                 }}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+            </CombinedValidatedQueryBoundary>
+        </CombinedQueryBoundary>
     );
 };
 
