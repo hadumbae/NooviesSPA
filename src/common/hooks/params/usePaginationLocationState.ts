@@ -1,49 +1,65 @@
-import {useLocation} from "react-router-dom";
-import {paginationSearchParamSchema} from "@/common/schema/PaginationSearchParamsSchema.ts";
+import { useLocation } from "react-router-dom";
+import { PaginationSearchParamSchema } from "@/common/schema/PaginationSearchParamsSchema.ts";
+
+/** Default page number from environment variables. */
+const DEFAULT_PAGE = import.meta.env.VITE_PAGINATION_PAGE_DEFAULT;
+
+/** Default number of items per page from environment variables. */
+const DEFAULT_PER_PAGE = import.meta.env.VITE_PAGINATION_PER_PAGE_DEFAULT;
 
 /**
- * Represents pagination-related data extracted from location state.
- *
- * @property page - The current page number.
- * @property perPage - The number of items per page.
+ * Pagination data returned from the hook.
  */
-type PaginationData = { page: number, perPage: number };
+type PaginationData = {
+    /** Current page number. Defaults to `DEFAULT_PAGE` if not provided. */
+    page: number;
+    /** Number of items per page. Defaults to `DEFAULT_PER_PAGE` if not provided. */
+    perPage: number;
+};
 
 /**
- * Represents the possible return types of the `usePaginationLocationState` hook.
+ * Return type of `usePaginationLocationState`.
  *
- * - When parsing is successful: `{ success: true, data: PaginationData }`
- * - When parsing fails: `{ success?: false, data: null }`
+ * @remarks
+ * - On success: `{ success: true, data: PaginationData }`
+ * - On failure: `{ success?: false, data: null }`
  */
-type PaginationReturns = | { success: true, data: PaginationData } | { success?: false, data: null }
+type PaginationReturns =
+    | { success: true; data: PaginationData }
+    | { success?: false; data: null };
 
 /**
- * A custom React hook that extracts and validates pagination parameters
- * (`page` and `perPage`) from the `state` object provided by `react-router-dom`'s `useLocation`.
+ * React hook to extract and validate pagination state from `useLocation`.
  *
- * It uses a Zod schema (`paginationSearchParamSchema`) to validate the shape and type of the data.
- *
- * @returns An object that indicates whether the parsing was successful:
- * - If successful: `{ success: true, data: { page, perPage } }`
- * - If not: `{ success: false, data: null }`
+ * @remarks
+ * - Uses `PaginationSearchParamSchema` to validate the state object from the current location.
+ * - Applies defaults from environment variables if `page` or `perPage` are missing or undefined.
+ * - Returns a strongly-typed object indicating success or failure.
  *
  * @example
- * ```tsx
+ * ```ts
  * const { success, data } = usePaginationLocationState();
  * if (success) {
  *   console.log(data.page, data.perPage);
- * } else {
- *   // Fallback or error handling
  * }
  * ```
+ *
+ * @returns An object containing:
+ *   - `success`: Whether parsing was successful.
+ *   - `data`: Validated pagination data with defaults, or `null` if validation failed.
  */
 export default function usePaginationLocationState(): PaginationReturns {
-    const {state} = useLocation();
-    const {data, success} = paginationSearchParamSchema.safeParse(state);
+    const { state } = useLocation();
+    const { data, success } = PaginationSearchParamSchema.safeParse(state);
 
     if (success) {
-        return {success: true, data};
+        const { page = DEFAULT_PAGE, perPage = DEFAULT_PER_PAGE } = data;
+
+        return {
+            success: true,
+            data: { page, perPage },
+        };
     }
 
-    return {success, data: null};
+    return { success, data: null };
 }

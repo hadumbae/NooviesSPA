@@ -1,37 +1,16 @@
 import {useSearchParams} from "react-router-dom";
-import {paginationSearchParamSchema} from "@/common/schema/PaginationSearchParamsSchema.ts";
+import {PaginationSearchParamSchema} from "@/common/schema/PaginationSearchParamsSchema.ts";
 import updateSearchParams from "@/common/utility/params/updateSearchParams.ts";
 import {
     PaginationParamValues,
     UsePaginationSearchParamsReturn
 } from "@/common/hooks/params/usePaginationSearchParams.types.ts";
 
-/**
- * Default pagination values used when no valid search parameters are found.
- */
-const DEFAULT_VALUES: PaginationParamValues = { page: 1, perPage: 10 };
+const defaultPage = import.meta.env.VITE_PAGINATION_PAGE_DEFAULT;
+const defaultPerPage = import.meta.env.VITE_PAGINATION_PER_PAGE_DEFAULT;
 
-/**
- * React hook for reading, validating, and updating pagination parameters (`page` and `perPage`)
- * from the URL search parameters.
- *
- * ### Behavior
- * - Reads the current `page` and `perPage` values from `window.location.search`.
- * - Validates the values against a Zod schema (`paginationSearchParamSchema`).
- * - Returns validated values or falls back to provided `presetValues` / defaults.
- * - Provides setter functions for updating `page` or `perPage` in the URL
- *   while preserving other existing query parameters.
- *
- * ### Fallback order
- * 1. Valid values from URL search parameters
- * 2. `presetValues` passed to the hook
- * 3. Internal `DEFAULT_VALUES`
- *
- * @param presetValues Optional pagination values to use when URL parameters are missing or invalid.
- *
- * @returns {@link UsePaginationSearchParamsReturn} — An object containing the current values,
- * setters, and status flags for pagination search parameters.
- */
+const DEFAULT_VALUES: PaginationParamValues = { page: defaultPage, perPage: defaultPerPage };
+
 export default function usePaginationSearchParams(
     presetValues: PaginationParamValues = DEFAULT_VALUES
 ): UsePaginationSearchParamsReturn {
@@ -41,10 +20,10 @@ export default function usePaginationSearchParams(
         perPage: searchParams.get("perPage")
     };
 
-    const {data, success} = paginationSearchParamSchema.safeParse(rawData);
+    const {data, success} = PaginationSearchParamSchema.safeParse(rawData);
     const hasAnyParam = rawData.page !== null || rawData.perPage !== null;
 
-    const {page, perPage} = success ? data : presetValues;
+    const {page = defaultPage, perPage = defaultPerPage} = success ? data : presetValues;
 
     const setParam = (key: keyof PaginationParamValues, value: number | string) => {
         setSearchParams(updateSearchParams({searchParams, updateValues: {[key]: value.toString()}}));
