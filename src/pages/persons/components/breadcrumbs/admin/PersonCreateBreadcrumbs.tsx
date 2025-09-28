@@ -6,7 +6,7 @@ import {
     BreadcrumbList, BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import {Link} from "react-router-dom";
+import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 
 const PersonCreateBreadcrumbs: FC = () => {
     return (
@@ -14,7 +14,12 @@ const PersonCreateBreadcrumbs: FC = () => {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to="/admin/persons">All Persons</Link>
+                        <LoggedLink
+                            to="/admin/persons"
+                            component={PersonCreateBreadcrumbs.name}
+                        >
+                            All Persons
+                        </LoggedLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
