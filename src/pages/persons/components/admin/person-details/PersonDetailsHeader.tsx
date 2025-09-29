@@ -9,25 +9,32 @@ import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarIm
 import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
 import PersonDetailsOptions
     from "@/pages/persons/components/admin/person-details/PersonDetailsOptions.tsx";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 
 type HeaderProps = {
+    /** The person whose details are displayed in this header. */
     person: Person | PersonDetails;
-}
+};
 
+/**
+ * Header component for the Person Details page.
+ *
+ * @remarks
+ * Displays the person's avatar, name, and date of birth, along with
+ * a dropdown menu for actions like editing, uploading an avatar,
+ * or deleting the person.
+ *
+ * - Uses `CloudinaryAvatarImage` to show the person's profile image.
+ * - Uses `HeaderTitle` and `HeaderDescription` for name and formatted DOB.
+ * - Includes `PersonDetailsOptions` to trigger context-based UI actions.
+ *
+ * @example
+ * ```tsx
+ * <PersonDetailsHeader person={person} />
+ * ```
+ */
 const PersonDetailsHeader: FC<HeaderProps> = ({person}) => {
-    const navigate = useLoggedNavigate();
-
     const {name, dob, profileImage} = person;
     const formattedDOB = format(dob, "dd MMM, yyyy");
-
-    const onDelete = () => {
-        navigate({
-            to: "/admin/persons",
-            component: PersonDetailsHeader.name,
-            message: "Navigation on person deletion."
-        });
-    }
 
     return (
         <header className={cn("flex justify-between items-center")}>
@@ -40,7 +47,7 @@ const PersonDetailsHeader: FC<HeaderProps> = ({person}) => {
             </section>
 
             <section className="flex justify-end items-center space-x-2">
-                <PersonDetailsOptions person={person} onDeleteProps={{onSubmitSuccess: onDelete}}>
+                <PersonDetailsOptions>
                     <HeaderButton variant="outline">
                         <EllipsisIcon />
                     </HeaderButton>
