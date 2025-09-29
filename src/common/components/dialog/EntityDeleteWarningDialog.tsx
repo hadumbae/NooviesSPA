@@ -1,66 +1,58 @@
-import {FC, PropsWithChildren} from 'react';
+import {FC, ReactNode, useState} from 'react';
 import {
     AlertDialog, AlertDialogAction, AlertDialogCancel,
     AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
     AlertDialogHeader, AlertDialogTitle,
     AlertDialogTrigger
 } from "@/common/components/ui/alert-dialog.tsx";
+import {PresetOpenState} from "@/common/type/OpenStateProps.ts";
 
 /**
- * Props for the {@link ScreenDeleteWarningDialog} component.
+ * Props for the `EntityDeleteWarningDialog` component.
+ *
+ * @property children - The element that triggers the dialog when clicked.
+ * @property title - Optional custom title for the dialog.
+ * @property description - Optional custom description for the dialog.
+ * @property deleteResource - Callback function invoked when the "Delete" action is confirmed.
+ * @property presetOpen - Optional controlled open state for the dialog.
+ * @property setPresetOpen - Optional setter for controlled open state.
  */
-type DialogProps = {
-    /**
-     * Optional custom title for the dialog.
-     * Defaults to `"Proceed to delete resource?"` if not provided.
-     */
+type DialogProps = PresetOpenState & {
+    children?: ReactNode;
     title?: string;
-
-    /**
-     * Optional custom description for the dialog.
-     * Defaults to a warning message if not provided.
-     */
     description?: string;
-
-    /**
-     * Callback function executed when the user confirms deletion.
-     */
     deleteResource: () => void;
 };
 
 /**
- * A reusable warning dialog for confirming deletion actions.
- * Displays a confirmation message with optional title and description,
- * and calls `deleteResource` when the user confirms.
+ * A reusable confirmation dialog for deleting entities.
  *
- * @component
+ * @remarks
+ * This component renders a modal dialog asking the user to confirm deletion of a resource.
+ * - Uses `AlertDialog` components for accessibility and consistent styling.
+ * - Supports optional preset open state (`presetOpen` / `setPresetOpen`) for controlled usage.
+ * - Defaults to generic title and description if not provided via props.
+ *
+ * The "Delete" button executes the provided `deleteResource` callback, while "Cancel" closes the dialog.
+ *
  * @example
  * ```tsx
- * <ScreenDeleteWarningDialog deleteResource={() => handleDelete()}>
- *   <button>Delete Screen</button>
- * </ScreenDeleteWarningDialog>
+ * <EntityDeleteWarningDialog deleteResource={handleDelete}>
+ *   <Button>Delete Item</Button>
+ * </EntityDeleteWarningDialog>
  * ```
- *
- * @param {PropsWithChildren<DialogProps>} params - The props object including optional children.
- * @param {React.ReactNode} [params.children] - Optional trigger element (defaults to "Delete" button if not provided).
- * @param {string} [params.title] - Optional dialog title.
- * @param {string} [params.description] - Optional dialog description.
- * @param {() => void} params.deleteResource - Function to execute on deletion confirmation.
- *
- * @returns {JSX.Element} A confirmation dialog for deletion.
  */
-const EntityDeleteWarningDialog: FC<PropsWithChildren<DialogProps>> = (params) => {
-    const {children, title, description, deleteResource} = params;
+const EntityDeleteWarningDialog: FC<DialogProps> = (props) => {
+    const {children, title, description, deleteResource, presetOpen, setPresetOpen} = props;
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const dialogTitle = title ??
-        "Proceed to delete resource?";
-
+    const dialogTitle = title ?? "Proceed to delete resource?";
     const dialogDescription = description ??
         "This action cannot be reversed. Related data will also be removed. Do you want to proceed?";
 
     return (
-        <AlertDialog>
-            <AlertDialogTrigger asChild>{children ? children : "Delete"}</AlertDialogTrigger>
+        <AlertDialog open={presetOpen ?? isOpen} onOpenChange={setPresetOpen ?? setIsOpen}>
+            <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>{dialogTitle}</AlertDialogTitle>
