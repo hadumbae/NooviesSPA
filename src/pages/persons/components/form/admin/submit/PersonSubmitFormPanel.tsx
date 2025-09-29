@@ -1,6 +1,5 @@
 import {FC, ReactNode, useState} from 'react';
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
-import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
+import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 import {PersonFormValues} from "@/pages/persons/schema/forms/PersonForm.types.ts";
 import {
     Sheet,
@@ -12,68 +11,47 @@ import {
 } from "@/common/components/ui/sheet.tsx";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import PersonSubmitFormContainer from "@/pages/persons/components/form/admin/submit/PersonSubmitFormContainer.tsx";
+import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
+import {PresetOpenState} from "@/common/type/OpenStateProps.ts";
 
 /**
- * Props controlling whether the form is in edit mode or create mode.
+ * Props for `PersonSubmitFormPanel`.
  *
- * - `isEditing: true` — Editing an existing person; must provide `person`.
- * - `isEditing?: false` — Creating a new person; `person` must be omitted.
+ * @property children - Optional element that triggers the slide-over panel.
+ * @property className - Optional CSS class applied to the form container.
+ * @property presetOpen - Optional controlled open state for the panel.
+ * @property setPresetOpen - Optional setter for controlled open state.
+ * @property onSubmitSuccess - Optional callback executed when the form is successfully submitted.
+ * @property props - Other props required for `PersonSubmitFormContainer`, including `isEditing`, `entity`, and `presetValues`.
  */
-type EditingProps =
-    | { isEditing: true; person: Person | PersonDetails }
-    | { isEditing?: false; person?: never };
-
-/**
- * Props for the `PersonSubmitFormPanel` component.
- *
- * @remarks
- * This panel wraps a person submission form in a sheet UI for either creating
- * or editing a person's details. It handles form state, validation, and submit callbacks.
- */
-type FormPanelProps =
-    Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> &
-    EditingProps & {
-    /**
-     * Optional trigger element to open the sheet. Defaults to `"Open"` if not provided.
-     */
+type FormPanelProps = FormContainerProps<Person, Person, PersonFormValues> & PresetOpenState & {
     children?: ReactNode;
-
-    /**
-     * Callback invoked when the form is successfully submitted.
-     * @param person - The created or updated `Person` object.
-     */
-    onSubmitSuccess?: (person: Person) => void;
-
-    /**
-     * Callback invoked if the form submission fails.
-     * @param error - The error thrown during submission.
-     */
-    onSubmitError?: (error: unknown) => void;
-
-    /**
-     * Optional initial values to prefill in the form fields.
-     */
-    presetValues?: Partial<PersonFormValues>;
-
-    /**
-     * Keys of form fields to disable.
-     */
-    disableFields?: (keyof PersonFormValues)[];
-
-    /**
-     * Optional class names for styling the panel container.
-     */
     className?: string;
 };
 
 /**
- * A sheet-based panel containing the `PersonSubmitFormContainer` for submitting or editing
- * personal details. Can be toggled open/closed via a trigger element.
+ * Slide-over panel for creating or updating a person's details.
  *
- * @param params - {@link FormPanelProps}
+ * @remarks
+ * - Uses `Sheet` to provide a slide-over UI panel with header and description.
+ * - Wraps `PersonSubmitFormContainer` inside a scrollable area.
+ * - Supports controlled or uncontrolled open state using `presetOpen` / `setPresetOpen`.
+ * - Automatically closes the panel upon successful form submission and calls `onSubmitSuccess`.
+ * - Adjusts header title and description based on whether the form is in edit mode.
+ *
+ * @example
+ * ```tsx
+ * <PersonSubmitFormPanel
+ *   isEditing={false}
+ *   presetValues={{name: "John Doe"}}
+ *   onSubmitSuccess={(person) => console.log("Submitted", person)}
+ * >
+ *   <Button>Open Form</Button>
+ * </PersonSubmitFormPanel>
+ * ```
  */
 const PersonSubmitFormPanel: FC<FormPanelProps> = (params) => {
-    const {children, onSubmitSuccess, ...props} = params;
+    const {children, onSubmitSuccess, presetOpen, setPresetOpen, ...props} = params;
     const {isEditing} = props;
 
     const [open, setOpen] = useState<boolean>(false);
@@ -81,14 +59,19 @@ const PersonSubmitFormPanel: FC<FormPanelProps> = (params) => {
     const sheetTitle = `${isEditing ? "Update" : "Submit"} Personal Details`;
     const sheetDescription = `${isEditing ? "Update" : "Submit"} personal details by using the form.`;
 
+    /**
+     * Closes the panel and triggers the external success callback.
+     *
+     * @param person - The person entity returned from a successful form submission.
+     */
     const closeOnSubmit = (person: Person) => {
         setOpen(false);
         onSubmitSuccess?.(person);
     }
 
     return (
-        <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>{children ? children : "Open"}</SheetTrigger>
+        <Sheet open={presetOpen ?? open} onOpenChange={setPresetOpen ?? setOpen}>
+            <SheetTrigger asChild>{children}</SheetTrigger>
             <SheetContent className="flex flex-col">
                 <SheetHeader>
                     <SheetTitle>{sheetTitle}</SheetTitle>
@@ -96,7 +79,10 @@ const PersonSubmitFormPanel: FC<FormPanelProps> = (params) => {
                 </SheetHeader>
 
                 <ScrollArea className="flex-grow px-1">
-                    <PersonSubmitFormContainer {...props} onSubmitSuccess={closeOnSubmit} />
+                    <PersonSubmitFormContainer
+                        {...props}
+                        onSubmitSuccess={closeOnSubmit}
+                    />
                 </ScrollArea>
             </SheetContent>
         </Sheet>
