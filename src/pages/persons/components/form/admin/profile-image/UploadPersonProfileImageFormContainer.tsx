@@ -10,44 +10,46 @@ import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultP
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 
 /**
- * Props for the {@link UploadPersonProfileImageFormContainer} component.
+ * Props for `UploadPersonProfileImageFormContainer`.
  *
- * Extends {@link FormMutationOnSubmitParams} but overrides `onSubmitSuccess` and `onSubmitError`
- * to allow type-safe handling of `Person` results and errors.
+ * @property personID - The ID of the person whose profile image will be updated.
+ * @property className - Optional CSS class to apply to the form view.
+ * @property mutationProps - Optional form mutation callbacks (success, error, etc.).
  */
-type ContainerProps = Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
-    /**
-     * The ObjectId of the person whose profile image is being uploaded.
-     */
+type ContainerProps = FormMutationOnSubmitParams<Person> & {
     personID: ObjectId;
-
-    /**
-     * Callback invoked after a successful image upload.
-     * @param person - The updated `Person` object returned by the server.
-     */
-    onSubmitSuccess?: (person: Person) => void;
-
-    /**
-     * Callback invoked if an error occurs during image upload.
-     * @param error - The error object encountered.
-     */
-    onSubmitError?: (error: unknown) => void;
+    className?: string;
 };
 
 /**
- * Container component for submitting a new profile image for a person.
+ * Container component for uploading a person's profile image.
  *
- * Handles:
- * - Creating a form instance via `usePersonProfileImageSubmitForm`.
- * - Performing the submission mutation via `usePersonProfileImageSubmitMutation`.
- * - Passing form state and mutation handlers to {@link UploadPersonProfileImageFormView}.
+ * @remarks
+ * - Sets up the form using `usePersonProfileImageSubmitForm`.
+ * - Connects the form to the mutation hook `usePersonProfileImageSubmitMutation`.
+ * - Passes the form instance, submit handler, and mutation object to the presentational component
+ *   `UploadPersonProfileImageFormView`.
+ * - Handles submitting form values to the mutation for updating the person's profile image.
  *
- * @param props - {@link ContainerProps}
+ * @example
+ * ```tsx
+ * <UploadPersonProfileImageFormContainer
+ *   personID={person.id}
+ *   onSuccess={() => console.log("Upload successful")}
+ * />
+ * ```
  */
-const UploadPersonProfileImageFormContainer: FC<ContainerProps> = ({personID, ...mutationProps}) => {
+const UploadPersonProfileImageFormContainer: FC<ContainerProps> = (props) => {
+    const {personID, className, ...mutationProps} = props;
+
     const form = usePersonProfileImageSubmitForm();
     const mutation = usePersonProfileImageSubmitMutation({_id: personID, form, ...mutationProps});
 
+    /**
+     * Handles form submission by passing the values to the mutation.
+     *
+     * @param values - The values submitted from the profile image form.
+     */
     const submitImage = (values: PersonProfileImageFormValues) => {
         mutation.mutate(values as PersonProfileImageForm);
     }
@@ -57,6 +59,7 @@ const UploadPersonProfileImageFormContainer: FC<ContainerProps> = ({personID, ..
             form={form}
             submitHandler={submitImage}
             mutation={mutation}
+            className={className}
         />
     );
 };

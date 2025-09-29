@@ -6,40 +6,32 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {Loader} from "lucide-react";
 import HookFormFileInput from "@/common/components/forms/HookFormFileInput.tsx";
 import {PersonProfileImageForm, PersonProfileImageFormValues} from "@/pages/persons/schema/forms/PersonForm.types.ts";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
- * Props for {@link UploadPersonProfileImageFormView}.
+ * Props for `UploadPersonProfileImageFormView`.
  *
- * @template TForm - The type of the react-hook-form instance. Defaults to {@link UseFormReturn} for {@link PersonProfileImageFormValues}.
+ * @template TForm - The form instance type returned by `react-hook-form`.
+ * @property form - The `react-hook-form` instance controlling the form state.
+ * @property submitHandler - Callback function executed on form submission.
+ * @property mutation - Mutation object from `react-query` to track submission status.
+ * @property className - Optional CSS class to apply to the form container.
  */
 type ViewProps<TForm = UseFormReturn<PersonProfileImageFormValues>> = {
-    /**
-     * The react-hook-form instance controlling the profile image form.
-     */
     form: TForm;
-
-    /**
-     * Handler invoked when the form is submitted.
-     *
-     * @param values - The current form values of type {@link PersonProfileImageFormValues}.
-     */
     submitHandler: SubmitHandler<PersonProfileImageFormValues>;
-
-    /**
-     * The mutation object returned by the profile image submission hook.
-     * Used to determine submission state (`isPending`) and trigger mutations.
-     */
     mutation: UseMutationResult<any, unknown, PersonProfileImageForm>;
+    className?: string;
 };
 
 /**
- * Form view for uploading a profile image for a `Person`.
+ * Presentational form component for uploading a person's profile image.
  *
- * Renders:
- * - A file input for the profile image.
- * - A submit button that displays a loading spinner while the mutation is pending.
- *
- * @param props - {@link ViewProps}
+ * @remarks
+ * - Renders a file input for the profile image using `HookFormFileInput`.
+ * - Includes a submit button that shows a spinner when the mutation is pending.
+ * - Uses `react-hook-form` for form state management and validation.
+ * - Integrates with a `react-query` mutation to submit the form data.
  *
  * @example
  * ```tsx
@@ -50,16 +42,27 @@ type ViewProps<TForm = UseFormReturn<PersonProfileImageFormValues>> = {
  * />
  * ```
  */
-const UploadPersonProfileImageFormView: FC<ViewProps> = ({form, submitHandler, mutation}) => {
-    const {isPending} = mutation;
+const UploadPersonProfileImageFormView: FC<ViewProps> = (props) => {
+    const {form, submitHandler, className, mutation: {isPending}} = props;
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(submitHandler)} className="space-y-4">
+            <form
+                onSubmit={form.handleSubmit(submitHandler)}
+                className={cn("space-y-4", className)}
+            >
+                <HookFormFileInput
+                    name="profileImage"
+                    label="Profile Image"
+                    control={form.control}
+                />
 
-                <HookFormFileInput name="profileImage" label="Profile Image" control={form.control} />
-
-                <Button className="w-full bg-primary" type="submit" variant="default" disabled={isPending} >
+                <Button
+                    className="w-full bg-primary"
+                    type="submit"
+                    variant="default"
+                    disabled={isPending}
+                >
                     {isPending ? <Loader className="animate-spin"/> : "Submit"}
                 </Button>
             </form>
