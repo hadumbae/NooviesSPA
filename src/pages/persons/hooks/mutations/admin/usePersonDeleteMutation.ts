@@ -2,72 +2,78 @@ import {toast} from "react-toastify";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {OnDeleteMutationParams} from "@/common/type/form/FormMutationResultParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
 
-type MutationParams = Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
-    /**
-     * Optional callback invoked after a successful delete mutation.
-     */
-    onSubmitSuccess?: () => void;
-
-    /**
-     * Optional callback invoked if the delete mutation fails.
-     * @param error - The error object or value returned from the mutation.
-     */
-    onSubmitError?: (error: unknown) => void;
-};
-
 /**
- * Custom React Query hook to perform a deletion mutation for a person entity.
+ * Custom React hook to delete a person using a mutation.
  *
- * Wraps `PersonRepository.delete` with mutation lifecycle handlers:
- * - Displays success/error toasts.
- * - Invalidates relevant queries on success.
- * - Calls optional callbacks for success and error handling.
+ * @remarks
+ * - Uses `react-query`'s `useMutation` to perform the delete operation.
+ * - Handles toast notifications for success and error states.
+ * - Invalidates relevant queries after a successful deletion.
+ * - Executes optional callbacks provided via `params`.
  *
- * @param {MutationParams} params - Parameters controlling success/error callbacks and messages.
- * @param {() => void} [params.onSubmitSuccess] - Callback fired after successful deletion.
- * @param {(error: unknown) => void} [params.onSubmitError] - Callback fired on deletion error.
- * @param {string} [params.successMessage] - Optional success toast message override.
- * @param {string} [params.errorMessage] - Optional error toast message override.
+ * @param params - Callback handlers and optional messages for success or error.
+ * @param params.onDeleteSuccess - Optional callback executed after successful deletion.
+ * @param params.onDeleteError - Optional callback executed when deletion fails.
+ * @param params.successMessage - Optional custom message for a successful deletion toast.
+ * @param params.errorMessage - Optional custom message for a failed deletion toast.
  *
- * @returns {import("@tanstack/react-query").UseMutationResult<void, unknown, {_id: ObjectId}, unknown>} React Query mutation object.
+ * @returns A `useMutation` result object from `react-query` for deleting a person.
  *
  * @example
  * ```ts
- * const { mutate: deletePerson } = usePersonDeleteMutation({
- *   onSubmitSuccess: () => console.log("Deleted!"),
- *   onSubmitError: (err) => console.error(err),
+ * const { mutate: deletePerson, isLoading } = usePersonDeleteMutation({
+ *   onDeleteSuccess: () => console.log("Person deleted"),
+ *   successMessage: "Successfully removed person!",
  * });
  *
- * deletePerson({ _id: somePersonId });
+ * deletePerson({ _id: person.id });
  * ```
  */
-export default function usePersonDeleteMutation(params: MutationParams) {
-    const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
+export default function usePersonDeleteMutation(params: OnDeleteMutationParams) {
+    const {onDeleteSuccess, onDeleteError, successMessage, errorMessage} = params;
 
     const queryClient = useQueryClient();
 
+    /**
+     * Performs the deletion of a person by ID.
+     *
+     * @param _id - The ID of the person to delete.
+     */
     const deletePerson = async ({_id}: {_id: ObjectId}) => {
-        const action = () => PersonRepository.delete({_id});
         await handleMutationResponse({
-            action,
+            action: () => PersonRepository.delete({_id}),
             errorMessage: "Failed to delete person data. Please try again.",
         });
     }
 
+    /**
+     * Handles successful deletion.
+     * - Shows a success toast.
+     * - Invalidates the person queries in react-query cache.
+     * - Calls the optional `onDeleteSuccess` callback.
+     */
     const onSuccess = async () => {
         toast.success(successMessage ?? "Person deleted successfully.");
         await queryClient.invalidateQueries({queryKey: ["fetch_persons_by_query"], exact: false});
-        onSubmitSuccess && onSubmitSuccess();
+        onDeleteSuccess?.();
     }
 
+    /**
+     * Handles deletion errors.
+     * - Shows an error toast.
+     * - Calls `handleMutationResponseError`.
+     * - Calls the optional `onDeleteError` callback.
+     *
+     * @param error - The error thrown during deletion.
+     */
     const onError = (error: unknown) => {
         toast.error(errorMessage ?? "Failed to delete person. Please try again.");
         handleMutationResponseError({error, displayMessage: errorMessage});
-        onSubmitError && onSubmitError(error);
+        onDeleteError?.(error);
     }
 
     return useMutation({
