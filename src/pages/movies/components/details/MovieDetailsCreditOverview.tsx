@@ -1,11 +1,12 @@
 import {FC} from 'react';
-import {MovieCreditDetails, MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
 import getInitials from "@/common/utility/getInitials.ts";
 import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
+import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.types.ts";
 
 /**
  * Props for the `MovieDetailsCreditOverview` component.

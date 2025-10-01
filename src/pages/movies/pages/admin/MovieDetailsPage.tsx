@@ -14,12 +14,10 @@ import useFetchMovieCredits from "@/pages/moviecredit/hooks/queries/useFetchMovi
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
 import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-import {
-    MovieCreditDetailsArraySchema,
-} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
-import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import MovieDetailsCreditOverview from "@/pages/movies/components/details/MovieDetailsCreditOverview.tsx";
+import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
+import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.types.ts";
 
 type MovieWithData = {
     movie: MovieDetails,

@@ -17,16 +17,12 @@ import CombinedValidatedQueryBoundary from "@/common/components/query/combined/C
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
 import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
-import {
-    PaginatedMovieCreditDetailsSchema,
-} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
-import {
-    PaginatedMovieCreditDetails
-} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import {MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import TextCollapsible from "@/common/components/TextCollapsible.tsx";
 import MoviePersonDetailsCard from "@/pages/movies/components/admin/credits/cards/MoviePersonDetailsCard.tsx";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+import {PaginatedMovieCreditDetailsSchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
+import {PaginatedMovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.types.ts";
 
 /**
  * Props for {@link MoviePeoplePage}.

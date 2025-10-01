@@ -8,51 +8,59 @@ import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/Po
 import { MovieSchema } from "@/pages/movies/schema/movie/Movie.schema.ts";
 import { PersonSchema } from "@/pages/persons/schema/person/Person.schema.ts";
 import { RoleTypeSchema } from "@/pages/roletype/schema/model/RoleType.schema.ts";
-import { generatePaginationSchema } from "@/common/schema/helpers/zodHelperFunctions.ts";
-import generateArraySchema from "@/common/utility/validation/generateArraySchema.ts";
 import { UndefinedForCrewSchema } from "@/pages/moviecredit/schemas/MovieCreditCrewSchema.ts";
 
 /**
- * Base schema for a movie credit (either cast or crew).
+ * Base schema for a movie credit, either cast or crew.
  *
  * @remarks
- * - Defines shared properties between cast and crew.
- * - Used as a foundation for discriminated unions.
+ * - Contains properties common to both cast and crew credits.
+ * - Serves as a foundation for discriminated unions.
  */
 export const MovieCreditBaseSchema = z.object({
     /** Unique identifier of the movie credit */
     _id: IDStringSchema.readonly(),
-    /** Department of the credit, e.g., CAST or CREW */
+
+    /** Department of the credit (CAST or CREW) */
     department: RoleTypeDepartmentEnumSchema,
-    /** Display name of the role, optional; trimmed and max 150 characters */
+
+    /** Display name of the role, optional; max 150 characters */
     displayRoleName: preprocessEmptyStringToUndefined(
         NonEmptyStringSchema.max(150, "Must be 150 characters or less.").optional()
     ),
-    /** Name used in credits, optional; trimmed and max 150 characters */
+
+    /** Name used in credits, optional; max 150 characters */
     creditedAs: preprocessEmptyStringToUndefined(
         NonEmptyStringSchema.max(150, "Must be 150 characters or less.").optional()
     ),
+
     /** Whether the credit is uncredited; optional boolean */
     uncredited: RequiredBoolean.optional(),
+
     /** Notes about the credit; optional nullable string */
     notes: NonEmptyStringSchema.nullable().optional(),
+
     /** ID of the associated movie */
     movie: IDStringSchema,
+
     /** ID of the associated person */
     person: IDStringSchema,
+
     /** ID of the role type */
     roleType: IDStringSchema,
 });
 
 /**
- * Schema for crew credits.
+ * Schema representing crew credits.
  *
  * @remarks
- * - Extends the base credit schema.
+ * - Extends {@link MovieCreditBaseSchema}.
  * - All cast-specific fields are set to undefined for crew.
  */
-const CrewSchema = MovieCreditBaseSchema.extend({
+export const MovieCreditCrewSchema = MovieCreditBaseSchema.extend({
     department: z.literal("CREW"),
+
+    /** Cast-specific properties are undefined for crew */
     billingOrder: UndefinedForCrewSchema,
     characterName: UndefinedForCrewSchema,
     isPrimary: UndefinedForCrewSchema,
@@ -63,17 +71,25 @@ const CrewSchema = MovieCreditBaseSchema.extend({
 });
 
 /**
- * Schema for cast credits.
+ * Schema representing cast credits.
  *
  * @remarks
- * - Extends the base credit schema.
+ * - Extends {@link MovieCreditBaseSchema}.
  * - Includes cast-specific fields like characterName, billingOrder, etc.
  */
-const CastSchema = MovieCreditBaseSchema.extend({
+export const MovieCreditCastSchema = MovieCreditBaseSchema.extend({
     department: z.literal("CAST"),
+
+    /** Character name for the role */
     characterName: NonEmptyStringSchema,
+
+    /** Billing order of the cast member; optional */
     billingOrder: PositiveNumberSchema.optional(),
+
+    /** Whether the role is primary */
     isPrimary: RequiredBoolean,
+
+    /** Flags indicating specific role properties */
     voiceOnly: RequiredBoolean,
     cameo: RequiredBoolean,
     motionCapture: RequiredBoolean,
@@ -81,45 +97,63 @@ const CastSchema = MovieCreditBaseSchema.extend({
 });
 
 /**
- * Discriminated union of cast and crew credits.
+ * Discriminated union of cast and crew movie credits.
  *
  * @remarks
- * - Uses `department` as the discriminator.
+ * - Allows validation of a credit as either cast or crew based on the `department` field.
  */
-export const MovieCreditSchema = z.discriminatedUnion("department", [CrewSchema, CastSchema]);
+export const MovieCreditSchema = z.discriminatedUnion("department", [
+    MovieCreditCrewSchema,
+    MovieCreditCastSchema,
+]);
 
-/** Paginated list of movie credits */
-export const PaginatedMovieCreditSchema = generatePaginationSchema(MovieCreditSchema);
-
-/** Array of movie credits */
-export const MovieCreditArraySchema = generateArraySchema(MovieCreditSchema);
-
-/** Lazy-loaded references for detailed schemas */
+/**
+ * Extension of movie credit schemas with detailed object references.
+ *
+ * @remarks
+ * - Replaces IDs with full objects for `movie`, `person`, and `roleType`.
+ * - Useful for returning fully populated details in API responses.
+ */
 const detailsExtension = {
-    /** Full movie object for detailed view */
     movie: z.lazy(() => MovieSchema),
-    /** Full person object for detailed view */
     person: z.lazy(() => PersonSchema),
-    /** Full role type object for detailed view */
     roleType: z.lazy(() => RoleTypeSchema),
 };
 
-/** Crew and cast detailed schemas with full references */
-const sharedDetailsSchemas = [
-    CrewSchema.extend(detailsExtension),
-    CastSchema.extend(detailsExtension),
+const detailsOptions = [
+    MovieCreditCrewSchema.extend(detailsExtension),
+    MovieCreditCastSchema.extend(detailsExtension),
 ] as const;
 
 /**
- * Discriminated union of detailed cast and crew credits.
+ * Schema for movie credit details including populated `movie`, `person`, and `roleType`.
+ */
+export const MovieCreditDetailsSchema = z.discriminatedUnion("department", detailsOptions);
+
+/**
+ * Extension for movie credit details excluding person details.
  *
  * @remarks
- * - Includes full nested objects for movie, person, and role type.
+ * - `person` remains as an ID while `movie` and `roleType` are populated.
  */
-export const MovieCreditDetailsSchema = z.discriminatedUnion("department", sharedDetailsSchemas);
+const detailsExceptPersonExtension = {
+    person: IDStringSchema,
+    movie: z.lazy(() => MovieSchema),
+    roleType: z.lazy(() => RoleTypeSchema),
+};
 
-/** Paginated detailed movie credits */
-export const PaginatedMovieCreditDetailsSchema = generatePaginationSchema(MovieCreditDetailsSchema);
+const detailsExceptPersonOptions = [
+    MovieCreditCrewSchema.extend(detailsExceptPersonExtension),
+    MovieCreditCastSchema.extend(detailsExceptPersonExtension),
+] as const;
 
-/** Array of detailed movie credits */
-export const MovieCreditDetailsArraySchema = generateArraySchema(MovieCreditDetailsSchema);
+/**
+ * Schema for movie credit details excluding the person object.
+ *
+ * @remarks
+ * - Useful when you want full movie and roleType details but only a reference ID for the person.
+ */
+export const MovieCreditDetailsExceptPersonSchema = z.discriminatedUnion(
+    "department",
+    detailsExceptPersonOptions
+);
