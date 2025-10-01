@@ -53,10 +53,12 @@ type PersonSubmitParams = {
 export default function usePersonSubmitForm(params?: PersonSubmitParams): UseFormReturn<PersonFormValues> {
     const {presetValues = {}, person} = params || {};
 
+    const personDate = person ? person.dob.toISOString().split("T")[0] : null
+
     const defaultValues: PersonFormValues = {
         name: getDefaultValue(presetValues.name, person?.name, "")!,
         biography: getDefaultValue(presetValues.biography, person?.biography, "")!,
-        dob: getDefaultValue(presetValues.dob, person?.dob, "")!,
+        dob: getDefaultValue(presetValues.dob, personDate, "")!,
         nationality: getDefaultValue(presetValues.nationality, person?.nationality, ""),
     };
 
