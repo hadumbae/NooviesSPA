@@ -47,12 +47,17 @@ type FormPanelProps = FormMutationOnSubmitParams<Person> & PresetOpenState & {
  * ```
  */
 const UploadPersonProfileImageFormPanel: FC<FormPanelProps> = (props) => {
-    const {children, className, personID, presetOpen, setPresetOpen} = props;
+    const {children, className, personID, presetOpen, setPresetOpen, onSubmitSuccess, ...formProps} = props;
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const sheetTitle = "Upload Profile Image";
     const sheetDescription = "Upload your profile images here. Select the image and hit the `Upload` button.";
+
+    const closeOnSubmit = (person: Person) => {
+        setPresetOpen ? setPresetOpen(false) : setIsOpen(false);
+        onSubmitSuccess?.(person);
+    }
 
     return (
         <Sheet open={presetOpen ?? isOpen} onOpenChange={setPresetOpen ?? setIsOpen}>
@@ -70,6 +75,8 @@ const UploadPersonProfileImageFormPanel: FC<FormPanelProps> = (props) => {
                     <UploadPersonProfileImageFormContainer
                         personID={personID}
                         className={className}
+                        {...formProps}
+                        onSubmitSuccess={closeOnSubmit}
                     />
                 </ScrollArea>
             </SheetContent>
