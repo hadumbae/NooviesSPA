@@ -1,6 +1,7 @@
 import {MovieCreditDetailsExceptPersonSchema} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {RoleTypeDepartmentEnumSchema} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 
 /**
  * Schema representing a group of movie credits for a person, organized by role type.
@@ -30,6 +31,8 @@ export const MovieCreditDetailsExceptPersonByRoleSchema = z.object({
      * Maximum length of 150 characters.
      */
     roleName: NonEmptyStringSchema.max(150, "Must be 150 characters or less."),
+
+    department: RoleTypeDepartmentEnumSchema,
 
     /**
      * Array of movie credits for this role.
