@@ -28,7 +28,9 @@ import {
 import {
     MovieCreditDetailsExceptPersonGroupedByRoleArray
 } from "@/pages/moviecredit/schemas/model/MovieCreditGroup.types.ts";
-import PersonDetailsCreditOverview from "@/pages/persons/components/admin/person-details/credit-overview/PersonDetailsCreditOverview.tsx";
+import PersonDetailsCreditOverview
+    from "@/pages/persons/components/admin/person-details/credit-overview/PersonDetailsCreditOverview.tsx";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 type QueryData = {
     /** Detailed information about the person fetched from the backend */
@@ -111,16 +113,21 @@ const PersonDetailsPage: FC = () => {
                                 <PersonDetailsBreadcrumbs name={name}/>
                                 <PersonDetailsHeader person={person}/>
 
-                                <PageSection srTitle="Personal Details">
-                                    <PersonDetailsCard person={person}/>
-                                </PageSection>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <section>
+                                        <SectionHeader>Personal Details</SectionHeader>
 
-                                <PageSection srTitle="Movie Credits" title="Movie Credits">
-                                    <PersonDetailsCreditOverview
-                                        personName={name}
-                                        creditsByRole={creditsByRole}
-                                    />
-                                </PageSection>
+                                        <PersonDetailsCard person={person}/>
+                                    </section>
+
+                                    <section className="md:col-span-2">
+                                        <SectionHeader>Movie Credits</SectionHeader>
+                                        <PersonDetailsCreditOverview
+                                            personName={name}
+                                            creditsByRole={creditsByRole}
+                                        />
+                                    </section>
+                                </div>
 
                                 {/* Hidden admin sections */}
                                 <PageSection srTitle="Edit Person" className="hidden">
