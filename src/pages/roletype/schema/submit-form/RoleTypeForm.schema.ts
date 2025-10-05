@@ -1,109 +1,121 @@
-import {z} from "zod";
-import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {RoleTypeDepartmentEnumSchema} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import { z } from "zod";
+import { FormStarterValueSchema } from "@/common/schema/form/FormStarterValueSchema.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import { RoleTypeDepartmentEnumSchema } from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {
+    RoleTypeCastCategoryEnumSchema,
+    RoleTypeCrewCategoryEnumSchema,
+} from "@/pages/roletype/schema/enums/RoleTypeCategory.enum.ts";
 
 /**
- * Zod schema for the initial form values when creating or editing a role type.
- *
- * This schema is typically used for UI form state, where all fields may start
- * as "empty" values rather than fully validated ones.
- *
- * Fields:
- * - `roleName`: Starter value for the role name field.
- * - `department`: Starter value for the department field.
- * - `description`: Starter value for the description field.
+ * Schema representing the initial (unvalidated) form values
+ * for creating or editing a role type.
  *
  * @remarks
- * `FormStarterValueSchema` usually represents an "empty" form state,
- * such as `""`, `null`, or `undefined`, before final validation.
- *
- * @example
- * ```ts
- * const starterValues = RoleTypeFormValuesSchema.parse({
- *   roleName: "",
- *   department: "",
- *   description: ""
- * });
- * ```
+ * Used primarily for initializing form states, where all fields
+ * are stored as generic values compatible with form libraries.
  */
 export const RoleTypeFormValuesSchema = z.object({
-    /** Starter value for the role name field. */
+    /** Role name value (may start as an empty string). */
     roleName: FormStarterValueSchema,
 
-    /** Starter value for the department field. */
+    /** Department value (e.g., `"CAST"`, `"CREW"`, or empty before selection). */
     department: FormStarterValueSchema,
 
-    /** Starter value for the description field. */
+    /** Category value corresponding to the selected department. */
+    category: FormStarterValueSchema,
+
+    /** Description value (may start as an empty string). */
     description: FormStarterValueSchema,
 });
 
 /**
- * Zod schema for validated role type form submission.
+ * Base schema for validating form input when creating or editing role types.
  *
- * This schema enforces correct types and constraints for form values
- * after user input, ensuring they match the requirements for a `RoleType`.
+ * @remarks
+ * Shared between cast and crew role forms.
  *
- * Fields:
- * - `roleName`: Required string, max length 150.
- * - `department`: Must be a valid department enum (`"CAST"` or `"CREW"`).
- * - `description`: Optional string, max length 1000. Transformed to
- *   `undefined` if empty or not a string.
- *
- * @example
- * ```ts
- * const formData = RoleTypeFormSchema.parse({
- *   roleName: "Actor",
- *   department: "CAST",
- *   description: "Performs a character in the production."
- * });
- *
- * // ✅ Valid, parsed into strongly typed data
- * ```
- *
- * @example
- * ```ts
- * RoleTypeFormSchema.parse({
- *   roleName: "This is way too long ...", // > 150 chars
- *   department: "ADMIN", // ❌ not allowed
- *   description: null
- * });
- * // Throws ZodError with descriptive validation messages
- * ```
+ * **Validation behavior:**
+ * - `roleName`: Required, non-empty string, max 150 characters.
+ * - `department`: Must be `"CAST"` or `"CREW"`, required.
+ * - `description`: Optional; if empty, transformed to `undefined`.
  */
-export const RoleTypeFormSchema = z.object({
-    /**
-     * Role name, required, must be a non-empty string.
-     *
-     * - Maximum length: 150 characters.
-     * - Error message if too long: `"Must be 150 characters or less."`
-     */
-    roleName: NonEmptyStringSchema
-        .max(150, {message: "Must be 150 characters or less."}),
+const RoleTypeFormBaseSchema = z.object({
+    /** Role name, required, non-empty, max 150 characters. */
+    roleName: NonEmptyStringSchema.max(150, {
+        message: "Must be 150 characters or less.",
+    }),
 
     /**
-     * Department value, required.
+     * Department value.
      *
-     * - Must be `"CAST"` or `"CREW"`.
-     * - Empty string (`""`) is not allowed at validation time.
+     * @remarks
+     * Accepts `"CAST"` or `"CREW"`, required.
+     * Empty string is disallowed and yields `"Required."` message.
      */
     department: z
-        .union([z.literal(""), RoleTypeDepartmentEnumSchema], {message: "Invalid value. Must be a string."})
-        .refine(val => val !== "", {message: "Required."}),
+        .union([z.literal(""), RoleTypeDepartmentEnumSchema], {
+            message: "Invalid value. Must be a string.",
+        })
+        .refine((val) => val !== "", { message: "Required." }),
 
     /**
      * Optional description field.
      *
-     * - Must be a string (if provided).
-     * - Maximum length: 1000 characters.
-     * - Empty string or non-string values are transformed to `undefined`.
+     * @remarks
+     * - Max length 1000 characters.
+     * - Empty strings are transformed to `undefined`.
      */
-    description: z
-        .string({required_error: "Required.", invalid_type_error: "Must be a string."})
-        .max(1000, {message: "Must be 1000 characters or less."})
+    description: NonEmptyStringSchema.max(1000, {
+        message: "Must be 1000 characters or less.",
+    })
         .optional()
         .transform((val) => {
             if (typeof val !== "string" || val === "") return undefined;
             return val;
         }),
 });
+
+/**
+ * Schema for validating crew role form input.
+ *
+ * @remarks
+ * Extends {@link RoleTypeFormBaseSchema} with:
+ * - Fixed `department`: `"CREW"`
+ * - Valid `category`: from {@link RoleTypeCrewCategoryEnumSchema}
+ */
+const RoleTypeFormCrewSchema = RoleTypeFormBaseSchema.extend({
+    /** Department discriminator, fixed to `"CREW"`. */
+    department: z.literal("CREW"),
+
+    /** Crew category selection (e.g., "CINEMATOGRAPHY", "DIRECTION"). */
+    category: RoleTypeCrewCategoryEnumSchema,
+});
+
+/**
+ * Schema for validating cast role form input.
+ *
+ * @remarks
+ * Extends {@link RoleTypeFormBaseSchema} with:
+ * - Fixed `department`: `"CAST"`
+ * - Valid `category`: from {@link RoleTypeCastCategoryEnumSchema}
+ */
+const RoleTypeFormCastSchema = RoleTypeFormBaseSchema.extend({
+    /** Department discriminator, fixed to `"CAST"`. */
+    department: z.literal("CAST"),
+
+    /** Cast category selection (e.g., "MAIN", "SUPPORTING"). */
+    category: RoleTypeCastCategoryEnumSchema,
+});
+
+/**
+ * Discriminated union schema for validating role type form submissions.
+ *
+ * @remarks
+ * Uses the `department` field as the discriminator between
+ * {@link RoleTypeFormCastSchema} and {@link RoleTypeFormCrewSchema}.
+ */
+export const RoleTypeFormSchema = z.discriminatedUnion("department", [
+    RoleTypeFormCrewSchema,
+    RoleTypeFormCastSchema,
+]);

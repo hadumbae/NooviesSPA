@@ -1,36 +1,22 @@
-import {z} from "zod";
-import {RoleTypeDepartmentEnumSchema} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
+import { z } from "zod";
+import { RoleTypeDepartmentEnumSchema } from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
+import { generatePaginationSchema } from "@/common/schema/helpers/zodHelperFunctions.ts";
+import {
+    RoleTypeCastCategoryEnumSchema,
+    RoleTypeCrewCategoryEnumSchema,
+} from "@/pages/roletype/schema/enums/RoleTypeCategory.enum.ts";
 
 /**
- * Zod schema for a role type entity.
+ * Base schema defining shared fields for all role types.
  *
- * A role type represents a specific job or function (e.g., `"Actor"`, `"Director"`)
- * within a production, and is associated with a department (e.g., `"CAST"`, `"CREW"`).
- *
- * Fields:
- * - `_id`: Unique identifier for the role type (read-only).
- * - `roleName`: Name of the role (e.g., `"Actor"`, `"Director"`), required,
- *   must be a non-empty string (max 150 characters enforced by {@link NonEmptyStringSchema}).
- * - `department`: Department the role belongs to, must be either `"CAST"` or `"CREW"`.
- * - `description`: Optional free-text description of the role, up to 1000 characters.
- *   May also be `null` if not provided.
- *
- * @example
- * ```ts
- * const role = RoleTypeSchema.parse({
- *   _id: "role_123",
- *   roleName: "Actor",
- *   department: "CAST",
- *   description: "Performs a character in the production."
- * });
- *
- * // role is now strongly typed as RoleType
- * ```
+ * @remarks
+ * This schema serves as the foundation for both cast and crew role types.
+ * It defines the fields that are common to all roles, including identifiers,
+ * names, departments, and optional descriptions.
  */
-export const RoleTypeSchema = z.object({
+const RoleTypeBaseSchema = z.object({
     /** Unique identifier for the role type (read-only). */
     _id: IDStringSchema.readonly(),
 
@@ -43,50 +29,71 @@ export const RoleTypeSchema = z.object({
     /**
      * Optional role description.
      *
-     * - Must be a string (if provided).
+     * @remarks
+     * - Must be a string if provided.
      * - May be `null` if intentionally unset.
      * - Maximum length (1000) enforced by {@link NonEmptyStringSchema}.
      */
-    description: NonEmptyStringSchema
-        .optional()
-        .nullable(),
+    description: NonEmptyStringSchema.optional().nullable(),
 });
 
 /**
- * Zod schema for an array of role types.
+ * Schema representing a crew role type.
  *
- * Each element of the array must conform to {@link RoleTypeSchema}.
+ * @remarks
+ * Extends {@link RoleTypeBaseSchema} with crew-specific fields and
+ * constrains the `department` to `"CREW"`.
+ */
+const RoleTypeCrewSchema = RoleTypeBaseSchema.extend({
+    /** Department discriminator, fixed to `"CREW"`. */
+    department: z.literal("CREW"),
+
+    /** Crew category enum value (e.g., "CINEMATOGRAPHY", "DIRECTION"). */
+    category: RoleTypeCrewCategoryEnumSchema,
+});
+
+/**
+ * Schema representing a cast role type.
  *
- * @example
- * ```ts
- * const roles = RoleTypeArraySchema.parse([
- *   { _id: "1", roleName: "Actor", department: "CAST" },
- *   { _id: "2", roleName: "Director", department: "CREW" }
- * ]);
- * ```
+ * @remarks
+ * Extends {@link RoleTypeBaseSchema} with cast-specific fields and
+ * constrains the `department` to `"CAST"`.
+ */
+const RoleTypeCastSchema = RoleTypeBaseSchema.extend({
+    /** Department discriminator, fixed to `"CAST"`. */
+    department: z.literal("CAST"),
+
+    /** Cast category enum value (e.g., "MAIN", "SUPPORTING"). */
+    category: RoleTypeCastCategoryEnumSchema,
+});
+
+/**
+ * Discriminated union schema for all role types.
+ *
+ * @remarks
+ * Uses the `department` field as the discriminator between
+ * {@link RoleTypeCastSchema} and {@link RoleTypeCrewSchema}.
+ */
+export const RoleTypeSchema = z.discriminatedUnion("department", [
+    RoleTypeCastSchema,
+    RoleTypeCrewSchema,
+]);
+
+/**
+ * Schema representing an array of role types.
+ *
+ * @remarks
+ * Ensures that each element in the array conforms to {@link RoleTypeSchema}.
  */
 export const RoleTypeArraySchema = z.array(RoleTypeSchema, {
     message: "Must be an array of role types.",
 });
 
 /**
- * Zod schema for paginated role types.
+ * Schema for paginated role type results.
  *
- * Extends {@link RoleTypeSchema} into a paginated structure
- * using {@link generatePaginationSchema}. Includes:
- * - `items`: array of role types for the current page
- * - `totalCount`: total number of role types
- * - `page`: current page number (1-based)
- * - `pageSize`: number of items per page
- *
- * @example
- * ```ts
- * const page = PaginatedRoleTypeSchema.parse({
- *   items: [{ _id: "1", roleName: "Actor", department: "CAST" }],
- *   totalCount: 42,
- *   page: 1,
- *   pageSize: 10
- * });
- * ```
+ * @remarks
+ * Extends pagination metadata to include role type data.
+ * Generated using {@link generatePaginationSchema}.
  */
 export const PaginatedRoleTypeSchema = generatePaginationSchema(RoleTypeSchema);

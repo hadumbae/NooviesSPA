@@ -1,32 +1,40 @@
-import {z} from "zod";
+import { z } from "zod";
 import {
     PaginatedRoleTypeSchema,
     RoleTypeArraySchema,
-    RoleTypeSchema
+    RoleTypeSchema,
 } from "@/pages/roletype/schema/model/RoleType.schema.ts";
 
 /**
- * TypeScript type inferred from {@link RoleTypeSchema}.
+ * Represents a role type entity.
  *
- * Represents a role type object, including ID, name, department,
- * and an optional description.
+ * @remarks
+ * Inferred from {@link RoleTypeSchema}.
+ * Includes the following properties:
+ * - `_id`: Unique identifier for the role.
+ * - `roleName`: Name of the role (non-empty string).
+ * - `department`: Either `"CAST"` or `"CREW"`.
+ * - `category`: Category within the department.
+ * - `description`: Optional or nullable text description.
  */
 export type RoleType = z.infer<typeof RoleTypeSchema>;
 
 /**
- * TypeScript type inferred from {@link RoleTypeArraySchema}.
+ * Represents an array of {@link RoleType} entities.
  *
- * Represents an array of {@link RoleType} objects.
- * Useful when working with collections of role types.
+ * @remarks
+ * Inferred from {@link RoleTypeArraySchema}.
+ * Commonly used when fetching or validating multiple roles at once.
  */
 export type RoleTypeArray = z.infer<typeof RoleTypeArraySchema>;
 
 /**
- * TypeScript type inferred from {@link PaginatedRoleTypeSchema}.
+ * Represents a paginated list of {@link RoleType} entities.
  *
- * Represents a paginated list of {@link RoleType} objects,
- * typically used in API responses that return:
- * - an array of role types for the current page
- * - pagination metadata such as total count, page number, and page size
+ * @remarks
+ * Inferred from {@link PaginatedRoleTypeSchema}.
+ * Used for API responses that include:
+ * - An array of role types for the current page.
+ * - Pagination metadata (e.g., total count, page number, page size).
  */
 export type PaginatedRoleTypes = z.infer<typeof PaginatedRoleTypeSchema>;
