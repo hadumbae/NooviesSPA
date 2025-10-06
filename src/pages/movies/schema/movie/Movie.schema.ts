@@ -11,6 +11,7 @@ import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctio
 import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {ParsedUTCDayOnlyDateStringSchema} from "@/common/schema/dates/ParsedUTCDayOnlyDateStringSchema.ts";
+import {RequiredStringSchema} from "@/common/schema/strings/RequiredStringSchema.ts";
 
 /**
  * Base schema for a movie object.
@@ -19,8 +20,11 @@ import {ParsedUTCDayOnlyDateStringSchema} from "@/common/schema/dates/ParsedUTCD
 export const MovieBaseSchema = z.object({
     /** Display title of the movie (max 250 characters). */
     title: NonEmptyStringSchema.max(250, "Must be 250 characters or less."),
-    /** Original (untranslated) title of the movie (max 250 characters). */
-    originalTitle: NonEmptyStringSchema.max(250, "Must be 250 characters or less."),
+    /** Original (untranslated) title of the movie (max 250 characters). Optional */
+    originalTitle: RequiredStringSchema
+        .max(250, "Must be 250 characters or less.")
+        .transform(value => value || undefined)
+        .optional(),
     /** Optional tagline or slogan (max 100 characters). */
     tagline: NonEmptyStringSchema.max(100, "Must be 100 characters or less.").optional(),
     /** ISO 3166-1 alpha-2 country code representing the production country. */
