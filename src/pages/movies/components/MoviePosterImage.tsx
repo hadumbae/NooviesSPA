@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
-import { Film } from "lucide-react";
 import { cn } from "@/common/lib/utils.ts";
 import { Dialog, DialogContent, DialogTrigger } from "@/common/components/ui/dialog.tsx";
+import MoviePosterPlaceholder from "@/pages/movies/components/MoviePosterPlaceholder.tsx";
 
 /**
  * Props for the `MoviePosterImage` component.
@@ -46,13 +46,7 @@ const MoviePosterImage: FC<PosterProps> = (props) => {
     // Fallback placeholder if no image or image fails to load
     if (!src || hasError) {
         return (
-            <div className={cn(
-                "bg-gray-600 aspect-[2/3] w-16 rounded-md",
-                "flex items-center justify-center",
-                className
-            )}>
-                <Film className="text-gray-400" />
-            </div>
+            <MoviePosterPlaceholder className={className} />
         );
     }
 
