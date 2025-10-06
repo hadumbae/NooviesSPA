@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { cn } from "@/common/lib/utils.ts";
 import { Dialog, DialogContent, DialogTrigger } from "@/common/components/ui/dialog.tsx";
 import MoviePosterPlaceholder from "@/pages/movies/components/MoviePosterPlaceholder.tsx";
+import MoviePosterErrorPlaceholder from "@/pages/movies/components/MoviePosterErrorPlaceholder.tsx";
 
 /**
  * Props for the `MoviePosterImage` component.
@@ -17,8 +18,8 @@ type PosterProps = {
     className?: string;
 
     /**
-     * If `true`, disables the dialog/modal feature.
-     * When disabled, the poster image is rendered as-is without click-to-enlarge functionality.
+     * If `true`, disables the click-to-enlarge dialog.
+     * When disabled, the poster image is rendered inline without a modal.
      */
     disableDialog?: boolean;
 };
@@ -27,30 +28,45 @@ type PosterProps = {
  * Displays a movie poster image with optional click-to-enlarge dialog.
  *
  * @remarks
- * - If `src` is missing or fails to load, a fallback placeholder with a film icon is displayed.
- * - When `disableDialog` is `false` or not provided, clicking the poster opens a dialog
- *   showing a larger version of the image.
- * - The component uses `useState` to track image load errors.
+ * - If `src` is `null` or `undefined`, a `MoviePosterPlaceholder` is rendered.
+ * - If the image fails to load, a `MoviePosterErrorPlaceholder` is displayed.
+ * - By default, clicking the image opens a dialog with a larger version.
+ * - Use `disableDialog={true}` to render the image without a dialog.
+ * - Tracks load errors using React `useState`.
  *
  * @param props - The properties for the poster image component.
+ * @param props.src - URL of the poster image.
+ * @param props.alt - Alt text for accessibility.
+ * @param props.className - Optional additional CSS classes.
+ * @param props.disableDialog - Optional flag to disable the dialog/modal.
  *
  * @example
  * ```tsx
+ * // Renders a poster with dialog enabled
  * <MoviePosterImage src="https://example.com/poster.jpg" alt="Movie Poster" />
+ *
+ * // Renders a poster without a dialog
+ * <MoviePosterImage src="https://example.com/poster.jpg" alt="Movie Poster" disableDialog />
+ *
+ * // Renders a placeholder if no image URL is provided
+ * <MoviePosterImage src={null} />
  * ```
  */
 const MoviePosterImage: FC<PosterProps> = (props) => {
     const [hasError, setHasError] = useState<boolean>(false);
     const { src, alt, className, disableDialog } = props;
 
-    // Fallback placeholder if no image or image fails to load
-    if (!src || hasError) {
-        return (
-            <MoviePosterPlaceholder className={className} />
-        );
+    // Render placeholder if no image URL
+    if (!src) {
+        return <MoviePosterPlaceholder className={className} />;
     }
 
-    // Image component for both inline and dialog display
+    // Render error placeholder if image failed to load
+    if (hasError) {
+        return <MoviePosterErrorPlaceholder className={className} />;
+    }
+
+    // Image element used for inline and dialog display
     const imgComponent = (
         <img
             src={src}
@@ -64,7 +80,7 @@ const MoviePosterImage: FC<PosterProps> = (props) => {
         />
     );
 
-    // Render image without dialog if disabled
+    // Render image inline without dialog if disabled
     if (disableDialog) {
         return imgComponent;
     }
