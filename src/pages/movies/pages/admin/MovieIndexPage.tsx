@@ -4,7 +4,7 @@ import MovieIndexHeader from "@/pages/movies/components/headers/admin/MovieIndex
 import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
-import MovieIndexCard from "@/pages/movies/components/list/MovieIndexCard.tsx";
+import MovieIndexCard from "@/pages/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
 import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
 import usePaginationLocationState from "@/common/hooks/params/usePaginationLocationState.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
