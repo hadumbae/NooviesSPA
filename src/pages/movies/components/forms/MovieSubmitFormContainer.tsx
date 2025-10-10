@@ -3,73 +3,63 @@ import {FC} from 'react';
 import useMovieSubmitForm from "@/pages/movies/hooks/forms/useMovieSubmitForm.ts";
 import useMovieSubmitMutation, {MovieSubmitParams} from "@/pages/movies/hooks/mutations/useMovieSubmitMutation.ts";
 import MovieSubmitFormView from "@/pages/movies/components/forms/MovieSubmitFormView.tsx";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
-import {MovieFormValues} from "@/pages/movies/schema/form/MovieForm.types.ts";
-
-/** Props representing editing state for the movie form. */
-type EditingProps =
-    | { isEditing: true; movie: Movie } // Editing an existing movie
-    | { isEditing?: false; movie?: never }; // Creating a new movie
+import {MovieForm, MovieFormValues} from "@/pages/movies/schema/form/MovieForm.types.ts";
+import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 
 /**
- * Props for {@link MovieSubmitFormContainer}.
+ * Props for `MovieSubmitFormContainer`.
  *
- * Extends general form mutation parameters, and adds support for:
- * - Editing state
- * - Optional preset form values
- * - Optional disabled fields
- * - Success and error callbacks
+ * @template TEntity - The entity type managed by the form (here `Movie`).
+ * @template TReturn - The type returned by the mutation (here also `Movie`).
+ * @template TFormValues - The type of the form values (here `MovieFormValues`).
  */
-type FormContainerProps =
-    Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError" | "validationSchema"> &
-    EditingProps & {
-    /** Optional preset values to prefill the form. */
-    presetValues?: Partial<MovieFormValues>;
-    /** Optional list of fields to disable in the form. */
-    disableFields?: (keyof MovieFormValues)[];
-    /** Optional callback triggered when form submission succeeds. */
-    onSubmitSuccess?: (movie: Movie) => void;
-    /** Optional callback triggered when form submission fails. */
-    onSubmitError?: (error: unknown) => void;
+type SubmitFormProps = FormContainerProps<Movie, Movie, MovieFormValues> & {
+    /** Optional CSS class applied to the container or the form view. */
+    className?: string;
 };
 
 /**
- * Container component for submitting or editing a movie.
+ * Container component that integrates form logic, mutation logic, and the presentation layer
+ * for creating or editing `Movie` entities.
  *
- * Handles:
- * - Initializing form values via {@link useMovieSubmitForm}
- * - Managing the submission mutation via {@link useMovieSubmitMutation}
- * - Passing necessary props and handlers to {@link MovieSubmitFormView}
+ * This component:
+ * - Initializes the form with optional preset values or the existing entity (if editing).
+ * - Sets up the mutation hook for submitting or updating the movie.
+ * - Handles form submission and passes it to the mutation.
+ * - Renders the `MovieSubmitFormView` with the form instance and submission handler.
  *
- * @param params - Component props including editing state, preset values, mutation params, and optional callbacks.
- *
- * @example
- * ```tsx
- * <MovieSubmitFormContainer
- *   isEditing={true}
- *   movie={existingMovie}
- *   successMessage="Movie updated successfully!"
- * />
- * ```
+ * @param props - Props controlling the form behavior and mutation callbacks.
+ * @param props.presetValues - Optional preset values for initializing the form fields.
+ * @param props.disableFields - Flag to disable all form inputs.
+ * @param props.isEditing - Whether the form is in edit mode.
+ * @param props.entity - The existing movie entity, required if `isEditing` is true.
+ * @param props.className - Optional CSS class applied to the container/view.
+ * @param props.* - Additional mutation callbacks inherited from `FormContainerProps`.
  */
-const MovieSubmitFormContainer: FC<FormContainerProps> = (params) => {
-    const { movie, presetValues, disableFields, isEditing, ...mutationParams } = params;
+const MovieSubmitFormContainer: FC<SubmitFormProps> = (props) => {
+    const { className, presetValues, disableFields, isEditing, entity, ...onSubmitProps } = props;
 
-    // Initialize form with optional preset values or existing movie data
-    const form = useMovieSubmitForm({ movie, presetValues });
+    // Initialize the form instance, optionally using preset values or existing entity
+    const form = useMovieSubmitForm({ movie: entity, presetValues });
 
-    // Prepare mutation parameters based on editing state
-    const editingParams: MovieSubmitParams = isEditing
-        ? { form, isEditing: true, _id: movie._id }
-        : { form, isEditing: false };
+    // Configure mutation parameters based on editing mode
+    const mutationParams: MovieSubmitParams = isEditing
+        ? { ...onSubmitProps, form, isEditing: true, _id: entity._id }
+        : { ...onSubmitProps, form, isEditing: false };
 
-    const mutation = useMovieSubmitMutation({ ...editingParams, ...mutationParams });
+    // Initialize the mutation hook for submitting/updating the movie
+    const mutation = useMovieSubmitMutation(mutationParams);
 
-    /** Handler for form submission */
-    const onFormSubmit = (values: any) => {
+    /**
+     * Handles form submission by passing values to the mutation.
+     * The mutation internally manages success and error handling.
+     *
+     * @param values - The current form values to submit.
+     */
+    const onFormSubmit = (values: MovieFormValues) => {
         console.log("Movie Submit Value: ", values);
-        mutation.mutate(values);
+        mutation.mutate(values as MovieForm);
     };
 
     return (
@@ -78,6 +68,7 @@ const MovieSubmitFormContainer: FC<FormContainerProps> = (params) => {
             submitHandler={onFormSubmit}
             mutation={mutation}
             disableFields={disableFields}
+            className={className}
         />
     );
 };
