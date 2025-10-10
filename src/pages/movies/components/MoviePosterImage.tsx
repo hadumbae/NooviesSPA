@@ -5,68 +5,63 @@ import MoviePosterPlaceholder from "@/pages/movies/components/MoviePosterPlaceho
 import MoviePosterErrorPlaceholder from "@/pages/movies/components/MoviePosterErrorPlaceholder.tsx";
 
 /**
- * Props for the `MoviePosterImage` component.
+ * Props for the {@link MoviePosterImage} component.
  */
 type PosterProps = {
-    /** The URL of the movie poster image. Can be `null` or `undefined`. */
+    /**
+     * The URL of the movie poster image.
+     * If `null` or `undefined`, a placeholder will be displayed instead.
+     */
     src: string | null | undefined;
 
-    /** The alt text for the image, for accessibility purposes. */
+    /**
+     * Alternative text for the image, used for accessibility and when the image cannot load.
+     */
     alt?: string;
 
-    /** Additional CSS class names to apply to the image container. */
+    /**
+     * Additional class names applied to the image element for styling customization.
+     */
     className?: string;
 
     /**
-     * If `true`, disables the click-to-enlarge dialog.
-     * When disabled, the poster image is rendered inline without a modal.
+     * Disables the dialog popup when `true`.
+     * When disabled, the image is rendered directly without enlarging on click.
      */
     disableDialog?: boolean;
 };
 
 /**
- * Displays a movie poster image with optional click-to-enlarge dialog.
+ * Displays a movie poster image with built-in fallback and error handling.
  *
- * @remarks
- * - If `src` is `null` or `undefined`, a `MoviePosterPlaceholder` is rendered.
- * - If the image fails to load, a `MoviePosterErrorPlaceholder` is displayed.
- * - By default, clicking the image opens a dialog with a larger version.
- * - Use `disableDialog={true}` to render the image without a dialog.
- * - Tracks load errors using React `useState`.
- *
- * @param props - The properties for the poster image component.
- * @param props.src - URL of the poster image.
- * @param props.alt - Alt text for accessibility.
- * @param props.className - Optional additional CSS classes.
- * @param props.disableDialog - Optional flag to disable the dialog/modal.
+ * - If no image source is provided, renders a generic placeholder.
+ * - If the image fails to load, renders an error placeholder.
+ * - When not disabled, clicking the image opens it in a fullscreen-style dialog for detailed viewing.
  *
  * @example
  * ```tsx
- * // Renders a poster with dialog enabled
- * <MoviePosterImage src="https://example.com/poster.jpg" alt="Movie Poster" />
- *
- * // Renders a poster without a dialog
- * <MoviePosterImage src="https://example.com/poster.jpg" alt="Movie Poster" disableDialog />
- *
- * // Renders a placeholder if no image URL is provided
- * <MoviePosterImage src={null} />
+ * <MoviePosterImage
+ *   src={movie.posterUrl}
+ *   alt={movie.title}
+ *   className="w-32"
+ * />
  * ```
  */
 const MoviePosterImage: FC<PosterProps> = (props) => {
     const [hasError, setHasError] = useState<boolean>(false);
     const { src, alt, className, disableDialog } = props;
 
-    // Render placeholder if no image URL
+    // Display a placeholder if no source is provided
     if (!src) {
         return <MoviePosterPlaceholder className={className} />;
     }
 
-    // Render error placeholder if image failed to load
+    // Display an error placeholder if the image failed to load
     if (hasError) {
         return <MoviePosterErrorPlaceholder className={className} />;
     }
 
-    // Image element used for inline and dialog display
+    // The base image element, reused in both inline and dialog modes
     const imgComponent = (
         <img
             src={src}
@@ -74,34 +69,32 @@ const MoviePosterImage: FC<PosterProps> = (props) => {
             loading="lazy"
             onError={() => setHasError(true)}
             className={cn(
-                "aspect-[2/3] w-16 rounded-md",
+                "aspect-[2/3] rounded-md",
+                "w-28 xl:w-44",
                 className
             )}
         />
     );
 
-    // Render image inline without dialog if disabled
+    // Render static image if dialog is disabled
     if (disableDialog) {
         return imgComponent;
     }
 
-    // Render image with click-to-enlarge dialog
+    // Render image inside a dialog for zoomed view
     return (
         <Dialog>
-            <DialogTrigger asChild className="hover:cursor-pointer">
+            <DialogTrigger asChild className="hover:cursor-pointer object-cover">
                 {imgComponent}
             </DialogTrigger>
 
-            <DialogContent className="aspect-[2/3] w-96 p-0 bg-transparent border-0">
+            <DialogContent className="p-0 bg-transparent border-0">
                 <img
                     src={src}
                     alt={alt}
                     loading="lazy"
                     onError={() => setHasError(true)}
-                    className={cn(
-                        "w-full",
-                        className
-                    )}
+                    className={cn("w-full", className)}
                 />
             </DialogContent>
         </Dialog>
