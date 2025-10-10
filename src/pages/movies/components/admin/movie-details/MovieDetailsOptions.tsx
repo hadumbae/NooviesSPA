@@ -1,0 +1,68 @@
+import {Dispatch, FC, ReactNode, SetStateAction, useState} from 'react';
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {MovieDetailsUIContext} from "@/pages/movies/context/MovieDetailsUIContext.ts";
+import {
+    DropdownMenu,
+    DropdownMenuContent, DropdownMenuGroup,
+    DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from "@/common/components/ui/dropdown-menu.tsx";
+import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+
+type OptionProps = {
+    children: ReactNode;
+    movieID: ObjectId;
+}
+
+const MovieDetailsOptions: FC<OptionProps> = ({children, movieID}) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const navigate = useLoggedNavigate();
+
+    const {
+        setIsEditing,
+        setIsUpdatingPoster,
+        setIsDeleting,
+    } = useRequiredContext({context: MovieDetailsUIContext});
+
+    const closeOnAction = (action: Dispatch<SetStateAction<boolean>>) => {
+        action(true);
+        setIsOpen(false);
+    }
+
+    const navigateToCredits = (department: RoleTypeDepartment) => {
+        navigate({
+            to: `/admin/movies/get/${movieID}/people/${department.toLowerCase()}`,
+            component: MovieDetailsOptions.name,
+            message: `Navigate to movie's "${department}" credits.`,
+        });
+    }
+
+    return (
+        <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+            <DropdownMenuTrigger asChild>
+                {children}
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent>
+                <DropdownMenuGroup>
+                    <DropdownMenuLabel className="select-none">Credits</DropdownMenuLabel>
+                    <DropdownMenuItem onClick={() => navigateToCredits("CAST")}>Cast</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigateToCredits("CREW")}>Crew</DropdownMenuItem>
+                </DropdownMenuGroup>
+
+                <DropdownMenuSeparator />
+
+                <DropdownMenuGroup>
+                    <DropdownMenuLabel className="select-none">Movie</DropdownMenuLabel>
+                    <DropdownMenuItem onClick={() => closeOnAction(setIsEditing)}>Edit</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => closeOnAction(setIsUpdatingPoster)}>Update Poster</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => closeOnAction(setIsDeleting)}>Delete</DropdownMenuItem>
+                </DropdownMenuGroup>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
+};
+
+export default MovieDetailsOptions;

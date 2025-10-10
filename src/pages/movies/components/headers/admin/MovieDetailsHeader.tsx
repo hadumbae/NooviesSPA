@@ -1,99 +1,61 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {format} from "date-fns";
-import {Contact, Pencil, Trash} from "lucide-react";
-import {cn} from "@/common/lib/utils.ts";
-import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
-import MovieSubmitFormPanel from "@/pages/movies/components/forms/MovieSubmitFormPanel.tsx";
-import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
-import MovieDeleteWarningDialog from "@/pages/movies/components/dialog/MovieDeleteWarningDialog.tsx";
-import {Link} from "react-router-dom";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
-
-interface Props {
-    /** The movie object containing details to display in the header. */
-    movie: Movie;
-}
+import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import MoviePosterImage from "@/pages/movies/components/MoviePosterImage.tsx";
+import formatMovieDetails from "@/pages/movies/utility/formatMovieDetails.ts";
+import HeaderSubtitle from "@/common/components/page/headers/HeaderSubtitle.tsx";
 
 /**
- * Component that renders the header section for a movie details page.
- *
- * This header includes:
- * - The movie title and release year.
- * - The movie tagline.
- * - Buttons for editing or deleting the movie.
- *
- * The Edit button opens the `MovieSubmitFormPanel` in editing mode.
- * The Delete button opens the `MovieDeleteWarningDialog` and navigates
- * back to the movies list upon successful deletion.
- *
- * @param {Props} props - The component props.
- * @param {Movie} props.movie - The movie to display details for.
- *
- * @example
- * ```tsx
- * <MovieDetailsHeader movie={myMovie} />
- * ```
+ * Props for the `MovieDetailsHeader` component.
  */
-const MovieDetailsHeader: FC<Props> = ({movie}) => {
-    const navigate = useLoggedNavigate();
+type HeaderProps = {
+    /** Movie details object containing title, tagline, poster, genres, release date, and runtime. */
+    movie: MovieDetails;
+};
 
-    const {_id, title, releaseDate, tagline} = movie;
-    const formattedDate = releaseDate && format(releaseDate, "yyyy");
+/**
+ * Displays the header section for a movie details page.
+ *
+ * This component renders:
+ * - The movie poster image.
+ * - The movie title and tagline.
+ * - Release date, runtime, and genres.
+ *
+ * Accessibility:
+ * - `SectionHeader` elements are marked `srOnly` to provide context for screen readers.
+ *
+ * @param props.movie - The `MovieDetails` object to display.
+ */
+const MovieDetailsHeader: FC<HeaderProps> = ({movie}) => {
+    const {title, tagline, posterImage} = movie;
 
-    /** Callback fired after movie is successfully deleted. Navigates back to movies list. */
-    const onMovieDelete = () => {
-        navigate({
-            to: "/admin/movies",
-            component: MovieDetailsHeader.name,
-            message: "Navigate on movie deletion.",
-        });
-    }
+    // Format movie details into readable strings (e.g., "Action, Adventure" and "2025 • 120 min")
+    const {genreString, releaseRuntimeString} = formatMovieDetails(movie);
 
     return (
-        <header className={cn(
-            "flex",
-            "max-md:flex-col max-md:space-y-2",
-            "md:justify-between md:items-center"
-        )}>
+        <header className="flex space-x-3">
+            {/* Movie poster section */}
             <section>
-                <HeaderTitle>{title} ({formattedDate})</HeaderTitle>
-                <HeaderDescription>{tagline}</HeaderDescription>
+                <SectionHeader srOnly={true}>Movie Poster Image</SectionHeader>
+                <MoviePosterImage src={posterImage?.secure_url} alt="Poster Image"/>
             </section>
 
-            <section className="space-x-0 flex justify-end items-center">
-                <Link
-                    to={`/admin/movies/get/${_id}/people/cast`}
-                    className={cn(
-                        buttonVariants({variant: "link"}),
-                        "text-neutral-400 hover:text-black"
-                    )}
-                >
-                    <Contact/> Cast
-                </Link>
+            {/* Movie details section */}
+            <section className="flex-grow grid grid-cols-1 gap-1">
+                <SectionHeader srOnly={true}>Movie Details</SectionHeader>
 
-                <Link
-                    to={`/admin/movies/get/${_id}/people/crew`}
-                    className={cn(
-                        buttonVariants({variant: "link"}),
-                        "text-neutral-400 hover:text-black"
-                    )}
-                >
-                    <Contact/> Crew
-                </Link>
+                {/* Title and tagline */}
+                <section className="space-y-3 flex flex-col justify-center">
+                    <HeaderTitle>{title}</HeaderTitle>
+                    <HeaderSubtitle>{tagline}</HeaderSubtitle>
+                </section>
 
-                <MovieSubmitFormPanel isEditing={true} movie={movie}>
-                    <Button variant="link" className="text-neutral-400 hover:text-black">
-                        <Pencil/> Edit
-                    </Button>
-                </MovieSubmitFormPanel>
-
-                <MovieDeleteWarningDialog movieID={_id} onDeleteSuccess={onMovieDelete}>
-                    <Button variant="link" className="text-neutral-400 hover:text-black">
-                        <Trash/> Delete
-                    </Button>
-                </MovieDeleteWarningDialog>
+                {/* Release date, runtime, and genres */}
+                <section className="space-y-1 flex flex-col justify-center">
+                    <h3 className="text-xs text-neutral-400">{releaseRuntimeString}</h3>
+                    <h3 className="text-xs text-neutral-400">{genreString}</h3>
+                </section>
             </section>
         </header>
     );
