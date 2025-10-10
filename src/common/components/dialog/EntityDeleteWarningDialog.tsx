@@ -9,49 +9,52 @@ import {PresetOpenState} from "@/common/type/OpenStateProps.ts";
 
 /**
  * Props for the `EntityDeleteWarningDialog` component.
- *
- * @property children - The element that triggers the dialog when clicked.
- * @property title - Optional custom title for the dialog.
- * @property description - Optional custom description for the dialog.
- * @property deleteResource - Callback function invoked when the "Delete" action is confirmed.
- * @property presetOpen - Optional controlled open state for the dialog.
- * @property setPresetOpen - Optional setter for controlled open state.
  */
 type DialogProps = PresetOpenState & {
+    /** Optional React node rendered as the dialog trigger. */
     children?: ReactNode;
+
+    /** Title text displayed at the top of the dialog. Defaults to a generic warning. */
     title?: string;
+
+    /** Description text displayed below the title. Defaults to a generic delete warning. */
     description?: string;
+
+    /** Callback invoked when the "Delete" action is confirmed. */
     deleteResource: () => void;
 };
 
 /**
- * A reusable confirmation dialog for deleting entities.
+ * A confirmation dialog for deleting a resource, with controlled or uncontrolled open state.
  *
- * @remarks
- * This component renders a modal dialog asking the user to confirm deletion of a resource.
- * - Uses `AlertDialog` components for accessibility and consistent styling.
- * - Supports optional preset open state (`presetOpen` / `setPresetOpen`) for controlled usage.
- * - Defaults to generic title and description if not provided via props.
+ * Features:
+ * - Displays a title and description warning the user about deletion consequences.
+ * - Supports controlled open state via `presetOpen`/`setPresetOpen` or uses internal state if not provided.
+ * - Provides Cancel and Delete actions. Cancel closes the dialog, Delete calls the `deleteResource` callback.
  *
- * The "Delete" button executes the provided `deleteResource` callback, while "Cancel" closes the dialog.
- *
- * @example
- * ```tsx
- * <EntityDeleteWarningDialog deleteResource={handleDelete}>
- *   <Button>Delete Item</Button>
- * </EntityDeleteWarningDialog>
- * ```
+ * @param props - Props controlling dialog content, trigger, and open state.
+ * @param props.children - Optional trigger element (e.g., button or icon) to open the dialog.
+ * @param props.title - Optional title text for the dialog.
+ * @param props.description - Optional description text for the dialog.
+ * @param props.deleteResource - Callback invoked when the user confirms deletion.
+ * @param props.presetOpen - Controlled open state (optional).
+ * @param props.setPresetOpen - Setter for controlled open state (optional).
  */
 const EntityDeleteWarningDialog: FC<DialogProps> = (props) => {
     const {children, title, description, deleteResource, presetOpen, setPresetOpen} = props;
-    const [isOpen, setIsOpen] = useState<boolean>(false);
 
+    // Determine controlled vs internal state
+    const isControlled = presetOpen !== undefined && setPresetOpen !== undefined;
+    const internalOpenState = useState<boolean>(false);
+    const [activeOpen, setActiveOpen] = isControlled ? [presetOpen, setPresetOpen] : internalOpenState;
+
+    // Default text if not provided
     const dialogTitle = title ?? "Proceed to delete resource?";
     const dialogDescription = description ??
         "This action cannot be reversed. Related data will also be removed. Do you want to proceed?";
 
     return (
-        <AlertDialog open={presetOpen ?? isOpen} onOpenChange={setPresetOpen ?? setIsOpen}>
+        <AlertDialog open={activeOpen} onOpenChange={setActiveOpen}>
             <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>

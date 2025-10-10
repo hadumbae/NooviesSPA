@@ -1,53 +1,64 @@
-import {FC, PropsWithChildren} from 'react';
+import {FC, ReactNode} from 'react';
 import {OnDeleteMutationParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import useMovieDeleteMutation from "@/pages/movies/hooks/mutations/useMovieDeleteMutation.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
+import {PresetOpenState} from "@/common/type/OpenStateProps.ts";
+import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 
 /**
- * Props for {@link MovieDeleteWarningDialog}.
+ * Props for the `MovieDeleteWarningDialog` component.
  */
-type WarningDialogProps = OnDeleteMutationParams & {
-    /** The unique identifier of the movie to be deleted. */
+type WarningDialogProps = OnDeleteMutationParams &
+    PresetOpenState & {
+    /** Optional React node rendered as the dialog trigger element (e.g., button or icon). */
+    children?: ReactNode;
+
+    /** The ID of the movie to delete. */
     movieID: ObjectId;
 
-    /** Optional display name of the movie in the dialog. Defaults to `"movie"` if not provided. */
+    /** Optional name of the movie for display in the dialog title. */
     movieName?: string;
 };
 
 /**
- * A warning dialog component for confirming the deletion of a movie.
+ * A confirmation dialog specifically for deleting a movie entity.
  *
- * This component:
- * - Displays a confirmation dialog with the movie name.
- * - Executes a delete mutation when confirmed.
- * - Supports optional success and error callbacks via {@link OnDeleteMutationParams}.
- * - Wraps any children inside the `EntityDeleteWarningDialog` component.
+ * Features:
+ * - Wraps the generic `EntityDeleteWarningDialog` for consistent UI.
+ * - Handles movie deletion via `useMovieDeleteMutation`.
+ * - Dynamically generates the dialog title using the movie name if provided.
+ * - Supports controlled or uncontrolled open state via `PresetOpenState`.
+ * - Cleans up empty preset state attributes using `filterEmptyAttributes`.
  *
- * @param props - Props including movie ID, optional movie name, children, and delete mutation callbacks.
- *
- * @example
- * ```tsx
- * <MovieDeleteWarningDialog
- *   movieID="abc123"
- *   movieName="Inception"
- *   onDeleteSuccess={() => refetchMovies()}
- * >
- *   <button>Delete</button>
- * </MovieDeleteWarningDialog>
- * ```
+ * @param props - Props controlling the dialog, deletion behavior, and optional open state.
+ * @param props.movieID - The ID of the movie to delete.
+ * @param props.movieName - Optional movie name for the dialog title.
+ * @param props.onDeleteSuccess - Optional callback invoked after successful deletion.
+ * @param props.onDeleteError - Optional callback invoked if deletion fails.
+ * @param props.presetOpen - Optional controlled open state for the dialog.
+ * @param props.setPresetOpen - Optional setter for controlled open state.
+ * @param props.children - Optional React node used as the trigger element for the dialog.
  */
-const MovieDeleteWarningDialog: FC<PropsWithChildren<WarningDialogProps>> = (props) => {
-    const {children, movieID, movieName, onDeleteSuccess, onDeleteError} = props;
+const MovieDeleteWarningDialog: FC<WarningDialogProps> = (props) => {
+    const {children, movieID, movieName, onDeleteSuccess, onDeleteError, presetOpen, setPresetOpen} = props;
 
     const displayName = movieName ? `"${movieName}"` : "movie";
     const dialogTitle = `Proceed to delete ${displayName}?`;
 
+    // Filter out undefined preset state values for controlled/uncontrolled behavior
+    const presetStates = filterEmptyAttributes({presetOpen, setPresetOpen});
+
+    // Setup delete mutation
     const {mutate} = useMovieDeleteMutation({onDeleteSuccess, onDeleteError});
     const deleteMovie = () => mutate({_id: movieID});
 
     return (
-        <EntityDeleteWarningDialog title={dialogTitle} deleteResource={deleteMovie}>
+        <EntityDeleteWarningDialog
+            title={dialogTitle}
+            deleteResource={deleteMovie}
+            {...presetStates}
+        >
             {children}
         </EntityDeleteWarningDialog>
     );
