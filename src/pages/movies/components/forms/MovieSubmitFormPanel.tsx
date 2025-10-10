@@ -8,98 +8,71 @@ import {
     SheetTrigger
 } from "@/common/components/ui/sheet.tsx";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {MovieFormValues} from "@/pages/movies/schema/form/MovieForm.types.ts";
 import MovieSubmitFormContainer from "@/pages/movies/components/forms/MovieSubmitFormContainer.tsx";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
+import {PresetOpenState} from "@/common/type/OpenStateProps.ts";
 
 /**
- * Base props for the `MovieSubmitFormPanel` component.
+ * Props for `MovieSubmitFormPanel`.
  *
- * These props extend `FormMutationOnSubmitParams`, except for `onSubmitSuccess` and
- * `onSubmitError`, which are replaced with custom handlers.
+ * @template TEntity - The type of the entity being managed (here `Movie`).
+ * @template TReturn - The type returned by the mutation (here also `Movie`).
+ * @template TFormValues - The type of the form values (here `MovieFormValues`).
  */
-type BaseProps = Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
-    /** Optional child element to use as the trigger (e.g., a button). */
+type FormPanelProps = FormContainerProps<Movie, Movie, MovieFormValues> &
+    PresetOpenState & {
+    /** Optional trigger element (e.g., button or icon) that opens the panel. */
     children?: ReactNode;
-    /** Optional CSS class for styling the form panel. */
-    className?: string;
-    /** Pre-populated values for the form. Useful for editing or drafts. */
-    presetValues?: Partial<MovieFormValues>;
-    /** Fields that should be disabled in the form. */
-    disableFields?: (keyof MovieFormValues)[];
-    /** Callback when a movie is successfully submitted. */
-    onSubmitSuccess?: (movie: Movie) => void;
-    /** Callback when form submission fails. */
-    onSubmitError?: (error: unknown) => void;
 };
 
 /**
- * Props for editing an existing movie.
- */
-type SubmitFormProps = BaseProps & {
-    /** Indicates edit mode is active. */
-    isEditing: true;
-    /** The movie being edited. */
-    movie: Movie;
-};
-
-/**
- * Props for creating a new movie.
- */
-type EditFormProps = BaseProps & {
-    /** Indicates create mode (default if omitted). */
-    isEditing?: false;
-};
-
-/**
- * Union type for props accepted by `MovieSubmitFormPanel`.
+ * A panel component that displays a `MovieSubmitFormContainer` inside a slide-over sheet.
  *
- * - `SubmitFormProps` → editing an existing movie
- * - `EditFormProps` → creating a new movie
- */
-type FormPanelProps = SubmitFormProps | EditFormProps;
-
-/**
- * A panel component that displays a form for creating or updating a movie.
+ * Features:
+ * - Wraps the form in a UI `Sheet` with a trigger element.
+ * - Supports controlled or uncontrolled open state via `presetOpen`/`setPresetOpen`.
+ * - Dynamically sets the sheet title and description based on whether the form is creating or editing a movie.
+ * - Closes the sheet automatically when the form submission succeeds.
+ * - Forwards success callback to parent components.
  *
- * It uses a Radix UI `Sheet` as a sliding panel.
- * The form is rendered inside a scrollable area and submits via
- * `MovieSubmitFormContainer`.
- *
- * @example
- * ```tsx
- * <MovieSubmitFormPanel
- *   isEditing
- *   movie={selectedMovie}
- *   disableFields={["id"]}
- *   onSubmitSuccess={(movie) => console.log("Updated:", movie)}
- * >
- *   <button>Edit Movie</button>
- * </MovieSubmitFormPanel>
- * ```
+ * @param props - Props controlling the form behavior, open state, and trigger element.
+ * @param props.children - Optional React element that acts as the sheet trigger.
+ * @param props.presetOpen - Controlled open state for the sheet (optional).
+ * @param props.setPresetOpen - Setter for controlled open state (optional).
+ * @param props.isEditing - Whether the form is editing an existing movie.
+ * @param props.onSubmitSuccess - Callback invoked when the movie form is successfully submitted.
+ * @param props.* - Additional props forwarded to `MovieSubmitFormContainer`.
  */
 const MovieSubmitFormPanel: FC<FormPanelProps> = (props) => {
-    const {children, onSubmitSuccess, ...formProps} = props;
+    const {children, presetOpen, setPresetOpen, onSubmitSuccess, ...formProps} = props;
     const {isEditing} = formProps;
 
-    const [open, setOpen] = useState<boolean>(false);
+    // Determine whether open state is controlled externally or managed internally
+    const isControlled = presetOpen !== undefined && setPresetOpen !== undefined;
+    const internalOpenState = useState<boolean>(false);
+    const [activeOpen, setActiveOpen] = isControlled ? [presetOpen, setPresetOpen] : internalOpenState;
 
+    // Dynamic UI text based on create/edit mode
     const action = isEditing ? "Update" : "Create";
     const sheetTitle = `${action} Movie`;
     const sheetDescription = `${action} your movie here by submitting data with the form.`;
 
     /**
-     * Local success handler that closes the panel and delegates to external `onSubmitSuccess`.
+     * Handles successful form submission.
+     * Closes the sheet and invokes optional parent callback.
+     *
+     * @param movie - The submitted movie object.
      */
     const onSuccess = (movie: Movie) => {
-        setOpen(false);
+        setActiveOpen(false);
         onSubmitSuccess?.(movie);
     };
 
     return (
-        <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>{children ? children : "Open"}</SheetTrigger>
+        <Sheet open={activeOpen} onOpenChange={setActiveOpen}>
+            <SheetTrigger asChild>{children}</SheetTrigger>
             <SheetContent className="flex flex-col">
                 <SheetHeader>
                     <SheetTitle>{sheetTitle}</SheetTitle>
