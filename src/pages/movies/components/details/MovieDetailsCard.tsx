@@ -31,6 +31,7 @@ type CardProps = {
  */
 const MovieDetailsCard: FC<CardProps> = ({movie}) => {
     const {
+        title,
         originalTitle,
         originalLanguage,
         country,
@@ -85,7 +86,7 @@ const MovieDetailsCard: FC<CardProps> = ({movie}) => {
     /** Section containing basic movie information */
     const basicSection = (
         <section className="space-y-3">
-            <LabelContent label="Original Title" orientation="horizontal">{originalTitle}</LabelContent>
+            <LabelContent label="Original Title" orientation="horizontal">{originalTitle ?? title}</LabelContent>
             {genresLabel}
             <LabelContent label="Runtime" orientation="horizontal">{movieDuration}</LabelContent>
             <LabelContent label="Country" orientation="horizontal">{countryName}</LabelContent>
