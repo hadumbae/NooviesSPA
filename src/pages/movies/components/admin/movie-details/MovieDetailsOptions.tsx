@@ -14,9 +14,12 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 type OptionProps = {
     children: ReactNode;
     movieID: ObjectId;
+    hasPoster?: boolean;
 }
 
-const MovieDetailsOptions: FC<OptionProps> = ({children, movieID}) => {
+const MovieDetailsOptions: FC<OptionProps> = (props) => {
+    const {children, movieID, hasPoster = false} = props;
+
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const navigate = useLoggedNavigate();
 
@@ -24,6 +27,7 @@ const MovieDetailsOptions: FC<OptionProps> = ({children, movieID}) => {
         setIsEditing,
         setIsUpdatingPoster,
         setIsDeleting,
+        setIsDeletingPoster,
     } = useRequiredContext({context: MovieDetailsUIContext});
 
     const closeOnAction = (action: Dispatch<SetStateAction<boolean>>) => {
@@ -52,13 +56,29 @@ const MovieDetailsOptions: FC<OptionProps> = ({children, movieID}) => {
                     <DropdownMenuItem onClick={() => navigateToCredits("CREW")}>Crew</DropdownMenuItem>
                 </DropdownMenuGroup>
 
-                <DropdownMenuSeparator />
+                <DropdownMenuSeparator/>
 
                 <DropdownMenuGroup>
                     <DropdownMenuLabel className="select-none">Movie</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => closeOnAction(setIsEditing)}>Edit</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => closeOnAction(setIsUpdatingPoster)}>Update Poster</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => closeOnAction(setIsDeleting)}>Delete</DropdownMenuItem>
+
+                    <DropdownMenuItem onClick={() => closeOnAction(setIsEditing)}>
+                        Edit
+                    </DropdownMenuItem>
+
+                    <DropdownMenuItem onClick={() => closeOnAction(setIsUpdatingPoster)}>
+                        Update Poster
+                    </DropdownMenuItem>
+
+                    {
+                        hasPoster &&
+                        <DropdownMenuItem onClick={() => closeOnAction(setIsDeletingPoster)}>
+                            Delete Poster
+                        </DropdownMenuItem>
+                    }
+
+                    <DropdownMenuItem onClick={() => closeOnAction(setIsDeleting)}>
+                        Delete
+                    </DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>

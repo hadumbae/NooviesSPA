@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC} from "react";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MovieDetailsHeader from "@/pages/movies/components/headers/admin/MovieDetailsHeader.tsx";
 import useFetchMovieParams from "@/pages/movies/hooks/params/useFetchMovieParams.ts";
@@ -28,55 +28,58 @@ import simplifyMovieDetails from "@/pages/movies/utility/simplifyMovieDetails.ts
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {MovieDetailsUIContext} from "@/pages/movies/context/MovieDetailsUIContext.ts";
 import MovieDeleteWarningDialog from "@/pages/movies/components/dialog/MovieDeleteWarningDialog.tsx";
+import MoviePosterImageDeleteDialog
+    from "@/pages/movies/components/admin/poster-image/MoviePosterImageDeleteDialog.tsx";
 
 /**
- * Type representing a movie along with its fetched credits.
+ * Represents detailed movie data along with its associated credits.
  */
 type MovieWithData = {
-    /** The detailed movie data. */
+    /** The validated and fetched detailed movie entity. */
     movie: MovieDetails;
 
-    /** Array of credits (cast/crew) associated with the movie. */
+    /** List of validated credit entries (cast and/or crew) associated with the movie. */
     credits: MovieCreditDetailsArray;
 };
 
 /**
- * Page component that renders detailed information about a specific movie.
+ * Renders the **Movie Details Page**, showing complete information about a specific movie,
+ * including its metadata, poster, and top-billed cast/crew.
  *
  * @remarks
- * This component performs the following tasks:
- * - Sets the document title to "Movie Details" using `useTitle`.
- * - Fetches the movie ID from URL parameters via `useFetchMovieParams`.
- * - Fetches movie data using `useFetchMovie` and movie credits using `useFetchMovieCredits`.
- * - Handles loading states with `PageLoader`.
- * - Validates fetched movie data and credits using `CombinedValidatedQueryBoundary` against
- *   `MovieDetailsSchema` and `MovieCreditDetailsArraySchema`.
- * - Simplifies movie details for display in the header using `simplifyMovieDetails`.
- * - Displays:
- *   - Breadcrumb navigation (`MovieDetailsBreadcrumb`),
- *   - Header section (`MovieDetailsHeader`),
- *   - Detailed movie card (`MovieDetailsCard`),
- *   - Credit overview section (`MovieDetailsCreditOverview`).
+ * This component:
+ * - Dynamically sets the document title to `"Movie Details"`.
+ * - Extracts the movie ID from URL parameters via `useFetchMovieParams`.
+ * - Fetches:
+ *   - Movie details (`useFetchMovie`) with populated references.
+ *   - Movie credits (`useFetchMovieCredits`) for the first six billed cast members.
+ * - Combines both queries with `CombinedQueryBoundary` and validates them using
+ *   `CombinedValidatedQueryBoundary` against `MovieDetailsSchema` and `MovieCreditDetailsArraySchema`.
+ * - On success, simplifies movie data for header display and renders:
+ *   - `MovieDetailsBreadcrumb` navigation,
+ *   - `MovieDetailsHeader` (title, release info, etc.),
+ *   - `MovieDetailsCard` (core metadata),
+ *   - `MovieDetailsCreditOverview` (cast list preview).
+ * - Also contains hidden form sections and dialogs for editing, updating, or deleting
+ *   movie and poster data via contextual UI controls.
  *
+ * @component
  * @example
  * ```tsx
  * <MovieDetailsPage />
  * ```
  */
 const MovieDetailsPage: FC = () => {
-    // Set the document title
+    // — Document setup —
     useTitle("Movie Details");
 
-    // Fetch movie parameters from URL (e.g., movie ID)
+    // — URL parameter extraction —
     const movieParams = useFetchMovieParams();
     if (!movieParams) return <PageLoader/>;
-
     const {movieID} = movieParams;
 
-    // Fetch movie data with populated references and virtuals
+    // — Queries —
     const movieQuery = useFetchMovie({_id: movieID, populate: true, virtuals: true});
-
-    // Fetch first 6 cast credits, sorted by billing order
     const creditQuery = useFetchMovieCredits({
         movie: movieID,
         populate: true,
@@ -88,7 +91,7 @@ const MovieDetailsPage: FC = () => {
 
     const queries = [movieQuery, creditQuery];
 
-    // Validate fetched data against schemas
+    // — Validation setup —
     const validationQueries: CombinedSchemaQuery[] = [
         {query: movieQuery, key: "movie", schema: MovieDetailsSchema},
         {query: creditQuery, key: "credits", schema: MovieCreditDetailsArraySchema},
@@ -101,7 +104,13 @@ const MovieDetailsPage: FC = () => {
                     {(data) => {
                         const {movie, credits} = data as MovieWithData;
                         const simplifiedMovie = simplifyMovieDetails(movie);
+                        const hasPoster = Boolean(movie.posterImage);
 
+                        // — Refresh poster data when updated —
+                        const {refetch: refetchMovie} = movieQuery;
+                        const onPosterUpdate = () => refetchMovie();
+
+                        // — Context state —
                         const {
                             isEditing,
                             setIsEditing,
@@ -109,21 +118,29 @@ const MovieDetailsPage: FC = () => {
                             setIsUpdatingPoster,
                             isDeleting,
                             setIsDeleting,
+                            isDeletingPoster,
+                            setIsDeletingPoster,
                         } = useRequiredContext({context: MovieDetailsUIContext});
 
+                        // — Option menu (ellipsis button) —
                         const options = (
-                            <MovieDetailsOptions movieID={movie._id}>
-                                <Button variant="outline" size="icon" className="text-neutral-400 hover:text-black rounded-3xl">
+                            <MovieDetailsOptions movieID={movie._id} hasPoster={hasPoster}>
+                                <Button
+                                    variant="outline"
+                                    size="icon"
+                                    className="text-neutral-400 hover:text-black rounded-3xl"
+                                >
                                     <Ellipsis/>
                                 </Button>
                             </MovieDetailsOptions>
                         );
 
+                        // — Hidden edit, poster, and delete modals —
                         const hiddenEditSection = (
                             <section className="hidden">
-                                <SectionHeader srOnly={true}>Edit Movie Details Panel</SectionHeader>
+                                <SectionHeader srOnly>Edit Movie Details Panel</SectionHeader>
                                 <MovieSubmitFormPanel
-                                    isEditing={true}
+                                    isEditing
                                     entity={simplifiedMovie}
                                     presetOpen={isEditing}
                                     setPresetOpen={setIsEditing}
@@ -135,9 +152,9 @@ const MovieDetailsPage: FC = () => {
                             <section className="hidden">
                                 <MoviePosterImageSubmitFormPanel
                                     movieID={movie._id}
-                                    posterImage={movie.posterImage}
                                     presetOpen={isUpdatingPoster}
                                     setPresetOpen={setIsUpdatingPoster}
+                                    onSubmitSuccess={onPosterUpdate}
                                 />
                             </section>
                         );
@@ -152,10 +169,22 @@ const MovieDetailsPage: FC = () => {
                             </section>
                         );
 
+                        const hiddenDeletingPosterSection = (
+                            <section className="hidden">
+                                <MoviePosterImageDeleteDialog
+                                    movieID={movie._id}
+                                    presetOpen={isDeletingPoster}
+                                    setPresetOpen={setIsDeletingPoster}
+                                    onDeleteSuccess={onPosterUpdate}
+                                />
+                            </section>
+                        );
+
+                        // — Render layout —
                         return (
                             <PageFlexWrapper>
                                 <section className="flex flex-col">
-                                    <SectionHeader srOnly={true}>Movie Details Header</SectionHeader>
+                                    <SectionHeader srOnly>Movie Details Header</SectionHeader>
 
                                     <div className="flex justify-between items-center">
                                         <MovieDetailsBreadcrumb/>
@@ -166,21 +195,22 @@ const MovieDetailsPage: FC = () => {
                                 </section>
 
                                 <section className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
-                                    <SectionHeader srOnly={true}>Details & Credits</SectionHeader>
+                                    <SectionHeader srOnly>Details & Credits</SectionHeader>
 
                                     <section>
-                                        <SectionHeader srOnly={true}>Movie Details Card</SectionHeader>
+                                        <SectionHeader srOnly>Movie Details Card</SectionHeader>
                                         <MovieDetailsCard movie={movie}/>
                                     </section>
 
                                     <section className="2xl:col-span-2">
-                                        <SectionHeader srOnly={true}>Movie Credits Overview</SectionHeader>
+                                        <SectionHeader srOnly>Movie Credits Overview</SectionHeader>
                                         <MovieDetailsCreditOverview movieID={movie._id} credits={credits}/>
                                     </section>
 
                                     {hiddenEditSection}
                                     {hiddenPosterSection}
                                     {hiddenDeletingSection}
+                                    {hiddenDeletingPosterSection}
                                 </section>
                             </PageFlexWrapper>
                         );
