@@ -58,8 +58,8 @@ export default function useRoleTypeSubmitForm(params?: FormParams): UseFormRetur
 
     const defaultValues: RoleTypeFormValues = {
         roleName: getDefaultValue(presetValues?.roleName, roleType?.roleName, ""),
-        department: getDefaultValue(presetValues?.department, roleType?.department, ""),
-        category: getDefaultValue(presetValues?.category, roleType?.category, ""),
+        department: getDefaultValue(presetValues?.department, roleType?.department, undefined),
+        category: getDefaultValue(presetValues?.category, roleType?.category, undefined),
         description: getDefaultValue(presetValues?.description, roleType?.description, ""),
     };
 

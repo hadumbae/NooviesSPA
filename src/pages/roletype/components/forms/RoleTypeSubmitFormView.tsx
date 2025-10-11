@@ -11,6 +11,8 @@ import RoleTypeDepartmentConstant from "@/pages/roletype/constant/RoleTypeDepart
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
+import RoleTypeCategorySelect from "@/pages/roletype/components/inputs/RoleTypeCategorySelect.tsx";
+import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 
 /**
  * Props for {@link RoleTypeSubmitFormView}.
@@ -53,6 +55,7 @@ const RoleTypeSubmitFormView: FC<SubmitViewProps> = (props) => {
         roleName: !disableFields?.includes("roleName"),
         department: !disableFields?.includes("department"),
         description: !disableFields?.includes("description"),
+        category: !disableFields?.includes("category"),
     };
 
     /** Options for the Department select field, converted to Title Case */
@@ -60,6 +63,8 @@ const RoleTypeSubmitFormView: FC<SubmitViewProps> = (props) => {
         label: convertToTitleCase(val),
         value: val
     }));
+
+    const department = form.watch("department") as (RoleTypeDepartment | undefined);
 
     return (
         <Form {...form}>
@@ -79,6 +84,15 @@ const RoleTypeSubmitFormView: FC<SubmitViewProps> = (props) => {
                         label="Department"
                         control={form.control}
                         options={departmentOptions}
+                    />
+                )}
+
+                {activeFields["category"] && (
+                    <RoleTypeCategorySelect
+                        department={department}
+                        name="category"
+                        label="Category"
+                        control={form.control}
                     />
                 )}
 

@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import useRoleTypeSubmitForm from "@/pages/roletype/hooks/forms/useRoleTypeSubmitForm.ts";
 import {FormMutationEditingParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
@@ -49,18 +49,24 @@ const RoleTypeSubmitFormContainer: FC<SubmitFormProps> = (props) => {
     const {entity, presetValues, isEditing, disableFields, className, ...mutationProps} = props;
     const {onSubmitSuccess} = mutationProps;
 
-    const resetOnSuccess = (data: RoleType) => {
-        form.reset();
-        onSubmitSuccess?.(data);
-    }
-
     /** Initialize the form with preset values or existing entity data */
     const form = useRoleTypeSubmitForm({presetValues, roleType: entity});
+
+    const department = form.watch("department");
+
+    useEffect(() => {
+        form.resetField("category");
+    }, [department]);
 
     /** Prepare mutation parameters, including editing mode and form */
     const isEditingParams: FormMutationEditingParams = isEditing === true
         ? {isEditing: true, _id: entity._id}
         : {isEditing: false};
+
+    const resetOnSuccess = (data: RoleType) => {
+        form.reset();
+        onSubmitSuccess?.(data);
+    }
 
     const mutationParams = {...isEditingParams, form, ...mutationProps, onSubmitSuccess: resetOnSuccess};
 
