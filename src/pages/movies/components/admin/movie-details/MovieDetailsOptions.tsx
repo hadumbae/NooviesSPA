@@ -59,22 +59,24 @@ const MovieDetailsOptions: FC<OptionProps> = (props) => {
                 <DropdownMenuSeparator/>
 
                 <DropdownMenuGroup>
+                    <DropdownMenuLabel className="select-none">Poster</DropdownMenuLabel>
+
+                    <DropdownMenuItem onClick={() => closeOnAction(setIsUpdatingPoster)}>Update</DropdownMenuItem>
+
+                    {
+                        hasPoster &&
+                        <DropdownMenuItem onClick={() => closeOnAction(setIsDeletingPoster)}>Delete</DropdownMenuItem>
+                    }
+                </DropdownMenuGroup>
+
+                <DropdownMenuSeparator/>
+
+                <DropdownMenuGroup>
                     <DropdownMenuLabel className="select-none">Movie</DropdownMenuLabel>
 
                     <DropdownMenuItem onClick={() => closeOnAction(setIsEditing)}>
                         Edit
                     </DropdownMenuItem>
-
-                    <DropdownMenuItem onClick={() => closeOnAction(setIsUpdatingPoster)}>
-                        Update Poster
-                    </DropdownMenuItem>
-
-                    {
-                        hasPoster &&
-                        <DropdownMenuItem onClick={() => closeOnAction(setIsDeletingPoster)}>
-                            Delete Poster
-                        </DropdownMenuItem>
-                    }
 
                     <DropdownMenuItem onClick={() => closeOnAction(setIsDeleting)}>
                         Delete
