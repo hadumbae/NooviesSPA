@@ -94,7 +94,7 @@ const MoviePosterImage: FC<PosterProps> = (props) => {
                     alt={alt}
                     loading="lazy"
                     onError={() => setHasError(true)}
-                    className={cn("w-full", className)}
+                    className={cn("w-full")}
                 />
             </DialogContent>
         </Dialog>

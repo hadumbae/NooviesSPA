@@ -45,7 +45,10 @@ const MovieIndexCard: FC<IndexCardProps> = ({ movie }) => {
             <CardContent className="p-4 flex items-center space-x-2">
                 {/* Movie poster */}
                 <section>
-                    <MoviePosterImage src={posterURL} />
+                    <MoviePosterImage
+                        src={posterURL}
+                        className="w-16"
+                    />
                 </section>
 
                 {/* Title, runtime, and genres */}
