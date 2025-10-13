@@ -1,8 +1,8 @@
 import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
 import RequestMethod from "@/common/type/RequestMethod.ts";
-import JSONParseError from "@/common/errors/JSONParseError.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import Logger from "@/common/utility/logger/Logger.ts";
+import handleBadResponse from "@/common/utility/use-fetch-api/handleBadResponse.ts";
+import parseJSON from "@/common/utility/use-fetch-api/parseJSON.ts";
 
 /**
  * Parameters for `useFetchAPI`.
@@ -58,17 +58,23 @@ export default async function useFetchAPI<TData = unknown, TReturns = unknown>(
     const funcName = useFetchAPI.name;
     const {url, data, signal, method = "GET"} = params;
 
+    // === Build Query Options
+
     const isFormData = typeof FormData !== "undefined" && data instanceof FormData;
 
     const headers: HeadersInit = isFormData ? {} : {"Content-Type": "application/json"};
 
     const body: BodyInit | undefined = data
-        ? isFormData
-            ? (data as FormData)
-            : JSON.stringify(data)
+        ? (isFormData ? (data as FormData) : JSON.stringify(data))
         : undefined;
 
-    Logger.log({msg: "Fetching data: ", type: "FETCH", context: {funcName, url, method, headers, body}});
+    Logger.log({
+        msg: "Fetching data: ",
+        type: "FETCH",
+        context: {funcName, url, method, headers, body},
+    });
+
+    // === Use Fetch Query ===
 
     let response: Response;
     try {
@@ -81,19 +87,26 @@ export default async function useFetchAPI<TData = unknown, TReturns = unknown>(
         throw error;
     }
 
+    // === Handle Bad Response ===
+
     const raw = await response.text();
     if (!response.ok) {
-        Logger.warn({msg: `HTTP ERROR: ${response.status}`, type: "ERROR", context: {funcName, response_text: raw}});
-        throw new HttpResponseError({response, message: raw});
+        handleBadResponse({
+            response,
+            source: funcName,
+            rawPayload: raw,
+        });
     }
 
-    let result: TReturns;
-    try {
-        result = JSON.parse(raw) as TReturns;
-    } catch (error: unknown) {
-        Logger.error({msg: "Failed to parse JSON.", type: "ERROR", context: {funcName, response_text: raw}});
-        throw new JSONParseError({raw, status: response.status});
-    }
+    // === Return Parsed JSON ====
+    const result = parseJSON({
+        raw,
+        source: funcName,
+        statusCode: response.status
+    });
 
-    return {response, result};
+    return {
+        response,
+        result,
+    };
 }
