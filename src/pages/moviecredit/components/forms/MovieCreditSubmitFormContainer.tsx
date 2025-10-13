@@ -83,18 +83,28 @@ const MovieCreditSubmitFormContainer: FC<ContainerProps> = (props) => {
         movieFilters,
         personFilters,
         roleTypeFilters,
+        onSubmitSuccess,
         ...mutationProps
     } = props;
 
     // Initialize the form state with preset values or entity data
     const form = useMovieCreditSubmitForm({presetValues, credit: entity});
 
+    const resetOnSuccess = (credit: MovieCredit) => {
+        form.reset();
+        onSubmitSuccess?.(credit);
+    }
+
     // Prepare mutation params for create or edit
     const mutationParams: FormMutationEditingParams = isEditing === true
         ? {isEditing: true, _id: entity._id, ...mutationProps}
         : {isEditing: false, ...mutationProps};
 
-    const mutation = useMovieCreditSubmitMutation({form, ...mutationParams});
+    const mutation = useMovieCreditSubmitMutation({
+        form,
+        onSubmitSuccess: resetOnSuccess,
+        ...mutationParams
+    });
 
     // Filter role types by selected department if available
     const formDepartment = form.watch("department") as (RoleTypeDepartment | undefined);
@@ -111,7 +121,6 @@ const MovieCreditSubmitFormContainer: FC<ContainerProps> = (props) => {
     const handleSubmit = (values: MovieCreditFormValues) => {
         console.log("Movie Credit Form Values:", values);
         mutation.mutate(values as MovieCreditForm);
-        form.reset();
     };
 
     return (
