@@ -2,9 +2,9 @@ import {EntityPaginatedQuery, RequestOptions} from "@/common/type/repositories/E
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {ShowingQueryFilters} from "@/pages/showings/schema/queries/ShowingFilter.types.ts";
+import {ShowingQueryMatchFilters} from "@/pages/showings/schema/queries/ShowingQueryOption.types.ts";
 
-type FetchQueries = RequestOptions & EntityPaginatedQuery & ShowingQueryFilters;
+type FetchQueries = RequestOptions & EntityPaginatedQuery & ShowingQueryMatchFilters;
 
 /**
  * React Query hook for fetching a paginated list of showings based on query filters.
