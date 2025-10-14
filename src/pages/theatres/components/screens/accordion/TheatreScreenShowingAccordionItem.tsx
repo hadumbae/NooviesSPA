@@ -1,19 +1,19 @@
 import {FC} from 'react';
 import {AccordionContent, AccordionItem, AccordionTrigger} from "@/common/components/ui/accordion.tsx";
-import {ShowingWithMovie} from "@/pages/showings/schema/populated/ShowingWithMovieSchema.ts";
 import {format} from "date-fns";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 interface Props {
     value: string
-    showing: ShowingWithMovie;
+    showing: ShowingDetails;
 }
 
 const TheatreScreenShowingAccordionItem: FC<Props> = ({value, showing}) => {
     const {_id: showingID, movie, startTime, ticketPrice, isSpecialEvent} = showing;
     const {_id: movieID, title, releaseDate} = movie;
 
-    const movieReleaseDate = format(releaseDate, "yyyy");
+    const movieReleaseDate = releaseDate ? format(releaseDate, "yyyy") : "Unreleased";
     const isSpecial = isSpecialEvent ? "Yes" : "No";
 
     const startingTime = format(startTime, "dd MMM, yy (hh:mm)");

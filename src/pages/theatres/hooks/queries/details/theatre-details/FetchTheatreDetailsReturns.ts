@@ -1,6 +1,6 @@
-import {PaginatedShowings} from "@/pages/showings/schema/ShowingPaginationSchema.ts";
 import {PaginatedScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {PaginatedShowings} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 /**
  * Return shape when theatre detail parsing is successful.

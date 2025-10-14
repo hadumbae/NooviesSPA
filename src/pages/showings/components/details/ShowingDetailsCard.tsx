@@ -2,10 +2,10 @@ import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {format} from "date-fns";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
-import {PopulatedShowing} from "@/pages/showings/schema/populated/ShowingPopulatedSchema.ts";
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 interface Props {
-    showing: PopulatedShowing;
+    showing: ShowingDetails;
 }
 
 const ShowingDetailsCard: FC<Props> = ({showing}) => {

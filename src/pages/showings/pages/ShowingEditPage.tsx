@@ -6,9 +6,9 @@ import useFetchShowing from "@/pages/showings/hooks/queries/useFetchShowing.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import {useNavigate} from "react-router-dom";
-import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import ShowingSubmitFormContainer from "@/pages/showings/components/forms/ShowingSubmitFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 const ShowingEditPage: FC = () => {
     const navigate = useNavigate();

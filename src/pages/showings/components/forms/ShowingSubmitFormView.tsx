@@ -13,9 +13,9 @@ import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSe
 import ScreenHookFormSelect from "@/pages/screens/components/submit-form/inputs/ScreenHookFormSelect.tsx";
 import MovieHookFormSelect from "@/pages/movies/components/ui/MovieHookFormSelect.tsx";
 
-import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
-import {ShowingSubmit} from "@/pages/showings/schema/ShowingSubmitSchema.ts";
+import {ShowingSubmit} from "@/pages/showings/schema/form/ShowingForm.schema.ts";
 import {cn} from "@/common/lib/utils.ts";
+import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 interface Props {
     mutation: UseMutationResult<Showing, Error, ShowingSubmit>;

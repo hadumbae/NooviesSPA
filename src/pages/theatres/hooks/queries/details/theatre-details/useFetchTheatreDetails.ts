@@ -4,7 +4,6 @@ import useFetchShowings from "@/pages/showings/hooks/queries/useFetchShowings.ts
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import {TheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 
-import {PaginatedShowingSchema} from "@/pages/showings/schema/ShowingPaginationSchema.ts";
 import {PaginatedScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 
 import {
@@ -14,6 +13,7 @@ import {
 import {
     FetchTheatreDetailsReturns
 } from "@/pages/theatres/hooks/queries/details/theatre-details/FetchTheatreDetailsReturns.ts";
+import {PaginatedShowingSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 
 /**
  * Composite React Query hook that fetches full theatre details including:

@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import {format} from "date-fns";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
@@ -7,6 +6,7 @@ import {Link, TriangleAlert} from "lucide-react";
 import HoverLink from "@/common/components/navigation/HoverLink.tsx";
 import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import useValidateShowingAndSeatMap from "@/pages/seatmap/hooks/validation/useValidateShowingAndSeatMap.ts";
+import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 interface Props {
     seatMap: SeatMap;

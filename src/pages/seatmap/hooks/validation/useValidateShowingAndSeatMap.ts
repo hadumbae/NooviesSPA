@@ -1,14 +1,14 @@
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
-import {ShowingPopulatedSchema} from "@/pages/showings/schema/populated/ShowingPopulatedSchema.ts";
 import {SeatMapPopulatedSchema} from "@/pages/seatmap/schema/SeatMapPopulatedSchema.ts";
-import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
+import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
+import {ShowingDetailsSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 
 export default function useValidateShowingAndSeatMap(params: {showing: Showing, seatMap: SeatMap}) {
     const {showing, seatMap} = params;
 
-    const populatedShowing = useValidateData<typeof ShowingPopulatedSchema>({
-        schema: ShowingPopulatedSchema,
+    const populatedShowing = useValidateData<typeof ShowingDetailsSchema>({
+        schema: ShowingDetailsSchema,
         data: showing,
     });
 

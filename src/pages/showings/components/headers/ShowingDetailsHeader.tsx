@@ -6,10 +6,10 @@ import {TableOfContents} from "lucide-react";
 import ShowingOptions from "@/pages/showings/components/ShowingOptions.tsx";
 import {useNavigate} from "react-router-dom";
 import {Button} from "@/common/components/ui/button.tsx";
-import {PopulatedShowing} from "@/pages/showings/schema/populated/ShowingPopulatedSchema.ts";
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 interface Props {
-    showing: PopulatedShowing;
+    showing: ShowingDetails;
 }
 
 const ShowingDetailsHeader: FC<Props> = ({showing}) => {
@@ -20,7 +20,7 @@ const ShowingDetailsHeader: FC<Props> = ({showing}) => {
     const {name: screenName} = screen;
     const {name: theatreName} = theatre;
 
-    const formattedReleaseDate = format(releaseDate, "yyyy");
+    const formattedReleaseDate = releaseDate && format(releaseDate, "yyyy");
 
     const navigateToIndex = () => {
         navigate("/admin/showings");

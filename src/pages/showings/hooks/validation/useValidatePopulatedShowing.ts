@@ -1,5 +1,6 @@
-import {PopulatedShowing, ShowingPopulatedSchema} from "@/pages/showings/schema/populated/ShowingPopulatedSchema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
+import {ShowingDetailsSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 /**
  * Validates that the provided showing object includes all required populated relations.
@@ -13,8 +14,8 @@ import {ParseError} from "@/common/errors/ParseError.ts";
  * const validatedShowing = useValidatePopulatedShowing(rawShowing);
  * ```
  */
-export default function useValidatePopulatedShowing(showing: any): PopulatedShowing {
-    const result = ShowingPopulatedSchema.safeParse(showing);
+export default function useValidatePopulatedShowing(showing: any): ShowingDetails {
+    const result = ShowingDetailsSchema.safeParse(showing);
 
     if (!result.success) {
         const message = "Invalid `Populated Showing` Data. ";

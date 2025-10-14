@@ -3,7 +3,8 @@ import {SeatMapSubmit, SeatMapSubmitSchema} from "@/pages/seatmap/schema/SeatMap
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import convertObjectsToIDs from "@/common/utility/convertObjectsToIDs.ts";
-import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
+
+import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 export default function useShowingSeatMapSubmitForm(
     params: {showing: Showing, seatMap?: SeatMap}

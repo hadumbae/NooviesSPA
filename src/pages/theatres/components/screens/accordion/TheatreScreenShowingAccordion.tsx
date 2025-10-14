@@ -1,12 +1,12 @@
 import {FC} from 'react';
 
 import {Accordion} from "@/common/components/ui/accordion.tsx";
-import {ShowingWithMovie} from "@/pages/showings/schema/populated/ShowingWithMovieSchema.ts";
 import TheatreScreenShowingAccordionItem
     from "@/pages/theatres/components/screens/accordion/TheatreScreenShowingAccordionItem.tsx";
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 interface TheatreScreenShowingAccordionProps {
-    showings: ShowingWithMovie[];
+    showings: ShowingDetails[];
 }
 
 const TheatreScreenShowingAccordion: FC<TheatreScreenShowingAccordionProps> = ({showings}) => {

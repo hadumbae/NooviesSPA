@@ -3,11 +3,11 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import ShowingOptions from "@/pages/showings/components/ShowingOptions.tsx";
 import {Link} from "react-router-dom";
 import {format} from "date-fns";
-import {PopulatedShowing} from "@/pages/showings/schema/populated/ShowingPopulatedSchema.ts";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 interface Props {
-    showing: PopulatedShowing;
+    showing: ShowingDetails;
     onShowingDelete: () => void;
 }
 
@@ -18,7 +18,7 @@ const ShowingListCard: FC<Props> = ({showing, onShowingDelete}) => {
     const {name: screenName} = screen;
     const {title: movieTitle, releaseDate} = movie;
 
-    const movieReleaseDate = format(releaseDate, "yyyy");
+    const movieReleaseDate = releaseDate && format(releaseDate, "yyyy");
     const startingTime = format(startTime, "dd MMM hh:mm");
     const endingTime = endTime ? format(endTime, "dd MMM hh:mm") : undefined;
 

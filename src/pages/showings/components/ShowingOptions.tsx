@@ -1,14 +1,14 @@
 import {FC} from 'react';
-import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import {Popover, PopoverContent, PopoverTrigger} from '@/common/components/ui/popover';
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {Ellipsis, Loader} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import useShowingDeleteMutation from "@/pages/showings/hooks/mutations/useShowingDeleteMutation.ts";
 import {Link} from "react-router-dom";
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 interface Props {
-    showing: Showing;
+    showing: ShowingDetails;
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link",
     className?: string,
     onDelete: () => void,

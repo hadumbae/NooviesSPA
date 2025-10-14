@@ -1,9 +1,10 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {UseQueryResult} from "@tanstack/react-query";
-import {ShowingArray, ShowingArraySchema} from "@/pages/showings/schema/base/ShowingSchema.ts";
+import {ShowingArraySchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import {ShowingArray} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 /**
  * Custom hook to fetch all showings from the API with optional filters.

@@ -1,8 +1,9 @@
-import {ShowingWithMovie, ShowingWithMovieSchema} from "@/pages/showings/schema/populated/ShowingWithMovieSchema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
+import {ShowingDetailsSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 
-export default function useValidateShowingWithMovie(data: any): ShowingWithMovie {
-    const result = ShowingWithMovieSchema.safeParse(data);
+export default function useValidateShowingWithMovie(data: any): ShowingDetails {
+    const result = ShowingDetailsSchema.safeParse(data);
 
     if (!result.success) {
         const message = "Invalid `Showing With Movie` Data. ";

@@ -5,8 +5,8 @@ import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {Ellipsis, Loader} from "lucide-react";
 import {Link} from "react-router-dom";
-import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import useSeatMapOptionsHooks from "@/pages/seatmap/hooks/options/useSeatMapOptionsHooks.ts";
+import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 interface Params {
     seatMap: SeatMap;

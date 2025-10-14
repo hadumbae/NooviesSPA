@@ -1,9 +1,9 @@
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import convertObjectsToIDs from "@/common/utility/convertObjectsToIDs.ts";
-import {ShowingSubmit, ShowingSubmitSchema} from "@/pages/showings/schema/ShowingSubmitSchema.ts";
-import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
+import {ShowingSubmit, ShowingFormSchema} from "@/pages/showings/schema/form/ShowingForm.schema.ts";
 import {format} from "date-fns";
+import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 export default function useShowingSubmitForm(params?: { showing?: Showing }) {
     const {showing} = params || {};
@@ -34,7 +34,7 @@ export default function useShowingSubmitForm(params?: { showing?: Showing }) {
     }
 
     return useForm<ShowingSubmit>({
-        resolver: zodResolver(ShowingSubmitSchema),
+        resolver: zodResolver(ShowingFormSchema),
         defaultValues: {
             ...defaultValues,
             ...(showing ? showing : {}),

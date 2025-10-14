@@ -1,8 +1,9 @@
 import QueryFilters from "@/common/type/QueryFilters.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
-import {PaginatedShowings, PaginatedShowingSchema} from "@/pages/showings/schema/ShowingPaginationSchema.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
+import {PaginatedShowingSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
+import {PaginatedShowings} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 interface Params {
     page: number,

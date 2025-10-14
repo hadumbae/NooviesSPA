@@ -3,9 +3,9 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {Search} from "lucide-react";
-import {Showing} from "@/pages/showings/schema/base/ShowingSchema.ts";
 import useValidatePopulatedShowing from "@/pages/showings/hooks/validation/useValidatePopulatedShowing.ts";
 import {cn} from "@/common/lib/utils.ts";
+import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 interface Props {
     /**
