@@ -1,5 +1,5 @@
 import BaseLayout from "@/common/layout/BaseLayout.tsx";
-import ShowingsPage from "@/pages/showings/pages/ShowingsPage.tsx";
+import ShowingIndexPage from "@/pages/showings/pages/ShowingIndexPage.tsx";
 import ShowingCreatePage from "@/pages/showings/pages/ShowingCreatePage.tsx";
 import ShowingEditPage from "@/pages/showings/pages/ShowingEditPage.tsx";
 import ShowingPage from "@/pages/showings/pages/ShowingPage.tsx";
@@ -16,7 +16,7 @@ const routes: RouteObject[] = [
         children: [
             {
                 path: "/admin/showings",
-                element: <ShowingsPage/>,
+                element: <ShowingIndexPage/>,
                 errorElement: <ComponentErrorHandler/>,
             },
             {

@@ -1,45 +1,78 @@
-import {EntityPaginatedQuery, RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import { EntityPaginatedQuery, RequestOptions } from "@/common/type/repositories/EntityRequestParamTypes.ts";
+import { ShowingQueryOptions } from "@/pages/showings/schema/queries/ShowingQueryOption.types.ts";
+import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {ShowingQueryMatchFilters} from "@/pages/showings/schema/queries/ShowingQueryOption.types.ts";
-
-type FetchQueries = RequestOptions & EntityPaginatedQuery & ShowingQueryMatchFilters;
 
 /**
- * React Query hook for fetching a paginated list of showings based on query filters.
+ * Parameters for `UseFetchShowings` hook.
  *
- * @template TData - The expected shape of the returned data (e.g., a paginated list of showings).
+ * @template TData - Expected type of the returned data (default: `unknown`)
+ */
+type FetchParams<TData = unknown> = {
+    /** Optional query filters, pagination, and sort options */
+    queries?: RequestOptions & EntityPaginatedQuery & ShowingQueryOptions;
+    /** Optional React Query options such as `enabled`, `staleTime`, `initialData`, and `placeholderData` */
+    options?: UseQueryOptions<TData>;
+};
+
+/**
+ * React Query hook to fetch **multiple movie showings** based on query filters.
  *
- * @param queries - An object that combines:
- * - `RequestOptions`: optional metadata such as headers or context.
- * - `EntityPaginatedQuery`: pagination parameters (`page`, `limit`).
- * - `ShowingQueryFilters`: custom filters like `movie`, `theatre`, or `screen`.
+ * Supports pagination, filtering, and sorting via `ShowingQueryOptions`.
+ * Allows React Query options such as `enabled`, `staleTime`, `placeholderData`, and `initialData`.
  *
- * @returns A {@link UseQueryResult} containing showing data, loading state, error information, and more.
+ * @template TData - The expected type of the query result data
+ *
+ * @param params - Optional parameters for the query
+ * @param params.queries - Filters, sort, and pagination options
+ * @param params.options - React Query options
+ *
+ * @returns A `UseQueryResult` containing:
+ * - `data`: array or paginated list of showings
+ * - `isLoading`: boolean indicating if the request is in progress
+ * - `error`: `HttpResponseError` if the request failed
  *
  * @example
  * ```ts
- * const { data, isLoading } = useFetchShowings<PaginatedShowings>({
- *   page: 1,
- *   limit: 10,
- *   movie: "movieId123",
- *   screen: "screenId456"
+ * const { data, isLoading, error } = UseFetchShowings({
+ *   queries: { movie: "movieId123", startTime: "2025-10-14" },
+ *   options: { staleTime: 60000 }
  * });
+ *
+ * if (isLoading) return <Spinner />;
+ * if (error) return <ErrorMessage message={error.message} />;
+ *
+ * return <ShowingList showings={data} />;
  * ```
  */
-export default function useFetchShowings<TData>(queries: FetchQueries): UseQueryResult<TData> {
-    const queryKey = ["fetch_showings_by_query", queries] as const;
+export default function useFetchShowings<TData = unknown>(
+    params: FetchParams<TData> = {}
+): UseQueryResult<unknown, HttpResponseError> {
+    const { queries = {}, options = {} } = params;
 
-    const fetchByQuery = useQueryFnHandler<TData>({
-        action: () => ShowingRepository.query({queries}),
-        errorMessage: "Failed to fetch showing data. Please try again.",
+    const {
+        enabled = true,
+        staleTime = 1000 * 60,
+        placeholderData = (data: TData | undefined) => data,
+        initialData,
+    } = options;
+
+    const queryKey = ["fetch_showings_by_query", queries];
+
+    const fetchShowingsByQuery = useQueryFnHandler({
+        action: () => ShowingRepository.query({ queries }),
+        errorMessage: "Failed to fetch data. Please try again.",
     });
 
     return useQuery({
         queryKey,
-        queryFn: fetchByQuery,
-        staleTime: 1000 * 60,
-        placeholderData: (previousData) => previousData,
+        queryFn: fetchShowingsByQuery,
+        enabled,
+        staleTime,
+        placeholderData,
+        initialData,
     });
 }
