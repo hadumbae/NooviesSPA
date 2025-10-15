@@ -1,25 +1,38 @@
-import {z} from "zod";
+import { z } from "zod";
 
 /**
- * Zod schema representing the allowed starter values for a form field.
+ * Zod schema representing valid **starter values** for a form field.
  *
- * This schema is used to initialize form fields with default values before
- * user input. It allows a flexible set of types to cover common starter values:
+ * @description
+ * This schema is intended to initialize form fields with default values
+ * before user interaction. It allows a flexible set of types that cover
+ * most common starter values:
  *
- * - `string` — typical for text inputs
+ * - `string` — for text inputs
  * - `number` — for numeric inputs
  * - `boolean` — for checkboxes or toggles
- * - `null` / `undefined` — to represent empty or uninitialized fields
- * - `File` — to allow starter values that may already include a file object
+ * - `null` / `undefined` — for empty or uninitialized fields
+ * - `Array<any>` — for multi-value inputs or complex initial arrays
+ * - `File` — for fields that may start with a preloaded file
  *
- * This ensures that form fields are correctly typed for initialization while
- * still being compatible with eventual validation and transformation to the
- * final payload type.
+ * @remarks
+ * Using this schema ensures that initial form state is type-safe and
+ * compatible with eventual transformation or validation before submission.
+ *
+ * @example
+ * ```ts
+ * import { FormStarterValueSchema } from "@/common/schema/forms/FormStarterValueSchema.ts";
+ *
+ * const defaultValue = FormStarterValueSchema.parse("Initial text");
+ * const defaultNumber = FormStarterValueSchema.parse(0);
+ * const defaultFile = FormStarterValueSchema.parse(new File([], "example.txt"));
+ * ```
  */
 export const FormStarterValueSchema = z.union([
     z.string(),
     z.number(),
     z.boolean(),
+    z.array(z.any()),
     z.null(),
     z.undefined(),
     z.instanceof(File),
@@ -28,8 +41,18 @@ export const FormStarterValueSchema = z.union([
 /**
  * Type representing valid starter values for form fields.
  *
- * This type is inferred from {@link FormStarterValueSchema}
- * and includes all values typically safe to use as defaults
- * in form field state or `defaultValues` in `useForm`.
+ * @description
+ * This type is inferred from {@link FormStarterValueSchema} and can
+ * be used to type form state, default values in `useForm`, or any
+ * initial value passed to form fields.
+ *
+ * @example
+ * ```ts
+ * import type { FormStarterValue } from "@/common/schema/forms/FormStarterValueSchema.ts";
+ *
+ * const initialValue: FormStarterValue = "Hello";
+ * const initialArray: FormStarterValue = [1, 2, 3];
+ * const initialFile: FormStarterValue = new File([], "example.txt");
+ * ```
  */
 export type FormStarterValue = z.infer<typeof FormStarterValueSchema>;
