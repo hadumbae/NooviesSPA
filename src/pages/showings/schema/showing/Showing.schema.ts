@@ -3,12 +3,13 @@ import { TheatreSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts
 import { ScreenSchema } from "@/pages/screens/schema/screen/Screen.schema.ts";
 import { MovieSchema } from "@/pages/movies/schema/movie/Movie.schema.ts";
 import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
-import { CoercedDateSchema } from "@/common/schema/helpers/ZodDateHelpers.ts";
 import { RequiredBoolean } from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import { CleanedPositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import { ISO6391CodeEnum } from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
 import { generatePaginationSchema } from "@/common/schema/helpers/zodHelperFunctions.ts";
 import { NonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import {UTCISO8601DateTimeSchema} from "@/common/schema/dates/iso-8601/ISO8601DateString.schema.ts";
+import {ShowingStatusEnumSchema} from "@/pages/showings/schema/ShowingStatus.enum.ts";
 
 /**
  * @fileoverview
@@ -70,8 +71,8 @@ const ShowingBaseSchema = z.object({});
  */
 export const ShowingSchema = z.object({
     _id: IDStringSchema.readonly(),
-    startTime: CoercedDateSchema,
-    endTime: CoercedDateSchema,
+    startTime: UTCISO8601DateTimeSchema,
+    endTime: UTCISO8601DateTimeSchema,
     ticketPrice: CleanedPositiveNumberSchema,
     language: ISO6391CodeEnum,
     subtitleLanguages: z
@@ -82,6 +83,7 @@ export const ShowingSchema = z.object({
     movie: IDStringSchema,
     theatre: IDStringSchema,
     screen: IDStringSchema,
+    status: ShowingStatusEnumSchema,
 });
 
 /**
