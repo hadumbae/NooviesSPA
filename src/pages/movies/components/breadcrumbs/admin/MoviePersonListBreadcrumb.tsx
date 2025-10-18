@@ -10,7 +10,6 @@ import {
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
-import {format} from "date-fns";
 import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 
 /**
@@ -48,7 +47,7 @@ const MoviePersonListBreadcrumb: FC<PersonListBreadcrumbProps> = ({movie, depart
     const {_id, title, releaseDate} = movie;
 
     const parsedDepartment = convertToTitleCase(department);
-    const parsedReleaseDate = releaseDate ? `(${format(releaseDate, "yyyy")})` : "";
+    const parsedReleaseDate = releaseDate ? `(${releaseDate.toFormat("yyyy")})` : "";
 
     return (
         <Breadcrumb>

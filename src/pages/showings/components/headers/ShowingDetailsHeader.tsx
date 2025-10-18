@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {format} from "date-fns";
 import {TableOfContents} from "lucide-react";
 import ShowingOptions from "@/pages/showings/components/ShowingOptions.tsx";
 import {useNavigate} from "react-router-dom";
@@ -20,7 +19,7 @@ const ShowingDetailsHeader: FC<Props> = ({showing}) => {
     const {name: screenName} = screen;
     const {name: theatreName} = theatre;
 
-    const formattedReleaseDate = releaseDate && format(releaseDate, "yyyy");
+    const formattedReleaseDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
 
     const navigateToIndex = () => {
         navigate("/admin/showings");

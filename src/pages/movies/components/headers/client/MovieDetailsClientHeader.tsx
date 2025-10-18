@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {format} from "date-fns";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Link, useLocation} from "react-router-dom";
@@ -14,7 +13,7 @@ interface headerProps {
 
 const MovieDetailsClientHeader: FC<headerProps> = ({movie}) => {
     const {title, releaseDate} = movie;
-    const formattedReleaseDate = format(releaseDate, "yyyy");
+    const formattedReleaseDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
 
     const {search, hash} = useLocation();
     const locationDesc = {

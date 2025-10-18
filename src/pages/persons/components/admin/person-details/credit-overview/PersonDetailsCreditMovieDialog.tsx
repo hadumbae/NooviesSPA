@@ -1,7 +1,6 @@
 import {FC, ReactNode} from 'react';
 import {Movie, MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {Dialog, DialogContent, DialogTrigger} from "@/common/components/ui/dialog.tsx";
-import {format} from "date-fns";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
 import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 import {Search} from "lucide-react";
@@ -48,7 +47,7 @@ const PersonDetailsCreditMovieDialog: FC<MovieDialogProps> = ({children, personN
     const {department, characterName, roleType: {roleName}} = credit;
 
     /** Formatted release year or fallback if unreleased */
-    const formattedDate = releaseDate ? format(releaseDate, "yyyy") : "Unreleased";
+    const formattedDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
 
     /** Display text for the person's credit, depending on department */
     const creditDisplay = department === "CREW" ? roleName : characterName;

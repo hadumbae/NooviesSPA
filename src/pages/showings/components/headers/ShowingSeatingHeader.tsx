@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {format} from "date-fns";
 import useValidatePopulatedShowing from "@/pages/showings/hooks/validation/useValidatePopulatedShowing.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {Plus, Search} from "lucide-react";
@@ -20,7 +19,7 @@ const ShowingSeatingHeader: FC<Props> = ({showing}) => {
     const {name: screenName} = screen;
     const {name: theatreName} = theatre;
 
-    const formattedDate = format(releaseDate, "yyyy");
+    const formattedDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
 
     return (
         <header className={cn(

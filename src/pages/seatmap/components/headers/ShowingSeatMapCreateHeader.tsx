@@ -1,6 +1,5 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import {format} from "date-fns";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Link} from "lucide-react";
 import HoverLink from "@/common/components/navigation/HoverLink.tsx";
@@ -12,7 +11,7 @@ interface Props {
 
 const ShowingSeatMapCreateHeader: FC<Props> = ({showing}) => {
     const {_id, movie: {title, releaseDate}} = showing;
-    const formattedReleaseDate = releaseDate && format(releaseDate, "yyyy");
+    const formattedReleaseDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
 
     return (
         <header className="flex flex-col justify-between space-y-2">

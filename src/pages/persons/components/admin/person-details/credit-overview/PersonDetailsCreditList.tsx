@@ -4,7 +4,6 @@ import {
 } from "@/pages/moviecredit/schemas/model/MovieCreditGroup.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Info} from "lucide-react";
-import {format} from "date-fns";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import PersonDetailsCreditMovieDialog
     from "@/pages/persons/components/admin/person-details/credit-overview/PersonDetailsCreditMovieDialog.tsx";
@@ -57,7 +56,7 @@ const PersonDetailsCreditList: FC<AccordionListProps> = ({personName, department
                         const {title: movieTitle, originalTitle, releaseDate} = movie;
 
                         const roleDisplay = department === "CAST" ? characterName : roleName;
-                        const formattedReleaseDate = releaseDate && format(releaseDate, "yyyy");
+                        const formattedReleaseDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
                         const displayTitle = movieTitle === originalTitle
                             ? movieTitle
                             : `${movieTitle} (${originalTitle})`;

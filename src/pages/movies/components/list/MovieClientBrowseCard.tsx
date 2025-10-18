@@ -1,6 +1,5 @@
 import {FC} from 'react';
 import {Card, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
-import {format} from "date-fns";
 import {Link, useLocation} from "react-router-dom";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 
@@ -12,7 +11,7 @@ const MovieClientBrowseCard: FC<MovieProps> = ({movie}) => {
     const {search, hash} = useLocation();
 
     const {_id, title, releaseDate} = movie;
-    const formattedDate = format(releaseDate, "yyyy");
+    const formattedDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
 
     const navigatePath = {
         pathname: `/browse/movies/${_id}`,

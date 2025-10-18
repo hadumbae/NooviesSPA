@@ -1,6 +1,5 @@
 import { MovieDetails } from "@/pages/movies/schema/movie/Movie.types.ts";
 import formatDuration from "@/common/utility/formatDuration.ts";
-import { format } from "date-fns";
 import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
 
 /**
@@ -20,7 +19,7 @@ export default function formatMovieDetails(movie: MovieDetails) {
     const formattedRuntime = formatDuration(runtime);
 
     /** The release year as a string, or "Unreleased" if no date is set. */
-    const formattedReleaseDate = releaseDate ? format(releaseDate, "yyyy") : "Unreleased";
+    const formattedReleaseDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
 
     /** All genres of the movie joined into a single string with " | " separator. */
     const genreString = genres.map(g => g.name).join(" | ");
