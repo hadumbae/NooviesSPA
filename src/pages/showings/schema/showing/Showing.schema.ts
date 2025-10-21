@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { TheatreSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import { ScreenSchema } from "@/pages/screens/schema/screen/Screen.schema.ts";
-import { MovieSchema } from "@/pages/movies/schema/movie/Movie.schema.ts";
+import {MovieSchema, MovieWithGenresSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
 import { RequiredBoolean } from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import { CleanedPositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
@@ -106,13 +106,13 @@ export const ShowingSchema = z.object({
  * @property unreservedSeatsCount - Number of unreserved seats.
  */
 export const ShowingDetailsSchema = ShowingSchema.extend({
-    movie: z.lazy(() => MovieSchema),
-    theatre: z.lazy(() => TheatreSchema),
-    screen: z.lazy(() => ScreenSchema),
     seatMapCount: NonNegativeNumberSchema,
     availableSeatsCount: NonNegativeNumberSchema,
     reservedSeatsCount: NonNegativeNumberSchema,
     unreservedSeatsCount: NonNegativeNumberSchema,
+    theatre: z.lazy(() => TheatreSchema),
+    screen: z.lazy(() => ScreenSchema),
+    movie: z.lazy(() => MovieWithGenresSchema),
 });
 
 /**
