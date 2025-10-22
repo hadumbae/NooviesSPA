@@ -1,11 +1,12 @@
 import {FC, useState} from 'react';
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui/collapsible.tsx";
 import {ChevronDown, ChevronUp} from "lucide-react";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Props for the `CollapsibleTextblock` component.
  */
-interface TextblockProps {
+type TextblockProps = {
     /**
      * The main text content to display inside the collapsible section.
      */
@@ -22,6 +23,8 @@ interface TextblockProps {
      * @default "Show Less"
      */
     closeText?: string;
+
+    className?: string;
 }
 
 /**
@@ -41,17 +44,12 @@ interface TextblockProps {
  * ```
  */
 const CollapsibleTextblock: FC<TextblockProps> = (props) => {
+    const {text, openText = "Show More", closeText = "Show Less", className} = props;
     const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    const {
-        text,
-        openText = "Show More",
-        closeText = "Show Less",
-    } = props;
 
     return (
         <Collapsible
-            className="text-neutral-500 border-l-4 pl-4 space-y-4"
+            className="border-l-4 pl-4 space-y-4"
             open={isOpen}
             onOpenChange={setIsOpen}
         >
@@ -60,7 +58,7 @@ const CollapsibleTextblock: FC<TextblockProps> = (props) => {
                 {isOpen ? <ChevronUp /> : <ChevronDown />}
             </CollapsibleTrigger>
 
-            <CollapsibleContent className="text-justify">
+            <CollapsibleContent className={cn("text-justify", className)}>
                 {text}
             </CollapsibleContent>
         </Collapsible>
