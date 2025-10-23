@@ -1,6 +1,5 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {format} from "date-fns";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
@@ -33,7 +32,7 @@ type IndexProps = {
 const PersonIndexCard: FC<IndexProps> = ({person}) => {
     const {_id, name, dob, nationality, profileImage} = person;
 
-    const formattedDOB = format(dob, "dd MMM, yyyy");
+    const formattedDOB = dob.toFormat("dd MMM, yyyy");
     const formattedNationality = ISO3166Alpha2CountryConstant[nationality];
 
     return (
