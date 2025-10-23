@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import {Control} from "react-hook-form";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";

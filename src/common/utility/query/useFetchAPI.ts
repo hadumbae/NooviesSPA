@@ -1,5 +1,5 @@
-import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
-import RequestMethod from "@/common/type/RequestMethod.ts";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import RequestMethod from "@/common/type/request/RequestMethod.ts";
 import Logger from "@/common/utility/logger/Logger.ts";
 import handleBadResponse from "@/common/utility/use-fetch-api/handleBadResponse.ts";
 import parseJSON from "@/common/utility/use-fetch-api/parseJSON.ts";
@@ -54,7 +54,7 @@ type useFetchAPIParams<TData> = {
  */
 export default async function useFetchAPI<TData = unknown, TReturns = unknown>(
     params: useFetchAPIParams<TData>
-): Promise<FetchReturns<TReturns>> {
+): Promise<RequestReturns<TReturns>> {
     const funcName = useFetchAPI.name;
     const {url, data, signal, method = "GET"} = params;
 

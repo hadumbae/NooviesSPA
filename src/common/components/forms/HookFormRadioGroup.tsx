@@ -1,7 +1,7 @@
 import {RadioGroup, RadioGroupItem} from "@/common/components/ui/radio-group.tsx";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/common/components/ui/form.tsx";
 import {FieldValues, Path, UseFormReturn} from "react-hook-form";
-import HookRadioOption from "@/common/type/HookRadioOption.ts";
+import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
 import {cn} from "@/common/lib/utils.ts";
 
 /**

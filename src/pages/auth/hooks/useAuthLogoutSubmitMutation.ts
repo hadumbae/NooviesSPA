@@ -1,18 +1,18 @@
 import {useMutation} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
 import useLogoutAuthUser from "@/pages/auth/hooks/authUser/useLogoutAuthUser.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Parameters for configuring the logout mutation.
  *
- * Extends {@link FormMutationOnSubmitParams} but removes `onSubmitSuccess`
+ * Extends {@link MutationOnSubmitParams} but removes `onSubmitSuccess`
  * and `validationSchema` since logout does not require schema validation.
  */
-type LogoutParams = Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "validationSchema"> & {
+type LogoutParams = Omit<MutationOnSubmitParams, "onSubmitSuccess" | "validationSchema"> & {
     /**
      * Optional callback fired when logout succeeds.
      */

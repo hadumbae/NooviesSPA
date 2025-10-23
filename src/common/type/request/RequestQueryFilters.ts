@@ -15,6 +15,6 @@
  * };
  * ```
  */
-type QueryFilters = Record<string, any>;
+type RequestQueryFilters = Record<string, any>;
 
-export default QueryFilters;
+export default RequestQueryFilters;

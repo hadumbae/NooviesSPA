@@ -4,6 +4,7 @@ import {UseQueryResult} from "@tanstack/react-query";
 
 /**
  * Represents a React Query result along with metadata for management and validation.
+ * Typically used when filtering between enabled and disabled queries.
  *
  * @template TSchema - The Zod schema type used to validate the query data.
  * @template TData - The type of data returned by the query.

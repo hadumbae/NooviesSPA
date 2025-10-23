@@ -3,9 +3,9 @@ import {Control} from "react-hook-form";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import useFetchAllGenres from "@/pages/genres/hooks/useFetchAllGenres.ts";
-import QueryFilters from "@/common/type/QueryFilters.ts";
+import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import {Loader} from "lucide-react";
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 
 interface Props {
     name: string,
@@ -13,7 +13,7 @@ interface Props {
     description?: string;
     placeholder?: string;
     control: Control<any>;
-    filters?: QueryFilters;
+    filters?: RequestQueryFilters;
     isMulti?: boolean;
 }
 

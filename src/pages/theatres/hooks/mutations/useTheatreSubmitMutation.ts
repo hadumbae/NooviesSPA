@@ -3,19 +3,16 @@ import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.t
 import {TheatreSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import {TheatreForm, TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
-import {
-    FormMutationEditingParams,
-    FormMutationOnSubmitParams,
-} from "@/common/type/form/FormMutationResultParams.ts";
 import {toast} from "react-toastify";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
+import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 export type TheatreSubmitMutationParams =
-    Omit<FormMutationOnSubmitParams<Theatre>, "onSubmitSuccess"> &
-    FormMutationEditingParams &
+    Omit<MutationOnSubmitParams<Theatre>, "onSubmitSuccess"> &
+    MutationEditByIDParams &
     {
         form: UseFormReturn<TheatreFormValues>,
         onSubmitSuccess?: (theatre: Theatre) => void,

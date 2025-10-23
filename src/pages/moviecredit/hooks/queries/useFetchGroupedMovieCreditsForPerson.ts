@@ -1,11 +1,11 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import MovieCreditGroupedRepository from "@/pages/moviecredit/repositories/MovieCreditGroupedRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {UseQueryOptions} from "@/common/type/UseQueryOptions.ts";
+import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {MovieCreditDetailsExceptPersonGroupedByRole} from "@/pages/moviecredit/schemas/model/MovieCreditGroup.types.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
  * Parameters for `useGroupCreditsByRole` hook.

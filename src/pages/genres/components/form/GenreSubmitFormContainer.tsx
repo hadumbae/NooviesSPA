@@ -5,8 +5,8 @@ import useGenreSubmitMutation from "@/pages/genres/hooks/useGenreSubmitMutation.
 
 import {GenreForm, GenreFormValues} from "@/pages/genres/schema/form/GenreForm.types.ts";
 import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
-import {FormMutationEditingParams, FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import GenreSubmitFormView from "@/pages/genres/components/form/GenreSubmitFormView.tsx";
+import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for configuring the genre submission form.
@@ -17,7 +17,7 @@ import GenreSubmitFormView from "@/pages/genres/components/form/GenreSubmitFormV
  * Supports both creation and editing modes, determined by the presence of the `genre` prop.
  */
 type SubmitFormProps =
-    Omit<FormMutationOnSubmitParams, "onSubmitSuccess"> &
+    Omit<MutationOnSubmitParams, "onSubmitSuccess"> &
     {
         /**
          * Callback invoked when the genre submission succeeds.
@@ -74,7 +74,7 @@ const GenreSubmitFormContainer: FC<SubmitFormProps> = (params) => {
 
     const form = useGenreSubmitForm({genre, presetValues});
 
-    const editingParams: FormMutationEditingParams = genre
+    const editingParams: MutationEditByIDParams = genre
         ? {isEditing: true, _id: genre._id}
         : {isEditing: false};
 

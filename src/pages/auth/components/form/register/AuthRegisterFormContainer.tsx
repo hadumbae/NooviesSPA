@@ -3,15 +3,16 @@ import useAuthRegisterForm from "@/pages/auth/hooks/useAuthRegisterForm.ts";
 import useAuthRegisterSubmitMutation from "@/pages/auth/hooks/useAuthRegisterSubmitMutation.ts";
 import {UserRegisterData} from "@/pages/auth/schema/form/AuthForm.types.ts";
 import AuthRegisterFormView from "@/pages/auth/components/form/register/AuthRegisterFormView.tsx";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
+
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for the {@link AuthRegisterFormContainer} component.
  *
- * Extends {@link FormMutationOnSubmitParams} (excluding `onSubmitSuccess` and `validationSchema`)
+ * Extends {@link MutationOnSubmitParams} (excluding `onSubmitSuccess` and `validationSchema`)
  * with optional UI configuration.
  */
-type ContainerProps = Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "validationSchema"> & {
+type ContainerProps = Omit<MutationOnSubmitParams, "onSubmitSuccess" | "validationSchema"> & {
     /** Optional callback invoked when the registration succeeds. */
     onSubmitSuccess?: () => void;
 

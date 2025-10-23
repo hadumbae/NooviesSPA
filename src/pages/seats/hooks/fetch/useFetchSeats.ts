@@ -1,13 +1,13 @@
-import { EntityPaginatedQuery, RequestOptions } from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { SeatQueryFilters } from "@/pages/seats/schema/queries/SeatQueryOption.types.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
+import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 
 type FetchParams<TData = unknown> = {
-    queries: RequestOptions & EntityPaginatedQuery & SeatQueryFilters,
+    queries: RequestOptions & RequestPaginationOptions & SeatQueryFilters,
     options?: UseQueryOptions<TData>
 };
 

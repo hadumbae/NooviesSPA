@@ -6,14 +6,15 @@ import useTheatreSubmitMutation, {
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import {TheatreForm, TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import TheatreSubmitFormView from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormView.tsx";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
+
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 type SubmitEditProps = (
     { isEditing: true, theatre: Theatre } |
     { isEditing?: false, theatre?: never }
 );
 
-type SubmitFormProps = Omit<FormMutationOnSubmitParams<Theatre>, "onSubmitSuccess"> & {
+type SubmitFormProps = Omit<MutationOnSubmitParams<Theatre>, "onSubmitSuccess"> & {
     className?: string;
     disableFields?: (keyof TheatreFormValues)[];
     presetValues?: Partial<TheatreFormValues>;

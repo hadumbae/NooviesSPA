@@ -1,12 +1,12 @@
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
-import QueryFilters from "@/common/type/QueryFilters.ts";
+import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import {GenreArraySchema} from "@/pages/genres/schema/genre/Genre.schema.ts";
 import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
 import {UseQueryResult} from "@tanstack/react-query";
 import {GenreArray} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 export default function useFetchAllGenres(
-    params?: { filters?: QueryFilters, populate?: boolean }
+    params?: { filters?: RequestQueryFilters, populate?: boolean }
 ): UseQueryResult<GenreArray> {
     const {filters = {}, populate = false} = params || {};
 

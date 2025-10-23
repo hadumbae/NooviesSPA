@@ -2,7 +2,7 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import {OnDeleteMutationParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
 

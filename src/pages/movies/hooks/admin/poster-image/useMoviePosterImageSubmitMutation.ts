@@ -1,4 +1,3 @@
-import { FormMutationOnSubmitParams } from "@/common/type/form/FormMutationResultParams.ts";
 import { UseFormReturn } from "react-hook-form";
 import { MoviePosterImageForm, MoviePosterImageFormValues } from "@/pages/movies/schema/form/MoviePosterImage.types.ts";
 import { Movie } from "@/pages/movies/schema/movie/Movie.types.ts";
@@ -10,11 +9,12 @@ import MovieImageRepository from "@/pages/movies/repositories/image-repository/M
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
 import { MovieSchema } from "@/pages/movies/schema/movie/Movie.schema.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Parameters for submitting a movie poster image via mutation.
  */
-type ImageSubmitParams = FormMutationOnSubmitParams<Movie> & {
+type ImageSubmitParams = MutationOnSubmitParams<Movie> & {
     /** React Hook Form instance managing the poster image form. */
     form: UseFormReturn<MoviePosterImageFormValues>;
     /** The unique identifier of the movie to upload the poster image for. */

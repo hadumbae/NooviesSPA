@@ -5,7 +5,7 @@ import {
     AlertDialogHeader, AlertDialogTitle,
     AlertDialogTrigger
 } from "@/common/components/ui/alert-dialog.tsx";
-import {PresetOpenState} from "@/common/type/OpenStateProps.ts";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 
 /**
  * Props for the `EntityDeleteWarningDialog` component.

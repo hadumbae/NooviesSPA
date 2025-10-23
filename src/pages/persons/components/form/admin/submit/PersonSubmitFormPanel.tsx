@@ -12,7 +12,7 @@ import {
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import PersonSubmitFormContainer from "@/pages/persons/components/form/admin/submit/PersonSubmitFormContainer.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
-import {PresetOpenState} from "@/common/type/OpenStateProps.ts";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 
 /**
  * Props for `PersonSubmitFormPanel`.

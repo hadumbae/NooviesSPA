@@ -2,7 +2,7 @@ import {Control, FieldValues, Path} from "react-hook-form";
 import {Loader} from "lucide-react";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import ErrorMessage from "@/common/components/text/ErrorMessage.tsx";
 import useFetchSeatsForShowing from "@/pages/showings/hooks/queries/useFetchSeatsForShowing.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";

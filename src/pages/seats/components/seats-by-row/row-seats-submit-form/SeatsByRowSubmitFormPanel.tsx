@@ -1,5 +1,4 @@
 import { FC, PropsWithChildren, useState } from 'react';
-import { FormMutationOnSubmitParams } from "@/common/type/form/FormMutationResultParams.ts";
 import {
     Sheet,
     SheetContent,
@@ -13,6 +12,7 @@ import SeatsByRowSubmitFormContainer
 import { SeatsByRowFormValues } from "@/pages/seats/schema/form/SeatForm.types.ts";
 import { FormOptions } from "@/common/type/form/HookFormProps.ts";
 import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for SeatsByRowSubmitFormPanel.
@@ -23,7 +23,7 @@ import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
  * - Optional CSS className for styling.
  */
 type PanelProps =
-    FormMutationOnSubmitParams<Seat[]> &
+    MutationOnSubmitParams<Seat[]> &
     FormOptions<SeatsByRowFormValues> & {
     /** Optional CSS class for the root container */
     className?: string;

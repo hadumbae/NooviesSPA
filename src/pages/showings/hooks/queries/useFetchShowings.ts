@@ -1,10 +1,10 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import { EntityPaginatedQuery, RequestOptions } from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import { ShowingQueryOptions } from "@/pages/showings/schema/queries/ShowingQueryOption.types.ts";
-import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
+import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
+import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
  * Parameters for `UseFetchShowings` hook.
@@ -13,7 +13,7 @@ import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.t
  */
 type FetchParams<TData = unknown> = {
     /** Optional query filters, pagination, and sort options */
-    queries?: RequestOptions & EntityPaginatedQuery & ShowingQueryOptions;
+    queries?: RequestOptions & RequestPaginationOptions & ShowingQueryOptions;
     /** Optional React Query options such as `enabled`, `staleTime`, `initialData`, and `placeholderData` */
     options?: UseQueryOptions<TData>;
 };

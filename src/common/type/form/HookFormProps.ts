@@ -1,6 +1,6 @@
 import {FieldValues, SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
-import {FormEditingParams, FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Optional configuration for a form’s UI behavior.
@@ -31,6 +31,27 @@ export type FormOptions<TFormValues extends FieldValues> = {
 };
 
 /**
+ * Parameters that describe whether a form is in editing mode and,
+ * if so, the entity being edited.
+ *
+ * @template TEntity - The shape of the entity being edited.
+ */
+export type FormEditByEntityParams<TEntity = any> =
+    | {
+    /** Indicates the form is in editing mode. */
+    isEditing: true;
+
+    /** The entity instance currently being edited. */
+    entity: TEntity;
+} | {
+    /** Indicates the form is in create mode (default). */
+    isEditing?: false;
+
+    /** Entity is not provided in create mode. */
+    entity?: never;
+};
+
+/**
  * Props for a generic form container component that orchestrates:
  *
  * - Form state and validation
@@ -44,16 +65,16 @@ export type FormOptions<TFormValues extends FieldValues> = {
  *
  * @remarks
  * Combines:
- * - {@link FormMutationOnSubmitParams} for mutation callbacks and messages.
- * - {@link FormEditingParams} to indicate create or edit mode.
+ * - {@link MutationOnSubmitParams} for mutation callbacks and messages.
+ * - {@link FormEditByEntityParams} to indicate create or edit mode.
  * - {@link FormOptions} for optional UI-level behavior.
  */
 export type FormContainerProps<
     TModel,
     TEntity,
     TFormValues extends FieldValues,
-> = FormMutationOnSubmitParams<TModel> &
-    FormEditingParams<TEntity> &
+> = MutationOnSubmitParams<TModel> &
+    FormEditByEntityParams<TEntity> &
     FormOptions<TFormValues>;
 
 /**

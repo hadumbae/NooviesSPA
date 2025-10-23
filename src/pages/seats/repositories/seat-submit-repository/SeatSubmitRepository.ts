@@ -1,4 +1,4 @@
-import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {
     ISeatSubmitRepository,
     SubmitSeatsByRowParams
@@ -10,7 +10,7 @@ import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
 const repository: ISeatSubmitRepository = {
     _baseURL: `${import.meta.env.VITE_API_URL}/api/v1/admin/seats`,
 
-    submitSeatsByRow<TReturns = Seat[]>(params: SubmitSeatsByRowParams): Promise<FetchReturns<TReturns>> {
+    submitSeatsByRow<TReturns = Seat[]>(params: SubmitSeatsByRowParams): Promise<RequestReturns<TReturns>> {
         const {data, ...options} = params;
         const url = buildQueryURL({baseURL: this._baseURL, path: "create/by-row", queries: options});
         return useFetchAPI({url, data, method: "POST"});

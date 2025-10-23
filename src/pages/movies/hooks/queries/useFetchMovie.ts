@@ -3,7 +3,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { FetchByIDParams } from "@/common/type/query/FetchByIDParams.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
+import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
 
 /**
  * Parameters for fetching a single movie.

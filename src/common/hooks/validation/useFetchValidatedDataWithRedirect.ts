@@ -1,7 +1,7 @@
 import {QueryKey, UseQueryResult} from "@tanstack/react-query";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import parseResponseData from "@/common/utility/query/parseResponseData.ts";
-import fetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import fetchReturns from "@/common/type/request/RequestReturns.ts";
 import {ZodType} from "zod";
 import useQueryWithRedirect from "@/common/hooks/errors/useQueryWithRedirect.ts";
 

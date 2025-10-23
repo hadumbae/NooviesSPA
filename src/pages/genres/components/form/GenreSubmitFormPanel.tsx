@@ -1,5 +1,4 @@
 import {FC, ReactNode, useState} from 'react';
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 import {
     Sheet,
@@ -12,12 +11,13 @@ import {
 import {GenreFormValues} from "@/pages/genres/schema/form/GenreForm.types.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import GenreSubmitFormContainer from "@/pages/genres/components/form/GenreSubmitFormContainer.tsx";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 type EditingProps =
     | { isEditing: true, genre: Genre }
     | { isEditing?: false, genre?: never };
 
-type PanelProps = Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & EditingProps & {
+type PanelProps = Omit<MutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & EditingProps & {
     children?: ReactNode;
     onSubmitSuccess?: (genre: Genre) => void;
     onSubmitError?: (error: unknown) => void;

@@ -5,22 +5,20 @@ import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import {PersonSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 import {PersonForm, PersonFormValues} from "@/pages/persons/schema/forms/PersonForm.types.ts";
-import {
-    FormMutationEditingParams, FormMutationOnSubmitParams,
-} from "@/common/type/form/FormMutationResultParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Parameters for submitting a `Person` form mutation.
  *
- * Extends {@link FormMutationOnSubmitParams} (excluding `onSubmitSuccess` and `onSubmitError`)
- * and merges with {@link FormMutationEditingParams} to support both create and update workflows.
+ * Extends {@link MutationOnSubmitParams} (excluding `onSubmitSuccess` and `onSubmitError`)
+ * and merges with {@link MutationEditByIDParams} to support both create and update workflows.
  */
 export type PersonSubmitParams =
-    Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> &
-    FormMutationEditingParams &
+    Omit<MutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> &
+    MutationEditByIDParams &
     {
         /**
          * The `react-hook-form` instance managing the `PersonFormValues` state.

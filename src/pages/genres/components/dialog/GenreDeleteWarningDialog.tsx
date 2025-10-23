@@ -1,17 +1,17 @@
 import {FC, PropsWithChildren} from 'react';
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import useGenreDeleteMutation from "@/pages/genres/hooks/useGenreDeleteMutation.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for the {@link GenreDeleteWarningDialog} component.
  *
- * Extends {@link FormMutationOnSubmitParams} for submission configuration,
+ * Extends {@link MutationOnSubmitParams} for submission configuration,
  * omitting `onSubmitSuccess` and `onSubmitError` to redefine them with
  * deletion-specific signatures.
  */
-type DialogProps = Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
+type DialogProps = Omit<MutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
     /**
      * The unique identifier of the genre to be deleted.
      */

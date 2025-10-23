@@ -1,19 +1,19 @@
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
-import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface IMovieFavouriteRepository {
     baseURL: string;
-    addToFavourites: (params: {movieID: ObjectId}) => Promise<FetchReturns>;
-    removeFromFavourites: (params: {movieID: ObjectId}) => Promise<FetchReturns>;
-    fetchFavouriteMovieAndShowings: (params: {movieID: ObjectId}) => Promise<FetchReturns>;
+    addToFavourites: (params: {movieID: ObjectId}) => Promise<RequestReturns>;
+    removeFromFavourites: (params: {movieID: ObjectId}) => Promise<RequestReturns>;
+    fetchFavouriteMovieAndShowings: (params: {movieID: ObjectId}) => Promise<RequestReturns>;
 }
 
 const MovieFavouriteRepository: IMovieFavouriteRepository = {
     baseURL: `${import.meta.env.VITE_API_URL}/api/v1/admin/movies`,
 
-    async fetchFavouriteMovieAndShowings({movieID}: {movieID: ObjectId}): Promise<FetchReturns> {
+    async fetchFavouriteMovieAndShowings({movieID}: {movieID: ObjectId}): Promise<RequestReturns> {
         const url = buildQueryURL({baseURL: this.baseURL, path: `get/${movieID}/favourites`});
         return useFetchAPI({method: "GET", url});
     },

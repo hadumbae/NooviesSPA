@@ -3,21 +3,21 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {PersonImageRepository} from "@/pages/persons/repositories/PersonImageRepository.ts";
 import {toast} from "react-toastify";
 import {PersonProfileImageForm, PersonProfileImageFormValues} from "@/pages/persons/schema/forms/PersonForm.types.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {PersonSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
 import {UseFormReturn} from "react-hook-form";
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Parameters for submitting a profile image for a `Person`.
  *
- * Extends {@link FormMutationOnSubmitParams} but overrides
+ * Extends {@link MutationOnSubmitParams} but overrides
  * `onSubmitSuccess` and `onSubmitError` to use a `Person`-specific signature.
  */
-type ImageSubmitParams = Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
+type ImageSubmitParams = Omit<MutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
     /**
      * The ObjectId of the `Person` whose profile image will be updated.
      */

@@ -1,8 +1,8 @@
 import {Control, FieldValues, Path} from "react-hook-form";
 import {Loader} from "lucide-react";
 
-import QueryFilters from "@/common/type/QueryFilters.ts";
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
@@ -52,7 +52,7 @@ interface Props<TSubmit extends FieldValues> {
     /**
      * Optional filters applied when querying movie options.
      */
-    filters?: QueryFilters;
+    filters?: RequestQueryFilters;
 }
 
 /**

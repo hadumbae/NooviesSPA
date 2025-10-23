@@ -1,12 +1,12 @@
 import {FC, useEffect} from 'react';
 import useRoleTypeSubmitForm from "@/pages/roletype/hooks/forms/useRoleTypeSubmitForm.ts";
-import {FormMutationEditingParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import {RoleTypeForm, RoleTypeFormValues} from "@/pages/roletype/schema/submit-form/RoleTypeForm.types.ts";
 import useRoleTypeSubmitMutation from "@/pages/roletype/hooks/mutations/useRoleTypeSubmitMutation.ts";
 import RoleTypeSubmitFormView from "@/pages/roletype/components/forms/RoleTypeSubmitFormView.tsx";
 
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
+import {MutationEditByIDParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for the RoleTypeSubmitFormContainer component.
@@ -59,7 +59,7 @@ const RoleTypeSubmitFormContainer: FC<SubmitFormProps> = (props) => {
     }, [department]);
 
     /** Prepare mutation parameters, including editing mode and form */
-    const isEditingParams: FormMutationEditingParams = isEditing === true
+    const isEditingParams: MutationEditByIDParams = isEditing === true
         ? {isEditing: true, _id: entity._id}
         : {isEditing: false};
 

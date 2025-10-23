@@ -1,11 +1,11 @@
-import {EntityPaginatedQuery, RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import {TheatreFilterQuery} from "@/pages/theatres/schema/queries/TheatreFilterQuerySchema.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 
-type FetchQueries = RequestOptions & EntityPaginatedQuery & TheatreFilterQuery;
+type FetchQueries = RequestOptions & RequestPaginationOptions & TheatreFilterQuery;
 
 export default function useFetchTheatres(queries: FetchQueries = {}): UseQueryResult<unknown, HttpResponseError> {
     const queryKey = ["fetch_theatres_by_query", queries] as const;

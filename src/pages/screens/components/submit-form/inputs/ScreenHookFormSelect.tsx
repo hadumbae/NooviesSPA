@@ -1,7 +1,7 @@
 import {Control, FieldValues, Path} from "react-hook-form";
-import QueryFilters from "@/common/type/QueryFilters.ts";
+import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import {Loader} from "lucide-react";
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
@@ -16,7 +16,7 @@ interface Props<TSubmit extends FieldValues> {
     placeholder?: string;
     control: Control<TSubmit>,
     isMulti?: boolean;
-    filters?: QueryFilters,
+    filters?: RequestQueryFilters,
 }
 
 const ScreenHookFormSelect = <TSubmit extends FieldValues>(

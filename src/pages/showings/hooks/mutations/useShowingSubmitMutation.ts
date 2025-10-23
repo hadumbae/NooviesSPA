@@ -4,21 +4,18 @@ import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.t
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {ShowingForm, ShowingFormValues} from "@/pages/showings/schema/form/ShowingForm.types.ts";
-import {
-    FormMutationEditingParams,
-    FormMutationOnSubmitParams,
-} from "@/common/type/form/FormMutationResultParams.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Combined parameters for the showing submission mutation.
  *
  * Extends form mutation configuration with editing and submission behavior.
  */
-type SubmitMutationParams = FormMutationOnSubmitParams<Showing> &
-    FormMutationEditingParams & {
+type SubmitMutationParams = MutationOnSubmitParams<Showing> &
+    MutationEditByIDParams & {
     /** React Hook Form instance for managing showing form state. */
     form: UseFormReturn<ShowingFormValues>;
 };

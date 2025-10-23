@@ -1,4 +1,4 @@
-import {createRequestRepository} from "@/common/repositories/RequestRepository.ts";
+import {createRequestRepository} from "@/common/repositories/request-repository/RequestRepository.ts";
 
 const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/admin/seatmaps`;
 const repository =  createRequestRepository({baseURL});

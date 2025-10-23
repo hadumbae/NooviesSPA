@@ -4,9 +4,9 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {Ellipsis} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {GenreDetails} from "@/pages/genres/schema/genre/Genre.types.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import GenreSubmitFormPanel from "@/pages/genres/components/form/GenreSubmitFormPanel.tsx";
 import GenreDeleteWarningDialog from "@/pages/genres/components/dialog/GenreDeleteWarningDialog.tsx";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for the `GenreOptions` component.
@@ -21,7 +21,7 @@ import GenreDeleteWarningDialog from "@/pages/genres/components/dialog/GenreDele
  * @property onSubmitSuccess - Optional callback invoked after successful form submission or deletion.
  * @property onSubmitError - Optional callback invoked if an error occurs during submission or deletion.
  */
-type OptionProps = Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
+type OptionProps = Omit<MutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
     genre: GenreDetails;
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
     className?: string;

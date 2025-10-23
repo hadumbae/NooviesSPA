@@ -6,7 +6,8 @@ import useSeatSubmitMutation, {
 import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
 import { SeatForm, SeatFormValues } from "@/pages/seats/schema/form/SeatForm.types.ts";
 import SeatSubmitFormView from "@/pages/seats/components/forms/submit-form/SeatSubmitFormView.tsx";
-import { FormMutationOnSubmitParams } from "@/common/type/form/FormMutationResultParams.ts";
+
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for the SeatSubmitFormContainer component.
@@ -18,7 +19,7 @@ import { FormMutationOnSubmitParams } from "@/common/type/form/FormMutationResul
  * - Optional callback `onSubmitSuccess` invoked after a successful submission.
  */
 type FormProps =
-    Omit<FormMutationOnSubmitParams<Seat>, "onSubmitSuccess"> &
+    Omit<MutationOnSubmitParams<Seat>, "onSubmitSuccess"> &
     (| { isEditing: true; seat: Seat } | { isEditing?: false; seat?: never }) &
     {
         /** Optional CSS class for the container */

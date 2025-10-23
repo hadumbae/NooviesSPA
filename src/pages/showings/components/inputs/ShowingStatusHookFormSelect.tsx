@@ -1,6 +1,6 @@
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import {Control, FieldValues, Path} from "react-hook-form";
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import ShowingStatusConstant from "@/pages/showings/constants/ShowingStatusConstant.ts";
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 

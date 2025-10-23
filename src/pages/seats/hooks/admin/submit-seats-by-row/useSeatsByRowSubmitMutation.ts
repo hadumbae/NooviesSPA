@@ -1,7 +1,6 @@
 import {SeatsByRowForm, SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import SeatSubmitRepository from "@/pages/seats/repositories/seat-submit-repository/SeatSubmitRepository.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {toast} from "react-toastify";
 import {UseFormReturn} from "react-hook-form";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
@@ -9,11 +8,12 @@ import {SeatArraySchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Parameters for the {@link useSeatsByRowSubmitMutation} hook.
  */
-type SubmitMutationParams = FormMutationOnSubmitParams<SeatArray> & {
+type SubmitMutationParams = MutationOnSubmitParams<SeatArray> & {
     /** React Hook Form instance managing the form state. */
     form: UseFormReturn<SeatsByRowFormValues>;
 };

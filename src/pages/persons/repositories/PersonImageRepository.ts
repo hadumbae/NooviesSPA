@@ -1,8 +1,8 @@
-import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 type UploadProfileImageParams = RequestOptions & {
     personID: ObjectId;
@@ -15,14 +15,14 @@ type RemoveProfileImageParams = RequestOptions & {
 
 export interface IPersonImageRepository {
     baseURL: string;
-    uploadProfileImage: (params: UploadProfileImageParams) => Promise<FetchReturns>;
-    removeProfileImage: (params: RemoveProfileImageParams) => Promise<FetchReturns>;
+    uploadProfileImage: (params: UploadProfileImageParams) => Promise<RequestReturns>;
+    removeProfileImage: (params: RemoveProfileImageParams) => Promise<RequestReturns>;
 }
 
 export const PersonImageRepository: IPersonImageRepository = {
     baseURL: `${import.meta.env.VITE_API_URL}/api/v1/admin/persons`,
 
-    uploadProfileImage(params: UploadProfileImageParams): Promise<FetchReturns> {
+    uploadProfileImage(params: UploadProfileImageParams): Promise<RequestReturns> {
         const {personID, data, ...options} = params;
 
         const path = `update/${personID}/images/profile`;
@@ -31,7 +31,7 @@ export const PersonImageRepository: IPersonImageRepository = {
         return useFetchAPI({url, method: "PATCH", data});
     },
 
-    removeProfileImage(params: RemoveProfileImageParams): Promise<FetchReturns> {
+    removeProfileImage(params: RemoveProfileImageParams): Promise<RequestReturns> {
         const {personID, ...options} = params;
 
     const path = `delete/${personID}/images/profile`;

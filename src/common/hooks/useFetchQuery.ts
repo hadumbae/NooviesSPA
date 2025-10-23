@@ -1,6 +1,6 @@
 import {QueryKey, useQuery, UseQueryOptions, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import fetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import fetchReturns from "@/common/type/request/RequestReturns.ts";
 
 /**
  * Parameters for `useFetchQuery`, defining the query key, fetch action,

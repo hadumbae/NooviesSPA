@@ -1,4 +1,4 @@
-import {OnDeleteMutationParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import RoleTypeRepository from "@/pages/roletype/repositories/RoleTypeRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";

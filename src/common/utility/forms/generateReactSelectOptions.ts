@@ -1,4 +1,4 @@
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 
 /**
  * Parameters for generating options compatible with `react-select` from generic data.

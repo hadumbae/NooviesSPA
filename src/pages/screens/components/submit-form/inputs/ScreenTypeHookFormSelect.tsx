@@ -1,7 +1,7 @@
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import {Control, FieldValues, Path} from "react-hook-form";
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import ScreenTypeConstant from "@/pages/screens/constants/ScreenTypeConstant.ts";
 
 interface Props<TSubmit extends FieldValues> {

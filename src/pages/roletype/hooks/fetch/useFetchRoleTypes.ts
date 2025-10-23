@@ -1,23 +1,23 @@
-import { EntityPaginatedQuery, RequestOptions } from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import { RoleTypeQueryOptions } from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import RoleTypeRepository from "@/pages/roletype/repositories/RoleTypeRepository.ts";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
+import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
  * Parameters for fetching role types via {@link useFetchRoleTypes}.
  *
  * Combines:
  * - {@link RequestOptions} — controls population, virtual fields, and result limits
- * - {@link EntityPaginatedQuery} — pagination settings (`paginated`, `page`, `perPage`)
+ * - {@link RequestPaginationOptions} — pagination settings (`paginated`, `page`, `perPage`)
  * - {@link RoleTypeQueryOptions} — role type-specific filters and sorts (`roleName`, `department`, etc.)
  *
  * @template TData - The expected shape of the fetched data.
  */
 type FetchParams<TData = unknown> = {
-    queries?: RequestOptions & EntityPaginatedQuery & RoleTypeQueryOptions;
+    queries?: RequestOptions & RequestPaginationOptions & RoleTypeQueryOptions;
     options?: UseQueryOptions<TData>;
 };
 

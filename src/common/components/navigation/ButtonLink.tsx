@@ -2,8 +2,8 @@ import {FC, HTMLAttributeAnchorTarget, PropsWithChildren} from 'react';
 import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {Link, To} from "react-router-dom";
-import ButtonVariant from "@/common/type/ui/ButtonVariant.ts";
-import ButtonSize from "@/common/type/ui/ButtonSize.ts";
+import ButtonVariant from "@/common/type/ui/shad-cn-button/ButtonVariant.ts";
+import ButtonSize from "@/common/type/ui/shad-cn-button/ButtonSize.ts";
 
 interface Props {
     to: To;

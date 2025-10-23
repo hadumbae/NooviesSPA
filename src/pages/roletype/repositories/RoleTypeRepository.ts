@@ -1,4 +1,4 @@
-import { createRequestRepository } from "@/common/repositories/RequestRepository.ts";
+import { createRequestRepository } from "@/common/repositories/request-repository/RequestRepository.ts";
 
 /**
  * Base URL for the Role Types API.

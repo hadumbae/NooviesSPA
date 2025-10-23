@@ -1,10 +1,10 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { EntityPaginatedQuery, RequestOptions } from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import { PersonQueryFilters } from "@/pages/persons/schema/queries/PersonFilter.types.ts";
-import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
+import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
  * Combined query parameters type for fetching persons.
@@ -13,12 +13,12 @@ import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
  *
  * This type combines:
  * - {@link RequestOptions} — controls population, virtual fields, and result limits
- * - {@link EntityPaginatedQuery} — pagination settings such as page number and page size
+ * - {@link RequestPaginationOptions} — pagination settings such as page number and page size
  * - {@link PersonQueryFilters} — filters specific to the person entity like `_id`, `name`, and `nationality`
  * - {@link UseQueryOptions} — optional query behavior settings such as `staleTime`, `enabled`, `initialData`, and `placeholderData`
  */
 export type QueryParams<TData = unknown> = {
-    queries?: RequestOptions & EntityPaginatedQuery & PersonQueryFilters;
+    queries?: RequestOptions & RequestPaginationOptions & PersonQueryFilters;
     options?: UseQueryOptions<TData>;
 };
 
@@ -30,7 +30,7 @@ export type QueryParams<TData = unknown> = {
  * @param params - Object containing query parameters and optional query options.
  * @param params.queries - Combined filters, pagination, and request options.
  *   @see {@link RequestOptions}
- *   @see {@link EntityPaginatedQuery}
+ *   @see {@link RequestPaginationOptions}
  *   @see {@link PersonQueryFilters}
  * @param params.options - Optional query behavior settings.
  *   @see {@link UseQueryOptions#enabled}

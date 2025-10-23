@@ -1,4 +1,4 @@
-import { OnDeleteMutationParams } from "@/common/type/form/FormMutationResultParams.ts";
+import { OnDeleteMutationParams } from "@/common/type/form/MutationDeleteParams.ts";
 import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import MovieImageRepository from "@/pages/movies/repositories/image-repository/MovieImageRepository.ts";

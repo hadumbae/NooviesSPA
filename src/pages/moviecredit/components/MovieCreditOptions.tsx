@@ -5,7 +5,7 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {Ellipsis} from "lucide-react";
 import MovieCreditSubmitFormPanel from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormPanel.tsx";
 import {MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
-import {EntityOptionProps} from "@/common/type/EntityOptionProps.ts";
+import {EntityOptionProps} from "@/common/type/components/EntityOptionProps.ts";
 import MovieCreditDeleteWarningDialog from "@/pages/moviecredit/components/dialog/MovieCreditDeleteWarningDialog.tsx";
 
 /**

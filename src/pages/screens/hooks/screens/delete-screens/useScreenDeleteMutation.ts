@@ -2,7 +2,7 @@ import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-qu
 import {toast} from "react-toastify";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {OnDeleteMutationParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
 

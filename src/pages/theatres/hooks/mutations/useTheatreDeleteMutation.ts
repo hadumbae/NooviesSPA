@@ -4,10 +4,10 @@ import {toast} from "react-toastify";
 import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.ts";
 
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
-export default function useTheatreDeleteMutation(options: FormMutationOnSubmitParams) {
+export default function useTheatreDeleteMutation(options: MutationOnSubmitParams) {
     const {successMessage, onSubmitSuccess, errorMessage, onSubmitError} = options;
 
     const mutationKey = ["delete_single_theatre"];

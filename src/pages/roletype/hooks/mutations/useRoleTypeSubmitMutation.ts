@@ -1,4 +1,3 @@
-import {FormMutationEditingParams, FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {UseFormReturn} from "react-hook-form";
 import {RoleTypeForm, RoleTypeFormValues} from "@/pages/roletype/schema/submit-form/RoleTypeForm.types.ts";
 import RoleTypeRepository from "@/pages/roletype/repositories/RoleTypeRepository.ts";
@@ -9,12 +8,13 @@ import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Parameters for submitting Role Type form data.
  */
-type FormSubmitParams = FormMutationOnSubmitParams<RoleType> &
-    FormMutationEditingParams & {
+type FormSubmitParams = MutationOnSubmitParams<RoleType> &
+    MutationEditByIDParams & {
     /** The `react-hook-form` instance controlling the form. */
     form: UseFormReturn<RoleTypeFormValues>;
 };

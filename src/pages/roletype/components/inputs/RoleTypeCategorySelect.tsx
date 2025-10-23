@@ -1,7 +1,7 @@
 import RoleTypeCrewCategoryConstant from "@/pages/roletype/constant/RoleTypeCrewCategoryConstant.ts";
 import RoleTypeCastCategoryConstant from "@/pages/roletype/constant/RoleTypeCastCategoryConstant.ts";
 import { RoleTypeDepartment } from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import { Control, FieldValues, Path } from "react-hook-form";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";

@@ -1,7 +1,7 @@
 import Select from "react-select";
 import {Control, Controller, FieldValues, Path} from "react-hook-form";
 
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import {FormControl, FormDescription, FormItem, FormLabel} from "@/common/components/ui/form.tsx";
 import HookFormErrorMessage from "@/common/components/forms/HookFormErrorMessage.tsx";
 import {cn} from "@/common/lib/utils.ts";

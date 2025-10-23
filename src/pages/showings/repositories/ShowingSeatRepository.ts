@@ -1,11 +1,11 @@
-import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 
 interface IShowingSeatRepository {
     baseURL: string;
-    fetchSeatsForShowing(params: {showingID: ObjectId, populate?: boolean, mapped?: boolean}): Promise<FetchReturns>;
+    fetchSeatsForShowing(params: {showingID: ObjectId, populate?: boolean, mapped?: boolean}): Promise<RequestReturns>;
 }
 
 const ShowingSeatRepository: IShowingSeatRepository = {
@@ -13,7 +13,7 @@ const ShowingSeatRepository: IShowingSeatRepository = {
 
     async fetchSeatsForShowing(
         params: { showingID: ObjectId, populate?: boolean, mapped?: boolean }
-    ): Promise<FetchReturns> {
+    ): Promise<RequestReturns> {
         const {showingID, populate = false, mapped = false} = params;
 
         const url = buildQueryURL({

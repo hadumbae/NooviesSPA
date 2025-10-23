@@ -1,6 +1,5 @@
 import { FC, ReactNode, useState } from 'react';
-import { PresetOpenState } from "@/common/type/OpenStateProps.ts";
-import { FormMutationOnSubmitParams } from "@/common/type/form/FormMutationResultParams.ts";
+import { PresetOpenState } from "@/common/type/ui/OpenStateProps.ts";
 import { Movie } from "@/pages/movies/schema/movie/Movie.types.ts";
 import {
     Sheet,
@@ -14,6 +13,7 @@ import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
 import MoviePosterImageSubmitFormContainer
     from "@/pages/movies/components/forms/poster-image/MoviePosterImageSubmitFormContainer.tsx";
 import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for `MoviePosterImageSubmitFormPanel`.
@@ -26,7 +26,7 @@ import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
  */
 type FormPanelProps =
     PresetOpenState &
-    FormMutationOnSubmitParams<Movie> & {
+    MutationOnSubmitParams<Movie> & {
     /** The ID of the movie for which the poster image is being uploaded */
     movieID: ObjectId;
 

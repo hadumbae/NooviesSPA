@@ -2,7 +2,7 @@ import {FC, PropsWithChildren} from 'react';
 import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {To} from "react-router-dom";
-import ButtonVariant from "@/common/type/ui/ButtonVariant.ts";
+import ButtonVariant from "@/common/type/ui/shad-cn-button/ButtonVariant.ts";
 import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 
 /**

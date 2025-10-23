@@ -1,6 +1,6 @@
 import {forwardRef, PropsWithChildren} from 'react';
 import {cn} from "@/common/lib/utils.ts";
-import ButtonVariant from "@/common/type/ui/ButtonVariant.ts";
+import ButtonVariant from "@/common/type/ui/shad-cn-button/ButtonVariant.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 
 interface Props {

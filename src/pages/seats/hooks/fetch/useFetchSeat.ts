@@ -2,7 +2,7 @@ import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
-import {UseQueryOptions} from "@/common/type/UseQueryOptions.ts";
+import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 
 type FetchParams<TData = unknown> = FetchByIDParams & UseQueryOptions<TData>;
 

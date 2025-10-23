@@ -16,8 +16,8 @@ import {PersonQueryFilters} from "@/pages/persons/schema/queries/PersonFilter.ty
 import {RoleTypeQueryFilters} from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import {RoleTypeArray} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
-import {FormMutationEditingParams} from "@/common/type/form/FormMutationResultParams.ts";
 import useMovieCreditFormDataQueries from "@/pages/moviecredit/hooks/forms/useMovieCreditFormDataQueries.ts";
+import {MutationEditByIDParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for {@link MovieCreditSubmitFormContainer}.
@@ -96,7 +96,7 @@ const MovieCreditSubmitFormContainer: FC<ContainerProps> = (props) => {
     }
 
     // Prepare mutation params for create or edit
-    const mutationParams: FormMutationEditingParams = isEditing === true
+    const mutationParams: MutationEditByIDParams = isEditing === true
         ? {isEditing: true, _id: entity._id, ...mutationProps}
         : {isEditing: false, ...mutationProps};
 

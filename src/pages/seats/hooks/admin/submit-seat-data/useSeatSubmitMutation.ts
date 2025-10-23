@@ -1,10 +1,6 @@
 import {UseFormReturn} from "react-hook-form";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
-import {
-    FormMutationEditingParams,
-    FormMutationOnSubmitParams,
-} from "@/common/type/form/FormMutationResultParams.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import {toast} from "react-toastify";
@@ -13,6 +9,7 @@ import handleMutationResponse from "@/common/handlers/mutation/handleMutationRes
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import Logger from "@/common/utility/logger/Logger.ts";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Parameters for the `useSeatSubmitMutation` hook.
@@ -27,8 +24,8 @@ import handleMutationFormError from "@/common/utility/mutations/handleMutationFo
  * @template TSchema - Optional Zod schema type for validation (not required here).
  */
 export type SeatSubmitMutationFormParams =
-    Omit<FormMutationOnSubmitParams<Seat>, "validationSchema"> &
-    FormMutationEditingParams & {
+    Omit<MutationOnSubmitParams<Seat>, "validationSchema"> &
+    MutationEditByIDParams & {
     /** React Hook Form instance for managing form state and validation. */
     form: UseFormReturn<SeatFormValues>;
 };

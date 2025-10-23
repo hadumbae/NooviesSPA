@@ -5,20 +5,20 @@ import SeatsByRowSubmitFormView
     from "@/pages/seats/components/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormView.tsx";
 import {SeatsByRowForm, SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";
 import Logger from "@/common/utility/logger/Logger.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for the SeatsByRowSubmitFormContainer component.
  *
  * Combines:
- * - Mutation submission parameters (excluding `validationSchema`) via {@link FormMutationOnSubmitParams}.
+ * - Mutation submission parameters (excluding `validationSchema`) via {@link MutationOnSubmitParams}.
  * - Optional form UI configuration via {@link FormOptions}.
  * - Optional CSS class for styling.
  */
 type ContainerProps =
-    Omit<FormMutationOnSubmitParams<SeatArray>, "validationSchema"> &
+    Omit<MutationOnSubmitParams<SeatArray>, "validationSchema"> &
     FormOptions<SeatsByRowFormValues> &
     {
         /** Optional CSS class applied to the container wrapper. */

@@ -5,16 +5,16 @@ import {GenreSchema} from "@/pages/genres/schema/genre/Genre.schema.ts";
 import {toast} from "react-toastify";
 import {GenreForm, GenreFormValues} from "@/pages/genres/schema/form/GenreForm.types.ts";
 import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
-import {FormMutationEditingParams, FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Parameters for handling a Genre form submission mutation.
  *
- * Extends {@link FormMutationOnSubmitParams} (excluding its `onSubmitSuccess`)
- * and {@link FormMutationEditingParams}, with an additional required `form`
+ * Extends {@link MutationOnSubmitParams} (excluding its `onSubmitSuccess`)
+ * and {@link MutationEditByIDParams}, with an additional required `form`
  * instance and an optional `onSubmitSuccess` callback specific to `Genre`.
  *
  * This type is designed for use with hooks or utilities that handle
@@ -28,8 +28,8 @@ import handleMutationFormError from "@/common/utility/mutations/handleMutationFo
  * @property onSubmitSuccess - Optional callback invoked when the submission
  *                             succeeds, receiving the created or updated `Genre`.
  */
-type useGenreSubmitMutationParams = Omit<FormMutationOnSubmitParams, "onSubmitSuccess">
-    & FormMutationEditingParams & {
+type useGenreSubmitMutationParams = Omit<MutationOnSubmitParams, "onSubmitSuccess">
+    & MutationEditByIDParams & {
     form: UseFormReturn<GenreFormValues>;
     onSubmitSuccess?: (genre: Genre) => void;
 };

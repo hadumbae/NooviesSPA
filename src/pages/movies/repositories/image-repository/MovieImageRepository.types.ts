@@ -1,5 +1,5 @@
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
 
 /**
  * Parameters for querying a movie by its unique identifier.
@@ -33,7 +33,7 @@ export interface IImageRepository {
      * @param params - The movie ID and image form data.
      * @returns A promise that resolves with the API response.
      */
-    uploadPosterImage: (params: UploadPosterImageParams) => Promise<FetchReturns>;
+    uploadPosterImage: (params: UploadPosterImageParams) => Promise<RequestReturns>;
 
     /**
      * Deletes the poster image for a specific movie.
@@ -41,5 +41,5 @@ export interface IImageRepository {
      * @param params - The movie ID of the poster image to delete.
      * @returns A promise that resolves with the API response.
      */
-    deletePosterImage: (params: QueryByIDParams) => Promise<FetchReturns>;
+    deletePosterImage: (params: QueryByIDParams) => Promise<RequestReturns>;
 }

@@ -2,18 +2,18 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
 import {toast} from "react-toastify";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Parameters for the `useGenreDeleteMutation` hook.
  *
- * This type extends {@link FormMutationOnSubmitParams} but overrides the
+ * This type extends {@link MutationOnSubmitParams} but overrides the
  * `onSubmitSuccess` and `onSubmitError` callbacks to provide signatures
  * specific to delete operations.
  */
-type DeleteMutationParams = Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
+type DeleteMutationParams = Omit<MutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
     /**
      * Callback invoked when the genre deletion succeeds.
      */

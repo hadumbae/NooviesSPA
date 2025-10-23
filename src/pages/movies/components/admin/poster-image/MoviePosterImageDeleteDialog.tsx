@@ -1,11 +1,11 @@
 import {FC} from 'react';
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {OnDeleteMutationParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import useMoviePosterImageDeleteMutation
     from "@/pages/movies/hooks/admin/poster-image/useMoviePosterImageDeleteMutation.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
-import {PresetOpenState} from "@/common/type/OpenStateProps.ts";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 
 type DialogProps = Omit<OnDeleteMutationParams, "onDeleteSuccess"> & PresetOpenState & {

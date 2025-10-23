@@ -2,10 +2,10 @@ import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
 import {UseFormReturn} from "react-hook-form";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
 import {UserRegisterData} from "@/pages/auth/schema/form/AuthForm.types.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Parameters for the `useAuthRegisterSubmitMutation` hook.
@@ -13,7 +13,7 @@ import {UserRegisterData} from "@/pages/auth/schema/form/AuthForm.types.ts";
  * Extends `FormMutationOnSubmitParams` (excluding `onSubmitSuccess` and `validationSchema`)
  * and requires the React Hook Form instance and a custom success callback.
  */
-type SubmitMutationParams = Omit<FormMutationOnSubmitParams, "onSubmitSuccess" | "validationSchema"> & {
+type SubmitMutationParams = Omit<MutationOnSubmitParams, "onSubmitSuccess" | "validationSchema"> & {
     /** React Hook Form instance managing the registration form. */
     form: UseFormReturn<UserRegisterData>;
 

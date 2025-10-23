@@ -2,7 +2,7 @@ import {toast} from "react-toastify";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {OnDeleteMutationParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
 

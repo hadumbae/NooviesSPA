@@ -1,5 +1,5 @@
 import {FieldValues, Path, PathValue, UseFormReturn} from "react-hook-form";
-import HookSelectValue from "@/common/type/HookSelectValue.ts";
+import HookSelectValue from "@/common/type/input/HookSelectValue.ts";
 import HookFormCombobox from "@/common/components/forms/HookFormCombobox.tsx";
 import CountryConstant from "@/common/constants/CountryConstant.ts";
 

@@ -1,4 +1,4 @@
-import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 
 /**
@@ -9,11 +9,11 @@ import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts"
 type HandleParams<TReturns = unknown> = {
     /**
      * The async function that performs the fetch or API request.
-     * Must return a {@link FetchReturns} object containing:
+     * Must return a {@link RequestReturns} object containing:
      * - `response` - the raw `Response` object.
      * - `result` - the parsed response body.
      */
-    action: () => Promise<FetchReturns<TReturns>>;
+    action: () => Promise<RequestReturns<TReturns>>;
 
     /**
      * Optional custom error message to use if the response is not OK.

@@ -1,4 +1,4 @@
-import QueryFilters from "@/common/type/QueryFilters.ts";
+import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
@@ -8,7 +8,7 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";
 
 export default function useFetchSeatsByTheatre(
-    {theatreID, queries = {}}: {theatreID: ObjectId, queries?: QueryFilters}
+    {theatreID, queries = {}}: {theatreID: ObjectId, queries?: RequestQueryFilters}
 ): UseQueryResult<SeatArray> {
     const filters = {...queries, theatre: theatreID};
 

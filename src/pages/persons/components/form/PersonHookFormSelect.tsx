@@ -3,7 +3,7 @@ import {Control} from "react-hook-form";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import {Loader} from "lucide-react";
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import useFetchPersons from "@/pages/persons/hooks/fetch/useFetchPersons.ts";
 import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";

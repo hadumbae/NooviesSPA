@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
-import { OnDeleteMutationParams } from "@/common/type/form/FormMutationResultParams.ts";
+import { OnDeleteMutationParams } from "@/common/type/form/MutationDeleteParams.ts";
 import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
 import useScreenDeleteMutation from "@/pages/screens/hooks/screens/delete-screens/useScreenDeleteMutation.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";

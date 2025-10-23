@@ -1,10 +1,10 @@
 import {FC} from 'react';
 import useAuthLoginForm from "@/pages/auth/hooks/useAuthLoginForm.ts";
 import useAuthLoginSubmitMutation from "@/pages/auth/hooks/useAuthLoginSubmitMutation.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {AuthUserDetails} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
 import AuthLoginFormView from "@/pages/auth/components/form/login/AuthLoginFormView.tsx";
 import {UserLoginData} from "@/pages/auth/schema/form/AuthForm.types.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for the `AuthLoginFormContainer` component.
@@ -12,7 +12,7 @@ import {UserLoginData} from "@/pages/auth/schema/form/AuthForm.types.ts";
  * Extends `FormMutationOnSubmitParams<AuthUserDetails>` except for the `validationSchema`,
  * which is omitted since validation is handled within the form hook.
  */
-type FormProps = Omit<FormMutationOnSubmitParams<AuthUserDetails>, "validationSchema"> & {
+type FormProps = Omit<MutationOnSubmitParams<AuthUserDetails>, "validationSchema"> & {
     /** Optional custom CSS class name for styling the container. */
     className?: string;
 }

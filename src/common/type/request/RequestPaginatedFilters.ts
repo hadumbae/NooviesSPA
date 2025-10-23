@@ -1,4 +1,4 @@
-import QueryFilters from "@/common/type/QueryFilters.ts";
+import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 
 /**
  * Represents a filter object for paginated API requests.
@@ -16,6 +16,6 @@ import QueryFilters from "@/common/type/QueryFilters.ts";
  * };
  * ```
  */
-type PaginatedFilters = { page: number, perPage: number } & QueryFilters;
+type RequestPaginatedFilters = { page: number, perPage: number } & RequestQueryFilters;
 
-export default PaginatedFilters;
+export default RequestPaginatedFilters;

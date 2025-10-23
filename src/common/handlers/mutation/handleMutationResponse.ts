@@ -1,4 +1,4 @@
-import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {ParseErrorResponseSchema} from "@/common/schema/responses/ErrorResponse.schema.ts";
 import {ZodIssue} from "zod";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
@@ -13,10 +13,10 @@ import {FormValidationError} from "@/common/errors/FormValidationError.ts";
 type FormResponseParams<TReturns = unknown, TRaw = unknown> = {
     /**
      * Function that performs the API request.
-     * Must return a {@link FetchReturns} object containing both
+     * Must return a {@link RequestReturns} object containing both
      * the raw `Response` and the parsed result.
      */
-    action: () => Promise<FetchReturns<TReturns>>;
+    action: () => Promise<RequestReturns<TReturns>>;
 
     /**
      * Optional error message to override default messages.

@@ -12,8 +12,8 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import UploadPersonProfileImageFormContainer
     from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormContainer.tsx";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
-import {PresetOpenState} from "@/common/type/OpenStateProps.ts";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for `UploadPersonProfileImageFormPanel`.
@@ -24,7 +24,7 @@ import {PresetOpenState} from "@/common/type/OpenStateProps.ts";
  * @property presetOpen - Optional controlled open state for the panel.
  * @property setPresetOpen - Optional setter for controlled open state.
  */
-type FormPanelProps = FormMutationOnSubmitParams<Person> & PresetOpenState & {
+type FormPanelProps = MutationOnSubmitParams<Person> & PresetOpenState & {
     children?: ReactNode;
     className?: string;
     personID: ObjectId;

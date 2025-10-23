@@ -1,5 +1,4 @@
 import {FC, ReactNode, useState} from 'react';
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {Theatre, TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import {TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import TheatreSubmitFormContainer from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormContainer.tsx";
@@ -13,6 +12,7 @@ import {
     SheetTrigger
 } from "@/common/components/ui/sheet.tsx";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 type FormPanelEditingProps = {
     isEditing: true;
@@ -22,7 +22,7 @@ type FormPanelEditingProps = {
     theatre?: never;
 };
 
-type FormPanelProps = FormMutationOnSubmitParams<Theatre> & {
+type FormPanelProps = MutationOnSubmitParams<Theatre> & {
     children?: ReactNode;
     className?: string;
     presetValues?: Partial<TheatreFormValues>;

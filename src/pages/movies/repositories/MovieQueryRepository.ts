@@ -1,4 +1,4 @@
-import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
 
@@ -7,7 +7,7 @@ interface IMovieQueryRepository {
 
     fetchPaginatedMoviesWithData(
         params: { page: number, perPage: number, queries: Record<string, string> }
-    ): Promise<FetchReturns>;
+    ): Promise<RequestReturns>;
 }
 
 const repository: IMovieQueryRepository = {
@@ -15,7 +15,7 @@ const repository: IMovieQueryRepository = {
 
     fetchPaginatedMoviesWithData(
         params: { page: number; perPage: number; queries: Record<string, string> }
-    ): Promise<FetchReturns> {
+    ): Promise<RequestReturns> {
         const {page, perPage, queries} = params;
 
         const url = buildQueryURL({

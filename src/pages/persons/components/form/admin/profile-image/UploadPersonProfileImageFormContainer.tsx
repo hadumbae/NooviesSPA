@@ -6,8 +6,8 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import UploadPersonProfileImageFormView
     from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormView.tsx";
 import {PersonProfileImageForm, PersonProfileImageFormValues} from "@/pages/persons/schema/forms/PersonForm.types.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for `UploadPersonProfileImageFormContainer`.
@@ -16,7 +16,7 @@ import {Person} from "@/pages/persons/schema/person/Person.types.ts";
  * @property className - Optional CSS class to apply to the form view.
  * @property mutationProps - Optional form mutation callbacks (success, error, etc.).
  */
-type ContainerProps = FormMutationOnSubmitParams<Person> & {
+type ContainerProps = MutationOnSubmitParams<Person> & {
     personID: ObjectId;
     className?: string;
 };

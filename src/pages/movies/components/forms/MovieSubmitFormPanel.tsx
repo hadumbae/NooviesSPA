@@ -12,7 +12,7 @@ import {MovieFormValues} from "@/pages/movies/schema/form/MovieForm.types.ts";
 import MovieSubmitFormContainer from "@/pages/movies/components/forms/MovieSubmitFormContainer.tsx";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
-import {PresetOpenState} from "@/common/type/OpenStateProps.ts";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 
 /**
  * Props for `MovieSubmitFormPanel`.

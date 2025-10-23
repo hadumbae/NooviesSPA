@@ -3,15 +3,12 @@ import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditR
 import { toast } from "react-toastify";
 import { MovieCredit } from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import { MovieCreditForm, MovieCreditFormValues } from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
-import {
-    FormMutationEditingParams,
-    FormMutationOnSubmitParams,
-} from "@/common/type/form/FormMutationResultParams.ts";
 import { UseFormReturn } from "react-hook-form";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import { MovieCreditSchema } from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
+import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Parameters for submitting a movie credit through a form mutation.
@@ -19,12 +16,12 @@ import { MovieCreditSchema } from "@/pages/moviecredit/schemas/model/MovieCredit
  * Combines generic form submission parameters with editing state and the form instance.
  *
  * @template TData - The type of the data returned on a successful submit.
- * @see {@link FormMutationOnSubmitParams}
- * @see {@link FormMutationEditingParams}
+ * @see {@link MutationOnSubmitParams}
+ * @see {@link MutationEditByIDParams}
  * @see {@link UseFormReturn}
  */
-type SubmitParams = FormMutationOnSubmitParams<MovieCredit> &
-    FormMutationEditingParams & {
+type SubmitParams = MutationOnSubmitParams<MovieCredit> &
+    MutationEditByIDParams & {
     /** React Hook Form instance used for validation and error handling */
     form: UseFormReturn<MovieCreditFormValues>;
 };
@@ -37,19 +34,19 @@ type SubmitParams = FormMutationOnSubmitParams<MovieCredit> &
  * @param params - Object containing form data, editing state, callbacks, and messages.
  * @param params.form - {@link UseFormReturn} instance managing the form.
  * @param params.onSubmitSuccess - Optional callback fired on successful submission.
- *   @see {@link FormMutationOnSubmitParams#onSubmitSuccess}
+ *   @see {@link MutationOnSubmitParams#onSubmitSuccess}
  * @param params.onSubmitError - Optional callback fired on submission error.
- *   @see {@link FormMutationOnSubmitParams#onSubmitError}
+ *   @see {@link MutationOnSubmitParams#onSubmitError}
  * @param params.successMessage - Optional success message to display.
- *   @see {@link FormMutationOnSubmitParams#successMessage}
+ *   @see {@link MutationOnSubmitParams#successMessage}
  * @param params.errorMessage - Optional error message to display.
- *   @see {@link FormMutationOnSubmitParams#errorMessage}
+ *   @see {@link MutationOnSubmitParams#errorMessage}
  * @param params.validationSchema - Optional Zod schema to validate returned data.
- *   @see {@link FormMutationOnSubmitParams#validationSchema}
+ *   @see {@link MutationOnSubmitParams#validationSchema}
  * @param params.isEditing - Indicates whether this is an edit operation.
- *   @see {@link FormMutationEditingParams#isEditing}
+ *   @see {@link MutationEditByIDParams#isEditing}
  * @param params._id - Required when editing; identifies the movie credit to update.
- *   @see {@link FormMutationEditingParams#_id}
+ *   @see {@link MutationEditByIDParams#_id}
  *
  * @returns A {@link UseMutationResult} for managing mutation state, data, and errors.
  *

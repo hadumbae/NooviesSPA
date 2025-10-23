@@ -1,9 +1,9 @@
 import {Control, FieldValues, Path} from "react-hook-form";
-import QueryFilters from "@/common/type/QueryFilters.ts";
+import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import {Loader} from "lucide-react";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import useFetchTheatres from "@/pages/theatres/hooks/queries/query/fetch-by-query/useFetchTheatres.ts";
 import {TheatreArraySchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
@@ -39,7 +39,7 @@ type SelectProps<TSubmit extends FieldValues> = {
     isDisabled?: boolean;
 
     /** Optional query filters passed to theatre fetching hook. */
-    filters?: QueryFilters;
+    filters?: RequestQueryFilters;
 };
 
 /**

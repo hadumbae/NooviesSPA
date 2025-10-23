@@ -25,9 +25,10 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 import ScreenSubmitFormContainer from "@/pages/screens/components/submit-form/ScreenSubmitFormContainer.tsx";
 import {ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 
-type FormDrawerProps = FormMutationOnSubmitParams<Screen> & {
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+
+type FormDrawerProps = MutationOnSubmitParams<Screen> & {
     theatreID: ObjectId;
 } & (
     | { isEditing: true, screen: Screen }

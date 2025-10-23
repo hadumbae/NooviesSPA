@@ -3,7 +3,7 @@ import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {RoleTypeQueryOptionsFormValues} from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import RoleTypeDepartmentConstant from "@/pages/roletype/constant/RoleTypeDepartmentConstant.ts";
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";

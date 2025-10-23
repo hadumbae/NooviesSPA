@@ -1,9 +1,9 @@
-import {EntityPaginatedQuery, RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import {GenreQueryOptions} from "@/pages/genres/schema/filters/GenreFilter.types.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
  * **FetchQueries**
@@ -21,7 +21,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
  * };
  * ```
  */
-type FetchQueries = RequestOptions & EntityPaginatedQuery & GenreQueryOptions;
+type FetchQueries = RequestOptions & RequestPaginationOptions & GenreQueryOptions;
 
 /**
  * **useFetchGenres**

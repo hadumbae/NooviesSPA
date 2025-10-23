@@ -1,10 +1,10 @@
-import { EntityPaginatedQuery, RequestOptions } from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import { MovieQueryFilters } from "@/pages/movies/schema/queries/MovieFilter.types.ts";
-import { UseQueryOptions } from "@/common/type/UseQueryOptions.ts";
+import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
  * Combined query parameters for fetching movie data.
@@ -15,10 +15,10 @@ export type QueryParams<TData = unknown> = {
     /**
      * Combined parameters for the query.
      * @see {@link RequestOptions}
-     * @see {@link EntityPaginatedQuery}
+     * @see {@link RequestPaginationOptions}
      * @see {@link MovieQueryFilters}
      */
-    queries?: RequestOptions & EntityPaginatedQuery & MovieQueryFilters;
+    queries?: RequestOptions & RequestPaginationOptions & MovieQueryFilters;
 
     /**
      * Optional settings to customize the behavior of the query.

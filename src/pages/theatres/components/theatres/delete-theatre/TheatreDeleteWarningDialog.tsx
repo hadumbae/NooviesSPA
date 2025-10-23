@@ -7,9 +7,10 @@ import {
     AlertDialogHeader, AlertDialogTitle,
     AlertDialogTrigger
 } from "@/common/components/ui/alert-dialog.tsx";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 
-type DeleteMutationProps = FormMutationOnSubmitParams & {
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+
+type DeleteMutationProps = MutationOnSubmitParams & {
     theatreName?: string;
     theatreID: ObjectId;
 }

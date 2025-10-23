@@ -1,9 +1,9 @@
 import {FC} from 'react';
 import {Button} from "@/common/components/ui/button.tsx";
-import ButtonSize from "@/common/type/ui/ButtonSize.ts";
+import ButtonSize from "@/common/type/ui/shad-cn-button/ButtonSize.ts";
 import {Heart, Loader} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import ButtonVariant from "@/common/type/ui/ButtonVariant.ts";
+import ButtonVariant from "@/common/type/ui/shad-cn-button/ButtonVariant.ts";
 
 interface ButtonProps {
     size?: ButtonSize;

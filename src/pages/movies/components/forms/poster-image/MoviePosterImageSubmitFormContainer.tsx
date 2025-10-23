@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { FormMutationOnSubmitParams } from "@/common/type/form/FormMutationResultParams.ts";
 import { Movie } from "@/pages/movies/schema/movie/Movie.types.ts";
 import useMoviePosterImageSubmitMutation
     from "@/pages/movies/hooks/admin/poster-image/useMoviePosterImageSubmitMutation.ts";
@@ -9,11 +8,12 @@ import { MoviePosterImageForm, MoviePosterImageFormValues } from "@/pages/movies
 import buildStandardLog from "@/common/utility/logger/buildStandardLog.ts";
 import MoviePosterImageSubmitFormView
     from "@/pages/movies/components/forms/poster-image/MoviePosterImageSubmitFormView.tsx";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props for `MoviePosterImageSubmitFormContainer`.
  */
-type FormProps = FormMutationOnSubmitParams<Movie> & {
+type FormProps = MutationOnSubmitParams<Movie> & {
     /** The ID of the movie to attach the poster image to */
     movieID: ObjectId;
 

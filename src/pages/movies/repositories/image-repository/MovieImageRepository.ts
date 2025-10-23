@@ -1,4 +1,4 @@
-import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
 import {
@@ -23,7 +23,7 @@ const MovieImageRepository: IImageRepository = {
      * @param params - The movie ID and the image form data to upload.
      * @returns A promise resolving to the fetch response.
      */
-    uploadPosterImage: function (params: UploadPosterImageParams): Promise<FetchReturns> {
+    uploadPosterImage: function (params: UploadPosterImageParams): Promise<RequestReturns> {
         const {movieID, data} = params;
 
         const url = buildQueryURL({
@@ -40,7 +40,7 @@ const MovieImageRepository: IImageRepository = {
      * @param params - The movie ID whose poster image should be deleted.
      * @returns A promise resolving to the fetch response.
      */
-    deletePosterImage: function (params: QueryByIDParams): Promise<FetchReturns> {
+    deletePosterImage: function (params: QueryByIDParams): Promise<RequestReturns> {
         const {movieID} = params;
 
         const url = buildQueryURL({

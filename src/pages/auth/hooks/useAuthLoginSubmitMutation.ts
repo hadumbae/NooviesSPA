@@ -3,17 +3,17 @@ import {AuthUserDetails, AuthUserDetailsSchema} from "@/pages/auth/schema/AuthUs
 import {toast} from "react-toastify";
 import {UseFormReturn} from "react-hook-form";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import useSetAuthUser from "@/pages/auth/hooks/authUser/useSetAuthUser.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
 import {UserLoginData} from "@/pages/auth/schema/form/AuthForm.types.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Parameters for `useAuthLoginSubmitMutation`.
  */
-export type SubmitMutationParams = Omit<FormMutationOnSubmitParams<AuthUserDetails>, "validationSchema"> & {
+export type SubmitMutationParams = Omit<MutationOnSubmitParams<AuthUserDetails>, "validationSchema"> & {
     /** React Hook Form instance managing the login form. */
     form: UseFormReturn<UserLoginData>;
 };

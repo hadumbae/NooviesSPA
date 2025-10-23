@@ -1,4 +1,4 @@
-import QueryFilters from "@/common/type/QueryFilters.ts";
+import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import {useQuery} from "@tanstack/react-query";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
@@ -9,7 +9,7 @@ import {PaginatedGenresSchema} from "@/pages/genres/schema/genre/Genre.schema.ts
 import {PaginatedGenres} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 export default function useFetchPaginatedGenres(
-    {page, perPage, queries}: {page: number, perPage: number, queries: QueryFilters}
+    {page, perPage, queries}: {page: number, perPage: number, queries: RequestQueryFilters}
 ) {
     const fetchGenres = async () => {
         const filteredQueries = filterEmptyAttributes(queries);

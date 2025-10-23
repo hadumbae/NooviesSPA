@@ -1,5 +1,5 @@
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
-import HookRadioOption from "@/common/type/HookRadioOption.ts";
+import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
 import HookFormRadioGroup from "@/common/components/forms/HookFormRadioGroup.tsx";
 import RoleTypeDepartmentConstant from "@/pages/roletype/constant/RoleTypeDepartmentConstant.ts";
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";

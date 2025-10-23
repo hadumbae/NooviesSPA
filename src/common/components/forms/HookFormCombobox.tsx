@@ -19,7 +19,7 @@ import {
     CommandItem,
     CommandList
 } from "@/common/components/ui/command.tsx";
-import HookSelectValue from "@/common/type/HookSelectValue.ts";
+import HookSelectValue from "@/common/type/input/HookSelectValue.ts";
 
 interface Props<T extends FieldValues> {
     form: UseFormReturn<T>,

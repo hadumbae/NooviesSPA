@@ -6,7 +6,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
-import ReactSelectOption from "@/common/type/component/ReactSelectOption.ts";
+import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import RoleTypeDepartmentConstant from "@/pages/roletype/constant/RoleTypeDepartmentConstant.ts";
 import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";

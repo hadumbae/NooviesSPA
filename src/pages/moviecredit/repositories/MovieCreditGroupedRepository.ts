@@ -1,9 +1,9 @@
-import FetchReturns from "@/common/type/fetch/FetchReturns.ts";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
-import {RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
  * Parameters for fetching movie credits grouped by role for a person.
@@ -35,7 +35,7 @@ type MovieCreditGroupedRepository = {
      * @param params.limit - Optional limit for the number of results returned
      * @returns A promise that resolves with a standardized fetch response wrapper
      */
-    getGroupedByRoleForPerson(params: GroupedForPersonParams): Promise<FetchReturns>;
+    getGroupedByRoleForPerson(params: GroupedForPersonParams): Promise<RequestReturns>;
 };
 
 /**
@@ -45,7 +45,7 @@ type MovieCreditGroupedRepository = {
 const repository: MovieCreditGroupedRepository = {
     baseURL: `${import.meta.env.VITE_API_URL}/api/v1/admin/movie/credits`,
 
-    async getGroupedByRoleForPerson(params: GroupedForPersonParams): Promise<FetchReturns> {
+    async getGroupedByRoleForPerson(params: GroupedForPersonParams): Promise<RequestReturns> {
         const {personID, limit} = params;
 
         // Filter out empty or undefined query attributes

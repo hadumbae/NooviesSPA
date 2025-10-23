@@ -1,4 +1,4 @@
-import QueryFilters from "@/common/type/QueryFilters.ts";
+import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
@@ -12,7 +12,7 @@ type FetchParams = {
     /**
      * Filters to apply to the movie query. Can include arbitrary fields based on backend support.
      */
-    filters?: QueryFilters;
+    filters?: RequestQueryFilters;
 
     /**
      * Whether to populate reference fields with related documents (e.g., genres, cast).

@@ -1,9 +1,9 @@
 import {FC, ReactNode} from 'react';
-import {OnDeleteMutationParams} from "@/common/type/form/FormMutationResultParams.ts";
+import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import useMovieDeleteMutation from "@/pages/movies/hooks/mutations/useMovieDeleteMutation.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
-import {PresetOpenState} from "@/common/type/OpenStateProps.ts";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
 
 /**

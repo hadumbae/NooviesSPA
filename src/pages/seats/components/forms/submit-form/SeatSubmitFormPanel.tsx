@@ -7,12 +7,12 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui/sheet.tsx";
-import {FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props defining editing state for the SeatSubmitFormPanel.
@@ -37,7 +37,7 @@ type PanelEditingProps =
  * - `className`: optional CSS class name for the root container.
  */
 type PanelProps =
-    Omit<FormMutationOnSubmitParams<Seat>, "validationSchema"> &
+    Omit<MutationOnSubmitParams<Seat>, "validationSchema"> &
     PanelEditingProps &
     FormOptions<SeatFormValues> & {
     children?: ReactNode;

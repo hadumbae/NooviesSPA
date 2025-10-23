@@ -7,8 +7,8 @@ import ShowingSubmitFormView from "@/pages/showings/components/forms/ShowingSubm
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {ShowingForm, ShowingFormValues} from "@/pages/showings/schema/form/ShowingForm.types.ts";
-import {FormMutationEditingParams, FormMutationOnSubmitParams} from "@/common/type/form/FormMutationResultParams.ts";
 import {IANATimezone} from "@/common/schema/datetime/IANATimezone.schema.ts";
+import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
  * Props used when the form is in editing mode.
@@ -38,7 +38,7 @@ type ShowingEditingProps =
  * @property theatreTimezone - The timezone context for showing date/time fields.
  */
 type SubmitContainerProps =
-    FormMutationOnSubmitParams<Showing> &
+    MutationOnSubmitParams<Showing> &
     FormOptions<ShowingFormValues> &
     ShowingEditingProps &
     {
@@ -91,7 +91,7 @@ const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
 
     // ⚡ Initialize mutation ⚡
 
-    const mutationProps: FormMutationEditingParams = isEditing
+    const mutationProps: MutationEditByIDParams = isEditing
         ? {isEditing: true, _id: entity._id}
         : {isEditing: false};
 

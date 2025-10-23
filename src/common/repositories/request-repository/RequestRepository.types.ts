@@ -1,34 +1,14 @@
-import QueryFilters from "@/common/type/QueryFilters.ts";
-import PaginatedFilters from "@/common/type/PaginatedFilters.ts";
+import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
+import RequestPaginatedFilters from "@/common/type/request/RequestPaginatedFilters.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-
-/**
- * Common request options to control population of related fields, inclusion of virtuals,
- * and optional limits on returned results.
- */
-export type RequestOptions = {
-    /**
-     * Whether to populate referenced documents (e.g., foreign keys).
-     */
-    populate?: boolean;
-
-    /**
-     * Whether to include virtual properties in the response.
-     */
-    virtuals?: boolean;
-
-    /**
-     * Optional limit for the number of results (primarily for non-paginated queries).
-     */
-    limit?: number;
-};
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
  * Parameters for retrieving multiple entities using optional filters and request options.
  *
  * @template TFilters The type of filters to apply. Defaults to `QueryFilters`.
  */
-export type GetEntitiesParams<TFilters = QueryFilters> = RequestOptions & {
+export type GetEntitiesParams<TFilters = RequestQueryFilters> = RequestOptions & {
     /**
      * Optional filters to narrow the query.
      */
@@ -40,7 +20,7 @@ export type GetEntitiesParams<TFilters = QueryFilters> = RequestOptions & {
  *
  * @template TFilters The type of paginated filters to apply. Defaults to `PaginatedFilters`.
  */
-export type GetPaginatedEntitiesParams<TFilters = PaginatedFilters> = RequestOptions & {
+export type GetPaginatedEntitiesParams<TFilters = RequestPaginatedFilters> = RequestOptions & {
     /**
      * Filters to apply to the paginated query.
      */
@@ -96,31 +76,3 @@ export type DeleteEntityParams = {
     readonly _id: ObjectId;
 };
 
-/**
- * Parameters controlling whether a query should return paginated results.
- *
- * - If `paginated` is `true`, then both `page` and `perPage` are required.
- * - If `paginated` is `false` or omitted, pagination is disabled and `page`/`perPage` must not be present.
- */
-export type EntityPaginatedQuery = {
-    paginated: true;
-    page: number;
-    perPage: number;
-} | {
-    paginated?: false;
-    page?: never;
-    perPage?: never;
-};
-
-/**
- * Parameters used to construct a flexible entity query,
- * supporting filtering, population, virtuals, and pagination.
- *
- * @template TFilters - The shape of the filter object. Defaults to {@link QueryFilters}.
- */
-export type EntityQueryParams<TFilters = QueryFilters> = {
-    /**
-     * A combination of filters, request options, and optional pagination settings.
-     */
-    queries: TFilters & RequestOptions & EntityPaginatedQuery;
-};

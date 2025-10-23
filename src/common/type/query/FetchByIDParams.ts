@@ -1,5 +1,6 @@
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {RequestOptions} from "@/common/type/repositories/EntityRequestParamTypes.ts";
+
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
  * Parameters for fetching a single entity by its ObjectId.
