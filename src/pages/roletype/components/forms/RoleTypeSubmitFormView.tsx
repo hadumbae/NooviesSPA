@@ -8,7 +8,7 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import RoleTypeDepartmentConstant from "@/pages/roletype/constant/RoleTypeDepartmentConstant.ts";
-import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
+import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import RoleTypeCategorySelect from "@/pages/roletype/components/inputs/RoleTypeCategorySelect.tsx";

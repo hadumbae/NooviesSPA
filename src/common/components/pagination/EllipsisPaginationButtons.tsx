@@ -6,7 +6,7 @@ import {
     PaginationNext,
     PaginationPrevious
 } from "@/common/components/ui/pagination.tsx";
-import generatePaginationRange from "@/common/utility/pagination/generatePaginationRange.ts";
+import generatePaginationRange from "@/common/utility/features/pagination-buttons/generatePaginationRange.ts";
 import PaginationPageButton from "@/common/components/pagination/PaginationPageButton.tsx";
 
 type PaginationButtonsProps = {

@@ -2,7 +2,7 @@ import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import {SeatMapSubmit, SeatMapSubmitSchema} from "@/pages/seatmap/schema/SeatMapSubmitSchema.ts";
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import convertObjectsToIDs from "@/common/utility/convertObjectsToIDs.ts";
+import convertObjectsToIDs from "@/common/utility/formatters/convertObjectsToIDs.ts";
 
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 

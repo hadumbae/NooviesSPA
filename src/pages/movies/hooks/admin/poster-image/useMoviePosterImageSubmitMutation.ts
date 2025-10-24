@@ -7,7 +7,7 @@ import { useMutation, UseMutationResult, useQueryClient } from "@tanstack/react-
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import MovieImageRepository from "@/pages/movies/repositories/image-repository/MovieImageRepository.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import { MovieSchema } from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 

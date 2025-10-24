@@ -9,7 +9,7 @@
  * @param data - An object containing key-value pairs to be filtered.
  * @returns A new object with all properties that had empty values removed.
  */
-export default function filterEmptyAttributes(data: Record<string, any>) {
+export default function filterNullishAttributes(data: Record<string, any>) {
     return Object.fromEntries(
         Object
             .entries(data)

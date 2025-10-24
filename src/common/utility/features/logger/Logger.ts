@@ -1,4 +1,4 @@
-import {LogPayload} from "@/common/utility/logger/Logger.types.ts";
+import {LogPayload} from "@/common/utility/features/logger/Logger.types.ts";
 
 /**
  * Indicates whether the app is running in development mode.

@@ -3,7 +3,7 @@ import handleMutationResponse from "@/common/handlers/mutation/handleMutationRes
 import RoleTypeRepository from "@/pages/roletype/repositories/RoleTypeRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {toast} from "react-toastify";
-import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import {useMutation} from "@tanstack/react-query";
 import queryClient from "@/config/ReactQueryClient.ts";
 

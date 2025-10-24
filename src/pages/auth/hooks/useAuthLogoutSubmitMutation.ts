@@ -2,7 +2,7 @@ import {useMutation} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
-import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import useLogoutAuthUser from "@/pages/auth/hooks/authUser/useLogoutAuthUser.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 

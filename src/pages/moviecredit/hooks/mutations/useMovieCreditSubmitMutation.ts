@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { MovieCredit } from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import { MovieCreditForm, MovieCreditFormValues } from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import { UseFormReturn } from "react-hook-form";
-import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import { MovieCreditSchema } from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";

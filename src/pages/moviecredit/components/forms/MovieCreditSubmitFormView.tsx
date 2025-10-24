@@ -7,7 +7,7 @@ import {Form} from "@/common/components/ui/form.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 
-import generateReactSelectOptions from "@/common/utility/forms/generateReactSelectOptions.ts";
+import generateReactSelectOptions from "@/common/utility/inputs/generateReactSelectOptions.ts";
 
 import RoleTypeDepartmentRadioGroup from "@/pages/roletype/components/inputs/RoleTypeDepartmentRadioGroup.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";

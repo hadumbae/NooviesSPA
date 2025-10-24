@@ -1,5 +1,5 @@
 import MovieQueryRepository from "@/pages/movies/repositories/MovieQueryRepository.ts";
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
 
@@ -50,7 +50,7 @@ type IPaginatedMovieParams = {
  */
 export default function useFetchPaginatedMoviesWithData(params: IPaginatedMovieParams): UseQueryResult<PaginatedMovies> {
     const {page, perPage, query, sort} = params;
-    const filteredQuery = filterEmptyAttributes({...query, ...sort});
+    const filteredQuery = filterNullishAttributes({...query, ...sort});
 
     const queryKey = [
         "fetch_paginated_movies_with_data",

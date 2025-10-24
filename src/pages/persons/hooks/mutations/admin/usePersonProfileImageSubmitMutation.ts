@@ -6,7 +6,7 @@ import {PersonProfileImageForm, PersonProfileImageFormValues} from "@/pages/pers
 import {PersonSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {UseFormReturn} from "react-hook-form";
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";

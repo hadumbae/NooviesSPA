@@ -1,11 +1,10 @@
-import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
+import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
-import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
-import {AuthUserAdminStatus, AuthUserAdminStatusSchema} from "@/pages/auth/schema/AuthUserAdminStatusSchema.ts";
-import parseResponseData from "@/common/utility/query/parseResponseData.ts";
+import {AuthUserAdminStatusSchema} from "@/pages/auth/schema/AuthUserAdminStatusSchema.ts";
 import {AuthUserDetails, AuthUserDetailsSchema} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
 import Cookies from "js-cookie";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 
 interface IAuthService {
     baseURL: string;
@@ -35,12 +34,13 @@ const AuthService: IAuthService = {
 
     async verifyAdminStatus({authUserID}: { authUserID: ObjectId }): Promise<boolean> {
         const url = buildQueryURL({baseURL: this.baseURL, path: "admin/verify"});
-        const action = () => useFetchAPI({url, method: "GET"});
 
-        const {result: data} = await useFetchErrorHandler({fetchQueryFn: action});
-        const schema = AuthUserAdminStatusSchema;
+        const {result} = await useFetchAPI({url, method: "GET"});
+        const {data, success, error} = validateData({data: result, schema: AuthUserAdminStatusSchema});
 
-        const {userID, isAdmin} = parseResponseData<typeof schema, AuthUserAdminStatus>({schema, data});
+        if (!success) throw error;
+        const {isAdmin, userID} = data;
+
         return isAdmin && userID == authUserID
     }
 };

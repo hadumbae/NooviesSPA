@@ -1,6 +1,6 @@
 import {useSearchParams} from "react-router-dom";
 import {PaginationSearchParamSchema} from "@/common/schema/PaginationSearchParamsSchema.ts";
-import updateSearchParams from "@/common/utility/params/updateSearchParams.ts";
+import updateSearchParams from "@/common/utility/features/search-params/updateSearchParams.ts";
 import {
     PaginationParamValues,
     UsePaginationSearchParamsReturn

@@ -1,8 +1,8 @@
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import RequestMethod from "@/common/type/request/RequestMethod.ts";
-import Logger from "@/common/utility/logger/Logger.ts";
-import handleBadResponse from "@/common/utility/use-fetch-api/handleBadResponse.ts";
-import parseJSON from "@/common/utility/use-fetch-api/parseJSON.ts";
+import Logger from "@/common/utility/features/logger/Logger.ts";
+import handleBadResponse from "@/common/utility/features/use-fetch-api/handleBadResponse.ts";
+import parseJSON from "@/common/utility/features/use-fetch-api/parseJSON.ts";
 
 /**
  * Parameters for `useFetchAPI`.

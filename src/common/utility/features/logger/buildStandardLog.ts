@@ -1,6 +1,6 @@
-import {LoggerFunction, LogType} from "@/common/utility/logger/Logger.types.ts";
-import Logger from "@/common/utility/logger/Logger.ts";
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import {LoggerFunction, LogType} from "@/common/utility/features/logger/Logger.types.ts";
+import Logger from "@/common/utility/features/logger/Logger.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 
 /**
  * Parameters accepted by {@link buildStandardLog}.
@@ -69,6 +69,6 @@ export default function buildStandardLog(params: LogParams) {
     Logger[level]({
         msg,
         type,
-        context: filterEmptyAttributes({component, ...context}),
+        context: filterNullishAttributes({component, ...context}),
     });
 }

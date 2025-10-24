@@ -7,7 +7,7 @@ import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 import {PersonForm, PersonFormValues} from "@/pages/persons/schema/forms/PersonForm.types.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**

@@ -1,4 +1,4 @@
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 
 type URLParams = {
     /** The base URL of the API, e.g., "https://api.example.com" */
@@ -35,7 +35,7 @@ export default function buildQueryURL({baseURL, path, queries}: URLParams): stri
     const url = new URL(`${baseURL}/${path}`);
 
     if (queries) {
-        const filteredQueries = filterEmptyAttributes(queries);
+        const filteredQueries = filterNullishAttributes(queries);
 
         Object.entries(filteredQueries).forEach(([key, value]) => {
             if (Array.isArray(value)) {

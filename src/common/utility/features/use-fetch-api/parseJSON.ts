@@ -1,6 +1,6 @@
-import Logger from "@/common/utility/logger/Logger.ts";
+import Logger from "@/common/utility/features/logger/Logger.ts";
 import JSONParseError from "@/common/errors/JSONParseError.ts";
-import buildContext from "@/common/utility/logger/buildLoggerContext.ts";
+import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
 
 type ParseOrThrowParams = {
     /** The raw string expected to be valid JSON */

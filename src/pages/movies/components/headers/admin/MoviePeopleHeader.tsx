@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
+import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Link} from "react-router-dom";
 import {buttonVariants} from "@/common/components/ui/button.tsx";

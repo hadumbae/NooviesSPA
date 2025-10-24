@@ -1,9 +1,9 @@
 import {useSearchParams} from "react-router-dom";
 import {RoleTypeQueryOptions} from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
-import fetchParsedSearchParams from "@/common/utility/search-params/fetchParsedSearchParams.ts";
+import fetchParsedSearchParams from "@/common/utility/features/search-params/fetchParsedSearchParams.ts";
 import {RoleTypeQueryOptionsSchema} from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.schema.ts";
-import stringifySearchParams from "@/common/utility/search-params/stringifySearchParams.ts";
-import updateSearchParams from "@/common/utility/params/updateSearchParams.ts";
+import stringifySearchParams from "@/common/utility/features/search-params/stringifySearchParams.ts";
+import updateSearchParams from "@/common/utility/features/search-params/updateSearchParams.ts";
 
 /**
  * Custom hook to manage role type query options via URL search parameters.

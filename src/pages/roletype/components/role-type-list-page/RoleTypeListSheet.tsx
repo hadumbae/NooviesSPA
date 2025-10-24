@@ -8,7 +8,7 @@ import {
     SheetTrigger
 } from "@/common/components/ui/sheet.tsx";
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
-import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
+import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import {ScrollAreaScrollbar} from "@radix-ui/react-scroll-area";

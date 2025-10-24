@@ -4,7 +4,7 @@ import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
-import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 
 /**
  * Custom React hook for deleting a single screen entity.

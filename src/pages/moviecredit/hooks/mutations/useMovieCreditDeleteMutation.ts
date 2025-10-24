@@ -4,7 +4,7 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
-import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 
 /**
  * React Query mutation hook for deleting a movie credit.

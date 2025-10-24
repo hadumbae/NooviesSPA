@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import type {CloudinaryImageObject} from "@/common/schema/objects/CloudinaryImageObjectSchema.ts";
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
-import getInitials from "@/common/utility/getInitials.ts";
+import getInitials from "@/common/utility/formatters/getInitials.ts";
 import {cn} from "@/common/lib/utils.ts";
 
 type AvatarProps = {

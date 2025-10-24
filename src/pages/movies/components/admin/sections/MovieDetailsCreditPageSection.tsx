@@ -3,7 +3,7 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import {ChevronRight} from "lucide-react";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
-import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
+import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import MovieDetailsPersonListPreviewCard
     from "@/pages/movies/components/admin/credits/cards/MovieDetailsPersonListPreviewCard.tsx";
 

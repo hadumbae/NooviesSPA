@@ -5,7 +5,7 @@ import {
 } from "@/pages/seats/repositories/seat-submit-repository/SeatSubmitRepository.types.ts";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
-import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
+import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 
 const repository: ISeatSubmitRepository = {
     _baseURL: `${import.meta.env.VITE_API_URL}/api/v1/admin/seats`,

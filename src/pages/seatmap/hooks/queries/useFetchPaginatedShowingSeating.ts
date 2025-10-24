@@ -1,9 +1,8 @@
-import useFetchValidatedDataWithRedirect from "@/common/hooks/validation/useFetchValidatedDataWithRedirect.ts";
-import SeatMapShowingRepository from "@/pages/seatmap/repositories/SeatMapShowingRepository.ts";
+// import SeatMapShowingRepository from "@/pages/seatmap/repositories/SeatMapShowingRepository.ts";
 
 import SeatMapFilters from "@/pages/seatmap/types/SeatMapFilters.ts";
-import {PaginatedSeatMaps, PaginatedSeatMapSchema} from "@/pages/seatmap/schema/SeatMapPaginationSchema.ts";
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
+import {useQuery} from "@tanstack/react-query";
 
 
 interface Params {
@@ -41,16 +40,18 @@ interface Params {
  */
 export default function useFetchPaginatedShowingSeating(params: Params) {
     const {showingID, page = 1, perPage = 50, filters = {}} = params;
-    const filteredQueries = filterEmptyAttributes(filters)
+    const filteredQueries = filterNullishAttributes(filters)
 
     const queryKey = ["fetch_showing_seating", {showingID, page, perPage, filters: filteredQueries}];
-    const schema = PaginatedSeatMapSchema;
-    const action = () => SeatMapShowingRepository.fetchShowingSeatMap({
-        showingID,
-        page,
-        perPage,
-        filters: filteredQueries
-    });
+    // const schema = PaginatedSeatMapSchema;
+    // const action = () => SeatMapShowingRepository.fetchShowingSeatMap({
+    //     showingID,
+    //     page,
+    //     perPage,
+    //     filters: filteredQueries
+    // });
 
-    return useFetchValidatedDataWithRedirect<typeof schema, PaginatedSeatMaps>({queryKey, schema, action});
+    return useQuery({
+        queryKey
+    });
 }

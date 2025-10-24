@@ -1,7 +1,7 @@
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
-import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
+import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import {IRequestRepository} from "@/common/repositories/request-repository/IRequestRepository.ts";
 import {
     CreateEntityParams, DeleteEntityParams, GetEntitiesParams, GetEntityByIDParams,
@@ -32,7 +32,7 @@ export const createRequestRepository = ({baseURL}: { baseURL: string }): IReques
      */
     async getAll<TResult = unknown>(params?: GetEntitiesParams): Promise<RequestReturns<TResult>> {
         const {filters = {}, populate, virtuals} = params || {};
-        const queries = filterEmptyAttributes({...filters, populate, virtuals});
+        const queries = filterNullishAttributes({...filters, populate, virtuals});
 
         const url = buildQueryURL({baseURL: baseURL, path: "all", queries});
         return useFetchAPI({url, method: "GET"});
@@ -43,7 +43,7 @@ export const createRequestRepository = ({baseURL}: { baseURL: string }): IReques
      */
     async paginated<TResult = unknown>(params: GetPaginatedEntitiesParams): Promise<RequestReturns<TResult>> {
         const {filters, populate, virtuals} = params;
-        const queries = filterEmptyAttributes({...filters, populate, virtuals});
+        const queries = filterNullishAttributes({...filters, populate, virtuals});
 
         const url = buildQueryURL({baseURL: baseURL, path: "paginated", queries});
         return useFetchAPI({url, method: "GET"});
@@ -54,7 +54,7 @@ export const createRequestRepository = ({baseURL}: { baseURL: string }): IReques
      */
     async get<TResult = unknown>(params: GetEntityByIDParams): Promise<RequestReturns<TResult>> {
         const {_id, populate, virtuals} = params;
-        const queries = filterEmptyAttributes({populate, virtuals});
+        const queries = filterNullishAttributes({populate, virtuals});
 
         const url = buildQueryURL({baseURL: baseURL, path: `get/${_id}`, queries});
         return useFetchAPI({url, method: "GET"});
@@ -65,7 +65,7 @@ export const createRequestRepository = ({baseURL}: { baseURL: string }): IReques
      */
     async create<TResult = unknown>(params: CreateEntityParams): Promise<RequestReturns<TResult>> {
         const {data, populate, virtuals} = params;
-        const queries = filterEmptyAttributes({populate, virtuals});
+        const queries = filterNullishAttributes({populate, virtuals});
 
         const url = buildQueryURL({baseURL: baseURL, path: "create", queries});
         return useFetchAPI({url: url, method: "POST", data});
@@ -76,7 +76,7 @@ export const createRequestRepository = ({baseURL}: { baseURL: string }): IReques
      */
     async update<TResult = unknown>(params: UpdateEntityParams): Promise<RequestReturns<TResult>> {
         const {_id, data, populate, virtuals} = params;
-        const queries = filterEmptyAttributes({populate, virtuals});
+        const queries = filterNullishAttributes({populate, virtuals});
 
         const url = buildQueryURL({baseURL: baseURL, path: `update/${_id}`, queries});
         return useFetchAPI({url: url, method: "PATCH", data});
@@ -94,7 +94,7 @@ export const createRequestRepository = ({baseURL}: { baseURL: string }): IReques
 
     async query<TResult = unknown>(params: RequestQueryOptions): Promise<RequestReturns<TResult>> {
         const {queries} = params;
-        const filteredQueries = filterEmptyAttributes(queries);
+        const filteredQueries = filterNullishAttributes(queries);
 
         const url = buildQueryURL({baseURL: baseURL, path: `query`, queries: filteredQueries});
         return useFetchAPI({url, method: "GET"});

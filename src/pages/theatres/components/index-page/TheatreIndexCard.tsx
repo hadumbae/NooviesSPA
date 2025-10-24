@@ -3,7 +3,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {Clapperboard, Search, Sofa, TvMinimal} from "lucide-react";
-import getAddressString from "@/common/utility/location/getAddressString.ts";
+import generateLocationAddressString from "@/common/utility/features/location/generateLocationAddressString.ts";
 import StatItem from "@/common/components/stat-details/StatItem.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
 import TooltipStatItem from "@/common/components/stat-details/TooltipStatItem.tsx";
@@ -28,7 +28,7 @@ type TheatreIndexCardProps = {
  */
 const TheatreIndexCard: FC<TheatreIndexCardProps> = ({theatre}) => {
     const {_id, name, location, seatCount, screenCount, futureShowingCount} = theatre;
-    const addressString = getAddressString(location);
+    const addressString = generateLocationAddressString(location);
 
     const screenCountStat = (
         <TooltipStatItem

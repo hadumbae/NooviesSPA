@@ -3,9 +3,9 @@ import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {toast} from "react-toastify";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import parseData from "@/common/utility/validation/parseData.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
+import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 
 interface RemoveFavouriteParams {
     movieID: ObjectId;
@@ -18,9 +18,15 @@ export default function useRemoveMovieToFavouritesMutation({movieID, onSuccess, 
     const mutationKey = ["remove_movie_to_favourite", {movieID}];
 
     const removeFromFavourites = async () => {
-        const {response, result} = await MovieFavouriteRepository.removeFromFavourites({movieID});
-        if (response.status === 200) return parseData({schema: MovieSchema, data: result});
-        throw new HttpResponseError({response, message: "Oops. Something went wrong!"});
+        const {result} = await MovieFavouriteRepository.removeFromFavourites({movieID});
+
+        const {data, success, error} = useValidateData({schema: MovieSchema, data: result});
+
+        if (!success) {
+            throw error;
+        }
+
+        return data;
     }
 
     const onMutateSuccess = async (movie: Movie) => {

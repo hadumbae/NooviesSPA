@@ -1,10 +1,10 @@
-import Logger from "@/common/utility/logger/Logger.ts";
-import buildContext from "@/common/utility/logger/buildLoggerContext.ts";
+import Logger from "@/common/utility/features/logger/Logger.ts";
+import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {ParseErrorResponseSchema} from "@/common/schema/responses/ErrorResponse.schema.ts";
 import {FormValidationError} from "@/common/errors/FormValidationError.ts";
 import {ZodIssue} from "zod";
-import parseJSON from "@/common/utility/use-fetch-api/parseJSON.ts";
+import parseJSON from "@/common/utility/features/use-fetch-api/parseJSON.ts";
 
 type HandlerParams = {
     /** The original fetch Response object from an HTTP request */
@@ -56,7 +56,7 @@ export default function handleBadResponse(params: HandlerParams) {
     const {status: statusCode} = response;
 
     if (statusCode === 422) {
-        // === Parse JSON ===
+        // ⚡ Parse JSON ⚡
         const parsedJSON = parseJSON({
             source,
             statusCode,
@@ -64,12 +64,12 @@ export default function handleBadResponse(params: HandlerParams) {
             errorMessage: "Failed to parse validation response."
         });
 
-        // === Parse Response ===
+        // ⚡ Parse Response ⚡
         const {success, data} = ParseErrorResponseSchema.safeParse(parsedJSON);
         if (!success) throw new Error("Invalid 422 Error Response. Failed to validate response.");
         const {message, errors} = data;
 
-        // === Log Error ===
+        // ⚡ Log Error ⚡
         const context = buildContext([
             { key: "message", value: message },
             { key: "source", value: source },
@@ -82,7 +82,7 @@ export default function handleBadResponse(params: HandlerParams) {
             context,
         });
 
-        // === Throw Error ===
+        // ⚡ Throw Error ⚡
         throw new FormValidationError({
             message: "HTTP 422: Validation Failed",
             errors: errors as ZodIssue[],
@@ -90,7 +90,7 @@ export default function handleBadResponse(params: HandlerParams) {
         });
     }
 
-    // === Throw Standard Errors ===
+    // ⚡ Throw Standard Errors ⚡
     const context = buildContext([
         { key: "source", value: source },
         { key: "raw", value: rawPayload }

@@ -2,7 +2,7 @@ import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import {Control, FieldValues, Path} from "react-hook-form";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import ShowingStatusConstant from "@/pages/showings/constants/ShowingStatusConstant.ts";
-import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
+import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 
 type FormSelectProps<TSubmit extends FieldValues> = {
     name: Path<TSubmit>;

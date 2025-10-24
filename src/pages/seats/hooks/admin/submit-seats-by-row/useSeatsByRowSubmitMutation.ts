@@ -3,7 +3,7 @@ import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-qu
 import SeatSubmitRepository from "@/pages/seats/repositories/seat-submit-repository/SeatSubmitRepository.ts";
 import {toast} from "react-toastify";
 import {UseFormReturn} from "react-hook-form";
-import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {SeatArraySchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";

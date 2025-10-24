@@ -6,7 +6,7 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import {RoleTypeSchema} from "@/pages/roletype/schema/model/RoleType.schema.ts";
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import {toast} from "react-toastify";
-import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 

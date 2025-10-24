@@ -7,8 +7,8 @@ import {toast} from "react-toastify";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import Logger from "@/common/utility/logger/Logger.ts";
-import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import Logger from "@/common/utility/features/logger/Logger.ts";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**

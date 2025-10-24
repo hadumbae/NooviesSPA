@@ -1,7 +1,7 @@
 import {ScreenDetailsSearchParamsSchema} from "@/pages/screens/schema/params/ScreenDetailsParamsSchema.ts";
 import {useSearchParams} from "react-router-dom";
-import fetchParsedSearchParams from "@/common/utility/search-params/fetchParsedSearchParams.ts";
-import setSearchParamValue from "@/common/utility/search-params/setSearchParamValue.ts";
+import fetchParsedSearchParams from "@/common/utility/features/search-params/fetchParsedSearchParams.ts";
+import setSearchParamValue from "@/common/utility/features/search-params/setSearchParamValue.ts";
 import {ScreenDetailsSearchParams} from "@/pages/screens/schema/params/ScreenDetailsParams.types.ts";
 
 type FetchSearchParams = {

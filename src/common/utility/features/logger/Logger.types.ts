@@ -1,4 +1,4 @@
-import Logger from "@/common/utility/logger/Logger.ts";
+import Logger from "@/common/utility/features/logger/Logger.ts";
 
 /**
  * Predefined categories for log entries.

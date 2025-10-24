@@ -1,6 +1,6 @@
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
-import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
+import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import SeatMapFilters from "@/pages/seatmap/types/SeatMapFilters.ts";
 
 interface ShowingSeatMapParams {

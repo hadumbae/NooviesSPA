@@ -1,5 +1,5 @@
 import { MovieDetails } from "@/pages/movies/schema/movie/Movie.types.ts";
-import formatDuration from "@/common/utility/formatDuration.ts";
+import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
 
 /**
@@ -16,7 +16,7 @@ export default function formatMovieDetails(movie: MovieDetails) {
     const posterURL = posterImage?.secure_url;
 
     /** The movie runtime formatted as a human-readable string. */
-    const formattedRuntime = formatDuration(runtime);
+    const formattedRuntime = formatMovieRuntime(runtime);
 
     /** The release year as a string, or "Unreleased" if no date is set. */
     const formattedReleaseDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";

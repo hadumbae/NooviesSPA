@@ -5,7 +5,7 @@ import useMoviePosterImageSubmitMutation
 import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
 import useMoviePosterImageSubmitForm from "@/pages/movies/hooks/admin/poster-image/useMoviePosterImageSubmitForm.ts";
 import { MoviePosterImageForm, MoviePosterImageFormValues } from "@/pages/movies/schema/form/MoviePosterImage.types.ts";
-import buildStandardLog from "@/common/utility/logger/buildStandardLog.ts";
+import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
 import MoviePosterImageSubmitFormView
     from "@/pages/movies/components/forms/poster-image/MoviePosterImageSubmitFormView.tsx";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";

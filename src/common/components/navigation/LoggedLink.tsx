@@ -1,7 +1,7 @@
 import {FC, MouseEventHandler} from 'react';
 import {Link, LinkProps, NavigateOptions} from "react-router-dom";
-import {LoggerFunction} from "@/common/utility/logger/Logger.types.ts";
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import {LoggerFunction} from "@/common/utility/features/logger/Logger.types.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
 import {ParamError} from "@/common/errors/ParamError.ts";
 
@@ -71,7 +71,7 @@ const LoggedLink: FC<LoggedLinkProps> = (props) => {
     } = props;
 
     const navigate = useLoggedNavigate();
-    const options = filterEmptyAttributes(navigateOptions);
+    const options = filterNullishAttributes(navigateOptions);
 
     /** Ensures `to` is a valid navigation path. */
     const navigateTo = typeof to === "string" ? to : to.pathname;

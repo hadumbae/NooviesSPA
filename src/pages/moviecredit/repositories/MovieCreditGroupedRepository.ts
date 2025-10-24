@@ -1,8 +1,8 @@
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
@@ -49,7 +49,7 @@ const repository: MovieCreditGroupedRepository = {
         const {personID, limit} = params;
 
         // Filter out empty or undefined query attributes
-        const queries = filterEmptyAttributes({limit});
+        const queries = filterNullishAttributes({limit});
 
         // Build the API endpoint URL with the given person ID and query parameters
         const url = buildQueryURL({

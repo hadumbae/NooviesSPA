@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import formatDuration from "@/common/utility/formatDuration.ts";
+import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import {FavouriteMovie} from "@/pages/movies/schema/client/favourites/FavouriteMovieSchema.ts";
 import FavouritesButton from "@/common/components/buttons/FavouritesButton.tsx";
 import useAddMovieToFavouritesMutation from "@/pages/movies/hooks/client/favourites/useAddMovieToFavouritesMutation.ts";
@@ -16,7 +16,7 @@ const MovieBrowseDetails: FC<DetailsProps> = ({movie}) => {
     const {_id, synopsis, genres, runtime, isFavourite} = movie;
 
     const genreString = (genres as Genre[]).map((genre) => genre.name).join(", ");
-    const timeString = formatDuration(runtime);
+    const timeString = formatMovieRuntime(runtime);
 
     const addMutation = useAddMovieToFavouritesMutation({movieID: _id});
     const removeMutation = useRemoveMovieToFavouritesMutation({movieID: _id});

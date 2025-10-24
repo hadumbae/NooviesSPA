@@ -3,12 +3,12 @@ import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import MovieImageRepository from "@/pages/movies/repositories/image-repository/MovieImageRepository.ts";
 import { toast } from "react-toastify";
-import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Movie } from "@/pages/movies/schema/movie/Movie.types.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import { MovieSchema } from "@/pages/movies/schema/movie/Movie.schema.ts";
-import buildStandardLog from "@/common/utility/logger/buildStandardLog.ts";
+import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
 
 /**
  * Values required to delete a movie poster image.

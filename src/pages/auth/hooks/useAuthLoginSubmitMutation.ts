@@ -6,7 +6,7 @@ import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
 import useSetAuthUser from "@/pages/auth/hooks/authUser/useSetAuthUser.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {UserLoginData} from "@/pages/auth/schema/form/AuthForm.types.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 

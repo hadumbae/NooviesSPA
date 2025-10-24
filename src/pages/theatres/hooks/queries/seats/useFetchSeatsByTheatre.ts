@@ -1,25 +1,22 @@
 import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
-import parseResponseData from "@/common/utility/query/parseResponseData.ts";
-import {SeatArraySchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";
+import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 export default function useFetchSeatsByTheatre(
     {theatreID, queries = {}}: {theatreID: ObjectId, queries?: RequestQueryFilters}
-): UseQueryResult<SeatArray> {
+): UseQueryResult<unknown, HttpResponseError> {
     const filters = {...queries, theatre: theatreID};
 
-    const queryKey = ["fetch_seats_by_theatre"];
-    const queryFn = async () => {
-        const schema = SeatArraySchema;
-        const action = () => SeatRepository.getAll({filters});
-        const {result} = await useFetchErrorHandler({fetchQueryFn: action});
+    const fetchSeats = useQueryFnHandler({
+        action: () => SeatRepository.getAll({filters}),
+        errorMessage: "Failed to fetch seats for theatre",
+    });
 
-        return parseResponseData({schema, data: result});
-    }
-
-    return useQuery<SeatArray>({queryKey, queryFn});
+    return useQuery({
+        queryKey: ["fetch_seats_by_theatre"],
+        queryFn: fetchSeats,
+    });
 }

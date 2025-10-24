@@ -1,33 +1,38 @@
-import {useMutation} from "@tanstack/react-query";
-import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
+import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import SeatMapShowingRepository from "@/pages/seatmap/repositories/SeatMapShowingRepository.ts";
 import {SeatMap, SeatMapSchema} from "@/pages/seatmap/schema/SeatMapSchema.ts";
-import parseResponseData from "@/common/utility/query/parseResponseData.ts";
 import {toast} from "react-toastify";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 
-interface Params {
-    onToggle?: (seatMap: SeatMap) => void
-}
-
-export default function useSeatMapUpdateAvailabilityMutation(params?: Params) {
-    const {onToggle} = params || {};
+export default function useSeatMapUpdateAvailabilityMutation(
+    params: MutationOnSubmitParams<SeatMap> = {}
+): UseMutationResult<SeatMap, unknown, string> {
+    const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
     const mutationKey = ['toggle_seat_map_availability'];
 
     const toggleAvailability = async (seatMapID: string) => {
-        const action = () => SeatMapShowingRepository.toggleSeatMapAvailability({seatMapID});
+        const {result} = await SeatMapShowingRepository.toggleSeatMapAvailability({seatMapID});
 
-        const {result} = await useFetchErrorHandler({fetchQueryFn: action});
-        return parseResponseData<typeof SeatMapSchema, SeatMap>({data: result, schema: SeatMapSchema});
+        const {data, success, error} = validateData({data: result, schema: SeatMapSchema});
+
+        if (!success) {
+            throw error;
+        }
+
+        return data;
     }
 
     const onSuccess = (seatMap: SeatMap) => {
-        toast.success("Seat Map updated.");
-        onToggle && onToggle(seatMap);
+        toast.success(successMessage ?? "Seat Map updated.");
+        onSubmitSuccess?.(seatMap);
     }
 
-    const onError = (error: Error) => {
-        console.error("[Create Seat Map Error] | ", error.message);
-        toast.error("Error: Failed to toggle seat availability. Please try again.");
+    const onError = (error: unknown) => {
+        const displayMessage = errorMessage ?? "Failed to toggle seat availability. Please try again.";
+        handleMutationResponseError({error, displayMessage});
+        onSubmitError?.(error);
     }
 
     return useMutation({

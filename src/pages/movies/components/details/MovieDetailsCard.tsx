@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import formatDuration from "@/common/utility/formatDuration.ts";
+import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
 import LabelContent from "@/common/components/card-content/LabelContent.tsx";
 import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
@@ -44,7 +44,7 @@ const MovieDetailsCard: FC<CardProps> = ({movie}) => {
     } = movie;
 
     // Format runtime for display (e.g., "2h 15m")
-    const movieDuration = formatDuration(runtime);
+    const movieDuration = formatMovieRuntime(runtime);
 
     // Safe lookups with fallbacks for missing or unknown values
     const countryName = ISO3166Alpha2CountryConstant[country] ?? country?.toUpperCase() ?? "Unknown";

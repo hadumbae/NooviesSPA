@@ -6,7 +6,7 @@ import SeatsByRowSubmitFormView
 import {SeatsByRowForm, SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";
-import Logger from "@/common/utility/logger/Logger.ts";
+import Logger from "@/common/utility/features/logger/Logger.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**

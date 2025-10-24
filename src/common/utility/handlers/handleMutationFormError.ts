@@ -1,7 +1,7 @@
 import {FieldValues, Path, UseFormReturn} from "react-hook-form";
 import {FormValidationError} from "@/common/errors/FormValidationError.ts";
-import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
-import Logger from "@/common/utility/logger/Logger.ts";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import Logger from "@/common/utility/features/logger/Logger.ts";
 
 /**
  * Parameters for {@link handleMutationFormError}.

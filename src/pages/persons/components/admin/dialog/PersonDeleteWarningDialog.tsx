@@ -4,7 +4,7 @@ import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import usePersonDeleteMutation from "@/pages/persons/hooks/mutations/admin/usePersonDeleteMutation.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 
 /**
  * Props for `PersonDeleteWarningDialog`.
@@ -46,7 +46,7 @@ const PersonDeleteWarningDialog: FC<WarningDialogProps> = (params) => {
     const {children, personID, personName, presetOpen, setPresetOpen, ...mutationParams} = params;
 
     const dialogTitle = `Proceed to delete entry for "${personName}"?`;
-    const presetState: PresetOpenState = filterEmptyAttributes({presetOpen, setPresetOpen});
+    const presetState: PresetOpenState = filterNullishAttributes({presetOpen, setPresetOpen});
 
     const {mutate} = usePersonDeleteMutation(mutationParams);
     const deletePerson = () => mutate({_id: personID});

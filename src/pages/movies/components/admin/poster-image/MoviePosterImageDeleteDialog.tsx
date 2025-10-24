@@ -6,7 +6,7 @@ import useMoviePosterImageDeleteMutation
     from "@/pages/movies/hooks/admin/poster-image/useMoviePosterImageDeleteMutation.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 
 type DialogProps = Omit<OnDeleteMutationParams, "onDeleteSuccess"> & PresetOpenState & {
     onDeleteSuccess?: (movie: Movie) => void;
@@ -22,7 +22,7 @@ const MoviePosterImageDeleteDialog: FC<DialogProps> = (props) => {
     const title = "Delete Movie Poster Image?";
     const description = "Delete movie's poster image? This is an irreversible action.";
 
-    const presetProps: PresetOpenState = filterEmptyAttributes({presetOpen, setPresetOpen});
+    const presetProps: PresetOpenState = filterNullishAttributes({presetOpen, setPresetOpen});
 
     return (
         <EntityDeleteWarningDialog

@@ -1,5 +1,5 @@
 import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
-import generateArraySchema from "@/common/utility/validation/generateArraySchema.ts";
+import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {MovieCreditDetailsSchema, MovieCreditSchema} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
 
 /** Paginated list of movie credits */

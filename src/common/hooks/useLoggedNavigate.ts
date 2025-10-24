@@ -1,7 +1,7 @@
 import {NavigateOptions, To, useLocation, useNavigate} from "react-router-dom";
-import Logger from "@/common/utility/logger/Logger.ts";
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
-import {LoggerFunction} from "@/common/utility/logger/Logger.types.ts";
+import Logger from "@/common/utility/features/logger/Logger.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
+import {LoggerFunction} from "@/common/utility/features/logger/Logger.types.ts";
 
 /**
  * Optional parameters for logging navigation events.
@@ -67,7 +67,7 @@ export default function useLoggedNavigate() {
         const {to, options, component, message, level = "log"} = params;
 
         // Filter out undefined logging attributes for cleaner logs
-        const messageObject = filterEmptyAttributes({from, component, message});
+        const messageObject = filterNullishAttributes({from, component, message});
 
         if (typeof to === "number") {
             // Delta (history) navigation
@@ -82,7 +82,7 @@ export default function useLoggedNavigate() {
             // Path-based navigation
             const path = typeof to === "string" ? to : to.pathname;
             const {state, replace} = options ?? {};
-            const filteredContext = filterEmptyAttributes({to: path, state, replace, ...messageObject});
+            const filteredContext = filterNullishAttributes({to: path, state, replace, ...messageObject});
 
             Logger[level]({
                 msg: "Router Navigation:",

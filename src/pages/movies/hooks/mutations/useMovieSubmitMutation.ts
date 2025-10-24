@@ -7,9 +7,9 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {toast} from "react-toastify";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import handleMutationFormError from "@/common/utility/mutations/handleMutationFormError.ts";
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
-import buildStandardLog from "@/common/utility/logger/buildStandardLog.ts";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
+import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
 import {
     MutationEditByIDParams,
     MutationOnSubmitParams
@@ -101,7 +101,7 @@ export default function useMovieSubmitMutation(
      * @param movie - The successfully submitted `Movie` entity.
      */
     const onSuccess = async (movie: Movie) => {
-        const context = filterEmptyAttributes({
+        const context = filterNullishAttributes({
             isEditing: true,
             movie: _id,
         });

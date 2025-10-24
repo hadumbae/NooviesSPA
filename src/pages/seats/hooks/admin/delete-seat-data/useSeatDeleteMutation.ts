@@ -3,7 +3,7 @@ import {toast} from "react-toastify";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
-import handleMutationResponseError from "@/common/utility/mutations/handleMutationResponseError.ts";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 
 /**

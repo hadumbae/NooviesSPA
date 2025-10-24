@@ -1,8 +1,8 @@
 import {AnchorHTMLAttributes, FC, ReactNode} from 'react';
-import {LoggerFunction} from "@/common/utility/logger/Logger.types.ts";
+import {LoggerFunction} from "@/common/utility/features/logger/Logger.types.ts";
 import {useLocation} from "react-router-dom";
-import buildStandardLog from "@/common/utility/logger/buildStandardLog.ts";
-import buildContext from "@/common/utility/logger/buildLoggerContext.ts";
+import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
+import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
 
 /**
  * Props for the {@link LoggedAnchor} component.

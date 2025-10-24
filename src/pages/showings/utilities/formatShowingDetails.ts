@@ -1,9 +1,9 @@
 import { ShowingDetails } from "@/pages/showings/schema/showing/Showing.types.ts";
-import formatLocationDetails from "@/common/utility/formatLocationDetails.ts";
+import formatLocationDetails from "@/common/utility/features/location/formatLocationDetails.ts";
 import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
-import convertToTitleCase from "@/common/utility/convertToTitleCase.ts";
+import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import buildShowingDateString from "@/pages/showings/utilities/buildShowingDateString.ts";
-import formatDuration from "@/common/utility/formatDuration.ts";
+import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 
 /**
  * **formatShowingDetails**
@@ -44,7 +44,7 @@ export default function formatShowingDetails(showing: ShowingDetails) {
     // ⚡ Movie details ⚡
     const { title: movieTitle, releaseDate, genres, runtime } = movie;
     const releaseYear = releaseDate?.toFormat("yyyy") ?? "Unreleased";
-    const runtimeString = formatDuration(runtime);
+    const runtimeString = formatMovieRuntime(runtime);
     const genreString = genres.map(({ name }) => name).join(" • ");
 
     // ⚡ Theatre details ⚡

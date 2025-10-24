@@ -1,6 +1,6 @@
 import {z} from "zod";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
-import refineRequireImageFile from "@/common/utility/validation/refineRequiredImageFile.ts";
+import refineRequireImageFile from "@/common/utility/schemas/refineRequiredImageFile.ts";
 
 /**
  * Schema representing the initial or default form values

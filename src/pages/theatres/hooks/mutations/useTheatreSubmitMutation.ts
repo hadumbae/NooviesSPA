@@ -5,7 +5,7 @@ import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import {TheatreForm, TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import {toast} from "react-toastify";
 import {ParseError} from "@/common/errors/ParseError.ts";
-import handleFormSubmitError from "@/common/utility/forms/handleFormSubmitError.ts";
+import handleFormSubmitError from "@/common/utility/handlers/handleFormSubmitError.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";

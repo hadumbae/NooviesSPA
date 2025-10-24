@@ -1,5 +1,5 @@
 import { z, ZodObject, ZodRawShape } from "zod";
-import buildStandardLog from "@/common/utility/logger/buildStandardLog.ts";
+import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
 
 /**
  * Parameters for `fetchParsedSearchParams`.

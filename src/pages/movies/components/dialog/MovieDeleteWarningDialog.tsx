@@ -4,7 +4,7 @@ import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import useMovieDeleteMutation from "@/pages/movies/hooks/mutations/useMovieDeleteMutation.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
-import filterEmptyAttributes from "@/common/utility/filterEmptyAttributes.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 
 /**
  * Props for the `MovieDeleteWarningDialog` component.
@@ -47,7 +47,7 @@ const MovieDeleteWarningDialog: FC<WarningDialogProps> = (props) => {
     const dialogTitle = `Proceed to delete ${displayName}?`;
 
     // Filter out undefined preset state values for controlled/uncontrolled behavior
-    const presetStates = filterEmptyAttributes({presetOpen, setPresetOpen});
+    const presetStates = filterNullishAttributes({presetOpen, setPresetOpen});
 
     // Setup delete mutation
     const {mutate} = useMovieDeleteMutation({onDeleteSuccess, onDeleteError});

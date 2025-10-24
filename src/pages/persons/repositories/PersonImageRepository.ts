@@ -1,7 +1,7 @@
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
-import useFetchAPI from "@/common/utility/query/useFetchAPI.ts";
+import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 type UploadProfileImageParams = RequestOptions & {

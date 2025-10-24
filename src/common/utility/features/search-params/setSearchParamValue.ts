@@ -1,5 +1,5 @@
 import {NavigateOptions, URLSearchParamsInit} from "react-router-dom";
-import updateSearchParams from "@/common/utility/params/updateSearchParams.ts";
+import updateSearchParams from "@/common/utility/features/search-params/updateSearchParams.ts";
 
 type SetValueParams = {
     key: string;
