@@ -1,7 +1,7 @@
 import {z} from "zod";
 import {LatitudeSchema, LongitudeSchema} from "@/common/schema/location/Coordinate.schema.ts";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
-import FormInputValidationService from "@/common/services/FormInputValidationService.ts";
+import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 
 /**
  * 🔧 Initial value schema for coordinate form inputs.
@@ -27,7 +27,7 @@ export const CoordinateFormValueSchema = z.object({
  *
  * @internal
  */
-const LongitudeFormSchema = FormInputValidationService.cleanNumberInput(LongitudeSchema);
+const LongitudeFormSchema = preprocessEmptyStringToUndefined(LongitudeSchema);
 
 /**
  * 🧹 Cleaned latitude input schema.
@@ -37,7 +37,7 @@ const LongitudeFormSchema = FormInputValidationService.cleanNumberInput(Longitud
  *
  * @internal
  */
-const LatitudeFormSchema = FormInputValidationService.cleanNumberInput(LatitudeSchema);
+const LatitudeFormSchema = preprocessEmptyStringToUndefined(LatitudeSchema);
 
 /**
  * 🌐 Zod schema for validating coordinate form submissions.

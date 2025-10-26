@@ -1,9 +1,11 @@
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import FormInputValidationService from "@/common/services/FormInputValidationService.ts";
+import {
+    CoercedNonNegativeNumberSchema,
+} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {LocationFormSchema, LocationFormValueSchema} from "@/common/schema/location/LocationForm.schema.ts";
+import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 
 /**
  * Schema for raw form input values for the theatre form.
@@ -36,6 +38,5 @@ export const TheatreFormSchema = z.object({
     location: LocationFormSchema,
 
     /** Validated seat capacity: cleaned number >= 0, max 2500 */
-    seatCapacity: FormInputValidationService
-        .cleanNumberInput(NonNegativeNumberSchema.max(2500, "Must be 2500 or less.")),
+    seatCapacity: preprocessEmptyStringToUndefined(CoercedNonNegativeNumberSchema.max(2500, "Must be 2500 or less.")),
 });
