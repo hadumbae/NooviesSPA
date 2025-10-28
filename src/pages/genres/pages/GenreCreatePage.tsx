@@ -5,7 +5,7 @@ import GenreCreateHeader from "@/pages/genres/components/pages/create-genre/Genr
 import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import GenreCreateBreadcrumbs from "@/pages/genres/components/pages/create-genre/GenreCreateBreadcrumbs.tsx";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Page component for creating a new genre.

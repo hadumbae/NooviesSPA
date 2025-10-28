@@ -6,7 +6,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PersonCreateBreadcrumbs from "@/pages/persons/components/breadcrumbs/admin/PersonCreateBreadcrumbs.tsx";
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Page component for creating a new person (actor or crew) in the admin interface.

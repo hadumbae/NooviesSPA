@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import useFetchRoleTypes from "@/pages/roletype/hooks/fetch/useFetchRoleTypes.ts";
-import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {PaginatedRoleTypeSchema} from "@/pages/roletype/schema/model/RoleType.schema.ts";

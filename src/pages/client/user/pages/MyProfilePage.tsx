@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import useFetchAuthUserDetails from "@/common/hooks/useFetchAuthUserDetails.ts";
+import useFetchAuthUserDetails from "@/common/hooks/auth/useLogoutUser.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MyProfileHeader from "@/pages/client/user/components/headers/MyProfileHeader.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";

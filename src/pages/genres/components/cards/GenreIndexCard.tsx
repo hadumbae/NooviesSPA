@@ -3,8 +3,8 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {GenreDetails} from "@/pages/genres/schema/genre/Genre.types.ts";
 import {Clapperboard} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Props for the `GenreIndexCard` component.

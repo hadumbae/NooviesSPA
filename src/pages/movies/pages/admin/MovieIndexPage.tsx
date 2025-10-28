@@ -1,12 +1,12 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MovieIndexHeader from "@/pages/movies/components/headers/admin/MovieIndexHeader.tsx";
-import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import MovieIndexCard from "@/pages/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
 import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
-import usePaginationLocationState from "@/common/hooks/params/usePaginationLocationState.ts";
+import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {MovieDetails, PaginatedMovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";

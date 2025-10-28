@@ -7,7 +7,7 @@ import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 import GenreDeleteWarningDialog from "@/pages/genres/components/dialog/GenreDeleteWarningDialog.tsx";
 import GenreSubmitFormPanel from "@/pages/genres/components/form/GenreSubmitFormPanel.tsx";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 interface Props {
     genre: Genre;

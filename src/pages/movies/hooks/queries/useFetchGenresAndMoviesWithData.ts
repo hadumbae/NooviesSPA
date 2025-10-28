@@ -1,7 +1,7 @@
 import useFetchPaginatedMoviesWithData from "@/pages/movies/hooks/queries/useFetchPaginatedMoviesWithData.ts";
 import useFetchGenresWithParamsForMovieBrowse
     from "@/pages/movies/hooks/client/browse/useFetchGenresWithParamsForMovieBrowse.ts";
-import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 
 interface FetchQueryDataParams {
     overridePage?: number;

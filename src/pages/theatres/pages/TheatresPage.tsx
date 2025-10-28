@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import TheatreIndexHeader from "@/pages/theatres/components/headers/TheatreIndexHeader.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";

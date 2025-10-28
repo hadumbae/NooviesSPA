@@ -6,7 +6,7 @@ import PageSection from "@/common/components/page/PageSection.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import TheatreCreateHeader from "@/pages/theatres/components/headers/TheatreCreateHeader.tsx";
 import TheatreCreateBreadcrumbs from "@/pages/theatres/components/breadcrumbs/admin/TheatreCreateBreadcrumbs.tsx";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 const TheatreCreatePage: FC = () => {
     const navigate = useLoggedNavigate();

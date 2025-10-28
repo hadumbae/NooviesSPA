@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useFetchMovieBrowseParams from "@/pages/movies/hooks/params/client/useFetchMovieBrowseParams.ts";
 
 interface ParamReturns {

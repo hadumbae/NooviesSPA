@@ -1,7 +1,7 @@
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {toast} from "react-toastify";
 import {useEffect} from "react";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {useLocation} from "react-router-dom";
 import setRedirectPath from "@/common/utility/router/setRedirectPath.ts";
 

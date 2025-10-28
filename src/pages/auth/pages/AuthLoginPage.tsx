@@ -5,7 +5,7 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import AuthLoginFormContainer from "@/pages/auth/components/form/login/AuthLoginFormContainer.tsx";
 import {useLocation} from "react-router-dom";
 import {toast} from "react-toastify";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Login page component.

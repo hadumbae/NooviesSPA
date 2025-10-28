@@ -14,7 +14,7 @@ import {PersonDetailsSchema} from "@/pages/persons/schema/person/Person.schema.t
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Page component for managing a `Person`'s profile images.

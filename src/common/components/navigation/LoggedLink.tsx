@@ -2,7 +2,7 @@ import {FC, MouseEventHandler} from 'react';
 import {Link, LinkProps, NavigateOptions} from "react-router-dom";
 import {LoggerFunction} from "@/common/utility/features/logger/Logger.types.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {ParamError} from "@/common/errors/ParamError.ts";
 
 /**

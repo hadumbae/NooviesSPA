@@ -20,7 +20,7 @@ import {PersonDetailsUIContext} from "@/pages/persons/context/PersonDetailsUICon
 import UploadPersonProfileImageFormPanel
     from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormPanel.tsx";
 import PersonDeleteWarningDialog from "@/pages/persons/components/admin/dialog/PersonDeleteWarningDialog.tsx";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import PersonSubmitFormPanel from "@/pages/persons/components/form/admin/submit/PersonSubmitFormPanel.tsx";
 import {
     MovieCreditDetailsExceptPersonByRoleArraySchema

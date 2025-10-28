@@ -9,7 +9,7 @@ import {
 import {Link} from "react-router-dom";
 import {User} from "lucide-react";
 import useAuthLogoutSubmitMutation from "@/pages/auth/hooks/useAuthLogoutSubmitMutation.ts";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 const GuestAuthSidebarGroup: FC = () => {
     const navigate = useLoggedNavigate();

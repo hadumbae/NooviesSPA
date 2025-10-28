@@ -1,7 +1,7 @@
 import { FC } from "react";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import ShowingIndexHeader from "@/pages/showings/components/admin/index-page/ShowingIndexHeader.tsx";
-import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";

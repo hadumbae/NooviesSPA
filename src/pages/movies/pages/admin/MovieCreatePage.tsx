@@ -6,7 +6,7 @@ import PageSection from "@/common/components/page/PageSection.tsx";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import MovieCreateBreadcrumbs from "@/pages/movies/components/pages/admin/create-movie/MovieCreateBreadcrumbs.tsx";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Page component for creating a new movie in the admin interface.

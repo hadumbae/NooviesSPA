@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import GenreIndexHeader from "@/pages/genres/components/headers/GenreIndexHeader.tsx";
@@ -12,7 +12,7 @@ import {PaginatedGenreDetailsSchema} from "@/pages/genres/schema/genre/Genre.sch
 import {GenreDetails, PaginatedGenreDetails} from "@/pages/genres/schema/genre/Genre.types.ts";
 import GenreIndexCard from "@/pages/genres/components/cards/GenreIndexCard.tsx";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
-import usePaginationLocationState from "@/common/hooks/params/usePaginationLocationState.ts";
+import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
 
 const GenreIndexPage: FC = () => {

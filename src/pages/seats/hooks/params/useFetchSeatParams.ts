@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import {toast} from "react-toastify";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useFetchSeatMapParams from "@/pages/seatmap/hooks/params/useFetchSeatMapParams.ts";
 
 export default function useFetchSeatParams() {

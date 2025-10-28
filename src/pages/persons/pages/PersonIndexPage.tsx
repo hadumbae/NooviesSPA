@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import usePaginationSearchParams from "@/common/hooks/params/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import PersonIndexHeader from "@/pages/persons/components/headers/PersonIndexHeader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
@@ -8,7 +8,7 @@ import useFetchPersons from "@/pages/persons/hooks/fetch/useFetchPersons.ts";
 import PersonIndexCard from "@/pages/persons/components/PersonIndexCard.tsx";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import usePaginationLocationState from "@/common/hooks/params/usePaginationLocationState.ts";
+import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
 import {PaginatedPersonsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import {PaginatedPersons} from "@/pages/persons/schema/person/Person.types.ts";

@@ -9,7 +9,7 @@ import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenD
 import SeatSubmitFormPanel from "@/pages/seats/components/forms/submit-form/SeatSubmitFormPanel.tsx";
 
 import { SeatFormValues } from "@/pages/seats/schema/form/SeatForm.types.ts";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Props for the `TheatreScreenDetailsHeader` component.

@@ -1,6 +1,6 @@
 import {FC, useEffect} from 'react';
 import useAuthLogoutSubmitMutation from "@/pages/auth/hooks/useAuthLogoutSubmitMutation.ts";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 
 /**

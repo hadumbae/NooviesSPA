@@ -2,7 +2,7 @@ import {IDStringSchema, ObjectId} from "@/common/schema/strings/IDStringSchema.t
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 import {toast} from "react-toastify";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Custom React hook to safely retrieve and validate the `roleTypeID` route parameter.

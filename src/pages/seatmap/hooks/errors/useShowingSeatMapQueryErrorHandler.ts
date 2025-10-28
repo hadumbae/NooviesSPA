@@ -1,6 +1,6 @@
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {useEffect} from "react";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 export default function useShowingSeatMapQueryErrorHandler(error?: Error | null) {
     const navigate = useLoggedNavigate();

@@ -3,7 +3,7 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import AuthRegisterFormContainer from "@/pages/auth/components/form/register/AuthRegisterFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import RegisterHeader from "@/pages/auth/components/headers/RegisterHeader.tsx";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Page component for user registration.

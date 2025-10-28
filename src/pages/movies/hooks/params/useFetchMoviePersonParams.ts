@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import {IDStringSchema, ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {useEffect, useRef} from "react";
 import {toast} from "react-toastify";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useFetchMovieBrowseParams from "@/pages/movies/hooks/params/client/useFetchMovieBrowseParams.ts";
 
 export default function useFetchMoviePersonParams(): {movieID: ObjectId, creditID: ObjectId} | null {

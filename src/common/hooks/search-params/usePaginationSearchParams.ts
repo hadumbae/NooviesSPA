@@ -4,7 +4,7 @@ import updateSearchParams from "@/common/utility/features/search-params/updateSe
 import {
     PaginationParamValues,
     UsePaginationSearchParamsReturn
-} from "@/common/hooks/params/usePaginationSearchParams.types.ts";
+} from "@/common/hooks/search-params/usePaginationSearchParams.types.ts";
 
 const defaultPage = import.meta.env.VITE_PAGINATION_PAGE_DEFAULT;
 const defaultPerPage = import.meta.env.VITE_PAGINATION_PER_PAGE_DEFAULT;

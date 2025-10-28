@@ -7,7 +7,7 @@ import {
     DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/common/components/ui/dropdown-menu.tsx";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 

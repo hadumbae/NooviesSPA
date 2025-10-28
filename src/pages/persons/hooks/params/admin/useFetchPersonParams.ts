@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 import {useEffect} from "react";
 import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 type FetchParams = {
     /**

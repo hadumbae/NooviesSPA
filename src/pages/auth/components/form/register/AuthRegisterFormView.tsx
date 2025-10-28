@@ -5,7 +5,7 @@ import {UseMutationResult} from "@tanstack/react-query";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Form} from "@/common/components/ui/form.tsx";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {cn} from "@/common/lib/utils.ts";
 
 /**

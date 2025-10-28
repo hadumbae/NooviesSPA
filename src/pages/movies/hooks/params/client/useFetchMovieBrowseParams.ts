@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 import {useEffect, useMemo} from "react";
 import {IDStringSchema, ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Custom hook to read and validate a `movieID` route parameter, with optional redirection on failure.

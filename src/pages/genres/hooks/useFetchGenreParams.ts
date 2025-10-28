@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import {toast} from "react-toastify";
-import useLoggedNavigate from "@/common/hooks/useLoggedNavigate.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 export default function useFetchGenreParams() {
     const navigate = useLoggedNavigate();

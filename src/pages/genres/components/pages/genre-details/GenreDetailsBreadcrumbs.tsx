@@ -7,7 +7,7 @@ import {
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
 import {Link} from "react-router-dom";
-import usePaginationLocationState from "@/common/hooks/params/usePaginationLocationState.ts";
+import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import convertToQueryParams from "@/common/utility/query/convertToQueryParams.ts";
 
 /**
