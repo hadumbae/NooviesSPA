@@ -1,8 +1,8 @@
 import IMovie from "@/pages/movies/interfaces/IMovie.ts";
-import ITheatre from "@/pages/theatres/interfaces/ITheatre.ts";
 import {IScreen} from "@/pages/screens/interfaces/IScreen.ts";
 import ISeatMap from "@/pages/seatmap/interfaces/ISeatMap.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 /**
  * Represents a movie showing within a theatre.
@@ -61,7 +61,7 @@ export default interface IShowing {
      * Reference to the theatre where the showing takes place.
      * Can be either the theatre's ObjectId or the full ITheatre object.
      */
-    theatre: ObjectId | ITheatre;
+    theatre: ObjectId | Theatre;
 
     /**
      * Reference to the screen on which the movie is shown.

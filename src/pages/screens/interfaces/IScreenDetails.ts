@@ -1,7 +1,7 @@
 import {ScreenType} from "@/pages/screens/schema/ScreenType.enum.ts";
 
-import ITheatre from "@/pages/theatres/interfaces/ITheatre.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 
 export interface IScreenDetails {
     readonly _id: ObjectId,
@@ -9,7 +9,7 @@ export interface IScreenDetails {
     capacity: number,
     screenType: ScreenType,
     
-    theatre: ITheatre,
+    theatre: Theatre,
     seatCount: number,
     futureShowingCount: number,
 }
