@@ -2,7 +2,7 @@ import {FC} from 'react';
 import useTheatreSubmitForm from "@/pages/theatres/hooks/forms/useTheatreSubmitForm.ts";
 import useTheatreSubmitMutation, {
     TheatreSubmitMutationParams
-} from "@/pages/theatres/hooks/mutations/useTheatreSubmitMutation.ts";
+} from "@/pages/theatres/hooks/features/submit-form/useTheatreSubmitMutation.ts";
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import {TheatreForm, TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import TheatreSubmitFormView from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormView.tsx";

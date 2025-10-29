@@ -1,5 +1,5 @@
 import {FC, PropsWithChildren} from 'react';
-import useTheatreDeleteMutation from "@/pages/theatres/hooks/mutations/useTheatreDeleteMutation.ts";
+import useTheatreDeleteMutation from "@/pages/theatres/hooks/features/delete-theatre/useTheatreDeleteMutation.ts";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {
     AlertDialog, AlertDialogAction, AlertDialogCancel,

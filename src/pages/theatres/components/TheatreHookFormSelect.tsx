@@ -4,7 +4,7 @@ import {Loader} from "lucide-react";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
-import useFetchTheatres from "@/pages/theatres/hooks/queries/query/fetch-by-query/useFetchTheatres.ts";
+import useFetchTheatres from "@/pages/theatres/hooks/query/useFetchTheatres.ts";
 import {TheatreArraySchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";

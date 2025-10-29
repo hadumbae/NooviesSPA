@@ -1,30 +1,12 @@
 import {z} from "zod";
 import {CoercedNonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-
-/**
- * Schema for identifying a specific screen within a theatre.
- *
- * Used when both `theatreID` and `screenID` are required to reference a screen.
- */
-export const ScreenDetailsParamsSchema = z.object({
-    /**
-     * Unique identifier for the theatre.
-     */
-    theatreID: IDStringSchema,
-
-    /**
-     * Unique identifier for the screen within the theatre.
-     */
-    screenID: IDStringSchema,
-});
 
 /**
  * Schema for query parameters used when searching or paginating through a theatre screen's data.
  *
  * This includes pagination for both seat listings and showings, as well as tab selection.
  */
-export const ScreenDetailsSearchParamsSchema = z.object({
+export const ScreenDetailsSearchParamSchema = z.object({
     /**
      * Specifies which tab should be active in the UI.
      *
@@ -72,3 +54,10 @@ export const ScreenDetailsSearchParamsSchema = z.object({
         .default(15),
 });
 
+/**
+ * Type representing search and pagination parameters for viewing seat or showing data
+ * associated with a specific theatre screen.
+ *
+ * Includes information like which tab is active, current page, and number of items per page.
+ */
+export type ScreenDetailsSearchParams = z.infer<typeof ScreenDetailsSearchParamSchema>;

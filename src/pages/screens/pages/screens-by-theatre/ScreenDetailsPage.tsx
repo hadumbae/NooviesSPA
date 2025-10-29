@@ -2,7 +2,6 @@ import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import TheatreScreenDetailsBreadcrumbs
     from "@/pages/screens/components/theatre-screen/admin/breadcrumbs/TheatreScreenDetailsBreadcrumbs.tsx";
-import useFetchTheatreScreenParams from "@/pages/theatres/hooks/params/useFetchTheatreScreenParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import TheatreScreenDetailsHeader
     from "@/pages/screens/components/theatre-screen/admin/headers/TheatreScreenDetailsHeader.tsx";
@@ -10,7 +9,7 @@ import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/t
 import TheatreScreenSeatsByRowCard
     from "@/pages/screens/components/theatre-screen/admin/lists/TheatreScreenSeatsByRowCard.tsx";
 import useTheatreScreenSearchParams from "@/pages/screens/hooks/screens-by-theatres/params/useTheatreScreenSearchParams.ts";
-import useFetchTheatre from "@/pages/theatres/hooks/queries/useFetchTheatre.ts";
+import useFetchTheatre from "@/pages/theatres/hooks/query/useFetchTheatre.ts";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import useFetchScreen from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreen.ts";
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
@@ -19,6 +18,9 @@ import CombinedValidatedQueryBoundary from "@/common/components/query/combined/C
 import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
 import {TheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import {ScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
+import useFetchRouteParams from "@/common/hooks/router/useFetchRouteParams.ts";
+import {TheatreScreenRouteParamSchema} from "@/pages/theatres/schema/params/TheatreScreenRouteParamSchema.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Page component displaying detailed information for a specific theatre screen.
@@ -37,9 +39,16 @@ import {ScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.t
  * @returns A JSX element rendering the full screen details page.
  */
 const ScreenDetailsPage: FC = () => {
-    const urlParams = useFetchTheatreScreenParams();
-    if (!urlParams) return <PageLoader/>;
-    const {theatreID, screenID} = urlParams;
+    const navigate = useLoggedNavigate();
+    const onError = () => navigate({level: "error", to: "admin/theatres"});
+
+    const {theatreID, screenID} = useFetchRouteParams({
+        schema: TheatreScreenRouteParamSchema,
+        onError,
+        onErrorMessage: "Failed to parse theatre and screen route parameters."
+    }) ?? {};
+
+    if (!theatreID || !screenID) return <PageLoader/>;
 
     const {searchParams, setActiveTab} = useTheatreScreenSearchParams({activeTab: "seats"});
     const {activeTab, showingPage, showingsPerPage} = searchParams;

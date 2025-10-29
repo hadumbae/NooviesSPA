@@ -5,7 +5,7 @@ import TheatreIndexHeader from "@/pages/theatres/components/headers/TheatreIndex
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
-import useFetchTheatres from "@/pages/theatres/hooks/queries/query/fetch-by-query/useFetchTheatres.ts";
+import useFetchTheatres from "@/pages/theatres/hooks/query/useFetchTheatres.ts";
 import TheatreIndexCard from "@/pages/theatres/components/index-page/TheatreIndexCard.tsx";
 import {PaginatedTheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
