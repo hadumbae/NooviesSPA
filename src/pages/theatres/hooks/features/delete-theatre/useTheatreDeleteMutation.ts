@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ParseError } from "@/common/errors/ParseError.ts";
 import { toast } from "react-toastify";
 import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.ts";
-import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import { OnDeleteMutationParams } from "@/common/type/form/MutationDeleteParams.ts";
 

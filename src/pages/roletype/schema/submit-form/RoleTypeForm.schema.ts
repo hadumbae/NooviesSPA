@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { FormStarterValueSchema } from "@/common/schema/form/FormStarterValueSchema.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import { RoleTypeDepartmentEnumSchema } from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import {
     RoleTypeCastCategoryEnumSchema,

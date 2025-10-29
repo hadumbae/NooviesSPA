@@ -1,8 +1,8 @@
 import {z} from 'zod';
-import {DateStringSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
+import {DateStringSchema} from "@/common/schema/dates/DateStringSchema.ts";
 
 /**
  * Schema for filtering movie query results.

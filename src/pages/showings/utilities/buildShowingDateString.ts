@@ -1,5 +1,5 @@
 import {DateTime} from "luxon";
-import {IANATimezone} from "@/common/schema/datetime/IANATimezone.schema.ts";
+import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 
 /**
  * Parameters for {@link buildShowingDateString}.

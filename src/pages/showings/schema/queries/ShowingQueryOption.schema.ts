@@ -1,9 +1,9 @@
 import { z } from "zod";
-import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
-import { DateStringSchema } from "@/common/schema/helpers/ZodDateHelpers.ts";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import { RequiredBoolean } from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import { MongooseSortOrderSchema } from "@/common/schema/enums/MongooseSortOrderSchema.ts";
+import {DateStringSchema} from "@/common/schema/dates/DateStringSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**
  * Schema for filtering **movie showings** in queries.
@@ -34,9 +34,9 @@ export const ShowingQueryMatchFilterSchema = z.object({
     /** Filter by minimum ticket price */
     ticketPrice: PositiveNumberSchema.optional(),
     /** Filter by special event flag */
-    isSpecialEvent: RequiredBoolean.optional(),
+    isSpecialEvent: CoercedBooleanValueSchema.optional(),
     /** Filter by active status */
-    isActive: RequiredBoolean.optional(),
+    isActive: CoercedBooleanValueSchema.optional(),
 });
 
 /**

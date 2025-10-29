@@ -3,7 +3,7 @@ import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import {AuthUserAdminStatusSchema} from "@/pages/auth/schema/AuthUserAdminStatusSchema.ts";
 import {AuthUserDetails, AuthUserDetailsSchema} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
 import Cookies from "js-cookie";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 
 interface IAuthService {

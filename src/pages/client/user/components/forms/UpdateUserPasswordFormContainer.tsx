@@ -3,7 +3,7 @@ import useUpdateUserPasswordForm from "@/pages/users/hooks/form/useUpdateUserPas
 import useUpdateUserPasswordSubmitMutation from "@/pages/users/hooks/mutations/useUpdateUserPasswordSubmitMutation.ts";
 import {UserPasswordUpdateSubmit} from "@/pages/users/schemas/UserPasswordUpdateSubmitSchema.ts";
 import UpdateUserPasswordFormView from "@/pages/client/user/components/forms/UpdateUserPasswordFormView.tsx";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 interface UpdateUserPasswordFormContainerProps {
     userID: ObjectId;

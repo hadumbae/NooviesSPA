@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import {IDStringSchema, ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {IDStringSchema, ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useEffect, useRef} from "react";
 import {toast} from "react-toastify";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";

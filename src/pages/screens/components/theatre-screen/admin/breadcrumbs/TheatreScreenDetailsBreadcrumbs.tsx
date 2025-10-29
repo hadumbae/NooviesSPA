@@ -7,7 +7,7 @@ import {
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
 import {Link} from "react-router-dom";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 type DetailsBreadcrumbs = {
     theatreID: ObjectId;

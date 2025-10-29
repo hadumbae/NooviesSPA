@@ -1,10 +1,10 @@
 import {z} from "zod";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {RoleTypeDepartmentEnumSchema} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**
  * Schema for filtering movie credit queries.
@@ -28,12 +28,12 @@ export const MovieCreditQueryFiltersSchema = z.object({
     creditedAs: NonEmptyStringSchema.max(150, {message: "Must be 150 characters or less."}).optional(),
     characterName: NonEmptyStringSchema.optional(),
     billingOrder: PositiveNumberSchema.optional(),
-    uncredited: RequiredBoolean.optional(),
-    voiceOnly: RequiredBoolean.optional(),
-    cameo: RequiredBoolean.optional(),
-    motionCapture: RequiredBoolean.optional(),
-    isPrimary: RequiredBoolean.optional(),
-    archiveFootage: RequiredBoolean.optional(),
+    uncredited: CoercedBooleanValueSchema.optional(),
+    voiceOnly: CoercedBooleanValueSchema.optional(),
+    cameo: CoercedBooleanValueSchema.optional(),
+    motionCapture: CoercedBooleanValueSchema.optional(),
+    isPrimary: CoercedBooleanValueSchema.optional(),
+    archiveFootage: CoercedBooleanValueSchema.optional(),
 });
 
 /**

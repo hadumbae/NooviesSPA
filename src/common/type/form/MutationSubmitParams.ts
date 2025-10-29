@@ -1,5 +1,5 @@
 import {ZodTypeAny} from "zod";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
  * Common parameters for handling mutation submissions, such as create or update operations.

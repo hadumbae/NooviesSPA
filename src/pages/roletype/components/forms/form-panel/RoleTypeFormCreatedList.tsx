@@ -1,6 +1,6 @@
 import {Dispatch, FC, SetStateAction} from 'react';
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {X} from "lucide-react";
 

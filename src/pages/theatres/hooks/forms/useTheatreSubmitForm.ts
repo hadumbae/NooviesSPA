@@ -5,7 +5,7 @@ import {TheatreFormSchema} from "@/pages/theatres/schema/forms/TheatreForm.schem
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import {TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
-import {LocationFormValues} from "@/common/schema/location/LocationForm.types.ts";
+import {LocationFormValues} from "@/common/schema/models/location-form/LocationForm.types.ts";
 
 type FormParams = {
     theatre?: Theatre;

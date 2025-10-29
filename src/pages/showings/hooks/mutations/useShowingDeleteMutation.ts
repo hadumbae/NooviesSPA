@@ -3,7 +3,7 @@ import {ParseError} from "@/common/errors/ParseError.ts";
 import {toast} from "react-toastify";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 interface Params {
     onDelete: () => void;

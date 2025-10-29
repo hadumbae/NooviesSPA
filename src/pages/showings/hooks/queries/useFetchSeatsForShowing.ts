@@ -1,7 +1,7 @@
 // import ShowingSeatRepository from "@/pages/showings/repositories/ShowingSeatRepository.ts";
 // import {SeatArraySchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 // import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useQuery} from "@tanstack/react-query";
 
 interface Params {

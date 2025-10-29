@@ -1,11 +1,12 @@
 import { z } from "zod";
-import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import { ISO3166Alpha2CodeEnum } from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
-import { CloudinaryImageObjectSchema } from "@/common/schema/objects/CloudinaryImageObjectSchema.ts";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import { ISO3166Alpha2CountryCodeEnum } from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
+import { CloudinaryImageSchema } from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
 import { NonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import { ParsedUTCDayOnlyDateStringSchema } from "@/common/schema/dates/ParsedUTCDayOnlyDateStringSchema.ts";
-import { generatePaginationSchema } from "@/common/schema/helpers/zodHelperFunctions.ts";
+import { UTCDayOnlyDateTimeSchema } from "@/common/schema/date-time/iso-8601/UTCDayOnlyDateTimeSchema.ts";
+
+import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 
 /**
  * Represents a person in the system.
@@ -25,13 +26,13 @@ export const PersonSchema = z.object({
     biography: NonEmptyStringSchema.max(1000, "Must be 1000 characters or less."),
 
     /** Date of birth as an ISO 8601 date string (UTC, day-only). */
-    dob: ParsedUTCDayOnlyDateStringSchema,
+    dob: UTCDayOnlyDateTimeSchema,
 
     /** Nationality of the person as an ISO 3166-1 alpha-2 country code. */
-    nationality: ISO3166Alpha2CodeEnum,
+    nationality: ISO3166Alpha2CountryCodeEnum,
 
     /** Optional profile image object from Cloudinary; nullable if no image exists. */
-    profileImage: CloudinaryImageObjectSchema.nullable().optional(),
+    profileImage: CloudinaryImageSchema.nullable().optional(),
 });
 
 /**

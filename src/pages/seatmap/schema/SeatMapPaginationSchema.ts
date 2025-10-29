@@ -1,6 +1,6 @@
 import {z} from "zod";
-import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
 import {SeatMapSchema} from "@/pages/seatmap/schema/SeatMapSchema.ts";
+import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 
 
 /**

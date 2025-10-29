@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { ScreenTypeEnum } from "@/pages/screens/schema/ScreenType.enum.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { FormStarterValueSchema } from "@/common/schema/form/FormStarterValueSchema.ts";
 import { CleanedNonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 

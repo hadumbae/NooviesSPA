@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 import useTheatreDeleteMutation from "@/pages/theatres/hooks/features/delete-theatre/useTheatreDeleteMutation.ts";
-import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     AlertDialog, AlertDialogAction, AlertDialogCancel,
     AlertDialogContent, AlertDialogDescription, AlertDialogFooter,

@@ -1,4 +1,4 @@
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";

@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     Breadcrumb,
     BreadcrumbItem,

@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { NonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import { ScreenTypeEnum } from "@/pages/screens/schema/ScreenType.enum.ts";
 import { MongooseSortOrderSchema } from "@/common/schema/enums/MongooseSortOrderSchema.ts";
 

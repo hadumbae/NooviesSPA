@@ -1,8 +1,8 @@
 import {z, ZodType} from "zod";
-import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import ISeatMapSubmit from "@/pages/seatmap/interfaces/ISeatMapSubmit.ts";
-import {RefinedIDStringSchema} from "@/common/schema/strings/RefinedIDStringSchema.ts";
-import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
+import {CoercedNumberValueSchema} from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
  * Zod schema for validating `SeatMap` submission data.
@@ -11,22 +11,22 @@ import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema
  * data submitted when creating or updating a seat map.
  */
 export const SeatMapSubmitSchema: ZodType<ISeatMapSubmit> = z.object({
-    isAvailable: RequiredBoolean
+    isAvailable: CoercedBooleanValueSchema
         .optional()
         .default(true),
 
-    isReserved: RequiredBoolean
+    isReserved: CoercedBooleanValueSchema
         .optional()
         .default(false),
 
     price: z
-        .union([z.literal(""), RequiredNumberSchema])
+        .union([z.literal(""), CoercedNumberValueSchema])
         .refine((price) => price !== "", {message: "Required."})
         .refine((price) => price > 0, {message: "Must be 0 or greater."}),
 
-    seat: RefinedIDStringSchema,
+    seat: IDStringSchema,
 
-    showing: RefinedIDStringSchema,
+    showing: IDStringSchema,
 });
 
 /**

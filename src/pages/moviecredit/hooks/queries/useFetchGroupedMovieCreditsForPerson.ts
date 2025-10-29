@@ -1,6 +1,6 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import MovieCreditGroupedRepository from "@/pages/moviecredit/repositories/MovieCreditGroupedRepository.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {MovieCreditDetailsExceptPersonGroupedByRole} from "@/pages/moviecredit/schemas/model/MovieCreditGroup.types.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";

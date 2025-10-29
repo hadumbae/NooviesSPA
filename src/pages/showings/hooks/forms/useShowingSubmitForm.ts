@@ -3,7 +3,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {ShowingFormSchema} from "@/pages/showings/schema/form/ShowingForm.schema.ts";
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingForm.types.ts";
-import {IANATimezone} from "@/common/schema/datetime/IANATimezone.schema.ts";
+import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 import getShowingDateAndTime from "@/common/utility/date-and-time/getShowingDateAndTime.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 

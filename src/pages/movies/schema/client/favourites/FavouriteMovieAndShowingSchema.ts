@@ -1,7 +1,7 @@
 import {z} from "zod";
 import {ShowingSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import {FavouriteMovieSchema} from "@/pages/movies/schema/client/favourites/FavouriteMovieSchema.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 export const FavouriteMovieAndShowingSchema = z.object({
     movie: z.lazy(() => FavouriteMovieSchema),

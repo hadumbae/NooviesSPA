@@ -1,17 +1,17 @@
-import { z } from "zod";
-import { GenreSchema } from "@/pages/genres/schema/genre/Genre.schema.ts";
-import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
-import { NonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import { ISO3166Alpha2CodeEnum } from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
-import { ISO6391CodeEnum } from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
-import { CloudinaryImageObjectSchema } from "@/common/schema/objects/CloudinaryImageObjectSchema.ts";
-import { URLStringSchema } from "@/common/schema/strings/URLStringSchema.ts";
-import { generatePaginationSchema } from "@/common/schema/helpers/zodHelperFunctions.ts";
-import { RequiredBoolean } from "@/common/schema/helpers/ZodBooleanHelpers.ts";
-import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import { ParsedUTCDayOnlyDateStringSchema } from "@/common/schema/dates/ParsedUTCDayOnlyDateStringSchema.ts";
-import { RequiredStringSchema } from "@/common/schema/strings/RequiredStringSchema.ts";
+import {z} from "zod";
+import {GenreSchema} from "@/pages/genres/schema/genre/Genre.schema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
+import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
+import {CloudinaryImageSchema} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
+import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {UTCDayOnlyDateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCDayOnlyDateTimeSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 
 /* -------------------------------------------------------------------------------------------------
  * Base Schema
@@ -28,46 +28,45 @@ export const MovieBaseSchema = z.object({
     title: NonEmptyStringSchema.max(250, "Must be 250 characters or less."),
 
     /** Original (untranslated) title of the movie (max 250 characters). Optional. */
-    originalTitle: RequiredStringSchema
-        .max(250, "Must be 250 characters or less.")
-        .transform(value => value || undefined)
-        .optional(),
+    originalTitle: preprocessEmptyStringToUndefined(
+        NonEmptyStringSchema.max(250, "Must be 250 characters or less.").optional()
+    ).optional(),
 
     /** Optional tagline or slogan (max 100 characters). */
     tagline: NonEmptyStringSchema.max(100, "Must be 100 characters or less.").optional(),
 
     /** ISO 3166-1 alpha-2 code for the production country. */
-    country: ISO3166Alpha2CodeEnum,
+    country: ISO3166Alpha2CountryCodeEnum,
 
     /** Synopsis or description (max 2000 characters). */
     synopsis: NonEmptyStringSchema.max(2000, "synopsis must be 2000 characters or less."),
 
     /** Release date in parsed UTC day-only format. Optional and nullable. */
-    releaseDate: ParsedUTCDayOnlyDateStringSchema.optional().nullable(),
+    releaseDate: UTCDayOnlyDateTimeSchema.optional().nullable(),
 
     /** Whether the movie has been released. */
-    isReleased: RequiredBoolean,
+    isReleased: CoercedBooleanValueSchema,
 
     /** Runtime of the movie in minutes (must be positive). */
     runtime: PositiveNumberSchema,
 
     /** ISO 639-1 code for the movie’s original language. */
-    originalLanguage: ISO6391CodeEnum,
+    originalLanguage: ISO6391LanguageCodeEnum,
 
     /** Languages available for the movie (ISO 639-1 codes). */
-    languages: z.array(ISO6391CodeEnum),
+    languages: z.array(ISO6391LanguageCodeEnum),
 
     /** Available subtitle languages (ISO 639-1 codes). */
-    subtitles: z.array(ISO6391CodeEnum),
+    subtitles: z.array(ISO6391LanguageCodeEnum),
 
     /** Optional Cloudinary poster image object. Nullable. */
-    posterImage: CloudinaryImageObjectSchema.optional().nullable(),
+    posterImage: CloudinaryImageSchema.optional().nullable(),
 
     /** Optional trailer URL. Nullable. */
     trailerURL: URLStringSchema.optional().nullable(),
 
     /** Whether the movie is currently available (e.g., for streaming). */
-    isAvailable: RequiredBoolean,
+    isAvailable: CoercedBooleanValueSchema,
 });
 
 /* -------------------------------------------------------------------------------------------------
@@ -82,7 +81,7 @@ export const ExtendedMovieSchema = MovieBaseSchema.extend({
     _id: IDStringSchema.readonly(),
 
     /** Array of genre IDs associated with the movie. */
-    genres: z.array(IDStringSchema, { message: "Must be an array of genre references." }),
+    genres: z.array(IDStringSchema, {message: "Must be an array of genre references."}),
 });
 
 /**
@@ -93,7 +92,7 @@ export const ExtendedMovieDetailsSchema = MovieBaseSchema.extend({
     _id: IDStringSchema.readonly(),
 
     /** Array of full genre objects associated with the movie. */
-    genres: z.array(z.lazy(() => GenreSchema), { message: "Must be an array of genres." }),
+    genres: z.array(z.lazy(() => GenreSchema), {message: "Must be an array of genres."}),
 
     /** Number of showings linked to the movie (non-negative). */
     showingCount: NonNegativeNumberSchema,
@@ -107,7 +106,7 @@ export const ExtendedMovieWithGenresSchema = MovieBaseSchema.extend({
     _id: IDStringSchema.readonly(),
 
     /** Array of full genre objects associated with the movie. */
-    genres: z.array(z.lazy(() => GenreSchema), { message: "Must be an array of genres." }),
+    genres: z.array(z.lazy(() => GenreSchema), {message: "Must be an array of genres."}),
 });
 
 /* -------------------------------------------------------------------------------------------------
@@ -121,7 +120,7 @@ export const ExtendedMovieWithGenresSchema = MovieBaseSchema.extend({
  * @param ctx Zod refinement context used to report validation issues.
  */
 const dateIfReleased = (values: any, ctx: z.RefinementCtx) => {
-    const { releaseDate, isReleased } = values;
+    const {releaseDate, isReleased} = values;
     if (isReleased && (releaseDate === undefined || releaseDate === null)) {
         ctx.addIssue({
             code: "custom",

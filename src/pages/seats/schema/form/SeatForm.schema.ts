@@ -1,12 +1,12 @@
-import { z } from "zod";
-import { SeatTypeEnum } from "@/pages/seats/schema/SeatType.enum.ts";
-import { RequiredBoolean } from "@/common/schema/helpers/ZodBooleanHelpers.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
-import { CleanedPositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import { UndefinedStringSchema } from "@/common/schema/strings/UndefinedStringSchema.ts";
-import { FormStarterValueSchema } from "@/common/schema/form/FormStarterValueSchema.ts";
-import { SeatForm } from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {z} from "zod";
+import {SeatTypeEnum} from "@/pages/seats/schema/SeatType.enum.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
+import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 
 /**
  * Schema for initial seat form values.
@@ -54,9 +54,11 @@ export const SeatFormSchema = z.object({
     screen: IDStringSchema,
     row: NonEmptyStringSchema.max(10, "Must be 10 characters or less."),
     seatNumber: CleanedPositiveNumberSchema,
-    seatLabel: UndefinedStringSchema,
+    seatLabel: preprocessEmptyStringToUndefined(
+        NonEmptyStringSchema.max(50, {message: "Must be 50 characters or less."}).optional()
+    ).optional(),
     seatType: SeatTypeEnum,
-    isAvailable: RequiredBoolean,
+    isAvailable: CoercedBooleanValueSchema,
     priceMultiplier: CleanedPositiveNumberSchema,
     x: CleanedPositiveNumberSchema,
     y: CleanedPositiveNumberSchema,
@@ -83,7 +85,7 @@ export const seatsByRowOmits: Partial<Record<keyof Pick<SeatForm, "seatNumber" |
  */
 export const SeatsByRowFormValuesSchema = SeatFormValuesSchema
     .omit(seatsByRowOmits)
-    .extend({ numberOfSeats: FormStarterValueSchema });
+    .extend({numberOfSeats: FormStarterValueSchema});
 
 /**
  * Fully validated schema for creating a row of seats.
@@ -94,4 +96,4 @@ export const SeatsByRowFormValuesSchema = SeatFormValuesSchema
  */
 export const SeatsByRowFormSchema = SeatFormSchema
     .omit(seatsByRowOmits)
-    .extend({ numberOfSeats: CleanedPositiveNumberSchema });
+    .extend({numberOfSeats: CleanedPositiveNumberSchema});

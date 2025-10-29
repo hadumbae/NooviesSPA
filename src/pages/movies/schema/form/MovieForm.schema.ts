@@ -1,12 +1,13 @@
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
-import {ISO6391CodeEnum} from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
+import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
 import {MovieBaseSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
 import {NonFutureDateStringSchema} from "@/common/schema/dates/NonFutureDateStringSchema.ts";
-import {UndefinedEmptyStringLiteralSchema} from "@/common/schema/strings/UndefinedEmptyStringLiteralSchema.ts";
+import refineToRequire from "@/common/utility/schemas/refineToRequire.ts";
+import {EmptyStringSchema} from "@/common/schema/strings/simple-strings/EmptyStringSchema.ts";
 
 /**
  * Schema representing the raw values used in the movie form.
@@ -34,9 +35,9 @@ export const MovieFormValuesSchema = z.object({
     /** Optional URL to the movie trailer */
     trailerURL: FormStarterValueSchema.optional().nullable(),
     /** Array of spoken languages in ISO 639-1 codes */
-    languages: z.array(ISO6391CodeEnum),
+    languages: z.array(ISO6391LanguageCodeEnum),
     /** Array of subtitle languages in ISO 639-1 codes */
-    subtitles: z.array(ISO6391CodeEnum),
+    subtitles: z.array(ISO6391LanguageCodeEnum),
     /** Array of genre IDs */
     genres: z.array(IDStringSchema),
     /** Whether the movie is currently available */
@@ -64,7 +65,7 @@ export const MovieFormSchema = MovieBaseSchema.extend({
      * - Can be undefined or an empty string if the movie is not released.
      */
     releaseDate: z.union(
-        [UndefinedEmptyStringLiteralSchema, NonFutureDateStringSchema],
+        [refineToRequire(EmptyStringSchema), NonFutureDateStringSchema],
         {message: "Must be a non-future date or empty."},
     ),
 
@@ -72,10 +73,10 @@ export const MovieFormSchema = MovieBaseSchema.extend({
     runtime: CleanedPositiveNumberSchema,
 
     /** Array of spoken language ISO 639-1 codes (optional) */
-    languages: z.array(ISO6391CodeEnum).optional(),
+    languages: z.array(ISO6391LanguageCodeEnum).optional(),
 
     /** Array of subtitle language ISO 639-1 codes (optional) */
-    subtitles: z.array(ISO6391CodeEnum).optional(),
+    subtitles: z.array(ISO6391LanguageCodeEnum).optional(),
 
     /**
      * Optional trailer URL.

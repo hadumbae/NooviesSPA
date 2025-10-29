@@ -3,7 +3,7 @@ import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {toast} from "react-toastify";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 

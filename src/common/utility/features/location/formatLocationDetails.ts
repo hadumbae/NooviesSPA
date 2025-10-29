@@ -1,4 +1,4 @@
-import {Location} from "@/common/schema/location/Location.schema.ts";
+import {Location} from "@/common/schema/models/location/Location.schema.ts";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
 
 /**

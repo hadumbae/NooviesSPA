@@ -3,7 +3,7 @@ import ISeatMap from "@/pages/seatmap/interfaces/ISeatMap.ts";
 import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import {ShowingSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import SeatMapBaseSchema from "@/pages/seatmap/schema/SeatMapBaseSchema.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
  * Zod schema for validating a `SeatMap` object.

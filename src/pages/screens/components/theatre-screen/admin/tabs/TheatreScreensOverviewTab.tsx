@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useFetchScreens from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreens.ts";
 import {PaginatedScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 import {isArray} from "lodash";

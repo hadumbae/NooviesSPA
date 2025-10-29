@@ -1,5 +1,6 @@
-import { IANATimezone } from "@/common/schema/datetime/IANATimezone.schema.ts";
-import { UTCISO8601DateTime } from "@/common/schema/dates/iso-8601/ISO8601DateString.types.ts";
+import { IANATimezone } from "@/common/schema/date-time/IANATimezone.schema.ts";
+
+import {UTCISO8601DateTime} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
 
 /**
  * Parameters for {@link getShowingDateAndTime}.

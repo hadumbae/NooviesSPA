@@ -1,4 +1,4 @@
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import IPersonBase from "@/pages/persons/interfaces/IPersonBase.ts";
 import {IMovieCredit} from "@/pages/moviecredit/interfaces/IMovieCredit.ts";
 

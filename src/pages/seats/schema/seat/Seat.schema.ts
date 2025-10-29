@@ -1,13 +1,13 @@
 import { z } from "zod";
-import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import { SeatTypeEnum } from "@/pages/seats/schema/SeatType.enum.ts";
-import { RequiredBoolean } from "@/common/schema/helpers/ZodBooleanHelpers.ts";
-import { RequiredNumberSchema } from "@/common/schema/numbers/RequiredNumberSchema.ts";
+import { CoercedNumberValueSchema } from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
 import { TheatreSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import { ScreenSchema } from "@/pages/screens/schema/screen/Screen.schema.ts";
-import { generatePaginationSchema } from "@/common/schema/helpers/zodHelperFunctions.ts";
 import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 
 /**
  * Schema representing a seat with minimal references.
@@ -35,8 +35,8 @@ export const SeatSchema = z.object({
     seatType: SeatTypeEnum,
     x: PositiveNumberSchema,
     y: PositiveNumberSchema,
-    isAvailable: RequiredBoolean,
-    priceMultiplier: RequiredNumberSchema.gte(0, "Must be 0 or greater."),
+    isAvailable: CoercedBooleanValueSchema,
+    priceMultiplier: CoercedNumberValueSchema.gte(0, "Must be 0 or greater."),
 });
 
 /**

@@ -5,7 +5,7 @@ import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import ErrorMessage from "@/common/components/text/ErrorMessage.tsx";
 import useFetchSeatsForShowing from "@/pages/showings/hooks/queries/useFetchSeatsForShowing.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 interface Props<T extends FieldValues> {
     name: Path<T>,

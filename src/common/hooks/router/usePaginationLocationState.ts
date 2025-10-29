@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { PaginationSearchParamSchema } from "@/common/schema/PaginationSearchParamsSchema.ts";
+import { PaginationSearchParamSchema } from "@/common/schema/features/pagination-search-params/PaginationSearchParamsSchema.ts";
 
 /** Default page number from environment variables. */
 const DEFAULT_PAGE = import.meta.env.VITE_PAGINATION_PAGE_DEFAULT;

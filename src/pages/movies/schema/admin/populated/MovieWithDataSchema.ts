@@ -1,6 +1,6 @@
 import {z} from "zod";
 import {GenreSchema} from "@/pages/genres/schema/genre/Genre.schema.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ShowingSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import {MovieBaseSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {MovieCreditSchema} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";

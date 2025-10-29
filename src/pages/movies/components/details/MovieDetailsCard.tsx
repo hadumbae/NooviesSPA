@@ -7,7 +7,7 @@ import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391Languag
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import BadgeListLabel from "@/common/components/card-content/BadgeListLabel.tsx";
-import {ISO6391Code} from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
+import {ISO6391LanguageCode} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
 import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 import CollapsibleTextblock from "@/common/components/text/CollapsibleTextblock.tsx";
 
@@ -68,7 +68,7 @@ const MovieDetailsCard: FC<CardProps> = ({movie}) => {
             orientation="horizontal"
             items={languages}
             getKey={(lan: string) => lan}
-            renderText={(lan: ISO6391Code) => ISO6391LanguageConstant[lan] ?? lan?.toUpperCase() ?? "Unknown"}
+            renderText={(lan: ISO6391LanguageCode) => ISO6391LanguageConstant[lan] ?? lan?.toUpperCase() ?? "Unknown"}
         />
     );
 
@@ -79,7 +79,7 @@ const MovieDetailsCard: FC<CardProps> = ({movie}) => {
             orientation="horizontal"
             items={subtitles}
             getKey={(lan: string) => lan}
-            renderText={(lan: ISO6391Code) => ISO6391LanguageConstant[lan] ?? lan?.toUpperCase() ?? "Unknown"}
+            renderText={(lan: ISO6391LanguageCode) => ISO6391LanguageConstant[lan] ?? lan?.toUpperCase() ?? "Unknown"}
         />
     );
 

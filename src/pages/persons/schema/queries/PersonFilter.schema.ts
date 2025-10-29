@@ -1,8 +1,9 @@
 import {z} from "zod";
-import {ISO3166Alpha2CodeEnum} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-import {UndefinedStringSchema} from "@/common/schema/strings/UndefinedStringSchema.ts";
+import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 
 /**
  * Schema for filtering queries against Person records.
@@ -17,8 +18,8 @@ import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSc
  */
 export const PersonQueryFilterSchema = z.object({
     _id: IDStringSchema.optional(),
-    name: UndefinedStringSchema.optional(),
-    nationality: ISO3166Alpha2CodeEnum.optional(),
+    name: preprocessEmptyStringToUndefined(NonEmptyStringSchema.optional()),
+    nationality: ISO3166Alpha2CountryCodeEnum.optional(),
 });
 
 /**

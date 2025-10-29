@@ -1,10 +1,10 @@
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {SeatTypeEnum} from "@/pages/seats/schema/SeatType.enum.ts";
-import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**
  * Zod schema for filtering seats in queries.
@@ -26,7 +26,7 @@ export const SeatQueryFiltersSchema = z.object({
     seatType: SeatTypeEnum.optional(),
 
     /** Whether the seat is currently available for booking. */
-    isAvailable: RequiredBoolean.optional(),
+    isAvailable: CoercedBooleanValueSchema.optional(),
 
     /** Price multiplier applied to the seat (must be a positive number). */
     priceMultiplier: PositiveNumberSchema.optional(),

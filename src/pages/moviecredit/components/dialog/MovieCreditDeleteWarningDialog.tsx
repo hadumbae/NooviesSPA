@@ -1,6 +1,6 @@
 import {FC, ReactNode} from 'react';
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useMovieCreditDeleteMutation from "@/pages/moviecredit/hooks/mutations/useMovieCreditDeleteMutation.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 

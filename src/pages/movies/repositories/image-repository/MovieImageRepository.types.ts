@@ -1,4 +1,4 @@
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 
 /**

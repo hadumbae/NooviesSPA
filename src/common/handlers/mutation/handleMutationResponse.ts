@@ -1,8 +1,8 @@
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import {ParseErrorResponseSchema} from "@/common/schema/responses/ErrorResponse.schema.ts";
 import {ZodIssue} from "zod";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {FormValidationError} from "@/common/errors/FormValidationError.ts";
+import {ValidationErrorResponseSchema} from "@/common/schema/features/failed-response/ValidationErrorResponseSchema.ts";
 
 /**
  * Parameters for {@link handleMutationResponse}.
@@ -36,7 +36,7 @@ type FormResponseParams<TReturns = unknown, TRaw = unknown> = {
  * - Executes the provided `action()` function to make the request.
  * - On non-OK HTTP responses:
  *   - If `400 Bad Request`:
- *     - Parses the error response with {@link ParseErrorResponseSchema}.
+ *     - Parses the error response with {@link ValidationErrorResponseSchema}.
  *     - Throws a {@link FormValidationError} containing `ZodIssue[]` and raw data.
  *   - For all other errors:
  *     - Throws an {@link HttpResponseError}.
@@ -65,7 +65,7 @@ export default async function handleMutationResponse<TReturns = unknown>(params:
         const message = errorMessage || "Submitting data failed. Please try again.";
 
         if (response.status === 422) {
-            const {success, data: parsedResult} = ParseErrorResponseSchema.safeParse(result);
+            const {success, data: parsedResult} = ValidationErrorResponseSchema.safeParse(result);
             if (!success) throw new Error("Submitting data failed. Invalid Error Response.");
 
             const {message: parsedMessage = "Bad Request", errors} = parsedResult;

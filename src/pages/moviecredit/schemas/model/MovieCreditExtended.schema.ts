@@ -1,6 +1,6 @@
-import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {MovieCreditDetailsSchema, MovieCreditSchema} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
+import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 
 /** Paginated list of movie credits */
 export const PaginatedMovieCreditSchema = generatePaginationSchema(MovieCreditSchema);

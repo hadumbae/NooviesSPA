@@ -1,7 +1,7 @@
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
-import {ErrorResponseSchema} from "@/common/schema/responses/ErrorResponse.schema.ts";
+import {ErrorResponseSchema} from "@/common/schema/features/failed-response/ErrorResponseSchema.ts";
 
 type HandlerParams = { fetchQueryFn: () => Promise<RequestReturns>, message?: string }
 

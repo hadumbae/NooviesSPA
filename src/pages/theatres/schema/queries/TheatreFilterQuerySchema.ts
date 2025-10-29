@@ -1,7 +1,7 @@
 import {z} from "zod";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {CoercedNumberValueSchema} from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
  * Zod schema for validating theatre filter query parameters.
@@ -26,7 +26,7 @@ export const TheatreFilterQuerySchema = z.object({
     _id: IDStringSchema.optional(),
     name: NonEmptyStringSchema.optional(),
     location: NonEmptyStringSchema.optional(),
-    seatCapacity: RequiredNumberSchema.optional(),
+    seatCapacity: CoercedNumberValueSchema.optional(),
 });
 
 /**

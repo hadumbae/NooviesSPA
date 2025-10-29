@@ -2,7 +2,7 @@ import useFetchShowing from "@/pages/showings/hooks/queries/useFetchShowing.ts";
 import useFetchPaginatedShowingSeating from "@/pages/seatmap/hooks/queries/useFetchPaginatedShowingSeating.ts";
 import {UseQueryResult} from "@tanstack/react-query";
 import {PaginatedSeatMaps} from "@/pages/seatmap/schema/SeatMapPaginationSchema.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 
 interface useFetchShowingWithSeatingReturns {

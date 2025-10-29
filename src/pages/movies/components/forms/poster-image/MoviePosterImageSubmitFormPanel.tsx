@@ -12,7 +12,7 @@ import {
 import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
 import MoviePosterImageSubmitFormContainer
     from "@/pages/movies/components/forms/poster-image/MoviePosterImageSubmitFormContainer.tsx";
-import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**

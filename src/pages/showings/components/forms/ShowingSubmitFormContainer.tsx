@@ -7,7 +7,7 @@ import ShowingSubmitFormView from "@/pages/showings/components/forms/ShowingSubm
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {ShowingForm, ShowingFormValues} from "@/pages/showings/schema/form/ShowingForm.types.ts";
-import {IANATimezone} from "@/common/schema/datetime/IANATimezone.schema.ts";
+import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**

@@ -1,9 +1,9 @@
 import {z} from "zod";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-import {generatePaginationSchema} from "@/common/schema/helpers/zodHelperFunctions.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {LocationSchema} from "@/common/schema/location/Location.schema.ts";
+import {LocationSchema} from "@/common/schema/models/location/Location.schema.ts";
+import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 
 /**
  * 🎭 Base schema for a theatre object.

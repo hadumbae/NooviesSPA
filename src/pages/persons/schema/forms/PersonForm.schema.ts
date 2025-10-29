@@ -1,6 +1,6 @@
 import {z} from "zod";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import {ISO3166Alpha2CodeEnum} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
 import {NonFutureDateStringSchema} from "@/common/schema/dates/NonFutureDateStringSchema.ts";
 
@@ -43,7 +43,7 @@ export const PersonFormSchema = z.object({
     name: NonEmptyStringSchema.max(255, "Name must not be more than 255 characters."),
     biography: NonEmptyStringSchema.max(1000, "Must be 1000 characters or less."),
     dob: NonFutureDateStringSchema,
-    nationality: ISO3166Alpha2CodeEnum,
+    nationality: ISO3166Alpha2CountryCodeEnum,
 });
 
 /**

@@ -1,6 +1,6 @@
 import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import RequestPaginatedFilters from "@/common/type/request/RequestPaginatedFilters.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**

@@ -21,7 +21,7 @@ import {
 } from "@/common/components/ui/drawer.tsx"
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 import ScreenSubmitFormContainer from "@/pages/screens/components/submit-form/ScreenSubmitFormContainer.tsx";
 import {ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";

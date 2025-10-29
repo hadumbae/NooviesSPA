@@ -1,4 +1,4 @@
-import {IDStringSchema, ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {IDStringSchema, ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 import {toast} from "react-toastify";

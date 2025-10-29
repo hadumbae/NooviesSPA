@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
  * Schema for identifying a specific screen within a theatre.

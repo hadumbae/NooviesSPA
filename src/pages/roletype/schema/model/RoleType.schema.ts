@@ -1,12 +1,12 @@
 import { z } from "zod";
 import { RoleTypeDepartmentEnumSchema } from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
-import { generatePaginationSchema } from "@/common/schema/helpers/zodHelperFunctions.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     RoleTypeCastCategoryEnumSchema,
     RoleTypeCrewCategoryEnumSchema,
 } from "@/pages/roletype/schema/enums/RoleTypeCategory.enum.ts";
+import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 
 /**
  * Base schema defining shared fields for all role types.

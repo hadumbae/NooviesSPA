@@ -1,40 +1,47 @@
-import {z} from "zod";
-import {format, isValid, parse} from "date-fns";
+import { DateTime } from "luxon";
+import { DateStringSchema } from "@/common/schema/dates/DateStringSchema.ts";
 
 /**
- * Validates and normalizes a date string in `yyyy-MM-dd` format that is not in the future.
+ * **Non-Future Date String Schema**
  *
- * - Ensures the input is a string.
- * - Checks that it represents a valid date.
- * - Ensures the date is today or in the past (not a future date).
- * - Returns the date string normalized to `yyyy-MM-dd`.
+ * A Zod schema that extends {@link DateStringSchema} to ensure the date:
+ * - Is a valid string in the **`yyyy-MM-dd`** format.
+ * - Represents a date that is **today or in the past** (i.e., not in the future).
  *
- * Example:
+ * ### Validation Rules
+ * 1. The string must conform to the pattern `yyyy-MM-dd`.
+ * 2. The parsed date must be valid according to the ISO calendar system.
+ * 3. The date must not be after the current UTC time (`DateTime.now()`).
+ *
+ * ### Example
  * ```ts
- * NonFutureDateStringSchema.parse("2025-08-20"); // "2025-08-20"
- * NonFutureDateStringSchema.parse("3000-01-01"); // throws ZodError
- * NonFutureDateStringSchema.parse("invalid");    // throws ZodError
+ * NonFutureDateStringSchema.parse("2025-10-29"); // ✅ valid if today is Oct 29, 2025 or later
+ * NonFutureDateStringSchema.parse("2025-11-01"); // ❌ invalid if today < Nov 1, 2025
  * ```
+ *
+ * ### Notes
+ * - The schema uses Luxon’s {@link DateTime.fromFormat} for date parsing.
+ * - Validation issues are added via `ctx.addIssue()` with `fatal: true` for hard failures.
+ * - Timezones are not included — validation is based solely on the **local system date**.
  */
-export const NonFutureDateStringSchema = z
-    .string({required_error: "Required.", invalid_type_error: "Must be a valid date string."})
-    .refine(
-        (dateString) => {
-            const parsedDate = parse(dateString, "yyyy-MM-dd", new Date());
-            return isValid(parsedDate) && (parsedDate <= new Date());
-        },
-        (dateString) => {
-            if (dateString === "") return {message: "Required"};
+export const NonFutureDateStringSchema = DateStringSchema.superRefine((value, ctx) => {
+    const parsedDate = DateTime.fromFormat(value, "yyyy-MM-dd");
 
-            const parsedDate = parse(dateString, "yyyy-MM-dd", new Date());
-            if (!isValid(parsedDate)) return {message: "Must be a valid date string in the `yyyy-MM-dd` format"};
-            if (parsedDate > new Date()) return {message: "Must be a current or past date"};
+    if (!parsedDate.isValid) {
+        ctx.addIssue({
+            code: "custom",
+            path: [],
+            message: "Must be a valid date string in the `yyyy-MM-dd` format.",
+            fatal: true,
+        });
+    }
 
-            return {message: "Invalid date."};
-        },
-    ).transform(
-        (dateString) => {
-            const parsed = parse(dateString, "yyyy-MM-dd", new Date());
-            return format(parsed, "yyyy-MM-dd");
-        }
-    );
+    if (parsedDate > DateTime.now()) {
+        ctx.addIssue({
+            code: "custom",
+            path: [],
+            message: "Must be a current or past date.",
+            fatal: true,
+        });
+    }
+});

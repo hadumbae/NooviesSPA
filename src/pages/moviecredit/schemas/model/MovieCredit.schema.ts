@@ -1,14 +1,14 @@
 import { z } from "zod";
-import { NonEmptyStringSchema } from "@/common/schema/strings/NonEmptyStringSchema.ts";
-import { RequiredBoolean } from "@/common/schema/helpers/ZodBooleanHelpers.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import { RoleTypeDepartmentEnumSchema } from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
-import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import { MovieSchema } from "@/pages/movies/schema/movie/Movie.schema.ts";
 import { PersonSchema } from "@/pages/persons/schema/person/Person.schema.ts";
 import { RoleTypeSchema } from "@/pages/roletype/schema/model/RoleType.schema.ts";
 import { UndefinedForCrewSchema } from "@/pages/moviecredit/schemas/MovieCreditCrewSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**
  * Base schema for a movie credit, either cast or crew.
@@ -35,7 +35,7 @@ export const MovieCreditBaseSchema = z.object({
     ),
 
     /** Whether the credit is uncredited; optional boolean */
-    uncredited: RequiredBoolean.optional(),
+    uncredited: CoercedBooleanValueSchema.optional(),
 
     /** Notes about the credit; optional nullable string */
     notes: NonEmptyStringSchema.nullable().optional(),
@@ -87,13 +87,13 @@ export const MovieCreditCastSchema = MovieCreditBaseSchema.extend({
     billingOrder: PositiveNumberSchema.optional(),
 
     /** Whether the role is primary */
-    isPrimary: RequiredBoolean,
+    isPrimary: CoercedBooleanValueSchema,
 
     /** Flags indicating specific role properties */
-    voiceOnly: RequiredBoolean,
-    cameo: RequiredBoolean,
-    motionCapture: RequiredBoolean,
-    archiveFootage: RequiredBoolean,
+    voiceOnly: CoercedBooleanValueSchema,
+    cameo: CoercedBooleanValueSchema,
+    motionCapture: CoercedBooleanValueSchema,
+    archiveFootage: CoercedBooleanValueSchema,
 });
 
 /**

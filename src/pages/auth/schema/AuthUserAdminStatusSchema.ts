@@ -1,10 +1,10 @@
 import {z} from "zod";
-import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 export const AuthUserAdminStatusSchema = z.object({
     userID: IDStringSchema,
-    isAdmin: RequiredBoolean,
+    isAdmin: CoercedBooleanValueSchema,
 });
 
 export type AuthUserAdminStatus = z.infer<typeof AuthUserAdminStatusSchema>;

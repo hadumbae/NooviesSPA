@@ -1,6 +1,6 @@
 import {z, ZodType} from "zod";
 import IUserPasswordUpdate from "@/pages/users/interfaces/IUserPasswordUpdate.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 
 /**
  * Zod schema for validating the payload of

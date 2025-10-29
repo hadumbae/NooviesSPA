@@ -1,10 +1,10 @@
 import Logger from "@/common/utility/features/logger/Logger.ts";
 import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {ParseErrorResponseSchema} from "@/common/schema/responses/ErrorResponse.schema.ts";
 import {FormValidationError} from "@/common/errors/FormValidationError.ts";
 import {ZodIssue} from "zod";
 import parseJSON from "@/common/utility/features/use-fetch-api/parseJSON.ts";
+import {ValidationErrorResponseSchema} from "@/common/schema/features/failed-response/ValidationErrorResponseSchema.ts";
 
 type HandlerParams = {
     /** The original fetch Response object from an HTTP request */
@@ -65,7 +65,7 @@ export default function handleBadResponse(params: HandlerParams) {
         });
 
         // ⚡ Parse Response ⚡
-        const {success, data} = ParseErrorResponseSchema.safeParse(parsedJSON);
+        const {success, data} = ValidationErrorResponseSchema.safeParse(parsedJSON);
         if (!success) throw new Error("Invalid 422 Error Response. Failed to validate response.");
         const {message, errors} = data;
 

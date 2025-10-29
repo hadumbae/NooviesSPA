@@ -1,4 +1,4 @@
-import type {Location} from "@/common/schema/location/Location.schema.ts";
+import type {Location} from "@/common/schema/models/location/Location.schema.ts";
 
 /**
  * Returns a human-readable address string from a {@link Location} object.

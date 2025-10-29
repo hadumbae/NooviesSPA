@@ -1,7 +1,7 @@
 import { UseFormReturn } from "react-hook-form";
 import { MoviePosterImageForm, MoviePosterImageFormValues } from "@/pages/movies/schema/form/MoviePosterImage.types.ts";
 import { Movie } from "@/pages/movies/schema/movie/Movie.types.ts";
-import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { toast } from "react-toastify";
 import { useMutation, UseMutationResult, useQueryClient } from "@tanstack/react-query";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";

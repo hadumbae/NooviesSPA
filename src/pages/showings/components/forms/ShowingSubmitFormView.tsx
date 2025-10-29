@@ -16,7 +16,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {ShowingForm, ShowingFormValues} from "@/pages/showings/schema/form/ShowingForm.types.ts";
 import MovieQuickOverviewFetchCard from "@/pages/movies/components/admin/movie-details/MovieQuickOverviewFetchCard.tsx";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import TheatreQuickOverviewFetchCard from "@/pages/theatres/components/admin/theatre-details/TheatreQuickOverviewFetchCard.tsx";
 import ShowingStatusHookFormSelect from "@/pages/showings/components/inputs/ShowingStatusHookFormSelect.tsx";
 

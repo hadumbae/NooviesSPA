@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Movie } from "@/pages/movies/schema/movie/Movie.types.ts";
 import useMoviePosterImageSubmitMutation
     from "@/pages/movies/hooks/admin/poster-image/useMoviePosterImageSubmitMutation.ts";
-import { ObjectId } from "@/common/schema/strings/IDStringSchema.ts";
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useMoviePosterImageSubmitForm from "@/pages/movies/hooks/admin/poster-image/useMoviePosterImageSubmitForm.ts";
 import { MoviePosterImageForm, MoviePosterImageFormValues } from "@/pages/movies/schema/form/MoviePosterImage.types.ts";
 import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";

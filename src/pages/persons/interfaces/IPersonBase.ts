@@ -1,6 +1,6 @@
 import ICloudinaryImage from "@/common/interfaces/ICloudinaryImage.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {ISO3166Alpha2Code} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ISO3166Alpha2CountryCode} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
 
 /**
  * Represents the base structure for a person entity, such as an actor, director, or public figure.
@@ -29,7 +29,7 @@ export default interface IPersonBase {
     /**
      * The nationality or country of origin of the person.
      */
-    nationality: ISO3166Alpha2Code;
+    nationality: ISO3166Alpha2CountryCode;
 
     /**
      * The person's profile image, typically stored via Cloudinary.

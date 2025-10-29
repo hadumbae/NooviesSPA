@@ -2,7 +2,7 @@ import {FC} from 'react';
 import usePersonProfileImageSubmitForm from "@/pages/persons/hooks/forms/admin/usePersonProfileImageSubmitForm.ts";
 import usePersonProfileImageSubmitMutation
     from "@/pages/persons/hooks/mutations/admin/usePersonProfileImageSubmitMutation.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import UploadPersonProfileImageFormView
     from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormView.tsx";
 import {PersonProfileImageForm, PersonProfileImageFormValues} from "@/pages/persons/schema/forms/PersonForm.types.ts";

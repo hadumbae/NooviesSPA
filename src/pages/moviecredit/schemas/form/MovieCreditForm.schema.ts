@@ -1,13 +1,13 @@
 import {z} from "zod";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
-import {RefinedIDStringSchema} from "@/common/schema/strings/RefinedIDStringSchema.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {
     PositiveNumberSchema
 } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {UndefinedForCrewSchema} from "@/pages/moviecredit/schemas/MovieCreditCrewSchema.ts";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
  * Schema representing the **raw form values** for a movie credit.
@@ -42,11 +42,11 @@ export const MovieCreditFormValuesSchema = z.object({
  */
 export const MovieCreditFormBaseSchema = z.object({
     /** Unique ID of the movie. */
-    movie: RefinedIDStringSchema,
+    movie: IDStringSchema,
     /** Unique ID of the person. */
-    person: RefinedIDStringSchema,
+    person: IDStringSchema,
     /** Role type identifier (links to role categories). */
-    roleType: RefinedIDStringSchema,
+    roleType: IDStringSchema,
     /** Optional display name for the credited role. */
     displayRoleName: preprocessEmptyStringToUndefined(
         NonEmptyStringSchema.max(150, {message: "Must be 150 characters or less."}).optional()
@@ -101,17 +101,17 @@ const castSharedFields = {
         PositiveNumberSchema.optional(),
     ),
     /** Whether the role is considered the actor's *primary* role. */
-    isPrimary: RequiredBoolean.optional(),
+    isPrimary: CoercedBooleanValueSchema.optional(),
     /** Whether the actor is uncredited. */
-    uncredited: RequiredBoolean.optional(),
+    uncredited: CoercedBooleanValueSchema.optional(),
     /** Whether the role is voice-only. */
-    voiceOnly: RequiredBoolean.optional(),
+    voiceOnly: CoercedBooleanValueSchema.optional(),
     /** Whether the role is a cameo. */
-    cameo: RequiredBoolean.optional(),
+    cameo: CoercedBooleanValueSchema.optional(),
     /** Whether the role involves motion capture. */
-    motionCapture: RequiredBoolean.optional(),
+    motionCapture: CoercedBooleanValueSchema.optional(),
     /** Whether the role uses archive footage. */
-    archiveFootage: RequiredBoolean.optional(),
+    archiveFootage: CoercedBooleanValueSchema.optional(),
 };
 
 /**

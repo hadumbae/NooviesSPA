@@ -1,13 +1,13 @@
 import {z} from "zod";
-import {DateStringSchema} from "@/common/schema/helpers/ZodDateHelpers.ts";
-import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
-import {TimeStringSchema} from "@/common/schema/datetime/TimeString.schema.ts";
+import {TimeStringSchema} from "@/common/schema/date-time/TimeString.schema.ts";
 import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {ISO6391CodeEnum} from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
+import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
 import {ShowingStatusEnumSchema} from "@/pages/showings/schema/ShowingStatus.enum.ts";
 import {DateTime} from "luxon";
+import {DateStringSchema} from "@/common/schema/dates/DateStringSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**
  * Schema representing the **starter/default values** of a showing form.
@@ -74,18 +74,18 @@ export const ShowingFormSchema = z.object({
     ticketPrice: CleanedPositiveNumberSchema,
 
     /** Language code of the showing */
-    language: ISO6391CodeEnum,
+    language: ISO6391LanguageCodeEnum,
 
     /** Subtitle languages — must be non-empty array of ISO 639-1 codes */
     subtitleLanguages: z
-        .array(ISO6391CodeEnum, {message: "Must be an array of ISO 639-1 codes."})
+        .array(ISO6391LanguageCodeEnum, {message: "Must be an array of ISO 639-1 codes."})
         .nonempty({message: "Must not be empty."}),
 
     /** Is this a special event showing? Optional */
-    isSpecialEvent: RequiredBoolean.optional(),
+    isSpecialEvent: CoercedBooleanValueSchema.optional(),
 
     /** Is this showing active? Optional */
-    isActive: RequiredBoolean.optional(),
+    isActive: CoercedBooleanValueSchema.optional(),
 
     /** Movie ID */
     movie: IDStringSchema,

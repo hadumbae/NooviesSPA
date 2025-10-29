@@ -2,14 +2,16 @@ import { z } from "zod";
 import { TheatreSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import { ScreenSchema } from "@/pages/screens/schema/screen/Screen.schema.ts";
 import {MovieSchema, MovieWithGenresSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
-import { IDStringSchema } from "@/common/schema/strings/IDStringSchema.ts";
-import { RequiredBoolean } from "@/common/schema/helpers/ZodBooleanHelpers.ts";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { CleanedPositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import { ISO6391CodeEnum } from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
-import { generatePaginationSchema } from "@/common/schema/helpers/zodHelperFunctions.ts";
+import { ISO6391LanguageCodeEnum } from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
 import { NonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {UTCISO8601DateTimeSchema} from "@/common/schema/dates/iso-8601/ISO8601DateString.schema.ts";
 import {ShowingStatusEnumSchema} from "@/pages/showings/schema/ShowingStatus.enum.ts";
+import {
+    UTCISO8601DateTimeSchema
+} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 
 /**
  * @fileoverview
@@ -74,12 +76,12 @@ export const ShowingSchema = z.object({
     startTime: UTCISO8601DateTimeSchema,
     endTime: UTCISO8601DateTimeSchema,
     ticketPrice: CleanedPositiveNumberSchema,
-    language: ISO6391CodeEnum,
+    language: ISO6391LanguageCodeEnum,
     subtitleLanguages: z
-        .array(ISO6391CodeEnum)
+        .array(ISO6391LanguageCodeEnum)
         .nonempty({ message: "Must not be empty." }),
-    isSpecialEvent: RequiredBoolean.optional(),
-    isActive: RequiredBoolean.optional(),
+    isSpecialEvent: CoercedBooleanValueSchema.optional(),
+    isActive: CoercedBooleanValueSchema.optional(),
     movie: IDStringSchema,
     theatre: IDStringSchema,
     screen: IDStringSchema,

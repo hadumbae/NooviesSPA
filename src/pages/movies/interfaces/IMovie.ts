@@ -1,7 +1,7 @@
 import ICloudinaryImage from "@/common/interfaces/ICloudinaryImage.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
-import {ISO6391Code} from "@/common/schema/enums/languages/ISO6391CodeEnum.ts";
-import {ISO3166Alpha2Code} from "@/common/schema/enums/ISO3166Alpha2CodeEnum.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ISO6391LanguageCode} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
+import {ISO3166Alpha2CountryCode} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
 import IShowing from "@/pages/showings/interfaces/IShowing.ts";
 import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
@@ -37,7 +37,7 @@ export default interface IMovie {
     /**
      * ISO 3166-1 alpha-2 country code where the movie was produced.
      */
-    country: ISO3166Alpha2Code;
+    country: ISO3166Alpha2CountryCode;
 
     /**
      * Full synopsis or summary description of the movie.
@@ -65,17 +65,17 @@ export default interface IMovie {
     /**
      * ISO 639-1 language code representing the original spoken language.
      */
-    originalLanguage: ISO6391Code;
+    originalLanguage: ISO6391LanguageCode;
 
     /**
      * List of ISO 639-1 language codes for all audio languages included in the film.
      */
-    languages: ISO6391Code[];
+    languages: ISO6391LanguageCode[];
 
     /**
      * List of ISO 639-1 language codes for available subtitle languages.
      */
-    subtitles: ISO6391Code[];
+    subtitles: ISO6391LanguageCode[];
 
     /**
      * Optional Cloudinary-hosted poster image metadata for the movie.

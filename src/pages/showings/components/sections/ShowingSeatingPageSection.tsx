@@ -6,7 +6,7 @@ import PageSection from "@/common/components/page/PageSection.tsx";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {Plus} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 interface ShowingSeatingPageSectionProps {
     seating: SeatMap[];

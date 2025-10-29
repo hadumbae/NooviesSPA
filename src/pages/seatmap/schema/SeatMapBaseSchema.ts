@@ -1,7 +1,7 @@
 import {z} from "zod";
-import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
-import {IDStringSchema} from "@/common/schema/strings/IDStringSchema.ts";
-import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {CoercedNumberValueSchema} from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**
  * Zod schema for validating a `SeatMap` object.
@@ -11,10 +11,10 @@ import {RequiredNumberSchema} from "@/common/schema/numbers/RequiredNumberSchema
 export default z.object({
     _id: IDStringSchema,
 
-    isAvailable: RequiredBoolean,
+    isAvailable: CoercedBooleanValueSchema,
 
-    isReserved: RequiredBoolean,
+    isReserved: CoercedBooleanValueSchema,
 
-    price: RequiredNumberSchema
+    price: CoercedNumberValueSchema
         .gt(0, "Must be greater than 0."),
 });

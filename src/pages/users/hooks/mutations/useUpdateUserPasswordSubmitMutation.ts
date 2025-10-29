@@ -3,7 +3,7 @@ import {UserPasswordUpdateSubmit} from "@/pages/users/schemas/UserPasswordUpdate
 import UserRepository from "@/pages/users/repositories/UserRepository.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {toast} from "react-toastify";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 interface IParams {
     userID: ObjectId;

@@ -1,5 +1,5 @@
 import {FC, PropsWithChildren} from 'react';
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import useGenreDeleteMutation from "@/pages/genres/hooks/useGenreDeleteMutation.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";

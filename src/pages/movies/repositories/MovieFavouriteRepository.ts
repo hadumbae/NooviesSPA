@@ -1,7 +1,7 @@
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
-import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 interface IMovieFavouriteRepository {
     baseURL: string;

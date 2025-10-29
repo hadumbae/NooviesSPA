@@ -1,6 +1,6 @@
 import {z} from "zod";
-import {RequiredBoolean} from "@/common/schema/helpers/ZodBooleanHelpers.ts";
 import {ExtendedMovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
+import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**
  * Schema for a movie with user-specific favourite status.
@@ -10,7 +10,7 @@ import {ExtendedMovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
  */
 export const FavouriteMovieSchema = ExtendedMovieSchema.extend({
     /** Whether the movie is marked as a favourite by the user. */
-    isFavourite: RequiredBoolean,
+    isFavourite: CoercedBooleanValueSchema,
 });
 
 /**

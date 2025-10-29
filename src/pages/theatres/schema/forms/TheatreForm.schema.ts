@@ -1,10 +1,10 @@
 import {z} from "zod";
-import {NonEmptyStringSchema} from "@/common/schema/strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
 import {
     CoercedNonNegativeNumberSchema,
 } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {LocationFormSchema, LocationFormValueSchema} from "@/common/schema/location/LocationForm.schema.ts";
+import {LocationFormSchema, LocationFormValueSchema} from "@/common/schema/models/location-form/LocationForm.schema.ts";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 
 /**
