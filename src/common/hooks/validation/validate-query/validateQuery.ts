@@ -1,7 +1,9 @@
 import {z, ZodTypeAny} from "zod";
-import {UseValidateDataResults} from "@/common/hooks/validation/use-validate-data/useValidateDataResults.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
-import {ValidateQueryParams} from "@/common/hooks/validation/validate-query/validateQuery.types.ts";
+import {
+    ValidateQueryResults,
+    ValidateQueryParams
+} from "@/common/hooks/validation/validate-query/validateQuery.types.ts";
 
 /**
  * Validates the result of a React Query against a Zod schema.
@@ -44,7 +46,7 @@ export default function validateQuery<
     TSchema extends ZodTypeAny = ZodTypeAny
 >(
     params: ValidateQueryParams<TData, TError, TSchema>
-): UseValidateDataResults<z.infer<TSchema>> {
+): ValidateQueryResults<z.infer<TSchema>> {
     const {query, schema, message} = params;
     const {data, isPending, isError} = query;
 

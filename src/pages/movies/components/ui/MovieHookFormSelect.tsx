@@ -7,88 +7,92 @@ import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
 import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
-import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import {MovieArraySchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
+import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
+import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
+import {MovieArray} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 /**
- * Props for the `TheatreHookFormSelect` component.
+ * Props for the `MovieHookFormSelect` component.
  *
- * @template TSubmit - Type of the form values used with `react-hook-form`.
+ * @template TSubmit - The type of the form values used with `react-hook-form`.
  */
-interface Props<TSubmit extends FieldValues> {
-    /**
-     * Name of the form field to register with `react-hook-form`.
-     */
+type SelectProps<TSubmit extends FieldValues> = {
+    /** Name of the field in the form, registered with `react-hook-form`. */
     name: Path<TSubmit>;
 
-    /**
-     * Label displayed above the select input.
-     */
+    /** Label displayed above the select input. */
     label: string;
 
-    /**
-     * Optional description shown under the label.
-     */
+    /** Optional description displayed below the label. */
     description?: string;
 
-    /**
-     * Placeholder text displayed when no option is selected.
-     */
+    /** Placeholder text displayed when no option is selected. */
     placeholder?: string;
 
-    /**
-     * Control object from `react-hook-form`'s `useForm` hook.
-     */
+    /** `react-hook-form` control object for this field. */
     control: Control<TSubmit>;
 
     /**
-     * If true, renders a multi-select instead of a single-select.
-     *
-     * @default false
+     * Whether to render a multi-select. Defaults to `false` for single-select.
      */
     isMulti?: boolean;
 
-    /**
-     * Optional filters applied when querying movie options.
-     */
+    /** Optional query filters applied when fetching movie options. */
     filters?: RequestQueryFilters;
 }
 
 /**
- * A reusable form select component for choosing a movie from a list.
+ * A reusable `react-hook-form` select component for choosing movies.
  *
- * Internally fetches movie data using `useFetchMovies`, validates the response,
- * and renders either a single or multi-select input using `react-hook-form`.
+ * Fetches a list of movies using `useFetchMovies`, validates the response
+ * against `MovieArraySchema`, and renders either a single or multi-select
+ * field. Handles loading and error states automatically.
  *
- * Displays loading and error states appropriately.
+ * @template TSubmit - The type of the form values managed by `react-hook-form`.
+ * @param props - Component props including form control, field name, label, and optional filters.
+ * @returns A `react-hook-form`-connected select input populated with movie options.
  *
- * @template TSubmit - Type of form values managed by `react-hook-form`.
- * @param props - Component props including form control, field name, label, and filters.
- * @returns A form select component populated with validated movie options.
+ * @example
+ * ```ts
+ * <MovieHookFormSelect
+ *   name="favoriteMovie"
+ *   label="Select your favorite movie"
+ *   control={form.control}
+ *   placeholder="Choose a movie"
+ * />
+ * ```
  */
-const TheatreHookFormSelect = <TSubmit extends FieldValues>(props: Props<TSubmit>) => {
-    const {isMulti = false, filters = {}} = props
-    const {data, isPending, isError, error: queryError} = useFetchMovies({queries: filters});
-    const {success, error: parseError, data: movies} = useValidateData({
-        data,
-        isPending,
-        schema: MovieArraySchema,
-        message: "Invalid Movie Data.",
-    });
-
-    if (isPending) return <Loader className="animate-spin"/>;
-    if (isError) return <ErrorMessageDisplay error={queryError} />;
-    if (!success) return <ErrorMessageDisplay error={parseError} />;
-
-    const options: ReactSelectOption[] = movies.map(
-        (movie): ReactSelectOption => ({label: movie.title, value: movie._id}),
-    );
+const TheatreHookFormSelect = <TSubmit extends FieldValues>(props: SelectProps<TSubmit>) => {
+    const {isMulti = false, filters = {}} = props;
+    const query = useFetchMovies({queries: filters});
 
     return (
-        isMulti
-            ? <HookFormMultiSelect<TSubmit> options={options} {...props} />
-            : <HookFormSelect<TSubmit> options={options} {...props} />
+        <QueryBoundary
+            query={query}
+            loaderComponent={Loader}
+            errorComponent={ErrorMessageDisplay}
+        >
+            <ValidatedQueryBoundary
+                query={query}
+                schema={MovieArraySchema}
+                loaderComponent={Loader}
+                errorComponent={ErrorMessageDisplay}
+            >
+                {(movies: MovieArray) => {
+                    const options: ReactSelectOption[] = movies.map(
+                        (movie): ReactSelectOption => ({label: movie.title, value: movie._id}),
+                    );
+
+                    return (
+                        isMulti
+                            ? <HookFormMultiSelect<TSubmit> options={options} {...props} />
+                            : <HookFormSelect<TSubmit> options={options} {...props} />
+                    );
+                }}
+            </ValidatedQueryBoundary>
+        </QueryBoundary>
     );
 };
 

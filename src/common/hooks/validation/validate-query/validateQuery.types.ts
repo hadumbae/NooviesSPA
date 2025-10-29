@@ -1,5 +1,6 @@
 import {UseQueryResult} from "@tanstack/react-query";
 import {ZodTypeAny} from "zod";
+import {ParseError} from "@/common/errors/ParseError.ts";
 
 /**
  * Parameters for validating the result of a React Query against a Zod schema.
@@ -33,3 +34,78 @@ export type ValidateQueryParams<
      */
     message?: string;
 };
+
+/**
+ * Represents a successful validation result.
+ *
+ * @template TReturn - The inferred type from the provided Zod schema.
+ */
+type ValidQueryDataResults<TReturn> = {
+    /**
+     * Indicates that the validation was successful.
+     */
+    success: true;
+
+    /**
+     * The parsed and validated data.
+     */
+    data: TReturn;
+
+    /**
+     * Always `null` since there was no error.
+     */
+    error: null;
+};
+
+/**
+ * Represents a failed validation result (i.e., schema parse error).
+ */
+type InvalidQueryDataResults = {
+    /**
+     * Indicates that validation failed.
+     */
+    success: false;
+
+    /**
+     * Always `null` since the data could not be parsed.
+     */
+    data: null;
+
+    /**
+     * The error describing why validation failed.
+     */
+    error: Error | ParseError;
+};
+
+/**
+ * Represents a pending validation state (e.g., data is still loading).
+ */
+type PendingQueryDataResults = {
+    /**
+     * Validation has not occurred yet (e.g., data is still pending).
+     */
+    success: false;
+
+    /**
+     * Always `null` since validation has not run.
+     */
+    data: null;
+
+    /**
+     * Always `null` since there's no error yet.
+     */
+    error: null;
+};
+
+/**
+ * The union of all possible validation result states:
+ * - Validated successfully
+ * - Failed validation
+ * - Waiting for data (pending)
+ *
+ * @template TReturn - The inferred type from the provided Zod schema.
+ */
+export type ValidateQueryResults<TReturn> =
+    | ValidQueryDataResults<TReturn>
+    | InvalidQueryDataResults
+    | PendingQueryDataResults;

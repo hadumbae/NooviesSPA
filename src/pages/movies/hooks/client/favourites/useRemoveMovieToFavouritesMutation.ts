@@ -5,9 +5,9 @@ import {toast} from "react-toastify";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
-import useValidateData from "@/common/hooks/validation/use-validate-data/useValidateData.ts";
+import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 
-interface RemoveFavouriteParams {
+type RemoveFavouriteParams = {
     movieID: ObjectId;
     onSuccess?: (movie: Movie) => void;
     onError?: (error: Error) => void;
@@ -20,7 +20,7 @@ export default function useRemoveMovieToFavouritesMutation({movieID, onSuccess, 
     const removeFromFavourites = async () => {
         const {result} = await MovieFavouriteRepository.removeFromFavourites({movieID});
 
-        const {data, success, error} = useValidateData({schema: MovieSchema, data: result});
+        const {data, success, error} = validateData({schema: MovieSchema, data: result});
 
         if (!success) {
             throw error;
@@ -33,7 +33,7 @@ export default function useRemoveMovieToFavouritesMutation({movieID, onSuccess, 
         await queryClient.invalidateQueries({queryKey: ["fetch_movie_and_related_showings", {movieID}]});
 
         toast.success("Movie Removed From User's Favourites");
-        onSuccess && onSuccess(movie);
+        onSuccess?.(movie);
     }
 
     const onMutateError = (error: Error) => {
@@ -42,7 +42,7 @@ export default function useRemoveMovieToFavouritesMutation({movieID, onSuccess, 
             toast.error(`[${status}] Something went wrong! Please try again.`);
         }
 
-        onError && onError(error);
+        onError?.(error);
     }
 
     return useMutation({
