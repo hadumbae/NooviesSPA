@@ -1,6 +1,6 @@
-import {FC, ReactNode, useState} from 'react';
-import {Theatre, TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
-import {TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
+import { FC, ReactNode, useState } from 'react';
+import { Theatre } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import { TheatreFormValues } from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import TheatreSubmitFormContainer from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormContainer.tsx";
 
 import {
@@ -11,35 +11,63 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui/sheet.tsx";
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
+import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 
-type FormPanelEditingProps = {
-    isEditing: true;
-    theatre: Theatre | TheatreDetails;
-} | {
-    isEditing?: false;
-    theatre?: never;
-};
-
-type FormPanelProps = MutationOnSubmitParams<Theatre> & {
+/**
+ * Props for {@link TheatreSubmitFormPanel}.
+ *
+ * @property children - Optional trigger element for opening the sheet (button, icon, etc.).
+ * @property className - Optional CSS classes applied to the container.
+ * @property onSubmitSuccess - Callback invoked after a successful theatre submission.
+ * @property isEditing - Flag indicating whether the panel is for editing an existing theatre.
+ * @property entity - Optional theatre entity for prefilling the form when editing.
+ * @property presetValues - Optional partial values to prefill the form fields.
+ * @property disableFields - Optional array of form fields to disable (`"name"`, `"location"`, `"seatCapacity"`).
+ * @property successMessage - Optional custom success message for the submission.
+ * @property errorMessage - Optional custom error message for the submission.
+ */
+type FormPanelProps = FormContainerProps<Theatre, Theatre, TheatreFormValues> & {
     children?: ReactNode;
     className?: string;
-    presetValues?: Partial<TheatreFormValues>;
-    disableFields?: (keyof TheatreFormValues)[];
-} & (| FormPanelEditingProps);
+};
 
+/**
+ * **TheatreSubmitFormPanel**
+ *
+ * A slide-over panel (sheet) containing the {@link TheatreSubmitFormContainer} to
+ * create or update a theatre.
+ *
+ * Features:
+ * - Opens via a trigger element (`children`) or defaults to "Open".
+ * - Shows a sheet title and description that changes depending on `isEditing`.
+ * - Wraps the form in a scrollable area for long content.
+ * - Automatically closes the sheet after successful submission and invokes `onSubmitSuccess`.
+ *
+ * @param params - Props controlling form behavior, edit mode, submission callbacks, and UI.
+ *
+ * @example
+ * ```tsx
+ * <TheatreSubmitFormPanel
+ *   isEditing={true}
+ *   entity={existingTheatre}
+ *   disableFields={["seatCapacity"]}
+ * >
+ *   <Button>Edit Theatre</Button>
+ * </TheatreSubmitFormPanel>
+ * ```
+ */
 const TheatreSubmitFormPanel: FC<FormPanelProps> = (params) => {
     const [open, setOpen] = useState<boolean>(false);
-    const {children, onSubmitSuccess, ...formParams} = params;
-    const {isEditing} = formParams;
+    const { children, onSubmitSuccess, ...formParams } = params;
+    const { isEditing } = formParams;
 
     const sheetTitle = `${isEditing ? "Update" : "Create"} Theatre`;
     const sheetDescription = `${isEditing ? "Update" : "Create"} theatres by submitting data.`;
 
-    const closeOnSuccess = (theatre?: Theatre) => {
+    const closeOnSuccess = (theatre: Theatre) => {
         setOpen(false);
-        onSubmitSuccess && onSubmitSuccess(theatre);
+        onSubmitSuccess?.(theatre);
     }
 
     return (
