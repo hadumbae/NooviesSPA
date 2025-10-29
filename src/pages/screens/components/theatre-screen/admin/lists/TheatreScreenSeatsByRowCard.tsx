@@ -8,11 +8,11 @@ import {SeatsByRowArraySchema} from "@/pages/screens/schema/screen/ScreenSeat.sc
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageHTTPError from "@/common/components/page/errors/PageHTTPError.tsx";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
-import SeatRowAccordionItem from "@/pages/seats/components/seats-by-row/SeatRowAccordionItem.tsx";
+import SeatRowAccordionItem from "@/pages/seats/components/features/seats-by-row/SeatRowAccordionItem.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Plus} from "lucide-react";
 import SeatsByRowSubmitFormPanel
-    from "@/pages/seats/components/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormPanel.tsx";
+    from "@/pages/seats/components/features/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormPanel.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 

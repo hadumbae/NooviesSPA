@@ -2,7 +2,7 @@ import {FC} from 'react';
 import useSeatsByRowSubmitForm from "@/pages/seats/hooks/features/admin/submit-seats-by-row/useSeatsByRowSubmitForm.ts";
 import useSeatsByRowSubmitMutation from "@/pages/seats/hooks/features/admin/submit-seats-by-row/useSeatsByRowSubmitMutation.ts";
 import SeatsByRowSubmitFormView
-    from "@/pages/seats/components/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormView.tsx";
+    from "@/pages/seats/components/features/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormView.tsx";
 import {SeatsByRowForm, SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {SeatArray} from "@/pages/seats/schema/seat/Seat.types.ts";

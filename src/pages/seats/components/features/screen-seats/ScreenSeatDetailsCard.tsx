@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Card, CardContent } from "@/common/components/ui/card.tsx";
 import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
-import ScreenSeatDetailsPanel from "@/pages/seats/components/screen-seats/ScreenSeatDetailsPanel.tsx";
+import ScreenSeatDetailsPanel from "@/pages/seats/components/features/screen-seats/ScreenSeatDetailsPanel.tsx";
 import { Button } from "@/common/components/ui/button.tsx";
 
 /**

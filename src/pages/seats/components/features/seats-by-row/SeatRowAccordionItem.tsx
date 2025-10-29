@@ -3,7 +3,7 @@ import { AccordionContent, AccordionItem, AccordionTrigger } from "@/common/comp
 import { SeatsByRow } from "@/pages/screens/schema/screen/ScreenSeat.types.ts";
 import { ScrollArea, ScrollBar } from "@/common/components/ui/scroll-area.tsx";
 import { isArray } from "lodash";
-import ScreenSeatDetailsCard from "@/pages/seats/components/screen-seats/ScreenSeatDetailsCard.tsx";
+import ScreenSeatDetailsCard from "@/pages/seats/components/features/screen-seats/ScreenSeatDetailsCard.tsx";
 
 /**
  * Props for the {@link SeatRowAccordionItem} component.

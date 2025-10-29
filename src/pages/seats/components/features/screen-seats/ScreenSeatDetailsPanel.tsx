@@ -12,8 +12,9 @@ import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/co
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
-import DeleteSeatWarning from "@/pages/seats/components/delete-seats/DeleteSeatWarning.tsx";
+import SeatDeleteWarningDialog from "@/pages/seats/components/features/delete-seats/SeatDeleteWarningDialog.tsx";
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {Ellipsis} from "lucide-react";
 
 /**
  * Props for the {@link ScreenSeatDetailsPanel} component.
@@ -47,7 +48,7 @@ const ScreenSeatDetailsPanel: FC<PropsWithChildren<ScreenProps>> = ({children, c
     const [open, setOpen] = useState<boolean>(false);
     const [value, setValue] = useState<string>("");
 
-    const {_id, row, seatNumber, seatLabel, seatType, isAvailable, x, y, priceMultiplier} = seat;
+    const {row, seatNumber, seatLabel, seatType, isAvailable, x, y, priceMultiplier} = seat;
 
     /** Display title for the seat: label if available, otherwise row+number. */
     const seatTitle = seatLabel ? seatLabel : `${row}${seatNumber}`;
@@ -103,7 +104,14 @@ const ScreenSeatDetailsPanel: FC<PropsWithChildren<ScreenProps>> = ({children, c
                         <AccordionItem value="screen-row-accordion-delete">
                             <AccordionTrigger>Delete</AccordionTrigger>
                             <AccordionContent className="flex flex-col items-center space-y-5">
-                                <DeleteSeatWarning seatID={_id} onDelete={onDelete}/>
+                                <SeatDeleteWarningDialog
+                                    seat={seat}
+                                    onDeleteSuccess={onDelete}
+                                >
+                                    <Button variant="link">
+                                        <Ellipsis />
+                                    </Button>
+                                </SeatDeleteWarningDialog>
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion>
