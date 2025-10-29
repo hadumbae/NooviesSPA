@@ -1,4 +1,4 @@
-import {TheatreDetailsSearchParams} from "@/pages/theatres/schema/params/TheatreDetailsParams.types.ts";
+import {TheatreDetailsSearchParams} from "@/pages/theatres/schema/params/TheatreDetailsSearchParamSchema.ts";
 
 /**
  * Default search parameters for the Theatre Details page.

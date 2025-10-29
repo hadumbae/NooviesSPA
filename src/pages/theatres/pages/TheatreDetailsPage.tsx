@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import useFetchTheatreDetailsParams from "@/pages/theatres/hooks/theatre-details/useFetchTheatreDetailsParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import TheatreDetailsHeader from "@/pages/theatres/components/headers/TheatreDetailsHeader.tsx";
@@ -7,16 +6,18 @@ import TheatreDetailsCard from "@/pages/theatres/components/TheatreDetailsCard.t
 import PageSection from "@/common/components/page/PageSection.tsx";
 import TheatreDetailsBreadcrumbs from "@/pages/theatres/components/breadcrumbs/admin/TheatreDetailsBreadcrumbs.tsx";
 import useTheatreDetailsSearchParams
-    from "@/pages/theatres/hooks/theatre-details/search-params/useTheatreDetailsSearchParams.ts";
+    from "@/pages/theatres/hooks/features/search-params/theatre-details/useTheatreDetailsSearchParams.ts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/common/components/ui/tabs.tsx";
 import TheatreScreensOverviewTab
     from "@/pages/screens/components/theatre-screen/admin/tabs/TheatreScreensOverviewTab.tsx";
-import { useNavigate } from "react-router-dom";
-import useFetchTheatre from "@/pages/theatres/hooks/queries/useFetchTheatre.ts";
+import useFetchTheatre from "@/pages/theatres/hooks/query/useFetchTheatre.ts";
 import { TheatreDetailsSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import { TheatreDetails } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import useFetchRouteParams from "@/common/hooks/router/useFetchRouteParams.ts";
+import {TheatreDetailsRouteParamSchema} from "@/pages/theatres/schema/params/TheatreDetailsRouteParamSchema.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Page component displaying detailed information for a single theatre.
@@ -39,7 +40,14 @@ import { TheatreDetails } from "@/pages/theatres/schema/theatre/Theatre.types.ts
  * ```
  */
 const TheatreDetailsPage: FC = () => {
-    const { theatreID } = useFetchTheatreDetailsParams() ?? {};
+    const navigate = useLoggedNavigate();
+    const navigateToIndex = () => navigate({to: "/admin/theatres"})
+
+    const { theatreID } = useFetchRouteParams({
+        schema: TheatreDetailsRouteParamSchema,
+        onErrorMessage: "Failed to parse route parameters.",
+        onError: navigateToIndex,
+    }) ?? {};
 
     // Show loader if no theatre ID
     if (!theatreID) return <PageLoader />;
@@ -51,9 +59,6 @@ const TheatreDetailsPage: FC = () => {
         searchParams: { activeTab, screenPage, screenPerPage },
         setScreenPage
     } = useTheatreDetailsSearchParams();
-
-    const navigate = useNavigate();
-    const onDelete = () => navigate("/admin/theatres");
 
     return (
         <QueryBoundary query={query}>
@@ -88,7 +93,7 @@ const TheatreDetailsPage: FC = () => {
                     return (
                         <PageFlexWrapper>
                             <TheatreDetailsBreadcrumbs theatreName={theatre.name} />
-                            <TheatreDetailsHeader theatre={theatre} onDelete={onDelete} />
+                            <TheatreDetailsHeader theatre={theatre} onDelete={navigateToIndex} />
 
                             <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
                                 <PageSection srTitle="Theatre Details Card">

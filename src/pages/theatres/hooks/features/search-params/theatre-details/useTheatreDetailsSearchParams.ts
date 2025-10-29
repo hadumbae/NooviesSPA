@@ -1,11 +1,12 @@
-import {
-    TheatreDetailsSearchParamsDefaults,
-    TheatreDetailsSearchParamsReturns
-} from "@/pages/theatres/hooks/theatre-details/search-params/useTheatreDetailsSearchParams.types.ts";
 import {useSearchParams} from "react-router-dom";
 import fetchParsedSearchParams from "@/common/utility/features/search-params/fetchParsedSearchParams.ts";
-import {TheatreDetailsSearchParamSchema} from "@/pages/theatres/schema/params/TheatreDetailsParams.schema.ts";
 import setSearchParamValue from "@/common/utility/features/search-params/setSearchParamValue.ts";
+import {
+    TheatreDetailsSearchParamSchema
+} from "@/pages/theatres/schema/params/TheatreDetailsSearchParamSchema.ts";
+import {
+    TheatreDetailsSearchParamsDefaults, TheatreDetailsSearchParamsReturns
+} from "@/pages/theatres/hooks/features/search-params/theatre-details/useTheatreDetailsSearchParams.types.ts";
 
 // useTheatreDetailsSearchParam
 // ├── uses: useSearchParams (hook)

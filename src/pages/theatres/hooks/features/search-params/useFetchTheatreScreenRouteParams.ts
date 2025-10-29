@@ -4,7 +4,7 @@ import {useEffect} from "react";
 import {toast} from "react-toastify";
 import {ScreenDetailsParamsSchema} from "@/pages/screens/schema/params/ScreenDetailsParamsSchema.ts";
 
-export default function useFetchTheatreScreenParams() {
+export default function useFetchTheatreScreenRouteParams() {
     const navigate = useNavigate();
     const urlParams = useParams<{ theatreID: ObjectId, screenID: ObjectId }>();
 
