@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {ObjectId} from "@/common/schema/strings/IDStringSchema.ts";
 import {Loader, TriangleAlert} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
-import useSeatDeleteMutation from "@/pages/seats/hooks/admin/delete-seat-data/useSeatDeleteMutation.ts";
+import useSeatDeleteMutation from "@/pages/seats/hooks/features/admin/delete-seat-data/useSeatDeleteMutation.ts";
 
 type WarningProps = {
     seatID: ObjectId;

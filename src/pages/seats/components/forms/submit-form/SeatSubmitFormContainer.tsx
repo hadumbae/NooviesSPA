@@ -1,8 +1,8 @@
 import { FC, useEffect, useRef } from 'react';
-import useSeatSubmitForm from "@/pages/seats/hooks/admin/submit-seat-data/useSeatSubmitForm.ts";
+import useSeatSubmitForm from "@/pages/seats/hooks/features/admin/submit-seat-data/useSeatSubmitForm.ts";
 import useSeatSubmitMutation, {
     SeatSubmitMutationFormParams
-} from "@/pages/seats/hooks/admin/submit-seat-data/useSeatSubmitMutation.ts";
+} from "@/pages/seats/hooks/features/admin/submit-seat-data/useSeatSubmitMutation.ts";
 import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
 import { SeatForm, SeatFormValues } from "@/pages/seats/schema/form/SeatForm.types.ts";
 import SeatSubmitFormView from "@/pages/seats/components/forms/submit-form/SeatSubmitFormView.tsx";
