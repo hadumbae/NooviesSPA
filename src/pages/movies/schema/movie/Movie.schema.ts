@@ -1,17 +1,18 @@
-import {z} from "zod";
-import {GenreSchema} from "@/pages/genres/schema/genre/Genre.schema.ts";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
-import {CloudinaryImageSchema} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
-import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {UTCDayOnlyDateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCDayOnlyDateTimeSchema.ts";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import { z } from "zod";
+import { GenreSchema } from "@/pages/genres/schema/genre/Genre.schema.ts";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { NonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import { ISO3166Alpha2CountryCodeEnum } from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
+import { ISO6391LanguageCodeEnum } from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
+import { CloudinaryImageSchema } from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import { URLStringSchema } from "@/common/schema/strings/URLStringSchema.ts";
+import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import { UTCDayOnlyDateTimeSchema } from "@/common/schema/date-time/iso-8601/UTCDayOnlyDateTimeSchema.ts";
+import { CoercedBooleanValueSchema } from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import { generatePaginationSchema } from "@/common/utility/schemas/generatePaginationSchema.ts";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import { DateTimeInstanceSchema } from "@/common/schema/date-time/DateTimeInstanceSchema.ts";
 
 /* -------------------------------------------------------------------------------------------------
  * Base Schema
@@ -21,7 +22,7 @@ import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preproces
  * Base schema for a movie object.
  *
  * Defines the core descriptive and metadata fields for a movie,
- * including title information, runtime, language, and availability.
+ * including title, runtime, languages, availability, and release information.
  */
 export const MovieBaseSchema = z.object({
     /** Display title of the movie (max 250 characters). */
@@ -39,10 +40,10 @@ export const MovieBaseSchema = z.object({
     country: ISO3166Alpha2CountryCodeEnum,
 
     /** Synopsis or description (max 2000 characters). */
-    synopsis: NonEmptyStringSchema.max(2000, "synopsis must be 2000 characters or less."),
+    synopsis: NonEmptyStringSchema.max(2000, "Synopsis must be 2000 characters or less."),
 
     /** Release date in parsed UTC day-only format. Optional and nullable. */
-    releaseDate: UTCDayOnlyDateTimeSchema.optional().nullable(),
+    releaseDate: z.union([DateTimeInstanceSchema, UTCDayOnlyDateTimeSchema]).optional().nullable(),
 
     /** Whether the movie has been released. */
     isReleased: CoercedBooleanValueSchema,
@@ -74,39 +75,39 @@ export const MovieBaseSchema = z.object({
  * ----------------------------------------------------------------------------------------------- */
 
 /**
- * Extended movie schema including database identifier and genre references (IDs only).
+ * Movie schema including unique identifier and genre references (IDs only).
  */
 export const ExtendedMovieSchema = MovieBaseSchema.extend({
     /** Unique string identifier for the movie. */
     _id: IDStringSchema.readonly(),
 
     /** Array of genre IDs associated with the movie. */
-    genres: z.array(IDStringSchema, {message: "Must be an array of genre references."}),
+    genres: z.array(IDStringSchema, { message: "Must be an array of genre references." }),
 });
 
 /**
- * Extended movie schema with full genre objects and showing count.
+ * Detailed movie schema including full genre objects and showing count.
  */
 export const ExtendedMovieDetailsSchema = MovieBaseSchema.extend({
     /** Unique string identifier for the movie. */
     _id: IDStringSchema.readonly(),
 
     /** Array of full genre objects associated with the movie. */
-    genres: z.array(z.lazy(() => GenreSchema), {message: "Must be an array of genres."}),
+    genres: z.array(z.lazy(() => GenreSchema), { message: "Must be an array of genres." }),
 
     /** Number of showings linked to the movie (non-negative). */
     showingCount: NonNegativeNumberSchema,
 });
 
 /**
- * Extended movie schema with full genre objects (without showing count).
+ * Movie schema including full genre objects without showing count.
  */
 export const ExtendedMovieWithGenresSchema = MovieBaseSchema.extend({
     /** Unique string identifier for the movie. */
     _id: IDStringSchema.readonly(),
 
     /** Array of full genre objects associated with the movie. */
-    genres: z.array(z.lazy(() => GenreSchema), {message: "Must be an array of genres."}),
+    genres: z.array(z.lazy(() => GenreSchema), { message: "Must be an array of genres." }),
 });
 
 /* -------------------------------------------------------------------------------------------------
@@ -114,13 +115,14 @@ export const ExtendedMovieWithGenresSchema = MovieBaseSchema.extend({
  * ----------------------------------------------------------------------------------------------- */
 
 /**
- * Ensures a release date is provided when a movie is marked as released.
+ * Ensures a release date is provided if the movie is marked as released.
  *
- * @param values The movie object being validated.
- * @param ctx Zod refinement context used to report validation issues.
+ * @param values - The movie object being validated.
+ * @param ctx - Zod refinement context used to report validation issues.
  */
 const dateIfReleased = (values: any, ctx: z.RefinementCtx) => {
-    const {releaseDate, isReleased} = values;
+    const { releaseDate, isReleased } = values;
+
     if (isReleased && (releaseDate === undefined || releaseDate === null)) {
         ctx.addIssue({
             code: "custom",
@@ -135,25 +137,19 @@ const dateIfReleased = (values: any, ctx: z.RefinementCtx) => {
  * ----------------------------------------------------------------------------------------------- */
 
 /**
- * **MovieSchema**
- *
- * Full movie schema with identifiers and genre IDs, including refinement
- * that requires a release date if `isReleased` is true.
+ * Movie schema with identifiers and genre IDs,
+ * requiring a release date if `isReleased` is true.
  */
 export const MovieSchema = ExtendedMovieSchema.superRefine(dateIfReleased);
 
 /**
- * **MovieDetailsSchema**
- *
  * Detailed movie schema including full genre objects and showing count.
- * Also enforces a release date when `isReleased` is true.
+ * Also requires a release date when `isReleased` is true.
  */
 export const MovieDetailsSchema = ExtendedMovieDetailsSchema.superRefine(dateIfReleased);
 
 /**
- * **MovieWithGenresSchema**
- *
- * Movie schema including full genre objects (no showing count),
+ * Movie schema with full genre objects (no showing count),
  * enforcing release-date validation when released.
  */
 export const MovieWithGenresSchema = ExtendedMovieWithGenresSchema.superRefine(dateIfReleased);
