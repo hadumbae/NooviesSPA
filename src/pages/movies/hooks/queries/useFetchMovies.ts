@@ -1,87 +1,82 @@
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
+import { MovieQueryOptions } from "@/pages/movies/schema/queries/MovieFilter.types.ts";
+import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import { MovieQueryFilters } from "@/pages/movies/schema/queries/MovieFilter.types.ts";
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
-import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
- * Combined query parameters for fetching movie data.
+ * Parameters for the {@link useFetchMovies} hook.
  *
- * @template TData The expected type of the data returned by the query.
+ * @template TData - The expected data type returned by the query.
  */
-export type QueryParams<TData = unknown> = {
+type FetchParams<TData = unknown> = RequestOptions & {
     /**
-     * Combined parameters for the query.
-     * @see {@link RequestOptions}
-     * @see {@link RequestPaginationOptions}
-     * @see {@link MovieQueryFilters}
+     * Optional filters or query parameters to refine the movie retrieval.
+     * See {@link MovieQueryOptions} for available filter fields.
      */
-    queries?: RequestOptions & RequestPaginationOptions & MovieQueryFilters;
+    queries?: MovieQueryOptions;
 
     /**
-     * Optional settings to customize the behavior of the query.
-     * @see {@link UseQueryOptions}
+     * Optional React Query configuration, controlling cache, refetch, and placeholder behavior.
+     *
+     * @defaultValue Uses {@link useQueryOptionDefaults} for sensible defaults
+     * (`enabled: true`, `staleTime: 60_000`, etc.).
      */
     options?: UseQueryOptions<TData>;
 };
 
 /**
- * React hook to fetch paginated, filtered movie data.
+ * **`useFetchAllMovies`** — React Query hook for fetching all movies from the API.
  *
- * @template TData The expected type of the data returned by the query. Can be an array or object.
+ * @remarks
+ * - Wraps {@link MovieRepository.getAll} to retrieve all movie entities at once.
+ * - Uses {@link useQueryFnHandler} to standardize API error handling and
+ *   return structured {@link HttpResponseError} objects.
+ * - Merges user-supplied React Query options with defaults from {@link useQueryOptionDefaults}.
  *
- * @param params - Object containing query parameters and query options.
- * @param params.queries - Combined parameters for the query.
- * @param params.options - Optional settings for the query.
- *   @see {@link UseQueryOptions#enabled}
- *   @see {@link UseQueryOptions#staleTime}
- *   @see {@link UseQueryOptions#initialData}
- *   @see {@link UseQueryOptions#placeholderData}
+ * @template TData - The type of the returned data.
+ *
+ * @param params - Optional parameters controlling the request, including:
+ * - `queries`: Filtering options for the movie query.
+ * - `options`: React Query configuration such as `staleTime` or `enabled`.
+ * - Any {@link RequestOptions} for network configuration (headers, auth, etc.).
  *
  * @returns A {@link UseQueryResult} containing:
- *   - `data` – The fetched movie data (or undefined initially)
- *   - `error` – An {@link HttpResponseError} if the query fails
- *   - Status flags like `isLoading`, `isFetching`, `isError`, etc.
+ * - `data`: The fetched movie list (typed as `TData`).
+ * - `isLoading`, `isError`, and `error` for query state handling.
+ * - `refetch` and other React Query utilities.
  *
  * @example
  * ```ts
- * const { data, isLoading, error } = useFetchMovies<Movie[]>({
- *   queries: { page: 1, limit: 10, populate: true },
- *   options: { staleTime: 1000 * 30 }
+ * const { data, isLoading, error } = useFetchAllMovies({
+ *   queries: { genre: "Action", releasedAfter: "2020-01-01" },
+ *   options: { staleTime: 300_000 }
  * });
+ *
  * if (isLoading) return <Spinner />;
- * if (error) return <div>{error.message}</div>;
+ * if (error) return <ErrorBanner message={error.message} />;
+ *
  * return <MovieList movies={data} />;
  * ```
  */
 export default function useFetchMovies<TData = unknown>(
-    params?: QueryParams<TData>
-): UseQueryResult<TData, HttpResponseError> {
-    const {
-        queries = {},
-        options: {
-            enabled = true,
-            staleTime = 1000 * 60,
-            placeholderData = (previousData: TData | undefined) => previousData,
-            initialData,
-        } = {},
-    } = params || {};
+    params: FetchParams<TData> = {}
+): UseQueryResult<unknown, HttpResponseError> {
+    const { queries = {}, options = useQueryOptionDefaults(), ...requestOptions } = params;
 
-    const queryKey = ["fetch_movies_by_query", queries] as const;
+    const queryKey = ["fetch_movies", { queries, options, requestOptions }];
 
     const fetchMovies = useQueryFnHandler({
-        action: () => MovieRepository.query({ queries }),
-        errorMessage: "Failed to fetch movie data. Please try again."
+        action: () => MovieRepository.getAll({ queries: queries, ...requestOptions }),
+        errorMessage: "Failed to fetch movies. Please try again.",
     });
 
     return useQuery({
         queryKey,
         queryFn: fetchMovies,
-        enabled,
-        staleTime,
-        placeholderData,
-        initialData,
+        ...options
     });
 }

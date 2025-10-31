@@ -82,10 +82,13 @@ export default function useMovieDeleteMutation(params?: OnDeleteMutationParams) 
      * Invalidates movie queries to refresh the list.
      */
     const onSettled = async () => {
-        await queryClient.invalidateQueries({
-            queryKey: ["fetch_movies_by_query"],
-            exact: false,
-        });
+        const queryKeys = [
+            "fetch_movies_by_query",
+            "fetch_movies",
+            "fetch_paginated_movies",
+        ];
+
+        await Promise.all(queryKeys.map(queryKey => queryClient.invalidateQueries({queryKey, exact: false})));
     };
 
     return useMutation({

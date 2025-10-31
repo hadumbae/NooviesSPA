@@ -135,10 +135,14 @@ export default function useMovieSubmitMutation(
      * Invalidates related queries after mutation completion to refresh movie data.
      */
     const onSettled = async () => {
-        await Promise.all([
-            queryClient.invalidateQueries({queryKey: ["fetch_single_movie"], exact: false}),
-            queryClient.invalidateQueries({queryKey: ["fetch_movies_by_query"], exact: false}),
-        ]);
+        const queryKeys = [
+            "fetch_single_movie",
+            "fetch_movies_by_query",
+            "fetch_movies",
+            "fetch_paginated_movies",
+        ];
+
+        await Promise.all(queryKeys.map(queryKey => queryClient.invalidateQueries({queryKey, exact: false})));
     };
 
     return useMutation({

@@ -6,12 +6,12 @@ import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
-import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import {MovieArraySchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {MovieArray} from "@/pages/movies/schema/movie/Movie.types.ts";
+import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
 
 /**
  * Props for the `MovieHookFormSelect` component.
@@ -46,7 +46,7 @@ type SelectProps<TSubmit extends FieldValues> = {
 /**
  * A reusable `react-hook-form` select component for choosing movies.
  *
- * Fetches a list of movies using `useFetchMovies`, validates the response
+ * Fetches a list of movies using `useFetchAllMovies`, validates the response
  * against `MovieArraySchema`, and renders either a single or multi-select
  * field. Handles loading and error states automatically.
  *

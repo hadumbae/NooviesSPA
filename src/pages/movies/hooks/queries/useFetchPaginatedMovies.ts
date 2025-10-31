@@ -1,59 +1,94 @@
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
-import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
-import {PaginatedMovies} from "@/pages/movies/schema/movie/Movie.types.ts";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-
-/**
- * Parameters for fetching a specific page of movie results.
- *
- * Extends {@link RequestOptions} to include pagination-specific properties.
- */
-type FetchParams = RequestOptions & {
-    /** The page number to retrieve (1-indexed). */
-    page: number;
-
-    /** The number of items to retrieve per page. */
-    perPage: number;
-}
-
+import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
+import { PaginationParamValues } from "@/common/hooks/search-params/usePaginationSearchParams.types.ts";
+import { MovieQueryOptions } from "@/pages/movies/schema/queries/MovieFilter.types.ts";
+import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 
 /**
- * Custom React Query hook to fetch a paginated list of movies.
+ * Parameters for the {@link useFetchPaginatedMovies} hook.
  *
- * Uses the `MovieRepository.paginated()` method under the hood to retrieve
- * movies based on the provided `page`, `perPage`, and optional flags like
- * `populate` and `virtuals`. The result is cached and managed by React Query.
- *
- * If the response is not OK, it throws a standardized response error using
- * `throwResponseError`.
- *
- * @param params - The parameters for pagination and data shaping.
- * @returns A `UseQueryResult` containing `PaginatedMovies` or error/loading state.
+ * @template TData - The expected shape of the paginated movie response.
  */
-export const useFetchPaginatedMovies = (params: FetchParams): UseQueryResult<PaginatedMovies> => {
-    const {page, perPage, populate = false, virtuals = false} = params;
+type FetchParams<TData = unknown> = RequestOptions & PaginationParamValues & {
+    /**
+     * Optional query filters to refine, search, or sort the paginated movie results.
+     */
+    queries?: MovieQueryOptions;
 
-    const queryKey = ["fetch_paginated_movies", {page, perPage, populate, virtuals}] as const;
+    /**
+     * React Query configuration for caching, refetching, and placeholder behavior.
+     *
+     * @defaultValue Uses defaults from {@link useQueryOptionDefaults}.
+     */
+    options?: UseQueryOptions<TData>;
+};
 
-    const fetchPaginatedMovies = async () => {
-        const {response, result} = await MovieRepository.paginated({
-            populate,
-            virtuals,
-            filters: {page, perPage}
-        });
+/**
+ * **`useFetchPaginatedMovies`**
+ *
+ * React Query hook to fetch a paginated list of movies from the API using
+ * {@link MovieRepository.paginated}.
+ *
+ * @remarks
+ * - Supports pagination via `page` and `perPage`.
+ * - Query filters can be applied using `queries`.
+ * - Wraps the request in {@link useQueryFnHandler} for standardized error handling.
+ * - Uses {@link useQueryOptionDefaults} for default React Query settings like
+ *   `enabled`, `staleTime`, and `placeholderData`.
+ *
+ * @template TData - The type of data expected in the paginated response.
+ *
+ * @param params - Configuration object containing:
+ * - `page` and `perPage` for pagination
+ * - `queries` for filtering and sorting
+ * - `options` for React Query configuration
+ * - any {@link RequestOptions} such as headers or authentication info
+ *
+ * @returns A {@link UseQueryResult} containing:
+ * - `data`: Paginated movie data (`TData`)
+ * - `isLoading`, `isError`, and `error` for query state
+ * - `refetch` and other React Query utilities
+ *
+ * @example
+ * ```ts
+ * const { data, isLoading, error } = useFetchPaginatedMovies({
+ *   page: 1,
+ *   perPage: 20,
+ *   queries: { genre: "Action", releasedAfter: "2020-01-01" },
+ *   options: { staleTime: 120_000 }
+ * });
+ *
+ * if (isLoading) return <Spinner />;
+ * if (error) return <ErrorBanner message={error.message} />;
+ *
+ * return <MovieGrid movies={data.items} total={data.total} />;
+ * ```
+ */
+export default function useFetchPaginatedMovies<TData = unknown>(
+    params: FetchParams<TData>
+): UseQueryResult<unknown, HttpResponseError> {
+    const {
+        page,
+        perPage,
+        queries = {},
+        options = useQueryOptionDefaults(),
+        ...requestOptions
+    } = params;
 
-        if (!response.ok) {
-            const message = "Failed To Fetch Data. Please Try Again.";
-            throwResponseError({response, result, message});
-        }
+    const queryKey = ["fetch_paginated_movies", { page, perPage, queries, options, requestOptions }];
 
-        return result;
-    }
+    const fetchPaginatedMovies = useQueryFnHandler({
+        action: () => MovieRepository.paginated({ page, perPage, queries, ...requestOptions }),
+    });
 
     return useQuery({
         queryKey,
         queryFn: fetchPaginatedMovies,
+        ...options,
     });
 }

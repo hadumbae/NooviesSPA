@@ -5,14 +5,13 @@ import usePaginationSearchParams from "@/common/hooks/search-params/usePaginatio
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import MovieIndexCard from "@/pages/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
-import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {MovieDetails, PaginatedMovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {PaginatedMovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 
-import {RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
+import useFetchPaginatedMovies from "@/pages/movies/hooks/queries/useFetchPaginatedMovies.ts";
 
 /**
  * `MovieIndexPage` displays a paginated list of movies
@@ -43,8 +42,7 @@ const MovieIndexPage: FC = () => {
     const {data: paginationState} = usePaginationLocationState();
     const {page, perPage} = usePaginationSearchParams(paginationState ?? {page: 1, perPage: 25});
 
-    const paginationQueries: RequestPaginationOptions = {paginated: true, page, perPage};
-    const query = useFetchMovies({queries: {populate: true, virtuals: true, ...paginationQueries}});
+    const query = useFetchPaginatedMovies({page, perPage, populate: true, virtuals: true});
 
     return (
         <QueryBoundary query={query}>
