@@ -4,10 +4,10 @@ import {
     DeleteEntityParams,
     GetEntitiesParams,
     GetEntityByIDParams,
-    GetPaginatedEntitiesParams,
     UpdateEntityParams
 } from "@/common/repositories/request-repository/RequestRepository.types.ts";
 import { RequestQueryOptions } from "@/common/type/request/RequestOptions.ts";
+import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 
 /**
  * Interface defining a standardized HTTP-based repository for performing CRUD operations
@@ -51,7 +51,7 @@ export interface IRequestRepository {
      * @param params - Object containing pagination settings, filters, and query options.
      * @returns A promise resolving to {@link RequestReturns} with paginated results.
      */
-    paginated<TResult = unknown>(params: GetPaginatedEntitiesParams): Promise<RequestReturns<TResult>>;
+    paginated<TResult = unknown>(params: RequestQueryFilters): Promise<RequestReturns<TResult>>;
 
     /**
      * Creates a new entity at the endpoint.
