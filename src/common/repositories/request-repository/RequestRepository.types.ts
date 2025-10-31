@@ -2,29 +2,30 @@ import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import RequestPaginatedFilters from "@/common/type/request/RequestPaginatedFilters.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {PaginationParamValues} from "@/common/hooks/search-params/usePaginationSearchParams.types.ts";
 
 /**
- * Parameters for retrieving multiple entities using optional filters and request options.
+ * Parameters for retrieving multiple entities with optional filters and request options.
  *
- * @template TFilters The type of filters to apply. Defaults to `QueryFilters`.
+ * @template TQueries - The type of query filters to apply. Defaults to {@link RequestQueryFilters}.
  */
-export type GetEntitiesParams<TFilters = RequestQueryFilters> = RequestOptions & {
+export type GetEntitiesParams<TQueries = RequestQueryFilters> = RequestOptions & {
     /**
-     * Optional filters to narrow the query.
+     * Optional query filters to narrow down the results.
      */
-    filters?: TFilters;
+    queries?: TQueries;
 };
 
 /**
- * Parameters for retrieving a paginated list of entities using filters and request options.
+ * Parameters for retrieving a paginated list of entities using filters and pagination settings.
  *
- * @template TFilters The type of paginated filters to apply. Defaults to `PaginatedFilters`.
+ * @template TQueries - The type of filters to apply to the paginated query. Defaults to {@link RequestPaginatedFilters}.
  */
-export type GetPaginatedEntitiesParams<TFilters = RequestPaginatedFilters> = RequestOptions & {
+export type GetPaginatedEntitiesParams<TQueries = RequestPaginatedFilters> = RequestOptions & PaginationParamValues & {
     /**
-     * Filters to apply to the paginated query.
+     * Filters to apply for the paginated query.
      */
-    filters?: TFilters;
+    queries?: TQueries;
 };
 
 /**
@@ -38,9 +39,9 @@ export type GetEntityByIDParams = RequestOptions & {
 };
 
 /**
- * Parameters for creating a new entity, including its data and optional population behavior.
+ * Parameters for creating a new entity.
  *
- * @template TData The type of the data payload. Defaults to a generic record.
+ * @template TData - The type of the creation payload. Defaults to a generic object.
  */
 export type CreateEntityParams<TData = Record<string, any>> = RequestOptions & {
     /**
@@ -50,9 +51,9 @@ export type CreateEntityParams<TData = Record<string, any>> = RequestOptions & {
 };
 
 /**
- * Parameters for updating an existing entity, including its identifier and updated data.
+ * Parameters for updating an existing entity by its identifier.
  *
- * @template TData The type of the update payload. Defaults to a generic record.
+ * @template TData - The type of the update payload. Defaults to a generic object.
  */
 export type UpdateEntityParams<TData = Record<string, any>> = RequestOptions & {
     /**
@@ -61,7 +62,7 @@ export type UpdateEntityParams<TData = Record<string, any>> = RequestOptions & {
     readonly _id: ObjectId;
 
     /**
-     * The updated data to apply to the entity.
+     * The data to apply to the entity update.
      */
     data: TData;
 };
@@ -75,4 +76,3 @@ export type DeleteEntityParams = {
      */
     readonly _id: ObjectId;
 };
-
