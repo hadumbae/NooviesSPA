@@ -9,32 +9,37 @@ import formatMovieDetails from "@/pages/movies/utility/formatMovieDetails.ts";
 import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 
 /**
- * Props for the `MovieIndexCard` component.
+ * Props for the {@link MovieIndexCard} component.
+ *
+ * @property movie - The movie details to display in the card.
+ * @property className - Optional class name applied to the movie poster image.
  */
 type IndexCardProps = {
-    /** The movie details to display in the card. */
     movie: MovieDetails;
+    className?: string;
 }
 
 /**
- * A card component that displays a movie's poster, title, runtime, genres, and a tooltip button for more information.
+ * Displays a concise movie card for use in an admin movie index or list view.
  *
  * @remarks
- * The card integrates with `MovieDetailsDialog` to show a modal with detailed movie information.
- * The title links to the admin page for the movie, and a `TooltipButton` displays a hover tooltip.
+ * This component shows a movie's poster, title, release date, runtime, and genres.
+ * It includes a tooltip button that opens a {@link MovieDetailsDialog} containing
+ * detailed information about the selected movie.
  *
- * @param props - The props object.
- * @param props.movie - The movie details to render in the card.
+ * - The title links to the movie's admin page via {@link LoggedLink}.
+ * - The card uses {@link formatMovieDetails} to format display strings.
+ * - The `TooltipButton` displays a hover tooltip and acts as the trigger for the dialog.
  *
  * @example
  * ```tsx
  * <MovieIndexCard movie={someMovie} />
  * ```
  */
-const MovieIndexCard: FC<IndexCardProps> = ({ movie }) => {
+const MovieIndexCard: FC<IndexCardProps> = ({ movie, className }) => {
     const { _id, title } = movie;
 
-    /** Formatted movie details for display in the card. */
+    /** Formatted display strings generated from the movie details. */
     const { posterURL, genreString, releaseRuntimeString } = formatMovieDetails(movie);
 
     /** Tooltip text for the info button. */
@@ -47,7 +52,7 @@ const MovieIndexCard: FC<IndexCardProps> = ({ movie }) => {
                 <section>
                     <MoviePosterImage
                         src={posterURL}
-                        className="w-16"
+                        className={className}
                     />
                 </section>
 

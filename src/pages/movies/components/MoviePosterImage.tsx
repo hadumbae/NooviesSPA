@@ -70,7 +70,7 @@ const MoviePosterImage: FC<PosterProps> = (props) => {
             onError={() => setHasError(true)}
             className={cn(
                 "aspect-[2/3] rounded-md",
-                "w-28 xl:w-44",
+                "w-16",
                 className
             )}
         />

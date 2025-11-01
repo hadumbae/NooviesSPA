@@ -53,7 +53,13 @@ const MovieIndexPage: FC = () => {
 
                     const movieSection = (
                         <PageSection srTitle="List Of Movies" className="space-y-3">
-                            {movies.map((movie: MovieDetails) => <MovieIndexCard movie={movie} key={movie._id}/>)}
+                            {movies.map(
+                                (movie: MovieDetails) => <MovieIndexCard
+                                    className="w-16"
+                                    movie={movie}
+                                    key={movie._id}
+                                />
+                            )}
                         </PageSection>
                     );
 
