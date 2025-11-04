@@ -1,86 +1,75 @@
-import {FC, PropsWithChildren} from 'react';
+import {FC, ReactNode} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import useGenreDeleteMutation from "@/pages/genres/hooks/useGenreDeleteMutation.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 
 /**
  * Props for the {@link GenreDeleteWarningDialog} component.
  *
- * Extends {@link MutationOnSubmitParams} for submission configuration,
- * omitting `onSubmitSuccess` and `onSubmitError` to redefine them with
- * deletion-specific signatures.
+ * @remarks
+ * Extends deletion mutation parameters with optional dialog open-state control.
+ * This component renders a confirmation dialog for deleting a genre record.
+ *
+ * @property genreID - The unique {@link ObjectId} of the genre to delete.
+ * @property genreName - Optional display name shown in the dialog title.
+ * @property children - Optional trigger element (e.g., a button).
  */
-type DialogProps = Omit<MutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
-    /**
-     * The unique identifier of the genre to be deleted.
-     */
+type DialogProps = OnDeleteMutationParams & PresetOpenState & {
+    children?: ReactNode;
     genreID: ObjectId;
-
-    /**
-     * Optional human-readable name of the genre for display in the dialog title.
-     */
     genreName?: string;
-
-    /**
-     * Optional callback invoked when the deletion succeeds.
-     */
-    onSubmitSuccess?: () => void;
-
-    /**
-     * Optional callback invoked when the deletion fails.
-     * @param error - The error object from the failed mutation.
-     */
-    onSubmitError?: (error: unknown) => void;
 };
 
 /**
- * A confirmation dialog component for deleting a specific genre.
+ * A confirmation dialog for deleting a {@link Genre}.
  *
- * This component wraps {@link EntityDeleteWarningDialog} to provide
- * a specialized delete confirmation flow for genre entities.
- * It integrates with {@link useGenreDeleteMutation} to execute
- * the deletion and trigger success or error callbacks.
+ * @remarks
+ * Wraps {@link EntityDeleteWarningDialog} and integrates with
+ * {@link useGenreDeleteMutation} to perform the deletion request.
  *
- * @component
- *
- * @param params - Component props.
- * @param params.genreID - The unique identifier of the genre to delete.
- * @param params.genreName - Optional name of the genre to display in the confirmation message.
- * @param params.successMessage - Optional toast message displayed after successful deletion.
- * @param params.errorMessage - Optional toast message displayed after failed deletion.
- * @param params.onSubmitSuccess - Callback executed on successful deletion.
- * @param params.onSubmitError - Callback executed on failed deletion.
- * @param params.children - Optional elements to render inside the dialog body.
+ * Supports both controlled and uncontrolled open states via {@link PresetOpenState}.
+ * The dialog dynamically updates its title based on the provided `genreName`.
  *
  * @example
  * ```tsx
  * <GenreDeleteWarningDialog
- *   genreID="64e9a4..."
- *   genreName="Jazz"
- *   successMessage="Genre deleted successfully."
- *   errorMessage="Could not delete genre."
- *   onSubmitSuccess={() => refreshGenres()}
- *   onSubmitError={(err) => console.error(err)}
+ *   genreID={genre._id}
+ *   genreName={genre.name}
+ *   onDeleteSuccess={refreshGenres}
  * >
- *   <p>This action cannot be undone.</p>
+ *   <Button variant="destructive">Delete</Button>
  * </GenreDeleteWarningDialog>
  * ```
  */
-const GenreDeleteWarningDialog: FC<PropsWithChildren<DialogProps>> = (params) => {
-    const {children, genreID, genreName, ...mutationParams} = params;
+const GenreDeleteWarningDialog: FC<DialogProps> = (params) => {
+    const {children, genreID, genreName, presetOpen, setPresetOpen, ...mutationParams} = params;
 
-    const dialogTitle = `Proceed to delete ${genreName ?? "genre"}?`
+    /**
+     * ⚡ Dialog Setup ⚡
+     * Prepares title and optional preset open-state values.
+     */
+    const dialogTitle = `Proceed to delete ${genreName ?? "genre"}?`;
+    const presetStates: PresetOpenState = filterNullishAttributes({presetOpen, setPresetOpen});
+
+    /**
+     * ⚡ Mutation ⚡
+     * Binds the delete mutation to the current genre ID.
+     */
     const {mutate} = useGenreDeleteMutation(mutationParams);
+    const deleteGenre = () => mutate({_id: genreID});
 
-    const deleteGenre = () => {
-        mutate({_id: genreID});
-    }
-
+    /**
+     * ⚡ Render ⚡
+     * Renders the dialog with the dynamic title and bound mutation handler.
+     */
     return (
         <EntityDeleteWarningDialog
             title={dialogTitle}
             deleteResource={deleteGenre}
+            {...presetStates}
         >
             {children}
         </EntityDeleteWarningDialog>

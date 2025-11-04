@@ -12,36 +12,31 @@ import { GenreFormValues } from "@/pages/genres/schema/form/GenreForm.types.ts";
 import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
 import GenreSubmitFormContainer from "@/pages/genres/components/form/GenreSubmitFormContainer.tsx";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
+import { PresetOpenState } from "@/common/type/ui/OpenStateProps.ts";
 
 /**
  * Props for the {@link GenreSubmitFormPanel} component.
  *
  * @remarks
- * Extends {@link FormContainerProps} with additional layout and trigger options
- * for rendering the genre submit form inside a sheet panel.
+ * Combines {@link FormContainerProps} with optional open-state control
+ * via {@link PresetOpenState}, allowing either internal or external
+ * management of the sheet's open/close behavior.
  *
- * @property children - Optional custom trigger element for opening the form panel.
- * @property className - Optional class name applied to the panel container.
+ * @property children - Optional trigger element to open the panel.
+ * @property className - Optional custom class name for the panel container.
  */
-type PanelProps = FormContainerProps<Genre, Genre, GenreFormValues> & {
+type PanelProps = FormContainerProps<Genre, Genre, GenreFormValues> & PresetOpenState & {
     children?: ReactNode;
     className?: string;
 };
 
 /**
- * A sheet panel that wraps the genre submission form.
+ * A sheet-based panel for creating or updating a {@link Genre}.
  *
  * @remarks
- * This component provides a slide-over panel UI (using the `Sheet` component)
- * to create or update a {@link Genre}.
- * It internally manages open/close state and integrates with the
- * {@link GenreSubmitFormContainer} for form and mutation logic.
- *
- * The panel automatically updates its title and description based on
- * whether it is in **create** or **edit** mode.
- *
- * On successful submission, the panel closes automatically and calls
- * the `onSubmitSuccess` callback if provided.
+ * This component wraps the {@link GenreSubmitFormContainer} inside
+ * a `Sheet` UI element. It can operate in either controlled or uncontrolled mode
+ * depending on whether `presetOpen` and `setPresetOpen` are provided.
  *
  * @example
  * ```tsx
@@ -53,40 +48,46 @@ type PanelProps = FormContainerProps<Genre, Genre, GenreFormValues> & {
  * </GenreSubmitFormPanel>
  * ```
  */
-const GenreSubmitFormPanel: FC<PanelProps> = (params) => {
-    /** Manages the open/closed state of the sheet panel. */
-    const [open, setOpen] = useState<boolean>(false);
-
-    const { children, onSubmitSuccess, ...formOptions } = params;
+const GenreSubmitFormPanel: FC<PanelProps> = (props) => {
+    /**
+     * ⚡ State ⚡
+     */
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const { children, onSubmitSuccess, presetOpen, setPresetOpen, ...formOptions } = props;
     const { isEditing } = formOptions;
 
-    /** Dynamic sheet title based on create/edit mode. */
+    /**
+     * ⚡ Controlled State ⚡
+     */
+    const isControlled = presetOpen !== undefined && setPresetOpen !== undefined;
+    const activeOpen = isControlled ? presetOpen : isOpen;
+    const setActiveOpen = isControlled ? setPresetOpen : setIsOpen;
+
+    /**
+     * ⚡ Computed Values ⚡
+     */
     const sheetTitle = `${isEditing ? "Update" : "Create"} Genre`;
-
-    /** Dynamic description displayed below the title. */
     const sheetDescription = `${isEditing ? "Update" : "Create"} genres by submitting data.`;
-
-    /** Default trigger element if none is provided via children. */
-    const defaultOpen = (
+    const defaultTrigger = (
         <span className="text-neutral-400 hover:text-black cursor-pointer">
             Open
         </span>
     );
 
     /**
-     * Closes the panel after a successful form submission
-     * and invokes the `onSubmitSuccess` callback if available.
+     * ⚡ Handlers ⚡
      */
     const closeOnSubmit = (genre: Genre) => {
-        setOpen(false);
+        setActiveOpen(false);
         onSubmitSuccess?.(genre);
     };
 
     return (
-        <Sheet open={open} onOpenChange={setOpen}>
+        <Sheet open={activeOpen} onOpenChange={setActiveOpen}>
             <SheetTrigger asChild>
-                {children ? children : defaultOpen}
+                {children ?? defaultTrigger}
             </SheetTrigger>
+
             <SheetContent className="flex flex-col">
                 <SheetHeader>
                     <SheetTitle>{sheetTitle}</SheetTitle>
