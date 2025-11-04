@@ -1,6 +1,5 @@
-import { z, ZodTypeAny } from "zod";
-import { CoercedPositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {z, ZodTypeAny} from "zod";
+import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 
 /**
  * Generates a Zod schema for paginated data structures.
@@ -19,6 +18,6 @@ import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preproces
  */
 export const generatePaginationSchema = <TSchema extends ZodTypeAny>(schema: TSchema) =>
     z.object({
-        totalItems: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema),
+        totalItems: PositiveNumberSchema,
         items: z.array(z.lazy(() => schema)),
     });
