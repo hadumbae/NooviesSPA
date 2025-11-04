@@ -1,79 +1,90 @@
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import { useMutation, UseMutationResult, useQueryClient } from "@tanstack/react-query";
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
-import {toast} from "react-toastify";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { toast } from "react-toastify";
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import { OnDeleteMutationParams } from "@/common/type/form/MutationDeleteParams.ts";
 
 /**
- * Parameters for the `useGenreDeleteMutation` hook.
- *
- * This type extends {@link MutationOnSubmitParams} but overrides the
- * `onSubmitSuccess` and `onSubmitError` callbacks to provide signatures
- * specific to delete operations.
+ * Represents the required input for deleting a single genre record by ID.
  */
-type DeleteMutationParams = Omit<MutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> & {
+type DeleteByID = {
     /**
-     * Callback invoked when the genre deletion succeeds.
+     * The unique identifier of the genre record to delete.
      */
-    onSubmitSuccess?: () => void;
-
-    /**
-     * Callback invoked when the genre deletion fails.
-     * @param error - The error object from the failed mutation.
-     */
-    onSubmitError?: (error: unknown) => void;
+    _id: ObjectId;
 };
 
 /**
- * A custom React hook that handles deleting a single genre entity.
+ * Custom React Query hook for deleting a genre by its ID.
  *
- * This hook integrates with `@tanstack/react-query` for mutation handling,
- * uses `GenreRepository.delete` for API interaction, and displays
- * success/error toasts via `react-toastify`.
+ * This hook encapsulates mutation logic for deleting a single genre record.
+ * It automatically handles success/error toasts, cache invalidation,
+ * and optional external callbacks for success and error events.
  *
- * @param params - Configuration for mutation behavior including optional
- *                 success/error callbacks and messages.
+ * @param params - Configuration options controlling deletion behavior.
  *
- * @returns The mutation object from `useMutation`, which includes state
- *          (e.g., `isLoading`, `isError`) and mutation methods.
+ * @returns A {@link UseMutationResult} object exposing mutation utilities and state:
+ * - `mutate({ _id })` — Triggers the deletion for the given genre ID.
+ * - `isLoading`, `isError`, `isSuccess` — Track mutation status.
+ * - `error` — Contains any thrown error from the mutation.
  *
  * @example
  * ```tsx
- * const deleteMutation = useGenreDeleteMutation({
- *   successMessage: "Genre successfully deleted.",
- *   errorMessage: "Could not delete genre.",
- *   onSubmitSuccess: () => refreshGenres(),
+ * const mutation = useGenreDeleteMutation({
+ *   successMessage: "Genre removed successfully.",
+ *   onDeleteSuccess: () => console.log("Deleted!"),
  * });
  *
- * deleteMutation.mutate({ _id: "someObjectId" });
+ * mutation.mutate({ _id: selectedGenreId });
  * ```
+ *
+ * @remarks
+ * On successful deletion, this hook automatically invalidates:
+ * - `"fetch_genres_by_query"` (non-exact match)
  */
-export default function useGenreDeleteMutation(params: DeleteMutationParams) {
-    const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
+export default function useGenreDeleteMutation(
+    params: OnDeleteMutationParams
+): UseMutationResult<void, unknown, DeleteByID> {
+    const { onDeleteSuccess, onDeleteError, successMessage, errorMessage } = params;
     const queryClient = useQueryClient();
 
-    const deleteGenre = async ({_id}: { _id: ObjectId }) => {
+    /**
+     * Executes the delete API call for a given genre ID.
+     *
+     * @param _id - The unique identifier of the genre to delete.
+     * @throws {Error} If the API request fails or returns an unexpected response.
+     */
+    const deleteGenre = async ({ _id }: DeleteByID) => {
         await handleMutationResponse({
-            action: () => GenreRepository.delete({_id}),
+            action: () => GenreRepository.delete({ _id }),
             errorMessage: "Failed to delete genre. Please try again.",
         });
-    }
+    };
 
+    /**
+     * Callback triggered when the deletion succeeds.
+     * Displays a toast message, invalidates cached genre lists,
+     * and calls the optional `onDeleteSuccess` callback.
+     */
     const onSuccess = async () => {
         toast.success(successMessage ?? "Genre deleted.");
-        await queryClient.invalidateQueries({queryKey: ["fetch_genres_by_query"], exact: false});
-        onSubmitSuccess && onSubmitSuccess();
-    }
+        await queryClient.invalidateQueries({ queryKey: ["fetch_genres_by_query"], exact: false });
+        onDeleteSuccess?.();
+    };
 
+    /**
+     * Callback triggered when the deletion fails.
+     * Displays an error toast and calls the optional `onDeleteError` callback.
+     */
     const onError = (error: unknown) => {
-        handleMutationResponseError({error, displayMessage: errorMessage});
-        onSubmitError && onSubmitError(error);
-    }
+        handleMutationResponseError({ error, displayMessage: errorMessage });
+        onDeleteError?.(error);
+    };
 
     return useMutation({
-        mutationKey: ['delete_single_genre'],
+        mutationKey: ["delete_single_genre"],
         mutationFn: deleteGenre,
         onSuccess,
         onError,

@@ -1,91 +1,65 @@
-import {FC} from 'react';
+import { FC } from 'react';
 
 import useGenreSubmitForm from "@/pages/genres/hooks/useGenreSubmitForm.ts";
 import useGenreSubmitMutation from "@/pages/genres/hooks/useGenreSubmitMutation.ts";
 
-import {GenreForm, GenreFormValues} from "@/pages/genres/schema/form/GenreForm.types.ts";
-import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
+import { GenreForm, GenreFormValues } from "@/pages/genres/schema/form/GenreForm.types.ts";
+import { Genre } from "@/pages/genres/schema/genre/Genre.types.ts";
 import GenreSubmitFormView from "@/pages/genres/components/form/GenreSubmitFormView.tsx";
-import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import { MutationEditByIDParams } from "@/common/type/form/MutationSubmitParams.ts";
+import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 
 /**
- * Props for configuring the genre submission form.
+ * Props for the {@link GenreSubmitFormContainer} component.
  *
- * Extends `FormMutationOnSubmitParams` except `onSubmitSuccess` is overridden
- * to require a strongly typed `Genre` on success.
+ * @remarks
+ * Extends {@link FormContainerProps} to configure a genre form container
+ * with optional class styling and field disabling behavior.
  *
- * Supports both creation and editing modes, determined by the presence of the `genre` prop.
+ * @property className - Optional CSS class name for styling the form container.
  */
-type SubmitFormProps =
-    Omit<MutationOnSubmitParams, "onSubmitSuccess"> &
-    {
-        /**
-         * Callback invoked when the genre submission succeeds.
-         * @param genre - The successfully created or updated genre.
-         */
-        onSubmitSuccess: (genre: Genre) => void;
-
-        /**
-         * Optional CSS class applied to the form container.
-         */
-        className?: string;
-
-        /**
-         * Existing genre being edited.
-         * When provided, the form will populate with its values.
-         */
-        genre?: Genre;
-
-        /**
-         * Array of field keys that should be disabled in the form.
-         */
-        disableFields?: (keyof GenreFormValues)[];
-
-        /**
-         * Partial preset values to initialize the form fields.
-         * These will override default values if provided.
-         */
-        presetValues?: Partial<GenreFormValues>;
-    };
+type SubmitFormProps = FormContainerProps<Genre, Genre, GenreFormValues> & {
+    className?: string;
+};
 
 /**
- * Container component for submitting or editing a genre.
+ * Handles form state, mutation logic, and submission for the genre form.
  *
- * This component handles:
- * - Initializing the genre form with optional preset or existing genre values.
- * - Determining editing mode based on the presence of a `genre` prop.
- * - Managing the submission process through a mutation hook.
- * - Rendering the presentational form view component.
+ * @remarks
+ * This container component composes form setup and mutation logic:
+ * - Initializes form state using {@link useGenreSubmitForm}.
+ * - Configures mutation behavior through {@link useGenreSubmitMutation}.
+ * - Passes all necessary handlers and state to {@link GenreSubmitFormView}.
  *
- * @param {SubmitFormProps} params - The props for configuring the genre submission form.
+ * It supports both **create** and **edit** operations, automatically determining
+ * mode based on the `isEditing` flag and the provided `entity` object.
  *
  * @example
  * ```tsx
  * <GenreSubmitFormContainer
- *   onSubmitSuccess={(genre) => console.log("Saved:", genre)}
- *   successMessage="Genre saved successfully!"
- *   genre={existingGenre}
- *   disableFields={["name"]}
+ *   isEditing={true}
+ *   entity={genre}
+ *   onSuccess={refreshGenres}
  * />
  * ```
  */
 const GenreSubmitFormContainer: FC<SubmitFormProps> = (params) => {
-    const {genre, className, disableFields, presetValues, ...mutationParams} = params;
+    const { className, disableFields, presetValues, isEditing, entity, ...mutationParams } = params;
 
-    const form = useGenreSubmitForm({genre, presetValues});
+    /** Initializes the React Hook Form instance for genre submission. */
+    const form = useGenreSubmitForm({ genre: entity, presetValues });
 
-    const editingParams: MutationEditByIDParams = genre
-        ? {isEditing: true, _id: genre._id}
-        : {isEditing: false};
+    /** Determines mutation parameters based on edit mode. */
+    const editingParams: MutationEditByIDParams = isEditing === true
+        ? { isEditing: true, _id: entity!._id }
+        : { isEditing: false };
 
-    const mutation = useGenreSubmitMutation({
-        form,
-        ...mutationParams,
-        ...editingParams,
-    });
+    /** Creates a mutation handler for submitting the genre form. */
+    const mutation = useGenreSubmitMutation({ form, ...mutationParams, ...editingParams });
 
+    /** Handles validated form submission and triggers the mutation. */
     const onSubmit = (values: GenreFormValues) => {
-        console.log("Genre Form Values: ", values);
+        console.log("Genre Form Values:", values);
         mutation.mutate(values as GenreForm);
     };
 
