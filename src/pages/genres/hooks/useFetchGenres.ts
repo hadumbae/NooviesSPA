@@ -1,4 +1,4 @@
-import {GenreQueryOptions} from "@/pages/genres/schema/filters/GenreFilter.types.ts";
+import {GenreQueryOptions} from "@/pages/genres/schema/filters/GenreQueryOptions.types.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
