@@ -42,7 +42,6 @@ const AuthLoader: LoaderFunction = ({ request }) => {
     const authDetails = localStorage.getItem("authUser");
 
     try {
-        console.log("Auth Details: ", authDetails);
         return JSON.parse(authDetails!);
     } catch (e) {
         console.error("Authentication Error: ", e);
