@@ -48,8 +48,8 @@ export const RoleTypeQueryFiltersSchema = z.object({
  * - `sortByDepartment`: Sort order for the `department` field (`asc` or `desc`). Empty string is treated as `undefined`.
  */
 export const RoleTypeQuerySortsSchema = z.object({
-    sortByRoleName: preprocessEmptyStringToUndefined(MongooseSortOrderSchema),
-    sortByDepartment: preprocessEmptyStringToUndefined(MongooseSortOrderSchema),
+    sortByRoleName: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()),
+    sortByDepartment: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()),
 });
 
 /**
