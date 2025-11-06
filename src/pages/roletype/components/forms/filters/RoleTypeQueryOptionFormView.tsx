@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef} from 'react';
+import {FC} from 'react';
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {RoleTypeQueryOptionsFormValues} from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import {Form} from "@/common/components/ui/form.tsx";
@@ -9,6 +9,7 @@ import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.t
 import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
 import HookFormStateToggleButton from "@/common/components/forms/HookFormSortToggle.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAutoSubmit.ts";
 
 /**
  * Props for {@link RoleTypeQueryOptionFormView}.
@@ -53,23 +54,7 @@ const RoleTypeQueryOptionFormView: FC<FormViewProps> = ({form, submitHandler}) =
         ...RoleTypeDepartmentConstant.map(value => ({value, label: convertToTitleCase(value)}))
     ];
 
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const prevValuesRef = useRef(form.getValues());
-
-    const values = form.watch();
-
-    useEffect(() => {
-        const prevValues = prevValuesRef.current;
-
-        if (JSON.stringify(prevValues) !== JSON.stringify(values)) {
-            if (timeoutRef.current) clearTimeout(timeoutRef.current);
-
-            timeoutRef.current = setTimeout(() => {
-                submitHandler(values);
-                prevValuesRef.current = values;
-            }, 450);
-        }
-    }, [values, submitHandler]);
+    useDebouncedFormAutoSubmit({form, submitHandler, timeout: 450});
 
     return (
         <Form {...form}>
