@@ -2,7 +2,7 @@ import {z} from 'zod';
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
-import {DateStringSchema} from "@/common/schema/dates/DateStringSchema.ts";
+import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema.ts";
 
 /**
  * Schema for filtering movie query results.
@@ -15,7 +15,7 @@ export const MovieQueryFilterSchema = z.object({
     /** Partial or full movie title to filter by (non-empty string). */
     title: NonEmptyStringSchema.optional(),
     /** Exact release date to filter by (YYYY-MM-DD format). */
-    releaseDate: DateStringSchema.optional(),
+    releaseDate: DateOnlyStringSchema.optional(),
     /** List of genre IDs to match (movies must include at least one). */
     genres: z.array(IDStringSchema).optional(),
 });

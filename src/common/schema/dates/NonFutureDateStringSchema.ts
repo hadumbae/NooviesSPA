@@ -1,10 +1,10 @@
 import { DateTime } from "luxon";
-import { DateStringSchema } from "@/common/schema/dates/DateStringSchema.ts";
+import { DateOnlyStringSchema } from "@/common/schema/dates/DateOnlyStringSchema.ts";
 
 /**
  * **Non-Future Date String Schema**
  *
- * A Zod schema that extends {@link DateStringSchema} to ensure the date:
+ * A Zod schema that extends {@link DateOnlyStringSchema} to ensure the date:
  * - Is a valid string in the **`yyyy-MM-dd`** format.
  * - Represents a date that is **today or in the past** (i.e., not in the future).
  *
@@ -24,7 +24,7 @@ import { DateStringSchema } from "@/common/schema/dates/DateStringSchema.ts";
  * - Validation issues are added via `ctx.addIssue()` with `fatal: true` for hard failures.
  * - Timezones are not included — validation is based solely on the **local system date**.
  */
-export const NonFutureDateStringSchema = DateStringSchema.superRefine((value, ctx) => {
+export const NonFutureDateStringSchema = DateOnlyStringSchema.superRefine((value, ctx) => {
     const parsedDate = DateTime.fromFormat(value, "yyyy-MM-dd");
 
     if (!parsedDate.isValid) {

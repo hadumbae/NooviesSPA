@@ -2,7 +2,7 @@ import { z } from "zod";
 import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import { MongooseSortOrderSchema } from "@/common/schema/enums/MongooseSortOrderSchema.ts";
-import {DateStringSchema} from "@/common/schema/dates/DateStringSchema.ts";
+import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**
@@ -28,9 +28,9 @@ export const ShowingQueryMatchFilterSchema = z.object({
     /** Filter by screen ID */
     screen: IDStringSchema.optional(),
     /** Filter by start date (YYYY-MM-DD) */
-    startTime: DateStringSchema.optional(),
+    startTime: DateOnlyStringSchema.optional(),
     /** Filter by end date (YYYY-MM-DD) */
-    endTime: DateStringSchema.optional(),
+    endTime: DateOnlyStringSchema.optional(),
     /** Filter by minimum ticket price */
     ticketPrice: PositiveNumberSchema.optional(),
     /** Filter by special event flag */

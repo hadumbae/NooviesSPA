@@ -6,7 +6,7 @@ import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-numb
 import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
 import {ShowingStatusEnumSchema} from "@/pages/showings/schema/ShowingStatus.enum.ts";
 import {DateTime} from "luxon";
-import {DateStringSchema} from "@/common/schema/dates/DateStringSchema.ts";
+import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**
@@ -55,7 +55,7 @@ export const ShowingFormSchema = z.object({
 
     /** Start date (YYYY-MM-DD) of the showing — required */
     startAtDate: z
-        .union([z.literal(""), DateStringSchema])
+        .union([z.literal(""), DateOnlyStringSchema])
         .refine((date) => date !== "", {message: "Required."}),
 
     /** Optional end time (HH:mm) */
@@ -66,7 +66,7 @@ export const ShowingFormSchema = z.object({
 
     /** Optional end date (YYYY-MM-DD) */
     endAtDate: z
-        .union([z.literal(""), DateStringSchema])
+        .union([z.literal(""), DateOnlyStringSchema])
         .transform((date) => (date === "" ? undefined : date))
         .optional(),
 
