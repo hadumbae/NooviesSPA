@@ -3,7 +3,7 @@ import {
     PersonQueryFilterSchema,
     PersonQueryOptionsSchema,
     PersonQuerySortSchema
-} from "@/pages/persons/schema/queries/PersonFilter.schema.ts";
+} from "@/pages/persons/schema/queries/PersonQueryOption.schema.ts";
 
 /**
  * Type representing the filter criteria used for querying Person records.

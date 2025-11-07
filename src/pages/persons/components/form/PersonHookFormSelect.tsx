@@ -7,7 +7,7 @@ import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import useFetchPersons from "@/pages/persons/hooks/fetch/useFetchPersons.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import {PersonArraySchema} from "@/pages/persons/schema/person/Person.schema.ts";
-import {PersonQueryFilters} from "@/pages/persons/schema/queries/PersonFilter.types.ts";
+import {PersonQueryFilters} from "@/pages/persons/schema/queries/PersonQueryOption.types.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {PersonArray} from "@/pages/persons/schema/person/Person.types.ts";

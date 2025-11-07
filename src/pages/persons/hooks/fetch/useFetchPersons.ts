@@ -2,7 +2,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import { PersonQueryFilters } from "@/pages/persons/schema/queries/PersonFilter.types.ts";
+import { PersonQueryFilters } from "@/pages/persons/schema/queries/PersonQueryOption.types.ts";
 import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
 import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 
