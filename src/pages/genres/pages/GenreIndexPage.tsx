@@ -17,8 +17,8 @@ import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPa
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import GenreQueryOptionCollapsible
     from "@/pages/genres/components/admin/genre-query-options/GenreQueryOptionCollapsible.tsx";
-import useGenreQueryOptionSearchParams
-    from "@/pages/genres/hooks/features/genre-query-option/useGenreQueryOptionSearchParams.ts";
+import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import {GenreQueryOptionSchema} from "@/pages/genres/schema/filters/GenreQueryOptions.schema.ts";
 
 /**
  * A page displaying all available genres with search filters, pagination, and responsive layout.
@@ -53,7 +53,7 @@ const GenreIndexPage: FC = () => {
     // ⚡ Pagination & Query Params ⚡
     const {data: paginationState} = usePaginationLocationState();
     const {page, perPage, setPage} = usePaginationSearchParams(paginationState ?? {page: 1, perPage: 25});
-    const {searchParams} = useGenreQueryOptionSearchParams();
+    const {searchParams} = useParsedSearchParams({schema: GenreQueryOptionSchema});
 
     // ⚡ Data Fetching ⚡
     const query = useFetchGenres({
