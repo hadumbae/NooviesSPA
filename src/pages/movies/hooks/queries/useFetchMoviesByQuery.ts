@@ -2,7 +2,7 @@ import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import { MovieQueryFilters } from "@/pages/movies/schema/queries/MovieFilter.types.ts";
+import { MovieQueryFilters } from "@/pages/movies/schema/queries/MovieQueryOption.types.ts";
 import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
 import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 

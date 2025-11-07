@@ -3,7 +3,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
 import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
 import { PaginationParamValues } from "@/common/hooks/search-params/usePaginationSearchParams.types.ts";
-import { MovieQueryOptions } from "@/pages/movies/schema/queries/MovieFilter.types.ts";
+import { MovieQueryOptions } from "@/pages/movies/schema/queries/MovieQueryOption.types.ts";
 import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";

@@ -4,7 +4,7 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
 
 import {PaginatedMovies} from "@/pages/movies/schema/movie/Movie.types.ts";
-import {MovieQueryFilters, MovieQuerySorts} from "@/pages/movies/schema/queries/MovieFilter.types.ts";
+import {MovieQueryFilters, MovieQuerySorts} from "@/pages/movies/schema/queries/MovieQueryOption.types.ts";
 
 /**
  * Parameters used to fetch paginated movie data with query and sort options.

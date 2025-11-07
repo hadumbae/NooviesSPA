@@ -1,8 +1,8 @@
 import {useSearchParams} from "react-router-dom";
 import {ParseError} from "@/common/errors/ParseError.ts";
 import updateSearchParams from "@/common/utility/features/search-params/updateSearchParams.ts";
-import {MovieQuerySortSchema} from "@/pages/movies/schema/queries/MovieFilter.schema.ts";
-import {MovieQuerySorts} from "@/pages/movies/schema/queries/MovieFilter.types.ts";
+import {MovieQuerySortSchema} from "@/pages/movies/schema/queries/MovieQueryOption.schema.ts";
+import {MovieQuerySorts} from "@/pages/movies/schema/queries/MovieQueryOption.types.ts";
 
 interface SortParamReturns {
     rawSort: Partial<Record<string, string>>

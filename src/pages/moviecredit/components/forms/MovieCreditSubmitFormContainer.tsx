@@ -2,7 +2,7 @@ import {FC} from 'react';
 import useMovieCreditSubmitForm from "@/pages/moviecredit/hooks/forms/useMovieCreditSubmitForm.ts";
 import useMovieCreditSubmitMutation from "@/pages/moviecredit/hooks/mutations/useMovieCreditSubmitMutation.ts";
 import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
-import {MovieQueryFilters} from "@/pages/movies/schema/queries/MovieFilter.types.ts";
+import {MovieQueryFilters} from "@/pages/movies/schema/queries/MovieQueryOption.types.ts";
 import {MovieCreditForm, MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import {Loader} from "lucide-react";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
@@ -12,7 +12,7 @@ import MovieCreditSubmitFormView from "@/pages/moviecredit/components/forms/Movi
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 import {MovieArray} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {PersonArray} from "@/pages/persons/schema/person/Person.types.ts";
-import {PersonQueryFilters} from "@/pages/persons/schema/queries/PersonFilter.types.ts";
+import {PersonQueryFilters} from "@/pages/persons/schema/queries/PersonQueryOption.types.ts";
 import {RoleTypeQueryFilters} from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import {RoleTypeArray} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";

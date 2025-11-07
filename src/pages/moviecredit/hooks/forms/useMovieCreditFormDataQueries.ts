@@ -6,8 +6,8 @@ import {MovieArraySchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {PersonArraySchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import {RoleTypeArraySchema} from "@/pages/roletype/schema/model/RoleType.schema.ts";
 import activeUseQueriesOnly from "@/common/utility/query/activeUseQueriesOnly.ts";
-import {MovieQueryFilters} from "@/pages/movies/schema/queries/MovieFilter.types.ts";
-import {PersonQueryFilters} from "@/pages/persons/schema/queries/PersonFilter.types.ts";
+import {MovieQueryFilters} from "@/pages/movies/schema/queries/MovieQueryOption.types.ts";
+import {PersonQueryFilters} from "@/pages/persons/schema/queries/PersonQueryOption.types.ts";
 import {RoleTypeQueryFilters} from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
 

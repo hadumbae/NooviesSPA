@@ -3,7 +3,7 @@ import {
     MovieQueryFilterSchema,
     MovieQueryOptionSchema,
     MovieQuerySortSchema
-} from "@/pages/movies/schema/queries/MovieFilter.schema.ts";
+} from "@/pages/movies/schema/queries/MovieQueryOption.schema.ts";
 
 /**
  * Type representing **movie query filter criteria**.
