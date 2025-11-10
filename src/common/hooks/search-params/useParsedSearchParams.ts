@@ -95,7 +95,7 @@ export default function useParsedSearchParams<
     const [searchParams, setSearchParams] = useSearchParams(parsedDefaultValues);
 
     // ⚡ Parsing ⚡
-    const rawData = searchParams.entries();
+    const rawData = Object.fromEntries(searchParams.entries());
     const parsedSearchParams = fetchParsedSearchParams({raw: rawData, schema});
 
     // ⚡ Update ⚡
