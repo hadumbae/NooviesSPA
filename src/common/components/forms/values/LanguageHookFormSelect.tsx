@@ -18,7 +18,7 @@ interface Props {
     // The react-hook-form control object used to manage form state.
     control: Control<any>;
     // Whether the select allows multiple selections (multi-select).
-    isMulti: boolean;
+    isMulti?: boolean;
 }
 
 /**
@@ -34,15 +34,17 @@ interface Props {
  * @returns A JSX element for language selection in a hook-form-controlled environment.
  */
 const LanguageHookFormSelect: FC<Props> = (props) => {
+    const {isMulti = false, ...rest} = props;
+
     const options = ISO6391CodeConstant.map((code): ReactSelectOption => ({
         value: code,
         label: ISO6391LanguageConstant[code]
     }));
 
     return (
-        props.isMulti
-            ? <HookFormMultiSelect options={options} {...props} />
-            : <HookFormSelect options={options} {...props} />
+        isMulti
+            ? <HookFormMultiSelect options={options} {...rest} />
+            : <HookFormSelect options={options} {...rest} />
     );
 };
 

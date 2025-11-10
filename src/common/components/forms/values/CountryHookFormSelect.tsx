@@ -26,7 +26,7 @@ interface CountryProps {
     control: Control<any>;
 
     /** Determines whether the select input allows multiple selections. */
-    isMulti: boolean;
+    isMulti?: boolean;
 
     className?: string;
 }
@@ -41,15 +41,17 @@ interface CountryProps {
  * @returns A single or multi select dropdown component.
  */
 const CountryHookFormSelect: FC<CountryProps> = (props) => {
+    const {isMulti = false, ...rest} = props;
+
     const options = ISO3166Alpha2CodeConstant.map((code): ReactSelectOption => ({
         value: code,
         label: ISO3166Alpha2CountryConstant[code],
     }));
 
     return (
-        props.isMulti
-            ? <HookFormMultiSelect options={options} {...props} />
-            : <HookFormSelect options={options} {...props} />
+        isMulti
+            ? <HookFormMultiSelect options={options} {...rest} />
+            : <HookFormSelect options={options} {...rest} />
     );
 };
 
