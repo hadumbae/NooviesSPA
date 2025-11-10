@@ -41,7 +41,7 @@ import { TheatreQueryOptionSchema } from "@/pages/theatres/schema/queries/Theatr
  * <TheatresPage />
  * ```
  */
-const TheatresPage: FC = () => {
+const TheatreIndexPage: FC = () => {
     useTitle("Theatre Index");
 
     const { page, perPage } = usePaginationSearchParams();
@@ -64,7 +64,7 @@ const TheatresPage: FC = () => {
                     const hasTheatres = (theatres || []).length > 0;
 
                     const hasTheatreSection = (
-                        <PageSection className="grid grid-cols-1 gap-4">
+                        <PageSection className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                             {theatres.map((theatre) => (
                                 <TheatreIndexCard key={theatre._id} theatre={theatre} />
                             ))}
@@ -102,4 +102,4 @@ const TheatresPage: FC = () => {
     );
 };
 
-export default TheatresPage;
+export default TheatreIndexPage;
