@@ -1,14 +1,34 @@
-import {FC} from 'react';
+/**
+ * @file ClientMovieSidebarGroup.tsx
+ * @description Sidebar group for client-facing movie navigation. Provides access
+ * to the main movie browsing section for regular users.
+ */
+
+import { FC } from 'react';
 import {
     SidebarGroup,
     SidebarGroupContent,
     SidebarGroupLabel,
-    SidebarMenu, SidebarMenuButton,
+    SidebarMenu,
+    SidebarMenuButton,
     SidebarMenuItem
 } from "@/common/components/ui/sidebar.tsx";
-import {Link} from "react-router-dom";
-import {TableOfContents} from "lucide-react";
+import { Link } from "react-router-dom";
+import { TableOfContents } from "lucide-react";
 
+/**
+ * `ClientMovieSidebarGroup` renders a sidebar section for movie-related
+ * navigation in the client interface.
+ *
+ * - Contains a single link to the **Movies** browsing page.
+ * - Designed for use in the client user’s sidebar layout.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <ClientMovieSidebarGroup />
+ * ```
+ */
 const ClientMovieSidebarGroup: FC = () => {
     return (
         <SidebarGroup>
@@ -17,7 +37,6 @@ const ClientMovieSidebarGroup: FC = () => {
                 <SidebarMenu>
 
                     {/* Movies Page */}
-
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/browse/movies">
@@ -26,6 +45,7 @@ const ClientMovieSidebarGroup: FC = () => {
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
+
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>
