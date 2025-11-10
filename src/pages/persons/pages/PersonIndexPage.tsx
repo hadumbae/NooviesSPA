@@ -12,30 +12,62 @@ import usePaginationLocationState from "@/common/hooks/router/usePaginationLocat
 import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
 import {PaginatedPersonsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import {PaginatedPersons} from "@/pages/persons/schema/person/Person.types.ts";
+import PersonQueryOptionFormContainer
+    from "@/pages/persons/components/features/admin/person-query-options/PersonQueryOptionFormContainer.tsx";
+import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import {PersonQueryOptionsSchema} from "@/pages/persons/schema/queries/PersonQueryOption.schema.ts";
+import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
+import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 
 /**
- * Page component for displaying a paginated list of persons (actors, crew, etc.).
+ * **Person Index Page**
+ *
+ * A paginated page component displaying all registered persons (e.g., actors, crew members).
+ * This page provides integrated filtering, sorting, and pagination using search parameters.
  *
  * @remarks
- * - Fetches paginated person data from the API using {@link useFetchPersons}.
- * - Validates the returned data against {@link PaginatedPersonsSchema}.
- * - Displays persons in a responsive grid using {@link PersonIndexCard}.
- * - Shows an empty state when there are no persons.
- * - Includes pagination controls with {@link EllipsisPaginationButtons}.
- * - Renders the page header with {@link PersonIndexHeader}.
+ * This component orchestrates several layers:
+ *
+ * - **Search Parameters:** Managed via {@link useParsedSearchParams} and {@link usePaginationSearchParams}.
+ * - **Data Fetching:** Handled by {@link useFetchPersons}, returning paginated person results.
+ * - **Validation:** Data is verified using {@link ValidatedQueryBoundary} with {@link PaginatedPersonsSchema}.
+ * - **Presentation:** Persons are rendered as responsive cards via {@link PersonIndexCard}.
+ * - **UI Enhancements:** Includes filters in a modal dialog, pagination buttons, and empty state messaging.
+ *
+ * @structure
+ * - Header: {@link PersonIndexHeader}
+ * - Filters: {@link PresetFilterDialog} + {@link PersonQueryOptionFormContainer}
+ * - Grid: {@link PageSection} (person cards)
+ * - Pagination: {@link EllipsisPaginationButtons}
+ * - Wrapper: {@link PageFlexWrapper}
  *
  * @example
  * ```tsx
+ * // Displays the paginated list of persons with filters and pagination
  * <PersonIndexPage />
  * ```
+ *
+ * @see {@link useFetchPersons} – Fetches paginated person data.
+ * @see {@link PersonQueryOptionFormContainer} – Provides the filtering form.
+ * @see {@link PaginatedPersonsSchema} – Schema validation for API response.
+ * @see {@link EllipsisPaginationButtons} – Handles multi-page navigation.
+ * @see {@link PresetFilterDialog} – Wraps the filter form in a modal.
  */
 const PersonIndexPage: FC = () => {
-    // Get pagination state from location or default
+    // ⚡ State and Search Params ⚡
     const {data: paginationState} = usePaginationLocationState();
+    const {searchParams} = useParsedSearchParams({schema: PersonQueryOptionsSchema});
     const {page, perPage, setPage} = usePaginationSearchParams(paginationState ?? {page: 1, perPage: 20});
 
-    // Fetch paginated persons data
-    const query = useFetchPersons({queries: {paginated: true, page, perPage}});
+    // ⚡ Query ⚡
+    const query = useFetchPersons({
+        queries: {
+            paginated: true,
+            page,
+            perPage,
+            ...searchParams,
+        }
+    });
 
     return (
         <QueryBoundary query={query}>
@@ -45,14 +77,15 @@ const PersonIndexPage: FC = () => {
                 message={"Invalid Data Returned FROM API."}
             >
                 {({totalItems, items: persons}: PaginatedPersons) => {
+                    // ⚡ Props ⚡
+
                     const hasPersons = persons.length > 0;
 
-                    // Section displaying persons in a responsive grid
+                    // ⚡ Sections ⚡
+
                     const personSection = (
                         <PageSection className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                            {persons.map((person) => (
-                                <PersonIndexCard key={person._id} person={person} />
-                            ))}
+                            {persons.map((person) => <PersonIndexCard key={person._id} person={person}/>)}
                         </PageSection>
                     );
 
@@ -63,24 +96,31 @@ const PersonIndexPage: FC = () => {
                         </PageCenter>
                     );
 
-                    // Pagination buttons if total items exceed items per page
-                    const paginationButtons = (
-                        (totalItems > perPage) &&
-                        <EllipsisPaginationButtons
-                            page={page}
-                            perPage={perPage}
-                            totalItems={totalItems}
-                            setPage={setPage}
-                        />
-                    );
-
                     return (
                         <PageFlexWrapper>
-                            <PersonIndexHeader />
+                            <PersonIndexHeader/>
+
+                            <PresetFilterDialog
+                                title="Person Filters"
+                                description="Filter and sort persons."
+                            >
+                                <ScrollArea className="max-h-[80vh]">
+                                    <ScrollBar/>
+                                    <PersonQueryOptionFormContainer presetValues={searchParams}/>
+                                </ScrollArea>
+                            </PresetFilterDialog>
 
                             {hasPersons ? personSection : emptySection}
 
-                            {paginationButtons}
+                            {
+                                (totalItems > perPage) &&
+                                <EllipsisPaginationButtons
+                                    page={page}
+                                    perPage={perPage}
+                                    totalItems={totalItems}
+                                    setPage={setPage}
+                                />
+                            }
                         </PageFlexWrapper>
                     );
                 }}
