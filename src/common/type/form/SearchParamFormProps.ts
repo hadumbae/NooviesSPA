@@ -1,44 +1,47 @@
-import {FieldValues, SubmitHandler, UseFormReturn} from "react-hook-form";
-import {FormOptions} from "@/common/type/form/HookFormProps.ts";
+import { FieldValues, SubmitHandler, UseFormReturn } from "react-hook-form";
+import { FormOptions } from "@/common/type/form/HookFormProps.ts";
 
 /**
- * Props for container components managing forms that synchronize with search parameters.
+ * Props for container components that manage forms synchronized with URL search parameters.
  *
- * @typeParam TValues - The type of form values handled by React Hook Form.
+ * @template TValues - Type of the form values handled by React Hook Form.
+ * @template TForm - Type of the complete form data model. Defaults to `TValues`.
  *
  * @remarks
- * This type extends the base {@link FormOptions} interface, adding presentation-related
- * properties suitable for wrapping form views that interact with URL query parameters.
+ * Extends {@link FormOptions}, adding presentation-level configuration
+ * (e.g., CSS class handling) for forms that modify or reflect query parameters.
  *
- * @property {string} [className] - Optional CSS class name for styling the form container.
+ * Typically used to wrap filter or query option forms in list or index pages.
  *
  * @example
  * ```tsx
  * const props: SearchParamFormContainerProps<MovieQueryOptionFormValues> = {
- *   onSubmit: handleSearch,
- *   defaultValues: { title: "", genre: "" },
+ *   presetValues: { title: "", genre: "" },
+ *   disableFields: ["country"],
  *   className: "space-y-4",
  * };
  * ```
  */
-export type SearchParamFormContainerProps<TValues extends FieldValues> =
-    FormOptions<TValues> & {
+export type SearchParamFormContainerProps<
+    TValues extends FieldValues,
+    TForm extends FieldValues = TValues,
+> = FormOptions<TValues, TForm> & {
+    /**
+     * Optional CSS class name for styling or layout customization
+     * of the form container.
+     */
     className?: string;
 };
 
 /**
- * Props for view components rendering forms that interact with URL-based search parameters.
+ * Props for view components that render forms synchronized with URL-based search parameters.
  *
- * @typeParam TValues - The type of form values managed by React Hook Form.
+ * @template TValues - Type of the form values managed by React Hook Form.
  *
  * @remarks
- * This type is designed for use with form presentation components.
- * It provides the form instance, submit handler, and field-level configuration options.
- *
- * @property {UseFormReturn<TValues>} form - The React Hook Form instance containing methods and state.
- * @property {SubmitHandler<TValues>} submitHandler - Handler function triggered on form submission.
- * @property {(keyof TValues)[]} [disableFields] - Optional list of field names to disable in the form.
- * @property {string} [className] - Optional CSS class name for customizing layout or appearance.
+ * Designed for use in form presentation components (views), this type
+ * provides the React Hook Form instance, submit handler, and optional
+ * field-level configuration options.
  *
  * @example
  * ```tsx
@@ -51,8 +54,39 @@ export type SearchParamFormContainerProps<TValues extends FieldValues> =
  * ```
  */
 export type SearchParamFormViewProps<TValues extends FieldValues> = {
+    /**
+     * The React Hook Form instance containing state, validation,
+     * and field registration methods.
+     *
+     * @see {@link UseFormReturn}
+     */
     form: UseFormReturn<TValues>;
+
+    /**
+     * Handler function executed when the form is submitted.
+     *
+     * Typically wrapped with `form.handleSubmit` from React Hook Form.
+     *
+     * @see {@link SubmitHandler}
+     */
     submitHandler: SubmitHandler<TValues>;
+
+    /**
+     * Array of field keys to disable in the UI.
+     *
+     * Useful for read-only states or when specific filters
+     * should be locked to preserve URL query consistency.
+     *
+     * @example
+     * ```tsx
+     * disableFields: ["country", "year"]
+     * ```
+     */
     disableFields?: (keyof TValues)[];
+
+    /**
+     * Optional CSS class name for styling or layout customization
+     * of the form view.
+     */
     className?: string;
 };
