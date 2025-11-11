@@ -1,6 +1,5 @@
 import BaseLayout from "@/common/layout/BaseLayout.tsx";
 import PersonIndexPage from "@/pages/persons/pages/PersonIndexPage.tsx";
-import PersonCreatePage from "@/pages/persons/pages/PersonCreatePage.tsx";
 import PersonDetailsPage from "@/pages/persons/pages/PersonDetailsPage.tsx";
 import PersonImagePage from "@/pages/persons/pages/PersonImagePage.tsx";
 
@@ -34,12 +33,6 @@ export default [
                 /** Route for listing all persons. */
                 path: "/admin/persons",
                 element: <PersonIndexPage />,
-                errorElement: <ComponentErrorHandler />
-            },
-            {
-                /** Route for creating a new person. */
-                path: "/admin/persons/create",
-                element: <PersonCreatePage />,
                 errorElement: <ComponentErrorHandler />
             },
             {
