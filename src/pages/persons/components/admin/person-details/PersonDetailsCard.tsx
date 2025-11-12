@@ -1,6 +1,5 @@
 import {FC} from 'react';
 import {PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
-import {format} from "date-fns";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
@@ -8,13 +7,45 @@ import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alph
 import TextQuote from "@/common/components/text/TextQuote.tsx";
 
 type DetailCardProps = {
+    /**
+     * The person object containing all details to display.
+     *
+     * @remarks
+     * Should conform to the {@link PersonDetails} type.
+     */
     person: PersonDetails;
 }
 
+/**
+ * Card component for displaying detailed information about a person.
+ *
+ * @remarks
+ * - Displays personal details such as name, date of birth, nationality, and biography.
+ * - Formats date of birth as `dd MMM, yyyy`.
+ * - Converts ISO 3166-1 alpha-2 nationality codes into full country names using
+ *   {@link ISO3166Alpha2CountryConstant}.
+ * - Displays credits overview including number of credited roles and movies.
+ * - Uses {@link Card} and {@link CardContent} for consistent UI styling.
+ * - Uses {@link DetailsCardSpan} for label/text display and {@link TextQuote} for biography.
+ *
+ * @example
+ * ```tsx
+ * <PersonDetailsCard person={person} />
+ * ```
+ */
 const PersonDetailsCard: FC<DetailCardProps> = ({person}) => {
-    const {name, dob, nationality, biography, creditCount, movieCount} = person;
+    // ⚡ Props ⚡
+    const {
+        name,
+        dob,
+        nationality,
+        biography,
+        creditCount,
+        movieCount,
+    } = person;
 
-    const formattedDOB = format(dob, "dd MMM, yyyy");
+    // ⚡ Formatting ⚡
+    const formattedDOB = dob.toFormat("dd MMM, yyyy");
     const formattedNationality = nationality in ISO3166Alpha2CountryConstant
         ? ISO3166Alpha2CountryConstant[nationality]
         : "Unknown";

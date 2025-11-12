@@ -1,6 +1,6 @@
 import BaseLayout from "@/common/layout/BaseLayout.tsx";
 import PersonIndexPage from "@/pages/persons/pages/PersonIndexPage.tsx";
-import PersonDetailsPage from "@/pages/persons/pages/PersonDetailsPage.tsx";
+import PersonDetailsPage from "@/pages/persons/pages/details/PersonDetailsPage.tsx";
 import PersonImagePage from "@/pages/persons/pages/PersonImagePage.tsx";
 
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";

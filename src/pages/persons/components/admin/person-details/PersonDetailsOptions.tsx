@@ -58,7 +58,7 @@ const PersonDetailsOptions: FC<PropsWithChildren> = (params) => {
 
     return (
         <DropdownMenu open={open} onOpenChange={setOpen}>
-            <DropdownMenuTrigger>{children ?? "Open"}</DropdownMenuTrigger>
+            <DropdownMenuTrigger asChild>{children ?? "Open"}</DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuItem onClick={editPerson}>Edit</DropdownMenuItem>
                 <DropdownMenuItem onClick={updateProfileImage}>Upload Avatar</DropdownMenuItem>

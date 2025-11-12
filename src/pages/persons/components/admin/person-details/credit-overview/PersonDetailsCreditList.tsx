@@ -7,6 +7,8 @@ import {Info} from "lucide-react";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import PersonDetailsCreditMovieDialog
     from "@/pages/persons/components/admin/person-details/credit-overview/PersonDetailsCreditMovieDialog.tsx";
+import MoviePosterImage from "@/pages/movies/components/MoviePosterImage.tsx";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 type AccordionListProps = {
     /** The full name of the person whose credits are being displayed. */
@@ -47,47 +49,57 @@ const PersonDetailsCreditList: FC<AccordionListProps> = ({personName, department
         roleTypeList.map((roleTypeGroup) => {
             const {roleName, credits} = roleTypeGroup;
 
-            return <section key={`${roleName}-${department}`}>
-                <h1>{roleName}</h1>
+            return (
+                <section key={`${roleName}-${department}`}>
+                    <SectionHeader srOnly={true}>Grouped by Role Type : {roleName}</SectionHeader>
 
-                <div>
-                    {credits.map(credit => {
-                        const {_id, movie, characterName} = credit;
-                        const {title: movieTitle, originalTitle, releaseDate} = movie;
+                    <h1 className="font-bold">{roleName}</h1>
 
-                        const roleDisplay = department === "CAST" ? characterName : roleName;
-                        const formattedReleaseDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
-                        const displayTitle = movieTitle === originalTitle
-                            ? movieTitle
-                            : `${movieTitle} (${originalTitle})`;
+                    <div>
+                        {credits.map(credit => {
+                            const {_id, movie, characterName} = credit;
+                            const {title: movieTitle, releaseDate, posterImage} = movie;
 
-                        return (
-                            <Card key={_id}>
-                                <CardContent className="py-4 px-3 flex items-center">
-                                    <div className="flex-grow">
-                                        <h1 className="text-lg font-bold">{displayTitle}</h1>
-                                        <span className="text-sm text-neutral-400">{roleDisplay}</span>
-                                    </div>
+                            const roleDisplay = department === "CAST" ? characterName : roleName;
+                            const releaseYear = releaseDate?.toFormat("yyyy") ?? "Unreleased";
 
-                                    <div className="flex space-x-2 items-center">
-                                        <span className="text-xs text-neutral-400">
-                                            {formattedReleaseDate}
-                                        </span>
+                            return (
+                                <Card key={_id}>
+                                    <CardContent className="py-4 px-3 flex items-center space-x-2">
 
-                                        <PersonDetailsCreditMovieDialog
-                                            personName={personName}
-                                            credit={credit}
-                                            movie={movie}
-                                        >
-                                            <Info className="text-blue-200 hover:text-blue-500"/>
-                                        </PersonDetailsCreditMovieDialog>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        );
-                    })}
-                </div>
-            </section>;
+                                        {/* Poster Image */}
+
+                                        <div>
+                                            <MoviePosterImage src={posterImage?.secure_url}/>
+                                        </div>
+
+                                        {/* Credit Information */}
+
+                                        <div className="flex-1 min-w-0 flex flex-col space-y-2 justify-center">
+                                            <h1 className="text-base font-bold truncate">{movieTitle}</h1>
+                                            <span className="text-sm text-neutral-400 truncate">{roleDisplay}</span>
+                                        </div>
+
+                                        {/* Movie Dialog */}
+
+                                        <div className="flex space-x-2 items-center justify-end">
+                                            <span className="text-xs text-neutral-400">{releaseYear}</span>
+
+                                            <PersonDetailsCreditMovieDialog
+                                                personName={personName}
+                                                credit={credit}
+                                                movie={movie}
+                                            >
+                                                <Info className="text-blue-200 hover:text-blue-500"/>
+                                            </PersonDetailsCreditMovieDialog>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            );
+                        })}
+                    </div>
+                </section>
+            );
         })
     );
 };

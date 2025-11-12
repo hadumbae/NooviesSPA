@@ -7,6 +7,8 @@ import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {MovieCreditDetailsExceptPerson} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import MoviePosterImage from "@/pages/movies/components/MoviePosterImage.tsx";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 type MovieDialogProps = {
     /** The trigger content to open the dialog, e.g., an icon or button. */
@@ -26,7 +28,7 @@ type MovieDialogProps = {
  * Displays a dialog showing detailed information about a person's credit in a movie.
  *
  * Features included in the dialog:
- * - Movie title, release year, and runtime
+ * - Movie title, release year, poster, and runtime
  * - Movie synopsis
  * - Person's credit display (character name for CAST, role name for CREW)
  * - Link to the full movie page
@@ -43,7 +45,7 @@ type MovieDialogProps = {
  * </PersonDetailsCreditMovieDialog>
  */
 const PersonDetailsCreditMovieDialog: FC<MovieDialogProps> = ({children, personName, movie, credit}) => {
-    const {_id, title, releaseDate, runtime, synopsis} = movie;
+    const {_id, title, originalTitle, releaseDate, runtime, synopsis, posterImage} = movie;
     const {department, characterName, roleType: {roleName}} = credit;
 
     /** Formatted release year or fallback if unreleased */
@@ -52,37 +54,53 @@ const PersonDetailsCreditMovieDialog: FC<MovieDialogProps> = ({children, personN
     /** Display text for the person's credit, depending on department */
     const creditDisplay = department === "CREW" ? roleName : characterName;
 
+    const notOriginalTitle = title !== originalTitle;
+
     return (
         <Dialog>
             <DialogTrigger>{children ?? "Open"}</DialogTrigger>
             <DialogContent className="space-y-5">
+
+                {/* Basic Movie Details */}
+
                 <section className="flex items-center space-x-2">
-                    <h1 className="sr-only">Movie Basic Details : {title}</h1>
+                    <SectionHeader srOnly={true}>Movie Basic Details : {title}</SectionHeader>
+
+                    {/* Poster */}
 
                     <div>
-                        Poster Image
+                        <MoviePosterImage src={posterImage?.secure_url}/>
                     </div>
 
-                    <div className="flex-grow">
+                    {/* Title, Runtime, Release Date */}
+
+                    <div className="flex-grow flex flex-col space-y-1">
                         <h2 className="font-bold text-lg">{title}</h2>
-                        <span className="text-xs text-neutral-400">
-                            {formattedDate} | {runtime} mins
-                        </span>
+                        {notOriginalTitle && <span className="text-sm text-neutral-400">{originalTitle}</span>}
+                        <span className="text-xs text-neutral-400">{formattedDate} | {runtime} mins</span>
                     </div>
                 </section>
 
+                {/* Movie Synopsis */}
+
                 <section>
-                    <h1 className="sr-only">Movie Synopsis</h1>
+                    <SectionHeader srOnly={true}>Movie Synopsis</SectionHeader>
+
                     <TextQuote>{synopsis}</TextQuote>
                 </section>
 
+                {/* Movie Credit */}
+
                 <section>
-                    <h1 className="sr-only">Person Credit</h1>
+                    <SectionHeader srOnly={true}>Person Credit</SectionHeader>
+
                     <h2 className="text-yellow-500 font-bold">{personName}'s Credit</h2>
                     <p>{creditDisplay}</p>
                 </section>
 
-                <section>
+                {/* Link To Movie */}
+
+                <div>
                     <LoggedLink
                         to={`/admin/movies/get/${_id}`}
                         className={cn(
@@ -92,7 +110,7 @@ const PersonDetailsCreditMovieDialog: FC<MovieDialogProps> = ({children, personN
                     >
                         <Search size={12}/> <span>Movie</span>
                     </LoggedLink>
-                </section>
+                </div>
             </DialogContent>
         </Dialog>
     );

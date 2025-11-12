@@ -2,13 +2,12 @@ import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {EllipsisIcon} from "lucide-react";
-import {format} from "date-fns";
 import {cn} from "@/common/lib/utils.ts";
-import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
 import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
 import PersonDetailsOptions
     from "@/pages/persons/components/admin/person-details/PersonDetailsOptions.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
 
 type HeaderProps = {
     /** The person whose details are displayed in this header. */
@@ -34,7 +33,7 @@ type HeaderProps = {
  */
 const PersonDetailsHeader: FC<HeaderProps> = ({person}) => {
     const {name, dob, profileImage} = person;
-    const formattedDOB = format(dob, "dd MMM, yyyy");
+    const formattedDOB = dob.toFormat("dd MMM, yyyy");
 
     return (
         <header className={cn("flex justify-between items-center")}>
@@ -48,9 +47,9 @@ const PersonDetailsHeader: FC<HeaderProps> = ({person}) => {
 
             <section className="flex justify-end items-center space-x-2">
                 <PersonDetailsOptions>
-                    <HeaderButton variant="outline">
+                    <Button variant="outline" size="icon" className="rounded-3xl">
                         <EllipsisIcon />
-                    </HeaderButton>
+                    </Button>
                 </PersonDetailsOptions>
             </section>
         </header>

@@ -4,6 +4,7 @@ import {
 } from "@/pages/moviecredit/schemas/model/MovieCreditGroup.types.ts";
 import PersonDetailsCreditList
     from "@/pages/persons/components/admin/person-details/credit-overview/PersonDetailsCreditList.tsx";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 type OverviewProps = {
     /** The full name of the person whose credits are being displayed. */
@@ -47,7 +48,7 @@ const PersonDetailsCreditOverview: FC<OverviewProps> = ({personName, creditsByRo
             {
                 castCredits.length > 0 &&
                 <section className="space-y-4">
-                    <h1 className="sr-only">{personName} : CAST Credits</h1>
+                    <SectionHeader srOnly={true}>{personName} : CAST Credits</SectionHeader>
 
                     <PersonDetailsCreditList
                         department="CAST"
@@ -60,7 +61,7 @@ const PersonDetailsCreditOverview: FC<OverviewProps> = ({personName, creditsByRo
             {
                 crewCredits.length > 0 &&
                 <section className="space-y-4">
-                    <h1 className="sr-only">{personName} : CREW Credits</h1>
+                    <SectionHeader srOnly={true}>{personName} : CREW Credits</SectionHeader>
 
                     <PersonDetailsCreditList
                         department="CREW"
