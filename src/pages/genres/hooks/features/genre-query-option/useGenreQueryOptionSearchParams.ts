@@ -10,7 +10,7 @@ import { useSearchParams } from "react-router-dom";
 import { GenreQueryOptions } from "@/pages/genres/schema/filters/GenreQueryOptions.types.ts";
 import { GenreQueryOptionSchema } from "@/pages/genres/schema/filters/GenreQueryOptions.schema.ts";
 import stringifySearchParams from "@/common/utility/features/search-params/stringifySearchParams.ts";
-import fetchParsedSearchParams from "@/common/utility/features/search-params/fetchParsedSearchParams.ts";
+import parseSearchParams from "@/common/utility/features/search-params/parseSearchParams.ts";
 import updateSearchParams from "@/common/utility/features/search-params/updateSearchParams.ts";
 
 /**
@@ -62,7 +62,7 @@ export default function useGenreQueryOptionSearchParams(
 
     // ⚡ Parsing ⚡
     const rawData = Object.fromEntries(searchParams.entries());
-    const parsedSearchParams = fetchParsedSearchParams({
+    const parsedSearchParams = parseSearchParams({
         schema: GenreQueryOptionSchema,
         raw: rawData,
     });

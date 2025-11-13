@@ -2,7 +2,7 @@ import { z, ZodObject, ZodRawShape } from "zod";
 import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
 
 /**
- * Parameters for `fetchParsedSearchParams`.
+ * Parameters for `parseSearchParams`.
  *
  * @typeParam TObject - A Zod raw shape representing the expected schema of search parameters.
  */
@@ -40,11 +40,11 @@ type ParseParams<TObject extends ZodRawShape> = {
  * });
  *
  * const rawParams = { page: "2" };
- * const parsed = fetchParsedSearchParams({ schema, raw: rawParams });
+ * const parsed = parseSearchParams({ schema, raw: rawParams });
  * // parsed -> { page: 2, pageSize: 10 }
  * ```
  */
-export default function fetchParsedSearchParams<TObject extends ZodRawShape>(
+export default function parseSearchParams<TObject extends ZodRawShape>(
     params: ParseParams<TObject>
 ): z.infer<ZodObject<TObject>> {
     const { schema, raw } = params;
@@ -62,7 +62,7 @@ export default function fetchParsedSearchParams<TObject extends ZodRawShape>(
             level: "warn",
             type: "ERROR",
             msg: "Failed to set default values for search params. Verify that schema allows for optional fields.",
-            component: fetchParsedSearchParams.name,
+            component: parseSearchParams.name,
             context: { error },
         });
     }

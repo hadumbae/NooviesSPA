@@ -1,8 +1,10 @@
 import stringifySearchParams from "@/common/utility/features/search-params/stringifySearchParams.ts";
 import {useSearchParams} from "react-router-dom";
-import fetchParsedSearchParams from "@/common/utility/features/search-params/fetchParsedSearchParams.ts";
+import parseSearchParams from "@/common/utility/features/search-params/parseSearchParams.ts";
 import updateSearchParams from "@/common/utility/features/search-params/updateSearchParams.ts";
 import {z, ZodObject, ZodRawShape} from "zod";
+import getSearchParamValues from "@/common/utility/features/search-params/getSearchParamValues.ts";
+import getTopLevelArrayKeys from "@/common/utility/features/zod/getTopLevelArrayKeys.ts";
 
 /**
  * Parameters accepted by {@link useParsedSearchParams}.
@@ -91,14 +93,18 @@ export default function useParsedSearchParams<
     const {defaultValues, schema} = params;
 
     // ⚡ State ⚡
+
     const parsedDefaultValues = stringifySearchParams(defaultValues ?? {});
     const [searchParams, setSearchParams] = useSearchParams(parsedDefaultValues);
+    const arrayKeys = getTopLevelArrayKeys(schema);
 
     // ⚡ Parsing ⚡
-    const rawData = Object.fromEntries(searchParams.entries());
-    const parsedSearchParams = fetchParsedSearchParams({raw: rawData, schema});
+
+    const rawData = getSearchParamValues({searchParams, arrayKeys});
+    const parsedSearchParams = parseSearchParams({raw: rawData, schema});
 
     // ⚡ Update ⚡
+
     const setQueryOptions = (values: TOptions) => {
         const updatedSearchParams = updateSearchParams({
             searchParams,
