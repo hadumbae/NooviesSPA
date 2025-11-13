@@ -1,6 +1,6 @@
 import {useSearchParams} from "react-router-dom";
 import {RoleTypeQueryOptions} from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
-import fetchParsedSearchParams from "@/common/utility/features/search-params/fetchParsedSearchParams.ts";
+import parseSearchParams from "@/common/utility/features/search-params/parseSearchParams.ts";
 import {RoleTypeQueryOptionsSchema} from "@/pages/roletype/schema/query-options/RoleTypeQueryOptions.schema.ts";
 import stringifySearchParams from "@/common/utility/features/search-params/stringifySearchParams.ts";
 import updateSearchParams from "@/common/utility/features/search-params/updateSearchParams.ts";
@@ -45,7 +45,7 @@ export default function useRoleTypeQueryOptionSearchParams(defaultValues: RoleTy
     const rawData = Object.fromEntries(searchParams.entries());
 
     /** Parsed and validated query options according to the schema. */
-    const parsedSearchParams = fetchParsedSearchParams({schema: RoleTypeQueryOptionsSchema, raw: rawData});
+    const parsedSearchParams = parseSearchParams({schema: RoleTypeQueryOptionsSchema, raw: rawData});
 
     /**
      * Updates the query parameters with new values,

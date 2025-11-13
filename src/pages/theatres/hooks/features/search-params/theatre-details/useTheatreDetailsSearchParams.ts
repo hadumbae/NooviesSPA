@@ -1,5 +1,5 @@
 import {useSearchParams} from "react-router-dom";
-import fetchParsedSearchParams from "@/common/utility/features/search-params/fetchParsedSearchParams.ts";
+import parseSearchParams from "@/common/utility/features/search-params/parseSearchParams.ts";
 import setSearchParamValue from "@/common/utility/features/search-params/setSearchParamValue.ts";
 import {
     TheatreDetailsSearchParamSchema
@@ -33,7 +33,7 @@ export default function useTheatreDetailsSearchParams(
 
     const params = {searchParams, setSearchParams};
     const rawData = Object.fromEntries(searchParams.entries());
-    const parsedSearchParams = fetchParsedSearchParams({schema: TheatreDetailsSearchParamSchema, raw: rawData});
+    const parsedSearchParams = parseSearchParams({schema: TheatreDetailsSearchParamSchema, raw: rawData});
 
     const setActiveTab = (value: string | number) =>
         setSearchParamValue({key: "activeTab", value, ...params});
