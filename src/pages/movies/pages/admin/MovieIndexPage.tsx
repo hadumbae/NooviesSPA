@@ -2,7 +2,6 @@ import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MovieIndexHeader from "@/pages/movies/components/headers/admin/MovieIndexHeader.tsx";
 import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
-import PageSection from "@/common/components/page/PageSection.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import MovieIndexCard from "@/pages/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
@@ -17,8 +16,10 @@ import MovieQueryOptionFormContainer
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {MovieQueryOptionSchema} from "@/pages/movies/schema/queries/MovieQueryOption.schema.ts";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 const MovieIndexPage: FC = () => {
+
     // ⚡ State ⚡
 
     const {data: paginationState} = usePaginationLocationState();
@@ -43,7 +44,9 @@ const MovieIndexPage: FC = () => {
                     const hasMovies = (movies || []).length > 0;
 
                     const movieSection = (
-                        <PageSection srTitle="List Of Movies" className="space-y-3">
+                        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                            <SectionHeader srOnly={true}>List Of Movies</SectionHeader>
+
                             {movies.map(
                                 (movie: MovieDetails) => <MovieIndexCard
                                     className="w-16"
@@ -51,12 +54,14 @@ const MovieIndexPage: FC = () => {
                                     key={movie._id}
                                 />
                             )}
-                        </PageSection>
+                        </section>
                     );
 
                     const emptySection = (
                         <PageCenter>
-                            <span className="text-neutral-400 select-none">There Are No Movies</span>
+                            <span className="text-neutral-400 select-none">
+                                There Are No Movies
+                            </span>
                         </PageCenter>
                     );
 
@@ -72,13 +77,18 @@ const MovieIndexPage: FC = () => {
                             </PresetFilterDialog>
 
 
-                            {hasMovies ? movieSection : emptySection}
+                            {
+                                hasMovies
+                                    ? movieSection
+                                    : emptySection
+                            }
+
                         </PageFlexWrapper>
                     );
                 }}
-</ValidatedQueryBoundary>
-</QueryBoundary>
-);
+            </ValidatedQueryBoundary>
+        </QueryBoundary>
+    );
 };
 
-    export default MovieIndexPage;
+export default MovieIndexPage;

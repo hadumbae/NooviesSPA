@@ -74,7 +74,14 @@ const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation, clas
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-5", className)}>
+            <form
+                onSubmit={form.handleSubmit(submitHandler)}
+                className={cn(
+                    "grid grid-cols-1 lg:grid-cols-3 gap-4",
+                    className,
+                )}
+            >
+
                 <fieldset className="space-y-3">
                     {/* Basic Details Section */}
                     <section>
@@ -235,14 +242,17 @@ const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation, clas
                 </fieldset>
 
 
-                <Button
-                    type="submit"
-                    variant="default"
-                    className="w-full bg-primary"
-                    disabled={isPending || isSuccess}
-                >
-                    Submit
-                </Button>
+                <div className="lg:col-span-3">
+                    <Button
+                        type="submit"
+                        variant="default"
+                        className="w-full bg-primary"
+                        disabled={isPending || isSuccess}
+                    >
+                        Submit
+                    </Button>
+                </div>
+
             </form>
         </Form>
     );
