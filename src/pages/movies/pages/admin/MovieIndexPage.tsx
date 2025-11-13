@@ -12,37 +12,28 @@ import {MovieDetails, PaginatedMovieDetails} from "@/pages/movies/schema/movie/M
 import {PaginatedMovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 
 import useFetchPaginatedMovies from "@/pages/movies/hooks/queries/useFetchPaginatedMovies.ts";
+import MovieQueryOptionFormContainer
+    from "@/pages/movies/components/features/admin/movie-query-option/MovieQueryOptionFormContainer.tsx";
+import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
+import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import {MovieQueryOptionSchema} from "@/pages/movies/schema/queries/MovieQueryOption.schema.ts";
 
-/**
- * `MovieIndexPage` displays a paginated list of movies
- * within the admin dashboard.
- *
- * @remarks
- * This page:
- * - Reads pagination state from either the URL query parameters or
- *   navigation state (via `usePaginationLocationState`).
- * - Fetches paginated movie data using `useFetchMovies`.
- * - Uses `QueryBoundary` to handle loading and error states,
- *   and `ValidatedQueryBoundary` to ensure the fetched data
- *   matches the `PaginatedMovieSchema`.
- * - Renders a `MovieIndexHeader` with a "Create" button
- *   that preserves pagination state when navigating to the create page.
- * - Shows a movie list (`MovieIndexCard` for each item)
- *   or an empty state message if no movies exist.
- *
- * @example
- * ```tsx
- * <MovieIndexPage />
- * ```
- *
- * @component
- * @returns {JSX.Element} The movie index page UI.
- */
 const MovieIndexPage: FC = () => {
+    // ⚡ State ⚡
+
     const {data: paginationState} = usePaginationLocationState();
     const {page, perPage} = usePaginationSearchParams(paginationState ?? {page: 1, perPage: 25});
+    const {searchParams} = useParsedSearchParams({schema: MovieQueryOptionSchema});
 
-    const query = useFetchPaginatedMovies({page, perPage, populate: true, virtuals: true});
+    // ⚡ Query ⚡
+
+    const query = useFetchPaginatedMovies({
+        page,
+        perPage,
+        populate: true,
+        virtuals: true,
+        queries: searchParams,
+    });
 
     return (
         <QueryBoundary query={query}>
@@ -72,13 +63,22 @@ const MovieIndexPage: FC = () => {
                     return (
                         <PageFlexWrapper>
                             <MovieIndexHeader/>
+
+                            <PresetFilterDialog
+                                title="Movie Filters"
+                                description="Filter and sort movies here."
+                            >
+                                <MovieQueryOptionFormContainer presetValues={searchParams}/>
+                            </PresetFilterDialog>
+
+
                             {hasMovies ? movieSection : emptySection}
                         </PageFlexWrapper>
                     );
                 }}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
-    );
+</ValidatedQueryBoundary>
+</QueryBoundary>
+);
 };
 
-export default MovieIndexPage;
+    export default MovieIndexPage;
