@@ -1,22 +1,47 @@
-import {FC} from 'react';
+import { FC } from "react";
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
-    BreadcrumbPage, BreadcrumbSeparator
+    BreadcrumbPage,
+    BreadcrumbSeparator,
 } from "@/common/components/ui/breadcrumb.tsx";
-import {Link} from "react-router-dom";
+import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 
+/**
+ * `TheatreCreateBreadcrumbs` renders a breadcrumb navigation trail
+ * for the theatre creation page in the admin panel.
+ *
+ * The breadcrumb structure is:
+ *
+ * **Admin / Theatres → Create**
+ *
+ * - The first item links back to the **Theatres Index** page (`/admin/theatres`).
+ * - The second item displays the current page, **Create**, as non-clickable text.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <TheatreCreateBreadcrumbs />
+ * ```
+ *
+ * @remarks
+ * This component is typically used at the top of the **Create Theatre** page.
+ * It uses `LoggedLink` to ensure navigation respects authentication state.
+ */
 const TheatreCreateBreadcrumbs: FC = () => {
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to="/admin/theatres">
+                        <LoggedLink
+                            to="/admin/theatres"
+                            component={TheatreCreateBreadcrumbs.name}
+                        >
                             Index
-                        </Link>
+                        </LoggedLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
