@@ -46,7 +46,7 @@ const HookFormSelect = <TSubmit extends FieldValues>(props: Props<TSubmit>) => {
                         options={options}
                         isClearable={true}
                         value={options.find(o => o.value === field.value) || {label: placeholder, value: undefined}}
-                        onChange={(val) => field.onChange(val?.value)}
+                        onChange={(val) => field.onChange(val ? val.value : null)}
                         placeholder={placeholder}
                         isDisabled={isDisabled}
                     />
