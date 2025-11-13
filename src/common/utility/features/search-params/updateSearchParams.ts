@@ -23,7 +23,12 @@ type SearchParamValue = string | number | boolean | null | undefined | object | 
 export default function updateSearchParams(
     {searchParams, updateValues}: { searchParams: URLSearchParams, updateValues: Record<string, SearchParamValue> }
 ): URLSearchParams {
+    if (Object.keys(updateValues).length === 0) {
+        return new URLSearchParams();
+    }
+
     const newSearchParams = new URLSearchParams(searchParams.toString());
+
     Object
         .entries(updateValues)
         .forEach(([key, val]) => {
