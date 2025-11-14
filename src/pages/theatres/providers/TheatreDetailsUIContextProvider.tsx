@@ -1,6 +1,5 @@
 import {FC, PropsWithChildren, useState} from 'react';
-import {GenreDetailsUIContext} from "@/pages/genres/context/GenreDetailsUIContext.ts";
-import {TheatreDetailsUIStates} from "@/pages/theatres/context/TheatreDetailsUIContext.ts";
+import {TheatreDetailsUIContext, TheatreDetailsUIStates} from "@/pages/theatres/context/TheatreDetailsUIContext.ts";
 
 /**
  * Provider component for theatre details UI state.
@@ -39,9 +38,9 @@ const TheatreDetailsUIContextProvider: FC<PropsWithChildren> = ({children}) => {
     };
 
     return (
-        <GenreDetailsUIContext.Provider value={context}>
+        <TheatreDetailsUIContext.Provider value={context}>
             {children}
-        </GenreDetailsUIContext.Provider>
+        </TheatreDetailsUIContext.Provider>
     );
 };
 

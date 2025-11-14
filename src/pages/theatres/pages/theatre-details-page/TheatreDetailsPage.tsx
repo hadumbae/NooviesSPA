@@ -9,6 +9,7 @@ import useFetchRouteParams from "@/common/hooks/router/useFetchRouteParams.ts";
 import {TheatreDetailsRouteParamSchema} from "@/pages/theatres/schema/params/TheatreDetailsRouteParamSchema.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import TheatreDetailsPageContent from "@/pages/theatres/pages/theatre-details-page/TheatreDetailsPageContent.tsx";
+import TheatreDetailsUIContextProvider from "@/pages/theatres/providers/TheatreDetailsUIContextProvider.tsx";
 
 /**
  * Page component displaying detailed information for a single theatre.
@@ -57,11 +58,13 @@ const TheatreDetailsPage: FC = () => {
     });
 
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={TheatreDetailsSchema} message={"Invalid theatre data."}>
-                {(theatre: TheatreDetails) => <TheatreDetailsPageContent theatre={theatre}/>}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+        <TheatreDetailsUIContextProvider>
+            <QueryBoundary query={query}>
+                <ValidatedQueryBoundary query={query} schema={TheatreDetailsSchema} message={"Invalid theatre data."}>
+                    {(theatre: TheatreDetails) => <TheatreDetailsPageContent theatre={theatre}/>}
+                </ValidatedQueryBoundary>
+            </QueryBoundary>
+        </TheatreDetailsUIContextProvider>
     );
 };
 

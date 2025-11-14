@@ -16,26 +16,56 @@ import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {TheatreDetailsSearchParamSchema} from "@/pages/theatres/schema/params/TheatreDetailsSearchParamSchema.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {TheatreDetailsUIContext} from "@/pages/theatres/context/TheatreDetailsUIContext.ts";
 
+/**
+ * Props for {@link TheatreDetailsPageContent}.
+ */
 type TheatreDetailsPageContentProps = {
+    /** Theatre entity containing all details required to render the page */
     theatre: TheatreDetails;
 }
 
+/**
+ * **TheatreDetailsPageContent**
+ *
+ * Main content component for the theatre details page in the admin interface.
+ *
+ * ### Features:
+ * - Displays theatre breadcrumbs, header, and main details card.
+ * - Renders tabs for "Screens" and "Showings" with paginated screen data.
+ * - Supports hidden edit and delete panels that open via context state.
+ * - Uses search parameters to track active tab and pagination state.
+ * - Integrates with {@link TheatreDetailsUIContext} for UI state control.
+ *
+ * @param props - Props including the theatre entity to render.
+ *
+ * @example
+ * ```tsx
+ * <TheatreDetailsPageContent theatre={theatre} />
+ * ```
+ */
 const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}) => {
     // ⚡ State ⚡
-
     const {_id} = theatre;
 
     // ⚡ Search Params ⚡
-
     const {searchParams, setSearchParams} = useParsedSearchParams({schema: TheatreDetailsSearchParamSchema});
     const {activeTab = "screens", screenPage = 1, screenPerPage = 10} = searchParams;
 
     const setActivePage = (tab: "screens" | "showings") => setSearchParams({...searchParams, activeTab: tab});
     const setScreenPage = (page: number) => setSearchParams({...searchParams, screenPage: page});
 
-    // ⚡ Handlers ⚡
+    // ⚡ Context ⚡
+    const {
+        isEditing,
+        setIsEditing,
+        isDeleting,
+        setIsDeleting,
+    } = useRequiredContext({context: TheatreDetailsUIContext});
 
+    // ⚡ Handlers ⚡
     const navigate = useLoggedNavigate();
 
     const navigateOnDelete = () => {
@@ -48,7 +78,6 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
     }
 
     // ⚡ Tabs ⚡
-
     const theatreTabs = (
         <Tabs className="h-full" defaultValue={activeTab}>
             <section className="flex justify-center">
@@ -75,11 +104,15 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
         </Tabs>
     );
 
-    // ⚡ Hidden Sections ⚡
-
+    // ⚡ Hidden Panels ⚡
     const hiddenEditingSection = (
         <section className="hidden">
-            <TheatreSubmitFormPanel isEditing={true} entity={theatre}>
+            <TheatreSubmitFormPanel
+                isEditing={true}
+                entity={theatre}
+                presetOpen={isEditing}
+                setPresetOpen={setIsEditing}
+            >
                 <Button variant="link" className="text-neutral-400 hover:text-black">
                     <Pencil/> Edit
                 </Button>
@@ -89,7 +122,12 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
 
     const hiddenDeleteSection = (
         <section className="hidden">
-            <TheatreDeleteWarningDialog theatreID={theatre._id} onDeleteSuccess={navigateOnDelete}>
+            <TheatreDeleteWarningDialog
+                theatreID={theatre._id}
+                onDeleteSuccess={navigateOnDelete}
+                presetOpen={isDeleting}
+                setPresetOpen={setIsDeleting}
+            >
                 <Button variant="link" className="text-neutral-400 hover:text-black">
                     <Trash/> Delete
                 </Button>
@@ -100,7 +138,7 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
     return (
         <PageFlexWrapper>
             <TheatreDetailsBreadcrumbs theatreName={theatre.name}/>
-            <TheatreDetailsHeader theatre={theatre} />
+            <TheatreDetailsHeader theatre={theatre}/>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
                 <section>
@@ -114,8 +152,8 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
                 </section>
             </div>
 
-            {hiddenEditingSection}
-            {hiddenDeleteSection}
+            {isEditing && hiddenEditingSection}
+            {isDeleting && hiddenDeleteSection}
         </PageFlexWrapper>
     );
 };

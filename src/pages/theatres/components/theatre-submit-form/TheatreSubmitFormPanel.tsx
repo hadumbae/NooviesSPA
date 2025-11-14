@@ -13,21 +13,18 @@ import {
 } from "@/common/components/ui/sheet.tsx";
 import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 
 /**
  * Props for {@link TheatreSubmitFormPanel}.
  *
- * @property children - Optional trigger element for opening the sheet (button, icon, etc.).
- * @property className - Optional CSS classes applied to the container.
- * @property onSubmitSuccess - Callback invoked after a successful theatre submission.
- * @property isEditing - Flag indicating whether the panel is for editing an existing theatre.
- * @property entity - Optional theatre entity for prefilling the form when editing.
- * @property presetValues - Optional partial values to prefill the form fields.
- * @property disableFields - Optional array of form fields to disable (`"name"`, `"location"`, `"seatCapacity"`).
- * @property successMessage - Optional custom success message for the submission.
- * @property errorMessage - Optional custom error message for the submission.
+ * Extends {@link FormContainerProps} for theatre forms and {@link PresetOpenState}
+ * for optional controlled open-state behavior.
+ *
+ * @property children - Optional trigger element used to open the slide-over panel.
+ * @property className - Optional CSS class applied to the trigger wrapper.
  */
-type FormPanelProps = FormContainerProps<Theatre, Theatre, TheatreFormValues> & {
+type FormPanelProps = FormContainerProps<Theatre, Theatre, TheatreFormValues> & PresetOpenState & {
     children?: ReactNode;
     className?: string;
 };
@@ -35,43 +32,62 @@ type FormPanelProps = FormContainerProps<Theatre, Theatre, TheatreFormValues> & 
 /**
  * **TheatreSubmitFormPanel**
  *
- * A slide-over panel (sheet) containing the {@link TheatreSubmitFormContainer} to
- * create or update a theatre.
+ * A slide-over (sheet) panel that renders a {@link TheatreSubmitFormContainer} to
+ * create or update a theatre entity.
  *
- * Features:
- * - Opens via a trigger element (`children`) or defaults to "Open".
- * - Shows a sheet title and description that changes depending on `isEditing`.
- * - Wraps the form in a scrollable area for long content.
- * - Automatically closes the sheet after successful submission and invokes `onSubmitSuccess`.
+ * ### Features
+ * - Can operate as **controlled** or **uncontrolled** depending on `presetOpen` / `setPresetOpen`.
+ * - Triggered by a custom child element (`children`), or defaults to a simple `"Open"` string.
+ * - Displays appropriate title/description depending on `isEditing`.
+ * - Wraps the form content in a scrollable container for long forms.
+ * - Automatically closes the panel after a successful submission and triggers `onSubmitSuccess`.
  *
- * @param params - Props controlling form behavior, edit mode, submission callbacks, and UI.
+ * ### Controlled vs Uncontrolled Behavior
+ * - **Controlled:** Provide both `presetOpen` and `setPresetOpen` to externally manage open state.
+ * - **Uncontrolled:** Omit both; the component manages its own internal `isOpen` state.
+ *
+ * @param params - Props that determine form behavior, edit mode, preset values, and UI interactions.
  *
  * @example
  * ```tsx
  * <TheatreSubmitFormPanel
- *   isEditing={true}
- *   entity={existingTheatre}
- *   disableFields={["seatCapacity"]}
+ *   isEditing
+ *   entity={theatre}
+ *   disableFields={["location"]}
+ *   onSubmitSuccess={(updated) => console.log(updated)}
  * >
  *   <Button>Edit Theatre</Button>
  * </TheatreSubmitFormPanel>
  * ```
  */
 const TheatreSubmitFormPanel: FC<FormPanelProps> = (params) => {
-    const [open, setOpen] = useState<boolean>(false);
-    const { children, onSubmitSuccess, ...formParams } = params;
+    // ⚡ Props ⚡
+
+    const { children, onSubmitSuccess, presetOpen, setPresetOpen, ...formParams } = params;
     const { isEditing } = formParams;
+
+    // ⚡ State: Controlled vs Uncontrolled ⚡
+
+    const isControlled = presetOpen !== undefined && setPresetOpen !== undefined;
+
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const activeOpen = isControlled ? presetOpen : isOpen;
+    const setActiveOpen = isControlled ? setPresetOpen : setIsOpen;
+
+    // ⚡ Header Text ⚡
 
     const sheetTitle = `${isEditing ? "Update" : "Create"} Theatre`;
     const sheetDescription = `${isEditing ? "Update" : "Create"} theatres by submitting data.`;
 
+    // ⚡ Success Handler ⚡
+
     const closeOnSuccess = (theatre: Theatre) => {
-        setOpen(false);
+        setIsOpen(false);
         onSubmitSuccess?.(theatre);
     }
 
     return (
-        <Sheet open={open} onOpenChange={setOpen}>
+        <Sheet open={activeOpen} onOpenChange={setActiveOpen}>
             <SheetTrigger asChild>{children ? children : "Open"}</SheetTrigger>
             <SheetContent className="flex flex-col">
                 <SheetHeader>

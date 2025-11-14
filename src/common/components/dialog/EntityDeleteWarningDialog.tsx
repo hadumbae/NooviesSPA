@@ -1,4 +1,4 @@
-import {FC, ReactNode, useState} from 'react';
+import {FC, ReactNode} from 'react';
 import {
     AlertDialog, AlertDialogAction, AlertDialogCancel,
     AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
@@ -6,6 +6,7 @@ import {
     AlertDialogTrigger
 } from "@/common/components/ui/alert-dialog.tsx";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
+import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
 
 /**
  * Props for the `EntityDeleteWarningDialog` component.
@@ -44,9 +45,7 @@ const EntityDeleteWarningDialog: FC<DialogProps> = (props) => {
     const {children, title, description, deleteResource, presetOpen, setPresetOpen} = props;
 
     // Determine controlled vs internal state
-    const isControlled = presetOpen !== undefined && setPresetOpen !== undefined;
-    const internalOpenState = useState<boolean>(false);
-    const [activeOpen, setActiveOpen] = isControlled ? [presetOpen, setPresetOpen] : internalOpenState;
+    const {activeOpen, setActiveOpen} = usePresetActiveOpen({presetOpen, setPresetOpen});
 
     // Default text if not provided
     const dialogTitle = title ?? "Proceed to delete resource?";

@@ -2,6 +2,9 @@ import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import TheatreDetailsOptions from "@/pages/theatres/components/features/admin/TheatreDetailsOptions.tsx";
+import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {Ellipsis} from "lucide-react";
 
 /**
  * Props for {@link TheatreDetailsHeader}.
@@ -36,6 +39,11 @@ const TheatreDetailsHeader: FC<HeaderProps> = ({theatre}) => {
             </section>
 
             {/* Options Component To Add Later */}
+            <TheatreDetailsOptions>
+                <IconButton>
+                    <Ellipsis />
+                </IconButton>
+            </TheatreDetailsOptions>
         </header>
     );
 };
