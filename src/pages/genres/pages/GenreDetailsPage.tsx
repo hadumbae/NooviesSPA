@@ -21,7 +21,7 @@ import MovieIndexCard from "@/pages/movies/components/admin/movie-index-list/Mov
 import GenreDetailsUIContextProvider
     from "@/pages/genres/components/admin/genre-details/GenreDetailsUIContextProvider.tsx";
 import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
-import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
+import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {GenreDetailsUIContext} from "@/pages/genres/context/GenreDetailsUIContext.ts";
 import GenreSubmitFormPanel from "@/pages/genres/components/form/GenreSubmitFormPanel.tsx";
@@ -156,7 +156,7 @@ const GenreDetailsPage: FC = (): ReactElement => {
                                 {movies.length > 0 ? hasMovieSection : noMovieSection}
 
                                 {totalItems > perPage && (
-                                    <EllipsisPaginationButtons
+                                    <PaginationRangeButtons
                                         page={page}
                                         perPage={perPage}
                                         totalItems={totalItems}

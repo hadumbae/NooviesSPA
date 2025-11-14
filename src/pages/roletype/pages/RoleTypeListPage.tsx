@@ -8,7 +8,7 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {PaginatedRoleTypes} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import RoleTypeListHeader from "@/pages/roletype/components/role-type-list-page/RoleTypeListHeader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
-import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
+import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import RoleTypeListSheet from "@/pages/roletype/components/role-type-list-page/RoleTypeListSheet.tsx";
 import RoleTypeCollapsibleFilters from "@/pages/roletype/components/filters/RoleTypeCollapsibleFilters.tsx";
 import useRoleTypeQueryOptionSearchParams
@@ -38,7 +38,7 @@ const RoleTypeListPage: FC = () => {
 
                             {
                                 totalItems > perPage &&
-                                <EllipsisPaginationButtons
+                                <PaginationRangeButtons
                                     page={page}
                                     perPage={perPage}
                                     totalItems={totalItems}

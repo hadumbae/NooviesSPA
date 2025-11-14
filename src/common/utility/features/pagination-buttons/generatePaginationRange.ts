@@ -10,7 +10,7 @@ type PaginationRange = (number | "...")[];
  */
 type PaginationRangeParams = {
     /** The currently active page (1-indexed). */
-    currentPage: number;
+    activePage: number;
     /** Total number of pages available. */
     totalPages: number;
     /** Number of sibling pages to display on each side of the current page. Defaults to 1. */
@@ -35,25 +35,33 @@ type PaginationRangeParams = {
  * ```
  */
 export default function generatePaginationRange(params: PaginationRangeParams): PaginationRange {
-    const {currentPage, totalPages, siblingCount = 1} = params;
+    const {activePage, totalPages, siblingCount = 1} = params;
 
-    // Total number of pages to show including siblings, first/last, and ellipses
+    // ⚡ Total Number Of Buttons To Show ⚡
+
     const pagesToShow = (siblingCount * 2) + 5;
 
-    // If total pages fit within the range, show all pages directly
+    // ⚡ Show All Pages If Within Range ⚡
+
     if (pagesToShow >= totalPages) {
         return Array.from({length: totalPages}, (_, i) => i + 1);
     }
 
-    // Determine the leftmost and rightmost siblings around the current page
-    const leftSibling = Math.max(currentPage - siblingCount, 1);
-    const rightSibling = Math.min(currentPage + siblingCount, totalPages);
+    // ⚡ Determine The Siblings Around The Active Page ⚡
 
-    // Determine whether to show ellipses
+    const leftSibling = Math.max(activePage - siblingCount, 1);
+    const rightSibling = Math.min(activePage + siblingCount, totalPages);
+
+    // ⚡ Determine Ellipses Visibility ⚡
+
     const showLeftEllipsis = leftSibling > 3;
     const showRightEllipsis = rightSibling < totalPages - 2;
 
+    // ⚡ Build Range ⚡
+
     const paginationRange: PaginationRange = [];
+
+    // ⚡ Active On The Left ⚡
 
     if (!showLeftEllipsis && showRightEllipsis) {
         const visibleLeftPages = 2 + 2 * siblingCount;
@@ -63,6 +71,8 @@ export default function generatePaginationRange(params: PaginationRangeParams): 
         paginationRange.push(totalPages);
     }
 
+    // ⚡ Active On The Right ⚡
+
     else if (showLeftEllipsis && !showRightEllipsis) {
         paginationRange.push(1);
         paginationRange.push("...");
@@ -70,6 +80,8 @@ export default function generatePaginationRange(params: PaginationRangeParams): 
         const visibleRightPages = 2 + 2 * siblingCount;
         for (let i = totalPages - visibleRightPages + 1; i <= totalPages; i++) paginationRange.push(i);
     }
+
+    // ⚡ Active In The Centre ⚡
 
     else if (showLeftEllipsis && showRightEllipsis) {
         paginationRange.push(1);

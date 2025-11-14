@@ -9,7 +9,7 @@ import PersonIndexCard from "@/pages/persons/components/PersonIndexCard.tsx";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
-import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
+import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {PaginatedPersonsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import {PaginatedPersons} from "@/pages/persons/schema/person/Person.types.ts";
 import PersonQueryOptionFormContainer
@@ -38,7 +38,7 @@ import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
  * - Header: {@link PersonIndexHeader}
  * - Filters: {@link PresetFilterDialog} + {@link PersonQueryOptionFormContainer}
  * - Grid: {@link PageSection} (person cards)
- * - Pagination: {@link EllipsisPaginationButtons}
+ * - Pagination: {@link PaginationRangeButtons}
  * - Wrapper: {@link PageFlexWrapper}
  *
  * @example
@@ -50,7 +50,7 @@ import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
  * @see {@link useFetchPersons} – Fetches paginated person data.
  * @see {@link PersonQueryOptionFormContainer} – Provides the filtering form.
  * @see {@link PaginatedPersonsSchema} – Schema validation for API response.
- * @see {@link EllipsisPaginationButtons} – Handles multi-page navigation.
+ * @see {@link PaginationRangeButtons} – Handles multi-page navigation.
  * @see {@link PresetFilterDialog} – Wraps the filter form in a modal.
  */
 const PersonIndexPage: FC = () => {
@@ -114,7 +114,7 @@ const PersonIndexPage: FC = () => {
 
                             {
                                 (totalItems > perPage) &&
-                                <EllipsisPaginationButtons
+                                <PaginationRangeButtons
                                     page={page}
                                     perPage={perPage}
                                     totalItems={totalItems}

@@ -13,7 +13,7 @@ import {GenreDetails, PaginatedGenreDetails} from "@/pages/genres/schema/genre/G
 import GenreIndexCard from "@/pages/genres/components/cards/GenreIndexCard.tsx";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
-import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
+import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import GenreQueryOptionCollapsible
     from "@/pages/genres/components/admin/genre-query-options/GenreQueryOptionCollapsible.tsx";
@@ -107,7 +107,7 @@ const GenreIndexPage: FC = () => {
                     // Pagination Buttons
                     const paginationButtons = (
                         (totalItems > perPage) && (
-                            <EllipsisPaginationButtons
+                            <PaginationRangeButtons
                                 page={page}
                                 perPage={perPage}
                                 totalItems={totalItems}
