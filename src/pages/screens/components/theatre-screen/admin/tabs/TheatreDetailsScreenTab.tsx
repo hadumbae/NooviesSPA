@@ -4,7 +4,7 @@ import useFetchScreens from "@/pages/screens/hooks/screens/fetch-screens/useFetc
 import {PaginatedScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 import {isArray} from "lodash";
 import {cn} from "@/common/lib/utils.ts";
-import EllipsisPaginationButtons from "@/common/components/pagination/EllipsisPaginationButtons.tsx";
+import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import TheatreScreenDetailsDrawer
     from "@/pages/screens/components/theatre-screens/admin/lists/TheatreScreenDetailsDrawer.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
@@ -18,7 +18,7 @@ import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.
 import {ScreenQueryOptions} from "@/pages/screens/schema/queries/ScreenQueryOptions.types.ts";
 
 /**
- * Props for the `TheatreScreensOverviewTab` component.
+ * Props for the `TheatreDetailsScreenTab` component.
  */
 export type OverviewTabProps = {
     /** The ID of the theatre whose screens are being displayed */
@@ -31,7 +31,7 @@ export type OverviewTabProps = {
     perPage: number;
 
     /** Callback to update the current page number */
-    setPage: (val: string | number) => void;
+    setPage: (val: number) => void;
 
     /** Optional query filters and sorts to apply when fetching screens */
     queries?: ScreenQueryOptions;
@@ -72,7 +72,7 @@ const panelInfo = {
  * />
  * ```
  */
-const TheatreScreensOverviewTab: FC<OverviewTabProps> = (props) => {
+const TheatreDetailsScreenTab: FC<OverviewTabProps> = (props) => {
     const {theatreID, page, perPage, setPage, className, queries} = props;
 
     const screenQuery = useFetchScreens({
@@ -101,7 +101,11 @@ const TheatreScreensOverviewTab: FC<OverviewTabProps> = (props) => {
                     const disableFields: (keyof ScreenFormValues)[] = ["theatre"];
 
                     const formPanel = (
-                        <ScreenSubmitFormPanel presetValues={presetValues} disableFields={disableFields} {...panelInfo}>
+                        <ScreenSubmitFormPanel
+                            presetValues={presetValues}
+                            disableFields={disableFields}
+                            {...panelInfo}
+                        >
                             <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
                                 <Plus/> Add Screens
                             </Button>
@@ -139,7 +143,7 @@ const TheatreScreensOverviewTab: FC<OverviewTabProps> = (props) => {
 
                             {
                                 totalItems > perPage &&
-                                <EllipsisPaginationButtons
+                                <PaginationRangeButtons
                                     page={page}
                                     perPage={perPage}
                                     setPage={setPage}
@@ -154,4 +158,4 @@ const TheatreScreensOverviewTab: FC<OverviewTabProps> = (props) => {
     );
 };
 
-export default TheatreScreensOverviewTab;
+export default TheatreDetailsScreenTab;
