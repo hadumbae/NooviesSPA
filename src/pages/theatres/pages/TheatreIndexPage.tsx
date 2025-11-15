@@ -1,52 +1,69 @@
 /**
  * @file TheatresPage.tsx
- * @description Client/admin index page for displaying theatres.
- * Handles fetching, filtering, sorting, and pagination of theatre data.
- * Renders theatre cards or a fallback message when no theatres exist.
+ * @description Client/admin index page for managing and browsing theatres.
+ * Integrates filtering, sorting, pagination, and validated theatre queries.
  */
 
-import { FC } from 'react';
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import {FC} from 'react';
 import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
-import TheatreIndexHeader from "@/pages/theatres/components/headers/TheatreIndexHeader.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
-import PageSection from "@/common/components/page/PageSection.tsx";
-import PageCenter from "@/common/components/page/PageCenter.tsx";
 import useFetchTheatres from "@/pages/theatres/hooks/query/useFetchTheatres.ts";
-import TheatreIndexCard from "@/pages/theatres/components/index-page/TheatreIndexCard.tsx";
-import { PaginatedTheatreDetailsSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
+import {PaginatedTheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import { PaginatedTheatreDetails } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
-import TheatreQueryOptionFormContainer from "@/pages/theatres/components/features/admin/theatre-query-option/TheatreQueryOptionFormContainer.tsx";
-import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
-import { ScrollArea, ScrollBar } from "@/common/components/ui/scroll-area.tsx";
+import {PaginatedTheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
-import { TheatreQueryOptionSchema } from "@/pages/theatres/schema/queries/TheatreQueryOption.schema.ts";
+import {TheatreQueryOptionSchema} from "@/pages/theatres/schema/queries/TheatreQueryOption.schema.ts";
+import TheatreIndexPageContent from "@/pages/theatres/pages/theatre-index-page/TheatreIndexPageContent.tsx";
 
 /**
- * `TheatresPage` renders the theatre index page with filters, sorting, pagination,
- * and theatre cards.
+ * Top–level page component for the Theatre Index.
  *
- * - Sets the page title to `"Theatre Index"`.
- * - Uses URL search parameters to drive filters and pagination.
- * - Fetches theatres using `useFetchTheatres`.
- * - Renders a `QueryBoundary` and `ValidatedQueryBoundary` for safe query handling.
- * - Displays either theatre cards in a grid or a fallback message if no theatres exist.
- * - Includes a `PresetFilterDialog` with `TheatreQueryOptionFormContainer` for filtering and sorting.
+ * This component provides:
+ *
+ * **Page Setup**
+ * - Sets the document title to `"Theatre Index"`.
+ *
+ * **Search Parameter Handling**
+ * - Reads pagination values (`page`, `perPage`) from URL search params.
+ * - Parses and validates theatre query parameters (filters/sorting)
+ *   via {@link TheatreQueryOptionSchema}.
+ *
+ * **Data Fetching**
+ * - Fetches paginated theatre results using {@link useFetchTheatres},
+ *   including population and virtual fields.
+ *
+ * **Query Safety**
+ * - Wraps rendering in:
+ *   - {@link QueryBoundary} for general loading/error handling.
+ *   - {@link ValidatedQueryBoundary} to ensure API data
+ *     conforms to {@link PaginatedTheatreDetailsSchema}.
+ *
+ * **Rendering**
+ * - Passes validated theatre items and total count to
+ *   {@link TheatreIndexPageContent}, which renders:
+ *   - Theatre cards
+ *   - Empty-state fallback
+ *   - Page-level filters and actions
  *
  * @component
+ *
  * @example
  * ```tsx
- * <TheatresPage />
+ * // Renders the complete admin theatre index page
+ * <TheatreIndexPage />
  * ```
  */
 const TheatreIndexPage: FC = () => {
     useTitle("Theatre Index");
 
-    const { page, perPage } = usePaginationSearchParams();
-    const { searchParams } = useParsedSearchParams({ schema: TheatreQueryOptionSchema });
+    // Pagination
+    const {page, perPage} = usePaginationSearchParams();
 
+    // Filter/sort query params
+    const {searchParams} = useParsedSearchParams({schema: TheatreQueryOptionSchema});
+
+    // Theatre query
     const query = useFetchTheatres({
         virtuals: true,
         populate: true,
@@ -59,44 +76,9 @@ const TheatreIndexPage: FC = () => {
     return (
         <QueryBoundary query={query}>
             <ValidatedQueryBoundary query={query} schema={PaginatedTheatreDetailsSchema}>
-                {(paginatedTheatres: PaginatedTheatreDetails) => {
-                    const { items: theatres } = paginatedTheatres;
-                    const hasTheatres = (theatres || []).length > 0;
-
-                    const hasTheatreSection = (
-                        <PageSection className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                            {theatres.map((theatre) => (
-                                <TheatreIndexCard key={theatre._id} theatre={theatre} />
-                            ))}
-                        </PageSection>
-                    );
-
-                    const hasNoTheatreSection = (
-                        <PageCenter>
-                            <span className="text-neutral-400 select-none">
-                                There Are No Theatres
-                            </span>
-                        </PageCenter>
-                    );
-
-                    return (
-                        <PageFlexWrapper>
-                            <TheatreIndexHeader />
-
-                            <PresetFilterDialog
-                                title="Theatre Filters"
-                                description="Filter and sort theatres by attributes."
-                            >
-                                <ScrollArea className="max-h-[80vh]">
-                                    <ScrollBar />
-                                    <TheatreQueryOptionFormContainer presetValues={searchParams} />
-                                </ScrollArea>
-                            </PresetFilterDialog>
-
-                            {hasTheatres ? hasTheatreSection : hasNoTheatreSection}
-                        </PageFlexWrapper>
-                    );
-                }}
+                {({items, totalItems}: PaginatedTheatreDetails) => (
+                    <TheatreIndexPageContent theatres={items} totalItems={totalItems} />
+                )}
             </ValidatedQueryBoundary>
         </QueryBoundary>
     );

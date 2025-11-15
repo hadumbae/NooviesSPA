@@ -9,66 +9,105 @@ import TheatreSubmitFormLocationInputs
     from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormLocationInputs.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
+import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
+import {TheatreFormValuesSchema} from "@/pages/theatres/schema/forms/TheatreForm.schema.ts";
 
 /**
  * Props for {@link TheatreSubmitFormView}.
  *
- * @property form - `react-hook-form` object managing the theatre form state.
- * @property submitHandler - Function called when the form is submitted.
- * @property mutation - Mutation object from `@tanstack/react-query` handling submission state.
- * @property disableFields - Optional array of form fields to disable (`"name"`, `"location"`, `"seatCapacity"`).
- * @property className - Optional CSS classes applied to the main field container.
+ * Extends a generic {@link FormViewProps} object used by all form
+ * view components across the application.
+ *
+ * @property isPanel - If `true`, the layout collapses into a single-column panel-style layout.
+ * @property className - Optional CSS classes applied to the root `<form>` container.
+ *
+ * Inherited from {@link FormViewProps}:
+ * - **form** – Fully initialized `react-hook-form` instance.
+ * - **submitHandler** – Handler invoked when the form is submitted.
+ * - **mutation** – React Query mutation object containing `isPending`, `isSuccess`, etc.
+ * - **disableFields** – Fields that should not render or be interactive.
  */
 type TheatreSubmitFormViewProps = FormViewProps<Theatre, TheatreForm, TheatreFormValues> & {
+    isPanel?: boolean;
     className?: string;
 };
 
 /**
  * **TheatreSubmitFormView**
  *
- * Presentational form component for creating or editing a theatre.
+ * Pure presentational component that renders the theatre form UI.
  *
- * Features:
- * - Integrates with `react-hook-form` for form state and validation.
- * - Uses `HookFormInput` for individual input fields.
- * - Dynamically disables fields based on `disableFields`.
- * - Handles theatre location input via `TheatreSubmitFormLocationInputs`.
- * - Submit button is disabled when mutation is pending or has succeeded.
+ * It does not manage logic, state, or mutations itself—those responsibilities
+ * belong to the container (`TheatreSubmitFormContainer`).
+ * This component focuses solely on rendering fields, grouping them logically,
+ * and providing a consistent layout.
  *
- * @param params - Props including `form`, `submitHandler`, `mutation`, `disableFields`, and `className`.
+ * ---
+ *
+ * ### Features
+ *
+ * - Renders theatre fields including:
+ *   - **Name**
+ *   - **Seat Capacity**
+ *   - **Location** (via {@link TheatreSubmitFormLocationInputs})
+ *
+ * - Automatically disables fields listed in `disableFields`.
+ *
+ * - Uses the shared `<Form />` wrapper to connect to `react-hook-form`.
+ *
+ * - Submission is routed through the provided `submitHandler`.
+ *
+ * - Submit button auto-disables when:
+ *   - Mutation is pending
+ *   - Mutation has succeeded (to prevent resubmission)
+ *
+ * - Supports a panel mode via `isPanel`, adjusting layout appropriately.
+ *
+ * ---
+ *
+ * @param params - Props including form state, handlers, mutation, disabled fields, and visual layout options.
  *
  * @example
  * ```tsx
  * import useTheatreSubmitForm from "@/pages/theatres/hooks/forms/useTheatreSubmitForm.ts";
  * import useTheatreSubmitMutation from "@/pages/theatres/hooks/features/submit-form/useTheatreSubmitMutation.ts";
  *
- * const form = useTheatreSubmitForm({ presetValues: { name: "Grand Theatre" } });
- * const mutation = useTheatreSubmitMutation({ form, isEditing: false });
+ * const form = useTheatreSubmitForm({ presetValues: { name: "City Theatre" } });
+ * const mutation = useTheatreSubmitMutation({ isEditing: false, form });
  *
  * <TheatreSubmitFormView
  *   form={form}
- *   submitHandler={form.handleSubmit(values => mutation.mutate(values))}
+ *   submitHandler={values => mutation.mutate(values)}
  *   mutation={mutation}
  *   disableFields={["seatCapacity"]}
- *   className="max-w-lg"
+ *   className="p-4"
  * />
  * ```
+ *
+ * @component
  */
 const TheatreSubmitFormView: FC<TheatreSubmitFormViewProps> = (params) => {
-    const {form, submitHandler, mutation, disableFields, className} = params;
-    const {isPending, isSuccess} = mutation;
+    // ⚡ Props ⚡
+    const {
+        form,
+        submitHandler,
+        disableFields,
+        className,
+        mutation: {isPending, isSuccess},
+        isPanel = false
+    } = params;
 
-    const activeFields = {
-        name: !disableFields?.includes("name"),
-        location: !disableFields?.includes("location"),
-        seatCapacity: !disableFields?.includes("seatCapacity"),
-    };
+    // ⚡ Active Fields ⚡
+    const activeFields = getActiveSchemaInputFields({
+        schema: TheatreFormValuesSchema,
+        disableFields,
+    });
 
     return (
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(submitHandler)}
-                className={cn("grid grid-cols-1 lg:grid-cols-2 gap-4", className)}
+                className={cn("grid grid-cols-1 gap-4", !isPanel && "lg:grid-cols-2", className)}
             >
                 <fieldset className="space-y-4">
                     <div>
@@ -76,14 +115,18 @@ const TheatreSubmitFormView: FC<TheatreSubmitFormViewProps> = (params) => {
                         <Separator/>
                     </div>
 
-                    <div className={cn("grid grid-cols-1 gap-4")}>
+                    <div className="grid grid-cols-1 gap-4">
                         {
-                            activeFields["name"] &&
-                            <HookFormInput name="name" label="Name" control={form.control}/>
+                            activeFields.name &&
+                            <HookFormInput
+                                name="name"
+                                label="Name"
+                                control={form.control}
+                            />
                         }
 
                         {
-                            activeFields["seatCapacity"] &&
+                            activeFields.seatCapacity &&
                             <HookFormInput
                                 name="seatCapacity"
                                 label="Number Of Seats (Capacity)"
@@ -96,11 +139,11 @@ const TheatreSubmitFormView: FC<TheatreSubmitFormViewProps> = (params) => {
                 </fieldset>
 
                 {
-                    activeFields["location"] &&
+                    activeFields.location &&
                     <TheatreSubmitFormLocationInputs form={form}/>
                 }
 
-                <div className="lg:col-span-2">
+                <div className={cn(!isPanel && "lg:col-span-2")}>
                     <Button
                         type="submit"
                         variant="default"

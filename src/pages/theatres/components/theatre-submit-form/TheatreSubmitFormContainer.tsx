@@ -11,47 +11,87 @@ import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 /**
  * Props for {@link TheatreSubmitFormContainer}.
  *
- * @property isEditing - Indicates if the form is for editing an existing theatre.
- * @property entity - Theatre entity used to prefill the form when editing.
- * @property disableFields - Optional array of form fields to disable (`"name"`, `"location"`, `"seatCapacity"`).
- * @property presetValues - Optional partial values to prefill the form.
- * @property className - Optional CSS classes applied to the main form container.
- * @property onSubmitSuccess - Optional callback invoked when submission succeeds.
- * @property successMessage - Optional custom success message for toast notifications.
- * @property errorMessage - Optional custom error message for toast notifications.
+ * Extends a generic {@link FormContainerProps} used across the app for
+ * entity-based `react-hook-form` containers.
+ *
+ * @property isPanel - If `true`, renders the form inside a panel-styled container.
+ * @property className - Optional CSS class names applied to the root container.
+ *
+ * Inherited from {@link FormContainerProps}:
+ * - **isEditing** – Whether the form is editing an existing theatre.
+ * - **entity** – Theatre entity used for pre-filling values when editing.
+ * - **presetValues** – Partial form values applied before user input.
+ * - **disableFields** – Form fields that should be disabled.
+ * - **onSubmitSuccess** – Callback invoked when mutation succeeds.
+ * - **successMessage** – Custom success toast message.
+ * - **errorMessage** – Custom error toast message.
  */
 type SubmitFormProps = FormContainerProps<Theatre, Theatre, TheatreFormValues> & {
+    isPanel?: boolean;
     className?: string;
 };
 
 /**
  * **TheatreSubmitFormContainer**
  *
- * Container component for creating or editing a theatre.
+ * High-level container responsible for:
  *
- * Responsibilities:
- * - Initializes form state via {@link useTheatreSubmitForm}.
- * - Sets up mutation with {@link useTheatreSubmitMutation} for create/update operations.
- * - Handles submission via `onFormSubmit`.
- * - Passes form, mutation, and disabled fields to {@link TheatreSubmitFormView} for rendering.
+ * ### ✔ Initializing the form
+ * Uses {@link useTheatreSubmitForm} to generate a fully typed `react-hook-form`
+ * instance with:
+ * - Default values (new form)
+ * - Prefilled values (editing mode or preset values)
  *
- * @param params - Props including `isEditing`, `entity`, `disableFields`, `presetValues`, `className`, and mutation callbacks/options.
+ * ### ✔ Configuring mutations
+ * Uses {@link useTheatreSubmitMutation} to build the mutation for:
+ * - Creating a new theatre
+ * - Updating an existing theatre
+ *
+ * The mutation behavior is automatically determined by the `isEditing` flag.
+ *
+ * ### ✔ Handling form submission
+ * The `onFormSubmit` handler forwards validated form values to the mutation.
+ *
+ * ### ✔ Rendering the view
+ * Delegates UI responsibilities to {@link TheatreSubmitFormView}, passing:
+ * - Form instance
+ * - Mutation state
+ * - Disabled fields
+ * - Visual layout mode (`isPanel`)
+ *
+ * ---
+ *
+ * @param props - Combined props from {@link SubmitFormProps} and mutation options.
  *
  * @example
  * ```tsx
  * <TheatreSubmitFormContainer
  *   isEditing={false}
  *   presetValues={{ name: "Grand Theatre" }}
- *   onSubmitSuccess={(theatre) => console.log("Created Theatre:", theatre)}
+ *   onSubmitSuccess={(t) => console.log("Created theatre:", t)}
  *   disableFields={["seatCapacity"]}
- *   className="max-w-lg"
+ *   className="max-w-xl"
  * />
  * ```
+ *
+ * @component
  */
-const TheatreSubmitFormContainer: FC<SubmitFormProps> = (params) => {
-    const { isEditing, entity, disableFields, presetValues, className, ...mutationOptions } = params;
+const TheatreSubmitFormContainer: FC<SubmitFormProps> = (props) => {
+    const {
+        isEditing,
+        entity,
+        disableFields,
+        presetValues,
+        className,
+        isPanel = false,
+        ...mutationOptions
+    } = props;
+
+    // ⚡ Form ⚡
 
     const form = useTheatreSubmitForm({ theatre: entity, presetValues });
+
+    // ⚡ Mutation ⚡
 
     const mutationParams: TheatreSubmitMutationParams = isEditing
         ? { isEditing: true, _id: entity._id, form, ...mutationOptions }
@@ -59,13 +99,13 @@ const TheatreSubmitFormContainer: FC<SubmitFormProps> = (params) => {
 
     const mutation = useTheatreSubmitMutation(mutationParams);
 
-    const onFormSubmit = (values: TheatreFormValues) => {
-        console.log("Theatre Submit Values : ", values);
-        mutation.mutate(values as TheatreForm);
-    };
+    // ⚡ Submit Handler ⚡
+
+    const onFormSubmit = (values: TheatreFormValues) => mutation.mutate(values as TheatreForm);
 
     return (
         <TheatreSubmitFormView
+            isPanel={isPanel}
             form={form}
             submitHandler={onFormSubmit}
             mutation={mutation}

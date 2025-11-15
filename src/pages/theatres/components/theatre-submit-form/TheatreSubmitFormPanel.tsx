@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode } from 'react';
 import { Theatre } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import { TheatreFormValues } from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import TheatreSubmitFormContainer from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormContainer.tsx";
@@ -14,6 +14,7 @@ import {
 import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
+import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
 
 /**
  * Props for {@link TheatreSubmitFormPanel}.
@@ -68,11 +69,7 @@ const TheatreSubmitFormPanel: FC<FormPanelProps> = (params) => {
 
     // ⚡ State: Controlled vs Uncontrolled ⚡
 
-    const isControlled = presetOpen !== undefined && setPresetOpen !== undefined;
-
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-    const activeOpen = isControlled ? presetOpen : isOpen;
-    const setActiveOpen = isControlled ? setPresetOpen : setIsOpen;
+    const {activeOpen, setActiveOpen} = usePresetActiveOpen();
 
     // ⚡ Header Text ⚡
 
@@ -82,7 +79,7 @@ const TheatreSubmitFormPanel: FC<FormPanelProps> = (params) => {
     // ⚡ Success Handler ⚡
 
     const closeOnSuccess = (theatre: Theatre) => {
-        setIsOpen(false);
+        setActiveOpen(false);
         onSubmitSuccess?.(theatre);
     }
 
@@ -99,6 +96,7 @@ const TheatreSubmitFormPanel: FC<FormPanelProps> = (params) => {
                     <TheatreSubmitFormContainer
                         {...formParams}
                         onSubmitSuccess={closeOnSuccess}
+                        isPanel={true}
                     />
                 </ScrollArea>
             </SheetContent>
