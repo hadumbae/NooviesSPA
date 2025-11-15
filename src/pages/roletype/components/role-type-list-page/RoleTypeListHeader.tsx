@@ -4,8 +4,56 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import {Button} from "@/common/components/ui/button.tsx";
 import {Plus} from "lucide-react";
 import RoleTypeSubmitFormPanel from "@/pages/roletype/components/forms/form-panel/RoleTypeSubmitFormPanel.tsx";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
 
-const RoleTypeListHeader: FC = () => {
+/**
+ * Props for {@link RoleTypeListHeader}.
+ *
+ * This header component accepts {@link MutationOnSubmitParams} for consistency
+ * with other list headers in the application, even though no props are
+ * currently consumed directly.
+ *
+ * @remarks
+ * The mutation params are passed implicitly down to nested form panels
+ * via React context or container-level patterns, aligning with other page headers
+ * that allow new-item creation.
+ *
+ * @example
+ * ```tsx
+ * <RoleTypeListHeader
+ *   onSubmitSuccess={(roleType) => console.log("RoleType created:", roleType)}
+ *   successMessage="RoleType created successfully!"
+ * />
+ * ```
+ */
+type HeaderProps = MutationOnSubmitParams<RoleType>;
+
+/**
+ * **RoleTypeListHeader**
+ *
+ * Page header for the Role Type list page.
+ *
+ * Responsibilities:
+ * - Displays the page title and short description.
+ * - Provides a "Create" button that triggers a {@link RoleTypeSubmitFormPanel}.
+ *
+ * The form panel:
+ * - Opens as a panel-style modal.
+ * - Uses `closeOnSubmit={false}` to keep the panel open after creation (useful for multi-entry workflows).
+ *
+ * ---
+ *
+ * @component
+ *
+ * @returns JSX element representing the header section for the Role Types page.
+ *
+ * @example
+ * ```tsx
+ * <RoleTypeListHeader />
+ * ```
+ */
+const RoleTypeListHeader: FC<HeaderProps> = () => {
     return (
         <header className="flex items-center justify-between">
             <section>
@@ -15,8 +63,8 @@ const RoleTypeListHeader: FC = () => {
 
             <section>
                 <RoleTypeSubmitFormPanel closeOnSubmit={false}>
-                    <Button variant="link" className="text-neutral-400 hover:text-black">
-                        <Plus/> Create
+                    <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
+                        <Plus /> Create
                     </Button>
                 </RoleTypeSubmitFormPanel>
             </section>

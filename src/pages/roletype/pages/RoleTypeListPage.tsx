@@ -10,9 +10,10 @@ import RoleTypeListHeader from "@/pages/roletype/components/role-type-list-page/
 import PageSection from "@/common/components/page/PageSection.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import RoleTypeListSheet from "@/pages/roletype/components/role-type-list-page/RoleTypeListSheet.tsx";
-import RoleTypeCollapsibleFilters from "@/pages/roletype/components/filters/RoleTypeCollapsibleFilters.tsx";
+import RoleTypeQueryOptionFormContainer from "@/pages/roletype/components/forms/filters/RoleTypeQueryOptionFormContainer.tsx";
 import useRoleTypeQueryOptionSearchParams
     from "@/pages/roletype/hooks/params/query-option-search-params/useRoleTypeQueryOptionSearchParams.ts";
+import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 
 const RoleTypeListPage: FC = () => {
     const {searchParams: queryOptions} = useRoleTypeQueryOptionSearchParams();
@@ -30,7 +31,9 @@ const RoleTypeListPage: FC = () => {
                         <PageFlexWrapper>
                             <RoleTypeListHeader/>
 
-                            <RoleTypeCollapsibleFilters />
+                            <PresetFilterDialog title="Role Type Filters" description="Filter And Sort Role Types.">
+                                <RoleTypeQueryOptionFormContainer />
+                            </PresetFilterDialog>
 
                             <PageSection className="grid grid-cols-2 gap-2">
                                 {roleTypes.map(rt => <RoleTypeListSheet key={rt._id} roleType={rt} />)}
