@@ -1,5 +1,5 @@
 import HomePage from "../pages/HomePage.tsx";
-import BaseLayout from "@/common/layout/BaseLayout.tsx";
+import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 
 export default [
     {

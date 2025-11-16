@@ -1,4 +1,4 @@
-import BaseLayout from "@/common/layout/BaseLayout.tsx";
+import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import PersonIndexPage from "@/pages/persons/pages/PersonIndexPage.tsx";
 import PersonDetailsPage from "@/pages/persons/pages/details/PersonDetailsPage.tsx";
 import PersonImagePage from "@/pages/persons/pages/PersonImagePage.tsx";

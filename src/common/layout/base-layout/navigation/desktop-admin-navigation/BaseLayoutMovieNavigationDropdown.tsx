@@ -36,7 +36,7 @@ import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.ts
  *
  * @returns {JSX.Element} A dropdown menu labeled “Movies” with links to Movies and Showings pages.
  */
-const BaseLayoutMovieNavigation: FC = () => {
+const BaseLayoutMovieNavigationDropdown: FC = () => {
     // ⚡ URL ⚡
 
     const url = useCurrentURLPath();
@@ -65,14 +65,14 @@ const BaseLayoutMovieNavigation: FC = () => {
             <DropdownMenuContent>
                 <DropdownMenuLink
                     to="/admin/movies"
-                    component={BaseLayoutMovieNavigation.name}
+                    component={BaseLayoutMovieNavigationDropdown.name}
                 >
                     Movies
                 </DropdownMenuLink>
 
                 <DropdownMenuLink
                     to="/admin/showings"
-                    component={BaseLayoutMovieNavigation.name}
+                    component={BaseLayoutMovieNavigationDropdown.name}
                 >
                     Showings
                 </DropdownMenuLink>
@@ -81,4 +81,4 @@ const BaseLayoutMovieNavigation: FC = () => {
     );
 };
 
-export default BaseLayoutMovieNavigation;
+export default BaseLayoutMovieNavigationDropdown;

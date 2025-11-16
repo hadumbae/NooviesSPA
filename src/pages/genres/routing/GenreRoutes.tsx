@@ -1,4 +1,4 @@
-import BaseLayout from "@/common/layout/BaseLayout.tsx";
+import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import GenreIndexPage from "@/pages/genres/pages/GenreIndexPage.tsx";
 import GenreCreatePage from "@/pages/genres/pages/GenreCreatePage.tsx";
 import GenreDetailsPage from "@/pages/genres/pages/GenreDetailsPage.tsx";

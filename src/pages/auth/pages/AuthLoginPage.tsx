@@ -6,6 +6,8 @@ import AuthLoginFormContainer from "@/pages/auth/components/form/login/AuthLogin
 import {useLocation} from "react-router-dom";
 import {toast} from "react-toastify";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
 
 /**
  * Login page component.
@@ -56,10 +58,16 @@ const AuthLoginPage: FC = () => {
                 <HeaderDescription>Enter your credentials to login.</HeaderDescription>
             </header>
 
-            <section>
-                <AuthLoginFormContainer
-                    onSubmitSuccess={onSubmitSuccess}
-                />
+            <section className="flex justify-center">
+                <SectionHeader srOnly={true}>Login Form</SectionHeader>
+
+                <Card className="w-full md:w-5/6 lg:w-2/3 xl:w-1/2">
+                    <CardContent className="p-3">
+                        <AuthLoginFormContainer
+                            onSubmitSuccess={onSubmitSuccess}
+                        />
+                    </CardContent>
+                </Card>
             </section>
         </PageFlexWrapper>
     );

@@ -1,9 +1,9 @@
 import {FC} from 'react';
 import {SidebarProvider} from "@/common/components/ui/sidebar.tsx";
-import BaseSidebar from "@/common/components/layout/BaseSidebar.tsx";
-import BaseLayoutContent from "@/common/layout/base-layout/BaseLayoutContent.tsx";
-import BaseLayoutHeader from "@/common/layout/base-layout/BaseLayoutHeader.tsx";
-import BaseLayoutFooter from "@/common/layout/base-layout/BaseLayoutFooter.tsx";
+import BaseSidebar from "@/common/layout/base-layout/sidebar/BaseSidebar.tsx";
+import BaseLayoutContent from "@/common/layout/base-layout/layout/BaseLayoutContent.tsx";
+import BaseLayoutHeader from "@/common/layout/base-layout/layout/BaseLayoutHeader.tsx";
+import BaseLayoutFooter from "@/common/layout/base-layout/layout/BaseLayoutFooter.tsx";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 
 const BaseLayout: FC = () => {

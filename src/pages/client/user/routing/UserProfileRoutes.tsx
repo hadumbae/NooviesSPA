@@ -1,5 +1,5 @@
 import {RouteObject} from "react-router-dom";
-import BaseLayout from "@/common/layout/BaseLayout.tsx";
+import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
 import MyProfilePage from "@/pages/client/user/pages/MyProfilePage.tsx";
 import MyFavouritesPage from "@/pages/client/user/pages/MyFavouritesPage.tsx";

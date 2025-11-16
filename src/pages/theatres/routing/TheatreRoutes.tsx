@@ -1,4 +1,4 @@
-import BaseLayout from "@/common/layout/BaseLayout.tsx";
+import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
 import TheatreIndexPage from "@/pages/theatres/pages/TheatreIndexPage.tsx";
 import TheatreDetailsPage from "@/pages/theatres/pages/theatre-details-page/TheatreDetailsPage.tsx";

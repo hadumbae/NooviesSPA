@@ -1,4 +1,4 @@
-import BaseLayout from "@/common/layout/BaseLayout.tsx";
+import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import MovieIndexPage from "@/pages/movies/pages/admin/MovieIndexPage.tsx";
 import MovieCreatePage from "@/pages/movies/pages/admin/MovieCreatePage.tsx";
 import MovieDetailsPage from "@/pages/movies/pages/admin/movie-details-page/MovieDetailsPage.tsx";

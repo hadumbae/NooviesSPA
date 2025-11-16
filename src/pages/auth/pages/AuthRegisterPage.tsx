@@ -4,6 +4,7 @@ import AuthRegisterFormContainer from "@/pages/auth/components/form/register/Aut
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import RegisterHeader from "@/pages/auth/components/headers/RegisterHeader.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 /**
  * Page component for user registration.
@@ -43,8 +44,10 @@ const AuthRegisterPage: FC = () => {
         <PageFlexWrapper>
             <RegisterHeader />
 
-            <section>
-                <Card>
+            <section className="flex justify-center">
+                <SectionHeader srOnly={true}>Register Form</SectionHeader>
+
+                <Card className="w-full md:w-5/6 lg:w-2/3 xl:w-1/2">
                     <CardContent className="p-3">
                         <AuthRegisterFormContainer
                             onSubmitSuccess={onRegister}

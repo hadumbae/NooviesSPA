@@ -1,0 +1,56 @@
+import {FC} from 'react';
+import {Sidebar, SidebarContent, SidebarHeader} from "@/common/components/ui/sidebar.tsx";
+import ClientProfileSidebarGroup
+    from "@/common/layout/base-layout/sidebar/client-side-bar/ClientProfileSidebarGroup.tsx";
+import {Separator} from "@/common/components/ui/separator.tsx";
+import AuthSidebarGroup from "@/common/layout/base-layout/sidebar/auth-side-bar/AuthSidebarGroup.tsx";
+import ClientMovieSidebarGroup from "@/common/layout/base-layout/sidebar/client-side-bar/ClientMovieSidebarGroup.tsx";
+
+/**
+ * **ClientSidebar**
+ *
+ * Sidebar component specifically for **authenticated client users**.
+ *
+ * ### Features
+ * - Displays the application title/logo in the header (`Noovies`).
+ * - Includes structured sidebar groups for:
+ *   - **Profile** (`ClientProfileSidebarGroup`)
+ *   - **Movie management** (`ClientMovieSidebarGroup`)
+ *   - **Authentication actions** (`AuthSidebarGroup`)
+ * - Separators (`Separator`) are used to visually separate groups.
+ *
+ * ### Notes
+ * - Designed to work with the main `Sidebar` layout component.
+ * - Intended for client users only (not admin or guest).
+ *
+ * @returns {JSX.Element} A fully structured client sidebar
+ */
+const ClientSidebar: FC = () => {
+    return (
+        <Sidebar>
+            <SidebarHeader className="flex justify-center items-center">
+                <h1 className="text-3xl font-playwriteRoCursive">Noovies</h1>
+            </SidebarHeader>
+
+            <SidebarContent>
+
+                {/* Profile */}
+
+                <Separator/>
+                <ClientProfileSidebarGroup/>
+
+                {/* Movie */}
+
+                <Separator/>
+                <ClientMovieSidebarGroup/>
+
+                {/* Auth */}
+
+                <Separator/>
+                <AuthSidebarGroup/>
+            </SidebarContent>
+        </Sidebar>
+    );
+};
+
+export default ClientSidebar;

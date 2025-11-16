@@ -1,4 +1,4 @@
-import BaseLayout from "@/common/layout/BaseLayout.tsx";
+import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
 import NotFoundPage from "@/common/pages/NotFoundPage.tsx";
 import UnauthorizedPage from "@/common/pages/UnauthorizedPage.tsx";

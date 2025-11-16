@@ -1,4 +1,4 @@
-import BaseLayout from "@/common/layout/BaseLayout.tsx";
+import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ShowingIndexPage from "@/pages/showings/pages/ShowingIndexPage.tsx";
 import ShowingCreatePage from "@/pages/showings/pages/ShowingCreatePage.tsx";
 import ShowingEditPage from "@/pages/showings/pages/ShowingEditPage.tsx";

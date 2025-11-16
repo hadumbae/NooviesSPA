@@ -1,71 +1,55 @@
 import {FC} from 'react';
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import useAuthLogoutSubmitMutation from "@/pages/auth/hooks/useAuthLogoutSubmitMutation.ts";
-import {Button} from "@/common/components/ui/button.tsx";
-import NavLink from "@/common/components/navigation/NavLink.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import BaseLayoutSetupNavigation from "@/common/layout/base-layout/navigation/BaseLayoutSetupNavigation.tsx";
-import BaseLayoutMovieNavigation from "@/common/layout/base-layout/navigation/BaseLayoutMovieNavigation.tsx";
+import BaseLayoutDesktopAdminNavigation
+    from "@/common/layout/base-layout/navigation/desktop-admin-navigation/BaseLayoutDesktopAdminNavigation.tsx";
+import BaseLayoutDesktopGuestNavigation
+    from "@/common/layout/base-layout/navigation/desktop-guest-navigation/BaseLayoutDesktopGuestNavigation.tsx";
+import Cookies from "js-cookie";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
+import BaseLayoutDesktopClientNavigation
+    from "@/common/layout/base-layout/navigation/desktop-client-navigation/BaseLayoutDesktopClientNavigation.tsx";
 
 /**
- * @fileoverview
- * Renders the desktop navigation section for the application's base layout.
+ * **BaseLayoutDesktopNavigation**
  *
- * Includes links to key admin pages such as the Dashboard and Setup menu,
- * as well as a logout button. This component is designed for desktop viewports
- * and provides structured, accessible navigation for authenticated users.
+ * Determines which desktop navigation component to render
+ * based on the current authentication and authorization state.
  *
- * @component
- * @example
- * ```tsx
- * <BaseLayoutDesktopNavigation />
- * ```
+ * ### Behavior
+ * 1. Checks for a valid authentication token via cookies (`hasAuthToken`).
+ * 2. Retrieves the current user from {@link AuthContext} using `useRequiredContext`.
+ * 3. Conditionally renders:
+ *    - `BaseLayoutDesktopAdminNavigation` if the user is authenticated and an admin.
+ *    - `BaseLayoutDesktopUserNavigation` if the user is authenticated but not an admin.
+ *    - `BaseLayoutDesktopGuestNavigation` if the user is not authenticated.
  *
- * @remarks
- * - Uses {@link useLoggedNavigate} to perform navigation with logging metadata.
- * - Triggers logout via {@link useAuthLogoutSubmitMutation}, which runs the `onLogout`
- *   callback on success.
- * - Integrates {@link BaseLayoutSetupNavigation} to provide a dropdown for setup-related routes.
+ * ### Notes
+ * - This component does not handle mobile navigation.
+ * - Assumes `hasAuthToken` cookie presence is sufficient for authentication check,
+ *   but also requires a valid `user` object from context.
  *
- * @dependencies
- * - {@link SectionHeader} — visually hidden header for screen reader accessibility.
- * - {@link NavLink} — handles internal navigation links.
- * - {@link Button} — UI component for actions (logout).
- * - {@link cn} — utility for conditional class name concatenation.
- *
- * @returns {JSX.Element} The rendered desktop navigation section.
+ * @returns {JSX.Element} The appropriate desktop navigation component
  */
-
 const BaseLayoutDesktopNavigation: FC = () => {
-    const navigate = useLoggedNavigate();
+    /** Checks for authentication token in cookies */
+    const isAuthenticated = Cookies.get("hasAuthToken");
 
-    const onLogout = () => navigate({to: "/", component: BaseLayoutDesktopNavigation.name});
-    const {mutate} = useAuthLogoutSubmitMutation({onSubmitSuccess: onLogout});
+    /** Retrieves current user from AuthContext (required) */
+    const {user} = useRequiredContext({context: AuthContext});
 
+    if (isAuthenticated && user) {
+        const {isAdmin} = user;
+
+        return (
+            isAdmin
+                ? <BaseLayoutDesktopAdminNavigation/>
+                : <BaseLayoutDesktopClientNavigation/>
+        );
+    }
+
+    /** Guest navigation for unauthenticated users */
     return (
-        <section className={cn(
-            "flex items-center",
-        )}>
-            <SectionHeader srOnly={true}>Desktop Navigation</SectionHeader>
-
-            <NavLink to="/">
-                Dashboard
-            </NavLink>
-
-            <BaseLayoutSetupNavigation />
-
-            <BaseLayoutMovieNavigation />
-
-            <Button
-                variant="link"
-                size="sm"
-                className="text-neutral-400 hover:text-black"
-                onClick={() => mutate()}
-            >
-                Log Out
-            </Button>
-        </section>
+        <BaseLayoutDesktopGuestNavigation/>
     );
 };
 

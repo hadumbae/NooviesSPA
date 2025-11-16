@@ -40,7 +40,7 @@ import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.ts
  * - Requires React Router context (`react-router-dom`).
  * - Uses `useCurrentURLPath()` to determine active state.
  */
-const BaseLayoutSetupNavigation: FC = () => {
+const BaseLayoutSetupNavigationDropdown: FC = () => {
     // ⚡ URL ⚡
 
     const url = useCurrentURLPath();
@@ -71,28 +71,28 @@ const BaseLayoutSetupNavigation: FC = () => {
             <DropdownMenuContent>
                 <DropdownMenuLink
                     to="/admin/genres"
-                    component={BaseLayoutSetupNavigation.name}
+                    component={BaseLayoutSetupNavigationDropdown.name}
                 >
                     Genres
                 </DropdownMenuLink>
 
                 <DropdownMenuLink
                     to="/admin/persons"
-                    component={BaseLayoutSetupNavigation.name}
+                    component={BaseLayoutSetupNavigationDropdown.name}
                 >
                     Persons
                 </DropdownMenuLink>
 
                 <DropdownMenuLink
                     to="/admin/roletypes"
-                    component={BaseLayoutSetupNavigation.name}
+                    component={BaseLayoutSetupNavigationDropdown.name}
                 >
                     Role Types
                 </DropdownMenuLink>
 
                 <DropdownMenuLink
                     to="/admin/theatres"
-                    component={BaseLayoutSetupNavigation.name}
+                    component={BaseLayoutSetupNavigationDropdown.name}
                 >
                     Theatres
                 </DropdownMenuLink>
@@ -101,4 +101,4 @@ const BaseLayoutSetupNavigation: FC = () => {
     );
 };
 
-export default BaseLayoutSetupNavigation;
+export default BaseLayoutSetupNavigationDropdown;
