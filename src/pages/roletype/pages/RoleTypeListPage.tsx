@@ -4,20 +4,61 @@ import usePaginationSearchParams from "@/common/hooks/search-params/usePaginatio
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {PaginatedRoleTypeSchema} from "@/pages/roletype/schema/model/RoleType.schema.ts";
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {PaginatedRoleTypes} from "@/pages/roletype/schema/model/RoleType.types.ts";
-import RoleTypeListHeader from "@/pages/roletype/components/role-type-list-page/RoleTypeListHeader.tsx";
-import PageSection from "@/common/components/page/PageSection.tsx";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import RoleTypeListSheet from "@/pages/roletype/components/role-type-list-page/RoleTypeListSheet.tsx";
-import RoleTypeQueryOptionFormContainer from "@/pages/roletype/components/forms/filters/RoleTypeQueryOptionFormContainer.tsx";
 import useRoleTypeQueryOptionSearchParams
     from "@/pages/roletype/hooks/params/query-option-search-params/useRoleTypeQueryOptionSearchParams.ts";
-import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
+import RoleTypeListPageContent from "@/pages/roletype/pages/list-page/RoleTypeListPageContent.tsx";
 
+/**
+ * **RoleTypeListPage**
+ *
+ * The top-level page component for displaying a **paginated, filterable**
+ * list of role types.
+ *
+ * This component is responsible for:
+ *
+ * - Reading pagination params from the URL (`page`, `perPage`)
+ * - Reading filter + sort query options from URL search params
+ * - Fetching role type data via `useFetchRoleTypes`
+ * - Validating server response shape using `ValidatedQueryBoundary`
+ * - Rendering the final content using `RoleTypeListPageContent`
+ *
+ * ## Data Flow
+ * 1. **URL search params**
+ *    - Pagination → `usePaginationSearchParams`
+ *    - Filter/sort options → `useRoleTypeQueryOptionSearchParams`
+ *
+ * 2. **Fetching**
+ *    `useFetchRoleTypes` receives all search params and performs a paginated query.
+ *
+ * 3. **Error / Loading Handling**
+ *    `QueryBoundary` manages loading and error UI.
+ *
+ * 4. **Validation**
+ *    `ValidatedQueryBoundary` ensures the response matches
+ *    {@link PaginatedRoleTypeSchema}.
+ *
+ * 5. **Presentation**
+ *    Once validated, `RoleTypeListPageContent` renders:
+ *    - Headers
+ *    - Filters
+ *    - Grid of role type sheets
+ *    - Pagination controls
+ *
+ * ## When to use this component
+ * This component is intended to be mounted as the actual route-level page
+ * for viewing role types. It should **not** be used inside other components.
+ *
+ * @returns {JSX.Element} The fully composed role type list page
+ */
 const RoleTypeListPage: FC = () => {
+    // ⚡ Search Params ⚡
+
     const {searchParams: queryOptions} = useRoleTypeQueryOptionSearchParams();
-    const {page, perPage, setPage} = usePaginationSearchParams({page: 1, perPage: 25});
+    const {page, perPage} = usePaginationSearchParams({page: 1, perPage: 25});
+
+    // ⚡ Query ⚡
+
     const query = useFetchRoleTypes({
         queries: {paginated: true, page, perPage, ...queryOptions}
     });
@@ -25,32 +66,13 @@ const RoleTypeListPage: FC = () => {
     return (
         <QueryBoundary query={query}>
             <ValidatedQueryBoundary query={query} schema={PaginatedRoleTypeSchema}>
-                {({totalItems, items: roleTypes}: PaginatedRoleTypes) => {
-
-                    return (
-                        <PageFlexWrapper>
-                            <RoleTypeListHeader/>
-
-                            <PresetFilterDialog title="Role Type Filters" description="Filter And Sort Role Types.">
-                                <RoleTypeQueryOptionFormContainer />
-                            </PresetFilterDialog>
-
-                            <PageSection className="grid grid-cols-2 gap-2">
-                                {roleTypes.map(rt => <RoleTypeListSheet key={rt._id} roleType={rt} />)}
-                            </PageSection>
-
-                            {
-                                totalItems > perPage &&
-                                <PaginationRangeButtons
-                                    page={page}
-                                    perPage={perPage}
-                                    totalItems={totalItems}
-                                    setPage={setPage}
-                                />
-                            }
-                        </PageFlexWrapper>
-                    )
-                }}
+                {
+                    ({totalItems, items}: PaginatedRoleTypes) =>
+                        <RoleTypeListPageContent
+                            roleTypes={items}
+                            totalItems={totalItems}
+                        />
+                }
             </ValidatedQueryBoundary>
         </QueryBoundary>
     );
