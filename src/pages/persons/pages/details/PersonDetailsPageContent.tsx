@@ -96,7 +96,7 @@ const PersonDetailsPageContent: FC<PersonDetailsPageContentProps> = (props) => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Personal Details Section */}
                 <section>
-                    <SectionHeader>Personal Details</SectionHeader>
+                    <SectionHeader srOnly={true}>Personal Details</SectionHeader>
                     <PersonDetailsCard person={person}/>
                 </section>
 
