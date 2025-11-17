@@ -1,5 +1,4 @@
 import {FC} from "react";
-import useFetchMovieParams from "@/pages/movies/hooks/params/useFetchMovieParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
@@ -13,6 +12,9 @@ import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/M
 import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.types.ts";
 import MovieDetailsUIContextProvider from "@/pages/movies/components/providers/MovieDetailsUIContextProvider.tsx";
 import MovieDetailsPageContent from "@/pages/movies/pages/admin/movie-details-page/MovieDetailsPageContent.tsx";
+import useFetchRouteParams from "@/common/hooks/router/useFetchRouteParams.ts";
+import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
+import useErrorNavigateToMovieIndex from "@/pages/movies/hooks/admin/navigate-to-index/useErrorNavigateToMovieIndex.ts";
 
 /**
  * Represents detailed movie data along with its associated credits.
@@ -59,9 +61,19 @@ const MovieDetailsPage: FC = () => {
 
     // ⚡ URL Params ⚡
 
-    const movieParams = useFetchMovieParams();
-    if (!movieParams) return <PageLoader/>;
-    const {movieID} = movieParams;
+    const navigateToMovieIndex = useErrorNavigateToMovieIndex();
+
+    const routeParams = useFetchRouteParams({
+        schema: IDRouteParamSchema,
+        onErrorMessage: "Failed to fetch route params.",
+        onError: () => navigateToMovieIndex({
+            component: MovieDetailsPage.name,
+            message: "Failed to fetch route params.",
+        })
+    });
+
+    if (!routeParams) return <PageLoader/>;
+    const {_id: movieID} = routeParams;
 
     // ⚡ Queries ⚡
 

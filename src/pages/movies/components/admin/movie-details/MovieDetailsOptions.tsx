@@ -24,7 +24,6 @@ const MovieDetailsOptions: FC<OptionProps> = (props) => {
     const navigate = useLoggedNavigate();
 
     const {
-        setIsEditing,
         setIsUpdatingPoster,
         setIsDeleting,
         setIsDeletingPoster,
@@ -40,6 +39,14 @@ const MovieDetailsOptions: FC<OptionProps> = (props) => {
             to: `/admin/movies/get/${movieID}/people/${department.toLowerCase()}`,
             component: MovieDetailsOptions.name,
             message: `Navigate to movie's "${department}" credits.`,
+        });
+    }
+
+    const navigateToEdit = () => {
+        navigate({
+            to: `/admin/movies/edit/${movieID}`,
+            component: MovieDetailsOptions.name,
+            message: `Navigate to movie's editing page.`,
         });
     }
 
@@ -74,7 +81,7 @@ const MovieDetailsOptions: FC<OptionProps> = (props) => {
                 <DropdownMenuGroup>
                     <DropdownMenuLabel className="select-none">Movie</DropdownMenuLabel>
 
-                    <DropdownMenuItem onClick={() => closeOnAction(setIsEditing)}>
+                    <DropdownMenuItem onClick={navigateToEdit}>
                         Edit
                     </DropdownMenuItem>
 
