@@ -15,7 +15,7 @@ import filterNullishAttributes from "@/common/utility/collections/filterNullishA
  * @property theatreID - Required ID of the theatre to delete.
  */
 type DeleteMutationProps = OnDeleteMutationParams & PresetOpenState & {
-    children: ReactNode;
+    children?: ReactNode;
     theatreName?: string;
     theatreID: ObjectId;
 };
@@ -65,7 +65,9 @@ const TheatreDeleteWarningDialog: FC<DeleteMutationProps> = (params) => {
             title={dialogTitle}
             deleteResource={deleteTheatre}
             {...presetControl}
-        />
+        >
+            {children}
+        </EntityDeleteWarningDialog>
     );
 };
 

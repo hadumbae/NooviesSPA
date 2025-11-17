@@ -69,7 +69,7 @@ const TheatreSubmitFormPanel: FC<FormPanelProps> = (params) => {
 
     // ⚡ State: Controlled vs Uncontrolled ⚡
 
-    const {activeOpen, setActiveOpen} = usePresetActiveOpen();
+    const {activeOpen, setActiveOpen} = usePresetActiveOpen({presetOpen, setPresetOpen});
 
     // ⚡ Header Text ⚡
 
@@ -82,6 +82,8 @@ const TheatreSubmitFormPanel: FC<FormPanelProps> = (params) => {
         setActiveOpen(false);
         onSubmitSuccess?.(theatre);
     }
+
+    // ⚡ Render ⚡
 
     return (
         <Sheet open={activeOpen} onOpenChange={setActiveOpen}>

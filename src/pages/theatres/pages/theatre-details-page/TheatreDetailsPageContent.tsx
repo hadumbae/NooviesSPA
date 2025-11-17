@@ -8,8 +8,6 @@ import TheatreDetailsBreadcrumbs from "@/pages/theatres/components/breadcrumbs/a
 import TheatreDetailsHeader from "@/pages/theatres/components/headers/TheatreDetailsHeader.tsx";
 import TheatreDetailsCard from "@/pages/theatres/components/TheatreDetailsCard.tsx";
 import TheatreSubmitFormPanel from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormPanel.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
-import {Pencil, Trash} from "lucide-react";
 import TheatreDeleteWarningDialog
     from "@/pages/theatres/components/theatres/delete-theatre/TheatreDeleteWarningDialog.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
@@ -48,9 +46,11 @@ type TheatreDetailsPageContentProps = {
  */
 const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}) => {
     // ⚡ State ⚡
+
     const {_id} = theatre;
 
     // ⚡ Search Params ⚡
+
     const {searchParams, setSearchParams} = useParsedSearchParams({schema: TheatreDetailsSearchParamSchema});
     const {activeTab = "screens", screenPage = 1, screenPerPage = 10} = searchParams;
 
@@ -58,6 +58,7 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
     const setScreenPage = (page: number) => setSearchParams({...searchParams, screenPage: page});
 
     // ⚡ Context ⚡
+
     const {
         isEditing,
         setIsEditing,
@@ -66,6 +67,7 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
     } = useRequiredContext({context: TheatreDetailsUIContext});
 
     // ⚡ Handlers ⚡
+
     const navigate = useLoggedNavigate();
 
     const navigateOnDelete = () => {
@@ -78,6 +80,7 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
     }
 
     // ⚡ Tabs ⚡
+
     const theatreTabs = (
         <Tabs className="h-full" defaultValue={activeTab}>
             <section className="flex justify-center">
@@ -105,6 +108,7 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
     );
 
     // ⚡ Hidden Panels ⚡
+
     const hiddenEditingSection = (
         <section className="hidden">
             <TheatreSubmitFormPanel
@@ -112,11 +116,7 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
                 entity={theatre}
                 presetOpen={isEditing}
                 setPresetOpen={setIsEditing}
-            >
-                <Button variant="link" className="text-neutral-400 hover:text-black">
-                    <Pencil/> Edit
-                </Button>
-            </TheatreSubmitFormPanel>
+            />
         </section>
     );
 
@@ -127,11 +127,7 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
                 onDeleteSuccess={navigateOnDelete}
                 presetOpen={isDeleting}
                 setPresetOpen={setIsDeleting}
-            >
-                <Button variant="link" className="text-neutral-400 hover:text-black">
-                    <Trash/> Delete
-                </Button>
-            </TheatreDeleteWarningDialog>
+            />
         </section>
     );
 
@@ -152,8 +148,8 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
                 </section>
             </div>
 
-            {isEditing && hiddenEditingSection}
-            {isDeleting && hiddenDeleteSection}
+            {hiddenEditingSection}
+            {hiddenDeleteSection}
         </PageFlexWrapper>
     );
 };
