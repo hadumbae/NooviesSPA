@@ -1,11 +1,12 @@
-import {FC} from 'react';
+import { FC } from 'react';
 
 import useMovieSubmitForm from "@/pages/movies/hooks/forms/useMovieSubmitForm.ts";
-import useMovieSubmitMutation, {MovieSubmitParams} from "@/pages/movies/hooks/mutations/useMovieSubmitMutation.ts";
+import useMovieSubmitMutation, { MovieSubmitParams } from "@/pages/movies/hooks/mutations/useMovieSubmitMutation.ts";
 import MovieSubmitFormView from "@/pages/movies/components/forms/MovieSubmitFormView.tsx";
-import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
-import {MovieForm, MovieFormValues} from "@/pages/movies/schema/form/MovieForm.types.ts";
-import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
+import { Movie } from "@/pages/movies/schema/movie/Movie.types.ts";
+import { MovieForm, MovieFormValues } from "@/pages/movies/schema/form/MovieForm.types.ts";
+import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
+import buildFormSubmitLog from "@/common/utility/features/logger/buildFormSubmitLog.ts";
 
 /**
  * Props for `MovieSubmitFormContainer`.
@@ -17,48 +18,71 @@ import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 type SubmitFormProps = FormContainerProps<Movie, Movie, MovieFormValues> & {
     /** Optional CSS class applied to the container or the form view. */
     className?: string;
+
+    /** Indicates whether the form is rendered inside a panel (e.g., `MovieSubmitFormPanel`). */
+    isPanel?: boolean;
 };
 
 /**
- * Container component that integrates form logic, mutation logic, and the presentation layer
- * for creating or editing `Movie` entities.
+ * `MovieSubmitFormContainer` is a container component that integrates form state,
+ * mutation logic, and presentation for creating or editing `Movie` entities.
  *
- * This component:
+ * Features:
  * - Initializes the form with optional preset values or the existing entity (if editing).
  * - Sets up the mutation hook for submitting or updating the movie.
- * - Handles form submission and passes it to the mutation.
- * - Renders the `MovieSubmitFormView` with the form instance and submission handler.
+ * - Handles form submission, logging submitted values, and delegating to the mutation.
+ * - Renders the `MovieSubmitFormView` with the form instance, submit handler, and mutation state.
  *
- * @param props - Props controlling the form behavior and mutation callbacks.
- * @param props.presetValues - Optional preset values for initializing the form fields.
- * @param props.disableFields - Flag to disable all form inputs.
- * @param props.isEditing - Whether the form is in edit mode.
+ * @param props - Props controlling the form behavior, mutation callbacks, and optional styling.
+ * @param props.presetValues - Optional initial values for the form fields.
+ * @param props.disableFields - Whether to disable all form inputs.
+ * @param props.isEditing - Indicates if the form is editing an existing movie.
  * @param props.entity - The existing movie entity, required if `isEditing` is true.
  * @param props.className - Optional CSS class applied to the container/view.
- * @param props.* - Additional mutation callbacks inherited from `FormContainerProps`.
+ * @param props.isPanel - Indicates the form is used inside a panel layout.
+ * @param props.* - Additional callbacks and mutation handlers inherited from `FormContainerProps`.
+ *
+ * @example
+ * ```tsx
+ * <MovieSubmitFormContainer
+ *   isEditing={false}
+ *   presetValues={{ title: "", description: "" }}
+ *   onSubmitSuccess={(movie) => console.log("Created movie:", movie)}
+ * />
+ * ```
  */
 const MovieSubmitFormContainer: FC<SubmitFormProps> = (props) => {
-    const { className, presetValues, disableFields, isEditing, entity, ...onSubmitProps } = props;
+    const {
+        className,
+        presetValues,
+        disableFields,
+        isEditing,
+        entity,
+        isPanel,
+        ...onSubmitProps
+    } = props;
 
-    // Initialize the form instance, optionally using preset values or existing entity
+    // ⚡ Form  ⚡
+
     const form = useMovieSubmitForm({ movie: entity, presetValues });
 
-    // Configure mutation parameters based on editing mode
+    // ⚡ Mutation ⚡
+
     const mutationParams: MovieSubmitParams = isEditing
         ? { ...onSubmitProps, form, isEditing: true, _id: entity._id }
         : { ...onSubmitProps, form, isEditing: false };
 
-    // Initialize the mutation hook for submitting/updating the movie
     const mutation = useMovieSubmitMutation(mutationParams);
 
-    /**
-     * Handles form submission by passing values to the mutation.
-     * The mutation internally manages success and error handling.
-     *
-     * @param values - The current form values to submit.
-     */
+    // ⚡ Handler ⚡
+
     const onFormSubmit = (values: MovieFormValues) => {
-        console.log("Movie Submit Value: ", values);
+        buildFormSubmitLog({
+            values,
+            msg: "Movie Submit Values",
+            component: MovieSubmitFormContainer.name
+        });
+
         mutation.mutate(values as MovieForm);
     };
 
@@ -69,6 +93,7 @@ const MovieSubmitFormContainer: FC<SubmitFormProps> = (props) => {
             mutation={mutation}
             disableFields={disableFields}
             className={className}
+            isPanel={isPanel}
         />
     );
 };

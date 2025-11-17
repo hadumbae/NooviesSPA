@@ -5,41 +5,53 @@ import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import GenreHookFormSelect from "@/pages/genres/components/input/GenreHookFormSelect.tsx";
 import LanguageHookFormSelect from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import {SubmitHandler, UseFormReturn} from "react-hook-form";
-import {UseMutationResult} from "@tanstack/react-query";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {MovieForm, MovieFormValues} from "@/pages/movies/schema/form/MovieForm.types.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
+import {MovieFormValuesSchema} from "@/pages/movies/schema/form/MovieForm.schema.ts";
+import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 
 /**
- * Props for {@link MovieSubmitFormView}.
+ * Props for `MovieSubmitFormView`.
+ *
+ * @template TEntity - The entity type managed by the form (here `Movie`).
+ * @template TForm - The type of the form submission object (here `MovieForm`).
+ * @template TFormValues - The type of the form values (here `MovieFormValues`).
  */
-type ViewProps = {
-    /** React Hook Form instance for managing movie form state and validation. */
-    form: UseFormReturn<MovieFormValues>;
-    /** Handler function invoked on form submission. */
-    submitHandler: SubmitHandler<MovieFormValues>;
-    /** React Query mutation object for handling submission status and state. */
-    mutation: UseMutationResult<Movie, unknown, MovieForm>;
-    /** Optional list of form fields to disable. */
-    disableFields?: (keyof MovieFormValues)[];
-
+type ViewProps = FormViewProps<Movie, MovieForm, MovieFormValues> & {
+    /** Optional CSS class applied to the form container. */
     className?: string;
+
+    /** Indicates whether the form is rendered inside a panel layout. */
+    isPanel?: boolean;
 };
 
 /**
- * Movie form component view.
+ * `MovieSubmitFormView` renders the UI for creating or editing a movie.
  *
- * Renders the form fields for submitting or editing a movie,
- * grouped into sections: Basic Details, Production & Release, Media & Accessibility.
+ * Features:
+ * - Groups form fields into sections: Basic Details, Production & Release, Media & Accessibility.
+ * - Uses React Hook Form for state management and validation.
+ * - Integrates with React Query mutation object for submission state (`isPending`, `isSuccess`).
+ * - Dynamically shows or hides fields based on `disableFields` prop.
+ * - Supports single-column panel layout or multi-column layout for desktop screens.
  *
- * Integrates with React Hook Form and React Query mutation for state management
- * and submission handling.
+ * Sections:
+ * 1. **Basic Details** – title, original title, tagline, synopsis.
+ * 2. **Production & Release** – country, runtime, original language, release status/date.
+ * 3. **Media & Accessibility** – trailer URL, languages, subtitles, genres, availability.
  *
- * @param props - Props including form instance, submission handler, mutation object, and optional disabled fields.
+ * @param props - Props including form instance, submission handler, mutation object, and optional UI options.
+ * @param props.form - The React Hook Form instance for the movie form.
+ * @param props.submitHandler - Callback invoked on form submission.
+ * @param props.mutation - Mutation object for managing submission state.
+ * @param props.disableFields - Optional array of field keys to disable in the UI.
+ * @param props.className - Optional CSS class applied to the form container.
+ * @param props.isPanel - Whether the form is rendered inside a panel (adjusts layout).
  *
  * @example
  * ```tsx
@@ -48,42 +60,30 @@ type ViewProps = {
  *   submitHandler={onSubmit}
  *   mutation={mutation}
  *   disableFields={["title", "releaseDate"]}
+ *   isPanel={true}
  * />
  * ```
  */
-const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation, className, disableFields}) => {
+const MovieSubmitFormView: FC<ViewProps> = (props) => {
+    const {form, submitHandler, mutation, className, disableFields, isPanel = false} = props;
     const {isPending, isSuccess} = mutation;
 
-    // Determine which fields are active (not disabled)
-    const activeFields = {
-        title: !disableFields?.includes("title"),
-        originalTitle: !disableFields?.includes("originalTitle"),
-        tagline: !disableFields?.includes("tagline"),
-        country: !disableFields?.includes("country"),
-        synopsis: !disableFields?.includes("synopsis"),
-        releaseDate: !disableFields?.includes("releaseDate"),
-        isReleased: !disableFields?.includes("isReleased"),
-        runtime: !disableFields?.includes("runtime"),
-        originalLanguage: !disableFields?.includes("originalLanguage"),
-        trailerURL: !disableFields?.includes("trailerURL"),
-        languages: !disableFields?.includes("languages"),
-        subtitles: !disableFields?.includes("subtitles"),
-        genres: !disableFields?.includes("genres"),
-        isAvailable: !disableFields?.includes("isAvailable"),
-    };
+    // Determine which fields are active based on schema and disableFields
+    const activeFields = getActiveSchemaInputFields({schema: MovieFormValuesSchema, disableFields});
 
     return (
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(submitHandler)}
                 className={cn(
-                    "grid grid-cols-1 lg:grid-cols-3 gap-4",
+                    "grid grid-cols-1 gap-4",
+                    !isPanel && "lg:grid-cols-3",
                     className,
                 )}
             >
+                {/* Basic Details */}
 
                 <fieldset className="space-y-3">
-                    {/* Basic Details Section */}
                     <section>
                         <h1 className="text-lg font-bold">Basic Details</h1>
                         <Separator/>
@@ -126,8 +126,9 @@ const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation, clas
                     )}
                 </fieldset>
 
+                {/* Production & Release */}
+
                 <fieldset className="space-y-3">
-                    {/* Production & Release Section */}
                     <section>
                         <h1 className="text-lg font-bold">Production & Release</h1>
                         <Separator/>
@@ -148,10 +149,10 @@ const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation, clas
                             name="runtime"
                             label="Duration In Minutes"
                             control={form.control}
-                            description="The duration of the movie in minutes."
                             type="number"
                             min={1}
                             step={1}
+                            description="The duration of the movie in minutes."
                         />
                     )}
 
@@ -185,8 +186,9 @@ const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation, clas
                     )}
                 </fieldset>
 
+                {/* Media & Accessibility */}
+
                 <fieldset className="space-y-3">
-                    {/* Media & Accessibility Section */}
                     <section>
                         <h1 className="text-lg font-bold">Media & Accessibility</h1>
                         <Separator/>
@@ -197,7 +199,7 @@ const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation, clas
                             name="trailerURL"
                             label="Trailer URL"
                             control={form.control}
-                            description="The full URL of the movie's trailer, e.g. `https://google.com`."
+                            description="The full URL of the movie's trailer."
                         />
                     )}
 
@@ -207,7 +209,7 @@ const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation, clas
                             label="Languages"
                             control={form.control}
                             isMulti={true}
-                            description="The languages in which the movie is available."
+                            description="Languages in which the movie is available."
                         />
                     )}
 
@@ -217,7 +219,7 @@ const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation, clas
                             label="Subtitles"
                             control={form.control}
                             isMulti={true}
-                            description="The subtitles available for the movie."
+                            description="Available subtitles for the movie."
                         />
                     )}
 
@@ -241,8 +243,9 @@ const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation, clas
                     )}
                 </fieldset>
 
+                {/* Submit Button */}
 
-                <div className="lg:col-span-3">
+                <div className={cn(!isPanel && "lg:col-span-3")}>
                     <Button
                         type="submit"
                         variant="default"
@@ -252,7 +255,6 @@ const MovieSubmitFormView: FC<ViewProps> = ({form, submitHandler, mutation, clas
                         Submit
                     </Button>
                 </div>
-
             </form>
         </Form>
     );
