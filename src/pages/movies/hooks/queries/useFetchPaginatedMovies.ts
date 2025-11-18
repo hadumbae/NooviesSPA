@@ -2,19 +2,19 @@ import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
 import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
-import { PaginationParamValues } from "@/common/hooks/search-params/usePaginationSearchParams.types.ts";
 import { MovieQueryOptions } from "@/pages/movies/schema/queries/MovieQueryOption.types.ts";
 import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
+import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 
 /**
  * Parameters for the {@link useFetchPaginatedMovies} hook.
  *
  * @template TData - The expected shape of the paginated movie response.
  */
-type FetchParams<TData = unknown> = RequestOptions & PaginationParamValues & {
+type FetchParams<TData = unknown> = RequestOptions & PaginationValues & {
     /**
      * Optional query filters to refine, search, or sort the paginated movie results.
      */

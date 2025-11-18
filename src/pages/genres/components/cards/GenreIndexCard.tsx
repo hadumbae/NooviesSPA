@@ -40,23 +40,32 @@ type IndexProps = {
  * ```
  */
 const GenreIndexCard: FC<IndexProps> = ({genre, orientation = "horizontal"}) => {
+    // ⚡ State ⚡
+
     const navigate = useLoggedNavigate();
     const {_id, name, movieCount} = genre;
 
-    const {page, perPage, hasValidParams} = usePaginationSearchParams();
+    const {page, perPage, hasPaginationValues} = usePaginationSearchParams();
+
+    // ⚡ CSS ⚡
 
     const flexClasses = orientation === "horizontal"
         ? "flex justify-between items-center"
         : "flex flex-col items-center";
 
+    // ⚡ Handler ⚡
+
     const openGenre = () => {
-        const state = hasValidParams ? {page, perPage} : {};
+        const state = hasPaginationValues ? {page, perPage} : {};
+
         navigate({
             to: `/admin/genres/get/${_id}`,
             component: GenreIndexCard.name,
             options: {state},
         });
     }
+
+    // ⚡ Render ⚡
 
     return (
         <Card className="hover:cursor-pointer" onClick={openGenre}>

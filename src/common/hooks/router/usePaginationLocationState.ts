@@ -1,65 +1,82 @@
-import { useLocation } from "react-router-dom";
-import { PaginationSearchParamSchema } from "@/common/schema/features/pagination-search-params/PaginationSearchParamsSchema.ts";
-
-/** Default page number from environment variables. */
-const DEFAULT_PAGE = import.meta.env.VITE_PAGINATION_PAGE_DEFAULT;
-
-/** Default number of items per page from environment variables. */
-const DEFAULT_PER_PAGE = import.meta.env.VITE_PAGINATION_PER_PAGE_DEFAULT;
+import {useLocation} from "react-router-dom";
+import {
+    PaginationValues,
+    PaginationValuesSchema
+} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 
 /**
- * Pagination data returned from the hook.
- */
-type PaginationData = {
-    /** Current page number. Defaults to `DEFAULT_PAGE` if not provided. */
-    page: number;
-    /** Number of items per page. Defaults to `DEFAULT_PER_PAGE` if not provided. */
-    perPage: number;
-};
-
-/**
- * Return type of `usePaginationLocationState`.
+ * Represents the outcome of parsing pagination values from `location.state`.
  *
- * @remarks
- * - On success: `{ success: true, data: PaginationData }`
- * - On failure: `{ success?: false, data: null }`
+ * Returned by {@link usePaginationLocationState}.
+ *
+ * ## Variants
+ * - **Success**:
+ *   ```ts
+ *   { success: true; data: PaginationValues }
+ *   ```
+ *   Indicates that the `state` object contained valid pagination values.
+ *
+ * - **Failure**:
+ *   ```ts
+ *   { success?: false; data: null }
+ *   ```
+ *   Indicates that `state` was missing, invalid, or failed schema validation.
  */
-type PaginationReturns =
-    | { success: true; data: PaginationData }
+export type PaginationReturns =
+    | { success: true; data: PaginationValues }
     | { success?: false; data: null };
 
 /**
- * React hook to extract and validate pagination state from `useLocation`.
+ * Attempts to extract and validate pagination values from React Router's
+ * `location.state`.
  *
- * @remarks
- * - Uses `PaginationSearchParamSchema` to validate the state object from the current location.
- * - Applies defaults from environment variables if `page` or `perPage` are missing or undefined.
- * - Returns a strongly-typed object indicating success or failure.
+ * ## Purpose
+ * This hook is designed to support navigation flows where pagination must be
+ * preserved between pages. For example:
  *
- * @example
- * ```ts
- * const { success, data } = usePaginationLocationState();
- * if (success) {
- *   console.log(data.page, data.perPage);
+ * - Returning to a list page from a detail page
+ * - Preserving pagination after routing interactions
+ *
+ * It validates the state using {@link PaginationValuesSchema} to ensure strong
+ * typing and prevent invalid values from leaking into the pagination logic.
+ *
+ * ## Behavior
+ * 1. Reads the `state` object from `useLocation()`.
+ * 2. Attempts to validate it using `PaginationValuesSchema.safeParse`.
+ * 3. Returns one of two shapes:
+ *    - **Valid state:** `{ success: true, data: PaginationValues }`
+ *    - **Invalid / missing state:** `{ success: false, data: null }`
+ *
+ * ## Example
+ * ### Passing State
+ * ```tsx
+ * navigate("/genres", {
+ *   state: { page: 3, perPage: 50 }
+ * });
+ * ```
+ *
+ * ### Receiving State
+ * ```tsx
+ * const paginationState = usePaginationLocationState();
+ *
+ * if (paginationState.success) {
+ *   console.log(paginationState.data.page);     // 3
+ *   console.log(paginationState.data.perPage);  // 50
  * }
  * ```
  *
- * @returns An object containing:
- *   - `success`: Whether parsing was successful.
- *   - `data`: Validated pagination data with defaults, or `null` if validation failed.
+ * ## Use Cases
+ * - Restoring list state after navigating to a detail view.
+ * - Passing validated pagination context between pages.
+ * - Ensuring consistent pagination control in URL + navigation hybrid flows.
+ *
+ * @returns A discriminated union describing whether the parsed state is valid.
  */
 export default function usePaginationLocationState(): PaginationReturns {
-    const { state } = useLocation();
-    const { data, success } = PaginationSearchParamSchema.safeParse(state);
+    const {state} = useLocation();
+    const {data, success} = PaginationValuesSchema.safeParse(state);
 
-    if (success) {
-        const { page = DEFAULT_PAGE, perPage = DEFAULT_PER_PAGE } = data;
-
-        return {
-            success: true,
-            data: { page, perPage },
-        };
-    }
-
-    return { success, data: null };
+    return success
+        ? {success: true, data}
+        : {success: false, data: null};
 }

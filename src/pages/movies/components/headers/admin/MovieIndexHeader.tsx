@@ -27,10 +27,11 @@ import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
  */
 const MovieIndexHeader: FC = () => {
     const navigate = useLoggedNavigate();
-    const {page, perPage, hasValidParams} = usePaginationSearchParams();
+    const {page, perPage, hasPaginationValues} = usePaginationSearchParams();
 
     const navigateToCreate = () => {
-        const state = hasValidParams ? {page, perPage} : {};
+        const state = hasPaginationValues ? {page, perPage} : {};
+
         navigate({
             to: "/admin/movies/create",
             options: {state},

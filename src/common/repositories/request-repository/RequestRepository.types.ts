@@ -2,7 +2,7 @@ import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import RequestPaginatedFilters from "@/common/type/request/RequestPaginatedFilters.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {PaginationParamValues} from "@/common/hooks/search-params/usePaginationSearchParams.types.ts";
+import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 
 /**
  * Parameters for retrieving multiple entities with optional filters and request options.
@@ -21,7 +21,7 @@ export type GetEntitiesParams<TQueries = RequestQueryFilters> = RequestOptions &
  *
  * @template TQueries - The type of filters to apply to the paginated query. Defaults to {@link RequestPaginatedFilters}.
  */
-export type GetPaginatedEntitiesParams<TQueries = RequestPaginatedFilters> = RequestOptions & PaginationParamValues & {
+export type GetPaginatedEntitiesParams<TQueries = RequestPaginatedFilters> = RequestOptions & PaginationValues & {
     /**
      * Filters to apply for the paginated query.
      */
