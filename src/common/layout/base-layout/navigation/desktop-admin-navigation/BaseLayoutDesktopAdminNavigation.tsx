@@ -8,6 +8,8 @@ import {Button} from "@/common/components/ui/button.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useAuthLogoutSubmitMutation from "@/pages/auth/hooks/useAuthLogoutSubmitMutation.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import BaseLayoutDesktopThemeDropdown
+    from "@/common/layout/base-layout/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";
 
 /**
  * **BaseLayoutDesktopAdminNavigation**
@@ -52,6 +54,8 @@ const BaseLayoutDesktopAdminNavigation: FC = () => {
             {/** Admin-specific dropdown menus */}
             <BaseLayoutSetupNavigationDropdown/>
             <BaseLayoutMovieNavigationDropdown/>
+
+            <BaseLayoutDesktopThemeDropdown />
 
             {/** Log Out button */}
             <Button
