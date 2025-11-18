@@ -9,6 +9,7 @@ import { ChevronDown } from "lucide-react";
 import useCurrentURLPath from "@/common/hooks/router/useCurrentURLPath.ts";
 import { cn } from "@/common/lib/utils.ts";
 import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.tsx";
+import {HoverLinkCSS} from "@/common/constants/country/ButtonCSS.ts";
 
 /**
  * @component BaseLayoutMovieNavigation
@@ -56,7 +57,7 @@ const BaseLayoutMovieNavigationDropdown: FC = () => {
                 <Button
                     variant="link"
                     size="sm"
-                    className={cn(!isActive && "text-neutral-400 hover:text-black")}
+                    className={cn(!isActive && HoverLinkCSS)}
                 >
                     Movies <ChevronDown />
                 </Button>

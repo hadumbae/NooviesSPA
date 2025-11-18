@@ -46,7 +46,7 @@ const BaseLayoutHeader: FC = () => {
 
             {!isMobile && <BaseLayoutDesktopNavigation />}
 
-            {isMobile && <SidebarTrigger/>}
+            {isMobile && <SidebarTrigger className="dark:text-white"/>}
         </header>
     );
 };

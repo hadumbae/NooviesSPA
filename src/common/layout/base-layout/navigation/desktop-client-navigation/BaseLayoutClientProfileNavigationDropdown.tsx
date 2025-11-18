@@ -8,6 +8,7 @@ import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.ts
 import BaseLayoutDesktopClientNavigation
     from "@/common/layout/base-layout/navigation/desktop-client-navigation/BaseLayoutDesktopClientNavigation.tsx";
 import { Separator } from "@/common/components/ui/separator.tsx";
+import {HoverLinkCSS} from "@/common/constants/country/ButtonCSS.ts";
 
 /**
  * `BaseLayoutClientProfileNavigationDropdown` renders a dropdown menu
@@ -50,7 +51,7 @@ const BaseLayoutClientProfileNavigationDropdown: FC = () => {
                 <Button
                     variant="link"
                     size="sm"
-                    className={cn(!isActive && "text-neutral-400 hover:text-black")}
+                    className={cn(!isActive && HoverLinkCSS)}
                 >
                     Profile <ChevronDown />
                 </Button>

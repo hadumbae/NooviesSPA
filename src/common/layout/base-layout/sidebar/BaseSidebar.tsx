@@ -34,12 +34,8 @@ const BaseSidebar: FC = () => {
     /** Retrieve auth context */
     const {user} = useRequiredContext({context: AuthContext});
 
-
     if (isAuthenticated && user) {
         const {isAdmin = false} = user ?? {};
-
-        console.log("User: ", user);
-    console.log("isAuthenticated: ", isAuthenticated);
 
         return (
             isAdmin

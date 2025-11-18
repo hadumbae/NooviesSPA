@@ -8,6 +8,7 @@ import BaseLayoutClientProfileNavigationDropdown
     from "@/common/layout/base-layout/navigation/desktop-client-navigation/BaseLayoutClientProfileNavigationDropdown.tsx";
 import BaseLayoutClientMovieNavigationDropdown
     from "@/common/layout/base-layout/navigation/desktop-client-navigation/BaseLayoutClientMovieNavigationDropdown.tsx";
+import {HoverLinkCSS} from "@/common/constants/country/ButtonCSS.ts";
 
 /**
  * `BaseLayoutDesktopClientNavigation` renders the main desktop navigation
@@ -56,7 +57,7 @@ const BaseLayoutDesktopClientNavigation: FC = () => {
             <Button
                 variant="link"
                 size="sm"
-                className="text-neutral-400 hover:text-black"
+                className={HoverLinkCSS}
                 onClick={() => logout()}
             >
                 Log Out

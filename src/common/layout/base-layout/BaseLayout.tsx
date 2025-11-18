@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect} from 'react';
 import {SidebarProvider} from "@/common/components/ui/sidebar.tsx";
 import BaseSidebar from "@/common/layout/base-layout/sidebar/BaseSidebar.tsx";
 import BaseLayoutContent from "@/common/layout/base-layout/layout/BaseLayoutContent.tsx";
@@ -11,29 +11,29 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ThemeContext} from "@/common/context/theme/ThemeContext.ts";
 
 const BaseLayout: FC = () => {
-    const [isDark, setIsDark] = useState<boolean>(() => getIsDarkTheme());
     const {themeVariant} = useRequiredContext({context: ThemeContext});
 
     useEffect(() => {
-        const newDark = getIsDarkTheme();
-        setIsDark(newDark);
+        const isDark = getIsDarkTheme();
+
+        isDark
+            ? document.body.classList.add("dark")
+            : document.body.classList.remove("dark");
     }, [themeVariant]);
 
     const isMobile = useIsMobile();
 
     return (
         <SidebarProvider>
-            {isMobile && <BaseSidebar />}
+            {isMobile && <BaseSidebar/>}
 
             <main className={cn(
-                isDark && "dark",
                 "flex flex-col space-y-1 p-3 w-full",
-                "bg-gray-50 dark:bg-gray-800"
+                "bg-gray-50 dark:bg-dark"
             )}>
-                {themeVariant}
-                <BaseLayoutHeader />
-                <BaseLayoutContent />
-                <BaseLayoutFooter />
+                <BaseLayoutHeader/>
+                <BaseLayoutContent/>
+                <BaseLayoutFooter/>
             </main>
         </SidebarProvider>
     );

@@ -1,14 +1,15 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuTrigger
 } from "@/common/components/ui/dropdown-menu.tsx";
-import { Button } from "@/common/components/ui/button.tsx";
-import { ChevronDown } from "lucide-react";
+import {Button} from "@/common/components/ui/button.tsx";
+import {ChevronDown} from "lucide-react";
 import useCurrentURLPath from "@/common/hooks/router/useCurrentURLPath.ts";
-import { cn } from "@/common/lib/utils.ts";
+import {cn} from "@/common/lib/utils.ts";
 import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.tsx";
+import {HoverLinkCSS} from "@/common/constants/country/ButtonCSS.ts";
 
 /**
  * **BaseLayoutSetupNavigation** — a dropdown navigation component
@@ -62,9 +63,9 @@ const BaseLayoutSetupNavigationDropdown: FC = () => {
                 <Button
                     variant="link"
                     size="sm"
-                    className={cn(!isActive && "text-neutral-400 hover:text-black")}
+                    className={cn(!isActive && HoverLinkCSS)}
                 >
-                    Setup <ChevronDown />
+                    Setup <ChevronDown/>
                 </Button>
             </DropdownMenuTrigger>
 

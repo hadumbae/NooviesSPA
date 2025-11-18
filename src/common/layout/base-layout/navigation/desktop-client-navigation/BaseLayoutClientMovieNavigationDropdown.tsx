@@ -7,6 +7,7 @@ import useCurrentURLPath from "@/common/hooks/router/useCurrentURLPath.ts";
 import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.tsx";
 import BaseLayoutDesktopClientNavigation
     from "@/common/layout/base-layout/navigation/desktop-client-navigation/BaseLayoutDesktopClientNavigation.tsx";
+import {HoverLinkCSS} from "@/common/constants/country/ButtonCSS.ts";
 
 /**
  * `BaseLayoutClientMovieNavigationDropdown` renders a dropdown menu
@@ -46,7 +47,7 @@ const BaseLayoutClientMovieNavigationDropdown: FC = () => {
                 <Button
                     variant="link"
                     size="sm"
-                    className={cn(!isActive && "text-neutral-400 hover:text-black")}
+                    className={cn(!isActive && HoverLinkCSS)}
                 >
                     Movies <ChevronDown />
                 </Button>

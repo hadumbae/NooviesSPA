@@ -3,6 +3,7 @@ import LoggedLink, { LoggedLinkProps } from "@/common/components/navigation/Logg
 import { cn } from "@/common/lib/utils.ts";
 import { buttonVariants } from "@/common/components/ui/button.tsx";
 import { useLocation } from "react-router-dom";
+import {HoverLinkCSS} from "@/common/constants/country/ButtonCSS.ts";
 
 /**
  * **NavLink** — a styled navigation link component built on top of {@link LoggedLink}.
@@ -42,7 +43,7 @@ const NavLink: FC<LoggedLinkProps> = (props) => {
             to={to}
             className={cn(
                 buttonVariants({ variant: "link", size: "sm" }),
-                !isActive && "text-neutral-400 hover:text-black",
+                !isActive && HoverLinkCSS,
                 className,
             )}
         >
