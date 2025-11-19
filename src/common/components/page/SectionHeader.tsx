@@ -34,7 +34,12 @@ type HeaderProps = {
  */
 const SectionHeader: FC<HeaderProps> = ({children, className, srOnly = false}) => {
     return (
-        <h1 className={cn("text-lg", "font-bold", srOnly && "sr-only", className)}>
+        <h1 className={cn(
+            "text-lg font-bold",
+            "dark:text-white",
+            srOnly && "sr-only",
+            className,
+        )}>
             {children}
         </h1>
     );

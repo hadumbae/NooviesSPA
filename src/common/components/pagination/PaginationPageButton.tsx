@@ -78,8 +78,9 @@ const PaginationPageButton: FC<PaginationPageButtonProps> = ({buttonValue, activ
             <PaginationLink
                 onClick={() => onPageChange(buttonValue)}
                 className={cn(
-                    "text-neutral-400 hover:cursor-pointer",
-                    buttonValue === activePage && "text-black font-bold"
+                    buttonValue === activePage && "text-black font-bold dark:text-white",
+                    "text-neutral-400 dark:text-neutral-600",
+                    "hover:cursor-pointer",
                 )}
             >
                 {buttonValue}

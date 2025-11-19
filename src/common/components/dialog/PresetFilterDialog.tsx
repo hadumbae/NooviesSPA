@@ -85,15 +85,20 @@ const PresetFilterDialog: FC<PresetFilterDialogProps> = (props) => {
                 <Button
                     size="sm"
                     variant="link"
-                    className={cn("w-fit text-neutral-400 hover:text-black", className)}
+                    className={cn(
+                        "w-fit",
+                        "text-neutral-400 hover:text-black",
+                        "dark:text-neutral-500 hover:text-white",
+                        className
+                    )}
                 >
                     <ListFilter /> Filters
                 </Button>
             </DialogTrigger>
 
-            <DialogContent>
+            <DialogContent className="dark:bg-dark">
                 <DialogHeader>
-                    <DialogTitle>{title}</DialogTitle>
+                    <DialogTitle className="dark:text-white">{title}</DialogTitle>
                     <DialogDescription>{description}</DialogDescription>
                 </DialogHeader>
 
