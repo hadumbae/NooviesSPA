@@ -31,8 +31,9 @@ const HeaderDescription: FC<PropsWithChildren<DescriptionProps>> = ({ children, 
     return (
         <p
             className={cn(
-                "text-neutral-500 text-xs text-justify",
-                "md:text-sm",
+                "text-justify",
+                "text-neutral-500 dark:text-neutral-300",
+                "text-xs md:text-sm",
                 className,
             )}
         >

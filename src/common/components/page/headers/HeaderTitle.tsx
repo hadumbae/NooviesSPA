@@ -35,9 +35,8 @@ type TitleProps = {
 const HeaderTitle: FC<PropsWithChildren<TitleProps>> = ({children, className}) => {
     return (
         <h1 className={cn(
-            "text-xl font-bold",
-            "md:text-2xl",
-            "xl:text-4xl",
+            "font-bold dark:text-white",
+            "text-xl md:text-2xl xl:text-4xl",
             className,
         )}>
             {children}
