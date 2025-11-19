@@ -13,8 +13,8 @@ const BooleanFlagLabelSpan: FC<FlagProps> = ({label, flag}) => {
         <Badge
             variant="outline"
             className={cn(
-                "flex justify-between items-center",
-                flag ? "border-green-500" : "border-red-500"
+                "flex justify-between items-center px-2 py-1",
+                flag ? "border-green-500 dark:border-green-500" : "border-red-500 dark:border-red-500"
             )}
         >
             <span className="select-none">{label}</span>

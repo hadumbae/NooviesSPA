@@ -17,6 +17,8 @@ import { buttonVariants } from "@/common/components/ui/button.tsx";
 import { cn } from "@/common/lib/utils.ts";
 import LabelContent from "@/common/components/card-content/LabelContent.tsx";
 import formatMovieDetails from "@/pages/movies/utility/formatMovieDetails.ts";
+import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
+import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 /**
  * Props for the `MovieDetailsDialog` component.
@@ -69,7 +71,7 @@ const MovieDetailsDialog: FC<DetailsDialogProps> = ({ children, movie }) => {
             {/* Dialog trigger element */}
             <DialogTrigger asChild>{children ?? "Open"}</DialogTrigger>
 
-            <DialogContent>
+            <DialogContent className={ContainerCSS}>
                 {/* Dialog header for screen readers */}
                 <DialogHeader className="sr-only">
                     <DialogTitle>Movie: {title}</DialogTitle>
@@ -88,9 +90,9 @@ const MovieDetailsDialog: FC<DetailsDialogProps> = ({ children, movie }) => {
 
                     {/* Title, release/runtime, genres */}
                     <div className="flex-grow space-y-1">
-                        <h2 className="font-bold">{title}</h2>
-                        <h3 className="text-sm text-neutral-400">{releaseRuntimeString}</h3>
-                        <h4 className="text-xs text-neutral-400">{genreString}</h4>
+                        <h2 className={cn("font-bold", PrimaryTextBaseCSS)}>{title}</h2>
+                        <h3 className={cn("text-sm", SecondaryTextBaseCSS)}>{releaseRuntimeString}</h3>
+                        <h4 className={cn("text-xs", SecondaryTextBaseCSS)}>{genreString}</h4>
                     </div>
                 </section>
 
@@ -105,7 +107,7 @@ const MovieDetailsDialog: FC<DetailsDialogProps> = ({ children, movie }) => {
                     <LabelContent
                         orientation="horizontal"
                         label="Languages"
-                        classNames={{ content: "text-sm text-neutral-400" }}
+                        classNames={{ content: cn("text-sm", SecondaryTextBaseCSS) }}
                     >
                         <span>{languageString}</span>
                     </LabelContent>
@@ -113,7 +115,7 @@ const MovieDetailsDialog: FC<DetailsDialogProps> = ({ children, movie }) => {
                     <LabelContent
                         orientation="horizontal"
                         label="Subtitles"
-                        classNames={{ content: "text-sm text-neutral-400" }}
+                        classNames={{ content: cn("text-sm", SecondaryTextBaseCSS) }}
                     >
                         <span>{subtitleLanguageString}</span>
                     </LabelContent>

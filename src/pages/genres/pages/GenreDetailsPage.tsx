@@ -128,7 +128,7 @@ const GenreDetailsPage: FC = (): ReactElement => {
                         const hasMovieSection = (
                             <section className="space-y-2">
                                 <SectionHeader>Movies</SectionHeader>
-                                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                     {movies.map((movie: MovieDetails) => (
                                         <MovieIndexCard
                                             className="w-16"

@@ -28,13 +28,14 @@ import {Input} from "@/common/components/ui/input.tsx";
 import {FieldValues} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormFileInputProps, HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 /**
  * Props for the {@link HookFormFileInput} component.
  *
  * @template TValues - The type of the form values from `react-hook-form`.
  */
-type FileInputProps<TValues extends FieldValues> = HookFormInputControlProps<TValues> & HookFormFileInputProps;
+type FileInputProps<TValues extends FieldValues> = HookFormInputControlProps<TValues> & Omit<HookFormFileInputProps, "type">;
 
 /**
  * `HookFormFileInput` is a type-safe file input component integrated with React Hook Form.
@@ -76,10 +77,14 @@ const HookFormFileInput = <TValues extends FieldValues>(props: FileInputProps<TV
             name={name}
             render={({field: {value, onChange, ...fieldProps}}) => (
                 <FormItem className={cn(className)}>
-                    {hasLabel && <FormLabel>{label}</FormLabel>}
+                    {
+                        hasLabel &&
+                        <FormLabel className={PrimaryTextBaseCSS}>{label}</FormLabel>
+                    }
 
                     <FormControl>
                         <Input
+                            className="dark:text-neutral-500"
                             type="file"
                             disabled={disabled}
                             multiple={multiple}

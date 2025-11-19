@@ -14,6 +14,7 @@ import MoviePosterImageSubmitFormContainer
     from "@/pages/movies/components/forms/poster-image/MoviePosterImageSubmitFormContainer.tsx";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {SubmitPanelCSS} from "@/common/constants/css/SheetCSS.ts";
 
 /**
  * Props for `MoviePosterImageSubmitFormPanel`.
@@ -71,7 +72,7 @@ const MoviePosterImageSubmitFormPanel: FC<FormPanelProps> = (props) => {
     return (
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>{children}</SheetTrigger>
-            <SheetContent className="flex flex-col">
+            <SheetContent className={SubmitPanelCSS}>
                 <SheetHeader>
                     <SheetTitle>{title}</SheetTitle>
                     <SheetDescription>{description}</SheetDescription>

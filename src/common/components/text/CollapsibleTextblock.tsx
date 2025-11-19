@@ -2,6 +2,7 @@ import {FC, useState} from 'react';
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui/collapsible.tsx";
 import {ChevronDown, ChevronUp} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
+import {QuoteTextCSS} from "@/common/constants/css/TextCSS.ts";
 
 /**
  * Props for the `CollapsibleTextblock` component.
@@ -55,10 +56,14 @@ const CollapsibleTextblock: FC<TextblockProps> = (props) => {
         >
             <CollapsibleTrigger className="flex justify-between items-center w-full">
                 <span>{isOpen ? closeText : openText}</span>
-                {isOpen ? <ChevronUp /> : <ChevronDown />}
+                {isOpen ? <ChevronUp/> : <ChevronDown/>}
             </CollapsibleTrigger>
 
-            <CollapsibleContent className={cn("text-justify", className)}>
+            <CollapsibleContent className={cn(
+                "text-justify",
+                QuoteTextCSS,
+                className
+            )}>
                 {text}
             </CollapsibleContent>
         </Collapsible>

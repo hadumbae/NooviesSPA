@@ -27,6 +27,8 @@ import {FieldValues} from "react-hook-form";
 import {Textarea} from "@/common/components/ui/textarea.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {HookFormInputCSS} from "@/common/constants/css/HookFormInputCSS.ts";
+import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 /**
  * `HookFormTextArea` props are based on {@link HookFormInputControlProps} from `react-hook-form`.
@@ -42,12 +44,12 @@ const HookFormTextArea = <TValues extends FieldValues>(props: HookFormInputContr
             name={name}
             render={({field}) => (
                 <FormItem>
-                    <FormLabel>{label}</FormLabel>
+                    <FormLabel className={PrimaryTextBaseCSS}>{label}</FormLabel>
 
                     <FormControl>
                         <Textarea
                             placeholder={placeholder || label}
-                            className={cn("resize-none", className)}
+                            className={cn(HookFormInputCSS, "resize-none h-28", className)}
                             {...field}
                         />
                     </FormControl>

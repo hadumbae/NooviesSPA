@@ -13,6 +13,8 @@ import { cn } from "@/common/lib/utils.ts";
 import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAutoSubmit.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormSortToggle from "@/common/components/forms/HookFormSortToggle.tsx";
+import {Separator} from "@/common/components/ui/separator.tsx";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 /**
  * Props for {@link GenreQueryOptionFormView}.
@@ -83,22 +85,40 @@ const GenreQueryOptionFormView: FC<FormViewProps> = (props) => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(submitHandler)} className={cn(className)}>
-                {activeFields["name"] && (
-                    <HookFormInput
-                        name="name"
-                        label="Name"
-                        control={form.control}
-                    />
-                )}
+            <form
+                onSubmit={form.handleSubmit(submitHandler)}
+                className={cn("space-y-3", className)}
+            >
+                <fieldset>
+                    <div>
+                        <SectionHeader>Filters</SectionHeader>
+                        <Separator />
+                    </div>
 
-                {activeFields["sortByName"] && (
-                    <HookFormSortToggle
-                        name="sortByName"
-                        label="Sort By Name"
-                        control={form.control}
-                    />
-                )}
+                    {activeFields["name"] && (
+                        <HookFormInput
+                            name="name"
+                            label="Name"
+                            control={form.control}
+                        />
+                    )}
+                </fieldset>
+
+                <fieldset>
+                    <div>
+                        <SectionHeader>Sorts</SectionHeader>
+                        <Separator/>
+                    </div>
+
+                    {activeFields["sortByName"] && (
+                        <HookFormSortToggle
+                            name="sortByName"
+                            label="Sort By Name"
+                            control={form.control}
+                        />
+                    )}
+                </fieldset>
+
             </form>
         </Form>
     );

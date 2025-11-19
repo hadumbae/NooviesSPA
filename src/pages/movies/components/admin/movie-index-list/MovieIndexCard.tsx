@@ -7,6 +7,7 @@ import MovieDetailsDialog from "@/pages/movies/components/admin/movie-index-list
 import MoviePosterImage from "@/pages/movies/components/MoviePosterImage.tsx";
 import formatMovieDetails from "@/pages/movies/utility/formatMovieDetails.ts";
 import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Props for the {@link MovieIndexCard} component.
@@ -74,7 +75,10 @@ const MovieIndexCard: FC<IndexCardProps> = ({ movie, className }) => {
                     <TooltipButton
                         tooltipText={tooltipText}
                         variant="link"
-                        className="text-neutral-400 hover:text-black"
+                        className={cn(
+                            "text-neutral-400 hover:text-black",
+                            "dark:text-neutral-600 dark:hover:text-white"
+                        )}
                     >
                         <Info />
                     </TooltipButton>

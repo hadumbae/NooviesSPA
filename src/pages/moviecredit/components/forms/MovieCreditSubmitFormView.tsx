@@ -25,6 +25,8 @@ import {
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
+import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
+import {PrimaryButtonCSS, SecondaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for {@link MovieCreditSubmitFormView}.
@@ -147,7 +149,7 @@ const MovieCreditSubmitFormView: FC<ViewProps> = (params) => {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-5")}>
                 <fieldset className="space-y-3">
-                    <h1 className="text-lg font-bold">Basic Details</h1>
+                    <h1 className={HeaderTextCSS}>Basic Details</h1>
 
                     {
                         activeFields["department"] &&
@@ -217,7 +219,7 @@ const MovieCreditSubmitFormView: FC<ViewProps> = (params) => {
                 {
                     department === "CAST" && <>
                         <fieldset className="space-y-3">
-                            <h1 className="text-lg font-bold">Credits Info</h1>
+                            <h1 className={HeaderTextCSS}>Credits Info</h1>
 
                             {
                                 activeCastFields["billingOrder"] &&
@@ -251,7 +253,7 @@ const MovieCreditSubmitFormView: FC<ViewProps> = (params) => {
                 {
                     department === "CAST" && <>
                         <fieldset className="space-y-3">
-                            <h1 className="text-lg font-bold">Flags</h1>
+                            <h1 className={HeaderTextCSS}>Flags</h1>
 
                             <section className="grid grid-cols-2 gap-2">
                                 {
@@ -298,10 +300,15 @@ const MovieCreditSubmitFormView: FC<ViewProps> = (params) => {
                 }
 
                 <section className="grid grid-cols-4 gap-2">
-                    <Button disabled={isPending} className="bg-primary col-span-3" variant="default" type="submit">
+                    <Button
+                        disabled={isPending}
+                        className={cn(PrimaryButtonCSS, "bg-primary col-span-3")}
+                        variant="default"
+                        type="submit"
+                    >
                         Submit
                     </Button>
-                    <Button disabled={isPending} className="bg-secondary text-primary hover:text-black"
+                    <Button disabled={isPending} className={cn(SecondaryButtonCSS, "bg-secondary text-primary")}
                             variant="secondary" type="button" onClick={reset}>
                         <RefreshCw/>
                     </Button>

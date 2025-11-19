@@ -46,19 +46,17 @@ const MovieCreditOptions: FC<OptionsProps> = (props) => {
     const {children, onSubmit, onDelete, entity} = props;
     const {_id} = entity;
 
-    // Default popover trigger if no children are provided
-    const defaultButton = (
-        <Button variant="outline">
-            <Ellipsis/>
-        </Button>
-    );
-
     return (
         <Popover>
             <PopoverTrigger asChild>
-                {children ?? defaultButton}
+                {
+                    children ??
+                    <Button variant="outline" className="dark:hover:border dark:hover:border-gray-400">
+                        <Ellipsis/>
+                    </Button>
+                }
             </PopoverTrigger>
-            <PopoverContent className="w-40 flex flex-col p-0">
+            <PopoverContent className="w-40 flex flex-col p-0 dark:bg-dark">
                 <MovieCreditSubmitFormPanel {...onSubmit} isEditing={true} entity={entity}>
                     <Button variant="link">Edit</Button>
                 </MovieCreditSubmitFormPanel>

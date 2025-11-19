@@ -5,7 +5,6 @@ import usePaginationSearchParams from "@/common/hooks/search-params/usePaginatio
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import MoviePersonListBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MoviePersonListBreadcrumb.tsx";
 import MoviePeopleHeader from "@/pages/movies/components/headers/admin/MoviePeopleHeader.tsx";
-import PageSection from "@/common/components/page/PageSection.tsx";
 import MovieCreditSubmitFormContainer
     from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
@@ -23,6 +22,7 @@ import MoviePersonDetailsCard from "@/pages/movies/components/admin/credits/card
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import {PaginatedMovieCreditDetailsSchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
 import {PaginatedMovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.types.ts";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 /**
  * Props for {@link MoviePeoplePage}.
@@ -132,15 +132,15 @@ const MoviePeoplePage: FC<PeoplePageProps> = ({department}) => {
                     return (
                         <PageFlexWrapper className="space-y-6">
                             <section className="space-y-2">
-                                <h1 className="sr-only">Header</h1>
+                                <SectionHeader srOnly={true}>Header</SectionHeader>
                                 <MoviePersonListBreadcrumb movie={movie!} department={department}/>
                                 <MoviePeopleHeader movie={movie!} roleType={department}/>
                             </section>
 
-                            <section className="grid max-md:grid-cols-1 md:grid-cols-3 md:gap-4 gap-6">
-                                <h1 className="sr-only">Credits</h1>
+                            <div className="grid max-md:grid-cols-1 md:grid-cols-3 md:gap-4 gap-6">
+                                <section className="space-y-3">
+                                    <SectionHeader>Add Credits</SectionHeader>
 
-                                <PageSection title="Add Credits" srTitle="Credit Form">
                                     <TextCollapsible triggerText="Form" defaultOpen={isDesktop} className="py-2">
                                         <Card>
                                             <CardContent className="p-4">
@@ -151,14 +151,18 @@ const MoviePeoplePage: FC<PeoplePageProps> = ({department}) => {
                                             </CardContent>
                                         </Card>
                                     </TextCollapsible>
-                                </PageSection>
+                                </section>
 
                                 <section className="md:col-span-2">
-                                    <PageSection title="Credits" srTitle="Credit List" className="md:col-span-2">
-                                        {hasCredits ? hasCreditsSection : hasNoCreditsSection}
-                                    </PageSection>
+                                    <SectionHeader>Credits</SectionHeader>
+
+                                    {
+                                        hasCredits
+                                            ? hasCreditsSection
+                                            : hasNoCreditsSection
+                                    }
                                 </section>
-                            </section>
+                            </div>
                         </PageFlexWrapper>
                     );
                 }}

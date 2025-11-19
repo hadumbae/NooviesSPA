@@ -7,6 +7,8 @@ import {
 } from "@/common/components/ui/alert-dialog.tsx";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
+import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
+import {DialogActionCSS, DialogCloseCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for the `EntityDeleteWarningDialog` component.
@@ -55,14 +57,21 @@ const EntityDeleteWarningDialog: FC<DialogProps> = (props) => {
     return (
         <AlertDialog open={activeOpen} onOpenChange={setActiveOpen}>
             <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent className={ContainerCSS}>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>{dialogTitle}</AlertDialogTitle>
+                    <AlertDialogTitle className="dark:text-white">{dialogTitle}</AlertDialogTitle>
                     <AlertDialogDescription>{dialogDescription}</AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={deleteResource}>Delete</AlertDialogAction>
+                    <AlertDialogCancel className={DialogCloseCSS}>
+                        Cancel
+                    </AlertDialogCancel>
+                    <AlertDialogAction
+                        onClick={deleteResource}
+                        className={DialogActionCSS}
+                    >
+                        Delete
+                    </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

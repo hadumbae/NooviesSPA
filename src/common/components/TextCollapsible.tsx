@@ -2,6 +2,7 @@ import {FC, ReactNode, useEffect, useState} from 'react';
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui/collapsible.tsx";
 import {ChevronDown, ChevronRight} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
+import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 type TextProps = {
     children: ReactNode;
@@ -23,7 +24,7 @@ const TextCollapsible: FC<TextProps> = (props) => {
 
     return (
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-            <CollapsibleTrigger className="flex items-center space-x-2">
+            <CollapsibleTrigger className={cn(PrimaryTextBaseCSS, "flex items-center space-x-2")}>
                 {triggerIcon}
                 <h1 className="text-md font-bold">{triggerDisplay}</h1>
             </CollapsibleTrigger>

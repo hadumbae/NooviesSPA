@@ -9,6 +9,7 @@ import HookFormFileInput from "@/common/components/forms/HookFormFileInput.tsx";
 import { Button } from "@/common/components/ui/button.tsx";
 import { ImageUp, Loader } from "lucide-react";
 import ACCEPTED_IMAGE_TYPES from "@/common/constants/AcceptedImageTypeConstant.ts";
+import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for the `MoviePosterImageSubmitFormView` component.
@@ -55,7 +56,7 @@ const MoviePosterImageSubmitFormView: FC<ViewProps> = (props) => {
         <Button
             variant="default"
             disabled={isPending}
-            className="w-full bg-primary"
+            className={cn("w-full bg-primary", PrimaryButtonCSS)}
             aria-busy={isPending}
         >
             {isPending ? <Loader className="animate-spin" /> : <> <ImageUp /> Upload </>}

@@ -1,5 +1,6 @@
 import {FC, PropsWithChildren} from 'react';
 import {cn} from "@/common/lib/utils.ts";
+import {QuoteTextCSS} from "@/common/constants/css/TextCSS.ts";
 
 interface Props {
     className?: string;
@@ -8,8 +9,7 @@ interface Props {
 const TextQuote: FC<PropsWithChildren<Props>> = ({children, className}) => {
     return (
         <blockquote className={cn(
-            "text-sm",
-            "text-neutral-500",
+            QuoteTextCSS,
             "border-l-4",
             "px-4",
             "text-justify",

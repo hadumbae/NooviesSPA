@@ -7,6 +7,7 @@ import getInitials from "@/common/utility/formatters/getInitials.ts";
 import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
 import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.types.ts";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 /**
  * Props for the `MovieDetailsCreditOverview` component.
@@ -75,7 +76,9 @@ const MovieDetailsCreditOverview: FC<OverviewProps> = ({movieID, credits}) => {
      */
     const hasCastSection = (
         <section className="space-y-4">
-            <h1 className="sr-only">Movie Cast Overview List</h1>
+            <SectionHeader srOnly={true}>
+                Movie Cast Overview List
+            </SectionHeader>
 
             <div className="grid grid-cols-2 gap-2">
                 {credits.map((credit: MovieCreditDetails) => {
@@ -126,7 +129,7 @@ const MovieDetailsCreditOverview: FC<OverviewProps> = ({movieID, credits}) => {
 
     return (
         <section className="space-y-4">
-            <h1 className="text-lg font-bold">Cast Overview</h1>
+            <SectionHeader>Cast Overview</SectionHeader>
             {hasCast ? hasCastSection : noCastSection}
         </section>
     );

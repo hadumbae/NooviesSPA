@@ -7,6 +7,7 @@ import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 interface HeaderProps {
     movie: Movie;
@@ -40,6 +41,7 @@ const MoviePeopleHeader: FC<HeaderProps> = ({movie, roleType}) => {
                     to={`/admin/movies/get/${_id}/people/crew`}
                     className={cn(
                         buttonVariants({variant: isCrew ? "outline" : "link"}),
+                        PrimaryTextBaseCSS,
                         !isCrew && "text-neutral-400",
                     )}
                 >
@@ -50,6 +52,7 @@ const MoviePeopleHeader: FC<HeaderProps> = ({movie, roleType}) => {
                     to={`/admin/movies/get/${_id}/people/cast`}
                     className={cn(
                         buttonVariants({variant: isCast ? "outline" : "link"}),
+                        PrimaryTextBaseCSS,
                         !isCast && "text-neutral-400",
                     )}
                 >

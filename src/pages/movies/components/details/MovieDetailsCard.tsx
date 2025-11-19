@@ -58,6 +58,7 @@ const MovieDetailsCard: FC<CardProps> = ({movie}) => {
             items={genres}
             getKey={({_id}: Genre) => _id}
             renderText={({name}: Genre) => name}
+            variant="default"
         />
     );
 

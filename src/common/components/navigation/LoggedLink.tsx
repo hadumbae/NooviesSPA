@@ -4,6 +4,8 @@ import {LoggerFunction} from "@/common/utility/features/logger/Logger.types.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {ParamError} from "@/common/errors/ParamError.ts";
+import {cn} from "@/common/lib/utils.ts";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for the `LoggedLink` component.
@@ -107,6 +109,7 @@ const LoggedLink: FC<LoggedLinkProps> = (props) => {
             {...linkProps}
             to={to}
             onClick={onLinkClick}
+            className={cn(HoverLinkCSS, "hover:underline hover:underline-offset-4")}
         />
     );
 };

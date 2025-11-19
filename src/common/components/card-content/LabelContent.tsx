@@ -1,5 +1,6 @@
 import {FC, PropsWithChildren} from 'react';
 import {cn} from "@/common/lib/utils.ts";
+import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 interface StylingProps {
     label?: string;
@@ -23,8 +24,15 @@ const LabelContent: FC<PropsWithChildren<LabelProps>> = (props) => {
     return (
         <div className={cn(containerCSS, containerClassName)}>
             {
-                label && <div>
-                    <span className={cn("uppercase text-[12px] text-neutral-500", labelClassName)}>{label}</span>
+                label &&
+                <div>
+                    <span className={cn(
+                        "uppercase text-[12px] select-none",
+                        SecondaryTextBaseCSS,
+                        labelClassName,
+                    )}>
+                        {label}
+                    </span>
                 </div>
             }
 

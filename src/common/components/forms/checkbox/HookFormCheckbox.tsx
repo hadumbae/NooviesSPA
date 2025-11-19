@@ -26,6 +26,7 @@ import {Checkbox} from "@/common/components/ui/checkbox.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {FieldValues} from "react-hook-form";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 /**
  * Props for the {@link HookFormCheckbox} component.
@@ -45,7 +46,7 @@ const HookFormCheckbox = <TValues extends FieldValues>(
                 <FormItem
                     className={cn(
                         "flex flex-row items-start",
-                        "rounded-md border shadow",
+                        "rounded-md border dark:border-neutral-500 shadow",
                         "space-x-3 space-y-0 p-4",
                         className
                     )}
@@ -58,7 +59,7 @@ const HookFormCheckbox = <TValues extends FieldValues>(
                     </FormControl>
 
                     <div className="space-y-1 leading-none">
-                        <FormLabel>{label}</FormLabel>
+                        <FormLabel className={PrimaryTextBaseCSS}>{label}</FormLabel>
                         {description && <FormDescription>{description}</FormDescription>}
                         <FormMessage />
                     </div>
