@@ -7,7 +7,7 @@ import useCurrentURLPath from "@/common/hooks/router/useCurrentURLPath.ts";
 import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.tsx";
 import BaseLayoutDesktopClientNavigation
     from "@/common/layout/base-layout/navigation/desktop-client-navigation/BaseLayoutDesktopClientNavigation.tsx";
-import {HoverLinkCSS} from "@/common/constants/country/ButtonCSS.ts";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * `BaseLayoutClientMovieNavigationDropdown` renders a dropdown menu

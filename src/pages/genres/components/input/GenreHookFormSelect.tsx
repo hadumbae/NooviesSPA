@@ -1,6 +1,6 @@
 import { Control, FieldValues, Path } from "react-hook-form";
-import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
-import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
+import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
+import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import useFetchGenres from "@/pages/genres/hooks/useFetchGenres.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";

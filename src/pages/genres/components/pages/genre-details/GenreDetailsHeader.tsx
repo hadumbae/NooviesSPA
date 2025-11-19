@@ -4,8 +4,8 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import {cn} from "@/common/lib/utils.ts";
 import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 import GenreDetailsOptions from "@/pages/genres/components/admin/genre-details/GenreDetailsOptions.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
 import {Ellipsis} from "lucide-react";
+import IconButton from "@/common/components/buttons/IconButton.tsx";
 
 /**
  * Props for the {@link GenreDetailsHeader} component.
@@ -43,13 +43,9 @@ const GenreDetailsHeader: FC<HeaderProps> = ({genre}) => {
 
             <section>
                 <GenreDetailsOptions>
-                    <Button
-                        variant="outline"
-                        size="icon"
-                        className="text-neutral-400 hover:text-black rounded-3xl"
-                    >
+                    <IconButton>
                         <Ellipsis/>
-                    </Button>
+                    </IconButton>
                 </GenreDetailsOptions>
             </section>
         </header>

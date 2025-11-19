@@ -5,8 +5,8 @@ import { cn } from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import { Separator } from "@/common/components/ui/separator.tsx";
-import IANATimezoneHookFormSelect from "@/common/components/forms/timezone/IANATimezoneHookFormSelect.tsx";
-import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
+import IANATimezoneHookFormSelect from "@/common/components/forms/values/IANATimezoneHookFormSelect.tsx";
+import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 
 /**
  * Props for {@link TheatreSubmitFormLocationInputs}.

@@ -1,6 +1,6 @@
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
-import HookFormRadioGroup from "@/common/components/forms/HookFormRadioGroup.tsx";
+import HookFormRadioGroup from "@/common/components/forms/radio-group/HookFormRadioGroup.tsx";
 import RoleTypeDepartmentConstant from "@/pages/roletype/constant/RoleTypeDepartmentConstant.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 
@@ -57,7 +57,7 @@ const RoleTypeDepartmentRadioGroup = <TForm extends FieldValues>(
     return (
         <HookFormRadioGroup
             className={className}
-            form={form}
+            control={form.control}
             label={label}
             name={name}
             items={items}

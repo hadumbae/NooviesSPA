@@ -10,7 +10,7 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import generateReactSelectOptions from "@/common/utility/inputs/generateReactSelectOptions.ts";
 
 import RoleTypeDepartmentRadioGroup from "@/pages/roletype/components/inputs/RoleTypeDepartmentRadioGroup.tsx";
-import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
+import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 
 import {FC} from "react";
@@ -23,7 +23,7 @@ import {
     MovieCreditFormValues
 } from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
+import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
 
 /**

@@ -8,7 +8,7 @@ import BaseLayoutClientProfileNavigationDropdown
     from "@/common/layout/base-layout/navigation/desktop-client-navigation/BaseLayoutClientProfileNavigationDropdown.tsx";
 import BaseLayoutClientMovieNavigationDropdown
     from "@/common/layout/base-layout/navigation/desktop-client-navigation/BaseLayoutClientMovieNavigationDropdown.tsx";
-import {HoverLinkCSS} from "@/common/constants/country/ButtonCSS.ts";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * `BaseLayoutDesktopClientNavigation` renders the main desktop navigation

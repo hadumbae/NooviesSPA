@@ -1,4 +1,4 @@
-import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
+import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import {Control, FieldValues, Path} from "react-hook-form";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import ShowingStatusConstant from "@/pages/showings/constants/ShowingStatusConstant.ts";

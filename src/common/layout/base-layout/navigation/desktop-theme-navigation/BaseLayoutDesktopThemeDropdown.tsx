@@ -10,7 +10,7 @@ import {ChevronDown} from "lucide-react";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ThemeContext} from "@/common/context/theme/ThemeContext.ts";
 import {cn} from "@/common/lib/utils.ts";
-import {HoverLinkCSS} from "@/common/constants/country/ButtonCSS.ts";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * **BaseLayoutDesktopGuestNavigation**

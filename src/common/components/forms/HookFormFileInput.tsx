@@ -1,4 +1,21 @@
-import {FC} from 'react';
+/**
+ * @file HookFormFileInput.tsx
+ * @description
+ * A reusable, type-safe file input component integrated with React Hook Form.
+ * Supports single and multiple file selection, optional labels, descriptions,
+ * disabled state, and automatic form value binding.
+ *
+ * Works with generic form types (`TValues extends FieldValues`) from `react-hook-form`.
+ *
+ * @example
+ * <HookFormFileInput
+ *    name="profilePicture"
+ *    label="Upload Profile Picture"
+ *    control={control}
+ *    multiple={false}
+ * />
+ */
+
 import {
     FormControl,
     FormDescription,
@@ -8,21 +25,40 @@ import {
     FormMessage
 } from "@/common/components/ui/form.tsx";
 import {Input} from "@/common/components/ui/input.tsx";
-import {Control} from "react-hook-form";
+import {FieldValues} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
+import {HookFormFileInputProps, HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 
-interface Props {
-    name: string,
-    label: string;
-    description?: string;
-    control: Control<any>;
-    className?: string;
-    disabled?: boolean;
-    multiple?: boolean;
-    hasLabel?: boolean;
-}
+/**
+ * Props for the {@link HookFormFileInput} component.
+ *
+ * @template TValues - The type of the form values from `react-hook-form`.
+ */
+type FileInputProps<TValues extends FieldValues> = HookFormInputControlProps<TValues> & HookFormFileInputProps;
 
-const HookFormFileInput: FC<Props> = (params) => {
+/**
+ * `HookFormFileInput` is a type-safe file input component integrated with React Hook Form.
+ *
+ * Features:
+ * - Supports single or multiple file selection
+ * - Automatically updates the form field value
+ * - Optional label and description
+ * - Disabled state support
+ *
+ * @template TValues - The type of the form values.
+ *
+ * @param {FileInputProps<TValues>} props - Configuration for the file input.
+ * @returns {JSX.Element} A file input field bound to React Hook Form.
+ *
+ * @example
+ * <HookFormFileInput
+ *    name="documents"
+ *    label="Upload Documents"
+ *    control={control}
+ *    multiple={true}
+ * />
+ */
+const HookFormFileInput = <TValues extends FieldValues>(props: FileInputProps<TValues>) => {
     const {
         name,
         label,
@@ -32,32 +68,37 @@ const HookFormFileInput: FC<Props> = (params) => {
         className,
         multiple = false,
         hasLabel = true,
-    } = params;
+    } = props;
 
     return (
         <FormField
             control={control}
             name={name}
-            render={({field: {value, onChange, ...fieldProps}}) => <FormItem className={cn(className)}>
-                {hasLabel && <FormLabel>{label}</FormLabel>}
+            render={({field: {value, onChange, ...fieldProps}}) => (
+                <FormItem className={cn(className)}>
+                    {hasLabel && <FormLabel>{label}</FormLabel>}
 
-                <FormControl>
-                    <Input
-                        type="file"
-                        disabled={disabled}
-                        multiple={multiple}
-                        onChange={(event) => onChange(
-                            event.target.files && (multiple ? event.target.files : event.target.files[0])
-                        )}
+                    <FormControl>
+                        <Input
+                            type="file"
+                            disabled={disabled}
+                            multiple={multiple}
+                            onChange={(event) =>
+                                onChange(
+                                    event.target.files &&
+                                    (multiple ? event.target.files : event.target.files[0])
+                                )
+                            }
+                            {...fieldProps}
+                        />
+                    </FormControl>
 
-                        {...fieldProps}
-                    />
-                </FormControl>
+                    {description && <FormDescription>{description}</FormDescription>}
 
-                {description && <FormDescription>{description}</FormDescription>}
-
-                <FormMessage/>
-            </FormItem>}/>
+                    <FormMessage/>
+                </FormItem>
+            )}
+        />
     );
 };
 

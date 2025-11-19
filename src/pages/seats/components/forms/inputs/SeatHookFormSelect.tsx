@@ -1,7 +1,7 @@
 import { Control, FieldValues, Path } from "react-hook-form";
 import { Loader } from "lucide-react";
-import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
-import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
+import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
+import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import { SeatArraySchema } from "@/pages/seats/schema/seat/Seat.schema.ts";

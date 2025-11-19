@@ -18,7 +18,7 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import GenreHookFormSelect from "@/pages/genres/components/input/GenreHookFormSelect.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
-import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
+import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import HookFormSortToggle from "@/common/components/forms/HookFormSortToggle.tsx";
 

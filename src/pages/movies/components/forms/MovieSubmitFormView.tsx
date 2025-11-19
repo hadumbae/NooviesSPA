@@ -9,7 +9,7 @@ import CountryHookFormSelect from "@/common/components/forms/values/CountryHookF
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {MovieForm, MovieFormValues} from "@/pages/movies/schema/form/MovieForm.types.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
+import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
 import {MovieFormValuesSchema} from "@/pages/movies/schema/form/MovieForm.schema.ts";

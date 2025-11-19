@@ -6,7 +6,7 @@ import {Button} from "@/common/components/ui/button.tsx";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 import ScreenHookFormSelect from "@/pages/screens/components/submit-form/inputs/ScreenHookFormSelect.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import HookFormCheckbox from "@/common/components/forms/HookFormCheckbox.tsx";
+import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {Loader} from "lucide-react";
 import SeatTypeHookFormSelect from "@/pages/seats/components/forms/inputs/SeatTypeHookFormSelect.tsx";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";

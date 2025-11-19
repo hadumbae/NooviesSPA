@@ -1,7 +1,7 @@
 import { Control, FieldValues, Path } from "react-hook-form";
 import SeatTypeConstant from "@/pages/seats/constants/SeatTypeConstant.ts";
-import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
-import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
+import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
+import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 
 /**
  * Props for {@link SeatTypeHookFormSelect}.

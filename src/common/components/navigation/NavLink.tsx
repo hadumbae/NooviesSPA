@@ -3,7 +3,7 @@ import LoggedLink, { LoggedLinkProps } from "@/common/components/navigation/Logg
 import { cn } from "@/common/lib/utils.ts";
 import { buttonVariants } from "@/common/components/ui/button.tsx";
 import { useLocation } from "react-router-dom";
-import {HoverLinkCSS} from "@/common/constants/country/ButtonCSS.ts";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * **NavLink** — a styled navigation link component built on top of {@link LoggedLink}.

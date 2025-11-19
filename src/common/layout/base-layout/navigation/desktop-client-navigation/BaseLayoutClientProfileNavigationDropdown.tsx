@@ -8,7 +8,7 @@ import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.ts
 import BaseLayoutDesktopClientNavigation
     from "@/common/layout/base-layout/navigation/desktop-client-navigation/BaseLayoutDesktopClientNavigation.tsx";
 import { Separator } from "@/common/components/ui/separator.tsx";
-import {HoverLinkCSS} from "@/common/constants/country/ButtonCSS.ts";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * `BaseLayoutClientProfileNavigationDropdown` renders a dropdown menu

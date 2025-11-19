@@ -1,8 +1,8 @@
 import {Control, FieldValues, Path} from "react-hook-form";
 import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import {Loader} from "lucide-react";
-import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
-import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
+import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
+import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import useFetchTheatres from "@/pages/theatres/hooks/query/useFetchTheatres.ts";
 import {TheatreArraySchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";

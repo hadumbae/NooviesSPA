@@ -1,35 +1,17 @@
-import {FC} from 'react';
-import {Control} from "react-hook-form";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import ISO3166Alpha2CodeConstant from "@/common/constants/country/ISO3166Alpha2CodeConstant.ts";
-import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
-import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
+import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
+import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
+import {FieldValues} from "react-hook-form";
+import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 
 /**
  * Props for the {@link CountryHookFormSelect} component.
  */
-interface CountryProps {
-    /** Name of the form field. */
-    name: string;
-
-    /** Label displayed above the select input. */
-    label: string;
-
-    /** Optional description shown below the select input. */
-    description?: string;
-
-    /** Placeholder text for the select input. */
-    placeholder?: string;
-
-    /** React Hook Form control object for managing form state. */
-    control: Control<any>;
-
-    /** Determines whether the select input allows multiple selections. */
+type CountryProps<TValues extends FieldValues> = HookFormInputControlProps<TValues> & {
     isMulti?: boolean;
-
-    className?: string;
-}
+};
 
 /**
  * `CountryHookFormSelect` is a form component that renders a single-select or multi-select dropdown
@@ -40,7 +22,7 @@ interface CountryProps {
  * @param props - Configuration for the select input including control and selection mode.
  * @returns A single or multi select dropdown component.
  */
-const CountryHookFormSelect: FC<CountryProps> = (props) => {
+const CountryHookFormSelect = <TValues extends FieldValues>(props: CountryProps<TValues>) => {
     const {isMulti = false, ...rest} = props;
 
     const options = ISO3166Alpha2CodeConstant.map((code): ReactSelectOption => ({

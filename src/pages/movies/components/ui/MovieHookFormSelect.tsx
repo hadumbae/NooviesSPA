@@ -4,8 +4,8 @@ import {Loader} from "lucide-react";
 import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 
-import HookFormSelect from "@/common/components/forms/HookFormSelect.tsx";
-import HookFormMultiSelect from "@/common/components/forms/HookFormMultiSelect.tsx";
+import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
+import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import {MovieArraySchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";

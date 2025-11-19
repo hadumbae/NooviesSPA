@@ -7,7 +7,7 @@
 import { FC } from 'react';
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
-import IANATimezoneHookFormSelect from "@/common/components/forms/timezone/IANATimezoneHookFormSelect.tsx";
+import IANATimezoneHookFormSelect from "@/common/components/forms/values/IANATimezoneHookFormSelect.tsx";
 import { UseFormReturn } from "react-hook-form";
 import { TheatreQueryOptionFormValues } from "@/pages/theatres/schema/queries/TheatreQueryOptionFormSchema.ts";
 import { TheatreQueryFilters } from "@/pages/theatres/schema/queries/TheatreQueryOption.types.ts";
