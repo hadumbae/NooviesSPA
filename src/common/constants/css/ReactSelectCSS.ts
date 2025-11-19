@@ -48,7 +48,8 @@ export const ReactSelectStyleConfig: ClassNamesConfig<
     control: ({isFocused}) =>
         cn(
             HookFormInputCSS,
-            isFocused && "border-black dark:border-white"
+            "dark:text-white",
+            isFocused && "border-black dark:border-white",
         ),
 
     menu: () =>
@@ -62,7 +63,7 @@ export const ReactSelectStyleConfig: ClassNamesConfig<
         cn(
             "px-3 py-1",
             !isSelected &&
-            "hover:text-purple-800 dark:hover:text-purple-500 hover:font-bold",
+            "hover:text-purple-800 dark:text-neutral-500 dark:hover:text-purple-500 hover:font-bold",
             isSelected && "bg-purple-800 text-white"
         ),
 };
@@ -95,7 +96,7 @@ export const ReactSelectMultiStyleConfig: ClassNamesConfig<
         cn(
             HookFormInputCSS,
             isFocused && "border-black dark:border-white",
-            "h-fit"
+            "h-fit dark:text-white"
         ),
 
     menu: () =>
@@ -109,7 +110,7 @@ export const ReactSelectMultiStyleConfig: ClassNamesConfig<
         cn(
             "px-3 py-1",
             !isSelected &&
-            "hover:text-purple-800 dark:hover:text-purple-500 hover:font-bold",
+            "hover:text-purple-800 dark:text-neutral-500 dark:hover:text-purple-500 hover:font-bold",
             isSelected && "bg-purple-800 text-white"
         ),
 

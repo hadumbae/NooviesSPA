@@ -40,6 +40,7 @@ import {
 import HookFormErrorMessage from "@/common/components/forms/HookFormErrorMessage.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ReactSelectMultiStyleConfig} from "@/common/constants/css/ReactSelectCSS.ts";
+import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 /**
  * Props for the `HookFormMultiSelect` component.
@@ -114,7 +115,7 @@ const HookFormMultiSelect = <TSubmit extends FieldValues>(
             name={name}
             render={({field, fieldState: {error}}) => (
                 <FormItem className={cn(className)}>
-                    <FormLabel>{label}</FormLabel>
+                    <FormLabel className={PrimaryTextBaseCSS}>{label}</FormLabel>
 
                     <FormControl>
                         <Select
