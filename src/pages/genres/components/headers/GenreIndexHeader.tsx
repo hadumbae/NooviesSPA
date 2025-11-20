@@ -4,6 +4,7 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import { Plus } from "lucide-react";
 import GenreSubmitFormPanel from "@/pages/genres/components/form/GenreSubmitFormPanel.tsx";
 import { Button } from "@/common/components/ui/button.tsx";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Header section for the Genre index page.
@@ -36,7 +37,7 @@ const GenreIndexHeader: FC = () => {
             </section>
 
             <GenreSubmitFormPanel>
-                <Button variant="link" className="text-neutral-400 hover:text-black">
+                <Button variant="link" className={HoverLinkCSS}>
                     <Plus /> Create
                 </Button>
             </GenreSubmitFormPanel>

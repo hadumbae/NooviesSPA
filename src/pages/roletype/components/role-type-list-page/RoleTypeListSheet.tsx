@@ -1,12 +1,7 @@
 import {FC, useState} from 'react';
 import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
+    Sheet
+} from "@/common/components/ui/Sheet/Sheet.tsx";
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
@@ -18,6 +13,11 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import RoleTypeSubmitFormContainer from "@/pages/roletype/components/forms/RoleTypeSubmitFormContainer.tsx";
 import useRoleTypeDeleteMutation from "@/pages/roletype/hooks/mutations/useRoleTypeDeleteMutation.ts";
 import {Button} from "@/common/components/ui/button.tsx";
+import {SheetContent} from "@/common/components/ui/Sheet/SheetContent.tsx";
+import {SheetHeader} from "@/common/components/ui/Sheet/SheetHeader.tsx";
+import {SheetTitle} from "@/common/components/ui/Sheet/SheetTitle.tsx";
+import {SheetDescription} from "@/common/components/ui/Sheet/SheetDescription.tsx";
+import {SheetTrigger} from "@/common/components/ui/Sheet/SheetTrigger.tsx";
 
 /**
  * Props for the {@link RoleTypeListSheet} component.

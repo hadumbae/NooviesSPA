@@ -1,12 +1,4 @@
 import { FC, ReactNode } from 'react';
-import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
 import { Movie } from "@/pages/movies/schema/movie/Movie.types.ts";
 import { MovieFormValues } from "@/pages/movies/schema/form/MovieForm.types.ts";
 import MovieSubmitFormContainer from "@/pages/movies/components/forms/MovieSubmitFormContainer.tsx";
@@ -14,6 +6,14 @@ import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 import { PresetOpenState } from "@/common/type/ui/OpenStateProps.ts";
 import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger
+} from "@/common/components/ui/Sheet";
 
 /**
  * Props for `MovieSubmitFormPanel`.

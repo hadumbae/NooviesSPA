@@ -4,17 +4,17 @@ import { TheatreFormValues } from "@/pages/theatres/schema/forms/TheatreForm.typ
 import TheatreSubmitFormContainer from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormContainer.tsx";
 
 import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
+    Sheet
+} from "@/common/components/ui/Sheet/Sheet.tsx";
 import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
+import {SheetContent} from "@/common/components/ui/Sheet/SheetContent.tsx";
+import {SheetHeader} from "@/common/components/ui/Sheet/SheetHeader.tsx";
+import {SheetTitle} from "@/common/components/ui/Sheet/SheetTitle.tsx";
+import {SheetDescription} from "@/common/components/ui/Sheet/SheetDescription.tsx";
+import {SheetTrigger} from "@/common/components/ui/Sheet/SheetTrigger.tsx";
 
 /**
  * Props for {@link TheatreSubmitFormPanel}.

@@ -9,7 +9,7 @@ import {cn} from "@/common/lib/utils"
 import {Button} from "@/common/components/ui/button"
 import {Input} from "@/common/components/ui/input"
 import {Separator} from "@/common/components/ui/separator"
-import {Sheet, SheetContent, SheetHeader, SheetTitle} from "@/common/components/ui/sheet"
+import {Sheet} from "@/common/components/ui/Sheet/Sheet.tsx"
 import {Skeleton} from "@/common/components/ui/skeleton"
 import {
     Tooltip,
@@ -18,6 +18,9 @@ import {
     TooltipTrigger,
 } from "@/common/components/ui/tooltip"
 import {SidebarContext} from "@/common/components/ui/sidebar/SidebarContext.ts";
+import {SheetContent} from "@/common/components/ui/Sheet/SheetContent.tsx";
+import {SheetHeader} from "@/common/components/ui/Sheet/SheetHeader.tsx";
+import {SheetTitle} from "@/common/components/ui/Sheet/SheetTitle.tsx";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7

@@ -1,5 +1,11 @@
 import {FC, ReactNode, useState} from 'react';
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import UploadPersonProfileImageFormContainer
+    from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormContainer.tsx";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {
     Sheet,
     SheetContent,
@@ -7,13 +13,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
-import UploadPersonProfileImageFormContainer
-    from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormContainer.tsx";
-import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+} from "@/common/components/ui/Sheet";
 
 /**
  * Props for `UploadPersonProfileImageFormPanel`.

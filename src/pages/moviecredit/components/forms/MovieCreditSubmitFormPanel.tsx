@@ -1,5 +1,9 @@
 import {FC, ReactNode, useState} from 'react';
 import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import MovieCreditSubmitFormContainer from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormContainer.tsx";
+import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
+import {MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import {
     Sheet,
     SheetContent,
@@ -7,11 +11,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
-import MovieCreditSubmitFormContainer from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormContainer.tsx";
-import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
-import {MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
+} from "@/common/components/ui/Sheet";
 
 /**
  * Props for the {@link MovieCreditSubmitFormPanel} component.

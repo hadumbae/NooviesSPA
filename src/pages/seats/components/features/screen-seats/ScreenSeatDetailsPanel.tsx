@@ -1,12 +1,7 @@
 import {FC, PropsWithChildren, useState} from 'react';
 import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
+    Sheet
+} from "@/common/components/ui/Sheet/Sheet.tsx";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/common/components/ui/accordion.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
@@ -15,6 +10,11 @@ import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/
 import SeatDeleteWarningDialog from "@/pages/seats/components/features/delete-seats/SeatDeleteWarningDialog.tsx";
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {Ellipsis} from "lucide-react";
+import {SheetContent} from "@/common/components/ui/Sheet/SheetContent.tsx";
+import {SheetHeader} from "@/common/components/ui/Sheet/SheetHeader.tsx";
+import {SheetTitle} from "@/common/components/ui/Sheet/SheetTitle.tsx";
+import {SheetDescription} from "@/common/components/ui/Sheet/SheetDescription.tsx";
+import {SheetTrigger} from "@/common/components/ui/Sheet/SheetTrigger.tsx";
 
 /**
  * Props for the {@link ScreenSeatDetailsPanel} component.

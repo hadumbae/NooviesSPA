@@ -1,4 +1,10 @@
 import {FC, ReactNode, useState} from 'react';
+import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
+import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {FormOptions} from "@/common/type/form/HookFormProps.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {
     Sheet,
     SheetContent,
@@ -6,13 +12,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
-import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
-import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
-import {FormOptions} from "@/common/type/form/HookFormProps.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+} from "@/common/components/ui/Sheet";
 
 /**
  * Props defining editing state for the SeatSubmitFormPanel.

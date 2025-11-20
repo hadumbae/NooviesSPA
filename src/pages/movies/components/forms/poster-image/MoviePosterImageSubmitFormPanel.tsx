@@ -1,6 +1,11 @@
 import { FC, ReactNode, useState } from 'react';
 import { PresetOpenState } from "@/common/type/ui/OpenStateProps.ts";
 import { Movie } from "@/pages/movies/schema/movie/Movie.types.ts";
+import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
+import MoviePosterImageSubmitFormContainer
+    from "@/pages/movies/components/forms/poster-image/MoviePosterImageSubmitFormContainer.tsx";
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {
     Sheet,
     SheetContent,
@@ -8,12 +13,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
-import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
-import MoviePosterImageSubmitFormContainer
-    from "@/pages/movies/components/forms/poster-image/MoviePosterImageSubmitFormContainer.tsx";
-import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+} from "@/common/components/ui/Sheet";
 
 /**
  * Props for `MoviePosterImageSubmitFormPanel`.

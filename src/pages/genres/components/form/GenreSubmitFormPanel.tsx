@@ -1,5 +1,10 @@
 import { FC, ReactNode, useState } from 'react';
 import { Genre } from "@/pages/genres/schema/genre/Genre.types.ts";
+import { GenreFormValues } from "@/pages/genres/schema/form/GenreForm.types.ts";
+import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
+import GenreSubmitFormContainer from "@/pages/genres/components/form/GenreSubmitFormContainer.tsx";
+import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
+import { PresetOpenState } from "@/common/type/ui/OpenStateProps.ts";
 import {
     Sheet,
     SheetContent,
@@ -7,12 +12,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
-import { GenreFormValues } from "@/pages/genres/schema/form/GenreForm.types.ts";
-import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
-import GenreSubmitFormContainer from "@/pages/genres/components/form/GenreSubmitFormContainer.tsx";
-import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
-import { PresetOpenState } from "@/common/type/ui/OpenStateProps.ts";
+} from "@/common/components/ui/Sheet";
 
 /**
  * Props for the {@link GenreSubmitFormPanel} component.

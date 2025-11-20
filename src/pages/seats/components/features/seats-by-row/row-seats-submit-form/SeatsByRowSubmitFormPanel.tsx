@@ -1,4 +1,10 @@
 import { FC, PropsWithChildren, useState } from 'react';
+import SeatsByRowSubmitFormContainer
+    from "@/pages/seats/components/features/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormContainer.tsx";
+import { SeatsByRowFormValues } from "@/pages/seats/schema/form/SeatForm.types.ts";
+import { FormOptions } from "@/common/type/form/HookFormProps.ts";
+import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {
     Sheet,
     SheetContent,
@@ -6,13 +12,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
-import SeatsByRowSubmitFormContainer
-    from "@/pages/seats/components/features/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormContainer.tsx";
-import { SeatsByRowFormValues } from "@/pages/seats/schema/form/SeatForm.types.ts";
-import { FormOptions } from "@/common/type/form/HookFormProps.ts";
-import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+} from "@/common/components/ui/Sheet";
 
 /**
  * Props for SeatsByRowSubmitFormPanel.

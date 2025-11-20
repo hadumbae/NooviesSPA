@@ -2,13 +2,8 @@ import {FC, ReactNode, useState} from 'react';
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import {RoleTypeFormValues} from "@/pages/roletype/schema/submit-form/RoleTypeForm.types.ts";
 import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
+    Sheet
+} from "@/common/components/ui/Sheet/Sheet.tsx";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import RoleTypeSubmitFormContainer from "@/pages/roletype/components/forms/RoleTypeSubmitFormContainer.tsx";
@@ -17,6 +12,11 @@ import {ScrollAreaScrollbar} from "@radix-ui/react-scroll-area";
 import RoleTypeFormCreatedList from "@/pages/roletype/components/forms/form-panel/RoleTypeFormCreatedList.tsx";
 import {X} from "lucide-react";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
+import {SheetContent} from "@/common/components/ui/Sheet/SheetContent.tsx";
+import {SheetHeader} from "@/common/components/ui/Sheet/SheetHeader.tsx";
+import {SheetTitle} from "@/common/components/ui/Sheet/SheetTitle.tsx";
+import {SheetDescription} from "@/common/components/ui/Sheet/SheetDescription.tsx";
+import {SheetTrigger} from "@/common/components/ui/Sheet/SheetTrigger.tsx";
 
 /**
  * Props for {@link RoleTypeSubmitFormPanel}.

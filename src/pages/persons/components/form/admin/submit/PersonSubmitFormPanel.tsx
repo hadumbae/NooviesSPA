@@ -1,6 +1,10 @@
 import {FC, ReactNode, useState} from 'react';
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 import {PersonFormValues} from "@/pages/persons/schema/forms/PersonForm.types.ts";
+import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import PersonSubmitFormContainer from "@/pages/persons/components/form/admin/submit/PersonSubmitFormContainer.tsx";
+import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import {
     Sheet,
     SheetContent,
@@ -8,11 +12,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
-import PersonSubmitFormContainer from "@/pages/persons/components/form/admin/submit/PersonSubmitFormContainer.tsx";
-import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
-import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
+} from "@/common/components/ui/Sheet";
 
 /**
  * Props for `PersonSubmitFormPanel`.

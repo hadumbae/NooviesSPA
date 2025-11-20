@@ -1,6 +1,9 @@
 import {FC, ReactNode, useState} from 'react';
 import type {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
+import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import ScreenSubmitFormContainer from "@/pages/screens/components/submit-form/ScreenSubmitFormContainer.tsx";
+import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 import {
     Sheet,
     SheetContent,
@@ -8,10 +11,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet.tsx";
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
-import ScreenSubmitFormContainer from "@/pages/screens/components/submit-form/ScreenSubmitFormContainer.tsx";
-import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
+} from "@/common/components/ui/Sheet";
 
 /**
  * Props for the `ScreenSubmitFormPanel` component.
