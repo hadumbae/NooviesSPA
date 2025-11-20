@@ -13,6 +13,7 @@ import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import RoleTypeCategorySelect from "@/pages/roletype/components/inputs/RoleTypeCategorySelect.tsx";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for {@link RoleTypeSubmitFormView}.
@@ -106,7 +107,7 @@ const RoleTypeSubmitFormView: FC<SubmitViewProps> = (props) => {
 
                 <Button
                     variant="default"
-                    className="w-full bg-primary"
+                    className={cn(PrimaryButtonCSS, "w-full")}
                     disabled={isPending}
                 >
                     {submitButtonText ?? "Submit"}

@@ -6,6 +6,7 @@ import {Plus} from "lucide-react";
 import RoleTypeSubmitFormPanel from "@/pages/roletype/components/forms/form-panel/RoleTypeSubmitFormPanel.tsx";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for {@link RoleTypeListHeader}.
@@ -63,7 +64,7 @@ const RoleTypeListHeader: FC<HeaderProps> = () => {
 
             <section>
                 <RoleTypeSubmitFormPanel closeOnSubmit={false}>
-                    <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
+                    <Button variant="link" size="sm" className={HoverLinkCSS}>
                         <Plus /> Create
                     </Button>
                 </RoleTypeSubmitFormPanel>
