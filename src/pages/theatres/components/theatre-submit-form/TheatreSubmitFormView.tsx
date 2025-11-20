@@ -11,6 +11,8 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
 import {TheatreFormValuesSchema} from "@/pages/theatres/schema/forms/TheatreForm.schema.ts";
+import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
+import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for {@link TheatreSubmitFormView}.
@@ -111,7 +113,7 @@ const TheatreSubmitFormView: FC<TheatreSubmitFormViewProps> = (params) => {
             >
                 <fieldset className="space-y-4">
                     <div>
-                        <h1 className="text-lg font-bold">Theatre</h1>
+                        <PrimaryHeaderText>Theatre</PrimaryHeaderText>
                         <Separator/>
                     </div>
 
@@ -147,7 +149,7 @@ const TheatreSubmitFormView: FC<TheatreSubmitFormViewProps> = (params) => {
                     <Button
                         type="submit"
                         variant="default"
-                        className="w-full bg-primary"
+                        className={cn(PrimaryButtonCSS, "w-full")}
                         disabled={isPending || isSuccess}
                     >
                         Submit

@@ -7,6 +7,7 @@ import CountryHookFormSelect from "@/common/components/forms/values/CountryHookF
 import { Separator } from "@/common/components/ui/separator.tsx";
 import IANATimezoneHookFormSelect from "@/common/components/forms/values/IANATimezoneHookFormSelect.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
+import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 
 /**
  * Props for {@link TheatreSubmitFormLocationInputs}.
@@ -59,7 +60,7 @@ const TheatreSubmitFormLocationInputs: FC<TheatreSubmitFormLocationInputsProps> 
     return (
         <fieldset className="space-y-4">
             <div>
-                <h1 className="text-lg font-bold">Location</h1>
+                <PrimaryHeaderText>Location</PrimaryHeaderText>
                 <Separator />
             </div>
 

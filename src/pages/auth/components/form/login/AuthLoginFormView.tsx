@@ -8,6 +8,7 @@ import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
 import {AuthUserDetails} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
 import {UserLoginData} from "@/pages/auth/schema/form/AuthForm.types.ts";
+import {PrimaryButtonCSS, SecondaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for the `AuthLoginFormView` component.
@@ -69,7 +70,7 @@ const AuthLoginFormView: FC<ViewProps> = (props) => {
                 <Button
                     variant="default"
                     type="submit"
-                    className="w-full bg-primary"
+                    className={cn(PrimaryButtonCSS, "w-full")}
                     disabled={isPending}
                 >
                     Login
@@ -77,7 +78,7 @@ const AuthLoginFormView: FC<ViewProps> = (props) => {
 
                 <Button
                     variant="outline"
-                    className="w-full"
+                    className={cn(SecondaryButtonCSS, "w-full")}
                     type="button"
                     onClick={redirectToRegister}
                 >

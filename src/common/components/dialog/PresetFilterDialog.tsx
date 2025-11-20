@@ -11,6 +11,7 @@ import {
 import { ListFilter } from "lucide-react";
 import { Button } from "@/common/components/ui/button.tsx";
 import { cn } from "@/common/lib/utils.ts";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for the PresetFilterDialog component.
@@ -86,9 +87,8 @@ const PresetFilterDialog: FC<PresetFilterDialogProps> = (props) => {
                     size="sm"
                     variant="link"
                     className={cn(
+                        HoverLinkCSS,
                         "w-fit",
-                        "text-neutral-400 hover:text-black",
-                        "dark:text-neutral-500 hover:text-white",
                         className
                     )}
                 >

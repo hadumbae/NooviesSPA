@@ -6,6 +6,7 @@ import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import TheatreSubmitFormPanel from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormPanel.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for {@link TheatreIndexHeader}.
@@ -75,7 +76,7 @@ const TheatreIndexHeader: FC<HeaderProps> = (props) => {
                 <Button
                     variant="link"
                     size="sm"
-                    className="text-neutral-400 hover:text-black"
+                    className={HoverLinkCSS}
                 >
                     <Plus/> Create
                 </Button>

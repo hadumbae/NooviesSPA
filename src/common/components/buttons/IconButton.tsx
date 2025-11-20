@@ -1,6 +1,7 @@
 import { Button, ButtonProps } from "@/common/components/ui/button.tsx";
 import { forwardRef } from "react";
 import { cn } from "@/common/lib/utils.ts";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for `IconButton`.
@@ -21,7 +22,8 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
             size="icon"
             ref={ref}
             className={cn(
-                "text-neutral-400 hover:text-black rounded-3xl",
+                HoverLinkCSS,
+                "rounded-3xl",
                 className
             )}
             {...rest}

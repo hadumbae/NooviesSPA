@@ -7,6 +7,7 @@ import PersonSubmitFormPanel from "@/pages/persons/components/form/admin/submit/
 import {Button} from "@/common/components/ui/button.tsx";
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * **Person Index Header**
@@ -76,7 +77,7 @@ const PersonIndexHeader: FC = () => {
             <PersonSubmitFormPanel onSubmitSuccess={onSubmit}>
                 <Button
                     variant="link"
-                    className="text-neutral-400 hover:text-black"
+                    className={HoverLinkCSS}
                 >
                     <Plus /> Create
                 </Button>

@@ -7,7 +7,7 @@ import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarIm
 import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
 import PersonDetailsOptions
     from "@/pages/persons/components/admin/person-details/PersonDetailsOptions.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
+import IconButton from "@/common/components/buttons/IconButton.tsx";
 
 type HeaderProps = {
     /** The person whose details are displayed in this header. */
@@ -47,9 +47,9 @@ const PersonDetailsHeader: FC<HeaderProps> = ({person}) => {
 
             <section className="flex justify-end items-center space-x-2">
                 <PersonDetailsOptions>
-                    <Button variant="outline" size="icon" className="rounded-3xl">
+                    <IconButton>
                         <EllipsisIcon />
-                    </Button>
+                    </IconButton>
                 </PersonDetailsOptions>
             </section>
         </header>

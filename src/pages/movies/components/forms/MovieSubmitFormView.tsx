@@ -14,6 +14,7 @@ import {cn} from "@/common/lib/utils.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
 import {MovieFormValuesSchema} from "@/pages/movies/schema/form/MovieForm.schema.ts";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
+import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for `MovieSubmitFormView`.
@@ -249,7 +250,7 @@ const MovieSubmitFormView: FC<ViewProps> = (props) => {
                     <Button
                         type="submit"
                         variant="default"
-                        className="w-full bg-primary"
+                        className={cn(PrimaryButtonCSS, "w-full")}
                         disabled={isPending || isSuccess}
                     >
                         Submit

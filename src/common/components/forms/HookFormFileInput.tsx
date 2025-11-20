@@ -29,6 +29,7 @@ import {FieldValues} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormFileInputProps, HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
+import {HookFormInputCSS} from "@/common/constants/css/HookFormInputCSS.ts";
 
 /**
  * Props for the {@link HookFormFileInput} component.
@@ -84,7 +85,7 @@ const HookFormFileInput = <TValues extends FieldValues>(props: FileInputProps<TV
 
                     <FormControl>
                         <Input
-                            className="dark:text-neutral-500"
+                            className={HookFormInputCSS}
                             type="file"
                             disabled={disabled}
                             multiple={multiple}
