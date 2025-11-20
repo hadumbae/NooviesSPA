@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import {ChevronLeft} from "lucide-react";
-import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
+import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 
 interface Props {
     showing: Showing;
@@ -13,13 +13,13 @@ const ShowingSeatMapCreateNavigation: FC<Props> = ({showing}) => {
 
     return (
         <div className="flex justify-between">
-            <HeaderLink variant="link" to={`/admin/showings/get/${_id}/seating`}>
+            <LoggedLink to={`/admin/showings/get/${_id}/seating`}>
                 <ChevronLeft /> Seating
-            </HeaderLink>
+            </LoggedLink>
 
-            <HeaderLink variant="link" to={`/admin/showings/get/${_id}/seating`}>
+            <LoggedLink to={`/admin/showings/get/${_id}/seating`}>
                 <ChevronLeft /> Seating
-            </HeaderLink>
+            </LoggedLink>
         </div>
     );
 };

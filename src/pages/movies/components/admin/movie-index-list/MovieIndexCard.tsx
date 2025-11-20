@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { Card, CardContent } from "@/common/components/ui/card.tsx";
-import { MovieDetails } from "@/pages/movies/schema/movie/Movie.types.ts";
-import { Info } from "lucide-react";
+import {FC} from 'react';
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {Info} from "lucide-react";
 import TooltipButton from "@/common/components/buttons/TooltipButton.tsx";
 import MovieDetailsDialog from "@/pages/movies/components/admin/movie-index-list/MovieDetailsDialog.tsx";
 import MoviePosterImage from "@/pages/movies/components/MoviePosterImage.tsx";
@@ -37,11 +37,11 @@ type IndexCardProps = {
  * <MovieIndexCard movie={someMovie} />
  * ```
  */
-const MovieIndexCard: FC<IndexCardProps> = ({ movie, className }) => {
-    const { _id, title } = movie;
+const MovieIndexCard: FC<IndexCardProps> = ({movie, className}) => {
+    const {_id, title} = movie;
 
     /** Formatted display strings generated from the movie details. */
-    const { posterURL, genreString, releaseRuntimeString } = formatMovieDetails(movie);
+    const {posterURL, genreString, releaseRuntimeString} = formatMovieDetails(movie);
 
     /** Tooltip text for the info button. */
     const tooltipText = "More Information For Movie";
@@ -59,10 +59,7 @@ const MovieIndexCard: FC<IndexCardProps> = ({ movie, className }) => {
 
                 {/* Title, runtime, and genres */}
                 <section className="flex-grow flex flex-col space-y-1">
-                    <LoggedLink
-                        to={`/admin/movies/get/${_id}`}
-                        className="hover:underline hover:underline-offset-4"
-                    >
+                    <LoggedLink to={`/admin/movies/get/${_id}`}>
                         <h1 className="text-lg font-bold">{title}</h1>
                     </LoggedLink>
 
@@ -80,7 +77,7 @@ const MovieIndexCard: FC<IndexCardProps> = ({ movie, className }) => {
                             "dark:text-neutral-600 dark:hover:text-white"
                         )}
                     >
-                        <Info />
+                        <Info/>
                     </TooltipButton>
                 </MovieDetailsDialog>
             </CardContent>

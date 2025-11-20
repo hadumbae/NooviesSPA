@@ -1,11 +1,11 @@
 import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import HeaderLink from "@/common/components/page/headers/HeaderLink.tsx";
 import {Search} from "lucide-react";
 import useValidatePopulatedShowing from "@/pages/showings/hooks/validation/useValidatePopulatedShowing.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
+import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 
 interface Props {
     /**
@@ -47,9 +47,9 @@ const ShowingEditHeader: FC<Props> = ({showing}) => {
             </section>
 
             <section className="flex justify-end items-center">
-                <HeaderLink variant="link" to={`/admin/showings/get/${_id}`}>
+                <LoggedLink to={`/admin/showings/get/${_id}`}>
                     <Search/> Back To Showing
-                </HeaderLink>
+                </LoggedLink>
             </section>
         </header>
     );

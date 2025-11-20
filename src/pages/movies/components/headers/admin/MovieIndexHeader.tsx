@@ -4,8 +4,7 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import {Plus} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
-import HeaderButton from "@/common/components/page/headers/HeaderButton.tsx";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
 
 /**
  * `MovieIndexHeader` is the header section for the movie index page.
@@ -26,18 +25,14 @@ import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
  * @returns {JSX.Element} The rendered movie index header.
  */
 const MovieIndexHeader: FC = () => {
-    const navigate = useLoggedNavigate();
     const {page, perPage, hasPaginationValues} = usePaginationSearchParams();
+    const state = hasPaginationValues ? {page, perPage} : {};
 
-    const navigateToCreate = () => {
-        const state = hasPaginationValues ? {page, perPage} : {};
-
-        navigate({
-            to: "/admin/movies/create",
-            options: {state},
-            component: MovieIndexHeader.name,
-            message: "Navigate to movie creation form.",
-        });
+    const createNavigationObject = {
+        to: "/admin/movies/create",
+        options: {state},
+        component: MovieIndexHeader.name,
+        message: "Navigate to movie creation form.",
     };
 
     return (
@@ -48,9 +43,9 @@ const MovieIndexHeader: FC = () => {
             </section>
 
             <section className="flex justify-end items-center">
-                <HeaderButton variant="link" onClick={navigateToCreate}>
+                <LoggedLink {...createNavigationObject}>
                     <Plus/> Create
-                </HeaderButton>
+                </LoggedLink>
             </section>
         </header>
     );
