@@ -7,6 +7,7 @@ import { Form } from "@/common/components/ui/form.tsx";
 import { Genre } from "@/pages/genres/schema/genre/Genre.types.ts";
 import { cn } from "@/common/lib/utils.ts";
 import { FormViewProps } from "@/common/type/form/HookFormProps.ts";
+import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * Props for the {@link GenreSubmitFormView} component.
@@ -75,7 +76,7 @@ const GenreSubmitFormView: FC<GenreFormViewProps> = (params) => {
                 )}
 
                 <Button
-                    className="w-full bg-primary"
+                    className={cn(PrimaryButtonCSS, "w-full")}
                     disabled={isPending}
                 >
                     Submit

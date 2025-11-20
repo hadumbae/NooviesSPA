@@ -32,7 +32,8 @@ export const HookFormInputCSS = cn(
     "flex rounded-md shadow-sm transition-colors md:text-sm",
     "disabled:cursor-not-allowed disabled:opacity-50",
     "bg-transparent text-base",
-    "placeholder:text-neutral-500 dark:placeholder:text-neutral-600",
+    "placeholder:text-neutral-500 dark:placeholder:text-neutral-400",
     "border border-neutral-200 dark:border-neutral-500",
-    "h-9 w-full px-3 py-1"
+    "h-9 w-full px-3 py-1",
+    "text-black dark:text-gray-200",
 );

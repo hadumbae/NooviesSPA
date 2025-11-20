@@ -12,7 +12,6 @@ import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import MovieCreditSubmitFormContainer from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormContainer.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 import {MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
-import {SubmitPanelCSS} from "@/common/constants/css/SheetCSS.ts";
 
 /**
  * Props for the {@link MovieCreditSubmitFormPanel} component.
@@ -85,7 +84,7 @@ const MovieCreditSubmitFormPanel: FC<FormPanelProps> = (props) => {
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>{children ?? "Open"}</SheetTrigger>
 
-            <SheetContent className={SubmitPanelCSS}>
+            <SheetContent className="flex flex-col">
                 <SheetHeader>
                     <SheetTitle>{sheetTitle}</SheetTitle>
                     <SheetDescription>{sheetDescription}</SheetDescription>
