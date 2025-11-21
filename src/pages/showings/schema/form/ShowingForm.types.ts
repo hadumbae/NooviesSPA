@@ -1,56 +1,48 @@
-import { z } from "zod";
-import { ShowingFormSchema, ShowingFormValuesSchema } from "@/pages/showings/schema/form/ShowingForm.schema.ts";
-
 /**
- * Type representing the **starter/default values** of a showing form.
+ * @file ShowingForm.types.ts
+ * @description
+ * Provides TypeScript types inferred from the `ShowingForm` Zod schemas.
+ * These types ensure type safety across forms and components that consume
+ * showing-related data.
  *
- * Inferred from `ShowingFormValuesSchema`.
- * Typically used for form initialization and prefilled values.
- *
- * @example
- * ```ts
- * const defaultValues: ShowingFormValues = {
- *   startTime: "",
- *   startDate: "",
- *   endTime: "",
- *   endDate: "",
- *   ticketPrice: 0,
- *   language: "en",
- *   subtitleLanguages: [],
- *   isSpecialEvent: false,
- *   isActive: true,
- *   movie: "",
- *   theatre: "",
- *   screen: "",
- *   status: "scheduled",
- * };
- * ```
+ * The types mirror the Zod schemas:
+ * - ShowingFormDetails → `ShowingFormDetailSchema`
+ * - ShowingFormLanguages → `ShowingFormLanguageSchema`
+ * - ShowingFormDateTimes → `ShowingFormDateTimeSchema`
+ * - ShowingFormStatuses → `ShowingFormStatusSchema`
+ * - ShowingForm → `ShowingFormSchema`
  */
-export type ShowingFormValues = z.infer<typeof ShowingFormValuesSchema>;
+
+import {z} from "zod";
+import {
+    ShowingFormDateTimeSchema,
+    ShowingFormDetailSchema,
+    ShowingFormLanguageSchema,
+    ShowingFormSchema,
+    ShowingFormStatusSchema
+} from "@/pages/showings/schema/form/ShowingForm.schema.ts";
 
 /**
- * Type representing a **validated showing form submission**.
- *
- * Inferred from `ShowingFormSchema`.
- * This type is guaranteed to satisfy all the validation rules defined in the schema.
- *
- * @example
- * ```ts
- * const formSubmission: ShowingForm = {
- *   startTime: "15:30",
- *   startDate: "2024-05-12",
- *   endTime: "17:45",
- *   endDate: "2024-05-12",
- *   ticketPrice: 12.5,
- *   language: "en",
- *   subtitleLanguages: ["fr", "es"],
- *   isSpecialEvent: true,
- *   isActive: true,
- *   movie: "movieId123",
- *   theatre: "theatreId456",
- *   screen: "screenId789",
- *   status: "scheduled",
- * };
- * ```
+ * Type for basic showing details, including movie, screen, theatre, and optional location.
+ */
+export type ShowingFormDetails = z.infer<typeof ShowingFormDetailSchema>;
+
+/**
+ * Type for showing language information.
+ */
+export type ShowingFormLanguages = z.infer<typeof ShowingFormLanguageSchema>;
+
+/**
+ * Type for showing start and end date/time.
+ */
+export type ShowingFormDateTimes = z.infer<typeof ShowingFormDateTimeSchema>;
+
+/**
+ * Type for showing status information such as ticket price, active/special flags, and status enum.
+ */
+export type ShowingFormStatuses = z.infer<typeof ShowingFormStatusSchema>;
+
+/**
+ * Complete type representing all fields in the showing form.
  */
 export type ShowingForm = z.infer<typeof ShowingFormSchema>;

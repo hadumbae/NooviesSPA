@@ -3,11 +3,12 @@ import {ShowingSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {ShowingForm, ShowingFormValues} from "@/pages/showings/schema/form/ShowingForm.types.ts";
+import {ShowingForm} from "@/pages/showings/schema/form/ShowingForm.types.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
 
 /**
  * Combined parameters for the showing submission mutation.

@@ -13,7 +13,10 @@ import ISO6391CodeConstant from "@/common/constants/languages/ISO6391CodeConstan
  * ISO6391CodeEnum.parse("en"); // ✅ Valid
  * ISO6391CodeEnum.parse("xx"); // ❌ Throws ZodError: Invalid Language
  */
-export const ISO6391LanguageCodeEnum = z.enum(ISO6391CodeConstant, {message: "Invalid Language"});
+export const ISO6391LanguageCodeEnum = z.enum(
+    ISO6391CodeConstant,
+    {invalid_type_error: "Invalid Language", required_error: "Required."},
+);
 
 /**
  * Type alias for the inferred TypeScript union of valid ISO 639-1 codes.

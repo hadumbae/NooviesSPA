@@ -26,6 +26,7 @@ import {cn} from "@/common/lib/utils.ts";
  * Includes dark mode variants.
  */
 export const HoverLinkCSS = cn(
+    "shadow",
     "text-neutral-400 hover:text-black",
     "dark:text-neutral-500 dark:hover:text-white"
 );
@@ -66,8 +67,9 @@ export const PrimaryButtonCSS = cn(
  * Includes dark text and hover text color.
  */
 export const SecondaryButtonCSS = cn(
-    "dark:bg-neutral-800 dark:hover:bg-neutral-500",
-    "dark:text-white dark:hover:text-black"
+    "shadow-sm",
+    "text-neutral-900 bg-neutral-100 hover:bg-neutral-100/80",
+    "dark:text-neutral-50 dark:hover:text-black dark:bg-neutral-800 dark:hover:bg-neutral-500",
 );
 
 /**

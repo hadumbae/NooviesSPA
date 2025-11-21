@@ -1,3 +1,20 @@
+/**
+ * @fileoverview
+ * Form view component for creating or editing a {@link Showing} entity.
+ *
+ * This component orchestrates the full Showing submission flow, including:
+ * - Rendering grouped fieldsets for details, languages, date/time, and status.
+ * - Integrating `react-hook-form` for validation and state management.
+ * - Supporting conditional disabling of fields via Zod schemas.
+ * - Handling submission through a TanStack Query mutation.
+ *
+ * @remarks
+ * This file adheres to the `#ts-docs-standard-format`:
+ * 1. File-level documentation
+ * 2. Types & interfaces with full comments
+ * 3. Component-level documentation with examples
+ */
+
 import {FC} from 'react';
 import {UseMutationResult} from "@tanstack/react-query";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
@@ -5,29 +22,30 @@ import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {Form} from "@/common/components/ui/form.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
-import LanguageHookFormSelect from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
-import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
-import ScreenHookFormSelect from "@/pages/screens/components/submit-form/inputs/ScreenHookFormSelect.tsx";
-import MovieHookFormSelect from "@/pages/movies/components/ui/MovieHookFormSelect.tsx";
-
 import {cn} from "@/common/lib/utils.ts";
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
-import {ShowingForm, ShowingFormValues} from "@/pages/showings/schema/form/ShowingForm.types.ts";
-import MovieQuickOverviewFetchCard from "@/pages/movies/components/admin/movie-details/MovieQuickOverviewFetchCard.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import TheatreQuickOverviewFetchCard from "@/pages/theatres/components/admin/theatre-details/TheatreQuickOverviewFetchCard.tsx";
-import ShowingStatusHookFormSelect from "@/pages/showings/components/inputs/ShowingStatusHookFormSelect.tsx";
+import {ShowingForm} from "@/pages/showings/schema/form/ShowingForm.types.ts";
+import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
+import ShowingSubmitFormDetailsFieldset
+    from "@/pages/showings/components/forms/fieldsets/ShowingSubmitFormDetailsFieldset.tsx";
+import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
+import {ShowingFormValuesSchema} from "@/pages/showings/schema/form/ShowingFormValues.schema.ts";
+import ShowingSubmitFormDateTimeFieldset
+    from "@/pages/showings/components/forms/fieldsets/ShowingSubmitFormDateTimeFieldset.tsx";
+import ShowingSubmitFormLanguagesFieldset
+    from "@/pages/showings/components/forms/fieldsets/ShowingSubmitFormLanguagesFieldset.tsx";
+import ShowingSubmitFormStatusFieldset
+    from "@/pages/showings/components/forms/fieldsets/ShowingSubmitFormStatusFieldset.tsx";
+import {X} from "lucide-react";
 
 /**
  * Props for {@link ShowingSubmitFormView}.
  *
- * @property mutation - The mutation hook managing form submission state and response.
- * @property form - The `react-hook-form` instance controlling the showing form fields.
- * @property submitHandler - The callback executed when the form is submitted.
- * @property disableFields - Optional list of field names to disable in the form UI.
- * @property className - Optional class names for additional styling on the form element.
+ * @property mutation - The TanStack Query mutation managing submission state and results.
+ * @property form - The `react-hook-form` instance controlling validation and input bindings.
+ * @property submitHandler - Callback executed when the form is submitted.
+ * @property disableFields - Optional array of field keys that should be disabled in the UI.
+ * @property className - Optional Tailwind utility classes for the root form container.
  */
 export type FormViewProps = {
     mutation: UseMutationResult<Showing, unknown, ShowingForm>;
@@ -38,13 +56,22 @@ export type FormViewProps = {
 };
 
 /**
- * Form component for creating or editing a Showing entity.
+ * Main form component for creating or updating a Showing.
  *
  * @remarks
- * This component uses `react-hook-form` and integrates custom UI input components
- * to handle showing creation or editing workflows. It supports conditional field
- * disabling, dynamic field population (e.g., based on selected movie/theatre),
- * and visual quick-overview cards.
+ * The form is assembled from four fieldsets:
+ * - Details
+ * - Languages
+ * - Date & Time
+ * - Status
+ *
+ * Field visibility is automatically determined by the Zod schema and
+ * the optional `disableFields` prop using {@link getActiveSchemaInputFields}.
+ *
+ * The component automatically:
+ * - Manages submission state feedback (pending/success)
+ * - Disables the submit button during mutation
+ * - Provides a reset button to restore default values
  *
  * @example
  * ```tsx
@@ -52,7 +79,8 @@ export type FormViewProps = {
  *   form={form}
  *   mutation={mutation}
  *   submitHandler={onSubmit}
- *   disableFields={["theatre", "status"]}
+ *   disableFields={["status", "ticketPrice"]}
+ *   className="p-4"
  * />
  * ```
  *
@@ -61,28 +89,15 @@ export type FormViewProps = {
 const ShowingSubmitFormView: FC<FormViewProps> = (props) => {
     const {form, mutation, submitHandler, disableFields, className} = props;
 
-    // Watch selected entities for quick overview rendering
-    const movie = form.watch("movie");
-    const theatre = form.watch("theatre");
-
     const {isPending, isSuccess} = mutation;
 
-    /** Field activation map controlling visibility and interactivity */
-    const activeFields = {
-        movie: !disableFields?.includes("movie"),
-        theatre: !disableFields?.includes("theatre"),
-        screen: !disableFields?.includes("screen"),
-        startAtTime: !disableFields?.includes("startAtTime"),
-        startAtDate: !disableFields?.includes("startAtDate"),
-        endAtTime: !disableFields?.includes("endAtTime"),
-        endAtDate: !disableFields?.includes("endAtDate"),
-        ticketPrice: !disableFields?.includes("ticketPrice"),
-        language: !disableFields?.includes("language"),
-        subtitleLanguages: !disableFields?.includes("subtitleLanguages"),
-        isSpecialEvent: !disableFields?.includes("isSpecialEvent"),
-        isActive: !disableFields?.includes("isActive"),
-        status: !disableFields?.includes("status"),
-    };
+    /** Field activation map controlling visibility & interactivity */
+    const activeFields = getActiveSchemaInputFields({
+        schema: ShowingFormValuesSchema,
+        disableFields
+    });
+
+    const resetForm = () => form.reset();
 
     return (
         <Form {...form}>
@@ -90,167 +105,50 @@ const ShowingSubmitFormView: FC<FormViewProps> = (props) => {
                 onSubmit={form.handleSubmit(submitHandler)}
                 className={cn("space-y-3", className)}
             >
-                {/* 🎬 Movie Selection */}
-                {activeFields.movie && (
-                    <fieldset>
-                        <MovieHookFormSelect
-                            control={form.control}
-                            name="movie"
-                            label="Movie"
-                            description="The movie to be shown."
-                        />
-                        {movie && <MovieQuickOverviewFetchCard movieID={movie as ObjectId}/>}
-                    </fieldset>
-                )}
+                {/*Details*/}
 
-                {/* 🎭 Theatre Selection */}
-                {activeFields.theatre && (
-                    <fieldset>
-                        <TheatreHookFormSelect
-                            control={form.control}
-                            name="theatre"
-                            label="Theatre"
-                            description="The theatre at which the showing will be."
-                        />
-                        {theatre && <TheatreQuickOverviewFetchCard theatreID={theatre as ObjectId}/>}
-                    </fieldset>
-                )}
+                <ShowingSubmitFormDetailsFieldset
+                    form={form}
+                    activeFields={activeFields}
+                />
 
-                {/* 🖥 Screen Selection */}
-                {activeFields.screen && (
-                    <fieldset className="space-y-3">
-                        {theatre && (
-                            <ScreenHookFormSelect
-                                control={form.control}
-                                name="screen"
-                                label="Screen"
-                                filters={{theatre}}
-                                description="The screen on which the movie will be shown."
-                            />
-                        )}
-                    </fieldset>
-                )}
+                {/*Languages*/}
 
-                {/* 🕓 Start Time */}
-                <fieldset className="grid grid-cols-2 gap-3">
-                    {activeFields.startAtDate && (
-                        <HookFormInput
-                            name="startAtDate"
-                            label="Starting Date"
-                            type="date"
-                            control={form.control}
-                            description="Date the showing starts."
-                        />
-                    )}
+                <ShowingSubmitFormLanguagesFieldset
+                    form={form}
+                    activeFields={activeFields}
+                />
 
-                    {activeFields.startAtTime && (
-                        <HookFormInput
-                            name="startAtTime"
-                            label="Starting Time"
-                            type="time"
-                            control={form.control}
-                            description="Time the showing starts."
-                        />
-                    )}
-                </fieldset>
+                {/*Date & Time*/}
 
-                {/* 🕔 End Time */}
-                <fieldset className="grid grid-cols-2 gap-3">
-                    {activeFields.endAtDate && (
-                        <HookFormInput
-                            name="endAtDate"
-                            label="Ending Date"
-                            type="date"
-                            control={form.control}
-                            description="Date the showing ends."
-                        />
-                    )}
+                <ShowingSubmitFormDateTimeFieldset
+                    form={form}
+                    activeFields={activeFields}
+                />
 
-                    {activeFields.endAtTime && (
-                        <HookFormInput
-                            name="endAtTime"
-                            label="Ending Time"
-                            type="time"
-                            control={form.control}
-                            description="Time the showing ends."
-                        />
-                    )}
-                </fieldset>
+                {/*Status*/}
 
-                {/* 💵 Ticket Price */}
-                {activeFields.ticketPrice && (
-                    <HookFormInput
-                        name="ticketPrice"
-                        label="Ticket Price"
-                        control={form.control}
-                        description="The base price of the showing."
-                        type="number"
-                        min={1}
-                        step={0.01}
-                    />
-                )}
+                <ShowingSubmitFormStatusFieldset
+                    form={form}
+                    activeFields={activeFields}
+                />
 
-                {/* 🌐 Languages */}
-                <fieldset className="space-y-3">
-                    {activeFields.language && (
-                        <LanguageHookFormSelect
-                            name="language"
-                            label="Language"
-                            control={form.control}
-                            isMulti={false}
-                            description="The language in which the showing is available."
-                        />
-                    )}
+                {/*Submit*/}
 
-                    {activeFields.subtitleLanguages && (
-                        <LanguageHookFormSelect
-                            name="subtitleLanguages"
-                            label="Subtitles"
-                            control={form.control}
-                            isMulti={false}
-                            description="Available subtitle languages."
-                        />
-                    )}
-                </fieldset>
+                <div className="flex items-center space-x-2">
+                    <Button
+                        type="submit"
+                        variant="primary"
+                        className="flex-1"
+                        disabled={isPending || isSuccess}
+                    >
+                        Submit
+                    </Button>
 
-                {/* ✅ Booleans */}
-                <fieldset className="grid grid-cols-2 gap-2">
-                    {activeFields.isActive && (
-                        <HookFormCheckbox
-                            name="isActive"
-                            label="Is Active?"
-                            control={form.control}
-                        />
-                    )}
-
-                    {activeFields.isSpecialEvent && (
-                        <HookFormCheckbox
-                            name="isSpecialEvent"
-                            label="Is Special Event?"
-                            control={form.control}
-                        />
-                    )}
-                </fieldset>
-
-                {/* 📊 Status */}
-                {activeFields.status && (
-                    <ShowingStatusHookFormSelect
-                        name="status"
-                        label="Status"
-                        control={form.control}
-                        description="The current status of the showing."
-                    />
-                )}
-
-                {/* 🚀 Submit */}
-                <Button
-                    type="submit"
-                    variant="default"
-                    className="w-full bg-primary"
-                    disabled={isPending || isSuccess}
-                >
-                    Submit
-                </Button>
+                    <Button type="button" variant="secondary" onClick={resetForm}>
+                        <X/>
+                    </Button>
+                </div>
             </form>
         </Form>
     );

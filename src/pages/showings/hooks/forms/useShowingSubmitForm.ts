@@ -1,11 +1,26 @@
+/**
+ * @file useShowingSubmitForm.ts
+ * @description
+ * Custom hook for initializing a `react-hook-form` instance for creating or editing a Showing.
+ *
+ * Features:
+ * - Integrates `zodResolver` with {@link ShowingFormSchema} for validation.
+ * - Computes `defaultValues` dynamically from:
+ *   1. `presetValues` (highest priority)
+ *   2. `showing` (existing entity data)
+ *   3. Hardcoded empty/default values
+ * - Converts UTC showing times to the theatre’s local timezone when editing, using {@link getShowingDateAndTime}.
+ * - Returns a fully typed `UseFormReturn<ShowingFormValues>` for use with React Hook Form.
+ */
+
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {ShowingFormSchema} from "@/pages/showings/schema/form/ShowingForm.schema.ts";
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
-import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingForm.types.ts";
 import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 import getShowingDateAndTime from "@/common/utility/date-and-time/getShowingDateAndTime.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
+import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
 
 /**
  * Parameters for {@link useShowingSubmitForm} when editing an existing showing.
@@ -15,9 +30,10 @@ type EditingParams =
     /** The showing being edited. */
     showing: Showing;
 
-    /** The theatre’s IANA timezone used to localize showtime fields. */
+    /** Theatre’s IANA timezone for localizing showtime fields. */
     theatreTimezone: IANATimezone;
-} | {
+}
+    | {
     /** Not provided when creating a new showing. */
     showing?: never;
 
@@ -30,50 +46,39 @@ type EditingParams =
  */
 type SubmitFormParams = EditingParams & {
     /**
-     * Optional preset values used to prefill specific fields
-     * before defaulting to `showing` data or empty strings.
+     * Optional preset values to prefill specific form fields before defaulting
+     * to `showing` data or hardcoded empty defaults.
      */
     presetValues?: Partial<ShowingFormValues>;
 };
 
 /**
- * Initializes a `react-hook-form` instance for creating or editing a showing.
+ * Initializes a `react-hook-form` instance for the Showing form.
  *
  * @description
- * This hook prepares a form with schema-based validation using
- * {@link ShowingFormSchema}, and dynamically determines default values from:
+ * Returns a fully configured form instance with validation and default values.
+ * This hook handles both **creating a new showing** and **editing an existing showing**.
  *
- * 1. `presetValues` (highest priority)
- * 2. `showing` (existing entity data)
- * 3. Hardcoded empty defaults
- *
- * When editing, it converts UTC showing times to the theatre’s local timezone
- * using {@link getShowingDateAndTime}.
- *
- * @param {SubmitFormParams} [params] - Optional configuration for the form.
- * @param {Showing} [params.showing] - Existing showing being edited.
- * @param {IANATimezone} [params.theatreTimezone] - Theatre’s timezone.
+ * @param {SubmitFormParams} [params] - Optional parameters for form initialization.
+ * @param {Showing} [params.showing] - Existing showing to prefill the form (editing mode).
+ * @param {IANATimezone} [params.theatreTimezone] - Theatre timezone for converting UTC times.
  * @param {Partial<ShowingFormValues>} [params.presetValues] - Optional preset field values.
  *
- * @returns {ReturnType<typeof useForm>} A `react-hook-form` instance configured with:
- * - `resolver` — the `zodResolver` for `ShowingFormSchema`
- * - `defaultValues` — field values computed from provided data
+ * @returns {UseFormReturn<ShowingFormValues>} A `react-hook-form` instance with:
+ * - `resolver`: zodResolver configured with {@link ShowingFormSchema}.
+ * - `defaultValues`: computed defaults from `presetValues`, `showing`, or empty values.
  *
  * @example
  * ```ts
- * import useShowingSubmitForm from "@/pages/showings/hooks/forms/useShowingSubmitForm.ts";
- *
  * const form = useShowingSubmitForm({
  *   showing: existingShowing,
  *   theatreTimezone: "Asia/Bangkok",
- *   presetValues: { language: "English" },
+ *   presetValues: { language: "en" },
  * });
  *
- * // Usage:
  * <form onSubmit={form.handleSubmit(onSubmit)}>
  *   <input {...form.register("startAtDate")} />
  *   <input {...form.register("startAtTime")} />
- *   ...
  * </form>
  * ```
  */
@@ -86,8 +91,9 @@ export default function useShowingSubmitForm(
         ? getShowingDateAndTime({
             startTime: showing.startTime,
             endTime: showing.endTime,
-            theatreTimezone: theatreTimezone,
-        }) : null;
+            theatreTimezone,
+        })
+        : null;
 
     const defaultValues: ShowingFormValues = {
         startAtTime: getDefaultValue(presetValues?.startAtTime, formattedDateAndTime?.startAtTime, ""),
@@ -96,13 +102,16 @@ export default function useShowingSubmitForm(
         endAtDate: getDefaultValue(presetValues?.endAtDate, formattedDateAndTime?.endAtDate, ""),
         ticketPrice: getDefaultValue(presetValues?.ticketPrice, showing?.ticketPrice, ""),
         language: getDefaultValue(presetValues?.language, showing?.language, ""),
-        subtitleLanguages: getDefaultValue(presetValues?.subtitleLanguages, showing?.subtitleLanguages, ""),
+        subtitleLanguages: getDefaultValue(presetValues?.subtitleLanguages, showing?.subtitleLanguages, []),
         isSpecialEvent: getDefaultValue(presetValues?.isSpecialEvent, showing?.isSpecialEvent, ""),
         isActive: getDefaultValue(presetValues?.isActive, showing?.isActive, ""),
         movie: getDefaultValue(presetValues?.movie, showing?.movie, ""),
         theatre: getDefaultValue(presetValues?.theatre, showing?.theatre, ""),
         screen: getDefaultValue(presetValues?.screen, showing?.screen, ""),
         status: getDefaultValue(presetValues?.status, showing?.status, "SCHEDULED"),
+        theatreCity: presetValues?.theatreCity ?? "",
+        theatreState: presetValues?.theatreState ?? "",
+        theatreCountry: presetValues?.theatreCountry ?? undefined,
     };
 
     return useForm<ShowingFormValues>({

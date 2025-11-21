@@ -6,9 +6,10 @@ import useShowingSubmitMutation from "@/pages/showings/hooks/mutations/useShowin
 import ShowingSubmitFormView from "@/pages/showings/components/forms/ShowingSubmitFormView.tsx";
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
-import {ShowingForm, ShowingFormValues} from "@/pages/showings/schema/form/ShowingForm.types.ts";
+import {ShowingForm} from "@/pages/showings/schema/form/ShowingForm.types.ts";
 import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
 
 /**
  * Props used when the form is in editing mode.

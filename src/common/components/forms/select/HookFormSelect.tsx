@@ -95,7 +95,7 @@ export type SelectProps<TSubmit extends FieldValues> = {
  */
 const HookFormSelect = <TSubmit extends FieldValues>(
     props: SelectProps<TSubmit>
-): JSX.Element => {
+) => {
     const {
         name,
         label,
