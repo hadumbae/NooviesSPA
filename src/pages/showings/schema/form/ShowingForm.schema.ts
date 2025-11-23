@@ -111,7 +111,6 @@ export const ShowingFormStatusSchema = z.object({
 export const ShowingFormSchema = ShowingFormDetailSchema
     .merge(ShowingFormLanguageSchema)
     .merge(ShowingFormDateTimeSchema)
-    .merge(ShowingFormDetailSchema)
     .merge(ShowingFormStatusSchema)
     .transform(({theatreCity, theatreState, theatreCountry, ...rest}) => rest)
     .superRefine((values, ctx) => {

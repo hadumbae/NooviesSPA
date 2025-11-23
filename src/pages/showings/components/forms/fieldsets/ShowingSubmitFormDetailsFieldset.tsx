@@ -18,7 +18,7 @@
  * @module ShowingSubmitFormDetailsFieldset
  */
 
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import MovieHookFormSelect from "@/pages/movies/components/ui/MovieHookFormSelect.tsx";
 import MovieQuickOverviewFetchCard from "@/pages/movies/components/admin/movie-details/MovieQuickOverviewFetchCard.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -36,6 +36,7 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui/collapsible.tsx";
 import {Plus, X} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
+import {MultiStepFormContext} from "@/common/context/multi-step-form/MultiStepFormContext.ts";
 
 /**
  * Props for the `ShowingSubmitFormDetailsFieldset` component.
@@ -97,6 +98,7 @@ type FieldsetProps = {
  */
 const ShowingSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields}) => {
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+    const {isHydrated = true} = useContext(MultiStepFormContext) ?? {};
 
     // ⚡ Watch Form ⚡
     const movie = form.watch("movie");
@@ -124,7 +126,9 @@ const ShowingSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields
 
     // When the theatre is changed, clear the screen selection
     useEffect(() => {
-        form.resetField("screen");
+        if (isHydrated) {
+            form.resetField("screen");
+        }
     }, [theatre]);
 
     const theatreFilters = filterFalsyAttributes({city, state, country});
