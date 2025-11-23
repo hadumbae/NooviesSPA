@@ -1,43 +1,64 @@
 /**
  * @file HookFormErrorMessage.tsx
  * @description
- * A small reusable component to display error messages from `react-hook-form`.
+ * Reusable component to display validation error messages from `react-hook-form`.
+ *
  * Automatically applies consistent styling for form error messages, including dark mode support.
+ * If no error is provided, the component renders nothing.
  *
  * @example
+ * ```tsx
  * <HookFormErrorMessage error={formState.errors.name} />
+ * ```
+ * @module HookFormErrorMessage
  */
 
-import {FC} from 'react';
+import {forwardRef} from 'react';
 import {cn} from "@/common/lib/utils.ts";
 import {FieldError} from "react-hook-form";
+import {ErrorMessageCSS} from "@/common/constants/css/TextCSS.ts";
 
 /**
  * Props for the {@link HookFormErrorMessage} component.
+ *
+ * @property className - Optional additional Tailwind or CSS class names.
+ * @property error - The error object returned from `react-hook-form` for a specific field.
  */
-interface Props {
+type ErrorProps = {
+    className?: string;
+
     /** The error object returned from `react-hook-form` for a specific field. */
     error?: FieldError;
-
-    /** Optional additional CSS classes for styling. */
-    className?: string;
 }
 
 /**
- * `HookFormErrorMessage` displays a form field error message with consistent styling.
+ * Component that displays a form field error message with consistent styling.
  *
- * @param {Props} props - Component props.
- * @returns {JSX.Element} A styled paragraph containing the error message, or nothing if no error exists.
+ * @remarks
+ * - Integrates seamlessly with `react-hook-form` field errors.
+ * - Applies `ErrorMessageCSS` styling by default.
+ * - Supports optional additional `className`.
+ *
+ * @param {ErrorProps} props - Component props.
+ * @param {React.Ref<HTMLParagraphElement>} ref - Optional ref forwarded to the paragraph element.
+ * @returns {JSX.Element | null} A styled paragraph containing the error message, or `null` if no error exists.
  *
  * @example
- * <HookFormErrorMessage error={formState.errors.email} />
+ * ```tsx
+ * <HookFormErrorMessage error={formState.errors.email} className="text-sm text-red-500" />
+ * ```
  */
-const HookFormErrorMessage: FC<Props> = ({error, className}) => {
+const HookFormErrorMessage = forwardRef<
+    HTMLParagraphElement,
+    ErrorProps
+>(({error, className}, ref) => {
+    if (!error) return null;
+
     return (
-        <p className={cn("text-[0.8rem] font-medium text-red-500 dark:text-red-900", className)}>
-            {error && error.message}
+        <p ref={ref} className={cn(ErrorMessageCSS, className)}>
+            {error.message}
         </p>
     );
-};
+});
 
 export default HookFormErrorMessage;

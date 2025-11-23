@@ -111,33 +111,39 @@ const HookFormSelect = <TSubmit extends FieldValues>(
         <Controller
             control={control}
             name={name}
-            render={({field, fieldState: {error}}) => (
-                <FormItem className={cn(className)}>
-                    <FormLabel className={PrimaryTextBaseCSS}>{label}</FormLabel>
+            render={({field, fieldState: {error}}) => {
+                const id = `select-${name}`
 
-                    <FormControl>
-                        <Select
-                            options={options}
-                            isClearable={true}
-                            value={
-                                options.find(o => o.value === field.value) ||
-                                {label: placeholder, value: undefined}
-                            }
-                            onChange={val => field.onChange(val ? val.value : null)}
-                            placeholder={placeholder}
-                            isDisabled={isDisabled}
-                            classNames={ReactSelectStyleConfig}
-                            unstyled={true}
-                        />
-                    </FormControl>
+                return (
+                    <FormItem className={cn(className)}>
+                        <FormLabel htmlFor={id} className={PrimaryTextBaseCSS}>
+                            {label}
+                        </FormLabel>
 
-                    {description && (
-                        <FormDescription>{description}</FormDescription>
-                    )}
+                        <FormControl>
+                            <Select
+                                {...field}
+                                inputId={id}
+                                options={options}
+                                isClearable={true}
+                                value={options.find(o => o.value === field.value) || null}
+                                onChange={val => field.onChange(val ? val.value : null)}
+                                placeholder={placeholder}
+                                isDisabled={isDisabled}
+                                classNames={ReactSelectStyleConfig}
+                                unstyled={true}
+                            />
+                        </FormControl>
 
-                    <HookFormErrorMessage error={error}/>
-                </FormItem>
-            )}
+                        {
+                            description &&
+                            <FormDescription>{description}</FormDescription>
+                        }
+
+                        <HookFormErrorMessage error={error}/>
+                    </FormItem>
+                );
+            }}
         />
     );
 };
