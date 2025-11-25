@@ -1,54 +1,75 @@
-import { FC } from 'react';
-import LoggedLink, { LoggedLinkProps } from "@/common/components/navigation/LoggedLink.tsx";
-import { cn } from "@/common/lib/utils.ts";
-import { buttonVariants } from "@/common/components/ui/button.tsx";
-import { useLocation } from "react-router-dom";
-import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
-
 /**
- * **NavLink** — a styled navigation link component built on top of {@link LoggedLink}.
+ * @file NavLink.tsx
+ * @description
+ * A styled navigation link component built on top of `ButtonLink` (and therefore `LoggedLink`)
+ * that integrates logging, hover styling, and active state detection.
  *
- * This component automatically determines whether it is currently active based on
- * the current URL (`pathname + search + hash`) and applies styling accordingly.
+ * Features:
+ * - Determines whether the link is active based on the current URL
+ *   (`pathname + search + hash`).
+ * - Applies active/inactive styles automatically.
+ * - Uses `ButtonLink` and `HoverLinkCSS` for consistent button-like appearance.
+ * - Extends `LoggedLinkProps` to support logging and navigation tracking.
  *
- * When inactive, it uses a neutral text color (`text-neutral-400`) and
- * darkens on hover. When active, it inherits the base button link style.
+ * Designed to be used inside a `react-router-dom` `<Router>` context.
  *
- * ### Example
+ * @example
  * ```tsx
  * <NavLink to="/dashboard">Dashboard</NavLink>
  * <NavLink to="/settings">Settings</NavLink>
  * ```
+ */
+
+import { FC } from 'react';
+import { cn } from "@/common/lib/utils.ts";
+import { useLocation } from "react-router-dom";
+import { HoverLinkCSS } from "@/common/constants/css/ButtonCSS.ts";
+import { LoggedLinkProps } from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
+
+/**
+ * `NavLink` renders a navigation link with active state detection and consistent styling.
  *
- * @remarks
- * - Designed to be used within a `react-router-dom` `<Router>` context.
- * - Uses `buttonVariants` for consistent styling with other button-based elements.
- * - Extends {@link LoggedLinkProps} for authentication-aware navigation.
+ * - Automatically applies a hoverable button style when inactive.
+ * - Applies the base button link style when active.
+ * - Supports logging and navigation tracking through `LoggedLinkProps`.
+ *
+ * @param props - Props extending `LoggedLinkProps` (e.g., `to`, `component`, `message`).
+ *
+ * @returns A styled, logging-enabled navigation link component.
+ *
+ * @example
+ * ```tsx
+ * <NavLink to="/profile" component="Sidebar" message="Navigated to Profile">
+ *   Profile
+ * </NavLink>
+ * ```
  */
 const NavLink: FC<LoggedLinkProps> = (props) => {
+    // ⚡ Props ⚡
+
     const { children, className, to, ...rest } = props;
 
-    /** Current location object (URL parts). */
+    // ⚡ Get Current Location ⚡
+
     const { pathname, search, hash } = useLocation();
 
-    /**
-     * Determines if the link is active by comparing
-     * its `to` prop with the current full path.
-     */
+    // ⚡ Is Active? ⚡
+
     const isActive = to === `${pathname}${search}${hash}`;
 
+    // ⚡ Render ⚡
+
     return (
-        <LoggedLink
+        <ButtonLink
             {...rest}
             to={to}
-            className={cn(
-                buttonVariants({ variant: "link", size: "sm" }),
-                !isActive && HoverLinkCSS,
-                className,
-            )}
+            variant="link"
+            size="sm"
+            className={cn(!isActive && HoverLinkCSS, className)}
         >
             {children}
-        </LoggedLink>
+        </ButtonLink>
     );
 };
 

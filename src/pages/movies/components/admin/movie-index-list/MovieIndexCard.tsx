@@ -6,7 +6,7 @@ import TooltipButton from "@/common/components/buttons/TooltipButton.tsx";
 import MovieDetailsDialog from "@/pages/movies/components/admin/movie-index-list/MovieDetailsDialog.tsx";
 import MoviePosterImage from "@/pages/movies/components/MoviePosterImage.tsx";
 import formatMovieDetails from "@/pages/movies/utility/formatMovieDetails.ts";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
 
 /**
@@ -28,7 +28,7 @@ type IndexCardProps = {
  * It includes a tooltip button that opens a {@link MovieDetailsDialog} containing
  * detailed information about the selected movie.
  *
- * - The title links to the movie's admin page via {@link LoggedLink}.
+ * - The title links to the movie's admin page via {@link LoggedHoverLink}.
  * - The card uses {@link formatMovieDetails} to format display strings.
  * - The `TooltipButton` displays a hover tooltip and acts as the trigger for the dialog.
  *
@@ -59,9 +59,9 @@ const MovieIndexCard: FC<IndexCardProps> = ({movie, className}) => {
 
                 {/* Title, runtime, and genres */}
                 <section className="flex-grow flex flex-col space-y-1">
-                    <LoggedLink to={`/admin/movies/get/${_id}`}>
+                    <LoggedHoverLink to={`/admin/movies/get/${_id}`}>
                         <h1 className="text-lg font-bold">{title}</h1>
-                    </LoggedLink>
+                    </LoggedHoverLink>
 
                     <h2 className="text-sm text-neutral-400">{releaseRuntimeString}</h2>
                     <h3 className="text-xs text-neutral-400">{genreString}</h3>

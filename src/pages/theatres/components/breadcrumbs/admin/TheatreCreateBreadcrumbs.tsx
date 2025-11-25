@@ -7,7 +7,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/common/components/ui/breadcrumb.tsx";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 
 /**
  * `TheatreCreateBreadcrumbs` renders a breadcrumb navigation trail
@@ -36,12 +36,12 @@ const TheatreCreateBreadcrumbs: FC = () => {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedLink
+                        <LoggedHoverLink
                             to="/admin/theatres"
                             component={TheatreCreateBreadcrumbs.name}
                         >
                             Index
-                        </LoggedLink>
+                        </LoggedHoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

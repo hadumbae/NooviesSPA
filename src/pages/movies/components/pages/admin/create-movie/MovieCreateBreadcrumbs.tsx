@@ -6,7 +6,7 @@ import {
     BreadcrumbList, BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 
 /**
  * `MovieCreateBreadcrumbs` is a breadcrumb navigation component
@@ -27,12 +27,12 @@ const MovieCreateBreadcrumbs: FC = () => {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedLink
+                        <LoggedHoverLink
                             to="/admin/movies"
                             component={MovieCreateBreadcrumbs.name}
                         >
                             All Movies
-                        </LoggedLink>
+                        </LoggedHoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

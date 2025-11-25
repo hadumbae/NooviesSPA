@@ -5,7 +5,7 @@ import {Search} from "lucide-react";
 import useValidatePopulatedShowing from "@/pages/showings/hooks/validation/useValidatePopulatedShowing.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 
 interface Props {
     /**
@@ -47,9 +47,9 @@ const ShowingEditHeader: FC<Props> = ({showing}) => {
             </section>
 
             <section className="flex justify-end items-center">
-                <LoggedLink to={`/admin/showings/get/${_id}`}>
+                <LoggedHoverLink to={`/admin/showings/get/${_id}`}>
                     <Search/> Back To Showing
-                </LoggedLink>
+                </LoggedHoverLink>
             </section>
         </header>
     );

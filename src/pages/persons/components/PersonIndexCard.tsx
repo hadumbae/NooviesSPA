@@ -5,7 +5,7 @@ import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alph
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {Search} from "lucide-react";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
 
 /**
@@ -54,14 +54,14 @@ const PersonIndexCard: FC<IndexProps> = ({person}) => {
                 </div>
 
                 {/* Link to person details */}
-                <LoggedLink
+                <LoggedHoverLink
                     to={`/admin/persons/get/${_id}`}
                     component={PersonIndexCard.name}
                     message="Navigate to person details page."
                     className={cn(buttonVariants({variant: "outline"}))}
                 >
                     <Search/>
-                </LoggedLink>
+                </LoggedHoverLink>
             </CardContent>
         </Card>
     );

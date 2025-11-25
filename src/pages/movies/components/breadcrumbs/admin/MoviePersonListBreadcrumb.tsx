@@ -10,7 +10,7 @@ import {
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 
 /**
  * Props for the {@link MoviePersonListBreadcrumb} component.
@@ -54,12 +54,12 @@ const MoviePersonListBreadcrumb: FC<PersonListBreadcrumbProps> = ({movie, depart
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedLink
+                        <LoggedHoverLink
                             to="/admin/movies"
                             component={MoviePersonListBreadcrumb.name}
                         >
                             All Movies
-                        </LoggedLink>
+                        </LoggedHoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -67,12 +67,12 @@ const MoviePersonListBreadcrumb: FC<PersonListBreadcrumbProps> = ({movie, depart
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedLink
+                        <LoggedHoverLink
                             to={`/admin/movies/get/${_id}`}
                             component={MoviePersonListBreadcrumb.name}
                         >
                             {`${title} ${parsedReleaseDate}`}
-                        </LoggedLink>
+                        </LoggedHoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

@@ -6,7 +6,7 @@ import {
     BreadcrumbList, BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 
 const PersonCreateBreadcrumbs: FC = () => {
     return (
@@ -14,12 +14,12 @@ const PersonCreateBreadcrumbs: FC = () => {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedLink
+                        <LoggedHoverLink
                             to="/admin/persons"
                             component={PersonCreateBreadcrumbs.name}
                         >
                             All Persons
-                        </LoggedLink>
+                        </LoggedHoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

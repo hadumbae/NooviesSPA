@@ -1,60 +1,75 @@
-import {FC, PropsWithChildren} from 'react';
-import {cn} from "@/common/lib/utils.ts";
-import {buttonVariants} from "@/common/components/ui/button.tsx";
+/**
+ * @file ButtonLink.tsx
+ * @description
+ * A styled link component that behaves like a button and supports logging.
+ *
+ * Combines:
+ * - `LoggedLink` for logging and navigation tracking.
+ * - `buttonVariants` from the UI library for consistent button styling.
+ *
+ * Supports specifying `variant` and `size` to match other UI buttons.
+ *
+ * Designed to be used in a `react-router-dom` `<Router>` context.
+ *
+ * @example
+ * ```tsx
+ * <ButtonLink to="/dashboard" variant="default" size="sm">
+ *   Go to Dashboard
+ * </ButtonLink>
+ * ```
+ */
+
+import { forwardRef } from "react";
+import { cn } from "@/common/lib/utils.ts";
+import { buttonVariants } from "@/common/components/ui/button.tsx";
 import ButtonVariant from "@/common/type/ui/shad-cn-button/ButtonVariant.ts";
 import ButtonSize from "@/common/type/ui/shad-cn-button/ButtonSize.ts";
-import LoggedLink, {LoggedLinkProps} from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedLink, { LoggedLinkProps } from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 
+/**
+ * Props for `ButtonLink` component.
+ *
+ * Extends `LoggedLinkProps` with optional button styling options.
+ *
+ * @property variant - Button style variant (default: `"link"`).
+ * @property size - Button size (default: `"default"`).
+ */
 type ButtonProps = LoggedLinkProps & {
-    /**
-     * Visual style variant of the button.
-     * Corresponds to ShadCN button variants.
-     * @default "link"
-     */
     variant?: ButtonVariant;
-
-    /**
-     * Size of the button (padding / font-size).
-     * @default "default"
-     */
     size?: ButtonSize;
 };
 
 /**
- * **ButtonLink**
+ * `ButtonLink` renders a `LoggedLink` with button-like styling.
  *
- * A reusable button component that behaves as a link.
- * It wraps `LoggedLink` while providing consistent
- * styling based on ShadCN button variants.
+ * - Applies the selected `variant` and `size` via `buttonVariants`.
+ * - Preserves all logging/navigation functionality from `LoggedLink`.
  *
- * ### Features
- * - Accepts `variant` and `size` props to match button UI variants.
- * - Automatically merges additional classNames.
- * - Inherits all props from `LoggedLink` (e.g., `href`, `target`).
+ * @param props - Props extending `ButtonProps`.
+ * @param ref - Optional `ref` forwarded to the underlying anchor element.
  *
- * ### Usage
+ * @returns A styled, logging-enabled link that looks like a button.
+ *
+ * @example
  * ```tsx
- * <ButtonLink href="/dashboard" variant="primary" size="lg">
- *   Go to Dashboard
+ * <ButtonLink to="/profile" variant="default" size="lg" component="Header">
+ *   Profile
  * </ButtonLink>
  * ```
- *
- * ### Notes
- * - `children` is required to display button content.
- * - Default styling adds `"text-neutral-400 hover:text-black"`.
- *
- * @param props - {@link ButtonProps} + React children
- * @returns {JSX.Element} A styled link rendered as a button
  */
-const ButtonLink: FC<PropsWithChildren<ButtonProps>> = (props) => {
-    const {children, className, variant = "link", size = "default", ...remProps} = props;
-    const buttonCSS = cn(buttonVariants({variant, size}), "text-neutral-400 hover:text-black", className);
+const ButtonLink = forwardRef<HTMLAnchorElement, ButtonProps>((props, ref) => {
+    const { className, variant = "link", size = "default", ...rem } = props;
 
     return (
-        <LoggedLink {...remProps} className={buttonCSS}>
-            {children}
-        </LoggedLink>
+        <LoggedLink
+            ref={ref}
+            {...rem}
+            className={cn(
+                buttonVariants({ variant, size }),
+                className
+            )}
+        />
     );
-};
+});
 
 export default ButtonLink;

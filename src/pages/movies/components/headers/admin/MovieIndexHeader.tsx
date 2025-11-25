@@ -4,7 +4,7 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import {Plus} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 
 /**
  * `MovieIndexHeader` is the header section for the movie index page.
@@ -43,9 +43,9 @@ const MovieIndexHeader: FC = () => {
             </section>
 
             <section className="flex justify-end items-center">
-                <LoggedLink {...createNavigationObject}>
+                <LoggedHoverLink {...createNavigationObject}>
                     <Plus/> Create
-                </LoggedLink>
+                </LoggedHoverLink>
             </section>
         </header>
     );

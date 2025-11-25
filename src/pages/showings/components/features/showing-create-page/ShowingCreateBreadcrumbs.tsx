@@ -24,7 +24,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 
 /**
  * `ShowingCreateBreadcrumbs` displays the breadcrumb trail for the
@@ -43,9 +43,9 @@ const ShowingCreateBreadcrumbs: FC = () => {
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbLink asChild>
-                    <LoggedLink to="/admin/showings" component={ShowingCreateBreadcrumbs.name}>
+                    <LoggedHoverLink to="/admin/showings" component={ShowingCreateBreadcrumbs.name}>
                         All Showings
-                    </LoggedLink>
+                    </LoggedHoverLink>
                 </BreadcrumbLink>
 
                 <BreadcrumbSeparator />

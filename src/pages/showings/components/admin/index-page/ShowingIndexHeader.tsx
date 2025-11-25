@@ -1,7 +1,7 @@
 import { FC } from "react";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import { Plus } from "lucide-react";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import { buttonVariants } from "@/common/components/ui/button.tsx";
 import HeaderSubtitle from "@/common/components/page/headers/HeaderSubtitle.tsx";
 
@@ -56,13 +56,13 @@ const ShowingIndexHeader: FC = () => {
                 </HeaderSubtitle>
             </section>
 
-            <LoggedLink
+            <LoggedHoverLink
                 className={buttonVariants({ variant: "link" })}
                 to="/admin/showings/create"
                 message="Navigate to Showing Create."
             >
                 <Plus /> Create
-            </LoggedLink>
+            </LoggedHoverLink>
         </header>
     );
 };

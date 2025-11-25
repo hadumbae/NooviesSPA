@@ -7,7 +7,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
@@ -28,7 +28,7 @@ type BreadcrumbProps = {
  * 2. Movie title – links to the movie detail page.
  * 3. "Edit Movie" – the current page (non-clickable).
  *
- * Integrates with {@link LoggedLink} to log navigation actions for analytics or debugging.
+ * Integrates with {@link LoggedHoverLink} to log navigation actions for analytics or debugging.
  *
  * @example
  * ```tsx
@@ -41,12 +41,12 @@ const MovieEditBreadcrumbs: FC<BreadcrumbProps> = ({ movieID, movieTitle }) => {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedLink
+                        <LoggedHoverLink
                             to="/admin/movies"
                             component={MovieEditBreadcrumbs.name}
                         >
                             All Movies
-                        </LoggedLink>
+                        </LoggedHoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -54,12 +54,12 @@ const MovieEditBreadcrumbs: FC<BreadcrumbProps> = ({ movieID, movieTitle }) => {
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedLink
+                        <LoggedHoverLink
                             to={`/admin/movies/get/${movieID}`}
                             component={MovieEditBreadcrumbs.name}
                         >
                             {movieTitle}
-                        </LoggedLink>
+                        </LoggedHoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

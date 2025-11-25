@@ -9,7 +9,7 @@ import {
 } from "@/common/components/ui/breadcrumb.tsx";
 import {Link} from "react-router-dom";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 
 /**
  * Props for {@link TheatreDetailsBreadcrumbs}.
@@ -69,12 +69,12 @@ const TheatreDetailsBreadcrumbs: FC<TheatreDetailsBreadcrumbsProps> = ({theatreI
                 {/* Theatre details link */}
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedLink
+                        <LoggedHoverLink
                             to={`/admin/theatres/get/${theatreID}`}
                             component={TheatreDetailsBreadcrumbs.name}
                         >
                             {theatreName ?? "Theatre"} | Details
-                        </LoggedLink>
+                        </LoggedHoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

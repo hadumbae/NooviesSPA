@@ -2,7 +2,7 @@ import {FC, ReactNode} from 'react';
 import {Movie, MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {Dialog, DialogContent, DialogTrigger} from "@/common/components/ui/dialog.tsx";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
-import LoggedLink from "@/common/components/navigation/LoggedLink.tsx";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
@@ -101,7 +101,7 @@ const PersonDetailsCreditMovieDialog: FC<MovieDialogProps> = ({children, personN
                 {/* Link To Movie */}
 
                 <div>
-                    <LoggedLink
+                    <LoggedHoverLink
                         to={`/admin/movies/get/${_id}`}
                         className={cn(
                             buttonVariants({variant: "default"}),
@@ -109,7 +109,7 @@ const PersonDetailsCreditMovieDialog: FC<MovieDialogProps> = ({children, personN
                         )}
                     >
                         <Search size={12}/> <span>Movie</span>
-                    </LoggedLink>
+                    </LoggedHoverLink>
                 </div>
             </DialogContent>
         </Dialog>
