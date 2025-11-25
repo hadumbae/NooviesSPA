@@ -40,7 +40,7 @@ const BaseLayoutDesktopClientNavigation: FC = () => {
     const { mutate: logout } = useAuthLogoutSubmitMutation({ onSubmitSuccess: onLogout });
 
     return (
-        <section className="flex items-center">
+        <section className="flex items-center space-x-2">
             {/* Screen reader only header for accessibility */}
             <SectionHeader srOnly={true}>Desktop Navigation</SectionHeader>
 

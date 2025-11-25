@@ -22,7 +22,7 @@ import NavLink from "@/common/components/navigation/NavLink.tsx";
  */
 const BaseLayoutDesktopGuestNavigation: FC = () => {
     return (
-        <section className="flex items-center">
+        <section className="flex items-center space-x-4">
             {/** Hidden section header for accessibility */}
             <SectionHeader srOnly={true}>Desktop Navigation</SectionHeader>
 
