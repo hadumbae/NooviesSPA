@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { ShowingDetails } from "@/pages/showings/schema/showing/Showing.types.ts";
+import {FC} from "react";
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {
     Dialog,
     DialogContent,
@@ -25,11 +25,18 @@ import {
     Ticket,
 } from "lucide-react";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import { Separator } from "@/common/components/ui/separator.tsx";
+import {Separator} from "@/common/components/ui/separator.tsx";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
-import { buttonVariants } from "@/common/components/ui/button.tsx";
-import { cn } from "@/common/lib/utils.ts";
+import {buttonVariants} from "@/common/components/ui/button.tsx";
+import {cn} from "@/common/lib/utils.ts";
 import CollapsibleTextblock from "@/common/components/text/CollapsibleTextblock.tsx";
+import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
+import {
+    HeaderTextCSS,
+    PrimaryTextBaseCSS,
+    SecondaryTextBaseCSS,
+    SubheaderTextCSS
+} from "@/common/constants/css/TextCSS.ts";
 
 /**
  * Props for the {@link ShowingIndexListDialog} component.
@@ -64,11 +71,11 @@ type ShowingIndexListDialogProps = {
  * <ShowingIndexListDialog showing={showingData} />
  * ```
  */
-const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({ showing }) => {
-    const { _id, movie, theatre, isSpecialEvent, isActive, ticketPrice } = showing;
-    const { posterImage, synopsis } = movie;
+const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({showing}) => {
+    const {_id, movie, theatre, isSpecialEvent, isActive, ticketPrice} = showing;
+    const {posterImage, synopsis} = movie;
     const {
-        location: { country },
+        location: {country},
     } = theatre;
 
     const {
@@ -88,7 +95,10 @@ const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({ showing }) =>
     /** Renders the showing status section under the dialog title. */
     const descSection = (
         <section className="flex max-sm:justify-center items-center space-x-3">
-            <LucideIconText icon={Cog} text={formattedStatus} />
+            <LucideIconText
+                icon={Cog}
+                text={formattedStatus}
+            />
 
             <LucideIconText
                 icon={Circle}
@@ -107,15 +117,13 @@ const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({ showing }) =>
     return (
         <Dialog>
             <DialogTrigger>
-                <ShowingIndexListCard showing={showing} />
+                <ShowingIndexListCard showing={showing}/>
             </DialogTrigger>
 
-            <DialogContent className="space-y-2">
+            <DialogContent className={cn(ContainerCSS, "bg-white space-y-2")}>
                 <DialogHeader>
-                    <DialogTitle>
-                        {movieTitle} ({releaseYear})
-                    </DialogTitle>
-                    <DialogDescription>{descSection}</DialogDescription>
+                    <DialogTitle className={PrimaryTextBaseCSS}>{movieTitle} ({releaseYear})</DialogTitle>
+                    <DialogDescription className={SecondaryTextBaseCSS}>{descSection}</DialogDescription>
                 </DialogHeader>
 
                 {/* Movie header section */}
@@ -129,15 +137,13 @@ const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({ showing }) =>
                     />
 
                     <div className="flex flex-col gap-1">
-                        <h1 className="text-lg font-bold">{movieTitle}</h1>
-                        <h2 className="text-sm text-neutral-400">
-                            {releaseYear} • {runtimeString}
-                        </h2>
-                        <h3 className="text-xs text-neutral-400">{genreString}</h3>
+                        <h1 className={cn(HeaderTextCSS)}>{movieTitle}</h1>
+                        <h2 className={cn(SubheaderTextCSS, "text-sm")}>{releaseYear} • {runtimeString}</h2>
+                        <h3 className={cn(SubheaderTextCSS, "text-xs")}>{genreString}</h3>
                     </div>
                 </section>
 
-                <Separator />
+                <Separator/>
 
                 {/* Showing details */}
                 <section className="grid grid-cols-1 gap-4">
@@ -145,19 +151,19 @@ const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({ showing }) =>
 
                     <div className="grid grid-cols-2 gap-1">
                         <LucideIconText
-                            className="col-span-2"
+                            className={cn(PrimaryTextBaseCSS, "col-span-2")}
                             icon={Clock}
                             text={dateString}
                         />
 
                         <LucideIconText
-                            className="text-xs text-neutral-600"
+                            className={cn(SecondaryTextBaseCSS, "text-xs")}
                             icon={Landmark}
                             text={`${theatreName} (${country})`}
                         />
 
                         <LucideIconText
-                            className="text-xs text-neutral-600"
+                            className={cn(SecondaryTextBaseCSS, "text-xs")}
                             icon={Presentation}
                             text={`${screenName} • ${screenType}`}
                         />
@@ -165,26 +171,26 @@ const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({ showing }) =>
 
                     <div className="flex items-center justify-between">
                         <LucideIconText
-                            className="col-span-2"
+                            className={cn(PrimaryTextBaseCSS)}
                             icon={Ticket}
                             text={`$${ticketPrice.toString()} per ticket`}
                         />
 
                         <LucideIconText
-                            className="text-xs text-neutral-600"
+                            className={cn(SecondaryTextBaseCSS, "text-xs")}
                             icon={Headphones}
                             text={audioLanguageString}
                         />
 
                         <LucideIconText
-                            className="text-xs text-neutral-600"
+                            className={cn(SecondaryTextBaseCSS, "text-xs")}
                             icon={Captions}
                             text={subtitleString}
                         />
                     </div>
                 </section>
 
-                <Separator />
+                <Separator/>
 
                 {/* Movie synopsis */}
                 <section>
@@ -200,12 +206,9 @@ const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({ showing }) =>
                 <LoggedAnchor
                     href={`/admin/showings/get/${_id}`}
                     target="_blank"
-                    className={cn(
-                        buttonVariants({ variant: "default" }),
-                        "w-full bg-primary"
-                    )}
+                    className={cn(buttonVariants({variant: "primary"}), "w-full")}
                 >
-                    <Search /> Details
+                    <Search/> Details
                 </LoggedAnchor>
             </DialogContent>
         </Dialog>

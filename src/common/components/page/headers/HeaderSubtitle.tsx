@@ -1,5 +1,6 @@
 import {FC, PropsWithChildren} from 'react';
 import {cn} from "@/common/lib/utils.ts";
+import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 /**
  * Props for the {@link HeaderSubtitle} component.
@@ -37,7 +38,8 @@ type SubtitleProps = {
 const HeaderSubtitle: FC<PropsWithChildren<SubtitleProps>> = ({children, className}) => {
     return (
         <h2 className={cn(
-            "text-sm font-light italic text-neutral-600",
+            SecondaryTextBaseCSS,
+            "text-sm font-light italic",
             "md:text-base",
             "xl:text-lg",
             className,

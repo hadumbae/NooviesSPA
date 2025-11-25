@@ -1,5 +1,6 @@
 import {FC, PropsWithChildren} from 'react';
 import {cn} from "@/common/lib/utils.ts";
+import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 /**
  * Props for the {@link HeaderTitle} component.
@@ -35,7 +36,8 @@ type TitleProps = {
 const HeaderTitle: FC<PropsWithChildren<TitleProps>> = ({children, className}) => {
     return (
         <h1 className={cn(
-            "font-bold dark:text-white",
+            PrimaryTextBaseCSS,
+            "font-bold",
             "text-xl md:text-2xl xl:text-4xl",
             className,
         )}>
