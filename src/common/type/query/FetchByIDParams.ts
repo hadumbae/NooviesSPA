@@ -1,24 +1,30 @@
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
- * Parameters for fetching a single entity by its ObjectId.
+ * # Fetch By ID Parameters
  *
- * Combines common request options (e.g. `populate`, `lean`, etc.)
- * with a required `_id` field used to identify the target entity.
+ * Defines the parameter type for fetching a single entity by its ObjectId.
  *
- * @property _id - The ObjectId of the entity to fetch
+ * Combines generic `RequestOptions` (e.g., `populate`, `lean`, headers, etc.)
+ * with a required `_id` field to uniquely identify the entity.
+ *
+ * This type excludes pagination fields like `limit` since fetching by ID
+ * returns a single record.
  *
  * @example
  * ```ts
  * const params: FetchByIDParams = {
- *   _id: "64aef...b83f", // some ObjectId
- *   populate: true,
+ *   _id: "64aef...b83f",
+ *   populate: true, // optional
+ *   lean: true,     // optional
  * };
  * ```
  */
-export type FetchByIDParams = RequestOptions & {
-    /** The ObjectId of the entity to fetch. */
-    _id: ObjectId
+export type FetchByIDParams = Omit<RequestOptions, "limit"> & {
+    /**
+     * The ObjectId of the entity to fetch.
+     * Must be a valid MongoDB ObjectId string.
+     */
+    _id: ObjectId;
 };
