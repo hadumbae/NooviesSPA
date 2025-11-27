@@ -6,9 +6,9 @@ import ShowingSeatMapEditHeader from "@/pages/seatmap/components/headers/Showing
 import useFetchShowingSeatMapParams from "@/pages/seatmap/hooks/params/useFetchShowingSeatMapParams.ts";
 import ShowingSeatMapSubmitForm from "@/pages/seatmap/components/forms/ShowingSeatMapSubmitForm.tsx";
 import {useNavigate} from "react-router-dom";
-import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import useShowingSeatMapQueryErrorHandler from "@/pages/seatmap/hooks/errors/useShowingSeatMapQueryErrorHandler.ts";
 import useFetchShowingAndSeatMap from "@/pages/seatmap/hooks/queries/useFetchShowingAndSeatMap.ts";
+import {SeatMap} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
 
 const ShowingSeatMapEditPage: FC = () => {
     const navigate = useNavigate();

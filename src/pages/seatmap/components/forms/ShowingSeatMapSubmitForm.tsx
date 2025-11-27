@@ -1,7 +1,5 @@
 import {FC} from 'react';
 import useShowingSeatMapSubmitForm from "@/pages/seatmap/hooks/forms/useShowingSeatMapSubmitForm.ts";
-import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
-import {SeatMapSubmit} from "@/pages/seatmap/schema/SeatMapSubmitSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
@@ -9,6 +7,8 @@ import useSeatMapSubmitMutation from "@/pages/seatmap/hooks/mutations/useSeatMap
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import ShowingSeatHookFormSelect from "@/pages/seatmap/components/forms/ShowingSeatHookFormSelect.tsx";
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
+import {SeatMap} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
+import {SeatMapForm} from "@/pages/seatmap/schema/form/SeatMapForm.types.ts";
 
 interface Props {
     showing: Showing;
@@ -22,7 +22,7 @@ const ShowingSeatMapSubmitForm: FC<Props> = ({showing, seatMap, onSubmit}) => {
 
     const {_id: showingID} = showing;
 
-    const onFormSubmit = (values: SeatMapSubmit) => {
+    const onFormSubmit = (values: SeatMapForm) => {
         console.log("[Seat Map Submit] Values :", values);
         mutate(values);
     }

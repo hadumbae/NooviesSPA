@@ -1,7 +1,7 @@
 import {FC} from 'react';
-import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import ShowingSeatMapCompactCard from "@/pages/showings/components/seatmap/ShowingSeatMapCompactCard.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {SeatMap} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
 
 interface Props {
     seating: SeatMap[];

@@ -1,6 +1,7 @@
 import useSeatMapUpdateAvailabilityMutation from "@/pages/seatmap/hooks/mutations/useSeatMapUpdateAvailabilityMutation.ts";
 import useSeatMapDeleteMutation from "@/pages/seatmap/hooks/mutations/useSeatMapDeleteMutation.ts";
-import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
+
+import {SeatMap} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
 
 interface Params {
     seatMap: SeatMap;

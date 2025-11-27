@@ -1,10 +1,11 @@
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import SeatMapShowingRepository from "@/pages/seatmap/repositories/SeatMapShowingRepository.ts";
-import {SeatMap, SeatMapSchema} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import {toast} from "react-toastify";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {SeatMapSchema} from "@/pages/seatmap/schema/model/SeatMap.schema.ts";
+import {SeatMap} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
 
 export default function useSeatMapUpdateAvailabilityMutation(
     params: MutationOnSubmitParams<SeatMap> = {}

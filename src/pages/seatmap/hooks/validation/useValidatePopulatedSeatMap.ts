@@ -1,9 +1,9 @@
-import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
-import {SeatMapPopulatedSchema} from "@/pages/seatmap/schema/SeatMapPopulatedSchema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
+import {SeatMapDetailsSchema} from "@/pages/seatmap/schema/model/SeatMap.schema.ts";
+import {SeatMap} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
 
 export default function useValidatePopulatedSeatMap(seatMap: SeatMap) {
-    const result = SeatMapPopulatedSchema.safeParse(seatMap);
+    const result = SeatMapDetailsSchema.safeParse(seatMap);
 
     if (!result.success) {
         throw new ParseError({

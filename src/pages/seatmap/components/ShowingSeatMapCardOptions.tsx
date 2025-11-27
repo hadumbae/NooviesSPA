@@ -1,5 +1,4 @@
 import {FC, useState} from 'react';
-import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
@@ -7,6 +6,7 @@ import {Ellipsis, Loader} from "lucide-react";
 import {Link} from "react-router-dom";
 import useSeatMapOptionsHooks from "@/pages/seatmap/hooks/options/useSeatMapOptionsHooks.ts";
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
+import {SeatMap} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
 
 interface Params {
     seatMap: SeatMap;

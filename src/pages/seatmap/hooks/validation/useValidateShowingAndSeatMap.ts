@@ -1,8 +1,8 @@
-import {SeatMapPopulatedSchema} from "@/pages/seatmap/schema/SeatMapPopulatedSchema.ts";
-import {SeatMap} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {ShowingDetailsSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {SeatMapDetailsSchema} from "@/pages/seatmap/schema/model/SeatMap.schema.ts";
+import {SeatMap} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
 
 /**
  * Validates both a showing object and its corresponding seat map.
@@ -48,7 +48,7 @@ export default function useValidateShowingAndSeatMap(params: { showing: Showing;
     });
 
     const populatedSeatMap = validateData({
-        schema: SeatMapPopulatedSchema,
+        schema: SeatMapDetailsSchema,
         data: seatMap,
     });
 

@@ -1,23 +1,24 @@
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {SeatMapSubmit} from "@/pages/seatmap/schema/SeatMapSubmitSchema.ts";
-import {SeatMap, SeatMapSchema} from "@/pages/seatmap/schema/SeatMapSchema.ts";
 import SeatMapRepository from "@/pages/seatmap/repositories/SeatMapRepository.ts";
 import {toast} from "react-toastify";
 import {UseFormReturn} from "react-hook-form";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {SeatMapSchema} from "@/pages/seatmap/schema/model/SeatMap.schema.ts";
+import {SeatMap} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
+import {SeatMapForm} from "@/pages/seatmap/schema/form/SeatMapForm.types.ts";
 
 type FormSubmitParams = MutationOnSubmitParams<SeatMap> & MutationEditByIDParams & {
-    form: UseFormReturn<SeatMapSubmit>;
+    form: UseFormReturn<SeatMapForm>;
 }
 
-export default function useSeatMapSubmitMutation(params: FormSubmitParams): UseMutationResult<SeatMap, unknown, SeatMapSubmit> {
+export default function useSeatMapSubmitMutation(params: FormSubmitParams): UseMutationResult<SeatMap, unknown, SeatMapForm> {
     const {form, isEditing, _id, onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
 
     const mutationKey = ['submit_single_seat_map'];
 
-    const mutationFn = async (values: SeatMapSubmit) => {
+    const mutationFn = async (values: SeatMapForm) => {
         const action = isEditing
             ? () => SeatMapRepository.update({_id, data: values})
             : () => SeatMapRepository.create({data: values});
