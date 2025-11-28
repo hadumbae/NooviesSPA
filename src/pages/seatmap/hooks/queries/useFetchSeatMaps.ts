@@ -94,10 +94,10 @@ export default function useFetchSeatMaps<TData = unknown>(
 ): UseQueryResult<TData, HttpResponseError> {
     const {queries = {}, options = useQueryOptionDefaults(), ...requestOptions} = params;
 
-    const queryKey = ["fetch_seat_maps_by_query", {options, queries, requestOptions}];
+    const queryKey = ["fetch_seat_maps_by_query", {queries, options: requestOptions}];
 
     const fetchData = useQueryFnHandler({
-        action: () => SeatMapRepository.query({queries, ...requestOptions}),
+        action: () => SeatMapRepository.query({queries: {...queries, ...requestOptions}}),
         errorMessage: "Failed to fetch seat map. Please try again.",
     });
 
