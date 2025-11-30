@@ -1,91 +1,99 @@
-import {Control, FieldValues, Path} from "react-hook-form";
-import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
-import {Loader} from "lucide-react";
-import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
-import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
-import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
-import {ScreenArraySchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
-import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
-import useFetchScreens from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreens.ts";
+import {FC} from 'react';
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
+import {Accordion} from "@/common/components/ui/accordion.tsx";
+import useFetchScreenSeatsByRow from "@/pages/screens/hooks/screens-and-seats/useFetchScreenSeatsByRow.ts";
+import {SeatsByRowArraySchema} from "@/pages/screens/schema/screen/ScreenSeat.schema.ts";
+import SeatRowAccordionItem from "@/pages/seats/components/features/seats-by-row/SeatRowAccordionItem.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
+import {Plus} from "lucide-react";
+import SeatsByRowSubmitFormPanel
+    from "@/pages/seats/components/features/seats-by-row/row-seats-submit-form/SeatsByRowSubmitFormPanel.tsx";
+import {cn} from "@/common/lib/utils.ts";
+import {SeatsByRowFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import {ScreenArray} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {SeatsByRow} from "@/pages/screens/schema/screen/ScreenSeat.types.ts";
 
 /**
- * Props for `ScreenHookFormSelect` component.
- *
- * @template TSubmit - The type of the form values managed by `react-hook-form`.
+ * Props for the {@link TheatreScreenSeatsByRowCard} component.
  */
-type SelectProps<TSubmit extends FieldValues> = {
-    /** Name of the form field to register with `react-hook-form`. */
-    name: Path<TSubmit>;
+type SeatCardProps = {
+    /**
+     * The ObjectId of the theatre to which the screen belongs.
+     */
+    theatreID: ObjectId;
 
-    /** Label displayed above the select input. */
-    label: string;
-
-    /** Optional description shown under the label. */
-    description?: string;
-
-    /** Placeholder text displayed when no option is selected. */
-    placeholder?: string;
-
-    /** `react-hook-form` control object for this field. */
-    control: Control<TSubmit>;
-
-    /** If true, renders a multi-select input instead of a single-select. Defaults to `false`. */
-    isMulti?: boolean;
-
-    /** Optional filters applied when querying screen options. */
-    filters?: RequestQueryFilters;
-}
+    /**
+     * The ObjectId of the screen whose seat layout is being rendered.
+     */
+    screenID: ObjectId;
+};
 
 /**
- * A reusable form select component for choosing one or multiple screens.
+ * Displays a card showing all seat rows for a given screen within a theatre.
  *
- * Fetches screen data using `useFetchScreens`, validates the response using `ScreenArraySchema`,
- * and renders a single-select or multi-select input connected to `react-hook-form`.
+ * This component fetches seat data by row, validates it using Zod,
+ * and displays each row inside an accordion. It also includes a form
+ * panel to allow users to add more seat rows.
  *
- * Automatically handles loading and error states via `QueryBoundary` and `ValidatedQueryBoundary`.
+ * Handles loading, HTTP, and validation errors gracefully using page-level error components.
  *
- * @template TSubmit - The type of form values managed by `react-hook-form`.
- * @param props - Component props including `control`, `name`, `label`, `filters`, and `isMulti`.
- * @returns A form select input populated with validated screen options.
- *
- * @example
- * ```ts
- * <ScreenHookFormSelect
- *   name="mainScreen"
- *   label="Select Main Screen"
- *   control={form.control}
- *   placeholder="Choose a screen"
- * />
- *
- * <ScreenHookFormSelect
- *   name="screens"
- *   label="Select Screens"
- *   control={form.control}
- *   isMulti
- * />
- * ```
+ * @component
+ * @param props - Props including `theatreID` and `screenID` to fetch and render seat rows.
  */
-const ScreenHookFormSelect = <TSubmit extends FieldValues>(
-    props: SelectProps<TSubmit>
-) => {
-    const {isMulti = false, filters = {}} = props;
-    const query = useFetchScreens(filters);
+const TheatreScreenSeatsByRowCard: FC<SeatCardProps> = ({theatreID, screenID}) => {
+    const query = useFetchScreenSeatsByRow({_id: screenID, populate: false});
 
     return (
-        <QueryBoundary query={query} loaderComponent={Loader} errorComponent={ErrorMessageDisplay}>
-            <ValidatedQueryBoundary query={query} schema={ScreenArraySchema} loaderComponent={Loader} errorComponent={ErrorMessageDisplay}>
-                {(screens: ScreenArray) => {
-                    const options: ReactSelectOption[] = screens.map(
-                        ({_id, name, screenType}): ReactSelectOption => ({value: _id, label: `${name} (${screenType})`}),
+        <QueryBoundary query={query}>
+            <ValidatedQueryBoundary query={query} schema={SeatsByRowArraySchema}>
+                {(rows: SeatsByRow[]) => {
+                    const presetValues = {screen: screenID, theatre: theatreID};
+                    const disableFields: (keyof SeatsByRowFormValues)[] = ["screen", "theatre"];
+
+                    const hasContent = rows.length > 0;
+
+                    const rowContent = (
+                        <CardContent className="p-5">
+                            <Accordion type="single" collapsible>
+                                {rows.map((rowData) => <SeatRowAccordionItem
+                                    key={`seat-row-${rowData.row}`}
+                                    value={`seat-row-${rowData.row}`}
+                                    rowData={rowData}
+                                />)}
+                            </Accordion>
+                        </CardContent>
+                    );
+
+                    const panelComponent = (
+                        <SeatsByRowSubmitFormPanel presetValues={presetValues} disableFields={disableFields}>
+                            <Button variant="link">
+                                <Plus/>
+                            </Button>
+                        </SeatsByRowSubmitFormPanel>
                     );
 
                     return (
-                        isMulti
-                            ? <HookFormMultiSelect<TSubmit> options={options} {...props} />
-                            : <HookFormSelect<TSubmit> options={options} {...props} />
+                        <section className="space-y-4">
+                            {/* Seats By Row Form */}
+                            <Card>
+                                <CardHeader className={cn(hasContent && "pb-0")}>
+                                    <section className="flex justify-between items-center">
+                                        <div>
+                                            <CardTitle>Seats By Row</CardTitle>
+                                            <CardDescription>Browse seats by rows.</CardDescription>
+                                        </div>
+
+
+                                        {panelComponent}
+                                    </section>
+                                </CardHeader>
+
+
+                                {hasContent && rowContent}
+                            </Card>
+                        </section>
                     );
                 }}
             </ValidatedQueryBoundary>
@@ -93,4 +101,4 @@ const ScreenHookFormSelect = <TSubmit extends FieldValues>(
     );
 };
 
-export default ScreenHookFormSelect;
+export default TheatreScreenSeatsByRowCard;

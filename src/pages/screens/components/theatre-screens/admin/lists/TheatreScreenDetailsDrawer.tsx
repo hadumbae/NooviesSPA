@@ -12,8 +12,9 @@ import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import {CircleX} from "lucide-react";
-import {Link} from "react-router-dom";
 import {cn} from "@/common/lib/utils.ts";
+import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
+import {SecondaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 type DrawerProps = {
     screen: ScreenDetails
@@ -48,16 +49,16 @@ const TheatreScreenDetailsDrawer: FC<DrawerProps> = ({screen}) => {
 
                 <DrawerFooter>
                     <section className="flex space-x-2">
-                        <Link
+                        <LoggedAnchor
                             target="_blank"
-                            to={`/admin/theatres/get/${theatreID}/screen/${_id}`}
-                            className={cn(buttonVariants({variant: "default"}), "flex-grow")}
+                            href={`/admin/theatres/get/${theatreID}/screen/${_id}`}
+                            className={cn(buttonVariants({variant: "primary"}), "flex-grow")}
                         >
                             More Details
-                        </Link>
+                        </LoggedAnchor>
 
                         <DrawerClose asChild>
-                            <Button variant="outline">
+                            <Button variant="outline" className={SecondaryButtonCSS}>
                                 <CircleX />
                             </Button>
                         </DrawerClose>

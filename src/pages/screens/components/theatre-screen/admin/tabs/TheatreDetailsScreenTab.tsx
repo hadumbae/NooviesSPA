@@ -1,21 +1,39 @@
-import {FC} from 'react';
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+/**
+ * @file TheatreDetailsScreenTab.tsx
+ * @description
+ * React component that displays an overview of screens for a specific theatre.
+ *
+ * Features:
+ * - Fetches paginated screen data for a given theatre ID using `useFetchScreens`.
+ * - Handles loading, error, and validation states via `QueryBoundary` and `ValidatedQueryBoundary`.
+ * - Renders screen items using `TheatreDetailsScreenTabContent`.
+ * - Supports pagination controls and optional styling overrides.
+ * - Accepts query filters and sort options via `ScreenQueryOptions`.
+ *
+ * @example
+ * ```tsx
+ * <TheatreDetailsScreenTab
+ *   theatreID="64f123abc1234567890abcdef"
+ *   page={1}
+ *   perPage={10}
+ *   setPage={setPage}
+ *   queries={{ active: true }}
+ *   classNames={{ container: "custom-container", list: "custom-list" }}
+ * />
+ * ```
+ */
+
+import { FC } from 'react';
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useFetchScreens from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreens.ts";
-import {PaginatedScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
-import {isArray} from "lodash";
-import {cn} from "@/common/lib/utils.ts";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import TheatreScreenDetailsDrawer
-    from "@/pages/screens/components/theatre-screens/admin/lists/TheatreScreenDetailsDrawer.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
-import ScreenSubmitFormPanel from "@/pages/screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
-import {Plus} from "lucide-react";
-import {ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
+import { PaginatedScreenDetailsSchema } from "@/pages/screens/schema/screen/Screen.schema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import {PaginatedScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
+import { PaginatedScreenDetails } from "@/pages/screens/schema/screen/Screen.types.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
-import {ScreenQueryOptions} from "@/pages/screens/schema/queries/ScreenQueryOptions.types.ts";
+import { ScreenQueryOptions } from "@/pages/screens/schema/queries/ScreenQueryOptions.types.ts";
+import TheatreDetailsScreenTabContent
+    from "@/pages/screens/components/theatre-screen/admin/tabs/TheatreDetailsScreenTabContent.tsx";
 
 /**
  * Props for the `TheatreDetailsScreenTab` component.
@@ -37,43 +55,38 @@ export type OverviewTabProps = {
     queries?: ScreenQueryOptions;
 
     /** Optional CSS class overrides */
-    className?: {
+    classNames?: {
+        /** Class applied to the container element */
         container?: string;
+
+        /** Class applied to the screen list element */
         list?: string;
     };
 };
 
 /**
- * Information for the screen submission form panel.
- */
-const panelInfo = {
-    title: "Add Screen",
-    description: "Add screen data for theatre.",
-};
-
-/**
- * Component for displaying an overview of screens for a theatre.
+ * Displays a paginated overview of screens for a specific theatre.
  *
- * - Fetches paginated screens for a given theatre ID.
- * - Handles loading and validation via `QueryBoundary` and `ValidatedQueryBoundary`.
- * - Displays a list of screens with `TheatreScreenDetailsDrawer`.
- * - Includes pagination controls and a form panel to add new screens.
+ * Handles fetching, validation, loading, and error states automatically.
  *
- * @param props - Props controlling theatre ID, pagination, queries, and styling
- * @returns JSX element rendering the screens overview tab
+ * @param props - Props controlling theatre ID, pagination, query filters, and styling.
+ * @returns JSX element rendering the screens overview tab.
  *
  * @example
  * ```tsx
- * <TheatreScreensOverviewTab
+ * const [page, setPage] = useState(1);
+ * <TheatreDetailsScreenTab
  *   theatreID="64f123abc1234567890abcdef"
- *   page={1}
+ *   page={page}
  *   perPage={10}
  *   setPage={setPage}
+ *   queries={{ active: true }}
+ *   classNames={{ container: "custom-container", list: "custom-list" }}
  * />
  * ```
  */
 const TheatreDetailsScreenTab: FC<OverviewTabProps> = (props) => {
-    const {theatreID, page, perPage, setPage, className, queries} = props;
+    const { theatreID, page, perPage, setPage, classNames, queries } = props;
 
     const screenQuery = useFetchScreens({
         theatre: theatreID,
@@ -93,66 +106,14 @@ const TheatreDetailsScreenTab: FC<OverviewTabProps> = (props) => {
                 message="Invalid data received. Please try again."
                 errorComponent={ErrorMessageDisplay}
             >
-                {(paginatedScreens: PaginatedScreenDetails) => {
-                    const {totalItems, items: screens} = paginatedScreens;
-                    const hasScreens = isArray(screens) && screens.length > 0;
-
-                    const presetValues = {theatre: theatreID};
-                    const disableFields: (keyof ScreenFormValues)[] = ["theatre"];
-
-                    const formPanel = (
-                        <ScreenSubmitFormPanel
-                            presetValues={presetValues}
-                            disableFields={disableFields}
-                            {...panelInfo}
-                        >
-                            <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
-                                <Plus/> Add Screens
-                            </Button>
-                        </ScreenSubmitFormPanel>
-                    );
-
-                    if (!hasScreens) {
-                        return (
-                            <div className={cn(
-                                "flex flex-col justify-center items-center space-y-8",
-                                className?.container
-                            )}>
-                                <span className="select-none text-neutral-400">No Registered Screens</span>
-                                {formPanel}
-                            </div>
-                        );
-                    }
-
-                    return (
-                        <div className={cn("space-y-5", className?.container)}>
-                            <section className="grid grid-cols-2 gap-2">
-                                <h1 className="font-bold">Screens</h1>
-                                <div className="text-right"> {formPanel} </div>
-                            </section>
-
-                            <section className={cn("grid grid-cols-1 gap-3", className?.list)}>
-                                <h1 className="sr-only">Screen list</h1>
-                                {screens.map((screen) =>
-                                    <TheatreScreenDetailsDrawer
-                                        key={screen._id}
-                                        screen={screen}
-                                    />
-                                )}
-                            </section>
-
-                            {
-                                totalItems > perPage &&
-                                <PaginationRangeButtons
-                                    page={page}
-                                    perPage={perPage}
-                                    setPage={setPage}
-                                    totalItems={totalItems}
-                                />
-                            }
-                        </div>
-                    );
-                }}
+                {({ items, totalItems }: PaginatedScreenDetails) =>
+                    <TheatreDetailsScreenTabContent
+                        theatreID={theatreID}
+                        screens={items}
+                        totalItems={totalItems}
+                        paginationOptions={{ page, perPage, setPage }}
+                        classNames={classNames}
+                    />}
             </ValidatedQueryBoundary>
         </QueryBoundary>
     );

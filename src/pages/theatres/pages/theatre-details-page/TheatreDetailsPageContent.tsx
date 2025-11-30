@@ -96,7 +96,7 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
                     page={screenPage}
                     perPage={screenPerPage}
                     setPage={setScreenPage}
-                    className={{container: "h-full"}}
+                    classNames={{container: "h-full"}}
                     queries={{sortByName: "asc"}}
                 />
             </TabsContent>
