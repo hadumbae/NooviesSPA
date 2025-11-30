@@ -1,4 +1,3 @@
-import {ZodTypeAny} from "zod";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
@@ -11,13 +10,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
  */
 export type MutationOnSubmitParams<
     TData = unknown,
-    TSchema extends ZodTypeAny = ZodTypeAny
 > = {
-    /**
-     * Optional Zod schema used to validate data before submission or after receiving a response.
-     */
-    validationSchema?: TSchema;
-
     /**
      * Optional message displayed upon successful mutation.
      */

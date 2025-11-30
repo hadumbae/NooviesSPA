@@ -3,10 +3,19 @@ import {UseMutationResult} from "@tanstack/react-query";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
- * Optional configuration for a form’s UI behavior and default values.
+ * Configuration options for a form's UI behavior and default values.
  *
  * @template TFormValues - Type of the form values managed by React Hook Form. Must extend `FieldValues`.
  * @template TForm - Type of the complete form data model. Defaults to `TFormValues`.
+ *
+ * @example
+ * ```ts
+ * const formOptions: FormOptions<MyFormValues> = {
+ *   disableFields: ['email', 'createdAt'],
+ *   presetValues: { username: 'jane_doe' },
+ *   resetOnSubmit: true
+ * };
+ * ```
  */
 export type FormOptions<
     TFormValues extends FieldValues,
@@ -15,8 +24,8 @@ export type FormOptions<
     /**
      * Array of form field keys to disable in the UI.
      *
-     * Useful when specific fields should not be editable,
-     * such as in update forms or restricted contexts.
+     * Useful for preventing editing of certain fields in update forms
+     * or in restricted contexts.
      *
      * @example
      * ```ts
@@ -28,8 +37,8 @@ export type FormOptions<
     /**
      * Initial values used to prefill the form.
      *
-     * Only provided keys are applied. Commonly used for
-     * edit forms or when restoring saved drafts.
+     * Only the provided keys are applied. Commonly used for
+     * edit forms or restoring saved drafts.
      *
      * @example
      * ```ts
@@ -37,7 +46,20 @@ export type FormOptions<
      * ```
      */
     presetValues?: Partial<TForm>;
+
+    /**
+     * Whether to reset the form to its initial values after successful submission.
+     *
+     * Defaults to `false` if not specified.
+     *
+     * @example
+     * ```ts
+     * resetOnSubmit: true
+     * ```
+     */
+    resetOnSubmit?: boolean;
 };
+
 
 /**
  * Indicates whether a form is in create or edit mode, and if editing,
