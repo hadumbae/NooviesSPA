@@ -13,9 +13,12 @@ export const ScreenDetailsSearchParamSchema = z.object({
      * Can be either `"seats"` or `"showings"`. Defaults to `"seats"` if not provided.
      */
     activeTab: z
-        .union([z.literal("seats"), z.literal("showings")], {message: "Must be 'seats' or 'showings'."})
+        .union(
+            [z.literal("view-seats"), z.literal("create-seats"), z.literal("showings")],
+            {message: "Must be 'seats' or 'showings'."},
+        )
         .optional()
-        .default("seats"),
+        .default("view-seats"),
 
     /**
      * Current page number for seat listings.

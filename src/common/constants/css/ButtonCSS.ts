@@ -18,6 +18,7 @@
  */
 
 import {cn} from "@/common/lib/utils.ts";
+import {IconTextCSS} from "@/common/constants/css/TextCSS.ts";
 
 /**
  * @constant HoverLinkCSS
@@ -41,11 +42,10 @@ export const HoverLinkCSS = cn(
  * - Inherits hover/link behavior from `HoverLinkCSS`.
  */
 export const IconTextButtonCSS = cn(
-    "inline-flex items-center",
-    "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+    IconTextCSS,
+    HoverLinkCSS,
     "text-sm font-medium",
     "underline-offset-4 hover:underline-offset-4",
-    HoverLinkCSS
 );
 
 /**

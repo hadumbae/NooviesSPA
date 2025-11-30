@@ -21,6 +21,8 @@ import {ScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.t
 import useFetchRouteParams from "@/common/hooks/router/useFetchRouteParams.ts";
 import {TheatreScreenRouteParamSchema} from "@/pages/theatres/schema/params/TheatreScreenRouteParamSchema.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import TheatreScreenCreateSeatTab
+    from "@/pages/screens/components/theatre-screens/admin/features/create-theatre-screen-seats/tabs/TheatreScreenCreateSeatTab.tsx";
 
 /**
  * Page component displaying detailed information for a specific theatre screen.
@@ -85,13 +87,21 @@ const ScreenDetailsPage: FC = () => {
                             <Tabs defaultValue={activeTab} onValueChange={(v) => setActiveTab(v)}>
                                 <section className="flex justify-center">
                                     <TabsList>
-                                        <TabsTrigger value="seats">Seats</TabsTrigger>
+                                        <TabsTrigger value="view-seats">Seats</TabsTrigger>
+                                        <TabsTrigger value="create-seats">Create Seats</TabsTrigger>
                                         <TabsTrigger value="showings">Showings</TabsTrigger>
                                     </TabsList>
                                 </section>
 
-                                <TabsContent value="seats">
+                                <TabsContent value="view-seats">
                                     <TheatreScreenSeatsByRowCard theatreID={theatreID} screenID={screenID}/>
+                                </TabsContent>
+
+                                <TabsContent value="create-seats">
+                                    <TheatreScreenCreateSeatTab
+                                        screenID={screenID}
+                                        theatreID={theatreID}
+                                    />
                                 </TabsContent>
 
                                 <TabsContent value="showings">

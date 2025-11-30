@@ -1,20 +1,25 @@
 /**
  * @file textStyles.ts
- * @description
- * Centralized Tailwind-based text style utilities used across the application.
  *
- * These exports provide consistent typography styling patterns for:
+ * @summary
+ * Centralized Tailwind-based text style utilities for consistent typography across the app.
+ *
+ * @description
+ * Provides pre-computed className strings for common text patterns, including:
  * - Primary and secondary text
  * - Headers and subheaders
- * - Quotes
+ * - Quotes and supportive inline text
  * - Error labels and messages
+ * - Icon-aligned text
  *
- * Each constant is a pre-computed className string produced by `cn()`.
+ * All constants leverage the `cn()` utility to merge class strings consistently.
  *
  * @example
  * ```tsx
- * <p className={PrimaryTextBaseCSS}>Hello</p>
- * <span className={ErrorMessageCSS}>Required field.</span>
+ * <p className={PrimaryTextBaseCSS}>Primary text example</p>
+ * <span className={ErrorMessageCSS}>Validation error message</span>
+ * <h2 className={HeaderTextCSS}>Section Header</h2>
+ * <span className={IconTextCSS}><Icon /> Label</span>
  * ```
  */
 
@@ -23,7 +28,7 @@ import { cn } from "@/common/lib/utils.ts";
 /**
  * Base styling for primary text.
  *
- * - Black text in light mode
+ * - Black in light mode
  * - Gray-50 in dark mode
  */
 export const PrimaryTextBaseCSS = cn(
@@ -33,7 +38,7 @@ export const PrimaryTextBaseCSS = cn(
 /**
  * Base styling for secondary, de-emphasized text.
  *
- * - Neutral gray in light/dark modes
+ * - Neutral gray in both light and dark modes
  */
 export const SecondaryTextBaseCSS = cn(
     "text-neutral-400 dark:text-gray-500"
@@ -42,7 +47,7 @@ export const SecondaryTextBaseCSS = cn(
 /**
  * Styling for quoted or supportive inline text.
  *
- * - Neutral gray
+ * - Neutral gray color
  * - Smaller font size
  */
 export const QuoteTextCSS = cn(
@@ -53,8 +58,8 @@ export const QuoteTextCSS = cn(
 /**
  * Styling for header-level text.
  *
- * - Inherits `PrimaryTextBaseCSS`
- * - Large, bold text
+ * - Inherits PrimaryTextBaseCSS
+ * - Large, bold font
  */
 export const HeaderTextCSS = cn(
     PrimaryTextBaseCSS,
@@ -64,8 +69,8 @@ export const HeaderTextCSS = cn(
 /**
  * Styling for subheader or section labels.
  *
- * - Inherits `SecondaryTextBaseCSS`
- * - Bold text
+ * - Inherits SecondaryTextBaseCSS
+ * - Bold font weight
  */
 export const SubheaderTextCSS = cn(
     SecondaryTextBaseCSS,
@@ -75,19 +80,31 @@ export const SubheaderTextCSS = cn(
 /**
  * Styling for form field error labels.
  *
- * - Red tone in both light and dark modes
+ * - Red tone for light and dark themes
  */
 export const ErrorLabelCSS = cn(
     "text-red-500 dark:text-red-700"
 );
 
 /**
- * Styling for inline error messages (e.g. validation messages).
+ * Styling for inline error messages (e.g., validation feedback).
  *
  * - Small font size
  * - Medium weight
- * - Red color variants for light/dark themes
+ * - Red variants for light/dark themes
  */
 export const ErrorMessageCSS = cn(
     "text-[0.8rem] font-medium text-red-500 dark:text-red-700"
+);
+
+/**
+ * Utility styling for text with icons.
+ *
+ * - Aligns text and inline SVG icons
+ * - Ensures icons do not capture pointer events
+ * - Maintains icon size and prevents shrinking
+ */
+export const IconTextCSS = cn(
+    "inline-flex items-center",
+    "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
 );
