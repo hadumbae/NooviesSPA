@@ -1,99 +1,164 @@
-import {z} from "zod";
-import {SeatTypeEnum} from "@/pages/seats/schema/SeatType.enum.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
-import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import { z } from "zod";
+import { SeatTypeEnum } from "@/pages/seats/schema/SeatTypeEnumSchema.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {
+    CleanedPositiveNumberSchema,
+} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import { CoercedBooleanValueSchema } from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import { SeatLayoutTypeEnumSchema } from "@/pages/seats/schema/SeatLayoutTypeEnumSchema.ts";
 
 /**
- * Schema for initial seat form values.
+ * @file SeatFormSchema.ts
  *
- * - All fields use `FormStarterValueSchema` to allow empty or placeholder values
- *   when initializing forms.
- * - Suitable for form default values or "starter" forms before final validation.
+ * Defines schemas for **validated seat form submissions**, including seats,
+ * aisles, and stairs.
+ *
+ * This file exports:
+ * - `SeatFormBaseSchema`: shared fields used across all layout types
+ * - `SeatingSchema`: full schema for actual seats
+ * - `AisleSchema` & `StairSchema`: schemas for non-seat layout elements
+ * - `SeatFormSchema`: discriminated union combining all layout types
+ *
+ * The union is discriminated using the `layoutType` field, ensuring that:
+ * - Fields such as `seatNumber`, `seatType`, etc. exist only for `"SEAT"`
+ * - Aisles and stairs enforce *only* their required structure
+ *
+ * This schema is intended for:
+ * - Server-side validation of submitted form data
+ * - API endpoint request validation
+ * - Strict form handling where seat vs. aisle vs. stair rules differ
  */
-export const SeatFormValuesSchema = z.object({
-    /** Theatre ID (starter value, may be empty) */
-    theatre: FormStarterValueSchema,
-    /** Screen ID (starter value, may be empty) */
-    screen: FormStarterValueSchema,
-    /** Row identifier (starter value, may be empty) */
-    row: FormStarterValueSchema,
-    /** Seat number (starter value, may be empty) */
-    seatNumber: FormStarterValueSchema,
-    /** Seat label (starter value, may be empty) */
-    seatLabel: FormStarterValueSchema,
-    /** Seat type (starter value, may be empty) */
-    seatType: FormStarterValueSchema,
-    /** Seat availability (starter value, may be empty) */
-    isAvailable: FormStarterValueSchema,
-    /** Price multiplier (starter value, may be empty) */
-    priceMultiplier: FormStarterValueSchema,
-    /** X coordinate for seat placement (starter value, may be empty) */
-    x: FormStarterValueSchema,
-    /** Y coordinate for seat placement (starter value, may be empty) */
-    y: FormStarterValueSchema,
-});
 
 /**
- * Fully validated seat form schema.
+ * Base schema shared by all seat-layout elements.
  *
- * Enforces all required fields and proper types for a complete seat:
- * - `theatre` and `screen` must be valid IDs.
- * - `row` must be a non-empty string, max 10 characters.
- * - `seatNumber`, `priceMultiplier`, `x`, and `y` must be positive numbers.
- * - `seatLabel` can be undefined.
- * - `seatType` must be a valid enum value.
- * - `isAvailable` must be a boolean.
+ * Includes the core geometric and location data that applies to:
+ * - Seats
+ * - Aisles
+ * - Stairs
  */
-export const SeatFormSchema = z.object({
+export const SeatFormBaseSchema = z.object({
+    /**
+     * Theatre ID to which this layout element belongs.
+     */
     theatre: IDStringSchema,
+
+    /**
+     * Screen ID within the theatre.
+     */
     screen: IDStringSchema,
+
+    /**
+     * Row identifier (e.g., "A", "Front", "VIP-Row1").
+     * Limited to 10 characters for consistency.
+     */
     row: NonEmptyStringSchema.max(10, "Must be 10 characters or less."),
-    seatNumber: CleanedPositiveNumberSchema,
-    seatLabel: preprocessEmptyStringToUndefined(
-        NonEmptyStringSchema.max(50, {message: "Must be 50 characters or less."}).optional()
-    ).optional(),
-    seatType: SeatTypeEnum,
-    isAvailable: CoercedBooleanValueSchema,
-    priceMultiplier: CleanedPositiveNumberSchema,
+
+    /**
+     * X-coordinate position on the seat map layout.
+     */
     x: CleanedPositiveNumberSchema,
+
+    /**
+     * Y-coordinate position on the seat map layout.
+     */
     y: CleanedPositiveNumberSchema,
+
+    /**
+     * Layout type discriminant. Determines which extended schema applies.
+     */
+    layoutType: SeatLayoutTypeEnumSchema,
 });
 
 /**
- * Fields to omit when defining a row of seats.
+ * Schema for **actual seats** (as opposed to aisles or stairs).
  *
- * - `seatNumber`, `seatLabel`, and `x` are seat-specific and do not apply
- *   for bulk row creation.
+ * Requires additional fields related to seating, such as:
+ * - seat number
+ * - seat type
+ * - availability
+ * - pricing multiplier
  */
-export const seatsByRowOmits: Partial<Record<keyof Pick<SeatForm, "seatNumber" | "seatLabel" | "x">, true>> = {
-    seatNumber: true,
-    seatLabel: true,
-    x: true,
-};
+const SeatingSchema = SeatFormBaseSchema.extend({
+    /** Discriminant indicating the element is a seat. */
+    layoutType: z.literal("SEAT"),
+
+    /** Number identifying the seat within its row. */
+    seatNumber: CleanedPositiveNumberSchema,
+
+    /**
+     * Optional seat label (e.g., "VIP-3", "XL-Legroom").
+     * Empty string is converted to `undefined` to standardize optionality.
+     */
+    seatLabel: preprocessEmptyStringToUndefined(
+        NonEmptyStringSchema.max(50, {
+            message: "Must be 50 characters or less.",
+        }).optional(),
+    ).optional(),
+
+    /** Type of seat (e.g., regular, premium, VIP). */
+    seatType: SeatTypeEnum,
+
+    /** Whether the seat is available for booking. */
+    isAvailable: CoercedBooleanValueSchema,
+
+    /**
+     * Price multiplier applied on top of the base screen price.
+     * For example: 1 = normal, 1.5 = premium.
+     */
+    priceMultiplier: CleanedPositiveNumberSchema,
+});
 
 /**
- * Schema for form values when creating a row of seats (starter values).
+ * Schema for **aisle blocks** within the seating layout.
  *
- * - Uses `SeatFormValuesSchema` as a base.
- * - Omits seat-specific fields (`seatNumber`, `seatLabel`, `x`) not needed for bulk creation.
- * - Adds `numberOfSeats` as a starter value for row creation.
+ * These represent empty floor space rather than seatable positions.
  */
-export const SeatsByRowFormValuesSchema = SeatFormValuesSchema
-    .omit(seatsByRowOmits)
-    .extend({numberOfSeats: FormStarterValueSchema});
+const AisleSchema = SeatFormBaseSchema.extend({
+    /** Discriminant indicating an aisle. */
+    layoutType: z.literal("AISLE"),
+});
 
 /**
- * Fully validated schema for creating a row of seats.
+ * Schema for **stairs** within the seating layout.
  *
- * - Uses `SeatFormSchema` as a base.
- * - Omits seat-specific fields (`seatNumber`, `seatLabel`, `x`) for bulk row creation.
- * - Requires `numberOfSeats` to be a positive number.
+ * Represents elevation steps or transitions in the seating map.
  */
-export const SeatsByRowFormSchema = SeatFormSchema
-    .omit(seatsByRowOmits)
-    .extend({numberOfSeats: CleanedPositiveNumberSchema});
+const StairSchema = SeatFormBaseSchema.extend({
+    /** Discriminant indicating a stair. */
+    layoutType: z.literal("STAIR"),
+});
+
+/**
+ * Discriminated union schema representing **any valid seat-layout form**.
+ *
+ * Uses the `layoutType` field as the discriminant, automatically selecting
+ * the correct subtype:
+ *
+ * - `"SEAT"` → {@link SeatingSchema}
+ * - `"AISLE"` → {@link AisleSchema}
+ * - `"STAIR"` → {@link StairSchema}
+ *
+ * @example
+ * ```ts
+ * const result = SeatFormSchema.parse({
+ *   theatre: "656a...",
+ *   screen: "99bb...",
+ *   row: "C",
+ *   x: 12,
+ *   y: 5,
+ *   layoutType: "SEAT",
+ *   seatNumber: 14,
+ *   seatType: "REGULAR",
+ *   isAvailable: true,
+ *   priceMultiplier: 1,
+ * });
+ * ```
+ */
+export const SeatFormSchema = z.discriminatedUnion("layoutType", [
+    SeatingSchema,
+    AisleSchema,
+    StairSchema,
+]);

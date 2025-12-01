@@ -24,7 +24,8 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import {Separator} from "@/common/components/ui/separator.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {UseFormReturn} from "react-hook-form";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 /**
  * Props for {@link SeatSubmitFormRowFieldset}.

@@ -1,68 +1,139 @@
 import { z } from "zod";
 import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import { SeatTypeEnum } from "@/pages/seats/schema/SeatType.enum.ts";
+import { SeatTypeEnum } from "@/pages/seats/schema/SeatTypeEnumSchema.ts";
 import { CoercedNumberValueSchema } from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
-import { TheatreSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
-import { ScreenSchema } from "@/pages/screens/schema/screen/Screen.schema.ts";
 import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import { CoercedBooleanValueSchema } from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import { SeatLayoutTypeEnumSchema } from "@/pages/seats/schema/SeatLayoutTypeEnumSchema.ts";
 
 /**
- * Schema representing a seat with minimal references.
+ * ## SeatBaseSchema
  *
- * Theatre and screen are represented by their IDs only.
- * Fields:
- * - `_id`: Unique seat identifier
- * - `theatre`: Theatre ID
- * - `screen`: Screen ID
- * - `row`: Row identifier (non-empty, max 10 chars)
- * - `seatNumber`: Positive seat number
- * - `seatLabel`: Optional label
- * - `seatType`: Seat type enum
- * - `x`, `y`: Positive coordinates
- * - `isAvailable`: Boolean for availability
- * - `priceMultiplier`: Non-negative number for price adjustments
+ * Base Zod schema for all seat entries.
+ * Contains common properties for seating and non-seating layout types.
+ *
+ * @properties
+ * - `_id` — Readonly ObjectId string identifying the seat.
+ * - `row` — Row identifier (max 10 characters).
+ * - `x` — X-coordinate in the layout grid (positive number).
+ * - `y` — Y-coordinate in the layout grid (positive number).
+ * - `layoutType` — Layout classification (SEAT, AISLE, STAIR).
  */
-export const SeatSchema = z.object({
-    _id: IDStringSchema,
+export const SeatBaseSchema = z.object({
+    _id: IDStringSchema.readonly(),
+    row: NonEmptyStringSchema.max(10, "Must be 10 characters or less."),
+    x: PositiveNumberSchema,
+    y: PositiveNumberSchema,
+    layoutType: SeatLayoutTypeEnumSchema,
+});
+
+/**
+ * ## SeatReferenceSchema
+ *
+ * Extends SeatBaseSchema by including references to the theatre and screen.
+ * Shared by all layout types.
+ *
+ * @properties
+ * - `theatre` — ObjectId string referencing the theatre.
+ * - `screen` — ObjectId string referencing the screen.
+ */
+const SeatReferenceSchema = SeatBaseSchema.extend({
     theatre: IDStringSchema,
     screen: IDStringSchema,
-    row: NonEmptyStringSchema.max(10, "Must be 10 characters or less."),
+});
+
+/**
+ * ## SeatingSchema
+ *
+ * Schema for standard seating positions (SEAT layout type).
+ * Extends SeatReferenceSchema with additional seat-specific properties.
+ *
+ * @properties
+ * - `seatNumber` — Numeric identifier within the row (positive number).
+ * - `seatLabel` — Optional display label (e.g., "A5", "VIP-1").
+ * - `seatType` — Type/category of the seat (e.g., REGULAR, VIP).
+ * - `isAvailable` — Boolean indicating booking availability.
+ * - `priceMultiplier` — Multiplier applied to the base ticket price (≥ 0).
+ */
+const SeatingSchema = SeatReferenceSchema.extend({
+    layoutType: z.literal("SEAT"),
     seatNumber: PositiveNumberSchema,
     seatLabel: NonEmptyStringSchema.optional(),
     seatType: SeatTypeEnum,
-    x: PositiveNumberSchema,
-    y: PositiveNumberSchema,
     isAvailable: CoercedBooleanValueSchema,
     priceMultiplier: CoercedNumberValueSchema.gte(0, "Must be 0 or greater."),
 });
 
 /**
- * Schema representing a seat with fully populated theatre and screen objects.
+ * ## AisleSchema
  *
- * Extends `SeatSchema` by overriding `theatre` and `screen` with nested objects.
- * Typically used for detailed seat responses.
+ * Schema for AISLE layout type.
+ * Extends SeatReferenceSchema and restricts `layoutType` to "AISLE".
  */
-export const SeatDetailsSchema = SeatSchema.extend({
-    theatre: z.lazy(() => TheatreSchema),
-    screen: z.lazy(() => ScreenSchema),
+const AisleSchema = SeatReferenceSchema.extend({
+    layoutType: z.literal("AISLE"),
 });
 
 /**
- * Schema representing an array of minimal seat objects (`SeatSchema`).
- */
-export const SeatArraySchema = z.array(SeatSchema);
-
-/**
- * Schema representing a paginated response of minimal seats (`SeatSchema`).
- */
-export const PaginatedSeatSchema = generatePaginationSchema(SeatSchema);
-
-/**
- * Schema representing a paginated response of detailed seats (`SeatDetailsSchema`).
+ * ## StairSchema
  *
- * Each item includes fully populated theatre and screen objects.
+ * Schema for STAIR layout type.
+ * Extends SeatReferenceSchema and restricts `layoutType` to "STAIR".
  */
-export const PaginatedSeatDetailsSchema = generatePaginationSchema(SeatDetailsSchema);
+const StairSchema = SeatReferenceSchema.extend({
+    layoutType: z.literal("STAIR"),
+});
+
+/**
+ * ## SeatSchema
+ *
+ * Discriminated union schema for all seat inputs.
+ * Differentiates between seating, aisle, and stair layout types
+ * based on the `layoutType` property.
+ *
+ * @example
+ * ```ts
+ * // SEAT input
+ * const seat = SeatSchema.parse({
+ *   _id: "64f1c0c8ab1234567890abcd",
+ *   theatre: "64f1c0c8ab1234567890abce",
+ *   screen: "64f1c0c8ab1234567890abcf",
+ *   row: "A",
+ *   seatNumber: 1,
+ *   seatType: "VIP",
+ *   layoutType: "SEAT",
+ *   x: 1,
+ *   y: 1,
+ *   seatLabel: "VIP-1",
+ *   isAvailable: true,
+ *   priceMultiplier: 1.5,
+ * });
+ *
+ * // AISLE input
+ * const aisle = SeatSchema.parse({
+ *   _id: "64f1c0c8ab1234567890abc1",
+ *   theatre: "64f1c0c8ab1234567890abce",
+ *   screen: "64f1c0c8ab1234567890abcf",
+ *   row: "B",
+ *   layoutType: "AISLE",
+ *   x: 5,
+ *   y: 2,
+ * });
+ *
+ * // STAIR input
+ * const stair = SeatSchema.parse({
+ *   _id: "64f1c0c8ab1234567890abc2",
+ *   theatre: "64f1c0c8ab1234567890abce",
+ *   screen: "64f1c0c8ab1234567890abcf",
+ *   row: "C",
+ *   layoutType: "STAIR",
+ *   x: 10,
+ *   y: 3,
+ * });
+ * ```
+ */
+export const SeatSchema = z.discriminatedUnion(
+    "layoutType",
+    [SeatingSchema, AisleSchema, StairSchema],
+);

@@ -20,12 +20,12 @@
 
 import {FC} from 'react';
 import {UseFormReturn} from "react-hook-form";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import SeatTypeHookFormSelect from "@/pages/seats/components/forms/inputs/SeatTypeHookFormSelect.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 /**
  * Props for {@link SeatSubmitFormSeatFieldset}.

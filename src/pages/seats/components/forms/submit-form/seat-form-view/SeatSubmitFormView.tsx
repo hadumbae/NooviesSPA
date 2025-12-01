@@ -30,10 +30,9 @@
 import {cn} from "@/common/lib/utils.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import {SeatFormValuesSchema} from "@/pages/seats/schema/form/SeatForm.schema.ts";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import {FC} from "react";
 import SeatSubmitFormDetailsFieldset
@@ -44,6 +43,7 @@ import SeatSubmitFormCoordinateFieldset
     from "@/pages/seats/components/forms/submit-form/seat-form-view/SeatSubmitFormCoordinateFieldset.tsx";
 import SeatSubmitFormSeatFieldset
     from "@/pages/seats/components/forms/submit-form/seat-form-view/SeatSubmitFormSeatFieldset.tsx";
+import {SeatFormValues, SeatFormValuesSchema} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 /**
  * Props for {@link SeatSubmitFormView}.

@@ -22,7 +22,8 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 import ScreenHookFormSelect from "@/pages/screens/components/submit-form/inputs/ScreenHookFormSelect.tsx";
 import {UseFormReturn} from "react-hook-form";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 /**
  * Props for {@link SeatSubmitFormDetailsFieldset}.

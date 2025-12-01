@@ -1,7 +1,7 @@
-import { SeatsByRowForm } from "@/pages/seats/schema/form/SeatForm.types.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
 import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
+import {SeatsByRowForm} from "@/pages/seats/schema/form/SeatsByRowFormSchema.ts";
 
 /**
  * Parameters required to submit a batch of seats by row.

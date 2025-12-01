@@ -18,7 +18,7 @@
  */
 
 import {FC, useState} from 'react';
-import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
@@ -26,6 +26,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import SeatFormSubmitList
     from "@/pages/screens/components/theatre-screens/admin/features/seat-submit/SeatFormSubmitList.tsx";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 /**
  * Props for {@link TheatreScreenCreateSeatTab}.

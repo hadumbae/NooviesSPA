@@ -4,13 +4,13 @@ import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiS
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
-import { SeatArraySchema } from "@/pages/seats/schema/seat/Seat.schema.ts";
 import useFetchSeats from "@/pages/seats/hooks/query/useFetchSeats.ts";
 
 import { SeatQueryFilters } from "@/pages/seats/schema/queries/SeatQueryOption.types.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import { SeatArray } from "@/pages/seats/schema/seat/Seat.types.ts";
+import {SeatArraySchema} from "@/pages/seats/schema/seat/SeatRelated.schema.ts";
+import {SeatArray} from "@/pages/seats/schema/seat/SeatRelated.types.ts";
 
 /**
  * Props for {@link SeatHookFormSelect}.

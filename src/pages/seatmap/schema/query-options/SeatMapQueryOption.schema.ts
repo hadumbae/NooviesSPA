@@ -23,7 +23,7 @@ import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/Posi
 import {SeatMapStatusEnum} from "@/pages/seatmap/schema/enum/SeatMapStatusEnum.ts";
 import {ShowingStatusEnumSchema} from "@/pages/showings/schema/ShowingStatus.enum.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import {SeatTypeEnum} from "@/pages/seats/schema/SeatType.enum.ts";
+import {SeatTypeEnum} from "@/pages/seats/schema/SeatTypeEnumSchema.ts";
 import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
 
 /**

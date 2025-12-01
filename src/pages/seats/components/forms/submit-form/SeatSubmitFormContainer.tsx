@@ -18,11 +18,12 @@
 import {FC, useEffect} from 'react';
 import useSeatSubmitForm from "@/pages/seats/hooks/features/admin/submit-seat-data/useSeatSubmitForm.ts";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
-import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import SeatSubmitFormView from "@/pages/seats/components/forms/submit-form/seat-form-view/SeatSubmitFormView.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 import useSeatSubmitMutation from "@/pages/seats/hooks/features/admin/submit-seat-data/useSeatSubmitMutation.ts";
 import {MutationEditByIDParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 /**
  * Props for the `SeatSubmitFormContainer` component.

@@ -17,7 +17,7 @@
 
 import {UseFormReturn} from "react-hook-form";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
-import {SeatForm, SeatFormValues} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import {toast} from "react-toastify";
@@ -27,6 +27,7 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import Logger from "@/common/utility/features/logger/Logger.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 /**
  * Parameters for {@link useSeatSubmitMutation}.

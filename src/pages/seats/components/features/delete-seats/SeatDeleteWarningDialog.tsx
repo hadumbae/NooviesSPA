@@ -1,8 +1,9 @@
 import { FC, ReactNode } from 'react';
 import useSeatDeleteMutation from "@/pages/seats/hooks/features/admin/delete-seat-data/useSeatDeleteMutation.ts";
-import { Seat, SeatDetails } from "@/pages/seats/schema/seat/Seat.types.ts";
+import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
 import { OnDeleteMutationParams } from "@/common/type/form/MutationDeleteParams.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
+import {SeatDetails} from "@/pages/seats/schema/seat/SeatDetails.types.ts";
 
 /**
  * Props for {@link SeatDeleteWarningDialog}.

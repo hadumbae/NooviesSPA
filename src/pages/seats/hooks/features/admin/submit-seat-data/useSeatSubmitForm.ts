@@ -3,7 +3,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SeatFormSchema } from "@/pages/seats/schema/form/SeatForm.schema.ts";
 import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
-import { SeatFormValues } from "@/pages/seats/schema/form/SeatForm.types.ts";
+
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 /**
  * Parameters for configuring the seat submission form.
@@ -52,7 +53,7 @@ export default function useSeatSubmitForm(
         seatNumber: getDefaultValue(presetValues?.seatNumber, seat?.seatNumber, ""),
         seatType: getDefaultValue(presetValues?.seatType, seat?.seatType, undefined),
         isAvailable: getDefaultValue(presetValues?.isAvailable, seat?.isAvailable, true),
-        priceMultiplier: getDefaultValue(presetValues?.priceMultiplier, seat?.priceMultiplier, undefined),
+        priceMultiplier: getDefaultValue(presetValues?.priceMultiplier, seat?.priceMultiplier, 1),
         x: getDefaultValue(presetValues?.x, seat?.x, ""),
         y: getDefaultValue(presetValues?.y, seat?.y, ""),
         screen: getDefaultValue(presetValues?.screen, seat?.screen, undefined),

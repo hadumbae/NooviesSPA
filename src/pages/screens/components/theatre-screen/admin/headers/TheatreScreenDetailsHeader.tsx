@@ -8,8 +8,8 @@ import { Plus, Trash } from "lucide-react";
 import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 import SeatSubmitFormPanel from "@/pages/seats/components/forms/submit-form/SeatSubmitFormPanel.tsx";
 
-import { SeatFormValues } from "@/pages/seats/schema/form/SeatForm.types.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 /**
  * Props for the `TheatreScreenDetailsHeader` component.
