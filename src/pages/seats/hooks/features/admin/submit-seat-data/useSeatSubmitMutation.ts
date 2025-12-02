@@ -1,18 +1,18 @@
 /**
  * useSeatSubmitMutation
  *
- * A React Query mutation hook to create or update a `Seat` entity using the `SeatRepository`.
+ * React Query mutation hook for creating or updating a `Seat` entity using the `SeatRepository`.
  *
  * ### Features
  * - Automatically selects **create** or **update** mode based on `isEditing`.
  * - Validates server response using {@link SeatSchema}.
- * - Handles form errors and integrates with React Hook Form.
- * - Shows success toast and calls `onSubmitSuccess` callback.
- * - Calls `onSubmitError` on failure and displays error messages.
- * - Invalidates seat-related queries after mutation.
+ * - Integrates with React Hook Form for local validation and error hydration.
+ * - Displays success toast and calls `onSubmitSuccess` callback on success.
+ * - Calls `onSubmitError` and shows error messages on failure.
+ * - Invalidates seat-related queries after mutation settles.
  *
  * ### Defaults
- * - Returns enriched `Seat` data.
+ * - Returns fully parsed and validated `Seat` data.
  */
 
 import {UseFormReturn} from "react-hook-form";
@@ -30,70 +30,65 @@ import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 /**
- * Parameters for {@link useSeatSubmitMutation}.
+ * Options for configuring the {@link useSeatSubmitMutation} hook.
  *
  * Extends:
- * - {@link MutationOnSubmitParams}: for submit-success/error callbacks
- * - {@link MutationEditByIDParams}: `_id` and `isEditing` controls
+ * - {@link MutationOnSubmitParams} — callbacks for success and error handling.
+ * - {@link MutationEditByIDParams} — `_id` and `isEditing` control mutation mode.
  *
  * Additional fields:
- * - `form`: React Hook Form instance for local validation and error propagation
+ * - `form`: React Hook Form instance for local validation and error mapping.
  */
-export type SeatSubmitMutationFormParams =
-    MutationOnSubmitParams<Seat> &
-    MutationEditByIDParams & {
-    /**
-     * React Hook Form instance for local validation and error handling.
-     */
-    form: UseFormReturn<SeatFormValues>;
+export type SeatSubmitMutationFormOptions = {
+    /** Optional edit mode configuration: `_id` of seat and whether editing */
+    editing?: MutationEditByIDParams;
+
+    /** Optional success and error callbacks with custom messages */
+    options?: MutationOnSubmitParams<Seat>;
 };
 
 /**
- * `useSeatSubmitMutation`
- *
  * Creates a React Query mutation for submitting seat data.
  *
- * ### Behavior
- * - **Create mode**: executed when `isEditing` is `false`.
- * - **Update mode**: executed when `isEditing` is `true` and `_id` is provided.
- * - Returns parsed and validated data of type {@link Seat}.
- * - Automatically handles:
- *   - Success toasts and callbacks (`onSubmitSuccess`)
- *   - Form error hydration (`onSubmitError`)
- *   - Invalidating seat-related queries after submission
+ * @param form - React Hook Form instance for local validation and error propagation.
+ * @param param1 - Optional configuration object including editing mode and callbacks.
+ * @returns A React Query `UseMutationResult` for submitting `Seat` data.
  *
- * @param params - All mutation configuration fields, form reference, and callbacks.
- * @returns A React Query `UseMutationResult` for submitting seat data.
+ * ### Behavior
+ * - Executes **create** if `isEditing` is `false` or not provided.
+ * - Executes **update** if `isEditing` is `true` and `_id` is provided.
+ * - Automatically parses and validates returned data using {@link SeatSchema}.
+ * - Shows success toast and calls `onSubmitSuccess` if provided.
+ * - Maps server or validation errors to form errors and calls `onSubmitError` if provided.
+ * - Invalidates seat-related queries after mutation settles.
  *
  * @example
  * ```ts
- * const mutation = useSeatSubmitMutation({
- *   form,
- *   isEditing: false,
- *   onSubmitSuccess: (seat) => console.log("Created:", seat),
+ * const mutation = useSeatSubmitMutation(form, {
+ *   editing: { isEditing: false },
+ *   options: {
+ *     onSubmitSuccess: (seat) => console.log("Created:", seat),
+ *   },
  * });
  *
  * mutation.mutate(formValues);
  * ```
  */
 export default function useSeatSubmitMutation(
-    params: SeatSubmitMutationFormParams
+    form: UseFormReturn<SeatFormValues>,
+    {editing = {}, options = {}}: SeatSubmitMutationFormOptions = {}
 ): UseMutationResult<Seat, unknown, SeatForm> {
-    const {
-        form,
-        _id,
-        isEditing,
-        successMessage,
-        onSubmitSuccess,
-        errorMessage,
-        onSubmitError,
-    } = params;
+    const {_id, isEditing} = editing;
+    const {successMessage, onSubmitSuccess, errorMessage, onSubmitError} = options;
 
     const queryClient = useQueryClient();
     const mutationKey = ["submit_seat_data"];
 
     /**
-     * Executes repository create/update request and validates response.
+     * Executes the repository request (create or update) and validates the response.
+     *
+     * @param values - Seat form values to submit.
+     * @returns Parsed and validated `Seat` object.
      */
     const submitSeatData = async (values: SeatForm) => {
         const action = isEditing
@@ -124,7 +119,9 @@ export default function useSeatSubmitMutation(
     };
 
     /**
-     * Success handler: displays toast, calls external callbacks, etc.
+     * Success handler: displays toast, calls external success callbacks.
+     *
+     * @param seat - The newly created or updated seat.
      */
     const onSuccess = async (seat: Seat) => {
         const actionDisplay = isEditing ? "updated" : "created";
@@ -133,7 +130,9 @@ export default function useSeatSubmitMutation(
     };
 
     /**
-     * Error handler: maps server errors to form errors, displays toast, etc.
+     * Error handler: maps server errors to form, displays toast, and calls `onSubmitError`.
+     *
+     * @param error - The error thrown during mutation.
      */
     const onError = (error: unknown) => {
         const displayMessage = errorMessage ?? "Failed to submit seat data. Please try again.";
@@ -142,13 +141,10 @@ export default function useSeatSubmitMutation(
     };
 
     /**
-     * After mutation settles (success or error), invalidate all relevant queries.
+     * After mutation settles, invalidate relevant queries to refresh data.
      */
     const onSettled = async () => {
-        const keys = [
-            "fetch_seats_by_query",
-            "fetch_screen_seats_by_row",
-        ];
+        const keys = ["fetch_seats_by_query", "fetch_screen_seats_by_row"];
 
         await Promise.all(
             keys.map((key) =>

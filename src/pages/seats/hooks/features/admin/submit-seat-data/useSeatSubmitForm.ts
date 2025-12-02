@@ -1,67 +1,93 @@
+/**
+ * @file useSeatSubmitForm.ts
+ *
+ * @summary
+ * Custom React hook for creating and managing a seat submission form.
+ * Integrates React Hook Form with Zod schema validation to provide a type-safe,
+ * validated form for adding or editing seats.
+ *
+ * @description
+ * Default values are applied in the following priority:
+ * 1. Hardcoded defaults (e.g., `layoutType: "SEAT"`, `x: 1`, `y: 1`)
+ * 2. Values from an existing `seat` object (editing mode)
+ * 3. Preset values passed via `presetValues`
+ *
+ * The hook automatically validates against {@link SeatFormSchema}.
+ */
+
 import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SeatFormSchema } from "@/pages/seats/schema/form/SeatForm.schema.ts";
 import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
-import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
-
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import { SeatFormValues } from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 /**
- * Parameters for configuring the seat submission form.
+ * Configuration parameters for {@link useSeatSubmitForm}.
  */
-type SeatFormParams = {
+export type SeatFormParams = {
     /**
-     * Optional preset values to initialize the form fields.
+     * Optional preset values to initialize the form.
+     * Overrides the default values for specific fields.
      */
     presetValues?: Partial<SeatFormValues>;
 
     /**
-     * Optional seat object to populate form fields when editing an existing seat.
+     * Optional seat object used to populate the form for editing.
+     * Fields from `seat` override defaults but can be further overridden
+     * by `presetValues`.
      */
     seat?: Seat;
 };
 
 /**
- * Custom hook for creating and managing a seat submission form using React Hook Form.
+ * React hook for creating and managing a seat submission form.
  *
- * Features:
- * - Initializes default values from `presetValues`, `seat` (for editing), or hardcoded defaults.
- * - Integrates Zod schema validation via `zodResolver`.
+ * @template TFormValues - Type of the form values (usually {@link SeatFormValues}).
  *
- * @param params - Optional configuration object with `presetValues` and/or `seat`.
- * @returns A `UseFormReturn<SeatFormValues>` instance from React Hook Form.
+ * @param params - Optional configuration object containing preset values and/or a seat object.
+ *
+ * @returns `UseFormReturn<TFormValues>` — the React Hook Form instance for managing
+ *          values, validation, and submission.
  *
  * @example
  * ```ts
- * const form = useSeatSubmitForm({
- *   presetValues: { row: "A", seatNumber: "10" },
+ * // Creating a new seat form with defaults
+ * const form = useSeatSubmitForm();
+ *
+ * // Creating a form with preset values
+ * const formWithPreset = useSeatSubmitForm({
+ *   presetValues: { row: "A", seatNumber: 10 },
+ * });
+ *
+ * // Editing an existing seat
+ * const formEditing = useSeatSubmitForm({
  *   seat: existingSeat,
  * });
  *
- * // Access form values
+ * // Access form state and values
  * console.log(form.getValues());
+ * form.setValue("seatType", "VIP");
  * ```
  */
 export default function useSeatSubmitForm(
-    params?: SeatFormParams
+    { presetValues, seat }: SeatFormParams = {}
 ): UseFormReturn<SeatFormValues> {
-    const { presetValues, seat } = params || {};
-
-    const defaultValues: SeatFormValues = {
-        row: getDefaultValue(presetValues?.row, seat?.row, ""),
-        seatLabel: getDefaultValue(presetValues?.seatLabel, seat?.seatLabel, ""),
-        seatNumber: getDefaultValue(presetValues?.seatNumber, seat?.seatNumber, ""),
-        seatType: getDefaultValue(presetValues?.seatType, seat?.seatType, undefined),
-        isAvailable: getDefaultValue(presetValues?.isAvailable, seat?.isAvailable, true),
-        priceMultiplier: getDefaultValue(presetValues?.priceMultiplier, seat?.priceMultiplier, 1),
-        x: getDefaultValue(presetValues?.x, seat?.x, ""),
-        y: getDefaultValue(presetValues?.y, seat?.y, ""),
-        screen: getDefaultValue(presetValues?.screen, seat?.screen, undefined),
-        theatre: getDefaultValue(presetValues?.theatre, seat?.theatre, undefined),
-    };
-
     return useForm<SeatFormValues>({
         resolver: zodResolver(SeatFormSchema),
-        defaultValues,
+        defaultValues: {
+            layoutType: "SEAT",
+            row: "",
+            x: 1,
+            y: 1,
+            theatre: undefined,
+            screen: undefined,
+            seatNumber: 1,
+            seatLabel: "",
+            seatType: "REGULAR",
+            isAvailable: true,
+            priceMultiplier: 1,
+            ...seat,
+            ...presetValues,
+        },
     });
 }
