@@ -1,58 +1,93 @@
-import { Control, FieldValues, Path } from "react-hook-form";
+/**
+ * @file SeatTypeHookFormSelect
+ *
+ * Provides a typed React Hook Form select component for choosing a seat type.
+ * This component generates its options from {@link SeatTypeConstant} and
+ * formats human-readable labels using {@link SeatTypeLabelMap}.
+ *
+ * It wraps the shared {@link HookFormSelect} component to ensure consistent
+ * form rendering across the application.
+ */
+
+import {Control, FieldValues, Path} from "react-hook-form";
 import SeatTypeConstant from "@/pages/seats/constants/SeatTypeConstant.ts";
-import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
+import SeatTypeLabelMap from "@/pages/seats/constants/SeatTypeLabelMap.ts";
+import {ReactElement} from "react";
 
 /**
+ * @typedef SelectProps
+ * @template TSubmit
+ *
  * Props for {@link SeatTypeHookFormSelect}.
+ *
+ * @property {Path<TSubmit>} name
+ * The field name within the form.
+ *
+ * @property {string} label
+ * The text label displayed above the select field.
+ *
+ * @property {string} [description]
+ * Optional helper or descriptive text for the field.
+ *
+ * @property {string} [placeholder]
+ * Optional placeholder text displayed when no value is selected.
+ *
+ * @property {Control<TSubmit>} control
+ * The React Hook Form control object used to bind the field.
  */
 type SelectProps<TSubmit extends FieldValues> = {
-    /** Whether multiple seat types can be selected */
-    isMulti?: boolean;
-    /** Name of the field in the form */
     name: Path<TSubmit>;
-    /** Label displayed above the select input */
     label: string;
-    /** Optional description text for the field */
     description?: string;
-    /** Optional placeholder text for the input */
     placeholder?: string;
-    /** React Hook Form control object */
     control: Control<TSubmit>;
 };
 
 /**
- * A select input component for choosing seat types within a React Hook Form.
+ * @function SeatTypeHookFormSelect
+ * @template TSubmit
  *
- * Supports single or multiple selection and automatically generates options
- * based on {@link SeatTypeConstant}.
+ * A typed select component for choosing a single seat type in a React Hook Form.
  *
- * Internally uses {@link HookFormSelect} for single selection or
- * {@link HookFormMultiSelect} for multi-selection.
+ * The component:
+ * - Builds its options list from {@link SeatTypeConstant}.
+ * - Converts internal seat type identifiers into display labels via
+ *   {@link SeatTypeLabelMap}.
+ * - Delegates UI and behavior to {@link HookFormSelect}.
  *
- * @typeParam TSubmit - The form values type used in React Hook Form.
+ * @param {SelectProps<TSubmit>} props
+ * The configuration object for the select input.
  *
- * @param params - Props for the component of type {@link SelectProps}.
+ * @returns {React.ReactElement}
+ * A fully configured select input for seat type selection.
  *
  * @example
  * ```tsx
+ * const form = useForm<SeatFormValues>();
+ *
  * <SeatTypeHookFormSelect
  *   name="seatType"
  *   label="Seat Type"
+ *   placeholder="Choose a type"
  *   control={form.control}
- *   isMulti
  * />
  * ```
  */
-const SeatTypeHookFormSelect = <TSubmit extends FieldValues>(params: SelectProps<TSubmit>) => {
-    const { isMulti = false, ...selectOptions } = params;
+const SeatTypeHookFormSelect = <TSubmit extends FieldValues>(
+    props: SelectProps<TSubmit>
+): ReactElement => {
 
-    const options = SeatTypeConstant.map(type => ({ value: type, label: type }));
+    const options = SeatTypeConstant.map(type => ({
+        value: type,
+        label: SeatTypeLabelMap[type],
+    }));
 
     return (
-        isMulti
-            ? <HookFormMultiSelect options={options} {...selectOptions} />
-            : <HookFormSelect options={options} {...selectOptions} />
+        <HookFormSelect
+            options={options}
+            {...props}
+        />
     );
 };
 
