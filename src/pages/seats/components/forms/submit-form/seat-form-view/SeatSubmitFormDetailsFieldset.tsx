@@ -16,7 +16,7 @@
  * in coordination with other fieldset components such as coordinate and status fieldsets.
  */
 
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
@@ -79,8 +79,16 @@ type FieldsetProps = {
  * ```
  */
 const SeatSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields}) => {
+    // ⚡ Form State ⚡
+
     const theatre = form.watch("theatre");
     const screenFilters = {theatre};
+
+    // ⚡ Reset Screen On Theatre Change ⚡
+
+    useEffect(() => {
+        form.resetField("screen");
+    }, [theatre]);
 
     return (
         <fieldset className="space-y-4">

@@ -26,6 +26,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {Armchair, BadgeCheck, DollarSign, Tag, X} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import SeatLayoutTypeLabelMap from "@/pages/seats/constants/SeatLayoutTypeLabelMap.ts";
 
 /**
  * Props for {@link SeatFormSubmitList}.
@@ -74,7 +75,42 @@ const SeatFormSubmitList: FC<ListProps> = ({seats, setSeats}) => {
     return (
         <div className="grid grid-cols-1 gap-4">
             {seats.map((seat: Seat) => {
-                const {_id, row, seatLabel, priceMultiplier, seatNumber, x, y, seatType, isAvailable} = seat;
+                const {_id, row, x, y, layoutType} = seat;
+
+                if (layoutType !== "SEAT") {
+                    return (
+                        <Card key={_id}>
+                            <CardContent className="px-5 py-2 space-y-2">
+                                <section className="flex justify-between items-center">
+                                    <h1 className={HeaderTextCSS}>
+                                        {row} • {SeatLayoutTypeLabelMap[layoutType]}
+                                    </h1>
+
+                                    <div className="flex items-center space-x-2">
+                                        <span className={cn(
+                                            SecondaryTextBaseCSS,
+                                            "select-none text-sm",
+                                        )}>
+                                            X{x}, Y{y}
+                                        </span>
+
+                                        <Button
+                                            variant="outline"
+                                            size="icon"
+                                            className="px-1 py-0 rounded-3xl"
+                                            onClick={() => removeSeat(_id)}
+                                        >
+                                            <X/>
+                                        </Button>
+                                    </div>
+                                </section>
+                            </CardContent>
+                        </Card>
+                    );
+
+                }
+
+                const {seatNumber, isAvailable, seatType, seatLabel, priceMultiplier} = seat;
 
                 return (
                     <Card key={_id}>
@@ -101,24 +137,24 @@ const SeatFormSubmitList: FC<ListProps> = ({seats, setSeats}) => {
                                         className="px-1 py-0 rounded-3xl"
                                         onClick={() => removeSeat(_id)}
                                     >
-                                        <X />
+                                        <X/>
                                     </Button>
                                 </div>
                             </section>
 
                             <section className={cn(SecondaryTextBaseCSS, "flex justify-between items-center")}>
                                 <span className={cn(IconTextCSS, "gap-1")}>
-                                    <Armchair /> {seatType}
+                                    <Armchair/> {seatType}
                                 </span>
 
                                 {seatLabel && (
                                     <span className={cn(IconTextCSS, "gap-1")}>
-                                        <Tag /> {seatLabel}
+                                        <Tag/> {seatLabel}
                                     </span>
                                 )}
 
                                 <span className={cn(IconTextCSS, "gap-1")}>
-                                    <DollarSign /> x{priceMultiplier}
+                                    <DollarSign/> x{priceMultiplier}
                                 </span>
                             </section>
                         </CardContent>

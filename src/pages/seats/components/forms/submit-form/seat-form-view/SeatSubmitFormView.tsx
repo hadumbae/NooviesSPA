@@ -44,6 +44,11 @@ import SeatSubmitFormCoordinateFieldset
 import SeatSubmitFormSeatFieldset
     from "@/pages/seats/components/forms/submit-form/seat-form-view/SeatSubmitFormSeatFieldset.tsx";
 import {SeatFormValues, SeatFormValuesSchema} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import SeatSubmitFormLayoutFieldset
+    from "@/pages/seats/components/forms/submit-form/seat-form-view/SeatSubmitFormLayoutFieldset.tsx";
+import {HookFormFieldGroup} from "@/common/type/form/HookFormFieldGroupTypes.ts";
+import SeatSubmitFormNonSeatFieldset
+    from "@/pages/seats/components/forms/submit-form/seat-form-view/SeatSubmitFormNonSeatFieldset.tsx";
 
 /**
  * Props for {@link SeatSubmitFormView}.
@@ -101,34 +106,60 @@ const SeatSubmitFormView: FC<FormProps> = (props: FormProps) => {
 
     const {isPending} = mutation;
 
+    const layoutType = form.watch("layoutType");
+    const isSeat = layoutType === "SEAT";
+
     // Determine which fields to render based on schema + disables
     const activeFields = getActiveSchemaInputFields({
         schema: SeatFormValuesSchema,
         disableFields,
     });
 
+    const fieldGroups: HookFormFieldGroup<SeatFormValues>[] = [
+        {
+            render: true,
+            fields: ["layoutType"],
+            element: <SeatSubmitFormLayoutFieldset form={form} activeFields={activeFields} key={`layout-1`} />,
+        },
+        {
+            render: true,
+            fields: ["theatre", "screen"],
+            element: <SeatSubmitFormDetailsFieldset form={form} activeFields={activeFields} key={`details-2`} />,
+        },
+        {
+            render: !isSeat,
+            fields: ["row", "x", "y"],
+            element: <SeatSubmitFormNonSeatFieldset form={form} activeFields={activeFields} key={`non-seat-3`} />
+        },
+        {
+            render: isSeat,
+            fields: ["row", "seatNumber", "seatLabel"],
+            element: <SeatSubmitFormRowFieldset form={form} activeFields={activeFields} key={`row-3`} />,
+        },
+        {
+            render: isSeat,
+            fields: ["x", "y"],
+            element: <SeatSubmitFormCoordinateFieldset form={form} activeFields={activeFields} key={`coordinates-4`} />,
+        },
+        {
+            render: isSeat,
+            fields: ["seatType", "priceMultiplier", "isAvailable"],
+            element: <SeatSubmitFormSeatFieldset form={form} activeFields={activeFields} key={`seat-5`} />,
+        },
+    ];
+
+    const fields = fieldGroups.map(
+        ({render, fields, element}) => (
+            render && fields.some((field) => activeFields[field as keyof SeatFormValues])
+                ? element
+                : null
+        )
+    );
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-4", className)}>
-                {
-                    (activeFields["theatre"] || activeFields["screen"]) &&
-                    <SeatSubmitFormDetailsFieldset form={form} activeFields={activeFields}/>
-                }
-
-                {
-                    (activeFields["row"] || activeFields["seatNumber"] || activeFields["seatLabel"]) &&
-                    <SeatSubmitFormRowFieldset form={form} activeFields={activeFields}/>
-                }
-
-                {
-                    (activeFields["x"] || activeFields["y"]) &&
-                    <SeatSubmitFormCoordinateFieldset form={form} activeFields={activeFields}/>
-                }
-
-                {
-                    (activeFields["seatType"] || activeFields["priceMultiplier"] || activeFields["isAvailable"]) &&
-                    <SeatSubmitFormSeatFieldset form={form} activeFields={activeFields}/>
-                }
+                {fields}
 
                 <Button
                     variant="default"
