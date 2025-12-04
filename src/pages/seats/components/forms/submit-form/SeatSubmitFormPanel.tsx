@@ -1,9 +1,8 @@
-import {FC, ReactNode, useState} from 'react';
-import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import { FC, ReactNode, useState } from 'react';
+import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
+import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
 import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
-import {FormOptions} from "@/common/type/form/HookFormProps.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 import {
     Sheet,
     SheetContent,
@@ -12,34 +11,21 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui/Sheet";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import { SeatFormValues } from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 /**
- * Props defining editing state for the SeatSubmitFormPanel.
- *
- * - If `isEditing` is `true`, a `seat` must be provided.
- * - If `isEditing` is `false` or omitted, no seat should be provided.
- */
-type PanelEditingProps =
-    | { isEditing: true; seat: Seat }
-    | { isEditing?: false; seat?: never };
-
-/**
- * Props for the SeatSubmitFormPanel component.
+ * Props for the {@link SeatSubmitFormPanel} component.
  *
  * Combines:
- * - Form mutation callbacks (`onSubmitSuccess`, `onSubmitError`, etc.)
- * - Editing state (`isEditing` and `seat`)
- * - Optional form UI options (`disableFields`, `presetValues`)
+ * - Form submission and mutation callbacks (`onSubmitSuccess`, `onSubmitError`, etc.)
+ * - Editing state (`isEditing` and `seat` for pre-filling form)
+ * - Optional UI configuration (`disableFields`, `presetValues`)
  *
- * Additional props:
- * - `children`: optional ReactNode to trigger opening the panel.
- * - `className`: optional CSS class name for the root container.
+ * Additional optional props:
+ * - `children`: ReactNode used as the trigger element for opening the panel.
+ * - `className`: CSS class name to customize styling of the root container.
  */
-type PanelProps =
-    Omit<MutationOnSubmitParams<Seat>, "validationSchema"> &
-    PanelEditingProps &
-    FormOptions<SeatFormValues> & {
+type PanelProps = FormContainerProps<Seat, Seat, SeatFormValues> & {
     children?: ReactNode;
     className?: string;
 };
@@ -47,27 +33,45 @@ type PanelProps =
 /**
  * SeatSubmitFormPanel
  *
- * A slide-over panel (Sheet) component for creating or editing Seat entities.
+ * A slide-over panel (Sheet) component for creating or editing a Seat entity.
  *
  * Features:
- * - Opens a Sheet with a form for creating or updating seats.
- * - Adjusts title and description depending on `isEditing`.
- * - Closes automatically on successful submission and calls `onSubmitSuccess`.
+ * - Opens a sheet with a seat form for creating or updating seats.
+ * - Automatically updates the title and description based on `isEditing`.
+ * - Closes the panel after successful form submission and calls `onSubmitSuccess`.
+ * - Supports optional trigger content (`children`) or defaults to a simple "Open" button.
  *
- * @param params - Panel props combining mutation callbacks, editing state, and optional UI behavior.
+ * @param params - Props combining form callbacks, editing state, and optional UI behavior.
+ *
+ * @example
+ * ```tsx
+ * <SeatSubmitFormPanel
+ *   isEditing={true}
+ *   seat={existingSeat}
+ *   onSubmitSuccess={(seat) => console.log("Updated seat:", seat)}
+ * >
+ *   <button>Edit Seat</button>
+ * </SeatSubmitFormPanel>
+ * ```
+ *
+ * @remarks
+ * Internally uses `SeatSubmitFormContainer` for form handling, integrates
+ * `ScrollArea` for scrollable content, and leverages the `Sheet` component
+ * for slide-over panel behavior.
  */
 const SeatSubmitFormPanel: FC<PanelProps> = (params) => {
     const [open, setOpen] = useState<boolean>(false);
 
-    const {children, onSubmitSuccess, ...formOptions} = params;
-    const {isEditing} = formOptions;
+    const { children, onSubmitSuccess, ...formOptions } = params;
+    const { isEditing } = formOptions;
 
     const action = isEditing ? "Update" : "Create";
     const sheetTitle = `${action} Seat`;
     const sheetDescription = `${action} seats by submitting data.`;
 
     /**
-     * Closes the panel after a successful form submission.
+     * Handles successful form submission by closing the panel
+     * and invoking the optional `onSubmitSuccess` callback.
      *
      * @param seat - The newly created or updated seat entity.
      */

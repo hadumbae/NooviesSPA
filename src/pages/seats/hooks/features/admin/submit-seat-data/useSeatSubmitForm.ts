@@ -20,6 +20,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SeatFormSchema } from "@/pages/seats/schema/form/SeatForm.schema.ts";
 import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
 import { SeatFormValues } from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import useSeatSubmitFormDefaultValues
+    from "@/pages/seats/hooks/features/admin/submit-seat-data/useSeatSubmitFormDefaultValues.ts";
 
 /**
  * Configuration parameters for {@link useSeatSubmitForm}.
@@ -69,25 +71,13 @@ export type SeatFormParams = {
  * form.setValue("seatType", "VIP");
  * ```
  */
-export default function useSeatSubmitForm(
-    { presetValues, seat }: SeatFormParams = {}
-): UseFormReturn<SeatFormValues> {
+export default function useSeatSubmitForm(params: SeatFormParams = {}): UseFormReturn<SeatFormValues> {
+    // ⚡ Get Default Values ⚡
+
+    const defaultValues: SeatFormValues = useSeatSubmitFormDefaultValues(params);
+
     return useForm<SeatFormValues>({
         resolver: zodResolver(SeatFormSchema),
-        defaultValues: {
-            layoutType: "SEAT",
-            row: "",
-            x: 1,
-            y: 1,
-            theatre: undefined,
-            screen: undefined,
-            seatNumber: 1,
-            seatLabel: "",
-            seatType: "REGULAR",
-            isAvailable: true,
-            priceMultiplier: 1,
-            ...seat,
-            ...presetValues,
-        },
+        defaultValues,
     });
 }

@@ -18,7 +18,7 @@
  * updates the state when a seat is removed.
  */
 
-import {Dispatch, FC, SetStateAction} from 'react';
+import {FC} from 'react';
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {HeaderTextCSS, IconTextCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
@@ -27,54 +27,22 @@ import {Armchair, BadgeCheck, DollarSign, Tag, X} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import SeatLayoutTypeLabelMap from "@/pages/seats/constants/SeatLayoutTypeLabelMap.ts";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {SeatFormContext} from "@/pages/seats/context/form/SeatFormContext.ts";
 
-/**
- * Props for {@link SeatFormSubmitList}.
- *
- * @property seats - The array of seat objects to display.
- * @property setSeats - React state setter for updating the seat array.
- */
-type ListProps = {
-    /** Array of `Seat` objects to display in the list. */
-    seats: Seat[];
+const SeatFormSubmitList: FC = () => {
+    const {returnedSeats, setReturnedSeats} = useRequiredContext({
+        context: SeatFormContext,
+        message: "Must use within a provider for `SeatFormContext`.",
+    });
 
-    /** React state setter to update the seat array. */
-    setSeats: Dispatch<SetStateAction<Seat[]>>;
-};
-
-/**
- * @component SeatFormSubmitList
- *
- * @description
- * Displays a grid of seat cards for all seats in the `seats` array. Each card
- * shows:
- * - Row and seat number
- * - Coordinates (`x`, `y`)
- * - Availability status (green/red BadgeCheck)
- * - Seat type
- * - Optional seat label
- * - Price multiplier
- *
- * Users can remove seats from the list using the remove button.
- *
- * @param props - See {@link ListProps}.
- * @returns A React element rendering a grid of seat cards.
- *
- * @example
- * ```tsx
- * const [seats, setSeats] = useState<Seat[]>([]);
- *
- * <SeatFormSubmitList seats={seats} setSeats={setSeats} />
- * ```
- */
-const SeatFormSubmitList: FC<ListProps> = ({seats, setSeats}) => {
     const removeSeat = (_id: ObjectId) => {
-        setSeats(prev => prev.filter(s => s._id !== _id));
+        setReturnedSeats(prev => prev.filter(s => s._id !== _id));
     };
 
     return (
         <div className="grid grid-cols-1 gap-4">
-            {seats.map((seat: Seat) => {
+            {returnedSeats.map((seat: Seat) => {
                 const {_id, row, x, y, layoutType} = seat;
 
                 if (layoutType !== "SEAT") {

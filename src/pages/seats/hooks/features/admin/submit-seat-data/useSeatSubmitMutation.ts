@@ -28,6 +28,8 @@ import Logger from "@/common/utility/features/logger/Logger.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {SeatFormContext} from "@/pages/seats/context/form/SeatFormContext.ts";
 
 /**
  * Options for configuring the {@link useSeatSubmitMutation} hook.
@@ -78,6 +80,11 @@ export default function useSeatSubmitMutation(
     form: UseFormReturn<SeatFormValues>,
     {editing = {}, options = {}}: SeatSubmitMutationFormOptions = {}
 ): UseMutationResult<Seat, unknown, SeatForm> {
+    const {setReturnedSeats} = useRequiredContext({
+        context: SeatFormContext,
+        message: "Must use within a provider for `SeatFormContext`.",
+    });
+
     const {_id, isEditing} = editing;
     const {successMessage, onSubmitSuccess, errorMessage, onSubmitError} = options;
 
@@ -124,6 +131,8 @@ export default function useSeatSubmitMutation(
      * @param seat - The newly created or updated seat.
      */
     const onSuccess = async (seat: Seat) => {
+        setReturnedSeats((prev) => [...prev, seat]);
+
         const actionDisplay = isEditing ? "updated" : "created";
         toast.success(successMessage || `Seat ${actionDisplay} successfully.`);
         onSubmitSuccess?.(seat);

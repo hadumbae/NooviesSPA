@@ -2,29 +2,32 @@
  * @file SeatSubmitFormView.tsx
  *
  * @summary
- * A full-featured presentational form component for creating or updating `Seat` records.
- * It uses React Hook Form, dynamic field activation based on a Zod schema, and conditional
- * rendering based on parent configuration (such as disabling specific fields).
+ * Presentational React Hook Form component for creating or editing `Seat` entities.
  *
  * @description
- * This component is typically paired with `SeatSubmitFormContainer`, which handles:
- * - Initializing form state and validation
- * - Managing mutations (create/update)
- * - Providing the `submitHandler`
+ * `SeatSubmitFormView` is responsible for rendering a structured, dynamic form for
+ * `Seat` data. It integrates with React Hook Form and uses the `SeatFormValuesSchema`
+ * to determine active fields, optionally modified by the `disableFields` prop.
  *
- * `SeatSubmitFormView` focuses purely on **rendering**:
- * - Breaks the form into logical fieldsets (Details, Row, Coordinates, Seat)
- * - Enables or disables fields dynamically via `disableFields`
- * - Automatically infers active fields using `getActiveSchemaInputFields` and the Zod schema
- * - Disables the submit button based on mutation status
+ * This component is typically used together with `SeatSubmitFormContainer`, which
+ * handles:
+ * - Form initialization and validation
+ * - Mutation handling (create/update)
+ * - Supplying the `submitHandler` function
  *
- * ## Fieldsets Rendered
+ * `SeatSubmitFormView` focuses solely on **rendering** the form:
+ * - Breaks the form into logical fieldsets (Layout, Details, Row, Coordinates, Seat)
+ * - Conditionally renders fieldsets based on `layoutType` and active fields
+ * - Disables the submit button when a mutation is pending
+ * - Supports a reset button that reverts the form to `initialValues` from context
+ *
+ * ## Fieldsets
+ * - **Layout**: layoutType
  * - **Details**: theatre, screen
- * - **Row**: row, seatNumber, seatLabel
- * - **Coordinates**: x, y
- * - **Seat Data**: seatType, priceMultiplier, isAvailable
- *
- * All fieldsets render only when at least one relevant field is marked active.
+ * - **Non-Seat**: row, x, y (rendered when layoutType is not "SEAT")
+ * - **Row**: row, seatNumber, seatLabel (rendered when layoutType is "SEAT")
+ * - **Coordinates**: x, y (rendered when layoutType is "SEAT")
+ * - **Seat**: seatType, priceMultiplier, isAvailable (rendered when layoutType is "SEAT")
  */
 
 import {cn} from "@/common/lib/utils.ts";
@@ -49,46 +52,39 @@ import SeatSubmitFormLayoutFieldset
 import {HookFormFieldGroup} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import SeatSubmitFormNonSeatFieldset
     from "@/pages/seats/components/forms/submit-form/seat-form-view/SeatSubmitFormNonSeatFieldset.tsx";
+import {RotateCcw} from "lucide-react";
+import {SeatFormContext} from "@/pages/seats/context/form/SeatFormContext.ts";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 
 /**
  * Props for {@link SeatSubmitFormView}.
  *
- * @template TEntity - The entity type being modified (normally {@link Seat}).
- * @template TForm - The form submission DTO (normally {@link SeatForm}).
- * @template TFormValues - The React Hook Form value type (normally {@link SeatFormValues}).
+ * @template TEntity - The entity type being modified (typically {@link Seat}).
+ * @template TForm - The form submission DTO (typically {@link SeatForm}).
+ * @template TFormValues - The React Hook Form value type (typically {@link SeatFormValues}).
  *
- * @property className - Optional CSS class for the root form container.
- * @property disableFields - Optional list of `SeatFormValues` keys to disable. Disabled fields
- * are removed from the rendered form entirely.
+ * @property className - Optional CSS class applied to the root form container.
+ * @property disableFields - Optional list of keys from `SeatFormValues` specifying fields
+ * that should be disabled (removed from rendering entirely).
  */
 type FormProps = FormViewProps<Seat, SeatForm, SeatFormValues> & {
-    /**
-     * Optional additional class for custom layout/styling.
-     */
     className?: string;
-
-    /**
-     * A list of keys from `SeatFormValues` specifying which form fields
-     * should be disabled and not rendered.
-     */
     disableFields?: (keyof SeatFormValues)[];
 };
 
 /**
  * @component SeatSubmitFormView
  *
- * @description
- * Renders a structured React Hook Form for managing `Seat` data, broken into logical fieldsets.
- * The form auto-determines which inputs are active based on:
- * - The Zod schema (`SeatFormValuesSchema`)
- * - The optional `disableFields` array
+ * Renders a fully structured, dynamic seat form split into fieldsets.
  *
- * It also respects mutation state from React Query:
- * - Submit button is disabled during pending mutations and after successful submission.
+ * Responsibilities:
+ * - Dynamically renders active fields according to the Zod schema and `disableFields` prop
+ * - Conditionally renders fieldsets based on the `layoutType` field
+ * - Disables submit button while a mutation is pending
+ * - Provides a reset button to revert to `initialValues` from {@link SeatFormContext}
  *
  * @param props - See {@link FormProps}.
- *
- * @returns A fully rendered seat form with dynamic sections.
+ * @returns JSX element rendering the seat form.
  *
  * @example
  * ```tsx
@@ -102,14 +98,17 @@ type FormProps = FormViewProps<Seat, SeatForm, SeatFormValues> & {
  * ```
  */
 const SeatSubmitFormView: FC<FormProps> = (props: FormProps) => {
-    const {className, form, mutation, submitHandler, disableFields} = props;
+    const {className, form, submitHandler, disableFields, mutation: {isPending}} = props;
 
-    const {isPending} = mutation;
+    const {initialValues, setCurrentValues} = useRequiredContext({
+        context: SeatFormContext,
+        message: "Must use within a provider for `SeatFormContext`.",
+    });
 
     const layoutType = form.watch("layoutType");
     const isSeat = layoutType === "SEAT";
 
-    // Determine which fields to render based on schema + disables
+    // Determine which fields are active based on schema + disables
     const activeFields = getActiveSchemaInputFields({
         schema: SeatFormValuesSchema,
         disableFields,
@@ -156,19 +155,35 @@ const SeatSubmitFormView: FC<FormProps> = (props: FormProps) => {
         )
     );
 
+    const onReset = () => {
+        if (initialValues) form.reset(initialValues);
+        setCurrentValues(undefined);
+    }
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-4", className)}>
                 {fields}
 
-                <Button
-                    variant="default"
-                    type="submit"
-                    className="w-full"
-                    disabled={isPending}
-                >
-                    Submit
-                </Button>
+                <div className="flex items-center space-x-2">
+                    <Button
+                        variant="primary"
+                        type="submit"
+                        className="flex-1"
+                        disabled={isPending}
+                    >
+                        Submit
+                    </Button>
+
+                    <Button
+                        variant="secondary"
+                        type="button"
+                        disabled={isPending}
+                        onClick={onReset}
+                    >
+                        <RotateCcw />
+                    </Button>
+                </div>
             </form>
         </Form>
     );
