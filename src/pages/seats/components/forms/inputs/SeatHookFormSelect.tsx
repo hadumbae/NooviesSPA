@@ -1,52 +1,76 @@
-import { Control, FieldValues, Path } from "react-hook-form";
-import { Loader } from "lucide-react";
+/**
+ * @file SeatHookFormSelect.tsx
+ *
+ * A hook-form-integrated select component for choosing seats.
+ *
+ * This component:
+ * - Fetches seat data via {@link useFetchSeats}.
+ * - Validates query results using {@link SeatArraySchema}.
+ * - Renders a single-select or multi-select React Select component
+ *   wrapped in `react-hook-form` bindings.
+ * - Handles loading and error states through {@link QueryBoundary}
+ *   and {@link ValidatedQueryBoundary}.
+ *
+ * It is designed to serve as a reusable form input for selecting seats
+ * within any form built using React Hook Form.
+ */
+
+import {Control, FieldValues, Path} from "react-hook-form";
+import {Loader} from "lucide-react";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import useFetchSeats from "@/pages/seats/hooks/query/useFetchSeats.ts";
 
-import { SeatQueryFilters } from "@/pages/seats/schema/queries/SeatQueryOption.types.ts";
+import {SeatQueryFilters} from "@/pages/seats/schema/queries/SeatQueryOption.types.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {SeatArraySchema} from "@/pages/seats/schema/seat/SeatRelated.schema.ts";
 import {SeatArray} from "@/pages/seats/schema/seat/SeatRelated.types.ts";
+import buildString from "@/common/utility/buildString.ts";
 
 /**
  * Props for {@link SeatHookFormSelect}.
  *
- * @template T - The type of form values used with `react-hook-form`.
+ * @template T - Form values type used with `react-hook-form`.
  */
 type Props<T extends FieldValues> = {
-    /** Name of the field in the form, corresponding to a key in `T` */
+    /** Name of the field in the form. Must be a key of `T`. */
     name: Path<T>;
-    /** Label displayed above the select input */
+    /** Label displayed above the select input. */
     label: string;
-    /** Optional description displayed under the label */
+    /** Optional description shown under the label. */
     description?: string;
-    /** Placeholder text for the select input */
+    /** Placeholder text for the select input. */
     placeholder?: string;
-    /** React Hook Form control object for this form */
+    /** React Hook Form control instance. */
     control: Control<T>;
-    /** Optional filters to limit which seats are fetched */
+    /** Optional filters used when fetching seats. */
     filters?: SeatQueryFilters;
-    /** Whether multiple seat selection is allowed */
+    /** Whether the component should allow selecting multiple seats. */
     isMulti?: boolean;
 };
 
 /**
- * A hook-form-integrated select input for choosing seats.
+ * SeatHookFormSelect
  *
- * Fetches seat data using {@link useFetchSeats}, validates it against {@link SeatArraySchema},
- * and renders either a single-select (`HookFormSelect`) or multi-select (`HookFormMultiSelect`) component.
+ * A form-controlled select component for choosing seats.
  *
- * Handles loading and error states using {@link QueryBoundary} and {@link ValidatedQueryBoundary}.
+ * This component integrates:
+ * - **Data fetching:** via {@link useFetchSeats}
+ * - **Validation:** against {@link SeatArraySchema}
+ * - **Rendering:** using {@link HookFormSelect} or {@link HookFormMultiSelect}
  *
- * @template T - The type of form values used with `react-hook-form`.
+ * It also wraps the fetch operation in {@link QueryBoundary} and
+ * {@link ValidatedQueryBoundary} to ensure the UI gracefully handles
+ * loading states, errors, and schema validation.
  *
- * @param props - Component props of type {@link Props}.
+ * @template T - Form values type.
  *
- * @returns A `HookFormSelect` or `HookFormMultiSelect` component bound to React Hook Form.
+ * @param props - {@link Props} used to configure the component.
+ *
+ * @returns A hook-form-bound select component for seat selection.
  *
  * @example
  * ```tsx
@@ -60,16 +84,29 @@ type Props<T extends FieldValues> = {
  * ```
  */
 const SeatHookFormSelect = <T extends FieldValues>(props: Props<T>) => {
-    const { isMulti = false, filters = {} } = props;
-    const query = useFetchSeats({ queries: filters });
+    const {isMulti = false, filters = {layoutType: "SEAT"}} = props;
+    const query = useFetchSeats({queries: filters});
 
     return (
         <QueryBoundary query={query} loaderComponent={Loader} errorComponent={ErrorMessageDisplay}>
-            <ValidatedQueryBoundary query={query} schema={SeatArraySchema} loaderComponent={Loader} errorComponent={ErrorMessageDisplay}>
+            <ValidatedQueryBoundary
+                query={query}
+                schema={SeatArraySchema}
+                loaderComponent={Loader}
+                errorComponent={ErrorMessageDisplay}
+            >
                 {(seats: SeatArray) => {
-                    const options = seats.map(
-                        ({ _id, row, seatNumber }): ReactSelectOption => ({ value: _id, label: `Seat ${seatNumber} (Row ${row})` })
-                    );
+                    const options = seats
+                        .filter(seat => seat.layoutType === "SEAT")
+                        .map(({_id, row, seatNumber, x, y, seatLabel}): ReactSelectOption => ({
+                            value: _id,
+                            label: buildString([
+                                `${row} • ${seatNumber}`,
+                                seatLabel && `(${seatLabel})`,
+                                "|",
+                                `(X${x}, Y${y})`,
+                            ]),
+                        }));
 
                     return (
                         isMulti
