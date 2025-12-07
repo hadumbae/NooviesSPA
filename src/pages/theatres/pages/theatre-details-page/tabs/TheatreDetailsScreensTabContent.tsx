@@ -1,5 +1,5 @@
 /**
- * @file TheatreDetailsScreenTabContent.tsx
+ * @file TheatreDetailsScreensTabContent.tsx
  * @description
  * React component rendering the content of the "Screens" tab for a theatre.
  *
@@ -12,7 +12,7 @@
  *
  * @example
  * ```tsx
- * <TheatreDetailsScreenTabContent
+ * <TheatreDetailsScreensTabContent
  *   theatreID="64f123abc1234567890abcdef"
  *   screens={screensArray}
  *   totalItems={screensArray.length}
@@ -39,7 +39,7 @@ import { ScreenDetails } from "@/pages/screens/schema/screen/Screen.types.ts";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
- * Props for `TheatreDetailsScreenTabContent`.
+ * Props for `TheatreDetailsScreensTabContent`.
  */
 type TabContentProps = {
     /** ID of the theatre to which the screens belong */
@@ -81,7 +81,7 @@ const panelInfo = {
  * @param props - Tab content props including theatre ID, screens, pagination, and styling
  * @returns JSX element rendering the screens list, empty state, form panel, and pagination
  */
-const TheatreDetailsScreenTabContent: FC<TabContentProps> = (props) => {
+const TheatreDetailsScreensTabContent: FC<TabContentProps> = (props) => {
     // ⚡ Props ⚡
     const { totalItems, screens, theatreID, classNames, paginationOptions } = props;
     const { page, perPage, setPage } = paginationOptions;
@@ -139,4 +139,4 @@ const TheatreDetailsScreenTabContent: FC<TabContentProps> = (props) => {
     );
 };
 
-export default TheatreDetailsScreenTabContent;
+export default TheatreDetailsScreensTabContent;

@@ -1,7 +1,7 @@
 /**
  * @file TheatresPage.tsx
- * @description Client/admin index page for managing and browsing theatres.
- * Integrates filtering, sorting, pagination, and validated theatre queries.
+ * Top-level admin page for browsing and managing theatres.
+ * Handles filtering, sorting, pagination, and validated theatre queries.
  */
 
 import {FC} from 'react';
@@ -17,53 +17,42 @@ import {TheatreQueryOptionSchema} from "@/pages/theatres/schema/queries/TheatreQ
 import TheatreIndexPageContent from "@/pages/theatres/pages/theatre-index-page/TheatreIndexPageContent.tsx";
 
 /**
- * Top–level page component for the Theatre Index.
+ * **Component: TheatreIndexPage**
+ * Entry point for the Theatre Index admin view.
  *
- * This component provides:
- *
- * **Page Setup**
- * - Sets the document title to `"Theatre Index"`.
- *
- * **Search Parameter Handling**
- * - Reads pagination values (`page`, `perPage`) from URL search params.
- * - Parses and validates theatre query parameters (filters/sorting)
- *   via {@link TheatreQueryOptionSchema}.
- *
- * **Data Fetching**
- * - Fetches paginated theatre results using {@link useFetchTheatres},
- *   including population and virtual fields.
+ * **Behaviour**
+ * - Sets page title ("Theatre Index")
+ * - Uses {@link usePaginationSearchParams} for pagination
+ * - Parses filter/sort params via {@link useParsedSearchParams}
+ * - Fetches paginated theatres using {@link useFetchTheatres}
  *
  * **Query Safety**
- * - Wraps rendering in:
- *   - {@link QueryBoundary} for general loading/error handling.
- *   - {@link ValidatedQueryBoundary} to ensure API data
- *     conforms to {@link PaginatedTheatreDetailsSchema}.
+ * - Wraps content in {@link QueryBoundary} and
+ *   {@link ValidatedQueryBoundary} to enforce correct API response shape.
  *
- * **Rendering**
- * - Passes validated theatre items and total count to
- *   {@link TheatreIndexPageContent}, which renders:
- *   - Theatre cards
- *   - Empty-state fallback
- *   - Page-level filters and actions
+ * **Render Flow**
+ * - Validated API result → `{ items, totalItems }`
+ * - Delegates full UI rendering to {@link TheatreIndexPageContent}
  *
- * @component
- *
- * @example
+ * **Example**
  * ```tsx
- * // Renders the complete admin theatre index page
  * <TheatreIndexPage />
  * ```
+ *
+ * @component
  */
 const TheatreIndexPage: FC = () => {
     useTitle("Theatre Index");
 
-    // Pagination
-    const {page, perPage} = usePaginationSearchParams();
+    // ⚡ Pagination ⚡
+    const { page, perPage } = usePaginationSearchParams();
 
-    // Filter/sort query params
-    const {searchParams} = useParsedSearchParams({schema: TheatreQueryOptionSchema});
+    // ⚡ Filter + Sort Params ⚡
+    const { searchParams } = useParsedSearchParams({
+        schema: TheatreQueryOptionSchema,
+    });
 
-    // Theatre query
+    // ⚡ Query: Fetch theatres ⚡
     const query = useFetchTheatres({
         virtuals: true,
         populate: true,
@@ -76,8 +65,11 @@ const TheatreIndexPage: FC = () => {
     return (
         <QueryBoundary query={query}>
             <ValidatedQueryBoundary query={query} schema={PaginatedTheatreDetailsSchema}>
-                {({items, totalItems}: PaginatedTheatreDetails) => (
-                    <TheatreIndexPageContent theatres={items} totalItems={totalItems} />
+                {({ items, totalItems }: PaginatedTheatreDetails) => (
+                    <TheatreIndexPageContent
+                        theatres={items}
+                        totalItems={totalItems}
+                    />
                 )}
             </ValidatedQueryBoundary>
         </QueryBoundary>

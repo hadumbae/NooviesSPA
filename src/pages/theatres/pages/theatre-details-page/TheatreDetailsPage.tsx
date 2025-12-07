@@ -1,3 +1,8 @@
+/**
+ * @file TheatreDetailsPage.tsx
+ * Page for displaying full details of a single theatre.
+ */
+
 import {FC} from 'react';
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import useFetchTheatre from "@/pages/theatres/hooks/query/useFetchTheatre.ts";
@@ -12,45 +17,47 @@ import TheatreDetailsPageContent from "@/pages/theatres/pages/theatre-details-pa
 import TheatreDetailsUIContextProvider from "@/pages/theatres/providers/TheatreDetailsUIContextProvider.tsx";
 
 /**
- * Page component displaying detailed information for a single theatre.
+ * **Component: TheatreDetailsPage**
+ * Renders complete details for a single theatre.
  *
- * Features:
- * - Breadcrumbs and header with actions (e.g., delete theatre)
- * - Theatre details card
- * - Tabs for managing associated screens and showings
- * - Fetches theatre data and validates it against `TheatreDetailsSchema`
- * - Handles loading and invalid data states gracefully
+ * **Behaviour**
+ * - Extracts `theatreID` from route params (validated)
+ * - Redirects to index page on route parse failure
+ * - Fetches theatre details with population + virtual fields
  *
- * @remarks
- * - Uses `useFetchTheatreDetailsParams` to extract `theatreID` from URL or context
- * - Uses `QueryBoundary` and `ValidatedQueryBoundary` to handle async fetching and schema validation
- * - Includes `TheatreScreensOverviewTab` with pagination and sorting for screens
+ * **Query Safety**
+ * - Uses {@link QueryBoundary} for async state handling
+ * - Uses {@link ValidatedQueryBoundary} to enforce {@link TheatreDetailsSchema}
  *
- * @example
+ * **Render Flow**
+ * - If theatreID missing → shows loader
+ * - Validated result → passes theatre to {@link TheatreDetailsPageContent}
+ *
+ * **Example**
  * ```tsx
  * <TheatreDetailsPage />
  * ```
+ *
+ * @component
  */
 const TheatreDetailsPage: FC = () => {
     // ⚡ Navigation ⚡
-
     const navigate = useLoggedNavigate();
-    const navigateToIndex = () => navigate({to: "/admin/theatres"})
+    const navigateToIndex = () => navigate({ to: "/admin/theatres" });
 
-    // ⚡ Fetch Route Params ⚡
-
-    const {theatreID} = useFetchRouteParams({
+    // ⚡ Route Params ⚡
+    const { theatreID } =
+    useFetchRouteParams({
         schema: TheatreDetailsRouteParamSchema,
         onError: navigateToIndex,
         onErrorMessage: "Failed to parse route parameters.",
     }) ?? {};
 
     if (!theatreID) {
-        return <PageLoader/>;
+        return <PageLoader />;
     }
 
     // ⚡ Query ⚡
-
     const query = useFetchTheatre({
         _id: theatreID,
         populate: true,
@@ -60,8 +67,14 @@ const TheatreDetailsPage: FC = () => {
     return (
         <TheatreDetailsUIContextProvider>
             <QueryBoundary query={query}>
-                <ValidatedQueryBoundary query={query} schema={TheatreDetailsSchema} message={"Invalid theatre data."}>
-                    {(theatre: TheatreDetails) => <TheatreDetailsPageContent theatre={theatre}/>}
+                <ValidatedQueryBoundary
+                    query={query}
+                    schema={TheatreDetailsSchema}
+                    message="Invalid theatre data."
+                >
+                    {(theatre: TheatreDetails) => (
+                        <TheatreDetailsPageContent theatre={theatre} />
+                    )}
                 </ValidatedQueryBoundary>
             </QueryBoundary>
         </TheatreDetailsUIContextProvider>

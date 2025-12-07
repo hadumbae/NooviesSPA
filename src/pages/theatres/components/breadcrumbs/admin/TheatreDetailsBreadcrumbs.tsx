@@ -1,21 +1,43 @@
-import {FC} from 'react';
+/**
+ * @file TheatreDetailsBreadcrumbs.tsx
+ * @description Breadcrumbs for the Theatre Details admin page.
+ *
+ * Shows:
+ * - Link to theatre index
+ * - Current theatre name (or fallback)
+ */
+
+import { FC } from "react";
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
-    BreadcrumbList, BreadcrumbPage,
+    BreadcrumbList,
+    BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-type DetailsBreadcrumbProps = {
+/** Props for {@link TheatreDetailsBreadcrumbs}. */
+export type DetailsBreadcrumbProps = {
+    /** Optional theatre name; defaults to `"Theatre"`. */
     theatreName?: string;
-}
+};
 
-const TheatreDetailsBreadcrumbs: FC<DetailsBreadcrumbProps> = ({theatreName}) => {
+/**
+ * **TheatreDetailsBreadcrumbs**
+ * Index → Theatre → Details.
+ *
+ * @example
+ * ```tsx
+ * <TheatreDetailsBreadcrumbs theatreName="Grand Regent Theatre" />
+ * ```
+ */
+const TheatreDetailsBreadcrumbs: FC<DetailsBreadcrumbProps> = ({ theatreName }) => {
     return (
         <Breadcrumb>
             <BreadcrumbList>
+                {/* Index */}
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                         <Link to="/admin/theatres">Index</Link>
@@ -24,8 +46,11 @@ const TheatreDetailsBreadcrumbs: FC<DetailsBreadcrumbProps> = ({theatreName}) =>
 
                 <BreadcrumbSeparator />
 
+                {/* Current Page */}
                 <BreadcrumbItem>
-                    <BreadcrumbPage>{theatreName ?? "Theatre"} | Details</BreadcrumbPage>
+                    <BreadcrumbPage>
+                        {theatreName ?? "Theatre"} | Details
+                    </BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>

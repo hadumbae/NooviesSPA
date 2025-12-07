@@ -1,44 +1,42 @@
-import {FC} from 'react';
+/**
+ * @file TheatreDetailsHeader.tsx
+ * @description Header block for the Theatre Details admin page.
+ *
+ * Shows:
+ * - Theatre name (title)
+ * - Static subtitle ("Theatre")
+ * - Right-side options button for admin actions
+ */
+
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import TheatreDetailsOptions from "@/pages/theatres/components/features/admin/TheatreDetailsOptions.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
-import {Ellipsis} from "lucide-react";
+import { Ellipsis } from "lucide-react";
+
+/** Props for {@link TheatreDetailsHeader}. */
+export type HeaderProps = {
+    /** Theatre name shown as page title. */
+    theatreName: string;
+};
 
 /**
- * Props for {@link TheatreDetailsHeader}.
- */
-type HeaderProps = {
-    /** Theatre object containing details to display in the header */
-    theatre: Theatre;
-}
-
-/**
- * Header component for displaying theatre details.
- *
- * Shows the theatre's name as a title and a subtitle description.
- * Designed to handle responsive layouts for mobile and desktop.
- *
- * @remarks
- * The right section of the header (action buttons) is currently empty
- * and can be populated with edit/delete actions, e.g., using
- * {@link TheatreSubmitFormPanel} or {@link TheatreDeleteWarningDialog}.
+ * **TheatreDetailsHeader**
+ * Title + subtitle + admin options button.
  *
  * @example
- * <TheatreDetailsHeader theatre={theatre} />
+ * ```tsx
+ * <TheatreDetailsHeader theatreName="Central Cinema" />
+ * ```
  */
-const TheatreDetailsHeader: FC<HeaderProps> = ({theatre}) => {
-    const {name} = theatre;
-
+const TheatreDetailsHeader = ({ theatreName }: HeaderProps) => {
     return (
         <header className="flex justify-between items-center">
             <section>
-                <HeaderTitle>{name}</HeaderTitle>
+                <HeaderTitle>{theatreName}</HeaderTitle>
                 <HeaderDescription>Theatre</HeaderDescription>
             </section>
 
-            {/* Options Component To Add Later */}
             <TheatreDetailsOptions>
                 <IconButton>
                     <Ellipsis />

@@ -23,10 +23,10 @@
  */
 
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
-import TheatreIndexPage from "@/pages/theatres/pages/TheatreIndexPage.tsx";
 import TheatreDetailsPage from "@/pages/theatres/pages/theatre-details-page/TheatreDetailsPage.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import ScreenDetailsPage from "@/pages/screens/pages/admin/screen-details-page/ScreenDetailsPage.tsx";
+import TheatreIndexPage from "@/pages/theatres/pages/theatre-index-page/TheatreIndexPage.tsx";
 
 export default [
     /**

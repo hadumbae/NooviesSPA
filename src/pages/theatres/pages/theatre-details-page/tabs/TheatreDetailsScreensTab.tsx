@@ -1,26 +1,16 @@
 /**
- * @file TheatreDetailsScreenTab.tsx
+ * @file TheatreDetailsScreensTab.tsx
  * @description
- * React component that displays an overview of screens for a specific theatre.
+ * Paginated screen overview for a specific theatre.
  *
- * Features:
- * - Fetches paginated screen data for a given theatre ID using `useFetchScreens`.
- * - Handles loading, error, and validation states via `QueryBoundary` and `ValidatedQueryBoundary`.
- * - Renders screen items using `TheatreDetailsScreenTabContent`.
- * - Supports pagination controls and optional styling overrides.
- * - Accepts query filters and sort options via `ScreenQueryOptions`.
+ * This component:
+ * - Fetches paginated screen data via `useFetchScreens`
+ * - Wraps fetching + validation with `QueryBoundary` and `ValidatedQueryBoundary`
+ * - Renders screen results using `TheatreDetailsScreensTabContent`
+ * - Exposes pagination + optional query filters
+ * - Supports optional className overrides
  *
- * @example
- * ```tsx
- * <TheatreDetailsScreenTab
- *   theatreID="64f123abc1234567890abcdef"
- *   page={1}
- *   perPage={10}
- *   setPage={setPage}
- *   queries={{ active: true }}
- *   classNames={{ container: "custom-container", list: "custom-list" }}
- * />
- * ```
+ * Designed for use inside `TheatreDetailsPageTabs`.
  */
 
 import { FC } from 'react';
@@ -32,50 +22,67 @@ import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoun
 import { PaginatedScreenDetails } from "@/pages/screens/schema/screen/Screen.types.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import { ScreenQueryOptions } from "@/pages/screens/schema/queries/ScreenQueryOptions.types.ts";
-import TheatreDetailsScreenTabContent
-    from "@/pages/screens/components/theatre-screen/admin/tabs/TheatreDetailsScreenTabContent.tsx";
+import TheatreDetailsScreensTabContent
+    from "@/pages/theatres/pages/theatre-details-page/tabs/TheatreDetailsScreensTabContent.tsx";
 
 /**
- * Props for the `TheatreDetailsScreenTab` component.
+ * Props for {@link TheatreDetailsScreensTab}.
  */
 export type OverviewTabProps = {
-    /** The ID of the theatre whose screens are being displayed */
+    /**
+     * ID of the theatre whose screens are displayed.
+     */
     theatreID: ObjectId;
 
-    /** Current page number for pagination */
+    /**
+     * Current pagination page.
+     */
     page: number;
 
-    /** Number of items to display per page */
+    /**
+     * Number of screens to fetch per page.
+     */
     perPage: number;
 
-    /** Callback to update the current page number */
+    /**
+     * Updates the pagination page.
+     */
     setPage: (val: number) => void;
 
-    /** Optional query filters and sorts to apply when fetching screens */
+    /**
+     * Optional query filters and sorting rules.
+     */
     queries?: ScreenQueryOptions;
 
-    /** Optional CSS class overrides */
+    /**
+     * Optional CSS class overrides.
+     */
     classNames?: {
-        /** Class applied to the container element */
+        /** Class for the outer container. */
         container?: string;
 
-        /** Class applied to the screen list element */
+        /** Class for the list of screens. */
         list?: string;
     };
 };
 
 /**
- * Displays a paginated overview of screens for a specific theatre.
+ * Displays a paginated overview of screens for a theatre.
  *
- * Handles fetching, validation, loading, and error states automatically.
+ * Handles:
+ * - Fetching (via `useFetchScreens`)
+ * - Validation (via `ValidatedQueryBoundary`)
+ * - Error and loading states (via `QueryBoundary`)
  *
- * @param props - Props controlling theatre ID, pagination, query filters, and styling.
- * @returns JSX element rendering the screens overview tab.
+ * Renders the screen list through {@link TheatreDetailsScreensTabContent}.
+ *
+ * @param props - See {@link OverviewTabProps}
  *
  * @example
  * ```tsx
  * const [page, setPage] = useState(1);
- * <TheatreDetailsScreenTab
+ *
+ * <TheatreDetailsScreensTab
  *   theatreID="64f123abc1234567890abcdef"
  *   page={page}
  *   perPage={10}
@@ -85,7 +92,7 @@ export type OverviewTabProps = {
  * />
  * ```
  */
-const TheatreDetailsScreenTab: FC<OverviewTabProps> = (props) => {
+const TheatreDetailsScreensTab: FC<OverviewTabProps> = (props) => {
     const { theatreID, page, perPage, setPage, classNames, queries } = props;
 
     const screenQuery = useFetchScreens({
@@ -107,7 +114,7 @@ const TheatreDetailsScreenTab: FC<OverviewTabProps> = (props) => {
                 errorComponent={ErrorMessageDisplay}
             >
                 {({ items, totalItems }: PaginatedScreenDetails) =>
-                    <TheatreDetailsScreenTabContent
+                    <TheatreDetailsScreensTabContent
                         theatreID={theatreID}
                         screens={items}
                         totalItems={totalItems}
@@ -119,4 +126,4 @@ const TheatreDetailsScreenTab: FC<OverviewTabProps> = (props) => {
     );
 };
 
-export default TheatreDetailsScreenTab;
+export default TheatreDetailsScreensTab;
