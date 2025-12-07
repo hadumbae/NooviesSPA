@@ -105,6 +105,6 @@ export const ErrorMessageCSS = cn(
  * - Maintains icon size and prevents shrinking
  */
 export const IconTextCSS = cn(
-    "inline-flex items-center",
+    "inline-flex items-center gap-2",
     "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
 );
