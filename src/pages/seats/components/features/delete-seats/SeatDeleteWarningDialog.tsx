@@ -1,30 +1,39 @@
-import { FC, ReactNode } from 'react';
+import {FC, ReactNode} from 'react';
 import useSeatDeleteMutation from "@/pages/seats/hooks/features/admin/delete-seat-data/useSeatDeleteMutation.ts";
-import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
-import { OnDeleteMutationParams } from "@/common/type/form/MutationDeleteParams.ts";
+import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
+import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import {SeatDetails} from "@/pages/seats/schema/seat/SeatDetails.types.ts";
-
+import buildString from "@/common/utility/buildString.ts";
+import SeatLayoutTypeLabelMap from "@/pages/seats/constants/SeatLayoutTypeLabelMap.ts";
 /**
- * Props for {@link SeatDeleteWarningDialog}.
+ * ⚡ WarningProps
+ *
+ * Props for {@link SeatDeleteWarningDialog}. Extends {@link OnDeleteMutationParams}
+ * to support delete mutation handlers and status messages.
  */
 type WarningProps = OnDeleteMutationParams & {
-    /** React node(s) that trigger the delete dialog when clicked */
+    /** React node(s) that trigger opening the delete dialog */
     children: ReactNode;
-    /** The seat or seat details to be deleted */
+    /** The seat (or structure-type seat) to be deleted */
     seat: Seat | SeatDetails;
 };
 
 /**
- * A delete confirmation dialog specifically for seat entities.
+ * ⚡ SeatDeleteWarningDialog
  *
- * Wraps {@link EntityDeleteWarningDialog} and integrates {@link useSeatDeleteMutation}
- * to handle API deletion, success/error callbacks, and mutation state.
+ * A seat-specific delete confirmation dialog.
  *
- * The dialog title is automatically generated based on seat information
- * (row, number, type, and optional label).
+ * Wraps {@link EntityDeleteWarningDialog} and wires it to {@link useSeatDeleteMutation}
+ * to perform API deletion and trigger success/error callbacks from
+ * {@link OnDeleteMutationParams}.
  *
- * @param props - Component props of type {@link WarningProps}.
+ * Automatically generates the dialog title based on seat details:
+ * - For SEAT types: row, seat number, optional seat label
+ * - For non-seat layout types: row, layout label, and coordinates
+ *
+ * @component
+ * @param props - See {@link WarningProps}.
  *
  * @example
  * ```tsx
@@ -33,27 +42,34 @@ type WarningProps = OnDeleteMutationParams & {
  *   successMessage="Seat deleted successfully."
  *   errorMessage="Failed to delete seat."
  * >
- *   <button>Delete Seat</button>
+ *   <button>Delete</button>
  * </SeatDeleteWarningDialog>
  * ```
  */
-const SeatDeleteWarningDialog: FC<WarningProps> = ({ children, seat, ...mutationProps }) => {
-    const { _id, row, seatNumber, seatLabel, seatType } = seat;
+const SeatDeleteWarningDialog: FC<WarningProps> = ({children, seat, ...mutationProps}) => {
+    // ⚡ Extract Props ⚡
+    const {_id, row, layoutType, x, y} = seat;
 
-    const label = `${row}-${seatNumber} (${seatType})` + (seatLabel ? ` [${seatLabel}]` : "");
+    // ⚡ Dialog Metadata ⚡
+    const isSeat = layoutType === "SEAT";
+    const layoutLabel = SeatLayoutTypeLabelMap[layoutType];
+
+    const label = buildString([
+        isSeat
+            ? `${row}${seat.seatNumber}`
+            : `${row} • ${layoutLabel} • X${x}, Y${y}`,
+        (isSeat && seat.seatLabel) && `[${seat.seatLabel}]`,
+    ]);
+
     const dialogTitle = `Proceed to delete ${label}?`;
 
-    const { mutate } = useSeatDeleteMutation(mutationProps);
+    // ⚡ Mutation Handler ⚡
+    const {mutate} = useSeatDeleteMutation(mutationProps);
+    const deleteSeat = () => mutate({_id});
 
-    const deleteSeat = () => {
-        mutate({ _id });
-    };
-
+    // ⚡ Render ⚡
     return (
-        <EntityDeleteWarningDialog
-            title={dialogTitle}
-            deleteResource={deleteSeat}
-        >
+        <EntityDeleteWarningDialog title={dialogTitle} deleteResource={deleteSeat}>
             {children}
         </EntityDeleteWarningDialog>
     );
