@@ -1,132 +1,87 @@
 /**
  * @file SeatFormSubmitList.tsx
  *
- * @summary
- * Renders a list of seat entries created via a Seat Submit Form. Each seat is
- * displayed inside a styled card with row/number, coordinates, availability,
- * type, label, and price multiplier.
+ * ⚡ SeatFormSubmitList
  *
- * @description
- * This component is intended as a "preview" or "pending list" of seats before
- * final submission. It provides:
- * - Seat metadata visualization
- * - Coordinate display (`x`, `y`)
- * - Availability status via colored icons
- * - Removal of seats from the list via a button
+ * Renders all seats stored in {@link SeatFormContext.returnedSeats} as individual
+ * cards. Automatically dispatches each seat to either {@link SeatFormSubmitSeatCard}
+ * (for `"SEAT"` layout types) or {@link SeatFormSubmitStructureCard}
+ * (for non-seat structural types).
  *
- * The component receives the `seats` array and a setter from the parent and
- * updates the state when a seat is removed.
+ * ⚡ Responsibilities
+ * - Consume {@link SeatFormContext} to retrieve and mutate `returnedSeats`
+ * - Render all seats using the correct card component based on `layoutType`
+ * - Provide seat removal functionality via a shared `removeSeat` callback
+ * - Visualize metadata such as coordinates, availability, labels, and prices
+ *
+ * ⚡ Type Safety Notes
+ * - This component centrally dispatches seat types:
+ *   - `"SEAT"` → {@link SeatFormSubmitSeatCard}
+ *   - Other structural types → {@link SeatFormSubmitStructureCard}
+ * - Subtype correctness is therefore guaranteed **here**, so child components do
+ *   not need their own runtime `layoutType` guards.
+ *
+ * ⚡ Example
+ * ```tsx
+ * <SeatFormContextProvider>
+ *   <SeatFormSubmitList />
+ * </SeatFormContextProvider>
+ * ```
  */
 
-import {FC} from 'react';
-import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {HeaderTextCSS, IconTextCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import {cn} from "@/common/lib/utils.ts";
-import {Armchair, BadgeCheck, DollarSign, Tag, X} from "lucide-react";
-import {Button} from "@/common/components/ui/button.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import SeatLayoutTypeLabelMap from "@/pages/seats/constants/SeatLayoutTypeLabelMap.ts";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {SeatFormContext} from "@/pages/seats/context/form/SeatFormContext.ts";
 
+import { FC } from 'react';
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import { SeatFormContext } from "@/pages/seats/context/form/SeatFormContext.ts";
+import { SeatDetails } from "@/pages/seats/schema/seat/SeatDetails.types.ts";
+import SeatFormSubmitSeatCard
+    from "@/pages/screens/components/theatre-screens/admin/features/seat-submit/SeatFormSubmitSeatCard.tsx";
+import SeatFormSubmitStructureCard
+    from "@/pages/screens/components/theatre-screens/admin/features/seat-submit/SeatFormSubmitStructureCard.tsx";
+
+/**
+ * ⚡ SeatFormSubmitList Component
+ *
+ * Displays all seats from {@link SeatFormContext.returnedSeats} as cards.
+ * Handles removal and delegates rendering to specialized card components based
+ * on each seat’s `layoutType`.
+ *
+ * @component
+ * @returns JSX.Element
+ */
 const SeatFormSubmitList: FC = () => {
-    const {returnedSeats, setReturnedSeats} = useRequiredContext({
+    // ⚡ Access Context ⚡
+    const { returnedSeats, setReturnedSeats } = useRequiredContext({
         context: SeatFormContext,
         message: "Must use within a provider for `SeatFormContext`.",
     });
 
+    // ⚡ Remove Seat From List ⚡
     const removeSeat = (_id: ObjectId) => {
         setReturnedSeats(prev => prev.filter(s => s._id !== _id));
     };
 
+    // ⚡ Render ⚡
     return (
         <div className="grid grid-cols-1 gap-4">
-            {returnedSeats.map((seat: Seat) => {
-                const {_id, row, x, y, layoutType} = seat;
+            {returnedSeats.map((seat: SeatDetails) => {
+                const { layoutType } = seat;
 
-                if (layoutType !== "SEAT") {
+                if (layoutType === "SEAT") {
                     return (
-                        <Card key={_id}>
-                            <CardContent className="px-5 py-2 space-y-2">
-                                <section className="flex justify-between items-center">
-                                    <h1 className={HeaderTextCSS}>
-                                        {row} • {SeatLayoutTypeLabelMap[layoutType]}
-                                    </h1>
-
-                                    <div className="flex items-center space-x-2">
-                                        <span className={cn(
-                                            SecondaryTextBaseCSS,
-                                            "select-none text-sm",
-                                        )}>
-                                            X{x}, Y{y}
-                                        </span>
-
-                                        <Button
-                                            variant="outline"
-                                            size="icon"
-                                            className="px-1 py-0 rounded-3xl"
-                                            onClick={() => removeSeat(_id)}
-                                        >
-                                            <X/>
-                                        </Button>
-                                    </div>
-                                </section>
-                            </CardContent>
-                        </Card>
+                        <SeatFormSubmitSeatCard
+                            seat={seat}
+                            removeSeat={removeSeat}
+                        />
                     );
-
                 }
 
-                const {seatNumber, isAvailable, seatType, seatLabel, priceMultiplier} = seat;
-
                 return (
-                    <Card key={_id}>
-                        <CardContent className="px-5 py-2 space-y-2">
-                            {/* ⚡ Header ⚡ */}
-                            <section className="flex justify-between items-center">
-                                <h1 className={HeaderTextCSS}>
-                                    {row} • {seatNumber}
-                                </h1>
-
-                                <div className="flex items-center space-x-2">
-                                    <span className={cn(SecondaryTextBaseCSS, "select-none text-sm")}>
-                                        X{x}, Y{y}
-                                    </span>
-
-                                    <BadgeCheck
-                                        className={isAvailable ? "text-green-500" : "text-red-500"}
-                                        size={20}
-                                    />
-
-                                    <Button
-                                        variant="outline"
-                                        size="icon"
-                                        className="px-1 py-0 rounded-3xl"
-                                        onClick={() => removeSeat(_id)}
-                                    >
-                                        <X/>
-                                    </Button>
-                                </div>
-                            </section>
-
-                            <section className={cn(SecondaryTextBaseCSS, "flex justify-between items-center")}>
-                                <span className={cn(IconTextCSS, "gap-1")}>
-                                    <Armchair/> {seatType}
-                                </span>
-
-                                {seatLabel && (
-                                    <span className={cn(IconTextCSS, "gap-1")}>
-                                        <Tag/> {seatLabel}
-                                    </span>
-                                )}
-
-                                <span className={cn(IconTextCSS, "gap-1")}>
-                                    <DollarSign/> x{priceMultiplier}
-                                </span>
-                            </section>
-                        </CardContent>
-                    </Card>
+                    <SeatFormSubmitStructureCard
+                        seat={seat}
+                        removeSeat={removeSeat}
+                    />
                 );
             })}
         </div>

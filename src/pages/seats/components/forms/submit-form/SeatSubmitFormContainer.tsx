@@ -1,36 +1,19 @@
 /**
  * @file SeatSubmitFormContainer.tsx
  *
- * @summary
- * High-level container component orchestrating the lifecycle of creating or updating `Seat` entities.
+ * ⚡ SeatSubmitFormContainer
  *
- * @description
- * `SeatSubmitFormContainer` acts as the top-level controller for seat form operations. It combines:
- * - React Hook Form initialization via `useSeatSubmitForm`
- * - Mutation handling via `useSeatSubmitMutation`
- * - Cross-component state synchronization via `SeatFormContext`
- * - Optional UI customization from `FormContainerProps`
+ * Top-level orchestrator for creating or updating Seat entities.
+ * Combines form initialization, mutation handling, and context synchronization.
+ * Delegates rendering to {@link SeatSubmitFormView}.
  *
- * By separating orchestration from presentation, rendering is delegated to `SeatSubmitFormView`,
- * which remains stateless and easy to reason about.
+ * Responsibilities:
+ * - Initialize form state (preset or entity values)
+ * - Handle create/update mutation via `useSeatSubmitMutation`
+ * - Sync `currentValues` and `initialValues` with {@link SeatFormContext}
+ * - Optionally reset form/context on successful submission (`resetOnSubmit`)
  *
- * ## Responsibilities
- * - Initializes form state, optionally pre-filled from an existing `Seat` entity or preset values
- * - Determines mutation mode (create vs. update) and forwards form submissions
- * - Synchronizes `currentValues` and `initialValues` with `SeatFormContext`
- * - Optionally resets form and context state after submission
- *
- * ## Context Integration
- * Uses `SeatFormContext` to:
- * - Keep `currentValues` synchronized as the user modifies the form
- * - Preserve `initialValues` as the baseline for resets
- *
- * ## Reset Behavior
- * When `resetOnSubmit` is `true`:
- * - The form resets to `initialValues` after a successful submission
- * - `currentValues` in context are cleared
- *
- * ## Example
+ * Example:
  * ```tsx
  * <SeatSubmitFormContainer
  *   isEditing
@@ -43,51 +26,37 @@
  * ```
  */
 
-import {FC, useEffect} from 'react';
+import {FC, useEffect} from "react";
 import useSeatSubmitForm from "@/pages/seats/hooks/features/admin/submit-seat-data/useSeatSubmitForm.ts";
-import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
-import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
-import SeatSubmitFormView from "@/pages/seats/components/forms/submit-form/seat-form-view/SeatSubmitFormView.tsx";
-import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 import useSeatSubmitMutation from "@/pages/seats/hooks/features/admin/submit-seat-data/useSeatSubmitMutation.ts";
-import {MutationEditByIDParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import SeatSubmitFormView from "@/pages/seats/components/forms/submit-form/seat-form-view/SeatSubmitFormView.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatFormContext} from "@/pages/seats/context/form/SeatFormContext.ts";
+import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
+import {MutationEditByIDParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
+import {SeatDetails} from "@/pages/seats/schema/seat/SeatDetails.types.ts";
+import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
 
 /**
- * Props accepted by {@link SeatSubmitFormContainer}.
- *
- * Extends {@link FormContainerProps} with optional layout, styling, and preset value options.
- *
- * @template Seat - The entity type being created or updated.
- * @template SeatFormValues - The form value type managed by React Hook Form.
+ * Props for {@link SeatSubmitFormContainer}
  */
-type FormProps = FormContainerProps<Seat, Seat, SeatFormValues> & {
-    /**
-     * Optional CSS class name applied to the container or underlying form view.
-     */
+type FormProps = FormContainerProps<SeatDetails, Seat, SeatFormValues> & {
     className?: string;
 };
 
 /**
- * @component SeatSubmitFormContainer
+ * ⚡ SeatSubmitFormContainer component
  *
- * High-level orchestrator for seat form operations.
- *
- * Handles:
- * - Form initialization with optional preset values
- * - Mutation setup for create or update operations
- * - Context synchronization (`SeatFormContext`)
+ * Manages the full lifecycle of creating or updating seats, including:
+ * - Form initialization and pre-filling
+ * - Mutation handling (create/update)
+ * - Context state synchronization (`SeatFormContext`)
  * - Optional reset behavior after submission
- *
- * Delegates rendering to `SeatSubmitFormView`.
- *
- * @param params - Props specifying edit mode, entity, preset values, UI options, and mutation callbacks.
- *
- * @returns JSX element rendering the seat form via {@link SeatSubmitFormView}.
  */
-const SeatSubmitFormContainer: FC<FormProps> = (params) => {
+const SeatSubmitFormContainer: FC<FormProps> = (props) => {
+    // ⚡ Props ⚡
     const {
         className,
         isEditing,
@@ -96,22 +65,19 @@ const SeatSubmitFormContainer: FC<FormProps> = (params) => {
         disableFields,
         resetOnSubmit = false,
         ...formOptions
-    } = params;
+    } = props;
 
-    // ⚡ Context ⚡
-
+    // ⚡ Access Context ⚡
     const {initialValues, currentValues, setCurrentValues} = useRequiredContext({
         context: SeatFormContext,
         message: "Must use within a provider for `SeatFormContext`.",
     });
 
-    // ⚡ Form Initialization ⚡
-
+    // ⚡ Form ⚡
     const form = useSeatSubmitForm({seat: entity, presetValues});
     const {reset} = form;
 
-    // ⚡ Sync Values ⚡
-
+    // ⚡ Sync Form Values ⚡
     useEffect(() => {
         if (currentValues) reset(currentValues);
     }, [reset]);
@@ -122,33 +88,25 @@ const SeatSubmitFormContainer: FC<FormProps> = (params) => {
     }, [form]);
 
     // ⚡ Mutation ⚡
-
     const editParams: MutationEditByIDParams = isEditing
         ? {isEditing: true, _id: entity._id}
         : {isEditing: false};
 
-    const mutation = useSeatSubmitMutation(form, {
-        editing: editParams,
-        options: formOptions,
-    });
+    const mutation = useSeatSubmitMutation(form, {editing: editParams, options: formOptions});
 
-    // ⚡ Submission Handler ⚡
-
+    // ⚡ Submission ⚡
     const onFormSubmit = (values: SeatFormValues) => {
-        console.log("Seat Submit Values: ", values);
-
         if (resetOnSubmit && initialValues) {
             form.reset(initialValues);
             setCurrentValues(undefined);
         }
-
         mutation.mutate(values as SeatForm);
     };
 
     // ⚡ Render ⚡
-
     return (
         <SeatSubmitFormView
+            className={className}
             form={form}
             mutation={mutation}
             submitHandler={onFormSubmit}

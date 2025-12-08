@@ -1,4 +1,20 @@
-import { FC, ReactNode, useState } from 'react';
+/**
+ * @file SeatSubmitFormPanel.tsx
+ * @description
+ * A slide-over panel (Sheet) for creating or editing a Seat entity.
+ *
+ * Wraps `SeatSubmitFormContainer` for form handling, integrates `ScrollArea`
+ * for scrollable content, and leverages the `Sheet` component for slide-over
+ * panel behavior.
+ *
+ * The panel supports:
+ * - Create or update mode (based on `isEditing`)
+ * - Dynamic title and description
+ * - Closing on successful submission
+ * - Optional custom trigger element (`children`) or default "Open" button
+ */
+
+import { FC, ReactNode, useState } from "react";
 import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
 import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
 import SeatSubmitFormContainer from "@/pages/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
@@ -9,15 +25,16 @@ import {
     SheetDescription,
     SheetHeader,
     SheetTitle,
-    SheetTrigger
+    SheetTrigger,
 } from "@/common/components/ui/Sheet";
 import { SeatFormValues } from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import { SeatDetails } from "@/pages/seats/schema/seat/SeatDetails.types.ts";
 
 /**
- * Props for the {@link SeatSubmitFormPanel} component.
+ * Props for {@link SeatSubmitFormPanel}.
  *
  * Combines:
- * - Form submission and mutation callbacks (`onSubmitSuccess`, `onSubmitError`, etc.)
+ * - Form submission callbacks (`onSubmitSuccess`, `onSubmitError`, etc.)
  * - Editing state (`isEditing` and `seat` for pre-filling form)
  * - Optional UI configuration (`disableFields`, `presetValues`)
  *
@@ -25,21 +42,15 @@ import { SeatFormValues } from "@/pages/seats/schema/form/SeatFormValuesSchema.t
  * - `children`: ReactNode used as the trigger element for opening the panel.
  * - `className`: CSS class name to customize styling of the root container.
  */
-type PanelProps = FormContainerProps<Seat, Seat, SeatFormValues> & {
+type PanelProps = FormContainerProps<SeatDetails, Seat, SeatFormValues> & {
     children?: ReactNode;
     className?: string;
 };
 
 /**
- * SeatSubmitFormPanel
+ * `SeatSubmitFormPanel`
  *
- * A slide-over panel (Sheet) component for creating or editing a Seat entity.
- *
- * Features:
- * - Opens a sheet with a seat form for creating or updating seats.
- * - Automatically updates the title and description based on `isEditing`.
- * - Closes the panel after successful form submission and calls `onSubmitSuccess`.
- * - Supports optional trigger content (`children`) or defaults to a simple "Open" button.
+ * A slide-over panel component for creating or editing Seat entities.
  *
  * @param params - Props combining form callbacks, editing state, and optional UI behavior.
  *
@@ -55,9 +66,9 @@ type PanelProps = FormContainerProps<Seat, Seat, SeatFormValues> & {
  * ```
  *
  * @remarks
- * Internally uses `SeatSubmitFormContainer` for form handling, integrates
- * `ScrollArea` for scrollable content, and leverages the `Sheet` component
- * for slide-over panel behavior.
+ * Internally uses `SeatSubmitFormContainer` for form logic and validation,
+ * `ScrollArea` for scrollable form content, and `Sheet` for the slide-over
+ * panel behavior. Closes automatically on successful submission.
  */
 const SeatSubmitFormPanel: FC<PanelProps> = (params) => {
     const [open, setOpen] = useState<boolean>(false);
@@ -75,7 +86,7 @@ const SeatSubmitFormPanel: FC<PanelProps> = (params) => {
      *
      * @param seat - The newly created or updated seat entity.
      */
-    const closeOnSubmit = (seat: Seat) => {
+    const closeOnSubmit = (seat: SeatDetails) => {
         setOpen(false);
         onSubmitSuccess?.(seat);
     };

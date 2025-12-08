@@ -1,37 +1,35 @@
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
- * Common parameters for handling mutation submissions, such as create or update operations.
+ * Common parameters for handling mutation submissions (create, update, etc.).
  *
- * Provides configuration for validation, success/error messages, and optional callbacks.
+ * Provides optional success/error messages and callbacks for handling
+ * mutation results.
  *
- * @template TData - The type of the successfully returned data
- * @template TSchema - The Zod schema type used for validation (if applicable)
+ * @template TReturn - Type of data returned by the mutation upon success
  */
-export type MutationOnSubmitParams<
-    TData = unknown,
-> = {
+export type MutationOnSubmitParams<TReturn = unknown> = {
     /**
-     * Optional message displayed upon successful mutation.
+     * Message displayed on successful mutation.
      */
     successMessage?: string;
 
     /**
      * Callback fired when the mutation succeeds.
      *
-     * @param data - The successfully returned data
+     * @param data The data returned by the mutation
      */
-    onSubmitSuccess?: (data: TData) => void;
+    onSubmitSuccess?: (data: TReturn) => void;
 
     /**
-     * Optional message displayed when the mutation fails.
+     * Message displayed when the mutation fails.
      */
     errorMessage?: string;
 
     /**
      * Callback fired when the mutation encounters an error.
      *
-     * @param error - The error object returned from the mutation
+     * @param error The error object returned from the mutation
      */
     onSubmitError?: (error: unknown) => void;
 };
@@ -39,10 +37,10 @@ export type MutationOnSubmitParams<
 /**
  * Parameters describing whether a mutation is in "edit" mode or "create" mode.
  *
- * When `isEditing` is `true`, an `_id` must be provided.
- * When `isEditing` is `false` or omitted, `_id` must not be present.
+ * - `isEditing: true` → editing an existing record; `_id` required
+ * - `isEditing: false` or omitted → creating a new record; `_id` must not be present
  *
- * Useful for differentiating between creating a new resource and updating an existing one.
+ * Useful for distinguishing between creating a new resource and updating an existing one.
  *
  * @example
  * ```ts
