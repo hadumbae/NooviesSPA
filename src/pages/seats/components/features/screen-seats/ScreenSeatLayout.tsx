@@ -1,31 +1,23 @@
 /**
  * @file ScreenSeatLayout
  * @description
- * Renders a complete visual grid of seats for a theatre screen using Tailwind CSS.
+ * Renders a grid of theatre seats with left and right row labels using Tailwind CSS.
  *
- * This component formats seat data—grouped and sorted by their Y-axis (row)—into
- * a responsive grid with axis labels on both the left and right sides.
- *
- * It relies on:
- * - `organiseScreenSeatMap()` to produce grouped and sorted seat layout data.
- * - `ScreenSeatLayoutElement` to render individual seat cells and axis labels.
- *
- * The resulting grid uses CSS Grid with dynamic column sizing based on the
- * maximum X-coordinate detected in the data.
+ * Uses `organiseScreenSeatMap` to group and sort seats by row (Y-axis), and
+ * `ScreenSeatLayoutElement` to render each seat or label.
  */
 
-import {FC, memo, useMemo} from "react";
+import { memo, ReactElement, useMemo } from "react";
 import organiseScreenSeatMap from "@/pages/seats/hooks/features/admin/screen-seat-layout/organiseScreenSeatMap.ts";
 import ScreenSeatLayoutElement from "@/pages/seats/components/features/screen-seats/ScreenSeatLayoutElement.tsx";
-import {SeatDetails} from "@/pages/seats/schema/seat/SeatDetails.types.ts";
+import { SeatDetails } from "@/pages/seats/schema/seat/SeatDetails.types.ts";
 import keyForSeatElement from "@/pages/seats/utilities/screen-seats/keyForSeatElement.ts";
 
 /**
  * Props for {@link ScreenSeatLayout}.
  *
- * @property seats An array of {@link SeatDetails} objects representing all seats
- * within a single screen. These seats must include valid `x`, `y`, and
- * `layoutType` values for grid placement.
+ * @property seats Array of {@link SeatDetails} representing all seats in a screen.
+ * Seats must include `x`, `y`, and `layoutType`.
  */
 type GridProps = {
     seats: SeatDetails[];
@@ -35,48 +27,55 @@ type GridProps = {
  * `ScreenSeatLayout`
  *
  * @component
- * Renders a grid-based seat layout with left and right axis labels.
+ * Renders a seat layout grid with left and right axis labels per row.
  *
  * @remarks
- * - Determines the number of grid columns dynamically using `maxX`.
- * - Each row includes:
- *   - Left axis label (`y`)
- *   - One element for each seat or layout item
- *   - Right axis label (`y`)
- * - The grid uses:
- *   `grid-cols-[0.5fr_repeat(maxX+1,1fr)]`
- *
- * @param props.seats List of seat detail objects to display.
+ * - Columns are dynamic based on the maximum X-coordinate (`maxX`).
+ * - Each row renders:
+ *   1. Left label (`y`)
+ *   2. Seat elements
+ *   3. Right label (`y`)
  *
  * @example
  * ```tsx
  * <ScreenSeatLayout seats={seatDetailsList} />
  * ```
  *
- * @returns A vertically stacked list of grid rows representing the entire screen layout.
+ * @param seats List of seat detail objects.
+ * @returns Grid of rows representing the theatre screen.
  */
-const ScreenSeatLayout: FC<GridProps> = ({seats}) => {
-    // ⚡ Get Seat Layout ⚡
-    const {sortedSeats, maxX} = organiseScreenSeatMap({seats});
+const ScreenSeatLayout = ({ seats }: GridProps): ReactElement => {
+    // ⚡ Group and sort seats ⚡
+    const { sortedSeats, maxX } = organiseScreenSeatMap({ seats });
     const seatEntries = useMemo(() => Array.from(sortedSeats), [sortedSeats]);
 
-    // ⚡ Grid CSS ⚡
-    const gridCSS = useMemo(() => `grid grid-cols-[0.5fr_repeat(${maxX + 1},1fr)] gap-1`, [maxX]);
+    // ⚡ Grid style ⚡
+    const gridStyle = useMemo(
+        () => ({
+            display: "grid",
+            gridTemplateColumns: `0.5fr repeat(${maxX + 1}, 1fr)`,
+            gap: "0.25rem",
+        }),
+        [maxX]
+    );
 
-    // ⚡ Render ⚡
+    // ⚡ Render grid ⚡
     return (
         <div className="space-y-2">
-            {seatEntries.map(([y, sortedSeats]) =>
-                <div className={gridCSS} key={y}>
-                    <ScreenSeatLayoutElement element={y}/>
+            {seatEntries.map(([y, rowSeats]) => (
+                <div style={gridStyle} key={y}>
+                    <ScreenSeatLayoutElement element={y} />
 
-                    {sortedSeats.map((element, index) => (
-                        <ScreenSeatLayoutElement key={keyForSeatElement(element, index)} element={element}/>
+                    {rowSeats.map((element, index) => (
+                        <ScreenSeatLayoutElement
+                            key={keyForSeatElement(element, index)}
+                            element={element}
+                        />
                     ))}
 
-                    <ScreenSeatLayoutElement element={y}/>
+                    <ScreenSeatLayoutElement element={y} />
                 </div>
-            )}
+            ))}
         </div>
     );
 };
