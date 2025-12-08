@@ -15,6 +15,7 @@
 import {SeatDetails} from "@/pages/seats/schema/seat/SeatDetails.types.ts";
 import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
+import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 
 /**
  * Converts a populated `SeatDetails` object into a simplified `Seat` structure.
