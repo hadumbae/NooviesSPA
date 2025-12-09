@@ -65,20 +65,25 @@ type FormProps = FormViewProps<SeatDetails, SeatForm, SeatFormValues> & {
  * Delegates state management and submission to the parent container.
  */
 const SeatSubmitFormView: FC<FormProps> = (props) => {
-    const {className, form, submitHandler, disableFields, mutation: {isPending}} = props;
+    const {className, form, submitHandler, mutation: {isPending}} = props;
 
-    // ⚡ Context
-    const {initialValues, setCurrentValues} = useRequiredContext({
+    // --- Access Context ---
+    const {initialValues, setCurrentValues, options = {}} = useRequiredContext({
         context: SeatFormContext,
         message: "Must use within a provider for `SeatFormContext`.",
     });
 
-    // ⚡ Determine Layout
+    const {disableFields} = options;
+
+    // --- Determine Layout ---
     const layoutType = form.watch("layoutType");
     const isSeat = layoutType === "SEAT";
 
-    // ⚡ Active Fields
-    const activeFields = getActiveSchemaInputFields({schema: SeatFormValuesSchema, disableFields});
+    // --- Active Fields ---
+    const activeFields = getActiveSchemaInputFields({
+        schema: SeatFormValuesSchema,
+        disableFields,
+    });
 
     const fieldGroups: HookFormFieldGroup<SeatFormValues>[] = [
         {
@@ -117,13 +122,16 @@ const SeatSubmitFormView: FC<FormProps> = (props) => {
         render && fields.some((field) => activeFields[field as keyof SeatFormValues]) ? element : null
     );
 
-    // ⚡ Handlers
+    // --- Reset Form ---
     const onReset = () => {
-        if (initialValues) form.reset(initialValues);
+        if (initialValues) {
+            form.reset(initialValues);
+        }
+
         setCurrentValues(undefined);
     };
 
-    // ⚡ Render
+    // --- Render ---
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-4", className)}>

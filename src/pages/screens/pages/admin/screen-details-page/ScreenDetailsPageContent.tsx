@@ -38,6 +38,8 @@ import useTheatreScreenSearchParams
     from "@/pages/screens/hooks/screens-by-theatres/params/useTheatreScreenSearchParams.ts";
 import ScreenDetailsCreateSeatTab
     from "@/pages/screens/pages/admin/screen-details-page/screen-details-tabs/ScreenDetailsCreateSeatTab.tsx";
+import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
+import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 
 type ContentProps = {
     /** The parent theatre that owns this screen. */
@@ -76,26 +78,25 @@ type ContentProps = {
  * ```
  */
 const ScreenDetailsPageContent = (props: ContentProps) => {
-    // ⚡ Props ⚡
-
+    // --- Props ---
     const {theatre, screen, seats} = props;
 
-    // ⚡ Search Params ⚡
-
+    // --- Search Params ---
     const {searchParams, setActiveTab} = useTheatreScreenSearchParams({activeTab: "seats"});
     const {activeTab, showingPage, showingsPerPage} = searchParams;
 
-    // ⚡ Render ⚡
+    // --- Form Options ---
+    const presetValues: Partial<SeatForm> = {screen: screen._id, theatre: theatre._id};
+    const disableFields: (keyof SeatFormValues)[] = ["theatre", "screen"];
 
+    // --- Render ---
     return (
         <PageFlexWrapper>
 
             {/* Header */}
 
             <section className="space-y-1">
-                <SectionHeader srOnly={true}>
-                    Seat Details : Header
-                </SectionHeader>
+                <SectionHeader srOnly={true}>Seat Details : Header</SectionHeader>
 
                 <TheatreScreenDetailsBreadcrumbs
                     theatreID={theatre._id}
@@ -128,11 +129,8 @@ const ScreenDetailsPageContent = (props: ContentProps) => {
                 </SeatDetailsPanelContextProvider>
 
                 {/* Create Seats Tab */}
-                <SeatFormContextProvider>
-                    <ScreenDetailsCreateSeatTab
-                        screenID={screen._id}
-                        theatreID={theatre._id}
-                    />
+                <SeatFormContextProvider presetValues={presetValues} disableFields={disableFields}>
+                    <ScreenDetailsCreateSeatTab />
                 </SeatFormContextProvider>
 
                 {/* Showings Tab */}

@@ -26,6 +26,9 @@ import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbo
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {SeatFormContext} from "@/pages/seats/context/form/SeatFormContext.ts";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Props for {@link SeatSubmitFormSeatFieldset}.
@@ -74,6 +77,13 @@ type FieldsetProps = {
  * ```
  */
 const SeatSubmitFormSeatFieldset: FC<FieldsetProps> = ({form, activeFields}) => {
+    // --- Access Context ---
+    const {options: {isPanel} = {}} = useRequiredContext({
+        context: SeatFormContext,
+        message: "Must use within a provider for `SeatFormContext`.",
+    });
+
+    // --- Render ---
     return (
         <fieldset className="space-y-4">
             <div>
@@ -81,7 +91,10 @@ const SeatSubmitFormSeatFieldset: FC<FieldsetProps> = ({form, activeFields}) => 
                 <Separator/>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className={cn(
+                "grid gap-2",
+                isPanel ? "grid-cols-1" : "grid-cols-2",
+            )}>
                 {
                     activeFields["seatType"] &&
                     <SeatTypeHookFormSelect
@@ -108,7 +121,7 @@ const SeatSubmitFormSeatFieldset: FC<FieldsetProps> = ({form, activeFields}) => 
                     <HookFormCheckbox
                         name="isAvailable"
                         label="Is Available?"
-                        className="col-span-2"
+                        className={cn(!isPanel && "col-span-2")}
                         control={form.control}
                     />
                 }

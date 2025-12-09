@@ -24,6 +24,9 @@ import ScreenHookFormSelect from "@/pages/screens/components/submit-form/inputs/
 import {UseFormReturn} from "react-hook-form";
 
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {SeatFormContext} from "@/pages/seats/context/form/SeatFormContext.ts";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Props for {@link SeatSubmitFormDetailsFieldset}.
@@ -79,17 +82,24 @@ type FieldsetProps = {
  * ```
  */
 const SeatSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields}) => {
-    // ⚡ Form State ⚡
+    // --- Access Context ---
+    const {options: {isPanel} = {}} = useRequiredContext({
+        context: SeatFormContext,
+        message: "Must use within a provider for `SeatFormContext`.",
+    });
+
+    // --- Form State ---
 
     const theatre = form.watch("theatre");
     const screenFilters = {theatre};
 
-    // ⚡ Reset Screen On Theatre Change ⚡
+    // --- Reset Screen On Theatre Change ---
 
     useEffect(() => {
         form.resetField("screen");
     }, [theatre]);
 
+    // --- Render ---
     return (
         <fieldset className="space-y-4">
             <div>
@@ -97,7 +107,10 @@ const SeatSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields}) 
                 <Separator/>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+            <div className={cn(
+                "grid grid-cols-1 gap-2",
+                !isPanel && "lg:grid-cols-2",
+            )}>
                 {
                     activeFields["theatre"] &&
                     <TheatreHookFormSelect

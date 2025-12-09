@@ -26,6 +26,9 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {UseFormReturn} from "react-hook-form";
 
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {SeatFormContext} from "@/pages/seats/context/form/SeatFormContext.ts";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Props for {@link SeatSubmitFormRowFieldset}.
@@ -78,6 +81,13 @@ type FieldsetProps = {
  * ```
  */
 const SeatSubmitFormRowFieldset: FC<FieldsetProps> = ({form, activeFields}) => {
+    // --- Access Context ---
+    const {options: {isPanel} = {}} = useRequiredContext({
+        context: SeatFormContext,
+        message: "Must use within a provider for `SeatFormContext`.",
+    });
+
+    // --- Render ---
     return (
         <fieldset className="space-y-2">
             <div>
@@ -85,7 +95,7 @@ const SeatSubmitFormRowFieldset: FC<FieldsetProps> = ({form, activeFields}) => {
                 <Separator/>
             </div>
 
-            <div className="grid grid-cols-3 gap-2">
+            <div className={cn("grid gap-2", isPanel ? "grid-cols-2" : "grid-cols-3")}>
                 {activeFields["row"] && (
                     <HookFormInput
                         name="row"
@@ -110,6 +120,7 @@ const SeatSubmitFormRowFieldset: FC<FieldsetProps> = ({form, activeFields}) => {
                         name="seatLabel"
                         label="Label"
                         control={form.control}
+                        className={cn(isPanel && "col-span-2")}
                     />
                 )}
             </div>

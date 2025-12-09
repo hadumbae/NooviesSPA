@@ -56,30 +56,26 @@ type FormProps = FormContainerProps<SeatDetails, Seat, SeatFormValues> & {
  * - Optional reset behavior after submission
  */
 const SeatSubmitFormContainer: FC<FormProps> = (props) => {
-    // ⚡ Props ⚡
-    const {
-        className,
-        isEditing,
-        entity,
-        presetValues,
-        disableFields,
-        resetOnSubmit = false,
-        ...formOptions
-    } = props;
+    // --- Props ---
+    const {className, isEditing, entity, ...formOptions} = props;
 
-    // ⚡ Access Context ⚡
-    const {initialValues, currentValues, setCurrentValues} = useRequiredContext({
+    // --- Access Context ---
+    const {initialValues, currentValues, setCurrentValues, options = {}} = useRequiredContext({
         context: SeatFormContext,
         message: "Must use within a provider for `SeatFormContext`.",
     });
 
-    // ⚡ Form ⚡
+    const {presetValues, resetOnSubmit} = options;
+
+    // --- Form ---
     const form = useSeatSubmitForm({seat: entity, presetValues});
     const {reset} = form;
 
-    // ⚡ Sync Form Values ⚡
+    // --- Sync Form Values ---
     useEffect(() => {
-        if (currentValues) reset(currentValues);
+        if (currentValues) {
+            reset(currentValues);
+        }
     }, [reset]);
 
     useEffect(() => {
@@ -87,14 +83,17 @@ const SeatSubmitFormContainer: FC<FormProps> = (props) => {
         return () => subscription.unsubscribe();
     }, [form]);
 
-    // ⚡ Mutation ⚡
+    // --- Mutation ---
     const editParams: MutationEditByIDParams = isEditing
         ? {isEditing: true, _id: entity._id}
         : {isEditing: false};
 
-    const mutation = useSeatSubmitMutation(form, {editing: editParams, options: formOptions});
+    const mutation = useSeatSubmitMutation(form, {
+        editing: editParams,
+        options: formOptions,
+    });
 
-    // ⚡ Submission ⚡
+    // --- Submission ---
     const onFormSubmit = (values: SeatFormValues) => {
         if (resetOnSubmit && initialValues) {
             form.reset(initialValues);
@@ -103,14 +102,13 @@ const SeatSubmitFormContainer: FC<FormProps> = (props) => {
         mutation.mutate(values as SeatForm);
     };
 
-    // ⚡ Render ⚡
+    // --- Render ---
     return (
         <SeatSubmitFormView
             className={className}
             form={form}
             mutation={mutation}
             submitHandler={onFormSubmit}
-            disableFields={disableFields}
         />
     );
 };

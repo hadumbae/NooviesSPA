@@ -1,36 +1,40 @@
 /**
  * @file SeatFormContextProvider.tsx
  * @description
- * Provides a React Context Provider for managing seat-form state during
- * create/update workflows.
+ * React provider for managing seat-form state during create/update workflows.
  *
- * The provider maintains synchronized state for:
- * - `initialValues`: baseline form values (from server or defaults)
- * - `currentValues`: actively edited form values
+ * Exposes a shared state container for:
+ * - `initialValues`: baseline form values (defaults or server-loaded)
+ * - `currentValues`: actively edited values
  * - `returnedSeats`: seats returned by the server after submission
- * - setter functions for controlled updates
+ * - `options`: optional configuration controlling form behavior
  *
- * Components wrapped by this provider can consume the state via {@link SeatFormContext}.
+ * Components wrapped by this provider can access and modify shared state
+ * using {@link SeatFormContext}.
  */
 
-import { FC, PropsWithChildren, useState } from "react";
+import { ReactNode, useState } from "react";
 import { SeatFormValues } from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 import { SeatFormContext } from "@/pages/seats/context/form/SeatFormContext.ts";
 import { SeatDetails } from "@/pages/seats/schema/seat/SeatDetails.types.ts";
+import { FormOptions } from "@/common/type/form/HookFormProps.ts";
+import { SeatForm } from "@/pages/seats/schema/form/SeatForm.types.ts";
+
+type ProviderProps = FormOptions<SeatFormValues, SeatForm> & {
+    children: ReactNode;
+};
 
 /**
- * `SeatFormContextProvider`
+ * Provides a {@link SeatFormContext} instance to all child components.
  *
- * Wraps children in a context that exposes the full lifecycle state of a seat form.
+ * Manages the full lifecycle of a seat form:
+ * - initial load (`initialValues`)
+ * - user editing (`currentValues`)
+ * - server responses (`returnedSeats`)
+ * - behavior configuration (`options`)
  *
- * ⚡ State managed internally:
- * - **initialValues** — baseline values (usually loaded once)
- * - **currentValues** — live user-edited values
- * - **returnedSeats** — seats returned after form submission (empty array if none)
- *
- * @param children React children to render inside the provider
- *
- * @returns Context provider exposing synchronized seat-form state
+ * @param props - Includes React children and optional form configuration.
+ * @returns A context provider exposing synchronized seat-form state.
  *
  * @example
  * ```tsx
@@ -39,13 +43,16 @@ import { SeatDetails } from "@/pages/seats/schema/seat/SeatDetails.types.ts";
  * </SeatFormContextProvider>
  * ```
  */
-const SeatFormContextProvider: FC<PropsWithChildren> = ({ children }) => {
-    // ⚡ State ⚡
+const SeatFormContextProvider = (props: ProviderProps) => {
+    // --- Props ---
+    const { children, ...options } = props;
+
+    // --- State ---
     const [initialValues, setInitialValues] = useState<SeatFormValues | undefined>(undefined);
     const [currentValues, setCurrentValues] = useState<SeatFormValues | undefined>(undefined);
     const [returnedSeats, setReturnedSeats] = useState<SeatDetails[]>([]);
 
-    // ⚡ Values ⚡
+    // --- Aggregated Context Value ---
     const values = {
         initialValues,
         setInitialValues,
@@ -53,9 +60,10 @@ const SeatFormContextProvider: FC<PropsWithChildren> = ({ children }) => {
         setCurrentValues,
         returnedSeats,
         setReturnedSeats,
+        options,
     };
 
-    // ⚡ Render ⚡
+    // --- Render ---
     return (
         <SeatFormContext.Provider value={values}>
             {children}

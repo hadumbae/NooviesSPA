@@ -1,54 +1,71 @@
 /**
  * @file SeatFormContext.ts
  * @description
- * Provides a React context for managing seat-form creation and editing workflows.
+ * React context for managing seat-form creation and editing workflows.
  *
- * This context centralizes state for:
- * - `initialValues`: loaded from server or default values
- * - `currentValues`: actively edited form state
- * - `returnedSeats`: server-returned seats after submission
+ * Centralizes form lifecycle state:
+ * - `initialValues`: defaults or server-loaded values
+ * - `currentValues`: actively edited state
+ * - `returnedSeats`: server results after submission
  * - setter functions for controlled updates
  *
- * Typically provided at the page or workflow level so multiple components
- * can access and modify shared seat-form state in a synchronized manner.
+ * Intended to be provided at a workflow or panel level so multiple components
+ * can access and update shared seat-form state.
  */
 
 import { createContext, Dispatch, SetStateAction } from "react";
 import { SeatFormValues } from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 import { SeatDetails } from "@/pages/seats/schema/seat/SeatDetails.types.ts";
+import { FormOptions } from "@/common/type/form/HookFormProps.ts";
+import { SeatForm } from "@/pages/seats/schema/form/SeatForm.types.ts";
 
 /**
- * Values stored within {@link SeatFormContext}.
+ * Shape of the values stored within {@link SeatFormContext}.
  *
- * Represents the full lifecycle of a seat form:
- * 1. Initial state (`initialValues`)
- * 2. Actively edited state (`currentValues`)
- * 3. Server-returned results (`returnedSeats`)
+ * Tracks the full lifecycle of a seat form:
+ * - `initialValues`: starting state (defaults or server data)
+ * - `currentValues`: actively edited state
+ * - `returnedSeats`: server-returned items after submit
  */
 export type SeatFormContextValues = {
-    /** Initial form values (server-loaded for edit mode or defaults for create mode). `undefined` if not set. */
+    /**
+     * Initial form values.
+     * Loaded from the server for edit mode or defaults for create mode.
+     */
     initialValues: SeatFormValues | undefined;
 
-    /** Setter for updating {@link initialValues}. Typically used once on load or reset. */
+    /** Setter for updating `initialValues`. */
     setInitialValues: Dispatch<SetStateAction<SeatFormValues | undefined>>;
 
-    /** The current, actively edited form state. `undefined` if not initialized. */
+    /**
+     * Current, actively edited form values.
+     * May be undefined before initialization.
+     */
     currentValues: SeatFormValues | undefined;
 
-    /** Setter for updating {@link currentValues}. Keeps state synchronized across components. */
+    /** Setter for updating `currentValues`. */
     setCurrentValues: Dispatch<SetStateAction<SeatFormValues | undefined>>;
 
-    /** Seats returned by the server after submission. Empty array if no response yet or cleared. */
+    /**
+     * Seats returned after a successful server submission.
+     * Empty array when no data has been returned or after reset.
+     */
     returnedSeats: SeatDetails[];
 
-    /** Setter for updating {@link returnedSeats}. Called after POST/PUT results or to reset state. */
+    /** Setter for updating `returnedSeats`. */
     setReturnedSeats: Dispatch<SetStateAction<SeatDetails[]>>;
+
+    /**
+     * Optional configuration controlling form behavior,
+     * such as disabled fields, preset values, and reset logic.
+     */
+    options?: FormOptions<SeatFormValues, SeatForm>;
 };
 
 /**
- * React context providing {@link SeatFormContextValues}.
+ * React context containing {@link SeatFormContextValues}.
  *
- * Enables components to participate in a shared, synchronized seat-form workflow.
- * If consumed while `undefined`, the component is not wrapped in the provider.
+ * Components consuming this context must be wrapped in the provider.
+ * A value of `undefined` indicates misuse outside of the provider boundary.
  */
 export const SeatFormContext = createContext<SeatFormContextValues | undefined>(undefined);

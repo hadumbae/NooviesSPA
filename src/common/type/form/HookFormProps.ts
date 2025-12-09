@@ -1,35 +1,47 @@
-import { FieldValues, SubmitHandler, UseFormReturn } from "react-hook-form";
-import { UseMutationResult } from "@tanstack/react-query";
-import { MutationOnSubmitParams } from "@/common/type/form/MutationSubmitParams.ts";
+import {FieldValues, SubmitHandler, UseFormReturn} from "react-hook-form";
+import {UseMutationResult} from "@tanstack/react-query";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
- * Configuration options for form behavior and initial values.
+ * Configuration options for form initialization and runtime behavior.
  *
- * @template TFormValues - Type of the form values managed by React Hook Form. Must extend `FieldValues`.
- * @template TForm - Type of the payload submitted to the mutation. Defaults to `TFormValues`.
+ * @template TFormValues - Form values type used by React Hook Form. Must extend `FieldValues`.
+ * @template TForm - Payload type submitted on mutation. Defaults to `TFormValues`.
  *
  * @example
- * ```ts
- * const formOptions: FormOptions<MyFormValues> = {
- *   disableFields: ['email', 'createdAt'],
- *   presetValues: { username: 'jane_doe' },
- *   resetOnSubmit: true
+ * const options: FormOptions<MyFormValues> = {
+ *   disableFields: ["email", "createdAt"],
+ *   presetValues: { username: "jane_doe" },
+ *   resetOnSubmit: true,
+ *   isPanel: false
  * };
- * ```
  */
-export type FormOptions<
-    TFormValues extends FieldValues,
-    TForm extends FieldValues = TFormValues
-> = {
-    /** Keys of fields to disable in the form UI */
+export type FormOptions<TFormValues extends FieldValues, TForm extends FieldValues = TFormValues> = {
+    /**
+     * Form field keys to disable within the UI.
+     * Useful for preventing edits to server-controlled or immutable values.
+     */
     disableFields?: (keyof TFormValues)[];
 
-    /** Initial values to prefill the form */
+    /**
+     * Optional initial values used to prefill the form.
+     * Allows for controlled population of existing entities or defaults.
+     */
     presetValues?: Partial<TForm>;
 
-    /** Whether to reset the form after successful submission */
+    /**
+     * If true, the form will reset to its default state
+     * after a successful submission.
+     */
     resetOnSubmit?: boolean;
+
+    /**
+     * Whether the form is rendered inside a panel-style UI container.
+     * Can influence layout, scroll, or padding behavior.
+     */
+    isPanel?: boolean;
 };
+
 
 /**
  * Indicates whether a form is in "edit" or "create" mode.
