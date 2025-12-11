@@ -1,95 +1,44 @@
-import { FC } from 'react';
-import { TheatreDetails } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
-import { ScreenDetails } from "@/pages/screens/schema/screen/Screen.types.ts";
+/**
+ * @file TheatreScreenDetailsHeader.tsx
+ * @summary
+ * Header section for the Theatre Screen Details page, showing the screen title,
+ * theatre name, and action menu.
+ */
+
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import { Button } from "@/common/components/ui/button.tsx";
-import { Plus, Trash } from "lucide-react";
-import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
-import SeatSubmitFormPanel from "@/pages/seats/components/forms/submit-form/SeatSubmitFormPanel.tsx";
-
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import ScreenDetailsOptions from "@/pages/screens/components/admin/features/screen-details/ScreenDetailsOptions.tsx";
 
 /**
- * Props for the `TheatreScreenDetailsHeader` component.
+ * Props for {@link TheatreScreenDetailsHeader}.
+ *
+ * @property theatreName - Name of the parent theatre.
+ * @property screenName - Name of the screen being viewed.
  */
 type DetailsHeader = {
-    /** The theatre to which the screen belongs. */
-    theatre: TheatreDetails;
-
-    /** The screen whose details are displayed. */
-    screen: ScreenDetails;
+    theatreName: string;
+    screenName: string;
 };
 
 /**
- * Displays a header section for a theatre's screen details.
+ * Renders the heading section for the Screen Details page.
  *
- * Includes:
- * - The screen's title and description.
- * - A button to add a new seat.
- * - A button to delete the screen with confirmation dialog.
+ * @description
+ * Displays the screen name, theatre name, and an options dropdown
+ * (edit/delete). Used at the top of the Screen Details admin view.
  *
- * @param props - Component props.
- * @param props.theatre - The theatre to which the screen belongs.
- * @param props.screen - The screen whose details are displayed.
- *
- * @returns A React header element with screen details and actionable buttons.
+ * @param props - Component props containing theatre and screen names.
+ * @returns A header element with title, description, and options menu.
  */
-const TheatreScreenDetailsHeader: FC<DetailsHeader> = ({ theatre, screen }) => {
-    const navigate = useLoggedNavigate();
-
-    const { _id: theatreID, name: theatreName } = theatre;
-    const { _id: screenID, name: screenName } = screen;
-
-    const presetValues = { theatre: theatreID, screen: screenID };
-    const disableFields: (keyof SeatFormValues)[] = ["theatre", "screen"];
-
-    /**
-     * Callback fired when the screen is successfully deleted.
-     * Navigates back to the theatre details page.
-     */
-    const onDelete = () => {
-        navigate({
-            component: ScreenDeleteWarningDialog.name,
-            to: `/admin/theatres/get/${theatreID}`,
-        });
-    }
-
-    /**
-     * Seat addition panel with preset values for theatre and screen.
-     */
-    const seatFormPanel = (
-        <SeatSubmitFormPanel presetValues={presetValues} disableFields={disableFields}>
-            <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
-                <Plus /> Seat
-            </Button>
-        </SeatSubmitFormPanel>
-    );
-
-    /**
-     * Screen deletion dialog with confirmation.
-     */
-    const screenDeleteDialog = (
-        <ScreenDeleteWarningDialog screenID={screenID} onDeleteSuccess={onDelete}>
-            <Button variant="link" size="sm" className="text-neutral-400 hover:text-black">
-                <Trash /> Delete
-            </Button>
-        </ScreenDeleteWarningDialog>
-    );
-
+const TheatreScreenDetailsHeader = ({ theatreName, screenName }: DetailsHeader) => {
     return (
-        <header className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            <section>
+        <header className="flex justify-between items-center">
+            <section className="flex-1">
                 <HeaderTitle>{screenName} Details</HeaderTitle>
-                <HeaderDescription>
-                    Screen at {theatreName}. Handle seats and showings here.
-                </HeaderDescription>
+                <HeaderDescription>Screen at {theatreName}. Handle seats and showings here.</HeaderDescription>
             </section>
-            <section className="text-right">
-                {seatFormPanel}
-                {screenDeleteDialog}
-            </section>
+
+            <ScreenDetailsOptions />
         </header>
     );
 };

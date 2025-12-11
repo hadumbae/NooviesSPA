@@ -24,7 +24,6 @@
 
 import { FC } from 'react';
 import { isArray } from "lodash";
-import { ScreenFormValues } from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 import ScreenSubmitFormPanel from "@/pages/screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
 import { Button } from "@/common/components/ui/button.tsx";
 import { HoverLinkCSS } from "@/common/constants/css/ButtonCSS.ts";
@@ -83,20 +82,14 @@ const panelInfo = {
  */
 const TheatreDetailsScreensTabContent: FC<TabContentProps> = (props) => {
     // ⚡ Props ⚡
-    const { totalItems, screens, theatreID, classNames, paginationOptions } = props;
+    const { totalItems, screens, classNames, paginationOptions } = props;
     const { page, perPage, setPage } = paginationOptions;
 
     // ⚡ Has Screens ⚡
     const hasScreens = isArray(screens) && screens.length > 0;
 
-    // ⚡ Form Panel ⚡
-    const presetValues = { theatre: theatreID };
-    const disableFields: (keyof ScreenFormValues)[] = ["theatre"];
-
     const formPanel = (
         <ScreenSubmitFormPanel
-            presetValues={presetValues}
-            disableFields={disableFields}
             {...panelInfo}
         >
             <Button size="sm" variant="link" className={HoverLinkCSS}>

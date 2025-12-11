@@ -40,6 +40,10 @@ import ScreenDetailsCreateSeatTab
     from "@/pages/screens/pages/admin/screen-details-page/screen-details-tabs/ScreenDetailsCreateSeatTab.tsx";
 import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
+import ScreenSubmitFormPanel from "@/pages/screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {ScreenDetailsUIContext} from "@/pages/screens/contexts/screen-details/ScreenDetailsUIContext.ts";
+import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 
 type ContentProps = {
     /** The parent theatre that owns this screen. */
@@ -89,6 +93,14 @@ const ScreenDetailsPageContent = (props: ContentProps) => {
     const presetValues: Partial<SeatForm> = {screen: screen._id, theatre: theatre._id};
     const disableFields: (keyof SeatFormValues)[] = ["theatre", "screen"];
 
+    // --- Access Context ---
+    const {
+        isEditing,
+        setIsEditing,
+        showDeleteWarning,
+        setShowDeleteWarning,
+    } = useRequiredContext({context: ScreenDetailsUIContext});
+
     // --- Render ---
     return (
         <PageFlexWrapper>
@@ -105,8 +117,8 @@ const ScreenDetailsPageContent = (props: ContentProps) => {
                 />
 
                 <TheatreScreenDetailsHeader
-                    theatre={theatre}
-                    screen={screen}
+                    theatreName={theatre.name}
+                    screenName={screen.name}
                 />
             </section>
 
@@ -130,7 +142,7 @@ const ScreenDetailsPageContent = (props: ContentProps) => {
 
                 {/* Create Seats Tab */}
                 <SeatFormContextProvider presetValues={presetValues} disableFields={disableFields}>
-                    <ScreenDetailsCreateSeatTab />
+                    <ScreenDetailsCreateSeatTab/>
                 </SeatFormContextProvider>
 
                 {/* Showings Tab */}
@@ -140,6 +152,25 @@ const ScreenDetailsPageContent = (props: ContentProps) => {
                     <p>Per Page : {showingsPerPage}</p>
                 </TabsContent>
             </Tabs>
+
+            {/*Hidden Sections*/}
+
+            <section>
+                <SectionHeader srOnly={true}>Edit Screen Form</SectionHeader>
+                <ScreenSubmitFormPanel
+                    presetOpen={isEditing}
+                    setPresetOpen={setIsEditing}
+                />
+            </section>
+
+            <section>
+                <SectionHeader srOnly={true}>Delete Screen Dialog</SectionHeader>
+                <ScreenDeleteWarningDialog
+                    screenID={screen._id}
+                    presetOpen={showDeleteWarning}
+                    setPresetOpen={setShowDeleteWarning}
+                />
+            </section>
         </PageFlexWrapper>
     );
 };
