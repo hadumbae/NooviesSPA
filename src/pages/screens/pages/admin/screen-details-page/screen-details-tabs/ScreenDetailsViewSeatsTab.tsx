@@ -23,6 +23,8 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatDetailsPanelContext} from "@/pages/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
 import {SeatDetails} from "@/pages/seats/schema/seat/SeatDetails.types.ts";
 import {ReactElement} from "react";
+import {cn} from "@/common/lib/utils.ts";
+import {CardCSS} from "@/common/constants/css/ContainerCSS.ts";
 
 type TabProps = {
     /**
@@ -62,23 +64,22 @@ type TabProps = {
  * ```
  */
 const ScreenDetailsViewSeatsTab = (props: TabProps): ReactElement => {
-    // ⚡ Props ⚡
+    // --- Props ---
     const {seats} = props;
 
-    // ⚡ Access Selected Seat from Context ⚡
+    // --- Access Selected Seat from Context ---
     const {seat} = useRequiredContext({
         context: SeatDetailsPanelContext,
         message: "Must be used within provider for `SeatDetailsPanelContext`."
     });
 
-    // ⚡ Render ⚡
-
+    // --- Render ---
     return (
         <TabsContent value="view-seats">
-            <section>
+            <section className="space-y-2">
                 <SectionHeader>Seat Layout</SectionHeader>
 
-                <ScrollArea className="w-full p-2">
+                <ScrollArea className={cn(CardCSS, "w-full p-3")}>
                     <ScreenSeatLayout seats={seats}/>
                     <ScrollBar orientation="horizontal"/>
                 </ScrollArea>
