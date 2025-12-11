@@ -1,44 +1,48 @@
-import { FC } from 'react';
-import { Form } from "@/common/components/ui/form.tsx";
-import { cn } from "@/common/lib/utils.ts";
+import {FC} from 'react';
+import {Form} from "@/common/components/ui/form.tsx";
+import {cn} from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import { Button } from "@/common/components/ui/button.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
 import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 import ScreenTypeHookFormSelect from "@/pages/screens/components/submit-form/inputs/ScreenTypeHookFormSelect.tsx";
-import { Screen } from "@/pages/screens/schema/screen/Screen.types.ts";
-import { ScreenForm, ScreenFormValues } from "@/pages/screens/schema/forms/ScreenForm.types.ts";
-import { FormViewProps } from "@/common/type/form/HookFormProps.ts";
+import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {ScreenForm, ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
+import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {ScreenFormContext} from "@/pages/screens/contexts/screen-form/ScreenFormContext.ts";
+import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
+import {ScreenFormValuesSchema} from "@/pages/screens/schema/forms/ScreenForm.schema.ts";
 
 /**
- * Props for the `ScreenSubmitFormView` component.
+ * Props for `ScreenSubmitFormView`.
  *
- * Combines generic form view props with optional styling and
- * UI-level field control.
+ * Extends generic form view props and adds optional styling for the form
+ * container and submit button text.
+ *
+ * @template TSchema extends ScreenDetails
+ * @template TForm extends ScreenForm
+ * @template TValues extends ScreenFormValues
  */
-type ViewProps = FormViewProps<Screen, ScreenForm, ScreenFormValues> & {
-    /** Optional CSS class names to apply to the form container */
+type ViewProps = FormViewProps<ScreenDetails, ScreenForm, ScreenFormValues> & {
+    /** Optional CSS class names applied to the form wrapper. */
     className?: string;
-
-    /** Optional array of form field keys to disable */
-    disableFields?: (keyof ScreenFormValues)[];
 };
 
 /**
- * Form view component for submitting or editing a `Screen` entity.
+ * Form view for creating or editing a `Screen`.
  *
- * Renders form fields using React Hook Form and supports:
- * - Disabling specific fields via `disableFields`
- * - Submitting data via a React Query mutation
- * - Showing loading state on the submit button while the mutation is pending
+ * Renders active fields determined by the schema and context-level disabled
+ * field configuration. Integrates with React Hook Form for validation and
+ * React Query for mutation state.
  *
- * @param params - Props controlling form behavior, mutation, and UI
- * @param params.form - React Hook Form instance for managing form state and validation
- * @param params.mutation - React Query mutation object for handling form submission
- * @param params.submitHandler - Function called when the form is submitted
- * @param params.className - Optional CSS class applied to the form wrapper
- * @param params.submitButtonText - Optional text for the submit button (default: `"Submit"`)
- * @param params.disableFields - Optional array of field keys to disable
- * @returns A fully controlled form view component for screens
+ * @param params - Component props
+ * @param params.form - React Hook Form instance for managing state and validation
+ * @param params.mutation - React Query mutation controlling submit state
+ * @param params.submitHandler - Form submission handler
+ * @param params.className - Optional extra class name for the wrapper
+ * @param params.submitButtonText - Label for the submit button (default: "Submit")
+ *
+ * @returns Rendered form bound to form controls and schema-defined fields
  *
  * @example
  * ```tsx
@@ -46,28 +50,45 @@ type ViewProps = FormViewProps<Screen, ScreenForm, ScreenFormValues> & {
  *   form={form}
  *   mutation={mutation}
  *   submitHandler={onSubmit}
- *   disableFields={['theatre']}
+ *   disableFields={["theatre"]}
  * />
  * ```
  */
 const ScreenSubmitFormView: FC<ViewProps> = (params) => {
-    const { form, mutation, submitHandler, className, submitButtonText = "Submit", disableFields = [] } = params;
-    const { isPending } = mutation;
+    // --- Props ---
+    const {
+        form,
+        submitHandler,
+        mutation: {isPending},
+        className,
+        submitButtonText = "Submit",
+    } = params;
 
-    // Determine which fields should be active based on `disableFields`
-    const activeFields = {
-        name: !disableFields.includes("name"),
-        capacity: !disableFields.includes("capacity"),
-        screenType: !disableFields.includes("screenType"),
-        theatre: !disableFields.includes("theatre"),
-    };
+    // --- Access Context ---
+    const {options: {disableFields} = {}} = useRequiredContext({context: ScreenFormContext});
 
+    // --- Active Fields Resolution ---
+    const activeFields = getActiveSchemaInputFields({
+        schema: ScreenFormValuesSchema,
+        disableFields: disableFields,
+    });
+
+    // --- Render ---
     return (
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(submitHandler)}
                 className={cn("space-y-4", className)}
             >
+                {activeFields["theatre"] && (
+                    <TheatreHookFormSelect
+                        control={form.control}
+                        isDisabled={isPending}
+                        name="theatre"
+                        label="Theatre"
+                    />
+                )}
+
                 {activeFields["name"] && (
                     <HookFormInput
                         name="name"
@@ -94,15 +115,6 @@ const ScreenSubmitFormView: FC<ViewProps> = (params) => {
                         isDisabled={isPending}
                         name="screenType"
                         label="Screen Type"
-                    />
-                )}
-
-                {activeFields["theatre"] && (
-                    <TheatreHookFormSelect
-                        control={form.control}
-                        isDisabled={isPending}
-                        name="theatre"
-                        label="Theatre"
                     />
                 )}
 

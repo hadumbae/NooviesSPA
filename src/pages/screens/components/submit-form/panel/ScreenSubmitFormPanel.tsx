@@ -1,5 +1,5 @@
-import {FC, ReactNode, useState} from 'react';
-import type {Screen} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {ReactNode, useState} from 'react';
+import type {Screen, ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import ScreenSubmitFormContainer from "@/pages/screens/components/submit-form/ScreenSubmitFormContainer.tsx";
@@ -12,70 +12,89 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui/Sheet";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 
 /**
- * Props for the `ScreenSubmitFormPanel` component.
+ * Props for `ScreenSubmitFormPanel`.
  *
- * Extends `FormContainerProps` to include form handling for `Screen` entities.
- * Provides optional UI customization for the panel including title, description, and children trigger.
+ * Extends `FormContainerProps` to provide form handling for `Screen` entities,
+ * while adding UI-related configuration such as panel title, description, and trigger content.
+ *
+ * @template TEntity - Always `Screen`
+ * @template TForm - Always `Screen`
+ * @template TFormValues - Always `ScreenFormValues`
  */
-type FormPanelProps = FormContainerProps<Screen, Screen, ScreenFormValues> & {
-    /** Optional React children to render inside the panel trigger. Defaults to a simple "Open" button if not provided. */
+type FormPanelProps = FormContainerProps<ScreenDetails, Screen, ScreenFormValues> & PresetOpenState & {
+    /** Optional React node to render as the panel trigger. Defaults to `"Open"` if unspecified. */
     children?: ReactNode;
 
-    /** Optional additional CSS class names to apply to the sheet content. */
+    /** Optional CSS class name(s) applied to the underlying sheet content element. */
     className?: string;
 
-    /** Optional title to display at the top of the sheet panel. Defaults to "Submit Screen Data". */
+    /** Title displayed in the panel header. Defaults to `"Submit Screen Data"`. */
     title?: string;
 
-    /** Optional description to display below the title. Defaults to "Input screen data and submit it." */
+    /** Description displayed below the title. Defaults to `"Input screen data and submit it."` */
     description?: string;
 };
 
 /**
- * `ScreenSubmitFormPanel` renders a slide-over panel containing a form for submitting `Screen` data.
+ * Slide-over panel that wraps `ScreenSubmitFormContainer` inside a `Sheet`.
  *
- * - Uses `Sheet` as the main panel container.
- * - Supports create and edit modes via `FormContainerProps`.
- * - Automatically closes the panel on successful submission.
+ * Provides:
+ * - A controlled or uncontrolled open state (`PresetOpenState`)
+ * - Auto-closing behavior on successful form submission
+ * - UI header (title + description)
+ * - Customizable trigger element
  *
- * @param props - Component props extending `FormContainerProps` with optional UI customization
- * @returns A fully controlled form panel component
+ * This component is intended for use when submitting or editing `Screen` data in a compact panel UI.
+ *
+ * @param props - Panel and form configuration options.
+ * @returns A panel containing a screen submission form.
  *
  * @example
  * ```tsx
  * <ScreenSubmitFormPanel
- *    onSubmitSuccess={(screen) => console.log("Screen saved:", screen)}
+ *   onSubmitSuccess={(screen) => console.log("Saved:", screen)}
  * >
- *    <button>Open Form</button>
+ *   <button>Open Form</button>
  * </ScreenSubmitFormPanel>
  * ```
  */
-const ScreenSubmitFormPanel: FC<FormPanelProps> = (props) => {
+const ScreenSubmitFormPanel = (props: FormPanelProps) => {
     const {
         children,
         onSubmitSuccess,
         title = "Submit Screen Data",
         description = "Input screen data and submit it.",
+        presetOpen,
+        setPresetOpen,
         ...formParams
     } = props;
 
+    // --- Controlled vs Uncontrolled Open State ---
+    const isControlled = presetOpen !== undefined && setPresetOpen !== undefined;
     const [open, setOpen] = useState<boolean>(false);
 
+    const activeOpen = isControlled ? presetOpen : open;
+    const setActiveOpen = isControlled ? setPresetOpen : setOpen;
+
     /**
-     * Closes the panel and triggers the optional `onSubmitSuccess` callback.
+     * Handles a successful form submission by closing the panel
+     * and forwarding the submitted entity to any provided callback.
      *
-     * @param screen - The successfully submitted `Screen` entity
+     * @param screen - The successfully saved `Screen` entity.
      */
-    const closeOnSuccess = (screen: Screen) => {
-        setOpen(false);
-        onSubmitSuccess && onSubmitSuccess(screen);
+    const closeOnSuccess = (screen: ScreenDetails) => {
+        setActiveOpen(false);
+        onSubmitSuccess?.(screen);
     };
 
+    // --- Render ---
     return (
-        <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>{children ? children : "Open"}</SheetTrigger>
+        <Sheet open={activeOpen} onOpenChange={setActiveOpen}>
+            <SheetTrigger asChild>{children ?? "Open"}</SheetTrigger>
+
             <SheetContent className="flex flex-col">
                 <SheetHeader>
                     <SheetTitle>{title}</SheetTitle>
@@ -84,8 +103,8 @@ const ScreenSubmitFormPanel: FC<FormPanelProps> = (props) => {
 
                 <ScrollArea className="flex-grow px-1">
                     <ScreenSubmitFormContainer
-                        onSubmitSuccess={closeOnSuccess}
                         {...formParams}
+                        onSubmitSuccess={closeOnSuccess}
                     />
                 </ScrollArea>
             </SheetContent>

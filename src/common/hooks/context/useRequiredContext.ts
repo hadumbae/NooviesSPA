@@ -48,7 +48,11 @@ export default function useRequiredContext<TContext>(
     const ctx = useContext(context);
 
     if (ctx === undefined) {
-        throw new Error(message ?? "Context must be used within provider.");
+        const defaultMessage = context.displayName
+            ? `Context must be used within a provider for "${context.displayName}".`
+            : "Context must be used within provider.";
+
+        throw new Error(message ?? defaultMessage);
     }
 
     return ctx;

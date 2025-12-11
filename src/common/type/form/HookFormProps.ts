@@ -3,44 +3,81 @@ import {UseMutationResult} from "@tanstack/react-query";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 
 /**
- * Configuration options for form initialization and runtime behavior.
+ * Configuration options that control how a form initializes and behaves at runtime.
  *
- * @template TFormValues - Form values type used by React Hook Form. Must extend `FieldValues`.
- * @template TForm - Payload type submitted on mutation. Defaults to `TFormValues`.
+ * Enables fine-grained lifecycle and UI customization, including:
+ * - disabling specific fields
+ * - applying preset values before initialization
+ * - auto-resetting after successful submission
+ * - adapting form behavior based on the entity being edited
+ *
+ * @template TFormValues - Form value type managed by React Hook Form.
+ * @template TForm - Payload type submitted to the server. Defaults to `TFormValues`.
+ * @template TEntity - Entity type used for edit-mode behavior.
  *
  * @example
+ * ```ts
  * const options: FormOptions<MyFormValues> = {
  *   disableFields: ["email", "createdAt"],
  *   presetValues: { username: "jane_doe" },
  *   resetOnSubmit: true,
- *   isPanel: false
+ *   isPanel: false,
+ *   editEntity: userEntity
  * };
+ * ```
  */
-export type FormOptions<TFormValues extends FieldValues, TForm extends FieldValues = TFormValues> = {
+export type FormOptions<
+    TFormValues extends FieldValues,
+    TForm extends FieldValues = TFormValues,
+    TEntity = unknown
+> = {
     /**
-     * Form field keys to disable within the UI.
-     * Useful for preventing edits to server-controlled or immutable values.
+     * Form field keys that should be disabled in the UI.
+     *
+     * Common scenarios include:
+     * - preventing edits to server-controlled attributes (e.g., `_id`, timestamps)
+     * - enforcing permission-based read-only fields
+     * - locking immutable values during edit operations
      */
     disableFields?: (keyof TFormValues)[];
 
     /**
-     * Optional initial values used to prefill the form.
-     * Allows for controlled population of existing entities or defaults.
+     * Values applied during initial form hydration.
+     *
+     * Useful for:
+     * - default values in creation flows
+     * - preloading entity data in edit flows
+     * - enforcing persistent presets regardless of external data
      */
     presetValues?: Partial<TForm>;
 
     /**
-     * If true, the form will reset to its default state
-     * after a successful submission.
+     * Whether to reset the form to its default state after a successful submit.
+     *
+     * Typically enabled when repeatedly creating entities or clearing inputs
+     * after server mutations.
      */
     resetOnSubmit?: boolean;
 
     /**
-     * Whether the form is rendered inside a panel-style UI container.
-     * Can influence layout, scroll, or padding behavior.
+     * Indicates that the form is rendered inside a panel-style container.
+     *
+     * May influence layout, spacing, or scrolling behavior.
      */
     isPanel?: boolean;
+
+    /**
+     * The entity currently being edited, if any.
+     *
+     * Enables edit-mode-aware functionality such as:
+     * - conditional field rules based on entity state
+     * - dynamic presets or validation
+     * - contextual UI/logic depending on the resource being modified
+     */
+    editEntity?: TEntity;
 };
+
+
 
 
 /**

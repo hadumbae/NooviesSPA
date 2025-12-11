@@ -1,73 +1,88 @@
-import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {FieldValues, UseFormReturn} from "react-hook-form";
 
 /**
- * Common parameters for handling mutation submissions (create, update, etc.).
+ * Base parameters for handling form-related mutations (create, update, etc.).
  *
- * Provides optional success/error messages and callbacks for handling
- * mutation results.
+ * Provides optional success/error messages and lifecycle callbacks.
  *
- * @template TReturn - Type of data returned by the mutation upon success
+ * @template TReturn - Data type returned on successful mutation.
  */
 export type MutationOnSubmitParams<TReturn = unknown> = {
-    /**
-     * Message displayed on successful mutation.
-     */
+    /** Message shown on successful mutation. */
     successMessage?: string;
 
     /**
-     * Callback fired when the mutation succeeds.
+     * Called when the mutation succeeds.
      *
-     * @param data The data returned by the mutation
+     * @param data - The value returned by the mutation.
      */
     onSubmitSuccess?: (data: TReturn) => void;
 
-    /**
-     * Message displayed when the mutation fails.
-     */
+    /** Message shown when the mutation fails. */
     errorMessage?: string;
 
     /**
-     * Callback fired when the mutation encounters an error.
+     * Called when the mutation fails.
      *
-     * @param error The error object returned from the mutation
+     * @param error - The thrown error from the mutation.
      */
     onSubmitError?: (error: unknown) => void;
 };
 
 /**
- * Parameters describing whether a mutation is in "edit" mode or "create" mode.
+ * Parameters describing whether the mutation is for creating or editing a record.
  *
- * - `isEditing: true` → editing an existing record; `_id` required
- * - `isEditing: false` or omitted → creating a new record; `_id` must not be present
- *
- * Useful for distinguishing between creating a new resource and updating an existing one.
+ * - When `isEditing: true`, `_id` **must** be provided.
+ * - When creating, omit `isEditing` or set it to `false`; `_id` must not be present.
  *
  * @example
  * ```ts
- * // Edit mode
+ * // Editing an existing entry
  * const editParams: MutationEditByIDParams = {
  *   isEditing: true,
- *   _id: "6540fa..." as ObjectId
+ *   _id: "6540fa..." as ObjectId,
  * };
  *
- * // Create mode
+ * // Creating a new entry
  * const createParams: MutationEditByIDParams = {
- *   isEditing: false
+ *   isEditing: false,
  * };
  * ```
  */
 export type MutationEditByIDParams =
     | {
-    /** Indicates the form is in edit mode and requires an existing record ID. */
+    /** Marks the mutation as editing an existing record. */
     isEditing: true;
-
-    /** The unique identifier of the record being edited. */
+    /** ID of the record being edited. */
     _id: ObjectId;
 }
     | {
-    /** Indicates the form is in create mode (default). */
+    /** Marks the mutation as creating a new record (default). */
     isEditing?: false;
-
-    /** Must not be provided in create mode. */
+    /** ID must not be provided in create mode. */
     _id?: never;
+};
+
+/**
+ * Combined parameters required for submitting a mutation from a form.
+ *
+ * Used by higher-level mutation hooks to unify form handling,
+ * submission lifecycle behavior, and optional editing.
+ *
+ * @template TFormValues - React Hook Form value type.
+ * @template TReturn - Mutation return type.
+ */
+export type SubmitMutationParams<
+    TFormValues extends FieldValues,
+    TReturn = unknown
+> = MutationOnSubmitParams<TReturn> & {
+    /** The React Hook Form instance controlling the form. */
+    form: UseFormReturn<TFormValues>;
+
+    /**
+     * Optional ID of the record being edited.
+     * If present, the hook should treat the operation as an update.
+     */
+    editID?: ObjectId;
 };
