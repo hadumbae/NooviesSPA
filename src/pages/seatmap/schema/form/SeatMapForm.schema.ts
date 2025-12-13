@@ -1,89 +1,70 @@
 /**
- * # SeatMap Form Schemas
+ * @file SeatMapFormSchemas.ts
+ * @summary Zod schemas for validating and shaping SeatMap form data.
  *
- * This module defines the Zod schemas used for validating and shaping seat map
- * form data. It includes:
+ * Provides:
+ * - `SeatMapFormSchema`: Core schema for raw form input.
+ * - `SeatMapFormValuesSchema`: Form-friendly schema for UI layer integration.
  *
- * - **SeatMapFormSchema**: The core validation schema for seat map form fields.
- * - **SeatMapFormValuesSchema**: A form-friendly schema generated for UI layer
- *   integration (e.g., React Hook Form), via `generateFormValueSchema`.
- *
- * ## Key Features
- * - Automatic preprocessing of empty string inputs for `price`, converting them
- *   into `undefined` using `preprocessEmptyStringToUndefined`.
- * - Coerced numeric parsing via `CoercedPositiveNumberSchema`, allowing string
- *   inputs such as `"450"` to be converted into numbers.
- * - Strict ID validation using `IDStringSchema`.
- * - Strong, typed seat-status validation with `SeatMapStatusEnum`.
+ * Features:
+ * - Converts empty string inputs to `undefined`.
+ * - Coerces numeric strings into positive numbers.
+ * - Validates ObjectId strings and seat map status.
  */
 
-import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {
-    CoercedPositiveNumberSchema
-} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {SeatMapStatusEnum} from "@/pages/seatmap/schema/enum/SeatMapStatusEnum.ts";
+import { z } from "zod";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { CoercedPositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import { SeatMapStatusEnum } from "@/pages/seatmap/schema/enum/SeatMapStatusEnum.ts";
 import generateFormValueSchema from "@/common/utility/schemas/generateFormValueSchema.ts";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 
 /**
- * ## SeatMapFormSchema
+ * @summary Base schema for validating raw SeatMap form input.
  *
- * The base schema for validating raw seat map form input.
+ * @description
+ * Validates seat map form fields including seat ID, showing ID, pricing, and status.
  *
- * ### Field Details
- * - **seat** — Required. Must be a valid ObjectId string.
- * - **showing** — Required. Must be a valid ObjectId string.
- * - **price**
- *   - Optional.
- *   - Accepts empty strings and treats them as `undefined`.
- *   - When provided, coerces values into positive numbers.
- *   - Uses: `preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema.optional())`.
- * - **status** — Required. Must be a value from `SeatMapStatusEnum`.
+ * @fields
+ * - `seat`: Required, must be a valid ObjectId string.
+ * - `showing`: Required, must be a valid ObjectId string.
+ * - `basePrice`: Optional, coerces numeric string to positive number; empty string → undefined.
+ * - `priceMultiplier`: Optional, coerces numeric string to positive number; empty string → undefined.
+ * - `overridePrice`: Optional, coerces numeric string to positive number; empty string → undefined.
+ * - `status`: Required, must be a value from `SeatMapStatusEnum`.
  *
  * @example
  * SeatMapFormSchema.parse({
  *   seat: "6530a8121e4f09c92f123abc",
  *   showing: "6530a8121e4f09c92f123def",
- *   price: "450",        // coerced to number
+ *   basePrice: "450",
+ *   priceMultiplier: "1.5",
+ *   overridePrice: "",
  *   status: "AVAILABLE"
- * });
- *
- * @example
- * // Acceptable: empty price becomes undefined
- * SeatMapFormSchema.parse({
- *   seat: "6530a8121e4f09c92f123abc",
- *   showing: "6530a8121e4f09c92f123def",
- *   price: "",
- *   status: "RESERVED"
  * });
  */
 export const SeatMapFormSchema = z.object({
     seat: IDStringSchema,
     showing: IDStringSchema,
-    price: preprocessEmptyStringToUndefined(
-        CoercedPositiveNumberSchema.optional()
-    ).optional(),
+    basePrice: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema),
+    priceMultiplier: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema),
+    overridePrice: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema.optional()).optional(),
     status: SeatMapStatusEnum,
 });
 
 /**
- * ## SeatMapFormValuesSchema
+ * @summary Form-friendly schema generated from `SeatMapFormSchema`.
  *
- * A schema tailored for use in form libraries, generated from
- * `SeatMapFormSchema` by `generateFormValueSchema`.
- *
- * This schema typically:
- * - Allows intermediate/partial values when editing.
- * - Standardizes optional/undefined handling for fields.
- * - Ensures the final parsed output still conforms to the base schema.
- *
- * @param schema - The underlying validation schema (`SeatMapFormSchema`).
- * @returns A transformed Zod schema suitable for use as form values.
+ * @description
+ * Tailored for integration with form libraries (e.g., React Hook Form):
+ * - Supports intermediate/partial values during editing.
+ * - Handles empty/optional fields gracefully.
+ * - Ensures final parsed output conforms to `SeatMapFormSchema`.
  *
  * @example
  * const values = SeatMapFormValuesSchema.parse({
- *   price: "",
+ *   basePrice: "",
+ *   priceMultiplier: "1.2",
  *   seat: "6530a8121e4f09c92f123abc",
  *   showing: "6530a8121e4f09c92f123def",
  *   status: "SOLD"

@@ -1,60 +1,73 @@
-import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import { CleanedPositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import { z } from "zod";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import { SeatMapStatusEnum } from "@/pages/seatmap/schema/enum/SeatMapStatusEnum.ts";
 import { SeatSchema } from "@/pages/seats/schema/seat/Seat.schema.ts";
 import { ShowingSchema } from "@/pages/showings/schema/showing/Showing.schema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import { generatePaginationSchema } from "@/common/utility/schemas/generatePaginationSchema.ts";
 
-// ⚡ Seat Map ⚡
-
 /**
- * Zod schema representing a SeatMap entity.
+ * @summary Zod schema representing a SeatMap entity.
  *
- * Fields:
- * - `_id`: Object ID of the seat map.
- * - `seat`: Object ID of the related Seat.
- * - `showing`: Object ID of the related Showing.
- * - `price`: Positive numeric price for this seat map entry.
- * - `status`: Current status of the seat map (AVAILABLE, UNAVAILABLE, etc.).
+ * @description
+ * Validates the core fields of a seat map, linking a seat to a specific showing
+ * and defining pricing and status.
+ *
+ * @fields
+ * - `_id` — ObjectId of the seat map entry.
+ * - `seat` — ObjectId reference to the related Seat.
+ * - `showing` — ObjectId reference to the related Showing.
+ * - `basePrice` — Base price of the seat map entry.
+ * - `priceMultiplier` — Multiplier applied to the base price.
+ * - `overridePrice` — Optional override price.
+ * - `status` — Current seat map status (`AVAILABLE`, `UNAVAILABLE`, etc.).
  */
 export const SeatMapSchema = z.object({
     _id: IDStringSchema,
     seat: IDStringSchema,
     showing: IDStringSchema,
-    price: CleanedPositiveNumberSchema,
+    basePrice: PositiveNumberSchema,
+    priceMultiplier: PositiveNumberSchema,
+    overridePrice: PositiveNumberSchema.optional(),
     status: SeatMapStatusEnum,
 });
 
 /**
- * Array schema for multiple SeatMap entries.
+ * @summary Array schema for multiple SeatMap entries.
  */
 export const SeatMapArraySchema = generateArraySchema(SeatMapSchema);
 
 /**
- * Paginated schema for SeatMap results.
+ * @summary Paginated schema for SeatMap results.
  */
 export const PaginatedSeatMapSchema = generatePaginationSchema(SeatMapSchema);
 
-// ⚡ Seat Map Details ⚡
-
 /**
- * Detailed SeatMap schema with populated references.
+ * @summary Detailed SeatMap schema with populated references.
  *
- * Extends `SeatMapSchema` by replacing `seat` and `showing` IDs with full objects.
+ * @description
+ * Extends `SeatMapSchema` by replacing the `seat` and `showing` ObjectId fields
+ * with the full populated objects, and adds a computed `finalPrice` field
+ * representing the effective price of the seat.
+ *
+ * @fields
+ * - `seat` — Full populated Seat object.
+ * - `showing` — Full populated Showing object.
+ * - `finalPrice` — Computed price: `overridePrice` if present, otherwise `basePrice * priceMultiplier`.
  */
 export const SeatMapDetailsSchema = SeatMapSchema.extend({
     seat: z.lazy(() => SeatSchema),
     showing: z.lazy(() => ShowingSchema),
+    finalPrice: PositiveNumberSchema,
 });
 
 /**
- * Array schema for multiple SeatMap details.
+ * @summary Array schema for multiple detailed SeatMap entries.
  */
 export const SeatMapDetailsArraySchema = generateArraySchema(SeatMapDetailsSchema);
 
 /**
- * Paginated schema for detailed SeatMap results.
+ * @summary Paginated schema for detailed SeatMap results.
  */
 export const PaginatedSeatMapDetailsSchema = generatePaginationSchema(SeatMapDetailsSchema);

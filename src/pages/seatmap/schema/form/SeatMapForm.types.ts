@@ -1,54 +1,46 @@
 /**
- * # SeatMap Form Types
+ * @file SeatMapFormTypes.ts
+ * @summary TypeScript types inferred from SeatMap form Zod schemas.
  *
- * This module provides TypeScript type aliases inferred from the seat map form
- * Zod schemas. These types are used throughout the application wherever
- * validated or form-friendly seat map data is required.
- *
- * ## Exports
- * - **SeatMapForm** — Strongly typed representation of validated seat map form data.
- * - **SeatMapFormValues** — Type representation of form-layer values, typically
- *   used with form libraries (e.g., React Hook Form), allowing partial or
- *   intermediate values.
+ * Provides strongly typed representations of seat map form data:
+ * - `SeatMapForm` — Fully validated form data after parsing.
+ * - `SeatMapFormValues` — Form-layer values for UI libraries (e.g., React Hook Form), allowing partial or intermediate input.
  */
 
-import {z} from "zod";
-import {SeatMapFormSchema, SeatMapFormValuesSchema} from "@/pages/seatmap/schema/form/SeatMapForm.schema.ts";
+import { z } from "zod";
+import { SeatMapFormSchema, SeatMapFormValuesSchema } from "@/pages/seatmap/schema/form/SeatMapForm.schema.ts";
 
 /**
- * ## SeatMapForm
+ * @summary Fully validated seat map form data.
  *
- * The fully validated seat map form data structure inferred from
- * `SeatMapFormSchema`.
- * This represents the canonical, sanitized data after parsing and validation.
+ * Represents canonical, sanitized data after parsing with `SeatMapFormSchema`.
  *
  * @example
  * const form: SeatMapForm = {
  *   seat: "6530a8121e4f09c92f123abc",
  *   showing: "6530a8121e4f09c92f123def",
- *   price: 450,
+ *   basePrice: 450,
+ *   priceMultiplier: 1.5,
+ *   overridePrice: undefined,
  *   status: "AVAILABLE",
  * };
  */
 export type SeatMapForm = z.infer<typeof SeatMapFormSchema>;
 
 /**
- * ## SeatMapFormValues
+ * @summary Form-layer seat map values.
  *
- * The type inferred from `SeatMapFormValuesSchema`, representing the form-layer
- * input state. This is typically used in UI frameworks where values may be
- * `string`, `undefined`, or otherwise unprocessed before schema parsing.
- *
- * This type is appropriate for:
- * - React Hook Form field values
- * - Intermediate form editing states
- * - Partial inputs prior to validation/transformation
+ * Inferred from `SeatMapFormValuesSchema`. Supports intermediate/partial
+ * values as commonly used in UI frameworks like React Hook Form.
+ * Fields may be empty strings or undefined before final parsing.
  *
  * @example
  * const values: SeatMapFormValues = {
  *   seat: "6530a8121e4f09c92f123abc",
  *   showing: "6530a8121e4f09c92f123def",
- *   price: "",           // allowed in form state
+ *   basePrice: "",           // allowed in form state
+ *   priceMultiplier: "1.2",
+ *   overridePrice: "",
  *   status: "SOLD",
  * };
  */
