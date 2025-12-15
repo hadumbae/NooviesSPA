@@ -12,8 +12,7 @@
  * This ensures React receives predictable and collision-free keys.
  */
 
-import { Seat } from "@/pages/seats/schema/seat/Seat.types.ts";
-import { SeatDetails } from "@/pages/seats/schema/seat/SeatDetails.types.ts";
+import {GridPositionedSeat} from "@/pages/seats/types/GridPositionedSeat.ts";
 
 /**
  * Generates a unique, stable key string for a seat layout element.
@@ -37,8 +36,8 @@ import { SeatDetails } from "@/pages/seats/schema/seat/SeatDetails.types.ts";
  *
  * @returns A unique string suitable for use as a React `key`.
  */
-export default function keyForSeatElement(
-    element: Seat | SeatDetails | number | null,
+export default function keyForSeatElement<TElement extends GridPositionedSeat>(
+    element: TElement | number | null,
     index: number
 ): string {
     if (element === null) {

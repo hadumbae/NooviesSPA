@@ -8,7 +8,7 @@
  */
 
 import { memo, ReactElement, useMemo } from "react";
-import organiseScreenSeatMap from "@/pages/seats/hooks/features/admin/screen-seat-layout/organiseScreenSeatMap.ts";
+import organiseSeatsForLayout from "@/pages/seats/hooks/features/admin/screen-seat-layout/organiseSeatsForLayout.ts";
 import ScreenSeatLayoutElement from "@/pages/seats/components/features/screen-seats/ScreenSeatLayoutElement.tsx";
 import { SeatDetails } from "@/pages/seats/schema/seat/SeatDetails.types.ts";
 import keyForSeatElement from "@/pages/seats/utilities/screen-seats/keyForSeatElement.ts";
@@ -46,7 +46,7 @@ type GridProps = {
  */
 const ScreenSeatLayout = ({ seats }: GridProps): ReactElement => {
     // ⚡ Group and sort seats ⚡
-    const { sortedSeats, maxX } = organiseScreenSeatMap({ seats });
+    const { sortedSeats, maxX } = organiseSeatsForLayout({ seats });
     const seatEntries = useMemo(() => Array.from(sortedSeats), [sortedSeats]);
 
     // ⚡ Grid style ⚡
