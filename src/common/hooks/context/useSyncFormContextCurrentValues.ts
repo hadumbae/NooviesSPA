@@ -1,5 +1,14 @@
-import {Context, useEffect} from "react";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+/**
+ * @file useSyncFormContextCurrentValues.ts
+ * @summary
+ * Hook for keeping React Hook Form values synchronized with a shared form context.
+ *
+ * This hook bridges a controlled form instance and a {@link FormContextValues}
+ * provider, ensuring that the form’s active state is continuously reflected
+ * in context while avoiding excessive updates.
+ */
+
+import {Context, useContext, useEffect} from "react";
 import {FormContextValues} from "@/common/type/context/FormContextValues.ts";
 import {FieldValues, UseFormReturn} from "react-hook-form";
 import useDebouncedCallback from "@/common/hooks/useDebouncedCallback.tsx";
@@ -16,32 +25,38 @@ type ContextParams<
     TForm extends FieldValues = TFormValues,
     TEntity = unknown,
 > = {
-    /** The React Hook Form instance controlling the form. */
+    /**
+     * The React Hook Form instance controlling the form.
+     */
     form: UseFormReturn<TFormValues>;
 
     /**
-     * The form context that stores `currentValues` and its setter.
-     * Must match the corresponding provider used above in the component tree.
+     * Form context storing `currentValues` and its setter.
+     *
+     * Must correspond to the provider mounted higher in the tree.
      */
     context: Context<FormContextValues<TFormValues, TForm, TEntity> | undefined>;
 };
 
 /**
- * Synchronizes a form's active values with a {@link FormContextValues} provider.
+ * Synchronizes a form’s active values with a form context provider.
  *
- * Behavior:
- * - Resets the form to the context’s `currentValues` when mounted.
- * - Subscribes to form changes and updates the context.
- * - Uses a debounced setter to prevent excessive update calls during typing.
+ * ### Behavior
+ * - On mount, resets the form to the context’s `currentValues` (if present)
+ * - Subscribes to form value changes and propagates them to context
+ * - Debounces updates to reduce render and state churn during typing
+ * - Cleans up subscriptions automatically on unmount
  *
- * Useful when shared UI regions need continuous access to the form’s active state
- * or when preserving state while navigating between nested panels.
+ * This is especially useful for:
+ * - Multi-panel or wizard-style UIs
+ * - Preserving form state across navigations
+ * - Allowing sibling components to react to live form changes
  *
  * @template TFormValues - Internal form value shape.
  * @template TForm - Optional submission payload type.
  * @template TEntity - Optional attached entity used for editing.
  *
- * @param params - The form instance and its associated context.
+ * @param params The form instance and its associated context.
  * @returns void
  *
  * @example
@@ -58,24 +73,31 @@ export default function useSyncFormContextCurrentValues<
     TEntity = unknown
 >(params: ContextParams<TFormValues, TForm, TEntity>): void {
     const {form, context} = params;
-    const {currentValues, setCurrentValues} = useRequiredContext({context});
+    const contextValues = useContext(context);
     const {reset} = form;
 
-    // Debounced setter to limit update frequency
+    // --- Exit If No Context ---
+    if (!contextValues) {
+        return;
+    }
+
+    const {currentValues, setCurrentValues} = contextValues;
+
+    // --- Debounced Setter ---
     const debounceSet = useDebouncedCallback(setCurrentValues, 500);
 
-    // Reset on mount for consistent initial state
+    // --- Sync Values On Render ---
     useEffect(() => {
         if (currentValues) {
             reset(currentValues);
         }
     }, [reset]);
 
-    // Subscribe to form changes and propagate them
+    // --- Update Context Values ---
     useEffect(() => {
-        const subscription = form.watch((newValues) =>
-            debounceSet(newValues as TFormValues)
-        );
+        const subscription = form.watch((newValues) => {
+            debounceSet(newValues as TFormValues);
+        });
 
         return () => subscription.unsubscribe();
     }, [form, debounceSet]);

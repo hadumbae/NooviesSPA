@@ -1,70 +1,78 @@
 /**
- * @file Defines the `HookFormFieldGroup` type, a utility structure used to
- *       represent a logical grouping of related form fields and the React
- *       element responsible for rendering them within a React Hook Form context.
+ * @file HookFormFieldGroup.ts
  *
- * This type is typically used when constructing dynamic form sections
- * that may be conditionally displayed based on application state.
+ * @summary
+ * Type definitions for logical groups of React Hook Form fields and their
+ * corresponding UI components.
+ *
+ * @description
+ * Provides a structure to define:
+ * - Conditional rendering of form field groups (`render`)
+ * - Association between form schema fields and UI components (`fields` and `element`)
+ *
+ * These types are useful for building dynamic, modular forms where certain
+ * field sections may be shown or hidden based on application state or business logic.
  */
 
 import { FieldValues } from "react-hook-form";
 import { ReactElement } from "react";
 
 /**
- * Represents a grouped set of fields within a form, along with metadata
- * controlling whether the group should be displayed and what component should
- * be rendered to represent it.
+ * Represents a single renderable unit in a form.
  *
- * @template TValues - A type extending `FieldValues` that defines the
- * structure of the form fields available within this group.
+ * @property render - Whether the group should currently be rendered.
+ * @property element - The React element that renders this group in the UI.
  */
-export type HookFormFieldGroup<TValues extends FieldValues> = {
+export type HookFormField = {
     /**
-     * Whether this group should be rendered.
+     * Controls if this group should be rendered.
      *
-     * Typically controlled by form state or business rules. When `false`,
-     * the renderer should skip the group's `element`.
+     * When `false`, the `element` will not be displayed.
      */
     render: boolean;
 
     /**
-     * The list of field names (keys of the form schema) associated with this
-     * group.
+     * The React element responsible for rendering this group of fields.
      *
-     * This represents a *mapping layer* between the form schema and the UI,
-     * allowing grouping, ordering, or conditional logic based on field sets.
+     * Typically a component that uses `useFormContext()` or receives form props.
      *
      * @example
-     * For a form type:
+     * ```tsx
+     * const nameGroup: HookFormField = {
+     *   render: true,
+     *   element: <NameSection />
+     * };
+     * ```
+     */
+    element: ReactElement;
+};
+
+/**
+ * Represents a group of form fields with associated metadata for rendering.
+ *
+ * @template TValues - Type extending `FieldValues` describing the form schema.
+ *
+ * @property fields - Array of field keys from the form schema that belong to this group.
+ *   Serves as a bridge between schema and UI for ordering, grouping, and conditional logic.
+ */
+export type HookFormFieldGroup<TValues extends FieldValues> = HookFormField & {
+    /**
+     * The keys of the form schema included in this group.
+     *
+     * @example
      * ```ts
      * type MyFormValues = {
      *   firstName: string;
      *   lastName: string;
      *   age: number;
      * };
-     * ```
      *
-     * A group may specify:
-     * ```ts
-     * fields: ["firstName", "lastName"]
-     * ```
-     */
-    fields: (keyof TValues)[];
-
-    /**
-     * The React element responsible for rendering this group in the UI.
-     *
-     * This is usually a form section component. The component typically uses
-     * React Hook Form’s `useFormContext()` or receives props externally.
-     *
-     * @example
-     * ```tsx
-     * const nameGroup: HookFormFieldGroup<MyFormValues> = {
+     * const personalInfoGroup: HookFormFieldGroup<MyFormValues> = {
      *   render: true,
      *   fields: ["firstName", "lastName"],
-     *   element: <NameSection />
+     *   element: <PersonalInfoSection />
      * };
      * ```
      */
-    element: ReactElement;
+    fields: (keyof TValues)[];
 };

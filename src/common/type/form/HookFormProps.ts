@@ -120,7 +120,7 @@ export type FormContainerProps<
     TForm extends FieldValues = TFormValues
 > = MutationOnSubmitParams<TReturn> &
     FormEditByEntityParams<TEntity> &
-    FormOptions<TFormValues, TForm>;
+    FormOptions<TFormValues, TForm, TEntity>;
 
 /**
  * Props for a form view component that integrates:
