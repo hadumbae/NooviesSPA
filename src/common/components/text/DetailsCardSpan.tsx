@@ -30,10 +30,11 @@
  * ```
  */
 
-import { ElementType, FC } from 'react';
-import { Link } from "react-router-dom";
-import { cn } from "@/common/lib/utils.ts";
-import { PrimaryTextBaseCSS, SecondaryTextBaseCSS } from "@/common/constants/css/TextCSS.ts";
+import {ElementType} from 'react';
+import {cn} from "@/common/lib/utils.ts";
+import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggerFunction} from "@/common/utility/features/logger/Logger.types.ts";
 
 /**
  * Props for `DetailsCardSpan`.
@@ -65,6 +66,10 @@ type SpanProps = {
      * Opens in a new tab.
      */
     to?: string | null;
+
+    sourceComponent?: string;
+
+    navMessage?: string;
 }
 
 /**
@@ -73,13 +78,30 @@ type SpanProps = {
  * @param props - Props controlling label, text, link, and styling.
  * @returns JSX element rendering a labeled detail with optional link.
  */
-const DetailsCardSpan: FC<SpanProps> = ({ as: Component = "span", label, text, to, className }) => {
-    const content = (
-        to
-            ? <Link to={to} target="_blank" className={cn("font-bold hover:underline", className)}>{text}</Link>
-            : <Component className={cn("font-bold", className)}>{text}</Component>
+const DetailsCardSpan = (props: SpanProps) => {
+    // --- Props ---
+    const {as: Component = "span", label, text, to, className, sourceComponent, navMessage} = props
+
+    // --- Content ---
+    const linkProps = {
+        level: "log" as LoggerFunction,
+        component: sourceComponent,
+        message: navMessage,
+        target: "_blank",
+    }
+
+    const content = (to ? (
+            <LoggedLink className={cn("font-bold hover:underline", className)} to={to}  {...linkProps}>
+                {text}
+            </LoggedLink>
+        ) : (
+            <Component className={cn("font-bold", className)}>
+                {text}
+            </Component>
+        )
     );
 
+    // --- Render ---
     return (
         <div className="flex flex-col space-y-0">
             <span className={cn(SecondaryTextBaseCSS, "text-[12px] uppercase")}>{label}</span>

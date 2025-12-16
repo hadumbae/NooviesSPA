@@ -2,17 +2,17 @@ import { z } from "zod";
 import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import { SeatMapStatusEnum } from "@/pages/seatmap/schema/enum/SeatMapStatusEnum.ts";
-import { SeatSchema } from "@/pages/seats/schema/seat/Seat.schema.ts";
-import { ShowingSchema } from "@/pages/showings/schema/showing/Showing.schema.ts";
+import {ShowingDetailsSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import { generatePaginationSchema } from "@/common/utility/schemas/generatePaginationSchema.ts";
 import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import { SeatDetailsSchema } from "@/pages/seats/schema/seat/SeatDetails.schema.ts";
 
 /**
  * @summary
  * Base Zod schema for a SeatMap entity.
  *
- * @remarks
+ * @description
  * Represents a seat’s pricing and availability within a specific showing.
  * Stores only ObjectId references for relational fields.
  */
@@ -42,13 +42,13 @@ export const PaginatedSeatMapSchema = generatePaginationSchema(SeatMapSchema);
  * @summary
  * Detailed SeatMap schema with populated relations.
  *
- * @remarks
+ * @description
  * - Replaces ObjectId references with populated `Seat` and `Showing` objects.
- * - Adds positional metadata and a computed `finalPrice` field.
+ * - Adds positional metadata (`x`, `y`, `row`) and a computed `finalPrice` field.
  */
 export const SeatMapDetailsSchema = SeatMapSchema.extend({
-    seat: z.lazy(() => SeatSchema),
-    showing: z.lazy(() => ShowingSchema),
+    seat: z.lazy(() => SeatDetailsSchema),
+    showing: z.lazy(() => ShowingDetailsSchema),
     x: PositiveNumberSchema,
     y: PositiveNumberSchema,
     row: NonEmptyStringSchema.max(10, "Must be 10 characters or less."),
