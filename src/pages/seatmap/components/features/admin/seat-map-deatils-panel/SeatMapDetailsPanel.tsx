@@ -1,3 +1,17 @@
+/**
+ * @file SeatMapDetailsPanel.tsx
+ *
+ * @summary
+ * Sliding details panel for inspecting and editing an individual seat map entry.
+ *
+ * @description
+ * Renders a side sheet displaying detailed information about a selected seat map,
+ * including seat metadata, status, references, and an optional edit form.
+ *
+ * The panel is fully controlled by {@link SeatMapDetailsPanelContext} and assumes
+ * a valid seat map is present when rendered.
+ */
+
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatMapDetailsPanelContext} from "@/pages/seatmap/context/details-panel-context/SeatMapDetailsPanelContext.ts";
 import {
@@ -26,10 +40,30 @@ import {cn} from "@/common/lib/utils.ts";
 import {CardCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {SeatMapDetails} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
 
+/**
+ * Props for {@link SeatMapDetailsPanel}.
+ */
 type PanelProps = {
+    /**
+     * The showing associated with the current seat map.
+     *
+     * Used to derive screen and showing identifiers for form submissions
+     * and reference links.
+     */
     showing: ShowingDetails;
-}
+};
 
+/**
+ * Displays a details panel for a selected seat map entry.
+ *
+ * @remarks
+ * - Requires {@link SeatMapDetailsPanelContext} to be present
+ * - Throws if no seat map is available or if the seat layout type is invalid
+ * - Supports read-only and edit modes via internal context state
+ *
+ * @returns
+ * A controlled {@link Sheet} component containing seat map details and editing UI.
+ */
 const SeatMapDetailsPanel = ({showing}: PanelProps) => {
     // --- Access Context ---
     const {
@@ -41,13 +75,15 @@ const SeatMapDetailsPanel = ({showing}: PanelProps) => {
         setIsEditing,
     } = useRequiredContext({context: SeatMapDetailsPanelContext});
 
-    // --- No Seat Map, Should Not Show ---
+    // --- Guard: Seat Map Required ---
     if (!seatMap) {
         throw new Error("Required seat map not found for `SeatMapDetailsContextPanel`.");
     }
 
     if (seatMap.seat.layoutType !== "SEAT") {
-        throw new Error(`Seat Map has seat of invalid layout type. Type received: ${seatMap.seat.layoutType}`);
+        throw new Error(
+            `Seat Map has seat of invalid layout type. Type received: ${seatMap.seat.layoutType}`
+        );
     }
 
     // --- Seat Map Details ---
@@ -61,14 +97,19 @@ const SeatMapDetailsPanel = ({showing}: PanelProps) => {
     const sheetTitle = getSeatIdentifier(seat);
     const sheetDescription = `${formattedSeatType} • ${formattedStatus}`;
 
-    // --- Form ---
+    // --- Form Context ---
     const {_id: seatMapShowing, screen: {_id: seatMapScreen}} = showing;
     const {options = {}} = useRequiredContext({context: SeatMapFormContext});
 
+    /**
+     * Handles successful seat map updates from the edit form.
+     *
+     * @param seatMap - The updated seat map details.
+     */
     const onSuccess = (seatMap: SeatMapDetails) => {
         setSeatMap(seatMap);
         setIsEditing(false);
-    }
+    };
 
     // --- Render ---
     return (
@@ -81,8 +122,7 @@ const SeatMapDetailsPanel = ({showing}: PanelProps) => {
 
                 <ScrollArea className="flex-1">
                     <div className="space-y-5">
-                        {
-                            isEditing &&
+                        {isEditing && (
                             <SeatMapFormContainer
                                 className={cn(CardCSS, "p-4")}
                                 seatMapShowing={seatMapShowing}
@@ -90,19 +130,20 @@ const SeatMapDetailsPanel = ({showing}: PanelProps) => {
                                 onSubmitSuccess={onSuccess}
                                 {...options}
                             />
-                        }
+                        )}
 
-                        {!isEditing && <>
-                            <SeatMapDetailsReferenceLinks showing={showing}/>
-                            <SeatMapSeatSummary seat={seat}/>
-                            <SeatMapDetailsSummary seatMap={seatMap}/>
-                        </>}
+                        {!isEditing && (
+                            <>
+                                <SeatMapDetailsReferenceLinks showing={showing}/>
+                                <SeatMapSeatSummary seat={seat}/>
+                                <SeatMapDetailsSummary seatMap={seatMap}/>
+                            </>
+                        )}
 
                         <SeatMapEditFormSelector/>
                     </div>
                 </ScrollArea>
             </SheetContent>
-
         </Sheet>
     );
 };
