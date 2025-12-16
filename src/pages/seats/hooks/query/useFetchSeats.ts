@@ -1,40 +1,53 @@
+/**
+ * @file useFetchSeats.ts
+ *
+ * @summary React Query hook for fetching paginated seat data from the backend.
+ *
+ * @description
+ * Provides a convenient hook to query seat documents with support for:
+ * - Pagination (`page`, `limit`)
+ * - Filtering (seat-specific fields like `row`, `seatType`, `theatre`, `screen`)
+ * - Sorting and additional request options (`RequestOptions`)
+ * - Integration with React Query for caching, background refetching, and state management
+ *
+ * Utilizes {@link SeatRepository.query} under the hood and wraps errors with {@link HttpResponseError}.
+ */
+
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { SeatQueryFilters } from "@/pages/seats/schema/queries/SeatQueryOption.types.ts";
+import {SeatQueryOptions} from "@/pages/seats/schema/queries/SeatQueryOption.types.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
 import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 
 type FetchParams<TData = unknown> = {
-    queries: RequestOptions & RequestPaginationOptions & SeatQueryFilters,
-    options?: UseQueryOptions<TData>
+    /**
+     * Queries to control the request:
+     * - Filters (seat-specific) via {@link SeatQueryOptions}
+     * - Pagination via {@link RequestPaginationOptions}
+     * - Request options via {@link RequestOptions} (e.g., projection, population)
+     */
+    queries: RequestOptions & RequestPaginationOptions & SeatQueryOptions;
+
+    /**
+     * React Query options to customize caching and fetch behavior.
+     */
+    options?: UseQueryOptions<TData>;
 };
 
 /**
- * React Query hook for fetching a **paginated list of seats** from the backend.
+ * React Query hook for fetching a **paginated list of seats**.
  *
- * This hook supports filtering, pagination, and query options to integrate seamlessly
- * with React Query caching and background refetching.
+ * @template TData - Shape of the returned data (e.g., paginated seat results).
  *
- * @template TData - The expected shape of the returned data (e.g., a paginated response containing seat entries).
- *
- * @param params - The configuration object:
- * - `queries`: Object that combines:
- *   - `RequestOptions` (sorting, projection, population flags, etc.)
- *   - `EntityPaginatedQuery` (pagination parameters like `page` and `limit`)
- *   - `SeatQueryFilters` (seat-specific filters such as `theatre`, `screen`, `row`, etc.)
- * - `options`: React Query options for controlling cache and fetch behavior:
- *   - `enabled` (default: `true`) — Whether the query should run automatically.
- *   - `staleTime` (default: `60_000`) — Time in ms before cached data is considered stale.
- *   - `initialData` (optional) — Preloaded data for hydration.
- *   - `placeholderData` (default: previous data) — Data shown while fetching.
+ * @param params - Configuration object including query parameters and React Query options.
  *
  * @returns A {@link UseQueryResult} containing:
- * - `data`: The fetched seat data (typed as `TData`)
- * - `isLoading`: Whether the query is currently loading.
- * - `isError` / `error`: Error state with {@link HttpResponseError}.
- * - Other React Query state helpers (`refetch`, `isFetching`, etc.)
+ * - `data`: The fetched seat data (`TData`)
+ * - `isLoading`: Whether the request is in progress
+ * - `isError` / `error`: {@link HttpResponseError} if the request failed
+ * - Other React Query helpers (`refetch`, `isFetching`, etc.)
  *
  * @example
  * ```ts
