@@ -1,14 +1,13 @@
 /**
  * @file SeatQuerySchemas.ts
- *
- * @summary
- * Zod schemas for querying seats, including filtering and sorting options.
+ * @summary Zod schemas for validating query parameters when fetching Seat documents.
  *
  * @description
- * These schemas validate query parameters for fetching seat data.
- * - `SeatQueryFiltersSchema` supports filtering by seat attributes.
- * - `SeatQuerySortsSchema` supports sorting by seat attributes.
- * - `SeatQueryOptionsSchema` combines filters and sorts for a single query object.
+ * These schemas standardize the validation of query parameters for Seat-related API endpoints.
+ * They cover filtering, sorting, and combined query options:
+ * - `SeatQueryFiltersSchema` validates optional filters on seat attributes.
+ * - `SeatQuerySortsSchema` validates optional sorting parameters for Mongoose queries.
+ * - `SeatQueryOptionsSchema` merges filters and sorts for a complete, validated query object.
  */
 
 import { z } from "zod";
@@ -21,11 +20,9 @@ import { CoercedBooleanValueSchema } from "@/common/schema/boolean/CoercedBoolea
 import { SeatLayoutTypeEnumSchema } from "@/pages/seats/schema/SeatLayoutTypeEnumSchema.ts";
 
 /**
- * @summary Zod schema for filtering seats in queries.
+ * Zod schema for filtering Seat documents in queries.
  *
- * @description
- * Supports optional filters for seat identity, row, number, type, availability,
- * pricing, layout type, and associated theatre or screen.
+ * All fields are optional and correspond to filterable Seat properties.
  *
  * @example
  * ```ts
@@ -46,30 +43,33 @@ export const SeatQueryFiltersSchema = z.object({
     /** Seat number within the row (non-empty string). */
     seatNumber: NonEmptyStringSchema.optional(),
 
-    /** Seat type (e.g., REGULAR, VIP, RECLINER). */
+    /** Type of seat (e.g., REGULAR, VIP, RECLINER). */
     seatType: SeatTypeEnum.optional(),
 
     /** Seat layout type (e.g., SEAT, NON-SEAT). */
     layoutType: SeatLayoutTypeEnumSchema.optional(),
 
-    /** Whether the seat is currently available for booking. */
+    /** Whether the seat is available for booking. */
     isAvailable: CoercedBooleanValueSchema.optional(),
 
-    /** Price multiplier applied to the seat (must be positive). */
+    /** Price multiplier applied to the seat (positive number). */
     priceMultiplier: PositiveNumberSchema.optional(),
 
-    /** Theatre ID to which the seat belongs. */
+    /** ID of the theatre the seat belongs to. */
     theatre: IDStringSchema.optional(),
 
-    /** Screen ID to which the seat belongs. */
+    /** ID of the screen the seat belongs to. */
     screen: IDStringSchema.optional(),
+
+    /** ID of the showing associated with the seat. */
+    showing: IDStringSchema.optional(),
 });
 
 /**
- * @summary Zod schema for sorting seat queries.
+ * Zod schema for sorting Seat queries.
  *
- * @description
- * Each field accepts a MongoDB sort order (`1` for ascending, `-1` for descending).
+ * Each field corresponds to a sortable property in Mongoose `$sort`.
+ * Accepts `1` for ascending and `-1` for descending.
  *
  * @example
  * ```ts
@@ -80,34 +80,20 @@ export const SeatQueryFiltersSchema = z.object({
  * ```
  */
 export const SeatQuerySortsSchema = z.object({
-    /** Sort by theatre association. */
     sortByTheatre: MongooseSortOrderSchema.optional(),
-
-    /** Sort by screen association. */
     sortByScreen: MongooseSortOrderSchema.optional(),
-
-    /** Sort by seat row. */
     sortByRow: MongooseSortOrderSchema.optional(),
-
-    /** Sort by seat number. */
     sortBySeatNumber: MongooseSortOrderSchema.optional(),
-
-    /** Sort by seat type. */
     sortBySeatType: MongooseSortOrderSchema.optional(),
-
-    /** Sort by availability (available vs unavailable). */
     sortByIsAvailable: MongooseSortOrderSchema.optional(),
-
-    /** Sort by price multiplier. */
     sortByPriceMultiplier: MongooseSortOrderSchema.optional(),
 });
 
 /**
- * @summary Combined Zod schema for seat query options.
+ * Combined Zod schema for all Seat query options.
  *
- * @description
- * Merges {@link SeatQueryFiltersSchema} and {@link SeatQuerySortsSchema} into a single
- * schema that can be used to validate all seat query parameters at once.
+ * Merges {@link SeatQueryFiltersSchema} and {@link SeatQuerySortsSchema} into a single schema
+ * for complete validation of filtering and sorting parameters.
  *
  * @example
  * ```ts
