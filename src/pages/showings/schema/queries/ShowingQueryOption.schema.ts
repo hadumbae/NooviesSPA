@@ -2,13 +2,17 @@ import { z } from "zod";
 import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import { MongooseSortOrderSchema } from "@/common/schema/enums/MongooseSortOrderSchema.ts";
-import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema.ts";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import { DateOnlyStringSchema } from "@/common/schema/dates/DateOnlyStringSchema.ts";
+import { CoercedBooleanValueSchema } from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import { ISO6391LanguageCodeEnum } from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
+import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import { ShowingStatusEnumSchema } from "@/pages/showings/schema/ShowingStatus.enum.ts";
 
 /**
- * Schema for filtering **movie showings** in queries.
+ * Schema defining filters for querying movie showings.
  *
- * Each field is optional. Filters can be applied individually or in combination.
+ * All fields are optional. Can filter by movie, theatre, screen, dates,
+ * price, language, subtitle languages, active status, special event flag, and status.
  *
  * @example
  * ```ts
@@ -37,32 +41,41 @@ export const ShowingQueryMatchFilterSchema = z.object({
     isSpecialEvent: CoercedBooleanValueSchema.optional(),
     /** Filter by active status */
     isActive: CoercedBooleanValueSchema.optional(),
+    /** Filter by primary language */
+    language: ISO6391LanguageCodeEnum.optional(),
+    /** Filter by subtitle languages */
+    subtitleLanguages: generateArraySchema(ISO6391LanguageCodeEnum).optional(),
+    /** Filter by showing status */
+    status: ShowingStatusEnumSchema.optional()
 });
 
 /**
- * Schema for sorting **movie showings** in queries.
+ * Schema defining sorting options for querying movie showings.
  *
- * Each field is optional. Use `1` for ascending or `-1` for descending order.
+ * Each field is optional. Use `1` for ascending and `-1` for descending order.
  *
  * @example
  * ```ts
  * const sort = {
- *   startTime: 1,
- *   ticketPrice: -1,
+ *   sortByStartTime: 1,
+ *   sortByTicketPrice: -1,
  * };
  * ```
  */
 export const ShowingQueryMatchSortSchema = z.object({
-    /** Sort by start time */
-    startTime: MongooseSortOrderSchema.optional(),
-    /** Sort by end time */
-    endTime: MongooseSortOrderSchema.optional(),
-    /** Sort by ticket price */
-    ticketPrice: MongooseSortOrderSchema.optional(),
+    sortByStartTime: MongooseSortOrderSchema.optional(),
+    sortByEndTime: MongooseSortOrderSchema.optional(),
+    sortByTicketPrice: MongooseSortOrderSchema.optional(),
+    sortByIsSpecialEvent: MongooseSortOrderSchema.optional(),
+    sortByIsActive: MongooseSortOrderSchema.optional(),
+    sortByStatus: MongooseSortOrderSchema.optional(),
 });
 
 /**
- * Combined schema for **showing query options** including filters and sort orders.
+ * Combined schema for movie showing query options including filters and sorting.
+ *
+ * @remarks
+ * Merges {@link ShowingQueryMatchFilterSchema} and {@link ShowingQueryMatchSortSchema}.
  *
  * @example
  * ```ts
@@ -70,7 +83,7 @@ export const ShowingQueryMatchSortSchema = z.object({
  *   movie: "movieId123",
  *   startTime: "2025-10-14",
  *   ticketPrice: 10,
- *   startTime: 1, // ascending
+ *   sortByStartTime: 1, // ascending
  * };
  * ```
  */

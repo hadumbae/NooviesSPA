@@ -1,80 +1,110 @@
 /**
- * @file ShowingDetailsPageContent.tsx
- *
- * @summary
- * Main content layout for the Showing Details admin page.
+ * @file ShowingDetailsPage.tsx
  *
  * @description
- * Composes the full details view for a single showing, including:
- * - Header and high-level showing metadata
- * - A summary details card
- * - A tabbed interface for extended information (e.g., seating, movie, references)
+ * Admin page responsible for fetching, validating, and rendering
+ * the Showing Details view.
  *
- * This component assumes that {@link ShowingDetailsPageContext} has already
- * been provided higher in the tree and focuses solely on layout and composition.
+ * This page:
+ * - Reads the showing ID from the route parameters
+ * - Fetches the showing and its associated seat maps
+ * - Combines multiple queries into a single loading and error boundary
+ * - Validates query results against Zod schemas
+ * - Provides validated data via {@link ShowingDetailsPageContextProvider}
+ *
+ * The actual UI rendering is delegated to
+ * {@link ShowingDetailsPageContent}.
  */
 
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import ShowingDetailsHeader from "@/pages/showings/components/headers/ShowingDetailsHeader.tsx";
-import ShowingDetailsCard from "@/pages/showings/components/details/ShowingDetailsCard.tsx";
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
-import SeatMapDetailsPanelContextProvider
-    from "@/pages/seatmap/context/details-panel-context/SeatMapDetailsPanelContextProvider.tsx";
-import ShowingDetailsPageSeatingTab from "@/pages/showings/pages/details-page/tabs/ShowingDetailsPageSeatingTab.tsx";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {
-    ShowingDetailsPageContext
-} from "@/pages/showings/context/showing-details-page-context/ShowingDetailsPageContext.ts";
+import {FC} from "react";
+
+import useFetchShowing from "@/pages/showings/hooks/queries/useFetchShowing.ts";
+import useFetchSeatMaps from "@/pages/seatmap/hooks/queries/useFetchSeatMaps.ts";
+
+import PageLoader from "@/common/components/page/PageLoader.tsx";
+import useFetchRouteParams from "@/common/hooks/router/useFetchRouteParams.ts";
+import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
+
+import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
+import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
+import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
+
+import {ShowingDetailsSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
+import {SeatMapDetailsArraySchema} from "@/pages/seatmap/schema/model/SeatMap.schema.ts";
+
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
+import {SeatMapDetails} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
+
+import ShowingDetailsPageContent from "@/pages/showings/pages/details-page/page/ShowingDetailsPageContent.tsx";
+import ShowingDetailsPageContextProvider
+    from "@/pages/showings/context/showing-details-page-context/ShowingDetailsPageContextProvider.tsx";
 
 /**
- * Renders the core content of the Showing Details page.
+ * Shape of validated query data passed to the page context.
+ */
+type QueryData = {
+    showing: ShowingDetails;
+    seating: SeatMapDetails[];
+};
+
+/**
+ * @component ShowingDetailsPage
+ *
+ * @description
+ * Entry point for the Showing Details admin page.
+ *
+ * Handles:
+ * - Route parameter validation
+ * - Parallel data fetching
+ * - Query loading and error boundaries
+ * - Schema validation of API responses
+ * - Context provisioning for child components
  *
  * @remarks
- * - Reads the active showing from {@link ShowingDetailsPageContext}
- * - Uses a tabbed layout to separate seating, movie, and reference information
- * - Wraps the seating tab with {@link SeatMapDetailsPanelContextProvider}
- *   to enable seat-map inspection and editing
- *
- * @returns
- * The full Showing Details page content layout.
+ * If route parameters are not yet available or invalid,
+ * a {@link PageLoader} is rendered until resolution.
  */
-const ShowingDetailsPageContent = () => {
-    const {showing} = useRequiredContext({
-        context: ShowingDetailsPageContext,
+const ShowingDetailsPage: FC = () => {
+    // --- Fetch Route Params ---
+    const routeParams = useFetchRouteParams({schema: IDRouteParamSchema});
+    if (!routeParams) return <PageLoader/>;
+
+    const {_id} = routeParams;
+
+    // --- Queries ---
+    const showingQuery = useFetchShowing({_id, populate: true, virtuals: true});
+    const seatingQuery = useFetchSeatMaps({
+        queries: {showing: _id},
+        populate: true,
+        virtuals: true,
     });
 
+    const queries = [showingQuery, seatingQuery];
+
+    const validatedQueries: CombinedSchemaQuery[] = [
+        {query: showingQuery, schema: ShowingDetailsSchema, key: "showing"},
+        {query: seatingQuery, schema: SeatMapDetailsArraySchema, key: "seating"},
+    ];
+
+    // --- Render ---
     return (
-        <PageFlexWrapper>
-            {/* Header */}
-            <ShowingDetailsHeader showing={showing}/>
+        <CombinedQueryBoundary queries={queries}>
+            <CombinedValidatedQueryBoundary queries={validatedQueries}>
+                {(data) => {
+                    const {showing, seating} = data as QueryData;
 
-            {/* Details Card */}
-            <ShowingDetailsCard showing={showing}/>
-
-            {/* Page Tabs */}
-            <Tabs defaultValue="seating-tab">
-                {/* Centered Tab Selector */}
-                <div className="flex justify-center">
-                    <TabsList>
-                        <TabsTrigger value="seating-tab">Seating</TabsTrigger>
-                        <TabsTrigger value="movie-tab">Movie</TabsTrigger>
-                        <TabsTrigger value="reference-tab">Theatre & Screen</TabsTrigger>
-                    </TabsList>
-                </div>
-
-                {/* Seating Tab */}
-                <SeatMapDetailsPanelContextProvider>
-                    <ShowingDetailsPageSeatingTab/>
-                </SeatMapDetailsPanelContextProvider>
-
-                {/* Movie Tab (placeholder) */}
-                <TabsContent value="movie-tab" />
-
-                {/* Theatre & Screen Tab (placeholder) */}
-                <TabsContent value="reference-tab" />
-            </Tabs>
-        </PageFlexWrapper>
+                    return (
+                        <ShowingDetailsPageContextProvider
+                            showing={showing}
+                            seating={seating}
+                        >
+                            <ShowingDetailsPageContent/>
+                        </ShowingDetailsPageContextProvider>
+                    );
+                }}
+            </CombinedValidatedQueryBoundary>
+        </CombinedQueryBoundary>
     );
 };
 
-export default ShowingDetailsPageContent;
+export default ShowingDetailsPage;

@@ -25,6 +25,9 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {
     ShowingDetailsPageContext
 } from "@/pages/showings/context/showing-details-page-context/ShowingDetailsPageContext.ts";
+import ShowingMovieTab from "@/pages/showings/pages/details-page/tabs/ShowingMovieTab.tsx";
+import ShowingDetailsPageReferenceTab
+    from "@/pages/showings/pages/details-page/tabs/ShowingDetailsPageReferenceTab.tsx";
 
 /**
  * Renders the core content of the Showing Details page.
@@ -42,6 +45,8 @@ const ShowingDetailsPageContent = () => {
     const {showing} = useRequiredContext({
         context: ShowingDetailsPageContext,
     });
+
+    const {movie: {_id: movieID}, screen: {_id: screenID}, theatre: {_id: theatreID}} = showing;
 
     return (
         <PageFlexWrapper>
@@ -68,10 +73,14 @@ const ShowingDetailsPageContent = () => {
                 </SeatMapDetailsPanelContextProvider>
 
                 {/* Movie Tab (placeholder) */}
-                <TabsContent value="movie-tab" />
+                <TabsContent value="movie-tab">
+                    <ShowingMovieTab movieID={movieID} />
+                </TabsContent>
 
                 {/* Theatre & Screen Tab (placeholder) */}
-                <TabsContent value="reference-tab" />
+                <TabsContent value="reference-tab">
+                    <ShowingDetailsPageReferenceTab screenID={screenID} theatreID={theatreID} />
+                </TabsContent>
             </Tabs>
         </PageFlexWrapper>
     );
