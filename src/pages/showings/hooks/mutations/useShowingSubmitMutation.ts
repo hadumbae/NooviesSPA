@@ -111,6 +111,10 @@ export default function useShowingSubmitMutation(
     const onSuccess = (showing: ShowingDetails) => {
         const message = editID ? "Showing updated." : "Showing submitted.";
         toast.success(successMessage ?? message);
+
+        queryClient.invalidateQueries({queryKey: ["fetch_single_showing", showing._id]})
+        queryClient.invalidateQueries({queryKey: "fetch_showings_by_query", exact: false})
+
         onSubmitSuccess?.(showing);
     };
 
@@ -133,31 +137,10 @@ export default function useShowingSubmitMutation(
         onSubmitError?.(error);
     };
 
-    /**
-     * Invalidates all relevant Showing-related queries once the mutation settles.
-     *
-     * @remarks
-     * Ensures cached lists and detail views remain consistent
-     * with the server state after create or update operations.
-     */
-    const onSettled = async () => {
-        const invalidateKeys = [
-            "fetch_showings_by_query",
-            "fetch_single_showing",
-        ];
-
-        await Promise.all(
-            invalidateKeys.map(key =>
-                queryClient.invalidateQueries({queryKey: key, exact: false})
-            )
-        );
-    };
-
     return useMutation({
         mutationKey,
         mutationFn: submitShowings,
         onSuccess,
         onError,
-        onSettled,
     });
 }

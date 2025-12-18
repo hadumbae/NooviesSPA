@@ -60,7 +60,7 @@ export default function useFetchShowings<TData = unknown>(
         initialData,
     } = options;
 
-    const queryKey = ["fetch_showings_by_query", queries];
+    const queryKey = ["fetch_showings_by_query"];
 
     const fetchShowingsByQuery = useQueryFnHandler({
         action: () => ShowingRepository.query({ queries }),

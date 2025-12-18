@@ -60,7 +60,7 @@ export default function useFetchShowing<TData = unknown>(
 ): UseQueryResult<TData, HttpResponseError> {
     const { _id, options = useQueryOptionDefaults(), ...requestOptions } = params;
 
-    const queryKey = ["fetch_single_showing", { _id, options: requestOptions }];
+    const queryKey = ["fetch_single_showing", _id];
 
     const fetchShowing = useQueryFnHandler({
         action: () => ShowingRepository.get({ _id, ...requestOptions }),
