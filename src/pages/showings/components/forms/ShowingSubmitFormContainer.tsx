@@ -1,16 +1,17 @@
 /**
- * @file ShowingSubmitFormContainer.tsx
- * @description
- * Container component managing the creation or editing of a `Showing`.
+ * Showing Submit Form Container
+ *
+ * Container component responsible for creating or editing a showing.
+ * Manages form state, multi-step flow, mutation logic, and persistence.
  *
  * Responsibilities:
- * - Initializes and manages form state via `useShowingSubmitForm`
- * - Sets up mutation logic with `useShowingSubmitMutation`
- * - Handles multi-step form steps and active fields
- * - Persists form state to `localStorage` and resets on successful submission
- * - Provides a clean API for UI components via `MultiStepForm`
+ * - Initialize form state via `useShowingSubmitForm`
+ * - Handle create/update mutations with `useShowingSubmitMutation`
+ * - Define and manage multi-step form configuration
+ * - Persist intermediate state in `localStorage`
+ * - Reset state and storage after successful submission
  *
- * Form Steps:
+ * Form steps:
  * 1. Details
  * 2. Languages
  * 3. Date & Time
@@ -19,27 +20,25 @@
  * @example
  * ```tsx
  * <ShowingSubmitFormContainer
- *     isEditing={true}
  *     entity={existingShowing}
  *     theatreTimezone="Asia/Bangkok"
- *     presetValues={{ title: "Sample Showing" }}
  *     onSubmitSuccess={(showing) => console.log("Submitted", showing)}
  * />
  * ```
  */
 
-import { FC } from "react";
+import {FC} from "react";
 
 import useShowingSubmitForm from "@/pages/showings/hooks/forms/useShowingSubmitForm.ts";
 import useShowingSubmitMutation from "@/pages/showings/hooks/mutations/useShowingSubmitMutation.ts";
 
-import { Showing } from "@/pages/showings/schema/showing/Showing.types.ts";
-import { FormOptions } from "@/common/type/form/HookFormProps.ts";
-import { IANATimezone } from "@/common/schema/date-time/IANATimezone.schema.ts";
-import { MutationEditByIDParams, MutationOnSubmitParams } from "@/common/type/form/MutationSubmitParams.ts";
-import { ShowingFormValues } from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
-import { FormStep } from "@/common/type/form/SteppedFormTypes.ts";
-import { ChevronRight, Clock, Languages, ListCollapse } from "lucide-react";
+import {Showing, ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
+import {FormOptions} from "@/common/type/form/HookFormProps.ts";
+import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
+import {FormStep} from "@/common/type/form/SteppedFormTypes.ts";
+import {ChevronRight, Clock, Languages, ListCollapse} from "lucide-react";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
 import {
     ShowingFormDateTimeValuesSchema,
@@ -58,136 +57,123 @@ import ShowingSubmitFormDateTimeFieldset
 import ShowingSubmitFormStatusFieldset
     from "@/pages/showings/components/forms/fieldsets/ShowingSubmitFormStatusFieldset.tsx";
 import getSchemaFieldKeys from "@/common/utility/features/zod/getSchemaFieldKeys.ts";
-import { ShowingForm } from "@/pages/showings/schema/form/ShowingForm.types.ts";
+import {ShowingForm} from "@/pages/showings/schema/form/ShowingForm.types.ts";
 import buildFormSubmitLog from "@/common/utility/features/logger/buildFormSubmitLog.ts";
 
 /**
- * Props used when the form is in editing mode.
+ * Editing-specific props for the submit form.
  *
- * @property isEditing - Whether the form is editing an existing `Showing` entity.
- * @property entity - The `Showing` entity currently being edited.
- * @property theatreTimezone - The theatre's IANA timezone, used for showing date/time calculations.
+ * When provided, the form operates in edit mode.
  */
 type ShowingEditingProps =
-    | { isEditing: true; entity: Showing; theatreTimezone: IANATimezone }
-    | { isEditing?: false; entity?: never; theatreTimezone?: never };
+    | { entity: Showing; theatreTimezone: IANATimezone }
+    | { entity?: never; theatreTimezone?: never };
 
 /**
- * Props for the `ShowingSubmitFormContainer` component.
+ * Props for {@link ShowingSubmitFormContainer}.
  *
- * Combines mutation callbacks, form options, and optional editing parameters.
- *
- * @template Showing - The entity type being submitted or updated.
- *
- * @property className - Optional CSS class for styling.
- * @property disableFields - Optional list of form field names to disable.
- * @property presetValues - Optional preset form values (default initialization).
- * @property onSubmitSuccess - Callback fired after successful submission.
- * @property onSubmitError - Callback fired after failed submission.
- * @property isEditing - Whether the form is in edit mode (affects prefilled values and mutation behavior).
- * @property entity - The `Showing` being edited, if applicable.
- * @property theatreTimezone - The timezone context for showing date/time fields.
+ * Combines form options, mutation callbacks, and optional editing context.
  */
 type SubmitContainerProps =
-    MutationOnSubmitParams<Showing> &
-    FormOptions<ShowingFormValues> &
-    ShowingEditingProps & {
+    MutationOnSubmitParams<ShowingDetails>
+    & FormOptions<ShowingFormValues>
+    & ShowingEditingProps
+    & {
+    /** Optional wrapper class name */
     className?: string;
 };
 
 /**
- * Container component managing the logic for creating or editing a `Showing`.
+ * Container component for submitting showing data.
  *
- * Features:
- * - Initializes multi-step form state and manages active fields
- * - Handles mutation logic for creating or updating showings
- * - Persists values in `localStorage` for step-by-step progress
- * - Resets form and clears `localStorage` after successful submission
- *
- * @template Showing - The type of entity being submitted or edited.
- *
- * @example
- * ```tsx
- * <ShowingSubmitFormContainer
- *     isEditing={true}
- *     entity={existingShowing}
- *     theatreTimezone="Asia/Bangkok"
- *     presetValues={{ title: "Sample Showing" }}
- *     onSubmitSuccess={(showing) => console.log("Submitted", showing)}
- * />
- * ```
+ * Orchestrates form state, step configuration, and submission lifecycle
+ * for both create and edit flows.
  */
 const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
-    const { isEditing, entity, theatreTimezone, disableFields, presetValues, ...onSubmitProps } = props;
-    const { onSubmitSuccess } = onSubmitProps;
+    const {entity: showing, theatreTimezone, disableFields, presetValues, ...onSubmitProps} = props;
+    const {onSubmitSuccess} = onSubmitProps;
 
-    // ⚡ Form ⚡
-    const formEditingProps = isEditing ? { showing: entity, theatreTimezone } : {};
-    const form = useShowingSubmitForm({ presetValues, ...formEditingProps });
+    // --- Setup ---
+    const formProps = showing ? {showing, theatreTimezone} : {};
+    const form = useShowingSubmitForm({presetValues, ...formProps});
 
-    // ⚡ Local Storage Key ⚡
-    const localStorageKey = "showing-submit-form";
+    const localStorageKey = showing
+        ? `edit-showing-submit-form-${showing._id}`
+        : "showing-submit-form";
 
-    // ⚡ Mutation Handlers ⚡
-    const resetOnSuccess = (showing: Showing) => {
-        localStorage.removeItem(localStorageKey);
-        form.reset();
-        onSubmitSuccess?.(showing);
-    };
-
-    const mutationProps: MutationEditByIDParams = isEditing
-        ? { isEditing: true, _id: entity._id }
-        : { isEditing: false };
-
-    const mutation = useShowingSubmitMutation({
-        form,
-        ...mutationProps,
-        ...onSubmitProps,
-        onSubmitSuccess: resetOnSuccess,
-    });
-
-    // ⚡ Active Fields ⚡
     const activeFields = getActiveSchemaInputFields({
         schema: ShowingFormValuesSchema,
-        disableFields,
+        disableFields
     });
 
-    // ⚡ Form Steps ⚡
+    // --- Steps ---
     const steps: FormStep<ShowingFormValues>[] = [
         {
             title: "Details",
             stepCount: 1,
             icon: ListCollapse,
-            component: <ShowingSubmitFormDetailsFieldset form={form} activeFields={activeFields} />,
             fields: getSchemaFieldKeys(ShowingFormDetailValuesSchema),
+            component: (
+                <ShowingSubmitFormDetailsFieldset
+                    activeFields={activeFields}
+                    form={form}
+                />
+            ),
         },
         {
             title: "Languages",
             stepCount: 2,
             icon: Languages,
-            component: <ShowingSubmitFormLanguagesFieldset form={form} activeFields={activeFields} />,
             fields: getSchemaFieldKeys(ShowingFormLanguageValuesSchema),
+            component: (
+                <ShowingSubmitFormLanguagesFieldset
+                    activeFields={activeFields}
+                    form={form}
+                />
+            ),
         },
         {
             title: "Date & Time",
             stepCount: 3,
             icon: Clock,
-            component: <ShowingSubmitFormDateTimeFieldset form={form} activeFields={activeFields} />,
             fields: getSchemaFieldKeys(ShowingFormDateTimeValuesSchema),
+            component: (
+                <ShowingSubmitFormDateTimeFieldset
+                    activeFields={activeFields}
+                    form={form}
+                />
+            ),
         },
         {
             title: "Status",
             stepCount: 4,
             icon: ChevronRight,
-            component: <ShowingSubmitFormStatusFieldset form={form} activeFields={activeFields} />,
             fields: getSchemaFieldKeys(ShowingFormStatusValuesSchema),
+            component: (
+                <ShowingSubmitFormStatusFieldset
+                    activeFields={activeFields}
+                    form={form}
+                />
+            ),
         },
     ];
 
+    // --- Mutation & Submit Handler ---
+    const resetOnSuccess = (data: ShowingDetails) => {
+        localStorage.removeItem(localStorageKey);
+        form.reset();
+        onSubmitSuccess?.(data);
+    };
+
+    const mutation = useShowingSubmitMutation({
+        form,
+        editID: showing?._id,
+        ...onSubmitProps,
+        onSubmitSuccess: resetOnSuccess,
+    });
+
     /**
-     * Handles submission of the form by invoking the mutation with validated values.
-     *
-     * @param values - Validated `ShowingFormValues` to submit.
+     * Submits validated form values to the mutation handler.
      */
     const onFormSubmit = (values: ShowingFormValues) => {
         buildFormSubmitLog({
@@ -198,6 +184,7 @@ const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
         mutation.mutate(values as ShowingForm);
     };
 
+    // --- Render ---
     return (
         <MultiStepForm
             localStorageKey={localStorageKey}

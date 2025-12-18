@@ -21,7 +21,7 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import ShowingCreateHeader from "@/pages/showings/components/features/showing-create-page/ShowingCreateHeader.tsx";
 import ShowingSubmitFormContainer from "@/pages/showings/components/forms/ShowingSubmitFormContainer.tsx";
 import { Card, CardContent } from "@/common/components/ui/card.tsx";
-import { Showing } from "@/pages/showings/schema/showing/Showing.types.ts";
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 import ShowingCreateBreadcrumbs
     from "@/pages/showings/components/features/showing-create-page/ShowingCreateBreadcrumbs.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
@@ -48,7 +48,7 @@ const ShowingCreatePage: FC = () => {
      *
      * @param showing - The newly created `Showing` object.
      */
-    const onSubmit = (showing: Showing) => {
+    const onSubmit = (showing: ShowingDetails) => {
         navigate({
             level: "log",
             to: `/admin/showings/get/${showing._id}`,

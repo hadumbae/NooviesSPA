@@ -1,103 +1,127 @@
-import {UseFormReturn} from "react-hook-form";
-import {ShowingSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
+/**
+ * @file useShowingSubmitMutation.ts
+ *
+ * @summary
+ * React Query mutation hook for creating or updating a Showing.
+ *
+ * @description
+ * Encapsulates the full submission lifecycle for Showing form data, including:
+ * - Creating or updating a showing via {@link ShowingRepository}
+ * - Runtime schema validation of API responses using {@link ShowingDetailsSchema}
+ * - Success and error feedback handling
+ * - Automatic cache invalidation for affected showing queries
+ *
+ * This hook is designed to be used alongside a controlled form (e.g. React Hook Form)
+ * and integrates cleanly with standardized mutation submit parameters.
+ */
+
+import {ShowingDetailsSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
-import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {ShowingForm} from "@/pages/showings/schema/form/ShowingForm.types.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {SubmitMutationParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
 
 /**
  * Combined parameters for the showing submission mutation.
  *
- * Extends form mutation configuration with editing and submission behavior.
+ * @remarks
+ * Extends {@link SubmitMutationParams} with Showing-specific
+ * form values and response typing.
  */
-type SubmitMutationParams = MutationOnSubmitParams<Showing> &
-    MutationEditByIDParams & {
-    /** React Hook Form instance for managing showing form state. */
-    form: UseFormReturn<ShowingFormValues>;
-};
+type SubmitParams = SubmitMutationParams<ShowingFormValues, ShowingDetails>;
 
 /**
- * Custom React Query mutation hook for creating or updating a showing record.
+ * Provides a mutation for submitting Showing form data.
  *
  * @remarks
- * This hook abstracts form submission logic for the `Showing` entity.
- * It performs schema validation, handles success/error feedback,
- * and invalidates relevant cached queries upon completion.
+ * - Automatically switches between create and update operations based on `editID`
+ * - Validates server responses against {@link ShowingDetailsSchema}
+ * - Displays toast feedback on success
+ * - Maps API validation errors back onto the form
+ * - Invalidates all relevant Showing-related queries after completion
  *
- * @param params - Configuration for mutation behavior and form handling.
- * @returns A React Query `UseMutationResult` that represents the mutation state and helpers.
+ * @param params - Mutation configuration, form instance, and lifecycle callbacks.
+ *
+ * @returns
+ * A React Query {@link UseMutationResult} for the Showing submission operation.
  *
  * @example
- * ```tsx
- * const form = useForm<ShowingSubmit>({...});
- *
+ * ```ts
  * const mutation = useShowingSubmitMutation({
  *   form,
- *   isEditing: !!id,
- *   _id: id,
- *   successMessage: "Showing saved!",
- *   onSubmitSuccess: data => console.log("Submitted:", data),
+ *   editID,
+ *   successMessage: "Showing saved successfully",
  * });
  *
  * form.handleSubmit(values => mutation.mutate(values));
  * ```
  */
 export default function useShowingSubmitMutation(
-    params: SubmitMutationParams
-): UseMutationResult<Showing, unknown, ShowingForm> {
+    params: SubmitParams
+): UseMutationResult<ShowingDetails, unknown, ShowingForm> {
     const {
         form,
-        isEditing,
-        _id,
+        editID,
         onSubmitSuccess,
         onSubmitError,
         successMessage,
         errorMessage,
     } = params;
 
-    const mutationKey = ['submit_showing_data'];
+    const mutationKey = ["submit_showing_data"];
     const queryClient = useQueryClient();
+    const queryOptions = {populate: true, virtuals: true};
 
     /**
-     * Executes the create or update API request for showing data.
-     * Validates response data using `ShowingSchema` before returning.
+     * Executes the create or update request for a Showing.
      *
-     * @throws Error if schema validation fails or repository call errors.
+     * @param values - Validated form values to submit.
+     *
+     * @throws
+     * Throws if the repository request fails or if schema validation does not pass.
      */
     const submitShowings = async (values: ShowingForm) => {
-        const action = isEditing
-            ? () => ShowingRepository.update({_id, data: values})
-            : () => ShowingRepository.create({data: values});
+        const action = editID
+            ? () => ShowingRepository.update({_id: editID, data: values, ...queryOptions})
+            : () => ShowingRepository.create({data: values, ...queryOptions});
 
         const {result} = await action();
 
         const {data: parsedData, success, error} = validateData({
             data: result,
-            schema: ShowingSchema,
+            schema: ShowingDetailsSchema,
             message: "Invalid data received. Please try again.",
         });
 
         if (!success) throw error;
+
         return parsedData;
     };
 
     /**
-     * Handles successful submission.
-     * Displays a toast and triggers optional external callback.
+     * Handles successful mutation completion.
+     *
+     * @param showing - The validated Showing returned from the API.
      */
-    const onSuccess = (showing: Showing) => {
-        toast.success(successMessage ?? "Showing data submitted.");
+    const onSuccess = (showing: ShowingDetails) => {
+        const message = editID ? "Showing updated." : "Showing submitted.";
+        toast.success(successMessage ?? message);
         onSubmitSuccess?.(showing);
     };
 
     /**
-     * Handles submission errors.
-     * Maps server validation errors back to form fields and triggers optional callback.
+     * Handles mutation errors.
+     *
+     * @param error - The error thrown during submission.
+     *
+     * @remarks
+     * Attempts to map backend validation errors back to the form
+     * and displays a fallback error message when necessary.
      */
     const onError = (error: unknown) => {
         handleMutationFormError({
@@ -110,8 +134,11 @@ export default function useShowingSubmitMutation(
     };
 
     /**
-     * Invalidates related showing queries on mutation settlement.
-     * Ensures UI data stays consistent with server state.
+     * Invalidates all relevant Showing-related queries once the mutation settles.
+     *
+     * @remarks
+     * Ensures cached lists and detail views remain consistent
+     * with the server state after create or update operations.
      */
     const onSettled = async () => {
         const invalidateKeys = [
@@ -120,8 +147,8 @@ export default function useShowingSubmitMutation(
         ];
 
         await Promise.all(
-            invalidateKeys.map(k =>
-                queryClient.invalidateQueries({queryKey: k, exact: false})
+            invalidateKeys.map(key =>
+                queryClient.invalidateQueries({queryKey: key, exact: false})
             )
         );
     };

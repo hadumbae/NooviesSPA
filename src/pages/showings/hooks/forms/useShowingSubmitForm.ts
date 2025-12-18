@@ -19,7 +19,6 @@ import {ShowingFormSchema} from "@/pages/showings/schema/form/ShowingForm.schema
 import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 import getShowingDateAndTime from "@/common/utility/date-and-time/getShowingDateAndTime.ts";
-import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
 
 /**
@@ -87,6 +86,7 @@ export default function useShowingSubmitForm(
 ): UseFormReturn<ShowingFormValues> {
     const {showing, theatreTimezone, presetValues} = params;
 
+    // --- Date And Time ---
     const formattedDateAndTime = showing
         ? getShowingDateAndTime({
             startTime: showing.startTime,
@@ -95,25 +95,30 @@ export default function useShowingSubmitForm(
         })
         : null;
 
+    // --- Default Values ---
     const defaultValues: ShowingFormValues = {
-        startAtTime: getDefaultValue(presetValues?.startAtTime, formattedDateAndTime?.startAtTime, ""),
-        startAtDate: getDefaultValue(presetValues?.startAtDate, formattedDateAndTime?.startAtDate, ""),
-        endAtTime: getDefaultValue(presetValues?.endAtTime, formattedDateAndTime?.endAtTime, ""),
-        endAtDate: getDefaultValue(presetValues?.endAtDate, formattedDateAndTime?.endAtDate, ""),
-        ticketPrice: getDefaultValue(presetValues?.ticketPrice, showing?.ticketPrice, ""),
-        language: getDefaultValue(presetValues?.language, showing?.language, ""),
-        subtitleLanguages: getDefaultValue(presetValues?.subtitleLanguages, showing?.subtitleLanguages, []),
-        isSpecialEvent: getDefaultValue(presetValues?.isSpecialEvent, showing?.isSpecialEvent, ""),
-        isActive: getDefaultValue(presetValues?.isActive, showing?.isActive, ""),
-        movie: getDefaultValue(presetValues?.movie, showing?.movie, ""),
-        theatre: getDefaultValue(presetValues?.theatre, showing?.theatre, ""),
-        screen: getDefaultValue(presetValues?.screen, showing?.screen, ""),
-        status: getDefaultValue(presetValues?.status, showing?.status, "SCHEDULED"),
-        theatreCity: presetValues?.theatreCity ?? "",
-        theatreState: presetValues?.theatreState ?? "",
-        theatreCountry: presetValues?.theatreCountry ?? undefined,
+        startAtTime: "",
+        startAtDate: "",
+        endAtTime: "",
+        endAtDate: "",
+        ticketPrice: "",
+        language: "",
+        subtitleLanguages: [],
+        isSpecialEvent: "",
+        isActive: "",
+        movie: "",
+        theatre: "",
+        screen: "",
+        status: "SCHEDULED",
+        theatreCity: "",
+        theatreState: "",
+        theatreCountry: undefined,
+        ...showing,
+        ...formattedDateAndTime,
+        ...presetValues,
     };
 
+    // --- Form ---
     return useForm<ShowingFormValues>({
         resolver: zodResolver(ShowingFormSchema),
         defaultValues,
