@@ -1,71 +1,35 @@
 /**
  * @file useShowingSubmitForm.ts
- * @description
- * Custom hook for initializing a `react-hook-form` instance for creating or editing a Showing.
+ *
+ * Custom hook for initializing a `react-hook-form` instance used to
+ * create or edit a Showing.
  *
  * Features:
- * - Integrates `zodResolver` with {@link ShowingFormSchema} for validation.
- * - Computes `defaultValues` dynamically from:
- *   1. `presetValues` (highest priority)
- *   2. `showing` (existing entity data)
- *   3. Hardcoded empty/default values
- * - Converts UTC showing times to the theatre’s local timezone when editing, using {@link getShowingDateAndTime}.
- * - Returns a fully typed `UseFormReturn<ShowingFormValues>` for use with React Hook Form.
+ * - Integrates `zodResolver` with {@link ShowingFormSchema} for validation
+ * - Computes `defaultValues` via {@link useShowingSubmitFormDefaultValues}
+ * - Supports both create and edit workflows through a single API
+ * - Returns a fully typed `UseFormReturn<ShowingFormValues>`
  */
 
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {ShowingFormSchema} from "@/pages/showings/schema/form/ShowingForm.schema.ts";
-import {Showing} from "@/pages/showings/schema/showing/Showing.types.ts";
-import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
-import getShowingDateAndTime from "@/common/utility/date-and-time/getShowingDateAndTime.ts";
 import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
+import {UseShowingFormParams} from "@/pages/showings/hooks/forms/useShowingSubmitForm.types.ts";
+import useShowingSubmitFormDefaultValues from "@/pages/showings/hooks/forms/useShowingSubmitFormDefaultValues.ts";
 
 /**
- * Parameters for {@link useShowingSubmitForm} when editing an existing showing.
- */
-type EditingParams =
-    | {
-    /** The showing being edited. */
-    showing: Showing;
-
-    /** Theatre’s IANA timezone for localizing showtime fields. */
-    theatreTimezone: IANATimezone;
-}
-    | {
-    /** Not provided when creating a new showing. */
-    showing?: never;
-
-    /** Not provided when creating a new showing. */
-    theatreTimezone?: never;
-};
-
-/**
- * Parameters accepted by {@link useShowingSubmitForm}.
- */
-type SubmitFormParams = EditingParams & {
-    /**
-     * Optional preset values to prefill specific form fields before defaulting
-     * to `showing` data or hardcoded empty defaults.
-     */
-    presetValues?: Partial<ShowingFormValues>;
-};
-
-/**
- * Initializes a `react-hook-form` instance for the Showing form.
+ * Initializes a `react-hook-form` instance for the showing submit form.
  *
- * @description
- * Returns a fully configured form instance with validation and default values.
- * This hook handles both **creating a new showing** and **editing an existing showing**.
+ * This hook abstracts form setup logic for both:
+ * - Creating a new showing
+ * - Editing an existing showing
  *
- * @param {SubmitFormParams} [params] - Optional parameters for form initialization.
- * @param {Showing} [params.showing] - Existing showing to prefill the form (editing mode).
- * @param {IANATimezone} [params.theatreTimezone] - Theatre timezone for converting UTC times.
- * @param {Partial<ShowingFormValues>} [params.presetValues] - Optional preset field values.
+ * Validation is handled via Zod, and default values are resolved
+ * dynamically based on the provided parameters.
  *
- * @returns {UseFormReturn<ShowingFormValues>} A `react-hook-form` instance with:
- * - `resolver`: zodResolver configured with {@link ShowingFormSchema}.
- * - `defaultValues`: computed defaults from `presetValues`, `showing`, or empty values.
+ * @param params - Parameters controlling form initialization
+ * @returns A configured `react-hook-form` instance for showing submission
  *
  * @example
  * ```ts
@@ -82,43 +46,10 @@ type SubmitFormParams = EditingParams & {
  * ```
  */
 export default function useShowingSubmitForm(
-    params: SubmitFormParams = {}
+    params: UseShowingFormParams
 ): UseFormReturn<ShowingFormValues> {
-    const {showing, theatreTimezone, presetValues} = params;
+    const defaultValues = useShowingSubmitFormDefaultValues(params);
 
-    // --- Date And Time ---
-    const formattedDateAndTime = showing
-        ? getShowingDateAndTime({
-            startTime: showing.startTime,
-            endTime: showing.endTime,
-            theatreTimezone,
-        })
-        : null;
-
-    // --- Default Values ---
-    const defaultValues: ShowingFormValues = {
-        startAtTime: "",
-        startAtDate: "",
-        endAtTime: "",
-        endAtDate: "",
-        ticketPrice: "",
-        language: "",
-        subtitleLanguages: [],
-        isSpecialEvent: "",
-        isActive: "",
-        movie: "",
-        theatre: "",
-        screen: "",
-        status: "SCHEDULED",
-        theatreCity: "",
-        theatreState: "",
-        theatreCountry: undefined,
-        ...showing,
-        ...formattedDateAndTime,
-        ...presetValues,
-    };
-
-    // --- Form ---
     return useForm<ShowingFormValues>({
         resolver: zodResolver(ShowingFormSchema),
         defaultValues,

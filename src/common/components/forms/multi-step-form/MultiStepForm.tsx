@@ -27,14 +27,19 @@
  * ```
  */
 
-import { useEffect, useState } from "react";
-import { FormStep } from "@/common/type/form/SteppedFormTypes.ts";
-import { FieldValues, FormProvider, SubmitHandler, UseFormReturn } from "react-hook-form";
+import {useEffect, useState} from "react";
+import {FormStep} from "@/common/type/form/SteppedFormTypes.ts";
+import {DeepPartial, FieldValues, FormProvider, SubmitHandler, UseFormReturn} from "react-hook-form";
 import MultiStepFormProgressIndicator
     from "@/common/components/forms/multi-step-form/progress-indicator/MultiStepFormProgressIndicator.tsx";
-import { MultiStepFormContext, MultiStepFormContextValues } from "@/common/context/multi-step-form/MultiStepFormContext.ts";
-import { ScrollArea, ScrollBar } from "@/common/components/ui/scroll-area.tsx";
+import {
+    MultiStepFormContext,
+    MultiStepFormContextValues
+} from "@/common/context/multi-step-form/MultiStepFormContext.ts";
+import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import MultiStepFormStepButtons from "@/common/components/forms/multi-step-form/MultiStepFormStepButtons.tsx";
+import useDebouncedCallback from "@/common/hooks/useDebouncedCallback.tsx";
+import useFormInitialValues from "@/common/hooks/forms/useFormInitialValues.tsx";
 
 /**
  * Props for the `MultiStepForm` component.
@@ -77,16 +82,18 @@ type FormProps<TValues extends FieldValues> = {
  * ```
  */
 const MultiStepForm = <TValues extends FieldValues>(props: FormProps<TValues>) => {
-    const { form, submitHandler, steps, localStorageKey } = props;
-    const { trigger, reset } = form;
+    const {form, submitHandler, steps, localStorageKey} = props;
+    const {trigger, reset} = form;
 
-    // ⚡ State ⚡
+    // --- State ---
 
+    const initialValues = useFormInitialValues({form});
     const [isHydrated, setIsHydrated] = useState<boolean>(false);
     const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
+
     const currentStep = steps[currentStepIndex];
 
-    // ⚡ Hydrate From Local Storage ⚡
+    // --- Hydrate From Local Storage ---
 
     useEffect(() => {
         try {
@@ -95,28 +102,32 @@ const MultiStepForm = <TValues extends FieldValues>(props: FormProps<TValues>) =
             if (saved) {
                 const parsed = JSON.parse(saved);
                 reset(parsed);
-                setIsHydrated(true);
             }
+
+            setIsHydrated(true);
         } catch (error: unknown) {
             reset();
         }
     }, [reset, currentStepIndex]);
 
-    // ⚡ Persist Values On Change ⚡
+    // --- Persist Values On Change ---
+
+    const debouncedWatch = useDebouncedCallback((values: DeepPartial<TValues>) => {
+        localStorage.setItem(localStorageKey, JSON.stringify(values[0]));
+    });
 
     useEffect(() => {
         if (!isHydrated) return;
 
-        const subscription = form.watch((newValues) => {
-            localStorage.setItem(localStorageKey, JSON.stringify(newValues));
-        });
+        const subscription = form.watch((newValues) => debouncedWatch(newValues));
 
         return () => subscription.unsubscribe();
     }, [form, isHydrated, localStorageKey]);
 
-    // ⚡ Helpers ⚡
+    // --- Helpers ---
 
     const isFirstStep = () => currentStepIndex === 0;
+
     const isLastStep = () => currentStepIndex === steps.length - 1;
 
     const changeStep = async (direction: 1 | -1) => {
@@ -132,9 +143,15 @@ const MultiStepForm = <TValues extends FieldValues>(props: FormProps<TValues>) =
         }
     };
 
-    // ⚡ Context Values ⚡
+    const resetForm = () => {
+        initialValues.current && reset(initialValues.current);
+        setCurrentStepIndex(0);
+    }
+
+    // --- Context Values ---
 
     const contextValues: MultiStepFormContextValues<TValues> = {
+        initialValues: initialValues.current,
         isHydrated,
         steps,
         currentStep,
@@ -142,23 +159,24 @@ const MultiStepForm = <TValues extends FieldValues>(props: FormProps<TValues>) =
         isFirstStep,
         isLastStep,
         changeStep,
+        resetForm,
     };
 
-    // ⚡ Render ⚡
+    // --- Render ---
 
     return (
         <MultiStepFormContext.Provider value={contextValues}>
             <FormProvider {...form}>
                 <div className="p-3 md:p-10 space-y-5">
                     <ScrollArea className="w-full py-5">
-                        <MultiStepFormProgressIndicator />
-                        <ScrollBar orientation="horizontal" />
+                        <MultiStepFormProgressIndicator/>
+                        <ScrollBar orientation="horizontal"/>
                     </ScrollArea>
 
                     <form onSubmit={form.handleSubmit(submitHandler)} className="space-y-3">
                         {currentStep.component}
 
-                        <MultiStepFormStepButtons />
+                        <MultiStepFormStepButtons/>
                     </form>
                 </div>
             </FormProvider>

@@ -59,6 +59,7 @@ import ShowingSubmitFormStatusFieldset
 import getSchemaFieldKeys from "@/common/utility/features/zod/getSchemaFieldKeys.ts";
 import {ShowingForm} from "@/pages/showings/schema/form/ShowingForm.types.ts";
 import buildFormSubmitLog from "@/common/utility/features/logger/buildFormSubmitLog.ts";
+import useFormInitialValues from "@/common/hooks/forms/useFormInitialValues.tsx";
 
 /**
  * Editing-specific props for the submit form.
@@ -105,6 +106,8 @@ const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
         schema: ShowingFormValuesSchema,
         disableFields
     });
+
+    const initialValues = useFormInitialValues({form});
 
     // --- Steps ---
     const steps: FormStep<ShowingFormValues>[] = [
@@ -161,7 +164,7 @@ const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
     // --- Mutation & Submit Handler ---
     const resetOnSuccess = (data: ShowingDetails) => {
         localStorage.removeItem(localStorageKey);
-        form.reset();
+        initialValues.current && form.reset(initialValues.current);
         onSubmitSuccess?.(data);
     };
 

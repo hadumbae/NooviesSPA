@@ -1,15 +1,16 @@
 /**
  * @file MultiStepFormStepButtons.tsx
- * @description
- * Renders navigation buttons for a multi-step (wizard) form.
  *
- * The component:
- * - Shows a **Back** button unless the user is on the first step
- * - Shows a **Next** button unless the user is on the last step
- * - Shows a **Submit** button only on the final step
+ * Renders navigation controls for a multi-step (wizard-style) form.
  *
- * Navigation is driven by `changeStep()` and state helpers (`isFirstStep`, `isLastStep`)
- * provided by `useMultiStepFormContext`.
+ * The component conditionally displays:
+ * - **Back** button — hidden on the first step
+ * - **Next** button — hidden on the final step
+ * - **Submit** button — shown only on the final step
+ * - **Reset** button — always shown, clears form and step state
+ *
+ * Navigation and state are driven by helpers exposed from
+ * {@link useMultiStepFormContext}.
  *
  * @example
  * ```tsx
@@ -17,43 +18,68 @@
  * ```
  */
 
-import { FC } from "react";
+import {FC} from "react";
 import useMultiStepFormContext from "@/common/hooks/context/useMultiStepFormContext.ts";
-import { Button } from "@/common/components/ui/button.tsx";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {Button} from "@/common/components/ui/button.tsx";
+import {ChevronLeft, ChevronRight, RefreshCw} from "lucide-react";
 
 /**
- * Renders the set of navigation buttons used within a multi-step form:
+ * Multi-step form navigation button group.
  *
- * - **Back** button: appears on all steps except the first
- * - **Next** button: appears on all steps except the last
- * - **Submit** button: appears only on the final step
+ * Uses the multi-step form context to:
+ * - Determine the current step position
+ * - Navigate between steps
+ * - Reset the entire form flow
  *
- * Uses the multi-step form context to determine which buttons to render and
- * to perform navigation actions.
+ * Expected to be rendered inside a `<form>` element wrapped by
+ * `MultiStepFormProvider`.
  *
  * @example
  * ```tsx
- * // Inside a <form> element within a MultiStepFormProvider:
- * <MultiStepFormStepButtons />
+ * // Inside a MultiStepFormProvider
+ * <form onSubmit={form.handleSubmit(onSubmit)}>
+ *   <MultiStepFormStepButtons />
+ * </form>
  * ```
  */
 const MultiStepFormStepButtons: FC = () => {
-    const { isLastStep, isFirstStep, changeStep } = useMultiStepFormContext();
+    const {
+        isLastStep,
+        isFirstStep,
+        changeStep,
+        resetForm,
+    } = useMultiStepFormContext();
 
     return (
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
             {!isFirstStep() ? (
-                <Button variant="secondary" type="button" onClick={() => changeStep(-1)}>
-                    <ChevronLeft />
+                <Button
+                    variant="secondary"
+                    type="button"
+                    onClick={() => changeStep(-1)}
+                >
+                    <ChevronLeft/>
                 </Button>
             ) : (
-                <div></div>
+                <div/>
             )}
 
+            <Button
+                variant="outline"
+                type="button"
+                onClick={() => resetForm()}
+                aria-label="Reset form"
+            >
+                <RefreshCw className="hover:animate-spin"/>
+            </Button>
+
             {!isLastStep() && (
-                <Button variant="secondary" type="button" onClick={() => changeStep(1)}>
-                    <ChevronRight />
+                <Button
+                    variant="secondary"
+                    type="button"
+                    onClick={() => changeStep(1)}
+                >
+                    <ChevronRight/>
                 </Button>
             )}
 
