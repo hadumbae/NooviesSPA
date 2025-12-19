@@ -1,51 +1,86 @@
 import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 
 /**
- * Common request options to control population of related fields, inclusion of virtuals,
- * and optional limits on returned results.
+ * @summary
+ * Common options for shaping request responses.
+ *
+ * @description
+ * Controls population of related entities, inclusion of virtual fields,
+ * and optional result limiting for non-paginated queries.
  */
 export type RequestOptions = {
     /**
-     * Whether to populate referenced documents (e.g., foreign keys).
+     * Populate referenced documents (e.g. relations / foreign keys).
      */
     populate?: boolean;
 
     /**
-     * Whether to include virtual properties in the response.
+     * Include virtual properties in the response payload.
      */
     virtuals?: boolean;
 
     /**
-     * Optional limit for the number of results (primarily for non-paginated queries).
+     * Maximum number of results to return.
+     *
+     * @remarks
+     * Intended primarily for non-paginated queries.
      */
     limit?: number;
 };
 
 /**
- * Parameters controlling whether a query should return paginated results.
+ * @summary
+ * Pagination configuration for queries.
  *
- * - If `paginated` is `true`, then both `page` and `perPage` are required.
- * - If `paginated` is `false` or omitted, pagination is disabled and `page`/`perPage` must not be present.
+ * @description
+ * Enforces mutually exclusive pagination states:
+ *
+ * - When `paginated` is `true`, both `page` and `perPage` are required.
+ * - When `paginated` is `false` or omitted, pagination is disabled and
+ *   pagination fields are forbidden.
  */
-export type RequestPaginationOptions = {
+export type RequestPaginationOptions =
+    | {
+    /**
+     * Enable pagination.
+     */
     paginated: true;
+
+    /**
+     * Current page index (1-based).
+     */
     page: number;
+
+    /**
+     * Number of items per page.
+     */
     perPage: number;
-} | {
+}
+    | {
+    /**
+     * Disable pagination.
+     */
     paginated?: false;
     page?: never;
     perPage?: never;
 };
 
 /**
- * Parameters used to construct a flexible entity query,
- * supporting filtering, population, virtuals, and pagination.
+ * @summary
+ * Generic query options for entity-based requests.
  *
- * @template TFilters - The shape of the filter object. Defaults to {@link RequestQueryFilters}.
+ * @description
+ * Combines filtering, request shaping options, and optional pagination
+ * into a single query object.
+ *
+ * @template TFilters
+ * Shape of the filter object applied to the query.
+ *
+ * @defaultValue {@link RequestQueryFilters}
  */
 export type RequestQueryOptions<TFilters = RequestQueryFilters> = {
     /**
-     * A combination of filters, request options, and optional pagination settings.
+     * Query parameters including filters, options, and pagination rules.
      */
-    queries: TFilters & RequestOptions & RequestPaginationOptions;
+    queries?: TFilters & RequestOptions & RequestPaginationOptions;
 };

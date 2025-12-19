@@ -14,16 +14,19 @@ import {
 import { RequestQueryOptions } from "@/common/type/request/RequestOptions.ts";
 
 /**
- * Creates a standardized HTTP request repository for a specific resource endpoint.
+ * @file createRequestRepository.ts
  *
- * @remarks
- * This factory returns an object implementing {@link IRequestRepository}, providing generic
- * CRUD operations (`getAll`, `paginated`, `get`, `create`, `update`, `delete`) and a `query`
- * method. All requests use `useFetchAPI` internally, and URLs are automatically constructed
- * with query parameters via `buildQueryURL`.
+ * @summary
+ * Factory for creating a standardized HTTP request repository.
  *
- * @param baseURL - The base API endpoint for the resource (e.g., "/api/users").
- * @returns An object implementing {@link IRequestRepository}.
+ * @description
+ * Produces an {@link IRequestRepository} bound to a specific API resource.
+ * All requests:
+ * - Use {@link useFetchAPI} for transport
+ * - Build URLs via {@link buildQueryURL}
+ * - Omit nullish query parameters automatically
+ *
+ * Supported operations include CRUD, pagination, and flexible querying.
  *
  * @example
  * ```ts
@@ -31,42 +34,58 @@ import { RequestQueryOptions } from "@/common/type/request/RequestOptions.ts";
  * const { result } = await UserRepository.getAll({ populate: true });
  * ```
  */
-export const createRequestRepository = ({ baseURL }: { baseURL: string }): IRequestRepository => ({
+export const createRequestRepository = (
+    { baseURL }: { baseURL: string }
+): IRequestRepository => ({
     /**
-     * Fetches all resources, optionally filtered or enriched with virtual/populated fields.
+     * Fetch all entities without pagination.
      *
-     * @param params - Optional query and request options.
-     * @returns A promise resolving to {@link RequestReturns} containing all results.
+     * @param params
+     * Optional filters and request options.
      */
-    async getAll<TResult = unknown>(params?: GetEntitiesParams): Promise<RequestReturns<TResult>> {
-        const { queries = {}, ...options } = params || {};
-        const urlQueries = filterNullishAttributes({ paginated: false, ...queries, ...options });
+    async getAll<TResult = unknown>(
+        params?: GetEntitiesParams
+    ): Promise<RequestReturns<TResult>> {
+        const { queries, ...options } = params || {};
+        const urlQueries = filterNullishAttributes({
+            paginated: false,
+            ...queries,
+            ...options,
+        });
 
         const url = buildQueryURL({ baseURL, path: "query", queries: urlQueries });
         return useFetchAPI({ url, method: "GET" });
     },
 
     /**
-     * Fetches resources with pagination.
+     * Fetch entities using pagination.
      *
-     * @param params - Pagination and filter options.
-     * @returns A promise resolving to {@link RequestReturns} containing paginated results.
+     * @param params
+     * Pagination, filters, and request options.
      */
-    async paginated<TResult = unknown>(params: GetPaginatedEntitiesParams): Promise<RequestReturns<TResult>> {
+    async paginated<TResult = unknown>(
+        params: GetPaginatedEntitiesParams
+    ): Promise<RequestReturns<TResult>> {
         const { queries, ...options } = params;
-        const urlQueries = filterNullishAttributes({ paginated: true, ...options, ...queries });
+        const urlQueries = filterNullishAttributes({
+            paginated: true,
+            ...options,
+            ...queries,
+        });
 
         const url = buildQueryURL({ baseURL, path: "query", queries: urlQueries });
         return useFetchAPI({ url, method: "GET" });
     },
 
     /**
-     * Fetches a single resource by its unique ID.
+     * Fetch a single entity by ID.
      *
-     * @param params - Parameters including `_id` and optional populate/virtuals flags.
-     * @returns A promise resolving to {@link RequestReturns} with the single resource.
+     * @param params
+     * Entity identifier and optional request options.
      */
-    async get<TResult = unknown>(params: GetEntityByIDParams): Promise<RequestReturns<TResult>> {
+    async get<TResult = unknown>(
+        params: GetEntityByIDParams
+    ): Promise<RequestReturns<TResult>> {
         const { _id, populate, virtuals } = params;
         const queries = filterNullishAttributes({ populate, virtuals });
 
@@ -75,12 +94,14 @@ export const createRequestRepository = ({ baseURL }: { baseURL: string }): IRequ
     },
 
     /**
-     * Creates a new resource.
+     * Create a new entity.
      *
-     * @param params - Includes `data` to create and optional populate/virtuals.
-     * @returns A promise resolving to {@link RequestReturns} with the created resource.
+     * @param params
+     * Payload and optional request options.
      */
-    async create<TResult = unknown>(params: CreateEntityParams): Promise<RequestReturns<TResult>> {
+    async create<TResult = unknown>(
+        params: CreateEntityParams
+    ): Promise<RequestReturns<TResult>> {
         const { data, populate, virtuals } = params;
         const queries = filterNullishAttributes({ populate, virtuals });
 
@@ -89,12 +110,14 @@ export const createRequestRepository = ({ baseURL }: { baseURL: string }): IRequ
     },
 
     /**
-     * Updates an existing resource identified by `_id`.
+     * Update an existing entity.
      *
-     * @param params - Includes `_id`, update `data`, and optional populate/virtuals.
-     * @returns A promise resolving to {@link RequestReturns} with the updated resource.
+     * @param params
+     * Entity ID, update payload, and optional request options.
      */
-    async update<TResult = unknown>(params: UpdateEntityParams): Promise<RequestReturns<TResult>> {
+    async update<TResult = unknown>(
+        params: UpdateEntityParams
+    ): Promise<RequestReturns<TResult>> {
         const { _id, data, populate, virtuals } = params;
         const queries = filterNullishAttributes({ populate, virtuals });
 
@@ -103,29 +126,33 @@ export const createRequestRepository = ({ baseURL }: { baseURL: string }): IRequ
     },
 
     /**
-     * Deletes a resource by its unique ID.
+     * Delete an entity by ID.
      *
-     * @param params - Object containing `_id` of the resource to delete.
-     * @returns A promise resolving to {@link RequestReturns} indicating success/failure.
+     * @param params
+     * Entity identifier.
      */
-    async delete<TResult = unknown>(params: DeleteEntityParams): Promise<RequestReturns<TResult>> {
-        const { _id } = params;
-
+    async delete<TResult = unknown>(
+        { _id }: DeleteEntityParams
+    ): Promise<RequestReturns<TResult>> {
         const url = buildQueryURL({ baseURL, path: `delete/${_id}` });
         return useFetchAPI({ url, method: "DELETE" });
     },
 
     /**
-     * Performs a custom query against the resource endpoint.
+     * Execute a flexible query against the resource endpoint.
      *
-     * @param params - Query options including filters.
-     * @returns A promise resolving to {@link RequestReturns} containing the query results.
+     * @param params
+     * Query filters and options.
      */
-    async query<TResult = unknown>(params: RequestQueryOptions): Promise<RequestReturns<TResult>> {
-        const { queries } = params;
-        const filteredQueries = filterNullishAttributes(queries);
+    async query<TResult = unknown>(
+        { queries }: RequestQueryOptions
+    ): Promise<RequestReturns<TResult>> {
+        const url = buildQueryURL({
+            baseURL,
+            path: "query",
+            queries: filterNullishAttributes(queries ?? {}),
+        });
 
-        const url = buildQueryURL({ baseURL, path: "query", queries: filteredQueries });
         return useFetchAPI({ url, method: "GET" });
     },
 });
