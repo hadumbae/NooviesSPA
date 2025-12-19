@@ -4,8 +4,8 @@ import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {PaginatedShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {PaginatedShowingDetailsSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
-import useFetchShowings from "@/pages/showings/hooks/queries/useFetchShowings.ts";
 import ShowingIndexPageContent from "@/pages/showings/pages/index-page/ShowingIndexPageContent.tsx";
+import useFetchPaginatedShowings from "@/pages/showings/hooks/queries/useFetchPaginatedShowings.ts";
 
 /**
  * **ShowingIndexPage**
@@ -14,7 +14,7 @@ import ShowingIndexPageContent from "@/pages/showings/pages/index-page/ShowingIn
  *
  * @description
  * This page component:
- * - Fetches paginated showing data via {@link useFetchShowings}.
+ * - Fetches paginated showing data via {@link useFetchPaginatedShowings}.
  * - Validates the fetched data against {@link PaginatedShowingDetailsSchema}.
  * - Displays a header with the page title and a "Create" button via {@link ShowingIndexHeader}.
  * - Renders a responsive grid of {@link ShowingIndexListDialog} components for each showing.
@@ -33,14 +33,17 @@ import ShowingIndexPageContent from "@/pages/showings/pages/index-page/ShowingIn
  * ```
  */
 const ShowingIndexPage: FC = () => {
-    // ⚡ Pagination ⚡
+    // --- Pagination ---
     const {page, perPage} = usePaginationSearchParams({page: 1, perPage: 25});
 
-    // ⚡ Query ⚡
-    const query = useFetchShowings({
-        queries: {paginated: true, page, perPage, populate: true, virtuals: true},
+    // --- Query ---
+    const query = useFetchPaginatedShowings({
+        page,
+        perPage,
+        requestOptions: {populate: true, virtuals: true},
     });
 
+    // --- Render ---
     return (
         <QueryBoundary query={query}>
             <ValidatedQueryBoundary query={query} schema={PaginatedShowingDetailsSchema}>

@@ -40,13 +40,8 @@ const ShowingMovieTab = ({ movieID }: TabProps) => {
 
     // --- Showing Query ---
     const showingQuery = useFetchShowings({
-        queries: {
-            movie: movieID,
-            sortByStartTime: -1,
-            populate: true,
-            virtuals: true,
-            limit: 10,
-        },
+        requestOptions: {populate: true, virtuals: true, limit: 10},
+        queries: {movie: movieID, sortByStartTime: -1},
     });
 
     // --- Query Aggregation ---

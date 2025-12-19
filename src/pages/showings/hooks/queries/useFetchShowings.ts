@@ -4,75 +4,93 @@ import { ShowingQueryOptions } from "@/pages/showings/schema/queries/ShowingQuer
 import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
-import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
+import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 
 /**
- * Parameters for `UseFetchShowings` hook.
+ * @summary
+ * Parameters for fetching Showings.
  *
- * @template TData - Expected type of the returned data (default: `unknown`)
+ * @template TData
+ * Type of data returned by the query.
  */
 type FetchParams<TData = unknown> = {
-    /** Optional query filters, pagination, and sort options */
-    queries?: RequestOptions & RequestPaginationOptions & ShowingQueryOptions;
-    /** Optional React Query options such as `enabled`, `staleTime`, `initialData`, and `placeholderData` */
-    options?: UseQueryOptions<TData>;
+    /**
+     * Domain-specific query filters.
+     */
+    queries?: ShowingQueryOptions;
+
+    /**
+     * Request-level options such as `populate` or `virtuals`.
+     */
+    requestOptions?: RequestOptions;
+
+    /**
+     * React Query configuration overrides.
+     */
+    queryOptions?: UseQueryOptions<TData>;
 };
 
 /**
- * React Query hook to fetch **multiple movie showings** based on query filters.
+ * @summary
+ * Hook to fetch Showings using React Query.
  *
- * Supports pagination, filtering, and sorting via `ShowingQueryOptions`.
- * Allows React Query options such as `enabled`, `staleTime`, `placeholderData`, and `initialData`.
+ * @description
+ * Executes a query against the Showing repository, combining domain filters,
+ * request-level options, and React Query configuration.
  *
- * @template TData - The expected type of the query result data
+ * Features:
+ * - Provides a stable query key
+ * - Handles HTTP errors via {@link HttpResponseError}
+ * - Applies default React Query options, which can be overridden
  *
- * @param params - Optional parameters for the query
- * @param params.queries - Filters, sort, and pagination options
- * @param params.options - React Query options
+ * @template TData
+ * Type of data returned by the query.
  *
- * @returns A `UseQueryResult` containing:
- * - `data`: array or paginated list of showings
- * - `isLoading`: boolean indicating if the request is in progress
- * - `error`: `HttpResponseError` if the request failed
+ * @param params
+ * Query filters, request options, and React Query overrides.
+ *
+ * @returns
+ * A React Query `UseQueryResult` containing Showings data or an `HttpResponseError`.
  *
  * @example
  * ```ts
- * const { data, isLoading, error } = UseFetchShowings({
- *   queries: { movie: "movieId123", startTime: "2025-10-14" },
- *   options: { staleTime: 60000 }
+ * const { data, isLoading, error } = useFetchShowings({
+ *   queries: { title: "Hamlet" },
+ *   requestOptions: { populate: true },
  * });
- *
- * if (isLoading) return <Spinner />;
- * if (error) return <ErrorMessage message={error.message} />;
- *
- * return <ShowingList showings={data} />;
  * ```
  */
 export default function useFetchShowings<TData = unknown>(
-    params: FetchParams<TData> = {}
+    params: FetchParams<TData>
 ): UseQueryResult<unknown, HttpResponseError> {
-    const { queries = {}, options = {} } = params;
-
     const {
-        enabled = true,
-        staleTime = 1000 * 60,
-        placeholderData = (data: TData | undefined) => data,
-        initialData,
-    } = options;
+        queries = {},
+        requestOptions = {},
+        queryOptions = {},
+    } = params ?? {};
 
+    // --- Query Key ---
     const queryKey = ["fetch_showings_by_query"];
 
+    // --- Query Function ---
     const fetchShowingsByQuery = useQueryFnHandler({
-        action: () => ShowingRepository.query({ queries }),
         errorMessage: "Failed to fetch data. Please try again.",
+        action: () =>
+            ShowingRepository.query({
+                queries: {
+                    ...queries,
+                    ...requestOptions,
+                },
+            }),
     });
+
+    // --- Merge Provided Options With Defaults ---
+    const optionsWithDefaults = useQueryOptionDefaults(queryOptions);
 
     return useQuery({
         queryKey,
         queryFn: fetchShowingsByQuery,
-        enabled,
-        staleTime,
-        placeholderData,
-        initialData,
+        ...optionsWithDefaults,
     });
 }

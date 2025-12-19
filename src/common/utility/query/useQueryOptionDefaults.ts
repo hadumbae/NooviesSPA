@@ -1,37 +1,58 @@
+import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+
 /**
- * Returns default options for a React Query query.
+ * @file useQueryOptionDefaults.ts
  *
- * @template TData - The type of the query data. Defaults to `unknown`.
+ * @summary
+ * Provides default configuration for React Query queries.
  *
- * @remarks
- * This hook provides a standard set of options to be passed to React Query's
- * `useQuery` hook, including:
- * - `enabled`: Whether the query should automatically run (default `true`).
- * - `staleTime`: How long the data is considered fresh (default 60 seconds).
- * - `placeholderData`: Returns previous data while the query refetches.
+ * @description
+ * Returns a baseline set of options intended to be spread into `useQuery`,
+ * with sensible defaults for caching and refetch behavior.
  *
- * @returns An object containing default query options suitable for `useQuery`.
+ * Defaults:
+ * - `enabled`: `true`
+ * - `staleTime`: `60_000` ms
+ * - `placeholderData`: reuse previous cached data
+ *
+ * @template TData
+ * Type of data returned by the query.
  *
  * @example
  * ```ts
- * const queryOptions = useQueryOptionDefaults<User>();
- * const { data } = useQuery(['user', id], fetchUser, queryOptions);
+ * const queryOptions = useQueryOptionDefaults<User>({
+ *   enabled: !!id,
+ * });
+ *
+ * const { data } = useQuery({
+ *   queryKey: ["user", id],
+ *   queryFn: fetchUser,
+ *   ...queryOptions,
+ * });
  * ```
  */
-export default function useQueryOptionDefaults<TData = unknown>() {
+export default function useQueryOptionDefaults<TData = unknown>(
+    values?: UseQueryOptions<TData>
+): UseQueryOptions<TData> {
     return {
-        /** Whether the query is enabled and should run automatically. */
+        /**
+         * Enable automatic execution of the query.
+         */
         enabled: true,
 
-        /** Time in milliseconds before cached data is considered stale. Default is 60,000ms (1 minute). */
-        staleTime: 1000 * 60,
+        /**
+         * Duration (in milliseconds) for which data is considered fresh.
+         */
+        staleTime: 60_000,
 
         /**
-         * Provides placeholder data while the query is loading.
-         *
-         * @param previousData - The previous cached data (if any).
-         * @returns The previous data, or undefined if none exists.
+         * Reuse previous data while a new query is loading.
          */
         placeholderData: (previousData: TData | undefined) => previousData,
+
+        /**
+         * Consumer-provided options.
+         */
+        ...values,
     };
 }

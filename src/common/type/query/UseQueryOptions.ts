@@ -1,39 +1,47 @@
 /**
- * Options for customizing the behavior of a `useQuery` hook.
+ * @summary
+ * Configuration options for a `useQuery` hook.
  *
- * @template TData The type of data returned by the query.
+ * @description
+ * Defines cache behavior, execution control, and data hydration strategies
+ * for a React Query query.
+ *
+ * @template TData
+ * Type of data returned by the query.
  */
 export type UseQueryOptions<TData> = {
     /**
-     * If `false`, the query will not automatically run.
-     * Default is `true`.
+     * Enable or disable automatic query execution.
+     *
+     * @defaultValue true
      */
     enabled?: boolean;
 
     /**
-     * The amount of time (in milliseconds) that fetched data is considered "fresh".
+     * Duration (in milliseconds) for which fetched data is considered fresh.
      *
-     * - `0` (default) → data is stale immediately.
-     * - `Infinity` → data is never considered stale.
+     * @remarks
+     * - `0` → data is stale immediately
+     * - `Infinity` → data is never considered stale
      */
     staleTime?: number | typeof Infinity;
 
     /**
-     * Initial data to populate the query with before it fetches.
-     * Can be a direct value or a function returning the value (lazy initialization).
+     * Initial value used to populate the query before the first fetch.
      *
-     * This value becomes part of the query cache.
+     * @remarks
+     * This value is written to the query cache.
      */
     initialData?: TData | (() => TData);
 
     /**
-     * Placeholder data to display while the query is loading.
-     * Can be a direct value or a function that receives the previous query data
-     * and returns a new value.
+     * Temporary data displayed while a query is loading or refetching.
      *
-     * Unlike `initialData`, this does **not** become the cached value.
+     * @remarks
+     * Unlike `initialData`, placeholder data is **not** stored in the cache.
      *
-     * @param previousData - The previous data for this query, if available.
+     * @param previousData
+     * Previously cached data for this query, if available.
      */
-    placeholderData?: TData | ((previousData: TData | undefined) => TData);
+    placeholderData?: TData | ((previousData: TData | undefined) => TData | undefined);
 };
