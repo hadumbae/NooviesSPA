@@ -17,6 +17,7 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
+import {cloneElement} from "react";
 
 /**
  * Props for {@link SeatMapFormPriceFields}.
@@ -66,20 +67,35 @@ type FieldProps = {
 const SeatMapFormPriceFields = ({form, activeFields, isPanel}: FieldProps) => {
     const fieldGroup: HookFormField[] = [
         {
+            key: "basePrice",
             render: activeFields["basePrice"],
-            element: <HookFormInput label="Base Price" name="basePrice" control={form.control}/>
+            element: <HookFormInput
+                label="Base Price"
+                name="basePrice"
+                control={form.control}
+            />
         },
         {
+            key: "priceMultiplier",
             render: activeFields["priceMultiplier"],
-            element: <HookFormInput label="Price Multiplier" name="priceMultiplier" control={form.control}/>
+            element: <HookFormInput
+                label="Price Multiplier"
+                name="priceMultiplier"
+                control={form.control}
+            />
         },
         {
+            key: "overridePrice",
             render: activeFields["overridePrice"],
-            element: <HookFormInput label="Override Price" name="overridePrice" control={form.control}/>
+            element: <HookFormInput
+                label="Override Price"
+                name="overridePrice"
+                control={form.control}
+            />
         }
     ];
 
-    const fields = fieldGroup.map(({render, element}) => render ? element : null);
+    const fields = fieldGroup.map(({render, key, element}) => render ? cloneElement(element, {key}) : null);
 
     return (
         <fieldset className="space-y-4">

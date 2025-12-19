@@ -21,6 +21,7 @@ import {UseFormReturn} from "react-hook-form";
 import {SeatMapFormValues} from "@/pages/seatmap/schema/form/SeatMapForm.types.ts";
 import SeatMapStatusRadioGroup from "@/pages/seatmap/components/forms/input/SeatMapStatusRadioGroup.tsx";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
+import {cloneElement} from "react";
 
 /**
  * Props for {@link SeatMapFormDetailsFields}.
@@ -70,6 +71,7 @@ const SeatMapFormDetailsFields = (props: FieldProps) => {
     // --- Fields ---
     const fieldGroup: HookFormField[] = [
         {
+            key: "seat-map-seat",
             render: activeFields["seat"],
             element: <SeatHookFormSelect
                 name="seat"
@@ -79,6 +81,7 @@ const SeatMapFormDetailsFields = (props: FieldProps) => {
             />
         },
         {
+            key: "seat-map-status",
             render: activeFields["status"],
             element: <SeatMapStatusRadioGroup
                 name="status"
@@ -90,7 +93,7 @@ const SeatMapFormDetailsFields = (props: FieldProps) => {
 
     ];
 
-    const fields = fieldGroup.map(({render, element}) => render ? element : null);
+    const fields = fieldGroup.map(({render, key, element}) => render ? cloneElement(element, {key}) : null);
 
     // --- Render ---
     return (

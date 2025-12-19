@@ -12,6 +12,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import SeatMapFormDetailsFields
     from "@/pages/seatmap/components/forms/seat-map-form/fieldset/SeatMapFormDetailsFields.tsx";
 import {HookFormFieldGroup} from "@/common/type/form/HookFormFieldGroupTypes.ts";
+import {cloneElement} from "react";
 
 type ViewProps = FormViewProps<SeatMapDetails, SeatMapForm, SeatMapFormValues> & {
     className?: string;
@@ -38,6 +39,7 @@ const SeatMapFormView = (props: ViewProps) => {
     const fieldGroups: HookFormFieldGroup<SeatMapFormValues>[] = [
         {
             render: true,
+            key: "seat-map-details-field",
             fields: ["seat", "status"],
             element: <SeatMapFormDetailsFields
                 form={form}
@@ -47,6 +49,7 @@ const SeatMapFormView = (props: ViewProps) => {
         },
         {
             render: true,
+            key: "seat-map-price-field",
             fields: ["basePrice", "priceMultiplier", "overridePrice"],
             element: <SeatMapFormPriceFields
                 form={form}
@@ -56,9 +59,12 @@ const SeatMapFormView = (props: ViewProps) => {
         },
     ];
 
-    const fields = fieldGroups.map(
-        ({render, fields, element}) => render && fields.some(field => activeFields[field]) ? element : null
+    const fields = fieldGroups.map(({render, fields, key, element}) =>
+        render && fields.some(field => activeFields[field])
+            ? cloneElement(element, {key})
+            : null
     );
+
 
     // --- Button Text ---
     const buttonText = isPending
