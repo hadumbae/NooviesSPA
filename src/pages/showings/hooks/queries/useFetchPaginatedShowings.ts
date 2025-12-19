@@ -79,6 +79,9 @@ export default function useFetchPaginatedShowings<TData = unknown>(
         action: () =>
             ShowingRepository.query({
                 queries: filterNullishAttributes({
+                    paginated: true,
+                    page,
+                    perPage,
                     ...queries,
                     ...requestOptions,
                 }),
