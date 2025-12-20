@@ -51,12 +51,15 @@ const TheatreShowingCreatePageContent = ({ theatre }: ContentProps) => {
     // --- Render ---
     return (
         <PageFlexWrapper>
-            <section className="space-y-1">
+            <section className="space-y-2">
                 <TheatreShowingCreateBreadcrumbs
                     theatreID={theatreID}
                     theatreName={theatreName}
                 />
-                <TheatreShowingCreateHeader theatreName={theatreName} />
+                <TheatreShowingCreateHeader
+                    theatreID={theatreID}
+                    theatreName={theatreName}
+                />
             </section>
 
             <Card>
