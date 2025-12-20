@@ -24,7 +24,8 @@ import {SeatDetailsPanelContext} from "@/pages/seats/context/seat-details-contex
 import {SeatDetails} from "@/pages/seats/schema/seat/SeatDetails.types.ts";
 import {ReactElement} from "react";
 import {cn} from "@/common/lib/utils.ts";
-import {CardCSS} from "@/common/constants/css/ContainerCSS.ts";
+import {CardCSS, RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
+import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 type TabProps = {
     /**
@@ -73,18 +74,37 @@ const ScreenDetailsViewSeatsTab = (props: TabProps): ReactElement => {
         message: "Must be used within provider for `SeatDetailsPanelContext`."
     });
 
+    // --- Has Seats? ---
+
+    const hasSeatsSection = (
+        <section className="space-y-2">
+            <SectionHeader>Seat Layout</SectionHeader>
+
+            <ScrollArea className={cn(CardCSS, "w-full p-3")}>
+                <ScreenSeatLayout seats={seats}/>
+                <ScrollBar orientation="horizontal"/>
+            </ScrollArea>
+        </section>
+    );
+
+    const noSeatsSection = (
+        <section className={RoundedBorderCSS}>
+            <div className="flex justify-center items-center h-56">
+                <span className={cn(SecondaryTextBaseCSS, "select-none capitalize")}>
+                    There Are No Seats
+                </span>
+            </div>
+        </section>
+    );
+
+    const contentSection = seats.length > 0
+        ? hasSeatsSection
+        : noSeatsSection;
+
     // --- Render ---
     return (
         <TabsContent value="view-seats">
-            <section className="space-y-2">
-                <SectionHeader>Seat Layout</SectionHeader>
-
-                <ScrollArea className={cn(CardCSS, "w-full p-3")}>
-                    <ScreenSeatLayout seats={seats}/>
-                    <ScrollBar orientation="horizontal"/>
-                </ScrollArea>
-            </section>
-
+            {contentSection}
             {seat && <SeatDetailsContextPanel/>}
         </TabsContent>
     );
