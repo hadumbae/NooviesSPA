@@ -25,7 +25,7 @@ import TheatreScreenDetailsBreadcrumbs
     from "@/pages/screens/components/theatre-screen/admin/breadcrumbs/TheatreScreenDetailsBreadcrumbs.tsx";
 import TheatreScreenDetailsHeader
     from "@/pages/screens/components/theatre-screen/admin/headers/TheatreScreenDetailsHeader.tsx";
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
+import {Tabs, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import SeatDetailsPanelContextProvider
     from "@/pages/seats/context/seat-details-context/SeatDetailsPanelContextProvider.tsx";
 import ScreenDetailsViewSeatsTab
@@ -44,6 +44,8 @@ import ScreenSubmitFormPanel from "@/pages/screens/components/submit-form/panel/
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ScreenDetailsUIContext} from "@/pages/screens/contexts/screen-details/ScreenDetailsUIContext.ts";
 import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
+import ScreenDetailsShowingsTab
+    from "@/pages/screens/pages/admin/screen-details-page/screen-details-tabs/ScreenDetailsShowingsTab.tsx";
 
 type ContentProps = {
     /** The parent theatre that owns this screen. */
@@ -84,13 +86,15 @@ type ContentProps = {
 const ScreenDetailsPageContent = (props: ContentProps) => {
     // --- Props ---
     const {theatre, screen, seats} = props;
+    const {_id: screenID, name: screenName} = screen;
+    const {_id: theatreID, name: theatreName} = theatre;
 
     // --- Search Params ---
     const {searchParams, setActiveTab} = useTheatreScreenSearchParams({activeTab: "seats"});
-    const {activeTab, showingPage, showingsPerPage} = searchParams;
+    const {activeTab} = searchParams;
 
     // --- Form Options ---
-    const presetValues: Partial<SeatForm> = {screen: screen._id, theatre: theatre._id};
+    const presetValues: Partial<SeatForm> = {screen: screenID, theatre: theatreID};
     const disableFields: (keyof SeatFormValues)[] = ["theatre", "screen"];
 
     // --- Access Context ---
@@ -105,24 +109,24 @@ const ScreenDetailsPageContent = (props: ContentProps) => {
     return (
         <PageFlexWrapper>
 
-            {/* Header */}
+            {/* --- Header --- */}
 
             <section className="space-y-1">
                 <SectionHeader srOnly={true}>Seat Details : Header</SectionHeader>
 
                 <TheatreScreenDetailsBreadcrumbs
-                    theatreID={theatre._id}
-                    theatreName={theatre.name}
-                    screenName={screen.name}
+                    theatreID={theatreID}
+                    theatreName={theatreName}
+                    screenName={screenName}
                 />
 
                 <TheatreScreenDetailsHeader
-                    theatreName={theatre.name}
-                    screenName={screen.name}
+                    theatreName={theatreName}
+                    screenName={screenName}
                 />
             </section>
 
-            {/* Tabs */}
+            {/* --- Tabs --- */}
 
             <Tabs defaultValue={activeTab} onValueChange={(v) => setActiveTab(v)}>
                 <div className="flex justify-center">
@@ -146,14 +150,10 @@ const ScreenDetailsPageContent = (props: ContentProps) => {
                 </SeatFormContextProvider>
 
                 {/* Showings Tab */}
-                <TabsContent value="showings">
-                    <p>Showings</p>
-                    <p>Page : {showingPage}</p>
-                    <p>Per Page : {showingsPerPage}</p>
-                </TabsContent>
+                <ScreenDetailsShowingsTab screenID={screenID}/>
             </Tabs>
 
-            {/*Hidden Sections*/}
+            {/* --- Hidden Sections --- */}
 
             <section>
                 <SectionHeader srOnly={true}>Edit Screen Form</SectionHeader>
@@ -166,7 +166,7 @@ const ScreenDetailsPageContent = (props: ContentProps) => {
             <section>
                 <SectionHeader srOnly={true}>Delete Screen Dialog</SectionHeader>
                 <ScreenDeleteWarningDialog
-                    screenID={screen._id}
+                    screenID={screenID}
                     presetOpen={showDeleteWarning}
                     setPresetOpen={setShowDeleteWarning}
                 />
