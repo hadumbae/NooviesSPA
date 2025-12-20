@@ -10,11 +10,10 @@ import {TheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.sche
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
-import useFetchRouteParams from "@/common/hooks/router/useFetchRouteParams.ts";
-import {TheatreDetailsRouteParamSchema} from "@/pages/theatres/schema/params/TheatreDetailsRouteParamSchema.ts";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import TheatreDetailsPageContent from "@/pages/theatres/pages/theatre-details-page/TheatreDetailsPageContent.tsx";
 import TheatreDetailsUIContextProvider from "@/pages/theatres/providers/TheatreDetailsUIContextProvider.tsx";
+import useFetchIDRouteParams from "@/common/hooks/route-params/useFetchIDRouteParams.ts";
+import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
 
 /**
  * **Component: TheatreDetailsPage**
@@ -41,29 +40,25 @@ import TheatreDetailsUIContextProvider from "@/pages/theatres/providers/TheatreD
  * @component
  */
 const TheatreDetailsPage: FC = () => {
-    // ⚡ Navigation ⚡
-    const navigate = useLoggedNavigate();
-    const navigateToIndex = () => navigate({ to: "/admin/theatres" });
-
-    // ⚡ Route Params ⚡
-    const { theatreID } =
-    useFetchRouteParams({
-        schema: TheatreDetailsRouteParamSchema,
-        onError: navigateToIndex,
-        onErrorMessage: "Failed to parse route parameters.",
+    // --- Fetch Route Params ---
+    const {_id: theatreID} = useFetchIDRouteParams({
+        schema: IDRouteParamSchema,
+        errorTo: "/admin/theatres",
+        sourceComponent: TheatreDetailsPage.name,
     }) ?? {};
 
     if (!theatreID) {
         return <PageLoader />;
     }
 
-    // ⚡ Query ⚡
+    // --- Query ---
     const query = useFetchTheatre({
         _id: theatreID,
         populate: true,
         virtuals: true,
     });
 
+    // --- Render ---
     return (
         <TheatreDetailsUIContextProvider>
             <QueryBoundary query={query}>

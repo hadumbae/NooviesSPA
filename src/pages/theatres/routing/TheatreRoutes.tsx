@@ -1,25 +1,13 @@
 /**
  * @file admin-theatre-routes.ts
- * @description
- * Route configuration for all admin-facing theatre and screen pages.
  *
- * This module defines nested React Router route objects used by the
- * `/admin/theatres` section, including:
+ * @summary
+ * Admin route configuration for theatre, screen, and showing management.
  *
- * - Theatre index (list)
- * - Theatre details
- * - Screen details
- *
- * Each route is wrapped with:
- * - `BaseLayout` as the parent layout
- * - `ComponentErrorHandler` as the per-route error boundary
- *
- * Pages rendered by this route tree:
- * - `TheatreIndexPage`
- * - `TheatreDetailsPage`
- * - `ScreenDetailsPage`
- *
- * These routes are consumed by `createBrowserRouter` / `RouterProvider`.
+ * @remarks
+ * Defines the React Router route tree under `/admin/theatres`.
+ * All routes are wrapped by {@link BaseLayout} and use
+ * {@link ComponentErrorHandler} as the per-route error boundary.
  */
 
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
@@ -27,28 +15,23 @@ import TheatreDetailsPage from "@/pages/theatres/pages/theatre-details-page/Thea
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import ScreenDetailsPage from "@/pages/screens/pages/admin/screen-details-page/ScreenDetailsPage.tsx";
 import TheatreIndexPage from "@/pages/theatres/pages/theatre-index-page/TheatreIndexPage.tsx";
+import TheatreShowingCreatePage from "@/pages/theatres/pages/theatre-showings/TheatreShowingCreatePage.tsx";
+import TheatreShowingListPage from "@/pages/theatres/pages/theatre-showings/TheatreShowingListPage.tsx";
 
 export default [
     /**
-     * Root admin theatre routes.
+     * Root admin theatre route.
      *
      * @route /admin/theatres
-     * @description
-     * Uses `BaseLayout` to wrap all child routes.
-     * Child routes handle listing theatres, viewing theatre details,
-     * and viewing screen details.
      */
     {
         path: "/admin/theatres",
         element: <BaseLayout />,
         children: [
             /**
-             * Theatre index (list view).
+             * Theatre index page.
              *
              * @route /admin/theatres
-             * @description
-             * Displays a paginated list of all theatres.
-             * Errors are captured by `ComponentErrorHandler`.
              */
             {
                 path: "/admin/theatres",
@@ -59,16 +42,33 @@ export default [
             /**
              * Theatre details page.
              *
-             * @route /admin/theatres/get/:theatreID
-             * @description
-             * Displays details for a single theatre, including its screens
-             * and movie showing information.
-             *
-             * `:theatreID` is validated within the page’s loader/hooks.
+             * @route /admin/theatres/get/:_id
              */
             {
-                path: "/admin/theatres/get/:theatreID",
+                path: "/admin/theatres/get/:_id",
                 element: <TheatreDetailsPage />,
+                errorElement: <ComponentErrorHandler />,
+            },
+
+            /**
+             * Theatre showing creation page.
+             *
+             * @route /admin/theatres/get/:_id/showings/create
+             */
+            {
+                path: "/admin/theatres/get/:_id/showings/create",
+                element: <TheatreShowingCreatePage />,
+                errorElement: <ComponentErrorHandler />,
+            },
+
+            /**
+             * Theatre showing list page.
+             *
+             * @route /admin/theatres/get/:_id/showings/list
+             */
+            {
+                path: "/admin/theatres/get/:_id/showings/list",
+                element: <TheatreShowingListPage />,
                 errorElement: <ComponentErrorHandler />,
             },
 
@@ -76,11 +76,6 @@ export default [
              * Screen details page.
              *
              * @route /admin/theatres/get/:theatreID/screen/:screenID
-             * @description
-             * Displays complete details for a specific screen inside a theatre.
-             * Includes seat viewing, seat creation, and showings.
-             *
-             * Both `:theatreID` and `:screenID` are validated by the page.
              */
             {
                 path: "/admin/theatres/get/:theatreID/screen/:screenID",

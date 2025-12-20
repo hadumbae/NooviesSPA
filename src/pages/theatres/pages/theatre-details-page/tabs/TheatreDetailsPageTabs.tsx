@@ -1,20 +1,8 @@
 /**
  * @file TheatreDetailsPageTabs.tsx
+ *
  * @summary
- * Tabbed interface for managing Theatre Details in the admin panel.
- *
- * @description
- * This component renders a tabbed UI for navigating between:
- * - **Screens**: paginated list of screens belonging to the theatre
- * - **Showings**: placeholder section for scheduled showtimes
- *
- * URL search parameters are used (via {@link useParsedSearchParams}) to:
- * - Track the active tab
- * - Persist pagination state (`screenPage`, `screenPerPage`)
- * - Allow shareable and reload-persistent URLs
- *
- * The Screens tab is wrapped in {@link ScreenFormContextProvider} to provide
- * default form values and control disabled fields for screen creation/editing.
+ * Tabbed admin interface for managing theatre details.
  */
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/common/components/ui/tabs.tsx";
@@ -24,44 +12,46 @@ import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import TheatreDetailsScreensTab from "@/pages/theatres/pages/theatre-details-page/tabs/TheatreDetailsScreensTab.tsx";
 import ScreenFormContextProvider from "@/pages/screens/contexts/screen-form/ScreenFormContextProvider.tsx";
 import { ScreenFormValues } from "@/pages/screens/schema/forms/ScreenForm.types.ts";
+import TheatreRecentShowingList from "@/pages/theatres/components/admin/theatre-showings/TheatreRecentShowingList.tsx";
 
 /**
  * Props for {@link TheatreDetailsPageTabs}.
  */
 export type TabProps = {
-    /**
-     * Unique identifier of the theatre for which the tabs are rendered.
-     */
+    /** Theatre identifier used for scoping tab content */
     theatreID: ObjectId;
 };
 
 /**
- * Renders a tabbed UI for the Theatre Details page.
+ * Renders tabbed content for the theatre details admin page.
  *
- * Tabs include:
- * - **Screens Tab**: displays a paginated list of screens with context support for screen forms
- * - **Showings Tab**: placeholder for future showings management
+ * Tabs:
+ * - **Screens**: paginated screen management with form context
+ * - **Showings**: recent scheduled showings for the theatre
  *
- * Active tab and pagination state are stored in URL search parameters,
- * enabling deep linking and page reload persistence.
+ * Active tab and pagination state are persisted via URL search params.
  *
- * @param props - Component props (see {@link TabProps})
- * @returns A fully rendered tabbed interface for theatre administration.
- *
- * @example
- * ```tsx
- * <TheatreDetailsPageTabs theatreID="65af01c9e4f12d98b73b2dd1" />
- * ```
+ * @param props - Component props
+ * @returns Theatre details tab interface
  */
-const TheatreDetailsPageTabs = (props: TabProps) => {
-    const { theatreID } = props;
-
+const TheatreDetailsPageTabs = ({ theatreID }: TabProps) => {
     // --- Search Params ---
-    const { searchParams, setSearchParams } = useParsedSearchParams({ schema: TheatreDetailsSearchParamSchema });
-    const { activeTab = "screens", screenPage = 1, screenPerPage = 10 } = searchParams;
+    const { searchParams, setSearchParams } = useParsedSearchParams({
+        schema: TheatreDetailsSearchParamSchema,
+    });
 
-    const setActivePage = (tab: "screens" | "showings") => setSearchParams({ ...searchParams, activeTab: tab });
-    const setScreenPage = (page: number) => setSearchParams({ ...searchParams, screenPage: page });
+    const {
+        activeTab = "screens",
+        screenPage = 1,
+        screenPerPage = 25,
+    } = searchParams;
+
+    // --- Search Param Setters ---
+    const setActivePage = (tab: "screens" | "showings") =>
+        setSearchParams({ ...searchParams, activeTab: tab });
+
+    const setScreenPage = (page: number) =>
+        setSearchParams({ ...searchParams, screenPage: page });
 
     // --- Screen Form Defaults ---
     const presetValues = { theatre: theatreID };
@@ -69,7 +59,6 @@ const TheatreDetailsPageTabs = (props: TabProps) => {
 
     return (
         <Tabs className="h-full" defaultValue={activeTab}>
-            {/* Tab Selector */}
             <div className="flex justify-center">
                 <TabsList>
                     <TabsTrigger value="screens" onClick={() => setActivePage("screens")}>
@@ -81,8 +70,10 @@ const TheatreDetailsPageTabs = (props: TabProps) => {
                 </TabsList>
             </div>
 
-            {/* Screens Tab */}
-            <ScreenFormContextProvider presetValues={presetValues} disableFields={disableFields}>
+            <ScreenFormContextProvider
+                presetValues={presetValues}
+                disableFields={disableFields}
+            >
                 <TabsContent value="screens" className="h-full py-5">
                     <TheatreDetailsScreensTab
                         theatreID={theatreID}
@@ -95,9 +86,8 @@ const TheatreDetailsPageTabs = (props: TabProps) => {
                 </TabsContent>
             </ScreenFormContextProvider>
 
-            {/* Showings Tab */}
             <TabsContent value="showings" className="h-full py-5">
-                Showings
+                <TheatreRecentShowingList theatreID={theatreID} />
             </TabsContent>
         </Tabs>
     );
