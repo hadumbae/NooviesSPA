@@ -17,7 +17,7 @@
 
 import { z } from "zod";
 import { MovieSnapshotSchema } from "@/pages/movies/schema/snapshot/MovieSnapshotSchema.ts";
-import { TheatreSnapshotSchema } from "@/pages/theatres/schema/snapshot/TheatreSnapshotSchema.ts";
+import { TheatreSnapshotSchema } from "@/pages/theatres/schema/model/snapshot/TheatreSnapshotSchema.ts";
 import { ScreenSnapshotSchema } from "@/pages/screens/schema/snapshot/ScreenSnapshotSchema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import { ReservedSeatSnapshotSchema } from "@/pages/reservation/schema/snapshot/ReservedSeatSnapshotSchema.ts";

@@ -1,4 +1,4 @@
-import { TheatreDetails } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import { TheatreDetails } from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import { Card, CardContent } from "@/common/components/ui/card.tsx";
 import buildString from "@/common/utility/buildString.ts";
 import ISO3166Alpha2ShortCountryConstant from "@/common/constants/country/ISO3166Alpha2ShortCountryConstant.ts";

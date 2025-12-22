@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TheatreSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
+import { TheatreSchema } from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
 import { ScreenSchema } from "@/pages/screens/schema/screen/Screen.schema.ts";
 import { SeatBaseSchema } from "@/pages/seats/schema/seat/Seat.schema.ts";
 import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";

@@ -3,7 +3,7 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Plus} from "lucide-react";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {Theatre} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 import TheatreSubmitFormPanel

@@ -5,7 +5,7 @@
  * Page content component for creating a new showing for a theatre.
  */
 
-import { Theatre, TheatreDetails } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import { Theatre, TheatreDetails } from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import TheatreShowingCreateBreadcrumbs

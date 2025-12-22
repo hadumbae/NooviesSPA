@@ -4,11 +4,11 @@ import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiS
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import useFetchTheatres from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatres.ts";
-import {TheatreArraySchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
+import {TheatreArraySchema} from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import {TheatreArray} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {TheatreArray} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import {TheatreQueryOptions} from "@/pages/theatres/schema/queries/TheatreQueryOption.types.ts";
 
 /**

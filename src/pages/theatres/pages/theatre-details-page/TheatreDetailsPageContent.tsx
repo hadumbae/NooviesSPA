@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import TheatreDetailsBreadcrumbs from "@/pages/theatres/components/admin/pages/theatre-details/TheatreDetailsBreadcrumbs.tsx";
 import TheatreDetailsHeader from "@/pages/theatres/components/admin/pages/theatre-details/TheatreDetailsHeader.tsx";

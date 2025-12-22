@@ -1,7 +1,7 @@
 import { UseFormReturn } from "react-hook-form";
 import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.ts";
-import { TheatreSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
-import { Theatre } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import { TheatreSchema } from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
+import { Theatre } from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import { TheatreForm, TheatreFormValues } from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import { toast } from "react-toastify";
 import { ParseError } from "@/common/errors/ParseError.ts";

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TheatreSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
+import { TheatreSchema } from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
 import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import { CoercedNumberValueSchema } from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";

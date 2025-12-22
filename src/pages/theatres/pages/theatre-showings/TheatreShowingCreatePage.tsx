@@ -11,8 +11,8 @@ import { IDRouteParamSchema } from "@/common/schema/route-params/IDRouteParamSch
 import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import { TheatreSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
-import { Theatre } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import { TheatreSchema } from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
+import { Theatre } from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import TheatreShowingCreatePageContent
     from "@/pages/theatres/pages/theatre-showings/TheatreShowingCreatePageContent.tsx";
 

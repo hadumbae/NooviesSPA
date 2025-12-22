@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {Clapperboard, Search, Sofa, TvMinimal} from "lucide-react";
 import generateLocationAddressString from "@/common/utility/features/location/generateLocationAddressString.ts";

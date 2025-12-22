@@ -2,7 +2,7 @@ import IMovie from "@/pages/movies/interfaces/IMovie.ts";
 import {IScreen} from "@/pages/screens/interfaces/IScreen.ts";
 import ISeatMap from "@/pages/seatmap/interfaces/ISeatMap.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {Theatre} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 
 /**
  * Represents a movie showing within a theatre.

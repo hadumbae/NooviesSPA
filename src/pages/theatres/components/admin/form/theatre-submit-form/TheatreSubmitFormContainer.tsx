@@ -3,7 +3,7 @@ import useTheatreSubmitForm from "@/pages/theatres/hooks/submit-form/useTheatreS
 import useTheatreSubmitMutation, {
     TheatreSubmitMutationParams
 } from "@/pages/theatres/hooks/submit-form/useTheatreSubmitMutation.ts";
-import { Theatre } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import { Theatre } from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import { TheatreForm, TheatreFormValues } from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 import TheatreSubmitFormView

@@ -31,7 +31,7 @@ import SeatDetailsPanelContextProvider
 import ScreenDetailsViewSeatsTab
     from "@/pages/screens/pages/admin/screen-details-page/screen-details-tabs/ScreenDetailsViewSeatsTab.tsx";
 import SeatFormContextProvider from "@/pages/seats/context/form/SeatFormContextProvider.tsx";
-import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {SeatDetailsArray} from "@/pages/seats/schema/seat/SeatRelated.types.ts";
 import useTheatreScreenSearchParams

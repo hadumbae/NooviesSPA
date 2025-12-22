@@ -5,7 +5,7 @@
  * Page content component for listing showings belonging to a theatre.
  */
 
-import { Theatre, TheatreDetails } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import { Theatre, TheatreDetails } from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import { ShowingDetails } from "@/pages/showings/schema/showing/Showing.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import TheatreShowingListHeader

@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { Theatre } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import { Theatre } from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import { TheatreFormValues } from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 
 import {

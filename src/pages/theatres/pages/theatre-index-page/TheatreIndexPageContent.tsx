@@ -7,7 +7,7 @@ import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.ts
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import TheatreQueryOptionFormContainer
     from "@/pages/theatres/components/admin/form/theatre-query-option/TheatreQueryOptionFormContainer.tsx";
-import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {TheatreQueryOptionSchema} from "@/pages/theatres/schema/queries/TheatreQueryOption.schema.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";

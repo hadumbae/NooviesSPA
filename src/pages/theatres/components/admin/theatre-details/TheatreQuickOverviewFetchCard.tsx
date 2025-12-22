@@ -6,8 +6,8 @@ import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
-import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
-import {TheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
+import {TheatreDetailsSchema} from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import formatTheatreDetails from "@/pages/theatres/utilities/formatTheatreDetails.ts";
 

@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {TheatreForm, TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
-import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {Theatre} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";

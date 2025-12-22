@@ -5,7 +5,7 @@ import {
     TheatreArraySchema,
     TheatreDetailsSchema,
     TheatreSchema
-} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
+} from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
 
 /**
  * Type representing a single theatre object as defined by {@link TheatreSchema}.

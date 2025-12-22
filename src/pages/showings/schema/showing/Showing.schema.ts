@@ -17,7 +17,7 @@
  */
 
 import { z } from "zod";
-import { TheatreSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
+import { TheatreSchema } from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
 import { ScreenSchema } from "@/pages/screens/schema/screen/Screen.schema.ts";
 import { MovieWithGenresSchema } from "@/pages/movies/schema/movie/Movie.schema.ts";
 import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";

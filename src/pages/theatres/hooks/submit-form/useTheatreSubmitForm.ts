@@ -2,7 +2,7 @@ import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {TheatreFormSchema} from "@/pages/theatres/schema/forms/TheatreForm.schema.ts";
 
-import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {Theatre} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import {TheatreFormValues} from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 import {LocationFormValues} from "@/common/schema/models/location-form/LocationForm.types.ts";

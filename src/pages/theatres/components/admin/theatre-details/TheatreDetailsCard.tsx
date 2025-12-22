@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
-import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import generateLocationAddressString from "@/common/utility/features/location/generateLocationAddressString.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {cn} from "@/common/lib/utils.ts";

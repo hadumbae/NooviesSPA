@@ -12,10 +12,10 @@ import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatr
 import useFetchPaginatedShowings from "@/pages/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import { CombinedSchemaQuery } from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-import { TheatreSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
+import { TheatreSchema } from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
 import { PaginatedShowingDetailsSchema } from "@/pages/showings/schema/showing/Showing.schema.ts";
 import { PaginatedShowingDetails } from "@/pages/showings/schema/showing/Showing.types.ts";
-import { Theatre } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
+import { Theatre } from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
 import TheatreShowingListPageContent from "@/pages/theatres/pages/theatre-showings/TheatreShowingListPageContent.tsx";
