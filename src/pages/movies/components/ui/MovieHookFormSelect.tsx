@@ -64,7 +64,7 @@ type SelectProps<TSubmit extends FieldValues> = {
  * />
  * ```
  */
-const TheatreHookFormSelect = <TSubmit extends FieldValues>(props: SelectProps<TSubmit>) => {
+const MovieHookFormSelect = <TSubmit extends FieldValues>(props: SelectProps<TSubmit>) => {
     const {isMulti = false, filters = {}} = props;
     const query = useFetchMovies({queries: filters});
 
@@ -96,4 +96,4 @@ const TheatreHookFormSelect = <TSubmit extends FieldValues>(props: SelectProps<T
     );
 };
 
-export default TheatreHookFormSelect;
+export default MovieHookFormSelect;

@@ -22,7 +22,6 @@ import {FC, useContext, useEffect, useState} from 'react';
 import MovieHookFormSelect from "@/pages/movies/components/ui/MovieHookFormSelect.tsx";
 import MovieQuickOverviewFetchCard from "@/pages/movies/components/admin/movie-details/MovieQuickOverviewFetchCard.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 import TheatreQuickOverviewFetchCard
     from "@/pages/theatres/components/admin/theatre-details/TheatreQuickOverviewFetchCard.tsx";
 import ScreenHookFormSelect from "@/pages/screens/components/submit-form/inputs/ScreenHookFormSelect.tsx";
@@ -37,6 +36,7 @@ import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/comp
 import {Plus, X} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {MultiStepFormContext} from "@/common/context/multi-step-form/MultiStepFormContext.ts";
+import TheatreHookFormSelect from "@/pages/theatres/components/admin/form/theatre-inputs/TheatreHookFormSelect.tsx";
 
 /**
  * Props for the `ShowingSubmitFormDetailsFieldset` component.

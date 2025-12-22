@@ -4,9 +4,10 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import {Plus} from "lucide-react";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {Theatre} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
-import TheatreSubmitFormPanel from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormPanel.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
+import TheatreSubmitFormPanel
+    from "@/pages/theatres/components/admin/form/theatre-submit-form/TheatreSubmitFormPanel.tsx";
 
 /**
  * Props for {@link TheatreIndexHeader}.

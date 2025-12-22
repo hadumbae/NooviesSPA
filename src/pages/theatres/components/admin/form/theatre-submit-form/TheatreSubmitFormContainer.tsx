@@ -5,8 +5,9 @@ import useTheatreSubmitMutation, {
 } from "@/pages/theatres/hooks/features/submit-form/useTheatreSubmitMutation.ts";
 import { Theatre } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import { TheatreForm, TheatreFormValues } from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
-import TheatreSubmitFormView from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormView.tsx";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
+import TheatreSubmitFormView
+    from "@/pages/theatres/components/admin/form/theatre-submit-form/TheatreSubmitFormView.tsx";
 
 /**
  * Props for {@link TheatreSubmitFormContainer}.

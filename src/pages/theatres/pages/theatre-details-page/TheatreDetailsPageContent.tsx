@@ -1,17 +1,18 @@
 import {FC} from 'react';
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import TheatreDetailsBreadcrumbs from "@/pages/theatres/components/breadcrumbs/admin/TheatreDetailsBreadcrumbs.tsx";
-import TheatreDetailsHeader from "@/pages/theatres/components/headers/TheatreDetailsHeader.tsx";
-import TheatreDetailsCard from "@/pages/theatres/components/TheatreDetailsCard.tsx";
-import TheatreSubmitFormPanel from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormPanel.tsx";
-import TheatreDeleteWarningDialog
-    from "@/pages/theatres/components/theatres/delete-theatre/TheatreDeleteWarningDialog.tsx";
+import TheatreDetailsBreadcrumbs from "@/pages/theatres/components/admin/pages/theatre-details/TheatreDetailsBreadcrumbs.tsx";
+import TheatreDetailsHeader from "@/pages/theatres/components/admin/pages/theatre-details/TheatreDetailsHeader.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {TheatreDetailsUIContext} from "@/pages/theatres/context/TheatreDetailsUIContext.ts";
 import TheatreDetailsPageTabs from "@/pages/theatres/pages/theatre-details-page/tabs/TheatreDetailsPageTabs.tsx";
+import TheatreSubmitFormPanel
+    from "@/pages/theatres/components/admin/form/theatre-submit-form/TheatreSubmitFormPanel.tsx";
+import TheatreDeleteWarningDialog
+    from "@/pages/theatres/components/admin/theatre-actions/TheatreDeleteWarningDialog.tsx";
+import TheatreDetailsCard from "@/pages/theatres/components/admin/theatre-details/TheatreDetailsCard.tsx";
 
 /**
  * ⚡ **TheatreDetailsPageContent** ⚡

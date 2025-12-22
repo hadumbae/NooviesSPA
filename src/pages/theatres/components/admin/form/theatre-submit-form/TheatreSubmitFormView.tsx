@@ -5,14 +5,14 @@ import {Form} from "@/common/components/ui/form.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import TheatreSubmitFormLocationInputs
-    from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormLocationInputs.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
 import {TheatreFormValuesSchema} from "@/pages/theatres/schema/forms/TheatreForm.schema.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
+import TheatreSubmitFormLocationInputs
+    from "@/pages/theatres/components/admin/form/theatre-submit-form/TheatreSubmitFormLocationInputs.tsx";
 
 /**
  * Props for {@link TheatreSubmitFormView}.

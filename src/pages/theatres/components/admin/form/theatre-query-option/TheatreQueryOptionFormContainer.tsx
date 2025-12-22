@@ -11,7 +11,7 @@ import useTheatreQueryOptionForm from "@/pages/theatres/hooks/features/theatre-q
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import { TheatreQueryOptionSchema } from "@/pages/theatres/schema/queries/TheatreQueryOption.schema.ts";
 import { TheatreQueryOptions } from "@/pages/theatres/schema/queries/TheatreQueryOption.types.ts";
-import TheatreQueryOptionFormView from "@/pages/theatres/components/features/admin/theatre-query-option/TheatreQueryOptionFormView.tsx";
+import TheatreQueryOptionFormView from "@/pages/theatres/components/admin/form/theatre-query-option/TheatreQueryOptionFormView.tsx";
 
 /**
  * Props for {@link TheatreQueryOptionFormContainer}.

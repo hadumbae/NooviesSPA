@@ -9,9 +9,9 @@ import { Theatre, TheatreDetails } from "@/pages/theatres/schema/theatre/Theatre
 import { ShowingDetails } from "@/pages/showings/schema/showing/Showing.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import TheatreShowingListHeader
-    from "@/pages/theatres/components/features/admin/theatre-showing-list/TheatreShowingListHeader.tsx";
+    from "@/pages/theatres/components/admin/pages/theatre-showing-list/TheatreShowingListHeader.tsx";
 import TheatreShowingListBreadcrumbs
-    from "@/pages/theatres/components/features/admin/theatre-showing-list/TheatreShowingListBreadcrumbs.tsx";
+    from "@/pages/theatres/components/admin/pages/theatre-showing-list/TheatreShowingListBreadcrumbs.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import { Plus } from "lucide-react";

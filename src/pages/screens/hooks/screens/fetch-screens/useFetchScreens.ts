@@ -45,8 +45,6 @@ export default function useFetchScreens<TData = unknown>(
     const queryKey = ["fetch_screens_by_query", queries] as const;
 
     const queryAction = async () => {
-        console.log("Screen Queries: ", queries);
-
         return handleQueryResponse({
             action: () => ScreenRepository.query({queries}),
             errorMessage: "Failed to fetch screen data. Pleas try again."

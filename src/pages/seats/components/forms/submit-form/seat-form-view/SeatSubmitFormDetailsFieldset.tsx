@@ -19,7 +19,6 @@
 import {FC, useEffect} from 'react';
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import TheatreHookFormSelect from "@/pages/theatres/components/TheatreHookFormSelect.tsx";
 import ScreenHookFormSelect from "@/pages/screens/components/submit-form/inputs/ScreenHookFormSelect.tsx";
 import {UseFormReturn} from "react-hook-form";
 
@@ -27,6 +26,7 @@ import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts"
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatFormContext} from "@/pages/seats/context/form/SeatFormContext.ts";
 import {cn} from "@/common/lib/utils.ts";
+import TheatreHookFormSelect from "@/pages/theatres/components/admin/form/theatre-inputs/TheatreHookFormSelect.tsx";
 
 /**
  * Props for {@link SeatSubmitFormDetailsFieldset}.

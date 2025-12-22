@@ -5,14 +5,15 @@
  * Tabbed admin interface for managing theatre details.
  */
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/common/components/ui/tabs.tsx";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
-import { TheatreDetailsSearchParamSchema } from "@/pages/theatres/schema/params/TheatreDetailsSearchParamSchema.ts";
-import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {TheatreDetailsSearchParamSchema} from "@/pages/theatres/schema/params/TheatreDetailsSearchParamSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import TheatreDetailsScreensTab from "@/pages/theatres/pages/theatre-details-page/tabs/TheatreDetailsScreensTab.tsx";
 import ScreenFormContextProvider from "@/pages/screens/contexts/screen-form/ScreenFormContextProvider.tsx";
-import { ScreenFormValues } from "@/pages/screens/schema/forms/ScreenForm.types.ts";
-import TheatreRecentShowingList from "@/pages/theatres/components/admin/theatre-showings/TheatreRecentShowingList.tsx";
+import {ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
+import TheatreDetailsShowingsTab
+    from "@/pages/theatres/pages/theatre-details-page/tabs/TheatreDetailsShowingsTab.tsx";
 
 /**
  * Props for {@link TheatreDetailsPageTabs}.
@@ -34,9 +35,9 @@ export type TabProps = {
  * @param props - Component props
  * @returns Theatre details tab interface
  */
-const TheatreDetailsPageTabs = ({ theatreID }: TabProps) => {
+const TheatreDetailsPageTabs = ({theatreID}: TabProps) => {
     // --- Search Params ---
-    const { searchParams, setSearchParams } = useParsedSearchParams({
+    const {searchParams, setSearchParams} = useParsedSearchParams({
         schema: TheatreDetailsSearchParamSchema,
     });
 
@@ -48,13 +49,13 @@ const TheatreDetailsPageTabs = ({ theatreID }: TabProps) => {
 
     // --- Search Param Setters ---
     const setActivePage = (tab: "screens" | "showings") =>
-        setSearchParams({ ...searchParams, activeTab: tab });
+        setSearchParams({...searchParams, activeTab: tab});
 
     const setScreenPage = (page: number) =>
-        setSearchParams({ ...searchParams, screenPage: page });
+        setSearchParams({...searchParams, screenPage: page});
 
     // --- Screen Form Defaults ---
-    const presetValues = { theatre: theatreID };
+    const presetValues = {theatre: theatreID};
     const disableFields: (keyof ScreenFormValues)[] = ["theatre"];
 
     return (
@@ -80,14 +81,17 @@ const TheatreDetailsPageTabs = ({ theatreID }: TabProps) => {
                         page={screenPage}
                         perPage={screenPerPage}
                         setPage={setScreenPage}
-                        classNames={{ container: "h-full" }}
-                        queries={{ sortByName: "asc" }}
+                        classNames={{container: "h-full"}}
+                        queries={{sortByName: "asc"}}
                     />
                 </TabsContent>
             </ScreenFormContextProvider>
 
-            <TabsContent value="showings" className="h-full py-5">
-                <TheatreRecentShowingList theatreID={theatreID} />
+            <TabsContent value="showings">
+                <TheatreDetailsShowingsTab
+                    theatreID={theatreID}
+                    className="h-full space-y-4"
+                />
             </TabsContent>
         </Tabs>
     );

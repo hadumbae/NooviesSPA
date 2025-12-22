@@ -9,9 +9,9 @@ import { Theatre, TheatreDetails } from "@/pages/theatres/schema/theatre/Theatre
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import TheatreShowingCreateBreadcrumbs
-    from "@/pages/theatres/components/features/admin/theatre-showing-create/TheatreShowingCreateBreadcrumbs.tsx";
+    from "@/pages/theatres/components/admin/pages/theatre-showing-create/TheatreShowingCreateBreadcrumbs.tsx";
 import TheatreShowingCreateHeader
-    from "@/pages/theatres/components/features/admin/theatre-showing-create/TheatreShowingCreateHeader.tsx";
+    from "@/pages/theatres/components/admin/pages/theatre-showing-create/TheatreShowingCreateHeader.tsx";
 import { Card, CardContent } from "@/common/components/ui/card.tsx";
 import ShowingSubmitFormContainer from "@/pages/showings/components/forms/ShowingSubmitFormContainer.tsx";
 

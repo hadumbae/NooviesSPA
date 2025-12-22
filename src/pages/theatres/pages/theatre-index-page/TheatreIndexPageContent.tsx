@@ -1,12 +1,12 @@
 import PageSection from "@/common/components/page/PageSection.tsx";
-import TheatreIndexCard from "@/pages/theatres/components/index-page/TheatreIndexCard.tsx";
+import TheatreIndexCard from "@/pages/theatres/components/admin/pages/theatre-index/TheatreIndexCard.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import TheatreIndexHeader from "@/pages/theatres/components/headers/TheatreIndexHeader.tsx";
+import TheatreIndexHeader from "@/pages/theatres/components/admin/pages/theatre-index/TheatreIndexHeader.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import TheatreQueryOptionFormContainer
-    from "@/pages/theatres/components/features/admin/theatre-query-option/TheatreQueryOptionFormContainer.tsx";
+    from "@/pages/theatres/components/admin/form/theatre-query-option/TheatreQueryOptionFormContainer.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {TheatreQueryOptionSchema} from "@/pages/theatres/schema/queries/TheatreQueryOption.schema.ts";

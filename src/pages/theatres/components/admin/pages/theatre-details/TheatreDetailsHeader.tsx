@@ -10,7 +10,7 @@
 
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import TheatreDetailsOptions from "@/pages/theatres/components/features/admin/TheatreDetailsOptions.tsx";
+import TheatreDetailsOptions from "@/pages/theatres/components/admin/theatre-actions/TheatreDetailsOptions.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import { Ellipsis } from "lucide-react";
 

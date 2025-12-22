@@ -1,7 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { Theatre } from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import { TheatreFormValues } from "@/pages/theatres/schema/forms/TheatreForm.types.ts";
-import TheatreSubmitFormContainer from "@/pages/theatres/components/theatre-submit-form/TheatreSubmitFormContainer.tsx";
 
 import {
     Sheet
@@ -15,6 +14,8 @@ import {SheetHeader} from "@/common/components/ui/Sheet/SheetHeader.tsx";
 import {SheetTitle} from "@/common/components/ui/Sheet/SheetTitle.tsx";
 import {SheetDescription} from "@/common/components/ui/Sheet/SheetDescription.tsx";
 import {SheetTrigger} from "@/common/components/ui/Sheet/SheetTrigger.tsx";
+import TheatreSubmitFormContainer
+    from "@/pages/theatres/components/admin/form/theatre-submit-form/TheatreSubmitFormContainer.tsx";
 
 /**
  * Props for {@link TheatreSubmitFormPanel}.
