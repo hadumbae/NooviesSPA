@@ -1,5 +1,5 @@
 import {FC, PropsWithChildren, useState} from 'react';
-import {TheatreDetailsUIContext, TheatreDetailsUIStates} from "@/pages/theatres/context/TheatreDetailsUIContext.ts";
+import {TheatreDetailsUIContext, TheatreDetailsUIStates} from "@/pages/theatres/context/theatre-details-ui/TheatreDetailsUIContext.ts";
 
 /**
  * Provider component for theatre details UI state.

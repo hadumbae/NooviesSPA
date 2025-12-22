@@ -11,7 +11,7 @@ import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import TheatreDetailsPageContent from "@/pages/theatres/pages/theatre-details-page/TheatreDetailsPageContent.tsx";
-import TheatreDetailsUIContextProvider from "@/pages/theatres/providers/TheatreDetailsUIContextProvider.tsx";
+import TheatreDetailsUIContextProvider from "@/pages/theatres/context/theatre-details-ui/TheatreDetailsUIContextProvider.tsx";
 import useFetchIDRouteParams from "@/common/hooks/route-params/useFetchIDRouteParams.ts";
 import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
 

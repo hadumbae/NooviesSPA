@@ -6,7 +6,7 @@ import {
     DropdownMenuTrigger
 } from "@/common/components/ui/dropdown-menu.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {TheatreDetailsUIContext} from "@/pages/theatres/context/TheatreDetailsUIContext.ts";
+import {TheatreDetailsUIContext} from "@/pages/theatres/context/theatre-details-ui/TheatreDetailsUIContext.ts";
 
 /**
  * **TheatreDetailsOptions**

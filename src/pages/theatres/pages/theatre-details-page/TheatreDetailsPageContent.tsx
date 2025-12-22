@@ -6,7 +6,7 @@ import TheatreDetailsHeader from "@/pages/theatres/components/admin/pages/theatr
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {TheatreDetailsUIContext} from "@/pages/theatres/context/TheatreDetailsUIContext.ts";
+import {TheatreDetailsUIContext} from "@/pages/theatres/context/theatre-details-ui/TheatreDetailsUIContext.ts";
 import TheatreDetailsPageTabs from "@/pages/theatres/pages/theatre-details-page/tabs/TheatreDetailsPageTabs.tsx";
 import TheatreSubmitFormPanel
     from "@/pages/theatres/components/admin/form/theatre-submit-form/TheatreSubmitFormPanel.tsx";
