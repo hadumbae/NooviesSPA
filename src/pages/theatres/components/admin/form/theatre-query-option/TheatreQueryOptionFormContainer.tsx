@@ -7,7 +7,7 @@
 import { FC } from 'react';
 import { SearchParamFormContainerProps } from "@/common/type/form/SearchParamFormProps.ts";
 import { TheatreQueryOptionFormValues } from "@/pages/theatres/schema/queries/TheatreQueryOptionFormSchema.ts";
-import useTheatreQueryOptionForm from "@/pages/theatres/hooks/features/theatre-query-option/useTheatreQueryOptionForm.ts";
+import useTheatreQueryOptionForm from "@/pages/theatres/hooks/theatre-query-option-selectors/useTheatreQueryOptionForm.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import { TheatreQueryOptionSchema } from "@/pages/theatres/schema/queries/TheatreQueryOption.schema.ts";
 import { TheatreQueryOptions } from "@/pages/theatres/schema/queries/TheatreQueryOption.types.ts";

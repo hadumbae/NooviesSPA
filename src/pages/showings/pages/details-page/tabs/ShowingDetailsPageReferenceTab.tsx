@@ -13,7 +13,7 @@
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useFetchTheatre from "@/pages/theatres/hooks/query/useFetchTheatre.ts";
+import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
 import useFetchScreen from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreen.ts";
 import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
 import {TheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";

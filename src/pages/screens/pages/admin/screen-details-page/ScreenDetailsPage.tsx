@@ -1,5 +1,5 @@
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useFetchTheatre from "@/pages/theatres/hooks/query/useFetchTheatre.ts";
+import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
 import {TheatreDetails} from "@/pages/theatres/schema/theatre/Theatre.types.ts";
 import useFetchScreen from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreen.ts";
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";

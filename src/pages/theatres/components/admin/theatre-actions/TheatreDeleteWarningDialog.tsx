@@ -1,5 +1,5 @@
 import {FC, ReactNode} from 'react';
-import useTheatreDeleteMutation from "@/pages/theatres/hooks/features/delete-theatre/useTheatreDeleteMutation.ts";
+import useTheatreDeleteMutation from "@/pages/theatres/hooks/delete-theatre/useTheatreDeleteMutation.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";

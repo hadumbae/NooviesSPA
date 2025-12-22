@@ -5,7 +5,7 @@
 
 import {FC} from 'react';
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useFetchTheatre from "@/pages/theatres/hooks/query/useFetchTheatre.ts";
+import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
 import {TheatreDetailsSchema} from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";

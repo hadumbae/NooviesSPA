@@ -8,7 +8,7 @@
 import useFetchIDRouteParams from "@/common/hooks/route-params/useFetchIDRouteParams.ts";
 import { IDRouteParamSchema } from "@/common/schema/route-params/IDRouteParamSchema.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useFetchTheatre from "@/pages/theatres/hooks/query/useFetchTheatre.ts";
+import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
 import useFetchPaginatedShowings from "@/pages/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import { CombinedSchemaQuery } from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";

@@ -6,7 +6,7 @@ import {
 } from "@/pages/theatres/schema/params/TheatreDetailsSearchParamSchema.ts";
 import {
     TheatreDetailsSearchParamsDefaults, TheatreDetailsSearchParamsReturns
-} from "@/pages/theatres/hooks/features/search-params/theatre-details/useTheatreDetailsSearchParams.types.ts";
+} from "@/pages/theatres/hooks/search-params/theatre-details/useTheatreDetailsSearchParams.types.ts";
 
 // useTheatreDetailsSearchParam
 // ├── uses: useSearchParams (hook)
