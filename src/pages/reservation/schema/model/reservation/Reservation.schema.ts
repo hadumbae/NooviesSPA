@@ -25,8 +25,8 @@ import { ISO4217CurrencyCodeEnumSchema } from "@/common/schema/enums/ISO4217Curr
 import { UTCDayOnlyDateTimeSchema } from "@/common/schema/date-time/iso-8601/UTCDayOnlyDateTimeSchema.ts";
 import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 
-import { ReservationStatusEnumSchema } from "@/pages/reservation/schema/ReservationStatusEnumSchema.ts";
-import { ReservationBase, ReservationDetailsBase } from "@/pages/reservation/schema/reservation/Reservation.types.ts";
+import { ReservationStatusEnumSchema } from "@/pages/reservation/schema/enum/ReservationStatusEnumSchema.ts";
+import { ReservationBase, ReservationDetailsBase } from "@/pages/reservation/schema/model/reservation/Reservation.types.ts";
 import { PopulatedShowingSchema } from "@/pages/showings/schema/showing/Showing.schema.ts";
 import { UserSchema } from "@/pages/users/schemas/user/User.schema.ts";
 

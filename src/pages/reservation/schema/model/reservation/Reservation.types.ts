@@ -21,7 +21,7 @@ import {
     ReservationDetailsBaseSchema,
     ReservationDetailsSchema,
     ReservationSchema,
-} from "@/pages/reservation/schema/reservation/Reservation.schema.ts";
+} from "@/pages/reservation/schema/model/reservation/Reservation.schema.ts";
 
 /**
  * @summary
