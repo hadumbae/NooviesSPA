@@ -1,39 +1,64 @@
-import {FC, PropsWithChildren, useEffect, useState} from 'react';
+/**
+ * Authentication context provider.
+ *
+ * Manages the authenticated user state, logout signaling, and periodic
+ * validation of auth persistence via cookies and localStorage.
+ *
+ * Responsibilities:
+ * - Hydrate the authenticated user on initial load
+ * - Validate persisted auth state against runtime schemas
+ * - Automatically invalidate auth state when tokens disappear
+ *
+ * @remarks
+ * - Relies on `hasAuthToken` cookie as a lightweight auth presence check
+ * - Persists user data in `localStorage` under `authUser`
+ * - Performs periodic auth consistency checks every 30 seconds
+ */
+import {ReactNode, useEffect, useState} from 'react';
 import {AuthContext, AuthUserContextValue} from "@/pages/auth/context/AuthContext.ts";
-import {AuthUserDetails, AuthUserDetailsSchema} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
 import Cookies from "js-cookie";
+import {User} from "@/pages/users/schemas/user/User.types.ts";
+import {UserSchema} from "@/pages/users/schemas/user/User.schema.ts";
 
 /**
- * **AuthProvider**
- *
- * React context provider that manages authentication state for the application.
- * It wraps child components and supplies the `AuthContext` containing:
- * - The current authenticated user
- * - Setters for updating user and logout state
- * - Logout flag
- *
- * ### Behavior
- * 1. Initializes `user` and `logout` state via `useState`, attempting to load
- *    user details from localStorage and validate them using `AuthUserDetailsSchema`.
- * 2. Periodically checks every 30 seconds whether the auth token or user details
- *    are missing/invalid; if so, sets `user` to `null` and `logout` to `true`.
- * 3. Provides context value to children components via `AuthContext.Provider`.
- *
- * ### Notes
- * - The interval-based check ensures that user state stays consistent if cookies
- *   or localStorage are removed externally.
- * - This component should wrap the root of your application (or at least the
- *   part of the app that requires authentication context).
- * - `console.log` currently logs the context value for debugging purposes.
- *
- * @param children - React children to be wrapped by this provider
- * @returns {JSX.Element} `AuthContext.Provider` wrapping its children
+ * Props for {@link AuthProvider}.
  */
-const AuthProvider: FC<PropsWithChildren> = ({children}) => {
-    // ⚡ State ⚡
+type ProviderProps = {
+    /**
+     * Child components that require access to authentication context.
+     */
+    children: ReactNode;
+};
 
+/**
+ * Provides authentication state and actions to descendant components.
+ *
+ * @component
+ * @param props - {@link ProviderProps}
+ *
+ * @example
+ * ```tsx
+ * <AuthProvider>
+ *   <App />
+ * </AuthProvider>
+ * ```
+ */
+const AuthProvider = ({children}: ProviderProps) => {
+    // --- STATE ---
+
+    /**
+     * Indicates that a forced logout has occurred due to auth invalidation.
+     */
     const [logout, setLogout] = useState<boolean>(false);
-    const [user, setUser] = useState<AuthUserDetails | null>(() => {
+
+    /**
+     * Currently authenticated user, hydrated from persisted storage.
+     *
+     * @remarks
+     * - Returns `null` if no auth token or stored user exists
+     * - Validates stored user data using {@link UserSchema}
+     */
+    const [user, setUser] = useState<User | null>(() => {
         const hasToken = Cookies.get("hasAuthToken");
         const authUser = localStorage.getItem("authUser");
 
@@ -43,36 +68,49 @@ const AuthProvider: FC<PropsWithChildren> = ({children}) => {
 
         try {
             const userDetails = JSON.parse(authUser);
-            return AuthUserDetailsSchema.parse(userDetails);
-        } catch (error) {
+            return UserSchema.parse(userDetails);
+        } catch {
             return null;
         }
     });
 
-    // ⚡ Periodic Auth Check ⚡
+    // --- AUTH CHECK ---
 
+    /**
+     * Periodically validates authentication persistence.
+     *
+     * @remarks
+     * - Runs every 30 seconds
+     * - Logs the user out if persisted auth data disappears
+     * - Prevents stale in-memory auth state
+     */
     useEffect(() => {
         const interval = setInterval(() => {
             const hasToken = Cookies.get("hasAuthToken");
             const authUser = localStorage.getItem("authUser");
 
-            if ((user !== null) && (!hasToken || !authUser)) {
+            if (user !== null && (!hasToken || !authUser)) {
                 setUser(null);
                 setLogout(true);
             }
-        }, 1000 * 30); // every 30 seconds
+        }, 1000 * 30);
 
         return () => clearInterval(interval);
     }, [user]);
 
-    // ⚡ Context Value ⚡
+    // --- CONTEXT VALUES ---
 
+    /**
+     * Context value exposed to consumers.
+     */
     const contextValue: AuthUserContextValue = {
         user,
         setUser,
         logout,
         setLogout,
     };
+
+    // --- RENDER ---
 
     return (
         <AuthContext.Provider value={contextValue}>

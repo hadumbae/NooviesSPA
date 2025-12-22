@@ -1,47 +1,57 @@
+/**
+ * Authentication context types and instance.
+ *
+ * Defines the shared authentication state shape and the React context
+ * used to expose it throughout the application.
+ */
 import {createContext, Dispatch, SetStateAction} from "react";
-import {AuthUserDetails} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
+import {User} from "@/pages/users/schemas/user/User.types.ts";
 
 /**
- * **AuthUserContextValue**
+ * Value exposed by {@link AuthContext}.
  *
- * Represents the value stored in `AuthContext`.
- *
- * @property user - The currently authenticated user details.
- *   `null` if no user is authenticated.
- * @property setUser - React state setter for updating the authenticated user.
- * @property logout - Flag indicating whether the user is logged out.
- * @property setLogout - React state setter to update the logout flag.
+ * @remarks
+ * - `user === null` indicates no authenticated session
+ * - `logout` is a derived signal, not the source of truth
  */
 export type AuthUserContextValue = {
-    user: AuthUserDetails | null;
-    setUser: Dispatch<SetStateAction<AuthUserDetails | null>>;
+    /**
+     * Currently authenticated user.
+     */
+    user: User | null;
+
+    /**
+     * Updates the authenticated user state.
+     */
+    setUser: Dispatch<SetStateAction<User | null>>;
+
+    /**
+     * Indicates that a logout has occurred or is required.
+     */
     logout: boolean;
+
+    /**
+     * Updates the logout flag.
+     */
     setLogout: Dispatch<SetStateAction<boolean>>;
-}
+};
 
 /**
- * **AuthContext**
+ * React context for authentication state.
  *
- * React context providing authentication state and actions.
- *
- * Used to share:
- * - The currently authenticated user
- * - A setter to update the user
- * - Logout status
- * - A setter to update logout status
- *
- * Consumers should handle the case where the context is `undefined`.
+ * @remarks
+ * - Defaults to `undefined`
+ * - Must be consumed within {@link AuthProvider}
  *
  * @example
  * ```ts
  * const auth = useContext(AuthContext);
- * if (!auth) throw new Error("AuthContext must be used within a provider");
+ * if (!auth) {
+ *   throw new Error("AuthContext must be used within AuthProvider");
+ * }
  *
- * // Access user
  * console.log(auth.user);
- *
- * // Log out
- * auth.setLogout(true);
  * ```
  */
-export const AuthContext = createContext<AuthUserContextValue | undefined>(undefined);
+export const AuthContext =
+    createContext<AuthUserContextValue | undefined>(undefined);
