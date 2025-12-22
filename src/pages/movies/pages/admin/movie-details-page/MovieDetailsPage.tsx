@@ -4,28 +4,13 @@ import useTitle from "@/common/hooks/document/useTitle.ts";
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
 import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
-import useFetchMovieCredits from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
-import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
-import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
-import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
-import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.types.ts";
 import MovieDetailsUIContextProvider from "@/pages/movies/components/providers/MovieDetailsUIContextProvider.tsx";
 import MovieDetailsPageContent from "@/pages/movies/pages/admin/movie-details-page/MovieDetailsPageContent.tsx";
-import useFetchRouteParams from "@/common/hooks/router/useFetchRouteParams.ts";
 import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
-import useErrorNavigateToMovieIndex from "@/pages/movies/hooks/admin/navigate-to-index/useErrorNavigateToMovieIndex.ts";
+import useFetchIDRouteParams from "@/common/hooks/route-params/useFetchIDRouteParams.ts";
+import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
+import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 
-/**
- * Represents detailed movie data along with its associated credits.
- */
-type MovieWithData = {
-    /** The validated and fetched detailed movie entity. */
-    movie: MovieDetails;
-
-    /** List of validated credit entries (cast and/or crew) associated with the movie. */
-    credits: MovieCreditDetailsArray;
-};
 
 /**
  * Renders the **Movie Details Page**, showing complete information about a specific movie,
@@ -55,65 +40,47 @@ type MovieWithData = {
  * ```
  */
 const MovieDetailsPage: FC = () => {
-    // ⚡ Document ⚡
+    // --- Title ---
 
     useTitle("Movie Details");
 
-    // ⚡ URL Params ⚡
+    // --- Route Params ---
 
-    const navigateToMovieIndex = useErrorNavigateToMovieIndex();
-
-    const routeParams = useFetchRouteParams({
+    const {_id: movieID} = useFetchIDRouteParams({
         schema: IDRouteParamSchema,
-        onErrorMessage: "Failed to fetch route params.",
-        onError: () => navigateToMovieIndex({
-            component: MovieDetailsPage.name,
-            message: "Failed to fetch route params.",
-        })
-    });
+        errorTo: "/admin/movies",
+    }) ?? {};
 
-    if (!routeParams) return <PageLoader/>;
-    const {_id: movieID} = routeParams;
+    if (!movieID) {
+        return <PageLoader/>;
+    }
 
-    // ⚡ Queries ⚡
+    // --- Query ---
 
-    const movieQuery = useFetchMovie({_id: movieID, populate: true, virtuals: true});
-    const creditQuery = useFetchMovieCredits({
-        movie: movieID,
+    const query = useFetchMovie({
+        _id: movieID,
         populate: true,
         virtuals: true,
-        limit: 6,
-        department: "CAST",
-        sortByBillingOrder: "asc",
     });
 
-    const queries = [movieQuery, creditQuery];
-
-    // ⚡ Validation ⚡
-
-    const validationQueries: CombinedSchemaQuery[] = [
-        {query: movieQuery, key: "movie", schema: MovieDetailsSchema},
-        {query: creditQuery, key: "credits", schema: MovieCreditDetailsArraySchema},
-    ];
+    // --- Render ---
 
     return (
         <MovieDetailsUIContextProvider>
-            <CombinedQueryBoundary queries={queries}>
-                <CombinedValidatedQueryBoundary queries={validationQueries}>
-                    {(data) => {
-                        const {refetch} = movieQuery;
-                        const {movie, credits} = data as MovieWithData;
+            <QueryBoundary query={query}>
+                <ValidatedQueryBoundary query={query} schema={MovieDetailsSchema}>
+                    {(movie: MovieDetails) => {
+                        const {refetch} = query;
 
                         return (
                             <MovieDetailsPageContent
                                 movie={movie}
-                                credits={credits}
                                 refetchMovie={refetch}
                             />
                         );
                     }}
-                </CombinedValidatedQueryBoundary>
-            </CombinedQueryBoundary>
+                </ValidatedQueryBoundary>
+            </QueryBoundary>
         </MovieDetailsUIContextProvider>
     );
 };

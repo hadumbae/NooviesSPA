@@ -6,6 +6,9 @@ import {PaginatedShowingDetails} from "@/pages/showings/schema/showing/Showing.t
 import {PaginatedShowingDetailsSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import ShowingIndexPageContent from "@/pages/showings/pages/index-page/ShowingIndexPageContent.tsx";
 import useFetchPaginatedShowings from "@/pages/showings/hooks/queries/useFetchPaginatedShowings.ts";
+import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import {ShowingQueryOptionSchema} from "@/pages/showings/schema/queries/ShowingQueryOption.schema.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 
 /**
  * **ShowingIndexPage**
@@ -36,11 +39,14 @@ const ShowingIndexPage: FC = () => {
     // --- Pagination ---
     const {page, perPage} = usePaginationSearchParams({page: 1, perPage: 25});
 
+    const {searchParams} = useParsedSearchParams({schema: ShowingQueryOptionSchema});
+
     // --- Query ---
     const query = useFetchPaginatedShowings({
         page,
         perPage,
         requestOptions: {populate: true, virtuals: true},
+        queries: filterNullishAttributes(searchParams),
     });
 
     // --- Render ---
