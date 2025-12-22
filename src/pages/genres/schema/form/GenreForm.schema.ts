@@ -1,34 +1,36 @@
-import {z} from "zod";
-import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
-import {GenreBaseSchema} from "@/pages/genres/schema/genre/Genre.schema.ts";
+import { z } from "zod";
+import { FormStarterValueSchema } from "@/common/schema/form/FormStarterValueSchema.ts";
+import { GenreSchema } from "@/pages/genres/schema/genre/Genre.schema.ts";
 
 /**
- * **GenreFormValuesSchema**
+ * Schema for raw genre form values.
  *
- * Zod schema for the raw form values when creating or editing a genre.
+ * @remarks
+ * Intended for validating unprocessed user input directly from UI forms.
+ * Each field uses {@link FormStarterValueSchema} to provide consistent
+ * base handling such as trimming, empty-value normalization, and
+ * optional/null support.
  *
- * This schema is intended to validate user-provided input values from the form.
- * It reuses the `FormStarterValueSchema` for each field to enforce the same
- * base validation rules (e.g., string trimming, optional/null handling, etc.).
- *
- * **Fields:**
- * - `name` – Name of the genre.
- * - `description` – Description of the genre.
+ * @property name - Name of the genre.
+ * @property description - Description of the genre.
  */
 export const GenreFormValuesSchema = z.object({
+    /** Name of the genre. */
     name: FormStarterValueSchema,
+
+    /** Description of the genre. */
     description: FormStarterValueSchema,
 });
 
 /**
- * **GenreFormSchema**
+ * Schema for validated genre form data.
  *
- * Zod schema for the complete Genre form object.
+ * @remarks
+ * Derived from {@link GenreSchema} with the identifier omitted.
+ * Represents the final, domain-valid data produced after transforming
+ * and validating raw form values.
  *
- * This schema extends the `GenreBaseSchema`, which may include additional
- * validated properties such as `id`, `createdAt`, etc. It represents the
- * finalized, validated form data after transformation from raw values.
- *
- * Use this schema when you need a fully typed and validated Genre entity.
+ * Use this schema when submitting form data to the API or persisting
+ * a new or updated genre entity.
  */
-export const GenreFormSchema = GenreBaseSchema.extend({});
+export const GenreFormSchema = GenreSchema.omit({ _id: true });

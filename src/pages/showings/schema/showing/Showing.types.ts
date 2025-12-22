@@ -2,6 +2,7 @@ import { z } from "zod";
 import {
     PaginatedShowingDetailsSchema,
     PaginatedShowingSchema,
+    PopulatedShowingSchema,
     ShowingArraySchema,
     ShowingDetailsArraySchema,
     ShowingDetailsSchema,
@@ -9,67 +10,83 @@ import {
 } from "@/pages/showings/schema/showing/Showing.schema.ts";
 
 /**
- * @file Provides TypeScript types inferred from Zod schemas
- * related to movie showings, including detailed, array, and
- * paginated representations.
+ * @file Showing.types.ts
  *
- * @module ShowingTypes
+ * @summary
+ * TypeScript types inferred from Zod showing schemas.
+ *
+ * @description
+ * Provides strongly typed aliases derived from showing-related Zod schemas,
+ * covering:
+ * - Core showing entities
+ * - Populated and detailed variants
+ * - Array-based collections
+ * - Paginated API response shapes
+ *
+ * These types ensure compile-time safety while staying fully aligned with
+ * runtime validation logic.
  */
 
 /**
- * Represents a single movie showing document.
+ * Core showing type.
  *
  * @remarks
- * Derived from {@link ShowingSchema}.
- * Includes reference IDs to associated movie, theatre, and screen.
+ * Inferred from {@link ShowingSchema}.
+ * Uses reference IDs for related movie, theatre, and screen entities.
  */
 export type Showing = z.infer<typeof ShowingSchema>;
 
 /**
- * Represents a movie showing document with fully populated
- * relational data.
+ * Showing type with populated relations.
  *
  * @remarks
- * Derived from {@link ShowingDetailsSchema}.
- * Replaces reference IDs with nested objects:
- * - `movie`
- * - `theatre`
- * - `screen`
- * - `seating`
+ * Inferred from {@link PopulatedShowingSchema}.
+ * Replaces foreign key IDs with full related documents.
+ */
+export type PopulatedShowing = z.infer<typeof PopulatedShowingSchema>;
+
+/**
+ * Detailed showing type with populated relations and seat statistics.
+ *
+ * @remarks
+ * Inferred from {@link ShowingDetailsSchema}.
+ * Includes populated `movie`, `theatre`, and `screen` objects, along with
+ * seat availability counters.
  */
 export type ShowingDetails = z.infer<typeof ShowingDetailsSchema>;
 
 /**
- * Represents an array of basic movie showings.
+ * Array of core showing entities.
  *
  * @remarks
- * Derived from {@link ShowingArraySchema}.
+ * Inferred from {@link ShowingArraySchema}.
  */
 export type ShowingArray = z.infer<typeof ShowingArraySchema>;
 
 /**
- * Represents an array of detailed movie showings
- * (with fully expanded relational data).
+ * Array of detailed showing entities.
  *
  * @remarks
- * Derived from {@link ShowingDetailsArraySchema}.
+ * Inferred from {@link ShowingDetailsArraySchema}.
+ * Useful for list views requiring expanded relational data.
  */
 export type ShowingDetailsArray = z.infer<typeof ShowingDetailsArraySchema>;
 
 /**
- * Represents a paginated list of movie showings.
+ * Paginated collection of core showings.
  *
  * @remarks
- * Derived from {@link PaginatedShowingSchema}.
- * Useful for paginated API responses returning basic showing data.
+ * Inferred from {@link PaginatedShowingSchema}.
+ * Intended for paginated API responses returning minimal showing data.
  */
 export type PaginatedShowings = z.infer<typeof PaginatedShowingSchema>;
 
 /**
- * Represents a paginated list of detailed movie showings.
+ * Paginated collection of detailed showings.
  *
  * @remarks
- * Derived from {@link PaginatedShowingDetailsSchema}.
- * Useful for paginated API responses including related movie, theatre, and screen data.
+ * Inferred from {@link PaginatedShowingDetailsSchema}.
+ * Intended for paginated API responses that include populated relations
+ * and seat statistics.
  */
 export type PaginatedShowingDetails = z.infer<typeof PaginatedShowingDetailsSchema>;

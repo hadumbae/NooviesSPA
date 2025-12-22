@@ -1,3 +1,21 @@
+/**
+ * @file Showing.schema.ts
+ *
+ * @summary
+ * Zod schemas for validating and typing movie showings.
+ *
+ * @description
+ * Provides runtime validation and TypeScript inference for showing-related
+ * data, including:
+ * - Core showing entities
+ * - Populated variants with related documents
+ * - Detailed variants with seat statistics
+ * - Array and paginated response shapes
+ *
+ * These schemas are used across API boundaries, services, and UI layers to
+ * ensure consistency and correctness of showing data.
+ */
+
 import { z } from "zod";
 import { TheatreSchema } from "@/pages/theatres/schema/theatre/Theatre.schema.ts";
 import { ScreenSchema } from "@/pages/screens/schema/screen/Screen.schema.ts";
@@ -13,107 +31,104 @@ import { generatePaginationSchema } from "@/common/utility/schemas/generatePagin
 import { DateTimeInstanceSchema } from "@/common/schema/date-time/DateTimeInstanceSchema.ts";
 
 /**
- * @fileoverview
- * Zod schemas for movie showings.
- *
- * Includes:
- * - Base and core showing schemas
- * - Detailed schemas with populated relations
- * - Array and paginated variants for API responses
- *
- * These schemas provide runtime validation and type inference
- * for showing-related data throughout the application.
- *
- * @module ShowingSchema
- */
-
-/**
- * Base schema for showing entities.
+ * Base showing schema.
  *
  * @remarks
- * Currently empty and reserved for future shared fields.
+ * Currently empty and reserved for future shared fields or composition.
  */
 const ShowingBaseSchema = z.object({});
 
 /**
- * Core schema describing a movie showing.
+ * Core showing schema.
  *
- * Validates scheduling metadata, pricing, language configuration,
- * and foreign key references.
- *
- * @property _id - Unique identifier of the showing.
- * @property startTime - Scheduled start time (DateTime or ISO-8601 string).
- * @property endTime - Scheduled end time (DateTime or ISO-8601 string).
- * @property ticketPrice - Positive ticket price.
- * @property language - Primary spoken language (ISO 639-1).
- * @property subtitleLanguages - Non-empty list of subtitle languages.
- * @property isSpecialEvent - Indicates a special event showing.
- * @property isActive - Indicates whether the showing is active.
- * @property movie - Referenced movie ID.
- * @property theatre - Referenced theatre ID.
- * @property screen - Referenced screen ID.
- * @property status - Current showing status.
+ * @description
+ * Represents a scheduled movie showing with timing, pricing, language
+ * configuration, lifecycle status, and foreign key references.
  */
 export const ShowingSchema = z.object({
+    /** Unique identifier of the showing. */
     _id: IDStringSchema.readonly(),
+
+    /** Scheduled start time (DateTime instance or ISO 8601 string). */
     startTime: z.union([DateTimeInstanceSchema, UTCISO8601DateTimeSchema]),
+
+    /** Scheduled end time (DateTime instance or ISO 8601 string). */
     endTime: z.union([DateTimeInstanceSchema, UTCISO8601DateTimeSchema]),
+
+    /** Base ticket price for the showing. */
     ticketPrice: CleanedPositiveNumberSchema,
+
+    /** Primary spoken language (ISO 639-1). */
     language: ISO6391LanguageCodeEnum,
+
+    /** Available subtitle languages (non-empty). */
     subtitleLanguages: z
         .array(ISO6391LanguageCodeEnum)
         .nonempty({ message: "Must not be empty." }),
+
+    /** Indicates whether this is a special event showing. */
     isSpecialEvent: CoercedBooleanValueSchema.optional(),
+
+    /** Indicates whether the showing is currently active. */
     isActive: CoercedBooleanValueSchema.optional(),
+
+    /** Referenced movie ID. */
     movie: IDStringSchema,
+
+    /** Referenced theatre ID. */
     theatre: IDStringSchema,
+
+    /** Referenced screen ID. */
     screen: IDStringSchema,
+
+    /** Current lifecycle status of the showing. */
     status: ShowingStatusEnumSchema,
 });
 
 /**
- * Schema for populated showing details.
+ * Showing schema with populated relations.
  *
- * Extends {@link ShowingSchema} by replacing reference IDs
- * with their full relational documents and including seat statistics.
- *
- * @property movie - Populated movie document.
- * @property theatre - Populated theatre document.
- * @property screen - Populated screen document.
- * @property seatMapCount - Total number of seat entries.
- * @property availableSeatsCount - Available seat count.
- * @property reservedSeatsCount - Reserved seat count.
- * @property unreservedSeatsCount - Unreserved seat count.
+ * @remarks
+ * Replaces foreign key IDs with fully populated documents.
  */
-export const ShowingDetailsSchema = ShowingSchema.extend({
-    seatMapCount: NonNegativeNumberSchema,
-    availableSeatsCount: NonNegativeNumberSchema,
-    reservedSeatsCount: NonNegativeNumberSchema,
-    unreservedSeatsCount: NonNegativeNumberSchema,
+export const PopulatedShowingSchema = ShowingSchema.extend({
     theatre: z.lazy(() => TheatreSchema),
     screen: z.lazy(() => ScreenSchema),
     movie: z.lazy(() => MovieWithGenresSchema),
 });
 
 /**
- * Array schema for core showing documents.
+ * Detailed showing schema.
+ *
+ * @description
+ * Extends {@link PopulatedShowingSchema} with seat availability statistics,
+ * typically used for admin views or booking workflows.
  */
+export const ShowingDetailsSchema = PopulatedShowingSchema.extend({
+    /** Total number of seats defined for the showing. */
+    seatMapCount: NonNegativeNumberSchema,
+
+    /** Number of seats currently available. */
+    availableSeatsCount: NonNegativeNumberSchema,
+
+    /** Number of seats already reserved. */
+    reservedSeatsCount: NonNegativeNumberSchema,
+
+    /** Number of seats not yet reserved. */
+    unreservedSeatsCount: NonNegativeNumberSchema,
+});
+
+/** Array schema for core showing entities. */
 export const ShowingArraySchema = z.array(ShowingSchema);
 
-/**
- * Array schema for populated showing documents.
- */
+/** Array schema for detailed, populated showings. */
 export const ShowingDetailsArraySchema = z.array(ShowingDetailsSchema);
 
-/**
- * Paginated schema for core showings.
- */
+/** Paginated schema for core showings. */
 export const PaginatedShowingSchema =
     generatePaginationSchema(ShowingSchema);
 
-/**
- * Paginated schema for populated showings.
- */
+/** Paginated schema for detailed, populated showings. */
 export const PaginatedShowingDetailsSchema =
     generatePaginationSchema(ShowingDetailsSchema);
 

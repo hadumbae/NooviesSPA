@@ -1,65 +1,81 @@
-import {z} from "zod";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import { z } from "zod";
+import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { NonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import { generatePaginationSchema } from "@/common/utility/schemas/generatePaginationSchema.ts";
 
 /**
- * **GenreBaseSchema**
+ * @file Genre.schema.ts
  *
- * Base schema for a genre entity.
- * - `name`: Non-empty string between 3–255 characters.
- * - `description`: Non-empty string up to 1000 characters.
+ * @summary
+ * Zod schemas for movie genres.
+ *
+ * @description
+ * Defines runtime validation schemas for genre-related data, including:
+ * - Core genre entities
+ * - Extended genre details with aggregate statistics
+ * - Array and paginated variants for API responses
+ *
+ * These schemas provide consistent validation and type inference for
+ * genre management across the application.
  */
-export const GenreBaseSchema = z.object({
+
+/**
+ * Core genre schema.
+ *
+ * @remarks
+ * Represents a single genre entity with a stable identifier,
+ * human-readable name, and optional descriptive text.
+ */
+export const GenreSchema = z.object({
+    /** Unique genre identifier. */
+    _id: IDStringSchema,
+
+    /** Display name of the genre. */
     name: NonEmptyStringSchema
         .min(3, "Must be 3 characters or longer.")
         .max(255, "Must be 255 characters or less."),
 
+    /** Optional descriptive text explaining the genre. */
     description: NonEmptyStringSchema
         .max(1000, "Must be 1000 characters or less."),
 });
 
 /**
- * **GenreSchema**
+ * Detailed genre schema.
  *
- * Extends `GenreBaseSchema` with:
- * - `_id`: Unique identifier string.
- */
-export const GenreSchema = GenreBaseSchema.extend({
-    _id: IDStringSchema,
-});
-
-/**
- * **GenreDetailsSchema**
- *
- * Extends `GenreSchema` with:
- * - `movieCount`: Non-negative number representing the count of movies in the genre.
+ * @remarks
+ * Extends {@link GenreSchema} by including aggregate statistics.
  */
 export const GenreDetailsSchema = GenreSchema.extend({
+    /** Number of movies associated with this genre. */
     movieCount: NonNegativeNumberSchema,
 });
 
 /**
- * **GenreArraySchema**
+ * Array schema for genre entities.
  *
- * Array schema for multiple `GenreSchema` objects.
+ * @remarks
+ * Represents a list of {@link GenreSchema} objects.
  */
 export const GenreArraySchema = z.array(GenreSchema);
 
 /**
- * **PaginatedGenresSchema**
+ * Paginated schema for genre entities.
  *
- * Paginated schema for basic genre data.
- * Uses `generatePaginationSchema` with `GenreSchema` as the item type.
+ * @remarks
+ * Uses {@link generatePaginationSchema} with {@link GenreSchema}
+ * as the item type. Intended for paginated API responses.
  */
 export const PaginatedGenresSchema = generatePaginationSchema(GenreSchema);
 
 /**
- * **PaginatedGenreDetailsSchema**
+ * Paginated schema for detailed genre entities.
  *
- * Paginated schema for detailed genre data.
- * Uses `generatePaginationSchema` with `GenreDetailsSchema` as the item type.
+ * @remarks
+ * Uses {@link generatePaginationSchema} with {@link GenreDetailsSchema}
+ * as the item type. Intended for paginated API responses that include
+ * aggregate statistics.
  */
-export const PaginatedGenreDetailsSchema = generatePaginationSchema(GenreDetailsSchema);
+export const PaginatedGenreDetailsSchema =
+    generatePaginationSchema(GenreDetailsSchema);
