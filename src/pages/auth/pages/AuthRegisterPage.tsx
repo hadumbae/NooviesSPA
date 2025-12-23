@@ -25,6 +25,7 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
  * ```
  */
 const AuthRegisterPage: FC = () => {
+    // --- HANDLE NAVIGATION ---
     const navigate = useLoggedNavigate();
 
     /**
@@ -40,9 +41,10 @@ const AuthRegisterPage: FC = () => {
         });
     };
 
+    // --- RENDER ---
     return (
         <PageFlexWrapper>
-            <RegisterHeader />
+            <RegisterHeader/>
 
             <section className="flex justify-center">
                 <SectionHeader srOnly={true}>Register Form</SectionHeader>

@@ -1,54 +1,52 @@
-import {FC} from 'react';
 import useAuthRegisterForm from "@/pages/auth/hooks/useAuthRegisterForm.ts";
 import useAuthRegisterSubmitMutation from "@/pages/auth/hooks/useAuthRegisterSubmitMutation.ts";
-import {UserRegisterData} from "@/pages/auth/schema/form/AuthForm.types.ts";
 import AuthRegisterFormView from "@/pages/auth/components/form/register/AuthRegisterFormView.tsx";
-
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {AuthRegisterForm, AuthRegisterFormValues} from "@/pages/auth/schema/form/AuthRegisterForm.types.ts";
 
 /**
- * Props for the {@link AuthRegisterFormContainer} component.
- *
- * Extends {@link MutationOnSubmitParams} (excluding `onSubmitSuccess` and `validationSchema`)
- * with optional UI configuration.
+ * Props for {@link AuthRegisterFormContainer}.
  */
-type ContainerProps = Omit<MutationOnSubmitParams, "onSubmitSuccess" | "validationSchema"> & {
-    /** Optional callback invoked when the registration succeeds. */
+type ContainerProps =
+    Omit<MutationOnSubmitParams, "onSubmitSuccess" | "validationSchema"> & {
+    /** Optional callback fired after successful registration. */
     onSubmitSuccess?: () => void;
 
-    /** Optional custom CSS class for styling the container. */
+    /** Optional CSS class for styling the form container. */
     className?: string;
 };
 
 /**
- * Container component for the user registration form.
+ * Registration form container component.
  *
- * - Initializes a `react-hook-form` instance with validation.
- * - Configures the registration mutation using React Query.
- * - Passes the form, mutation state, and submit handler down to {@link AuthRegisterFormView}.
+ * @remarks
+ * - Initializes the registration form with validation
+ * - Wires React Query mutation for submission
+ * - Delegates rendering to {@link AuthRegisterFormView}
  *
- * @param props - Props controlling form mutation behavior and optional UI styling.
- * @returns A fully wired registration form ready for rendering.
+ * @param props - Mutation configuration and optional UI styling
  *
  * @example
  * ```tsx
  * <AuthRegisterFormContainer
  *   onSubmitSuccess={() => navigate("/login")}
- *   successMessage="Registration successful! Welcome aboard."
- *   errorMessage="Could not register. Please try again later."
  * />
  * ```
  */
-const AuthRegisterFormContainer: FC<ContainerProps> = ({className, ...mutationProps}) => {
+const AuthRegisterFormContainer = ({className, ...mutationProps}: ContainerProps) => {
     const form = useAuthRegisterForm();
-    const mutation = useAuthRegisterSubmitMutation({form, ...mutationProps});
+
+    const mutation = useAuthRegisterSubmitMutation({
+        form,
+        ...mutationProps,
+    });
 
     /**
-     * Handles submission of the registration form.
-     *
-     * @param values - User-provided registration data.
+     * Handles registration form submission.
      */
-    const onSubmit = (values: UserRegisterData) => mutation.mutate(values);
+    const onSubmit = (values: AuthRegisterFormValues) => {
+        mutation.mutate(values as AuthRegisterForm);
+    };
 
     return (
         <AuthRegisterFormView

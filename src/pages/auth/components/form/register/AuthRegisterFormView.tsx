@@ -1,41 +1,38 @@
-import {FC} from 'react';
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
-import {UserRegisterData} from "@/pages/auth/schema/form/AuthForm.types.ts";
 import {UseMutationResult} from "@tanstack/react-query";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Form} from "@/common/components/ui/form.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {cn} from "@/common/lib/utils.ts";
+import {AuthRegisterForm, AuthRegisterFormValues} from "@/pages/auth/schema/form/AuthRegisterForm.types.ts";
 
 /**
- * Props for the {@link AuthRegisterFormView} component.
+ * Props for {@link AuthRegisterFormView}.
  */
 type ViewProps = {
-    /** React Hook Form instance managing the registration form state and validation. */
-    form: UseFormReturn<UserRegisterData>;
+    /** React Hook Form instance controlling registration state. */
+    form: UseFormReturn<AuthRegisterFormValues>;
 
-    /** React Query mutation object for handling registration submissions. */
-    mutation: UseMutationResult<void, unknown, UserRegisterData>;
+    /** React Query mutation handling registration submission. */
+    mutation: UseMutationResult<void, unknown, AuthRegisterForm>;
 
-    /** Submit handler invoked by React Hook Form when the form is submitted. */
-    submitHandler: SubmitHandler<UserRegisterData>;
+    /** Form submit handler invoked by React Hook Form. */
+    submitHandler: SubmitHandler<AuthRegisterFormValues>;
 
-    /** Optional CSS class name for custom styling of the form. */
+    /** Optional CSS class for the form container. */
     className?: string;
 };
 
 /**
- * Presentational component for rendering the user registration form.
+ * Registration form presentation component.
  *
- * This component:
- * - Displays input fields for `name`, `email`, `password`, and `confirm` password.
- * - Binds form state and validation to `react-hook-form`.
- * - Integrates with a React Query mutation for submission.
- * - Provides navigation back to the login page.
+ * @remarks
+ * - Renders inputs for name, email, password, and confirmation
+ * - Disables submission while mutation is pending or completed
+ * - Provides navigation back to the login page
  *
- * @param props - {@link ViewProps} configuring form, mutation, and handlers.
- * @returns The rendered registration form UI.
+ * @param props - Form state, mutation, and handlers
  *
  * @example
  * ```tsx
@@ -43,17 +40,16 @@ type ViewProps = {
  *   form={form}
  *   mutation={mutation}
  *   submitHandler={onSubmit}
- *   className="max-w-md mx-auto"
  * />
  * ```
  */
-const AuthRegisterFormView: FC<ViewProps> = (props) => {
+const AuthRegisterFormView = (props: ViewProps) => {
     const {form, submitHandler, className, mutation: {isPending, isSuccess}} = props;
 
     const navigate = useLoggedNavigate();
 
     /**
-     * Navigates the user to the login page.
+     * Redirects the user to the login page.
      */
     const redirectToLogin = () => {
         navigate({
@@ -65,12 +61,11 @@ const AuthRegisterFormView: FC<ViewProps> = (props) => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-5", className)}>
-                <HookFormInput
-                    name="name"
-                    label="Name"
-                    control={form.control}
-                />
+            <form
+                onSubmit={form.handleSubmit(submitHandler)}
+                className={cn("space-y-5", className)}
+            >
+                <HookFormInput name="name" label="Name" control={form.control} />
 
                 <HookFormInput
                     name="email"

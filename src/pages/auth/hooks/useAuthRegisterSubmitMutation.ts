@@ -1,88 +1,76 @@
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
 import {UseFormReturn} from "react-hook-form";
+import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import {UserRegisterData} from "@/pages/auth/schema/form/AuthForm.types.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {AuthRegisterForm, AuthRegisterFormValues} from "@/pages/auth/schema/form/AuthRegisterForm.types.ts";
 
 /**
- * Parameters for the `useAuthRegisterSubmitMutation` hook.
- *
- * Extends `FormMutationOnSubmitParams` (excluding `onSubmitSuccess` and `validationSchema`)
- * and requires the React Hook Form instance and a custom success callback.
+ * Parameters for {@link useAuthRegisterSubmitMutation}.
  */
-type SubmitMutationParams = Omit<MutationOnSubmitParams, "onSubmitSuccess" | "validationSchema"> & {
-    /** React Hook Form instance managing the registration form. */
-    form: UseFormReturn<UserRegisterData>;
+type SubmitMutationParams =
+    Omit<MutationOnSubmitParams, "onSubmitSuccess" | "validationSchema"> & {
+    /** React Hook Form instance managing registration state. */
+    form: UseFormReturn<AuthRegisterFormValues>;
 
-    /** Optional callback fired when the registration succeeds. */
+    /** Optional callback fired after successful registration. */
     onSubmitSuccess?: () => void;
 };
 
 /**
- * Custom React Query mutation hook for submitting a user registration form.
+ * Registration submission mutation hook.
  *
- * Handles API submission, success notifications, and form error handling.
+ * @remarks
+ * - Submits data via {@link AuthRepository.register}
+ * - Displays success toast on completion
+ * - Maps API errors back to the form on failure
  *
- * @param params - Configuration parameters for the mutation.
- * @returns A React Query mutation object that can be used to trigger the registration mutation.
+ * @param params - Mutation configuration and callbacks
+ * @returns React Query mutation for registration submission
  *
  * @example
  * ```ts
- * const { mutate, isLoading } = useAuthRegisterSubmitMutation({
- *   form,
- *   onSubmitSuccess: () => console.log("User registered!"),
- *   successMessage: "You have been successfully registered!",
- *   errorMessage: "Registration failed. Please try again."
- * });
- *
- * mutate(form.getValues());
+ * const mutation = useAuthRegisterSubmitMutation({ form });
+ * mutation.mutate(form.getValues());
  * ```
  */
 export default function useAuthRegisterSubmitMutation(
     params: SubmitMutationParams
-): UseMutationResult<void, unknown, UserRegisterData> {
+): UseMutationResult<void, unknown, AuthRegisterForm> {
     const {form, onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
 
     /**
-     * Executes the API call to register a user.
-     *
-     * @param data - User registration form data.
+     * Executes registration request.
      */
-    const submitRegisterData = async (data: UserRegisterData) => {
+    const submitRegisterData = async (data: AuthRegisterForm): Promise<void> => {
         await handleMutationResponse({
             action: () => AuthRepository.register(data),
-            errorMessage: "Failed to register user. Please try again."
+            errorMessage: "Failed to register user. Please try again.",
         });
     };
 
     /**
-     * Callback fired when the registration mutation succeeds.
-     *
-     * Displays a success toast and calls the user-provided `onSubmitSuccess`.
+     * Handles successful registration.
      */
-    const onSuccess = async () => {
-        toast.success(successMessage ?? "Registered successfully. Please login in.");
+    const onSuccess = () => {
+        toast.success(successMessage ?? "Registered successfully. Please login.");
         onSubmitSuccess?.();
     };
 
     /**
-     * Callback fired when the registration mutation fails.
-     *
-     * Handles form errors and calls the user-provided `onSubmitError`.
-     *
-     * @param error - The error thrown during mutation.
+     * Handles registration failure.
      */
     const onError = (error: unknown) => {
-        const displayMessage = errorMessage ?? "Something went wrong. Failed to register user.";
+        const displayMessage =
+            errorMessage ?? "Something went wrong. Failed to register user.";
         handleMutationFormError({form, error, displayMessage});
         onSubmitError?.(error);
     };
 
     return useMutation({
-        mutationKey: ['submit_register_data'],
+        mutationKey: ["submit_register_data"],
         mutationFn: submitRegisterData,
         onSuccess,
         onError,
