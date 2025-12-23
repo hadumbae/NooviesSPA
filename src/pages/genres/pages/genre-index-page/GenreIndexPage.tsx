@@ -12,50 +12,31 @@ import GenreIndexPageContent from "@/pages/genres/pages/genre-index-page/GenreIn
 import useFetchPaginatedGenres from "@/pages/genres/hooks/fetch-data/useFetchPaginatedGenres.ts";
 
 /**
- * Full index page for managing and browsing movie genres.
+ * **GenreIndexPage**
  *
- * This page component composes filtering, pagination, data validation, and
- * responsive rendering into a single unified experience. It acts as the
- * top-level orchestration layer for genre listing behavior.
+ * Top-level page component for browsing and managing genres.
+ *
+ * Acts as the orchestration layer that wires together:
+ * - document metadata
+ * - pagination state
+ * - URL-based filters
+ * - server data fetching
+ * - schema validation
  *
  * ## Responsibilities
- * - Sets the browser document title via {@link useTitle}.
- * - Restores pagination state from `location.state` using {@link usePaginationLocationState}.
- * - Synchronizes pagination with the URL using {@link usePaginationSearchParams}.
- * - Parses and validates genre filter options from search parameters using
- *   {@link useParsedSearchParams} with {@link GenreQueryOptionSchema}.
- * - Fetches paginated genre data from the server using {@link useFetchPaginatedGenres}.
- * - Ensures server responses conform to {@link PaginatedGenreDetailsSchema}
- *   through {@link ValidatedQueryBoundary}.
- * - Provides loading, error, and success UI states via {@link QueryBoundary}.
+ * - Sets the document title via {@link useTitle}
+ * - Restores pagination from router location state
+ * - Synchronizes pagination with URL search params
+ * - Parses and validates filter search params
+ * - Fetches paginated genre data
+ * - Guards rendering with query + schema boundaries
  *
- * ## Rendering Flow
- * 1. **QueryBoundary**
- *    Displays loading and error states for network activity.
+ * ## Data Flow
+ * `location.state → URL search params → query → validated render`
  *
- * 2. **ValidatedQueryBoundary**
- *    Ensures the API response matches the expected structure before rendering.
- *
- * 3. **GenreIndexPageContent**
- *    Displays:
- *    - Page header
- *    - Filter panel
- *    - Genre cards (or empty state)
- *    - Pagination controls
- *
- * ## Pagination Behavior
- * - If the user navigates back to this page, previously selected page/perPage
- *   values may be restored from the router `location.state`.
- * - Pagination state is synced with the URL for shareability and refresh stability.
- *
- * ## Example
- * ```tsx
- * import GenreIndexPage from "@/pages/genres/pages/genre-index-page/GenreIndexPage";
- *
- * export default function AdminGenresRoute() {
- *   return <GenreIndexPage />;
- * }
- * ```
+ * ## Pagination
+ * - Pagination state is URL-driven for shareability
+ * - `location.state` is used only as an initial fallback
  *
  * @component
  */
@@ -67,8 +48,13 @@ const GenreIndexPage: FC = () => {
     // --- Pagination & Query Params ---
 
     const {data: paginationState} = usePaginationLocationState();
-    const {page, perPage} = usePaginationSearchParams(paginationState ?? {page: 1, perPage: 25});
-    const {searchParams} = useParsedSearchParams({schema: GenreQueryOptionSchema});
+    const {page, perPage, setPage} = usePaginationSearchParams(
+        paginationState ?? {page: 1, perPage: 25}
+    );
+
+    const {searchParams} = useParsedSearchParams({
+        schema: GenreQueryOptionSchema
+    });
 
     // --- Data Fetching ---
 
@@ -85,7 +71,13 @@ const GenreIndexPage: FC = () => {
         <QueryBoundary query={query}>
             <ValidatedQueryBoundary query={query} schema={PaginatedGenreDetailsSchema}>
                 {({totalItems, items}: PaginatedGenreDetails) => (
-                    <GenreIndexPageContent genres={items} totalItems={totalItems}/>
+                    <GenreIndexPageContent
+                        genres={items}
+                        totalItems={totalItems}
+                        page={page}
+                        perPage={perPage}
+                        setPage={setPage}
+                    />
                 )}
             </ValidatedQueryBoundary>
         </QueryBoundary>

@@ -10,79 +10,61 @@ import GenreIndexHeader from "@/pages/genres/components/headers/GenreIndexHeader
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {GenreQueryOptionSchema} from "@/pages/genres/schema/filters/GenreQueryOptions.schema.ts";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
-import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import GenreQueryOptionFormContainer
     from "@/pages/genres/components/admin/genre-query-options/GenreQueryOptionFormContainer.tsx";
+import {cn} from "@/common/lib/utils.ts";
+import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 /**
  * Props for {@link GenreIndexPageContent}.
- *
- * @property genres - The list of genre entries to render in the index grid.
- * @property totalItems - Total number of items available, used for pagination control.
  */
 type GenreIndexPageContentProps = {
+    /** Current page number (URL-derived). */
+    page: number;
+
+    /** Items per page (URL-derived). */
+    perPage: number;
+
+    /** Updates the current page in URL search params. */
+    setPage: (page: number) => void;
+
+    /** List of genres to render. */
     genres: GenreDetails[];
+
+    /** Total number of genres available. */
     totalItems: number;
 };
 
 /**
- * Main content component for the **Genre Index Page**.
+ * **GenreIndexPageContent**
  *
- * This component assembles all page sections:
+ * Presentational content for the Genre Index page.
  *
- * - **Header:** Displays the page title and a “Create Genre” button.
- * - **Filter Section:** Shows a collapsible filter panel populated from URL search params.
- * - **Genre Grid:** Renders genre cards or a centered empty state message.
- * - **Pagination Controls:** Displays pagination buttons when needed.
+ * ## Responsibilities
+ * - Renders page header and filter controls
+ * - Displays genre cards or an empty state
+ * - Shows pagination controls when required
  *
  * ## Behavior
- * - Parses search parameters using {@link useParsedSearchParams} with `GenreQueryOptionSchema`.
- * - Determines pagination state using {@link usePaginationSearchParams}.
- * - Detects mobile layout via {@link useIsMobile} to adjust card orientation.
- * - Shows an empty state if no genres exist.
- * - Renders pagination only when `totalItems > perPage`.
- *
- * @example
- * ```tsx
- * <GenreIndexPageContent
- *   genres={genresData}
- *   totalItems={42}
- * />
- * ```
+ * - Filter state is derived from URL search params
+ * - Layout adapts based on viewport (mobile vs desktop)
+ * - Pagination controls render only when `totalItems > perPage`
  *
  * @remarks
- * - Designed to be wrapped by higher-level layout routes.
- * - Maintains consistent vertical rhythm through {@link PageFlexWrapper}.
- * - Cards use horizontal layout on desktop and vertical layout on mobile.
+ * - Contains no data fetching logic
+ * - Expects validated and paginated data from parent
  */
 const GenreIndexPageContent: FC<GenreIndexPageContentProps> = (props) => {
-    // ⚡ State ⚡
-
-    const {totalItems, genres} = props;
+    // --- State ---
     const isMobile = useIsMobile();
+    const {totalItems, genres, page, perPage, setPage} = props;
 
-    // ⚡ Search Params ⚡
+    const {searchParams} = useParsedSearchParams({
+        schema: GenreQueryOptionSchema
+    });
 
-    const {page, perPage, setPage} = usePaginationSearchParams();
-    const {searchParams} = useParsedSearchParams({schema: GenreQueryOptionSchema});
-
-    // ⚡ Filter Section ⚡
-
-    const filterSection = (
-        <section>
-            <SectionHeader srOnly={true}>Filter Genres</SectionHeader>
-
-            <PresetFilterDialog title="Genre Filters" description="Filter and sort your genres.">
-                <GenreQueryOptionFormContainer
-                    presetValues={searchParams}
-                />
-            </PresetFilterDialog>
-        </section>
-    );
-
-    // ⚡ Genre Section ⚡
-
+    // --- List ---
     const hasGenreSection = (
         <PageSection className="grid grid-cols-2 md:grid-cols-3 gap-2">
             {genres.map((genre: GenreDetails) => (
@@ -97,38 +79,45 @@ const GenreIndexPageContent: FC<GenreIndexPageContentProps> = (props) => {
 
     const hasNoGenreSection = (
         <PageCenter>
-            <span className="text-neutral-400 select-none">
+            <span className={cn(SecondaryTextBaseCSS, "select-none capitalize")}>
                 There Are No Genres
             </span>
         </PageCenter>
     );
 
-    // ⚡ Pagination ⚡
+    const listContent = genres.length > 0
+        ? hasGenreSection
+        : hasNoGenreSection;
 
-    const paginationButtons =
-        (totalItems > perPage) && (
-            <PaginationRangeButtons
-                page={page}
-                perPage={perPage}
-                totalItems={totalItems}
-                setPage={setPage}
-            />
-        );
-
-    // ⚡ Render ⚡
+    // --- Render ---
 
     return (
         <PageFlexWrapper>
+            {/* Header */}
             <GenreIndexHeader/>
-            {filterSection}
+
+            {/* Filters */}
+            <section>
+                <SectionHeader srOnly={true}>Filter Genres</SectionHeader>
+
+                <PresetFilterDialog title="Genre Filters" description="Filter and sort your genres.">
+                    <GenreQueryOptionFormContainer
+                        presetValues={searchParams}
+                    />
+                </PresetFilterDialog>
+            </section>
+
+            {listContent}
 
             {
-                genres.length > 0
-                    ? hasGenreSection
-                    : hasNoGenreSection
+                totalItems > perPage &&
+                <PaginationRangeButtons
+                    page={page}
+                    perPage={perPage}
+                    totalItems={totalItems}
+                    setPage={setPage}
+                />
             }
-
-            {paginationButtons}
         </PageFlexWrapper>
     );
 };

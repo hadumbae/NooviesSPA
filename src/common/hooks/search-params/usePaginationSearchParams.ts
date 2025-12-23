@@ -8,106 +8,115 @@ import getPaginationDefaults from "@/common/utility/defaults/getPaginationDefaul
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 import Logger from "@/common/utility/features/logger/Logger.ts";
 
+/**
+ * Return type for {@link usePaginationSearchParams}.
+ */
 type UsePaginationSearchParamsReturn = {
-    /** Current page number from URL or defaults. */
+    /** Current page number (validated). */
     page: number;
 
-    /** Current number of items per page from URL or defaults. */
+    /** Current items-per-page value (validated). */
     perPage: number;
 
-    /** Setter to update the page number in URL search params. */
+    /** Updates the `page` URL search parameter. */
     setPage: (newPage: number | string) => void;
 
-    /** Setter to update the per-page number in URL search params. */
+    /** Updates the `perPage` URL search parameter. */
     setPerPage: (newPerPage: number | string) => void;
 
-    /** Indicates whether the URL currently contains `page` and `perPage` search parameters. */
+    /** Whether both pagination parameters exist in the URL. */
     hasPaginationValues: boolean;
 };
 
 /**
- * Custom React hook to manage pagination state via URL search parameters.
+ * **usePaginationSearchParams**
  *
- * ## Overview
- * This hook provides type-safe access to pagination values (`page` and `perPage`)
- * from the URL search params. It falls back to default values if parameters are missing
- * and supports optional preset values.
+ * URL-driven pagination state hook.
  *
- * ### Behavior
- * - Reads `page` and `perPage` from the URL search parameters.
- * - Falls back to `presetValues` if provided, or defaults from {@link getPaginationDefaults}.
- * - Validates values using {@link PaginationValuesSchema}.
- * - Provides setters (`setPage` and `setPerPage`) that automatically update the URL search parameters.
- * - Throws an error if invalid pagination values are detected.
+ * Reads, validates, and updates `page` and `perPage`
+ * values from URL search parameters.
  *
- * @param presetValues - Optional object containing preset `page` and `perPage` values.
+ * ## Source of Truth
+ * - URL search params are authoritative
+ * - Fallback values are used only when params are missing
  *
- * @returns An object containing:
- * - `page` – The current page number.
- * - `perPage` – The current number of items per page.
- * - `setPage(newPage)` – Function to update the page number in the URL.
- * - `setPerPage(newPerPage)` – Function to update the per-page number in the URL.
- * - `hasPaginationValues` – Boolean indicating if the URL contains both `page` and `perPage`.
+ * ## Guarantees
+ * - Returned values always conform to {@link PaginationValuesSchema}
+ * - Invalid params are logged and rejected early
+ *
+ * @param fallbackValues - Initial pagination values used only if URL params are absent
+ *
+ * @throws Error if pagination values fail schema validation
  *
  * @example
  * ```ts
- * const { page, perPage, setPage, setPerPage } = usePaginationSearchParams();
+ * const { page, perPage, setPage } = usePaginationSearchParams({ page: 1, perPage: 25 });
  *
- * console.log(page, perPage);
  * setPage(2);
- * setPerPage(50);
  * ```
- *
- * @remarks
- * - Ensure `.env` contains valid default pagination values via `VITE_PAGINATION_PAGE_DEFAULT` and
- *   `VITE_PAGINATION_PER_PAGE_DEFAULT`.
- * - This hook automatically logs invalid URL parameters via {@link Logger} before throwing.
  */
-export default function usePaginationSearchParams(presetValues?: PaginationValues): UsePaginationSearchParamsReturn {
-    // ⚡ State ⚡
-
+export default function usePaginationSearchParams(
+    fallbackValues?: PaginationValues
+): UsePaginationSearchParamsReturn {
+    // --- STATE ---
     const [searchParams, setSearchParams] = useSearchParams();
+
     const defaultValues = getPaginationDefaults();
-
-    // ⚡ Has Relevant Values ⚡
-
-    const hasPaginationValues = searchParams.get("page") !== null && searchParams.get("perPage") !== null;
-
-    // ⚡ Get Values ⚡
-
-    const raw = {
-        page: getDefaultValue(presetValues?.page, searchParams.get("page"), defaultValues.page),
-        perPage: getDefaultValue(presetValues?.perPage, searchParams.get("perPage"), defaultValues.perPage),
+    const paramValues = {
+        page: searchParams.get("page"),
+        perPage: searchParams.get("perPage"),
     };
 
-    // ⚡ Parse Values ⚡
+    // --- PRESENCE ---
+    const hasPaginationValues =
+        paramValues.page !== null &&
+        paramValues.perPage !== null;
 
+    // --- RAW VALUES ---
+    const raw = {
+        page: getDefaultValue(
+            paramValues.page,
+            fallbackValues?.page,
+            defaultValues.page
+        ),
+        perPage: getDefaultValue(
+            paramValues.perPage,
+            fallbackValues?.perPage,
+            defaultValues.perPage
+        ),
+    };
+
+    // --- VALIDATION ---
     const {data, success, error} = PaginationValuesSchema.safeParse(raw);
 
     if (!success || error) {
         Logger.error({
             type: "ERROR",
             error,
-            msg: "Invalid pagination search params. Please try again.",
-            context: {raw}
+            msg: "Invalid pagination search params.",
+            context: {raw},
         });
 
-        throw Error("Invalid pagination search params.");
+        throw new Error("Invalid pagination search params.");
     }
 
     const {page, perPage} = data;
 
-    // ⚡ Handler
-
+    // --- SETTERS ---
     const setParam = (key: keyof PaginationValues, value: number | string) => {
-        setSearchParams(updateSearchParams({searchParams, updateValues: {[key]: value.toString()}}));
-    }
+        setSearchParams(
+            updateSearchParams({
+                searchParams,
+                updateValues: {[key]: value.toString()},
+            })
+        );
+    };
 
     return {
         page,
         perPage,
-        setPage: (newPage: number | string) => setParam("page", newPage),
-        setPerPage: (newPerPage: number | string) => setParam("perPage", newPerPage),
+        setPage: (newPage) => setParam("page", newPage),
+        setPerPage: (newPerPage) => setParam("perPage", newPerPage),
         hasPaginationValues,
-    }
+    };
 }
