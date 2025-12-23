@@ -33,10 +33,10 @@ import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
  * <GuestAuthSidebarGroup />
  * ```
  */
-const GuestAuthSidebarGroup: FC = () => {
+const AdminSetupSidebarGroup: FC = () => {
     const navigate = useLoggedNavigate();
 
-    const onLogout = () => navigate({ to: "/", component: GuestAuthSidebarGroup.name });
+    const onLogout = () => navigate({ to: "/", component: AdminSetupSidebarGroup.name });
     const { mutate } = useAuthLogoutSubmitMutation({ onSubmitSuccess: onLogout });
 
     return (
@@ -69,4 +69,4 @@ const GuestAuthSidebarGroup: FC = () => {
     );
 };
 
-export default GuestAuthSidebarGroup;
+export default AdminSetupSidebarGroup;

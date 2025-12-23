@@ -12,41 +12,15 @@ import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.ts
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
- * **BaseLayoutSetupNavigation** — a dropdown navigation component
- * for accessing setup-related admin pages such as genres, persons,
- * role types, and theatres.
- *
- * The component visually indicates whether the user is currently
- * on one of the setup-related routes by applying an inactive color
- * when none of the setup paths match the current URL.
- *
- * ### Behavior
- * - Displays a “Setup” button with a dropdown icon (`ChevronDown`).
- * - Expands to show links to setup-related admin pages.
- * - Highlights the trigger when any of the linked routes are active.
- *
- * ### Example
- * ```tsx
- * <BaseLayoutSetupNavigation />
- * ```
- *
- * ### Routes Covered
- * - `/admin/genres`
- * - `/admin/persons`
- * - `/admin/roletypes`
- * - `/admin/theatres`
+ * Admin setup navigation dropdown.
  *
  * @remarks
- * - Uses {@link DropdownMenuLink} for navigation with integrated logging.
- * - Requires React Router context (`react-router-dom`).
- * - Uses `useCurrentURLPath()` to determine active state.
+ * - Groups admin setup routes under a single dropdown
+ * - Highlights active state based on current URL
+ * - Intended for admin layout navigation bars
  */
-const BaseLayoutSetupNavigationDropdown: FC = () => {
-    // ⚡ URL ⚡
-
+const AdminLayoutSetupNavigationDropdown: FC = () => {
     const url = useCurrentURLPath();
-
-    // ⚡ Check If Active ⚡
 
     const pathNames = [
         "/admin/genres",
@@ -72,28 +46,28 @@ const BaseLayoutSetupNavigationDropdown: FC = () => {
             <DropdownMenuContent>
                 <DropdownMenuLink
                     to="/admin/genres"
-                    component={BaseLayoutSetupNavigationDropdown.name}
+                    component={AdminLayoutSetupNavigationDropdown.name}
                 >
                     Genres
                 </DropdownMenuLink>
 
                 <DropdownMenuLink
                     to="/admin/persons"
-                    component={BaseLayoutSetupNavigationDropdown.name}
+                    component={AdminLayoutSetupNavigationDropdown.name}
                 >
                     Persons
                 </DropdownMenuLink>
 
                 <DropdownMenuLink
                     to="/admin/roletypes"
-                    component={BaseLayoutSetupNavigationDropdown.name}
+                    component={AdminLayoutSetupNavigationDropdown.name}
                 >
                     Role Types
                 </DropdownMenuLink>
 
                 <DropdownMenuLink
                     to="/admin/theatres"
-                    component={BaseLayoutSetupNavigationDropdown.name}
+                    component={AdminLayoutSetupNavigationDropdown.name}
                 >
                     Theatres
                 </DropdownMenuLink>
@@ -102,4 +76,4 @@ const BaseLayoutSetupNavigationDropdown: FC = () => {
     );
 };
 
-export default BaseLayoutSetupNavigationDropdown;
+export default AdminLayoutSetupNavigationDropdown;

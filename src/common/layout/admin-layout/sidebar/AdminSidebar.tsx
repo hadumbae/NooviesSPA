@@ -3,10 +3,13 @@ import {
     Sidebar,
     SidebarContent,
     SidebarHeader,
-} from "@/common/components/ui/sidebar";
-import AdminAuthSidebarGroup from "@/common/layout/base-layout/sidebar/auth-side-bar/AuthSidebarGroup.tsx";
-import AdminSetupSidebarGroup from "@/common/layout/base-layout/sidebar/admin-side-bar/AdminSetupSidebarGroup.tsx";
-import AdminMovieSidebarGroup from "@/common/layout/base-layout/sidebar/admin-side-bar/AdminMovieSidebarGroup.tsx";
+} from "@/common/components/ui/sidebar.tsx";
+import AdminAuthSidebarGroup
+    from "@/common/layout/admin-layout/sidebar/admin-side-bar-groups/AdminAuthSidebarGroup.tsx";
+import AdminSetupSidebarGroup
+    from "@/common/layout/admin-layout/sidebar/admin-side-bar-groups/AdminSetupSidebarGroup.tsx";
+import AdminMovieSidebarGroup
+    from "@/common/layout/admin-layout/sidebar/admin-side-bar-groups/AdminMovieSidebarGroup.tsx";
 
 /**
  * **AdminSidebar**
@@ -30,13 +33,13 @@ const AdminSidebar: FC = () => {
     return (
         <Sidebar>
             <SidebarHeader>
-                Noovies
+                NOOVIES Admin
             </SidebarHeader>
 
             <SidebarContent>
-                <AdminSetupSidebarGroup />
-                <AdminMovieSidebarGroup />
-                <AdminAuthSidebarGroup />
+                <AdminSetupSidebarGroup/>
+                <AdminMovieSidebarGroup/>
+                <AdminAuthSidebarGroup/>
             </SidebarContent>
         </Sidebar>
     );
