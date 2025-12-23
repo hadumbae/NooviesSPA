@@ -19,6 +19,7 @@ import {AuthContext, AuthUserContextValue} from "@/pages/auth/context/AuthContex
 import Cookies from "js-cookie";
 import {User} from "@/pages/users/schemas/user/User.types.ts";
 import {UserSchema} from "@/pages/users/schemas/user/User.schema.ts";
+import isAdminUser from "@/pages/auth/utility/isAdminUser.ts";
 
 /**
  * Props for {@link AuthProvider}.
@@ -103,7 +104,7 @@ const AuthProvider = ({children}: ProviderProps) => {
     /**
      * Indicates whether the authenticated user has admin privileges.
      */
-    const isAdmin = user?.roles.includes("ADMIN") ?? false;
+    const isAdmin = isAdminUser(user);
 
     /**
      * Context value exposed to consumers.
