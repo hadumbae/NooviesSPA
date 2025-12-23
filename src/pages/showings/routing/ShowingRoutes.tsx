@@ -15,13 +15,13 @@
  * {@link ComponentErrorHandler} for route-level error handling.
  */
 
-import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ShowingIndexPage from "@/pages/showings/pages/index-page/ShowingIndexPage.tsx";
 import ShowingCreatePage from "@/pages/showings/pages/ShowingCreatePage.tsx";
 import ShowingEditPage from "@/pages/showings/pages/ShowingEditPage.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import {RouteObject} from "react-router-dom";
 import ShowingDetailsPage from "@/pages/showings/pages/details-page/page/ShowingDetailsPage.tsx";
+import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
 
 /**
  * Route definitions for admin showings.
@@ -34,7 +34,7 @@ import ShowingDetailsPage from "@/pages/showings/pages/details-page/page/Showing
 const routes: RouteObject[] = [
     {
         path: "/admin/showings",
-        element: <BaseLayout/>,
+        element: <AdminLayout/>,
         children: [
             {
                 path: "/admin/showings",

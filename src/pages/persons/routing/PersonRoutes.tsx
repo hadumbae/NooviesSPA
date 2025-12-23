@@ -1,9 +1,9 @@
-import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import PersonIndexPage from "@/pages/persons/pages/PersonIndexPage.tsx";
 import PersonDetailsPage from "@/pages/persons/pages/details/PersonDetailsPage.tsx";
 import PersonImagePage from "@/pages/persons/pages/PersonImagePage.tsx";
 
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
+import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
 
 /**
  * Routes configuration for the admin "Persons" section.
@@ -26,7 +26,7 @@ export default [
         /** Base path for all person-related admin routes. */
         path: '/admin/persons',
         /** Top-level layout wrapper for person routes. */
-        element: <BaseLayout />,
+        element: <AdminLayout />,
         /** Child routes nested under the base path. */
         children: [
             {

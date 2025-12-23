@@ -1,4 +1,3 @@
-import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import MovieIndexPage from "@/pages/movies/pages/admin/MovieIndexPage.tsx";
 import MovieCreatePage from "@/pages/movies/pages/admin/movie-create-page/MovieCreatePage.tsx";
 import MovieDetailsPage from "@/pages/movies/pages/admin/movie-details-page/MovieDetailsPage.tsx";
@@ -6,11 +5,12 @@ import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHand
 import {RouteObject} from "react-router-dom";
 import MoviePeoplePage from "@/pages/movies/pages/admin/credits/MoviePeoplePage.tsx";
 import MovieEditPage from "@/pages/movies/pages/admin/movie-edit-page/MovieEditPage.tsx";
+import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
 
 const routes: RouteObject[] = [
     {
         path: '/admin/movies',
-        element: <BaseLayout />,
+        element: <AdminLayout />,
         children: [
             // CRUD Routes
 
