@@ -1,4 +1,9 @@
-import {FC} from 'react';
+/**
+ * Login form presentation component.
+ *
+ * Renders authentication inputs and actions using React Hook Form,
+ * delegating submission and mutation handling to the parent.
+ */
 import {cn} from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
@@ -6,41 +11,51 @@ import {Form} from "@/common/components/ui/form.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
-import {AuthUserDetails} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
-import {UserLoginData} from "@/pages/auth/schema/form/AuthForm.types.ts";
-import {PrimaryButtonCSS, SecondaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
+import {User} from "@/pages/users/schemas/user/User.types.ts";
+import {
+    AuthLoginForm,
+    AuthLoginFormValues,
+} from "@/pages/auth/schema/form/AuthLoginForm.types.ts";
 
 /**
- * Props for the `AuthLoginFormView` component.
+ * Props for {@link AuthLoginFormView}.
  */
 type ViewProps = {
-    /** React Hook Form instance for managing form state and validation. */
-    form: UseFormReturn<UserLoginData>;
+    /**
+     * React Hook Form instance managing login state.
+     */
+    form: UseFormReturn<AuthLoginFormValues>;
 
-    /** Function to handle form submission. */
-    submitHandler: SubmitHandler<UserLoginData>;
+    /**
+     * Submission handler invoked on valid form submit.
+     */
+    submitHandler: SubmitHandler<AuthLoginFormValues>;
 
-    /** Optional CSS class for styling the form container. */
+    /**
+     * Optional container class name.
+     */
     className?: string;
 
-    /** React Query mutation result for submitting login data. */
-    mutation: UseMutationResult<AuthUserDetails, unknown, UserLoginData>;
-}
+    /**
+     * Login submission mutation.
+     */
+    mutation: UseMutationResult<User, unknown, AuthLoginForm>;
+};
 
 /**
- * Presentation component for the login form.
+ * Stateless login form view.
  *
- * Renders the email and password fields, login and register buttons,
- * and manages form submission state.
- *
- * @param props - Props including form instance, submit handler, mutation, and optional className.
+ * @remarks
+ * - Handles rendering only
+ * - Submission, validation, and side effects are delegated
+ * - Disables submission while the mutation is pending
  */
-const AuthLoginFormView: FC<ViewProps> = (props) => {
+const AuthLoginFormView = (props: ViewProps) => {
     const {form, submitHandler, className, mutation: {isPending}} = props;
     const navigate = useLoggedNavigate();
 
     /**
-     * Redirects the user to the registration page.
+     * Navigates to the registration page.
      */
     const redirectToRegister = () => {
         navigate({
@@ -52,7 +67,10 @@ const AuthLoginFormView: FC<ViewProps> = (props) => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-5", className)}>
+            <form
+                onSubmit={form.handleSubmit(submitHandler)}
+                className={cn("space-y-3", className)}
+            >
                 <HookFormInput
                     name="email"
                     label="Email"
@@ -68,18 +86,18 @@ const AuthLoginFormView: FC<ViewProps> = (props) => {
                 />
 
                 <Button
-                    variant="default"
+                    variant="primary"
                     type="submit"
-                    className={cn(PrimaryButtonCSS, "w-full")}
+                    className="w-full"
                     disabled={isPending}
                 >
                     Login
                 </Button>
 
                 <Button
-                    variant="outline"
-                    className={cn(SecondaryButtonCSS, "w-full")}
+                    variant="secondary"
                     type="button"
+                    className="w-full"
                     onClick={redirectToRegister}
                 >
                     Register

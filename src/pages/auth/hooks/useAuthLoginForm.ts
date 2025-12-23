@@ -1,19 +1,22 @@
+/**
+ * Authentication login form hook.
+ *
+ * Creates a React Hook Form instance configured with
+ * Zod validation and default login values.
+ */
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {UserLoginSchema} from "@/pages/auth/schema/form/AuthForm.schema.ts";
-import {UserLoginData} from "@/pages/auth/schema/form/AuthForm.types.ts";
+import {AuthLoginFormSchema} from "@/pages/auth/schema/form/AuthLoginForm.schema.ts";
+import {AuthLoginFormValues} from "@/pages/auth/schema/form/AuthLoginForm.types.ts";
 
 /**
- * Custom React Hook for initializing the login form using React Hook Form.
+ * Initializes the login form.
  *
- * Integrates Zod validation with the login schema (`UserLoginSchema`) and
- * provides default values for email and password fields.
+ * @remarks
+ * - Validated using {@link AuthLoginFormSchema}
+ * - All fields default to empty strings
  *
- * @returns A `UseFormReturn<UserLoginData>` object containing:
- * - `register` for input registration
- * - `handleSubmit` for form submission handling
- * - `control` for controlled inputs
- * - `formState` including errors and touched fields
+ * @returns React Hook Form instance for login input
  *
  * @example
  * ```ts
@@ -25,9 +28,14 @@ import {UserLoginData} from "@/pages/auth/schema/form/AuthForm.types.ts";
  * </form>
  * ```
  */
-export default function useAuthLoginForm(): UseFormReturn<UserLoginData> {
-    return useForm<UserLoginData>({
-        resolver: zodResolver(UserLoginSchema),
-        defaultValues: { email: "",  password: "" },
+export default function useAuthLoginForm(): UseFormReturn<AuthLoginFormValues> {
+    const defaultValues: AuthLoginFormValues = {
+        email: "",
+        password: "",
+    };
+
+    return useForm<AuthLoginFormValues>({
+        resolver: zodResolver(AuthLoginFormSchema),
+        defaultValues,
     });
 }

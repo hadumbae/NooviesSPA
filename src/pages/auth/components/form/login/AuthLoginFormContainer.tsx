@@ -1,10 +1,10 @@
 import {FC} from 'react';
 import useAuthLoginForm from "@/pages/auth/hooks/useAuthLoginForm.ts";
 import useAuthLoginSubmitMutation from "@/pages/auth/hooks/useAuthLoginSubmitMutation.ts";
-import {AuthUserDetails} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
 import AuthLoginFormView from "@/pages/auth/components/form/login/AuthLoginFormView.tsx";
-import {UserLoginData} from "@/pages/auth/schema/form/AuthForm.types.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {User} from "@/pages/users/schemas/user/User.types.ts";
+import {AuthLoginForm, AuthLoginFormValues} from "@/pages/auth/schema/form/AuthLoginForm.types.ts";
 
 /**
  * Props for the `AuthLoginFormContainer` component.
@@ -12,7 +12,7 @@ import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts
  * Extends `FormMutationOnSubmitParams<AuthUserDetails>` except for the `validationSchema`,
  * which is omitted since validation is handled within the form hook.
  */
-type FormProps = Omit<MutationOnSubmitParams<AuthUserDetails>, "validationSchema"> & {
+type FormProps = Omit<MutationOnSubmitParams<User>, "validationSchema"> & {
     /** Optional custom CSS class name for styling the container. */
     className?: string;
 }
@@ -32,18 +32,28 @@ type FormProps = Omit<MutationOnSubmitParams<AuthUserDetails>, "validationSchema
  * @returns The `AuthLoginFormView` presentation component with form, mutation, and submit handler.
  */
 const AuthLoginFormContainer: FC<FormProps> = ({className, ...mutationProps}) => {
+    // ---- FORM ---
     const form = useAuthLoginForm();
-    const mutation = useAuthLoginSubmitMutation({form, ...mutationProps});
+
+    // --- MUTATION ---
+    const mutation = useAuthLoginSubmitMutation({
+        form,
+        ...mutationProps,
+    });
+
+    // --- SUBMIT HANDLER ---
 
     /**
      * Handles login form submission.
      *
      * @param values - The user-provided login credentials.
      */
-    const onSubmit = (values: UserLoginData) => {
+    const onSubmit = (values: AuthLoginFormValues) => {
         console.log("Logging In...");
-        mutation.mutate(values);
+        mutation.mutate(values as AuthLoginForm);
     };
+
+    // --- RENDER ---
 
     return (
         <AuthLoginFormView

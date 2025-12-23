@@ -1,39 +1,37 @@
+/**
+ * Authentication user setter hook.
+ *
+ * Persists the authenticated user and synchronizes global auth state.
+ */
 import {useContext} from "react";
 import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
-import {AuthUserDetails} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
+import {User} from "@/pages/users/schemas/user/User.types.ts";
 
 /**
- * Custom React hook for updating the authenticated user state.
+ * Provides a function for setting the authenticated user.
  *
- * This hook provides a function to:
- * 1. Store the authenticated user in `localStorage`.
- * 2. Update the global authentication context.
- * 3. Optionally handle redirect paths stored in `sessionStorage`.
+ * @remarks
+ * - Persists the user in `localStorage` under `authUser`
+ * - Resets the logout signal on successful set
+ * - No-op for context updates if used outside {@link AuthProvider}
  *
- * @returns A function that accepts an `authUser` object and updates both localStorage and the AuthContext.
+ * @returns Function that accepts a {@link User} and updates auth state
  *
  * @example
  * ```ts
  * const setAuthUser = useSetAuthUser();
- * setAuthUser({ authUser: currentUser });
+ * setAuthUser(user);
  * ```
  */
 export default function useSetAuthUser() {
     const authContext = useContext(AuthContext);
 
-    /**
-     * Updates the authenticated user.
-     *
-     * @param params.authUser - The authenticated user details to store and set in context.
-     */
-    return ({authUser}: {authUser: AuthUserDetails}) => {
-        // Save authenticated user in localStorage
+    return (authUser: User) => {
         localStorage.setItem("authUser", JSON.stringify(authUser));
 
-        // Update the global AuthContext if available
         if (authContext) {
             authContext.setUser(authUser);
             authContext.setLogout(false);
         }
-    }
+    };
 }

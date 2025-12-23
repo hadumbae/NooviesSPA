@@ -1,5 +1,11 @@
+/**
+ * Login submission mutation hook.
+ *
+ * Provides a React Query mutation for authenticating a user.
+ * Handles API submission, response validation, global auth state updates,
+ * and form-level error mapping.
+ */
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {AuthUserDetails, AuthUserDetailsSchema} from "@/pages/auth/schema/AuthUserDetailsSchema.ts";
 import {toast} from "react-toastify";
 import {UseFormReturn} from "react-hook-form";
 import AuthRepository from "@/pages/auth/repositories/AuthRepository.ts";
@@ -7,55 +13,56 @@ import useSetAuthUser from "@/pages/auth/hooks/authUser/useSetAuthUser.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import {UserLoginData} from "@/pages/auth/schema/form/AuthForm.types.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {UserSchema} from "@/pages/users/schemas/user/User.schema.ts";
+import {User} from "@/pages/users/schemas/user/User.types.ts";
+import {AuthLoginForm, AuthLoginFormValues} from "@/pages/auth/schema/form/AuthLoginForm.types.ts";
 
 /**
- * Parameters for `useAuthLoginSubmitMutation`.
+ * Parameters for {@link useAuthLoginSubmitMutation}.
+ *
+ * @template TUser - Authenticated user type
  */
-export type SubmitMutationParams = Omit<MutationOnSubmitParams<AuthUserDetails>, "validationSchema"> & {
-    /** React Hook Form instance managing the login form. */
-    form: UseFormReturn<UserLoginData>;
+export type SubmitMutationParams =
+    Omit<MutationOnSubmitParams<User>, "validationSchema"> & {
+    /**
+     * React Hook Form instance managing the login form state.
+     */
+    form: UseFormReturn<AuthLoginFormValues>;
 };
 
 /**
- * Custom React hook for handling login form submission with validation and API integration.
+ * Creates a login submission mutation.
  *
- * This hook integrates:
- * - Form validation with `react-hook-form`.
- * - API request to log in the user.
- * - Validation of the API response against `AuthUserDetailsSchema`.
- * - Success and error handling, including toast notifications.
- * - Updating the authenticated user state.
+ * @remarks
+ * - Calls {@link AuthRepositoryMethods.login}
+ * - Validates the API response against {@link UserSchema}
+ * - Updates authenticated user state on success
+ * - Maps API errors back to the form on failure
  *
- * @param params - Configuration parameters including the form instance, optional callbacks, and messages.
- * @returns A `react-query` mutation object for login submission.
+ * @param params - Mutation configuration and callbacks
+ * @returns React Query mutation instance for login submission
  *
  * @example
  * ```ts
- * const loginMutation = useAuthLoginSubmitMutation({
- *   form,
- *   successMessage: "Welcome back!",
- *   onSubmitSuccess: (user) => console.log("Logged in user:", user),
- * });
- *
- * loginMutation.mutate({email: "user@example.com", password: "secret"});
+ * const mutation = useAuthLoginSubmitMutation({ form });
+ * mutation.mutate({ email, password });
  * ```
  */
 export default function useAuthLoginSubmitMutation(
     params: SubmitMutationParams
-): UseMutationResult<AuthUserDetails, unknown, UserLoginData> {
+): UseMutationResult<User, unknown, AuthLoginForm> {
     const {form, onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
     const setAuthUser = useSetAuthUser();
 
     /**
-     * Submits login data to the Auth API and validates the response.
+     * Submits login credentials and validates the API response.
      *
-     * @param data - The login form data containing email and password.
-     * @returns The validated authenticated user details.
-     * @throws Will throw an error if the API response is invalid or login fails.
+     * @param data - Login form values
+     * @returns Authenticated user
+     * @throws Validation or request errors
      */
-    const submitLoginData = async (data: UserLoginData) => {
+    const submitLoginData = async (data: AuthLoginForm): Promise<User> => {
         const returnData = await handleMutationResponse({
             action: () => AuthRepository.login(data),
             errorMessage: "Failed to login. Please try again.",
@@ -63,29 +70,34 @@ export default function useAuthLoginSubmitMutation(
 
         const {data: parsedData, success, error} = validateData({
             data: returnData,
-            schema: AuthUserDetailsSchema,
-            message: "Invalid Login API Response."
+            schema: UserSchema,
+            message: "Invalid Login API Response.",
         });
 
-        if (!success) throw error;
+        if (!success) {
+            throw error;
+        }
+
         return parsedData;
     };
 
     /**
-     * Handles a successful login mutation.
+     * Handles successful authentication.
      *
-     * @param authUser - The authenticated user details returned by the API.
+     * @param user - Authenticated user
      */
-    const onSuccess = (authUser: AuthUserDetails) => {
+    const onSuccess = (user: User) => {
         toast.success(successMessage ?? "Logged in.");
-        setAuthUser({authUser});
-        onSubmitSuccess?.(authUser);
+        setAuthUser(user);
+        onSubmitSuccess?.(user);
     };
 
     /**
-     * Handles a failed login mutation.
+     * Handles authentication failure.
      *
-     * @param error - The error thrown during login submission.
+     * Maps API errors back to the form and triggers error callbacks.
+     *
+     * @param error - Submission error
      */
     const onError = (error: unknown) => {
         const displayMessage = errorMessage ?? "Failed to login. Please try again.";
@@ -94,7 +106,7 @@ export default function useAuthLoginSubmitMutation(
     };
 
     return useMutation({
-        mutationKey: ['submit_login_data'],
+        mutationKey: ["submit_login_data"],
         mutationFn: submitLoginData,
         onSuccess,
         onError,

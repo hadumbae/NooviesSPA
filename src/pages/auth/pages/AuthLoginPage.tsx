@@ -1,4 +1,10 @@
-import {FC, useEffect} from 'react';
+/**
+ * Authentication login page.
+ *
+ * Renders the login form and handles post-login navigation and
+ * redirected error messaging.
+ */
+import {useEffect} from "react";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
@@ -12,21 +18,19 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 /**
  * Login page component.
  *
- * Renders the login form with a title and description. Handles navigation
- * after successful login and displays login error messages if redirected
- * with `showLoginError` state.
- *
  * @remarks
- * - Uses `AuthLoginFormContainer` for the login form.
- * - Uses `useLoggedNavigate` for programmatic navigation.
- * - Reads optional `redirectPath` from sessionStorage to redirect after login.
+ * - Displays an error toast when redirected with `showLoginError`
+ * - Delegates authentication logic to {@link AuthLoginFormContainer}
+ * - Redirects the user after successful login
  */
-const AuthLoginPage: FC = () => {
+const AuthLoginPage = () => {
+    // --- HOOKS ---
+
     const navigate = useLoggedNavigate();
     const location = useLocation();
 
     /**
-     * Display an error toast if redirected with `showLoginError` in location state.
+     * Displays an error toast when redirected from a failed auth flow.
      */
     useEffect(() => {
         if (location.state?.showLoginError) {
@@ -34,32 +38,45 @@ const AuthLoginPage: FC = () => {
         }
     }, [location.state]);
 
+    // --- CALLBACKS ---
+
     /**
-     * Callback executed after a successful login.
+     * Handles post-login navigation.
      *
-     * - Redirects the user to the `redirectPath` saved in sessionStorage, or to `/` if none.
-     * - Cleans up the stored redirect path.
+     * @remarks
+     * - Redirects to the stored `redirectPath` if present
+     * - Falls back to `/`
+     * - Cleans up session storage
      */
     const onSubmitSuccess = () => {
         const path = sessionStorage.getItem("redirectPath");
-        path && sessionStorage.removeItem("redirectPath");
+
+        if (path) {
+            sessionStorage.removeItem("redirectPath");
+        }
 
         navigate({
             to: path ?? "/",
             component: AuthLoginPage.name,
-            message: "Navigate on login success."
+            message: "Navigate on login success.",
         });
     };
+
+    // --- RENDER ---
 
     return (
         <PageFlexWrapper>
             <header>
                 <HeaderTitle>Login</HeaderTitle>
-                <HeaderDescription>Enter your credentials to login.</HeaderDescription>
+                <HeaderDescription>
+                    Enter your credentials to login.
+                </HeaderDescription>
             </header>
 
             <section className="flex justify-center">
-                <SectionHeader srOnly={true}>Login Form</SectionHeader>
+                <SectionHeader srOnly>
+                    Login Form
+                </SectionHeader>
 
                 <Card className="w-full md:w-5/6 lg:w-2/3 xl:w-1/2">
                     <CardContent className="p-3">
