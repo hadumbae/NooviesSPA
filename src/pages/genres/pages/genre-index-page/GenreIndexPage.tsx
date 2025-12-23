@@ -3,13 +3,13 @@ import usePaginationSearchParams from "@/common/hooks/search-params/usePaginatio
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import useFetchGenres from "@/pages/genres/hooks/useFetchGenres.ts";
 import {PaginatedGenreDetailsSchema} from "@/pages/genres/schema/genre/Genre.schema.ts";
 import {PaginatedGenreDetails} from "@/pages/genres/schema/genre/Genre.types.ts";
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {GenreQueryOptionSchema} from "@/pages/genres/schema/filters/GenreQueryOptions.schema.ts";
 import GenreIndexPageContent from "@/pages/genres/pages/genre-index-page/GenreIndexPageContent.tsx";
+import useFetchPaginatedGenres from "@/pages/genres/hooks/fetch-data/useFetchPaginatedGenres.ts";
 
 /**
  * Full index page for managing and browsing movie genres.
@@ -24,7 +24,7 @@ import GenreIndexPageContent from "@/pages/genres/pages/genre-index-page/GenreIn
  * - Synchronizes pagination with the URL using {@link usePaginationSearchParams}.
  * - Parses and validates genre filter options from search parameters using
  *   {@link useParsedSearchParams} with {@link GenreQueryOptionSchema}.
- * - Fetches paginated genre data from the server using {@link useFetchGenres}.
+ * - Fetches paginated genre data from the server using {@link useFetchPaginatedGenres}.
  * - Ensures server responses conform to {@link PaginatedGenreDetailsSchema}
  *   through {@link ValidatedQueryBoundary}.
  * - Provides loading, error, and success UI states via {@link QueryBoundary}.
@@ -60,33 +60,32 @@ import GenreIndexPageContent from "@/pages/genres/pages/genre-index-page/GenreIn
  * @component
  */
 const GenreIndexPage: FC = () => {
-    // ⚡ Page Setup ⚡
+    // --- Page Setup ---
 
     useTitle("Genres");
 
-    // ⚡ Pagination & Query Params ⚡
+    // --- Pagination & Query Params ---
 
     const {data: paginationState} = usePaginationLocationState();
     const {page, perPage} = usePaginationSearchParams(paginationState ?? {page: 1, perPage: 25});
     const {searchParams} = useParsedSearchParams({schema: GenreQueryOptionSchema});
 
-    // ⚡ Data Fetching ⚡
+    // --- Data Fetching ---
 
-    const query = useFetchGenres({
-        virtuals: true,
-        populate: true,
-        paginated: true,
+    const query = useFetchPaginatedGenres({
         page,
         perPage,
-        ...searchParams,
+        queries: searchParams,
+        requestOptions: {virtuals: true, populate: true},
     });
 
-    // ⚡ Rendering ⚡
+    // --- RENDER ---
+
     return (
         <QueryBoundary query={query}>
             <ValidatedQueryBoundary query={query} schema={PaginatedGenreDetailsSchema}>
                 {({totalItems, items}: PaginatedGenreDetails) => (
-                    <GenreIndexPageContent genres={items} totalItems={totalItems} />
+                    <GenreIndexPageContent genres={items} totalItems={totalItems}/>
                 )}
             </ValidatedQueryBoundary>
         </QueryBoundary>

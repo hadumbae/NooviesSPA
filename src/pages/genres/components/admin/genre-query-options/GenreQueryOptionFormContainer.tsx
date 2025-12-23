@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import {GenreQueryOptions} from "@/pages/genres/schema/filters/GenreQueryOptions.types.ts";
-import useGenreQueryOptionForm from "@/pages/genres/hooks/features/genre-query-option/useGenreQueryOptionForm.ts";
+import useGenreQueryOptionForm from "@/pages/genres/hooks/use-query-options/useGenreQueryOptionForm.ts";
 import useGenreQueryOptionSearchParams
-    from "@/pages/genres/hooks/features/genre-query-option/useGenreQueryOptionSearchParams.ts";
+    from "@/pages/genres/hooks/use-query-options/useGenreQueryOptionSearchParams.ts";
 import {GenreQueryOptionFormValues} from "@/pages/genres/schema/filters/GenreQueryOptionForm.types.ts";
 import GenreQueryOptionFormView from "@/pages/genres/components/admin/genre-query-options/GenreQueryOptionFormView.tsx";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";

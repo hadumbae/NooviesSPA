@@ -1,7 +1,7 @@
 // TODO - Movies By Genre
 import {FC, ReactElement} from 'react';
-import useFetchGenre from "@/pages/genres/hooks/useFetchGenre.ts";
-import useFetchGenreParams from "@/pages/genres/hooks/useFetchGenreParams.ts";
+import useFetchGenre from "@/pages/genres/hooks/fetch-data/useFetchGenre.ts";
+import useFetchGenreParams from "@/pages/genres/hooks/fetch-search-params/useFetchGenreParams.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import GenreDetailsHeader from "@/pages/genres/components/pages/genre-details/GenreDetailsHeader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";

@@ -2,12 +2,13 @@ import { Control, FieldValues, Path } from "react-hook-form";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
-import useFetchGenres from "@/pages/genres/hooks/useFetchGenres.ts";
+import useFetchGenres from "@/pages/genres/hooks/fetch-data/useFetchGenres.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import { GenreArraySchema } from "@/pages/genres/schema/genre/Genre.schema.ts";
 import { GenreArray } from "@/pages/genres/schema/genre/Genre.types.ts";
 import { GenreQueryOptions } from "@/pages/genres/schema/filters/GenreQueryOptions.types.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 
 /**
  * Props for {@link GenreHookFormSelect}.
@@ -42,9 +43,9 @@ type SelectProps<TValues extends FieldValues> = {
     control: Control<TValues>;
 
     /**
-     * Optional filter parameters passed to the genre fetcher hook.
+     * Optional query parameters passed to the genre fetcher hook.
      */
-    filters?: GenreQueryOptions;
+    queries?: GenreQueryOptions;
 
     /**
      * Whether the select allows multiple selections.
@@ -84,8 +85,8 @@ type SelectProps<TValues extends FieldValues> = {
  * - Maps each genre to a {@link ReactSelectOption} compatible with react-select components.
  */
 const GenreHookFormSelect = <TValues extends FieldValues>(props: SelectProps<TValues>) => {
-    const { isMulti = false, filters = {} } = props;
-    const query = useFetchGenres(filters);
+    const { isMulti = false, queries = {} } = props;
+    const query = useFetchGenres({queries: filterNullishAttributes(queries)});
 
     return (
         <QueryBoundary query={query}>

@@ -1,6 +1,6 @@
 import useFetchMovieBrowseQueryParams from "@/pages/movies/hooks/params/useFetchMovieBrowseQueryParams.ts";
 import useFetchMovieBrowseSortParams from "@/pages/movies/hooks/params/useFetchMovieBrowseSortParams.ts";
-import useFetchGenres from "@/pages/genres/hooks/useFetchGenres.ts";
+import useFetchGenres from "@/pages/genres/hooks/fetch-data/useFetchGenres.ts";
 import {Genre} from "@/pages/genres/schema/genre/Genre.types.ts";
 
 export default function useFetchGenresWithParamsForMovieBrowse() {
