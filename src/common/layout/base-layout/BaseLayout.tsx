@@ -11,18 +11,19 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ThemeContext} from "@/common/context/theme/ThemeContext.ts";
 
 const BaseLayout: FC = () => {
+    // --- ACCESS CONTEXT ---
     const {themeVariant} = useRequiredContext({context: ThemeContext});
 
+    // --- TOGGLE DARK MODE ---
     useEffect(() => {
         const isDark = getIsDarkTheme();
-
-        isDark
-            ? document.body.classList.add("dark")
-            : document.body.classList.remove("dark");
+        document.body.classList.toggle("dark", isDark);
     }, [themeVariant]);
 
+    // --- IS MOBILE? ---
     const isMobile = useIsMobile();
 
+    // --- Render ---
     return (
         <SidebarProvider>
             {isMobile && <BaseSidebar/>}

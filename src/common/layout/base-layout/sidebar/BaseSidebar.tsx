@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import Cookies from "js-cookie";
 import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
 import GuestSidebar from "@/common/layout/base-layout/sidebar/guest-side-bar/GuestSidebar.tsx";
 import AdminSidebar from "@/common/layout/base-layout/sidebar/admin-side-bar/AdminSidebar.tsx";
@@ -7,45 +6,43 @@ import ClientSidebar from "@/common/layout/base-layout/sidebar/client-side-bar/C
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 
 /**
- * **BaseSidebar**
+ * Base sidebar switch for the application layout.
  *
- * Determines and renders the appropriate sidebar based on the current
+ * Selects and renders the appropriate sidebar based on the current
  * authentication and authorization state.
  *
- * ### Behavior
- * 1. Checks for authentication via the `hasAuthToken` cookie.
- * 2. Retrieves the current user from {@link AuthContext}.
- * 3. Conditionally renders:
- *    - `AdminSidebar` if the user is authenticated and an admin
- *    - `ClientSidebar` if the user is authenticated but not an admin
- *    - `GuestSidebar` if the user is unauthenticated
+ * @remarks
+ * Rendering logic:
+ * - Guest → {@link GuestSidebar}
+ * - Authenticated admin → {@link AdminSidebar}
+ * - Authenticated non-admin → {@link ClientSidebar}
  *
- * ### Notes
- * - Assumes the presence of the `hasAuthToken` cookie is sufficient to
- *   indicate authentication, but also requires a valid user object from context.
- * - Safe defaults are applied (`isAdmin = false`) if user data is missing.
- *
- * @returns {JSX.Element} The sidebar component appropriate for the current user
+ * This component:
+ * - Requires {@link AuthContext} to be available
+ * - Assumes authorization (`isAdmin`) is derived from the authenticated user
+ * - Does not handle mobile or responsive sidebar variants
  */
 const BaseSidebar: FC = () => {
-    /** Check for authentication token in cookies */
-    const isAuthenticated = Cookies.get("hasAuthToken");
+    /**
+     * Auth state retrieved from {@link AuthContext}.
+     *
+     * @remarks
+     * `useRequiredContext` guarantees a defined context value.
+     */
+    const {user, isAdmin} = useRequiredContext({context: AuthContext});
 
-    /** Retrieve auth context */
-    const {user} = useRequiredContext({context: AuthContext});
-
-    if (isAuthenticated && user) {
-        const {isAdmin = false} = user ?? {};
-
-        return (
-            isAdmin
-                ? <AdminSidebar/>
-                : <ClientSidebar/>
-        );
+    // --- GUEST ---
+    if (!user) {
+        return <GuestSidebar />;
     }
 
-    /** Guest sidebar for unauthenticated users */
-    return <GuestSidebar/>;
+    // --- ADMIN ---
+    if (isAdmin) {
+        return <AdminSidebar />;
+    }
+
+    // --- CLIENT ---
+    return <ClientSidebar />;
 };
 
 export default BaseSidebar;
