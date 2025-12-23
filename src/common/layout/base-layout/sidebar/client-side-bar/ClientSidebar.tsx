@@ -3,7 +3,7 @@ import {Sidebar, SidebarContent, SidebarHeader} from "@/common/components/ui/sid
 import ClientProfileSidebarGroup
     from "@/common/layout/base-layout/sidebar/client-side-bar/ClientProfileSidebarGroup.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import AuthSidebarGroup from "@/common/layout/base-layout/sidebar/auth-side-bar/AuthSidebarGroup.tsx";
+import AuthSidebarGroup from "@/common/layout/admin-layout/sidebar/admin-side-bar-groups/AdminAuthSidebarGroup.tsx";
 import ClientMovieSidebarGroup from "@/common/layout/base-layout/sidebar/client-side-bar/ClientMovieSidebarGroup.tsx";
 
 /**
