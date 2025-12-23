@@ -1,20 +1,20 @@
 /**
  * Authentication context provider.
  *
- * Manages the authenticated user state, logout signaling, and periodic
- * validation of auth persistence via cookies and localStorage.
+ * Manages authenticated user state, logout signaling, and periodic
+ * validation of persisted authentication data.
  *
  * Responsibilities:
- * - Hydrate the authenticated user on initial load
- * - Validate persisted auth state against runtime schemas
- * - Automatically invalidate auth state when tokens disappear
+ * - Hydrates the authenticated user on initial load
+ * - Validates persisted user data against runtime schemas
+ * - Invalidates auth state when persistence disappears
  *
  * @remarks
- * - Relies on `hasAuthToken` cookie as a lightweight auth presence check
+ * - Uses `hasAuthToken` cookie as a lightweight auth presence indicator
  * - Persists user data in `localStorage` under `authUser`
  * - Performs periodic auth consistency checks every 30 seconds
  */
-import {ReactNode, useEffect, useState} from 'react';
+import {ReactNode, useEffect, useState} from "react";
 import {AuthContext, AuthUserContextValue} from "@/pages/auth/context/AuthContext.ts";
 import Cookies from "js-cookie";
 import {User} from "@/pages/users/schemas/user/User.types.ts";
@@ -25,13 +25,13 @@ import {UserSchema} from "@/pages/users/schemas/user/User.schema.ts";
  */
 type ProviderProps = {
     /**
-     * Child components that require access to authentication context.
+     * Descendant components requiring authentication context.
      */
     children: ReactNode;
 };
 
 /**
- * Provides authentication state and actions to descendant components.
+ * Authentication context provider component.
  *
  * @component
  * @param props - {@link ProviderProps}
@@ -52,11 +52,12 @@ const AuthProvider = ({children}: ProviderProps) => {
     const [logout, setLogout] = useState<boolean>(false);
 
     /**
-     * Currently authenticated user, hydrated from persisted storage.
+     * Authenticated user state.
      *
      * @remarks
-     * - Returns `null` if no auth token or stored user exists
-     * - Validates stored user data using {@link UserSchema}
+     * - Hydrated from persisted storage on initial load
+     * - Returns `null` if auth persistence is missing or invalid
+     * - Validated using {@link UserSchema}
      */
     const [user, setUser] = useState<User | null>(() => {
         const hasToken = Cookies.get("hasAuthToken");
@@ -67,22 +68,21 @@ const AuthProvider = ({children}: ProviderProps) => {
         }
 
         try {
-            const userDetails = JSON.parse(authUser);
-            return UserSchema.parse(userDetails);
+            return UserSchema.parse(JSON.parse(authUser));
         } catch {
             return null;
         }
     });
 
-    // --- AUTH CHECK ---
+    // --- AUTH CONSISTENCY CHECK ---
 
     /**
      * Periodically validates authentication persistence.
      *
      * @remarks
      * - Runs every 30 seconds
-     * - Logs the user out if persisted auth data disappears
-     * - Prevents stale in-memory auth state
+     * - Clears in-memory auth state if persistence disappears
+     * - Prevents stale authenticated sessions
      */
     useEffect(() => {
         const interval = setInterval(() => {
@@ -98,7 +98,12 @@ const AuthProvider = ({children}: ProviderProps) => {
         return () => clearInterval(interval);
     }, [user]);
 
-    // --- CONTEXT VALUES ---
+    // --- DERIVED STATE ---
+
+    /**
+     * Indicates whether the authenticated user has admin privileges.
+     */
+    const isAdmin = user?.roles.includes("ADMIN") ?? false;
 
     /**
      * Context value exposed to consumers.
@@ -108,6 +113,7 @@ const AuthProvider = ({children}: ProviderProps) => {
         setUser,
         logout,
         setLogout,
+        isAdmin,
     };
 
     // --- RENDER ---

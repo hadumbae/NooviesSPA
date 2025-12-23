@@ -1,8 +1,8 @@
 /**
  * Authentication context types and instance.
  *
- * Defines the shared authentication state shape and the React context
- * used to expose it throughout the application.
+ * Defines the shared authentication state and React context
+ * exposed throughout the application.
  */
 import {createContext, Dispatch, SetStateAction} from "react";
 import {User} from "@/pages/users/schemas/user/User.types.ts";
@@ -21,23 +21,28 @@ export type AuthUserContextValue = {
     user: User | null;
 
     /**
-     * Updates the authenticated user state.
+     * Sets the authenticated user.
      */
     setUser: Dispatch<SetStateAction<User | null>>;
 
     /**
-     * Indicates that a logout has occurred or is required.
+     * Logout state indicator.
      */
     logout: boolean;
 
     /**
-     * Updates the logout flag.
+     * Sets the logout flag.
      */
     setLogout: Dispatch<SetStateAction<boolean>>;
+
+    /**
+     * Whether the authenticated user has admin privileges.
+     */
+    isAdmin: boolean;
 };
 
 /**
- * React context for authentication state.
+ * React authentication context.
  *
  * @remarks
  * - Defaults to `undefined`
