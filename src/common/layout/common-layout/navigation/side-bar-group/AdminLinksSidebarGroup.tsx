@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import {
     SidebarGroup,
     SidebarGroupContent,
@@ -6,21 +7,20 @@ import {
     SidebarMenuButton,
     SidebarMenuItem
 } from "@/common/components/ui/sidebar.tsx";
-import {Link} from "react-router-dom";
-import {TableOfContents} from "lucide-react";
+import { Link } from "react-router-dom";
+import { TableOfContents } from "lucide-react";
 
 /**
- * Admin dashboard sidebar group.
+ * Admin links sidebar group.
  *
  * @remarks
- * - Provides navigation entry for the admin dashboard
+ * - Provides primary admin navigation links
  * - Intended for use within {@link AdminSidebar}
  */
-const AdminDashboardSidebarGroup = () => {
+const AdminLinksSidebarGroup: FC = () => {
     return (
         <SidebarGroup>
-            <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
-
+            <SidebarGroupLabel>Admin</SidebarGroupLabel>
             <SidebarGroupContent>
                 <SidebarMenu>
                     <SidebarMenuItem>
@@ -31,19 +31,10 @@ const AdminDashboardSidebarGroup = () => {
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
-
-                    <SidebarMenuItem>
-                        <SidebarMenuButton asChild>
-                            <Link to="/">
-                                <TableOfContents />
-                                <span>Client Pages</span>
-                            </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>
     );
 };
 
-export default AdminDashboardSidebarGroup;
+export default AdminLinksSidebarGroup;

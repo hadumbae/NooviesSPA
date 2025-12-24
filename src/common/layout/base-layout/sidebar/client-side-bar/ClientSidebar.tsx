@@ -5,6 +5,9 @@ import ClientProfileSidebarGroup
 import {Separator} from "@/common/components/ui/separator.tsx";
 import AuthSidebarGroup from "@/common/layout/admin-layout/sidebar/admin-side-bar-groups/AdminAuthSidebarGroup.tsx";
 import ClientMovieSidebarGroup from "@/common/layout/base-layout/sidebar/client-side-bar/ClientMovieSidebarGroup.tsx";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
+import AdminLinksSidebarGroup from "@/common/layout/common-layout/navigation/side-bar-group/AdminLinksSidebarGroup.tsx";
 
 /**
  * **ClientSidebar**
@@ -26,6 +29,8 @@ import ClientMovieSidebarGroup from "@/common/layout/base-layout/sidebar/client-
  * @returns {JSX.Element} A fully structured client sidebar
  */
 const ClientSidebar: FC = () => {
+    const {isAdmin} = useRequiredContext({context: AuthContext});
+
     return (
         <Sidebar>
             <SidebarHeader className="flex justify-center items-center">
@@ -33,6 +38,14 @@ const ClientSidebar: FC = () => {
             </SidebarHeader>
 
             <SidebarContent>
+                {/* Admin */}
+
+                {
+                    isAdmin && <>
+                        <Separator/>
+                        <AdminLinksSidebarGroup/>
+                    </>
+                }
 
                 {/* Profile */}
 
