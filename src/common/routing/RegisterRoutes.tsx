@@ -1,4 +1,4 @@
-import HomeRoutes from "../../pages/home/routing/HomeRoutes.tsx";
+import HomeRoutes from "../../pages/client/routing/ClientRoutes.tsx";
 import AuthRoutes from "@/pages/auth/routing/AuthRoutes.tsx";
 import GenreRoutes from "@/pages/genres/routing/GenreRoutes.tsx";
 import PersonRoutes from "@/pages/persons/routing/PersonRoutes.tsx";
@@ -9,7 +9,7 @@ import ShowingRoutes from "@/pages/showings/routing/ShowingRoutes.tsx";
 import AdminMovieRoutes from "@/pages/movies/routing/AdminMovieRoutes.tsx";
 import SystemRoutes from "@/common/routing/SystemRoutes.tsx";
 import {RouteObject} from "react-router-dom";
-import UserProfileRoutes from "@/pages/client/user/routing/UserProfileRoutes.tsx";
+import UserProfileRoutes from "@/pages/users/routing/UserProfileRoutes.tsx";
 import ClientMovieRoutes from "@/pages/movies/routing/ClientMovieRoutes.tsx";
 import RoleTypeRoutes from "@/pages/roletype/routing/RoleTypeRoutes.tsx";
 import AdminDashboardRoutes from "@/pages/dashboard/routing/AdminDashboardRoutes.tsx";

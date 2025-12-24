@@ -1,18 +1,18 @@
 import {FC} from 'react';
 import useFetchAuthUserDetails from "@/common/hooks/auth/useLogoutUser.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import MyProfileHeader from "@/pages/client/user/components/headers/MyProfileHeader.tsx";
+import MyProfileHeader from "@/pages/users/components/headers/MyProfileHeader.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import ClientRecentReservationListContainer
-    from "@/pages/client/user/components/profile/ClientRecentReservationListContainer.tsx";
+    from "@/pages/users/components/profile/ClientRecentReservationListContainer.tsx";
 import ClientRecentFavouritesListContainer
-    from "@/pages/client/user/components/profile/ClientRecentFavouritesListContainer.tsx";
+    from "@/pages/users/components/profile/ClientRecentFavouritesListContainer.tsx";
 import ClientRecentReviewsListContainer
-    from "@/pages/client/user/components/profile/ClientRecentReviewsListContainer.tsx";
+    from "@/pages/users/components/profile/ClientRecentReviewsListContainer.tsx";
 import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
-import UpdateUserPasswordFormContainer from "@/pages/client/user/components/forms/UpdateUserPasswordFormContainer.tsx";
+import UpdateUserPasswordFormContainer from "@/pages/users/components/forms/UpdateUserPasswordFormContainer.tsx";
 
 const MyProfilePage: FC = () => {
     const authUserDetails = useFetchAuthUserDetails();

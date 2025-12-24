@@ -1,10 +1,18 @@
 import {RouteObject} from "react-router-dom";
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
-import MyProfilePage from "@/pages/client/user/pages/MyProfilePage.tsx";
-import MyFavouritesPage from "@/pages/client/user/pages/MyFavouritesPage.tsx";
-import MyReviewsPage from "@/pages/client/user/pages/MyReviewsPage.tsx";
+import MyProfilePage from "@/pages/users/pages/MyProfilePage.tsx";
+import MyFavouritesPage from "@/pages/users/pages/MyFavouritesPage.tsx";
+import MyReviewsPage from "@/pages/users/pages/MyReviewsPage.tsx";
 
+/**
+ * User account routes.
+ *
+ * @remarks
+ * - Uses {@link BaseLayout} as the account layout wrapper
+ * - Groups authenticated user pages under `/account`
+ * - Provides a shared {@link ErrorPage} for route errors
+ */
 const routes: RouteObject[] = [
     {
         path: "/account",
