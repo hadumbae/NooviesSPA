@@ -29,7 +29,7 @@ import { TableOfContents } from "lucide-react";
  * <ClientMovieSidebarGroup />
  * ```
  */
-const ClientMovieSidebarGroup: FC = () => {
+const ClientBrowseSidebarGroup: FC = () => {
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Movies</SidebarGroupLabel>
@@ -46,10 +46,19 @@ const ClientMovieSidebarGroup: FC = () => {
                         </SidebarMenuButton>
                     </SidebarMenuItem>
 
+                    {/* Movies Page */}
+                    <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                            <Link to="/browse/genres">
+                                <TableOfContents />
+                                <span>Genres</span>
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>
     );
 };
 
-export default ClientMovieSidebarGroup;
+export default ClientBrowseSidebarGroup;
