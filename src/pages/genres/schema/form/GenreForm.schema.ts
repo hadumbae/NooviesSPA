@@ -3,34 +3,25 @@ import { FormStarterValueSchema } from "@/common/schema/form/FormStarterValueSch
 import { GenreSchema } from "@/pages/genres/schema/genre/Genre.schema.ts";
 
 /**
- * Schema for raw genre form values.
+ * Schema for raw genre form input.
  *
- * @remarks
- * Intended for validating unprocessed user input directly from UI forms.
- * Each field uses {@link FormStarterValueSchema} to provide consistent
- * base handling such as trimming, empty-value normalization, and
- * optional/null support.
- *
- * @property name - Name of the genre.
- * @property description - Description of the genre.
+ * Used to validate unprocessed UI form values before transformation.
  */
 export const GenreFormValuesSchema = z.object({
-    /** Name of the genre. */
+    /** Genre name input. */
     name: FormStarterValueSchema,
 
-    /** Description of the genre. */
+    /** Genre description input. */
     description: FormStarterValueSchema,
 });
 
 /**
  * Schema for validated genre form data.
  *
- * @remarks
- * Derived from {@link GenreSchema} with the identifier omitted.
- * Represents the final, domain-valid data produced after transforming
- * and validating raw form values.
- *
- * Use this schema when submitting form data to the API or persisting
- * a new or updated genre entity.
+ * Derived from {@link GenreSchema} with system-managed fields removed.
+ * Intended for API submission and persistence.
  */
-export const GenreFormSchema = GenreSchema.omit({ _id: true });
+export const GenreFormSchema = GenreSchema.omit({
+    _id: true,
+    slug: true,
+});
