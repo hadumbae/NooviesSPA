@@ -59,7 +59,7 @@ const AdminLayoutSetupNavigationDropdown: FC = () => {
                 </DropdownMenuLink>
 
                 <DropdownMenuLink
-                    to="/admin/roletypes"
+                    to="/admin/roletypes/list"
                     component={AdminLayoutSetupNavigationDropdown.name}
                 >
                     Role Types
