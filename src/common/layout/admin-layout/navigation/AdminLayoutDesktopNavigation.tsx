@@ -32,7 +32,7 @@ const AdminLayoutDesktopNavigation: FC = () => {
         <section className="flex items-center space-x-2">
             <SectionHeader srOnly={true}>Desktop Navigation</SectionHeader>
 
-            <NavLink to="/">Dashboard</NavLink>
+            <NavLink to="/admin/dashboard">Dashboard</NavLink>
 
             <AdminLayoutSetupNavigationDropdown />
             <AdminLayoutMovieNavigationDropdown />

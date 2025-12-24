@@ -10,6 +10,9 @@ import AdminSetupSidebarGroup
     from "@/common/layout/admin-layout/sidebar/admin-side-bar-groups/AdminSetupSidebarGroup.tsx";
 import AdminMovieSidebarGroup
     from "@/common/layout/admin-layout/sidebar/admin-side-bar-groups/AdminMovieSidebarGroup.tsx";
+import AdminDashboardSidebarGroup
+    from "@/common/layout/admin-layout/sidebar/admin-side-bar-groups/AdminDashboardSidebarGroup.tsx";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 
 /**
  * **AdminSidebar**
@@ -33,10 +36,13 @@ const AdminSidebar: FC = () => {
     return (
         <Sidebar>
             <SidebarHeader>
-                NOOVIES Admin
+                <LoggedLink to="/admin/dashboard">
+                    NOOVIES Admin
+                </LoggedLink>
             </SidebarHeader>
 
             <SidebarContent>
+                <AdminDashboardSidebarGroup />
                 <AdminSetupSidebarGroup/>
                 <AdminMovieSidebarGroup/>
                 <AdminAuthSidebarGroup/>
