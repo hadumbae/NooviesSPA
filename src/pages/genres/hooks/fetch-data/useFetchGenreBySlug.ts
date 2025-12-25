@@ -32,7 +32,7 @@ export default function useFetchGenreBySlug(
 ): UseQueryResult<unknown, HttpResponseError> {
     const { slug, queryConfig, queryOptions } = params;
 
-    const queryKey = ["use_fetch_genre_by_slug"];
+    const queryKey = ["fetch_genre_by_slug"];
 
     const fetchGenre = useQueryFnHandler({
         action: () => GenreRepository.getBySlug({ slug, ...queryConfig }),

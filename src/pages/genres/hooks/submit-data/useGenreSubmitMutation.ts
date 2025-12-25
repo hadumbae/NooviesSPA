@@ -131,6 +131,7 @@ export default function useGenreSubmitMutation(
     const onSettled = async () => {
         const queryKeys = [
             "fetch_single_genre",
+            "fetch_genre_by_slug",
             "fetch_genres_by_query",
             "fetch_paginated_genres_by_query",
         ];

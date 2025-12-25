@@ -11,7 +11,7 @@ import useTitle from "@/common/hooks/document/useTitle.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 
 import {GenreDetailsUIContext} from "@/pages/genres/context/GenreDetailsUIContext.ts";
-import {GenreDetails} from "@/pages/genres/schema/genre/Genre.types.ts";
+import {Genre, GenreDetails} from "@/pages/genres/schema/genre/Genre.types.ts";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
@@ -33,6 +33,7 @@ import GenreSubmitFormPanel
     from "@/pages/genres/components/form/GenreSubmitFormPanel.tsx";
 import GenreDeleteWarningDialog
     from "@/pages/genres/components/dialog/GenreDeleteWarningDialog.tsx";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Props for {@link GenreDetailsPageContent}.
@@ -59,7 +60,9 @@ const GenreDetailsPageContent = (props: ContentProps) => {
 
     useTitle(name);
 
-    // --- UI Context ---
+    // --- HOOKS ---
+    const navigate = useLoggedNavigate();
+
     const {
         isEditing,
         setIsEditing,
@@ -67,10 +70,7 @@ const GenreDetailsPageContent = (props: ContentProps) => {
         setIsDeleting,
     } = useRequiredContext({context: GenreDetailsUIContext});
 
-    /**
-     * ⚡ Sections ⚡
-     * Conditional rendering blocks for the Movies section.
-     */
+    // --- MOVIES ---
     const noMovieSection = (
         <section className="flex-1">
             <SectionHeader>Movies</SectionHeader>
@@ -97,10 +97,12 @@ const GenreDetailsPageContent = (props: ContentProps) => {
         </section>
     );
 
-    /**
-     * ⚡ Main Layout ⚡
-     * Renders page structure, sections, and contextual panels.
-     */
+    // --- Form Handler ---
+    const onEditSuccess = (genre: Genre) => {
+        navigate({to: `/admin/genres/get/${genre.slug}`, options: {replace: true}});
+    }
+
+    // --- RENDER ---
     return (
         <PageFlexWrapper>
             <GenreDetailsBreadcrumbs genreName={name}/>
@@ -128,6 +130,7 @@ const GenreDetailsPageContent = (props: ContentProps) => {
                     entity={genre}
                     presetOpen={isEditing}
                     setPresetOpen={setIsEditing}
+                    onSubmitSuccess={onEditSuccess}
                 />
             </section>
 
