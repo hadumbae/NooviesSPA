@@ -1,7 +1,7 @@
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
-import MoviesByGenreClientPage from "@/pages/movies/pages/client/movies/MoviesByGenreClientPage.tsx";
-import MovieDetailsClientPage from "@/pages/movies/pages/client/movie/MovieDetailsClientPage.tsx";
+import BrowseMoviesPage from "@/pages/movies/pages/client/browse-movies/BrowseMoviesPage.tsx";
+import MovieInfoPage from "@/pages/movies/pages/client/movie-info/MovieInfoPage.tsx";
 
 export default [
     {
@@ -10,12 +10,12 @@ export default [
         children: [
             {
                 path: "/browse/movies",
-                element: <MoviesByGenreClientPage/>,
+                element: <BrowseMoviesPage/>,
                 errorElement: <ComponentErrorHandler/>,
             },
             {
                 path: "/browse/movies/:movieID",
-                element: <MovieDetailsClientPage />,
+                element: <MovieInfoPage />,
                 errorElement: <ComponentErrorHandler/>,
             }
         ]
