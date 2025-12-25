@@ -1,78 +1,99 @@
 import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
 import RequestPaginatedFilters from "@/common/type/request/RequestPaginatedFilters.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
+import { PaginationValues } from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+
+// -------------------
+// ------ TYPES ------
+// -------------------
 
 /**
- * Parameters for retrieving multiple entities with optional filters and request options.
+ * Parameters for retrieving multiple entities.
  *
- * @template TQueries - The type of query filters to apply. Defaults to {@link RequestQueryFilters}.
+ * @remarks
+ * Supports optional query filters and request-level options
+ * such as population, lean mode, or headers.
+ *
+ * @template TQueries - Filter shape applied to the query.
  */
-export type GetEntitiesParams<TQueries = RequestQueryFilters> = RequestOptions & {
-    /**
-     * Optional query filters to narrow down the results.
-     */
+export type GetEntitiesParams<TQueries = RequestQueryFilters> =
+    RequestOptions & {
+    /** Optional query filters used to narrow results. */
     queries?: TQueries;
 };
 
 /**
- * Parameters for retrieving a paginated list of entities using filters and pagination settings.
+ * Parameters for retrieving a paginated list of entities.
  *
- * @template TQueries - The type of filters to apply to the paginated query. Defaults to {@link RequestPaginatedFilters}.
+ * @remarks
+ * Combines pagination controls, query filters, and
+ * request-level options into a single parameter object.
+ *
+ * @template TQueries - Filter shape applied to the paginated query.
  */
-export type GetPaginatedEntitiesParams<TQueries = RequestPaginatedFilters> = RequestOptions & PaginationValues & {
-    /**
-     * Filters to apply for the paginated query.
-     */
+export type GetPaginatedEntitiesParams<TQueries = RequestPaginatedFilters> =
+    RequestOptions &
+    PaginationValues & {
+    /** Optional filters applied to the paginated query. */
     queries?: TQueries;
 };
 
 /**
- * Parameters for retrieving a single entity by its unique identifier.
+ * Parameters for retrieving a single entity by its ObjectId.
+ *
+ * @remarks
+ * Pagination-related options are intentionally excluded,
+ * as ID-based retrieval always resolves to a single entity.
  */
-export type GetEntityByIDParams = RequestOptions & {
-    /**
-     * The unique identifier of the entity to retrieve.
-     */
+export type GetEntityByIDParams =
+    Omit<RequestOptions, "limit"> & {
+    /** Unique identifier of the target entity. */
     readonly _id: ObjectId;
+};
+
+/**
+ * Parameters for retrieving a single entity by slug.
+ *
+ * @remarks
+ * Slug-based retrieval is treated as a single-record operation
+ * and therefore excludes pagination options.
+ */
+export type GetEntityBySlugParams =
+    Omit<RequestOptions, "limit"> & {
+    /** Unique slug identifier. */
+    slug: string;
 };
 
 /**
  * Parameters for creating a new entity.
  *
- * @template TData - The type of the creation payload. Defaults to a generic object.
+ * @template TData - Shape of the creation payload.
  */
-export type CreateEntityParams<TData = Record<string, any>> = RequestOptions & {
-    /**
-     * The payload used to create the new entity.
-     */
+export type CreateEntityParams<TData = Record<string, any>> =
+    RequestOptions & {
+    /** Payload used to create the entity. */
     data: TData;
 };
 
 /**
- * Parameters for updating an existing entity by its identifier.
+ * Parameters for updating an existing entity.
  *
- * @template TData - The type of the update payload. Defaults to a generic object.
+ * @template TData - Shape of the update payload.
  */
-export type UpdateEntityParams<TData = Record<string, any>> = RequestOptions & {
-    /**
-     * The unique identifier of the entity to update.
-     */
+export type UpdateEntityParams<TData = Record<string, any>> =
+    RequestOptions & {
+    /** Unique identifier of the entity to update. */
     readonly _id: ObjectId;
 
-    /**
-     * The data to apply to the entity update.
-     */
+    /** Partial or full update payload. */
     data: TData;
 };
 
 /**
- * Parameters for deleting an entity by its unique identifier.
+ * Parameters for deleting an entity.
  */
 export type DeleteEntityParams = {
-    /**
-     * The unique identifier of the entity to delete.
-     */
+    /** Unique identifier of the entity to delete. */
     readonly _id: ObjectId;
 };

@@ -12,7 +12,7 @@ import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoun
 import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import TheatreDetailsPageContent from "@/pages/theatres/pages/theatre-details-page/TheatreDetailsPageContent.tsx";
 import TheatreDetailsUIContextProvider from "@/pages/theatres/context/theatre-details-ui/TheatreDetailsUIContextProvider.tsx";
-import useFetchIDRouteParams from "@/common/hooks/route-params/useFetchIDRouteParams.ts";
+import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
 
 /**
@@ -41,7 +41,7 @@ import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchem
  */
 const TheatreDetailsPage: FC = () => {
     // --- Fetch Route Params ---
-    const {_id: theatreID} = useFetchIDRouteParams({
+    const {_id: theatreID} = useFetchByIdentifierRouteParams({
         schema: IDRouteParamSchema,
         errorTo: "/admin/theatres",
         sourceComponent: TheatreDetailsPage.name,

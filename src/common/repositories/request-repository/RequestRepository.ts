@@ -2,12 +2,12 @@ import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
-import { IRequestRepository } from "@/common/repositories/request-repository/IRequestRepository.ts";
+import { RequestRepositoryMethods } from "@/common/repositories/request-repository/RequestRepositoryMethods.ts";
 import {
     CreateEntityParams,
     DeleteEntityParams,
     GetEntitiesParams,
-    GetEntityByIDParams,
+    GetEntityByIDParams, GetEntityBySlugParams,
     GetPaginatedEntitiesParams,
     UpdateEntityParams
 } from "@/common/repositories/request-repository/RequestRepository.types.ts";
@@ -20,7 +20,7 @@ import { RequestQueryOptions } from "@/common/type/request/RequestOptions.ts";
  * Factory for creating a standardized HTTP request repository.
  *
  * @description
- * Produces an {@link IRequestRepository} bound to a specific API resource.
+ * Produces an {@link RequestRepositoryMethods} bound to a specific API resource.
  * All requests:
  * - Use {@link useFetchAPI} for transport
  * - Build URLs via {@link buildQueryURL}
@@ -36,7 +36,7 @@ import { RequestQueryOptions } from "@/common/type/request/RequestOptions.ts";
  */
 export const createRequestRepository = (
     { baseURL }: { baseURL: string }
-): IRequestRepository => ({
+): RequestRepositoryMethods => ({
     /**
      * Fetch all entities without pagination.
      *
@@ -90,6 +90,16 @@ export const createRequestRepository = (
         const queries = filterNullishAttributes({ populate, virtuals });
 
         const url = buildQueryURL({ baseURL, path: `get/${_id}`, queries });
+        return useFetchAPI({ url, method: "GET" });
+    },
+
+    async getBySlug<TResult = unknown>(
+        params: GetEntityBySlugParams
+    ): Promise<RequestReturns<TResult>> {
+        const { slug, populate, virtuals } = params;
+        const queries = filterNullishAttributes({ populate, virtuals });
+
+        const url = buildQueryURL({ baseURL, path: `slug/${slug}`, queries });
         return useFetchAPI({ url, method: "GET" });
     },
 

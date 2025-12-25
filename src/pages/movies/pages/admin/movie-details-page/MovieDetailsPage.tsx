@@ -7,7 +7,7 @@ import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import MovieDetailsUIContextProvider from "@/pages/movies/components/providers/MovieDetailsUIContextProvider.tsx";
 import MovieDetailsPageContent from "@/pages/movies/pages/admin/movie-details-page/MovieDetailsPageContent.tsx";
 import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
-import useFetchIDRouteParams from "@/common/hooks/route-params/useFetchIDRouteParams.ts";
+import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 
@@ -46,7 +46,7 @@ const MovieDetailsPage: FC = () => {
 
     // --- Route Params ---
 
-    const {_id: movieID} = useFetchIDRouteParams({
+    const {_id: movieID} = useFetchByIdentifierRouteParams({
         schema: IDRouteParamSchema,
         errorTo: "/admin/movies",
     }) ?? {};

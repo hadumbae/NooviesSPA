@@ -5,7 +5,7 @@
  * Admin page for listing paginated showings under a specific theatre.
  */
 
-import useFetchIDRouteParams from "@/common/hooks/route-params/useFetchIDRouteParams.ts";
+import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import { IDRouteParamSchema } from "@/common/schema/route-params/IDRouteParamSchema.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
@@ -41,7 +41,7 @@ type QueryData = {
  */
 const TheatreShowingListPage = () => {
     // --- Route Params ---
-    const { _id: theatreID } = useFetchIDRouteParams({
+    const { _id: theatreID } = useFetchByIdentifierRouteParams({
         errorTo: "/admin/theatres",
         schema: IDRouteParamSchema,
         sourceComponent: TheatreShowingListPage.name,

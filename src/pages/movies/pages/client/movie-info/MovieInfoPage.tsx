@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useFetchIDRouteParams from "@/common/hooks/route-params/useFetchIDRouteParams.ts";
+import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
@@ -11,7 +11,7 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 
 const MovieInfoPage: FC = () => {
     // --- Route Params ---
-    const {_id} = useFetchIDRouteParams({
+    const {_id} = useFetchByIdentifierRouteParams({
         schema: IDRouteParamSchema,
         errorTo: "/browse/movies",
     }) ?? {};

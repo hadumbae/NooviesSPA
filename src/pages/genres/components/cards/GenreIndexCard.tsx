@@ -43,7 +43,7 @@ const GenreIndexCard: FC<IndexProps> = ({genre, orientation = "horizontal"}) => 
     // ⚡ State ⚡
 
     const navigate = useLoggedNavigate();
-    const {_id, name, movieCount} = genre;
+    const {slug, name, movieCount} = genre;
 
     const {page, perPage, hasPaginationValues} = usePaginationSearchParams();
 
@@ -59,7 +59,7 @@ const GenreIndexCard: FC<IndexProps> = ({genre, orientation = "horizontal"}) => 
         const state = hasPaginationValues ? {page, perPage} : {};
 
         navigate({
-            to: `/admin/genres/get/${_id}`,
+            to: `/admin/genres/get/${slug}`,
             component: GenreIndexCard.name,
             options: {state},
         });
