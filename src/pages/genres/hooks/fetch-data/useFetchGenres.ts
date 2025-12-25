@@ -69,8 +69,9 @@ export default function useFetchGenres<TData = unknown>(
 
     // --- QUERY ---
     return useQuery({
-        queryKey: ["fetch_genres_by_query"],
+        queryKey: ["fetch_genres_by_query", filteredQueries],
         queryFn: fetchGenres,
         ...optionsWithDefaults,
     });
 }
+

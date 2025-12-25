@@ -69,7 +69,7 @@ export default function useFetchPaginatedGenres<TData = unknown>(
 
     // --- QUERY ---
     return useQuery({
-        queryKey: ["fetch_paginated_genres_by_query"],
+        queryKey: ["fetch_paginated_genres_by_query", filteredQueries],
         queryFn: fetchGenres,
         ...optionsWithDefaults,
     });
