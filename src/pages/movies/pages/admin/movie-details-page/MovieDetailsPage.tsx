@@ -1,15 +1,15 @@
 import {FC} from "react";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
-import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
 import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import MovieDetailsUIContextProvider from "@/pages/movies/components/providers/MovieDetailsUIContextProvider.tsx";
 import MovieDetailsPageContent from "@/pages/movies/pages/admin/movie-details-page/MovieDetailsPageContent.tsx";
-import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
+import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlug.ts";
 
 
 /**
@@ -46,21 +46,20 @@ const MovieDetailsPage: FC = () => {
 
     // --- Route Params ---
 
-    const {_id: movieID} = useFetchByIdentifierRouteParams({
-        schema: IDRouteParamSchema,
+    const {slug} = useFetchByIdentifierRouteParams({
+        schema: SlugRouteParamSchema,
         errorTo: "/admin/movies",
     }) ?? {};
 
-    if (!movieID) {
+    if (!slug) {
         return <PageLoader/>;
     }
 
     // --- Query ---
 
-    const query = useFetchMovie({
-        _id: movieID,
-        populate: true,
-        virtuals: true,
+    const query = useFetchMovieBySlug({
+        slug,
+        queryConfig: {populate: true, virtuals: true},
     });
 
     // --- Render ---

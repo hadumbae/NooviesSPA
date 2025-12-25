@@ -1,89 +1,58 @@
 import {FC} from 'react';
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import MovieIndexHeader from "@/pages/movies/components/headers/admin/MovieIndexHeader.tsx";
-import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
-import PageCenter from "@/common/components/page/PageCenter.tsx";
-import MovieIndexCard from "@/pages/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import {MovieDetails, PaginatedMovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {PaginatedMovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {PaginatedMovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 
 import useFetchPaginatedMovies from "@/pages/movies/hooks/queries/useFetchPaginatedMovies.ts";
-import MovieQueryOptionFormContainer
-    from "@/pages/movies/components/features/admin/movie-query-option/MovieQueryOptionFormContainer.tsx";
-import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
+import MovieIndexPageContent from "@/pages/movies/pages/admin/movie-edit-page/MovieIndexPageContent.tsx";
+import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {MovieQueryOptionSchema} from "@/pages/movies/schema/queries/MovieQueryOption.schema.ts";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
+/** Number of movies displayed per page */
+const MOVIES_PER_PAGE = 20;
+
+/**
+ * Admin movie index page.
+ *
+ * @remarks
+ * Responsible for:
+ * - Parsing pagination and filter state from the URL
+ * - Fetching paginated movie data
+ * - Handling loading, error, and validation boundaries
+ * - Delegating rendering to {@link MovieIndexPageContent}
+ */
 const MovieIndexPage: FC = () => {
-
-    // ⚡ State ⚡
-
+    // --- STATE ---
     const {data: paginationState} = usePaginationLocationState();
-    const {page, perPage} = usePaginationSearchParams(paginationState ?? {page: 1, perPage: 25});
+    const {value: page, setValue: setPage} = useParsedPaginationValue("page", paginationState?.page);
     const {searchParams} = useParsedSearchParams({schema: MovieQueryOptionSchema});
 
-    // ⚡ Query ⚡
-
+    // --- QUERY ---
     const query = useFetchPaginatedMovies({
         page,
-        perPage,
-        populate: true,
-        virtuals: true,
+        perPage: MOVIES_PER_PAGE,
         queries: searchParams,
+        queryConfig: {populate: true, virtuals: true},
     });
 
+    // --- RENDER ---
     return (
         <QueryBoundary query={query}>
             <ValidatedQueryBoundary query={query} schema={PaginatedMovieDetailsSchema}>
                 {(paginatedMovies: PaginatedMovieDetails) => {
-                    const {items: movies} = paginatedMovies;
-                    const hasMovies = (movies || []).length > 0;
-
-                    const movieSection = (
-                        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-                            <SectionHeader srOnly={true}>List Of Movies</SectionHeader>
-
-                            {movies.map(
-                                (movie: MovieDetails) => <MovieIndexCard
-                                    className="w-16"
-                                    movie={movie}
-                                    key={movie._id}
-                                />
-                            )}
-                        </section>
-                    );
-
-                    const emptySection = (
-                        <PageCenter>
-                            <span className="text-neutral-400 select-none">
-                                There Are No Movies
-                            </span>
-                        </PageCenter>
-                    );
+                    const {totalItems, items: movies} = paginatedMovies;
 
                     return (
-                        <PageFlexWrapper>
-                            <MovieIndexHeader/>
-
-                            <PresetFilterDialog
-                                title="Movie Filters"
-                                description="Filter and sort movies here."
-                            >
-                                <MovieQueryOptionFormContainer presetValues={searchParams}/>
-                            </PresetFilterDialog>
-
-
-                            {
-                                hasMovies
-                                    ? movieSection
-                                    : emptySection
-                            }
-
-                        </PageFlexWrapper>
+                        <MovieIndexPageContent
+                            page={page}
+                            perPage={MOVIES_PER_PAGE}
+                            setPage={setPage}
+                            movies={movies}
+                            totalItems={totalItems}
+                        />
                     );
                 }}
             </ValidatedQueryBoundary>

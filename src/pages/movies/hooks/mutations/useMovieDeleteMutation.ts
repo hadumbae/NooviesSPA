@@ -83,6 +83,7 @@ export default function useMovieDeleteMutation(params?: OnDeleteMutationParams) 
      */
     const onSettled = async () => {
         const queryKeys = [
+            "fetch_movie_by_slug",
             "fetch_movies_by_query",
             "fetch_movies",
             "fetch_paginated_movies",

@@ -137,6 +137,7 @@ export default function useMovieSubmitMutation(
     const onSettled = async () => {
         const queryKeys = [
             "fetch_single_movie",
+            "fetch_movie_by_slug",
             "fetch_movies_by_query",
             "fetch_movies",
             "fetch_paginated_movies",

@@ -68,6 +68,9 @@ export const MovieBaseSchema = z.object({
 
     /** Whether the movie is currently available (e.g., for streaming). */
     isAvailable: CoercedBooleanValueSchema,
+
+    /** URL-safe identifier derived from the name. */
+    slug: NonEmptyStringSchema.readonly(),
 });
 
 /* -------------------------------------------------------------------------------------------------

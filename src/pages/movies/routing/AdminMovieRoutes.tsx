@@ -25,24 +25,24 @@ const routes: RouteObject[] = [
                 errorElement: <ComponentErrorHandler />,
             },
             {
-                path: "/admin/movies/get/:_id",
+                path: "/admin/movies/get/:slug",
                 element: <MovieDetailsPage />,
                 errorElement: <ComponentErrorHandler />,
             },
             {
-                path: "/admin/movies/edit/:_id",
+                path: "/admin/movies/edit/:slug",
                 element: <MovieEditPage />,
                 errorElement: <ComponentErrorHandler />,
             },
 
             // People
             {
-                path: "/admin/movies/get/:movieID/people/cast",
+                path: "/admin/movies/get/:slug/people/cast",
                 element: <MoviePeoplePage department="CAST" />,
                 errorElement: <ComponentErrorHandler />,
             },
             {
-                path: "/admin/movies/get/:movieID/people/crew",
+                path: "/admin/movies/get/:slug/people/crew",
                 element: <MoviePeoplePage department="CREW" />,
                 errorElement: <ComponentErrorHandler />,
             }

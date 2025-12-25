@@ -3,22 +3,40 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {MovieDetailsUIContext} from "@/pages/movies/context/MovieDetailsUIContext.ts";
 import {
     DropdownMenu,
-    DropdownMenuContent, DropdownMenuGroup,
-    DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
-    DropdownMenuTrigger
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
 } from "@/common/components/ui/dropdown-menu.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
+/**
+ * Props for {@link MovieDetailsOptions}.
+ */
 type OptionProps = {
+    /** Trigger element for the dropdown menu */
     children: ReactNode;
-    movieID: ObjectId;
-    hasPoster?: boolean;
-}
 
+    /** Whether the movie currently has a poster */
+    hasPoster?: boolean;
+
+    /** Movie slug used for navigation */
+    slug: string;
+};
+
+/**
+ * Dropdown menu providing admin actions for a movie.
+ *
+ * Includes navigation to credits, poster management,
+ * and movie-level actions (edit/delete).
+ *
+ * @param props Component props
+ */
 const MovieDetailsOptions: FC<OptionProps> = (props) => {
-    const {children, movieID, hasPoster = false} = props;
+    const {children, slug, hasPoster = false} = props;
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const navigate = useLoggedNavigate();
@@ -29,26 +47,39 @@ const MovieDetailsOptions: FC<OptionProps> = (props) => {
         setIsDeletingPoster,
     } = useRequiredContext({context: MovieDetailsUIContext});
 
+    /**
+     * Triggers a UI action and closes the dropdown.
+     *
+     * @param action State setter to invoke
+     */
     const closeOnAction = (action: Dispatch<SetStateAction<boolean>>) => {
         action(true);
         setIsOpen(false);
-    }
+    };
 
+    /**
+     * Navigate to movie credits by department.
+     *
+     * @param department Credit department
+     */
     const navigateToCredits = (department: RoleTypeDepartment) => {
         navigate({
-            to: `/admin/movies/get/${movieID}/people/${department.toLowerCase()}`,
+            to: `/admin/movies/get/${slug}/people/${department.toLowerCase()}`,
             component: MovieDetailsOptions.name,
             message: `Navigate to movie's "${department}" credits.`,
         });
-    }
+    };
 
+    /**
+     * Navigate to the movie edit page.
+     */
     const navigateToEdit = () => {
         navigate({
-            to: `/admin/movies/edit/${movieID}`,
+            to: `/admin/movies/edit/${slug}`,
             component: MovieDetailsOptions.name,
             message: `Navigate to movie's editing page.`,
         });
-    }
+    };
 
     return (
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
@@ -58,28 +89,43 @@ const MovieDetailsOptions: FC<OptionProps> = (props) => {
 
             <DropdownMenuContent>
                 <DropdownMenuGroup>
-                    <DropdownMenuLabel className="select-none">Credits</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => navigateToCredits("CAST")}>Cast</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => navigateToCredits("CREW")}>Crew</DropdownMenuItem>
+                    <DropdownMenuLabel className="select-none">
+                        Credits
+                    </DropdownMenuLabel>
+
+                    <DropdownMenuItem onClick={() => navigateToCredits("CAST")}>
+                        Cast
+                    </DropdownMenuItem>
+
+                    <DropdownMenuItem onClick={() => navigateToCredits("CREW")}>
+                        Crew
+                    </DropdownMenuItem>
                 </DropdownMenuGroup>
 
-                <DropdownMenuSeparator/>
+                <DropdownMenuSeparator />
 
                 <DropdownMenuGroup>
-                    <DropdownMenuLabel className="select-none">Poster</DropdownMenuLabel>
+                    <DropdownMenuLabel className="select-none">
+                        Poster
+                    </DropdownMenuLabel>
 
-                    <DropdownMenuItem onClick={() => closeOnAction(setIsUpdatingPoster)}>Update</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => closeOnAction(setIsUpdatingPoster)}>
+                        Update
+                    </DropdownMenuItem>
 
-                    {
-                        hasPoster &&
-                        <DropdownMenuItem onClick={() => closeOnAction(setIsDeletingPoster)}>Delete</DropdownMenuItem>
-                    }
+                    {hasPoster && (
+                        <DropdownMenuItem onClick={() => closeOnAction(setIsDeletingPoster)}>
+                            Delete
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuGroup>
 
-                <DropdownMenuSeparator/>
+                <DropdownMenuSeparator />
 
                 <DropdownMenuGroup>
-                    <DropdownMenuLabel className="select-none">Movie</DropdownMenuLabel>
+                    <DropdownMenuLabel className="select-none">
+                        Movie
+                    </DropdownMenuLabel>
 
                     <DropdownMenuItem onClick={navigateToEdit}>
                         Edit

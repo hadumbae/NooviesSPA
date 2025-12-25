@@ -38,7 +38,7 @@ type IndexCardProps = {
  * ```
  */
 const MovieIndexCard: FC<IndexCardProps> = ({movie, className}) => {
-    const {_id, title} = movie;
+    const {slug, title} = movie;
 
     /** Formatted display strings generated from the movie details. */
     const {posterURL, genreString, releaseRuntimeString} = formatMovieDetails(movie);
@@ -59,7 +59,7 @@ const MovieIndexCard: FC<IndexCardProps> = ({movie, className}) => {
 
                 {/* Title, runtime, and genres */}
                 <section className="flex-grow flex flex-col space-y-1">
-                    <LoggedHoverLink to={`/admin/movies/get/${_id}`}>
+                    <LoggedHoverLink to={`/admin/movies/get/${slug}`}>
                         <h1 className="text-lg font-bold">{title}</h1>
                     </LoggedHoverLink>
 

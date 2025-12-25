@@ -21,55 +21,34 @@ import {RefetchFunction} from "@/common/type/query/RefetchFunction.ts";
 import MovieDetailsPageTabs from "@/pages/movies/pages/admin/movie-details-page/tabs/MovieDetailsPageTabs.tsx";
 
 /**
- * Props for the `MovieDetailsPageContent` component.
+ * Props for {@link MovieDetailsPageContent}.
  */
 export type MovieDetailsPageContentProps = {
-    /**
-     * The full details of the movie.
-     */
+    /** Full movie details */
     movie: MovieDetails;
 
-    /**
-     * A function to refetch the movie details from the backend.
-     */
+    /** Refetches movie data */
     refetchMovie: RefetchFunction;
 };
 
 /**
- * Displays the main content of the Movie Details page in the admin interface.
+ * Admin movie details page content.
  *
- * Features:
- * - Header section with breadcrumbs and options menu.
- * - Movie details card and credits overview.
- * - Hidden panels for editing movie details, updating poster, deleting movie, and deleting poster.
- * - Integrates with context to manage editing, updating, and deleting states.
+ * Renders movie metadata, credits, and admin controls,
+ * with hidden panels driven by UI context state.
  *
- * @param props - Props containing `movie`, `credits`, and `refetchMovie`.
- *
- * @returns A React component displaying movie details and admin controls.
- *
- * @example
- * ```tsx
- * <MovieDetailsPageContent
- *   movie={movie}
- *   credits={credits}
- *   refetchMovie={refetchMovieFunction}
- * />
- * ```
+ * @param props Component props
  */
 const MovieDetailsPageContent: FC<MovieDetailsPageContentProps> = (props) => {
-    // --- State ---
-
+    // --- STATE ---
     const {movie, refetchMovie} = props;
     const simplifiedMovie = simplifyMovieDetails(movie);
     const hasPoster = Boolean(movie.posterImage);
 
-    // --- Refetch Movies ---
-
+    // --- REFETCH ---
     const onPosterUpdate = () => refetchMovie();
 
-    // --- UI Context ---
-
+    // --- UI CONTEXT ---
     const {
         isEditing,
         setIsEditing,
@@ -81,8 +60,7 @@ const MovieDetailsPageContent: FC<MovieDetailsPageContentProps> = (props) => {
         setIsDeletingPoster,
     } = useRequiredContext({context: MovieDetailsUIContext});
 
-    // --- Render ---
-
+    // --- RENDER ---
     return (
         <PageFlexWrapper>
             <section className="flex flex-col">
@@ -91,7 +69,7 @@ const MovieDetailsPageContent: FC<MovieDetailsPageContentProps> = (props) => {
                 <div className="flex justify-between items-center">
                     <MovieDetailsBreadcrumb/>
 
-                    <MovieDetailsOptions movieID={movie._id} hasPoster={hasPoster}>
+                    <MovieDetailsOptions slug={movie.slug} hasPoster={hasPoster}>
                         <IconButton>
                             <Ellipsis/>
                         </IconButton>
@@ -107,13 +85,13 @@ const MovieDetailsPageContent: FC<MovieDetailsPageContentProps> = (props) => {
                     <MovieDetailsCard movie={movie}/>
                 </div>
 
-
-                <MovieDetailsPageTabs className="2xl:col-span-2" movie={movie} />
+                <MovieDetailsPageTabs
+                    className="2xl:col-span-2"
+                    movie={movie}
+                />
             </section>
 
-
-            {/* Edit Panel*/}
-
+            {/* Edit Panel */}
             <section className="hidden">
                 <SectionHeader srOnly>Edit Movie Details Panel</SectionHeader>
                 <MovieSubmitFormPanel
@@ -124,8 +102,7 @@ const MovieDetailsPageContent: FC<MovieDetailsPageContentProps> = (props) => {
                 />
             </section>
 
-            {/*Poster Panel*/}
-
+            {/* Poster Panel */}
             <section className="hidden">
                 <MoviePosterImageSubmitFormPanel
                     movieID={movie._id}
@@ -135,8 +112,7 @@ const MovieDetailsPageContent: FC<MovieDetailsPageContentProps> = (props) => {
                 />
             </section>
 
-            {/*Delete Warning*/}
-
+            {/* Delete Movie */}
             <section className="hidden">
                 <MovieDeleteWarningDialog
                     movieID={movie._id}
@@ -145,8 +121,7 @@ const MovieDetailsPageContent: FC<MovieDetailsPageContentProps> = (props) => {
                 />
             </section>
 
-            {/*Delete Dialog*/}
-
+            {/* Delete Poster */}
             <section className="hidden">
                 <MoviePosterImageDeleteDialog
                     movieID={movie._id}
@@ -155,7 +130,6 @@ const MovieDetailsPageContent: FC<MovieDetailsPageContentProps> = (props) => {
                     onDeleteSuccess={onPosterUpdate}
                 />
             </section>
-
         </PageFlexWrapper>
     );
 };

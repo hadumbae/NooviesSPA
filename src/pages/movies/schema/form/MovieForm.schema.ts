@@ -55,7 +55,7 @@ export const MovieFormValuesSchema = z.object({
  *
  * The `superRefine` enforces that `releaseDate` is required if `isReleased` is true.
  */
-export const MovieFormSchema = MovieBaseSchema.extend({
+export const MovieFormSchema = MovieBaseSchema.omit({slug: true}).extend({
     /** Array of genre IDs */
     genres: z.array(IDStringSchema, {message: "Must be an array of genre IDs."}),
 

@@ -55,7 +55,7 @@ export type DetailsDialogProps = {
  * ```
  */
 const MovieDetailsDialog: FC<DetailsDialogProps> = ({ children, movie }) => {
-    const { _id, title, synopsis } = movie;
+    const { slug, title, synopsis } = movie;
 
     /** Formatted movie details including poster URL, genre string, release/runtime, languages, and subtitles. */
     const {
@@ -125,7 +125,7 @@ const MovieDetailsDialog: FC<DetailsDialogProps> = ({ children, movie }) => {
                 <section>
                     <LoggedAnchor
                         target="_blank"
-                        href={`/admin/movies/get/${_id}`}
+                        href={`/admin/movies/get/${slug}`}
                         className={cn(
                             buttonVariants({ variant: "default" }),
                             "w-full bg-primary"

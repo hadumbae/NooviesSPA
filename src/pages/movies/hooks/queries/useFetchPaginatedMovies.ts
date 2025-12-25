@@ -71,25 +71,19 @@ export default function useFetchPaginatedMovies<TData = unknown>(
         queryOptions,
     } = params;
 
-    const queryKey = ["fetch_paginated_movies"];
-
     // --- OPTIONS ---
     const filteredQueries = filterNullishAttributes({...queries, ...queryConfig});
     const optionsWithDefaults = useQueryOptionDefaults(queryOptions);
 
     // --- QUERY FN ---
     const fetchPaginatedMovies = useQueryFnHandler({
-        action: () =>
-            MovieRepository.paginated({
-                page,
-                perPage,
-                queries: filteredQueries,
-            }),
+        action: () => MovieRepository.paginated({page, perPage, queries: filteredQueries}),
+        errorMessage: "Failed to fetch movies. Please try again.",
     });
 
     // --- QUERY ---
     return useQuery({
-        queryKey,
+        queryKey: ["fetch_paginated_movies", filteredQueries],
         queryFn: fetchPaginatedMovies,
         ...optionsWithDefaults,
     });
