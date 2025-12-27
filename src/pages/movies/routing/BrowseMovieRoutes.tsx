@@ -14,7 +14,7 @@ export default [
                 errorElement: <ComponentErrorHandler/>,
             },
             {
-                path: "/browse/movies/:movieID",
+                path: "/browse/movies/:slug",
                 element: <MovieInfoPage />,
                 errorElement: <ComponentErrorHandler/>,
             }

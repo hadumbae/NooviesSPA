@@ -6,14 +6,14 @@ import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoun
 import useFetchPaginatedMovies from "@/pages/movies/hooks/queries/useFetchPaginatedMovies.ts";
 import {PaginatedMovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {PaginatedMovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import BrowseMovieSummaryCard from "@/pages/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieSummaryCard.tsx";
+import {cn} from "@/common/lib/utils.ts";
 
 const BrowseMoviesPage: FC = () => {
     const query = useFetchPaginatedMovies({
         page: 1,
         perPage: 25,
-        populate: true,
-        virtuals: true,
+        queryConfig: {populate: true, virtuals: true},
     });
 
     return (
@@ -27,13 +27,13 @@ const BrowseMoviesPage: FC = () => {
 
                             Total Items: {totalItems}
 
-                            <section>
-                                {movies.map((movie) => <LoggedHoverLink
-                                    key={movie._id}
-                                    to={`/browse/movies/${movie._id}`}
-                                >
-                                    {movie.title}
-                                </LoggedHoverLink>)}
+                            <section className={cn(
+                                "grid gap-2",
+                                "grid-cols-1 lg:grid-cols-2",
+                            )}>
+                                {movies.map((movie) =>
+                                    <BrowseMovieSummaryCard key={movie._id} movie={movie}/>
+                                )}
                             </section>
                         </PageFlexWrapper>
                     );

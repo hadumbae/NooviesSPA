@@ -1,14 +1,13 @@
 /**
  * @file LoggedLink.tsx
- * @description
- * A wrapper around React Router's `Link` component that adds logging
- * and navigation tracking for user interactions.
  *
- * Features:
- * - Logs navigation events using `useLoggedNavigate`.
- * - Allows specifying log `level`, `component`, and `message`.
- * - Preserves standard `LinkProps` for React Router.
- * - Prevents navigation if `to` is missing and throws a descriptive error.
+ * Wrapper around React Router's {@link Link} that adds structured logging
+ * and tracked navigation via {@link useLoggedNavigate}.
+ *
+ * Responsibilities:
+ * - Logs navigation intent before routing
+ * - Preserves standard {@link LinkProps} behavior
+ * - Enforces presence of a valid `to` destination
  *
  * @example
  * ```tsx
@@ -20,47 +19,43 @@
  * ```
  */
 
-import { forwardRef, MouseEventHandler } from 'react';
-import { Link, LinkProps, NavigateOptions } from "react-router-dom";
-import { LoggerFunction } from "@/common/utility/features/logger/Logger.types.ts";
+import {forwardRef, MouseEventHandler} from 'react';
+import {Link, LinkProps, NavigateOptions} from "react-router-dom";
+import {LogContext, LoggerFunction} from "@/common/utility/features/logger/Logger.types.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import { ParamError } from "@/common/errors/ParamError.ts";
+import {ParamError} from "@/common/errors/ParamError.ts";
 
 /**
- * Props for the `LoggedLink` component.
+ * Props for {@link LoggedLink}.
  *
- * Extends React Router's `LinkProps` with optional logging and navigation tracking.
- *
- * @property level - Logging function or log level for navigation events.
- * @property component - Name of the component triggering the navigation.
- * @property message - Optional message to include in the log.
- * @property options - Additional `NavigateOptions` for React Router navigation.
- * @property className - Optional CSS class for styling the link.
+ * Extends {@link LinkProps} with optional logging metadata
+ * and navigation options.
  */
 export type LoggedLinkProps = LinkProps & {
+    /** Logger function (level) used for the navigation event */
     level?: LoggerFunction;
+    /** Source component name for logging context */
     component?: string;
+    /** Optional descriptive log message */
     message?: string;
+    /** React Router navigation options */
     options?: NavigateOptions;
+    /** Optional log context payload */
+    context?: LogContext;
+    /** Optional CSS class name */
     className?: string;
 };
 
 /**
- * `LoggedLink` is a React component that wraps React Router's `Link` component,
- * providing automatic logging and navigation tracking.
+ * Logged version of React Router's {@link Link}.
  *
- * @example
- * ```tsx
- * <LoggedLink
- *   to="/profile"
- *   component="Header"
- *   message="Navigated to Profile"
- *   className="text-blue-500"
- * />
- * ```
+ * @remarks
+ * - Prevents default anchor navigation
+ * - Delegates routing and logging to {@link useLoggedNavigate}
+ * - Throws {@link ParamError} if `to` is missing or invalid
  */
-const LoggedLink = forwardRef<HTMLAnchorElement, LoggedLinkProps>((props, ref)  => {
+const LoggedLink = forwardRef<HTMLAnchorElement, LoggedLinkProps>((props, ref) => {
     const {
         to,
         level,
@@ -68,40 +63,40 @@ const LoggedLink = forwardRef<HTMLAnchorElement, LoggedLinkProps>((props, ref)  
         message,
         options: navigateOptions = {},
         onClick,
+        context,
         ...linkProps
     } = props;
 
     const navigate = useLoggedNavigate();
     const options = filterNullishAttributes(navigateOptions);
 
-    /** Determines the navigation path from `to`. */
-    const navigateTo = typeof to === "string" ? to : to.pathname;
+    /** Normalized navigation target */
+    const navigateTo = typeof to === "string" ? to : to?.pathname;
 
     if (!navigateTo) {
         throw new ParamError({
             paramName: "to",
             fnName: component ?? LoggedLink.name,
-            message: `Navigation path is required. "to" or "to.pathname" must exist. "${navigateTo}" received instead.`,
+            message:
+                `Navigation target is required. Expected "to" or "to.pathname", received "${navigateTo}".`,
         });
     }
 
     /**
-     * Handles link clicks.
-     *
-     * Steps:
-     * 1. Prevents default browser navigation.
-     * 2. Calls `useLoggedNavigate` to perform navigation and log the event.
-     * 3. Executes any user-provided `onClick` callback.
+     * Intercepts link clicks to perform logged navigation.
      */
     const onLinkClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
         e.preventDefault();
+
         navigate({
             to: navigateTo,
             component: component ?? LoggedLink.name,
             level,
             message,
+            context,
             options,
         });
+
         onClick?.(e);
     };
 
