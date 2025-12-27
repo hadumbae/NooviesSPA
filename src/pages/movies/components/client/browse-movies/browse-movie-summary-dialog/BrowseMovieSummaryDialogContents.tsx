@@ -12,8 +12,8 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/common/components/ui/dialog.tsx";
-import BrowseMovieSummarySpan
-    from "@/pages/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieSummarySpan.tsx";
+import BrowseMovieMetaRow
+    from "@/pages/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
@@ -70,7 +70,7 @@ const BrowseMovieSummaryDialogContents = ({movie, credits}: ContentProps) => {
             </DialogHeader>
 
             {/* --- SUMMARY --- */}
-            <BrowseMovieSummarySpan movie={movie}/>
+            <BrowseMovieMetaRow movie={movie}/>
 
             {/* --- SYNOPSIS --- */}
             <p className={cn(PrimaryTextBaseCSS, "max-md:text-sm")}>

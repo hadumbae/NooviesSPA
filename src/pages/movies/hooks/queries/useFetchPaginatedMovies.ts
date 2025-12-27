@@ -83,7 +83,10 @@ export default function useFetchPaginatedMovies<TData = unknown>(
 
     // --- QUERY ---
     return useQuery({
-        queryKey: ["fetch_paginated_movies", filteredQueries],
+        queryKey: [
+            "fetch_paginated_movies",
+            {page, perPage, ...filteredQueries},
+        ],
         queryFn: fetchPaginatedMovies,
         ...optionsWithDefaults,
     });

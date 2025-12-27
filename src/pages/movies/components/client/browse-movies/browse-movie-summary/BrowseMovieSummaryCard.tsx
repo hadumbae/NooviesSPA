@@ -11,8 +11,8 @@ import {cn} from "@/common/lib/utils.ts";
 import {Info} from "lucide-react";
 import BrowseMovieSummaryDialog from "@/pages/movies/components/client/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialog.tsx";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
-import BrowseMovieSummarySpan
-    from "@/pages/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieSummarySpan.tsx";
+import BrowseMovieMetaRow
+    from "@/pages/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
 
 /**
  * Props for {@link BrowseMovieSummaryCard}.
@@ -42,7 +42,7 @@ const BrowseMovieSummaryCard = ({movie}: CardProps) => {
     return (
         <Card>
             <CardContent className="px-5 py-5 flex justify-between items-center">
-                <BrowseMovieSummarySpan movie={movie}/>
+                <BrowseMovieMetaRow movie={movie}/>
 
                 <BrowseMovieSummaryDialog movie={movie}>
                     <Info
