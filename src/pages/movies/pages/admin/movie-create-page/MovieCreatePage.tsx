@@ -30,9 +30,9 @@ const MovieCreatePage: FC = () => {
      *
      * @param movie - The newly created movie object.
      */
-    const onSuccess = ({_id}: Movie) => {
+    const onSuccess = ({slug}: Movie) => {
         navigate({
-            to: `/admin/movies/get/${_id}`,
+            to: `/admin/movies/get/${slug}`,
             component: MovieCreatePage.name,
             message: "Navigation on movie creation."
         });

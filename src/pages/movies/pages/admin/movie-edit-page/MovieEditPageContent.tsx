@@ -52,9 +52,9 @@ const MovieEditPageContent: FC<ContentProps> = ({ movie }) => {
      *
      * @param movie - The updated movie object containing the new ID value.
      */
-    const onSuccess = ({ _id }: Movie) => {
+    const onSuccess = ({ slug }: Movie) => {
         navigate({
-            to: `/admin/movies/get/${_id}`,
+            to: `/admin/movies/get/${slug}`,
             component: MovieEditPageContent.name,
             message: "Navigation on movie editing."
         });
