@@ -5,9 +5,9 @@ import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlug.ts";
+import MovieInfoPageContent from "@/pages/movies/pages/client/movie-info/movie-info/MovieInfoPageContent.tsx";
 
 const MovieInfoPage: FC = () => {
     // --- Route Params ---
@@ -17,7 +17,7 @@ const MovieInfoPage: FC = () => {
     }) ?? {};
 
     if (!slug) {
-        return <PageLoader />;
+        return <PageLoader/>;
     }
 
     // --- Query ---
@@ -31,14 +31,9 @@ const MovieInfoPage: FC = () => {
         <QueryBoundary query={query}>
             <ValidatedQueryBoundary query={query} schema={MovieDetailsSchema}>
                 {(movie: MovieDetails) => {
-                    const {_id: movieID, title, originalTitle} = movie;
 
                     return (
-                      <PageFlexWrapper>
-                          ID: {movieID}
-                          Title: {title}
-                          Original Title: {originalTitle}
-                      </PageFlexWrapper>
+                        <MovieInfoPageContent movie={movie}/>
                     );
                 }}
             </ValidatedQueryBoundary>

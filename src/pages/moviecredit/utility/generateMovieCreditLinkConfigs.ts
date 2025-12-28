@@ -1,8 +1,8 @@
 /**
  * @file generateMovieCreditLinkConfigs.ts
  * @description
- * Generates grouped {@link LinkConfig} objects for movie credits, separating
- * primary actors and directors with enriched logging context.
+ * Generates grouped {@link LinkConfig} objects for movie credits,
+ * categorized by role and enriched with structured logging context.
  */
 
 import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
@@ -14,46 +14,56 @@ import filterNullishAttributes from "@/common/utility/collections/filterNullishA
  */
 type ConfigParams = {
     /**
-     * Optional source component name used for logging context.
+     * Optional source component name for logging context.
      */
     sourceComponent?: string;
 
     /**
-     * List of movie credit details to process.
+     * Movie credit records to transform into link configs.
      */
     credits: MovieCreditDetails[];
 };
 
 /**
- * Creates link configurations for navigating from movie credits to person pages.
+ * Groups movie credits into navigable link configurations.
  *
- * Credits are grouped into:
- * - **actors**: primary cast members with the "Actor" role.
- * - **directors**: crew members with the "Director" role.
+ * Credits are categorized as:
+ * - **actors** – primary cast members with the "Actor" role
+ * - **directors** – crew members with the "Director" role
+ * - **writers** – crew members with the "Writer" role
  *
- * Each link includes structured logging context derived from the credit data,
- * with nullish values automatically removed.
+ * Each link includes filtered logging context derived from
+ * credit, person, and movie metadata.
  *
- * @param params - Configuration parameters including credits and optional source component.
- * @returns An object containing actor and director link configurations.
+ * @param params - Credit list and optional source component.
+ * @returns Grouped link configurations by credit role.
  *
  * @example
  * ```ts
- * const {actors, directors} = generateMovieCreditLinkConfigs({
- *   sourceComponent: "MovieDetailsPage",
- *   credits
- * });
+ * const {actors, directors, writers} =
+ *   generateMovieCreditLinkConfigs({
+ *     sourceComponent: "MovieDetailsPage",
+ *     credits,
+ *   });
  * ```
  */
-export default function generateMovieCreditLinkConfigs(params: ConfigParams) {
+export default function generateMovieCreditLinkConfigs(
+    params: ConfigParams,
+): {
+    actors: LinkConfig[];
+    directors: LinkConfig[];
+    writers: LinkConfig[];
+} {
     const {sourceComponent, credits} = params;
 
-    // --- MAPPING FUNC ---
+    const actors: LinkConfig[] = [];
+    const directors: LinkConfig[] = [];
+    const writers: LinkConfig[] = [];
 
     /**
-     * Maps a single movie credit to a {@link LinkConfig}.
+     * Maps a single credit record to a {@link LinkConfig}.
      */
-    const linkMap = (credit: MovieCreditDetails): LinkConfig => {
+    const mapToLinkConfig = (credit: MovieCreditDetails): LinkConfig => {
         const {
             _id: creditID,
             person: {_id: personID, name},
@@ -62,56 +72,35 @@ export default function generateMovieCreditLinkConfigs(params: ConfigParams) {
             department,
         } = credit;
 
-        const context = filterNullishAttributes({
-            component: sourceComponent,
-            person: personID,
-            credit: creditID,
-            movie: movieID,
-            name,
-            department,
-            roleCategory: category,
-            roleName,
-        });
-
         return {
             to: `/browse/persons/${personID}`,
             label: name,
             message: "Navigate to person's details from credits.",
-            context,
+            context: filterNullishAttributes({
+                component: sourceComponent,
+                person: personID,
+                credit: creditID,
+                movie: movieID,
+                name,
+                department,
+                roleCategory: category,
+                roleName,
+            }),
         };
     };
 
-    // --- CREW ---
+    for (const credit of credits) {
+        const {department, isPrimary, roleType: {category}} = credit;
 
-    /**
-     * Director links derived from crew credits.
-     */
-    const directorLinks = credits
-        .filter(credit =>
-            credit.department === "CREW" &&
-            credit.roleType.department === "CREW" &&
-            credit.roleType.category === "Director"
-        )
-        .map(linkMap);
+        if (department === "CREW") {
+            if (category === "Director") directors.push(mapToLinkConfig(credit));
+            if (category === "Writer") writers.push(mapToLinkConfig(credit));
+        }
 
-    // --- CAST ---
+        if (department === "CAST" && category === "Actor" && isPrimary) {
+            actors.push(mapToLinkConfig(credit));
+        }
+    }
 
-    /**
-     * Actor links derived from primary cast credits.
-     */
-    const actorLinks = credits
-        .filter(credit =>
-            credit.department === "CAST" &&
-            credit.roleType.department === "CAST" &&
-            credit.roleType.category === "Actor" &&
-            credit.isPrimary
-        )
-        .map(linkMap);
-
-    // --- LINKS ---
-
-    return {
-        actors: actorLinks,
-        directors: directorLinks,
-    };
+    return {actors, directors, writers};
 }
