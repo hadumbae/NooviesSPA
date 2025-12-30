@@ -8,6 +8,7 @@ import {Dot, LucideIcon} from "lucide-react";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {ReactElement} from "react";
 import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
+import NoneSpan from "@/common/components/NoneSpan.tsx";
 
 /**
  * Props for {@link LinkGroup}.
@@ -46,6 +47,10 @@ type GroupProps = {
 const LinkGroup = (props: GroupProps) => {
     const {links, className, separator: Icon = Dot} = props;
 
+    if (links.length === 0) {
+        return <NoneSpan />;
+    }
+
     const separatedLinks: ReactElement[] = links.reduce((acc, cur, i) => {
         const {to, context, message} = cur;
 
@@ -57,13 +62,17 @@ const LinkGroup = (props: GroupProps) => {
         };
 
         const link = (
-            <LoggedHoverLink {...props}>
+            <LoggedHoverLink key={`link-${i}`} {...props}>
                 {cur.label}
             </LoggedHoverLink>
         );
 
         if (i === 0) return [link];
-        return [...acc, <Icon size={15} />, link];
+        return [
+            ...acc,
+            <Icon key={`icon-${i}`} size={15}/>,
+            link
+        ];
     }, [] as ReactElement[]);
 
     return <div className="flex items-center">
