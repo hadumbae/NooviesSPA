@@ -12,7 +12,7 @@
  * generateAcronym("Hyper Text Markup Language"); // "HTML"
  * ```
  */
-export default function generateAcronym(sentence: string): string {
+export default function getInitials(sentence: string): string {
     return sentence
         .split(" ")       // Split the sentence into words
         .map(word => word[0]) // Take the first letter of each word

@@ -36,6 +36,10 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import NoneSpan from "@/common/components/NoneSpan.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {ChevronRight} from "lucide-react";
+import ActorCreditAvatar from "@/pages/moviecredit/components/clients/ActorCreditAvatar.tsx";
+import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
+import {cn} from "@/common/lib/utils.ts";
+import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 
 /**
  * Props for {@link MovieCreditInfoRow}.
@@ -57,6 +61,13 @@ type RowProps = {
 const MovieCreditInfoRow = ({movie, credits}: RowProps) => {
     const {slug: movieSlug} = movie;
 
+    // --- AVATARS ---
+    const mainActorAvatars = credits.filter(
+        (credit): credit is Extract<MovieCreditDetails, { department: "CAST" }> =>
+            credit.department === "CAST" && credit.isPrimary
+    ).map(credit => <ActorCreditAvatar credit={credit} key={credit._id}/>);
+
+    // --- Link Configs ---
     const {directors: directorLinks, writers: writerLinks} = generateMovieCreditLinkConfigs({
         sourceComponent: MovieCreditInfoRow.name,
         credits,
@@ -67,6 +78,14 @@ const MovieCreditInfoRow = ({movie, credits}: RowProps) => {
             <SectionHeader className={SectionHeaderCSS}>
                 Cast & Crew
             </SectionHeader>
+
+            <ScrollArea className={cn(RoundedBorderCSS, "p-3")}>
+                <div className="flex justify-start items-center space-x-5">
+                    {mainActorAvatars}
+                </div>
+
+                <ScrollBar orientation="horizontal"/>
+            </ScrollArea>
 
             <div className="space-y-2">
                 {/* Directors */}
