@@ -108,3 +108,14 @@ export const IconTextCSS = cn(
     "inline-flex items-center gap-2",
     "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
 );
+
+/**
+ * Styling for section headers with a visual accent.
+ *
+ * - Left border highlight
+ * - Horizontal padding
+ */
+export const SectionHeaderCSS = cn(
+    "border-l-4 px-2",
+    "border-primary",
+);
