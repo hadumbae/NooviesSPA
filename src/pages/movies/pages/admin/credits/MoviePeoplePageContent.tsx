@@ -98,7 +98,7 @@ const MoviePeoplePageContent = (props: ContentProps) => {
                     <SectionHeader>Credits</SectionHeader>
 
                     <MovieCreditPaginatedListQuery
-                        className="lg:col"
+                        department={department}
                         sortByBillingOrder={1}
                         page={page}
                         perPage={perPage}

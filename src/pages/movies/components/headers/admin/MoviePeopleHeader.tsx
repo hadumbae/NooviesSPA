@@ -15,7 +15,7 @@ interface HeaderProps {
 }
 
 const MoviePeopleHeader: FC<HeaderProps> = ({movie, roleType}) => {
-    const {_id, title} = movie;
+    const {slug, title} = movie;
     const parsedType = convertToTitleCase(roleType);
 
     const isCrew = roleType === "CREW";
@@ -38,7 +38,7 @@ const MoviePeopleHeader: FC<HeaderProps> = ({movie, roleType}) => {
                 "md:justify-end",
             )}>
                 <Link
-                    to={`/admin/movies/get/${_id}/people/crew`}
+                    to={`/admin/movies/get/${slug}/people/crew`}
                     className={cn(
                         buttonVariants({variant: isCrew ? "outline" : "link"}),
                         PrimaryTextBaseCSS,
@@ -49,7 +49,7 @@ const MoviePeopleHeader: FC<HeaderProps> = ({movie, roleType}) => {
                 </Link>
 
                 <Link
-                    to={`/admin/movies/get/${_id}/people/cast`}
+                    to={`/admin/movies/get/${slug}/people/cast`}
                     className={cn(
                         buttonVariants({variant: isCast ? "outline" : "link"}),
                         PrimaryTextBaseCSS,
