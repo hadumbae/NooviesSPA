@@ -1,104 +1,71 @@
 /**
  * @file generateMovieCreditLinkConfigs.ts
  * @description
- * Generates grouped {@link LinkConfig} objects for movie credits,
+ * Generates grouped {@link LinkConfig} objects from movie credit data,
  * categorized by role and enriched with structured logging context.
  */
-
 import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
+import mapCreditToPersonLinkConfig from "@/pages/moviecredit/utility/mapCreditToPersonLinkConfig.ts";
 
 /**
  * Parameters for {@link generateMovieCreditLinkConfigs}.
  */
 type ConfigParams = {
-    /**
-     * Optional source component name for logging context.
-     */
+    /** Optional source component identifier for analytics context */
     sourceComponent?: string;
 
-    /**
-     * Movie credit records to transform into link configs.
-     */
+    /** Movie credit records to transform into link configs */
     credits: MovieCreditDetails[];
 };
 
 /**
- * Groups movie credits into navigable link configurations.
- *
- * Credits are categorized as:
- * - **actors** – primary cast members with the "Actor" role
- * - **directors** – crew members with the "Director" role
- * - **writers** – crew members with the "Writer" role
- *
- * Each link includes filtered logging context derived from
- * credit, person, and movie metadata.
- *
- * @param params - Credit list and optional source component.
- * @returns Grouped link configurations by credit role.
- *
- * @example
- * ```ts
- * const {actors, directors, writers} =
- *   generateMovieCreditLinkConfigs({
- *     sourceComponent: "MovieDetailsPage",
- *     credits,
- *   });
- * ```
+ * Grouped link configurations by credit role.
  */
-export default function generateMovieCreditLinkConfigs(
-    params: ConfigParams,
-): {
+type ConfigReturns = {
     actors: LinkConfig[];
     directors: LinkConfig[];
     writers: LinkConfig[];
-} {
+};
+
+/**
+ * Transforms movie credits into grouped navigation link configs.
+ *
+ * Grouping rules:
+ * - **actors**: CAST credits with category `"Actor"` and `isPrimary === true`
+ * - **directors**: CREW credits with category `"Director"`
+ * - **writers**: CREW credits with category `"Writer"`
+ *
+ * Each link is generated via {@link mapCreditToPersonLinkConfig}
+ * and includes filtered contextual metadata for logging.
+ *
+ * @param params - Credit records and optional source component
+ * @returns Link configurations grouped by role
+ */
+export default function generateMovieCreditLinkConfigs(
+    params: ConfigParams,
+): ConfigReturns {
     const {sourceComponent, credits} = params;
 
     const actors: LinkConfig[] = [];
     const directors: LinkConfig[] = [];
     const writers: LinkConfig[] = [];
 
-    /**
-     * Maps a single credit record to a {@link LinkConfig}.
-     */
-    const mapToLinkConfig = (credit: MovieCreditDetails): LinkConfig => {
-        const {
-            _id: creditID,
-            person: {_id: personID, name},
-            movie: {_id: movieID},
-            roleType: {category, roleName},
-            department,
-        } = credit;
-
-        return {
-            to: `/browse/persons/${personID}`,
-            label: name,
-            message: "Navigate to person's details from credits.",
-            context: filterNullishAttributes({
-                component: sourceComponent,
-                person: personID,
-                credit: creditID,
-                movie: movieID,
-                name,
-                department,
-                roleCategory: category,
-                roleName,
-            }),
-        };
-    };
-
     for (const credit of credits) {
         const {department, isPrimary, roleType: {category}} = credit;
 
+        const link = mapCreditToPersonLinkConfig({
+            credit,
+            sourceComponent,
+        });
+
         if (department === "CREW") {
-            if (category === "Director") directors.push(mapToLinkConfig(credit));
-            if (category === "Writer") writers.push(mapToLinkConfig(credit));
+            if (category === "Director") directors.push(link);
+            if (category === "Writer") writers.push(link);
         }
 
         if (department === "CAST" && category === "Actor" && isPrimary) {
-            actors.push(mapToLinkConfig(credit));
+            actors.push(link);
         }
     }
 
