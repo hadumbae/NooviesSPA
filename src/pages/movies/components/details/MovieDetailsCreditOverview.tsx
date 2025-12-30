@@ -1,3 +1,27 @@
+/**
+ * @file MovieDetailsCreditOverview.tsx
+ *
+ * @summary
+ * Displays a compact, card-based overview of a movie’s cast.
+ *
+ * @description
+ * Renders a summarized cast section for a movie, intended for detail or admin
+ * pages where a full credit list would be excessive.
+ *
+ * Behavior:
+ * - Shows a grid of cast member cards when credits exist
+ * - Displays a placeholder state when no cast is available
+ * - Provides a persistent “See All Credits” navigation link
+ *
+ * Each cast card includes:
+ * - Avatar image (with initials fallback)
+ * - Character name
+ * - Person name linking to the admin person detail page
+ *
+ * All navigation interactions are logged via `LoggedHoverLink` and
+ * `LoggedAnchor` for audit and analytics purposes.
+ */
+
 import {FC} from 'react';
 import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -10,44 +34,44 @@ import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCr
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 /**
- * Props for the `MovieDetailsCreditOverview` component.
+ * Props for {@link MovieDetailsCreditOverview}.
  */
 export type OverviewProps = {
-    /** The unique identifier of the movie for which to display credits. */
-    movieID: ObjectId;
-    /** An array of movie credit details, including character and person info. */
+    /**
+     * Unique identifier (slug) of the movie.
+     * Used for constructing navigation routes.
+     */
+    slug: ObjectId;
+
+    /**
+     * Array of movie cast credit records.
+     */
     credits: MovieCreditDetailsArray;
-}
+};
 
 /**
- * Displays a compact overview of the cast for a given movie.
+ * Compact cast overview component for a movie.
  *
- * @remarks
- * - Shows a "See All Credits" link that navigates to the full cast page.
- * - If no credits are available, a placeholder message is displayed.
- * - Each cast member is shown as a card with:
- *   - Avatar image or initials
- *   - Character name
- *   - Person name linking to their admin detail page
+ * @param props - Component props
+ * @returns Rendered cast overview section
  *
  * @example
  * ```tsx
  * <MovieDetailsCreditOverview
- *   movieID="64c12f7e2b4c8e00123abcde"
- *   credits={movieCreditsArray}
+ *   slug={movie.slug}
+ *   credits={credits}
  * />
  * ```
  */
-const MovieDetailsCreditOverview: FC<OverviewProps> = ({movieID, credits}) => {
-
+const MovieDetailsCreditOverview: FC<OverviewProps> = ({slug, credits}) => {
     /**
-     * Link element linking to the full cast page.
+     * Shared navigation link to the full cast page.
      */
     const creditLink = (
         <LoggedHoverLink
-            to={`/admin/movies/get/${movieID}/people/cast`}
+            to={`/admin/movies/get/${slug}/people/cast`}
             component={MovieDetailsCreditOverview.name}
-            message="Navigate to the movie's `CAST` credits page."
+            message="Navigate to the movie's CAST credits page."
             className="text-neutral-400 hover:text-black"
         >
             See All Credits
@@ -57,7 +81,7 @@ const MovieDetailsCreditOverview: FC<OverviewProps> = ({movieID, credits}) => {
     const hasCast = credits.length > 0;
 
     /**
-     * Rendered when the movie has no cast.
+     * Rendered when no cast credits exist.
      */
     const noCastSection = (
         <section>
@@ -72,17 +96,25 @@ const MovieDetailsCreditOverview: FC<OverviewProps> = ({movieID, credits}) => {
     );
 
     /**
-     * Rendered when the movie has cast members.
+     * Rendered when cast credits are available.
      */
     const hasCastSection = (
         <section className="space-y-4">
-            <SectionHeader srOnly={true}>
+            <SectionHeader srOnly>
                 Movie Cast Overview List
             </SectionHeader>
 
             <div className="grid grid-cols-2 gap-2">
                 {credits.map((credit: MovieCreditDetails) => {
-                    const {_id, characterName, person: {_id: personID, name: personName, profileImage}} = credit;
+                    const {
+                        _id,
+                        characterName,
+                        person: {
+                            _id: personID,
+                            name: personName,
+                            profileImage,
+                        },
+                    } = credit;
 
                     const initials = getInitials(personName);
                     const profileImageLink = profileImage?.secure_url;
@@ -91,7 +123,9 @@ const MovieDetailsCreditOverview: FC<OverviewProps> = ({movieID, credits}) => {
                         <Card key={_id}>
                             <CardContent className="p-4 flex items-center">
                                 <section>
-                                    <h1 className="sr-only">Person Profile Image : {personName}</h1>
+                                    <h1 className="sr-only">
+                                        Person Profile Image: {personName}
+                                    </h1>
                                     <Avatar>
                                         <AvatarImage src={profileImageLink} />
                                         <AvatarFallback>{initials}</AvatarFallback>
@@ -99,7 +133,9 @@ const MovieDetailsCreditOverview: FC<OverviewProps> = ({movieID, credits}) => {
                                 </section>
 
                                 <section className="flex flex-col space-x-3 space-y-1">
-                                    <h1 className="sr-only">Character Details: {characterName}</h1>
+                                    <h1 className="sr-only">
+                                        Character Details: {characterName}
+                                    </h1>
 
                                     <span className="text-lg font-bold">
                                         {characterName}

@@ -50,7 +50,7 @@ type TabValue = typeof MOVIE_DETAILS_PAGE_TABS[number];
  * @param className - Optional styling for the tabs container.
  */
 const MovieDetailsPageTabs = ({ movie, className }: PageTabContent) => {
-    const { _id: movieID } = movie;
+    const { _id: movieID, slug: movieSlug } = movie;
 
     const { searchParams, setSearchParams } = useParsedSearchParams({ schema: MovieDetailsSearchParams });
 
@@ -70,7 +70,7 @@ const MovieDetailsPageTabs = ({ movie, className }: PageTabContent) => {
                 </TabsList>
             </div>
 
-            <MovieDetailsPageCreditTab movieID={movieID} />
+            <MovieDetailsPageCreditTab slug={movieSlug} />
 
             <TabsContent value="showings" className="space-y-4">
                 <div className="flex justify-between items-center">

@@ -2,62 +2,83 @@
  * @file MovieDetailsPageCreditTab.tsx
  *
  * @summary
- * Tab component displaying the credits for a specific movie.
+ * Credits tab for the movie details page.
  *
  * @description
- * Fetches and validates movie credit data, then renders
- * an overview inside a tab panel. Uses query boundaries to
- * handle loading, errors, and schema validation.
+ * Responsible for fetching, validating, and rendering a summarized
+ * cast overview for a specific movie inside a tab panel.
+ *
+ * Data flow:
+ * - Fetches CAST credits for the movie via {@link useFetchMovieCredits}
+ * - Applies query boundaries for loading and error handling
+ * - Validates the response against {@link MovieCreditDetailsArraySchema}
+ * - Renders {@link MovieDetailsCreditOverview} on success
+ *
+ * This component is intentionally thin and declarative, delegating:
+ * - Data fetching → hooks
+ * - State handling → query boundaries
+ * - Presentation → child components
  */
 
 import useFetchMovieCredits from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
 import MovieDetailsCreditOverview from "@/pages/movies/components/details/MovieDetailsCreditOverview.tsx";
-import { TabsContent } from "@/common/components/ui/tabs.tsx";
-import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {TabsContent} from "@/common/components/ui/tabs.tsx";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import { MovieCreditDetailsArraySchema } from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
-import { MovieCreditDetailsArray } from "@/pages/moviecredit/schemas/model/MovieCreditExtended.types.ts";
+import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
+import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.types.ts";
 
 /**
- * @summary Props for MovieDetailsPageCreditTab.
+ * Props for {@link MovieDetailsPageCreditTab}.
  */
 type TabProps = {
-    /** The ID of the movie to fetch credits for. */
-    movieID: ObjectId;
+    /**
+     * Unique identifier (slug) of the movie whose credits are displayed.
+     */
+    slug: ObjectId;
 };
 
 /**
- * @summary Movie credits tab component.
+ * Movie credits tab content.
  *
- * @description
- * Fetches and displays cast credits for a movie inside the
- * "credits" tab of the movie details page. Handles loading,
- * error, and validation states via QueryBoundary and
- * ValidatedQueryBoundary.
+ * @remarks
+ * - Fetches only CAST credits
+ * - Sorts results by billing order (ascending)
+ * - Limits results for overview display
+ * - Populates referenced documents and virtual fields
  *
- * @param movieID - The ID of the movie to fetch credits for.
+ * @param props - Component props
+ * @returns Rendered tab panel containing the cast overview
  */
-const MovieDetailsPageCreditTab = ({ movieID }: TabProps) => {
+const MovieDetailsPageCreditTab = ({slug}: TabProps) => {
     const query = useFetchMovieCredits({
-        movie: movieID,
-        populate: true,
-        virtuals: true,
-        limit: 6,
-        department: "CAST",
-        sortByBillingOrder: "asc",
+        queries: {
+            movieSlug: slug,
+            department: "CAST",
+            sortByBillingOrder: "asc",
+        },
+        queryConfig: {
+            populate: true,
+            virtuals: true,
+            limit: 6,
+        },
     });
 
     return (
         <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={MovieCreditDetailsArraySchema}>
-                {(credits: MovieCreditDetailsArray) => {
-                    return (
-                        <TabsContent value="credits">
-                            <MovieDetailsCreditOverview movieID={movieID} credits={credits} />
-                        </TabsContent>
-                    );
-                }}
+            <ValidatedQueryBoundary
+                query={query}
+                schema={MovieCreditDetailsArraySchema}
+            >
+                {(credits: MovieCreditDetailsArray) => (
+                    <TabsContent value="credits">
+                        <MovieDetailsCreditOverview
+                            slug={slug}
+                            credits={credits}
+                        />
+                    </TabsContent>
+                )}
             </ValidatedQueryBoundary>
         </QueryBoundary>
     );

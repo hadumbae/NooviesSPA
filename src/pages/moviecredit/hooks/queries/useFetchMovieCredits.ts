@@ -1,3 +1,28 @@
+/**
+ * @file useFetchMovieCredits.ts
+ *
+ * @summary
+ * React Query hook for fetching movie credit data with filtering and defaults.
+ *
+ * @description
+ * Wraps a movie credit query in a standardized `useQuery` hook that:
+ * - Merges query filters and request options
+ * - Removes nullish query attributes before execution
+ * - Applies shared React Query default options
+ * - Normalizes error handling via `useQueryFnHandler`
+ *
+ * This hook is intended to be the primary access point for fetching
+ * movie credit data throughout the application.
+ *
+ * @example
+ * ```ts
+ * const {data, isLoading, error} = useFetchMovieCredits({
+ *   queries: {movie: movieId},
+ *   queryOptions: {enabled: !!movieId},
+ * });
+ * ```
+ */
+
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
@@ -5,40 +30,60 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {
     MovieCreditQueryOptions
 } from "@/pages/moviecredit/schemas/filters/MovieCreditQueryOptions.types.ts";
-import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 
 /**
- * Combined query parameters for fetching movie credits.
+ * Parameters for {@link useFetchMovieCredits}.
  *
- * Includes pagination, request options, and filter parameters specific to movie credits.
+ * @template TData - Expected response data shape
  */
-type FetchQueries = RequestOptions & RequestPaginationOptions & MovieCreditQueryOptions;
+type FetchQueries<TData = unknown> = {
+    /** Optional query filters for movie credits */
+    queries?: MovieCreditQueryOptions;
+
+    /** Optional request-level configuration */
+    queryConfig?: RequestOptions;
+
+    /** Optional React Query configuration overrides */
+    queryOptions?: UseQueryOptions<TData>;
+};
 
 /**
- * React hook to fetch paginated and filtered movie credit data.
+ * Fetches movie credits using React Query.
  *
- * This hook integrates with `react-query` to manage asynchronous fetching
- * and caching of movie credit entries. It uses a query key based on the input
- * parameters to ensure proper caching and refetching behavior.
- *
- * The fetcher uses `MovieCreditRepository.query` under the hood and wraps it with
- * `useQueryFnHandler` to handle errors gracefully.
- *
- * @param queries - Combined parameters for pagination, filtering, and request control.
- * @returns A `useQuery` result object including status, data, and error handling.
+ * @template TData - Expected response data type
+ * @param params - Query filters, request config, and query options
+ * @returns React Query result containing movie credit data or error state
  */
-export default function useFetchMovieCredits(queries: FetchQueries): UseQueryResult<unknown, HttpResponseError> {
-    const queryKey = ["fetch_movie_credits_by_query", queries];
+export default function useFetchMovieCredits<TData = unknown>(
+    params: FetchQueries<TData>
+): UseQueryResult<unknown, HttpResponseError> {
+    const {queries, queryConfig, queryOptions} = params;
 
-    const fetchMovieCredits = useQueryFnHandler({
-        action: () => MovieCreditRepository.query({queries}),
-        errorMessage: "Failed to fetch movie credit data. Please try again."
+    // --- SETUP ---
+
+    const filteredQueries = filterNullishAttributes({
+        ...queries,
+        ...queryConfig,
     });
 
+    const optionsWithDefaults = useQueryOptionDefaults(queryOptions);
+
+    // --- FETCH DATA ---
+
+    const fetchMovieCredits = useQueryFnHandler({
+        action: () => MovieCreditRepository.query({queries: filteredQueries}),
+        errorMessage: "Failed to fetch movie credit data. Please try again.",
+    });
+
+    // --- USE QUERY ---
+
     return useQuery({
-        queryKey,
+        queryKey: ["fetch_movie_credits_by_query", filteredQueries],
         queryFn: fetchMovieCredits,
-        staleTime: 1000 * 60,
-        placeholderData: (previousData) => previousData,
+        ...optionsWithDefaults,
     });
 }
