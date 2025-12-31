@@ -4,87 +4,90 @@ import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/Po
 import { MongooseSortOrderSchema } from "@/common/schema/enums/MongooseSortOrderSchema.ts";
 import { DateOnlyStringSchema } from "@/common/schema/dates/DateOnlyStringSchema.ts";
 import { CoercedBooleanValueSchema } from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
-import { ISO6391LanguageCodeEnum } from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import { ShowingStatusEnumSchema } from "@/pages/showings/schema/ShowingStatus.enum.ts";
+import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import { ISO3166Alpha2CountryCodeEnum } from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
 
 /**
- * Schema defining filters for querying movie showings.
+ * Direct match filters for Showings.
  *
- * All fields are optional. Can filter by movie, theatre, screen, dates,
- * price, language, subtitle languages, active status, special event flag, and status.
- *
- * @example
- * ```ts
- * const filter = {
- *   movie: "movieId123",
- *   theatre: "theatreId456",
- *   startTime: "2025-10-14",
- *   isActive: true,
- * };
- * ```
+ * All fields are optional and map to concrete showing fields.
  */
 export const ShowingQueryMatchFilterSchema = z.object({
-    /** Filter by movie ID */
+    /** Movie identifier */
     movie: IDStringSchema.optional(),
-    /** Filter by theatre ID */
+
+    /** Theatre identifier */
     theatre: IDStringSchema.optional(),
-    /** Filter by screen ID */
+
+    /** Screen identifier */
     screen: IDStringSchema.optional(),
-    /** Filter by start date (YYYY-MM-DD) */
+
+    /** Start date (YYYY-MM-DD) */
     startTime: DateOnlyStringSchema.optional(),
-    /** Filter by end date (YYYY-MM-DD) */
+
+    /** End date (YYYY-MM-DD) */
     endTime: DateOnlyStringSchema.optional(),
-    /** Filter by minimum ticket price */
+
+    /** Minimum ticket price */
     ticketPrice: PositiveNumberSchema.optional(),
-    /** Filter by special event flag */
+
+    /** Special event flag */
     isSpecialEvent: CoercedBooleanValueSchema.optional(),
-    /** Filter by active status */
+
+    /** Active / inactive flag */
     isActive: CoercedBooleanValueSchema.optional(),
-    /** Filter by primary language */
-    language: ISO6391LanguageCodeEnum.optional(),
-    /** Filter by subtitle languages */
-    subtitleLanguages: generateArraySchema(ISO6391LanguageCodeEnum).optional(),
-    /** Filter by showing status */
-    status: ShowingStatusEnumSchema.optional()
+
+    /** Showing lifecycle status */
+    status: ShowingStatusEnumSchema.optional(),
 });
 
 /**
- * Schema defining sorting options for querying movie showings.
+ * Sorting options for Showings.
  *
- * Each field is optional. Use `1` for ascending and `-1` for descending order.
- *
- * @example
- * ```ts
- * const sort = {
- *   sortByStartTime: 1,
- *   sortByTicketPrice: -1,
- * };
- * ```
+ * Uses MongoDB sort semantics:
+ * - `1` ascending
+ * - `-1` descending
  */
 export const ShowingQueryMatchSortSchema = z.object({
     sortByStartTime: MongooseSortOrderSchema.optional(),
     sortByEndTime: MongooseSortOrderSchema.optional(),
-    sortByTicketPrice: MongooseSortOrderSchema.optional(),
-    sortByIsSpecialEvent: MongooseSortOrderSchema.optional(),
-    sortByIsActive: MongooseSortOrderSchema.optional(),
-    sortByStatus: MongooseSortOrderSchema.optional(),
 });
 
 /**
- * Combined schema for movie showing query options including filters and sorting.
+ * Reference-based filters resolved via populated relations.
  *
- * @remarks
- * Merges {@link ShowingQueryMatchFilterSchema} and {@link ShowingQueryMatchSortSchema}.
- *
- * @example
- * ```ts
- * const queryOptions = {
- *   movie: "movieId123",
- *   startTime: "2025-10-14",
- *   ticketPrice: 10,
- *   sortByStartTime: 1, // ascending
- * };
- * ```
+ * These fields do not exist directly on the Showing document.
  */
-export const ShowingQueryOptionSchema = ShowingQueryMatchFilterSchema.merge(ShowingQueryMatchSortSchema);
+export const ShowingQueryReferenceFilterSchema = z.object({
+    /** Movie title (partial or full match) */
+    movieTitle: NonEmptyStringSchema.optional(),
+
+    /** Movie slug */
+    movieSlug: NonEmptyStringSchema.optional(),
+
+    /** Theatre name */
+    theatreName: NonEmptyStringSchema.optional(),
+
+    /** Theatre state / province */
+    theatreState: NonEmptyStringSchema.optional(),
+
+    /** Theatre city */
+    theatreCity: NonEmptyStringSchema.optional(),
+
+    /** Theatre country (ISO 3166-1 alpha-2) */
+    theatreCountry: ISO3166Alpha2CountryCodeEnum.optional(),
+});
+
+/**
+ * Unified query schema for fetching Showings.
+ *
+ * Combines:
+ * - Direct match filters
+ * - Reference-based filters
+ * - Sort options
+ */
+export const ShowingQueryOptionSchema =
+    ShowingQueryMatchFilterSchema
+        .merge(ShowingQueryMatchSortSchema)
+        .merge(ShowingQueryReferenceFilterSchema);
