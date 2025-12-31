@@ -21,7 +21,7 @@ type FetchParams<TData = unknown> = PaginationValues & {
     queries?: ShowingQueryOptions;
 
     /** Request-level options such as population and virtual fields. */
-    requestOptions?: RequestOptions;
+    queryConfig?: RequestOptions;
 
     /** React Query configuration overrides. */
     queryOptions?: UseQueryOptions<TData>;
@@ -63,36 +63,27 @@ type FetchParams<TData = unknown> = PaginationValues & {
 export default function useFetchPaginatedShowings<TData = unknown>(
     params: FetchParams<TData>
 ): UseQueryResult<unknown, HttpResponseError> {
-    const {
+    const {page, perPage, queries, queryConfig, queryOptions} = params;
+
+    // --- CONFIG ---
+    const optionsWithDefaults = useQueryOptionDefaults(queryOptions);
+    const filteredQueries = filterNullishAttributes({
+        paginated: true,
         page,
         perPage,
-        queries = {},
-        requestOptions = {},
-        queryOptions,
-    } = params;
-
-    // --- Query Key ---
-    const queryKey = ["fetch_paginated_showings_by_query", { page, perPage }];
-
-    // --- Query Function ---
-    const queryFn = useQueryFnHandler({
-        action: () =>
-            ShowingRepository.query({
-                queries: filterNullishAttributes({
-                    paginated: true,
-                    page,
-                    perPage,
-                    ...queries,
-                    ...requestOptions,
-                }),
-            }),
+        ...queries,
+        ...queryConfig
     });
 
-    // --- Merge Provided Values With Defaults ---
-    const optionsWithDefaults = useQueryOptionDefaults(queryOptions);
+    // --- FUNCTION ---
+    const queryFn = useQueryFnHandler({
+        action: () => ShowingRepository.query({queries: filteredQueries}),
+        errorMessage: "Failed to fetch paginated showing data. Please try again.",
+    });
 
+    // --- QUERY ---
     return useQuery({
-        queryKey,
+        queryKey: ["fetch_paginated_showings_by_query"],
         queryFn,
         ...optionsWithDefaults,
     });

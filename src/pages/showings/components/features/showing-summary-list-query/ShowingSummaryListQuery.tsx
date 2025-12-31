@@ -35,15 +35,13 @@ type ListProps = ShowingQueryOptions & Pick<RequestOptions, "limit">;
 const ShowingSummaryListQuery = (props: ListProps) => {
     const {limit, ...queries} = props;
 
-    const requestOptions = filterNullishAttributes({
-        virtuals: true,
-        populate: true,
-        limit,
-    });
-
     const query = useFetchShowings({
         queries,
-        requestOptions,
+        queryConfig: filterNullishAttributes({
+            virtuals: true,
+            populate: true,
+            limit,
+        }),
     });
 
     return (

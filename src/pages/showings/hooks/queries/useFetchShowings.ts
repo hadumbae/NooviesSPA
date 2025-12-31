@@ -1,3 +1,15 @@
+/**
+ * @file useFetchShowings.ts
+ *
+ * React Query hook for fetching showings using query-based filters.
+ *
+ * Responsibilities:
+ * - Merges query filters and request config
+ * - Removes nullish query attributes
+ * - Applies default React Query options
+ * - Wraps repository calls with standardized error handling
+ */
+
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import { ShowingQueryOptions } from "@/pages/showings/schema/queries/ShowingQueryOption.types.ts";
@@ -6,90 +18,49 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
 import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 
 /**
- * @summary
- * Parameters for fetching Showings.
+ * Parameters for `useFetchShowings`.
  *
- * @template TData
- * Type of data returned by the query.
+ * @template TData - Expected response data shape
  */
 type FetchParams<TData = unknown> = {
-    /**
-     * Domain-specific query filters.
-     */
+    /** Query-level filters (e.g. movie, date, cinema) */
     queries?: ShowingQueryOptions;
 
-    /**
-     * Request-level options such as `populate` or `virtuals`.
-     */
-    requestOptions?: RequestOptions;
+    /** Request configuration (virtuals, populate, etc.) */
+    queryConfig?: RequestOptions;
 
-    /**
-     * React Query configuration overrides.
-     */
+    /** React Query configuration overrides */
     queryOptions?: UseQueryOptions<TData>;
 };
 
 /**
- * @summary
- * Hook to fetch Showings using React Query.
+ * Fetch showings using query-based filters.
  *
- * @description
- * Executes a query against the Showing repository, combining domain filters,
- * request-level options, and React Query configuration.
- *
- * Features:
- * - Provides a stable query key
- * - Handles HTTP errors via {@link HttpResponseError}
- * - Applies default React Query options, which can be overridden
- *
- * @template TData
- * Type of data returned by the query.
- *
- * @param params
- * Query filters, request options, and React Query overrides.
- *
- * @returns
- * A React Query `UseQueryResult` containing Showings data or an `HttpResponseError`.
- *
- * @example
- * ```ts
- * const { data, isLoading, error } = useFetchShowings({
- *   queries: { title: "Hamlet" },
- *   requestOptions: { populate: true },
- * });
- * ```
+ * @template TData - Expected response data shape
+ * @param params - Query filters, request config, and query options
+ * @returns React Query result containing showings data or error state
  */
 export default function useFetchShowings<TData = unknown>(
     params: FetchParams<TData>
 ): UseQueryResult<unknown, HttpResponseError> {
-    const {
-        queries = {},
-        requestOptions = {},
-        queryOptions = {},
-    } = params ?? {};
+    const {queries, queryConfig, queryOptions} = params ?? {};
 
-    // --- Query Key ---
-    const queryKey = ["fetch_showings_by_query"];
+    // --- CONFIG ---
+    const optionsWithDefaults = useQueryOptionDefaults(queryOptions);
+    const filteredQueries = filterNullishAttributes({...queries,...queryConfig});
 
-    // --- Query Function ---
+    // --- FUNCTION ---
     const fetchShowingsByQuery = useQueryFnHandler({
         errorMessage: "Failed to fetch data. Please try again.",
-        action: () =>
-            ShowingRepository.query({
-                queries: {
-                    ...queries,
-                    ...requestOptions,
-                },
-            }),
+        action: () => ShowingRepository.query({ queries: filteredQueries }),
     });
 
-    // --- Merge Provided Options With Defaults ---
-    const optionsWithDefaults = useQueryOptionDefaults(queryOptions);
-
+    // --- USE QUERY ---
     return useQuery({
-        queryKey,
+        queryKey: ["fetch_showings_by_query", filteredQueries],
         queryFn: fetchShowingsByQuery,
         ...optionsWithDefaults,
     });

@@ -45,7 +45,7 @@ const ShowingIndexPage: FC = () => {
     const query = useFetchPaginatedShowings({
         page,
         perPage,
-        requestOptions: {populate: true, virtuals: true},
+        queryConfig: {populate: true, virtuals: true},
         queries: filterNullishAttributes(searchParams),
     });
 

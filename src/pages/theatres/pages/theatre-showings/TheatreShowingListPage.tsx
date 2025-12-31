@@ -60,7 +60,7 @@ const TheatreShowingListPage = () => {
     const showingQuery = useFetchPaginatedShowings({
         page,
         perPage,
-        requestOptions: { populate: true, virtuals: true },
+        queryConfig: { populate: true, virtuals: true },
         queries: { theatre: theatreID },
     });
 
