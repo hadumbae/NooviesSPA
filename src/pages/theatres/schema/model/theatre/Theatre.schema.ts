@@ -6,67 +6,63 @@ import {LocationSchema} from "@/common/schema/models/location/Location.schema.ts
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 
 /**
- * 🎭 Base schema for a theatre object.
+ * @file Theatre.schema.ts
  *
- * Represents a single theatre with its identifying and core data fields.
- * Typically used for detailed API responses or documents.
+ * Zod schemas for validating **theatre** domain objects.
+ *
+ * Covers:
+ * - Base theatre model
+ * - Aggregated/detail theatre views
+ * - Array and paginated API responses
  */
 export const TheatreSchema = z.object({
-    /** Unique identifier of the theatre (MongoDB ObjectId as string). */
+    /** MongoDB ObjectId (readonly). */
     _id: IDStringSchema.readonly(),
 
-    /** Name of the theatre (max 255 characters). */
+    /** Theatre display name (≤ 255 characters). */
     name: NonEmptyStringSchema.max(255, "Must be 255 characters or less."),
 
-    /** Location of the theatre (latitude/longitude, city, etc.). */
+    /** Physical location of the theatre. */
     location: LocationSchema,
 
-    /** Total seating capacity of the theatre (must be ≥ 0). */
+    /** Total seating capacity (≥ 0). */
     seatCapacity: NonNegativeNumberSchema,
+
+    /** URL-safe unique identifier (readonly). */
+    slug: NonEmptyStringSchema.readonly(),
 });
 
 /**
- * 🪄 Extended schema for a theatre including aggregate summary fields.
+ * Extended theatre schema with aggregated metrics.
  *
- * Adds computed fields like number of screens, total seats,
- * and count of upcoming showings. Useful for dashboards or list views
- * where full detailed child objects are unnecessary.
+ * Intended for list views, dashboards, and admin summaries.
  */
 export const TheatreDetailsSchema = TheatreSchema.extend({
-    /** Total number of screens in the theatre. */
+    /** Number of screens in the theatre. */
     screenCount: NonNegativeNumberSchema,
 
-    /** Total number of seats in the theatre. */
+    /** Total number of seats across all screens. */
     seatCount: NonNegativeNumberSchema,
 
-    /** Number of scheduled future showings in the theatre. */
+    /** Count of upcoming scheduled showings. */
     futureShowingCount: NonNegativeNumberSchema,
 });
 
-/**
- * 🎬 Schema for validating an array of theatres.
- *
- * Typically used when the API returns a list of theatre objects
- * without pagination metadata.
- */
+/** Array response of base theatre objects. */
 export const TheatreArraySchema = z.array(TheatreSchema);
 
 /**
- * 📄 Schema for paginated theatre data.
+ * Paginated response of base theatres.
  *
- * Represents a paginated response containing a list of base theatre entries
- * and pagination metadata like `totalCount`, `page`, and `pageSize`.
- *
- * Useful for endpoints returning a page of theatres.
+ * Includes pagination metadata alongside theatre entries.
  */
-export const PaginatedTheatreSchema = generatePaginationSchema(TheatreSchema);
+export const PaginatedTheatreSchema =
+    generatePaginationSchema(TheatreSchema);
 
 /**
- * 📊 Schema for paginated detailed theatre data.
+ * Paginated response of detailed theatre entries.
  *
- * Similar to {@link PaginatedTheatreSchema} but includes
- * aggregated detail fields (screens, seats, future showings) per theatre.
- *
- * Useful for admin dashboards or detailed listings.
+ * Includes aggregated metrics per theatre.
  */
-export const PaginatedTheatreDetailsSchema = generatePaginationSchema(TheatreDetailsSchema);
+export const PaginatedTheatreDetailsSchema =
+    generatePaginationSchema(TheatreDetailsSchema);

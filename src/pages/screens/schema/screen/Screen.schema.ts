@@ -5,49 +5,61 @@ import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/Non
 import { CoercedNumberValueSchema } from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
 import { ScreenTypeEnum } from "@/pages/screens/schema/ScreenType.enum.ts";
 import { NonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import { generatePaginationSchema } from "@/common/utility/schemas/generatePaginationSchema.ts";
 
-/**
- * Schema for a basic screen object.
- */
+// /**
+//  * @file Screen.schema.ts
+//  *
+//  * Zod schemas for validating **screen** domain objects.
+//  *
+//  * Screens represent individual auditoriums within a theatre.
+//  */
 export const ScreenSchema = z.object({
-    /** Unique identifier for the screen */
+    /** MongoDB ObjectId (readonly). */
     _id: IDStringSchema.readonly(),
 
-    /** Name of the screen */
+    /** Screen display name (≤ 255 characters). */
     name: NonEmptyStringSchema
         .min(1, "Required.")
         .max(255, "Name must be 255 characters or less."),
 
-    /** Maximum number of people the screen can accommodate */
-    capacity: CoercedNumberValueSchema.gt(0, "Capacity must be greater than 0"),
+    /** Maximum seating capacity (> 0). */
+    capacity: CoercedNumberValueSchema.gt(
+        0,
+        "Capacity must be greater than 0",
+    ),
 
-    /** Type of screen (e.g., IMAX, Standard, 3D) */
+    /** Screen classification (e.g., IMAX, STANDARD, 3D). */
     screenType: ScreenTypeEnum,
 
-    /** Reference ID of the theatre this screen belongs to */
+    /** Reference to owning theatre (ObjectId string). */
     theatre: IDStringSchema,
+
+    /** URL-safe unique identifier (readonly). */
+    slug: NonEmptyStringSchema.readonly(),
 });
 
 /**
- * Schema for a screen with additional details.
+ * 🎬 Extended screen schema with resolved relations and metrics.
  */
 export const ScreenDetailsSchema = ScreenSchema.extend({
-    /** Detailed theatre information */
+    /** Fully populated theatre object. */
     theatre: z.lazy(() => TheatreSchema),
 
-    /** Total number of seats in the screen */
+    /** Total number of seats in this screen. */
     seatCount: NonNegativeNumberSchema,
 
-    /** Number of showings scheduled in the future */
+    /** Count of upcoming showings. */
     futureShowingCount: NonNegativeNumberSchema,
 });
 
-/** Array of basic screens */
+/** Array response of base screens. */
 export const ScreenArraySchema = z.array(ScreenSchema);
 
-/** Paginated response of basic screens */
-export const PaginatedScreenSchema = generatePaginationSchema(ScreenSchema);
+/** Paginated response of base screen entries. */
+export const PaginatedScreenSchema =
+    generatePaginationSchema(ScreenSchema);
 
-/** Paginated response of detailed screens */
-export const PaginatedScreenDetailsSchema = generatePaginationSchema(ScreenDetailsSchema);
+/** Paginated response of detailed screen entries. */
+export const PaginatedScreenDetailsSchema =
+    generatePaginationSchema(ScreenDetailsSchema);
