@@ -1,10 +1,21 @@
 /**
  * @file MovieCreditQueryOptions.schema.ts
- * @description
- * Zod schemas for filtering and sorting movie credit queries.
+ * @summary
+ * Zod schemas for validating movie credit query parameters.
  *
- * Designed for use with query parameter validation on list and search endpoints.
+ * @description
+ * Provides composable schemas for filtering and sorting movie credit
+ * list/search endpoints.
+ *
+ * Design goals:
+ * - Safe parsing of URL query parameters
+ * - Explicit constraints for IDs, strings, numbers, and booleans
+ * - MongoDB-compatible sort semantics
+ *
+ * These schemas are intended to sit at the API boundary, before
+ * translation into aggregation stages such as `$match` and `$sort`.
  */
+
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -14,30 +25,20 @@ import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSc
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**
- * Defines filter parameters for movie credit queries.
+ * Match-level filters for MovieCredit queries.
  *
- * All fields are optional and may be combined freely.
+ * @remarks
+ * These filters map directly to fields on the MovieCredit model and are
+ * typically converted into MongoDB `$match` conditions.
  *
- * Supported filters include:
- * - Identifiers (`_id`, `movie`, `person`, `roleType`)
- * - Department classification (`CAST` / `CREW`)
- * - Text-based fields (names and titles)
- * - Billing and credit flags
+ * All properties are optional and may be freely combined.
  */
-export const MovieCreditQueryFiltersSchema = z.object({
+export const MovieCreditQueryMatchFiltersSchema = z.object({
     _id: IDStringSchema.optional(),
     movie: IDStringSchema.optional(),
-    movieSlug: NonEmptyStringSchema.optional(),
     person: IDStringSchema.optional(),
     roleType: IDStringSchema.optional(),
     department: RoleTypeDepartmentEnumSchema.optional(),
-    name: NonEmptyStringSchema
-        .min(3, {message: "Must be at least 3 characters."})
-        .max(255, {message: "Must be 255 characters or less."})
-        .optional(),
-    title: NonEmptyStringSchema
-        .max(255, {message: "Must be 255 characters or less."})
-        .optional(),
     displayRoleName: NonEmptyStringSchema
         .max(150, {message: "Must be 150 characters or less."})
         .optional(),
@@ -55,32 +56,45 @@ export const MovieCreditQueryFiltersSchema = z.object({
 });
 
 /**
- * Defines sorting parameters for movie credit queries.
+ * Sort options for MovieCredit queries.
  *
- * Each field maps to a sortable property and uses
- * {@link MongooseSortOrderSchema} (`asc` or `desc`).
+ * @remarks
+ * Each field represents a sortable attribute and accepts a
+ * {@link MongooseSortOrderSchema} value (`asc` or `desc`).
  */
-export const MovieCreditQuerySortsSchema = z.object({
-    sortByMovie: MongooseSortOrderSchema.optional(),
-    sortByPerson: MongooseSortOrderSchema.optional(),
-    sortByRoleType: MongooseSortOrderSchema.optional(),
-    sortByDepartment: MongooseSortOrderSchema.optional(),
+export const MovieCreditQueryMatchSortsSchema = z.object({
     sortByCreditedAs: MongooseSortOrderSchema.optional(),
     sortByCharacterName: MongooseSortOrderSchema.optional(),
     sortByBillingOrder: MongooseSortOrderSchema.optional(),
-    sortByUncredited: MongooseSortOrderSchema.optional(),
-    sortByVoiceOnly: MongooseSortOrderSchema.optional(),
-    sortByCameo: MongooseSortOrderSchema.optional(),
-    sortByMotionCapture: MongooseSortOrderSchema.optional(),
-    sortByIsPrimary: MongooseSortOrderSchema.optional(),
-    sortByArchiveFootage: MongooseSortOrderSchema.optional(),
 });
 
 /**
- * Combined schema for movie credit query options.
+ * Reference-level filters for MovieCredit queries.
  *
- * Merges filtering and sorting parameters into a single schema
- * suitable for validating query strings.
+ * @remarks
+ * These filters apply to fields resolved via lookups or joins
+ * (e.g. movie slug, role name).
+ */
+export const MovieCreditQueryReferenceFiltersSchema = z.object({
+    movieSlug: NonEmptyStringSchema.optional(),
+    roleName: NonEmptyStringSchema.optional(),
+});
+
+/**
+ * Combined filter schema for MovieCredit queries.
+ *
+ * @remarks
+ * Merges match-level and reference-level filters into a single schema.
+ */
+export const MovieCreditQueryFiltersSchema =
+    MovieCreditQueryMatchFiltersSchema.merge(MovieCreditQueryReferenceFiltersSchema);
+
+/**
+ * Full query options schema for MovieCredit list endpoints.
+ *
+ * @remarks
+ * Combines filtering and sorting parameters for validating raw
+ * query strings.
  */
 export const MovieCreditQueryOptionsSchema =
-    MovieCreditQueryFiltersSchema.merge(MovieCreditQuerySortsSchema);
+    MovieCreditQueryFiltersSchema.merge(MovieCreditQueryMatchSortsSchema);

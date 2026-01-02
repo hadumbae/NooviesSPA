@@ -1,28 +1,86 @@
-import { z } from "zod";
+/**
+ * @file MovieCreditQueryOptions.types.ts
+ * @summary
+ * TypeScript types inferred from movie credit query Zod schemas.
+ *
+ * @description
+ * Exposes strongly typed query parameter contracts by inferring
+ * TypeScript types directly from their source Zod schemas.
+ *
+ * This ensures:
+ * - A single source of truth for query shape and constraints
+ * - Compile-time safety aligned with runtime validation
+ * - Clear separation between match, reference, and sort concerns
+ *
+ * These types are intended for use across controller, service,
+ * and query-construction layers.
+ */
+
+import {z} from "zod";
 import {
+    MovieCreditQueryMatchFiltersSchema,
+    MovieCreditQueryMatchSortsSchema,
+    MovieCreditQueryReferenceFiltersSchema,
     MovieCreditQueryFiltersSchema,
     MovieCreditQueryOptionsSchema,
-    MovieCreditQuerySortsSchema
 } from "@/pages/moviecredit/schemas/filters/MovieCreditQueryOptions.schema.ts";
 
 /**
- * Type representing the filter parameters for querying movie credits.
+ * Match-level filter parameters for querying movie credits.
  *
- * Derived from `MovieCreditQueryFiltersSchema`.
+ * @remarks
+ * Maps directly to fields on the MovieCredit document and is typically
+ * translated into MongoDB `$match` stages.
+ *
+ * Derived from {@link MovieCreditQueryMatchFiltersSchema}.
  */
-export type MovieCreditQueryFilters = z.infer<typeof MovieCreditQueryFiltersSchema>;
+export type MovieCreditQueryMatchFilters =
+    z.infer<typeof MovieCreditQueryMatchFiltersSchema>;
 
 /**
- * Type representing the sorting options for movie credit queries.
+ * Sorting parameters for movie credit queries.
  *
- * Derived from `MovieCreditQuerySortsSchema`.
+ * @remarks
+ * Each property represents a sortable field and uses MongoDB-style
+ * ordering semantics (`asc` | `desc`).
+ *
+ * Derived from {@link MovieCreditQueryMatchSortsSchema}.
  */
-export type MovieCreditQuerySorts = z.infer<typeof MovieCreditQuerySortsSchema>;
+export type MovieCreditQueryMatchSorts =
+    z.infer<typeof MovieCreditQueryMatchSortsSchema>;
 
 /**
- * Type representing the full query options for movie credits,
- * including both filters and sorting.
+ * Reference-level filter parameters for movie credit queries.
  *
- * Derived from `MovieCreditQueryOptionsSchema`.
+ * @remarks
+ * Applies to fields resolved through lookups or joins
+ * (e.g. movie slug, role name).
+ *
+ * Derived from {@link MovieCreditQueryReferenceFiltersSchema}.
  */
-export type MovieCreditQueryOptions = z.infer<typeof MovieCreditQueryOptionsSchema>;
+export type MovieCreditQueryReferenceFilters =
+    z.infer<typeof MovieCreditQueryReferenceFiltersSchema>;
+
+/**
+ * Combined filter parameters for movie credit queries.
+ *
+ * @remarks
+ * Merges match-level and reference-level filters into a single type
+ * for convenience when constructing query pipelines.
+ *
+ * Derived from {@link MovieCreditQueryFiltersSchema}.
+ */
+export type MovieCreditQueryFilters =
+    z.infer<typeof MovieCreditQueryFiltersSchema>;
+
+/**
+ * Full set of query options for movie credit list/search endpoints.
+ *
+ * @remarks
+ * Combines filtering and sorting parameters into a single
+ * type-safe contract aligned with API validation.
+ *
+ * Derived from {@link MovieCreditQueryOptionsSchema}.
+ */
+export type MovieCreditQueryOptions =
+    z.infer<typeof MovieCreditQueryOptionsSchema>;
