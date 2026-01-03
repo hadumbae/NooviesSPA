@@ -22,13 +22,13 @@
  * - **UseQueryResult** — Returned type of React Query, typed to `TData`.
  */
 
-import {SeatMapQueryOptions} from "@/pages/seatmap/schema/query-options/SeatMapQueryOption.types.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import SeatMapRepository from "@/pages/seatmap/repositories/SeatMapRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {FetchByQueryHookParams} from "@/common/type/query/FetchHookParams.ts";
+import {SeatMapQueryOptions} from "@/pages/seatmap/schema/query-options/SeatMapQueryOptions.ts";
 
 /**
  * ## FetchQueryParams

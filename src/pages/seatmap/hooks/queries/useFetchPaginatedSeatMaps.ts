@@ -18,13 +18,13 @@
  */
 
 import {FetchByQueryHookParams} from "@/common/type/query/FetchHookParams.ts";
-import {SeatMapQueryOptions} from "@/pages/seatmap/schema/query-options/SeatMapQueryOption.types.ts";
 import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import SeatMapRepository from "@/pages/seatmap/repositories/SeatMapRepository.ts";
 import {RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 import {useQuery} from "@tanstack/react-query";
+import {SeatMapQueryOptions} from "@/pages/seatmap/schema/query-options/SeatMapQueryOptions.ts";
 
 /**
  * ## FetchParams
