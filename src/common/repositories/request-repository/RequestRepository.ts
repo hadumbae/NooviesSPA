@@ -47,12 +47,13 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
     async getAll(params?: GetEntitiesParams<TQueries>): Promise<RequestReturns<unknown>> {
         const {queries, config} = params ?? {};
 
-        const urlQueries = filterNullishAttributes({...queries, ...config});
-
         const url = buildQueryURL({
             baseURL,
             path: "query",
-            queries: urlQueries,
+            queries: {
+                ...queries,
+                ...config,
+            },
         });
 
         return useFetchAPI({url, method: "GET"});
@@ -67,18 +68,16 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
     async paginated(params: GetPaginatedEntitiesParams<TQueries>): Promise<RequestReturns<unknown>> {
         const {page, perPage, queries, config} = params;
 
-        const urlQueries = filterNullishAttributes({
-            paginated: true,
-            page,
-            perPage,
-            ...queries,
-            ...config,
-        });
-
         const url = buildQueryURL({
             baseURL,
             path: "query",
-            queries: urlQueries,
+            queries: {
+                paginated: true,
+                page,
+                perPage,
+                ...queries,
+                ...config,
+            },
         });
 
         return useFetchAPI({url, method: "GET"});
@@ -98,7 +97,7 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
         const url = buildQueryURL({
             baseURL,
             path: `get/${_id}`,
-            queries: config && filterNullishAttributes(config),
+            queries: config,
         });
 
         return useFetchAPI({url, method: "GET"});
@@ -112,7 +111,7 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
         const url = buildQueryURL({
             baseURL,
             path: `slug/${slug}`,
-            queries: config && filterNullishAttributes(config),
+            queries: config,
         });
 
         return useFetchAPI({url, method: "GET"});
@@ -132,7 +131,7 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
         const url = buildQueryURL({
             baseURL,
             path: "create",
-            queries: config && filterNullishAttributes(config),
+            queries: config,
         });
 
         return useFetchAPI({url, method: "POST", data});
@@ -152,7 +151,7 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
         const url = buildQueryURL({
             baseURL,
             path: `update/${_id}`,
-            queries: config && filterNullishAttributes(config),
+            queries: config,
         });
 
         return useFetchAPI({url, method: "PATCH", data});
