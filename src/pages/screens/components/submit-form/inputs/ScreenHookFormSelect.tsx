@@ -1,5 +1,5 @@
 import {Control, FieldValues, Path} from "react-hook-form";
-import RequestQueryFilters from "@/common/type/request/RequestQueryFilters.ts";
+import RequestQueryParams from "@/common/type/request/RequestQueryParams.ts";
 import {Loader} from "lucide-react";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
@@ -36,7 +36,7 @@ type SelectProps<TSubmit extends FieldValues> = {
     isMulti?: boolean;
 
     /** Optional filters applied when querying screen options. */
-    filters?: RequestQueryFilters;
+    filters?: RequestQueryParams;
 }
 
 /**

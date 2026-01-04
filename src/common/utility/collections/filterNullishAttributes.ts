@@ -1,18 +1,29 @@
 /**
- * Removes all key-value pairs from the given object where the value is
- * `null`, `undefined`, or an empty string (`""`).
+ * Remove nullish and empty-string values from an object.
  *
- * This function preserves values such as `0`, `false`, and `NaN`, which may
- * be valid in many use cases. It is commonly used to clean objects before
- * sending them to APIs or storing them, ensuring only meaningful data is retained.
+ * Filters out properties whose values are:
+ * - `null`
+ * - `undefined`
+ * - empty strings (`""`)
  *
- * @param data - An object containing key-value pairs to be filtered.
- * @returns A new object with all properties that had empty values removed.
+ * Preserves valid falsy values such as `0`, `false`, and `NaN`.
+ * Commonly used to sanitize query parameters or request payloads
+ * before sending them to an API.
+ *
+ * @param data - Source object to be cleaned.
+ * @returns A new object containing only meaningful values.
  */
-export default function filterNullishAttributes(data: Record<string, any>) {
+export default function filterNullishAttributes(data?: Record<string, any>): Record<string, any> {
+    if (!data) {
+        return {};
+    }
+
     return Object.fromEntries(
-        Object
-            .entries(data)
-            .filter(([_, value]) => value !== null && value !== undefined && value !== '')
+        Object.entries(data).filter(
+            ([_, value]) =>
+                value !== null &&
+                value !== undefined &&
+                value !== ""
+        )
     );
 }
