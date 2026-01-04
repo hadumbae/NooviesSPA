@@ -1,95 +1,55 @@
 /**
- * # useFetchPaginatedSeatMaps Hook
+ * @file useFetchPaginatedSeatMaps.ts
  *
- * A React Query hook for fetching paginated seat maps from the backend.
- * Supports filtering, pagination, and customizable React Query options.
- *
- * Integrates:
- * - **SeatMapRepository.query** — performs the paginated API query.
- * - **useQueryFnHandler** — wraps the repository call with consistent error handling.
- * - **React Query (`useQuery`)** — manages caching, re-fetching, and query state.
- *
- * ## Features
- * - Type-safe query parameters (`SeatMapQueryOptions`).
- * - Pagination support via `page` and `perPage`.
- * - Optional request-level options (`RequestOptions`).
- * - Configurable React Query behavior (`UseQueryOptions<TData>`).
- * - Automatic error handling with a standardized error message.
+ * React Query hook for fetching paginated seat map data.
  */
 
-import {FetchByQueryHookParams} from "@/common/type/query/FetchHookParams.ts";
 import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import SeatMapRepository from "@/pages/seatmap/repositories/SeatMapRepository.ts";
-import {RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
 import {useQuery} from "@tanstack/react-query";
 import {SeatMapQueryOptions} from "@/pages/seatmap/schema/query-options/SeatMapQueryOptions.ts";
+import {FetchByQueryParams} from "@/common/type/query/FetchByQueryParams.ts";
 
 /**
- * ## FetchParams
+ * Parameters for `useFetchPaginatedSeatMaps`.
  *
- * Parameters accepted by `useFetchPaginatedSeatMaps`.
+ * Combines pagination values with query filters and React Query options.
  *
- * Combines:
- * - `SeatMapQueryOptions` — optional query filters and sort options.
- * - `PaginationValues` — `page` and `perPage` values for pagination.
- * - `RequestOptions` & `UseQueryOptions<TData>` from `FetchByQueryHookParams`.
- *
- * @template TData
- * The type of data returned by the hook. Defaults to `unknown`.
- *
- * @example
- * const params: FetchParams<SeatMap[]> = {
- *   page: 1,
- *   perPage: 10,
- *   queries: { status: "AVAILABLE", sortByPrice: 1 },
- *   options: { enabled: true, staleTime: 30000 }
- * };
+ * @template TData - Returned data shape.
  */
-type FetchParams<TData = unknown> = FetchByQueryHookParams<SeatMapQueryOptions, TData> & PaginationValues;
+type FetchParams<TData = unknown> =
+    PaginationValues &
+    FetchByQueryParams<SeatMapQueryOptions, TData>;
 
 /**
- * ## useFetchPaginatedSeatMaps
+ * Fetch paginated seat maps using React Query.
  *
- * React Query hook for fetching paginated seat map data from the API.
+ * @template TData - Returned data shape.
  *
- * @template TData
- * The type of the returned seat map data. Defaults to `unknown`.
- *
- * @param params - The fetch parameters, including pagination, queries, request options, and React Query options.
- *
- * @returns A `UseQueryResult<TData>` object from React Query, containing:
- * - `data` — the fetched paginated seat maps
- * - `isLoading` / `isFetching` — loading state
- * - `isError` / `error` — error state
- * - other React Query result properties
- *
- * @example
- * const { data, isLoading, error } = useFetchPaginatedSeatMaps<SeatMap[]>({
- *   page: 1,
- *   perPage: 20,
- *   queries: { status: "AVAILABLE", sortBySeatRow: 1 },
- *   options: { enabled: true, staleTime: 15000 }
- * });
+ * @param params - Pagination, query filters, request config, and query options.
+ * @returns React Query result for the paginated seat map request.
  */
-export default function useFetchPaginatedSeatMaps<TData = unknown>(params: FetchParams<TData>) {
-    const {page, perPage, queries = {}, options = useQueryOptionDefaults(), ...requestOptions} = params;
-    const paginatedQueries: RequestPaginationOptions = {paginated: true, page, perPage};
-
-    const queryKey = [
-        "fetch_paginated_seat_maps_by_query",
-        {page, perPage, queries, requestOptions, options}
-    ];
+export default function useFetchPaginatedSeatMaps<TData = unknown>(
+    params: FetchParams<TData>
+) {
+    const {page, perPage, queries, queryConfig, queryOptions} = params;
 
     const fetchSeatMap = useQueryFnHandler({
-        action: () => SeatMapRepository.query({queries: {...paginatedQueries, ...queries}}),
         errorMessage: "Failed to fetch seat maps. Please try again.",
+        action: () =>
+            SeatMapRepository.paginated({
+                page,
+                perPage,
+                queries,
+                config: queryConfig,
+            }),
     });
 
     return useQuery({
-        queryKey,
+        queryKey: ["fetch_paginated_seat_maps_by_query"],
         queryFn: fetchSeatMap,
-        ...options,
+        ...useQueryOptionDefaults(queryOptions),
     });
 }
