@@ -11,7 +11,8 @@ import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import TheatreDetailsPageContent from "@/pages/theatres/pages/theatre-details-page/TheatreDetailsPageContent.tsx";
-import TheatreDetailsUIContextProvider from "@/pages/theatres/context/theatre-details-ui/TheatreDetailsUIContextProvider.tsx";
+import TheatreDetailsUIContextProvider
+    from "@/pages/theatres/context/theatre-details-ui/TheatreDetailsUIContextProvider.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
 
@@ -48,14 +49,13 @@ const TheatreDetailsPage: FC = () => {
     }) ?? {};
 
     if (!theatreID) {
-        return <PageLoader />;
+        return <PageLoader/>;
     }
 
     // --- Query ---
     const query = useFetchTheatre({
         _id: theatreID,
-        populate: true,
-        virtuals: true,
+        config: {populate: true, virtuals: true},
     });
 
     // --- Render ---
@@ -68,7 +68,7 @@ const TheatreDetailsPage: FC = () => {
                     message="Invalid theatre data."
                 >
                     {(theatre: TheatreDetails) => (
-                        <TheatreDetailsPageContent theatre={theatre} />
+                        <TheatreDetailsPageContent theatre={theatre}/>
                     )}
                 </ValidatedQueryBoundary>
             </QueryBoundary>
