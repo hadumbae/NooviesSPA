@@ -1,92 +1,89 @@
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
+/**
+ * @file useFetchPaginatedTheatres.ts
+ *
+ * React Query hook for fetching paginated theatres.
+ * Supports pagination, query-based filtering, request configuration,
+ * and shared React Query defaults with consistent error handling.
+ */
 
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-
 import TheatreRepository from "@/pages/theatres/repositories/TheatreRepository.ts";
 import {TheatreQueryOptions} from "@/pages/theatres/schema/queries/TheatreQueryOption.types.ts";
-
-import {FetchByQueryParams} from "@/common/type/query/FetchByQueryParams.ts";
 import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
- * Parameters accepted by {@link useFetchPaginatedTheatres}.
- *
- * Combines:
- * - {@link PaginationValues} for pagination (`page`, `perPage`)
- * - {@link TheatreQueryOptions} for filtering and sorting
- * - Request configuration and React Query options via {@link FetchByQueryParams}
+ * Parameters for {@link useFetchPaginatedTheatres}.
  *
  * @template TData
- * Expected response data type.
+ * Optional transformed response type.
  */
-type FetchQueries<TData = unknown> =
-    PaginationValues &
-    FetchByQueryParams<TheatreQueryOptions, TData>;
+type FetchQueries<TData = unknown> = PaginationValues & {
+    /**
+     * Theatre query filters.
+     */
+    queries?: TheatreQueryOptions;
+
+    /**
+     * Request-level configuration (excluding pagination limit).
+     */
+    config?: Omit<RequestOptions, "limit">;
+
+    /**
+     * React Query configuration overrides.
+     */
+    options?: UseQueryOptions<TData>;
+};
 
 /**
- * React Query hook for fetching paginated theatre data.
+ * # useFetchPaginatedTheatres Hook
  *
- * Wraps `useQuery` to:
- * - Fetch paginated theatres via {@link TheatreRepository.paginated}
- * - Apply standardized error handling
- * - Merge default React Query options
- * - Cache results based on pagination and query parameters
+ * Fetches paginated theatre data using React Query.
  *
- * Intended for theatre index pages, admin listings, and
- * any UI that requires paginated theatre data.
+ * Integrates:
+ * - **TheatreRepository** for API access
+ * - **useQueryFnHandler** for standardized error handling
+ * - **useQueryOptionDefaults** for shared query defaults
  *
  * @template TData
- * Expected response payload type.
+ * Optional transformed response type.
  *
- * @param params - Pagination values, query filters, request config, and query options.
+ * @param params
+ * Pagination values, query filters, request configuration,
+ * and React Query options.
  *
- * @returns A {@link UseQueryResult} containing:
- * - `data` — paginated theatre results
- * - `isLoading` / `isFetching` — loading states
- * - `isError` / `error` — error state
+ * @returns
+ * React Query result containing theatre data or an {@link HttpResponseError}.
  *
  * @example
  * ```ts
- * const { data, isLoading } = useFetchPaginatedTheatres<PaginatedTheatreDetails>({
+ * const { data, isLoading } = useFetchPaginatedTheatres({
  *   page: 1,
- *   perPage: 10,
- *   queries: { city: "Bangkok" },
- *   queryOptions: { staleTime: 30_000 },
+ *   perPage: 20,
+ *   queries: { city: "Berlin" },
  * });
  * ```
  */
 export default function useFetchPaginatedTheatres<TData = unknown>(
-    params: FetchQueries<TData>
+    {page, perPage, queries, config, options}: FetchQueries<TData>
 ): UseQueryResult<TData, HttpResponseError> {
-    const {page, perPage, queries, queryConfig, queryOptions} = params;
-
-    /**
-     * Query key scoped by pagination and query parameters.
-     */
     const queryKey = [
         "fetch_paginated_theatres_by_query",
-        {page, perPage, ...queries, ...queryConfig},
+        {page, perPage, ...queries, ...config},
     ];
 
-    /**
-     * Query function to fetch paginated theatres.
-     */
     const fetchTheatres = useQueryFnHandler({
         errorMessage: "Failed to fetch theatre data. Please try again.",
-        action: () =>
-            TheatreRepository.paginated({
-                page,
-                perPage,
-                queries,
-                config: queryConfig,
-            }),
+        action: () => TheatreRepository.paginated({page, perPage, queries, config}),
     });
 
     return useQuery({
         queryKey,
         queryFn: fetchTheatres,
-        ...useQueryOptionDefaults(queryOptions),
+        ...useQueryOptionDefaults(options),
     });
 }
