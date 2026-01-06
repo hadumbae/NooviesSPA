@@ -1,28 +1,27 @@
 /**
- * @file useFetchScreen.ts
+ * @file useFetchScreenBySlug.ts
  *
- * React Query hook for fetching a single screen by ID.
- * Provides a standardized, typed interface with consistent
- * error handling and shared React Query defaults.
+ * React Query hook for fetching a single screen by slug.
+ * Provides a standardized interface with consistent error handling
+ * and shared React Query defaults.
  */
 
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 
 /**
- * Parameters for {@link useFetchScreen}.
+ * Parameters for {@link useFetchScreenBySlug}.
  */
 type FetchParams = {
     /**
-     * Screen identifier.
+     * Screen slug identifier.
      */
-    _id: ObjectId;
+    slug: string;
 
     /**
      * Request-level configuration (excluding pagination limit).
@@ -36,9 +35,9 @@ type FetchParams = {
 };
 
 /**
- * # useFetchScreen Hook
+ * # useFetchScreenBySlug Hook
  *
- * Fetches a single screen by its unique identifier.
+ * Fetches a single screen using its slug identifier.
  *
  * Integrates:
  * - **ScreenRepository** for API access
@@ -46,28 +45,28 @@ type FetchParams = {
  * - **useQueryOptionDefaults** for shared React Query defaults
  *
  * @param params
- * Screen ID, request configuration, and React Query options.
+ * Screen slug, request configuration, and React Query options.
  *
  * @returns
  * React Query result containing screen data or an {@link HttpResponseError}.
  *
  * @example
  * ```ts
- * const { data, isLoading } = useFetchScreen({
- *   _id: screenId,
+ * const { data, isLoading } = useFetchScreenBySlug({
+ *   slug: "imax-main-hall",
  * });
  * ```
  */
-export default function useFetchScreen(
-    {_id, config, options}: FetchParams
+export default function useFetchScreenBySlug(
+    {slug, config, options}: FetchParams
 ): UseQueryResult<unknown, HttpResponseError> {
     const fetchScreen = useQueryFnHandler({
-        action: () => ScreenRepository.get({_id, config}),
+        action: () => ScreenRepository.getBySlug({slug, config}),
         errorMessage: "Failed to fetch screen data. Please try again.",
     });
 
     return useQuery({
-        queryKey: ["fetch_screen_by_id", {_id, ...config}],
+        queryKey: ["fetch_screen_by_slug", {slug, ...config}],
         queryFn: fetchScreen,
         ...useQueryOptionDefaults(options),
     });

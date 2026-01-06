@@ -1,52 +1,59 @@
-import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+/**
+ * @file useScreenDeleteMutation.ts
+ *
+ * React Query mutation hook for deleting a single screen.
+ * Handles backend deletion, user feedback, optional lifecycle callbacks,
+ * and query invalidation to keep UI state in sync.
+ */
+
+import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {ScreenListQueryKeys} from "@/pages/screens/constants/ScreenQueryKeys.ts";
 
 /**
- * Custom React hook for deleting a single screen entity.
+ * # useScreenDeleteMutation Hook
  *
- * Wraps a React Query `useMutation` hook to:
- * - Delete a screen via `ScreenRepository`
- * - Show success or error toast messages
- * - Trigger optional success and error callbacks
- * - Invalidate cached queries after mutation
+ * React Query mutation hook for deleting a single `Screen` entity.
  *
- * @param params - Optional configuration for the deletion mutation
- * @param params.onDeleteSuccess - Callback fired when deletion succeeds
- * @param params.onDeleteError - Callback fired when deletion fails
- * @param params.successMessage - Optional message displayed on success
- * @param params.errorMessage - Optional message displayed on error
+ * Responsibilities:
+ * - Deletes a screen via **ScreenRepository**
+ * - Displays success and error toast notifications
+ * - Executes optional success and error callbacks
+ * - Invalidates screen list queries to refresh cached data
  *
- * @returns A React Query mutation object of type `UseMutationResult<void, unknown, {_id: ObjectId}>`
+ * @param params
+ * Optional deletion lifecycle configuration.
+ *
+ * @returns
+ * React Query mutation result for deleting a screen by ID.
  *
  * @example
  * ```ts
  * const deleteMutation = useScreenDeleteMutation({
  *   onDeleteSuccess: () => console.log("Screen deleted"),
- *   onDeleteError: (err) => console.error(err),
  * });
  *
- * deleteMutation.mutate({ _id: "64f123abc1234567890abcdef" });
+ * deleteMutation.mutate({ _id: screenId });
  * ```
  */
 export default function useScreenDeleteMutation(
     params: OnDeleteMutationParams = {}
-): UseMutationResult<void, unknown, { _id: ObjectId }> {
+): UseMutationResult<void, unknown, {_id: ObjectId}> {
     const {onDeleteSuccess, onDeleteError, successMessage, errorMessage} = params;
 
-    const mutationKey = ["delete_single_screen"];
-    const queryClient = useQueryClient();
+    const keys = ScreenListQueryKeys.map(key => [key]);
+    const invalidateQueries = useInvalidateQueryKeys({keys, exact: false});
 
     /**
-     * Executes the deletion of a screen by ID.
-     *
-     * @param _id - The unique identifier of the screen to delete
+     * Executes the deletion request.
      */
-    const mutationFn = async ({_id}: { _id: ObjectId }) => {
+    const deleteScreen = async ({_id}: {_id: ObjectId}) => {
         await handleQueryResponse({
             action: () => ScreenRepository.delete({_id}),
             errorMessage: "Failed to delete screen data. Please try again.",
@@ -54,19 +61,16 @@ export default function useScreenDeleteMutation(
     };
 
     /**
-     * Called when the deletion succeeds.
-     * Shows a success toast and calls optional success callback.
+     * Handles a successful deletion.
      */
     const onSuccess = async () => {
         toast.success(successMessage ?? "Screen deleted.");
+        invalidateQueries();
         onDeleteSuccess?.();
     };
 
     /**
-     * Called when the deletion fails.
-     * Shows an error toast and calls optional error callback.
-     *
-     * @param error - The error thrown during deletion
+     * Handles deletion errors.
      */
     const onError = (error: unknown) => {
         const displayMessage = errorMessage ?? "Something went wrong. Please try again.";
@@ -74,19 +78,10 @@ export default function useScreenDeleteMutation(
         onDeleteError?.(error);
     };
 
-    /**
-     * Called after the mutation settles (regardless of success or error).
-     * Invalidates queries related to screen listings to keep cache consistent.
-     */
-    const onSettled = async () => {
-        await queryClient.invalidateQueries({queryKey: ["fetch_screens_by_query"], exact: false});
-    };
-
     return useMutation({
-        mutationKey,
-        mutationFn,
+        mutationKey: ["delete_single_screen"],
+        mutationFn: deleteScreen,
         onSuccess,
         onError,
-        onSettled,
     });
 }

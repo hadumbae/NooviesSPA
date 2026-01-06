@@ -1,29 +1,29 @@
 /**
  * @file TheatreDetailsScreensTab.tsx
- * @description
- * Paginated screen overview for a specific theatre.
  *
- * This component:
- * - Fetches paginated screen data via `useFetchScreens`
- * - Wraps fetching + validation with `QueryBoundary` and `ValidatedQueryBoundary`
- * - Renders screen results using `TheatreDetailsScreensTabContent`
- * - Exposes pagination + optional query filters
- * - Supports optional className overrides
+ * Paginated screen overview tab for a specific theatre.
  *
- * Designed for use inside `TheatreDetailsPageTabs`.
+ * Responsibilities:
+ * - Fetches paginated screen data scoped to a theatre
+ * - Handles loading and error states via `QueryBoundary`
+ * - Validates responses using `ValidatedQueryBoundary`
+ * - Renders screen results with `TheatreDetailsScreensTabContent`
+ * - Exposes pagination controls and optional query filters
+ *
+ * Intended for use within `TheatreDetailsPageTabs`.
  */
 
-import { FC } from 'react';
-import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useFetchScreens from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreens.ts";
-import { PaginatedScreenDetailsSchema } from "@/pages/screens/schema/screen/Screen.schema.ts";
+import {FC} from "react";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {PaginatedScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import { PaginatedScreenDetails } from "@/pages/screens/schema/screen/Screen.types.ts";
+import {PaginatedScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
-import { ScreenQueryOptions } from "@/pages/screens/schema/queries/ScreenQueryOptions.types.ts";
+import {ScreenQueryOptions} from "@/pages/screens/schema/queries/ScreenQueryOptions.types.ts";
 import TheatreDetailsScreensTabContent
     from "@/pages/theatres/pages/theatre-details-page/tabs/TheatreDetailsScreensTabContent.tsx";
+import useFetchPaginatedScreens from "@/pages/screens/hooks/screens/fetch-screens/useFetchPaginatedScreens.ts";
 
 /**
  * Props for {@link TheatreDetailsScreensTab}.
@@ -58,51 +58,52 @@ export type OverviewTabProps = {
      * Optional CSS class overrides.
      */
     classNames?: {
-        /** Class for the outer container. */
+        /**
+         * Class for the outer container.
+         */
         container?: string;
 
-        /** Class for the list of screens. */
+        /**
+         * Class for the screen list.
+         */
         list?: string;
     };
 };
 
 /**
- * Displays a paginated overview of screens for a theatre.
+ * # TheatreDetailsScreensTab Component
  *
- * Handles:
- * - Fetching (via `useFetchScreens`)
- * - Validation (via `ValidatedQueryBoundary`)
- * - Error and loading states (via `QueryBoundary`)
+ * Displays a paginated list of screens for a given theatre.
  *
- * Renders the screen list through {@link TheatreDetailsScreensTabContent}.
+ * Integrates:
+ * - **useFetchPaginatedScreens** for data fetching
+ * - **QueryBoundary** for loading and error handling
+ * - **ValidatedQueryBoundary** for runtime data validation
  *
- * @param props - See {@link OverviewTabProps}
+ * @param props
+ * Component props. See {@link OverviewTabProps}.
  *
  * @example
  * ```tsx
  * const [page, setPage] = useState(1);
  *
  * <TheatreDetailsScreensTab
- *   theatreID="64f123abc1234567890abcdef"
+ *   theatreID={theatreId}
  *   page={page}
  *   perPage={10}
  *   setPage={setPage}
  *   queries={{ active: true }}
- *   classNames={{ container: "custom-container", list: "custom-list" }}
  * />
  * ```
  */
 const TheatreDetailsScreensTab: FC<OverviewTabProps> = (props) => {
-    const { theatreID, page, perPage, setPage, classNames, queries } = props;
+    const {theatreID, page, perPage, setPage, classNames, queries} = props;
 
-    const screenQuery = useFetchScreens({
-        theatre: theatreID,
-        paginated: true,
-        virtuals: true,
-        populate: true,
+    const screenQuery = useFetchPaginatedScreens({
         page,
         perPage,
-        ...queries
+        config: {populate: true, virtuals: true},
+        queries: {...queries, theatre: theatreID},
     });
 
     return (
@@ -113,14 +114,15 @@ const TheatreDetailsScreensTab: FC<OverviewTabProps> = (props) => {
                 message="Invalid data received. Please try again."
                 errorComponent={ErrorMessageDisplay}
             >
-                {({ items, totalItems }: PaginatedScreenDetails) =>
+                {({items, totalItems}: PaginatedScreenDetails) => (
                     <TheatreDetailsScreensTabContent
                         theatreID={theatreID}
                         screens={items}
                         totalItems={totalItems}
-                        paginationOptions={{ page, perPage, setPage }}
+                        paginationOptions={{page, perPage, setPage}}
                         classNames={classNames}
-                    />}
+                    />
+                )}
             </ValidatedQueryBoundary>
         </QueryBoundary>
     );

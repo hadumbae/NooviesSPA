@@ -1,9 +1,9 @@
 /**
- * @file useFetchScreens.ts
+ * @file useFetchPaginatedScreens.ts
  *
- * React Query hook for fetching screens by query.
- * Provides a standardized interface for filtered screen retrieval
- * with shared query defaults and consistent error handling.
+ * React Query hook for fetching paginated screens.
+ * Supports pagination, query-based filtering, request configuration,
+ * and shared React Query defaults with standardized error handling.
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
@@ -14,13 +14,14 @@ import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
+import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 
 /**
- * Parameters for {@link useFetchScreens}.
+ * Parameters for {@link useFetchPaginatedScreens}.
  */
-export type FetchParams = {
+export type FetchParams = PaginationValues & {
     /**
-     * Screen query filters and sorting options.
+     * Screen query filters.
      */
     queries?: ScreenQueryOptions;
 
@@ -36,38 +37,41 @@ export type FetchParams = {
 };
 
 /**
- * # useFetchScreens Hook
+ * # useFetchPaginatedScreens Hook
  *
- * Fetches screens using query-based filtering.
+ * Fetches paginated screen data using React Query.
  *
  * Integrates:
  * - **ScreenRepository** for API access
- * - **useQueryFnHandler** for standardized error handling
- * - **useQueryOptionDefaults** for shared React Query defaults
+ * - **useQueryFnHandler** for consistent error handling
+ * - **useQueryOptionDefaults** for shared query defaults
  *
  * @param params
- * Query filters, request configuration, and React Query options.
+ * Pagination values, query filters, request configuration,
+ * and React Query options.
  *
  * @returns
  * React Query result containing screen data or an {@link HttpResponseError}.
  *
  * @example
  * ```ts
- * const { data, isLoading } = useFetchScreens({
- *   queries: { theatre: theatreId, active: true },
+ * const { data, isLoading } = useFetchPaginatedScreens({
+ *   page: 1,
+ *   perPage: 10,
+ *   queries: { theatre: theatreId },
  * });
  * ```
  */
-export default function useFetchScreens(
-    {queries, config, options}: FetchParams
+export default function useFetchPaginatedScreens(
+    {page, perPage, queries, config, options}: FetchParams
 ): UseQueryResult<unknown, HttpResponseError> {
     const fetchScreens = useQueryFnHandler({
-        action: () => ScreenRepository.query({queries, config}),
+        action: () => ScreenRepository.paginated({page, perPage, queries, config}),
         errorMessage: "Failed to fetch screen data. Please try again.",
     });
 
     return useQuery({
-        queryKey: ["fetch_screens_by_query", {...queries, ...config}],
+        queryKey: ["fetch_paginated_screens_by_query", {page, perPage, ...queries, ...config}],
         queryFn: fetchScreens,
         ...useQueryOptionDefaults(options),
     });

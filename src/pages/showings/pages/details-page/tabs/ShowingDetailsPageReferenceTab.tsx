@@ -54,7 +54,7 @@ type QueryData = {
 const ShowingDetailsPageReferenceTab = ({screenID, theatreID}: TabProps) => {
     // --- Queries ---
     const theatreQuery = useFetchTheatre({_id: theatreID, config: {populate: true, virtuals: true}});
-    const screenQuery = useFetchScreen({_id: screenID, populate: true, virtuals: true});
+    const screenQuery = useFetchScreen({_id: screenID, config: {populate: true, virtuals: true}});
 
     const queries = [theatreQuery, screenQuery];
 

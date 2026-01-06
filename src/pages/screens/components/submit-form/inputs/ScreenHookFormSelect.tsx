@@ -72,7 +72,7 @@ const ScreenHookFormSelect = <TSubmit extends FieldValues>(
     props: SelectProps<TSubmit>
 ) => {
     const {isMulti = false, filters = {}} = props;
-    const query = useFetchScreens(filters);
+    const query = useFetchScreens({queries: filters});
 
     return (
         <QueryBoundary query={query} loaderComponent={Loader} errorComponent={ErrorMessageDisplay}>

@@ -1,39 +1,50 @@
+/**
+ * @file useScreenSubmitMutation.ts
+ *
+ * React Query mutation hook for creating or updating screens.
+ * Encapsulates form submission, server interaction, response validation,
+ * error mapping, user feedback, and query invalidation.
+ */
+
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {ScreenForm, ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 import {toast} from "react-toastify";
-import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import ScreenRepository from "@/pages/screens/repositories/ScreenRepository.ts";
 import {ScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {SubmitMutationParams} from "@/common/type/form/MutationSubmitParams.ts";
+import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {ScreenIDQueryKeys, ScreenListQueryKeys} from "@/pages/screens/constants/ScreenQueryKeys.ts";
 
 /**
- * Parameters required to submit or update a `Screen` entity.
+ * Parameters for {@link useScreenSubmitMutation}.
  *
- * Extends the base mutation configuration with:
- * - the active React Hook Form instance
- * - the `_id` when performing edits
- *
- * Used by `useScreenSubmitMutation` to unify form state, validation,
- * backend interaction, and success/error handling.
+ * Extends the base submit mutation params with screen-specific
+ * form values and response typing.
  */
 export type ScreenSubmitMutationParams =
     SubmitMutationParams<ScreenFormValues, ScreenDetails>;
 
 /**
+ * # useScreenSubmitMutation Hook
+ *
  * React Query mutation hook for creating or updating a `Screen`.
  *
- * This hook handles the full mutation lifecycle:
- * - Submits data to the backend via `ScreenRepository`
- * - Parses/validates server responses using `ScreenDetailsSchema`
+ * Responsibilities:
+ * - Submits form data via **ScreenRepository**
+ * - Validates server responses using **ScreenDetailsSchema**
  * - Maps backend validation errors to form fields
- * - Displays toast feedback for success and failure
+ * - Displays success/error toast notifications
  * - Invalidates screen-related queries to refresh UI state
  *
- * @param params - Form instance, edit ID, and optional lifecycle callbacks.
- * @returns A `UseMutationResult` controlling mutation state and utilities.
+ * @param params
+ * Form instance, optional edit ID, and lifecycle callbacks.
+ *
+ * @returns
+ * React Query mutation result controlling submission state.
  *
  * @example
  * ```ts
@@ -51,20 +62,16 @@ export default function useScreenSubmitMutation(
 ): UseMutationResult<ScreenDetails, unknown, ScreenForm> {
     const {form, editID, onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
 
-    // --- Mutation Setup ---
-    const queryClient = useQueryClient();
-    const mutationKey = ["submit_screen_data"];
     const queryOptions = {populate: true, virtuals: true};
 
+    const keys = [...ScreenIDQueryKeys, ...ScreenListQueryKeys].map(key => [key]);
+    const invalidateQueries = useInvalidateQueryKeys({keys, exact: false});
+
     /**
-     * Executes the create/update request.
+     * Executes the create or update request.
      *
-     * Selects the correct repository method based on `editID`,
-     * performs the network request, and validates the response shape.
-     *
-     * @param values - The form payload submitted to the backend.
-     * @returns The validated `ScreenDetails` returned from the server.
-     * @throws If validation fails or the response is malformed.
+     * Selects the appropriate repository method based on `editID`
+     * and validates the returned payload.
      */
     const submitScreenData = async (values: ScreenForm) => {
         const action = editID
@@ -87,27 +94,20 @@ export default function useScreenSubmitMutation(
     };
 
     /**
-     * Called after a successful mutation.
-     *
-     * Displays a success toast and triggers the optional
-     * `onSubmitSuccess` callback.
-     *
-     * @param screen - The successfully returned `ScreenDetails`.
+     * Handles a successful mutation.
      */
-    const onSuccess = async (screen: ScreenDetails) => {
-        const label = editID ? "updated" : "created";
-        toast.success(successMessage || `Screen ${label} successfully.`);
+    const onSuccess = (screen: ScreenDetails) => {
+        const fallbackMessage = editID
+            ? "Screen updated successfully."
+            : "Screen created successfully.";
 
+        toast.success(successMessage || fallbackMessage);
+        invalidateQueries();
         onSubmitSuccess?.(screen);
     };
 
     /**
-     * Handles any mutation failure.
-     *
-     * Attempts to map validation errors to form fields, displays an error toast,
-     * and invokes the optional `onSubmitError` callback.
-     *
-     * @param error - The thrown or returned error object.
+     * Handles mutation errors.
      */
     const onError = (error: unknown) => {
         const displayMessage = errorMessage || "Something went wrong. Please try again.";
@@ -115,26 +115,10 @@ export default function useScreenSubmitMutation(
         onSubmitError?.(error);
     };
 
-    /**
-     * Runs after the mutation settles, whether successful or failed.
-     *
-     * Ensures all screen-related queries are invalidated,
-     * refreshing any list/detail views dependent on up-to-date data.
-     */
-    const onSettled = async () => {
-        const queryKeys = [
-            "fetch_single_screen",
-            "fetch_screens_by_query",
-        ]
-
-        await Promise.all(queryKeys.map(key => queryClient.invalidateQueries({queryKey: [key], exact: false})))
-    };
-
     return useMutation({
-        mutationKey,
+        mutationKey: ["submit_screen_data"],
         mutationFn: submitScreenData,
         onSuccess,
         onError,
-        onSettled,
     });
 }

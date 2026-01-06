@@ -60,8 +60,8 @@ const ScreenDetailsPage = (): ReactElement => {
     const {theatreID, screenID} = routeParams;
 
     // --- Queries ---
-    const theatreQuery = useFetchTheatre<TheatreDetails>({_id: theatreID, virtuals: true, populate: true});
-    const screenQuery = useFetchScreen<ScreenDetails>({_id: screenID, virtuals: true, populate: true});
+    const theatreQuery = useFetchTheatre({_id: theatreID, config: {populate: true, virtuals: true}});
+    const screenQuery = useFetchScreen({_id: screenID, config: {populate: true, virtuals: true}});
     const seatQuery = useFetchSeats({queries: {populate: true, virtuals: true, theatre: theatreID, screen: screenID}});
 
     // --- Query Validation ---
