@@ -60,9 +60,20 @@ const ScreenDetailsPage = (): ReactElement => {
     const {theatreID, screenID} = routeParams;
 
     // --- Queries ---
-    const theatreQuery = useFetchTheatre({_id: theatreID, config: {populate: true, virtuals: true}});
-    const screenQuery = useFetchScreen({_id: screenID, config: {populate: true, virtuals: true}});
-    const seatQuery = useFetchSeats({queries: {populate: true, virtuals: true, theatre: theatreID, screen: screenID}});
+    const theatreQuery = useFetchTheatre({
+        _id: theatreID,
+        config: {populate: true, virtuals: true},
+    });
+
+    const screenQuery = useFetchScreen({
+        _id: screenID,
+        config: {populate: true, virtuals: true},
+    });
+
+    const seatQuery = useFetchSeats({
+        queries: {theatre: theatreID, screen: screenID},
+        config: {populate: true, virtuals: true}
+    });
 
     // --- Query Validation ---
     const validationQueries: CombinedSchemaQuery[] = [

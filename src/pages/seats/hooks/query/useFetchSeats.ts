@@ -1,100 +1,74 @@
 /**
  * @file useFetchSeats.ts
  *
- * @summary React Query hook for fetching paginated seat data from the backend.
- *
- * @description
- * Provides a convenient hook to query seat documents with support for:
- * - Pagination (`page`, `limit`)
- * - Filtering (seat-specific fields like `row`, `seatType`, `theatre`, `screen`)
- * - Sorting and additional request options (`RequestOptions`)
- * - Integration with React Query for caching, background refetching, and state management
- *
- * Utilizes {@link SeatRepository.query} under the hood and wraps errors with {@link HttpResponseError}.
+ * React Query hook for fetching a list of seats using query filters.
+ * Supports flexible seat querying with standardized error handling
+ * and shared React Query defaults.
  */
 
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {SeatQueryOptions} from "@/pages/seats/schema/queries/SeatQueryOption.types.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
-import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
+import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 
-type FetchParams<TData = unknown> = {
+/**
+ * Parameters for {@link useFetchSeats}.
+ */
+type FetchParams = {
     /**
-     * Queries to control the request:
-     * - Filters (seat-specific) via {@link SeatQueryOptions}
-     * - Pagination via {@link RequestPaginationOptions}
-     * - Request options via {@link RequestOptions} (e.g., projection, population)
+     * Seat query filters (e.g. theatre, screen, row, status).
      */
-    queries: RequestOptions & RequestPaginationOptions & SeatQueryOptions;
+    queries?: SeatQueryOptions;
 
     /**
-     * React Query options to customize caching and fetch behavior.
+     * Request-level configuration (pagination, sorting, includes, etc.).
      */
-    options?: UseQueryOptions<TData>;
+    config?: RequestOptions;
+
+    /**
+     * React Query configuration overrides.
+     */
+    options?: UseQueryOptions<unknown>;
 };
 
 /**
- * React Query hook for fetching a **paginated list of seats**.
+ * # useFetchSeats Hook
  *
- * @template TData - Shape of the returned data (e.g., paginated seat results).
+ * Fetches a collection of seats based on provided query options.
  *
- * @param params - Configuration object including query parameters and React Query options.
+ * Integrates:
+ * - **SeatRepository** for backend querying
+ * - **useQueryFnHandler** for consistent error handling
+ * - **useQueryOptionDefaults** for shared React Query behavior
  *
- * @returns A {@link UseQueryResult} containing:
- * - `data`: The fetched seat data (`TData`)
- * - `isLoading`: Whether the request is in progress
- * - `isError` / `error`: {@link HttpResponseError} if the request failed
- * - Other React Query helpers (`refetch`, `isFetching`, etc.)
+ * @param params
+ * Optional seat query filters, request configuration, and React Query options.
+ *
+ * @returns
+ * React Query result containing a seat list or an {@link HttpResponseError}.
  *
  * @example
  * ```ts
- * type PaginatedSeats = {
- *   items: Array<{ _id: string; row: string; seatNumber: number }>;
- *   total: number;
- *   page: number;
- *   limit: number;
- * };
- *
- * const { data, isLoading, error } = useFetchSeats<PaginatedSeats>({
- *   queries: {
- *     page: 1,
- *     limit: 20,
- *     theatre: "abc123",
- *     screen: "xyz789",
- *   },
- *   options: {
- *     staleTime: 5 * 60 * 1000, // 5 minutes
- *   },
+ * const { data, isLoading } = useFetchSeats({
+ *   queries: { screen: "screen-1" },
  * });
  * ```
  */
-export default function useFetchSeats<TData = unknown>(
-    params: FetchParams<TData>
-): UseQueryResult<TData, HttpResponseError> {
-    const { queries, options } = params;
-    const queryKey = ["fetch_seats_by_query", queries];
-
-    const {
-        enabled = true,
-        staleTime = 1000 * 60,
-        placeholderData = (previousData: TData | undefined) => previousData,
-        initialData,
-    } = options || {};
-
+export default function useFetchSeats(
+    {queries, config, options}: FetchParams = {}
+): UseQueryResult<unknown, HttpResponseError> {
     const fetchSeats = useQueryFnHandler({
-        action: () => SeatRepository.query({ queries }),
+        action: () => SeatRepository.query({queries, config}),
         errorMessage: "Failed to fetch seats. Please try again.",
     });
 
     return useQuery({
-        queryKey,
+        queryKey: ["fetch_seats_by_query", {...queries, ...config}],
         queryFn: fetchSeats,
-        enabled,
-        staleTime,
-        initialData,
-        placeholderData,
+        ...useQueryOptionDefaults(options),
     });
 }

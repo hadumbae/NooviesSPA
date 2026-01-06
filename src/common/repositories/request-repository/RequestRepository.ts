@@ -1,7 +1,6 @@
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import {RequestRepositoryMethods} from "@/common/repositories/request-repository/RequestRepositoryMethods.ts";
 import {
     CreateEntityParams,
@@ -182,10 +181,10 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
         const url = buildQueryURL({
             baseURL,
             path: "query",
-            queries: filterNullishAttributes({
-                queries,
-                config,
-            }),
+            queries: {
+                ...queries,
+                ...config,
+            },
         });
 
         return useFetchAPI({url, method: "GET"});
