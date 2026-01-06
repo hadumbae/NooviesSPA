@@ -64,7 +64,7 @@ const TheatreIndexPage: FC = () => {
         page,
         perPage: THEATRES_PER_PAGE,
         queries: searchParams,
-        queryConfig: {virtuals: true, populate: true},
+        config: {virtuals: true, populate: true},
     });
 
     return (

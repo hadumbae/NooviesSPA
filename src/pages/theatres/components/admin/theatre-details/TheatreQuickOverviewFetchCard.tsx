@@ -48,7 +48,7 @@ export type FetchCardProps = {
  * This ensures robust runtime safety and user-friendly fallback states.
  */
 const TheatreQuickOverviewFetchCard: FC<FetchCardProps> = ({theatreID, className}) => {
-    const query = useFetchTheatre({_id: theatreID, populate: true, virtuals: true});
+    const query = useFetchTheatre({_id: theatreID, config: {populate: true, virtuals: true}});
 
     return (
         <QueryBoundary
