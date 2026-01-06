@@ -33,7 +33,6 @@ import SeatSubmitFormView from "@/pages/seats/components/forms/submit-form/seat-
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatFormContext} from "@/pages/seats/context/form/SeatFormContext.ts";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
-import {MutationEditByIDParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
 import {Seat} from "@/pages/seats/schema/seat/Seat.types.ts";
 import {SeatDetails} from "@/pages/seats/schema/seat/SeatDetails.types.ts";
@@ -57,7 +56,7 @@ type FormProps = FormContainerProps<SeatDetails, Seat, SeatFormValues> & {
  */
 const SeatSubmitFormContainer: FC<FormProps> = (props) => {
     // --- Props ---
-    const {className, isEditing, entity, ...formOptions} = props;
+    const {className, entity, ...formOptions} = props;
 
     // --- Access Context ---
     const {initialValues, currentValues, setCurrentValues, options = {}} = useRequiredContext({
@@ -84,12 +83,9 @@ const SeatSubmitFormContainer: FC<FormProps> = (props) => {
     }, [form]);
 
     // --- Mutation ---
-    const editParams: MutationEditByIDParams = isEditing
-        ? {isEditing: true, _id: entity._id}
-        : {isEditing: false};
-
-    const mutation = useSeatSubmitMutation(form, {
-        editing: editParams,
+    const mutation = useSeatSubmitMutation({
+        form,
+        editID: entity?._id,
         options: formOptions,
     });
 
