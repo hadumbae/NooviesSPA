@@ -1,71 +1,82 @@
+/**
+ * @file useFetchMovie.ts
+ *
+ * React Query hook for fetching a single movie by ID.
+ * Provides a typed, standardized interface for retrieving movie data
+ * with consistent error handling and shared query defaults.
+ */
+
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { FetchByIDParams } from "@/common/type/query/FetchByIDParams.ts";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 
 /**
- * Parameters for fetching a single movie.
+ * Parameters for {@link useFetchMovie}.
  *
- * Combines the base fetch parameters with query options.
- *
- * @template TData The expected type of the data returned by the query.
+ * @template TData
+ * Optional transformed response type.
  */
-export type FetchParams<TData> = FetchByIDParams & UseQueryOptions<TData>;
+export type FetchParams<TData = unknown> = {
+    /**
+     * Movie identifier.
+     */
+    _id: ObjectId;
+
+    /**
+     * Request-level configuration (excluding pagination limit).
+     */
+    config?: Omit<RequestOptions, "limit">;
+
+    /**
+     * React Query configuration overrides.
+     */
+    options?: UseQueryOptions<TData>;
+};
 
 /**
- * Custom hook to fetch a single movie by its ID.
+ * # useFetchMovie Hook
  *
- * @template TData The expected type of the movie data returned by the query.
+ * Fetches a single movie by its unique identifier.
  *
- * @param params - Object containing parameters to fetch the movie.
- * @param params._id - The unique identifier of the movie to fetch.
- * @param params.populate - Optional. Whether to populate related entities (default: false).
- * @param params.virtuals - Optional. Whether to include virtual fields (default: false).
- * @param params.staleTime - See {@link UseQueryOptions#staleTime}.
- * @param params.initialData - See {@link UseQueryOptions#initialData}.
- * @param params.placeholderData - See {@link UseQueryOptions#placeholderData}.
+ * Integrates:
+ * - **MovieRepository** for API access
+ * - **useQueryFnHandler** for consistent error handling
+ * - **useQueryOptionDefaults** for shared React Query defaults
  *
- * @returns A {@link UseQueryResult} containing the movie data or an {@link HttpResponseError}.
+ * @template TData
+ * Optional transformed response type.
+ *
+ * @param params
+ * Movie ID, request configuration, and React Query options.
+ *
+ * @returns
+ * React Query result containing movie data or an {@link HttpResponseError}.
  *
  * @example
  * ```ts
- * const { data, error, isLoading } = useFetchMovie<Movie>({
- *   _id: "12345",
- *   populate: true
+ * const { data, isLoading, error } = useFetchMovie({
+ *   _id: movieId,
  * });
- * if (isLoading) return <Spinner />;
- * if (error) return <div>{error.message}</div>;
- * return <MovieDetails movie={data} />;
  * ```
  */
 export default function useFetchMovie<TData = unknown>(
     params: FetchParams<TData>
 ): UseQueryResult<TData, HttpResponseError> {
-    const {
-        _id,
-        populate = false,
-        virtuals = false,
-        enabled = true,
-        staleTime = 1000 * 60,
-        initialData,
-        placeholderData = (previousData: TData | undefined) => previousData,
-    } = params;
-
-    const queryKey = ["fetch_single_movie", { _id, populate, virtuals }];
+    const {_id, config, options} = params;
 
     const fetchMovie = useQueryFnHandler({
-        action: () => MovieRepository.get({ _id, populate, virtuals }),
-        errorMessage: "Failed to fetch movie data. Please try again."
+        action: () => MovieRepository.get({_id, config}),
+        errorMessage: "Failed to fetch movie data. Please try again.",
     });
 
     return useQuery({
-        queryKey,
+        queryKey: ["fetch_single_movie", {_id, ...config}],
         queryFn: fetchMovie,
-        enabled,
-        staleTime,
-        initialData,
-        placeholderData,
+        ...useQueryOptionDefaults(options),
     });
 }

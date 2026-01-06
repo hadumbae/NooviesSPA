@@ -8,7 +8,6 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 
 /**
  * Parameters for {@link useFetchPaginatedMovies}.
@@ -24,7 +23,7 @@ type FetchParams<TData = unknown> = PaginationValues & {
     /**
      * Optional request-level configuration (excluding pagination limit).
      */
-    queryConfig?: Omit<RequestOptions, "limit">;
+    config?: Omit<RequestOptions, "limit">;
 
     /**
      * Optional React Query configuration overrides.
@@ -32,7 +31,7 @@ type FetchParams<TData = unknown> = PaginationValues & {
      * @remarks
      * Merged with defaults from {@link useQueryOptionDefaults}.
      */
-    queryOptions?: UseQueryOptions<TData>;
+    options?: UseQueryOptions<TData>;
 };
 
 /**
@@ -67,27 +66,18 @@ export default function useFetchPaginatedMovies<TData = unknown>(
         page,
         perPage,
         queries = {},
-        queryConfig,
-        queryOptions,
+        config,
+        options,
     } = params;
 
-    // --- OPTIONS ---
-    const filteredQueries = filterNullishAttributes({...queries, ...queryConfig});
-    const optionsWithDefaults = useQueryOptionDefaults(queryOptions);
-
-    // --- QUERY FN ---
     const fetchPaginatedMovies = useQueryFnHandler({
-        action: () => MovieRepository.paginated({page, perPage, queries: filteredQueries}),
+        action: () => MovieRepository.paginated({page, perPage, queries, config}),
         errorMessage: "Failed to fetch movies. Please try again.",
     });
 
-    // --- QUERY ---
     return useQuery({
-        queryKey: [
-            "fetch_paginated_movies",
-            {page, perPage, ...filteredQueries},
-        ],
+        queryKey: ["fetch_paginated_movies", {page, perPage, ...queries, ...config}],
         queryFn: fetchPaginatedMovies,
-        ...optionsWithDefaults,
+        ...useQueryOptionDefaults(options),
     });
 }

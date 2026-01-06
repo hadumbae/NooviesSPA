@@ -80,7 +80,7 @@ const GenreDetailsPage: FC = (): ReactElement => {
     const movieQuery = useFetchPaginatedMovies({
         page,
         perPage: MOVIES_PER_PAGE,
-        queryConfig: {populate: true, virtuals: true},
+        config: {populate: true, virtuals: true},
     });
 
     // --- Query Setup ---

@@ -49,8 +49,7 @@ const MovieQuickOverviewFetchCard: FC<FetchCardProps> = (props) => {
 
     const query = useFetchMovie({
         _id: movieID,
-        virtuals: true,
-        populate: true,
+        config: {virtuals: true, populate: true},
     });
 
     return (

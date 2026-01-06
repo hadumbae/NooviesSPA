@@ -51,7 +51,7 @@ const PaginatedMovieDetailsDataLoader = (props: LoaderProps) => {
         page,
         perPage,
         queries: filterNullishAttributes(queries),
-        queryConfig: {populate: true, virtuals: true},
+        config: {populate: true, virtuals: true},
     });
 
     return (

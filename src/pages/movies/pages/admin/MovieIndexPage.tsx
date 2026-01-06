@@ -35,7 +35,7 @@ const MovieIndexPage: FC = () => {
         page,
         perPage: MOVIES_PER_PAGE,
         queries: searchParams,
-        queryConfig: {populate: true, virtuals: true},
+        config: {populate: true, virtuals: true},
     });
 
     // --- RENDER ---

@@ -13,7 +13,7 @@ const BrowseMoviesPage: FC = () => {
     const query = useFetchPaginatedMovies({
         page: 1,
         perPage: 25,
-        queryConfig: {populate: true, virtuals: true},
+        config: {populate: true, virtuals: true},
     });
 
     return (
