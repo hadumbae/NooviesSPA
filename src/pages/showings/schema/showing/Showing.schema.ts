@@ -29,7 +29,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEm
 export const ShowingSchema = z.object({
     _id: IDStringSchema.readonly(),
     startTime: z.union([DateTimeInstanceSchema, UTCISO8601DateTimeSchema]),
-    endTime: z.union([DateTimeInstanceSchema, UTCISO8601DateTimeSchema]),
+    endTime: z.union([DateTimeInstanceSchema, UTCISO8601DateTimeSchema]).optional().nullable(),
     ticketPrice: CleanedPositiveNumberSchema,
     language: ISO6391LanguageCodeEnum,
     subtitleLanguages: z.array(ISO6391LanguageCodeEnum).nonempty({message: "Must not be empty."}),

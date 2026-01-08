@@ -59,7 +59,7 @@ const ShowingEditPage: FC = () => {
                         level: "log",
                         component: ShowingEditPage.name,
                         message: "Navigate to showing after update.",
-                        to: `/admin/showings/get/${updated._id}`,
+                        to: `/admin/showings/get/${updated.slug}`,
                     });
                 };
 

@@ -51,7 +51,7 @@ const ShowingCreatePage: FC = () => {
     const onSubmit = (showing: ShowingDetails) => {
         navigate({
             level: "log",
-            to: `/admin/showings/get/${showing._id}`,
+            to: `/admin/showings/get/${showing.slug}`,
             component: ShowingCreatePage.name,
             message: "Navigate to showing after creation.",
         });

@@ -67,6 +67,7 @@ export default function handleMutationResponseError({error, displayMessage}: Err
         const context = buildContext([
             {key: "message", value: displayMessage},
             {key: "raw", value: error.raw},
+            {key: "errors", value: error.errors},
         ]);
 
         toast.error(displayMessage ?? "Invalid data returned. Please try again.");
