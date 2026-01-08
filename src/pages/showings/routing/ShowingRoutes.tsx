@@ -47,12 +47,12 @@ const routes: RouteObject[] = [
                 errorElement: <ComponentErrorHandler/>,
             },
             {
-                path: "/admin/showings/get/:_id",
+                path: "/admin/showings/get/:slug",
                 element: <ShowingDetailsPage/>,
                 errorElement: <ComponentErrorHandler/>,
             },
             {
-                path: "/admin/showings/edit/:_id",
+                path: "/admin/showings/edit/:slug",
                 element: <ShowingEditPage/>,
                 errorElement: <ComponentErrorHandler/>,
             },

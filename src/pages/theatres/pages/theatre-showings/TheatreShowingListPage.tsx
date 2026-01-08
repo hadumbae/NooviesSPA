@@ -13,12 +13,12 @@ import useFetchPaginatedShowings from "@/pages/showings/hooks/queries/useFetchPa
 import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import { CombinedSchemaQuery } from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
 import { TheatreSchema } from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
-import { PaginatedShowingDetailsSchema } from "@/pages/showings/schema/showing/Showing.schema.ts";
-import { PaginatedShowingDetails } from "@/pages/showings/schema/showing/Showing.types.ts";
 import { Theatre } from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
 import TheatreShowingListPageContent from "@/pages/theatres/pages/theatre-showings/TheatreShowingListPageContent.tsx";
+import {PaginatedShowingDetailsSchema} from "@/pages/showings/schema/showing/ShowingRelated.schema.ts";
+import {PaginatedShowingDetails} from "@/pages/showings/schema/showing/ShowingRelated.types.ts";
 
 /**
  * Combined query data shape for the page.
@@ -60,7 +60,7 @@ const TheatreShowingListPage = () => {
     const showingQuery = useFetchPaginatedShowings({
         page,
         perPage,
-        queryConfig: { populate: true, virtuals: true },
+        config: { populate: true, virtuals: true },
         queries: { theatre: theatreID },
     });
 

@@ -1,98 +1,86 @@
 /**
- * Showing Edit Page
+ * @file ShowingEditPage.tsx
  *
- * Admin page for editing an existing showing.
- * Handles route parameter validation, data fetching,
- * schema validation, and rendering of the edit form.
+ * Admin page for editing an existing `Showing`.
+ *
+ * Handles:
+ * - Route parameter validation via slug
+ * - Showing data fetching and schema validation
+ * - Transformation of API data into form-ready values
+ * - Submission success navigation
  */
 
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import ShowingEditHeader from "@/pages/showings/components/headers/ShowingEditHeader.tsx";
-import useFetchShowing from "@/pages/showings/hooks/queries/useFetchShowing.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import ShowingSubmitFormContainer from "@/pages/showings/components/forms/ShowingSubmitFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import useFetchRouteParams from "@/common/hooks/router/useFetchRouteParams.ts";
-import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {ShowingDetailsSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 import simplifyShowingDetails from "@/pages/showings/utilities/simplifyShowingDetails.ts";
 import ShowingEditBreadcrumbs from "@/pages/showings/components/features/showing-edit-page/ShowingEditBreadcrumbs.tsx";
+import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
+import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import useFetchShowingBySlug from "@/pages/showings/hooks/queries/useFetchShowingBySlug.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
- * Page component responsible for editing a showing.
+ * Page component for editing a Showing.
  */
 const ShowingEditPage: FC = () => {
-    // --- Fetch Route Params ---
-    const navigate = useLoggedNavigate();
-
-    const onError = () => {
-        navigate({
-            level: "warn",
-            component: ShowingEditPage.name,
-            message: "Failed to fetch required route params. Please try again.",
-            to: "/admin/showings"
-        });
-    };
-
-    const {_id: showingID} = useFetchRouteParams({
-        schema: IDRouteParamSchema,
-        onError,
-        onErrorMessage: "Invalid Route Params",
+    const {slug} = useFetchByIdentifierRouteParams({
+        schema: SlugRouteParamSchema,
+        sourceComponent: ShowingEditPage.name,
+        errorTo: "/admin/showings",
+        errorMessage: "Failed to resolve route parameters.",
     }) ?? {};
 
-    if (!showingID) {
-        return <PageLoader />;
+    if (!slug) {
+        return <PageLoader/>;
     }
 
-    // --- Query ---
-    const query = useFetchShowing({
-        _id: showingID,
-        populate: true,
-        virtuals: true,
+    const query = useFetchShowingBySlug({
+        slug,
+        config: {populate: true, virtuals: true},
     });
 
-    // --- Render ---
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={ShowingDetailsSchema}>
-                {(showing: ShowingDetails) => {
-                    const {theatre: {location: {timezone}}} = showing;
+        <ValidatedDataLoader query={query} schema={ShowingDetailsSchema}>
+            {(showing: ShowingDetails) => {
+                const navigate = useLoggedNavigate();
 
-                    const simplifiedShowing = simplifyShowingDetails(showing);
+                const {theatre: {location: {timezone}}} = showing;
+                const simplifiedShowing = simplifyShowingDetails(showing);
 
-                    const onSubmit = (showing: ShowingDetails) => {
-                        navigate({
-                            level: "log",
-                            component: ShowingEditPage.name,
-                            message: "Navigate to showing after update.",
-                            to: `/admin/showings/get/${showing._id}`,
-                        });
-                    };
+                const onSuccess = (updated: ShowingDetails) => {
+                    navigate({
+                        level: "log",
+                        component: ShowingEditPage.name,
+                        message: "Navigate to showing after update.",
+                        to: `/admin/showings/get/${updated._id}`,
+                    });
+                };
 
-                    return (
-                        <PageFlexWrapper>
-                            <ShowingEditBreadcrumbs showing={showing} />
-                            <ShowingEditHeader showing={showing} />
+                return (
+                    <PageFlexWrapper>
+                        <ShowingEditBreadcrumbs showing={showing}/>
+                        <ShowingEditHeader showing={showing}/>
 
-                            <Card>
-                                <CardContent className="p-3">
-                                    <ShowingSubmitFormContainer
-                                        onSubmitSuccess={onSubmit}
-                                        entity={simplifiedShowing}
-                                        theatreTimezone={timezone}
-                                    />
-                                </CardContent>
-                            </Card>
-                        </PageFlexWrapper>
-                    );
-                }}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+                        <Card>
+                            <CardContent className="p-3">
+                                <ShowingSubmitFormContainer
+                                    entity={simplifiedShowing}
+                                    theatreTimezone={timezone}
+                                    onSubmitSuccess={onSuccess}
+                                />
+                            </CardContent>
+                        </Card>
+                    </PageFlexWrapper>
+                );
+            }}
+        </ValidatedDataLoader>
     );
 };
 

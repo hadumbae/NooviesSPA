@@ -1,90 +1,75 @@
-import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
-import { PaginationValues } from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
-import { ShowingQueryOptions } from "@/pages/showings/schema/queries/ShowingQueryOption.types.ts";
+/**
+ * @file useFetchPaginatedShowings.ts
+ *
+ * React Query hook for fetching paginated `Showing` entities.
+ *
+ * Handles:
+ * - Pagination via `page` and `perPage`
+ * - Query filter and request config merging
+ * - Nullish query sanitization
+ * - Standardized query error handling
+ */
+
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {ShowingQueryOptions} from "@/pages/showings/schema/queries/ShowingQueryOption.types.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**
- * @summary
  * Parameters for fetching paginated Showings.
- *
- * @template TData
- * Type of data returned by the query.
  */
 type FetchParams<TData = unknown> = PaginationValues & {
-    /** Domain-specific query filters. */
+    /** Optional query filters */
     queries?: ShowingQueryOptions;
 
-    /** Request-level options such as population and virtual fields. */
-    queryConfig?: RequestOptions;
+    /** Optional request configuration */
+    config?: RequestOptions;
 
-    /** React Query configuration overrides. */
-    queryOptions?: UseQueryOptions<TData>;
+    /** Optional React Query options */
+    options?: UseQueryOptions<TData>;
 };
 
 /**
- * @summary
- * Hook to fetch paginated Showings using React Query.
+ * Fetches paginated Showings using query filters.
  *
- * @description
- * Combines pagination values, domain filters, request options, and React Query
- * configuration into a single hook.
- *
- * Features:
- * - Builds a stable query key scoped by `page` and `perPage`
- * - Merges and sanitizes query parameters via {@link filterNullishAttributes}
- * - Uses {@link useQueryFnHandler} for standardized error handling
- * - Applies default React Query options via {@link useQueryOptionDefaults}
- *
- * @template TData
- * Type of data returned by the query.
- *
- * @param params
- * Pagination values, query filters, request options, and query configuration.
+ * @param params - Pagination values, filters, request configuration, and query options.
  *
  * @returns
- * A `UseQueryResult` containing the paginated Showings data or an {@link HttpResponseError}.
+ * A React Query result containing paginated Showings data or an error state.
  *
  * @example
  * ```ts
- * const { data, isLoading, error } = useFetchPaginatedShowings({
+ * const { data, isLoading } = useFetchPaginatedShowings({
  *   page: 1,
  *   perPage: 10,
  *   queries: { title: "Hamlet" },
- *   requestOptions: { populate: true },
  * });
  * ```
  */
-export default function useFetchPaginatedShowings<TData = unknown>(
-    params: FetchParams<TData>
+export default function useFetchPaginatedShowings(
+    params: FetchParams
 ): UseQueryResult<unknown, HttpResponseError> {
-    const {page, perPage, queries, queryConfig, queryOptions} = params;
+    const {page, perPage, queries, config, options} = params;
 
-    // --- CONFIG ---
-    const optionsWithDefaults = useQueryOptionDefaults(queryOptions);
-    const filteredQueries = filterNullishAttributes({
-        paginated: true,
-        page,
-        perPage,
-        ...queries,
-        ...queryConfig
-    });
+    const queryKey = [
+        "fetch_paginated_showings_by_query",
+        filterNullishAttributes({...queries, ...config}),
+    ];
 
-    // --- FUNCTION ---
     const queryFn = useQueryFnHandler({
-        action: () => ShowingRepository.query({queries: filteredQueries}),
-        errorMessage: "Failed to fetch paginated showing data. Please try again.",
+        action: () => ShowingRepository.paginated({page, perPage, queries, config}),
+        errorMessage: "Failed to fetch paginated showings.",
     });
 
-    // --- QUERY ---
     return useQuery({
-        queryKey: ["fetch_paginated_showings_by_query"],
+        queryKey,
         queryFn,
-        ...optionsWithDefaults,
+        ...useQueryOptionDefaults(options),
     });
 }

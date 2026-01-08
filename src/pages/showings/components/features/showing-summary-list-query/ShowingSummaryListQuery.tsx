@@ -8,13 +8,12 @@
 import useFetchShowings from "@/pages/showings/hooks/queries/useFetchShowings.ts";
 import {ShowingQueryOptions} from "@/pages/showings/schema/queries/ShowingQueryOption.types.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import {ShowingDetailsArraySchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
-import {ShowingDetailsArray} from "@/pages/showings/schema/showing/Showing.types.ts";
 import ShowingSummaryCardList
     from "@/pages/showings/components/admin/card/showing-summary-card/ShowingSummaryCardList.tsx";
+import {ShowingDetailsArraySchema} from "@/pages/showings/schema/showing/ShowingRelated.schema.ts";
+import {ShowingDetailsArray} from "@/pages/showings/schema/showing/ShowingRelated.types.ts";
 
 /**
  * Props for {@link ShowingSummaryListQuery}.
@@ -37,11 +36,7 @@ const ShowingSummaryListQuery = (props: ListProps) => {
 
     const query = useFetchShowings({
         queries,
-        queryConfig: filterNullishAttributes({
-            virtuals: true,
-            populate: true,
-            limit,
-        }),
+        config: {virtuals: true, populate: true, limit},
     });
 
     return (

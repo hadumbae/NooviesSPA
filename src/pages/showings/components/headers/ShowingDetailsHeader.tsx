@@ -37,7 +37,12 @@ const ShowingDetailsHeader: FC<Props> = ({showing}) => {
                     <TableOfContents/>
                 </Button>
 
-                <ShowingOptions variant="outline" className="p-2" showing={showing} onDelete={navigateToIndex} />
+                <ShowingOptions
+                    variant="outline"
+                    className="p-2"
+                    showing={showing}
+                    onDeleteSuccess={navigateToIndex}
+                />
             </div>
         </header>
     );

@@ -1,75 +1,67 @@
 /**
  * @file useFetchShowing.ts
- * @description
- * A custom React Query hook for fetching a single showing by its ID.
- * This hook wraps `ShowingRepository.get` with error handling and query option defaults, making it easy
- * to fetch showing data and manage loading, error, and success states in a React component.
  *
- * It uses:
- * - `useQuery` from React Query for caching and state management
- * - `useQueryFnHandler` for standardized error handling
- * - `useQueryOptionDefaults` to apply default query options
+ * React Query hook for fetching a single `Showing` by ID.
  *
- * @example
- * const { data, error, isLoading } = useFetchShowing({ _id: "12345" });
- * if (isLoading) return <div>Loading...</div>;
- * if (error) return <div>{error.message}</div>;
- * return <ShowingDetails data={data} />;
+ * Wraps {@link ShowingRepository.get} with:
+ * - Standardized query error handling
+ * - Default query option application
+ * - Typed React Query result state
  */
 
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import { FetchByIDParams } from "@/common/type/query/FetchByIDParams.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
- * Parameters for `useFetchShowing`.
- *
- * @template TData - The type of the data expected from the showing fetch.
+ * Parameters for fetching a single Showing.
  */
-type FetchParams<TData = unknown> = FetchByIDParams & {
-    /**
-     * Optional React Query options to override defaults.
-     */
-    options?: UseQueryOptions<TData>;
+type FetchParams = {
+    /** Showing identifier */
+    _id: ObjectId;
+
+    /** Optional request configuration */
+    config?: RequestOptions;
+
+    /** Optional React Query options */
+    options?: UseQueryOptions<unknown>;
 };
 
 /**
- * Custom hook to fetch a single showing by its ID.
+ * Fetches a single Showing by its ID.
  *
- * @template TData - Type of the returned data (default: `unknown`).
- * @param {FetchParams<TData>} params - Parameters for fetching the showing.
- * @param {string} params._id - The ID of the showing to fetch.
- * @param {UseQueryOptions<TData>} [params.options] - Optional React Query options.
- * @returns {UseQueryResult<TData, HttpResponseError>} React Query result containing data, loading and error states.
+ * @param params - Fetch parameters and query options.
+ *
+ * @returns
+ * A React Query result containing the Showing data or error state.
  *
  * @example
  * ```tsx
- * const { data, isLoading, error } = useFetchShowing({ _id: "showing_123" });
+ * const { data, isLoading, error } = useFetchShowing({ _id });
  *
- * if (isLoading) return <div>Loading...</div>;
- * if (error) return <div>{error.message}</div>;
- * return <div>{data?.title}</div>;
+ * if (isLoading) return <Spinner />;
+ * if (error) return <ErrorMessage />;
+ * return <ShowingDetails showing={data} />;
  * ```
  */
-export default function useFetchShowing<TData = unknown>(
-    params: FetchParams<TData>
-): UseQueryResult<TData, HttpResponseError> {
-    const { _id, options = useQueryOptionDefaults(), ...requestOptions } = params;
-
-    const queryKey = ["fetch_single_showing", _id];
+export default function useFetchShowing(
+    params: FetchParams
+): UseQueryResult<unknown, HttpResponseError> {
+    const {_id, options, config} = params;
 
     const fetchShowing = useQueryFnHandler({
-        action: () => ShowingRepository.get({ _id, ...requestOptions }),
-        errorMessage: "Failed to fetch showing data. Please try again.",
+        action: () => ShowingRepository.get({_id, config}),
+        errorMessage: "Failed to fetch showing data.",
     });
 
     return useQuery({
-        queryKey,
+        queryKey: ["fetch_showing_by_id", {_id, ...config}],
         queryFn: fetchShowing,
-        ...options,
+        ...useQueryOptionDefaults(options),
     });
 }

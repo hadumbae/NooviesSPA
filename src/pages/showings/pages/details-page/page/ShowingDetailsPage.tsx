@@ -17,25 +17,19 @@
  */
 
 import {FC} from "react";
-
-import useFetchShowing from "@/pages/showings/hooks/queries/useFetchShowing.ts";
 import useFetchSeatMaps from "@/pages/seatmap/hooks/queries/useFetchSeatMaps.ts";
-
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useFetchRouteParams from "@/common/hooks/router/useFetchRouteParams.ts";
-import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
-
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
 import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-
 import {ShowingDetailsSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import {SeatMapDetailsArraySchema} from "@/pages/seatmap/schema/model/SeatMap.schema.ts";
-
 import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {SeatMapDetails} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
-
 import ShowingDetailsPageContent from "@/pages/showings/pages/details-page/page/ShowingDetailsPageContent.tsx";
+import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
+import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import useFetchShowingBySlug from "@/pages/showings/hooks/queries/useFetchShowingBySlug.ts";
 import ShowingDetailsPageContextProvider
     from "@/pages/showings/context/showing-details-page-context/ShowingDetailsPageContextProvider.tsx";
 
@@ -65,18 +59,28 @@ type QueryData = {
  * a {@link PageLoader} is rendered until resolution.
  */
 const ShowingDetailsPage: FC = () => {
-    // --- Fetch Route Params ---
-    const routeParams = useFetchRouteParams({schema: IDRouteParamSchema});
-    if (!routeParams) return <PageLoader/>;
+    // --- ROUTE PARAM ---
+    const {slug} = useFetchByIdentifierRouteParams({
+        schema: SlugRouteParamSchema,
+        errorTo: "/admin/showings",
+        errorMessage: "Invalid showing. Please try again later.",
+        sourceComponent: ShowingDetailsPage.name,
+    }) ?? {};
 
-    const {_id} = routeParams;
+    if (!slug) {
+        return <PageLoader/>;
+    }
 
-    // --- Queries ---
-    const showingQuery = useFetchShowing({_id, populate: true, virtuals: true});
+    // --- QUERIES ---
+
+    const showingQuery = useFetchShowingBySlug({
+        slug,
+        config: {populate: true, virtuals: true},
+    });
+
     const seatingQuery = useFetchSeatMaps({
-        queries: {showing: _id},
-        populate: true,
-        virtuals: true,
+        queries: {showingSlug: slug},
+        queryConfig: {populate: true, virtuals: true},
     });
 
     const queries = [showingQuery, seatingQuery];
@@ -86,7 +90,8 @@ const ShowingDetailsPage: FC = () => {
         {query: seatingQuery, schema: SeatMapDetailsArraySchema, key: "seating"},
     ];
 
-    // --- Render ---
+    // --- RENDER ---
+
     return (
         <CombinedQueryBoundary queries={queries}>
             <CombinedValidatedQueryBoundary queries={validatedQueries}>

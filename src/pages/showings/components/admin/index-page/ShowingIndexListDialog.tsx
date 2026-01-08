@@ -72,7 +72,7 @@ type ShowingIndexListDialogProps = {
  * ```
  */
 const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({showing}) => {
-    const {_id, movie, theatre, isSpecialEvent, isActive, ticketPrice} = showing;
+    const {movie, theatre, isSpecialEvent, isActive, ticketPrice, slug} = showing;
     const {posterImage, synopsis} = movie;
     const {
         location: {country},
@@ -204,7 +204,7 @@ const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({showing}) => {
 
                 {/* Navigation link */}
                 <LoggedAnchor
-                    href={`/admin/showings/get/${_id}`}
+                    href={`/admin/showings/get/${slug}`}
                     target="_blank"
                     className={cn(buttonVariants({variant: "primary"}), "w-full")}
                 >

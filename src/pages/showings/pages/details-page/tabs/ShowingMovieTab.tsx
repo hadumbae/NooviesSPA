@@ -1,7 +1,17 @@
+/**
+ * @file ShowingMovieTab.tsx
+ *
+ * Admin tab displaying a movie overview with its recent Showings.
+ *
+ * Combines:
+ * - Movie detail fetching
+ * - Recent Showing queries scoped to the movie
+ * - Schema validation and aggregated query boundaries
+ */
+
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
 import { CombinedSchemaQuery } from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-import { ShowingDetailsArraySchema } from "@/pages/showings/schema/showing/Showing.schema.ts";
 import { MovieDetailsSchema } from "@/pages/movies/schema/movie/Movie.schema.ts";
 import useFetchShowings from "@/pages/showings/hooks/queries/useFetchShowings.ts";
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
@@ -11,49 +21,49 @@ import { ShowingDetails } from "@/pages/showings/schema/showing/Showing.types.ts
 import ShowingMovieCard from "@/pages/showings/components/admin/card/showing-movie-card/ShowingMovieCard.tsx";
 import ShowingSummaryCardList from "@/pages/showings/components/admin/card/showing-summary-card/ShowingSummaryCardList.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import { ShowingDetailsArraySchema } from "@/pages/showings/schema/showing/ShowingRelated.schema.ts";
 
+/**
+ * Combined query result shape for {@link ShowingMovieTab}.
+ */
 type QueryParams = {
     movie: MovieDetails;
     showings: ShowingDetails[];
 };
 
+/**
+ * Props for {@link ShowingMovieTab}.
+ */
 type TabProps = {
-    /** Target movie ID used to fetch movie details and related showings */
+    /** Target movie ID used to resolve details and related showings */
     movieID: ObjectId;
 };
 
 /**
- * Admin tab displaying a movie overview with its recent showings.
+ * Renders an admin tab showing a movie summary and its latest Showings.
  *
- * @remarks
- * - Fetches movie details and latest showings in parallel.
- * - Uses combined query boundaries for loading, error, and validation states.
- * - Limits showing results to the most recent 10 entries.
+ * - Fetches movie details and showings in parallel
+ * - Limits showings to the 10 most recent entries
+ * - Validates all query results via schema boundaries
  */
 const ShowingMovieTab = ({ movieID }: TabProps) => {
-    // --- Movie Query ---
     const movieQuery = useFetchMovie({
         _id: movieID,
-        populate: true,
-        virtuals: true,
+        config: { populate: true, virtuals: true },
     });
 
-    // --- Showing Query ---
     const showingQuery = useFetchShowings({
-        queries: {movie: movieID, sortByStartTime: -1},
-        queryConfig: {populate: true, virtuals: true, limit: 10},
+        queries: { movie: movieID, sortByStartTime: -1 },
+        config: { populate: true, virtuals: true, limit: 10 },
     });
 
-    // --- Query Aggregation ---
     const queries = [movieQuery, showingQuery];
 
-    // --- Schema Validation ---
     const queryValidation: CombinedSchemaQuery[] = [
         { query: movieQuery, schema: MovieDetailsSchema, key: "movie" },
         { query: showingQuery, schema: ShowingDetailsArraySchema, key: "showings" },
     ];
 
-    // --- Render ---
     return (
         <CombinedQueryBoundary queries={queries}>
             <CombinedValidatedQueryBoundary queries={queryValidation}>

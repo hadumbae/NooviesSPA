@@ -1,62 +1,45 @@
 /**
  * @file useShowingSubmitMutation.ts
  *
- * @summary
- * React Query mutation hook for creating or updating a Showing.
+ * React Query mutation hook for creating or updating a `Showing`.
  *
- * @description
- * Encapsulates the full submission lifecycle for Showing form data, including:
- * - Creating or updating a showing via {@link ShowingRepository}
- * - Runtime schema validation of API responses using {@link ShowingDetailsSchema}
- * - Success and error feedback handling
- * - Automatic cache invalidation for affected showing queries
- *
- * This hook is designed to be used alongside a controlled form (e.g. React Hook Form)
- * and integrates cleanly with standardized mutation submit parameters.
+ * Handles:
+ * - Create vs. update resolution via `editID`
+ * - API response validation using `ShowingDetailsSchema`
+ * - Toast-based success feedback
+ * - Form-level error hydration
+ * - Cache invalidation for all related Showing queries
  */
 
 import {ShowingDetailsSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
 import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
-import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ShowingForm} from "@/pages/showings/schema/form/ShowingForm.types.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {SubmitMutationParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
+import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {ShowingIDQueryKeys, ShowingListQueryKeys} from "@/pages/showings/constants/ShowingQueryKeys.ts";
 
 /**
- * Combined parameters for the showing submission mutation.
- *
- * @remarks
- * Extends {@link SubmitMutationParams} with Showing-specific
- * form values and response typing.
+ * Mutation parameters for submitting a Showing form.
  */
 type SubmitParams = SubmitMutationParams<ShowingFormValues, ShowingDetails>;
 
 /**
  * Provides a mutation for submitting Showing form data.
  *
- * @remarks
- * - Automatically switches between create and update operations based on `editID`
- * - Validates server responses against {@link ShowingDetailsSchema}
- * - Displays toast feedback on success
- * - Maps API validation errors back onto the form
- * - Invalidates all relevant Showing-related queries after completion
- *
- * @param params - Mutation configuration, form instance, and lifecycle callbacks.
+ * @param params - Form instance, mutation options, and lifecycle callbacks.
  *
  * @returns
- * A React Query {@link UseMutationResult} for the Showing submission operation.
+ * A React Query mutation result for the Showing submission flow.
  *
  * @example
  * ```ts
- * const mutation = useShowingSubmitMutation({
- *   form,
- *   editID,
- *   successMessage: "Showing saved successfully",
- * });
+ * const mutation = useShowingSubmitMutation({ form, editID });
  *
  * form.handleSubmit(values => mutation.mutate(values));
  * ```
@@ -73,72 +56,51 @@ export default function useShowingSubmitMutation(
         errorMessage,
     } = params;
 
-    const mutationKey = ["submit_showing_data"];
-    const queryClient = useQueryClient();
-    const queryOptions = {populate: true, virtuals: true};
+    const config = {populate: true, virtuals: true};
+
+    const keys = [...ShowingIDQueryKeys, ...ShowingListQueryKeys].map(key => [key]);
+    const invalidateQueries = useInvalidateQueryKeys({keys});
 
     /**
-     * Executes the create or update request for a Showing.
-     *
-     * @param values - Validated form values to submit.
-     *
-     * @throws
-     * Throws if the repository request fails or if schema validation does not pass.
+     * Executes a create or update request for a Showing.
      */
     const submitShowings = async (values: ShowingForm) => {
         const action = editID
-            ? () => ShowingRepository.update({_id: editID, data: values, ...queryOptions})
-            : () => ShowingRepository.create({data: values, ...queryOptions});
+            ? () => ShowingRepository.update({_id: editID, data: values, config})
+            : () => ShowingRepository.create({data: values, config});
 
         const {result} = await action();
 
-        const {data: parsedData, success, error} = validateData({
+        const {data, success, error} = validateData({
             data: result,
             schema: ShowingDetailsSchema,
-            message: "Invalid data received. Please try again.",
+            message: "Invalid data received.",
         });
 
         if (!success) throw error;
 
-        return parsedData;
+        return data;
     };
 
     /**
-     * Handles successful mutation completion.
-     *
-     * @param showing - The validated Showing returned from the API.
+     * Handles successful mutation resolution.
      */
     const onSuccess = (showing: ShowingDetails) => {
-        const message = editID ? "Showing updated." : "Showing submitted.";
-        toast.success(successMessage ?? message);
-
-        queryClient.invalidateQueries({queryKey: ["fetch_single_showing", showing._id]})
-        queryClient.invalidateQueries({queryKey: "fetch_showings_by_query", exact: false})
-
+        invalidateQueries();
+        successMessage && toast.success(successMessage);
         onSubmitSuccess?.(showing);
     };
 
     /**
-     * Handles mutation errors.
-     *
-     * @param error - The error thrown during submission.
-     *
-     * @remarks
-     * Attempts to map backend validation errors back to the form
-     * and displays a fallback error message when necessary.
+     * Handles mutation errors and form hydration.
      */
     const onError = (error: unknown) => {
-        handleMutationFormError({
-            form,
-            error,
-            displayMessage: errorMessage ?? "An error occurred. Please try again.",
-        });
-
+        handleMutationFormError({form, error, displayMessage: errorMessage});
         onSubmitError?.(error);
     };
 
     return useMutation({
-        mutationKey,
+        mutationKey: ["submit_showing_data"],
         mutationFn: submitShowings,
         onSuccess,
         onError,
