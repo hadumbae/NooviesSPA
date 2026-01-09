@@ -3,9 +3,6 @@ import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatr
 import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import useFetchScreen from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreen.ts";
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
-import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
-import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
-import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
 import {TheatreDetailsSchema} from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
 import {ScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
 import useFetchRouteParams from "@/common/hooks/router/useFetchRouteParams.ts";
@@ -20,6 +17,8 @@ import ScreenDetailsUIContextProvider from "@/pages/screens/contexts/screen-deta
 import ScreenFormContextProvider from "@/pages/screens/contexts/screen-form/ScreenFormContextProvider.tsx";
 import {ScreenForm, ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 import simplifyScreenDetails from "@/pages/screens/utilities/simplifyScreenDetails.ts";
+import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
+import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 
 type QueryData = {
     theatre: TheatreDetails;
@@ -76,7 +75,7 @@ const ScreenDetailsPage = (): ReactElement => {
     });
 
     // --- Query Validation ---
-    const validationQueries: CombinedSchemaQuery[] = [
+    const validationQueries: QueryDefinition[] = [
         {key: "theatre", query: theatreQuery, schema: TheatreDetailsSchema},
         {key: "screen", query: screenQuery, schema: ScreenDetailsSchema},
         {key: "seats", query: seatQuery, schema: SeatDetailsArraySchema},
@@ -84,8 +83,7 @@ const ScreenDetailsPage = (): ReactElement => {
 
     // --- Render ---
     return (
-        <CombinedQueryBoundary queries={[theatreQuery, screenQuery]}>
-            <CombinedValidatedQueryBoundary queries={validationQueries}>
+        <MultiQueryDataLoader queries={validationQueries}>
                 {(data) => {
                     const {theatre, screen, seats} = data as QueryData;
 
@@ -111,8 +109,7 @@ const ScreenDetailsPage = (): ReactElement => {
                         </ScreenDetailsUIContextProvider>
                     );
                 }}
-            </CombinedValidatedQueryBoundary>
-        </CombinedQueryBoundary>
+        </MultiQueryDataLoader>
     );
 };
 

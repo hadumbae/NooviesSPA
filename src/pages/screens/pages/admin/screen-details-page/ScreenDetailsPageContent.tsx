@@ -1,22 +1,13 @@
 /**
- * @file ScreenDetailsPageContent
- * @description
- * Main content component for the **Screen Details Page**.
+ * @file ScreenDetailsPageContent.tsx
  *
- * This page displays:
- * - Screen and theatre metadata (breadcrumbs + headers)
- * - A tabbed interface for:
- *   - Viewing existing seats
- *   - Creating seats
- *   - Viewing upcoming showings
+ * Main content component for the **Screen Details** admin page.
  *
- * The component also wires together several context providers:
- *
- * - `SeatDetailsPanelContextProvider` — enables seat selection and the details side-panel
- * - `SeatFormContextProvider` — provides form state for seat creation
- *
- * Routing state is synchronized with URL search params via
- * `useTheatreScreenSearchParams`, keeping the active tab reflected in the URL.
+ * Responsibilities:
+ * - Renders screen + theatre headers and breadcrumbs
+ * - Manages tab navigation via URL search params
+ * - Wires seat, form, and screen UI contexts
+ * - Hosts edit and delete screen affordances
  */
 
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
@@ -30,89 +21,79 @@ import SeatDetailsPanelContextProvider
     from "@/pages/seats/context/seat-details-context/SeatDetailsPanelContextProvider.tsx";
 import ScreenDetailsViewSeatsTab
     from "@/pages/screens/pages/admin/screen-details-page/screen-details-tabs/ScreenDetailsViewSeatsTab.tsx";
-import SeatFormContextProvider from "@/pages/seats/context/form/SeatFormContextProvider.tsx";
+import SeatFormContextProvider
+    from "@/pages/seats/context/form/SeatFormContextProvider.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
 import {SeatDetailsArray} from "@/pages/seats/schema/seat/SeatRelated.types.ts";
-import useTheatreScreenSearchParams
-    from "@/pages/screens/hooks/screens-by-theatres/params/useTheatreScreenSearchParams.ts";
 import ScreenDetailsCreateSeatTab
     from "@/pages/screens/pages/admin/screen-details-page/screen-details-tabs/ScreenDetailsCreateSeatTab.tsx";
-import {SeatForm} from "@/pages/seats/schema/form/SeatForm.types.ts";
-import {SeatFormValues} from "@/pages/seats/schema/form/SeatFormValuesSchema.ts";
-import ScreenSubmitFormPanel from "@/pages/screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {ScreenDetailsUIContext} from "@/pages/screens/contexts/screen-details/ScreenDetailsUIContext.ts";
-import ScreenDeleteWarningDialog from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
+import ScreenSubmitFormPanel
+    from "@/pages/screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
+import ScreenDeleteWarningDialog
+    from "@/pages/screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 import ScreenDetailsShowingsTab
     from "@/pages/screens/pages/admin/screen-details-page/screen-details-tabs/ScreenDetailsShowingsTab.tsx";
+import useScreenDetailsPageValues
+    from "@/pages/screens/hooks/page/screen-details/useScreenDetailsPageValues.ts";
+import {ScreenDetailsActiveTab}
+    from "@/pages/screens/schema/params/ScreenDetailsActiveTabEnumSchema.ts";
+import useNavigateToTheatre
+    from "@/pages/theatres/hooks/navigate/navigate-to-theatre/useNavigateToTheatre.ts";
 
+/**
+ * Props required to render the Screen Details page.
+ */
 type ContentProps = {
-    /** The parent theatre that owns this screen. */
+    /** Parent theatre owning the screen */
     theatre: TheatreDetails;
 
-    /** The specific screen being viewed. */
+    /** Screen currently being viewed */
     screen: ScreenDetails;
 
-    /** All seat details associated with this screen. */
+    /** Seat details for the screen */
     seats: SeatDetailsArray;
 };
 
 /**
- * Renders the full **Screen Details** page, including all tabs,
- * headers, search-param state management, and context boundaries.
+ * Screen Details page content.
  *
- * Tabs included:
+ * Tabs:
+ * - **Seats** — seat layout and selection
+ * - **Create Seats** — seat creation tools
+ * - **Showings** — upcoming showings for the screen
  *
- * - **view-seats** — shows a visual layout of seats and enables seat selection
- * - **create-seats** — provides tools for adding seats to the screen
- * - **showings** — (placeholder) lists upcoming showings for this screen
+ * Active tab state is synchronized with URL search params
+ * via {@link useScreenDetailsPageValues}.
  *
- * URL search params are integrated through
- * {@link useTheatreScreenSearchParams}, ensuring the active tab is
- * reflected in the browser's query string.
- *
- * @param {ContentProps} props - Theatre, screen, and seat data for this page.
- *
- * @example
- * ```tsx
- * <ScreenDetailsPageContent
- *   theatre={theatre}
- *   screen={screen}
- *   seats={seatDetails}
- * />
- * ```
+ * @param theatre - Theatre details
+ * @param screen - Screen details
+ * @param seats - Associated seat data
  */
-const ScreenDetailsPageContent = (props: ContentProps) => {
-    // --- Props ---
-    const {theatre, screen, seats} = props;
+const ScreenDetailsPageContent = ({theatre, screen, seats}: ContentProps) => {
     const {_id: screenID, name: screenName} = screen;
-    const {_id: theatreID, name: theatreName} = theatre;
+    const {_id: theatreID, name: theatreName, slug: theatreSlug} = theatre;
 
-    // --- Search Params ---
-    const {searchParams, setActiveTab} = useTheatreScreenSearchParams({activeTab: "seats"});
-    const {activeTab} = searchParams;
-
-    // --- Form Options ---
-    const presetValues: Partial<SeatForm> = {screen: screenID, theatre: theatreID};
-    const disableFields: (keyof SeatFormValues)[] = ["theatre", "screen"];
-
-    // --- Access Context ---
     const {
-        isEditing,
-        setIsEditing,
-        showDeleteWarning,
-        setShowDeleteWarning,
-    } = useRequiredContext({context: ScreenDetailsUIContext});
+        presetValues,
+        disableFields,
+        context: {isEditing, setIsEditing, showDeleteWarning, setShowDeleteWarning},
+        tabConfig: {activeTab, setActiveTab},
+    } = useScreenDetailsPageValues({theatreID, screenID});
 
-    // --- Render ---
+    const navigateToTheatre = useNavigateToTheatre({
+        slug: theatreSlug,
+        source: TheatreScreenDetailsHeader.name,
+        message: "Navigate to index after deleting screen.",
+    });
+
     return (
         <PageFlexWrapper>
 
-            {/* --- Header --- */}
+            {/* Header */}
 
             <section className="space-y-1">
-                <SectionHeader srOnly={true}>Seat Details : Header</SectionHeader>
+                <SectionHeader srOnly>Screen Details Header</SectionHeader>
 
                 <TheatreScreenDetailsBreadcrumbs
                     theatreID={theatreID}
@@ -126,9 +107,12 @@ const ScreenDetailsPageContent = (props: ContentProps) => {
                 />
             </section>
 
-            {/* --- Tabs --- */}
+            {/* Tabs */}
 
-            <Tabs defaultValue={activeTab} onValueChange={(v) => setActiveTab(v)}>
+            <Tabs
+                defaultValue={activeTab}
+                onValueChange={(v) => setActiveTab(v as ScreenDetailsActiveTab)}
+            >
                 <div className="flex justify-center">
                     <TabsList>
                         <TabsTrigger value="view-seats">Seats</TabsTrigger>
@@ -137,38 +121,39 @@ const ScreenDetailsPageContent = (props: ContentProps) => {
                     </TabsList>
                 </div>
 
-                {/* Seats Tab */}
                 <SeatDetailsPanelContextProvider>
-                    <ScreenDetailsViewSeatsTab
-                        seats={seats}
-                    />
+                    <ScreenDetailsViewSeatsTab seats={seats}/>
                 </SeatDetailsPanelContextProvider>
 
-                {/* Create Seats Tab */}
-                <SeatFormContextProvider presetValues={presetValues} disableFields={disableFields}>
+                <SeatFormContextProvider
+                    presetValues={presetValues}
+                    disableFields={disableFields}
+                >
                     <ScreenDetailsCreateSeatTab/>
                 </SeatFormContextProvider>
 
-                {/* Showings Tab */}
                 <ScreenDetailsShowingsTab screenID={screenID}/>
             </Tabs>
 
-            {/* --- Hidden Sections --- */}
+            {/* Edit Screen */}
 
             <section>
-                <SectionHeader srOnly={true}>Edit Screen Form</SectionHeader>
+                <SectionHeader srOnly>Edit Screen</SectionHeader>
                 <ScreenSubmitFormPanel
                     presetOpen={isEditing}
                     setPresetOpen={setIsEditing}
                 />
             </section>
 
+            {/* Delete Screen */}
+
             <section>
-                <SectionHeader srOnly={true}>Delete Screen Dialog</SectionHeader>
+                <SectionHeader srOnly>Delete Screen</SectionHeader>
                 <ScreenDeleteWarningDialog
                     screenID={screenID}
                     presetOpen={showDeleteWarning}
                     setPresetOpen={setShowDeleteWarning}
+                    onDeleteSuccess={navigateToTheatre}
                 />
             </section>
         </PageFlexWrapper>

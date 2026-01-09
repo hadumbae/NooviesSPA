@@ -1,5 +1,6 @@
 import {z} from "zod";
 import {CoercedNonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import {ScreenDetailsActiveTabEnum} from "@/pages/screens/schema/params/ScreenDetailsActiveTabEnumSchema.ts";
 
 /**
  * Schema for query parameters used when searching or paginating through a theatre screen's data.
@@ -12,11 +13,7 @@ export const ScreenDetailsSearchParamSchema = z.object({
      *
      * Can be either `"seats"` or `"showings"`. Defaults to `"seats"` if not provided.
      */
-    activeTab: z
-        .union(
-            [z.literal("view-seats"), z.literal("create-seats"), z.literal("showings")],
-            {message: "Must be 'seats' or 'showings'."},
-        )
+    activeTab: ScreenDetailsActiveTabEnum
         .optional()
         .default("view-seats"),
 
