@@ -1,15 +1,6 @@
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
 import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
-import useFetchScreen from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreen.ts";
 import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
-import {TheatreDetailsSchema} from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
-import {ScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
-import useFetchRouteParams from "@/common/hooks/router/useFetchRouteParams.ts";
-import {TheatreScreenRouteParamSchema} from "@/pages/theatres/schema/params/TheatreScreenRouteParamSchema.ts";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import useFetchSeats from "@/pages/seats/hooks/query/useFetchSeats.ts";
-import {SeatDetailsArraySchema} from "@/pages/seats/schema/seat/SeatRelated.schema.ts";
 import {SeatDetailsArray} from "@/pages/seats/schema/seat/SeatRelated.types.ts";
 import ScreenDetailsPageContent from "@/pages/screens/pages/admin/screen-details-page/ScreenDetailsPageContent.tsx";
 import {ReactElement} from "react";
@@ -18,7 +9,9 @@ import ScreenFormContextProvider from "@/pages/screens/contexts/screen-form/Scre
 import {ScreenForm, ScreenFormValues} from "@/pages/screens/schema/forms/ScreenForm.types.ts";
 import simplifyScreenDetails from "@/pages/screens/utilities/simplifyScreenDetails.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
-import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
+import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
+import {ScreenDetailsRouteParamSchema} from "@/pages/screens/schema/params/ScreenDetailsRouteParamSchema.ts";
+import useScreenDetailsPageQueries from "@/pages/screens/hooks/page/screen-details/useScreenDetailsPageQueries.ts";
 
 type QueryData = {
     theatre: TheatreDetails;
@@ -43,56 +36,28 @@ type QueryData = {
  * @returns A JSX element rendering the full screen details page.
  */
 const ScreenDetailsPage = (): ReactElement => {
-    // --- Fetch Route Params ---
-    const navigate = useLoggedNavigate();
-
-    const onError = () => navigate({level: "error", to: "admin/theatres"});
-    const onErrorMessage = "Failed to parse theatre and screen route parameters.";
-
-    const routeParams = useFetchRouteParams({
-        schema: TheatreScreenRouteParamSchema,
-        onError,
-        onErrorMessage
+    const routeParams = useFetchByIdentifierRouteParams({
+        schema: ScreenDetailsRouteParamSchema,
+        errorTo: "admin/theatres",
+        errorMessage: "Failed to parse theatre and screen route parameters.",
+        sourceComponent: ScreenDetailsPage.name,
     });
 
-    if (!routeParams) return <PageLoader/>;
-    const {theatreID, screenID} = routeParams;
+    if (!routeParams) {
+        return <PageLoader/>;
+    }
 
-    // --- Queries ---
-    const theatreQuery = useFetchTheatre({
-        _id: theatreID,
-        config: {populate: true, virtuals: true},
-    });
+    const queries = useScreenDetailsPageQueries(routeParams);
 
-    const screenQuery = useFetchScreen({
-        _id: screenID,
-        config: {populate: true, virtuals: true},
-    });
-
-    const seatQuery = useFetchSeats({
-        queries: {theatre: theatreID, screen: screenID},
-        config: {populate: true, virtuals: true}
-    });
-
-    // --- Query Validation ---
-    const validationQueries: QueryDefinition[] = [
-        {key: "theatre", query: theatreQuery, schema: TheatreDetailsSchema},
-        {key: "screen", query: screenQuery, schema: ScreenDetailsSchema},
-        {key: "seats", query: seatQuery, schema: SeatDetailsArraySchema},
-    ];
-
-    // --- Render ---
     return (
-        <MultiQueryDataLoader queries={validationQueries}>
+        <MultiQueryDataLoader queries={queries}>
                 {(data) => {
                     const {theatre, screen, seats} = data as QueryData;
 
-                    // --- Form Options ---
                     const simplifiedScreen = simplifyScreenDetails(screen);
                     const presetValues: Partial<ScreenForm> = {theatre: theatre._id};
                     const disableFields: (keyof ScreenFormValues)[] = ["theatre"];
 
-                    // --- Render ---
                     return (
                         <ScreenDetailsUIContextProvider>
                             <ScreenFormContextProvider

@@ -7,14 +7,13 @@
 
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import { IDRouteParamSchema } from "@/common/schema/route-params/IDRouteParamSchema.ts";
-import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import { TheatreSchema } from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
-import { Theatre } from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
+import {TheatreSchema} from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
+import {Theatre} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import TheatreShowingCreatePageContent
     from "@/pages/theatres/pages/theatre-showings/TheatreShowingCreatePageContent.tsx";
+import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import useFetchTheatreBySlug from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatreBySlug.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * Page component for creating a new showing for a theatre.
@@ -27,26 +26,22 @@ import TheatreShowingCreatePageContent
  * @returns Theatre showing creation page
  */
 const TheatreShowingCreatePage = () => {
-    // --- Route Params ---
-    const { _id } = useFetchByIdentifierRouteParams({
-        schema: IDRouteParamSchema,
+    const {slug} = useFetchByIdentifierRouteParams({
+        schema: SlugRouteParamSchema,
         errorTo: "/admin/theatres",
         sourceComponent: TheatreShowingCreatePage.name,
     }) ?? {};
 
-    if (!_id) return <PageLoader />;
+    if (!slug) {
+        return <PageLoader/>;
+    }
 
-    // --- Query ---
-    const query = useFetchTheatre({ _id });
+    const query = useFetchTheatreBySlug({slug});
 
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={TheatreSchema}>
-                {(theatre: Theatre) => (
-                    <TheatreShowingCreatePageContent theatre={theatre} />
-                )}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+        <ValidatedDataLoader query={query} schema={TheatreSchema}>
+            {(theatre: Theatre) => <TheatreShowingCreatePageContent theatre={theatre}/>}
+        </ValidatedDataLoader>
     );
 };
 

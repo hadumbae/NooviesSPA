@@ -19,6 +19,7 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatDetailsPanelContext} from "@/pages/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
 import {Theater, TvMinimal} from "lucide-react";
 import StackedIconCardLink from "@/common/components/navigation/logged-link/StackedIconCardLink.tsx";
+import {ReactElement} from "react";
 
 /**
  * Displays links to the **theatre** and **screen** associated with the
@@ -38,7 +39,7 @@ import StackedIconCardLink from "@/common/components/navigation/logged-link/Stac
  * @throws {Error}
  * Thrown when used without a seat in context.
  *
- * @returns {JSX.Element}
+ * @returns {ReactElement}
  * A 2-column grid of related navigation links.
  *
  * @example
@@ -48,35 +49,34 @@ import StackedIconCardLink from "@/common/components/navigation/logged-link/Stac
  * </SeatDetailsPanelContextProvider>
  * ```
  */
-const SeatDetailsPanelRelatedSection = () => {
+const SeatDetailsPanelRelatedSection = (): ReactElement => {
     const {seat, setIsPanelOpen} = useRequiredContext({
         context: SeatDetailsPanelContext,
         message: "Must be used within provider for `SeatDetailsPanelContext`."
     });
 
-    // ⚡ Throw Error If Seat Missing ⚡
-
     if (!seat) {
         throw new Error("Seat is missing in component.");
     }
 
-    // ⚡ Render Links ⚡
-
-    const {screen, theatre} = seat;
+    const {
+        screen: {slug: screenSlug, name: screenName},
+        theatre: {slug: theatreSlug, name: theatreName},
+    } = seat;
 
     return (
         <div className="grid grid-cols-2 gap-4 w-full">
             <StackedIconCardLink
-                to={`/admin/theatres/get/${theatre._id}`}
+                to={`/admin/theatres/get/${theatreSlug}`}
                 icon={Theater}
-                text={theatre.name}
+                text={theatreName}
             />
 
             <StackedIconCardLink
-                to={`/admin/theatres/get/${theatre._id}/screen/${screen._id}`}
+                to={`/admin/theatres/get/${theatreSlug}/screen/${screenSlug}`}
                 onClick={() => setIsPanelOpen(false)}
                 icon={TvMinimal}
-                text={screen.name}
+                text={screenName}
             />
         </div>
     );

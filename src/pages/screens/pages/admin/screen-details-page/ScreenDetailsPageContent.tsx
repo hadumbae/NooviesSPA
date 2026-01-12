@@ -96,7 +96,7 @@ const ScreenDetailsPageContent = ({theatre, screen, seats}: ContentProps) => {
                 <SectionHeader srOnly>Screen Details Header</SectionHeader>
 
                 <TheatreScreenDetailsBreadcrumbs
-                    theatreID={theatreID}
+                    theatreSlug={theatreSlug}
                     theatreName={theatreName}
                     screenName={screenName}
                 />

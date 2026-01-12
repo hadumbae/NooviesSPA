@@ -1,8 +1,18 @@
-import {FC} from 'react';
+/**
+ * @file TheatreScreenDetailsDrawer.tsx
+ *
+ * Drawer-based summary component for a theatre screen.
+ *
+ * Renders a clickable card that opens a drawer showing
+ * key screen metadata and navigation actions.
+ */
+
 import {
-    Drawer, DrawerClose,
+    Drawer,
+    DrawerClose,
     DrawerContent,
-    DrawerDescription, DrawerFooter,
+    DrawerDescription,
+    DrawerFooter,
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger
@@ -16,16 +26,38 @@ import {cn} from "@/common/lib/utils.ts";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
 import {SecondaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 
+/**
+ * Props for {@link TheatreScreenDetailsDrawer}.
+ */
 type DrawerProps = {
+    /**
+     * Fully hydrated screen details object.
+     */
     screen: ScreenDetails
-}
+};
 
-const TheatreScreenDetailsDrawer: FC<DrawerProps> = ({screen}) => {
-    const {_id, name, screenType, capacity, seatCount, futureShowingCount, theatre: {_id: theatreID}} = screen;
+/**
+ * Theatre screen details drawer.
+ *
+ * Displays a compact screen card that opens a drawer
+ * containing capacity, seat, and showing metadata,
+ * with a shortcut to the admin screen details page.
+ *
+ * @param screen Screen details to render
+ */
+const TheatreScreenDetailsDrawer = ({screen}: DrawerProps) => {
+    const {
+        name,
+        screenType,
+        capacity,
+        seatCount,
+        futureShowingCount,
+        slug: screenSlug,
+        theatre: {slug: theatreSlug},
+    } = screen;
 
     return (
         <Drawer fadeFromIndex={0} snapPoints={[]}>
-
             <DrawerTrigger>
                 <Card>
                     <CardContent className="p-4 flex justify-between items-center">
@@ -51,7 +83,7 @@ const TheatreScreenDetailsDrawer: FC<DrawerProps> = ({screen}) => {
                     <section className="flex space-x-2">
                         <LoggedAnchor
                             target="_blank"
-                            href={`/admin/theatres/get/${theatreID}/screen/${_id}`}
+                            href={`/admin/theatres/get/${theatreSlug}/screen/${screenSlug}`}
                             className={cn(buttonVariants({variant: "primary"}), "flex-grow")}
                         >
                             More Details
@@ -59,7 +91,7 @@ const TheatreScreenDetailsDrawer: FC<DrawerProps> = ({screen}) => {
 
                         <DrawerClose asChild>
                             <Button variant="outline" className={SecondaryButtonCSS}>
-                                <CircleX />
+                                <CircleX/>
                             </Button>
                         </DrawerClose>
                     </section>

@@ -1,8 +1,8 @@
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import { Clapperboard, Theater, TvMinimal } from "lucide-react";
+import {Clapperboard, Theater, TvMinimal} from "lucide-react";
 import StackedIconCardLink
     from "@/common/components/navigation/logged-link/StackedIconCardLink.tsx";
-import { ShowingDetails } from "@/pages/showings/schema/showing/Showing.types.ts";
+import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 import buildString from "@/common/utility/buildString.ts";
 
 /**
@@ -32,11 +32,11 @@ type SectionProps = {
  * - Uses `StackedIconCardLink` for consistent admin navigation cards.
  * - Layout is handled via a responsive two-column CSS grid.
  */
-const SeatMapDetailsReferenceLinks = ({ showing }: SectionProps) => {
+const SeatMapDetailsReferenceLinks = ({showing}: SectionProps) => {
     const {
-        movie: { _id: movieID, title: movieTitle, releaseDate },
-        screen: { _id: screenID, name: screenName },
-        theatre: { _id: theatreID, name: theatreName },
+        movie: {_id: movieID, title: movieTitle, releaseDate},
+        screen: {slug: screenSlug, name: screenName},
+        theatre: {slug: theatreSlug, name: theatreName},
     } = showing;
 
     const formattedMovieTitle = buildString([
@@ -58,13 +58,13 @@ const SeatMapDetailsReferenceLinks = ({ showing }: SectionProps) => {
                     />
 
                     <StackedIconCardLink
-                        to={`/admin/theatres/get/${theatreID}`}
+                        to={`/admin/theatres/get/${theatreSlug}`}
                         icon={Theater}
                         text={theatreName}
                     />
 
                     <StackedIconCardLink
-                        to={`/admin/theatres/get/${theatreID}/screen/${screenID}`}
+                        to={`/admin/theatres/get/${theatreSlug}/screen/${screenSlug}`}
                         icon={TvMinimal}
                         text={screenName}
                     />

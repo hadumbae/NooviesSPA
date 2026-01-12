@@ -6,19 +6,16 @@
  */
 
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
-import { IDRouteParamSchema } from "@/common/schema/route-params/IDRouteParamSchema.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
-import useFetchPaginatedShowings from "@/pages/showings/hooks/queries/useFetchPaginatedShowings.ts";
-import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
-import { CombinedSchemaQuery } from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-import { TheatreSchema } from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
-import { Theatre } from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
-import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
-import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
+import {Theatre} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import TheatreShowingListPageContent from "@/pages/theatres/pages/theatre-showings/TheatreShowingListPageContent.tsx";
-import {PaginatedShowingDetailsSchema} from "@/pages/showings/schema/showing/ShowingRelated.schema.ts";
 import {PaginatedShowingDetails} from "@/pages/showings/schema/showing/ShowingRelated.types.ts";
+import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
+import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
+import useTheatreShowingListPageQueries from "@/pages/theatres/hooks/pages/showing-list-page/useTheatreShowingListPageQueries.ts";
+
+const SHOWINGS_PER_PAGE = 10;
 
 /**
  * Combined query data shape for the page.
@@ -40,62 +37,40 @@ type QueryData = {
  * @returns Theatre showing list page
  */
 const TheatreShowingListPage = () => {
-    // --- Route Params ---
-    const { _id: theatreID } = useFetchByIdentifierRouteParams({
+    const {slug} = useFetchByIdentifierRouteParams({
         errorTo: "/admin/theatres",
-        schema: IDRouteParamSchema,
+        schema: SlugRouteParamSchema,
         sourceComponent: TheatreShowingListPage.name,
     }) ?? {};
 
-    if (!theatreID) {
-        return <PageLoader />;
+    if (!slug) {
+        return <PageLoader/>;
     }
 
-    // --- Search Params ---
-    const { page, perPage, setPage } = usePaginationSearchParams();
+    const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
 
-    // --- Queries ---
-    const theatreQuery = useFetchTheatre({ _id: theatreID });
-
-    const showingQuery = useFetchPaginatedShowings({
-        page,
-        perPage,
-        config: { populate: true, virtuals: true },
-        queries: { theatre: theatreID },
+    const queries = useTheatreShowingListPageQueries({
+        theatre: {slug},
+        showing: {page, perPage: SHOWINGS_PER_PAGE}
     });
 
-    const queries = [theatreQuery, showingQuery];
-    const queryValidation: CombinedSchemaQuery[] = [
-        { key: "theatre", query: theatreQuery, schema: TheatreSchema },
-        {
-            key: "paginatedShowings",
-            query: showingQuery,
-            schema: PaginatedShowingDetailsSchema,
-        },
-    ];
-
     return (
-        <CombinedQueryBoundary queries={queries}>
-            <CombinedValidatedQueryBoundary queries={queryValidation}>
-                {(data: unknown) => {
-                    const {
-                        theatre,
-                        paginatedShowings: { totalItems, items: showings },
-                    } = data as QueryData;
+        <MultiQueryDataLoader queries={queries}>
+            {(data: unknown) => {
+                const {theatre, paginatedShowings: {totalItems, items: showings}} = data as QueryData;
 
-                    return (
-                        <TheatreShowingListPageContent
-                            theatre={theatre}
-                            totalShowings={totalItems}
-                            showings={showings}
-                            page={page}
-                            perPage={perPage}
-                            setPage={setPage}
-                        />
-                    );
-                }}
-            </CombinedValidatedQueryBoundary>
-        </CombinedQueryBoundary>
+                return (
+                    <TheatreShowingListPageContent
+                        theatre={theatre}
+                        totalShowings={totalItems}
+                        showings={showings}
+                        page={page}
+                        perPage={SHOWINGS_PER_PAGE}
+                        setPage={setPage}
+                    />
+                );
+            }}
+        </MultiQueryDataLoader>
     );
 };
 

@@ -27,7 +27,7 @@ type TheatreIndexCardProps = {
  * @param theatre - The theatre details used to populate the card.
  */
 const TheatreIndexCard: FC<TheatreIndexCardProps> = ({theatre}) => {
-    const {_id, name, location, seatCount, screenCount, futureShowingCount} = theatre;
+    const {name, location, seatCount, screenCount, futureShowingCount, slug} = theatre;
     const addressString = generateLocationAddressString(location);
 
     const screenCountStat = (
@@ -82,7 +82,7 @@ const TheatreIndexCard: FC<TheatreIndexCardProps> = ({theatre}) => {
                 </section>
 
                 <section className="flex justify-end items-center">
-                    <ButtonLink to={`/admin/theatres/get/${_id}`} variant="outline">
+                    <ButtonLink to={`/admin/theatres/get/${slug}`} variant="outline">
                         <Search />
                     </ButtonLink>
                 </section>

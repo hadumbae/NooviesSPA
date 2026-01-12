@@ -28,12 +28,12 @@ type CardProps = {
 const TheatreSummaryCard = ({ theatre }: CardProps) => {
     // --- Theatre ---
     const {
-        _id,
         name,
         seatCount,
         futureShowingCount,
         screenCount,
         location: { street, city, country },
+        slug,
     } = theatre;
 
     // --- Navigation ---
@@ -44,7 +44,7 @@ const TheatreSummaryCard = ({ theatre }: CardProps) => {
             level: "log",
             component: TheatreSummaryCard.name,
             message: "Navigate to theatre from summary.",
-            to: `/admin/theatres/get/${_id}`,
+            to: `/admin/theatres/get/${slug}`,
         });
     };
 

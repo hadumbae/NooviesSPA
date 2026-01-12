@@ -9,11 +9,11 @@
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import SeatRepository from "@/pages/seats/repositories/SeatRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {SeatQueryOptions} from "@/pages/seats/schema/queries/SeatQueryOption.types.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {SeatQueryOptions} from "@/pages/seats/schema/queries/SeatQueryOptions.ts";
 
 /**
  * Parameters for {@link useFetchSeats}.

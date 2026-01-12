@@ -1,77 +1,78 @@
 /**
  * @file TheatreDetailsPage.tsx
- * Page for displaying full details of a single theatre.
+ *
+ * Admin page for displaying full details of a single theatre.
+ *
+ * Responsibilities:
+ * - Validate and extract the theatre slug from route params
+ * - Fetch theatre details with populated relations and virtual fields
+ * - Runtime-validate the API response
+ * - Provide UI-level context for the details view
+ * - Delegate rendering to the page content component
  */
 
 import {FC} from 'react';
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
 import {TheatreDetailsSchema} from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import TheatreDetailsPageContent from "@/pages/theatres/pages/theatre-details-page/TheatreDetailsPageContent.tsx";
 import TheatreDetailsUIContextProvider
     from "@/pages/theatres/context/theatre-details-ui/TheatreDetailsUIContextProvider.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
-import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
+import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import useFetchTheatreBySlug from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatreBySlug.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
- * **Component: TheatreDetailsPage**
- * Renders complete details for a single theatre.
+ * **TheatreDetailsPage**
  *
- * **Behaviour**
- * - Extracts `theatreID` from route params (validated)
- * - Redirects to index page on route parse failure
- * - Fetches theatre details with population + virtual fields
+ * Admin entry point for the Theatre Details view.
  *
- * **Query Safety**
- * - Uses {@link QueryBoundary} for async state handling
- * - Uses {@link ValidatedQueryBoundary} to enforce {@link TheatreDetailsSchema}
+ * Flow:
+ * 1. Parse and validate `slug` from route params
+ * 2. Redirect to index on route parse failure
+ * 3. Fetch theatre details by slug
+ * 4. Validate API response at runtime
+ * 5. Provide UI context
+ * 6. Delegate rendering to {@link TheatreDetailsPageContent}
  *
- * **Render Flow**
- * - If theatreID missing → shows loader
- * - Validated result → passes theatre to {@link TheatreDetailsPageContent}
+ * Validation:
+ * - Route params validated via {@link SlugRouteParamSchema}
+ * - API response enforced via {@link TheatreDetailsSchema}
  *
- * **Example**
+ * @component
+ *
+ * @example
  * ```tsx
  * <TheatreDetailsPage />
  * ```
- *
- * @component
  */
 const TheatreDetailsPage: FC = () => {
-    // --- Fetch Route Params ---
-    const {_id: theatreID} = useFetchByIdentifierRouteParams({
-        schema: IDRouteParamSchema,
+    const {slug} = useFetchByIdentifierRouteParams({
+        schema: SlugRouteParamSchema,
         errorTo: "/admin/theatres",
         sourceComponent: TheatreDetailsPage.name,
     }) ?? {};
 
-    if (!theatreID) {
-        return <PageLoader/>;
+    if (!slug) {
+        return <PageLoader />;
     }
 
-    // --- Query ---
-    const query = useFetchTheatre({
-        _id: theatreID,
+    const query = useFetchTheatreBySlug({
+        slug,
         config: {populate: true, virtuals: true},
     });
 
-    // --- Render ---
     return (
         <TheatreDetailsUIContextProvider>
-            <QueryBoundary query={query}>
-                <ValidatedQueryBoundary
-                    query={query}
-                    schema={TheatreDetailsSchema}
-                    message="Invalid theatre data."
-                >
-                    {(theatre: TheatreDetails) => (
-                        <TheatreDetailsPageContent theatre={theatre}/>
-                    )}
-                </ValidatedQueryBoundary>
-            </QueryBoundary>
+            <ValidatedDataLoader
+                query={query}
+                schema={TheatreDetailsSchema}
+            >
+                {(theatre: TheatreDetails) => (
+                    <TheatreDetailsPageContent theatre={theatre} />
+                )}
+            </ValidatedDataLoader>
         </TheatreDetailsUIContextProvider>
     );
 };

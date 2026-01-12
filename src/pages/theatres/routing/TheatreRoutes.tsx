@@ -42,10 +42,10 @@ export default [
             /**
              * Theatre details page.
              *
-             * @route /admin/theatres/get/:_id
+             * @route /admin/theatres/get/:slug
              */
             {
-                path: "/admin/theatres/get/:_id",
+                path: "/admin/theatres/get/:slug",
                 element: <TheatreDetailsPage />,
                 errorElement: <ComponentErrorHandler />,
             },
@@ -53,10 +53,10 @@ export default [
             /**
              * Theatre showing creation page.
              *
-             * @route /admin/theatres/get/:_id/showings/create
+             * @route /admin/theatres/get/:slug/showings/create
              */
             {
-                path: "/admin/theatres/get/:_id/showings/create",
+                path: "/admin/theatres/get/:slug/showings/create",
                 element: <TheatreShowingCreatePage />,
                 errorElement: <ComponentErrorHandler />,
             },
@@ -64,10 +64,10 @@ export default [
             /**
              * Theatre showing list page.
              *
-             * @route /admin/theatres/get/:_id/showings/list
+             * @route /admin/theatres/get/:slug/showings/list
              */
             {
-                path: "/admin/theatres/get/:_id/showings/list",
+                path: "/admin/theatres/get/:slug/showings/list",
                 element: <TheatreShowingListPage />,
                 errorElement: <ComponentErrorHandler />,
             },
@@ -75,10 +75,10 @@ export default [
             /**
              * Screen details page.
              *
-             * @route /admin/theatres/get/:theatreID/screen/:screenID
+             * @route /admin/theatres/get/:theatreSlug/screen/:screenSlug
              */
             {
-                path: "/admin/theatres/get/:theatreID/screen/:screenID",
+                path: "/admin/theatres/get/:theatreSlug/screen/:screenSlug",
                 element: <ScreenDetailsPage />,
                 errorElement: <ComponentErrorHandler />,
             },

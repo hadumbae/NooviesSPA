@@ -51,7 +51,7 @@ const ShowingSummaryCard = ({ showing }: CardProps) => {
     } = showing;
 
     const { runtime } = movie;
-    const { _id: theatreID, name: theatreName } = theatre;
+    const { _id: theatreID, name: theatreName, slug: theatreSlug } = theatre;
     const { _id: screenID, name: screenName, screenType } = screen;
 
     // --- Formatted Strings ---
@@ -112,7 +112,7 @@ const ShowingSummaryCard = ({ showing }: CardProps) => {
 
                 <div className="flex justify-between">
                     <LoggedHoverLink
-                        to={`/admin/theatres/get/${theatreID}`}
+                        to={`/admin/theatres/get/${theatreSlug}`}
                         className="text-xs"
                     >
                         <Theater /> {theatreName}

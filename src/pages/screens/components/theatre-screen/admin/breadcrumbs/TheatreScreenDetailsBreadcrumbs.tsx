@@ -7,15 +7,14 @@ import {
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
 import {Link} from "react-router-dom";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 type DetailsBreadcrumbs = {
-    theatreID: ObjectId;
+    theatreSlug: string;
     theatreName?: string;
     screenName?: string;
 }
 
-const TheatreScreenDetailsBreadcrumbs: FC<DetailsBreadcrumbs> = ({theatreID, theatreName, screenName}) => {
+const TheatreScreenDetailsBreadcrumbs: FC<DetailsBreadcrumbs> = ({theatreSlug, theatreName, screenName}) => {
     return (
         <Breadcrumb>
             <BreadcrumbList>
@@ -32,7 +31,7 @@ const TheatreScreenDetailsBreadcrumbs: FC<DetailsBreadcrumbs> = ({theatreID, the
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to={`/admin/theatres/get/${theatreID}`}>
+                        <Link to={`/admin/theatres/get/${theatreSlug}`}>
                             {theatreName ?? "Theatre"} | Details
                         </Link>
                     </BreadcrumbLink>

@@ -76,7 +76,7 @@ const ShowingDetailsCard = ({showing}: CardProps) => {
     // --- References ---
     const {_id: movieID, title: movieTitle} = movie;
     const {_id: screenID, name: screenName} = screen;
-    const {_id: theatreID, name: theatreName} = theatre;
+    const {name: theatreName, slug: theatreSlug} = theatre;
 
     return (
         <Card>
@@ -90,7 +90,7 @@ const ShowingDetailsCard = ({showing}: CardProps) => {
                     <SectionHeader srOnly>Showing Theatre Details</SectionHeader>
                     <div className="flex space-x-5 items-center">
                         <DetailsCardSpan label="Screen" text={screenName} to={`/admin/screens/get/${screenID}`}/>
-                        <DetailsCardSpan label="Theatre" text={theatreName} to={`/admin/theatres/get/${theatreID}`}/>
+                        <DetailsCardSpan label="Theatre" text={theatreName} to={`/admin/theatres/get/${theatreSlug}`}/>
                     </div>
                 </section>
 

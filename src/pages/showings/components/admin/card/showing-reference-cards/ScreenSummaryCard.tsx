@@ -1,14 +1,14 @@
-import { ScreenDetails } from "@/pages/screens/schema/screen/Screen.types.ts";
-import { Card, CardContent } from "@/common/components/ui/card.tsx";
+import {ScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
 import buildString from "@/common/utility/buildString.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
-import { Film, Search, Sofa, Theater } from "lucide-react";
+import {Film, Search, Sofa, Theater} from "lucide-react";
 import IconTextSpan from "@/common/components/card-content/IconTextSpan.tsx";
-import { cn } from "@/common/lib/utils.ts";
-import { SecondaryTextBaseCSS } from "@/common/constants/css/TextCSS.ts";
+import {cn} from "@/common/lib/utils.ts";
+import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 type CardProps = {
@@ -25,15 +25,15 @@ type CardProps = {
  * - Provides a quick navigation action to the screen detail page.
  * - Includes screen-reader-only section headers for accessibility.
  */
-const ScreenSummaryCard = ({ screen }: CardProps) => {
+const ScreenSummaryCard = ({screen}: CardProps) => {
     const {
-        _id: screenID,
         name,
         screenType,
         futureShowingCount,
         seatCount,
         capacity,
-        theatre: { _id: theatreID, name: theatreName },
+        slug: screenSlug,
+        theatre: {slug: theatreSlug, name: theatreName},
     } = screen;
 
     // --- Navigation ---
@@ -44,7 +44,7 @@ const ScreenSummaryCard = ({ screen }: CardProps) => {
             level: "log",
             component: ScreenSummaryCard.name,
             message: "Navigate to screen from summary.",
-            to: `/admin/theatres/get/${theatreID}/screen/${screenID}`,
+            to: `/admin/theatres/get/${theatreSlug}/screen/${screenSlug}`,
         });
     };
 
@@ -71,7 +71,7 @@ const ScreenSummaryCard = ({ screen }: CardProps) => {
                     </section>
 
                     <IconButton onClick={navigateToScreen}>
-                        <Search />
+                        <Search/>
                     </IconButton>
                 </div>
 
@@ -87,15 +87,15 @@ const ScreenSummaryCard = ({ screen }: CardProps) => {
                     </SectionHeader>
 
                     <IconTextSpan aria-description="Name Of Theatre">
-                        <Theater /> {theatreName}
+                        <Theater/> {theatreName}
                     </IconTextSpan>
 
                     <IconTextSpan aria-description="Number Of Seats By Capacity">
-                        <Sofa /> {formattedCapacity} Seats
+                        <Sofa/> {formattedCapacity} Seats
                     </IconTextSpan>
 
                     <IconTextSpan aria-description="Upcoming Showings">
-                        <Film /> {futureShowingCount} Showings
+                        <Film/> {futureShowingCount} Showings
                     </IconTextSpan>
                 </section>
             </CardContent>

@@ -2,57 +2,55 @@
  * @file TheatreIndexPage.tsx
  *
  * Top-level admin page for browsing and managing theatres.
- * Coordinates filter parsing, pagination state, data fetching,
- * and validated rendering of the Theatre Index view.
+ *
+ * Responsibilities:
+ * - Parse pagination and filter state from URL search params
+ * - Fetch paginated theatre data from the API
+ * - Runtime-validate API responses
+ * - Delegate all UI rendering to the index page content component
  */
 
 import {FC} from "react";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import {PaginatedTheatreDetailsSchema} from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {PaginatedTheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {TheatreQueryOptionSchema} from "@/pages/theatres/schema/queries/TheatreQueryOption.schema.ts";
 import TheatreIndexPageContent from "@/pages/theatres/pages/theatre-index-page/TheatreIndexPageContent.tsx";
 import useFetchPaginatedTheatres from "@/pages/theatres/hooks/fetch-theatre/useFetchPaginatedTheatres.ts";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
- * Number of theatres displayed per page in the Theatre Index view.
+ * Number of theatres displayed per page.
  *
- * Used by pagination state and passed to the paginated theatre query
- * to keep UI pagination and API results in sync.
+ * Shared between pagination state and the paginated API query
+ * to ensure UI and backend remain consistent.
  */
 const THEATRES_PER_PAGE = 20;
 
 /**
- * **Component: TheatreIndexPage**
+ * **TheatreIndexPage**
  *
- * Entry point for the Theatre Index admin view.
+ * Admin entry point for the Theatre Index view.
  *
- * **Behaviour**
- * - Sets the document title to `"Theatre Index"`
- * - Parses pagination state from URL search params
- * - Parses filter and sort options using {@link TheatreQueryOptionSchema}
- * - Fetches paginated theatre data from the API
+ * Flow:
+ * 1. Set document title
+ * 2. Parse pagination (`page`) from URL
+ * 3. Parse filter/sort options via {@link TheatreQueryOptionSchema}
+ * 4. Fetch paginated theatre data
+ * 5. Validate API response at runtime
+ * 6. Delegate rendering to {@link TheatreIndexPageContent}
  *
- * **Query Safety**
- * - {@link QueryBoundary} handles loading and error states
- * - {@link ValidatedQueryBoundary} enforces API response shape at runtime
+ * Validation:
+ * - {@link ValidatedDataLoader} enforces {@link PaginatedTheatreDetailsSchema}
  *
- * **Render Flow**
- * - Fetch paginated data → validate response
- * - Destructure `{ items, totalItems }`
- * - Delegate all layout and interaction rendering to
- *   {@link TheatreIndexPageContent}
+ * @component
  *
- * **Example**
+ * @example
  * ```tsx
  * <TheatreIndexPage />
  * ```
- *
- * @component
  */
 const TheatreIndexPage: FC = () => {
     useTitle("Theatre Index");
@@ -68,19 +66,20 @@ const TheatreIndexPage: FC = () => {
     });
 
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={PaginatedTheatreDetailsSchema}>
-                {({items, totalItems}: PaginatedTheatreDetails) => (
-                    <TheatreIndexPageContent
-                        theatres={items}
-                        page={page}
-                        perPage={THEATRES_PER_PAGE}
-                        setPage={setPage}
-                        totalItems={totalItems}
-                    />
-                )}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+        <ValidatedDataLoader
+            query={query}
+            schema={PaginatedTheatreDetailsSchema}
+        >
+            {({items, totalItems}: PaginatedTheatreDetails) => (
+                <TheatreIndexPageContent
+                    theatres={items}
+                    page={page}
+                    perPage={THEATRES_PER_PAGE}
+                    setPage={setPage}
+                    totalItems={totalItems}
+                />
+            )}
+        </ValidatedDataLoader>
     );
 };
 
