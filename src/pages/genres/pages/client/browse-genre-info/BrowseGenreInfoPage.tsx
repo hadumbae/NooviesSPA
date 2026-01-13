@@ -21,7 +21,6 @@ import BrowseGenreInfoPageContent from "@/pages/genres/pages/client/browse-genre
  * - Ensures type-safe rendering via {@link GenreDetailsSchema}
  */
 const BrowseGenreInfoPage = () => {
-    // --- ROUTE PARAMS ---
     const {slug} = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/browse/genres",
@@ -32,18 +31,14 @@ const BrowseGenreInfoPage = () => {
         return <PageLoader/>;
     }
 
-    // --- QUERY ---
     const query = useFetchGenreBySlug({
         slug,
-        queryConfig: {populate: true, virtuals: true},
+        config: {populate: true, virtuals: true},
     });
 
-    // --- RENDER ---
     return (
         <ValidatedDataLoader query={query} schema={GenreDetailsSchema}>
-            {(genre: GenreDetails) => (
-                <BrowseGenreInfoPageContent genre={genre}/>
-            )}
+            {(genre: GenreDetails) => <BrowseGenreInfoPageContent genre={genre}/>}
         </ValidatedDataLoader>
     );
 };
