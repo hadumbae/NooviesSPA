@@ -1,76 +1,56 @@
-import {GenreQueryOptions} from "@/pages/genres/schema/filters/GenreQueryOptions.types.ts";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+/**
+ * @file useFetchPaginatedGenres.ts
+ *
+ * React Query hook for fetching paginated `Genre` collections.
+ */
+
+import { GenreQueryOptions } from "@/pages/genres/schema/filters/GenreQueryOptions.types.ts";
+import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
+import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import { PaginationValues } from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import GenreRepository from "@/pages/genres/repositories/GenreRepository.ts";
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**
- * Combined parameters for fetching paginated genres.
+ * Parameters for {@link useFetchPaginatedGenres}.
  *
- * @template TData - Expected query result type
+ * @template TData - Optional transformed response type.
  */
 type FetchQueries<TData = unknown> = PaginationValues & {
+    /** Optional genre filters. */
     queries?: GenreQueryOptions;
-    requestOptions?: RequestOptions;
-    queryOptions?: UseQueryOptions<TData>;
+
+    /** Repository request options. */
+    config?: RequestOptions;
+
+    /** React Query configuration overrides. */
+    options?: UseQueryOptions<TData>;
 };
 
 /**
- * Fetches paginated genres using React Query.
+ * Fetches paginated genres.
  *
- * Applies pagination, filters, and request options while automatically:
- * - Removing nullish query parameters
- * - Applying default React Query options
- * - Handling API errors consistently
+ * @remarks
+ * - Delegates pagination logic to {@link GenreRepository.paginated}
+ * - Automatically normalizes query options and errors
  *
- * @param params - Pagination values and optional query configuration
- * @returns React Query result for the paginated genre request
- *
- * @example
- * ```ts
- * const { data, isLoading } = useFetchPaginatedGenres({
- *   page: 1,
- *   perPage: 20,
- *   queries: { name: "Rock" }
- * });
- * ```
+ * @param params - Pagination, filters, and configuration.
+ * @returns React Query result containing paginated genre data.
  */
 export default function useFetchPaginatedGenres<TData = unknown>(
-    params: FetchQueries<TData>
+    { page, perPage, queries, config, options }: FetchQueries<TData>
 ): UseQueryResult<unknown, HttpResponseError> {
-    const {
-        page,
-        perPage,
-        queries = {},
-        requestOptions = {},
-        queryOptions = {},
-    } = params ?? {};
-
-    // --- OPTIONS ---
-    const optionsWithDefaults = useQueryOptionDefaults(queryOptions);
-    const filteredQueries = filterNullishAttributes({
-        paginated: true,
-        page,
-        perPage,
-        ...queries,
-        ...requestOptions,
-    });
-
-    // --- QUERY FN ---
     const fetchGenres = useQueryFnHandler({
         errorMessage: "Failed to fetch genres. Please try again.",
-        action: () => GenreRepository.query({queries: filteredQueries}),
+        action: () => GenreRepository.paginated({ page, perPage, config, queries }),
     });
 
-    // --- QUERY ---
     return useQuery({
-        queryKey: ["fetch_paginated_genres_by_query", filteredQueries],
+        queryKey: ["genres", "list", "paginated", { page, perPage, ...queries, ...config }],
         queryFn: fetchGenres,
-        ...optionsWithDefaults,
+        ...useQueryOptionDefaults(options),
     });
 }

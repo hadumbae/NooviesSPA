@@ -25,7 +25,7 @@ import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.t
  */
 const BrowseGenresPage = () => {
     const query = useFetchGenres({
-        requestOptions: {populate: false, virtuals: false},
+        config: {populate: false, virtuals: false},
     });
 
     return (

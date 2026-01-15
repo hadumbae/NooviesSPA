@@ -1,17 +1,22 @@
 /**
- * Genre details page content.
+ * @file GenreDetailsPageContent.tsx
  *
- * Presentational component responsible for rendering:
- * - Genre metadata
- * - Movie list (empty + populated states)
- * - Pagination controls
- * - Hidden edit/delete panels driven by UI context
+ * Presentational content component for the genre details page.
+ *
+ * Responsibilities:
+ * - Render genre metadata and details
+ * - Display associated movies (empty and populated states)
+ * - Handle pagination UI
+ * - Host hidden edit and delete panels driven by UI context
+ *
+ * Contains no data-fetching logic.
  */
+
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 
 import {GenreDetailsUIContext} from "@/pages/genres/context/GenreDetailsUIContext.ts";
-import {Genre, GenreDetails} from "@/pages/genres/schema/genre/Genre.types.ts";
+import {GenreDetails} from "@/pages/genres/schema/genre/Genre.types.ts";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
@@ -37,30 +42,42 @@ import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**
  * Props for {@link GenreDetailsPageContent}.
- *
- * @property genre      - Genre details
- * @property movies     - Movies belonging to the genre
- * @property totalItems - Total number of movies
- * @property page       - Current pagination page
- * @property perPage    - Items per page
- * @property setPage    - Pagination state setter
  */
 type ContentProps = {
+    /** Genre details payload. */
     genre: GenreDetails;
+
+    /** Movies associated with the genre. */
     movies: MovieDetails[];
+
+    /** Total number of movies available. */
     totalItems: number;
+
+    /** Current pagination page. */
     page: number;
+
+    /** Items displayed per page. */
     perPage: number;
+
+    /** Pagination state setter. */
     setPage: (page: number | string) => void;
 };
 
+/**
+ * **GenreDetailsPageContent**
+ *
+ * Stateless page section responsible for rendering genre details,
+ * movie listings, and context-driven edit/delete panels.
+ *
+ * @remarks
+ * UI state (editing, deleting) is controlled via {@link GenreDetailsUIContext}.
+ */
 const GenreDetailsPageContent = (props: ContentProps) => {
     const {page, perPage, setPage, movies, genre, totalItems} = props;
     const {name} = genre;
 
     useTitle(name);
 
-    // --- HOOKS ---
     const navigate = useLoggedNavigate();
 
     const {
@@ -70,7 +87,6 @@ const GenreDetailsPageContent = (props: ContentProps) => {
         setIsDeleting,
     } = useRequiredContext({context: GenreDetailsUIContext});
 
-    // --- MOVIES ---
     const noMovieSection = (
         <section className="flex-1">
             <SectionHeader>Movies</SectionHeader>
@@ -97,12 +113,17 @@ const GenreDetailsPageContent = (props: ContentProps) => {
         </section>
     );
 
-    // --- Form Handler ---
-    const onEditSuccess = (genre: Genre) => {
-        navigate({to: `/admin/genres/get/${genre.slug}`, options: {replace: true}});
+    const content = movies.length > 0
+        ? hasMovieSection
+        : noMovieSection;
+
+    const onEditSuccess = (genre: GenreDetails) => {
+        navigate({
+            to: `/admin/genres/get/${genre.slug}`,
+            options: {replace: true},
+        });
     }
 
-    // --- RENDER ---
     return (
         <PageFlexWrapper>
             <GenreDetailsBreadcrumbs genreName={name}/>
@@ -112,7 +133,7 @@ const GenreDetailsPageContent = (props: ContentProps) => {
                 <GenreDetailsCard genre={genre}/>
             </PageSection>
 
-            {movies.length > 0 ? hasMovieSection : noMovieSection}
+            {content}
 
             {totalItems > perPage && (
                 <PaginationRangeButtons

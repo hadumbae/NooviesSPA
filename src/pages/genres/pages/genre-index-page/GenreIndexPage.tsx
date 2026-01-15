@@ -62,7 +62,7 @@ const GenreIndexPage: FC = () => {
         page,
         perPage,
         queries: searchParams,
-        requestOptions: {virtuals: true, populate: true},
+        config: {virtuals: true, populate: true},
     });
 
     // --- RENDER ---

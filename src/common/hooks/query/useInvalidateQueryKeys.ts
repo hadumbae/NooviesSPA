@@ -1,59 +1,79 @@
 /**
  * @file useInvalidateQueryKeys.ts
  *
- * React hook that returns an async callback for invalidating one or more
+ * React hook that returns an async helper for invalidating one or more
  * TanStack Query cache entries.
  *
- * Supports single or multiple `QueryKey` values, optional exact matching,
- * and forwarded `InvalidateOptions`.
+ * Designed for post-mutation cache synchronization.
  */
 
-import {InvalidateOptions, QueryKey, useQueryClient} from "@tanstack/react-query";
+import {
+    InvalidateOptions,
+    InvalidateQueryFilters,
+    QueryKey,
+    useQueryClient,
+} from "@tanstack/react-query";
 
 /**
- * Hook parameters for {@link useInvalidateQueryKeys}.
- */
-type KeyParams = {
-    /**
-     * A single query key or an array of query keys to invalidate.
-     */
-    keys: QueryKey | QueryKey[];
-
-    /**
-     * Whether to invalidate only queries with an exact key match.
-     * Defaults to `false` (partial matching allowed).
-     */
-    exact?: boolean;
-
-    /**
-     * Additional options forwarded to `invalidateQueries`.
-     */
-    options?: InvalidateOptions;
-};
-
-/**
- * Creates an async invalidation function for one or more React Query keys.
+ * Accepted query key input.
  *
- * @param params - Invalidation configuration.
- * @returns An async function that invalidates the specified query keys.
+ * - Single `QueryKey`
+ * - Array of `QueryKey` values
+ */
+type HookKeys = QueryKey | QueryKey[];
+
+/**
+ * **useInvalidateQueryKeys**
+ *
+ * Returns an async function that invalidates one or more query keys.
+ *
+ * Supports:
+ * - Single or multiple query keys
+ * - Additional {@link InvalidateQueryFilters} (excluding `queryKey`)
+ * - Forwarded {@link InvalidateOptions}
+ *
+ * Empty key arrays are safely ignored.
+ *
+ * @returns Async cache invalidation function.
  *
  * @example
- * const invalidateTheatres = useInvalidateQueryKeys({
- *   keys: ["fetch_theatres_by_query"],
- * });
+ * ```ts
+ * const invalidateGenres = useInvalidateQueryKeys();
  *
- * await invalidateTheatres();
+ * await invalidateGenres(["genres"]);
+ * ```
+ *
+ * @example
+ * ```ts
+ * await invalidateGenres(
+ *   [["genres", "list"], ["genres", "_id"]],
+ *   { exact: true }
+ * );
+ * ```
  */
-export default function useInvalidateQueryKeys({keys, options, exact = false}: KeyParams): () => void {
+export default function useInvalidateQueryKeys(): (
+    keys: HookKeys,
+    filters?: Omit<InvalidateQueryFilters, "queryKey">,
+    options?: InvalidateOptions
+) => Promise<void> {
     const queryClient = useQueryClient();
 
-    const queryKeys = Array.isArray(keys) ? keys : [keys];
+    return async (
+        keys: HookKeys,
+        filters?: Omit<InvalidateQueryFilters, "queryKey">,
+        options?: InvalidateOptions
+    ) => {
+        if (Array.isArray(keys) && keys.length === 0) return;
 
-    return async () => {
-        if (queryKeys.length === 0) return;
+        const queryKeys = Array.isArray(keys[0]) ? keys : [keys];
 
         await Promise.all(
-            queryKeys.map((queryKey) => queryClient.invalidateQueries({queryKey, exact}, options))
+            queryKeys.map((queryKey) =>
+                queryClient.invalidateQueries(
+                    { queryKey, ...filters },
+                    options
+                )
+            )
         );
     };
 }
