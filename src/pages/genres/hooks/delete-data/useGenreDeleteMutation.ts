@@ -83,7 +83,10 @@ export default function useGenreDeleteMutation(
      * and calls the optional `onDeleteSuccess` callback.
      */
     const onSuccess = async () => {
-        await invalidateData([GenreQueryKeys.lists()], {exact: false});
+        await invalidateData(
+            [GenreQueryKeys.query(), GenreQueryKeys.paginated()],
+            {exact: false}
+        );
 
         successMessage && toast.success(successMessage);
         onDeleteSuccess?.();

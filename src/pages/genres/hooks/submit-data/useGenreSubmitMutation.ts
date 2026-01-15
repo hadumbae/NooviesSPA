@@ -111,7 +111,7 @@ export default function useGenreSubmitMutation(
      */
     const onSuccess = async (genre: GenreDetails) => {
         await invalidateQueries(
-            [GenreQueryKeys.lists(), GenreQueryKeys.ids()],
+            [GenreQueryKeys.ids(), GenreQueryKeys.query(), GenreQueryKeys.paginated()],
             {exact: false},
         );
 

@@ -1,41 +1,61 @@
-import {
-    QueryKeyByIDParams,
-    QueryKeyByOptionsParams,
-    QueryKeyBySlugParams
-} from "@/common/type/query/QueryKeyTypes.ts";
-
 /**
- * Centralized query key factory for `Genre` resources.
+ * @file GenreQueryKeys.ts
  *
- * Provides stable, structured TanStack Query keys for:
- * - Single-entity queries (by ID or slug)
- * - Collection/list queries with filters and options
+ * Centralized TanStack Query key factory for `Genre` resources.
+ *
+ * Provides stable, namespaced query keys for:
+ * - Single-genre queries (by ID or slug)
+ * - Filtered genre lists
+ * - Paginated genre collections
  *
  * All keys are rooted under the `"genres"` namespace.
  */
+
+import {
+    QueryKeyByIDParams,
+    QueryKeyByOptionsParams,
+    QueryKeyByPaginationParams,
+    QueryKeyBySlugParams,
+} from "@/common/type/query/QueryKeyTypes.ts";
+
+/**
+ * Query key factory for `Genre` queries.
+ */
 export const GenreQueryKeys = {
     /**
-     * Root query key for all `Genre` queries.
+     * Root key for all genre-related queries.
      */
     all: ["genres"] as const,
 
     /**
      * Query key for fetching a single genre by ObjectId.
+     *
+     * @param params - ID-based query parameters
      */
     ids: (params?: QueryKeyByIDParams) =>
         [...GenreQueryKeys.all, "_id", params] as const,
 
     /**
      * Query key for fetching a single genre by slug.
+     *
+     * @param params - Slug-based query parameters
      */
     slugs: (params?: QueryKeyBySlugParams) =>
         [...GenreQueryKeys.all, "slug", params] as const,
 
     /**
-     * Query key for fetching genre collections.
+     * Query key for fetching filtered genre lists.
      *
-     * Supports filters, pagination, and sorting options.
+     * @param params - Arbitrary query and request options
      */
-    lists: (params?: QueryKeyByOptionsParams) =>
-        [...GenreQueryKeys.all, "lists", params] as const,
+    query: (params?: QueryKeyByOptionsParams) =>
+        [...GenreQueryKeys.all, "lists", "query", params] as const,
+
+    /**
+     * Query key for fetching paginated genre lists.
+     *
+     * @param params - Pagination, filters, and request options
+     */
+    paginated: (params?: QueryKeyByPaginationParams) =>
+        [...GenreQueryKeys.all, "lists", "paginated", params] as const,
 };
