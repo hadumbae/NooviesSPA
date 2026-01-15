@@ -124,6 +124,13 @@ const GenreDetailsPageContent = (props: ContentProps) => {
         });
     }
 
+    const onDeleteSuccess = () => {
+        navigate({
+            to: `/admin/genres`,
+            message: "Navigate after deleting genre.",
+        });
+    }
+
     return (
         <PageFlexWrapper>
             <GenreDetailsBreadcrumbs genreName={name}/>
@@ -160,6 +167,7 @@ const GenreDetailsPageContent = (props: ContentProps) => {
                     presetOpen={isDeleting}
                     setPresetOpen={setIsDeleting}
                     genreID={genre._id}
+                    onDeleteSuccess={onDeleteSuccess}
                 />
             </section>
         </PageFlexWrapper>
