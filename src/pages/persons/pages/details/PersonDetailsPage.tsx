@@ -13,7 +13,8 @@
 import {FC} from 'react';
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import useFetchPerson from "@/pages/persons/hooks/fetch/useFetchPerson.ts";
-import useFetchGroupedMovieCreditsForPerson from "@/pages/moviecredit/hooks/queries/useFetchGroupedMovieCreditsForPerson.ts";
+import useFetchGroupedMovieCreditsForPerson
+    from "@/pages/moviecredit/hooks/queries/useFetchGroupedMovieCreditsForPerson.ts";
 import {PersonDetailsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import PersonDetailsUIProvider from "@/pages/persons/providers/PersonDetailsUIProvider.tsx";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
@@ -40,7 +41,8 @@ const PersonDetailsPage: FC = () => {
     const {_id: personID} = useFetchByIdentifierRouteParams({
         schema: IDRouteParamSchema,
         sourceComponent: PersonDetailsPage.name,
-        errorTo: "Invalid Person Identifier."
+        errorTo: "/admin/persons",
+        errorMessage: "Invalid Person Identifier."
     }) ?? {};
 
     if (!personID) {

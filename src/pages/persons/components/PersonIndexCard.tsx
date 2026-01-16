@@ -3,10 +3,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
-import {buttonVariants} from "@/common/components/ui/button.tsx";
-import {Search} from "lucide-react";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 
 /**
  * Props for {@link PersonIndexCard}.
@@ -36,34 +33,27 @@ const PersonIndexCard: FC<IndexProps> = ({person}) => {
     const formattedNationality = ISO3166Alpha2CountryConstant[nationality];
 
     return (
-        <Card>
-            <CardContent className="p-4 h-full flex items-center space-x-2">
-                {/* Person avatar */}
-                <CloudinaryAvatarImage
-                    personName={name}
-                    image={profileImage}
-                    className="h-16 w-16"
-                />
+        <LoggedLink to={`/admin/persons/get/${_id}`}>
+            <Card>
+                <CardContent className="p-4 h-full flex items-center space-x-2">
+                    {/* Person avatar */}
+                    <CloudinaryAvatarImage
+                        personName={name}
+                        image={profileImage}
+                        className="h-16 w-16"
+                    />
 
-                {/* Name and details */}
-                <div className="flex-grow flex flex-col">
-                    <h1 className="font-bold text-lg">{name}</h1>
-                    <span className="text-sm text-neutral-500">
-                        {formattedDOB} | {formattedNationality}
-                    </span>
-                </div>
+                    {/* Name and details */}
+                    <div className="flex-grow flex flex-col">
+                        <h2 className="font-bold text-lg">{name}</h2>
 
-                {/* Link to person details */}
-                <LoggedHoverLink
-                    to={`/admin/persons/get/${_id}`}
-                    component={PersonIndexCard.name}
-                    message="Navigate to person details page."
-                    className={cn(buttonVariants({variant: "outline"}))}
-                >
-                    <Search/>
-                </LoggedHoverLink>
-            </CardContent>
-        </Card>
+                        <span className="text-sm text-neutral-500">
+                            {formattedDOB} | {formattedNationality}
+                        </span>
+                    </div>
+                </CardContent>
+            </Card>
+        </LoggedLink>
     );
 };
 

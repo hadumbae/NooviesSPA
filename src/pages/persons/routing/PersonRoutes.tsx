@@ -37,7 +37,7 @@ export default [
             },
             {
                 /** Route for viewing details of a specific person by ID. */
-                path: "/admin/persons/get/:personID",
+                path: "/admin/persons/get/:_id",
                 element: <PersonDetailsPage />,
                 errorElement: <ComponentErrorHandler />
             },
