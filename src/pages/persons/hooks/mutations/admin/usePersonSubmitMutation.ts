@@ -78,7 +78,7 @@ export default function usePersonSubmitMutation(
     const onSuccess = (person: Person) => {
         invalidateQueries(
             [
-                PersonQueryKeys.ids(),
+                PersonQueryKeys.ids({_id: person._id}),
                 PersonQueryKeys.slugs(),
                 PersonQueryKeys.query(),
                 PersonQueryKeys.paginated(),

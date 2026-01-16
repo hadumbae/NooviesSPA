@@ -61,4 +61,4 @@ export type QueryKeyByOptionsParams<
  */
 export type QueryKeyByPaginationParams<
     TQueryOptions = Record<string, unknown>
-> = PaginationValues & TQueryOptions & RequestOptions;
+> = Partial<PaginationValues> & TQueryOptions & RequestOptions;

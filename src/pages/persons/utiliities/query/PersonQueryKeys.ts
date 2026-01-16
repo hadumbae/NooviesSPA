@@ -30,24 +30,24 @@ export const PersonQueryKeys = {
     /**
      * Query key for fetching a single person by ObjectId.
      */
-    ids: (params?: QueryKeyByIDParams) =>
+    ids: (params: QueryKeyByIDParams = {}) =>
         [...PersonQueryKeys.all, "_id", params] as const,
 
     /**
      * Query key for fetching a single person by slug.
      */
-    slugs: (params?: QueryKeyBySlugParams) =>
+    slugs: (params: QueryKeyBySlugParams = {}) =>
         [...PersonQueryKeys.all, "slug", params] as const,
 
     /**
      * Query key for filtered, non-paginated person lists.
      */
-    query: (params?: QueryKeyByOptionsParams) =>
+    query: (params: QueryKeyByOptionsParams = {}) =>
         [...PersonQueryKeys.all, "lists", "query", params] as const,
 
     /**
      * Query key for paginated person lists.
      */
-    paginated: (params?: QueryKeyByPaginationParams) =>
+    paginated: (params: QueryKeyByPaginationParams = {}) =>
         [...PersonQueryKeys.all, "lists", "paginated", params] as const,
 };
