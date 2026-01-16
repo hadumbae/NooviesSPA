@@ -43,13 +43,13 @@ export default [
             },
             {
                 /** Route for viewing a person's profile image. */
-                path: "/admin/persons/get/:personID/images/profile",
+                path: "/admin/persons/get/:_id/images/profile",
                 element: <PersonImagePage />,
                 errorElement: <ComponentErrorHandler />
             },
             {
                 /** Route for editing a person's profile image. */
-                path: "/admin/persons/edit/:personID/profile-image",
+                path: "/admin/persons/edit/:_id/profile-image",
                 element: <PersonImagePage />,
                 errorElement: <ComponentErrorHandler />
             },

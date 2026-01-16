@@ -1,31 +1,32 @@
+/**
+ * @file PersonImagePage.tsx
+ *
+ * Page component for editing a person's profile image.
+ * Handles routing, data fetching, validation, and loading states.
+ */
+
 import {FC} from 'react';
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import useFetchPerson from "@/pages/persons/hooks/fetch/useFetchPerson.ts";
-import useFetchPersonParams from "@/pages/persons/hooks/params/admin/useFetchPersonParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PersonImageDetailsBreadcrumbs
-    from "@/pages/persons/components/breadcrumbs/admin/PersonImageDetailsBreadcrumbs.tsx";
-import PersonProfileImageHeader from "@/pages/persons/components/headers/PersonProfileImageHeader.tsx";
-import PageSection from "@/common/components/page/PageSection.tsx";
-import UploadPersonProfileImageFormContainer
-    from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormContainer.tsx";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import {PersonDetailsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
+import useFetchByIdentifierRouteParams
+    from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
+import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import PersonImagePageContent
+    from "@/pages/persons/pages/image-page/PersonImagePageContent.tsx";
 
 /**
- * Page component for managing a `Person`'s profile images.
+ * **Person Image Page**
  *
- * Features:
- * - Fetches a `Person` by ID from URL parameters.
- * - Validates API response using {@link PersonDetailsSchema}.
- * - Displays breadcrumbs and profile image header.
- * - Includes a card section for uploading a new profile image using {@link UploadPersonProfileImageFormContainer}.
+ * Top-level page for managing a person's profile image.
  *
- * Uses {@link QueryBoundary} and {@link ValidatedQueryBoundary} for async data fetching and validation.
+ * @remarks
+ * - Resolves the person ID from route parameters.
+ * - Fetches the corresponding person entity.
+ * - Validates the response using {@link PersonDetailsSchema}.
+ * - Delegates rendering to {@link PersonImagePageContent}.
  *
  * @example
  * ```tsx
@@ -33,54 +34,28 @@ import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
  * ```
  */
 const PersonImagePage: FC = () => {
-    const urlParams = useFetchPersonParams();
-    if (!urlParams) return <PageLoader/>;
+    const {_id: personID} = useFetchByIdentifierRouteParams({
+        schema: IDRouteParamSchema,
+        sourceComponent: PersonImagePage.name,
+        errorTo: "/admin/persons",
+        errorMessage: "Invalid Person Identifier.",
+    }) ?? {};
 
-    const {personID} = urlParams;
-    const query = useFetchPerson({_id: personID, populate: true, virtuals: true});
+    if (!personID) {
+        return <PageLoader/>;
+    }
+
+    const query = useFetchPerson({
+        _id: personID,
+        config: {populate: true, virtuals: true},
+    });
 
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={PersonDetailsSchema}
-                                    message="API Response Validation Failed.">
-                {(person: PersonDetails) => {
-                    const navigate = useLoggedNavigate();
-                    const {_id, name} = person;
-
-                    const onUpdate = (person: Person) => {
-                        navigate({
-                            to: `/admin/persons/get/${person._id}`,
-                            message: "Navigation on successful update to person's profile image.",
-                        });
-                    }
-
-                    return (
-                        <PageFlexWrapper className="space-y-5">
-                            <header className="space-y-5">
-                                <PersonImageDetailsBreadcrumbs personID={_id} name={name}/>
-                                <PersonProfileImageHeader name={name}/>
-                            </header>
-
-                            <PageSection>
-                                <Card>
-                                    <CardHeader>
-                                        <CardTitle>Upload Images</CardTitle>
-                                        <CardDescription>Select an image and click on `Submit`.</CardDescription>
-                                    </CardHeader>
-
-                                    <CardContent>
-                                        <UploadPersonProfileImageFormContainer
-                                            personID={personID}
-                                            onSubmitSuccess={onUpdate}
-                                        />
-                                    </CardContent>
-                                </Card>
-                            </PageSection>
-                        </PageFlexWrapper>
-                    );
-                }}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+        <ValidatedDataLoader query={query} schema={PersonDetailsSchema}>
+            {(person: PersonDetails) =>
+                <PersonImagePageContent person={person}/>
+            }
+        </ValidatedDataLoader>
     );
 };
 
