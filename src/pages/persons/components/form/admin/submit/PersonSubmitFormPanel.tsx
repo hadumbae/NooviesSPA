@@ -56,8 +56,13 @@ const PersonSubmitFormPanel: FC<FormPanelProps> = (params) => {
 
     const [open, setOpen] = useState<boolean>(false);
 
+    const isControlled = presetOpen !== undefined && setPresetOpen !== undefined;
+    const activeOpen = isControlled ? presetOpen : open;
+    const setActiveOpen = isControlled ? setPresetOpen : setOpen;
+    
     const sheetTitle = `${isEditing ? "Update" : "Submit"} Personal Details`;
     const sheetDescription = `${isEditing ? "Update" : "Submit"} personal details by using the form.`;
+
 
     /**
      * Closes the panel and triggers the external success callback.
@@ -65,12 +70,12 @@ const PersonSubmitFormPanel: FC<FormPanelProps> = (params) => {
      * @param person - The person entity returned from a successful form submission.
      */
     const closeOnSubmit = (person: Person) => {
-        setOpen(false);
+        setActiveOpen(false);
         onSubmitSuccess?.(person);
     }
 
     return (
-        <Sheet open={presetOpen ?? open} onOpenChange={setPresetOpen ?? setOpen}>
+        <Sheet open={activeOpen} onOpenChange={setActiveOpen}>
             <SheetTrigger asChild>{children}</SheetTrigger>
             <SheetContent className="flex flex-col">
                 <SheetHeader>

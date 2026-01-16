@@ -111,41 +111,32 @@ const PersonDetailsPageContent: FC<PersonDetailsPageContentProps> = (props) => {
             </div>
 
             {/* Hidden admin panels for editing, profile image upload, and deletion */}
-            {
-                isEditing &&
-                <PageSection srTitle="Edit Person" className="hidden">
-                    <PersonSubmitFormPanel
-                        isEditing={true}
-                        entity={person}
-                        presetOpen={isEditing}
-                        setPresetOpen={setIsEditing}
-                    />
-                </PageSection>
-            }
+            <PageSection srTitle="Edit Person" className="hidden">
+                <PersonSubmitFormPanel
+                    isEditing={true}
+                    entity={person}
+                    presetOpen={isEditing}
+                    setPresetOpen={setIsEditing}
+                />
+            </PageSection>
 
-            {
-                isUpdatingProfileImage &&
-                <PageSection srTitle="Upload Person Profile Image" className="hidden">
-                    <UploadPersonProfileImageFormPanel
-                        personID={_id}
-                        presetOpen={isUpdatingProfileImage}
-                        setPresetOpen={setIsUpdatingProfileImage}
-                    />
-                </PageSection>
-            }
+            <PageSection srTitle="Upload Person Profile Image" className="hidden">
+                <UploadPersonProfileImageFormPanel
+                    personID={_id}
+                    presetOpen={isUpdatingProfileImage}
+                    setPresetOpen={setIsUpdatingProfileImage}
+                />
+            </PageSection>
 
-            {
-                isDeletingPerson &&
-                <PageSection srTitle="Warning Dialog For Deleting Person" className="hidden">
-                    <PersonDeleteWarningDialog
-                        personName={name}
-                        personID={_id}
-                        onDeleteSuccess={navigateToPersonIndex}
-                        presetOpen={isDeletingPerson}
-                        setPresetOpen={setIsDeletingPerson}
-                    />
-                </PageSection>
-            }
+            <PageSection srTitle="Warning Dialog For Deleting Person" className="hidden">
+                <PersonDeleteWarningDialog
+                    personName={name}
+                    personID={_id}
+                    onDeleteSuccess={navigateToPersonIndex}
+                    presetOpen={isDeletingPerson}
+                    setPresetOpen={setIsDeletingPerson}
+                />
+            </PageSection>
         </PageFlexWrapper>
     );
 };
