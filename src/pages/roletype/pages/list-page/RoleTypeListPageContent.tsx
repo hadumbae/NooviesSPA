@@ -1,4 +1,10 @@
-import {FC} from 'react';
+/**
+ * @file RoleTypeListPageContent.tsx
+ *
+ * Presentational component responsible for rendering the main content
+ * of the Role Type List Page after data has been fetched and validated.
+ */
+
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import RoleTypeListSheet from "@/pages/roletype/components/role-type-list-page/list-sheet/RoleTypeListSheet.tsx";
@@ -9,93 +15,88 @@ import RoleTypeListHeader from "@/pages/roletype/components/role-type-list-page/
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import RoleTypeQueryOptionFormContainer
     from "@/pages/roletype/components/forms/filters/RoleTypeQueryOptionFormContainer.tsx";
-import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 
+/**
+ * Props for {@link RoleTypeListPageContent}.
+ */
 type ContentProps = {
     /**
-     * The list of role types returned by the validated query.
-     * Each role type is displayed as a `RoleTypeListSheet` card.
+     * Validated list of role types to display.
      */
     roleTypes: RoleType[];
 
     /**
-     * Total number of available role types that match the current filters.
-     * Used to determine whether pagination controls should be displayed.
+     * Total number of role types matching the current filters.
      */
     totalItems: number;
+
+    /**
+     * Current pagination page.
+     */
+    page: number;
+
+    /**
+     * Maximum number of items per page.
+     */
+    perPage: number;
+
+    /**
+     * Pagination page setter.
+     */
+    setPage: (page: number) => void;
 };
 
 /**
  * **RoleTypeListPageContent**
  *
- * A presentational component responsible for rendering the **content area**
- * of the Role Type List Page once data has already been loaded and validated.
+ * Stateless presentational component that renders:
  *
- * This component does **not** perform fetching; it receives:
- * - The list of role types
- * - The total number of matching items
+ * - Page header and contextual controls
+ * - Filter dialog with sorting and filtering options
+ * - A responsive grid of role type cards
+ * - Pagination controls when applicable
+ * - An empty state when no role types exist
  *
- * It manages **pagination state** using URL search params and renders:
+ * ### Responsibilities
+ * - Render UI based solely on provided props
+ * - Perform no data fetching or validation
  *
- * - A page header (`RoleTypeListHeader`)
- * - A preset filter dialog (`PresetFilterDialog`)
- * - A responsive grid of `RoleTypeListSheet` cards
- * - Pagination controls (`PaginationRangeButtons`) when needed
- * - An empty-state message when no items exist
+ * ### Intended Usage
+ * Use this component **only after data has been fetched and validated**
+ * (e.g., inside {@link ValidatedQueryBoundary}).
  *
- * ---
- *
- * ### When to use this component
- * Use `RoleTypeListPageContent` inside a larger page or container component
- * once data has been fetched via `useFetchRoleTypes` and validated using
- * `ValidatedQueryBoundary`.
- *
- * @param props - {@link ContentProps} containing the role type items and total count
- * @returns {JSX.Element} The rendered role type list content
+ * @param props - {@link ContentProps}
+ * @returns Rendered role type list content
  */
-const RoleTypeListPageContent: FC<ContentProps> = (props) => {
-    // ⚡ State ⚡
-    const {roleTypes, totalItems} = props;
-
-    /** Pagination state synchronized with URL search params */
-    const {page, perPage, setPage} = usePaginationSearchParams({page: 1, perPage: 25});
-
-    // ⚡ Sections ⚡
-
+const RoleTypeListPageContent = (
+    {page, perPage, setPage, roleTypes, totalItems}: ContentProps
+) => {
     /**
-     * Section: Non-empty list of role types
-     *
-     * Renders:
-     * - A semantic section wrapper
-     * - A visually-hidden section header
-     * - A responsive grid of `RoleTypeListSheet` cards
-     * - Pagination controls when the number of items exceeds `perPage`
+     * Non-empty role type list section
      */
     const hasRoleTypeSection = (
         <section>
             <SectionHeader srOnly={true}>Role Type List</SectionHeader>
 
             <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2">
-                {roleTypes.map(rt => <RoleTypeListSheet key={rt._id} roleType={rt}/>)}
+                {roleTypes.map(rt => (
+                    <RoleTypeListSheet key={rt._id} roleType={rt}/>
+                ))}
             </div>
 
-            {
-                totalItems > perPage &&
+            {totalItems > perPage && (
                 <PaginationRangeButtons
                     page={page}
                     perPage={perPage}
                     totalItems={totalItems}
                     setPage={setPage}
                 />
-            }
+            )}
         </section>
     );
 
     /**
-     * Section: Empty state
-     *
-     * Renders a centered message indicating that no role types
-     * match the current filter or search parameters.
+     * Empty state section
      */
     const noRoleTypeSection = (
         <PageCenter>
@@ -105,25 +106,31 @@ const RoleTypeListPageContent: FC<ContentProps> = (props) => {
         </PageCenter>
     );
 
-    // ⚡ Render ⚡
-
     return (
         <PageFlexWrapper>
-            {/** Page title and contextual header */}
+            {/* Page title and header */}
             <RoleTypeListHeader/>
 
-            {/** Filter dialog with form-driven sorting and filtering */}
-            <PresetFilterDialog title="Role Type Filters" description="Filter And Sort Role Types.">
+            {/* Filter and sort dialog */}
+            <PresetFilterDialog
+                title="Role Type Filters"
+                description="Filter and sort role types."
+            >
                 <RoleTypeQueryOptionFormContainer/>
             </PresetFilterDialog>
 
-            {/** Conditional rendering based on presence of items */}
-            {
-                roleTypes.length > 0
-                    ? hasRoleTypeSection
-                    : noRoleTypeSection
-            }
+            {/* Conditional list rendering */}
+            {roleTypes.length > 0 ? hasRoleTypeSection : noRoleTypeSection}
 
+            {/* Footer pagination (mirrors top behavior for long lists) */}
+            {totalItems > perPage && (
+                <PaginationRangeButtons
+                    page={page}
+                    perPage={perPage}
+                    totalItems={totalItems}
+                    setPage={setPage}
+                />
+            )}
         </PageFlexWrapper>
     );
 };

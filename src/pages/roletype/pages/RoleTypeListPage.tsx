@@ -1,6 +1,13 @@
+/**
+ * @file RoleTypeListPage.tsx
+ *
+ * Route-level page component for browsing `RoleType` records.
+ *
+ * This page composes pagination, filtering, data fetching, validation,
+ * and presentation into a single, mountable route component.
+ */
+
 import {FC} from 'react';
-import useFetchRoleTypes from "@/pages/roletype/hooks/fetch/useFetchRoleTypes.ts";
-import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {PaginatedRoleTypeSchema} from "@/pages/roletype/schema/model/RoleType.schema.ts";
@@ -8,70 +15,78 @@ import {PaginatedRoleTypes} from "@/pages/roletype/schema/model/RoleType.types.t
 import useRoleTypeQueryOptionSearchParams
     from "@/pages/roletype/hooks/params/query-option-search-params/useRoleTypeQueryOptionSearchParams.ts";
 import RoleTypeListPageContent from "@/pages/roletype/pages/list-page/RoleTypeListPageContent.tsx";
+import {useFetchPaginatedRoleTypes} from "@/pages/roletype/hooks/fetch/useFetchPaginatedRoleTypes.ts";
+import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
+
+/**
+ * Default number of role types displayed per page.
+ */
+const ROLE_TYPES_PER_PAGE = 25;
 
 /**
  * **RoleTypeListPage**
  *
- * The top-level page component for displaying a **paginated, filterable**
+ * Top-level page component for displaying a **paginated and filterable**
  * list of role types.
  *
- * This component is responsible for:
+ * ### Responsibilities
+ * - Read pagination state from URL search params (`page`)
+ * - Read filter and sort options from URL search params
+ * - Execute paginated role type queries
+ * - Handle loading and error states
+ * - Validate API responses against {@link PaginatedRoleTypeSchema}
+ * - Delegate rendering to {@link RoleTypeListPageContent}
  *
- * - Reading pagination params from the URL (`page`, `perPage`)
- * - Reading filter + sort query options from URL search params
- * - Fetching role type data via `useFetchRoleTypes`
- * - Validating server response shape using `ValidatedQueryBoundary`
- * - Rendering the final content using `RoleTypeListPageContent`
- *
- * ## Data Flow
- * 1. **URL search params**
- *    - Pagination → `usePaginationSearchParams`
- *    - Filter/sort options → `useRoleTypeQueryOptionSearchParams`
+ * ### Data Flow
+ * 1. **Search Params**
+ *    - Pagination → {@link useParsedPaginationValue}
+ *    - Filters & sorting → {@link useRoleTypeQueryOptionSearchParams}
  *
  * 2. **Fetching**
- *    `useFetchRoleTypes` receives all search params and performs a paginated query.
+ *    - {@link useFetchPaginatedRoleTypes} executes the paginated query
  *
- * 3. **Error / Loading Handling**
- *    `QueryBoundary` manages loading and error UI.
+ * 3. **Boundaries**
+ *    - {@link QueryBoundary} handles loading and error UI
+ *    - {@link ValidatedQueryBoundary} enforces response schema correctness
  *
- * 4. **Validation**
- *    `ValidatedQueryBoundary` ensures the response matches
- *    {@link PaginatedRoleTypeSchema}.
+ * 4. **Presentation**
+ *    - {@link RoleTypeListPageContent} renders the validated data
  *
- * 5. **Presentation**
- *    Once validated, `RoleTypeListPageContent` renders:
- *    - Headers
- *    - Filters
- *    - Grid of role type sheets
- *    - Pagination controls
+ * ### Usage
+ * This component is intended to be used **only at the route level**
+ * and should not be embedded inside other components.
  *
- * ## When to use this component
- * This component is intended to be mounted as the actual route-level page
- * for viewing role types. It should **not** be used inside other components.
- *
- * @returns {JSX.Element} The fully composed role type list page
+ * @returns The fully composed Role Type List page
  */
 const RoleTypeListPage: FC = () => {
-    // ⚡ Search Params ⚡
-
+    /**
+     * URL Search Params
+     */
     const {searchParams: queryOptions} = useRoleTypeQueryOptionSearchParams();
-    const {page, perPage} = usePaginationSearchParams({page: 1, perPage: 25});
+    const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
 
-    // ⚡ Query ⚡
-
-    const query = useFetchRoleTypes({
-        queries: {paginated: true, page, perPage, ...queryOptions}
+    /**
+     * Data Fetching
+     */
+    const query = useFetchPaginatedRoleTypes({
+        page,
+        perPage: ROLE_TYPES_PER_PAGE,
+        queries: queryOptions,
     });
 
     return (
         <QueryBoundary query={query}>
             <ValidatedQueryBoundary query={query} schema={PaginatedRoleTypeSchema}>
                 {
-                    ({totalItems, items}: PaginatedRoleTypes) =>
+                    ({totalItems, items}: PaginatedRoleTypes) => (
                         <RoleTypeListPageContent
                             roleTypes={items}
                             totalItems={totalItems}
+                            page={page}
+                            perPage={ROLE_TYPES_PER_PAGE}
+                            setPage={setPage}
                         />
+                    )
                 }
             </ValidatedQueryBoundary>
         </QueryBoundary>

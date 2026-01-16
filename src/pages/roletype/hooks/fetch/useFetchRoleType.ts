@@ -1,75 +1,68 @@
-import { FetchByIDParams } from "@/common/type/query/FetchByIDParams.ts";
+/**
+ * @file useFetchRoleType.ts
+ *
+ * React Query hook for fetching a single `RoleType` by its unique ID.
+ *
+ * Encapsulates repository access, error handling, query defaults,
+ * and cache key construction.
+ */
+
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import RoleTypeRepository from "@/pages/roletype/repositories/RoleTypeRepository.ts";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-
-type FetchParams<TData = unknown> = FetchByIDParams & UseQueryOptions<TData>;
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 
 /**
- * Fetch a single {@link RoleType} by its unique ID using React Query.
+ * Parameters for fetching a single role type by ID.
+ */
+type FetchParams = {
+    /** Unique role type identifier */
+    _id: ObjectId;
+
+    /** Optional request configuration (populate, virtuals, etc.) */
+    config?: Omit<RequestOptions, "limit">;
+
+    /** Optional React Query configuration */
+    options?: UseQueryOptions<unknown>;
+};
+
+/**
+ * Fetches a single `RoleType` by its unique ID using React Query.
  *
- * @template TData - The expected type of the returned role type.
- *
- * @param params - Parameters for fetching a role type by ID.
- * @param params._id - {@link FetchByIDParams._id} The unique identifier of the role type.
- * @param params.populate - {@link FetchByIDParams.populate} Optional. Whether to populate referenced documents.
- * @param params.virtuals - {@link FetchByIDParams.virtuals} Optional. Whether to include virtual properties.
- * @param params.enabled - {@link UseQueryOptions.enabled} Optional. Whether the query should automatically run.
- * @param params.staleTime - {@link UseQueryOptions.staleTime} Optional. Duration in milliseconds before the query is considered stale.
- * @param params.initialData - {@link UseQueryOptions.initialData} Optional. Initial data for the query before fetching.
- * @param params.placeholderData - {@link UseQueryOptions.placeholderData} Optional. Placeholder data returned while the query is fetching.
+ * @param params - Fetch parameters
  *
  * @returns A {@link UseQueryResult} containing:
- *  - `data` — The fetched {@link RoleType} (or placeholder/initial data)
- *  - `error` — Any {@link HttpResponseError} from the fetch
- *  - `isLoading` / `isFetching` — Query state flags
+ * - `data` — The fetched role type
+ * - `error` — {@link HttpResponseError} if the request fails
+ * - Query state flags (`isLoading`, `isFetching`, etc.)
  *
  * @example
  * ```ts
- * const { data, isLoading, error } = useFetchRoleType({
+ * const { data } = useFetchRoleType({
  *   _id: "role_123",
- *   populate: true,
- *   virtuals: false
+ *   config: { populate: true }
  * });
- *
- * if (data) {
- *   console.log("Fetched RoleType:", data);
- * }
  * ```
  *
  * @remarks
- * - Uses {@link useQueryFnHandler} to handle fetch errors with a consistent message.
- * - Automatically caches the fetched role type using React Query.
- * - Query is considered fresh for 60 seconds (`staleTime: 1000 * 60`).
+ * - Uses {@link useQueryFnHandler} for consistent error handling
+ * - Query options are normalized via {@link useQueryOptionDefaults}
  */
-export default function useFetchRoleType<TData = unknown>(
-    params: FetchParams<TData>
-): UseQueryResult<TData, HttpResponseError> {
-    const {
-        _id,
-        populate,
-        virtuals,
-        enabled = true,
-        staleTime = 1000 * 60,
-        placeholderData = (previousData: TData | undefined) => previousData,
-        initialData,
-    } = params;
-
-    const queryKey = ["fetch_single_role_type_by_id", params];
-
+export default function useFetchRoleType(
+    {_id, config, options}: FetchParams
+): UseQueryResult<unknown, HttpResponseError> {
     const fetchRoleType = useQueryFnHandler({
-        action: () => RoleTypeRepository.get({ _id, populate, virtuals }),
+        action: () => RoleTypeRepository.get({ _id, config }),
         errorMessage: "Failed to fetch role type. Please try again.",
     });
 
     return useQuery({
-        queryKey,
+        queryKey: ["roleTypes", "_id", {_id, ...config}],
         queryFn: fetchRoleType,
-        staleTime,
-        placeholderData,
-        initialData,
-        enabled,
+        ...useQueryOptionDefaults(options),
     });
 }

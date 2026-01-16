@@ -1,3 +1,18 @@
+/**
+ * @file useRoleTypeSubmitMutation.ts
+ *
+ * React Query mutation hook for creating or updating `RoleType` entities.
+ *
+ * Responsibilities:
+ * - Selects create vs. update behavior based on `isEditing`
+ * - Normalizes API errors via `handleMutationResponse`
+ * - Validates responses using `RoleTypeSchema`
+ * - Maps server-side errors into `react-hook-form`
+ * - Displays toast notifications
+ * - Triggers consumer success/error callbacks
+ * - Invalidates Role Type–related queries on success
+ */
+
 import {UseFormReturn} from "react-hook-form";
 import {RoleTypeForm, RoleTypeFormValues} from "@/pages/roletype/schema/submit-form/RoleTypeForm.types.ts";
 import RoleTypeRepository from "@/pages/roletype/repositories/RoleTypeRepository.ts";
@@ -7,34 +22,28 @@ import {RoleTypeSchema} from "@/pages/roletype/schema/model/RoleType.schema.ts";
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {RoleTypeQueryKeys} from "@/pages/roletype/query/RoleTypeQueryKeys.ts";
 
 /**
- * Parameters for submitting Role Type form data.
+ * Parameters required to submit a Role Type form.
  */
-type FormSubmitParams = MutationOnSubmitParams<RoleType> &
+type FormSubmitParams =
+    MutationOnSubmitParams<RoleType> &
     MutationEditByIDParams & {
-    /** The `react-hook-form` instance controlling the form. */
+    /** `react-hook-form` instance controlling the form state. */
     form: UseFormReturn<RoleTypeFormValues>;
 };
 
 /**
- * Mutation hook for creating or updating Role Types.
+ * React Query mutation hook for submitting Role Type form data.
  *
- * - Selects the correct repository action based on `isEditing`.
- * - Wraps the API call with {@link handleMutationResponse} for error normalization.
- * - Validates the response against {@link RoleTypeSchema}.
- * - Maps server errors into `react-hook-form` field errors.
- * - Shows toast notifications and triggers success/error callbacks.
- * - Invalidates Role Type queries on settle to refresh cached data.
+ * @param params - Form state, editing configuration, and lifecycle callbacks.
+ * @returns Mutation object for creating or updating a Role Type.
  *
- * @param params - Form parameters including editing state and callbacks.
- * @returns A React Query mutation for submitting Role Type data.
- *
- * @throws {FormValidationError} When the API returns validation errors (422).
- * @throws {HttpResponseError} For non-422 API errors.
- * @throws {Error} If response validation against {@link RoleTypeSchema} fails.
+ * @throws {Error} When API calls fail or response validation fails.
  */
 export default function useRoleTypeSubmitMutation(
     params: FormSubmitParams
@@ -49,8 +58,15 @@ export default function useRoleTypeSubmitMutation(
         _id,
     } = params;
 
-    const queryClient = useQueryClient();
+    const invalidateQueries = useInvalidateQueryKeys();
 
+    /**
+     * Submits Role Type form data to the API.
+     *
+     * - Executes create or update repository action
+     * - Normalizes API errors
+     * - Validates response schema
+     */
     const submitRoleTypeData = async (values: RoleTypeForm) => {
         const action = isEditing
             ? () => RoleTypeRepository.update({_id, data: values})
@@ -72,33 +88,39 @@ export default function useRoleTypeSubmitMutation(
         return data;
     };
 
+    /**
+     * Handles successful mutation completion.
+     */
     const onSuccess = (roleType: RoleType) => {
-        const actionDisplay = isEditing ? "updated" : "created"
+        invalidateQueries(
+            [
+                RoleTypeQueryKeys.ids(),
+                RoleTypeQueryKeys.query(),
+                RoleTypeQueryKeys.paginated(),
+            ],
+            {exact: false},
+        );
 
-        toast.success(successMessage ?? `Role Type ${actionDisplay} successfully.`);
+        successMessage && toast.success(successMessage);
         onSubmitSuccess?.(roleType);
-    }
+    };
 
+    /**
+     * Handles mutation errors and maps them into form state.
+     */
     const onError = (error: unknown) => {
         const actionDisplay = isEditing ? "update" : "create";
+        const displayMessage =
+            errorMessage ?? `Failed to ${actionDisplay} role type. Please try again.`;
 
-        const displayMessage = errorMessage ?? `Failed to ${actionDisplay} role type. Please try again.`
         handleMutationFormError({form, error, displayMessage});
         onSubmitError?.(error);
-    }
-
-    const onSettled = async () => {
-        await Promise.all([
-            queryClient.invalidateQueries({queryKey: ["fetch_role_types_by_query"], exact: false}),
-            queryClient.invalidateQueries({queryKey: ["fetch_single_role_type_by_id"], exact: false}),
-        ]);
-    }
+    };
 
     return useMutation({
-        mutationKey: ['submit_role_type_data'],
+        mutationKey: ["submit_role_type_data"],
         mutationFn: submitRoleTypeData,
         onSuccess,
         onError,
-        onSettled,
     });
 }

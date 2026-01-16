@@ -1,3 +1,16 @@
+/**
+ * @file useRoleTypeDeleteMutation.ts
+ *
+ * React Query mutation hook for deleting `RoleType` entities.
+ *
+ * Responsibilities:
+ * - Executes delete requests via `RoleTypeRepository`
+ * - Normalizes API errors
+ * - Displays toast notifications on success
+ * - Triggers consumer success/error callbacks
+ * - Invalidates Role Type–related queries after mutation
+ */
+
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import RoleTypeRepository from "@/pages/roletype/repositories/RoleTypeRepository.ts";
@@ -6,25 +19,23 @@ import {toast} from "react-toastify";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import {useMutation} from "@tanstack/react-query";
 import queryClient from "@/config/ReactQueryClient.ts";
+import {RoleTypeQueryKeys} from "@/pages/roletype/query/RoleTypeQueryKeys.ts";
+import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 
 /**
- * Mutation hook for deleting a Role Type.
+ * React Query mutation hook for deleting a single Role Type.
  *
- * - Calls {@link RoleTypeRepository.delete} to remove a record by ID.
- * - Wraps the API call with {@link handleMutationResponse} for error normalization.
- * - Displays a toast notification on success (or custom `successMessage`).
- * - Triggers `onDeleteSuccess` or `onDeleteError` callbacks if provided.
- * - Maps errors with {@link handleMutationResponseError}.
- * - Invalidates Role Type list queries on settle to refresh cached data.
- *
- * @param params - Parameters controlling success/error messages and callbacks.
- * @returns A React Query mutation for deleting a Role Type.
- *
- * @throws {HttpResponseError} For failed API requests other than validation errors.
+ * @param params - Optional success/error messages and lifecycle callbacks.
+ * @returns Mutation object for deleting a Role Type by ID.
  */
-export default function useRoleTypeDeleteMutation(params: OnDeleteMutationParams) {
-    const {onDeleteSuccess, onDeleteError, successMessage, errorMessage} = params;
+export default function useRoleTypeDeleteMutation(
+    {onDeleteSuccess, onDeleteError, successMessage, errorMessage}: OnDeleteMutationParams
+) {
+    const invalidateQueries = useInvalidateQueryKeys();
 
+    /**
+     * Deletes a Role Type by its identifier.
+     */
     const deleteRoleType = async ({_id}: { _id: ObjectId }) => {
         await handleMutationResponse({
             action: () => RoleTypeRepository.delete({_id}),
@@ -32,20 +43,40 @@ export default function useRoleTypeDeleteMutation(params: OnDeleteMutationParams
         });
     };
 
+    /**
+     * Handles successful deletion.
+     */
     const onSuccess = () => {
-        toast.success(successMessage ?? "Role Type deleted.");
+        invalidateQueries(
+            [
+                RoleTypeQueryKeys.query(),
+                RoleTypeQueryKeys.paginated(),
+            ],
+            {exact: false},
+        );
+
+        successMessage && toast.success(successMessage);
         onDeleteSuccess?.();
     };
 
+    /**
+     * Handles deletion errors.
+     */
     const onError = (error: unknown) => {
         const displayMessage = errorMessage ?? "";
         handleMutationResponseError({error, displayMessage});
         onDeleteError?.(error);
     };
 
+    /**
+     * Ensures related queries are refreshed after mutation completion.
+     */
     const onSettled = async () => {
-        await queryClient.invalidateQueries({queryKey: ["fetch_role_types_by_query"], exact: false});
-    }
+        await queryClient.invalidateQueries({
+            queryKey: ["fetch_role_types_by_query"],
+            exact: false,
+        });
+    };
 
     return useMutation({
         mutationKey: ["delete_single_role_type"],
@@ -53,5 +84,5 @@ export default function useRoleTypeDeleteMutation(params: OnDeleteMutationParams
         onSuccess,
         onError,
         onSettled,
-    })
+    });
 }
