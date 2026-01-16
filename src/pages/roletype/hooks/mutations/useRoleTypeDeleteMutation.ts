@@ -63,7 +63,7 @@ export default function useRoleTypeDeleteMutation(
      * Handles deletion errors.
      */
     const onError = (error: unknown) => {
-        const displayMessage = errorMessage ?? "";
+        const displayMessage = errorMessage ?? "An error occurred.";
         handleMutationResponseError({error, displayMessage});
         onDeleteError?.(error);
     };

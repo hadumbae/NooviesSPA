@@ -24,7 +24,7 @@ export const RoleTypeQueryKeys = {
     /**
      * Root query key for all role type queries.
      */
-    all: ["roleType"] as const,
+    all: ["roleTypes"] as const,
 
     /**
      * Query key for fetching a single role type by ID.
@@ -32,7 +32,7 @@ export const RoleTypeQueryKeys = {
      * @param params - ID-based query parameters
      */
     ids: (params?: QueryKeyByIDParams) =>
-        [...RoleTypeQueryKeys.all, "id", params] as const,
+        [...RoleTypeQueryKeys.all, "id", params ?? {}] as const,
 
     /**
      * Query key for fetching filtered role type lists.
@@ -40,7 +40,7 @@ export const RoleTypeQueryKeys = {
      * @param params - Arbitrary query and request options
      */
     query: (params?: QueryKeyByOptionsParams) =>
-        [...RoleTypeQueryKeys.all, "lists", "query", params] as const,
+        [...RoleTypeQueryKeys.all, "lists", "query", params ?? {}] as const,
 
     /**
      * Query key for fetching paginated role type lists.
@@ -48,5 +48,5 @@ export const RoleTypeQueryKeys = {
      * @param params - Pagination, filters, and request options
      */
     paginated: (params?: QueryKeyByPaginationParams) =>
-        [...RoleTypeQueryKeys.all, "lists", "paginated", params] as const,
+        [...RoleTypeQueryKeys.all, "lists", "paginated", params ?? {}] as const,
 };
