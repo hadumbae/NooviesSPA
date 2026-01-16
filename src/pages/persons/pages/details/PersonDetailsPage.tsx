@@ -1,14 +1,25 @@
+/**
+ * @file PersonDetailsPage.tsx
+ *
+ * Route-level page for displaying detailed information about a single `Person`.
+ *
+ * Responsibilities:
+ * - Resolves the person ID from route/search params
+ * - Fetches person details and grouped movie credits in parallel
+ * - Validates all fetched data before rendering
+ * - Provides UI state context for editing and destructive actions
+ */
+
 import {FC} from 'react';
-import useFetchPersonParams from "@/pages/persons/hooks/params/admin/useFetchPersonParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import useFetchPerson from "@/pages/persons/hooks/fetch/useFetchPerson.ts";
-import useFetchGroupedMovieCreditsForPerson
-    from "@/pages/moviecredit/hooks/queries/useFetchGroupedMovieCreditsForPerson.ts";
-import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
-import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
-import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
+import useFetchGroupedMovieCreditsForPerson from "@/pages/moviecredit/hooks/queries/useFetchGroupedMovieCreditsForPerson.ts";
 import {PersonDetailsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import PersonDetailsUIProvider from "@/pages/persons/providers/PersonDetailsUIProvider.tsx";
+import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
+import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
+import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
+import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
 import {
     MovieCreditDetailsExceptPersonByRoleArraySchema
 } from "@/pages/moviecredit/schemas/model/MovieCreditGroup.schema.ts";
@@ -17,54 +28,46 @@ import PersonDetailsPageContent, {
 } from "@/pages/persons/pages/details/PersonDetailsPageContent.tsx";
 
 /**
- * **Person Details Page**
+ * Page component for rendering a person's detailed profile.
  *
- * Top-level page component for displaying a single person's detailed profile.
+ * Data flow:
+ * - Person metadata → `useFetchPerson`
+ * - Movie credits grouped by role → `useFetchGroupedMovieCreditsForPerson`
  *
- * @remarks
- * - Fetches person details and grouped movie credits in parallel using React Query hooks:
- *   - {@link useFetchPerson} for person metadata
- *   - {@link useFetchGroupedMovieCreditsForPerson} for grouped movie credits
- * - Validates the fetched data using:
- *   - {@link PersonDetailsSchema} for person details
- *   - {@link MovieCreditDetailsExceptPersonByRoleArraySchema} for movie credits
- * - Uses a combined query boundary approach:
- *   - {@link CombinedQueryBoundary} handles asynchronous query loading and errors
- *   - {@link CombinedValidatedQueryBoundary} validates the returned data before rendering
- * - Wraps content in {@link PersonDetailsUIProvider} to provide UI state context for:
- *   - Editing mode
- *   - Profile image updates
- *   - Deletion confirmation
- * - Renders the main page content via {@link PersonDetailsPageContent}.
- *
- * @example
- * ```tsx
- * <PersonDetailsPage />
- * ```
+ * All queries are validated before rendering via `MultiQueryDataLoader`.
  */
 const PersonDetailsPage: FC = () => {
-    const {personID} = useFetchPersonParams() ?? {};
-    if (!personID) return <PageLoader/>;
+    const {_id: personID} = useFetchByIdentifierRouteParams({
+        schema: IDRouteParamSchema,
+        sourceComponent: PersonDetailsPage.name,
+        errorTo: "Invalid Person Identifier."
+    }) ?? {};
 
-    // ⚡ Queries ⚡
-    const personQuery = useFetchPerson({_id: personID, populate: true, virtuals: true});
+    if (!personID) {
+        return <PageLoader/>;
+    }
+
+    const personQuery = useFetchPerson({_id: personID, config: {populate: true, virtuals: true}});
     const creditQuery = useFetchGroupedMovieCreditsForPerson({personID, limit: 10});
 
-    const queries = [personQuery, creditQuery];
-
-    // ⚡ Validation ⚡
-    const validationQueries: CombinedSchemaQuery[] = [
-        {key: "person", query: personQuery, schema: PersonDetailsSchema},
-        {key: "creditsByRole", query: creditQuery, schema: MovieCreditDetailsExceptPersonByRoleArraySchema},
+    const queries: QueryDefinition[] = [
+        {
+            key: "person",
+            query: personQuery,
+            schema: PersonDetailsSchema,
+        },
+        {
+            key: "creditsByRole",
+            query: creditQuery,
+            schema: MovieCreditDetailsExceptPersonByRoleArraySchema,
+        },
     ];
 
     return (
         <PersonDetailsUIProvider>
-            <CombinedQueryBoundary queries={queries}>
-                <CombinedValidatedQueryBoundary queries={validationQueries}>
-                    {(data) => <PersonDetailsPageContent {...data as PersonDetailsPageContentProps} />}
-                </CombinedValidatedQueryBoundary>
-            </CombinedQueryBoundary>
+            <MultiQueryDataLoader queries={queries}>
+                {(data) => <PersonDetailsPageContent {...data as PersonDetailsPageContentProps}/>}
+            </MultiQueryDataLoader>
         </PersonDetailsUIProvider>
     );
 };

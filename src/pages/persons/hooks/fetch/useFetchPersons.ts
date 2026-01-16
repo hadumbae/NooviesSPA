@@ -1,97 +1,45 @@
+/**
+ * @file useFetchPersons.ts
+ *
+ * React Query hook for fetching a filtered list of Person entities.
+ *
+ * Responsibilities:
+ * - Executes list queries via `PersonRepository.query`
+ * - Normalizes request errors
+ * - Applies shared React Query option defaults
+ */
+
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import { PersonQueryFilters } from "@/pages/persons/schema/queries/PersonQueryOption.types.ts";
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
-import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
+import {PersonQueryOptions} from "@/pages/persons/schema/queries/PersonQueryOption.types.ts";
+import {OptionQueryParams} from "@/common/type/query/FetchQueryTypes.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 
 /**
- * Combined query parameters type for fetching persons.
+ * Fetches a list of persons using optional query filters.
  *
- * @template TData The expected type of the data returned by the query.
+ * @template TData Expected response data shape.
  *
- * This type combines:
- * - {@link RequestOptions} — controls population, virtual fields, and result limits
- * - {@link RequestPaginationOptions} — pagination settings such as page number and page size
- * - {@link PersonQueryFilters} — filters specific to the person entity like `_id`, `name`, and `nationality`
- * - {@link UseQueryOptions} — optional query behavior settings such as `staleTime`, `enabled`, `initialData`, and `placeholderData`
- */
-export type QueryParams<TData = unknown> = {
-    queries?: RequestOptions & RequestPaginationOptions & PersonQueryFilters;
-    options?: UseQueryOptions<TData>;
-};
-
-/**
- * Hook to fetch a paginated list of persons filtered by query parameters.
- *
- * @template TData The expected type of the data returned by the query. Can be an array or object.
- *
- * @param params - Object containing query parameters and optional query options.
- * @param params.queries - Combined filters, pagination, and request options.
- *   @see {@link RequestOptions}
- *   @see {@link RequestPaginationOptions}
- *   @see {@link PersonQueryFilters}
- * @param params.options - Optional query behavior settings.
- *   @see {@link UseQueryOptions#enabled}
- *   @see {@link UseQueryOptions#staleTime}
- *   @see {@link UseQueryOptions#initialData}
- *   @see {@link UseQueryOptions#placeholderData}
- *
- * @returns A {@link UseQueryResult} containing the fetched persons or an {@link HttpResponseError} on failure.
+ * @param params - Query filters, request configuration, and query options.
+ * @returns React Query result containing fetched persons or an error.
  *
  * @remarks
- * - Uses {@link PersonRepository.query} for data fetching.
- * - Errors are handled via {@link useQueryFnHandler} with a standardized message.
- * - Defaults: `staleTime = 60_000ms`, `enabled = true`.
- * - `placeholderData` retains previous results during background refetches for smoother UX.
- *
- * @example
- * ```tsx
- * const { data, isLoading, error } = useFetchPersons({
- *   queries: {
- *     paginated: true,
- *     page: 1,
- *     perPage: 20,
- *     name: "Alice",
- *     nationality: "US",
- *     populate: true
- *   },
- *   options: { staleTime: 1000 * 30 }
- * });
- *
- * if (isLoading) return <Spinner />;
- * if (error) return <ErrorMessage>{error.message}</ErrorMessage>;
- *
- * return <PersonTable persons={data?.results} />;
- * ```
+ * - Uses `PersonRepository.query` internally.
+ * - Previous data may be retained during background refetches.
  */
 export default function useFetchPersons<TData = unknown>(
-    params?: QueryParams<TData>
+    {queries, config, options}: OptionQueryParams<PersonQueryOptions, TData> = {}
 ): UseQueryResult<TData, HttpResponseError> {
-    const {
-        queries = {},
-        options: {
-            enabled = true,
-            staleTime = 1000 * 60,
-            placeholderData = (previousData: TData | undefined) => previousData,
-            initialData
-        } = {}
-    } = params || {};
-
-    const queryKey = ["fetch_person_by_query", queries] as const;
-
     const fetchPersons = useQueryFnHandler({
-        action: () => PersonRepository.query({ queries }),
+        action: () => PersonRepository.query({ queries, config }),
         errorMessage: "Failed to fetch person(s) data. Please try again.",
     });
 
     return useQuery({
-        queryKey,
+        queryKey: ["persons", "lists", "query", {...queries, ...config}],
         queryFn: fetchPersons,
-        enabled,
-        staleTime,
-        placeholderData,
-        initialData
+        ...useQueryOptionDefaults(options),
     });
 }

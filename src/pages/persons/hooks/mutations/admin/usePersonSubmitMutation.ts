@@ -1,5 +1,18 @@
+/**
+ * @file usePersonSubmitMutation.ts
+ *
+ * React Query mutation hook for creating or updating `Person` entities.
+ *
+ * Responsibilities:
+ * - Executes create or update requests
+ * - Normalizes API errors
+ * - Validates responses against `PersonSchema`
+ * - Maps server errors into form state
+ * - Invalidates relevant person queries on success
+ */
+
 import {UseFormReturn} from "react-hook-form";
-import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import PersonRepository from "@/pages/persons/repositories/PersonRepository.ts";
 import {PersonSchema} from "@/pages/persons/schema/person/Person.schema.ts";
@@ -8,86 +21,44 @@ import {PersonForm, PersonFormValues} from "@/pages/persons/schema/forms/PersonF
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {PersonQueryKeys} from "@/pages/persons/utiliities/query/PersonQueryKeys.ts";
 
 /**
- * Parameters for submitting a `Person` form mutation.
- *
- * Extends {@link MutationOnSubmitParams} (excluding `onSubmitSuccess` and `onSubmitError`)
- * and merges with {@link MutationEditByIDParams} to support both create and update workflows.
+ * Parameters for submitting `Person` form data.
  */
-export type PersonSubmitParams =
-    Omit<MutationOnSubmitParams, "onSubmitSuccess" | "onSubmitError"> &
-    MutationEditByIDParams &
-    {
-        /**
-         * The `react-hook-form` instance managing the `PersonFormValues` state.
-         */
-        form: UseFormReturn<PersonFormValues>;
-
-        /**
-         * Optional callback invoked when the mutation succeeds.
-         *
-         * @param person - The successfully created or updated `Person` object.
-         */
-        onSubmitSuccess?: (person: Person) => void;
-
-        /**
-         * Optional callback invoked when the mutation fails.
-         *
-         * @param error - The error returned from the failed submission.
-         */
-        onSubmitError?: (error: unknown) => void;
-    };
+export type PersonSubmitParams = MutationOnSubmitParams<Person> & {
+    /** Form instance controlling the submission. */
+    form: UseFormReturn<PersonFormValues>;
+    /** Optional ID enabling update mode when present. */
+    editID?: ObjectId;
+};
 
 /**
- * React hook for handling `Person` form submissions, supporting both create and update operations.
+ * Handles submission of `Person` form data.
  *
- * Uses:
- * - **react-query**'s `useMutation` to manage request lifecycle.
- * - **react-hook-form** for form state.
- * - Zod validation (`PersonSchema`) to ensure server responses are valid.
- * - Toast notifications for user feedback.
- *
- * @param params - The mutation parameters including the form instance, editing mode, and optional callbacks/messages.
- *
- * @returns A `UseMutationResult` from `react-query`, typed as:
- *          - `data` → `Person` on success
- *          - `error` → `unknown` on failure
- *          - `variables` → `PersonForm` submitted
- *
- * @example
- * ```ts
- * const mutation = usePersonSubmitMutation({
- *   form,
- *   isEditing: true,
- *   _id: somePersonId,
- *   successMessage: "Person updated!",
- *   onSubmitSuccess: (person) => console.log("Updated:", person),
- * });
- *
- * form.handleSubmit(mutation.mutate);
- * ```
+ * Automatically selects create or update behavior based on `editID`.
  */
 export default function usePersonSubmitMutation(
     params: PersonSubmitParams
 ): UseMutationResult<Person, unknown, PersonForm> {
     const {
         form,
-        _id,
-        isEditing,
         onSubmitSuccess,
         onSubmitError,
         successMessage,
         errorMessage,
+        editID,
     } = params;
 
-    const queryClient = useQueryClient();
+    const invalidateQueries = useInvalidateQueryKeys();
 
     const submitPersonData = async (data: PersonForm) => {
-        const action = isEditing
-            ? () => PersonRepository.update<Person>({_id, data})
-            : () => PersonRepository.create<Person>({data});
+        const action = editID
+            ? () => PersonRepository.update({_id: editID, data})
+            : () => PersonRepository.create({data});
 
         const result = await handleMutationResponse({
             action,
@@ -97,28 +68,35 @@ export default function usePersonSubmitMutation(
         const {data: person, success, error} = validateData({
             data: result,
             schema: PersonSchema,
-            message: "Invalid data returned. Please try again."
+            message: "Invalid data returned. Please try again.",
         });
 
         if (!success || error) throw error;
         return person;
-    }
+    };
 
-    const onSuccess = async (person: Person) => {
-        const message = `Person ${isEditing ? "updated" : "created"} successfully.`;
-        toast.success(successMessage ?? message);
+    const onSuccess = (person: Person) => {
+        invalidateQueries(
+            [
+                PersonQueryKeys.ids(),
+                PersonQueryKeys.slugs(),
+                PersonQueryKeys.query(),
+                PersonQueryKeys.paginated(),
+            ],
+            {exact: false},
+        );
 
-        await Promise.all([
-            queryClient.invalidateQueries({queryKey: ["fetch_single_person"], exact: false}),
-            queryClient.invalidateQueries({queryKey: ["fetch_person_by_query"], exact: false}),
-        ]);
-
+        successMessage && toast.success(successMessage);
         onSubmitSuccess?.(person);
-    }
+    };
 
     const onError = (error: unknown) => {
-        const displayMessage = errorMessage ?? "Failed to submit person data. Please try again.";
-        handleMutationFormError({form, error, displayMessage});
+        handleMutationFormError({
+            form,
+            error,
+            displayMessage: errorMessage ?? "An error occurred.",
+        });
+
         onSubmitError?.(error);
     };
 
@@ -129,4 +107,3 @@ export default function usePersonSubmitMutation(
         onError,
     });
 }
-
