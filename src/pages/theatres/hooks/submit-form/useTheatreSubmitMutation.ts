@@ -1,14 +1,14 @@
 /**
  * @file useTheatreSubmitMutation.ts
  *
- * React Query mutation hook for submitting theatre form data.
+ * React Query mutation hook for creating or updating `Theatre` entities.
  *
- * Supports both create and update workflows, handling:
- * - API submission via {@link TheatreRepository}
- * - Response validation with {@link TheatreSchema}
- * - Toast-based user feedback
- * - Form-level error mapping
- * - Query cache invalidation
+ * Responsibilities:
+ * - Submit form data via {@link TheatreRepository}
+ * - Validate responses with {@link TheatreSchema}
+ * - Surface toast notifications
+ * - Map API errors back to React Hook Form
+ * - Invalidate related theatre query caches
  */
 
 import {UseFormReturn} from "react-hook-form";
@@ -29,40 +29,35 @@ import {
     MutationOnSubmitParams,
 } from "@/common/type/form/MutationSubmitParams.ts";
 
-import {
-    TheatreIDQueryKeys,
-    TheatreListQueryKeys,
-} from "@/pages/theatres/constants/TheatreQueryKeys.ts";
-
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {TheatreQueryKeys} from "@/pages/theatres/utilities/query/TheatreQueryKeys.ts";
 
 /**
  * Parameters for {@link useTheatreSubmitMutation}.
  *
- * Composes:
- * - {@link MutationOnSubmitParams} for messaging and callbacks
- * - {@link MutationEditByIDParams} for edit state and entity ID
- * - {@link UseFormReturn} for form state management
+ * Combines:
+ * - Submit lifecycle callbacks and messaging
+ * - Optional edit mode and entity ID
+ * - React Hook Form instance
  */
-export type TheatreSubmitMutationParams = MutationOnSubmitParams<Theatre> & MutationEditByIDParams & {
+export type TheatreSubmitMutationParams =
+    MutationOnSubmitParams<Theatre> &
+    MutationEditByIDParams & {
     /**
-     * React Hook Form instance bound to the theatre form.
+     * Bound React Hook Form instance.
      */
     form: UseFormReturn<TheatreFormValues>;
 };
 
 /**
- * React hook for submitting theatre form data.
+ * Mutation hook for submitting theatre form data.
  *
- * Internally wraps {@link useMutation} to:
- * - Create or update a theatre entity
- * - Validate returned data against a schema
- * - Display success and error notifications
- * - Handle API-driven form errors
- * - Invalidate relevant theatre queries
+ * Automatically switches between create and update modes
+ * based on `isEditing`, validates responses, and keeps the
+ * React Query cache in sync.
  *
- * @param params - Mutation configuration and form handlers.
- * @returns A {@link UseMutationResult} for theatre submission.
+ * @param params Mutation configuration and form handlers
+ * @returns React Query mutation result
  *
  * @example
  * ```ts
@@ -91,26 +86,14 @@ export default function useTheatreSubmitMutation(
     } = params;
 
     /**
-     * Query keys invalidated after a successful mutation.
-     *
-     * Covers:
-     * - Theatre detail queries
-     * - Theatre list queries
+     * Invalidates theatre-related query caches after mutation.
      */
-    const keys = [...TheatreIDQueryKeys, ...TheatreListQueryKeys].map(key => [key]);
-    const invalidateQueries = useInvalidateQueryKeys({keys, exact: false});
+    const invalidateQueries = useInvalidateQueryKeys();
 
     /**
-     * Submits theatre data to the backend.
+     * Executes the create or update request and validates the response.
      *
-     * - Chooses create or update based on `isEditing`
-     * - Normalizes API error handling
-     * - Validates the response payload
-     *
-     * @param values - Form values to submit.
-     * @returns The validated {@link Theatre} entity.
-     *
-     * @throws {@link ParseError} If returned data fails schema validation.
+     * @throws {@link ParseError} When schema validation fails
      */
     const submitTheatreData = async (values: TheatreForm): Promise<Theatre> => {
         const action = isEditing
@@ -136,27 +119,29 @@ export default function useTheatreSubmitMutation(
     };
 
     /**
-     * Handles successful mutation completion.
-     *
-     * - Invalidates cached theatre queries
-     * - Displays a success notification
-     * - Invokes the optional success callback
+     * Handles successful submission.
      */
-    const onSuccess = async (theatre: Theatre): Promise<void> => {
-        await invalidateQueries();
+    const onSuccess = (theatre: Theatre): void => {
+        invalidateQueries(
+            [
+                TheatreQueryKeys.ids({_id: theatre._id}),
+                TheatreQueryKeys.slugs({slug: theatre.slug}),
+                TheatreQueryKeys.paginated(),
+                TheatreQueryKeys.query(),
+            ],
+            {exact: false},
+        );
 
-        const message = isEditing ? "Theatre updated." : "Theatre created.";
-        toast.success(successMessage || message);
+        toast.success(
+            successMessage ??
+            (isEditing ? "Theatre updated." : "Theatre created.")
+        );
 
         onSubmitSuccess?.(theatre);
     };
 
     /**
-     * Handles mutation errors.
-     *
-     * - Displays an error notification
-     * - Maps API errors back to the form
-     * - Invokes the optional error callback
+     * Handles submission errors.
      */
     const onError = (error: unknown): void => {
         toast.error(errorMessage || "Oops. Something went wrong.");
@@ -165,7 +150,7 @@ export default function useTheatreSubmitMutation(
     };
 
     /**
-     * Registers the theatre submission mutation.
+     * Registers the mutation.
      */
     return useMutation({
         mutationKey: ["submit_theatre_data"],

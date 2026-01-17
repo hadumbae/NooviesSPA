@@ -1,3 +1,15 @@
+/**
+ * @file useTheatreDeleteMutation.ts
+ *
+ * React Query mutation hook for deleting `Theatre` entities.
+ *
+ * Handles:
+ * - Delete requests via {@link TheatreRepository}
+ * - Toast-based user feedback
+ * - Cache invalidation for theatre list queries
+ * - Optional lifecycle callbacks
+ */
+
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 
@@ -8,23 +20,17 @@ import {ParseError} from "@/common/errors/ParseError.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
-import {TheatreListQueryKeys} from "@/pages/theatres/constants/TheatreQueryKeys.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {TheatreQueryKeys} from "@/pages/theatres/utilities/query/TheatreQueryKeys.ts";
 
 /**
- * React Query mutation hook for deleting a theatre.
+ * Mutation hook for deleting a single theatre by ID.
  *
- * Encapsulates the full delete workflow:
- * - Executes the delete request via {@link TheatreRepository}
- * - Displays user feedback via toast notifications
- * - Invalidates theatre list queries after deletion
- * - Executes optional success and error callbacks
+ * Intended for administrative or management workflows
+ * where theatre entities can be permanently removed.
  *
- * Intended for admin or management views where theatres
- * can be removed permanently.
- *
- * @param options - Delete mutation configuration.
- * @returns A {@link UseMutationResult} configured for theatre deletion.
+ * @param options Delete mutation configuration
+ * @returns React Query mutation result
  *
  * @example
  * ```ts
@@ -46,16 +52,12 @@ export default function useTheatreDeleteMutation(
     } = options;
 
     /**
-     * Theatre list queries to invalidate after deletion.
+     * Invalidates theatre list queries after deletion.
      */
-    const keys = TheatreListQueryKeys.map(key => [key]);
-    const invalidateQueries = useInvalidateQueryKeys({keys, exact: false});
+    const invalidateQueries = useInvalidateQueryKeys();
 
     /**
-     * Deletes a theatre by ID.
-     *
-     * @param params - Deletion parameters.
-     * @param params._id - Unique identifier of the theatre.
+     * Executes the delete request.
      */
     const deleteTheatre = async ({_id}: { _id: ObjectId }): Promise<void> => {
         await handleMutationResponse({
@@ -66,13 +68,12 @@ export default function useTheatreDeleteMutation(
 
     /**
      * Handles successful deletion.
-     *
-     * - Invalidates theatre list queries
-     * - Displays a success notification
-     * - Executes optional success callback
      */
-    const onSuccess = async (): Promise<void> => {
-        await invalidateQueries();
+    const onSuccess = (): void => {
+        invalidateQueries(
+            [TheatreQueryKeys.paginated(), TheatreQueryKeys.query()],
+            {exact: false},
+        );
 
         toast.success(successMessage ?? "Theatre deleted.");
         onDeleteSuccess?.();
@@ -80,11 +81,6 @@ export default function useTheatreDeleteMutation(
 
     /**
      * Handles deletion errors.
-     *
-     * - Displays an error notification
-     * - Executes optional error callback
-     *
-     * @param error - Error thrown during deletion.
      */
     const onError = (error: Error | ParseError): void => {
         toast.error(
@@ -97,7 +93,7 @@ export default function useTheatreDeleteMutation(
     };
 
     /**
-     * Registers the theatre deletion mutation.
+     * Registers the mutation.
      */
     return useMutation({
         mutationKey: ["delete_single_theatre"],
