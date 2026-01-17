@@ -1,12 +1,12 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
-import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
-import {Clapperboard, Search, Sofa, TvMinimal} from "lucide-react";
+import {Clapperboard, Sofa, TvMinimal} from "lucide-react";
 import generateLocationAddressString from "@/common/utility/features/location/generateLocationAddressString.ts";
 import StatItem from "@/common/components/stat-details/StatItem.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
 import TooltipStatItem from "@/common/components/stat-details/TooltipStatItem.tsx";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 
 /**
  * Props for the `TheatreIndexCard` component.
@@ -69,26 +69,19 @@ const TheatreIndexCard: FC<TheatreIndexCardProps> = ({theatre}) => {
     );
 
     return (
-        <Card>
-            <CardContent className="p-4 flex">
-                <section className="flex-grow space-y-2">
-                        <h1 className="text-xl font-extrabold">{name}</h1>
-                        <h2 className="text-neutral-400 text-sm">{addressString}</h2>
-                        <div className="text-neutral-400 gap-10 flex items-center">
-                            {screenCountStat}
-                            {theatreSeatCount}
-                            {showingCount}
-                        </div>
-                </section>
-
-                <section className="flex justify-end items-center">
-                    <ButtonLink to={`/admin/theatres/get/${slug}`} variant="outline">
-                        <Search />
-                    </ButtonLink>
-                </section>
-
-            </CardContent>
-        </Card>
+        <LoggedLink to={`/admin/theatres/get/${slug}`}>
+            <Card className="hover:shadow-md">
+                <CardContent className="flex-grow space-y-2 p-4">
+                    <h1 className="text-xl font-extrabold">{name}</h1>
+                    <h2 className="text-neutral-400 text-sm">{addressString}</h2>
+                    <div className="text-neutral-400 gap-10 flex items-center">
+                        {screenCountStat}
+                        {theatreSeatCount}
+                        {showingCount}
+                    </div>
+                </CardContent>
+            </Card>
+        </LoggedLink>
     );
 };
 
