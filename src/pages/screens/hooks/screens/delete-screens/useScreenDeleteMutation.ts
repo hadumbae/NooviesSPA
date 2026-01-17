@@ -14,7 +14,7 @@ import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts
 import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {ScreenListQueryKeys} from "@/pages/screens/constants/ScreenQueryKeys.ts";
+import {ScreenQueryKeys} from "@/pages/screens/utilities/query/ScreenQueryKeys.ts";
 
 /**
  * # useScreenDeleteMutation Hook
@@ -44,16 +44,15 @@ import {ScreenListQueryKeys} from "@/pages/screens/constants/ScreenQueryKeys.ts"
  */
 export default function useScreenDeleteMutation(
     params: OnDeleteMutationParams = {}
-): UseMutationResult<void, unknown, {_id: ObjectId}> {
+): UseMutationResult<void, unknown, { _id: ObjectId }> {
     const {onDeleteSuccess, onDeleteError, successMessage, errorMessage} = params;
 
-    const keys = ScreenListQueryKeys.map(key => [key]);
-    const invalidateQueries = useInvalidateQueryKeys({keys, exact: false});
+    const invalidateQueries = useInvalidateQueryKeys();
 
     /**
      * Executes the deletion request.
      */
-    const deleteScreen = async ({_id}: {_id: ObjectId}) => {
+    const deleteScreen = async ({_id}: { _id: ObjectId }) => {
         await handleQueryResponse({
             action: () => ScreenRepository.delete({_id}),
             errorMessage: "Failed to delete screen data. Please try again.",
@@ -64,8 +63,12 @@ export default function useScreenDeleteMutation(
      * Handles a successful deletion.
      */
     const onSuccess = async () => {
+        invalidateQueries(
+            [ScreenQueryKeys.query(), ScreenQueryKeys.paginated()],
+            {exact: false},
+        );
+
         toast.success(successMessage ?? "Screen deleted.");
-        invalidateQueries();
         onDeleteSuccess?.();
     };
 

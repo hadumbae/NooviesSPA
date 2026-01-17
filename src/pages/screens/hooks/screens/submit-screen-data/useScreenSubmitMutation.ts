@@ -17,7 +17,7 @@ import handleMutationResponse from "@/common/handlers/mutation/handleMutationRes
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {SubmitMutationParams} from "@/common/type/form/MutationSubmitParams.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {ScreenIDQueryKeys, ScreenListQueryKeys} from "@/pages/screens/constants/ScreenQueryKeys.ts";
+import {ScreenQueryKeys} from "@/pages/screens/utilities/query/ScreenQueryKeys.ts";
 
 /**
  * Parameters for {@link useScreenSubmitMutation}.
@@ -64,8 +64,7 @@ export default function useScreenSubmitMutation(
 
     const queryOptions = {populate: true, virtuals: true};
 
-    const keys = [...ScreenIDQueryKeys, ...ScreenListQueryKeys].map(key => [key]);
-    const invalidateQueries = useInvalidateQueryKeys({keys, exact: false});
+    const invalidateQueries = useInvalidateQueryKeys();
 
     /**
      * Executes the create or update request.
@@ -97,12 +96,17 @@ export default function useScreenSubmitMutation(
      * Handles a successful mutation.
      */
     const onSuccess = (screen: ScreenDetails) => {
-        const fallbackMessage = editID
-            ? "Screen updated successfully."
-            : "Screen created successfully.";
+        invalidateQueries(
+            [
+                ScreenQueryKeys.ids({_id: screen._id}),
+                ScreenQueryKeys.slugs({slug: screen.slug}),
+                ScreenQueryKeys.query(),
+                ScreenQueryKeys.paginated(),
+            ],
+            {exact: false}
+        );
 
-        toast.success(successMessage || fallbackMessage);
-        invalidateQueries();
+        successMessage && toast.success(successMessage);
         onSubmitSuccess?.(screen);
     };
 
