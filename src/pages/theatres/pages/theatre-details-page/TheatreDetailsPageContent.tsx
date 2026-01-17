@@ -1,7 +1,8 @@
 import {FC} from 'react';
-import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
+import {Theatre, TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import TheatreDetailsBreadcrumbs from "@/pages/theatres/components/admin/pages/theatre-details/TheatreDetailsBreadcrumbs.tsx";
+import TheatreDetailsBreadcrumbs
+    from "@/pages/theatres/components/admin/pages/theatre-details/TheatreDetailsBreadcrumbs.tsx";
 import TheatreDetailsHeader from "@/pages/theatres/components/admin/pages/theatre-details/TheatreDetailsHeader.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
@@ -13,6 +14,7 @@ import TheatreSubmitFormPanel
 import TheatreDeleteWarningDialog
     from "@/pages/theatres/components/admin/theatre-actions/TheatreDeleteWarningDialog.tsx";
 import TheatreDetailsCard from "@/pages/theatres/components/admin/theatre-details/TheatreDetailsCard.tsx";
+import useNavigateToTheatre from "@/pages/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
 
 /**
  * ⚡ **TheatreDetailsPageContent** ⚡
@@ -35,14 +37,21 @@ type TheatreDetailsPageContentProps = {
 };
 
 const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}) => {
-    // ⚡ Access Context ⚡
+    const navigate = useLoggedNavigate();
+    const updateSlugURL = useNavigateToTheatre();
+
     const {isEditing, setIsEditing, isDeleting, setIsDeleting} = useRequiredContext({
         context: TheatreDetailsUIContext,
         message: "Must be used within a provider for `TheatreDetailsUIContext`."
     });
 
-    // ⚡ Navigation ⚡
-    const navigate = useLoggedNavigate();
+    const replaceOnUpdate = (theatre: Theatre) => {
+        updateSlugURL({
+            slug: theatre.slug,
+            options: {replace: true},
+        });
+    }
+
     const navigateOnDelete = () =>
         navigate({
             level: "log",
@@ -51,7 +60,6 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
             message: "Navigating after deleting theatre.",
         });
 
-    // ⚡ Tabs + Layout ⚡
     return (
         <PageFlexWrapper>
             {/* Header */}
@@ -82,6 +90,7 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
                     entity={theatre}
                     presetOpen={isEditing}
                     setPresetOpen={setIsEditing}
+                    onSubmitSuccess={replaceOnUpdate}
                 />
             </div>
 
@@ -99,3 +108,6 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
 };
 
 export default TheatreDetailsPageContent;
+
+// http://localhost:3000/admin/theatres/get/aaa-e9mgjm
+// http://localhost:3000/admin/theatres/get/ass-2wh3m5
