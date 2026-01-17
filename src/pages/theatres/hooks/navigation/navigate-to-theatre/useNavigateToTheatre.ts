@@ -58,7 +58,7 @@ export default function useNavigateToTheatre(): (params: NavigateParams) => void
         });
 
         navigate({
-            to: `/admin/theatre/get/${slug}`,
+            to: `/admin/theatres/get/${slug}`,
             message: message ?? "Navigate to theatre details.",
             level,
             context,
