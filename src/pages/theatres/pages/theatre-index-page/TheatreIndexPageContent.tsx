@@ -1,9 +1,12 @@
 /**
  * @file TheatreIndexPageContent.tsx
  *
- * Main content renderer for the Theatre Index admin page.
- * Responsible for displaying filters, theatre cards, empty state,
- * and pagination controls.
+ * Content renderer for the Theatre Index admin page.
+ *
+ * Renders:
+ * - Page header and filter dialog
+ * - Theatre cards or empty state
+ * - Pagination controls
  */
 
 import PageSection from "@/common/components/page/PageSection.tsx";
@@ -15,85 +18,94 @@ import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.ts
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import TheatreQueryOptionFormContainer
     from "@/pages/theatres/components/admin/form/theatre-query-option/TheatreQueryOptionFormContainer.tsx";
-import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
+import {Theatre, TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {TheatreQueryOptionSchema} from "@/pages/theatres/schema/queries/TheatreQueryOption.schema.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import useNavigateToTheatre from "@/pages/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
 
 /**
  * Props for {@link TheatreIndexPageContent}.
  */
 export type TheatreIndexPageContentProps = {
-    /** Theatres to render for the current page. */
+    /** Paginated theatre results */
     theatres: TheatreDetails[];
 
-    /** Total number of theatres across all pages. */
+    /** Total number of theatres */
     totalItems: number;
 
-    /** Current pagination page (1-based). */
+    /** Current page (1-based) */
     page: number;
 
-    /** Number of theatres displayed per page. */
+    /** Items per page */
     perPage: number;
 
-    /** Updates the current page number. */
+    /** Page setter */
     setPage: (page: number) => void;
 };
 
 /**
- * **Component: TheatreIndexPageContent**
+ * Theatre Index page content.
  *
- * Renders the Theatre Index layout:
- * header → filters → theatre cards or empty state → pagination.
+ * Layout:
+ * header → filters → theatre cards / empty state → pagination
  *
- * **Behaviour**
- * - Reads filter and sort state via {@link useParsedSearchParams}
- * - Displays an empty state when no theatres are available
- * - Conditionally renders pagination controls based on result size
- *
- * **Data Flow**
- * - Receives paginated data and pagination state from the parent page
- * - Delegates filtering UI to {@link TheatreQueryOptionFormContainer}
- *
- * **Example**
- * ```tsx
- * <TheatreIndexPageContent
- *   theatres={items}
- *   totalItems={total}
- *   page={page}
- *   perPage={20}
- *   setPage={setPage}
- * />
- * ```
+ * - Filter state is derived from URL search params
+ * - Pagination rendering is conditional on total size
  *
  * @component
  */
-const TheatreIndexPageContent = (props: TheatreIndexPageContentProps) => {
-    const {theatres, page, perPage, setPage, totalItems} = props;
-    const {searchParams} = useParsedSearchParams({schema: TheatreQueryOptionSchema});
+const TheatreIndexPageContent = (
+    {theatres, page, perPage, setPage, totalItems}: TheatreIndexPageContentProps
+) => {
+    const {searchParams} = useParsedSearchParams({
+        schema: TheatreQueryOptionSchema,
+    });
 
-    const pageContent = theatres.length > 0 ? (
-        <PageSection className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {theatres.map(
-                (theatre) => <TheatreIndexCard key={theatre._id} theatre={theatre}/>
-            )}
-        </PageSection>
-    ) : (
-        <PageCenter>
-            <span className="text-neutral-400 select-none">
-                There Are No Theatres
-            </span>
-        </PageCenter>
-    );
+    const navigateToTheatre = useNavigateToTheatre();
+
+    const pageContent =
+        theatres.length > 0 ? (
+            <PageSection className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {theatres.map((theatre) => (
+                    <TheatreIndexCard
+                        key={theatre._id}
+                        theatre={theatre}
+                    />
+                ))}
+            </PageSection>
+        ) : (
+            <PageCenter>
+                <span className="text-neutral-400 select-none">
+                    There are no theatres
+                </span>
+            </PageCenter>
+        );
+
+    /**
+     * Navigates to the theatre detail page after successful submit.
+     */
+    const onSubmitSuccess = (theatre: Theatre) => {
+        navigateToTheatre({
+            slug: theatre.slug,
+            component: TheatreIndexPageContent.name,
+            message: "Navigate to theatre after submit.",
+        });
+    };
 
     return (
         <PageFlexWrapper>
-            <TheatreIndexHeader/>
+            <TheatreIndexHeader onSubmitSuccess={onSubmitSuccess}/>
 
-            <PresetFilterDialog title="Theatre Filters" description="Filter and sort theatres.">
+            <PresetFilterDialog
+                title="Theatre Filters"
+                description="Filter and sort theatres."
+            >
                 <ScrollArea className="max-h-[80vh]">
                     <ScrollBar/>
-                    <TheatreQueryOptionFormContainer presetValues={searchParams}/>
+                    <TheatreQueryOptionFormContainer
+                        presetValues={searchParams}
+                    />
                 </ScrollArea>
             </PresetFilterDialog>
 

@@ -1,13 +1,12 @@
 /**
  * @file ScreenDetailsPageContent.tsx
  *
- * Main content component for the **Screen Details** admin page.
+ * Content renderer for the Screen Details admin page.
  *
- * Responsibilities:
- * - Renders screen + theatre headers and breadcrumbs
- * - Manages tab navigation via URL search params
- * - Wires seat, form, and screen UI contexts
- * - Hosts edit and delete screen affordances
+ * Coordinates:
+ * - Screen and theatre headers
+ * - Tabbed screen views
+ * - Seat, form, and delete contexts
  */
 
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
@@ -39,19 +38,19 @@ import useScreenDetailsPageValues
 import {ScreenDetailsActiveTab}
     from "@/pages/screens/schema/params/ScreenDetailsActiveTabEnumSchema.ts";
 import useNavigateToTheatre
-    from "@/pages/theatres/hooks/navigate/navigate-to-theatre/useNavigateToTheatre.ts";
+    from "@/pages/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
 
 /**
- * Props required to render the Screen Details page.
+ * Props for {@link ScreenDetailsPageContent}.
  */
 type ContentProps = {
-    /** Parent theatre owning the screen */
+    /** Parent theatre */
     theatre: TheatreDetails;
 
-    /** Screen currently being viewed */
+    /** Screen being viewed */
     screen: ScreenDetails;
 
-    /** Seat details for the screen */
+    /** Seat data for the screen */
     seats: SeatDetailsArray;
 };
 
@@ -59,33 +58,49 @@ type ContentProps = {
  * Screen Details page content.
  *
  * Tabs:
- * - **Seats** — seat layout and selection
- * - **Create Seats** — seat creation tools
- * - **Showings** — upcoming showings for the screen
+ * - Seats
+ * - Create Seats
+ * - Showings
  *
- * Active tab state is synchronized with URL search params
- * via {@link useScreenDetailsPageValues}.
+ * Active tab and edit state are synchronized with
+ * URL search params via {@link useScreenDetailsPageValues}.
  *
- * @param theatre - Theatre details
- * @param screen - Screen details
- * @param seats - Associated seat data
+ * @component
  */
-const ScreenDetailsPageContent = ({theatre, screen, seats}: ContentProps) => {
+const ScreenDetailsPageContent = (
+    {theatre, screen, seats}: ContentProps
+) => {
     const {_id: screenID, name: screenName} = screen;
-    const {_id: theatreID, name: theatreName, slug: theatreSlug} = theatre;
+    const {
+        _id: theatreID,
+        name: theatreName,
+        slug: theatreSlug,
+    } = theatre;
 
     const {
         presetValues,
         disableFields,
-        context: {isEditing, setIsEditing, showDeleteWarning, setShowDeleteWarning},
+        context: {
+            isEditing,
+            setIsEditing,
+            showDeleteWarning,
+            setShowDeleteWarning,
+        },
         tabConfig: {activeTab, setActiveTab},
     } = useScreenDetailsPageValues({theatreID, screenID});
 
-    const navigateToTheatre = useNavigateToTheatre({
-        slug: theatreSlug,
-        source: TheatreScreenDetailsHeader.name,
-        message: "Navigate to index after deleting screen.",
-    });
+    const navigateToTheatre = useNavigateToTheatre();
+
+    /**
+     * Navigates back to the theatre after successful deletion.
+     */
+    const onDeleteSuccess = () => {
+        navigateToTheatre({
+            slug: theatreSlug,
+            component: ScreenDetailsPageContent.name,
+            message: "Navigate to theatre after deleting screen.",
+        });
+    };
 
     return (
         <PageFlexWrapper>
@@ -93,7 +108,9 @@ const ScreenDetailsPageContent = ({theatre, screen, seats}: ContentProps) => {
             {/* Header */}
 
             <section className="space-y-1">
-                <SectionHeader srOnly>Screen Details Header</SectionHeader>
+                <SectionHeader srOnly>
+                    Screen Details Header
+                </SectionHeader>
 
                 <TheatreScreenDetailsBreadcrumbs
                     theatreSlug={theatreSlug}
@@ -111,13 +128,21 @@ const ScreenDetailsPageContent = ({theatre, screen, seats}: ContentProps) => {
 
             <Tabs
                 defaultValue={activeTab}
-                onValueChange={(v) => setActiveTab(v as ScreenDetailsActiveTab)}
+                onValueChange={(v) =>
+                    setActiveTab(v as ScreenDetailsActiveTab)
+                }
             >
                 <div className="flex justify-center">
                     <TabsList>
-                        <TabsTrigger value="view-seats">Seats</TabsTrigger>
-                        <TabsTrigger value="create-seats">Create Seats</TabsTrigger>
-                        <TabsTrigger value="showings">Showings</TabsTrigger>
+                        <TabsTrigger value="view-seats">
+                            Seats
+                        </TabsTrigger>
+                        <TabsTrigger value="create-seats">
+                            Create Seats
+                        </TabsTrigger>
+                        <TabsTrigger value="showings">
+                            Showings
+                        </TabsTrigger>
                     </TabsList>
                 </div>
 
@@ -132,13 +157,18 @@ const ScreenDetailsPageContent = ({theatre, screen, seats}: ContentProps) => {
                     <ScreenDetailsCreateSeatTab/>
                 </SeatFormContextProvider>
 
-                <ScreenDetailsShowingsTab screenID={screenID}/>
+                <ScreenDetailsShowingsTab
+                    screenID={screenID}
+                />
             </Tabs>
 
             {/* Edit Screen */}
 
             <section>
-                <SectionHeader srOnly>Edit Screen</SectionHeader>
+                <SectionHeader srOnly>
+                    Edit Screen
+                </SectionHeader>
+
                 <ScreenSubmitFormPanel
                     presetOpen={isEditing}
                     setPresetOpen={setIsEditing}
@@ -148,12 +178,15 @@ const ScreenDetailsPageContent = ({theatre, screen, seats}: ContentProps) => {
             {/* Delete Screen */}
 
             <section>
-                <SectionHeader srOnly>Delete Screen</SectionHeader>
+                <SectionHeader srOnly>
+                    Delete Screen
+                </SectionHeader>
+
                 <ScreenDeleteWarningDialog
                     screenID={screenID}
                     presetOpen={showDeleteWarning}
                     setPresetOpen={setShowDeleteWarning}
-                    onDeleteSuccess={navigateToTheatre}
+                    onDeleteSuccess={onDeleteSuccess}
                 />
             </section>
         </PageFlexWrapper>
