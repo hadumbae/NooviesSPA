@@ -72,7 +72,7 @@ export default function useFetchPaginatedTheatres<TData = unknown>(
     {page, perPage, queries, config, options}: FetchQueries<TData>
 ): UseQueryResult<TData, HttpResponseError> {
     const queryKey = [
-        "fetch_paginated_theatres_by_query",
+        "theatres", "lists", "paginated",
         {page, perPage, ...queries, ...config},
     ];
 

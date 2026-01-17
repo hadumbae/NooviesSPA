@@ -74,7 +74,7 @@ export default function useFetchTheatre(
     });
 
     return useQuery({
-        queryKey: ["fetch_theatre_by_id", {_id, ...config}],
+        queryKey: ["theatres", "_id", {_id, ...config}],
         queryFn: action,
         ...useQueryOptionDefaults(options),
     });

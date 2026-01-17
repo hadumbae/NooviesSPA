@@ -34,7 +34,7 @@ export default function useFetchTheatres<TData = unknown>(
     const {queries, queryConfig, queryOptions} = params;
 
     const queryKey = [
-        "fetch_theatres_by_query",
+        "theatres", "lists", "query",
         {...queries, ...queryConfig},
     ];
 

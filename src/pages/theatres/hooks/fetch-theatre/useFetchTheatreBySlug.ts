@@ -48,7 +48,7 @@ export default function useFetchTheatreBySlug(
     });
 
     return useQuery({
-        queryKey: ["fetch_theatre_by_slug"],
+        queryKey: ["theatres", "slug", {slug, ...config}],
         queryFn: fetchTheatre,
         ...useQueryOptionDefaults(options),
     });
