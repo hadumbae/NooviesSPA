@@ -67,7 +67,7 @@ export default function useFetchScreens(
     });
 
     return useQuery({
-        queryKey: ["fetch_screens_by_query", {...queries, ...config}],
+        queryKey: ["screens", "lists", "query", {...queries, ...config}],
         queryFn: fetchScreens,
         ...useQueryOptionDefaults(options),
     });

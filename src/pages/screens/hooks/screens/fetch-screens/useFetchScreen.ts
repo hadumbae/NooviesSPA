@@ -67,7 +67,7 @@ export default function useFetchScreen(
     });
 
     return useQuery({
-        queryKey: ["fetch_screen_by_id", {_id, ...config}],
+        queryKey: ["screens", "_id", {_id, ...config}],
         queryFn: fetchScreen,
         ...useQueryOptionDefaults(options),
     });

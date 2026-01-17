@@ -66,7 +66,7 @@ export default function useFetchScreenBySlug(
     });
 
     return useQuery({
-        queryKey: ["fetch_screen_by_slug", {slug, ...config}],
+        queryKey: ["screens", "slug", {slug, ...config}],
         queryFn: fetchScreen,
         ...useQueryOptionDefaults(options),
     });

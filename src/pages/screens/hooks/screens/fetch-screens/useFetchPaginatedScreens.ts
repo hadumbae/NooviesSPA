@@ -71,7 +71,7 @@ export default function useFetchPaginatedScreens(
     });
 
     return useQuery({
-        queryKey: ["fetch_paginated_screens_by_query", {page, perPage, ...queries, ...config}],
+        queryKey: ["screens", "lists", "paginated", {page, perPage, ...queries, ...config}],
         queryFn: fetchScreens,
         ...useQueryOptionDefaults(options),
     });
