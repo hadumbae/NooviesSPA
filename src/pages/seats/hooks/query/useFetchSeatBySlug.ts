@@ -50,7 +50,7 @@ export default function useFetchSeatBySlug(
     });
 
     return useQuery({
-        queryKey: ["fetch_seat_by_slug", {slug, ...config}],
+        queryKey: ["seats", "slug", {slug, ...config}],
         queryFn: fetchSeat,
         ...useQueryOptionDefaults(options),
     });

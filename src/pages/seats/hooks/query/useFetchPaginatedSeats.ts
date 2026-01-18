@@ -67,7 +67,7 @@ export default function useFetchPaginatedSeats(
     {page, perPage, queries, config, options}: FetchParams
 ): UseQueryResult<unknown, HttpResponseError> {
     const queryKey = [
-        "fetch_paginated_seats_by_query",
+        "seats", "lists", "paginated",
         {page, perPage, ...queries, ...config},
     ];
 

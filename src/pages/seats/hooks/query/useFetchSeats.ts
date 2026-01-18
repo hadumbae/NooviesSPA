@@ -67,7 +67,7 @@ export default function useFetchSeats(
     });
 
     return useQuery({
-        queryKey: ["fetch_seats_by_query", {...queries, ...config}],
+        queryKey: ["seats", "lists", "query", {...queries, ...config}],
         queryFn: fetchSeats,
         ...useQueryOptionDefaults(options),
     });

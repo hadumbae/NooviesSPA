@@ -69,7 +69,7 @@ export default function useFetchSeat(
     });
 
     return useQuery({
-        queryKey: ["fetch_seat_by_id", {_id, ...config}],
+        queryKey: ["seats", "_id", {_id, ...config}],
         queryFn: fetchSeat,
         ...useQueryOptionDefaults(options),
     });
