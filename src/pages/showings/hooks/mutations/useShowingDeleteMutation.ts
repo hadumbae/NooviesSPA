@@ -18,8 +18,8 @@ import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.t
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
-import {ShowingListQueryKeys} from "@/pages/showings/constants/ShowingQueryKeys.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {ShowingQueryKeys} from "@/pages/showings/utilities/query/ShowingQueryKeys.ts";
 
 /**
  * Provides a mutation for deleting a single Showing.
@@ -32,8 +32,7 @@ import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.
 export default function useShowingDeleteMutation(params: OnDeleteMutationParams) {
     const {successMessage, onDeleteSuccess, errorMessage, onDeleteError} = params;
 
-    const keys = ShowingListQueryKeys.map(key => [key]);
-    const invalidateQueries = useInvalidateQueryKeys({keys, exact: false});
+    const invalidateQueries = useInvalidateQueryKeys();
 
     /**
      * Executes the delete request for a Showing.
@@ -47,7 +46,10 @@ export default function useShowingDeleteMutation(params: OnDeleteMutationParams)
      * Handles successful deletion.
      */
     const onSuccess = () => {
-        invalidateQueries();
+        invalidateQueries(
+            [ShowingQueryKeys.paginated(), ShowingQueryKeys.query()],
+            {exact: false}
+        );
 
         successMessage && toast.error(successMessage);
         onDeleteSuccess?.();

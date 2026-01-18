@@ -22,7 +22,7 @@ import handleMutationFormError from "@/common/utility/handlers/handleMutationFor
 import {SubmitMutationParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {ShowingIDQueryKeys, ShowingListQueryKeys} from "@/pages/showings/constants/ShowingQueryKeys.ts";
+import {ShowingQueryKeys} from "@/pages/showings/utilities/query/ShowingQueryKeys.ts";
 
 /**
  * Mutation parameters for submitting a Showing form.
@@ -57,9 +57,7 @@ export default function useShowingSubmitMutation(
     } = params;
 
     const config = {populate: true, virtuals: true};
-
-    const keys = [...ShowingIDQueryKeys, ...ShowingListQueryKeys].map(key => [key]);
-    const invalidateQueries = useInvalidateQueryKeys({keys});
+    const invalidateQueries = useInvalidateQueryKeys();
 
     /**
      * Executes a create or update request for a Showing.
@@ -86,7 +84,16 @@ export default function useShowingSubmitMutation(
      * Handles successful mutation resolution.
      */
     const onSuccess = (showing: ShowingDetails) => {
-        invalidateQueries();
+        invalidateQueries(
+            [
+                ShowingQueryKeys.ids({_id: showing._id}),
+                ShowingQueryKeys.slugs({slug: showing.slug}),
+                ShowingQueryKeys.paginated(),
+                ShowingQueryKeys.query(),
+            ],
+            {exact: false}
+        );
+
         successMessage && toast.success(successMessage);
         onSubmitSuccess?.(showing);
     };
