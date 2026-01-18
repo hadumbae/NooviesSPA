@@ -43,17 +43,15 @@ type FetchParams = {
  * ```
  */
 export default function useFetchShowingBySlug(
-    params: FetchParams
+    {slug, config, options}: FetchParams
 ): UseQueryResult<unknown, HttpResponseError> {
-    const {slug, config, options} = params;
-
     const fetchShowing = useQueryFnHandler({
         action: () => ShowingRepository.getBySlug({slug, config}),
         errorMessage: "Failed to fetch showing.",
     });
 
     return useQuery({
-        queryKey: ["fetch_showing_by_slug", {slug, ...config}],
+        queryKey: ["showings", "slug", {slug, ...config}],
         queryFn: fetchShowing,
         ...useQueryOptionDefaults(options),
     });

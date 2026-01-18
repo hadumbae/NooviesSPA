@@ -48,17 +48,15 @@ type FetchParams = {
  * ```
  */
 export default function useFetchShowings(
-    params: FetchParams = {}
+    {queries, config, options}: FetchParams = {}
 ): UseQueryResult<unknown, HttpResponseError> {
-    const {queries, config, options} = params;
-
     const fetchShowingsByQuery = useQueryFnHandler({
         action: () => ShowingRepository.query({queries, config}),
         errorMessage: "Failed to fetch showings.",
     });
 
     return useQuery({
-        queryKey: ["fetch_showings_by_query", {...queries, ...config}],
+        queryKey: ["showings", "lists", "query", {...queries, ...config}],
         queryFn: fetchShowingsByQuery,
         ...useQueryOptionDefaults(options),
     });

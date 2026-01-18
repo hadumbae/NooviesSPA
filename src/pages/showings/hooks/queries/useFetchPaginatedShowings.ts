@@ -17,7 +17,6 @@ import {ShowingQueryOptions} from "@/pages/showings/schema/queries/ShowingQueryO
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import ShowingRepository from "@/pages/showings/repositories/ShowingRepository.ts";
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
@@ -53,23 +52,16 @@ type FetchParams<TData = unknown> = PaginationValues & {
  * ```
  */
 export default function useFetchPaginatedShowings(
-    params: FetchParams
+    {page, perPage, queries, config, options}: FetchParams
 ): UseQueryResult<unknown, HttpResponseError> {
-    const {page, perPage, queries, config, options} = params;
-
-    const queryKey = [
-        "fetch_paginated_showings_by_query",
-        filterNullishAttributes({...queries, ...config}),
-    ];
-
-    const queryFn = useQueryFnHandler({
+    const fetchShowings = useQueryFnHandler({
         action: () => ShowingRepository.paginated({page, perPage, queries, config}),
         errorMessage: "Failed to fetch paginated showings.",
     });
 
     return useQuery({
-        queryKey,
-        queryFn,
+        queryKey: ["showings", "lists", "paginated",{...queries, ...config}],
+        queryFn: fetchShowings,
         ...useQueryOptionDefaults(options),
     });
 }
