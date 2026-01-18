@@ -9,6 +9,7 @@ import AdminSidebar from "@/common/layout/admin-layout/sidebar/AdminSidebar.tsx"
 import AdminLayoutHeader from "@/common/layout/admin-layout/layout/AdminLayoutHeader.tsx";
 import AdminLayoutContent from "@/common/layout/admin-layout/layout/AdminLayoutContent.tsx";
 import AdminLayoutFooter from "@/common/layout/admin-layout/layout/AdminLayoutFooter.tsx";
+import AdminBoundary from "@/common/layout/admin-layout/AdminBoundary.tsx";
 
 /**
  * Admin application layout.
@@ -38,9 +39,11 @@ const AdminLayout = () => {
                     "bg-gray-50 dark:bg-dark"
                 )}
             >
-                <AdminLayoutHeader />
-                <AdminLayoutContent />
-                <AdminLayoutFooter />
+                <AdminBoundary>
+                    <AdminLayoutHeader/>
+                    <AdminLayoutContent/>
+                    <AdminLayoutFooter/>
+                </AdminBoundary>
             </main>
         </SidebarProvider>
     );
