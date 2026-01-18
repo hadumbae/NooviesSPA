@@ -33,7 +33,7 @@ export const SeatQueryKeys = {
      *
      * @param params Optional ID parameters
      */
-    ids: (params?: QueryKeyByIDParams) =>
+    ids: (params: QueryKeyByIDParams = {}) =>
         [...SeatQueryKeys.all, "_id", params] as const,
 
     /**
@@ -41,7 +41,7 @@ export const SeatQueryKeys = {
      *
      * @param params Optional slug parameters
      */
-    slugs: (params?: QueryKeyBySlugParams) =>
+    slugs: (params: QueryKeyBySlugParams = {}) =>
         [...SeatQueryKeys.all, "slug", params] as const,
 
     /**
@@ -49,7 +49,7 @@ export const SeatQueryKeys = {
      *
      * @param params Filter and sort options
      */
-    query: (params?: QueryKeyByOptionsParams) =>
+    query: (params: QueryKeyByOptionsParams = {}) =>
         [...SeatQueryKeys.all, "lists", "query", params] as const,
 
     /**
@@ -57,6 +57,6 @@ export const SeatQueryKeys = {
      *
      * @param params Pagination options
      */
-    paginated: (params?: QueryKeyByPaginationParams) =>
+    paginated: (params: QueryKeyByPaginationParams = {}) =>
         [...SeatQueryKeys.all, "lists", "paginated", params] as const,
 };

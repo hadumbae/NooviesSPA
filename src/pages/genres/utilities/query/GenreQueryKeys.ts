@@ -32,7 +32,7 @@ export const GenreQueryKeys = {
      *
      * @param params - ID-based query parameters
      */
-    ids: (params?: QueryKeyByIDParams) =>
+    ids: (params: QueryKeyByIDParams = {}) =>
         [...GenreQueryKeys.all, "_id", params] as const,
 
     /**
@@ -40,7 +40,7 @@ export const GenreQueryKeys = {
      *
      * @param params - Slug-based query parameters
      */
-    slugs: (params?: QueryKeyBySlugParams) =>
+    slugs: (params: QueryKeyBySlugParams = {}) =>
         [...GenreQueryKeys.all, "slug", params] as const,
 
     /**
@@ -48,7 +48,7 @@ export const GenreQueryKeys = {
      *
      * @param params - Arbitrary query and request options
      */
-    query: (params?: QueryKeyByOptionsParams) =>
+    query: (params: QueryKeyByOptionsParams = {}) =>
         [...GenreQueryKeys.all, "lists", "query", params] as const,
 
     /**
@@ -56,6 +56,6 @@ export const GenreQueryKeys = {
      *
      * @param params - Pagination, filters, and request options
      */
-    paginated: (params?: QueryKeyByPaginationParams) =>
+    paginated: (params: QueryKeyByPaginationParams = {}) =>
         [...GenreQueryKeys.all, "lists", "paginated", params] as const,
 };

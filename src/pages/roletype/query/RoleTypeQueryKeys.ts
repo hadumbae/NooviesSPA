@@ -31,7 +31,7 @@ export const RoleTypeQueryKeys = {
      *
      * @param params - ID-based query parameters
      */
-    ids: (params?: QueryKeyByIDParams) =>
+    ids: (params: QueryKeyByIDParams = {}) =>
         [...RoleTypeQueryKeys.all, "id", params ?? {}] as const,
 
     /**
@@ -39,7 +39,7 @@ export const RoleTypeQueryKeys = {
      *
      * @param params - Arbitrary query and request options
      */
-    query: (params?: QueryKeyByOptionsParams) =>
+    query: (params: QueryKeyByOptionsParams = {}) =>
         [...RoleTypeQueryKeys.all, "lists", "query", params ?? {}] as const,
 
     /**
@@ -47,6 +47,6 @@ export const RoleTypeQueryKeys = {
      *
      * @param params - Pagination, filters, and request options
      */
-    paginated: (params?: QueryKeyByPaginationParams) =>
+    paginated: (params: QueryKeyByPaginationParams = {}) =>
         [...RoleTypeQueryKeys.all, "lists", "paginated", params ?? {}] as const,
 };

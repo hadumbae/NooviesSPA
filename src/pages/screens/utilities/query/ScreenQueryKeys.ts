@@ -33,7 +33,7 @@ export const ScreenQueryKeys = {
      *
      * @param params Optional ID parameters
      */
-    ids: (params?: QueryKeyByIDParams) =>
+    ids: (params: QueryKeyByIDParams = {}) =>
         [...ScreenQueryKeys.all, "_id", params] as const,
 
     /**
@@ -41,7 +41,7 @@ export const ScreenQueryKeys = {
      *
      * @param params Optional slug parameters
      */
-    slugs: (params?: QueryKeyBySlugParams) =>
+    slugs: (params: QueryKeyBySlugParams = {}) =>
         [...ScreenQueryKeys.all, "slug", params] as const,
 
     /**
@@ -49,7 +49,7 @@ export const ScreenQueryKeys = {
      *
      * @param params Filter and sort options
      */
-    query: (params?: QueryKeyByOptionsParams) =>
+    query: (params: QueryKeyByOptionsParams = {}) =>
         [...ScreenQueryKeys.all, "lists", "query", params] as const,
 
     /**
@@ -57,6 +57,6 @@ export const ScreenQueryKeys = {
      *
      * @param params Pagination options
      */
-    paginated: (params?: QueryKeyByPaginationParams) =>
+    paginated: (params: QueryKeyByPaginationParams = {}) =>
         [...ScreenQueryKeys.all, "lists", "paginated", params] as const,
 };

@@ -32,7 +32,7 @@ export const ShowingQueryKeys = {
      *
      * @param params - ID-based query parameters
      */
-    ids: (params?: QueryKeyByIDParams) =>
+    ids: (params: QueryKeyByIDParams = {}) =>
         [...ShowingQueryKeys.all, "_id", params] as const,
 
     /**
@@ -40,7 +40,7 @@ export const ShowingQueryKeys = {
      *
      * @param params - Slug-based query parameters
      */
-    slugs: (params?: QueryKeyBySlugParams) =>
+    slugs: (params: QueryKeyBySlugParams = {}) =>
         [...ShowingQueryKeys.all, "slug", params] as const,
 
     /**
@@ -48,7 +48,7 @@ export const ShowingQueryKeys = {
      *
      * @param params - Arbitrary query and request options
      */
-    query: (params?: QueryKeyByOptionsParams) =>
+    query: (params: QueryKeyByOptionsParams = {}) =>
         [...ShowingQueryKeys.all, "lists", "query", params] as const,
 
     /**
@@ -56,6 +56,6 @@ export const ShowingQueryKeys = {
      *
      * @param params - Pagination, filters, and request options
      */
-    paginated: (params?: QueryKeyByPaginationParams) =>
+    paginated: (params: QueryKeyByPaginationParams = {}) =>
         [...ShowingQueryKeys.all, "lists", "paginated", params] as const,
 };
