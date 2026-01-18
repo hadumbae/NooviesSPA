@@ -32,9 +32,9 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import Logger from "@/common/utility/features/logger/Logger.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {SeatIDQueryKeys, SeatListQueryKeys} from "@/pages/seats/constants/SeatQueryKeys.ts";
 import {UseFormReturn} from "react-hook-form";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {SeatQueryKeys} from "@/pages/seats/utilities/query/SeatQueryKeys.ts";
 
 /**
  * Parameters for {@link useSeatSubmitMutation}.
@@ -86,8 +86,7 @@ export default function useSeatSubmitMutation(
     const {form, editID, options} = params;
     const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = options;
 
-    const keys = [...SeatIDQueryKeys, ...SeatListQueryKeys].map(key => [key]);
-    const invalidateQueries = useInvalidateQueryKeys({keys, exact: false});
+    const invalidateQueries = useInvalidateQueryKeys();
 
     const {setReturnedSeats} = useContext(SeatFormContext) ?? {};
 
@@ -121,9 +120,17 @@ export default function useSeatSubmitMutation(
     };
 
     const onSuccess = (seat: SeatDetails) => {
-        invalidateQueries();
-        setReturnedSeats?.((prev) => [...prev, seat]);
+        invalidateQueries(
+            [
+                SeatQueryKeys.ids({_id: seat._id}),
+                SeatQueryKeys.slugs({slug: seat.slug}),
+                SeatQueryKeys.query(),
+                SeatQueryKeys.paginated(),
+            ],
+            {exact: false}
+        );
 
+        setReturnedSeats?.((prev) => [...prev, seat]);
         successMessage && toast.success(successMessage);
         onSubmitSuccess?.(seat);
     };

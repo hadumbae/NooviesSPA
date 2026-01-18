@@ -17,8 +17,8 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
-import {SeatListQueryKeys} from "@/pages/seats/constants/SeatQueryKeys.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {SeatQueryKeys} from "@/pages/seats/utilities/query/SeatQueryKeys.ts";
 
 /**
  * Deletes a seat by ID.
@@ -43,8 +43,7 @@ export default function useSeatDeleteMutation(
 ): UseMutationResult<void, unknown, { _id: ObjectId }> {
     const {onDeleteSuccess, onDeleteError, successMessage, errorMessage} = params;
 
-    const keys = SeatListQueryKeys.map(key => [key]);
-    const invalidateQueries = useInvalidateQueryKeys({keys, exact: false});
+    const invalidateQueries = useInvalidateQueryKeys();
 
     /**
      * Executes the seat deletion request.
@@ -59,7 +58,11 @@ export default function useSeatDeleteMutation(
     };
 
     const onSuccess = () => {
-        invalidateQueries();
+        invalidateQueries(
+            [SeatQueryKeys.query(), SeatQueryKeys.paginated()],
+            {exact: false},
+        );
+
         successMessage && toast.success(successMessage);
         onDeleteSuccess?.();
     };
