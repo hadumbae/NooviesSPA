@@ -6,6 +6,7 @@ import {MovieCreditDetailsExceptPersonGroupedByRole} from "@/pages/moviecredit/s
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 
 /**
  * Parameters for `useGroupCreditsByRole` hook.
@@ -32,31 +33,17 @@ type GroupCreditsParams = RequestOptions & {
  * });
  * ```
  */
-export default function useFetchGroupedMovieCreditsForPerson(params: GroupCreditsParams): UseQueryResult<unknown, HttpResponseError> {
-    const {personID, limit, options = {}} = params;
-
-    const {
-        enabled = true,
-        staleTime = 1000 * 60, // 1 minute
-        placeholderData = (prev) => prev,
-        initialData,
-    } = options;
-
-    // Unique key to identify this query in React Query cache
-    const queryKey = ["fetch_movie_credits_grouped_by_role_for_person", params];
-
-    // Wrap the repository fetch function with error handling
+export default function useFetchGroupedMovieCreditsForPerson(
+    {personID, options, ...config}: GroupCreditsParams
+): UseQueryResult<unknown, HttpResponseError> {
     const fetchCredits = useQueryFnHandler({
-        action: () => MovieCreditGroupedRepository.getGroupedByRoleForPerson({personID, limit}),
+        action: () => MovieCreditGroupedRepository.getGroupedByRoleForPerson({personID, ...config}),
         errorMessage: "Failed to fetch movie credits. Please try again.",
     });
 
     return useQuery({
-        queryKey,
+        queryKey: ["movie_credits", "lists", "grouped", "person", {personID, ...config}],
         queryFn: fetchCredits,
-        enabled,
-        staleTime,
-        placeholderData,
-        initialData,
+        ...useQueryOptionDefaults(options),
     });
 }

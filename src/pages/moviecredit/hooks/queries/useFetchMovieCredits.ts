@@ -27,13 +27,10 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {
-    MovieCreditQueryOptions
-} from "@/pages/moviecredit/schemas/filters/MovieCreditQueryOptions.types.ts";
+import {MovieCreditQueryOptions} from "@/pages/moviecredit/schemas/filters/MovieCreditQueryOptions.types.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 
 /**
  * Parameters for {@link useFetchMovieCredits}.
@@ -59,31 +56,16 @@ type FetchQueries<TData = unknown> = {
  * @returns React Query result containing movie credit data or error state
  */
 export default function useFetchMovieCredits<TData = unknown>(
-    params: FetchQueries<TData>
+    {queries, queryConfig, queryOptions}: FetchQueries<TData>
 ): UseQueryResult<unknown, HttpResponseError> {
-    const {queries, queryConfig, queryOptions} = params;
-
-    // --- SETUP ---
-
-    const filteredQueries = filterNullishAttributes({
-        ...queries,
-        ...queryConfig,
-    });
-
-    const optionsWithDefaults = useQueryOptionDefaults(queryOptions);
-
-    // --- FETCH DATA ---
-
     const fetchMovieCredits = useQueryFnHandler({
-        action: () => MovieCreditRepository.query({queries: filteredQueries}),
+        action: () => MovieCreditRepository.query({queries, config: queryConfig}),
         errorMessage: "Failed to fetch movie credit data. Please try again.",
     });
 
-    // --- USE QUERY ---
-
     return useQuery({
-        queryKey: ["fetch_movie_credits_by_query", filteredQueries],
+        queryKey: ["movie_credits", "lists", "query", {...queries, ...queryConfig}],
         queryFn: fetchMovieCredits,
-        ...optionsWithDefaults,
+        ...useQueryOptionDefaults(queryOptions),
     });
 }

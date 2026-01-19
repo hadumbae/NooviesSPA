@@ -2,6 +2,7 @@ import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditR
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**
  * React Query hook to fetch a single movie credit by its ID.
@@ -21,18 +22,17 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
  * const { data, isLoading, error } = useFetchMovieCredit({ _id: someId, populate: true });
  * ```
  */
-export default function useFetchMovieCredit(params: FetchByIDParams): UseQueryResult {
-    const {_id, populate = false} = params;
-
-    const queryKey = ["fetch_movie_credit", {_id, populate}];
+export default function useFetchMovieCredit(
+    {_id, populate = false}: FetchByIDParams
+): UseQueryResult<unknown, HttpResponseError> {
 
     const fetchMovieCredit = useQueryFnHandler({
-        action: () => MovieCreditRepository.get({_id, populate}),
+        action: () => MovieCreditRepository.get({_id, config: {populate}}),
         errorMessage: "Failed to fetch movie credit data. Please try again."
     });
 
     return useQuery({
-        queryKey,
+        queryKey: ["movie_credits", "_id", {_id, populate}],
         queryFn: fetchMovieCredit,
     });
 }
