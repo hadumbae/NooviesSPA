@@ -1,36 +1,45 @@
-import {FetchBySlugParams} from "@/common/type/query/FetchBySlugParams.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
+import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
- * Fetches a single movie by its slug.
+ * Parameters for fetching a movie by slug.
+ */
+type FetchParams = {
+    /** Unique movie slug */
+    slug: string;
+    /** Optional request configuration */
+    config?: RequestOptions;
+    /** Optional React Query overrides */
+    options?: UseQueryOptions<unknown>;
+};
+
+/**
+ * React Query hook for fetching a movie by slug.
  *
  * @remarks
- * Wraps {@link MovieRepository.getBySlug} in a React Query hook with
- * standardized error handling and default query options.
+ * - Wraps {@link MovieRepository.getBySlug}
+ * - Applies default query options
+ * - Normalizes error handling
  *
- * The query key is scoped by both the slug and provided query configuration
- * to ensure correct cache separation.
- *
- * @template TData - Expected response data shape
- *
- * @param params - Slug, query config, and optional React Query options
- * @returns React Query result for the movie fetch operation
+ * @param params - Fetch parameters
+ * @returns React Query result
  */
-export default function useFetchMovieBySlug<TData = unknown>(
-    {slug, queryConfig, queryOptions}: FetchBySlugParams<TData>,
+export default function useFetchMovieBySlug(
+    {slug, config, options}: FetchParams,
 ): UseQueryResult<unknown, HttpResponseError> {
     const fetchMovie = useQueryFnHandler({
-        action: () => MovieRepository.getBySlug({slug, ...queryConfig}),
+        action: () => MovieRepository.getBySlug({slug, config}),
         errorMessage: "Failed to fetch movie. Please try again.",
     });
 
     return useQuery({
-        queryKey: ["movies", "slug", queryConfig],
+        queryKey: ["movies", "slug", {slug, ...config}],
         queryFn: fetchMovie,
-        ...useQueryOptionDefaults(queryOptions),
+        ...useQueryOptionDefaults(options),
     });
 }

@@ -6,11 +6,9 @@ import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import MovieDetailsUIContextProvider from "@/pages/movies/components/providers/MovieDetailsUIContextProvider.tsx";
 import MovieDetailsPageContent from "@/pages/movies/pages/admin/movie-details-page/MovieDetailsPageContent.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlug.ts";
-
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * Renders the **Movie Details Page**, showing complete information about a specific movie,
@@ -40,11 +38,7 @@ import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlu
  * ```
  */
 const MovieDetailsPage: FC = () => {
-    // --- Title ---
-
     useTitle("Movie Details");
-
-    // --- Route Params ---
 
     const {slug} = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
@@ -55,31 +49,22 @@ const MovieDetailsPage: FC = () => {
         return <PageLoader/>;
     }
 
-    // --- Query ---
-
     const query = useFetchMovieBySlug({
         slug,
-        queryConfig: {populate: true, virtuals: true},
+        config: {populate: true, virtuals: true},
     });
-
-    // --- Render ---
 
     return (
         <MovieDetailsUIContextProvider>
-            <QueryBoundary query={query}>
-                <ValidatedQueryBoundary query={query} schema={MovieDetailsSchema}>
-                    {(movie: MovieDetails) => {
-                        const {refetch} = query;
+            <ValidatedDataLoader query={query} schema={MovieDetailsSchema}>
+                {(movie: MovieDetails) => {
+                    const {refetch} = query;
 
-                        return (
-                            <MovieDetailsPageContent
-                                movie={movie}
-                                refetchMovie={refetch}
-                            />
-                        );
-                    }}
-                </ValidatedQueryBoundary>
-            </QueryBoundary>
+                    return (
+                        <MovieDetailsPageContent movie={movie} refetchMovie={refetch}/>
+                    );
+                }}
+            </ValidatedDataLoader>
         </MovieDetailsUIContextProvider>
     );
 };

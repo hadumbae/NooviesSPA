@@ -9,7 +9,6 @@ import MovieInfoCreditsPageContent
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 const MovieInfoCreditsPage = () => {
-    // --- ROUTE PARAMS ---
     const {slug} = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/browse/movies",
@@ -17,19 +16,17 @@ const MovieInfoCreditsPage = () => {
     }) ?? {};
 
     if (!slug) {
-        return <PageLoader />;
+        return <PageLoader/>;
     }
 
-    // --- Query ---
-
     const query = useFetchMovieBySlug({
-       slug,
-        queryConfig: {virtuals: true, populate: true},
+        slug,
+        config: {virtuals: true, populate: true},
     });
 
     return (
         <ValidatedDataLoader query={query} schema={MovieDetailsSchema}>
-            {(movie: MovieDetails) => <MovieInfoCreditsPageContent movie={movie} />}
+            {(movie: MovieDetails) => <MovieInfoCreditsPageContent movie={movie}/>}
         </ValidatedDataLoader>
     );
 };

@@ -46,20 +46,18 @@ type QueryData = {
  * or missing.
  */
 const MovieInfoPage: FC = () => {
-    // --- Route Params ---
     const {slug} = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/browse/movies",
     }) ?? {};
 
     if (!slug) {
-        return <PageLoader />;
+        return <PageLoader/>;
     }
 
-    // --- Queries ---
     const movieQuery = useFetchMovieBySlug({
         slug,
-        queryConfig: {virtuals: true, populate: true},
+        config: {virtuals: true, populate: true},
     });
 
     const creditQuery = useFetchMovieCredits({
@@ -68,30 +66,15 @@ const MovieInfoPage: FC = () => {
     });
 
     const queryDefinitions: QueryDefinition[] = [
-        {
-            query: movieQuery,
-            key: "movie",
-            schema: MovieDetailsSchema,
-        },
-        {
-            query: creditQuery,
-            key: "credits",
-            schema: MovieCreditDetailsArraySchema,
-        },
+        {query: movieQuery, key: "movie", schema: MovieDetailsSchema},
+        {query: creditQuery, key: "credits", schema: MovieCreditDetailsArraySchema},
     ];
 
-    // --- Render ---
     return (
         <MultiQueryDataLoader queries={queryDefinitions}>
             {(data) => {
                 const {movie, credits} = data as QueryData;
-
-                return (
-                    <MovieInfoPageContent
-                        movie={movie}
-                        credits={credits}
-                    />
-                );
+                return (<MovieInfoPageContent movie={movie} credits={credits}/>);
             }}
         </MultiQueryDataLoader>
     );
