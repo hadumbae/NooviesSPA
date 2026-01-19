@@ -1,3 +1,9 @@
+/**
+ * @file MovieCreditSubmitFormView.tsx
+ *
+ * Presentational form for creating or editing a movie credit.
+ */
+
 import {UseMutationResult} from "@tanstack/react-query";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {RefreshCw} from "lucide-react";
@@ -13,10 +19,9 @@ import RoleTypeDepartmentRadioGroup from "@/pages/roletype/components/inputs/Rol
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 
-import {FC} from "react";
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import {
     MovieCreditForm,
     MovieCreditFormCastValues,
@@ -28,91 +33,43 @@ import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
 import {PrimaryButtonCSS, SecondaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 
-/**
- * Props for {@link MovieCreditSubmitFormView}.
- *
- * @interface ViewProps
- */
 interface ViewProps {
-    /**
-     * React Hook Form instance managing the form state.
-     * Provides access to `register`, `handleSubmit`, `watch`, and other utilities.
-     */
+    /** React Hook Form controller */
     form: UseFormReturn<MovieCreditFormValues>;
 
-    /**
-     * Function called when the form is submitted.
-     * Typically passed to `form.handleSubmit`.
-     */
+    /** Submit handler passed to RHF */
     submitHandler: SubmitHandler<MovieCreditFormValues>;
 
-    /**
-     * React Query mutation object responsible for handling asynchronous form submission.
-     * Provides `isPending`, `mutate`, `reset`, and other mutation state information.
-     */
-    mutation: UseMutationResult<MovieCredit, unknown, MovieCreditForm>;
+    /** React Query mutation for submission */
+    mutation: UseMutationResult<MovieCreditDetails, unknown, MovieCreditForm>;
 
-    /**
-     * Array of available movies to select from in the form.
-     */
+    /** Available movie options */
     movies: Movie[];
 
-    /**
-     * Array of available persons to select from in the form.
-     */
+    /** Available person options */
     persons: Person[];
 
-    /**
-     * Array of available role types to select from in the form.
-     */
+    /** Available role type options */
     roleTypes: RoleType[];
 
-    /**
-     * Optional array of form fields to disable.
-     * Disabled fields are hidden or made read-only depending on the field type.
-     */
+    /** Fields to disable or hide */
     disableFields?: (keyof MovieCreditFormValues)[];
 }
 
 /**
- * Form view component for creating or editing a movie credit.
+ * Movie credit submission form.
  *
- * Renders a fully dynamic form for managing movie credits. The form:
- * - Adjusts fields dynamically based on `department` (CAST or CREW).
- * - Allows selective disabling of fields via `disableFields`.
- * - Uses React Hook Form for validation and state management.
- * - Uses React Query mutation to handle submissions asynchronously.
- *
- * @component
- * @param {ViewProps} params - Props including form state, submit handler, mutation, options, and field availability.
- *
- * @example
- * ```tsx
- * <MovieCreditSubmitFormView
- *   form={form}
- *   submitHandler={handleSubmit}
- *   mutation={mutation}
- *   movies={movies}
- *   persons={persons}
- *   roleTypes={roleTypes}
- *   disableFields={['department', 'uncredited']}
- * />
- * ```
+ * Features:
+ * - CAST / CREW conditional rendering
+ * - Field-level enable/disable control
+ * - Fully controlled via React Hook Form
+ * - Async submission with React Query
  *
  * @remarks
- * - Generates select options using {@link generateReactSelectOptions}.
- * - Uses the following custom form components:
- *   - {@link HookFormInput}
- *   - {@link HookFormSelect}
- *   - {@link HookFormTextArea}
- *   - {@link HookFormCheckbox}
- *   - {@link RoleTypeDepartmentRadioGroup}
- * - Dynamically enables or disables fields based on `department` and `disableFields`.
- * - Maintains form state with React Hook Form and handles asynchronous submission with React Query.
- * - Uses `cn` utility for class name concatenation.
- * - Reset button calls `form.reset()` to reset all form values.
+ * - Select options are generated via {@link generateReactSelectOptions}
+ * - Reset button clears all form values
  */
-const MovieCreditSubmitFormView: FC<ViewProps> = (params) => {
+const MovieCreditSubmitFormView = (params : ViewProps) => {
     const {form, submitHandler, mutation, persons, movies, roleTypes, disableFields = []} = params;
 
     const {isPending} = mutation;

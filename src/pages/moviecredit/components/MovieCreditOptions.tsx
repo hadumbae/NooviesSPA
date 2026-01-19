@@ -1,5 +1,5 @@
 import {FC, ReactNode} from 'react';
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCredit, MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Ellipsis} from "lucide-react";
@@ -15,7 +15,7 @@ import MovieCreditDeleteWarningDialog from "@/pages/moviecredit/components/dialo
  * - {@link EntityOptionProps} for handling edit and delete actions
  * - Optional `children` to provide a custom trigger element for the popover
  */
-type OptionsProps = EntityOptionProps<MovieCredit, MovieCredit, MovieCreditFormValues> & {
+type OptionsProps = EntityOptionProps<MovieCreditDetails, MovieCredit, MovieCreditFormValues> & {
     /**
      * Optional custom trigger element for opening the options popover.
      * Defaults to a button with an ellipsis icon.
@@ -57,7 +57,7 @@ const MovieCreditOptions: FC<OptionsProps> = (props) => {
                 }
             </PopoverTrigger>
             <PopoverContent className="w-40 flex flex-col p-0 dark:bg-dark">
-                <MovieCreditSubmitFormPanel {...onSubmit} isEditing={true} entity={entity}>
+                <MovieCreditSubmitFormPanel {...onSubmit} editEntity={entity}>
                     <Button variant="link">Edit</Button>
                 </MovieCreditSubmitFormPanel>
                 <MovieCreditDeleteWarningDialog {...onDelete} _id={_id}>

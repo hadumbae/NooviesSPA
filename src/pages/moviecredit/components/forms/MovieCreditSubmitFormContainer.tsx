@@ -1,7 +1,13 @@
-import {FC} from 'react';
+/**
+ * @file MovieCreditSubmitFormContainer.tsx
+ *
+ * Data container for the movie credit submission form.
+ * Handles queries, mutations, and form orchestration.
+ */
+
 import useMovieCreditSubmitForm from "@/pages/moviecredit/hooks/forms/useMovieCreditSubmitForm.ts";
 import useMovieCreditSubmitMutation from "@/pages/moviecredit/hooks/mutations/useMovieCreditSubmitMutation.ts";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCredit, MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import {MovieQueryFilters} from "@/pages/movies/schema/queries/MovieQueryOption.types.ts";
 import {MovieCreditForm, MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import {Loader} from "lucide-react";
@@ -17,69 +23,38 @@ import {RoleTypeQueryFilters} from "@/pages/roletype/schema/query-options/RoleTy
 import {RoleTypeArray} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import useMovieCreditFormDataQueries from "@/pages/moviecredit/hooks/forms/useMovieCreditFormDataQueries.ts";
-import {MutationEditByIDParams} from "@/common/type/form/MutationSubmitParams.ts";
 
-/**
- * Props for {@link MovieCreditSubmitFormContainer}.
- *
- * Extends {@link FormContainerProps} for managing form state, preset values, and submission.
- * Optionally accepts filters for movies, persons, and role types to pre-populate select fields.
- *
- * All filter props and `disableFields` are optional, and the component handles undefined values gracefully.
- *
- * @template TData - The type of the entity managed by the form (here {@link MovieCredit}).
- */
-type ContainerProps = FormContainerProps<MovieCredit, MovieCredit, MovieCreditFormValues> & {
-    /** Optional filters to apply when fetching movies for the form */
+type ContainerProps = FormContainerProps<MovieCreditDetails, MovieCredit, MovieCreditFormValues> & {
+    /** Optional filters for movie lookup */
     movieFilters?: MovieQueryFilters;
 
-    /** Optional filters to apply when fetching persons for the form */
+    /** Optional filters for person lookup */
     personFilters?: PersonQueryFilters;
 
-    /** Optional filters to apply when fetching role types for the form */
+    /** Optional filters for role type lookup */
     roleTypeFilters?: RoleTypeQueryFilters;
-}
+};
 
 /**
- * Container component for submitting a movie credit.
+ * Container component for submitting movie credits.
  *
- * Handles:
- * - Fetching related movies, persons, and role types.
- * - Managing form state with {@link useMovieCreditSubmitForm}.
- * - Handling create/update submissions via {@link useMovieCreditSubmitMutation}.
- * - Managing loading, error, and schema validation states using
- *   {@link CombinedQueryBoundary} and {@link CombinedValidatedQueryBoundary}.
- *
- * @param props - {@link ContainerProps} including optional preset values, editing state, filters, and mutation callbacks.
- *
- * @returns A React functional component rendering {@link MovieCreditSubmitFormView} once
- * queries are loaded and validated.
+ * Responsibilities:
+ * - Initializes form state
+ * - Fetches related reference data
+ * - Handles create/update mutation lifecycle
+ * - Manages query loading and validation boundaries
  *
  * @remarks
- * - Uses {@link useMovieCreditFormDataQueries} to aggregate and validate movie, person, and role type queries.
- * - All optional props (`movieFilters`, `personFilters`, `roleTypeFilters`, `disableFields`) are handled safely; the component works correctly if any are undefined.
- * - Dynamically disables queries for fields listed in `disableFields` to avoid unnecessary network requests.
+ * - Query execution is automatically disabled for fields listed in `disableFields`
+ * - Role types are dynamically filtered by selected department
  *
- * @example
- * ```tsx
- * <MovieCreditSubmitFormContainer
- *   presetValues={{ role: "Lead Actor" }}
- *   disableFields={['department']}
- *   isEditing={false}
- *   entity={undefined}
- *   movieFilters={{ title: "Inception" }}
- *   personFilters={{ nationality: "US" }}
- *   roleTypeFilters={{ department: "Acting" }}
- *   onSubmitSuccess={(data) => console.log("Submitted:", data)}
- * />
- * ```
+ * @returns Form view wrapped in query boundaries
  */
-const MovieCreditSubmitFormContainer: FC<ContainerProps> = (props) => {
+const MovieCreditSubmitFormContainer = (props: ContainerProps) => {
     const {
         presetValues,
         disableFields,
-        isEditing,
-        entity,
+        editEntity,
         movieFilters,
         personFilters,
         roleTypeFilters,
@@ -88,22 +63,18 @@ const MovieCreditSubmitFormContainer: FC<ContainerProps> = (props) => {
     } = props;
 
     // Initialize the form state with preset values or entity data
-    const form = useMovieCreditSubmitForm({presetValues, credit: entity});
+    const form = useMovieCreditSubmitForm({presetValues, credit: editEntity});
 
-    const resetOnSuccess = (credit: MovieCredit) => {
+    const resetOnSuccess = (credit: MovieCreditDetails) => {
         form.reset();
         onSubmitSuccess?.(credit);
     }
 
-    // Prepare mutation params for create or edit
-    const mutationParams: MutationEditByIDParams = isEditing === true
-        ? {isEditing: true, _id: entity._id, ...mutationProps}
-        : {isEditing: false, ...mutationProps};
-
     const mutation = useMovieCreditSubmitMutation({
         form,
         onSubmitSuccess: resetOnSuccess,
-        ...mutationParams
+        editID: editEntity?._id,
+        ...mutationProps
     });
 
     // Filter role types by selected department if available

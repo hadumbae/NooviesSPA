@@ -1,4 +1,4 @@
-import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+    import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import MoviePersonListBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MoviePersonListBreadcrumb.tsx";
