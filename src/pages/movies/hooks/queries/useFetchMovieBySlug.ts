@@ -21,22 +21,16 @@ import MovieRepository from "@/pages/movies/repositories/MovieRepository.ts";
  * @returns React Query result for the movie fetch operation
  */
 export default function useFetchMovieBySlug<TData = unknown>(
-    params: FetchBySlugParams<TData>,
+    {slug, queryConfig, queryOptions}: FetchBySlugParams<TData>,
 ): UseQueryResult<unknown, HttpResponseError> {
-    const {slug, queryConfig, queryOptions} = params;
-
-    const queryKey = ["fetch_movie_by_slug", queryConfig];
-
     const fetchMovie = useQueryFnHandler({
         action: () => MovieRepository.getBySlug({slug, ...queryConfig}),
         errorMessage: "Failed to fetch movie. Please try again.",
     });
 
-    const options = useQueryOptionDefaults(queryOptions);
-
     return useQuery({
-        queryKey,
+        queryKey: ["movies", "slug", queryConfig],
         queryFn: fetchMovie,
-        ...options,
+        ...useQueryOptionDefaults(queryOptions),
     });
 }

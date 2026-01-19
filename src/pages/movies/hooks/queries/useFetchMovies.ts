@@ -65,17 +65,15 @@ type FetchParams<TData = unknown> = {
  * ```
  */
 export default function useFetchMovies<TData = unknown>(
-    params: FetchParams<TData> = {}
+    {queries, config, options}: FetchParams<TData> = {}
 ): UseQueryResult<unknown, HttpResponseError> {
-    const {queries = {}, config, options} = params;
-
     const fetchMovies = useQueryFnHandler({
         action: () => MovieRepository.query({queries, config}),
         errorMessage: "Failed to fetch movies. Please try again.",
     });
 
     return useQuery({
-        queryKey: ["fetch_movies", {...queries, ...config}],
+        queryKey: ["movies", "lists", "query", {...queries, ...config}],
         queryFn: fetchMovies,
         ...useQueryOptionDefaults(options),
     });

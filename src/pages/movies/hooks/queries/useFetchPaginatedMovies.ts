@@ -60,23 +60,15 @@ type FetchParams<TData = unknown> = PaginationValues & {
  * ```
  */
 export default function useFetchPaginatedMovies<TData = unknown>(
-    params: FetchParams<TData>
+    {page, perPage, queries, config, options}: FetchParams<TData>
 ): UseQueryResult<unknown, HttpResponseError> {
-    const {
-        page,
-        perPage,
-        queries = {},
-        config,
-        options,
-    } = params;
-
     const fetchPaginatedMovies = useQueryFnHandler({
         action: () => MovieRepository.paginated({page, perPage, queries, config}),
         errorMessage: "Failed to fetch movies. Please try again.",
     });
 
     return useQuery({
-        queryKey: ["fetch_paginated_movies", {page, perPage, ...queries, ...config}],
+        queryKey: ["movies", "lists", "paginated", {page, perPage, ...queries, ...config}],
         queryFn: fetchPaginatedMovies,
         ...useQueryOptionDefaults(options),
     });
