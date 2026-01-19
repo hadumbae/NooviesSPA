@@ -62,7 +62,7 @@ export default function useScreenSubmitMutation(
 ): UseMutationResult<ScreenDetails, unknown, ScreenForm> {
     const {form, editID, onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
 
-    const queryOptions = {populate: true, virtuals: true};
+    const config = {populate: true, virtuals: true};
 
     const invalidateQueries = useInvalidateQueryKeys();
 
@@ -74,8 +74,8 @@ export default function useScreenSubmitMutation(
      */
     const submitScreenData = async (values: ScreenForm) => {
         const action = editID
-            ? () => ScreenRepository.update({_id: editID, data: values, ...queryOptions})
-            : () => ScreenRepository.create({data: values, ...queryOptions});
+            ? () => ScreenRepository.update({_id: editID, data: values, config})
+            : () => ScreenRepository.create({data: values, config});
 
         const returnData = await handleMutationResponse({
             action,
