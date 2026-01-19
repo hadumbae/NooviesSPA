@@ -39,6 +39,8 @@ import {ScreenDetailsActiveTab}
     from "@/pages/screens/schema/params/ScreenDetailsActiveTabEnumSchema.ts";
 import useNavigateToTheatre
     from "@/pages/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {useLocation} from "react-router-dom";
 
 /**
  * Props for {@link ScreenDetailsPageContent}.
@@ -71,11 +73,11 @@ const ScreenDetailsPageContent = (
     {theatre, screen, seats}: ContentProps
 ) => {
     const {_id: screenID, name: screenName} = screen;
-    const {
-        _id: theatreID,
-        name: theatreName,
-        slug: theatreSlug,
-    } = theatre;
+    const {_id: theatreID, name: theatreName, slug: theatreSlug,} = theatre;
+
+    const {search} = useLocation();
+    const navigate = useLoggedNavigate();
+    const navigateToTheatre = useNavigateToTheatre();
 
     const {
         presetValues,
@@ -89,7 +91,15 @@ const ScreenDetailsPageContent = (
         tabConfig: {activeTab, setActiveTab},
     } = useScreenDetailsPageValues({theatreID, screenID});
 
-    const navigateToTheatre = useNavigateToTheatre();
+    const onUpdateSuccess = (screen: ScreenDetails) => {
+        const {theatre: {slug: theatreSlug}, slug: screenSlug} = screen;
+
+        navigate({
+            to: `/admin/theatres/get/${theatreSlug}/screen/${screenSlug}${search}`,
+            message: "Replace URL on screen update.",
+            options: {replace: true},
+        });
+    }
 
     /**
      * Navigates back to the theatre after successful deletion.
@@ -172,6 +182,7 @@ const ScreenDetailsPageContent = (
                 <ScreenSubmitFormPanel
                     presetOpen={isEditing}
                     setPresetOpen={setIsEditing}
+                    onSubmitSuccess={onUpdateSuccess}
                 />
             </section>
 
