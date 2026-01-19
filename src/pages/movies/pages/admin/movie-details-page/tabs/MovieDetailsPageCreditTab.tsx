@@ -20,7 +20,7 @@
  * - Presentation → child components
  */
 
-import useFetchMovieCredits from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
+import {useFetchMovieCredits} from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
 import MovieDetailsCreditOverview from "@/pages/movies/components/details/MovieDetailsCreditOverview.tsx";
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -53,16 +53,8 @@ type TabProps = {
  */
 const MovieDetailsPageCreditTab = ({slug}: TabProps) => {
     const query = useFetchMovieCredits({
-        queries: {
-            movieSlug: slug,
-            department: "CAST",
-            sortByBillingOrder: "asc",
-        },
-        queryConfig: {
-            populate: true,
-            virtuals: true,
-            limit: 6,
-        },
+        queries: {movieSlug: slug, department: "CAST", sortByBillingOrder: "asc"},
+        config: {populate: true, virtuals: true, limit: 6},
     });
 
     return (

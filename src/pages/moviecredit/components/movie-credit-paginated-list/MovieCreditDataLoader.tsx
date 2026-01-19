@@ -10,7 +10,7 @@
 
 import {MovieCreditQueryOptions} from "@/pages/moviecredit/schemas/filters/MovieCreditQueryOptions.types.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import useFetchMovieCredits from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
+import {useFetchMovieCredits} from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
 import {z, ZodTypeAny} from "zod";
 import {ReactNode} from "react";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
@@ -57,7 +57,7 @@ const MovieCreditDataLoader = (props: LoaderProps) => {
     const {children, schema, populate, virtuals, limit, ...queries} = props;
 
     const query = useFetchMovieCredits({
-        queryConfig: {populate, virtuals, limit},
+        config: {populate, virtuals, limit},
         queries,
     });
 

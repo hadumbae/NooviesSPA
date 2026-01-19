@@ -37,15 +37,15 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
  *
  * @template TData - Expected response data shape
  */
-type FetchQueries<TData = unknown> = {
+type FetchQueries = {
     /** Optional query filters for movie credits */
     queries?: MovieCreditQueryOptions;
 
     /** Optional request-level configuration */
-    queryConfig?: RequestOptions;
+    config?: RequestOptions;
 
     /** Optional React Query configuration overrides */
-    queryOptions?: UseQueryOptions<TData>;
+    options?: UseQueryOptions<unknown>;
 };
 
 /**
@@ -55,17 +55,17 @@ type FetchQueries<TData = unknown> = {
  * @param params - Query filters, request config, and query options
  * @returns React Query result containing movie credit data or error state
  */
-export default function useFetchMovieCredits<TData = unknown>(
-    {queries, queryConfig, queryOptions}: FetchQueries<TData>
+export function useFetchMovieCredits(
+    {queries, config, options}: FetchQueries
 ): UseQueryResult<unknown, HttpResponseError> {
     const fetchMovieCredits = useQueryFnHandler({
-        action: () => MovieCreditRepository.query({queries, config: queryConfig}),
+        action: () => MovieCreditRepository.query({queries, config}),
         errorMessage: "Failed to fetch movie credit data. Please try again.",
     });
 
     return useQuery({
-        queryKey: ["movie_credits", "lists", "query", {...queries, ...queryConfig}],
+        queryKey: ["movie_credits", "lists", "query", {...queries, ...config}],
         queryFn: fetchMovieCredits,
-        ...useQueryOptionDefaults(queryOptions),
+        ...useQueryOptionDefaults(options),
     });
 }

@@ -13,7 +13,7 @@
 import {FC} from 'react';
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import useFetchPerson from "@/pages/persons/hooks/fetch/useFetchPerson.ts";
-import useFetchGroupedMovieCreditsForPerson
+import {useFetchGroupedMovieCreditsForPerson}
     from "@/pages/moviecredit/hooks/queries/useFetchGroupedMovieCreditsForPerson.ts";
 import {PersonDetailsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import PersonDetailsUIProvider from "@/pages/persons/providers/PersonDetailsUIProvider.tsx";
@@ -50,7 +50,7 @@ const PersonDetailsPage: FC = () => {
     }
 
     const personQuery = useFetchPerson({_id: personID, config: {populate: true, virtuals: true}});
-    const creditQuery = useFetchGroupedMovieCreditsForPerson({personID, limit: 10});
+    const creditQuery = useFetchGroupedMovieCreditsForPerson({personID, config: {limit: 10}});
 
     const queries: QueryDefinition[] = [
         {

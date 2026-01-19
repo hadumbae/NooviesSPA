@@ -21,7 +21,7 @@ import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamS
 import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlug.ts";
 import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
 import MovieInfoPageContent from "@/pages/movies/pages/client/movie-info/movie-info/MovieInfoPageContent.tsx";
-import useFetchMovieCredits from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
+import {useFetchMovieCredits} from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
@@ -62,7 +62,7 @@ const MovieInfoPage: FC = () => {
 
     const creditQuery = useFetchMovieCredits({
         queries: {movieSlug: slug},
-        queryConfig: {populate: true, virtuals: true},
+        config: {populate: true, virtuals: true},
     });
 
     const queryDefinitions: QueryDefinition[] = [

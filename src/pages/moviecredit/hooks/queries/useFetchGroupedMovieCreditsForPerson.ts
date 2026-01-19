@@ -2,42 +2,40 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import MovieCreditGroupedRepository from "@/pages/moviecredit/repositories/MovieCreditGroupedRepository.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
-import {MovieCreditDetailsExceptPersonGroupedByRole} from "@/pages/moviecredit/schemas/model/MovieCreditGroup.types.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 
 /**
- * Parameters for `useGroupCreditsByRole` hook.
+ * Parameters for fetching grouped movie credits for a person.
  */
-type GroupCreditsParams = RequestOptions & {
-    /** Unique identifier of the person whose credits are being fetched */
+type GroupCreditsParams = {
+    /** Target person ObjectId */
     personID: ObjectId;
 
+    /** Optional request configuration */
+    config?: RequestOptions;
+
     /** Optional React Query configuration overrides */
-    options?: UseQueryOptions<MovieCreditDetailsExceptPersonGroupedByRole>;
-}
+    options?: UseQueryOptions<unknown>;
+};
 
 /**
- * React Query hook to fetch movie credits for a specific person,
- * grouped by role type (e.g., Actor, Director, Writer).
+ * Fetch movie credits for a person, grouped by role type.
  *
- * @param params - Parameters for fetching grouped credits
- * @returns A React Query result object containing the grouped movie credits and query state
+ * Wraps {@link MovieCreditGroupedRepository.getGroupedByRoleForPerson}
+ * in a React Query hook with standardized error handling and defaults.
  *
- * @example
- * ```ts
- * const { data, isLoading, error } = useGroupCreditsByRole({
- *   personID: "64a1f9c5e3f3b1a2b3c4d5e6"
- * });
- * ```
+ * @param params - Person ID, request config, and query options
+ * @returns React Query result containing grouped movie credits
  */
-export default function useFetchGroupedMovieCreditsForPerson(
-    {personID, options, ...config}: GroupCreditsParams
+export function useFetchGroupedMovieCreditsForPerson(
+    {personID, options, config}: GroupCreditsParams
 ): UseQueryResult<unknown, HttpResponseError> {
     const fetchCredits = useQueryFnHandler({
-        action: () => MovieCreditGroupedRepository.getGroupedByRoleForPerson({personID, ...config}),
+        action: () =>
+            MovieCreditGroupedRepository.getGroupedByRoleForPerson({personID, config}),
         errorMessage: "Failed to fetch movie credits. Please try again.",
     });
 

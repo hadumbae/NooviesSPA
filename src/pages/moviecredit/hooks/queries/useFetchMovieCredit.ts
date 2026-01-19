@@ -1,38 +1,52 @@
+/**
+ * @file useFetchMovieCredit.ts
+ *
+ * React Query hook for fetching a single `MovieCredit` by ObjectId.
+ *
+ * Wraps {@link MovieCreditRepository.get} with standardized
+ * query handling, error messaging, and default query options.
+ */
+
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 
 /**
- * React Query hook to fetch a single movie credit by its ID.
- *
- * This hook queries the backend for a specific movie credit document using the provided ObjectId.
- * It supports optional population of related fields (e.g., actor, role, or movie data).
- *
- * @param params - Parameters for fetching the movie credit
- * @param params._id - The ObjectId of the movie credit to fetch
- * @param params.populate - Whether to populate referenced fields (optional, defaults to `false`)
- *
- * @returns A React Query result object containing the movie credit data,
- *          along with loading, error, and refetch metadata.
- *
- * @example
- * ```ts
- * const { data, isLoading, error } = useFetchMovieCredit({ _id: someId, populate: true });
- * ```
+ * Parameters for fetching a single movie credit.
  */
-export default function useFetchMovieCredit(
-    {_id, populate = false}: FetchByIDParams
-): UseQueryResult<unknown, HttpResponseError> {
+type FetchParams = {
+    /** Target movie credit ObjectId */
+    _id: ObjectId;
 
+    /** Optional request configuration (excluding pagination limits) */
+    config?: Omit<RequestOptions, "limit">;
+
+    /** Optional React Query configuration overrides */
+    options?: UseQueryOptions<unknown>;
+};
+
+/**
+ * Fetch a single movie credit by ObjectId.
+ *
+ * @param params - Fetch parameters
+ * @returns React Query result for the movie credit request
+ */
+export function useFetchMovieCredit(
+    {_id, config, options}: FetchParams
+): UseQueryResult<unknown, HttpResponseError> {
     const fetchMovieCredit = useQueryFnHandler({
-        action: () => MovieCreditRepository.get({_id, config: {populate}}),
-        errorMessage: "Failed to fetch movie credit data. Please try again."
+        action: () => MovieCreditRepository.get({_id, config}),
+        errorMessage: "Failed to fetch movie credit data. Please try again.",
     });
 
     return useQuery({
-        queryKey: ["movie_credits", "_id", {_id, populate}],
+        queryKey: ["movie_credits", "_id", {_id, ...config}],
         queryFn: fetchMovieCredit,
+        ...useQueryOptionDefaults(options),
     });
 }

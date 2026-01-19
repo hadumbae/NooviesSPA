@@ -21,7 +21,7 @@ const MovieInfoReviewsPage = () => {
 
     const query = useFetchMovieBySlug({
         slug,
-        queryConfig: {populate: true, virtuals: true}
+        config: {populate: true, virtuals: true}
     });
 
     return (

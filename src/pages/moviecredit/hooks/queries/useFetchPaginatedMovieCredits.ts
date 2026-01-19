@@ -13,13 +13,13 @@ import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditR
  */
 type FetchParams<TData = unknown> = PaginationValues & {
     /** Credit query filters */
-    queries: MovieCreditQueryOptions;
+    queries?: MovieCreditQueryOptions;
 
     /** Request options (excluding limit) */
-    queryConfig?: Omit<RequestOptions, "limit">;
+    config?: Omit<RequestOptions, "limit">;
 
     /** React Query options */
-    queryOptions?: UseQueryOptions<TData>;
+    options?: UseQueryOptions<TData>;
 };
 
 /**
@@ -27,23 +27,17 @@ type FetchParams<TData = unknown> = PaginationValues & {
  *
  * @template TData
  */
-export default function useFetchPaginatedMovieCredits<TData = unknown>(
-    {page, perPage, queries, queryConfig, queryOptions}: FetchParams<TData>
+export function useFetchPaginatedMovieCredits<TData = unknown>(
+    {page, perPage, queries, config, options}: FetchParams<TData>
 ): UseQueryResult<unknown, HttpResponseError> {
     const fetchPaginatedCredits = useQueryFnHandler({
-        action: () =>
-            MovieCreditRepository.paginated({
-                page,
-                perPage,
-                queries,
-                config: queryConfig,
-            }),
+        action: () => MovieCreditRepository.paginated({page, perPage, queries, config}),
         errorMessage: "Failed to fetch movies. Please try again.",
     });
 
     return useQuery({
-        queryKey: ["movie_credits", "lists", "paginated", {...queries, ...queryConfig}],
+        queryKey: ["movie_credits", "lists", "paginated", {...queries, ...config}],
         queryFn: fetchPaginatedCredits,
-        ...useQueryOptionDefaults(queryOptions),
+        ...useQueryOptionDefaults(options),
     });
 }

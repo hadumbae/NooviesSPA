@@ -1,5 +1,4 @@
 import {MovieCreditQueryOptions} from "@/pages/moviecredit/schemas/filters/MovieCreditQueryOptions.types.ts";
-import useFetchPaginatedMovieCredits from "@/pages/moviecredit/hooks/queries/useFetchPaginatedMovieCredits.ts";
 import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
 import {PaginatedMovieCreditDetailsSchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
@@ -9,6 +8,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import MoviePersonDetailsCard from "@/pages/movies/components/admin/credits/cards/MoviePersonDetailsCard.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {useFetchPaginatedMovieCredits} from "@/pages/moviecredit/hooks/queries/useFetchPaginatedMovieCredits.ts";
 
 /**
  * Props for {@link MovieCreditPaginatedListQuery}.
@@ -36,8 +36,8 @@ const MovieCreditPaginatedListQuery = (props: QueryProps) => {
     const query = useFetchPaginatedMovieCredits({
         page,
         perPage,
-        queryConfig: {populate: true, virtuals: true},
         queries: queries,
+        config: {populate: true, virtuals: true},
     });
 
     return (
