@@ -1,4 +1,4 @@
-import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {toast} from "react-toastify";
 import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
@@ -9,6 +9,8 @@ import handleMutationResponse from "@/common/handlers/mutation/handleMutationRes
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {MovieCreditSchema} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
 import {MutationEditByIDParams, MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {MovieCreditQueryKeys} from "@/pages/moviecredit/utility/query/MovieCreditQueryKeys.ts";
 
 /**
  * Params for {@link useMovieCreditSubmitMutation}.
@@ -29,7 +31,6 @@ type SubmitParams =
 export default function useMovieCreditSubmitMutation(
     params: SubmitParams
 ): UseMutationResult<MovieCredit, unknown, MovieCreditForm> {
-    const queryClient = useQueryClient();
     const {
         form,
         onSubmitSuccess,
@@ -40,7 +41,7 @@ export default function useMovieCreditSubmitMutation(
         _id,
     } = params;
 
-    const mutationKey = ["submit_single_movie_credit"];
+    const invalidateQueries = useInvalidateQueryKeys();
 
     const submitMovieCreditData = async (values: MovieCreditForm) => {
         const action =
@@ -63,20 +64,21 @@ export default function useMovieCreditSubmitMutation(
         return data;
     };
 
-    const onSuccess = async (credit: MovieCredit) => {
-        const actionLabel = isEditing ? "Updated" : "Created";
-        toast.success(successMessage ?? `${actionLabel} movie credit successfully.`);
-
-        onSubmitSuccess?.(credit);
-
-        await Promise.all(
+    const onSuccess = (credit: MovieCredit) => {
+        invalidateQueries(
             [
-                "fetch_movie_credits_by_query",
-                "fetch_paginated_movie_credits",
-            ].map((queryKey) =>
-                queryClient.invalidateQueries({queryKey: [queryKey], exact: false})
-            )
-        );
+
+                MovieCreditQueryKeys.ids({_id: credit._id}),
+                MovieCreditQueryKeys.slugs(),
+                MovieCreditQueryKeys.persons({personID: credit.person}),
+                MovieCreditQueryKeys.query(),
+                MovieCreditQueryKeys.paginated(),
+            ],
+            {exact: false},
+        )
+
+        successMessage && toast.success(successMessage);
+        onSubmitSuccess?.(credit);
     };
 
     const onError = (error: unknown) => {
@@ -89,7 +91,7 @@ export default function useMovieCreditSubmitMutation(
     };
 
     return useMutation({
-        mutationKey,
+        mutationKey: ["submit_single_movie_credit"],
         mutationFn: submitMovieCreditData,
         onSuccess,
         onError,

@@ -1,10 +1,12 @@
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {useMutation} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {MovieCreditQueryKeys} from "@/pages/moviecredit/utility/query/MovieCreditQueryKeys.ts";
 
 /**
  * Delete a movie credit.
@@ -13,10 +15,9 @@ import handleMutationResponseError from "@/common/utility/handlers/handleMutatio
  * and cache invalidation.
  */
 export default function useMovieCreditDeleteMutation(
-    params?: OnDeleteMutationParams
+    {onDeleteSuccess, onDeleteError, successMessage, errorMessage}: OnDeleteMutationParams = {}
 ) {
-    const queryClient = useQueryClient();
-    const {onDeleteSuccess, onDeleteError, successMessage, errorMessage} = params || {};
+    const invalidateQueries = useInvalidateQueryKeys();
 
     const mutationKey = ["delete_single_movie_credit"];
 
@@ -27,18 +28,18 @@ export default function useMovieCreditDeleteMutation(
         });
     };
 
-    const onSuccess = async () => {
+    const onSuccess = () => {
+        invalidateQueries(
+            [
+                MovieCreditQueryKeys.persons(),
+                MovieCreditQueryKeys.query(),
+                MovieCreditQueryKeys.paginated(),
+            ],
+            {exact: false},
+        )
+
         toast.success(successMessage ?? "Deleted movie credit.");
         onDeleteSuccess?.();
-
-        await Promise.all(
-            [
-                "fetch_movie_credits_by_query",
-                "fetch_paginated_movie_credits",
-            ].map((queryKey) =>
-                queryClient.invalidateQueries({queryKey: [queryKey], exact: false})
-            )
-        );
     };
 
     const onError = (error: Error) => {
