@@ -52,7 +52,7 @@ const PersonIndexHeader: FC = () => {
     const onSubmit = (person: Person) => {
         navigate({
             level: "log",
-            to: `/admin/persons/get/${person._id}`,
+            to: `/admin/persons/get/${person.slug}`,
             component: PersonIndexHeader.name,
             message: "Navigate to details after creating person."
         });

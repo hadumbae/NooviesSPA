@@ -6,16 +6,14 @@
  */
 
 import {FC} from 'react';
-import useFetchPerson from "@/pages/persons/hooks/fetch/useFetchPerson.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import {PersonDetailsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import {PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
-import useFetchByIdentifierRouteParams
-    from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
-import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
+import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import PersonImagePageContent
-    from "@/pages/persons/pages/image-page/PersonImagePageContent.tsx";
+import PersonImagePageContent from "@/pages/persons/pages/image-page/PersonImagePageContent.tsx";
+import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import {useFetchPersonBySlug} from "@/pages/persons/hooks/fetch/useFetchPersonBySlug.ts";
 
 /**
  * **Person Image Page**
@@ -34,27 +32,25 @@ import PersonImagePageContent
  * ```
  */
 const PersonImagePage: FC = () => {
-    const {_id: personID} = useFetchByIdentifierRouteParams({
-        schema: IDRouteParamSchema,
+    const {slug} = useFetchByIdentifierRouteParams({
+        schema: SlugRouteParamSchema,
         sourceComponent: PersonImagePage.name,
         errorTo: "/admin/persons",
-        errorMessage: "Invalid Person Identifier.",
+        errorMessage: "Invalid Person Identifier."
     }) ?? {};
 
-    if (!personID) {
+    if (!slug) {
         return <PageLoader/>;
     }
 
-    const query = useFetchPerson({
-        _id: personID,
+    const query = useFetchPersonBySlug({
+        slug,
         config: {populate: true, virtuals: true},
     });
 
     return (
         <ValidatedDataLoader query={query} schema={PersonDetailsSchema}>
-            {(person: PersonDetails) =>
-                <PersonImagePageContent person={person}/>
-            }
+            {(person: PersonDetails) => <PersonImagePageContent person={person}/>}
         </ValidatedDataLoader>
     );
 };

@@ -37,19 +37,19 @@ export default [
             },
             {
                 /** Route for viewing details of a specific person by ID. */
-                path: "/admin/persons/get/:_id",
+                path: "/admin/persons/get/:slug",
                 element: <PersonDetailsPage />,
                 errorElement: <ComponentErrorHandler />
             },
             {
                 /** Route for viewing a person's profile image. */
-                path: "/admin/persons/get/:_id/images/profile",
+                path: "/admin/persons/get/:slug/images/profile",
                 element: <PersonImagePage />,
                 errorElement: <ComponentErrorHandler />
             },
             {
                 /** Route for editing a person's profile image. */
-                path: "/admin/persons/edit/:_id/profile-image",
+                path: "/admin/persons/edit/:slug/profile-image",
                 element: <PersonImagePage />,
                 errorElement: <ComponentErrorHandler />
             },

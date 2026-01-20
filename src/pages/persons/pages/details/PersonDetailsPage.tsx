@@ -12,21 +12,18 @@
 
 import {FC} from 'react';
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useFetchPerson from "@/pages/persons/hooks/fetch/useFetchPerson.ts";
 import {useFetchGroupedMovieCreditsForPerson}
     from "@/pages/moviecredit/hooks/queries/useFetchGroupedMovieCreditsForPerson.ts";
 import {PersonDetailsSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import PersonDetailsUIProvider from "@/pages/persons/providers/PersonDetailsUIProvider.tsx";
-import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
-import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
-import {IDRouteParamSchema} from "@/common/schema/route-params/IDRouteParamSchema.ts";
 import {
     MovieCreditDetailsExceptPersonByRoleArraySchema
 } from "@/pages/moviecredit/schemas/model/MovieCreditGroup.schema.ts";
-import PersonDetailsPageContent, {
-    PersonDetailsPageContentProps
-} from "@/pages/persons/pages/details/PersonDetailsPageContent.tsx";
+import PersonDetailsPageContent from "@/pages/persons/pages/details/PersonDetailsPageContent.tsx";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import {useFetchPersonBySlug} from "@/pages/persons/hooks/fetch/useFetchPersonBySlug.ts";
 
 /**
  * Page component for rendering a person's detailed profile.
@@ -38,38 +35,38 @@ import PersonDetailsPageContent, {
  * All queries are validated before rendering via `MultiQueryDataLoader`.
  */
 const PersonDetailsPage: FC = () => {
-    const {_id: personID} = useFetchByIdentifierRouteParams({
-        schema: IDRouteParamSchema,
+    const {slug} = useFetchByIdentifierRouteParams({
+        schema: SlugRouteParamSchema,
         sourceComponent: PersonDetailsPage.name,
         errorTo: "/admin/persons",
         errorMessage: "Invalid Person Identifier."
     }) ?? {};
 
-    if (!personID) {
+    if (!slug) {
         return <PageLoader/>;
     }
 
-    const personQuery = useFetchPerson({_id: personID, config: {populate: true, virtuals: true}});
-    const creditQuery = useFetchGroupedMovieCreditsForPerson({personID, config: {limit: 10}});
-
-    const queries: QueryDefinition[] = [
-        {
-            key: "person",
-            query: personQuery,
-            schema: PersonDetailsSchema,
-        },
-        {
-            key: "creditsByRole",
-            query: creditQuery,
-            schema: MovieCreditDetailsExceptPersonByRoleArraySchema,
-        },
-    ];
+    const personQuery = useFetchPersonBySlug({slug, config: {populate: true, virtuals: true}});
 
     return (
         <PersonDetailsUIProvider>
-            <MultiQueryDataLoader queries={queries}>
-                {(data) => <PersonDetailsPageContent {...data as PersonDetailsPageContentProps}/>}
-            </MultiQueryDataLoader>
+            <ValidatedDataLoader query={personQuery} schema={PersonDetailsSchema}>
+                {(person) => {
+                    const creditQuery = useFetchGroupedMovieCreditsForPerson({
+                        personID: person._id,
+                        config: {limit: 10}
+                    });
+
+                    return (
+                        <ValidatedDataLoader
+                            query={creditQuery}
+                            schema={MovieCreditDetailsExceptPersonByRoleArraySchema}
+                        >
+                            {(credits) => <PersonDetailsPageContent person={person} creditsByRole={credits}/>}
+                        </ValidatedDataLoader>
+                    );
+                }}
+            </ValidatedDataLoader>
         </PersonDetailsUIProvider>
     );
 };

@@ -11,21 +11,20 @@ interface Props {
 }
 
 const MoviePersonAvatarCard: FC<Props> = ({person, role = "Cast"}) => {
-    const {_id, name, profileImage} = person
-    const {secure_url} = profileImage || {};
+    const {name, profileImage, slug} = person
 
     return (
-        <Card key={_id} className="w-full">
+        <Card key={slug} className="w-full">
             {/*<CardContent className="p-6 flex flex-col items-center space-y-7">*/}
             <CardContent className="p-6 flex justify-center items-center space-x-5">
                 <Avatar>
-                    <AvatarImage src={secure_url} />
+                    <AvatarImage src={profileImage?.secure_url} />
                     <AvatarFallback>{getInitials(name)}</AvatarFallback>
                 </Avatar>
 
                 <div className="flex flex-col items-center">
                     <Link className="font-bold hover:underline hover:underline-offset-4"
-                          to={`/admin/persons/get/${_id}`}
+                          to={`/admin/persons/get/${slug}`}
                     >
                         {name}
                     </Link>

@@ -27,13 +27,13 @@ type IndexProps = {
  * ```
  */
 const PersonIndexCard: FC<IndexProps> = ({person}) => {
-    const {_id, name, dob, nationality, profileImage} = person;
+    const {name, dob, nationality, profileImage, slug} = person;
 
     const formattedDOB = dob.toFormat("dd MMM, yyyy");
     const formattedNationality = ISO3166Alpha2CountryConstant[nationality];
 
     return (
-        <LoggedLink to={`/admin/persons/get/${_id}`}>
+        <LoggedLink to={`/admin/persons/get/${slug}`}>
             <Card>
                 <CardContent className="p-4 h-full flex items-center space-x-2">
                     {/* Person avatar */}

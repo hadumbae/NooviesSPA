@@ -110,8 +110,8 @@ const MovieDetailsCreditOverview: FC<OverviewProps> = ({slug, credits}) => {
                         _id,
                         characterName,
                         person: {
-                            _id: personID,
                             name: personName,
+                            slug: personSlug,
                             profileImage,
                         },
                     } = credit;
@@ -127,7 +127,7 @@ const MovieDetailsCreditOverview: FC<OverviewProps> = ({slug, credits}) => {
                                         Person Profile Image: {personName}
                                     </h1>
                                     <Avatar>
-                                        <AvatarImage src={profileImageLink} />
+                                        <AvatarImage src={profileImageLink}/>
                                         <AvatarFallback>{initials}</AvatarFallback>
                                     </Avatar>
                                 </section>
@@ -143,7 +143,7 @@ const MovieDetailsCreditOverview: FC<OverviewProps> = ({slug, credits}) => {
 
                                     <LoggedAnchor
                                         target="_blank"
-                                        href={`/admin/persons/get/${personID}`}
+                                        href={`/admin/persons/get/${personSlug}`}
                                         className="text-sm hover:underline hover:underline-offset-4"
                                         message="Navigate to person's detail page."
                                         component={MovieDetailsCreditOverview.name}

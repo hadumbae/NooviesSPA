@@ -66,3 +66,5 @@ const PersonIndexPage: FC = () => {
 };
 
 export default PersonIndexPage;
+
+// http://localhost:3000/admin/persons/get/alice-morgan-owppcc

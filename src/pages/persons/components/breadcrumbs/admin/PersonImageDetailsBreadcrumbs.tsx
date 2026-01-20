@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -14,9 +13,9 @@ import {Link} from "react-router-dom";
  */
 type CrumbProps = {
     /**
-     * The ID of the person for constructing links.
+     * The slug of the person for constructing links.
      */
-    personID: ObjectId;
+    personSlug: string;
 
     /**
      * The display name of the person.
@@ -39,7 +38,7 @@ type CrumbProps = {
  * <PersonImageDetailsBreadcrumbs personID={person._id} name={person.name} />
  * ```
  */
-const PersonImageDetailsBreadcrumbs: FC<CrumbProps> = ({personID, name}) => {
+const PersonImageDetailsBreadcrumbs: FC<CrumbProps> = ({personSlug, name}) => {
     return (
         <Breadcrumb>
             <BreadcrumbList>
@@ -53,7 +52,7 @@ const PersonImageDetailsBreadcrumbs: FC<CrumbProps> = ({personID, name}) => {
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to={`/admin/persons/get/${personID}`}>Person Details {name && ` | ${name}`}</Link>
+                        <Link to={`/admin/persons/get/${personSlug}`}>Person Details {name && ` | ${name}`}</Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

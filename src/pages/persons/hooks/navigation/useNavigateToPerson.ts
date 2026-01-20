@@ -9,14 +9,13 @@ import useLoggedNavigate, {
     LoggingMessageParams
 } from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {NavigateOptions} from "react-router-dom";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
  * Parameters for navigating to a person details page.
  */
 type NavigateParams = LoggingMessageParams & {
     /** Target person identifier. */
-    _id: ObjectId;
+    slug: string;
 
     /** Optional React Router navigation options. */
     options?: NavigateOptions;
@@ -43,9 +42,9 @@ type NavigateParams = LoggingMessageParams & {
 export function useNavigateToPerson(): (params: NavigateParams) => void {
     const navigate = useLoggedNavigate();
 
-    return ({_id, message, ...rest}) => {
+    return ({slug, message, ...rest}) => {
         navigate({
-            to: `/admin/persons/get/${_id}`,
+            to: `/admin/persons/get/${slug}`,
             message: message ?? "Navigate To Person Details.",
             ...rest
         });

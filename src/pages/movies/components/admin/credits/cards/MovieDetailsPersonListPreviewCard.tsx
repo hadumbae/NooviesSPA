@@ -11,16 +11,16 @@ interface DetailsProp {
 }
 
 const MovieDetailsPersonListPreviewCard: FC<DetailsProp> = ({credit, className}) => {
-    const {roleType, person: {_id: personID, name}} = credit;
+    const {roleType, department, person: {slug: personSlug, name}} = credit;
 
     let secondaryText;
 
-    switch (roleType) {
+    switch (department) {
         case "CAST":
             secondaryText = credit.characterName;
             break;
         case "CREW":
-            secondaryText = credit.job;
+            secondaryText = roleType.roleName;
             break;
         default:
             throw new ParamError({
@@ -37,7 +37,7 @@ const MovieDetailsPersonListPreviewCard: FC<DetailsProp> = ({credit, className})
                 "flex flex-col justify-center items-center",
                 className,
             )}>
-                <Link to={`/admin/persons/get/${personID}`} className="font-bold  hover:underline" target="_blank">
+                <Link to={`/admin/persons/get/${personSlug}`} className="font-bold  hover:underline" target="_blank">
                     {name}
                 </Link>
 

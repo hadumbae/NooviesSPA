@@ -45,11 +45,11 @@ type ContentProps = {
  */
 const PersonImagePageContent = ({person}: ContentProps) => {
     const navigate = useNavigateToPerson();
-    const {_id, name} = person;
+    const {_id, name, slug} = person;
 
     const onUpdate = (updated: Person) =>
         navigate({
-            _id: updated._id,
+            slug: updated.slug,
             message: "Navigation on successful update to person's profile image.",
             component: PersonImagePageContent.name,
         });
@@ -57,7 +57,7 @@ const PersonImagePageContent = ({person}: ContentProps) => {
     return (
         <PageFlexWrapper className="space-y-5">
             <header className="space-y-5">
-                <PersonImageDetailsBreadcrumbs personID={_id} name={name}/>
+                <PersonImageDetailsBreadcrumbs personSlug={slug} name={name}/>
                 <PersonProfileImageHeader name={name}/>
             </header>
 
