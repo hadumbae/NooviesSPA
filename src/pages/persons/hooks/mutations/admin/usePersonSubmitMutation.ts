@@ -79,7 +79,7 @@ export default function usePersonSubmitMutation(
         invalidateQueries(
             [
                 PersonQueryKeys.ids({_id: person._id}),
-                PersonQueryKeys.slugs(),
+                PersonQueryKeys.slugs({slug: person.slug}),
                 PersonQueryKeys.query(),
                 PersonQueryKeys.paginated(),
             ],

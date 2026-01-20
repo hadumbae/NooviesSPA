@@ -11,7 +11,7 @@ import UploadPersonProfileImageFormPanel
     from "@/pages/persons/components/form/admin/profile-image/UploadPersonProfileImageFormPanel.tsx";
 import PersonDeleteWarningDialog from "@/pages/persons/components/admin/dialog/PersonDeleteWarningDialog.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import {PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
+import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
 import {
     MovieCreditDetailsExceptPersonGroupedByRoleArray
 } from "@/pages/moviecredit/schemas/model/MovieCreditGroup.types.ts";
@@ -65,8 +65,6 @@ const PersonDetailsPageContent: FC<PersonDetailsPageContentProps> = (props) => {
     const {person, creditsByRole} = props;
     const {_id, name} = person;
 
-    // ⚡ Hooks ⚡
-
     const navigate = useLoggedNavigate();
 
     const {
@@ -78,7 +76,6 @@ const PersonDetailsPageContent: FC<PersonDetailsPageContentProps> = (props) => {
         setIsDeletingPerson,
     } = useRequiredContext({context: PersonDetailsUIContext});
 
-    // ⚡ Handlers ⚡
 
     const navigateToPersonIndex = () => {
         navigate({
@@ -87,6 +84,15 @@ const PersonDetailsPageContent: FC<PersonDetailsPageContentProps> = (props) => {
             message: "Navigation on person deletion."
         });
     };
+
+    const replaceOnUpdate = (person: Person) => {
+        navigate({
+            to: `/admin/persons/get/${person.slug}`,
+            component: PersonDetailsPageContent.name,
+            message: "Update slug in URL.",
+            options: {replace: true},
+        });
+    }
 
     return (
         <PageFlexWrapper>
@@ -117,6 +123,7 @@ const PersonDetailsPageContent: FC<PersonDetailsPageContentProps> = (props) => {
                     entity={person}
                     presetOpen={isEditing}
                     setPresetOpen={setIsEditing}
+                    onSubmitSuccess={replaceOnUpdate}
                 />
             </PageSection>
 
