@@ -1,13 +1,13 @@
-import { z } from "zod";
-import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import { RoleTypeDepartmentEnumSchema } from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {z} from "zod";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {RoleTypeDepartmentEnumSchema} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
-import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import { MovieSchema } from "@/pages/movies/schema/movie/Movie.schema.ts";
-import { PersonSchema } from "@/pages/persons/schema/person/Person.schema.ts";
-import { RoleTypeSchema } from "@/pages/roletype/schema/model/RoleType.schema.ts";
-import { UndefinedForCrewSchema } from "@/pages/moviecredit/schemas/MovieCreditCrewSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
+import {PersonSchema} from "@/pages/persons/schema/person/Person.schema.ts";
+import {RoleTypeSchema} from "@/pages/roletype/schema/model/RoleType.schema.ts";
+import {UndefinedForCrewSchema} from "@/pages/moviecredit/schemas/MovieCreditCrewSchema.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**
@@ -20,6 +20,9 @@ import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanV
 export const MovieCreditBaseSchema = z.object({
     /** Unique identifier of the movie credit */
     _id: IDStringSchema.readonly(),
+
+    /** URL-friendly slug derived from the credited person. */
+    slug: NonEmptyStringSchema.max(75, "Must be 75 characters or less."),
 
     /** Department of the credit (CAST or CREW) */
     department: RoleTypeDepartmentEnumSchema,
