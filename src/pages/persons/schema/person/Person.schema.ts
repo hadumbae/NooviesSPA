@@ -1,59 +1,64 @@
-import { z } from "zod";
-import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import { ISO3166Alpha2CountryCodeEnum } from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import { CloudinaryImageSchema } from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
-import { NonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import { UTCDayOnlyDateTimeSchema } from "@/common/schema/date-time/iso-8601/UTCDayOnlyDateTimeSchema.ts";
+/**
+ * @file Person.schema.ts
+ *
+ * Zod schemas for validating person entities.
+ * Used across API boundaries, forms, and UI data models.
+ */
+
+import {z} from "zod";
+
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
+import {CloudinaryImageSchema} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import {UTCDayOnlyDateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCDayOnlyDateTimeSchema.ts";
 
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 
 /**
- * Represents a person in the system.
+ * Base schema for a person entity.
  *
- * @remarks
- * - Core schema for a person entity.
- * - Can be used for forms, API requests, or responses.
+ * Represents core identity and profile data.
  */
 export const PersonSchema = z.object({
-    /** Unique identifier string for the person (read-only). */
+    /** Unique identifier (read-only). */
     _id: IDStringSchema.readonly(),
 
-    /** The full name of the person. Must be 255 characters or fewer. */
+    /** URL-friendly identifier. */
+    slug: NonEmptyStringSchema.max(75, "Slug must not be more than 75 characters."),
+
+    /** Full name of the person. */
     name: NonEmptyStringSchema.max(255, "Name must not be more than 255 characters."),
 
-    /** A brief biography of the person, required, max 1000 characters. */
+    /** Short biography. */
     biography: NonEmptyStringSchema.max(1000, "Must be 1000 characters or less."),
 
-    /** Date of birth as an ISO 8601 date string (UTC, day-only). */
+    /** Date of birth (UTC, day-only). */
     dob: UTCDayOnlyDateTimeSchema,
 
-    /** Nationality of the person as an ISO 3166-1 alpha-2 country code. */
+    /** Nationality (ISO 3166-1 alpha-2). */
     nationality: ISO3166Alpha2CountryCodeEnum,
 
-    /** Optional profile image object from Cloudinary; nullable if no image exists. */
+    /** Optional Cloudinary profile image. */
     profileImage: CloudinaryImageSchema.nullable().optional(),
 });
 
 /**
- * Extends `PersonSchema` with detailed counts for associated movies and credits.
+ * Extended person schema with aggregate counts.
  *
- * @remarks
- * - Useful for detailed views in UI or API responses.
+ * Used for populated or detailed views.
  */
 export const PersonDetailsSchema = PersonSchema.extend({
-    /** Number of credits associated with the person (non-negative). */
+    /** Total number of associated credits. */
     creditCount: NonNegativeNumberSchema,
 
-    /** Number of movies the person has been involved with (non-negative). */
+    /** Total number of associated movies. */
     movieCount: NonNegativeNumberSchema,
 });
 
 /**
- * Schema representing an array of persons.
- *
- * @remarks
- * - Provides type validation for lists of `PersonSchema`.
+ * Schema for an array of persons.
  */
 export const PersonArraySchema = z.array(PersonSchema, {
     required_error: "Required.",
@@ -61,10 +66,7 @@ export const PersonArraySchema = z.array(PersonSchema, {
 });
 
 /**
- * Schema representing an array of detailed persons.
- *
- * @remarks
- * - Provides type validation for lists of `PersonDetailsSchema`.
+ * Schema for an array of detailed persons.
  */
 export const PersonDetailsArraySchema = z.array(PersonDetailsSchema, {
     required_error: "Required.",
@@ -72,17 +74,13 @@ export const PersonDetailsArraySchema = z.array(PersonDetailsSchema, {
 });
 
 /**
- * Paginated response schema for persons.
- *
- * @remarks
- * - Wraps `PersonSchema` in a standard pagination structure.
+ * Paginated persons response schema.
  */
-export const PaginatedPersonsSchema = generatePaginationSchema(PersonSchema);
+export const PaginatedPersonsSchema =
+    generatePaginationSchema(PersonSchema);
 
 /**
- * Paginated response schema for detailed persons.
- *
- * @remarks
- * - Wraps `PersonDetailsSchema` in a standard pagination structure.
+ * Paginated detailed persons response schema.
  */
-export const PaginatedPersonDetailsSchema = generatePaginationSchema(PersonDetailsSchema);
+export const PaginatedPersonDetailsSchema =
+    generatePaginationSchema(PersonDetailsSchema);
