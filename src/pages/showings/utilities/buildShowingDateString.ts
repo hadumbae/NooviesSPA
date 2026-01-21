@@ -8,7 +8,7 @@ type DateParams = {
     /** Start date and time in UTC (as a Luxon `DateTime`). */
     start: DateTime;
     /** End date and time in UTC (as a Luxon `DateTime`), or `null` if not applicable. */
-    end: DateTime | null;
+    end: DateTime | undefined | null;
     /** IANA timezone identifier to localize the formatted output. */
     timezone: IANATimezone;
 };
