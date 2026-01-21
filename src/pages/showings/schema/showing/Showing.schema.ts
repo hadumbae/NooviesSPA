@@ -56,8 +56,9 @@ export const PopulatedShowingSchema = ShowingSchema.extend({
  */
 export const ShowingDetailsSchema = PopulatedShowingSchema.extend({
     seatMapCount: NonNegativeNumberSchema,
+    unavailableSeatsCount: NonNegativeNumberSchema,
     availableSeatsCount: NonNegativeNumberSchema,
     reservedSeatsCount: NonNegativeNumberSchema,
-    unreservedSeatsCount: NonNegativeNumberSchema,
+    soldSeatsCount: NonNegativeNumberSchema,
 });
 
