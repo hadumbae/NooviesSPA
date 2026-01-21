@@ -1,4 +1,3 @@
-import {FC} from "react";
 import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
 import {
     Dialog,
@@ -71,7 +70,7 @@ type ShowingIndexListDialogProps = {
  * <ShowingIndexListDialog showing={showingData} />
  * ```
  */
-const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({showing}) => {
+const ShowingIndexListDialog = ({showing}: ShowingIndexListDialogProps) => {
     const {movie, theatre, isSpecialEvent, isActive, ticketPrice, slug} = showing;
     const {posterImage, synopsis} = movie;
     const {
@@ -94,7 +93,10 @@ const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({showing}) => {
 
     /** Renders the showing status section under the dialog title. */
     const descSection = (
-        <section className="flex max-sm:justify-center items-center space-x-3">
+        <section className={cn(
+            SecondaryTextBaseCSS,
+            "flex max-sm:justify-center items-center space-x-3",
+        )}>
             <LucideIconText
                 icon={Cog}
                 text={formattedStatus}
@@ -123,7 +125,8 @@ const ShowingIndexListDialog: FC<ShowingIndexListDialogProps> = ({showing}) => {
             <DialogContent className={cn(ContainerCSS, "bg-white space-y-2")}>
                 <DialogHeader>
                     <DialogTitle className={PrimaryTextBaseCSS}>{movieTitle} ({releaseYear})</DialogTitle>
-                    <DialogDescription className={SecondaryTextBaseCSS}>{descSection}</DialogDescription>
+                    <DialogDescription className="hidden">Data</DialogDescription>
+                    {descSection}
                 </DialogHeader>
 
                 {/* Movie header section */}
