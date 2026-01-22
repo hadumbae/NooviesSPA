@@ -14,6 +14,7 @@ import ClientMovieRoutes from "@/pages/movies/routing/BrowseMovieRoutes.tsx";
 import RoleTypeRoutes from "@/pages/roletype/routing/RoleTypeRoutes.tsx";
 import AdminDashboardRoutes from "@/pages/dashboard/routing/AdminDashboardRoutes.tsx";
 import ClientGenreRoutes from "@/pages/genres/routing/ClientGenreRoutes.tsx";
+import BrowseShowingRoutes from "@/pages/showings/routing/BrowseShowingRoutes.tsx";
 
 // --- ADMIN ROUTES ---
 
@@ -37,6 +38,7 @@ const clientRoutes: RouteObject[] = [
     ...UserProfileRoutes,
     ...ClientMovieRoutes,
     ...ClientGenreRoutes,
+    ...BrowseShowingRoutes,
 ];
 
 // --- AGGREGATE ---
