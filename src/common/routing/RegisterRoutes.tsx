@@ -10,11 +10,12 @@ import AdminMovieRoutes from "@/pages/movies/routing/AdminMovieRoutes.tsx";
 import SystemRoutes from "@/common/routing/SystemRoutes.tsx";
 import {RouteObject} from "react-router-dom";
 import UserProfileRoutes from "@/pages/users/routing/UserProfileRoutes.tsx";
-import ClientMovieRoutes from "@/pages/movies/routing/BrowseMovieRoutes.tsx";
+import BrowseMovieRoutes from "@/pages/movies/routing/BrowseMovieRoutes.tsx";
 import RoleTypeRoutes from "@/pages/roletype/routing/RoleTypeRoutes.tsx";
 import AdminDashboardRoutes from "@/pages/dashboard/routing/AdminDashboardRoutes.tsx";
 import ClientGenreRoutes from "@/pages/genres/routing/ClientGenreRoutes.tsx";
 import BrowseShowingRoutes from "@/pages/showings/routing/BrowseShowingRoutes.tsx";
+import BrowseTheatreRoutes from "@/pages/theatres/routing/BrowseTheatreRoutes.tsx";
 
 // --- ADMIN ROUTES ---
 
@@ -36,9 +37,10 @@ const adminRoutes = [
 
 const clientRoutes: RouteObject[] = [
     ...UserProfileRoutes,
-    ...ClientMovieRoutes,
     ...ClientGenreRoutes,
+    ...BrowseMovieRoutes,
     ...BrowseShowingRoutes,
+    ...BrowseTheatreRoutes,
 ];
 
 // --- AGGREGATE ---
