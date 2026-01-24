@@ -12,6 +12,7 @@ import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAut
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
+import {cloneElement} from "react";
 
 type FormProps =
     Pick<FormOptions<BrowseTheatreParamFormValues, BrowseTheatreParams>, "disableFields"> & {
@@ -53,7 +54,9 @@ const BrowseTheatreParamFormView = (
         }
     ];
 
-    const fieldsToRender = fields.filter(f => f.render).map(({element}) => element);
+    const fieldsToRender = fields.map(
+        ({key, element, render}) => render ? cloneElement(element, {key}) : null
+    );
 
     return (
         <Form {...form}>
