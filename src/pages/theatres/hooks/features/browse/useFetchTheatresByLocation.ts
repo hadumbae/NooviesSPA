@@ -38,7 +38,7 @@ type LocationParams = PaginationValues & {
  */
 export function useFetchTheatresByLocation(
     {page, perPage, target, options}: LocationParams,
-): UseQueryResult<HttpResponseError, unknown> {
+): UseQueryResult<unknown, HttpResponseError> {
     const fetchByLocation = useQueryFnHandler({
         action: () =>
             TheatreBrowseRepository.theatresByLocation({page, perPage, target}),
