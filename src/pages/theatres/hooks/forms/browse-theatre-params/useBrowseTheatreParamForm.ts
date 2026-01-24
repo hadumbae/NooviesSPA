@@ -4,44 +4,42 @@
  * React Hook Form initializer for theatre browse parameters.
  *
  * Integrates:
- * - **Zod** schema validation
- * - **React Hook Form** state management
- * - Stable default values via `useBrowseTheatreParamFormDefaultValues`
+ * - Zod-based validation
+ * - React Hook Form state management
+ * - Stable default values
  */
 
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
-    BrowseTheatreParamFormValues,
-    BrowseTheatreParams,
-    BrowseTheatreParamsSchema,
-} from "@/pages/movies/schema/params/BrowseTheatreParams.ts";
-import {
     useBrowseTheatreParamFormDefaultValues,
 } from "@/pages/theatres/hooks/forms/browse-theatre-params/useBrowseTheatreParamFormDefaultValues.ts";
+import {
+    BrowseTheatreParamFormValues,
+    BrowseTheatreParams,
+    BrowseTheatreParamSchema,
+} from "@/pages/theatres/schema/params/client/browse-theatre-list/BrowseTheatreParamSchema.ts";
 
 /**
- * Parameters for initializing the browse theatre form.
+ * Initialization options for the browse theatre form.
  */
 type FormParams = {
-    /** Optional preset browse parameters used to prefill the form */
+    /** Optional preset values used to prefill the form */
     presetValues?: Partial<BrowseTheatreParams>;
 };
 
 /**
- * Creates a React Hook Form instance for browsing theatres.
+ * Creates a React Hook Form instance for theatre browse parameters.
  *
- * - Applies Zod-based validation
- * - Injects stable default values to prevent unnecessary resets
- *
- * @param params - Form initialization parameters
- * @returns React Hook Form API for browse theatre parameters
+ * @param params - Optional initialization options
  */
-export function useBrowseTheatreParamForm(params?: FormParams): UseFormReturn<BrowseTheatreParamFormValues> {
+export function useBrowseTheatreParamForm(
+    params?: FormParams,
+): UseFormReturn<BrowseTheatreParamFormValues> {
     const defaultValues = useBrowseTheatreParamFormDefaultValues(params);
 
     return useForm<BrowseTheatreParamFormValues>({
-        resolver: zodResolver(BrowseTheatreParamsSchema),
+        resolver: zodResolver(BrowseTheatreParamSchema),
         defaultValues,
     });
 }

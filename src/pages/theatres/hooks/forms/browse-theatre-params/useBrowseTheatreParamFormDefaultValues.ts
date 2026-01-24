@@ -1,48 +1,43 @@
 /**
  * @file useBrowseTheatreParamFormDefaultValues.ts
  *
- * React hook for producing stable default form values for theatre browse parameters.
+ * React hook for producing stable default values
+ * for theatre browse parameter forms.
  *
  * Ensures:
  * - Deterministic initial form state
  * - Referential stability across renders
- * - Safe merging of preset values with empty defaults
+ * - Safe merging of preset values
  */
 
+import {useRef} from "react";
+import {isEqual} from "lodash";
 import {
     BrowseTheatreParamFormValues,
     BrowseTheatreParams,
-} from "@/pages/movies/schema/params/BrowseTheatreParams.ts";
-import {useRef} from "react";
-import {isEqual} from "lodash";
+} from "@/pages/theatres/schema/params/client/browse-theatre-list/BrowseTheatreParamSchema.ts";
 
 /**
- * Input parameters for initializing browse theatre form defaults.
+ * Options for generating browse theatre form defaults.
  */
 type ValueParams = {
-    /** Optional preset query values to prefill the form */
+    /** Optional preset query values */
     presetValues?: Partial<BrowseTheatreParams>;
 };
 
 /**
- * Returns stable default values for the browse theatre parameter form.
+ * Returns referentially stable default values
+ * for the browse theatre parameter form.
  *
- * Uses a ref to prevent unnecessary form resets when values are deeply equal,
- * even if object identity changes between renders.
- *
- * @param presetValues - Partial preset browse parameters
- * @returns Form-safe default values for browse theatre parameters
+ * @param presetValues - Optional preset browse parameters
  */
 export function useBrowseTheatreParamFormDefaultValues(
     {presetValues}: ValueParams = {},
 ): BrowseTheatreParamFormValues {
     const initialValues = useRef<BrowseTheatreParamFormValues | null>(null);
 
-    const defaultValues = {
-        city: "",
-        state: "",
-        country: "",
-        postalCode: "",
+    const defaultValues: BrowseTheatreParamFormValues = {
+        target: "",
         ...presetValues,
     };
 
