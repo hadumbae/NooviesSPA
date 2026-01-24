@@ -11,11 +11,12 @@
  */
 
 import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
-import {useQuery} from "@tanstack/react-query";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {TheatreBrowseRepository} from "@/pages/theatres/repositories/theatre-browse/TheatreBrowseRepository.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**
  * Parameters for fetching theatres by location.
@@ -37,7 +38,7 @@ type LocationParams = PaginationValues & {
  */
 export function useFetchTheatresByLocation(
     {page, perPage, target, options}: LocationParams,
-): H {
+): UseQueryResult<HttpResponseError, unknown> {
     const fetchByLocation = useQueryFnHandler({
         action: () =>
             TheatreBrowseRepository.theatresByLocation({page, perPage, target}),
