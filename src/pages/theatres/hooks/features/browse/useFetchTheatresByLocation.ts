@@ -23,10 +23,10 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
  */
 type LocationParams = PaginationValues & {
     /** Location identifier (city, country code, or free-text target) */
-    target: string;
+    target?: string;
 
     /** React Query configuration overrides */
-    options: UseQueryOptions<unknown>;
+    options?: UseQueryOptions<unknown>;
 };
 
 /**

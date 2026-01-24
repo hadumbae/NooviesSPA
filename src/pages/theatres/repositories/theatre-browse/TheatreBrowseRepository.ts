@@ -35,8 +35,8 @@ export const TheatreBrowseRepository: TheatreBrowseMethods = {
     ): Promise<RequestReturns> {
         const url = buildQueryURL({
             baseURL: this.baseURL,
-            path: `theatres-by-location/${target}/paginated`,
-            queries: {page, perPage},
+            path: `theatres-by-location/paginated`,
+            queries: {page, perPage, target},
         });
 
         return useFetchAPI({method: "GET", url});

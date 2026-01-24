@@ -12,7 +12,7 @@ import RequestReturns from "@/common/type/request/RequestReturns.ts";
  */
 export type BrowseTheatreByLocationParams = PaginationValues & {
     /** Location identifier (e.g. city, country code, free-form target) */
-    target: string;
+    target?: string;
 };
 
 /**
