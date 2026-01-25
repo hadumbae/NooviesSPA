@@ -55,6 +55,16 @@ const ClientBrowseSidebarGroup: FC = () => {
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
+
+                    {/* Theatres Page */}
+                    <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                            <Link to="/browse/theatres">
+                                <TableOfContents />
+                                <span>Theatres</span>
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>
