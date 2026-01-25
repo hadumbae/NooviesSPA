@@ -3,10 +3,10 @@
  *
  * Client-side repository for public theatre browse endpoints.
  *
- * Responsible for:
- * - Building browse URLs
- * - Executing HTTP requests
- * - Returning normalized request results
+ * Handles:
+ * - URL construction for browse queries
+ * - HTTP request execution
+ * - Normalized API responses
  */
 
 import {
@@ -18,25 +18,32 @@ import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 
 /**
- * Repository implementation for theatre browsing operations.
+ * Concrete implementation of theatre browse repository methods.
  */
 export const TheatreBrowseRepository: TheatreBrowseMethods = {
-    /** Base API endpoint for theatre browsing */
+    /** Base API endpoint for theatre browse routes */
     baseURL: `${import.meta.env.VITE_API_URL}/api/v1/browse/theatres`,
 
     /**
-     * Fetches paginated theatres filtered by a location target.
+     * Retrieves paginated theatres filtered by a location target.
      *
-     * @param params Location identifier and pagination values
-     * @returns API request result containing theatre browse data
+     * Optionally limits the number of showings returned per theatre.
+     *
+     * @param params Pagination, location target, and browse configuration
+     * @returns API request result containing paginated theatre data
      */
     theatresByLocation(
-        {page, perPage, target}: BrowseTheatreByLocationParams,
+        {page, perPage, target, config}: BrowseTheatreByLocationParams,
     ): Promise<RequestReturns> {
         const url = buildQueryURL({
             baseURL: this.baseURL,
             path: `theatres-by-location/paginated`,
-            queries: {page, perPage, target},
+            queries: {
+                page,
+                perPage,
+                target,
+                limit: config?.showingsPerTheatre,
+            },
         });
 
         return useFetchAPI({method: "GET", url});

@@ -8,15 +8,30 @@ import {PaginationValues} from "@/common/schema/features/pagination-search-param
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 
 /**
- * Parameters for browsing theatres by location.
+ * Optional configuration for theatre browse queries.
  */
-export type BrowseTheatreByLocationParams = PaginationValues & {
-    /** Location identifier (e.g. city, country code, free-form target) */
-    target?: string;
+export type BrowseTheatreByLocationConfig = {
+    /** Maximum number of showings returned per theatre */
+    showingsPerTheatre?: number;
 };
 
 /**
- * Theatre browse repository contract.
+ * Parameters for browsing theatres by location.
+ */
+export type BrowseTheatreByLocationParams = PaginationValues & {
+    /**
+     * Location target used for filtering theatres.
+     *
+     * Can represent a country code, city name, or free-form marker.
+     */
+    target?: string;
+
+    /** Additional browse configuration */
+    config?: BrowseTheatreByLocationConfig;
+};
+
+/**
+ * Contract for theatre browse repository implementations.
  */
 export interface TheatreBrowseMethods {
     /** Base API endpoint for browse routes */
@@ -25,8 +40,10 @@ export interface TheatreBrowseMethods {
     /**
      * Fetches paginated theatres filtered by location.
      *
-     * @param params Location and pagination parameters
+     * @param params Pagination, target, and configuration options
      * @returns API request result
      */
-    theatresByLocation(params: BrowseTheatreByLocationParams): Promise<RequestReturns>;
+    theatresByLocation(
+        params: BrowseTheatreByLocationParams
+    ): Promise<RequestReturns>;
 }
