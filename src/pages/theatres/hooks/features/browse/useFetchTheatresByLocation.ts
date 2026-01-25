@@ -17,31 +17,42 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {TheatreBrowseRepository} from "@/pages/theatres/repositories/theatre-browse/TheatreBrowseRepository.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {
+    BrowseTheatreByLocationConfig,
+} from "@/pages/theatres/repositories/theatre-browse/TheatreBrowseRepository.types.ts";
 
 /**
  * Parameters for fetching theatres by location.
  */
 type LocationParams = PaginationValues & {
-    /** Location identifier (city, country code, or free-text target) */
+    /**
+     * Location target used to filter theatres.
+     *
+     * Can represent a country code, city name, or free-form marker.
+     */
     target?: string;
 
-    /** React Query configuration overrides */
+    /** Optional per-theatre browse configuration */
+    config?: BrowseTheatreByLocationConfig;
+
+    /** React Query option overrides */
     options?: UseQueryOptions<unknown>;
 };
 
 /**
- * Fetches paginated theatres that have scheduled showings,
- * filtered by a location target.
+ * Fetches paginated theatres filtered by a location target.
  *
- * @param params Pagination, location, and query options
- * @returns React Query result for theatre browse request
+ * Uses a stable query key derived from pagination and location
+ * parameters, and applies shared query defaults automatically.
+ *
+ * @param params Pagination, location target, and query options
+ * @returns React Query result for the theatre browse request
  */
 export function useFetchTheatresByLocation(
-    {page, perPage, target, options}: LocationParams,
+    {page, perPage, target, options, config}: LocationParams,
 ): UseQueryResult<unknown, HttpResponseError> {
     const fetchByLocation = useQueryFnHandler({
-        action: () =>
-            TheatreBrowseRepository.theatresByLocation({page, perPage, target}),
+        action: () => TheatreBrowseRepository.theatresByLocation({page, perPage, target, config}),
         errorMessage: "An error occurred.",
     });
 
