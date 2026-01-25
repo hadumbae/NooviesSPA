@@ -119,3 +119,7 @@ export const SectionHeaderCSS = cn(
     "border-l-4 px-2",
     "border-primary",
 );
+
+export const HoverUnderlineCSS = cn(
+    "hover:underline underline-offset-4",
+);
