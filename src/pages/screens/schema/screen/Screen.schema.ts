@@ -7,13 +7,13 @@ import { ScreenTypeEnum } from "@/pages/screens/schema/ScreenType.enum.ts";
 import { NonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import { generatePaginationSchema } from "@/common/utility/schemas/generatePaginationSchema.ts";
 
-// /**
-//  * @file Screen.schema.ts
-//  *
-//  * Zod schemas for validating **screen** domain objects.
-//  *
-//  * Screens represent individual auditoriums within a theatre.
-//  */
+/**
+ * @file Screen.schema.ts
+ *
+ * Zod schemas for validating **screen** domain objects.
+ *
+ * Screens represent individual auditoriums within a theatre.
+ */
 export const ScreenSchema = z.object({
     /** MongoDB ObjectId (readonly). */
     _id: IDStringSchema.readonly(),
@@ -40,12 +40,17 @@ export const ScreenSchema = z.object({
 });
 
 /**
- * 🎬 Extended screen schema with resolved relations and metrics.
+ * Screen schema with populated theatre reference.
  */
-export const ScreenDetailsSchema = ScreenSchema.extend({
+export const PopulatedScreenSchema = ScreenSchema.extend({
     /** Fully populated theatre object. */
     theatre: z.lazy(() => TheatreSchema),
+});
 
+/**
+ * Screen schema extended with derived metrics.
+ */
+export const ScreenDetailsSchema = PopulatedScreenSchema.extend({
     /** Total number of seats in this screen. */
     seatCount: NonNegativeNumberSchema,
 

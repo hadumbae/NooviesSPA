@@ -2,6 +2,7 @@ import { z } from "zod";
 import {
     PaginatedScreenDetailsSchema,
     PaginatedScreenSchema,
+    PopulatedScreenSchema,
     ScreenArraySchema,
     ScreenDetailsSchema,
     ScreenSchema,
@@ -9,13 +10,20 @@ import {
 
 /**
  * Type representing a basic screen.
- * Mirrors the `ScreenSchema` structure.
+ *
+ * Mirrors {@link ScreenSchema}.
  */
 export type Screen = z.infer<typeof ScreenSchema>;
 
 /**
- * Type representing a screen with additional details.
- * Includes theatre information, seat count, and future showings.
+ * Type representing a screen with populated theatre data.
+ */
+export type PopulatedScreen = z.infer<typeof PopulatedScreenSchema>;
+
+/**
+ * Type representing a screen with derived details.
+ *
+ * Includes theatre data, seat count, and future showing count.
  */
 export type ScreenDetails = z.infer<typeof ScreenDetailsSchema>;
 
