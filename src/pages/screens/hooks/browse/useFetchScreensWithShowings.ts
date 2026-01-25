@@ -1,17 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { DateOnlyString } from "@/common/schema/dates/DateOnlyStringSchema.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import { ScreenBrowseRepository } from "@/pages/screens/repositories/screen-browse/ScreenBrowseRepository.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 
 /**
  * Parameters for fetching screens with showings.
  */
 type FetchParams = {
     /** Target theatre ObjectId */
-    theatreID: ObjectId;
+    theatreID: ObjectId | SlugString;
 
     /** Date used to filter showings (YYYY-MM-DD) */
     dateString: DateOnlyString;
@@ -34,7 +36,7 @@ type FetchParams = {
  */
 export function useFetchScreensWithShowings(
     { theatreID, dateString, options }: FetchParams
-) {
+): UseQueryResult<unknown, HttpResponseError> {
     const fetchScreens = useQueryFnHandler({
         action: () =>
             ScreenBrowseRepository.fetchScreensWithShowings({

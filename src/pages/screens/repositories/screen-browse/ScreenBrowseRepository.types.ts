@@ -1,13 +1,14 @@
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { DateOnlyString } from "@/common/schema/dates/DateOnlyStringSchema.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 
 /**
  * Parameters for fetching screens with showings by theatre and date.
  */
 export type FetchScreensWithShowingsParams = {
     /** Target theatre ObjectId */
-    theatreID: ObjectId;
+    theatreID: ObjectId | SlugString;
 
     /** Date used to filter showings (YYYY-MM-DD) */
     dateString: DateOnlyString;
