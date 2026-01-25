@@ -44,7 +44,7 @@ const BrowseTheatreParamFormView = (
             >
                 <HookFormInput
                     name="target"
-                    label="City, State, Country, or Post Code"
+                    label="City, State, or Post Code"
                     hasLabel={false}
                     control={form.control}
                 />

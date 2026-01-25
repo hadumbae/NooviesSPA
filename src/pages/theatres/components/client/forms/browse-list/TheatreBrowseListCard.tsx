@@ -34,14 +34,17 @@ type BrowseProps = {
  * - A list of recent showings with selection actions
  */
 const TheatreBrowseListCard = ({theatre}: BrowseProps) => {
+    // --- PARAMS ---
     const {name, location, slug, showings} = theatre;
     const {city, state, country} = location;
 
+    // --- FORMAT ---
     const locationString = buildString(
         [city, state, ISO3166Alpha2ShortCountryConstant[country]],
         ", "
     );
 
+    // --- RENDER ---
     return (
         <Card>
             <CardHeader>
@@ -54,7 +57,7 @@ const TheatreBrowseListCard = ({theatre}: BrowseProps) => {
             </CardHeader>
 
             <CardContent>
-                <section className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+                <section className="grid grid-cols-1 gap-2">
                     {showings.map((showing) => (
                         <TheatreShowingSelectSummary
                             key={showing._id}
