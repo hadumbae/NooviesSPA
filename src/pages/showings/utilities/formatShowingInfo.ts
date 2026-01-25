@@ -70,7 +70,7 @@ export function formatShowingInfo(showing: ShowingDetails): FormattedShowingInfo
     const {slug: theatreSlug, name: theatreName, location: {timezone: theatreTimeZone}} = theatre;
     const {slug: screenSlug, name: screenName, screenType} = screen;
 
-    const formattedReleaseDate = releaseDate ? releaseDate.toFormat("   yyyy") : "Unreleased";
+    const formattedReleaseDate = releaseDate ? releaseDate.toFormat("yyyy") : "Unreleased";
     const formattedMovieTitle = buildString([movieTitle, `(${formattedReleaseDate})`]);
     const formattedRunTime = formatMovieRuntime(runtime, true);
 
