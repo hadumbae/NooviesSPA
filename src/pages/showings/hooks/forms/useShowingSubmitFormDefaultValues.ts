@@ -3,6 +3,7 @@ import {useMemo, useRef} from "react";
 import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
 import getShowingDateAndTime from "@/common/utility/date-and-time/getShowingDateAndTime.ts";
 import {isEqual} from "lodash";
+import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 
 /**
  * Computes and returns the default values for the showing submit form.
@@ -23,10 +24,12 @@ export default function useShowingSubmitFormDefaultValues(
     params: UseShowingFormParams
 ): ShowingFormValues {
     const {showing, theatreTimezone, presetValues} = params;
+    const {config, startTime, endTime, ...remShowing} = showing ? showing : {};
+
     const formValues = useRef<ShowingFormValues | null>(null);
 
-    // --- Date And Time ---
-    const formattedDateAndTime = useMemo(
+    // --- DATE AND TIME ---
+    const showingDateAndTime = useMemo(
         () =>
             showing
                 ? getShowingDateAndTime({
@@ -38,7 +41,16 @@ export default function useShowingSubmitFormDefaultValues(
         [showing, theatreTimezone]
     );
 
-    // --- Default Values ---
+    // --- CONFIG ---
+    const formattedConfig = {
+        canReserveSeats: getDefaultValue(
+            presetValues?.config?.canReserveSeats,
+            showing?.config?.canReserveSeats,
+            false
+        )
+    };
+
+    // --- DEFAULT VALUES ---
     const defaultValues: ShowingFormValues = useMemo(
         () => ({
             startAtTime: "",
@@ -57,13 +69,17 @@ export default function useShowingSubmitFormDefaultValues(
             theatreCity: "",
             theatreState: "",
             theatreCountry: undefined,
-            ...showing,
-            ...formattedDateAndTime,
+            config: {canReserveSeats: false},
+
+            ...remShowing,
+            ...showingDateAndTime,
             ...presetValues,
+            ...formattedConfig,
         }),
-        [showing, presetValues, formattedDateAndTime]
+        [showing, presetValues, showingDateAndTime, formattedConfig]
     );
 
+    // --- SYNC VALUES ---
     if (!isEqual(formValues.current, defaultValues)) {
         formValues.current = defaultValues;
     }

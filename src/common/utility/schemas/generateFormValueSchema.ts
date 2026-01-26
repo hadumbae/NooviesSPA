@@ -2,41 +2,51 @@ import {z, ZodObject, ZodRawShape} from "zod";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
 
 /**
- * A mapped type representing a new Zod shape where every field
- * from the original shape is replaced with {@link FormStarterValueSchema}.
+ * Recursive mapped type that converts a Zod object shape into
+ * a form-value shape.
+ *
+ * - Leaf fields are replaced with {@link FormStarterValueSchema}.
+ * - Nested {@link ZodObject} fields are transformed recursively.
+ *
+ * @typeParam TShape - Raw Zod shape to transform.
  */
 type ZodReturnShape<TShape extends ZodRawShape> = {
-    [K in keyof TShape]: typeof FormStarterValueSchema;
+    [K in keyof TShape]: TShape[K] extends ZodObject<infer TChildShape extends ZodRawShape>
+        ? ZodObject<ZodReturnShape<TChildShape>>
+        : typeof FormStarterValueSchema;
 };
 
+// type ZodReturnShape<TShape extends ZodRawShape> = {
+//     [K in keyof TShape]: typeof FormStarterValueSchema;
+// };
+
 /**
- * Generates a new Zod object schema based on an existing one,
- * replacing all of its field schemas with {@link FormStarterValueSchema}.
+ * Generates a form-value Zod schema from an existing Zod object schema.
  *
- * @typeParam TShape - The raw shape type of the input Zod object schema.
- * @param schema - The original {@link ZodObject} whose keys are used to construct the new schema.
- * @returns A new {@link ZodObject} where each field corresponds to
- * the same key in the original schema but uses `FormStarterValueSchema` as its value schema.
+ * @remarks
+ * Preserves the original object structure while replacing all
+ * non-object fields with {@link FormStarterValueSchema}. Nested
+ * Zod objects are handled recursively.
+ *
+ * Intended for initializing and validating form state where each
+ * field tracks metadata such as `{ value, touched }`.
+ *
+ * @typeParam TShape - Raw shape of the source {@link ZodObject}.
+ * @param schema - Source schema used as the structural template.
+ * @returns A new {@link ZodObject} mirroring the input schema’s keys,
+ * with all fields converted to form starter value schemas.
  *
  * @example
  * ```ts
- * import { z } from "zod";
- * import generateFormSchema from "./generateFormSchema";
- *
  * const userSchema = z.object({
  *   name: z.string(),
- *   age: z.number(),
+ *   profile: z.object({
+ *     age: z.number(),
+ *   }),
  * });
  *
- * const formSchema = generateFormSchema(userSchema);
- * // formSchema now validates objects like:
- * // { name: { value: string, touched: boolean }, age: { value: number, touched: boolean } }
+ * const formSchema = generateFormValueSchema(userSchema);
  * ```
- *
- * @remarks
- * This utility is typically used to generate form-friendly schemas
- * from existing Zod definitions, ensuring consistent initial values
- * and validation structures for forms.
  */
 export default function generateFormValueSchema<TShape extends ZodRawShape>(
     schema: ZodObject<TShape>
@@ -44,7 +54,13 @@ export default function generateFormValueSchema<TShape extends ZodRawShape>(
     const originalShape = schema.shape;
 
     const newShape = Object.fromEntries(
-        Object.keys(originalShape).map(key => [key, FormStarterValueSchema]),
+        Object.entries(originalShape).map(([key, value]) => {
+            if (value instanceof z.ZodObject) {
+                return [key, generateFormValueSchema(value)];
+            }
+
+            return [key, FormStarterValueSchema];
+        }),
     ) as ZodReturnShape<TShape>;
 
     return z.object(newShape);

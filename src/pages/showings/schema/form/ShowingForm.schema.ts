@@ -35,8 +35,7 @@ import {NonEmptyStringSchema}
     from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import preprocessEmptyStringToUndefined
     from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
-import {ShowingConfigSchema}
-    from "@/pages/showings/schema/showing/Showing.schema.ts";
+import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
 
 /**
  * Optional theatre city field.
@@ -135,7 +134,9 @@ export const ShowingFormStatusSchema = z.object({
     status: ShowingStatusEnumSchema,
 
     /** Optional showing-level configuration */
-    config: ShowingConfigSchema,
+    config: z.object({
+        canReserveSeats: BooleanValueSchema,
+    }),
 });
 
 /**
