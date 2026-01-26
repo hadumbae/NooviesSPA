@@ -1,42 +1,67 @@
 /**
  * @file ShowingFormSchema.ts
- * @description
- * Defines Zod schemas for validating a "Showing" form in a cinema management system.
- * The schemas are modular, covering details, language, datetime, and status aspects.
- * The combined schema (`ShowingFormSchema`) supports transformations and cross-field
- * validations, e.g., ensuring that the end datetime is not earlier than the start datetime.
  *
- * Schemas included:
- * - `ShowingFormDetailSchema`: Theatre and movie identifiers and location info.
- * - `ShowingFormLanguageSchema`: Main language and subtitle languages.
- * - `ShowingFormDateTimeSchema`: Start and optional end date/time validation.
- * - `ShowingFormStatusSchema`: Ticket price, active status, special event, showing status.
- * - `ShowingFormSchema`: Merges all of the above with transformations and cross-field checks.
+ * Zod schemas for validating the Showing management form.
+ *
+ * The form schema is composed of smaller, focused schemas covering:
+ * - Core identifiers and theatre context
+ * - Language and subtitle configuration
+ * - Start/end date–time input
+ * - Pricing, lifecycle status, and feature flags
+ *
+ * The combined {@link ShowingFormSchema} applies transformations and
+ * cross-field validation to ensure a valid showing timeline.
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {TimeStringSchema} from "@/common/schema/date-time/TimeString.schema.ts";
-import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
-import {ShowingStatusEnumSchema} from "@/pages/showings/schema/ShowingStatus.enum.ts";
+import {IDStringSchema}
+    from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {TimeStringSchema}
+    from "@/common/schema/date-time/TimeString.schema.ts";
+import {CleanedPositiveNumberSchema}
+    from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {ISO6391LanguageCodeEnum}
+    from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
+import {ShowingStatusEnumSchema}
+    from "@/pages/showings/schema/ShowingStatus.enum.ts";
 import {DateTime} from "luxon";
-import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema.ts";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
-import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {DateOnlyStringSchema}
+    from "@/common/schema/dates/DateOnlyStringSchema.ts";
+import {CoercedBooleanValueSchema}
+    from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import {ISO3166Alpha2CountryCodeEnum}
+    from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
+import {NonEmptyStringSchema}
+    from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import preprocessEmptyStringToUndefined
+    from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {ShowingConfigSchema}
+    from "@/pages/showings/schema/showing/Showing.schema.ts";
 
+/**
+ * Optional theatre city field.
+ *
+ * Empty strings are coerced to `undefined`.
+ */
 const citySchema = preprocessEmptyStringToUndefined(
-    NonEmptyStringSchema.max(500, {message: "Must be 500 characters or less."}).optional()
-).optional();
-
-const stateSchema = preprocessEmptyStringToUndefined(
-    NonEmptyStringSchema.max(500, {message: "Must be 500 characters or less."}).optional()
+    NonEmptyStringSchema
+        .max(500, {message: "Must be 500 characters or less."})
+        .optional()
 ).optional();
 
 /**
- * Validates basic showing details including movie, screen, theatre, and location.
+ * Optional theatre state field.
+ *
+ * Empty strings are coerced to `undefined`.
+ */
+const stateSchema = preprocessEmptyStringToUndefined(
+    NonEmptyStringSchema
+        .max(500, {message: "Must be 500 characters or less."})
+        .optional()
+).optional();
+
+/**
+ * Validates core showing identifiers and theatre context.
  */
 export const ShowingFormDetailSchema = z.object({
     movie: IDStringSchema,
@@ -48,23 +73,30 @@ export const ShowingFormDetailSchema = z.object({
 });
 
 /**
- * Validates the main language and subtitle languages for the showing.
+ * Validates language configuration for the showing.
  */
 export const ShowingFormLanguageSchema = z.object({
+    /** Primary spoken language (ISO-639-1). */
     language: preprocessEmptyStringToUndefined(ISO6391LanguageCodeEnum),
+
+    /** Subtitle languages (non-empty ISO-639-1 list). */
     subtitleLanguages: z
         .array(
             ISO6391LanguageCodeEnum,
-            {required_error: "Required.", invalid_type_error: "Must be an array of ISO 639-1 codes."},
-        ).nonempty({message: "Required."}),
+            {
+                required_error: "Required.",
+                invalid_type_error: "Must be an array of ISO 639-1 codes.",
+            },
+        )
+        .nonempty({message: "Required."}),
 });
 
 /**
- * Validates start and end dates/times for the showing.
+ * Validates start and optional end date–time inputs.
  *
- * - Start datetime is required.
- * - End datetime is optional but must be after the start datetime if provided.
- * - Empty string values are coerced to undefined for optional fields.
+ * - Start date and time are required.
+ * - End date and time are optional but must form a valid range when both are provided.
+ * - Empty strings are normalized to `undefined` for optional fields.
  */
 export const ShowingFormDateTimeSchema = z.object({
     startAtTime: z
@@ -87,26 +119,32 @@ export const ShowingFormDateTimeSchema = z.object({
 });
 
 /**
- * Validates status-related fields for the showing.
- *
- * - Ticket price must be a cleaned positive number.
- * - `isSpecialEvent` and `isActive` are optional booleans.
- * - `status` must be one of the defined showing status enums.
+ * Validates pricing, lifecycle status, and feature flags.
  */
 export const ShowingFormStatusSchema = z.object({
+    /** Ticket price */
     ticketPrice: CleanedPositiveNumberSchema,
+
+    /** Marks special screenings (e.g. premieres). */
     isSpecialEvent: CoercedBooleanValueSchema.optional(),
+
+    /** Whether the showing is active and bookable. */
     isActive: CoercedBooleanValueSchema.optional(),
+
+    /** Lifecycle status */
     status: ShowingStatusEnumSchema,
+
+    /** Optional showing-level configuration */
+    config: ShowingConfigSchema,
 });
 
 /**
- * The full showing form schema.
+ * Full showing form schema.
  *
  * @remarks
- * Combines detail, language, datetime, and status schemas.
- * Applies a transformation to remove location fields from final output.
- * Includes cross-field validation to ensure the end datetime is not earlier than start datetime.
+ * - Composes detail, language, datetime, and status schemas
+ * - Removes theatre location fields from the final payload
+ * - Enforces chronological validity between start and end datetime values
  */
 export const ShowingFormSchema = ShowingFormDetailSchema
     .merge(ShowingFormLanguageSchema)
