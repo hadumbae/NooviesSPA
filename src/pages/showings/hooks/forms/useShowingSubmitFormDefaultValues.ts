@@ -1,7 +1,7 @@
 import {UseShowingFormParams} from "@/pages/showings/hooks/forms/useShowingSubmitForm.types.ts";
 import {useMemo, useRef} from "react";
 import {ShowingFormValues} from "@/pages/showings/schema/form/ShowingFormValues.types.ts";
-import getShowingDateAndTime from "@/common/utility/date-and-time/getShowingDateAndTime.ts";
+import getShowingDateAndTimeFormValues from "@/common/utility/date-and-time/getShowingDateAndTimeFormValues.ts";
 import {isEqual} from "lodash";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 
@@ -30,14 +30,11 @@ export default function useShowingSubmitFormDefaultValues(
 
     // --- DATE AND TIME ---
     const showingDateAndTime = useMemo(
-        () =>
-            showing
-                ? getShowingDateAndTime({
-                    startTime: showing.startTime,
-                    endTime: showing.endTime,
-                    theatreTimezone,
-                })
-                : null,
+        () => getShowingDateAndTimeFormValues({
+            startTime: showing?.startTime,
+            endTime: showing?.endTime,
+            theatreTimezone,
+        }),
         [showing, theatreTimezone]
     );
 
@@ -53,10 +50,6 @@ export default function useShowingSubmitFormDefaultValues(
     // --- DEFAULT VALUES ---
     const defaultValues: ShowingFormValues = useMemo(
         () => ({
-            startAtTime: "",
-            startAtDate: "",
-            endAtTime: "",
-            endAtDate: "",
             ticketPrice: "",
             language: "",
             subtitleLanguages: [],

@@ -119,6 +119,13 @@ const ShowingSubmitFormStatusFieldset: FC<FieldsetProps> = ({form, activeFields}
                     />
                 )}
 
+                {/* Can Reserve Seats */}
+                <HookFormCheckbox
+                    name="config.canReserveSeats"
+                    label="Can Reserve Seats?"
+                    control={form.control}
+                />
+
                 {/* Status Select */}
                 {activeFields.status && (
                     <ShowingStatusHookFormSelect
