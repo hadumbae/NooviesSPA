@@ -1,3 +1,12 @@
+/**
+ * @file SeatMap.types.ts
+ *
+ * TypeScript types inferred from SeatMap Zod schemas.
+ *
+ * Provides strongly typed representations of seat map data
+ * derived directly from runtime-validated schemas.
+ */
+
 import {
     PaginatedSeatMapDetailsSchema,
     PaginatedSeatMapSchema,
@@ -6,87 +15,58 @@ import {
     SeatMapDetailsArraySchema,
     SeatMapDetailsSchema,
     SeatMapSchema,
+    SeatMapWithSeatSchema,
 } from "@/pages/seatmap/schema/model/SeatMap.schema.ts";
-import { z } from "zod";
+import {z} from "zod";
 
 /**
- * @file SeatMap.types.ts
- *
- * @summary
- * TypeScript types inferred from SeatMap Zod schemas.
- *
- * @description
- * Provides strongly typed representations of seat map data derived from
- * runtime-validated Zod schemas. Includes basic, populated, detailed,
- * array, and paginated variants used throughout the application for
- * seat availability, pricing, and layout handling.
- *
- * @module SeatMapTypes
- */
-
-/**
- * Represents a single SeatMap document.
+ * Base SeatMap type.
  *
  * @remarks
- * Derived from {@link SeatMapSchema}.
- * Contains ObjectId references to the associated seat and showing,
- * along with pricing and availability status.
+ * ObjectId-backed representation of a seat map entry,
+ * including pricing and availability metadata.
  */
-export type SeatMap = z.infer<typeof SeatMapSchema>;
+export type SeatMap =
+    z.infer<typeof SeatMapSchema>;
+
+/** Array of base SeatMap entries. */
+export type SeatMapArray =
+    z.infer<typeof SeatMapArraySchema>;
 
 /**
- * Represents an array of SeatMap documents.
- *
- * @remarks
- * Derived from {@link SeatMapArraySchema}.
- * Commonly used for bulk seat map queries and list responses.
+ * SeatMap with populated seat relation.
  */
-export type SeatMapArray = z.infer<typeof SeatMapArraySchema>;
+export type SeatMapWithSeat =
+    z.infer<typeof SeatMapWithSeatSchema>;
 
 /**
- * Represents a SeatMap document with populated relations.
- *
- * @remarks
- * Derived from {@link PopulatedSeatMapSchema}.
- * Replaces the `seat` and `showing` ObjectId references with
- * their corresponding populated documents.
+ * SeatMap with populated seat and showing relations.
  */
-export type PopulatedSeatMap = z.infer<typeof PopulatedSeatMapSchema>;
+export type PopulatedSeatMap =
+    z.infer<typeof PopulatedSeatMapSchema>;
 
 /**
- * Represents a detailed SeatMap document.
+ * Detailed SeatMap representation.
  *
  * @remarks
- * Derived from {@link SeatMapDetailsSchema}.
- * Includes fully populated seat and showing data, positional metadata,
- * and a computed `finalPrice` field.
+ * Includes layout coordinates, populated relations,
+ * and a computed final price.
  */
-export type SeatMapDetails = z.infer<typeof SeatMapDetailsSchema>;
+export type SeatMapDetails =
+    z.infer<typeof SeatMapDetailsSchema>;
+
+/** Array of detailed SeatMap entries. */
+export type SeatMapDetailsArray =
+    z.infer<typeof SeatMapDetailsArraySchema>;
 
 /**
- * Represents an array of detailed SeatMap documents.
- *
- * @remarks
- * Derived from {@link SeatMapDetailsArraySchema}.
- * Useful for seat layout views and administrative tooling.
+ * Paginated SeatMap response.
  */
-export type SeatMapDetailsArray = z.infer<typeof SeatMapDetailsArraySchema>;
+export type PaginatedSeatMaps =
+    z.infer<typeof PaginatedSeatMapSchema>;
 
 /**
- * Represents a paginated collection of SeatMap documents.
- *
- * @remarks
- * Derived from {@link PaginatedSeatMapSchema}.
- * Intended for paginated API responses returning basic seat map data.
+ * Paginated detailed SeatMap response.
  */
-export type PaginatedSeatMaps = z.infer<typeof PaginatedSeatMapSchema>;
-
-/**
- * Represents a paginated collection of detailed SeatMap documents.
- *
- * @remarks
- * Derived from {@link PaginatedSeatMapDetailsSchema}.
- * Intended for paginated API responses requiring fully populated
- * seat and showing information.
- */
-export type PaginatedSeatMapDetails = z.infer<typeof PaginatedSeatMapDetailsSchema>;
+export type PaginatedSeatMapDetails =
+    z.infer<typeof PaginatedSeatMapDetailsSchema>;
