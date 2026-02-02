@@ -16,14 +16,11 @@
 import {FC} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PaginatedScreenDetailsSchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {PaginatedScreenDetails} from "@/pages/screens/schema/screen/Screen.types.ts";
-import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import {ScreenQueryOptions} from "@/pages/screens/schema/queries/ScreenQueryOptions.types.ts";
-import TheatreDetailsScreensTabContent
-    from "@/pages/theatres/pages/theatre-details-page/tabs/TheatreDetailsScreensTabContent.tsx";
 import useFetchPaginatedScreens from "@/pages/screens/hooks/screens/fetch-screens/useFetchPaginatedScreens.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import TheatreDetailsScreensTabContent from "@/pages/theatres/pages/theatre-details-page/tabs/TheatreDetailsScreensTabContent.tsx";
 
 /**
  * Props for {@link TheatreDetailsScreensTab}.
@@ -107,24 +104,17 @@ const TheatreDetailsScreensTab: FC<OverviewTabProps> = (props) => {
     });
 
     return (
-        <QueryBoundary query={screenQuery} errorComponent={ErrorMessageDisplay}>
-            <ValidatedQueryBoundary
-                query={screenQuery}
-                schema={PaginatedScreenDetailsSchema}
-                message="Invalid data received. Please try again."
-                errorComponent={ErrorMessageDisplay}
-            >
-                {({items, totalItems}: PaginatedScreenDetails) => (
-                    <TheatreDetailsScreensTabContent
-                        theatreID={theatreID}
-                        screens={items}
-                        totalItems={totalItems}
-                        paginationOptions={{page, perPage, setPage}}
-                        classNames={classNames}
-                    />
-                )}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+        <ValidatedDataLoader query={screenQuery} schema={PaginatedScreenDetailsSchema}>
+            {({items, totalItems}: PaginatedScreenDetails) => (
+                <TheatreDetailsScreensTabContent
+                    theatreID={theatreID}
+                    screens={items}
+                    totalItems={totalItems}
+                    paginationOptions={{page, perPage, setPage}}
+                    classNames={classNames}
+                />
+            )}
+        </ValidatedDataLoader>
     );
 };
 

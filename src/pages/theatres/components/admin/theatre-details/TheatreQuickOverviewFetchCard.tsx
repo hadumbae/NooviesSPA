@@ -1,15 +1,13 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Loader} from "lucide-react";
-import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useFetchTheatre from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
 import {TheatreDetails} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import {TheatreDetailsSchema} from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import formatTheatreDetails from "@/pages/theatres/utilities/formatTheatreDetails.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * Props for {@link TheatreQuickOverviewFetchCard}.
@@ -51,37 +49,26 @@ const TheatreQuickOverviewFetchCard: FC<FetchCardProps> = ({theatreID, className
     const query = useFetchTheatre({_id: theatreID, config: {populate: true, virtuals: true}});
 
     return (
-        <QueryBoundary
-            query={query}
-            loaderComponent={Loader}
-            errorComponent={ErrorMessageDisplay}
-        >
-            <ValidatedQueryBoundary
-                query={query}
-                schema={TheatreDetailsSchema}
-                loaderComponent={Loader}
-                errorComponent={ErrorMessageDisplay}
-            >
-                {(theatre: TheatreDetails) => {
-                    const {name} = theatre;
-                    const {address, details} = formatTheatreDetails(theatre);
+        <ValidatedDataLoader query={query} schema={TheatreDetailsSchema} loaderComponent={Loader}>
+            {(theatre: TheatreDetails) => {
+                const {name} = theatre;
+                const {address, details} = formatTheatreDetails(theatre);
 
-                    return (
-                        <Card>
-                            <CardContent className={cn(
-                                "flex flex-col",
-                                "space-y-2 p-3",
-                                className,
-                            )}>
-                                <h1 className="text-sm font-bold">{name}</h1>
-                                <h2 className="text-sm text-neutral-400">{details}</h2>
-                                <h3 className="text-xs text-neutral-400">{address}</h3>
-                            </CardContent>
-                        </Card>
-                    );
-                }}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+                return (
+                    <Card>
+                        <CardContent className={cn(
+                            "flex flex-col",
+                            "space-y-2 p-3",
+                            className,
+                        )}>
+                            <h1 className="text-sm font-bold">{name}</h1>
+                            <h2 className="text-sm text-neutral-400">{details}</h2>
+                            <h3 className="text-xs text-neutral-400">{address}</h3>
+                        </CardContent>
+                    </Card>
+                );
+            }}
+        </ValidatedDataLoader>
     );
 };
 

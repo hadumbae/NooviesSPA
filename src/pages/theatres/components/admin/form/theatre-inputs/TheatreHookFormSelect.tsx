@@ -5,11 +5,9 @@ import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx"
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import useFetchTheatres from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatres.ts";
 import {TheatreArraySchema} from "@/pages/theatres/schema/model/theatre/Theatre.schema.ts";
-import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {TheatreArray} from "@/pages/theatres/schema/model/theatre/Theatre.types.ts";
 import {TheatreQueryOptions} from "@/pages/theatres/schema/queries/TheatreQueryOption.types.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * Props for {@link TheatreHookFormSelect}.
@@ -70,45 +68,33 @@ const TheatreHookFormSelect = <TSubmit extends FieldValues>(
 ) => {
     const {isDisabled, isMulti = false, filters = {}} = props;
 
-    const query = useFetchTheatres(filters);
+    const query = useFetchTheatres({queries: filters});
 
     return (
-        <QueryBoundary
-            query={query}
-            loaderComponent={Loader}
-            errorComponent={ErrorMessageDisplay}
-        >
-            <ValidatedQueryBoundary
-                query={query}
-                schema={TheatreArraySchema}
-                message="Invalid Theatre Data."
-                loaderComponent={Loader}
-                errorComponent={ErrorMessageDisplay}
-            >
-                {(theatres: TheatreArray) => {
-                    const options: ReactSelectOption[] = theatres.map(
-                        (theatre): ReactSelectOption => ({
-                            label: theatre.name,
-                            value: theatre._id,
-                        }),
-                    );
+        <ValidatedDataLoader query={query} schema={TheatreArraySchema} loaderComponent={Loader}>
+            {(theatres: TheatreArray) => {
+                const options: ReactSelectOption[] = theatres.map(
+                    (theatre): ReactSelectOption => ({
+                        label: theatre.name,
+                        value: theatre._id,
+                    }),
+                );
 
-                    return isMulti ? (
-                        <HookFormMultiSelect<TSubmit>
-                            isDisabled={isDisabled}
-                            options={options}
-                            {...props}
-                        />
-                    ) : (
-                        <HookFormSelect<TSubmit>
-                            isDisabled={isDisabled}
-                            options={options}
-                            {...props}
-                        />
-                    );
-                }}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+                return isMulti ? (
+                    <HookFormMultiSelect<TSubmit>
+                        isDisabled={isDisabled}
+                        options={options}
+                        {...props}
+                    />
+                ) : (
+                    <HookFormSelect<TSubmit>
+                        isDisabled={isDisabled}
+                        options={options}
+                        {...props}
+                    />
+                );
+            }}
+        </ValidatedDataLoader>
     );
 };
 
