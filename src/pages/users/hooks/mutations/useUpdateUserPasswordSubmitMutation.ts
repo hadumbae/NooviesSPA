@@ -23,7 +23,13 @@ export default function useUpdateUserPasswordSubmitMutation({userID, onSubmit}: 
         }
 
         const message = messages[response.status] ?? "Oops. Failed To Update Your Password. Please try again later.";
-        throw new HttpResponseError({response, message});
+        throw new HttpResponseError({
+            url: response.url,
+            headers: response.headers,
+            status: response.status,
+            statusText: response.statusText,
+            message,
+        });
     }
 
     const onSuccess = () => {

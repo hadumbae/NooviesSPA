@@ -30,7 +30,12 @@ const HandleFetchError = async (
             if (success) errorMessage = data?.message;
         }
 
-        throw new HttpResponseError({response, message: errorMessage});
+        throw new HttpResponseError({
+            url: response.url,
+            headers: response.headers,
+            status: response.status,
+            statusText: response.statusText,
+            message: errorMessage});
     }
 
     return {

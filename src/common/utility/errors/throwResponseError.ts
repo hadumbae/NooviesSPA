@@ -39,5 +39,11 @@ export default function throwResponseError(params: ThrowParams): never | void {
         throw new ParseError({message: message ?? parsedMessage, errors: errors as ZodIssue[]});
     }
 
-    throw new HttpResponseError({response, message});
+    throw new HttpResponseError({
+        url: response.url,
+        headers: response.headers,
+        status: response.status,
+        statusText: response.statusText,
+        message,
+    });
 }

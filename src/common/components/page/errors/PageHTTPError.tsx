@@ -58,7 +58,7 @@ const PageHTTPError: FC<PageHTTPErrorProps> = (params) => {
         return <PageError {...params} />
     }
 
-    const {response: {status}, message: errorMessage} = error;
+    const {status, message: errorMessage} = error;
 
     const statusText: Record<number, { text: string, subtitle: string }> = {
         400: {text: "Bad Request", subtitle: "The server could not understand your request. Please check your input."},

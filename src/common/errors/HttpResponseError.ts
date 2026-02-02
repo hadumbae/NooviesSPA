@@ -1,40 +1,77 @@
 /**
- * Represents an error thrown when an HTTP response returns a status code other than 200.
- * Optionally associates the error with a specific data model.
+ * @file HttpResponseError.ts
+ *
+ * Custom error type representing a failed HTTP response.
+ *
+ * Wraps transport-level metadata (URL, headers, status)
+ * along with optional payload and domain model context.
+ */
+
+type ErrorConstructor = {
+    /** Request URL that produced the error */
+    url: string;
+
+    /** Response headers */
+    headers: Headers;
+
+    /** HTTP status code */
+    status: number;
+
+    /** HTTP status text */
+    statusText?: string;
+
+    /** Optional parsed response payload */
+    payload?: unknown;
+
+    /** Optional domain or model identifier */
+    model?: string;
+
+    /** Human-readable error message */
+    message?: string;
+};
+
+/**
+ * Error thrown for non-successful HTTP responses.
+ *
+ * Designed for API, fetch, and repository layers where
+ * response metadata must be preserved for debugging
+ * and error handling.
  */
 export default class HttpResponseError extends Error {
-    /**
-     * The HTTP response associated with this error.
-     */
-    public readonly response: Response;
+    /** Request URL */
+    public readonly url: string;
 
-    /**
-     * The payload associated with this error.
-     */
+    /** Response headers */
+    public readonly headers: Headers;
+
+    /** HTTP status code */
+    public readonly status: number;
+
+    /** HTTP status text */
+    public readonly statusText?: string;
+
+    /** Optional response payload */
     public readonly payload?: unknown;
 
-    /**
-     * The name of the data model related to the error, if applicable.
-     */
+    /** Optional domain or model identifier */
     public readonly model?: string;
 
     /**
-     * Creates an instance of HttpResponseError.
+     * Creates a new HttpResponseError instance.
      *
-     * @param params - The parameters for initializing the error.
-     * @param params.message - Optional. A descriptive message for the error.
-     * @param params.response - The HTTP response that triggered the error.
-     * @param params.payload - Optional. The payload related to the error.
-     * @param params.model - Optional. The name of the data model related to the error.
+     * @param params - Error construction parameters
      */
-    constructor(params: { message?: string, response: Response, payload?: unknown, model?: string }) {
-        const {message, response, model, payload} = params;
+    constructor(params: ErrorConstructor) {
+        const {message, url, headers, statusText, status, model, payload} = params;
 
         super(message);
 
         if (Error.captureStackTrace) Error.captureStackTrace(this, HttpResponseError);
 
-        this.response = response;
+        this.url = url;
+        this.headers = headers;
+        this.status = status;
+        this.statusText = statusText;
         this.payload = payload;
         this.model = model;
 
@@ -42,25 +79,23 @@ export default class HttpResponseError extends Error {
     }
 
     /**
-     * Returns a string representation of the error, including its name, HTTP status, and message.
-     *
-     * @returns A string describing the error.
+     * Returns a concise string representation of the error.
      */
     toString(): string {
-        return `[${this.name}] Status : ${this.response.status} | ${this.message || "An Error Occurred."}`;
+        return `[HTTP ${this.status}] ${this.statusText ?? "Unknown status"}`;
     }
 
     /**
-     * Converts the error instance to a JSON object.
-     *
-     * @returns An object containing the error's name, message, status code, and response URL.
+     * Serializes the error into a JSON-safe structure.
      */
     toJSON(): Record<string, any> {
         return {
-            name: this.name,
+            url: this.url,
+            headers: this.headers,
+            status: this.status,
+            statusText: this.statusText,
+            model: this.model,
             message: this.message,
-            status: this.response.status,
-            url: this.response.url,
         };
     }
 }

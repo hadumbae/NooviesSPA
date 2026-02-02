@@ -56,7 +56,7 @@ export default function handleBadResponse(params: HandlerParams) {
     const {status: statusCode} = response;
 
     if (statusCode === 422) {
-        // ⚡ Parse JSON ⚡
+        // --- Parse JSON ---
         const parsedJSON = parseJSON({
             source,
             statusCode,
@@ -64,16 +64,16 @@ export default function handleBadResponse(params: HandlerParams) {
             errorMessage: "Failed to parse validation response."
         });
 
-        // ⚡ Parse Response ⚡
+        // --- Parse Response ---
         const {success, data} = ValidationErrorResponseSchema.safeParse(parsedJSON);
         if (!success) throw new Error("Invalid 422 Error Response. Failed to validate response.");
         const {message, errors} = data;
 
-        // ⚡ Log Error ⚡
+        // --- Log Error ---
         const context = buildContext([
-            { key: "message", value: message },
-            { key: "source", value: source },
-            { key: "errors", value: errors },
+            {key: "message", value: message},
+            {key: "source", value: source},
+            {key: "errors", value: errors},
         ]);
 
         Logger.warn({
@@ -82,7 +82,7 @@ export default function handleBadResponse(params: HandlerParams) {
             context,
         });
 
-        // ⚡ Throw Error ⚡
+        // --- Throw Error ---
         throw new FormValidationError({
             message: "HTTP 422: Validation Failed",
             errors: errors as ZodIssue[],
@@ -90,16 +90,19 @@ export default function handleBadResponse(params: HandlerParams) {
         });
     }
 
-    // ⚡ Throw Standard Errors ⚡
+    // --- Throw Standard Errors ---
     const context = buildContext([
-        { key: "source", value: source },
-        { key: "raw", value: rawPayload }
+        {key: "source", value: source},
+        {key: "raw", value: rawPayload}
     ]);
 
-    Logger.warn({ msg: `HTTP ERROR: ${response.status}`, type: "ERROR", context });
+    Logger.warn({msg: `HTTP ERROR: ${response.status}`, type: "ERROR", context});
 
     throw new HttpResponseError({
-        response,
+        url: response.url,
+        headers: response.headers,
+        status: response.status,
+        statusText: response.statusText,
         message: rawPayload,
     });
 }

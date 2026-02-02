@@ -77,7 +77,13 @@ export default async function handleMutationResponse<TReturns = unknown>(params:
             });
         }
 
-        throw new HttpResponseError({message, response});
+        throw new HttpResponseError({
+            url: response.url,
+            headers: response.headers,
+            status: response.status,
+            statusText: response.statusText,
+            message,
+        });
     }
 
     return result;
