@@ -1,8 +1,8 @@
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import RequestMethod from "@/common/type/request/RequestMethod.ts";
-import Logger from "@/common/utility/features/logger/Logger.ts";
 import handleBadResponse from "@/common/utility/features/use-fetch-api/handleBadResponse.ts";
 import parseJSON from "@/common/utility/features/use-fetch-api/parseJSON.ts";
+import {executeFetch} from "@/common/utility/features/use-fetch-api/executeFetch.ts";
 
 /**
  * Parameters for `useFetchAPI`.
@@ -52,53 +52,36 @@ type useFetchAPIParams<TData> = {
  * console.log(result.id);
  * ```
  */
-export default async function useFetchAPI<TData = unknown, TReturns = unknown>(
-    params: useFetchAPIParams<TData>
-): Promise<RequestReturns<TReturns>> {
+export default async function useFetchAPI<TData = unknown>(
+    {url, data, signal, method = "GET"}: useFetchAPIParams<TData>
+): Promise<RequestReturns<unknown>> {
     const funcName = useFetchAPI.name;
-    const {url, data, signal, method = "GET"} = params;
-
-    // === Build Query Options
 
     const isFormData = typeof FormData !== "undefined" && data instanceof FormData;
 
-    const headers: HeadersInit = isFormData ? {} : {"Content-Type": "application/json"};
+    const headers: HeadersInit = isFormData
+        ? {}
+        : {"Content-Type": "application/json"};
 
     const body: BodyInit | undefined = data
         ? (isFormData ? (data as FormData) : JSON.stringify(data))
         : undefined;
 
-    Logger.log({
-        msg: "Fetching data: ",
-        type: "FETCH",
-        context: {funcName, url, method, headers, body},
+    const response: Response = await executeFetch({
+        source: funcName,
+        url,
+        method,
+        headers,
+        body,
+        signal,
     });
 
-    // === Use Fetch Query ===
-
-    let response: Response;
-    try {
-        response = await fetch(url, {credentials: "include", method, headers, body, signal});
-    } catch (error: unknown) {
-        error instanceof Error
-            ? Logger.error({msg: "Fetch request failed.", type: "ERROR", context: {funcName}, error})
-            : Logger.error({msg: "Fetch request failed.", type: "ERROR", context: {funcName, error}});
-
-        throw error;
-    }
-
-    // === Handle Bad Response ===
-
     const raw = await response.text();
+
     if (!response.ok) {
-        handleBadResponse({
-            response,
-            source: funcName,
-            rawPayload: raw,
-        });
+        handleBadResponse({response, source: funcName, rawPayload: raw});
     }
 
-    // === Return Parsed JSON ====
     const result = parseJSON({
         raw,
         source: funcName,

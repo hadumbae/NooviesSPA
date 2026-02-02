@@ -1,51 +1,70 @@
+/**
+ * @file parseJSON.ts
+ *
+ * Safe JSON parsing utility with structured logging and error escalation.
+ *
+ * Wraps `JSON.parse` to:
+ * - Provide consistent logging context on failure
+ * - Throw a domain-specific {@link JSONParseError}
+ * - Preserve raw payload and optional status metadata
+ */
+
 import Logger from "@/common/utility/features/logger/Logger.ts";
 import JSONParseError from "@/common/errors/JSONParseError.ts";
 import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
 
 type ParseOrThrowParams = {
-    /** The raw string expected to be valid JSON */
+    /** Raw string expected to contain valid JSON */
     raw: string;
 
-    /** HTTP or internal status code associated with this JSON parsing attempt */
-    statusCode: number;
+    /** Optional request URL associated with the JSON payload */
+    url?: string;
 
-    /** Optional custom error message to log if parsing fails */
-    errorMessage?: string;
+    /** Optional HTTP or internal status code */
+    statusCode?: number;
 
-    /** Optional source identifier to help trace where the JSON originated */
+    /** Optional source identifier for logging context */
     source?: string;
-}
+
+    /** Optional custom error message for logging */
+    message?: string;
+};
 
 /**
- * Attempts to parse a JSON string into an object.
+ * Parses a JSON string or throws a {@link JSONParseError}.
  *
- * @description
- * This function wraps `JSON.parse` and provides enhanced error handling:
- * - On success, it returns the parsed object.
- * - On failure, it logs an error with context and throws a `JSONParseError`.
+ * @remarks
+ * - Logs structured context on failure
+ * - Does not swallow errors
+ * - Intended for API and fetch-layer usage
  *
- * @param params - Parameters for parsing and error handling
- * @returns The parsed object if JSON is valid
- * @throws {JSONParseError} When the JSON string cannot be parsed
+ * @param params - JSON parsing parameters
+ * @returns Parsed JSON value
+ * @throws {JSONParseError} When parsing fails
  *
  * @example
  * ```ts
- * const data = parseOrThrow({ raw: '{"foo": "bar"}', statusCode: 500 });
- * console.log(data.foo); // "bar"
+ * const data = parseJSON({ raw: '{"foo":"bar"}' });
  * ```
  */
-export default function parseJSON(params: ParseOrThrowParams) {
-    const {raw, statusCode, source, errorMessage} = params;
+export default function parseJSON(params: ParseOrThrowParams): unknown {
+    const {raw, statusCode, source, message, url} = params;
 
     try {
         return JSON.parse(raw);
-    } catch (e) {
+    } catch {
         const context = buildContext([
-            { key: "source", value: source },
-            { key: "raw", value: raw }
+            {key: "source", value: source},
+            {key: "raw", value: raw},
+            {key: "url", value: url},
         ]);
 
-        Logger.error({ msg: errorMessage ?? "Failed to parse JSON.", type: "ERROR", context });
-        throw new JSONParseError({ raw, status: statusCode });
+        Logger.error({
+            msg: message ?? "Failed to parse JSON.",
+            type: "ERROR",
+            context,
+        });
+
+        throw new JSONParseError({raw, status: statusCode});
     }
 }

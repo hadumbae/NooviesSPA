@@ -1,108 +1,84 @@
+/**
+ * @file handleBadResponse.ts
+ *
+ * Centralized handler for non-OK HTTP fetch responses.
+ *
+ * Responsibilities:
+ * - Parse and normalize failed response payloads
+ * - Short-circuit validation failures (HTTP 422)
+ * - Emit structured logs for observability
+ * - Throw a normalized `HttpResponseError` for upstream consumers
+ *
+ * This function never returns.
+ */
+
 import Logger from "@/common/utility/features/logger/Logger.ts";
 import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {FormValidationError} from "@/common/errors/FormValidationError.ts";
-import {ZodIssue} from "zod";
+import {handle422Response} from "@/common/utility/features/use-fetch-api/bad-response/handle422Response.ts";
 import parseJSON from "@/common/utility/features/use-fetch-api/parseJSON.ts";
-import {ValidationErrorResponseSchema} from "@/common/schema/features/failed-response/ValidationErrorResponseSchema.ts";
 
 type HandlerParams = {
-    /** The original fetch Response object from an HTTP request */
+    /** Fetch API Response object */
     response: Response;
 
-    /** Raw response payload as a string */
+    /** Raw response body as received from the server */
     rawPayload: string;
 
-    /** Source identifier to trace where this response came from */
+    /** Identifier describing the request origin */
     source: string;
-}
+
+    /** Optional override for the thrown error message */
+    message?: string;
+};
 
 /**
- * Handles HTTP responses that indicate failure (non-2xx status codes).
+ * Handles a failed HTTP response by normalizing payloads, logging context,
+ * and throwing a domain-specific error.
  *
- * @description
- * This function processes "bad" HTTP responses and provides structured
- * error handling:
+ * Validation errors (HTTP 422) are escalated immediately and do not fall
+ * through to generic HTTP error handling.
  *
- * - If the response has a 422 status code (validation error):
- *   - Attempts to parse the response JSON using `parseJSON`.
- *   - Validates the parsed object against `ParseErrorResponseSchema`.
- *   - Logs a warning with contextual information.
- *   - Throws a `FormValidationError` containing the validation issues.
+ * @param params - Failed response handling input
  *
- * - For all other error status codes:
- *   - Logs a warning with the raw response and source.
- *   - Throws a generic `HttpResponseError`.
+ * @throws {FormValidationError}
+ * When a 422 validation error response is encountered
  *
- * @param params - Parameters required for handling the response
- * @throws {FormValidationError} When the response is HTTP 422 and validation fails
- * @throws {HttpResponseError} For all other HTTP error responses
- *
- * @example
- * ```ts
- * try {
- *   const response = await fetch("/api/resource");
- *   if (!response.ok) {
- *     const raw = await response.text();
- *     handleBadResponse({ response, rawPayload: raw, source: "fetchResource" });
- *   }
- * } catch (error) {
- *   console.error(error);
- * }
- * ```
+ * @throws {HttpResponseError}
+ * For all other non-OK HTTP responses
  */
-export default function handleBadResponse(params: HandlerParams) {
-    const {response, source, rawPayload} = params;
-    const {status: statusCode} = response;
+export default function handleBadResponse(
+    {response, source, rawPayload, message}: HandlerParams
+): never {
+    const {url, headers, status, statusText} = response;
 
-    if (statusCode === 422) {
-        // --- Parse JSON ---
-        const parsedJSON = parseJSON({
-            source,
-            statusCode,
-            raw: rawPayload,
-            errorMessage: "Failed to parse validation response."
-        });
+    const payload = parseJSON({
+        url,
+        raw: rawPayload,
+        statusCode: status,
+        source,
+        message: "Invalid Response Body.",
+    });
 
-        // --- Parse Response ---
-        const {success, data} = ValidationErrorResponseSchema.safeParse(parsedJSON);
-        if (!success) throw new Error("Invalid 422 Error Response. Failed to validate response.");
-        const {message, errors} = data;
-
-        // --- Log Error ---
-        const context = buildContext([
-            {key: "message", value: message},
-            {key: "source", value: source},
-            {key: "errors", value: errors},
-        ]);
-
-        Logger.warn({
-            msg: `HTTP 422 : Validation Error`,
-            type: "ERROR",
-            context,
-        });
-
-        // --- Throw Error ---
-        throw new FormValidationError({
-            message: "HTTP 422: Validation Failed",
-            errors: errors as ZodIssue[],
-            raw: rawPayload,
-        });
+    if (status === 422) {
+        handle422Response({source, payload});
     }
 
-    // --- Throw Standard Errors ---
-    const context = buildContext([
-        {key: "source", value: source},
-        {key: "raw", value: rawPayload}
-    ]);
-
-    Logger.warn({msg: `HTTP ERROR: ${response.status}`, type: "ERROR", context});
+    Logger.warn({
+        msg: `HTTP ERROR: ${status}`,
+        type: "ERROR",
+        context: buildContext([
+            {key: "source", value: source},
+            {key: "payload", value: payload},
+        ]),
+    });
 
     throw new HttpResponseError({
-        url: response.url,
-        headers: response.headers,
-        status: response.status,
-        statusText: response.statusText,
-        message: rawPayload,
+        url,
+        headers,
+        status,
+        statusText,
+        message,
+        payload,
     });
 }
