@@ -1,8 +1,6 @@
 import {FC} from 'react';
 import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import useTitle from "@/common/hooks/document/useTitle.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {PaginatedGenreDetailsSchema} from "@/pages/genres/schema/genre/Genre.schema.ts";
 import {PaginatedGenreDetails} from "@/pages/genres/schema/genre/Genre.types.ts";
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
@@ -10,6 +8,7 @@ import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchP
 import {GenreQueryOptionSchema} from "@/pages/genres/schema/filters/GenreQueryOptions.schema.ts";
 import GenreIndexPageContent from "@/pages/genres/pages/genre-index-page/GenreIndexPageContent.tsx";
 import useFetchPaginatedGenres from "@/pages/genres/hooks/fetch-data/useFetchPaginatedGenres.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * **GenreIndexPage**
@@ -68,19 +67,17 @@ const GenreIndexPage: FC = () => {
     // --- RENDER ---
 
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={PaginatedGenreDetailsSchema}>
-                {({totalItems, items}: PaginatedGenreDetails) => (
-                    <GenreIndexPageContent
-                        genres={items}
-                        totalItems={totalItems}
-                        page={page}
-                        perPage={perPage}
-                        setPage={setPage}
-                    />
-                )}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+        <ValidatedDataLoader query={query} schema={PaginatedGenreDetailsSchema}>
+            {({totalItems, items}: PaginatedGenreDetails) => (
+                <GenreIndexPageContent
+                    genres={items}
+                    totalItems={totalItems}
+                    page={page}
+                    perPage={perPage}
+                    setPage={setPage}
+                />
+            )}
+        </ValidatedDataLoader>
     );
 };
 
