@@ -6,12 +6,10 @@ import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
-import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import {MovieArraySchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {MovieArray} from "@/pages/movies/schema/movie/Movie.types.ts";
 import useFetchMovies from "@/pages/movies/hooks/queries/useFetchMovies.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * Props for the `MovieHookFormSelect` component.
@@ -69,30 +67,20 @@ const MovieHookFormSelect = <TSubmit extends FieldValues>(props: SelectProps<TSu
     const query = useFetchMovies({queries: filters});
 
     return (
-        <QueryBoundary
-            query={query}
-            loaderComponent={Loader}
-            errorComponent={ErrorMessageDisplay}
-        >
-            <ValidatedQueryBoundary
-                query={query}
-                schema={MovieArraySchema}
-                loaderComponent={Loader}
-                errorComponent={ErrorMessageDisplay}
-            >
-                {(movies: MovieArray) => {
-                    const options: ReactSelectOption[] = movies.map(
-                        (movie): ReactSelectOption => ({label: movie.title, value: movie._id}),
-                    );
+        <ValidatedDataLoader query={query} schema={MovieArraySchema} loaderComponent={Loader}>
+            {(movies: MovieArray) => {
+                const options: ReactSelectOption[] = movies.map((movie): ReactSelectOption => ({
+                    label: movie.title,
+                    value: movie._id
+                }));
 
-                    return (
-                        isMulti
-                            ? <HookFormMultiSelect<TSubmit> options={options} {...props} />
-                            : <HookFormSelect<TSubmit> options={options} {...props} />
-                    );
-                }}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+                return (
+                    isMulti
+                        ? <HookFormMultiSelect<TSubmit> options={options} {...props} />
+                        : <HookFormSelect<TSubmit> options={options} {...props} />
+                );
+            }}
+        </ValidatedDataLoader>
     );
 };
 

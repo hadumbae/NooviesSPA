@@ -1,7 +1,5 @@
 import {FC} from 'react';
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {PaginatedMovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {PaginatedMovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 
@@ -10,6 +8,7 @@ import MovieIndexPageContent from "@/pages/movies/pages/admin/movie-edit-page/Mo
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {MovieQueryOptionSchema} from "@/pages/movies/schema/queries/MovieQueryOption.schema.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /** Number of movies displayed per page */
 const MOVIES_PER_PAGE = 20;
@@ -40,23 +39,21 @@ const MovieIndexPage: FC = () => {
 
     // --- RENDER ---
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={PaginatedMovieDetailsSchema}>
-                {(paginatedMovies: PaginatedMovieDetails) => {
-                    const {totalItems, items: movies} = paginatedMovies;
+        <ValidatedDataLoader query={query} schema={PaginatedMovieDetailsSchema}>
+            {(paginatedMovies: PaginatedMovieDetails) => {
+                const {totalItems, items: movies} = paginatedMovies;
 
-                    return (
-                        <MovieIndexPageContent
-                            page={page}
-                            perPage={MOVIES_PER_PAGE}
-                            setPage={setPage}
-                            movies={movies}
-                            totalItems={totalItems}
-                        />
-                    );
-                }}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+                return (
+                    <MovieIndexPageContent
+                        page={page}
+                        perPage={MOVIES_PER_PAGE}
+                        setPage={setPage}
+                        movies={movies}
+                        totalItems={totalItems}
+                    />
+                );
+            }}
+        </ValidatedDataLoader>
     );
 };
 

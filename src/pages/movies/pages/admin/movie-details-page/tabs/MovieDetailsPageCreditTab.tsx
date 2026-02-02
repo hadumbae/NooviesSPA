@@ -24,10 +24,9 @@ import {useFetchMovieCredits} from "@/pages/moviecredit/hooks/queries/useFetchMo
 import MovieDetailsCreditOverview from "@/pages/movies/components/details/MovieDetailsCreditOverview.tsx";
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
 import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.types.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * Props for {@link MovieDetailsPageCreditTab}.
@@ -58,21 +57,16 @@ const MovieDetailsPageCreditTab = ({slug}: TabProps) => {
     });
 
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary
-                query={query}
-                schema={MovieCreditDetailsArraySchema}
-            >
-                {(credits: MovieCreditDetailsArray) => (
-                    <TabsContent value="credits">
-                        <MovieDetailsCreditOverview
-                            slug={slug}
-                            credits={credits}
-                        />
-                    </TabsContent>
-                )}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+        <ValidatedDataLoader query={query} schema={MovieCreditDetailsArraySchema}>
+            {(credits: MovieCreditDetailsArray) => (
+                <TabsContent value="credits">
+                    <MovieDetailsCreditOverview
+                        slug={slug}
+                        credits={credits}
+                    />
+                </TabsContent>
+            )}
+        </ValidatedDataLoader>
     );
 };
 
