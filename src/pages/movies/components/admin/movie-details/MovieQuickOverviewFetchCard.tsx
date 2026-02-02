@@ -2,15 +2,13 @@ import {FC} from "react";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useFetchMovie from "@/pages/movies/hooks/queries/useFetchMovie.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import MoviePosterImage from "@/pages/movies/components/MoviePosterImage.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import formatMovieDetails from "@/pages/movies/utility/formatMovieDetails.ts";
 import {Loader} from "lucide-react";
-import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * Props for {@link MovieQuickOverviewFetchCard}.
@@ -53,42 +51,31 @@ const MovieQuickOverviewFetchCard: FC<FetchCardProps> = (props) => {
     });
 
     return (
-        <QueryBoundary
-            query={query}
-            loaderComponent={Loader}
-            errorComponent={ErrorMessageDisplay}
-        >
-            <ValidatedQueryBoundary
-                query={query}
-                schema={MovieDetailsSchema}
-                loaderComponent={Loader}
-                errorComponent={ErrorMessageDisplay}
-            >
-                {(movie: MovieDetails) => {
-                    const {title, posterImage} = movie;
-                    const {genreString, releaseRuntimeString} = formatMovieDetails(movie);
+        <ValidatedDataLoader query={query} schema={MovieDetailsSchema} loaderComponent={Loader}>
+            {(movie: MovieDetails) => {
+                const {title, posterImage} = movie;
+                const {genreString, releaseRuntimeString} = formatMovieDetails(movie);
 
-                    return (
-                        <Card>
-                            <CardContent className={cn("p-3 flex space-x-2", className)}>
-                                <section>
-                                    <MoviePosterImage
-                                        src={posterImage?.secure_url}
-                                        className="w-16"
-                                    />
-                                </section>
+                return (
+                    <Card>
+                        <CardContent className={cn("p-3 flex space-x-2", className)}>
+                            <section>
+                                <MoviePosterImage
+                                    src={posterImage?.secure_url}
+                                    className="w-16"
+                                />
+                            </section>
 
-                                <section className="flex-grow flex flex-col justify-center space-y-2">
-                                    <h1 className="text-sm font-bold">{title}</h1>
-                                    <h2 className="text-xs text-neutral-400">{genreString}</h2>
-                                    <h3 className="text-xs text-neutral-400">{releaseRuntimeString}</h3>
-                                </section>
-                            </CardContent>
-                        </Card>
-                    );
-                }}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+                            <section className="flex-grow flex flex-col justify-center space-y-2">
+                                <h1 className="text-sm font-bold">{title}</h1>
+                                <h2 className="text-xs text-neutral-400">{genreString}</h2>
+                                <h3 className="text-xs text-neutral-400">{releaseRuntimeString}</h3>
+                            </section>
+                        </CardContent>
+                    </Card>
+                );
+            }}
+        </ValidatedDataLoader>
     );
 };
 

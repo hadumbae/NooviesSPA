@@ -5,15 +5,17 @@ import {formatShowingInfo} from "@/pages/showings/utilities/formatShowingInfo.ts
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import buildString from "@/common/utility/buildString.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import ShowingTicketSelector from "@/pages/reservation/components/ticket-selector/ShowingTicketSelector.tsx";
 
 type ContentProps = {
     showing: ShowingDetails;
 }
 
 const ShowingInfoPageContent = (
-    { showing }: ContentProps
+    {showing}: ContentProps
 ) => {
     const {
+        reservationType,
         movieTitle,
         formattedStartTime,
         formattedRunTime,
@@ -34,6 +36,10 @@ const ShowingInfoPageContent = (
 
             <section>
                 <SectionHeader>Ticket Selection</SectionHeader>
+                <ShowingTicketSelector
+                    showing={showing}
+                    reservationType={reservationType}
+                />
             </section>
         </PageFlexWrapper>
     );

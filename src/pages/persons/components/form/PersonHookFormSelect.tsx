@@ -5,12 +5,10 @@ import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx"
 import {Loader} from "lucide-react";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import useFetchPersons from "@/pages/persons/hooks/fetch/useFetchPersons.ts";
-import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import {PersonArraySchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import {PersonQueryFilters} from "@/pages/persons/schema/queries/PersonQueryOption.types.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {PersonArray} from "@/pages/persons/schema/person/Person.types.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * Props for the `PersonHookFormSelect` component.
@@ -75,30 +73,19 @@ const PersonHookFormSelect: FC<SelectProps> = (props) => {
     const query = useFetchPersons({queries: filters});
 
     return (
-        <QueryBoundary
-            query={query}
-            loaderComponent={Loader}
-            errorComponent={ErrorMessageDisplay}
-        >
-            <ValidatedQueryBoundary
-                query={query}
-                schema={PersonArraySchema}
-                loaderComponent={Loader}
-                errorComponent={ErrorMessageDisplay}
-            >
-                {(persons: PersonArray) => {
-                    const options: ReactSelectOption[] = persons.map(
-                        ({_id, name}) => ({value: _id, label: name})
-                    );
+        <ValidatedDataLoader query={query} schema={PersonArraySchema} loaderComponent={Loader}>
+            {(persons: PersonArray) => {
+                const options: ReactSelectOption[] = persons.map(
+                    ({_id, name}) => ({value: _id, label: name})
+                );
 
-                    return (
-                        isMulti
-                            ? <HookFormMultiSelect options={options} {...props} />
-                            : <HookFormSelect options={options} {...props} />
-                    );
-                }}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+                return (
+                    isMulti
+                        ? <HookFormMultiSelect options={options} {...props} />
+                        : <HookFormSelect options={options} {...props} />
+                );
+            }}
+        </ValidatedDataLoader>
     );
 };
 

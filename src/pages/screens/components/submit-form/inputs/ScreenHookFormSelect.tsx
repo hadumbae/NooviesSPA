@@ -5,11 +5,9 @@ import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import {ScreenArraySchema} from "@/pages/screens/schema/screen/Screen.schema.ts";
-import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import useFetchScreens from "@/pages/screens/hooks/screens/fetch-screens/useFetchScreens.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {ScreenArray} from "@/pages/screens/schema/screen/Screen.types.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * Props for `ScreenHookFormSelect` component.
@@ -75,21 +73,19 @@ const ScreenHookFormSelect = <TSubmit extends FieldValues>(
     const query = useFetchScreens({queries: filters});
 
     return (
-        <QueryBoundary query={query} loaderComponent={Loader} errorComponent={ErrorMessageDisplay}>
-            <ValidatedQueryBoundary query={query} schema={ScreenArraySchema} loaderComponent={Loader} errorComponent={ErrorMessageDisplay}>
-                {(screens: ScreenArray) => {
-                    const options: ReactSelectOption[] = screens.map(
-                        ({_id, name, screenType}): ReactSelectOption => ({value: _id, label: `${name} (${screenType})`}),
-                    );
+        <ValidatedDataLoader query={query} schema={ScreenArraySchema} loaderComponent={Loader}>
+            {(screens: ScreenArray) => {
+                const options: ReactSelectOption[] = screens.map(
+                    ({_id, name, screenType}): ReactSelectOption => ({value: _id, label: `${name} (${screenType})`}),
+                );
 
-                    return (
-                        isMulti
-                            ? <HookFormMultiSelect<TSubmit> options={options} {...props} />
-                            : <HookFormSelect<TSubmit> options={options} {...props} />
-                    );
-                }}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+                return (
+                    isMulti
+                        ? <HookFormMultiSelect<TSubmit> options={options} {...props} />
+                        : <HookFormSelect<TSubmit> options={options} {...props} />
+                );
+            }}
+        </ValidatedDataLoader>
     );
 };
 

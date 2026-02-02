@@ -8,8 +8,6 @@
  */
 
 import {FC} from 'react';
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import {PaginatedRoleTypeSchema} from "@/pages/roletype/schema/model/RoleType.schema.ts";
 import {PaginatedRoleTypes} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import useRoleTypeQueryOptionSearchParams
@@ -17,6 +15,7 @@ import useRoleTypeQueryOptionSearchParams
 import RoleTypeListPageContent from "@/pages/roletype/pages/list-page/RoleTypeListPageContent.tsx";
 import {useFetchPaginatedRoleTypes} from "@/pages/roletype/hooks/fetch/useFetchPaginatedRoleTypes.ts";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * Default number of role types displayed per page.
@@ -75,21 +74,19 @@ const RoleTypeListPage: FC = () => {
     });
 
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={PaginatedRoleTypeSchema}>
-                {
-                    ({totalItems, items}: PaginatedRoleTypes) => (
-                        <RoleTypeListPageContent
-                            roleTypes={items}
-                            totalItems={totalItems}
-                            page={page}
-                            perPage={ROLE_TYPES_PER_PAGE}
-                            setPage={setPage}
-                        />
-                    )
-                }
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+        <ValidatedDataLoader query={query} schema={PaginatedRoleTypeSchema}>
+            {
+                ({totalItems, items}: PaginatedRoleTypes) => (
+                    <RoleTypeListPageContent
+                        roleTypes={items}
+                        totalItems={totalItems}
+                        page={page}
+                        perPage={ROLE_TYPES_PER_PAGE}
+                        setPage={setPage}
+                    />
+                )
+            }
+        </ValidatedDataLoader>
     );
 };
 

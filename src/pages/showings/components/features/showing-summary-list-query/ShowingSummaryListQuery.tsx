@@ -8,12 +8,11 @@
 import useFetchShowings from "@/pages/showings/hooks/queries/useFetchShowings.ts";
 import {ShowingQueryOptions} from "@/pages/showings/schema/queries/ShowingQueryOption.types.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import ShowingSummaryCardList
     from "@/pages/showings/components/admin/card/showing-summary-card/ShowingSummaryCardList.tsx";
 import {ShowingDetailsArraySchema} from "@/pages/showings/schema/showing/ShowingRelated.schema.ts";
 import {ShowingDetailsArray} from "@/pages/showings/schema/showing/ShowingRelated.types.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * Props for {@link ShowingSummaryListQuery}.
@@ -40,13 +39,11 @@ const ShowingSummaryListQuery = (props: ListProps) => {
     });
 
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={ShowingDetailsArraySchema}>
-                {(showings: ShowingDetailsArray) => (
-                    <ShowingSummaryCardList showings={showings} />
-                )}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+        <ValidatedDataLoader query={query} schema={ShowingDetailsArraySchema}>
+            {(showings: ShowingDetailsArray) => (
+                <ShowingSummaryCardList showings={showings}/>
+            )}
+        </ValidatedDataLoader>
     );
 };
 

@@ -1,14 +1,13 @@
-import { Control, FieldValues, Path } from "react-hook-form";
+import {Control, FieldValues, Path} from "react-hook-form";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import useFetchGenres from "@/pages/genres/hooks/fetch-data/useFetchGenres.ts";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
-import { GenreArraySchema } from "@/pages/genres/schema/genre/Genre.schema.ts";
-import { GenreArray } from "@/pages/genres/schema/genre/Genre.types.ts";
-import { GenreQueryOptions } from "@/pages/genres/schema/filters/GenreQueryOptions.types.ts";
+import {GenreArraySchema} from "@/pages/genres/schema/genre/Genre.schema.ts";
+import {GenreArray} from "@/pages/genres/schema/genre/Genre.types.ts";
+import {GenreQueryOptions} from "@/pages/genres/schema/filters/GenreQueryOptions.types.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**
  * Props for {@link GenreHookFormSelect}.
@@ -85,26 +84,24 @@ type SelectProps<TValues extends FieldValues> = {
  * - Maps each genre to a {@link ReactSelectOption} compatible with react-select components.
  */
 const GenreHookFormSelect = <TValues extends FieldValues>(props: SelectProps<TValues>) => {
-    const { isMulti = false, queries = {} } = props;
+    const {isMulti = false, queries = {}} = props;
     const query = useFetchGenres({queries: filterNullishAttributes(queries)});
 
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary query={query} schema={GenreArraySchema}>
-                {(genres: GenreArray) => {
-                    const options = genres.map(({ _id, name }): ReactSelectOption => ({
-                        value: _id,
-                        label: name,
-                    }));
+        <ValidatedDataLoader query={query} schema={GenreArraySchema}>
+            {(genres: GenreArray) => {
+                const options = genres.map(({_id, name}): ReactSelectOption => ({
+                    value: _id,
+                    label: name,
+                }));
 
-                    return (
-                        isMulti
-                            ? <HookFormMultiSelect options={options} {...props} />
-                            : <HookFormSelect options={options} {...props} />
-                    );
-                }}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+                return (
+                    isMulti
+                        ? <HookFormMultiSelect options={options} {...props} />
+                        : <HookFormSelect options={options} {...props} />
+                );
+            }}
+        </ValidatedDataLoader>
     );
 };
 

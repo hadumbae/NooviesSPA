@@ -5,8 +5,6 @@
  */
 
 import {FC, ReactElement} from "react";
-import QueryBoundary from "@/common/components/query/QueryBoundary.tsx";
-import ValidatedQueryBoundary from "@/common/components/query/ValidatedQueryBoundary.tsx";
 import ShowingIndexPageContent from "@/pages/showings/pages/index-page/ShowingIndexPageContent.tsx";
 import useFetchPaginatedShowings from "@/pages/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
@@ -14,6 +12,7 @@ import {ShowingQueryOptionSchema} from "@/pages/showings/schema/queries/ShowingQ
 import {PaginatedShowingDetailsSchema} from "@/pages/showings/schema/showing/ShowingRelated.schema.ts";
 import {PaginatedShowingDetails} from "@/pages/showings/schema/showing/ShowingRelated.types.ts";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 const SHOWINGS_PER_PAGE = 10;
 
@@ -41,22 +40,17 @@ const ShowingIndexPage: FC = (): ReactElement => {
 
     // --- Render ---
     return (
-        <QueryBoundary query={query}>
-            <ValidatedQueryBoundary
-                query={query}
-                schema={PaginatedShowingDetailsSchema}
-            >
-                {({items: showings, totalItems}: PaginatedShowingDetails) => (
-                    <ShowingIndexPageContent
-                        showings={showings}
-                        totalItems={totalItems}
-                        page={page}
-                        perPage={SHOWINGS_PER_PAGE}
-                        setPage={setPage}
-                    />
-                )}
-            </ValidatedQueryBoundary>
-        </QueryBoundary>
+        <ValidatedDataLoader query={query} schema={PaginatedShowingDetailsSchema}>
+            {({items: showings, totalItems}: PaginatedShowingDetails) => (
+                <ShowingIndexPageContent
+                    showings={showings}
+                    totalItems={totalItems}
+                    page={page}
+                    perPage={SHOWINGS_PER_PAGE}
+                    setPage={setPage}
+                />
+            )}
+        </ValidatedDataLoader>
     );
 };
 
