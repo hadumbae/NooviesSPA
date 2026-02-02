@@ -6,12 +6,12 @@ import {z, ZodTypeAny} from "zod";
 import {ParseError} from "@/common/errors/ParseError.ts";
 
 /**
- * Props for {@link QueryBoundary}.
+ * Props for {@link ValidatedDataLoader}.
  *
  * @template TData - Raw data type returned by the query.
  * @template TSchema - Zod schema used to validate the query result.
  */
-type QueryBoundaryProps<
+type LoaderProps<
     TData = unknown,
     TSchema extends ZodTypeAny = ZodTypeAny
 > = {
@@ -60,9 +60,7 @@ type QueryBoundaryProps<
  * </QueryBoundary>
  * ```
  */
-const QueryBoundary = <TData = unknown>(
-    params: QueryBoundaryProps<TData>
-) => {
+const ValidatedDataLoader = <TData = unknown>(params: LoaderProps<TData>) => {
     const {
         children,
         schema,
@@ -70,12 +68,8 @@ const QueryBoundary = <TData = unknown>(
         loaderComponent: Loader = PageLoader,
     } = params;
 
-    // --- QUERY STATE ---
-
     if (isPending || (isFetching && !data)) return <Loader/>;
     if (isError) throw error;
-
-    // --- VALIDATION ---
 
     const {data: parsedData, error: parseError, success} = schema.safeParse(data);
 
@@ -86,7 +80,9 @@ const QueryBoundary = <TData = unknown>(
         });
     }
 
-    return <>{children(parsedData)}</>;
+    return <>
+        {children(parsedData)}
+    </>;
 };
 
-export default QueryBoundary;
+export default ValidatedDataLoader;
