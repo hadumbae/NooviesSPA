@@ -3,6 +3,7 @@ import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391Languag
 import buildString from "@/common/utility/buildString.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import {ReservationType} from "@/pages/reservation/schema/enum/ReservationTypeEnumSchema.ts";
 
 /**
  * UI-ready formatted showing information.
@@ -33,6 +34,7 @@ export type FormattedShowingInfo = {
     formattedReleaseDate: string;
     formattedStartTime: string;
 
+    reservationType: ReservationType;
 };
 
 /**
@@ -64,6 +66,7 @@ export function formatShowingInfo(showing: ShowingDetails): FormattedShowingInfo
         language,
         subtitleLanguages,
         slug: showingSlug,
+        config: showingConfig
     } = showing;
 
     const {title: movieTitle, posterImage, runtime, releaseDate, slug: movieSlug} = movie;
@@ -84,6 +87,10 @@ export function formatShowingInfo(showing: ShowingDetails): FormattedShowingInfo
         ? buildString(subtitleLanguages.map((l) => ISO6391LanguageConstant[l]), " • ")
         : "None";
 
+    const reservationType = showingConfig?.canReserveSeats
+        ? "GENERAL_ADMISSION"
+        : "RESERVED_SEATS";
+
     return {
         movieTitle,
         posterImage,
@@ -101,5 +108,6 @@ export function formatShowingInfo(showing: ShowingDetails): FormattedShowingInfo
         formattedStartTime,
         spokenLanguage,
         subtitles,
+        reservationType,
     };
 }
