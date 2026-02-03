@@ -20,6 +20,8 @@ import TheatreIndexPageContent from "@/pages/theatres/pages/theatre-index-page/T
 import useFetchPaginatedTheatres from "@/pages/theatres/hooks/fetch-theatre/useFetchPaginatedTheatres.ts";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
+import {TheatreHttpStatusOverrideText} from "@/pages/theatres/constants/TheatreHttpStatusOverrideText.ts";
 
 /**
  * Number of theatres displayed per page.
@@ -66,20 +68,22 @@ const TheatreIndexPage: FC = () => {
     });
 
     return (
-        <ValidatedDataLoader
-            query={query}
-            schema={PaginatedTheatreDetailsSchema}
-        >
-            {({items, totalItems}: PaginatedTheatreDetails) => (
-                <TheatreIndexPageContent
-                    theatres={items}
-                    page={page}
-                    perPage={THEATRES_PER_PAGE}
-                    setPage={setPage}
-                    totalItems={totalItems}
-                />
-            )}
-        </ValidatedDataLoader>
+       <QueryErrorBoundary statusTextOverride={TheatreHttpStatusOverrideText}>
+           <ValidatedDataLoader
+               query={query}
+               schema={PaginatedTheatreDetailsSchema}
+           >
+               {({items, totalItems}: PaginatedTheatreDetails) => (
+                   <TheatreIndexPageContent
+                       theatres={items}
+                       page={page}
+                       perPage={THEATRES_PER_PAGE}
+                       setPage={setPage}
+                       totalItems={totalItems}
+                   />
+               )}
+           </ValidatedDataLoader>
+       </QueryErrorBoundary>
     );
 };
 

@@ -22,6 +22,8 @@ import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetc
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchTheatreBySlug from "@/pages/theatres/hooks/fetch-theatre/useFetchTheatreBySlug.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
+import {TheatreHttpStatusOverrideText} from "@/pages/theatres/constants/TheatreHttpStatusOverrideText.ts";
 
 /**
  * **TheatreDetailsPage**
@@ -55,7 +57,7 @@ const TheatreDetailsPage: FC = () => {
     }) ?? {};
 
     if (!slug) {
-        return <PageLoader />;
+        return <PageLoader/>;
     }
 
     const query = useFetchTheatreBySlug({
@@ -64,16 +66,18 @@ const TheatreDetailsPage: FC = () => {
     });
 
     return (
-        <TheatreDetailsUIContextProvider>
-            <ValidatedDataLoader
-                query={query}
-                schema={TheatreDetailsSchema}
-            >
-                {(theatre: TheatreDetails) => (
-                    <TheatreDetailsPageContent theatre={theatre} />
-                )}
-            </ValidatedDataLoader>
-        </TheatreDetailsUIContextProvider>
+        <QueryErrorBoundary statusTextOverride={TheatreHttpStatusOverrideText}>
+            <TheatreDetailsUIContextProvider>
+                <ValidatedDataLoader
+                    query={query}
+                    schema={TheatreDetailsSchema}
+                >
+                    {(theatre: TheatreDetails) => (
+                        <TheatreDetailsPageContent theatre={theatre}/>
+                    )}
+                </ValidatedDataLoader>
+            </TheatreDetailsUIContextProvider>
+        </QueryErrorBoundary>
     );
 };
 

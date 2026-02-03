@@ -11,7 +11,6 @@
  */
 
 import TheatreDetailsPage from "@/pages/theatres/pages/theatre-details-page/TheatreDetailsPage.tsx";
-import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import ScreenDetailsPage from "@/pages/screens/pages/admin/screen-details-page/ScreenDetailsPage.tsx";
 import TheatreIndexPage from "@/pages/theatres/pages/theatre-index-page/TheatreIndexPage.tsx";
 import TheatreShowingCreatePage from "@/pages/theatres/pages/theatre-showings/TheatreShowingCreatePage.tsx";
@@ -26,7 +25,7 @@ export default [
      */
     {
         path: "/admin/theatres",
-        element: <AdminLayout />,
+        element: <AdminLayout/>,
         children: [
             /**
              * Theatre index page.
@@ -35,8 +34,7 @@ export default [
              */
             {
                 path: "/admin/theatres",
-                element: <TheatreIndexPage />,
-                errorElement: <ComponentErrorHandler />,
+                element: <TheatreIndexPage/>,
             },
 
             /**
@@ -46,8 +44,7 @@ export default [
              */
             {
                 path: "/admin/theatres/get/:slug",
-                element: <TheatreDetailsPage />,
-                errorElement: <ComponentErrorHandler />,
+                element: <TheatreDetailsPage/>,
             },
 
             /**
@@ -57,8 +54,7 @@ export default [
              */
             {
                 path: "/admin/theatres/get/:slug/showings/create",
-                element: <TheatreShowingCreatePage />,
-                errorElement: <ComponentErrorHandler />,
+                element: <TheatreShowingCreatePage/>,
             },
 
             /**
@@ -68,8 +64,7 @@ export default [
              */
             {
                 path: "/admin/theatres/get/:slug/showings/list",
-                element: <TheatreShowingListPage />,
-                errorElement: <ComponentErrorHandler />,
+                element: <TheatreShowingListPage/>,
             },
 
             /**
@@ -79,8 +74,7 @@ export default [
              */
             {
                 path: "/admin/theatres/get/:theatreSlug/screen/:screenSlug",
-                element: <ScreenDetailsPage />,
-                errorElement: <ComponentErrorHandler />,
+                element: <ScreenDetailsPage/>,
             },
         ],
     },
