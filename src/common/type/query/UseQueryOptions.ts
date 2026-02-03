@@ -1,3 +1,5 @@
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+
 /**
  * @file UseQueryOptions.ts
  *
@@ -12,7 +14,7 @@
  * @template TError
  * Type of error produced by the query function.
  */
-export type UseQueryOptions<TData, TError = unknown> = {
+export type UseQueryOptions<TData, TError = HttpResponseError> = {
     /**
      * Enable or disable automatic query execution.
      *
