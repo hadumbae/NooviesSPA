@@ -67,7 +67,7 @@ const ErrorMessageDisplay: FC<ErrorProps> = ({error, displayMessage, className, 
     }
 
     if (error instanceof HttpResponseError) {
-        const {response: {status}, message} = error;
+        const {status, message} = error;
         errorMessage = message ? `${status} : ${message}` : `Network Attempt Failed With Code ${status}`;
 
         if (logToConsole) {
