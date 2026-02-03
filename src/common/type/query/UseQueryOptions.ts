@@ -1,15 +1,18 @@
 /**
- * @summary
+ * @file UseQueryOptions.ts
+ *
  * Configuration options for a `useQuery` hook.
  *
- * @description
- * Defines cache behavior, execution control, and data hydration strategies
- * for a React Query query.
+ * Defines cache behavior, execution control, error handling,
+ * and data hydration strategies for a React Query query.
  *
  * @template TData
  * Type of data returned by the query.
+ *
+ * @template TError
+ * Type of error produced by the query function.
  */
-export type UseQueryOptions<TData> = {
+export type UseQueryOptions<TData, TError = unknown> = {
     /**
      * Enable or disable automatic query execution.
      *
@@ -44,4 +47,13 @@ export type UseQueryOptions<TData> = {
      * Previously cached data for this query, if available.
      */
     placeholderData?: TData | ((previousData: TData | undefined) => TData | undefined);
+
+    /**
+     * Controls whether query errors should be thrown.
+     *
+     * @remarks
+     * When set to a function, the return value determines whether
+     * the error should be thrown for the given error instance.
+     */
+    throwOnError?: boolean | ((error: TError) => boolean);
 };

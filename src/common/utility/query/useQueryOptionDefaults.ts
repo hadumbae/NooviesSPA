@@ -1,19 +1,18 @@
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
-
 /**
  * @file useQueryOptionDefaults.ts
  *
- * @summary
- * Provides default configuration for React Query queries.
+ * Provides a baseline configuration for React Query `useQuery` calls.
  *
- * @description
- * Returns a baseline set of options intended to be spread into `useQuery`,
- * with sensible defaults for caching and refetch behavior.
+ * Intended to be spread into query options to enforce consistent defaults
+ * for caching, execution, and error behavior across the application.
  *
  * Defaults:
  * - `enabled`: `true`
  * - `staleTime`: `60_000` ms
  * - `placeholderData`: reuse previous cached data
+ * - `throwOnError`: `false`
+ *
+ * Consumer-provided values override all defaults.
  *
  * @template TData
  * Type of data returned by the query.
@@ -24,12 +23,20 @@ import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
  *   enabled: !!id,
  * });
  *
- * const { data } = useQuery({
+ * const {data} = useQuery({
  *   queryKey: ["user", id],
  *   queryFn: fetchUser,
  *   ...queryOptions,
  * });
  * ```
+ */
+
+import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+
+/**
+ * Returns a standardized set of default query options.
+ *
+ * @param values - Optional consumer overrides
  */
 export default function useQueryOptionDefaults<TData = unknown>(
     values?: UseQueryOptions<TData>
@@ -46,12 +53,17 @@ export default function useQueryOptionDefaults<TData = unknown>(
         staleTime: 60_000,
 
         /**
-         * Reuse previous data while a new query is loading.
+         * Reuse previous cached data while a new query is loading.
          */
         placeholderData: (previousData: TData | undefined) => previousData,
 
         /**
-         * Consumer-provided options.
+         * Disable error throwing at the query layer by default.
+         */
+        throwOnError: false,
+
+        /**
+         * Consumer-provided option overrides.
          */
         ...values,
     };
