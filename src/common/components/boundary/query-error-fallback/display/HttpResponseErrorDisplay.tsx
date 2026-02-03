@@ -1,9 +1,10 @@
 /**
  * @file HttpResponseErrorDisplay.tsx
  *
- * Display component for HTTP response-level query failures.
+ * Display component for HTTP response–level query failures.
  *
- * Used when a request completes but returns a non-OK HTTP status.
+ * Used when a request completes successfully at the network
+ * level but returns a non-OK HTTP status code.
  */
 
 import Logger from "@/common/utility/features/logger/Logger.ts";
@@ -13,15 +14,25 @@ import {cn} from "@/common/lib/utils.ts";
 import {HeaderTextCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {ErrorHandlerDisplayProps} from "@/common/type/ErrorHandlerProps.ts";
+import {HttpStatusOverrideText} from "@/common/type/error/HttpErrorTypes.ts";
+
+type DisplayProps = ErrorHandlerDisplayProps<HttpResponseError> & {
+    /** Optional HTTP status → message overrides */
+    statusTextOverride?: HttpStatusOverrideText;
+};
 
 /**
- * Renders HTTP error details and logs structured response context.
+ * Renders HTTP response errors and logs structured
+ * request/response context for diagnostics.
  *
- * Intended for server-side failures and non-OK HTTP responses.
+ * Supports optional status text overrides for
+ * domain-specific or user-friendly messaging.
  */
-const HttpResponseErrorDisplay = ({error, className}: ErrorHandlerDisplayProps<HttpResponseError>) => {
+const HttpResponseErrorDisplay = ({error, className, statusTextOverride}: DisplayProps) => {
     const {message, status, statusText, url, model, payload} = error;
+
     const errorMessage = message ? message : undefined;
+    const statusMessage = statusTextOverride?.[status] || statusText;
 
     Logger.error({
         error,
@@ -33,6 +44,7 @@ const HttpResponseErrorDisplay = ({error, className}: ErrorHandlerDisplayProps<H
             {key: "status", value: status},
             {key: "payload", value: payload},
             {key: "message", value: errorMessage},
+            {key: "statusText", value: statusMessage},
         ]),
     });
 
@@ -43,7 +55,7 @@ const HttpResponseErrorDisplay = ({error, className}: ErrorHandlerDisplayProps<H
             <div className="space-y-2 text-center">
                 <h2 className={cn(HeaderTextCSS, "uppercase italic")}>HTTP {status}</h2>
                 <span className={cn(SecondaryTextBaseCSS, "text-sm")}>
-                    {errorMessage ?? statusText}
+                    {errorMessage ?? statusMessage}
                 </span>
             </div>
         </div>
