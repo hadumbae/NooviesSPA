@@ -11,15 +11,8 @@ import Logger from "@/common/utility/features/logger/Logger.ts";
 import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
 import {Network} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-
-type DisplayParams = {
-    /** Network error instance */
-    error: NetworkError;
-
-    /** Optional wrapper class name */
-    className?: string;
-};
+import {HeaderTextCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
+import {ErrorHandlerDisplayProps} from "@/common/type/ErrorHandlerProps.ts";
 
 /**
  * Renders network failure details and emits structured diagnostics.
@@ -27,7 +20,7 @@ type DisplayParams = {
  * Intended for transport-level failures such as connectivity issues,
  * timeouts, or aborted requests.
  */
-const NetworkErrorDisplay = ({error, className}: DisplayParams) => {
+const NetworkErrorDisplay = ({error, className}: ErrorHandlerDisplayProps<NetworkError>) => {
     const {method, url, message: errorMessage, cause: {message: causeMessage} = {}} = error;
 
     Logger.error({
@@ -44,10 +37,10 @@ const NetworkErrorDisplay = ({error, className}: DisplayParams) => {
 
     return (
         <div className={cn("h-full flex justify-center items-center space-y-4", className)}>
-            <Network/>
+            <Network size={30}/>
 
-            <div className="space-y-2">
-                <h2 className={cn(PrimaryTextBaseCSS)}>Network Error</h2>
+            <div className="space-y-2 text-center">
+                <h2 className={cn(HeaderTextCSS, "uppercase italic")}>Network Error</h2>
                 <span className={cn(SecondaryTextBaseCSS, "text-sm")}>
                     {errorMessage ?? causeMessage}
                 </span>

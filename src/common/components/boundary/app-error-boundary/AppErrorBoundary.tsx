@@ -1,16 +1,19 @@
 /**
- * @file QueryErrorBoundary.tsx
+ * @file AppErrorBoundary.tsx
  *
- * Error boundary wrapper for React Query workflows.
+ * Top-level application error boundary.
  *
- * Integrates React Query's reset mechanism with
- * a unified query error handler.
+ * Wraps the application tree and provides a unified fallback
+ * for both query-related and non-query runtime errors.
+ *
+ * Integrates React Query’s reset mechanism to allow recovery
+ * after handled failures.
  */
 
-import {ReactNode} from "react";
 import {ErrorBoundary} from "react-error-boundary";
 import {useQueryErrorResetBoundary} from "@tanstack/react-query";
-import QueryErrorHandler from "@/common/components/boundary/query-error-fallback/QueryErrorHandler.tsx";
+import AppErrorFallback from "@/common/components/boundary/app-error-boundary/AppErrorFallback.tsx";
+import {ReactNode} from "react";
 
 type BoundaryProps = {
     children: ReactNode;
@@ -18,19 +21,19 @@ type BoundaryProps = {
 };
 
 /**
- * Error boundary for query-driven components.
+ * Root error boundary for the application.
  *
  * @param children - Wrapped render tree
  * @param className - Optional class name passed to fallback UI
  */
-const QueryErrorBoundary = ({children, className}: BoundaryProps) => {
+const AppErrorBoundary = ({children, className}: BoundaryProps) => {
     const {reset} = useQueryErrorResetBoundary();
 
     return (
         <ErrorBoundary
             onReset={reset}
             fallbackRender={(fallbackProps) => (
-                <QueryErrorHandler
+                <AppErrorFallback
                     {...fallbackProps}
                     className={className}
                 />
@@ -41,4 +44,4 @@ const QueryErrorBoundary = ({children, className}: BoundaryProps) => {
     );
 };
 
-export default QueryErrorBoundary;
+export default AppErrorBoundary;
