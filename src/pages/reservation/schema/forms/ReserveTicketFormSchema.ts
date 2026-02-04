@@ -16,10 +16,11 @@
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {CoercedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {ISO4217CurrencyCodeEnumSchema} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
 import {ReservationTypeConstant} from "@/pages/reservation/constants/ReservationTypeConstant.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 
 /**
  * Base schema for ticket reservation form submissions.
@@ -32,7 +33,7 @@ export const ReserveTicketFormBaseSchema = z.object({
     showing: IDStringSchema,
 
     /** Number of tickets included in the checkout. */
-    ticketCount: PositiveNumberSchema,
+    ticketCount: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema),
 
     /** Currency used for pricing (ISO 4217). */
     currency: ISO4217CurrencyCodeEnumSchema,
