@@ -88,8 +88,8 @@ export function formatShowingInfo(showing: ShowingDetails): FormattedShowingInfo
         : "None";
 
     const reservationType = showingConfig?.canReserveSeats
-        ? "GENERAL_ADMISSION"
-        : "RESERVED_SEATS";
+        ? "RESERVED_SEATS"
+        : "GENERAL_ADMISSION";
 
     return {
         movieTitle,
