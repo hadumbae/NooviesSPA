@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import useFetchAuthUserDetails from "@/common/hooks/auth/useLogoutUser.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MyProfileHeader from "@/pages/users/components/headers/MyProfileHeader.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
@@ -13,17 +12,18 @@ import ClientRecentReviewsListContainer
     from "@/pages/users/components/profile/ClientRecentReviewsListContainer.tsx";
 import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import UpdateUserPasswordFormContainer from "@/pages/users/components/forms/UpdateUserPasswordFormContainer.tsx";
+import {useGetAuthUser} from "@/pages/auth/hooks/authUser/useGetAuthUser.ts";
+import useTitle from "@/common/hooks/document/useTitle.ts";
 
 const MyProfilePage: FC = () => {
-    const authUserDetails = useFetchAuthUserDetails();
+    useTitle("My Profile");
 
-    if (!authUserDetails) return <PageLoader />;
-
-    const {user: userID} = authUserDetails;
+    const user = useGetAuthUser();
+    if (!user) return <PageLoader />;
 
     return (
         <PageFlexWrapper>
-            <MyProfileHeader authUser={authUserDetails} />
+            <MyProfileHeader user={user} />
 
             <Separator />
 
@@ -33,7 +33,7 @@ const MyProfilePage: FC = () => {
                         <CardTitle>Update Your Password</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <UpdateUserPasswordFormContainer userID={userID} />
+                        <UpdateUserPasswordFormContainer userID={user._id} />
                     </CardContent>
                 </Card>
             </PageSection>
