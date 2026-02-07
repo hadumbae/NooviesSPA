@@ -38,6 +38,7 @@ import {UTCISO8601StringSchema} from "@/common/schema/date-time/iso-8601/UTCISO8
  * Cross-field requirements are enforced via refinement.
  */
 export const ReservationBaseSchema = z.object({
+    _id: IDStringSchema,
     user: IDStringSchema,
     showing: IDStringSchema,
     ticketCount: PositiveNumberSchema,
