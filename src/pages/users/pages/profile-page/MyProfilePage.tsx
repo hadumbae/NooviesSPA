@@ -1,59 +1,49 @@
 import {FC} from 'react';
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import MyProfileHeader from "@/pages/users/components/headers/MyProfileHeader.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import PageSection from "@/common/components/page/PageSection.tsx";
-import {Separator} from "@/common/components/ui/separator.tsx";
-import ClientRecentReservationListContainer
-    from "@/pages/users/components/profile/ClientRecentReservationListContainer.tsx";
-import ClientRecentFavouritesListContainer
-    from "@/pages/users/components/profile/ClientRecentFavouritesListContainer.tsx";
-import ClientRecentReviewsListContainer
-    from "@/pages/users/components/profile/ClientRecentReviewsListContainer.tsx";
-import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
-import UpdateUserPasswordFormContainer from "@/pages/users/components/forms/UpdateUserPasswordFormContainer.tsx";
 import {useGetAuthUser} from "@/pages/auth/hooks/authUser/useGetAuthUser.ts";
 import useTitle from "@/common/hooks/document/useTitle.ts";
+import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import {MyProfilePageSearchParamsSchema} from "@/pages/users/schemas/params/MyProfilePageSearchParamsSchema.ts";
+import {MyProfilePageActiveTab} from "@/pages/users/schemas/tabs/my-profile-page/MyProfilePageActiveTabSchema.ts";
+import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import MyProfileHeader from "@/pages/users/components/headers/MyProfileHeader.tsx";
+import {Separator} from "@/common/components/ui/separator.tsx";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import MyProfilePageTabs from "@/pages/users/pages/profile-page/tabs/MyProfilePageTabs.tsx";
 
 const MyProfilePage: FC = () => {
     useTitle("My Profile");
 
     const user = useGetAuthUser();
-    if (!user) return <PageLoader />;
+    if (!user) return <PageLoader/>;
+
+    const isMobile = useIsMobile();
+
+    const {searchParams, setSearchParams} = useParsedSearchParams({
+        schema: MyProfilePageSearchParamsSchema
+    });
+
+    const {activeTab} = searchParams;
+    const setActiveTab = (tab: MyProfilePageActiveTab) => setSearchParams({...searchParams, activeTab: tab})
 
     return (
         <PageFlexWrapper>
-            <MyProfileHeader user={user} />
+            <MyProfileHeader user={user} setTab={setActiveTab} showTabSelector={isMobile}/>
 
-            <Separator />
+            <Separator/>
 
-            <PageSection title="Update My Password">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Update Your Password</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <UpdateUserPasswordFormContainer userID={user._id} />
-                    </CardContent>
-                </Card>
-            </PageSection>
+            <section className="flex-1 flex flex-col">
+                <SectionHeader srOnly={true}>Tabs</SectionHeader>
 
-            <Separator />
-
-            <PageSection title="My Reservations">
-                <ClientRecentReservationListContainer recentReservations={[]} />
-                {/*TODO My Most Recent Reservations*/}
-            </PageSection>
-
-            <PageSection title="My Favourites">
-                <ClientRecentFavouritesListContainer recentFavourites={[]} />
-                {/*TODO My Most Recent Favourites*/}
-            </PageSection>
-
-            <PageSection title="My Reviews">
-                <ClientRecentReviewsListContainer recentReviews={[]} />
-                {/*TODO My Most Recent Reviews*/}
-            </PageSection>
+                <MyProfilePageTabs
+                    user={user}
+                    activeTab={activeTab ?? "password"}
+                    setActiveTab={setActiveTab}
+                    showTabSelector={!isMobile}
+                    className="flex-1"
+                />
+            </section>
         </PageFlexWrapper>
     );
 };
