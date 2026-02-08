@@ -20,6 +20,7 @@ const routes: RouteObject[] = [
         errorElement: <ErrorPage />,
         children: [
             {path: "/account/profile", element: <MyProfilePage />},
+            {path: "/account/reservations/:slug", element: <MyFavouritesPage />},
             {path: "/account/favourites", element: <MyFavouritesPage />},
             {path: "/account/reviews", element: <MyReviewsPage />},
         ],
