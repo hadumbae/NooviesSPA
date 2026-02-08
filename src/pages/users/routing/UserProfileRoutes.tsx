@@ -1,9 +1,9 @@
 import {RouteObject} from "react-router-dom";
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
-import MyProfilePage from "@/pages/users/pages/profile-page/MyProfilePage.tsx";
-import MyFavouritesPage from "@/pages/users/pages/MyFavouritesPage.tsx";
-import MyReviewsPage from "@/pages/users/pages/MyReviewsPage.tsx";
+import MyProfilePage from "@/features/client/users/pages/profile-page/MyProfilePage.tsx";
+import MyFavouritesPage from "@/features/client/users/pages/favourites-page/MyFavouritesPage.tsx";
+import MyReviewsPage from "@/features/client/users/pages/reviews-page/MyReviewsPage.tsx";
 
 /**
  * User account routes.

@@ -11,7 +11,7 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import {User} from "@/pages/users/schemas/user/User.types.ts";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {MyProfilePageActiveTab} from "@/pages/users/schemas/tabs/my-profile-page/MyProfilePageActiveTabSchema.ts";
-import MyProfilePageTabDropdown from "@/pages/users/pages/profile-page/tabs/MyProfilePageTabDropdown.tsx";
+import MyProfilePageTabDropdown from "@/features/client/users/pages/profile-page/tabs/MyProfilePageTabDropdown.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 type MyProfileHeaderProps = {

@@ -2,7 +2,9 @@
  * @file MyProfilePageTabs.tsx
  *
  * Tab-based layout for the My Profile page.
- * Controls active tab state and renders tab navigation and content.
+ *
+ * Manages active tab state, renders optional tab navigation,
+ * and displays tab-specific profile content.
  */
 
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
@@ -12,42 +14,42 @@ import {User} from "@/pages/users/schemas/user/User.types.ts";
 import ClientRecentFavouritesListContainer
     from "@/pages/users/components/profile/ClientRecentFavouritesListContainer.tsx";
 import ClientRecentReviewsListContainer from "@/pages/users/components/profile/ClientRecentReviewsListContainer.tsx";
-import MyProfilePageReservationTab from "@/pages/users/pages/profile-page/tabs/MyProfilePageReservationTab.tsx";
-import MyProfilePagePasswordTab from "@/pages/users/pages/profile-page/tabs/MyProfilePagePasswordTab.tsx";
+import MyProfilePageReservationTab from "@/features/client/users/pages/profile-page/tabs/MyProfilePageReservationTab.tsx";
+import MyProfilePagePasswordTab from "@/features/client/users/pages/profile-page/tabs/MyProfilePagePasswordTab.tsx";
+import {useMyProfilePageSetup} from "@/pages/users/hooks/my-profie-page/useMyProfilePageSetup.ts";
 
 type TabProps = {
+    /** Authenticated user whose profile is being rendered */
     user: User;
 
-    /** Whether the tab selector UI should be rendered */
+    /** Controls visibility of the tab selector UI */
     showTabSelector?: boolean;
-
-    /** Currently active profile page tab */
-    activeTab: MyProfilePageActiveTab;
-
-    /** Updates the active profile page tab */
-    setActiveTab: (tab: MyProfilePageActiveTab) => void;
 
     className?: string;
 };
 
 /**
- * Renders the My Profile page tabs and associated content.
+ * Renders profile tabs and associated tab content.
  *
- * Tab navigation can be conditionally hidden for alternative
- * layouts while still supporting controlled tab state.
+ * Supports controlled tab state and optional tab navigation,
+ * allowing reuse in alternative layouts.
  */
 const MyProfilePageTabs = (
-    {user, activeTab, setActiveTab, className, showTabSelector = true}: TabProps
+    {user, className, showTabSelector = true}: TabProps
 ) => {
 
+    const {searchParams, setters} = useMyProfilePageSetup();
+    const {activeTab, resPage} = searchParams;
+    const {setActiveTab, setResPage} = setters;
+
     /**
-     * Tab selector UI derived from the profile page tab constants.
+     * Tab selector generated from profile tab constants.
      */
     const tabList = (
         <TabsList>
-            {MyProfilePageTabKeysConstant.map(({key, label}) => (
-                <TabsTrigger key={key} value={key}>{label}</TabsTrigger>
-            ))}
+            {MyProfilePageTabKeysConstant.map(
+                ({key, label}) => <TabsTrigger key={key} value={key}>{label}</TabsTrigger>
+            )}
         </TabsList>
     );
 
@@ -65,6 +67,8 @@ const MyProfilePageTabs = (
             />
 
             <MyProfilePageReservationTab
+                page={resPage}
+                setPage={setResPage}
                 tabValue="reservations"
                 className={activeTab === "reservations" ? "h-full" : ""}
             />
