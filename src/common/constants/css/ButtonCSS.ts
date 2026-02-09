@@ -68,8 +68,8 @@ export const PrimaryButtonCSS = cn(
  */
 export const SecondaryButtonCSS = cn(
     "shadow-sm",
-    "text-neutral-900 bg-neutral-100 hover:bg-neutral-100/80",
-    "dark:text-neutral-50 dark:hover:text-black dark:bg-neutral-700 dark:hover:bg-neutral-500",
+    "text-neutral-900 bg-neutral-200 hover:bg-neutral-400/80 hover:text-neutral-200",
+    "dark:text-neutral-50 dark:hover:text-black dark:bg-neutral-600 dark:hover:bg-neutral-500",
 );
 
 /**
