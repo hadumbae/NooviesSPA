@@ -14,6 +14,7 @@ const SeatMapStatusConstant = [
     "AVAILABLE",
     "RESERVED",
     "SOLD",
+    "PENDING",
 ] as const;
 
 export default SeatMapStatusConstant;
