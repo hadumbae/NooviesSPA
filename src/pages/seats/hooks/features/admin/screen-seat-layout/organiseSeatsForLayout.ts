@@ -1,121 +1,108 @@
 /**
- * @file organiseSeatsForLayout
- * @summary
- * Transforms a flat list of seats into a normalized 2D seat grid.
+ * @file organiseSeatsForLayout.ts
  *
- * @remarks
- * - Groups seats by `y` (rows) and orders them by `x` (columns)
- * - Normalizes all rows to equal width using `null` placeholders
- * - Adds a numeric column-label row at `y = 0`
+ * Normalizes a flat seat list into a 2D grid for layout rendering.
  *
- * Intended for grid-based seat layout rendering.
+ * Responsibilities:
+ * - Groups seats by row (`y`) and orders by column (`x`)
+ * - Normalizes row widths using `null` placeholders
+ * - Optionally prepends a numeric column-label row at `y = 0`
+ *
+ * Intended for grid-based seat map UIs.
  */
 
-import { GridPositionedSeat } from "@/pages/seats/types/GridPositionedSeat.ts";
+import {GridPositionedSeat} from "@/pages/seats/types/GridPositionedSeat.ts";
 
 /**
- * @summary
- * Parameters for seat grid organization.
+ * Parameters for {@link organiseSeatsForLayout}.
  */
 type SortParams<TSeat extends GridPositionedSeat> = {
-    /** Flat list of seat objects */
+    /** Flat list of positioned seats */
     seats: TSeat[];
+
+    /** Whether to include a numeric column-label row */
+    includeLabels?: boolean;
 };
 
 /**
- * @summary
- * Result of seat grid organization.
+ * Return shape of {@link organiseSeatsForLayout}.
  */
 type SortReturns<TSeat extends GridPositionedSeat> = {
     /**
      * Row-indexed seat grid.
      *
      * @remarks
-     * - Keys represent `y` coordinates (descending order)
-     * - Values are row arrays ordered by `x`
-     * - Missing positions are represented as `null`
-     * - Row `0` contains numeric column labels (`1..maxX`)
+     * - Keys represent `y` coordinates (descending)
+     * - Rows are ordered by `x`
+     * - Missing positions are filled with `null`
+     * - Row `0` contains numeric column labels (`1..maxX`) when enabled
      */
     sortedSeats: Map<number, (TSeat | number | null)[]>;
-    /** Maximum column index */
+
+    /** Maximum column index (`x`) */
     maxX: number;
-    /** Maximum row index */
+
+    /** Maximum row index (`y`) */
     maxY: number;
 };
 
 /**
- * @summary
- * Organizes seats into a normalized 2D grid for layout rendering.
+ * Organizes seats into a normalized 2D grid.
  *
- * @remarks
  * Useful for UI components that require consistent row/column
  * alignment (e.g. seat maps, screen layouts).
  *
- * @param params
- * Seat list to organize.
- *
- * @returns
- * Structured seat grid with computed bounds.
+ * @param params - Seat list and layout options
+ * @returns Normalized seat grid with computed bounds
  *
  * @example
- * const result = organiseSeatsForLayout({ seats });
+ * ```ts
+ * const { sortedSeats, maxX, maxY } =
+ *   organiseSeatsForLayout({ seats });
  *
- * const row5 = result.sortedSeats.get(5);
- *
- * for (const [y, row] of result.sortedSeats) {
- *   console.log("Row", y, row);
- * }
+ * const row = sortedSeats.get(5);
+ * ```
  */
 export default function organiseSeatsForLayout<TSeat extends GridPositionedSeat>(
-    { seats }: SortParams<TSeat>
+    {seats, includeLabels = true}: SortParams<TSeat>
 ): SortReturns<TSeat> {
     if (!seats.length) {
         return {
-            sortedSeats: new Map<number, TSeat[]>(),
+            sortedSeats: new Map<number, (TSeat | number | null)[]>(),
             maxX: 0,
             maxY: 0,
         };
     }
 
-    let maxX = 0;
-    let maxY = 0;
+    const maxCount: Record<"x" | "y", number> = {x: 0, y: 0};
+    const seatMapLookup: Record<string, TSeat> = {};
+    const rows = new Map<number, (TSeat | number | null)[]>();
 
     for (const seat of seats) {
-        if (seat.x > maxX) maxX = seat.x;
-        if (seat.y > maxY) maxY = seat.y;
+        const {x, y} = seat;
+
+        if (x > maxCount.x) maxCount.x = x;
+        if (y > maxCount.y) maxCount.y = y;
+
+        seatMapLookup[`${x}-${y}`] = seat;
     }
 
-    const rows = new Map<number, TSeat[]>();
+    for (let y = maxCount.y; y >= 1; y--) {
+        const row = Array.from({length: maxCount.x}, (_, i) => {
+            const x = i + 1;
+            return seatMapLookup[`${x}-${y}`] ?? null;
+        });
 
-    for (let y = 1; y <= maxY; y++) {
-        rows.set(y, []);
+        rows.set(y, row);
     }
 
-    for (const seat of seats) {
-        rows.get(seat.y)!.push(seat);
+    if (includeLabels) {
+        rows.set(0, Array.from({length: maxCount.x}, (_, i) => i + 1));
     }
-
-    const sortedSeats = new Map<number, (TSeat | number | null)[]>();
-    const reversedY = Array.from(rows.keys()).sort((a, b) => b - a);
-
-    for (const y of reversedY) {
-        const seatRow: (TSeat | null)[] = Array.from(
-            { length: maxX },
-            () => null
-        );
-
-        for (const seat of rows.get(y)!) {
-            seatRow[seat.x - 1] = seat;
-        }
-
-        sortedSeats.set(y, seatRow);
-    }
-
-    sortedSeats.set(0, Array.from({ length: maxX }, (_, i) => i + 1));
 
     return {
-        sortedSeats,
-        maxX,
-        maxY,
+        sortedSeats: rows,
+        maxX: maxCount.x,
+        maxY: maxCount.y,
     };
 }

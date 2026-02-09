@@ -1,42 +1,56 @@
+/**
+ * @file useOrganisedSeatingForLayout.ts
+ *
+ * React hook for preparing seat data for grid-based layout rendering.
+ *
+ * Responsibilities:
+ * - Normalizes seating into a 2D grid structure
+ * - Memoizes derived row entries for efficient rendering
+ * - Computes CSS Grid styles from grid dimensions
+ *
+ * Intended for admin-facing screen and seat layout components.
+ */
+
 import organiseSeatsForLayout from "@/pages/seats/hooks/features/admin/screen-seat-layout/organiseSeatsForLayout.ts";
 import {useMemo} from "react";
 import {GridPositionedSeat} from "@/pages/seats/types/GridPositionedSeat.ts";
 
 /**
- * @summary
- * Parameters for organizing seating into a layout-ready grid.
+ * Parameters for {@link useOrganisedSeatingForLayout}.
  */
 type SeatProps<TSeat extends GridPositionedSeat> = {
     /** Flat list of seats with grid positioning data */
     seating: TSeat[];
+
+    /** Whether to include a numeric column-label row */
+    includeLabels?: boolean;
 };
 
 /**
- * @summary
  * Prepares seat data for grid-based layout rendering.
  *
  * @remarks
- * - Organizes seats into a normalized 2D structure
- * - Memoizes derived row entries for efficient rendering
- * - Computes CSS Grid styles based on grid dimensions
+ * - Delegates grid normalization to {@link organiseSeatsForLayout}
+ * - Memoizes all derived values to avoid unnecessary recalculation
+ * - Generates CSS Grid styles based on computed bounds
  *
- * Intended for admin-facing screen and seat layout components.
+ * @param params - Seating data and layout options
+ * @returns Normalized grid data and layout helpers
  *
- * @param params
- * Seating data to organize.
- *
- * @returns
- * Organized seat grid, grid bounds, row entries, and layout styles.
+ * @example
+ * ```ts
+ * const {
+ *   seatRowEntries,
+ *   layoutGridStyle
+ * } = useOrganisedSeatingForLayout({ seating });
+ * ```
  */
 export default function useOrganisedSeatingForLayout<
     TSeat extends GridPositionedSeat
->(params: SeatProps<TSeat>) {
-    const {seating} = params;
-
-    // --- Get Sorted Seats ---
+>({seating, includeLabels = true}: SeatProps<TSeat>) {
     const {sortedSeats, maxX, maxY} = useMemo(
-        () => organiseSeatsForLayout({seats: seating}),
-        [seating],
+        () => organiseSeatsForLayout({seats: seating, includeLabels}),
+        [seating, includeLabels],
     );
 
     const seatRowEntries = useMemo(
@@ -44,7 +58,6 @@ export default function useOrganisedSeatingForLayout<
         [sortedSeats]
     );
 
-    // --- Grid Styling ---
     const layoutGridStyle = useMemo(
         () => ({
             display: "grid",
@@ -55,10 +68,10 @@ export default function useOrganisedSeatingForLayout<
     );
 
     return {
-        sortedSeats,
-        seatRowEntries,
         maxX,
         maxY,
+        sortedSeats,
+        seatRowEntries,
         layoutGridStyle,
     };
 }
