@@ -78,6 +78,7 @@ export const SeatMapDetailsSchema = SeatMapSchema.extend({
     x: PositiveNumberSchema,
     y: PositiveNumberSchema,
     row: NonEmptyStringSchema.max(10, "Must be 10 characters or less."),
+    seatLabel: NonEmptyStringSchema.optional(),
     finalPrice: PositiveNumberSchema,
 });
 
