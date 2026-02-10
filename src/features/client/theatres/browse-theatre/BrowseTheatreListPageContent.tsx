@@ -3,6 +3,9 @@
  *
  * Presentational layout for the theatre browse page.
  *
+ * Assumes all provided theatres already have
+ * recent or upcoming showings available.
+ *
  * Handles:
  * - Browse parameter form rendering
  * - Theatre result grid
@@ -16,13 +19,12 @@ import BrowseTheatreParamFormContainer
     from "@/pages/theatres/components/client/forms/browse-theatre-params/BrowseTheatreParamFormContainer.tsx";
 import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 import {TheatreWithRecentShowings} from "@/pages/theatres/schema/model/theatre/TheatreWithRecentShowings.types.ts";
-import {cn} from "@/common/lib/utils.ts";
-import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import TheatreBrowseListCard from "@/pages/theatres/components/client/forms/browse-list/TheatreBrowseListCard.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
+import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
 /**
  * Props for {@link BrowseTheatreListPageContent}.
@@ -34,7 +36,12 @@ type ContentProps = PaginationValues & {
     /** Total number of matching theatres */
     totalTheatres: number;
 
-    /** Paginated theatre results */
+    /**
+     * Paginated theatre results.
+     *
+     * All theatres are guaranteed to have
+     * recent or upcoming showings.
+     */
     theatres: TheatreWithRecentShowings[];
 };
 
@@ -42,34 +49,26 @@ type ContentProps = PaginationValues & {
  * Renders the theatre browse page layout.
  *
  * Displays:
- * - Location filter form
+ * - Location-based browse parameter form
  * - Theatre cards with recent showings
- * - Empty state when no results exist
+ * - Empty state when no theatres match the criteria
  * - Pagination controls when applicable
+ *
+ * @remarks
+ * This component is purely presentational and assumes
+ * filtering and validation have already been handled
+ * by the parent page.
  */
 const BrowseTheatreListPageContent = (
     {page, perPage, setPage, totalTheatres, theatres}: ContentProps,
 ) => {
-    // --- SECTIONS ---
-
-    const emptySection = (
-        <section className="flex-1 flex justify-center items-center">
-            <span className={cn(SecondaryTextBaseCSS, "uppercase select-none")}>
-                No Theatres
-            </span>
-        </section>
-    );
-
     const theatreSection = (
         <section className="space-y-4">
             <SectionHeader srOnly={true}>Theatres</SectionHeader>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {theatres.map((theatre) => (
-                    <TheatreBrowseListCard
-                        key={theatre.slug}
-                        theatre={theatre}
-                    />
+                    <TheatreBrowseListCard key={theatre.slug} theatre={theatre}/>
                 ))}
             </div>
 
@@ -84,7 +83,6 @@ const BrowseTheatreListPageContent = (
         </section>
     );
 
-    // --- RENDER ---
     return (
         <PageFlexWrapper className="space-y-4">
             <header>
@@ -94,11 +92,15 @@ const BrowseTheatreListPageContent = (
 
             <Card>
                 <CardContent className="p-4">
-                    <BrowseTheatreParamFormContainer />
+                    <BrowseTheatreParamFormContainer/>
                 </CardContent>
             </Card>
 
-            {theatres.length > 0 ? theatreSection : emptySection}
+            {
+                theatres.length > 0
+                    ? theatreSection
+                    : <EmptyArrayContainer text="No Theatres" className="flex-1"/>
+            }
         </PageFlexWrapper>
     );
 };
