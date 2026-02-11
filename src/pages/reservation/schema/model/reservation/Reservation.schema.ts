@@ -28,6 +28,7 @@ import {ReservationTypeEnumSchema} from "@/pages/reservation/schema/enum/Reserva
 import {ReservationStatusEnumSchema} from "@/pages/reservation/schema/enum/ReservationStatusEnumSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {UTCISO8601StringSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601StringSchema.ts";
+import {SlugStringSchema} from "@/common/schema/strings/simple-strings/SlugString.ts";
 
 /**
  * Base reservation schema.
@@ -39,6 +40,7 @@ import {UTCISO8601StringSchema} from "@/common/schema/date-time/iso-8601/UTCISO8
  */
 export const ReservationBaseSchema = z.object({
     _id: IDStringSchema,
+    slug: SlugStringSchema,
     user: IDStringSchema,
     showing: IDStringSchema,
     ticketCount: PositiveNumberSchema,
