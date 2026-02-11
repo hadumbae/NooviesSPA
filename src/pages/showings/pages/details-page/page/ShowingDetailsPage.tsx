@@ -59,7 +59,6 @@ type QueryData = {
  * a {@link PageLoader} is rendered until resolution.
  */
 const ShowingDetailsPage: FC = () => {
-    // --- ROUTE PARAM ---
     const {slug} = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/admin/showings",
@@ -71,8 +70,6 @@ const ShowingDetailsPage: FC = () => {
         return <PageLoader/>;
     }
 
-    // --- QUERIES ---
-
     const showingQuery = useFetchShowingBySlug({
         slug,
         config: {populate: true, virtuals: true},
@@ -80,7 +77,7 @@ const ShowingDetailsPage: FC = () => {
 
     const seatingQuery = useFetchSeatMaps({
         queries: {showingSlug: slug},
-        queryConfig: {populate: true, virtuals: true},
+        config: {populate: true, virtuals: true},
     });
 
     const queries = [showingQuery, seatingQuery];
@@ -89,8 +86,6 @@ const ShowingDetailsPage: FC = () => {
         {query: showingQuery, schema: ShowingDetailsSchema, key: "showing"},
         {query: seatingQuery, schema: SeatMapDetailsArraySchema, key: "seating"},
     ];
-
-    // --- RENDER ---
 
     return (
         <CombinedQueryBoundary queries={queries}>

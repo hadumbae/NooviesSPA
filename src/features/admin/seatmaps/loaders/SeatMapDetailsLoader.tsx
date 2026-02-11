@@ -38,8 +38,8 @@ const SeatMapDetailsLoader = (
     {children, showingID, ...queryOptions}: LoaderProps
 ) => {
     const query = useFetchSeatMaps({
-        queryConfig: {populate: true, virtuals: true},
         queries: {...queryOptions, showing: showingID},
+        config: {populate: true, virtuals: true},
     });
 
     return (

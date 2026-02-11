@@ -18,7 +18,7 @@ import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {SeatMapStatusEnum} from "@/pages/seatmap/schema/enum/SeatMapStatusEnum.ts";
-import {ShowingDetailsSchema, ShowingSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
+import {PopulatedShowingSchema, ShowingSchema} from "@/pages/showings/schema/showing/Showing.schema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
@@ -74,7 +74,7 @@ export const PopulatedSeatMapSchema = SeatMapWithSeatSchema.extend({
  */
 export const SeatMapDetailsSchema = SeatMapSchema.extend({
     seat: z.lazy(() => SeatDetailsSchema),
-    showing: z.lazy(() => ShowingDetailsSchema),
+    showing: z.lazy(() => PopulatedShowingSchema),
     x: PositiveNumberSchema,
     y: PositiveNumberSchema,
     row: NonEmptyStringSchema.max(10, "Must be 10 characters or less."),
