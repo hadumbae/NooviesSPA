@@ -75,7 +75,7 @@ const ValidatedDataLoader = <TData = unknown>(params: LoaderProps<TData>) => {
 
     if (!success) {
         throw new ParseError({
-            message: "Error in query. Failed to fetch data.",
+            message: "Invalid Data Received.",
             errors: parseError.errors,
         });
     }
