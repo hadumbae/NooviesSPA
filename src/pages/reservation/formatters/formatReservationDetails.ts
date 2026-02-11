@@ -5,7 +5,7 @@ import buildShowingDateString from "@/pages/showings/utilities/buildShowingDateS
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 
 export function formatReservationDetails(reservation: ReservationDetails) {
-    const {_id, status, showing, reservationType, ticketCount, pricePaid} = reservation;
+    const {_id, slug, status, showing, reservationType, ticketCount, pricePaid} = reservation;
     const {movie, theatre, startTime, endTime} = showing;
     const {location: {timezone}} = theatre;
     const {title, releaseDate, posterImage, runtime} = movie;
@@ -18,6 +18,7 @@ export function formatReservationDetails(reservation: ReservationDetails) {
 
     return {
         _id,
+        slug,
         status,
         reservationType,
         title,

@@ -36,7 +36,7 @@ type CardProps = {
 const MyReservationCompactCard = ({reservation}: CardProps) => {
     const navigate = useLoggedNavigate();
 
-    const {_id, formatted, status, ticketCount, pricePaid, posterImage} =
+    const {slug, formatted, status, ticketCount, pricePaid, posterImage} =
         formatReservationDetails(reservation);
 
     const {movieTitle, reservationType, showtime, runtime} = formatted;
@@ -47,7 +47,7 @@ const MyReservationCompactCard = ({reservation}: CardProps) => {
     const navigateToReservation = () => {
         navigate({
             level: "log",
-            to: `/account/reservations/${_id}`,
+            to: `/account/reservations/${slug}`,
             message: "Navigate to user's reservation.",
             component: MyReservationCompactCard.name,
         });
