@@ -1,18 +1,6 @@
 /**
  * @file TicketRepository.ts
- *
- * @summary
- * Client-side repository for ticket reservation requests.
- *
- * @description
- * Provides a thin abstraction over the ticket reservation API,
- * responsible for:
- * - Building request URLs
- * - Submitting validated checkout payloads
- * - Returning normalized API responses
- *
- * This repository contains no business logic and delegates
- * request execution to shared fetch utilities.
+ * Client-side ticket reservation API adapter.
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
@@ -20,23 +8,14 @@ import {ReserveTicketForm} from "@/pages/reservation/schema/forms/ReserveTicketF
 import {TicketRepositoryMethods} from "@/pages/reservation/repositories/ticket-repository/TicketRepository.types.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
- * Ticket repository implementation.
- *
- * @remarks
- * Acts as the client-facing boundary for reservation checkout.
+ * UI-facing repository for reservation requests.
  */
 const repository: TicketRepositoryMethods = {
-    /** Base API endpoint for ticket operations. */
     baseURL: `${import.meta.env.VITE_API_URL}/api/v1/tickets`,
 
-    /**
-     * Submits a reservation checkout request.
-     *
-     * @param data - Validated reservation form payload
-     * @returns Wrapped API response
-     */
     reserveTicket(data: ReserveTicketForm): Promise<RequestReturns> {
         const url = buildQueryURL({
             baseURL: this.baseURL,
@@ -45,6 +24,24 @@ const repository: TicketRepositoryMethods = {
 
         return useFetchAPI({method: "POST", url, data});
     },
+
+    checkoutTicket(_id: ObjectId): Promise<RequestReturns> {
+        const url = buildQueryURL({
+            baseURL: this.baseURL,
+            path: `checkout/${_id}`,
+        });
+
+        return useFetchAPI({method: "PATCH", url});
+    },
+
+    cancelReservation(_id: ObjectId): Promise<RequestReturns> {
+        const url = buildQueryURL({
+            baseURL: this.baseURL,
+            path: `cancel/${_id}`,
+        });
+
+        return useFetchAPI({method: "PATCH", url});
+    }
 };
 
 export {
