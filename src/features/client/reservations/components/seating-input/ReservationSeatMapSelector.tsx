@@ -17,7 +17,7 @@ import {SeatMapDetails} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
 import {cn} from "@/common/lib/utils.ts";
 import useOrganisedSeatingForLayout
     from "@/pages/seats/hooks/features/admin/screen-seat-layout/useOrganisedSeatingForLayout.ts";
-import ReservationSeatMapElement from "@/features/client/reservations/components/seating/ReservationSeatMapElement.tsx";
+import ReservationSeatMapElement from "@/features/client/reservations/components/seating-input/ReservationSeatMapElement.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 /**
