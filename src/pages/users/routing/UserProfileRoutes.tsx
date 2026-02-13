@@ -4,6 +4,7 @@ import ErrorPage from "@/common/pages/ErrorPage.tsx";
 import MyProfilePage from "@/features/client/users/pages/profile-page/MyProfilePage.tsx";
 import MyFavouritesPage from "@/features/client/users/pages/favourites-page/MyFavouritesPage.tsx";
 import MyReviewsPage from "@/features/client/users/pages/reviews-page/MyReviewsPage.tsx";
+import MyReservationPage from "@/features/client/users/pages/reservation-page/MyReservationPage.tsx";
 
 /**
  * User account routes.
@@ -16,13 +17,13 @@ import MyReviewsPage from "@/features/client/users/pages/reviews-page/MyReviewsP
 const routes: RouteObject[] = [
     {
         path: "/account",
-        element: <BaseLayout />,
-        errorElement: <ErrorPage />,
+        element: <BaseLayout/>,
+        errorElement: <ErrorPage/>,
         children: [
-            {path: "/account/profile", element: <MyProfilePage />},
-            {path: "/account/reservations/:slug", element: <MyFavouritesPage />},
-            {path: "/account/favourites", element: <MyFavouritesPage />},
-            {path: "/account/reviews", element: <MyReviewsPage />},
+            {path: "/account/profile", element: <MyProfilePage/>},
+            {path: "/account/reservations/:slug", element: <MyReservationPage/>},
+            {path: "/account/favourites", element: <MyFavouritesPage/>},
+            {path: "/account/reviews", element: <MyReviewsPage/>},
         ],
     }
 ];
