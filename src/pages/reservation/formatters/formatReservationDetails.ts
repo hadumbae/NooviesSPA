@@ -31,9 +31,11 @@ type FormattedReturns = {
     pricePaid: number;
     posterImage?: CloudinaryImage | null;
     isSpecialEvent?: boolean;
-    /**
-     * Preformatted values for UI rendering.
-     */
+    _ids: {
+        showingID: ObjectId;
+        theatreID: ObjectId;
+        movieID: ObjectId;
+    },
     formatted: {
         movieTitle: string;
         movieReleaseDate: string;
@@ -45,13 +47,14 @@ type FormattedReturns = {
 }
 
 /**
- * Produces display-ready reservation metadata for UI consumption.
+ * @param reservation Source reservation entity.
+ * @returns Reservation data enriched with formatted display fields.
  */
 export function formatReservationDetails(reservation: ReservationDetails): FormattedReturns {
     const {_id, slug, status, showing, reservationType, ticketCount, pricePaid} = reservation;
-    const {movie, theatre, startTime, endTime, isSpecialEvent} = showing;
-    const {location: {timezone}} = theatre;
-    const {title, releaseDate, posterImage, runtime, genres: movieGenres} = movie;
+    const {_id: showingID, movie, theatre, startTime, endTime, isSpecialEvent} = showing;
+    const {_id: theatreID, location: {timezone}} = theatre;
+    const {_id: movieID, title, releaseDate, posterImage, runtime, genres: movieGenres} = movie;
 
     const formattedReleaseDate = releaseDate?.toFormat("yyyy") || "Unreleased";
     const formattedMovieTitle = buildString([title, releaseDate && `(${formattedReleaseDate})`]);
@@ -74,6 +77,11 @@ export function formatReservationDetails(reservation: ReservationDetails): Forma
         pricePaid,
         posterImage,
         isSpecialEvent,
+        _ids: {
+            showingID,
+            theatreID,
+            movieID,
+        },
         formatted: {
             movieTitle: formattedMovieTitle,
             movieReleaseDate: formattedReleaseDate,
