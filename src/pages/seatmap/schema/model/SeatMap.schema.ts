@@ -36,6 +36,7 @@ import {SeatSchema} from "@/pages/seats/schema/seat/Seat.schema.ts";
 export const SeatMapSchema = z.object({
     _id: IDStringSchema,
     seat: IDStringSchema,
+    reservation: IDStringSchema.nullable().optional(),
     showing: IDStringSchema,
     basePrice: PositiveNumberSchema,
     priceMultiplier: PositiveNumberSchema,
