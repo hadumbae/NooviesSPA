@@ -20,7 +20,7 @@ type SubmitProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
  * @returns React Query mutation result for reservation cancellation.
  */
 export function useCancelReservationMutation(
-    {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitProps
+    {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitProps = {}
 ): UseMutationResult<void, unknown, ObjectId> {
     const cancelReservation = async (_id: ObjectId) => {
         await TicketRepository.cancelReservation(_id);

@@ -21,7 +21,7 @@ type SubmitProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
  * @returns React Query mutation result for ticket checkout.
  */
 export function useCheckoutTicketMutation(
-    {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitProps
+    {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitProps = {}
 ): UseMutationResult<void, unknown, ObjectId> {
     const checkoutTickets = async (_id: ObjectId) => {
         await TicketRepository.checkoutTicket(_id);
