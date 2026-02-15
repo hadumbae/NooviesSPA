@@ -20,8 +20,8 @@ type NoReturnParams = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
  * Props for useReservationStateMutations
  */
 type MutationParams = {
-    onCancel: NoReturnParams;
-    onCheckout: NoReturnParams;
+    onCancel?: NoReturnParams;
+    onCheckout?: NoReturnParams;
 }
 
 /**
@@ -39,7 +39,7 @@ type ReturnParams = {
  * Combines reservation cancel and checkout mutations with shared state.
  */
 export function useReservationStateMutations(
-    {onCancel, onCheckout}: MutationParams
+    {onCancel, onCheckout}: MutationParams = {}
 ): ReturnParams {
     const cancelMutation = useCancelReservationMutation(onCancel);
     const checkoutMutation = useCheckoutTicketMutation(onCheckout);
