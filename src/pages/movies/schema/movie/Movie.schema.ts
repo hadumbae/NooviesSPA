@@ -1,7 +1,11 @@
+/**
+ * @file Movie.schema.ts
+ * Zod schemas for movie domain models and paginated responses.
+ */
+
 import { z } from "zod";
 import { GenreSchema } from "@/pages/genres/schema/genre/Genre.schema.ts";
 import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import { NonNegativeNumberSchema } from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import { ISO3166Alpha2CountryCodeEnum } from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
 import { ISO6391LanguageCodeEnum } from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
@@ -19,57 +23,25 @@ import { DateTimeInstanceSchema } from "@/common/schema/date-time/DateTimeInstan
  * ----------------------------------------------------------------------------------------------- */
 
 /**
- * Base schema for a movie object.
- *
- * Defines the core descriptive and metadata fields for a movie,
- * including title, runtime, languages, availability, and release information.
+ * Core movie schema.
  */
 export const MovieBaseSchema = z.object({
-    /** Display title of the movie (max 250 characters). */
     title: NonEmptyStringSchema.max(250, "Must be 250 characters or less."),
-
-    /** Original (untranslated) title of the movie (max 250 characters). Optional. */
     originalTitle: preprocessEmptyStringToUndefined(
         NonEmptyStringSchema.max(250, "Must be 250 characters or less.").optional()
     ).optional(),
-
-    /** Optional tagline or slogan (max 100 characters). */
     tagline: NonEmptyStringSchema.max(100, "Must be 100 characters or less.").optional(),
-
-    /** ISO 3166-1 alpha-2 code for the production country. */
     country: ISO3166Alpha2CountryCodeEnum,
-
-    /** Synopsis or description (max 2000 characters). */
     synopsis: NonEmptyStringSchema.max(2000, "Synopsis must be 2000 characters or less."),
-
-    /** Release date in parsed UTC day-only format. Optional and nullable. */
     releaseDate: z.union([DateTimeInstanceSchema, UTCDayOnlyDateTimeSchema]).optional().nullable(),
-
-    /** Whether the movie has been released. */
     isReleased: CoercedBooleanValueSchema,
-
-    /** Runtime of the movie in minutes (must be positive). */
     runtime: PositiveNumberSchema,
-
-    /** ISO 639-1 code for the movie’s original language. */
     originalLanguage: ISO6391LanguageCodeEnum,
-
-    /** Languages available for the movie (ISO 639-1 codes). */
     languages: z.array(ISO6391LanguageCodeEnum),
-
-    /** Available subtitle languages (ISO 639-1 codes). */
     subtitles: z.array(ISO6391LanguageCodeEnum),
-
-    /** Optional Cloudinary poster image object. Nullable. */
     posterImage: CloudinaryImageSchema.optional().nullable(),
-
-    /** Optional trailer URL. Nullable. */
     trailerURL: URLStringSchema.optional().nullable(),
-
-    /** Whether the movie is currently available (e.g., for streaming). */
     isAvailable: CoercedBooleanValueSchema,
-
-    /** URL-safe identifier derived from the name. */
     slug: NonEmptyStringSchema.readonly(),
 });
 
@@ -78,38 +50,26 @@ export const MovieBaseSchema = z.object({
  * ----------------------------------------------------------------------------------------------- */
 
 /**
- * Movie schema including unique identifier and genre references (IDs only).
+ * Movie with identifier and genre IDs.
  */
 export const ExtendedMovieSchema = MovieBaseSchema.extend({
-    /** Unique string identifier for the movie. */
     _id: IDStringSchema.readonly(),
-
-    /** Array of genre IDs associated with the movie. */
     genres: z.array(IDStringSchema, { message: "Must be an array of genre references." }),
 });
 
 /**
- * Detailed movie schema including full genre objects and showing count.
+ * Movie with populated genres and showing count.
  */
 export const ExtendedMovieDetailsSchema = MovieBaseSchema.extend({
-    /** Unique string identifier for the movie. */
     _id: IDStringSchema.readonly(),
-
-    /** Array of full genre objects associated with the movie. */
     genres: z.array(z.lazy(() => GenreSchema), { message: "Must be an array of genres." }),
-
-    /** Number of showings linked to the movie (non-negative). */
-    showingCount: NonNegativeNumberSchema,
 });
 
 /**
- * Movie schema including full genre objects without showing count.
+ * Movie with populated genres.
  */
 export const ExtendedMovieWithGenresSchema = MovieBaseSchema.extend({
-    /** Unique string identifier for the movie. */
     _id: IDStringSchema.readonly(),
-
-    /** Array of full genre objects associated with the movie. */
     genres: z.array(z.lazy(() => GenreSchema), { message: "Must be an array of genres." }),
 });
 
@@ -118,10 +78,7 @@ export const ExtendedMovieWithGenresSchema = MovieBaseSchema.extend({
  * ----------------------------------------------------------------------------------------------- */
 
 /**
- * Ensures a release date is provided if the movie is marked as released.
- *
- * @param values - The movie object being validated.
- * @param ctx - Zod refinement context used to report validation issues.
+ * Requires a release date when marked as released.
  */
 const dateIfReleased = (values: any, ctx: z.RefinementCtx) => {
     const { releaseDate, isReleased } = values;
@@ -136,24 +93,21 @@ const dateIfReleased = (values: any, ctx: z.RefinementCtx) => {
 };
 
 /* -------------------------------------------------------------------------------------------------
- * Final Schemas (with Refinements)
+ * Final Schemas
  * ----------------------------------------------------------------------------------------------- */
 
 /**
- * Movie schema with identifiers and genre IDs,
- * requiring a release date if `isReleased` is true.
+ * Movie schema with genre IDs and release validation.
  */
 export const MovieSchema = ExtendedMovieSchema.superRefine(dateIfReleased);
 
 /**
- * Detailed movie schema including full genre objects and showing count.
- * Also requires a release date when `isReleased` is true.
+ * Detailed movie schema with populated genres and showing count.
  */
 export const MovieDetailsSchema = ExtendedMovieDetailsSchema.superRefine(dateIfReleased);
 
 /**
- * Movie schema with full genre objects (no showing count),
- * enforcing release-date validation when released.
+ * Movie schema with populated genres.
  */
 export const MovieWithGenresSchema = ExtendedMovieWithGenresSchema.superRefine(dateIfReleased);
 
@@ -161,14 +115,14 @@ export const MovieWithGenresSchema = ExtendedMovieWithGenresSchema.superRefine(d
  * Collections & Pagination
  * ----------------------------------------------------------------------------------------------- */
 
-/** Array of {@link MovieSchema} objects. */
+/** Movie collection schema. */
 export const MovieArraySchema = z.array(MovieSchema);
 
-/** Array of {@link MovieDetailsSchema} objects. */
+/** Detailed movie collection schema. */
 export const MovieDetailsArraySchema = z.array(MovieDetailsSchema);
 
-/** Paginated result schema for movies using {@link MovieSchema}. */
+/** Paginated movies schema. */
 export const PaginatedMovieSchema = generatePaginationSchema(MovieSchema);
 
-/** Paginated result schema for movies using {@link MovieDetailsSchema}. */
+/** Paginated detailed movies schema. */
 export const PaginatedMovieDetailsSchema = generatePaginationSchema(MovieDetailsSchema);
