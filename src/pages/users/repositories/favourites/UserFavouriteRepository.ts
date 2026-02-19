@@ -8,7 +8,7 @@ import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts"
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 
-const baseURL = `${import.meta.env.VITE_BASE_URL}/api/v1/profile`;
+const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/profile`;
 
 /**
  * Fetches the authenticated user's favourite movies.
