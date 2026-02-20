@@ -21,7 +21,7 @@ import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlu
 import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import MovieInfoShowingsPageContent
-    from "@/pages/movies/pages/client/movie-info/movie-info-showings/MovieInfoShowingsPageContent.tsx";
+    from "@/features/client/movies/movie-info/movie-info-showings/MovieInfoShowingsPageContent.tsx";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import useFetchPaginatedShowings from "@/pages/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";

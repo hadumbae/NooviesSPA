@@ -20,7 +20,7 @@ import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlug.ts";
 import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
-import MovieInfoPageContent from "@/pages/movies/pages/client/movie-info/movie-info/MovieInfoPageContent.tsx";
+import MovieInfoPageContent from "@/features/client/movies/movie-info/movie-info/MovieInfoPageContent.tsx";
 import {useFetchMovieCredits} from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";

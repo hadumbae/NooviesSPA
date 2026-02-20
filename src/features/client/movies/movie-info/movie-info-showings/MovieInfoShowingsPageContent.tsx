@@ -30,7 +30,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import ShowingInfoCompactListCard from "@/pages/showings/components/client/showing-list/ShowingInfoCompactListCard.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import MovieInfoShowingHeader from "@/pages/movies/pages/client/movie-showing-info/MovieInfoShowingHeader.tsx";
+import MovieInfoShowingHeader from "@/features/client/movies/movie-showing-info/MovieInfoShowingHeader.tsx";
 
 /**
  * Props for {@link MovieInfoShowingsPageContent}.

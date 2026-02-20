@@ -13,7 +13,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/common/components/ui/tabs.tsx";
 import { MovieDetails } from "@/pages/movies/schema/movie/Movie.types.ts";
-import MovieDetailsPageCreditTab from "@/pages/movies/pages/admin/movie-details-page/tabs/MovieDetailsPageCreditTab.tsx";
+import MovieDetailsPageCreditTab from "@/features/admin/movies/details-page/tabs/MovieDetailsPageCreditTab.tsx";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {
     MOVIE_DETAILS_PAGE_TABS,

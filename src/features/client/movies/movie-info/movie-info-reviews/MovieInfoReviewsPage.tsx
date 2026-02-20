@@ -1,5 +1,5 @@
 import MovieInfoReviewsPageContent
-    from "@/pages/movies/pages/client/movie-info/movie-info-reviews/MovieInfoReviewsPageContent.tsx";
+    from "@/features/client/movies/movie-info/movie-info-reviews/MovieInfoReviewsPageContent.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";

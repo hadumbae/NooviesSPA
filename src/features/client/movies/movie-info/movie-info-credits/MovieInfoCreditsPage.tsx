@@ -5,7 +5,7 @@ import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlu
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import MovieInfoCreditsPageContent
-    from "@/pages/movies/pages/client/movie-info/movie-info-credits/MovieInfoCreditsPageContent.tsx";
+    from "@/features/client/movies/movie-info/movie-info-credits/MovieInfoCreditsPageContent.tsx";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 const MovieInfoCreditsPage = () => {

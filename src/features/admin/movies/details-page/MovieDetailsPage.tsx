@@ -4,7 +4,7 @@ import useTitle from "@/common/hooks/document/useTitle.ts";
 import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import MovieDetailsUIContextProvider from "@/pages/movies/components/providers/MovieDetailsUIContextProvider.tsx";
-import MovieDetailsPageContent from "@/pages/movies/pages/admin/movie-details-page/MovieDetailsPageContent.tsx";
+import MovieDetailsPageContent from "@/features/admin/movies/details-page/MovieDetailsPageContent.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlug.ts";
