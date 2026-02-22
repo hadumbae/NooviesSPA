@@ -14,14 +14,14 @@
 
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
-import BrowseMoviesPage from "@/features/client/movies/browse-movies/BrowseMoviesPage.tsx";
-import MovieInfoPage from "@/features/client/movies/movie-info/movie-info/MovieInfoPage.tsx";
+import BrowseMoviesPage from "@/features/client/movies/pages/browse-movies/BrowseMoviesPage.tsx";
+import MovieInfoPage from "@/features/client/movies/pages/movie-info/movie-info/MovieInfoPage.tsx";
 import MovieInfoCreditsPage
-    from "@/features/client/movies/movie-info/movie-info-credits/MovieInfoCreditsPage.tsx";
+    from "@/features/client/movies/pages/movie-info/movie-info-credits/MovieInfoCreditsPage.tsx";
 import MovieInfoShowingsPage
-    from "@/features/client/movies/movie-info/movie-info-showings/MovieInfoShowingsPage.tsx";
+    from "@/features/client/movies/pages/movie-info/movie-info-showings/MovieInfoShowingsPage.tsx";
 import MovieInfoReviewsPage
-    from "@/features/client/movies/movie-info/movie-info-reviews/MovieInfoReviewsPage.tsx";
+    from "@/features/client/movies/pages/movie-info/movie-info-reviews/MovieInfoReviewsPage.tsx";
 
 /**
  * Route definitions for movie browsing and movie information pages.
