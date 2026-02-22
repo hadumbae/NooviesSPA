@@ -1,29 +1,25 @@
 /**
- * @file useRemoveFromUserFavourites.ts
- * Mutation hook for removing a movie from user favourites.
+ * @file Mutation hook for toggling a user's favourite movie.
+ * useToggleUserFavouriteMovie.ts
  */
 
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import * as UserFavouriteRepository from "@/pages/users/repositories/favourites/UserFavouriteRepository.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {toast} from "react-toastify";
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
 
-/**
- * Optional mutation callbacks and toast messages for success/error handling.
- */
+/** Options for favourite toggle mutation lifecycle. */
 type MutationProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
     onSubmitSuccess?: () => void;
 }
 
-/**
- * Removes a movie from the authenticated user's favourites.
- */
-export function useRemoveFromUserFavourites(
+/** Performs a favourite toggle mutation for the current user. */
+export function useToggleUserFavouriteMovie(
     {onSubmitSuccess, successMessage, onSubmitError, errorMessage}: MutationProps
 ): UseMutationResult<void, unknown, ObjectId> {
-    const addToFavourites = async (movieID: ObjectId) => {
-        await UserFavouriteRepository.patchRemoveFromUserFavourites(movieID);
+    const toggleFavouriteMovie = async (movieID: ObjectId) => {
+        await UserFavouriteRepository.patchToggleUserFavouriteMovie(movieID);
     }
 
     const onSuccess = () => {
@@ -37,8 +33,8 @@ export function useRemoveFromUserFavourites(
     }
 
     return useMutation({
-        mutationKey: ["profile", "favourites", "remove"],
-        mutationFn: addToFavourites,
+        mutationKey: ["profile", "favourites", "toggle"],
+        mutationFn: toggleFavouriteMovie,
         onSuccess,
         onError,
     });

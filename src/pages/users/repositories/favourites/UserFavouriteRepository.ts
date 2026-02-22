@@ -1,6 +1,6 @@
 /**
- * @file UserFavouriteRepository.ts
- * Repository requests for user favourite movie endpoints.
+ * @file Client repository for user favourite movie requests.
+ * UserFavouriteRepository.ts
  */
 
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
@@ -10,32 +10,25 @@ import {PaginationValues} from "@/common/schema/features/pagination-search-param
 
 const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/profile`;
 
-/**
- * Fetches the authenticated user's favourite movies.
- */
+/** Checks if a movie is favourited by the current user. */
+export const getCheckIsFavouriteMovie = (movieID: ObjectId) => {
+    const url = buildQueryURL({baseURL, path: `favourites/check/movie/${movieID}`});
+    return useFetchAPI({url, method: "GET"});
+}
+
+/** Retrieves paginated favourites for the current user. */
 const getUserFavourites = (params: PaginationValues) => {
     const url = buildQueryURL({baseURL, path: "favourites/user", queries: params});
     return useFetchAPI({url, method: "GET"});
 }
 
-/**
- * Adds a movie to the user's favourites.
- */
-const patchAddToUserFavourites = (movieID: ObjectId) => {
-    const url = buildQueryURL({baseURL, path: "favourites/add"});
-    return useFetchAPI({url, method: "PATCH", data: {movieID}});
-}
-
-/**
- * Removes a movie from the user's favourites.
- */
-const patchRemoveFromUserFavourites = (movieID: ObjectId) => {
-    const url = buildQueryURL({baseURL, path: "favourites/remove"});
+/** Toggles favourite state for a movie. */
+const patchToggleUserFavouriteMovie = (movieID: ObjectId) => {
+    const url = buildQueryURL({baseURL, path: "favourites/toggle"});
     return useFetchAPI({url, method: "PATCH", data: {movieID}});
 }
 
 export {
     getUserFavourites,
-    patchAddToUserFavourites,
-    patchRemoveFromUserFavourites,
+    patchToggleUserFavouriteMovie,
 }
