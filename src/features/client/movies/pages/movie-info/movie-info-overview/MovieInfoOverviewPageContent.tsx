@@ -25,6 +25,8 @@ import MovieEditorialInfoRow
     from "@/features/client/movies/pages/movie-info/movie-info-overview/rows/movie-editorial-info/MovieEditorialInfoRow.tsx";
 import MovieCreditInfoRow
     from "@/features/client/movies/pages/movie-info/movie-info-overview/rows/movie-credit-info/MovieCreditInfoRow.tsx";
+import MovieFavouriteSelector
+    from "@/features/client/movies/pages/movie-info/movie-info-overview/rows/movie-favourite-selector/MovieFavouriteSelector.tsx";
 
 /**
  * Props for {@link MovieInfoOverviewPageContent}.
@@ -58,6 +60,8 @@ const MovieInfoOverviewPageContent = ({ movie, credits }: ContentProps) => {
     return (
         <PageFlexWrapper className="space-y-10">
             <MovieInfoOverview movie={movie} credits={credits} />
+
+            <MovieFavouriteSelector movieID={movie._id} />
 
             <MovieEditorialInfoRow movie={movie} />
 

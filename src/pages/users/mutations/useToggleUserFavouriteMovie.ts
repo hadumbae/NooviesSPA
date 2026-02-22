@@ -3,7 +3,7 @@
  * useToggleUserFavouriteMovie.ts
  */
 
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import * as UserFavouriteRepository from "@/pages/users/repositories/favourites/UserFavouriteRepository.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
@@ -16,13 +16,20 @@ type MutationProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
 
 /** Performs a favourite toggle mutation for the current user. */
 export function useToggleUserFavouriteMovie(
-    {onSubmitSuccess, successMessage, onSubmitError, errorMessage}: MutationProps
-): UseMutationResult<void, unknown, ObjectId> {
+    {onSubmitSuccess, successMessage, onSubmitError, errorMessage}: MutationProps = {}
+): UseMutationResult<ObjectId, unknown, ObjectId> {
+    const queryClient = useQueryClient();
+
     const toggleFavouriteMovie = async (movieID: ObjectId) => {
         await UserFavouriteRepository.patchToggleUserFavouriteMovie(movieID);
+        return movieID;
     }
 
-    const onSuccess = () => {
+    const onSuccess = async (movieID: ObjectId) => {
+        await queryClient.invalidateQueries({
+            queryKey: ["profile", "favourites", "check", "movie", { _id: movieID }]
+        });
+
         successMessage && toast.success(successMessage);
         onSubmitSuccess?.();
     }
