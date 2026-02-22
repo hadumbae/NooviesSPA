@@ -7,14 +7,14 @@
  * The layout adapts responsively for large and small screens.
  */
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import MovieInfoHeadline from "@/pages/movies/components/client/browse-movies/movie-info/MovieInfoHeadline.tsx";
+import MovieInfoHeadline from "@/features/client/movies/pages/movie-info/movie-info-overview/rows/movie-info-overview/MovieInfoHeadline.tsx";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import PosterImage from "@/pages/movies/components/images/PosterImage.tsx";
 import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import MovieInfoOverviewMeta
-    from "@/pages/movies/components/client/browse-movies/movie-info/movie-info-overview/MovieInfoOverviewMeta.tsx";
+    from "@/features/client/movies/pages/movie-info/movie-info-overview/rows/movie-info-overview/MovieInfoOverviewMeta.tsx";
 import MovieInfoOverviewCreditLinks
-    from "@/pages/movies/components/client/browse-movies/movie-info/movie-info-overview/MovieInfoOverviewCreditLinks.tsx";
+    from "@/features/client/movies/pages/movie-info/movie-info-overview/rows/movie-info-overview/MovieInfoOverviewCreditLinks.tsx";
 
 /**
  * Props for {@link MovieInfoOverview}.

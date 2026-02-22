@@ -15,7 +15,7 @@
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import BrowseMoviesPage from "@/features/client/movies/pages/browse-movies/BrowseMoviesPage.tsx";
-import MovieInfoPage from "@/features/client/movies/pages/movie-info/movie-info/MovieInfoPage.tsx";
+import MovieInfoOverviewPage from "@/features/client/movies/pages/movie-info/movie-info-overview/MovieInfoOverviewPage.tsx";
 import MovieInfoCreditsPage
     from "@/features/client/movies/pages/movie-info/movie-info-credits/MovieInfoCreditsPage.tsx";
 import MovieInfoShowingsPage
@@ -43,7 +43,7 @@ export default [
             },
             {
                 path: "/browse/movies/:slug",
-                element: <MovieInfoPage/>,
+                element: <MovieInfoOverviewPage/>,
                 errorElement: <ComponentErrorHandler/>,
             },
             {

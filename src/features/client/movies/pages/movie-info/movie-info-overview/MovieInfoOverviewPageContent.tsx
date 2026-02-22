@@ -19,15 +19,15 @@
 import { MovieDetails } from "@/pages/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import MovieInfoOverview from "@/pages/movies/components/client/browse-movies/movie-info/movie-info-overview/MovieInfoOverview.tsx";
+import MovieInfoOverview from "@/features/client/movies/pages/movie-info/movie-info-overview/rows/movie-info-overview/MovieInfoOverview.tsx";
 import { MovieCreditDetails } from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import MovieEditorialInfoRow
-    from "@/pages/movies/components/client/browse-movies/movie-info/movie-editorial-info/MovieEditorialInfoRow.tsx";
+    from "@/features/client/movies/pages/movie-info/movie-info-overview/rows/movie-editorial-info/MovieEditorialInfoRow.tsx";
 import MovieCreditInfoRow
-    from "@/pages/movies/components/client/browse-movies/movie-info/movie-credit-info/MovieCreditInfoRow.tsx";
+    from "@/features/client/movies/pages/movie-info/movie-info-overview/rows/movie-credit-info/MovieCreditInfoRow.tsx";
 
 /**
- * Props for {@link MovieInfoPageContent}.
+ * Props for {@link MovieInfoOverviewPageContent}.
  */
 type ContentProps = {
     /**
@@ -52,7 +52,7 @@ type ContentProps = {
  * @param props - Movie and credit data required for rendering
  * @returns Movie information page content
  */
-const MovieInfoPageContent = ({ movie, credits }: ContentProps) => {
+const MovieInfoOverviewPageContent = ({ movie, credits }: ContentProps) => {
     const { slug } = movie;
 
     return (
@@ -70,7 +70,7 @@ const MovieInfoPageContent = ({ movie, credits }: ContentProps) => {
     );
 };
 
-export default MovieInfoPageContent;
+export default MovieInfoOverviewPageContent;
 
 // --- Layout ---
 

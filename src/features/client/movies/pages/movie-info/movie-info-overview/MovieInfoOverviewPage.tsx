@@ -20,7 +20,7 @@ import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlug.ts";
 import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
-import MovieInfoPageContent from "@/features/client/movies/pages/movie-info/movie-info/MovieInfoPageContent.tsx";
+import MovieInfoOverviewPageContent from "@/features/client/movies/pages/movie-info/movie-info-overview/MovieInfoOverviewPageContent.tsx";
 import {useFetchMovieCredits} from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
@@ -45,7 +45,7 @@ type QueryData = {
  * Redirects or suspends rendering if route parameters are invalid
  * or missing.
  */
-const MovieInfoPage: FC = () => {
+const MovieInfoOverviewPage: FC = () => {
     const {slug} = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/browse/movies",
@@ -74,10 +74,10 @@ const MovieInfoPage: FC = () => {
         <MultiQueryDataLoader queries={queryDefinitions}>
             {(data) => {
                 const {movie, credits} = data as QueryData;
-                return (<MovieInfoPageContent movie={movie} credits={credits}/>);
+                return (<MovieInfoOverviewPageContent movie={movie} credits={credits}/>);
             }}
         </MultiQueryDataLoader>
     );
 };
 
-export default MovieInfoPage;
+export default MovieInfoOverviewPage;
