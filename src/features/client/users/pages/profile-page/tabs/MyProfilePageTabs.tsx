@@ -1,38 +1,55 @@
 /**
  * @file MyProfilePageTabs.tsx
  *
- * Tab-based layout for the My Profile page.
+ * Tabbed content layout for the authenticated user's profile page.
  *
- * Manages active tab state, renders optional tab navigation,
- * and displays tab-specific profile content.
+ * @remarks
+ * - Manages active tab state via URL search parameters.
+ * - Optionally renders tab navigation controls.
+ * - Delegates tab-specific UI to dedicated tab components.
+ * - Supports responsive layouts where the tab selector may be rendered externally.
  */
 
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import {MyProfilePageActiveTab} from "@/pages/users/schemas/tabs/my-profile-page/MyProfilePageActiveTabSchema.ts";
 import {MyProfilePageTabKeysConstant} from "@/pages/users/schemas/tabs/my-profile-page/MyProfilePageTabConstants.ts";
 import {User} from "@/pages/users/schemas/user/User.types.ts";
-import ClientRecentFavouritesListContainer
-    from "@/pages/users/components/profile/ClientRecentFavouritesListContainer.tsx";
 import ClientRecentReviewsListContainer from "@/pages/users/components/profile/ClientRecentReviewsListContainer.tsx";
-import MyProfilePageReservationTab from "@/features/client/users/pages/profile-page/tabs/MyProfilePageReservationTab.tsx";
+import MyProfilePageReservationTab
+    from "@/features/client/users/pages/profile-page/tabs/MyProfilePageReservationTab.tsx";
 import MyProfilePagePasswordTab from "@/features/client/users/pages/profile-page/tabs/MyProfilePagePasswordTab.tsx";
 import {useMyProfilePageSetup} from "@/pages/users/hooks/my-profie-page/useMyProfilePageSetup.ts";
+import MyProfilePageFavouriteTab from "@/features/client/users/pages/profile-page/tabs/MyProfilePageFavouriteTab.tsx";
+import {cn} from "@/common/lib/utils.ts";
 
 type TabProps = {
-    /** Authenticated user whose profile is being rendered */
+    /** Authenticated user whose profile data will populate tab content. */
     user: User;
 
-    /** Controls visibility of the tab selector UI */
+    /**
+     * Controls visibility of the tab selector UI.
+     *
+     * @defaultValue true
+     */
     showTabSelector?: boolean;
 
+    /** Optional className applied to the root tab container. */
     className?: string;
 };
 
 /**
- * Renders profile tabs and associated tab content.
+ * Renders tab navigation and associated profile content panels.
  *
- * Supports controlled tab state and optional tab navigation,
- * allowing reuse in alternative layouts.
+ * @remarks
+ * - Uses {@link useMyProfilePageSetup} to synchronise tab state with URL parameters.
+ * - Allows the tab selector (`TabsList`) to be hidden for mobile layouts where
+ *   tab switching is handled externally.
+ * - Expands active content panels (e.g. reservations or favourites) to fill available space.
+ *
+ * @param props - {@link TabProps} containing user data and layout configuration.
+ *
+ * @returns A controlled tab interface containing password, reservations,
+ *          reviews, and favourites sections.
  */
 const MyProfilePageTabs = (
     {user, className, showTabSelector = true}: TabProps
@@ -53,13 +70,20 @@ const MyProfilePageTabs = (
         </TabsList>
     );
 
+    const isFull = (tab: MyProfilePageActiveTab) => {
+        return activeTab === tab ? "flex-1" : "";
+    }
+
     return (
         <Tabs
-            className={className}
+            className={cn("flex flex-col space-y-2", className)}
             value={activeTab}
             onValueChange={(val) => setActiveTab(val as MyProfilePageActiveTab)}
         >
-            {showTabSelector && tabList}
+            {
+                showTabSelector &&
+                <section>{tabList}</section>
+            }
 
             <MyProfilePagePasswordTab
                 tabValue="password"
@@ -70,16 +94,16 @@ const MyProfilePageTabs = (
                 page={resPage}
                 setPage={setResPage}
                 tabValue="reservations"
-                className={activeTab === "reservations" ? "h-full" : ""}
+                className={isFull("reservations")}
             />
 
             <TabsContent value="reviews">
                 <ClientRecentReviewsListContainer recentReviews={[]}/>
             </TabsContent>
 
-            <TabsContent value="favourites">
-                <ClientRecentFavouritesListContainer recentFavourites={[]}/>
-            </TabsContent>
+            <MyProfilePageFavouriteTab
+                className={isFull("favourites")}
+            />
         </Tabs>
     );
 };

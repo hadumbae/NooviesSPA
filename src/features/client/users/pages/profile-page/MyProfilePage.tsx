@@ -1,12 +1,13 @@
 /**
  * @file MyProfilePage.tsx
  *
- * Root page component for the authenticated user's profile.
+ * Page container for the authenticated user's profile.
  *
  * @remarks
- * - Handles page-level layout and composition.
- * - Resolves the current authenticated user.
+ * - Sets the browser document title.
+ * - Ensures an authenticated user is present before rendering content.
  * - Coordinates responsive tab navigation behaviour.
+ * - Composes header and tab sections within a flexible page layout.
  */
 
 import PageLoader from "@/common/components/page/PageLoader.tsx";
@@ -18,13 +19,18 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import MyProfilePageTabs from "@/features/client/users/pages/profile-page/tabs/MyProfilePageTabs.tsx";
 import {useMyProfilePageSetup} from "@/pages/users/hooks/my-profie-page/useMyProfilePageSetup.ts";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
- * Renders the My Profile page for the current user.
+ * Renders the "My Profile" page for the current authenticated user.
  *
- * - Sets the document title.
- * - Guards access via authentication.
- * - Switches tab navigation UI based on viewport size.
+ * @remarks
+ * - Displays a loading state while resolving authentication.
+ * - Switches tab selector placement depending on viewport size.
+ * - Delegates profile sections to {@link MyProfilePageTabs}.
+ *
+ * @returns The fully composed profile page layout, or a loading state
+ *          while authentication is being resolved.
  */
 const MyProfilePage = () => {
     useTitle("My Profile");
@@ -44,7 +50,7 @@ const MyProfilePage = () => {
 
             <Separator/>
 
-            <section className="flex-1 flex flex-col">
+            <section className={cn("flex-1", "flex flex-col")}>
                 <SectionHeader srOnly={true}>Tabs</SectionHeader>
 
                 <MyProfilePageTabs
