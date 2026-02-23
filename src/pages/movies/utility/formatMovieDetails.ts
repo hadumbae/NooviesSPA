@@ -25,7 +25,7 @@ export default function formatMovieDetails(movie: MovieDetails): FormattedReturn
     const { releaseDate, genres, runtime, posterImage, languages, subtitles } = movie;
 
     const posterURL = posterImage?.secure_url;
-    const duration = formatMovieRuntime(runtime);
+    const duration = formatMovieRuntime(runtime, true);
     const releaseYear = releaseDate?.toFormat("yyyy") ?? "Unreleased";
     const genreList = genres.map(g => g.name).join(" | ");
     const yearAndDuration = [releaseYear, duration].join(" | ");
