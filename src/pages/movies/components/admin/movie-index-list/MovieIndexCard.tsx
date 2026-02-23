@@ -1,4 +1,8 @@
-import {FC} from 'react';
+/**
+ * @file Compact movie index card component.
+ * MovieIndexCard.tsx
+ */
+
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {Info} from "lucide-react";
@@ -9,47 +13,25 @@ import formatMovieDetails from "@/pages/movies/utility/formatMovieDetails.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
 
-/**
- * Props for the {@link MovieIndexCard} component.
- *
- * @property movie - The movie details to display in the card.
- * @property className - Optional class name applied to the movie poster image.
- */
+/** Props for MovieIndexCard. */
 type IndexCardProps = {
+    /** Source movie details. */
     movie: MovieDetails;
+    /** Additional class names for the poster image. */
     className?: string;
 }
 
-/**
- * Displays a concise movie card for use in an admin movie index or list view.
- *
- * @remarks
- * This component shows a movie's poster, title, release date, runtime, and genres.
- * It includes a tooltip button that opens a {@link MovieDetailsDialog} containing
- * detailed information about the selected movie.
- *
- * - The title links to the movie's admin page via {@link LoggedHoverLink}.
- * - The card uses {@link formatMovieDetails} to format display strings.
- * - The `TooltipButton` displays a hover tooltip and acts as the trigger for the dialog.
- *
- * @example
- * ```tsx
- * <MovieIndexCard movie={someMovie} />
- * ```
- */
-const MovieIndexCard: FC<IndexCardProps> = ({movie, className}) => {
-    const {slug, title} = movie;
-
-    /** Formatted display strings generated from the movie details. */
-    const {posterURL, genreString, releaseRuntimeString} = formatMovieDetails(movie);
-
-    /** Tooltip text for the info button. */
-    const tooltipText = "More Information For Movie";
+/** Renders a concise movie overview for index listings. */
+const MovieIndexCard = ({movie, className}: IndexCardProps) => {
+    const {
+        slug,
+        title,
+        formatted: {posterURL, genreList, yearAndDuration},
+    } = formatMovieDetails(movie);
 
     return (
         <Card>
             <CardContent className="p-4 flex items-center space-x-2">
-                {/* Movie poster */}
                 <section>
                     <MoviePosterImage
                         src={posterURL}
@@ -57,21 +39,19 @@ const MovieIndexCard: FC<IndexCardProps> = ({movie, className}) => {
                     />
                 </section>
 
-                {/* Title, runtime, and genres */}
                 <section className="flex-grow flex flex-col space-y-1">
                     <LoggedHoverLink to={`/admin/movies/get/${slug}`}>
                         <h1 className="text-lg font-bold">{title}</h1>
                     </LoggedHoverLink>
 
-                    <h2 className="text-sm text-neutral-400">{releaseRuntimeString}</h2>
-                    <h3 className="text-xs text-neutral-400">{genreString}</h3>
+                    <h2 className="text-sm text-neutral-400">{yearAndDuration}</h2>
+                    <h3 className="text-xs text-neutral-400">{genreList}</h3>
                 </section>
 
-                {/* Tooltip info button triggering movie details dialog */}
                 <MovieDetailsDialog movie={movie}>
                     <TooltipButton
-                        tooltipText={tooltipText}
                         variant="link"
+                        tooltipText={"More Information For Movie"}
                         className={cn(
                             "text-neutral-400 hover:text-black",
                             "dark:text-neutral-600 dark:hover:text-white"
