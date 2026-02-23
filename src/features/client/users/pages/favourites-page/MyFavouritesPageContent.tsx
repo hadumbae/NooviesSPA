@@ -40,7 +40,7 @@ const MyFavouritesPageContent = (
             <MyFavouritesPageHeader/>
 
             {
-                movies.length === 0 ? movieSection : (
+                movies.length > 0 ? movieSection : (
                     <EmptyArrayContainer
                         text="You Have No Favourites"
                         className="flex-1"
