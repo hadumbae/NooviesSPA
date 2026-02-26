@@ -6,7 +6,8 @@
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import {
-    CurrentUserMovieReviewsParams
+    CreateCurrentUserMovieReviewParams,
+    CurrentUserMovieReviewsParams, UpdateCurrentUserMovieReviewParams
 } from "@/pages/review/repositories/my-movie-review/MyMovieReviewRepository.types.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 
@@ -26,3 +27,33 @@ export const getFetchMovieReviewsByCurrentUser = (
 
     return useFetchAPI({url, method: "GET"})
 };
+
+/**
+ * Creates a new movie review for the current user.
+ */
+export const postCreateMovieReviewForCurrentUser = (
+    {data, options}: CreateCurrentUserMovieReviewParams
+): Promise<RequestReturns<unknown>> => {
+    const url = buildQueryURL({
+        baseURL,
+        path: "current/create",
+        queries: options
+    });
+
+    return useFetchAPI({url, method: "POST", data})
+}
+
+/**
+ * Updates an existing movie review for the current user.
+ */
+export const patchUpdateMovieReviewForCurrentUser = (
+    {reviewID, data, options}: UpdateCurrentUserMovieReviewParams
+) => {
+    const url = buildQueryURL({
+        baseURL,
+        path: `current/update/${reviewID}`,
+        queries: options,
+    });
+
+    return useFetchAPI({url, method: "PATCH", data});
+}
