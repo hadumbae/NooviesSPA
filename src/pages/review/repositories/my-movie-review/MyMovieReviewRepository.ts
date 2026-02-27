@@ -1,5 +1,5 @@
 /**
- * @file API accessors for current user movie reviews.
+ * @file API repository for current-user MovieReview endpoints.
  * MyMovieReviewRepository.ts
  */
 
@@ -7,14 +7,16 @@ import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import {
     CreateCurrentUserMovieReviewParams,
-    CurrentUserMovieReviewsParams, UpdateCurrentUserMovieReviewParams
+    CurrentUserMovieReviewsParams,
+    UpdateCurrentUserMovieReviewParams
 } from "@/pages/review/repositories/my-movie-review/MyMovieReviewRepository.types.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/user/reviews`;
 
 /**
- * Fetches paginated movie reviews created by the current user.
+ * Retrieves paginated MovieReviews created by the current user.
  */
 export const getFetchMovieReviewsByCurrentUser = (
     {page, perPage, options}: CurrentUserMovieReviewsParams
@@ -29,7 +31,7 @@ export const getFetchMovieReviewsByCurrentUser = (
 };
 
 /**
- * Creates a new movie review for the current user.
+ * Creates a MovieReview for the current user.
  */
 export const postCreateMovieReviewForCurrentUser = (
     {data, options}: CreateCurrentUserMovieReviewParams
@@ -44,11 +46,11 @@ export const postCreateMovieReviewForCurrentUser = (
 }
 
 /**
- * Updates an existing movie review for the current user.
+ * Updates a MovieReview owned by the current user.
  */
 export const patchUpdateMovieReviewForCurrentUser = (
     {reviewID, data, options}: UpdateCurrentUserMovieReviewParams
-) => {
+): Promise<RequestReturns<unknown>> => {
     const url = buildQueryURL({
         baseURL,
         path: `current/update/${reviewID}`,
@@ -56,4 +58,18 @@ export const patchUpdateMovieReviewForCurrentUser = (
     });
 
     return useFetchAPI({url, method: "PATCH", data});
+}
+
+/**
+ * Deletes a MovieReview owned by the current user.
+ */
+export const deleteRemoveMovieReviewForCurrentUser = (
+    reviewID: ObjectId,
+): Promise<RequestReturns<unknown>> => {
+    const url = buildQueryURL({
+        baseURL,
+        path: `current/delete/${reviewID}`,
+    });
+
+    return useFetchAPI({url, method: "DELETE"});
 }
