@@ -38,7 +38,7 @@ export type HookFormInputControlProps<TValues extends FieldValues> = {
     name: Path<TValues>;
 
     /** Label displayed above the input. */
-    label: string;
+    label?: string;
 
     /** Optional description displayed under the input. */
     description?: string;
