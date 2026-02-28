@@ -12,7 +12,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
  * Query parameters for fetching the current user's movie reviews.
  */
 export type CurrentUserMovieReviewsParams = PaginationValues & {
-    options?: Omit<RequestOptions, "limit">;
+    config?: Omit<RequestOptions, "limit">;
 };
 
 /**

@@ -19,12 +19,12 @@ const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/user/reviews`;
  * Retrieves paginated MovieReviews created by the current user.
  */
 export const getFetchMovieReviewsByCurrentUser = (
-    {page, perPage, options}: CurrentUserMovieReviewsParams
+    {page, perPage, config}: CurrentUserMovieReviewsParams
 ): Promise<RequestReturns<unknown>> => {
     const url = buildQueryURL({
         baseURL,
         path: "current/fetch",
-        queries: {page, perPage, ...options},
+        queries: {page, perPage, ...config},
     });
 
     return useFetchAPI({url, method: "GET"})

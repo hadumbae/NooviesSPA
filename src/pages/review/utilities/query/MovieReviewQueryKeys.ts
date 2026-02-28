@@ -16,7 +16,7 @@ export const MovieReviewQueryKeys = {
     /**
      * Base namespace for all MovieReview query keys.
      */
-    all: ["movie_keys"] as const,
+    all: ["movie_reviews"] as const,
 
     /**
      * Query key for the current user's MovieReview list.
