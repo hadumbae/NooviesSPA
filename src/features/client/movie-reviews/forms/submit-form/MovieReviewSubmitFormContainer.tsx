@@ -48,6 +48,8 @@ const MovieReviewSubmitFormContainer = (params: FormProps) => {
         ...onSubmitProps
     } = params;
 
+    const formID = "movie-review-submit-form";
+
     const form = useMovieReviewSubmitForm({
         movieReview: editEntity,
         presetValues: {...presetValues, movie: movieID},
@@ -71,13 +73,14 @@ const MovieReviewSubmitFormContainer = (params: FormProps) => {
 
     return (
         <MovieReviewSubmitFormViewContextProvider
+            formID={formID}
             mutation={mutation}
             disableFields={disableFields}
             isPanel={isPanel}
             isEditing={!!editEntity}
         >
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(handleSubmit)}>
+                <form id={formID} onSubmit={form.handleSubmit(handleSubmit)}>
                     {children}
                 </form>
             </Form>
