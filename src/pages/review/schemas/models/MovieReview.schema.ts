@@ -1,5 +1,5 @@
 /**
- * @file Zod schemas for movie review models.
+ * @file Zod model schemas for MovieReview entities.
  * MovieReview.schema.ts
  */
 
@@ -11,9 +11,10 @@ import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts"
 import {MovieWithGenresSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 
 /**
- * Schema for a movie review with reference IDs.
+ * Base MovieReview schema using reference identifiers.
  */
 export const MovieReviewSchema = z.object({
+    _id: IDStringSchema,
     user: IDStringSchema,
     movie: IDStringSchema,
     reviewText: NonEmptyStringSchema.max(2000, "Must be 2000 characters or less.").optional(),
@@ -22,12 +23,8 @@ export const MovieReviewSchema = z.object({
 });
 
 /**
- * Schema for a movie review with populated movie data.
+ * MovieReview schema with populated movie relation.
  */
-export const PopulatedMovieReviewSchema = z.object({
-    user: IDStringSchema,
+export const PopulatedMovieReviewSchema = MovieReviewSchema.extend({
     movie: MovieWithGenresSchema,
-    reviewText: NonEmptyStringSchema.max(2000, "Must be 2000 characters or less.").optional(),
-    rating: PositiveNumberSchema.max(5, "Must be 1-5."),
-    isRecommended: BooleanValueSchema.optional(),
 });
