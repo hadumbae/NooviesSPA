@@ -68,7 +68,7 @@ const MovieReviewSubmitFormContainer = (params: FormProps) => {
             context: {values},
         });
 
-        mutation.mutate(values as MovieReviewForm);
+        // mutation.mutate(values as MovieReviewForm);
     }
 
     return (
@@ -80,7 +80,10 @@ const MovieReviewSubmitFormContainer = (params: FormProps) => {
             isEditing={!!editEntity}
         >
             <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(handleSubmit)}>
+                <form id={formID} onSubmit={form.handleSubmit(
+                    handleSubmit,
+                    (errors) => console.error("Form Errors: ", {formID, errors})
+                )}>
                     {children}
                 </form>
             </Form>
