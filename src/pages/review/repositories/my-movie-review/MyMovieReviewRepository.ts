@@ -34,12 +34,12 @@ export const getFetchMovieReviewsByCurrentUser = (
  * Creates a MovieReview for the current user.
  */
 export const postCreateMovieReviewForCurrentUser = (
-    {data, options}: CreateCurrentUserMovieReviewParams
+    {data, config}: CreateCurrentUserMovieReviewParams
 ): Promise<RequestReturns<unknown>> => {
     const url = buildQueryURL({
         baseURL,
         path: "current/create",
-        queries: options
+        queries: config
     });
 
     return useFetchAPI({url, method: "POST", data})
@@ -49,12 +49,12 @@ export const postCreateMovieReviewForCurrentUser = (
  * Updates a MovieReview owned by the current user.
  */
 export const patchUpdateMovieReviewForCurrentUser = (
-    {reviewID, data, options}: UpdateCurrentUserMovieReviewParams
+    {reviewID, data, config}: UpdateCurrentUserMovieReviewParams
 ): Promise<RequestReturns<unknown>> => {
     const url = buildQueryURL({
         baseURL,
         path: `current/update/${reviewID}`,
-        queries: options,
+        queries: config,
     });
 
     return useFetchAPI({url, method: "PATCH", data});

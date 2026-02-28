@@ -20,7 +20,7 @@ export type CurrentUserMovieReviewsParams = PaginationValues & {
  */
 export type CreateCurrentUserMovieReviewParams = {
     data: MovieReviewForm;
-    options: Omit<RequestOptions, "limit">;
+    config?: Omit<RequestOptions, "limit">;
 }
 
 /**
@@ -29,5 +29,5 @@ export type CreateCurrentUserMovieReviewParams = {
 export type UpdateCurrentUserMovieReviewParams = {
     reviewID: ObjectId;
     data: MovieReviewForm;
-    options: Omit<RequestOptions, "limit">;
+    config?: Omit<RequestOptions, "limit">;
 }

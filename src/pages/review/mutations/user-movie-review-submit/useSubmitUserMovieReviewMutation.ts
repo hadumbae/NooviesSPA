@@ -49,7 +49,7 @@ export function useSubmitUserMovieReviewMutation(
     const submitReviewData = async (values: MovieReviewForm) => {
         const payload = {
             data: values,
-            options: {populate: true, virtuals: true}
+            config: {populate: true, virtuals: true}
         };
 
         const action = editID
