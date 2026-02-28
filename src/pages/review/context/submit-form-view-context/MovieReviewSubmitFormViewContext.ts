@@ -19,4 +19,4 @@ export type MovieReviewSubmitFormContextValues = {
  * MovieReview submit form context instance.
  */
 export const MovieReviewSubmitFormViewContext =
-    createContext<MovieReviewSubmitFormContextValues | null>(null);
+    createContext<MovieReviewSubmitFormContextValues | undefined>(undefined);

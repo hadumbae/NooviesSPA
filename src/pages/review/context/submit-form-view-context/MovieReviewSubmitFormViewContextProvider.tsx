@@ -18,6 +18,7 @@ import {
  */
 type ProviderProps = FormViewOptions<MovieReviewFormValues> & {
     children: ReactNode;
+    isEditing?: boolean;
     mutation: UseMutationResult<PopulatedMovieReview, unknown, MovieReviewForm>;
 };
 

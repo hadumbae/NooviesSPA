@@ -74,6 +74,7 @@ const MovieReviewSubmitFormContainer = (params: FormProps) => {
             mutation={mutation}
             disableFields={disableFields}
             isPanel={isPanel}
+            isEditing={!!editEntity}
         >
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(handleSubmit)}>
