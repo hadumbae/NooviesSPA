@@ -1,5 +1,5 @@
 /**
- * @file Query key factory for MovieReview cache scoping.
+ * @file Movie review query key factory.
  * MovieReviewQueryKeys.ts
  */
 
@@ -7,35 +7,39 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {QueryKeyByOptionsParams, QueryKeyByPaginationParams} from "@/common/type/query/QueryKeyTypes.ts";
 
 /**
- * Centralised query key definitions for MovieReview data.
- *
- * Ensures consistent cache segmentation across user,
- * movie-scoped, and parameterised queries.
+ * Centralized query key definitions for movie review caching.
  */
 export const MovieReviewQueryKeys = {
     /**
-     * Base namespace for all MovieReview query keys.
+     * Root namespace.
      */
     all: ["movie_reviews"] as const,
 
     /**
-     * Query key for the current user's MovieReview list.
+     * Current user's review list.
      */
     userList: () => [...MovieReviewQueryKeys.all, "lists", "current"],
 
     /**
-     * Query key for MovieReviews associated with a specific movie.
+     * Reviews scoped to a movie.
      */
-    movieList: (movieID?: ObjectId) => [...MovieReviewQueryKeys.all, "lists", "movies", {movieID}],
+    movieList: (movieID?: ObjectId) =>
+        [...MovieReviewQueryKeys.all, "lists", "movies", {movieID}],
 
     /**
-     * Query key for option-scoped MovieReview queries.
+     * Detailed review data scoped to a movie.
+     */
+    movieDetails: (movieID?: ObjectId) =>
+        [...MovieReviewQueryKeys.all, "lists", "movie", "details", {movieID}],
+
+    /**
+     * Option-scoped queries.
      */
     query: (params?: QueryKeyByOptionsParams) =>
         [...MovieReviewQueryKeys.all, "lists", "query", params],
 
     /**
-     * Query key for paginated MovieReview queries.
+     * Pagination-scoped queries.
      */
     paginated: (params?: QueryKeyByPaginationParams) =>
         [...MovieReviewQueryKeys.all, "lists", "paginated", params],

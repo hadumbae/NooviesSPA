@@ -11,12 +11,15 @@ import {
 } from "@/pages/review/repositories/my-movie-review/MyMovieReviewRepository.ts";
 import {toast} from "react-toastify";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {MovieReviewQueryKeys} from "@/pages/review/utilities/query/MovieReviewQueryKeys.ts";
+import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 
 /**
  * Parameters for invoking the delete MovieReview mutation.
  */
 type MutateParams = {
     reviewID: ObjectId;
+    movieID?: ObjectId;
 }
 
 /**
@@ -26,13 +29,23 @@ type MutateParams = {
  */
 export function useDeleteCurrentUserMovieReviewMutation(
     {onDeleteSuccess, successMessage, onDeleteError, errorMessage}: OnDeleteMutationParams = {}
-): UseMutationResult<void, unknown, MutateParams> {
+): UseMutationResult<MutateParams, unknown, MutateParams> {
+    const invalidateQueries = useInvalidateQueryKeys();
 
     const deleteMovieReview = async (params: MutateParams) => {
         await deleteRemoveMovieReviewForCurrentUser(params.reviewID);
+        return params;
     }
 
-    const onSuccess = () => {
+    const onSuccess = ({movieID}: MutateParams) => {
+        invalidateQueries([
+            MovieReviewQueryKeys.query(),
+            MovieReviewQueryKeys.paginated(),
+            MovieReviewQueryKeys.userList(),
+            MovieReviewQueryKeys.movieList(movieID),
+            MovieReviewQueryKeys.movieDetails(movieID),
+        ], {exact: false});
+
         successMessage && toast.success(successMessage);
         onDeleteSuccess?.();
     }

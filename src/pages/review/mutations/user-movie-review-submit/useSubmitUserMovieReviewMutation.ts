@@ -79,6 +79,7 @@ export function useSubmitUserMovieReviewMutation(
             MovieReviewQueryKeys.paginated(),
             MovieReviewQueryKeys.userList(),
             MovieReviewQueryKeys.movieList(movieID),
+            MovieReviewQueryKeys.movieDetails(movieID),
         ]);
 
         successMessage && toast.success(successMessage);
