@@ -68,7 +68,7 @@ const MovieReviewSubmitFormContainer = (params: FormProps) => {
             context: {values},
         });
 
-        // mutation.mutate(values as MovieReviewForm);
+        mutation.mutate(values as MovieReviewForm);
     }
 
     return (
