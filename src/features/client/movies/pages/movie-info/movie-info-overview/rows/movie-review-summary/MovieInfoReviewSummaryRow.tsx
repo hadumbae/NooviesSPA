@@ -20,10 +20,9 @@ import {PopulatedMovieReview} from "@/pages/review/schemas/models/MovieReview.ty
  */
 type RowProps = {
     movieID: ObjectId;
+    userReview: PopulatedMovieReview;
     reviews: PopulatedMovieReview[];
-    totalItems: number;
-    page: number;
-    setPage: (page: number) => void;
+    averageRating: number;
 }
 
 /**
