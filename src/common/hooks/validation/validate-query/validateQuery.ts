@@ -79,6 +79,14 @@ export default function validateQuery<
         };
     }
 
+    if (import.meta.env.VITE_DEV_MODE && import.meta.env.VITE_DEV_LOG_TO_CONSOLE) {
+        console.group("Query Validation Failed");
+        console.error("Failed to validate query!")
+        console.error("Raw: ", data);
+        console.error("Errors: ", error?.errors);
+        console.groupEnd();
+    }
+
     return {
         success: false,
         data: null,
