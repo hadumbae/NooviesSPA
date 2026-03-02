@@ -1,6 +1,6 @@
 /**
  * @file Movie review summary row.
- * MovieInfoReviewSummaryRow.ts
+ * MovieInfoReviewSummaryRow.tsx
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -20,7 +20,7 @@ import {PopulatedMovieReview} from "@/pages/review/schemas/models/MovieReview.ty
  */
 type RowProps = {
     movieID: ObjectId;
-    userReview: PopulatedMovieReview;
+    userReview: PopulatedMovieReview | null;
     reviews: PopulatedMovieReview[];
     averageRating: number;
 }

@@ -1,19 +1,6 @@
 /**
- * @file MovieInfoPageContent.tsx
- *
- * @summary
- * Main content layout for the public movie information page.
- *
- * @description
- * Composes the primary informational sections for a movie detail view,
- * including:
- * - Overview header with poster, metadata, and key credits
- * - Editorial information (titles, genres, synopsis, tagline)
- * - Condensed cast & crew information
- * - Navigation link to available showings
- *
- * This component is responsible for layout orchestration only and assumes
- * all required movie and credit data has already been fetched.
+ * @file Movie info overview page content.
+ * MovieInfoPageContent.tsx
  */
 
 import { MovieDetails } from "@/pages/movies/schema/movie/Movie.types.ts";
@@ -27,35 +14,25 @@ import MovieCreditInfoRow
     from "@/features/client/movies/pages/movie-info/movie-info-overview/rows/movie-credit-info/MovieCreditInfoRow.tsx";
 import MovieFavouriteSelector
     from "@/features/client/movies/pages/movie-info/movie-info-overview/rows/movie-favourite-selector/MovieFavouriteSelector.tsx";
+import MovieInfoReviewSummaryRow
+    from "@/features/client/movies/pages/movie-info/movie-info-overview/rows/movie-review-summary/MovieInfoReviewSummaryRow.tsx";
+import {ReviewDetailsByMovie} from "@/pages/review/schemas/models/ReviewDetailsByMovieSchema.ts";
 
 /**
- * Props for {@link MovieInfoOverviewPageContent}.
+ * Props for overview page content.
  */
 type ContentProps = {
-    /**
-     * Full movie details to render across all sections.
-     */
     movie: MovieDetails;
-
-    /**
-     * Movie credit records used for overview and credit sections.
-     */
     credits: MovieCreditDetails[];
+    reviewDetails: ReviewDetailsByMovie;
 };
 
 /**
- * Renders the structured content of a movie information page.
- *
- * @remarks
- * - Acts as a composition root for the movie info layout
- * - Does not perform any data fetching
- * - Navigation events are logged via {@link LoggedHoverLink}
- *
- * @param props - Movie and credit data required for rendering
- * @returns Movie information page content
+ * Renders overview page layout sections.
  */
-const MovieInfoOverviewPageContent = ({ movie, credits }: ContentProps) => {
-    const { slug } = movie;
+const MovieInfoOverviewPageContent = ({ movie, credits, reviewDetails }: ContentProps) => {
+    const { _id: movieID, slug } = movie;
+    const {averageRating, userReview, items: reviews} = reviewDetails;
 
     return (
         <PageFlexWrapper className="space-y-10">
@@ -70,18 +47,15 @@ const MovieInfoOverviewPageContent = ({ movie, credits }: ContentProps) => {
             <LoggedHoverLink to={`/browse/movies/${slug}/showings`}>
                 Showings
             </LoggedHoverLink>
+
+            <MovieInfoReviewSummaryRow
+                movieID={movieID}
+                averageRating={averageRating}
+                userReview={userReview}
+                reviews={reviews}
+            />
         </PageFlexWrapper>
     );
 };
 
 export default MovieInfoOverviewPageContent;
-
-// --- Layout ---
-
-//  - Reviews
-//      - Review Carousel
-//      - Links
-
-//  - Related
-//      - Movies of the same genre (about 10)
-//      - Related interests

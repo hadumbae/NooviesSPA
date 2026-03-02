@@ -1,49 +1,34 @@
 /**
- * @file MovieInfoPage.tsx
- *
- * Page-level container for displaying detailed movie information.
- *
- * Responsibilities:
- * - Validates and extracts the `slug` route parameter
- * - Fetches movie details and associated credits in parallel
- * - Validates query results using Zod schemas
- * - Delegates rendering to `MovieInfoPageContent`
- *
- * Data loading is coordinated via `MultiQueryDataLoader` to ensure
- * consistent loading, error, and validation handling.
+ * @file Movie info overview page container.
+ * MovieInfoPage.tsx
  */
 
 import {FC} from 'react';
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
-import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlug.ts";
-import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
-import MovieInfoOverviewPageContent from "@/features/client/movies/pages/movie-info/movie-info-overview/MovieInfoOverviewPageContent.tsx";
-import {useFetchMovieCredits} from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
+import MovieInfoOverviewPageContent
+    from "@/features/client/movies/pages/movie-info/movie-info-overview/MovieInfoOverviewPageContent.tsx";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {ReviewDetailsByMovie} from "@/pages/review/schemas/models/ReviewDetailsByMovieSchema.ts";
+import {
+    useMovieInfoOverviewPageQueries
+} from "@/pages/movies/hooks/pages/client/movie-info-overview/useMovieInfoOverviewPageQueries.ts";
 
 /**
- * Shape of validated data returned from `MultiQueryDataLoader`.
+ * Validated query result shape.
  */
 type QueryData = {
     movie: MovieDetails;
     credits: MovieCreditDetails[];
+    reviewDetails: ReviewDetailsByMovie;
 };
 
 /**
- * Movie information page.
- *
- * Fetches:
- * - A single movie by slug
- * - All associated credit entries for that movie
- *
- * Redirects or suspends rendering if route parameters are invalid
- * or missing.
+ * Coordinates overview page data loading.
  */
 const MovieInfoOverviewPage: FC = () => {
     const {slug} = useFetchByIdentifierRouteParams({
@@ -55,26 +40,20 @@ const MovieInfoOverviewPage: FC = () => {
         return <PageLoader/>;
     }
 
-    const movieQuery = useFetchMovieBySlug({
-        slug,
-        config: {virtuals: true, populate: true},
-    });
-
-    const creditQuery = useFetchMovieCredits({
-        queries: {movieSlug: slug},
-        config: {populate: true, virtuals: true},
-    });
-
-    const queryDefinitions: QueryDefinition[] = [
-        {query: movieQuery, key: "movie", schema: MovieDetailsSchema},
-        {query: creditQuery, key: "credits", schema: MovieCreditDetailsArraySchema},
-    ];
+    const queryDefinitions: QueryDefinition[] = useMovieInfoOverviewPageQueries({slug});
 
     return (
         <MultiQueryDataLoader queries={queryDefinitions}>
             {(data) => {
-                const {movie, credits} = data as QueryData;
-                return (<MovieInfoOverviewPageContent movie={movie} credits={credits}/>);
+                const {movie, credits, reviewDetails} = data as QueryData;
+
+                return (
+                    <MovieInfoOverviewPageContent
+                        movie={movie}
+                        credits={credits}
+                        reviewDetails={reviewDetails}
+                    />
+                );
             }}
         </MultiQueryDataLoader>
     );
