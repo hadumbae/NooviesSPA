@@ -24,11 +24,13 @@ import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
+import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
 
 /**
  * Props for SubmitMovieReviewPopup.
  */
-type PopupProps = {
+type PopupProps = PresetOpenState & {
     /** Trigger element used to open the popup dialog. */
     children: ReactNode;
 };
@@ -44,21 +46,18 @@ type PopupProps = {
  * Renders rating, review text, and recommendation inputs.
  */
 const SubmitMovieReviewPopup = (
-    {children}: PopupProps
+    {children, ...presetState}: PopupProps
 ) => {
-    const {control} = useFormContext();
+    const {activeOpen, setActiveOpen} = usePresetActiveOpen(presetState);
 
-    const {
-        formID,
-        mutationState: {isPending} = {},
-        options: {isEditing} = {}
-    } = useRequiredContext({
+    const {control} = useFormContext();
+    const {formID, mutationState: {isPending} = {}, options: {isEditing} = {}} = useRequiredContext({
         context: MovieReviewSubmitFormViewContext,
         message: "Must be used within a provider for the form context."
     });
 
     return (
-        <Dialog>
+        <Dialog open={activeOpen} onOpenChange={setActiveOpen}>
             <DialogTrigger asChild>
                 {children}
             </DialogTrigger>
