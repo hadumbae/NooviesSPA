@@ -14,8 +14,12 @@ import {z} from "zod";
  */
 export const ReviewDetailsByMovieSchema = PaginatedPopulatedMovieReviewsSchema.merge(
     z.object({
-        averageRating: PositiveNumberSchema.min(1, "Must be at least 1.").max(5, "Must be 5 or less"),
-        userReview: PopulatedMovieReviewSchema.nullable(),
+        averageRating: PositiveNumberSchema
+            .min(1, "Must be at least 1.")
+            .max(5, "Must be 5 or less")
+            .nullable(),
+        userReview: PopulatedMovieReviewSchema
+            .nullable(),
     }),
 );
 

@@ -26,6 +26,8 @@ export function useMovieReviewSubmitFormDefaultValues(
 
     const initialValues = useMemo(() => ({
         movie: undefined,
+        displayName: "",
+        summary: "",
         reviewText: "",
         isRecommended: false,
         rating: "",
