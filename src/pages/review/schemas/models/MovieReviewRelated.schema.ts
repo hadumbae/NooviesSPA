@@ -1,18 +1,35 @@
 /**
- * @file Derived schemas for populated movie review collections.
+ * @file Movie review collection schemas.
  * MovieReviewRelated.schema.ts
  */
 
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
-import {PopulatedMovieReviewSchema} from "@/pages/review/schemas/models/MovieReview.schema.ts";
+import {
+    MovieReviewDetailsSchema,
+    PopulatedMovieReviewSchema
+} from "@/pages/review/schemas/models/MovieReview.schema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 
 /**
- * Array schema for populated movie reviews.
+ * Array of populated movie reviews.
  */
-export const PopulatedMovieReviewArraySchema = generateArraySchema(PopulatedMovieReviewSchema);
+export const PopulatedMovieReviewArraySchema =
+    generateArraySchema(PopulatedMovieReviewSchema);
 
 /**
- * Pagination schema for populated movie reviews.
+ * Paginated populated movie reviews.
  */
-export const PaginatedPopulatedMovieReviewsSchema = generatePaginationSchema(PopulatedMovieReviewSchema);
+export const PaginatedPopulatedMovieReviewsSchema =
+    generatePaginationSchema(PopulatedMovieReviewSchema);
+
+/**
+ * Array of detailed movie reviews.
+ */
+export const MovieReviewDetailsArraySchema =
+    generateArraySchema(MovieReviewDetailsSchema);
+
+/**
+ * Paginated detailed movie reviews.
+ */
+export const PaginatedMovieReviewDetailsSchema =
+    generatePaginationSchema(MovieReviewDetailsSchema);

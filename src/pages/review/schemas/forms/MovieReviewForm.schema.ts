@@ -9,18 +9,24 @@ import {StringValueSchema} from "@/common/schema/strings/simple-strings/StringVa
 import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
 import generateFormValueSchema from "@/common/utility/schemas/generateFormValueSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 
 /**
  * Validation schema for movie review form submission.
  */
 export const MovieReviewFormSchema = z.object({
     movie: IDStringSchema,
+    rating: CleanedPositiveNumberSchema,
+    displayName: NonEmptyStringSchema
+        .max(100, "Must be 500 characters or less."),
+    summary: NonEmptyStringSchema
+        .max(500, "Must be 500 characters or less."),
     reviewText: StringValueSchema
         .max(2000, "Must be 2000 characters or less.")
         .transform(v => v === "" ? undefined : v)
         .optional(),
-    rating: CleanedPositiveNumberSchema,
-    isRecommended: BooleanValueSchema.optional(),
+    isRecommended: BooleanValueSchema
+        .optional(),
 });
 
 /**

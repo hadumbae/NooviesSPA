@@ -1,17 +1,26 @@
 /**
- * @file TypeScript types derived from movie review schemas.
+ * @file Movie review inferred types.
  * MovieReview.types.ts
  */
 
 import {z} from "zod";
-import {MovieReviewSchema, PopulatedMovieReviewSchema} from "@/pages/review/schemas/models/MovieReview.schema.ts";
+import {
+    MovieReviewDetailsSchema,
+    MovieReviewSchema,
+    PopulatedMovieReviewSchema
+} from "@/pages/review/schemas/models/MovieReview.schema.ts";
 
 /**
- * Inferred type for a movie review.
+ * Movie review type.
  */
 export type MovieReview = z.infer<typeof MovieReviewSchema>;
 
 /**
- * Inferred type for a populated movie review.
+ * Populated movie review type.
  */
 export type PopulatedMovieReview = z.infer<typeof PopulatedMovieReviewSchema>;
+
+/**
+ * Detailed movie review type.
+ */
+export type MovieReviewDetails = z.infer<typeof MovieReviewDetailsSchema>;
