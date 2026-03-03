@@ -9,6 +9,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEm
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
 import {MovieWithGenresSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
+import {LeanUserSchema} from "@/pages/users/schemas/user/User.schema.ts";
 
 /**
  * Base MovieReview schema using reference identifiers.
@@ -26,5 +27,6 @@ export const MovieReviewSchema = z.object({
  * MovieReview schema with populated movie relation.
  */
 export const PopulatedMovieReviewSchema = MovieReviewSchema.extend({
+    user: LeanUserSchema,
     movie: MovieWithGenresSchema,
 });
