@@ -10,6 +10,7 @@
 
 import {cn} from "@/common/lib/utils.ts";
 import {ReactNode} from "react";
+import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 type SpanProps = {
     /** Inline content to render */
@@ -24,7 +25,7 @@ type SpanProps = {
  */
 const PrimarySpan = ({children, className}: SpanProps) => {
     return (
-        <span className={cn(PrimarySpan, className)}>
+        <span className={cn(PrimaryTextBaseCSS, className)}>
             {children}
         </span>
     );
