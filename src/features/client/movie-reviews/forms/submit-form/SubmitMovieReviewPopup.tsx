@@ -1,5 +1,5 @@
 /**
- * @file Popup dialog for creating or editing a MovieReview submission.
+ * @file Movie review submission dialog.
  * SubmitMovieReviewPopup.tsx
  */
 
@@ -26,27 +26,21 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
+import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 
 /**
- * Props for SubmitMovieReviewPopup.
+ * Props for the submission dialog.
  */
 type PopupProps = PresetOpenState & {
-    /** Trigger element used to open the popup dialog. */
+    isHidden?: boolean;
     children: ReactNode;
 };
 
 /**
- * Modal dialog for submitting or editing a movie review.
- *
- * Consumes MovieReviewSubmitFormViewContext to:
- * - Resolve current mutation state (e.g. loading).
- * - Determine editing mode.
- * - Bind submit action to parent form via formID.
- *
- * Renders rating, review text, and recommendation inputs.
+ * Dialog for creating or editing a movie review.
  */
 const SubmitMovieReviewPopup = (
-    {children, ...presetState}: PopupProps
+    {children, isHidden, ...presetState}: PopupProps
 ) => {
     const {activeOpen, setActiveOpen} = usePresetActiveOpen(presetState);
 
@@ -55,6 +49,10 @@ const SubmitMovieReviewPopup = (
         context: MovieReviewSubmitFormViewContext,
         message: "Must be used within a provider for the form context."
     });
+
+    if (isHidden) {
+        return null;
+    }
 
     return (
         <Dialog open={activeOpen} onOpenChange={setActiveOpen}>
@@ -75,7 +73,9 @@ const SubmitMovieReviewPopup = (
 
                     <Separator/>
 
-                    <HookFormTextArea placeholder="Review" name="reviewText" control={control}/>
+                    <HookFormInput label="Display Name" name="displayName" control={control}/>
+                    <HookFormInput label="Summary" name="summary" control={control}/>
+                    <HookFormTextArea label="Review" name="reviewText" control={control}/>
                     <HookFormCheckbox label="Recommend Movie?" name="isRecommended" control={control}/>
                 </section>
 
