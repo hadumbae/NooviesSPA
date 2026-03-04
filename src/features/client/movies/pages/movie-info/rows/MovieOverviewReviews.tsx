@@ -1,27 +1,27 @@
 /**
- * @file Section displaying movie reviews with submission controls.
+ * @file Review overview section with submission controls.
  *
- * MovieReviewSummarySection.tsx
+ * MovieOverviewReviews.tsx
  */
 
-import { cn } from "@/common/lib/utils.ts";
+import {cn} from "@/common/lib/utils.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import { SectionHeaderCSS } from "@/common/constants/css/TextCSS.ts";
+import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import SubmitMovieReviewPopup from "@/features/client/movie-reviews/forms/submit-form/SubmitMovieReviewPopup.tsx";
-import { ChevronRight, MessageCirclePlus } from "lucide-react";
+import {ChevronRight, MessageCirclePlus} from "lucide-react";
 import MovieReviewSubmitFormContainer
     from "@/features/client/movie-reviews/forms/submit-form/MovieReviewSubmitFormContainer.tsx";
-import { Button } from "@/common/components/ui/button.tsx";
-import { useState } from "react";
-import { MovieReviewDetails } from "@/pages/review/schemas/models/MovieReview.types.ts";
+import {Button} from "@/common/components/ui/button.tsx";
+import {useState} from "react";
+import {MovieReviewDetails} from "@/pages/review/schemas/models/MovieReview.types.ts";
 import MovieReviewSummaryCard
     from "@/features/client/movie-reviews/cards/review-summary-card/MovieReviewSummaryCard.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import { MovieDetails } from "@/pages/movies/schema/movie/Movie.types.ts";
+import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 
 /**
- * Props for MovieReviewSummarySection.
+ * Props for MovieOverviewReviews.
  */
 type RowProps = {
     /**
@@ -51,10 +51,10 @@ type RowProps = {
 };
 
 /**
- * Renders the movie review summary section.
+ * Renders the movie review overview section.
  */
-const MovieReviewSummarySection = (
-    { movie, userReview, reviews, className }: RowProps
+const MovieOverviewReviews = (
+    {movie, userReview, reviews, className}: RowProps
 ) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const onSubmit = () => setIsOpen(false);
@@ -66,17 +66,10 @@ const MovieReviewSummarySection = (
                     Movie Reviews
                 </SectionHeader>
 
-                <MovieReviewSubmitFormContainer
-                    movieID={movie._id}
-                    onSubmitSuccess={onSubmit}
-                >
-                    <SubmitMovieReviewPopup
-                        isHidden={!!userReview}
-                        presetOpen={isOpen}
-                        setPresetOpen={setIsOpen}
-                    >
+                <MovieReviewSubmitFormContainer movieID={movie._id} onSubmitSuccess={onSubmit}>
+                    <SubmitMovieReviewPopup isHidden={!!userReview} presetOpen={isOpen} setPresetOpen={setIsOpen}>
                         <Button variant="primary" size="icon" type="button">
-                            <MessageCirclePlus />
+                            <MessageCirclePlus/>
                         </Button>
                     </SubmitMovieReviewPopup>
                 </MovieReviewSubmitFormContainer>
@@ -87,32 +80,22 @@ const MovieReviewSummarySection = (
                     <PrimaryHeaderText>User Review</PrimaryHeaderText>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <MovieReviewSummaryCard
-                            isUser={true}
-                            review={userReview}
-                        />
+                        <MovieReviewSummaryCard isUser={true} review={userReview}/>
                     </div>
                 </div>
             )}
 
             {reviews.length > 0 && (
                 <div className="space-y-4">
-                    <PrimaryHeaderText>
-                        Most Recent Reviews
-                    </PrimaryHeaderText>
+                    <PrimaryHeaderText>Most Recent Reviews</PrimaryHeaderText>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {reviews.map((review) => (
-                            <MovieReviewSummaryCard
-                                key={review._id}
-                                review={review}
-                            />
-                        ))}
+                        {reviews.map((review) => <MovieReviewSummaryCard key={review._id} review={review}/>)}
                     </div>
 
                     <div className="flex justify-end">
                         <LoggedHoverLink to={`/browse/movies/${movie.slug}/reviews`}>
-                            <ChevronRight /> More Reviews
+                            <ChevronRight/> More Reviews
                         </LoggedHoverLink>
                     </div>
                 </div>
@@ -121,4 +104,4 @@ const MovieReviewSummarySection = (
     );
 };
 
-export default MovieReviewSummarySection;
+export default MovieOverviewReviews;

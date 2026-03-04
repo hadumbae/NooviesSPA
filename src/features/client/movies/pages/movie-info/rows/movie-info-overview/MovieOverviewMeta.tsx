@@ -1,13 +1,9 @@
 /**
- * @file MovieInfoOverviewMeta.tsx
- * @description
- * Displays high-level metadata for a movie, including genre navigation,
- * original title, tagline, and synopsis.
+ * @file Metadata section for the movie overview layout.
  *
- * The component is responsive:
- * - Genre links are horizontally scrollable.
- * - Technical details are hidden on small screens.
+ * MovieOverviewMeta.tsx
  */
+
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
 import {PillCSS} from "@/common/constants/css/ContainerCSS.ts";
@@ -19,27 +15,24 @@ import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 /**
- * Props for {@link MovieInfoOverviewMeta}.
+ * Props for MovieOverviewMeta.
  */
 type OverviewProps = {
-    /** Optional wrapper class name */
+    /**
+     * Optional wrapper classes.
+     */
     className?: string;
-    /** Full movie details used to derive overview metadata */
+
+    /**
+     * Movie used to derive metadata.
+     */
     movie: MovieDetails;
 };
 
 /**
- * Renders the movie overview metadata section.
- *
- * @param props - {@link OverviewProps}
- * @returns A responsive movie overview metadata block
- *
- * @example
- * ```tsx
- * <MovieInfoOverviewMeta movie={movie} />
- * ```
+ * Renders movie overview metadata.
  */
-const MovieInfoOverviewMeta = ({className, movie}: OverviewProps) => {
+const MovieOverviewMeta = ({className, movie}: OverviewProps) => {
     const {originalTitle, tagline, genres, synopsis} = movie;
     const genreLinks = generateGenreLinkConfigs(genres);
 
@@ -76,4 +69,4 @@ const MovieInfoOverviewMeta = ({className, movie}: OverviewProps) => {
     );
 };
 
-export default MovieInfoOverviewMeta;
+export default MovieOverviewMeta;

@@ -1,6 +1,7 @@
 /**
  * @file Favourite selector component for a movie.
- * MovieFavouriteSelector.tsx
+ *
+ * MovieOverviewFavouriteToggle.tsx
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -16,14 +17,14 @@ import FavouriteMovieHeartButton from "@/features/client/movies/buttons/Favourit
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {useToggleUserFavouriteMovie} from "@/pages/users/mutations/useToggleUserFavouriteMovie.ts";
 
-/** Props for MovieFavouriteSelector. */
+/** Props for MovieOverviewFavouriteToggle. */
 type SelectorProps = {
     /** Target movie identifier. */
     movieID: ObjectId;
 }
 
 /** Displays and manages the current user's favourite state for a movie. */
-const MovieFavouriteSelector = (
+const MovieOverviewFavouriteToggle = (
     {movieID}: SelectorProps
 ) => {
     const query = useCheckIsFavouriteMovie({_id: movieID});
@@ -54,4 +55,4 @@ const MovieFavouriteSelector = (
     );
 };
 
-export default MovieFavouriteSelector;
+export default MovieOverviewFavouriteToggle;

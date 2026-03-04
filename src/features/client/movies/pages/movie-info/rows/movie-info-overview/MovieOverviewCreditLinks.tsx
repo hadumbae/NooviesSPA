@@ -1,12 +1,9 @@
 /**
- * @file MovieInfoOverviewCreditLinks.tsx
- * @description
- * Renders grouped navigation links for a movie’s primary credits,
- * including directors, writers, and actors.
+ * @file Grouped credit navigation links for a movie overview.
  *
- * Credit links are generated once per render cycle and displayed
- * with graceful fallbacks when no entries exist.
+ * MovieOverviewCreditLinks.tsx
  */
+
 import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import generateMovieCreditLinkConfigs from "@/pages/moviecredit/utility/generateMovieCreditLinkConfigs.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
@@ -16,30 +13,27 @@ import {useMemo} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
 
 /**
- * Props for {@link MovieInfoOverviewCreditLinks}.
+ * Props for MovieOverviewCreditLinks.
  */
 type LinkProps = {
-    /** Optional wrapper class name */
+    /**
+     * Optional wrapper classes.
+     */
     className?: string;
-    /** Normalized credit entries for the movie */
+
+    /**
+     * Credit entries used to generate links.
+     */
     credits: MovieCreditDetails[];
 };
 
 /**
- * Displays navigable credit links grouped by role.
- *
- * @param props - {@link LinkProps}
- * @returns A labeled list of credit link groups
- *
- * @example
- * ```tsx
- * <MovieInfoOverviewCreditLinks credits={credits} />
- * ```
+ * Renders grouped credit links.
  */
-const MovieInfoOverviewCreditLinks = ({className, credits}: LinkProps) => {
+const MovieOverviewCreditLinks = ({className, credits}: LinkProps) => {
     const links = useMemo(() => {
         return generateMovieCreditLinkConfigs({
-            sourceComponent: MovieInfoOverviewCreditLinks.name,
+            sourceComponent: MovieOverviewCreditLinks.name,
             credits,
         });
     }, [credits]);
@@ -56,13 +50,13 @@ const MovieInfoOverviewCreditLinks = ({className, credits}: LinkProps) => {
                 <LinkGroup links={directorLinks}/>
             </LabeledGroup>
 
-            <Separator />
+            <Separator/>
 
             <LabeledGroup label="Writers">
                 <LinkGroup links={writerLinks}/>
             </LabeledGroup>
 
-            <Separator />
+            <Separator/>
 
             <LabeledGroup label="Actors">
                 <LinkGroup links={actorLinks}/>
@@ -71,4 +65,4 @@ const MovieInfoOverviewCreditLinks = ({className, credits}: LinkProps) => {
     );
 };
 
-export default MovieInfoOverviewCreditLinks;
+export default MovieOverviewCreditLinks;
