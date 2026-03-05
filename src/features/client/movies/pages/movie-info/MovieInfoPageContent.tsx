@@ -4,12 +4,11 @@
  * MovieInfoPageContent.tsx
  */
 
-import { MovieDetails } from "@/pages/movies/schema/movie/Movie.types.ts";
+import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import MovieOverviewHeader
     from "@/features/client/movies/pages/movie-info/rows/MovieOverviewHeader.tsx";
-import { MovieCreditDetails } from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
 import MovieOverviewEditorialInfo
     from "@/features/client/movies/pages/movie-info/rows/MovieOverviewEditorialInfo.tsx";
 import MovieOverviewCredits
@@ -18,7 +17,8 @@ import MovieOverviewFavouriteToggle
     from "@/features/client/movies/pages/movie-info/rows/MovieOverviewFavouriteToggle.tsx";
 import MovieOverviewReviews
     from "@/features/client/movies/pages/movie-info/rows/MovieOverviewReviews.tsx";
-import { ReviewDetailsByMovie } from "@/pages/review/schemas/models/ReviewDetailsByMovieSchema.ts";
+import {ReviewDetailsByMovie} from "@/pages/review/schemas/models/ReviewDetailsByMovieSchema.ts";
+import MovieOverviewShowings from "@/features/client/movies/pages/movie-info/rows/MovieOverviewShowings.tsx";
 
 /**
  * Props for MovieInfoPageContent.
@@ -44,9 +44,9 @@ type ContentProps = {
  * Renders the movie overview page sections.
  */
 const MovieInfoPageContent = (
-    { movie, credits, reviewDetails }: ContentProps
+    {movie, credits, reviewDetails}: ContentProps
 ) => {
-    const { slug } = movie;
+    const {slug} = movie;
     const {
         averageRating,
         userReview,
@@ -55,23 +55,33 @@ const MovieInfoPageContent = (
 
     return (
         <PageFlexWrapper className="space-y-10">
-            <MovieOverviewHeader movie={movie} credits={credits} />
+            <MovieOverviewHeader
+                movie={movie}
+                credits={credits}
+            />
 
-            <MovieOverviewFavouriteToggle movieID={movie._id} />
+            <MovieOverviewFavouriteToggle
+                movieID={movie._id}
+            />
 
-            <MovieOverviewEditorialInfo movie={movie} />
+            <MovieOverviewEditorialInfo
+                movie={movie}
+            />
 
-            <MovieOverviewCredits movie={movie} credits={credits} />
-
-            <LoggedHoverLink to={`/browse/movies/${slug}/showings`}>
-                Showings
-            </LoggedHoverLink>
+            <MovieOverviewCredits
+                movie={movie}
+                credits={credits}
+            />
 
             <MovieOverviewReviews
                 movie={movie}
                 averageRating={averageRating}
                 userReview={userReview}
                 reviews={reviews}
+            />
+
+            <MovieOverviewShowings
+                movieSlug={slug}
             />
         </PageFlexWrapper>
     );
