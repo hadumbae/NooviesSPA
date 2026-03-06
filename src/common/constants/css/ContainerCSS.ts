@@ -5,7 +5,7 @@ export const ContainerCSS = cn(
 );
 
 export const RoundedBorderCSS = cn(
-    "border border-neutral-200 dark:border-neutral-800",
+    "border border-neutral-200 dark:border-neutral-600",
     "rounded-xl",
 );
 
