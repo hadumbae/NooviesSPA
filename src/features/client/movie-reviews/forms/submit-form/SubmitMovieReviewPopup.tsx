@@ -27,6 +27,7 @@ import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbo
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {useLockForFormUI} from "@/common/hooks/forms/useLockForFormUI.ts";
 
 /**
  * Props for the submission dialog.
@@ -34,6 +35,7 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 type PopupProps = PresetOpenState & {
     isHidden?: boolean;
     children: ReactNode;
+    isEditing?: boolean;
 };
 
 /**
@@ -42,17 +44,25 @@ type PopupProps = PresetOpenState & {
 const SubmitMovieReviewPopup = (
     {children, isHidden, ...presetState}: PopupProps
 ) => {
+    if (isHidden) return null;
+
     const {activeOpen, setActiveOpen} = usePresetActiveOpen(presetState);
 
     const {control} = useFormContext();
-    const {formID, mutationState: {isPending} = {}, options: {isEditing} = {}} = useRequiredContext({
+    const {formID, mutationState: {isPending, isError} = {}, options: {isEditing} = {}} = useRequiredContext({
         context: MovieReviewSubmitFormViewContext,
         message: "Must be used within a provider for the form context."
     });
 
-    if (isHidden) {
-        return null;
-    }
+    const {isUILocked} = useLockForFormUI({
+        isContentOpen: activeOpen,
+        isMutationPending: !!isPending,
+        isMutationError: !!isError,
+    });
+
+    const actionButtonText = isEditing
+        ? "Edit Review"
+        : "Submit";
 
     return (
         <Dialog open={activeOpen} onOpenChange={setActiveOpen}>
@@ -84,8 +94,8 @@ const SubmitMovieReviewPopup = (
                         <Button type="button" variant="secondary">Close</Button>
                     </DialogClose>
 
-                    <Button form={formID} type="submit" variant="primary" disabled={isPending}>
-                        {isPending ? <AnimatedLoader/> : "Submit"}
+                    <Button form={formID} type="submit" variant="primary" disabled={isUILocked}>
+                        {isPending ? <AnimatedLoader/> : actionButtonText}
                     </Button>
                 </DialogFooter>
             </DialogContent>
