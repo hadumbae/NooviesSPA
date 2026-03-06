@@ -3,18 +3,18 @@
  * MovieReview.schema.ts
  */
 
-import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
 import {MovieWithGenresSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {LeanUserSchema} from "@/pages/users/schemas/user/User.schema.ts";
+import {ModelTimestampsSchema} from "@/common/schema/models/ModelTimestampsSchema.ts";
 
 /**
  * Movie review schema using identifier references.
  */
-export const MovieReviewSchema = z.object({
+export const MovieReviewSchema = ModelTimestampsSchema.extend({
     _id: IDStringSchema,
     user: IDStringSchema,
     movie: IDStringSchema,
