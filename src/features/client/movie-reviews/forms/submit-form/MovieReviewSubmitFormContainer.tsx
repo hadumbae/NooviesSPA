@@ -17,8 +17,6 @@ import {ReactNode} from "react";
 import MovieReviewSubmitFormViewContextProvider
     from "@/pages/review/context/submit-form-view-context/MovieReviewSubmitFormViewContextProvider.tsx";
 import Logger from "@/common/utility/features/logger/Logger.ts";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
 
 /**
  * Props for MovieReviewSubmitFormContainer.
@@ -52,17 +50,11 @@ const MovieReviewSubmitFormContainer = (params: FormProps) => {
 
     const formID = "movie-review-submit-form";
 
-    const {user} = useRequiredContext({
-        context: AuthContext,
-        message: "Must be used within a provider for the authentication context."
-    });
-
     const form = useMovieReviewSubmitForm({
         movieReview: editEntity,
         presetValues: {
             ...presetValues,
             movie: movieID,
-            displayName: user?.name,
         },
     });
 

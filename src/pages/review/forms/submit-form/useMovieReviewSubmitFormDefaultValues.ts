@@ -5,8 +5,9 @@
 
 import {MovieReview} from "@/pages/review/schemas/models/MovieReview.types.ts";
 import {MovieReviewFormValues} from "@/pages/review/schemas/forms/MovieReviewForm.types.ts";
-import {useMemo, useRef} from "react";
+import {useContext, useMemo, useRef} from "react";
 import {isEqual} from "lodash";
+import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
 
 /**
  * Parameters for initializing movie review form defaults.
@@ -23,10 +24,11 @@ export function useMovieReviewSubmitFormDefaultValues(
     {presetValues, movieReview}: FormParams
 ): MovieReviewFormValues {
     const defaultValues = useRef<MovieReviewFormValues | null>(null);
+    const userContext = useContext(AuthContext);
 
     const initialValues = useMemo(() => ({
         movie: undefined,
-        displayName: "",
+        displayName: userContext?.user?.name ?? "",
         summary: "",
         reviewText: "",
         isRecommended: false,
