@@ -3,15 +3,15 @@
  * @filename ModelTimestampsSchema.ts
  */
 
-import { z } from "zod";
-import { UTCISO8601DateTimeSchema } from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
+import {z} from "zod";
+import {UTCISO8601ValueSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601ValueSchema.ts";
 
 /**
  * Common timestamp fields included on persisted models.
  */
 export const ModelTimestampsSchema = z.object({
-    createdAt: UTCISO8601DateTimeSchema,
-    updatedAt: UTCISO8601DateTimeSchema,
+    createdAt: UTCISO8601ValueSchema,
+    updatedAt: UTCISO8601ValueSchema,
 });
 
 /**
