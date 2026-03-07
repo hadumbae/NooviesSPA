@@ -32,6 +32,9 @@ export const MovieReviewQueryKeys = {
     movieDetails: (movieID?: ObjectId) =>
         [...MovieReviewQueryKeys.all, "lists", "movie", "details", {movieID}],
 
+    featuredReviews: (movieID?: ObjectId) =>
+        [...MovieReviewQueryKeys.all, "lists", "movie", "featured", {movieID}],
+
     /**
      * Option-scoped queries.
      */
