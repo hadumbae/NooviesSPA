@@ -44,6 +44,7 @@ export function useDeleteCurrentUserMovieReviewMutation(
             MovieReviewQueryKeys.userList(),
             MovieReviewQueryKeys.movieList(movieID),
             MovieReviewQueryKeys.movieDetails(movieID),
+            MovieReviewQueryKeys.featuredReviews(movieID),
         ], {exact: false});
 
         successMessage && toast.success(successMessage);

@@ -80,6 +80,7 @@ export function useSubmitUserMovieReviewMutation(
             MovieReviewQueryKeys.userList(),
             MovieReviewQueryKeys.movieList(movieID),
             MovieReviewQueryKeys.movieDetails(movieID),
+            MovieReviewQueryKeys.featuredReviews(movieID),
         ]);
 
         successMessage && toast.success(successMessage);
