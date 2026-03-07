@@ -3,7 +3,10 @@
  * ReviewsByMovieRepository.ts
  */
 
-import {FetchReviewsByMovieParams} from "@/pages/movies/repositories/movie-reviews/ReviewsByMovieRepository.types.ts";
+import {
+    FetchPaginatedReviewsByMovieParams,
+    FetchReviewsByMovieParams
+} from "@/pages/movies/repositories/movie-reviews/ReviewsByMovieRepository.types.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
@@ -17,7 +20,7 @@ const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/browse/movies`;
  * Requests paginated reviews for a movie.
  */
 export const getFetchReviewsByMovie = (
-    {movieID, page, perPage, config}: FetchReviewsByMovieParams
+    {movieID, page, perPage, config}: FetchPaginatedReviewsByMovieParams
 ): Promise<RequestReturns<unknown>> => {
     const url = buildQueryURL({
         baseURL,
@@ -32,12 +35,27 @@ export const getFetchReviewsByMovie = (
  * Requests paginated reviews with aggregate details for a movie.
  */
 export const getFetchReviewDetailsByMovie = (
-    {movieID, page, perPage, config}: FetchReviewsByMovieParams
+    {movieID, page, perPage, config}: FetchPaginatedReviewsByMovieParams
 ): Promise<RequestReturns<unknown>> => {
     const url = buildQueryURL({
         baseURL,
         path: `item/${movieID}/reviews/details`,
         queries: {page, perPage, ...config},
+    });
+
+    return useFetchAPI({url, method: "GET"});
+};
+
+/**
+ * Fetches featured reviews for a movie.
+ */
+export const getFetchFeaturedReviewsByMovie = (
+    {movieID, config}: FetchReviewsByMovieParams
+): Promise<RequestReturns<unknown>> => {
+    const url = buildQueryURL({
+        baseURL,
+        path: `item/${movieID}/reviews/featured`,
+        queries: config,
     });
 
     return useFetchAPI({url, method: "GET"});
