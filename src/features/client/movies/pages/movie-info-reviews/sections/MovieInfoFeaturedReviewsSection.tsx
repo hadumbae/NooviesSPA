@@ -1,5 +1,5 @@
 /**
- * @file Section placeholder for displaying featured movie reviews.
+ * @file Displays featured and user reviews for a movie.
  * @filename MovieInfoUserReviewSection.tsx
  */
 
@@ -12,17 +12,18 @@ import {
     FeaturedReviewsByMovie,
     FeaturedReviewsByMovieSchema
 } from "@/pages/review/schemas/models/FeaturedReviewsByMovieSchema.ts";
+import MovieReviewDetailsCard from "@/features/client/movie-reviews/cards/review-card/MovieReviewDetailsCard.tsx";
 
 /**
- * Props for the featured reviews section.
+ * Props for MovieInfoFeaturedReviewsSection.
  */
 type SectionProps = {
+    /** Movie identifier used to fetch reviews */
     movieID: ObjectId;
 };
 
 /**
- * Scaffold section intended to display featured reviews for a movie.
- * Data fetching and review rendering will be added later.
+ * Renders featured reviews and prioritizes the current user's review.
  */
 const MovieInfoFeaturedReviewsSection = (
     {movieID}: SectionProps
@@ -34,23 +35,33 @@ const MovieInfoFeaturedReviewsSection = (
 
     return (
         <ValidatedDataLoader query={query} schema={FeaturedReviewsByMovieSchema}>
-            {({reviews, userReview}: FeaturedReviewsByMovie) => {
+            {({reviews, userReview}: FeaturedReviewsByMovie) => (
+                <section className="space-y-4">
+                    <SectionHeader className={SectionHeaderCSS}>
+                        Featured Reviews
+                    </SectionHeader>
 
-                console.log("User Review: ", userReview);
-                console.log("Reviews: ", reviews);
+                    <div className="grid grid-cols-1 gap-4">
+                        {
+                            userReview &&
+                            <MovieReviewDetailsCard
+                                isUser={true}
+                                review={userReview}
+                                canDelete={true}
+                            />
+                        }
 
-                return (
-                    <section>
-                        <SectionHeader className={SectionHeaderCSS}>
-                            Featured Reviews
-                        </SectionHeader>
-
-                        <div>
-                            ID {movieID}
-                        </div>
-                    </section>
-                );
-            }}
+                        {
+                            reviews.map((review) => (
+                                <MovieReviewDetailsCard
+                                    key={review._id}
+                                    review={review}
+                                />
+                            ))
+                        }
+                    </div>
+                </section>
+            )}
         </ValidatedDataLoader>
     );
 };
