@@ -30,7 +30,7 @@ const MovieReviewText = ({children, className}: TextProps) => {
     return (
         <p className={cn(
             PrimaryTextBaseCSS,
-            "text-justify",
+            "text-justify text-sm md:text-base",
             className
         )}>
             {children}
