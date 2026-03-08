@@ -25,7 +25,11 @@ type SpanProps = {
  */
 const PrimarySpan = ({children, className}: SpanProps) => {
     return (
-        <span className={cn(PrimaryTextBaseCSS, className)}>
+        <span className={cn(
+            PrimaryTextBaseCSS,
+            "max-md:text-sm",
+            className
+        )}>
             {children}
         </span>
     );
