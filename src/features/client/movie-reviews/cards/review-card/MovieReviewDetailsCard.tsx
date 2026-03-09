@@ -13,6 +13,7 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import MovieReviewText from "@/features/client/movie-reviews/text/MovieReviewText.tsx";
 import MovieReviewHelpfulButton from "@/features/client/movie-reviews/buttons/MovieReviewHelpfulButton.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import IsRecommendedBadge from "@/features/client/movie-reviews/badges/IsRecommendedBadge.tsx";
 
 /**
  * Props for MovieReviewDetailsCard.
@@ -40,8 +41,10 @@ const MovieReviewDetailsCard = (
         summary,
         reviewText,
         displayName,
+        helpfulCount,
         movie: {_id: movieID},
-        createdAt
+        isRecommended,
+        createdAt,
     } = review;
 
     const dateWritten = createdAt.toFormat("MMM dd, yyyy")
@@ -57,27 +60,15 @@ const MovieReviewDetailsCard = (
                         <SecondarySpan>{rating}/5</SecondarySpan>
                     </div>
 
-                    {
-                        canDelete && (
-                            <DeleteMovieReviewButton
-                                movieID={movieID}
-                                reviewID={_id}
-                            />
-                        )
-                    }
+                    <div className="flex items-center">
+                        {isRecommended && <IsRecommendedBadge/>}
+                        {canDelete && <DeleteMovieReviewButton movieID={movieID} reviewID={_id}/>}
+                    </div>
                 </section>
 
-                <PrimaryHeaderText as="h2">
-                    {summary}
-                </PrimaryHeaderText>
+                <PrimaryHeaderText as="h2">{summary}</PrimaryHeaderText>
 
-                {
-                    reviewText && (
-                        <MovieReviewText>
-                            {reviewText}
-                        </MovieReviewText>
-                    )
-                }
+                {reviewText && <MovieReviewText>{reviewText}</MovieReviewText>}
 
                 <section className="flex items-center justify-between">
                     <PrimarySpan className={cn(
@@ -88,7 +79,7 @@ const MovieReviewDetailsCard = (
                     </PrimarySpan>
 
                     <MovieReviewHelpfulButton
-                        likeCount={123}
+                        likeCount={helpfulCount}
                         textOnly={isUser}
                     />
                 </section>
