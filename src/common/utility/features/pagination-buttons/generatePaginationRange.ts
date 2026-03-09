@@ -1,67 +1,48 @@
 /**
- * Represents the pagination items to display.
- *
- * Can include page numbers and ellipsis ("...") for skipped ranges.
+ * @file Generates condensed pagination ranges with ellipsis markers.
+ * @filename generatePaginationRange.ts
+ */
+
+/**
+ * Pagination items consisting of page numbers and ellipses.
  */
 type PaginationRange = (number | "...")[];
 
 /**
- * Parameters required to generate a pagination range.
+ * Parameters for generatePaginationRange.
  */
 type PaginationRangeParams = {
-    /** The currently active page (1-indexed). */
+    /** Active page (1-based) */
     activePage: number;
-    /** Total number of pages available. */
+
+    /** Total available pages */
     totalPages: number;
-    /** Number of sibling pages to display on each side of the current page. Defaults to 1. */
+
+    /** Visible sibling pages on each side of the active page */
     siblingCount: number;
 };
 
 /**
- * Generates a pagination range for UI components, including page numbers and ellipses.
- *
- * This function ensures:
- * - The current page and its siblings are always shown.
- * - First and last pages are always included.
- * - Ellipses ("...") are used to condense long ranges.
- *
- * @param params - Object containing `currentPage`, `totalPages`, and `siblingCount`.
- * @returns An array of page numbers and/or ellipses for pagination display.
- *
- * @example
- * ```ts
- * generatePaginationRange({ currentPage: 5, totalPages: 10, siblingCount: 1 });
- * // [1, "...", 4, 5, 6, "...", 10]
- * ```
+ * Produces a compact sequence of page numbers for pagination controls.
  */
-export default function generatePaginationRange(params: PaginationRangeParams): PaginationRange {
+export default function generatePaginationRange(
+    params: PaginationRangeParams
+): PaginationRange {
     const {activePage, totalPages, siblingCount = 1} = params;
 
-    // ⚡ Total Number Of Buttons To Show ⚡
-
     const pagesToShow = (siblingCount * 2) + 5;
-
-    // ⚡ Show All Pages If Within Range ⚡
 
     if (pagesToShow >= totalPages) {
         return Array.from({length: totalPages}, (_, i) => i + 1);
     }
 
-    // ⚡ Determine The Siblings Around The Active Page ⚡
-
     const leftSibling = Math.max(activePage - siblingCount, 1);
     const rightSibling = Math.min(activePage + siblingCount, totalPages);
-
-    // ⚡ Determine Ellipses Visibility ⚡
 
     const showLeftEllipsis = leftSibling > 3;
     const showRightEllipsis = rightSibling < totalPages - 2;
 
-    // ⚡ Build Range ⚡
-
     const paginationRange: PaginationRange = [];
-
-    // ⚡ Active On The Left ⚡
 
     if (!showLeftEllipsis && showRightEllipsis) {
         const visibleLeftPages = 2 + 2 * siblingCount;
@@ -71,8 +52,6 @@ export default function generatePaginationRange(params: PaginationRangeParams): 
         paginationRange.push(totalPages);
     }
 
-    // ⚡ Active On The Right ⚡
-
     else if (showLeftEllipsis && !showRightEllipsis) {
         paginationRange.push(1);
         paginationRange.push("...");
@@ -80,8 +59,6 @@ export default function generatePaginationRange(params: PaginationRangeParams): 
         const visibleRightPages = 2 + 2 * siblingCount;
         for (let i = totalPages - visibleRightPages + 1; i <= totalPages; i++) paginationRange.push(i);
     }
-
-    // ⚡ Active In The Centre ⚡
 
     else if (showLeftEllipsis && showRightEllipsis) {
         paginationRange.push(1);
