@@ -5,8 +5,6 @@
  */
 
 import {cn} from "@/common/lib/utils.ts";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import SubmitMovieReviewPopup from "@/features/client/movie-reviews/forms/submit-form/SubmitMovieReviewPopup.tsx";
 import {ChevronRight, MessageCirclePlus} from "lucide-react";
 import MovieReviewSubmitFormContainer
@@ -19,6 +17,7 @@ import MovieReviewSummaryCard
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import SectionHeaderLink from "@/common/components/page/SectionHeaderLink.tsx";
 
 /**
  * Props for MovieOverviewReviews.
@@ -62,9 +61,9 @@ const MovieOverviewReviews = (
     return (
         <section className={cn("space-y-4", className)}>
             <div className="flex justify-between items-center">
-                <SectionHeader className={SectionHeaderCSS}>
+                <SectionHeaderLink to={`/browse/movies/${movie.slug}/reviews`}>
                     Movie Reviews
-                </SectionHeader>
+                </SectionHeaderLink>
 
                 <MovieReviewSubmitFormContainer movieID={movie._id} onSubmitSuccess={onSubmit}>
                     <SubmitMovieReviewPopup isHidden={!!userReview} presetOpen={isOpen} setPresetOpen={setIsOpen}>
