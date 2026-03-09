@@ -1,5 +1,5 @@
 /**
- * @file Card displaying detailed information for a movie review.
+ * @file Card presenting movie review content with metadata and actions.
  * @filename MovieReviewDetailsCard.tsx
  */
 
@@ -14,6 +14,7 @@ import MovieReviewText from "@/features/client/movie-reviews/text/MovieReviewTex
 import MovieReviewHelpfulButton from "@/features/client/movie-reviews/buttons/MovieReviewHelpfulButton.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import IsRecommendedBadge from "@/features/client/movie-reviews/badges/IsRecommendedBadge.tsx";
+import {Separator} from "@/common/components/ui/separator.tsx";
 
 /**
  * Props for MovieReviewDetailsCard.
@@ -22,18 +23,21 @@ type CardProps = {
     /** Review data to display */
     review: MovieReviewDetails;
 
-    /** Highlights card when authored by current user */
+    /** Indicates the review belongs to the current user */
     isUser?: boolean;
 
-    /** Shows delete control when permitted */
+    /** Applies visual emphasis to the card */
+    isHighlighted?: boolean;
+
+    /** Enables review deletion control */
     canDelete?: boolean;
 };
 
 /**
- * Renders a structured movie review with rating, content, and actions.
+ * Displays rating, review content, author info, and engagement controls.
  */
 const MovieReviewDetailsCard = (
-    {review, isUser, canDelete}: CardProps
+    {review, isUser, isHighlighted, canDelete}: CardProps
 ) => {
     const {
         _id,
@@ -44,16 +48,18 @@ const MovieReviewDetailsCard = (
         helpfulCount,
         movie: {_id: movieID},
         isRecommended,
+        isLikedByUser,
+        isUserReview,
         createdAt,
     } = review;
 
-    const dateWritten = createdAt.toFormat("MMM dd, yyyy")
+    const dateWritten = createdAt.toFormat("MMM dd, yyyy");
 
     return (
         <Card className={cn(
-            isUser && "border-primary dark:border-purple-400 border-2",
+            isHighlighted && "border-primary dark:border-purple-400 border-2",
         )}>
-            <CardContent className="p-4 space-y-4">
+            <CardContent className="p-4 h-full flex flex-col space-y-4">
                 <section className="flex justify-between items-center">
                     <div className="flex space-x-3 items-center">
                         <MovieReviewRatingStars size={15} rating={rating}/>
@@ -66,13 +72,16 @@ const MovieReviewDetailsCard = (
                     </div>
                 </section>
 
-                <PrimaryHeaderText as="h2">{summary}</PrimaryHeaderText>
+                <section className="flex-1 space-y-2">
+                    <PrimaryHeaderText as="h2">{summary}</PrimaryHeaderText>
+                    {reviewText && <MovieReviewText>{reviewText}</MovieReviewText>}
+                </section>
 
-                {reviewText && <MovieReviewText>{reviewText}</MovieReviewText>}
+                <Separator/>
 
                 <section className="flex items-center justify-between">
                     <PrimarySpan className={cn(
-                        isUser && "text-primary dark:text-purple-400",
+                        isHighlighted && "text-primary dark:text-purple-400",
                         "italic"
                     )}>
                         {displayName} • {dateWritten}
@@ -80,7 +89,8 @@ const MovieReviewDetailsCard = (
 
                     <MovieReviewHelpfulButton
                         likeCount={helpfulCount}
-                        textOnly={isUser}
+                        isLikedByUser={isLikedByUser}
+                        textOnly={isUser || isUserReview}
                     />
                 </section>
             </CardContent>
