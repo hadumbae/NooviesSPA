@@ -10,6 +10,7 @@ import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts"
 import {MovieWithGenresSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {LeanUserSchema} from "@/pages/users/schemas/user/User.schema.ts";
 import {ModelTimestampsSchema} from "@/common/schema/models/ModelTimestampsSchema.ts";
+import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 
 /**
  * Movie review schema using identifier references.
@@ -38,4 +39,6 @@ export const PopulatedMovieReviewSchema = MovieReviewSchema.extend({
  */
 export const MovieReviewDetailsSchema = PopulatedMovieReviewSchema.extend({
     isLikedByUser: BooleanValueSchema,
+    isUserReview: BooleanValueSchema,
+    helpfulCount: NonNegativeNumberSchema,
 });
