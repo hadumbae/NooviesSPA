@@ -35,7 +35,7 @@ export type PaginationRangeButtonsProps = {
  * Renders navigable pagination with condensed page ranges.
  */
 const PaginationRangeButtons: FC<PaginationRangeButtonsProps> = ({page, perPage, totalItems, setPage}) => {
-    if (perPage > totalItems) return null;
+    if (perPage >= totalItems) return null;
 
     const totalPages = Math.ceil(totalItems / perPage);
     const paginationRange = generatePaginationRange({totalPages, activePage: page, siblingCount: 2});
