@@ -34,7 +34,7 @@ export function useFetchReviewDetailsByMovie(
     });
 
     return useQuery({
-        queryKey: ["movie_reviews", "lists", "movie", "details", {...config, movieID}],
+        queryKey: ["movie_reviews", "lists", "movie", "details", {...config, page, perPage, movieID}],
         queryFn: fetchReviews,
         ...useQueryOptionDefaults(options),
     });
