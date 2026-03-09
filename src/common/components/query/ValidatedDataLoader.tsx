@@ -74,6 +74,14 @@ const ValidatedDataLoader = <TData = unknown>(params: LoaderProps<TData>) => {
     const {data: parsedData, error: parseError, success} = schema.safeParse(data);
 
     if (!success) {
+        if (import.meta.env.VITE_DEV_MODE && import.meta.env.VITE_DEV_LOG_TO_CONSOLE) {
+            console.group("Query Validation Failed");
+            console.error("Failed to validate query!")
+            console.error("Raw: ", data);
+            console.error("Errors: ", parseError?.errors);
+            console.groupEnd();
+        }
+
         throw new ParseError({
             message: "Invalid Data Received.",
             errors: parseError.errors,
