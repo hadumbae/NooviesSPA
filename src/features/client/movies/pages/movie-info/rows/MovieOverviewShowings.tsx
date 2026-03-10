@@ -1,40 +1,28 @@
 /**
- * @file Compact showings navigation section for a movie detail page.
- *
- * MovieOverviewShowings.tsx
+ * @file Displays a compact showings navigation section on the movie details page.
+ * @filename MovieOverviewShowings.tsx
  */
 
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import { SectionHeaderCSS } from "@/common/constants/css/TextCSS.ts";
-import { ChevronRight } from "lucide-react";
+import SectionHeaderLink from "@/common/components/page/SectionHeaderLink.tsx";
 
 /**
- * Props for MovieOverviewShowings.
+ * Component props.
  */
-type OverviewProps = {
+type MovieOverviewShowingsProps = {
+    /** Movie slug used for showings page routing */
     movieSlug: string;
 };
 
 /**
- * Renders a minimal “Showings” section with navigation
- * to the full movie showings page.
- *
- * Typically used within a movie detail view as a quick-access
- * link rather than displaying actual showtime data.
+ * Renders a lightweight navigation section linking to the
+ * movie's full showings page.
  */
-const MovieOverviewShowings = ({ movieSlug }: OverviewProps) => {
+const MovieOverviewShowings = ({movieSlug}: MovieOverviewShowingsProps) => {
     return (
         <section className="space-y-4">
-            <SectionHeader className={SectionHeaderCSS}>
+            <SectionHeaderLink to={`/browse/movies/${movieSlug}/showings`}>
                 Showings
-            </SectionHeader>
-
-            <div className="text-right">
-                <LoggedHoverLink to={`/browse/movies/${movieSlug}/showings`}>
-                    <ChevronRight /> Browse Showings
-                </LoggedHoverLink>
-            </div>
+            </SectionHeaderLink>
         </section>
     );
 };
