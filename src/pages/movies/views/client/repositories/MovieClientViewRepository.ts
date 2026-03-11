@@ -6,7 +6,7 @@
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
-import {GetCreditsForMovieViewParams} from "@/pages/movies/repositories/views/MovieClientViewRepository.types.ts";
+import {GetCreditsForMovieViewParams} from "@/pages/movies/views/client/repositories/MovieClientViewRepository.types.ts";
 
 const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/views/${import.meta.env.VITE_DEV_CLIENT_NAME}/client/movies`;
 
