@@ -1,96 +1,85 @@
 /**
- * @file Cast and crew overview section for a movie detail page.
- *
- * MovieOverviewCredits.tsx
+ * @file Displays a summarized cast and crew section on the movie details page.
+ * @filename MovieOverviewCredits.tsx
  */
 
-import { MovieDetails } from "@/pages/movies/schema/movie/Movie.types.ts";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import { SectionHeaderCSS } from "@/common/constants/css/TextCSS.ts";
-import { MovieCreditDetails } from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import generateMovieCreditLinkConfigs from "@/pages/moviecredit/utility/generateMovieCreditLinkConfigs.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
-import { Separator } from "@/common/components/ui/separator.tsx";
+import {Separator} from "@/common/components/ui/separator.tsx";
 import NoneSpan from "@/common/components/NoneSpan.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import { ChevronRight } from "lucide-react";
+import {ChevronRight} from "lucide-react";
 import ActorCreditAvatar from "@/pages/moviecredit/components/clients/ActorCreditAvatar.tsx";
-import { ScrollArea, ScrollBar } from "@/common/components/ui/scroll-area.tsx";
-import { cn } from "@/common/lib/utils.ts";
-import { RoundedBorderCSS } from "@/common/constants/css/ContainerCSS.ts";
+import SectionHeaderLink from "@/common/components/page/SectionHeaderLink.tsx";
+import {
+    MovieCreditDetails
+} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 /**
- * Props for MovieOverviewCredits.
+ * Component props.
  */
-type RowProps = {
-    /**
-     * Movie used for routing to the full credits page.
-     */
+type MovieOverviewCreditsProps = {
+    /** Movie used for credit page routing */
     movie: MovieDetails;
 
-    /**
-     * Credit entries associated with the movie.
-     */
+    /** Credit records associated with the movie */
     credits: MovieCreditDetails[];
 };
 
 /**
- * Renders a summarized cast and crew section.
+ * Renders a compact preview of primary cast and key crew groups
+ * with navigation to the full credits page.
  */
-const MovieOverviewCredits = ({movie, credits}: RowProps) => {
+const MovieOverviewCredits = ({movie, credits}: MovieOverviewCreditsProps) => {
     const {slug: movieSlug} = movie;
 
-    // --- AVATARS ---
-    const mainActorAvatars = credits.filter(
-        (credit): credit is Extract<MovieCreditDetails, { department: "CAST" }> =>
-            credit.department === "CAST" && credit.isPrimary
-    ).map(credit => <ActorCreditAvatar credit={credit} key={credit._id}/>);
-
-    // --- Link Configs ---
     const {directors: directorLinks, writers: writerLinks} = generateMovieCreditLinkConfigs({
         sourceComponent: MovieOverviewCredits.name,
         credits,
     });
 
     return (
-        <section className="space-y-4">
-            <SectionHeader className={SectionHeaderCSS}>
+        <section className="space-y-6">
+            <SectionHeaderLink to={`/browse/movies/${movieSlug}/credits`}>
                 Cast & Crew
-            </SectionHeader>
+            </SectionHeaderLink>
 
-            <ScrollArea className={cn(RoundedBorderCSS, "p-3")}>
-                <div className="flex justify-start items-center space-x-5">
-                    {mainActorAvatars}
-                </div>
-
-                <ScrollBar orientation="horizontal"/>
-            </ScrollArea>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 2xl:grid-cols-3 gap-2">
+                {
+                    credits.filter(
+                        (credit): credit is Extract<MovieCreditDetails, { department: "CAST" }> =>
+                            credit.department === "CAST" && credit.isPrimary
+                    ).map(credit => <ActorCreditAvatar credit={credit} key={credit._id}/>)
+                }
+            </div>
 
             <div className="space-y-2">
-                {/* Directors */}
+                {/* DIRECTORS */}
+
                 <LabeledGroup label="Directors">
-                    {
-                        directorLinks.length > 0
-                            ? <LinkGroup links={directorLinks}/>
-                            : <NoneSpan/>
+                    {directorLinks.length > 0
+                        ? <LinkGroup links={directorLinks}/>
+                        : <NoneSpan/>
                     }
                 </LabeledGroup>
 
                 <Separator/>
 
-                {/* Writers */}
+                {/* WRITERS */}
+
                 <LabeledGroup label="Writers">
-                    {
-                        writerLinks.length > 0
-                            ? <LinkGroup links={writerLinks}/>
-                            : <NoneSpan/>
+                    {writerLinks.length > 0
+                        ? <LinkGroup links={writerLinks}/>
+                        : <NoneSpan/>
                     }
                 </LabeledGroup>
 
                 <Separator/>
 
-                {/* Full Cast & Crew */}
+                {/* FULL CAST & CREW */}
+
                 <LoggedHoverLink
                     to={`/browse/movies/${movieSlug}/credits`}
                     className="flex justify-between items-center"
