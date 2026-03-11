@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import MovieCreditOptions from "@/pages/moviecredit/components/MovieCreditOptions.tsx";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import simplifyMovieCreditDetails from "@/pages/moviecredit/utility/simplifyMovieCreditDetails.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";

@@ -4,7 +4,7 @@
  */
 
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import getInitials from "@/common/utility/formatters/getInitials.ts";
 import {cn} from "@/common/lib/utils.ts";
 import mapCreditToPersonLinkConfig from "@/pages/moviecredit/utility/mapCreditToPersonLinkConfig.ts";

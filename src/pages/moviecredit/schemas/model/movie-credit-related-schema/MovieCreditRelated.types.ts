@@ -4,7 +4,7 @@ import {
     MovieCreditDetailsArraySchema,
     PaginatedMovieCreditDetailsSchema,
     PaginatedMovieCreditSchema
-} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
+} from "@/pages/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.schema.ts";
 
 /**
  * Type representing an array of movie credits.

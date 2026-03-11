@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {
     MovieCreditDetailsExceptPersonGroupedByRoleArray
-} from "@/pages/moviecredit/schemas/model/MovieCreditGroup.types.ts";
+} from "@/pages/moviecredit/schemas/model/movie-credit-grouped-schema/MovieCreditGroup.types.ts";
 import PersonDetailsCreditList
     from "@/pages/persons/components/admin/person-details/credit-overview/PersonDetailsCreditList.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";

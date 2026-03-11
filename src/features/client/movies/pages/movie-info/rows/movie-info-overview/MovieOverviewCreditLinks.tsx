@@ -4,7 +4,7 @@
  * MovieOverviewCreditLinks.tsx
  */
 
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import generateMovieCreditLinkConfigs from "@/pages/moviecredit/utility/generateMovieCreditLinkConfigs.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";

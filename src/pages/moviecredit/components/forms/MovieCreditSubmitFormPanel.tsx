@@ -7,7 +7,7 @@
  */
 
 import {ReactNode, useState} from 'react';
-import {MovieCredit, MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCredit, MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import MovieCreditSubmitFormContainer from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormContainer.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";

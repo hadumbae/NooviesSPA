@@ -1,4 +1,4 @@
-import {MovieCreditDetailsExceptPersonSchema} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
+import {MovieCreditDetailsExceptPersonSchema} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.schema.ts";
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {RoleTypeDepartmentEnumSchema} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";

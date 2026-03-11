@@ -7,7 +7,7 @@
 
 import useMovieCreditSubmitForm from "@/pages/moviecredit/hooks/forms/useMovieCreditSubmitForm.ts";
 import useMovieCreditSubmitMutation from "@/pages/moviecredit/hooks/mutations/useMovieCreditSubmitMutation.ts";
-import {MovieCredit, MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCredit, MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {MovieQueryFilters} from "@/pages/movies/schema/queries/MovieQueryOption.types.ts";
 import {MovieCreditForm, MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import {Loader} from "lucide-react";

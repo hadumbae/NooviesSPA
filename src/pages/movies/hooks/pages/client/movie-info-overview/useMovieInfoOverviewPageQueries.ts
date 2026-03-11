@@ -7,7 +7,7 @@ import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlu
 import {useFetchMovieCredits} from "@/pages/moviecredit/hooks/queries/useFetchMovieCredits.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
-import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
+import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.schema.ts";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {useFetchReviewDetailsByMovie} from "@/pages/movies/fetch/movie-reviews/useFetchReviewDetailsByMovie.ts";
 import {ReviewDetailsByMovieSchema} from "@/pages/review/schemas/models/ReviewDetailsByMovieSchema.ts";

@@ -3,7 +3,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {ParamError} from "@/common/errors/ParamError.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {Link} from "react-router-dom";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 
 interface DetailsProp {
     credit: MovieCreditDetails;

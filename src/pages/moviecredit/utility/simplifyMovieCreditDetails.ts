@@ -1,5 +1,5 @@
-import { MovieCredit, MovieCreditDetails } from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
-import { MovieCreditSchema } from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
+import { MovieCredit, MovieCreditDetails } from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
+import { MovieCreditSchema } from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.schema.ts";
 import { ParseError } from "@/common/errors/ParseError.ts";
 
 /**

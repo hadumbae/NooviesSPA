@@ -9,7 +9,7 @@ import MovieOverviewHeadline
     from "@/features/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewHeadline.tsx";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import PosterImage from "@/pages/movies/components/images/PosterImage.tsx";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import MovieOverviewMeta
     from "@/features/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewMeta.tsx";
 import MovieOverviewCreditLinks

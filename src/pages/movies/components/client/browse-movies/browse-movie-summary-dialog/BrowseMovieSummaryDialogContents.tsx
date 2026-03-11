@@ -15,7 +15,7 @@ import {
 import BrowseMovieMetaRow
     from "@/pages/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import BrowseMovieCreditSummaryLinkList
     from "@/pages/moviecredit/components/clients/browse-movie-clients/BrowseMovieCreditSummaryLinkList.tsx";

@@ -3,7 +3,7 @@ import {
     MovieCreditDetailsExceptPersonSchema,
     MovieCreditDetailsSchema,
     MovieCreditSchema,
-} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
+} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.schema.ts";
 
 /**
  * Type representing a movie credit (cast or crew).

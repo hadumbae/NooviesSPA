@@ -1,5 +1,5 @@
 import {FC, ReactNode} from 'react';
-import {MovieCredit, MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCredit, MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Ellipsis} from "lucide-react";

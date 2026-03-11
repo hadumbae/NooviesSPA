@@ -8,8 +8,8 @@
 import {ReactNode, useState} from "react";
 import {Dialog, DialogTrigger} from "@/common/components/ui/dialog.tsx";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
-import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.schema.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import BrowseMovieSummaryDialogContents
     from "@/pages/movies/components/client/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialogContents.tsx";
 import MovieCreditDataLoader

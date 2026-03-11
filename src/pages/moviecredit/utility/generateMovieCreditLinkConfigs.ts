@@ -4,7 +4,7 @@
  * Generates grouped {@link LinkConfig} objects from movie credit data,
  * categorized by role and enriched with structured logging context.
  */
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
 import mapCreditToPersonLinkConfig from "@/pages/moviecredit/utility/mapCreditToPersonLinkConfig.ts";
 

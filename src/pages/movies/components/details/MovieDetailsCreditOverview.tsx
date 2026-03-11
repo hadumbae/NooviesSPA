@@ -23,14 +23,14 @@
  */
 
 import {FC} from 'react';
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
 import getInitials from "@/common/utility/formatters/getInitials.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
-import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.types.ts";
+import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 /**

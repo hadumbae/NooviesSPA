@@ -24,8 +24,8 @@ import {useFetchMovieCredits} from "@/pages/moviecredit/hooks/queries/useFetchMo
 import MovieDetailsCreditOverview from "@/pages/movies/components/details/MovieDetailsCreditOverview.tsx";
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.schema.ts";
-import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/MovieCreditExtended.types.ts";
+import {MovieCreditDetailsArraySchema} from "@/pages/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.schema.ts";
+import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.types.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**

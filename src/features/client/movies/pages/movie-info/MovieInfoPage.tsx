@@ -13,7 +13,7 @@ import MovieInfoPageContent
 import { QueryDefinition } from "@/common/type/query/loader/MultiQuery.types.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import { MovieDetails } from "@/pages/movies/schema/movie/Movie.types.ts";
-import { MovieCreditDetails } from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import { MovieCreditDetails } from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import { ReviewDetailsByMovie } from "@/pages/review/schemas/models/ReviewDetailsByMovieSchema.ts";
 import {
     useMovieInfoOverviewPageQueries

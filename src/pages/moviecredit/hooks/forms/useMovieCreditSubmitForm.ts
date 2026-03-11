@@ -1,6 +1,6 @@
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 
 import {MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import {MovieCreditFormSchema} from "@/pages/moviecredit/schemas/form/MovieCreditForm.schema.ts";

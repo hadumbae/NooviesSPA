@@ -7,7 +7,7 @@ import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/Posi
 import {MovieSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import {PersonSchema} from "@/pages/persons/schema/person/Person.schema.ts";
 import {RoleTypeSchema} from "@/pages/roletype/schema/model/RoleType.schema.ts";
-import {UndefinedForCrewSchema} from "@/pages/moviecredit/schemas/MovieCreditCrewSchema.ts";
+import {UndefinedForCrewSchema} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCreditCrewSchema.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**

@@ -1,7 +1,7 @@
 import {useRef} from "react";
 import {MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
-import {MovieCredit} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {isEqual} from "lodash";
 
 /**

@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {ParamError} from "@/common/errors/ParamError.ts";
 import BooleanFlagLabelSpan from "@/common/components/BooleanFlagLabelSpan.tsx";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import MoviePersonDetailsCardHeader
     from "@/pages/movies/components/admin/credits/cards/MoviePersonDetailsCardHeader.tsx";
 import LabelContent from "@/common/components/card-content/LabelContent.tsx";

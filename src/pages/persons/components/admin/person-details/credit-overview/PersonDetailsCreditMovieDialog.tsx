@@ -6,7 +6,7 @@ import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHo
 import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
-import {MovieCreditDetailsExceptPerson} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetailsExceptPerson} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import MoviePosterImage from "@/pages/movies/components/MoviePosterImage.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 

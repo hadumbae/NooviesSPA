@@ -14,7 +14,7 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {Person, PersonDetails} from "@/pages/persons/schema/person/Person.types.ts";
 import {
     MovieCreditDetailsExceptPersonGroupedByRoleArray
-} from "@/pages/moviecredit/schemas/model/MovieCreditGroup.types.ts";
+} from "@/pages/moviecredit/schemas/model/movie-credit-grouped-schema/MovieCreditGroup.types.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {PersonDetailsUIContext} from "@/pages/persons/context/PersonDetailsUIContext.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";

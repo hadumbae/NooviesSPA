@@ -19,7 +19,7 @@ import PersonDetailsUIProvider from "@/pages/persons/providers/PersonDetailsUIPr
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {
     MovieCreditDetailsExceptPersonByRoleArraySchema
-} from "@/pages/moviecredit/schemas/model/MovieCreditGroup.schema.ts";
+} from "@/pages/moviecredit/schemas/model/movie-credit-grouped-schema/MovieCreditGroup.schema.ts";
 import PersonDetailsPageContent from "@/pages/persons/pages/details/PersonDetailsPageContent.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";

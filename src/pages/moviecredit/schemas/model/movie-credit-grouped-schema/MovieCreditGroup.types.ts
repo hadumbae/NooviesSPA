@@ -2,7 +2,7 @@ import {z} from "zod";
 import {
     MovieCreditDetailsExceptPersonByRoleArraySchema,
     MovieCreditDetailsExceptPersonByRoleSchema
-} from "@/pages/moviecredit/schemas/model/MovieCreditGroup.schema.ts";
+} from "@/pages/moviecredit/schemas/model/movie-credit-grouped-schema/MovieCreditGroup.schema.ts";
 
 /**
  * Type representing a single group of a person's movie credits, organized by role type.

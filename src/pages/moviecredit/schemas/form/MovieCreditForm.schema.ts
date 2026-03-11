@@ -4,7 +4,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEm
 import {
     PositiveNumberSchema
 } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {UndefinedForCrewSchema} from "@/pages/moviecredit/schemas/MovieCreditCrewSchema.ts";
+import {UndefinedForCrewSchema} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCreditCrewSchema.ts";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";

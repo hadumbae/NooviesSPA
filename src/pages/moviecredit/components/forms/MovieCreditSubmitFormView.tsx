@@ -21,7 +21,7 @@ import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {
     MovieCreditForm,
     MovieCreditFormCastValues,

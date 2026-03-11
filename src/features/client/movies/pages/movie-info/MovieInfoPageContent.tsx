@@ -8,7 +8,7 @@ import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MovieOverviewHeader
     from "@/features/client/movies/pages/movie-info/rows/MovieOverviewHeader.tsx";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import MovieOverviewEditorialInfo
     from "@/features/client/movies/pages/movie-info/rows/MovieOverviewEditorialInfo.tsx";
 import MovieOverviewCredits

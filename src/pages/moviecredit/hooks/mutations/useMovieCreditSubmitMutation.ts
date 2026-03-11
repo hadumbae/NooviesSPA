@@ -7,13 +7,13 @@
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import MovieCreditRepository from "@/pages/moviecredit/repositories/MovieCreditRepository.ts";
 import {toast} from "react-toastify";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/MovieCredit.types.ts";
+import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {MovieCreditForm, MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import {UseFormReturn} from "react-hook-form";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import {MovieCreditDetailsSchema} from "@/pages/moviecredit/schemas/model/MovieCredit.schema.ts";
+import {MovieCreditDetailsSchema} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.schema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {MovieCreditQueryKeys} from "@/pages/moviecredit/utility/query/MovieCreditQueryKeys.ts";
