@@ -1,13 +1,15 @@
-import {MovieCreditDetailsExceptPersonSchema} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.schema.ts";
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {RoleTypeDepartmentEnumSchema} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {
+    CreditExceptPersonSchema
+} from "@/pages/moviecredit/schemas/model/credit-except-schemas/CreditExceptPerson.schema.ts";
 
 /**
  * Schema representing a group of movie credits for a person, organized by role type.
  *
  * @remarks
- * - Each group contains a `roleName` and an array of {@link MovieCreditDetailsExceptPersonSchema}.
+ * - Each group contains a `roleName` and an array of {@link CreditExceptPersonSchema}.
  * - Useful for displaying all credits of a person grouped by their role types.
  *
  * @example
@@ -36,10 +38,10 @@ export const MovieCreditDetailsExceptPersonByRoleSchema = z.object({
 
     /**
      * Array of movie credits for this role.
-     * Each item is a {@link MovieCreditDetailsExceptPersonSchema},
+     * Each item is a {@link CreditExceptPersonSchema},
      * with `movie` and `roleType` populated, but `person` as ID.
      */
-    credits: z.array(MovieCreditDetailsExceptPersonSchema, {
+    credits: z.array(CreditExceptPersonSchema, {
         required_error: "Required.",
         invalid_type_error: "Movie Credits with populated movies and role types required.",
     }),

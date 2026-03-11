@@ -1,35 +1,20 @@
-import { z } from "zod";
+/**
+ * @file Inferred types for cast and crew movie credit schemas.
+ * @filename MovieCredit.types.ts
+ */
+
+import {z} from "zod";
 import {
-    MovieCreditDetailsExceptPersonSchema,
-    MovieCreditDetailsSchema,
+    MovieCreditCastSchema,
+    MovieCreditCrewSchema,
     MovieCreditSchema,
 } from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.schema.ts";
 
-/**
- * Type representing a movie credit (cast or crew).
- *
- * @remarks
- * - Inferred from {@link MovieCreditSchema}.
- * - Includes both cast-specific and crew-specific fields.
- * - Use for validating or typing raw movie credit objects from the database or API.
- */
+/** Crew movie credit type. */
+export type CrewMovieCredit = z.infer<typeof MovieCreditCrewSchema>;
+
+/** Cast movie credit type. */
+export type CastMovieCredit = z.infer<typeof MovieCreditCastSchema>;
+
+/** Union type for movie credits. */
 export type MovieCredit = z.infer<typeof MovieCreditSchema>;
-
-/**
- * Type representing a movie credit with fully populated details.
- *
- * @remarks
- * - Inferred from {@link MovieCreditDetailsSchema}.
- * - `movie`, `person`, and `roleType` fields are full objects, not just IDs.
- * - Useful when returning enriched API responses or performing operations requiring full related objects.
- */
-export type MovieCreditDetails = z.infer<typeof MovieCreditDetailsSchema>;
-
-/**
- * Type representing a movie credit with populated `movie` and `roleType`, but `person` as ID only.
- *
- * @remarks
- * - Inferred from {@link MovieCreditDetailsExceptPersonSchema}.
- * - Useful when you want most related details but want to avoid embedding full person objects.
- */
-export type MovieCreditDetailsExceptPerson = z.infer<typeof MovieCreditDetailsExceptPersonSchema>;

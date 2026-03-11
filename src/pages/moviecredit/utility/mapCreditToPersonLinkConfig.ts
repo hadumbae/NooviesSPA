@@ -7,8 +7,10 @@
  * Additional contextual metadata is attached for logging and analytics.
  */
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
+import {
+    MovieCreditDetails
+} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 /**
  * Parameters for {@link mapCreditToPersonLinkConfig}.

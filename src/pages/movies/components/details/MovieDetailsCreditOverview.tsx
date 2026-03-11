@@ -23,7 +23,6 @@
  */
 
 import {FC} from 'react';
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
@@ -32,6 +31,9 @@ import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHo
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
 import {MovieCreditDetailsArray} from "@/pages/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import {
+    MovieCreditDetails
+} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 /**
  * Props for {@link MovieDetailsCreditOverview}.

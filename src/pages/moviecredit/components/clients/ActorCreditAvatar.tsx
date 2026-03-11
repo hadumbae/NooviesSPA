@@ -4,12 +4,14 @@
  */
 
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import getInitials from "@/common/utility/formatters/getInitials.ts";
 import {cn} from "@/common/lib/utils.ts";
 import mapCreditToPersonLinkConfig from "@/pages/moviecredit/utility/mapCreditToPersonLinkConfig.ts";
 import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {
+    MovieCreditDetails
+} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 /**
  * Component props.

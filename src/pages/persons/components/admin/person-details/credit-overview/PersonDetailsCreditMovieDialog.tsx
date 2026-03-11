@@ -6,9 +6,11 @@ import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHo
 import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
-import {MovieCreditDetailsExceptPerson} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import MoviePosterImage from "@/pages/movies/components/MoviePosterImage.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import {
+    CreditExceptPerson
+} from "@/pages/moviecredit/schemas/model/credit-except-schemas/CreditExceptPerson.types.ts";
 
 type MovieDialogProps = {
     /** The trigger content to open the dialog, e.g., an icon or button. */
@@ -21,7 +23,7 @@ type MovieDialogProps = {
     movie: Movie | MovieDetails;
 
     /** The specific credit of the person in the movie. */
-    credit: MovieCreditDetailsExceptPerson;
+    credit: CreditExceptPerson;
 }
 
 /**

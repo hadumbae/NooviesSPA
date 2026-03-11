@@ -1,5 +1,5 @@
 import {FC, ReactNode} from 'react';
-import {MovieCredit, MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Ellipsis} from "lucide-react";
@@ -7,6 +7,9 @@ import MovieCreditSubmitFormPanel from "@/pages/moviecredit/components/forms/Mov
 import {MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import {EntityOptionProps} from "@/common/type/components/EntityOptionProps.ts";
 import MovieCreditDeleteWarningDialog from "@/pages/moviecredit/components/dialog/MovieCreditDeleteWarningDialog.tsx";
+import {
+    MovieCreditDetails
+} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 /**
  * Props for `MovieCreditOptions` component.

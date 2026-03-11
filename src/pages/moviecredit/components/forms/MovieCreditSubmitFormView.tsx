@@ -21,7 +21,6 @@ import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 
 import {Person} from "@/pages/persons/schema/person/Person.types.ts";
 import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {
     MovieCreditForm,
     MovieCreditFormCastValues,
@@ -32,6 +31,9 @@ import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbo
 import {RoleType} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
 import {PrimaryButtonCSS, SecondaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
+import {
+    MovieCreditDetails
+} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 interface ViewProps {
     /** React Hook Form controller */

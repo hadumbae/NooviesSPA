@@ -5,12 +5,14 @@
  * and primary actors.
  */
 
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
 import generateMovieCreditLinkConfigs from "@/pages/moviecredit/utility/generateMovieCreditLinkConfigs.ts";
 import {cn} from "@/common/lib/utils.ts";
+import {
+    MovieCreditDetails
+} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 /**
  * Props for {@link BrowseMovieCreditSummaryLinkList}.

@@ -7,8 +7,10 @@ import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.t
 import MovieDetailsPersonListPreviewCard
     from "@/pages/movies/components/admin/credits/cards/MovieDetailsPersonListPreviewCard.tsx";
 
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {
+    MovieCreditDetails
+} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 interface CreditProps {
     movieID: ObjectId;

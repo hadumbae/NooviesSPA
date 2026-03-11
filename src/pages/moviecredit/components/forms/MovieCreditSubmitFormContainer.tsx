@@ -7,7 +7,7 @@
 
 import useMovieCreditSubmitForm from "@/pages/moviecredit/hooks/forms/useMovieCreditSubmitForm.ts";
 import useMovieCreditSubmitMutation from "@/pages/moviecredit/hooks/mutations/useMovieCreditSubmitMutation.ts";
-import {MovieCredit, MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
+import {MovieCredit} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {MovieQueryFilters} from "@/pages/movies/schema/queries/MovieQueryOption.types.ts";
 import {MovieCreditForm, MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
 import {Loader} from "lucide-react";
@@ -23,6 +23,9 @@ import {RoleTypeQueryFilters} from "@/pages/roletype/schema/query-options/RoleTy
 import {RoleTypeArray} from "@/pages/roletype/schema/model/RoleType.types.ts";
 import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import useMovieCreditFormDataQueries from "@/pages/moviecredit/hooks/forms/useMovieCreditFormDataQueries.ts";
+import {
+    MovieCreditDetails
+} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 type ContainerProps = FormContainerProps<MovieCreditDetails, MovieCredit, MovieCreditFormValues> & {
     /** Optional filters for movie lookup */

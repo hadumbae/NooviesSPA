@@ -2,11 +2,13 @@ import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {ParamError} from "@/common/errors/ParamError.ts";
 import BooleanFlagLabelSpan from "@/common/components/BooleanFlagLabelSpan.tsx";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import MoviePersonDetailsCardHeader
     from "@/pages/movies/components/admin/credits/cards/MoviePersonDetailsCardHeader.tsx";
 import LabelContent from "@/common/components/card-content/LabelContent.tsx";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
+import {
+    MovieCreditDetails
+} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 interface DetailsProp {
     credit: MovieCreditDetails;

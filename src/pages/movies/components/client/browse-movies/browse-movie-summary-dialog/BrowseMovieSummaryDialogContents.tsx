@@ -15,7 +15,6 @@ import {
 import BrowseMovieMetaRow
     from "@/pages/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import {MovieCreditDetails} from "@/pages/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
 import BrowseMovieCreditSummaryLinkList
     from "@/pages/moviecredit/components/clients/browse-movie-clients/BrowseMovieCreditSummaryLinkList.tsx";
@@ -23,6 +22,9 @@ import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.ts
 import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
+import {
+    MovieCreditDetails
+} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 /**
  * Props for {@link BrowseMovieSummaryDialogContents}.
