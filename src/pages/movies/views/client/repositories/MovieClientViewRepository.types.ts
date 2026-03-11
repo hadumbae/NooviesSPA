@@ -3,14 +3,14 @@
  * @filename MovieClientViewRepository.types.ts
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 
 /**
  * Parameters for requesting movie credit view data.
  */
 type GetCreditsForMovieViewParams = {
     /** Movie identifier used for API routing */
-    movieID: ObjectId;
+    slug: SlugString;
 }
 
 export type {

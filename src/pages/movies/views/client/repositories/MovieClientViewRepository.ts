@@ -14,11 +14,11 @@ const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/views/${import.meta.env.
  * Fetches grouped credits for a movie view.
  */
 const getCreditsForMovieView = (
-    {movieID}: GetCreditsForMovieViewParams
+    {slug}: GetCreditsForMovieViewParams
 ): Promise<RequestReturns> => {
     const url = buildQueryURL({
         baseURL,
-        path: `${movieID}/credits`
+        path: `${slug}/credits`
     });
 
     return useFetchAPI({url, method: "GET"});

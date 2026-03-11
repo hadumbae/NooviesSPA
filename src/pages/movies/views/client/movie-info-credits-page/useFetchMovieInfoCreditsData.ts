@@ -3,20 +3,20 @@
  * @filename useFetchMovieInfoCreditsData.ts
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {getCreditsForMovieView} from "@/pages/movies/views/client/repositories/MovieClientViewRepository.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 
 /**
  * Parameters for fetching movie credits view data.
  */
 type FetchParams = {
     /** Movie identifier used for query scoping */
-    movieID: ObjectId;
+    slug: SlugString;
 
     /** Optional React Query configuration */
     options?: UseQueryOptions<unknown>;
@@ -26,15 +26,15 @@ type FetchParams = {
  * Fetches grouped movie credits for the movie info view.
  */
 export function useFetchMovieInfoCreditsData(
-    {movieID, options}: FetchParams,
+    {slug, options}: FetchParams,
 ): UseQueryResult<unknown, HttpResponseError> {
     const fetchData = useQueryFnHandler({
-        action: () => getCreditsForMovieView({movieID}),
+        action: () => getCreditsForMovieView({slug: slug}),
         errorMessage: "Failed to fetch credits."
     });
 
     return useQuery({
-        queryKey: ["movies", "views", "client", "credits", {movieID}],
+        queryKey: ["movies", "views", "client", "credits", {slug: slug}],
         queryFn: fetchData,
         ...useQueryOptionDefaults(options),
     });
