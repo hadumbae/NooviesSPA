@@ -6,12 +6,12 @@
 import {z} from "zod";
 import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
-import {RoleTypeCrewCategoryEnumSchema} from "@/pages/roletype/schema/enums/RoleTypeCategory.enum.ts";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {
-    CastCreditExceptMovieSchema,
-    CrewCreditExceptMovieSchema
+    CastCreditExceptMovieSchema
 } from "@/pages/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.schema.ts";
+import {
+    GroupedCrewCreditsExceptMovieSchema
+} from "@/pages/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.schema.ts";
 
 /**
  * View schema combining movie details with grouped cast and crew credits.
@@ -20,11 +20,7 @@ export const MovieInfoCreditViewSchema = z.object({
     movie: MovieDetailsSchema,
     creditDetails: z.object({
         castCredits: generateArraySchema(CastCreditExceptMovieSchema),
-        crewCredits: generateArraySchema(z.object({
-            category: RoleTypeCrewCategoryEnumSchema,
-            totalCredits: NonNegativeNumberSchema,
-            credits: generateArraySchema(CrewCreditExceptMovieSchema),
-        })),
+        crewCredits: generateArraySchema(GroupedCrewCreditsExceptMovieSchema),
     }),
 });
 
