@@ -18,7 +18,7 @@ import {
  */
 export const MovieInfoCreditViewSchema = z.object({
     movie: MovieDetailsSchema,
-    movieCredits: z.object({
+    creditDetails: z.object({
         castCredits: generateArraySchema(CastCreditExceptMovieSchema),
         crewCredits: generateArraySchema(z.object({
             category: RoleTypeCrewCategoryEnumSchema,
