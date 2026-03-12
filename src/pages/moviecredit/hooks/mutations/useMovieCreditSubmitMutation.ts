@@ -49,10 +49,15 @@ export default function useMovieCreditSubmitMutation(
     const invalidateQueries = useInvalidateQueryKeys();
 
     const submitMovieCreditData = async (values: MovieCreditForm) => {
+        const submitData = {
+            data: values,
+            config: {populate: true, virtuals: true},
+        }
+
         const action =
             editID
-                ? () => MovieCreditRepository.update({_id: editID, data: values})
-                : () => MovieCreditRepository.create({data: values});
+                ? () => MovieCreditRepository.update({_id: editID, ...submitData})
+                : () => MovieCreditRepository.create(submitData);
 
         const result = await handleMutationResponse({
             action,
