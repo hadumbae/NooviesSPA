@@ -1,32 +1,39 @@
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlug.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
 import MovieInfoCreditsPageContent
     from "@/features/client/movies/pages/movie-info-credits/MovieInfoCreditsPageContent.tsx";
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {
+    useFetchMovieInfoCreditsData
+} from "@/pages/movies/views/client/movie-info-credits-page/useFetchMovieInfoCreditsData.ts";
+import {
+    MovieInfoCreditViewData,
+    MovieInfoCreditViewSchema
+} from "@/pages/movies/views/client/movie-info-credits-page/MovieInfoCreditViewSchema.ts";
 
 const MovieInfoCreditsPage = () => {
-    const {slug} = useFetchByIdentifierRouteParams({
+    const routeParams = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/browse/movies",
         errorMessage: "Failed to identify movie. Please try again.",
-    }) ?? {};
+    });
 
-    if (!slug) {
+    if (!routeParams) {
         return <PageLoader/>;
     }
 
-    const query = useFetchMovieBySlug({
-        slug,
-        config: {virtuals: true, populate: true},
-    });
+    const query = useFetchMovieInfoCreditsData({slug: routeParams.slug});
 
     return (
-        <ValidatedDataLoader query={query} schema={MovieDetailsSchema}>
-            {(movie: MovieDetails) => <MovieInfoCreditsPageContent movie={movie}/>}
+        <ValidatedDataLoader query={query} schema={MovieInfoCreditViewSchema}>
+            {({movie, creditDetails: {castCredits, crewCredits}}: MovieInfoCreditViewData) => (
+                <MovieInfoCreditsPageContent
+                    movie={movie}
+                    castCredits={castCredits}
+                    crewCredits={crewCredits}
+                />
+            )}
         </ValidatedDataLoader>
     );
 };
