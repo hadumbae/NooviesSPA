@@ -1,14 +1,17 @@
 /**
- * @file Display order for movie credit categories.
+ * @file Defines the canonical UI display order for movie credit categories.
  * @filename CreditCategoryDisplayOrderConstant.ts
  */
 
-import {RoleTypeCategory} from "@/pages/roletype/schema/enums/RoleTypeCategory.types.ts";
+import { RoleTypeCategory } from "@/pages/roletype/schema/enums/RoleTypeCategory.types.ts";
 
 /**
- * Ordered list of credit categories used for UI display.
+ * Canonical ordering used when rendering grouped credit sections in the UI.
+ *
+ * Includes the synthetic `"Cast"` category which is not part of
+ * {@link RoleTypeCategory} but is displayed alongside crew categories.
  */
-const orderConstant: (RoleTypeCategory | "Cast")[] = [
+const CreditCategoryDisplayOrderConstant: readonly (RoleTypeCategory | "Cast")[] = [
     "Writer",
     "Director",
     "Cast",
@@ -30,6 +33,9 @@ const orderConstant: (RoleTypeCategory | "Cast")[] = [
     "Other",
 ] as const;
 
-export {
-    orderConstant as CreditCategoryDisplayOrderConstant
-}
+/**
+ * Union type representing all categories that can appear in the
+ * credit display ordering.
+ */
+export type CreditDisplayOrderCategory =
+    typeof CreditCategoryDisplayOrderConstant[number];
