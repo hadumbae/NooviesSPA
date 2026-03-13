@@ -10,7 +10,7 @@ import useFetchGenres from "@/domains/genres/hooks/fetch-data/useFetchGenres.ts"
 import {GenreArraySchema} from "@/domains/genres/schema/genre/Genre.schema.ts";
 import {Genre} from "@/domains/genres/schema/genre/Genre.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import GenreImageListCard from "@/domains/genres/components/client/browse-genre/GenreImageListCard.tsx";
+import GenreImageListCard from "@/features/client/genres/components/browse-genre/GenreImageListCard.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";

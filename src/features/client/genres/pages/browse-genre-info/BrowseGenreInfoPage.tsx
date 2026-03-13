@@ -5,7 +5,7 @@ import useFetchGenreBySlug from "@/domains/genres/hooks/fetch-data/useFetchGenre
 import {GenreDetailsSchema} from "@/domains/genres/schema/genre/Genre.schema.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
-import BrowseGenreInfoPageContent from "@/domains/genres/pages/client/browse-genre-info/BrowseGenreInfoPageContent.tsx";
+import BrowseGenreInfoPageContent from "@/features/client/genres/pages/browse-genre-info/BrowseGenreInfoPageContent.tsx";
 
 /**
  * Client-facing page for displaying detailed information about a genre.

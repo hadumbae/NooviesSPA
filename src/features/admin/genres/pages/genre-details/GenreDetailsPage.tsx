@@ -23,9 +23,9 @@ import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamS
 import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
 import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import GenreDetailsUIContextProvider
-    from "@/domains/genres/components/admin/genre-details/GenreDetailsUIContextProvider.tsx";
+    from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContextProvider.tsx";
 import GenreDetailsPageContent
-    from "@/domains/genres/pages/genre-index-page/GenreDetailsPageContent.tsx";
+    from "@/features/admin/genres/pages/genre-details/GenreDetailsPageContent.tsx";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import useGenreDetailsPageQueries from "@/domains/genres/hooks/pages/details-page/useGenreDetailsPageQueries.ts";
 

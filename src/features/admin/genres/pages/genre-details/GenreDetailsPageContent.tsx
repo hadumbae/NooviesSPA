@@ -15,7 +15,7 @@
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 
-import {GenreDetailsUIContext} from "@/domains/genres/context/GenreDetailsUIContext.ts";
+import {GenreDetailsUIContext} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContext.ts";
 import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 
@@ -25,19 +25,19 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 
 import GenreDetailsBreadcrumbs
-    from "@/domains/genres/components/pages/genre-details/GenreDetailsBreadcrumbs.tsx";
+    from "@/features/admin/genres/pages/genre-details/header/GenreDetailsBreadcrumbs.tsx";
 import GenreDetailsHeader
-    from "@/domains/genres/components/pages/genre-details/GenreDetailsHeader.tsx";
+    from "@/features/admin/genres/pages/genre-details/header/GenreDetailsHeader.tsx";
 import GenreDetailsCard
-    from "@/domains/genres/components/pages/genre-details/GenreDetailsCard.tsx";
+    from "@/features/admin/genres/pages/genre-details/display/GenreDetailsCard.tsx";
 
 import MovieIndexCard
     from "@/domains/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
 
 import GenreSubmitFormPanel
-    from "@/domains/genres/components/form/GenreSubmitFormPanel.tsx";
+    from "@/features/admin/genres/components/form/submit-form/GenreSubmitFormPanel.tsx";
 import GenreDeleteWarningDialog
-    from "@/domains/genres/components/dialog/GenreDeleteWarningDialog.tsx";
+    from "@/features/admin/genres/components/dialog/GenreDeleteWarningDialog.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**

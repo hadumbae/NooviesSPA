@@ -6,7 +6,7 @@ import {PaginatedGenreDetails} from "@/domains/genres/schema/genre/Genre.types.t
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";
-import GenreIndexPageContent from "@/domains/genres/pages/genre-index-page/GenreIndexPageContent.tsx";
+import GenreIndexPageContent from "@/features/admin/genres/pages/genre-index-page/GenreIndexPageContent.tsx";
 import useFetchPaginatedGenres from "@/domains/genres/hooks/fetch-data/useFetchPaginatedGenres.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 

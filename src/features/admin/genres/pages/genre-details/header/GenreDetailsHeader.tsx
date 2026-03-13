@@ -3,7 +3,7 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {Genre} from "@/domains/genres/schema/genre/Genre.types.ts";
-import GenreDetailsOptions from "@/domains/genres/components/admin/genre-details/GenreDetailsOptions.tsx";
+import GenreDetailsUIToggles from "@/features/admin/genres/pages/genre-details/display/GenreDetailsUIToggles.tsx";
 import {Ellipsis} from "lucide-react";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 
@@ -42,11 +42,11 @@ const GenreDetailsHeader: FC<HeaderProps> = ({genre}) => {
             </section>
 
             <section>
-                <GenreDetailsOptions>
+                <GenreDetailsUIToggles>
                     <IconButton>
                         <Ellipsis/>
                     </IconButton>
-                </GenreDetailsOptions>
+                </GenreDetailsUIToggles>
             </section>
         </header>
     );

@@ -4,7 +4,7 @@ import useGenreQueryOptionForm from "@/domains/genres/hooks/use-query-options/us
 import useGenreQueryOptionSearchParams
     from "@/domains/genres/hooks/use-query-options/useGenreQueryOptionSearchParams.ts";
 import {GenreQueryOptionFormValues} from "@/domains/genres/schema/filters/GenreQueryOptionForm.types.ts";
-import GenreQueryOptionFormView from "@/domains/genres/components/admin/genre-query-options/GenreQueryOptionFormView.tsx";
+import GenreQueryOptionFormView from "@/features/admin/genres/components/form/genre-query-options/GenreQueryOptionFormView.tsx";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 
 /**

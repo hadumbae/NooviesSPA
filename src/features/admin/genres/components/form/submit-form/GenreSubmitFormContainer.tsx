@@ -21,7 +21,7 @@ import useGenreSubmitMutation from "@/domains/genres/hooks/submit-data/useGenreS
 
 import {GenreForm, GenreFormValues} from "@/domains/genres/schema/form/GenreForm.types.ts";
 import {Genre, GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
-import GenreSubmitFormView from "@/domains/genres/components/form/GenreSubmitFormView.tsx";
+import GenreSubmitFormView from "@/features/admin/genres/components/form/submit-form/GenreSubmitFormView.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 
 /**

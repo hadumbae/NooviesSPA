@@ -2,17 +2,17 @@ import {FC} from 'react';
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
 import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
-import GenreIndexCard from "@/domains/genres/components/cards/GenreIndexCard.tsx";
+import GenreIndexCard from "@/features/admin/genres/components/cards/GenreIndexCard.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import GenreIndexHeader from "@/domains/genres/components/headers/GenreIndexHeader.tsx";
+import GenreIndexHeader from "@/features/admin/genres/pages/genre-index-page/headers/GenreIndexHeader.tsx";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import GenreQueryOptionFormContainer
-    from "@/domains/genres/components/admin/genre-query-options/GenreQueryOptionFormContainer.tsx";
+    from "@/features/admin/genres/components/form/genre-query-options/GenreQueryOptionFormContainer.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 

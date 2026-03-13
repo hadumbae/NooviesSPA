@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, useState } from 'react';
-import { GenreDetailsUIContext, GenreDetailsUIStates } from "@/domains/genres/context/GenreDetailsUIContext.ts";
+import { GenreDetailsUIContext, GenreDetailsUIStates } from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContext.ts";
 
 /**
  * Provides UI state context for the Genre Details section.

@@ -9,7 +9,7 @@ import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import GenreInfoBanner from "@/domains/genres/components/client/browse-genre/GenreInfoBanner.tsx";
+import GenreInfoBanner from "@/features/client/genres/components/browse-genre/GenreInfoBanner.tsx";
 import PaginatedMovieDetailsDataLoader from "@/domains/movies/components/loaders/PaginatedMovieDetailsDataLoader.tsx";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import BrowseMovieOverviewCard
