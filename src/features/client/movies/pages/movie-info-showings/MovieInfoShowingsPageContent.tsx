@@ -30,7 +30,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import ShowingInfoCompactListCard from "@/domains/showings/components/client/showing-list/ShowingInfoCompactListCard.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import MovieInfoShowingHeader from "@/features/client/movies/pages/movie-showing-info/MovieInfoShowingHeader.tsx";
+import MovieInfoHeader from "@/features/client/movies/components/headers/MovieInfoHeader.tsx";
 
 /**
  * Props for {@link MovieInfoShowingsPageContent}.
@@ -70,7 +70,7 @@ type ContentProps = {
 const MovieInfoShowingsPageContent = (
     {page, perPage, movie, totalShowings, showings, setPage}: ContentProps
 ) => {
-    const {title, releaseDate, slug} = movie;
+    const {title, posterImage, slug} = movie;
 
     const {searchParams: presetValues} =
         useParsedSearchParams({schema: TheatreShowingQueryOptionSchema});
@@ -83,11 +83,12 @@ const MovieInfoShowingsPageContent = (
 
     return (
         <PageFlexWrapper className="space-y-6">
-            <MovieInfoShowingHeader
-                movieTitle={title}
+            <MovieInfoHeader
                 movieSlug={slug}
-                releaseDate={releaseDate}
-            />
+                movieTitle={title}
+                posterURL={posterImage?.secure_url}
+                pageText="Showings"
+                />
 
             <section>
                 <SectionHeader srOnly={true}>Theatre Options</SectionHeader>
