@@ -11,6 +11,9 @@ import {CreditExceptMovie} from "@/pages/moviecredit/schemas/model/credit-except
  * Props for {@link MovieCreditInfoList}.
  */
 type ListProps = {
+    /** Whether avatars should be hidden in list items */
+    hideAvatar?: boolean;
+
     /** Credits rendered in the list */
     credits: CreditExceptMovie[];
 
@@ -22,7 +25,7 @@ type ListProps = {
  * Renders a list of movie credits.
  */
 const MovieCreditInfoList = (
-    {credits, className}: ListProps
+    {credits, hideAvatar, className}: ListProps
 ) => {
     return (
         <ul className={cn(
@@ -34,8 +37,9 @@ const MovieCreditInfoList = (
                     <MovieCreditInfoListItem
                         key={credit._id}
                         credit={credit}
+                        hideAvatar={hideAvatar}
                         className={cn(
-                            index % 2 && "bg-gray-200"
+                            !(index % 2) && "bg-gray-100"
                         )}
                     />
                 ))
