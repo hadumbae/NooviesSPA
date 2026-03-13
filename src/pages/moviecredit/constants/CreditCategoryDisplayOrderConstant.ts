@@ -11,7 +11,7 @@ import { RoleTypeCategory } from "@/pages/roletype/schema/enums/RoleTypeCategory
  * Includes the synthetic `"Cast"` category which is not part of
  * {@link RoleTypeCategory} but is displayed alongside crew categories.
  */
-const CreditCategoryDisplayOrderConstant: readonly (RoleTypeCategory | "Cast")[] = [
+export const CreditCategoryDisplayOrderConstant: readonly (RoleTypeCategory | "Cast")[] = [
     "Writer",
     "Director",
     "Cast",
