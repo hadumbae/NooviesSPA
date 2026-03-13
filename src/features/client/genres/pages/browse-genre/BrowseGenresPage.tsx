@@ -6,7 +6,7 @@
  * clickable cards.
  */
 
-import useFetchGenres from "@/domains/genres/hooks/fetch-data/useFetchGenres.ts";
+import useFetchGenres from "@/domains/genres/fetch/useFetchGenres.ts";
 import {GenreArraySchema} from "@/domains/genres/schema/genre/Genre.schema.ts";
 import {Genre} from "@/domains/genres/schema/genre/Genre.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";

@@ -1,7 +1,7 @@
 import {FC, ReactNode} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
-import useGenreDeleteMutation from "@/domains/genres/hooks/delete-data/useGenreDeleteMutation.ts";
+import useGenreDeleteMutation from "@/domains/genres/mutations/useGenreDeleteMutation.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";

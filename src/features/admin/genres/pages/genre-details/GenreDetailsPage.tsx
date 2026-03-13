@@ -27,7 +27,7 @@ import GenreDetailsUIContextProvider
 import GenreDetailsPageContent
     from "@/features/admin/genres/pages/genre-details/GenreDetailsPageContent.tsx";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
-import useGenreDetailsPageQueries from "@/domains/genres/hooks/pages/details-page/useGenreDetailsPageQueries.ts";
+import useGenreDetailsPageQueries from "@/domains/genres/views/admin/details-page/useGenreDetailsPageQueries.ts";
 
 /**
  * Number of movies displayed per page.

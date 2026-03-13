@@ -16,8 +16,8 @@
 
 import {FC} from 'react';
 
-import useGenreSubmitForm from "@/domains/genres/hooks/submit-data/useGenreSubmitForm.ts";
-import useGenreSubmitMutation from "@/domains/genres/hooks/submit-data/useGenreSubmitMutation.ts";
+import useGenreSubmitForm from "@/domains/genres/forms/useGenreSubmitForm.ts";
+import useGenreSubmitMutation from "@/domains/genres/mutations/useGenreSubmitMutation.ts";
 
 import {GenreForm, GenreFormValues} from "@/domains/genres/schema/form/GenreForm.types.ts";
 import {Genre, GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
