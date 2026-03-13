@@ -17,21 +17,19 @@
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
-import {MovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import MovieInfoShowingsPageContent
     from "@/features/client/movies/pages/movie-info-showings/MovieInfoShowingsPageContent.tsx";
-import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
-import useFetchPaginatedShowings from "@/domains/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {
     TheatreShowingQueryOptionSchema
 } from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.schema.ts";
-import {PaginatedShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingRelated.schema.ts";
 import {PaginatedShowingDetails} from "@/domains/showings/schema/showing/ShowingRelated.types.ts";
+import {
+    useMovieInfoShowingsPageQueries
+} from "@/domains/movies/views/client/movie-info-showings-page/useMovieInfoShowingsPageQueries.ts";
 
 /** Default number of showings displayed per page. */
 const SHOWINGS_PER_PAGE = 20;
@@ -50,47 +48,25 @@ type QueryData = {
  * @returns Fully resolved movie showings page.
  */
 const MovieInfoShowingsPage = () => {
-    const {slug} = useFetchByIdentifierRouteParams({
+    const routeParams = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/browse/movies",
         errorMessage: "Failed to fetch movie. Please try again.",
-    }) ?? {};
+    });
 
-    if (!slug) {
+    if (!routeParams) {
         return <PageLoader />;
     }
 
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
-    const {searchParams} = useParsedSearchParams({
-        schema: TheatreShowingQueryOptionSchema
-    });
+    const {searchParams} = useParsedSearchParams({schema: TheatreShowingQueryOptionSchema});
 
-    const movieQuery = useFetchMovieBySlug({
-        slug,
-        config: {populate: true, virtuals: true},
+    const queries = useMovieInfoShowingsPageQueries({
+       movieSlug: routeParams.slug,
+       queryOptions: searchParams,
+       showingsPage: page,
+       showingsPerPage: SHOWINGS_PER_PAGE,
     });
-
-    const showingQuery = useFetchPaginatedShowings({
-        page,
-        perPage: SHOWINGS_PER_PAGE,
-        config: {populate: true, virtuals: true},
-        queries: {
-            ...searchParams,
-            movieSlug: slug,
-            status: "SCHEDULED",
-            isActive: true,
-            sortByStartTime: "desc",
-        },
-    });
-
-    const queries: QueryDefinition[] = [
-        {key: "movie", query: movieQuery, schema: MovieDetailsSchema},
-        {
-            key: "paginatedShowings",
-            query: showingQuery,
-            schema: PaginatedShowingDetailsSchema
-        },
-    ];
 
     return (
         <MultiQueryDataLoader queries={queries}>
