@@ -18,7 +18,7 @@ import MovieDetailsHeader from "@/domains/movies/components/headers/admin/MovieD
 import MovieDetailsCard from "@/domains/movies/components/details/MovieDetailsCard.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {RefetchFunction} from "@/common/type/query/RefetchFunction.ts";
-import MovieDetailsPageTabs from "@/features/admin/movies/details-page/tabs/MovieDetailsPageTabs.tsx";
+import MovieDetailsPageTabs from "@/features/admin/movies/pages/details-page/tabs/MovieDetailsPageTabs.tsx";
 
 /**
  * Props for {@link MovieDetailsPageContent}.

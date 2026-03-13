@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import {MovieSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
-import MovieEditPageContent from "@/features/admin/movies/edit-page/MovieEditPageContent.tsx";
+import MovieEditPageContent from "@/features/admin/movies/pages/edit-page/MovieEditPageContent.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";

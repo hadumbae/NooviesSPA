@@ -13,14 +13,14 @@
 import {ReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationDetails.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
-import SecondarySpan from "@/features/common/text/SecondarySpan.tsx";
+import SecondarySpan from "@/features/common/components/text/SecondarySpan.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import PrimarySpan from "@/features/common/text/PrimarySpan.tsx";
+import PrimarySpan from "@/features/common/components/text/PrimarySpan.tsx";
 
 type CardProps = {
     /** Reservation data rendered in compact card form */

@@ -4,7 +4,7 @@ import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/Movie.types.t
 import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 
 import useFetchPaginatedMovies from "@/domains/movies/hooks/queries/useFetchPaginatedMovies.ts";
-import MovieIndexPageContent from "@/features/admin/movies/edit-page/MovieIndexPageContent.tsx";
+import MovieIndexPageContent from "@/features/admin/movies/pages/edit-page/MovieIndexPageContent.tsx";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries/MovieQueryOption.schema.ts";

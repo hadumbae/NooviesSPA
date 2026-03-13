@@ -19,7 +19,7 @@ import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.s
 import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
-import MyFavouriteMovieCompactCard from "@/features/client/movies/card/favourites/MyFavouriteMovieCompactCard.tsx";
+import MyFavouriteMovieCompactCard from "@/features/client/movies/components/card/favourites/MyFavouriteMovieCompactCard.tsx";
 import {ChevronRight} from "lucide-react";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 

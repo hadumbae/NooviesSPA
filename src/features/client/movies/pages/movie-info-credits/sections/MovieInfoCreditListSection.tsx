@@ -8,7 +8,7 @@ import {
 } from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
 import { SectionHeaderCSS } from "@/common/constants/css/TextCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import MovieCreditInfoList from "@/features/client/movie-credits/lists/MovieCreditInfoList.tsx";
+import MovieCreditInfoList from "@/features/client/movie-credits/components/lists/MovieCreditInfoList.tsx";
 import {
     CreditDisplayOrderCategory
 } from "@/domains/moviecredit/constants/CreditCategoryDisplayOrderConstant.ts";

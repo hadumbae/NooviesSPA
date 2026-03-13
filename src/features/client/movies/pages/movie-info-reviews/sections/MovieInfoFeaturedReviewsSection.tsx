@@ -12,7 +12,7 @@ import {
     FeaturedReviewsByMovie,
     FeaturedReviewsByMovieSchema
 } from "@/domains/review/schemas/models/FeaturedReviewsByMovieSchema.ts";
-import MovieReviewDetailsCard from "@/features/client/movie-reviews/cards/review-card/MovieReviewDetailsCard.tsx";
+import MovieReviewDetailsCard from "@/features/client/movie-reviews/components/cards/review-card/MovieReviewDetailsCard.tsx";
 
 /**
  * Props for MovieInfoFeaturedReviewsSection.

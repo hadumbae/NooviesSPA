@@ -7,10 +7,10 @@ import {ReservationDetails} from "@/domains/reservation/schema/model/reservation
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import SecondarySpan from "@/features/common/text/SecondarySpan.tsx";
+import SecondarySpan from "@/features/common/components/text/SecondarySpan.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import PrimarySpan from "@/features/common/text/PrimarySpan.tsx";
+import PrimarySpan from "@/features/common/components/text/PrimarySpan.tsx";
 
 /**
  * Props for MyReservationInfoCard.

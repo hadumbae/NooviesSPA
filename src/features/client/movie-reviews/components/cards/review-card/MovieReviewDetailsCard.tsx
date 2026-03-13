@@ -5,15 +5,15 @@
 
 import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import DeleteMovieReviewButton from "@/features/client/movie-reviews/buttons/DeleteMovieReviewButton.tsx";
-import PrimarySpan from "@/features/common/text/PrimarySpan.tsx";
-import MovieReviewRatingStars from "@/features/client/movie-reviews/MovieReviewRatingStars.tsx";
-import SecondarySpan from "@/features/common/text/SecondarySpan.tsx";
+import DeleteMovieReviewButton from "@/features/client/movie-reviews/components/buttons/DeleteMovieReviewButton.tsx";
+import PrimarySpan from "@/features/common/components/text/PrimarySpan.tsx";
+import MovieReviewRatingStars from "@/features/client/movie-reviews/components/MovieReviewRatingStars.tsx";
+import SecondarySpan from "@/features/common/components/text/SecondarySpan.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import MovieReviewText from "@/features/client/movie-reviews/text/MovieReviewText.tsx";
-import MovieReviewHelpfulButton from "@/features/client/movie-reviews/buttons/MovieReviewHelpfulButton.tsx";
+import MovieReviewText from "@/features/client/movie-reviews/components/text/MovieReviewText.tsx";
+import MovieReviewHelpfulButton from "@/features/client/movie-reviews/components/buttons/MovieReviewHelpfulButton.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import IsRecommendedBadge from "@/features/client/movie-reviews/badges/IsRecommendedBadge.tsx";
+import IsRecommendedBadge from "@/features/client/movie-reviews/components/badges/IsRecommendedBadge.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 
 /**

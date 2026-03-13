@@ -6,7 +6,7 @@ import {MovieSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
-import MoviePeoplePageContent from "@/features/admin/movies/credits-page/MoviePeoplePageContent.tsx";
+import MoviePeoplePageContent from "@/features/admin/movies/pages/credits-page/MoviePeoplePageContent.tsx";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 

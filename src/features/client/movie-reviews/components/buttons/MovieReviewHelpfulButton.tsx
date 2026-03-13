@@ -5,7 +5,7 @@
 
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {ThumbsUp} from "lucide-react";
-import PrimarySpan from "@/features/common/text/PrimarySpan.tsx";
+import PrimarySpan from "@/features/common/components/text/PrimarySpan.tsx";
 import {cn} from "@/common/lib/utils.ts";
 
 /**

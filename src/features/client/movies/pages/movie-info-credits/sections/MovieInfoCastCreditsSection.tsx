@@ -10,7 +10,7 @@ import {
 import {
     organiseMovieCastCreditsByPrimacy
 } from "@/domains/movies/views/client/movie-info-credits-page/organiseMovieCastCreditsByPrimacy.ts";
-import MovieCreditInfoList from "@/features/client/movie-credits/lists/MovieCreditInfoList.tsx";
+import MovieCreditInfoList from "@/features/client/movie-credits/components/lists/MovieCreditInfoList.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";

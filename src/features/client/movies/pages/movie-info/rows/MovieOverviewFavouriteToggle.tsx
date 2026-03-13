@@ -13,7 +13,7 @@ import {
 } from "@/domains/users/schemas/favourites/IsFavouriteMovieSchema.ts";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import FavouriteMovieHeartButton from "@/features/client/movies/buttons/FavouriteMovieHeartButton.tsx";
+import FavouriteMovieHeartButton from "@/features/client/movies/components/buttons/FavouriteMovieHeartButton.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {useToggleUserFavouriteMovie} from "@/domains/users/mutations/useToggleUserFavouriteMovie.ts";
 

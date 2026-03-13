@@ -18,7 +18,7 @@ import {UseFormReturn} from "react-hook-form";
 import {ReserveTicketFormValues} from "@/domains/reservation/schema/forms/ReserveTicketFormValuesSchema.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import SeatMapDetailsLoader from "@/features/admin/seatmaps/loaders/SeatMapDetailsLoader.tsx";
+import SeatMapDetailsLoader from "@/features/admin/seatmaps/components/loaders/SeatMapDetailsLoader.tsx";
 import ReservationSeatMapInput from "@/features/client/reservations/components/seating-input/ReservationSeatMapInput.tsx";
 import {useEffect} from "react";
 

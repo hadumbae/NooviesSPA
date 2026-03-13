@@ -20,7 +20,7 @@ import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchP
 import {BrowseTheatreParamSchema} from "@/domains/theatres/schema/params/client/browse-theatre-list/BrowseTheatreParamSchema.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {PaginatedTheatresWithRecentShowingsSchema} from "@/domains/theatres/schema/model/theatre/TheatreWithRecentShowings.schema.ts";
-import BrowseTheatreListPageContent from "@/features/client/theatres/browse-theatre/BrowseTheatreListPageContent.tsx";
+import BrowseTheatreListPageContent from "@/features/client/theatres/pages/browse-theatre/BrowseTheatreListPageContent.tsx";
 import {PaginatedTheatresWithRecentShowings} from "@/domains/theatres/schema/model/theatre/TheatreWithRecentShowings.types.ts";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 

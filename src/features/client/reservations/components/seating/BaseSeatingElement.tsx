@@ -5,7 +5,7 @@
 
 import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
-import SecondarySpan from "@/features/common/text/SecondarySpan.tsx";
+import SecondarySpan from "@/features/common/components/text/SecondarySpan.tsx";
 
 type ElementType = "SELECTED" | "SEAT" | "STRUCTURE";
 

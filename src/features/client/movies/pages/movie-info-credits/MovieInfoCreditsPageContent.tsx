@@ -11,7 +11,7 @@ import {
 import {
     GroupedCrewCreditsExceptMovie
 } from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.types.ts";
-import MovieInfoHeader from "@/features/client/movies/headers/MovieInfoHeader.tsx";
+import MovieInfoHeader from "@/features/client/movies/components/headers/MovieInfoHeader.tsx";
 import MovieInfoCastCreditsSection
     from "@/features/client/movies/pages/movie-info-credits/sections/MovieInfoCastCreditsSection.tsx";
 import {
