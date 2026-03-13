@@ -4,7 +4,7 @@
  * MovieInfoPageContent.tsx
  */
 
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MovieOverviewHeader
     from "@/features/client/movies/pages/movie-info/rows/MovieOverviewHeader.tsx";
@@ -16,11 +16,11 @@ import MovieOverviewFavouriteToggle
     from "@/features/client/movies/pages/movie-info/rows/MovieOverviewFavouriteToggle.tsx";
 import MovieOverviewReviews
     from "@/features/client/movies/pages/movie-info/rows/MovieOverviewReviews.tsx";
-import {ReviewDetailsByMovie} from "@/pages/review/schemas/models/ReviewDetailsByMovieSchema.ts";
+import {ReviewDetailsByMovie} from "@/domains/review/schemas/models/ReviewDetailsByMovieSchema.ts";
 import MovieOverviewShowings from "@/features/client/movies/pages/movie-info/rows/MovieOverviewShowings.tsx";
 import {
     MovieCreditDetails
-} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 /**
  * Props for MovieInfoPageContent.

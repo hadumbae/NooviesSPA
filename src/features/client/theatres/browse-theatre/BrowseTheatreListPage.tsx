@@ -14,14 +14,14 @@
  * - Delegate rendering to {@link BrowseTheatreListPageContent}
  */
 
-import {useFetchTheatresByLocation} from "@/pages/theatres/hooks/features/browse/useFetchTheatresByLocation.ts";
+import {useFetchTheatresByLocation} from "@/domains/theatres/hooks/features/browse/useFetchTheatresByLocation.ts";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
-import {BrowseTheatreParamSchema} from "@/pages/theatres/schema/params/client/browse-theatre-list/BrowseTheatreParamSchema.ts";
+import {BrowseTheatreParamSchema} from "@/domains/theatres/schema/params/client/browse-theatre-list/BrowseTheatreParamSchema.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {PaginatedTheatresWithRecentShowingsSchema} from "@/pages/theatres/schema/model/theatre/TheatreWithRecentShowings.schema.ts";
+import {PaginatedTheatresWithRecentShowingsSchema} from "@/domains/theatres/schema/model/theatre/TheatreWithRecentShowings.schema.ts";
 import BrowseTheatreListPageContent from "@/features/client/theatres/browse-theatre/BrowseTheatreListPageContent.tsx";
-import {PaginatedTheatresWithRecentShowings} from "@/pages/theatres/schema/model/theatre/TheatreWithRecentShowings.types.ts";
+import {PaginatedTheatresWithRecentShowings} from "@/domains/theatres/schema/model/theatre/TheatreWithRecentShowings.types.ts";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 
 /** Number of theatres displayed per page */

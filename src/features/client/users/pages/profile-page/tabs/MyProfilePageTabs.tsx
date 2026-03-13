@@ -11,14 +11,14 @@
  */
 
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
-import {MyProfilePageActiveTab} from "@/pages/users/schemas/tabs/my-profile-page/MyProfilePageActiveTabSchema.ts";
-import {MyProfilePageTabKeysConstant} from "@/pages/users/schemas/tabs/my-profile-page/MyProfilePageTabConstants.ts";
-import {User} from "@/pages/users/schemas/user/User.types.ts";
-import ClientRecentReviewsListContainer from "@/pages/users/components/profile/ClientRecentReviewsListContainer.tsx";
+import {MyProfilePageActiveTab} from "@/domains/users/schemas/tabs/my-profile-page/MyProfilePageActiveTabSchema.ts";
+import {MyProfilePageTabKeysConstant} from "@/domains/users/schemas/tabs/my-profile-page/MyProfilePageTabConstants.ts";
+import {User} from "@/domains/users/schemas/user/User.types.ts";
+import ClientRecentReviewsListContainer from "@/domains/users/components/profile/ClientRecentReviewsListContainer.tsx";
 import MyProfilePageReservationTab
     from "@/features/client/users/pages/profile-page/tabs/MyProfilePageReservationTab.tsx";
 import MyProfilePagePasswordTab from "@/features/client/users/pages/profile-page/tabs/MyProfilePagePasswordTab.tsx";
-import {useMyProfilePageSetup} from "@/pages/users/hooks/my-profie-page/useMyProfilePageSetup.ts";
+import {useMyProfilePageSetup} from "@/domains/users/hooks/my-profie-page/useMyProfilePageSetup.ts";
 import MyProfilePageFavouriteTab from "@/features/client/users/pages/profile-page/tabs/MyProfilePageFavouriteTab.tsx";
 import {cn} from "@/common/lib/utils.ts";
 

@@ -13,8 +13,8 @@ import {
     DropdownMenuTrigger
 } from "@/common/components/ui/dropdown-menu.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import {MyProfilePageActiveTab} from "@/pages/users/schemas/tabs/my-profile-page/MyProfilePageActiveTabSchema.ts";
-import {MyProfilePageTabKeysConstant} from "@/pages/users/schemas/tabs/my-profile-page/MyProfilePageTabConstants.ts";
+import {MyProfilePageActiveTab} from "@/domains/users/schemas/tabs/my-profile-page/MyProfilePageActiveTabSchema.ts";
+import {MyProfilePageTabKeysConstant} from "@/domains/users/schemas/tabs/my-profile-page/MyProfilePageTabConstants.ts";
 
 type DropdownProps = {
     /** Updates the currently active profile page tab */

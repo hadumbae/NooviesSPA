@@ -1,14 +1,14 @@
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
-import MovieIndexCard from "@/pages/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
+import MovieIndexCard from "@/domains/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import MovieIndexHeader from "@/pages/movies/components/headers/admin/MovieIndexHeader.tsx";
+import MovieIndexHeader from "@/domains/movies/components/headers/admin/MovieIndexHeader.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import MovieQueryOptionFormContainer
-    from "@/pages/movies/components/features/admin/movie-query-option/MovieQueryOptionFormContainer.tsx";
+    from "@/domains/movies/components/features/admin/movie-query-option/MovieQueryOptionFormContainer.tsx";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
-import {MovieQueryOptionSchema} from "@/pages/movies/schema/queries/MovieQueryOption.schema.ts";
+import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries/MovieQueryOption.schema.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 
 /**

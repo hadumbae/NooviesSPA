@@ -1,11 +1,11 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import BrowseMoviesHeader from "@/pages/movies/components/client/browse-movies/BrowseMoviesHeader.tsx";
-import useFetchPaginatedMovies from "@/pages/movies/hooks/queries/useFetchPaginatedMovies.ts";
-import {PaginatedMovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
-import {PaginatedMovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import BrowseMoviesHeader from "@/domains/movies/components/client/browse-movies/BrowseMoviesHeader.tsx";
+import useFetchPaginatedMovies from "@/domains/movies/hooks/queries/useFetchPaginatedMovies.ts";
+import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
+import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import BrowseMovieSummaryCard
-    from "@/pages/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieSummaryCard.tsx";
+    from "@/domains/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieSummaryCard.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 

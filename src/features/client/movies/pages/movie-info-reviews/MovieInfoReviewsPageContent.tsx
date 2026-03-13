@@ -3,9 +3,9 @@
  * @filename MovieInfoReviewsPageContent.tsx
  */
 
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import {MovieReviewDetails} from "@/pages/review/schemas/models/MovieReview.types.ts";
+import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import MovieInfoReviewsPageHeader
     from "@/features/client/movies/pages/movie-info-reviews/sections/MovieInfoReviewsPageHeader.tsx";
 import MovieInfoReviewAction

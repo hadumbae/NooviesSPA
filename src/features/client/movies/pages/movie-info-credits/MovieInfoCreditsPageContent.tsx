@@ -3,20 +3,20 @@
  * @filename MovieInfoCreditsPageContent.tsx
  */
 
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {
     CastCreditExceptMovie
-} from "@/pages/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
+} from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
 import {
     GroupedCrewCreditsExceptMovie
-} from "@/pages/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.types.ts";
+} from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.types.ts";
 import MovieInfoHeader from "@/features/client/movies/headers/MovieInfoHeader.tsx";
 import MovieInfoCastCreditsSection
     from "@/features/client/movies/pages/movie-info-credits/sections/MovieInfoCastCreditsSection.tsx";
 import {
     buildFullCreditListByCategoryOrder
-} from "@/pages/movies/views/client/movie-info-credits-page/buildFullCreditListByCategoryOrder.ts";
+} from "@/domains/movies/views/client/movie-info-credits-page/buildFullCreditListByCategoryOrder.ts";
 import MovieInfoCreditListSection
     from "@/features/client/movies/pages/movie-info-credits/sections/MovieInfoCreditListSection.tsx";
 import {useMemo} from "react";

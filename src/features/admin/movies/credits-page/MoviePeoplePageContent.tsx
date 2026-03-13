@@ -1,16 +1,16 @@
     import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import MoviePersonListBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MoviePersonListBreadcrumb.tsx";
-import MoviePeopleHeader from "@/pages/movies/components/headers/admin/MoviePeopleHeader.tsx";
+import MoviePersonListBreadcrumb from "@/domains/movies/components/breadcrumbs/admin/MoviePersonListBreadcrumb.tsx";
+import MoviePeopleHeader from "@/domains/movies/components/headers/admin/MoviePeopleHeader.tsx";
 import TextCollapsible from "@/common/components/TextCollapsible.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import MovieCreditSubmitFormContainer from "@/pages/moviecredit/components/forms/MovieCreditSubmitFormContainer.tsx";
-import {MovieCreditFormValues} from "@/pages/moviecredit/schemas/form/MovieCreditForm.types.ts";
-import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
-import {RoleTypeDepartment} from "@/pages/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import MovieCreditSubmitFormContainer from "@/domains/moviecredit/components/forms/MovieCreditSubmitFormContainer.tsx";
+import {MovieCreditFormValues} from "@/domains/moviecredit/schemas/form/MovieCreditForm.types.ts";
+import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
+import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import MovieCreditPaginatedListQuery
-    from "@/pages/moviecredit/components/movie-credit-paginated-list/MovieCreditPaginatedListQuery.tsx";
+    from "@/domains/moviecredit/components/movie-credit-paginated-list/MovieCreditPaginatedListQuery.tsx";
 
 /**
  * Props for {@link MoviePeoplePageContent}.

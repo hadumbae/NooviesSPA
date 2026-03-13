@@ -4,7 +4,7 @@
  * MovieOverviewCreditLinks.tsx
  */
 
-import generateMovieCreditLinkConfigs from "@/pages/moviecredit/utility/generateMovieCreditLinkConfigs.ts";
+import generateMovieCreditLinkConfigs from "@/domains/moviecredit/utility/generateMovieCreditLinkConfigs.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
 import {cn} from "@/common/lib/utils.ts";
@@ -12,7 +12,7 @@ import {useMemo} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     MovieCreditDetails
-} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 /**
  * Props for MovieOverviewCreditLinks.

@@ -16,12 +16,12 @@
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import BrowseTheatreParamFormContainer
-    from "@/pages/theatres/components/client/forms/browse-theatre-params/BrowseTheatreParamFormContainer.tsx";
+    from "@/domains/theatres/components/client/forms/browse-theatre-params/BrowseTheatreParamFormContainer.tsx";
 import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
-import {TheatreWithRecentShowings} from "@/pages/theatres/schema/model/theatre/TheatreWithRecentShowings.types.ts";
+import {TheatreWithRecentShowings} from "@/domains/theatres/schema/model/theatre/TheatreWithRecentShowings.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import TheatreBrowseListCard from "@/pages/theatres/components/client/forms/browse-list/TheatreBrowseListCard.tsx";
+import TheatreBrowseListCard from "@/domains/theatres/components/client/forms/browse-list/TheatreBrowseListCard.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";

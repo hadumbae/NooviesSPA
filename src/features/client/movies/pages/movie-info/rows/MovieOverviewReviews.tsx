@@ -11,12 +11,12 @@ import MovieReviewSubmitFormContainer
     from "@/features/client/movie-reviews/forms/submit-form/MovieReviewSubmitFormContainer.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {useState} from "react";
-import {MovieReviewDetails} from "@/pages/review/schemas/models/MovieReview.types.ts";
+import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import MovieReviewSummaryCard
     from "@/features/client/movie-reviews/cards/review-summary-card/MovieReviewSummaryCard.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import SectionHeaderLink from "@/common/components/page/SectionHeaderLink.tsx";
 
 /**

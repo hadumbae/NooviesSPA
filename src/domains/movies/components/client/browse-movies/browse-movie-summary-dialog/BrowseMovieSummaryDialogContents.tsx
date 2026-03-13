@@ -1,0 +1,96 @@
+/**
+ * @file BrowseMovieSummaryDialogContents.tsx
+ * @description
+ * Dialog content component that renders a concise movie overview,
+ * including summary metadata, synopsis, key credits, and a link
+ * to the full movie details page.
+ */
+
+import {
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+} from "@/common/components/ui/dialog.tsx";
+import BrowseMovieMetaRow
+    from "@/domains/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
+import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
+import BrowseMovieCreditSummaryLinkList
+    from "@/domains/moviecredit/components/clients/browse-movie-clients/BrowseMovieCreditSummaryLinkList.tsx";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {Search} from "lucide-react";
+import {cn} from "@/common/lib/utils.ts";
+import {buttonVariants} from "@/common/components/ui/button.tsx";
+import {
+    MovieCreditDetails
+} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+
+/**
+ * Props for {@link BrowseMovieSummaryDialogContents}.
+ */
+type ContentProps = {
+    /**
+     * Movie details used to populate summary and navigation data.
+     */
+    movie: MovieDetails;
+
+    /**
+     * Movie credits used to render director and actor link groups.
+     */
+    credits: MovieCreditDetails[];
+};
+
+/**
+ * Renders the inner contents of a movie summary dialog.
+ *
+ * Structure:
+ * - Screen-reader-only title and description for accessibility
+ * - Compact movie summary header
+ * - Synopsis text
+ * - Linked directors and actors
+ * - Call-to-action button linking to the movie details page
+ *
+ * @param props - Component props.
+ *
+ * @example
+ * ```tsx
+ * <BrowseMovieSummaryDialogContents
+ *   movie={movie}
+ *   credits={credits}
+ * />
+ * ```
+ */
+const BrowseMovieSummaryDialogContents = ({movie, credits}: ContentProps) => {
+    const {title, tagline, synopsis, slug} = movie;
+
+    return (
+        <DialogContent>
+            <DialogHeader className="sr-only">
+                <DialogTitle>Movie Summary: {title}</DialogTitle>
+                <DialogDescription>{tagline}</DialogDescription>
+            </DialogHeader>
+
+            {/* --- SUMMARY --- */}
+            <BrowseMovieMetaRow movie={movie}/>
+
+            {/* --- SYNOPSIS --- */}
+            <p className={cn(PrimaryTextBaseCSS, "max-md:text-sm")}>
+                {synopsis}
+            </p>
+
+            {/* --- LINKS --- */}
+            <BrowseMovieCreditSummaryLinkList credits={credits}/>
+
+            {/* --- REDIRECT --- */}
+            <LoggedLink
+                to={`/browse/movies/${slug}`}
+                className={cn(buttonVariants({variant: "primary"}))}
+            >
+                <Search/> Details
+            </LoggedLink>
+        </DialogContent>
+    );
+};
+
+export default BrowseMovieSummaryDialogContents;

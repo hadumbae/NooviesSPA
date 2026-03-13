@@ -12,14 +12,14 @@ import MovieInfoPageContent
     from "@/features/client/movies/pages/movie-info/MovieInfoPageContent.tsx";
 import { QueryDefinition } from "@/common/type/query/loader/MultiQuery.types.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
-import { MovieDetails } from "@/pages/movies/schema/movie/Movie.types.ts";
-import { ReviewDetailsByMovie } from "@/pages/review/schemas/models/ReviewDetailsByMovieSchema.ts";
+import { MovieDetails } from "@/domains/movies/schema/movie/Movie.types.ts";
+import { ReviewDetailsByMovie } from "@/domains/review/schemas/models/ReviewDetailsByMovieSchema.ts";
 import {
     useMovieInfoOverviewPageQueries
-} from "@/pages/movies/hooks/pages/client/movie-info-overview/useMovieInfoOverviewPageQueries.ts";
+} from "@/domains/movies/hooks/pages/client/movie-info-overview/useMovieInfoOverviewPageQueries.ts";
 import {
     MovieCreditDetails
-} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 /**
  * Aggregated query result shape for the overview page.

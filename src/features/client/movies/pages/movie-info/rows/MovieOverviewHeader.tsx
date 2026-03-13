@@ -7,15 +7,15 @@
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import MovieOverviewHeadline
     from "@/features/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewHeadline.tsx";
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
-import PosterImage from "@/pages/movies/components/images/PosterImage.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
+import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import MovieOverviewMeta
     from "@/features/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewMeta.tsx";
 import MovieOverviewCreditLinks
     from "@/features/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewCreditLinks.tsx";
 import {
     MovieCreditDetails
-} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 /**
  * Props for MovieOverviewHeader.

@@ -11,12 +11,12 @@
 
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import {MyProfilePageActiveTab} from "@/pages/users/schemas/tabs/my-profile-page/MyProfilePageActiveTabSchema.ts";
+import {MyProfilePageActiveTab} from "@/domains/users/schemas/tabs/my-profile-page/MyProfilePageActiveTabSchema.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {useFetchCurrentUserFavourites} from "@/pages/users/fetch/favourites/useFetchCurrentUserFavourites.ts";
-import {PaginatedMovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
-import {PaginatedMovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {useFetchCurrentUserFavourites} from "@/domains/users/fetch/favourites/useFetchCurrentUserFavourites.ts";
+import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
+import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import MyFavouriteMovieCompactCard from "@/features/client/movies/card/favourites/MyFavouriteMovieCompactCard.tsx";

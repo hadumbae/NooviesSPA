@@ -8,13 +8,13 @@
  * `SeatMapDetails[]` via a render prop.
  */
 
-import {SeatMapQueryOptions} from "@/pages/seatmap/schema/query-options/SeatMapQueryOptions.ts";
+import {SeatMapQueryOptions} from "@/domains/seatmap/schema/query-options/SeatMapQueryOptions.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useFetchSeatMaps from "@/pages/seatmap/hooks/queries/useFetchSeatMaps.ts";
+import useFetchSeatMaps from "@/domains/seatmap/hooks/queries/useFetchSeatMaps.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {SeatMapDetailsArraySchema} from "@/pages/seatmap/schema/model/SeatMap.schema.ts";
+import {SeatMapDetailsArraySchema} from "@/domains/seatmap/schema/model/SeatMap.schema.ts";
 import {ReactNode} from "react";
-import {SeatMapDetails} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
+import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 
 type LoaderProps = Omit<SeatMapQueryOptions, "showing"> & {
     /**

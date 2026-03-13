@@ -3,9 +3,9 @@
  * Displays formatted reservation summary details.
  */
 
-import {ReservationDetails} from "@/pages/reservation/schema/model/reservation/ReservationDetails.types.ts";
+import {ReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationDetails.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {formatReservationDetails} from "@/pages/reservation/formatters/formatReservationDetails.ts";
+import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import SecondarySpan from "@/features/common/text/SecondarySpan.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";

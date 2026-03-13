@@ -11,14 +11,14 @@
  */
 
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import {useGetAuthUser} from "@/pages/auth/hooks/authUser/useGetAuthUser.ts";
+import {useGetAuthUser} from "@/domains/auth/hooks/authUser/useGetAuthUser.ts";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import MyProfileHeader from "@/pages/users/components/headers/MyProfileHeader.tsx";
+import MyProfileHeader from "@/domains/users/components/headers/MyProfileHeader.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import MyProfilePageTabs from "@/features/client/users/pages/profile-page/tabs/MyProfilePageTabs.tsx";
-import {useMyProfilePageSetup} from "@/pages/users/hooks/my-profie-page/useMyProfilePageSetup.ts";
+import {useMyProfilePageSetup} from "@/domains/users/hooks/my-profie-page/useMyProfilePageSetup.ts";
 import {cn} from "@/common/lib/utils.ts";
 
 /**

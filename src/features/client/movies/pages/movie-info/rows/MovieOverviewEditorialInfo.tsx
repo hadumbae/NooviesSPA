@@ -4,11 +4,11 @@
  * MovieOverviewEditorialInfo.tsx
  */
 
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import generateGenreLinkConfigs from "@/pages/genres/utilities/navigation/generateGenreLinkConfigs.ts";
+import generateGenreLinkConfigs from "@/domains/genres/utilities/navigation/generateGenreLinkConfigs.ts";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {PrimaryTextBaseCSS, SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";

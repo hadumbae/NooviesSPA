@@ -5,7 +5,7 @@
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import SeatMapDetailsLoader from "@/features/admin/seatmaps/loaders/SeatMapDetailsLoader.tsx";
-import {SeatMapDetails} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
+import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import ReservationSeatingView
     from "@/features/client/reservations/components/seating-display/ReservationSeatingView.tsx";
 

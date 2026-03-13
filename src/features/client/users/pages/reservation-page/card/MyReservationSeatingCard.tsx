@@ -7,7 +7,7 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/c
 import ReservationSeatingLoader
     from "@/features/client/reservations/components/seating-display/ReservationSeatingLoader.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {SeatMapWithSeat} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
+import {SeatMapWithSeat} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 
 /**
  * Props for the MyReservationSeatingCard component.

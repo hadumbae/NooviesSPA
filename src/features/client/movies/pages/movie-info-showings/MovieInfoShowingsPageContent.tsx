@@ -13,21 +13,21 @@
  * Data fetching and query orchestration are handled by the parent page.
  */
 
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import {ShowingDetails} from "@/pages/showings/schema/showing/Showing.types.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import TheatreShowingQueryFormContainer
-    from "@/pages/showings/components/forms/theatre-showing-query/TheatreShowingQueryFormContainer.tsx";
+    from "@/domains/showings/components/forms/theatre-showing-query/TheatreShowingQueryFormContainer.tsx";
 import {DisableKeys} from "@/common/type/form/HookFormFieldTypes.ts";
 import {
     TheatreShowingQueryOptions
-} from "@/pages/showings/schema/features/movie-showings/TheatreShowingQueryOptions.types.ts";
+} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.types.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {
     TheatreShowingQueryOptionSchema
-} from "@/pages/showings/schema/features/movie-showings/TheatreShowingQueryOptions.schema.ts";
+} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.schema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import ShowingInfoCompactListCard from "@/pages/showings/components/client/showing-list/ShowingInfoCompactListCard.tsx";
+import ShowingInfoCompactListCard from "@/domains/showings/components/client/showing-list/ShowingInfoCompactListCard.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import MovieInfoShowingHeader from "@/features/client/movies/pages/movie-showing-info/MovieInfoShowingHeader.tsx";

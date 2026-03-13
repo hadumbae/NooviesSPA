@@ -13,7 +13,7 @@
  * - Selection state is controlled by the parent
  */
 
-import {SeatMapDetails} from "@/pages/seatmap/schema/model/SeatMap.types.ts";
+import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import {Check, Plus} from "lucide-react";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {cn} from "@/common/lib/utils.ts";
@@ -23,7 +23,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     SelectedSeatButtonCSS,
     UnselectedSeatButtonCSS,
-} from "@/pages/reservation/constants/ReservationButtonCSS.ts";
+} from "@/domains/reservation/constants/ReservationButtonCSS.ts";
 
 /**
  * Props for {@link ReservationSeatMapElement}.

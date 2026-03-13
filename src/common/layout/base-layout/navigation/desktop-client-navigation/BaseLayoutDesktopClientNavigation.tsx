@@ -2,7 +2,7 @@ import { FC } from 'react';
 import NavLink from "@/common/components/navigation/NavLink.tsx";
 import { Button } from "@/common/components/ui/button.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import useAuthLogoutSubmitMutation from "@/pages/auth/hooks/useAuthLogoutSubmitMutation.ts";
+import useAuthLogoutSubmitMutation from "@/domains/auth/hooks/useAuthLogoutSubmitMutation.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import BaseLayoutClientProfileNavigationDropdown
     from "@/common/layout/base-layout/navigation/desktop-client-navigation/BaseLayoutClientProfileNavigationDropdown.tsx";

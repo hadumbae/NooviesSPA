@@ -10,12 +10,12 @@
  * - **INCOMPLETE**: visual hierarchy and data density are provisional.
  */
 
-import {ReservationDetails} from "@/pages/reservation/schema/model/reservation/ReservationDetails.types.ts";
+import {ReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationDetails.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {formatReservationDetails} from "@/pages/reservation/formatters/formatReservationDetails.ts";
+import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
 import SecondarySpan from "@/features/common/text/SecondarySpan.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import PosterImage from "@/pages/movies/components/images/PosterImage.tsx";
+import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";

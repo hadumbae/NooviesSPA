@@ -3,7 +3,7 @@
  * MyFavouritesPageContent.tsx
  */
 
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MyFavouritesPageHeader from "@/features/client/users/pages/favourites-page/headers/MyFavouritesPageHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";

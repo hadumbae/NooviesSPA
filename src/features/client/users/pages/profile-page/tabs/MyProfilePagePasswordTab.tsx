@@ -6,7 +6,7 @@
 
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
-import UpdateUserPasswordFormContainer from "@/pages/users/components/forms/UpdateUserPasswordFormContainer.tsx";
+import UpdateUserPasswordFormContainer from "@/domains/users/components/forms/UpdateUserPasswordFormContainer.tsx";
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 

@@ -1,22 +1,22 @@
 import {FC} from 'react';
-import simplifyMovieDetails from "@/pages/movies/utility/simplifyMovieDetails.ts";
+import simplifyMovieDetails from "@/domains/movies/utility/simplifyMovieDetails.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {MovieDetailsUIContext} from "@/pages/movies/context/MovieDetailsUIContext.ts";
-import MovieDetailsOptions from "@/pages/movies/components/admin/movie-details/MovieDetailsOptions.tsx";
+import {MovieDetailsUIContext} from "@/domains/movies/context/MovieDetailsUIContext.ts";
+import MovieDetailsOptions from "@/domains/movies/components/admin/movie-details/MovieDetailsOptions.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {Ellipsis} from "lucide-react";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import MovieSubmitFormPanel from "@/pages/movies/components/forms/MovieSubmitFormPanel.tsx";
+import MovieSubmitFormPanel from "@/domains/movies/components/forms/MovieSubmitFormPanel.tsx";
 import MoviePosterImageSubmitFormPanel
-    from "@/pages/movies/components/forms/poster-image/MoviePosterImageSubmitFormPanel.tsx";
-import MovieDeleteWarningDialog from "@/pages/movies/components/dialog/MovieDeleteWarningDialog.tsx";
+    from "@/domains/movies/components/forms/poster-image/MoviePosterImageSubmitFormPanel.tsx";
+import MovieDeleteWarningDialog from "@/domains/movies/components/dialog/MovieDeleteWarningDialog.tsx";
 import MoviePosterImageDeleteDialog
-    from "@/pages/movies/components/admin/poster-image/MoviePosterImageDeleteDialog.tsx";
+    from "@/domains/movies/components/admin/poster-image/MoviePosterImageDeleteDialog.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import MovieDetailsBreadcrumb from "@/pages/movies/components/breadcrumbs/admin/MovieDetailsBreadcrumb.tsx";
-import MovieDetailsHeader from "@/pages/movies/components/headers/admin/MovieDetailsHeader.tsx";
-import MovieDetailsCard from "@/pages/movies/components/details/MovieDetailsCard.tsx";
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import MovieDetailsBreadcrumb from "@/domains/movies/components/breadcrumbs/admin/MovieDetailsBreadcrumb.tsx";
+import MovieDetailsHeader from "@/domains/movies/components/headers/admin/MovieDetailsHeader.tsx";
+import MovieDetailsCard from "@/domains/movies/components/details/MovieDetailsCard.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {RefetchFunction} from "@/common/type/query/RefetchFunction.ts";
 import MovieDetailsPageTabs from "@/features/admin/movies/details-page/tabs/MovieDetailsPageTabs.tsx";
 

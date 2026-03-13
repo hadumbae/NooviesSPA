@@ -5,7 +5,7 @@
 
 import {cn} from "@/common/lib/utils.ts";
 import MovieCreditInfoListItemText from "@/features/client/movie-credits/lists/MovieCreditInfoListItemText.tsx";
-import {CreditExceptMovie} from "@/pages/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
+import {CreditExceptMovie} from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
 import PersonProfileAvatar from "@/features/admin/persons/display/PersonProfileAvatar.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import buildString from "@/common/utility/buildString.ts";

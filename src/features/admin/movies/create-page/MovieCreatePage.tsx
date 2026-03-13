@@ -1,11 +1,11 @@
 import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import MovieCreateHeader from "@/pages/movies/components/pages/admin/create-movie/MovieCreateHeader.tsx";
-import MovieSubmitFormContainer from "@/pages/movies/components/forms/MovieSubmitFormContainer.tsx";
+import MovieCreateHeader from "@/domains/movies/components/pages/admin/create-movie/MovieCreateHeader.tsx";
+import MovieSubmitFormContainer from "@/domains/movies/components/forms/MovieSubmitFormContainer.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
-import {Movie} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import MovieCreateBreadcrumbs from "@/pages/movies/components/pages/admin/create-movie/MovieCreateBreadcrumbs.tsx";
+import MovieCreateBreadcrumbs from "@/domains/movies/components/pages/admin/create-movie/MovieCreateBreadcrumbs.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**

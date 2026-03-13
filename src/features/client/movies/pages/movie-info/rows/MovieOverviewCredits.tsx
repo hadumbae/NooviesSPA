@@ -3,19 +3,19 @@
  * @filename MovieOverviewCredits.tsx
  */
 
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
-import generateMovieCreditLinkConfigs from "@/pages/moviecredit/utility/generateMovieCreditLinkConfigs.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
+import generateMovieCreditLinkConfigs from "@/domains/moviecredit/utility/generateMovieCreditLinkConfigs.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import NoneSpan from "@/common/components/NoneSpan.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {ChevronRight} from "lucide-react";
-import ActorCreditAvatar from "@/pages/moviecredit/components/clients/ActorCreditAvatar.tsx";
+import ActorCreditAvatar from "@/domains/moviecredit/components/clients/ActorCreditAvatar.tsx";
 import SectionHeaderLink from "@/common/components/page/SectionHeaderLink.tsx";
 import {
     MovieCreditDetails
-} from "@/pages/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 
 /**
  * Component props.

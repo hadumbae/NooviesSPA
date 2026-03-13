@@ -5,7 +5,7 @@
 
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import PosterImage from "@/pages/movies/components/images/PosterImage.tsx";
+import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import {URLString} from "@/common/schema/strings/URLStringSchema.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 

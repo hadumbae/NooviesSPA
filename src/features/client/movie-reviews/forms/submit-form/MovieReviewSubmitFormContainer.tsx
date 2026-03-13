@@ -4,18 +4,18 @@
  */
 
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
-import {MovieReview, PopulatedMovieReview} from "@/pages/review/schemas/models/MovieReview.types.ts";
+import {MovieReview, PopulatedMovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {MovieReviewForm, MovieReviewFormValues} from "@/pages/review/schemas/forms/MovieReviewForm.types.ts";
+import {MovieReviewForm, MovieReviewFormValues} from "@/domains/review/schemas/forms/MovieReviewForm.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {useMovieReviewSubmitForm} from "@/pages/review/forms/submit-form/useMovieReviewSubmitForm.ts";
+import {useMovieReviewSubmitForm} from "@/domains/review/forms/submit-form/useMovieReviewSubmitForm.ts";
 import {
     useSubmitUserMovieReviewMutation
-} from "@/pages/review/mutations/user-movie-review-submit/useSubmitUserMovieReviewMutation.ts";
+} from "@/domains/review/mutations/user-movie-review-submit/useSubmitUserMovieReviewMutation.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {ReactNode} from "react";
 import MovieReviewSubmitFormViewContextProvider
-    from "@/pages/review/context/submit-form-view-context/MovieReviewSubmitFormViewContextProvider.tsx";
+    from "@/domains/review/context/submit-form-view-context/MovieReviewSubmitFormViewContextProvider.tsx";
 import Logger from "@/common/utility/features/logger/Logger.ts";
 
 /**

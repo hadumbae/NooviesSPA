@@ -6,11 +6,11 @@ import MovieInfoCreditsPageContent
     from "@/features/client/movies/pages/movie-info-credits/MovieInfoCreditsPageContent.tsx";
 import {
     useFetchMovieInfoCreditsData
-} from "@/pages/movies/views/client/movie-info-credits-page/useFetchMovieInfoCreditsData.ts";
+} from "@/domains/movies/views/client/movie-info-credits-page/useFetchMovieInfoCreditsData.ts";
 import {
     MovieInfoCreditViewData,
     MovieInfoCreditViewSchema
-} from "@/pages/movies/views/client/movie-info-credits-page/MovieInfoCreditViewSchema.ts";
+} from "@/domains/movies/views/client/movie-info-credits-page/MovieInfoCreditViewSchema.ts";
 
 const MovieInfoCreditsPage = () => {
     const routeParams = useFetchByIdentifierRouteParams({

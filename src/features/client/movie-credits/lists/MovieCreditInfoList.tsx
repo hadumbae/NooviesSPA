@@ -5,7 +5,7 @@
 
 import MovieCreditInfoListItem from "@/features/client/movie-credits/lists/MovieCreditInfoListItem.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import {CreditExceptMovie} from "@/pages/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
+import {CreditExceptMovie} from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
 
 /**
  * Props for {@link MovieCreditInfoList}.

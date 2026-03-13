@@ -6,7 +6,7 @@
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {
     MovieReviewSubmitFormViewContext
-} from "@/pages/review/context/submit-form-view-context/MovieReviewSubmitFormViewContext.ts";
+} from "@/domains/review/context/submit-form-view-context/MovieReviewSubmitFormViewContext.ts";
 import {
     Dialog, DialogClose,
     DialogContent,

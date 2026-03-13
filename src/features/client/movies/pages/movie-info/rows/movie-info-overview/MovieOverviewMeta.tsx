@@ -10,8 +10,8 @@ import {PillCSS} from "@/common/constants/css/ContainerCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import generateGenreLinkConfigs from "@/pages/genres/utilities/navigation/generateGenreLinkConfigs.ts";
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import generateGenreLinkConfigs from "@/domains/genres/utilities/navigation/generateGenreLinkConfigs.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 /**

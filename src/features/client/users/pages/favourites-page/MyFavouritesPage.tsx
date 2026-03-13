@@ -5,12 +5,12 @@
 
 import {FC} from 'react';
 import useTitle from "@/common/hooks/document/useTitle.ts";
-import {useFetchCurrentUserFavourites} from "@/pages/users/fetch/favourites/useFetchCurrentUserFavourites.ts";
+import {useFetchCurrentUserFavourites} from "@/domains/users/fetch/favourites/useFetchCurrentUserFavourites.ts";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import MyFavouritesPageContent from "@/features/client/users/pages/favourites-page/MyFavouritesPageContent.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {PaginatedMovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
-import {PaginatedMovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
+import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 
 /** Number of favourite movies displayed per page. */
 const MOVIES_PER_PAGE = 20;

@@ -3,10 +3,10 @@
  * MyFavouriteMovieCompactCard.tsx
  */
 
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
-import formatMovieDetails from "@/pages/movies/utility/formatMovieDetails.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
+import formatMovieDetails from "@/domains/movies/utility/formatMovieDetails.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import PosterImage from "@/pages/movies/components/images/PosterImage.tsx";
+import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondarySpan from "@/features/common/text/SecondarySpan.tsx";
 import buildString from "@/common/utility/buildString.ts";
@@ -16,7 +16,7 @@ import {Info} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 import BrowseMovieSummaryDialog
-    from "@/pages/movies/components/client/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialog.tsx";
+    from "@/domains/movies/components/client/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialog.tsx";
 
 /** Props for MyFavouriteMovieCompactCard. */
 type CardProps = {

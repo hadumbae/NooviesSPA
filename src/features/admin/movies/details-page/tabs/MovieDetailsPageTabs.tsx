@@ -12,14 +12,14 @@
  */
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/common/components/ui/tabs.tsx";
-import { MovieDetails } from "@/pages/movies/schema/movie/Movie.types.ts";
+import { MovieDetails } from "@/domains/movies/schema/movie/Movie.types.ts";
 import MovieDetailsPageCreditTab from "@/features/admin/movies/details-page/tabs/MovieDetailsPageCreditTab.tsx";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {
     MOVIE_DETAILS_PAGE_TABS,
     MovieDetailsSearchParams,
-} from "@/pages/movies/schema/admin/search-params/MovieDetailsSearchParams.ts";
-import ShowingSummaryListQuery from "@/pages/showings/components/features/showing-summary-list-query/ShowingSummaryListQuery.tsx";
+} from "@/domains/movies/schema/admin/search-params/MovieDetailsSearchParams.ts";
+import ShowingSummaryListQuery from "@/domains/showings/components/features/showing-summary-list-query/ShowingSummaryListQuery.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";

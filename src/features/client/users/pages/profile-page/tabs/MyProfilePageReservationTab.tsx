@@ -18,10 +18,10 @@
 
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import CurrentUserReservationLoader from "@/pages/reservation/components/loaders/CurrentUserReservationLoader.tsx";
-import {PaginatedReservationDetails} from "@/pages/reservation/schema/model/reservation/ReservationRelated.types.ts";
+import CurrentUserReservationLoader from "@/domains/reservation/components/loaders/CurrentUserReservationLoader.tsx";
+import {PaginatedReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationRelated.types.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {ReservationDetails} from "@/pages/reservation/schema/model/reservation/ReservationDetails.types.ts";
+import {ReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationDetails.types.ts";
 import MyReservationCompactCard from "@/features/client/reservations/components/cards/MyReservationCompactCard.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";

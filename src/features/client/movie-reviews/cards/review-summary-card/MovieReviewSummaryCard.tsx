@@ -4,7 +4,7 @@
  * MovieReviewSummaryCard.tsx
  */
 
-import {MovieReviewDetails} from "@/pages/review/schemas/models/MovieReview.types.ts";
+import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import MovieReviewRatingStars from "@/features/client/movie-reviews/MovieReviewRatingStars.tsx";

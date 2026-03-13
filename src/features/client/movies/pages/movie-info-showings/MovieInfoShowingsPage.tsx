@@ -17,21 +17,21 @@
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import useFetchMovieBySlug from "@/pages/movies/hooks/queries/useFetchMovieBySlug.ts";
-import {MovieDetailsSchema} from "@/pages/movies/schema/movie/Movie.schema.ts";
-import {MovieDetails} from "@/pages/movies/schema/movie/Movie.types.ts";
+import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
+import {MovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import MovieInfoShowingsPageContent
     from "@/features/client/movies/pages/movie-info-showings/MovieInfoShowingsPageContent.tsx";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
-import useFetchPaginatedShowings from "@/pages/showings/hooks/queries/useFetchPaginatedShowings.ts";
+import useFetchPaginatedShowings from "@/domains/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {
     TheatreShowingQueryOptionSchema
-} from "@/pages/showings/schema/features/movie-showings/TheatreShowingQueryOptions.schema.ts";
-import {PaginatedShowingDetailsSchema} from "@/pages/showings/schema/showing/ShowingRelated.schema.ts";
-import {PaginatedShowingDetails} from "@/pages/showings/schema/showing/ShowingRelated.types.ts";
+} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.schema.ts";
+import {PaginatedShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingRelated.schema.ts";
+import {PaginatedShowingDetails} from "@/domains/showings/schema/showing/ShowingRelated.types.ts";
 
 /** Default number of showings displayed per page. */
 const SHOWINGS_PER_PAGE = 20;

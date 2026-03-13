@@ -1,4 +1,4 @@
-import {MovieReviewDetails} from "@/pages/review/schemas/models/MovieReview.types.ts";
+import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";

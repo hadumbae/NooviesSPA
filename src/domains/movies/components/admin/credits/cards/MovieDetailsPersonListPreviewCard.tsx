@@ -1,0 +1,55 @@
+import {FC} from 'react';
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {ParamError} from "@/common/errors/ParamError.ts";
+import {cn} from "@/common/lib/utils.ts";
+import {Link} from "react-router-dom";
+
+import {
+    MovieCreditDetails
+} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+
+interface DetailsProp {
+    credit: MovieCreditDetails;
+    className?: string;
+}
+
+const MovieDetailsPersonListPreviewCard: FC<DetailsProp> = ({credit, className}) => {
+    const {roleType, department, person: {slug: personSlug, name}} = credit;
+
+    let secondaryText;
+
+    switch (department) {
+        case "CAST":
+            secondaryText = credit.characterName;
+            break;
+        case "CREW":
+            secondaryText = roleType.roleName;
+            break;
+        default:
+            throw new ParamError({
+                fnName: MovieDetailsPersonListPreviewCard.name,
+                paramName: "roleType",
+                message: "Invalid Role Type."
+            });
+    }
+
+    return (
+        <Card>
+            <CardContent className={cn(
+                "p-2 space-y-2",
+                "flex flex-col justify-center items-center",
+                className,
+            )}>
+                <Link to={`/admin/persons/get/${personSlug}`} className="font-bold  hover:underline" target="_blank">
+                    {name}
+                </Link>
+
+                <h2 className="text-sm text-neutral-400">
+                    {secondaryText}
+                </h2>
+            </CardContent>
+        </Card>
+    );
+};
+
+export default MovieDetailsPersonListPreviewCard;

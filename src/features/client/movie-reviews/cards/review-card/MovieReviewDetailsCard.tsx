@@ -3,7 +3,7 @@
  * @filename MovieReviewDetailsCard.tsx
  */
 
-import {MovieReviewDetails} from "@/pages/review/schemas/models/MovieReview.types.ts";
+import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import DeleteMovieReviewButton from "@/features/client/movie-reviews/buttons/DeleteMovieReviewButton.tsx";
 import PrimarySpan from "@/features/common/text/PrimarySpan.tsx";

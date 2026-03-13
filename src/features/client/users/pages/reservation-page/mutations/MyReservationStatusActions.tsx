@@ -4,11 +4,11 @@
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {useReservationStateMutations} from "@/pages/reservation/hooks/useReservationStateMutations.ts";
+import {useReservationStateMutations} from "@/domains/reservation/hooks/useReservationStateMutations.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Loader} from "lucide-react";
-import {ReservationStatus} from "@/pages/reservation/schema/enum/ReservationStatusEnumSchema.ts";
+import {ReservationStatus} from "@/domains/reservation/schema/enum/ReservationStatusEnumSchema.ts";
 
 /**
  * @prop reservationID Target reservation identifier.

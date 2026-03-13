@@ -4,7 +4,7 @@ import BaseLayoutDesktopGuestNavigation
 import BaseLayoutDesktopClientNavigation
     from "@/common/layout/base-layout/navigation/desktop-client-navigation/BaseLayoutDesktopClientNavigation.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {AuthContext} from "@/pages/auth/context/AuthContext.ts";
+import {AuthContext} from "@/domains/auth/context/AuthContext.ts";
 
 /**
  * Desktop navigation switch for the base layout.

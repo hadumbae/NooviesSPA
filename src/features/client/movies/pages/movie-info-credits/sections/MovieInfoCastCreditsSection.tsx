@@ -6,10 +6,10 @@
 import {useMemo} from "react";
 import {
     CastCreditExceptMovie
-} from "@/pages/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
+} from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
 import {
     organiseMovieCastCreditsByPrimacy
-} from "@/pages/movies/views/client/movie-info-credits-page/organiseMovieCastCreditsByPrimacy.ts";
+} from "@/domains/movies/views/client/movie-info-credits-page/organiseMovieCastCreditsByPrimacy.ts";
 import MovieCreditInfoList from "@/features/client/movie-credits/lists/MovieCreditInfoList.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";

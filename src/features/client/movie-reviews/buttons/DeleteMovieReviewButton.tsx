@@ -5,7 +5,7 @@ import {Button, ButtonProps} from "@/common/components/ui/button.tsx";
 import {Trash} from "lucide-react";
 import {
     useDeleteCurrentUserMovieReviewMutation
-} from "@/pages/review/mutations/delete-user-movie-submit/useDeleteCurrentUserMovieReviewMutation.ts";
+} from "@/domains/review/mutations/delete-user-movie-submit/useDeleteCurrentUserMovieReviewMutation.ts";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
