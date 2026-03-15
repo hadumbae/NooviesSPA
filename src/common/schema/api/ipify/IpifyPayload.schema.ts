@@ -25,6 +25,7 @@ const IpifyLocationSchema = z.object({
 export const IpifyPayloadSchema = z.object({
     ip: IpSchema,
     location: IpifyLocationSchema,
+    isp: NonEmptyStringSchema,
 });
 
 /**
