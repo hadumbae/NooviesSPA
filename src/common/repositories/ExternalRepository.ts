@@ -1,31 +1,26 @@
 /**
- * @file Repository for external (third-party) API integrations.
+ * @file External API repository utilities.
+ * Provides functions for interacting with external-facing backend endpoints.
  * @filename ExternalRepository.ts
- *
- * Encapsulates URL construction and fetch behavior for external services.
  */
 
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 
+const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/ext`;
+
 /**
- * Access layer for external API requests.
+ * Requests geolocation data for the current IP address.
+ *
+ * Builds the endpoint URL and executes the request using `useFetchAPI`.
+ *
+ * @returns Fetch API hook result for the geolocation request.
  */
-export const ExternalRepository = {
-    /**
-     * Fetches IP geolocation data from the Ipify API using the configured API key.
-     *
-     * @returns Result of the API request from `useFetchAPI`.
-     */
-    fetchIpifyCountryData: () => {
-        const url = buildQueryURL({
-            baseURL: `https://geo.ipify.org/`,
-            path: "api/v2/country",
-            queries: { apiKey: import.meta.env.VITE_IPIFY_KEY }
-        });
+export const fetchGeolocationByIP = () => {
+    const url = buildQueryURL({
+        baseURL,
+        path: "ip-geo/get-geolocation",
+    });
 
-        console.log("URL: ", url.toString());
-
-        return useFetchAPI({ url });
-    },
+    return useFetchAPI({url, method: "GET"});
 };
