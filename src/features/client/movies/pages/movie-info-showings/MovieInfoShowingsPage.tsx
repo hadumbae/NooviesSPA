@@ -24,8 +24,8 @@ import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDa
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {
-    TheatreShowingQueryOptionSchema
-} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.schema.ts";
+    ShowingsPageQueryStringSchema
+} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";
 import {PaginatedShowingDetails} from "@/domains/showings/schema/showing/ShowingRelated.types.ts";
 import {
     useMovieInfoShowingsPageQueries
@@ -59,7 +59,7 @@ const MovieInfoShowingsPage = () => {
     }
 
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
-    const {searchParams} = useParsedSearchParams({schema: TheatreShowingQueryOptionSchema});
+    const {searchParams} = useParsedSearchParams({schema: ShowingsPageQueryStringSchema});
 
     const queries = useMovieInfoShowingsPageQueries({
        movieSlug: routeParams.slug,
