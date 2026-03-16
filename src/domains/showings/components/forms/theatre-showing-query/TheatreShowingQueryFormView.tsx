@@ -51,7 +51,7 @@ const TheatreShowingQueryFormView = (
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(submitHandler)}
-                className={cn("grid grid-cols-2 md:grid-cols-4 gap-2", className)}
+                className={cn("space-y-4", className)}
             >
                 {activeFields.near && (
                     <HookFormInput
@@ -73,18 +73,6 @@ const TheatreShowingQueryFormView = (
                         className="md:col-span-2"
                     />
                 )}
-
-                {activeFields.perPage && (
-                    <HookFormInput
-                        name="perPage"
-                        type="number"
-                        min={1}
-                        label="Per Page"
-                        control={form.control}
-                        className="md:col-span-2"
-                    />
-                )}
-
             </form>
         </Form>
     );

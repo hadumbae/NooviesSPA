@@ -44,7 +44,6 @@ export function useTheatreShowingQueryFormDefaultValues(
 
     const defaultValues: ShowingsPageQueryFormValues = {
         page: 1,
-        perPage: 10,
         near: "",
         ...presetValues,
     };
