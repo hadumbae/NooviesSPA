@@ -13,7 +13,7 @@ import { BooleanValueSchema } from "@/common/schema/boolean/BooleanValueSchema.t
 /**
  * Schema describing the location information returned by Ipify.
  */
-const IpifyLocationSchema = z.object({
+export const IpifyLocationSchema = z.object({
     country: ISO3166Alpha2CountryCodeEnum,
     region: NonEmptyStringSchema,
     timezone: TimezoneOffsetSchema,
