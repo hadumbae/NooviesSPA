@@ -14,9 +14,9 @@
 
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {
-    TheatreShowingQueryOptionSchema
-} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.schema.ts";
-import {TheatreShowingQueryFormValues, TheatreShowingQueryOptions} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.types.ts";
+    ShowingsPageQueryStringSchema
+} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";
+import {ShowingsPageQueryFormValues, ShowingsPageQueryStrings} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.types.ts";
 import {useTheatreShowingQueryForm} from "@/domains/showings/hooks/forms/theatre-showing-query-form/useTheatreShowingQueryForm.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import TheatreShowingQueryFormView
@@ -30,7 +30,7 @@ import TheatreShowingQueryFormView
  * - `presetValues` to initialize query state
  */
 type FormParams = Pick<
-    FormOptions<TheatreShowingQueryFormValues, TheatreShowingQueryOptions>,
+    FormOptions<ShowingsPageQueryFormValues, ShowingsPageQueryStrings>,
     "disableFields" | "presetValues"
 >;
 
@@ -42,14 +42,14 @@ const TheatreShowingQueryFormContainer = ({disableFields, presetValues}: FormPar
     const form = useTheatreShowingQueryForm({presetValues});
 
     const {setSearchParams} = useParsedSearchParams({
-        schema: TheatreShowingQueryOptionSchema,
+        schema: ShowingsPageQueryStringSchema,
     });
 
     /**
      * Update URL search parameters when the form submits.
      */
-    const updateParams = (values: TheatreShowingQueryFormValues) => {
-        setSearchParams(values as TheatreShowingQueryOptions);
+    const updateParams = (values: ShowingsPageQueryFormValues) => {
+        setSearchParams(values as ShowingsPageQueryStrings);
     };
 
     return (

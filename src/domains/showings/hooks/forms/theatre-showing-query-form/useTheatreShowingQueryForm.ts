@@ -4,7 +4,7 @@
  * React Hook Form wrapper for Theatre Showing query options.
  *
  * Integrates:
- * - {@link TheatreShowingQueryOptionSchema} for runtime validation
+ * - {@link ShowingsPageQueryStringSchema} for runtime validation
  * - React Hook Form for form state management
  * - Zod resolver for schema-based validation
  * - Stable default values via {@link useTheatreShowingQueryFormDefaultValues}
@@ -12,16 +12,16 @@
 
 import {useForm, UseFormReturn} from "react-hook-form";
 import {
-    TheatreShowingQueryFormValues,
-    TheatreShowingQueryOptions
-} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.types.ts";
+    ShowingsPageQueryFormValues,
+    ShowingsPageQueryStrings
+} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.types.ts";
 import {
     useTheatreShowingQueryFormDefaultValues
 } from "@/domains/showings/hooks/forms/theatre-showing-query-form/useTheatreShowingQueryFormDefaultValues.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
-    TheatreShowingQueryOptionSchema
-} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.schema.ts";
+    ShowingsPageQueryStringSchema
+} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";
 
 /**
  * Parameters for {@link useTheatreShowingQueryForm}.
@@ -33,7 +33,7 @@ type FormParams = {
      * These values are merged into the form's default state and
      * are typically derived from URL parameters or persisted filters.
      */
-    presetValues?: Partial<TheatreShowingQueryOptions>;
+    presetValues?: Partial<ShowingsPageQueryStrings>;
 };
 
 /**
@@ -48,11 +48,11 @@ type FormParams = {
  */
 export function useTheatreShowingQueryForm(
     {presetValues}: FormParams
-): UseFormReturn<TheatreShowingQueryFormValues> {
+): UseFormReturn<ShowingsPageQueryFormValues> {
     const defaultValues = useTheatreShowingQueryFormDefaultValues({presetValues});
 
-    return useForm<TheatreShowingQueryFormValues>({
-        resolver: zodResolver(TheatreShowingQueryOptionSchema),
+    return useForm<ShowingsPageQueryFormValues>({
+        resolver: zodResolver(ShowingsPageQueryStringSchema),
         defaultValues,
     });
 }

@@ -9,8 +9,8 @@ import { QueryDefinition } from "@/common/type/query/loader/MultiQuery.types.ts"
 import { MovieDetailsSchema } from "@/domains/movies/schema/movie/Movie.schema.ts";
 import { PaginatedShowingDetailsSchema } from "@/domains/showings/schema/showing/ShowingRelated.schema.ts";
 import {
-    TheatreShowingQueryOptions
-} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.types.ts";
+    ShowingsPageQueryStrings
+} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.types.ts";
 import { SlugString } from "@/common/schema/strings/simple-strings/SlugString.ts";
 
 /**
@@ -25,7 +25,7 @@ type QueryParams = {
     /**
      * Additional filters applied to the showings query.
      */
-    queryOptions: TheatreShowingQueryOptions;
+    queryOptions: ShowingsPageQueryStrings;
 
     /**
      * Current showings pagination page.
