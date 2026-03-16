@@ -8,28 +8,29 @@ import {ISO3166Alpha2CountryCode} from "@/common/schema/enums/ISO3166Alpha2Count
 import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 
 /**
- * Parameters for requesting movie credit data.
+ * Parameters for retrieving movie credit data.
  */
-type GetCreditsForMovieViewParams = {
+export type GetCreditsForMovieViewParams = {
     /** Movie slug used for routing. */
     slug: SlugString;
 };
 
 /**
- * Parameters for requesting paginated movie showings.
+ * Parameters for retrieving movie showings.
  */
-type GetShowingsForMovieViewParams = PaginationValues & {
+export type GetShowingsForMovieViewParams = {
     /** Movie slug used for routing. */
     slug: SlugString;
 
-    /** Optional location filter. */
-    near?: string;
+    /**
+     * Query parameters applied to the showings request.
+     */
+    queries: PaginationValues & {
+        /** Optional location filter for nearby showings. */
+        near?: string;
 
-    /** Country used for regional filtering. */
-    country: ISO3166Alpha2CountryCode;
+        /** Country used for regional filtering. */
+        country: ISO3166Alpha2CountryCode;
+    };
 };
 
-export type {
-    GetCreditsForMovieViewParams,
-    GetShowingsForMovieViewParams,
-};

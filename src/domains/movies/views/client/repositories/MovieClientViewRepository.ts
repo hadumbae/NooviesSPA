@@ -31,12 +31,12 @@ const getCreditsForMovieView = (
  * Retrieves paginated showings for a movie.
  */
 const getShowingsForMovieView = (
-    {slug, near, country, page, perPage}: GetShowingsForMovieViewParams
+    {slug, queries}: GetShowingsForMovieViewParams
 ): Promise<RequestReturns> => {
     const url = buildQueryURL({
         baseURL,
         path: `${slug}/showings`,
-        queries: {country, near, page, perPage}
+        queries
     });
 
     return useFetchAPI({url, method: "GET"});
