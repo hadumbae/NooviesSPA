@@ -20,12 +20,12 @@ import TheatreShowingQueryFormContainer
     from "@/domains/showings/components/forms/theatre-showing-query/TheatreShowingQueryFormContainer.tsx";
 import {DisableKeys} from "@/common/type/form/HookFormFieldTypes.ts";
 import {
-    TheatreShowingQueryOptions
-} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.types.ts";
+    ShowingsPageQueryStrings
+} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.types.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {
-    TheatreShowingQueryOptionSchema
-} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.schema.ts";
+    ShowingsPageQueryStringSchema
+} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import ShowingInfoCompactListCard from "@/domains/showings/components/client/showing-list/ShowingInfoCompactListCard.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
@@ -72,13 +72,13 @@ const MovieInfoShowingsPageContent = (
 ) => {
     const {title, posterImage, slug} = movie;
 
-    const {searchParams: presetValues} =
-        useParsedSearchParams({schema: TheatreShowingQueryOptionSchema});
+    const {searchParams: presetValues} = useParsedSearchParams({
+        schema: ShowingsPageQueryStringSchema,
+        defaultValues: {page},
+    });
 
-    const disabledFields: DisableKeys<TheatreShowingQueryOptions> = [
-        "theatreSlug",
-        "movieSlug",
-        "screenSlug",
+    const disabledFields: DisableKeys<ShowingsPageQueryStrings> = [
+        "page",
     ];
 
     return (
