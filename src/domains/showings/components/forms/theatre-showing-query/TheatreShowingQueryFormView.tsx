@@ -1,28 +1,19 @@
 /**
- * @file TheatreShowingQueryFormView.tsx
- *
- * Presentational form component for Theatre Showing queries.
- *
- * Responsibilities:
- * - Renders form inputs based on active schema fields
- * - Automatically submits changes using debounced behavior
- * - Respects disabled field configuration
- *
- * Contains no routing or URL logic.
+ * @file Showings page query form view component.
+ * @filename TheatreShowingQueryFormView.tsx
  */
 
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {
-    TheatreShowingQueryFormValues
-} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.types.ts";
+    ShowingsPageQueryFormValues
+} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.types.ts";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
 import {
-    TheatreShowingQueryFormValuesSchema
-} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.schema.ts";
+    ShowingsPageQueryFormValuesSchema
+} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
-import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAutoSubmit.ts";
 
@@ -30,17 +21,17 @@ import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAut
  * Props for {@link TheatreShowingQueryFormView}.
  */
 type FormProps =
-    Pick<FormOptions<TheatreShowingQueryFormValues>, "disableFields"> & {
-    /** React Hook Form instance */
-    form: UseFormReturn<TheatreShowingQueryFormValues>;
-    /** Submit handler invoked on debounced form changes */
-    submitHandler: SubmitHandler<TheatreShowingQueryFormValues>;
-    /** Optional wrapper class name */
+    Pick<FormOptions<ShowingsPageQueryFormValues>, "disableFields"> & {
+    /** React Hook Form instance. */
+    form: UseFormReturn<ShowingsPageQueryFormValues>;
+    /** Invoked when the form auto-submits. */
+    submitHandler: SubmitHandler<ShowingsPageQueryFormValues>;
+    /** Optional wrapper class name. */
     className?: string;
 };
 
 /**
- * Stateless view component for Theatre Showing query inputs.
+ * View component for showings query inputs.
  */
 const TheatreShowingQueryFormView = (
     {disableFields, form, submitHandler, className}: FormProps
@@ -52,7 +43,7 @@ const TheatreShowingQueryFormView = (
     });
 
     const activeFields = getActiveSchemaInputFields({
-        schema: TheatreShowingQueryFormValuesSchema,
+        schema: ShowingsPageQueryFormValuesSchema,
         disableFields,
     });
 
@@ -60,62 +51,40 @@ const TheatreShowingQueryFormView = (
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(submitHandler)}
-                className={cn("grid grid-cols-2 md:grid-cols-3 gap-2", className)}
+                className={cn("grid grid-cols-2 md:grid-cols-4 gap-2", className)}
             >
-                {/* Slug filters */}
-                <>
-                    {activeFields.movieSlug && (
-                        <HookFormInput
-                            name="movieSlug"
-                            label="Movie"
-                            control={form.control}
-                        />
-                    )}
+                {activeFields.near && (
+                    <HookFormInput
+                        name="near"
+                        type="text"
+                        label="Location"
+                        control={form.control}
+                        className="col-span-2 md:col-span-4"
+                    />
+                )}
 
-                    {activeFields.screenSlug && (
-                        <HookFormInput
-                            name="screenSlug"
-                            label="Screen"
-                            control={form.control}
-                        />
-                    )}
+                {activeFields.page && (
+                    <HookFormInput
+                        name="page"
+                        type="number"
+                        min={1}
+                        label="Showings Page"
+                        control={form.control}
+                        className="md:col-span-2"
+                    />
+                )}
 
-                    {activeFields.theatreSlug && (
-                        <CountryHookFormSelect
-                            name="theatreSlug"
-                            label="Theatre"
-                            control={form.control}
-                        />
-                    )}
-                </>
+                {activeFields.perPage && (
+                    <HookFormInput
+                        name="perPage"
+                        type="number"
+                        min={1}
+                        label="Per Page"
+                        control={form.control}
+                        className="md:col-span-2"
+                    />
+                )}
 
-                {/* Location filters */}
-                <>
-                    {activeFields.theatreCity && (
-                        <HookFormInput
-                            name="theatreCity"
-                            label="City"
-                            control={form.control}
-                        />
-                    )}
-
-                    {activeFields.theatreState && (
-                        <HookFormInput
-                            name="theatreState"
-                            label="State"
-                            control={form.control}
-                        />
-                    )}
-
-                    {activeFields.theatreCountry && (
-                        <CountryHookFormSelect
-                            name="theatreCountry"
-                            label="Country"
-                            control={form.control}
-                            className="max-md:col-span-2"
-                        />
-                    )}
-                </>
             </form>
         </Form>
     );

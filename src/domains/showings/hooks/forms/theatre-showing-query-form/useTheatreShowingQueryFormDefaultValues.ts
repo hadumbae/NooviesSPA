@@ -8,9 +8,9 @@
  */
 
 import {
-    TheatreShowingQueryFormValues,
-    TheatreShowingQueryOptions
-} from "@/domains/showings/schema/features/movie-showings/TheatreShowingQueryOptions.types.ts";
+    ShowingsPageQueryFormValues,
+    ShowingsPageQueryStrings
+} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.types.ts";
 import {useRef} from "react";
 import {isEqual} from "lodash";
 
@@ -21,7 +21,7 @@ type FormParams = {
     /**
      * Optional preset query values to override defaults.
      */
-    presetValues?: Partial<TheatreShowingQueryOptions>;
+    presetValues?: Partial<ShowingsPageQueryStrings>;
 };
 
 /**
@@ -39,16 +39,13 @@ type FormParams = {
  */
 export function useTheatreShowingQueryFormDefaultValues(
     {presetValues}: FormParams
-): TheatreShowingQueryFormValues {
-    const initialValues = useRef<TheatreShowingQueryFormValues | null>(null);
+): ShowingsPageQueryFormValues {
+    const initialValues = useRef<ShowingsPageQueryFormValues | null>(null);
 
-    const defaultValues: TheatreShowingQueryFormValues = {
-        movieSlug: "",
-        theatreSlug: "",
-        screenSlug: "",
-        theatreState: "",
-        theatreCity: "",
-        theatreCountry: "",
+    const defaultValues: ShowingsPageQueryFormValues = {
+        page: 1,
+        perPage: 10,
+        near: "",
         ...presetValues,
     };
 
