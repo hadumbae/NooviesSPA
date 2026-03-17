@@ -1,16 +1,6 @@
 /**
- * @file ShowingFormSchema.ts
- *
- * Zod schemas for validating the Showing management form.
- *
- * The form schema is composed of smaller, focused schemas covering:
- * - Core identifiers and theatre context
- * - Language and subtitle configuration
- * - Start/end date–time input
- * - Pricing, lifecycle status, and feature flags
- *
- * The combined {@link ShowingFormSchema} applies transformations and
- * cross-field validation to ensure a valid showing timeline.
+ * @file Zod schemas for the showing management form.
+ * @filename ShowingFormSchema.ts
  */
 
 import {z} from "zod";
@@ -35,12 +25,9 @@ import {NonEmptyStringSchema}
     from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import preprocessEmptyStringToUndefined
     from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
-import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
 
 /**
- * Optional theatre city field.
- *
- * Empty strings are coerced to `undefined`.
+ * Optional string field that normalizes empty input to `undefined`.
  */
 const citySchema = preprocessEmptyStringToUndefined(
     NonEmptyStringSchema
@@ -49,9 +36,7 @@ const citySchema = preprocessEmptyStringToUndefined(
 ).optional();
 
 /**
- * Optional theatre state field.
- *
- * Empty strings are coerced to `undefined`.
+ * Optional string field that normalizes empty input to `undefined`.
  */
 const stateSchema = preprocessEmptyStringToUndefined(
     NonEmptyStringSchema
@@ -60,7 +45,7 @@ const stateSchema = preprocessEmptyStringToUndefined(
 ).optional();
 
 /**
- * Validates core showing identifiers and theatre context.
+ * Core identifiers and theatre context.
  */
 export const ShowingFormDetailSchema = z.object({
     movie: IDStringSchema,
@@ -72,30 +57,20 @@ export const ShowingFormDetailSchema = z.object({
 });
 
 /**
- * Validates language configuration for the showing.
+ * Language configuration.
  */
 export const ShowingFormLanguageSchema = z.object({
-    /** Primary spoken language (ISO-639-1). */
     language: preprocessEmptyStringToUndefined(ISO6391LanguageCodeEnum),
-
-    /** Subtitle languages (non-empty ISO-639-1 list). */
     subtitleLanguages: z
-        .array(
-            ISO6391LanguageCodeEnum,
-            {
-                required_error: "Required.",
-                invalid_type_error: "Must be an array of ISO 639-1 codes.",
-            },
-        )
+        .array(ISO6391LanguageCodeEnum, {
+            required_error: "Required.",
+            invalid_type_error: "Must be an array of ISO 639-1 codes.",
+        })
         .nonempty({message: "Required."}),
 });
 
 /**
- * Validates start and optional end date–time inputs.
- *
- * - Start date and time are required.
- * - End date and time are optional but must form a valid range when both are provided.
- * - Empty strings are normalized to `undefined` for optional fields.
+ * Date/time inputs with normalization for optional end values.
  */
 export const ShowingFormDateTimeSchema = z.object({
     startAtTime: z
@@ -118,34 +93,25 @@ export const ShowingFormDateTimeSchema = z.object({
 });
 
 /**
- * Validates pricing, lifecycle status, and feature flags.
+ * Pricing, lifecycle state, and configuration flags.
  */
 export const ShowingFormStatusSchema = z.object({
-    /** Ticket price */
     ticketPrice: CleanedPositiveNumberSchema,
-
-    /** Marks special screenings (e.g. premieres). */
-    isSpecialEvent: CoercedBooleanValueSchema.optional(),
-
-    /** Whether the showing is active and bookable. */
-    isActive: CoercedBooleanValueSchema.optional(),
-
-    /** Lifecycle status */
     status: ShowingStatusEnumSchema,
 
-    /** Optional showing-level configuration */
+    /** Nested configuration mapped directly to showing config. */
     config: z.object({
-        canReserveSeats: BooleanValueSchema,
+        isActive: CoercedBooleanValueSchema,
+        isSpecialEvent: CoercedBooleanValueSchema.optional(),
+        canReserveSeats: CoercedBooleanValueSchema.optional(),
     }),
 });
 
 /**
- * Full showing form schema.
+ * Composed showing form schema.
  *
- * @remarks
- * - Composes detail, language, datetime, and status schemas
- * - Removes theatre location fields from the final payload
- * - Enforces chronological validity between start and end datetime values
+ * - Removes theatre location fields from the output
+ * - Ensures end datetime is not earlier than start
  */
 export const ShowingFormSchema = ShowingFormDetailSchema
     .merge(ShowingFormLanguageSchema)

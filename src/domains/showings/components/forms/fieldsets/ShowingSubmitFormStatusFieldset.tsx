@@ -83,7 +83,7 @@ const ShowingSubmitFormStatusFieldset: FC<FieldsetProps> = ({form, activeFields}
         <fieldset className="space-y-3">
             <div>
                 <PrimaryHeaderText>Status</PrimaryHeaderText>
-                <Separator />
+                <Separator/>
             </div>
 
             <div className="grid grid-cols-2 gap-2">
@@ -102,22 +102,18 @@ const ShowingSubmitFormStatusFieldset: FC<FieldsetProps> = ({form, activeFields}
                 )}
 
                 {/* Is Active */}
-                {activeFields.isActive && (
-                    <HookFormCheckbox
-                        name="isActive"
-                        label="Is Active?"
-                        control={form.control}
-                    />
-                )}
+                <HookFormCheckbox
+                    name="config.isActive"
+                    label="Is Active?"
+                    control={form.control}
+                />
 
                 {/* Is Special Event */}
-                {activeFields.isSpecialEvent && (
-                    <HookFormCheckbox
-                        name="isSpecialEvent"
-                        label="Is Special Event?"
-                        control={form.control}
-                    />
-                )}
+                <HookFormCheckbox
+                    name="config.isSpecialEvent"
+                    label="Is Special Event?"
+                    control={form.control}
+                />
 
                 {/* Can Reserve Seats */}
                 <HookFormCheckbox

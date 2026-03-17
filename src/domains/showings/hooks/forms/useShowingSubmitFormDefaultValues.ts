@@ -53,8 +53,6 @@ export default function useShowingSubmitFormDefaultValues(
             ticketPrice: "",
             language: "",
             subtitleLanguages: [],
-            isSpecialEvent: "",
-            isActive: "",
             movie: "",
             theatre: "",
             screen: "",
@@ -62,7 +60,11 @@ export default function useShowingSubmitFormDefaultValues(
             theatreCity: "",
             theatreState: "",
             theatreCountry: undefined,
-            config: {canReserveSeats: false},
+            config: {
+                isActive: true,
+                isSpecialEvent: false,
+                canReserveSeats: false
+            },
 
             ...remShowing,
             ...showingDateAndTime,
