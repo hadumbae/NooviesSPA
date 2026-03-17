@@ -26,7 +26,6 @@ import TheatreQuickOverviewFetchCard
     from "@/domains/theatres/components/admin/theatre-details/TheatreQuickOverviewFetchCard.tsx";
 import ScreenHookFormSelect from "@/domains/screens/components/submit-form/inputs/ScreenHookFormSelect.tsx";
 import {UseFormReturn} from "react-hook-form";
-import {ShowingFormValues} from "@/domains/showings/schema/form/ShowingFormValues.types.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import filterFalsyAttributes from "@/common/utility/collections/filterFalsyAttributes.ts";
@@ -37,6 +36,7 @@ import {Plus, X} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {MultiStepFormContext} from "@/common/context/multi-step-form/MultiStepFormContext.ts";
 import TheatreHookFormSelect from "@/domains/theatres/components/admin/form/theatre-inputs/TheatreHookFormSelect.tsx";
+import {ShowingFormValues} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
 
 /**
  * Props for the `ShowingSubmitFormDetailsFieldset` component.

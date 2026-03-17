@@ -13,15 +13,15 @@
 
 import ShowingRepository from "@/domains/showings/repositories/ShowingRepository.ts";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {ShowingForm} from "@/domains/showings/schema/form/ShowingForm.types.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {SubmitMutationParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {ShowingFormValues} from "@/domains/showings/schema/form/ShowingFormValues.types.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {ShowingQueryKeys} from "@/domains/showings/utilities/query/ShowingQueryKeys.ts";
 import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ShowingForm} from "@/domains/showings/schema/form/form-schemas/ShowingFormSchema.ts";
+import {ShowingFormValues} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
 
 /**
  * Mutation parameters for submitting a Showing form.

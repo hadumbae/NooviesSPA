@@ -13,10 +13,10 @@
 
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {ShowingFormSchema} from "@/domains/showings/schema/form/ShowingForm.schema.ts";
-import {ShowingFormValues} from "@/domains/showings/schema/form/ShowingFormValues.types.ts";
 import {UseShowingFormParams} from "@/domains/showings/hooks/forms/useShowingSubmitForm.types.ts";
 import useShowingSubmitFormDefaultValues from "@/domains/showings/hooks/forms/useShowingSubmitFormDefaultValues.ts";
+import {ShowingFormSchema} from "@/domains/showings/schema/form/form-schemas/ShowingFormSchema.ts";
+import {ShowingFormValues} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
 
 /**
  * Initializes a `react-hook-form` instance for the showing submit form.

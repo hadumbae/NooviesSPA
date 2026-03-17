@@ -20,12 +20,12 @@
 
 import {FC} from 'react';
 import {UseFormReturn} from "react-hook-form";
-import {ShowingFormValues} from "@/domains/showings/schema/form/ShowingFormValues.types.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import ShowingStatusHookFormSelect from "@/domains/showings/components/inputs/ShowingStatusHookFormSelect.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
+import {ShowingFormValues} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
 
 /**
  * Props for `ShowingSubmitFormStatusFieldset`.

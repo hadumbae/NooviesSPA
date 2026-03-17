@@ -35,17 +35,9 @@ import useShowingSubmitMutation from "@/domains/showings/hooks/mutations/useShow
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {ShowingFormValues} from "@/domains/showings/schema/form/ShowingFormValues.types.ts";
 import {FormStep} from "@/common/type/form/SteppedFormTypes.ts";
 import {ChevronRight, Clock, Languages, ListCollapse} from "lucide-react";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import {
-    ShowingFormDateTimeValuesSchema,
-    ShowingFormDetailValuesSchema,
-    ShowingFormLanguageValuesSchema,
-    ShowingFormStatusValuesSchema,
-    ShowingFormValuesSchema
-} from "@/domains/showings/schema/form/ShowingFormValues.schema.ts";
 import ShowingSubmitFormDetailsFieldset
     from "@/domains/showings/components/forms/fieldsets/ShowingSubmitFormDetailsFieldset.tsx";
 import ShowingSubmitFormLanguagesFieldset
@@ -56,11 +48,27 @@ import ShowingSubmitFormDateTimeFieldset
 import ShowingSubmitFormStatusFieldset
     from "@/domains/showings/components/forms/fieldsets/ShowingSubmitFormStatusFieldset.tsx";
 import getSchemaFieldKeys from "@/common/utility/features/zod/getSchemaFieldKeys.ts";
-import {ShowingForm} from "@/domains/showings/schema/form/ShowingForm.types.ts";
 import buildFormSubmitLog from "@/common/utility/features/logger/buildFormSubmitLog.ts";
 import useFormInitialValues from "@/common/hooks/forms/useFormInitialValues.tsx";
 import {Showing} from "@/domains/showings/schema/showing/ShowingSchema.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ShowingForm} from "@/domains/showings/schema/form/form-schemas/ShowingFormSchema.ts";
+import {
+    ShowingFormLanguageValuesSchema
+} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormLanguageValuesSchema.ts";
+import {
+    ShowingFormDateTimeValuesSchema
+} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormDateTimeValuesSchema.ts";
+import {
+    ShowingFormDetailValuesSchema
+} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormDetailValuesSchema.ts";
+import {
+    ShowingFormStatusValuesSchema
+} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormStatusValuesSchema.ts";
+import {
+    ShowingFormValues,
+    ShowingFormValuesSchema
+} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
 
 /**
  * Editing-specific props for the submit form.

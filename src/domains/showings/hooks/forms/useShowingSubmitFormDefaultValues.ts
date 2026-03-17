@@ -1,9 +1,9 @@
 import {UseShowingFormParams} from "@/domains/showings/hooks/forms/useShowingSubmitForm.types.ts";
 import {useMemo, useRef} from "react";
-import {ShowingFormValues} from "@/domains/showings/schema/form/ShowingFormValues.types.ts";
 import getShowingDateAndTimeFormValues from "@/common/utility/date-and-time/getShowingDateAndTimeFormValues.ts";
 import {isEqual} from "lodash";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
+import {ShowingFormValues} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
 
 /**
  * Computes and returns the default values for the showing submit form.
