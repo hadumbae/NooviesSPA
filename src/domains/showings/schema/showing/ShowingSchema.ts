@@ -9,7 +9,6 @@ import {DateTimeInstanceSchema} from "@/common/schema/date-time/DateTimeInstance
 import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
 import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 import {ShowingStatusEnumSchema} from "@/domains/showings/schema/ShowingStatus.enum.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 
@@ -41,10 +40,6 @@ export const ShowingSchema = z.object({
         .array(ISO6391LanguageCodeEnum)
         .nonempty({message: "Must not be empty."}),
 
-    isSpecialEvent: CoercedBooleanValueSchema.optional(),
-
-    isActive: CoercedBooleanValueSchema.optional(),
-
     movie: IDStringSchema,
 
     theatre: IDStringSchema,
@@ -53,7 +48,7 @@ export const ShowingSchema = z.object({
 
     status: ShowingStatusEnumSchema,
 
-    config: ShowingConfigSchema.nullable().optional(),
+    config: ShowingConfigSchema,
 
     slug: NonEmptyStringSchema,
 });
