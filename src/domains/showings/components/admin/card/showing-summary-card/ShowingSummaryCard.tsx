@@ -1,4 +1,3 @@
-import { ShowingDetails } from "@/domains/showings/schema/showing/Showing.types.ts";
 import { Card, CardContent } from "@/common/components/ui/card.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import buildString from "@/common/utility/buildString.ts";
@@ -20,6 +19,7 @@ import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.t
 import IconTextSpan from "@/common/components/card-content/IconTextSpan.tsx";
 import { cn } from "@/common/lib/utils.ts";
 import { RoundedBorderCSS } from "@/common/constants/css/ContainerCSS.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 type CardProps = {
     /** Fully populated showing details */

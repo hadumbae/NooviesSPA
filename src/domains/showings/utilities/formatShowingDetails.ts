@@ -1,9 +1,9 @@
-import { ShowingDetails } from "@/domains/showings/schema/showing/Showing.types.ts";
 import formatLocationDetails from "@/common/utility/features/location/formatLocationDetails.ts";
 import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import buildShowingDateString from "@/domains/showings/utilities/buildShowingDateString.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * **formatShowingDetails**

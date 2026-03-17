@@ -16,8 +16,6 @@ import ShowingEditHeader from "@/domains/showings/components/headers/ShowingEdit
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import ShowingSubmitFormContainer from "@/domains/showings/components/forms/ShowingSubmitFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {ShowingDetailsSchema} from "@/domains/showings/schema/showing/Showing.schema.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import simplifyShowingDetails from "@/domains/showings/utilities/simplifyShowingDetails.ts";
 import ShowingEditBreadcrumbs from "@/domains/showings/components/features/showing-edit-page/ShowingEditBreadcrumbs.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
@@ -25,6 +23,7 @@ import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamS
 import useFetchShowingBySlug from "@/domains/showings/hooks/queries/useFetchShowingBySlug.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Page component for editing a Showing.

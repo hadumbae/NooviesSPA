@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { Card, CardContent } from "@/common/components/ui/card.tsx";
-import { ShowingDetails } from "@/domains/showings/schema/showing/Showing.types.ts";
 import formatShowingDetails from "@/domains/showings/utilities/formatShowingDetails.ts";
 import { Circle, Cog, DollarSign, Star } from "lucide-react";
 import LucideIconText from "@/common/components/card-content/LucideIconText.tsx";
 import { cn } from "@/common/lib/utils.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Props for the {@link ShowingIndexListCard} component.

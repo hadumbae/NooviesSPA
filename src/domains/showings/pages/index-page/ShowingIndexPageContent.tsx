@@ -9,8 +9,8 @@ import ShowingIndexListDialog from "@/domains/showings/components/admin/index-pa
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import ShowingIndexHeader from "@/domains/showings/components/admin/index-page/ShowingIndexHeader.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Props for `ShowingIndexPageContent`.

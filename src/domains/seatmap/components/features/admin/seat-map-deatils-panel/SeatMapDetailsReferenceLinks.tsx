@@ -2,8 +2,8 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {Clapperboard, Theater, TvMinimal} from "lucide-react";
 import StackedIconCardLink
     from "@/common/components/navigation/logged-link/StackedIconCardLink.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import buildString from "@/common/utility/buildString.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * @summary

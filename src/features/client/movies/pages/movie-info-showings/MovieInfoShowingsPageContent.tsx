@@ -15,7 +15,6 @@
 
 import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import TheatreShowingQueryFormContainer
     from "@/domains/showings/components/forms/theatre-showing-query/TheatreShowingQueryFormContainer.tsx";
 import {DisableKeys} from "@/common/type/form/HookFormFieldTypes.ts";
@@ -31,6 +30,7 @@ import ShowingInfoCompactListCard from "@/domains/showings/components/client/sho
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import MovieInfoHeader from "@/features/client/movies/components/headers/MovieInfoHeader.tsx";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Props for {@link MovieInfoShowingsPageContent}.

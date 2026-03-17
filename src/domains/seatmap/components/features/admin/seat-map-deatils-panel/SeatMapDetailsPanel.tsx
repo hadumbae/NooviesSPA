@@ -27,7 +27,6 @@ import SeatTypeLabelMap from "@/domains/seats/constants/SeatTypeLabelMap.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import SeatMapSeatSummary
     from "@/domains/seatmap/components/features/admin/seat-map-deatils-panel/SeatMapSeatSummary.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import SeatMapDetailsReferenceLinks
     from "@/domains/seatmap/components/features/admin/seat-map-deatils-panel/SeatMapDetailsReferenceLinks.tsx";
 import SeatMapDetailsSummary
@@ -39,6 +38,7 @@ import {SeatMapFormContext} from "@/domains/seatmap/context/seat-map-form-contex
 import {cn} from "@/common/lib/utils.ts";
 import {CardCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Props for {@link SeatMapDetailsPanel}.

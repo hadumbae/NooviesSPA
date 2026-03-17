@@ -13,7 +13,8 @@ import useFetchTheatreBySlug from "@/domains/theatres/hooks/fetch-theatre/useFet
 import useFetchPaginatedShowings from "@/domains/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {TheatreSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
-import {PaginatedShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingRelated.schema.ts";
+
+import {PaginatedShowingDetailsSchema} from "@/domains/showings/schema/showing/PaginatedShowingSchemas.ts";
 
 /**
  * Parameters for {@link useTheatreShowingListPageQueries}.

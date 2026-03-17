@@ -1,4 +1,3 @@
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import {
     Dialog,
     DialogContent,
@@ -36,6 +35,7 @@ import {
     SecondaryTextBaseCSS,
     SubheaderTextCSS
 } from "@/common/constants/css/TextCSS.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Props for the {@link ShowingIndexListDialog} component.

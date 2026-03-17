@@ -13,7 +13,6 @@
  * - Navigation events are logged for traceability
  */
 
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import {formatShowingInfo} from "@/domains/showings/utilities/formatShowingInfo.ts";
@@ -23,6 +22,7 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import ShowingTicketSelectorFormContainer
     from "@/domains/reservation/components/forms/ticket-selectors/ShowingTicketSelectorFormContainer.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Props for {@link ShowingInfoPageContent}.

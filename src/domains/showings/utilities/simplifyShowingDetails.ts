@@ -8,9 +8,9 @@
  * Throws a {@link ParseError} if the simplified payload fails schema validation.
  */
 
-import {Showing, ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
-import {ShowingSchema} from "@/domains/showings/schema/showing/Showing.schema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
+import {Showing, ShowingSchema} from "@/domains/showings/schema/showing/ShowingSchema.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * ⚡ Simplifies a populated showing into its base form.

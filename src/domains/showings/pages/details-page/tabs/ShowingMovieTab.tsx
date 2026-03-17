@@ -17,11 +17,11 @@ import useFetchShowings from "@/domains/showings/hooks/queries/useFetchShowings.
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
 import { MovieDetails } from "@/domains/movies/schema/movie/Movie.types.ts";
-import { ShowingDetails } from "@/domains/showings/schema/showing/Showing.types.ts";
 import ShowingMovieCard from "@/domains/showings/components/admin/card/showing-movie-card/ShowingMovieCard.tsx";
 import ShowingSummaryCardList from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCardList.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import { ShowingDetailsArraySchema } from "@/domains/showings/schema/showing/ShowingRelated.schema.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ShowingDetailsArraySchema} from "@/domains/showings/schema/showing/ShowingArraySchemas.ts";
 
 /**
  * Combined query result shape for {@link ShowingMovieTab}.

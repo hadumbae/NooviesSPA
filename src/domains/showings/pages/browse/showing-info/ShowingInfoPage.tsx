@@ -3,9 +3,8 @@ import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamS
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import useFetchShowingBySlug from "@/domains/showings/hooks/queries/useFetchShowingBySlug.ts";
-import {ShowingDetailsSchema} from "@/domains/showings/schema/showing/Showing.schema.ts";
 import ShowingInfoPageContent from "@/domains/showings/pages/browse/showing-info/ShowingInfoPageContent.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 const ShowingInfoPage = () => {
     const {slug} = useFetchByIdentifierRouteParams({

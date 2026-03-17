@@ -7,11 +7,11 @@ import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieByS
 import useFetchPaginatedShowings from "@/domains/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import { QueryDefinition } from "@/common/type/query/loader/MultiQuery.types.ts";
 import { MovieDetailsSchema } from "@/domains/movies/schema/movie/Movie.schema.ts";
-import { PaginatedShowingDetailsSchema } from "@/domains/showings/schema/showing/ShowingRelated.schema.ts";
 import {
     ShowingsPageQueryStrings
 } from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.types.ts";
 import { SlugString } from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {PaginatedShowingDetailsSchema} from "@/domains/showings/schema/showing/PaginatedShowingSchemas.ts";
 
 /**
  * Parameters for {@link useMovieInfoShowingsPageQueries}.

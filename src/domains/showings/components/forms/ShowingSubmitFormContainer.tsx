@@ -32,7 +32,6 @@ import {FC} from "react";
 import useShowingSubmitForm from "@/domains/showings/hooks/forms/useShowingSubmitForm.ts";
 import useShowingSubmitMutation from "@/domains/showings/hooks/mutations/useShowingSubmitMutation.ts";
 
-import {Showing, ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
@@ -60,6 +59,8 @@ import getSchemaFieldKeys from "@/common/utility/features/zod/getSchemaFieldKeys
 import {ShowingForm} from "@/domains/showings/schema/form/ShowingForm.types.ts";
 import buildFormSubmitLog from "@/common/utility/features/logger/buildFormSubmitLog.ts";
 import useFormInitialValues from "@/common/hooks/forms/useFormInitialValues.tsx";
+import {Showing} from "@/domains/showings/schema/showing/ShowingSchema.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Editing-specific props for the submit form.

@@ -1,7 +1,7 @@
 import { PopulatedScreenSchema } from "@/domains/screens/schema/screen/Screen.schema.ts";
-import { ShowingDetailsArraySchema } from "@/domains/showings/schema/showing/ShowingRelated.schema.ts";
 import { z } from "zod";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {ShowingDetailsArraySchema} from "@/domains/showings/schema/showing/ShowingArraySchemas.ts";
 
 /**
  * @file ScreenWithShowingsSchema.ts

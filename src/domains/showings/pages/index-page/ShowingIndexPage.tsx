@@ -9,10 +9,12 @@ import ShowingIndexPageContent from "@/domains/showings/pages/index-page/Showing
 import useFetchPaginatedShowings from "@/domains/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {ShowingQueryOptionSchema} from "@/domains/showings/schema/queries/ShowingQueryOption.schema.ts";
-import {PaginatedShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingRelated.schema.ts";
-import {PaginatedShowingDetails} from "@/domains/showings/schema/showing/ShowingRelated.types.ts";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {
+    PaginatedShowingDetails,
+    PaginatedShowingDetailsSchema
+} from "@/domains/showings/schema/showing/PaginatedShowingSchemas.ts";
 
 const SHOWINGS_PER_PAGE = 10;
 

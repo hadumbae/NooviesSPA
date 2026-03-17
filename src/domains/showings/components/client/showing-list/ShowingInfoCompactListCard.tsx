@@ -15,7 +15,6 @@
  * - Provide navigation to movie and showing detail pages
  */
 
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {IconTextCSS} from "@/common/constants/css/TextCSS.ts";
@@ -23,6 +22,7 @@ import {TvMinimal} from "lucide-react";
 import {formatShowingInfo} from "@/domains/showings/utilities/formatShowingInfo.ts";
 import TheatreShowingSelectSummary
     from "@/domains/theatres/components/client/forms/browse-list/TheatreShowingSelectSummary.tsx";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Props for {@link ShowingInfoCompactListCard}.

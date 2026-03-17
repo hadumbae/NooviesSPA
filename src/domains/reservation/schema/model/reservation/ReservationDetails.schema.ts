@@ -17,13 +17,13 @@
  * only relation depth differs.
  */
 
-import {PopulatedShowingSchema} from "@/domains/showings/schema/showing/Showing.schema.ts";
 import {superRefineReservation} from "@/domains/reservation/schema/model/reservation/Reservation.utils.ts";
 import {ReservationBaseSchema} from "@/domains/reservation/schema/model/reservation/Reservation.schema.ts";
 import {z} from "zod";
 import {ReservationTypeConstant} from "@/domains/reservation/constants/ReservationTypeConstant.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {SeatMapWithSeatSchema} from "@/domains/seatmap/schema/model/SeatMap.schema.ts";
+import {PopulatedShowingSchema} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 
 /**
  * Base populated reservation schema.

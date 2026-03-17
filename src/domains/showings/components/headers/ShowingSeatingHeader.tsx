@@ -5,7 +5,8 @@ import useValidatePopulatedShowing from "@/domains/showings/hooks/validation/use
 import {cn} from "@/common/lib/utils.ts";
 import {Plus, Search} from "lucide-react";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
-import {Showing} from "@/domains/showings/schema/showing/Showing.types.ts";
+
+import {Showing} from "@/domains/showings/schema/showing/ShowingSchema.ts";
 
 interface Props {
     showing: Showing;

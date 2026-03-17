@@ -1,6 +1,5 @@
 import {ParseError} from "@/common/errors/ParseError.ts";
-import {ShowingDetailsSchema} from "@/domains/showings/schema/showing/Showing.schema.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Validates that the provided showing object includes all required populated relations.

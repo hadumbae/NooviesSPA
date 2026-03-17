@@ -8,9 +8,9 @@
  * Showing Details page.
  */
 
-import { ShowingDetails } from "@/domains/showings/schema/showing/Showing.types.ts";
 import { SeatMapDetails } from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import { createContext } from "react";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Values exposed by {@link ShowingDetailsPageContext}.

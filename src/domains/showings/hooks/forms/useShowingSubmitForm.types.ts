@@ -1,6 +1,6 @@
-import {Showing} from "@/domains/showings/schema/showing/Showing.types.ts";
 import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 import {ShowingFormValues} from "@/domains/showings/schema/form/ShowingFormValues.types.ts";
+import {Showing} from "@/domains/showings/schema/showing/ShowingSchema.ts";
 
 /**
  * Editing-specific parameters for showing form initialization.

@@ -26,10 +26,10 @@ import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchP
 import {
     ShowingsPageQueryStringSchema
 } from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";
-import {PaginatedShowingDetails} from "@/domains/showings/schema/showing/ShowingRelated.types.ts";
 import {
     useMovieInfoShowingsPageQueries
 } from "@/domains/movies/views/client/movie-info-showings-page/useMovieInfoShowingsPageQueries.ts";
+import {PaginatedShowingDetails} from "@/domains/showings/schema/showing/PaginatedShowingSchemas.ts";
 
 /** Default number of showings displayed per page. */
 const SHOWINGS_PER_PAGE = 20;

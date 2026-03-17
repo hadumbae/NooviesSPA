@@ -7,7 +7,6 @@
  * and selection of individual showings.
  */
 
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import {cn} from "@/common/lib/utils.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
@@ -22,6 +21,7 @@ import buildString from "@/common/utility/buildString.ts";
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {Captions, Volume2} from "lucide-react";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Props for {@link TheatreShowingSelectSummary}.

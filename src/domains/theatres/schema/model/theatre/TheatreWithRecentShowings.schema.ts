@@ -10,7 +10,8 @@
 
 import {TheatreSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
-import {ShowingDetailsArraySchema} from "@/domains/showings/schema/showing/ShowingRelated.schema.ts";
+
+import {ShowingDetailsArraySchema} from "@/domains/showings/schema/showing/ShowingArraySchemas.ts";
 
 /**
  * Theatre schema extended with populated showing details.

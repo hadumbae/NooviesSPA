@@ -14,8 +14,8 @@ import {Ellipsis, Loader} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import useShowingDeleteMutation from "@/domains/showings/hooks/mutations/useShowingDeleteMutation.ts";
 import {Link} from "react-router-dom";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import ButtonVariant from "@/common/type/ui/shad-cn-button/ButtonVariant.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Props for {@link ShowingOptions}.

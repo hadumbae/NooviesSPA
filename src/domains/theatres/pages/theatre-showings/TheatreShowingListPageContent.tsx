@@ -6,7 +6,6 @@
  */
 
 import { Theatre, TheatreDetails } from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
-import { ShowingDetails } from "@/domains/showings/schema/showing/Showing.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import TheatreShowingListHeader
     from "@/domains/theatres/components/admin/pages/theatre-showing-list/TheatreShowingListHeader.tsx";
@@ -18,6 +17,7 @@ import { Plus } from "lucide-react";
 import { cn } from "@/common/lib/utils.ts";
 import { SecondaryTextBaseCSS } from "@/common/constants/css/TextCSS.ts";
 import ShowingSummaryCard from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCard.tsx";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Props for {@link TheatreShowingListPageContent}.

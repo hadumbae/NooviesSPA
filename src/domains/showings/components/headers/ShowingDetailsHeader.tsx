@@ -5,7 +5,8 @@ import {TableOfContents} from "lucide-react";
 import ShowingOptions from "@/domains/showings/components/ShowingOptions.tsx";
 import {useNavigate} from "react-router-dom";
 import {Button} from "@/common/components/ui/button.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
+
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 interface Props {
     showing: ShowingDetails;

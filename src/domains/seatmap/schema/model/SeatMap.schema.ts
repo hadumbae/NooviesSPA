@@ -7,12 +7,13 @@ import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {SeatMapStatusEnum} from "@/domains/seatmap/schema/enum/SeatMapStatusEnum.ts";
-import {PopulatedShowingSchema, ShowingSchema} from "@/domains/showings/schema/showing/Showing.schema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {SeatDetailsSchema} from "@/domains/seats/schema/seat/SeatDetails.schema.ts";
 import {SeatingStructureSchema} from "@/domains/seats/schema/seat/Seat.schema.ts";
+import {ShowingSchema} from "@/domains/showings/schema/showing/ShowingSchema.ts";
+import {PopulatedShowingSchema} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 
 /** Reservation and pricing state for a seat within a showing. */
 export const SeatMapSchema = z.object({

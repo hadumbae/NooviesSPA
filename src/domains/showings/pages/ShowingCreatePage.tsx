@@ -21,10 +21,10 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import ShowingCreateHeader from "@/domains/showings/components/features/showing-create-page/ShowingCreateHeader.tsx";
 import ShowingSubmitFormContainer from "@/domains/showings/components/forms/ShowingSubmitFormContainer.tsx";
 import { Card, CardContent } from "@/common/components/ui/card.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import ShowingCreateBreadcrumbs
     from "@/domains/showings/components/features/showing-create-page/ShowingCreateBreadcrumbs.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * `ShowingCreatePage` renders the full page for creating a new showing.

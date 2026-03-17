@@ -10,9 +10,8 @@ import {ShowingQueryOptions} from "@/domains/showings/schema/queries/ShowingQuer
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import ShowingSummaryCardList
     from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCardList.tsx";
-import {ShowingDetailsArraySchema} from "@/domains/showings/schema/showing/ShowingRelated.schema.ts";
-import {ShowingDetailsArray} from "@/domains/showings/schema/showing/ShowingRelated.types.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {ShowingDetailsArray, ShowingDetailsArraySchema} from "@/domains/showings/schema/showing/ShowingArraySchemas.ts";
 
 /**
  * Props for {@link ShowingSummaryListQuery}.

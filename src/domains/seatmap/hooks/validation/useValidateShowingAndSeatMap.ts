@@ -1,8 +1,8 @@
-import {Showing} from "@/domains/showings/schema/showing/Showing.types.ts";
-import {ShowingDetailsSchema} from "@/domains/showings/schema/showing/Showing.schema.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {SeatMapDetailsSchema} from "@/domains/seatmap/schema/model/SeatMap.schema.ts";
 import {SeatMap} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
+import {Showing} from "@/domains/showings/schema/showing/ShowingSchema.ts";
+import {ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Validates both a showing object and its corresponding seat map.

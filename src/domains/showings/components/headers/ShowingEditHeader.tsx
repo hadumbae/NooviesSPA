@@ -7,7 +7,8 @@
 
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
+
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 type HeaderProps = {
     /** Fully populated showing used to build the header content */

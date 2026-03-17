@@ -11,9 +11,7 @@
  * - Cache invalidation for all related Showing queries
  */
 
-import {ShowingDetailsSchema} from "@/domains/showings/schema/showing/Showing.schema.ts";
 import ShowingRepository from "@/domains/showings/repositories/ShowingRepository.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ShowingForm} from "@/domains/showings/schema/form/ShowingForm.types.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
@@ -23,6 +21,7 @@ import {SubmitMutationParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ShowingFormValues} from "@/domains/showings/schema/form/ShowingFormValues.types.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {ShowingQueryKeys} from "@/domains/showings/utilities/query/ShowingQueryKeys.ts";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Mutation parameters for submitting a Showing form.

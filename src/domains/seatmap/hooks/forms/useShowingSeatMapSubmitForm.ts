@@ -3,9 +3,9 @@ import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import convertObjectsToIDs from "@/common/utility/formatters/convertObjectsToIDs.ts";
 
-import {Showing} from "@/domains/showings/schema/showing/Showing.types.ts";
 import {SeatMap} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import {SeatMapForm} from "@/domains/seatmap/schema/form/SeatMapForm.types.ts";
+import {Showing} from "@/domains/showings/schema/showing/ShowingSchema.ts";
 
 export default function useShowingSeatMapSubmitForm(
     params: {showing: Showing, seatMap?: SeatMap}

@@ -6,7 +6,6 @@
  * details page, and the current edit state.
  */
 
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -17,6 +16,7 @@ import {
 } from "@/common/components/ui/breadcrumb.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import buildString from "@/common/utility/buildString.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 type BreadcrumbProps = {
     /** Fully populated showing used to build breadcrumb labels and links */

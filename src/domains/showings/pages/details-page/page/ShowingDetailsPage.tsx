@@ -22,9 +22,7 @@ import PageLoader from "@/common/components/page/PageLoader.tsx";
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
 import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-import {ShowingDetailsSchema} from "@/domains/showings/schema/showing/Showing.schema.ts";
 import {SeatMapDetailsArraySchema} from "@/domains/seatmap/schema/model/SeatMap.schema.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing/Showing.types.ts";
 import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import ShowingDetailsPageContent from "@/domains/showings/pages/details-page/page/ShowingDetailsPageContent.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
@@ -32,6 +30,7 @@ import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamS
 import useFetchShowingBySlug from "@/domains/showings/hooks/queries/useFetchShowingBySlug.ts";
 import ShowingDetailsPageContextProvider
     from "@/domains/showings/context/showing-details-page-context/ShowingDetailsPageContextProvider.tsx";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Shape of validated query data passed to the page context.
