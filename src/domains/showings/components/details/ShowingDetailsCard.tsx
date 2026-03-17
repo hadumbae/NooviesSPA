@@ -56,8 +56,7 @@ const ShowingDetailsCard = ({showing}: CardProps) => {
         ticketPrice,
         language,
         subtitleLanguages,
-        isActive,
-        isSpecialEvent
+        config: {isActive, isSpecialEvent}
     } = showing;
 
     // --- Date And Time ---

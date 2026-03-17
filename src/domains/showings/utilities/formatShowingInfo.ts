@@ -35,6 +35,9 @@ export type FormattedShowingInfo = {
     formattedStartTime: string;
 
     reservationType: ReservationType;
+    isActive: boolean;
+    isSpecialEvent?: boolean;
+    canReserveSeats?: boolean;
 };
 
 /**
@@ -62,7 +65,7 @@ export function formatShowingInfo(showing: ShowingDetails): FormattedShowingInfo
         theatre,
         screen,
         startTime,
-        isSpecialEvent,
+
         language,
         subtitleLanguages,
         slug: showingSlug,
@@ -81,13 +84,16 @@ export function formatShowingInfo(showing: ShowingDetails): FormattedShowingInfo
         .setZone(theatreTimeZone)
         .toFormat("hh:mma • dd MMM yy");
 
+    const {isActive, isSpecialEvent, canReserveSeats} = showingConfig;
+
     const formattedType = isSpecialEvent ? "Special" : "Standard";
     const spokenLanguage = ISO6391LanguageConstant[language];
     const subtitles = subtitleLanguages.length > 0
         ? buildString(subtitleLanguages.map((l) => ISO6391LanguageConstant[l]), " • ")
         : "None";
 
-    const reservationType = showingConfig?.canReserveSeats
+
+    const reservationType = canReserveSeats
         ? "RESERVED_SEATS"
         : "GENERAL_ADMISSION";
 
@@ -109,5 +115,8 @@ export function formatShowingInfo(showing: ShowingDetails): FormattedShowingInfo
         spokenLanguage,
         subtitles,
         reservationType,
+        isActive,
+        isSpecialEvent,
+        canReserveSeats,
     };
 }

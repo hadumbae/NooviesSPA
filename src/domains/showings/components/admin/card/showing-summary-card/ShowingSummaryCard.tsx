@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/common/components/ui/card.tsx";
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import buildString from "@/common/utility/buildString.ts";
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
@@ -17,8 +17,8 @@ import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHo
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import IconTextSpan from "@/common/components/card-content/IconTextSpan.tsx";
-import { cn } from "@/common/lib/utils.ts";
-import { RoundedBorderCSS } from "@/common/constants/css/ContainerCSS.ts";
+import {cn} from "@/common/lib/utils.ts";
+import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 type CardProps = {
@@ -36,7 +36,7 @@ type CardProps = {
  *
  * Designed for dense overview lists in admin dashboards.
  */
-const ShowingSummaryCard = ({ showing }: CardProps) => {
+const ShowingSummaryCard = ({showing}: CardProps) => {
     const {
         _id,
         movie,
@@ -45,14 +45,16 @@ const ShowingSummaryCard = ({ showing }: CardProps) => {
         startTime,
         endTime,
         ticketPrice,
-        isSpecialEvent,
-        isActive,
         status,
+        config: {
+            isSpecialEvent,
+            isActive,
+        }
     } = showing;
 
-    const { runtime } = movie;
-    const { _id: theatreID, name: theatreName, slug: theatreSlug } = theatre;
-    const { _id: screenID, name: screenName, screenType } = screen;
+    const {runtime} = movie;
+    const {_id: theatreID, name: theatreName, slug: theatreSlug} = theatre;
+    const {_id: screenID, name: screenName, screenType} = screen;
 
     // --- Formatted Strings ---
 
@@ -82,7 +84,7 @@ const ShowingSummaryCard = ({ showing }: CardProps) => {
                     <div>
                         <LoggedLink to={`/admin/showings/get/${_id}`}>
                             <IconButton>
-                                <Search />
+                                <Search/>
                             </IconButton>
                         </LoggedLink>
                     </div>
@@ -92,19 +94,19 @@ const ShowingSummaryCard = ({ showing }: CardProps) => {
 
                 <div className={cn(RoundedBorderCSS, "grid grid-cols-2 gap-1 p-2 select-none")}>
                     <IconTextSpan className={cn(RoundedBorderCSS, "px-2")}>
-                        <DollarSign /> {ticketPrice}
+                        <DollarSign/> {ticketPrice}
                     </IconTextSpan>
 
                     <IconTextSpan className={cn(RoundedBorderCSS, "px-2")}>
-                        <Cog /> {formattedStatus}
+                        <Cog/> {formattedStatus}
                     </IconTextSpan>
 
                     <IconTextSpan className={cn(RoundedBorderCSS, "px-2")}>
-                        <BadgeAlert /> {isSpecialEvent ? "Special" : "Normal"} Event
+                        <BadgeAlert/> {isSpecialEvent ? "Special" : "Normal"} Event
                     </IconTextSpan>
 
                     <IconTextSpan className={cn(RoundedBorderCSS, "px-2")}>
-                        <Circle /> {isActive ? "Active" : "Inactive"}
+                        <Circle/> {isActive ? "Active" : "Inactive"}
                     </IconTextSpan>
                 </div>
 
@@ -115,14 +117,14 @@ const ShowingSummaryCard = ({ showing }: CardProps) => {
                         to={`/admin/theatres/get/${theatreSlug}`}
                         className="text-xs"
                     >
-                        <Theater /> {theatreName}
+                        <Theater/> {theatreName}
                     </LoggedHoverLink>
 
                     <LoggedHoverLink
                         to={`/admin/theatres/get/${theatreID}/screen/${screenID}`}
                         className="text-xs"
                     >
-                        <TvMinimal /> {screenName} ({screenType})
+                        <TvMinimal/> {screenName} ({screenType})
                     </LoggedHoverLink>
                 </div>
             </CardContent>

@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { Card, CardContent } from "@/common/components/ui/card.tsx";
+import {FC} from "react";
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import formatShowingDetails from "@/domains/showings/utilities/formatShowingDetails.ts";
-import { Circle, Cog, DollarSign, Star } from "lucide-react";
+import {Circle, Cog, DollarSign, Star} from "lucide-react";
 import LucideIconText from "@/common/components/card-content/LucideIconText.tsx";
-import { cn } from "@/common/lib/utils.ts";
+import {cn} from "@/common/lib/utils.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
@@ -34,8 +34,8 @@ type ShowingIndexListCardProps = {
  * <ShowingIndexListCard showing={showingData} />
  * ```
  */
-const ShowingIndexListCard: FC<ShowingIndexListCardProps> = ({ showing }) => {
-    const { isSpecialEvent, ticketPrice, isActive } = showing;
+const ShowingIndexListCard: FC<ShowingIndexListCardProps> = ({showing}) => {
+    const {ticketPrice, config: {isSpecialEvent, isActive}} = showing;
 
     const {
         movieTitle,
@@ -56,7 +56,7 @@ const ShowingIndexListCard: FC<ShowingIndexListCardProps> = ({ showing }) => {
                         <h1 className="font-extrabold">
                             {movieTitle} ({releaseYear})
                         </h1>
-                        {isSpecialEvent && <Star className="text-green-500" size={20} />}
+                        {isSpecialEvent && <Star className="text-green-500" size={20}/>}
                     </div>
 
                     <h2 className="text-sm text-neutral-600 text-left">

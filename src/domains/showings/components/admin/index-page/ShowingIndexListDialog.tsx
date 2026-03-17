@@ -71,7 +71,7 @@ type ShowingIndexListDialogProps = {
  * ```
  */
 const ShowingIndexListDialog = ({showing}: ShowingIndexListDialogProps) => {
-    const {movie, theatre, isSpecialEvent, isActive, ticketPrice, slug} = showing;
+    const {movie, theatre, ticketPrice, slug, config: {isSpecialEvent, isActive}} = showing;
     const {posterImage, synopsis} = movie;
     const {
         location: {country},

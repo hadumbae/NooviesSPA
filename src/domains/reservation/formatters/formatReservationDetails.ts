@@ -30,7 +30,9 @@ type FormattedReturns = {
     ticketCount: number;
     pricePaid: number;
     posterImage?: CloudinaryImage | null;
+    isActive: boolean,
     isSpecialEvent?: boolean;
+    canReserveSeats?: boolean,
     _ids: {
         showingID: ObjectId;
         theatreID: ObjectId;
@@ -52,7 +54,8 @@ type FormattedReturns = {
  */
 export function formatReservationDetails(reservation: ReservationDetails): FormattedReturns {
     const {_id, slug, status, showing, reservationType, ticketCount, pricePaid} = reservation;
-    const {_id: showingID, movie, theatre, startTime, endTime, isSpecialEvent} = showing;
+    const {_id: showingID, movie, theatre, startTime, endTime, config} = showing;
+    const {isActive, isSpecialEvent, canReserveSeats} = config;
     const {_id: theatreID, location: {timezone}} = theatre;
     const {_id: movieID, title, releaseDate, posterImage, runtime, genres: movieGenres} = movie;
 
@@ -76,7 +79,9 @@ export function formatReservationDetails(reservation: ReservationDetails): Forma
         ticketCount,
         pricePaid,
         posterImage,
+        isActive,
         isSpecialEvent,
+        canReserveSeats,
         _ids: {
             showingID,
             theatreID,
