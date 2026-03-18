@@ -1,48 +1,32 @@
 /**
- * @file ShowingInfoCompactListCard.tsx
- *
- * Compact list-style card for displaying key Showing information.
- *
- * @remarks
- * Designed for dense browsing views (e.g. showing lists, search results).
- * Uses {@link formatShowingInfo} to transform domain data into
- * UI-ready display fields.
- *
- * Responsibilities:
- * - Display movie poster and title
- * - Show runtime, format type, language, and subtitles
- * - Present localized showing start time
- * - Provide navigation to movie and showing detail pages
+ * @file List-optimized card for showing previews.
+ * @filename ShowingInfoCompactListCard.tsx
  */
 
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/common/components/ui/card.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {IconTextCSS} from "@/common/constants/css/TextCSS.ts";
-import {TvMinimal} from "lucide-react";
-import {formatShowingInfo} from "@/domains/showings/utilities/formatShowingInfo.ts";
+import { IconTextCSS } from "@/common/constants/css/TextCSS.ts";
+import { TvMinimal } from "lucide-react";
 import TheatreShowingSelectSummary
     from "@/domains/theatres/components/client/forms/browse-list/TheatreShowingSelectSummary.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import { ShowingDetails } from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import { PopulatedShowing } from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 
 /**
  * Props for {@link ShowingInfoCompactListCard}.
  */
 type CardProps = {
-    /** Full showing details used to derive display information. */
-    showing: ShowingDetails;
+    /** {@link PopulatedShowing} | {@link ShowingDetails} */
+    showing: PopulatedShowing | ShowingDetails;
 };
 
 /**
- * Renders a compact card summarizing a
- * single Showing for client side browsing.
- *
- * @param props - Component props.
- * @returns A compact, interactive card suitable for list views.
+ * Minimal card delegating showing details to {@link TheatreShowingSelectSummary}.
  */
-const ShowingInfoCompactListCard = ({showing}: CardProps) => {
+const ShowingInfoCompactListCard = ({ showing }: CardProps) => {
     const {
-        theatre: {name: theatreName, slug: theatreSlug},
-        screen: {name: screenName},
+        theatre: { name: theatreName, slug: theatreSlug },
+        screen: { name: screenName },
     } = showing;
 
     return (

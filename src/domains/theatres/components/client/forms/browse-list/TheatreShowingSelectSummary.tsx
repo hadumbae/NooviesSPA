@@ -1,10 +1,6 @@
 /**
- * @file TheatreShowingSelectSummary.tsx
- *
- * Compact summary component for a single theatre showing.
- *
- * Used within theatre browse lists to allow quick inspection
- * and selection of individual showings.
+ * @file Compact selectable summary for a single theatre showing.
+ * @filename TheatreShowingSelectSummary.tsx
  */
 
 import {cn} from "@/common/lib/utils.ts";
@@ -22,28 +18,24 @@ import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeader
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {Captions, Volume2} from "lucide-react";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 
 /**
  * Props for {@link TheatreShowingSelectSummary}.
  */
 type SummaryProps = {
-    /** Fully populated showing details */
-    showing: ShowingDetails;
+    /** {@link PopulatedShowing} | {@link ShowingDetails} */
+    showing: PopulatedShowing | ShowingDetails;
 
-    /** Optional container class overrides */
+    /** Container style overrides. */
     className?: string;
 };
 
+/** Derived from {@link IconTextCSS}. */
 const ICON_CSS = cn(IconTextCSS, "max-md:text-sm select-none");
 
 /**
- * Displays a concise, selectable summary of a single showing.
- *
- * Includes:
- * - Movie poster and title
- * - Runtime and format metadata
- * - Language and subtitle indicators
- * - Start time and selection action
+ * Selection card using {@link formatShowingInfo} for data normalization.
  */
 const TheatreShowingSelectSummary = (
     {showing, className}: SummaryProps,

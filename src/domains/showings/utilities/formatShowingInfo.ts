@@ -1,20 +1,26 @@
+/**
+ * @file Normalization utility for theatre showing presentation data.
+ * @filename formatShowingInfo.ts
+ */
+
 import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
 import buildString from "@/common/utility/buildString.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
-import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
-import {ReservationType} from "@/domains/reservation/schema/enum/ReservationTypeEnumSchema.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import { CloudinaryImage } from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import { ReservationType } from "@/domains/reservation/schema/enum/ReservationTypeEnumSchema.ts";
+import { ShowingDetails } from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import { PopulatedShowing } from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 
 /**
- * UI-ready formatted showing information.
- *
- * @remarks
- * Intended for presentation layers (cards, lists, detail views).
- * All fields are safe to render directly.
+ * UI-ready representation of a showing.
  */
 export type FormattedShowingInfo = {
+    /** {@link movieTitle} without year. */
     movieTitle: string;
+
+    /** {@link CloudinaryImage} */
     posterImage: CloudinaryImage | undefined | null;
+
     movieSlug: string;
 
     screenName: string;
@@ -25,56 +31,55 @@ export type FormattedShowingInfo = {
     theatreSlug: string;
 
     showingSlug: string;
+
+    /** Human-readable language via {@link ISO6391LanguageConstant}. */
     spokenLanguage: string;
+
+    /** Delimited subtitle labels or "None". */
     subtitles: string;
 
+    /** Display label for the event type. */
     formattedType: "Standard" | "Special";
+
+    /** Formatted via {@link formatMovieRuntime}. */
     formattedRunTime: string;
+
+    /** Title suffixed with release year. */
     formattedMovieTitle: string;
+
+    /** Year string or "Unreleased". */
     formattedReleaseDate: string;
+
+    /** Localized time string based on theatre timezone. */
     formattedStartTime: string;
 
+    /** {@link ReservationType} */
     reservationType: ReservationType;
+
     isActive: boolean;
     isSpecialEvent?: boolean;
     canReserveSeats?: boolean;
 };
 
 /**
- * Formats a {@link ShowingDetails} object into UI-ready display fields.
- *
- * @remarks
- * Centralizes all human-readable formatting for showing cards, lists,
- * and detail views. Handles:
- * - Movie title + release year composition
- * - Runtime formatting
- * - Theatre-timezone–aware start time
- * - Spoken language and subtitle resolution
- * - Special vs. standard showing labeling
- *
- * This function is **pure** and performs no mutations.
- *
- * @param showing - Fully populated showing details object.
- *
- * @returns An object containing formatted strings and commonly accessed
- * identifiers for presentation components.
+ * Maps {@link PopulatedShowing} or {@link ShowingDetails} into {@link FormattedShowingInfo}.
+ * * Centralizes timezone adjustments, language resolution, and string formatting.
  */
-export function formatShowingInfo(showing: ShowingDetails): FormattedShowingInfo {
+export function formatShowingInfo(showing: PopulatedShowing | ShowingDetails): FormattedShowingInfo {
     const {
         movie,
         theatre,
         screen,
         startTime,
-
         language,
         subtitleLanguages,
         slug: showingSlug,
         config: showingConfig
     } = showing;
 
-    const {title: movieTitle, posterImage, runtime, releaseDate, slug: movieSlug} = movie;
-    const {slug: theatreSlug, name: theatreName, location: {timezone: theatreTimeZone}} = theatre;
-    const {slug: screenSlug, name: screenName, screenType} = screen;
+    const { title: movieTitle, posterImage, runtime, releaseDate, slug: movieSlug } = movie;
+    const { slug: theatreSlug, name: theatreName, location: { timezone: theatreTimeZone } } = theatre;
+    const { slug: screenSlug, name: screenName, screenType } = screen;
 
     const formattedReleaseDate = releaseDate ? releaseDate.toFormat("yyyy") : "Unreleased";
     const formattedMovieTitle = buildString([movieTitle, `(${formattedReleaseDate})`]);
@@ -84,14 +89,15 @@ export function formatShowingInfo(showing: ShowingDetails): FormattedShowingInfo
         .setZone(theatreTimeZone)
         .toFormat("hh:mma • dd MMM yy");
 
-    const {isActive, isSpecialEvent, canReserveSeats} = showingConfig;
+    const { isActive, isSpecialEvent, canReserveSeats } = showingConfig;
 
     const formattedType = isSpecialEvent ? "Special" : "Standard";
+
     const spokenLanguage = ISO6391LanguageConstant[language];
+
     const subtitles = subtitleLanguages.length > 0
         ? buildString(subtitleLanguages.map((l) => ISO6391LanguageConstant[l]), " • ")
         : "None";
-
 
     const reservationType = canReserveSeats
         ? "RESERVED_SEATS"
