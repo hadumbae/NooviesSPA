@@ -39,7 +39,12 @@ const MovieInfoHeader = (
             </LoggedLink>
 
             <div className="space-y-1 py-3">
-                <HeaderDescription className="text-sm">{movieTitle}</HeaderDescription>
+                <LoggedLink to={`/browse/movies/${movieSlug}`}>
+                    <HeaderDescription className="text-sm hover:underline hover:underline-offset-4">
+                        {movieTitle}
+                    </HeaderDescription>
+                </LoggedLink>
+
                 <HeaderTitle className="text-2xl">{pageText}</HeaderTitle>
             </div>
         </header>
