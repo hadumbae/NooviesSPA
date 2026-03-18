@@ -15,34 +15,32 @@ import {
 } from "@/domains/movies/views/client/repositories/MovieClientViewRepository.types.ts";
 
 /**
- * Parameters for {@link useFetchMovieInfoShowingsData}.
+ * Props for {@link useFetchMovieInfoShowingsData}.
  */
 type FetchParams = {
-    /** Movie slug used to identify the resource. */
+    /** {@link SlugString} used to resolve the specific movie resource. */
     slug: SlugString;
 
-    /** Query parameters applied to the request. */
+    /** {@link GetShowingsForMovieViewQueryStrings} for filtering and pagination. */
     queries: GetShowingsForMovieViewQueryStrings;
 
-    /** Optional React Query configuration overrides. */
+    /** {@link UseQueryOptions} overrides. */
     options?: UseQueryOptions<unknown>;
 };
 
 /**
- * Fetches showings data for a movie view.
+ * Fetches showing and movie metadata via {@link getShowingsForMovieView}.
  */
 export function useFetchMovieInfoShowingsData(
     {slug, queries, options}: FetchParams
 ): UseQueryResult<unknown, HttpResponseError> {
-    const {page, perPage} = queries;
-
     const fetchData = useQueryFnHandler({
         action: () => getShowingsForMovieView({slug, queries}),
         errorMessage: "Failed to fetch showing details for movie."
     });
 
     return useQuery({
-        queryKey: ["movies", "views", "client", "showings", {slug, page, perPage}],
+        queryKey: ["movies", "views", "client", "showings", {slug, ...queries}],
         queryFn: fetchData,
         ...useQueryOptionDefaults(options),
     });
