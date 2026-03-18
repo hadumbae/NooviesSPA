@@ -1,16 +1,6 @@
 /**
- * @file MovieInfoShowingsPageContent.tsx
- *
- * Page content component for displaying a movie’s available showings.
- *
- * @remarks
- * Responsible for:
- * - Rendering the movie header (title, release year, navigation)
- * - Providing theatre-level filtering controls via query form
- * - Displaying paginated showing results
- * - Handling pagination state updates
- *
- * Data fetching and query orchestration are handled by the parent page.
+ * @file Presentational content for movie showings including filters and list.
+ * @filename MovieInfoShowingsPageContent.tsx
  */
 
 import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
@@ -26,46 +16,38 @@ import {
     ShowingsPageQueryStringSchema
 } from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import ShowingInfoCompactListCard from "@/domains/showings/components/client/showing-list/ShowingInfoCompactListCard.tsx";
+import ShowingInfoCompactListCard
+    from "@/domains/showings/components/client/showing-list/ShowingInfoCompactListCard.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import MovieInfoHeader from "@/features/client/movies/components/headers/MovieInfoHeader.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 
 /**
  * Props for {@link MovieInfoShowingsPageContent}.
  */
 type ContentProps = {
-    /** Current pagination page. */
+    /** Current active page index. */
     page: number;
 
-    /** Number of showings per page. */
+    /** Items per page limit for layout spacing. */
     perPage: number;
 
-    /** Pagination state setter. */
+    /** Callback to update page state in parent. */
     setPage: (page: number) => void;
 
-    /** Movie metadata. */
+    /** Primary {@link MovieDetails} used for the header and filtering context. */
     movie: MovieDetails;
 
-    /** Total number of matching showings. */
+    /** Total results count used to calculate {@link PaginationRangeButtons}. */
     totalShowings: number;
 
-    /** Showing records for the current page. */
-    showings: ShowingDetails[];
+    /** List of {@link PopulatedShowing} records to be rendered as cards. */
+    showings: PopulatedShowing[];
 };
 
 /**
- * Renders the main content for a movie’s showings page.
- *
- * @remarks
- * - Locks movie, theatre, and screen slugs in the query form
- * - Syncs query form state with URL search parameters
- * - Displays showings as compact list cards
- * - Conditionally renders pagination controls
- *
- * @param props - Page content props.
- * @returns Movie showings page content.
+ * Renders filtered {@link ShowingInfoCompactListCard} results with {@link PaginationRangeButtons}.
  */
 const MovieInfoShowingsPageContent = (
     {page, perPage, movie, totalShowings, showings, setPage}: ContentProps
@@ -77,6 +59,7 @@ const MovieInfoShowingsPageContent = (
         defaultValues: {page},
     });
 
+    /** Pagination handled by parent via {@link setPage}. */
     const disabledFields: DisableKeys<ShowingsPageQueryStrings> = [
         "page",
     ];
@@ -88,7 +71,7 @@ const MovieInfoShowingsPageContent = (
                 movieTitle={title}
                 posterURL={posterImage?.secure_url}
                 pageText="Showings"
-                />
+            />
 
             <section>
                 <SectionHeader srOnly={true}>Theatre Options</SectionHeader>
