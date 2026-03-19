@@ -26,7 +26,7 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {PopulatedReservation} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
 import {
-    PaginatedReservationDetails
+    PaginatedPopulatedReservationDetails
 } from "@/domains/reservation/schema/model/reservation/ReservationPaginatedSchemas.ts";
 
 /** Number of reservations displayed per page */
@@ -58,7 +58,7 @@ const MyProfilePageReservationTab = ({page, setPage, tabValue, className}: TabPr
             <PrimaryHeaderText>My Reservations</PrimaryHeaderText>
 
             <CurrentUserReservationLoader page={page} perPage={RESERVATIONS_PER_PAGE}>
-                {({totalItems, items: reservations}: PaginatedReservationDetails) => {
+                {({totalItems, items: reservations}: PaginatedPopulatedReservationDetails) => {
                     if (reservations.length === 0) {
                         return (
                             <EmptyArrayContainer

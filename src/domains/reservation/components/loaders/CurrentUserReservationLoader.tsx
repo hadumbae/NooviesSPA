@@ -7,17 +7,17 @@ import {useFetchReservationsForCurrentUser} from "@/domains/reservation/fetch/us
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {ReactNode} from "react";
 import {
-    PaginatedReservationDetails,
-    PaginatedReservationDetailsSchema
+    PaginatedPopulatedReservationDetails,
+    PaginatedPopulatedReservationSchema
 } from "@/domains/reservation/schema/model/reservation/ReservationPaginatedSchemas.ts";
 
 /**
  * Props for {@link CurrentUserReservationLoader}.
  */
 type LoaderProps = {
-    /** * Render-prop pattern: receives the validated {@link PaginatedReservationDetails}.
+    /** * Render-prop pattern: receives the validated {@link PaginatedPopulatedReservationDetails}.
      */
-    children: (data: PaginatedReservationDetails) => ReactNode;
+    children: (data: PaginatedPopulatedReservationDetails) => ReactNode;
 
     /** Current subset of data to fetch. Defaults to 1. */
     page?: number;
@@ -31,7 +31,7 @@ type LoaderProps = {
  * * @description
  * This component abstracts the data-fetching lifecycle:
  * 1. Executes {@link useFetchReservationsForCurrentUser} with the provided pagination.
- * 2. Passes the resulting query and {@link PaginatedReservationDetailsSchema} to {@link ValidatedDataLoader}.
+ * 2. Passes the resulting query and {@link PaginatedPopulatedReservationSchema} to {@link ValidatedDataLoader}.
  * 3. Handles loading and error UI internally before calling the `children` function with typed data.
  * * @param props - {@link LoaderProps} including pagination and render-prop.
  */
@@ -45,7 +45,7 @@ const CurrentUserReservationLoader = (
     return (
         <ValidatedDataLoader
             query={query}
-            schema={PaginatedReservationDetailsSchema}
+            schema={PaginatedPopulatedReservationSchema}
         >
             {children}
         </ValidatedDataLoader>

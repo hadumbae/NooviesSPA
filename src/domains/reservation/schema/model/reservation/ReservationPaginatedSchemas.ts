@@ -12,14 +12,18 @@ import {z} from "zod";
  * * @remarks
  * Uses {@link generatePaginationSchema} to provide standard metadata fields
  * (e.g., totalItems, perPage, page) alongside an array of populated reservations.
+ * * This schema ensures that the data structure returned by the API matches the
+ * expected paginated format before being consumed by the UI.
  */
-export const PaginatedReservationDetailsSchema =
+export const PaginatedPopulatedReservationSchema =
     generatePaginationSchema(PopulatedReservationSchema);
 
 /**
- * Inferred type from {@link PaginatedReservationDetailsSchema}.
- * * Represents a page of populated reservations, typically used for administrative
- * dashboards or user booking history lists.
+ * Inferred TypeScript type from {@link PaginatedPopulatedReservationSchema}.
+ * * @remarks
+ * Represents a single page of fully resolved reservation documents.
+ * Typically utilized in administrative dashboards or user-facing
+ * booking history lists where relational data (User, Showing) is required.
  */
-export type PaginatedReservationDetails =
-    z.infer<typeof PaginatedReservationDetailsSchema>;
+export type PaginatedPopulatedReservationDetails =
+    z.infer<typeof PaginatedPopulatedReservationSchema>;
