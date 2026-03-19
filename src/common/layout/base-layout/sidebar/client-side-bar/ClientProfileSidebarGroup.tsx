@@ -66,6 +66,16 @@ const ClientProfileSidebarGroup: FC = () => {
                         </SidebarMenuButton>
                     </SidebarMenuItem>
 
+                    {/* My Reservations */}
+                    <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                            <Link to="/account/reservations">
+                                <TableOfContents />
+                                <span>My Reservations</span>
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>
