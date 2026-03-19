@@ -1,10 +1,10 @@
-import MovieIndexPage from "@/features/admin/movies/pages/index-page/MovieIndexPage.tsx";
-import MovieCreatePage from "@/features/admin/movies/pages/create-page/MovieCreatePage.tsx";
-import MovieDetailsPage from "@/features/admin/movies/pages/details-page/MovieDetailsPage.tsx";
+import MovieIndexPage from "@/views/admin/movies/pages/index-page/MovieIndexPage.tsx";
+import MovieCreatePage from "@/views/admin/movies/pages/create-page/MovieCreatePage.tsx";
+import MovieDetailsPage from "@/views/admin/movies/pages/details-page/MovieDetailsPage.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import {RouteObject} from "react-router-dom";
-import MoviePeoplePage from "@/features/admin/movies/pages/credits-page/MoviePeoplePage.tsx";
-import MovieEditPage from "@/features/admin/movies/pages/edit-page/MovieEditPage.tsx";
+import MoviePeoplePage from "@/views/admin/movies/pages/credits-page/MoviePeoplePage.tsx";
+import MovieEditPage from "@/views/admin/movies/pages/edit-page/MovieEditPage.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
 
 const routes: RouteObject[] = [

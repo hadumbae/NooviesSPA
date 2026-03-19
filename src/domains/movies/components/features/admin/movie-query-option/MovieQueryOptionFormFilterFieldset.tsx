@@ -34,7 +34,7 @@ import {UseFormReturn} from "react-hook-form";
 import {MovieQueryOptionFormValues} from "@/domains/movies/schema/queries/MovieQueryOptionFormValueSchema.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import GenreHookFormSelect from "@/features/admin/genres/components/input/GenreHookFormSelect.tsx";
+import GenreHookFormSelect from "@/views/admin/genres/components/input/GenreHookFormSelect.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 

@@ -5,8 +5,8 @@
  * including index and detail views. Routes are protected by
  * authentication and rendered within the admin layout.
  */
-import GenreIndexPage from "@/features/admin/genres/pages/genre-index-page/GenreIndexPage.tsx";
-import GenreDetailsPage from "@/features/admin/genres/pages/genre-details/GenreDetailsPage.tsx";
+import GenreIndexPage from "@/views/admin/genres/pages/genre-index-page/GenreIndexPage.tsx";
+import GenreDetailsPage from "@/views/admin/genres/pages/genre-details/GenreDetailsPage.tsx";
 import AuthLoader from "@/common/routing/loaders/AuthLoader.ts";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
