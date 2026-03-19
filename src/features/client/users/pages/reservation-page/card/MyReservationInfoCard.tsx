@@ -3,7 +3,6 @@
  * Displays formatted reservation summary details.
  */
 
-import {ReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationDetails.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
@@ -11,12 +10,13 @@ import SecondarySpan from "@/features/common/components/text/SecondarySpan.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import PrimarySpan from "@/features/common/components/text/PrimarySpan.tsx";
+import {PopulatedReservation} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
 
 /**
  * Props for MyReservationInfoCard.
  */
 type CardProps = {
-    reservation: ReservationDetails;
+    reservation: PopulatedReservation;
 };
 
 /**

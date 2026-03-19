@@ -19,13 +19,15 @@
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import CurrentUserReservationLoader from "@/domains/reservation/components/loaders/CurrentUserReservationLoader.tsx";
-import {PaginatedReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationRelated.types.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {ReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationDetails.types.ts";
 import MyReservationCompactCard from "@/features/client/reservations/components/cards/MyReservationCompactCard.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PopulatedReservation} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
+import {
+    PaginatedReservationDetails
+} from "@/domains/reservation/schema/model/reservation/ReservationPaginatedSchemas.ts";
 
 /** Number of reservations displayed per page */
 const RESERVATIONS_PER_PAGE = 20;
@@ -73,7 +75,7 @@ const MyProfilePageReservationTab = ({page, setPage, tabValue, className}: TabPr
                                     My Reservations : List
                                 </SectionHeader>
 
-                                {reservations.map((reservation: ReservationDetails) => (
+                                {reservations.map((reservation: PopulatedReservation) => (
                                     <MyReservationCompactCard
                                         key={reservation._id}
                                         reservation={reservation}

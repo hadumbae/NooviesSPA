@@ -13,7 +13,6 @@
  */
 
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {ReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationDetails.types.ts";
 import {ReserveTicketFormValues} from "@/domains/reservation/schema/forms/ReserveTicketFormValuesSchema.ts";
 import {useReserveTicketForm} from "@/domains/reservation/forms/useReserveTicketForm.ts";
 import {useReserveTicketSubmitMutation} from "@/domains/reservation/mutations/useReserveTicketSubmitMutation.ts";
@@ -24,11 +23,12 @@ import Logger from "@/common/utility/features/logger/Logger.ts";
 import {ISO4217CurrencyCode} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
 import ShowingTicketSelectorFormView
     from "@/domains/reservation/components/forms/ticket-selectors/ShowingTicketSelectorFormView.tsx";
+import {PopulatedReservation} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
 
 /**
  * Props for {@link ShowingTicketSelectorFormContainer}.
  */
-type ContainerProps = MutationOnSubmitParams<ReservationDetails> & {
+type ContainerProps = MutationOnSubmitParams<PopulatedReservation> & {
     /** Target showing identifier */
     showingID: ObjectId;
 

@@ -10,7 +10,6 @@
  * - **INCOMPLETE**: visual hierarchy and data density are provisional.
  */
 
-import {ReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationDetails.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
 import SecondarySpan from "@/features/common/components/text/SecondarySpan.tsx";
@@ -21,10 +20,11 @@ import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import PrimarySpan from "@/features/common/components/text/PrimarySpan.tsx";
+import {PopulatedReservation} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
 
 type CardProps = {
     /** Reservation data rendered in compact card form */
-    reservation: ReservationDetails;
+    reservation: PopulatedReservation;
 };
 
 /**

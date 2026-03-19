@@ -9,13 +9,11 @@
 
 import {useFetchReservationsForCurrentUser} from "@/domains/reservation/fetch/useFetchReservationsForCurrentUser.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {
-    PaginatedReservationDetailsSchema
-} from "@/domains/reservation/schema/model/reservation/ReservationRelated.schema.ts";
 import {ReactNode} from "react";
 import {
-    PaginatedReservationDetails
-} from "@/domains/reservation/schema/model/reservation/ReservationRelated.types.ts";
+    PaginatedReservationDetails,
+    PaginatedReservationDetailsSchema
+} from "@/domains/reservation/schema/model/reservation/ReservationPaginatedSchemas.ts";
 
 type LoaderProps = {
     /** Render-prop receiving validated paginated reservation data */

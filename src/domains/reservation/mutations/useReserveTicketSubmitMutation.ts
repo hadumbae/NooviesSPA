@@ -15,7 +15,6 @@
  */
 
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {ReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationDetails.types.ts";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ReserveTicketForm} from "@/domains/reservation/schema/forms/ReserveTicketFormSchema.ts";
 import {toast} from "react-toastify";
@@ -25,7 +24,10 @@ import {ReserveTicketFormValues} from "@/domains/reservation/schema/forms/Reserv
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import {TicketRepository} from "@/domains/reservation/repositories/ticket-repository/TicketRepository.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import {ReservationDetailsSchema} from "@/domains/reservation/schema/model/reservation/ReservationDetails.schema.ts";
+import {
+    PopulatedReservation,
+    PopulatedReservationSchema
+} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
 
 /**
  * Parameters required to configure the reservation submission mutation.
@@ -34,7 +36,7 @@ import {ReservationDetailsSchema} from "@/domains/reservation/schema/model/reser
  * Extends generic mutation submission parameters with
  * form instance access for error handling.
  */
-type SubmitParams = MutationOnSubmitParams<ReservationDetails> & {
+type SubmitParams = MutationOnSubmitParams<PopulatedReservation> & {
     /** React Hook Form instance for error binding. */
     form: UseFormReturn<ReserveTicketFormValues>;
 };
@@ -44,7 +46,7 @@ type SubmitParams = MutationOnSubmitParams<ReservationDetails> & {
  *
  * @remarks
  * - Submits ticket reservation data via {@link TicketRepository}
- * - Validates API responses against {@link ReservationDetailsSchema}
+ * - Validates API responses against {@link PopulatedReservationSchema}
  * - Centralizes success/error handling for reservation forms
  *
  * @param params - Mutation configuration and form handlers
@@ -52,7 +54,7 @@ type SubmitParams = MutationOnSubmitParams<ReservationDetails> & {
  */
 export function useReserveTicketSubmitMutation(
     {form, onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitParams
-): UseMutationResult<ReservationDetails, unknown, ReserveTicketForm> {
+): UseMutationResult<PopulatedReservation, unknown, ReserveTicketForm> {
 
     /**
      * Executes the reservation checkout request and validates the response.
@@ -69,7 +71,7 @@ export function useReserveTicketSubmitMutation(
 
         const {data: parsedData, success, error} = validateData({
             data: returnedData,
-            schema: ReservationDetailsSchema,
+            schema: PopulatedReservationSchema,
             message: "Invalid data.",
         });
 
@@ -80,7 +82,7 @@ export function useReserveTicketSubmitMutation(
     /**
      * Success handler for reservation submission.
      */
-    const onSuccess = (reservation: ReservationDetails) => {
+    const onSuccess = (reservation: PopulatedReservation) => {
         successMessage && toast.success(successMessage);
         onSubmitSuccess?.(reservation);
     };

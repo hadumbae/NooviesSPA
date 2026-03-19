@@ -8,8 +8,10 @@ import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamS
 import {Loader} from "lucide-react";
 import {useFetchReservationBySlug} from "@/domains/reservation/fetch/useFetchReservationBySlug.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {ReservationDetailsSchema} from "@/domains/reservation/schema/model/reservation/ReservationDetails.schema.ts";
-import {ReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationDetails.types.ts";
+import {
+    PopulatedReservation,
+    PopulatedReservationSchema
+} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
 import MyReservationPageContent from "@/features/client/users/pages/reservation-page/MyReservationPageContent.tsx";
 
 /**
@@ -31,8 +33,8 @@ const MyReservationPage = () => {
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={ReservationDetailsSchema}>
-            {(reservation: ReservationDetails) => (
+        <ValidatedDataLoader query={query} schema={PopulatedReservationSchema}>
+            {(reservation: PopulatedReservation) => (
                 <MyReservationPageContent reservation={reservation}/>
             )}
         </ValidatedDataLoader>

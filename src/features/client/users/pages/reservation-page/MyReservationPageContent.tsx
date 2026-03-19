@@ -3,7 +3,6 @@
  * Composes reservation detail, seating, and action sections.
  */
 
-import {ReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationDetails.types.ts";
 import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MyReservationPageHeader
@@ -13,12 +12,13 @@ import MyReservationSeatingCard from "@/features/client/users/pages/reservation-
 import MyReservationStatusActions
     from "@/features/client/users/pages/reservation-page/mutations/MyReservationStatusActions.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {PopulatedReservation} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
 
 /**
  * Props for MyReservationPageContent
  */
 type ContentProps = {
-    reservation: ReservationDetails;
+    reservation: PopulatedReservation;
 };
 
 /**

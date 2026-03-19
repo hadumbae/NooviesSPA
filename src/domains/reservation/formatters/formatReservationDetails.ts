@@ -3,7 +3,6 @@
  * Maps a reservation entity to UI-ready display values.
  */
 
-import {ReservationDetails} from "@/domains/reservation/schema/model/reservation/ReservationDetails.types.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import buildString from "@/common/utility/buildString.ts";
 import buildShowingDateString from "@/domains/showings/utilities/buildShowingDateString.ts";
@@ -14,6 +13,7 @@ import {ReservationStatus} from "@/domains/reservation/schema/enum/ReservationSt
 import {ReservationType} from "@/domains/reservation/schema/enum/ReservationTypeEnumSchema.ts";
 import {DateTime} from "luxon";
 import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import {PopulatedReservation} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
 
 /**
  * Reservation details with derived display fields.
@@ -52,7 +52,7 @@ type FormattedReturns = {
  * @param reservation Source reservation entity.
  * @returns Reservation data enriched with formatted display fields.
  */
-export function formatReservationDetails(reservation: ReservationDetails): FormattedReturns {
+export function formatReservationDetails(reservation: PopulatedReservation): FormattedReturns {
     const {_id, slug, status, showing, reservationType, ticketCount, pricePaid} = reservation;
     const {_id: showingID, movie, theatre, startTime, endTime, config} = showing;
     const {isActive, isSpecialEvent, canReserveSeats} = config;
