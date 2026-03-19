@@ -1,12 +1,6 @@
 /**
- * @file useFetchReservationsForCurrentUser.ts
- *
- * React Query hook for fetching paginated reservations
- * belonging to the currently authenticated user.
- *
- * Wraps `ReservationUtilityRepository.fetchUserReservations`
- * with a standardized query function handler and
- * applies default React Query options.
+ * @file React Query hook for fetching paginated reservations for the authenticated user.
+ * @filename useFetchReservationsForCurrentUser.ts
  */
 
 import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
@@ -16,35 +10,43 @@ import {ReservationUtilityRepository} from "@/domains/reservation/repositories/R
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 
+/**
+ * Input parameters for {@link useFetchReservationsForCurrentUser}.
+ */
 type FetchParams = {
-    /** Pagination configuration for the reservation list */
+    /** {@link PaginationValues} specifying page and record limit. */
     pagination: PaginationValues;
 
-    /** Optional React Query overrides (enabled, staleTime, etc.) */
+    /** * Optional React Query configuration overrides.
+     * @see UseQueryOptions
+     */
     options?: UseQueryOptions<unknown>;
 };
 
 /**
- * Fetches reservations for the current user with pagination support.
- *
- * Uses a shared query function handler to ensure consistent
- * error handling and response normalization.
- *
- * @param pagination - Page and per-page values
- * @param options - Optional React Query configuration
- *
- * @returns React Query result for the reservation list request
+ * Custom hook to retrieve a paginated list of reservations belonging to the current user.
+ * * * **Data Source:** {@link ReservationUtilityRepository.fetchUserReservations}.
+ * * **Error Handling:** Wrapped in {@link useQueryFnHandler} for standardized toast/logging.
+ * * **Caching:** Query key is strictly tied to pagination state for automatic refetching on page change.
+ * * @param params - Object containing {@link pagination} and optional {@link options}.
+ * @returns Standard TanStack {@link useQuery} result.
  */
 export function useFetchReservationsForCurrentUser(
     {pagination: {page, perPage}, options}: FetchParams
 ) {
+    /** * Higher-order function handling the async action and
+     * potential UI-level error side effects.
+     */
     const fetchReservations = useQueryFnHandler({
-        action: () =>
-            ReservationUtilityRepository.fetchUserReservations({page, perPage}),
+        action: () => ReservationUtilityRepository.fetchUserReservations({page, perPage}),
+        errorMessage: "Failed to fetch current authenticated user's reservations.",
     });
 
     return useQuery({
-        queryKey: ["reservations", "lists", "current-user"],
+        /** * Hierarchical query key for granular cache invalidation.
+         * Updates whenever {page, perPage} changes.
+         */
+        queryKey: ["reservations", "lists", "current-user", {page, perPage}],
         queryFn: fetchReservations,
         ...useQueryOptionDefaults(options),
     });
