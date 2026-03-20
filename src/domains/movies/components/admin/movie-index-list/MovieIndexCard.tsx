@@ -8,7 +8,7 @@ import {Info} from "lucide-react";
 import TooltipButton from "@/common/components/buttons/TooltipButton.tsx";
 import MovieDetailsDialog from "@/domains/movies/components/admin/movie-index-list/MovieDetailsDialog.tsx";
 import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
-import formatMovieDetails from "@/domains/movies/utility/formatMovieDetails.ts";
+import formatMovieData from "@/domains/movies/utility/formatMovieData.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
@@ -27,7 +27,7 @@ const MovieIndexCard = ({movie, className}: IndexCardProps) => {
         slug,
         title,
         formatted: {posterURL, genreList, yearAndDuration},
-    } = formatMovieDetails(movie);
+    } = formatMovieData(movie);
 
     return (
         <Card>

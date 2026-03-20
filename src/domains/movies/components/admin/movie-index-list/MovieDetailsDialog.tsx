@@ -15,7 +15,7 @@ import {Search} from "lucide-react";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import LabelContent from "@/common/components/card-content/LabelContent.tsx";
-import formatMovieDetails from "@/domains/movies/utility/formatMovieDetails.ts";
+import formatMovieData from "@/domains/movies/utility/formatMovieData.ts";
 import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
@@ -66,7 +66,7 @@ const MovieDetailsDialog = ({children, movie}: DetailsDialogProps) => {
             languageList,
             subtitleList
         },
-    } = formatMovieDetails(movie);
+    } = formatMovieData(movie);
 
     return (
         <Dialog>

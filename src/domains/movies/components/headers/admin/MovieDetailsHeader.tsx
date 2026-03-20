@@ -6,7 +6,7 @@
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
-import formatMovieDetails from "@/domains/movies/utility/formatMovieDetails.ts";
+import formatMovieData from "@/domains/movies/utility/formatMovieData.ts";
 import HeaderSubtitle from "@/common/components/page/headers/HeaderSubtitle.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
@@ -23,7 +23,7 @@ const MovieDetailsHeader = ({movie}: HeaderProps) => {
         tagline,
         posterImage,
         formatted: {genreList, yearAndDuration}
-    } = formatMovieDetails(movie);
+    } = formatMovieData(movie);
 
     return (
         <header className="flex space-x-3">

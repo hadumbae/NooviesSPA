@@ -3,7 +3,7 @@
  * MyFavouriteMovieCompactCard.tsx
  */
 
-import formatMovieDetails from "@/domains/movies/utility/formatMovieDetails.ts";
+import formatMovieData from "@/domains/movies/utility/formatMovieData.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
@@ -28,7 +28,7 @@ type CardProps = {
 const MyFavouriteMovieCompactCard = (
     {movie}: CardProps
 ) => {
-    const {slug, title, tagline, formatted} = formatMovieDetails(movie);
+    const {slug, title, tagline, formatted} = formatMovieData(movie);
     const {posterURL, releaseYear, duration, genreList} = formatted;
 
     const movieMeta = buildString([releaseYear, duration, genreList], " • ");
