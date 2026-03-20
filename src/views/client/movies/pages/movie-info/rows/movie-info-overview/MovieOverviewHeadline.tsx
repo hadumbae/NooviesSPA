@@ -4,11 +4,11 @@
  * MovieOverviewHeadline.tsx
  */
 
-import { MovieDetails } from "@/domains/movies/schema/movie/Movie.types.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import buildString from "@/common/utility/buildString.ts"
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for {@link MovieOverviewHeadline}.

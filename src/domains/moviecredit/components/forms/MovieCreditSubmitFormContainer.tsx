@@ -16,7 +16,6 @@ import CombinedValidatedQueryBoundary from "@/common/components/query/combined/C
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import MovieCreditSubmitFormView from "@/domains/moviecredit/components/forms/MovieCreditSubmitFormView.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
-import {MovieArray} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {PersonArray} from "@/domains/persons/schema/person/Person.types.ts";
 import {PersonQueryFilters} from "@/domains/persons/schema/queries/PersonQueryOption.types.ts";
 import {RoleTypeQueryFilters} from "@/domains/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
@@ -26,6 +25,7 @@ import useMovieCreditFormDataQueries from "@/domains/moviecredit/hooks/forms/use
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+import {MovieArray} from "@/domains/movies/schema/movie/MovieArraySchema.ts";
 
 type ContainerProps = FormContainerProps<MovieCreditDetails, MovieCredit, MovieCreditFormValues> & {
     /** Optional filters for movie lookup */

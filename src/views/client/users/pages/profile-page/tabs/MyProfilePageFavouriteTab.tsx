@@ -15,13 +15,15 @@ import {MyProfilePageActiveTab} from "@/domains/users/schemas/tabs/my-profile-pa
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {useFetchCurrentUserFavourites} from "@/domains/users/fetch/favourites/useFetchCurrentUserFavourites.ts";
-import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
-import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import MyFavouriteMovieCompactCard from "@/views/client/movies/components/card/favourites/MyFavouriteMovieCompactCard.tsx";
 import {ChevronRight} from "lucide-react";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {
+    PaginatedMovieDetails,
+    PaginatedMovieDetailsSchema
+} from "@/domains/movies/schema/movie/PaginatedMovieDetailsSchema.ts";
 
 type TabProps = {
     /**

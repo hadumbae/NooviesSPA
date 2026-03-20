@@ -16,8 +16,8 @@ import MovieReviewSummaryCard
     from "@/views/client/movie-reviews/components/cards/review-summary-card/MovieReviewSummaryCard.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import SectionHeaderLink from "@/common/components/page/SectionHeaderLink.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for MovieOverviewReviews.

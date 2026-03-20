@@ -5,13 +5,12 @@
 
 import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
 import {useFetchReviewDetailsByMovie} from "@/domains/movies/fetch/movie-reviews/useFetchReviewDetailsByMovie.ts";
-import {MovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {
     ReviewDetailsByMovie,
     ReviewDetailsByMovieSchema
 } from "@/domains/review/schemas/models/ReviewDetailsByMovieSchema.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
+import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Parameters for useMovieInfoReviewsPageQueries.

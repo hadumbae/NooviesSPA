@@ -7,10 +7,10 @@ import TextCollapsible from "@/common/components/TextCollapsible.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import MovieCreditSubmitFormContainer from "@/domains/moviecredit/components/forms/MovieCreditSubmitFormContainer.tsx";
 import {MovieCreditFormValues} from "@/domains/moviecredit/schemas/form/MovieCreditForm.types.ts";
-import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import MovieCreditPaginatedListQuery
     from "@/domains/moviecredit/components/movie-credit-paginated-list/MovieCreditPaginatedListQuery.tsx";
+    import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**
  * Props for {@link MoviePeoplePageContent}.

@@ -5,7 +5,8 @@ import {Ellipsis} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import useMovieDeleteMutation from "@/domains/movies/hooks/mutations/useMovieDeleteMutation.ts";
 import {Link} from "react-router-dom";
-import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
+
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 interface Props {
     movie: Movie;

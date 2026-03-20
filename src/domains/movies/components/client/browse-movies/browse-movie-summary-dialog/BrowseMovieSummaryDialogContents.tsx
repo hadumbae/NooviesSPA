@@ -15,7 +15,6 @@ import {
 import BrowseMovieMetaRow
     from "@/domains/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import BrowseMovieCreditSummaryLinkList
     from "@/domains/moviecredit/components/clients/browse-movie-clients/BrowseMovieCreditSummaryLinkList.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
@@ -25,6 +24,7 @@ import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for {@link BrowseMovieSummaryDialogContents}.

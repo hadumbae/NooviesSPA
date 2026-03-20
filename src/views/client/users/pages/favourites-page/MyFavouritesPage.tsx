@@ -9,8 +9,10 @@ import {useFetchCurrentUserFavourites} from "@/domains/users/fetch/favourites/us
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import MyFavouritesPageContent from "@/views/client/users/pages/favourites-page/MyFavouritesPageContent.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
-import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
+import {
+    PaginatedMovieDetails,
+    PaginatedMovieDetailsSchema
+} from "@/domains/movies/schema/movie/PaginatedMovieDetailsSchema.ts";
 
 /** Number of favourite movies displayed per page. */
 const MOVIES_PER_PAGE = 20;

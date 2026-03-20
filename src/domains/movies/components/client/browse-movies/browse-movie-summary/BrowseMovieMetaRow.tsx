@@ -5,11 +5,11 @@
  * with textual movie metadata.
  */
 
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {cn} from "@/common/lib/utils.ts";
 import BrowseMovieSummaryMeta
     from "@/domains/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieSummaryMeta.tsx";
 import MoviePosterLink from "@/domains/movies/components/MoviePosterLink.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for {@link BrowseMovieMetaRow}.

@@ -2,12 +2,14 @@ import {FC} from 'react';
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import BrowseMoviesHeader from "@/domains/movies/components/client/browse-movies/BrowseMoviesHeader.tsx";
 import useFetchPaginatedMovies from "@/domains/movies/hooks/queries/useFetchPaginatedMovies.ts";
-import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
-import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import BrowseMovieSummaryCard
     from "@/domains/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieSummaryCard.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {
+    PaginatedMovieDetails,
+    PaginatedMovieDetailsSchema
+} from "@/domains/movies/schema/movie/PaginatedMovieDetailsSchema.ts";
 
 const BrowseMoviesPage: FC = () => {
     const query = useFetchPaginatedMovies({

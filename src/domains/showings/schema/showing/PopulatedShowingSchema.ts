@@ -7,7 +7,8 @@ import {ShowingSchema} from "@/domains/showings/schema/showing/ShowingSchema.ts"
 import {z} from "zod";
 import {TheatreSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import {ScreenSchema} from "@/domains/screens/schema/screen/Screen.schema.ts";
-import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
+
+import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
 
 /**
  * Extends {@link ShowingSchema} with populated relations.

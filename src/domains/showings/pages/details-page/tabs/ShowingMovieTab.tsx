@@ -12,16 +12,15 @@
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useFetchMovie from "@/domains/movies/hooks/queries/useFetchMovie.ts";
 import { CombinedSchemaQuery } from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-import { MovieDetailsSchema } from "@/domains/movies/schema/movie/Movie.schema.ts";
 import useFetchShowings from "@/domains/showings/hooks/queries/useFetchShowings.ts";
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
-import { MovieDetails } from "@/domains/movies/schema/movie/Movie.types.ts";
 import ShowingMovieCard from "@/domains/showings/components/admin/card/showing-movie-card/ShowingMovieCard.tsx";
 import ShowingSummaryCardList from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCardList.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {ShowingDetailsArraySchema} from "@/domains/showings/schema/showing/ShowingArraySchemas.ts";
+import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Combined query result shape for {@link ShowingMovieTab}.

@@ -6,10 +6,10 @@
  */
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import MoviePosterLink from "@/domains/movies/components/MoviePosterLink.tsx";
 import BrowseMovieSummaryMeta
     from "@/domains/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieSummaryMeta.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for {@link BrowseMovieOverviewCard}.

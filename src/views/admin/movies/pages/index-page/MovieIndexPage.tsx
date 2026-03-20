@@ -1,7 +1,5 @@
 import {FC} from 'react';
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
-import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
-import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 
 import useFetchPaginatedMovies from "@/domains/movies/hooks/queries/useFetchPaginatedMovies.ts";
 import MovieIndexPageContent from "@/views/admin/movies/pages/edit-page/MovieIndexPageContent.tsx";
@@ -9,6 +7,10 @@ import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPagi
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries/MovieQueryOption.schema.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {
+    PaginatedMovieDetails,
+    PaginatedMovieDetailsSchema
+} from "@/domains/movies/schema/movie/PaginatedMovieDetailsSchema.ts";
 
 /** Number of movies displayed per page */
 const MOVIES_PER_PAGE = 20;

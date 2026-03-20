@@ -1,9 +1,9 @@
 import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MovieFormSchema } from "@/domains/movies/schema/form/MovieForm.schema.ts";
-import { Movie } from "@/domains/movies/schema/movie/Movie.types.ts";
 import { MovieFormValues } from "@/domains/movies/schema/form/MovieForm.types.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**
  * Parameters for {@link useMovieSubmitForm}.

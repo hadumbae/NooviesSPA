@@ -3,7 +3,6 @@
  * @filename MovieInfoCreditsPageContent.tsx
  */
 
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {
     CastCreditExceptMovie
@@ -20,6 +19,7 @@ import {
 import MovieInfoCreditListSection
     from "@/views/client/movies/pages/movie-info-credits/sections/MovieInfoCreditListSection.tsx";
 import {useMemo} from "react";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for {@link MovieInfoCreditsPageContent}.

@@ -2,7 +2,6 @@ import {MovieCreditFormValues} from "@/domains/moviecredit/schemas/form/MovieCre
 import useFetchPersons from "@/domains/persons/hooks/fetch/useFetchPersons.ts";
 import useFetchRoleTypes from "@/domains/roletype/hooks/fetch/useFetchRoleTypes.ts";
 import {ManagedUseQuery} from "@/common/type/query/ManagedUseQuery.ts";
-import {MovieArraySchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 import {PersonArraySchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import {RoleTypeArraySchema} from "@/domains/roletype/schema/model/RoleType.schema.ts";
 import activeUseQueriesOnly from "@/common/utility/query/activeUseQueriesOnly.ts";
@@ -10,6 +9,7 @@ import {MovieQueryFilters} from "@/domains/movies/schema/queries/MovieQueryOptio
 import {PersonQueryFilters} from "@/domains/persons/schema/queries/PersonQueryOption.types.ts";
 import {RoleTypeQueryFilters} from "@/domains/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import useFetchMovies from "@/domains/movies/hooks/queries/useFetchMovies.ts";
+import {MovieArraySchema} from "@/domains/movies/schema/movie/MovieArraySchema.ts";
 
 /**
  * Parameters for {@link useMovieCreditFormDataQueries}.

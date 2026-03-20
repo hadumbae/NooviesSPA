@@ -3,10 +3,10 @@ import { FC } from 'react';
 import useMovieSubmitForm from "@/domains/movies/hooks/forms/useMovieSubmitForm.ts";
 import useMovieSubmitMutation, { MovieSubmitParams } from "@/domains/movies/hooks/mutations/useMovieSubmitMutation.ts";
 import MovieSubmitFormView from "@/domains/movies/components/forms/MovieSubmitFormView.tsx";
-import { Movie } from "@/domains/movies/schema/movie/Movie.types.ts";
 import { MovieForm, MovieFormValues } from "@/domains/movies/schema/form/MovieForm.types.ts";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 import buildFormSubmitLog from "@/common/utility/features/logger/buildFormSubmitLog.ts";
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**
  * Props for `MovieSubmitFormContainer`.

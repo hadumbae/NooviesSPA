@@ -4,12 +4,12 @@ import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntim
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
 import LabelContent from "@/common/components/card-content/LabelContent.tsx";
 import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import BadgeListLabel from "@/common/components/card-content/BadgeListLabel.tsx";
 import {ISO6391LanguageCode} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
 import {Genre} from "@/domains/genres/schema/genre/Genre.types.ts";
 import CollapsibleTextblock from "@/common/components/text/CollapsibleTextblock.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 type CardProps = {
     /** The full details of a movie to display in the card */

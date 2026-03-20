@@ -21,13 +21,13 @@ import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetc
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
-import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import GenreDetailsUIContextProvider
     from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContextProvider.tsx";
 import GenreDetailsPageContent
     from "@/views/admin/genres/pages/genre-details/GenreDetailsPageContent.tsx";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import useGenreDetailsPageQueries from "@/domains/genres/views/admin/details-page/useGenreDetailsPageQueries.ts";
+import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/PaginatedMovieDetailsSchema.ts";
 
 /**
  * Number of movies displayed per page.

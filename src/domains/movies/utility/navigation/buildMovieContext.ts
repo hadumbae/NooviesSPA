@@ -5,8 +5,8 @@
  * from a {@link MovieDetails} object.
  */
 
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {LogContext} from "@/common/utility/features/logger/Logger.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Builds a logging context object for a movie.

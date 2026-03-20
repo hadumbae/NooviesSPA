@@ -4,7 +4,6 @@
  * MovieInfoPageContent.tsx
  */
 
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MovieOverviewHeader
     from "@/views/client/movies/pages/movie-info/rows/MovieOverviewHeader.tsx";
@@ -21,6 +20,7 @@ import MovieOverviewShowings from "@/views/client/movies/pages/movie-info/rows/M
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for MovieInfoPageContent.

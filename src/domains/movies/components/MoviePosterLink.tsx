@@ -7,11 +7,11 @@
 
 import {cn} from "@/common/lib/utils.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import buildMovieContext from "@/domains/movies/utility/navigation/buildMovieContext.ts";
 import {useState} from "react";
 import MoviePosterPlaceholder from "@/domains/movies/components/MoviePosterPlaceholder.tsx";
 import MoviePosterErrorPlaceholder from "@/domains/movies/components/MoviePosterErrorPlaceholder.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for {@link MoviePosterLink}.

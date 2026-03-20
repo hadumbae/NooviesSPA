@@ -1,7 +1,8 @@
 import {FC} from 'react';
 import {Card, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import {Link, useLocation} from "react-router-dom";
-import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
+
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 interface MovieProps {
     movie: Movie;

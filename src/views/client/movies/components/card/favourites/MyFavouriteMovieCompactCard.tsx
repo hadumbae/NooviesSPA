@@ -3,7 +3,6 @@
  * MyFavouriteMovieCompactCard.tsx
  */
 
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import formatMovieDetails from "@/domains/movies/utility/formatMovieDetails.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
@@ -17,6 +16,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 import BrowseMovieSummaryDialog
     from "@/domains/movies/components/client/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialog.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /** Props for MyFavouriteMovieCompactCard. */
 type CardProps = {

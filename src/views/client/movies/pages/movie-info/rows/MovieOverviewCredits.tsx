@@ -3,7 +3,6 @@
  * @filename MovieOverviewCredits.tsx
  */
 
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import generateMovieCreditLinkConfigs from "@/domains/moviecredit/utility/generateMovieCreditLinkConfigs.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
@@ -16,6 +15,7 @@ import SectionHeaderLink from "@/common/components/page/SectionHeaderLink.tsx";
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Component props.

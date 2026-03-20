@@ -4,13 +4,13 @@
  */
 
 import {z} from "zod";
-import {MovieSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 import {PersonSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import {RoleTypeSchema} from "@/domains/roletype/schema/model/RoleType.schema.ts";
 import {
     MovieCreditCastSchema,
     MovieCreditCrewSchema
 } from "@/domains/moviecredit/schemas/model/movie-credit-schema/MovieCredit.schema.ts";
+import {MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**
  * Populated relation fields added to base movie credit schemas.

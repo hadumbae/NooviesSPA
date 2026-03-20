@@ -4,9 +4,9 @@
  */
 
 import { z } from "zod";
-import { MovieDetailsSchema } from "@/domains/movies/schema/movie/Movie.schema.ts";
 import { generatePaginationSchema } from "@/common/utility/schemas/generatePaginationSchema.ts";
 import { PopulatedShowingSchema } from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
+import {MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Zod schema combining {@link MovieDetailsSchema} and paginated {@link PopulatedShowingSchema}.

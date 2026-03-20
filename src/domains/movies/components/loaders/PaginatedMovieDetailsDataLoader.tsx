@@ -10,9 +10,11 @@ import {MovieQueryOptions} from "@/domains/movies/schema/queries/MovieQueryOptio
 import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
-import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {ReactNode} from "react";
+import {
+    PaginatedMovieDetails,
+    PaginatedMovieDetailsSchema
+} from "@/domains/movies/schema/movie/PaginatedMovieDetailsSchema.ts";
 
 /**
  * Props for {@link PaginatedMovieDetailsDataLoader}.

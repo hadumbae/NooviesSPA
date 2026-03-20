@@ -6,10 +6,9 @@ import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
-import {MovieArraySchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
-import {MovieArray} from "@/domains/movies/schema/movie/Movie.types.ts";
 import useFetchMovies from "@/domains/movies/hooks/queries/useFetchMovies.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {MovieArray, MovieArraySchema} from "@/domains/movies/schema/movie/MovieArraySchema.ts";
 
 /**
  * Props for the `MovieHookFormSelect` component.

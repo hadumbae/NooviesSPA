@@ -5,7 +5,6 @@
  * interactive dialog trigger for additional details.
  */
 
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {Info} from "lucide-react";
@@ -13,6 +12,7 @@ import BrowseMovieSummaryDialog from "@/domains/movies/components/client/browse-
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 import BrowseMovieMetaRow
     from "@/domains/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for {@link BrowseMovieSummaryCard}.

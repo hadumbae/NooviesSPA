@@ -1,10 +1,8 @@
 import {UseFormReturn} from "react-hook-form";
-import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {MovieForm, MovieFormValues} from "@/domains/movies/schema/form/MovieForm.types.ts";
 import MovieRepository from "@/domains/movies/repositories/MovieRepository.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import {MovieSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 import {toast} from "react-toastify";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
@@ -14,6 +12,7 @@ import {
     MutationEditByIDParams,
     MutationOnSubmitParams
 } from "@/common/type/form/MutationSubmitParams.ts";
+import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**
  * Parameters used for submitting or editing a movie entry.

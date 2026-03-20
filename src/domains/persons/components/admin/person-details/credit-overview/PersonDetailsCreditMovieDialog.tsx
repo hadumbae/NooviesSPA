@@ -1,5 +1,4 @@
 import {FC, ReactNode} from 'react';
-import {Movie, MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {Dialog, DialogContent, DialogTrigger} from "@/common/components/ui/dialog.tsx";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
@@ -11,6 +10,8 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {
     CreditExceptPerson
 } from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptPerson.types.ts";
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 type MovieDialogProps = {
     /** The trigger content to open the dialog, e.g., an icon or button. */

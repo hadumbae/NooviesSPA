@@ -12,7 +12,6 @@
  */
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/common/components/ui/tabs.tsx";
-import { MovieDetails } from "@/domains/movies/schema/movie/Movie.types.ts";
 import MovieDetailsPageCreditTab from "@/views/admin/movies/pages/details-page/tabs/MovieDetailsPageCreditTab.tsx";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {
@@ -24,6 +23,7 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import { List } from "lucide-react";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * @summary Props for MovieDetailsPageTabs.

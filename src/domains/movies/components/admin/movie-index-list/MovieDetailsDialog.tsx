@@ -1,5 +1,4 @@
 import {ReactNode} from 'react';
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {
     Dialog,
     DialogContent,
@@ -19,6 +18,7 @@ import LabelContent from "@/common/components/card-content/LabelContent.tsx";
 import formatMovieDetails from "@/domains/movies/utility/formatMovieDetails.ts";
 import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for the `MovieDetailsDialog` component.

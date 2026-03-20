@@ -8,9 +8,9 @@ import {
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**
  * Props for the {@link MoviePersonListBreadcrumb} component.

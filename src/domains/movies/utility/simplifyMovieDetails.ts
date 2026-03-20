@@ -1,6 +1,6 @@
-import { Movie, MovieDetails } from "@/domains/movies/schema/movie/Movie.types.ts";
-import { MovieSchema } from "@/domains/movies/schema/movie/Movie.schema.ts";
 import { ParseError } from "@/common/errors/ParseError.ts";
+import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Simplifies a `MovieDetails` object into a `Movie` object suitable for storage or API submission.

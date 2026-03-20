@@ -7,10 +7,10 @@ import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.t
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
-import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 import {LeanUserSchema} from "@/domains/users/schemas/user/User.schema.ts";
 import {ModelTimestampsSchema} from "@/common/schema/models/ModelTimestampsSchema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
 
 /**
  * Movie review schema using identifier references.

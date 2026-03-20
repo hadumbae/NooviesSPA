@@ -13,7 +13,8 @@ import useFetchGenreBySlug from "@/domains/genres/fetch/useFetchGenreBySlug.ts";
 import useFetchPaginatedMovies from "@/domains/movies/hooks/queries/useFetchPaginatedMovies.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {GenreDetailsSchema} from "@/domains/genres/schema/genre/Genre.schema.ts";
-import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
+
+import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/PaginatedMovieDetailsSchema.ts";
 
 /**
  * Parameters for {@link useGenreDetailsPageQueries}.

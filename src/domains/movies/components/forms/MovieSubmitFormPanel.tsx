@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react';
-import { Movie } from "@/domains/movies/schema/movie/Movie.types.ts";
 import { MovieFormValues } from "@/domains/movies/schema/form/MovieForm.types.ts";
 import MovieSubmitFormContainer from "@/domains/movies/components/forms/MovieSubmitFormContainer.tsx";
 import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
@@ -14,6 +13,7 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui/Sheet";
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**
  * Props for `MovieSubmitFormPanel`.

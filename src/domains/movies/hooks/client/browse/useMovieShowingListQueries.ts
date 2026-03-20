@@ -1,9 +1,9 @@
 import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
 import useFetchPaginatedShowings from "@/domains/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
-import {MovieDetailsSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 import {ShowingQueryOptions} from "@/domains/showings/schema/queries/ShowingQueryOption.types.ts";
 import {PaginatedShowingDetailsSchema} from "@/domains/showings/schema/showing/PaginatedShowingSchemas.ts";
+import {MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 type QueryParams = {
     movieSlug: string;

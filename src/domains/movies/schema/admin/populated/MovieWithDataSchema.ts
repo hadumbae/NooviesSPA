@@ -1,9 +1,9 @@
 import {z} from "zod";
 import {GenreSchema} from "@/domains/genres/schema/genre/Genre.schema.ts";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {MovieBaseSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 import {MovieCreditSchema} from "@/domains/moviecredit/schemas/model/movie-credit-schema/MovieCredit.schema.ts";
 import {ShowingSchema} from "@/domains/showings/schema/showing/ShowingSchema.ts";
+import {MovieBaseSchema} from "@/domains/movies/schema/movie/MovieBaseSchema.ts";
 
 /**
  * A Zod schema representing a fully populated movie document that includes:

@@ -3,9 +3,9 @@
  * formatMovieDetails.ts
  */
 
-import { MovieDetails } from "@/domains/movies/schema/movie/Movie.types.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /** Movie details extended with derived display fields. */
 type FormattedReturns = MovieDetails & {

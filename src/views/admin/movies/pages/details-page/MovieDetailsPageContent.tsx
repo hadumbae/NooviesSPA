@@ -16,9 +16,9 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MovieDetailsBreadcrumb from "@/domains/movies/components/breadcrumbs/admin/MovieDetailsBreadcrumb.tsx";
 import MovieDetailsHeader from "@/domains/movies/components/headers/admin/MovieDetailsHeader.tsx";
 import MovieDetailsCard from "@/domains/movies/components/details/MovieDetailsCard.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {RefetchFunction} from "@/common/type/query/RefetchFunction.ts";
 import MovieDetailsPageTabs from "@/views/admin/movies/pages/details-page/tabs/MovieDetailsPageTabs.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for {@link MovieDetailsPageContent}.

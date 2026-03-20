@@ -12,7 +12,6 @@ import MovieInfoPageContent
     from "@/views/client/movies/pages/movie-info/MovieInfoPageContent.tsx";
 import { QueryDefinition } from "@/common/type/query/loader/MultiQuery.types.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
-import { MovieDetails } from "@/domains/movies/schema/movie/Movie.types.ts";
 import { ReviewDetailsByMovie } from "@/domains/review/schemas/models/ReviewDetailsByMovieSchema.ts";
 import {
     useMovieInfoOverviewPageQueries
@@ -20,6 +19,7 @@ import {
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Aggregated query result shape for the overview page.

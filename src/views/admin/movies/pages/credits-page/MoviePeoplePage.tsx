@@ -1,14 +1,13 @@
 import {FC} from 'react';
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
-import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
-import {MovieSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
 import MoviePeoplePageContent from "@/views/admin/movies/pages/credits-page/MoviePeoplePageContent.tsx";
 import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**
  * Props for {@link MoviePeoplePage}.

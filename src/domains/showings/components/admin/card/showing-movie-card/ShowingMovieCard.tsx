@@ -1,4 +1,3 @@
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
@@ -9,6 +8,7 @@ import ISO3166Alpha2ShortCountryConstant from "@/common/constants/country/ISO316
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {Badge} from "@/common/components/ui/badge.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 type CardProps = {
     movie: MovieDetails;

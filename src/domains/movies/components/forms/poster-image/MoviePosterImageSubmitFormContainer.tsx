@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Movie } from "@/domains/movies/schema/movie/Movie.types.ts";
 import useMoviePosterImageSubmitMutation
     from "@/domains/movies/hooks/admin/poster-image/useMoviePosterImageSubmitMutation.ts";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -9,6 +8,7 @@ import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.
 import MoviePosterImageSubmitFormView
     from "@/domains/movies/components/forms/poster-image/MoviePosterImageSubmitFormView.tsx";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**
  * Props for `MoviePosterImageSubmitFormContainer`.

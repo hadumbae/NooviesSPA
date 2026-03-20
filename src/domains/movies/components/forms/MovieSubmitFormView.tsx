@@ -6,7 +6,6 @@ import GenreHookFormSelect from "@/views/admin/genres/components/input/GenreHook
 import LanguageHookFormSelect from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
-import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {MovieForm, MovieFormValues} from "@/domains/movies/schema/form/MovieForm.types.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
@@ -15,6 +14,7 @@ import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaIn
 import {MovieFormValuesSchema} from "@/domains/movies/schema/form/MovieForm.schema.ts";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**
  * Props for `MovieSubmitFormView`.

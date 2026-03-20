@@ -6,12 +6,12 @@
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {MovieSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 import {RoleTypeSchema} from "@/domains/roletype/schema/model/RoleType.schema.ts";
 import {
     MovieCreditCastSchema,
     MovieCreditCrewSchema
 } from "@/domains/moviecredit/schemas/model/movie-credit-schema/MovieCredit.schema.ts";
+import {MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**
  * Relation fields populated while preserving person as an identifier.

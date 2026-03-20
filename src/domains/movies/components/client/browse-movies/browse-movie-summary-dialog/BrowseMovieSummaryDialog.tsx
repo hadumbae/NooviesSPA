@@ -7,7 +7,6 @@
 
 import {ReactNode, useState} from "react";
 import {Dialog, DialogTrigger} from "@/common/components/ui/dialog.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {MovieCreditDetailsArraySchema} from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.schema.ts";
 import BrowseMovieSummaryDialogContents
     from "@/domains/movies/components/client/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialogContents.tsx";
@@ -16,6 +15,7 @@ import MovieCreditDataLoader
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for {@link BrowseMovieSummaryDialog}.

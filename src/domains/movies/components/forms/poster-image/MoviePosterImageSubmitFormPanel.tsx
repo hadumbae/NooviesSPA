@@ -1,6 +1,5 @@
 import { FC, ReactNode, useState } from 'react';
 import { PresetOpenState } from "@/common/type/ui/OpenStateProps.ts";
-import { Movie } from "@/domains/movies/schema/movie/Movie.types.ts";
 import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
 import MoviePosterImageSubmitFormContainer
     from "@/domains/movies/components/forms/poster-image/MoviePosterImageSubmitFormContainer.tsx";
@@ -14,6 +13,7 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui/Sheet";
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**
  * Props for `MoviePosterImageSubmitFormPanel`.

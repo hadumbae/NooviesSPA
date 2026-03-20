@@ -7,7 +7,6 @@
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import MovieOverviewHeadline
     from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewHeadline.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import MovieOverviewMeta
     from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewMeta.tsx";
@@ -16,6 +15,7 @@ import MovieOverviewCreditLinks
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for MovieOverviewHeader.

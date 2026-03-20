@@ -17,7 +17,6 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 
 import {GenreDetailsUIContext} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContext.ts";
 import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
@@ -39,6 +38,7 @@ import GenreSubmitFormPanel
 import GenreDeleteWarningDialog
     from "@/views/admin/genres/components/dialog/GenreDeleteWarningDialog.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for {@link GenreDetailsPageContent}.

@@ -4,9 +4,9 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import useMoviePosterImageDeleteMutation
     from "@/domains/movies/hooks/admin/poster-image/useMoviePosterImageDeleteMutation.ts";
-import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 type DialogProps = Omit<OnDeleteMutationParams, "onDeleteSuccess"> & PresetOpenState & {
     onDeleteSuccess?: (movie: Movie) => void;

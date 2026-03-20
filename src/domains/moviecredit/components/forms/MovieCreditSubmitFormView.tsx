@@ -20,7 +20,6 @@ import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx"
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
-import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
 import {
     MovieCreditForm,
     MovieCreditFormCastValues,
@@ -34,6 +33,7 @@ import {PrimaryButtonCSS, SecondaryButtonCSS} from "@/common/constants/css/Butto
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 interface ViewProps {
     /** React Hook Form controller */

@@ -5,7 +5,8 @@ import {Link, useLocation} from "react-router-dom";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {TableOfContents} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import {Movie} from "@/domains/movies/schema/movie/Movie.types.ts";
+
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 interface headerProps {
     movie: Movie;

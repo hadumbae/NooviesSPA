@@ -2,12 +2,12 @@ import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {URLStringSchema} from "@/common/schema/strings/URLStringSchema.ts";
 import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
-import {MovieBaseSchema} from "@/domains/movies/schema/movie/Movie.schema.ts";
 import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
 import {NonFutureDateStringSchema} from "@/common/schema/dates/NonFutureDateStringSchema.ts";
 import refineToRequire from "@/common/utility/schemas/refineToRequire.ts";
 import {EmptyStringSchema} from "@/common/schema/strings/simple-strings/EmptyStringSchema.ts";
+import {MovieBaseSchema} from "@/domains/movies/schema/movie/MovieBaseSchema.ts";
 
 /**
  * Schema representing the raw values used in the movie form.

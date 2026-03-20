@@ -3,12 +3,12 @@
  * MyFavouritesPageContent.tsx
  */
 
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import MyFavouritesPageHeader from "@/views/client/users/pages/favourites-page/headers/MyFavouritesPageHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import MyFavouriteMovieCompactCard from "@/views/client/movies/components/card/favourites/MyFavouriteMovieCompactCard.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /** Props for MyFavouritesPageContent. */
 type ContentProps = {

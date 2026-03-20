@@ -3,7 +3,6 @@
  * @filename MovieInfoShowingsPageContent.tsx
  */
 
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import TheatreShowingQueryFormContainer
     from "@/domains/showings/components/forms/theatre-showing-query/TheatreShowingQueryFormContainer.tsx";
@@ -22,6 +21,7 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import MovieInfoHeader from "@/views/client/movies/components/headers/MovieInfoHeader.tsx";
 import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for {@link MovieInfoShowingsPageContent}.

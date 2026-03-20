@@ -4,11 +4,11 @@
  */
 
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
 import formatMovieDetails from "@/domains/movies/utility/formatMovieDetails.ts";
 import HeaderSubtitle from "@/common/components/page/headers/HeaderSubtitle.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /** Props for MovieDetailsHeader. */
 type HeaderProps = {

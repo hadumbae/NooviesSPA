@@ -14,8 +14,8 @@ import {
 } from "@/common/constants/css/TextCSS.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import buildString from "@/common/utility/buildString.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/Movie.types.ts";
 import buildMovieContext from "@/domains/movies/utility/navigation/buildMovieContext.ts";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Props for {@link BrowseMovieSummaryMeta}.
