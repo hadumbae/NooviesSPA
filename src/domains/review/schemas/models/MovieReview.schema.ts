@@ -32,6 +32,7 @@ export const MovieReviewSchema = ModelTimestampsSchema.extend({
 export const PopulatedMovieReviewSchema = MovieReviewSchema.extend({
     user: LeanUserSchema,
     movie: MovieWithGenresSchema,
+    helpfulCount: NonNegativeNumberSchema,
 });
 
 /**
@@ -40,5 +41,4 @@ export const PopulatedMovieReviewSchema = MovieReviewSchema.extend({
 export const MovieReviewDetailsSchema = PopulatedMovieReviewSchema.extend({
     isLikedByUser: BooleanValueSchema,
     isUserReview: BooleanValueSchema,
-    helpfulCount: NonNegativeNumberSchema,
 });
