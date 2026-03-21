@@ -4,7 +4,7 @@ import LayoutBreakpointIndicator from "@/common/components/layout/LayoutBreakpoi
 import {SidebarTrigger} from "@/common/components/ui/sidebar.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SidebarContext} from "@/common/components/ui/sidebar/SidebarContext.ts";
-import BaseLayoutDesktopNavigation from "@/common/layout/base-layout/navigation/BaseLayoutDesktopNavigation.tsx";
+import BaseLayoutDesktopNavigation from "@/common/layout/client/navigation/BaseLayoutDesktopNavigation.tsx";
 
 /**
  * @fileoverview
