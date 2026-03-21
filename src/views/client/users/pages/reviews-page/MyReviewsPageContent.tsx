@@ -38,7 +38,7 @@ const MyReviewsPageContent = (
             <MyReviewsPageHeader/>
 
             {
-                reviews.length === 0 ? (
+                reviews.length > 0 ? (
                     <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         {reviews.map(
                             (review) => (
