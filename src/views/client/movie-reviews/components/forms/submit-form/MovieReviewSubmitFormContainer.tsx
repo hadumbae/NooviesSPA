@@ -1,6 +1,6 @@
 /**
- * @file Container component for MovieReview submit form flows.
- * MovieReviewSubmitFormContainer.tsx
+ * @file Logical container for managing Movie Review form state and submission mutations.
+ * @filename MovieReviewSubmitFormContainer.tsx
  */
 
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
@@ -19,22 +19,25 @@ import MovieReviewSubmitFormViewContextProvider
 import Logger from "@/common/utility/features/logger/Logger.ts";
 
 /**
- * Props for MovieReviewSubmitFormContainer.
- *
- * Combines submit handlers, form configuration, and movie context.
+ * Combined properties for {@link MovieReviewSubmitFormContainer}.
+ * * * **Mutation Params:** Inherits success/error callbacks via {@link MutationOnSubmitParams}.
+ * * **Form Options:** Inherits configuration for field disabling and initial values via {@link FormOptions}.
  */
 type FormProps =
     MutationOnSubmitParams<PopulatedMovieReview> &
     FormOptions<MovieReviewFormValues, MovieReviewForm, MovieReview> &
     {
+        /** Form fields and UI elements rendered within the form context. */
         children: ReactNode;
+        /** The ID of the movie context for the review. */
         movieID: ObjectId;
+        /** Optional unique key to distinguish between multiple form instances on one page. */
+        formKey?: string;
     };
 
 /**
- * Orchestrates MovieReview create/edit submission flow.
- *
- * Binds form state, submit mutation, and view context.
+ * Orchestrates the logic for creating or updating a Movie Review.
+ * @param params - Configuration and child nodes for the review form flow.
  */
 const MovieReviewSubmitFormContainer = (params: FormProps) => {
     const {
@@ -45,11 +48,14 @@ const MovieReviewSubmitFormContainer = (params: FormProps) => {
         resetOnSubmit,
         isPanel,
         editEntity,
+        formKey,
         ...onSubmitProps
     } = params;
 
-    const formID = "movie-review-submit-form";
+    /** Unique HTML ID for the form element, aiding accessibility and external labels. */
+    const formID = `movie-review-submit-form-${formKey ?? "key"}`;
 
+    /** Initializes form controller with validation and optional edit data. */
     const form = useMovieReviewSubmitForm({
         movieReview: editEntity,
         presetValues: {
@@ -58,12 +64,17 @@ const MovieReviewSubmitFormContainer = (params: FormProps) => {
         },
     });
 
+    /** Configures the API mutation logic, handling both Create (POST) and Update (PATCH). */
     const mutation = useSubmitUserMovieReviewMutation({
         form,
         editID: editEntity?._id,
         onSubmit: onSubmitProps,
     });
 
+    /**
+     * Final submission handler.
+     * @param values - Validated form data compliant with {@link MovieReviewFormValues}.
+     */
     const handleSubmit = (values: MovieReviewFormValues) => {
         Logger.log({
             type: "DATA",
@@ -83,10 +94,13 @@ const MovieReviewSubmitFormContainer = (params: FormProps) => {
             isEditing={!!editEntity}
         >
             <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(
-                    handleSubmit,
-                    (errors) => console.error("Form Errors: ", {formID, errors})
-                )}>
+                <form
+                    id={formID}
+                    onSubmit={form.handleSubmit(
+                        handleSubmit,
+                        (errors) => console.error("Form Errors: ", {formID, errors})
+                    )}
+                >
                     {children}
                 </form>
             </Form>
