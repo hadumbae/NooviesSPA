@@ -5,9 +5,8 @@
 
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {useFetchMyMovieReviews} from "@/domains/review/fetch/my-reviews/useFetchMyMovieReviews.ts";
-import {PaginatedPopulatedMovieReviewsSchema} from "@/domains/review/schemas/models/MovieReviewRelated.schema.ts";
 import {ReactNode} from "react";
-import {PaginatedPopulatedMovieReviews} from "@/domains/review/schemas/models/MovieReviewRelated.types.ts";
+import {MyMovieReviewPaginatedSchema, MyPaginatedMovieReviews} from "@/domains/review/schemas/models/my-reviews";
 
 /**
  * Props for {@link MyReviewsLoader}.
@@ -17,8 +16,8 @@ type LoaderProps = {
     page: number;
     /** The number of reviews to fetch per page. */
     perPage: number;
-    /** Render-prop function called with the validated {@link PaginatedPopulatedMovieReviews} data.*/
-    children: (data: PaginatedPopulatedMovieReviews) => ReactNode
+    /** Render-prop function called with the validated {@link MyPaginatedMovieReviews} data.*/
+    children: (data: MyPaginatedMovieReviews) => ReactNode
 }
 
 /**
@@ -36,7 +35,7 @@ const MyReviewsLoader = ({page, perPage, children}: LoaderProps) => {
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={PaginatedPopulatedMovieReviewsSchema}>
+        <ValidatedDataLoader query={query} schema={MyMovieReviewPaginatedSchema}>
             {children}
         </ValidatedDataLoader>
     );
