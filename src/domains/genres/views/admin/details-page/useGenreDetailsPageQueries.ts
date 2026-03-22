@@ -1,30 +1,25 @@
 /**
- * @file useGenreDetailsPageQueries.ts
- *
- * Composes the query definitions required for the Genre Details page.
- *
- * Responsibilities:
- * - Fetch the target genre by slug
- * - Fetch paginated movies associated with the genre
- * - Attach runtime schemas for multi-query validation
+ * @file Composes the query definitions required to hydrate the Genre Details page.
+ * @filename useGenreDetailsPageQueries.ts
  */
 
 import useFetchGenreBySlug from "@/domains/genres/fetch/useFetchGenreBySlug.ts";
 import useFetchPaginatedMovies from "@/domains/movies/hooks/queries/useFetchPaginatedMovies.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
-import {GenreDetailsSchema} from "@/domains/genres/schema/genre/Genre.schema.ts";
 
 import {PaginatedMovieDetailsSchema} from "@/domains/movies/schema/movie/PaginatedMovieDetailsSchema.ts";
 
+import {GenreSchema} from "@/domains/genres/schema/genre/GenreSchema.ts";
+
 /**
- * Parameters for {@link useGenreDetailsPageQueries}.
+ * Parameters for the {@link useGenreDetailsPageQueries} hook.
  */
 type HookParams = {
-    /** Genre identifier configuration. */
+    /** Configuration for identifying the specific genre. */
     genreConfig: {
         slug: string;
     };
-    /** Pagination configuration for movies. */
+    /** Pagination parameters for the associated movies list. */
     movieConfig: {
         page: number;
         perPage: number;
@@ -32,21 +27,9 @@ type HookParams = {
 };
 
 /**
- * **useGenreDetailsPageQueries**
- *
- * Returns the query definitions needed to hydrate the Genre Details page
- * using a multi-query loader.
- *
- * Queries:
- * - `genre` — fetches genre details by slug
- * - `movies` — fetches paginated movies for the genre
- *
- * Validation:
- * - Each query is paired with its runtime schema
- *
- * @param params - {@link HookParams}
- *
- * @returns Ordered {@link QueryDefinition} array.
+ * Orchestrates multiple data fetches for the Genre Details view.
+ * @param params - Configuration for slug and pagination state.
+ * @returns A structured array of query definitions for the page loader.
  */
 export default function useGenreDetailsPageQueries(
     params: HookParams
@@ -56,11 +39,13 @@ export default function useGenreDetailsPageQueries(
         movieConfig: {page, perPage},
     } = params;
 
+    /** Retrieves the specific genre details with full relationship population. */
     const genreQuery = useFetchGenreBySlug({
         slug,
         config: {populate: true, virtuals: true},
     });
 
+    /** Retrieves the list of movies associated with this genre context. */
     const movieQuery = useFetchPaginatedMovies({
         page,
         perPage,
@@ -68,7 +53,7 @@ export default function useGenreDetailsPageQueries(
     });
 
     return [
-        {key: "genre", query: genreQuery, schema: GenreDetailsSchema},
+        {key: "genre", query: genreQuery, schema: GenreSchema},
         {key: "movies", query: movieQuery, schema: PaginatedMovieDetailsSchema},
     ];
 }

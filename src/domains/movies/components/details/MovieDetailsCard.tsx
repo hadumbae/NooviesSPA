@@ -7,9 +7,9 @@ import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391Languag
 import {Separator} from "@/common/components/ui/separator.tsx";
 import BadgeListLabel from "@/common/components/card-content/BadgeListLabel.tsx";
 import {ISO6391LanguageCode} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
-import {Genre} from "@/domains/genres/schema/genre/Genre.types.ts";
 import CollapsibleTextblock from "@/common/components/text/CollapsibleTextblock.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 
 type CardProps = {
     /** The full details of a movie to display in the card */

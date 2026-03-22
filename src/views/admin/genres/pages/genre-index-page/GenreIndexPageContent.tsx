@@ -1,7 +1,11 @@
+/**
+ * @file Presentational layer for the Genre Index administrative view.
+ * @filename GenreIndexPageContent.tsx
+ */
+
 import {FC} from 'react';
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
-import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
 import GenreIndexCard from "@/views/admin/genres/components/cards/GenreIndexCard.tsx";
 import PageCenter from "@/common/components/page/PageCenter.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
@@ -16,47 +20,29 @@ import GenreQueryOptionFormContainer
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+
 /**
- * Props for {@link GenreIndexPageContent}.
+ * Props for the {@link GenreIndexPageContent} component.
  */
 type GenreIndexPageContentProps = {
-    /** Current page number (URL-derived). */
+    /** Current active page number from the URL state. */
     page: number;
-
-    /** Items per page (URL-derived). */
+    /** Maximum items displayed per page. */
     perPage: number;
-
-    /** Updates the current page in URL search params. */
+    /** Callback to update the pagination state in the URL. */
     setPage: (page: number) => void;
-
-    /** List of genres to render. */
-    genres: GenreDetails[];
-
-    /** Total number of genres available. */
+    /** Collection of genre entities to display in the grid. */
+    genres: Genre[];
+    /** Total count of genres matching current filters for pagination logic. */
     totalItems: number;
 };
 
 /**
- * **GenreIndexPageContent**
- *
- * Presentational content for the Genre Index page.
- *
- * ## Responsibilities
- * - Renders page header and filter controls
- * - Displays genre cards or an empty state
- * - Shows pagination controls when required
- *
- * ## Behavior
- * - Filter state is derived from URL search params
- * - Layout adapts based on viewport (mobile vs desktop)
- * - Pagination controls render only when `totalItems > perPage`
- *
- * @remarks
- * - Contains no data fetching logic
- * - Expects validated and paginated data from parent
+ * Renders the main administrative interface for browsing and filtering genres.
+ * @param props - Data and pagination controls from the parent page container.
  */
 const GenreIndexPageContent: FC<GenreIndexPageContentProps> = (props) => {
-    // --- State ---
     const isMobile = useIsMobile();
     const {totalItems, genres, page, perPage, setPage} = props;
 
@@ -64,10 +50,9 @@ const GenreIndexPageContent: FC<GenreIndexPageContentProps> = (props) => {
         schema: GenreQueryOptionSchema
     });
 
-    // --- List ---
     const hasGenreSection = (
         <PageSection className="grid grid-cols-2 md:grid-cols-3 gap-2">
-            {genres.map((genre: GenreDetails) => (
+            {genres.map((genre: Genre) => (
                 <GenreIndexCard
                     orientation={isMobile ? "vertical" : "horizontal"}
                     genre={genre}
@@ -89,14 +74,10 @@ const GenreIndexPageContent: FC<GenreIndexPageContentProps> = (props) => {
         ? hasGenreSection
         : hasNoGenreSection;
 
-    // --- Render ---
-
     return (
         <PageFlexWrapper>
-            {/* Header */}
             <GenreIndexHeader/>
 
-            {/* Filters */}
             <section>
                 <SectionHeader srOnly={true}>Filter Genres</SectionHeader>
 

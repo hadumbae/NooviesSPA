@@ -1,29 +1,18 @@
 /**
- * @file generateGenreLinkConfigs.ts
- * @description
- * Generates {@link LinkConfig} objects for navigating to genre detail pages.
+ * @file Generates link configurations for navigating to genre-specific detail pages.
+ * @filename generateGenreLinkConfigs.ts
  */
 
-import {Genre, GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
 import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 
 /**
- * Creates navigation link configurations for genres.
- *
- * Each genre is mapped to a {@link LinkConfig} pointing to its
- * `/browse/genres/:slug` page, with logging context derived from
- * the genre's identity.
- *
- * @param genres - List of genre or genre detail objects.
- * @returns An array of link configurations for genre navigation.
- *
- * @example
- * ```ts
- * const links = generateGenreLinkConfigs(genres);
- * ```
+ * Maps a collection of genre entities to standardized {@link LinkConfig} objects.
+ * @param genres - An array of {@link Genre} or populated genre detail objects.
+ * @returns An array of {@link LinkConfig} ready for consumption by navigation components.
  */
 export default function generateGenreLinkConfigs(
-    genres: (Genre | GenreDetails)[]
+    genres: (Genre)[]
 ): LinkConfig[] {
     return genres.map((genre): LinkConfig => {
         const {_id, slug, name} = genre;

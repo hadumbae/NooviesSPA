@@ -7,7 +7,8 @@ import {MovieReleaseDateRefinement} from "@/domains/movies/schema/movie/MovieSch
 import {MovieBaseSchema} from "@/domains/movies/schema/movie/MovieBaseSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {z} from "zod";
-import {GenreSchema} from "@/domains/genres/schema/genre/Genre.schema.ts";
+
+import {GenreSchema} from "@/domains/genres/schema/genre/GenreSchema.ts";
 
 /**
  * Extended movie schema where the 'genres' field is expected as full objects.

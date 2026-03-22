@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { FormStarterValueSchema } from "@/common/schema/form/FormStarterValueSchema.ts";
-import { GenreSchema } from "@/domains/genres/schema/genre/Genre.schema.ts";
+
+import {GenreSchema} from "@/domains/genres/schema/genre/GenreSchema.ts";
 
 /**
  * Schema for raw genre form input.

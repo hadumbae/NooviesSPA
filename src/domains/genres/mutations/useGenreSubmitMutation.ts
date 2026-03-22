@@ -1,22 +1,13 @@
 /**
- * @file useGenreSubmitMutation.ts
- *
- * React Query mutation hook for creating or updating `Genre` entities.
- *
- * Always returns fully populated {@link GenreDetails} and integrates:
- * - Schema validation
- * - Form-level error mapping
- * - Toast notifications
- * - Query cache invalidation
+ * @file React Query mutation hook for managing Genre creation and updates.
+ * @filename useGenreSubmitMutation.ts
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import GenreRepository from "@/domains/genres/repositories/GenreRepository.ts";
 import {UseFormReturn} from "react-hook-form";
-import {GenreDetailsSchema} from "@/domains/genres/schema/genre/Genre.schema.ts";
 import {toast} from "react-toastify";
 import {GenreForm, GenreFormValues} from "@/domains/genres/schema/form/GenreForm.types.ts";
-import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
@@ -25,52 +16,26 @@ import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.
 import {GenreQueryKeys} from "@/domains/genres/utilities/query/GenreQueryKeys.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
+import {Genre, GenreSchema} from "@/domains/genres/schema/genre/GenreSchema.ts";
+
 /**
- * Parameters for {@link useGenreSubmitMutation}.
- *
- * @remarks
- * - When `editID` is provided, the mutation performs an update
- * - When `editID` is omitted, the mutation performs a create
+ * Parameters for the {@link useGenreSubmitMutation} hook.
  */
 export type UseGenreSubmitMutationParams =
-    MutationOnSubmitParams<GenreDetails> & {
-    /** Existing genre identifier (enables update mode). */
+    MutationOnSubmitParams<Genre> & {
+    /** The ID of the genre to update; if omitted, a new genre is created. */
     editID?: ObjectId;
-
-    /** React Hook Form instance managing the genre form state. */
+    /** The React Hook Form controller for the genre submission form. */
     form: UseFormReturn<GenreFormValues>;
 };
 
 /**
- * **useGenreSubmitMutation**
- *
- * React Query mutation hook for submitting genre form data.
- *
- * Responsibilities:
- * - Select create vs. update automatically based on `editID`
- * - Always request populated and virtualized genre data
- * - Validate API responses against {@link GenreDetailsSchema}
- * - Map API errors into React Hook Form state
- * - Emit optional success notifications
- * - Invalidate genre list and ID-based query caches
- *
- * @param params - Mutation configuration and lifecycle callbacks.
- *
- * @returns React Query mutation result resolving to {@link GenreDetails}.
- *
- * @example
- * ```ts
- * const mutation = useGenreSubmitMutation({
- *   editID: genreId,
- *   form,
- * });
- *
- * form.handleSubmit(mutation.mutate);
- * ```
+ * Handles the submission lifecycle for Genre entities, including validation and cache invalidation.
+ * @param params - Configuration including lifecycle callbacks and form state.
  */
 export default function useGenreSubmitMutation(
     params: UseGenreSubmitMutationParams
-): UseMutationResult<GenreDetails, unknown, GenreForm> {
+): UseMutationResult<Genre, unknown, GenreForm> {
     const {
         editID,
         form,
@@ -84,9 +49,10 @@ export default function useGenreSubmitMutation(
     const invalidateQueries = useInvalidateQueryKeys();
 
     /**
-     * Executes the create or update request.
+     * Internal execution logic for the mutation.
+     * @param values - The validated form data to be persisted.
      */
-    const submitGenre = async (values: GenreForm): Promise<GenreDetails> => {
+    const submitGenre = async (values: GenreForm): Promise<Genre> => {
         const action = editID
             ? () => GenreRepository.update({_id: editID, data: values, config})
             : () => GenreRepository.create({data: values, config});
@@ -98,7 +64,7 @@ export default function useGenreSubmitMutation(
 
         const {success, error, data} = validateData({
             data: response,
-            schema: GenreDetailsSchema,
+            schema: GenreSchema,
             message: "Invalid genre response data.",
         });
 
@@ -107,9 +73,9 @@ export default function useGenreSubmitMutation(
     };
 
     /**
-     * Handles successful mutation completion.
+     * Post-success side effects: UI notifications and cache cleanup.
      */
-    const onSuccess = async (genre: GenreDetails) => {
+    const onSuccess = async (genre: Genre) => {
         await invalidateQueries(
             [GenreQueryKeys.ids(), GenreQueryKeys.query(), GenreQueryKeys.paginated()],
             {exact: false},
@@ -120,7 +86,7 @@ export default function useGenreSubmitMutation(
     };
 
     /**
-     * Handles mutation failure.
+     * Post-error side effects: Mapping errors to form state.
      */
     const onError = (error: unknown) => {
         handleMutationFormError({

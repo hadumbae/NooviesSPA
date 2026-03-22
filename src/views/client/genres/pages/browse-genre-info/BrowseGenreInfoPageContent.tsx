@@ -1,11 +1,8 @@
 /**
- * @file BrowseGenreInfoPageContent.tsx
- * @description
- * Page content component for browsing a single genre,
- * displaying genre metadata and a paginated list of movies.
+ * @file Presentational content for the client-facing Genre Detail page.
+ * @filename BrowseGenreInfoPageContent.tsx
  */
 
-import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
@@ -18,29 +15,27 @@ import PaginationRangeButtons from "@/common/components/pagination/PaginationRan
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+
+/** Default pagination limit for the movie sub-collection. */
 const MOVIES_PER_PAGE = 10;
 
 /**
- * Props for {@link BrowseGenreInfoPageContent}.
+ * Props for the {@link BrowseGenreInfoPageContent} component.
  */
 type ContentProps = {
-    /**
-     * Genre metadata used for display and context.
-     */
-    genre: GenreDetails;
+    /** The core genre metadata to display and use as a filter for the movie list. */
+    genre: Genre;
 };
 
 /**
- * Renders genre information and a paginated movie list.
- *
- * Handles pagination via URL search params and
- * conditionally renders empty states and pagination controls.
- *
- * @param props Component props
+ * Renders the structural layout for browsing a specific genre and its associated movies.
+ * @param props - Component {@link ContentProps}.
  */
 const BrowseGenreInfoPageContent = ({genre}: ContentProps) => {
     const {_id: genreID, name} = genre;
 
+    /** Manages the 'page' search param, defaulting to 1 if not present. */
     const {
         value: page,
         setValue: setPage,
@@ -63,10 +58,10 @@ const BrowseGenreInfoPageContent = ({genre}: ContentProps) => {
                 {({totalItems, items: movies}) => {
                     if (!movies.length) {
                         return (
-                            <div className="flex-1 flex justify-center items-center">
+                            <div className="flex-1 flex justify-center items-center py-20">
                                 <span className={cn(
                                     SecondaryTextBaseCSS,
-                                    "italic uppercase select-none"
+                                    "italic uppercase select-none opacity-50"
                                 )}>
                                     There Are No Movies
                                 </span>
@@ -75,7 +70,8 @@ const BrowseGenreInfoPageContent = ({genre}: ContentProps) => {
                     }
 
                     return (
-                        <div className="space-y-3">
+                        <div className="space-y-6">
+                            {/* Responsive Movie Grid */}
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                                 {movies.map(movie => (
                                     <BrowseMovieOverviewCard

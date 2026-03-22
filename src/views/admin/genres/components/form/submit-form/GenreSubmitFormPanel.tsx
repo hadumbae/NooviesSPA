@@ -1,21 +1,14 @@
 /**
- * @file GenreSubmitFormPanel.tsx
- *
- * Sheet-based panel for creating or updating `Genre` entities.
- *
- * Acts as a UI wrapper around {@link GenreSubmitFormContainer}, providing:
- * - Controlled or uncontrolled open/close behavior
- * - Sheet layout, title, and description
- * - Automatic close-on-success handling
+ * @file Slide-over panel (Sheet) for managing the Genre submission lifecycle.
+ * @filename GenreSubmitFormPanel.tsx
  */
 
-import { FC, ReactNode, useState } from 'react';
-import {Genre, GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
-import { GenreFormValues } from "@/domains/genres/schema/form/GenreForm.types.ts";
-import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
+import {FC, ReactNode, useState} from 'react';
+import {GenreFormValues} from "@/domains/genres/schema/form/GenreForm.types.ts";
+import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import GenreSubmitFormContainer from "@/views/admin/genres/components/form/submit-form/GenreSubmitFormContainer.tsx";
-import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
-import { PresetOpenState } from "@/common/type/ui/OpenStateProps.ts";
+import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import {
     Sheet,
     SheetContent,
@@ -24,59 +17,51 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui/Sheet";
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 
 /**
  * Props for the {@link GenreSubmitFormPanel} component.
- *
- * @remarks
- * Extends {@link FormContainerProps} and {@link PresetOpenState} to support
- * both controlled and uncontrolled sheet visibility.
  */
 type PanelProps =
-    FormContainerProps<GenreDetails, Genre, GenreFormValues> &
+    FormContainerProps<Genre, Genre, GenreFormValues> &
     PresetOpenState & {
-    /** Optional trigger element for opening the panel. */
+    /** Element used to trigger the opening of the sheet. */
     children?: ReactNode;
 
-    /** Optional custom class name for the sheet content. */
+    /** Optional custom CSS classes for the sheet layout. */
     className?: string;
 };
 
 /**
- * **GenreSubmitFormPanel**
- *
- * Sheet-based UI container for genre creation and editing.
- *
- * @remarks
- * - Wraps {@link GenreSubmitFormContainer} inside a `Sheet`
- * - Automatically switches between controlled and uncontrolled modes
- * - Closes the panel after a successful submit
- *
- * @example
- * ```tsx
- * <GenreSubmitFormPanel isEditing>
- *   <Button>Edit Genre</Button>
- * </GenreSubmitFormPanel>
- * ```
+ * A UI wrapper that encapsulates the Genre form within a side-panel sheet.
+ * @param props - Component {@link PanelProps}.
  */
 const GenreSubmitFormPanel: FC<PanelProps> = (props) => {
+    /** Internal state for uncontrolled usage. */
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const { children, onSubmitSuccess, presetOpen, setPresetOpen, ...formOptions } = props;
-    const { isEditing } = formOptions;
+    const {children, onSubmitSuccess, presetOpen, setPresetOpen, ...formOptions} = props;
+    const {isEditing} = formOptions;
 
+    /** Determines if visibility is managed by a parent component. */
     const isControlled = presetOpen !== undefined && setPresetOpen !== undefined;
     const activeOpen = isControlled ? presetOpen : isOpen;
     const setActiveOpen = isControlled ? setPresetOpen : setIsOpen;
 
     const sheetTitle = `${isEditing ? "Update" : "Create"} Genre`;
     const sheetDescription = `${isEditing ? "Update" : "Create"} genres by submitting data.`;
+
+    /** Fallback trigger if no children are provided. */
     const defaultTrigger = (
         <span className="text-neutral-400 hover:text-black cursor-pointer">
             Open
         </span>
     );
 
-    const closeOnSubmit = (genre: GenreDetails) => {
+    /**
+     * Intercepts the success event to close the UI panel
+     * before notifying the parent component.
+     */
+    const closeOnSubmit = (genre: Genre) => {
         setActiveOpen(false);
         onSubmitSuccess?.(genre);
     };

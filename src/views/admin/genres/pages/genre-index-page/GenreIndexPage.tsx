@@ -1,50 +1,24 @@
+/**
+ * @file High-level administrative page for browsing and managing the Genre collection.
+ * @filename GenreIndexPage.tsx
+ */
+
 import {FC} from 'react';
 import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
 import useTitle from "@/common/hooks/document/useTitle.ts";
-import {PaginatedGenreDetailsSchema} from "@/domains/genres/schema/genre/Genre.schema.ts";
-import {PaginatedGenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";
 import GenreIndexPageContent from "@/views/admin/genres/pages/genre-index-page/GenreIndexPageContent.tsx";
 import useFetchPaginatedGenres from "@/domains/genres/fetch/useFetchPaginatedGenres.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {PaginatedGenres, PaginatedGenresSchema} from "@/domains/genres/schema/genre/PaginatedGenresSchema.ts";
 
 /**
- * **GenreIndexPage**
- *
- * Top-level page component for browsing and managing genres.
- *
- * Acts as the orchestration layer that wires together:
- * - document metadata
- * - pagination state
- * - URL-based filters
- * - server data fetching
- * - schema validation
- *
- * ## Responsibilities
- * - Sets the document title via {@link useTitle}
- * - Restores pagination from router location state
- * - Synchronizes pagination with URL search params
- * - Parses and validates filter search params
- * - Fetches paginated genre data
- * - Guards rendering with query + schema boundaries
- *
- * ## Data Flow
- * `location.state → URL search params → query → validated render`
- *
- * ## Pagination
- * - Pagination state is URL-driven for shareability
- * - `location.state` is used only as an initial fallback
- *
- * @component
+ * Acts as the orchestration layer for the Genre Index view.
  */
 const GenreIndexPage: FC = () => {
-    // --- Page Setup ---
-
     useTitle("Genres");
-
-    // --- Pagination & Query Params ---
 
     const {data: paginationState} = usePaginationLocationState();
     const {page, perPage, setPage} = usePaginationSearchParams(
@@ -55,8 +29,6 @@ const GenreIndexPage: FC = () => {
         schema: GenreQueryOptionSchema
     });
 
-    // --- Data Fetching ---
-
     const query = useFetchPaginatedGenres({
         page,
         perPage,
@@ -64,11 +36,9 @@ const GenreIndexPage: FC = () => {
         config: {virtuals: true, populate: true},
     });
 
-    // --- RENDER ---
-
     return (
-        <ValidatedDataLoader query={query} schema={PaginatedGenreDetailsSchema}>
-            {({totalItems, items}: PaginatedGenreDetails) => (
+        <ValidatedDataLoader query={query} schema={PaginatedGenresSchema}>
+            {({totalItems, items}: PaginatedGenres) => (
                 <GenreIndexPageContent
                     genres={items}
                     totalItems={totalItems}

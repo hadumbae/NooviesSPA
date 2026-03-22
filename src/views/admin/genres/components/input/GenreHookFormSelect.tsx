@@ -8,11 +8,10 @@ import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiS
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import useFetchGenres from "@/domains/genres/fetch/useFetchGenres.ts";
-import { GenreArraySchema } from "@/domains/genres/schema/genre/Genre.schema.ts";
-import { GenreArray } from "@/domains/genres/schema/genre/Genre.types.ts";
 import { GenreQueryOptions } from "@/domains/genres/schema/filters/GenreQueryOptions.types.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {GenreArray, GenreArraySchema} from "@/domains/genres/schema/genre/GenreArraySchema.ts";
 
 /**
  * Props for {@link GenreHookFormSelect}.

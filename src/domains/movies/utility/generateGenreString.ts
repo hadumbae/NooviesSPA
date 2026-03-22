@@ -1,4 +1,4 @@
-import {Genre} from "@/domains/genres/schema/genre/Genre.types.ts";
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 
 export default function generateGenreString(genres: Genre[]): string {
     if (!Array.isArray(genres)) throw new Error("[Genre String] Invalid Genre Array");

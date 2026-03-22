@@ -1,17 +1,6 @@
 /**
- * @file GenreDetailsPage.tsx
- *
- * Admin page for displaying genre details and its related movies.
- *
- * Responsibilities:
- * - Resolve and validate the genre slug from route params
- * - Fetch genre details and paginated related movies
- * - Coordinate multi-query loading and schema validation
- * - Provide UI context for genre-level interactions
- * - Delegate rendering to the page content component
- *
- * Route params:
- * - `slug` — Genre identifier
+ * @file Administrative page for managing a specific genre and its associated movie catalog.
+ * @filename GenreDetailsPage.tsx
  */
 
 import {FC, ReactElement} from 'react';
@@ -20,7 +9,6 @@ import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPagi
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
 import GenreDetailsUIContextProvider
     from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContextProvider.tsx";
 import GenreDetailsPageContent
@@ -29,34 +17,22 @@ import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDa
 import useGenreDetailsPageQueries from "@/domains/genres/views/admin/details-page/useGenreDetailsPageQueries.ts";
 import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/PaginatedMovieDetailsSchema.ts";
 
-/**
- * Number of movies displayed per page.
- */
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+
+/** Default limit for the paginated movie sub-collection. */
 const MOVIES_PER_PAGE = 12;
 
 /**
- * Combined validated query payload.
+ * Validated data structure returned by the multi-query loader.
  */
 type ValidatedData = {
-    genre: GenreDetails;
+    genre: Genre;
     movies: PaginatedMovieDetails;
 };
 
 /**
- * **GenreDetailsPage**
- *
- * Admin entry point for the Genre Details view.
- *
- * Flow:
- * 1. Set document title
- * 2. Parse pagination state from URL
- * 3. Resolve and validate genre slug
- * 4. Execute genre + movie queries
- * 5. Validate responses via schemas
- * 6. Provide UI context
- * 7. Delegate rendering to {@link GenreDetailsPageContent}
- *
- * @component
+ * The administrative entry point for the Genre Details view.
+ * @returns A fully hydrated admin view or a loading skeleton.
  */
 const GenreDetailsPage: FC = (): ReactElement => {
     useTitle("Genre Details");
@@ -71,7 +47,7 @@ const GenreDetailsPage: FC = (): ReactElement => {
     }) ?? {};
 
     if (!slug) {
-        return <PageLoader />;
+        return <PageLoader/>;
     }
 
     const queries = useGenreDetailsPageQueries({

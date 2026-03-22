@@ -8,7 +8,8 @@ import {
 } from "@/common/components/ui/dropdown-menu.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import useFetchMovieBrowseQueryParams from "@/domains/movies/hooks/params/useFetchMovieBrowseQueryParams.ts";
-import {Genre} from "@/domains/genres/schema/genre/Genre.types.ts";
+
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 
 interface DropdownProps {
     genres: Genre[];

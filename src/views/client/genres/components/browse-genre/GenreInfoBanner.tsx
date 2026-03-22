@@ -1,12 +1,8 @@
 /**
- * @file GenreInfoBanner.tsx
- * @description
- * Banner component for the genre detail page.
- * Displays a visual placeholder, genre metadata,
- * and navigation back to the genre list.
+ * @file Hero banner component for the public-facing Genre detail page.
+ * @filename GenreInfoBanner.tsx
  */
 
-import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
 import {ChevronLeft, Image} from "lucide-react";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
@@ -15,82 +11,57 @@ import {cn} from "@/common/lib/utils.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {Badge} from "@/common/components/ui/badge.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 
 /**
- * Props for {@link GenreInfoBanner}.
+ * Props for the {@link GenreInfoBanner} component.
  */
 type BannerProps = {
-    /**
-     * Detailed genre data used to populate the banner.
-     */
-    genre: GenreDetails;
+    /** The genre entity containing the name, description, and movie count to display. */
+    genre: Genre;
 };
 
 /**
- * Renders a genre information banner including:
- * - A visual image placeholder
- * - Genre name and description
- * - Movie count badge
- * - Logged navigation back to the genre list
- *
- * Includes screen-reader–only section headers
- * for improved accessibility.
- *
- * @param props - Component props.
- *
- * @example
- * ```tsx
- * <GenreInfoBanner genre={genre} />
- * ```
+ * Renders a prominent visual header for the genre info page.
+ * @param props - Component {@link BannerProps}.
  */
 const GenreInfoBanner = ({genre}: BannerProps) => {
     const {name, description, movieCount} = genre;
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            {/* Genre Image */}
-            <div
-                className={cn(
-                    "bg-gray-400 max-md:h-52 md:h-72",
-                    "flex justify-center items-center",
-                )}
-            >
-                <Image/>
+            <div className={cn(
+                "bg-gray-400 max-md:h-52 md:h-72",
+                "flex justify-center items-center",
+            )}>
+                <Image className="text-white/50"/>
             </div>
 
-            {/* Genre Details */}
             <div className="flex flex-col justify-center space-y-3 p-1">
                 <LoggedHoverLink to="/browse/genres">
-                    <ChevronLeft/> Genres
+                    <ChevronLeft size={16}/> Genres
                 </LoggedHoverLink>
 
                 <section>
                     <SectionHeader srOnly={true}>Genre Details</SectionHeader>
-
-                    <PrimaryHeaderText as="h2" className="text-primary">
-                        {name}
-                    </PrimaryHeaderText>
-                    <SecondaryHeaderText as="h3">
-                        Genre
-                    </SecondaryHeaderText>
+                    <PrimaryHeaderText as="h2" className="text-primary">{name}</PrimaryHeaderText>
+                    <SecondaryHeaderText as="h3">Genre</SecondaryHeaderText>
                 </section>
 
                 <section>
                     <SectionHeader srOnly={true}>Genre Description</SectionHeader>
 
-                    <p
-                        className={cn(
-                            PrimaryTextBaseCSS,
-                            "text-xs lg:text-sm md:line-clamp-6",
-                        )}
-                    >
+                    <p className={cn(
+                        PrimaryTextBaseCSS,
+                        "text-xs lg:text-sm md:line-clamp-6 italic text-neutral-600",
+                    )}>
                         {description}
                     </p>
                 </section>
 
                 <Badge
                     variant="outline"
-                    className="w-fit px-4 py-1 select-none"
+                    className="w-fit px-4 py-1 select-none border-primary/20 bg-primary/5"
                 >
                     {movieCount} Movies
                 </Badge>

@@ -2,10 +2,10 @@ import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import {Genre} from "@/domains/genres/schema/genre/Genre.types.ts";
 import GenreDetailsUIToggles from "@/views/admin/genres/pages/genre-details/display/GenreDetailsUIToggles.tsx";
 import {Ellipsis} from "lucide-react";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 
 /**
  * Props for the {@link GenreDetailsHeader} component.

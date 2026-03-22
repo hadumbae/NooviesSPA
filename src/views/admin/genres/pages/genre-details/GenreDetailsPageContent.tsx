@@ -1,22 +1,12 @@
 /**
- * @file GenreDetailsPageContent.tsx
- *
- * Presentational content component for the genre details page.
- *
- * Responsibilities:
- * - Render genre metadata and details
- * - Display associated movies (empty and populated states)
- * - Handle pagination UI
- * - Host hidden edit and delete panels driven by UI context
- *
- * Contains no data-fetching logic.
+ * @file Presentational layer for the Genre Details administrative view.
+ * @filename GenreDetailsPageContent.tsx
  */
 
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 
 import {GenreDetailsUIContext} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContext.ts";
-import {GenreDetails} from "@/domains/genres/schema/genre/Genre.types.ts";
 
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import PageSection from "@/common/components/page/PageSection.tsx";
@@ -40,37 +30,29 @@ import GenreDeleteWarningDialog
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+
 /**
- * Props for {@link GenreDetailsPageContent}.
+ * Props for the {@link GenreDetailsPageContent} component.
  */
 type ContentProps = {
-    /** Genre details payload. */
-    genre: GenreDetails;
-
-    /** Movies associated with the genre. */
+    /** The core genre data to display. */
+    genre: Genre;
+    /** List of movies associated with this genre. */
     movies: MovieDetails[];
-
-    /** Total number of movies available. */
+    /** Total count for pagination calculations. */
     totalItems: number;
-
-    /** Current pagination page. */
+    /** Current active page index. */
     page: number;
-
-    /** Items displayed per page. */
+    /** Number of items per results page. */
     perPage: number;
-
-    /** Pagination state setter. */
+    /** Callback to update the current page state. */
     setPage: (page: number | string) => void;
 };
 
 /**
- * **GenreDetailsPageContent**
- *
- * Stateless page section responsible for rendering genre details,
- * movie listings, and context-driven edit/delete panels.
- *
- * @remarks
- * UI state (editing, deleting) is controlled via {@link GenreDetailsUIContext}.
+ * Renders the structural layout and interactive panels for the Genre Details page.
+ * @param props - Data and pagination controls from the parent loader.
  */
 const GenreDetailsPageContent = (props: ContentProps) => {
     const {page, perPage, setPage, movies, genre, totalItems} = props;
@@ -117,7 +99,7 @@ const GenreDetailsPageContent = (props: ContentProps) => {
         ? hasMovieSection
         : noMovieSection;
 
-    const onEditSuccess = (genre: GenreDetails) => {
+    const onEditSuccess = (genre: Genre) => {
         navigate({
             to: `/admin/genres/get/${genre.slug}`,
             options: {replace: true},

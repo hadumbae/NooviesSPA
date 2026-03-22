@@ -2,8 +2,8 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {GenreFormSchema} from "@/domains/genres/schema/form/GenreForm.schema.ts";
 import {GenreFormValues} from "@/domains/genres/schema/form/GenreForm.types.ts";
-import {Genre} from "@/domains/genres/schema/genre/Genre.types.ts";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 
 type useGenreSubmitFormParams = {
     /**
