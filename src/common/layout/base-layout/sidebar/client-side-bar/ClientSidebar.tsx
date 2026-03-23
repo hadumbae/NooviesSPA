@@ -1,3 +1,8 @@
+/**
+ * @file Main sidebar navigation component for the client-facing application.
+ * @filename ClientSidebar.tsx
+ */
+
 import {FC} from 'react';
 import {Sidebar, SidebarContent, SidebarHeader} from "@/common/components/ui/sidebar.tsx";
 import ClientProfileSidebarGroup
@@ -8,25 +13,10 @@ import ClientBrowseSidebarGroup from "@/common/layout/base-layout/sidebar/client
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {AuthContext} from "@/domains/auth/context/AuthContext.ts";
 import AdminLinksSidebarGroup from "@/common/layout/common-layout/navigation/side-bar-group/AdminLinksSidebarGroup.tsx";
+import {LayoutThemeSidebarGroup} from "@/common/layout/common-layout/sidebar/LayoutThemeSidebarGroup.tsx";
 
 /**
- * **ClientSidebar**
- *
- * Sidebar component specifically for **authenticated client users**.
- *
- * ### Features
- * - Displays the application title/logo in the header (`Noovies`).
- * - Includes structured sidebar groups for:
- *   - **Profile** (`ClientProfileSidebarGroup`)
- *   - **Movie management** (`ClientMovieSidebarGroup`)
- *   - **Authentication actions** (`AuthSidebarGroup`)
- * - Separators (`Separator`) are used to visually separate groups.
- *
- * ### Notes
- * - Designed to work with the main `Sidebar` layout component.
- * - Intended for client users only (not admin or guest).
- *
- * @returns {JSX.Element} A fully structured client sidebar
+ * Orchestrates the sidebar content for client users, with conditional administrative shortcuts.
  */
 const ClientSidebar: FC = () => {
     const {isAdmin} = useRequiredContext({context: AuthContext});
@@ -38,8 +28,6 @@ const ClientSidebar: FC = () => {
             </SidebarHeader>
 
             <SidebarContent>
-                {/* Admin */}
-
                 {
                     isAdmin && <>
                         <Separator/>
@@ -47,17 +35,14 @@ const ClientSidebar: FC = () => {
                     </>
                 }
 
-                {/* Movie */}
-
                 <Separator/>
                 <ClientBrowseSidebarGroup/>
-
-                {/* Profile */}
 
                 <Separator/>
                 <ClientProfileSidebarGroup/>
 
-                {/* Auth */}
+                <Separator/>
+                <LayoutThemeSidebarGroup/>
 
                 <Separator/>
                 <AuthSidebarGroup/>

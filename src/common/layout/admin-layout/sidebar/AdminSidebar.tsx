@@ -1,3 +1,8 @@
+/**
+ * @file Specialized sidebar navigation component for the administrative dashboard.
+ * @filename AdminSidebar.tsx
+ */
+
 import {FC} from 'react';
 import {
     Sidebar,
@@ -13,38 +18,33 @@ import AdminMovieSidebarGroup
 import AdminDashboardSidebarGroup
     from "@/common/layout/admin-layout/sidebar/admin-side-bar-groups/AdminDashboardSidebarGroup.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LayoutThemeSidebarGroup} from "@/common/layout/common-layout/sidebar/LayoutThemeSidebarGroup.tsx";
 
 /**
- * **AdminSidebar**
- *
- * Sidebar component specifically for **authenticated admin users**.
- *
- * ### Features
- * - Displays the application title/logo (`Noovies`) in the header.
- * - Includes structured sidebar groups for:
- *   - **Setup management** (`AdminSetupSidebarGroup`)
- *   - **Movie management** (`AdminMovieSidebarGroup`)
- *   - **Authentication actions** (`AdminAuthSidebarGroup`)
- *
- * ### Notes
- * - Designed to work with the main `Sidebar` layout component.
- * - Intended for admin users only; should not be used for guests or clients.
- *
- * @returns {JSX.Element} A fully structured admin sidebar
+ * Orchestrates the administrative navigation menu, providing quick access to management modules.
+ * @returns A structured vertical navigation menu optimized for admin workflows.
  */
 const AdminSidebar: FC = () => {
     return (
         <Sidebar>
             <SidebarHeader>
-                <LoggedLink to="/admin/dashboard">
+                <LoggedLink
+                    to="/admin/dashboard"
+                    className="text-lg font-bold tracking-tight px-4 py-2"
+                >
                     NOOVIES Admin
                 </LoggedLink>
             </SidebarHeader>
 
             <SidebarContent>
                 <AdminDashboardSidebarGroup />
+
                 <AdminSetupSidebarGroup/>
+
                 <AdminMovieSidebarGroup/>
+
+                <LayoutThemeSidebarGroup/>
+
                 <AdminAuthSidebarGroup/>
             </SidebarContent>
         </Sidebar>
