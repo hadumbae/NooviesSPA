@@ -13,22 +13,16 @@ import GenreDetailsUIContextProvider
     from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContextProvider.tsx";
 import GenreDetailsPageContent
     from "@/views/admin/genres/pages/genre-details/GenreDetailsPageContent.tsx";
-import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
-import useGenreDetailsPageQueries from "@/domains/genres/views/admin/details-page/useGenreDetailsPageQueries.ts";
-import {PaginatedMovieDetails} from "@/domains/movies/schema/movie/PaginatedMovieDetailsSchema.ts";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {
+    GenreDetailsViewData,
+    GenreDetailsViewDataSchema,
+    useFetchGenreDetailsViewData
+} from "@/domains/genres/views/admin/details-page/data";
 
 /** Default limit for the paginated movie sub-collection. */
 const MOVIES_PER_PAGE = 12;
-
-/**
- * Validated data structure returned by the multi-query loader.
- */
-type ValidatedData = {
-    genre: Genre;
-    movies: PaginatedMovieDetails;
-};
 
 /**
  * The administrative entry point for the Genre Details view.
@@ -50,19 +44,21 @@ const GenreDetailsPage: FC = (): ReactElement => {
         return <PageLoader/>;
     }
 
-    const queries = useGenreDetailsPageQueries({
-        genreConfig: {slug},
-        movieConfig: {page, perPage: MOVIES_PER_PAGE},
+    const query = useFetchGenreDetailsViewData({
+        slug,
+        queries: {page, perPage: MOVIES_PER_PAGE}
     });
 
     return (
         <GenreDetailsUIContextProvider>
-            <MultiQueryDataLoader queries={queries}>
-                {(data) => {
+            <ValidatedDataLoader query={query} schema={GenreDetailsViewDataSchema}>
+                {(data: GenreDetailsViewData) => {
                     const {
                         genre,
-                        movies: {totalItems, items: movies},
-                    } = data as ValidatedData;
+                        details: {
+                            movies: {totalItems, items: movies}
+                        }
+                    } = data;
 
                     return (
                         <GenreDetailsPageContent
@@ -75,7 +71,7 @@ const GenreDetailsPage: FC = (): ReactElement => {
                         />
                     );
                 }}
-            </MultiQueryDataLoader>
+            </ValidatedDataLoader>
         </GenreDetailsUIContextProvider>
     );
 };

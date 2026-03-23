@@ -31,6 +31,7 @@ import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
 /**
  * Props for the {@link GenreDetailsPageContent} component.
@@ -69,49 +70,15 @@ const GenreDetailsPageContent = (props: ContentProps) => {
         setIsDeleting,
     } = useRequiredContext({context: GenreDetailsUIContext});
 
-    const noMovieSection = (
-        <section className="flex-1">
-            <SectionHeader>Movies</SectionHeader>
-            <div className="flex justify-center items-center h-full">
-                <span className="text-neutral-400 select-none">
-                    There Are No Movies
-                </span>
-            </div>
-        </section>
-    );
+    const updateSlug = ({slug}: Genre) => navigate({
+        to: `/admin/genres/get/${slug}`,
+        options: {replace: true},
+    });
 
-    const hasMovieSection = (
-        <section className="space-y-2">
-            <SectionHeader>Movies</SectionHeader>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                {movies.map((movie: MovieDetails) => (
-                    <MovieIndexCard
-                        className="w-16"
-                        movie={movie}
-                        key={movie._id}
-                    />
-                ))}
-            </div>
-        </section>
-    );
-
-    const content = movies.length > 0
-        ? hasMovieSection
-        : noMovieSection;
-
-    const onEditSuccess = (genre: Genre) => {
-        navigate({
-            to: `/admin/genres/get/${genre.slug}`,
-            options: {replace: true},
-        });
-    }
-
-    const onDeleteSuccess = () => {
-        navigate({
-            to: `/admin/genres`,
-            message: "Navigate after deleting genre.",
-        });
-    }
+    const navigateToIndex = () => navigate({
+        to: `/admin/genres`,
+        message: "Navigate after deleting genre.",
+    });
 
     return (
         <PageFlexWrapper>
@@ -122,7 +89,26 @@ const GenreDetailsPageContent = (props: ContentProps) => {
                 <GenreDetailsCard genre={genre}/>
             </PageSection>
 
-            {content}
+            {
+                movies.length > 0 ? (
+                    <section className="space-y-2">
+                        <SectionHeader>Movies</SectionHeader>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {movies.map((movie: MovieDetails) => (
+                                <MovieIndexCard
+                                    className="w-16"
+                                    movie={movie}
+                                    key={movie._id}
+                                />
+                            ))}
+                        </div>
+                    </section>
+                ) : (
+                    <EmptyArrayContainer
+                        text="There Are No Movies"
+                    />
+                )
+            }
 
             {totalItems > perPage && (
                 <PaginationRangeButtons
@@ -135,12 +121,13 @@ const GenreDetailsPageContent = (props: ContentProps) => {
 
             <section className="hidden">
                 <SectionHeader>Genre Editing Form</SectionHeader>
+
                 <GenreSubmitFormPanel
                     isEditing={true}
                     entity={genre}
                     presetOpen={isEditing}
                     setPresetOpen={setIsEditing}
-                    onSubmitSuccess={onEditSuccess}
+                    onSubmitSuccess={updateSlug}
                 />
             </section>
 
@@ -149,7 +136,7 @@ const GenreDetailsPageContent = (props: ContentProps) => {
                     presetOpen={isDeleting}
                     setPresetOpen={setIsDeleting}
                     genreID={genre._id}
-                    onDeleteSuccess={onDeleteSuccess}
+                    onDeleteSuccess={navigateToIndex}
                 />
             </section>
         </PageFlexWrapper>
