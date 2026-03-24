@@ -5,13 +5,13 @@ import ScreenDetailsPageContent from "@/domains/theatre-screens/pages/admin/scre
 import {ReactElement} from "react";
 import ScreenDetailsUIContextProvider from "@/domains/theatre-screens/contexts/screen-details/ScreenDetailsUIContextProvider.tsx";
 import ScreenFormContextProvider from "@/domains/theatre-screens/contexts/screen-form/ScreenFormContextProvider.tsx";
-import {ScreenForm, ScreenFormValues} from "@/domains/theatre-screens/schema/forms/ScreenForm.types.ts";
 import simplifyScreenDetails from "@/domains/theatre-screens/utilities/simplifyScreenDetails.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {ScreenDetailsRouteParamSchema} from "@/domains/theatre-screens/schema/params/ScreenDetailsRouteParamSchema.ts";
 import useScreenDetailsPageQueries from "@/domains/theatre-screens/hooks/page/screen-details/useScreenDetailsPageQueries.ts";
 import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenForm, TheatreScreenFormValues} from "@/domains/theatre-screens/forms";
 
 type QueryData = {
     theatre: TheatreDetails;
@@ -55,8 +55,8 @@ const ScreenDetailsPage = (): ReactElement => {
                     const {theatre, screen, seats} = data as QueryData;
 
                     const simplifiedScreen = simplifyScreenDetails(screen);
-                    const presetValues: Partial<ScreenForm> = {theatre: theatre._id};
-                    const disableFields: (keyof ScreenFormValues)[] = ["theatre"];
+                    const presetValues: Partial<TheatreScreenForm> = {theatre: theatre._id};
+                    const disableFields: (keyof TheatreScreenFormValues)[] = ["theatre"];
 
                     return (
                         <ScreenDetailsUIContextProvider>

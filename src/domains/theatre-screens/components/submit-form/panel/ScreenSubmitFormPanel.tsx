@@ -1,5 +1,4 @@
 import {ReactNode, useState} from 'react';
-import {ScreenFormValues} from "@/domains/theatre-screens/schema/forms/ScreenForm.types.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import ScreenSubmitFormContainer from "@/domains/theatre-screens/components/submit-form/ScreenSubmitFormContainer.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
@@ -12,8 +11,8 @@ import {
     SheetTrigger
 } from "@/common/components/ui/Sheet";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
-import {TheatreScreen} from "@/domains/theatre-screens/schema/model";
-import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenFormValues} from "@/domains/theatre-screens/forms";
+import {TheatreScreen, TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
 
 /**
  * Props for `ScreenSubmitFormPanel`.
@@ -25,7 +24,7 @@ import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
  * @template TForm - Always `Screen`
  * @template TFormValues - Always `ScreenFormValues`
  */
-type FormPanelProps = FormContainerProps<TheatreScreenDetails, TheatreScreen, ScreenFormValues> & PresetOpenState & {
+type FormPanelProps = FormContainerProps<TheatreScreenDetails, TheatreScreen, TheatreScreenFormValues> & PresetOpenState & {
     /** Optional React node to render as the panel trigger. Defaults to `"Open"` if unspecified. */
     children?: ReactNode;
 

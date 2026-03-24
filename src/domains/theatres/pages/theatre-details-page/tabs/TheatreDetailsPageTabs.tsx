@@ -11,9 +11,9 @@ import {TheatreDetailsSearchParamSchema} from "@/domains/theatres/schema/params/
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import TheatreDetailsScreensTab from "@/domains/theatres/pages/theatre-details-page/tabs/TheatreDetailsScreensTab.tsx";
 import ScreenFormContextProvider from "@/domains/theatre-screens/contexts/screen-form/ScreenFormContextProvider.tsx";
-import {ScreenFormValues} from "@/domains/theatre-screens/schema/forms/ScreenForm.types.ts";
 import TheatreDetailsShowingsTab
     from "@/domains/theatres/pages/theatre-details-page/tabs/TheatreDetailsShowingsTab.tsx";
+import {TheatreScreenFormValues} from "@/domains/theatre-screens/forms";
 
 /**
  * Props for {@link TheatreDetailsPageTabs}.
@@ -56,7 +56,7 @@ const TheatreDetailsPageTabs = ({theatreID}: TabProps) => {
 
     // --- Screen Form Defaults ---
     const presetValues = {theatre: theatreID};
-    const disableFields: (keyof ScreenFormValues)[] = ["theatre"];
+    const disableFields: (keyof TheatreScreenFormValues)[] = ["theatre"];
 
     return (
         <Tabs className="h-full" defaultValue={activeTab}>

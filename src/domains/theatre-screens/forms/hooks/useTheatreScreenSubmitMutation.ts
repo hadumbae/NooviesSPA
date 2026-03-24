@@ -1,12 +1,8 @@
 /**
- * @file useScreenSubmitMutation.ts
- *
- * React Query mutation hook for creating or updating screens.
- * Encapsulates form submission, server interaction, response validation,
- * error mapping, user feedback, and query invalidation.
+ * @file React Query mutation hook for managing Theatre Screen persistence.
+ * @filename useTheatreScreenSubmitMutation.ts
  */
 
-import {ScreenForm, ScreenFormValues} from "@/domains/theatre-screens/schema/forms/ScreenForm.types.ts";
 import {toast} from "react-toastify";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import ScreenRepository from "@/domains/theatre-screens/repositories/ScreenRepository.ts";
@@ -16,65 +12,30 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import {SubmitMutationParams} from "@/common/type/form/MutationSubmitParams.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {ScreenQueryKeys} from "@/domains/theatre-screens/utilities/query/ScreenQueryKeys.ts";
-import {
-    TheatreScreenDetails,
-    TheatreScreenDetailsSchema
-} from "@/domains/theatre-screens/schema/model/TheatreScreenDetailsSchema.ts";
+import {TheatreScreenForm, TheatreScreenFormValues} from "@/domains/theatre-screens/forms";
+import {TheatreScreenDetails, TheatreScreenDetailsSchema} from "@/domains/theatre-screens/schema/model";
 
 /**
- * Parameters for {@link useScreenSubmitMutation}.
- *
- * Extends the base submit mutation params with screen-specific
- * form values and response typing.
+ * Configuration parameters for the {@link useTheatreScreenSubmitMutation} hook.
+ * * Extends standard mutation parameters to bind {@link TheatreScreenFormValues} to a {@link TheatreScreenDetails} response.
  */
-export type ScreenSubmitMutationParams =
-    SubmitMutationParams<ScreenFormValues, TheatreScreenDetails>;
+export type SubmitParams =
+    SubmitMutationParams<TheatreScreenFormValues, TheatreScreenDetails>;
 
 /**
- * # useScreenSubmitMutation Hook
- *
- * React Query mutation hook for creating or updating a `Screen`.
- *
- * Responsibilities:
- * - Submits form data via **ScreenRepository**
- * - Validates server responses using **ScreenDetailsSchema**
- * - Maps backend validation errors to form fields
- * - Displays success/error toast notifications
- * - Invalidates screen-related queries to refresh UI state
- *
- * @param params
- * Form instance, optional edit ID, and lifecycle callbacks.
- *
- * @returns
- * React Query mutation result controlling submission state.
- *
- * @example
- * ```ts
- * const mutation = useScreenSubmitMutation({
- *   form,
- *   editID: screenId,
- *   onSubmitSuccess: (screen) => console.log("Saved:", screen),
- * });
- *
- * form.handleSubmit((data) => mutation.mutate(data));
- * ```
+ * A specialized mutation hook for creating or updating Theatre Screen records.
+ * @param params - Configuration including form context, lifecycle callbacks, and custom messages.
+ * @returns A TanStack Query mutation result object.
  */
-export default function useScreenSubmitMutation(
-    params: ScreenSubmitMutationParams
-): UseMutationResult<TheatreScreenDetails, unknown, ScreenForm> {
+export default function useTheatreScreenSubmitMutation(
+    params: SubmitParams
+): UseMutationResult<TheatreScreenDetails, unknown, TheatreScreenForm> {
     const {form, editID, onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
 
     const config = {populate: true, virtuals: true};
-
     const invalidateQueries = useInvalidateQueryKeys();
 
-    /**
-     * Executes the create or update request.
-     *
-     * Selects the appropriate repository method based on `editID`
-     * and validates the returned payload.
-     */
-    const submitScreenData = async (values: ScreenForm) => {
+    const submitScreenData = async (values: TheatreScreenForm) => {
         const action = editID
             ? () => ScreenRepository.update({_id: editID, data: values, config})
             : () => ScreenRepository.create({data: values, config});
@@ -94,9 +55,6 @@ export default function useScreenSubmitMutation(
         return parsedData;
     };
 
-    /**
-     * Handles a successful mutation.
-     */
     const onSuccess = (screen: TheatreScreenDetails) => {
         invalidateQueries(
             [
@@ -108,13 +66,10 @@ export default function useScreenSubmitMutation(
             {exact: false}
         );
 
-        successMessage && toast.success(successMessage);
+        if (successMessage) toast.success(successMessage);
         onSubmitSuccess?.(screen);
     };
 
-    /**
-     * Handles mutation errors.
-     */
     const onError = (error: unknown) => {
         const displayMessage = errorMessage || "Something went wrong. Please try again.";
         handleMutationFormError({form, error, displayMessage});

@@ -4,14 +4,18 @@ import {cn} from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import ScreenTypeHookFormSelect from "@/domains/theatre-screens/components/submit-form/inputs/ScreenTypeHookFormSelect.tsx";
-import {ScreenForm, ScreenFormValues} from "@/domains/theatre-screens/schema/forms/ScreenForm.types.ts";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ScreenFormContext} from "@/domains/theatre-screens/contexts/screen-form/ScreenFormContext.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import {ScreenFormValuesSchema} from "@/domains/theatre-screens/schema/forms/ScreenForm.schema.ts";
 import TheatreHookFormSelect from "@/domains/theatres/components/admin/form/theatre-inputs/TheatreHookFormSelect.tsx";
 import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {
+    TheatreScreenForm,
+    TheatreScreenFormValues,
+    TheatreScreenFormValuesSchema
+} from "@/domains/theatre-screens/forms";
+
 
 /**
  * Props for `ScreenSubmitFormView`.
@@ -23,7 +27,7 @@ import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
  * @template TForm extends ScreenForm
  * @template TValues extends ScreenFormValues
  */
-type ViewProps = FormViewProps<TheatreScreenDetails, ScreenForm, ScreenFormValues> & {
+type ViewProps = FormViewProps<TheatreScreenDetails, TheatreScreenForm, TheatreScreenFormValues> & {
     /** Optional CSS class names applied to the form wrapper. */
     className?: string;
 };
@@ -69,7 +73,7 @@ const ScreenSubmitFormView: FC<ViewProps> = (params) => {
 
     // --- Active Fields Resolution ---
     const activeFields = getActiveSchemaInputFields({
-        schema: ScreenFormValuesSchema,
+        schema: TheatreScreenFormValuesSchema,
         disableFields: disableFields,
     });
 

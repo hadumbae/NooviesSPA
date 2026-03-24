@@ -23,16 +23,16 @@ import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import ScreenSubmitFormContainer from "@/domains/theatre-screens/components/submit-form/ScreenSubmitFormContainer.tsx";
-import {ScreenFormValues} from "@/domains/theatre-screens/schema/forms/ScreenForm.types.ts";
 
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {TheatreScreen} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreen, TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenFormValues} from "@/domains/theatre-screens/forms/schema/TheatreScreenFormValuesSchema.ts";
 
-type FormDrawerProps = MutationOnSubmitParams<TheatreScreen> & {
+type FormDrawerProps = MutationOnSubmitParams<TheatreScreenDetails> & {
     theatreID: ObjectId;
 } & (
-    | { isEditing: true, screen: TheatreScreen }
-    | { isEditing?: false, screen?: never }
+    | { isEditing: true, entity: TheatreScreen }
+    | { isEditing?: false, entity?: never }
 );
 
 const TheatreScreenFormDrawer: FC<PropsWithChildren<FormDrawerProps>> = (params) => {
@@ -40,14 +40,14 @@ const TheatreScreenFormDrawer: FC<PropsWithChildren<FormDrawerProps>> = (params)
     const isDesktop = !useIsMobile();
 
     const {children, theatreID, ...formOptions} = params
-    const {isEditing, screen, onSubmitSuccess} = formOptions;
+    const {isEditing, entity, onSubmitSuccess} = formOptions;
 
     const presetValues = {theatre: theatreID};
-    const disableFields: (keyof ScreenFormValues)[] = ["theatre"];
+    const disableFields: (keyof TheatreScreenFormValues)[] = ["theatre"];
 
-    const title = isEditing ? `Edit | ${screen.name}` : "Add Screens";
+    const title = isEditing ? `Edit | ${entity.name}` : "Add Screens";
 
-    const onScreenAdd = (screen: TheatreScreen) => {
+    const onScreenAdd = (screen: TheatreScreenDetails) => {
         setOpen(false);
         onSubmitSuccess && onSubmitSuccess(screen);
     }

@@ -1,14 +1,15 @@
 import { FC } from 'react';
-import useScreenSubmitMutation from "@/domains/theatre-screens/hooks/screens/submit-screen-data/useScreenSubmitMutation.ts";
+import useTheatreScreenSubmitMutation from "@/domains/theatre-screens/forms/hooks/useTheatreScreenSubmitMutation.ts";
 import ScreenSubmitFormView from "@/domains/theatre-screens/components/submit-form/ScreenSubmitFormView.tsx";
-import { ScreenForm, ScreenFormValues } from "@/domains/theatre-screens/schema/forms/ScreenForm.types.ts";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import { ScreenFormContext } from "@/domains/theatre-screens/contexts/screen-form/ScreenFormContext.ts";
 import useSyncFormContextCurrentValues from "@/common/hooks/context/useSyncFormContextCurrentValues.ts";
-import useScreenSubmitForm
-    from "@/domains/theatre-screens/hooks/screens/submit-screen-data/screen-submit-form/useScreenSubmitForm.ts";
+import useTheatreScreenSubmitForm
+    from "@/domains/theatre-screens/forms/hooks/useTheatreScreenSubmitForm.ts";
+
 import {TheatreScreen, TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenForm, TheatreScreenFormValues} from "@/domains/theatre-screens/forms";
 
 /**
  * Props for the `ScreenSubmitFormContainer` component.
@@ -20,7 +21,7 @@ import {TheatreScreen, TheatreScreenDetails} from "@/domains/theatre-screens/sch
  * @template TForm - Always `Screen`
  * @template TFormValues - Always `ScreenFormValues`
  */
-type ContainerProps = FormContainerProps<TheatreScreenDetails, TheatreScreen, ScreenFormValues> & {
+type ContainerProps = FormContainerProps<TheatreScreenDetails, TheatreScreen, TheatreScreenFormValues> & {
     /** Optional CSS class names applied to the container wrapper. */
     className?: string;
 };
@@ -75,11 +76,11 @@ const ScreenSubmitFormContainer: FC<ContainerProps> = (params) => {
     } = useRequiredContext({ context: ScreenFormContext });
 
     // --- Form Initialization ---
-    const form = useScreenSubmitForm({ screen, presetValues });
+    const form = useTheatreScreenSubmitForm({ screen, presetValues });
     useSyncFormContextCurrentValues({ form, context: ScreenFormContext });
 
     // --- Mutation Setup ---
-    const mutation = useScreenSubmitMutation({
+    const mutation = useTheatreScreenSubmitMutation({
         form,
         editID: screen?._id,
         ...mutationOptions,
@@ -93,14 +94,14 @@ const ScreenSubmitFormContainer: FC<ContainerProps> = (params) => {
      *
      * @param values - Current form values submitted by the user.
      */
-    const onFormSubmit = (values: ScreenFormValues) => {
+    const onFormSubmit = (values: TheatreScreenFormValues) => {
         if (resetOnSubmit && initialValues) {
             form.reset(initialValues);
             setCurrentValues(undefined);
         }
 
         console.log("Screen Submit Values:", values);
-        mutation.mutate(values as ScreenForm);
+        mutation.mutate(values as TheatreScreenForm);
     };
 
     return (

@@ -80,7 +80,7 @@ const TheatreScreenListTableRow: FC<RowProps> = ({screen}) => {
                 <TheatreScreenFormDrawer
                     theatreID={theatreID}
                     isEditing={true}
-                    screen={simplifiedScreen}
+                    entity={simplifiedScreen}
                 >
                     <Button
                         variant="link"
