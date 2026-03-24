@@ -11,7 +11,7 @@ import {Theatre} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts"
 import TheatreShowingListPageContent from "@/domains/theatres/pages/theatre-showings/TheatreShowingListPageContent.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
-import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
+import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import useTheatreShowingListPageQueries from "@/domains/theatres/hooks/pages/showing-list-page/useTheatreShowingListPageQueries.ts";
 import {PaginatedShowingDetails} from "@/domains/showings/schema/showing/PaginatedShowingSchemas.ts";
 

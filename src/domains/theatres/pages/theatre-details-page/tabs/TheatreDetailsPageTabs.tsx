@@ -6,7 +6,7 @@
  */
 
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
-import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {TheatreDetailsSearchParamSchema} from "@/domains/theatres/schema/params/TheatreDetailsSearchParamSchema.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import TheatreDetailsScreensTab from "@/domains/theatres/pages/theatre-details-page/tabs/TheatreDetailsScreensTab.tsx";

@@ -1,9 +1,9 @@
 import {useSearchParams} from "react-router-dom";
 import {MovieQueryFilterSchema} from "@/domains/movies/schema/queries/MovieQueryOption.schema.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";
-import updateSearchParams from "@/common/utility/features/search-params/updateSearchParams.ts";
 
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {updateSearchParams} from "@/common/features/fetch-search-params";
 
 export default function useFetchMovieBrowseQueryParams({genres}: { genres: Genre[] }) {
     // Setup
@@ -15,7 +15,6 @@ export default function useFetchMovieBrowseQueryParams({genres}: { genres: Genre
         releaseDateFilter: searchParams.get("releaseDateFilter") || undefined,
         genreFilter: genre ? searchParams.get("genreFilter") : undefined,
     }
-
     const queryParams = {
         title: rawQuery["titleFilter"],
         releaseDate: rawQuery["releaseDateFilter"],
@@ -36,7 +35,7 @@ export default function useFetchMovieBrowseQueryParams({genres}: { genres: Genre
             genreFilter: values.genre?.name || undefined,
         };
 
-        const newSearchParams = updateSearchParams({searchParams, updateValues});
+        const newSearchParams = updateSearchParams({searchParams, updateData: updateValues});
         setSearchParams(newSearchParams);
     }
 

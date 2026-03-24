@@ -3,7 +3,7 @@
  * @filename useFetchReservationsForCurrentUser.ts
  */
 
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {useQuery} from "@tanstack/react-query";
 import {ReservationUtilityRepository} from "@/domains/reservation/repositories/ReservationUtilityRepository.ts";

@@ -7,7 +7,7 @@ import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 
 /**
  * Parameters for {@link useFetchPaginatedMovies}.

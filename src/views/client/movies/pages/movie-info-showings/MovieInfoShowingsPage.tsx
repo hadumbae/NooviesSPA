@@ -8,7 +8,7 @@ import { SlugRouteParamSchema } from "@/common/schema/route-params/SlugRoutePara
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import MovieInfoShowingsPageContent
     from "@/views/client/movies/pages/movie-info-showings/MovieInfoShowingsPageContent.tsx";
-import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {
     ShowingsPageQueryStringSchema
 } from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";

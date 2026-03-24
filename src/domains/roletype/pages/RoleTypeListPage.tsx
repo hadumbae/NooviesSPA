@@ -14,7 +14,7 @@ import useRoleTypeQueryOptionSearchParams
     from "@/domains/roletype/hooks/params/query-option-search-params/useRoleTypeQueryOptionSearchParams.ts";
 import RoleTypeListPageContent from "@/domains/roletype/pages/list-page/RoleTypeListPageContent.tsx";
 import {useFetchPaginatedRoleTypes} from "@/domains/roletype/hooks/fetch/useFetchPaginatedRoleTypes.ts";
-import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
+import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 /**

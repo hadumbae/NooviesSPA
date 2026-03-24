@@ -1,9 +1,9 @@
 import {useSearchParams} from "react-router-dom";
 import {RoleTypeQueryOptions} from "@/domains/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
-import parseSearchParams from "@/common/utility/features/search-params/parseSearchParams.ts";
+import parseSearchParams from "@/common/features/fetch-search-params/parseSearchParams.ts";
 import {RoleTypeQueryOptionsSchema} from "@/domains/roletype/schema/query-options/RoleTypeQueryOptions.schema.ts";
-import stringifySearchParams from "@/common/utility/features/search-params/stringifySearchParams.ts";
-import updateSearchParams from "@/common/utility/features/search-params/updateSearchParams.ts";
+import serializeQueryStrings from "@/common/features/fetch-search-params/serializeQueryStrings.ts";
+import {updateSearchParams} from "@/common/features/fetch-search-params";
 
 /**
  * Custom hook to manage role type query options via URL search parameters.
@@ -36,7 +36,7 @@ import updateSearchParams from "@/common/utility/features/search-params/updateSe
  */
 export default function useRoleTypeQueryOptionSearchParams(defaultValues: RoleTypeQueryOptions = {}) {
     /** Default values converted into a stringified form for initializing `useSearchParams`. */
-    const parsedDefaultValues = stringifySearchParams(defaultValues);
+    const parsedDefaultValues = serializeQueryStrings(defaultValues);
 
     /** Current URL search params and setter, managed by React Router. */
     const [searchParams, setSearchParams] = useSearchParams(parsedDefaultValues);
@@ -45,7 +45,7 @@ export default function useRoleTypeQueryOptionSearchParams(defaultValues: RoleTy
     const rawData = Object.fromEntries(searchParams.entries());
 
     /** Parsed and validated query options according to the schema. */
-    const parsedSearchParams = parseSearchParams({schema: RoleTypeQueryOptionsSchema, raw: rawData});
+    const parsedSearchParams = parseSearchParams({schema: RoleTypeQueryOptionsSchema, paramStrings: rawData});
 
     /**
      * Updates the query parameters with new values,
@@ -54,7 +54,7 @@ export default function useRoleTypeQueryOptionSearchParams(defaultValues: RoleTy
      * @param values - Partial or full {@link RoleTypeQueryOptions} to update in the URL.
      */
     const setQueryOptionValues = (values: RoleTypeQueryOptions) => {
-        const updatedSearchParams = updateSearchParams({searchParams, updateValues: values});
+        const updatedSearchParams = updateSearchParams({searchParams, updateData: values});
         setSearchParams(updatedSearchParams);
     };
 

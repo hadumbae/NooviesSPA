@@ -9,9 +9,9 @@
 import { useSearchParams } from "react-router-dom";
 import { GenreQueryOptions } from "@/domains/genres/schema/filters/GenreQueryOptions.types.ts";
 import { GenreQueryOptionSchema } from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";
-import stringifySearchParams from "@/common/utility/features/search-params/stringifySearchParams.ts";
-import parseSearchParams from "@/common/utility/features/search-params/parseSearchParams.ts";
-import updateSearchParams from "@/common/utility/features/search-params/updateSearchParams.ts";
+import serializeQueryStrings from "@/common/features/fetch-search-params/serializeQueryStrings.ts";
+import parseSearchParams from "@/common/features/fetch-search-params/parseSearchParams.ts";
+import {updateSearchParams} from "@/common/features/fetch-search-params";
 
 /**
  * Return type of {@link useGenreQueryOptionSearchParams}.
@@ -57,21 +57,21 @@ export default function useGenreQueryOptionSearchParams(
     defaultValues: GenreQueryOptions = {}
 ): SearchParamsReturns {
     // ⚡ State ⚡
-    const parsedDefaultValues = stringifySearchParams(defaultValues);
+    const parsedDefaultValues = serializeQueryStrings(defaultValues);
     const [searchParams, setSearchParams] = useSearchParams(parsedDefaultValues);
 
     // ⚡ Parsing ⚡
     const rawData = Object.fromEntries(searchParams.entries());
     const parsedSearchParams = parseSearchParams({
         schema: GenreQueryOptionSchema,
-        raw: rawData,
+        paramStrings: rawData,
     });
 
     // ⚡ Update ⚡
     const setQueryOptions = (values: GenreQueryOptions) => {
         const updatedSearchParams = updateSearchParams({
             searchParams,
-            updateValues: values,
+            updateData: values,
         });
         setSearchParams(updatedSearchParams);
     };

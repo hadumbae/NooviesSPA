@@ -7,7 +7,7 @@
 
 import useFetchPaginatedMovies from "@/domains/movies/hooks/queries/useFetchPaginatedMovies.ts";
 import {MovieQueryOptions} from "@/domains/movies/schema/queries/MovieQueryOption.types.ts";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {ReactNode} from "react";

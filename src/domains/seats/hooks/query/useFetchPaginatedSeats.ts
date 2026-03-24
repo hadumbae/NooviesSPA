@@ -13,7 +13,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {SeatQueryOptions} from "@/domains/seats/schema/queries/SeatQueryOptions.ts";
 
 /**

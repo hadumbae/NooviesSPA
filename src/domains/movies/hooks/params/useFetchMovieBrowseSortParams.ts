@@ -1,6 +1,6 @@
 import {useSearchParams} from "react-router-dom";
 import {ParseError} from "@/common/errors/ParseError.ts";
-import updateSearchParams from "@/common/utility/features/search-params/updateSearchParams.ts";
+import {updateSearchParams} from "@/common/features/fetch-search-params";
 import {MovieQuerySortSchema} from "@/domains/movies/schema/queries/MovieQueryOption.schema.ts";
 import {MovieQuerySorts} from "@/domains/movies/schema/queries/MovieQueryOption.types.ts";
 
@@ -36,7 +36,7 @@ export default function useFetchMovieBrowseSortParams(): SortParamReturns {
     // Function
     const setMovieSortParams = (values: MovieQuerySorts) => {
         const updateValues = {releaseDateSort: values.sortByReleaseDate, titleSort: values.sortByTitle};
-        const newSearchParams = updateSearchParams({searchParams, updateValues});
+        const newSearchParams = updateSearchParams({searchParams, updateData: updateValues});
         setSearchParams(newSearchParams);
     }
 

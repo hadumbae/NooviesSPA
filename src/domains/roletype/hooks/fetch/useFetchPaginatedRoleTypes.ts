@@ -6,7 +6,7 @@
 
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import { PaginationValues } from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import { PaginationValues } from "@/common/features/fetch-pagination-search-params/schemas/PaginationValuesSchema.ts";
 import { RoleTypeQueryOptions } from "@/domains/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
 import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";

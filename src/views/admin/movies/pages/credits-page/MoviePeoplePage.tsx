@@ -5,7 +5,7 @@ import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetc
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
 import MoviePeoplePageContent from "@/views/admin/movies/pages/credits-page/MoviePeoplePageContent.tsx";
-import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
+import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
 

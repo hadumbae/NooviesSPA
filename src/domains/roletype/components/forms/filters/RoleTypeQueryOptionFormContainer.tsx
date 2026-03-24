@@ -6,7 +6,7 @@ import {
 } from "@/domains/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import RoleTypeQueryOptionFormView from "@/domains/roletype/components/forms/filters/RoleTypeQueryOptionFormView.tsx";
 import {SearchParamFormContainerProps} from "@/common/type/form/SearchParamFormProps.ts";
-import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {RoleTypeQueryOptionsSchema} from "@/domains/roletype/schema/query-options/RoleTypeQueryOptions.schema.ts";
 
 /**

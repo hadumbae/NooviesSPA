@@ -12,7 +12,6 @@
  */
 
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 import {SeatForm} from "@/domains/seats/schema/form/SeatForm.types.ts";
@@ -27,6 +26,7 @@ import {
     ScreenDetailsSearchParams,
     ScreenDetailsSearchParamSchema
 } from "@/domains/screens/schema/params/ScreenDetailsSearchParamSchema.ts";
+import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 
 /**
  * Required identifiers for initializing screen-scoped state.

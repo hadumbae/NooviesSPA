@@ -5,7 +5,7 @@
 
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {ISO3166Alpha2CountryCode} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 
 /**
  * Parameters for retrieving movie credit data.

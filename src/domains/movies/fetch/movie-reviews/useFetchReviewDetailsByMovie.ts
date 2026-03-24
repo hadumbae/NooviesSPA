@@ -4,7 +4,7 @@
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";

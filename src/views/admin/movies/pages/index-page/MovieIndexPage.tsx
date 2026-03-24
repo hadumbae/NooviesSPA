@@ -3,8 +3,8 @@ import usePaginationLocationState from "@/common/hooks/router/usePaginationLocat
 
 import useFetchPaginatedMovies from "@/domains/movies/hooks/queries/useFetchPaginatedMovies.ts";
 import MovieIndexPageContent from "@/views/admin/movies/pages/edit-page/MovieIndexPageContent.tsx";
-import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
-import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries/MovieQueryOption.schema.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {

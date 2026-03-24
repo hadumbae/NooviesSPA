@@ -11,7 +11,7 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import TheatreRepository from "@/domains/theatres/repositories/TheatreRepository.ts";
 import {TheatreQueryOptions} from "@/domains/theatres/schema/queries/TheatreQueryOption.types.ts";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";

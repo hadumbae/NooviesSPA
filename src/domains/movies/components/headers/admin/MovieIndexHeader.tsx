@@ -3,7 +3,7 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Plus} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/features/fetch-pagination-search-params/hooks/usePaginationSearchParams.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 
 /**

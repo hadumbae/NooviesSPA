@@ -4,7 +4,7 @@
  */
 
 import {FC} from 'react';
-import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
+import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import MyReviewsLoader from "@/views/client/movie-reviews/components/loaders/MyReviewsLoader.tsx";
 import MyReviewsPageContent from "@/views/client/users/pages/reviews-page/MyReviewsPageContent.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";

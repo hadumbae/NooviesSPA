@@ -13,7 +13,7 @@
  */
 
 import {ReservationUtilityRoutes} from "@/domains/reservation/repositories/ReservationUtilityRepository.types.ts";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";

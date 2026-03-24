@@ -11,7 +11,7 @@ import PageCenter from "@/common/components/page/PageCenter.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import GenreIndexHeader from "@/views/admin/genres/pages/genre-index-page/headers/GenreIndexHeader.tsx";
-import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";

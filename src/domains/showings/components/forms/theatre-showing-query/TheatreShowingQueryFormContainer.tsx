@@ -12,7 +12,7 @@
  * and state orchestration layer.
  */
 
-import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {
     ShowingsPageQueryStringSchema
 } from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";

@@ -1,6 +1,6 @@
 import {useSearchParams} from "react-router-dom";
-import parseSearchParams from "@/common/utility/features/search-params/parseSearchParams.ts";
-import setSearchParamValue from "@/common/utility/features/search-params/setSearchParamValue.ts";
+import parseSearchParams from "@/common/features/fetch-search-params/parseSearchParams.ts";
+import updateSearchParamValue from "@/common/features/fetch-search-params/updateSearchParamValue.ts";
 import {
     TheatreDetailsSearchParamSchema
 } from "@/domains/theatres/schema/params/TheatreDetailsSearchParamSchema.ts";
@@ -33,22 +33,22 @@ export default function useTheatreDetailsSearchParams(
 
     const params = {searchParams, setSearchParams};
     const rawData = Object.fromEntries(searchParams.entries());
-    const parsedSearchParams = parseSearchParams({schema: TheatreDetailsSearchParamSchema, raw: rawData});
+    const parsedSearchParams = parseSearchParams({schema: TheatreDetailsSearchParamSchema, paramStrings: rawData});
 
     const setActiveTab = (value: string | number) =>
-        setSearchParamValue({key: "activeTab", value, ...params});
+        updateSearchParamValue({key: "activeTab", value, ...params});
 
     const setScreenPage = (value: string | number) =>
-        setSearchParamValue({key: "screenPage", value, ...params});
+        updateSearchParamValue({key: "screenPage", value, ...params});
 
     const setScreenPerPage = (value: string | number) =>
-        setSearchParamValue({key: "screenPerPage", value, ...params});
+        updateSearchParamValue({key: "screenPerPage", value, ...params});
 
     const setShowingPage = (value: string | number) =>
-        setSearchParamValue({key: "showingPage", value, ...params});
+        updateSearchParamValue({key: "showingPage", value, ...params});
 
     const setShowingPerPage = (value: string | number) =>
-        setSearchParamValue({key: "showingPerPage", value, ...params});
+        updateSearchParamValue({key: "showingPerPage", value, ...params});
 
     return {
         searchParams: parsedSearchParams,

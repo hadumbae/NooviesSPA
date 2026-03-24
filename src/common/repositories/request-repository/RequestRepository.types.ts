@@ -7,7 +7,7 @@
 import RequestQueryParams from "@/common/type/request/RequestQueryParams.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {RequestSubmitData} from "@/common/type/request/RequestParamTypes.ts";
 
 /**

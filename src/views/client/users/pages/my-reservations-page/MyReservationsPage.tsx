@@ -3,7 +3,7 @@
  * @filename MyReservationsPage.tsx
  */
 
-import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
+import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import CurrentUserReservationLoader from "@/domains/reservation/components/loaders/CurrentUserReservationLoader.tsx";
 import MyReservationsPageContent from "@/views/client/users/pages/my-reservations-page/ MyReservationsPageContent.tsx";
 

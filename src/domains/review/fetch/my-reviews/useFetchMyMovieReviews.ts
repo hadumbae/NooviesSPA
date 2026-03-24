@@ -11,7 +11,7 @@ import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {
     getFetchMovieReviewsByCurrentUser
 } from "@/domains/review/repositories/my-movie-review/MyMovieReviewRepository.ts";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**

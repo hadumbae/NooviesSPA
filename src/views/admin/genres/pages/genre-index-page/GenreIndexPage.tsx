@@ -4,10 +4,10 @@
  */
 
 import {FC} from 'react';
-import usePaginationSearchParams from "@/common/hooks/search-params/usePaginationSearchParams.ts";
+import usePaginationSearchParams from "@/common/features/fetch-pagination-search-params/hooks/usePaginationSearchParams.ts";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
-import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";
 import GenreIndexPageContent from "@/views/admin/genres/pages/genre-index-page/GenreIndexPageContent.tsx";
 import useFetchPaginatedGenres from "@/domains/genres/fetch/useFetchPaginatedGenres.ts";

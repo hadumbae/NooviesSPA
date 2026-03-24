@@ -3,8 +3,8 @@ import {
     ScreenDetailsSearchParamSchema
 } from "@/domains/screens/schema/params/ScreenDetailsSearchParamSchema.ts";
 import {useSearchParams} from "react-router-dom";
-import parseSearchParams from "@/common/utility/features/search-params/parseSearchParams.ts";
-import setSearchParamValue from "@/common/utility/features/search-params/setSearchParamValue.ts";
+import parseSearchParams from "@/common/features/fetch-search-params/parseSearchParams.ts";
+import updateSearchParamValue from "@/common/features/fetch-search-params/updateSearchParamValue.ts";
 
 type FetchSearchParams = {
     activeTab?: "seats" | "showings";
@@ -28,25 +28,25 @@ export default function useTheatreScreenSearchParams(defaultValues?: FetchSearch
     const [searchParams, setSearchParams] = useSearchParams(defaultValues);
 
     const rawData = Object.fromEntries(searchParams.entries());
-    const parsedSearchParams = parseSearchParams({schema: ScreenDetailsSearchParamSchema, raw: rawData});
+    const parsedSearchParams = parseSearchParams({schema: ScreenDetailsSearchParamSchema, paramStrings: rawData});
 
-    const setActiveTab = (value: string | number) => setSearchParamValue({
+    const setActiveTab = (value: string | number) => updateSearchParamValue({
         key: "activeTab", value, searchParams, setSearchParams
     });
 
-    const setSeatPage = (value: string | number) => setSearchParamValue({
+    const setSeatPage = (value: string | number) => updateSearchParamValue({
         key: "seatPage", value, searchParams, setSearchParams
     });
 
-    const setSeatsPerPage = (value: string | number) => setSearchParamValue({
+    const setSeatsPerPage = (value: string | number) => updateSearchParamValue({
         key: "seatsPerPage", value, searchParams, setSearchParams
     });
 
-    const setShowingPage = (value: string | number) => setSearchParamValue({
+    const setShowingPage = (value: string | number) => updateSearchParamValue({
         key: "showingPage", value, searchParams, setSearchParams
     });
 
-    const setShowingsPerPage = (value: string | number) => setSearchParamValue({
+    const setShowingsPerPage = (value: string | number) => updateSearchParamValue({
         key: "showingsPerPage", value, searchParams, setSearchParams
     });
 

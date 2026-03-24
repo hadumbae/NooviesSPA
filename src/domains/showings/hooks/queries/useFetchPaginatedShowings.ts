@@ -11,7 +11,6 @@
  */
 
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {ShowingQueryOptions} from "@/domains/showings/schema/queries/ShowingQueryOption.types.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
@@ -19,6 +18,7 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import ShowingRepository from "@/domains/showings/repositories/ShowingRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 
 /**
  * Parameters for fetching paginated Showings.

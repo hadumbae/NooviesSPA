@@ -14,10 +14,10 @@ import {FC} from 'react';
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import {PaginatedPersonDetailsSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import {PaginatedPersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
-import useParsedSearchParams from "@/common/hooks/search-params/useParsedSearchParams.ts";
+import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {PersonQueryOptionsSchema} from "@/domains/persons/schema/queries/PersonQueryOption.schema.ts";
 import {useFetchPaginatedPersons} from "@/domains/persons/hooks/fetch/useFetchPaginatedPersons.ts";
-import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
+import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import PersonIndexPageContent from "@/domains/persons/pages/index-page/PersonIndexPageContent.tsx";
 

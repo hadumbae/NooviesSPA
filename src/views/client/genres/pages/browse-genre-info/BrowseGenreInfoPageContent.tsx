@@ -8,7 +8,7 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import GenreInfoBanner from "@/views/client/genres/components/browse-genre/GenreInfoBanner.tsx";
 import PaginatedMovieDetailsDataLoader from "@/domains/movies/components/loaders/PaginatedMovieDetailsDataLoader.tsx";
-import useParsedPaginationValue from "@/common/hooks/search-params/useParsedPaginationValue.ts";
+import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import BrowseMovieOverviewCard
     from "@/domains/movies/components/client/browse-movies/browse-movie-overview/BrowseMovieOverviewCard.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";

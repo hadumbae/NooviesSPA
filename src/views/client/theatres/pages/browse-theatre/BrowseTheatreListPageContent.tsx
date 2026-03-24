@@ -17,7 +17,7 @@ import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import BrowseTheatreParamFormContainer
     from "@/domains/theatres/components/client/forms/browse-theatre-params/BrowseTheatreParamFormContainer.tsx";
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {TheatreWithRecentShowings} from "@/domains/theatres/schema/model/theatre/TheatreWithRecentShowings.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";

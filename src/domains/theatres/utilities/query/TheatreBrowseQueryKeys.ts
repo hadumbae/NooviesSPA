@@ -7,7 +7,7 @@
  * location-based theatre browsing with pagination.
  */
 
-import {PaginationValues} from "@/common/schema/features/pagination-search-params/PaginationValuesSchema.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 
 /**
  * Query parameters for location-based theatre browsing.
