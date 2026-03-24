@@ -17,21 +17,21 @@ import PageLoader from "@/common/components/page/PageLoader.tsx";
 import useFetchTheatreBySlug
     from "@/domains/theatres/hooks/fetch-theatre/useFetchTheatreBySlug.ts";
 import {useFetchScreensWithShowings}
-    from "@/domains/screens/hooks/browse/useFetchScreensWithShowings.ts";
+    from "@/domains/theatre-screens/hooks/browse/useFetchScreensWithShowings.ts";
 import {TheatreDetailsSchema}
     from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import TheatreInfoPageContent
     from "@/domains/theatres/pages/client/theatre-info/TheatreInfoPageContent.tsx";
 import {
-    ScreenWithShowings,
-    ScreenWithShowingsArraySchema
-} from "@/domains/screens/schema/screen/ScreenWithShowingsSchema.ts";
+    ScreenWithShowings
+} from "@/domains/theatre-screens/schema/model/ScreenWithShowingsSchema.ts";
 import MultiQueryDataLoader
     from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import {QueryDefinition}
     from "@/common/type/query/loader/MultiQuery.types.ts";
 import {TheatreDetails}
     from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
+import {ScreenWithShowingsArraySchema} from "@/domains/theatre-screens/schema/model/ScreenWithShowingsArraySchema.ts";
 
 /**
  * Combined query payload for {@link TheatreInfoPage}.

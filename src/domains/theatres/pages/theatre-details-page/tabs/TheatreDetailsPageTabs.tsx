@@ -10,8 +10,8 @@ import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {TheatreDetailsSearchParamSchema} from "@/domains/theatres/schema/params/TheatreDetailsSearchParamSchema.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import TheatreDetailsScreensTab from "@/domains/theatres/pages/theatre-details-page/tabs/TheatreDetailsScreensTab.tsx";
-import ScreenFormContextProvider from "@/domains/screens/contexts/screen-form/ScreenFormContextProvider.tsx";
-import {ScreenFormValues} from "@/domains/screens/schema/forms/ScreenForm.types.ts";
+import ScreenFormContextProvider from "@/domains/theatre-screens/contexts/screen-form/ScreenFormContextProvider.tsx";
+import {ScreenFormValues} from "@/domains/theatre-screens/schema/forms/ScreenForm.types.ts";
 import TheatreDetailsShowingsTab
     from "@/domains/theatres/pages/theatre-details-page/tabs/TheatreDetailsShowingsTab.tsx";
 

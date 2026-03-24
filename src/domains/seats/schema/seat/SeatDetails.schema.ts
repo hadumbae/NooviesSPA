@@ -1,12 +1,12 @@
 import { z } from "zod";
 import { TheatreSchema } from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
-import { ScreenSchema } from "@/domains/screens/schema/screen/Screen.schema.ts";
 import { SeatBaseSchema } from "@/domains/seats/schema/seat/Seat.schema.ts";
 import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import { SeatTypeEnum } from "@/domains/seats/schema/SeatTypeEnumSchema.ts";
 import { CoercedBooleanValueSchema } from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 import { CoercedNumberValueSchema } from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
+import {TheatreScreenSchema} from "@/domains/theatre-screens/schema/model/TheatreScreenSchema.ts";
 
 /**
  * ## SeatDetailsReferenceSchema
@@ -20,7 +20,7 @@ import { CoercedNumberValueSchema } from "@/common/schema/numbers/number-value/C
  */
 const SeatDetailsReferenceSchema = SeatBaseSchema.extend({
     theatre: z.lazy(() => TheatreSchema),
-    screen: z.lazy(() => ScreenSchema),
+    screen: z.lazy(() => TheatreScreenSchema),
 });
 
 /**

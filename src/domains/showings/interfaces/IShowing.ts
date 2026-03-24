@@ -1,5 +1,5 @@
 import IMovie from "@/domains/movies/interfaces/IMovie.ts";
-import {IScreen} from "@/domains/screens/interfaces/IScreen.ts";
+import {IScreen} from "@/domains/theatre-screens/interfaces/IScreen.ts";
 import ISeatMap from "@/domains/seatmap/interfaces/ISeatMap.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {Theatre} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";

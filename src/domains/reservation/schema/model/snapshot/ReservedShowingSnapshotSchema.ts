@@ -18,7 +18,7 @@
 import { z } from "zod";
 import { MovieSnapshotSchema } from "@/domains/movies/schema/snapshot/MovieSnapshotSchema.ts";
 import { TheatreSnapshotSchema } from "@/domains/theatres/schema/model/snapshot/TheatreSnapshotSchema.ts";
-import { ScreenSnapshotSchema } from "@/domains/screens/schema/snapshot/ScreenSnapshotSchema.ts";
+import { ScreenSnapshotSchema } from "@/domains/theatre-screens/schema/snapshot/ScreenSnapshotSchema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import { ReservedSeatSnapshotSchema } from "@/domains/reservation/schema/model/snapshot/ReservedSeatSnapshotSchema.ts";
 import { UTCISO8601DateTimeSchema } from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";

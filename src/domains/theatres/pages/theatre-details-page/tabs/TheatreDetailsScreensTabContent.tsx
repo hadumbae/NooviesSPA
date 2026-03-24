@@ -24,7 +24,7 @@
 
 import { FC } from 'react';
 import { isArray } from "lodash";
-import ScreenSubmitFormPanel from "@/domains/screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
+import ScreenSubmitFormPanel from "@/domains/theatre-screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
 import { Button } from "@/common/components/ui/button.tsx";
 import { HoverLinkCSS } from "@/common/constants/css/ButtonCSS.ts";
 import { Plus } from "lucide-react";
@@ -32,10 +32,10 @@ import { cn } from "@/common/lib/utils.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import TheatreScreenDetailsDrawer
-    from "@/domains/screens/components/theatre-screens/admin/lists/TheatreScreenDetailsDrawer.tsx";
+    from "@/domains/theatre-screens/components/theatre-screens/admin/lists/TheatreScreenDetailsDrawer.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import { ScreenDetails } from "@/domains/screens/schema/screen/Screen.types.ts";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
 
 /**
  * Props for `TheatreDetailsScreensTabContent`.
@@ -45,7 +45,7 @@ type TabContentProps = {
     theatreID: ObjectId;
 
     /** Array of screen details to display */
-    screens: ScreenDetails[];
+    screens: TheatreScreenDetails[];
 
     /** Total number of screens (for pagination) */
     totalItems: number;

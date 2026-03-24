@@ -11,7 +11,7 @@
  */
 
 import TheatreDetailsPage from "@/domains/theatres/pages/theatre-details-page/TheatreDetailsPage.tsx";
-import ScreenDetailsPage from "@/domains/screens/pages/admin/screen-details-page/ScreenDetailsPage.tsx";
+import ScreenDetailsPage from "@/domains/theatre-screens/pages/admin/screen-details-page/ScreenDetailsPage.tsx";
 import TheatreIndexPage from "@/domains/theatres/pages/theatre-index-page/TheatreIndexPage.tsx";
 import TheatreShowingCreatePage from "@/domains/theatres/pages/theatre-showings/TheatreShowingCreatePage.tsx";
 import TheatreShowingListPage from "@/domains/theatres/pages/theatre-showings/TheatreShowingListPage.tsx";

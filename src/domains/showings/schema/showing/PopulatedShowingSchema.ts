@@ -6,16 +6,16 @@
 import {ShowingSchema} from "@/domains/showings/schema/showing/ShowingSchema.ts";
 import {z} from "zod";
 import {TheatreSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
-import {ScreenSchema} from "@/domains/screens/schema/screen/Screen.schema.ts";
 
 import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
+import {TheatreScreenSchema} from "@/domains/theatre-screens/schema/model/TheatreScreenSchema.ts";
 
 /**
  * Extends {@link ShowingSchema} with populated relations.
  */
 export const PopulatedShowingSchema = ShowingSchema.extend({
     theatre: z.lazy(() => TheatreSchema),
-    screen: z.lazy(() => ScreenSchema),
+    screen: z.lazy(() => TheatreScreenSchema),
     movie: z.lazy(() => MovieWithGenresSchema),
 });
 

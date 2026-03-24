@@ -15,12 +15,14 @@
 
 import {FC} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {PaginatedScreenDetailsSchema} from "@/domains/screens/schema/screen/Screen.schema.ts";
-import {PaginatedScreenDetails} from "@/domains/screens/schema/screen/Screen.types.ts";
-import {ScreenQueryOptions} from "@/domains/screens/schema/queries/ScreenQueryOptions.types.ts";
-import useFetchPaginatedScreens from "@/domains/screens/hooks/screens/fetch-screens/useFetchPaginatedScreens.ts";
+import {ScreenQueryOptions} from "@/domains/theatre-screens/schema/queries/ScreenQueryOptions.types.ts";
+import useFetchPaginatedScreens from "@/domains/theatre-screens/hooks/screens/fetch-screens/useFetchPaginatedScreens.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import TheatreDetailsScreensTabContent from "@/domains/theatres/pages/theatre-details-page/tabs/TheatreDetailsScreensTabContent.tsx";
+import {
+    PaginatedTheatreScreenDetails,
+    PaginatedTheatreScreenDetailsSchema
+} from "@/domains/theatre-screens/schema/model/PaginatedTheatreScreenDetailsSchema.ts";
 
 /**
  * Props for {@link TheatreDetailsScreensTab}.
@@ -104,8 +106,8 @@ const TheatreDetailsScreensTab: FC<OverviewTabProps> = (props) => {
     });
 
     return (
-        <ValidatedDataLoader query={screenQuery} schema={PaginatedScreenDetailsSchema}>
-            {({items, totalItems}: PaginatedScreenDetails) => (
+        <ValidatedDataLoader query={screenQuery} schema={PaginatedTheatreScreenDetailsSchema}>
+            {({items, totalItems}: PaginatedTheatreScreenDetails) => (
                 <TheatreDetailsScreensTabContent
                     theatreID={theatreID}
                     screens={items}

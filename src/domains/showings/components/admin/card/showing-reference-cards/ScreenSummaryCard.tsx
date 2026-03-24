@@ -1,4 +1,3 @@
-import {ScreenDetails} from "@/domains/screens/schema/screen/Screen.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
@@ -10,10 +9,11 @@ import IconTextSpan from "@/common/components/card-content/IconTextSpan.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
 
 type CardProps = {
     /** Fully populated screen details */
-    screen: ScreenDetails;
+    screen: TheatreScreenDetails;
 };
 
 /**

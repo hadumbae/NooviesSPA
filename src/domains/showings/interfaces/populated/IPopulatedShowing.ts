@@ -1,4 +1,4 @@
-import {IScreen} from "@/domains/screens/interfaces/IScreen.ts";
+import {IScreen} from "@/domains/theatre-screens/interfaces/IScreen.ts";
 import IMovie from "@/domains/movies/interfaces/IMovie.ts";
 import ISeatMap from "@/domains/seatmap/interfaces/ISeatMap.ts";
 import IShowing from "@/domains/showings/interfaces/IShowing.ts";

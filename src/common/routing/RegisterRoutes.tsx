@@ -2,7 +2,7 @@ import HomeRoutes from "@/domains/client/routing/ClientRoutes.tsx";
 import AuthRoutes from "@/domains/auth/routing/AuthRoutes.tsx";
 import GenreRoutes from "@/domains/genres/routing/AdminGenreRoutes.tsx";
 import PersonRoutes from "@/domains/persons/routing/PersonRoutes.tsx";
-import ScreenRoutes from "@/domains/screens/routing/ScreenRoutes.tsx";
+import ScreenRoutes from "@/domains/theatre-screens/routing/ScreenRoutes.tsx";
 import SeatRoutes from "@/domains/seats/routing/SeatRoutes.tsx";
 import TheatreRoutes from "@/domains/theatres/routing/TheatreRoutes.tsx";
 import ShowingRoutes from "@/domains/showings/routing/ShowingRoutes.tsx";
