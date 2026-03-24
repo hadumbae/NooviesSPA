@@ -1,3 +1,8 @@
+/**
+ * @file Factory for creating a standardized HTTP request repository for API resources.
+ * @filename createRequestRepository.ts
+ */
+
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
@@ -14,34 +19,16 @@ import {RequestQueryOptions} from "@/common/type/request/RequestOptions.ts";
 import RequestQueryParams from "@/common/type/request/RequestQueryParams.ts";
 
 /**
- * @file createRequestRepository.ts
- *
- * @summary
- * Factory for creating a standardized HTTP request repository.
- *
- * @description
- * Produces an {@link RequestRepositoryMethods} bound to a specific API resource.
- * All requests:
- * - Use {@link useFetchAPI} for transport
- * - Build URLs via {@link buildQueryURL}
- * - Omit nullish query parameters automatically
- *
- * Supported operations include CRUD, pagination, and flexible querying.
- *
- * @example
- * ```ts
- * const UserRepository = createRequestRepository({ baseURL: "/api/users" });
- * const { result } = await UserRepository.getAll({ populate: true });
- * ```
+ * Creates a standard repository object bound to a specific base URL for a resource.
+ * @param config - Repository configuration including the base API endpoint.
+ * @returns An object containing standardized methods for CRUD and querying operations.
  */
 export const createRequestRepository = <TQueries extends RequestQueryParams = RequestQueryParams>({baseURL}: {
     baseURL: string
 }): RequestRepositoryMethods => ({
     /**
-     * Fetch all entities without pagination.
-     *
-     * @param params
-     * Optional filters and request options.
+     * Retrieves all entities for a resource without pagination.
+     * @param params - Optional filters and standard request configuration.
      */
     async getAll(params?: GetEntitiesParams<TQueries>): Promise<RequestReturns<unknown>> {
         const {queries, config} = params ?? {};
@@ -59,10 +46,8 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
     },
 
     /**
-     * Fetch entities using pagination.
-     *
-     * @param params
-     * Pagination, filters, and request options.
+     * Retrieves a paginated subset of entities.
+     * @param params - Required page/perPage metrics, plus optional filters.
      */
     async paginated(params: GetPaginatedEntitiesParams<TQueries>): Promise<RequestReturns<unknown>> {
         const {page, perPage, queries, config} = params;
@@ -83,14 +68,12 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
     },
 
     /**
-     * Fetch a single entity by ID.
-     *
-     * @param params
-     * Entity identifier and optional request options.
+     * Fetches a single entity using its unique database identifier.
+     * @param params - Object containing the entity `_id`.
      */
-    async get<TResult = unknown>(
+    async get(
         params: GetEntityByIDParams
-    ): Promise<RequestReturns<TResult>> {
+    ): Promise<RequestReturns<unknown>> {
         const {_id, config = {}} = params;
 
         const url = buildQueryURL({
@@ -102,9 +85,13 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
         return useFetchAPI({url, method: "GET"});
     },
 
-    async getBySlug<TResult = unknown>(
+    /**
+     * Fetches a single entity using its URL-friendly slug.
+     * @param params - Object containing the entity `slug`.
+     */
+    async getBySlug(
         params: GetEntityBySlugParams
-    ): Promise<RequestReturns<TResult>> {
+    ): Promise<RequestReturns<unknown>> {
         const {slug, config} = params;
 
         const url = buildQueryURL({
@@ -117,14 +104,12 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
     },
 
     /**
-     * Create a new entity.
-     *
-     * @param params
-     * Payload and optional request options.
+     * Persists a new entity to the resource collection.
+     * @param params - The data payload and optional configuration.
      */
-    async create<TResult = unknown>(
+    async create(
         params: CreateEntityParams
-    ): Promise<RequestReturns<TResult>> {
+    ): Promise<RequestReturns<unknown>> {
         const {data, config} = params;
 
         const url = buildQueryURL({
@@ -137,14 +122,12 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
     },
 
     /**
-     * Update an existing entity.
-     *
-     * @param params
-     * Entity ID, update payload, and optional request options.
+     * Updates an existing entity via a PATCH request.
+     * @param params - The entity ID and the partial or full update payload.
      */
-    async update<TResult = unknown>(
+    async update(
         params: UpdateEntityParams
-    ): Promise<RequestReturns<TResult>> {
+    ): Promise<RequestReturns<unknown>> {
         const {_id, data, config} = params;
 
         const url = buildQueryURL({
@@ -157,27 +140,24 @@ export const createRequestRepository = <TQueries extends RequestQueryParams = Re
     },
 
     /**
-     * Delete an entity by ID.
-     *
-     * @param params
-     * Entity identifier.
+     * Permanently removes an entity from the resource collection.
+     * @param params - Object containing the entity `_id` to delete.
      */
-    async delete<TResult = unknown>(
+    async delete(
         {_id}: DeleteEntityParams
-    ): Promise<RequestReturns<TResult>> {
+    ): Promise<RequestReturns<unknown>> {
         const url = buildQueryURL({baseURL, path: `delete/${_id}`});
         return useFetchAPI({url, method: "DELETE"});
     },
 
     /**
-     * Execute a flexible query against the resource endpoint.
-     *
-     * @param params
-     * Query filters and options.
+     * Performs a generic GET query against the resource's query endpoint.
+     * Useful for complex filtering that doesn't fit standard CRUD patterns.
+     * @param params - Combined query and configuration options.
      */
-    async query<TResult = unknown>(
+    async query(
         {queries, config}: RequestQueryOptions
-    ): Promise<RequestReturns<TResult>> {
+    ): Promise<RequestReturns<unknown>> {
         const url = buildQueryURL({
             baseURL,
             path: "query",
