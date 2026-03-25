@@ -36,10 +36,10 @@ const MyReservationPageContent = ({reservation}: ContentProps) => {
         showing: {movie: {title, posterImage}, config: {isSpecialEvent}},
     } = formatReservationDetails(reservation);
 
-    const navigateToProfile = () => {
+    const navigateToReservations = () => {
         navigate({
             level: "log",
-            to: "/account/profile?activeTab=reservations",
+            to: "/account/reservations",
             message: `Navigate after reservation update.`,
             component: MyReservationStatusActions.name,
         });
@@ -71,7 +71,7 @@ const MyReservationPageContent = ({reservation}: ContentProps) => {
                 (status === "RESERVED" || status === "PAID") &&
                 <MyReservationStatusActions
                     reservationID={_id}
-                    onSubmitSuccess={navigateToProfile}
+                    onSubmitSuccess={navigateToReservations}
                     status={status}
                 />
             }

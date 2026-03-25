@@ -27,6 +27,7 @@ const MyReservationInfoCard = ({reservation}: CardProps) => {
         status,
         ticketCount,
         pricePaid,
+        uniqueCode,
         formatted: {showtime, reservationType},
     } = formatReservationDetails(reservation);
 
@@ -63,6 +64,14 @@ const MyReservationInfoCard = ({reservation}: CardProps) => {
                     <LabeledGroup label="Status">
                         <PrimarySpan>
                             {status}
+                        </PrimarySpan>
+                    </LabeledGroup>
+                </section>
+
+                <section className="flex justify-between items-center">
+                    <LabeledGroup label="Code">
+                        <PrimarySpan>
+                            {uniqueCode}
                         </PrimarySpan>
                     </LabeledGroup>
                 </section>

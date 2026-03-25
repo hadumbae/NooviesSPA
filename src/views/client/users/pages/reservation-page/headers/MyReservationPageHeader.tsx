@@ -41,7 +41,7 @@ const MyReservationPageHeader = (
     const navigateToProfile = () => {
         navigate({
             level: "log",
-            to: "/account/profile?activeTab=reservations",
+            to: "/account/reservations",
             component: MyReservationPageHeader.name,
             message: "Navigate back to reservations.",
         });
