@@ -29,13 +29,11 @@ const MyReservationPageContent = ({reservation}: ContentProps) => {
 
     const {
         _id,
-        title,
-        posterImage,
-        isSpecialEvent,
         reservationType,
         status,
         _ids: {showingID},
         formatted: {movieReleaseDate, movieGenres},
+        showing: {movie: {title, posterImage}, config: {isSpecialEvent}},
     } = formatReservationDetails(reservation);
 
     const navigateToProfile = () => {

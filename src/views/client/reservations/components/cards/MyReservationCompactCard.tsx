@@ -28,12 +28,17 @@ type CardProps = {
  * @param props - Component properties containing the reservation data.
  */
 const MyReservationCompactCard = ({reservation}: CardProps) => {
-    console.log("Reservation: ", reservation);
-
     const navigate = useLoggedNavigate();
 
-    const {slug, formatted, status, ticketCount, pricePaid, posterImage} =
-        formatReservationDetails(reservation);
+    const {
+        slug,
+        uniqueCode,
+        formatted,
+        status,
+        ticketCount,
+        pricePaid,
+        showing: {movie: {posterImage}}
+    } = formatReservationDetails(reservation);
 
     const {movieTitle, reservationType, showtime, runtime} = formatted;
 
@@ -61,7 +66,7 @@ const MyReservationCompactCard = ({reservation}: CardProps) => {
                         />
                     </section>
 
-                    <section className="flex flex-col gap-4">
+                    <section className="flex-1 flex flex-col gap-4">
                         <SectionHeader srOnly={true}>
                             Reservation : Showing Metadata
                         </SectionHeader>
@@ -81,8 +86,8 @@ const MyReservationCompactCard = ({reservation}: CardProps) => {
                                 <PrimarySpan>$ {pricePaid}</PrimarySpan>
                             </LabeledGroup>
 
-                            <LabeledGroup label="Price">
-                                <PrimarySpan>$ {pricePaid}</PrimarySpan>
+                            <LabeledGroup label="Code">
+                                <PrimarySpan>{uniqueCode}</PrimarySpan>
                             </LabeledGroup>
                         </div>
                     </section>
