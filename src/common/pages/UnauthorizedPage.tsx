@@ -6,7 +6,7 @@ import {cn} from "@/common/lib/utils.ts";
 const UnauthorizedPage: FC = () => {
     return (
         <PageCenter className="space-y-5">
-            <h1 className="dotgothic16-regular text-[100px]">
+            <h1 className="font-dotGothic16 text-[100px]">
                 403
             </h1>
 

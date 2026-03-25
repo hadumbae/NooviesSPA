@@ -17,7 +17,7 @@ import {FC} from 'react';
  *
  * @remarks
  * - Automatically updates the displayed year using `new Date().getFullYear()`.
- * - Uses the `dotgothic16-regular` font for a distinctive aesthetic.
+ * - Uses the `font-dotGothic16` font for a distinctive aesthetic.
  * - Center-aligns its text and applies a neutral tone (`text-neutral-500`).
  * - Intended to be used at the bottom of the `BaseLayout`.
  *
@@ -27,7 +27,7 @@ const BaseLayoutFooter: FC = () => {
     const currentYear = (new Date()).getFullYear();
 
     return (
-        <footer className="dotgothic16-regular text-center text-neutral-500">
+        <footer className="font-dotGothic16 text-center text-neutral-500">
             <span className="text-sm">
                 All Rights Reserved <span className="font-bold">@{currentYear}</span> | Noovies Ltd.
             </span>

@@ -38,7 +38,7 @@ const BaseLayoutDesktopClientNavigation: FC = () => {
     const {mutate: logout} = useAuthLogoutSubmitMutation({onSubmitSuccess: onLogout});
 
     return (
-        <section className="flex items-center space-x-2">
+        <section className="flex items-center space-x-2 font-spaceGrotesk">
             <SectionHeader srOnly={true}>Desktop Navigation</SectionHeader>
 
             <NavLink to="/">Home</NavLink>

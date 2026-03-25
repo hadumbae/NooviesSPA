@@ -19,6 +19,7 @@ import AdminDashboardSidebarGroup
     from "@/common/layout/admin-layout/sidebar/admin-side-bar-groups/AdminDashboardSidebarGroup.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {LayoutThemeSidebarGroup} from "@/common/layout/common-layout/sidebar/LayoutThemeSidebarGroup.tsx";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Orchestrates the administrative navigation menu, providing quick access to management modules.
@@ -30,13 +31,17 @@ const AdminSidebar: FC = () => {
             <SidebarHeader>
                 <LoggedLink
                     to="/admin/dashboard"
-                    className="text-lg font-bold tracking-tight px-4 py-2"
+                    className={cn(
+                        "flex items-end justify-center space-x-2",
+                        "tracking-tight px-4 py-2",
+                    )}
                 >
-                    NOOVIES Admin
+                    <span className="font-playwriteRoCursive text-3xl">Noovies</span>
+                    <span className="text-gray-400 italic">Admin</span>
                 </LoggedLink>
             </SidebarHeader>
 
-            <SidebarContent>
+            <SidebarContent className="font-spaceGrotesk">
                 <AdminDashboardSidebarGroup />
 
                 <AdminSetupSidebarGroup/>

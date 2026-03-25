@@ -38,7 +38,7 @@ const BaseLayoutHeader: FC = () => {
 
     return (
         <header className="flex justify-between items-center">
-            <LayoutTitle text="Noovies MRS"/>
+            <LayoutTitle text="Noovies"/>
 
             <div className="flex justify-center space-x-5">
                 <LayoutBreakpointIndicator/>

@@ -52,7 +52,7 @@ const ComponentErrorHandler: FC = () => {
 
     return (
         <PageCenter className="space-y-5">
-            <h1 className="dotgothic16-regular text-[100px]">
+            <h1 className="font-dotGothic16 text-[100px]">
                 ERROR
             </h1>
 

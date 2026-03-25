@@ -22,7 +22,7 @@ const PageError: FC<Props> = ({error, message, header = "ERROR", to, linkText}) 
         const {errors} = error;
         return (
             <PageCenter className="space-y-6">
-                <h1 className="dotgothic16-regular text-[100px]">{header}</h1>
+                <h1 className="font-dotGothic16 text-[100px]">{header}</h1>
                 <h2 className="text-neutral-500">Received Invalid Data.</h2>
 
                 <ol className="list-disc text-sm text-neutral-400">
@@ -36,7 +36,7 @@ const PageError: FC<Props> = ({error, message, header = "ERROR", to, linkText}) 
 
     return (
         <PageCenter className="space-y-2">
-            <h1 className="dotgothic16-regular text-[100px]">{header}</h1>
+            <h1 className="font-dotGothic16 text-[100px]">{header}</h1>
             <h2 className="text-neutral-500">{message || error?.message || "Unknown Error"}</h2>
 
             {

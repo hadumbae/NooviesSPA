@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Offside&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+RO:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -73,24 +79,4 @@
         --sidebar-border: 240 3.7% 15.9%;
         --sidebar-ring: 217.2 91.2% 59.8%;
     }
-}
-
-
-.dotgothic16-regular {
-    font-family: "DotGothic16", serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.offside-regular {
-    font-family: "Offside", serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.playwrite-ro-cursive {
-    font-family: "Playwrite RO", cursive;
-    font-optical-sizing: auto;
-    font-weight: 100;
-    font-style: normal;
 }

@@ -29,7 +29,7 @@ const GuestSidebar: FC = () => {
                 Noovies
             </SidebarHeader>
 
-            <SidebarContent>
+            <SidebarContent className="font-spaceGrotesk">
                 <GuestAuthSidebarGroup />
             </SidebarContent>
         </Sidebar>

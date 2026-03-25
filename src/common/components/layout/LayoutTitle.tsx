@@ -9,7 +9,7 @@ type TitleProps = {
 const LayoutTitle: FC<TitleProps> = ({text, className}) => {
     return (
         <h1 className={cn(
-            "dotgothic16-regular text-xl",
+            "font-dotGothic16 text-xl",
             "dark:text-white",
             className,
         )}>

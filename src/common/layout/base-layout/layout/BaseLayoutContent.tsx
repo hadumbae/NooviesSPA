@@ -22,7 +22,7 @@ import {Bounce, ToastContainer} from "react-toastify";
  * - Uses `Outlet` to render nested route content defined in your router configuration.
  * - Includes a `ToastContainer` for consistent toast notifications across the app.
  * - Centers content on large screens (`md:mx-20`, `xl:mx-48`) while using full width on smaller screens.
- * - Applies `offside-regular` font and `py-5` vertical spacing.
+ * - Applies `font-offside` font and `py-5` vertical spacing.
  *
  * @dependencies
  * - `react-router-dom.Outlet` — Renders nested route content.
@@ -35,7 +35,7 @@ import {Bounce, ToastContainer} from "react-toastify";
 const BaseLayoutContent: FC = () => {
     return (
         <section className={cn(
-            "flex-1 offside-regular py-5",
+            "flex-1 font-offside py-5",
             "max-w-screen-2xl max-md:w-full",
             "md:mx-20 xl:mx-48",
         )}>

@@ -10,18 +10,11 @@ module.exports = {
   theme: {
   	extend: {
   		fontFamily: {
-  			dotGothic16: [
-  				'DotGothic16',
-  				'sans-serif'
-  			],
-  			offside: [
-  				'Offside',
-  				'sans-serif'
-  			],
-			playwriteRoCursive: [
-  				'Playwrite RO',
-  				'sans-serif'
-  			]
+  			dotGothic16: ['DotGothic16', 'sans-serif'],
+  			offside: ['Offside', 'sans-serif'],
+			playwriteRoCursive: ['Playwrite RO', 'sans-serif'],
+			oswald: ['Oswald', 'sans-serif'],
+			spaceGrotesk: ['Space Grotesk', 'sans-serif'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

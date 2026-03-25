@@ -27,7 +27,7 @@ const ClientSidebar: FC = () => {
                 <h1 className="text-3xl font-playwriteRoCursive">Noovies</h1>
             </SidebarHeader>
 
-            <SidebarContent>
+            <SidebarContent className="font-spaceGrotesk">
                 {
                     isAdmin && <>
                         <Separator/>
