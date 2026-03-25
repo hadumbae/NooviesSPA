@@ -12,7 +12,7 @@ import MyReservationSeatingCard from "@/views/client/users/pages/reservation-pag
 import MyReservationStatusActions
     from "@/views/client/users/pages/reservation-page/mutations/MyReservationStatusActions.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import {PopulatedReservation} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
+import {PopulatedReservation} from "@/domains/reservation/schema/model";
 
 /**
  * Props for MyReservationPageContent

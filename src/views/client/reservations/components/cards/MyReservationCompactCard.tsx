@@ -13,7 +13,7 @@ import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import PrimarySpan from "@/views/common/components/text/PrimarySpan.tsx";
-import {PopulatedReservation} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
+import {PopulatedReservation} from "@/domains/reservation/schema/model";
 
 /**
  * Props for the {@link MyReservationCompactCard} component.

@@ -7,17 +7,17 @@ import {useFetchReservationsForCurrentUser} from "@/domains/reservation/fetch/us
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {ReactNode} from "react";
 import {
-    PaginatedPopulatedReservationDetails,
+    PaginatedPopulatedReservations,
     PaginatedPopulatedReservationSchema
-} from "@/domains/reservation/schema/model/reservation/ReservationPaginatedSchemas.ts";
+} from "@/domains/reservation/schema/model/ReservationPaginatedSchemas.ts";
 
 /**
  * Props for {@link CurrentUserReservationLoader}.
  */
 type LoaderProps = {
-    /** * Render-prop pattern: receives the validated {@link PaginatedPopulatedReservationDetails}.
+    /** * Render-prop pattern: receives the validated {@link PaginatedPopulatedReservations}.
      */
-    children: (data: PaginatedPopulatedReservationDetails) => ReactNode;
+    children: (data: PaginatedPopulatedReservations) => ReactNode;
 
     /** Current subset of data to fetch. Defaults to 1. */
     page?: number;

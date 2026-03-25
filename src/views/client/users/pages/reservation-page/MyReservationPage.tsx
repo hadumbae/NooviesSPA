@@ -8,11 +8,8 @@ import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamS
 import {Loader} from "lucide-react";
 import {useFetchReservationBySlug} from "@/domains/reservation/fetch/useFetchReservationBySlug.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {
-    PopulatedReservation,
-    PopulatedReservationSchema
-} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
 import MyReservationPageContent from "@/views/client/users/pages/reservation-page/MyReservationPageContent.tsx";
+import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservation/schema/model";
 
 /**
  * Fetches and renders a reservation by slug.

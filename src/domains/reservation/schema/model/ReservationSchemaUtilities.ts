@@ -4,11 +4,11 @@
  */
 
 import {RefinementCtx} from "zod";
-import {ReservationStatus} from "@/domains/reservation/schema/enum/ReservationStatusEnumSchema.ts";
+import {ReservationStatus} from "@/domains/reservation/schema/model/fields/ReservationStatusEnumSchema.ts";
 import {
     ReservationBase
-} from "@/domains/reservation/schema/model/reservation/ReservationBaseSchema.ts";
-import {ReservationDetailsBase} from "@/domains/reservation/schema/model/reservation/PopulatedReservationBaseSchema.ts";
+} from "@/domains/reservation/schema/model/ReservationBaseSchema.ts";
+import {PopulatedReservationBase} from "@/domains/reservation/schema/model/PopulatedReservationBaseSchema.ts";
 
 /**
  * Mapping of {@link ReservationStatus} to its corresponding mandatory timestamp field.
@@ -27,14 +27,14 @@ const DATE_MAP: Partial<Record<ReservationStatus, keyof ReservationBase>> = {
  * This utility ensures that if a reservation is marked with a specific status,
  * the associated audit date (e.g., `datePaid` for status `PAID`) is not undefined.
  * * It is compatible with both raw {@link ReservationBase} and
- * {@link ReservationDetailsBase} (populated) shapes.
+ * {@link PopulatedReservationBase} (populated) shapes.
  *
  * @param values - The reservation data being validated.
  * @param ctx - The Zod refinement context used to inject custom validation issues.
  * * @example
  * // If status is 'CANCELLED', this checks that 'dateCancelled' is present.
  */
-export const superRefineReservation = (values: ReservationBase | ReservationDetailsBase, ctx: RefinementCtx): void => {
+export const superRefineReservation = (values: ReservationBase | PopulatedReservationBase, ctx: RefinementCtx): void => {
     const status = values.status as ReservationStatus;
     const requiredDate = DATE_MAP[status];
 

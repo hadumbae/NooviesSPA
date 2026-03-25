@@ -3,7 +3,7 @@
  * @filename PopulatedReservationBaseSchema.ts
  */
 
-import {ReservationBaseSchema} from "@/domains/reservation/schema/model/reservation/ReservationBaseSchema.ts";
+import {ReservationBaseSchema} from "@/domains/reservation/schema/model/ReservationBaseSchema.ts";
 import {PopulatedShowingSchema} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 import {z} from "zod";
 
@@ -25,4 +25,4 @@ export const PopulatedReservationBaseSchema = ReservationBaseSchema.extend({
  * Represents the raw populated structure. Note that this type does not yet
  * include the status-based refinements applied in the final union.
  */
-export type ReservationDetailsBase = z.infer<typeof PopulatedReservationBaseSchema>;
+export type PopulatedReservationBase = z.infer<typeof PopulatedReservationBaseSchema>;

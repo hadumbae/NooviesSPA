@@ -4,7 +4,7 @@
  */
 
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
-import {PopulatedReservationSchema} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
+import {PopulatedReservationSchema} from "@/domains/reservation/schema/model/PopulatedReservationSchema.ts";
 import {z} from "zod";
 
 /**
@@ -13,13 +13,13 @@ import {z} from "zod";
  * Utilizes {@link generateArraySchema} to enforce non-empty array constraints
  * and item-level validation for each populated reservation.
  */
-export const ReservationDetailsArraySchema =
+export const PopulatedReservationArraySchema =
     generateArraySchema(PopulatedReservationSchema);
 
 /**
- * Inferred type from {@link ReservationDetailsArraySchema}.
+ * Inferred type from {@link PopulatedReservationArraySchema}.
  * * Useful for bulk operations or specialized views that do not require
  * the full metadata provided by {@link PaginatedReservationDetailsSchema}.
  */
-export type ReservationDetailsArray =
-    z.infer<typeof ReservationDetailsArraySchema>;
+export type PopulatedReservationArray =
+    z.infer<typeof PopulatedReservationArraySchema>;

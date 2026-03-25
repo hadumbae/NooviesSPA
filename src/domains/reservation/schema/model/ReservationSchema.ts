@@ -6,9 +6,9 @@
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
-import {superRefineReservation} from "@/domains/reservation/schema/model/reservation/ReservationSchemaUtilities.ts";
+import {superRefineReservation} from "@/domains/reservation/schema/model/ReservationSchemaUtilities.ts";
 import {ReservationTypeConstant} from "@/domains/reservation/constants/ReservationTypeConstant.ts";
-import {ReservationBaseSchema} from "@/domains/reservation/schema/model/reservation/ReservationBaseSchema.ts";
+import {ReservationBaseSchema} from "@/domains/reservation/schema/model/ReservationBaseSchema.ts";
 
 /**
  * Schema for General Admission (GA) reservations.

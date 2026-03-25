@@ -10,12 +10,12 @@ import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/Posi
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {ISO4217CurrencyCodeEnumSchema} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
 import {UTCISO8601StringSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601StringSchema.ts";
-import {ReservationTypeEnumSchema} from "@/domains/reservation/schema/enum/ReservationTypeEnumSchema.ts";
-import {ReservationStatusEnumSchema} from "@/domains/reservation/schema/enum/ReservationStatusEnumSchema.ts";
+import {ReservationTypeEnumSchema} from "@/domains/reservation/schema/model/fields/ReservationTypeEnumSchema.ts";
+import {ReservationStatusEnumSchema} from "@/domains/reservation/schema/model/fields/ReservationStatusEnumSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {
     ReservationUniqueCodeSchema
-} from "@/domains/reservation/schema/model/reservation/ReservationUniqueCodeSchema.ts";
+} from "@/domains/reservation/schema/model/fields/ReservationUniqueCodeSchema.ts";
 import {ModelTimestampsSchema} from "@/common/schema/models/ModelTimestampsSchema.ts";
 
 /**

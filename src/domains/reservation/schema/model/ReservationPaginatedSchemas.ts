@@ -4,7 +4,7 @@
  */
 
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
-import {PopulatedReservationSchema} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
+import {PopulatedReservationSchema} from "@/domains/reservation/schema/model/PopulatedReservationSchema.ts";
 import {z} from "zod";
 
 /**
@@ -25,5 +25,5 @@ export const PaginatedPopulatedReservationSchema =
  * Typically utilized in administrative dashboards or user-facing
  * booking history lists where relational data (User, Showing) is required.
  */
-export type PaginatedPopulatedReservationDetails =
+export type PaginatedPopulatedReservations =
     z.infer<typeof PaginatedPopulatedReservationSchema>;

@@ -3,14 +3,14 @@
  * @filename PopulatedReservationSchema.ts
  */
 
-import {superRefineReservation} from "@/domains/reservation/schema/model/reservation/ReservationSchemaUtilities.ts";
+import {superRefineReservation} from "@/domains/reservation/schema/model/ReservationSchemaUtilities.ts";
 import {z} from "zod";
 import {ReservationTypeConstant} from "@/domains/reservation/constants/ReservationTypeConstant.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {SeatMapWithSeatSchema} from "@/domains/seatmap/schema/model/SeatMap.schema.ts";
 import {
     PopulatedReservationBaseSchema
-} from "@/domains/reservation/schema/model/reservation/PopulatedReservationBaseSchema.ts";
+} from "@/domains/reservation/schema/model/PopulatedReservationBaseSchema.ts";
 
 /**
  * Populated schema for General Admission (GA) variants.

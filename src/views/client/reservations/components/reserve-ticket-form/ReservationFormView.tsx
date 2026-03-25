@@ -6,7 +6,7 @@
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {ReserveTicketFormValues} from "@/domains/reservation/schema/forms/ReserveTicketFormValuesSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
-import {ReservationType} from "@/domains/reservation/schema/enum/ReservationTypeEnumSchema.ts";
+import {ReservationType} from "@/domains/reservation/schema/model/fields/ReservationTypeEnumSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {useState} from "react";
 import {ReservationCountFieldset}

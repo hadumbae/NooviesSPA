@@ -24,10 +24,7 @@ import {ReserveTicketFormValues} from "@/domains/reservation/schema/forms/Reserv
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import {TicketRepository} from "@/domains/reservation/repositories/ticket-repository/TicketRepository.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import {
-    PopulatedReservation,
-    PopulatedReservationSchema
-} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
+import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservation/schema/model";
 
 /**
  * Parameters required to configure the reservation submission mutation.

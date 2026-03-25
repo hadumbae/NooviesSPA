@@ -7,7 +7,7 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {UseFormReturn} from "react-hook-form";
 import {ReserveTicketFormValues} from "@/domains/reservation/schema/forms/ReserveTicketFormValuesSchema.ts";
-import {ReservationType} from "@/domains/reservation/schema/enum/ReservationTypeEnumSchema.ts";
+import {ReservationType} from "@/domains/reservation/schema/model/fields/ReservationTypeEnumSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
 
 /**

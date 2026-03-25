@@ -8,12 +8,12 @@ import {ReserveTicketFormValues} from "@/domains/reservation/schema/forms/Reserv
 import {useReserveTicketForm} from "@/domains/reservation/forms/useReserveTicketForm.ts";
 import {useReserveTicketSubmitMutation} from "@/domains/reservation/mutations/useReserveTicketSubmitMutation.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {ReservationType} from "@/domains/reservation/schema/enum/ReservationTypeEnumSchema.ts";
 import {ReserveTicketForm} from "@/domains/reservation/schema/forms/ReserveTicketFormSchema.ts";
 import Logger from "@/common/utility/features/logger/Logger.ts";
 import {ISO4217CurrencyCode} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
 import {ReservationFormView} from "@/views/client/reservations/components/reserve-ticket-form/ReservationFormView.tsx";
-import {PopulatedReservation} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
+
+import {PopulatedReservation, ReservationType} from "@/domains/reservation/schema/model";
 
 /**
  * Props for {@link ReservationFormContainer}.
