@@ -1,15 +1,6 @@
 /**
- * @file ShowingTicketSelectorFormContainer.tsx
- *
- * Container component for the ticket selection form.
- *
- * Orchestrates:
- * - Form initialization with preset reservation values
- * - Submission mutation wiring
- * - Reservation-type–specific defaults
- *
- * Delegates all rendering to
- * {@link ShowingTicketSelectorFormView}.
+ * @file Orchestration container for the Ticket Reservation form.
+ * @filename ShowingTicketSelectorFormContainer.tsx
  */
 
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
@@ -21,43 +12,34 @@ import {ReservationType} from "@/domains/reservation/schema/enum/ReservationType
 import {ReserveTicketForm} from "@/domains/reservation/schema/forms/ReserveTicketFormSchema.ts";
 import Logger from "@/common/utility/features/logger/Logger.ts";
 import {ISO4217CurrencyCode} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
-import ShowingTicketSelectorFormView
-    from "@/domains/reservation/components/forms/ticket-selectors/ShowingTicketSelectorFormView.tsx";
+import {ReservationFormView} from "@/views/client/reservations/components/reserve-ticket-form/ReservationFormView.tsx";
 import {PopulatedReservation} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
 
 /**
- * Props for {@link ShowingTicketSelectorFormContainer}.
+ * Props for {@link ReservationFormContainer}.
  */
 type ContainerProps = MutationOnSubmitParams<PopulatedReservation> & {
-    /** Target showing identifier */
+    /** The target `Showing` ID used to anchor the reservation and fetch relevant seat maps. */
     showingID: ObjectId;
 
-    /** Reservation flow type */
+    /** Determines the logic flow: either "GENERAL_ADMISSION" or "RESERVED_SEATS". */
     reservationType: ReservationType;
 
-    /** Currency code for pricing (defaults to USD) */
+    /** The currency context for pricing calculations. Defaults to "USD". */
     currency?: ISO4217CurrencyCode;
 };
 
 /**
- * Container for the showing ticket selector form.
- *
- * @remarks
- * - Injects reservation-specific preset values into the form
- * - Handles submission logging and mutation execution
- * - Keeps view component stateless and presentation-only
- *
- * @param props - Showing context and mutation configuration
+ * A container component that abstracts the business logic for booking tickets.
  */
-const ShowingTicketSelectorFormContainer = (
+export const ReservationFormContainer = (
     {showingID, reservationType, currency = "USD", ...mutationProps}: ContainerProps
 ) => {
     const presetValues: Partial<ReserveTicketFormValues> = {
         currency,
         reservationType,
         showing: showingID,
-        selectedSeating:
-            reservationType === "RESERVED_SEATS" ? [] : null,
+        selectedSeating: reservationType === "RESERVED_SEATS" ? [] : null,
     };
 
     const form = useReserveTicketForm({presetValues});
@@ -66,13 +48,10 @@ const ShowingTicketSelectorFormContainer = (
         ...mutationProps,
     });
 
-    /**
-     * Handles form submission.
-     */
     const submitData = (values: ReserveTicketFormValues) => {
         Logger.log({
             type: "DATA",
-            msg: "Data for ticket reservation.",
+            msg: "Initiating ticket reservation submission.",
             context: {values},
         });
 
@@ -80,12 +59,10 @@ const ShowingTicketSelectorFormContainer = (
     };
 
     return (
-        <ShowingTicketSelectorFormView
+        <ReservationFormView
             reservationType={reservationType}
             submitHandler={submitData}
             form={form}
         />
     );
 };
-
-export default ShowingTicketSelectorFormContainer;

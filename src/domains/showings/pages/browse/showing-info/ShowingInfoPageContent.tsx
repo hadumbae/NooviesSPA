@@ -1,16 +1,6 @@
 /**
- * @file ShowingInfoPageContent.tsx
- *
- * Primary content renderer for a showing details page.
- *
- * Responsibilities:
- * - Present formatted showing metadata
- * - Initialize ticket selection flow
- * - Handle post-reservation navigation
- *
- * @remarks
- * - Reservation flow behavior is delegated to form containers
- * - Navigation events are logged for traceability
+ * @file Presentational content layer for the Showing Details page.
+ * @filename ShowingInfoPageContent.tsx
  */
 
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
@@ -19,29 +9,28 @@ import {formatShowingInfo} from "@/domains/showings/utilities/formatShowingInfo.
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import buildString from "@/common/utility/buildString.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import ShowingTicketSelectorFormContainer
-    from "@/domains/reservation/components/forms/ticket-selectors/ShowingTicketSelectorFormContainer.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ReservationFormContainer} from "@/views/client/reservations/components/reserve-ticket-form";
 
 /**
- * Props for {@link ShowingInfoPageContent}.
+ * Props for the {@link ShowingInfoPageContent} component.
  */
 type ContentProps = {
-    /** Fully populated showing details */
+    /** The validated and fully populated showing entity retrieved from the API. */
     showing: ShowingDetails;
 };
 
 /**
- * Renders showing metadata and the ticket reservation workflow.
- *
- * @param showing - Showing being reserved
+ * Renders formatted showing metadata and the interactive ticket reservation workflow.
  */
 const ShowingInfoPageContent = (
     {showing}: ContentProps
 ) => {
+    /** Hook for navigation that automatically logs transition events to the backend. */
     const navigate = useLoggedNavigate();
 
+    /** Deconstructs domain logic into display-ready strings. */
     const {
         reservationType,
         movieTitle,
@@ -50,17 +39,19 @@ const ShowingInfoPageContent = (
         theatreName,
     } = formatShowingInfo(showing);
 
+    /** Combines metadata parts into a single bullet-separated line. */
     const metaString = buildString(
         [formattedRunTime, formattedStartTime, theatreName],
         " • ",
     );
 
+    /** Callback triggered after a successful reservation mutation. */
     const navigateToReservations = () => {
         navigate({
             to: "/account/profile?activeTab=reservations",
             level: "log",
             component: ShowingInfoPageContent.name,
-            message: "Navigate to user's reservations after creation.",
+            message: "User successfully reserved tickets; redirecting to dashboard.",
         });
     };
 
@@ -74,7 +65,8 @@ const ShowingInfoPageContent = (
             <section className="space-y-4">
                 <SectionHeader>Ticket Selection</SectionHeader>
 
-                <ShowingTicketSelectorFormContainer
+                {/* Form orchestrator handling both GA and Reserved Seating logic */}
+                <ReservationFormContainer
                     showingID={showing._id}
                     reservationType={reservationType}
                     currency="USD"

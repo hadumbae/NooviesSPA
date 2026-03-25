@@ -1,14 +1,6 @@
 /**
- * @file ShowingTicketSelectorFormView.tsx
- *
- * Presentation component for the ticket selection form.
- *
- * Handles:
- * - Conditional rendering between seat selection and ticket count
- * - Local UI flow state for reserved seating
- * - Form submission wiring via React Hook Form
- *
- * All business logic and mutations are delegated to the container.
+ * @file Presentation layer for the Ticket Reservation multi-step flow.
+ * @filename ShowingTicketSelectorFormView.tsx
  */
 
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
@@ -17,55 +9,42 @@ import {Form} from "@/common/components/ui/form.tsx";
 import {ReservationType} from "@/domains/reservation/schema/enum/ReservationTypeEnumSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {useState} from "react";
-import TicketSelectorCountFieldset
-    from "@/domains/reservation/components/forms/ticket-selectors/fieldsets/TicketSelectorCountFieldset.tsx";
-import TicketSelectorSeatFieldset
-    from "@/domains/reservation/components/forms/ticket-selectors/fieldsets/TicketSelectorSeatFieldset.tsx";
+import {ReservationCountFieldset}
+    from "@/views/client/reservations/components/reserve-ticket-form/fieldsets/ReservationCountFieldset.tsx";
+import {ReservationSeatFieldset}
+    from "@/views/client/reservations/components/reserve-ticket-form/fieldsets/ReservationSeatFieldset.tsx";
 
 /**
- * Props for {@link ShowingTicketSelectorFormView}.
+ * Props for the {@link ReservationFormView}.
  */
 type FormViewProps = {
-    /** Form submission handler */
+    /** The actual logic function that triggers the mutation. */
     submitHandler: SubmitHandler<ReserveTicketFormValues>;
 
-    /** React Hook Form instance */
+    /** The React Hook Form instance containing values and validation state. */
     form: UseFormReturn<ReserveTicketFormValues>;
 
-    /** Reservation flow type */
+    /** Informs the UI whether to show seat-selection steps. */
     reservationType: ReservationType;
 
-    /** Optional wrapper class name */
+    /** Optional CSS class for external layout control. */
     className?: string;
 };
 
 /**
- * View component for selecting tickets for a showing.
- *
- * @remarks
- * - Manages only local UI flow state (`reserveSeats`)
- * - Switches between seat selection and ticket count fieldsets
- * - Relies on the container for all business logic
- *
- * @param props - Form state and configuration
+ * A stateful view component that manages the user's progression through the booking steps.
  */
-const ShowingTicketSelectorFormView = (
+export const ReservationFormView = (
     {form, submitHandler, reservationType, className}: FormViewProps
 ) => {
     const [reserveSeats, setReserveSeats] =
         useState<boolean>(reservationType === "RESERVED_SEATS");
 
-    /** Advances from seat selection to ticket count */
     const proceedToCount = () => setReserveSeats(false);
-
-    /** Returns from ticket count to seat selection */
     const backToSeats = () => setReserveSeats(true);
 
-    /** Derived numeric ticket count */
     const ticketCountValue = form.watch("ticketCount");
-    const ticketCount = ticketCountValue
-        ? Number(ticketCountValue)
-        : 0;
+    const ticketCount = ticketCountValue ? Number(ticketCountValue) : 0;
 
     return (
         <Form {...form}>
@@ -74,13 +53,13 @@ const ShowingTicketSelectorFormView = (
                 className={cn("space-y-4", className)}
             >
                 {reserveSeats ? (
-                    <TicketSelectorSeatFieldset
+                    <ReservationSeatFieldset
                         form={form}
                         proceedToCount={proceedToCount}
                         ticketCount={ticketCount}
                     />
                 ) : (
-                    <TicketSelectorCountFieldset
+                    <ReservationCountFieldset
                         form={form}
                         backToSeats={backToSeats}
                         reservationType={reservationType}
@@ -91,5 +70,3 @@ const ShowingTicketSelectorFormView = (
         </Form>
     );
 };
-
-export default ShowingTicketSelectorFormView;

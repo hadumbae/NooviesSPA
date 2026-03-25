@@ -1,13 +1,6 @@
 /**
- * @file TicketSelectorCountFieldset.tsx
- *
- * Ticket count selection fieldset for the reservation flow.
- *
- * Handles:
- * - Ticket quantity input (hook-form controlled)
- * - Conditional behavior for reserved seating vs general admission
- * - Navigation back to seat selection when applicable
- * - Submit action gating based on ticket count
+ * @file Fieldset for final ticket quantity verification and submission.
+ * @filename TicketSelectorCountFieldset.tsx
  */
 
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
@@ -18,31 +11,26 @@ import {ReservationType} from "@/domains/reservation/schema/enum/ReservationType
 import {cn} from "@/common/lib/utils.ts";
 
 /**
- * Props for {@link TicketSelectorCountFieldset}.
+ * Props for {@link ReservationCountFieldset}.
  */
 type FieldsetProps = {
-    /** Active reservation type (general admission vs reserved seating) */
+    /** Used to toggle visibility of navigation buttons and input editability. */
     reservationType: ReservationType;
 
-    /** React Hook Form instance for the reservation form */
+    /** Access to the form's control for the `ticketCount` input. */
     form: UseFormReturn<ReserveTicketFormValues>;
 
-    /** Callback to return the user to seat selection */
+    /** Triggers the transition back to the seat map step. */
     backToSeats: () => void;
 
-    /** Current ticket count value */
+    /** The current number of tickets to display or validate against. */
     ticketCount: number;
 };
 
 /**
- * Renders ticket quantity controls and primary reservation actions.
- *
- * @remarks
- * - Disables manual ticket count editing when seats are reserved individually
- * - Shows a "Back" button only for reserved seating flows
- * - Prevents submission when ticket count is zero or less
+ * Renders the quantity input and the final action buttons for a reservation.
  */
-const TicketSelectorCountFieldset = (
+export const ReservationCountFieldset = (
     {reservationType, ticketCount, backToSeats, form}: FieldsetProps
 ) => {
     return (
@@ -53,6 +41,7 @@ const TicketSelectorCountFieldset = (
                 control={form.control}
                 type="number"
                 min={0}
+                /** Prevent manual overrides in reserved seating mode. */
                 disabled={reservationType === "RESERVED_SEATS"}
             />
 
@@ -63,7 +52,7 @@ const TicketSelectorCountFieldset = (
                 )}
             >
                 {reservationType === "RESERVED_SEATS" && (
-                    <Button onClick={() => backToSeats()}>
+                    <Button type="button" onClick={backToSeats}>
                         Back
                     </Button>
                 )}
@@ -79,5 +68,3 @@ const TicketSelectorCountFieldset = (
         </fieldset>
     );
 };
-
-export default TicketSelectorCountFieldset;

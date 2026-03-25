@@ -1,17 +1,6 @@
 /**
- * @file TicketSelectorSeatFieldset.tsx
- *
- * Seat-selection step of the ticket reservation flow.
- *
- * Responsibilities:
- * - Load seat map data for the selected showing
- * - Allow users to select seats
- * - Keep `ticketCount` in sync with selected seats
- * - Gate progression until at least one seat is selected
- *
- * @remarks
- * This fieldset assumes seat-based ticketing.
- * `ticketCount` is derived from `selectedSeating` and should not be edited directly.
+ * @file Interactive fieldset for visual seat selection.
+ * @filename TicketSelectorSeatFieldset.tsx
  */
 
 import {UseFormReturn} from "react-hook-form";
@@ -23,33 +12,30 @@ import ReservationSeatMapInput from "@/views/client/reservations/components/seat
 import {useEffect} from "react";
 
 /**
- * Props for {@link TicketSelectorSeatFieldset}.
+ * Props for {@link ReservationSeatFieldset}.
  */
 type FieldsetProps = {
-    /** React Hook Form instance for the reservation form */
+    /** The main form controller. */
     form: UseFormReturn<ReserveTicketFormValues>;
 
-    /** Advances the reservation flow to the ticket count / next step */
+    /** Navigates the user to the next step (Count/Confirmation). */
     proceedToCount: () => void;
 
-    /** Current number of selected tickets */
+    /** The count of currently selected seats to control the "Next" button state. */
     ticketCount: number;
 };
 
 /**
- * Renders the seat-selection UI within the reservation flow.
- *
- * @param form - React Hook Form controller
- * @param ticketCount - Derived count of selected seats
- * @param proceedToCount - Callback to advance the flow
+ * Renders a visual seat map and synchronizes selection with the form state.
  */
-const TicketSelectorSeatFieldset = ({form, ticketCount, proceedToCount}: FieldsetProps) => {
+export const ReservationSeatFieldset = ({form, ticketCount, proceedToCount}: FieldsetProps) => {
     const showingID = form.watch("showing") as ObjectId;
     const selectedSeating = (form.watch("selectedSeating") || []) as ObjectId[];
 
+    /** Keep the ticket count in sync with the visual map selection. */
     useEffect(() => {
-        form.setValue("ticketCount", selectedSeating.length);
-    }, [selectedSeating]);
+        form.setValue("ticketCount", selectedSeating.length, { shouldValidate: true });
+    }, [selectedSeating, form]);
 
     return (
         <fieldset className="space-y-4">
@@ -65,9 +51,10 @@ const TicketSelectorSeatFieldset = ({form, ticketCount, proceedToCount}: Fieldse
 
             <div className="text-right">
                 <Button
+                    type="button"
                     variant="outline"
                     disabled={ticketCount === 0}
-                    onClick={() => proceedToCount()}
+                    onClick={proceedToCount}
                 >
                     Next
                 </Button>
@@ -75,5 +62,3 @@ const TicketSelectorSeatFieldset = ({form, ticketCount, proceedToCount}: Fieldse
         </fieldset>
     );
 };
-
-export default TicketSelectorSeatFieldset;
