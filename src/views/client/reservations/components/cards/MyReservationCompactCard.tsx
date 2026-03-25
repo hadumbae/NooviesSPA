@@ -14,6 +14,10 @@ import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import PrimarySpan from "@/views/common/components/text/PrimarySpan.tsx";
 import {PopulatedReservation} from "@/domains/reservation/schema/model";
+import {Separator} from "@/common/components/ui/separator.tsx";
+import {
+    ReservationStatusBadge
+} from "@/views/client/reservations/components/reservation-status/ReservationStatusBadge.tsx";
 
 /**
  * Props for the {@link MyReservationCompactCard} component.
@@ -56,48 +60,52 @@ const MyReservationCompactCard = ({reservation}: CardProps) => {
 
     return (
         <Card className="hover:cursor-pointer transition-colors hover:bg-muted/50" onClick={navigateToReservation}>
-            <CardContent className="p-4 space-y-3">
-                <div className="flex items-start space-x-2">
-                    <section>
-                        <PosterImage
-                            src={posterImage?.secure_url}
-                            alt={`${movieTitle} Poster`}
-                            className="h-28"
-                        />
-                    </section>
-
-                    <section className="flex-1 flex flex-col gap-4">
+            <CardContent className="p-4 space-x-3 flex items-center">
+                <section>
+                    <PosterImage
+                        src={posterImage?.secure_url}
+                        alt={`${movieTitle} Poster`}
+                        className="h-52 lg:h-60"
+                    />
+                </section>
+                <div className="flex-1 space-y-3">
+                    <section className="flex-1 flex flex-col items-center gap-2 lg:gap-3">
                         <SectionHeader srOnly={true}>
                             Reservation : Showing Metadata
                         </SectionHeader>
 
-                        <h2 className={cn(PrimaryTextBaseCSS, "font-bold line-clamp-1")}>
+                        <h2 className={cn(
+                            PrimaryTextBaseCSS,
+                            "font-oswald font-extrabold line-clamp-1",
+                            "text-lg"
+                        )}>
                             {movieTitle}
                         </h2>
 
-                        <PrimarySpan>{showtime}</PrimarySpan>
+                        <SecondarySpan>{showtime}</SecondarySpan>
+                        <SecondarySpan>{runtime} • {reservationType}</SecondarySpan>
 
-                        <div className="flex justify-between items-center">
+                        <div className="flex items-center gap-10">
                             <LabeledGroup label="Tickets">
-                                <PrimarySpan>{ticketCount}</PrimarySpan>
+                                <PrimarySpan>{ticketCount} tickets</PrimarySpan>
                             </LabeledGroup>
 
                             <LabeledGroup label="Price">
-                                <PrimarySpan>$ {pricePaid}</PrimarySpan>
-                            </LabeledGroup>
-
-                            <LabeledGroup label="Code">
-                                <PrimarySpan>{uniqueCode}</PrimarySpan>
+                                <PrimarySpan>${pricePaid} Total</PrimarySpan>
                             </LabeledGroup>
                         </div>
                     </section>
+
+                    <Separator/>
+
+                    <section className="flex flex-col items-center space-y-3">
+                        <PrimarySpan className="font-bold text-lg lg:text-xl">
+                            ||| {uniqueCode} |||
+                        </PrimarySpan>
+                        <ReservationStatusBadge status={status}/>
+                    </section>
                 </div>
 
-                <section className="flex justify-between items-center">
-                    <SecondarySpan>{runtime} Runtime</SecondarySpan>
-                    <SecondarySpan>{status}</SecondarySpan>
-                    <SecondarySpan>{reservationType}</SecondarySpan>
-                </section>
             </CardContent>
         </Card>
     );
