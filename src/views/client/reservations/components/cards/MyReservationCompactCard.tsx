@@ -1,13 +1,6 @@
 /**
- * @file MyReservationCompactCard.tsx
- *
- * Compact reservation summary card used in profile and preview contexts.
- *
- * @remarks
- * - Displays a condensed, read-only snapshot of a reservation.
- * - Optimised for list views such as profile pages and dashboards.
- * - Navigates to the full reservation detail page on interaction.
- * - **INCOMPLETE**: visual hierarchy and data density are provisional.
+ * @file Compact summary card for user reservations.
+ * @filename MyReservationCompactCard.tsx
  */
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
@@ -22,18 +15,21 @@ import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import PrimarySpan from "@/views/common/components/text/PrimarySpan.tsx";
 import {PopulatedReservation} from "@/domains/reservation/schema/model/reservation/PopulatedReservationSchema.ts";
 
+/**
+ * Props for the {@link MyReservationCompactCard} component.
+ */
 type CardProps = {
-    /** Reservation data rendered in compact card form */
+    /** The fully populated reservation entity to be displayed. */
     reservation: PopulatedReservation;
 };
 
 /**
- * Renders a clickable compact reservation card.
- *
- * Formats reservation data for display and routes the user
- * to the full reservation detail view when selected.
+ * A clickable UI card that presents a high-level overview of a specific reservation.
+ * @param props - Component properties containing the reservation data.
  */
 const MyReservationCompactCard = ({reservation}: CardProps) => {
+    console.log("Reservation: ", reservation);
+
     const navigate = useLoggedNavigate();
 
     const {slug, formatted, status, ticketCount, pricePaid, posterImage} =
@@ -54,12 +50,13 @@ const MyReservationCompactCard = ({reservation}: CardProps) => {
     };
 
     return (
-        <Card className="hover:cursor-pointer" onClick={navigateToReservation}>
+        <Card className="hover:cursor-pointer transition-colors hover:bg-muted/50" onClick={navigateToReservation}>
             <CardContent className="p-4 space-y-3">
                 <div className="flex items-start space-x-2">
                     <section>
                         <PosterImage
                             src={posterImage?.secure_url}
+                            alt={`${movieTitle} Poster`}
                             className="h-28"
                         />
                     </section>
@@ -69,13 +66,19 @@ const MyReservationCompactCard = ({reservation}: CardProps) => {
                             Reservation : Showing Metadata
                         </SectionHeader>
 
-                        <h2 className={cn(PrimaryTextBaseCSS, "font-bold")}>{movieTitle}</h2>
+                        <h2 className={cn(PrimaryTextBaseCSS, "font-bold line-clamp-1")}>
+                            {movieTitle}
+                        </h2>
 
                         <PrimarySpan>{showtime}</PrimarySpan>
 
                         <div className="flex justify-between items-center">
                             <LabeledGroup label="Tickets">
                                 <PrimarySpan>{ticketCount}</PrimarySpan>
+                            </LabeledGroup>
+
+                            <LabeledGroup label="Price">
+                                <PrimarySpan>$ {pricePaid}</PrimarySpan>
                             </LabeledGroup>
 
                             <LabeledGroup label="Price">

@@ -1,5 +1,5 @@
 /**
- * @file Base schema and type for reservation records.
+ * @file Foundational Zod schema and type for Reservation entity validation.
  * @filename ReservationBaseSchema.ts
  */
 
@@ -13,64 +13,76 @@ import {UTCISO8601StringSchema} from "@/common/schema/date-time/iso-8601/UTCISO8
 import {ReservationTypeEnumSchema} from "@/domains/reservation/schema/enum/ReservationTypeEnumSchema.ts";
 import {ReservationStatusEnumSchema} from "@/domains/reservation/schema/enum/ReservationStatusEnumSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {
+    ReservationUniqueCodeSchema
+} from "@/domains/reservation/schema/model/reservation/ReservationUniqueCodeSchema.ts";
+import {ModelTimestampsSchema} from "@/common/schema/models/ModelTimestampsSchema.ts";
 
 /**
- * Core {@link z.object} defining the reservation data structure.
- * Uses {@link IDStringSchema} for entity references.
+ * Core validation schema defining the structure of a Reservation record.
+ * ---
+ * ### Composition
+ * * **Inheritance:** Extends {@link ModelTimestampsSchema} for automated `createdAt`/`updatedAt` tracking.
+ * * **Verification:** Integrates {@link ReservationUniqueCodeSchema} to enforce the `RES-XXXXX-XXXXX` identifier pattern.
+ * * **Life-cycle:** Tracks progress through optional ISO-8601 timestamps (`datePaid`, `dateCancelled`, etc.).
+ * * **Strictness:** References to `User` and `Showing` are validated as MongoDB ObjectIDs via {@link IDStringSchema}.
  */
-export const ReservationBaseSchema = z.object({
-    /** {@link IDStringSchema} */
-    _id: IDStringSchema,
+export const ReservationBaseSchema = ModelTimestampsSchema.extend({
+    /** Unique BSON identifier; read-only to prevent mutation after creation. */
+    _id: IDStringSchema.readonly(),
 
-    /** {@link SlugStringSchema} */
+    /** URL-friendly identifier derived from movie metadata. */
     slug: SlugStringSchema,
 
-    /** Reference via {@link IDStringSchema}. */
+    /** Human-readable verification code for ticket scanning. */
+    uniqueCode: ReservationUniqueCodeSchema,
+
+    /** Reference to the User who owns the reservation. */
     user: IDStringSchema,
 
-    /** Reference via {@link IDStringSchema}. */
+    /** Reference to the specific Showing event. */
     showing: IDStringSchema,
 
-    /** {@link PositiveNumberSchema} */
+    /** Total ticket quantity; must be at least 1. */
     ticketCount: PositiveNumberSchema,
 
-    /** {@link NonNegativeNumberSchema} */
+    /** Final monetary amount charged. */
     pricePaid: NonNegativeNumberSchema,
 
-    /** {@link ISO4217CurrencyCodeEnumSchema} */
+    /** 3-letter currency code (e.g., USD, GBP). */
     currency: ISO4217CurrencyCodeEnumSchema,
 
-    /** {@link UTCISO8601StringSchema} */
+    /** Timestamp of the initial booking. */
     dateReserved: UTCISO8601StringSchema,
 
-    /** Optional {@link UTCISO8601StringSchema}. */
+    /** Optional timestamp recorded upon successful payment. */
     datePaid: UTCISO8601StringSchema.optional(),
 
-    /** Optional {@link UTCISO8601StringSchema}. */
+    /** Optional timestamp recorded upon manual cancellation. */
     dateCancelled: UTCISO8601StringSchema.optional(),
 
-    /** Optional {@link UTCISO8601StringSchema}. */
+    /** Optional timestamp recorded upon refund issuance. */
     dateRefunded: UTCISO8601StringSchema.optional(),
 
-    /** Optional {@link UTCISO8601StringSchema}. */
+    /** Optional timestamp recorded upon automatic TTL expiration. */
     dateExpired: UTCISO8601StringSchema.optional(),
 
-    /** TTL timestamp via {@link UTCISO8601StringSchema}. */
+    /** The calculated deadline for finalizing payment. */
     expiresAt: UTCISO8601StringSchema,
 
-    /** {@link ReservationTypeEnumSchema} */
+    /** Booking category (GA vs Reserved Seating). */
     reservationType: ReservationTypeEnumSchema,
 
-    /** {@link ReservationStatusEnumSchema} */
+    /** Current transactional status (Pending, Paid, etc.). */
     status: ReservationStatusEnumSchema,
 
-    /** {@link NonEmptyStringSchema} capped at 3000 chars. */
+    /** Administrative or user-provided notes; max 3000 chars. */
     notes: NonEmptyStringSchema
         .max(3000, "Must be 3000 characters or less.")
         .optional(),
 });
 
 /**
- * Inferred type from {@link ReservationBaseSchema}.
+ * TypeScript type inferred from {@link ReservationBaseSchema}.
  */
 export type ReservationBase = z.infer<typeof ReservationBaseSchema>;
