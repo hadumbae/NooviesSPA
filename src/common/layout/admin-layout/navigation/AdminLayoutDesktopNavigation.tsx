@@ -10,6 +10,9 @@ import useAuthLogoutSubmitMutation from "@/domains/auth/hooks/useAuthLogoutSubmi
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import BaseLayoutDesktopThemeDropdown
     from "@/common/layout/common-layout/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";
+import {
+    AdminLayoutReservationNavigationDropdown
+} from "@/common/layout/admin-layout/navigation/AdminLayoutReservationNavigationDropdown.tsx";
 
 /**
  * Admin desktop navigation.
@@ -38,6 +41,7 @@ const AdminLayoutDesktopNavigation: FC = () => {
 
             <AdminLayoutSetupNavigationDropdown />
             <AdminLayoutMovieNavigationDropdown />
+            <AdminLayoutReservationNavigationDropdown />
 
             <BaseLayoutDesktopThemeDropdown />
 

@@ -1,5 +1,5 @@
 /**
- * @file Specialized sidebar navigation component for the administrative dashboard.
+ * @file Main sidebar navigation component for the administrative dashboard.
  * @filename AdminSidebar.tsx
  */
 
@@ -20,10 +20,13 @@ import AdminDashboardSidebarGroup
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {LayoutThemeSidebarGroup} from "@/common/layout/common-layout/sidebar/LayoutThemeSidebarGroup.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {
+    AdminReservationSidebarGroup
+} from "@/common/layout/admin-layout/sidebar/admin-side-bar-groups/AdminReservationSidebarGroup.tsx";
 
 /**
- * Orchestrates the administrative navigation menu, providing quick access to management modules.
- * @returns A structured vertical navigation menu optimized for admin workflows.
+ * Orchestrates the administrative vertical navigation menu.
+ * @returns A structured sidebar component integrated with the shadcn/ui sidebar provider.
  */
 const AdminSidebar: FC = () => {
     return (
@@ -42,14 +45,12 @@ const AdminSidebar: FC = () => {
             </SidebarHeader>
 
             <SidebarContent className="font-spaceGrotesk">
-                <AdminDashboardSidebarGroup />
-
+                <AdminDashboardSidebarGroup/>
                 <AdminSetupSidebarGroup/>
-
                 <AdminMovieSidebarGroup/>
+                <AdminReservationSidebarGroup/>
 
                 <LayoutThemeSidebarGroup/>
-
                 <AdminAuthSidebarGroup/>
             </SidebarContent>
         </Sidebar>
