@@ -1,13 +1,64 @@
-// FetchByCodeLoader.tsx
+/**
+ * @file Specialized data loader for administrative reservation lookups.
+ * @filename FetchByCodeLoader.tsx
+ */
 
-type LoaderProps = {};
+import {ReservationUniqueCode} from "@/domains/reservation/schema/model";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {ReactNode} from "react";
+import {
+    useFetchReservationByCode
+} from "@/domains/reservation/views/admin/reservation-by-code/useFetchReservationByCode.ts";
+import {
+    FetchReservationByCodeData,
+    FetchReservationByCodeSchema
+} from "@/domains/reservation/views/admin/reservation-by-code/FetchReservationByCodeSchema.ts";
 
-export const FetchByCodeLoader = (
-    {}: LoaderProps
-) => {
+/**
+ * Props for {@link FetchByCodeLoader}.
+ */
+type LoaderProps = | {
+    /** Render prop receiving validated reservation data. */
+    children: (data: FetchReservationByCodeData) => ReactNode;
+    /** Triggers the fetch and validation logic. @default true */
+    isEnabled?: true;
+    /** The validated verification code to query. */
+    code: ReservationUniqueCode;
+} | {
+    /** Render prop receiving null. */
+    children: (data: null) => ReactNode;
+    /** Bypasses the query and validation. */
+    isEnabled: false;
+    /** Code is not applicable when disabled. */
+    code?: null;
+};
+
+/**
+ * Orchestrates fetching and validation for reservation lookups by code.
+ * @param `props` - The component properties containing the code and render children.
+ */
+export const FetchByCodeLoader = (props: LoaderProps) => {
+    const {code, isEnabled} = props;
+
+    const query = useFetchReservationByCode({
+        code: code!,
+        options: {enabled: isEnabled}
+    });
+
+    if (props.isEnabled === false) {
+        return (
+            <ValidatedDataLoader query={query} schema={FetchReservationByCodeSchema} isEnabled={false} >
+                {props.children}
+            </ValidatedDataLoader>
+        );
+    }
+
     return (
-        <div>
-            {FetchByCodeLoader.name}
-        </div>
+        <ValidatedDataLoader
+            query={query}
+            schema={FetchReservationByCodeSchema}
+        >
+            {props.children}
+        </ValidatedDataLoader>
     );
 };
