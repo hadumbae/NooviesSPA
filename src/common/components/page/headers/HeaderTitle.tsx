@@ -1,4 +1,9 @@
-import {FC, PropsWithChildren} from 'react';
+/**
+ * @file Reusable Page/Section heading component with standardized typography.
+ * @filename HeaderTitle.tsx
+ */
+
+import {ReactNode} from 'react';
 import {cn} from "@/common/lib/utils.ts";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
@@ -6,39 +11,23 @@ import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
  * Props for the {@link HeaderTitle} component.
  */
 type TitleProps = {
-    /**
-     * Additional CSS class names to apply to the header.
-     * Useful for customizing spacing, color, or layout.
+    /** The content of the header, typically a title string or element. */
+    children: ReactNode;
+
+    /** * Optional additional CSS classes for layout or color overrides.
+     * @example "text-center" or "mb-4"
      */
     className?: string;
 }
 
 /**
- * Renders a page or section header with consistent typography styling.
- *
- * This component automatically scales its font size across breakpoints:
- * - `text-xl` on small screens
- * - `text-2xl` on medium screens
- * - `text-4xl` on extra-large screens
- *
- * You can pass additional styles through the `className` prop.
- *
- * @example
- * ```tsx
- * <HeaderTitle className="text-center text-primary">
- *   Movie Details
- * </HeaderTitle>
- * ```
- *
- * @param children - The content of the header, typically a title string or element.
- * @param className - Optional additional CSS classes.
+ * Renders a semantic `h1` header with responsive scaling and project-standard styling.
  */
-const HeaderTitle: FC<PropsWithChildren<TitleProps>> = ({children, className}) => {
+const HeaderTitle = ({children, className}: TitleProps) => {
     return (
         <h1 className={cn(
             PrimaryTextBaseCSS,
-            "font-bold",
-            "text-xl md:text-2xl xl:text-4xl",
+            "font-bold text-base md:text-lg 2xl:text-xl",
             className,
         )}>
             {children}
