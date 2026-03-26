@@ -1,54 +1,47 @@
-import { FC } from 'react';
-import NavLink from "@/common/components/navigation/NavLink.tsx";
+/**
+ * @file Desktop-specific navigation bar for the administrative layout.
+ * @filename AdminLayoutDesktopNavigation.tsx
+ */
+
+import {FC} from 'react';
 import AdminLayoutSetupNavigationDropdown
     from "@/common/layout/admin-layout/navigation/AdminLayoutSetupNavigationDropdown.tsx";
-import AdminLayoutMovieNavigationDropdown
-    from "@/common/layout/admin-layout/navigation/AdminLayoutMovieNavigationDropdown.tsx";
-import { Button } from "@/common/components/ui/button.tsx";
+import AdminLayoutShowingNavigationDropdown
+    from "@/common/layout/admin-layout/navigation/AdminLayoutShowingNavigationDropdown.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useAuthLogoutSubmitMutation from "@/domains/auth/hooks/useAuthLogoutSubmitMutation.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import BaseLayoutDesktopThemeDropdown
     from "@/common/layout/common-layout/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";
-import {
-    AdminLayoutReservationNavigationDropdown
-} from "@/common/layout/admin-layout/navigation/AdminLayoutReservationNavigationDropdown.tsx";
+import AdminLayoutDashboardNavigationDropdown
+    from "@/common/layout/admin-layout/navigation/AdminLayoutDashboardNavigationDropdown.tsx";
 
 /**
- * Admin desktop navigation.
- *
- * @remarks
- * - Provides dashboard navigation and admin dropdowns
- * - Includes theme selection and logout action
- * - Intended for admin desktop layouts only
+ * Orchestrates the horizontal navigation suite for administrative users on desktop.
  */
 const AdminLayoutDesktopNavigation: FC = () => {
     const navigate = useLoggedNavigate();
 
-    const onLogout = () =>
-        navigate({to: "/", component: AdminLayoutDesktopNavigation.name});
-
-    const {mutate: logout} =
-        useAuthLogoutSubmitMutation({onSubmitSuccess: onLogout});
+    const onLogout = () => navigate({to: "/", component: AdminLayoutDesktopNavigation.name});
+    const {mutate: logout} = useAuthLogoutSubmitMutation({onSubmitSuccess: onLogout});
 
     return (
-        <section className="flex items-center space-x-2 font-spaceGrotesk">
+        <section className="flex items-center space-x-0 font-spaceGrotesk">
             <SectionHeader srOnly={true}>Desktop Navigation</SectionHeader>
 
-            <NavLink to="/admin/dashboard">Dashboard</NavLink>
+            {/** Category-based navigation dropdowns */}
+            <AdminLayoutDashboardNavigationDropdown/>
+            <AdminLayoutSetupNavigationDropdown/>
+            <AdminLayoutShowingNavigationDropdown/>
 
-            <NavLink to="/">Client Pages</NavLink>
-
-            <AdminLayoutSetupNavigationDropdown />
-            <AdminLayoutMovieNavigationDropdown />
-            <AdminLayoutReservationNavigationDropdown />
-
-            <BaseLayoutDesktopThemeDropdown />
+            {/** Global UI and Auth controls */}
+            <BaseLayoutDesktopThemeDropdown/>
 
             <Button
                 variant="link"
                 size="sm"
-                className="text-neutral-400 hover:text-black"
+                className="text-neutral-400 hover:text-black dark:hover:text-white"
                 onClick={() => logout()}
             >
                 Log Out
