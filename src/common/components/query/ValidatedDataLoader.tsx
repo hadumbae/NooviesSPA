@@ -1,3 +1,8 @@
+/**
+ * @file High-order component for orchestrating query lifecycles with strict runtime schema validation.
+ * @filename ValidatedDataLoader.tsx
+ */
+
 import {ComponentType, ReactNode} from 'react';
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import {UseQueryResult} from "@tanstack/react-query";
@@ -7,67 +12,47 @@ import {ParseError} from "@/common/errors/ParseError.ts";
 
 /**
  * Props for {@link ValidatedDataLoader}.
- *
- * @template TData - Raw data type returned by the query.
- * @template TSchema - Zod schema used to validate the query result.
  */
 type LoaderProps<
     TData = unknown,
     TSchema extends ZodTypeAny = ZodTypeAny
 > = {
-    /**
-     * Render-prop function that receives validated query data.
-     */
-    children: (data: z.infer<TSchema>) => ReactNode;
-
-    /**
-     * React Query result object.
-     */
+    /** The TanStack Query result object to monitor for status and data. */
     query: UseQueryResult<TData, HttpResponseError>;
 
-    /**
-     * Zod schema used to validate the query result.
-     */
+    /** The Zod schema used to verify the integrity of the returned query data. */
     schema: TSchema;
 
-    /**
-     * Optional loader component displayed while the query is pending or fetching.
-     *
-     * @default PageLoader
-     */
+    /** Override for the default loading indicator. @default PageLoader */
     loaderComponent?: ComponentType;
-};
+} & (| {
+    /** When true, validates data against the schema before rendering. */
+    isEnabled?: true;
+    /** Render prop receiving the successfully parsed and typed data. */
+    children: (data: z.infer<TSchema>) => ReactNode;
+} | {
+    /** When false, bypasses the query and validation logic. */
+    isEnabled: false;
+    /** Render prop receiving null. */
+    children: (data: null) => ReactNode;
+});
 
 /**
- * Query boundary component that handles:
- * - Loading state
- * - Error propagation
- * - Runtime data validation via Zod
- *
- * Throws:
- * - {@link HttpResponseError} when the query fails
- * - {@link ParseError} when returned data does not match the schema
- *
- * @template TData - Raw data type returned by the query.
- *
- * @example
- * ```tsx
- * <QueryBoundary
- *   query={query}
- *   schema={MovieSchema}
- * >
- *   {(movie) => <MovieDetails movie={movie} />}
- * </QueryBoundary>
- * ```
+ * A boundary component that synchronizes network state with data integrity checks.
+ * @param `params` - The query result, Zod schema, and render logic.
  */
-const ValidatedDataLoader = <TData = unknown>(params: LoaderProps<TData>) => {
+const ValidatedDataLoader = <TData = unknown, TSchema extends ZodTypeAny = ZodTypeAny>(
+    params: LoaderProps<TData, TSchema>
+) => {
     const {
         children,
         schema,
         query: {data, isPending, isFetching, isError, error},
         loaderComponent: Loader = PageLoader,
+        isEnabled = true,
     } = params;
 
+    if (!isEnabled) return (<>{children(null)}</>);
     if (isPending || (isFetching && !data)) return <Loader/>;
     if (isError) throw error;
 
@@ -76,14 +61,13 @@ const ValidatedDataLoader = <TData = unknown>(params: LoaderProps<TData>) => {
     if (!success) {
         if (import.meta.env.VITE_DEV_MODE && import.meta.env.VITE_DEV_LOG_TO_CONSOLE) {
             console.group("Query Validation Failed");
-            console.error("Failed to validate query!")
-            console.error("Raw: ", data);
-            console.error("Errors: ", parseError?.errors);
+            console.error("Payload: ", data);
+            console.error("Zod Issues: ", parseError?.errors);
             console.groupEnd();
         }
 
         throw new ParseError({
-            message: "Invalid Data Received.",
+            message: "The data received from the server does not match the expected schema.",
             errors: parseError.errors,
         });
     }
