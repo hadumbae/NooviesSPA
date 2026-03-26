@@ -31,7 +31,7 @@ const AdminLayoutShowingNavigationDropdown: FC = () => {
             <DropdownMenuTrigger asChild>
                 {/** Trigger with built-in Chevron and active state logic. */}
                 <NavigationDropdownButton
-                    text="Movies"
+                    text="Showings"
                     isActive={isActive}
                 />
             </DropdownMenuTrigger>
