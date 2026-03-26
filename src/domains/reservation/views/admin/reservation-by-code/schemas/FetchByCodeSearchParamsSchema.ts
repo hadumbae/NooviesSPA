@@ -10,8 +10,8 @@ import {ReservationUniqueCodeSchema} from "@/domains/reservation/schema/model";
  * Validates the search criteria used to locate a reservation.
  */
 export const FetchByCodeSearchParamsSchema = z.object({
-    /** The unique ticket code entered by the administrator. */
-    code: ReservationUniqueCodeSchema,
+    /** The unique ticket code entered by the administrator, or null if unentered. */
+    code: ReservationUniqueCodeSchema.optional().nullable().default(null),
 });
 
 /**
