@@ -16,7 +16,7 @@ type FetchByCodeParams = {
 /**
  * Hierarchical query keys for the FetchByCode feature set.
  */
-const FetchByCodeQueryKeys = {
+export const FetchByCodeQueryKeys = {
     /** Global key for all reservation code queries. */
     all: ["reservations", "fetch", "by-code"],
 

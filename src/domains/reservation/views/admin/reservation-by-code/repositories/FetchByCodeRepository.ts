@@ -5,7 +5,7 @@
 
 import {
     GetFetchByCodeParams
-} from "@/domains/reservation/views/admin/reservation-by-code/FetchByCodeRepository.types.ts";
+} from "@/domains/reservation/views/admin/reservation-by-code/repositories/FetchByCodeRepository.types.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";

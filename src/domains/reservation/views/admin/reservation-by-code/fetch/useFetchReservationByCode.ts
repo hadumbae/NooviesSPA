@@ -8,7 +8,7 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {getFetchByCode} from "@/domains/reservation/views/admin/reservation-by-code/FetchByCodeRepository.ts";
+import {getFetchByCode} from "@/domains/reservation/views/admin/reservation-by-code/repositories/FetchByCodeRepository.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**

@@ -8,11 +8,11 @@ import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.t
 import {ReactNode} from "react";
 import {
     useFetchReservationByCode
-} from "@/domains/reservation/views/admin/reservation-by-code/useFetchReservationByCode.ts";
+} from "@/domains/reservation/views/admin/reservation-by-code/fetch/useFetchReservationByCode.ts";
 import {
     FetchReservationByCodeData,
     FetchReservationByCodeSchema
-} from "@/domains/reservation/views/admin/reservation-by-code/FetchReservationByCodeSchema.ts";
+} from "@/domains/reservation/views/admin/reservation-by-code/schemas/FetchReservationByCodeSchema.ts";
 
 /**
  * Props for {@link FetchByCodeLoader}.
