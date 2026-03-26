@@ -1,18 +1,16 @@
 /**
- * @file Shared validation utilities for Reservation lifecycle constraints.
+ * @file Shared validation logic for Reservation lifecycle and audit constraints.
  * @filename ReservationSchemaUtilities.ts
  */
 
 import {RefinementCtx} from "zod";
 import {ReservationStatus} from "@/domains/reservation/schema/model/fields/ReservationStatusEnumSchema.ts";
-import {
-    ReservationBase
-} from "@/domains/reservation/schema/model/ReservationBaseSchema.ts";
+import {ReservationBase} from "@/domains/reservation/schema/model/ReservationBaseSchema.ts";
 import {PopulatedReservationBase} from "@/domains/reservation/schema/model/PopulatedReservationBaseSchema.ts";
+import {AdminReservationBase} from "@/domains/reservation/schema/model/AdminReservationBaseSchema.ts";
 
 /**
- * Mapping of {@link ReservationStatus} to its corresponding mandatory timestamp field.
- * Used to ensure audit trails are present when a reservation transitions to a terminal state.
+ * Mapping of status constants to their respective mandatory audit timestamp fields.
  */
 const DATE_MAP: Partial<Record<ReservationStatus, keyof ReservationBase>> = {
     PAID: "datePaid",
@@ -22,27 +20,25 @@ const DATE_MAP: Partial<Record<ReservationStatus, keyof ReservationBase>> = {
 };
 
 /**
- * Zod {@link superRefine} function that enforces status-based date requirements.
- * * @description
- * This utility ensures that if a reservation is marked with a specific status,
- * the associated audit date (e.g., `datePaid` for status `PAID`) is not undefined.
- * * It is compatible with both raw {@link ReservationBase} and
- * {@link PopulatedReservationBase} (populated) shapes.
- *
- * @param values - The reservation data being validated.
- * @param ctx - The Zod refinement context used to inject custom validation issues.
- * * @example
- * // If status is 'CANCELLED', this checks that 'dateCancelled' is present.
+ * Union of reservation shapes compatible with lifecycle refinement.
  */
-export const superRefineReservation = (values: ReservationBase | PopulatedReservationBase, ctx: RefinementCtx): void => {
+type ValuesType = ReservationBase | PopulatedReservationBase | AdminReservationBase;
+
+/**
+ * Enforces that terminal or transitional statuses have their corresponding dates populated.
+ * @param `values` - The reservation object currently being validated.
+ * @param `ctx` - The Zod refinement context for attaching issues.
+ */
+export const superRefineReservation = (values: ValuesType, ctx: RefinementCtx): void => {
     const status = values.status as ReservationStatus;
     const requiredDate = DATE_MAP[status];
 
+    /** Trigger issue if the status requires a timestamp that is missing. */
     if (requiredDate && values[requiredDate] === undefined) {
         ctx.addIssue({
             code: "invalid_date",
             path: [requiredDate],
-            message: `Required for ${status.toLowerCase()} reservations.`,
+            message: `The field '${requiredDate}' is required for ${status.toLowerCase()} reservations.`,
         });
     }
 };

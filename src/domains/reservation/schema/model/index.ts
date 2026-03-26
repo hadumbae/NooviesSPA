@@ -24,13 +24,23 @@ import {
     ReservationStatus,
     ReservationStatusEnumSchema
 } from "@/domains/reservation/schema/model/fields/ReservationStatusEnumSchema.ts";
-import {ReservationTypeEnumSchema, ReservationType} from "@/domains/reservation/schema/model/fields/ReservationTypeEnumSchema.ts";
+import {
+    ReservationTypeEnumSchema,
+    ReservationType
+} from "@/domains/reservation/schema/model/fields/ReservationTypeEnumSchema.ts";
+import {AdminReservation, AdminReservationSchema} from "@/domains/reservation/schema/model/AdminReservationSchema.ts";
+import {
+    AdminReservationBase,
+    AdminReservationBaseSchema
+} from "@/domains/reservation/schema/model/AdminReservationBaseSchema.ts";
 
 export {
     ReservationSchema,
     ReservationBaseSchema,
     PopulatedReservationSchema,
     PopulatedReservationBaseSchema,
+    AdminReservationSchema,
+    AdminReservationBaseSchema,
     PopulatedReservationArraySchema,
     PaginatedPopulatedReservationSchema,
     ReservationUniqueCodeSchema,
@@ -43,6 +53,8 @@ export type {
     ReservationBase,
     PopulatedReservation,
     PopulatedReservationBase,
+    AdminReservation,
+    AdminReservationBase,
     PopulatedReservationArray,
     PaginatedPopulatedReservations,
     ReservationUniqueCode,
