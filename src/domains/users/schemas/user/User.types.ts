@@ -1,23 +1,22 @@
-import { z } from "zod";
-import { UserSchema } from "@/domains/users/schemas/user/User.schema.ts";
-
 /**
- * @file User.types.ts
- *
- * @summary
- * TypeScript types derived from user Zod schemas.
- *
- * @description
- * Provides strongly typed TypeScript representations inferred from
- * {@link UserSchema}. These types should be used throughout the
- * application wherever user data is consumed to ensure consistency
- * with runtime validation rules.
+ * @file TypeScript type definitions inferred from User Zod schemas.
+ * @filename User.types.ts
  */
 
+import {z} from "zod";
+import {LeanUserSchema, LeanUserWithEmailSchema, UserSchema} from "@/domains/users/schemas/user/User.schema.ts";
+
 /**
- * Represents a validated user entity.
- *
- * @remarks
- * Inferred directly from {@link UserSchema}.
+ * Lightweight user representation.
+ */
+export type LeanUser = z.infer<typeof LeanUserSchema>;
+
+/**
+ * Lean user profile including contact information.
+ */
+export type LeanUserWithEmail = z.infer<typeof LeanUserWithEmailSchema>;
+
+/**
+ * Fully validated User entity.
  */
 export type User = z.infer<typeof UserSchema>;
