@@ -5,14 +5,14 @@
 
 import generateFormValueSchema from "@/common/utility/schemas/generateFormValueSchema.ts";
 import {
-    SetReservationUniqueCodeFormSchema
-} from "@/domains/reservation/views/admin/reservation-by-code/schemas/SetReservationUniqueCodeFormSchema.ts";
+    SetReservationUniqueCodeFormSubmitSchema
+} from "@/domains/reservation/views/admin/reservation-by-code/schemas/SetReservationUniqueCodeFormSubmitSchema.ts";
 import {z} from "zod";
 
 /**
  * Transforms the base form schema into a structure optimized for React Hook Form state.
  */
-export const SetReservationUniqueCodeFormValuesSchema = generateFormValueSchema(SetReservationUniqueCodeFormSchema);
+export const SetReservationUniqueCodeFormValuesSchema = generateFormValueSchema(SetReservationUniqueCodeFormSubmitSchema);
 
 /**
  * TypeScript type inferred from {@link SetReservationUniqueCodeFormValuesSchema}.

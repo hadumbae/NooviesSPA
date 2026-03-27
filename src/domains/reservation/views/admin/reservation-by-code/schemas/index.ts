@@ -8,8 +8,8 @@ import {
 } from "@/domains/reservation/views/admin/reservation-by-code/schemas/FetchReservationByCodeSchema.ts";
 import {
     SetReservationUniqueCodeForm,
-    SetReservationUniqueCodeFormSchema
-} from "@/domains/reservation/views/admin/reservation-by-code/schemas/SetReservationUniqueCodeFormSchema.ts";
+    SetReservationUniqueCodeFormSubmitSchema
+} from "@/domains/reservation/views/admin/reservation-by-code/schemas/SetReservationUniqueCodeFormSubmitSchema.ts";
 import {
     SetReservationUniqueCodeFormValues,
     SetReservationUniqueCodeFormValuesSchema
@@ -19,7 +19,7 @@ import {
 export {
     FetchByCodeSearchParamsSchema,
     FetchReservationByCodeSchema,
-    SetReservationUniqueCodeFormSchema,
+    SetReservationUniqueCodeFormSubmitSchema,
     SetReservationUniqueCodeFormValuesSchema,
 }
 

@@ -4,7 +4,10 @@
  */
 
 import {z} from "zod";
-import {PopulatedReservationSchema, ReservationUniqueCodeSchema} from "@/domains/reservation/schema/model";
+import {
+    AdminReservationSchema,
+    ReservationUniqueCodeSchema
+} from "@/domains/reservation/schema/model";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 
 /**
@@ -15,7 +18,7 @@ export const FetchReservationByCodeSchema = z.object({
     code: ReservationUniqueCodeSchema,
 
     /** The resulting reservation record, including populated relations. */
-    reservation: PopulatedReservationSchema,
+    reservation: AdminReservationSchema,
 
     /** Human-readable status message for UI feedback. */
     message: NonEmptyStringSchema.max(100, "Must be 100 characters or less."),

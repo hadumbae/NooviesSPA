@@ -1,6 +1,6 @@
 /**
  * @file Zod schema for administrative search inputs targeting specific reservation codes.
- * @filename SetReservationUniqueCodeFormSchema.ts
+ * @filename SetReservationUniqueCodeFormSubmitSchema.ts
  */
 
 import {z} from "zod";
@@ -10,7 +10,7 @@ import {ReservationUniqueCodeSchema} from "@/domains/reservation/schema/model";
 /**
  * Validation schema for the reservation lookup form.
  */
-export const SetReservationUniqueCodeFormSchema = z.object({
+export const SetReservationUniqueCodeFormSubmitSchema = z.object({
     /** The verification string provided by the user. */
     code: preprocessEmptyStringToUndefined(
         ReservationUniqueCodeSchema.optional(),
@@ -18,6 +18,6 @@ export const SetReservationUniqueCodeFormSchema = z.object({
 });
 
 /**
- * TypeScript type inferred from {@link SetReservationUniqueCodeFormSchema}.
+ * TypeScript type inferred from {@link SetReservationUniqueCodeFormSubmitSchema}.
  */
-export type SetReservationUniqueCodeForm = z.infer<typeof SetReservationUniqueCodeFormSchema>;
+export type SetReservationUniqueCodeForm = z.infer<typeof SetReservationUniqueCodeFormSubmitSchema>;
