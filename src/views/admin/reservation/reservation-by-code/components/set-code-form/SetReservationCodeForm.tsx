@@ -22,9 +22,14 @@ import {ReactNode} from "react";
 type FormProps = FormViewOptions<SetReservationCodeFormValues> & {
     /** The child elements (inputs, buttons) to be rendered within the form context. */
     children: ReactNode;
+
+    /** Optional CSS classes for the native form element. */
+    className?: string;
+
     /** Initial values used to hydrate the form fields on mount. */
     presetValues?: Partial<FetchByCodeSearchParams>
-    /** Optional suffix for the form's HTML ID. */
+
+    /** Optional suffix for the form's HTML ID to prevent collisions. */
     uniqueKey?: string;
 };
 
@@ -32,19 +37,16 @@ type FormProps = FormViewOptions<SetReservationCodeFormValues> & {
  * Orchestrates the reservation code search form and synchronizes state with URL parameters.
  */
 export const SetReservationCodeForm = (
-    {children, uniqueKey, presetValues, ...options}: FormProps
+    {children, uniqueKey, presetValues, className, ...options}: FormProps
 ) => {
-    /** Generates a stable DOM ID for labeling and external button association. */
     const formKey = `set-res-unique-code-${uniqueKey ?? "form"}`;
 
     const form = useSetReservationCodeForm({presetValues});
 
-    /** Hook for reading/writing validated search parameters. */
     const {searchParams, setSearchParams} = useParsedSearchParams({
         schema: FetchByCodeSearchParamsSchema
     });
 
-    /** Updates the browser URL with the validated form values. */
     const updateCode = (values: SetReservationCodeFormValues) => {
         const {code} = values as SetReservationCodeFormSubmit;
         setSearchParams({...searchParams, code});
@@ -53,7 +55,7 @@ export const SetReservationCodeForm = (
     return (
         <SetReservationCodeFormContextProvider formID={formKey} {...options}>
             <Form {...form}>
-                <form id={formKey} onSubmit={form.handleSubmit(updateCode)}>
+                <form id={formKey} onSubmit={form.handleSubmit(updateCode)} className={className}>
                     {children}
                 </form>
             </Form>

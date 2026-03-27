@@ -17,15 +17,17 @@ import {cn} from "@/common/lib/utils.ts";
  * Props for the {@link SetReservationCodeFormCard} component.
  */
 type ViewProps = {
-    /** Optional additional CSS classes for the card content container. */
+    /** Optional CSS classes for the internal CardContent container. */
     className?: string;
+    /** Optional CSS classes for the outer Card wrapper. */
+    containerClassName?: string;
 };
 
 /**
  * A styled card containing the input and submission trigger for reservation lookups.
  */
 export const SetReservationCodeFormCard = (
-    {className}: ViewProps
+    {className, containerClassName}: ViewProps
 ) => {
     const {control} = useFormContext();
 
@@ -34,7 +36,7 @@ export const SetReservationCodeFormCard = (
     });
 
     return (
-        <Card>
+        <Card className={containerClassName}>
             <CardContent className={cn(
                 "p-3 flex flex-col space-y-2",
                 className,
