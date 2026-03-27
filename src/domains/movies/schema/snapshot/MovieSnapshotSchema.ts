@@ -1,18 +1,6 @@
 /**
- * @file MovieSnapshotSchema.ts
- *
- * @description
- * Zod schema defining an immutable movie snapshot.
- *
- * Represents the finalized state of a movie at the time it is embedded into
- * other domain snapshots (e.g. showings, reservations, historical records).
- * This ensures movie-related data remains consistent even if the source movie
- * entity changes later.
- *
- * Intended usage:
- * - Embedding within showing snapshots
- * - Embedding within reservation snapshots
- * - Read-only snapshot validation and typing
+ * @file Zod schema defining an immutable movie snapshot for historical records.
+ * @filename MovieSnapshotSchema.ts
  */
 
 import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
@@ -21,41 +9,41 @@ import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/Po
 import { ISO3166Alpha2CountryCodeEnum } from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import { z } from "zod";
-import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema.ts";
+import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
 
 /**
- * Movie snapshot schema.
+ * Represents the finalized state of a movie at the time of a transaction or event.
  */
 export const MovieSnapshotSchema = z.object({
-    /** Display title of the movie. */
+    /** Localized display title; capped at 250 characters. */
     title: NonEmptyStringSchema.max(250, "Must be 250 characters or less."),
 
-    /** Original (non-localized) title of the movie, if different. */
+    /** Original title in the native language, if different from the display title. */
     originalTitle: NonEmptyStringSchema
         .max(250, "Must be 250 characters or less.")
         .optional(),
 
-    /** Optional marketing tagline for the movie. */
+    /** Short marketing catchphrase; constrained to 100 characters. */
     tagline: NonEmptyStringSchema
         .max(100, "Must be 100 characters or less.")
         .optional()
         .nullable(),
 
-    /** URL to the movie poster image. */
+    /** Validated link to the movie's promotional artwork. */
     posterURL: URLStringSchema.optional().nullable(),
 
-    /** Official release date in UTC ISO-8601 format. */
-    releaseDate: DateOnlyStringSchema.optional().nullable(),
+    /** Official global release date stored in UTC ISO-8601 format. */
+    releaseDate: UTCISO8601DateTimeSchema.optional().nullable(),
 
-    /** List of genre labels associated with the movie. */
+    /** Array of genre tags, each limited to 150 characters. */
     genres: generateArraySchema(
         NonEmptyStringSchema.max(150, "Must be 150 characters or less."),
     ),
 
-    /** Runtime of the movie in minutes. */
+    /** Duration of the film in minutes; capped at 500 (approx. 8.3 hours). */
     runtime: PositiveNumberSchema.lte(500, "Must be 500 or less."),
 
-    /** ISO 3166-1 alpha-2 country code of origin. */
+    /** Standardized 2-letter country code (ISO 3166-1 alpha-2). */
     country: ISO3166Alpha2CountryCodeEnum,
 });
 

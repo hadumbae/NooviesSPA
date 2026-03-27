@@ -1,65 +1,53 @@
 /**
- * @file ReservedShowingSnapshot.schema.ts
- *
- * @description
- * Zod schema defining an immutable snapshot of a reserved showing.
- *
- * Captures the complete state of a showing at the moment a reservation is
- * finalized, including movie, venue, screen, timing, language details, and
- * seat-level pricing. This snapshot ensures historical accuracy even if the
- * underlying movie, theatre, screen, or pricing data changes in the future.
- *
- * Intended usage:
- * - Persisting finalized reservation data
- * - Rendering historical booking details
- * - Auditing pricing and seat allocations
+ * @file Zod schema defining an immutable snapshot of a reserved showing.
+ * @filename ReservedShowingSnapshot.schema.ts
  */
 
-import { z } from "zod";
-import { MovieSnapshotSchema } from "@/domains/movies/schema/snapshot/MovieSnapshotSchema.ts";
-import { TheatreSnapshotSchema } from "@/domains/theatres/schema/model/snapshot/TheatreSnapshotSchema.ts";
-import { ScreenSnapshotSchema } from "@/domains/theatre-screens/schema/snapshot/ScreenSnapshotSchema.ts";
+import {z} from "zod";
+import {MovieSnapshotSchema} from "@/domains/movies/schema/snapshot/MovieSnapshotSchema.ts";
+import {TheatreSnapshotSchema} from "@/domains/theatres/schema/model/snapshot/TheatreSnapshotSchema.ts";
+import {ScreenSnapshotSchema} from "@/domains/theatre-screens/schema/snapshot/ScreenSnapshotSchema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
-import { ReservedSeatSnapshotSchema } from "@/domains/reservation/schema/snapshot/ReservedSeatSnapshotSchema.ts";
-import { UTCISO8601DateTimeSchema } from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import { BooleanValueSchema } from "@/common/schema/boolean/BooleanValueSchema.ts";
-import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {ReservedSeatSnapshotSchema} from "@/domains/reservation/schema/snapshot/ReservedSeatSnapshotSchema.ts";
+import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
+import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 
 /**
- * Reserved showing snapshot schema.
+ * Captures the complete state of a showing at the moment a reservation is finalized.
  */
 export const ReservedShowingSnapshotSchema = z.object({
-    /** Snapshot of the movie being shown. */
+    /** Point-in-time details of the film being screened. */
     movie: MovieSnapshotSchema,
 
-    /** Snapshot of the theatre hosting the showing. */
+    /** Point-in-time details of the venue. */
     theatre: TheatreSnapshotSchema,
 
-    /** Snapshot of the screen where the showing takes place. */
+    /** Point-in-time details of the specific auditorium/screen. */
     screen: ScreenSnapshotSchema,
 
-    /** Seats selected and reserved for this showing. */
+    /** List of specific seats allocated to this reservation. */
     selectedSeats: generateArraySchema(ReservedSeatSnapshotSchema),
 
-    /** Scheduled start time of the showing (UTC, ISO 8601). */
+    /** The exact scheduled start time (UTC). */
     startTime: UTCISO8601DateTimeSchema,
 
-    /** Optional scheduled end time of the showing (UTC, ISO 8601). */
-    endTime: UTCISO8601DateTimeSchema.optional(),
+    /** The estimated conclusion time (UTC). */
+    endTime: UTCISO8601DateTimeSchema.nullable().optional(),
 
-    /** Primary spoken language of the showing. */
+    /** The audio language of the showing. */
     language: NonEmptyStringSchema,
 
-    /** Subtitle languages available for the showing. */
+    /** Available on-screen text languages; must contain at least one entry. */
     subtitleLanguages: z
         .array(NonEmptyStringSchema)
-        .nonempty({ message: "Must not be empty." }),
+        .nonempty({message: "Must not be empty."}),
 
-    /** Indicates whether this showing is a special event. */
+    /** Flag for promotional or restricted engagement screenings. */
     isSpecialEvent: BooleanValueSchema.optional(),
 
-    /** Total price paid for the reservation. */
+    /** The final calculated cost for the selected seats at the time of booking. */
     pricePaid: PositiveNumberSchema,
 });
 
