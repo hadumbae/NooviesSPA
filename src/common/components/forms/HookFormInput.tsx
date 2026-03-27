@@ -28,7 +28,7 @@ const HookFormInput = <TValues extends FieldValues>(props: HookFormInputProps<TV
         placeholder,
         control,
         className,
-        hasLabel = true,
+        inputClassName,
         ...inputProps
     } = props;
 
@@ -38,23 +38,20 @@ const HookFormInput = <TValues extends FieldValues>(props: HookFormInputProps<TV
             name={name}
             render={({field}) => (
                 <FormItem className={cn(className, "dark:text-white")}>
-                    {/** Renders label if provided and not explicitly disabled. */}
-                    {label && hasLabel && <FormLabel>{label}</FormLabel>}
+                    {label && <FormLabel>{label}</FormLabel>}
 
                     <FormControl>
                         <Input
                             placeholder={placeholder || label}
-                            className={HookFormInputCSS}
+                            className={cn(HookFormInputCSS, inputClassName)}
                             {...inputProps}
                             {...field}
                         />
                     </FormControl>
 
-                    {description && (
-                        <FormDescription>{description}</FormDescription>
-                    )}
+                    {description && <FormDescription>{description}</FormDescription>}
 
-                    <FormMessage />
+                    <FormMessage/>
                 </FormItem>
             )}
         />
