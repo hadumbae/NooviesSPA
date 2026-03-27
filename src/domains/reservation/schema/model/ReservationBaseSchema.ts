@@ -9,7 +9,6 @@ import {SlugStringSchema} from "@/common/schema/strings/simple-strings/SlugStrin
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {ISO4217CurrencyCodeEnumSchema} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
-import {UTCISO8601StringSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601StringSchema.ts";
 import {ReservationTypeEnumSchema} from "@/domains/reservation/schema/model/fields/ReservationTypeEnumSchema.ts";
 import {ReservationStatusEnumSchema} from "@/domains/reservation/schema/model/fields/ReservationStatusEnumSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
@@ -17,6 +16,7 @@ import {
     ReservationUniqueCodeSchema
 } from "@/domains/reservation/schema/model/fields/ReservationUniqueCodeSchema.ts";
 import {ModelTimestampsSchema} from "@/common/schema/models/ModelTimestampsSchema.ts";
+import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
 
 /**
  * Core validation schema defining the structure of a Reservation record.
@@ -53,22 +53,22 @@ export const ReservationBaseSchema = ModelTimestampsSchema.extend({
     currency: ISO4217CurrencyCodeEnumSchema,
 
     /** Timestamp of the initial booking. */
-    dateReserved: UTCISO8601StringSchema,
+    dateReserved: UTCISO8601DateTimeSchema,
 
     /** Optional timestamp recorded upon successful payment. */
-    datePaid: UTCISO8601StringSchema.optional(),
+    datePaid: UTCISO8601DateTimeSchema.optional(),
 
     /** Optional timestamp recorded upon manual cancellation. */
-    dateCancelled: UTCISO8601StringSchema.optional(),
+    dateCancelled: UTCISO8601DateTimeSchema.optional(),
 
     /** Optional timestamp recorded upon refund issuance. */
-    dateRefunded: UTCISO8601StringSchema.optional(),
+    dateRefunded: UTCISO8601DateTimeSchema.optional(),
 
     /** Optional timestamp recorded upon automatic TTL expiration. */
-    dateExpired: UTCISO8601StringSchema.optional(),
+    dateExpired: UTCISO8601DateTimeSchema.optional(),
 
     /** The calculated deadline for finalizing payment. */
-    expiresAt: UTCISO8601StringSchema,
+    expiresAt: UTCISO8601DateTimeSchema,
 
     /** Booking category (GA vs Reserved Seating). */
     reservationType: ReservationTypeEnumSchema,

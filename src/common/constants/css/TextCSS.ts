@@ -63,7 +63,7 @@ export const QuoteTextCSS = cn(
  */
 export const HeaderTextCSS = cn(
     PrimaryTextBaseCSS,
-    "text-lg font-bold",
+    "text-base md:text-lg font-bold",
 );
 
 /**
@@ -74,7 +74,7 @@ export const HeaderTextCSS = cn(
  */
 export const SubheaderTextCSS = cn(
     SecondaryTextBaseCSS,
-    "font-bold",
+    "text-sm font-bold",
 );
 
 /**
@@ -116,6 +116,7 @@ export const IconTextCSS = cn(
  * - Horizontal padding
  */
 export const SectionHeaderCSS = cn(
+    PrimaryTextBaseCSS,
     "border-l-4 px-2",
     "border-primary",
 );
