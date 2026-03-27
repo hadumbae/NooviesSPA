@@ -3,7 +3,7 @@
  * @filename SetReservationUniqueCodeFormView.tsx
  */
 
-import {useSetReservationUniqueCodeForm} from "@/domains/reservation/views/admin/reservation-by-code/forms";
+import {useSetReservationCodeForm} from "@/domains/reservation/views/admin/reservation-by-code/forms";
 import {
     FetchByCodeSearchParams,
     FetchByCodeSearchParamsSchema, SetReservationCodeFormSubmit, SetReservationCodeFormValues
@@ -37,7 +37,7 @@ export const SetReservationCodeForm = (
     /** Generates a stable DOM ID for labeling and external button association. */
     const formKey = `set-res-unique-code-${uniqueKey ?? "form"}`;
 
-    const form = useSetReservationUniqueCodeForm({presetValues});
+    const form = useSetReservationCodeForm({presetValues});
 
     /** Hook for reading/writing validated search parameters. */
     const {searchParams, setSearchParams} = useParsedSearchParams({

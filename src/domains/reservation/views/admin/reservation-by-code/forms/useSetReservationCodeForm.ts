@@ -1,6 +1,6 @@
 /**
  * @file Custom React Hook Form initialization for reservation code lookups.
- * @filename useSetReservationUniqueCodeForm.ts
+ * @filename useSetReservationCodeForm.ts
  */
 
 import {
@@ -12,7 +12,7 @@ import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 
 /**
- * Props for the {@link useSetReservationUniqueCodeForm} hook.
+ * Props for the {@link useSetReservationCodeForm} hook.
  */
 type FormProps = {
     /** Initial values typically derived from URL search parameters or session state. */
@@ -24,7 +24,7 @@ type FormProps = {
  * @param `props` - Optional configuration containing initial form values.
  * @returns A standard React Hook Form object typed with {@link SetReservationCodeFormValues}.
  */
-export function useSetReservationUniqueCodeForm(
+export function useSetReservationCodeForm(
     {presetValues}: FormProps = {},
 ): UseFormReturn<SetReservationCodeFormValues> {
     return useForm<SetReservationCodeFormValues>({

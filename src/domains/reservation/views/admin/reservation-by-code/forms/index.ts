@@ -1,7 +1,7 @@
 import {
-    useSetReservationUniqueCodeForm
-} from "@/domains/reservation/views/admin/reservation-by-code/forms/useSetReservationUniqueCodeForm.ts";
+    useSetReservationCodeForm
+} from "@/domains/reservation/views/admin/reservation-by-code/forms/useSetReservationCodeForm.ts";
 
 export {
-    useSetReservationUniqueCodeForm
+    useSetReservationCodeForm
 }
