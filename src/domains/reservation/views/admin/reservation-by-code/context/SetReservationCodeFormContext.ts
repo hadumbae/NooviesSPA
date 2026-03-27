@@ -3,7 +3,7 @@
  * @filename SetReservationUniqueCodeFormContext.ts
  */
 
-import {SetReservationUniqueCodeFormValues} from "@/domains/reservation/views/admin/reservation-by-code/schemas";
+import {SetReservationCodeFormValues} from "@/domains/reservation/views/admin/reservation-by-code/schemas";
 import {createContext} from "react";
 import {FormViewOptions} from "@/common/type/form/form-view/FormViewProps.ts";
 
@@ -15,7 +15,7 @@ export type SetReservationCodeFormContextValues = {
     formID: string;
 
     /** Configuration for initial values, submission handlers, and form-view behavior. */
-    options?: FormViewOptions<SetReservationUniqueCodeFormValues>;
+    options?: FormViewOptions<SetReservationCodeFormValues>;
 };
 
 /**

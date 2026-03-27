@@ -3,30 +3,30 @@ import {
     FetchByCodeSearchParamsSchema
 } from "@/domains/reservation/views/admin/reservation-by-code/schemas/FetchByCodeSearchParamsSchema.ts";
 import {
-    FetchReservationByCodeData,
-    FetchReservationByCodeSchema
-} from "@/domains/reservation/views/admin/reservation-by-code/schemas/FetchReservationByCodeSchema.ts";
+    FetchByCodeData,
+    FetchByCodeDataSchema
+} from "@/domains/reservation/views/admin/reservation-by-code/schemas/FetchByCodeDataSchema.ts";
 import {
-    SetReservationUniqueCodeFormSubmit,
-    SetReservationUniqueCodeFormSubmitSchema
-} from "@/domains/reservation/views/admin/reservation-by-code/schemas/SetReservationUniqueCodeFormSubmitSchema.ts";
+    SetReservationCodeFormSubmit,
+    SetReservationCodeFormSubmitSchema
+} from "@/domains/reservation/views/admin/reservation-by-code/schemas/SetReservationCodeFormSubmitSchema.ts";
 import {
-    SetReservationUniqueCodeFormValues,
-    SetReservationUniqueCodeFormValuesSchema
-} from "@/domains/reservation/views/admin/reservation-by-code/schemas/SetReservationUniqueCodeFormValuesSchema.ts";
+    SetReservationCodeFormValues,
+    SetReservationCodeFormValuesSchema
+} from "@/domains/reservation/views/admin/reservation-by-code/schemas/SetReservationCodeFormValuesSchema.ts";
 
 
 export {
     FetchByCodeSearchParamsSchema,
-    FetchReservationByCodeSchema,
-    SetReservationUniqueCodeFormSubmitSchema,
-    SetReservationUniqueCodeFormValuesSchema,
+    FetchByCodeDataSchema,
+    SetReservationCodeFormSubmitSchema,
+    SetReservationCodeFormValuesSchema,
 }
 
 export type {
     FetchByCodeSearchParams,
-    FetchReservationByCodeData,
-    SetReservationUniqueCodeFormSubmit,
-    SetReservationUniqueCodeFormValues,
+    FetchByCodeData,
+    SetReservationCodeFormSubmit,
+    SetReservationCodeFormValues,
 
 }

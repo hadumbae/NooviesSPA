@@ -1,6 +1,6 @@
 /**
  * @file Zod schema for validating the administrative "Fetch by Code" API response.
- * @filename FetchReservationByCodeSchema.ts
+ * @filename FetchByCodeDataSchema.ts
  */
 
 import {z} from "zod";
@@ -13,7 +13,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEm
 /**
  * Validates the full envelope returned by the administrative code lookup endpoint.
  */
-export const FetchReservationByCodeSchema = z.object({
+export const FetchByCodeDataSchema = z.object({
     /** The verification code associated with this query. */
     code: ReservationUniqueCodeSchema,
 
@@ -25,6 +25,6 @@ export const FetchReservationByCodeSchema = z.object({
 });
 
 /**
- * TypeScript type inferred from {@link FetchReservationByCodeSchema}.
+ * TypeScript type inferred from {@link FetchByCodeDataSchema}.
  */
-export type FetchReservationByCodeData = z.infer<typeof FetchReservationByCodeSchema>;
+export type FetchByCodeData = z.infer<typeof FetchByCodeDataSchema>;

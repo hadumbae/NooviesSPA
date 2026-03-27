@@ -10,16 +10,16 @@ import {
     useFetchReservationByCode
 } from "@/domains/reservation/views/admin/reservation-by-code/fetch/useFetchReservationByCode.ts";
 import {
-    FetchReservationByCodeData,
-    FetchReservationByCodeSchema
-} from "@/domains/reservation/views/admin/reservation-by-code/schemas/FetchReservationByCodeSchema.ts";
+    FetchByCodeData,
+    FetchByCodeDataSchema
+} from "@/domains/reservation/views/admin/reservation-by-code/schemas/FetchByCodeDataSchema.ts";
 
 /**
  * Props for {@link FetchByCodeLoader}.
  */
 type LoaderProps = | {
     /** Render prop receiving validated reservation data. */
-    children: (data: FetchReservationByCodeData) => ReactNode;
+    children: (data: FetchByCodeData) => ReactNode;
     /** Triggers the fetch and validation logic. @default true */
     isEnabled?: true;
     /** The validated verification code to query. */
@@ -47,7 +47,7 @@ export const FetchByCodeLoader = (props: LoaderProps) => {
 
     if (props.isEnabled === false) {
         return (
-            <ValidatedDataLoader query={query} schema={FetchReservationByCodeSchema} isEnabled={false} >
+            <ValidatedDataLoader query={query} schema={FetchByCodeDataSchema} isEnabled={false} >
                 {props.children}
             </ValidatedDataLoader>
         );
@@ -56,7 +56,7 @@ export const FetchByCodeLoader = (props: LoaderProps) => {
     return (
         <ValidatedDataLoader
             query={query}
-            schema={FetchReservationByCodeSchema}
+            schema={FetchByCodeDataSchema}
         >
             {props.children}
         </ValidatedDataLoader>

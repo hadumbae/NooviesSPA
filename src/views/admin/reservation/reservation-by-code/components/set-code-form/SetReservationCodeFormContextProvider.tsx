@@ -8,13 +8,13 @@ import {
     SetReservationCodeFormContext,
     SetReservationCodeFormContextValues
 } from "@/domains/reservation/views/admin/reservation-by-code/context/SetReservationCodeFormContext.ts";
-import {SetReservationUniqueCodeFormValues} from "@/domains/reservation/views/admin/reservation-by-code/schemas";
+import {SetReservationCodeFormValues} from "@/domains/reservation/views/admin/reservation-by-code/schemas";
 import {ReactNode} from "react";
 
 /**
  * Props for the {@link SetReservationCodeFormContextProvider} component.
  */
-type ProviderProps = FormViewOptions<SetReservationUniqueCodeFormValues> & {
+type ProviderProps = FormViewOptions<SetReservationCodeFormValues> & {
     /** The HTML id attribute used to identify the form in the DOM. */
     formID: string;
 

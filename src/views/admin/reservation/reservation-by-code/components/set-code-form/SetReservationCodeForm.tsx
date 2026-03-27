@@ -6,7 +6,7 @@
 import {useSetReservationUniqueCodeForm} from "@/domains/reservation/views/admin/reservation-by-code/forms";
 import {
     FetchByCodeSearchParams,
-    FetchByCodeSearchParamsSchema, SetReservationUniqueCodeFormSubmit, SetReservationUniqueCodeFormValues
+    FetchByCodeSearchParamsSchema, SetReservationCodeFormSubmit, SetReservationCodeFormValues
 } from "@/domains/reservation/views/admin/reservation-by-code/schemas";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {Form} from "@/common/components/ui/form.tsx";
@@ -19,7 +19,7 @@ import {ReactNode} from "react";
 /**
  * Props for the {@link SetReservationCodeForm} component.
  */
-type FormProps = FormViewOptions<SetReservationUniqueCodeFormValues> & {
+type FormProps = FormViewOptions<SetReservationCodeFormValues> & {
     /** The child elements (inputs, buttons) to be rendered within the form context. */
     children: ReactNode;
     /** Initial values used to hydrate the form fields on mount. */
@@ -45,8 +45,8 @@ export const SetReservationCodeForm = (
     });
 
     /** Updates the browser URL with the validated form values. */
-    const updateCode = (values: SetReservationUniqueCodeFormValues) => {
-        const {code} = values as SetReservationUniqueCodeFormSubmit;
+    const updateCode = (values: SetReservationCodeFormValues) => {
+        const {code} = values as SetReservationCodeFormSubmit;
         setSearchParams({...searchParams, code});
     }
 
