@@ -7,7 +7,7 @@ import {
     FetchReservationByCodeSchema
 } from "@/domains/reservation/views/admin/reservation-by-code/schemas/FetchReservationByCodeSchema.ts";
 import {
-    SetReservationUniqueCodeForm,
+    SetReservationUniqueCodeFormSubmit,
     SetReservationUniqueCodeFormSubmitSchema
 } from "@/domains/reservation/views/admin/reservation-by-code/schemas/SetReservationUniqueCodeFormSubmitSchema.ts";
 import {
@@ -26,7 +26,7 @@ export {
 export type {
     FetchByCodeSearchParams,
     FetchReservationByCodeData,
-    SetReservationUniqueCodeForm,
+    SetReservationUniqueCodeFormSubmit,
     SetReservationUniqueCodeFormValues,
 
 }

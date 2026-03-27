@@ -20,4 +20,4 @@ export const SetReservationUniqueCodeFormSubmitSchema = z.object({
 /**
  * TypeScript type inferred from {@link SetReservationUniqueCodeFormSubmitSchema}.
  */
-export type SetReservationUniqueCodeForm = z.infer<typeof SetReservationUniqueCodeFormSubmitSchema>;
+export type SetReservationUniqueCodeFormSubmit = z.infer<typeof SetReservationUniqueCodeFormSubmitSchema>;

@@ -5,7 +5,7 @@
 
 import {
     FetchByCodeSearchParams,
-    SetReservationUniqueCodeFormSchema,
+    SetReservationUniqueCodeFormSubmitSchema,
     SetReservationUniqueCodeFormValues
 } from "@/domains/reservation/views/admin/reservation-by-code/schemas";
 import {useForm, UseFormReturn} from "react-hook-form";
@@ -29,7 +29,7 @@ export function useSetReservationUniqueCodeForm(
 ): UseFormReturn<SetReservationUniqueCodeFormValues> {
     return useForm<SetReservationUniqueCodeFormValues>({
         /** Bridges Zod schema validation with React Hook Form. */
-        resolver: zodResolver(SetReservationUniqueCodeFormSchema),
+        resolver: zodResolver(SetReservationUniqueCodeFormSubmitSchema),
         /** Ensures the "code" field is controlled from mount. */
         defaultValues: {
             code: presetValues?.code ?? "",
