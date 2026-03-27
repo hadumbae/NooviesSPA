@@ -18,7 +18,7 @@ import {cn} from "@/common/lib/utils.ts";
  */
 type ImageProps = {
     /** Poster image URL */
-    src?: string;
+    src?: string | null;
     /** Alternative text for accessibility */
     alt?: string;
     /** Optional image class name */

@@ -1,54 +1,46 @@
 /**
- * @file LabeledGroup.tsx
- * @description
- * Layout component for rendering a small uppercase label alongside
- * arbitrary content in a horizontal row.
+ * @file A structural layout component for rendering a descriptive label paired with content.
+ * @filename LabeledGroup.tsx
  */
 
 import {ReactNode} from "react";
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
+import {OrientationValues} from "@/common/schema/enums/OrientationEnumSchema.ts";
 
 /**
- * Props for {@link LabeledGroup}.
+ * Props for the {@link LabeledGroup} component.
  */
 type GroupProps = {
-    /**
-     * Content rendered to the right of the label.
-     */
+    /** The value or interactive element to be described by the label. */
     children: ReactNode;
 
-    /**
-     * Text label displayed on the left.
-     */
+    /** The descriptive text displayed as a small uppercase header/prefix. */
     label: string;
 
-    /**
-     * Optional class name applied to the root container.
-     */
+    /** Optional CSS classes for the root container. */
     className?: string;
+
+    /** * Determines the flex direction of the label and its content.
+     * @default "horizontal"
+     */
+    orientation?: OrientationValues;
 };
 
 /**
- * Renders a labeled row with a fixed-style label and flexible content area.
- *
- * Commonly used for summary or metadata lists where a label/value
- * layout is required.
- *
- * @param props - Component props.
- *
- * @example
- * ```tsx
- * <LabeledGroup label="Genres">
- *   <span>Drama • Thriller</span>
- * </LabeledGroup>
- * ```
+ * Renders a standardized "Label: Value" pair with support for responsive layouts.
  */
 const LabeledGroup = (props: GroupProps) => {
-    const {children, label, className} = props;
+    const {children, className, label, orientation = "horizontal"} = props;
 
     return (
-        <div className={cn("flex items-center space-x-4", className)}>
+        <div className={cn(
+            "flex",
+            orientation === "horizontal" && "items-center space-x-4",
+            orientation === "vertical" && "flex-col space-y-0",
+            className
+        )}>
+            {/** The descriptive label element. */}
             <span
                 className={cn(
                     SecondaryTextBaseCSS,
@@ -58,6 +50,7 @@ const LabeledGroup = (props: GroupProps) => {
                 {label}
             </span>
 
+            {/** The primary content area. */}
             <div className="flex-1">
                 {children}
             </div>
