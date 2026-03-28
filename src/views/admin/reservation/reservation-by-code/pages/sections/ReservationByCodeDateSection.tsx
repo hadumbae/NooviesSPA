@@ -10,7 +10,6 @@ import {
 import {Check, Coins, Cross, Receipt, Timer} from "lucide-react";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
-import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Props for the {@link ReservationByCodeDateSection} component.
@@ -53,10 +52,7 @@ export const ReservationByCodeDateSection = (
             </SectionHeader>
 
             <div className="flex justify-center">
-                <div className={cn(
-                    "max-md:w-full md:w-2/3",
-                    "grid grid-cols-1 gap-2",
-                )}>
+                <div className="w-full grid grid-cols-1 gap-2">
                     <ReservationActiveDateCard
                         status="RESERVED"
                         date={dateReserved}
