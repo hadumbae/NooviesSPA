@@ -117,7 +117,7 @@ export const IconTextCSS = cn(
  */
 export const SectionHeaderCSS = cn(
     PrimaryTextBaseCSS,
-    "border-l-4 px-2",
+    "text-lg border-l-4 px-2",
     "border-primary",
 );
 
