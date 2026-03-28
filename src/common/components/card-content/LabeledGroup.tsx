@@ -5,23 +5,22 @@
 
 import {ReactNode} from "react";
 import {cn} from "@/common/lib/utils.ts";
-import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {OrientationValues} from "@/common/schema/enums/OrientationEnumSchema.ts";
 
 /**
  * Props for the {@link LabeledGroup} component.
  */
 type GroupProps = {
-    /** The value or interactive element to be described by the label. */
+    /** The value, text, or interactive element to be described by the label. */
     children: ReactNode;
 
-    /** The descriptive text displayed as a small uppercase header/prefix. */
+    /** The descriptive text displayed as a small uppercase header or prefix. */
     label: string;
 
-    /** Optional CSS classes for the root container. */
+    /** Optional additional CSS classes for the root container (e.g., margins, grid-spanning). */
     className?: string;
 
-    /** * Determines the flex direction of the label and its content.
+    /** * Determines the flex direction and alignment of the label and its content.
      * @default "horizontal"
      */
     orientation?: OrientationValues;
@@ -40,17 +39,10 @@ const LabeledGroup = (props: GroupProps) => {
             orientation === "vertical" && "flex-col space-y-0",
             className
         )}>
-            {/** The descriptive label element. */}
-            <span
-                className={cn(
-                    SecondaryTextBaseCSS,
-                    "uppercase text-[12px] select-none"
-                )}
-            >
+            <span className="secondary-text uppercase text-xs lg:text-sm select-none">
                 {label}
             </span>
 
-            {/** The primary content area. */}
             <div className="flex-1">
                 {children}
             </div>

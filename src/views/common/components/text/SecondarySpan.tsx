@@ -1,31 +1,28 @@
 /**
- * @file SecondarySpan.tsx
- *
- * Inline text component for secondary or de-emphasised content.
- *
- * @remarks
- * - Typically used for metadata, helper text, or subtle labels.
- * - Applies shared secondary text styling with a smaller font size.
+ * @file Inline text component for secondary or de-emphasized metadata.
+ * @filename SecondarySpan.tsx
  */
 
 import {cn} from "@/common/lib/utils.ts";
-import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {ReactNode} from "react";
 
+/**
+ * Props for the {@link SecondarySpan} component.
+ */
 type SpanProps = {
-    /** Inline content to render */
+    /** The inline content to render with secondary/subtle styling. */
     children: ReactNode;
 
-    /** Optional class name overrides */
+    /** Optional CSS classes for additional formatting. */
     className?: string;
 };
 
 /**
- * Renders a secondary-styled `<span>` element.
+ * Renders a secondary-styled `<span>` element for supporting information.
  */
 const SecondarySpan = ({children, className}: SpanProps) => {
     return (
-        <span className={cn(SecondaryTextBaseCSS, "text-sm", className)}>
+        <span className={cn("secondary-text text-sm", className)}>
             {children}
         </span>
     );

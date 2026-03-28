@@ -1,35 +1,28 @@
 /**
- * @file PrimarySpan.tsx
- *
- * Inline text component for primary emphasis.
- *
- * @remarks
- * - Intended for short inline text, not block-level usage.
- * - Styling is applied via shared primary text CSS.
+ * @file Inline text component for primary emphasis and high-visibility content.
+ * @filename PrimarySpan.tsx
  */
 
 import {cn} from "@/common/lib/utils.ts";
 import {ReactNode} from "react";
-import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
+/**
+ * Props for the {@link PrimarySpan} component.
+ */
 type SpanProps = {
-    /** Inline content to render */
+    /** The inline text or elements to render with primary styling. */
     children: ReactNode;
 
-    /** Optional class name overrides */
+    /** Optional CSS classes for custom overrides (e.g., font weight, colors). */
     className?: string;
 };
 
 /**
- * Renders a primary-styled `<span>` element.
+ * Renders a primary-styled `<span>` element for emphasized data.
  */
 const PrimarySpan = ({children, className}: SpanProps) => {
     return (
-        <span className={cn(
-            PrimaryTextBaseCSS,
-            "max-md:text-sm",
-            className
-        )}>
+        <span className={cn("primary-text", className)}>
             {children}
         </span>
     );
