@@ -1,0 +1,9 @@
+@layer components {
+    .primary-text {
+        @apply text-black dark:text-gray-50
+    }
+
+    .secondary-text {
+        @apply text-neutral-400 dark:text-gray-500
+    }
+}

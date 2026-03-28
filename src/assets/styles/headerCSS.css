@@ -1,0 +1,13 @@
+@layer components {
+    .subsection-title {
+        @apply primary-text text-base font-extrabold uppercase
+    }
+
+    .subsection-subtitle {
+        @apply secondary-text text-sm font-semibold italic
+    }
+
+    .subsection-description {
+        @apply secondary-text text-sm
+    }
+}
