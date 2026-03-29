@@ -9,13 +9,13 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEm
 /**
  * Validation schema for the reservation notes update form.
  */
-export const UpdateReservationNotesFormSubmitSchema = z.object({
+export const ReservationNotesFormSubmitSchema = z.object({
     /** The administrative text to be associated with the reservation record. */
     notes: NonEmptyStringSchema.optional().nullable(),
 });
 
 /**
- * TypeScript type inferred from {@link UpdateReservationNotesFormSubmitSchema}.
+ * TypeScript type inferred from {@link ReservationNotesFormSubmitSchema}.
  * Represents the data structure expected by the note-update service.
  */
-export type UpdateReservationNotesFormSubmit = z.infer<typeof UpdateReservationNotesFormSubmitSchema>;
+export type ReservationNotesFormSubmit = z.infer<typeof ReservationNotesFormSubmitSchema>;
