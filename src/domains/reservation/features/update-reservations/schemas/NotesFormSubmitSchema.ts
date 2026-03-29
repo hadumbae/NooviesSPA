@@ -1,6 +1,6 @@
 /**
  * @file Zod schema and type for reservation note update form submissions.
- * @filename UpdateReservationNotesFormSubmitSchema.ts
+ * @filename NotesFormSubmitSchema.ts
  */
 
 import {z} from "zod";
