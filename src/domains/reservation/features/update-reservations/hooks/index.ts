@@ -17,7 +17,9 @@ import {
 import {
     useUpdateAdminReservationSuccessHandler
 } from "@/domains/reservation/features/update-reservations/hooks/useUpdateAdminReservationSuccessHandler.ts";
-
+import {
+    useUpdateReservationNotesForm
+} from "@/domains/reservation/features/update-reservations/hooks/forms/useUpdateReservationNotesForm.ts";
 
 export {
     ReservationUpdateMutationKeys,
@@ -27,4 +29,5 @@ export {
     useRefundReservationMutation,
     useUpdateAdminReservationSuccessHandler,
     useUpdateAdminReservationErrorHandler,
+    useUpdateReservationNotesForm,
 }
