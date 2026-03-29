@@ -1,16 +1,16 @@
 /**
- * @file Mutation hook for cancelling an administrative reservation.
- * @filename useCancelReservationMutation.ts
+ * @file Mutation hook for processing administrative reservation refunds.
+ * @filename useRefundReservationMutation.ts
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {ReservationUpdateMutationKeys} from "@/domains/reservation/features/update-reservations/hooks/mutationKeys.ts";
+import {ReservationUpdateMutationKeys} from "@/domains/reservation/features/update-reservations/hooks/keys/mutationKeys.ts";
 import {
     ReservationNotesFormSubmit,
     ReservationNotesFormValues
 } from "@/domains/reservation/features/update-reservations/schemas";
 import {
-    patchCancelReservation,
+    patchRefundReservation,
 } from "@/domains/reservation/features/update-reservations/repositories";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {AdminReservation, AdminReservationSchema} from "@/domains/reservation/schema/model";
@@ -19,35 +19,35 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import {UseFormReturn} from "react-hook-form";
 import {
     useUpdateAdminReservationSuccessHandler
-} from "@/domains/reservation/features/update-reservations/hooks/useUpdateAdminReservationSuccessHandler.ts";
+} from "@/domains/reservation/features/update-reservations/hooks/mutation-helpers/useUpdateAdminReservationSuccessHandler.ts";
 import {
     useUpdateAdminReservationErrorHandler
-} from "@/domains/reservation/features/update-reservations/hooks/useUpdateAdminReservationErrorHandler.ts";
+} from "@/domains/reservation/features/update-reservations/hooks/mutation-helpers/useUpdateAdminReservationErrorHandler.ts";
 
 /**
- * Props for the {@link useUpdateReservationNotesMutation} hook.
+ * Props for the {@link useRefundReservationMutation} hook.
  */
 type MutationProps = {
-    /** The unique identifier of the reservation to be cancelled. */
+    /** The target reservation's unique identifier. */
     reservationID: ObjectId;
-    /** React Hook Form instance for managing notes/reasoning field states and errors. */
+    /** The React Hook Form instance for mapping server-side refund validation errors. */
     form: UseFormReturn<ReservationNotesFormValues>;
-    /** Standardized handlers for submission lifecycle events. */
+    /** Standardized handlers for post-refund UI logic and messaging. */
     onSubmit: MutationOnSubmitParams<AdminReservation>;
 }
 
 /**
- * Provides a mutation for cancelling a reservation with integrated success and error handling.
- * @param props - Configuration including ID, form context, and callbacks.
- * @returns A TanStack Query mutation result for the cancellation process.
+ * Provides a mutation to transition a reservation to a 'REFUNDED' state.
+ * @param props - Identity, form context, and submission callbacks.
+ * @returns A TanStack Query mutation result object.
  */
-export function useCancelReservationMutation(
+export function useRefundReservationMutation(
     {reservationID, form, onSubmit}: MutationProps
 ): UseMutationResult<AdminReservation, unknown, ReservationNotesFormSubmit> {
     const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = onSubmit;
 
-    const cancelReservation = async (values: ReservationNotesFormSubmit) => {
-        const {result} = await patchCancelReservation({
+    const refundReservation = async (values: ReservationNotesFormSubmit) => {
+        const {result} = await patchRefundReservation({
             _id: reservationID,
             data: values,
         });
@@ -55,7 +55,7 @@ export function useCancelReservationMutation(
         const {success, data, error} = validateData({
             data: result,
             schema: AdminReservationSchema,
-            message: "Invalid data after cancelling reservation.",
+            message: "Invalid data after refunding reservation.",
         });
 
         if (!success) throw error;
@@ -63,19 +63,19 @@ export function useCancelReservationMutation(
     }
 
     const onSuccess = useUpdateAdminReservationSuccessHandler({
-        onSubmitSuccess,
         successMessage,
+        onSubmitSuccess,
     });
 
     const onError = useUpdateAdminReservationErrorHandler({
         form,
-        errorMessage,
         onSubmitError,
+        errorMessage,
     });
 
     return useMutation({
-        mutationKey: ReservationUpdateMutationKeys.cancel({reservationID}),
-        mutationFn: cancelReservation,
+        mutationKey: ReservationUpdateMutationKeys.refund({reservationID}),
+        mutationFn: refundReservation,
         onSuccess,
         onError,
     });

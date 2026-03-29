@@ -4,7 +4,7 @@
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {ReservationUpdateMutationKeys} from "@/domains/reservation/features/update-reservations/hooks/mutationKeys.ts";
+import {ReservationUpdateMutationKeys} from "@/domains/reservation/features/update-reservations/hooks/keys/mutationKeys.ts";
 import {
     ReservationNotesFormSubmit,
     ReservationNotesFormValues
@@ -17,10 +17,10 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import {UseFormReturn} from "react-hook-form";
 import {
     useUpdateAdminReservationSuccessHandler
-} from "@/domains/reservation/features/update-reservations/hooks/useUpdateAdminReservationSuccessHandler.ts";
+} from "@/domains/reservation/features/update-reservations/hooks/mutation-helpers/useUpdateAdminReservationSuccessHandler.ts";
 import {
     useUpdateAdminReservationErrorHandler
-} from "@/domains/reservation/features/update-reservations/hooks/useUpdateAdminReservationErrorHandler.ts";
+} from "@/domains/reservation/features/update-reservations/hooks/mutation-helpers/useUpdateAdminReservationErrorHandler.ts";
 
 /**
  * Props for the {@link useUpdateReservationNotesMutation} hook.
