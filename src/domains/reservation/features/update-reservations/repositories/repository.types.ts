@@ -4,14 +4,14 @@
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {ReservationNotesFormSubmit} from "@/domains/reservation/features/update-reservations/schemas";
+import {UpdateReservationNotesFormSubmit} from "@/domains/reservation/features/update-reservations/schemas";
 
 /**
  * Parameters for updating administrative notes on a reservation.
  */
 export type PatchUpdateReservationNotesParams = {
     _id: ObjectId;
-    data: ReservationNotesFormSubmit;
+    data: UpdateReservationNotesFormSubmit;
 }
 
 /**
@@ -26,7 +26,7 @@ export type PatchResetReservationExpiryParams = {
  */
 export type PatchCancelReservationParams = {
     _id: ObjectId;
-    data: ReservationNotesFormSubmit;
+    data: UpdateReservationNotesFormSubmit;
 }
 
 /**
@@ -34,5 +34,5 @@ export type PatchCancelReservationParams = {
  */
 export type PatchRefundReservationParams = {
     _id: ObjectId;
-    data: ReservationNotesFormSubmit;
+    data: UpdateReservationNotesFormSubmit;
 }

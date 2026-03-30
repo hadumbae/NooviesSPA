@@ -4,7 +4,7 @@
  */
 
 import {
-    ReservationNotesFormSubmitSchema,
+    UpdateReservationNotesFormSubmitSchema,
     ReservationNotesFormValues
 } from "@/domains/reservation/features/update-reservations/schemas";
 import {useMemo} from "react";
@@ -33,7 +33,7 @@ export function useUpdateReservationNotesForm({presetValues}: FormParams = {}) {
     }), [presetValues]);
 
     return useForm<ReservationNotesFormValues>({
-        resolver: zodResolver(ReservationNotesFormSubmitSchema),
+        resolver: zodResolver(UpdateReservationNotesFormSubmitSchema),
         defaultValues,
     });
 }

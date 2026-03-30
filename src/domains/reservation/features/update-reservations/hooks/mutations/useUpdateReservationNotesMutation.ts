@@ -6,7 +6,7 @@
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ReservationUpdateMutationKeys} from "@/domains/reservation/features/update-reservations/hooks/keys/mutationKeys.ts";
 import {
-    ReservationNotesFormSubmit,
+    UpdateReservationNotesFormSubmit,
     ReservationNotesFormValues
 } from "@/domains/reservation/features/update-reservations/schemas";
 import {patchUpdateReservationNotes} from "@/domains/reservation/features/update-reservations/repositories";
@@ -41,10 +41,10 @@ type MutationProps = {
  */
 export function useUpdateReservationNotesMutation(
     {reservationID, form, onSubmit}: MutationProps
-): UseMutationResult<AdminReservation, unknown, ReservationNotesFormSubmit> {
+): UseMutationResult<AdminReservation, unknown, UpdateReservationNotesFormSubmit> {
     const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = onSubmit;
 
-    const submitNotes = async (values: ReservationNotesFormSubmit) => {
+    const submitNotes = async (values: UpdateReservationNotesFormSubmit) => {
         const {result} = await patchUpdateReservationNotes({
             _id: reservationID,
             data: values,

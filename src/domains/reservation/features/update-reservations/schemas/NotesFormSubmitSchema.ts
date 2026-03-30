@@ -10,7 +10,7 @@ import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preproces
 /**
  * Validation schema for the reservation notes update form.
  */
-export const ReservationNotesFormSubmitSchema = z.object({
+export const UpdateReservationNotesFormSubmitSchema = z.object({
     /** The administrative text to be associated with the reservation record. */
     notes: preprocessEmptyStringToUndefined(
         NonEmptyStringSchema.optional().nullable()
@@ -18,7 +18,7 @@ export const ReservationNotesFormSubmitSchema = z.object({
 });
 
 /**
- * TypeScript type inferred from {@link ReservationNotesFormSubmitSchema}.
+ * TypeScript type inferred from {@link UpdateReservationNotesFormSubmitSchema}.
  * Represents the data structure expected by the note-update service.
  */
-export type ReservationNotesFormSubmit = z.infer<typeof ReservationNotesFormSubmitSchema>;
+export type UpdateReservationNotesFormSubmit = z.infer<typeof UpdateReservationNotesFormSubmitSchema>;

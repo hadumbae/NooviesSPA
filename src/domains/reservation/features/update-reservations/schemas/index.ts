@@ -1,6 +1,6 @@
 import {
-    ReservationNotesFormSubmit,
-    ReservationNotesFormSubmitSchema
+    UpdateReservationNotesFormSubmit,
+    UpdateReservationNotesFormSubmitSchema
 } from "@/domains/reservation/features/update-reservations/schemas/NotesFormSubmitSchema.ts";
 import {
     ReservationNotesFormValues,
@@ -9,12 +9,12 @@ import {
 
 
 export {
-    ReservationNotesFormSubmitSchema,
+    UpdateReservationNotesFormSubmitSchema,
     ReservationNotesFormValuesSchema,
 }
 
 export type {
-    ReservationNotesFormSubmit,
+    UpdateReservationNotesFormSubmit,
     ReservationNotesFormValues,
 
 }
