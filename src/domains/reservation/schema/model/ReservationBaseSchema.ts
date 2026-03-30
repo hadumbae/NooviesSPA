@@ -18,69 +18,102 @@ import {
 import {ModelTimestampsSchema} from "@/common/schema/models/ModelTimestampsSchema.ts";
 import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
 import {ReservedShowingSnapshotSchema} from "@/domains/reservation/schema/snapshot/ReservedShowingSnapshotSchema.ts";
+import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
 
 /**
- * Core validation schema defining the structure of a Reservation record.
+ * Defines the temporal lifecycle of a reservation.
+ * Includes initial booking, payment deadlines (TTL), and terminal state timestamps.
  */
-export const ReservationBaseSchema = ModelTimestampsSchema.extend({
-    /** Unique BSON identifier; read-only to prevent mutation after creation. */
-    _id: IDStringSchema.readonly(),
-
-    /** URL-friendly identifier derived from movie or event metadata. */
-    slug: SlugStringSchema,
-
-    /** Human-readable verification code used for administrative lookups and scanning. */
-    uniqueCode: ReservationUniqueCodeSchema,
-
-    /** Reference to the User account associated with the booking. */
-    user: IDStringSchema,
-
-    /** Reference to the specific Showing/Event being booked. */
-    showing: IDStringSchema,
-
-    /** The number of tickets requested; must be at least 1. */
-    ticketCount: PositiveNumberSchema,
-
-    /** The final monetary amount calculated for the transaction. */
-    pricePaid: NonNegativeNumberSchema,
-
-    /** Standardized 3-letter currency code (e.g., USD, EUR). */
-    currency: ISO4217CurrencyCodeEnumSchema,
-
+const ReservationBaseDateSchema = z.object({
     /** Explicit timestamp of the initial seat/ticket reservation. */
     dateReserved: UTCISO8601DateTimeSchema,
 
     /** Timestamp recorded when payment is successfully processed. */
     datePaid: UTCISO8601DateTimeSchema.optional(),
 
-    /** Timestamp recorded if the reservation is manually voided. */
+    /** Timestamp recorded if the reservation is manually voided by an admin or user. */
     dateCancelled: UTCISO8601DateTimeSchema.optional(),
 
-    /** Timestamp recorded if a refund is issued for a previously paid reservation. */
+    /** Timestamp recorded if a financial refund is issued. */
     dateRefunded: UTCISO8601DateTimeSchema.optional(),
 
-    /** Timestamp recorded if the reservation was not paid within the TTL window. */
+    /** Timestamp recorded if the reservation failed to reach 'PAID' status before `expiresAt`. */
     dateExpired: UTCISO8601DateTimeSchema.optional(),
 
     /** The system-calculated deadline for the user to complete payment. */
     expiresAt: UTCISO8601DateTimeSchema,
+});
 
-    /** Discriminator for booking logic (e.g., General Admission vs Reserved Seating). */
+/**
+ * Defines financial and quantity data for the transaction.
+ */
+const ReservationBasePaymentSchema = z.object({
+    /** The number of tickets requested; must be a positive integer. */
+    ticketCount: PositiveNumberSchema,
+
+    /** The final monetary amount calculated for the transaction. */
+    pricePaid: NonNegativeNumberSchema,
+
+    /** Standardized 3-letter currency code (ISO 4217). */
+    currency: ISO4217CurrencyCodeEnumSchema,
+
+    /** Flag indicating if the transaction has been cleared by the payment provider. */
+    isPaid: BooleanValueSchema,
+});
+
+/**
+ * Defines relational references and immutable data snapshots.
+ */
+const ReservationBaseRelatedSchema = z.object({
+    /** Reference to the User account associated with the booking. */
+    user: IDStringSchema,
+
+    /** Reference to the specific Showing/Event being booked. */
+    showing: IDStringSchema,
+
+    /** * A point-in-time copy of showing details.
+     * Ensures historical accuracy if the original showing data is modified or deleted.
+     */
+    snapshot: ReservedShowingSnapshotSchema,
+});
+
+/**
+ * Defines identification and administrative metadata.
+ */
+const ReservationBaseMetaSchema = z.object({
+    /** Unique BSON identifier; read-only to ensure referential integrity. */
+    _id: IDStringSchema.readonly(),
+
+    /** URL-friendly identifier for routing purposes. */
+    slug: SlugStringSchema.readonly(),
+
+    /** Human-readable verification code used for ticket scanning and admin lookups. */
+    uniqueCode: ReservationUniqueCodeSchema.readonly(),
+
+    /** Discriminator for booking logic (e.g., specific seat selection vs general capacity). */
     reservationType: ReservationTypeEnumSchema,
 
-    /** Current lifecycle status (e.g., RESERVED, PAID, CANCELLED). */
+    /** Current lifecycle status (RESERVED, PAID, CANCELLED, REFUNDED, EXPIRED). */
     status: ReservationStatusEnumSchema,
 
-    /** A point-in-time copy of showing details to protect against historical changes. */
-    snapshot: ReservedShowingSnapshotSchema,
-
-    /** Optional administrative notes or user remarks; constrained to 3000 characters. */
+    /** Administrative notes. */
     notes: NonEmptyStringSchema
         .max(3000, "Must be 3000 characters or less.")
         .optional(),
 });
 
 /**
+ * Core validation schema defining the comprehensive structure of a Reservation record.
+ */
+export const ReservationBaseSchema = ModelTimestampsSchema.extend({
+    ...ReservationBaseDateSchema.shape,
+    ...ReservationBasePaymentSchema.shape,
+    ...ReservationBaseRelatedSchema.shape,
+    ...ReservationBaseMetaSchema.shape,
+});
+
+/**
  * TypeScript type inferred from {@link ReservationBaseSchema}.
+ * Represents the base interface for all reservation-related data structures.
  */
 export type ReservationBase = z.infer<typeof ReservationBaseSchema>;
