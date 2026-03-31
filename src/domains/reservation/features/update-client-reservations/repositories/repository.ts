@@ -10,7 +10,7 @@ import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts"
 
 /** * Root endpoint for client-facing reservation features.
  */
-const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/feat/client-reservations`;
+const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/feat/update-client-reservations`;
 
 /**
  * Transitions a pending reservation hold to a 'PAID' state.
