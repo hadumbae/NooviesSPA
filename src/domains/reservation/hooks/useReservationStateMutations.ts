@@ -9,7 +9,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     useCancelClientReservationMutation,
     useCheckoutClientReservationMutation
-} from "src/domains/reservation/features/update-client-reservations/mutations";
+} from "@/domains/reservation/features/update-client-reservations/mutations";
 
 /**
  * Mutation params with optional success handler.
