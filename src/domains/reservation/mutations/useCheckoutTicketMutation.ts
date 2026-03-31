@@ -5,7 +5,9 @@
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {TicketRepository} from "@/domains/reservation/repositories/ticket-repository/TicketRepository.ts";
+import {
+    checkoutTicket,
+} from "@/domains/reservation/repositories/ticket-repository/TicketRepository.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {toast} from "react-toastify";
 
@@ -23,8 +25,8 @@ type SubmitProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
 export function useCheckoutTicketMutation(
     {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitProps = {}
 ): UseMutationResult<void, unknown, ObjectId> {
-    const checkoutTickets = async (_id: ObjectId) => {
-        await TicketRepository.checkoutTicket(_id);
+    const checkout = async (_id: ObjectId) => {
+        await checkoutTicket(_id);
     }
 
     const onSuccess = () => {
@@ -39,7 +41,7 @@ export function useCheckoutTicketMutation(
 
     return useMutation({
         mutationKey: ["reservations", "tickets", "checkout"],
-        mutationFn: checkoutTickets,
+        mutationFn: checkout,
         onSuccess,
         onError,
     });

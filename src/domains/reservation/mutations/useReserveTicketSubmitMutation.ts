@@ -22,9 +22,9 @@ import handleMutationFormError from "@/common/utility/handlers/handleMutationFor
 import {UseFormReturn} from "react-hook-form";
 import {ReserveTicketFormValues} from "@/domains/reservation/schema/forms/ReserveTicketFormValuesSchema.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
-import {TicketRepository} from "@/domains/reservation/repositories/ticket-repository/TicketRepository.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservation/schema/model";
+import {reserveTicket} from "@/domains/reservation/repositories/ticket-repository";
 
 /**
  * Parameters required to configure the reservation submission mutation.
@@ -40,12 +40,6 @@ type SubmitParams = MutationOnSubmitParams<PopulatedReservation> & {
 
 /**
  * Ticket reservation submission mutation hook.
- *
- * @remarks
- * - Submits ticket reservation data via {@link TicketRepository}
- * - Validates API responses against {@link PopulatedReservationSchema}
- * - Centralizes success/error handling for reservation forms
- *
  * @param params - Mutation configuration and form handlers
  * @returns React Query mutation result
  */
@@ -60,9 +54,9 @@ export function useReserveTicketSubmitMutation(
      * @returns Parsed reservation details
      * @throws Validation or request errors
      */
-    const submitData = async (values: ReserveTicketForm) => {
+    const reserveTickets = async (values: ReserveTicketForm) => {
         const returnedData = await handleMutationResponse({
-            action: () => TicketRepository.reserveTicket(values),
+            action: () => reserveTicket(values),
             errorMessage: "Failed to reserve tickets. Please try again.",
         });
 
@@ -95,7 +89,7 @@ export function useReserveTicketSubmitMutation(
 
     return useMutation({
         mutationKey: ["reservations", "tickets", "reserve"],
-        mutationFn: submitData,
+        mutationFn: reserveTickets,
         onSuccess,
         onError,
     });

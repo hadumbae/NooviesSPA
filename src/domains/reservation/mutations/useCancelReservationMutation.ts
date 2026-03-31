@@ -4,9 +4,9 @@
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {TicketRepository} from "@/domains/reservation/repositories/ticket-repository/TicketRepository.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {toast} from "react-toastify";
+import {cancelReservation} from "@/domains/reservation/repositories/ticket-repository";
 
 type SubmitProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
     /** Optional callback invoked after a successful cancellation. */
@@ -22,8 +22,8 @@ type SubmitProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
 export function useCancelReservationMutation(
     {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitProps = {}
 ): UseMutationResult<void, unknown, ObjectId> {
-    const cancelReservation = async (_id: ObjectId) => {
-        await TicketRepository.cancelReservation(_id);
+    const cancel = async (_id: ObjectId) => {
+        await cancelReservation(_id);
     }
 
     const onSuccess = () => {
@@ -38,7 +38,7 @@ export function useCancelReservationMutation(
 
     return useMutation({
         mutationKey: ["reservations", "tickets", "cancel"],
-        mutationFn: cancelReservation,
+        mutationFn: cancel,
         onSuccess,
         onError,
     });

@@ -5,45 +5,41 @@
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {ReserveTicketForm} from "@/domains/reservation/schema/forms/ReserveTicketFormSchema.ts";
-import {TicketRepositoryMethods} from "@/domains/reservation/repositories/ticket-repository/TicketRepository.types.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
-/**
- * UI-facing repository for reservation requests.
- */
-const repository: TicketRepositoryMethods = {
-    baseURL: `${import.meta.env.VITE_API_URL}/api/v1/tickets`,
+const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/feat/reserve-tickets`;
 
-    reserveTicket(data: ReserveTicketForm): Promise<RequestReturns> {
-        const url = buildQueryURL({
-            baseURL: this.baseURL,
-            path: "reserve",
-        });
+export const reserveTicket = (
+    data: ReserveTicketForm
+): Promise<RequestReturns> => {
+    const url = buildQueryURL({
+        baseURL: baseURL,
+        path: "reserve",
+    });
 
-        return useFetchAPI({method: "POST", url, data});
-    },
-
-    checkoutTicket(_id: ObjectId): Promise<RequestReturns> {
-        const url = buildQueryURL({
-            baseURL: this.baseURL,
-            path: `checkout/${_id}`,
-        });
-
-        return useFetchAPI({method: "PATCH", url});
-    },
-
-    cancelReservation(_id: ObjectId): Promise<RequestReturns> {
-        const url = buildQueryURL({
-            baseURL: this.baseURL,
-            path: `cancel/${_id}`,
-        });
-
-        return useFetchAPI({method: "PATCH", url});
-    }
+    return useFetchAPI({method: "POST", url, data});
 };
 
-export {
-    repository as TicketRepository,
+export const checkoutTicket = (
+    _id: ObjectId
+): Promise<RequestReturns> => {
+    const url = buildQueryURL({
+        baseURL: baseURL,
+        path: `checkout/${_id}`,
+    });
+
+    return useFetchAPI({method: "PATCH", url});
+};
+
+export const cancelReservation = (
+    _id: ObjectId
+): Promise<RequestReturns> => {
+    const url = buildQueryURL({
+        baseURL: baseURL,
+        path: `cancel/${_id}`,
+    });
+
+    return useFetchAPI({method: "PATCH", url});
 };
