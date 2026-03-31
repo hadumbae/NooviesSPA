@@ -1,5 +1,5 @@
 /**
- * @file Zod schema for validating the administrative "Fetch by Code" API response.
+ * @file Zod schema for validating the administrative "Fetch by Code" API response envelope.
  * @filename FetchByCodeDataSchema.ts
  */
 
@@ -11,20 +11,25 @@ import {
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 
 /**
- * Validates the full envelope returned by the administrative code lookup endpoint.
+ * Validates the full data envelope returned by the administrative code lookup endpoint.
  */
 export const FetchByCodeDataSchema = z.object({
-    /** The verification code associated with this query. */
+    /** The human-readable verification code that was used for the query. */
     code: ReservationUniqueCodeSchema,
 
-    /** The resulting reservation record, including populated relations. */
-    reservation: AdminReservationSchema,
+    /** * The retrieved reservation record.
+     * Returns `null` if no record matches the provided `code`.
+     */
+    reservation: AdminReservationSchema.nullable(),
 
-    /** Human-readable status message for UI feedback. */
+    /** * Descriptive feedback for the administrator (e.g., "Reservation found successfully").
+     * Constrained to 100 characters for concise UI messaging.
+     */
     message: NonEmptyStringSchema.max(100, "Must be 100 characters or less."),
 });
 
 /**
  * TypeScript type inferred from {@link FetchByCodeDataSchema}.
+ * Represents the structured response for administrative ticket scanning or lookup features.
  */
 export type FetchByCodeData = z.infer<typeof FetchByCodeDataSchema>;
