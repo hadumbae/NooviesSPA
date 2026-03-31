@@ -11,9 +11,9 @@ const AdminLayoutFooter: FC = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="font-dotGothic16 text-center text-neutral-500">
-            <span className="text-sm">
-                All Rights Reserved <span className="font-bold">@{currentYear}</span> | Noovies Ltd.
+        <footer className="font-mono text-center text-neutral-500">
+            <span className="text-xs lg:text-sm">
+                All Rights Reserved <b>@ {currentYear}</b> | Noovies Ltd.
             </span>
         </footer>
     );

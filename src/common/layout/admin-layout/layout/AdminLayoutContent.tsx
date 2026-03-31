@@ -17,7 +17,7 @@ const AdminLayoutContent: FC = () => {
         <section className={cn(
             "flex-1 font-offside py-5",
             "max-w-screen-2xl max-md:w-full",
-            "md:mx-20 xl:mx-48",
+            "md:mx-5 xl:mx-36",
         )}>
             <AppErrorBoundary>
                 <Outlet/>
