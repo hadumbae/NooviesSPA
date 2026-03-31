@@ -5,11 +5,9 @@
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {
-    checkoutTicket,
-} from "@/domains/reservation/repositories/ticket-repository/TicketRepository.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {toast} from "react-toastify";
+import {patchCheckoutTicket} from "@/domains/reservation/features/update-client-reservations/repositories";
 
 type SubmitProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
     /** Optional callback invoked after a successful checkout. */
@@ -26,7 +24,7 @@ export function useCheckoutTicketMutation(
     {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitProps = {}
 ): UseMutationResult<void, unknown, ObjectId> {
     const checkout = async (_id: ObjectId) => {
-        await checkoutTicket(_id);
+        await patchCheckoutTicket(_id);
     }
 
     const onSuccess = () => {
