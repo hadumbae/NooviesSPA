@@ -3,11 +3,13 @@
  * Aggregates reservation cancel and checkout mutations.
  */
 
-import {useCancelReservationMutation} from "@/domains/reservation/mutations/useCancelReservationMutation.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {useCheckoutTicketMutation} from "@/domains/reservation/mutations/useCheckoutTicketMutation.ts";
 import {UseMutationResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {
+    useCancelClientReservationMutation,
+    useCheckoutClientReservationMutation
+} from "src/domains/reservation/features/update-client-reservations/mutations";
 
 /**
  * Mutation params with optional success handler.
@@ -41,8 +43,8 @@ type ReturnParams = {
 export function useReservationStateMutations(
     {onCancel, onCheckout}: MutationParams = {}
 ): ReturnParams {
-    const cancelMutation = useCancelReservationMutation(onCancel);
-    const checkoutMutation = useCheckoutTicketMutation(onCheckout);
+    const cancelMutation = useCancelClientReservationMutation(onCancel);
+    const checkoutMutation = useCheckoutClientReservationMutation(onCheckout);
 
     const mutations = [cancelMutation, checkoutMutation];
 

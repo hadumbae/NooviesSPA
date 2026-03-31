@@ -20,7 +20,7 @@ type SubmitProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
  * @param props - Submission lifecycle handlers and optional toast messages.
  * @returns React Query mutation result for ticket checkout.
  */
-export function useCheckoutTicketMutation(
+export function useCheckoutClientReservationMutation(
     {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitProps = {}
 ): UseMutationResult<void, unknown, ObjectId> {
     const checkout = async (_id: ObjectId) => {

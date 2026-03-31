@@ -3,13 +3,13 @@
  * @filename CurrentUserReservationLoader.tsx
  */
 
-import {useFetchReservationsForCurrentUser} from "@/domains/reservation/fetch/useFetchReservationsForCurrentUser.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {ReactNode} from "react";
 import {
     PaginatedPopulatedReservations,
     PaginatedPopulatedReservationSchema
 } from "@/domains/reservation/schema/model/ReservationPaginatedSchemas.ts";
+import {useFetchReservationsForCurrentUser} from "@/domains/reservation/features/client-reservations/fetch";
 
 /**
  * Props for {@link CurrentUserReservationLoader}.

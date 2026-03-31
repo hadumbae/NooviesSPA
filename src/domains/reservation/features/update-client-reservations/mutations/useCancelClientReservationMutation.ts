@@ -19,7 +19,7 @@ type SubmitProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
  * @param props - Submission lifecycle handlers and optional toast messages.
  * @returns React Query mutation result for reservation cancellation.
  */
-export function useCancelReservationMutation(
+export function useCancelClientReservationMutation(
     {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitProps = {}
 ): UseMutationResult<void, unknown, ObjectId> {
     const cancel = async (_id: ObjectId) => {
