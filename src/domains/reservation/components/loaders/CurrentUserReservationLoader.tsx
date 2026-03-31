@@ -9,7 +9,7 @@ import {
     PaginatedPopulatedReservations,
     PaginatedPopulatedReservationSchema
 } from "@/domains/reservation/schema/model/ReservationPaginatedSchemas.ts";
-import {useFetchReservationsForCurrentUser} from "@/domains/reservation/features/client-reservations/fetch";
+import {useFetchReservationsForCurrentUser} from "@/domains/reservation/features/fetch-client-reservations/fetch";
 
 /**
  * Props for {@link CurrentUserReservationLoader}.

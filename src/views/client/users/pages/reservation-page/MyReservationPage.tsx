@@ -9,7 +9,7 @@ import {Loader} from "lucide-react";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import MyReservationPageContent from "@/views/client/users/pages/reservation-page/MyReservationPageContent.tsx";
 import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservation/schema/model";
-import {useFetchReservationBySlug} from "@/domains/reservation/features/client-reservations/fetch";
+import {useFetchReservationBySlug} from "@/domains/reservation/features/fetch-client-reservations/fetch";
 
 /**
  * Fetches and renders a reservation by slug.
