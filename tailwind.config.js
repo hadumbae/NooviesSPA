@@ -15,6 +15,7 @@ module.exports = {
 			playwriteRoCursive: ['Playwrite RO', 'sans-serif'],
 			oswald: ['Oswald', 'sans-serif'],
 			spaceGrotesk: ['Space Grotesk', 'sans-serif'],
+			roboto: ['Roboto', 'sans-serif'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

@@ -15,7 +15,7 @@ import AppErrorBoundary from "@/common/components/boundary/app-error-boundary/Ap
 const AdminLayoutContent: FC = () => {
     return (
         <section className={cn(
-            "flex-1 font-offside py-5",
+            "flex-1 font-roboto py-5",
             "max-w-screen-2xl max-md:w-full",
             "md:mx-5 xl:mx-36",
         )}>
