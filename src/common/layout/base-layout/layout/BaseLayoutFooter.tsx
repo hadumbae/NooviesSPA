@@ -1,35 +1,21 @@
-import {FC} from 'react';
+/**
+ * @file Footer component for the primary application layout.
+ * @filename BaseLayoutFooter.tsx
+ */
+
+import {ReactElement} from "react";
 
 /**
- * @component BaseLayoutFooter
- * @description
- * A simple footer component that displays ownership and copyright information
- * for Noovies Ltd., including the dynamically generated current year.
- *
- * The footer uses a stylized font and neutral color scheme to complement
- * the overall layout design, providing a consistent and minimal visual anchor
- * at the bottom of the page.
- *
- * @example
- * ```tsx
- * <BaseLayoutFooter />
- * ```
- *
- * @remarks
- * - Automatically updates the displayed year using `new Date().getFullYear()`.
- * - Uses the `font-dotGothic16` font for a distinctive aesthetic.
- * - Center-aligns its text and applies a neutral tone (`text-neutral-500`).
- * - Intended to be used at the bottom of the `BaseLayout`.
- *
- * @returns {JSX.Element} A styled footer displaying copyright text and the current year.
+ * Renders a consistent, minimal visual anchor at the bottom of the page.
  */
-const BaseLayoutFooter: FC = () => {
+const BaseLayoutFooter = (): ReactElement => {
+    /** Extracts the current year for the copyright notice. */
     const currentYear = (new Date()).getFullYear();
 
     return (
-        <footer className="font-dotGothic16 text-center text-neutral-500">
-            <span className="text-sm">
-                All Rights Reserved <span className="font-bold">@{currentYear}</span> | Noovies Ltd.
+        <footer className="font-mono text-center text-neutral-500">
+            <span className="text-xs lg:text-sm">
+                All Rights Reserved <b>@ {currentYear}</b> | Noovies Ltd.
             </span>
         </footer>
     );

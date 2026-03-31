@@ -37,6 +37,9 @@ export type HookFormInputControlProps<TValues extends FieldValues> = {
 
     /** Tailwind classes applied directly to the `Input` or `Textarea` element. */
     inputClassName?: string;
+
+    /** Tailwind classes applied directly to the `FormLabel` element. */
+    labelClassName?: string;
 };
 
 /**

@@ -1,9 +1,8 @@
 /**
- * Login form presentation component.
- *
- * Renders authentication inputs and actions using React Hook Form,
- * delegating submission and mutation handling to the parent.
+ * @file Presentation component for the authentication login form.
+ * @filename AuthLoginFormView.tsx
  */
+
 import {cn} from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
@@ -18,50 +17,49 @@ import {
 } from "@/domains/auth/schema/form/AuthLoginForm.types.ts";
 
 /**
- * Props for {@link AuthLoginFormView}.
+ * Properties for the {@link AuthLoginFormView} component.
  */
 type ViewProps = {
-    /**
-     * React Hook Form instance managing login state.
-     */
+    /** The React Hook Form instance providing context, validation, and control state. */
     form: UseFormReturn<AuthLoginFormValues>;
 
-    /**
-     * Submission handler invoked on valid form submit.
-     */
+    /** The high-level submission logic passed down from the container. */
     submitHandler: SubmitHandler<AuthLoginFormValues>;
 
-    /**
-     * Optional container class name.
-     */
+    /** Optional CSS classes for the root form element. */
     className?: string;
 
-    /**
-     * Login submission mutation.
+    /** * The TanStack Query mutation state.
+     * Used here primarily to disable interactions during active network requests.
      */
     mutation: UseMutationResult<User, unknown, AuthLoginForm>;
 };
 
 /**
- * Stateless login form view.
- *
- * @remarks
- * - Handles rendering only
- * - Submission, validation, and side effects are delegated
- * - Disables submission while the mutation is pending
+ * A stateless "dumb" component that renders the login UI.
+ * ---
+ * ### Architecture
+ * Following the **Container/Presenter** pattern, this component focuses strictly on
+ * layout and user interaction. It does not manage its own state or perform API calls directly.
+ * ---
+ * ### Key Features
+ * * **Loading States:** Automatically disables the "Login" button while `isPending` is true.
+ * * **Navigation:** Provides a clear path to the registration flow via `redirectToRegister`.
+ * * **Form Integration:** Uses `HookFormInput` for consistent error handling and label styling.
  */
 const AuthLoginFormView = (props: ViewProps) => {
     const {form, submitHandler, className, mutation: {isPending}} = props;
     const navigate = useLoggedNavigate();
 
     /**
-     * Navigates to the registration page.
+     * Redirects the user to the registration page.
+     * Logged via `useLoggedNavigate` for observability.
      */
     const redirectToRegister = () => {
         navigate({
             to: "/auth/register",
             component: AuthLoginFormView.name,
-            message: "Go to `Register` page.",
+            message: "User clicked 'Register' from login view.",
         });
     };
 
@@ -71,18 +69,22 @@ const AuthLoginFormView = (props: ViewProps) => {
                 onSubmit={form.handleSubmit(submitHandler)}
                 className={cn("space-y-3", className)}
             >
+                {/* Email field with built-in Zod validation feedback */}
                 <HookFormInput
                     name="email"
                     label="Email"
                     type="email"
                     control={form.control}
+                    labelClassName="uppercase"
                 />
 
+                {/* Password field with hidden character input */}
                 <HookFormInput
                     name="password"
                     label="Password"
                     type="password"
                     control={form.control}
+                    labelClassName="uppercase"
                 />
 
                 <Button
@@ -91,11 +93,11 @@ const AuthLoginFormView = (props: ViewProps) => {
                     className="w-full"
                     disabled={isPending}
                 >
-                    Login
+                    {isPending ? "Logging in..." : "Login"}
                 </Button>
 
                 <Button
-                    variant="secondary"
+                    variant="ghost"
                     type="button"
                     className="w-full"
                     onClick={redirectToRegister}
