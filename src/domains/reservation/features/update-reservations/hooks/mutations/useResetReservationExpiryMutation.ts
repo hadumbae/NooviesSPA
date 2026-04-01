@@ -18,21 +18,28 @@ import {
     useUpdateAdminReservationSuccessHandler
 } from "@/domains/reservation/features/update-reservations/hooks/mutation-helpers/useUpdateAdminReservationSuccessHandler.ts";
 import {toast} from "react-toastify";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {parseErrorReturns} from "@/common/utility/parseErrorReturns.ts";
 
 /**
- * Props for the {@link useResetReservationExpiryMutation} hook.
+ * Properties for the {@link useResetReservationExpiryMutation} hook.
  */
 type MutationProps = {
-    /** The target reservation's unique identifier. */
+    /** The unique MongoDB ObjectId of the reservation to be updated. */
     reservationID: ObjectId;
-    /** Standardized submission handlers and messaging configuration. */
+
+    /**
+     * Standardized submission handlers.
+     * Includes `onSubmitSuccess`, `onSubmitError`, and custom notification messaging.
+     */
     onSubmit: MutationOnSubmitParams<AdminReservation>;
 }
 
 /**
- * Provides a mutation to extend the hold time of a reservation.
- * @param props - Identity, form context, and submission callbacks.
- * @returns A TanStack Query mutation result object.
+ * A TanStack Query mutation hook that extends the Time-To-Live (TTL) of a reservation.
+ * @param props - Identity of the target reservation and callback configurations.
+ * @returns A mutation result object for managing the loading state and triggering the reset.
  */
 export function useResetReservationExpiryMutation(
     {reservationID, onSubmit}: MutationProps
@@ -47,7 +54,7 @@ export function useResetReservationExpiryMutation(
         const {success, data, error} = validateData({
             data: result,
             schema: AdminReservationSchema,
-            message: "Invalid return after resetting reservation expiry.",
+            message: "Invalid data structure returned after resetting reservation expiry.",
         });
 
         if (!success) throw error;
@@ -61,6 +68,14 @@ export function useResetReservationExpiryMutation(
 
     const onError = (error: unknown) => {
         if (errorMessage) toast.error(errorMessage);
+
+        if (error instanceof HttpResponseError) {
+            const payload = parseErrorReturns(error.payload);
+            toast.error(payload?.message ?? `Request failed with status: ${error.status}`);
+        } else {
+            handleMutationResponseError({error});
+        }
+
         onSubmitError?.(error);
     };
 
