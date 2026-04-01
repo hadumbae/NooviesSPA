@@ -24,7 +24,7 @@ type SectionProps = {
     /** The MongoDB ObjectId of the reservation, used for identifying the update target. */
     resID: ObjectId
     /** The existing note content to display. If undefined, an empty state is shown. */
-    notes?: string;
+    notes?: string | null;
 };
 
 /**
