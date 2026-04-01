@@ -20,13 +20,14 @@ const buttonVariants = cva(
                 secondary: SecondaryButtonCSS,
                 ghost: "hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
                 link: "text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50",
+                ghostRing: "ghost-ring-button",
             },
             size: {
                 default: "h-9 px-4 py-2",
                 sm: "h-8 rounded-md px-3 text-xs",
                 lg: "h-10 rounded-md px-8",
                 icon: "h-9 w-9",
-                fab: "h-12 w-12 rounded-3xl",
+                fab: "h-12 w-12 rounded-full",
             },
         },
         defaultVariants: {

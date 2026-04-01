@@ -1,0 +1,9 @@
+@layer components {
+    .ghost-ring-button {
+        @apply
+        text-neutral-600 hover:text-black
+        dark:text-neutral-500 dark:hover:text-neutral-100
+        hover:border hover:border-black
+        dark:border-neutral-500 dark:hover:border dark:hover:border-neutral-100;
+    }
+}
