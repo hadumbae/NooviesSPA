@@ -15,6 +15,7 @@ import {
 } from "@/views/admin/reservation/update-reservation-notes/components/update-notes-form/UpdateReservationNotesFormPopup.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Pencil} from "lucide-react";
+import {useState} from "react";
 
 /**
  * Properties for the {@link ReservationByCodeNotesSection} component.
@@ -32,13 +33,20 @@ type SectionProps = {
 export const ReservationByCodeNotesSection = (
     {resID, notes}: SectionProps
 ) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const closeOnSuccess = () => setIsOpen(false);
+
     return (
         <section className="space-y-4">
             <div className="flex items-center justify-between">
                 <PageSectionHeader text="Admin Notes"/>
 
-                <UpdateReservationNotesForm reservationID={resID}>
-                    <UpdateReservationNotesFormPopup>
+                <UpdateReservationNotesForm
+                    reservationID={resID}
+                    presetValues={{notes: notes ?? ""}}
+                    onSubmitSuccess={closeOnSuccess}
+                >
+                    <UpdateReservationNotesFormPopup isOpen={isOpen} setIsOpen={setIsOpen}>
                         <Button size="fab" variant="ghostRing">
                             <Pencil/>
                         </Button>
@@ -48,7 +56,7 @@ export const ReservationByCodeNotesSection = (
 
             {
                 notes
-                    ? <ReservationNotesText text={notes} />
+                    ? <ReservationNotesText text={notes}/>
                     : <EmptyArrayContainer className="min-h-28" text="There Are No Notes"/>
             }
         </section>
