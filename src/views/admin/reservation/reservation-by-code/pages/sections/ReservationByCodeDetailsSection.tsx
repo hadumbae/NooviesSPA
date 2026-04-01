@@ -18,6 +18,7 @@ import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import {OrientationValues} from "@/common/schema/enums/OrientationEnumSchema.ts";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Props for the {@link ReservationByCodeDetailsSection} component.
@@ -45,7 +46,6 @@ export const ReservationByCodeDetailsSection = (
         currency,
         ticketCount,
         expiresAt,
-        status,
     } = reservation;
 
     const isMobile = useIsMobile();
@@ -57,7 +57,9 @@ export const ReservationByCodeDetailsSection = (
 
     const showtime = buildShowingDateString({start: startTime, end: endTime, timezone});
     const resType = convertToTitleCase(reservationType.replace("_", " "));
-    const expiryDate = status === "RESERVED" ? expiresAt.toFormat("HH:mm:ss dd MMM, yyyy") : "N/A";
+
+    const expiryDate = expiresAt.toFormat("HH:mm:ss dd MMM, yyyy");
+    const isExpired = new Date() > expiresAt.toJSDate();
 
     return (
         <section className="space-y-4">
@@ -106,10 +108,12 @@ export const ReservationByCodeDetailsSection = (
 
                             <LabeledGroup
                                 className="md:col-span-2"
-                                label="Expires At"
+                                label={isExpired ? "Expired" : "Expires At"}
                                 orientation={labelOrientation}
                             >
-                                <PrimarySpan>{expiryDate}</PrimarySpan>
+                                <PrimarySpan className={cn(isExpired && "text-red-500")}>
+                                    {expiryDate}
+                                </PrimarySpan>
                             </LabeledGroup>
                         </div>
                     </CardContent>
