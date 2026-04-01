@@ -1,14 +1,6 @@
 /**
- * @file handle422Response.ts
- *
- * Specialized handler for HTTP 422 validation error responses.
- *
- * Responsibilities:
- * - Enforce schema integrity of validation error payloads
- * - Emit structured logs for diagnostics and audit
- * - Throw a domain-level `FormValidationError`
- *
- * This function never returns.
+ * @file Specialized error handler for HTTP 422 (Unprocessable Entity) responses.
+ * @filename handle422Response.ts
  */
 
 import {ValidationErrorResponseSchema} from "@/common/schema/features/failed-response/ValidationErrorResponseSchema.ts";
@@ -16,40 +8,54 @@ import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts
 import Logger from "@/common/utility/features/logger/Logger.ts";
 import {FormValidationError} from "@/common/errors/FormValidationError.ts";
 import {ZodIssue} from "zod";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
+/**
+ * Parameters for the 422 error handling logic.
+ */
 type HandleParams = {
-    /** Parsed response payload */
+    /** The target URL of the failed request. */
+    url: string;
+
+    /** The response headers received from the server. */
+    headers: Headers;
+
+    /** The raw, unvalidated response body (usually JSON). */
     payload: unknown;
 
-    /** Optional request origin identifier */
+    /** The numeric HTTP status code (expected to be 422). */
+    status: number;
+
+    /** The status message associated with the HTTP response (e.g., "Unprocessable Entity"). */
+    statusText: string;
+
+    /** An optional identifier for the calling component or service (for tracing). */
     source?: string;
 };
 
 /**
- * Processes an HTTP 422 validation response by validating the payload
- * and escalating it as a domain-specific form error.
- *
- * Invalid payloads indicate a contract violation and are treated as
- * unrecoverable errors.
- *
- * @param params - Validation error handling input
- *
- * @throws {Error}
- * When the payload does not conform to the expected validation schema
- *
- * @throws {FormValidationError}
- * Always thrown for valid 422 validation responses
+ * Intercepts 422 responses to transform server-side validation failures into domain-specific errors.
+ * @param params - Contextual request and response data including HTTP metadata.
+ * @throws {HttpResponseError} If the 422 payload is malformed or unexpected.
+ * @throws {FormValidationError} The standard output for successfully parsed validation errors.
  */
 export function handle422Response(
-    {payload, source}: HandleParams
+    {payload, source, url, status, statusText, headers}: HandleParams
 ): never {
     const {
-        success,
+        success: isFormError,
         data: {message, errors} = {},
     } = ValidationErrorResponseSchema.safeParse(payload);
 
-    if (!success) {
-        throw new Error("Invalid 422 Error Response. Failed to validate response.");
+    if (!isFormError) {
+        throw new HttpResponseError({
+            url,
+            headers,
+            status,
+            message: "HTTP 422: Unprocessable Entity (Malformed Error Payload)",
+            statusText,
+            payload,
+        });
     }
 
     Logger.warn({

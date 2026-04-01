@@ -61,7 +61,14 @@ export default function handleBadResponse(
     });
 
     if (status === 422) {
-        handle422Response({source, payload});
+        handle422Response({
+            source,
+            url,
+            headers,
+            status,
+            statusText,
+            payload,
+        });
     }
 
     Logger.warn({
