@@ -1,4 +1,8 @@
 @layer components {
+    .section-header-visual {
+        @apply primary-text text-lg font-bold border-l-4 border-primary px-2
+    }
+
     .subsection-title {
         @apply primary-text text-base font-extrabold uppercase
     }
