@@ -1,4 +1,7 @@
-// ReservationByCodePageContent.tsx
+/**
+ * @file Presentation layer for the reservation lookup interface.
+ * @filename ReservationByCodePageContent.tsx
+ */
 
 import {AdminReservation, ReservationUniqueCode} from "@/domains/reservation/schema/model";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
@@ -14,11 +17,19 @@ import {
 } from "@/views/admin/reservation/reservation-by-code/pages/sections/ReservationByCodeDataContent.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
+/**
+ * Properties for the {@link ReservationByCodePageContent} component.
+ */
 type ContentProps = {
+    /** The code currently being searched or displayed. */
     code: ReservationUniqueCode | null;
+    /** The retrieved reservation data, or null if no search has been performed/found. */
     reservation: AdminReservation | null;
 };
 
+/**
+ * Renders the layout and sections for the reservation-by-code feature.
+ */
 export const ReservationByCodePageContent = (
     {code, reservation}: ContentProps
 ) => {
