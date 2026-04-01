@@ -99,7 +99,8 @@ const ReservationBaseMetaSchema = z.object({
     /** Administrative notes. */
     notes: NonEmptyStringSchema
         .max(3000, "Must be 3000 characters or less.")
-        .optional(),
+        .optional()
+        .nullable(),
 });
 
 /**
