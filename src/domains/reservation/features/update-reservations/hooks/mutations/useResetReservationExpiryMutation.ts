@@ -4,10 +4,9 @@
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {ReservationUpdateMutationKeys} from "@/domains/reservation/features/update-reservations/hooks/keys/mutationKeys.ts";
 import {
-    UpdateReservationNotesFormSubmit,
-} from "@/domains/reservation/features/update-reservations/schemas";
+    ReservationUpdateMutationKeys
+} from "@/domains/reservation/features/update-reservations/hooks/keys/mutationKeys.ts";
 import {
     patchResetReservationExpiry,
 } from "@/domains/reservation/features/update-reservations/repositories";
@@ -15,13 +14,10 @@ import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts
 import {AdminReservation, AdminReservationSchema} from "@/domains/reservation/schema/model";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import {UseFormReturn} from "react-hook-form";
 import {
     useUpdateAdminReservationSuccessHandler
 } from "@/domains/reservation/features/update-reservations/hooks/mutation-helpers/useUpdateAdminReservationSuccessHandler.ts";
-import {
-    useUpdateAdminReservationErrorHandler
-} from "@/domains/reservation/features/update-reservations/hooks/mutation-helpers/useUpdateAdminReservationErrorHandler.ts";
+import {toast} from "react-toastify";
 
 /**
  * Props for the {@link useResetReservationExpiryMutation} hook.
@@ -29,8 +25,6 @@ import {
 type MutationProps = {
     /** The target reservation's unique identifier. */
     reservationID: ObjectId;
-    /** The React Hook Form instance for error mapping and state management. */
-    form: UseFormReturn<UpdateReservationNotesFormSubmit>;
     /** Standardized submission handlers and messaging configuration. */
     onSubmit: MutationOnSubmitParams<AdminReservation>;
 }
@@ -41,7 +35,7 @@ type MutationProps = {
  * @returns A TanStack Query mutation result object.
  */
 export function useResetReservationExpiryMutation(
-    {reservationID, form, onSubmit}: MutationProps
+    {reservationID, onSubmit}: MutationProps
 ): UseMutationResult<AdminReservation, unknown, void> {
     const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = onSubmit;
 
@@ -65,11 +59,10 @@ export function useResetReservationExpiryMutation(
         successMessage,
     });
 
-    const onError = useUpdateAdminReservationErrorHandler({
-        form,
-        onSubmitError,
-        errorMessage,
-    });
+    const onError = (error: unknown) => {
+        if (errorMessage) toast.error(errorMessage);
+        onSubmitError?.(error);
+    };
 
     return useMutation({
         mutationKey: ReservationUpdateMutationKeys.expiry({reservationID}),
