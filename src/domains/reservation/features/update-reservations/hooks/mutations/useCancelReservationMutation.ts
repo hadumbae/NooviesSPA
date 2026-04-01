@@ -7,7 +7,7 @@ import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ReservationUpdateMutationKeys} from "@/domains/reservation/features/update-reservations/hooks/keys/mutationKeys.ts";
 import {
     UpdateReservationNotesFormSubmit,
-    ReservationNotesFormValues
+    UpdateReservationNotesFormValues
 } from "@/domains/reservation/features/update-reservations/schemas";
 import {
     patchCancelReservation,
@@ -31,7 +31,7 @@ type MutationProps = {
     /** The unique identifier of the reservation to be cancelled. */
     reservationID: ObjectId;
     /** React Hook Form instance for managing notes/reasoning field states and errors. */
-    form: UseFormReturn<ReservationNotesFormValues>;
+    form: UseFormReturn<UpdateReservationNotesFormValues>;
     /** Standardized handlers for submission lifecycle events. */
     onSubmit: MutationOnSubmitParams<AdminReservation>;
 }

@@ -6,14 +6,14 @@
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {UseFormReturn} from "react-hook-form";
-import {ReservationNotesFormValues} from "@/domains/reservation/features/update-reservations/schemas";
+import {UpdateReservationNotesFormValues} from "@/domains/reservation/features/update-reservations/schemas";
 
 /**
  * Configuration parameters for the reservation error handler.
  */
 type HandlerParams = {
     /** The React Hook Form instance to which server-side errors will be mapped. */
-    form: UseFormReturn<ReservationNotesFormValues>;
+    form: UseFormReturn<UpdateReservationNotesFormValues>;
     /** Optional custom message to display in the error toast. */
     errorMessage?: string;
     /** Optional callback executed after the error has been processed. */

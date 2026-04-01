@@ -12,7 +12,7 @@ import {
 /**
  * Transformation schema for mapping raw submission data to UI form state.
  */
-export const ReservationNotesFormValuesSchema = generateFormValueSchema(
+export const UpdateReservationNotesFormValuesSchema = generateFormValueSchema(
     UpdateReservationNotesFormSubmitSchema
 );
 
@@ -20,4 +20,4 @@ export const ReservationNotesFormValuesSchema = generateFormValueSchema(
  * TypeScript type inferred from {@link UpdateReservationNotesFormSubmitSchema}.
  * Represents the shape of the form state before it is cleaned for submission.
  */
-export type ReservationNotesFormValues = z.infer<typeof UpdateReservationNotesFormSubmitSchema>;
+export type UpdateReservationNotesFormValues = z.infer<typeof UpdateReservationNotesFormSubmitSchema>;

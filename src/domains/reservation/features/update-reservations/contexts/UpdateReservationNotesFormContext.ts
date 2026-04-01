@@ -4,7 +4,7 @@
  */
 
 import {FormViewOptions} from "@/common/type/form/form-view/FormViewProps.ts";
-import {ReservationNotesFormValues} from "@/domains/reservation/features/update-reservations/schemas";
+import {UpdateReservationNotesFormValues} from "@/domains/reservation/features/update-reservations/schemas";
 import {createContext} from "react";
 
 /**
@@ -17,7 +17,7 @@ export type UpdateReservationNotesFormContextValues = {
     /** * Optional UI configuration for the form view, such as field labels
      * or custom submission button text.
      */
-    options?: FormViewOptions<ReservationNotesFormValues>;
+    options?: FormViewOptions<UpdateReservationNotesFormValues>;
 };
 
 /**

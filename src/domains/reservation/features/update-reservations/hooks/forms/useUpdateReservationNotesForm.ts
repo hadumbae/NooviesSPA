@@ -5,7 +5,7 @@
 
 import {
     UpdateReservationNotesFormSubmitSchema,
-    ReservationNotesFormValues
+    UpdateReservationNotesFormValues
 } from "@/domains/reservation/features/update-reservations/schemas";
 import {useMemo} from "react";
 import {useForm} from "react-hook-form";
@@ -18,7 +18,7 @@ type FormParams = {
     /** * Initial values to populate the form fields.
      * Useful for editing existing notes.
      */
-    presetValues?: Partial<ReservationNotesFormValues>;
+    presetValues?: Partial<UpdateReservationNotesFormValues>;
 }
 
 /**
@@ -27,12 +27,12 @@ type FormParams = {
  * @returns A fully configured `UseFormReturn` instance.
  */
 export function useUpdateReservationNotesForm({presetValues}: FormParams = {}) {
-    const defaultValues: ReservationNotesFormValues = useMemo(() => ({
+    const defaultValues: UpdateReservationNotesFormValues = useMemo(() => ({
         notes: "",
         ...presetValues,
     }), [presetValues]);
 
-    return useForm<ReservationNotesFormValues>({
+    return useForm<UpdateReservationNotesFormValues>({
         resolver: zodResolver(UpdateReservationNotesFormSubmitSchema),
         defaultValues,
     });

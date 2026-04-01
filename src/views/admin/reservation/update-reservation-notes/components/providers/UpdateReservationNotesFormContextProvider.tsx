@@ -5,7 +5,7 @@
 
 import {ReactNode} from "react";
 import {FormViewOptions} from "@/common/type/form/form-view/FormViewProps.ts";
-import {ReservationNotesFormValues} from "@/domains/reservation/features/update-reservations/schemas";
+import {UpdateReservationNotesFormValues} from "@/domains/reservation/features/update-reservations/schemas";
 import {
     UpdateReservationNotesFormContext,
     UpdateReservationNotesFormContextValues
@@ -14,7 +14,7 @@ import {
 /**
  * Props for the {@link UpdateReservationNotesFormContextProvider}.
  */
-type ProviderProps = FormViewOptions<ReservationNotesFormValues> & {
+type ProviderProps = FormViewOptions<UpdateReservationNotesFormValues> & {
     /** The UI components (inputs, labels, buttons) that require context access. */
     children: ReactNode;
     /**

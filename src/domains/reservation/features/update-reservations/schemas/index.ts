@@ -3,18 +3,17 @@ import {
     UpdateReservationNotesFormSubmitSchema
 } from "@/domains/reservation/features/update-reservations/schemas/NotesFormSubmitSchema.ts";
 import {
-    ReservationNotesFormValues,
-    ReservationNotesFormValuesSchema
+    UpdateReservationNotesFormValues,
+    UpdateReservationNotesFormValuesSchema
 } from "@/domains/reservation/features/update-reservations/schemas/NotesFormValuesSchema.ts";
 
 
 export {
     UpdateReservationNotesFormSubmitSchema,
-    ReservationNotesFormValuesSchema,
+    UpdateReservationNotesFormValuesSchema,
 }
 
 export type {
     UpdateReservationNotesFormSubmit,
-    ReservationNotesFormValues,
-
+    UpdateReservationNotesFormValues,
 }
