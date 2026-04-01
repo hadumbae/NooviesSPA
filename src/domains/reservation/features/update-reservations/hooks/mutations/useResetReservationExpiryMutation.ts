@@ -6,7 +6,7 @@
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ReservationUpdateMutationKeys} from "@/domains/reservation/features/update-reservations/hooks/keys/mutationKeys.ts";
 import {
-    UpdateReservationNotesFormValues
+    UpdateReservationNotesFormSubmit,
 } from "@/domains/reservation/features/update-reservations/schemas";
 import {
     patchResetReservationExpiry,
@@ -30,7 +30,7 @@ type MutationProps = {
     /** The target reservation's unique identifier. */
     reservationID: ObjectId;
     /** The React Hook Form instance for error mapping and state management. */
-    form: UseFormReturn<UpdateReservationNotesFormValues>;
+    form: UseFormReturn<UpdateReservationNotesFormSubmit>;
     /** Standardized submission handlers and messaging configuration. */
     onSubmit: MutationOnSubmitParams<AdminReservation>;
 }

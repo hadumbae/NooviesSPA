@@ -7,7 +7,7 @@ import {
     useUpdateReservationNotesForm, useUpdateReservationNotesMutation,
 } from "@/domains/reservation/features/update-reservations/hooks";
 import {
-    UpdateReservationNotesFormValues
+    UpdateReservationNotesFormSubmit,
 } from "@/domains/reservation/features/update-reservations/schemas";
 import {Form} from "@/common/components/ui/form.tsx";
 import {ReactNode} from "react";
@@ -35,7 +35,7 @@ type FormProps = MutationOnSubmitParams<AdminReservation> & {
     uniqueKey?: string;
 
     /** Initial values used to populate the form fields upon mounting. */
-    presetValues?: Partial<UpdateReservationNotesFormValues>;
+    presetValues?: Partial<UpdateReservationNotesFormSubmit>;
 };
 
 /**
@@ -53,7 +53,7 @@ export const UpdateReservationNotesForm = (
         onSubmit: onSubmitProps,
     });
 
-    const updateNotes = (values: UpdateReservationNotesFormValues) => {
+    const updateNotes = (values: UpdateReservationNotesFormSubmit) => {
         mutation.mutate(values);
     }
 

@@ -1,6 +1,6 @@
 /**
- * @file Zod schema and type for reservation note update form submissions.
- * @filename NotesFormSubmitSchema.ts
+ * @file Zod schema and type for administrative reservation note update submissions.
+ * @filename formSchema.ts
  */
 
 import {z} from "zod";
@@ -8,10 +8,13 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEm
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 
 /**
- * Validation schema for the reservation notes update form.
+ * Validation schema for submitting administrative updates to reservation notes.
  */
 export const UpdateReservationNotesFormSubmitSchema = z.object({
-    /** The administrative text to be associated with the reservation record. */
+    /**
+     * The administrative commentary or audit notes to be persisted.
+     * Handles empty string conversion to ensure clean database entries.
+     */
     notes: preprocessEmptyStringToUndefined(
         NonEmptyStringSchema.optional().nullable()
     ),
@@ -19,6 +22,5 @@ export const UpdateReservationNotesFormSubmitSchema = z.object({
 
 /**
  * TypeScript type inferred from {@link UpdateReservationNotesFormSubmitSchema}.
- * Represents the data structure expected by the note-update service.
  */
 export type UpdateReservationNotesFormSubmit = z.infer<typeof UpdateReservationNotesFormSubmitSchema>;
