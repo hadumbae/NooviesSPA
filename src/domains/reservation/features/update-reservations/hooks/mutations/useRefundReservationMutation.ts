@@ -4,7 +4,9 @@
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {ReservationUpdateMutationKeys} from "@/domains/reservation/features/update-reservations/hooks/keys/mutationKeys.ts";
+import {
+    ReservationUpdateMutationKeys
+} from "@/domains/reservation/features/update-reservations/hooks/keys/mutationKeys.ts";
 import {
     UpdateReservationNotesFormSubmit,
 } from "@/domains/reservation/features/update-reservations/schemas";
@@ -19,26 +21,29 @@ import {UseFormReturn} from "react-hook-form";
 import {
     useUpdateAdminReservationSuccessHandler
 } from "@/domains/reservation/features/update-reservations/hooks/mutation-helpers/useUpdateAdminReservationSuccessHandler.ts";
-import {
-    useUpdateAdminReservationErrorHandler
-} from "@/domains/reservation/features/update-reservations/hooks/mutation-helpers/useUpdateAdminReservationErrorHandler.ts";
+import {useUpdateAdminReservationErrorHandler} from "@/domains/reservation/features/update-reservations/hooks";
 
 /**
- * Props for the {@link useRefundReservationMutation} hook.
+ * Properties for the {@link useRefundReservationMutation} hook.
  */
 type MutationProps = {
-    /** The target reservation's unique identifier. */
+    /** The unique MongoDB ObjectId of the reservation targeted for refund. */
     reservationID: ObjectId;
-    /** The React Hook Form instance for mapping server-side refund validation errors. */
+
+    /** The React Hook Form instance used to map server-side validation errors back to the UI. */
     form: UseFormReturn<UpdateReservationNotesFormSubmit>;
-    /** Standardized handlers for post-refund UI logic and messaging. */
+
+    /**
+     * Standardized submission handlers.
+     * Configures success/error callbacks and custom toast notification messages.
+     */
     onSubmit: MutationOnSubmitParams<AdminReservation>;
 }
 
 /**
- * Provides a mutation to transition a reservation to a 'REFUNDED' state.
- * @param props - Identity, form context, and submission callbacks.
- * @returns A TanStack Query mutation result object.
+ * A TanStack Query mutation hook that transitions a reservation to a 'REFUNDED' status.
+ * @param props - Identity, form context, and callback configurations.
+ * @returns A mutation result for managing the refund lifecycle and loading states.
  */
 export function useRefundReservationMutation(
     {reservationID, form, onSubmit}: MutationProps
@@ -54,7 +59,7 @@ export function useRefundReservationMutation(
         const {success, data, error} = validateData({
             data: result,
             schema: AdminReservationSchema,
-            message: "Invalid data after refunding reservation.",
+            message: "Invalid data structure returned after processing reservation refund.",
         });
 
         if (!success) throw error;
@@ -67,9 +72,9 @@ export function useRefundReservationMutation(
     });
 
     const onError = useUpdateAdminReservationErrorHandler({
-        form,
-        onSubmitError,
-        errorMessage,
+       form,
+       onSubmitError,
+       errorMessage,
     });
 
     return useMutation({
