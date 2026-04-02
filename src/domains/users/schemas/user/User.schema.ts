@@ -9,6 +9,7 @@ import {EmailStringSchema} from "@/common/schema/strings/EmailStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {UserRoleEnumSchema} from "@/domains/users/schemas/enums/UserRoleEnum.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {UserUniqueCodeSchema} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 
 /**
  * Foundation schema for identifying a user with minimal metadata.
@@ -16,6 +17,7 @@ import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts
 export const LeanUserSchema = z.object({
     _id: IDStringSchema,
     name: NonEmptyStringSchema,
+    uniqueCode: UserUniqueCodeSchema,
 });
 
 /**
