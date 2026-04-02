@@ -63,7 +63,7 @@ export const ReservationByCodeDateSection = (
                     {
                         STATUS_VALUES[status] >= 2 && (
                             <ReservationActiveDateCard
-                                status={status}
+                                status={status === "EXPIRED" ? "EXPIRED" : "PAID"}
                                 date={dateExpired ?? datePaid}
                                 text={status === "EXPIRED" ? "Expired" : "Paid"}
                                 icon={status === "EXPIRED" ? Timer : Receipt}
@@ -74,7 +74,7 @@ export const ReservationByCodeDateSection = (
                     {
                         STATUS_VALUES[status] >= 3 && (
                             <ReservationActiveDateCard
-                                status={status}
+                                status="CANCELLED"
                                 date={dateCancelled}
                                 text="Cancelled"
                                 icon={Cross}
@@ -85,7 +85,7 @@ export const ReservationByCodeDateSection = (
                     {
                         STATUS_VALUES[status] >= 4 && (
                             <ReservationActiveDateCard
-                                status={status}
+                                status="REFUNDED"
                                 date={dateRefunded}
                                 text="Refunded"
                                 icon={Coins}
