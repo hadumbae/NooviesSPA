@@ -11,6 +11,7 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {useResetReservationExpiryMutation} from "@/domains/reservation/features/update-reservations/hooks";
 import {AdminReservation} from "@/domains/reservation/schema/model";
 import {toast} from "react-toastify";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Properties for the {@link AdminReservationResetExpiryAction} component.
@@ -26,17 +27,12 @@ type ActionProps = {
 export const AdminReservationResetExpiryAction = (
     {reservation}: ActionProps
 ) => {
-    /** Controls the confirmation modal visibility. */
     const [isOpen, setIsOpen] = useState(false);
-    const {_id, expiresAt, uniqueCode} = reservation;
+    const {_id, expiresAt, uniqueCode, status} = reservation;
 
-    /** Formats the current expiration for display on the trigger button. */
-    const currentExpiry = expiresAt.toFormat("HH:mm:ss dd MMM, yyyy");
+    const isDisabled = status !== "RESERVED";
+    const subtext = isDisabled ? "Must Be A RESERVED Reservation" : expiresAt.toFormat("HH:mm:ss dd MMM, yyyy");
 
-    /**
-     * Post-success callback to close the modal and provide updated visual feedback.
-     * @param res - The updated reservation object returned from the server.
-     */
     const onSuccess = (res: AdminReservation) => {
         setIsOpen(false);
 
@@ -44,9 +40,6 @@ export const AdminReservationResetExpiryAction = (
         toast.success(`Expiration successfully extended. Now expires at: ${expiryDate}.`);
     }
 
-    /**
-     * Initializes the mutation with scoped success logic and standardized error handling.
-     */
     const mutation = useResetReservationExpiryMutation({
         reservationID: _id,
         onSubmit: {
@@ -65,11 +58,16 @@ export const AdminReservationResetExpiryAction = (
         >
             <Button
                 variant="primary"
-                className="w-full h-32"
+                disabled={isDisabled}
+                className={cn(
+                    "w-full h-32 text-white hover:text-white",
+                    "bg-blue-500 hover:bg-blue-800",
+                    "dark:bg-blue-600 dark:hover:bg-blue-500",
+                )}
             >
                 <div className="flex flex-col space-y-1">
                     <span className="font-bold uppercase tracking-tight">Reset Expiry Date</span>
-                    <span className="text-xs opacity-90">{currentExpiry}</span>
+                    <span className="text-xs opacity-90">{subtext}</span>
                 </div>
             </Button>
         </AdminReservationResetExpiryDialog>

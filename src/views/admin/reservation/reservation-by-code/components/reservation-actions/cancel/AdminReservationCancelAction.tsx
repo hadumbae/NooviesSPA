@@ -12,6 +12,7 @@ import {
 } from "@/views/admin/reservation/reservation-by-code/components/reservation-actions/cancel/AdminReservationCancelDialog.tsx";
 import {useState} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Properties for the {@link AdminReservationCancelAction} component.
@@ -28,9 +29,10 @@ export const AdminReservationCancelAction = (
     {reservation}: ActionProps
 ) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const {_id, notes, uniqueCode} = reservation;
+    const {_id, notes, uniqueCode, status} = reservation;
 
-
+    const isDisabled = status !== "RESERVED" && status !== "PAID";
+    const subtext = isDisabled ? "Already Cancelled" : "(Must Be An Active Reservation)";
 
     return (
         <AdminReservationCancelForm
@@ -43,14 +45,17 @@ export const AdminReservationCancelAction = (
                 setIsOpen={setIsOpen}
             >
                 <Button
-                    variant="primary"
-                    className="w-full h-32 bg-red-500 dark:bg-red-500"
+                    variant="ghost"
+                    disabled={isDisabled}
+                    className={cn(
+                        "w-full h-32 text-white hover:text-white",
+                        "bg-red-500 hover:bg-red-800",
+                        "dark:bg-red-600 dark:hover:bg-red-500",
+                    )}
                 >
                     <div className="flex flex-col space-y-1">
                         <span className="font-bold uppercase tracking-tight">Cancel Reservation</span>
-                        <span className="text-xs opacity-90">
-                            (Must Be An Active Reservation)
-                        </span>
+                        <span className="text-xs opacity-90">{subtext}</span>
                     </div>
                 </Button>
             </AdminReservationCancelDialog>
