@@ -27,10 +27,11 @@ export const ReservationStatusBadge = (
             variant="default"
             className={cn(
                 "font-semibold tracking-wide uppercase",
-                (status === "CANCELLED" || status === "REFUNDED") && "bg-red-500 hover:bg-red-600 dark:bg-red-500",
-                status === "EXPIRED" && "bg-red-800 hover:bg-red-900 dark:bg-red-700",
+                status === "CANCELLED" && "bg-gray-500 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-300",
+                status === "EXPIRED" && "hover:bg-orange-700 dark:bg-orange-600 dark:hover:bg-orange-400",
+                status === "REFUNDED" && "bg-red-500 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-500",
                 status === "PAID" && "bg-green-600 hover:bg-green-700 dark:bg-green-500",
-                status === "RESERVED" && "bg-yellow-600 hover:bg-yellow-700 dark:bg-yellow-500 text-white dark:text-black",
+                status === "RESERVED" && "bg-yellow-500 hover:bg-yellow-700 dark:bg-yellow-500 dark:hover:bg-yellow-300",
             )}
         >
             {status}
