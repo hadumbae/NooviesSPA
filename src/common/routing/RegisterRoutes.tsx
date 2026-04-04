@@ -17,6 +17,7 @@ import ClientGenreRoutes from "@/domains/genres/routing/ClientGenreRoutes.tsx";
 import BrowseShowingRoutes from "@/domains/showings/routing/BrowseShowingRoutes.tsx";
 import BrowseTheatreRoutes from "@/domains/theatres/routing/BrowseTheatreRoutes.tsx";
 import {AdminReservationRoutes} from "@/domains/reservation/views/admin";
+import {AdminCustomerRoutes} from "@/domains/customers/features/profile-overview/routing";
 
 // --- ADMIN ROUTES ---
 
@@ -27,6 +28,7 @@ const adminRoutes = [
     ...PersonRoutes,
     ...RoleTypeRoutes,
     ...AdminMovieRoutes,
+    ...AdminCustomerRoutes,
 
     ...ScreenRoutes,
     ...SeatRoutes,
