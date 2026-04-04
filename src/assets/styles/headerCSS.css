@@ -1,6 +1,26 @@
 @layer components {
-    .section-header-visual {
-        @apply primary-text text-lg font-bold border-l-4 border-primary px-2
+    .page-title {
+        @apply primary-text text-xl uppercase
+    }
+
+    .page-subtitle {
+        @apply primary-text text-lg font-semibold italic
+    }
+
+    .page-description {
+        @apply primary-text text-sm sm:text-base
+    }
+
+    .section-title {
+        @apply primary-text text-lg uppercase
+    }
+
+    .section-subtitle {
+        @apply primary-text text-base font-semibold italic
+    }
+
+    .section-description {
+        @apply primary-text text-sm
     }
 
     .subsection-title {
@@ -13,5 +33,9 @@
 
     .subsection-description {
         @apply secondary-text text-sm
+    }
+
+    .section-header-visual {
+        @apply primary-text text-lg font-bold border-l-4 border-primary px-2
     }
 }
