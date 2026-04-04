@@ -43,7 +43,7 @@ const LabeledGroup = (props: GroupProps) => {
                 {label}
             </span>
 
-            <div className="flex-1">
+            <div className="primary-text flex-1">
                 {children}
             </div>
         </div>
