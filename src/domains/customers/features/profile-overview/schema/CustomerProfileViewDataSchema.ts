@@ -5,8 +5,7 @@
 
 import {z} from "zod";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {MovieReviewSchema} from "@/domains/review/schemas/models/MovieReview.schema.ts";
-import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
+import {MovieReviewWithMovieSchema} from "@/domains/review/schemas/models/MovieReview.schema.ts";
 import {ReservationSchema} from "@/domains/reservation/schema/model";
 import {LeanUserSchema} from "@/domains/users/schemas/user";
 
@@ -28,7 +27,7 @@ const RevSchema = z.object({
     /** Total count of reviews submitted by the user. */
     total: NonNegativeNumberSchema,
     /** Array of reviews with hydrated movie and genre details. */
-    items: z.array(MovieReviewSchema.extend({movie: MovieWithGenresSchema})),
+    items: z.array(MovieReviewWithMovieSchema),
 });
 
 /**

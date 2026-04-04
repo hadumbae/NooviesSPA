@@ -14,6 +14,7 @@ import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenr
 
 /**
  * Base schema for a Movie Review using raw ObjectIDs for relational references.
+ * ---
  */
 export const MovieReviewSchema = ModelTimestampsSchema.extend({
     /** Unique database identifier for the review. */
@@ -42,7 +43,18 @@ export const MovieReviewSchema = ModelTimestampsSchema.extend({
 });
 
 /**
- * Movie review schema with fully resolved relational data.
+ * Schema for reviews where the movie reference has been hydrated.
+ * ---
+ */
+export const MovieReviewWithMovieSchema = MovieReviewSchema.extend({
+    /** Resolved movie information including genre metadata. */
+    movie: MovieWithGenresSchema,
+});
+
+
+/**
+ * Movie review schema with fully resolved relational data for both user and movie.
+ * ---
  */
 export const PopulatedMovieReviewSchema = MovieReviewSchema.extend({
     /** Resolved author profile information. */
@@ -54,6 +66,7 @@ export const PopulatedMovieReviewSchema = MovieReviewSchema.extend({
 
 /**
  * Comprehensive review schema including calculated metrics and viewer-contextual flags.
+ * ---
  */
 export const MovieReviewDetailsSchema = PopulatedMovieReviewSchema.extend({
     /** UI flag for rendering active "Like" button states. */
