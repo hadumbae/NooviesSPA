@@ -12,6 +12,8 @@ import {FallbackProps} from "react-error-boundary";
 import AppErrorDisplay from "@/common/components/boundary/app-error-boundary/display/AppErrorDisplay.tsx";
 import {isQueryError} from "@/common/utility/errors/checkErrorType.ts";
 import QueryErrorHandler from "@/common/components/boundary/query-error-fallback/QueryErrorHandler.tsx";
+import {RouteError} from "@/common/errors/RouteError.ts";
+import {RouteErrorDisplay} from "@/common/components/boundary/app-error-boundary/display/RouteErrorDisplay.tsx";
 
 type HandlerProps = FallbackProps & { className?: string };
 
@@ -24,6 +26,15 @@ const AppErrorFallback = ({error, className}: HandlerProps) => {
     if (isQueryError(error)) {
         return (
             <QueryErrorHandler
+                error={error}
+                className={className}
+            />
+        );
+    }
+
+    if (error instanceof RouteError) {
+        return (
+            <RouteErrorDisplay
                 error={error}
                 className={className}
             />
