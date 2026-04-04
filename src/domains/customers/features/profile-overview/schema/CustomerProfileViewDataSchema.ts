@@ -37,7 +37,7 @@ const RevSchema = z.object({
  */
 export const CustomerProfileViewDataSchema = z.object({
     /** Basic user profile information. */
-    user: LeanUserSchema,
+    customer: LeanUserSchema,
     /** Transactional history summary. */
     reservation: ResSchema,
     /** Engagement and feedback history summary. */
