@@ -12,7 +12,7 @@ export default function useHttpResponseErrorHandler(error: unknown) {
     if (!(error instanceof HttpResponseError)) return;
 
     useEffect(() => {
-        const {response: {status}} = error;
+        const {status} = error;
 
         if (status === 401) {
             toast.error("Unauthorized!");
