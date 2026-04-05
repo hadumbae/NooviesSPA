@@ -11,6 +11,7 @@ import {MovieReviewSchema} from "@/domains/review/schemas/models/MovieReview.sch
 
 /**
  * Zod schema representing a fully enriched movie review intended for the author's view.
+ * ---
  */
 export const MyMovieReviewSchema = MovieReviewSchema.extend({
     /** Populated author details (typically the current user's public info). */
@@ -25,5 +26,6 @@ export const MyMovieReviewSchema = MovieReviewSchema.extend({
 
 /**
  * TypeScript type inferred from {@link MyMovieReviewSchema}.
+ * Used primarily for the "My Reviews" section of a user's profile.
  */
 export type MyMovieReview = z.infer<typeof MyMovieReviewSchema>;
