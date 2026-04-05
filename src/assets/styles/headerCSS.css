@@ -1,10 +1,10 @@
 @layer components {
     .page-title {
-        @apply primary-text text-xl uppercase
+        @apply primary-text text-xl font-bold uppercase
     }
 
     .page-subtitle {
-        @apply primary-text text-lg font-semibold italic
+        @apply secondary-text text-lg font-semibold italic
     }
 
     .page-description {
@@ -16,7 +16,7 @@
     }
 
     .section-subtitle {
-        @apply primary-text text-base font-semibold italic
+        @apply secondary-text text-base font-semibold italic
     }
 
     .section-description {
