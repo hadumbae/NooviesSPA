@@ -12,7 +12,7 @@ import MovieInfoPageContent
     from "@/views/client/movies/pages/movie-info/MovieInfoPageContent.tsx";
 import { QueryDefinition } from "@/common/type/query/loader/MultiQuery.types.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
-import { ReviewDetailsByMovie } from "@/domains/review/schemas/models/ReviewDetailsByMovieSchema.ts";
+import { MovieReviewViewData } from "@/domains/review/schemas/models/MovieReviewViewDataSchema.ts";
 import {
     useMovieInfoOverviewPageQueries
 } from "@/domains/movies/hooks/pages/client/movie-info-overview/useMovieInfoOverviewPageQueries.ts";
@@ -38,7 +38,7 @@ type QueryData = {
     /**
      * Review summary data.
      */
-    reviewDetails: ReviewDetailsByMovie;
+    reviewDetails: MovieReviewViewData;
 };
 
 /**

@@ -7,9 +7,9 @@ import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieByS
 import {useFetchReviewDetailsByMovie} from "@/domains/movies/fetch/movie-reviews/useFetchReviewDetailsByMovie.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {
-    ReviewDetailsByMovie,
-    ReviewDetailsByMovieSchema
-} from "@/domains/review/schemas/models/ReviewDetailsByMovieSchema.ts";
+    MovieReviewViewData,
+    MovieReviewViewDataSchema
+} from "@/domains/review/schemas/models/MovieReviewViewDataSchema.ts";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 /**
@@ -34,7 +34,7 @@ export type MovieInfoReviewsPageData = {
     movie: MovieDetails;
 
     /** Paginated review data with aggregates */
-    reviewDetails: ReviewDetailsByMovie;
+    reviewDetails: MovieReviewViewData;
 };
 
 /**
@@ -61,6 +61,6 @@ export function useMovieInfoReviewsPageQueries(
 
     return [
         {query: movieQuery, key: "movie", schema: MovieDetailsSchema},
-        {query: reviewQuery, key: "reviewDetails", schema: ReviewDetailsByMovieSchema},
+        {query: reviewQuery, key: "reviewDetails", schema: MovieReviewViewDataSchema},
     ];
 }

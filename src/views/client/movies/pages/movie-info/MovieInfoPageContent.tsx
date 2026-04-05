@@ -15,7 +15,7 @@ import MovieOverviewFavouriteToggle
     from "@/views/client/movies/pages/movie-info/rows/MovieOverviewFavouriteToggle.tsx";
 import MovieOverviewReviews
     from "@/views/client/movies/pages/movie-info/rows/MovieOverviewReviews.tsx";
-import {ReviewDetailsByMovie} from "@/domains/review/schemas/models/ReviewDetailsByMovieSchema.ts";
+import {MovieReviewViewData} from "@/domains/review/schemas/models/MovieReviewViewDataSchema.ts";
 import MovieOverviewShowings from "@/views/client/movies/pages/movie-info/rows/MovieOverviewShowings.tsx";
 import {
     MovieCreditDetails
@@ -39,7 +39,7 @@ type ContentProps = {
     /**
      * Review summary data.
      */
-    reviewDetails: ReviewDetailsByMovie;
+    reviewDetails: MovieReviewViewData;
 };
 
 /**
