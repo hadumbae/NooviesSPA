@@ -4,7 +4,7 @@
  */
 
 import {Reservation} from "@/domains/reservation/schema/model";
-import {LeanUser} from "@/domains/users/schemas/user";
+import {LeanUserWithEmail} from "@/domains/users/schemas/user";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {
     CustomerProfileReviewSection
@@ -15,13 +15,17 @@ import {
 import {
     CustomerMovieReviewSummary
 } from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
+import {
+    CustomerProfilePageHeader
+} from "@/views/admin/customers/customer-profile-page/headers/CustomerProfilePageHeader.tsx";
+import {CustomerDetailsCard} from "@/views/admin/customers/components/card/CustomerDetailsCard.tsx";
 
 /**
  * Properties for the CustomerProfilePageContent component.
  */
 type ContentProps = {
     /** The hydrated user data for the customer being viewed. */
-    customer: LeanUser;
+    customer: LeanUserWithEmail;
 
     /** List of reservation records associated with this customer. */
     reservations: Reservation[];
@@ -48,14 +52,21 @@ export const CustomerProfilePageContent = (
 
     return (
         <PageFlexWrapper>
-            {/* Section: Activity and Bookings */}
+            <CustomerProfilePageHeader
+                name={customer.name}
+                code={customer.uniqueCode}
+            />
+
+            <CustomerDetailsCard
+                customer={customer}
+            />
+
             <CustomerProfileReservationSection
                 code={code}
                 itemCount={reservationCount}
                 reservations={reservations}
             />
 
-            {/* Section: Content Creation and Feedback */}
             <CustomerProfileReviewSection
                 code={code}
                 itemCount={reviewCount}

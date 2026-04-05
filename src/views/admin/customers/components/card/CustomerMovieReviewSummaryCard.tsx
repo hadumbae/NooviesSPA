@@ -77,7 +77,7 @@ export const CustomerMovieReviewSummaryCard = (
                     <span className="inline-flex items-center gap-2">
                         Likes • {helpfulCount} | {dateWritten}
                     </span>
-                    <LoggedLink to={`/admin/customers/${code}/review/${review.slug}`}>
+                    <LoggedLink to={`/admin/customers/${code}/reviews/${review.slug}`}>
                         <Button size="sm" variant="outline" className="h-7 px-2 text-xs">
                             Go To Details
                         </Button>

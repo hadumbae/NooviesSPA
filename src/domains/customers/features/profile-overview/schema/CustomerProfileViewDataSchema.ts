@@ -6,7 +6,7 @@
 import {z} from "zod";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {ReservationSchema} from "@/domains/reservation/schema/model";
-import {LeanUserSchema} from "@/domains/users/schemas/user";
+import {LeanUserWithEmailSchema} from "@/domains/users/schemas/user";
 import {CustomerMovieReviewSummarySchema} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
 
 /**
@@ -37,7 +37,7 @@ const RevSchema = z.object({
  */
 export const CustomerProfileViewDataSchema = z.object({
     /** Basic user profile information. */
-    customer: LeanUserSchema,
+    customer: LeanUserWithEmailSchema,
     /** Transactional history summary. */
     reservation: ResSchema,
     /** Engagement and feedback history summary. */
