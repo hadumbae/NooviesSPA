@@ -6,7 +6,7 @@
 import {RouteObject} from "react-router-dom";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
-import {CustomerProfilePage} from "@/views/admin/customers/customer-profile-page";
+import {CustomerProfilePage} from "@/views/admin/customers/pages/customer-profile-page/CustomerProfilePage.tsx";
 
 /**
  * Routes for administrative oversight of customer accounts and activity.

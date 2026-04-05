@@ -8,17 +8,17 @@ import {LeanUserWithEmail} from "@/domains/users/schemas/user";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
 import {
     CustomerProfileReviewSection
-} from "@/views/admin/customers/customer-profile-page/sections/CustomerProfileReviewSection.tsx";
+} from "@/views/admin/customers/pages/customer-profile-page/sections/CustomerProfileReviewSection.tsx";
 import {
     CustomerProfileReservationSection
-} from "@/views/admin/customers/customer-profile-page/sections/CustomerProfileReservationSection.tsx";
+} from "@/views/admin/customers/pages/customer-profile-page/sections/CustomerProfileReservationSection.tsx";
+import {
+    CustomerProfilePageHeader
+} from "@/views/admin/customers/pages/customer-profile-page/headers/CustomerProfilePageHeader.tsx";
 import {
     CustomerMovieReviewSummary
 } from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
-import {
-    CustomerProfilePageHeader
-} from "@/views/admin/customers/customer-profile-page/headers/CustomerProfilePageHeader.tsx";
-import {CustomerDetailsCard} from "@/views/admin/customers/components/card/CustomerDetailsCard.tsx";
+import {CustomerDetailsCard} from "@/views/admin/customers/components/customer-details/CustomerDetailsCard.tsx";
 
 /**
  * Properties for the CustomerProfilePageContent component.

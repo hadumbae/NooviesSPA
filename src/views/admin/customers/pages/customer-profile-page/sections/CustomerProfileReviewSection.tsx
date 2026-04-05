@@ -7,10 +7,8 @@ import {PageSectionHeader} from "@/common/components/page/PageSectionHeader.tsx"
 import {
     CustomerMovieReviewSummary
 } from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
-import {
-    CustomerMovieReviewSummaryCard
-} from "@/views/admin/customers/components/card/CustomerMovieReviewSummaryCard.tsx";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/components/customer-reviews";
 
 /**
  * Props for {@link CustomerProfileReviewSection}.

@@ -10,7 +10,7 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     ReservationStatusBadge
 } from "@/views/client/reservations/components/reservation-status/ReservationStatusBadge.tsx";
-import {CustomerReservationDialog} from "@/views/admin/customers/components/card/CustomerReservationDialog.tsx";
+import {CustomerReservationDialog} from "@/views/admin/customers/components/customer-reservations/CustomerReservationDialog.tsx";
 import {useState} from "react";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 

@@ -3,8 +3,6 @@
  * @filename CustomerProfilePage.tsx
  */
 
-import {CustomerProfilePageContent} from "@/views/admin/customers/customer-profile-page/CustomerProfilePageContent.tsx";
-import {useFetchCustomerCode} from "@/views/admin/customers/utils/fetch-customer-code/useFetchCustomerCode.ts";
 import {Loader} from "lucide-react";
 import {useFetchCustomerProfileViewData} from "@/domains/customers/features/profile-overview/fetch";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
@@ -12,6 +10,10 @@ import {
     CustomerProfileViewData,
     CustomerProfileViewDataSchema
 } from "@/domains/customers/features/profile-overview/schema";
+import {
+    CustomerProfilePageContent
+} from "@/views/admin/customers/pages/customer-profile-page/CustomerProfilePageContent.tsx";
+import {useFetchCustomerCode} from "@/domains/users/utils/fetch-customer-code/useFetchCustomerCode.ts";
 
 /**
  * Orchestrates data fetching and validation for the Customer Profile view.
