@@ -43,16 +43,6 @@ export const MovieReviewSchema = ModelTimestampsSchema.extend({
 });
 
 /**
- * Schema for reviews where the movie reference has been hydrated.
- * ---
- */
-export const MovieReviewWithMovieSchema = MovieReviewSchema.extend({
-    /** Resolved movie information including genre metadata. */
-    movie: MovieWithGenresSchema,
-});
-
-
-/**
  * Movie review schema with fully resolved relational data for both user and movie.
  * ---
  */

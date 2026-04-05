@@ -7,7 +7,6 @@ import {z} from "zod";
 import {
     MovieReviewDetailsSchema,
     MovieReviewSchema,
-    MovieReviewWithMovieSchema,
     PopulatedMovieReviewSchema
 } from "@/domains/review/schemas/models/MovieReview.schema.ts";
 
@@ -16,12 +15,6 @@ import {
  * Represents the raw document structure with non-populated relational IDs.
  */
 export type MovieReview = z.infer<typeof MovieReviewSchema>;
-
-/**
- * Movie review with hydrated movie details.
- * Useful for views focusing on a user's activity history across different films.
- */
-export type MovieReviewWithMovie = z.infer<typeof MovieReviewWithMovieSchema>;
 
 /**
  * Fully populated movie review entity.
