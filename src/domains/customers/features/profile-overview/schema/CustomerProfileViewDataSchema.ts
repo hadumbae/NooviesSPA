@@ -1,13 +1,13 @@
 /**
- * @file Zod validation schema for the Customer Profile view aggregation.
+ * @file Zod validation schema for the aggregated Customer Profile view.
  * @filename CustomerProfileViewDataSchema.ts
  */
 
 import {z} from "zod";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {MovieReviewWithMovieSchema} from "@/domains/review/schemas/models/MovieReview.schema.ts";
 import {ReservationSchema} from "@/domains/reservation/schema/model";
 import {LeanUserSchema} from "@/domains/users/schemas/user";
+import {CustomerMovieReviewSummarySchema} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
 
 /**
  * Schema for the reservation subset of the profile view.
@@ -22,12 +22,13 @@ const ResSchema = z.object({
 
 /**
  * Schema for the review subset of the profile view.
+ * ---
  */
 const RevSchema = z.object({
     /** Total count of reviews submitted by the user. */
     total: NonNegativeNumberSchema,
     /** Array of reviews with hydrated movie and genre details. */
-    items: z.array(MovieReviewWithMovieSchema),
+    items: z.array(CustomerMovieReviewSummarySchema),
 });
 
 /**
@@ -43,7 +44,8 @@ export const CustomerProfileViewDataSchema = z.object({
     review: RevSchema,
 });
 
-/** * TypeScript type inferred from the {@link CustomerProfileViewDataSchema}.
+/**
+ * TypeScript type inferred from the {@link CustomerProfileViewDataSchema}.
  * Represents the structured data used by the Profile Overview components.
  */
 export type CustomerProfileViewData = z.infer<typeof CustomerProfileViewDataSchema>;
