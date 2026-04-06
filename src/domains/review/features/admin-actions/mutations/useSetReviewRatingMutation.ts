@@ -17,6 +17,8 @@ import {
     CustomerReviewActionMutationKeys
 } from "@/domains/review/features/admin-actions/mutations/CustomerReviewActionMutationKeys.ts";
 import {SetReviewRatingFormData} from "@/domains/review/features/admin-actions/forms";
+import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {CustomerViewQueryKeys} from "@/domains/customers/features/profile-overview/fetch";
 
 /**
  * Configuration parameters for the Set Review Rating mutation.
@@ -42,6 +44,8 @@ export function useSetReviewRatingMutation(
     const {reviewID, form, onSubmit} = params;
     const {successMessage, onSubmitSuccess, onSubmitError, errorMessage} = onSubmit;
 
+    const invalidateQueries = useInvalidateQueryKeys();
+
     const setRatings = async (values: SetReviewRatingFormData) => {
         const {result} = await patchSetReviewRating({reviewID, data: values});
 
@@ -56,6 +60,10 @@ export function useSetReviewRatingMutation(
     }
 
     const onSuccess = (review: MovieReview) => {
+        invalidateQueries([
+            CustomerViewQueryKeys.profile({})
+        ], {exact: false});
+
         if (successMessage) toast.success(successMessage);
         onSubmitSuccess?.(review);
     }
