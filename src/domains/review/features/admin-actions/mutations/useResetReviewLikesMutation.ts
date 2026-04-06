@@ -17,8 +17,9 @@ import {
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {UseFormReturn} from "react-hook-form";
-import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {CustomerViewQueryKeys} from "@/domains/customers/features/profile-overview/fetch";
+import {
+    useReviewAdminActionSuccessHelper
+} from "@/domains/review/features/admin-actions/mutations/useReviewAdminActionSuccessHelper.ts";
 
 /**
  * Configuration parameters for the Reset Likes mutation.
@@ -44,8 +45,6 @@ export function useResetReviewLikesMutation(
     const {reviewID, form, onSubmit} = params;
     const {successMessage, onSubmitSuccess, onSubmitError, errorMessage} = onSubmit;
 
-    const invalidateQueries = useInvalidateQueryKeys();
-
     const resetLikes = async (values: ModerationMessageFormData) => {
         const {result} = await patchResetReviewLikes({reviewID, data: values});
 
@@ -59,14 +58,10 @@ export function useResetReviewLikesMutation(
         return data;
     }
 
-    const onSuccess = (review: MovieReview) => {
-        invalidateQueries([
-            CustomerViewQueryKeys.profile({})
-        ], {exact: false});
-
-        if (successMessage) toast.success(successMessage);
-        onSubmitSuccess?.(review);
-    }
+    const onSuccess = useReviewAdminActionSuccessHelper({
+        onSubmitSuccess,
+        successMessage,
+    });
 
     const onError = (error: unknown) => {
         if (errorMessage) toast.error(errorMessage);

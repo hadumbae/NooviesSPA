@@ -17,8 +17,9 @@ import {
     CustomerReviewActionMutationKeys
 } from "@/domains/review/features/admin-actions/mutations/CustomerReviewActionMutationKeys.ts";
 import {ResetReviewDisplayNameFormData} from "@/domains/review/features/admin-actions/forms";
-import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {CustomerViewQueryKeys} from "@/domains/customers/features/profile-overview/fetch";
+import {
+    useReviewAdminActionSuccessHelper
+} from "@/domains/review/features/admin-actions/mutations/useReviewAdminActionSuccessHelper.ts";
 
 /**
  * Configuration parameters for the Reset Display Name mutation.
@@ -44,8 +45,6 @@ export function useResetReviewDisplayNameMutation(
     const {reviewID, form, onSubmit} = params;
     const {successMessage, onSubmitSuccess, onSubmitError, errorMessage} = onSubmit;
 
-    const invalidateQueries = useInvalidateQueryKeys();
-
     const resetDisplayName = async (values: ResetReviewDisplayNameFormData) => {
         const {result} = await patchResetReviewDisplayName({reviewID, data: values});
 
@@ -59,14 +58,10 @@ export function useResetReviewDisplayNameMutation(
         return data;
     };
 
-    const onSuccess = (review: MovieReview) => {
-        invalidateQueries([
-            CustomerViewQueryKeys.profile({})
-        ], {exact: false});
-
-        if (successMessage) toast.success(successMessage);
-        onSubmitSuccess?.(review);
-    };
+    const onSuccess = useReviewAdminActionSuccessHelper({
+        onSubmitSuccess,
+        successMessage,
+    });
 
     const onError = (error: unknown) => {
         if (errorMessage) toast.error(errorMessage);
