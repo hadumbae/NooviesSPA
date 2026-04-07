@@ -17,7 +17,7 @@ import ClientGenreRoutes from "@/domains/genres/routing/ClientGenreRoutes.tsx";
 import BrowseShowingRoutes from "@/domains/showings/routing/BrowseShowingRoutes.tsx";
 import BrowseTheatreRoutes from "@/domains/theatres/routing/BrowseTheatreRoutes.tsx";
 import {AdminReservationRoutes} from "@/domains/reservation/views/admin";
-import {AdminCustomerRoutes} from "src/domains/customers/features/routing";
+import {AdminCustomerRoutes} from "@/domains/customers/features/routing";
 
 // --- ADMIN ROUTES ---
 
