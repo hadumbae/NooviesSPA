@@ -4,10 +4,10 @@
  */
 
 import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
-import {CustomerViewQueryKeys} from "@/domains/customers/features/profile-overview/fetch";
 import {toast} from "react-toastify";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {CustomerViewQueryKeys} from "@/domains/customers/features/data";
 
 /**
  * Parameters extracted from the standard mutation submission interface.

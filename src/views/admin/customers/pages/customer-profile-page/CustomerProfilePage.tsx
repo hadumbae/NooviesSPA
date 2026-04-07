@@ -20,17 +20,17 @@ import {useFetchCustomerCode} from "@/domains/users/utils/fetch-customer-code/us
  * ---
  */
 export const CustomerProfilePage = () => {
-    const code = useFetchCustomerCode();
+    const customerCode = useFetchCustomerCode();
 
-    if (!code) {
+    if (!customerCode) {
         return (
             <div className="flex items-center justify-center h-screen">
-                <Loader className="animate-spin text-muted-foreground" />
+                <Loader className="animate-spin text-muted-foreground"/>
             </div>
         );
     }
 
-    const query = useFetchCustomerProfileViewData({code});
+    const query = useFetchCustomerProfileViewData({customerCode});
 
     return (
         <ValidatedDataLoader query={query} schema={CustomerProfileViewDataSchema}>

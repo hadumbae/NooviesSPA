@@ -5,11 +5,11 @@
 
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {useQuery} from "@tanstack/react-query";
-import {CustomerViewQueryKeys} from "@/domains/customers/features/profile-overview/fetch/queryKeys.ts";
+import {CustomerViewQueryKeys} from "@/domains/customers/features/data/queryKeys.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {getFetchCustomerProfileViewData} from "@/domains/customers/features/profile-overview/repositories";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {getFetchCustomerProfileViewData} from "@/domains/customers/features/data";
 
 /**
  * Parameters for the customer profile fetch hook.
@@ -17,7 +17,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
  */
 type FetchParams = {
     /** The unique identifier (code) of the customer to retrieve. */
-    code: UserUniqueCode;
+    customerCode: UserUniqueCode;
     /** Optional TanStack Query configurations (e.g., staleTime, enabled, refetchOnWindowFocus). */
     options?: UseQueryOptions<unknown>;
 }
@@ -29,18 +29,18 @@ type FetchParams = {
  * @returns The TanStack Query result object containing the customer's aggregated view data.
  */
 export function useFetchCustomerProfileViewData(
-    {code, options}: FetchParams
+    {customerCode, options}: FetchParams
 ) {
     /** * Standardized query function handler that executes the repository
      * action with integrated error messaging.
      */
     const fetchDetails = useQueryFnHandler({
-        action: () => getFetchCustomerProfileViewData(code),
+        action: () => getFetchCustomerProfileViewData({customerCode}),
         errorMessage: "Failed to fetch customer details.",
     });
 
     return useQuery({
-        queryKey: CustomerViewQueryKeys.profile({code}),
+        queryKey: CustomerViewQueryKeys.profile({customerCode}),
         queryFn: fetchDetails,
         ...useQueryOptionDefaults(options),
     });
