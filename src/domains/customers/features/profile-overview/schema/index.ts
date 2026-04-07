@@ -3,10 +3,17 @@ import {
     CustomerProfileViewDataSchema
 } from "@/domains/customers/features/profile-overview/schema/CustomerProfileViewDataSchema.ts";
 
+import {
+    CustomerReviewViewData,
+    CustomerReviewViewSchema
+} from "@/domains/customers/features/profile-overview/schema/CustomerReviewViewSchema.ts";
+
 export {
-    CustomerProfileViewDataSchema
+    CustomerProfileViewDataSchema,
+    CustomerReviewViewSchema,
 }
 
 export type {
-    CustomerProfileViewData
+    CustomerProfileViewData,
+    CustomerReviewViewData,
 }

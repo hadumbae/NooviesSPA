@@ -11,8 +11,6 @@ import {LeanUserSchema} from "@/domains/users/schemas/user/User.schema.ts";
 import {ModelTimestampsSchema} from "@/common/schema/models/ModelTimestampsSchema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
-import {MovieReviewModerationLogSchema} from "@/domains/review/features/moderation/schema";
 import {SlugStringSchema} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {MovieReviewUniqueCodeSchema} from "@/domains/review/features/codes";
 
@@ -47,9 +45,6 @@ export const MovieReviewSchema = ModelTimestampsSchema.extend({
 
     /** Visibility status for public feeds. */
     isPublic: BooleanValueSchema,
-
-    /** History of administrative actions taken on this review. */
-    moderationLogs: generateArraySchema(MovieReviewModerationLogSchema),
 
     /** URL-friendly identifier for the review page. */
     slug: SlugStringSchema,
