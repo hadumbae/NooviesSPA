@@ -6,11 +6,11 @@
 import {
     CustomerReviewPageContent
 } from "@/views/admin/customers/pages/customer-review-page/CustomerReviewPageContent.tsx";
-import {useCustomerReviewRouteParams} from "@/domains/customers/features/movie-review/hooks";
+import {useCustomerReviewRouteParams} from "src/domains/customers/features/movie-review/hooks";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import {useFetchCustomerReviewViewData} from "@/domains/customers/features/movie-review/fetch";
-import {CustomerReviewViewData, CustomerReviewViewSchema} from "@/domains/customers/features/movie-review/schemas";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {CustomerReviewViewData} from "@/domains/customers/features/movie-review/schemas";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /**
  * Orchestrates the data fetching and validation lifecycle for the Review Moderation view.
@@ -28,13 +28,13 @@ export const CustomerReviewPage = () => {
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={CustomerReviewViewSchema}>
+        <QueryDataLoader query={query}>
             {({review, customer}: CustomerReviewViewData) => (
                 <CustomerReviewPageContent
                     customer={customer}
                     review={review}
                 />
             )}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 };

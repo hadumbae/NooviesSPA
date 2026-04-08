@@ -10,6 +10,7 @@ import {
     GetFetchCustomerReviewViewDataConfig
 } from "@/domains/customers/features/data/repository.types.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {CustomerReviewViewData} from "@/domains/customers/features/movie-review/schemas";
 
 /**
  * Base endpoint for administrative customer view data aggregation.
@@ -41,11 +42,11 @@ export const getFetchCustomerProfileViewData = (
  */
 export const getFetchCustomerReviewViewData = (
     {customerCode, reviewCode}: GetFetchCustomerReviewViewDataConfig
-): Promise<RequestReturns<unknown>> => {
+): Promise<RequestReturns<CustomerReviewViewData>> => {
     const url = buildQueryURL({
         baseURL,
         path: `profile-details/${customerCode}/review/${reviewCode}`,
     });
 
-    return useFetchAPI({method: "GET", url});
+    return useFetchAPI<CustomerReviewViewData>({method: "GET", url});
 }
