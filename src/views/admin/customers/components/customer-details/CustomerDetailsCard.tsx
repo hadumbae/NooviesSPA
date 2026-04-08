@@ -7,6 +7,8 @@ import {LeanUserWithEmail} from "@/domains/users/schemas/user";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Properties for the CustomerDetailsCard component.
@@ -60,9 +62,15 @@ export const CustomerDetailsCard = (
                     <span className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
                         Customer Access Code
                     </span>
-                    <h4 className="text-xl font-extrabold font-oswald tracking-wider text-primary">
-                        {uniqueCode}
-                    </h4>
+
+                    <LoggedLink to={`/admin/customers/${uniqueCode}/profile`}>
+                        <h4 className={cn(
+                            "text-xl font-extrabold font-oswald tracking-wider text-primary",
+                            "hover:underline hover:underline-offset-8"
+                        )}>
+                            {uniqueCode}
+                        </h4>
+                    </LoggedLink>
                 </div>
             </CardContent>
         </Card>
