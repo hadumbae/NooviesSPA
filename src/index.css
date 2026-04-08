@@ -1,6 +1,7 @@
 @import "assets/styles/headerCSS.css";
 @import "assets/styles/textCSS.css";
 @import "assets/styles/buttonCSS.css";
+@import "assets/styles/linkCSS.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
