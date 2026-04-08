@@ -8,8 +8,6 @@ import {MovieWithRatingSchema} from "@/domains/movies/schema/movie/MovieWithRati
 import {
     CustomerMovieReviewSummarySchema
 } from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
-import {MovieReviewModerationLogSchema} from "@/domains/review/features/moderation/schema";
 
 /**
  * Enriched review schema specifically for customer-centric administrative or profile views.
@@ -18,12 +16,6 @@ import {MovieReviewModerationLogSchema} from "@/domains/review/features/moderati
 export const CustomerMovieReviewSchema = CustomerMovieReviewSummarySchema.extend({
     /** Populated movie details including genres and system-wide rating averages. */
     movie: MovieWithRatingSchema,
-
-    /**
-     * Chronological history of administrative actions taken on this specific review.
-     * Useful for support staff viewing a customer's history.
-     */
-    moderationLogs: generateArraySchema(MovieReviewModerationLogSchema),
 });
 
 /**
