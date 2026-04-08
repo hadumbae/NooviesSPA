@@ -1,7 +1,6 @@
 import {useMutation} from "@tanstack/react-query";
 import {UserPasswordUpdateSubmit} from "@/domains/users/schemas/UserPasswordUpdateSubmitSchema.ts";
 import UserRepository from "@/domains/users/repositories/UserRepository.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {toast} from "react-toastify";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
@@ -12,24 +11,8 @@ interface IParams {
 
 export default function useUpdateUserPasswordSubmitMutation({userID, onSubmit}: IParams) {
     const submitPasswordUpdate = async (data: UserPasswordUpdateSubmit) => {
-        const {response} = await UserRepository.updatePassword({userID, data});
-
-        if (response.status === 200) return;
-
-        const messages: Record<number, string> = {
-            401: "Oops. Unauthorized.",
-            403: "Oops. Unauthorized.",
-            404: "Oops. Failed To Find User. Please try again later.",
-        }
-
-        const message = messages[response.status] ?? "Oops. Failed To Update Your Password. Please try again later.";
-        throw new HttpResponseError({
-            url: response.url,
-            headers: response.headers,
-            status: response.status,
-            statusText: response.statusText,
-            message,
-        });
+        const {result} = await UserRepository.updatePassword({userID, data});
+        return result;
     }
 
     const onSuccess = () => {

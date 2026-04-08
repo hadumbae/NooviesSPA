@@ -1,46 +1,51 @@
+/**
+ * @file Legacy handler for fetch operations and basic error propagation.
+ * @filename HandleFetchError.ts
+ * * @deprecated This utility is redundant. Its error-handling responsibilities
+ * (throwing HttpResponseError) have been consolidated into `useFetchAPI`,
+ * and data unwrapping is now handled by `useQueryFnHandler`.
+ */
+
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-
-import {ErrorResponseSchema} from "@/common/schema/features/failed-response/ErrorResponseSchema.ts";
-
-type HandlerParams = { fetchQueryFn: () => Promise<RequestReturns>, message?: string }
 
 /**
- * Executes a fetch function and handles HTTP errors by throwing an `HttpResponseError` if the response is not OK.
- *
- * @param {Object} params - The parameters for the function.
- * @param {() => Promise<RequestReturns>} params.fetchQueryFn - An asynchronous function that performs the fetch operation and returns a `FetchReturns` object.
- * @param {string} [params.message] - Optional custom error message to be used if the fetch response is not OK.
- *
- * @returns {Promise<RequestReturns>} A promise that resolves with the `FetchReturns` object if the fetch is successful.
- *
- * @throws {HttpResponseError} Throws an `HttpResponseError` if the HTTP response status is not OK (i.e., not in the range 200–299).
+ * Parameters for the HandleFetchError utility.
+ * ---
+ */
+type HandlerParams = {
+    /** The asynchronous fetch operation to execute. */
+    fetchQueryFn: () => Promise<RequestReturns>,
+    /** * Optional custom error message.
+     * @deprecated Consolidated into the `useQueryFnHandler` error configuration.
+     */
+    message?: string
+}
+
+/**
+ * Executes a fetch function and unwraps the result into a RequestReturns envelope.
+ * ---
+ * ### Status: Redundant
+ * Historically, this function was responsible for verifying `response.ok`
+ * and throwing `HttpResponseError`. In the current architecture:
+ * 1. **`useFetchAPI`** internalizes the check for `!response.ok` and throws immediately.
+ * 2. **`useQueryFnHandler`** manages the extraction of data and the mapping of
+ * user-friendly error messages for TanStack Query.
+ * ---
+ * @param params - Configuration containing the fetch action.
+ * @returns {Promise<RequestReturns>} A promise resolving to the standard response envelope.
  */
 const HandleFetchError = async (
     params: HandlerParams
 ): Promise<RequestReturns> => {
-    const {message, fetchQueryFn} = params;
-    const {response, result} = await fetchQueryFn();
+    const {fetchQueryFn} = params;
 
-    if (!response.ok) {
-        let errorMessage = message ?? "Error. Please try again.";
-
-        if (!message) {
-            const {data, success} = ErrorResponseSchema.safeParse(result);
-            if (success) errorMessage = data?.message;
-        }
-
-        throw new HttpResponseError({
-            url: response.url,
-            headers: response.headers,
-            status: response.status,
-            statusText: response.statusText,
-            message: errorMessage});
-    }
+    /** * In the current stack, useFetchAPI is called within this fn.
+     * useFetchAPI will have already thrown if the response was bad.
+     */
+    const {result} = await fetchQueryFn();
 
     return {
-        response,
-        result,
+        result
     };
 }
 

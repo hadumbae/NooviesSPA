@@ -1,59 +1,53 @@
+/**
+ * @file Legacy handler for processing API query responses.
+ * @filename handleQueryResponse.ts
+ * * @deprecated This utility has been made redundant by the modern data-fetching
+ * pipeline. Error throwing is now handled by `useFetchAPI`, and result unwrapping
+ * is managed by `useQueryFnHandler`.
+ */
+
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import throwResponseError from "@/common/utility/errors/throwResponseError.ts";
 
 /**
  * Parameters for {@link handleQueryResponse}.
- *
+ * ---
  * @template TReturns - The type of the successful response payload.
  */
 type APIParams<TReturns = unknown> = {
     /**
      * The async function that performs the fetch or API request.
-     * Must return a {@link RequestReturns} object containing:
-     * - `response` - the raw `Response` object.
-     * - `result` - the parsed response body.
+     * Must return a {@link RequestReturns} object.
      */
     action: () => Promise<RequestReturns<TReturns>>;
 
     /**
-     * Optional custom error message to use if the response is not OK.
-     * Defaults to `"Failed to fetch data. Please try again."`.
+     * Optional custom error message.
+     * @deprecated Use the configuration object in `useQueryFnHandler` instead.
      */
     errorMessage?: string;
 };
 
 /**
- * Handles the result of an API query by:
- * - Executing the provided `action`.
- * - Throwing an `HttpResponseError` (via {@link throwResponseError}) if the response is not OK.
- * - Returning the parsed result on success.
- *
+ * Handles the result of an API query by extracting the result from the request envelope.
+ * ---
+ * ### Status: Redundant
+ * Historically, this function acted as the guard that invoked `throwResponseError`
+ * if an API call failed. In the current architecture:
+ * * 1. **Automated Error Escalation:** `useFetchAPI` now internally captures
+ * `!response.ok` states and throws the appropriate `HttpResponseError` before
+ * this handler is even reached.
+ * 2. **Pipeline Consolidation:** `useQueryFnHandler` is now the preferred
+ * wrapper for `useQuery` functions, as it handles both the extraction of `result`
+ * and the application of standardized error messages.
+ * ---
  * @template TReturns - Type of the successful response payload.
- *
- * @param params - {@link APIParams} containing the action and optional error message.
- *
- * @returns The parsed API response result.
- *
- * @throws {@link HttpResponseError} - If the HTTP response is not OK.
- * @throws {@link ParseError} - If the error response fails to parse.
- *
- * @example
- * ```ts
- * const userData = await handleQueryResponse({
- *   action: () => fetchUser(userId),
- *   errorMessage: "Unable to load user data."
- * });
- * ```
+ * @param params - Configuration containing the API action.
+ * @returns {Promise<TReturns>} The unwrapped result from the API request.
  */
-export default async function handleQueryResponse<TReturns = unknown>(params: APIParams<TReturns>) {
-    const {action, errorMessage} = params;
-
-    const {response, result} = await action();
-
-    if (!response.ok) {
-        const message = errorMessage || "Failed to fetch data. Please try again.";
-        throwResponseError({response, result, message});
-    }
-
+export default async function handleQueryResponse<TReturns = unknown>(
+    params: APIParams<TReturns>
+): Promise<TReturns> {
+    const {action} = params;
+    const {result} = await action();
     return result;
 }
