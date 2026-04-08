@@ -42,6 +42,8 @@ export function useFetchCustomerCode(): UserUniqueCode | null {
                 msg: "Failed to fetch customer's unique code.",
                 context,
             });
+
+            throw error;
         }
     }, [success, code])
 

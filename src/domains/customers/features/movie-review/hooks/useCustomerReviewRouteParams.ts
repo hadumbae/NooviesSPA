@@ -33,15 +33,10 @@ export function useCustomerReviewRouteParams(): CustomerReviewRouteParams | null
                 {key: "errors", value: error.errors},
             ]);
 
-            const invalidData = {
-                uniqueCode: params.uniqueCode,
-                reviewCode: params.reviewCode,
-            };
-
             const routeError = new RouteError({
                 headerText: "Invalid Route Params",
                 message: "Invalid Params, Codes Required For Customer And Review",
-                description: `Valid customer [uniqueCode] and review [reviewCode] required. Received [${JSON.stringify(invalidData)}] instead.`
+                description: `Valid customer [uniqueCode] and review [reviewCode] required.`
             });
 
             Logger.error({
@@ -50,6 +45,8 @@ export function useCustomerReviewRouteParams(): CustomerReviewRouteParams | null
                 msg: "Failed to fetch route params.",
                 context,
             });
+
+            throw routeError;
         }
     }, [success, error, pathname, search, hash, params]);
 
