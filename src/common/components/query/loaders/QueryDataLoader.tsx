@@ -31,7 +31,7 @@ export const QueryDataLoader = <TData = unknown>(params: LoaderProps<TData>) => 
         loaderComponent: Loader = PageLoader,
     } = params;
 
-    if (isPending || (isFetching && !data)) {
+    if (isPending || isFetching || !data) {
         return <Loader/>;
     }
 
@@ -41,7 +41,7 @@ export const QueryDataLoader = <TData = unknown>(params: LoaderProps<TData>) => 
 
     return (
         <>
-            {children(data as TData)}
+            {children(data)}
         </>
     );
 };
