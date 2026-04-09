@@ -1,3 +1,8 @@
+/**
+ * @file Zod schema and type for transforming UTC ISO 8601 strings into Luxon DateTime instances.
+ * @filename UTCISO8601DateTimeSchema.ts
+ */
+
 import {DateTime} from "luxon";
 import {
     UTCISO8601StringSchema
@@ -5,46 +10,15 @@ import {
 import {z} from "zod";
 
 /**
- * **UTC ISO 8601 → Luxon DateTime Schema**
- *
- * A schema that:
- * 1. Validates a string using {@link UTCISO8601StringSchema}.
- * 2. Transforms the validated string into a `luxon.DateTime` instance
- *    representing the **exact same UTC instant**.
- *
- * - The resulting `DateTime` object will have:
- *   - `zone` set to `"UTC"`.
- *   - No timezone offset applied (unlike local time parsing).
- *
- * @example
- * ```ts
- * const dt = UTCISO8601DateTimeSchema.parse("2025-10-29T09:00:00Z");
- * console.log(dt.toISO()); // "2025-10-29T09:00:00.000Z"
- * console.log(dt.zoneName); // "UTC"
- * ```
+ * A Zod schema that validates a UTC string and transforms it into a Luxon DateTime instance.
+ * ---
  */
-export const UTCISO8601DateTimeSchema = UTCISO8601StringSchema.transform(
-    (dateString) => DateTime.fromISO(dateString),
-);
+export const UTCISO8601DateTimeSchema = UTCISO8601StringSchema
+    .transform((dateString) => DateTime.fromISO(dateString) as DateTime<true>)
+    .refine((date) => date.isValid, { message: "Invalid Luxon DateTime produced." });
 
 /**
- * **UTC ISO 8601 DateTime**
- *
- * Represents a **Luxon `DateTime` object** derived from a valid UTC ISO 8601 string.
- *
- * - Internally parsed using `DateTime.fromISO()` from the Luxon library.
- * - The resulting `DateTime` instance is in the **UTC timezone** (`zoneName: "UTC"`).
- * - It **does not carry any local timezone information**, ensuring that it
- *   represents the same absolute instant globally.
- *
- * Use this type when **performing time-based calculations** or **rendering
- * human-readable times** within the application.
- *
- * @example
- * ```ts
- * const dt: UTCISO8601DateTime = DateTime.fromISO("2025-10-29T09:00:00Z");
- * console.log(dt.toISO()); // "2025-10-29T09:00:00.000Z"
- * console.log(dt.zoneName); // "UTC"
- * ```
+ * TypeScript type inferred from {@link UTCISO8601DateTimeSchema}.
+ * ---
  */
 export type UTCISO8601DateTime = z.infer<typeof UTCISO8601DateTimeSchema>;
