@@ -6,13 +6,15 @@
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ResetReviewDisplayNameFormData} from "@/domains/review/features/admin-actions/forms";
 import {useState} from "react";
-import {ResetReviewDisplayNameForm} from "@/views/admin/moviereviews/forms";
 import {Button} from "@/common/components/ui/button.tsx";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {
     ResetReviewDisplayNameDialog
 } from "@/views/admin/customers/features/customer-review-actions/reset-display-name/ResetReviewDisplayNameDialog.tsx";
+import {
+    ResetReviewDisplayNameForm
+} from "@/views/admin/customers/features/customer-review-actions/reset-display-name/ResetReviewDisplayNameForm.tsx";
 
 /**
  * Props for the ResetReviewDisplayNameAction component.

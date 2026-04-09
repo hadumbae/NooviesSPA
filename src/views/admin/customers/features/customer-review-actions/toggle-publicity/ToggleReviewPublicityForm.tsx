@@ -1,56 +1,57 @@
 /**
- * @file Container component for the "Toggle Review Publicity" moderation form.
+ * @file Form wrapper for administrative operations that toggle the visibility of a movie review.
  * @filename ToggleReviewPublicityForm.tsx
  */
 
-import {Form} from "@/common/components/ui/form.tsx";
-import {useToggleReviewPublicityMutation} from "@/domains/review/features/admin-actions/mutations";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {ReactNode} from "react";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {useToggleReviewPublicityMutation} from "@/domains/review/features/admin-actions/mutations";
 import {AdminReviewActionFormContextProvider} from "@/domains/review/features/admin-actions/context";
+import {Form} from "@/common/components/ui/form.tsx";
 import {ModerationMessageFormData, useModerationMessageForm} from "@/common/features/moderation/forms";
 
 /**
  * Props for the ToggleReviewPublicityForm component.
  */
 type FormProps = MutationOnSubmitParams<MovieReview> & {
-    /** Nested UI components (e.g., justification text area, status indicators). */
+    /** The nested UI components, typically including the dialog trigger and audit fields. */
     children: ReactNode;
-    /** The ID of the review whose visibility is being toggled. */
-    reviewID: ObjectId;
-    /** Optional identifier to distinguish the form instance in the DOM. */
+    /** Unique identifier suffix to ensure DOM ID uniqueness in views containing multiple actions. */
     uniqueKey?: string;
-    /** Initial values for the moderation justification. */
+    /** The target review's database ID. */
+    reviewID: ObjectId;
+    /** Optional initial state for the moderation message field. */
     presetValues?: Partial<ModerationMessageFormData>;
 };
 
 /**
- * Orchestrates the administrative action of toggling a review between public and private.
+ * Orchestrates the data flow and submission logic for toggling review visibility.
  * ---
  */
 export const ToggleReviewPublicityForm = (
-    {children, uniqueKey, reviewID, presetValues, ...onSubmitProps}: FormProps
+    {children, uniqueKey, reviewID, presetValues, ...onSubmitParams}: FormProps
 ) => {
     const formKey = `toggle-review-publicity-${uniqueKey ?? "form"}`;
-
     const form = useModerationMessageForm({presetValues});
-
     const {mutate} = useToggleReviewPublicityMutation({
-        form,
         reviewID,
-        onSubmit: onSubmitProps
+        form,
+        onSubmit: onSubmitParams
     });
 
-    const onSubmit = (values: ModerationMessageFormData) => {
+    const togglePublicity = (values: ModerationMessageFormData) => {
         mutate(values);
     };
 
     return (
-        <AdminReviewActionFormContextProvider formID={formKey} reviewID={reviewID}>
+        <AdminReviewActionFormContextProvider reviewID={reviewID} formID={formKey}>
             <Form {...form}>
-                <form id={formKey} onSubmit={form.handleSubmit(onSubmit)}>
+                <form
+                    id={formKey}
+                    onSubmit={form.handleSubmit(togglePublicity)}
+                >
                     {children}
                 </form>
             </Form>
