@@ -10,9 +10,8 @@ import {MovieReviewUniqueCode} from "@/domains/review/features/codes";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {CustomerViewQueryKeys, getFetchCustomerReviewViewData} from "@/domains/customers/features/data";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {CustomerReviewViewData, CustomerReviewViewSchema} from "@/domains/customers/features/movie-review/schemas";
-import {logZodErrors} from "@/common/hooks/validation/validate-data/logZodErrors.ts";
+import {buildQueryFn} from "@/common/features/validate-fetch-data";
 
 /**
  * Configuration for the customer review data fetch.
@@ -35,25 +34,10 @@ type FetchParams = {
 export function useFetchCustomerReviewViewData(
     {customerCode, reviewCode, options}: FetchParams
 ): UseQueryResult<CustomerReviewViewData, HttpResponseError> {
-
-    /**
-     * Encapsulated fetch and validation logic.
-     */
-    const fetchDetails = async (): Promise<CustomerReviewViewData> => {
-        const {result} = await getFetchCustomerReviewViewData({customerCode, reviewCode});
-
-        const {data, success, error} = validateData({
-            data: result,
-            schema: CustomerReviewViewSchema
-        });
-
-        if (!success) {
-            logZodErrors({raw: result, errors: error.errors});
-            throw error;
-        }
-
-        return data;
-    };
+    const fetchDetails = buildQueryFn({
+        action: () => getFetchCustomerReviewViewData({customerCode, reviewCode}),
+        schema: CustomerReviewViewSchema,
+    });
 
     return useQuery({
         queryKey: CustomerViewQueryKeys.review({customerCode, reviewCode}),
