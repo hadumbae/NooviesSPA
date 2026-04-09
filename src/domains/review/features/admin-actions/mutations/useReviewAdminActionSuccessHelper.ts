@@ -29,8 +29,11 @@ export const useReviewAdminActionSuccessHelper = (
     const invalidateQueries = useInvalidateQueryKeys();
 
     return (review: MovieReview) => {
+        const {uniqueCode} = review;
+
         invalidateQueries([
-            CustomerViewQueryKeys.profile({})
+            CustomerViewQueryKeys.profile({}),
+            CustomerViewQueryKeys.review({reviewCode: uniqueCode}),
         ], {exact: false});
 
         if (successMessage) {
