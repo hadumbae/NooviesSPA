@@ -27,21 +27,14 @@ type LoaderProps<TData = unknown> = {
 export const QueryDataLoader = <TData = unknown>(params: LoaderProps<TData>) => {
     const {
         children,
-        query: {data, isPending, isFetching, isError, error},
+        query: {data, isPending, isError, error},
         loaderComponent: Loader = PageLoader,
     } = params;
 
-    if (isPending || isFetching || !data) {
-        return <Loader/>;
-    }
-
-    if (isError) {
-        throw error;
-    }
+    if (isPending || !data) return <Loader/>;
+    if (isError) throw error;
 
     return (
-        <>
-            {children(data)}
-        </>
+        <>{children(data)}</>
     );
 };
