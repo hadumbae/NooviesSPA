@@ -11,19 +11,23 @@ import {ReactNode} from "react";
  */
 type SpanProps = {
     /** The inline text or elements to render with primary styling. */
-    children: ReactNode;
+    children?: ReactNode;
 
     /** Optional CSS classes for custom overrides (e.g., font weight, colors). */
     className?: string;
+
+    /** Optional fallback string to render if no children are provided. */
+    text?: string;
 };
 
 /**
  * Renders a primary-styled `<span>` element for emphasized data.
+ * ---
  */
-const PrimarySpan = ({children, className}: SpanProps) => {
+const PrimarySpan = ({children, className, text}: SpanProps) => {
     return (
         <span className={cn("primary-text", className)}>
-            {children}
+            {children ?? text}
         </span>
     );
 };

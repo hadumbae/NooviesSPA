@@ -11,19 +11,23 @@ import {ReactNode} from "react";
  */
 type SpanProps = {
     /** The inline content to render with secondary/subtle styling. */
-    children: ReactNode;
+    children?: ReactNode;
 
-    /** Optional CSS classes for additional formatting. */
+    /** Optional CSS classes for additional formatting (e.g., margins, alignment). */
     className?: string;
+
+    /** Optional fallback string to render if no children are provided. */
+    text?: string;
 };
 
 /**
  * Renders a secondary-styled `<span>` element for supporting information.
+ * ---
  */
-const SecondarySpan = ({children, className}: SpanProps) => {
+const SecondarySpan = ({children, className, text}: SpanProps) => {
     return (
         <span className={cn("secondary-text text-sm", className)}>
-            {children}
+            {children ?? text}
         </span>
     );
 };
