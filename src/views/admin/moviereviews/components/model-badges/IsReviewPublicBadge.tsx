@@ -30,7 +30,7 @@ export const IsReviewPublicBadge = (
             variant="outline"
             className={cn(
                 "select-none font-semibold text-white dark:text-white",
-                !isPublic
+                isPublic
                     ? "bg-green-500 dark:bg-green-600 "
                     : "bg-neutral-400 dark:bg-neutral-600",
                 className
