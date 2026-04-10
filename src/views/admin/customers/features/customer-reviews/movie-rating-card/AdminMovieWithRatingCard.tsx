@@ -9,7 +9,7 @@ import {cn} from "@/common/lib/utils.ts";
 import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
-import {AdminMovieWithRatingCardStat} from "@/views/admin/customers/features/customer-reviews/AdminMovieWithRatingCardStat.tsx";
+import {AdminMovieWithRatingCardStat} from "@/views/admin/customers/features/customer-reviews/movie-rating-card/AdminMovieWithRatingCardStat.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {VerticalDivider} from "@/views/common/components/VerticalDivider.tsx";
 import {MovieRatingBadge} from "@/views/admin/moviereviews/components/MovieRatingBadge.tsx";
