@@ -8,7 +8,7 @@ import {
     CustomerMovieReviewSummary
 } from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
-import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/components/customer-reviews";
+import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/features/customer-reviews/movie-review-card";
 
 /**
  * Props for {@link CustomerProfileReviewSection}.
