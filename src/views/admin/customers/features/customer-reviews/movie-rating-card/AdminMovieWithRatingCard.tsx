@@ -12,8 +12,8 @@ import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391Languag
 import {AdminMovieWithRatingCardStat} from "@/views/admin/customers/features/customer-reviews/movie-rating-card/AdminMovieWithRatingCardStat.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {VerticalDivider} from "@/views/common/components/VerticalDivider.tsx";
-import {MovieRatingBadge} from "@/views/admin/moviereviews/components/MovieRatingBadge.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {MovieRatingBadge} from "@/views/admin/moviereviews/components/model-badges";
 
 /**
  * Props for the AdminMovieWithRatingCard component.
