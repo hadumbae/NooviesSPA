@@ -16,6 +16,7 @@ module.exports = {
 			oswald: ['Oswald', 'sans-serif'],
 			spaceGrotesk: ['Space Grotesk', 'sans-serif'],
 			roboto: ['Roboto', 'sans-serif'],
+			suseMono: ['SUSE Mono', 'sans-serif'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
