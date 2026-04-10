@@ -47,6 +47,17 @@ export const CustomerReviewPageBreadcrumbs = (
                     <BreadcrumbSeparator />
 
                     <BreadcrumbItem>
+                        <LoggedLink
+                            className="breadcrumb-link"
+                            to={`/admin/customers/${customerCode}/reviews`}
+                        >
+                            Reviews
+                        </LoggedLink>
+                    </BreadcrumbItem>
+
+                    <BreadcrumbSeparator />
+
+                    <BreadcrumbItem>
                         <BreadcrumbPage>
                             Review {reviewCode}
                         </BreadcrumbPage>
