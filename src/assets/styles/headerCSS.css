@@ -38,4 +38,10 @@
     .section-header-visual {
         @apply primary-text text-lg font-bold border-l-4 border-primary px-2
     }
+
+    .section-header-link {
+        @apply
+        inline-flex items-center gap-2
+        [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:hover:text-primary
+    }
 }
