@@ -1,39 +1,36 @@
 /**
  * @file Styled paragraph wrapper for movie review content.
- *
- * MovieReviewText.tsx
+ * @filename MovieReviewText.tsx
  */
 
 import {cn} from "@/common/lib/utils.ts";
-import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {ReactNode} from "react";
 
 /**
- * Props for MovieReviewText.
+ * Props for the {@link MovieReviewText} component.
  */
 type TextProps = {
-    /**
-     * Review content.
-     */
-    children: ReactNode;
+    /** The review content (supports nested elements like line breaks or highlights). */
+    children?: ReactNode;
 
-    /**
-     * Additional classes applied to the paragraph.
-     */
+    /** Additional CSS classes for typography or spacing overrides. */
     className?: string;
+
+    /** Optional fallback string to render if no children are provided. */
+    text?: string;
 };
 
 /**
- * Renders formatted review text.
+ * Renders formatted review text with standard administrative styling.
+ * ---
  */
-const MovieReviewText = ({children, className}: TextProps) => {
+const MovieReviewText = ({children, className, text}: TextProps) => {
     return (
         <p className={cn(
-            PrimaryTextBaseCSS,
-            "text-justify text-sm md:text-base",
+            "primary-text italic leading-relaxed",
             className
         )}>
-            {children}
+            {children ?? text}
         </p>
     );
 };
