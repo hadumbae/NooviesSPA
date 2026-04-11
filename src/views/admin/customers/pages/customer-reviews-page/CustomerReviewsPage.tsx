@@ -7,7 +7,9 @@ import {useParsedPaginationValue} from "@/common/features/fetch-pagination-searc
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {useFetchCustomerReviewsViewData} from "@/domains/customers/features/movie-reviews/fetch";
 import {useFetchCustomerCode} from "@/domains/users/utils/fetch-customer-code/useFetchCustomerCode.ts";
-import {CustomerReviewsPageContent} from "@/views/admin/customers/pages/customer-reviews-page/CustomerReviewsPageContent.tsx";
+import {
+    CustomerReviewsPageContent
+} from "@/views/admin/customers/pages/customer-reviews-page/CustomerReviewsPageContent.tsx";
 import {Loader} from "lucide-react";
 
 /** Number of reviews to display per page. */
@@ -17,7 +19,7 @@ const REVIEWS_PER_PAGE = 10;
  * Renders the customer reviews page by fetching customer details and reviews
  * based on the current URL pagination parameters and customer code.
  */
-export const CustomerReviewsPage = () => {
+export function CustomerReviewsPage() {
     const customerCode = useFetchCustomerCode();
 
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
@@ -46,4 +48,4 @@ export const CustomerReviewsPage = () => {
             )}
         </QueryDataLoader>
     );
-};
+}
