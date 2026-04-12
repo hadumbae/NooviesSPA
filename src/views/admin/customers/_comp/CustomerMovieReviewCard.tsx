@@ -5,15 +5,11 @@
 
 import {CustomerMovieReview} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {UniqueReviewCodeBadge} from "@/views/admin/moviereviews/components/model-badges/UniqueReviewCodeBadge.tsx";
-import {
-    DisplayNameBadge,
-    IsReviewPublicBadge,
-    MovieRatingBadge
-} from "@/views/admin/moviereviews/components/model-badges";
+import {UniqueReviewCodeBadge} from "@/views/admin/reviews/_comp/UniqueReviewCodeBadge.tsx";
 import IsRecommendedBadge from "@/views/client/movie-reviews/components/badges/IsRecommendedBadge.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import MovieReviewText from "@/views/client/movie-reviews/components/text/MovieReviewText.tsx";
+import {DisplayNameBadge, IsReviewPublicBadge, MovieRatingBadge} from "@/views/admin/reviews/_comp";
 
 /**
  * Props for the CustomerMovieReviewCard component.

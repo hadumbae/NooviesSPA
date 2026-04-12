@@ -11,7 +11,7 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     MovieReviewModerationActionBadge,
     MovieReviewModerationLogAccentBar
-} from "@/views/admin/moviereviews/_comp";
+} from "@/views/admin/reviews/_comp";
 
 /** Props for the CustomerReviewLogCard component. */
 type CardProps = {

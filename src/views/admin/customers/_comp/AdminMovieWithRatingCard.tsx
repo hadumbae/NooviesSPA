@@ -13,7 +13,7 @@ import {AdminMovieWithRatingCardStat} from "@/views/admin/customers/_comp/AdminM
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {VerticalDivider} from "@/views/common/components/VerticalDivider.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {MovieRatingBadge} from "@/views/admin/moviereviews/components/model-badges";
+import {MovieRatingBadge} from "@/views/admin/reviews/_comp";
 
 /**
  * Props for the AdminMovieWithRatingCard component.
