@@ -14,6 +14,9 @@ import {
     CustomerReviewLogsViewData,
     CustomerReviewLogsViewDataSchema
 } from "@/domains/customers/features/movie-review-logs/viewDataSchema.ts";
+import {
+    useCustomerReviewLogsRouteParams
+} from "@/domains/customers/features/movie-review-logs/useCustomerReviewLogsRouteParams.ts";
 
 export {
     useFetchCustomerReviewLogsViewData,
@@ -21,6 +24,7 @@ export {
     getFetchCustomerReviewLogsViewData,
     CustomerReviewLogsRouteParamsSchema,
     CustomerReviewLogsViewDataSchema,
+    useCustomerReviewLogsRouteParams,
 }
 
 export type {
