@@ -1,8 +1,43 @@
 import {ReactElement} from "react";
 import {CustomerReviewLogsPageContent} from "@/views/admin/customers/customer-review-logs-page/content.tsx";
+import {
+    useCustomerReviewLogsRouteParams,
+    useFetchCustomerReviewLogsViewData
+} from "@/domains/customers/features/movie-review-logs";
+import PageLoader from "@/common/components/page/PageLoader.tsx";
+import {useParsedPaginationValue} from "@/common/features/fetch-pagination-search-params";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+
+const LOGS_PER_PAGE = 20;
 
 export function CustomerReviewLogsPage(): ReactElement {
+    const routeParams = useCustomerReviewLogsRouteParams();
+    const {reviewCode, uniqueCode} = routeParams ?? {};
+
+    const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
+
+    const query = useFetchCustomerReviewLogsViewData({
+        customerCode: uniqueCode!,
+        reviewCode: reviewCode!,
+        pagination: {page, perPage: LOGS_PER_PAGE},
+        options: {enabled: !!routeParams},
+    });
+
+    if (!routeParams) return <PageLoader/>;
+
     return (
-        <CustomerReviewLogsPageContent/>
+        <QueryDataLoader query={query}>
+            {({items, totalItems}) => (
+                <CustomerReviewLogsPageContent
+                    customerCode={uniqueCode!}
+                    reviewCode={reviewCode!}
+                    page={page}
+                    perPage={LOGS_PER_PAGE}
+                    setPage={setPage}
+                    logs={items}
+                    totalItems={totalItems}
+                />
+            )}
+        </QueryDataLoader>
     );
 }
