@@ -5,12 +5,12 @@
 
 import {useParsedPaginationValue} from "@/common/features/fetch-pagination-search-params";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {useFetchCustomerReviewsViewData} from "@/domains/customers/features/movie-reviews/fetch";
 import {useFetchCustomerCode} from "@/domains/users/utils/fetch-customer-code/useFetchCustomerCode.ts";
 import {
     CustomerReviewsPageContent
 } from "@/views/admin/customers/customer-reviews-page/CustomerReviewsPageContent.tsx";
 import {Loader} from "lucide-react";
+import {useFetchCustomerReviewsViewData} from "@/domains/customers/features/movie-reviews";
 
 /** Number of reviews to display per page. */
 const REVIEWS_PER_PAGE = 10;

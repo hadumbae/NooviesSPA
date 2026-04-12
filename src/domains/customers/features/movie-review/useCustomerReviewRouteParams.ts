@@ -10,7 +10,7 @@ import Logger from "@/common/utility/features/logger/Logger.ts";
 import {
     CustomerReviewRouteParams,
     CustomerReviewRouteParamsSchema
-} from "@/domains/customers/features/movie-review/schemas/routeParamsSchema.ts";
+} from "@/domains/customers/features/movie-review/routeParamsSchema.ts";
 
 /**
  * Hook to retrieve and validate the `uniqueCode` and `reviewCode` from the current route.

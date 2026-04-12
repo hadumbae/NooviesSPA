@@ -4,12 +4,11 @@
  */
 
 import {Loader} from "lucide-react";
-import {useFetchCustomerProfileViewData} from "@/domains/customers/features/profile-overview/fetch";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {
     CustomerProfileViewData,
-    CustomerProfileViewDataSchema
-} from "@/domains/customers/features/profile-overview/schema";
+    CustomerProfileViewDataSchema, useFetchCustomerProfileViewData
+} from "@/domains/customers/features/profile-overview";
 import {
     CustomerProfilePageContent
 } from "@/views/admin/customers/customer-profile-page/CustomerProfilePageContent.tsx";

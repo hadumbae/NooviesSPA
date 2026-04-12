@@ -5,11 +5,11 @@
 
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params"
 import RequestReturns from "@/common/type/request/RequestReturns.ts"
-import {CustomerReviewLogsViewData} from "@/domains/customers/features/movie-review-logs/schemas"
 import {MovieReviewUniqueCode} from "@/domains/review/features/codes"
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts"
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts"
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts"
+import {CustomerReviewLogsViewData} from "@/domains/customers/features/movie-review-logs/viewDataSchema.ts";
 
 const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/admin/customers/view-data`
 

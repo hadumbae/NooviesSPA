@@ -4,19 +4,19 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query"
-import {
-    CustomerReviewLogsViewData,
-    CustomerReviewLogsViewDataSchema
-} from "@/domains/customers/features/movie-review-logs/schemas"
 import HttpResponseError from "@/common/errors/HttpResponseError.ts"
 import {buildQueryFn} from "@/common/features/validate-fetch-data"
-import {getFetchCustomerReviewLogsViewData} from "@/domains/customers/features/movie-review-logs/respositories"
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts"
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params"
 import {MovieReviewUniqueCode} from "@/domains/review/features/codes"
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts"
-import {CustomerReviewLogsQueryKeys} from "@/domains/customers/features/movie-review-logs/fetch/queryKeys.ts"
+import {CustomerReviewLogsQueryKeys} from "@/domains/customers/features/movie-review-logs/queryKeys.ts"
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts"
+import {getFetchCustomerReviewLogsViewData} from "@/domains/customers/features/movie-review-logs/repository.ts";
+import {
+    CustomerReviewLogsViewData,
+    CustomerReviewLogsViewDataSchema
+} from "@/domains/customers/features/movie-review-logs/viewDataSchema.ts";
 
 /** Configuration for the customer review logs fetch hook. */
 type FetchConfig = {
@@ -42,7 +42,7 @@ export function useFetchCustomerReviewLogsViewData(
     const fetchLogs = buildQueryFn({
         schema: CustomerReviewLogsViewDataSchema,
         action: () => getFetchCustomerReviewLogsViewData({customerCode, reviewCode, pagination}),
-    })
+    });
 
     return useQuery({
         queryKey: CustomerReviewLogsQueryKeys.reviewLogs({customerCode, reviewCode, ...pagination}),

@@ -7,7 +7,10 @@ import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts"
 import {toast} from "react-toastify";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {CustomerViewQueryKeys} from "@/domains/customers/features/data";
+import {CustomerProfileOverviewViewQueryKeys} from "@/domains/customers/features/profile-overview";
+import {CustomerReviewsViewQueryKeys} from "@/domains/customers/features/movie-reviews";
+import {CustomerReviewLogsQueryKeys} from "@/domains/customers/features/movie-review-logs/queryKeys.ts";
+import {CustomerReviewViewQueryKeys} from "@/domains/customers/features/movie-review";
 
 /**
  * Parameters extracted from the standard mutation submission interface.
@@ -32,8 +35,10 @@ export const useReviewAdminActionSuccessHelper = (
         const {uniqueCode} = review;
 
         invalidateQueries([
-            CustomerViewQueryKeys.profile({}),
-            CustomerViewQueryKeys.review({reviewCode: uniqueCode}),
+            CustomerProfileOverviewViewQueryKeys.profile({}),
+            CustomerReviewsViewQueryKeys.reviews({}),
+            CustomerReviewLogsQueryKeys.reviewLogs({}),
+            CustomerReviewViewQueryKeys.review({reviewCode: uniqueCode}),
         ], {exact: false});
 
         if (successMessage) {

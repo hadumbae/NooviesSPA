@@ -4,17 +4,18 @@
  */
 
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
-import {
-    CustomerReviewsViewData,
-    CustomerReviewsViewDataSchema
-} from "@/domains/customers/features/movie-reviews/schemas";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {CustomerViewQueryKeys, getFetchCustomerReviewsViewData} from "@/domains/customers/features/data";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {
+    CustomerReviewsViewData,
+    CustomerReviewsViewDataSchema
+} from "@/domains/customers/features/movie-reviews/viewDataSchema.ts";
+import {getFetchCustomerReviewsViewData} from "@/domains/customers/features/movie-reviews/repository.ts";
+import {CustomerReviewsViewQueryKeys} from "@/domains/customers/features/movie-reviews/queryKeys.ts";
 
 /**
  * Parameters for the useFetchCustomerReviewsViewData hook.
@@ -44,7 +45,7 @@ export function useFetchCustomerReviewsViewData(
     });
 
     return useQuery({
-        queryKey: CustomerViewQueryKeys.reviews({customerCode, ...pagination}),
+        queryKey: CustomerReviewsViewQueryKeys.reviews({customerCode, ...pagination}),
         queryFn: fetchDetails,
         ...useQueryOptionDefaults(options),
     });

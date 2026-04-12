@@ -5,11 +5,11 @@
 
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {useQuery} from "@tanstack/react-query";
-import {CustomerViewQueryKeys} from "@/domains/customers/features/data/queryKeys.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import {getFetchCustomerProfileViewData} from "@/domains/customers/features/data";
+import {getFetchCustomerProfileViewData} from "@/domains/customers/features/profile-overview/repository.ts";
+import {CustomerProfileOverviewViewQueryKeys} from "@/domains/customers/features/profile-overview/queryKeys.ts";
 
 /**
  * Parameters for the customer profile fetch hook.
@@ -40,7 +40,7 @@ export function useFetchCustomerProfileViewData(
     });
 
     return useQuery({
-        queryKey: CustomerViewQueryKeys.profile({customerCode}),
+        queryKey: CustomerProfileOverviewViewQueryKeys.profile({customerCode}),
         queryFn: fetchDetails,
         ...useQueryOptionDefaults(options),
     });

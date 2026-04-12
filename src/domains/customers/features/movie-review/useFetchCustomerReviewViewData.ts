@@ -8,10 +8,14 @@ import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {MovieReviewUniqueCode} from "@/domains/review/features/codes";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {CustomerViewQueryKeys, getFetchCustomerReviewViewData} from "@/domains/customers/features/data";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import {CustomerReviewViewData, CustomerReviewViewSchema} from "@/domains/customers/features/movie-review/schemas";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {CustomerReviewViewQueryKeys} from "@/domains/customers/features/movie-review/queryKeys.ts";
+import {
+    CustomerReviewViewData,
+    CustomerReviewViewSchema
+} from "@/domains/customers/features/movie-review/viewDataSchema.ts";
+import {getFetchCustomerReviewViewData} from "@/domains/customers/features/movie-review/repository.ts";
 
 /**
  * Configuration for the customer review data fetch.
@@ -40,7 +44,7 @@ export function useFetchCustomerReviewViewData(
     });
 
     return useQuery({
-        queryKey: CustomerViewQueryKeys.review({customerCode, reviewCode}),
+        queryKey: CustomerReviewViewQueryKeys.review({customerCode, reviewCode}),
         queryFn: fetchDetails,
         ...useQueryOptionDefaults(options),
     });

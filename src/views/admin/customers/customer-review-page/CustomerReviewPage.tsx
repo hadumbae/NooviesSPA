@@ -7,10 +7,12 @@ import {
     CustomerReviewPageContent
 } from "@/views/admin/customers/customer-review-page/CustomerReviewPageContent.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
-import {useFetchCustomerReviewViewData} from "@/domains/customers/features/movie-review/fetch";
-import {CustomerReviewViewData} from "@/domains/customers/features/movie-review/schemas";
+import {
+    CustomerReviewViewData,
+    useCustomerReviewRouteParams,
+    useFetchCustomerReviewViewData
+} from "@/domains/customers/features/movie-review";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {useCustomerReviewRouteParams} from "@/domains/customers/features/movie-review/hooks";
 
 /**
  * Orchestrates the data fetching and validation lifecycle for the Review Moderation view.
