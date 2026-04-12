@@ -1,7 +1,7 @@
-import {CustomerProfilePage} from "@/views/admin/customers/customer-profile-page/CustomerProfilePage.tsx";
+import {CustomerProfilePage} from "@/views/admin/customers/customer-profile-page/page.tsx";
 import {
     CustomerProfilePageContent
-} from "@/views/admin/customers/customer-profile-page/CustomerProfilePageContent.tsx";
+} from "@/views/admin/customers/customer-profile-page/content.tsx";
 import {
     CustomerProfilePageHeader
 } from "@/views/admin/customers/customer-profile-page/headers/CustomerProfilePageHeader.tsx";

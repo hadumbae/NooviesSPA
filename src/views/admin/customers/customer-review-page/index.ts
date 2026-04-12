@@ -1,7 +1,7 @@
-import {CustomerReviewPage} from "@/views/admin/customers/customer-review-page/CustomerReviewPage.tsx";
+import {CustomerReviewPage} from "@/views/admin/customers/customer-review-page/page.tsx";
 import {
     CustomerReviewPageContent
-} from "@/views/admin/customers/customer-review-page/CustomerReviewPageContent.tsx";
+} from "@/views/admin/customers/customer-review-page/content.tsx";
 import {
     CustomerReviewPageHeader
 } from "@/views/admin/customers/customer-review-page/headers/CustomerReviewPageHeader.tsx";

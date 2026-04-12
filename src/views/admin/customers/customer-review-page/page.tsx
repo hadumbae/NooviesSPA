@@ -5,7 +5,7 @@
 
 import {
     CustomerReviewPageContent
-} from "@/views/admin/customers/customer-review-page/CustomerReviewPageContent.tsx";
+} from "@/views/admin/customers/customer-review-page/content.tsx";
 import PageLoader from "@/common/components/page/PageLoader.tsx";
 import {
     CustomerReviewViewData,

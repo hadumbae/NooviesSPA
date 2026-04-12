@@ -8,7 +8,7 @@ import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader
 import {useFetchCustomerCode} from "@/domains/users/utils/fetch-customer-code/useFetchCustomerCode.ts";
 import {
     CustomerReviewsPageContent
-} from "@/views/admin/customers/customer-reviews-page/CustomerReviewsPageContent.tsx";
+} from "@/views/admin/customers/customer-reviews-page/content.tsx";
 import {Loader} from "lucide-react";
 import {useFetchCustomerReviewsViewData} from "@/domains/customers/features/movie-reviews";
 

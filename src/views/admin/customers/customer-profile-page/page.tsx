@@ -11,7 +11,7 @@ import {
 } from "@/domains/customers/features/profile-overview";
 import {
     CustomerProfilePageContent
-} from "@/views/admin/customers/customer-profile-page/CustomerProfilePageContent.tsx";
+} from "@/views/admin/customers/customer-profile-page/content.tsx";
 import {useFetchCustomerCode} from "@/domains/users/utils/fetch-customer-code/useFetchCustomerCode.ts";
 
 /**
