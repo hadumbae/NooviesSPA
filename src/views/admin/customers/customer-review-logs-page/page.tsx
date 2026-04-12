@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Main page component for viewing customer movie review logs.
+ * Orchestrates route parameter extraction, paginated data fetching, and
+ * view rendering.
+ */
+
 import {ReactElement} from "react";
 import {CustomerReviewLogsPageContent} from "@/views/admin/customers/customer-review-logs-page/content.tsx";
 import {
@@ -10,6 +16,10 @@ import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader
 
 const LOGS_PER_PAGE = 20;
 
+/**
+ * High-level page controller that handles the logic for fetching moderation
+ * audit logs for a specific review based on URL parameters.
+ */
 export function CustomerReviewLogsPage(): ReactElement {
     const routeParams = useCustomerReviewLogsRouteParams();
     const {reviewCode, uniqueCode} = routeParams ?? {};
@@ -23,7 +33,9 @@ export function CustomerReviewLogsPage(): ReactElement {
         options: {enabled: !!routeParams},
     });
 
-    if (!routeParams) return <PageLoader/>;
+    if (!routeParams) {
+        return <PageLoader/>;
+    }
 
     return (
         <QueryDataLoader query={query}>
