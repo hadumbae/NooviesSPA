@@ -7,7 +7,7 @@ import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {MovieReviewUniqueCode} from "@/domains/review/features/codes";
 import {
     CustomerReviewPageBreadcrumbs
-} from "@/views/admin/customers/customer-review-page/headers/CustomerReviewPageBreadcrumbs.tsx";
+} from "@/views/admin/customers/customer-review-page/breadcrumbs.tsx";
 
 /**
  * Props for the CustomerReviewPageHeader component.

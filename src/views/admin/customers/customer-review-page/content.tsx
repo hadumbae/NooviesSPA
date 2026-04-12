@@ -5,7 +5,7 @@
 
 import {LeanUserWithEmail} from "@/domains/users/schemas/user";
 import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import {CustomerReviewPageHeader} from "@/views/admin/customers/customer-review-page/headers/CustomerReviewPageHeader.tsx";
+import {CustomerReviewPageHeader} from "@/views/admin/customers/customer-review-page/header.tsx";
 import {CustomerMovieReview} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSchema.ts";
 import {CustomerReviewPageActionSection} from "@/views/admin/customers/customer-review-page/sections/CustomerReviewPageActionSection.tsx";
 import {PageSectionHeader} from "@/common/components/page/PageSectionHeader.tsx";

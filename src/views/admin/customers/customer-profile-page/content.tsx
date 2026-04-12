@@ -14,7 +14,7 @@ import {
 } from "@/views/admin/customers/customer-profile-page/sections/CustomerProfileReservationSection.tsx";
 import {
     CustomerProfilePageHeader
-} from "@/views/admin/customers/customer-profile-page/headers/CustomerProfilePageHeader.tsx";
+} from "@/views/admin/customers/customer-profile-page/header.tsx";
 import {
     CustomerMovieReviewSummary
 } from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";

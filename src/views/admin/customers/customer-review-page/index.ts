@@ -4,10 +4,10 @@ import {
 } from "@/views/admin/customers/customer-review-page/content.tsx";
 import {
     CustomerReviewPageHeader
-} from "@/views/admin/customers/customer-review-page/headers/CustomerReviewPageHeader.tsx";
+} from "@/views/admin/customers/customer-review-page/header.tsx";
 import {
     CustomerReviewPageBreadcrumbs
-} from "@/views/admin/customers/customer-review-page/headers/CustomerReviewPageBreadcrumbs.tsx";
+} from "@/views/admin/customers/customer-review-page/breadcrumbs.tsx";
 
 export {
     CustomerReviewPage,

@@ -4,7 +4,7 @@ import {
 } from "@/views/admin/customers/customer-profile-page/content.tsx";
 import {
     CustomerProfilePageHeader
-} from "@/views/admin/customers/customer-profile-page/headers/CustomerProfilePageHeader.tsx";
+} from "@/views/admin/customers/customer-profile-page/header.tsx";
 import {
     CustomerProfileReservationSection
 } from "@/views/admin/customers/customer-profile-page/sections/CustomerProfileReservationSection.tsx";

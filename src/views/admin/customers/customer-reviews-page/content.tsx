@@ -8,7 +8,7 @@ import PaginationRangeButtons from "@/common/components/pagination/PaginationRan
 import {CustomerMovieReviewSummary} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
 import {LeanUserWithEmail} from "@/domains/users/schemas/user";
 import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/_comp";
-import {CustomerReviewsPageHeader} from "@/views/admin/customers/customer-reviews-page/headers/CustomerReviewsPageHeader.tsx";
+import {CustomerReviewsPageHeader} from "@/views/admin/customers/customer-reviews-page/header.tsx";
 import {ReactElement} from "react";
 
 /** Properties for the CustomerReviewsPageContent component. */

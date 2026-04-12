@@ -4,7 +4,7 @@
  */
 
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
-import {CustomerReviewsPageBreadcrumbs} from "@/views/admin/customers/customer-reviews-page/headers/CustomerReviewsPageBreadcrumbs.tsx";
+import {CustomerReviewsPageBreadcrumbs} from "@/views/admin/customers/customer-reviews-page/breadcrumbs.tsx";
 import {ReactElement} from "react";
 
 type HeaderProps = {
