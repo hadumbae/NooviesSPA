@@ -13,6 +13,7 @@ import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCIS
  * Validated reference schema for an individual moderation audit entry.
  */
 export const MovieReviewModerationLogReferenceSchema = z.object({
+    _id: IDStringSchema,
     review: IDStringSchema,
     action: MovieReviewModerationActionSchema,
     admin: IDStringSchema,
