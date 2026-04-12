@@ -18,7 +18,5 @@ export const CustomerViewQueryKeys = buildQueryKey(
         reviews: ["profile", "reviews", "index"],
         /** Key for a singular, detailed movie review view. */
         review: ["profile", "reviews", "single"],
-        /** Key for the audit/moderation log history of a specific review. */
-        reviewLogs: ["profile", "reviews", "single", "logs"],
     },
 );
