@@ -5,7 +5,7 @@
  */
 
 import {ReactElement} from "react";
-import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
+import {PageLoader} from "@/views/common/_comp/page";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";

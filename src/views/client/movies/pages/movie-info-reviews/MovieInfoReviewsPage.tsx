@@ -5,7 +5,7 @@
 
 import MovieInfoReviewsPageContent
     from "@/views/client/movies/pages/movie-info-reviews/MovieInfoReviewsPageContent.tsx";
-import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
+import {PageLoader} from "@/views/common/_comp/page";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchByIdentifierRouteParams
     from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";

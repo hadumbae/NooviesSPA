@@ -1,7 +1,7 @@
 import {FC, useEffect} from 'react';
 import useAuthLogoutSubmitMutation from "@/domains/auth/hooks/useAuthLogoutSubmitMutation.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
+import {PageLoader} from "@/views/common/_comp/page";
 
 /**
  * Page component for logging out the current user.

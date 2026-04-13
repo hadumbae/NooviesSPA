@@ -3,7 +3,7 @@ import {
     CombinedSchemaQuery,
     CombinedValidatedQueryBoundaryProps
 } from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
+import {PageLoader} from "@/views/common/_comp/page";
 import PageParseError from "@/common/components/page/errors/PageParseError.tsx";
 import validateQuery from "@/common/hooks/validation/validate-query/validateQuery.ts";
 import {ParseError} from "@/common/errors/ParseError.ts";

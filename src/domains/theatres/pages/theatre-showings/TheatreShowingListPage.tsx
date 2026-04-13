@@ -6,7 +6,7 @@
  */
 
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
-import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
+import {PageLoader} from "@/views/common/_comp/page";
 import {Theatre} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import TheatreShowingListPageContent from "@/domains/theatres/pages/theatre-showings/TheatreShowingListPageContent.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";

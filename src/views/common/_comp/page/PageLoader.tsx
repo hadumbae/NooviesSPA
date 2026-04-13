@@ -1,12 +1,21 @@
-import {FC} from 'react';
+/**
+ * @fileoverview A centralized full-page loading component.
+ * Centers a loader both horizontally and vertically to provide visual
+ * feedback during data fetching or page transitions.
+ */
+
+import {ReactElement} from 'react';
 import ThreeDotsLoader from "@/common/components/loaders/ThreeDotsLoader.tsx";
 import {cn} from "@/common/lib/utils.ts";
 
-interface Props {
+type LoaderProps = {
     className?: string;
-}
+};
 
-const PageLoader: FC<Props> = ({className = ""}) => {
+/**
+ * Renders a full-page loading state using a centered ThreeDotsLoader.
+ */
+export function PageLoader({className}: LoaderProps): ReactElement {
     return (
         <div className={cn(
             "w-full",
@@ -14,11 +23,9 @@ const PageLoader: FC<Props> = ({className = ""}) => {
             "flex",
             "justify-center",
             "items-center",
-            className,
+            className
         )}>
             <ThreeDotsLoader />
         </div>
     );
-};
-
-export default PageLoader;
+}

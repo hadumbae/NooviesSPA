@@ -10,7 +10,7 @@
  * - Composes header and tab sections within a flexible page layout.
  */
 
-import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
+import {PageLoader} from "@/views/common/_comp/page";
 import {useGetAuthUser} from "@/domains/auth/hooks/authUser/useGetAuthUser.ts";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import {PageFlexWrapper} from "@/views/common/_comp/page";

@@ -5,7 +5,7 @@
  */
 
 import { FC } from "react";
-import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
+
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import { SlugRouteParamSchema } from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import MovieInfoPageContent
@@ -20,6 +20,7 @@ import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {PageLoader} from "@/views/common/_comp/page";
 
 /**
  * Aggregated query result shape for the overview page.

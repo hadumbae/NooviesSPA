@@ -6,7 +6,7 @@
 import {
     CustomerReviewPageContent
 } from "@/views/admin/customers/customer-review-page/content.tsx";
-import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
+import {PageLoader} from "@/views/common/_comp/page";
 import {
     CustomerReviewViewData,
     useCustomerReviewRouteParams,
