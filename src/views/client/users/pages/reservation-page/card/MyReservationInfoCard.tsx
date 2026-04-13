@@ -6,10 +6,10 @@
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import SecondarySpan from "@/views/common/components/text/SecondarySpan.tsx";
+import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import PrimarySpan from "@/views/common/components/text/PrimarySpan.tsx";
+import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import {PopulatedReservation} from "@/domains/reservation/schema/model";
 
 /**

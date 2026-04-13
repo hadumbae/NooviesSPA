@@ -8,7 +8,7 @@ import {MovieWithRating} from "@/domains/movies/schema/movie/MovieWithRatingSche
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import SecondarySpan from "@/views/common/components/text/SecondarySpan.tsx";
+import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import MovieReviewRatingStars from "@/views/client/movie-reviews/components/MovieReviewRatingStars.tsx";
 

@@ -7,7 +7,7 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {MessageCirclePlus} from "lucide-react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import PrimarySpan from "@/views/common/components/text/PrimarySpan.tsx";
+import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReview.types.ts";

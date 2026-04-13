@@ -5,7 +5,7 @@
 
 import {Badge} from "@/common/components/ui/badge.tsx";
 import MovieReviewRatingStars from "@/views/client/movie-reviews/components/MovieReviewRatingStars.tsx";
-import SecondarySpan from "@/views/common/components/text/SecondarySpan.tsx";
+import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import {cn} from "@/common/lib/utils.ts";
 
 /**

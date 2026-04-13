@@ -5,14 +5,14 @@
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
-import SecondarySpan from "@/views/common/components/text/SecondarySpan.tsx";
+import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import PrimarySpan from "@/views/common/components/text/PrimarySpan.tsx";
+import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import {PopulatedReservation} from "@/domains/reservation/schema/model";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {

@@ -5,9 +5,9 @@
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {DateTime} from "luxon";
-import PrimarySpan from "@/views/common/components/text/PrimarySpan.tsx";
+import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import {LucideIcon} from "lucide-react";
-import SecondarySpan from "@/views/common/components/text/SecondarySpan.tsx";
+import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import {ReservationStatus} from "@/domains/reservation/schema/model";
 import {cn} from "@/common/lib/utils.ts";
 

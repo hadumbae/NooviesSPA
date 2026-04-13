@@ -4,10 +4,10 @@ import {AdminReservation} from "@/domains/reservation/schema/model";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {SubsectionTitle} from "@/views/common/components/headers/SubsectionTitle.tsx";
-import {SubsectionSubtitle} from "@/views/common/components/headers/SubsectionSubtitle.tsx";
+import {SubsectionTitle} from "@/views/common/_comp/headers/SubsectionTitle.tsx";
+import {SubsectionSubtitle} from "@/views/common/_comp/headers/SubsectionSubtitle.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import PrimarySpan from "@/views/common/components/text/PrimarySpan.tsx";
+import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 
 type SectionProps = {

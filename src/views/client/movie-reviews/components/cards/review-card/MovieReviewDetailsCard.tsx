@@ -6,9 +6,9 @@
 import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import DeleteMovieReviewButton from "@/views/client/movie-reviews/components/buttons/DeleteMovieReviewButton.tsx";
-import PrimarySpan from "@/views/common/components/text/PrimarySpan.tsx";
+import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import MovieReviewRatingStars from "@/views/client/movie-reviews/components/MovieReviewRatingStars.tsx";
-import SecondarySpan from "@/views/common/components/text/SecondarySpan.tsx";
+import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import MovieReviewText from "@/views/client/movie-reviews/components/text/MovieReviewText.tsx";
 import MovieReviewHelpfulButton from "@/views/client/movie-reviews/components/buttons/MovieReviewHelpfulButton.tsx";

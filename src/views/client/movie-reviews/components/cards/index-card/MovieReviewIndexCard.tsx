@@ -10,9 +10,9 @@ import {
 } from "@/views/client/movie-reviews/components/cards/index-card/MovieReviewIndexCardMovieSection.tsx";
 import MovieReviewText from "@/views/client/movie-reviews/components/text/MovieReviewText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import PrimarySpan from "@/views/common/components/text/PrimarySpan.tsx";
+import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import IsRecommendedBadge from "@/views/client/movie-reviews/components/badges/IsRecommendedBadge.tsx";
-import SecondarySpan from "@/views/common/components/text/SecondarySpan.tsx";
+import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import MovieReviewRatingStars from "@/views/client/movie-reviews/components/MovieReviewRatingStars.tsx";
 import {
     MovieReviewIndexCardActions

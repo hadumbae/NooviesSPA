@@ -11,7 +11,7 @@ import {
 } from "@/common/components/ui/dropdown-menu.tsx";
 import useCurrentURLPath from "@/common/hooks/router/useCurrentURLPath.ts";
 import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.tsx";
-import {NavigationDropdownButton} from "@/views/common/components/buttons/NavigationDropdownButton.tsx";
+import {NavigationDropdownButton} from "@/views/common/_comp/buttons/NavigationDropdownButton.tsx";
 
 /**
  * A navigational dropdown providing centralized access to core system entities and catalogs.

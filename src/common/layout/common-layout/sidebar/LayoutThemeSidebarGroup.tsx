@@ -9,7 +9,7 @@ import {
     SidebarMenu,
     SidebarMenuItem
 } from "@/common/components/ui/sidebar.tsx";
-import {ThemeButtonSelectors} from "@/views/common/components/ui-theme/ThemeButtonSelectors.tsx";
+import {ThemeButtonSelectors} from "@/views/common/_comp/ui-theme/ThemeButtonSelectors.tsx";
 
 /**
  * Renders a specialized sidebar section containing global theme controls.
