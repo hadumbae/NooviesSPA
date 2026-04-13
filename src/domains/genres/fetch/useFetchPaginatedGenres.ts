@@ -12,7 +12,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {paginated} from "@/domains/genres/repositories/GenreCRUDRepository.ts";
+import {paginated} from "@/domains/genres/_feat/crud";
 
 /**
  * Parameters for {@link useFetchPaginatedGenres}.
@@ -40,7 +40,7 @@ export default function useFetchPaginatedGenres<TData = unknown>(
 ): UseQueryResult<unknown, HttpResponseError> {
     const fetchGenres = useQueryFnHandler({
         errorMessage: "Failed to fetch genres. Please try again.",
-        action: () => paginated({page, perPage, config, queries}),
+        action: () => paginated({config, queries, pagination: {page, perPage}}),
     });
 
     return useQuery({
