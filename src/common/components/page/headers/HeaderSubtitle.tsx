@@ -1,35 +1,31 @@
 /**
- * @file Reusable secondary heading component for page or section subtitles.
- * @filename HeaderSubtitle.tsx
+ * @fileoverview Reusable secondary heading component for page or section subtitles.
+ * Provides a standardized h2 styling to maintain typographic hierarchy
+ * throughout the administrative interface.
  */
 
-import {FC, PropsWithChildren} from 'react';
+import {ReactNode} from 'react';
 import {cn} from "@/common/lib/utils.ts";
-import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 /**
- * Props for the {@link HeaderSubtitle} component.
+ * Props for the HeaderSubtitle component.
  */
 type SubtitleProps = {
-    /**
-     * Additional CSS class names for fine-tuning margins, colors, or alignment.
-     */
+    children?: ReactNode;
+    text?: string;
     className?: string;
 };
 
 /**
- * Renders a semantic `h2` subtitle with a refined, secondary typographic treatment.
+ * Renders a semantic h2 subtitle with a refined typographic treatment,
+ * using the 'page-subtitle' utility class.
  */
-const HeaderSubtitle: FC<PropsWithChildren<SubtitleProps>> = ({children, className}) => {
+function HeaderSubtitle({children, text, className}: SubtitleProps) {
     return (
-        <h2 className={cn(
-            SecondaryTextBaseCSS,
-            "font-light italic text-xs xl:text-sm",
-            className,
-        )}>
-            {children}
+        <h2 className={cn("page-subtitle", className)}>
+            {children ?? text}
         </h2>
     );
-};
+}
 
 export default HeaderSubtitle;

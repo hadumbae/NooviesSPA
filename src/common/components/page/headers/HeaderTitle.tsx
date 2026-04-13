@@ -1,38 +1,28 @@
 /**
- * @file Reusable Page/Section heading component with standardized typography.
- * @filename HeaderTitle.tsx
+ * @fileoverview Reusable heading component with standardized typography.
+ * Ensures consistent h1 styling across different sections of the administrative UI.
  */
 
-import {ReactNode} from 'react';
+import {ReactElement, ReactNode} from 'react';
 import {cn} from "@/common/lib/utils.ts";
-import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
-/**
- * Props for the {@link HeaderTitle} component.
- */
 type TitleProps = {
-    /** The content of the header, typically a title string or element. */
-    children: ReactNode;
-
-    /** * Optional additional CSS classes for layout or color overrides.
-     * @example "text-center" or "mb-4"
-     */
+    children?: ReactNode;
+    text?: string;
     className?: string;
-}
+};
 
 /**
- * Renders a semantic `h1` header with responsive scaling and project-standard styling.
+ * Renders a semantic h1 header using the standardized 'page-title' styles.
  */
-const HeaderTitle = ({children, className}: TitleProps) => {
+function HeaderTitle(
+    {children, text, className}: TitleProps
+): ReactElement {
     return (
-        <h1 className={cn(
-            PrimaryTextBaseCSS,
-            "font-bold text-base md:text-lg 2xl:text-xl",
-            className,
-        )}>
-            {children}
+        <h1 className={cn("page-title", className)}>
+            {children ?? text}
         </h1>
     );
-};
+}
 
 export default HeaderTitle;
