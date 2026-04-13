@@ -10,7 +10,7 @@ import {
     useCustomerReviewLogsRouteParams,
     useFetchCustomerReviewLogsViewData
 } from "@/domains/customers/features/movie-review-logs";
-import PageLoader from "@/common/components/page/PageLoader.tsx";
+import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
 import {useParsedPaginationValue} from "@/common/features/fetch-pagination-search-params";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 

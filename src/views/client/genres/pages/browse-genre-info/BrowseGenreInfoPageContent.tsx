@@ -3,7 +3,7 @@
  * @filename BrowseGenreInfoPageContent.tsx
  */
 
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import GenreInfoBanner from "@/views/client/genres/components/browse-genre/GenreInfoBanner.tsx";

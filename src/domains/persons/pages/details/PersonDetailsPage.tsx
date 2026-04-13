@@ -11,7 +11,7 @@
  */
 
 import {FC} from 'react';
-import PageLoader from "@/common/components/page/PageLoader.tsx";
+import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
 import {useFetchGroupedMovieCreditsForPerson}
     from "@/domains/moviecredit/hooks/queries/useFetchGroupedMovieCreditsForPerson.ts";
 import {PersonDetailsSchema} from "@/domains/persons/schema/person/Person.schema.ts";

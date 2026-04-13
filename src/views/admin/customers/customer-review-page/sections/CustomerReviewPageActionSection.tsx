@@ -3,7 +3,7 @@
  * @filename CustomerReviewPageActionSection.tsx
  */
 
-import {PageSectionHeader} from "@/common/components/page/PageSectionHeader.tsx";
+import {PageSectionHeader} from "@/views/common/_comp/page/PageSectionHeader.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     ResetReviewDisplayNameAction,

@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import AuthRegisterFormContainer from "@/domains/auth/components/form/register/AuthRegisterFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import RegisterHeader from "@/domains/auth/components/headers/RegisterHeader.tsx";

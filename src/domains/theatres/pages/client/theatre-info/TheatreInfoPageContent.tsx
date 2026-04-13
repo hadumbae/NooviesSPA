@@ -14,7 +14,7 @@ import {TheatreDetails}
 import {ScreenWithShowings}
     from "@/domains/theatre-screens/schema/model/ScreenWithShowingsSchema.ts";
 import PageFlexWrapper
-    from "@/common/components/page/PageFlexWrapper.tsx";
+    from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import buildString
     from "@/common/utility/buildString.ts";
 import HeaderTitle

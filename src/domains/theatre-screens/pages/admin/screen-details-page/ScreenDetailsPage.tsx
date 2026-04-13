@@ -1,4 +1,4 @@
-import PageLoader from "@/common/components/page/PageLoader.tsx";
+import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
 import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {SeatDetailsArray} from "@/domains/seats/schema/seat/SeatRelated.types.ts";
 import ScreenDetailsPageContent from "@/domains/theatre-screens/pages/admin/screen-details-page/ScreenDetailsPageContent.tsx";

@@ -3,7 +3,7 @@
  * @filename CustomerProfileReviewSection.tsx
  */
 
-import {PageSectionHeader} from "@/common/components/page/PageSectionHeader.tsx";
+import {PageSectionHeader} from "@/views/common/_comp/page/PageSectionHeader.tsx";
 import {
     CustomerMovieReviewSummary
 } from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";

@@ -5,7 +5,7 @@
 
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {Reservation} from "@/domains/reservation/schema/model";
-import {PageSectionHeader} from "@/common/components/page/PageSectionHeader.tsx";
+import {PageSectionHeader} from "@/views/common/_comp/page/PageSectionHeader.tsx";
 import {CustomerReservationCard} from "@/views/admin/customers/_comp";
 
 /**

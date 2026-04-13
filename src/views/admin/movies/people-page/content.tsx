@@ -6,7 +6,7 @@
 
 import {ReactElement} from "react";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import TextCollapsible from "@/common/components/TextCollapsible.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";

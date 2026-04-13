@@ -4,7 +4,7 @@
  */
 
 import {PopulatedReservation} from "@/domains/reservation/schema/model/PopulatedReservationSchema.ts";
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import MyReservationCompactCard from "@/views/client/reservations/components/cards/MyReservationCompactCard.tsx";

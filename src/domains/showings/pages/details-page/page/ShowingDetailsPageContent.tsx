@@ -14,7 +14,7 @@
  * been provided higher in the tree and focuses solely on layout and composition.
  */
 
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import ShowingDetailsHeader from "@/domains/showings/components/headers/ShowingDetailsHeader.tsx";
 import ShowingDetailsCard from "@/domains/showings/components/details/ShowingDetailsCard.tsx";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";

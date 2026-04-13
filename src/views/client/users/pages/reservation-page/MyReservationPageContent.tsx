@@ -4,7 +4,7 @@
  */
 
 import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import MyReservationPageHeader
     from "@/views/client/users/pages/reservation-page/headers/MyReservationPageHeader.tsx";
 import MyReservationInfoCard from "@/views/client/users/pages/reservation-page/card/MyReservationInfoCard.tsx";

@@ -10,7 +10,7 @@
  */
 import {ComponentType, ReactNode} from "react";
 import {MultiQueryData, QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
-import PageLoader from "@/common/components/page/PageLoader.tsx";
+import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
 import validateQuery from "@/common/hooks/validation/validate-query/validateQuery.ts";
 import {z} from "zod";
 

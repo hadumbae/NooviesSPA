@@ -10,10 +10,10 @@
  * - Pagination controls
  */
 
-import PageSection from "@/common/components/page/PageSection.tsx";
+import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import PersonIndexCard from "@/domains/persons/components/PersonIndexCard.tsx";
-import PageCenter from "@/common/components/page/PageCenter.tsx";
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import PersonIndexHeader from "@/domains/persons/components/headers/PersonIndexHeader.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";

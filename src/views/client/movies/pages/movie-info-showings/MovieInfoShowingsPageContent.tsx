@@ -3,7 +3,7 @@
  * @filename MovieInfoShowingsPageContent.tsx
  */
 
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import TheatreShowingQueryFormContainer
     from "@/domains/showings/components/forms/theatre-showing-query/TheatreShowingQueryFormContainer.tsx";
 import {DisableKeys} from "@/common/type/form/HookFormFieldTypes.ts";

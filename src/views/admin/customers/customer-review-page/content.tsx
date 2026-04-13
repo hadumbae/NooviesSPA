@@ -4,13 +4,13 @@
  */
 
 import {LeanUserWithEmail} from "@/domains/users/schemas/user";
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import {CustomerReviewPageHeader} from "@/views/admin/customers/customer-review-page/header.tsx";
 import {CustomerMovieReview} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSchema.ts";
 import {CustomerReviewPageActionSection} from "@/views/admin/customers/customer-review-page/sections/CustomerReviewPageActionSection.tsx";
-import {PageSectionHeader} from "@/common/components/page/PageSectionHeader.tsx";
+import {PageSectionHeader} from "@/views/common/_comp/page/PageSectionHeader.tsx";
 import {CustomerMovieReviewCard} from "@/views/admin/customers/_comp";
-import {PageSectionHeaderLink} from "@/common/components/page/PageSectionHeaderLink.tsx";
+import {PageSectionHeaderLink} from "@/views/common/_comp/page/PageSectionHeaderLink.tsx";
 import {AdminMovieWithRatingCard, CustomerDetailsCard} from "@/views/admin/customers/_comp";
 
 /**

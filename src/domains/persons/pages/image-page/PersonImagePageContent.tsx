@@ -6,11 +6,11 @@
  */
 
 import {Person, PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import PersonImageDetailsBreadcrumbs
     from "@/domains/persons/components/breadcrumbs/admin/PersonImageDetailsBreadcrumbs.tsx";
 import PersonProfileImageHeader from "@/domains/persons/components/headers/PersonProfileImageHeader.tsx";
-import PageSection from "@/common/components/page/PageSection.tsx";
+import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import {
     Card,
     CardContent,

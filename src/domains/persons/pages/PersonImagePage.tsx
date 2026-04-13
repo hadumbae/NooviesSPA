@@ -6,7 +6,7 @@
  */
 
 import {FC} from 'react';
-import PageLoader from "@/common/components/page/PageLoader.tsx";
+import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
 import {PersonDetailsSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import {PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";

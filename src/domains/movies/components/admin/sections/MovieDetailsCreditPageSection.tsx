@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import PageSection from "@/common/components/page/PageSection.tsx";
+import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import {ChevronRight} from "lucide-react";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";

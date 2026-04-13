@@ -5,7 +5,7 @@
 
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import PageLoader from "@/common/components/page/PageLoader.tsx";
+import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import useFetchShowingBySlug from "@/domains/showings/hooks/queries/useFetchShowingBySlug.ts";
 import ShowingInfoPageContent from "@/domains/showings/pages/browse/showing-info/ShowingInfoPageContent.tsx";

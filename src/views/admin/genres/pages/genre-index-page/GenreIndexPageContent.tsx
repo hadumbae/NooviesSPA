@@ -5,11 +5,11 @@
 
 import {FC} from 'react';
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import PageSection from "@/common/components/page/PageSection.tsx";
+import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import GenreIndexCard from "@/views/admin/genres/components/cards/GenreIndexCard.tsx";
-import PageCenter from "@/common/components/page/PageCenter.tsx";
+import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import GenreIndexHeader from "@/views/admin/genres/pages/genre-index-page/headers/GenreIndexHeader.tsx";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";

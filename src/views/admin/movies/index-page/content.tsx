@@ -6,7 +6,7 @@
 
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import MovieIndexCard from "@/domains/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import MovieIndexPageHeader from "@/views/admin/movies/index-page/header.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import MovieQueryOptionFormContainer

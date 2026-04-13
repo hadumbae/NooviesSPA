@@ -4,7 +4,7 @@
  * MovieInfoPageContent.tsx
  */
 
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import MovieOverviewHeader
     from "@/views/client/movies/pages/movie-info/rows/MovieOverviewHeader.tsx";
 import MovieOverviewEditorialInfo

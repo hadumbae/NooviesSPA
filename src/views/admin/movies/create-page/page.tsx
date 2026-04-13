@@ -5,9 +5,9 @@
  */
 
 import {FC} from 'react';
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import MovieSubmitFormContainer from "@/domains/movies/components/forms/MovieSubmitFormContainer.tsx";
-import PageSection from "@/common/components/page/PageSection.tsx";
+import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";

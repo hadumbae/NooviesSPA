@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import PageSection from "@/common/components/page/PageSection.tsx";
+import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import MoviePersonDetailsCard from "@/domains/movies/components/admin/credits/cards/MoviePersonDetailsCard.tsx";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";

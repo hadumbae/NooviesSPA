@@ -3,7 +3,7 @@
  * @filename MovieInfoCreditsPageContent.tsx
  */
 
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import {
     CastCreditExceptMovie
 } from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";

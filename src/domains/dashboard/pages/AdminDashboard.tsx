@@ -1,4 +1,4 @@
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 
 const AdminDashboard = () => {
     return (

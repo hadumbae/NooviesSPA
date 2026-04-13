@@ -5,7 +5,7 @@
 
 import {Reservation} from "@/domains/reservation/schema/model";
 import {LeanUserWithEmail} from "@/domains/users/schemas/user";
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import {
     CustomerProfileReviewSection
 } from "@/views/admin/customers/customer-profile-page/sections/CustomerProfileReviewSection.tsx";

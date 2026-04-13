@@ -2,8 +2,8 @@
  * @fileoverview Defines the content layout for the Customer Reviews page.
  */
 
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
-import {PageSectionHeader} from "@/common/components/page/PageSectionHeader.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageSectionHeader} from "@/views/common/_comp/page/PageSectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {CustomerMovieReviewSummary} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
 import {LeanUserWithEmail} from "@/domains/users/schemas/user";

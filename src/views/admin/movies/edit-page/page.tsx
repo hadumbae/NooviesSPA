@@ -10,7 +10,7 @@ import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieByS
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieEditPageContent} from "@/views/admin/movies/edit-page/content.tsx";
-import PageLoader from "@/common/components/page/PageLoader.tsx";
+import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
 import {ReactElement} from "react";
 
 /**

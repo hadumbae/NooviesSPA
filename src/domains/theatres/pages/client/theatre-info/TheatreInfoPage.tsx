@@ -13,7 +13,7 @@
 import useFetchByIdentifierRouteParams
     from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import PageLoader from "@/common/components/page/PageLoader.tsx";
+import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
 import useFetchTheatreBySlug
     from "@/domains/theatres/hooks/fetch-theatre/useFetchTheatreBySlug.ts";
 import {useFetchScreensWithShowings}

@@ -5,7 +5,7 @@
  * administrative actions.
  */
 
-import PageLoader from "@/common/components/page/PageLoader.tsx";
+import PageLoader from "@/views/common/_comp/page/PageLoader.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import MovieDetailsUIContextProvider from "@/domains/movies/components/providers/MovieDetailsUIContextProvider.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";

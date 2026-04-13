@@ -3,7 +3,7 @@
  * @filename MyReviewsPageContent.tsx
  */
 
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import MyReviewsPageHeader from "@/views/client/users/pages/reviews-page/header/MyReviewsPageHeader.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";

@@ -9,7 +9,7 @@
  * - Seat, form, and delete contexts
  */
 
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import TheatreScreenDetailsBreadcrumbs
     from "@/domains/theatre-screens/components/theatre-screen/admin/breadcrumbs/TheatreScreenDetailsBreadcrumbs.tsx";

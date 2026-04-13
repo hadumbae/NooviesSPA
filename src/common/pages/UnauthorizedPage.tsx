@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import PageCenter from "@/common/components/page/PageCenter.tsx";
+import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
 import HoverLink from "@/common/components/navigation/HoverLink.tsx";
 
 const UnauthorizedPage: FC = () => {

@@ -5,12 +5,12 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PersonDetailsCard from "@/domains/persons/components/admin/person-details/PersonDetailsCard.tsx";
 import PersonDetailsCreditOverview
     from "@/domains/persons/components/admin/person-details/credit-overview/PersonDetailsCreditOverview.tsx";
-import PageSection from "@/common/components/page/PageSection.tsx";
+import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import PersonSubmitFormPanel from "@/domains/persons/components/form/admin/submit/PersonSubmitFormPanel.tsx";
 import UploadPersonProfileImageFormPanel
     from "@/domains/persons/components/form/admin/profile-image/UploadPersonProfileImageFormPanel.tsx";
 import PersonDeleteWarningDialog from "@/domains/persons/components/admin/dialog/PersonDeleteWarningDialog.tsx";
-import PageFlexWrapper from "@/common/components/page/PageFlexWrapper.tsx";
+import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import {Person, PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import {
     MovieCreditDetailsExceptPersonGroupedByRoleArray
