@@ -5,7 +5,7 @@
 
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {ReservationNotesText} from "@/views/admin/reservation/components/ReservationNotesText.tsx";
+import {ReservationNotesText} from "@/views/admin/reservation/_comp/ReservationNotesText.tsx";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {
     UpdateReservationNotesForm

@@ -14,8 +14,8 @@ import GenreDetailsBreadcrumbs from "@/views/admin/genres/pages/genre-details/he
 import GenreDetailsHeader from "@/views/admin/genres/pages/genre-details/header/GenreDetailsHeader.tsx";
 import GenreDetailsCard from "@/views/admin/genres/pages/genre-details/display/GenreDetailsCard.tsx";
 import MovieIndexCard from "@/domains/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
-import GenreSubmitFormPanel from "@/views/admin/genres/components/form/submit-form/GenreSubmitFormPanel.tsx";
-import GenreDeleteWarningDialog from "@/views/admin/genres/components/dialog/GenreDeleteWarningDialog.tsx";
+import GenreSubmitFormPanel from "@/views/admin/genres/_comp/form/submit-form/GenreSubmitFormPanel.tsx";
+import GenreDeleteWarningDialog from "@/views/admin/genres/_comp/dialog/GenreDeleteWarningDialog.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";

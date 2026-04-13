@@ -6,7 +6,7 @@
 import {FC, ReactNode, useState} from 'react';
 import {GenreFormValues} from "@/domains/genres/schema/form/GenreForm.types.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
-import GenreSubmitFormContainer from "@/views/admin/genres/components/form/submit-form/GenreSubmitFormContainer.tsx";
+import GenreSubmitFormContainer from "@/views/admin/genres/_comp/form/submit-form/GenreSubmitFormContainer.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import {

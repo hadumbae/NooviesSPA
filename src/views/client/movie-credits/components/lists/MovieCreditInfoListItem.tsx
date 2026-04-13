@@ -6,7 +6,7 @@
 import {cn} from "@/common/lib/utils.ts";
 import MovieCreditInfoListItemText from "@/views/client/movie-credits/components/lists/MovieCreditInfoListItemText.tsx";
 import {CreditExceptMovie} from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
-import PersonProfileAvatar from "@/views/admin/persons/components/display/PersonProfileAvatar.tsx";
+import PersonProfileAvatar from "@/views/admin/persons/_comp/display/PersonProfileAvatar.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import buildString from "@/common/utility/buildString.ts";
 

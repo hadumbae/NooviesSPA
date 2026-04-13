@@ -2,7 +2,7 @@ import { FC } from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import { Plus } from "lucide-react";
-import GenreSubmitFormPanel from "@/views/admin/genres/components/form/submit-form/GenreSubmitFormPanel.tsx";
+import GenreSubmitFormPanel from "@/views/admin/genres/_comp/form/submit-form/GenreSubmitFormPanel.tsx";
 import { Button } from "@/common/components/ui/button.tsx";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 

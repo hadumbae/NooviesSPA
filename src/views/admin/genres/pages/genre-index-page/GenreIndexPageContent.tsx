@@ -6,7 +6,7 @@
 
 import {FC} from 'react';
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import GenreIndexCard from "@/views/admin/genres/components/cards/GenreIndexCard.tsx";
+import GenreIndexCard from "@/views/admin/genres/_comp/cards/GenreIndexCard.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import GenreIndexHeader from "@/views/admin/genres/pages/genre-index-page/headers/GenreIndexHeader.tsx";
@@ -15,7 +15,7 @@ import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQuery
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import GenreQueryOptionFormContainer
-    from "@/views/admin/genres/components/form/genre-query-options/GenreQueryOptionFormContainer.tsx";
+    from "@/views/admin/genres/_comp/form/genre-query-options/GenreQueryOptionFormContainer.tsx";
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 

@@ -9,7 +9,7 @@ import useGenreSubmitForm from "@/domains/genres/forms/useGenreSubmitForm.ts";
 import useGenreSubmitMutation from "@/domains/genres/mutations/useGenreSubmitMutation.ts";
 
 import {GenreForm, GenreFormValues} from "@/domains/genres/schema/form/GenreForm.types.ts";
-import GenreSubmitFormView from "@/views/admin/genres/components/form/submit-form/GenreSubmitFormView.tsx";
+import GenreSubmitFormView from "@/views/admin/genres/_comp/form/submit-form/GenreSubmitFormView.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
