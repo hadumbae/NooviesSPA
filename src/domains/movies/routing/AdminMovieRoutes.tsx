@@ -1,11 +1,11 @@
-import MovieIndexPage from "@/views/admin/movies/pages/index-page/MovieIndexPage.tsx";
-import MovieCreatePage from "@/views/admin/movies/pages/create-page/MovieCreatePage.tsx";
-import MovieDetailsPage from "@/views/admin/movies/pages/details-page/MovieDetailsPage.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import {RouteObject} from "react-router-dom";
-import MoviePeoplePage from "@/views/admin/movies/pages/credits-page/MoviePeoplePage.tsx";
-import MovieEditPage from "@/views/admin/movies/pages/edit-page/MovieEditPage.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
+import {MovieCreatePage} from "@/views/admin/movies/create-page";
+import {MoviePeoplePage} from "@/views/admin/movies/people-page";
+import {MovieIndexPage} from "@/views/admin/movies/index-page";
+import {MovieEditPage} from "@/views/admin/movies/edit-page";
+import {MovieDetailsPage} from "@/views/admin/movies/details-page";
 
 const routes: RouteObject[] = [
     {
@@ -36,6 +36,7 @@ const routes: RouteObject[] = [
             },
 
             // People
+
             {
                 path: "/admin/movies/get/:slug/people/cast",
                 element: <MoviePeoplePage department="CAST" />,

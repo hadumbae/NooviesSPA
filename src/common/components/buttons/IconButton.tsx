@@ -1,20 +1,25 @@
-import { Button, ButtonProps } from "@/common/components/ui/button.tsx";
-import { forwardRef } from "react";
-import { cn } from "@/common/lib/utils.ts";
-import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
-
 /**
- * Props for `IconButton`.
- * Inherits all `ButtonProps` from the base `Button` component.
+ * @fileoverview A specialized button component optimized for displaying icons.
+ * Extends the standard Button component with circular styling and hover effects.
  */
-export type IconButtonProps = ButtonProps;
+
+import {Button, ButtonProps} from "@/common/components/ui/button.tsx";
+import {forwardRef} from "react";
+import {cn} from "@/common/lib/utils.ts";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
+import {LucideIcon} from "lucide-react";
+
+export type IconButtonProps = ButtonProps & {
+    /** Optional Lucide icon component to render if children are not provided. */
+    icon?: LucideIcon;
+};
 
 /**
- * `IconButton` is a small button designed to hold icons.
- * It wraps the base `Button` component with preset styles for icon usage.
+ * Renders a compact, circular button designed specifically for icon-only or
+ * icon-focused interactions. Inherits standard Button behavior and accessibility.
  */
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
-    const { children, className, ...rest } = props;
+    const {children, icon: Icon, className, ...rest} = props;
 
     return (
         <Button
@@ -28,7 +33,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
             )}
             {...rest}
         >
-                {children}
+            {children ?? (Icon && <Icon />)}
         </Button>
     );
 });
