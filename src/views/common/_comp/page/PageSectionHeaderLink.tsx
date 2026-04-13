@@ -1,9 +1,10 @@
 /**
- * @file A navigational header component that wraps section titles in a link.
- * @filename PageSectionHeaderLink.tsx
+ * @fileoverview A navigational header component that wraps section titles in a link.
+ * Combines semantic header tags with tracking-enabled navigation, featuring
+ * a visual indicator (chevron) to signify interactive sections.
  */
 
-import {ReactNode} from "react";
+import {ReactElement, ReactNode} from "react";
 import {HeaderTag} from "@/common/type/HeaderTag.ts";
 import {cn} from "@/common/lib/utils.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
@@ -27,13 +28,16 @@ type SectionProps = LinkProps & {
 
 /**
  * Renders a semantic header wrapped in a logged-link for consistent page section navigation.
- * ---
+ * Automatically appends a ChevronRight icon and applies "group" styles for hover state synchronization.
  */
-export const PageSectionHeaderLink = (
+export function PageSectionHeaderLink(
     {children, text, className, linkClasName, as: Tag = "h1", ...linkProps}: SectionProps
-) => {
+): ReactElement {
     return (
-        <LoggedLink {...linkProps} className={cn("group block w-fit", linkClasName)}>
+        <LoggedLink
+            {...linkProps}
+            className={cn("group block w-fit", linkClasName)}
+        >
             <Tag className={cn(
                 "section-header-visual section-header-link",
                 className
@@ -42,4 +46,4 @@ export const PageSectionHeaderLink = (
             </Tag>
         </LoggedLink>
     );
-};
+}

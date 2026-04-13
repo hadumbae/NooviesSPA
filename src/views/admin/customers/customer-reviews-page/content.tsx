@@ -3,7 +3,7 @@
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {PageSectionHeader} from "@/views/common/_comp/page/PageSectionHeader.tsx";
+import {PageSectionHeader} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {CustomerMovieReviewSummary} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
 import {LeanUserWithEmail} from "@/domains/users/schemas/user";

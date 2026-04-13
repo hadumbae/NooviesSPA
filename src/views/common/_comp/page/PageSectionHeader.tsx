@@ -1,14 +1,15 @@
 /**
- * @file Typography component for standardized page and section headings.
- * @filename PageSectionHeader.tsx
+ * @fileoverview Typography component for standardized page and section headings.
+ * Ensures visual consistency across the application by applying global heading
+ * styles while maintaining semantic HTML flexibility.
  */
 
-import {ReactNode} from "react";
+import {ReactElement, ReactNode} from "react";
 import {HeaderTag} from "@/common/type/HeaderTag.ts";
 import {cn} from "@/common/lib/utils.ts";
 
 /**
- * Properties for the {@link PageSectionHeader} component.
+ * Properties for the PageSectionHeader component.
  */
 type SectionProps = {
     /** Nested elements to render within the header. Takes precedence over `text`. */
@@ -24,7 +25,7 @@ type SectionProps = {
     className?: string;
 
     /**
-     * The semantic HTML element to render.
+     * The semantic HTML element to render (h1-h6).
      * Defaults to `h1`. Ensures accessibility and proper document outline structure.
      */
     as?: HeaderTag;
@@ -32,13 +33,15 @@ type SectionProps = {
 
 /**
  * A reusable heading component that applies global "Section Header" visual styles.
+ * Centralizes the application's header aesthetics to ensure a unified look
+ * and feel for all section titles.
  */
-export const PageSectionHeader = (
+export function PageSectionHeader(
     {children, text, className, as: Tag = "h1"}: SectionProps
-) => {
+): ReactElement {
     return (
         <Tag className={cn("section-header-visual", className)}>
             {children ?? text}
         </Tag>
     );
-};
+}

@@ -3,7 +3,7 @@
  * @filename ReservationByCodeActionsSection.tsx
  */
 
-import {PageSectionHeader} from "@/views/common/_comp/page/PageSectionHeader.tsx";
+import {PageSectionHeader} from "@/views/common/_comp/page";
 import {AdminReservation} from "@/domains/reservation/schema/model";
 import {
     AdminReservationCancelAction,

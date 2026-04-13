@@ -5,8 +5,9 @@
 
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {Reservation} from "@/domains/reservation/schema/model";
-import {PageSectionHeader} from "@/views/common/_comp/page/PageSectionHeader.tsx";
+
 import {CustomerReservationCard} from "@/views/admin/customers/_comp";
+import {PageSectionHeader} from "@/views/common/_comp/page";
 
 /**
  * Properties for the CustomerProfileReservationSection component.
