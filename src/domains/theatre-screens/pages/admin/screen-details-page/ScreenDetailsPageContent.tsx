@@ -9,7 +9,7 @@
  * - Seat, form, and delete contexts
  */
 
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import TheatreScreenDetailsBreadcrumbs
     from "@/domains/theatre-screens/components/theatre-screen/admin/breadcrumbs/TheatreScreenDetailsBreadcrumbs.tsx";
@@ -41,6 +41,7 @@ import useNavigateToTheatre
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {useLocation} from "react-router-dom";
 import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 
 /**
  * Props for {@link ScreenDetailsPageContent}.

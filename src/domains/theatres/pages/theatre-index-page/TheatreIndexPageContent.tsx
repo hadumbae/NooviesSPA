@@ -12,7 +12,7 @@
 import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import TheatreIndexCard from "@/domains/theatres/components/admin/pages/theatre-index/TheatreIndexCard.tsx";
 import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import TheatreIndexHeader from "@/domains/theatres/components/admin/pages/theatre-index/TheatreIndexHeader.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";

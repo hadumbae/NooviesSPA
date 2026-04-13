@@ -13,8 +13,6 @@ import {TheatreDetails}
     from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {ScreenWithShowings}
     from "@/domains/theatre-screens/schema/model/ScreenWithShowingsSchema.ts";
-import PageFlexWrapper
-    from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import buildString
     from "@/common/utility/buildString.ts";
 import HeaderTitle
@@ -29,6 +27,7 @@ import SectionHeader
     from "@/common/components/page/SectionHeader.tsx";
 import ScreenShowingSelectCard
     from "@/domains/theatre-screens/components/client/browse/ScreenShowingSelectCard.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 
 /**
  * Props for {@link TheatreInfoPageContent}.

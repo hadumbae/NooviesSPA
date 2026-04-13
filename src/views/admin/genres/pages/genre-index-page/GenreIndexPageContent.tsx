@@ -9,7 +9,7 @@ import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import GenreIndexCard from "@/views/admin/genres/components/cards/GenreIndexCard.tsx";
 import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import GenreIndexHeader from "@/views/admin/genres/pages/genre-index-page/headers/GenreIndexHeader.tsx";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";

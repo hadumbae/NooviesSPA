@@ -7,7 +7,7 @@
  */
 
 import useFetchGenres from "@/domains/genres/fetch/useFetchGenres.ts";
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import GenreImageListCard from "@/views/client/genres/components/browse-genre/GenreImageListCard.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";

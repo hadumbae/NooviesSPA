@@ -5,7 +5,7 @@
 
 import {ReactElement} from "react";
 import {MovieReviewModerationLog} from "@/domains/review/features/moderation/schema";
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {MovieReviewUniqueCode} from "@/domains/review/features/codes";

@@ -15,7 +15,7 @@ import MoviePosterImageSubmitFormPanel
 import MovieDeleteWarningDialog from "@/domains/movies/components/dialog/MovieDeleteWarningDialog.tsx";
 import MoviePosterImageDeleteDialog
     from "@/domains/movies/components/admin/poster-image/MoviePosterImageDeleteDialog.tsx";
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import MovieDetailsCard from "@/domains/movies/components/details/MovieDetailsCard.tsx";
 import {RefetchFunction} from "@/common/type/query/RefetchFunction.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";

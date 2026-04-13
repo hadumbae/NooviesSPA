@@ -7,7 +7,7 @@ import {RoleType} from "@/domains/roletype/schema/model/RoleType.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import RoleTypeListSheet from "@/domains/roletype/components/role-type-list-page/list-sheet/RoleTypeListSheet.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import RoleTypeListHeader from "@/domains/roletype/components/role-type-list-page/RoleTypeListHeader.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import RoleTypeQueryOptionFormContainer

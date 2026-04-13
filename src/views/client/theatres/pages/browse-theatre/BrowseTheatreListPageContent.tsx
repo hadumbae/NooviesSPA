@@ -13,7 +13,7 @@
  * - Pagination controls
  */
 
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import BrowseTheatreParamFormContainer
     from "@/domains/theatres/components/client/forms/browse-theatre-params/BrowseTheatreParamFormContainer.tsx";

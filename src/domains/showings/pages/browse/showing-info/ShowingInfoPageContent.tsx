@@ -3,7 +3,7 @@
  * @filename ShowingInfoPageContent.tsx
  */
 
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import {formatShowingInfo} from "@/domains/showings/utilities/formatShowingInfo.ts";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";

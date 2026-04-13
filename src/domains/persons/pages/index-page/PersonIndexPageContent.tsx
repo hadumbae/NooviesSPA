@@ -13,7 +13,7 @@
 import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import PersonIndexCard from "@/domains/persons/components/PersonIndexCard.tsx";
 import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PersonIndexHeader from "@/domains/persons/components/headers/PersonIndexHeader.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";

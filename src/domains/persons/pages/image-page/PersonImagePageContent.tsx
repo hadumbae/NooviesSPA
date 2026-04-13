@@ -6,7 +6,7 @@
  */
 
 import {Person, PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PersonImageDetailsBreadcrumbs
     from "@/domains/persons/components/breadcrumbs/admin/PersonImageDetailsBreadcrumbs.tsx";
 import PersonProfileImageHeader from "@/domains/persons/components/headers/PersonProfileImageHeader.tsx";

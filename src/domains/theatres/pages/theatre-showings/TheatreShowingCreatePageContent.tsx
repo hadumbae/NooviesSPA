@@ -6,7 +6,7 @@
  */
 
 import { Theatre, TheatreDetails } from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import TheatreShowingCreateBreadcrumbs
     from "@/domains/theatres/components/admin/pages/theatre-showing-create/TheatreShowingCreateBreadcrumbs.tsx";

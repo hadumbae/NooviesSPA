@@ -10,7 +10,7 @@ import PersonSubmitFormPanel from "@/domains/persons/components/form/admin/submi
 import UploadPersonProfileImageFormPanel
     from "@/domains/persons/components/form/admin/profile-image/UploadPersonProfileImageFormPanel.tsx";
 import PersonDeleteWarningDialog from "@/domains/persons/components/admin/dialog/PersonDeleteWarningDialog.tsx";
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Person, PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import {
     MovieCreditDetailsExceptPersonGroupedByRoleArray

@@ -17,7 +17,7 @@
  */
 
 import { FC } from 'react';
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import ShowingCreateHeader from "@/domains/showings/components/features/showing-create-page/ShowingCreateHeader.tsx";
 import ShowingSubmitFormContainer from "@/domains/showings/components/forms/ShowingSubmitFormContainer.tsx";
 import { Card, CardContent } from "@/common/components/ui/card.tsx";

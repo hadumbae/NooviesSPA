@@ -8,7 +8,7 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 
 import {GenreDetailsUIContext} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContext.ts";
 
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";

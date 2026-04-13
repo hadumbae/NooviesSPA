@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import BrowseMoviesHeader from "@/domains/movies/components/client/browse-movies/BrowseMoviesHeader.tsx";
 import useFetchPaginatedMovies from "@/domains/movies/hooks/queries/useFetchPaginatedMovies.ts";
 import BrowseMovieSummaryCard

@@ -4,7 +4,7 @@
  */
 
 import {AdminReservation, ReservationUniqueCode} from "@/domains/reservation/schema/model";
-import PageFlexWrapper from "@/views/common/_comp/page/PageFlexWrapper.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {
     ReservationByCodePageHeader
 } from "@/views/admin/reservation/reservation-by-code/pages/headers/ReservationByCodePageHeader.tsx";
