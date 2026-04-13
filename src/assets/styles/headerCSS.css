@@ -1,6 +1,6 @@
 @layer components {
     .page-title {
-        @apply primary-text text-xl font-bold uppercase
+        @apply primary-text text-xl font-bold uppercase tracking-tight
     }
 
     .page-subtitle {
