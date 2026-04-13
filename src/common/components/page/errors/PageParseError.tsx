@@ -1,5 +1,5 @@
 import {ParseError} from "@/common/errors/ParseError.ts";
-import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
+import {PageCenter} from "@/views/common/_comp/page";
 import PageError from "@/common/components/page/errors/PageError.tsx";
 import {TriangleAlert} from "lucide-react";
 import {ZodIssue} from "zod";

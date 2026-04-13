@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import {useRouteError} from "react-router-dom";
-import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
 import useHttpResponseErrorHandler from "@/common/hooks/errors/useHttpResponseErrorHandler.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {PageCenter} from "@/views/common/_comp/page";
 
 /**
  * ComponentErrorHandler

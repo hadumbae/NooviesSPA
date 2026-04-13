@@ -1,4 +1,4 @@
-import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
+import {PageCenter} from "@/views/common/_comp/page/PageCenter.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page/PageFlexWrapper.tsx";
 import {PageSectionHeader} from "@/views/common/_comp/page/PageSectionHeader.tsx";
 import {PageSectionHeaderLink} from "@/views/common/_comp/page/PageSectionHeaderLink.tsx";

@@ -8,7 +8,7 @@ import AuthLoginFormContainer from "@/domains/auth/components/form/login/AuthLog
 import {useLocation} from "react-router-dom";
 import {toast} from "react-toastify";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
+import {PageCenter} from "@/views/common/_comp/page";
 
 /**
  * Renders the primary login interface and manages post-authentication redirection logic.

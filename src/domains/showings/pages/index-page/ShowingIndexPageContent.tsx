@@ -6,7 +6,7 @@
 
 import {FC} from "react";
 import ShowingIndexListDialog from "@/domains/showings/components/admin/index-page/ShowingIndexListDialog.tsx";
-import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
+import {PageCenter} from "@/views/common/_comp/page";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import ShowingIndexHeader from "@/domains/showings/components/admin/index-page/ShowingIndexHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
