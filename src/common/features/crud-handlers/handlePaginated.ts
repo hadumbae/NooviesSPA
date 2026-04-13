@@ -1,6 +1,6 @@
 /**
- * @file Higher-order function for generating standardized paginated request handlers.
- * @filename handlePaginated.ts
+ * @fileoverview Higher-order function for generating standardized paginated request handlers.
+ * Facilitates faceted search and pagination by merging limit, offset, and filter parameters.
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
@@ -11,26 +11,21 @@ import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 
 /**
- * Composite parameter type for requesting paginated document sets.
- * ---
+ * Composite parameters for requesting paginated document sets.
  */
-export type PaginatedDocumentsParams<TQueries extends RequestQueryParams> = PaginationValues & {
-    /** Domain-specific filters applied to the search query. */
+export type FindPaginatedDocumentsConfig<TQueries extends RequestQueryParams> = {
+    pagination: PaginationValues;
     queries?: TQueries;
-    /** Technical configuration for the request (e.g., populate, virtuals). */
     config?: RequestOptions;
 };
 
 /**
- * Creates an asynchronous data-fetching function configured for paginated API endpoints.
- * ---
- * @param baseURL - The root endpoint for the resource (e.g., `/api/v1/admin/genres`).
- * @returns A specialized function for fetching paginated data.
+ * Generates an asynchronous fetcher for paginated resource retrieval using the GET method.
  */
-export const handlePaginated = <TQueries extends Record<string, unknown>>(baseURL: string) => {
-    return async (params: PaginatedDocumentsParams<TQueries>): Promise<RequestReturns<unknown>> => {
-        const {queries, config, ...pagination} = params;
-
+export const handlePaginated = (baseURL: string) => {
+    return async <TQueries extends Record<string, unknown>, TReturns = unknown>(
+        {queries, config, pagination}: FindPaginatedDocumentsConfig<TQueries>
+    ): Promise<RequestReturns<TReturns>> => {
         const url = buildQueryURL({
             baseURL,
             path: "paginated",
@@ -43,4 +38,4 @@ export const handlePaginated = <TQueries extends Record<string, unknown>>(baseUR
 
         return useFetchAPI({url, method: "GET"});
     };
-}
+};

@@ -1,27 +1,30 @@
 /**
- * @file Higher-order function for generating standardized "Find" request handlers.
- * @filename handleFind.ts
+ * @fileoverview Higher-order function for generating standardized "Find" request handlers.
+ * Facilitates non-paginated bulk retrieval of resources with support for filtering and sorting.
  */
 
-import {GetEntitiesParams} from "@/common/repositories/request-repository/RequestRepository.types.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+import RequestQueryParams from "@/common/type/request/RequestQueryParams.ts";
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
- * Creates an asynchronous data-fetching function configured for a specific resource base URL.
- * ---
- * @param baseURL - The root endpoint for the resource (e.g., `/api/v1/admin/genres`).
- * @returns A specialized function that accepts search parameters and returns a {@link RequestReturns} promise.
+ * Parameters for finding multiple documents.
  */
-export const handleFind = <TQueries extends Record<string, unknown>>(baseURL: string) => {
-    return async (params: GetEntitiesParams<TQueries>): Promise<RequestReturns<unknown>> => {
-        const {queries, config} = params;
+export type FindDocumentsConfig<TQueries extends RequestQueryParams> = {
+    queries?: TQueries;
+    config?: RequestOptions;
+};
 
-        /**
-         * Resolve the full endpoint by merging domain-specific filters
-         * and technical request configurations (limit, skip, etc).
-         */
+/**
+ * Generates an asynchronous fetcher for retrieving multiple resources using the GET method.
+ */
+export const handleFind = (baseURL: string) => {
+    return async <TQueries extends Record<string, unknown>, TReturns = unknown>(
+        {queries, config}: FindDocumentsConfig<TQueries>
+    ): Promise<RequestReturns<TReturns>> => {
+
         const url = buildQueryURL({
             baseURL,
             path: "find",
@@ -30,4 +33,4 @@ export const handleFind = <TQueries extends Record<string, unknown>>(baseURL: st
 
         return useFetchAPI({url, method: "GET"});
     };
-}
+};
