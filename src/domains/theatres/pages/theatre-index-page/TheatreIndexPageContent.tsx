@@ -1,17 +1,10 @@
 /**
- * @file TheatreIndexPageContent.tsx
- *
- * Content renderer for the Theatre Index admin page.
- *
- * Renders:
- * - Page header and filter dialog
- * - Theatre cards or empty state
- * - Pagination controls
+ * @fileoverview Presentation component for the Theatre Index page.
+ * Orchestrates the administrative interface for theater management, including
+ * responsive grid layouts, search/filter dialogs, and pagination.
  */
 
-import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import TheatreIndexCard from "@/domains/theatres/components/admin/pages/theatre-index/TheatreIndexCard.tsx";
-import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import TheatreIndexHeader from "@/domains/theatres/components/admin/pages/theatre-index/TheatreIndexHeader.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
@@ -23,73 +16,33 @@ import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {TheatreQueryOptionSchema} from "@/domains/theatres/schema/queries/TheatreQueryOption.schema.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import useNavigateToTheatre from "@/domains/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
+import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
-/**
- * Props for {@link TheatreIndexPageContent}.
- */
 export type TheatreIndexPageContentProps = {
-    /** Paginated theatre results */
     theatres: TheatreDetails[];
-
-    /** Total number of theatres */
     totalItems: number;
-
-    /** Current page (1-based) */
     page: number;
-
-    /** Items per page */
     perPage: number;
-
-    /** Page setter */
     setPage: (page: number) => void;
 };
 
 /**
- * Theatre Index page content.
- *
- * Layout:
- * header → filters → theatre cards / empty state → pagination
- *
- * - Filter state is derived from URL search params
- * - Pagination rendering is conditional on total size
- *
- * @component
+ * Renders the main theatre management listing.
+ * Combines URL-driven filter states with paginated results and provides
+ * navigation logic for theater creation or selection.
  */
 const TheatreIndexPageContent = (
     {theatres, page, perPage, setPage, totalItems}: TheatreIndexPageContentProps
 ) => {
-    const {searchParams} = useParsedSearchParams({
-        schema: TheatreQueryOptionSchema,
-    });
+    const {searchParams} = useParsedSearchParams({schema: TheatreQueryOptionSchema});
 
     const navigateToTheatre = useNavigateToTheatre();
 
-    const pageContent =
-        theatres.length > 0 ? (
-            <PageSection className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                {theatres.map((theatre) => (
-                    <TheatreIndexCard
-                        key={theatre._id}
-                        theatre={theatre}
-                    />
-                ))}
-            </PageSection>
-        ) : (
-            <PageCenter>
-                <span className="text-neutral-400 select-none">
-                    There are no theatres
-                </span>
-            </PageCenter>
-        );
-
-    /**
-     * Navigates to the theatre detail page after successful submit.
-     */
     const onSubmitSuccess = (theatre: Theatre) => {
         navigateToTheatre({
             slug: theatre.slug,
             component: TheatreIndexPageContent.name,
-            message: "Navigate to theatre after submit.",
+            message: "Navigation to theatre profile after submission."
         });
     };
 
@@ -109,7 +62,21 @@ const TheatreIndexPageContent = (
                 </ScrollArea>
             </PresetFilterDialog>
 
-            {pageContent}
+            {theatres.length > 0 ? (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    {theatres.map((theatre) => (
+                        <TheatreIndexCard
+                            key={theatre._id}
+                            theatre={theatre}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <EmptyArrayContainer
+                    className="flex-1"
+                    text="There are no theatres."
+                />
+            )}
 
             {totalItems > perPage && (
                 <PaginationRangeButtons

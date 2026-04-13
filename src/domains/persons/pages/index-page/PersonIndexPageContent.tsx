@@ -1,18 +1,10 @@
 /**
- * @file PersonIndexPageContent.tsx
- *
- * Presentational layout for the person index page.
- *
- * Renders:
- * - Page header
- * - Filter dialog
- * - Person grid or empty state
- * - Pagination controls
+ * @fileoverview Presentation component for the Person Index page.
+ * Orchestrates the layout for the person listing grid, search filters,
+ * and pagination for the administrative interface.
  */
 
-import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import PersonIndexCard from "@/domains/persons/components/PersonIndexCard.tsx";
-import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PersonIndexHeader from "@/domains/persons/components/headers/PersonIndexHeader.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
@@ -22,10 +14,8 @@ import PersonQueryOptionFormContainer
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import {PersonQueryOptions} from "@/domains/persons/schema/queries/PersonQueryOption.types.ts";
+import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
-/**
- * Props for {@link PersonIndexPageContent}.
- */
 type ContentProps = {
     persons: PersonDetails[];
     queryOptions: PersonQueryOptions;
@@ -36,44 +26,39 @@ type ContentProps = {
 };
 
 /**
- * Layout component for rendering the person index UI.
- *
- * Handles:
- * - Empty vs populated states
- * - Filter dialog placement
- * - Pagination visibility
+ * Renders the main person management interface.
  */
 const PersonIndexPageContent = (
     {persons, queryOptions, page, perPage, totalItems, setPage}: ContentProps
 ) => {
-    const personSection = (
-        <PageSection className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {persons.map(person => <PersonIndexCard key={person._id} person={person}/>)}
-        </PageSection>
-    );
-
-    const emptySection = (
-        <PageCenter>
-            <span className="text-neutral-400 select-none">
-                There Are No People
-            </span>
-        </PageCenter>
-    );
-
-    const content = persons.length > 0 ? personSection : emptySection;
-
     return (
         <PageFlexWrapper>
             <PersonIndexHeader/>
 
-            <PresetFilterDialog title="Person Filters" description="Filter and sort persons.">
+            <PresetFilterDialog
+                title="Person Filters"
+                description="Filter and sort persons."
+            >
                 <ScrollArea className="max-h-[80vh]">
                     <ScrollBar/>
                     <PersonQueryOptionFormContainer presetValues={queryOptions}/>
                 </ScrollArea>
             </PresetFilterDialog>
 
-            {content}
+            {
+                persons.length > 0 ? (
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        {persons.map(person => (
+                            <PersonIndexCard key={person._id} person={person}/>
+                        ))}
+                    </div>
+                ) : (
+                    <EmptyArrayContainer
+                        className="flex-1"
+                        text="There Are No People"
+                    />
+                )
+            }
 
             {totalItems > perPage && (
                 <PaginationRangeButtons

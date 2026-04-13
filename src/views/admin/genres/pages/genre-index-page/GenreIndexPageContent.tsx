@@ -1,13 +1,12 @@
 /**
- * @file Presentational layer for the Genre Index administrative view.
- * @filename GenreIndexPageContent.tsx
+ * @fileoverview Presentation component for the Genre Index page.
+ * Orchestrates the administrative grid view for genres, including
+ * search/filter dialogs, responsive card layouts, and pagination.
  */
 
 import {FC} from 'react';
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import GenreIndexCard from "@/views/admin/genres/components/cards/GenreIndexCard.tsx";
-import PageCenter from "@/views/common/_comp/page/PageCenter.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import GenreIndexHeader from "@/views/admin/genres/pages/genre-index-page/headers/GenreIndexHeader.tsx";
@@ -17,30 +16,19 @@ import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import GenreQueryOptionFormContainer
     from "@/views/admin/genres/components/form/genre-query-options/GenreQueryOptionFormContainer.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
-/**
- * Props for the {@link GenreIndexPageContent} component.
- */
 type GenreIndexPageContentProps = {
-    /** Current active page number from the URL state. */
     page: number;
-    /** Maximum items displayed per page. */
     perPage: number;
-    /** Callback to update the pagination state in the URL. */
     setPage: (page: number) => void;
-    /** Collection of genre entities to display in the grid. */
     genres: Genre[];
-    /** Total count of genres matching current filters for pagination logic. */
     totalItems: number;
 };
 
 /**
- * Renders the main administrative interface for browsing and filtering genres.
- * @param props - Data and pagination controls from the parent page container.
+ * Renders the primary genre management interface.
  */
 const GenreIndexPageContent: FC<GenreIndexPageContentProps> = (props) => {
     const isMobile = useIsMobile();
@@ -50,55 +38,48 @@ const GenreIndexPageContent: FC<GenreIndexPageContentProps> = (props) => {
         schema: GenreQueryOptionSchema
     });
 
-    const hasGenreSection = (
-        <PageSection className="grid grid-cols-2 md:grid-cols-3 gap-2">
-            {genres.map((genre: Genre) => (
-                <GenreIndexCard
-                    orientation={isMobile ? "vertical" : "horizontal"}
-                    genre={genre}
-                    key={genre._id}
-                />
-            ))}
-        </PageSection>
-    );
-
-    const hasNoGenreSection = (
-        <PageCenter>
-            <span className={cn(SecondaryTextBaseCSS, "select-none capitalize")}>
-                There Are No Genres
-            </span>
-        </PageCenter>
-    );
-
-    const listContent = genres.length > 0
-        ? hasGenreSection
-        : hasNoGenreSection;
-
     return (
         <PageFlexWrapper>
-            <GenreIndexHeader/>
+            <GenreIndexHeader />
 
             <section>
                 <SectionHeader srOnly={true}>Filter Genres</SectionHeader>
 
-                <PresetFilterDialog title="Genre Filters" description="Filter and sort your genres.">
+                <PresetFilterDialog
+                    title="Genre Filters"
+                    description="Filter and sort your genres."
+                >
                     <GenreQueryOptionFormContainer
                         presetValues={searchParams}
                     />
                 </PresetFilterDialog>
             </section>
 
-            {listContent}
+            {genres.length > 0 ? (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                    {genres.map((genre: Genre) => (
+                        <GenreIndexCard
+                            orientation={isMobile ? "vertical" : "horizontal"}
+                            genre={genre}
+                            key={genre._id}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <EmptyArrayContainer
+                    text="There are no genres."
+                    className="flex-1"
+                />
+            )}
 
-            {
-                totalItems > perPage &&
+            {totalItems > perPage && (
                 <PaginationRangeButtons
                     page={page}
                     perPage={perPage}
                     totalItems={totalItems}
                     setPage={setPage}
                 />
-            }
+            )}
         </PageFlexWrapper>
     );
 };

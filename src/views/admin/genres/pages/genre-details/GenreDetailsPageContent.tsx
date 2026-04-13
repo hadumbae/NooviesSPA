@@ -1,59 +1,39 @@
 /**
- * @file Presentational layer for the Genre Details administrative view.
- * @filename GenreDetailsPageContent.tsx
+ * @fileoverview Presentation component for the Genre Details page.
+ * Orchestrates the display of genre metadata and a paginated list of
+ * associated movies, while managing administrative editing and deletion panels.
  */
 
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-
 import {GenreDetailsUIContext} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContext.ts";
-
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-
-import GenreDetailsBreadcrumbs
-    from "@/views/admin/genres/pages/genre-details/header/GenreDetailsBreadcrumbs.tsx";
-import GenreDetailsHeader
-    from "@/views/admin/genres/pages/genre-details/header/GenreDetailsHeader.tsx";
-import GenreDetailsCard
-    from "@/views/admin/genres/pages/genre-details/display/GenreDetailsCard.tsx";
-
-import MovieIndexCard
-    from "@/domains/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
-
-import GenreSubmitFormPanel
-    from "@/views/admin/genres/components/form/submit-form/GenreSubmitFormPanel.tsx";
-import GenreDeleteWarningDialog
-    from "@/views/admin/genres/components/dialog/GenreDeleteWarningDialog.tsx";
+import GenreDetailsBreadcrumbs from "@/views/admin/genres/pages/genre-details/header/GenreDetailsBreadcrumbs.tsx";
+import GenreDetailsHeader from "@/views/admin/genres/pages/genre-details/header/GenreDetailsHeader.tsx";
+import GenreDetailsCard from "@/views/admin/genres/pages/genre-details/display/GenreDetailsCard.tsx";
+import MovieIndexCard from "@/domains/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
+import GenreSubmitFormPanel from "@/views/admin/genres/components/form/submit-form/GenreSubmitFormPanel.tsx";
+import GenreDeleteWarningDialog from "@/views/admin/genres/components/dialog/GenreDeleteWarningDialog.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
-/**
- * Props for the {@link GenreDetailsPageContent} component.
- */
 type ContentProps = {
-    /** The core genre data to display. */
     genre: Genre;
-    /** List of movies associated with this genre. */
     movies: MovieDetails[];
-    /** Total count for pagination calculations. */
     totalItems: number;
-    /** Current active page index. */
     page: number;
-    /** Number of items per results page. */
     perPage: number;
-    /** Callback to update the current page state. */
     setPage: (page: number | string) => void;
 };
 
 /**
  * Renders the structural layout and interactive panels for the Genre Details page.
- * @param props - Data and pagination controls from the parent loader.
+ * Synchronizes document title with the genre name and handles administrative
+ * state via GenreDetailsUIContext.
  */
 const GenreDetailsPageContent = (props: ContentProps) => {
     const {page, perPage, setPage, movies, genre, totalItems} = props;
@@ -67,48 +47,44 @@ const GenreDetailsPageContent = (props: ContentProps) => {
         isEditing,
         setIsEditing,
         isDeleting,
-        setIsDeleting,
+        setIsDeleting
     } = useRequiredContext({context: GenreDetailsUIContext});
 
+    /** Syncs the URL slug if the genre name is modified during editing. */
     const updateSlug = ({slug}: Genre) => navigate({
         to: `/admin/genres/get/${slug}`,
-        options: {replace: true},
+        options: {replace: true}
     });
 
+    /** Redirects to the genre library after successful deletion. */
     const navigateToIndex = () => navigate({
         to: `/admin/genres`,
-        message: "Navigate after deleting genre.",
+        message: "Navigation to index after successful genre deletion."
     });
 
     return (
         <PageFlexWrapper>
-            <GenreDetailsBreadcrumbs genreName={name}/>
-            <GenreDetailsHeader genre={genre}/>
+            <GenreDetailsBreadcrumbs genreName={name} />
+            <GenreDetailsHeader genre={genre} />
 
-            <PageSection srTitle="Genre Details">
-                <GenreDetailsCard genre={genre}/>
-            </PageSection>
+            <GenreDetailsCard genre={genre} />
 
-            {
-                movies.length > 0 ? (
-                    <section className="space-y-2">
-                        <SectionHeader>Movies</SectionHeader>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                            {movies.map((movie: MovieDetails) => (
-                                <MovieIndexCard
-                                    className="w-16"
-                                    movie={movie}
-                                    key={movie._id}
-                                />
-                            ))}
-                        </div>
-                    </section>
-                ) : (
-                    <EmptyArrayContainer
-                        text="There Are No Movies"
-                    />
-                )
-            }
+            {movies.length > 0 ? (
+                <section className="space-y-2">
+                    <SectionHeader>Movies</SectionHeader>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        {movies.map((movie: MovieDetails) => (
+                            <MovieIndexCard
+                                className="w-16"
+                                movie={movie}
+                                key={movie._id}
+                            />
+                        ))}
+                    </div>
+                </section>
+            ) : (
+                <EmptyArrayContainer text="There Are No Movies" />
+            )}
 
             {totalItems > perPage && (
                 <PaginationRangeButtons
@@ -119,6 +95,7 @@ const GenreDetailsPageContent = (props: ContentProps) => {
                 />
             )}
 
+            {/* Administrative Panels */}
             <section className="hidden">
                 <SectionHeader>Genre Editing Form</SectionHeader>
 

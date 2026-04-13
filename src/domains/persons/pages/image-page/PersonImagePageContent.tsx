@@ -1,8 +1,7 @@
 /**
- * @file PersonImagePageContent.tsx
- *
- * Presentational component for managing a person's profile image.
- * Renders breadcrumbs, header, and an image upload form.
+ * @fileoverview Presentation component for the Person Profile Image page.
+ * Provides the interface for managing and uploading a person's profile image,
+ * including contextual navigation and upload feedback.
  */
 
 import {Person, PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
@@ -10,7 +9,6 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PersonImageDetailsBreadcrumbs
     from "@/domains/persons/components/breadcrumbs/admin/PersonImageDetailsBreadcrumbs.tsx";
 import PersonProfileImageHeader from "@/domains/persons/components/headers/PersonProfileImageHeader.tsx";
-import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import {
     Card,
     CardContent,
@@ -21,37 +19,24 @@ import {
 import UploadPersonProfileImageFormContainer
     from "@/domains/persons/components/form/admin/profile-image/UploadPersonProfileImageFormContainer.tsx";
 import {useNavigateToPerson} from "@/domains/persons/hooks/navigation/useNavigateToPerson.ts";
+import {ReactElement} from "react";
 
-/**
- * Props for {@link PersonImagePageContent}.
- */
 type ContentProps = {
-    /** Fully populated person details. */
     person: PersonDetails;
 };
 
 /**
- * Renders the person profile image management UI.
- *
- * @remarks
- * - Displays contextual breadcrumbs and headers.
- * - Wraps the profile image upload form.
- * - Navigates back to the person details page on successful upload.
- *
- * @example
- * ```tsx
- * <PersonImagePageContent person={person} />
- * ```
+ * Renders the administrative interface for person profile image management.
  */
-const PersonImagePageContent = ({person}: ContentProps) => {
+function PersonImagePageContent({person}: ContentProps): ReactElement {
     const navigate = useNavigateToPerson();
     const {_id, name, slug} = person;
 
     const onUpdate = (updated: Person) =>
         navigate({
             slug: updated.slug,
-            message: "Navigation on successful update to person's profile image.",
-            component: PersonImagePageContent.name,
+            message: "Navigation to profile after successful image upload.",
+            component: PersonImagePageContent.name
         });
 
     return (
@@ -61,25 +46,23 @@ const PersonImagePageContent = ({person}: ContentProps) => {
                 <PersonProfileImageHeader name={name}/>
             </header>
 
-            <PageSection>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Upload Images</CardTitle>
-                        <CardDescription>
-                            Select an image and click on `Submit`.
-                        </CardDescription>
-                    </CardHeader>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Upload Images</CardTitle>
+                    <CardDescription>
+                        Select an image and click on "Submit".
+                    </CardDescription>
+                </CardHeader>
 
-                    <CardContent>
-                        <UploadPersonProfileImageFormContainer
-                            personID={_id}
-                            onSubmitSuccess={onUpdate}
-                        />
-                    </CardContent>
-                </Card>
-            </PageSection>
+                <CardContent>
+                    <UploadPersonProfileImageFormContainer
+                        personID={_id}
+                        onSubmitSuccess={onUpdate}
+                    />
+                </CardContent>
+            </Card>
         </PageFlexWrapper>
     );
-};
+}
 
 export default PersonImagePageContent;

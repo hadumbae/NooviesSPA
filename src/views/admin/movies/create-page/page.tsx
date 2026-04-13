@@ -7,7 +7,6 @@
 import {FC} from 'react';
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import MovieSubmitFormContainer from "@/domains/movies/components/forms/MovieSubmitFormContainer.tsx";
-import PageSection from "@/views/common/_comp/page/PageSection.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
@@ -32,19 +31,17 @@ const MovieCreatePage: FC = () => {
 
     return (
         <PageFlexWrapper>
-            <MovieCreatePageHeader />
+            <MovieCreatePageHeader/>
 
-            <PageSection srTitle="Movie Creation Form">
-                <Card>
-                    <CardContent className="p-4">
-                        <MovieSubmitFormContainer
-                            onSubmitSuccess={onSuccess}
-                            successMessage={successMessage}
-                            errorMessage={errorMessage}
-                        />
-                    </CardContent>
-                </Card>
-            </PageSection>
+            <Card>
+                <CardContent className="p-4">
+                    <MovieSubmitFormContainer
+                        onSubmitSuccess={onSuccess}
+                        successMessage={successMessage}
+                        errorMessage={errorMessage}
+                    />
+                </CardContent>
+            </Card>
         </PageFlexWrapper>
     );
 };
