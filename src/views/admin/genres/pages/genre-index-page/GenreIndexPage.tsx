@@ -1,6 +1,6 @@
 /**
- * @file High-level administrative page for browsing and managing the Genre collection.
- * @filename GenreIndexPage.tsx
+ * @fileoverview Administrative page for managing Genres.
+ * Handles pagination, search param parsing, and validated data fetching.
  */
 
 import {FC} from 'react';
@@ -10,12 +10,12 @@ import usePaginationLocationState from "@/common/hooks/router/usePaginationLocat
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";
 import GenreIndexPageContent from "@/views/admin/genres/pages/genre-index-page/GenreIndexPageContent.tsx";
-import useFetchPaginatedGenres from "@/domains/genres/_feat/crud-hooks/useFetchPaginatedGenres.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {PaginatedGenres, PaginatedGenresSchema} from "@/domains/genres/schema/genre/PaginatedGenresSchema.ts";
+import {useFetchPaginatedGenres} from "@/domains/genres/_feat/crud-hooks";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /**
- * Acts as the orchestration layer for the Genre Index view.
+ * Orchestration layer for the Genre Index view.
  */
 const GenreIndexPage: FC = () => {
     useTitle("Genres");
@@ -30,6 +30,7 @@ const GenreIndexPage: FC = () => {
     });
 
     const query = useFetchPaginatedGenres({
+        schema: PaginatedGenresSchema,
         page,
         perPage,
         queries: searchParams,
@@ -37,7 +38,7 @@ const GenreIndexPage: FC = () => {
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={PaginatedGenresSchema}>
+        <QueryDataLoader query={query}>
             {({totalItems, items}: PaginatedGenres) => (
                 <GenreIndexPageContent
                     genres={items}
@@ -47,7 +48,7 @@ const GenreIndexPage: FC = () => {
                     setPage={setPage}
                 />
             )}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 };
 
