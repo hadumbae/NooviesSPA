@@ -10,7 +10,7 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
-import {GenreHookFormSelect} from "@/views/admin/genres/_comp/input/GenreHookFormSelect.tsx";
+import {GenreHookFormSelect} from "@/views/admin/genres/_feat/form-input";
 
 /**
  * Props for MovieQueryOptionFormFilterFieldset.

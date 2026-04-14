@@ -1,9 +1,9 @@
 /**
  * @fileoverview Movie submission form view for creating or editing movies.
- * Groups fields into Basic Details, Production & Release, and Media & Accessibility.
+ * Groups fields into Basic Details, Production & Release, and Media & Accessibility sections.
  */
 
-import {FC} from 'react';
+import {ReactElement} from 'react';
 import {Form} from "@/common/components/ui/form.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
@@ -19,8 +19,9 @@ import {MovieFormValuesSchema} from "@/domains/movies/schema/form/MovieForm.sche
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
-import {GenreHookFormSelect} from "@/views/admin/genres/_comp/input/GenreHookFormSelect.tsx";
+import {GenreHookFormSelect} from "@/views/admin/genres/_feat/form-input/GenreHookFormSelect.tsx";
 
+/** Props for the {@link MovieSubmitFormView} component. */
 type ViewProps = FormViewProps<Movie, MovieForm, MovieFormValues> & {
     className?: string;
     isPanel?: boolean;
@@ -29,11 +30,13 @@ type ViewProps = FormViewProps<Movie, MovieForm, MovieFormValues> & {
 /**
  * Renders the movie form UI with dynamic field activation and responsive grid layout.
  */
-const MovieSubmitFormView: FC<ViewProps> = (props) => {
-    const {form, submitHandler, mutation, className, disableFields, isPanel = false} = props;
-    const {isPending, isSuccess} = mutation;
-
-    const activeFields = getActiveSchemaInputFields({schema: MovieFormValuesSchema, disableFields});
+function MovieSubmitFormView(
+    {form, submitHandler, className, disableFields, isPanel, mutation: {isPending, isSuccess}}: ViewProps
+): ReactElement {
+    const activeFields = getActiveSchemaInputFields({
+        schema: MovieFormValuesSchema,
+        disableFields
+    });
 
     return (
         <Form {...form}>
@@ -45,11 +48,11 @@ const MovieSubmitFormView: FC<ViewProps> = (props) => {
                     className,
                 )}
             >
-                {/* Basic Details */}
+                {/* Basic Details Section */}
                 <fieldset className="space-y-3">
                     <section>
-                        <h1 className="text-lg font-bold">Basic Details</h1>
-                        <Separator/>
+                        <h2 className="text-lg font-bold">Basic Details</h2>
+                        <Separator />
                     </section>
 
                     {activeFields.title && (
@@ -66,66 +69,96 @@ const MovieSubmitFormView: FC<ViewProps> = (props) => {
                     )}
                 </fieldset>
 
-                {/* Production & Release */}
+                {/* Production & Release Section */}
                 <fieldset className="space-y-3">
                     <section>
-                        <h1 className="text-lg font-bold">Production & Release</h1>
-                        <Separator/>
+                        <h2 className="text-lg font-bold">Production & Release</h2>
+                        <Separator />
                     </section>
 
                     {activeFields.country && (
                         <CountryHookFormSelect name="country" label="Country" control={form.control} />
                     )}
                     {activeFields.runtime && (
-                        <HookFormInput name="runtime" label="Duration (Min)" control={form.control} type="number" />
+                        <HookFormInput
+                            name="runtime"
+                            label="Duration (Min)"
+                            control={form.control}
+                            type="number"
+                        />
                     )}
                     {activeFields.originalLanguage && (
-                        <LanguageHookFormSelect name="originalLanguage" label="Original Language" control={form.control} />
+                        <LanguageHookFormSelect
+                            name="originalLanguage"
+                            label="Original Language"
+                            control={form.control}
+                        />
                     )}
                     {activeFields.isReleased && (
                         <HookFormCheckbox name="isReleased" label="Is Released?" control={form.control} />
                     )}
                     {activeFields.releaseDate && (
-                        <HookFormInput name="releaseDate" label="Release Date" control={form.control} type="date" />
+                        <HookFormInput
+                            name="releaseDate"
+                            label="Release Date"
+                            control={form.control}
+                            type="date"
+                        />
                     )}
                 </fieldset>
 
-                {/* Media & Accessibility */}
+                {/* Media & Accessibility Section */}
                 <fieldset className="space-y-3">
                     <section>
-                        <h1 className="text-lg font-bold">Media & Accessibility</h1>
-                        <Separator/>
+                        <h2 className="text-lg font-bold">Media & Accessibility</h2>
+                        <Separator />
                     </section>
 
                     {activeFields.trailerURL && (
                         <HookFormInput name="trailerURL" label="Trailer URL" control={form.control} />
                     )}
                     {activeFields.languages && (
-                        <LanguageHookFormSelect name="languages" label="Languages" control={form.control} isMulti />
+                        <LanguageHookFormSelect
+                            name="languages"
+                            label="Available Languages"
+                            control={form.control}
+                            isMulti
+                        />
                     )}
                     {activeFields.subtitles && (
-                        <LanguageHookFormSelect name="subtitles" label="Subtitles" control={form.control} isMulti />
+                        <LanguageHookFormSelect
+                            name="subtitles"
+                            label="Subtitles"
+                            control={form.control}
+                            isMulti
+                        />
                     )}
                     {activeFields.genres && (
-                        <GenreHookFormSelect name="genres" label="Genres" control={form.control} isMulti />
+                        <GenreHookFormSelect
+                            name="genres"
+                            label="Genres"
+                            control={form.control}
+                            isMulti
+                        />
                     )}
                     {activeFields.isAvailable && (
-                        <HookFormCheckbox name="isAvailable" label="Is Available?" control={form.control} />
+                        <HookFormCheckbox name="isAvailable" label="Is Publicly Available?" control={form.control} />
                     )}
                 </fieldset>
 
+                {/* Form Submission Action */}
                 <div className={cn(!isPanel && "lg:col-span-3")}>
                     <Button
                         type="submit"
                         className={cn(PrimaryButtonCSS, "w-full")}
                         disabled={isPending || isSuccess}
                     >
-                        Submit
+                        {isPending ? "Submitting..." : "Submit Movie"}
                     </Button>
                 </div>
             </form>
         </Form>
     );
-};
+}
 
 export default MovieSubmitFormView;

@@ -11,8 +11,6 @@ import {PageLoader} from "@/views/common/_comp/page";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import GenreDetailsUIContextProvider
     from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContextProvider.tsx";
-import GenreDetailsPageContent
-    from "@/views/admin/genres/pages/genre-details/GenreDetailsPageContent.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 import {
@@ -20,6 +18,7 @@ import {
     GenreDetailsViewDataSchema,
     useFetchGenreDetailsViewData
 } from "@/domains/genres/views/admin/details-page/data";
+import {GenreDetailsPageContent} from "@/views/admin/genres/pages/genre-details/content.tsx";
 
 /** Default limit for the paginated movie sub-collection. */
 const MOVIES_PER_PAGE = 12;

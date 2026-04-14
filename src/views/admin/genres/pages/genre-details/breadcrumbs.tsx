@@ -1,42 +1,33 @@
-import {FC} from 'react';
+/**
+ * @fileoverview Breadcrumb navigation for the Genre details view.
+ * Persists pagination and filter state when navigating back to the index.
+ */
+
+import {ReactElement} from 'react';
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
-    BreadcrumbList, BreadcrumbPage,
+    BreadcrumbList,
+    BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import {Link} from "react-router-dom";
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import convertToQueryParams from "@/common/utility/query/convertToQueryParams.ts";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 
-/**
- * Props for the {@link GenreDetailsBreadcrumbs} component.
- */
+/** Props for the {@link GenreDetailsPageBreadcrumbs} component. */
 type BreadcrumbProps = {
-    /**
-     * The name of the genre currently being viewed.
-     */
+    /** The display name of the genre being viewed. */
     genreName: string;
 };
 
 /**
- * A breadcrumb navigation component for the genre details page.
- * It provides a link back to the "All Genres" list and shows
- * the current genre name as the active page.
- *
- * @component
- * @example
- * ```tsx
- * <GenreDetailsBreadcrumbs genreName="Action" />
- * ```
- *
- * @param {BreadcrumbProps} props - The props object.
- * @param {string} props.genreName - The name of the genre to display in the breadcrumb.
- *
- * @returns {JSX.Element} A breadcrumb navigation bar for genre details.
+ * Renders breadcrumbs for the Genre details page.
  */
-const GenreDetailsBreadcrumbs: FC<BreadcrumbProps> = ({genreName}) => {
+export function GenreDetailsPageBreadcrumbs(
+    {genreName}: BreadcrumbProps
+): ReactElement {
     const {data: state} = usePaginationLocationState();
     const query = convertToQueryParams(state);
 
@@ -45,7 +36,12 @@ const GenreDetailsBreadcrumbs: FC<BreadcrumbProps> = ({genreName}) => {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to={`/admin/genres?${query.toString()}`}>All Genres</Link>
+                        <LoggedLink
+                            to={`/admin/genres?${query.toString()}`}
+                            component={GenreDetailsPageBreadcrumbs.name}
+                        >
+                            All Genres
+                        </LoggedLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -57,6 +53,4 @@ const GenreDetailsBreadcrumbs: FC<BreadcrumbProps> = ({genreName}) => {
             </BreadcrumbList>
         </Breadcrumb>
     );
-};
-
-export default GenreDetailsBreadcrumbs;
+}

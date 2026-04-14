@@ -7,19 +7,19 @@
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {GenreDetailsUIContext} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContext.ts";
-import {PageFlexWrapper} from "@/views/common/_comp/page";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import GenreDetailsBreadcrumbs from "@/views/admin/genres/pages/genre-details/header/GenreDetailsBreadcrumbs.tsx";
-import GenreDetailsHeader from "@/views/admin/genres/pages/genre-details/header/GenreDetailsHeader.tsx";
-import GenreDetailsCard from "@/views/admin/genres/pages/genre-details/display/GenreDetailsCard.tsx";
 import MovieIndexCard from "@/domains/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
-import GenreDeleteWarningDialog from "@/views/admin/genres/_comp/dialog/GenreDeleteWarningDialog.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {GenreSubmitForm, GenreSubmitFormPanel} from "@/views/admin/genres/_feat/submit-form";
+import {ReactElement} from "react";
+import {GenreDetailsPageHeader} from "@/views/admin/genres/pages/genre-details/header.tsx";
+import {GenreDetailsCard} from "@/views/admin/genres/pages/genre-details/detailsCard.tsx";
+import {SROnly} from "@/views/common/_comp/screen-readers";
+import {GenreDeleteWarningDialog} from "@/views/admin/genres/_feat/delete-genre";
 
 type ContentProps = {
     genre: Genre;
@@ -32,14 +32,11 @@ type ContentProps = {
 
 /**
  * Renders the structural layout and interactive panels for the Genre Details page.
- * Synchronizes document title with the genre name and handles administrative
- * state via GenreDetailsUIContext.
  */
-const GenreDetailsPageContent = (props: ContentProps) => {
-    const {page, perPage, setPage, movies, genre, totalItems} = props;
-    const {name} = genre;
-
-    useTitle(name);
+export function GenreDetailsPageContent(
+    {page, perPage, setPage, movies, genre, totalItems}: ContentProps
+): ReactElement {
+    useTitle(genre.name);
 
     const navigate = useLoggedNavigate();
 
@@ -50,13 +47,15 @@ const GenreDetailsPageContent = (props: ContentProps) => {
         setIsDeleting
     } = useRequiredContext({context: GenreDetailsUIContext});
 
-    /** Syncs the URL slug if the genre name is modified during editing. */
-    const updateSlug = ({slug}: Genre) => navigate({
-        to: `/admin/genres/get/${slug}`,
-        options: {replace: true}
-    });
+    const replaceSlug = ({slug}: Genre) => {
+        navigate({
+            to: `/admin/genres/get/${slug}`,
+            options: {replace: true}
+        });
 
-    /** Redirects to the genre library after successful deletion. */
+        setIsEditing(false);
+    }
+
     const navigateToIndex = () => navigate({
         to: `/admin/genres`,
         message: "Navigation to index after successful genre deletion."
@@ -64,64 +63,56 @@ const GenreDetailsPageContent = (props: ContentProps) => {
 
     return (
         <PageFlexWrapper>
-            <GenreDetailsBreadcrumbs genreName={name}/>
-            <GenreDetailsHeader genre={genre}/>
+            <GenreDetailsPageHeader genre={genre}/>
 
             <GenreDetailsCard genre={genre}/>
 
             {movies.length > 0 ? (
-                <section className="space-y-2">
-                    <SectionHeader>Movies</SectionHeader>
+                <section className="space-y-4">
+                    <PageSectionHeader text="Movies"/>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {movies.map((movie: MovieDetails) => (
-                            <MovieIndexCard
-                                className="w-16"
-                                movie={movie}
-                                key={movie._id}
-                            />
+                            <MovieIndexCard key={movie._id} className="w-16" movie={movie}/>
                         ))}
                     </div>
                 </section>
             ) : (
-                <EmptyArrayContainer text="There Are No Movies"/>
-            )}
-
-            {totalItems > perPage && (
-                <PaginationRangeButtons
-                    page={page}
-                    perPage={perPage}
-                    totalItems={totalItems}
-                    setPage={setPage}
+                <EmptyArrayContainer
+                    className="flex-1"
+                    text="There Are No Movies"
                 />
             )}
 
-            {/* Administrative Panels */}
+            <PaginationRangeButtons
+                page={page}
+                perPage={perPage}
+                totalItems={totalItems}
+                setPage={setPage}
+            />
+
             <section className="hidden">
-                <SectionHeader>Genre Editing Form</SectionHeader>
+                <SROnly text="Genre Option Dialogs"/>
 
                 <GenreSubmitForm
                     editEntity={genre}
-                    onSubmitSuccess={updateSlug}
+                    onSubmitSuccess={replaceSlug}
+                    successMessage="Updated"
                 >
                     <GenreSubmitFormPanel
                         isEditing={true}
                         isOpen={isEditing}
                         setIsOpen={setIsEditing}
-
                     />
                 </GenreSubmitForm>
-            </section>
 
-            <section className="hidden">
                 <GenreDeleteWarningDialog
-                    presetOpen={isDeleting}
-                    setPresetOpen={setIsDeleting}
-                    genreID={genre._id}
-                    onDeleteSuccess={navigateToIndex}
+                    isOpen={isDeleting}
+                    setIsOpen={setIsDeleting}
+                    _id={genre._id}
+                    name={genre.name}
+                    onSubmitSuccess={navigateToIndex}
                 />
             </section>
         </PageFlexWrapper>
     );
-};
-
-export default GenreDetailsPageContent;
+}
