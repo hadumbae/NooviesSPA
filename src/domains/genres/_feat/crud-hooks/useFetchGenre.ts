@@ -31,7 +31,7 @@ export type FetchParams<TData = unknown> = {
 export default function useFetchGenre<TData = unknown>(
     {_id, schema, config, options}: FetchParams<TData>
 ): UseQueryResult<TData, HttpResponseError> {
-    const fetchGenre = buildQueryFn({
+    const fetchGenre = buildQueryFn<TData>({
         action: () => findByID({_id, config}),
         schema,
     });
