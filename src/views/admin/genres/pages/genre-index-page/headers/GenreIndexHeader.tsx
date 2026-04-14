@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import {FC, useState} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import { Plus } from "lucide-react";
-import GenreSubmitFormPanel from "@/views/admin/genres/_comp/form/submit-form/GenreSubmitFormPanel.tsx";
-import { Button } from "@/common/components/ui/button.tsx";
+import {Plus} from "lucide-react";
+import {Button} from "@/common/components/ui/button.tsx";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
+import {GenreSubmitForm, GenreSubmitFormPanel} from "@/views/admin/genres/_feat/submit-form";
 
 /**
  * Header section for the Genre index page.
@@ -29,6 +29,8 @@ import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
  * - This component is intended to be used at the top of the Genre index page.
  */
 const GenreIndexHeader: FC = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
     return (
         <header className="flex justify-between items-center">
             <section>
@@ -36,11 +38,13 @@ const GenreIndexHeader: FC = () => {
                 <HeaderDescription>The genres of the movies.</HeaderDescription>
             </section>
 
-            <GenreSubmitFormPanel>
-                <Button variant="link" className={HoverLinkCSS}>
-                    <Plus /> Create
-                </Button>
-            </GenreSubmitFormPanel>
+            <GenreSubmitForm>
+                <GenreSubmitFormPanel isOpen={isOpen} setIsOpen={setIsOpen}>
+                    <Button variant="link" className={HoverLinkCSS} onClick={() => setIsOpen(true)}>
+                        <Plus/> Create
+                    </Button>
+                </GenreSubmitFormPanel>
+            </GenreSubmitForm>
         </header>
     );
 };

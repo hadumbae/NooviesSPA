@@ -14,12 +14,12 @@ import GenreDetailsBreadcrumbs from "@/views/admin/genres/pages/genre-details/he
 import GenreDetailsHeader from "@/views/admin/genres/pages/genre-details/header/GenreDetailsHeader.tsx";
 import GenreDetailsCard from "@/views/admin/genres/pages/genre-details/display/GenreDetailsCard.tsx";
 import MovieIndexCard from "@/domains/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
-import GenreSubmitFormPanel from "@/views/admin/genres/_comp/form/submit-form/GenreSubmitFormPanel.tsx";
 import GenreDeleteWarningDialog from "@/views/admin/genres/_comp/dialog/GenreDeleteWarningDialog.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {GenreSubmitForm, GenreSubmitFormPanel} from "@/views/admin/genres/_feat/submit-form";
 
 type ContentProps = {
     genre: Genre;
@@ -64,10 +64,10 @@ const GenreDetailsPageContent = (props: ContentProps) => {
 
     return (
         <PageFlexWrapper>
-            <GenreDetailsBreadcrumbs genreName={name} />
-            <GenreDetailsHeader genre={genre} />
+            <GenreDetailsBreadcrumbs genreName={name}/>
+            <GenreDetailsHeader genre={genre}/>
 
-            <GenreDetailsCard genre={genre} />
+            <GenreDetailsCard genre={genre}/>
 
             {movies.length > 0 ? (
                 <section className="space-y-2">
@@ -83,7 +83,7 @@ const GenreDetailsPageContent = (props: ContentProps) => {
                     </div>
                 </section>
             ) : (
-                <EmptyArrayContainer text="There Are No Movies" />
+                <EmptyArrayContainer text="There Are No Movies"/>
             )}
 
             {totalItems > perPage && (
@@ -99,13 +99,17 @@ const GenreDetailsPageContent = (props: ContentProps) => {
             <section className="hidden">
                 <SectionHeader>Genre Editing Form</SectionHeader>
 
-                <GenreSubmitFormPanel
-                    isEditing={true}
-                    entity={genre}
-                    presetOpen={isEditing}
-                    setPresetOpen={setIsEditing}
+                <GenreSubmitForm
+                    editEntity={genre}
                     onSubmitSuccess={updateSlug}
-                />
+                >
+                    <GenreSubmitFormPanel
+                        isEditing={true}
+                        isOpen={isEditing}
+                        setIsOpen={setIsEditing}
+
+                    />
+                </GenreSubmitForm>
             </section>
 
             <section className="hidden">

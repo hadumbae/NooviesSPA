@@ -5,7 +5,6 @@
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import {GenreForm, GenreFormValues} from "@/domains/genres/schema/form/GenreForm.types.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
@@ -13,26 +12,25 @@ import {Genre, GenreSchema} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import {MutationFormConfig, MutationResponseConfig} from "@/common/features/submit-data";
 import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDQueryKeys.ts";
 import {create, update} from "@/domains/genres/_feat/crud";
+import {GenreFormData} from "@/domains/genres/_feat/submit-form/GenreFormSchema.ts";
 
 /**
  * Combined configuration for genre mutations.
  */
-export type UseGenreDataSubmitConfig =
-    MutationResponseConfig<Genre> &
-    MutationFormConfig<GenreFormValues>;
+export type UseGenreDataSubmitConfig = MutationResponseConfig<Genre> & MutationFormConfig<GenreFormData>;
 
 /**
  * Manages Genre persistence lifecycle with automated cache cleanup and form error mapping.
  */
 export default function useGenreDataSubmit(
     params: UseGenreDataSubmitConfig
-): UseMutationResult<Genre, unknown, GenreForm> {
+): UseMutationResult<Genre, unknown, GenreFormData> {
     const {form, onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
     const invalidateQueries = useInvalidateQueryKeys();
 
     const config = {populate: true, virtuals: true};
 
-    const submitGenre = async ({_id, ...values}: GenreForm): Promise<Genre> => {
+    const submitGenre = async ({_id, ...values}: GenreFormData): Promise<Genre> => {
         const action = _id
             ? () => update({_id, data: values, config})
             : () => create({data: values, config});
