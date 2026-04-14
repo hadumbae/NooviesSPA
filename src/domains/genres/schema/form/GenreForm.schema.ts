@@ -1,28 +1,31 @@
-import { z } from "zod";
-import { FormStarterValueSchema } from "@/common/schema/form/FormStarterValueSchema.ts";
+/**
+ * @fileoverview Validation schemas for Genre forms.
+ * Handles both raw UI input and transformed submission data.
+ */
 
-import {GenreSchema} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {z} from "zod";
+import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
+import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 
 /**
- * Schema for raw genre form input.
- *
- * Used to validate unprocessed UI form values before transformation.
+ * Validates raw form state before processing.
  */
 export const GenreFormValuesSchema = z.object({
-    /** Genre name input. */
     name: FormStarterValueSchema,
-
-    /** Genre description input. */
     description: FormStarterValueSchema,
 });
 
 /**
- * Schema for validated genre form data.
- *
- * Derived from {@link GenreSchema} with system-managed fields removed.
- * Intended for API submission and persistence.
+ * Validates and transforms data for API submission.
  */
-export const GenreFormSchema = GenreSchema.omit({
-    _id: true,
-    slug: true,
+export const GenreFormSchema = z.object({
+    _id: IDStringSchema.optional(),
+
+    name: NonEmptyStringSchema
+        .min(3, "Must be 3 characters or longer.")
+        .max(255, "Must be 255 characters or less."),
+
+    description: NonEmptyStringSchema
+        .max(1000, "Must be 1000 characters or less."),
 });

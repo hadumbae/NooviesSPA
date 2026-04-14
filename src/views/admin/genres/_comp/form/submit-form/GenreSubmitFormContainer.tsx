@@ -6,7 +6,7 @@
 import {FC} from 'react';
 
 import useGenreSubmitForm from "@/domains/genres/forms/useGenreSubmitForm.ts";
-import useGenreSubmitMutation from "@/domains/genres/mutations/useGenreSubmitMutation.ts";
+import useGenreDataSubmit from "@/domains/genres/_feat/crud-hooks/useGenreDataSubmit.ts";
 
 import {GenreForm, GenreFormValues} from "@/domains/genres/schema/form/GenreForm.types.ts";
 import GenreSubmitFormView from "@/views/admin/genres/_comp/form/submit-form/GenreSubmitFormView.tsx";
@@ -41,9 +41,8 @@ const GenreSubmitFormContainer: FC<SubmitFormProps> = (params) => {
         presetValues,
     });
 
-    const mutation = useGenreSubmitMutation({
+    const mutation = useGenreDataSubmit({
         form,
-        editID: entity?._id,
         ...mutationParams,
     });
 
