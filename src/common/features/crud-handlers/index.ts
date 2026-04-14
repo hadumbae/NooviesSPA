@@ -5,6 +5,8 @@ import {FindDocumentByIDConfig, handleFindByID} from "@/common/features/crud-han
 import {FindPaginatedDocumentsConfig, handlePaginated} from "@/common/features/crud-handlers/handlePaginated.ts";
 import {FindDocumentsByQueryConfig, handleQuery} from "@/common/features/crud-handlers/handleQuery.ts";
 import {handleUpdate, UpdateDocumentConfig} from "@/common/features/crud-handlers/handleUpdate.ts";
+import {handleSoftDelete, SoftDeleteDocumentConfig} from "@/common/features/crud-handlers/handleSoftDelete.ts";
+import {FindDocumentBySlugConfig, handleFindBySlug} from "@/common/features/crud-handlers/handleFindBySlug.ts";
 
 export {
     handleFind,
@@ -14,8 +16,9 @@ export {
     handlePaginated,
     handleQuery,
     handleUpdate,
+    handleSoftDelete,
+    handleFindBySlug,
 }
-
 export type {
     FindDocumentsConfig,
     CreateDocumentConfig,
@@ -24,4 +27,6 @@ export type {
     FindPaginatedDocumentsConfig,
     FindDocumentsByQueryConfig,
     UpdateDocumentConfig,
+    SoftDeleteDocumentConfig,
+    FindDocumentBySlugConfig,
 }
