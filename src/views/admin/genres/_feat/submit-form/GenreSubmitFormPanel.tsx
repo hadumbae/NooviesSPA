@@ -64,7 +64,7 @@ export function GenreSubmitFormPanel(
                 </SheetHeader>
 
                 <ScrollArea className="flex-1 mt-4">
-                    <div className="space-y-4 pr-4">
+                    <div className="space-y-4">
                         {activeFields.name && (
                             <HookFormInput
                                 name="name"
