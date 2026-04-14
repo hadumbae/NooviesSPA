@@ -20,12 +20,12 @@ export interface IPersonImageRepository {
 }
 
 export const PersonImageRepository: IPersonImageRepository = {
-    baseURL: `${import.meta.env.VITE_API_URL}/api/v1/admin/persons`,
+    baseURL: `${import.meta.env.VITE_API_URL}/api/v1/admin/persons/feat`,
 
     uploadProfileImage(params: UploadProfileImageParams): Promise<RequestReturns> {
         const {personID, data, ...options} = params;
 
-        const path = `update/${personID}/images/profile`;
+        const path = `image/${personID}/update`;
         const url = buildQueryURL({baseURL: this.baseURL, path, queries: {...options}});
 
         return useFetchAPI({url, method: "PATCH", data});
@@ -34,7 +34,7 @@ export const PersonImageRepository: IPersonImageRepository = {
     removeProfileImage(params: RemoveProfileImageParams): Promise<RequestReturns> {
         const {personID, ...options} = params;
 
-    const path = `delete/${personID}/images/profile`;
+    const path = `image/${personID}/remove`;
         const url = buildQueryURL({baseURL: this.baseURL, path, queries: {...options}});
 
         return useFetchAPI({url, method: "DELETE"});
