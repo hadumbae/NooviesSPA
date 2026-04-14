@@ -1,9 +1,5 @@
 /**
- * @file BrowseGenresPage.tsx
- * @description
- * Page for browsing all available movie genres.
- * Fetches genres from the API and renders them as
- * clickable cards.
+ * @fileoverview Page for browsing and selecting movie genres.
  */
 
 import useFetchGenres from "@/domains/genres/_feat/crud-hooks/useFetchGenres.ts";
@@ -11,25 +7,21 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import GenreImageListCard from "@/views/client/genres/components/browse-genre/GenreImageListCard.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {GenreArraySchema} from "@/domains/genres/schema/genre/GenreArraySchema.ts";
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /**
- * Renders the genre browsing page.
- *
- * Responsibilities:
- * - Fetches all genres (without population or virtuals)
- * - Validates the response using {@link GenreArraySchema}
- * - Displays genres in a responsive grid of cards
+ * Renders a responsive grid of genre cards.
  */
 const BrowseGenresPage = () => {
     const query = useFetchGenres({
+        schema: GenreArraySchema,
         config: {populate: false, virtuals: false},
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={GenreArraySchema}>
+        <QueryDataLoader query={query}>
             {(genres: Genre[]) => (
                 <PageFlexWrapper>
                     <header>
@@ -47,7 +39,7 @@ const BrowseGenresPage = () => {
                     </div>
                 </PageFlexWrapper>
             )}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 };
 

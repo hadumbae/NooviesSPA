@@ -1,13 +1,8 @@
 /**
- * @file MovieQueryOptionFormView.tsx
- * @description
- * Provides a dynamic and schema-driven filter and sort form for querying movies.
- * This component integrates with `react-hook-form` and uses a Zod schema to dynamically
- * enable or disable form fields based on configuration. It supports auto-submission with
- * a debounce delay, ideal for real-time search or filtering UIs.
+ * @fileoverview Dynamic form view for movie queries, featuring auto-submit and schema-driven fields.
  */
 
-import {FC} from 'react';
+import {ReactElement} from 'react';
 import {SearchParamFormViewProps} from "@/common/type/form/SearchParamFormProps.ts";
 import {MovieQueryOptionFormValues} from "@/domains/movies/schema/queries/MovieQueryOptionFormValueSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
@@ -18,13 +13,18 @@ import {cn} from "@/common/lib/utils.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import MovieQueryOptionFormSortFieldset
     from "@/domains/movies/components/features/admin/movie-query-option/MovieQueryOptionFormSortFieldset.tsx";
-import MovieQueryOptionFormFilterFieldset
-    from "@/domains/movies/components/features/admin/movie-query-option/MovieQueryOptionFormFilterFieldset.tsx";
+import {
+    MovieQueryOptionFormFilterFieldset
+} from "@/domains/movies/components/features/admin/movie-query-option/MovieQueryOptionFormFilterFieldset.tsx";
 
 type FormViewProps = SearchParamFormViewProps<MovieQueryOptionFormValues>;
 
-const MovieQueryOptionFormView: FC<FormViewProps> = (props) => {
-    const {form, className, disableFields, submitHandler} = props;
+/**
+ * Renders filter and sort fieldsets for movie queries with a 450ms debounce auto-submit.
+ */
+function MovieQueryOptionFormView(
+    {form, className, disableFields, submitHandler}: FormViewProps
+): ReactElement {
     useDebouncedFormAutoSubmit({form, submitHandler, timeout: 450});
 
     const activeFields = getActiveSchemaInputFields({
@@ -38,22 +38,12 @@ const MovieQueryOptionFormView: FC<FormViewProps> = (props) => {
                 onSubmit={form.handleSubmit(submitHandler)}
                 className={cn(className, "space-y-4")}
             >
-                {/* Filters */}
-                <MovieQueryOptionFormFilterFieldset
-                    form={form}
-                    activeFields={activeFields}
-                />
-
+                <MovieQueryOptionFormFilterFieldset form={form} activeFields={activeFields}/>
                 <Separator/>
-
-                {/* Sorts */}
-                <MovieQueryOptionFormSortFieldset
-                    form={form}
-                    activeFields={activeFields}
-                />
+                <MovieQueryOptionFormSortFieldset form={form} activeFields={activeFields}/>
             </form>
         </Form>
     );
-};
+}
 
 export default MovieQueryOptionFormView;
