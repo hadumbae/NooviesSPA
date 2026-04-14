@@ -10,7 +10,7 @@ import usePaginationLocationState from "@/common/hooks/router/usePaginationLocat
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";
 import GenreIndexPageContent from "@/views/admin/genres/pages/genre-index-page/GenreIndexPageContent.tsx";
-import useFetchPaginatedGenres from "@/domains/genres/fetch/useFetchPaginatedGenres.ts";
+import useFetchPaginatedGenres from "@/domains/genres/_feat/crud-hooks/useFetchPaginatedGenres.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {PaginatedGenres, PaginatedGenresSchema} from "@/domains/genres/schema/genre/PaginatedGenresSchema.ts";
 

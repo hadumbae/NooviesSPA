@@ -6,7 +6,7 @@
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
-import useFetchGenreBySlug from "@/domains/genres/fetch/useFetchGenreBySlug.ts";
+import useFetchGenreBySlug from "@/domains/genres/_feat/crud-hooks/useFetchGenreBySlug.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import BrowseGenreInfoPageContent from "@/views/client/genres/pages/browse-genre-info/BrowseGenreInfoPageContent.tsx";
 import {Genre, GenreSchema} from "@/domains/genres/schema/genre/GenreSchema.ts";

@@ -7,7 +7,7 @@ import { Control, FieldValues, Path } from "react-hook-form";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
-import useFetchGenres from "@/domains/genres/fetch/useFetchGenres.ts";
+import useFetchGenres from "@/domains/genres/_feat/crud-hooks/useFetchGenres.ts";
 import { GenreQueryOptions } from "@/domains/genres/schema/filters/GenreQueryOptions.types.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";

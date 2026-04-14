@@ -1,7 +1,7 @@
 /**
- * @file useFetchPaginatedGenres.ts
- *
- * React Query hook for fetching paginated `Genre` collections.
+ * @fileoverview React Query hook for fetching paginated Genre collections.
+ * Simplifies the orchestration of pagination, domain-specific filters,
+ * and repository-level configuration.
  */
 
 import {GenreQueryOptions} from "@/domains/genres/schema/filters/GenreQueryOptions.types.ts";
@@ -13,27 +13,19 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {paginated} from "@/domains/genres/_feat/crud";
+import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDQueryKeys.ts";
 
 /**
- * Parameters for {@link useFetchPaginatedGenres}.
- *
- * @template TData - Optional transformed response type.
+ * Parameters for the useFetchPaginatedGenres hook.
  */
 type FetchQueries<TData = unknown> = PaginationValues & {
-    /** Optional genre filters. */
     queries?: GenreQueryOptions;
-
-    /** Repository request options. */
     config?: RequestOptions;
-
-    /** React Query configuration overrides. */
     options?: UseQueryOptions<TData>;
 };
 
 /**
- * Fetches paginated genres.
- * @param params - Pagination, filters, and configuration.
- * @returns React Query result containing paginated genre data.
+ * Custom hook for retrieving paginated genres via the CRUD repository.
  */
 export default function useFetchPaginatedGenres<TData = unknown>(
     {page, perPage, queries, config, options}: FetchQueries<TData>
@@ -44,7 +36,7 @@ export default function useFetchPaginatedGenres<TData = unknown>(
     });
 
     return useQuery({
-        queryKey: ["genres", "list", "paginated", {page, perPage, ...queries, ...config}],
+        queryKey: GenreCRUDQueryKeys.paginated({page, perPage, ...queries, ...config}),
         queryFn: fetchGenres,
         ...useQueryOptionDefaults(options),
     });

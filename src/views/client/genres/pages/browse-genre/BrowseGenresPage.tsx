@@ -6,7 +6,7 @@
  * clickable cards.
  */
 
-import useFetchGenres from "@/domains/genres/fetch/useFetchGenres.ts";
+import useFetchGenres from "@/domains/genres/_feat/crud-hooks/useFetchGenres.ts";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import GenreImageListCard from "@/views/client/genres/components/browse-genre/GenreImageListCard.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
