@@ -4,20 +4,19 @@
  * search/filter dialogs, responsive card layouts, and pagination.
  */
 
-import {FC} from 'react';
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import {ReactElement} from 'react';
 import GenreIndexCard from "@/views/admin/genres/_comp/cards/GenreIndexCard.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import GenreIndexHeader from "@/views/admin/genres/pages/genre-index-page/headers/GenreIndexHeader.tsx";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
-import GenreQueryOptionFormContainer
-    from "@/views/admin/genres/_comp/form/genre-query-options/GenreQueryOptionFormContainer.tsx";
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {GenreIndexHeader} from "@/views/admin/genres/pages/index-page/header.tsx";
+import {SROnly} from "@/views/common/_comp/screen-readers";
+import GenreQueryOptionFormContainer from "@/views/admin/genres/_comp/form/genre-query-options/GenreQueryOptionFormContainer.tsx";
 
 type GenreIndexPageContentProps = {
     page: number;
@@ -30,28 +29,21 @@ type GenreIndexPageContentProps = {
 /**
  * Renders the primary genre management interface.
  */
-const GenreIndexPageContent: FC<GenreIndexPageContentProps> = (props) => {
+export function GenreIndexPageContent(
+    {totalItems, genres, page, perPage, setPage}: GenreIndexPageContentProps
+): ReactElement {
     const isMobile = useIsMobile();
-    const {totalItems, genres, page, perPage, setPage} = props;
-
-    const {searchParams} = useParsedSearchParams({
-        schema: GenreQueryOptionSchema
-    });
+    const {searchParams} = useParsedSearchParams({schema: GenreQueryOptionSchema});
 
     return (
         <PageFlexWrapper>
-            <GenreIndexHeader />
+            <GenreIndexHeader/>
 
             <section>
-                <SectionHeader srOnly={true}>Filter Genres</SectionHeader>
+                <SROnly text="Filter Genres"/>
 
-                <PresetFilterDialog
-                    title="Genre Filters"
-                    description="Filter and sort your genres."
-                >
-                    <GenreQueryOptionFormContainer
-                        presetValues={searchParams}
-                    />
+                <PresetFilterDialog title="Genre Filters" description="Filter and sort your genres.">
+                    <GenreQueryOptionFormContainer presetValues={searchParams}/>
                 </PresetFilterDialog>
             </section>
 
@@ -72,16 +64,12 @@ const GenreIndexPageContent: FC<GenreIndexPageContentProps> = (props) => {
                 />
             )}
 
-            {totalItems > perPage && (
-                <PaginationRangeButtons
-                    page={page}
-                    perPage={perPage}
-                    totalItems={totalItems}
-                    setPage={setPage}
-                />
-            )}
+            <PaginationRangeButtons
+                page={page}
+                perPage={perPage}
+                totalItems={totalItems}
+                setPage={setPage}
+            />
         </PageFlexWrapper>
     );
-};
-
-export default GenreIndexPageContent;
+}
