@@ -17,7 +17,7 @@ import {
     GenreDetailsViewData,
     GenreDetailsViewDataSchema,
     useFetchGenreDetailsViewData
-} from "@/domains/genres/views/admin/details-page/data";
+} from "@/domains/genres/_feat/admin-view-data";
 import {GenreDetailsPageContent} from "@/views/admin/genres/pages/genre-details/content.tsx";
 
 /** Default limit for the paginated movie sub-collection. */

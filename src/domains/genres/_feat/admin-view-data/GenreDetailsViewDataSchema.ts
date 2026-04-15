@@ -1,6 +1,7 @@
 /**
- * @file Zod validation schema and type definitions for aggregated Genre view data.
- * @filename GenreDetailsViewDataSchema.ts
+ * @fileoverview Zod validation schema and type definitions for aggregated Genre view data.
+ * Validates the response structure for the Genre Details administrative page,
+ * including nested paginated movie data.
  */
 
 import {z} from "zod";
@@ -11,8 +12,10 @@ import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenr
 /**
  * Internal schema representing the detail-specific aggregates for a genre.
  */
-const GenreDetails = z.object(
-    {movies: generatePaginationSchema(MovieWithGenresSchema)},
+const GenreDetailsSchema = z.object(
+    {
+        movies: generatePaginationSchema(MovieWithGenresSchema),
+    },
     {message: "Must be a valid details object for genres."},
 );
 
@@ -20,14 +23,11 @@ const GenreDetails = z.object(
  * Top-level validation schema for the Genre Details administrative view data.
  */
 export const GenreDetailsViewDataSchema = z.object({
-    /** The primary genre metadata (ID, name, slug, etc.). */
     genre: GenreSchema,
-    /** The nested details containing the paginated movie catalog for this genre. */
-    details: GenreDetails,
+    details: GenreDetailsSchema,
 });
 
 /**
  * TypeScript type inferred from {@link GenreDetailsViewDataSchema}.
- * * Represents the fully hydrated data structure required by the Genre Details page.
  */
 export type GenreDetailsViewData = z.infer<typeof GenreDetailsViewDataSchema>;

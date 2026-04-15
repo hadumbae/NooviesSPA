@@ -1,33 +1,28 @@
 /**
- * @file Custom React Query hook for fetching administrative Genre view data.
- * @filename useFetchGenreDetailsViewData.ts
+ * @fileoverview Custom React Query hook for fetching administrative Genre view data.
+ * Retrieves comprehensive details for a specific genre, including its associated
+ * paginated movie list.
  */
 
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {getFetchGenreDetails} from "@/domains/genres/repositories/views/GenreAdminViewDataRepository.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {GenreAdminViewDataQueryKeys} from "@/domains/genres/_feat/admin-view-data/GenreAdminViewDataQueryKeys.ts";
 
-/**
- * Parameters for the genre details query hook.
- */
+/** Parameters for the {@link useFetchGenreDetailsViewData} hook. */
 type FetchParams = {
-    /** The unique slug of the genre to fetch. */
-    slug: SlugString,
-    /** Pagination parameters for the associated movie list. */
+    slug: SlugString;
     queries: PaginationValues;
-    /** Standard TanStack Query options for behavior customization (e.g., enabled, staleTime). */
     options?: UseQueryOptions<unknown>;
-}
+};
 
 /**
- * Custom hook that manages the server state for the Genre Details administrative view.
- * @param params - Configuration object including slug, pagination, and query options.
- * @returns A query result object containing data, loading states, and potential {@link HttpResponseError}.
+ * Fetches the administrative view data for a specific genre.
  */
 export function useFetchGenreDetailsViewData(
     {slug, queries, options}: FetchParams
@@ -40,7 +35,7 @@ export function useFetchGenreDetailsViewData(
     });
 
     return useQuery({
-        queryKey: ["genres", "views", "admin", "item", "details", {slug, page, perPage}],
+        queryKey: GenreAdminViewDataQueryKeys.itemDetails({slug, page, perPage}),
         queryFn: fetchGenreData,
         ...useQueryOptionDefaults(options),
     });
