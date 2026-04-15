@@ -10,9 +10,9 @@ import {PillCSS} from "@/common/constants/css/ContainerCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import generateGenreLinkConfigs from "@/domains/genres/utilities/navigation/generateGenreLinkConfigs.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {generateGenreLinkConfigs} from "@/domains/genres/_feat/navigation";
 
 /**
  * Props for MovieOverviewMeta.
