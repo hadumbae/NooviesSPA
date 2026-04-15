@@ -5,12 +5,13 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {GenreQueryOptions} from "@/domains/genres/schema/filters/GenreQueryOptions.types.ts";
-import useGenreQueryOptionSearchParams from "@/domains/genres/fetch/useGenreQueryOptionSearchParams.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {FormOptions} from "@/common/features/submit-data";
 import {GenreQueryOptionFormStarter} from "@/domains/genres/_feat/query-form/schema.ts";
 import {useGenreQueryOptionForm} from "@/domains/genres/_feat/query-form/useGenreQueryOptionForm.ts";
 import {GenreQueryOptionFormContextProvider} from "@/domains/genres/_feat/query-form";
+import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";
 
 /** Props for the {@link GenreQueryOptionForm} component. */
 type ContainerProps = FormOptions<GenreQueryOptionFormStarter> & {
@@ -31,7 +32,7 @@ export function GenreQueryOptionForm(
     const formKey = `set-genre-query-option-${uniqueKey ?? "form"}`;
 
     const form = useGenreQueryOptionForm({presetValues});
-    const {setSearchParams} = useGenreQueryOptionSearchParams();
+    const {setSearchParams} = useParsedSearchParams({schema: GenreQueryOptionSchema});
 
     const onSubmit = (values: GenreQueryOptionFormStarter): void => {
         setSearchParams(values as GenreQueryOptions);
