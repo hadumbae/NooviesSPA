@@ -5,18 +5,17 @@
  */
 
 import {ReactElement} from 'react';
-import GenreIndexCard from "@/views/admin/genres/_comp/cards/GenreIndexCard.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptions.schema.ts";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
-import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {GenreIndexHeader} from "@/views/admin/genres/pages/index-page/header.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
-import GenreQueryOptionFormContainer from "@/views/admin/genres/_comp/form/genre-query-options/GenreQueryOptionFormContainer.tsx";
+import {GenreIndexCard} from "@/views/admin/genres/_comp";
+import {GenreQueryOptionForm, GenreQueryOptionFormDialog} from "@/views/admin/genres/_feat/query-form";
 
 type GenreIndexPageContentProps = {
     page: number;
@@ -42,9 +41,9 @@ export function GenreIndexPageContent(
             <section>
                 <SROnly text="Filter Genres"/>
 
-                <PresetFilterDialog title="Genre Filters" description="Filter and sort your genres.">
-                    <GenreQueryOptionFormContainer presetValues={searchParams}/>
-                </PresetFilterDialog>
+                <GenreQueryOptionForm presetValues={searchParams}>
+                    <GenreQueryOptionFormDialog />
+                </GenreQueryOptionForm>
             </section>
 
             {genres.length > 0 ? (
