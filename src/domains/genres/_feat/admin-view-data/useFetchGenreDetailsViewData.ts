@@ -8,7 +8,7 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
-import {getFetchGenreDetails} from "@/domains/genres/repositories/views/GenreAdminViewDataRepository.ts";
+import {getFetchGenreDetails} from "@/domains/genres/_feat/admin-view-data/repository.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {GenreAdminViewDataQueryKeys} from "@/domains/genres/_feat/admin-view-data/GenreAdminViewDataQueryKeys.ts";
