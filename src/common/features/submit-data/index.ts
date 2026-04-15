@@ -6,12 +6,15 @@ import {
 import {FormOptions} from "@/common/features/submit-data/formTypes.ts";
 import {useAutoFormSubmit} from "@/common/features/submit-data/useAutoFormSubmit.ts";
 
+export {
+    useAutoFormSubmit,
+}
+
 export type {
     FormOptions,
     MutationFormConfig,
     MutationResponseConfig,
     MutationFormResetConfig,
-    useAutoFormSubmit,
 }
 
 
