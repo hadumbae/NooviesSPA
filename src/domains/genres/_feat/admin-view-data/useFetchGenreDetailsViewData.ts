@@ -8,11 +8,15 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {getFetchGenreDetails} from "@/domains/genres/repositories/views/GenreAdminViewDataRepository.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {GenreAdminViewDataQueryKeys} from "@/domains/genres/_feat/admin-view-data/GenreAdminViewDataQueryKeys.ts";
+import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {
+    GenreDetailsViewData,
+    GenreDetailsViewDataSchema
+} from "@/domains/genres/_feat/admin-view-data/GenreDetailsViewDataSchema.ts";
 
 /** Parameters for the {@link useFetchGenreDetailsViewData} hook. */
 type FetchParams = {
@@ -26,12 +30,12 @@ type FetchParams = {
  */
 export function useFetchGenreDetailsViewData(
     {slug, queries, options}: FetchParams
-): UseQueryResult<unknown, HttpResponseError> {
+): UseQueryResult<GenreDetailsViewData, HttpResponseError> {
     const {page, perPage} = queries;
 
-    const fetchGenreData = useQueryFnHandler({
+    const fetchGenreData = buildQueryFn({
+        schema: GenreDetailsViewDataSchema,
         action: () => getFetchGenreDetails({slug, queries}),
-        errorMessage: "Failed to fetch genre details. Please try again.",
     });
 
     return useQuery({

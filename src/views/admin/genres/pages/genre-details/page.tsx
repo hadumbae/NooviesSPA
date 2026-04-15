@@ -11,14 +11,13 @@ import {PageLoader} from "@/views/common/_comp/page";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import GenreDetailsUIContextProvider
     from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContextProvider.tsx";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 
 import {
     GenreDetailsViewData,
-    GenreDetailsViewDataSchema,
     useFetchGenreDetailsViewData
 } from "@/domains/genres/_feat/admin-view-data";
 import {GenreDetailsPageContent} from "@/views/admin/genres/pages/genre-details/content.tsx";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /** Default limit for the paginated movie sub-collection. */
 const MOVIES_PER_PAGE = 12;
@@ -50,7 +49,7 @@ const GenreDetailsPage: FC = (): ReactElement => {
 
     return (
         <GenreDetailsUIContextProvider>
-            <ValidatedDataLoader query={query} schema={GenreDetailsViewDataSchema}>
+            <QueryDataLoader query={query}>
                 {(data: GenreDetailsViewData) => {
                     const {
                         genre,
@@ -70,7 +69,7 @@ const GenreDetailsPage: FC = (): ReactElement => {
                         />
                     );
                 }}
-            </ValidatedDataLoader>
+            </QueryDataLoader>
         </GenreDetailsUIContextProvider>
     );
 };
