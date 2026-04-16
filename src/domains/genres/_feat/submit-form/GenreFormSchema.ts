@@ -4,23 +4,8 @@
  */
 
 import {z} from "zod";
-import {FormStarterValueSchema} from "@/common/schema/form/FormStarterValueSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-
-/**
- * Validates raw form state before processing.
- * Typically used for initializing form libraries like React Hook Form.
- */
-export const GenreFormValuesSchema = z.object({
-    name: FormStarterValueSchema,
-    description: FormStarterValueSchema,
-});
-
-/**
- * Raw values managed by the form state before transformation.
- */
-export type GenreFormValues = z.infer<typeof GenreFormValuesSchema>;
 
 /**
  * Validates and transforms data for API submission.
