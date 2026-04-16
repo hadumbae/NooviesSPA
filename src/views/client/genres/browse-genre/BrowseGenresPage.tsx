@@ -4,7 +4,7 @@
 
 import useFetchGenres from "@/domains/genres/_feat/crud-hooks/useFetchGenres.ts";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import GenreImageListCard from "@/views/client/genres/components/browse-genre/GenreImageListCard.tsx";
+import GenreImageListCard from "@/views/client/genres/_comp/GenreImageListCard.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {GenreArraySchema} from "@/domains/genres/schema/genre/GenreArraySchema.ts";

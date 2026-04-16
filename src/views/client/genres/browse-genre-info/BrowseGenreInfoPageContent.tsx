@@ -6,7 +6,7 @@
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import GenreInfoBanner from "@/views/client/genres/components/browse-genre/GenreInfoBanner.tsx";
+import GenreInfoBanner from "@/views/client/genres/_comp/GenreInfoBanner.tsx";
 import PaginatedMovieDetailsDataLoader from "@/domains/movies/components/loaders/PaginatedMovieDetailsDataLoader.tsx";
 import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import BrowseMovieOverviewCard
