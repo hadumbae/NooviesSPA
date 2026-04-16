@@ -12,7 +12,7 @@ import {paginated} from "@/domains/genres/_feat/crud";
 import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDQueryKeys.ts";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";
 import {ZodType, ZodTypeDef} from "zod";
-import {GenreQueryOptions} from "@/domains/genres/schema/filters/GenreQueryOptionsSchema.ts";
+import {GenreQueryOptions} from "@/domains/genres/schema";
 
 /**
  * Parameters for the useFetchPaginatedGenres hook.

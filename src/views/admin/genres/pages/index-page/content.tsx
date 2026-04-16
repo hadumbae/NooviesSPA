@@ -8,14 +8,13 @@ import {ReactElement} from 'react';
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptionsSchema.ts";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {GenreIndexHeader} from "@/views/admin/genres/pages/index-page/header.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {GenreIndexCard} from "@/views/admin/genres/_comp";
 import {GenreQueryOptionForm, GenreQueryOptionFormDialog} from "@/views/admin/genres/_feat/query-form";
+import {Genre, GenreQueryOptionSchema} from "@/domains/genres/schema";
 
 type GenreIndexPageContentProps = {
     page: number;

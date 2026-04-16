@@ -5,8 +5,7 @@
  */
 
 import {z} from "zod";
-import {GenreQueryFilterSchema} from "@/domains/genres/schema/filters/GenreQueryFilterSchema.ts";
-import {GenreQuerySortSchema} from "@/domains/genres/schema/filters/GenreQuerySortSchema.ts";
+import {GenreQueryFilterSchema, GenreQuerySortSchema} from "@/domains/genres/schema";
 
 /**
  * Combined schema including both filter and sorting options for genre queries.

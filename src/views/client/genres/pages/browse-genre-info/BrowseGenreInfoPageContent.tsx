@@ -14,8 +14,7 @@ import BrowseMovieOverviewCard
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {Genre} from "@/domains/genres/schema";
 
 /** Default pagination limit for the movie sub-collection. */
 const MOVIES_PER_PAGE = 10;

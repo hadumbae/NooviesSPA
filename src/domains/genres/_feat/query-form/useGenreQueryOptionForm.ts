@@ -6,8 +6,8 @@
 
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptionsSchema.ts";
 import {GenreQueryOptionFormStarter} from "@/domains/genres/_feat/query-form/schema.ts";
+import {GenreQueryOptionSchema} from "@/domains/genres/schema";
 
 /** Parameters accepted by {@link useGenreQueryOptionForm}. */
 type QueryOptionFormParams = {

@@ -10,15 +10,12 @@ import {GenreQueryOptionFormStarter} from "@/domains/genres/_feat/query-form/sch
 import {useGenreQueryOptionForm} from "@/domains/genres/_feat/query-form/useGenreQueryOptionForm.ts";
 import {GenreQueryOptionFormContextProvider} from "@/domains/genres/_feat/query-form";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {GenreQueryOptions, GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptionsSchema.ts";
+import {GenreQueryOptions, GenreQueryOptionSchema} from "@/domains/genres/schema";
 
 /** Props for the {@link GenreQueryOptionForm} component. */
 type ContainerProps = FormOptions<GenreQueryOptionFormStarter> & {
-    /** The form fields or UI to render within the provider. */
     children: ReactNode;
-    /** Optional identifier to prevent ID collisions in the DOM. */
     uniqueKey?: string;
-    /** Additional CSS classes for the form element. */
     className?: string;
 };
 

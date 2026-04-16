@@ -8,7 +8,7 @@
 import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
 import {Image} from "lucide-react";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {Genre} from "@/domains/genres/schema";
 
 /**
  * Props for {@link GenreImageListCard}.

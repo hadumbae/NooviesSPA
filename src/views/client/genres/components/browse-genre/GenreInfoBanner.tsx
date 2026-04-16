@@ -11,7 +11,7 @@ import {cn} from "@/common/lib/utils.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {Badge} from "@/common/components/ui/badge.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {Genre} from "@/domains/genres/schema";
 
 /**
  * Props for the {@link GenreInfoBanner} component.

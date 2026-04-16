@@ -10,8 +10,8 @@ import {Plus} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 import {GenreSubmitForm, GenreSubmitFormPanel} from "@/views/admin/genres/_feat/submit-form";
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import {useNavigateToGenreDetails} from "@/domains/genres/_feat/navigation";
+import {Genre} from "@/domains/genres/schema";
 
 /**
  * Renders the top-level header for the Genre management section.

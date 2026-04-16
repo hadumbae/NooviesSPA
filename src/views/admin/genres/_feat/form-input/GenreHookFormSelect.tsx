@@ -11,7 +11,7 @@ import filterNullishAttributes from "@/common/utility/collections/filterNullishA
 import {GenreArray, GenreArraySchema} from "@/domains/genres/schema/genre/GenreArraySchema.ts";
 import {ReactElement} from "react";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {GenreQueryOptions} from "@/domains/genres/schema/filters/GenreQueryOptionsSchema.ts";
+import {GenreQueryOptions} from "@/domains/genres/schema";
 
 /**
  * Props for GenreHookFormSelect.

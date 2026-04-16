@@ -8,8 +8,8 @@ import GenreImageListCard from "@/views/client/genres/components/browse-genre/Ge
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {GenreArraySchema} from "@/domains/genres/schema/genre/GenreArraySchema.ts";
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {Genre} from "@/domains/genres/schema";
 
 /**
  * Renders a responsive grid of genre cards.

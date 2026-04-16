@@ -9,9 +9,9 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import {cn} from "@/common/lib/utils.ts";
 import {Ellipsis} from "lucide-react";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import {GenreDetailsUIToggles} from "@/views/admin/genres/pages/genre-details/uiToggles.tsx";
 import {GenreDetailsPageBreadcrumbs} from "@/views/admin/genres/pages/genre-details/breadcrumbs.tsx";
+import {Genre} from "@/domains/genres/schema";
 
 /** Props for the {@link GenreDetailsPageHeader} component. */
 type HeaderProps = {

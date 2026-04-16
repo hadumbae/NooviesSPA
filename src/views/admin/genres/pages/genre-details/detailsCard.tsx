@@ -6,8 +6,8 @@ import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
+import {Genre} from "@/domains/genres/schema";
 
 /** Props for the {@link GenreDetailsCard} component. */
 type DetailsProps = {

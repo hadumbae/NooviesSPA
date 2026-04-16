@@ -7,12 +7,11 @@ import {ReactElement} from 'react';
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {GenreQueryOptionSchema} from "@/domains/genres/schema/filters/GenreQueryOptionsSchema.ts";
-import {PaginatedGenres, PaginatedGenresSchema} from "@/domains/genres/schema/genre/PaginatedGenresSchema.ts";
 import {useFetchPaginatedGenres} from "@/domains/genres/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {GenreIndexPageContent} from "@/views/admin/genres/pages/index-page/content.tsx";
 import {useParsedPaginationValue} from "@/common/features/fetch-pagination-search-params";
+import {GenreQueryOptionSchema, PaginatedGenres, PaginatedGenresSchema} from "@/domains/genres/schema";
 
 const GENRES_PER_PAGE = 20;
 
