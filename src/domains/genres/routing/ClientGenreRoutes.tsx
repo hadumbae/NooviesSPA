@@ -1,8 +1,8 @@
 import {RouteObject} from "react-router-dom";
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
-import BrowseGenreInfoPage from "@/views/client/genres/browse-genre-info/BrowseGenreInfoPage.tsx";
 import { BrowseGenresPage } from "@/views/client/genres/browse-genres-page";
+import { BrowseGenreInfoPage } from "@/views/client/genres/browse-genre-info";
 
 const routes: RouteObject[] = [
     {

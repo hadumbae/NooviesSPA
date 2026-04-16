@@ -8,13 +8,15 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import GenreInfoBanner from "@/views/client/genres/_comp/GenreInfoBanner.tsx";
 import PaginatedMovieDetailsDataLoader from "@/domains/movies/components/loaders/PaginatedMovieDetailsDataLoader.tsx";
-import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+import useParsedPaginationValue
+    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import BrowseMovieOverviewCard
     from "@/domains/movies/components/client/browse-movies/browse-movie-overview/BrowseMovieOverviewCard.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {Genre} from "@/domains/genres/schema";
+import {ReactElement} from "react";
 
 /** Default pagination limit for the movie sub-collection. */
 const MOVIES_PER_PAGE = 10;
@@ -23,15 +25,13 @@ const MOVIES_PER_PAGE = 10;
  * Props for the {@link BrowseGenreInfoPageContent} component.
  */
 type ContentProps = {
-    /** The core genre metadata to display and use as a filter for the movie list. */
     genre: Genre;
 };
 
 /**
  * Renders the structural layout for browsing a specific genre and its associated movies.
- * @param props - Component {@link ContentProps}.
  */
-const BrowseGenreInfoPageContent = ({genre}: ContentProps) => {
+export function BrowseGenreInfoPageContent({genre}: ContentProps): ReactElement {
     const {_id: genreID, name} = genre;
 
     /** Manages the 'page' search param, defaulting to 1 if not present. */
@@ -94,6 +94,4 @@ const BrowseGenreInfoPageContent = ({genre}: ContentProps) => {
             </PaginatedMovieDetailsDataLoader>
         </PageFlexWrapper>
     );
-};
-
-export default BrowseGenreInfoPageContent;
+}
