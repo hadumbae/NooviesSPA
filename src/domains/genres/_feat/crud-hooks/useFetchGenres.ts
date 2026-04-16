@@ -2,7 +2,6 @@
  * @fileoverview React Query hook for fetching Genre collections using aggregation.
  */
 
-import {GenreQueryOptions} from "@/domains/genres/schema/filters/GenreQueryOptions.types.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
@@ -12,6 +11,7 @@ import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDQue
 import {ZodType, ZodTypeDef} from "zod";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";
 import {query} from "@/domains/genres/_feat/crud";
+import {GenreQueryOptions} from "@/domains/genres/schema/filters/GenreQueryOptionsSchema.ts";
 
 /**
  * Parameters for the useFetchGenres hook.

@@ -1,6 +1,6 @@
 /**
- * @file Schema and type definitions for collections of Genre entities.
- * @filename GenreArraySchema.ts
+ * @fileoverview Schema and type definitions for collections of Genre entities.
+ * Defines the validation logic for non-paginated arrays of genre data.
  */
 
 import {z} from "zod";

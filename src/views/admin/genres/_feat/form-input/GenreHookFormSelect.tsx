@@ -7,11 +7,11 @@ import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiS
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import useFetchGenres from "@/domains/genres/_feat/crud-hooks/useFetchGenres.ts";
-import {GenreQueryOptions} from "@/domains/genres/schema/filters/GenreQueryOptions.types.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import {GenreArray, GenreArraySchema} from "@/domains/genres/schema/genre/GenreArraySchema.ts";
 import {ReactElement} from "react";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {GenreQueryOptions} from "@/domains/genres/schema/filters/GenreQueryOptionsSchema.ts";
 
 /**
  * Props for GenreHookFormSelect.

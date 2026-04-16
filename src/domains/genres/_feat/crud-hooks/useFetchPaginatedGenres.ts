@@ -2,7 +2,6 @@
  * @fileoverview React Query hook for fetching validated paginated Genre collections.
  */
 
-import {GenreQueryOptions} from "@/domains/genres/schema/filters/GenreQueryOptions.types.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params/schemas/PaginationValuesSchema.ts";
@@ -13,6 +12,7 @@ import {paginated} from "@/domains/genres/_feat/crud";
 import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDQueryKeys.ts";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";
 import {ZodType, ZodTypeDef} from "zod";
+import {GenreQueryOptions} from "@/domains/genres/schema/filters/GenreQueryOptionsSchema.ts";
 
 /**
  * Parameters for the useFetchPaginatedGenres hook.
