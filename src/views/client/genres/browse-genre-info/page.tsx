@@ -1,41 +1,54 @@
 /**
  * @fileoverview Client-facing page for displaying detailed genre information.
- * Orchestrates URL parameter extraction and genre data retrieval.
+ * Orchestrates URL parameter extraction, pagination state, and aggregated data retrieval.
  */
 
+import { ReactElement } from "react";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
-import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import {PageLoader} from "@/views/common/_comp/page";
-import BrowseGenreInfoPageContent from "@/views/client/genres/browse-genre-info/content.tsx";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {useFetchGenreBySlug} from "@/domains/genres/_feat/crud-hooks";
-import {Genre, GenreSchema} from "@/domains/genres/schema";
-import {ReactElement} from "react";
+import { SlugRouteParamSchema } from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import { PageLoader } from "@/views/common/_comp/page";
+import { BrowseGenreInfoPageContent } from "@/views/client/genres/browse-genre-info/content.tsx";
+import { QueryDataLoader } from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import { useFetchGenreWithMoviesViewData } from "@/domains/genres/_feat/client-view-data";
+import { useParsedPaginationValue } from "@/common/features/fetch-pagination-search-params";
+
+/** Global constant defining the number of movie results per page. */
+const MOVIES_PER_PAGE = 10;
 
 /**
- * Orchestrates the fetching and validation of genre data based on URL slug.
+ * Page component that manages the lifecycle of fetching a specific genre and its associated movies.
  */
 export function BrowseGenreInfoPage(): ReactElement {
-    const {slug} = useFetchByIdentifierRouteParams({
+    const { slug } = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/browse/genres",
         errorMessage: "Genre Not Found.",
     }) ?? {};
 
-    const query = useFetchGenreBySlug({
+    const { value: page, setValue: setPage } = useParsedPaginationValue("page", 1);
+
+    const query = useFetchGenreWithMoviesViewData({
         slug: slug!,
-        schema: GenreSchema,
-        config: {populate: true, virtuals: true},
-        options: {enabled: !!slug}
+        moviePagination: { page, perPage: MOVIES_PER_PAGE },
+        options: { enabled: !!slug }
     });
 
     if (!slug) {
-        return <PageLoader/>;
+        return <PageLoader />;
     }
 
     return (
         <QueryDataLoader query={query}>
-            {(genre: Genre) => <BrowseGenreInfoPageContent genre={genre}/>}
+            {({ genre, movies: { totalItems, items } }) => (
+                <BrowseGenreInfoPageContent
+                    genre={genre}
+                    movies={items}
+                    totalMovies={totalItems}
+                    page={page}
+                    perPage={MOVIES_PER_PAGE}
+                    setPage={setPage}
+                />
+            )}
         </QueryDataLoader>
     );
 }
