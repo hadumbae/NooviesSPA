@@ -1,6 +1,6 @@
 import {IMovieCreditBase} from "@/domains/moviecredit/interfaces/IMovieCreditBase.ts";
 import IMovie from "@/domains/movies/interfaces/IMovie.ts";
-import IPerson from "@/domains/persons/interfaces/IPerson.ts";
+import IPerson from "@/domains/persons/_feat/crud/IPerson.ts";
 
 /**
  * Represents a fully populated movie credit entry.

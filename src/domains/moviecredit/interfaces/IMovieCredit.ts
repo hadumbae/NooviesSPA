@@ -1,7 +1,7 @@
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {IMovieCreditBase} from "@/domains/moviecredit/interfaces/IMovieCreditBase.ts";
 import IMovie from "@/domains/movies/interfaces/IMovie.ts";
-import IPerson from "@/domains/persons/interfaces/IPerson.ts";
+import IPerson from "@/domains/persons/_feat/crud/IPerson.ts";
 
 /**
  * Represents a complete movie credit entry, extending {@link IMovieCreditBase} with specific identifiers.

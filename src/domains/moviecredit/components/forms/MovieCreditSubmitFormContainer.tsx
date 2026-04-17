@@ -17,7 +17,7 @@ import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQu
 import MovieCreditSubmitFormView from "@/domains/moviecredit/components/forms/MovieCreditSubmitFormView.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 import {PersonArray} from "@/domains/persons/schema/person/Person.types.ts";
-import {PersonQueryFilters} from "@/domains/persons/schema/queries/PersonQueryOption.types.ts";
+import {PersonQueryFilters} from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
 import {RoleTypeQueryFilters} from "@/domains/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import {RoleTypeArray} from "@/domains/roletype/schema/model/RoleType.types.ts";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";

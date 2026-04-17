@@ -1,6 +1,6 @@
-import PersonIndexPage from "@/domains/persons/pages/PersonIndexPage.tsx";
-import PersonDetailsPage from "@/domains/persons/pages/details/PersonDetailsPage.tsx";
-import PersonImagePage from "@/domains/persons/pages/PersonImagePage.tsx";
+import PersonIndexPage from "@/views/admin/persons/pages/index-page/PersonIndexPage.tsx";
+import PersonDetailsPage from "@/views/admin/persons/pages/details-page/PersonDetailsPage.tsx";
+import PersonImagePage from "@/views/admin/persons/pages/image-page/PersonImagePage.tsx";
 
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
