@@ -1,48 +1,43 @@
 /**
- * @file Client repository for retrieving movie view data.
- * @filename MovieClientViewRepository.ts
+ * @fileoverview Repository for retrieving public client-facing data for Movies.
+ * Interfaces with specialized view-data endpoints to provide aggregated content
+ * for movie detail pages, such as cast credits and theater showtimes.
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {
     GetCreditsForMovieViewParams,
     GetShowingsForMovieViewParams
 } from "@/domains/movies/views/client/repositories/MovieClientViewRepository.types.ts";
-
-const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/views/${import.meta.env.VITE_DEV_CLIENT_NAME}/client/movies`;
+import {buildURL} from "@/common/features/fetch-api";
+import {MovieClientViewBaseURL} from "@/domains/movies/views/client/repositories/MovieClientViewBaseURL.ts";
 
 /**
- * Retrieves grouped movie credits.
+ * Retrieves grouped movie credits (Cast and Crew) for a specific movie.
  */
-const getCreditsForMovieView = (
+export function getCreditsForMovieView(
     {slug}: GetCreditsForMovieViewParams
-): Promise<RequestReturns> => {
-    const url = buildQueryURL({
-        baseURL,
-        path: `${slug}/credits`
+): Promise<RequestReturns> {
+    const url = buildURL({
+        baseURL: MovieClientViewBaseURL,
+        path: `/item/${slug}/credits`
     });
 
     return useFetchAPI({url, method: "GET"});
-};
+}
 
 /**
- * Retrieves paginated showings for a movie.
+ * Retrieves a paginated list of upcoming showings for a specific movie.
  */
-const getShowingsForMovieView = (
+export function getShowingsForMovieView(
     {slug, queries}: GetShowingsForMovieViewParams
-): Promise<RequestReturns> => {
-    const url = buildQueryURL({
-        baseURL,
-        path: `${slug}/showings`,
+): Promise<RequestReturns> {
+    const url = buildURL({
+        baseURL: MovieClientViewBaseURL,
+        path: `/item/${slug}/showings`,
         queries
     });
 
     return useFetchAPI({url, method: "GET"});
-};
-
-export {
-    getCreditsForMovieView,
-    getShowingsForMovieView,
-};
+}
