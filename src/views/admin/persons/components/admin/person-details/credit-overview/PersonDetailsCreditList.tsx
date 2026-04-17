@@ -6,7 +6,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Info} from "lucide-react";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import PersonDetailsCreditMovieDialog
-    from "@/domains/persons/components/admin/person-details/credit-overview/PersonDetailsCreditMovieDialog.tsx";
+    from "@/views/admin/persons/components/admin/person-details/credit-overview/PersonDetailsCreditMovieDialog.tsx";
 import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 

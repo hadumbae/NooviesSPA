@@ -2,7 +2,7 @@ import {FC, ReactNode, useState} from 'react';
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import {PersonFormValues} from "@/domains/persons/schema/forms/PersonForm.types.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
-import PersonSubmitFormContainer from "@/domains/persons/components/form/admin/submit/PersonSubmitFormContainer.tsx";
+import PersonSubmitFormContainer from "@/views/admin/persons/components/form/admin/submit/PersonSubmitFormContainer.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import {

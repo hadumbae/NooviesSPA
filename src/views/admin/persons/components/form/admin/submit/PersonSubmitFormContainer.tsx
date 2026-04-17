@@ -12,7 +12,7 @@
 import {FC} from 'react';
 import usePersonSubmitForm from "@/domains/persons/hooks/forms/admin/usePersonSubmitForm.ts";
 import usePersonSubmitMutation from "@/domains/persons/hooks/mutations/admin/usePersonSubmitMutation.ts";
-import PersonSubmitFormView from "@/domains/persons/components/form/admin/submit/PersonSubmitFormView.tsx";
+import PersonSubmitFormView from "@/views/admin/persons/components/form/admin/submit/PersonSubmitFormView.tsx";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import {PersonForm, PersonFormValues} from "@/domains/persons/schema/forms/PersonForm.types.ts";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";

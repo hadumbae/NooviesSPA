@@ -4,13 +4,13 @@
  * and pagination for the administrative interface.
  */
 
-import PersonIndexCard from "@/domains/persons/components/PersonIndexCard.tsx";
+import PersonIndexCard from "@/views/admin/persons/components/PersonIndexCard.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import PersonIndexHeader from "@/domains/persons/components/headers/PersonIndexHeader.tsx";
+import PersonIndexHeader from "@/views/admin/persons/components/headers/PersonIndexHeader.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import PersonQueryOptionFormContainer
-    from "@/domains/persons/components/features/admin/person-query-options/PersonQueryOptionFormContainer.tsx";
+    from "@/views/admin/persons/components/features/admin/person-query-options/PersonQueryOptionFormContainer.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import {PersonQueryOptions} from "@/domains/persons/schema/queries/PersonQueryOption.types.ts";

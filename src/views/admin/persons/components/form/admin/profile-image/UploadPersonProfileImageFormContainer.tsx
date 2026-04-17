@@ -4,7 +4,7 @@ import usePersonProfileImageSubmitMutation
     from "@/domains/persons/hooks/mutations/admin/usePersonProfileImageSubmitMutation.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import UploadPersonProfileImageFormView
-    from "@/domains/persons/components/form/admin/profile-image/UploadPersonProfileImageFormView.tsx";
+    from "@/views/admin/persons/components/form/admin/profile-image/UploadPersonProfileImageFormView.tsx";
 import {PersonProfileImageForm, PersonProfileImageFormValues} from "@/domains/persons/schema/forms/PersonForm.types.ts";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";

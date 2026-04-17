@@ -6,7 +6,7 @@ import {cn} from "@/common/lib/utils.ts";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
 import {Person, PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import PersonDetailsOptions
-    from "@/domains/persons/components/admin/person-details/PersonDetailsOptions.tsx";
+    from "@/views/admin/persons/components/admin/person-details/PersonDetailsOptions.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 
 type HeaderProps = {

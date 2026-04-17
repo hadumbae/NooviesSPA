@@ -3,7 +3,7 @@ import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import UploadPersonProfileImageFormContainer
-    from "@/domains/persons/components/form/admin/profile-image/UploadPersonProfileImageFormContainer.tsx";
+    from "@/views/admin/persons/components/form/admin/profile-image/UploadPersonProfileImageFormContainer.tsx";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {

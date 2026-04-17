@@ -3,7 +3,7 @@ import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Plus} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import PersonSubmitFormPanel from "@/domains/persons/components/form/admin/submit/PersonSubmitFormPanel.tsx";
+import PersonSubmitFormPanel from "@/views/admin/persons/components/form/admin/submit/PersonSubmitFormPanel.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";

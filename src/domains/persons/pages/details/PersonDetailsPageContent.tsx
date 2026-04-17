@@ -5,14 +5,14 @@
  */
 
 import {FC} from 'react';
-import PersonDetailsBreadcrumbs from "@/domains/persons/components/admin/person-details/PersonDetailsBreadcrumbs.tsx";
-import PersonDetailsHeader from "@/domains/persons/components/admin/person-details/PersonDetailsHeader.tsx";
+import PersonDetailsBreadcrumbs from "@/views/admin/persons/components/admin/person-details/PersonDetailsBreadcrumbs.tsx";
+import PersonDetailsHeader from "@/views/admin/persons/components/admin/person-details/PersonDetailsHeader.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import PersonDetailsCard from "@/domains/persons/components/admin/person-details/PersonDetailsCard.tsx";
-import PersonDetailsCreditOverview from "@/domains/persons/components/admin/person-details/credit-overview/PersonDetailsCreditOverview.tsx";
-import PersonSubmitFormPanel from "@/domains/persons/components/form/admin/submit/PersonSubmitFormPanel.tsx";
-import UploadPersonProfileImageFormPanel from "@/domains/persons/components/form/admin/profile-image/UploadPersonProfileImageFormPanel.tsx";
-import PersonDeleteWarningDialog from "@/domains/persons/components/admin/dialog/PersonDeleteWarningDialog.tsx";
+import PersonDetailsCard from "@/views/admin/persons/components/admin/person-details/PersonDetailsCard.tsx";
+import PersonDetailsCreditOverview from "@/views/admin/persons/components/admin/person-details/credit-overview/PersonDetailsCreditOverview.tsx";
+import PersonSubmitFormPanel from "@/views/admin/persons/components/form/admin/submit/PersonSubmitFormPanel.tsx";
+import UploadPersonProfileImageFormPanel from "@/views/admin/persons/components/form/admin/profile-image/UploadPersonProfileImageFormPanel.tsx";
+import PersonDeleteWarningDialog from "@/views/admin/persons/components/admin/dialog/PersonDeleteWarningDialog.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Person, PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import {MovieCreditDetailsExceptPersonGroupedByRoleArray} from "@/domains/moviecredit/schemas/model/movie-credit-grouped-schema/MovieCreditGroup.types.ts";

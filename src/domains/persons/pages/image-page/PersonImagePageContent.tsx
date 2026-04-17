@@ -7,8 +7,8 @@
 import {Person, PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PersonImageDetailsBreadcrumbs
-    from "@/domains/persons/components/breadcrumbs/admin/PersonImageDetailsBreadcrumbs.tsx";
-import PersonProfileImageHeader from "@/domains/persons/components/headers/PersonProfileImageHeader.tsx";
+    from "@/views/admin/persons/components/breadcrumbs/admin/PersonImageDetailsBreadcrumbs.tsx";
+import PersonProfileImageHeader from "@/views/admin/persons/components/headers/PersonProfileImageHeader.tsx";
 import {
     Card,
     CardContent,
@@ -17,7 +17,7 @@ import {
     CardTitle
 } from "@/common/components/ui/card.tsx";
 import UploadPersonProfileImageFormContainer
-    from "@/domains/persons/components/form/admin/profile-image/UploadPersonProfileImageFormContainer.tsx";
+    from "@/views/admin/persons/components/form/admin/profile-image/UploadPersonProfileImageFormContainer.tsx";
 import {useNavigateToPerson} from "@/domains/persons/hooks/navigation/useNavigateToPerson.ts";
 import {ReactElement} from "react";
 

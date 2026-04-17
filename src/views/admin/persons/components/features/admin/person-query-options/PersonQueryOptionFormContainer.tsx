@@ -6,7 +6,7 @@ import {PersonQueryOptionFormValues} from "@/domains/persons/schema/queries/Pers
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {PersonQueryOptionsSchema} from "@/domains/persons/schema/queries/PersonQueryOption.schema.ts";
 import PersonQueryOptionFormView
-    from "@/domains/persons/components/features/admin/person-query-options/PersonQueryOptionFormView.tsx";
+    from "@/views/admin/persons/components/features/admin/person-query-options/PersonQueryOptionFormView.tsx";
 
 /**
  * Props for {@link PersonQueryOptionFormContainer}.
