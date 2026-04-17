@@ -1,60 +1,54 @@
-import {FC} from 'react';
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
+/**
+ * @fileoverview Card component for the administrative Person Index.
+ * Displays a concise summary of a person's identity and metadata, serving as
+ * a navigational entry point to their full profile.
+ */
+
+import { ReactElement } from 'react';
+import { Card, CardContent } from "@/common/components/ui/card.tsx";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
-import {Person} from "@/domains/persons/schema/person/Person.types.ts";
+import { Person } from "@/domains/persons/schema/person/Person.types.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 
 /**
- * Props for {@link PersonIndexCard}.
+ * Props for the {@link PersonIndexCard} component.
  */
 type IndexProps = {
-    /** The person data to display in the card. */
     person: Person;
 };
 
 /**
- * Card component for displaying a summary of a person in the index page.
- *
- * @remarks
- * - Shows the person's avatar, name, date of birth, and nationality.
- * - Includes a link to navigate to the full person details page.
- * - Uses responsive and flexible layout inside a `Card`.
- *
- * @example
- * ```tsx
- * <PersonIndexCard person={person} />
- * ```
+ * Renders a summary card for a Person record.
  */
-const PersonIndexCard: FC<IndexProps> = ({person}) => {
-    const {name, dob, nationality, profileImage, slug} = person;
-
+export function PersonIndexCard(
+    { person }: IndexProps
+): ReactElement {
+    const { name, dob, nationality, profileImage, slug } = person;
     const formattedDOB = dob.toFormat("dd MMM, yyyy");
     const formattedNationality = ISO3166Alpha2CountryConstant[nationality];
 
     return (
         <LoggedLink to={`/admin/persons/get/${slug}`}>
-            <Card>
-                <CardContent className="p-4 h-full flex items-center space-x-2">
-                    {/* Person avatar */}
+            <Card className="transition-colors hover:border-primary/50">
+                <CardContent className="p-4 h-full flex items-center space-x-4">
                     <CloudinaryAvatarImage
                         personName={name}
                         image={profileImage}
-                        className="h-16 w-16"
+                        className="h-16 w-16 shadow-sm"
                     />
 
-                    {/* Name and details */}
-                    <div className="flex-grow flex flex-col">
-                        <h2 className="font-bold text-lg">{name}</h2>
+                    <div className="flex-1">
+                        <h2 className="primary-text font-bold text-lg leading-tight line-clamp-1">
+                            {name}
+                        </h2>
 
-                        <span className="text-sm text-neutral-500">
-                            {formattedDOB} | {formattedNationality}
-                        </span>
+                        <p className="secondary-text text-sm font-medium line-clamp-1">
+                            {formattedDOB} • {formattedNationality}
+                        </p>
                     </div>
                 </CardContent>
             </Card>
         </LoggedLink>
     );
-};
-
-export default PersonIndexCard;
+}

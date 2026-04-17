@@ -5,7 +5,6 @@
  */
 
 import {ReactElement} from "react";
-import PersonIndexCard from "@/views/admin/persons/_comp/person-index/PersonIndexCard.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
@@ -16,6 +15,7 @@ import {PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import {PersonQueryOptions} from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {PersonIndexHeader} from "@/views/admin/persons/pages/index-page/header.tsx";
+import {PersonIndexCard} from "@/views/admin/persons/_comp/person-index";
 
 /**
  * Props for the {@link PersonIndexPageContent} component.
