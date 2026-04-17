@@ -1,43 +1,22 @@
 /**
- * @file useNavigateToPerson.ts
- *
- * Provides a convenience hook for navigating to a person details page
- * with integrated navigation logging.
+ * @fileoverview Specialized navigation hook for routing to the Person Details view.
+ * Integrates with the logging system to provide audit trails for administrative
+ * navigation actions.
  */
 
 import useLoggedNavigate, {
     LoggingMessageParams
 } from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {NavigateOptions} from "react-router-dom";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 
-/**
- * Parameters for navigating to a person details page.
- */
 type NavigateParams = LoggingMessageParams & {
-    /** Target person identifier. */
-    slug: string;
-
-    /** Optional React Router navigation options. */
+    slug: SlugString;
     options?: NavigateOptions;
 };
 
 /**
- * Hook that returns a function for navigating to a specific person.
- *
- * Automatically:
- * - Builds the person detail route
- * - Applies a default log message
- * - Forwards navigation options
- *
- * @example
- * ```ts
- * const navigateToPerson = useNavigateToPerson();
- *
- * navigateToPerson({
- *   _id: personId,
- *   message: "Viewing person details"
- * });
- * ```
+ * Hook that returns a function to navigate to a specific person's administrative page.
  */
 export function useNavigateToPerson(): (params: NavigateParams) => void {
     const navigate = useLoggedNavigate();

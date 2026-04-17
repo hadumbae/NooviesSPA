@@ -1,12 +1,12 @@
 /**
- * @fileoverview Presentation component for the Person Index page.
+ * @fileoverview Presentation component for the administrative Person Index page.
  * Orchestrates the layout for the person listing grid, search filters,
- * and pagination for the administrative interface.
+ * and pagination, providing a high-level UI for person management.
  */
 
+import {ReactElement} from "react";
 import PersonIndexCard from "@/views/admin/persons/_comp/person-index/PersonIndexCard.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import PersonIndexHeader from "@/views/admin/persons/pages/index-page/PersonIndexHeader.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import PersonQueryOptionFormContainer
@@ -15,7 +15,11 @@ import PaginationRangeButtons from "@/common/components/pagination/PaginationRan
 import {PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import {PersonQueryOptions} from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {PersonIndexHeader} from "@/views/admin/persons/pages/index-page/header.tsx";
 
+/**
+ * Props for the {@link PersonIndexPageContent} component.
+ */
 type ContentProps = {
     persons: PersonDetails[];
     queryOptions: PersonQueryOptions;
@@ -26,50 +30,39 @@ type ContentProps = {
 };
 
 /**
- * Renders the main person management interface.
+ * Renders the structural layout for the administrative Person Index.
  */
-const PersonIndexPageContent = (
+export function PersonIndexPageContent(
     {persons, queryOptions, page, perPage, totalItems, setPage}: ContentProps
-) => {
+): ReactElement {
     return (
         <PageFlexWrapper>
             <PersonIndexHeader/>
 
-            <PresetFilterDialog
-                title="Person Filters"
-                description="Filter and sort persons."
-            >
+            <PresetFilterDialog title="Person Filters" description="Filter and sort persons.">
                 <ScrollArea className="max-h-[80vh]">
                     <ScrollBar/>
                     <PersonQueryOptionFormContainer presetValues={queryOptions}/>
                 </ScrollArea>
             </PresetFilterDialog>
 
-            {
-                persons.length > 0 ? (
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        {persons.map(person => (
-                            <PersonIndexCard key={person._id} person={person}/>
-                        ))}
-                    </div>
-                ) : (
-                    <EmptyArrayContainer
-                        className="flex-1"
-                        text="There Are No People"
-                    />
-                )
-            }
-
-            {totalItems > perPage && (
-                <PaginationRangeButtons
-                    page={page}
-                    perPage={perPage}
-                    totalItems={totalItems}
-                    setPage={setPage}
+            {persons.length > 0 ? (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    {persons.map(person => <PersonIndexCard key={person._id} person={person}/>)}
+                </div>
+            ) : (
+                <EmptyArrayContainer
+                    className="flex-1"
+                    text="There Are No People"
                 />
             )}
+
+            <PaginationRangeButtons
+                page={page}
+                perPage={perPage}
+                totalItems={totalItems}
+                setPage={setPage}
+            />
         </PageFlexWrapper>
     );
-};
-
-export default PersonIndexPageContent;
+}

@@ -1,16 +1,10 @@
 /**
- * @file PersonIndexPage.tsx
- *
- * Admin index page for browsing and managing persons.
- *
- * Responsibilities:
- * - Parses query and pagination state from the URL
- * - Fetches paginated person data
- * - Validates API responses with Zod
- * - Delegates rendering to {@link PersonIndexPageContent}
+ * @fileoverview Admin index page for browsing and managing persons.
+ * Orchestrates URL state synchronization, paginated data retrieval,
+ * and schema validation for the administrative person management interface.
  */
 
-import {FC} from 'react';
+import {ReactElement} from 'react';
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import {PaginatedPersonDetailsSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import {PaginatedPersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
@@ -18,29 +12,21 @@ import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {PersonQueryOptionsSchema} from "@/domains/persons/schema/query-options/PersonQueryOption.schema.ts";
 import useParsedPaginationValue
     from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import PersonIndexPageContent from "@/views/admin/persons/pages/index-page/PersonIndexPageContent.tsx";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {useFetchPaginatedPersons} from "@/domains/persons/_feat/crud-hooks";
+import {PersonIndexPageContent} from "@/views/admin/persons/pages/index-page/content.tsx";
 
+/** Default result set size for the person administrative grid. */
 const PERSONS_PER_PAGE = 20;
 
 /**
- * Paginated index page displaying all registered persons.
- *
- * Integrates:
- * - URL-driven filtering and pagination
- * - Server-side querying
- * - Schema-validated data loading
- *
- * @example
- * ```tsx
- * <PersonIndexPage />
- * ```
+ * Orchestrator component for the Persons Index view.
  */
-const PersonIndexPage: FC = () => {
+export function PersonIndexPage(): ReactElement {
     const {data: paginationState} = usePaginationLocationState();
-    const {searchParams} = useParsedSearchParams({schema: PersonQueryOptionsSchema});
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", paginationState?.page);
+
+    const {searchParams} = useParsedSearchParams({schema: PersonQueryOptionsSchema});
 
     const query = useFetchPaginatedPersons({
         schema: PaginatedPersonDetailsSchema,
@@ -63,6 +49,4 @@ const PersonIndexPage: FC = () => {
             )}
         </QueryDataLoader>
     );
-};
-
-export default PersonIndexPage;
+}
