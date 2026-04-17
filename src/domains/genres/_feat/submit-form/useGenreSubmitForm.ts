@@ -19,7 +19,7 @@ type UseGenreSubmitFormParams = {
  */
 export default function useGenreSubmitForm(
     {genre, presetValues}: UseGenreSubmitFormParams = {}
-): UseFormReturn<GenreFormData> {
+): UseFormReturn<GenreFormData, unknown, GenreFormData> {
     const defaultValues = useMemo<GenreFormData>(() => ({
         name: "",
         description: "",
@@ -27,7 +27,7 @@ export default function useGenreSubmitForm(
         ...presetValues,
     }), [genre, presetValues]);
 
-    return useForm<GenreFormData>({
+    return useForm<GenreFormData, unknown, GenreFormData>({
         resolver: zodResolver(GenreFormSchema),
         defaultValues,
     });

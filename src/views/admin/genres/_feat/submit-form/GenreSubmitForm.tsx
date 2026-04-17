@@ -4,12 +4,12 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import useGenreDataSubmit from "@/domains/genres/_feat/crud-hooks/useGenreDataSubmit.ts";
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import {FormOptions} from '@/common/features/submit-data/formTypes';
 import {MutationResponseConfig} from "@/common/features/submit-data";
 import {Form} from "@/common/components/ui/form.tsx";
 import {GenreFormContextProvider, GenreFormData, useGenreSubmitForm} from "@/domains/genres/_feat/submit-form";
+import {useGenreDataSubmit} from "@/domains/genres/_feat/crud-hooks";
 
 /**
  * Props for the {@link GenreSubmitForm} component.

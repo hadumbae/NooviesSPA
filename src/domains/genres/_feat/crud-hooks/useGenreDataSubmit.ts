@@ -17,12 +17,12 @@ import {GenreFormData} from "@/domains/genres/_feat/submit-form/GenreFormSchema.
 /**
  * Combined configuration for genre mutations.
  */
-export type UseGenreDataSubmitConfig = MutationResponseConfig<Genre> & MutationFormConfig<GenreFormData>;
+export type UseGenreDataSubmitConfig = MutationResponseConfig<Genre> & MutationFormConfig<GenreFormData, GenreFormData>;
 
 /**
  * Manages Genre persistence lifecycle with automated cache cleanup and form error mapping.
  */
-export default function useGenreDataSubmit(
+export function useGenreDataSubmit(
     params: UseGenreDataSubmitConfig
 ): UseMutationResult<Genre, unknown, GenreFormData> {
     const {form, onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
