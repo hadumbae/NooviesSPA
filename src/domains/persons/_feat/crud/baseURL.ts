@@ -7,4 +7,4 @@
 /**
  * The base URL for administrative CRUD operations related to Persons.
  */
-export const PersonCRUDBaseURL = `${import.meta.env.VITE_API_URL}/api/v1/admin/persons/crud`;
+export const PersonCRUDBaseURL = `/api/v1/admin/persons/crud`;

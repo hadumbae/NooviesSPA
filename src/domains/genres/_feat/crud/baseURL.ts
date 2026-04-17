@@ -7,4 +7,4 @@
 /**
  * The base endpoint for Genre management operations.
  */
-export const GenreCRUDBaseURL = `${import.meta.env.VITE_API_URL}/api/v1/admin/genres/crud`;
+export const GenreCRUDBaseURL = `/api/v1/admin/genres/crud`;
