@@ -14,8 +14,8 @@ import handleMutationFormError from "@/common/utility/handlers/handleMutationFor
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {PersonFormData, PersonFormValues} from "@/domains/persons/_feat/submit-form/PersonFormSchema.ts";
 import {MutationFormConfig, MutationResponseConfig} from "@/common/features/submit-data";
-import {PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks";
-import {PersonSubmitDataMutationKeys} from "@/domains/persons/_feat/submit-form/PersonSubmitDataMutationKeys.ts";
+import {PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks/index.ts";
+import {PersonCRUDMutationKeys} from "@/domains/persons/_feat/crud-hooks/PersonCRUDMutationKeys.ts";
 
 /**
  * Configuration parameters for the Person submission mutation.
@@ -78,7 +78,7 @@ export function useSubmitPersonData(
     };
 
     return useMutation({
-        mutationKey: PersonSubmitDataMutationKeys.data(),
+        mutationKey: PersonCRUDMutationKeys.submit(),
         mutationFn: submitPersonData,
         onSuccess,
         onError,

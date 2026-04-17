@@ -12,8 +12,8 @@ import {
     PersonFormData,
     PersonFormValues,
     usePersonSubmitForm,
-    useSubmitPersonData
 } from "@/domains/persons/_feat/submit-form";
+import {useSubmitPersonData} from "@/domains/persons/_feat/crud-hooks";
 
 /**
  * Props for the {@link PersonSubmitFormContainer}.

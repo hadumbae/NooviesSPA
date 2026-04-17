@@ -11,38 +11,39 @@
  */
 
 import {toast} from "react-toastify";
-import PersonRepository from "@/domains/persons/_feat/crud/PersonRepository.ts";
 import {useMutation} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
-import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {PersonQueryKeys} from "@/domains/persons/_feat/crud-hooks/PersonQueryKeys.ts";
+import {MutationResponseConfig} from "@/common/features/submit-data";
+import {destroy} from "@/domains/persons/_feat/crud";
+import {PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks/PersonCRUDQueryKeys.ts";
+import {PersonCRUDMutationKeys} from "@/domains/persons/_feat/crud-hooks/PersonCRUDMutationKeys.ts";
 
 /**
  * Handles deletion of a single `Person` entity.
  */
-export default function usePersonDeleteMutation(
-    {onDeleteSuccess, onDeleteError, successMessage, errorMessage}: OnDeleteMutationParams
+export function useRemovePersonData(
+    {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: MutationResponseConfig
 ) {
     const invalidateQueries = useInvalidateQueryKeys();
 
-    const deletePerson = async ({_id}: {_id: ObjectId}) => {
-        await handleMutationResponse({
-            action: () => PersonRepository.delete({_id}),
-            errorMessage: "Failed to delete person data. Please try again.",
-        });
+    const deletePerson = async ({_id}: { _id: ObjectId }) => {
+        await destroy({_id});
     };
 
     const onSuccess = () => {
         invalidateQueries(
-            [PersonQueryKeys.query(), PersonQueryKeys.paginated()],
+            [
+                PersonCRUDQueryKeys.paginated({}),
+                PersonCRUDQueryKeys.query({}),
+                PersonCRUDQueryKeys.queryPaginated({})
+            ],
             {exact: false},
         );
 
         successMessage && toast.success(successMessage);
-        onDeleteSuccess?.();
+        onSubmitSuccess?.();
     };
 
     const onError = (error: unknown) => {
@@ -51,11 +52,11 @@ export default function usePersonDeleteMutation(
             displayMessage: errorMessage ?? "Failed to delete person. Please try again.",
         });
 
-        onDeleteError?.(error);
+        onSubmitError?.(error);
     };
 
     return useMutation({
-        mutationKey: ['delete_single_person'],
+        mutationKey: PersonCRUDMutationKeys.destroy(),
         mutationFn: deletePerson,
         onSuccess,
         onError,

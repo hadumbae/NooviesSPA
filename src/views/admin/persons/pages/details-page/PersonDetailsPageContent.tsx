@@ -12,13 +12,13 @@ import PersonDetailsCard from "@/views/admin/persons/_comp/person-details/Person
 import PersonDetailsCreditOverview from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditOverview.tsx";
 import PersonSubmitFormPanel from "@/views/admin/persons/_feat/submit-form/PersonSubmitFormPanel.tsx";
 import UploadPersonProfileImageFormPanel from "@/views/admin/persons/_feat/profile-image-form/UploadPersonProfileImageFormPanel.tsx";
-import PersonDeleteWarningDialog from "@/views/admin/persons/_feat/delete-person/PersonDeleteWarningDialog.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Person, PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import {MovieCreditDetailsExceptPersonGroupedByRoleArray} from "@/domains/moviecredit/schemas/model/movie-credit-grouped-schema/MovieCreditGroup.types.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {PersonDetailsUIContext} from "@/domains/persons/context/PersonDetailsUIContext.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {PersonDeleteWarningDialog} from "@/views/admin/persons/_feat/delete-person";
 
 export type PersonDetailsPageContentProps = {
     person: PersonDetails;
@@ -98,9 +98,9 @@ const PersonDetailsPageContent: FC<PersonDetailsPageContentProps> = (props) => {
                 <PersonDeleteWarningDialog
                     personName={name}
                     personID={_id}
-                    onDeleteSuccess={navigateToPersonIndex}
-                    presetOpen={isDeletingPerson}
-                    setPresetOpen={setIsDeletingPerson}
+                    onSubmitSuccess={navigateToPersonIndex}
+                    isOpen={isDeletingPerson}
+                    setIsOpen={setIsDeletingPerson}
                 />
             </section>
         </PageFlexWrapper>

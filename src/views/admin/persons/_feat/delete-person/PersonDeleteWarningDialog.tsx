@@ -1,65 +1,42 @@
-import {FC, ReactNode} from 'react';
+/**
+ * @fileoverview Specialized confirmation dialog for Person record deletion.
+ */
+
+import {Dispatch, ReactElement, ReactNode, SetStateAction} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
-import usePersonDeleteMutation from "@/domains/persons/_feat/remove-person/usePersonDeleteMutation.ts";
-import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
+import {useRemovePersonData} from "@/domains/persons/_feat/crud-hooks";
+import {MutationResponseConfig} from "@/common/features/submit-data";
 
 /**
- * Props for `PersonDeleteWarningDialog`.
- *
- * @property children - Optional element that triggers the dialog when clicked.
- * @property personName - The name of the person being deleted, used in the dialog title.
- * @property personID - The ID of the person to delete.
- * @property presetOpen - Optional controlled open state for the dialog.
- * @property setPresetOpen - Optional setter for controlled open state.
- * @property mutationParams - Additional mutation callbacks and messages from `OnDeleteMutationParams`.
+ * Props for the {@link PersonDeleteWarningDialog} component.
  */
-type WarningDialogProps = OnDeleteMutationParams & PresetOpenState & {
+type WarningDialogProps = MutationResponseConfig & {
     children?: ReactNode;
-    personName: string;
     personID: ObjectId;
+    personName: string;
+    isOpen: boolean;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 /**
- * A warning dialog for confirming deletion of a person entry.
- *
- * @remarks
- * - Wraps `EntityDeleteWarningDialog` with pre-configured title and deletion logic.
- * - Uses `usePersonDeleteMutation` to handle deletion and trigger mutation callbacks.
- * - Supports optional controlled open state via `presetOpen` / `setPresetOpen`.
- * - Filters out empty attributes to avoid passing undefined props to the dialog.
- *
- * @example
- * ```tsx
- * <PersonDeleteWarningDialog
- *   personID={person.id}
- *   personName={person.name}
- *   onDeleteSuccess={() => console.log("Person deleted")}
- * >
- *   <Button>Delete Person</Button>
- * </PersonDeleteWarningDialog>
- * ```
+ * A warning dialog for confirming the permanent deletion of a Person entry.
  */
-const PersonDeleteWarningDialog: FC<WarningDialogProps> = (params) => {
-    const {children, personID, personName, presetOpen, setPresetOpen, ...mutationParams} = params;
-
+export function PersonDeleteWarningDialog(
+    {children, personID, personName, isOpen, setIsOpen, ...mutationParams}: WarningDialogProps
+): ReactElement {
     const dialogTitle = `Proceed to delete entry for "${personName}"?`;
-    const presetState: PresetOpenState = filterNullishAttributes({presetOpen, setPresetOpen});
-
-    const {mutate} = usePersonDeleteMutation(mutationParams);
+    const {mutate} = useRemovePersonData(mutationParams);
     const deletePerson = () => mutate({_id: personID});
 
     return (
         <EntityDeleteWarningDialog
             title={dialogTitle}
             deleteResource={deletePerson}
-            {...presetState}
+            presetOpen={isOpen}
+            setPresetOpen={setIsOpen}
         >
             {children}
         </EntityDeleteWarningDialog>
     );
-};
-
-export default PersonDeleteWarningDialog;
+}
