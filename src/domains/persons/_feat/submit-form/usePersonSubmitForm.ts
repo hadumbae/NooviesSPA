@@ -11,6 +11,7 @@ import {
 } from "@/domains/persons/_feat/submit-form/PersonFormSchema.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
+import {useMemo} from "react";
 
 /**
  * Parameters for initializing the Person form state.
@@ -23,21 +24,23 @@ type PersonSubmitParams = {
 /**
  * Hook to initialize and manage the Person submission form state.
  */
-export default function usePersonSubmitForm(
+export function usePersonSubmitForm(
     {presetValues, person}: PersonSubmitParams = {}
 ): UseFormReturn<PersonFormValues, unknown, PersonFormData> {
-    const dob = presetValues?.dob
-        ? presetValues.dob
-        : person?.dob ? person.dob.toISODate() : "";
+    const defaultValues: PersonFormValues = useMemo(() => {
+        const dob = presetValues?.dob
+            ? presetValues.dob
+            : person?.dob ? person.dob.toISODate() : "";
 
-    const defaultValues: PersonFormValues = {
-        name: "",
-        biography: "",
-        nationality: undefined,
-        ...person,
-        ...presetValues,
-        dob,
-    };
+        return {
+            name: "",
+            biography: "",
+            nationality: undefined,
+            ...person,
+            ...presetValues,
+            dob,
+        };
+    }, [presetValues, person]);
 
     return useForm<PersonFormValues, unknown, PersonFormData>({
         resolver: zodResolver(PersonFormResolverSchema),

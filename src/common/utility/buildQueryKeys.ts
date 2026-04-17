@@ -34,7 +34,7 @@ export const buildQueryKey = <TKeys extends string>(
     meta: QueryKeyMeta<TKeys>
 ): QueryKeyReturns<TKeys> => {
     /** The root key used for broad cache invalidation. */
-    const baseRecord = ["all", baseKey];
+    const baseRecord = ["all", ...baseKey];
 
     /** Map the meta definitions into functions that append parameters to the base segments. */
     const keyRecords = (Object.entries(meta) as [TKeys, string[]][])

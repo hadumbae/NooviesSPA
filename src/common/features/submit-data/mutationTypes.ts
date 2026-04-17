@@ -20,7 +20,7 @@ export type MutationFormResetConfig = {
 };
 
 /** Form-based mutation integration. */
-export type MutationFormConfig<TFormValues extends FieldValues> = {
-    form: UseFormReturn<TFormValues>;
+export type MutationFormConfig<TFormValues extends FieldValues, TForm extends FieldValues = TFormValues> = {
+    form: UseFormReturn<TFormValues, unknown, TForm>;
     resetForm?: MutationFormResetConfig;
 };

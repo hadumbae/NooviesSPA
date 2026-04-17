@@ -1,66 +1,54 @@
 /**
- * @file usePersonSubmitMutation.ts
- *
- * React Query mutation hook for creating or updating `Person` entities.
- *
- * Responsibilities:
- * - Executes create or update requests
- * - Normalizes API errors
- * - Validates responses against `PersonSchema`
- * - Maps server errors into form state
- * - Invalidates relevant person queries on success
+ * @fileoverview React Query mutation hook for creating or updating Person entities.
+ * Manages the full submission lifecycle including validation, error mapping,
+ * and cache invalidation.
  */
 
-import {UseFormReturn} from "react-hook-form";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import PersonRepository from "@/domains/persons/_feat/crud/PersonRepository.ts";
 import {PersonSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
-import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {PersonQueryKeys} from "@/domains/persons/_feat/crud-hooks/PersonQueryKeys.ts";
 import {PersonFormData, PersonFormValues} from "@/domains/persons/_feat/submit-form/PersonFormSchema.ts";
+import {MutationFormConfig, MutationResponseConfig} from "@/common/features/submit-data";
+import {PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks";
+import {PersonSubmitDataMutationKeys} from "@/domains/persons/_feat/submit-form/PersonSubmitDataMutationKeys.ts";
 
 /**
- * Parameters for submitting `Person` form data.
+ * Configuration parameters for the Person submission mutation.
  */
-export type PersonSubmitParams = MutationOnSubmitParams<Person> & {
-    form: UseFormReturn<PersonFormValues, unknown, PersonFormData>;
-    editID?: ObjectId;
-};
+export type PersonSubmitParams =
+    MutationResponseConfig<Person> &
+    MutationFormConfig<PersonFormValues, PersonFormData>;
 
 /**
- * Handles submission of `Person` form data.
+ * Hook to handle the creation or update of Person records.
  */
-export default function usePersonSubmitMutation(
+export function useSubmitPersonData(
     params: PersonSubmitParams
 ): UseMutationResult<Person, unknown, PersonFormData> {
     const {
         form,
+        resetForm,
         onSubmitSuccess,
         onSubmitError,
         successMessage,
         errorMessage,
-        editID,
     } = params;
 
     const invalidateQueries = useInvalidateQueryKeys();
 
-    const submitPersonData = async (data: PersonFormData) => {
-        const action = editID
-            ? () => PersonRepository.update({_id: editID, data})
+    const submitPersonData = async ({_id, ...data}: PersonFormData) => {
+        const action = _id
+            ? () => PersonRepository.update({_id, data})
             : () => PersonRepository.create({data});
 
-        const result = await handleMutationResponse({
-            action,
-            errorMessage: "Failed to submit person data. Please try again.",
-        });
+        const {result} = await action();
 
+        /** Validates the server response against the Person domain schema. */
         const {data: person, success, error} = validateData({
             data: result,
             schema: PersonSchema,
@@ -72,16 +60,9 @@ export default function usePersonSubmitMutation(
     };
 
     const onSuccess = (person: Person) => {
-        invalidateQueries(
-            [
-                PersonQueryKeys.ids({_id: person._id}),
-                PersonQueryKeys.slugs({slug: person.slug}),
-                PersonQueryKeys.query(),
-                PersonQueryKeys.paginated(),
-            ],
-            {exact: false},
-        );
+        invalidateQueries([PersonCRUDQueryKeys.all], {exact: false});
 
+        resetForm && form.reset();
         successMessage && toast.success(successMessage);
         onSubmitSuccess?.(person);
     };
@@ -97,7 +78,7 @@ export default function usePersonSubmitMutation(
     };
 
     return useMutation({
-        mutationKey: ['single_person_submit'],
+        mutationKey: PersonSubmitDataMutationKeys.data(),
         mutationFn: submitPersonData,
         onSuccess,
         onError,
