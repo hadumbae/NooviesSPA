@@ -1,5 +1,10 @@
+/**
+ * @fileoverview Orchestrates data fetching for the Movie Credit administrative form.
+ * Aggregates multiple domain queries (Movies, Persons, RoleTypes) and provides
+ * a centralized loading state management through conditional execution.
+ */
+
 import {MovieCreditFormValues} from "@/domains/moviecredit/schemas/form/MovieCreditForm.types.ts";
-import useFetchPersons from "@/domains/persons/_feat/crud-hooks/useFetchPersons.ts";
 import useFetchRoleTypes from "@/domains/roletype/hooks/fetch/useFetchRoleTypes.ts";
 import {ManagedUseQuery} from "@/common/type/query/ManagedUseQuery.ts";
 import {PersonArraySchema} from "@/domains/persons/schema/person/Person.schema.ts";
@@ -10,74 +15,43 @@ import {PersonQueryFilters} from "@/domains/persons/schema/query-options/PersonQ
 import {RoleTypeQueryFilters} from "@/domains/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
 import useFetchMovies from "@/domains/movies/hooks/queries/useFetchMovies.ts";
 import {MovieArraySchema} from "@/domains/movies/schema/movie/MovieArraySchema.ts";
+import {useFetchPersons} from "@/domains/persons/_feat/crud-hooks";
 
 /**
- * Parameters for {@link useMovieCreditFormDataQueries}.
- *
- * @interface QueryParams
+ * Parameters for the {@link useMovieCreditFormDataQueries} hook.
  */
 type QueryParams = {
-    /**
-     * Array of form fields to disable.
-     * Disabled fields will prevent their corresponding queries from executing.
-     */
     disableFields: (keyof MovieCreditFormValues)[];
-
-    /**
-     * Optional filters to apply when fetching movies.
-     */
     movieFilters?: MovieQueryFilters;
-
-    /**
-     * Optional filters to apply when fetching persons.
-     */
     personFilters?: PersonQueryFilters;
-
-    /**
-     * Optional filters to apply when fetching role types.
-     */
     roleTypeFilters?: RoleTypeQueryFilters;
 };
 
 /**
- * Custom hook that fetches data for the movie credit form.
- *
- * Provides queries for movies, persons, and role types.
- * Each query is conditionally enabled based on the `disableFields` array
- * to avoid unnecessary network requests.
- * Returns only the active queries and their validated schemas.
- *
- * @param {QueryParams} params - Parameters including disabled fields and optional query filters.
- *
- * @returns An object containing:
- * - `queries`: Array of active `ManagedUseQuery` objects for movies, persons, and role types.
- * - `validationQueries`: Array of active queries with schema validation applied.
- *
- * @remarks
- * - Uses {@link useFetchMovies}, {@link useFetchPersons}, and {@link useFetchRoleTypes}.
- * - Uses `activeUseQueriesOnly` to filter out disabled queries.
- * - Applies schema validation using {@link MovieArraySchema}, {@link PersonArraySchema}, and {@link RoleTypeArraySchema}.
- *
- * @example
- * ```ts
- * const {queries, validationQueries} = useMovieCreditFormDataQueries({
- *   disableFields: ['roleType'],
- *   movieFilters: { title: 'Inception' },
- *   personFilters: { nationality: 'US' }
- * });
- * ```
+ * Custom hook to aggregate and manage the lifecycle of form-related data queries.
  */
 export default function useMovieCreditFormDataQueries(params: QueryParams) {
     const {disableFields, movieFilters, personFilters, roleTypeFilters} = params;
 
-    // Conditionally enable queries based on disabled fields
     const enableMovieQuery = !disableFields.includes("movie");
     const enablePersonQuery = !disableFields.includes("person");
     const enableRoleTypeQuery = !disableFields.includes("roleType");
 
-    const movieQuery = useFetchMovies({queries: movieFilters, options: {enabled: enableMovieQuery}});
-    const personQuery = useFetchPersons({queries: personFilters, options: {enabled: enablePersonQuery}});
-    const roleTypeQuery = useFetchRoleTypes({queries: roleTypeFilters, options: {enabled: enableRoleTypeQuery}});
+    const movieQuery = useFetchMovies({
+        queries: movieFilters,
+        options: {enabled: enableMovieQuery}
+    });
+
+    const roleTypeQuery = useFetchRoleTypes({
+        queries: roleTypeFilters,
+        options: {enabled: enableRoleTypeQuery}
+    });
+
+    const personQuery = useFetchPersons({
+        schema: PersonArraySchema,
+        queries: personFilters,
+        options: {enabled: enablePersonQuery}
+    });
 
     const managedQueries: ManagedUseQuery[] = [
         {key: "movies", query: movieQuery, schema: MovieArraySchema, enabled: enableMovieQuery},

@@ -1,44 +1,44 @@
 /**
- * @file useFetchPersons.ts
- *
- * React Query hook for fetching a filtered list of Person entities.
- *
- * Responsibilities:
- * - Executes list queries via `PersonRepository.query`
- * - Normalizes request errors
- * - Applies shared React Query option defaults
+ * @fileoverview React Query hook for fetching a filtered list of Person entities.
+ * This hook is designed for unpaginated administrative queries, such as
+ * populating search dropdowns or retrieving a subset of records based
+ * on complex filters.
  */
 
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import PersonRepository from "@/domains/persons/_feat/crud/PersonRepository.ts";
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
+import {ZodType, ZodTypeDef} from "zod";
+import {query} from "@/domains/persons/_feat/crud";
+import {PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks/PersonCRUDQueryKeys.ts";
 import {PersonQueryOptions} from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
-import {OptionQueryParams} from "@/common/type/query/FetchQueryTypes.ts";
+import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {buildQueryFn} from "@/common/features/validate-fetch-data";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**
- * Fetches a list of persons using optional query filters.
- *
- * @template TData Expected response data shape.
- *
- * @param params - Query filters, request configuration, and query options.
- * @returns React Query result containing fetched persons or an error.
- *
- * @remarks
- * - Uses `PersonRepository.query` internally.
- * - Previous data may be retained during background refetches.
+ * Configuration for the {@link useFetchPersons} hook.
+ */
+type FetchConfig<TData = unknown> = {
+    schema: ZodType<TData, ZodTypeDef, unknown>;
+    queries?: PersonQueryOptions;
+    config?: RequestOptions;
+    options?: UseQueryOptions<TData>;
+};
+
+/**
+ * Custom hook to retrieve Person records based on provided query filters.
  */
 export default function useFetchPersons<TData = unknown>(
-    {queries, config, options}: OptionQueryParams<PersonQueryOptions, TData> = {}
+    {schema, queries, config, options}: FetchConfig<TData>
 ): UseQueryResult<TData, HttpResponseError> {
-    const fetchPersons = useQueryFnHandler({
-        action: () => PersonRepository.query({ queries, config }),
-        errorMessage: "Failed to fetch person(s) data. Please try again.",
+    const fetchPersons = buildQueryFn<TData>({
+        schema,
+        action: () => query({queries, config}),
     });
 
     return useQuery({
-        queryKey: ["persons", "lists", "query", {...queries, ...config}],
+        queryKey: PersonCRUDQueryKeys.query({...queries, ...config}),
         queryFn: fetchPersons,
         ...useQueryOptionDefaults(options),
     });

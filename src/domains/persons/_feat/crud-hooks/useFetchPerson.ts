@@ -1,41 +1,43 @@
 /**
- * @file useFetchPerson.ts
- *
- * React Query hook for fetching a single Person entity by ID.
- *
- * Responsibilities:
- * - Fetches a person record via `PersonRepository.get`
- * - Normalizes request errors
- * - Applies shared React Query option defaults
+ * @fileoverview React Query hook for fetching a single Person record by ID.
+ * Integrates Zod schema validation and standardized query options to ensure
+ * type-safety and consistent caching for administrative Person details.
  */
 
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import PersonRepository from "@/domains/persons/_feat/crud/PersonRepository.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {IDQueryParams} from "@/common/type/query/FetchQueryTypes.ts";
+import { ZodSchema, ZodTypeDef } from "zod";
+import { findByID } from "@/domains/persons/_feat/crud";
+import { PersonCRUDQueryKeys } from "@/domains/persons/_feat/crud-hooks/PersonCRUDQueryKeys.ts";
+import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { buildQueryFn } from "@/common/features/validate-fetch-data";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /**
- * Fetches a single person by identifier.
- *
- * @param params - Query parameters including the person ID and optional request options.
- * @returns React Query result containing the fetched person or an error.
- *
- * @remarks
- * - Returned data is not schema-validated.
- * - Errors are normalized through `useQueryFnHandler`.
+ * Configuration parameters for the {@link useFetchPerson} hook.
  */
-export default function useFetchPerson(
-    {_id, config, options}: IDQueryParams
-): UseQueryResult<unknown, HttpResponseError> {
-    const fetchPerson = useQueryFnHandler({
-        action: () => PersonRepository.get({ _id, config }),
-        errorMessage: "Failed to fetch person. Please try again.",
+type FetchParams<TData = unknown> = {
+    _id: ObjectId;
+    schema: ZodSchema<TData, ZodTypeDef, unknown>;
+    config?: Omit<RequestOptions, "limit">;
+    options?: UseQueryOptions<TData>;
+};
+
+/**
+ * Custom hook to retrieve a specific Person entity by its ID.
+ */
+export function useFetchPerson<TData = unknown>(
+    { _id, schema, config, options }: FetchParams<TData>
+): UseQueryResult<TData, HttpResponseError> {
+    const fetchPerson = buildQueryFn<TData>({
+        action: () => findByID({ _id, config }),
+        schema,
     });
 
     return useQuery({
-        queryKey: ["persons", "_id", { _id, ...config }],
+        queryKey: PersonCRUDQueryKeys._id({ _id, ...config }),
         queryFn: fetchPerson,
         ...useQueryOptionDefaults(options),
     });

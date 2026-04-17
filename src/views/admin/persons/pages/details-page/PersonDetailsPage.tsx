@@ -23,7 +23,8 @@ import {
 import PersonDetailsPageContent from "@/views/admin/persons/pages/details-page/PersonDetailsPageContent.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import {useFetchPersonBySlug} from "@/domains/persons/_feat/crud-hooks/useFetchPersonBySlug.ts";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {useFetchPersonBySlug} from "@/domains/persons/_feat/crud-hooks";
 
 /**
  * Page component for rendering a person's detailed profile.
@@ -42,15 +43,20 @@ const PersonDetailsPage: FC = () => {
         errorMessage: "Invalid Person Identifier."
     }) ?? {};
 
+    const personQuery = useFetchPersonBySlug({
+        slug: slug!,
+        schema: PersonDetailsSchema,
+        config: {populate: true, virtuals: true},
+        options: {enabled: !!slug},
+    });
+
     if (!slug) {
         return <PageLoader/>;
     }
 
-    const personQuery = useFetchPersonBySlug({slug, config: {populate: true, virtuals: true}});
-
     return (
         <PersonDetailsUIProvider>
-            <ValidatedDataLoader query={personQuery} schema={PersonDetailsSchema}>
+            <QueryDataLoader query={personQuery}>
                 {(person) => {
                     const creditQuery = useFetchGroupedMovieCreditsForPerson({
                         personID: person._id,
@@ -66,7 +72,7 @@ const PersonDetailsPage: FC = () => {
                         </ValidatedDataLoader>
                     );
                 }}
-            </ValidatedDataLoader>
+            </QueryDataLoader>
         </PersonDetailsUIProvider>
     );
 };

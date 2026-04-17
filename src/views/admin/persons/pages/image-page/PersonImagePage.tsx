@@ -10,10 +10,10 @@ import {PageLoader} from "@/views/common/_comp/page";
 import {PersonDetailsSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import {PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import PersonImagePageContent from "@/views/admin/persons/pages/image-page/PersonImagePageContent.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import {useFetchPersonBySlug} from "@/domains/persons/_feat/crud-hooks/useFetchPersonBySlug.ts";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {useFetchPersonBySlug} from "@/domains/persons/_feat/crud-hooks";
 
 /**
  * **Person Image Page**
@@ -39,19 +39,21 @@ const PersonImagePage: FC = () => {
         errorMessage: "Invalid Person Identifier."
     }) ?? {};
 
+    const query = useFetchPersonBySlug({
+        slug: slug!,
+        schema: PersonDetailsSchema,
+        config: {populate: true, virtuals: true},
+        options: {enabled: !!slug},
+    });
+
     if (!slug) {
         return <PageLoader/>;
     }
 
-    const query = useFetchPersonBySlug({
-        slug,
-        config: {populate: true, virtuals: true},
-    });
-
     return (
-        <ValidatedDataLoader query={query} schema={PersonDetailsSchema}>
+        <QueryDataLoader query={query}>
             {(person: PersonDetails) => <PersonImagePageContent person={person}/>}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 };
 
