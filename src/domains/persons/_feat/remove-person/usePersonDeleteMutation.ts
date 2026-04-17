@@ -18,7 +18,7 @@ import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {PersonQueryKeys} from "@/domains/persons/_feat/crud/PersonQueryKeys.ts";
+import {PersonQueryKeys} from "@/domains/persons/_feat/crud-hooks/PersonQueryKeys.ts";
 
 /**
  * Handles deletion of a single `Person` entity.

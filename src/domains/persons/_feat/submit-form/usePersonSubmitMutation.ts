@@ -24,7 +24,7 @@ import handleMutationFormError from "@/common/utility/handlers/handleMutationFor
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {PersonQueryKeys} from "@/domains/persons/_feat/crud/PersonQueryKeys.ts";
+import {PersonQueryKeys} from "@/domains/persons/_feat/crud-hooks/PersonQueryKeys.ts";
 
 /**
  * Parameters for submitting `Person` form data.
