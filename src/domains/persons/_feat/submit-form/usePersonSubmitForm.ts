@@ -1,69 +1,46 @@
+/**
+ * @fileoverview Hook for initializing the Person form state with standardized
+ * default values and Zod resolver integration.
+ */
+
 import {useForm, UseFormReturn} from "react-hook-form";
-import {PersonFormSchema} from "@/domains/persons/_feat/submit-form/PersonForm.schema.ts";
+import {
+    PersonFormData,
+    PersonFormResolverSchema,
+    PersonFormValues
+} from "@/domains/persons/_feat/submit-form/PersonFormSchema.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
-import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
-import {Person, PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
-import {PersonFormValues} from "@/domains/persons/_feat/submit-form/PersonForm.types.ts";
+import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 
 /**
- * Parameters for initializing the `Person` form.
+ * Parameters for initializing the Person form state.
  */
 type PersonSubmitParams = {
-    /**
-     * Optional preset values to prefill the form.
-     *
-     * These will override the defaults and any values
-     * coming from the `person` object when provided.
-     */
     presetValues?: Partial<PersonFormValues>;
-
-    /**
-     * An existing `Person` or `PersonDetails` object whose data
-     * will be used to populate the form if no `presetValues`
-     * override is provided for that field.
-     */
-    person?: Person | PersonDetails;
+    person?: Person;
 };
 
 /**
- * React hook to initialize a `react-hook-form` instance for creating or editing a `Person`.
- *
- * - Merges `presetValues` with any existing `person` data.
- * - Falls back to empty string defaults when no value is provided.
- * - Uses Zod validation via `zodResolver` with {@link PersonFormSchema}.
- *
- * @param params - Optional initialization parameters for preset values and/or an existing person.
- *
- * @returns A `UseFormReturn` instance for managing the `PersonFormValues` form state.
- *
- * @example
- * ```ts
- * const form = usePersonSubmitForm({
- *   presetValues: { name: "John Doe" },
- *   person: existingPerson,
- * });
- *
- * return (
- *   <form onSubmit={form.handleSubmit(onSubmit)}>
- *     <input {...form.register("name")} />
- *   </form>
- * );
- * ```
+ * Hook to initialize and manage the Person submission form state.
  */
-export default function usePersonSubmitForm(params?: PersonSubmitParams): UseFormReturn<PersonFormValues> {
-    const {presetValues = {}, person} = params || {};
-
-    const personDate = person ? person.dob.toISODate() : null
+export default function usePersonSubmitForm(
+    {presetValues, person}: PersonSubmitParams = {}
+): UseFormReturn<PersonFormValues, unknown, PersonFormData> {
+    const dob = presetValues?.dob
+        ? presetValues.dob
+        : person?.dob ? person.dob.toISODate() : "";
 
     const defaultValues: PersonFormValues = {
-        name: getDefaultValue(presetValues.name, person?.name, "")!,
-        biography: getDefaultValue(presetValues.biography, person?.biography, "")!,
-        dob: getDefaultValue(presetValues.dob, personDate, "")!,
-        nationality: getDefaultValue(presetValues.nationality, person?.nationality, ""),
+        name: "",
+        biography: "",
+        nationality: undefined,
+        ...person,
+        ...presetValues,
+        dob,
     };
 
-    return useForm<PersonFormValues>({
-        resolver: zodResolver(PersonFormSchema),
+    return useForm<PersonFormValues, unknown, PersonFormData>({
+        resolver: zodResolver(PersonFormResolverSchema),
         defaultValues,
     });
 }

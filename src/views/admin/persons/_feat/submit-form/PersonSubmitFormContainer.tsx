@@ -1,12 +1,7 @@
 /**
- * @file PersonSubmitFormContainer.tsx
- *
- * Container component for creating or editing `Person` entities.
- *
- * Responsibilities:
- * - Initializes the form via `usePersonSubmitForm`
- * - Configures submit mutation via `usePersonSubmitMutation`
- * - Bridges form state and mutation logic to the presentational view
+ * @fileoverview Container component for Person entity management.
+ * Orchestrates the relationship between form state, server-side mutations,
+ * and the presentational view.
  */
 
 import {FC} from 'react';
@@ -14,21 +9,17 @@ import usePersonSubmitForm from "@/domains/persons/_feat/submit-form/usePersonSu
 import usePersonSubmitMutation from "@/domains/persons/_feat/submit-form/usePersonSubmitMutation.ts";
 import PersonSubmitFormView from "@/views/admin/persons/_feat/submit-form/PersonSubmitFormView.tsx";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
-import {PersonForm, PersonFormValues} from "@/domains/persons/_feat/submit-form/PersonForm.types.ts";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
+import {PersonFormData, PersonFormValues} from "@/domains/persons/_feat/submit-form";
 
 /**
- * Props for {@link PersonSubmitFormContainer}.
+ * Props for the {@link PersonSubmitFormContainer}.
  */
 type SubmitFormParams =
     FormContainerProps<Person, Person, PersonFormValues>;
 
 /**
- * Form container for submitting `Person` data.
- *
- * Determines create vs update mode based on `isEditing`,
- * and passes all required state and handlers to
- * {@link PersonSubmitFormView}.
+ * Logic-heavy container for the Person submission flow.
  */
 const PersonSubmitFormContainer: FC<SubmitFormParams> = (params) => {
     const {isEditing, entity, presetValues, disableFields, ...onSubmitParams} = params;
@@ -45,11 +36,8 @@ const PersonSubmitFormContainer: FC<SubmitFormParams> = (params) => {
         ...onSubmitParams,
     });
 
-    /**
-     * Handles form submission.
-     */
-    const onFormSubmit = (values: PersonFormValues) => {
-        mutation.mutate(values as PersonForm);
+    const onFormSubmit = (values: PersonFormData) => {
+        mutation.mutate(values);
     };
 
     return (

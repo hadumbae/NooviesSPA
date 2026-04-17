@@ -1,7 +1,9 @@
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {PersonProfileImageFormSchema} from "@/domains/persons/_feat/submit-form/PersonForm.schema.ts";
-import {PersonProfileImageFormValues} from "@/domains/persons/_feat/submit-form/PersonForm.types.ts";
+import {
+    PersonProfileImageFormSchema,
+    PersonProfileImageFormValues
+} from "@/domains/persons/_feat/submit-profile-image/PersonProfileImageFormSchema.ts";
 
 /**
  * Custom hook for managing the person profile image form.

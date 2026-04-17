@@ -5,9 +5,12 @@ import usePersonProfileImageSubmitMutation
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import UploadPersonProfileImageFormView
     from "@/views/admin/persons/_feat/profile-image-form/UploadPersonProfileImageFormView.tsx";
-import {PersonProfileImageForm, PersonProfileImageFormValues} from "@/domains/persons/_feat/submit-form/PersonForm.types.ts";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {
+    PersonProfileImageForm,
+    PersonProfileImageFormValues
+} from "@/domains/persons/_feat/submit-profile-image/PersonProfileImageFormSchema.ts";
 
 /**
  * Props for `UploadPersonProfileImageFormContainer`.

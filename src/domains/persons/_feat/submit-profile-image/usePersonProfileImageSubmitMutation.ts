@@ -2,7 +2,6 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {PersonImageRepository} from "@/domains/persons/_feat/submit-profile-image/PersonImageRepository.ts";
 import {toast} from "react-toastify";
-import {PersonProfileImageForm, PersonProfileImageFormValues} from "@/domains/persons/_feat/submit-form/PersonForm.types.ts";
 import {PersonSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
@@ -10,6 +9,10 @@ import handleMutationFormError from "@/common/utility/handlers/handleMutationFor
 import {UseFormReturn} from "react-hook-form";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {
+    PersonProfileImageForm,
+    PersonProfileImageFormValues
+} from "@/domains/persons/_feat/submit-profile-image/PersonProfileImageFormSchema.ts";
 
 /**
  * Parameters for submitting a profile image for a `Person`.

@@ -17,7 +17,6 @@ import {toast} from "react-toastify";
 import PersonRepository from "@/domains/persons/_feat/crud/PersonRepository.ts";
 import {PersonSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
-import {PersonForm, PersonFormValues} from "@/domains/persons/_feat/submit-form/PersonForm.types.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
@@ -25,25 +24,22 @@ import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {PersonQueryKeys} from "@/domains/persons/_feat/crud-hooks/PersonQueryKeys.ts";
+import {PersonFormData, PersonFormValues} from "@/domains/persons/_feat/submit-form/PersonFormSchema.ts";
 
 /**
  * Parameters for submitting `Person` form data.
  */
 export type PersonSubmitParams = MutationOnSubmitParams<Person> & {
-    /** Form instance controlling the submission. */
-    form: UseFormReturn<PersonFormValues>;
-    /** Optional ID enabling update mode when present. */
+    form: UseFormReturn<PersonFormValues, unknown, PersonFormData>;
     editID?: ObjectId;
 };
 
 /**
  * Handles submission of `Person` form data.
- *
- * Automatically selects create or update behavior based on `editID`.
  */
 export default function usePersonSubmitMutation(
     params: PersonSubmitParams
-): UseMutationResult<Person, unknown, PersonForm> {
+): UseMutationResult<Person, unknown, PersonFormData> {
     const {
         form,
         onSubmitSuccess,
@@ -55,7 +51,7 @@ export default function usePersonSubmitMutation(
 
     const invalidateQueries = useInvalidateQueryKeys();
 
-    const submitPersonData = async (data: PersonForm) => {
+    const submitPersonData = async (data: PersonFormData) => {
         const action = editID
             ? () => PersonRepository.update({_id: editID, data})
             : () => PersonRepository.create({data});

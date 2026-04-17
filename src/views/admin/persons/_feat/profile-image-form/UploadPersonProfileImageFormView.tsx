@@ -5,8 +5,11 @@ import {Form} from "@/common/components/ui/form.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Loader} from "lucide-react";
 import HookFormFileInput from "@/common/components/forms/HookFormFileInput.tsx";
-import {PersonProfileImageForm, PersonProfileImageFormValues} from "@/domains/persons/_feat/submit-form/PersonForm.types.ts";
 import {cn} from "@/common/lib/utils.ts";
+import {
+    PersonProfileImageForm,
+    PersonProfileImageFormValues
+} from "@/domains/persons/_feat/submit-profile-image/PersonProfileImageFormSchema.ts";
 
 /**
  * Props for `UploadPersonProfileImageFormView`.

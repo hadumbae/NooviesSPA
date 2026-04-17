@@ -1,4 +1,10 @@
-import {FC} from 'react';
+/**
+ * @fileoverview Presentational view for the Person submission form.
+ * Handles the conditional rendering of form fields for creating or updating
+ * Person records, strictly decoupled from business logic and data fetching.
+ */
+
+import {ReactElement} from 'react';
 import {Form} from "@/common/components/ui/form.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
@@ -8,66 +14,25 @@ import {UseMutationResult} from "@tanstack/react-query";
 import {cn} from "@/common/lib/utils.ts";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
-import {PersonForm, PersonFormValues} from "@/domains/persons/_feat/submit-form/PersonForm.types.ts";
+import {PersonFormData, PersonFormValues} from "@/domains/persons/_feat/submit-form";
 
 /**
  * Props for the {@link PersonSubmitFormView} component.
  */
-interface Props {
-    /**
-     * The `react-hook-form` instance controlling the `PersonFormValues` state.
-     */
-    form: UseFormReturn<PersonFormValues>;
-
-    /**
-     * Callback invoked when the form is submitted.
-     *
-     * Receives validated form values as the first parameter.
-     */
-    submitHandler: SubmitHandler<PersonFormValues>;
-
-    /**
-     * The mutation object returned from `usePersonSubmitMutation`.
-     * Used to manage submit state (loading, errors, etc.).
-     */
-    mutation: UseMutationResult<Person, unknown, PersonForm>;
-
-    /**
-     * Optional list of field names to disable from rendering.
-     * Fields in this array will not be displayed.
-     */
+type FormProps = {
+    form: UseFormReturn<PersonFormValues, unknown, PersonFormData>;
+    submitHandler: SubmitHandler<PersonFormData>;
+    mutation: UseMutationResult<Person, unknown, PersonFormData>;
     disableFields?: (keyof PersonFormValues)[];
-
-    /**
-     * Optional custom CSS class name to apply to the `<form>` element.
-     */
     className?: string;
 }
 
 /**
- * Presentational component for rendering a form to create or update a `Person`.
- *
- * - Renders form fields conditionally based on `disableFields`.
- * - Uses reusable `HookForm*` components tied into `react-hook-form`.
- * - Displays a submit button that is disabled while the mutation is pending.
- *
- * @param form - The form instance returned by `usePersonSubmitForm`.
- * @param submitHandler - Function to handle form submission.
- * @param mutation - Mutation state and functions from `usePersonSubmitMutation`.
- * @param className - Optional CSS class for styling the `<form>` container.
- * @param disableFields - Optional array of field names to hide.
- *
- * @example
- * ```tsx
- * <PersonSubmitFormView
- *   form={form}
- *   submitHandler={handleSubmit}
- *   mutation={mutation}
- *   disableFields={["dob", "nationality"]}
- * />
- * ```
+ * A standardized form layout for Person entity management.
  */
-const PersonSubmitFormView: FC<Props> = ({form, submitHandler, mutation, className, disableFields = []}) => {
+function PersonSubmitFormView(
+    {form, submitHandler, mutation, className, disableFields = []}: FormProps
+): ReactElement {
     const {isPending} = mutation;
 
     const activeFields = {
@@ -79,60 +44,59 @@ const PersonSubmitFormView: FC<Props> = ({form, submitHandler, mutation, classNa
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-5", className)}>
-                {
-                    activeFields["name"]
-                    && <HookFormInput
+            <form
+                onSubmit={form.handleSubmit(submitHandler)}
+                className={cn("space-y-5", className)}
+            >
+                {activeFields["name"] && (
+                    <HookFormInput
                         name="name"
                         label="Name"
-                        description="The name of the person."
+                        description="The legal or stage name of the person."
                         control={form.control}
                     />
-                }
+                )}
 
-                {
-                    activeFields["biography"]
-                    && <HookFormTextArea
+                {activeFields["biography"] && (
+                    <HookFormTextArea
                         name="biography"
                         label="Biography"
                         control={form.control}
-                        description="The biography of the person."
+                        description="A brief professional history or personal background."
                     />
-                }
+                )}
 
-                {
-                    activeFields["dob"]
-                    && <HookFormInput
+                {activeFields["dob"] && (
+                    <HookFormInput
                         name="dob"
                         label="Date Of Birth"
                         control={form.control}
                         type="date"
-                        description="The Date of Birth of the person."
+                        description="The birth date of the person."
                     />
-                }
+                )}
 
-                {
-                    activeFields["nationality"]
-                    && <CountryHookFormSelect
+                {activeFields["nationality"] && (
+                    <CountryHookFormSelect
                         name="nationality"
                         label="Nationality"
                         control={form.control}
                         isMulti={false}
-                        description="The nationality of the person."
+                        description="The primary country of citizenship or residence."
                     />
-                }
+                )}
 
                 <Button
                     type="submit"
                     variant="default"
-                    className="w-full bg-primary"
+                    className="w-full font-semibold"
                     disabled={isPending}
                 >
-                    Submit
+                    {isPending ? "Saving..." : "Submit"}
                 </Button>
             </form>
         </Form>
     );
-};
+}
 
 export default PersonSubmitFormView;
