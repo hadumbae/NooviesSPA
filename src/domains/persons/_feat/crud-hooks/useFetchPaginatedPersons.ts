@@ -1,40 +1,45 @@
 /**
- * @file useFetchPaginatedPersons.ts
- *
- * React Query hook for fetching paginated Person data.
- *
- * Responsibilities:
- * - Executes paginated queries via `PersonRepository.paginated`
- * - Normalizes request errors
- * - Applies shared React Query option defaults
+ * @fileoverview React Query hook for fetching paginated and filtered Person data.
+ * Orchestrates the retrieval of Person entities for administrative interfaces,
+ * integrating Zod validation and standardized pagination logic.
  */
 
-import {PaginatedQueryParams} from "@/common/type/query/FetchQueryTypes.ts";
-import {PersonQueryOptions} from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import PersonRepository from "@/domains/persons/_feat/crud/PersonRepository.ts";
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { ZodType, ZodTypeDef } from "zod";
+import { query } from "@/domains/persons/_feat/crud";
+import { PersonCRUDQueryKeys } from "@/domains/persons/_feat/crud-hooks/PersonCRUDQueryKeys.ts";
+import { PersonQueryOptions } from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
+import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
+import { PaginationValues } from "@/common/features/fetch-pagination-search-params";
+import { buildQueryFn } from "@/common/features/validate-fetch-data";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
-type FetchParams = PaginatedQueryParams<PersonQueryOptions, unknown>;
+/**
+ * Configuration parameters for the {@link useFetchPaginatedPersons} hook.
+ */
+type FetchParams<TData = unknown> = {
+    schema: ZodType<TData, ZodTypeDef, unknown>;
+    pagination: PaginationValues;
+    queries?: PersonQueryOptions;
+    config?: Omit<RequestOptions, "limit">;
+    options?: UseQueryOptions<TData>;
+};
 
 /**
- * Fetches a paginated list of persons.
- *
- * @param params - Pagination values, query filters, and query options.
- * @returns React Query result containing paginated person data.
+ * Custom hook to retrieve a paginated and filtered list of Person entities.
  */
-export function useFetchPaginatedPersons(
-    {page, perPage, queries, config, options}: FetchParams,
-): UseQueryResult<unknown, HttpResponseError> {
-    const fetchPersons = useQueryFnHandler({
-        action: () => PersonRepository.paginated({page, perPage, queries, config}),
-        errorMessage: "Failed to fetch person data. Please try again.",
+export function useFetchPaginatedPersons<TData = unknown>(
+    {pagination: {page, perPage}, schema, queries, config, options}: FetchParams<TData>,
+): UseQueryResult<TData, HttpResponseError> {
+    const fetchPersons = buildQueryFn<TData>({
+        action: () => query({pagination: {page, perPage}, queries, config}),
+        schema,
     });
 
     return useQuery({
-        queryKey: ["persons", "lists", "paginated", {page, perPage, ...queries, ...config}],
+        queryKey: PersonCRUDQueryKeys.queryPaginated({page, perPage, ...queries, ...config}),
         queryFn: fetchPersons,
         ...useQueryOptionDefaults(options),
     });

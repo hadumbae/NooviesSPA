@@ -16,10 +16,11 @@ import {PaginatedPersonDetailsSchema} from "@/domains/persons/schema/person/Pers
 import {PaginatedPersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {PersonQueryOptionsSchema} from "@/domains/persons/schema/query-options/PersonQueryOption.schema.ts";
-import {useFetchPaginatedPersons} from "@/domains/persons/_feat/crud-hooks/useFetchPaginatedPersons.ts";
-import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import useParsedPaginationValue
+    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import PersonIndexPageContent from "@/views/admin/persons/pages/index-page/PersonIndexPageContent.tsx";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {useFetchPaginatedPersons} from "@/domains/persons/_feat/crud-hooks";
 
 const PERSONS_PER_PAGE = 20;
 
@@ -39,18 +40,17 @@ const PERSONS_PER_PAGE = 20;
 const PersonIndexPage: FC = () => {
     const {data: paginationState} = usePaginationLocationState();
     const {searchParams} = useParsedSearchParams({schema: PersonQueryOptionsSchema});
-    const {value: page, setValue: setPage} =
-        useParsedPaginationValue("page", paginationState?.page);
+    const {value: page, setValue: setPage} = useParsedPaginationValue("page", paginationState?.page);
 
     const query = useFetchPaginatedPersons({
-        page,
-        perPage: PERSONS_PER_PAGE,
+        schema: PaginatedPersonDetailsSchema,
+        pagination: {page, perPage: PERSONS_PER_PAGE},
         queries: searchParams,
         config: {populate: true, virtuals: true}
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={PaginatedPersonDetailsSchema}>
+        <QueryDataLoader query={query}>
             {({totalItems, items: persons}: PaginatedPersonDetails) => (
                 <PersonIndexPageContent
                     persons={persons}
@@ -61,10 +61,8 @@ const PersonIndexPage: FC = () => {
                     setPage={setPage}
                 />
             )}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 };
 
 export default PersonIndexPage;
-
-// http://localhost:3000/admin/persons/get/alice-morgan-owppcc

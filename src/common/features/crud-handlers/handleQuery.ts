@@ -8,8 +8,8 @@ import {PaginationValues} from "@/common/features/fetch-pagination-search-params
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import RequestQueryParams from "@/common/type/request/RequestQueryParams.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+import {buildURL} from "@/common/features/fetch-api";
 
 /**
  * Composite parameters for document aggregation queries.
@@ -27,7 +27,7 @@ export function handleQuery(baseURL: string) {
     return async <TQueries extends Record<string, unknown>, TReturns = unknown>(
         {queries, config, pagination}: FindDocumentsByQueryConfig<TQueries>
     ): Promise<RequestReturns<TReturns>> => {
-        const url = buildQueryURL({
+        const url = buildURL({
             baseURL,
             path: "/query",
             queries: {
