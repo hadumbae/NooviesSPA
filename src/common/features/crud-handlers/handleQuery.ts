@@ -29,7 +29,7 @@ export function handleQuery(baseURL: string) {
     ): Promise<RequestReturns<TReturns>> => {
         const url = buildQueryURL({
             baseURL,
-            path: "query",
+            path: "/query",
             queries: {
                 ...pagination,
                 ...queries,

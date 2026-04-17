@@ -4,10 +4,10 @@
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import RequestQueryParams from "@/common/type/request/RequestQueryParams.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {buildURL} from "@/common/features/fetch-api";
 
 /**
  * Parameters for finding multiple documents.
@@ -24,10 +24,9 @@ export const handleFind = (baseURL: string) => {
     return async <TQueries extends Record<string, unknown>, TReturns = unknown>(
         {queries, config}: FindDocumentsConfig<TQueries>
     ): Promise<RequestReturns<TReturns>> => {
-
-        const url = buildQueryURL({
+        const url = buildURL({
             baseURL,
-            path: "find",
+            path: "/find",
             queries: {...queries, ...config},
         });
 

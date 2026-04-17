@@ -4,9 +4,9 @@
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {buildURL} from "@/common/features/fetch-api";
 
 /**
  * Parameters for fetching a document by its slug.
@@ -23,9 +23,9 @@ export function handleFindBySlug(baseURL: string) {
     return async <TReturns = unknown>(
         {slug, config}: FindDocumentBySlugConfig
     ): Promise<RequestReturns<TReturns>> => {
-        const url = buildQueryURL({
+        const url = buildURL({
             baseURL,
-            path: `item/${slug}/slug`,
+            path: `/item/${slug}/slug`,
             queries: config,
         });
 

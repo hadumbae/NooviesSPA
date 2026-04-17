@@ -4,9 +4,9 @@
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {buildURL} from "@/common/features/fetch-api";
 
 /**
  * Parameters required to soft-delete a specific document.
@@ -20,13 +20,11 @@ export type SoftDeleteDocumentConfig = {
  */
 export function handleSoftDelete(baseURL: string) {
     return async <TReturns = unknown>(
-        params: SoftDeleteDocumentConfig
+        {_id}: SoftDeleteDocumentConfig
     ): Promise<RequestReturns<TReturns>> => {
-        const {_id} = params;
-
-        const url = buildQueryURL({
+        const url = buildURL({
             baseURL,
-            path: `item/${_id}/soft`,
+            path: `/item/${_id}/soft`,
         });
 
         return useFetchAPI({url, method: "DELETE"});

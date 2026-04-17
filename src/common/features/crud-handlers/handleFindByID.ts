@@ -5,10 +5,10 @@
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {buildURL} from "@/common/features/fetch-api";
 
 /**
  * Parameters for fetching a specific document by its unique identifier.
@@ -25,9 +25,9 @@ export function handleFindByID(baseURL: string) {
     return async <TReturns = unknown>(
         {_id, config}: FindDocumentByIDConfig
     ): Promise<RequestReturns<TReturns>> => {
-        const url = buildQueryURL({
+        const url = buildURL({
             baseURL,
-            path: `item/${_id}`,
+            path: `/item/${_id}`,
             queries: config,
         });
 

@@ -21,13 +21,11 @@ export type DeleteDocumentConfig = {
  */
 export function handleDelete(baseURL: string) {
     return async <TReturns = unknown>(
-        params: DeleteDocumentConfig
+        {_id}: DeleteDocumentConfig
     ): Promise<RequestReturns<TReturns>> => {
-        const {_id} = params;
-
         const url = buildQueryURL({
             baseURL,
-            path: `item/${_id}`,
+            path: `/item/${_id}`,
         });
 
         return useFetchAPI({url, method: "DELETE"});

@@ -4,9 +4,9 @@
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {buildURL} from "@/common/features/fetch-api";
 
 /**
  * Parameters for creating a new document.
@@ -23,9 +23,9 @@ export function handleCreate(baseURL: string) {
     return async <TData = unknown, TReturns = unknown>(
         {config, data}: CreateDocumentConfig<TData>
     ): Promise<RequestReturns<TReturns>> => {
-        const url = buildQueryURL({
+        const url = buildURL({
             baseURL,
-            path: `item`,
+            path: `/item`,
             queries: config,
         });
 
