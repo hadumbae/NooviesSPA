@@ -1,7 +1,4 @@
 import {FC} from 'react';
-import {
-    MovieCreditDetailsExceptPersonGroupedByRoleArray
-} from "@/domains/moviecredit/_feat/role-credit-groups/MovieCreditGroup.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Info} from "lucide-react";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
@@ -9,6 +6,8 @@ import PersonDetailsCreditMovieDialog
     from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditMovieDialog.tsx";
 import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+
+import {PersonFilmography} from "src/domains/moviecredit/_feat/person-credit";
 
 type AccordionListProps = {
     /** The full name of the person whose credits are being displayed. */
@@ -21,7 +20,7 @@ type AccordionListProps = {
      * Array of credits grouped by role type.
      * Each element contains a role name and an array of credits associated with that role.
      */
-    roleTypeList: MovieCreditDetailsExceptPersonGroupedByRoleArray;
+    roleTypeList: PersonFilmography;
 }
 
 /**

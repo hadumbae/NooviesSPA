@@ -1,10 +1,9 @@
 import {FC} from 'react';
-import {
-    MovieCreditDetailsExceptPersonGroupedByRoleArray
-} from "@/domains/moviecredit/_feat/role-credit-groups/MovieCreditGroup.types.ts";
 import PersonDetailsCreditList
     from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditList.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+
+import {PersonFilmography} from "src/domains/moviecredit/_feat/person-credit";
 
 type OverviewProps = {
     /** The full name of the person whose credits are being displayed. */
@@ -14,7 +13,7 @@ type OverviewProps = {
      * An array of the person's movie credits grouped by role type and department.
      * Typically, includes both 'CAST' and 'CREW' roles.
      */
-    creditsByRole: MovieCreditDetailsExceptPersonGroupedByRoleArray;
+    creditsByRole: PersonFilmography;
 }
 
 /**

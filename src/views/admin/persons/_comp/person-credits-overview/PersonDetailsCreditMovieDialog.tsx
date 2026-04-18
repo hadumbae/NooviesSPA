@@ -7,11 +7,9 @@ import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {
-    CreditExceptPerson
-} from "@/domains/moviecredit/_feat/role-credit-groups/CreditExceptPerson.types.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {PersonCredit} from "@/domains/moviecredit/_feat/person-credit/schemas/PersonCreditSchema.ts";
 
 type MovieDialogProps = {
     /** The trigger content to open the dialog, e.g., an icon or button. */
@@ -24,7 +22,7 @@ type MovieDialogProps = {
     movie: Movie | MovieDetails;
 
     /** The specific credit of the person in the movie. */
-    credit: CreditExceptPerson;
+    credit: PersonCredit;
 }
 
 /**
