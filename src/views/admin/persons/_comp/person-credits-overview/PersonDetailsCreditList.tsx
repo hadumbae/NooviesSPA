@@ -46,16 +46,16 @@ type AccordionListProps = {
 const PersonDetailsCreditList: FC<AccordionListProps> = ({personName, department, roleTypeList}) => {
     return (
         roleTypeList.map((roleTypeGroup) => {
-            const {roleName, credits} = roleTypeGroup;
+            const {role, topCredits} = roleTypeGroup;
 
             return (
-                <section key={`${roleName}-${department}`}>
-                    <SectionHeader srOnly={true}>Grouped by Role Type : {roleName}</SectionHeader>
+                <section key={`${role}-${department}`}>
+                    <SectionHeader srOnly={true}>Grouped by Role Type : {role}</SectionHeader>
 
-                    <h1 className="font-bold">{roleName}</h1>
+                    <h1 className="font-bold">{role}</h1>
 
                     <div>
-                        {credits.map(credit => {
+                        {topCredits.map(credit => {
                             const {_id, movie, characterName} = credit;
                             const {title: movieTitle, releaseDate, posterImage} = movie;
 

@@ -15,7 +15,13 @@ import {
     FilmographyForPersonConfig,
     getFetchFilmographyForPerson
 } from "@/domains/moviecredit/_feat/person-credit/repository/repository.ts";
-import {useFetchFilmographyForPerson} from "@/domains/moviecredit/_feat/person-credit/fetch/useFetchFilmographyForPerson.ts";
+import {
+    useFetchFilmographyForPerson
+} from "@/domains/moviecredit/_feat/person-credit/fetch/useFetchFilmographyForPerson.ts";
+import {
+    PersonCreditStats,
+    PersonCreditStatsSchema
+} from "@/domains/moviecredit/_feat/person-credit/schemas/PersonCreditStatsSchema.ts";
 
 export {
     PersonCrewCreditSchema,
@@ -25,6 +31,7 @@ export {
     PersonFilmographySchema,
     getFetchFilmographyForPerson,
     useFetchFilmographyForPerson,
+    PersonCreditStatsSchema,
 }
 
 export type {
@@ -34,6 +41,7 @@ export type {
     PersonCreditRoleGroup,
     PersonFilmography,
     FilmographyForPersonConfig,
+    PersonCreditStats,
 }
 
 

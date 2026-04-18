@@ -1,8 +1,5 @@
 /**
  * @fileoverview Extended movie credit schemas with populated movie and role type relations.
- * This schema excludes detailed person information, preserving the person field as a
- * simple identifier. This is ideal for person-centric views where the person's identity
- * is already known.
  */
 
 import {z} from "zod";

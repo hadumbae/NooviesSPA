@@ -1,7 +1,5 @@
 /**
  * @fileoverview Schemas for grouping a person's movie credits by their specific role titles.
- * This structure is optimized for front-end "Filmography" sections where credits need
- * to be categorized under headers like "Director", "Actor", or "Producer".
  */
 
 import {z} from "zod";
