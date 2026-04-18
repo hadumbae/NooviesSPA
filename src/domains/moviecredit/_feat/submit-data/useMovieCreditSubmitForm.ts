@@ -1,12 +1,12 @@
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {MovieCredit} from "@/domains/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 
 import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
 import {MovieCreditFormSchema} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.schema.ts";
 import useMovieCreditSubmitFormDefaultValues
     from "@/domains/moviecredit/_feat/submit-data/useMovieCreditSubmitFormDefaultValues.ts";
 import {useEffect} from "react";
+import {MovieCredit} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
 
 type SubmitParams = {
     credit?: MovieCredit;

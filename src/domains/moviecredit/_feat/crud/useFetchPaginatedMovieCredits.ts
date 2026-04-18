@@ -1,4 +1,3 @@
-import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/filters/MovieCreditQueryOptions.types.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
@@ -7,6 +6,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import MovieCreditRepository from "@/domains/moviecredit/_feat/crud/MovieCreditRepository.ts";
+import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/query-options/MovieCreditQueryOptionsSchema.ts";
 
 /**
  * Params for {@link useFetchPaginatedMovieCredits}.

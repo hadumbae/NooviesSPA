@@ -1,6 +1,6 @@
 /**
- * @file Base and discriminated schemas for cast and crew movie credits.
- * @filename MovieCredit.schema.ts
+ * @fileoverview Base and discriminated schemas for cast and crew movie credits.
+ * Defines the validation logic and TypeScript types for movie participation records.
  */
 
 import {z} from "zod";
@@ -9,82 +9,72 @@ import {RoleTypeDepartmentEnumSchema} from "@/domains/roletype/schema/RoleTypeDe
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {UndefinedForCrewSchema} from "@/domains/moviecredit/schemas/model/movie-credit-schema/MovieCreditCrewSchema.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import {
+    UndefinedForCrewFieldSchema
+} from "@/domains/moviecredit/schemas/model/UndefinedForCrewFieldSchema.ts";
 
 /**
  * Base schema shared by cast and crew credits.
  */
 export const MovieCreditBaseSchema = z.object({
-    /** Unique credit identifier */
     _id: IDStringSchema.readonly(),
-
-    /** URL-friendly identifier */
     slug: NonEmptyStringSchema.max(75, "Must be 75 characters or less."),
-
-    /** Credit department classification */
     department: RoleTypeDepartmentEnumSchema,
-
-    /** Optional role display name */
     displayRoleName: preprocessEmptyStringToUndefined(
         NonEmptyStringSchema.max(150, "Must be 150 characters or less.").optional()
-    ),
-
-    /** Optional credited name */
+    ).optional(),
     creditedAs: preprocessEmptyStringToUndefined(
         NonEmptyStringSchema.max(150, "Must be 150 characters or less.").optional()
-    ),
-
-    /** Indicates uncredited participation */
+    ).optional(),
     uncredited: CoercedBooleanValueSchema.optional(),
-
-    /** Optional credit notes */
     notes: NonEmptyStringSchema.nullable().optional(),
-
-    /** Associated movie identifier */
     movie: IDStringSchema,
-
-    /** Associated person identifier */
     person: IDStringSchema,
-
-    /** Associated role type identifier */
     roleType: IDStringSchema,
 });
 
-/** Crew credit schema. */
+/**
+ * Schema for non-performance based credits (e.g., Directing, Production).
+ */
 export const MovieCreditCrewSchema = MovieCreditBaseSchema.extend({
     department: z.literal("CREW"),
-
-    billingOrder: UndefinedForCrewSchema,
-    characterName: UndefinedForCrewSchema,
-    isPrimary: UndefinedForCrewSchema,
-    voiceOnly: UndefinedForCrewSchema,
-    cameo: UndefinedForCrewSchema,
-    motionCapture: UndefinedForCrewSchema,
-    archiveFootage: UndefinedForCrewSchema,
+    billingOrder: UndefinedForCrewFieldSchema,
+    characterName: UndefinedForCrewFieldSchema,
+    isPrimary: UndefinedForCrewFieldSchema,
+    voiceOnly: UndefinedForCrewFieldSchema,
+    cameo: UndefinedForCrewFieldSchema,
+    motionCapture: UndefinedForCrewFieldSchema,
+    archiveFootage: UndefinedForCrewFieldSchema,
 });
 
-/** Cast credit schema. */
+/**
+ * Schema for performance-based credits.
+ */
 export const MovieCreditCastSchema = MovieCreditBaseSchema.extend({
     department: z.literal("CAST"),
-
-    /** Character portrayed */
     characterName: NonEmptyStringSchema,
-
-    /** Optional billing priority */
     billingOrder: PositiveNumberSchema.optional(),
-
-    /** Indicates primary cast status */
     isPrimary: CoercedBooleanValueSchema,
-
     voiceOnly: CoercedBooleanValueSchema,
     cameo: CoercedBooleanValueSchema,
     motionCapture: CoercedBooleanValueSchema,
     archiveFootage: CoercedBooleanValueSchema,
 });
 
-/** Discriminated union of movie credit variants. */
+/**
+ * Discriminated union of movie credit variants.
+ */
 export const MovieCreditSchema = z.discriminatedUnion("department", [
     MovieCreditCrewSchema,
     MovieCreditCastSchema,
 ]);
+
+/** Represents a validated crew movie credit. */
+export type CrewMovieCredit = z.infer<typeof MovieCreditCrewSchema>;
+
+/** Represents a validated cast movie credit. */
+export type CastMovieCredit = z.infer<typeof MovieCreditCastSchema>;
+
+/** Represents a validated movie credit (either cast or crew). */
+export type MovieCredit = z.infer<typeof MovieCreditSchema>;

@@ -6,11 +6,13 @@
 import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
 import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud/useFetchMovieCredits.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
-import {MovieCreditDetailsArraySchema} from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.schema.ts";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {useFetchReviewDetailsByMovie} from "@/domains/movies/fetch/movie-reviews/useFetchReviewDetailsByMovie.ts";
 import {MovieReviewViewDataSchema} from "@/domains/review/schemas/models/MovieReviewViewDataSchema.ts";
 import {MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {
+    MovieCreditDetailsArraySchema
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsArraySchema.ts";
 
 /**
  * Parameters for overview page queries.

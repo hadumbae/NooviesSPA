@@ -29,11 +29,14 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar
 import getInitials from "@/common/utility/formatters/getInitials.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
-import {MovieCreditDetailsArray} from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {
+    MovieCreditDetailsArray
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsArraySchema.ts";
 
 /**
  * Props for {@link MovieDetailsCreditOverview}.

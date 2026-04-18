@@ -1,13 +1,15 @@
-import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/filters/MovieCreditQueryOptions.types.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
-import {PaginatedMovieCreditDetailsSchema} from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.schema.ts";
-import {PaginatedMovieCreditDetails} from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.types.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import MoviePersonDetailsCard from "@/domains/movies/components/admin/credits/cards/MoviePersonDetailsCard.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {useFetchPaginatedMovieCredits} from "@/domains/moviecredit/_feat/crud/useFetchPaginatedMovieCredits.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {
+    PaginatedMovieCreditDetails,
+    PaginatedMovieCreditDetailsSchema
+} from "@/domains/moviecredit/schemas/model/PaginatedMovieCreditDetailsSchema.ts";
+import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/query-options/MovieCreditQueryOptionsSchema.ts";
 
 /**
  * Props for {@link MovieCreditPaginatedListQuery}.

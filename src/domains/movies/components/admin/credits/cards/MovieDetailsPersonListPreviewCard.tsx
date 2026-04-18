@@ -4,9 +4,10 @@ import {ParamError} from "@/common/errors/ParamError.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {Link} from "react-router-dom";
 
+
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 interface DetailsProp {
     credit: MovieCreditDetails;

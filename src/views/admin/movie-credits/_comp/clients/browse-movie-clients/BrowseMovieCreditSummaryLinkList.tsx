@@ -10,9 +10,10 @@ import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
 import generateMovieCreditLinkConfigs from "@/domains/moviecredit/_feat/navigation/generateMovieCreditLinkConfigs.ts";
 import {cn} from "@/common/lib/utils.ts";
+
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 /**
  * Props for {@link BrowseMovieCreditSummaryLinkList}.

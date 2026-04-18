@@ -21,10 +21,10 @@ import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.ts
 import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 /**
  * Props for {@link BrowseMovieSummaryDialogContents}.

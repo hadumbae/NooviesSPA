@@ -9,9 +9,10 @@ import {cn} from "@/common/lib/utils.ts";
 import mapCreditToPersonLinkConfig from "@/domains/moviecredit/_feat/navigation/mapCreditToPersonLinkConfig.ts";
 import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 /**
  * Component props.

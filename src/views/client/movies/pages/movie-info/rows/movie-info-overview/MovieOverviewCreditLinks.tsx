@@ -10,9 +10,10 @@ import LinkGroup from "@/common/components/LinkGroup.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {useMemo} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
+
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 /**
  * Props for MovieOverviewCreditLinks.

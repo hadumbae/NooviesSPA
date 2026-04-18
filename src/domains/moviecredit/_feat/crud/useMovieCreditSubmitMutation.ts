@@ -17,11 +17,9 @@ import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.
 import {MovieCreditQueryKeys} from "@/domains/moviecredit/_feat/crud/MovieCreditQueryKeys.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
+    MovieCreditDetails,
     MovieCreditDetailsSchema
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.schema.ts";
-import {
-    MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 type SubmitParams = MutationOnSubmitParams<MovieCreditDetails> & {
     /** React Hook Form instance */

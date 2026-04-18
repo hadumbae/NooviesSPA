@@ -8,10 +8,10 @@ import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts
 import {
     CastCreditExceptMovieSchema
 } from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.schema.ts";
+import {MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {
     GroupedCrewCreditsExceptMovieSchema
-} from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.schema.ts";
-import {MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+} from "@/domains/moviecredit/schemas/model/GroupedCrewCreditsExceptMovieSchema.ts";
 
 /**
  * View schema combining movie details with grouped cast and crew credits.

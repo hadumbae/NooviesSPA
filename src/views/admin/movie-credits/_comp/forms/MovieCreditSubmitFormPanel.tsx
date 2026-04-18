@@ -7,7 +7,6 @@
  */
 
 import {ReactNode, useState} from 'react';
-import {MovieCredit} from "@/domains/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import MovieCreditSubmitFormContainer from "@/views/admin/movie-credits/_comp/forms/MovieCreditSubmitFormContainer.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
@@ -20,9 +19,10 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui/Sheet";
+import {MovieCredit} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 
 type FormPanelProps =

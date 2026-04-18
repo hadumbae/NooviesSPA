@@ -7,12 +7,12 @@ import {
     CastCreditExceptMovie, CreditExceptMovie
 } from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
 import {
-    GroupedCrewCreditsExceptMovie
-} from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.types.ts";
-import {
     CreditCategoryDisplayOrderConstant,
     CreditDisplayOrderCategory
 } from "@/domains/moviecredit/constants/CreditCategoryDisplayOrderConstant.ts";
+import {
+    GroupedCrewCreditsExceptMovie
+} from "@/domains/moviecredit/schemas/model/GroupedCrewCreditsExceptMovieSchema.ts";
 
 /** Pair representing a category and its associated credits. */
 type DisplayOrderCategoryPair = [CreditDisplayOrderCategory, CreditExceptMovie[]];

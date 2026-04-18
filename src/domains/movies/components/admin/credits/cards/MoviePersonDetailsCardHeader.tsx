@@ -5,9 +5,10 @@ import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEn
 import simplifyMovieCreditDetails from "@/domains/moviecredit/_feat/formatters/simplifyMovieCreditDetails.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
+
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 /**
  * Props for {@link MoviePersonDetailsCardHeader}.

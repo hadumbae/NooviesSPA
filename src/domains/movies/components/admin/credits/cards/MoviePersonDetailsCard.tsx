@@ -6,9 +6,10 @@ import MoviePersonDetailsCardHeader
     from "@/domains/movies/components/admin/credits/cards/MoviePersonDetailsCardHeader.tsx";
 import LabelContent from "@/common/components/card-content/LabelContent.tsx";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
+
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 interface DetailsProp {
     credit: MovieCreditDetails;

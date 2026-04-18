@@ -12,10 +12,10 @@ import MovieOverviewMeta
     from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewMeta.tsx";
 import MovieOverviewCreditLinks
     from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewCreditLinks.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 /**
  * Props for MovieOverviewHeader.

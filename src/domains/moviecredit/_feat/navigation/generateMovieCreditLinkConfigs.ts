@@ -6,9 +6,10 @@
  */
 import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
 import mapCreditToPersonLinkConfig from "@/domains/moviecredit/_feat/navigation/mapCreditToPersonLinkConfig.ts";
+
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 /**
  * Parameters for {@link generateMovieCreditLinkConfigs}.

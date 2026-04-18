@@ -16,11 +16,11 @@ import { MovieReviewViewData } from "@/domains/review/schemas/models/MovieReview
 import {
     useMovieInfoOverviewPageQueries
 } from "@/domains/movies/hooks/pages/client/movie-info-overview/useMovieInfoOverviewPageQueries.ts";
-import {
-    MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
+import {
+    MovieCreditDetails
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 /**
  * Aggregated query result shape for the overview page.

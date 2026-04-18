@@ -8,12 +8,12 @@
  * declaratively load and render typed credit data.
  */
 
-import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/filters/MovieCreditQueryOptions.types.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud/useFetchMovieCredits.ts";
 import {z, ZodTypeAny} from "zod";
 import {ReactNode} from "react";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/query-options/MovieCreditQueryOptionsSchema.ts";
 
 /**
  * Props for {@link MovieCreditDataLoader}.

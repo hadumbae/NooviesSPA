@@ -10,7 +10,7 @@ import {RoleTypeSchema} from "@/domains/roletype/schema/model/RoleType.schema.ts
 import {
     MovieCreditCastSchema,
     MovieCreditCrewSchema
-} from "@/domains/moviecredit/schemas/model/movie-credit-schema/MovieCredit.schema.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
 import {PersonSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 
 /**

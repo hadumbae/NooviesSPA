@@ -17,10 +17,10 @@ import MovieOverviewReviews
     from "@/views/client/movies/pages/movie-info/rows/MovieOverviewReviews.tsx";
 import {MovieReviewViewData} from "@/domains/review/schemas/models/MovieReviewViewDataSchema.ts";
 import MovieOverviewShowings from "@/views/client/movies/pages/movie-info/rows/MovieOverviewShowings.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 /**
  * Props for MovieInfoPageContent.

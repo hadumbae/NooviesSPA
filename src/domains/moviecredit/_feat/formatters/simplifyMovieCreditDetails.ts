@@ -1,9 +1,12 @@
-import { MovieCredit } from "@/domains/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
-import { MovieCreditSchema } from "@/domains/moviecredit/schemas/model/movie-credit-schema/MovieCredit.schema.ts";
+import {
+    MovieCredit,
+    MovieCreditSchema
+} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
 import { ParseError } from "@/common/errors/ParseError.ts";
+
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 /**
  * Simplifies a full `MovieCreditDetails` object by converting nested objects

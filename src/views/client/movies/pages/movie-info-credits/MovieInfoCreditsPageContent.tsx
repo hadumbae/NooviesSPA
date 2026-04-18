@@ -7,9 +7,6 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {
     CastCreditExceptMovie
 } from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
-import {
-    GroupedCrewCreditsExceptMovie
-} from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.types.ts";
 import MovieInfoHeader from "@/views/client/movies/components/headers/MovieInfoHeader.tsx";
 import MovieInfoCastCreditsSection
     from "@/views/client/movies/pages/movie-info-credits/sections/MovieInfoCastCreditsSection.tsx";
@@ -20,6 +17,9 @@ import MovieInfoCreditListSection
     from "@/views/client/movies/pages/movie-info-credits/sections/MovieInfoCreditListSection.tsx";
 import {useMemo} from "react";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {
+    GroupedCrewCreditsExceptMovie
+} from "@/domains/moviecredit/schemas/model/GroupedCrewCreditsExceptMovieSchema.ts";
 
 /**
  * Props for {@link MovieInfoCreditsPageContent}.

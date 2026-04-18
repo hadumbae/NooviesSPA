@@ -27,10 +27,10 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import MovieCreditRepository from "@/domains/moviecredit/_feat/crud/MovieCreditRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/filters/MovieCreditQueryOptions.types.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/query-options/MovieCreditQueryOptionsSchema.ts";
 
 /**
  * Parameters for {@link useFetchMovieCredits}.

@@ -7,7 +7,6 @@
 
 import useMovieCreditSubmitForm from "@/domains/moviecredit/_feat/submit-data/useMovieCreditSubmitForm.ts";
 import useMovieCreditSubmitMutation from "@/domains/moviecredit/_feat/crud/useMovieCreditSubmitMutation.ts";
-import {MovieCredit} from "@/domains/moviecredit/schemas/model/movie-credit-schema/MovieCredit.types.ts";
 import {MovieQueryFilters} from "@/domains/movies/schema/queries/MovieQueryOption.types.ts";
 import {MovieCreditForm, MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
 import {Loader} from "lucide-react";
@@ -22,10 +21,11 @@ import {RoleTypeQueryFilters} from "@/domains/roletype/schema/query-options/Role
 import {RoleTypeArray} from "@/domains/roletype/schema/model/RoleType.types.ts";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import useMovieCreditFormDataQueries from "@/domains/moviecredit/_feat/submit-data/useMovieCreditFormDataQueries.ts";
+import {MovieArray} from "@/domains/movies/schema/movie/MovieArraySchema.ts";
+import {MovieCredit} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
-import {MovieArray} from "@/domains/movies/schema/movie/MovieArraySchema.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 type ContainerProps = FormContainerProps<MovieCreditDetails, MovieCredit, MovieCreditFormValues> & {
     /** Optional filters for movie lookup */

@@ -4,10 +4,12 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEm
 import {
     PositiveNumberSchema
 } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {UndefinedForCrewSchema} from "@/domains/moviecredit/schemas/model/movie-credit-schema/MovieCreditCrewSchema.ts";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {
+    UndefinedForCrewFieldSchema
+} from "@/domains/moviecredit/schemas/model/UndefinedForCrewFieldSchema.ts";
 
 /**
  * Schema representing the **raw form values** for a movie credit.
@@ -69,14 +71,14 @@ export const MovieCreditFormBaseSchema = z.object({
  */
 export const MovieCreditSubmitCrewSchema = MovieCreditFormBaseSchema.extend({
     department: z.literal("CREW", {required_error: "Required.", message: "Must be `CREW`."}),
-    billingOrder: UndefinedForCrewSchema,
-    characterName: UndefinedForCrewSchema,
-    isPrimary: UndefinedForCrewSchema,
-    uncredited: UndefinedForCrewSchema,
-    voiceOnly: UndefinedForCrewSchema,
-    cameo: UndefinedForCrewSchema,
-    motionCapture: UndefinedForCrewSchema,
-    archiveFootage: UndefinedForCrewSchema,
+    billingOrder: UndefinedForCrewFieldSchema,
+    characterName: UndefinedForCrewFieldSchema,
+    isPrimary: UndefinedForCrewFieldSchema,
+    uncredited: UndefinedForCrewFieldSchema,
+    voiceOnly: UndefinedForCrewFieldSchema,
+    cameo: UndefinedForCrewFieldSchema,
+    motionCapture: UndefinedForCrewFieldSchema,
+    archiveFootage: UndefinedForCrewFieldSchema,
 });
 
 /**

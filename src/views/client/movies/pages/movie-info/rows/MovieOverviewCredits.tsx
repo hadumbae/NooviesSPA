@@ -12,10 +12,10 @@ import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHo
 import {ChevronRight} from "lucide-react";
 import ActorCreditAvatar from "@/views/admin/movie-credits/_comp/clients/ActorCreditAvatar.tsx";
 import SectionHeaderLink from "@/common/components/page/SectionHeaderLink.tsx";
+import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 /**
  * Component props.

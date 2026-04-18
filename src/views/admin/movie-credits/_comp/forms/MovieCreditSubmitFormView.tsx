@@ -30,10 +30,10 @@ import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbo
 import {RoleType} from "@/domains/roletype/schema/model/RoleType.types.ts";
 import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
 import {PrimaryButtonCSS, SecondaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
+import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {
     MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";
-import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
+} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
 interface ViewProps {
     /** React Hook Form controller */
