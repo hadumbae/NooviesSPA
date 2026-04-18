@@ -6,7 +6,7 @@
 import {useMemo} from "react";
 import {
     CastCreditExceptMovie
-} from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
+} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
 import {
     organiseMovieCastCreditsByPrimacy
 } from "@/domains/movies/views/client/movie-info-credits-page/organiseMovieCastCreditsByPrimacy.ts";

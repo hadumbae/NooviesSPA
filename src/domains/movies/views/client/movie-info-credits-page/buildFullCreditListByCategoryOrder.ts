@@ -5,7 +5,7 @@
 
 import {
     CastCreditExceptMovie, CreditExceptMovie
-} from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
+} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
 import {
     GroupedCrewCreditsExceptMovie
 } from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.types.ts";

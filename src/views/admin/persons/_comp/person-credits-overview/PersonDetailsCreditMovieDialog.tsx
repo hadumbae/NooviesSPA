@@ -9,7 +9,7 @@ import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {
     CreditExceptPerson
-} from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptPerson.types.ts";
+} from "@/domains/moviecredit/_feat/role-credit-groups/CreditExceptPerson.types.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 

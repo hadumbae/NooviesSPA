@@ -4,7 +4,7 @@
  * MovieOverviewCreditLinks.tsx
  */
 
-import generateMovieCreditLinkConfigs from "@/domains/moviecredit/utility/generateMovieCreditLinkConfigs.ts";
+import generateMovieCreditLinkConfigs from "@/domains/moviecredit/_feat/navigation/generateMovieCreditLinkConfigs.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
 import {cn} from "@/common/lib/utils.ts";

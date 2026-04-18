@@ -7,7 +7,7 @@ import {z} from "zod";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {
     CastCreditExceptMovieSchema
-} from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.schema.ts";
+} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.schema.ts";
 import {
     GroupedCrewCreditsExceptMovieSchema
 } from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.schema.ts";

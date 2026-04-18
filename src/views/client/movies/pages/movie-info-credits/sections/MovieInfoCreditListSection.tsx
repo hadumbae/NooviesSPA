@@ -5,7 +5,7 @@
 
 import {
     CreditExceptMovie,
-} from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
+} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
 import { SectionHeaderCSS } from "@/common/constants/css/TextCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import MovieCreditInfoList from "@/views/client/movie-credits/components/lists/MovieCreditInfoList.tsx";

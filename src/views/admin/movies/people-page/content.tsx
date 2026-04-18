@@ -10,12 +10,12 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import TextCollapsible from "@/common/components/TextCollapsible.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import MovieCreditSubmitFormContainer from "@/domains/moviecredit/components/forms/MovieCreditSubmitFormContainer.tsx";
-import {MovieCreditFormValues} from "@/domains/moviecredit/schemas/form/MovieCreditForm.types.ts";
+import MovieCreditSubmitFormContainer from "@/views/admin/movie-credits/_comp/forms/MovieCreditSubmitFormContainer.tsx";
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import MovieCreditPaginatedListQuery
-    from "@/domains/moviecredit/components/movie-credit-paginated-list/MovieCreditPaginatedListQuery.tsx";
+    from "@/views/admin/movie-credits/_comp/movie-credit-paginated-list/MovieCreditPaginatedListQuery.tsx";
 import {MoviePeopleHeader} from "@/views/admin/movies/people-page/header.tsx";
 
 type ContentProps = {

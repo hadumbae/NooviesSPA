@@ -6,7 +6,7 @@
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {
     CastCreditExceptMovie
-} from "@/domains/moviecredit/schemas/model/credit-except-schemas/CreditExceptMovie.types.ts";
+} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
 import {
     GroupedCrewCreditsExceptMovie
 } from "@/domains/moviecredit/schemas/model/movie-credit-related-schema/MovieCreditRelated.types.ts";

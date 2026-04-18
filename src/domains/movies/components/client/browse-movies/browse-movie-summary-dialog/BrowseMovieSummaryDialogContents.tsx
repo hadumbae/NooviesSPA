@@ -16,7 +16,7 @@ import BrowseMovieMetaRow
     from "@/domains/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import BrowseMovieCreditSummaryLinkList
-    from "@/domains/moviecredit/components/clients/browse-movie-clients/BrowseMovieCreditSummaryLinkList.tsx";
+    from "@/views/admin/movie-credits/_comp/clients/browse-movie-clients/BrowseMovieCreditSummaryLinkList.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";

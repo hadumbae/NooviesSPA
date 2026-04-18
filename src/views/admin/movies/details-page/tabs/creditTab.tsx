@@ -4,7 +4,7 @@
  * a high-level overview of the movie's production credits.
  */
 
-import {useFetchMovieCredits} from "@/domains/moviecredit/hooks/queries/useFetchMovieCredits.ts";
+import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud/useFetchMovieCredits.ts";
 import MovieDetailsCreditOverview from "@/domains/movies/components/details/MovieDetailsCreditOverview.tsx";
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";

@@ -1,10 +1,10 @@
 import {FC} from 'react';
 import {CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
-import MovieCreditOptions from "@/domains/moviecredit/components/MovieCreditOptions.tsx";
+import MovieCreditOptions from "@/views/admin/movie-credits/_comp/MovieCreditOptions.tsx";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
-import simplifyMovieCreditDetails from "@/domains/moviecredit/utility/simplifyMovieCreditDetails.ts";
+import simplifyMovieCreditDetails from "@/domains/moviecredit/_feat/formatters/simplifyMovieCreditDetails.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
-import {MovieCreditFormValues} from "@/domains/moviecredit/schemas/form/MovieCreditForm.types.ts";
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";

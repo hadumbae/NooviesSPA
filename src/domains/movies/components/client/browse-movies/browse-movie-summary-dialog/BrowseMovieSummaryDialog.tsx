@@ -11,7 +11,7 @@ import {MovieCreditDetailsArraySchema} from "@/domains/moviecredit/schemas/model
 import BrowseMovieSummaryDialogContents
     from "@/domains/movies/components/client/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialogContents.tsx";
 import MovieCreditDataLoader
-    from "@/domains/moviecredit/components/movie-credit-paginated-list/MovieCreditDataLoader.tsx";
+    from "@/views/admin/movie-credits/_comp/movie-credit-paginated-list/MovieCreditDataLoader.tsx";
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/movie-credit-details-schema/MovieCreditDetails.types.ts";

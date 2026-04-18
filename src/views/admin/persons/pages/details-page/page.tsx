@@ -7,13 +7,13 @@ import {ReactElement} from 'react';
 import {PageLoader} from "@/views/common/_comp/page";
 import {
     useFetchGroupedMovieCreditsForPerson
-} from "@/domains/moviecredit/hooks/queries/useFetchGroupedMovieCreditsForPerson.ts";
+} from "@/domains/moviecredit/_feat/role-credit-groups/useFetchGroupedMovieCreditsForPerson.ts";
 import {PersonDetailsSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import PersonDetailsUIProvider from "@/domains/persons/context/PersonDetailsUIProvider.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {
     MovieCreditDetailsExceptPersonByRoleArraySchema
-} from "@/domains/moviecredit/schemas/model/movie-credit-grouped-schema/MovieCreditGroup.schema.ts";
+} from "@/domains/moviecredit/_feat/role-credit-groups/MovieCreditGroup.schema.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";

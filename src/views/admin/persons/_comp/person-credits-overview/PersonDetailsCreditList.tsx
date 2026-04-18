@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {
     MovieCreditDetailsExceptPersonGroupedByRoleArray
-} from "@/domains/moviecredit/schemas/model/movie-credit-grouped-schema/MovieCreditGroup.types.ts";
+} from "@/domains/moviecredit/_feat/role-credit-groups/MovieCreditGroup.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Info} from "lucide-react";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
