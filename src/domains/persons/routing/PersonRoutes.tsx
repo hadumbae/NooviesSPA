@@ -1,4 +1,6 @@
-import PersonImagePage from "@/views/admin/persons/pages/image-page/PersonImagePage.tsx";
+/**
+ * @fileoverview Route configuration for the administrative Persons domain.
+ */
 
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
@@ -6,53 +8,25 @@ import {PersonIndexPage} from "@/views/admin/persons/pages/index-page/page.tsx";
 import {PersonDetailsPage} from "@/views/admin/persons/pages/details-page";
 
 /**
- * Routes configuration for the admin "Persons" section.
- *
- * @remarks
- * - Uses `BaseLayout` as the top-level layout for all person-related routes.
- * - Defines child routes for listing, creating, viewing, and editing persons.
- * - Each route includes an `errorElement` to catch and display errors using `ComponentErrorHandler`.
- *
- * @example
- * ```ts
- * import { createBrowserRouter } from "react-router-dom";
- * import personRoutes from "./personRoutes";
- *
- * const router = createBrowserRouter(personRoutes);
- * ```
+ * Admin "Persons" route definitions.
  */
 export default [
     {
-        /** Base path for all person-related admin routes. */
         path: '/admin/persons',
-        /** Top-level layout wrapper for person routes. */
         element: <AdminLayout />,
-        /** Child routes nested under the base path. */
         children: [
             {
-                /** Route for listing all persons. */
+                /** List view for person management. */
                 path: "/admin/persons",
                 element: <PersonIndexPage />,
                 errorElement: <ComponentErrorHandler />
             },
             {
-                /** Route for viewing details of a specific person by ID. */
+                /** Detailed profile view utilizing URL slug parameters. */
                 path: "/admin/persons/get/:slug",
                 element: <PersonDetailsPage />,
                 errorElement: <ComponentErrorHandler />
-            },
-            {
-                /** Route for viewing a person's profile image. */
-                path: "/admin/persons/get/:slug/images/profile",
-                element: <PersonImagePage />,
-                errorElement: <ComponentErrorHandler />
-            },
-            {
-                /** Route for editing a person's profile image. */
-                path: "/admin/persons/edit/:slug/profile-image",
-                element: <PersonImagePage />,
-                errorElement: <ComponentErrorHandler />
-            },
+            }
         ],
     }
 ];

@@ -49,9 +49,7 @@ export function PersonDetailsPageHeader(
                 </div>
 
                 <PersonDetailsOptions>
-                    <IconButton variant="ghost" size="icon">
-                        <EllipsisIcon className="h-5 w-5"/>
-                    </IconButton>
+                    <IconButton variant="outline" size="icon" icon={EllipsisIcon}/>
                 </PersonDetailsOptions>
             </div>
         </header>
