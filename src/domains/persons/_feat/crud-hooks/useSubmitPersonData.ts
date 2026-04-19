@@ -20,9 +20,9 @@ import {PersonCRUDMutationKeys} from "@/domains/persons/_feat/crud-hooks/PersonC
 /**
  * Configuration parameters for the Person submission mutation.
  */
-export type PersonSubmitParams =
-    MutationResponseConfig<Person> &
-    MutationFormConfig<PersonFormValues, PersonFormData>;
+export type PersonSubmitParams = MutationFormConfig<PersonFormValues, PersonFormData> & {
+    onSubmit?: MutationResponseConfig<Person>;
+};
 
 /**
  * Hook to handle the creation or update of Person records.
@@ -33,10 +33,12 @@ export function useSubmitPersonData(
     const {
         form,
         resetForm,
-        onSubmitSuccess,
-        onSubmitError,
-        successMessage,
-        errorMessage,
+        onSubmit: {
+            onSubmitSuccess,
+            onSubmitError,
+            successMessage,
+            errorMessage,
+        } = {}
     } = params;
 
     const invalidateQueries = useInvalidateQueryKeys();

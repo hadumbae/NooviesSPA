@@ -5,7 +5,6 @@
  */
 
 import {ReactElement} from "react";
-import PersonSubmitFormPanel from "@/views/admin/persons/_feat/submit-form/PersonSubmitFormPanel.tsx";
 import {PersonDeleteWarningDialog} from "@/views/admin/persons/_feat/delete-person";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {PersonDetailsUIContext} from "@/domains/persons/context/PersonDetailsUIContext.ts";
@@ -16,6 +15,7 @@ import {
     UploadPersonProfileImageForm,
     UploadPersonProfileImageFormPanel
 } from "@/views/admin/persons/_feat/profile-image-form";
+import {PersonSubmitForm, PersonSubmitFormPanel} from "@/views/admin/persons/_feat/submit-form";
 
 /**
  * Props for the {@link PersonDetailsPageActions} component.
@@ -54,13 +54,17 @@ export function PersonDetailsPageActions(
 
     return (
         <div className={className}>
-            <PersonSubmitFormPanel
-                isEditing={true}
-                entity={person}
-                presetOpen={isEditing}
-                setPresetOpen={setIsEditing}
+            <PersonSubmitForm
                 onSubmitSuccess={replaceOnUpdate}
-            />
+                editEntity={person}
+            >
+                <PersonSubmitFormPanel
+                    isEditing={true}
+                    isOpen={isEditing}
+                    setIsOpen={setIsEditing}
+                />
+            </PersonSubmitForm>
+
 
             <UploadPersonProfileImageForm
                 onSubmitSuccess={() => setIsUpdatingProfileImage(false)}
