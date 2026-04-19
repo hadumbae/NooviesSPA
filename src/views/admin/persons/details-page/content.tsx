@@ -9,9 +9,9 @@ import PersonDetailsCreditOverview
     from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditOverview.tsx";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
-import {PersonDetailsPageActions} from "@/views/admin/persons/pages/details-page/actions.tsx";
-import {PersonDetailsPageHeader} from './header';
-import {PersonFilmography} from "src/domains/moviecredit/_feat/person-credit";
+import {PersonDetailsPageActions} from "@/views/admin/persons/details-page/actions.tsx";
+import {PersonDetailsPageHeader} from './header.tsx';
+import {PersonFilmography} from "@/domains/moviecredit/_feat/person-credit";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {PersonDetailsCard} from "@/views/admin/persons/_comp/person-details";
 

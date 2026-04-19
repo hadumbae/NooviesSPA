@@ -14,7 +14,7 @@ import PaginationRangeButtons from "@/common/components/pagination/PaginationRan
 import {PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import {PersonQueryOptions} from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {PersonIndexHeader} from "@/views/admin/persons/pages/index-page/header.tsx";
+import {PersonIndexHeader} from "@/views/admin/persons/index-page/header.tsx";
 import {PersonIndexCard} from "@/views/admin/persons/_comp/person-index";
 
 /**

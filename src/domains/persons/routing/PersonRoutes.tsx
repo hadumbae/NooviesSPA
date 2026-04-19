@@ -4,8 +4,8 @@
 
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
-import {PersonIndexPage} from "@/views/admin/persons/pages/index-page/page.tsx";
-import {PersonDetailsPage} from "@/views/admin/persons/pages/details-page";
+import {PersonIndexPage} from "@/views/admin/persons/index-page/page.tsx";
+import {PersonDetailsPage} from "src/views/admin/persons/details-page";
 
 /**
  * Admin "Persons" route definitions.

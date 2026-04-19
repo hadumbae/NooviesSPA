@@ -14,7 +14,7 @@ import useParsedPaginationValue
     from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {useFetchPaginatedPersons} from "@/domains/persons/_feat/crud-hooks";
-import {PersonIndexPageContent} from "@/views/admin/persons/pages/index-page/content.tsx";
+import {PersonIndexPageContent} from "@/views/admin/persons/index-page/content.tsx";
 
 /** Default result set size for the person administrative grid. */
 const PERSONS_PER_PAGE = 20;

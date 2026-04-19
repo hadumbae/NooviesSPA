@@ -11,7 +11,7 @@ import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarIm
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import PersonDetailsOptions from "@/views/admin/persons/_feat/person-details-actions/PersonDetailsOptions.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
-import {PersonDetailsPageBreadcrumbs} from '@/views/admin/persons/pages/details-page/breadcrumbs';
+import {PersonDetailsPageBreadcrumbs} from '@/views/admin/persons/details-page/breadcrumbs.tsx';
 
 /**
  * Props for the {@link PersonDetailsPageHeader} component.
