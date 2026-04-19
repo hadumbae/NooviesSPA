@@ -1,3 +1,7 @@
+/**
+ * @fileoverview UI component for rendering a person's movie credits grouped by professional role.
+ */
+
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Info} from "lucide-react";
@@ -5,91 +9,67 @@ import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEn
 import PersonDetailsCreditMovieDialog
     from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditMovieDialog.tsx";
 import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-
 import {PersonFilmography} from "src/domains/moviecredit/_feat/person-credit";
+import {SROnly} from "@/views/common/_comp/screen-readers";
 
+/**
+ * Props for the PersonDetailsCreditList component.
+ */
 type AccordionListProps = {
-    /** The full name of the person whose credits are being displayed. */
     personName: string;
-
-    /** The department of the credits being displayed, either "CAST" or "CREW". */
     department: RoleTypeDepartment;
-
-    /**
-     * Array of credits grouped by role type.
-     * Each element contains a role name and an array of credits associated with that role.
-     */
     roleTypeList: PersonFilmography;
 }
 
 /**
- * Renders a list of a person's movie credits grouped by role type within a department.
- *
- * Each role type group displays a section header with the role name and a card for each credit.
- * - CAST credits show the character name.
- * - CREW credits show the role name.
- *
- * Each credit card includes:
- * - Movie title (with original title if different)
- * - Role or character
- * - Release year
- * - A dialog trigger to view more details about the movie credit
- *
- * @example
- * <PersonDetailsCreditList
- *   personName="Jane Doe"
- *   department="CAST"
- *   roleTypeList={[{ roleName: "Lead", credits: [...] }, { roleName: "Supporting", credits: [...] }]}
- * />
+ * Renders a categorized list of a person's credits.
  */
 const PersonDetailsCreditList: FC<AccordionListProps> = ({personName, department, roleTypeList}) => {
     return (
-        roleTypeList.map((roleTypeGroup) => {
-            const {role, topCredits} = roleTypeGroup;
+        roleTypeList.map((roleGroup) => {
+            const {role, topCredits} = roleGroup;
 
             return (
-                <section key={`${role}-${department}`}>
-                    <SectionHeader srOnly={true}>Grouped by Role Type : {role}</SectionHeader>
+                <section key={`${role}-${department}`} className="space-y-2">
+                    <SROnly>Grouped by Role Type : {role}</SROnly>
 
-                    <h1 className="font-bold">{role}</h1>
+                    <h1 className="primary-text subsection-title">{role}</h1>
 
-                    <div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         {topCredits.map(credit => {
-                            const {_id, movie, characterName} = credit;
+                            const {_id, movie} = credit;
                             const {title: movieTitle, releaseDate, posterImage} = movie;
 
-                            const roleDisplay = department === "CAST" ? characterName : roleName;
                             const releaseYear = releaseDate?.toFormat("yyyy") ?? "Unreleased";
+
+                            const roleDisplay = department === "CAST"
+                                ? credit.characterName
+                                : credit.roleType.roleName;
 
                             return (
                                 <Card key={_id}>
                                     <CardContent className="py-4 px-3 flex items-center space-x-2">
 
-                                        {/* Poster Image */}
-
                                         <div>
                                             <MoviePosterImage src={posterImage?.secure_url}/>
                                         </div>
-
-                                        {/* Credit Information */}
 
                                         <div className="flex-1 min-w-0 flex flex-col space-y-2 justify-center">
                                             <h1 className="text-base font-bold truncate">{movieTitle}</h1>
                                             <span className="text-sm text-neutral-400 truncate">{roleDisplay}</span>
                                         </div>
 
-                                        {/* Movie Dialog */}
-
                                         <div className="flex space-x-2 items-center justify-end">
-                                            <span className="text-xs text-neutral-400">{releaseYear}</span>
+                                            <span className="secondary-text text-xs font-bold select-none">
+                                                {releaseYear}
+                                            </span>
 
                                             <PersonDetailsCreditMovieDialog
                                                 personName={personName}
                                                 credit={credit}
                                                 movie={movie}
                                             >
-                                                <Info className="text-blue-200 hover:text-blue-500"/>
+                                                <Info className="text-blue-200 hover:text-blue-500 cursor-pointer"/>
                                             </PersonDetailsCreditMovieDialog>
                                         </div>
                                     </CardContent>

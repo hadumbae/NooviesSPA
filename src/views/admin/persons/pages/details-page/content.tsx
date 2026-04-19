@@ -5,16 +5,16 @@
  */
 
 import {ReactElement} from 'react';
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PersonDetailsCard from "@/views/admin/persons/_comp/person-details/PersonDetailsCard.tsx";
 import PersonDetailsCreditOverview
     from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditOverview.tsx";
-import {PageFlexWrapper} from "@/views/common/_comp/page";
+import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import {PersonDetailsPageActions} from "@/views/admin/persons/pages/details-page/actions.tsx";
 import {PersonDetailsPageHeader} from './header';
 
 import {PersonFilmography} from "src/domains/moviecredit/_feat/person-credit";
+import {SROnly} from "@/views/common/_comp/screen-readers";
 
 /**
  * Props for the {@link PersonDetailsPageContent} component.
@@ -37,17 +37,17 @@ export function PersonDetailsPageContent(
 
     return (
         <PageFlexWrapper>
-            {/* Contextual header with primary identity and action triggers */}
             <PersonDetailsPageHeader person={person}/>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <section>
-                    <SectionHeader srOnly={true}>Personal Details</SectionHeader>
+                    <SROnly>Personal Details</SROnly>
                     <PersonDetailsCard person={person}/>
                 </section>
 
                 <section className="md:col-span-2">
-                    <SectionHeader className="mb-4">Movie Credits</SectionHeader>
+                    <PageSectionHeader>Movie Credits</PageSectionHeader>
+
                     <PersonDetailsCreditOverview
                         personName={name}
                         creditsByRole={filmography}
