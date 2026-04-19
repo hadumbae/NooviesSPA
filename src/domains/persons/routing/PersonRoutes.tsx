@@ -5,7 +5,7 @@
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
 import {PersonIndexPage} from "@/views/admin/persons/index-page/page.tsx";
-import {PersonDetailsPage} from "src/views/admin/persons/details-page";
+import {PersonDetailsPage} from "@/views/admin/persons/details-page";
 
 /**
  * Admin "Persons" route definitions.
@@ -13,19 +13,17 @@ import {PersonDetailsPage} from "src/views/admin/persons/details-page";
 export default [
     {
         path: '/admin/persons',
-        element: <AdminLayout />,
+        element: <AdminLayout/>,
         children: [
             {
-                /** List view for person management. */
                 path: "/admin/persons",
-                element: <PersonIndexPage />,
-                errorElement: <ComponentErrorHandler />
+                element: <PersonIndexPage/>,
+                errorElement: <ComponentErrorHandler/>
             },
             {
-                /** Detailed profile view utilizing URL slug parameters. */
                 path: "/admin/persons/get/:slug",
-                element: <PersonDetailsPage />,
-                errorElement: <ComponentErrorHandler />
+                element: <PersonDetailsPage/>,
+                errorElement: <ComponentErrorHandler/>
             }
         ],
     }
