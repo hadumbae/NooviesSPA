@@ -5,16 +5,15 @@
  */
 
 import {ReactElement} from 'react';
-import PersonDetailsCard from "@/views/admin/persons/_comp/person-details/PersonDetailsCard.tsx";
 import PersonDetailsCreditOverview
     from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditOverview.tsx";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import {PersonDetailsPageActions} from "@/views/admin/persons/pages/details-page/actions.tsx";
 import {PersonDetailsPageHeader} from './header';
-
 import {PersonFilmography} from "src/domains/moviecredit/_feat/person-credit";
 import {SROnly} from "@/views/common/_comp/screen-readers";
+import {PersonDetailsCard} from "@/views/admin/persons/_comp/person-details";
 
 /**
  * Props for the {@link PersonDetailsPageContent} component.
@@ -32,7 +31,7 @@ export type PersonDetailsPageContentProps = {
 export function PersonDetailsPageContent(
     props: PersonDetailsPageContentProps
 ): ReactElement {
-    const {person, filmography} = props;
+    const {person, filmography, creditCount, movieCount} = props;
     const {name} = person;
 
     return (
@@ -42,7 +41,11 @@ export function PersonDetailsPageContent(
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <section>
                     <SROnly>Personal Details</SROnly>
-                    <PersonDetailsCard person={person}/>
+                    <PersonDetailsCard
+                        person={person}
+                        creditCount={creditCount}
+                        movieCount={movieCount}
+                    />
                 </section>
 
                 <section className="md:col-span-2">

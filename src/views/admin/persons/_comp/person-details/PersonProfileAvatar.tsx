@@ -1,32 +1,25 @@
 /**
- * @file Avatar component for displaying a person's profile image.
- * @filename PersonProfileAvatar.tsx
+ * @fileoverview Avatar component for displaying a person's profile image with initials fallback.
  */
 
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
 import {URLString} from "@/common/schema/strings/URLStringSchema.ts";
 import getInitials from "@/common/utility/formatters/getInitials.ts";
+import {ReactElement} from "react";
 
 /**
- * Props for {@link PersonProfileAvatar}.
+ * Props for the PersonProfileAvatar component.
  */
 type AvatarProps = {
-    /** Person's display name used for initials fallback */
     name: string;
-
-    /** Optional profile image URL */
     imageLink?: URLString;
-
-    /** Optional CSS classes applied to the avatar */
     className?: string;
 }
 
 /**
- * Renders a person's avatar with an initials fallback.
+ * Renders a profile image for a person.
  */
-const PersonProfileAvatar = (
-    {name, imageLink, className}: AvatarProps
-) => {
+export function PersonProfileAvatar({name, imageLink, className}: AvatarProps): ReactElement {
     const initials = getInitials(name);
 
     return (
@@ -35,6 +28,4 @@ const PersonProfileAvatar = (
             <AvatarFallback>{initials}</AvatarFallback>
         </Avatar>
     );
-};
-
-export default PersonProfileAvatar;
+}

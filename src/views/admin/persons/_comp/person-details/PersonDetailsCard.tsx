@@ -1,4 +1,8 @@
-import {FC} from 'react';
+/**
+ * @fileoverview Card component for displaying a person's biographical data and career stats.
+ */
+
+import {ReactElement} from 'react';
 import {PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
@@ -6,45 +10,21 @@ import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
 
+/**
+ * Props for the PersonDetailsCard component.
+ */
 type DetailCardProps = {
-    /**
-     * The person object containing all details to display.
-     *
-     * @remarks
-     * Should conform to the {@link PersonDetails} type.
-     */
     person: PersonDetails;
+    creditCount: number;
+    movieCount: number;
 }
 
 /**
- * Card component for displaying detailed information about a person.
- *
- * @remarks
- * - Displays personal details such as name, date of birth, nationality, and biography.
- * - Formats date of birth as `dd MMM, yyyy`.
- * - Converts ISO 3166-1 alpha-2 nationality codes into full country names using
- *   {@link ISO3166Alpha2CountryConstant}.
- * - Displays credits overview including number of credited roles and movies.
- * - Uses {@link Card} and {@link CardContent} for consistent UI styling.
- * - Uses {@link DetailsCardSpan} for label/text display and {@link TextQuote} for biography.
- *
- * @example
- * ```tsx
- * <PersonDetailsCard person={person} />
- * ```
+ * Displays a structured summary of personal info and career metrics.
  */
-const PersonDetailsCard: FC<DetailCardProps> = ({person}) => {
-    // ⚡ Props ⚡
-    const {
-        name,
-        dob,
-        nationality,
-        biography,
-        creditCount,
-        movieCount,
-    } = person;
-
-    // ⚡ Formatting ⚡
+export function PersonDetailsCard(
+    {movieCount, creditCount, person: {name, dob, nationality, biography}}: DetailCardProps
+): ReactElement {
     const formattedDOB = dob.toFormat("dd MMM, yyyy");
     const formattedNationality = nationality in ISO3166Alpha2CountryConstant
         ? ISO3166Alpha2CountryConstant[nationality]
@@ -53,35 +33,34 @@ const PersonDetailsCard: FC<DetailCardProps> = ({person}) => {
     return (
         <Card>
             <CardContent className="p-4 space-y-4">
-                <section>
-                    <h1 className="text-lg font-bold">Personal Details</h1>
+                <div>
+                    <h1 className="subsection-title">Personal Details</h1>
                     <Separator/>
-                </section>
+                </div>
 
-                <section className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-4">
                     <div className="col-span-2">
                         <DetailsCardSpan label="Name" text={name}/>
                     </div>
                     <DetailsCardSpan label="DoB" text={formattedDOB}/>
                     <DetailsCardSpan label="Nationality" text={formattedNationality}/>
-                    <section className="col-span-2 space-y-1">
+
+                    <div className="col-span-2 space-y-1">
                         <h2 className="text-[12px] text-neutral-500 uppercase">Biography</h2>
                         <TextQuote className="col-span-2">{biography}</TextQuote>
-                    </section>
-                </section>
+                    </div>
+                </div>
 
-                <section>
-                    <h1 className="text-lg font-bold">Credits</h1>
+                <div>
+                    <h1 className="subsection-title">Credits</h1>
                     <Separator/>
-                </section>
+                </div>
 
-                <section className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-2">
                     <DetailsCardSpan label="Credited Roles" text={`${creditCount} Credits`}/>
                     <DetailsCardSpan label="Movies" text={`${movieCount} Movies`}/>
-                </section>
+                </div>
             </CardContent>
         </Card>
     );
-};
-
-export default PersonDetailsCard;
+}
