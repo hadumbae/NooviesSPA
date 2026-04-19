@@ -6,21 +6,22 @@
 
 import {ReactElement} from "react";
 import PersonSubmitFormPanel from "@/views/admin/persons/_feat/submit-form/PersonSubmitFormPanel.tsx";
-import UploadPersonProfileImageFormPanel
-    from "@/views/admin/persons/_feat/profile-image-form/UploadPersonProfileImageFormPanel.tsx";
 import {PersonDeleteWarningDialog} from "@/views/admin/persons/_feat/delete-person";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {PersonDetailsUIContext} from "@/domains/persons/context/PersonDetailsUIContext.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {Person, PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
+import {useNavigateToPersonIndex} from "@/domains/persons/_feat/navigation";
+import {
+    UploadPersonProfileImageForm,
+    UploadPersonProfileImageFormPanel
+} from "@/views/admin/persons/_feat/profile-image-form";
 
 /**
  * Props for the {@link PersonDetailsPageActions} component.
  */
 type ActionProps = {
-    /** The person entity being managed. */
     person: PersonDetails;
-    /** Optional styling for the wrapper container. */
     className?: string;
 };
 
@@ -42,14 +43,6 @@ export function PersonDetailsPageActions(
         setIsDeletingPerson,
     } = useRequiredContext({context: PersonDetailsUIContext});
 
-    const navigateToPersonIndex = () => {
-        navigate({
-            to: "/admin/persons",
-            component: PersonDetailsPageActions.name,
-            message: "Navigation to index after person deletion."
-        });
-    };
-
     const replaceOnUpdate = (updatedPerson: Person) => {
         navigate({
             to: `/admin/persons/get/${updatedPerson.slug}`,
@@ -69,16 +62,21 @@ export function PersonDetailsPageActions(
                 onSubmitSuccess={replaceOnUpdate}
             />
 
-            <UploadPersonProfileImageFormPanel
+            <UploadPersonProfileImageForm
+                onSubmitSuccess={() => setIsUpdatingProfileImage(false)}
+                successMessage="Profile Image Updated."
                 personID={_id}
-                presetOpen={isUpdatingProfileImage}
-                setPresetOpen={setIsUpdatingProfileImage}
-            />
+            >
+                <UploadPersonProfileImageFormPanel
+                    isOpen={isUpdatingProfileImage}
+                    setIsOpen={setIsUpdatingProfileImage}
+                />
+            </UploadPersonProfileImageForm>
 
             <PersonDeleteWarningDialog
                 personName={name}
                 personID={_id}
-                onSubmitSuccess={navigateToPersonIndex}
+                onSubmitSuccess={() => useNavigateToPersonIndex()}
                 isOpen={isDeletingPerson}
                 setIsOpen={setIsDeletingPerson}
             />

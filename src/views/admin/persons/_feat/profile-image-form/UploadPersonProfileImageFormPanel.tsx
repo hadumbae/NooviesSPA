@@ -1,11 +1,9 @@
-import {FC, ReactNode, useState} from 'react';
-import {Person} from "@/domains/persons/schema/person/Person.types.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+/**
+ * @fileoverview Slide-over panel containing the profile image upload form.
+ */
+
+import {ReactElement, ReactNode} from 'react';
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
-import UploadPersonProfileImageFormContainer
-    from "@/views/admin/persons/_feat/profile-image-form/UploadPersonProfileImageFormContainer.tsx";
-import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {
     Sheet,
     SheetContent,
@@ -14,74 +12,66 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui/Sheet";
+import HookFormFileInput from "@/common/components/forms/HookFormFileInput.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
+import {useFormContext} from "react-hook-form";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {BaseFormContext} from "@/common/features/generic-form-context";
+import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
- * Props for `UploadPersonProfileImageFormPanel`.
- *
- * @property children - Optional trigger element for opening the panel.
- * @property className - Optional CSS class to apply to the form container.
- * @property personID - The ID of the person whose profile image is being updated.
- * @property presetOpen - Optional controlled open state for the panel.
- * @property setPresetOpen - Optional setter for controlled open state.
+ * Props for the UploadPersonProfileImageFormPanel component.
  */
-type FormPanelProps = MutationOnSubmitParams<Person> & PresetOpenState & {
+type FormPanelProps = {
     children?: ReactNode;
     className?: string;
-    personID: ObjectId;
+    isOpen: boolean;
+    setIsOpen: (open: boolean) => void;
 };
 
 /**
- * Slide-over panel for uploading a person's profile image.
- *
- * @remarks
- * - Uses `Sheet` for a sliding panel UI.
- * - Includes a `SheetHeader` with a title and description.
- * - Wraps the `UploadPersonProfileImageFormContainer` in a `ScrollArea` for scrollable content.
- * - Supports optional controlled open state via `presetOpen` / `setPresetOpen`.
- *
- * @example
- * ```tsx
- * <UploadPersonProfileImageFormPanel personID={person.id}>
- *   <Button>Upload Profile Image</Button>
- * </UploadPersonProfileImageFormPanel>
- * ```
+ * A side-drawer component for submitting a person's profile image.
  */
-const UploadPersonProfileImageFormPanel: FC<FormPanelProps> = (props) => {
-    const {children, className, personID, presetOpen, setPresetOpen, onSubmitSuccess, ...formProps} = props;
-
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    const sheetTitle = "Upload Profile Image";
-    const sheetDescription = "Upload your profile images here. Select the image and hit the `Upload` button.";
-
-    const closeOnSubmit = (person: Person) => {
-        setPresetOpen ? setPresetOpen(false) : setIsOpen(false);
-        onSubmitSuccess?.(person);
-    }
+export function UploadPersonProfileImageFormPanel(
+    {children, className, isOpen, setIsOpen}: FormPanelProps
+): ReactElement {
+    const {control} = useFormContext();
+    const {formID, isPending} = useRequiredContext({context: BaseFormContext});
 
     return (
-        <Sheet open={presetOpen ?? isOpen} onOpenChange={setPresetOpen ?? setIsOpen}>
-            <SheetTrigger>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
                 {children}
             </SheetTrigger>
 
             <SheetContent className="flex flex-col">
                 <SheetHeader>
-                    <SheetTitle>{sheetTitle}</SheetTitle>
-                    <SheetDescription>{sheetDescription}</SheetDescription>
+                    <SheetTitle>Upload Profile Image</SheetTitle>
+                    <SheetDescription>
+                        Select a new image file (JPG, PNG, or WEBP) and click submit to update the profile.
+                    </SheetDescription>
                 </SheetHeader>
 
-                <ScrollArea className="flex-grow px-1">
-                    <UploadPersonProfileImageFormContainer
-                        personID={personID}
-                        className={className}
-                        {...formProps}
-                        onSubmitSuccess={closeOnSubmit}
-                    />
+                <ScrollArea className="flex-grow px-1 mt-6">
+                    <div className={cn("space-y-4", className)}>
+                        <HookFormFileInput
+                            name="profileImage"
+                            label="Profile Image"
+                            control={control}
+                        />
+
+                        <Button
+                            form={formID}
+                            className="w-full"
+                            variant="default"
+                            type="submit"
+                        >
+                            {isPending ? <AnimatedLoader/> : "Submit"}
+                        </Button>
+                    </div>
                 </ScrollArea>
             </SheetContent>
         </Sheet>
     );
-};
-
-export default UploadPersonProfileImageFormPanel;
+}
