@@ -3,7 +3,7 @@
  * @filename useFetchCustomerReviewViewData.ts
  */
 
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {MovieReviewUniqueCode} from "@/domains/review/features/codes";
@@ -26,7 +26,7 @@ type FetchParams = {
     /** The validated unique code of the specific review to be retrieved. */
     reviewCode: MovieReviewUniqueCode;
     /** Standard TanStack Query options for caching and staleness logic. */
-    options?: UseQueryOptions<CustomerReviewViewData>;
+    options?: FetchQueryOptions<CustomerReviewViewData>;
 }
 
 /**

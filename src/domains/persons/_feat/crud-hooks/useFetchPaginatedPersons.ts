@@ -9,7 +9,7 @@ import { ZodType, ZodTypeDef } from "zod";
 import { query } from "@/domains/persons/_feat/crud";
 import { PersonCRUDQueryKeys } from "@/domains/persons/_feat/crud-hooks/PersonCRUDQueryKeys.ts";
 import { PersonQueryOptions } from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import { FetchQueryOptions } from "@/common/type/query/FetchQueryOptions.ts";
 import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
 import { PaginationValues } from "@/common/features/fetch-pagination-search-params";
 import { buildQueryFn } from "@/common/features/validate-fetch-data";
@@ -24,7 +24,7 @@ type FetchParams<TData = unknown> = {
     pagination: PaginationValues;
     queries?: PersonQueryOptions;
     config?: Omit<RequestOptions, "limit">;
-    options?: UseQueryOptions<TData>;
+    options?: FetchQueryOptions<TData>;
 };
 
 /**

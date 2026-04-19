@@ -16,7 +16,7 @@ import SeatMapRepository from "@/domains/seatmap/repositories/SeatMapRepository.
 import {useQuery} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {FetchByIDParams} from "@/common/type/query/FetchByIDParams.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 
 /**
@@ -45,7 +45,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
  */
 type FetchParams<TData> = FetchByIDParams & {
     /** React Query configuration options for the hook. */
-    options: UseQueryOptions<TData>;
+    options: FetchQueryOptions<TData>;
 };
 
 /**

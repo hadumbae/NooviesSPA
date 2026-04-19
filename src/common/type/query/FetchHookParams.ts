@@ -19,7 +19,7 @@
  */
 
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 
 /**
  * ## FetchByQueryHookParams
@@ -62,5 +62,5 @@ import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
  */
 export type FetchByQueryHookParams<TOptions, TData = unknown> = RequestOptions & {
     queries?: TOptions;
-    options?: UseQueryOptions<TData>;
+    options?: FetchQueryOptions<TData>;
 };

@@ -7,7 +7,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 
 /**
  * Parameters accepted by {@link useFetchTheatre}.
@@ -29,7 +29,7 @@ type FetchParams = {
     /**
      * Optional React Query configuration.
      */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

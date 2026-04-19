@@ -3,7 +3,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import MovieRepository from "@/domains/movies/repositories/MovieRepository.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
@@ -15,7 +15,7 @@ type FetchParams = {
     /** Optional request configuration */
     config?: RequestOptions;
     /** Optional React Query overrides */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

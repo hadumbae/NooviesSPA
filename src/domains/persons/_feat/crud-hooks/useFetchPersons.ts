@@ -10,7 +10,7 @@ import {ZodType, ZodTypeDef} from "zod";
 import {query} from "@/domains/persons/_feat/crud";
 import {PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks/PersonCRUDQueryKeys.ts";
 import {PersonQueryOptions} from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
@@ -23,7 +23,7 @@ type FetchConfig<TData = unknown> = {
     schema: ZodType<TData, ZodTypeDef, unknown>;
     queries?: PersonQueryOptions;
     config?: RequestOptions;
-    options?: UseQueryOptions<TData>;
+    options?: FetchQueryOptions<TData>;
 };
 
 /**

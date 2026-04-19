@@ -10,7 +10,7 @@ import type {UseQueryOptions as QueryOptions} from "@tanstack/react-query";
 /**
  * Filtered subset of React Query configuration options.
  */
-export type UseQueryOptions<TData, TError = HttpResponseError> = Pick<QueryOptions<TData, TError>,
+export type FetchQueryOptions<TData, TError = HttpResponseError> = Pick<QueryOptions<TData, TError>,
     | "enabled"
     | "staleTime"
     | "initialData"

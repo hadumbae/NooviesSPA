@@ -4,7 +4,7 @@
  */
 
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {getShowingsForMovieView} from "@/domains/movies/views/client/repositories/MovieClientViewRepository.ts";
@@ -24,8 +24,8 @@ type FetchParams = {
     /** {@link GetShowingsForMovieViewQueryStrings} for filtering and pagination. */
     queries: GetShowingsForMovieViewQueryStrings;
 
-    /** {@link UseQueryOptions} overrides. */
-    options?: UseQueryOptions<unknown>;
+    /** {@link FetchQueryOptions} overrides. */
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

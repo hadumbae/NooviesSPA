@@ -13,7 +13,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import ShowingRepository from "@/domains/showings/repositories/ShowingRepository.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 
 /**
  * Parameters for fetching a Showing by slug.
@@ -26,7 +26,7 @@ type FetchParams = {
     config?: RequestOptions;
 
     /** Optional React Query options */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

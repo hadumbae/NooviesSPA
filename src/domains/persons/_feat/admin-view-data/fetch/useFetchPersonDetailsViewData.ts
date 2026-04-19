@@ -3,7 +3,7 @@
  */
 
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {
     getFetchPersonDetailsViewData,
     PersonDetailsViewData,
@@ -21,7 +21,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 type FetchConfig = {
     slug: SlugString;
     limit?: number;
-    options?: UseQueryOptions<PersonDetailsViewData>;
+    options?: FetchQueryOptions<PersonDetailsViewData>;
 }
 
 /**

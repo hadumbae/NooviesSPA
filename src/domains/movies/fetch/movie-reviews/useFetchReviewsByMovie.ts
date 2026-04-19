@@ -6,7 +6,7 @@
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
@@ -35,7 +35,7 @@ type FetchParams = PaginationValues & {
     /**
      * Optional React Query configuration overrides.
      */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

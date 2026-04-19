@@ -3,7 +3,7 @@
  * Query hook for fetching current user's favourite movies.
  */
 
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {useQuery} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import * as UserFavouriteRepository from "@/domains/users/repositories/favourites/UserFavouriteRepository.ts";
@@ -12,7 +12,7 @@ import {PaginationValues} from "@/common/features/fetch-pagination-search-params
 
 /** Pagination params with optional query options. */
 type FetchParams = Partial<PaginationValues> & {
-    options?: UseQueryOptions<unknown>
+    options?: FetchQueryOptions<unknown>
 }
 
 /**

@@ -5,7 +5,7 @@
 
 import {ReservationUniqueCode} from "@/domains/reservation/schema/model";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {getFetchByCode} from "@/domains/reservation/views/admin/reservation-by-code/repositories/FetchByCodeRepository.ts";
@@ -18,7 +18,7 @@ type FetchCodeParams = {
     /** The validated `RES-XXXXX-XXXXX` code string. */
     code: ReservationUniqueCode;
     /** Standard TanStack Query configuration overrides. */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 }
 
 /**

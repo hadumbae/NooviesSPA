@@ -10,7 +10,7 @@ import MovieRepository from "@/domains/movies/repositories/MovieRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {MovieQueryOptions} from "@/domains/movies/schema/queries/MovieQueryOption.types.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
@@ -35,7 +35,7 @@ type FetchParams<TData = unknown> = {
     /**
      * React Query configuration overrides.
      */
-    options?: UseQueryOptions<TData>;
+    options?: FetchQueryOptions<TData>;
 };
 
 /**

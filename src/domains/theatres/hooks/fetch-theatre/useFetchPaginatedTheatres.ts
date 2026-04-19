@@ -13,7 +13,7 @@ import TheatreRepository from "@/domains/theatres/repositories/TheatreRepository
 import {TheatreQueryOptions} from "@/domains/theatres/schema/queries/TheatreQueryOption.types.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
@@ -36,7 +36,7 @@ type FetchQueries<TData = unknown> = PaginationValues & {
     /**
      * React Query configuration overrides.
      */
-    options?: UseQueryOptions<TData>;
+    options?: FetchQueryOptions<TData>;
 };
 
 /**

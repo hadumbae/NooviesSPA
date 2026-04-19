@@ -5,7 +5,7 @@
 
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {useQuery} from "@tanstack/react-query";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {getFetchCustomerProfileViewData} from "@/domains/customers/features/profile-overview/repository.ts";
@@ -19,7 +19,7 @@ type FetchParams = {
     /** The unique identifier (code) of the customer to retrieve. */
     customerCode: UserUniqueCode;
     /** Optional TanStack Query configurations (e.g., staleTime, enabled, refetchOnWindowFocus). */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 }
 
 /**

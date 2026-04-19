@@ -9,7 +9,7 @@
 import SeatRepository from "@/domains/seats/repositories/SeatRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
@@ -25,7 +25,7 @@ type FetchParams = {
     config?: Omit<RequestOptions, "limit">;
 
     /** React Query option overrides. */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

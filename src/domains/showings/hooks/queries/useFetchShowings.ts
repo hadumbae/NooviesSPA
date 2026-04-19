@@ -12,7 +12,7 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {ShowingQueryOptions} from "@/domains/showings/schema/queries/ShowingQueryOption.types.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import ShowingRepository from "@/domains/showings/repositories/ShowingRepository.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
@@ -29,7 +29,7 @@ type FetchParams = {
     config?: RequestOptions;
 
     /** Optional React Query options */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

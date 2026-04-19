@@ -4,7 +4,7 @@
  */
 
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import { FetchQueryOptions } from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import { getCheckIsFavouriteMovie } from "@/domains/users/repositories/favourites/UserFavouriteRepository.ts";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
@@ -16,7 +16,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
  */
 type FetchParams = {
     _id: ObjectId;
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

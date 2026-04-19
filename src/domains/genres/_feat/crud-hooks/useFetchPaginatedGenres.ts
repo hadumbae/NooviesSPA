@@ -3,7 +3,7 @@
  */
 
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params/schemas/PaginationValuesSchema.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
@@ -21,7 +21,7 @@ type FetchQueries<TData = unknown> = PaginationValues & {
     schema: ZodType<TData, ZodTypeDef, unknown>;
     queries?: GenreQueryOptions;
     config?: RequestOptions;
-    options?: UseQueryOptions<TData>;
+    options?: FetchQueryOptions<TData>;
 };
 
 /**

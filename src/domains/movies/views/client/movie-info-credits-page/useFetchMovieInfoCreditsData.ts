@@ -7,7 +7,7 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {getCreditsForMovieView} from "@/domains/movies/views/client/repositories/MovieClientViewRepository.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 
@@ -19,7 +19,7 @@ type FetchParams = {
     slug: SlugString;
 
     /** Optional React Query configuration */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 }
 
 /**

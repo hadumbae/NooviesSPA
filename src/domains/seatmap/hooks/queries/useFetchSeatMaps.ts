@@ -13,7 +13,7 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {SeatMapQueryOptions} from "@/domains/seatmap/schema/query-options/SeatMapQueryOptions.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**
@@ -24,7 +24,7 @@ type FetchParams = {
     queries?: SeatMapQueryOptions;
 
     /** React Query configuration overrides */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 
     /** HTTP request configuration */
     config?: RequestOptions;

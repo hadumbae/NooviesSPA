@@ -1,5 +1,5 @@
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 
 /**
  * Generic parameter object for query-based fetch operations.
@@ -30,5 +30,5 @@ export type FetchByQueryParams<TOptions, TData = unknown> = {
     /**
      * Query behavior configuration (caching, retries, selectors, etc.).
      */
-    queryOptions?: UseQueryOptions<TData>;
+    queryOptions?: FetchQueryOptions<TData>;
 };

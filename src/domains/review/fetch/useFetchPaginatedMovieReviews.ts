@@ -3,7 +3,7 @@
  * useFetchMovieReviews.ts
  */
 
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {MovieReviewQueryOptions} from "@/domains/review/schemas/options/MovieReviewQueryOptionsSchema.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
@@ -29,7 +29,7 @@ type FetchParams = {
     /**
      * Optional React Query runtime configuration overrides.
      */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

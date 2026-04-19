@@ -8,7 +8,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { ZodSchema, ZodTypeDef } from "zod";
 import { findByID } from "@/domains/persons/_feat/crud";
 import { PersonCRUDQueryKeys } from "@/domains/persons/_feat/crud-hooks/PersonCRUDQueryKeys.ts";
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import { FetchQueryOptions } from "@/common/type/query/FetchQueryOptions.ts";
 import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { buildQueryFn } from "@/common/features/validate-fetch-data";
@@ -22,7 +22,7 @@ type FetchParams<TData = unknown> = {
     _id: ObjectId;
     schema: ZodSchema<TData, ZodTypeDef, unknown>;
     config?: Omit<RequestOptions, "limit">;
-    options?: UseQueryOptions<TData>;
+    options?: FetchQueryOptions<TData>;
 };
 
 /**

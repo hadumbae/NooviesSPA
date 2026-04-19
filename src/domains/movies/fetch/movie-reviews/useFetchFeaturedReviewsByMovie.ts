@@ -5,7 +5,7 @@
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {getFetchFeaturedReviewsByMovie} from "@/domains/movies/repositories/movie-reviews/ReviewsByMovieRepository.ts";
@@ -23,7 +23,7 @@ type FetchParams = {
     config?: RequestOptions;
 
     /** Optional React Query configuration. */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

@@ -5,7 +5,7 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
@@ -24,7 +24,7 @@ import {GenreClientViewDataQueryKeys} from "@/domains/genres/_feat/client-view-d
 type FetchParams = {
     slug: SlugString;
     moviePagination: PaginationValues;
-    options?: UseQueryOptions<BrowseGenreWithMoviesViewData>;
+    options?: FetchQueryOptions<BrowseGenreWithMoviesViewData>;
 };
 
 /**

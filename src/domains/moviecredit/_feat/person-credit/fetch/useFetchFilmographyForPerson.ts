@@ -8,7 +8,7 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {getFetchFilmographyForPerson} from "@/domains/moviecredit/_feat/person-credit/repository/repository.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
@@ -25,7 +25,7 @@ import {PersonCreditQueryKeys} from "@/domains/moviecredit/_feat/person-credit/f
 type FetchParams = {
     _id: ObjectId;
     config?: RequestOptions;
-    options?: UseQueryOptions<PersonFilmography>;
+    options?: FetchQueryOptions<PersonFilmography>;
 };
 
 /**

@@ -6,7 +6,7 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {fetchGeolocationByIP} from "@/common/repositories/ExternalRepository.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
@@ -15,7 +15,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
  */
 type FetchParams = {
     /** Optional React Query configuration overrides. */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

@@ -5,7 +5,7 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {getFetchGenreDetails} from "@/domains/genres/_feat/admin-view-data/repository.ts";
@@ -22,7 +22,7 @@ import {
 type FetchParams = {
     slug: SlugString;
     queries: PaginationValues;
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

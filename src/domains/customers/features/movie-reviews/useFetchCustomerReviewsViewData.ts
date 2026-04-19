@@ -3,7 +3,7 @@
  * @filename useFetchCustomerReviewsViewData.ts
  */
 
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
@@ -26,7 +26,7 @@ type FetchParams = {
     /** Current pagination state (page, perPage) to control the data slice. */
     pagination: PaginationValues;
     /** Standard React Query options for caching, stale time, and behavior overrides. */
-    options?: UseQueryOptions<CustomerReviewsViewData>;
+    options?: FetchQueryOptions<CustomerReviewsViewData>;
 }
 
 /**

@@ -14,7 +14,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 
 /**
  * Parameters for fetching a single movie credit.
@@ -27,7 +27,7 @@ type FetchParams = {
     config?: Omit<RequestOptions, "limit">;
 
     /** Optional React Query configuration overrides */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

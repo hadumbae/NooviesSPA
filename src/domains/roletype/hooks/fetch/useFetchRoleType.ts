@@ -10,7 +10,7 @@
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import RoleTypeRepository from "@/domains/roletype/repositories/RoleTypeRepository.ts";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import { FetchQueryOptions } from "@/common/type/query/FetchQueryOptions.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
@@ -27,7 +27,7 @@ type FetchParams = {
     config?: Omit<RequestOptions, "limit">;
 
     /** Optional React Query configuration */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

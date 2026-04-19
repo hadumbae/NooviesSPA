@@ -7,7 +7,7 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {
     getFetchMovieReviewsByCurrentUser
 } from "@/domains/review/repositories/my-movie-review/MyMovieReviewRepository.ts";
@@ -26,7 +26,7 @@ type FetchParams = PaginationValues & {
     /**
      * Optional React Query runtime configuration overrides.
      */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

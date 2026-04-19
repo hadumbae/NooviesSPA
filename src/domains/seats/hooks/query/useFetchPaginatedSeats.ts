@@ -10,7 +10,7 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import SeatRepository from "@/domains/seats/repositories/SeatRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
@@ -33,7 +33,7 @@ type FetchParams = PaginationValues & {
     /**
      * React Query configuration overrides.
      */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

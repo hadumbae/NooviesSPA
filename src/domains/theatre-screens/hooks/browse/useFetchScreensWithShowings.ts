@@ -1,5 +1,5 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import { FetchQueryOptions } from "@/common/type/query/FetchQueryOptions.ts";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { DateOnlyString } from "@/common/schema/dates/DateOnlyStringSchema.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
@@ -19,7 +19,7 @@ type FetchParams = {
     dateString: DateOnlyString;
 
     /** Optional React Query overrides */
-    options?: UseQueryOptions<unknown>;
+    options?: FetchQueryOptions<unknown>;
 };
 
 /**

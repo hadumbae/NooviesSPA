@@ -8,7 +8,7 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDQueryKeys.ts";
 import {ZodType, ZodTypeDef} from "zod";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";
@@ -21,7 +21,7 @@ type FetchParams<TData = unknown> = {
     slug: string;
     schema: ZodType<TData, ZodTypeDef, unknown>;
     config?: Omit<RequestOptions, "limit">;
-    options?: UseQueryOptions<TData>;
+    options?: FetchQueryOptions<TData>;
 };
 
 /**

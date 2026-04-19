@@ -1,5 +1,5 @@
 import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
-import { UseQueryOptions } from "@/common/type/query/UseQueryOptions.ts";
+import { FetchQueryOptions } from "@/common/type/query/FetchQueryOptions.ts";
 
 /**
  * Fetch-by-slug parameters.
@@ -25,5 +25,5 @@ export type FetchBySlugParams<TData = unknown> = {
     queryConfig?: Omit<RequestOptions, "limit">;
 
     /** Optional client-side query options (e.g. React Query config). */
-    queryOptions?: UseQueryOptions<TData>;
+    queryOptions?: FetchQueryOptions<TData>;
 };

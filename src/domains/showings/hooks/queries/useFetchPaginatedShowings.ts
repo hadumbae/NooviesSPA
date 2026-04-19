@@ -11,7 +11,7 @@
  */
 
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {UseQueryOptions} from "@/common/type/query/UseQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {ShowingQueryOptions} from "@/domains/showings/schema/queries/ShowingQueryOption.types.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
@@ -31,7 +31,7 @@ type FetchParams<TData = unknown> = PaginationValues & {
     config?: RequestOptions;
 
     /** Optional React Query options */
-    options?: UseQueryOptions<TData>;
+    options?: FetchQueryOptions<TData>;
 };
 
 /**
