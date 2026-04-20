@@ -6,7 +6,6 @@
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import PersonRepository from "@/domains/persons/_feat/crud/PersonRepository.ts";
 import {PersonSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
@@ -16,6 +15,7 @@ import {PersonFormData, PersonFormValues} from "@/domains/persons/_feat/submit-f
 import {MutationFormConfig, MutationResponseConfig} from "@/common/features/submit-data";
 import {PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks/index.ts";
 import {PersonCRUDMutationKeys} from "@/domains/persons/_feat/crud-hooks/PersonCRUDMutationKeys.ts";
+import {create, update} from "@/domains/persons/_feat/crud";
 
 /**
  * Configuration parameters for the Person submission mutation.
@@ -44,13 +44,9 @@ export function useSubmitPersonData(
     const invalidateQueries = useInvalidateQueryKeys();
 
     const submitPersonData = async ({_id, ...data}: PersonFormData) => {
-        const action = _id
-            ? () => PersonRepository.update({_id, data})
-            : () => PersonRepository.create({data});
-
+        const action = _id ? () => update({_id, data}) : () => create({data});
         const {result} = await action();
 
-        /** Validates the server response against the Person domain schema. */
         const {data: person, success, error} = validateData({
             data: result,
             schema: PersonSchema,
@@ -64,7 +60,7 @@ export function useSubmitPersonData(
     const onSuccess = (person: Person) => {
         invalidateQueries([PersonCRUDQueryKeys.all], {exact: false});
 
-        resetForm && form.reset();
+        resetForm?.onSuccess && form.reset({...person, dob: person?.dob ? person.dob.toISODate() : ""});
         successMessage && toast.success(successMessage);
         onSubmitSuccess?.(person);
     };
@@ -76,6 +72,7 @@ export function useSubmitPersonData(
             displayMessage: errorMessage ?? "An error occurred.",
         });
 
+        resetForm?.onError && form.reset();
         onSubmitError?.(error);
     };
 
