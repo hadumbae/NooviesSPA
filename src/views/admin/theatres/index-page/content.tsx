@@ -6,20 +6,19 @@
 
 import TheatreIndexCard from "@/domains/theatres/components/admin/pages/theatre-index/TheatreIndexCard.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import TheatreIndexHeader from "@/domains/theatres/components/admin/pages/theatre-index/TheatreIndexHeader.tsx";
+import {TheatreIndexHeader} from "@/views/admin/theatres/index-page/header.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import TheatreQueryOptionFormContainer
     from "@/domains/theatres/components/admin/form/theatre-query-option/TheatreQueryOptionFormContainer.tsx";
-import {Theatre, TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
+import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {TheatreQueryOptionSchema} from "@/domains/theatres/schema/queries/TheatreQueryOption.schema.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import useNavigateToTheatre from "@/domains/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {ReactElement} from "react";
 
-export type TheatreIndexPageContentProps = {
+type ContentProps = {
     theatres: TheatreDetails[];
     totalItems: number;
     page: number;
@@ -29,37 +28,20 @@ export type TheatreIndexPageContentProps = {
 
 /**
  * Renders the main theatre management listing.
- * Combines URL-driven filter states with paginated results and provides
- * navigation logic for theater creation or selection.
  */
 export function TheatreIndexPageContent(
-    {theatres, page, perPage, setPage, totalItems}: TheatreIndexPageContentProps
+    {theatres, page, perPage, setPage, totalItems}: ContentProps
 ): ReactElement {
     const {searchParams} = useParsedSearchParams({schema: TheatreQueryOptionSchema});
 
-    const navigateToTheatre = useNavigateToTheatre();
-
-    const onSubmitSuccess = (theatre: Theatre) => {
-        navigateToTheatre({
-            slug: theatre.slug,
-            component: TheatreIndexPageContent.name,
-            message: "Navigation to theatre profile after submission."
-        });
-    };
-
     return (
         <PageFlexWrapper>
-            <TheatreIndexHeader onSubmitSuccess={onSubmitSuccess}/>
+            <TheatreIndexHeader/>
 
-            <PresetFilterDialog
-                title="Theatre Filters"
-                description="Filter and sort theatres."
-            >
+            <PresetFilterDialog title="Theatre Filters" description="Filter and sort theatres.">
                 <ScrollArea className="max-h-[80vh]">
                     <ScrollBar/>
-                    <TheatreQueryOptionFormContainer
-                        presetValues={searchParams}
-                    />
+                    <TheatreQueryOptionFormContainer presetValues={searchParams}/>
                 </ScrollArea>
             </PresetFilterDialog>
 
