@@ -22,7 +22,7 @@ import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts"
  */
 export const TheatreBrowseRepository: TheatreBrowseMethods = {
     /** Base API endpoint for theatre browse routes */
-    baseURL: `${import.meta.env.VITE_API_URL}/api/v1/browse/theatres`,
+    baseURL: `${import.meta.env.VITE_API_URL}/api/v1/feat/search-theatres`,
 
     /**
      * Retrieves paginated theatres filtered by a location target.
@@ -37,7 +37,7 @@ export const TheatreBrowseRepository: TheatreBrowseMethods = {
     ): Promise<RequestReturns> {
         const url = buildQueryURL({
             baseURL: this.baseURL,
-            path: `theatres-by-location/paginated`,
+            path: `search/by-location/paginated`,
             queries: {
                 page,
                 perPage,
