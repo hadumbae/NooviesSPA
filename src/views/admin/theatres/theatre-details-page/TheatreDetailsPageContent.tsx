@@ -8,7 +8,7 @@ import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {TheatreDetailsUIContext} from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContext.ts";
-import TheatreDetailsPageTabs from "@/domains/theatres/pages/theatre-details-page/tabs/TheatreDetailsPageTabs.tsx";
+import TheatreDetailsPageTabs from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsPageTabs.tsx";
 import TheatreSubmitFormPanel
     from "@/domains/theatres/components/admin/form/theatre-submit-form/TheatreSubmitFormPanel.tsx";
 import TheatreDeleteWarningDialog

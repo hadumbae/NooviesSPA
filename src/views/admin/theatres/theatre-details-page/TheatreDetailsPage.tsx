@@ -15,7 +15,7 @@ import {FC} from 'react';
 import {PageLoader} from "@/views/common/_comp/page";
 import {TheatreDetailsSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
-import TheatreDetailsPageContent from "@/domains/theatres/pages/theatre-details-page/TheatreDetailsPageContent.tsx";
+import TheatreDetailsPageContent from "@/views/admin/theatres/theatre-details-page/TheatreDetailsPageContent.tsx";
 import TheatreDetailsUIContextProvider
     from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContextProvider.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";

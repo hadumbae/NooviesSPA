@@ -10,7 +10,7 @@ import {PageLoader} from "@/views/common/_comp/page";
 import {TheatreSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import {Theatre} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import TheatreShowingCreatePageContent
-    from "@/domains/theatres/pages/theatre-showings/TheatreShowingCreatePageContent.tsx";
+    from "@/views/admin/theatres/theatre-showings-create/TheatreShowingCreatePageContent.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchTheatreBySlug from "@/domains/theatres/hooks/fetch-theatre/useFetchTheatreBySlug.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";

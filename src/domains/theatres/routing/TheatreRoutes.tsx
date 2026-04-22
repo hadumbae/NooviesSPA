@@ -10,12 +10,12 @@
  * {@link ComponentErrorHandler} as the per-route error boundary.
  */
 
-import TheatreDetailsPage from "@/domains/theatres/pages/theatre-details-page/TheatreDetailsPage.tsx";
-import ScreenDetailsPage from "@/domains/theatre-screens/pages/admin/screen-details-page/ScreenDetailsPage.tsx";
-import TheatreShowingCreatePage from "@/domains/theatres/pages/theatre-showings/TheatreShowingCreatePage.tsx";
-import TheatreShowingListPage from "@/domains/theatres/pages/theatre-showings/TheatreShowingListPage.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
 import {TheatreIndexPage} from "@/views/admin/theatres/index-page";
+import {TheatreDetailsPage} from "@/views/admin/theatres/theatre-details-page";
+import {TheatreShowingCreatePage} from "@/views/admin/theatres/theatre-showings-create";
+import {TheatreShowingListPage} from "@/views/admin/theatres/theatre-showings-list";
+import {ScreenDetailsPage} from "@/views/admin/theatres/screen-details-page";
 
 export default [
     /**

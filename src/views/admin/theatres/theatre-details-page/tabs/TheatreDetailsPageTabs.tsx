@@ -9,10 +9,10 @@ import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/t
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {TheatreDetailsSearchParamSchema} from "@/domains/theatres/schema/params/TheatreDetailsSearchParamSchema.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import TheatreDetailsScreensTab from "@/domains/theatres/pages/theatre-details-page/tabs/TheatreDetailsScreensTab.tsx";
+import TheatreDetailsScreensTab from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsScreensTab.tsx";
 import ScreenFormContextProvider from "@/domains/theatre-screens/contexts/screen-form/ScreenFormContextProvider.tsx";
 import TheatreDetailsShowingsTab
-    from "@/domains/theatres/pages/theatre-details-page/tabs/TheatreDetailsShowingsTab.tsx";
+    from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsShowingsTab.tsx";
 import {TheatreScreenFormValues} from "@/domains/theatre-screens/forms";
 
 /**

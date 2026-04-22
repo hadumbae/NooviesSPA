@@ -19,19 +19,19 @@ import {Tabs, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import SeatDetailsPanelContextProvider
     from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContextProvider.tsx";
 import ScreenDetailsViewSeatsTab
-    from "@/domains/theatre-screens/pages/admin/screen-details-page/screen-details-tabs/ScreenDetailsViewSeatsTab.tsx";
+    from "@/views/admin/theatres/screen-details-page/screen-details-tabs/ScreenDetailsViewSeatsTab.tsx";
 import SeatFormContextProvider
     from "@/domains/seats/context/form/SeatFormContextProvider.tsx";
 import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {SeatDetailsArray} from "@/domains/seats/schema/seat/SeatRelated.types.ts";
 import ScreenDetailsCreateSeatTab
-    from "@/domains/theatre-screens/pages/admin/screen-details-page/screen-details-tabs/ScreenDetailsCreateSeatTab.tsx";
+    from "@/views/admin/theatres/screen-details-page/screen-details-tabs/ScreenDetailsCreateSeatTab.tsx";
 import ScreenSubmitFormPanel
     from "@/domains/theatre-screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
 import ScreenDeleteWarningDialog
     from "@/domains/theatre-screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 import ScreenDetailsShowingsTab
-    from "@/domains/theatre-screens/pages/admin/screen-details-page/screen-details-tabs/ScreenDetailsShowingsTab.tsx";
+    from "@/views/admin/theatres/screen-details-page/screen-details-tabs/ScreenDetailsShowingsTab.tsx";
 import useScreenDetailsPageValues
     from "@/domains/theatre-screens/hooks/page/screen-details/useScreenDetailsPageValues.ts";
 import {ScreenDetailsActiveTab}

@@ -18,7 +18,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ScreenQueryOptions} from "@/domains/theatre-screens/schema/queries/ScreenQueryOptions.types.ts";
 import useFetchPaginatedScreens from "@/domains/theatre-screens/hooks/screens/fetch-screens/useFetchPaginatedScreens.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import TheatreDetailsScreensTabContent from "@/domains/theatres/pages/theatre-details-page/tabs/TheatreDetailsScreensTabContent.tsx";
+import TheatreDetailsScreensTabContent from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsScreensTabContent.tsx";
 import {
     PaginatedTheatreScreenDetails,
     PaginatedTheatreScreenDetailsSchema
