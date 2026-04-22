@@ -9,12 +9,12 @@
  * - Attach runtime schemas for multi-query validation
  */
 
-import useFetchTheatreBySlug from "@/domains/theatres/hooks/fetch-theatre/useFetchTheatreBySlug.ts";
 import useFetchPaginatedShowings from "@/domains/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {TheatreSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 
 import {PaginatedShowingDetailsSchema} from "@/domains/showings/schema/showing/PaginatedShowingSchemas.ts";
+import {useFetchTheatreBySlug} from "@/domains/theatres/_feat/crud-hooks";
 
 /**
  * Parameters for {@link useTheatreShowingListPageQueries}.
@@ -56,9 +56,7 @@ export default function useTheatreShowingListPageQueries(
         showing: {page, perPage},
     } = params;
 
-    const theatreQuery = useFetchTheatreBySlug({
-        slug
-    });
+    const theatreQuery = useFetchTheatreBySlug({schema: TheatreSchema, slug});
 
     const showingQuery = useFetchPaginatedShowings({
         page,

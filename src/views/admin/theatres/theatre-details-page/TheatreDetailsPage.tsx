@@ -1,14 +1,5 @@
 /**
- * @file TheatreDetailsPage.tsx
- *
- * Admin page for displaying full details of a single theatre.
- *
- * Responsibilities:
- * - Validate and extract the theatre slug from route params
- * - Fetch theatre details with populated relations and virtual fields
- * - Runtime-validate the API response
- * - Provide UI-level context for the details view
- * - Delegate rendering to the page content component
+ * @fileoverview Administrative page for displaying and managing the details of a specific theatre.
  */
 
 import {FC} from 'react';
@@ -20,62 +11,39 @@ import TheatreDetailsUIContextProvider
     from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContextProvider.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import useFetchTheatreBySlug from "@/domains/theatres/hooks/fetch-theatre/useFetchTheatreBySlug.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
 import {TheatreHttpStatusOverrideText} from "@/domains/theatres/constants/TheatreHttpStatusOverrideText.ts";
+import {useFetchTheatreBySlug} from "@/domains/theatres/_feat/crud-hooks";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /**
- * **TheatreDetailsPage**
- *
- * Admin entry point for the Theatre Details view.
- *
- * Flow:
- * 1. Parse and validate `slug` from route params
- * 2. Redirect to index on route parse failure
- * 3. Fetch theatre details by slug
- * 4. Validate API response at runtime
- * 5. Provide UI context
- * 6. Delegate rendering to {@link TheatreDetailsPageContent}
- *
- * Validation:
- * - Route params validated via {@link SlugRouteParamSchema}
- * - API response enforced via {@link TheatreDetailsSchema}
- *
- * @component
- *
- * @example
- * ```tsx
- * <TheatreDetailsPage />
- * ```
+ * Entry point for the Theatre Details view that handles route parameter validation and data fetching.
+ * Requires a slug parameter from the route and provides TheatreDetailsUIContextProvider to its children.
  */
 const TheatreDetailsPage: FC = () => {
-    const {slug} = useFetchByIdentifierRouteParams({
+    const routeParams = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/admin/theatres",
         sourceComponent: TheatreDetailsPage.name,
-    }) ?? {};
-
-    if (!slug) {
-        return <PageLoader/>;
-    }
+    });
 
     const query = useFetchTheatreBySlug({
-        slug,
+        slug: routeParams?.slug!,
+        schema: TheatreDetailsSchema,
         config: {populate: true, virtuals: true},
+        options: {enabled: !!routeParams?.slug},
     });
+
+    if (!routeParams?.slug) {
+        return <PageLoader/>;
+    }
 
     return (
         <QueryErrorBoundary statusTextOverride={TheatreHttpStatusOverrideText}>
             <TheatreDetailsUIContextProvider>
-                <ValidatedDataLoader
-                    query={query}
-                    schema={TheatreDetailsSchema}
-                >
-                    {(theatre: TheatreDetails) => (
-                        <TheatreDetailsPageContent theatre={theatre}/>
-                    )}
-                </ValidatedDataLoader>
+                <QueryDataLoader query={query}>
+                    {(theatre: TheatreDetails) => <TheatreDetailsPageContent theatre={theatre}/>}
+                </QueryDataLoader>
             </TheatreDetailsUIContextProvider>
         </QueryErrorBoundary>
     );

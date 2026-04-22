@@ -12,10 +12,10 @@ import {Theatre} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts"
 import TheatreShowingCreatePageContent
     from "@/views/admin/theatres/theatre-showings-create/TheatreShowingCreatePageContent.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import useFetchTheatreBySlug from "@/domains/theatres/hooks/fetch-theatre/useFetchTheatreBySlug.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
 import {TheatreHttpStatusOverrideText} from "@/domains/theatres/constants/TheatreHttpStatusOverrideText.ts";
+import {useFetchTheatreBySlug} from "@/domains/theatres/_feat/crud-hooks";
 
 /**
  * Page component for creating a new showing for a theatre.
@@ -38,7 +38,7 @@ const TheatreShowingCreatePage = () => {
         return <PageLoader/>;
     }
 
-    const query = useFetchTheatreBySlug({slug});
+    const query = useFetchTheatreBySlug({slug, schema: TheatreSchema});
 
     return (
         <QueryErrorBoundary statusTextOverride={TheatreHttpStatusOverrideText}>

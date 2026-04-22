@@ -1,74 +1,44 @@
 /**
- * @file useScreenDetailsPageQueries.ts
- *
- * Composes all data-fetching queries required by the
- * Screen Details admin page.
- *
- * Each query is paired with a validation schema and
- * returned as a {@link QueryDefinition} for use with
- * multi-query loaders and query boundaries.
+ * @fileoverview Composes the data-fetching queries required for the Screen Details administrative page.
  */
 
-import useFetchTheatreBySlug
-    from "@/domains/theatres/hooks/fetch-theatre/useFetchTheatreBySlug.ts";
-import useFetchScreenBySlug
-    from "@/domains/theatre-screens/hooks/screens/fetch-screens/useFetchScreenBySlug.ts";
-import useFetchSeats
-    from "@/domains/seats/hooks/query/useFetchSeats.ts";
-import {QueryDefinition}
-    from "@/common/type/query/loader/MultiQuery.types.ts";
-import {TheatreDetailsSchema}
-    from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
-import {SeatDetailsArraySchema}
-    from "@/domains/seats/schema/seat/SeatRelated.schema.ts";
-import {TheatreScreenDetailsSchema} from "@/domains/theatre-screens/schema/model/TheatreScreenDetailsSchema.ts";
+import useFetchScreenBySlug from "@/domains/theatre-screens/hooks/screens/fetch-screens/useFetchScreenBySlug.ts";
+import useFetchSeats from "@/domains/seats/hooks/query/useFetchSeats.ts";
+import { QueryDefinition } from "@/common/type/query/loader/MultiQuery.types.ts";
+import { TheatreDetailsSchema } from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
+import { SeatDetailsArraySchema } from "@/domains/seats/schema/seat/SeatRelated.schema.ts";
+import { TheatreScreenDetailsSchema } from "@/domains/theatre-screens/schema/model/TheatreScreenDetailsSchema.ts";
+import { useFetchTheatreBySlug } from "@/domains/theatres/_feat/crud-hooks";
 
-/**
- * Slug parameters required to resolve screen-scoped data.
- */
+/** Props for the useScreenDetailsPageQueries hook. */
 type SlugParams = {
-    /** Theatre identifier (slug) */
     theatreSlug: string;
-
-    /** Screen identifier (slug) */
     screenSlug: string;
 };
 
 /**
- * Screen Details page query composer.
- *
- * Fetches:
- * - Theatre details
- * - Screen details
- * - Associated seats
- *
- * All queries enable population and virtuals
- * and are validated against their respective schemas.
- *
- * @param theatreSlug - Theatre slug
- * @param screenSlug - Screen slug
- * @returns Array of query definitions for page loading
+ * Aggregates theatre, screen, and seat queries into a unified definition for page-level data loading.
  */
-export default function useScreenDetailsPageQueries({theatreSlug, screenSlug}: SlugParams): QueryDefinition[] {
-
+export default function useScreenDetailsPageQueries({ theatreSlug, screenSlug }: SlugParams): QueryDefinition[] {
     const theatreQuery = useFetchTheatreBySlug({
+        schema: TheatreDetailsSchema,
         slug: theatreSlug,
-        config: {populate: true, virtuals: true},
+        config: { populate: true, virtuals: true },
     });
 
     const screenQuery = useFetchScreenBySlug({
         slug: screenSlug,
-        config: {populate: true, virtuals: true},
+        config: { populate: true, virtuals: true },
     });
 
     const seatQuery = useFetchSeats({
-        queries: {screenSlug},
-        config: {populate: true, virtuals: true},
+        queries: { screenSlug },
+        config: { populate: true, virtuals: true },
     });
 
     return [
-        {key: "theatre", query: theatreQuery, schema: TheatreDetailsSchema},
-        {key: "screen", query: screenQuery, schema: TheatreScreenDetailsSchema},
-        {key: "seats", query: seatQuery, schema: SeatDetailsArraySchema},
+        { key: "theatre", query: theatreQuery, schema: TheatreDetailsSchema },
+        { key: "screen", query: screenQuery, schema: TheatreScreenDetailsSchema },
+        { key: "seats", query: seatQuery, schema: SeatDetailsArraySchema },
     ];
 }

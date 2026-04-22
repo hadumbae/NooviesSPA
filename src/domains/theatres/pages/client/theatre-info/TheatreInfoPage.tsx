@@ -14,8 +14,6 @@ import useFetchByIdentifierRouteParams
     from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
-import useFetchTheatreBySlug
-    from "@/domains/theatres/hooks/fetch-theatre/useFetchTheatreBySlug.ts";
 import {useFetchScreensWithShowings}
     from "@/domains/theatre-screens/hooks/browse/useFetchScreensWithShowings.ts";
 import {TheatreDetailsSchema}
@@ -32,6 +30,7 @@ import {QueryDefinition}
 import {TheatreDetails}
     from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {ScreenWithShowingsArraySchema} from "@/domains/theatre-screens/schema/model/ScreenWithShowingsArraySchema.ts";
+import {useFetchTheatreBySlug} from "@/domains/theatres/_feat/crud-hooks";
 
 /**
  * Combined query payload for {@link TheatreInfoPage}.
@@ -64,6 +63,7 @@ const TheatreInfoPage = () => {
 
     // --- QUERIES ---
     const theatreQuery = useFetchTheatreBySlug({
+        schema: TheatreDetailsSchema,
         slug: theatreSlug,
         config: {populate: true, virtuals: true},
     });
