@@ -17,6 +17,7 @@ import {TheatreQueryOptionSchema} from "@/domains/theatres/schema/queries/Theatr
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import useNavigateToTheatre from "@/domains/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {ReactElement} from "react";
 
 export type TheatreIndexPageContentProps = {
     theatres: TheatreDetails[];
@@ -31,9 +32,9 @@ export type TheatreIndexPageContentProps = {
  * Combines URL-driven filter states with paginated results and provides
  * navigation logic for theater creation or selection.
  */
-const TheatreIndexPageContent = (
+export function TheatreIndexPageContent(
     {theatres, page, perPage, setPage, totalItems}: TheatreIndexPageContentProps
-) => {
+): ReactElement {
     const {searchParams} = useParsedSearchParams({schema: TheatreQueryOptionSchema});
 
     const navigateToTheatre = useNavigateToTheatre();
@@ -88,6 +89,4 @@ const TheatreIndexPageContent = (
             )}
         </PageFlexWrapper>
     );
-};
-
-export default TheatreIndexPageContent;
+}

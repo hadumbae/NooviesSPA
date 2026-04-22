@@ -10,18 +10,18 @@
  * - Delegate all UI rendering to the index page content component
  */
 
-import {FC} from "react";
+import {ReactElement} from "react";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import {PaginatedTheatreDetailsSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import {PaginatedTheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {TheatreQueryOptionSchema} from "@/domains/theatres/schema/queries/TheatreQueryOption.schema.ts";
-import TheatreIndexPageContent from "@/domains/theatres/pages/theatre-index-page/TheatreIndexPageContent.tsx";
-import useFetchPaginatedTheatres from "@/domains/theatres/hooks/fetch-theatre/useFetchPaginatedTheatres.ts";
+import {TheatreIndexPageContent} from "@/views/admin/theatres/index-page/content.tsx";
 import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
 import {TheatreHttpStatusOverrideText} from "@/domains/theatres/constants/TheatreHttpStatusOverrideText.ts";
+import {useFetchPaginatedTheatres} from "@/domains/theatres/_feat/crud-hooks";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /**
  * Number of theatres displayed per page.
@@ -54,13 +54,14 @@ const THEATRES_PER_PAGE = 20;
  * <TheatreIndexPage />
  * ```
  */
-const TheatreIndexPage: FC = () => {
+export function TheatreIndexPage(): ReactElement {
     useTitle("Theatre Index");
 
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
     const {searchParams} = useParsedSearchParams({schema: TheatreQueryOptionSchema});
 
     const query = useFetchPaginatedTheatres({
+        schema: PaginatedTheatreDetailsSchema,
         page,
         perPage: THEATRES_PER_PAGE,
         queries: searchParams,
@@ -68,23 +69,18 @@ const TheatreIndexPage: FC = () => {
     });
 
     return (
-       <QueryErrorBoundary statusTextOverride={TheatreHttpStatusOverrideText}>
-           <ValidatedDataLoader
-               query={query}
-               schema={PaginatedTheatreDetailsSchema}
-           >
-               {({items, totalItems}: PaginatedTheatreDetails) => (
-                   <TheatreIndexPageContent
-                       theatres={items}
-                       page={page}
-                       perPage={THEATRES_PER_PAGE}
-                       setPage={setPage}
-                       totalItems={totalItems}
-                   />
-               )}
-           </ValidatedDataLoader>
-       </QueryErrorBoundary>
+        <QueryErrorBoundary statusTextOverride={TheatreHttpStatusOverrideText}>
+            <QueryDataLoader query={query}>
+                {({items, totalItems}: PaginatedTheatreDetails) => (
+                    <TheatreIndexPageContent
+                        theatres={items}
+                        page={page}
+                        perPage={THEATRES_PER_PAGE}
+                        setPage={setPage}
+                        totalItems={totalItems}
+                    />
+                )}
+            </QueryDataLoader>
+        </QueryErrorBoundary>
     );
-};
-
-export default TheatreIndexPage;
+}

@@ -14,7 +14,7 @@
  * - Delegate rendering to {@link BrowseTheatreListPageContent}
  */
 
-import {useFetchTheatresByLocation} from "@/domains/theatres/hooks/_feat/browse/useFetchTheatresByLocation.ts";
+import {useFetchTheatresByLocation} from "@/domains/theatres/_feat/browse/useFetchTheatresByLocation.ts";
 import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {BrowseTheatreParamSchema} from "@/domains/theatres/schema/params/client/browse-theatre-list/BrowseTheatreParamSchema.ts";
