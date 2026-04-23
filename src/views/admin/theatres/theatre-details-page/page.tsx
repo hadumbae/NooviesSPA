@@ -2,11 +2,11 @@
  * @fileoverview Administrative page for displaying and managing the details of a specific theatre.
  */
 
-import {FC} from 'react';
+import {ReactElement} from 'react';
 import {PageLoader} from "@/views/common/_comp/page";
 import {TheatreDetailsSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
-import TheatreDetailsPageContent from "@/views/admin/theatres/theatre-details-page/TheatreDetailsPageContent.tsx";
+import {TheatreDetailsPageContent} from "@/views/admin/theatres/theatre-details-page/content.tsx";
 import TheatreDetailsUIContextProvider
     from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContextProvider.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
@@ -20,7 +20,7 @@ import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader
  * Entry point for the Theatre Details view that handles route parameter validation and data fetching.
  * Requires a slug parameter from the route and provides TheatreDetailsUIContextProvider to its children.
  */
-const TheatreDetailsPage: FC = () => {
+export function TheatreDetailsPage(): ReactElement {
     const routeParams = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/admin/theatres",
@@ -47,6 +47,4 @@ const TheatreDetailsPage: FC = () => {
             </TheatreDetailsUIContextProvider>
         </QueryErrorBoundary>
     );
-};
-
-export default TheatreDetailsPage;
+}

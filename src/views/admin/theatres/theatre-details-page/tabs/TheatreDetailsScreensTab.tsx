@@ -1,123 +1,62 @@
 /**
- * @file TheatreDetailsScreensTab.tsx
- *
- * Paginated screen overview tab for a specific theatre.
- *
- * Responsibilities:
- * - Fetches paginated screen data scoped to a theatre
- * - Handles loading and error states via `QueryBoundary`
- * - Validates responses using `ValidatedQueryBoundary`
- * - Renders screen results with `TheatreDetailsScreensTabContent`
- * - Exposes pagination controls and optional query filters
- *
- * Intended for use within `TheatreDetailsPageTabs`.
+ * @fileoverview Data-fetching component for the "Screens" tab on the Theatre Details page.
  */
 
-import {FC} from "react";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {ScreenQueryOptions} from "@/domains/theatre-screens/schema/queries/ScreenQueryOptions.types.ts";
-import useFetchPaginatedScreens from "@/domains/theatre-screens/hooks/screens/fetch-screens/useFetchPaginatedScreens.ts";
+import { ReactElement } from "react";
+import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { ScreenQueryOptions } from "@/domains/theatre-screens/schema/queries/ScreenQueryOptions.types.ts";
+import useFetchPaginatedScreens
+    from "@/domains/theatre-screens/hooks/screens/fetch-screens/useFetchPaginatedScreens.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import TheatreDetailsScreensTabContent from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsScreensTabContent.tsx";
+import {
+    TheatreDetailsScreensTabContent
+} from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsScreensTabContent.tsx";
 import {
     PaginatedTheatreScreenDetails,
     PaginatedTheatreScreenDetailsSchema
 } from "@/domains/theatre-screens/schema/model/PaginatedTheatreScreenDetailsSchema.ts";
 
-/**
- * Props for {@link TheatreDetailsScreensTab}.
- */
+/** Props for the TheatreDetailsScreensTab component. */
 export type OverviewTabProps = {
-    /**
-     * ID of the theatre whose screens are displayed.
-     */
     theatreID: ObjectId;
-
-    /**
-     * Current pagination page.
-     */
     page: number;
-
-    /**
-     * Number of screens to fetch per page.
-     */
     perPage: number;
-
-    /**
-     * Updates the pagination page.
-     */
     setPage: (val: number) => void;
-
-    /**
-     * Optional query filters and sorting rules.
-     */
     queries?: ScreenQueryOptions;
-
-    /**
-     * Optional CSS class overrides.
-     */
     classNames?: {
-        /**
-         * Class for the outer container.
-         */
         container?: string;
-
-        /**
-         * Class for the screen list.
-         */
         list?: string;
     };
 };
 
 /**
- * # TheatreDetailsScreensTab Component
- *
- * Displays a paginated list of screens for a given theatre.
- *
- * Integrates:
- * - **useFetchPaginatedScreens** for data fetching
- * - **QueryBoundary** for loading and error handling
- * - **ValidatedQueryBoundary** for runtime data validation
- *
- * @param props
- * Component props. See {@link OverviewTabProps}.
- *
- * @example
- * ```tsx
- * const [page, setPage] = useState(1);
- *
- * <TheatreDetailsScreensTab
- *   theatreID={theatreId}
- *   page={page}
- *   perPage={10}
- *   setPage={setPage}
- *   queries={{ active: true }}
- * />
- * ```
+ * Manages the paginated fetch and validation of theatre screens.
+ * Wraps the content in a ValidatedDataLoader to ensure the API response matches the PaginatedTheatreScreenDetailsSchema.
  */
-const TheatreDetailsScreensTab: FC<OverviewTabProps> = (props) => {
-    const {theatreID, page, perPage, setPage, classNames, queries} = props;
-
+export function TheatreDetailsScreensTab(
+    { theatreID, page, perPage, setPage, classNames, queries }: OverviewTabProps
+): ReactElement {
     const screenQuery = useFetchPaginatedScreens({
         page,
         perPage,
-        config: {populate: true, virtuals: true},
-        queries: {...queries, theatre: theatreID},
+        config: { populate: true, virtuals: true },
+        queries: { ...queries, theatre: theatreID },
     });
 
     return (
-        <ValidatedDataLoader query={screenQuery} schema={PaginatedTheatreScreenDetailsSchema}>
-            {({items, totalItems}: PaginatedTheatreScreenDetails) => (
+        <ValidatedDataLoader
+            query={screenQuery}
+            schema={PaginatedTheatreScreenDetailsSchema}
+        >
+            {({ items, totalItems }: PaginatedTheatreScreenDetails) => (
                 <TheatreDetailsScreensTabContent
                     theatreID={theatreID}
                     screens={items}
                     totalItems={totalItems}
-                    paginationOptions={{page, perPage, setPage}}
+                    paginationOptions={{ page, perPage, setPage }}
                     classNames={classNames}
                 />
             )}
         </ValidatedDataLoader>
     );
-};
-
-export default TheatreDetailsScreensTab;
+}

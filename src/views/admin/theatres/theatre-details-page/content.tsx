@@ -1,42 +1,35 @@
-import {FC} from 'react';
+/**
+ * @fileoverview Main content component for the Theatre Details administrative page.
+ */
+
+import {ReactElement} from 'react';
 import {Theatre, TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import TheatreDetailsBreadcrumbs
-    from "@/domains/theatres/components/admin/pages/theatre-details/TheatreDetailsBreadcrumbs.tsx";
-import TheatreDetailsHeader from "@/domains/theatres/components/admin/pages/theatre-details/TheatreDetailsHeader.tsx";
+import {TheatreDetailsHeader} from "@/views/admin/theatres/theatre-details-page/header.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {TheatreDetailsUIContext} from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContext.ts";
-import TheatreDetailsPageTabs from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsPageTabs.tsx";
+import {TheatreDetailsPageTabs} from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsPageTabs.tsx";
 import TheatreSubmitFormPanel
     from "@/domains/theatres/components/admin/form/theatre-submit-form/TheatreSubmitFormPanel.tsx";
 import TheatreDeleteWarningDialog
     from "@/domains/theatres/components/admin/theatre-actions/TheatreDeleteWarningDialog.tsx";
 import TheatreDetailsCard from "@/domains/theatres/components/admin/theatre-details/TheatreDetailsCard.tsx";
 import useNavigateToTheatre from "@/domains/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
+import {SROnly} from "@/views/common/_comp/screen-readers";
 
-/**
- * ⚡ **TheatreDetailsPageContent** ⚡
- *
- * Main content section for the Theatre Details page.
- *
- * ### Features
- * - Renders breadcrumbs, header, and theatre details card
- * - Screens + Showings tabs with pagination
- * - Edit + Delete panels controlled by context state
- *
- * @example
- * ```tsx
- * <TheatreDetailsPageContent theatre={theatre} />
- * ```
- */
+/** Props for the TheatreDetailsPageContent component. */
 type TheatreDetailsPageContentProps = {
-    /** Theatre entity used to render all sections */
     theatre: TheatreDetails;
 };
 
-const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}) => {
+/**
+ * Renders the layout for theatre management, including details cards, tabbed related data,
+ * and state-driven forms for editing or deletion.
+ */
+export function TheatreDetailsPageContent(
+    {theatre}: TheatreDetailsPageContentProps
+): ReactElement {
     const navigate = useLoggedNavigate();
     const updateSlugURL = useNavigateToTheatre();
 
@@ -45,9 +38,9 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
         message: "Must be used within a provider for `TheatreDetailsUIContext`."
     });
 
-    const replaceOnUpdate = (theatre: Theatre) => {
+    const replaceOnUpdate = (updatedTheatre: Theatre) => {
         updateSlugURL({
-            slug: theatre.slug,
+            slug: updatedTheatre.slug,
             options: {replace: true},
         });
     }
@@ -62,28 +55,22 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
 
     return (
         <PageFlexWrapper>
-            {/* Header */}
-            <section>
-                <SectionHeader srOnly={true}>Header</SectionHeader>
-                <TheatreDetailsBreadcrumbs theatreName={theatre.name}/>
-                <TheatreDetailsHeader theatreName={theatre.name}/>
-            </section>
+            <TheatreDetailsHeader theatreName={theatre.name}/>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
-                {/* Details Card */}
+                {/* Information Card */}
                 <section>
-                    <SectionHeader srOnly={true}>Theatre Details Card</SectionHeader>
+                    <SROnly text="Theatre Details Card"/>
                     <TheatreDetailsCard theatre={theatre}/>
                 </section>
 
-                {/* Tabs */}
+                {/* Related Data Tabs (Screens/Showings) */}
                 <section className="h-full">
-                    <SectionHeader srOnly={true}>Theatre Screens And Movie Showings</SectionHeader>
+                    <SROnly text="Theatre Screens And Movie Showings"/>
                     <TheatreDetailsPageTabs theatreID={theatre._id}/>
                 </section>
             </div>
 
-            {/* Contextual Form Panel */}
             <div className="hidden">
                 <TheatreSubmitFormPanel
                     isEditing={true}
@@ -92,10 +79,6 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
                     setPresetOpen={setIsEditing}
                     onSubmitSuccess={replaceOnUpdate}
                 />
-            </div>
-
-            {/* Contextual Warning Dialog */}
-            <div className="hidden">
                 <TheatreDeleteWarningDialog
                     theatreID={theatre._id}
                     onDeleteSuccess={navigateOnDelete}
@@ -105,9 +88,4 @@ const TheatreDetailsPageContent: FC<TheatreDetailsPageContentProps> = ({theatre}
             </div>
         </PageFlexWrapper>
     );
-};
-
-export default TheatreDetailsPageContent;
-
-// http://localhost:3000/admin/theatres/get/aaa-e9mgjm
-// http://localhost:3000/admin/theatres/get/ass-2wh3m5
+}
