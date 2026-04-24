@@ -28,6 +28,14 @@ import {
     ScreenWithShowingsArraySchema
 } from "@/domains/theatre-screens/schema/model/ScreenWithShowingsArraySchema.ts";
 import {ScreenType, ScreenTypeSchema} from "@/domains/theatre-screens/schema/model/ScreenTypeSchema.ts";
+import {
+    TheatreScreenWithVirtuals,
+    TheatreScreenWithVirtualsSchema
+} from "@/domains/theatre-screens/schema/model/TheatreScreenWithVirtualsSchema.ts";
+import {
+    TheatreScreenVirtuals,
+    TheatreScreenVirtualsSchema
+} from "@/domains/theatre-screens/schema/model/TheatreScreenVirtualsSchema.ts";
 
 
 export {
@@ -40,6 +48,8 @@ export {
     ScreenWithShowingsSchema,
     ScreenWithShowingsArraySchema,
     ScreenTypeSchema,
+    TheatreScreenWithVirtualsSchema,
+    TheatreScreenVirtualsSchema,
 }
 
 export type {
@@ -52,4 +62,6 @@ export type {
     ScreenWithShowings,
     ScreenWithShowingsArray,
     ScreenType,
+    TheatreScreenWithVirtuals,
+    TheatreScreenVirtuals,
 }
