@@ -18,8 +18,8 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 type FetchConfig = {
     slug: string;
     queries?: {
-        personPage?: number;
-        personPerPage?: number;
+        screenPage?: number;
+        screenPerPage?: number;
         showingLimit?: number;
     };
     options?: FetchQueryOptions<TheatreDetailsViewData>;

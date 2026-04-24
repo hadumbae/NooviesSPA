@@ -10,8 +10,8 @@ import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 export type GetFetchTheatreDetailsViewDataConfig = {
     slug: SlugString;
     queries?: {
-        personPage?: number;
-        personPerPage?: number;
+        screenPage?: number;
+        screenPerPage?: number;
         showingLimit?: number;
     }
 };
