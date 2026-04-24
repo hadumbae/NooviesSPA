@@ -15,3 +15,14 @@ export type GetFetchTheatreDetailsViewDataConfig = {
         showingLimit?: number;
     }
 };
+
+/**
+ * Configuration parameters for retrieving a paginated list of theatre showings.
+ */
+export type GetFetchTheatreShowingListViewDataConfig = {
+    slug: SlugString;
+    queries?: {
+        page?: number;
+        perPage?: number;
+    };
+};

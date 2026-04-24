@@ -33,7 +33,7 @@ export function useFetchTheatreDetailsViewData(
 ): UseQueryResult<TheatreDetailsViewData, HttpResponseError> {
     const fetchTheatreDetails = buildQueryFn<TheatreDetailsViewData>({
         schema: TheatreDetailsViewDataSchema,
-        action: () => getFetchTheatreDetailsViewData({slug, ...queries})
+        action: () => getFetchTheatreDetailsViewData({slug, queries})
     });
 
     return useQuery({
