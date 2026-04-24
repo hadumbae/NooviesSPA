@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import useTheatreScreenSubmitMutation from "@/domains/theatre-screens/forms/hooks/useTheatreScreenSubmitMutation.ts";
-import ScreenSubmitFormView from "@/domains/theatre-screens/components/submit-form/ScreenSubmitFormView.tsx";
+import ScreenSubmitFormView from "@/views/admin/theatre-screens/components/submit-form/ScreenSubmitFormView.tsx";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import { ScreenFormContext } from "@/domains/theatre-screens/contexts/screen-form/ScreenFormContext.ts";

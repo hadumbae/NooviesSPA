@@ -24,7 +24,7 @@ import MovieQuickOverviewFetchCard from "@/domains/movies/components/admin/movie
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import TheatreQuickOverviewFetchCard
     from "@/domains/theatres/components/admin/theatre-details/TheatreQuickOverviewFetchCard.tsx";
-import ScreenHookFormSelect from "@/domains/theatre-screens/components/submit-form/inputs/ScreenHookFormSelect.tsx";
+import ScreenHookFormSelect from "@/views/admin/theatre-screens/components/submit-form/inputs/ScreenHookFormSelect.tsx";
 import {UseFormReturn} from "react-hook-form";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";

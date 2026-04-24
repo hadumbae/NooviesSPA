@@ -19,7 +19,7 @@
 import {FC, useEffect} from 'react';
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import ScreenHookFormSelect from "@/domains/theatre-screens/components/submit-form/inputs/ScreenHookFormSelect.tsx";
+import ScreenHookFormSelect from "@/views/admin/theatre-screens/components/submit-form/inputs/ScreenHookFormSelect.tsx";
 import {UseFormReturn} from "react-hook-form";
 
 import {SeatFormValues} from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";

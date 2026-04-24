@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Table, TableBody, TableHead, TableHeader, TableRow} from "@/common/components/ui/table.tsx";
 import TheatreScreenListTableRow
-    from "@/domains/theatre-screens/components/theatre-screens/admin/lists/TheatreScreenListTableRow.tsx";
+    from "@/views/admin/theatre-screens/components/theatre-screens/admin/lists/TheatreScreenListTableRow.tsx";
 import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
 
 type ListTableProps = {

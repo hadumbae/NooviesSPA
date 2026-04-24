@@ -22,7 +22,7 @@ import {
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import ScreenSubmitFormContainer from "@/domains/theatre-screens/components/submit-form/ScreenSubmitFormContainer.tsx";
+import ScreenSubmitFormContainer from "@/views/admin/theatre-screens/components/submit-form/ScreenSubmitFormContainer.tsx";
 
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {TheatreScreen, TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";

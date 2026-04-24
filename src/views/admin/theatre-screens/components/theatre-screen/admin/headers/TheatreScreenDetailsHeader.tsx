@@ -7,7 +7,7 @@
 
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import ScreenDetailsOptions from "@/domains/theatre-screens/components/admin/features/screen-details/ScreenDetailsOptions.tsx";
+import ScreenDetailsOptions from "@/views/admin/theatre-screens/components/admin/features/screen-details/ScreenDetailsOptions.tsx";
 
 /**
  * Props for {@link TheatreScreenDetailsHeader}.

@@ -36,9 +36,9 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import { SeatFormContext } from "@/domains/seats/context/form/SeatFormContext.ts";
 import { SeatDetails } from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import SeatFormSubmitSeatCard
-    from "@/domains/theatre-screens/components/theatre-screens/admin/features/seat-submit/SeatFormSubmitSeatCard.tsx";
+    from "@/views/admin/theatre-screens/components/theatre-screens/admin/features/seat-submit/SeatFormSubmitSeatCard.tsx";
 import SeatFormSubmitStructureCard
-    from "@/domains/theatre-screens/components/theatre-screens/admin/features/seat-submit/SeatFormSubmitStructureCard.tsx";
+    from "@/views/admin/theatre-screens/components/theatre-screens/admin/features/seat-submit/SeatFormSubmitStructureCard.tsx";
 
 /**
  * ⚡ SeatFormSubmitList Component

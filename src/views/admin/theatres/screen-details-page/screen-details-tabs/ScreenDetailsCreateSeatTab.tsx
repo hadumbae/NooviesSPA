@@ -21,7 +21,7 @@
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import SeatSubmitFormContainer from "@/domains/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import SeatFormSubmitList from "@/domains/theatre-screens/components/theatre-screens/admin/features/seat-submit/SeatFormSubmitList.tsx";
+import SeatFormSubmitList from "@/views/admin/theatre-screens/components/theatre-screens/admin/features/seat-submit/SeatFormSubmitList.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatFormContext} from "@/domains/seats/context/form/SeatFormContext.ts";
 import {TabsContent} from "@/common/components/ui/tabs.tsx";

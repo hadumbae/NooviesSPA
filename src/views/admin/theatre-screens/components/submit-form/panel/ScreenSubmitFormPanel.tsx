@@ -1,6 +1,6 @@
 import {ReactNode, useState} from 'react';
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
-import ScreenSubmitFormContainer from "@/domains/theatre-screens/components/submit-form/ScreenSubmitFormContainer.tsx";
+import ScreenSubmitFormContainer from "@/views/admin/theatre-screens/components/submit-form/ScreenSubmitFormContainer.tsx";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 import {
     Sheet,

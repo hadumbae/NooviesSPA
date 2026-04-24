@@ -26,7 +26,7 @@ import {SecondaryTextBaseCSS}
 import SectionHeader
     from "@/common/components/page/SectionHeader.tsx";
 import ScreenShowingSelectCard
-    from "@/domains/theatre-screens/components/client/browse/ScreenShowingSelectCard.tsx";
+    from "@/views/admin/theatre-screens/components/client/browse/ScreenShowingSelectCard.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 
 /**

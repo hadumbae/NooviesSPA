@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import TheatreScreenDetailsDrawer
-    from "@/domains/theatre-screens/components/theatre-screens/admin/lists/TheatreScreenDetailsDrawer.tsx";
+    from "@/views/admin/theatre-screens/components/theatre-screens/admin/lists/TheatreScreenDetailsDrawer.tsx";
 
 import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
 

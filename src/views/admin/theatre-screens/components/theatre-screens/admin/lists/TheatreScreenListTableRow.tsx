@@ -15,9 +15,9 @@ import {TableCell, TableRow} from "@/common/components/ui/table.tsx";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {Pencil, Search, Trash} from "lucide-react";
 import TheatreScreenFormDrawer
-    from "@/domains/theatre-screens/components/theatre-screens/admin/forms/TheatreScreenFormDrawer.tsx";
+    from "@/views/admin/theatre-screens/components/theatre-screens/admin/forms/TheatreScreenFormDrawer.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import ScreenDeleteWarningDialog from "@/domains/theatre-screens/components/dialog/ScreenDeleteWarningDialog.tsx";
+import ScreenDeleteWarningDialog from "@/views/admin/theatre-screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 import simplifyScreenDetails from "@/domains/theatre-screens/utilities/simplifyScreenDetails.ts";
 import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
 

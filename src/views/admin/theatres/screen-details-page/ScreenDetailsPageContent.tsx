@@ -12,9 +12,9 @@
 
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import TheatreScreenDetailsBreadcrumbs
-    from "@/domains/theatre-screens/components/theatre-screen/admin/breadcrumbs/TheatreScreenDetailsBreadcrumbs.tsx";
+    from "@/views/admin/theatre-screens/components/theatre-screen/admin/breadcrumbs/TheatreScreenDetailsBreadcrumbs.tsx";
 import TheatreScreenDetailsHeader
-    from "@/domains/theatre-screens/components/theatre-screen/admin/headers/TheatreScreenDetailsHeader.tsx";
+    from "@/views/admin/theatre-screens/components/theatre-screen/admin/headers/TheatreScreenDetailsHeader.tsx";
 import {Tabs, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import SeatDetailsPanelContextProvider
     from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContextProvider.tsx";
@@ -27,9 +27,9 @@ import {SeatDetailsArray} from "@/domains/seats/schema/seat/SeatRelated.types.ts
 import ScreenDetailsCreateSeatTab
     from "@/views/admin/theatres/screen-details-page/screen-details-tabs/ScreenDetailsCreateSeatTab.tsx";
 import ScreenSubmitFormPanel
-    from "@/domains/theatre-screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
+    from "@/views/admin/theatre-screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
 import ScreenDeleteWarningDialog
-    from "@/domains/theatre-screens/components/dialog/ScreenDeleteWarningDialog.tsx";
+    from "@/views/admin/theatre-screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 import ScreenDetailsShowingsTab
     from "@/views/admin/theatres/screen-details-page/screen-details-tabs/ScreenDetailsShowingsTab.tsx";
 import useScreenDetailsPageValues
