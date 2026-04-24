@@ -17,15 +17,24 @@ import TheatreDeleteWarningDialog
 import TheatreDetailsCard from "@/domains/theatres/components/admin/theatre-details/TheatreDetailsCard.tsx";
 import useNavigateToTheatre from "@/domains/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
 import {SROnly} from "@/views/common/_comp/screen-readers";
+import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {PaginatedItems} from "@/common/types";
 
 /** Props for the TheatreDetailsPageContent component. */
 type TheatreDetailsPageContentProps = {
     theatre: TheatreDetails;
+    screens: PaginatedItems<TheatreScreenWithVirtuals>;
+    showings: ShowingDetails[];
+
+    screenPage: number;
+    screenPerPage: number;
+    setScreenPage: (page: number) => void;
 };
 
 /**
- * Renders the layout for theatre management, including details cards, tabbed related data,
- * and state-driven forms for editing or deletion.
+ * Renders the layout for theatre management, including details cards and related data tabs.
+ * Requires TheatreDetailsUIContext.
  */
 export function TheatreDetailsPageContent(
     {theatre}: TheatreDetailsPageContentProps
@@ -58,13 +67,11 @@ export function TheatreDetailsPageContent(
             <TheatreDetailsHeader theatreName={theatre.name}/>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
-                {/* Information Card */}
                 <section>
                     <SROnly text="Theatre Details Card"/>
                     <TheatreDetailsCard theatre={theatre}/>
                 </section>
 
-                {/* Related Data Tabs (Screens/Showings) */}
                 <section className="h-full">
                     <SROnly text="Theatre Screens And Movie Showings"/>
                     <TheatreDetailsPageTabs theatreID={theatre._id}/>
