@@ -7,14 +7,14 @@ import { TheatreDetailsSchema } from "@/domains/theatres/schema/model/theatre/Th
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import { ShowingDetailsSchema } from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import { generatePaginationSchema } from "@/common/utility/schemas/generatePaginationSchema.ts";
-import { TheatreScreenDetailsSchema } from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenWithVirtualsSchema} from "@/domains/theatre-screens/schema/model";
 
 /**
  * Validates the full data payload required for the Theatre Details dashboard.
  */
 export const TheatreDetailsViewDataSchema = z.object({
     theatre: TheatreDetailsSchema,
-    screens: generatePaginationSchema(TheatreScreenDetailsSchema),
+    screens: generatePaginationSchema(TheatreScreenWithVirtualsSchema),
     showings: generateArraySchema(ShowingDetailsSchema),
 });
 
