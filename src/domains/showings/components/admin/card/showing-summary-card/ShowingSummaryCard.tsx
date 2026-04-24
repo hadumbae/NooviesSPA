@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Administrative card displaying a summary of a movie showing.
+ */
+
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import buildString from "@/common/utility/buildString.ts";
@@ -20,23 +24,17 @@ import IconTextSpan from "@/common/components/card-content/IconTextSpan.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ReactElement} from "react";
 
+/** Props for the ShowingSummaryCard component. */
 type CardProps = {
-    /** Fully populated showing details */
     showing: ShowingDetails;
 };
 
 /**
- * Administrative card displaying a single movie showing.
- *
- * @remarks
- * - Shows formatted time metadata and runtime.
- * - Displays pricing, status, activity, and special-event flags.
- * - Provides quick navigation to showing, theatre, and screen admin pages.
- *
- * Designed for dense overview lists in admin dashboards.
+ * Renders an administrative summary card for a movie showing with metadata and navigation links.
  */
-const ShowingSummaryCard = ({showing}: CardProps) => {
+export function ShowingSummaryCard({showing}: CardProps): ReactElement {
     const {
         _id,
         movie,
@@ -56,21 +54,14 @@ const ShowingSummaryCard = ({showing}: CardProps) => {
     const {_id: theatreID, name: theatreName, slug: theatreSlug} = theatre;
     const {_id: screenID, name: screenName, screenType} = screen;
 
-    // --- Formatted Strings ---
-
     const formattedStatus = convertToTitleCase(status);
     const formattedRuntime = formatMovieRuntime(runtime);
     const formattedStartTime = startTime.toFormat("MMM dd, yyyy (hh:mm)");
-    const formattedTimeMetadata = buildString(
-        [endTime?.toFormat("MMM dd, yyyy (hh:mm)"), formattedRuntime],
-        " • "
-    );
+    const formattedTimeMetadata = buildString([endTime?.toFormat("MMM dd, yyyy (hh:mm)"), formattedRuntime], " • ");
 
     return (
         <Card>
             <CardContent className="px-5 py-3 space-y-3">
-                {/* Header */}
-
                 <div className="flex justify-between items-center">
                     <section>
                         <PrimaryHeaderText as="h2">
@@ -90,8 +81,6 @@ const ShowingSummaryCard = ({showing}: CardProps) => {
                     </div>
                 </div>
 
-                {/* Metadata */}
-
                 <div className={cn(RoundedBorderCSS, "grid grid-cols-2 gap-1 p-2 select-none")}>
                     <IconTextSpan className={cn(RoundedBorderCSS, "px-2")}>
                         <DollarSign/> {ticketPrice}
@@ -109,8 +98,6 @@ const ShowingSummaryCard = ({showing}: CardProps) => {
                         <Circle/> {isActive ? "Active" : "Inactive"}
                     </IconTextSpan>
                 </div>
-
-                {/* Links */}
 
                 <div className="flex justify-between">
                     <LoggedHoverLink
@@ -130,6 +117,4 @@ const ShowingSummaryCard = ({showing}: CardProps) => {
             </CardContent>
         </Card>
     );
-};
-
-export default ShowingSummaryCard;
+}

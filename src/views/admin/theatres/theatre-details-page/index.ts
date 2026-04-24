@@ -3,10 +3,13 @@ import {TheatreDetailsPageContent} from "@/views/admin/theatres/theatre-details-
 import {TheatreDetailsBreadcrumbs} from "@/views/admin/theatres/theatre-details-page/breadcrumbs.tsx";
 import {TheatreDetailsPageTabs} from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsPageTabs.tsx";
 import {TheatreDetailsScreensTab} from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsScreensTab.tsx";
-import {TheatreDetailsShowingsTab} from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsShowingsTab.tsx";
-import {TheatreDetailsScreensTabContent}
-    from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsScreensTabContent.tsx";
+import {
+    TheatreDetailsShowingsTab
+} from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsShowingsTab.tsx";
 import {TheatreDetailsHeader} from "@/views/admin/theatres/theatre-details-page/header.tsx";
+import {
+    TheatreDetailsShowingsTabHeader
+} from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsShowingsTabHeader.tsx";
 
 export {
     TheatreDetailsPage,
@@ -16,6 +19,6 @@ export {
     TheatreDetailsPageTabs,
     TheatreDetailsShowingsTab,
     TheatreDetailsScreensTab,
-    TheatreDetailsScreensTabContent,
+    TheatreDetailsShowingsTabHeader,
 }
 

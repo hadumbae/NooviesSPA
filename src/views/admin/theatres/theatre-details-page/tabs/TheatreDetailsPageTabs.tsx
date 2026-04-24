@@ -2,7 +2,7 @@
  * @fileoverview Tabbed administrative interface for managing a theatre's screens and scheduled showings.
  */
 
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
+import {Tabs, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {TheatreDetailsSearchParamSchema} from "@/domains/theatres/schema/params/TheatreDetailsSearchParamSchema.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -32,7 +32,7 @@ export type TabProps = {
  * Orchestrates the tabbed views for theatre sub-resources.
  */
 export function TheatreDetailsPageTabs(
-    {theatreID, theatreSlug, screens, screenPage, screenPerPage, setScreenPage}: TabProps
+    {theatreID, theatreSlug, showings, screens, screenPage, screenPerPage, setScreenPage}: TabProps
 ): ReactElement {
     const {searchParams, setSearchParams} = useParsedSearchParams({schema: TheatreDetailsSearchParamSchema});
     const {activeTab = "screens"} = searchParams;
@@ -42,7 +42,7 @@ export function TheatreDetailsPageTabs(
     const disableFields: (keyof TheatreScreenFormValues)[] = ["theatre"];
 
     return (
-        <Tabs className="h-full" defaultValue={activeTab}>
+        <Tabs defaultValue={activeTab}>
             <div className="flex justify-center">
                 <TabsList>
                     <TabsTrigger value="screens" onClick={() => setActiveTab("screens")}>Screens</TabsTrigger>
@@ -61,12 +61,10 @@ export function TheatreDetailsPageTabs(
                 />
             </ScreenFormContextProvider>
 
-            <TabsContent value="showings">
-                <TheatreDetailsShowingsTab
-                    theatreID={theatreID}
-                    className="h-full space-y-4"
-                />
-            </TabsContent>
+            <TheatreDetailsShowingsTab
+                theatreSlug={theatreSlug}
+                showings={showings}
+            />
         </Tabs>
     );
 }

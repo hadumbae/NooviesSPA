@@ -1,6 +1,6 @@
 import { cn } from "@/common/lib/utils.ts";
 import { SecondaryTextBaseCSS } from "@/common/constants/css/TextCSS.ts";
-import ShowingSummaryCard from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCard.tsx";
+import {ShowingSummaryCard} from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCard.tsx";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 type ListProps = {
