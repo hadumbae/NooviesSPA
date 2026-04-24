@@ -17,7 +17,7 @@ export default function useQueryOptionDefaults<TData = unknown>(
         enabled: true,
         staleTime: 60_000,
         placeholderData: keepPreviousData,
-        throwOnError: false,
+        throwOnError: true,
         ...values,
     };
 }
