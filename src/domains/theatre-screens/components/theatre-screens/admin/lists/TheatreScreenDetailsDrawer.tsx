@@ -1,10 +1,5 @@
 /**
- * @file TheatreScreenDetailsDrawer.tsx
- *
- * Drawer-based summary component for a theatre screen.
- *
- * Renders a clickable card that opens a drawer showing
- * key screen metadata and navigation actions.
+ * @fileoverview Drawer-based summary component for a theatre screen.
  */
 
 import {
@@ -17,33 +12,20 @@ import {
     DrawerTitle,
     DrawerTrigger
 } from "@/common/components/ui/drawer.tsx";
-import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import {CircleX} from "lucide-react";
-import {cn} from "@/common/lib/utils.ts";
-import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
 import {SecondaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
-import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
 
-/**
- * Props for {@link TheatreScreenDetailsDrawer}.
- */
+/** Props for the TheatreScreenDetailsDrawer component. */
 type DrawerProps = {
-    /**
-     * Fully hydrated screen details object.
-     */
-    screen: TheatreScreenDetails
+    screen: TheatreScreenWithVirtuals
 };
 
 /**
- * Theatre screen details drawer.
- *
- * Displays a compact screen card that opens a drawer
- * containing capacity, seat, and showing metadata,
- * with a shortcut to the admin screen details page.
- *
- * @param screen Screen details to render
+ * Displays a compact screen card that opens a drawer containing screen metadata.
  */
 const TheatreScreenDetailsDrawer = ({screen}: DrawerProps) => {
     const {
@@ -52,8 +34,6 @@ const TheatreScreenDetailsDrawer = ({screen}: DrawerProps) => {
         capacity,
         seatCount,
         futureShowingCount,
-        slug: screenSlug,
-        theatre: {slug: theatreSlug},
     } = screen;
 
     return (
@@ -80,21 +60,11 @@ const TheatreScreenDetailsDrawer = ({screen}: DrawerProps) => {
                 </section>
 
                 <DrawerFooter>
-                    <section className="flex space-x-2">
-                        <LoggedAnchor
-                            target="_blank"
-                            href={`/admin/theatres/get/${theatreSlug}/screen/${screenSlug}`}
-                            className={cn(buttonVariants({variant: "primary"}), "flex-grow")}
-                        >
-                            More Details
-                        </LoggedAnchor>
-
-                        <DrawerClose asChild>
-                            <Button variant="outline" className={SecondaryButtonCSS}>
-                                <CircleX/>
-                            </Button>
-                        </DrawerClose>
-                    </section>
+                    <DrawerClose asChild>
+                        <Button variant="outline" className={SecondaryButtonCSS}>
+                            <CircleX/>
+                        </Button>
+                    </DrawerClose>
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>

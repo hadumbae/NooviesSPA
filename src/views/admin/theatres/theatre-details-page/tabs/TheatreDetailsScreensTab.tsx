@@ -2,31 +2,32 @@
  * @fileoverview Data-fetching component for the "Screens" tab on the Theatre Details page.
  */
 
-import { ReactElement } from "react";
-import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import { ScreenQueryOptions } from "@/domains/theatre-screens/schema/queries/ScreenQueryOptions.types.ts";
-import useFetchPaginatedScreens
-    from "@/domains/theatre-screens/hooks/screens/fetch-screens/useFetchPaginatedScreens.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {
-    TheatreDetailsScreensTabContent
-} from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsScreensTabContent.tsx";
-import {
-    PaginatedTheatreScreenDetails,
-    PaginatedTheatreScreenDetailsSchema
-} from "@/domains/theatre-screens/schema/model/PaginatedTheatreScreenDetailsSchema.ts";
+import {ReactElement} from "react";
+import {TabsContent} from "@/common/components/ui/tabs.tsx";
+import TheatreScreenDetailsDrawer
+    from "@/domains/theatre-screens/components/theatre-screens/admin/lists/TheatreScreenDetailsDrawer.tsx";
+import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
+import {Plus} from "lucide-react";
+import ScreenSubmitFormPanel from "@/domains/theatre-screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
+import {PageSectionHeader} from "@/views/common/_comp/page";
+import {SROnly} from "@/views/common/_comp/screen-readers";
+import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
+
+const panelInfo = {
+    title: "Add Screen",
+    description: "Add screen data for theatre.",
+};
 
 /** Props for the TheatreDetailsScreensTab component. */
 export type OverviewTabProps = {
-    theatreID: ObjectId;
+    screens: TheatreScreenWithVirtuals[];
+    totalScreens: number;
+
     page: number;
     perPage: number;
     setPage: (val: number) => void;
-    queries?: ScreenQueryOptions;
-    classNames?: {
-        container?: string;
-        list?: string;
-    };
 };
 
 /**
@@ -34,29 +35,30 @@ export type OverviewTabProps = {
  * Wraps the content in a ValidatedDataLoader to ensure the API response matches the PaginatedTheatreScreenDetailsSchema.
  */
 export function TheatreDetailsScreensTab(
-    { theatreID, page, perPage, setPage, classNames, queries }: OverviewTabProps
+    {screens, totalScreens, page, perPage, setPage}: OverviewTabProps
 ): ReactElement {
-    const screenQuery = useFetchPaginatedScreens({
-        page,
-        perPage,
-        config: { populate: true, virtuals: true },
-        queries: { ...queries, theatre: theatreID },
-    });
-
     return (
-        <ValidatedDataLoader
-            query={screenQuery}
-            schema={PaginatedTheatreScreenDetailsSchema}
-        >
-            {({ items, totalItems }: PaginatedTheatreScreenDetails) => (
-                <TheatreDetailsScreensTabContent
-                    theatreID={theatreID}
-                    screens={items}
-                    totalItems={totalItems}
-                    paginationOptions={{ page, perPage, setPage }}
-                    classNames={classNames}
-                />
-            )}
-        </ValidatedDataLoader>
+        <TabsContent value="screens" className="h-full space-y-5">
+            <section className="flex justify-between items-center">
+                <PageSectionHeader text="Screens"/>
+                <ScreenSubmitFormPanel {...panelInfo}>
+                    <Button size="sm" variant="link" className={HoverLinkCSS}>
+                        <Plus/> Add Screens
+                    </Button>
+                </ScreenSubmitFormPanel>
+            </section>
+
+            <section className="grid grid-cols-1 gap-3">
+                <SROnly text="Screen List"/>
+                {screens.map((screen) => <TheatreScreenDetailsDrawer key={screen._id} screen={screen}/>)}
+            </section>
+
+            <PaginationRangeButtons
+                page={page}
+                perPage={perPage}
+                setPage={setPage}
+                totalItems={totalScreens}
+            />
+        </TabsContent>
     );
 }

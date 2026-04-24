@@ -37,7 +37,7 @@ type TheatreDetailsPageContentProps = {
  * Requires TheatreDetailsUIContext.
  */
 export function TheatreDetailsPageContent(
-    {theatre}: TheatreDetailsPageContentProps
+    {theatre, ...tabProps}: TheatreDetailsPageContentProps
 ): ReactElement {
     const navigate = useLoggedNavigate();
     const updateSlugURL = useNavigateToTheatre();
@@ -74,7 +74,7 @@ export function TheatreDetailsPageContent(
 
                 <section className="h-full">
                     <SROnly text="Theatre Screens And Movie Showings"/>
-                    <TheatreDetailsPageTabs theatreID={theatre._id}/>
+                    <TheatreDetailsPageTabs theatreID={theatre._id} {...tabProps} />
                 </section>
             </div>
 
