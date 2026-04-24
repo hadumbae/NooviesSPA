@@ -26,7 +26,6 @@ type TheatreDetailsPageContentProps = {
     theatre: TheatreDetails;
     screens: PaginatedItems<TheatreScreenWithVirtuals>;
     showings: ShowingDetails[];
-
     screenPage: number;
     screenPerPage: number;
     setScreenPage: (page: number) => void;
@@ -74,7 +73,11 @@ export function TheatreDetailsPageContent(
 
                 <section className="h-full">
                     <SROnly text="Theatre Screens And Movie Showings"/>
-                    <TheatreDetailsPageTabs theatreID={theatre._id} {...tabProps} />
+                    <TheatreDetailsPageTabs
+                        theatreID={theatre._id}
+                        theatreSlug={theatre.slug}
+                        {...tabProps}
+                    />
                 </section>
             </div>
 

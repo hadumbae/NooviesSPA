@@ -15,10 +15,12 @@ import {ReactElement} from "react";
 import {PaginatedItems} from "@/common/types";
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 
 /** Props for the TheatreDetailsPageTabs component. */
 export type TabProps = {
     theatreID: ObjectId;
+    theatreSlug: SlugString;
     screens: PaginatedItems<TheatreScreenWithVirtuals>;
     showings: ShowingDetails[];
     screenPage: number;
@@ -30,7 +32,7 @@ export type TabProps = {
  * Orchestrates the tabbed views for theatre sub-resources.
  */
 export function TheatreDetailsPageTabs(
-    {theatreID, screens, screenPage, screenPerPage, setScreenPage}: TabProps
+    {theatreID, theatreSlug, screens, screenPage, screenPerPage, setScreenPage}: TabProps
 ): ReactElement {
     const {searchParams, setSearchParams} = useParsedSearchParams({schema: TheatreDetailsSearchParamSchema});
     const {activeTab = "screens"} = searchParams;
@@ -50,6 +52,7 @@ export function TheatreDetailsPageTabs(
 
             <ScreenFormContextProvider presetValues={presetValues} disableFields={disableFields}>
                 <TheatreDetailsScreensTab
+                    theatreSlug={theatreSlug}
                     screens={screens.items}
                     totalScreens={screens.totalItems}
                     page={screenPage}
