@@ -1,8 +1,5 @@
 /**
- * @file TheatreShowingCreateBreadcrumbs.tsx
- *
- * @summary
- * Breadcrumb navigation for the theatre showing creation page.
+ * @fileoverview Breadcrumb navigation for the theatre showing creation page.
  */
 
 import {
@@ -15,57 +12,40 @@ import {
 } from "@/common/components/ui/breadcrumb.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ReactElement} from "react";
 
-/**
- * Props for {@link TheatreShowingCreateBreadcrumbs}.
- */
+/** Props for the TheatreShowingCreateBreadcrumbs component. */
 type BreadcrumbProps = {
-    /**
-     * Unique identifier of the theatre.
-     */
     theatreID: ObjectId;
-
-    /**
-     * Display name of the theatre.
-     */
     theatreName: string;
 };
 
 /**
- * Renders breadcrumb navigation for creating showings under a theatre.
- *
- * @param props - Component props.
- * @returns A breadcrumb trail linking back to theatre list and theatre details.
+ * Renders a breadcrumb trail linking back to the theatre list and theatre details views.
  */
-const TheatreShowingCreateBreadcrumbs = ({theatreID, theatreName}: BreadcrumbProps) => {
+export function TheatreShowingCreateBreadcrumbs({theatreID, theatreName}: BreadcrumbProps): ReactElement {
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink
-                            to="/admin/theatres"
-                            component={TheatreShowingCreateBreadcrumbs.name}
-                        >
+                        <LoggedHoverLink to="/admin/theatres">
                             All Theatres
                         </LoggedHoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator/>
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink
-                            to={`/admin/theatres/get/${theatreID}`}
-                            component={TheatreShowingCreateBreadcrumbs.name}
-                        >
+                        <LoggedHoverLink to={`/admin/theatres/get/${theatreID}`}>
                             {theatreName} | Details
                         </LoggedHoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator/>
 
                 <BreadcrumbItem>
                     <BreadcrumbPage>
@@ -75,6 +55,4 @@ const TheatreShowingCreateBreadcrumbs = ({theatreID, theatreName}: BreadcrumbPro
             </BreadcrumbList>
         </Breadcrumb>
     );
-};
-
-export default TheatreShowingCreateBreadcrumbs;
+}
