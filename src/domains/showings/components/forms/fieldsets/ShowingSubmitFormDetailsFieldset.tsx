@@ -1,30 +1,15 @@
 /**
- * @file ShowingSubmitFormDetailsFieldset.tsx
- * @description
- * A fieldset component used inside the Showing submit form.
- * It handles selection of movie, theatre, screen, and an optional set of theatre filters
- * (country, state, city).
- *
- * The component integrates closely with React Hook Form (`UseFormReturn<ShowingFormValues>`)
- * and dynamically shows or hides fields depending on both:
- * - `activeFields`: external configuration indicating which fields should be shown.
- * - `isFilterOpen`: local state determining whether theatre filters are applied.
- *
- * It also synchronizes filter values and theatre/screen values through `useEffect`,
- * enforcing mutual exclusivity between:
- * - Theatre filters
- * - Direct theatre/screen selection
- *
- * @module ShowingSubmitFormDetailsFieldset
+ * @fileoverview Fieldset component for the Showing submission form.
+ * Manages the selection and validation of movie, theatre, and screen entities.
  */
 
-import {FC, useContext, useEffect, useState} from 'react';
+import {ReactElement, useContext, useEffect, useState} from 'react';
 import MovieHookFormSelect from "@/domains/movies/components/ui/MovieHookFormSelect.tsx";
-import MovieQuickOverviewFetchCard from "@/domains/movies/components/admin/movie-details/MovieQuickOverviewFetchCard.tsx";
+import MovieQuickOverviewFetchCard
+    from "@/domains/movies/components/admin/movie-details/MovieQuickOverviewFetchCard.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import TheatreQuickOverviewFetchCard
     from "@/domains/theatres/components/admin/theatre-details/TheatreQuickOverviewFetchCard.tsx";
-import ScreenHookFormSelect from "@/views/admin/theatre-screens/components/submit-form/inputs/ScreenHookFormSelect.tsx";
 import {UseFormReturn} from "react-hook-form";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
@@ -37,77 +22,30 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {MultiStepFormContext} from "@/common/context/multi-step-form/MultiStepFormContext.ts";
 import TheatreHookFormSelect from "@/domains/theatres/components/admin/form/theatre-inputs/TheatreHookFormSelect.tsx";
 import {ShowingFormValues} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
+import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
 
-/**
- * Props for the `ShowingSubmitFormDetailsFieldset` component.
- *
- * @property form - The React Hook Form instance handling `ShowingFormValues`.
- * @property activeFields - A record indicating which fields in the form should be rendered.
- */
+/** Props for the ShowingSubmitFormDetailsFieldset component. */
 type FieldsetProps = {
     form: UseFormReturn<ShowingFormValues>;
     activeFields: Record<keyof ShowingFormValues, boolean>;
 };
 
 /**
- * A fieldset component containing all detail-related inputs for creating or editing
- * a Showing entity.
- *
- * This includes:
- * - Movie selection with overview card
- * - Optional theatre filters (country, state, city)
- * - Theatre selection with overview card
- * - Screen selection (conditional on theatre)
- *
- * The component ensures filter-based selection and direct theatre selection are mutually exclusive:
- * - Closing the filter panel clears filter fields.
- * - Changing filter fields clears theatre and screen selections.
- *
- * @param {FieldsetProps} props - Contains the form instance and active field controls.
- * @returns {JSX.Element} A fully controlled fieldset for entering showing details.
- *
- * @example Basic usage
- * ```tsx
- * <ShowingSubmitFormDetailsFieldset
- *   form={form}
- *   activeFields={{
- *     movie: true,
- *     theatre: true,
- *     screen: true,
- *     theatreCity: true,
- *     theatreState: true,
- *     theatreCountry: true
- *   }}
- * />
- * ```
- *
- * @example Rendering with filtered fields disabled
- * ```tsx
- * <ShowingSubmitFormDetailsFieldset
- *   form={form}
- *   activeFields={{
- *     movie: true,
- *     theatre: true,
- *     screen: true,
- *     theatreCity: false,
- *     theatreState: false,
- *     theatreCountry: false
- *   }}
- * />
- * ```
+ * A fieldset component handling movie, theatre, and screen selection with dynamic filtering.
  */
-const ShowingSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields}) => {
+export function ShowingSubmitFormDetailsFieldset(
+    {form, activeFields}: FieldsetProps
+): ReactElement {
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
     const {isHydrated = true} = useContext(MultiStepFormContext) ?? {};
 
-    // ⚡ Watch Form ⚡
     const movie = form.watch("movie");
     const theatre = form.watch("theatre");
     const city = form.watch("theatreCity");
     const state = form.watch("theatreState");
     const country = form.watch("theatreCountry");
 
-    // Clear theatre filters when the collapsible closes
+    /** Effect: Reset location filters when the filter panel is closed. */
     useEffect(() => {
         if (!isFilterOpen) {
             form.setValue("theatreCity", "");
@@ -116,7 +54,7 @@ const ShowingSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields
         }
     }, [isFilterOpen]);
 
-    // When filters are changed, clear theatre and screen selections
+    /** Effect: Clear selection when location filters are modified. */
     useEffect(() => {
         if (isFilterOpen) {
             form.setValue("theatre", undefined);
@@ -124,7 +62,7 @@ const ShowingSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields
         }
     }, [city, state, country]);
 
-    // When the theatre is changed, clear the screen selection
+    /** Effect: Reset screen selection whenever the selected theatre changes. */
     useEffect(() => {
         if (isHydrated) {
             form.resetField("screen");
@@ -140,7 +78,7 @@ const ShowingSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields
                 <Separator/>
             </div>
 
-            {/* Movie */}
+            {/* Movie Selection */}
             {activeFields.movie && (
                 <div className="space-y-1">
                     <MovieHookFormSelect
@@ -153,7 +91,7 @@ const ShowingSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields
                 </div>
             )}
 
-            {/* Theatre Filter */}
+            {/* Theatre Filters (Collapsible) */}
             <Collapsible open={isFilterOpen} onOpenChange={setIsFilterOpen}>
                 <CollapsibleTrigger asChild>
                     <Button variant="link" size="sm">
@@ -192,7 +130,7 @@ const ShowingSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields
                 </CollapsibleContent>
             </Collapsible>
 
-            {/* Theatre */}
+            {/* Theatre Selection */}
             {activeFields.theatre && (
                 <div>
                     <TheatreHookFormSelect
@@ -209,7 +147,7 @@ const ShowingSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields
                 </div>
             )}
 
-            {/* Screen */}
+            {/* Screen Selection (Conditional on Theatre) */}
             {activeFields.screen && theatre && (
                 <ScreenHookFormSelect
                     control={form.control}
@@ -221,6 +159,4 @@ const ShowingSubmitFormDetailsFieldset: FC<FieldsetProps> = ({form, activeFields
             )}
         </fieldset>
     );
-};
-
-export default ShowingSubmitFormDetailsFieldset;
+}

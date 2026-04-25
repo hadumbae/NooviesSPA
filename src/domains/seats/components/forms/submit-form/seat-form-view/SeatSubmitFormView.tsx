@@ -1,32 +1,9 @@
 /**
- * @file SeatSubmitFormView.tsx
- *
- * ⚡ SeatSubmitFormView
- *
- * Presentational component for rendering a dynamic Seat form.
- * Focuses purely on form rendering and fieldset layout, leaving
- * state management and submission orchestration to
- * {@link SeatSubmitFormContainer}.
- *
- * Responsibilities:
- * - Render active fields based on `SeatFormValuesSchema` and `disableFields`
- * - Conditionally render fieldsets according to `layoutType`
- * - Disable submit button while mutation is pending
- * - Provide reset functionality to restore `initialValues` from {@link SeatFormContext}
- *
- * Example:
- * ```tsx
- * <SeatSubmitFormView
- *   form={form}
- *   mutation={mutation}
- *   submitHandler={onSubmit}
- *   disableFields={["row", "seatLabel"]}
- *   className="p-6"
- * />
- * ```
+ * @fileoverview Presentational component for the Seat submission form.
+ * Handles the conditional rendering of logical fieldsets based on layout type and active fields.
  */
 
-import {FC} from "react";
+import {cloneElement, FC} from "react";
 import {cn} from "@/common/lib/utils.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
@@ -42,16 +19,14 @@ import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaIn
 import {HookFormFieldGroup} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 
 import SeatSubmitFormLayoutFieldset from "./SeatSubmitFormLayoutFieldset.tsx";
-import SeatSubmitFormDetailsFieldset from "./SeatSubmitFormDetailsFieldset.tsx";
+import {SeatSubmitFormDetailsFieldset} from "./SeatSubmitFormDetailsFieldset.tsx";
 import SeatSubmitFormNonSeatFieldset from "./SeatSubmitFormNonSeatFieldset.tsx";
 import SeatSubmitFormRowFieldset from "./SeatSubmitFormRowFieldset.tsx";
 import SeatSubmitFormCoordinateFieldset from "./SeatSubmitFormCoordinateFieldset.tsx";
 import SeatSubmitFormSeatFieldset from "./SeatSubmitFormSeatFieldset.tsx";
 
 /**
- * Props for {@link SeatSubmitFormView}.
- *
- * ⚡ Templated over entity, form DTO, and form values
+ * Props for SeatSubmitFormView, templated for entity and form DTOs.
  */
 type FormProps = FormViewProps<SeatDetails, SeatForm, SeatFormValues> & {
     className?: string;
@@ -59,15 +34,11 @@ type FormProps = FormViewProps<SeatDetails, SeatForm, SeatFormValues> & {
 };
 
 /**
- * ⚡ SeatSubmitFormView component
- *
- * Renders a structured, dynamic seat form split into logical fieldsets.
- * Delegates state management and submission to the parent container.
+ * Renders the Seat submission form with dynamic fieldsets based on the layout type (SEAT vs NON-SEAT).
  */
 const SeatSubmitFormView: FC<FormProps> = (props) => {
     const {className, form, submitHandler, mutation: {isPending}} = props;
 
-    // --- Access Context ---
     const {initialValues, setCurrentValues, options = {}} = useRequiredContext({
         context: SeatFormContext,
         message: "Must use within a provider for `SeatFormContext`.",
@@ -75,67 +46,76 @@ const SeatSubmitFormView: FC<FormProps> = (props) => {
 
     const {disableFields} = options;
 
-    // --- Determine Layout ---
     const layoutType = form.watch("layoutType");
     const isSeat = layoutType === "SEAT";
 
-    // --- Active Fields ---
     const activeFields = getActiveSchemaInputFields({
         schema: SeatFormValuesSchema,
         disableFields,
     });
 
+    /**
+     * Configuration for logical groupings of form fields.
+     */
     const fieldGroups: HookFormFieldGroup<SeatFormValues>[] = [
         {
             render: true,
+            key: "seat-layout-field-set",
             fields: ["layoutType"],
             element: <SeatSubmitFormLayoutFieldset form={form} activeFields={activeFields} key="layout-1"/>
         },
         {
             render: true,
+            key: "details-2",
             fields: ["theatre", "screen"],
-            element: <SeatSubmitFormDetailsFieldset form={form} activeFields={activeFields} key="details-2"/>
+            element: <SeatSubmitFormDetailsFieldset form={form} activeFields={activeFields}/>
         },
         {
             render: !isSeat,
+            key: "non-seat-3",
             fields: ["row", "x", "y"],
-            element: <SeatSubmitFormNonSeatFieldset form={form} activeFields={activeFields} key="non-seat-3"/>
+            element: <SeatSubmitFormNonSeatFieldset form={form} activeFields={activeFields}/>
         },
         {
             render: isSeat,
+            key: "row-3",
             fields: ["row", "seatNumber", "seatLabel"],
-            element: <SeatSubmitFormRowFieldset form={form} activeFields={activeFields} key="row-3"/>
+            element: <SeatSubmitFormRowFieldset form={form} activeFields={activeFields}/>
         },
         {
             render: isSeat,
+            key: "coordinates-4",
             fields: ["x", "y"],
-            element: <SeatSubmitFormCoordinateFieldset form={form} activeFields={activeFields} key="coordinates-4"/>
+            element: <SeatSubmitFormCoordinateFieldset form={form} activeFields={activeFields}/>
         },
         {
             render: isSeat,
+            key: "seat-5",
             fields: ["seatType", "priceMultiplier", "isAvailable"],
-            element: <SeatSubmitFormSeatFieldset form={form} activeFields={activeFields} key="seat-5"/>
+            element: <SeatSubmitFormSeatFieldset form={form} activeFields={activeFields}/>
         },
     ];
 
-    const fields = fieldGroups.map(({render, fields, element}) =>
-        render && fields.some((field) => activeFields[field as keyof SeatFormValues]) ? element : null
+    const renderedFields = fieldGroups.map(({render, fields, key, element}) =>
+        render && fields.some((field) => activeFields[field as keyof SeatFormValues])
+            ? cloneElement(element, {key})
+            : null
     );
 
-    // --- Reset Form ---
+    /**
+     * Restores form to initial state and clears current selection in context.
+     */
     const onReset = () => {
         if (initialValues) {
             form.reset(initialValues);
         }
-
         setCurrentValues(undefined);
     };
 
-    // --- Render ---
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(submitHandler)} className={cn("space-y-4", className)}>
-                {fields}
+                {renderedFields}
                 <div className="flex items-center space-x-2">
                     <Button variant="primary" type="submit" className="flex-1" disabled={isPending}>
                         Submit

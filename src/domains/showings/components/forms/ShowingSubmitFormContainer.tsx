@@ -1,44 +1,18 @@
 /**
- * Showing Submit Form Container
- *
- * Container component responsible for creating or editing a showing.
- * Manages form state, multi-step flow, mutation logic, and persistence.
- *
- * Responsibilities:
- * - Initialize form state via `useShowingSubmitForm`
- * - Handle create/update mutations with `useShowingSubmitMutation`
- * - Define and manage multi-step form configuration
- * - Persist intermediate state in `localStorage`
- * - Reset state and storage after successful submission
- *
- * Form steps:
- * 1. Details
- * 2. Languages
- * 3. Date & Time
- * 4. Status
- *
- * @example
- * ```tsx
- * <ShowingSubmitFormContainer
- *     entity={existingShowing}
- *     theatreTimezone="Asia/Bangkok"
- *     onSubmitSuccess={(showing) => console.log("Submitted", showing)}
- * />
- * ```
+ * @fileoverview Container component for creating or editing movie showings.
+ * Manages multi-step form state, persistence, and server mutations.
  */
 
 import {FC} from "react";
-
 import useShowingSubmitForm from "@/domains/showings/hooks/forms/useShowingSubmitForm.ts";
 import useShowingSubmitMutation from "@/domains/showings/hooks/mutations/useShowingSubmitMutation.ts";
-
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {FormStep} from "@/common/type/form/SteppedFormTypes.ts";
 import {ChevronRight, Clock, Languages, ListCollapse} from "lucide-react";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import ShowingSubmitFormDetailsFieldset
+import {ShowingSubmitFormDetailsFieldset}
     from "@/domains/showings/components/forms/fieldsets/ShowingSubmitFormDetailsFieldset.tsx";
 import ShowingSubmitFormLanguagesFieldset
     from "@/domains/showings/components/forms/fieldsets/ShowingSubmitFormLanguagesFieldset.tsx";
@@ -71,39 +45,29 @@ import {
 } from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
 
 /**
- * Editing-specific props for the submit form.
- *
- * When provided, the form operates in edit mode.
+ * Union type for editing vs. creation mode props.
  */
 type ShowingEditingProps =
     | { entity: Showing; theatreTimezone: IANATimezone }
     | { entity?: never; theatreTimezone?: never };
 
 /**
- * Props for {@link ShowingSubmitFormContainer}.
- *
- * Combines form options, mutation callbacks, and optional editing context.
+ * Combined props for the ShowingSubmitFormContainer.
  */
 type SubmitContainerProps =
     MutationOnSubmitParams<ShowingDetails>
     & FormOptions<ShowingFormValues>
     & ShowingEditingProps
-    & {
-    /** Optional wrapper class name */
-    className?: string;
-};
+    & { className?: string };
 
 /**
- * Container component for submitting showing data.
- *
- * Orchestrates form state, step configuration, and submission lifecycle
- * for both create and edit flows.
+ * Orchestrates the multi-step lifecycle for showing submissions.
+ * Includes local storage persistence and logic for dynamic field toggling.
  */
 const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
     const {entity: showing, theatreTimezone, disableFields, presetValues, ...onSubmitProps} = props;
     const {onSubmitSuccess} = onSubmitProps;
 
-    // --- Setup ---
     const formProps = showing ? {showing, theatreTimezone} : {};
     const form = useShowingSubmitForm({presetValues, ...formProps});
 
@@ -118,62 +82,43 @@ const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
 
     const initialValues = useFormInitialValues({form});
 
-    // --- Steps ---
     const steps: FormStep<ShowingFormValues>[] = [
         {
             title: "Details",
             stepCount: 1,
             icon: ListCollapse,
             fields: getSchemaFieldKeys(ShowingFormDetailValuesSchema),
-            component: (
-                <ShowingSubmitFormDetailsFieldset
-                    activeFields={activeFields}
-                    form={form}
-                />
-            ),
+            component: <ShowingSubmitFormDetailsFieldset activeFields={activeFields} form={form} />,
         },
         {
             title: "Languages",
             stepCount: 2,
             icon: Languages,
             fields: getSchemaFieldKeys(ShowingFormLanguageValuesSchema),
-            component: (
-                <ShowingSubmitFormLanguagesFieldset
-                    activeFields={activeFields}
-                    form={form}
-                />
-            ),
+            component: <ShowingSubmitFormLanguagesFieldset activeFields={activeFields} form={form} />,
         },
         {
             title: "Date & Time",
             stepCount: 3,
             icon: Clock,
             fields: getSchemaFieldKeys(ShowingFormDateTimeValuesSchema),
-            component: (
-                <ShowingSubmitFormDateTimeFieldset
-                    activeFields={activeFields}
-                    form={form}
-                />
-            ),
+            component: <ShowingSubmitFormDateTimeFieldset activeFields={activeFields} form={form} />,
         },
         {
             title: "Status",
             stepCount: 4,
             icon: ChevronRight,
             fields: getSchemaFieldKeys(ShowingFormStatusValuesSchema),
-            component: (
-                <ShowingSubmitFormStatusFieldset
-                    activeFields={activeFields}
-                    form={form}
-                />
-            ),
+            component: <ShowingSubmitFormStatusFieldset activeFields={activeFields} form={form} />,
         },
     ];
 
-    // --- Mutation & Submit Handler ---
+    /**
+     * Cleans up persistence and resets form state on successful submission.
+     */
     const resetOnSuccess = (data: ShowingDetails) => {
         localStorage.removeItem(localStorageKey);
-        initialValues.current && form.reset(initialValues.current);
+        if (initialValues.current) form.reset(initialValues.current);
         onSubmitSuccess?.(data);
     };
 
@@ -185,7 +130,7 @@ const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
     });
 
     /**
-     * Submits validated form values to the mutation handler.
+     * Final submission handler.
      */
     const onFormSubmit = (values: ShowingFormValues) => {
         buildFormSubmitLog({
@@ -196,7 +141,6 @@ const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
         mutation.mutate(values as ShowingForm);
     };
 
-    // --- Render ---
     return (
         <MultiStepForm
             localStorageKey={localStorageKey}

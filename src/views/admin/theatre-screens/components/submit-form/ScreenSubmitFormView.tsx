@@ -3,7 +3,6 @@ import {Form} from "@/common/components/ui/form.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import ScreenTypeHookFormSelect from "@/views/admin/theatre-screens/components/submit-form/inputs/ScreenTypeHookFormSelect.tsx";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ScreenFormContext} from "@/domains/theatre-screens/contexts/screen-form/ScreenFormContext.ts";
@@ -15,6 +14,7 @@ import {
     TheatreScreenFormValues,
     TheatreScreenFormValuesSchema
 } from "@/domains/theatre-screens/forms";
+import {ScreenTypeHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
 
 
 /**

@@ -2,7 +2,7 @@
  * @fileoverview Composes the data-fetching queries required for the Screen Details administrative page.
  */
 
-import useFetchScreenBySlug from "@/domains/theatre-screens/hooks/screens/fetch-screens/useFetchScreenBySlug.ts";
+import useFetchScreenBySlug from "@/domains/theatre-screens/_feat/crud-hooks/useFetchScreenBySlug.ts";
 import useFetchSeats from "@/domains/seats/hooks/query/useFetchSeats.ts";
 import { QueryDefinition } from "@/common/type/query/loader/MultiQuery.types.ts";
 import { TheatreDetailsSchema } from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";

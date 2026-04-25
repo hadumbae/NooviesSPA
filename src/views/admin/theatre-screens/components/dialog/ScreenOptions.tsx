@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import useScreenDeleteMutation from "@/domains/theatre-screens/hooks/screens/delete-screens/useScreenDeleteMutation.ts";
+import useScreenDeleteMutation from "@/domains/theatre-screens/_feat/crud-hooks/useScreenDeleteMutation.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";

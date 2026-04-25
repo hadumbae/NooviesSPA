@@ -14,7 +14,7 @@
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useFetchTheatre from "@/domains/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
-import useFetchScreen from "@/domains/theatre-screens/hooks/screens/fetch-screens/useFetchScreen.ts";
+import useFetchScreen from "@/domains/theatre-screens/_feat/crud-hooks/useFetchScreen.ts";
 import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
 import {TheatreDetailsSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
