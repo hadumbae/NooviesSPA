@@ -2,18 +2,19 @@
  * @fileoverview Data-fetching component for the "Screens" tab on the Theatre Details page.
  */
 
-import {ReactElement} from "react";
+import {ReactElement, useState} from "react";
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 import {Plus} from "lucide-react";
-import ScreenSubmitFormPanel from "@/views/admin/theatre-screens/components/submit-form/panel/ScreenSubmitFormPanel.tsx";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
 import {TheatreDetailsScreenListCard} from "@/views/admin/theatre-screens/_comp/theatre-details";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {TheatreScreenSubmitForm, TheatreScreenSubmitFormPanel} from "@/views/admin/theatre-screens/_feat/submit-data";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
 const panelInfo = {
     title: "Add Screen",
@@ -22,6 +23,7 @@ const panelInfo = {
 
 /** Props for the TheatreDetailsScreensTab component. */
 export type OverviewTabProps = {
+    theatreID: ObjectId;
     theatreSlug: SlugString;
     screens: TheatreScreenWithVirtuals[];
     totalScreens: number;
@@ -35,17 +37,26 @@ export type OverviewTabProps = {
  * Wraps the content in a ValidatedDataLoader to ensure the API response matches the PaginatedTheatreScreenDetailsSchema.
  */
 export function TheatreDetailsScreensTab(
-    {theatreSlug, screens, totalScreens, page, perPage, setPage}: OverviewTabProps
+    {theatreID, theatreSlug, screens, totalScreens, page, perPage, setPage}: OverviewTabProps
 ): ReactElement {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
     return (
         <TabsContent value="screens" className="h-full space-y-5">
             <section className="flex justify-between items-center">
                 <PageSectionHeader text="Screens"/>
-                <ScreenSubmitFormPanel {...panelInfo}>
-                    <Button size="sm" variant="link" className={HoverLinkCSS}>
-                        <Plus/> Add Screens
-                    </Button>
-                </ScreenSubmitFormPanel>
+                <TheatreScreenSubmitForm presetValues={{theatre: theatreID}}>
+                    <TheatreScreenSubmitFormPanel
+                        isOpen={isOpen}
+                        setIsOpen={setIsOpen}
+                        disableFields={{theatre: true}}
+                        {...panelInfo}
+                    >
+                        <Button size="sm" variant="link" className={HoverLinkCSS}>
+                            <Plus/> Add Screens
+                        </Button>
+                    </TheatreScreenSubmitFormPanel>
+                </TheatreScreenSubmitForm>
             </section>
 
             <section className="grid grid-cols-1 md:grid-cols-2 gap-3">

@@ -11,8 +11,8 @@
 import {FormContextValues} from "@/common/type/context/FormContextValues.ts";
 import {createContext} from "react";
 import {TheatreScreen} from "@/domains/theatre-screens/schema/model";
-import {TheatreScreenFormValues} from "@/domains/theatre-screens/forms/schema/TheatreScreenFormValuesSchema.ts";
-import {TheatreScreenForm} from "@/domains/theatre-screens/forms/schema/TheatreScreenFormSchema.ts";
+import {TheatreScreenFormValues} from "@/domains/theatre-screens/_feat/submit-data/TheatreScreenFormValuesSchema.ts";
+import {TheatreScreenFormData} from "@/domains/theatre-screens/_feat/submit-data/TheatreScreenFormSchema.ts";
 
 /**
  * Context value type for the screen form.
@@ -23,7 +23,7 @@ import {TheatreScreenForm} from "@/domains/theatre-screens/forms/schema/TheatreS
  * - `Screen` — entity representation for edit-by-entity logic
  */
 type ScreenFormContextValues =
-    FormContextValues<TheatreScreenFormValues, TheatreScreenForm, TheatreScreen>;
+    FormContextValues<TheatreScreenFormValues, TheatreScreenFormData, TheatreScreen>;
 
 /**
  * React context containing screen form state and behavior.

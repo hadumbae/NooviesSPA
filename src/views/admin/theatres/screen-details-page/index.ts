@@ -6,6 +6,7 @@ import ScreenDetailsShowingsTab
     from "@/views/admin/theatres/screen-details-page/screen-details-tabs/ScreenDetailsShowingsTab.tsx";
 import ScreenDetailsViewSeatsTab
     from "@/views/admin/theatres/screen-details-page/screen-details-tabs/ScreenDetailsViewSeatsTab.tsx";
+import {TheatreScreenDetailsPageScreenActions} from "@/views/admin/theatres/screen-details-page/screenActions.tsx";
 
 export {
     ScreenDetailsPage,
@@ -13,4 +14,6 @@ export {
     ScreenDetailsCreateSeatTab,
     ScreenDetailsShowingsTab,
     ScreenDetailsViewSeatsTab,
+    TheatreScreenDetailsPageScreenActions,
 }
+

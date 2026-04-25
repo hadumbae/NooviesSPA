@@ -20,7 +20,7 @@ type Props<TSubmit extends FieldValues> = {
     placeholder?: string;
     control: Control<TSubmit>;
     isMulti?: boolean;
-    isDisabled?: boolean;
+    disabled?: boolean;
 };
 
 /**
@@ -29,7 +29,7 @@ type Props<TSubmit extends FieldValues> = {
 export function ScreenTypeHookFormSelect<TSubmit extends FieldValues>(
     props: Props<TSubmit>
 ): ReactElement {
-    const {isDisabled, isMulti = false} = props;
+    const {disabled, isMulti = false} = props;
     const options: ReactSelectOption[] = ScreenTypeConstant.map(
         (screenType): ReactSelectOption => ({
             label: screenType,
@@ -39,7 +39,7 @@ export function ScreenTypeHookFormSelect<TSubmit extends FieldValues>(
 
     return (
         isMulti
-            ? <HookFormMultiSelect<TSubmit> isDisabled={isDisabled} options={options} {...props} />
-            : <HookFormSelect<TSubmit> isDisabled={isDisabled} options={options} {...props} />
+            ? <HookFormMultiSelect<TSubmit> disabled={disabled} options={options} {...props} />
+            : <HookFormSelect<TSubmit> disabled={disabled} options={options} {...props} />
     );
 }

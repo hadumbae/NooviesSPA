@@ -26,7 +26,7 @@ type SelectProps<TSubmit extends FieldValues> = {
     placeholder?: string;
     control: Control<TSubmit>;
     isMulti?: boolean;
-    isDisabled?: boolean;
+    disabled?: boolean;
     filters?: TheatreQueryOptions;
 };
 
@@ -36,7 +36,7 @@ type SelectProps<TSubmit extends FieldValues> = {
 const TheatreHookFormSelect = <TSubmit extends FieldValues>(
     props: SelectProps<TSubmit>
 ) => {
-    const {isDisabled, isMulti = false, filters} = props;
+    const {disabled, isMulti = false, filters} = props;
     const query = useFetchTheatres({schema: TheatreArraySchema, queries: filters});
 
     return (
@@ -47,8 +47,8 @@ const TheatreHookFormSelect = <TSubmit extends FieldValues>(
                 );
 
                 return isMulti
-                    ? <HookFormMultiSelect<TSubmit>{...props} options={options} isDisabled={isDisabled}/>
-                    : <HookFormSelect<TSubmit>{...props} options={options} isDisabled={isDisabled}/>
+                    ? <HookFormMultiSelect<TSubmit>{...props} options={options} disabled={disabled}/>
+                    : <HookFormSelect<TSubmit>{...props} options={options} disabled={disabled}/>
 
             }}
         </QueryDataLoader>

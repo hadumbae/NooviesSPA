@@ -1,88 +1,65 @@
 /**
- * @file useScreenDeleteMutation.ts
- *
- * React Query mutation hook for deleting a single screen.
- * Handles backend deletion, user feedback, optional lifecycle callbacks,
- * and query invalidation to keep UI state in sync.
+ * @fileoverview React Query mutation hook for deleting a theatre screen.
+ * Orchestrates API interaction, cache invalidation, and standardized user feedback.
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import ScreenRepository from "@/domains/theatre-screens/repositories/ScreenRepository.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
-import handleQueryResponse from "@/common/handlers/query/handleQueryResponse.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {ScreenQueryKeys} from "@/domains/theatre-screens/utilities/query/ScreenQueryKeys.ts";
+import {MutationResponseConfig} from "@/common/features/submit-data";
+import {destroy} from "@/domains/theatre-screens/_feat/crud";
+import {TheatreScreenCRUDQueryKeys} from "@/domains/theatre-screens/_feat/crud-hooks/queryKeys.ts";
+import {TheatreScreenCRUDMutationKeys} from "@/domains/theatre-screens/_feat/crud-hooks/mutationKeys.ts";
 
 /**
- * # useScreenDeleteMutation Hook
- *
- * React Query mutation hook for deleting a single `Screen` entity.
- *
- * Responsibilities:
- * - Deletes a screen via **ScreenRepository**
- * - Displays success and error toast notifications
- * - Executes optional success and error callbacks
- * - Invalidates screen list queries to refresh cached data
- *
- * @param params
- * Optional deletion lifecycle configuration.
- *
- * @returns
- * React Query mutation result for deleting a screen by ID.
- *
- * @example
- * ```ts
- * const deleteMutation = useScreenDeleteMutation({
- *   onDeleteSuccess: () => console.log("Screen deleted"),
- * });
- *
- * deleteMutation.mutate({ _id: screenId });
- * ```
+ * Custom hook to handle the deletion of a single Theatre Screen entity.
  */
-export default function useScreenDeleteMutation(
-    params: OnDeleteMutationParams = {}
+export function useScreenDeleteMutation(
+    params: MutationResponseConfig = {}
 ): UseMutationResult<void, unknown, { _id: ObjectId }> {
-    const {onDeleteSuccess, onDeleteError, successMessage, errorMessage} = params;
+    const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
 
     const invalidateQueries = useInvalidateQueryKeys();
 
     /**
-     * Executes the deletion request.
+     * Performs the asynchronous deletion via the CRUD handler.
      */
     const deleteScreen = async ({_id}: { _id: ObjectId }) => {
-        await handleQueryResponse({
-            action: () => ScreenRepository.delete({_id}),
-            errorMessage: "Failed to delete screen data. Please try again.",
-        });
+        await destroy({_id});
     };
 
     /**
-     * Handles a successful deletion.
+     * Post-deletion success handler for cache cleanup and notification.
      */
     const onSuccess = async () => {
+        // Broadly invalidate screen-related lists to ensure data consistency
         invalidateQueries(
-            [ScreenQueryKeys.query(), ScreenQueryKeys.paginated()],
+            [
+                TheatreScreenCRUDQueryKeys.find({}),
+                TheatreScreenCRUDQueryKeys.paginated({}),
+                TheatreScreenCRUDQueryKeys.query({}),
+                TheatreScreenCRUDQueryKeys.queryPaginated({}),
+            ],
             {exact: false},
         );
 
         toast.success(successMessage ?? "Screen deleted.");
-        onDeleteSuccess?.();
+        onSubmitSuccess?.();
     };
 
     /**
-     * Handles deletion errors.
+     * Standardized error handler for mutation failures.
      */
     const onError = (error: unknown) => {
         const displayMessage = errorMessage ?? "Something went wrong. Please try again.";
         handleMutationResponseError({error, displayMessage});
-        onDeleteError?.(error);
+        onSubmitError?.(error);
     };
 
     return useMutation({
-        mutationKey: ["delete_single_screen"],
+        mutationKey: TheatreScreenCRUDMutationKeys.deleteSingle(),
         mutationFn: deleteScreen,
         onSuccess,
         onError,

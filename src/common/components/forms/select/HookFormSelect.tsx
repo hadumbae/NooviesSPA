@@ -57,7 +57,7 @@ export type SelectProps<TSubmit extends FieldValues> = {
     /** React Hook Form control object */
     control: Control<TSubmit>;
     /** Whether the select input is disabled */
-    isDisabled?: boolean;
+    disabled?: boolean;
     /** Array of selectable options */
     options: ReactSelectOption[];
     /** Optional CSS class overrides for the wrapper */
@@ -102,7 +102,7 @@ const HookFormSelect = <TSubmit extends FieldValues>(
         description,
         className,
         control,
-        isDisabled,
+        disabled,
         placeholder = "Select an option.",
         options,
     } = props;
@@ -129,7 +129,7 @@ const HookFormSelect = <TSubmit extends FieldValues>(
                                 value={options.find(o => o.value === field.value) || null}
                                 onChange={val => field.onChange(val ? val.value : null)}
                                 placeholder={placeholder}
-                                isDisabled={isDisabled}
+                                isDisabled={disabled}
                                 classNames={ReactSelectStyleConfig}
                                 unstyled={true}
                             />

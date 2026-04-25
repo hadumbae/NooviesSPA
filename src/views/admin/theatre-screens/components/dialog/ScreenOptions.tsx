@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import useScreenDeleteMutation from "@/domains/theatre-screens/_feat/crud-hooks/useScreenDeleteMutation.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
@@ -7,6 +6,7 @@ import {Ellipsis} from "lucide-react";
 import {Link} from "react-router-dom";
 
 import {TheatreScreen} from "@/domains/theatre-screens/schema/model";
+import {useScreenDeleteMutation} from "@/domains/theatre-screens/_feat/crud-hooks";
 
 interface Props {
     screen: TheatreScreen;
@@ -18,7 +18,7 @@ interface Props {
 
 const ScreenOptions: FC<Props> = ({screen, variant = "default", className = "", onDelete}) => {
     const {_id} = screen;
-    const {mutate, isPending, isSuccess} = useScreenDeleteMutation({onDeleteSuccess: onDelete});
+    const {mutate, isPending, isSuccess} = useScreenDeleteMutation({onSubmitSuccess: onDelete});
 
     const deleteScreen = () => {
         mutate({_id});

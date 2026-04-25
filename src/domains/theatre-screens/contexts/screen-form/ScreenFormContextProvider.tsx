@@ -19,9 +19,9 @@ import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {FormContextValues} from "@/common/type/context/FormContextValues.ts";
 
 import {TheatreScreen} from "@/domains/theatre-screens/schema/model";
-import {TheatreScreenForm, TheatreScreenFormValues} from "@/domains/theatre-screens/forms";
+import {TheatreScreenFormData, TheatreScreenFormValues} from "@/domains/theatre-screens/_feat/submit-data";
 
-type ProviderType = FormOptions<TheatreScreenFormValues, TheatreScreenForm, TheatreScreen> & {
+type ProviderType = FormOptions<TheatreScreenFormValues, TheatreScreenFormData, TheatreScreen> & {
     children: ReactNode;
 };
 
@@ -51,7 +51,7 @@ const ScreenFormContextProvider = (props: ProviderType) => {
     const [currentValues, setCurrentValues] = useState<TheatreScreenFormValues | undefined>(undefined);
 
     // --- Aggregated Context Value ---
-    const values: FormContextValues<TheatreScreenFormValues, TheatreScreenForm, TheatreScreen> = useMemo(
+    const values: FormContextValues<TheatreScreenFormValues, TheatreScreenFormData, TheatreScreen> = useMemo(
         () => ({
             initialValues,
             setInitialValues,

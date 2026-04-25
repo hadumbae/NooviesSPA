@@ -1,11 +1,10 @@
 /**
- * @file Zod validation schema and type definitions for initializing Theatre Screen form states.
- * @filename TheatreScreenFormValuesSchema.ts
+ * @fileoverview Zod validation schema and type definitions for initializing Theatre Screen form states.
  */
 
 import {z} from "zod";
 import generateFormValueSchema from "@/common/utility/schemas/generateFormValueSchema.ts";
-import {TheatreScreenFormSchema} from "@/domains/theatre-screens/forms";
+import {TheatreScreenFormSchema} from "@/domains/theatre-screens/_feat/submit-data/TheatreScreenFormSchema.ts";
 
 /**
  * Zod schema representing the raw, potentially incomplete state of a Theatre Screen form.
