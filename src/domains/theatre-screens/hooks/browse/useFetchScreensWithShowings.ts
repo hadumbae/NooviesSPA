@@ -3,7 +3,7 @@ import { FetchQueryOptions } from "@/common/type/query/FetchQueryOptions.ts";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { DateOnlyString } from "@/common/schema/dates/DateOnlyStringSchema.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import { ScreenBrowseRepository } from "@/domains/theatre-screens/repositories/screen-browse/ScreenBrowseRepository.ts";
+import { ScreenBrowseRepository } from "@/domains/theatre-screens/_feat/client-view-data/screen-browse/ScreenBrowseRepository.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";

@@ -3,7 +3,6 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {ScreenQueryOptions} from "@/domains/theatre-screens/schema/queries/ScreenQueryOptions.types.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
@@ -13,12 +12,13 @@ import {TheatreScreenCRUDQueryKeys} from "@/domains/theatre-screens/_feat/crud-h
 import {ZodType, ZodTypeDef} from "zod";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";
 import {paginated} from "@/domains/theatre-screens/_feat/crud";
+import {TheatreScreenQueryOptions} from "@/domains/theatre-screens/schema/queries/TheatreScreenQueryOptionsSchema.ts";
 
 /** Parameters for the useFetchPaginatedScreens hook. */
 export type FetchParams<TData = unknown> = {
     schema: ZodType<TData, ZodTypeDef, unknown>;
     pagination: PaginationValues;
-    queries?: ScreenQueryOptions;
+    queries?: TheatreScreenQueryOptions;
     config?: RequestOptions;
     options?: FetchQueryOptions<TData>;
 };

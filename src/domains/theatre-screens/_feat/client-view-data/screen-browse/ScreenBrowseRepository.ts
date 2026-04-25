@@ -1,7 +1,7 @@
 import {
     FetchScreensWithShowingsParams,
     ScreenBrowseMethods,
-} from "@/domains/theatre-screens/repositories/screen-browse/ScreenBrowseRepository.types.ts";
+} from "@/domains/theatre-screens/_feat/client-view-data/screen-browse/ScreenBrowseRepository.types.ts";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";

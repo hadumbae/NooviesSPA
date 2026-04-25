@@ -2,9 +2,9 @@ import ICloudinaryImage from "@/common/interfaces/ICloudinaryImage.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ISO6391LanguageCode} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
 import {ISO3166Alpha2CountryCode} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import IShowing from "@/domains/showings/interfaces/IShowing.ts";
 
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {Showing} from "@/domains/showings/schema/showing/ShowingSchema.ts";
 
 /**
  * Represents a movie object with optional population of genres and showings.
@@ -100,5 +100,5 @@ export default interface IMovie {
      * @remarks
      * May contain either `ObjectId` references or fully populated `IShowing` objects.
      */
-    showings: (ObjectId | IShowing)[];
+    showings: (ObjectId | Showing)[];
 }

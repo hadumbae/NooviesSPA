@@ -3,7 +3,6 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {ScreenQueryOptions} from "@/domains/theatre-screens/schema/queries/ScreenQueryOptions.types.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
@@ -12,11 +11,12 @@ import {find} from "@/domains/theatre-screens/_feat/crud";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";
 import {ZodType, ZodTypeDef} from "zod";
 import {TheatreScreenCRUDQueryKeys} from "@/domains/theatre-screens/_feat/crud-hooks/queryKeys.ts";
+import {TheatreScreenQueryOptions} from "@/domains/theatre-screens/schema/queries/TheatreScreenQueryOptionsSchema.ts";
 
 /** Parameters for the useFetchScreens hook. */
 type FetchParams<TData = unknown> = {
     schema: ZodType<TData, ZodTypeDef, unknown>;
-    queries?: ScreenQueryOptions;
+    queries?: TheatreScreenQueryOptions;
     config?: RequestOptions;
     options?: FetchQueryOptions<TData>;
 };
