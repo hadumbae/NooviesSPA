@@ -1,7 +1,7 @@
 import {PageLoader} from "@/views/common/_comp/page";
 import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {SeatDetailsArray} from "@/domains/seats/schema/seat/SeatRelated.types.ts";
-import ScreenDetailsPageContent from "@/views/admin/theatres/screen-details-page/ScreenDetailsPageContent.tsx";
+import TheatreScreenDetailsPageContent from "@/views/admin/theatres/theatre-screen-details-page/content.tsx";
 import {ReactElement} from "react";
 import ScreenDetailsUIContextProvider
     from "@/domains/theatre-screens/contexts/screen-details/ScreenDetailsUIContextProvider.tsx";
@@ -34,12 +34,12 @@ type QueryData = {
  * @component
  * @returns A JSX element rendering the full screen details page.
  */
-const ScreenDetailsPage = (): ReactElement => {
+const TheatreScreenDetailsPage = (): ReactElement => {
     const routeParams = useFetchByIdentifierRouteParams({
         schema: ScreenDetailsRouteParamSchema,
         errorTo: "admin/theatres",
         errorMessage: "Failed to parse theatre and screen route parameters.",
-        sourceComponent: ScreenDetailsPage.name,
+        sourceComponent: TheatreScreenDetailsPage.name,
     });
 
     if (!routeParams) {
@@ -56,7 +56,7 @@ const ScreenDetailsPage = (): ReactElement => {
 
                 return (
                     <ScreenDetailsUIContextProvider>
-                        <ScreenDetailsPageContent
+                        <TheatreScreenDetailsPageContent
                             theatre={theatre}
                             screen={screen}
                             seats={seats}
@@ -68,4 +68,4 @@ const ScreenDetailsPage = (): ReactElement => {
     );
 };
 
-export default ScreenDetailsPage;
+export default TheatreScreenDetailsPage;

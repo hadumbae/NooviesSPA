@@ -15,7 +15,7 @@ import ShowingSummaryListQuery
     from "@/domains/showings/components/features/showing-summary-list-query/ShowingSummaryListQuery.tsx";
 
 /**
- * Props for {@link ScreenDetailsShowingsTab}.
+ * Props for {@link TheatreScreenDetailsShowingsTab}.
  */
 type TabProps = {
     /** Screen identifier used to scope showings. */
@@ -30,7 +30,7 @@ type TabProps = {
  *
  * @param props Component props.
  */
-const ScreenDetailsShowingsTab = ({screenID}: TabProps) => {
+const TheatreScreenDetailsShowingsTab = ({screenID}: TabProps) => {
     const showingIndexURL = `/admin/showings?screen=${screenID}`;
 
     return (
@@ -53,4 +53,4 @@ const ScreenDetailsShowingsTab = ({screenID}: TabProps) => {
     );
 };
 
-export default ScreenDetailsShowingsTab;
+export default TheatreScreenDetailsShowingsTab;

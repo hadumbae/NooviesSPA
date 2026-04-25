@@ -43,7 +43,7 @@ import {ReactElement} from "react";
  * <ScreenDetailsCreateSeatTab />
  * ```
  */
-const ScreenDetailsCreateSeatTab = (): ReactElement => {
+const TheatreScreenDetailsCreateSeatTab = (): ReactElement => {
     const {returnedSeats} = useRequiredContext({
         context: SeatFormContext,
         message: "Must use within a provider for `SeatFormContext`.",
@@ -72,4 +72,4 @@ const ScreenDetailsCreateSeatTab = (): ReactElement => {
     );
 };
 
-export default ScreenDetailsCreateSeatTab;
+export default TheatreScreenDetailsCreateSeatTab;

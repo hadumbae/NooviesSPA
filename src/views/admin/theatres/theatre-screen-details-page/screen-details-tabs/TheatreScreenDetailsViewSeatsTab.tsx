@@ -64,7 +64,7 @@ type TabProps = {
  * </SeatDetailsPanelContextProvider>
  * ```
  */
-const ScreenDetailsViewSeatsTab = (props: TabProps): ReactElement => {
+const TheatreScreenDetailsViewSeatsTab = (props: TabProps): ReactElement => {
     // --- Props ---
     const {seats} = props;
 
@@ -110,4 +110,4 @@ const ScreenDetailsViewSeatsTab = (props: TabProps): ReactElement => {
     );
 };
 
-export default ScreenDetailsViewSeatsTab;
+export default TheatreScreenDetailsViewSeatsTab;

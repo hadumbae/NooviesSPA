@@ -18,26 +18,26 @@ import TheatreScreenDetailsHeader
 import {Tabs, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import SeatDetailsPanelContextProvider
     from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContextProvider.tsx";
-import ScreenDetailsViewSeatsTab
-    from "@/views/admin/theatres/screen-details-page/screen-details-tabs/ScreenDetailsViewSeatsTab.tsx";
+import TheatreScreenDetailsViewSeatsTab
+    from "@/views/admin/theatres/theatre-screen-details-page/screen-details-tabs/TheatreScreenDetailsViewSeatsTab.tsx";
 import SeatFormContextProvider
     from "@/domains/seats/context/form/SeatFormContextProvider.tsx";
 import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {SeatDetailsArray} from "@/domains/seats/schema/seat/SeatRelated.types.ts";
-import ScreenDetailsCreateSeatTab
-    from "@/views/admin/theatres/screen-details-page/screen-details-tabs/ScreenDetailsCreateSeatTab.tsx";
-import ScreenDetailsShowingsTab
-    from "@/views/admin/theatres/screen-details-page/screen-details-tabs/ScreenDetailsShowingsTab.tsx";
+import TheatreScreenDetailsCreateSeatTab
+    from "@/views/admin/theatres/theatre-screen-details-page/screen-details-tabs/TheatreScreenDetailsCreateSeatTab.tsx";
+import TheatreScreenDetailsShowingsTab
+    from "@/views/admin/theatres/theatre-screen-details-page/screen-details-tabs/TheatreScreenDetailsShowingsTab.tsx";
 import useScreenDetailsPageValues
     from "@/domains/theatre-screens/hooks/page/screen-details/useScreenDetailsPageValues.ts";
 import {ScreenDetailsActiveTab}
     from "@/domains/theatre-screens/schema/params/ScreenDetailsActiveTabEnumSchema.ts";
 import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {TheatreScreenDetailsPageScreenActions} from "@/views/admin/theatres/screen-details-page/screenActions.tsx";
+import {TheatreScreenDetailsPageScreenActions} from "@/views/admin/theatres/theatre-screen-details-page/screenActions.tsx";
 
 /**
- * Props for {@link ScreenDetailsPageContent}.
+ * Props for {@link TheatreScreenDetailsPageContent}.
  */
 type ContentProps = {
     theatre: TheatreDetails;
@@ -58,7 +58,7 @@ type ContentProps = {
  *
  * @component
  */
-const ScreenDetailsPageContent = (
+const TheatreScreenDetailsPageContent = (
     {theatre, screen, seats}: ContentProps
 ) => {
     const {_id: screenID, name: screenName} = screen;
@@ -114,14 +114,14 @@ const ScreenDetailsPageContent = (
                 </div>
 
                 <SeatDetailsPanelContextProvider>
-                    <ScreenDetailsViewSeatsTab seats={seats}/>
+                    <TheatreScreenDetailsViewSeatsTab seats={seats}/>
                 </SeatDetailsPanelContextProvider>
 
                 <SeatFormContextProvider presetValues={presetValues} disableFields={disableFields}>
-                    <ScreenDetailsCreateSeatTab/>
+                    <TheatreScreenDetailsCreateSeatTab/>
                 </SeatFormContextProvider>
 
-                <ScreenDetailsShowingsTab screenID={screenID}/>
+                <TheatreScreenDetailsShowingsTab screenID={screenID}/>
             </Tabs>
 
             <TheatreScreenDetailsPageScreenActions
@@ -133,4 +133,4 @@ const ScreenDetailsPageContent = (
     );
 };
 
-export default ScreenDetailsPageContent;
+export default TheatreScreenDetailsPageContent;

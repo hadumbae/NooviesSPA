@@ -7,7 +7,7 @@ import { TheatreIndexPage } from "@/views/admin/theatres/index-page";
 import { TheatreDetailsPage } from "@/views/admin/theatres/theatre-details-page";
 import { TheatreShowingCreatePage } from "@/views/admin/theatres/theatre-showings-create";
 import { TheatreShowingListPage } from "@/views/admin/theatres/theatre-showings-list";
-import { ScreenDetailsPage } from "@/views/admin/theatres/screen-details-page";
+import {TheatreScreenDetailsPage} from "@/views/admin/theatres/theatre-screen-details-page";
 
 /**
  * Defines the routing hierarchy for theatre management.
@@ -45,7 +45,7 @@ export default [
             /** Detailed management view for a specific screen within a theatre. */
             {
                 path: "/admin/theatres/get/:theatreSlug/screen/:screenSlug",
-                element: <ScreenDetailsPage />,
+                element: <TheatreScreenDetailsPage />,
             },
         ],
     },
