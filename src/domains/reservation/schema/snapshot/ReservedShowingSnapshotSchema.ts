@@ -6,7 +6,7 @@
 import {z} from "zod";
 import {MovieSnapshotSchema} from "@/domains/movies/schema/snapshot/MovieSnapshotSchema.ts";
 import {TheatreSnapshotSchema} from "@/domains/theatres/schema/model/snapshot/TheatreSnapshotSchema.ts";
-import {ScreenSnapshotSchema} from "@/domains/theatre-screens/schema/snapshot/ScreenSnapshotSchema.ts";
+import {TheatreScreenSnapshotSchema} from "@/domains/theatre-screens/schema/snapshot/TheatreScreenSnapshotSchema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {ReservedSeatSnapshotSchema} from "@/domains/reservation/schema/snapshot/ReservedSeatSnapshotSchema.ts";
 import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
@@ -25,7 +25,7 @@ export const ReservedShowingSnapshotSchema = z.object({
     theatre: TheatreSnapshotSchema,
 
     /** Point-in-time details of the specific auditorium/screen. */
-    screen: ScreenSnapshotSchema,
+    screen: TheatreScreenSnapshotSchema,
 
     /** List of specific seats allocated to this reservation. */
     selectedSeats: generateArraySchema(ReservedSeatSnapshotSchema),
