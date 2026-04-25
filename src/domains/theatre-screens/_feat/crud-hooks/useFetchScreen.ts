@@ -1,73 +1,39 @@
 /**
- * @file useFetchScreen.ts
- *
- * React Query hook for fetching a single screen by ID.
- * Provides a standardized, typed interface with consistent
- * error handling and shared React Query defaults.
+ * @fileoverview React Query hook for fetching a single theatre screen by its unique identifier.
  */
 
-import ScreenRepository from "@/domains/theatre-screens/repositories/ScreenRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {ZodType, ZodTypeDef} from "zod";
+import {findByID} from "@/domains/theatre-screens/_feat/crud";
+import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {TheatreScreenCRUDQueryKeys} from "@/domains/theatre-screens/_feat/crud-hooks/queryKeys.ts";
 
-/**
- * Parameters for {@link useFetchScreen}.
- */
-type FetchParams = {
-    /**
-     * Screen identifier.
-     */
+/** Parameters for the useFetchScreen hook. */
+type FetchParams<TData = unknown> = {
+    schema: ZodType<TData, ZodTypeDef, unknown>;
     _id: ObjectId;
-
-    /**
-     * Request-level configuration (excluding pagination limit).
-     */
     config?: Omit<RequestOptions, "limit">;
-
-    /**
-     * React Query configuration overrides.
-     */
-    options?: FetchQueryOptions<unknown>;
+    options?: FetchQueryOptions<TData>;
 };
 
 /**
- * # useFetchScreen Hook
- *
- * Fetches a single screen by its unique identifier.
- *
- * Integrates:
- * - **ScreenRepository** for API access
- * - **useQueryFnHandler** for consistent error handling
- * - **useQueryOptionDefaults** for shared React Query defaults
- *
- * @param params
- * Screen ID, request configuration, and React Query options.
- *
- * @returns
- * React Query result containing screen data or an {@link HttpResponseError}.
- *
- * @example
- * ```ts
- * const { data, isLoading } = useFetchScreen({
- *   _id: screenId,
- * });
- * ```
+ * Fetches and validates a single theatre screen record by ID.
  */
-export default function useFetchScreen(
-    {_id, config, options}: FetchParams
-): UseQueryResult<unknown, HttpResponseError> {
-    const fetchScreen = useQueryFnHandler({
-        action: () => ScreenRepository.get({_id, config}),
-        errorMessage: "Failed to fetch screen data. Please try again.",
+export function useFetchScreen<TData = unknown>(
+    {schema, _id, config, options}: FetchParams<TData>
+): UseQueryResult<TData, HttpResponseError> {
+    const fetchScreen = buildQueryFn<TData>({
+        action: () => findByID({_id, config}),
+        schema,
     });
 
     return useQuery({
-        queryKey: ["screens", "_id", {_id, ...config}],
+        queryKey: TheatreScreenCRUDQueryKeys._id({_id, ...config}),
         queryFn: fetchScreen,
         ...useQueryOptionDefaults(options),
     });

@@ -1,77 +1,41 @@
 /**
- * @file useFetchPaginatedScreens.ts
- *
- * React Query hook for fetching paginated screens.
- * Supports pagination, query-based filtering, request configuration,
- * and shared React Query defaults with standardized error handling.
+ * @fileoverview React Query hook for fetching paginated theatre screen data.
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import ScreenRepository from "@/domains/theatre-screens/repositories/ScreenRepository.ts";
 import {ScreenQueryOptions} from "@/domains/theatre-screens/schema/queries/ScreenQueryOptions.types.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {TheatreScreenCRUDQueryKeys} from "@/domains/theatre-screens/_feat/crud-hooks/queryKeys.ts";
+import {ZodType, ZodTypeDef} from "zod";
+import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {paginated} from "@/domains/theatre-screens/_feat/crud";
 
-/**
- * Parameters for {@link useFetchPaginatedScreens}.
- */
-export type FetchParams = PaginationValues & {
-    /**
-     * Screen query filters.
-     */
+/** Parameters for the useFetchPaginatedScreens hook. */
+export type FetchParams<TData = unknown> = {
+    schema: ZodType<TData, ZodTypeDef, unknown>;
+    pagination: PaginationValues;
     queries?: ScreenQueryOptions;
-
-    /**
-     * Request-level configuration.
-     */
     config?: RequestOptions;
-
-    /**
-     * React Query configuration overrides.
-     */
-    options?: FetchQueryOptions<unknown>;
+    options?: FetchQueryOptions<TData>;
 };
 
 /**
- * # useFetchPaginatedScreens Hook
- *
- * Fetches paginated screen data using React Query.
- *
- * Integrates:
- * - **ScreenRepository** for API access
- * - **useQueryFnHandler** for consistent error handling
- * - **useQueryOptionDefaults** for shared query defaults
- *
- * @param params
- * Pagination values, query filters, request configuration,
- * and React Query options.
- *
- * @returns
- * React Query result containing screen data or an {@link HttpResponseError}.
- *
- * @example
- * ```ts
- * const { data, isLoading } = useFetchPaginatedScreens({
- *   page: 1,
- *   perPage: 10,
- *   queries: { theatre: theatreId },
- * });
- * ```
+ * Fetches and validates a paginated list of theatre screens.
  */
-export default function useFetchPaginatedScreens(
-    {page, perPage, queries, config, options}: FetchParams
-): UseQueryResult<unknown, HttpResponseError> {
-    const fetchScreens = useQueryFnHandler({
-        action: () => ScreenRepository.paginated({page, perPage, queries, config}),
-        errorMessage: "Failed to fetch screen data. Please try again.",
+export function useFetchPaginatedScreens<TData = unknown>(
+    {schema, pagination, queries, config, options}: FetchParams<TData>
+): UseQueryResult<TData, HttpResponseError> {
+    const fetchScreens = buildQueryFn<TData>({
+        action: () => paginated({pagination, queries, config}),
+        schema,
     });
 
     return useQuery({
-        queryKey: ["screens", "lists", "paginated", {page, perPage, ...queries, ...config}],
+        queryKey: TheatreScreenCRUDQueryKeys.paginated({...pagination, ...queries, ...config}),
         queryFn: fetchScreens,
         ...useQueryOptionDefaults(options),
     });
