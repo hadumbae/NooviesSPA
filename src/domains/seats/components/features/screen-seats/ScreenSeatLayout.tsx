@@ -1,55 +1,25 @@
 /**
- * @file ScreenSeatLayout
- * @description
- * Renders a grid of theatre seats with left and right row labels using Tailwind CSS.
- *
- * Uses `organiseScreenSeatMap` to group and sort seats by row (Y-axis), and
- * `ScreenSeatLayoutElement` to render each seat or label.
+ * @fileoverview Renders a structured grid of theatre seats with axis labels.
  */
 
 import { memo, ReactElement, useMemo } from "react";
 import organiseSeatsForLayout from "@/domains/seats/hooks/features/admin/screen-seat-layout/organiseSeatsForLayout.ts";
 import ScreenSeatLayoutElement from "@/domains/seats/components/features/screen-seats/ScreenSeatLayoutElement.tsx";
-import { SeatDetails } from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import keyForSeatElement from "@/domains/seats/utilities/screen-seats/keyForSeatElement.ts";
+import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 
-/**
- * Props for {@link ScreenSeatLayout}.
- *
- * @property seats Array of {@link SeatDetails} representing all seats in a screen.
- * Seats must include `x`, `y`, and `layoutType`.
- */
+/** Props for the ScreenSeatLayout component. */
 type GridProps = {
-    seats: SeatDetails[];
+    seats: Seat[];
 };
 
 /**
- * `ScreenSeatLayout`
- *
- * @component
- * Renders a seat layout grid with left and right axis labels per row.
- *
- * @remarks
- * - Columns are dynamic based on the maximum X-coordinate (`maxX`).
- * - Each row renders:
- *   1. Left label (`y`)
- *   2. Seat elements
- *   3. Right label (`y`)
- *
- * @example
- * ```tsx
- * <ScreenSeatLayout seats={seatDetailsList} />
- * ```
- *
- * @param seats List of seat detail objects.
- * @returns Grid of rows representing the theatre screen.
+ * Displays a dynamic seating map organized by row and column coordinates.
  */
 const ScreenSeatLayout = ({ seats }: GridProps): ReactElement => {
-    // ⚡ Group and sort seats ⚡
     const { sortedSeats, maxX } = organiseSeatsForLayout({ seats });
     const seatEntries = useMemo(() => Array.from(sortedSeats), [sortedSeats]);
 
-    // ⚡ Grid style ⚡
     const gridStyle = useMemo(
         () => ({
             display: "grid",
@@ -59,7 +29,6 @@ const ScreenSeatLayout = ({ seats }: GridProps): ReactElement => {
         [maxX]
     );
 
-    // ⚡ Render grid ⚡
     return (
         <div className="space-y-2">
             {seatEntries.map(([y, rowSeats]) => (

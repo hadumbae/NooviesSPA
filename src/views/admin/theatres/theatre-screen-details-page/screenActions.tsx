@@ -5,13 +5,13 @@
 
 import {ReactElement} from "react";
 import {TheatreScreenSubmitForm, TheatreScreenSubmitFormPanel} from "@/views/admin/theatre-screens/_feat/submit-data";
-import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenDetails, TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
 import {useLocation} from "react-router-dom";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useNavigateToTheatre from "@/domains/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ScreenDetailsUIContext} from "@/domains/theatre-screens/contexts/screen-details/ScreenDetailsUIContext.ts";
-import simplifyScreenDetails from "@/domains/theatre-screens/utilities/simplifyScreenDetails.ts";
+import {simplifyScreenDetails} from "@/domains/theatre-screens/utilities/simplifyScreenDetails.ts";
 import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {ScreenDeleteWarningDialog} from "@/views/admin/theatre-screens/components/dialog/ScreenDeleteWarningDialog.tsx";
 
@@ -21,7 +21,7 @@ import {ScreenDeleteWarningDialog} from "@/views/admin/theatre-screens/component
 type ActionProps = {
     className?: string;
     theatre: TheatreDetails;
-    screen: TheatreScreenDetails;
+    screen: TheatreScreenWithVirtuals;
 };
 
 /**

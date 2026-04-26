@@ -1,7 +1,7 @@
 import {
-    ScreenDetailsSearchParams,
-    ScreenDetailsSearchParamSchema
-} from "@/domains/theatre-screens/schema/params/ScreenDetailsSearchParamSchema.ts";
+    TheatreScreenDetailsSearchParams,
+    TheatreScreenDetailsSearchParamSchema
+} from "@/domains/theatre-screens/schema/params/TheatreScreenDetailsSearchParamSchema.ts";
 import {useSearchParams} from "react-router-dom";
 import parseSearchParams from "@/common/features/fetch-search-params/parseSearchParams.ts";
 import updateSearchParamValue from "@/common/features/fetch-search-params/updateSearchParamValue.ts";
@@ -15,7 +15,7 @@ type FetchSearchParams = {
 }
 
 type ParamReturns = {
-    searchParams: ScreenDetailsSearchParams;
+    searchParams: TheatreScreenDetailsSearchParams;
     setSearchParams: () => void;
     setActiveTab: (value: string | number) => void;
     setSeatPage: (value: string | number) => void;
@@ -28,7 +28,7 @@ export default function useTheatreScreenSearchParams(defaultValues?: FetchSearch
     const [searchParams, setSearchParams] = useSearchParams(defaultValues);
 
     const rawData = Object.fromEntries(searchParams.entries());
-    const parsedSearchParams = parseSearchParams({schema: ScreenDetailsSearchParamSchema, paramStrings: rawData});
+    const parsedSearchParams = parseSearchParams({schema: TheatreScreenDetailsSearchParamSchema, paramStrings: rawData});
 
     const setActiveTab = (value: string | number) => updateSearchParamValue({
         key: "activeTab", value, searchParams, setSearchParams

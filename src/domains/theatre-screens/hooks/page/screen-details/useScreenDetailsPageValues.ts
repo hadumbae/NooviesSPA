@@ -17,16 +17,17 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {SeatForm} from "@/domains/seats/schema/form/SeatForm.types.ts";
 import {SeatFormValues} from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
 
-import {ScreenDetailsActiveTab} from "@/domains/theatre-screens/schema/params/ScreenDetailsActiveTabEnumSchema.ts";
 import {
     ScreenDetailsUIContext,
     ScreenDetailsUIContextValues
 } from "@/domains/theatre-screens/contexts/screen-details/ScreenDetailsUIContext.ts";
-import {
-    ScreenDetailsSearchParams,
-    ScreenDetailsSearchParamSchema
-} from "@/domains/theatre-screens/schema/params/ScreenDetailsSearchParamSchema.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {
+    TheatreScreenDetailsActiveTab
+} from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsActiveTabEnumSchema.ts";
+import {
+    TheatreScreenDetailsSearchParams, TheatreScreenDetailsSearchParamSchema
+} from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsSearchParamSchema.ts";
 
 /**
  * Required identifiers for initializing screen-scoped state.
@@ -44,10 +45,10 @@ type ValueParams = {
  */
 type TabConfig = {
     /** Currently active tab */
-    activeTab: ScreenDetailsActiveTab | undefined;
+    activeTab: TheatreScreenDetailsActiveTab | undefined;
 
     /** Updates active tab via search params */
-    setActiveTab: (tab: ScreenDetailsActiveTab) => void;
+    setActiveTab: (tab: TheatreScreenDetailsActiveTab) => void;
 };
 
 /**
@@ -58,7 +59,7 @@ type ValueReturns = {
     tabConfig: TabConfig;
 
     /** Parsed and validated search params */
-    searchParams: ScreenDetailsSearchParams;
+    searchParams: TheatreScreenDetailsSearchParams;
 
     /** Required screen details UI context */
     context: ScreenDetailsUIContextValues;
@@ -84,11 +85,11 @@ export default function useScreenDetailsPageValues(
     {screenID, theatreID}: ValueParams
 ): ValueReturns {
     const {searchParams, setSearchParams} = useParsedSearchParams({
-        schema: ScreenDetailsSearchParamSchema
+        schema: TheatreScreenDetailsSearchParamSchema
     });
 
     const {activeTab} = searchParams;
-    const setActiveTab = (tab: ScreenDetailsActiveTab) =>
+    const setActiveTab = (tab: TheatreScreenDetailsActiveTab) =>
         setSearchParams({...searchParams, activeTab: tab});
 
     const context = useRequiredContext({context: ScreenDetailsUIContext});

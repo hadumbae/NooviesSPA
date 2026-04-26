@@ -9,7 +9,7 @@ import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {Pencil, Search, Trash} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ScreenDeleteWarningDialog} from "@/views/admin/theatre-screens/components/dialog/ScreenDeleteWarningDialog.tsx";
-import simplifyScreenDetails from "@/domains/theatre-screens/utilities/simplifyScreenDetails.ts";
+import {simplifyScreenDetails} from "@/domains/theatre-screens/utilities/simplifyScreenDetails.ts";
 import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
 import {TheatreScreenSubmitForm, TheatreScreenSubmitFormPanel} from "@/views/admin/theatre-screens/_feat/submit-data";
 

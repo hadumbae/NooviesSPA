@@ -1,17 +1,5 @@
 /**
- * @file ScreenDetailsViewSeatsTab
- * @description
- * Tab content for the **Screen Details Page**, responsible for rendering the
- * interactive seat layout of a theatre screen and—when applicable—the seat
- * details sidebar.
- *
- * The component displays:
- * - A scrollable seat layout grid for the selected screen.
- * - A contextual seat details panel when a seat is selected via
- *   {@link SeatDetailsPanelContext}.
- *
- * This tab is part of the `ScreenDetailsPage` and is one of the selectable
- * tabs within its `<Tabs />` structure.
+ * @fileoverview Tab content for rendering and managing a theatre screen's interactive seat layout.
  */
 
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
@@ -21,62 +9,27 @@ import ScreenSeatLayout from "@/domains/seats/components/features/screen-seats/S
 import SeatDetailsContextPanel from "@/domains/seats/components/features/seat-details/SeatDetailsContextPanel.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatDetailsPanelContext} from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
-import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import {ReactElement} from "react";
 import {cn} from "@/common/lib/utils.ts";
 import {CardCSS, RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
+import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 
+/** Props for the TheatreScreenDetailsViewSeatsTab component. */
 type TabProps = {
-    /**
-     * All seat and structural layout elements for the selected screen.
-     * Provided by the parent Screen Details Page.
-     */
-    seats: SeatDetails[];
+    seats: Seat[];
 };
 
 /**
- * Seats Tab inside the **Screen Details Page**.
- *
- * This component renders the seat layout for a theatre screen and conditionally
- * displays a seat details sidebar when a seat is selected.
- *
- * Context:
- * - Requires {@link SeatDetailsPanelContext}. An error is thrown if the component
- *   is used outside of the provider.
- * - Renders `<SeatDetailsContextPanel />` only when `context.seat` exists.
- *
- * Layout:
- * - Scrollable seat grid rendered via {@link ScreenSeatLayout}
- * - Optional contextual sidebar for the selected seat
- *
- * @param props.seats - The seat list belonging to the screen displayed on the page.
- *
- * @returns {ReactElement}
- * A `<TabsContent>` element showing the seat layout tab for the screen details page.
- *
- * @example
- * ```tsx
- * <SeatDetailsPanelContextProvider>
- *   <Tabs defaultValue="view-seats">
- *     <ScreenDetailsViewSeatsTab seats={screen.seats} />
- *   </Tabs>
- * </SeatDetailsPanelContextProvider>
- * ```
+ * Renders the seat grid layout and provides access to the seat details sidebar.
+ * Requires SeatDetailsPanelContext for managing seat selection and panel visibility.
  */
-const TheatreScreenDetailsViewSeatsTab = (props: TabProps): ReactElement => {
-    // --- Props ---
-    const {seats} = props;
+export function TheatreScreenDetailsViewSeatsTab(
+    {seats}: TabProps
+): ReactElement {
+    const {seat} = useRequiredContext({context: SeatDetailsPanelContext});
 
-    // --- Access Selected Seat from Context ---
-    const {seat} = useRequiredContext({
-        context: SeatDetailsPanelContext,
-        message: "Must be used within provider for `SeatDetailsPanelContext`."
-    });
-
-    // --- Has Seats? ---
-
-    const hasSeatsSection = (
+    const contentSection = seats.length > 0 ? (
         <section className="space-y-2">
             <SectionHeader>Seat Layout</SectionHeader>
 
@@ -85,9 +38,7 @@ const TheatreScreenDetailsViewSeatsTab = (props: TabProps): ReactElement => {
                 <ScrollBar orientation="horizontal"/>
             </ScrollArea>
         </section>
-    );
-
-    const noSeatsSection = (
+    ) : (
         <section className={RoundedBorderCSS}>
             <div className="flex justify-center items-center h-56">
                 <span className={cn(SecondaryTextBaseCSS, "select-none capitalize")}>
@@ -97,17 +48,10 @@ const TheatreScreenDetailsViewSeatsTab = (props: TabProps): ReactElement => {
         </section>
     );
 
-    const contentSection = seats.length > 0
-        ? hasSeatsSection
-        : noSeatsSection;
-
-    // --- Render ---
     return (
         <TabsContent value="view-seats">
             {contentSection}
             {seat && <SeatDetailsContextPanel/>}
         </TabsContent>
     );
-};
-
-export default TheatreScreenDetailsViewSeatsTab;
+}

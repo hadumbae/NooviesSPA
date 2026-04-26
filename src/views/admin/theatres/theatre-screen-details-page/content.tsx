@@ -18,31 +18,35 @@ import TheatreScreenDetailsHeader
 import {Tabs, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import SeatDetailsPanelContextProvider
     from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContextProvider.tsx";
-import TheatreScreenDetailsViewSeatsTab
+import {TheatreScreenDetailsViewSeatsTab}
     from "@/views/admin/theatres/theatre-screen-details-page/screen-details-tabs/TheatreScreenDetailsViewSeatsTab.tsx";
 import SeatFormContextProvider
     from "@/domains/seats/context/form/SeatFormContextProvider.tsx";
 import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
-import {SeatDetailsArray} from "@/domains/seats/schema/seat/SeatRelated.types.ts";
 import TheatreScreenDetailsCreateSeatTab
     from "@/views/admin/theatres/theatre-screen-details-page/screen-details-tabs/TheatreScreenDetailsCreateSeatTab.tsx";
 import TheatreScreenDetailsShowingsTab
     from "@/views/admin/theatres/theatre-screen-details-page/screen-details-tabs/TheatreScreenDetailsShowingsTab.tsx";
 import useScreenDetailsPageValues
     from "@/domains/theatre-screens/hooks/page/screen-details/useScreenDetailsPageValues.ts";
-import {ScreenDetailsActiveTab}
-    from "@/domains/theatre-screens/schema/params/ScreenDetailsActiveTabEnumSchema.ts";
-import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {TheatreScreenDetailsPageScreenActions} from "@/views/admin/theatres/theatre-screen-details-page/screenActions.tsx";
+import {
+    TheatreScreenDetailsPageScreenActions
+} from "@/views/admin/theatres/theatre-screen-details-page/screenActions.tsx";
+import {
+    TheatreScreenDetailsActiveTab
+} from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsActiveTabEnumSchema.ts";
+import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
+import {ReactElement} from "react";
 
 /**
  * Props for {@link TheatreScreenDetailsPageContent}.
  */
 type ContentProps = {
     theatre: TheatreDetails;
-    screen: TheatreScreenDetails;
-    seats: SeatDetailsArray;
+    screen: TheatreScreenWithVirtuals;
+    seats: Seat[];
 };
 
 /**
@@ -58,9 +62,9 @@ type ContentProps = {
  *
  * @component
  */
-const TheatreScreenDetailsPageContent = (
+export function TheatreScreenDetailsPageContent(
     {theatre, screen, seats}: ContentProps
-) => {
+): ReactElement {
     const {_id: screenID, name: screenName} = screen;
     const {_id: theatreID, name: theatreName, slug: theatreSlug,} = theatre;
 
@@ -96,7 +100,7 @@ const TheatreScreenDetailsPageContent = (
             <Tabs
                 defaultValue={activeTab}
                 onValueChange={(v) =>
-                    setActiveTab(v as ScreenDetailsActiveTab)
+                    setActiveTab(v as TheatreScreenDetailsActiveTab)
                 }
             >
                 <div className="flex justify-center">
@@ -131,6 +135,4 @@ const TheatreScreenDetailsPageContent = (
             />
         </PageFlexWrapper>
     );
-};
-
-export default TheatreScreenDetailsPageContent;
+}

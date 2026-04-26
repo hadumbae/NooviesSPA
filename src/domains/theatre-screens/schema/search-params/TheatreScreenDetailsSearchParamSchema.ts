@@ -1,19 +1,21 @@
 import {z} from "zod";
 import {CoercedNonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {ScreenDetailsActiveTabEnum} from "@/domains/theatre-screens/schema/params/ScreenDetailsActiveTabEnumSchema.ts";
+import {
+    TheatreScreenDetailsActiveTabEnum
+} from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsActiveTabEnumSchema.ts";
 
 /**
  * Schema for query parameters used when searching or paginating through a theatre screen's data.
  *
  * This includes pagination for both seat listings and showings, as well as tab selection.
  */
-export const ScreenDetailsSearchParamSchema = z.object({
+export const TheatreScreenDetailsSearchParamSchema = z.object({
     /**
      * Specifies which tab should be active in the UI.
      *
      * Can be either `"seats"` or `"showings"`. Defaults to `"seats"` if not provided.
      */
-    activeTab: ScreenDetailsActiveTabEnum
+    activeTab: TheatreScreenDetailsActiveTabEnum
         .optional()
         .default("view-seats"),
 
@@ -60,4 +62,4 @@ export const ScreenDetailsSearchParamSchema = z.object({
  *
  * Includes information like which tab is active, current page, and number of items per page.
  */
-export type ScreenDetailsSearchParams = z.infer<typeof ScreenDetailsSearchParamSchema>;
+export type TheatreScreenDetailsSearchParams = z.infer<typeof TheatreScreenDetailsSearchParamSchema>;

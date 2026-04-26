@@ -15,7 +15,7 @@ import {z} from "zod";
 /**
  * Allowed Screen Details tab identifiers.
  */
-export const ScreenDetailsActiveTabEnum = z.enum(
+export const TheatreScreenDetailsActiveTabEnum = z.enum(
     ["showings", "view-seats", "create-seats"],
     {
         errorMap: (issue, ctx) => {
@@ -35,4 +35,4 @@ export const ScreenDetailsActiveTabEnum = z.enum(
 /**
  * Inferred union type of valid screen detail tabs.
  */
-export type ScreenDetailsActiveTab = z.infer<typeof ScreenDetailsActiveTabEnum>;
+export type TheatreScreenDetailsActiveTab = z.infer<typeof TheatreScreenDetailsActiveTabEnum>;
