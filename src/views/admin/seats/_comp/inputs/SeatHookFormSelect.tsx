@@ -7,13 +7,13 @@ import {Loader} from "lucide-react";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
-import useFetchSeats from "@/domains/seats/_feat/crud-hooks/useFetchSeats.ts";
 import {SeatArraySchema} from "@/domains/seats/schema/seat/SeatRelated.schema.ts";
-import {SeatArray} from "@/domains/seats/schema/seat/SeatRelated.types.ts";
 import buildString from "@/common/utility/buildString.ts";
 import {SeatQueryFilters} from "@/domains/seats/_feat/handle-query-options/SeatQueryMatchFilters.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {ReactElement} from "react";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
+import {useFetchSeats} from "@/domains/seats/_feat/crud-hooks";
 
 /** Props for the SeatHookFormSelect component. */
 type SelectProps<TValues extends FieldValues> = {
@@ -33,11 +33,11 @@ export function SeatHookFormSelect<TValues extends FieldValues>(
     props: SelectProps<TValues>
 ): ReactElement {
     const {isMulti = false, filters = {layoutType: "SEAT"}} = props;
-    const query = useFetchSeats({queries: filters});
+    const query = useFetchSeats({queries: filters, schema: SeatArraySchema});
 
     return (
-        <ValidatedDataLoader query={query} schema={SeatArraySchema} loaderComponent={Loader}>
-            {(seats: SeatArray) => {
+        <QueryDataLoader query={query} loaderComponent={Loader}>
+            {(seats: Seat[]) => {
                 const options = seats.filter(seat => seat.layoutType === "SEAT").map(
                     ({_id, row, seatNumber, x, y, seatLabel}): ReactSelectOption => ({
                         value: _id,
@@ -54,6 +54,6 @@ export function SeatHookFormSelect<TValues extends FieldValues>(
                     ? <HookFormMultiSelect options={options} {...props} />
                     : <HookFormSelect options={options} {...props} />;
             }}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 }

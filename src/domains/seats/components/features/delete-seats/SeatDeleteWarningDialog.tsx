@@ -1,56 +1,28 @@
+/**
+ * @fileoverview Seat-specific confirmation dialog for deleting seats or layout elements with dynamic title generation.
+ */
+
 import {FC, ReactNode} from 'react';
-import useSeatDeleteMutation from "@/domains/seats/_feat/crud-hooks/useSeatDeleteMutation.ts";
 import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import buildString from "@/common/utility/buildString.ts";
 import SeatLayoutTypeLabelMap from "@/domains/seats/constants/SeatLayoutTypeLabelMap.ts";
-/**
- * ⚡ WarningProps
- *
- * Props for {@link SeatDeleteWarningDialog}. Extends {@link OnDeleteMutationParams}
- * to support delete mutation handlers and status messages.
- */
+import {useSeatDeleteMutation} from "@/domains/seats/_feat/crud-hooks";
+
+/** Props for the SeatDeleteWarningDialog component. */
 type WarningProps = OnDeleteMutationParams & {
-    /** React node(s) that trigger opening the delete dialog */
     children: ReactNode;
-    /** The seat (or structure-type seat) to be deleted */
     seat: Seat | SeatDetails;
 };
 
 /**
- * ⚡ SeatDeleteWarningDialog
- *
- * A seat-specific delete confirmation dialog.
- *
- * Wraps {@link EntityDeleteWarningDialog} and wires it to {@link useSeatDeleteMutation}
- * to perform API deletion and trigger success/error callbacks from
- * {@link OnDeleteMutationParams}.
- *
- * Automatically generates the dialog title based on seat details:
- * - For SEAT types: row, seat number, optional seat label
- * - For non-seat layout types: row, layout label, and coordinates
- *
- * @component
- * @param props - See {@link WarningProps}.
- *
- * @example
- * ```tsx
- * <SeatDeleteWarningDialog
- *   seat={seat}
- *   successMessage="Seat deleted successfully."
- *   errorMessage="Failed to delete seat."
- * >
- *   <button>Delete</button>
- * </SeatDeleteWarningDialog>
- * ```
+ * Renders a confirmation dialog that triggers a seat deletion mutation upon user approval.
  */
 const SeatDeleteWarningDialog: FC<WarningProps> = ({children, seat, ...mutationProps}) => {
-    // ⚡ Extract Props ⚡
     const {_id, row, layoutType, x, y} = seat;
 
-    // ⚡ Dialog Metadata ⚡
     const isSeat = layoutType === "SEAT";
     const layoutLabel = SeatLayoutTypeLabelMap[layoutType];
 
@@ -63,11 +35,9 @@ const SeatDeleteWarningDialog: FC<WarningProps> = ({children, seat, ...mutationP
 
     const dialogTitle = `Proceed to delete ${label}?`;
 
-    // ⚡ Mutation Handler ⚡
     const {mutate} = useSeatDeleteMutation(mutationProps);
     const deleteSeat = () => mutate({_id});
 
-    // ⚡ Render ⚡
     return (
         <EntityDeleteWarningDialog title={dialogTitle} deleteResource={deleteSeat}>
             {children}

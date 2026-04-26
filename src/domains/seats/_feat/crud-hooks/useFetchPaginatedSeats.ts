@@ -1,83 +1,32 @@
 /**
- * @file useFetchPaginatedSeats.ts
- *
- * React Query hook for fetching a paginated list of seats.
- * Combines pagination parameters with seat query filters and
- * standardized request / error handling.
+ * @fileoverview Hook for fetching paginated seat collections with schema validation and query filtering.
  */
 
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import SeatRepository from "@/domains/seats/_feat/crud/SeatRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import {SeatQueryOptions} from "@/domains/seats/_feat/handle-query-options/SeatQueryOptions.ts";
+import {paginated} from "@/domains/seats/_feat/crud";
+import {SeatCRUDQueryKeys} from "@/domains/seats/_feat/crud-hooks/queryKeys.ts";
+import {PaginatedQueryConfig} from "@/common/types";
+import {buildQueryFn} from "@/common/features/validate-fetch-data";
+
+/** Props for the useFetchPaginatedSeats hook. */
+type FetchParams<TData = unknown> = PaginatedQueryConfig<TData, SeatQueryOptions>
 
 /**
- * Parameters for {@link useFetchPaginatedSeats}.
+ * Retrieves a paginated list of seats based on provided page constraints and domain-specific filters.
  */
-type FetchParams = PaginationValues & {
-    /**
-     * Seat query filters (e.g. theatre, screen, availability).
-     */
-    queries?: SeatQueryOptions;
-
-    /**
-     * Request-level configuration such as sorting or population options.
-     */
-    config?: RequestOptions;
-
-    /**
-     * React Query configuration overrides.
-     */
-    options?: FetchQueryOptions<unknown>;
-};
-
-/**
- * # useFetchPaginatedSeats Hook
- *
- * Fetches a paginated collection of seats using page-based pagination.
- *
- * Integrates:
- * - **SeatRepository.paginated** for backend pagination
- * - **useQueryFnHandler** for consistent error handling
- * - **useQueryOptionDefaults** for shared React Query defaults
- *
- * @param params
- * Pagination values, optional seat filters, request configuration,
- * and React Query options.
- *
- * @returns
- * React Query result containing paginated seat data or an
- * {@link HttpResponseError}.
- *
- * @example
- * ```ts
- * const { data, isLoading } = useFetchPaginatedSeats({
- *   page: 1,
- *   perPage: 20,
- *   queries: { screen: "screen-1" },
- * });
- * ```
- */
-export default function useFetchPaginatedSeats(
-    {page, perPage, queries, config, options}: FetchParams
+export function useFetchPaginatedSeats<TData = unknown>(
+    {schema, page, perPage, queries, config, options}: FetchParams<TData>
 ): UseQueryResult<unknown, HttpResponseError> {
-    const queryKey = [
-        "seats", "lists", "paginated",
-        {page, perPage, ...queries, ...config},
-    ];
-
-    const fetchSeats = useQueryFnHandler({
-        action: () => SeatRepository.paginated({page, perPage, queries, config}),
-        errorMessage: "Failed to fetch seats. Please try again.",
+    const fetchSeats = buildQueryFn<TData>({
+        action: () => paginated({pagination: {page, perPage}, queries, config}),
+        schema,
     });
 
     return useQuery({
-        queryKey,
+        queryKey: SeatCRUDQueryKeys.paginated({page, perPage, ...queries, ...config}),
         queryFn: fetchSeats,
         ...useQueryOptionDefaults(options),
     });

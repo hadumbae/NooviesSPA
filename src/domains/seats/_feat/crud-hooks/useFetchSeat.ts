@@ -1,75 +1,34 @@
 /**
- * @file useFetchSeat.ts
- *
- * React Query hook for fetching a single seat by its unique identifier.
- * Provides a consistent, typed interface with shared query defaults
- * and standardized error handling.
+ * @fileoverview Hook for fetching a single seat by ID with schema validation and standardized query options.
  */
 
-import SeatRepository from "@/domains/seats/_feat/crud/SeatRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {QueryConfig} from "@/common/types";
+import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {findByID} from "@/domains/seats/_feat/crud";
+import {SeatCRUDQueryKeys} from "@/domains/seats/_feat/crud-hooks/queryKeys.ts";
 
-/**
- * Parameters for {@link useFetchSeat}.
- */
-type FetchParams = {
-    /**
-     * Seat identifier.
-     */
+/** Parameters for the useFetchSeat hook. */
+type FetchParams<TData = unknown> = QueryConfig<TData> & {
     _id: ObjectId;
-
-    /**
-     * Request-level configuration (excluding pagination limit).
-     */
-    config?: Omit<RequestOptions, "limit">;
-
-    /**
-     * React Query configuration overrides.
-     */
-    options?: FetchQueryOptions<unknown>;
 };
 
 /**
- * # useFetchSeat Hook
- *
- * Fetches a single seat entity by ID.
- *
- * Integrates:
- * - **SeatRepository** for API access
- * - **useQueryFnHandler** for consistent error handling
- * - **useQueryOptionDefaults** for shared React Query defaults
- *
- * @param params
- * Seat ID, request configuration, and React Query options.
- *
- * @returns
- * React Query result containing seat data or an {@link HttpResponseError}.
- *
- * @example
- * ```ts
- * const { data, isLoading } = useFetchSeat({
- *   _id: seatId,
- * });
- * ```
+ * Retrieves a single seat entity by its unique identifier and validates the response against a Zod schema.
  */
-export default function useFetchSeat(
-    params: FetchParams
-): UseQueryResult<unknown, HttpResponseError> {
-    const {_id, config, options} = params;
-
-    const fetchSeat = useQueryFnHandler({
-        action: () => SeatRepository.get({_id, config}),
-        errorMessage: "Failed to fetch seat data. Please try again.",
+export function useFetchSeat<TData = unknown>(
+    {schema, _id, config, options}: FetchParams<TData>
+): UseQueryResult<TData, HttpResponseError> {
+    const fetchSeat = buildQueryFn<TData>({
+        action: () => findByID({_id, config}),
+        schema,
     });
 
     return useQuery({
-        queryKey: ["seats", "_id", {_id, ...config}],
+        queryKey: SeatCRUDQueryKeys._id({_id, ...config}),
         queryFn: fetchSeat,
         ...useQueryOptionDefaults(options),
     });

@@ -1,73 +1,32 @@
 /**
- * @file useFetchSeats.ts
- *
- * React Query hook for fetching a list of seats using query filters.
- * Supports flexible seat querying with standardized error handling
- * and shared React Query defaults.
+ * @fileoverview Hook for fetching seat collections based on filters with schema validation and standardized query options.
  */
 
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import SeatRepository from "@/domains/seats/_feat/crud/SeatRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {SeatQueryOptions} from "@/domains/seats/_feat/handle-query-options/SeatQueryOptions.ts";
+import {ListQueryConfig} from "@/common/types";
+import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {query} from "@/domains/seats/_feat/crud";
+import {SeatCRUDQueryKeys} from "@/domains/seats/_feat/crud-hooks/queryKeys.ts";
+
+/** Props for the useFetchSeats hook. */
+type FetchParams<TData = unknown> = ListQueryConfig<TData, SeatQueryOptions>;
 
 /**
- * Parameters for {@link useFetchSeats}.
+ * Retrieves a list of seat entities matching the provided query filters and validates the response.
  */
-type FetchParams = {
-    /**
-     * Seat query filters (e.g. theatre, screen, row, status).
-     */
-    queries?: SeatQueryOptions;
-
-    /**
-     * Request-level configuration (pagination, sorting, includes, etc.).
-     */
-    config?: RequestOptions;
-
-    /**
-     * React Query configuration overrides.
-     */
-    options?: FetchQueryOptions<unknown>;
-};
-
-/**
- * # useFetchSeats Hook
- *
- * Fetches a collection of seats based on provided query options.
- *
- * Integrates:
- * - **SeatRepository** for backend querying
- * - **useQueryFnHandler** for consistent error handling
- * - **useQueryOptionDefaults** for shared React Query behavior
- *
- * @param params
- * Optional seat query filters, request configuration, and React Query options.
- *
- * @returns
- * React Query result containing a seat list or an {@link HttpResponseError}.
- *
- * @example
- * ```ts
- * const { data, isLoading } = useFetchSeats({
- *   queries: { screen: "screen-1" },
- * });
- * ```
- */
-export default function useFetchSeats(
-    {queries, config, options}: FetchParams = {}
-): UseQueryResult<unknown, HttpResponseError> {
-    const fetchSeats = useQueryFnHandler({
-        action: () => SeatRepository.query({queries, config}),
-        errorMessage: "Failed to fetch seats. Please try again.",
+export function useFetchSeats<TData = unknown>(
+    {schema, queries, config, options}: FetchParams<TData>
+): UseQueryResult<TData, HttpResponseError> {
+    const fetchSeats = buildQueryFn<TData>({
+        action: () => query({queries, config}),
+        schema,
     });
 
     return useQuery({
-        queryKey: ["seats", "lists", "query", {...queries, ...config}],
+        queryKey: SeatCRUDQueryKeys.query({...queries, ...config}),
         queryFn: fetchSeats,
         ...useQueryOptionDefaults(options),
     });

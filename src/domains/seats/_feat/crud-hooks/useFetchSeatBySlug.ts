@@ -1,56 +1,33 @@
 /**
- * @file useFetchSeatBySlug.ts
- *
- * React Query hook for fetching a single seat by its slug.
- * Slug-based counterpart to `useFetchSeat`, providing consistent
- * query keys, error handling, and request configuration.
+ * @fileoverview Hook for fetching a single seat by its slug with schema validation and standardized query options.
  */
 
-import SeatRepository from "@/domains/seats/_feat/crud/SeatRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {QueryConfig} from "@/common/types";
+import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {findBySlug} from "@/domains/seats/_feat/crud";
+import {SeatCRUDQueryKeys} from "@/domains/seats/_feat/crud-hooks/queryKeys.ts";
 
-/**
- * Parameters for {@link useFetchSeatBySlug}.
- */
-type FetchParams = {
-    /** Human-readable seat identifier. */
+/** Props for the useFetchSeatBySlug hook. */
+type FetchParams<TData = unknown> = QueryConfig<TData> & {
     slug: string;
-
-    /** Request configuration (pagination excluded). */
-    config?: Omit<RequestOptions, "limit">;
-
-    /** React Query option overrides. */
-    options?: FetchQueryOptions<unknown>;
 };
 
 /**
- * Fetches a single seat by slug.
- *
- * @param params - Seat slug, request config, and query options
- * @returns React Query result with seat data or {@link HttpResponseError}
- *
- * @example
- * ```ts
- * useFetchSeatBySlug({ slug: "balcony-a12" });
- * ```
+ * Retrieves a single seat entity by its unique slug and validates the response against a Zod schema.
  */
-export default function useFetchSeatBySlug(
-    params: FetchParams
-): UseQueryResult<unknown, HttpResponseError> {
-    const {slug, config, options} = params;
-
-    const fetchSeat = useQueryFnHandler({
-        action: () => SeatRepository.getBySlug({slug, config}),
-        errorMessage: "Failed to fetch seat data. Please try again.",
+export function useFetchSeatBySlug<TData = unknown>(
+    {schema, slug, config, options}: FetchParams<TData>
+): UseQueryResult<TData, HttpResponseError> {
+    const fetchSeat = buildQueryFn<TData>({
+        action: () => findBySlug({slug, config}),
+        schema,
     });
 
     return useQuery({
-        queryKey: ["seats", "slug", {slug, ...config}],
+        queryKey: SeatCRUDQueryKeys.slug({slug, ...config}),
         queryFn: fetchSeat,
         ...useQueryOptionDefaults(options),
     });

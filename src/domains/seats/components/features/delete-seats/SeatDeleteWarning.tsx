@@ -1,58 +1,28 @@
+/**
+ * @fileoverview Inline warning component for seat deletion with an integrated mutation trigger.
+ */
+
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {AlertTriangle, Loader, LucideIcon, Trash} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import useSeatDeleteMutation from "@/domains/seats/_feat/crud-hooks/useSeatDeleteMutation.ts";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
+import {useSeatDeleteMutation} from "@/domains/seats/_feat/crud-hooks";
 
-/**
- * ⚡ WarningProps
- *
- * Props for {@link SeatDeleteWarning}. Extends {@link OnDeleteMutationParams}
- * to supply success/error handlers for delete mutations.
- */
+/** Props for the SeatDeleteWarning component. */
 type WarningProps = OnDeleteMutationParams & {
-    /** Optional icon to display at the top of the warning (defaults to AlertTriangle). */
     icon?: LucideIcon;
-    /** ObjectId of the seat to delete. */
     seatID: ObjectId;
-    /** Optional seat name used in the title (defaults to "This Seat"). */
     seatName?: string;
-    /** Optional className for layout adjustments. */
     className?: string;
 };
 
 /**
- * ⚡ SeatDeleteWarning
- *
- * A compact, inline delete warning component for seats.
- *
- * Unlike {@link SeatDeleteWarningDialog}, this version does **not** open a dialog.
- * Instead, it renders an inline warning block containing:
- * - A warning icon
- * - A title generated from the provided `seatName`
- * - A standard deletion warning message
- * - A delete button that invokes {@link useSeatDeleteMutation}
- *
- * Automatically swaps the delete button icon to a loader when the deletion
- * request is pending.
- *
- * @param props - Component props of type {@link WarningProps}.
- *
- * @example
- * ```tsx
- * <SeatDeleteWarning
- *   seatID={seat._id}
- *   seatName={`Row ${seat.row}${seat.seatNumber}`}
- *   successMessage="Seat removed."
- *   errorMessage="Unable to delete seat."
- * />
- * ```
+ * Renders an inline warning message and a delete button that triggers the seat deletion mutation.
  */
 const SeatDeleteWarning = (props: WarningProps) => {
-    // ⚡ Props ⚡
     const {
         icon: Icon = AlertTriangle,
         seatName = "This Seat",
@@ -61,17 +31,14 @@ const SeatDeleteWarning = (props: WarningProps) => {
         ...mutationParams
     } = props;
 
-    // ⚡ Warning Metadata ⚡
     const title = `Delete ${seatName}?`;
     const description =
         "This action will remove all related data such as seat maps and reservations. This action is irreversible.";
 
-    // ⚡ Mutation ⚡
     const {mutate, isPending} = useSeatDeleteMutation(mutationParams);
     const deleteIcon = isPending ? <Loader className="animate-spin" /> : <Trash />;
     const deleteSeat = () => mutate({_id: seatID});
 
-    // ⚡ Render ⚡
     return (
         <div className={cn("flex flex-col items-center space-y-3", className)}>
             <Icon className="text-red-500" />
