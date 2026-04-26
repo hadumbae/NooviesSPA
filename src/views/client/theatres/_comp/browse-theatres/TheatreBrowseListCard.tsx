@@ -12,7 +12,7 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/commo
 import buildString from "@/common/utility/buildString.ts";
 import ISO3166Alpha2ShortCountryConstant from "@/common/constants/country/ISO3166Alpha2ShortCountryConstant.ts";
 import TheatreShowingSelectSummary
-    from "@/domains/theatres/components/client/forms/browse-list/TheatreShowingSelectSummary.tsx";
+    from "@/views/client/theatres/_comp/browse-theatres/TheatreShowingSelectSummary.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";

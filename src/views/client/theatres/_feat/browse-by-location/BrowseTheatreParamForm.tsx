@@ -12,7 +12,7 @@
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {useBrowseTheatreParamForm} from "@/domains/theatres/hooks/forms/browse-theatre-params/useBrowseTheatreParamForm.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import BrowseTheatreParamFormView from "@/domains/theatres/components/client/forms/browse-theatre-params/BrowseTheatreParamFormView.tsx";
+import BrowseTheatreParamFormView from "@/views/client/theatres/_feat/browse-by-location/BrowseTheatreParamFormView.tsx";
 import {
     BrowseTheatreParamFormValues,
     BrowseTheatreParams,
@@ -29,7 +29,7 @@ type FormProps =
 /**
  * State-aware container for the browse theatre parameter form.
  */
-const BrowseTheatreParamFormContainer = (
+const BrowseTheatreParamForm = (
     {presetValues, className}: FormProps,
 ) => {
     const form = useBrowseTheatreParamForm({presetValues});
@@ -50,4 +50,4 @@ const BrowseTheatreParamFormContainer = (
     );
 };
 
-export default BrowseTheatreParamFormContainer;
+export default BrowseTheatreParamForm;

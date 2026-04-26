@@ -10,6 +10,7 @@ import {TheatreDetailsHeader} from "@/views/admin/theatres/theatre-details-page/
 import {
     TheatreDetailsShowingsTabHeader
 } from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsShowingsTabHeader.tsx";
+import {TheatreDetailsToggles} from "@/views/admin/theatres/theatre-details-page/toggles.tsx";
 
 export {
     TheatreDetailsPage,
@@ -20,5 +21,6 @@ export {
     TheatreDetailsShowingsTab,
     TheatreDetailsScreensTab,
     TheatreDetailsShowingsTabHeader,
+    TheatreDetailsToggles,
 }
 

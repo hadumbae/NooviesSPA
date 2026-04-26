@@ -14,8 +14,8 @@ import { cn } from "@/common/lib/utils.ts";
 import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAutoSubmit.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import { Separator } from "@/common/components/ui/separator.tsx";
-import TheatreQueryOptionFormSortFieldset from "@/domains/theatres/components/admin/form/theatre-query-option/TheatreQueryOptionFormSortFieldset.tsx";
-import TheatreQueryOptionFormFilterFieldset from "@/domains/theatres/components/admin/form/theatre-query-option/TheatreQueryOptionFormFilterFieldset.tsx";
+import TheatreQueryOptionFormSortFieldset from "@/views/admin/theatres/_feat/update-query-options/TheatreQueryOptionFormSortFieldset.tsx";
+import TheatreQueryOptionFormFilterFieldset from "@/views/admin/theatres/_feat/update-query-options/TheatreQueryOptionFormFilterFieldset.tsx";
 
 /**
  * Props for {@link TheatreQueryOptionFormView}.

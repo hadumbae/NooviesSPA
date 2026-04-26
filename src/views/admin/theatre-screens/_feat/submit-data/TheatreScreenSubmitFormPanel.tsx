@@ -14,7 +14,7 @@ import {
     SheetTrigger
 } from "@/common/components/ui/Sheet";
 import {TheatreScreenFormValues} from "@/domains/theatre-screens/_feat/submit-data";
-import TheatreHookFormSelect from "@/domains/theatres/components/admin/form/theatre-inputs/TheatreHookFormSelect.tsx";
+import TheatreHookFormSelect from "@/views/admin/theatres/_feat/form-input/TheatreHookFormSelect.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {ScreenTypeHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
 import {Button} from "@/common/components/ui/button.tsx";

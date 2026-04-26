@@ -4,7 +4,7 @@
 
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import TheatreDetailsOptions from "@/domains/theatres/components/admin/theatre-actions/TheatreDetailsOptions.tsx";
+import {TheatreDetailsToggles} from "@/views/admin/theatres/theatre-details-page/toggles.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {Ellipsis} from "lucide-react";
 import {TheatreDetailsBreadcrumbs} from "@/views/admin/theatres/theatre-details-page/breadcrumbs.tsx";
@@ -31,9 +31,9 @@ export function TheatreDetailsHeader(
                     <HeaderDescription>Theatre</HeaderDescription>
                 </div>
 
-                <TheatreDetailsOptions>
+                <TheatreDetailsToggles>
                     <IconButton icon={Ellipsis}/>
-                </TheatreDetailsOptions>
+                </TheatreDetailsToggles>
             </div>
         </header>
     );

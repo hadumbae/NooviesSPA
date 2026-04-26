@@ -1,4 +1,8 @@
-import {FC} from 'react';
+/**
+ * @fileoverview Card component for displaying comprehensive theatre information, including administrative metrics and geographic location details.
+ */
+
+import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
@@ -6,34 +10,15 @@ import generateLocationAddressString from "@/common/utility/features/location/ge
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {cn} from "@/common/lib/utils.ts";
 
-/**
- * Props for the {@link TheatreDetailsCard} component.
- */
-interface Props {
-    /**
-     * Theatre details object containing general information
-     * such as name, seating capacity, and location.
-     */
+/** Props for the TheatreDetailsCard component. */
+type CardProps = {
     theatre: TheatreDetails;
 }
 
 /**
- * Displays detailed information about a theatre, including
- * general details (name, seats, screens, upcoming showings)
- * and location details (address, timezone, postal code, coordinates).
- *
- * @component
- * @example
- * ```tsx
- * <TheatreDetailsCard theatre={theatreData} />
- * ```
- *
- * @param {Props} props - The props object.
- * @param {TheatreDetails} props.theatre - The theatre details to display.
- *
- * @returns {JSX.Element} A card containing theatre information.
+ * Renders a structured overview of a theatre's general capacity metrics and localized address information.
  */
-const TheatreDetailsCard: FC<Props> = ({theatre}) => {
+export function TheatreDetailsCard({theatre}: CardProps): ReactElement {
     const {name, location, seatCapacity, screenCount, seatCount, futureShowingCount} = theatre;
     const {timezone, postalCode, coordinates} = location;
 
@@ -76,6 +61,4 @@ const TheatreDetailsCard: FC<Props> = ({theatre}) => {
             </CardContent>
         </Card>
     );
-};
-
-export default TheatreDetailsCard;
+}

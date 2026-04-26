@@ -11,8 +11,8 @@ import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaIn
 import {TheatreFormValuesSchema} from "@/domains/theatres/schema/forms/TheatreForm.schema.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
-import TheatreSubmitFormLocationInputs
-    from "@/domains/theatres/components/admin/form/theatre-submit-form/TheatreSubmitFormLocationInputs.tsx";
+import TheatreSubmitFormLocationFieldset
+    from "@/views/admin/theatres/_feat/submit-data/TheatreSubmitFormLocationFieldset.tsx";
 
 /**
  * Props for {@link TheatreSubmitFormView}.
@@ -51,7 +51,7 @@ type TheatreSubmitFormViewProps = FormViewProps<Theatre, TheatreForm, TheatreFor
  * - Renders theatre fields including:
  *   - **Name**
  *   - **Seat Capacity**
- *   - **Location** (via {@link TheatreSubmitFormLocationInputs})
+ *   - **Location** (via {@link TheatreSubmitFormLocationFieldset})
  *
  * - Automatically disables fields listed in `disableFields`.
  *
@@ -142,7 +142,7 @@ const TheatreSubmitFormView: FC<TheatreSubmitFormViewProps> = (params) => {
 
                 {
                     activeFields.location &&
-                    <TheatreSubmitFormLocationInputs form={form}/>
+                    <TheatreSubmitFormLocationFieldset form={form}/>
                 }
 
                 <div className={cn(!isPanel && "lg:col-span-2")}>

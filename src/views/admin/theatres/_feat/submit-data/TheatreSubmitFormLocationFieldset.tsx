@@ -10,7 +10,7 @@ import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbo
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 
 /**
- * Props for {@link TheatreSubmitFormLocationInputs}.
+ * Props for {@link TheatreSubmitFormLocationFieldset}.
  */
 export type TheatreSubmitFormLocationInputsProps = {
     /**
@@ -46,7 +46,7 @@ export type TheatreSubmitFormLocationInputsProps = {
  * This component is typically used inside the **Theatre submission form**.
  * It integrates directly with `react-hook-form` and custom `HookForm` components.
  */
-const TheatreSubmitFormLocationInputs: FC<TheatreSubmitFormLocationInputsProps> = (props) => {
+const TheatreSubmitFormLocationFieldset: FC<TheatreSubmitFormLocationInputsProps> = (props) => {
     const {className, form} = props;
     const includeCoordinates = form.watch("location.includeCoordinates");
 
@@ -134,4 +134,4 @@ const TheatreSubmitFormLocationInputs: FC<TheatreSubmitFormLocationInputsProps> 
     );
 };
 
-export default TheatreSubmitFormLocationInputs;
+export default TheatreSubmitFormLocationFieldset;

@@ -7,10 +7,10 @@ import { Theatre } from "@/domains/theatres/schema/model/theatre/Theatre.types.t
 import { TheatreForm, TheatreFormValues } from "@/domains/theatres/schema/forms/TheatreForm.types.ts";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 import TheatreSubmitFormView
-    from "@/domains/theatres/components/admin/form/theatre-submit-form/TheatreSubmitFormView.tsx";
+    from "@/views/admin/theatres/_feat/submit-data/TheatreSubmitFormView.tsx";
 
 /**
- * Props for {@link TheatreSubmitFormContainer}.
+ * Props for {@link TheatreSubmitForm}.
  *
  * Extends a generic {@link FormContainerProps} used across the app for
  * entity-based `react-hook-form` containers.
@@ -77,7 +77,7 @@ type SubmitFormProps = FormContainerProps<Theatre, Theatre, TheatreFormValues> &
  *
  * @component
  */
-const TheatreSubmitFormContainer: FC<SubmitFormProps> = (props) => {
+const TheatreSubmitForm: FC<SubmitFormProps> = (props) => {
     const {
         isEditing,
         entity,
@@ -116,4 +116,4 @@ const TheatreSubmitFormContainer: FC<SubmitFormProps> = (props) => {
     );
 };
 
-export default TheatreSubmitFormContainer;
+export default TheatreSubmitForm;

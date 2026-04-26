@@ -11,15 +11,14 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {TheatreDetailsUIContext} from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContext.ts";
 import {TheatreDetailsPageTabs} from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsPageTabs.tsx";
 import TheatreSubmitFormPanel
-    from "@/domains/theatres/components/admin/form/theatre-submit-form/TheatreSubmitFormPanel.tsx";
-import TheatreDeleteWarningDialog
-    from "@/domains/theatres/components/admin/theatre-actions/TheatreDeleteWarningDialog.tsx";
-import TheatreDetailsCard from "@/domains/theatres/components/admin/theatre-details/TheatreDetailsCard.tsx";
+    from "@/views/admin/theatres/_feat/submit-data/TheatreSubmitFormPanel.tsx";
+import {TheatreDetailsCard} from "@/views/admin/theatres/_comp/display-cards/TheatreDetailsCard.tsx";
 import useNavigateToTheatre from "@/domains/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {PaginatedItems} from "@/common/types";
+import {TheatreDeleteWarningDialog} from "@/views/admin/theatres/_feat/model-options";
 
 /** Props for the TheatreDetailsPageContent component. */
 type TheatreDetailsPageContentProps = {

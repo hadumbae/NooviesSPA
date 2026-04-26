@@ -4,13 +4,13 @@
  * responsive grid layouts, search/filter dialogs, and pagination.
  */
 
-import TheatreIndexCard from "@/domains/theatres/components/admin/pages/theatre-index/TheatreIndexCard.tsx";
+import TheatreIndexCard from "@/views/admin/theatres/_comp/index-page/TheatreIndexCard.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {TheatreIndexHeader} from "@/views/admin/theatres/index-page/header.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import TheatreQueryOptionFormContainer
-    from "@/domains/theatres/components/admin/form/theatre-query-option/TheatreQueryOptionFormContainer.tsx";
+    from "@/views/admin/theatres/_feat/update-query-options/TheatreQueryOptionFormContainer.tsx";
 import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {TheatreQueryOptionSchema} from "@/domains/theatres/schema/queries/TheatreQueryOption.schema.ts";

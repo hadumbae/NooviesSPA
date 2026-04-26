@@ -8,7 +8,7 @@ import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.ts
 import { IconTextCSS } from "@/common/constants/css/TextCSS.ts";
 import { TvMinimal } from "lucide-react";
 import TheatreShowingSelectSummary
-    from "@/domains/theatres/components/client/forms/browse-list/TheatreShowingSelectSummary.tsx";
+    from "@/views/client/theatres/_comp/browse-theatres/TheatreShowingSelectSummary.tsx";
 import { ShowingDetails } from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import { PopulatedShowing } from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 

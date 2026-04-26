@@ -14,8 +14,8 @@ import {SheetHeader} from "@/common/components/ui/Sheet/SheetHeader.tsx";
 import {SheetTitle} from "@/common/components/ui/Sheet/SheetTitle.tsx";
 import {SheetDescription} from "@/common/components/ui/Sheet/SheetDescription.tsx";
 import {SheetTrigger} from "@/common/components/ui/Sheet/SheetTrigger.tsx";
-import TheatreSubmitFormContainer
-    from "@/domains/theatres/components/admin/form/theatre-submit-form/TheatreSubmitFormContainer.tsx";
+import TheatreSubmitForm
+    from "@/views/admin/theatres/_feat/submit-data/TheatreSubmitForm.tsx";
 
 /**
  * Props for {@link TheatreSubmitFormPanel}.
@@ -34,7 +34,7 @@ type FormPanelProps = FormContainerProps<Theatre, Theatre, TheatreFormValues> & 
 /**
  * **TheatreSubmitFormPanel**
  *
- * A slide-over (sheet) panel that renders a {@link TheatreSubmitFormContainer} to
+ * A slide-over (sheet) panel that renders a {@link TheatreSubmitForm} to
  * create or update a theatre entity.
  *
  * ### Features
@@ -96,7 +96,7 @@ const TheatreSubmitFormPanel: FC<FormPanelProps> = (params) => {
                 </SheetHeader>
 
                 <ScrollArea className="flex-grow px-1">
-                    <TheatreSubmitFormContainer
+                    <TheatreSubmitForm
                         {...formParams}
                         onSubmitSuccess={closeOnSuccess}
                         isPanel={true}

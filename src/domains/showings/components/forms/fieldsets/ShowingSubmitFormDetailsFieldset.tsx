@@ -8,8 +8,6 @@ import MovieHookFormSelect from "@/domains/movies/components/ui/MovieHookFormSel
 import MovieQuickOverviewFetchCard
     from "@/domains/movies/components/admin/movie-details/MovieQuickOverviewFetchCard.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import TheatreQuickOverviewFetchCard
-    from "@/domains/theatres/components/admin/theatre-details/TheatreQuickOverviewFetchCard.tsx";
 import {UseFormReturn} from "react-hook-form";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
@@ -20,9 +18,10 @@ import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/comp
 import {Plus, X} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {MultiStepFormContext} from "@/common/context/multi-step-form/MultiStepFormContext.ts";
-import TheatreHookFormSelect from "@/domains/theatres/components/admin/form/theatre-inputs/TheatreHookFormSelect.tsx";
+import TheatreHookFormSelect from "@/views/admin/theatres/_feat/form-input/TheatreHookFormSelect.tsx";
 import {ShowingFormValues} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
+import {TheatreQuickOverviewFetchCard} from "@/views/admin/theatres/_comp/display-cards";
 
 /** Props for the ShowingSubmitFormDetailsFieldset component. */
 type FieldsetProps = {
