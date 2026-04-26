@@ -6,7 +6,7 @@
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import {TheatreQueryOptions} from "@/domains/theatres/schema/queries/TheatreQueryOption.types.ts";
+import {TheatreQueryOptions} from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.types.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";

@@ -3,7 +3,6 @@
  */
 
 import {ReactElement} from 'react';
-import {Theatre, TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {TheatreDetailsHeader} from "@/views/admin/theatres/theatre-details-page/header.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
@@ -13,12 +12,14 @@ import {TheatreDetailsPageTabs} from "@/views/admin/theatres/theatre-details-pag
 import TheatreSubmitFormPanel
     from "@/views/admin/theatres/_feat/submit-data/TheatreSubmitFormPanel.tsx";
 import {TheatreDetailsCard} from "@/views/admin/theatres/_comp/display-cards/TheatreDetailsCard.tsx";
-import useNavigateToTheatre from "@/domains/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {PaginatedItems} from "@/common/types";
 import {TheatreDeleteWarningDialog} from "@/views/admin/theatres/_feat/model-options";
+import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
+import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
+import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /** Props for the TheatreDetailsPageContent component. */
 type TheatreDetailsPageContentProps = {

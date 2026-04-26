@@ -7,7 +7,6 @@
  * alongside a small, preloaded subset of showings.
  */
 
-import {TheatreWithRecentShowings} from "@/domains/theatres/schema/model/theatre/TheatreWithRecentShowings.types.ts";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import buildString from "@/common/utility/buildString.ts";
 import ISO3166Alpha2ShortCountryConstant from "@/common/constants/country/ISO3166Alpha2ShortCountryConstant.ts";
@@ -17,6 +16,8 @@ import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {HoverUnderlineCSS} from "@/common/constants/css/TextCSS.ts";
+
+import {TheatreWithRecentShowings} from "@/domains/theatres/schema/theatre/TheatreWithRecentShowingsSchema.ts";
 
 /**
  * Props for {@link TheatreBrowseListCard}.

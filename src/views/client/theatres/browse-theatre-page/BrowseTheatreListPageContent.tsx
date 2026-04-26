@@ -18,13 +18,14 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import BrowseTheatreParamForm
     from "@/views/client/theatres/_feat/browse-by-location/BrowseTheatreParamForm.tsx";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
-import {TheatreWithRecentShowings} from "@/domains/theatres/schema/model/theatre/TheatreWithRecentShowings.types.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import TheatreBrowseListCard from "@/views/client/theatres/_comp/browse-theatres/TheatreBrowseListCard.tsx";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+
+import {TheatreWithRecentShowings} from "@/domains/theatres/schema/theatre/TheatreWithRecentShowingsSchema.ts";
 
 /**
  * Props for {@link BrowseTheatreListPageContent}.

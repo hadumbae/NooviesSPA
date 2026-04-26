@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { TheatreFormValues } from "@/domains/theatres/schema/forms/TheatreForm.types.ts";
+import { TheatreFormValues } from "@/domains/theatres/_feat/submit-data/TheatreForm.types.ts";
 import { cn } from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";

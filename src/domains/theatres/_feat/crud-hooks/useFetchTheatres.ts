@@ -6,7 +6,7 @@
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {TheatreQueryOptions} from "@/domains/theatres/schema/queries/TheatreQueryOption.types.ts";
+import {TheatreQueryOptions} from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.types.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {TheatreCRUDQueryKeys} from "@/domains/theatres/_feat/crud-hooks/TheatreCRUDQueryKeys.ts";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";

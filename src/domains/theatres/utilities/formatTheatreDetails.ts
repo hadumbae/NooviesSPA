@@ -1,5 +1,6 @@
-import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
+
+import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /**
  * Formats a {@link TheatreDetails} object into a concise and display-ready structure,

@@ -3,9 +3,9 @@
  */
 
 import {z} from "zod";
-import {TheatreDetailsSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 import {ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /**
  * Schema for validating the aggregated data used in the theatre showing list view.

@@ -6,12 +6,11 @@ import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Loader} from "lucide-react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useFetchTheatre from "@/domains/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
-import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
-import {TheatreDetailsSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
+import useFetchTheatre from "@/domains/theatres/_feat/crud-hooks/useFetchTheatre.ts";
 import {cn} from "@/common/lib/utils.ts";
 import formatTheatreDetails from "@/domains/theatres/utilities/formatTheatreDetails.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {TheatreDetails, TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /** Props for the TheatreQuickOverviewFetchCard component. */
 export type FetchCardProps = {

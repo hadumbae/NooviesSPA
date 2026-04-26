@@ -1,4 +1,3 @@
-import { TheatreDetails } from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import { Card, CardContent } from "@/common/components/ui/card.tsx";
 import buildString from "@/common/utility/buildString.ts";
 import ISO3166Alpha2ShortCountryConstant from "@/common/constants/country/ISO3166Alpha2ShortCountryConstant.ts";
@@ -11,6 +10,8 @@ import IconTextSpan from "@/common/components/card-content/IconTextSpan.tsx";
 import { cn } from "@/common/lib/utils.ts";
 import { SecondaryTextBaseCSS } from "@/common/constants/css/TextCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+
+import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 type CardProps = {
     /** Fully populated theatre details */

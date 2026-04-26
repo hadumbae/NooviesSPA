@@ -5,7 +5,8 @@
 
 import {TheatreScreenSchema} from "@/domains/theatre-screens/schema/model/TheatreScreenSchema.ts";
 import {z} from "zod";
-import {TheatreSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
+
+import {TheatreSchema} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
 
 /**
  * Zod schema for a Theatre Screen that includes the full Theatre object instead of just an ID.

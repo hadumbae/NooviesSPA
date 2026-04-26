@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import useTheatreDeleteMutation from "@/domains/theatres/hooks/delete-theatre/useTheatreDeleteMutation.ts";
+import useTheatreDeleteMutation from "@/domains/theatres/_feat/crud-hooks/useTheatreDeleteMutation.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";

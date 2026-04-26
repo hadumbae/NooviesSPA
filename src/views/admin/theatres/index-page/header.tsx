@@ -9,11 +9,12 @@ import { ReactElement } from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import { Plus } from "lucide-react";
-import { Theatre } from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import { Button } from "@/common/components/ui/button.tsx";
 import { HoverLinkCSS } from "@/common/constants/css/ButtonCSS.ts";
 import TheatreSubmitFormPanel from "@/views/admin/theatres/_feat/submit-data/TheatreSubmitFormPanel.tsx";
-import useNavigateToTheatre from "@/domains/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
+import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
+
+import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
 
 /**
  * Header component that introduces the "Theatres" section of the admin portal.

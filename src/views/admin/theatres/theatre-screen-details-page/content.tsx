@@ -12,7 +12,9 @@ import {
 import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import {ReactElement} from "react";
 import {TheatreScreenDetailsPageTabs} from "@/views/admin/theatres/theatre-screen-details-page/tabs.tsx";
-import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
+
+
+import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /** Props for the TheatreScreenDetailsPageContent component. */
 type ContentProps = {

@@ -4,7 +4,6 @@
 
 import {Tabs, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {TheatreDetailsSearchParamSchema} from "@/domains/theatres/schema/params/TheatreDetailsSearchParamSchema.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {TheatreDetailsScreensTab} from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsScreensTab.tsx";
 import {TheatreDetailsShowingsTab}
@@ -14,6 +13,7 @@ import {PaginatedItems} from "@/common/types";
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {TheatreDetailsSearchParamSchema} from "src/domains/theatres/_feat/handle-admin-search-params";
 
 /** Props for the TheatreDetailsPageTabs component. */
 export type TabProps = {

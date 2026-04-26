@@ -2,7 +2,6 @@
  * @fileoverview Main content component for the theatre showing list administrative page.
  */
 
-import {Theatre, TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {TheatreShowingListHeader}
     from "@/views/admin/theatres/theatre-showings-list/header.tsx";
@@ -11,6 +10,8 @@ import {ShowingSummaryCard} from "@/domains/showings/components/admin/card/showi
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {ReactElement} from "react";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
+import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /** Props for the TheatreShowingListPageContent component. */
 type ContentProps = {

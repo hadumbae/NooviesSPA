@@ -8,12 +8,13 @@ import {TheatreScreenSubmitForm, TheatreScreenSubmitFormPanel} from "@/views/adm
 import {TheatreScreenDetails, TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
 import {useLocation} from "react-router-dom";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import useNavigateToTheatre from "@/domains/theatres/hooks/navigation/navigate-to-theatre/useNavigateToTheatre.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ScreenDetailsUIContext} from "@/domains/theatre-screens/contexts/screen-details/ScreenDetailsUIContext.ts";
 import {simplifyScreenDetails} from "@/domains/theatre-screens/utilities/simplifyScreenDetails.ts";
-import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {ScreenDeleteWarningDialog} from "@/views/admin/theatre-screens/_feat/model-options";
+import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
+
+import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /**
  * Props for the TheatreScreenDetailsPageScreenActions component.

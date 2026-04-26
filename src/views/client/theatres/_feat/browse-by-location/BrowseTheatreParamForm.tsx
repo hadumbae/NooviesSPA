@@ -10,14 +10,15 @@
  */
 
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
-import {useBrowseTheatreParamForm} from "@/domains/theatres/hooks/forms/browse-theatre-params/useBrowseTheatreParamForm.ts";
+import {useBrowseTheatreParamForm} from "@/domains/theatres/_feat/submit-location/useBrowseTheatreParamForm.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import BrowseTheatreParamFormView from "@/views/client/theatres/_feat/browse-by-location/BrowseTheatreParamFormView.tsx";
 import {
     BrowseTheatreParamFormValues,
     BrowseTheatreParams,
-    BrowseTheatreParamSchema,
-} from "@/domains/theatres/schema/params/client/browse-theatre-list/BrowseTheatreParamSchema.ts";
+    BrowseTheatreParamSchema
+} from "@/domains/theatres/_feat/submit-location";
+
 
 /**
  * Props for the browse theatre parameter form container.

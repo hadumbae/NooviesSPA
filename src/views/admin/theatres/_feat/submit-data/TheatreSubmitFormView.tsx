@@ -1,6 +1,5 @@
 import {FC} from 'react';
-import {TheatreForm, TheatreFormValues} from "@/domains/theatres/schema/forms/TheatreForm.types.ts";
-import {Theatre} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
+import {TheatreForm, TheatreFormValues} from "@/domains/theatres/_feat/submit-data/TheatreForm.types.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
@@ -8,11 +7,13 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import {TheatreFormValuesSchema} from "@/domains/theatres/schema/forms/TheatreForm.schema.ts";
+import {TheatreFormValuesSchema} from "@/domains/theatres/_feat/submit-data/TheatreForm.schema.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 import TheatreSubmitFormLocationFieldset
     from "@/views/admin/theatres/_feat/submit-data/TheatreSubmitFormLocationFieldset.tsx";
+
+import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
 
 /**
  * Props for {@link TheatreSubmitFormView}.

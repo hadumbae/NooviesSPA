@@ -1,12 +1,13 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {Clapperboard, Sofa, TvMinimal} from "lucide-react";
 import generateLocationAddressString from "@/common/utility/features/location/generateLocationAddressString.ts";
 import StatItem from "@/common/components/stat-details/StatItem.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
 import TooltipStatItem from "@/common/components/stat-details/TooltipStatItem.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+
+import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /**
  * Props for the `TheatreIndexCard` component.

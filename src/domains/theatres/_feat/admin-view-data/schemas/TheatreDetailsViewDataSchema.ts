@@ -3,11 +3,11 @@
  */
 
 import { z } from "zod";
-import { TheatreDetailsSchema } from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import { ShowingDetailsSchema } from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import { generatePaginationSchema } from "@/common/utility/schemas/generatePaginationSchema.ts";
 import {TheatreScreenWithVirtualsSchema} from "@/domains/theatre-screens/schema/model";
+import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /**
  * Validates the full data payload required for the Theatre Details dashboard.

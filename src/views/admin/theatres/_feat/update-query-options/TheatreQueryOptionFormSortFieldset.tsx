@@ -6,8 +6,8 @@
 
 import { FC } from 'react';
 import { UseFormReturn } from "react-hook-form";
-import { TheatreQueryOptionFormValues } from "@/domains/theatres/schema/queries/TheatreQueryOptionFormSchema.ts";
-import { TheatreQuerySorts } from "@/domains/theatres/schema/queries/TheatreQueryOption.types.ts";
+import { TheatreQueryOptionFormValues } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionFormSchema.ts";
+import { TheatreQuerySorts } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.types.ts";
 import HookFormSortToggle from "@/common/components/forms/HookFormSortToggle.tsx";
 
 /**

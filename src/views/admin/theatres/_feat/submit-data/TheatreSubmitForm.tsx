@@ -1,13 +1,14 @@
 import { FC } from 'react';
-import useTheatreSubmitForm from "@/domains/theatres/hooks/submit-form/useTheatreSubmitForm.ts";
+import useTheatreSubmitForm from "@/domains/theatres/_feat/submit-data/useTheatreSubmitForm.ts";
 import useTheatreSubmitMutation, {
     TheatreSubmitMutationParams
-} from "@/domains/theatres/hooks/submit-form/useTheatreSubmitMutation.ts";
-import { Theatre } from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
-import { TheatreForm, TheatreFormValues } from "@/domains/theatres/schema/forms/TheatreForm.types.ts";
+} from "@/domains/theatres/_feat/crud-hooks/useTheatreSubmitMutation.ts";
+import { TheatreForm, TheatreFormValues } from "@/domains/theatres/_feat/submit-data/TheatreForm.types.ts";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
 import TheatreSubmitFormView
     from "@/views/admin/theatres/_feat/submit-data/TheatreSubmitFormView.tsx";
+
+import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
 
 /**
  * Props for {@link TheatreSubmitForm}.

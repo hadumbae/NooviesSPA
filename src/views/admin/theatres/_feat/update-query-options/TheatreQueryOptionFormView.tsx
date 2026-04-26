@@ -6,10 +6,10 @@
 
 import { FC } from 'react';
 import { Form } from "@/common/components/ui/form.tsx";
-import { TheatreQueryOptionFormValues } from "@/domains/theatres/schema/queries/TheatreQueryOptionFormSchema.ts";
+import { TheatreQueryOptionFormValues } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionFormSchema.ts";
 import { SearchParamFormViewProps } from "@/common/type/form/SearchParamFormProps.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import { TheatreQueryOptionSchema } from "@/domains/theatres/schema/queries/TheatreQueryOption.schema.ts";
+import { TheatreQueryOptionSchema } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.schema.ts";
 import { cn } from "@/common/lib/utils.ts";
 import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAutoSubmit.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";

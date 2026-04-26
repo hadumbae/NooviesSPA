@@ -4,10 +4,10 @@
  */
 
 import {z} from "zod";
-import {TheatreDetailsSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import {TheatreScreenWithVirtualsSchema} from "@/domains/theatre-screens/schema/model";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {SeatSchema} from "@/domains/seats/schema/seat/Seat.schema.ts";
+import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /**
  * Validates the full data package required to render the Theatre Screen management interface.

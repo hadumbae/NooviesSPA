@@ -9,8 +9,8 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import IANATimezoneHookFormSelect from "@/common/components/forms/values/IANATimezoneHookFormSelect.tsx";
 import { UseFormReturn } from "react-hook-form";
-import { TheatreQueryOptionFormValues } from "@/domains/theatres/schema/queries/TheatreQueryOptionFormSchema.ts";
-import { TheatreQueryFilters } from "@/domains/theatres/schema/queries/TheatreQueryOption.types.ts";
+import { TheatreQueryOptionFormValues } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionFormSchema.ts";
+import { TheatreQueryFilters } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.types.ts";
 
 /**
  * Props for {@link TheatreQueryOptionFormFilterFieldset}.

@@ -4,13 +4,11 @@
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useFetchTheatre from "@/domains/theatres/hooks/fetch-theatre/useFetchTheatre.ts";
+import useFetchTheatre from "@/domains/theatres/_feat/crud-hooks/useFetchTheatre.ts";
 import {useFetchScreen} from "@/domains/theatre-screens/_feat/crud-hooks";
 import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-import {TheatreDetailsSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
-import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import TheatreSummaryCard
     from "@/domains/showings/components/admin/card/showing-reference-cards/TheatreSummaryCard.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
@@ -19,6 +17,7 @@ import {
     TheatreScreenDetails,
     TheatreScreenDetailsSchema
 } from "@/domains/theatre-screens/schema/model/TheatreScreenDetailsSchema.ts";
+import {TheatreDetails, TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /** Props for the ShowingDetailsPageReferenceTab component. */
 type TabProps = {

@@ -2,7 +2,6 @@
  * @fileoverview Main content component for the theatre showing creation administrative page.
  */
 
-import {Theatre} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {TheatreShowingCreateHeader}
@@ -10,6 +9,8 @@ import {TheatreShowingCreateHeader}
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import ShowingSubmitFormContainer from "@/domains/showings/components/forms/ShowingSubmitFormContainer.tsx";
 import {ReactElement} from "react";
+
+import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
 
 /** Props for the TheatreShowingCreatePageContent component. */
 type ContentProps = {

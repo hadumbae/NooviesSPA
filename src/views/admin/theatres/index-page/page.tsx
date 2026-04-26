@@ -7,16 +7,18 @@
 
 import { ReactElement } from "react";
 import useTitle from "@/common/hooks/document/useTitle.ts";
-import { PaginatedTheatreDetailsSchema } from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
-import { PaginatedTheatreDetails } from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
 import { useParsedSearchParams } from "@/common/features/fetch-search-params";
-import { TheatreQueryOptionSchema } from "@/domains/theatres/schema/queries/TheatreQueryOption.schema.ts";
+import { TheatreQueryOptionSchema } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.schema.ts";
 import { TheatreIndexPageContent } from "@/views/admin/theatres/index-page/content.tsx";
 import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
 import { TheatreHttpStatusOverrideText } from "@/domains/theatres/constants/TheatreHttpStatusOverrideText.ts";
 import { useFetchPaginatedTheatres } from "@/domains/theatres/_feat/crud-hooks";
 import { QueryDataLoader } from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {
+    PaginatedTheatreDetails,
+    PaginatedTheatreDetailsSchema
+} from "@/domains/theatres/schema/theatre/PaginatedTheatreDetailsSchema.ts";
 
 /**
  * Defines how many theatres are shown in the list at once.
