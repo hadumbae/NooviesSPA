@@ -25,9 +25,8 @@ import {SecondaryTextBaseCSS}
     from "@/common/constants/css/TextCSS.ts";
 import SectionHeader
     from "@/common/components/page/SectionHeader.tsx";
-import ScreenShowingSelectCard
-    from "@/views/admin/theatre-screens/components/client/browse/ScreenShowingSelectCard.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
+import {TheatreScreenShowingSelectCard} from "@/views/client/theatre-screens/_feat/showing-selector";
 
 /**
  * Props for {@link TheatreInfoPageContent}.
@@ -71,7 +70,7 @@ const TheatreInfoPageContent = (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                 {screens.map(
                     (screen) => (
-                        <ScreenShowingSelectCard
+                        <TheatreScreenShowingSelectCard
                             key={screen._id}
                             screen={screen}
                         />

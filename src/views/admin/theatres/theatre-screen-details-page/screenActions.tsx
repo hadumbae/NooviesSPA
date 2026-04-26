@@ -13,7 +13,7 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ScreenDetailsUIContext} from "@/domains/theatre-screens/contexts/screen-details/ScreenDetailsUIContext.ts";
 import {simplifyScreenDetails} from "@/domains/theatre-screens/utilities/simplifyScreenDetails.ts";
 import {TheatreDetails} from "@/domains/theatres/schema/model/theatre/Theatre.types.ts";
-import {ScreenDeleteWarningDialog} from "@/views/admin/theatre-screens/components/dialog/ScreenDeleteWarningDialog.tsx";
+import {ScreenDeleteWarningDialog} from "@/views/admin/theatre-screens/_feat/model-options";
 
 /**
  * Props for the TheatreScreenDetailsPageScreenActions component.

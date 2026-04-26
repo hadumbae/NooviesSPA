@@ -4,8 +4,8 @@
 
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import ScreenDetailsOptions
-    from "@/views/admin/theatre-screens/components/admin/features/screen-details/ScreenDetailsOptions.tsx";
+import {TheatreScreenDetailsToggles}
+    from "@/views/admin/theatres/theatre-screen-details-page/toggles.tsx";
 import {TheatreScreenDetailsBreadcrumbs} from "@/views/admin/theatres/theatre-screen-details-page/breadcrumbs.tsx";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {ReactElement} from "react";
@@ -37,7 +37,7 @@ export function TheatreScreenDetailsHeader(
                     <HeaderDescription>Screen at {theatreName}. Handle seats and showings here.</HeaderDescription>
                 </section>
 
-                <ScreenDetailsOptions/>
+                <TheatreScreenDetailsToggles/>
             </div>
         </header>
     );

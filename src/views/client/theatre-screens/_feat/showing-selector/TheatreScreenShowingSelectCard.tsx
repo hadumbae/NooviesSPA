@@ -1,12 +1,5 @@
 /**
- * @file ScreenShowingSelectCard.tsx
- *
- * Card component for displaying a screen and its associated showings.
- *
- * Used in theatre browsing flows to present:
- * - Screen metadata (name, type)
- * - A selectable list of showings
- * - An empty-state when no showings are available
+ * @fileoverview Card component for displaying screen metadata alongside a selectable list of its associated showings.
  */
 
 import {ScreenWithShowings} from "@/domains/theatre-screens/schema/model/ScreenWithShowingsSchema.ts";
@@ -16,31 +9,21 @@ import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import TheatreShowingSelectSummary
     from "@/domains/theatres/components/client/forms/browse-list/TheatreShowingSelectSummary.tsx";
+import {ReactElement} from "react";
 
-/**
- * Props for {@link ScreenShowingSelectCard}.
- */
+/** Props for the TheatreScreenShowingSelectCard component. */
 type CardProps = {
-    /** Screen entity populated with its related showings */
     screen: ScreenWithShowings;
 };
 
 /**
- * Screen showing selection card.
- *
- * Renders:
- * - Screen title and type
- * - A list of available showings
- * - A placeholder state when no showings exist
- *
- * @param screen - Screen with populated showings
+ * Renders screen information and iterates through available showings, providing an empty state if none exist.
  */
-const ScreenShowingSelectCard = (
+export function TheatreScreenShowingSelectCard(
     {screen}: CardProps
-) => {
+): ReactElement {
     const {name, screenType, showings} = screen;
 
-    /** Empty-state UI when no showings are available */
     const emptySection = (
         <div className={cn(RoundedBorderCSS, "h-full min-h-28 flex justify-center items-center")}>
             <span className={cn(SecondaryTextBaseCSS, "select-none uppercase")}>
@@ -49,7 +32,6 @@ const ScreenShowingSelectCard = (
         </div>
     );
 
-    /** List of selectable showings */
     const showingSection = (
         <section className="grid grid-cols-1 gap-3">
             {showings.map(showing =>
@@ -77,6 +59,4 @@ const ScreenShowingSelectCard = (
             </CardContent>
         </Card>
     );
-};
-
-export default ScreenShowingSelectCard;
+}

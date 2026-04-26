@@ -12,6 +12,7 @@ import {
 import {TheatreScreenDetailsPageTabs} from "@/views/admin/theatres/theatre-screen-details-page/tabs.tsx";
 import {TheatreScreenDetailsBreadcrumbs} from "@/views/admin/theatres/theatre-screen-details-page/breadcrumbs.tsx";
 import {TheatreScreenDetailsHeader} from "@/views/admin/theatres/theatre-screen-details-page/header.tsx";
+import {TheatreScreenDetailsToggles} from "@/views/admin/theatres/theatre-screen-details-page/toggles.tsx";
 
 export {
     TheatreScreenDetailsPage,
@@ -23,5 +24,5 @@ export {
     TheatreScreenDetailsCreateSeatTab,
     TheatreScreenDetailsShowingsTab,
     TheatreScreenDetailsViewSeatsTab,
+    TheatreScreenDetailsToggles,
 }
-
