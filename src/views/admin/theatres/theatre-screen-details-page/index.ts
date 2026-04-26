@@ -1,8 +1,8 @@
 import {TheatreScreenDetailsPage} from "@/views/admin/theatres/theatre-screen-details-page/page.tsx";
 import {TheatreScreenDetailsPageContent} from "@/views/admin/theatres/theatre-screen-details-page/content.tsx";
-import TheatreScreenDetailsCreateSeatTab
+import {TheatreScreenDetailsCreateSeatTab}
     from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsCreateSeatTab.tsx";
-import TheatreScreenDetailsShowingsTab
+import {TheatreScreenDetailsShowingsTab}
     from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsShowingsTab.tsx";
 import {TheatreScreenDetailsViewSeatsTab}
     from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsViewSeatsTab.tsx";

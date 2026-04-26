@@ -2,33 +2,29 @@
  * @fileoverview Fieldset component for rendering seat-specific inputs like type, pricing, and availability.
  */
 
-import {FC} from 'react';
-import {UseFormReturn} from "react-hook-form";
+import {ReactElement} from 'react';
+import {useFormContext} from "react-hook-form";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {SeatFormContext} from "@/domains/seats/context/form/SeatFormContext.ts";
 import {cn} from "@/common/lib/utils.ts";
-import {SeatTypeHookFormSelect} from "@/views/admin/seats/_comp/inputs";
+import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {SeatTypeHookFormSelect} from "@/views/admin/seats/_feat/form-inputs";
 
 /** Props for the SeatSubmitFormSeatFieldset component. */
-type FieldsetProps = {
-    form: UseFormReturn<SeatFormValues>;
-    activeFields: Record<keyof SeatFormValues, boolean>;
+type FieldsetProps = Pick<FormViewProps<SeatFormValues>, "disableFields"> & {
+    isPanel?: boolean;
 };
 
 /**
- * Renders seat metadata fields conditionally based on form state.
- * Requires wrapping in a SeatFormContext provider.
+ * Renders seat metadata fields such as type, price modifier, and availability status.
  */
-const SeatSubmitFormSeatFieldset: FC<FieldsetProps> = ({form, activeFields}) => {
-    const {options: {isPanel} = {}} = useRequiredContext({
-        context: SeatFormContext,
-        message: "Must use within a provider for `SeatFormContext`.",
-    });
+export function SeatSubmitFormSeatFieldset(
+    {disableFields, isPanel}: FieldsetProps
+): ReactElement {
+    const {control} = useFormContext();
 
     return (
         <fieldset className="space-y-4">
@@ -37,43 +33,38 @@ const SeatSubmitFormSeatFieldset: FC<FieldsetProps> = ({form, activeFields}) => 
                 <Separator/>
             </div>
 
-            <div className={cn(
-                "grid gap-2",
-                isPanel ? "grid-cols-1" : "grid-cols-2",
-            )}>
+            <div className={cn("grid gap-2", isPanel ? "grid-cols-1" : "grid-cols-2")}>
                 {
-                    activeFields["seatType"] &&
+                    !disableFields?.seatType &&
                     <SeatTypeHookFormSelect
                         name="seatType"
                         label="Seat Type"
-                        control={form.control}
+                        control={control}
                     />
                 }
 
                 {
-                    activeFields["priceMultiplier"] &&
+                    !disableFields?.priceMultiplier &&
                     <HookFormInput
                         name="priceMultiplier"
                         label="Price Multiplier"
                         type="number"
                         min={0}
                         step={0.01}
-                        control={form.control}
+                        control={control}
                     />
                 }
 
                 {
-                    activeFields["isAvailable"] &&
+                    !disableFields?.isAvailable &&
                     <HookFormCheckbox
                         name="isAvailable"
                         label="Is Available?"
                         className={cn(!isPanel && "col-span-2")}
-                        control={form.control}
+                        control={control}
                     />
                 }
             </div>
         </fieldset>
     );
-};
-
-export default SeatSubmitFormSeatFieldset;
+}

@@ -21,7 +21,7 @@ import SeatMapStatusRadioGroup from "@/domains/seatmap/components/forms/input/Se
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import {cloneElement} from "react";
 import {SeatQueryOptions} from "@/domains/seats/_feat/handle-query-options/SeatQueryOptions.ts";
-import {SeatHookFormSelect} from "@/views/admin/seats/_comp/inputs";
+import {SeatHookFormSelect} from "@/views/admin/seats/_feat/form-inputs";
 
 /**
  * Props for {@link SeatMapFormDetailsFields}.

@@ -1,67 +1,59 @@
-import {FC, ReactElement} from 'react';
-import {UseFormReturn} from "react-hook-form";
+import {ReactElement} from 'react';
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
+import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {useFormContext} from "react-hook-form";
 
-type FieldsetProps = {
-    /** The react-hook-form instance managing seat form state and validation. */
-    form: UseFormReturn<SeatFormValues>;
+type FieldsetProps = Pick<FormViewProps<SeatFormValues>, "disableFields">;
 
-    /**
-     * Indicates which row fields to show.
-     * Relevant keys include:
-     * - `row`
-     * - `seatNumber`
-     * - `seatLabel`
-     */
-    activeFields: Record<keyof SeatFormValues, boolean>;
-};
+export function SeatSubmitFormNonSeatFieldset(
+    {disableFields}: FieldsetProps
+): ReactElement {
+    const {control} = useFormContext();
 
-const SeatSubmitFormNonSeatFieldset: FC<FieldsetProps> = ({form, activeFields}): ReactElement => {
     return (
         <fieldset className="space-y-4">
             <div>
                 <PrimaryHeaderText>Seat</PrimaryHeaderText>
-                <Separator />
+                <Separator/>
             </div>
 
             <div className="grid grid-cols-3 gap-2">
-                {activeFields["row"] && (
+                {
+                    !disableFields?.row &&
                     <HookFormInput
                         name="row"
                         label="Row"
-                        control={form.control}
+                        control={control}
                     />
-                )}
+                }
 
                 {
-                    activeFields["x"] &&
+                    !disableFields?.x &&
                     <HookFormInput
                         name="x"
                         label="X Coordinate"
                         type="number"
                         min={1}
                         step={1}
-                        control={form.control}
+                        control={control}
                     />
                 }
 
                 {
-                    activeFields["y"] &&
+                    !disableFields?.y &&
                     <HookFormInput
                         name="y"
                         label="Y Coordinate"
                         type="number"
                         min={1}
                         step={1}
-                        control={form.control}
+                        control={control}
                     />
                 }
             </div>
         </fieldset>
     );
-};
-
-export default SeatSubmitFormNonSeatFieldset;
+}

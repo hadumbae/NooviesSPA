@@ -2,25 +2,28 @@
  * @fileoverview Tab navigation and content orchestration for the Theatre Screen details page.
  */
 
-import {ReactElement} from "react";
+import {ReactElement, useState} from "react";
 import {Tabs, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
-import SeatDetailsPanelContextProvider
-    from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContextProvider.tsx";
 import {
     TheatreScreenDetailsViewSeatsTab
 } from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsViewSeatsTab.tsx";
-import SeatFormContextProvider from "@/domains/seats/context/form/SeatFormContextProvider.tsx";
-import TheatreScreenDetailsCreateSeatTab
+import {TheatreScreenDetailsCreateSeatTab}
     from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsCreateSeatTab.tsx";
-import TheatreScreenDetailsShowingsTab
+import {TheatreScreenDetailsShowingsTab}
     from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsShowingsTab.tsx";
-import useScreenDetailsPageValues
-    from "@/domains/theatre-screens/hooks/page/screen-details/useScreenDetailsPageValues.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import {
     TheatreScreenDetailsActiveTab
 } from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsActiveTabEnumSchema.ts";
+import {SeatDetailsPanelContextProvider} from "@/domains/seats/context/seat-details-context";
+import {SeatFormData} from "@/domains/seats/_feat/submit-data";
+import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {
+    TheatreScreenDetailsSearchParamSchema
+} from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsSearchParamSchema.ts";
+import {SeatSubmitForm} from "@/views/admin/seats/_feat/submit-data";
+import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 
 /** Props for the TheatreScreenDetailsPageTabs component. */
 type TabsProps = {
@@ -35,13 +38,27 @@ type TabsProps = {
 export function TheatreScreenDetailsPageTabs(
     {theatreID, screenID, seats}: TabsProps
 ): ReactElement {
-    const {presetValues, disableFields, tabConfig: {activeTab, setActiveTab}} = useScreenDetailsPageValues({
-        theatreID,
-        screenID
-    });
+    const [returnedSeating, setReturnedSeating] = useState<SeatDetails[]>([]);
+    const {searchParams, setSearchParams} = useParsedSearchParams({schema: TheatreScreenDetailsSearchParamSchema});
+    const {activeTab} = searchParams;
+
+    const presetValues: Partial<SeatFormData> = {
+        screen: screenID,
+        theatre: theatreID
+    };
+
+    const onSeatCreation = (seat: SeatDetails) => {
+        setReturnedSeating((prev: SeatDetails[]) => [...prev, seat]);
+    }
 
     return (
-        <Tabs defaultValue={activeTab} onValueChange={(v) => setActiveTab(v as TheatreScreenDetailsActiveTab)}>
+        <Tabs
+            defaultValue={activeTab}
+            onValueChange={(v) => setSearchParams({
+                ...searchParams,
+                activeTab: v as TheatreScreenDetailsActiveTab
+            })}
+        >
             <div className="flex justify-center">
                 <TabsList>
                     <TabsTrigger value="view-seats">Seats</TabsTrigger>
@@ -54,9 +71,12 @@ export function TheatreScreenDetailsPageTabs(
                 <TheatreScreenDetailsViewSeatsTab seats={seats}/>
             </SeatDetailsPanelContextProvider>
 
-            <SeatFormContextProvider presetValues={presetValues} disableFields={disableFields}>
-                <TheatreScreenDetailsCreateSeatTab/>
-            </SeatFormContextProvider>
+            <SeatSubmitForm presetValues={presetValues} onSubmitSuccess={onSeatCreation}>
+                <TheatreScreenDetailsCreateSeatTab
+                    returnedSeating={returnedSeating}
+                    setReturnedSeating={setReturnedSeating}
+                />
+            </SeatSubmitForm>
 
             <TheatreScreenDetailsShowingsTab screenID={screenID}/>
         </Tabs>

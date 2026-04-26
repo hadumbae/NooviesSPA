@@ -5,37 +5,32 @@
 import {ReactElement, useEffect} from 'react';
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {UseFormReturn} from "react-hook-form";
+import {useFormContext} from "react-hook-form";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {SeatFormContext} from "@/domains/seats/context/form/SeatFormContext.ts";
 import {cn} from "@/common/lib/utils.ts";
 import TheatreHookFormSelect from "@/domains/theatres/components/admin/form/theatre-inputs/TheatreHookFormSelect.tsx";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
+import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
 
 /** Props for the SeatSubmitFormDetailsFieldset component. */
-type FieldsetProps = {
-    form: UseFormReturn<SeatFormValues>;
-    activeFields: Record<keyof SeatFormValues, boolean>;
+type FieldsetProps = Pick<FormViewProps<SeatFormValues>, "disableFields"> & {
+    isPanel?: boolean;
 };
 
 /**
- * Renders the "Details" fieldset for seat management.
+ * Renders the theatre and screen selection fields, ensuring the screen resets when theatre changes.
+ * Requires wrapping in a SeatFormContext provider.
  */
 export function SeatSubmitFormDetailsFieldset(
-    {form, activeFields}: FieldsetProps
+    {disableFields, isPanel}: FieldsetProps
 ): ReactElement {
-    const {options: {isPanel} = {}} = useRequiredContext({
-        context: SeatFormContext,
-        message: "Must use within a provider for `SeatFormContext`.",
-    });
+    const {control, watch, resetField} = useFormContext();
 
-    const theatre = form.watch("theatre");
+    const theatre = watch("theatre");
     const screenFilters = {theatre};
 
-    /** Effect: Reset the screen field whenever the theatre is changed to ensure data integrity. */
     useEffect(() => {
-        form.resetField("screen");
+        resetField("screen");
     }, [theatre]);
 
     return (
@@ -50,21 +45,21 @@ export function SeatSubmitFormDetailsFieldset(
                 !isPanel && "lg:grid-cols-2",
             )}>
                 {
-                    activeFields["theatre"] &&
+                    !disableFields?.theatre &&
                     <TheatreHookFormSelect
                         name="theatre"
                         label="Theatre"
-                        control={form.control}
+                        control={control}
                     />
                 }
 
                 {
-                    activeFields["screen"] && theatre &&
+                    !disableFields?.screen && theatre &&
                     <ScreenHookFormSelect
                         name="screen"
                         label="Screen"
                         filters={screenFilters}
-                        control={form.control}
+                        control={control}
                     />
                 }
             </div>

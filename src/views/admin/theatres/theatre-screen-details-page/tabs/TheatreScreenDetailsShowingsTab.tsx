@@ -1,8 +1,6 @@
 /**
- * @file ScreenDetailsShowingsTab.tsx
- *
- * @summary
- * Tab content displaying recent showings for a screen.
+ * @fileoverview Tab content component for displaying a summary list of upcoming showings
+ * associated with a specific theatre screen.
  */
 
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
@@ -13,34 +11,28 @@ import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {List} from "lucide-react";
 import ShowingSummaryListQuery
     from "@/domains/showings/components/features/showing-summary-list-query/ShowingSummaryListQuery.tsx";
+import {ReactElement} from "react";
 
-/**
- * Props for {@link TheatreScreenDetailsShowingsTab}.
- */
+/** Props for the TheatreScreenDetailsShowingsTab component. */
 type TabProps = {
-    /** Screen identifier used to scope showings. */
     screenID: ObjectId;
 };
 
 /**
- * Renders the "Showings" tab for a screen detail view.
- *
- * Displays a header with navigation to the full showings index
- * and a limited list of upcoming showings for the screen.
- *
- * @param props Component props.
+ * Renders a list of the next 10 showings for the screen, ordered by start time.
  */
-const TheatreScreenDetailsShowingsTab = ({screenID}: TabProps) => {
+export function TheatreScreenDetailsShowingsTab(
+    {screenID}: TabProps
+): ReactElement {
     const showingIndexURL = `/admin/showings?screen=${screenID}`;
 
     return (
-        <TabsContent value="showings" className="space-y-3">
+        <TabsContent value="showings" className="space-y-4">
             <div className="flex justify-between items-center">
-                <PrimaryHeaderText>Showings</PrimaryHeaderText>
+                <PrimaryHeaderText>Recent Showings</PrimaryHeaderText>
+
                 <LoggedLink to={showingIndexURL}>
-                    <IconButton>
-                        <List/>
-                    </IconButton>
+                    <IconButton icon={List}/>
                 </LoggedLink>
             </div>
 
@@ -51,6 +43,4 @@ const TheatreScreenDetailsShowingsTab = ({screenID}: TabProps) => {
             />
         </TabsContent>
     );
-};
-
-export default TheatreScreenDetailsShowingsTab;
+}
