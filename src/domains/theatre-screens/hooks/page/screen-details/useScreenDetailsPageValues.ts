@@ -1,22 +1,10 @@
 /**
- * @file useScreenDetailsPageValues.ts
- *
- * Composes and normalizes all derived values required by the
- * Screen Details page.
- *
- * Responsibilities:
- * - Parses and manages screen-related search params
- * - Controls active tab state via URL params
- * - Resolves required UI context
- * - Provides preset and locked form values for seat creation
+ * @fileoverview Hook for composing and normalizing derived values for the Screen Details page.
  */
 
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-
-import {SeatForm} from "@/domains/seats/schema/form/SeatForm.types.ts";
-import {SeatFormValues} from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
-
+import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import {
     ScreenDetailsUIContext,
     ScreenDetailsUIContextValues
@@ -28,58 +16,31 @@ import {
 import {
     TheatreScreenDetailsSearchParams, TheatreScreenDetailsSearchParamSchema
 } from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsSearchParamSchema.ts";
+import {SeatForm} from "@/domains/seats/_feat/submit-data";
 
-/**
- * Required identifiers for initializing screen-scoped state.
- */
+/** Identifiers required to initialize the screen-scoped page state. */
 type ValueParams = {
-    /** Target screen ID */
     screenID: ObjectId;
-
-    /** Parent theatre ID */
     theatreID: ObjectId;
 };
 
-/**
- * Active tab state derived from URL search params.
- */
+/** Tab state and update handlers synchronized with URL search parameters. */
 type TabConfig = {
-    /** Currently active tab */
     activeTab: TheatreScreenDetailsActiveTab | undefined;
-
-    /** Updates active tab via search params */
     setActiveTab: (tab: TheatreScreenDetailsActiveTab) => void;
 };
 
-/**
- * Aggregated values returned by the hook.
- */
+/** Aggregated page values including tab state, UI context, and form presets. */
 type ValueReturns = {
-    /** Active tab controller */
     tabConfig: TabConfig;
-
-    /** Parsed and validated search params */
     searchParams: TheatreScreenDetailsSearchParams;
-
-    /** Required screen details UI context */
     context: ScreenDetailsUIContextValues;
-
-    /** Preset form values scoped to screen and theatre */
     presetValues: Partial<SeatForm>;
-
-    /** Seat form fields locked by context */
     disableFields: (keyof SeatFormValues)[];
 };
 
 /**
- * Screen Details page value composer.
- *
- * Centralizes URL state, UI context, and form presets
- * to keep page components declarative and lightweight.
- *
- * @param screenID - Current screen identifier
- * @param theatreID - Parent theatre identifier
- * @returns Normalized page values and handlers
+ * Manages URL search parameters, UI context, and seat form initialization for the screen details view.
  */
 export default function useScreenDetailsPageValues(
     {screenID, theatreID}: ValueParams

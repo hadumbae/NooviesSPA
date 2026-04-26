@@ -25,7 +25,7 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {UseFormReturn} from "react-hook-form";
 
-import {SeatFormValues} from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
+import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatFormContext} from "@/domains/seats/context/form/SeatFormContext.ts";
 import {cn} from "@/common/lib/utils.ts";

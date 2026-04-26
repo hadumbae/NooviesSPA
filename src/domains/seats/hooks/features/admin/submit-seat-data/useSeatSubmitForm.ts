@@ -17,11 +17,10 @@
 
 import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SeatFormSchema } from "@/domains/seats/schema/form/SeatForm.schema.ts";
 import { Seat } from "@/domains/seats/schema/seat/Seat.types.ts";
-import { SeatFormValues } from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
 import useSeatSubmitFormDefaultValues
     from "@/domains/seats/hooks/features/admin/submit-seat-data/useSeatSubmitFormDefaultValues.ts";
+import {SeatFormSchema, SeatFormValues} from "@/domains/seats/_feat/submit-data";
 
 /**
  * Configuration parameters for {@link useSeatSubmitForm}.

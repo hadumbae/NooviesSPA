@@ -15,7 +15,7 @@
  */
 
 import {useEffect, useMemo, useRef} from "react";
-import {SeatFormValues} from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
+import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatFormContext} from "@/domains/seats/context/form/SeatFormContext.ts";

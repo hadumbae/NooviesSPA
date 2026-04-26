@@ -1,28 +1,11 @@
 /**
- * @file useSeatSubmitMutation.ts
- *
- * React Query mutation hook for creating or updating `Seat` entities.
- *
- * Integrates:
- * - **React Hook Form** for validation and error hydration
- * - **SeatRepository** for persistence
- * - **SeatFormContext** for tracking returned seats
- * - **React Query** for cache invalidation
- *
- * Handles:
- * - Create vs. update mode via `editID`
- * - Server response validation with {@link SeatDetailsSchema}
- * - Form error hydration on failure
- * - Toast notifications
- * - Invalidation of seat ID and list query caches
+ * @fileoverview Mutation hook for creating or updating theatre seat entities with form synchronization.
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import {useContext} from "react";
 import SeatRepository from "@/domains/seats/repositories/SeatRepository.ts";
-import {SeatForm} from "@/domains/seats/schema/form/SeatForm.types.ts";
-import {SeatFormValues} from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
 import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import {SeatDetailsSchema} from "@/domains/seats/schema/seat/SeatDetails.schema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
@@ -35,50 +18,17 @@ import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.
 import {UseFormReturn} from "react-hook-form";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {SeatQueryKeys} from "@/domains/seats/utilities/query/SeatQueryKeys.ts";
+import {SeatForm, SeatFormValues} from "@/domains/seats/_feat/submit-data";
 
-/**
- * Parameters for {@link useSeatSubmitMutation}.
- */
+/** Props for the useSeatSubmitMutation hook. */
 type SubmitProps = {
-    /**
-     * Optional seat ID.
-     * When provided, the mutation runs in update mode.
-     */
     editID?: ObjectId;
-
-    /**
-     * React Hook Form instance.
-     */
-    form: UseFormReturn<SeatFormValues>;
-
-    /**
-     * Submission callbacks and messaging options.
-     */
+    form: UseFormReturn<SeatFormValues, unknown, SeatForm>;
     options: MutationOnSubmitParams<SeatDetails>;
 };
 
 /**
- * Submits seat form data.
- *
- * Automatically determines create vs. update mode,
- * validates server responses, hydrates form errors,
- * and synchronizes React Query caches.
- *
- * @param params - Form instance, optional edit ID, and submission options
- * @returns React Query mutation result for seat submission
- *
- * @example
- * ```ts
- * const mutation = useSeatSubmitMutation({
- *   form,
- *   editID: undefined,
- *   options: {
- *     onSubmitSuccess: (seat) => console.log(seat),
- *   },
- * });
- *
- * mutation.mutate(values);
- * ```
+ * Handles seat persistence, server response validation, and React Query cache invalidation.
  */
 export default function useSeatSubmitMutation(
     params: SubmitProps

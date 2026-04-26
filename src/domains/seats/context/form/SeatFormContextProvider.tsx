@@ -1,58 +1,29 @@
 /**
- * @file SeatFormContextProvider.tsx
- * @description
- * React provider for managing seat-form state during create/update workflows.
- *
- * Exposes a shared state container for:
- * - `initialValues`: baseline form values (defaults or server-loaded)
- * - `currentValues`: actively edited values
- * - `returnedSeats`: seats returned by the server after submission
- * - `options`: optional configuration controlling form behavior
- *
- * Components wrapped by this provider can access and modify shared state
- * using {@link SeatFormContext}.
+ * @fileoverview React provider for managing seat-form state during create and update workflows.
  */
 
 import { ReactNode, useState } from "react";
-import { SeatFormValues } from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
+import { SeatFormValues } from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import { SeatFormContext } from "@/domains/seats/context/form/SeatFormContext.ts";
 import { SeatDetails } from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import { FormOptions } from "@/common/type/form/HookFormProps.ts";
-import { SeatForm } from "@/domains/seats/schema/form/SeatForm.types.ts";
+import {SeatForm} from "@/domains/seats/_feat/submit-data/schemas/SeatFormSchema.ts";
 
+/** Props for the SeatFormContextProvider component. */
 type ProviderProps = FormOptions<SeatFormValues, SeatForm> & {
     children: ReactNode;
 };
 
 /**
- * Provides a {@link SeatFormContext} instance to all child components.
- *
- * Manages the full lifecycle of a seat form:
- * - initial load (`initialValues`)
- * - user editing (`currentValues`)
- * - server responses (`returnedSeats`)
- * - behavior configuration (`options`)
- *
- * @param props - Includes React children and optional form configuration.
- * @returns A context provider exposing synchronized seat-form state.
- *
- * @example
- * ```tsx
- * <SeatFormContextProvider>
- *   <SeatForm />
- * </SeatFormContextProvider>
- * ```
+ * Provides state management for seat form initialization, active editing, and server response tracking.
  */
 const SeatFormContextProvider = (props: ProviderProps) => {
-    // --- Props ---
     const { children, ...options } = props;
 
-    // --- State ---
     const [initialValues, setInitialValues] = useState<SeatFormValues | undefined>(undefined);
     const [currentValues, setCurrentValues] = useState<SeatFormValues | undefined>(undefined);
     const [returnedSeats, setReturnedSeats] = useState<SeatDetails[]>([]);
 
-    // --- Aggregated Context Value ---
     const values = {
         initialValues,
         setInitialValues,
@@ -63,7 +34,6 @@ const SeatFormContextProvider = (props: ProviderProps) => {
         options,
     };
 
-    // --- Render ---
     return (
         <SeatFormContext.Provider value={values}>
             {children}

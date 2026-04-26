@@ -33,10 +33,10 @@ import SeatSubmitFormView from "@/domains/seats/components/forms/submit-form/sea
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatFormContext} from "@/domains/seats/context/form/SeatFormContext.ts";
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
-import {SeatFormValues} from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
 import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
-import {SeatForm} from "@/domains/seats/schema/form/SeatForm.types.ts";
+import {SeatForm, SeatFormValues} from "@/domains/seats/_feat/submit-data";
+
 
 /**
  * Props for {@link SeatSubmitFormContainer}
@@ -59,12 +59,12 @@ const SeatSubmitFormContainer: FC<FormProps> = (props) => {
     const {className, entity, ...formOptions} = props;
 
     // --- Access Context ---
-    const {initialValues, currentValues, setCurrentValues, options = {}} = useRequiredContext({
+    const {currentValues, setCurrentValues, options = {}} = useRequiredContext({
         context: SeatFormContext,
         message: "Must use within a provider for `SeatFormContext`.",
     });
 
-    const {presetValues, resetOnSubmit} = options;
+    const {presetValues} = options;
 
     // --- Form ---
     const form = useSeatSubmitForm({seat: entity, presetValues});
@@ -90,12 +90,8 @@ const SeatSubmitFormContainer: FC<FormProps> = (props) => {
     });
 
     // --- Submission ---
-    const onFormSubmit = (values: SeatFormValues) => {
-        if (resetOnSubmit && initialValues) {
-            form.reset(initialValues);
-            setCurrentValues(undefined);
-        }
-        mutation.mutate(values as SeatForm);
+    const onFormSubmit = (values: SeatForm) => {
+        mutation.mutate(values);
     };
 
     // --- Render ---

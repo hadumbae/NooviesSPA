@@ -27,7 +27,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/common/components/ui/Sheet";
-import { SeatFormValues } from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
+import { SeatFormValues } from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import { SeatDetails } from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 
 /**

@@ -25,7 +25,7 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {UseFormReturn} from "react-hook-form";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {SeatFormValues} from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
+import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 
 /**
  * Props for {@link SeatSubmitFormCoordinateFieldset}.

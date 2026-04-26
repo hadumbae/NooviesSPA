@@ -11,8 +11,7 @@ import {RotateCcw} from "lucide-react";
 import {SeatFormContext} from "@/domains/seats/context/form/SeatFormContext.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 
-import {SeatFormValuesSchema, SeatFormValues} from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
-import {SeatForm} from "@/domains/seats/schema/form/SeatForm.types.ts";
+import {SeatFormValuesSchema, SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
@@ -24,6 +23,7 @@ import SeatSubmitFormNonSeatFieldset from "./SeatSubmitFormNonSeatFieldset.tsx";
 import SeatSubmitFormRowFieldset from "./SeatSubmitFormRowFieldset.tsx";
 import SeatSubmitFormCoordinateFieldset from "./SeatSubmitFormCoordinateFieldset.tsx";
 import SeatSubmitFormSeatFieldset from "./SeatSubmitFormSeatFieldset.tsx";
+import {SeatForm} from "@/domains/seats/_feat/submit-data";
 
 /**
  * Props for SeatSubmitFormView, templated for entity and form DTOs.

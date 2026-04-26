@@ -1,6 +1,6 @@
 import {FC, ReactElement} from 'react';
 import {UseFormReturn} from "react-hook-form";
-import {SeatFormValues} from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
+import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";

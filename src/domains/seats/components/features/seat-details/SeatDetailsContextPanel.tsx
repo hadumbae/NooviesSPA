@@ -15,7 +15,7 @@ import simplifySeatDetails from "@/domains/seats/utilities/seat-details/simplify
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import SeatDeleteWarning from "@/domains/seats/components/features/delete-seats/SeatDeleteWarning.tsx";
-import {SeatFormValues} from "@/domains/seats/schema/form/SeatFormValuesSchema.ts";
+import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 
 /**
  * Seat details context panel component.
