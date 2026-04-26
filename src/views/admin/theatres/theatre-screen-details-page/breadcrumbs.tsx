@@ -1,4 +1,8 @@
-import {FC} from 'react';
+/**
+ * @fileoverview Breadcrumb navigation for the theatre screen details administration page.
+ */
+
+import {ReactElement} from 'react';
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -8,17 +12,22 @@ import {
 } from "@/common/components/ui/breadcrumb.tsx";
 import {Link} from "react-router-dom";
 
-type DetailsBreadcrumbs = {
+/** Props for the TheatreScreenDetailsBreadcrumbs component. */
+type BreadcrumbsProps = {
     theatreSlug: string;
-    theatreName?: string;
-    screenName?: string;
+    theatreName: string;
+    screenName: string;
 }
 
-const TheatreScreenDetailsBreadcrumbs: FC<DetailsBreadcrumbs> = ({theatreSlug, theatreName, screenName}) => {
+/**
+ * Renders a navigation trail from the theatre index to the specific screen.
+ */
+export function TheatreScreenDetailsBreadcrumbs(
+    {theatreSlug, theatreName, screenName}: BreadcrumbsProps
+): ReactElement {
     return (
         <Breadcrumb>
             <BreadcrumbList>
-
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                         <Link to="/admin/theatres">
@@ -27,24 +36,24 @@ const TheatreScreenDetailsBreadcrumbs: FC<DetailsBreadcrumbs> = ({theatreSlug, t
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator/>
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                         <Link to={`/admin/theatres/get/${theatreSlug}`}>
-                            {theatreName ?? "Theatre"} | Details
+                            {theatreName} | Details
                         </Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator/>
 
                 <BreadcrumbItem>
-                    <BreadcrumbPage>{screenName ?? "Screen Details"} | Screen</BreadcrumbPage>
+                    <BreadcrumbPage>
+                        {screenName} | Screen
+                    </BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>
     );
-};
-
-export default TheatreScreenDetailsBreadcrumbs;
+}
