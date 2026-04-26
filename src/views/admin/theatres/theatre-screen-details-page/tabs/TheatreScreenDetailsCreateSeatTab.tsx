@@ -13,13 +13,13 @@
  * enforced at runtime by `useRequiredContext`, which throws a descriptive error
  * when the provider is missing.
  *
- * @see SeatSubmitFormContainer
+ * @see SeatSubmitForm
  * @see SeatFormSubmitList
  * @see SeatFormContext
  */
 
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import SeatSubmitFormContainer from "@/domains/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
+import SeatSubmitForm from "@/views/admin/seats/_comp/forms/SeatSubmitForm.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import SeatFormSubmitList from "@/views/admin/theatre-screens/components/theatre-screens/admin/features/seat-submit/SeatFormSubmitList.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
@@ -56,7 +56,7 @@ const TheatreScreenDetailsCreateSeatTab = (): ReactElement => {
                 <SectionHeader>Create Seats</SectionHeader>
                 <Card>
                     <CardContent className="p-4">
-                        <SeatSubmitFormContainer />
+                        <SeatSubmitForm />
                     </CardContent>
                 </Card>
             </section>

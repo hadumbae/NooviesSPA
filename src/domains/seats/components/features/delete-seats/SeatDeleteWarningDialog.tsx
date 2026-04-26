@@ -1,5 +1,5 @@
 import {FC, ReactNode} from 'react';
-import useSeatDeleteMutation from "@/domains/seats/hooks/features/admin/delete-seat-data/useSeatDeleteMutation.ts";
+import useSeatDeleteMutation from "@/domains/seats/_feat/crud-hooks/useSeatDeleteMutation.ts";
 import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";

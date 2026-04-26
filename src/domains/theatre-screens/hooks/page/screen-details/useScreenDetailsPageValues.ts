@@ -16,7 +16,7 @@ import {
 import {
     TheatreScreenDetailsSearchParams, TheatreScreenDetailsSearchParamSchema
 } from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsSearchParamSchema.ts";
-import {SeatForm} from "@/domains/seats/_feat/submit-data";
+import {SeatFormData} from "@/domains/seats/_feat/submit-data";
 
 /** Identifiers required to initialize the screen-scoped page state. */
 type ValueParams = {
@@ -35,7 +35,7 @@ type ValueReturns = {
     tabConfig: TabConfig;
     searchParams: TheatreScreenDetailsSearchParams;
     context: ScreenDetailsUIContextValues;
-    presetValues: Partial<SeatForm>;
+    presetValues: Partial<SeatFormData>;
     disableFields: (keyof SeatFormValues)[];
 };
 
@@ -55,7 +55,7 @@ export default function useScreenDetailsPageValues(
 
     const context = useRequiredContext({context: ScreenDetailsUIContext});
 
-    const presetValues: Partial<SeatForm> = {
+    const presetValues: Partial<SeatFormData> = {
         screen: screenID,
         theatre: theatreID
     };

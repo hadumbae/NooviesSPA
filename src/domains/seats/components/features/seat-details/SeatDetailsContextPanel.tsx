@@ -10,7 +10,7 @@ import SeatDetailsPanelRelatedSection
 import SeatDetailsPanelOptionButtonsSection
     from "@/domains/seats/components/features/seat-details/SeatDetailsPanelOptionButtonsSection.tsx";
 import SeatFormContextProvider from "@/domains/seats/context/form/SeatFormContextProvider.tsx";
-import SeatSubmitFormContainer from "@/domains/seats/components/forms/submit-form/SeatSubmitFormContainer.tsx";
+import SeatSubmitForm from "@/views/admin/seats/_comp/forms/SeatSubmitForm.tsx";
 import simplifySeatDetails from "@/domains/seats/utilities/seat-details/simplifySeatDetails.ts";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
@@ -96,7 +96,7 @@ const SeatDetailsContextPanel = () => {
                         {isEditing && (
                             <SeatFormContextProvider isPanel={true} disableFields={["theatre", "screen"]}>
                                 <div className="px-2">
-                                    <SeatSubmitFormContainer
+                                    <SeatSubmitForm
                                         className="border border-gray-200 dark:border-white p-3 rounded-xl"
                                         isEditing={true}
                                         entity={simplifiedSeat}

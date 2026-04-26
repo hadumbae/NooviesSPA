@@ -9,6 +9,7 @@ import { FormStarterValueSchema } from "@/common/schema/form/FormStarterValueSch
  * Zod schema defining the placeholder values used to initialize a seat form.
  */
 export const SeatFormValuesSchema = z.object({
+    _id: FormStarterValueSchema,
     theatre: FormStarterValueSchema,
     screen: FormStarterValueSchema,
     row: FormStarterValueSchema,

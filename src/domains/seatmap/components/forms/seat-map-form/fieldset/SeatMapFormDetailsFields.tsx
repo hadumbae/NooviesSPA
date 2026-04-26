@@ -15,13 +15,13 @@
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import SeatHookFormSelect from "@/domains/seats/components/forms/inputs/SeatHookFormSelect.tsx";
 import {UseFormReturn} from "react-hook-form";
 import {SeatMapFormValues} from "@/domains/seatmap/schema/form/SeatMapForm.types.ts";
 import SeatMapStatusRadioGroup from "@/domains/seatmap/components/forms/input/SeatMapStatusRadioGroup.tsx";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import {cloneElement} from "react";
-import {SeatQueryOptions} from "@/domains/seats/schema/queries/SeatQueryOptions.ts";
+import {SeatQueryOptions} from "@/domains/seats/_feat/handle-query-options/SeatQueryOptions.ts";
+import {SeatHookFormSelect} from "@/views/admin/seats/_comp/inputs";
 
 /**
  * Props for {@link SeatMapFormDetailsFields}.

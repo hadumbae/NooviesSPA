@@ -7,10 +7,10 @@ import { SeatFormValues } from "@/domains/seats/_feat/submit-data/schemas/SeatFo
 import { SeatFormContext } from "@/domains/seats/context/form/SeatFormContext.ts";
 import { SeatDetails } from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import { FormOptions } from "@/common/type/form/HookFormProps.ts";
-import {SeatForm} from "@/domains/seats/_feat/submit-data/schemas/SeatFormSchema.ts";
+import {SeatFormData} from "@/domains/seats/_feat/submit-data/schemas/SeatFormSchema.ts";
 
 /** Props for the SeatFormContextProvider component. */
-type ProviderProps = FormOptions<SeatFormValues, SeatForm> & {
+type ProviderProps = FormOptions<SeatFormValues, SeatFormData> & {
     children: ReactNode;
 };
 

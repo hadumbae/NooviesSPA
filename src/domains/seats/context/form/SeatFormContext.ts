@@ -5,7 +5,7 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 import { SeatDetails } from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import { FormOptions } from "@/common/type/form/HookFormProps.ts";
-import {SeatForm, SeatFormValues} from "@/domains/seats/_feat/submit-data";
+import {SeatFormData, SeatFormValues} from "@/domains/seats/_feat/submit-data";
 
 /** Context values tracking the lifecycle of seat form data from initialization to server response. */
 export type SeatFormContextValues = {
@@ -15,7 +15,7 @@ export type SeatFormContextValues = {
     setCurrentValues: Dispatch<SetStateAction<SeatFormValues | undefined>>;
     returnedSeats: SeatDetails[];
     setReturnedSeats: Dispatch<SetStateAction<SeatDetails[]>>;
-    options?: FormOptions<SeatFormValues, SeatForm>;
+    options?: FormOptions<SeatFormValues, SeatFormData>;
 };
 
 /**

@@ -1,5 +1,5 @@
 import {
-    SeatForm,
+    SeatFormData,
     SeatFormBaseSchema,
     SeatFormSchema
 } from "@/domains/seats/_feat/submit-data/schemas/SeatFormSchema.ts";
@@ -12,6 +12,6 @@ export {
 }
 
 export type {
-    SeatForm,
+    SeatFormData,
     SeatFormValues,
 }

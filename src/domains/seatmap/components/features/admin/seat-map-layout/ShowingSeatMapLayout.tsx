@@ -1,6 +1,6 @@
 import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import useOrganisedSeatingForLayout
-    from "@/domains/seats/hooks/features/admin/screen-seat-layout/useOrganisedSeatingForLayout.ts";
+    from "@/domains/seats/_feat/handle-seat-layout/useOrganisedSeatingForLayout.ts";
 import keyForSeatElement
     from "@/domains/seats/utilities/screen-seats/keyForSeatElement.ts";
 import ShowingSeatMapElement

@@ -3,7 +3,7 @@
  */
 
 import {useFetchScreenBySlug} from "@/domains/theatre-screens/_feat/crud-hooks";
-import useFetchSeats from "@/domains/seats/hooks/query/useFetchSeats.ts";
+import useFetchSeats from "@/domains/seats/_feat/crud-hooks/useFetchSeats.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {TheatreDetailsSchema} from "@/domains/theatres/schema/model/theatre/Theatre.schema.ts";
 import {SeatDetailsArraySchema} from "@/domains/seats/schema/seat/SeatRelated.schema.ts";

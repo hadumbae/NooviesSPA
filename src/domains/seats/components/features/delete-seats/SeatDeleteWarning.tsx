@@ -3,7 +3,7 @@ import {AlertTriangle, Loader, LucideIcon, Trash} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import useSeatDeleteMutation from "@/domains/seats/hooks/features/admin/delete-seat-data/useSeatDeleteMutation.ts";
+import useSeatDeleteMutation from "@/domains/seats/_feat/crud-hooks/useSeatDeleteMutation.ts";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 

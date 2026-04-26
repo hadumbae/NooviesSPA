@@ -4,7 +4,7 @@
  */
 
 import useOrganisedSeatingForLayout
-    from "@/domains/seats/hooks/features/admin/screen-seat-layout/useOrganisedSeatingForLayout.ts";
+    from "@/domains/seats/_feat/handle-seat-layout/useOrganisedSeatingForLayout.ts";
 import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {cn} from "@/common/lib/utils.ts";

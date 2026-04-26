@@ -15,6 +15,7 @@ import {SeatLayoutTypeEnumSchema} from "@/domains/seats/schema/SeatLayoutTypeEnu
  * Base schema containing shared geometric and relational data for all layout elements.
  */
 export const SeatFormBaseSchema = z.object({
+    _id: IDStringSchema.readonly().optional(),
     theatre: IDStringSchema,
     screen: IDStringSchema,
     row: NonEmptyStringSchema.max(10, "Must be 10 characters or less."),
@@ -63,4 +64,4 @@ export const SeatFormSchema = z.discriminatedUnion("layoutType", [
 /**
  * TypeScript type inferred from {@link SeatFormSchema}.
  */
-export type SeatForm = z.infer<typeof SeatFormSchema>;
+export type SeatFormData = z.infer<typeof SeatFormSchema>;
