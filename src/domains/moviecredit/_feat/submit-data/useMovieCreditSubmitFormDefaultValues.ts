@@ -3,7 +3,7 @@
 import {useMemo, useRef} from "react";
 import {isEqual} from "lodash";
 import {MovieCredit} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
-import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValuesSchema.ts";
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValues.ts";
 
 /** Parameters for the useMovieCreditSubmitFormDefaultValues hook. */
 type DefaultParams = {

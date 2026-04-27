@@ -8,7 +8,7 @@ import {
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
-import {MovieCreditCastOverviewCard} from "@/domains/movies/components/details/MovieCreditCastOverviewCard.tsx";
+import {MovieCreditCastOverviewCard} from "@/views/admin/movie-credits/_comp/cast-overview/MovieCreditCastOverviewCard.tsx";
 
 /** Props for the MovieDetailsCreditOverview component. */
 export type OverviewProps = {

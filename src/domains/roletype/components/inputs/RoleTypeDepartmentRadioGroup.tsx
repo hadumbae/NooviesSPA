@@ -1,68 +1,35 @@
-import { FieldValues, Path, UseFormReturn } from "react-hook-form";
+/** @fileoverview Radio group component for selecting a role type department. */
+
+import {Control, FieldValues, Path} from "react-hook-form";
 import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
 import HookFormRadioGroup from "@/common/components/forms/radio-group/HookFormRadioGroup.tsx";
 import RoleTypeDepartmentConstant from "@/domains/roletype/constant/RoleTypeDepartmentConstant.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {ReactElement} from "react";
 
-/**
- * Props for the `RoleTypeDepartmentRadioGroup` component.
- *
- * @template TForm - The type of the form data object used with react-hook-form.
- */
+/** Props for the RoleTypeDepartmentRadioGroup component. */
 export type RoleTypeProps<TForm extends FieldValues> = {
-    /** The `react-hook-form` object returned by `useForm`. */
-    form: UseFormReturn<TForm>;
-
-    /** The name of the field in the form this radio group controls. */
+    control: Control<TForm>;
     name: Path<TForm>;
-
-    /** The label displayed above the radio group. */
     label: string;
-
-    /** Optional CSS class name applied to the radio group container. */
     className?: string;
 };
 
-/**
- * A radio group component for selecting a department in a role type form.
- *
- * This component automatically generates options from the
- * `RoleTypeDepartmentConstant` list, formatting each value
- * to title case for display. It integrates with `react-hook-form`
- * through `HookFormRadioGroup`.
- *
- * @template TForm - The type of the form data object used with react-hook-form.
- * @param {RoleTypeProps<TForm>} props - The props for the component.
- * @returns A `HookFormRadioGroup` configured for selecting a role type department.
- *
- * @example
- * ```tsx
- * const form = useForm<{ department: string }>();
- * <RoleTypeDepartmentRadioGroup
- *     form={form}
- *     name="department"
- *     label="Select Department"
- * />
- * ```
- */
-const RoleTypeDepartmentRadioGroup = <TForm extends FieldValues>(
-    props: RoleTypeProps<TForm>
-) => {
-    const { form, name, label, className } = props;
-
+/** Renders a radio group populated with department options from RoleTypeDepartmentConstant. */
+export function RoleTypeDepartmentRadioGroup<TForm extends FieldValues>(
+    {control, name, label, className}: RoleTypeProps<TForm>
+): ReactElement {
     const items: HookRadioOption[] = RoleTypeDepartmentConstant.map(
-        val => ({ label: convertToTitleCase(val), value: val })
+        val => ({label: convertToTitleCase(val), value: val})
     );
 
     return (
         <HookFormRadioGroup
             className={className}
-            control={form.control}
+            control={control}
             label={label}
             name={name}
             items={items}
         />
     );
-};
-
-export default RoleTypeDepartmentRadioGroup;
+}

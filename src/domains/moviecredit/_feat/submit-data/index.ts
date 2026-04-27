@@ -16,11 +16,11 @@ import {
 } from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
 import {
     MovieCreditFormValues,
-    MovieCreditFormValuesSchema
-} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValuesSchema.ts";
+} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValues.ts";
 import {useMovieCreditSubmitForm} from "@/domains/moviecredit/_feat/submit-data/useMovieCreditSubmitForm.ts";
 import {useMovieCreditSubmitFormDefaultValues}
     from "@/domains/moviecredit/_feat/submit-data/useMovieCreditSubmitFormDefaultValues.ts";
+import {MovieCreditFormDisableFields} from "@/domains/moviecredit/_feat/submit-data/types.ts";
 
 
 export {
@@ -28,7 +28,6 @@ export {
     MovieCreditFormCastSchema,
     MovieCreditFormCrewSchema,
     MovieCreditFormSchema,
-    MovieCreditFormValuesSchema,
     useMovieCreditSubmitForm,
     useMovieCreditSubmitFormDefaultValues,
 }
@@ -39,5 +38,6 @@ export type {
     MovieCreditFormCrewValues,
     MovieCreditFormData,
     MovieCreditFormValues,
+    MovieCreditFormDisableFields,
 }
 

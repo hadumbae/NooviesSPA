@@ -1,6 +1,5 @@
 /** @fileoverview Tab content for displaying a preview of movie cast credits. */
 
-import {MovieDetailsCreditCastOverview} from "@/domains/movies/components/details/MovieDetailsCreditCastOverview.tsx";
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
@@ -11,6 +10,7 @@ import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {MovieCreditDetails} from "@/domains/moviecredit/schemas";
 import {ReactElement} from "react";
+import {MovieDetailsCreditCastOverview} from "@/views/admin/movie-credits/_comp/cast-overview";
 
 /** Cast-specific movie credit details filtered by department. */
 type CastCredits = (Extract<MovieCreditDetails, { department: "CAST" }>)[];

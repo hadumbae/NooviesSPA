@@ -7,6 +7,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEm
 
 /** Zod schema for core movie credit fields common to both cast and crew. */
 export const MovieCreditFormBaseSchema = z.object({
+    _id: IDStringSchema.readonly().optional(),
     movie: IDStringSchema,
     person: IDStringSchema,
     roleType: IDStringSchema,

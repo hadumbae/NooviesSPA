@@ -5,29 +5,24 @@
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import MovieCreditRepository from "@/domains/moviecredit/_feat/crud/remove/MovieCreditRepository.ts";
 import {toast} from "react-toastify";
 import {UseFormReturn} from "react-hook-form";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {MovieCreditQueryKeys} from "@/domains/moviecredit/_feat/crud/remove/MovieCreditQueryKeys.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     MovieCreditDetails,
     MovieCreditDetailsSchema
 } from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
-import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValuesSchema.ts";
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValues.ts";
 import {MovieCreditFormData} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
+import {create, MovieCreditCRUDMutationKeys, MovieCreditCRUDQueryKeys, update} from "@/domains/moviecredit/_feat/crud";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/features/submit-data";
 
-type SubmitParams = MutationOnSubmitParams<MovieCreditDetails> & {
+type SubmitParams = MutationResponseConfig<MovieCreditDetails> & {
     /** React Hook Form instance */
-    form: UseFormReturn<MovieCreditFormValues>;
-
-    /** Existing credit ID (edit mode only) */
-    editID?: ObjectId;
+    form: UseFormReturn<MovieCreditFormValues, unknown, MovieCreditFormData>;
+    resetOptions: MutationFormResetConfig;
 };
 
 /**
@@ -42,50 +37,28 @@ type SubmitParams = MutationOnSubmitParams<MovieCreditDetails> & {
  *
  * @returns React Query mutation instance
  */
-export default function useMovieCreditSubmitMutation(
-    {form, editID, onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitParams
+export function useMovieCreditSubmitMutation(
+    {form, onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitParams
 ): UseMutationResult<MovieCreditDetails, unknown, MovieCreditFormData> {
     const invalidateQueries = useInvalidateQueryKeys();
+    const config = {populate: true, virtuals: true};
 
-    const submitMovieCreditData = async (values: MovieCreditFormData) => {
-        const submitData = {
-            data: values,
-            config: {populate: true, virtuals: true},
-        }
+    const submitMovieCreditData = async ({_id, ...data}: MovieCreditFormData) => {
+        const action = _id ? () => update({_id, data, config}) : () => create({data, config});
+        const {result} = await action();
 
-        const action =
-            editID
-                ? () => MovieCreditRepository.update({_id: editID, ...submitData})
-                : () => MovieCreditRepository.create(submitData);
-
-        const result = await handleMutationResponse({
-            action,
-            errorMessage: "Failed to submit data. Please try again.",
-        });
-
-        const {data, success, error} = validateData({
+        const {data: parsed, success, error} = validateData({
             data: result,
             schema: MovieCreditDetailsSchema,
             message: "Invalid data returned. Please try again.",
         });
 
         if (!success) throw error;
-        return data;
+        return parsed;
     };
 
     const onSuccess = (credit: MovieCreditDetails) => {
-        invalidateQueries(
-            [
-
-                MovieCreditQueryKeys.ids({_id: credit._id}),
-                MovieCreditQueryKeys.slugs(),
-                MovieCreditQueryKeys.persons({personID: credit.person._id}),
-                MovieCreditQueryKeys.query(),
-                MovieCreditQueryKeys.paginated(),
-            ],
-            {exact: false},
-        )
-
+        invalidateQueries([MovieCreditCRUDQueryKeys.all], {exact: false});
         successMessage && toast.success(successMessage);
         onSubmitSuccess?.(credit);
     };
@@ -96,7 +69,7 @@ export default function useMovieCreditSubmitMutation(
     };
 
     return useMutation({
-        mutationKey: ["submit_single_movie_credit"],
+        mutationKey: MovieCreditCRUDMutationKeys.submit(),
         mutationFn: submitMovieCreditData,
         onSuccess,
         onError,

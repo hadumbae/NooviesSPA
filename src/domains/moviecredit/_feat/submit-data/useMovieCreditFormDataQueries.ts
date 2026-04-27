@@ -16,7 +16,7 @@ import useFetchMovies from "@/domains/movies/hooks/queries/useFetchMovies.ts";
 import {MovieArraySchema} from "@/domains/movies/schema/movie/MovieArraySchema.ts";
 import {useFetchPersons} from "@/domains/persons/_feat/crud-hooks";
 
-import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValuesSchema.ts";
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValues.ts";
 
 /**
  * Parameters for the {@link useMovieCreditFormDataQueries} hook.

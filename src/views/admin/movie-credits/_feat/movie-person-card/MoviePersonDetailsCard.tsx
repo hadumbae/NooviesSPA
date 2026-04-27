@@ -1,9 +1,11 @@
-import {FC} from 'react';
+/** @fileoverview Card component for displaying detailed movie credit information for cast and crew. */
+
+import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {ParamError} from "@/common/errors/ParamError.ts";
 import BooleanFlagLabelSpan from "@/common/components/BooleanFlagLabelSpan.tsx";
-import MoviePersonDetailsCardHeader
-    from "@/domains/movies/components/admin/credits/cards/MoviePersonDetailsCardHeader.tsx";
+import {MoviePersonDetailsCardHeader}
+    from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardHeader.tsx";
 import LabelContent from "@/common/components/card-content/LabelContent.tsx";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
 
@@ -11,11 +13,17 @@ import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
+/** Props for the MoviePersonDetailsCard component. */
 interface DetailsProp {
     credit: MovieCreditDetails;
 }
 
-const MoviePersonDetailsCard: FC<DetailsProp> = ({credit}) => {
+/**
+ * Renders a detailed breakdown of a movie credit, including role info and cast flags.
+ */
+export function MoviePersonDetailsCard(
+    {credit}: DetailsProp
+): ReactElement {
     const {
         person: {name},
         roleType: {roleName},
@@ -74,15 +82,11 @@ const MoviePersonDetailsCard: FC<DetailsProp> = ({credit}) => {
         <Card>
             <MoviePersonDetailsCardHeader department={department} credit={credit}/>
 
-            {
-                <CardContent className="space-y-5">
-                    {baseSection}
-                    {department === "CAST" && castFlagSection}
-                    {notes && <TextQuote className="text-[10px]">{notes}</TextQuote>}
-                </CardContent>
-            }
+            <CardContent className="space-y-5">
+                {baseSection}
+                {department === "CAST" && castFlagSection}
+                {notes && <TextQuote className="text-[10px]">{notes}</TextQuote>}
+            </CardContent>
         </Card>
     );
-};
-
-export default MoviePersonDetailsCard;
+}
