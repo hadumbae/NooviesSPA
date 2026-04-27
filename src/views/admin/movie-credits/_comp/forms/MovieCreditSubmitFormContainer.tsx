@@ -5,10 +5,8 @@
  * Handles queries, mutations, and form orchestration.
  */
 
-import useMovieCreditSubmitForm from "@/domains/moviecredit/_feat/submit-data/useMovieCreditSubmitForm.ts";
-import useMovieCreditSubmitMutation from "@/domains/moviecredit/_feat/crud/useMovieCreditSubmitMutation.ts";
+import useMovieCreditSubmitMutation from "@/domains/moviecredit/_feat/crud-hooks/useMovieCreditSubmitMutation.ts";
 import {MovieQueryFilters} from "@/domains/movies/schema/queries/MovieQueryOption.types.ts";
-import {MovieCreditForm, MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
 import {Loader} from "lucide-react";
 import ErrorMessageDisplay from "@/common/components/errors/ErrorMessageDisplay.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
@@ -26,6 +24,9 @@ import {MovieCredit} from "@/domains/moviecredit/schemas/model/MovieCreditSchema
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValuesSchema.ts";
+import {MovieCreditFormData} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
+import {useMovieCreditSubmitForm} from "@/domains/moviecredit/_feat/submit-data";
 
 type ContainerProps = FormContainerProps<MovieCreditDetails, MovieCredit, MovieCreditFormValues> & {
     /** Optional filters for movie lookup */
@@ -94,7 +95,7 @@ const MovieCreditSubmitFormContainer = (props: ContainerProps) => {
     // Form submission handler
     const handleSubmit = (values: MovieCreditFormValues) => {
         console.log("Movie Credit Form Values:", values);
-        mutation.mutate(values as MovieCreditForm);
+        mutation.mutate(values as MovieCreditFormData);
     };
 
     return (

@@ -5,21 +5,22 @@
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import MovieCreditRepository from "@/domains/moviecredit/_feat/crud/MovieCreditRepository.ts";
+import MovieCreditRepository from "@/domains/moviecredit/_feat/crud/remove/MovieCreditRepository.ts";
 import {toast} from "react-toastify";
-import {MovieCreditForm, MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
 import {UseFormReturn} from "react-hook-form";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {MovieCreditQueryKeys} from "@/domains/moviecredit/_feat/crud/MovieCreditQueryKeys.ts";
+import {MovieCreditQueryKeys} from "@/domains/moviecredit/_feat/crud/remove/MovieCreditQueryKeys.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     MovieCreditDetails,
     MovieCreditDetailsSchema
 } from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValuesSchema.ts";
+import {MovieCreditFormData} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
 
 type SubmitParams = MutationOnSubmitParams<MovieCreditDetails> & {
     /** React Hook Form instance */
@@ -43,10 +44,10 @@ type SubmitParams = MutationOnSubmitParams<MovieCreditDetails> & {
  */
 export default function useMovieCreditSubmitMutation(
     {form, editID, onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitParams
-): UseMutationResult<MovieCreditDetails, unknown, MovieCreditForm> {
+): UseMutationResult<MovieCreditDetails, unknown, MovieCreditFormData> {
     const invalidateQueries = useInvalidateQueryKeys();
 
-    const submitMovieCreditData = async (values: MovieCreditForm) => {
+    const submitMovieCreditData = async (values: MovieCreditFormData) => {
         const submitData = {
             data: values,
             config: {populate: true, virtuals: true},

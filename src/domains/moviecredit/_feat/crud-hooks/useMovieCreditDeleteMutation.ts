@@ -1,12 +1,12 @@
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import MovieCreditRepository from "@/domains/moviecredit/_feat/crud/MovieCreditRepository.ts";
+import MovieCreditRepository from "@/domains/moviecredit/_feat/crud/remove/MovieCreditRepository.ts";
 import {useMutation} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {MovieCreditQueryKeys} from "@/domains/moviecredit/_feat/crud/MovieCreditQueryKeys.ts";
+import {MovieCreditQueryKeys} from "@/domains/moviecredit/_feat/crud/remove/MovieCreditQueryKeys.ts";
 
 /**
  * Delete a movie credit.

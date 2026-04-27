@@ -3,13 +3,14 @@ import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/po
 import {Button} from "@/common/components/ui/button.tsx";
 import {Ellipsis} from "lucide-react";
 import MovieCreditSubmitFormPanel from "@/views/admin/movie-credits/_comp/forms/MovieCreditSubmitFormPanel.tsx";
-import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
 import {EntityOptionProps} from "@/common/type/components/EntityOptionProps.ts";
 import MovieCreditDeleteWarningDialog from "@/views/admin/movie-credits/_comp/dialog/MovieCreditDeleteWarningDialog.tsx";
 import {MovieCredit} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValuesSchema.ts";
 
 /**
  * Props for `MovieCreditOptions` component.

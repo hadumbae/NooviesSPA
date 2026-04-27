@@ -12,7 +12,7 @@ import {
 } from "@/domains/movies/schema/admin/search-params/MovieDetailsSearchParams.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MovieDetailsPageShowingsTab} from "@/views/admin/movies/details-page/tabs/showingsTab.tsx";
-import {MovieDetailsPageCreditTab} from "@/views/admin/movies/details-page/tabs/creditTab.tsx";
+import {MovieDetailsPageCastCreditTab} from "@/views/admin/movies/details-page/tabs/creditTab.tsx";
 import {ReactElement} from "react";
 
 type PageTabContent = {
@@ -51,7 +51,7 @@ export function MovieDetailsPageTabs(
                 </TabsList>
             </div>
 
-            <MovieDetailsPageCreditTab slug={movieSlug}/>
+            <MovieDetailsPageCastCreditTab slug={movieSlug}/>
 
             <MovieDetailsPageShowingsTab movieID={movieID}/>
         </Tabs>

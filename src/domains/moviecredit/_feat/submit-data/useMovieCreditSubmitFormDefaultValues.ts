@@ -1,104 +1,49 @@
-import {useRef} from "react";
-import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
-import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
+/** @fileoverview Hook for computing and memoizing default form values for movie credits. */
+
+import {useMemo, useRef} from "react";
 import {isEqual} from "lodash";
 import {MovieCredit} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValuesSchema.ts";
 
-/**
- * Parameters for {@link useMovieCreditSubmitFormDefaultValues}.
- */
+/** Parameters for the useMovieCreditSubmitFormDefaultValues hook. */
 type DefaultParams = {
-    /**
-     * Optional preset values to prefill the form.
-     * These values take priority over `credit` values.
-     */
     presetValues?: Partial<MovieCreditFormValues>;
-
-    /**
-     * Optional existing `MovieCredit` entity used to populate default values.
-     * Used when editing an existing credit.
-     */
     credit?: MovieCredit;
 };
 
 /**
- * Custom hook to generate default values for a movie credit submission form.
- *
- * This hook merges optional `presetValues` with an existing `MovieCredit` entity (`credit`)
- * to produce a complete `MovieCreditFormValues` object suitable for initializing a form.
- * It ensures consistent defaulting for CAST vs CREW departments and memoizes values
- * to avoid unnecessary re-renders.
- *
- * @param params - Optional parameters including `presetValues` and `credit`.
- *
- * @returns A fully populated {@link MovieCreditFormValues} object containing:
- * - `department` (string)
- * - Base fields: `movie`, `person`, `roleType`, `displayRoleName`, `notes`, `creditedAs`
- * - CAST-specific fields: `characterName`, `billingOrder`, `isPrimary`, `uncredited`, `voiceOnly`, `cameo`, `motionCapture`, `archiveFootage` (used if department is `"CAST"`)
- * - CREW-specific fields: `characterName`, `billingOrder`, `isPrimary`, `uncredited`, `voiceOnly`, `cameo`, `motionCapture`, `archiveFootage` (used if department is `"CREW"`)
- *
- * @remarks
- * - Prefers `presetValues` over values from `credit`.
- * - Uses `getDefaultValue` utility for safe defaulting.
- * - Memoizes the computed values using `useRef` and `lodash.isEqual` to prevent unnecessary recalculation.
- *
- * @example
- * ```ts
- * const defaultValues = useMovieCreditSubmitFormDefaultValues({
- *   presetValues: { displayRoleName: "Hero" },
- *   credit: existingCredit
- * });
- * // defaultValues can be passed to a form initializer like useForm({ defaultValues })
- * ```
+ * Generates and memoizes default values for the movie credit submission form.
+ * Merges optional preset values with an existing credit entity and maintains a stable reference.
  */
-export default function useMovieCreditSubmitFormDefaultValues(params?: DefaultParams): MovieCreditFormValues {
-    const {presetValues, credit} = params || {};
+export function useMovieCreditSubmitFormDefaultValues(
+    {presetValues, credit}: DefaultParams = {}
+): MovieCreditFormValues {
 
     const heldValues = useRef<MovieCreditFormValues | null>(null);
 
-    const department = getDefaultValue(presetValues?.department, credit?.department, "");
-
-    const baseValues = {
-        movie: getDefaultValue(presetValues?.movie, credit?.movie, undefined),
-        person: getDefaultValue(presetValues?.person, credit?.person, undefined),
-        roleType: getDefaultValue(presetValues?.roleType, credit?.roleType, undefined),
-        displayRoleName: getDefaultValue(presetValues?.displayRoleName, credit?.displayRoleName, ""),
-        notes: getDefaultValue(presetValues?.notes, credit?.notes, ""),
-        creditedAs: getDefaultValue(presetValues?.creditedAs, credit?.creditedAs, ""),
-    };
-
-    const crewValues = {
-        characterName: undefined,
-        billingOrder: undefined,
-        isPrimary: undefined,
-        uncredited: undefined,
-        voiceOnly: undefined,
-        cameo: undefined,
-        motionCapture: undefined,
-        archiveFootage: undefined,
-    };
-
-    const castValues = {
-        characterName: getDefaultValue(presetValues?.characterName, credit?.characterName, ""),
-        billingOrder: getDefaultValue(presetValues?.billingOrder, credit?.billingOrder, ""),
-        isPrimary: getDefaultValue(presetValues?.isPrimary, credit?.isPrimary, false),
-        uncredited: getDefaultValue(presetValues?.uncredited, credit?.uncredited, false),
-        voiceOnly: getDefaultValue(presetValues?.voiceOnly, credit?.voiceOnly, false),
-        cameo: getDefaultValue(presetValues?.cameo, credit?.cameo, false),
-        motionCapture: getDefaultValue(presetValues?.motionCapture, credit?.motionCapture, false),
-        archiveFootage: getDefaultValue(presetValues?.archiveFootage, credit?.archiveFootage, false),
-    };
-
-    const defaultValues: MovieCreditFormValues = {
-        department,
-        ...baseValues,
-        ...(department === "CREW" && crewValues),
-        ...(department === "CAST" && castValues)
-    };
+    const defaultValues: MovieCreditFormValues = useMemo(() => ({
+        department: "",
+        movie: undefined,
+        person: undefined,
+        roleType: undefined,
+        displayRoleName: "",
+        notes: "",
+        creditedAs: "",
+        characterName: "",
+        billingOrder: "",
+        isPrimary: false,
+        uncredited: false,
+        voiceOnly: false,
+        cameo: false,
+        motionCapture: false,
+        archiveFootage: false,
+        ...credit,
+        ...presetValues,
+    }), [presetValues, credit]);
 
     if (!isEqual(heldValues.current, defaultValues)) {
         heldValues.current = defaultValues;
     }
 
-    return heldValues.current as MovieCreditFormValues;
+    return heldValues.current ?? defaultValues;
 }

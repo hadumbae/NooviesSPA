@@ -1,42 +1,43 @@
-/**
- * @fileoverview Defines the Credits tab for the Movie Details page.
- * Fetches and validates a prioritized list of cast members to provide
- * a high-level overview of the movie's production credits.
- */
+/** @fileoverview Tab content for displaying a preview of movie cast credits. */
 
-import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud/useFetchMovieCredits.ts";
-import MovieDetailsCreditOverview from "@/domains/movies/components/details/MovieDetailsCreditOverview.tsx";
+import {MovieDetailsCreditCastOverview} from "@/domains/movies/components/details/MovieDetailsCreditCastOverview.tsx";
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {
     MovieCreditDetailsArray,
     MovieCreditDetailsArraySchema
 } from "@/domains/moviecredit/schemas/model/MovieCreditDetailsArraySchema.ts";
+import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {MovieCreditDetails} from "@/domains/moviecredit/schemas";
+import {ReactElement} from "react";
 
+/** Cast-specific movie credit details filtered by department. */
+type CastCredits = (Extract<MovieCreditDetails, { department: "CAST" }>)[];
+
+/** Props for the MovieDetailsPageCastCreditTab component. */
 type TabProps = {
     slug: ObjectId;
 };
 
-/**
- * Renders the top-billed cast members within a tabbed panel.
- */
-export function MovieDetailsPageCreditTab({slug}: TabProps) {
+/** Renders the top-billed cast members within a tabbed panel using validated query data. */
+export function MovieDetailsPageCastCreditTab({slug}: TabProps): ReactElement {
     const query = useFetchMovieCredits({
-        queries: {movieSlug: slug, department: "CAST", sortByBillingOrder: "asc"},
+        schema: MovieCreditDetailsArraySchema,
+        queries: {movieSlug: slug, department: "CAST", sortByBillingOrder: 1},
         config: {populate: true, virtuals: true, limit: 6},
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={MovieCreditDetailsArraySchema}>
+        <QueryDataLoader query={query}>
             {(credits: MovieCreditDetailsArray) => (
                 <TabsContent value="credits">
-                    <MovieDetailsCreditOverview
+                    <MovieDetailsCreditCastOverview
                         slug={slug}
-                        credits={credits}
+                        credits={credits as CastCredits}
                     />
                 </TabsContent>
             )}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 }

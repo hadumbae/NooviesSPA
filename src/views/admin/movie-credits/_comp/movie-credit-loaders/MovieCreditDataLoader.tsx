@@ -9,7 +9,7 @@
  */
 
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud/useFetchMovieCredits.ts";
+import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks/useFetchMovieCredits.ts";
 import {z, ZodTypeAny} from "zod";
 import {ReactNode} from "react";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";

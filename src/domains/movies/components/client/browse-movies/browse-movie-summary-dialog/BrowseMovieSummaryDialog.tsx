@@ -10,7 +10,7 @@ import {Dialog, DialogTrigger} from "@/common/components/ui/dialog.tsx";
 import BrowseMovieSummaryDialogContents
     from "@/domains/movies/components/client/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialogContents.tsx";
 import MovieCreditDataLoader
-    from "@/views/admin/movie-credits/_comp/movie-credit-paginated-list/MovieCreditDataLoader.tsx";
+    from "@/views/admin/movie-credits/_comp/movie-credit-loaders/MovieCreditDataLoader.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {
     MovieCreditDetails

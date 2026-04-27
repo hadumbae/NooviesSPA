@@ -4,7 +4,6 @@
  * a centralized loading state management through conditional execution.
  */
 
-import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
 import useFetchRoleTypes from "@/domains/roletype/hooks/fetch/useFetchRoleTypes.ts";
 import {ManagedUseQuery} from "@/common/type/query/ManagedUseQuery.ts";
 import {PersonArraySchema} from "@/domains/persons/schema/person/Person.schema.ts";
@@ -16,6 +15,8 @@ import {RoleTypeQueryFilters} from "@/domains/roletype/schema/query-options/Role
 import useFetchMovies from "@/domains/movies/hooks/queries/useFetchMovies.ts";
 import {MovieArraySchema} from "@/domains/movies/schema/movie/MovieArraySchema.ts";
 import {useFetchPersons} from "@/domains/persons/_feat/crud-hooks";
+
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValuesSchema.ts";
 
 /**
  * Parameters for the {@link useMovieCreditFormDataQueries} hook.

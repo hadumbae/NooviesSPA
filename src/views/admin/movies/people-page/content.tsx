@@ -11,12 +11,16 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import TextCollapsible from "@/common/components/TextCollapsible.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import MovieCreditSubmitFormContainer from "@/views/admin/movie-credits/_comp/forms/MovieCreditSubmitFormContainer.tsx";
-import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
-import MovieCreditPaginatedListQuery
-    from "@/views/admin/movie-credits/_comp/movie-credit-paginated-list/MovieCreditPaginatedListQuery.tsx";
 import {MoviePeopleHeader} from "@/views/admin/movies/people-page/header.tsx";
+
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValuesSchema.ts";
+import {PaginatedMovieCreditDetails} from "@/domains/moviecredit/schemas";
+import {MovieCreditPaginatedLoader} from "../../movie-credits/_comp/movie-credit-loaders";
+import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import MoviePersonDetailsCard from "@/domains/movies/components/admin/credits/cards/MoviePersonDetailsCard.tsx";
+import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 
 type ContentProps = {
     movie: Movie;
@@ -74,13 +78,34 @@ export function MoviePeoplePageContent(
                 <section className="md:col-span-2">
                     <SectionHeader>Credits</SectionHeader>
 
-                    <MovieCreditPaginatedListQuery
+                    <MovieCreditPaginatedLoader
                         department={department}
                         sortByBillingOrder={1}
                         page={page}
                         perPage={perPage}
-                        setPage={setPage}
-                    />
+                    >
+                        {({totalItems, items: credits}: PaginatedMovieCreditDetails) => {
+                            if (credits.length === 0) {
+                                return <EmptyArrayContainer text="There Are No Credits" className="h-28"/>;
+                            }
+
+                            return (
+                                <div className="space-y-5">
+                                    <div className="grid grid-cols-1 gap-2">
+                                        {credits.map((credit) => <MoviePersonDetailsCard key={credit._id}
+                                                                                         credit={credit}/>)}
+                                    </div>
+
+                                    <PaginationRangeButtons
+                                        page={page}
+                                        perPage={perPage}
+                                        totalItems={totalItems}
+                                        setPage={setPage}
+                                    />
+                                </div>
+                            );
+                        }}
+                    </MovieCreditPaginatedLoader>
                 </section>
             </div>
         </PageFlexWrapper>

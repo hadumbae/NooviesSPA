@@ -4,7 +4,7 @@
  */
 
 import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
-import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud/useFetchMovieCredits.ts";
+import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks/useFetchMovieCredits.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {useFetchReviewDetailsByMovie} from "@/domains/movies/fetch/movie-reviews/useFetchReviewDetailsByMovie.ts";

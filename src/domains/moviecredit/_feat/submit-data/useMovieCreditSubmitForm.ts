@@ -1,29 +1,33 @@
+/** @fileoverview Hook for initializing and managing the movie credit submission form state. */
+
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 
-import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
-import {MovieCreditFormSchema} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.schema.ts";
-import useMovieCreditSubmitFormDefaultValues
+import {useMovieCreditSubmitFormDefaultValues}
     from "@/domains/moviecredit/_feat/submit-data/useMovieCreditSubmitFormDefaultValues.ts";
-import {useEffect} from "react";
 import {MovieCredit} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValuesSchema.ts";
+import {
+    MovieCreditFormData,
+    MovieCreditFormSchema
+} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
 
+/** Parameters for the useMovieCreditSubmitForm hook. */
 type SubmitParams = {
     credit?: MovieCredit;
     presetValues?: Partial<MovieCreditFormValues>;
 }
 
-export default function useMovieCreditSubmitForm(params?: SubmitParams): UseFormReturn<MovieCreditFormValues> {
+/**
+ * Initializes a React Hook Form instance for creating or updating movie credits.
+ */
+export function useMovieCreditSubmitForm(
+    params?: SubmitParams
+): UseFormReturn<MovieCreditFormValues, unknown, MovieCreditFormData> {
     const defaultValues = useMovieCreditSubmitFormDefaultValues(params);
 
-    const form = useForm<MovieCreditFormValues>({
+    return useForm<MovieCreditFormValues, unknown, MovieCreditFormData>({
         resolver: zodResolver(MovieCreditFormSchema),
         defaultValues,
     });
-
-    useEffect(() => {
-        form.reset(defaultValues);
-    }, [defaultValues, form])
-
-    return form;
 }

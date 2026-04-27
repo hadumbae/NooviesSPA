@@ -20,11 +20,6 @@ import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx"
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 
 import {Person} from "@/domains/persons/schema/person/Person.types.ts";
-import {
-    MovieCreditForm,
-    MovieCreditFormCastValues,
-    MovieCreditFormValues
-} from "@/domains/moviecredit/_feat/submit-data/MovieCreditForm.types.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {RoleType} from "@/domains/roletype/schema/model/RoleType.types.ts";
@@ -34,6 +29,9 @@ import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValuesSchema.ts";
+import {MovieCreditFormCastValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormCastSchema.ts";
+import {MovieCreditFormData} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
 
 interface ViewProps {
     /** React Hook Form controller */
@@ -43,7 +41,7 @@ interface ViewProps {
     submitHandler: SubmitHandler<MovieCreditFormValues>;
 
     /** React Query mutation for submission */
-    mutation: UseMutationResult<MovieCreditDetails, unknown, MovieCreditForm>;
+    mutation: UseMutationResult<MovieCreditDetails, unknown, MovieCreditFormData>;
 
     /** Available movie options */
     movies: Movie[];
