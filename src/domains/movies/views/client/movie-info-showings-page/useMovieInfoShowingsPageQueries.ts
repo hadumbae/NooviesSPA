@@ -3,7 +3,7 @@
  * @filename useMovieInfoShowingsPageQueries.ts
  */
 
-import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
+import useFetchMovieBySlug from "@/domains/movies/_feat/crud-hooks/useFetchMovieBySlug.ts";
 import useFetchPaginatedShowings from "@/domains/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import { QueryDefinition } from "@/common/type/query/loader/MultiQuery.types.ts";
 import {

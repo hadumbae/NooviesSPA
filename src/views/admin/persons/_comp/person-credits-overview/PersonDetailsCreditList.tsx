@@ -8,9 +8,9 @@ import {Info} from "lucide-react";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import PersonDetailsCreditMovieDialog
     from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditMovieDialog.tsx";
-import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
 import {PersonFilmography} from "src/domains/moviecredit/_feat/person-credit";
 import {SROnly} from "@/views/common/_comp/screen-readers";
+import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 
 /**
  * Props for the PersonDetailsCreditList component.
@@ -51,7 +51,7 @@ const PersonDetailsCreditList: FC<AccordionListProps> = ({personName, department
                                     <CardContent className="py-4 px-3 flex items-center space-x-2">
 
                                         <div>
-                                            <MoviePosterImage src={posterImage?.secure_url}/>
+                                            <MoviePosterImageDialog src={posterImage?.secure_url}/>
                                         </div>
 
                                         <div className="flex-1 min-w-0 flex flex-col space-y-2 justify-center">

@@ -6,7 +6,7 @@
 
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
-import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
+import useFetchMovieBySlug from "@/domains/movies/_feat/crud-hooks/useFetchMovieBySlug.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieEditPageContent} from "@/views/admin/movies/edit-page/content.tsx";

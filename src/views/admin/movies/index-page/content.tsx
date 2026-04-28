@@ -5,18 +5,18 @@
  */
 
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import MovieIndexCard from "@/domains/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import MovieIndexPageHeader from "@/views/admin/movies/index-page/header.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import MovieQueryOptionFormContainer
-    from "@/domains/movies/components/features/admin/movie-query-option/MovieQueryOptionFormContainer.tsx";
+    from "@/views/admin/movies/_feat/submit-query-options/MovieQueryOptionFormContainer.tsx";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries/MovieQueryOption.schema.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {ReactElement} from "react";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {MovieIndexCard} from "@/views/admin/movies/_comp/index-list-display";
 
 type ContentProps = {
     page: number;

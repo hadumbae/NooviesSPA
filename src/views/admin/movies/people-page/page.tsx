@@ -9,7 +9,7 @@ import {PageLoader} from "@/views/common/_comp/page";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
+import useFetchMovieBySlug from "@/domains/movies/_feat/crud-hooks/useFetchMovieBySlug.ts";
 import useParsedPaginationValue
     from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";

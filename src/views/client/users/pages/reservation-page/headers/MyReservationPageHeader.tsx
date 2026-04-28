@@ -6,12 +6,12 @@
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {Redo} from "lucide-react";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import buildString from "@/common/utility/buildString.ts";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 
 /**
  * Props for MyReservationPageHeader.
@@ -56,7 +56,7 @@ const MyReservationPageHeader = (
         <header className="flex items-center space-x-3">
             <section>
                 <SectionHeader srOnly={true}>Poster Image</SectionHeader>
-                <PosterImage src={posterImage?.secure_url} className="h-24"/>
+                <MoviePosterImage src={posterImage?.secure_url} className="h-24"/>
             </section>
 
             <section className="flex-1 flex flex-col gap-2">

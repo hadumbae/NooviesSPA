@@ -6,9 +6,9 @@
 
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import {URLString} from "@/common/schema/strings/URLStringSchema.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 
 /**
  * Props for MovieInfoReviewsPageHeader.
@@ -40,7 +40,7 @@ const MovieInfoReviewsPageHeader = (
     return (
         <header className="flex space-x-4 items-end">
             <LoggedLink to={`/browse/movies/${movieSlug}`}>
-                <PosterImage src={posterURL} className="h-28"/>
+                <MoviePosterImage src={posterURL} className="h-28"/>
             </LoggedLink>
 
             <div className="space-y-1 py-3">

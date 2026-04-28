@@ -3,8 +3,8 @@
  * @filename useMovieInfoReviewsPageQueries.ts
  */
 
-import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
-import {useFetchReviewDetailsByMovie} from "@/domains/movies/fetch/movie-reviews/useFetchReviewDetailsByMovie.ts";
+import useFetchMovieBySlug from "@/domains/movies/_feat/crud-hooks/useFetchMovieBySlug.ts";
+import {useFetchReviewDetailsByMovie} from "@/domains/review/_feat/fetch-by-movie/useFetchReviewDetailsByMovie.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {
     MovieReviewViewData,

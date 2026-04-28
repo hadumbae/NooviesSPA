@@ -6,7 +6,7 @@
 
 import {FC} from 'react';
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import MovieSubmitFormContainer from "@/domains/movies/components/forms/MovieSubmitFormContainer.tsx";
+import MovieSubmitFormContainer from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";

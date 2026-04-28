@@ -7,7 +7,7 @@
 import {ReactElement} from 'react';
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import MovieSubmitFormContainer from "@/domains/movies/components/forms/MovieSubmitFormContainer.tsx";
+import MovieSubmitFormContainer from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormContainer.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";

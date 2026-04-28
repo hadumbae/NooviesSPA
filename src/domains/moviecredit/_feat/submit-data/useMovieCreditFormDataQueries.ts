@@ -12,7 +12,7 @@ import activeUseQueriesOnly from "@/common/utility/query/activeUseQueriesOnly.ts
 import {MovieQueryFilters} from "@/domains/movies/schema/queries/MovieQueryOption.types.ts";
 import {PersonQueryFilters} from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
 import {RoleTypeQueryFilters} from "@/domains/roletype/schema/query-options/RoleTypeQueryOptions.types.ts";
-import useFetchMovies from "@/domains/movies/hooks/queries/useFetchMovies.ts";
+import useFetchMovies from "@/domains/movies/_feat/crud-hooks/useFetchMovies.ts";
 import {MovieArraySchema} from "@/domains/movies/schema/movie/MovieArraySchema.ts";
 import {useFetchPersons} from "@/domains/persons/_feat/crud-hooks";
 

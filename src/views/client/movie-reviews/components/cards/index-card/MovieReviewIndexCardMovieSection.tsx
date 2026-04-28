@@ -6,11 +6,11 @@
 import formatMovieData from "@/domains/movies/utility/formatMovieData.ts";
 import {MovieWithRating} from "@/domains/movies/schema/movie/MovieWithRatingSchema.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import MovieReviewRatingStars from "@/views/client/movie-reviews/components/MovieReviewRatingStars.tsx";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 
 /**
  * Props for the {@link MovieReviewIndexCardMovieSection} component.
@@ -43,7 +43,7 @@ export const MovieReviewIndexCardMovieSection = (
             </SectionHeader>
 
             <LoggedLink to={`/browse/movies/${slug}`}>
-                <PosterImage
+                <MoviePosterImage
                     src={posterImage?.secure_url}
                     className="h-24"
                 />

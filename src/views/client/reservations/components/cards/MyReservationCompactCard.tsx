@@ -7,7 +7,6 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
@@ -18,6 +17,7 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     ReservationStatusBadge
 } from "@/views/client/reservations/components/reservation-status/ReservationStatusBadge.tsx";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 
 /**
  * Props for the {@link MyReservationCompactCard} component.
@@ -62,7 +62,7 @@ const MyReservationCompactCard = ({reservation}: CardProps) => {
         <Card className="hover:cursor-pointer transition-colors hover:bg-muted/50" onClick={navigateToReservation}>
             <CardContent className="p-4 space-x-3 flex items-center">
                 <section>
-                    <PosterImage
+                    <MoviePosterImage
                         src={posterImage?.secure_url}
                         alt={`${movieTitle} Poster`}
                         className="h-52 lg:h-60"

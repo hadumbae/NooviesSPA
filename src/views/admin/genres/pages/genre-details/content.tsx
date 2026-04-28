@@ -1,26 +1,23 @@
-/**
- * @fileoverview Presentation component for the Genre Details page.
- * Orchestrates the display of genre metadata and a paginated list of
- * associated movies, while managing administrative editing and deletion panels.
- */
+/** @fileoverview Presentation component for the Genre Details page, orchestrating metadata display and associated movies. */
 
+import {ReactElement} from "react";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {GenreDetailsUIContext} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContext.ts";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import MovieIndexCard from "@/domains/movies/components/admin/movie-index-list/MovieIndexCard.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {GenreSubmitForm, GenreSubmitFormPanel} from "@/views/admin/genres/_feat/submit-form";
-import {ReactElement} from "react";
 import {GenreDetailsPageHeader} from "@/views/admin/genres/pages/genre-details/header.tsx";
 import {GenreDetailsCard} from "@/views/admin/genres/pages/genre-details/detailsCard.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {GenreDeleteWarningDialog} from "@/views/admin/genres/_feat/delete-genre";
+import {MovieIndexCard} from "@/views/admin/movies/_comp/index-list-display";
 
+/** Props for the GenreDetailsPageContent component. */
 type ContentProps = {
     genre: Genre;
     movies: MovieDetails[];
@@ -31,7 +28,7 @@ type ContentProps = {
 };
 
 /**
- * Renders the structural layout and interactive panels for the Genre Details page.
+ * Renders the layout for a specific genre, including its metadata, associated movies, and admin controls.
  */
 export function GenreDetailsPageContent(
     {page, perPage, setPage, movies, genre, totalItems}: ContentProps
@@ -56,6 +53,7 @@ export function GenreDetailsPageContent(
         setIsEditing(false);
     }
 
+    /** Redirects to the genre index after a successful deletion. */
     const navigateToIndex = () => navigate({
         to: `/admin/genres`,
         message: "Navigation to index after successful genre deletion."
@@ -90,6 +88,7 @@ export function GenreDetailsPageContent(
                 setPage={setPage}
             />
 
+            {/* Admin Dialogs Section */}
             <section className="hidden">
                 <SROnly text="Genre Option Dialogs"/>
 

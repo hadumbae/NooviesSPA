@@ -1,9 +1,9 @@
 import {FC} from 'react';
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import BrowseMoviesHeader from "@/domains/movies/components/client/browse-movies/BrowseMoviesHeader.tsx";
-import useFetchPaginatedMovies from "@/domains/movies/hooks/queries/useFetchPaginatedMovies.ts";
+import BrowseMoviesHeader from "@/views/client/movies/browse-movies/BrowseMoviesHeader.tsx";
+import useFetchPaginatedMovies from "@/domains/movies/_feat/crud-hooks/useFetchPaginatedMovies.ts";
 import BrowseMovieSummaryCard
-    from "@/domains/movies/components/client/browse-movies/browse-movie-summary/BrowseMovieSummaryCard.tsx";
+    from "@/views/client/movies/browse-movies/browse-movie-summary/BrowseMovieSummaryCard.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {

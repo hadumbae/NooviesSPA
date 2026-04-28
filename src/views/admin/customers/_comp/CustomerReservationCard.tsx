@@ -5,7 +5,6 @@
 
 import {Reservation} from "@/domains/reservation/schema/model";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     ReservationStatusBadge
@@ -13,6 +12,7 @@ import {
 import {CustomerReservationDialog} from "@/views/admin/customers/_comp/CustomerReservationDialog.tsx";
 import {useState} from "react";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 
 /**
  * Properties for the CustomerReservationCard component.
@@ -57,7 +57,7 @@ export const CustomerReservationCard = (
                 className="p-4 flex items-center gap-3 cursor-pointer"
                 onClick={() => setIsOpen(true)}
             >
-                <PosterImage
+                <MoviePosterImage
                     className="h-28 md:h-40"
                     src={posterURL}
                     alt={`${title} Poster Image`}

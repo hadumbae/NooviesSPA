@@ -5,14 +5,14 @@
  */
 
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
 import formatMovieData from "@/domains/movies/utility/formatMovieData.ts";
 import HeaderSubtitle from "@/common/components/page/headers/HeaderSubtitle.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import MovieDetailsOptions from "@/domains/movies/components/admin/movie-details/MovieDetailsOptions.tsx";
+import MovieDetailsDropdown from "@/views/admin/movies/details-page/dropdown.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {Ellipsis} from "lucide-react";
 import {MovieDetailsBreadcrumb} from "@/views/admin/movies/details-page/breadcrumbs.tsx";
+import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 
 type HeaderProps = {
     movie: MovieDetails
@@ -35,14 +35,14 @@ export function MovieDetailsHeader({movie}: HeaderProps) {
             <div className="flex justify-between items-center">
                 <MovieDetailsBreadcrumb />
 
-                <MovieDetailsOptions slug={slug} hasPoster={!!posterImage}>
+                <MovieDetailsDropdown slug={slug} hasPoster={!!posterImage}>
                     <IconButton icon={Ellipsis} />
-                </MovieDetailsOptions>
+                </MovieDetailsDropdown>
             </div>
 
             <div className="flex space-x-3">
                 <div>
-                    <MoviePosterImage
+                    <MoviePosterImageDialog
                         src={posterImage?.secure_url}
                         alt="Poster Image"
                     />

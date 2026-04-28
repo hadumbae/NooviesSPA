@@ -3,11 +3,11 @@
  * useMovieInfoOverviewPageQueries.ts
  */
 
-import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
+import useFetchMovieBySlug from "@/domains/movies/_feat/crud-hooks/useFetchMovieBySlug.ts";
 import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks/useFetchMovieCredits.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
-import {useFetchReviewDetailsByMovie} from "@/domains/movies/fetch/movie-reviews/useFetchReviewDetailsByMovie.ts";
+import {useFetchReviewDetailsByMovie} from "@/domains/review/_feat/fetch-by-movie/useFetchReviewDetailsByMovie.ts";
 import {MovieReviewViewDataSchema} from "@/domains/review/schemas/models/MovieReviewViewDataSchema.ts";
 import {MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {

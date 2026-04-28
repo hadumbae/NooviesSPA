@@ -7,7 +7,6 @@
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import MovieOverviewHeadline
     from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewHeadline.tsx";
-import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import MovieOverviewMeta
     from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewMeta.tsx";
 import MovieOverviewCreditLinks
@@ -16,6 +15,7 @@ import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts"
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 
 /**
  * Props for MovieOverviewHeader.
@@ -46,7 +46,7 @@ const MovieOverviewHeader = ({movie, credits}: OverviewProps) => {
                 <CardContent className="p-0">
                     <div className="grid lg:grid-rows-[2fr_1fr] grid-cols-3 lg:max-h-[400px]">
                         <section className="lg:row-span-2 flex justify-center items-center p-2">
-                            <PosterImage src={posterImage?.secure_url} className="max-lg:w-full lg:h-[350px]"/>
+                            <MoviePosterImage src={posterImage?.secure_url} className="max-lg:w-full lg:h-[350px]"/>
                         </section>
 
                         <section className="col-span-2 px-3 py-3">

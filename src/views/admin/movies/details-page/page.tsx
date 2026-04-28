@@ -7,13 +7,13 @@
 
 import {PageLoader} from "@/views/common/_comp/page";
 import useTitle from "@/common/hooks/document/useTitle.ts";
-import MovieDetailsUIContextProvider from "@/domains/movies/components/providers/MovieDetailsUIContextProvider.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import useFetchMovieBySlug from "@/domains/movies/hooks/queries/useFetchMovieBySlug.ts";
+import useFetchMovieBySlug from "@/domains/movies/_feat/crud-hooks/useFetchMovieBySlug.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MovieDetailsPageContent} from "@/views/admin/movies/details-page/content.tsx";
+import {MovieDetailsUIContextProvider} from "@/domains/movies/context/details-ui/MovieDetailsUIContextProvider.tsx";
 
 /**
  * Controller component for the movie profile view.

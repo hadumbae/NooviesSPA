@@ -8,7 +8,6 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
-import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
@@ -19,6 +18,7 @@ import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.t
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import {OrientationValues} from "@/common/schema/enums/OrientationEnumSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 
 /**
  * Props for the {@link ReservationByCodeDetailsSection} component.
@@ -69,7 +69,7 @@ export const ReservationByCodeDetailsSection = (
 
             <div className="flex space-x-3">
                 <div>
-                    <PosterImage className="h-36 md:h-48" src={posterURL}/>
+                    <MoviePosterImage className="h-36 md:h-48" src={posterURL}/>
                 </div>
 
                 <Card className="flex-1">

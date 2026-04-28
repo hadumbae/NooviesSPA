@@ -4,9 +4,6 @@
  */
 
 import {ReactElement, useContext, useEffect, useState} from 'react';
-import MovieHookFormSelect from "@/domains/movies/components/ui/MovieHookFormSelect.tsx";
-import MovieQuickOverviewFetchCard
-    from "@/domains/movies/components/admin/movie-details/MovieQuickOverviewFetchCard.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {UseFormReturn} from "react-hook-form";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
@@ -22,6 +19,8 @@ import TheatreHookFormSelect from "@/views/admin/theatres/_feat/form-input/Theat
 import {ShowingFormValues} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
 import {TheatreQuickOverviewFetchCard} from "@/views/admin/theatres/_comp/display-cards";
+import {MovieHookFormSelect} from "@/views/admin/movies/_feat/form-inputs";
+import {MovieQuickOverviewFetchCard} from "@/views/admin/movies/_comp/form-display";
 
 /** Props for the ShowingSubmitFormDetailsFieldset component. */
 type FieldsetProps = {

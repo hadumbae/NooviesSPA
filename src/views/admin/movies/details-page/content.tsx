@@ -7,20 +7,20 @@
 import {ReactElement} from 'react';
 import simplifyMovieDetails from "@/domains/movies/utility/simplifyMovieDetails.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {MovieDetailsUIContext} from "@/domains/movies/context/MovieDetailsUIContext.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import MovieSubmitFormPanel from "@/domains/movies/components/forms/MovieSubmitFormPanel.tsx";
+import MovieSubmitFormPanel from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormPanel.tsx";
 import MoviePosterImageSubmitFormPanel
-    from "@/domains/movies/components/forms/poster-image/MoviePosterImageSubmitFormPanel.tsx";
-import MovieDeleteWarningDialog from "@/domains/movies/components/dialog/MovieDeleteWarningDialog.tsx";
+    from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormPanel.tsx";
 import MoviePosterImageDeleteDialog
-    from "@/domains/movies/components/admin/poster-image/MoviePosterImageDeleteDialog.tsx";
+    from "@/views/admin/movies/_feat/delete-poster-image/MoviePosterImageDeleteDialog.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import MovieDetailsCard from "@/domains/movies/components/details/MovieDetailsCard.tsx";
 import {RefetchFunction} from "@/common/type/query/RefetchFunction.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MovieDetailsHeader} from "@/views/admin/movies/details-page/header.tsx";
 import {MovieDetailsPageTabs} from "@/views/admin/movies/details-page/tabs/tabs.tsx";
+import {MovieDeleteWarningDialog} from "@/views/admin/movies/_feat/delete-movie";
+import {MovieDetailsCard} from "@/views/admin/movies/_comp/details-display";
+import {MovieDetailsUIContext} from "@/domains/movies/context/details-ui";
 
 export type MovieDetailsPageContentProps = {
     movie: MovieDetails;
@@ -87,8 +87,8 @@ export function MovieDetailsPageContent(
             <section className="hidden">
                 <MovieDeleteWarningDialog
                     movieID={movie._id}
-                    presetOpen={isDeleting}
-                    setPresetOpen={setIsDeleting}
+                    isOpen={isDeleting}
+                    setIsOpen={setIsDeleting}
                 />
             </section>
 

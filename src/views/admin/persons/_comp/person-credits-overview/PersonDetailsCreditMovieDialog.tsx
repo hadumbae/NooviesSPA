@@ -5,11 +5,11 @@ import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHo
 import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
-import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {PersonCredit} from "@/domains/moviecredit/_feat/person-credit/schemas/PersonCreditSchema.ts";
+import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 
 type MovieDialogProps = {
     /** The trigger content to open the dialog, e.g., an icon or button. */
@@ -70,7 +70,7 @@ const PersonDetailsCreditMovieDialog: FC<MovieDialogProps> = ({children, personN
                     {/* Poster */}
 
                     <div>
-                        <MoviePosterImage src={posterImage?.secure_url}/>
+                        <MoviePosterImageDialog src={posterImage?.secure_url}/>
                     </div>
 
                     {/* Title, Runtime, Release Date */}

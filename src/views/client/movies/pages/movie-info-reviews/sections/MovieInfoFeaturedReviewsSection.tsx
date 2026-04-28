@@ -7,7 +7,7 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {useFetchFeaturedReviewsByMovie} from "@/domains/movies/fetch/movie-reviews/useFetchFeaturedReviewsByMovie.ts";
+import {useFetchFeaturedReviewsByMovie} from "@/domains/review/_feat/fetch-by-movie/useFetchFeaturedReviewsByMovie.ts";
 import {
     FeaturedReviewsByMovie,
     FeaturedReviewsByMovieSchema

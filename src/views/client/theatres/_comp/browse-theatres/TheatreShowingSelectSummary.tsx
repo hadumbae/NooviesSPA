@@ -5,7 +5,6 @@
 
 import {cn} from "@/common/lib/utils.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import {formatShowingInfo} from "@/domains/showings/utilities/formatShowingInfo.ts";
 import {
     IconTextCSS,
@@ -19,6 +18,7 @@ import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {Captions, Volume2} from "lucide-react";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 
 /**
  * Props for {@link TheatreShowingSelectSummary}.
@@ -61,7 +61,7 @@ const TheatreShowingSelectSummary = (
         <div className={cn("flex space-x-3", className)}>
             <section>
                 <SectionHeader srOnly>Poster Image</SectionHeader>
-                <PosterImage src={posterImage?.secure_url} className="h-44"/>
+                <MoviePosterImage src={posterImage?.secure_url} className="h-44"/>
             </section>
 
             <div className="flex-1 flex flex-col justify-between space-y-2">

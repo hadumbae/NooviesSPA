@@ -5,7 +5,7 @@
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {useCheckIsFavouriteMovie} from "@/domains/movies/fetch/favourites/useCheckIsFavouriteMovie.ts";
+import {useCheckIsFavouriteMovie} from "@/domains/movies/_feat/favourite-movies/useCheckIsFavouriteMovie.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {
     IsFavouriteMovieMetadata,

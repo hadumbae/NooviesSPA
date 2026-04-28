@@ -5,7 +5,6 @@
 
 import formatMovieData from "@/domains/movies/utility/formatMovieData.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import PosterImage from "@/domains/movies/components/images/PosterImage.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import buildString from "@/common/utility/buildString.ts";
@@ -15,8 +14,9 @@ import {Info} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 import BrowseMovieSummaryDialog
-    from "@/domains/movies/components/client/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialog.tsx";
+    from "@/views/client/movies/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialog.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 
 /** Props for MyFavouriteMovieCompactCard. */
 type CardProps = {
@@ -50,7 +50,7 @@ const MyFavouriteMovieCompactCard = (
             <CardContent className="p-4 space-y-5">
                 <div className="flex items-stretch space-x-4">
                     <section>
-                        <PosterImage src={posterURL} className="h-40"/>
+                        <MoviePosterImage src={posterURL} className="h-40"/>
                     </section>
 
                     <div className="flex-1 flex flex-col justify-between">

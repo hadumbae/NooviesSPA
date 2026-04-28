@@ -1,5 +1,4 @@
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import buildString from "@/common/utility/buildString.ts";
@@ -9,6 +8,7 @@ import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntim
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {Badge} from "@/common/components/ui/badge.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 
 type CardProps = {
     movie: MovieDetails;
@@ -55,7 +55,7 @@ const ShowingMovieCard = ({movie}: CardProps) => {
                     {/*Poster Image*/}
                     <section>
                         <SectionHeader srOnly={true}>Movie Poster</SectionHeader>
-                        <MoviePosterImage src={posterImage?.secure_url} className="h-full"/>
+                        <MoviePosterImageDialog src={posterImage?.secure_url} className="h-full"/>
                     </section>
                     <div className="flex-1 space-y-4">
                         <section className="space-y-2">

@@ -10,7 +10,7 @@
  */
 
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useFetchMovie from "@/domains/movies/hooks/queries/useFetchMovie.ts";
+import useFetchMovie from "@/domains/movies/_feat/crud-hooks/useFetchMovie.ts";
 import { CombinedSchemaQuery } from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
 import useFetchShowings from "@/domains/showings/hooks/queries/useFetchShowings.ts";
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";

@@ -5,7 +5,7 @@
  */
 
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
-import useFetchPaginatedMovies from "@/domains/movies/hooks/queries/useFetchPaginatedMovies.ts";
+import useFetchPaginatedMovies from "@/domains/movies/_feat/crud-hooks/useFetchPaginatedMovies.ts";
 import useParsedPaginationValue
     from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";

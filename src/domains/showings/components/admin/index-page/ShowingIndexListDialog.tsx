@@ -8,7 +8,6 @@ import {
 } from "@/common/components/ui/dialog.tsx";
 import ShowingIndexListCard from "@/domains/showings/components/admin/index-page/ShowingIndexListCard.tsx";
 import formatShowingDetails from "@/domains/showings/utilities/formatShowingDetails.ts";
-import MoviePosterImage from "@/domains/movies/components/MoviePosterImage.tsx";
 import LucideIconText from "@/common/components/card-content/LucideIconText.tsx";
 import {
     BadgeAlert,
@@ -36,6 +35,7 @@ import {
     SubheaderTextCSS
 } from "@/common/constants/css/TextCSS.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 
 /**
  * Props for the {@link ShowingIndexListDialog} component.
@@ -133,7 +133,7 @@ const ShowingIndexListDialog = ({showing}: ShowingIndexListDialogProps) => {
                 <section className="flex items-center gap-4">
                     <SectionHeader srOnly={true}>Movie Details</SectionHeader>
 
-                    <MoviePosterImage
+                    <MoviePosterImageDialog
                         className="w-14 xl:w-14"
                         src={posterImage?.secure_url}
                         disableDialog={true}
