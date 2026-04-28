@@ -8,7 +8,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {getFetchFeaturedReviewsByMovie} from "@/domains/movies/repositories/movie-reviews/ReviewsByMovieRepository.ts";
+import {getFetchFeaturedReviewsByMovie} from "@/domains/review/_feat/fetch-by-movie/ReviewsByMovieRepository.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 

@@ -2,7 +2,7 @@
 
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import MovieRepository from "@/domains/movies/repositories/MovieRepository.ts";
+import MovieRepository from "@/domains/movies/_feat/crud/remove/MovieRepository.ts";
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";

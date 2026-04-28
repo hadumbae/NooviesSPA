@@ -1,7 +1,7 @@
 import { OnDeleteMutationParams } from "@/common/type/form/MutationDeleteParams.ts";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
-import MovieImageRepository from "@/domains/movies/repositories/image-repository/MovieImageRepository.ts";
+import MovieImageRepository from "@/domains/movies/_feat/submit-image/MovieImageRepository.ts";
 import { toast } from "react-toastify";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

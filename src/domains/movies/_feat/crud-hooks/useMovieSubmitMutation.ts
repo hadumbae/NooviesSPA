@@ -1,6 +1,6 @@
 import {UseFormReturn} from "react-hook-form";
 import {MovieForm, MovieFormValues} from "@/domains/movies/schema/form/MovieForm.types.ts";
-import MovieRepository from "@/domains/movies/repositories/MovieRepository.ts";
+import MovieRepository from "@/domains/movies/_feat/crud/remove/MovieRepository.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {toast} from "react-toastify";

@@ -2,7 +2,6 @@ import {useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import useFetchMovieBrowseParams from "@/domains/movies/hooks/params/client/useFetchMovieBrowseParams.ts";
 
 interface ParamReturns {
     seatMapID: ObjectId;
@@ -17,7 +16,7 @@ export default function useFetchSeatMapParams(): ParamReturns {
         navigate({
             level: "warn",
             to: "/admin/showings",
-            component: useFetchMovieBrowseParams.name,
+            component: useFetchSeatMapParams.name,
             message: "Failed to fetch seat map ID. ID is either missing or invalid.",
         });
 

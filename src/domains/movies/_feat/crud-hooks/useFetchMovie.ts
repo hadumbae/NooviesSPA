@@ -6,7 +6,7 @@
  * with consistent error handling and shared query defaults.
  */
 
-import MovieRepository from "@/domains/movies/repositories/MovieRepository.ts";
+import MovieRepository from "@/domains/movies/_feat/crud/remove/MovieRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";

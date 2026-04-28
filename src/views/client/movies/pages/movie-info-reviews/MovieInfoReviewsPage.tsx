@@ -12,7 +12,7 @@ import useFetchByIdentifierRouteParams
 import {
     MovieInfoReviewsPageData,
     useMovieInfoReviewsPageQueries
-} from "@/domains/movies/hooks/pages/client/useMovieInfoReviewsPageQueries.ts";
+} from "@/domains/movies/_feat/client-view-data/useMovieInfoReviewsPageQueries.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 

@@ -5,7 +5,7 @@ import {
     IImageRepository,
     QueryByIDParams,
     UploadPosterImageParams
-} from "@/domains/movies/repositories/image-repository/MovieImageRepository.types.ts";
+} from "@/domains/movies/_feat/submit-image/MovieImageRepository.types.ts";
 
 /**
  * Repository implementation for handling movie poster image operations.

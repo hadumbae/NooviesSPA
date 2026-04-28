@@ -4,12 +4,12 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Info} from "lucide-react";
 import TooltipButton from "@/common/components/buttons/TooltipButton.tsx";
 import {MovieIndexDetailsDialog} from "@/views/admin/movies/_comp/index-list-display/MovieIndexDetailsDialog.tsx";
-import formatMovieData from "@/domains/movies/utility/formatMovieData.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {ReactElement} from "react";
+import {formatMovieData} from "@/domains/movies/_feat/formatters";
 
 /** Props for the MovieIndexCard component. */
 type IndexCardProps = {

@@ -15,7 +15,7 @@ import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDa
 import { MovieReviewViewData } from "@/domains/review/schemas/models/MovieReviewViewDataSchema.ts";
 import {
     useMovieInfoOverviewPageQueries
-} from "@/domains/movies/hooks/pages/client/movie-info-overview/useMovieInfoOverviewPageQueries.ts";
+} from "@/domains/movies/_feat/client-view-data/useMovieInfoOverviewPageQueries.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
 import {

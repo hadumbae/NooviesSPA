@@ -3,7 +3,6 @@
  * @filename MovieReviewIndexCardMovieSection.tsx
  */
 
-import formatMovieData from "@/domains/movies/utility/formatMovieData.ts";
 import {MovieWithRating} from "@/domains/movies/schema/movie/MovieWithRatingSchema.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
@@ -11,6 +10,7 @@ import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import MovieReviewRatingStars from "@/views/client/movie-reviews/components/MovieReviewRatingStars.tsx";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
+import {formatMovieData} from "@/domains/movies/_feat/formatters";
 
 /**
  * Props for the {@link MovieReviewIndexCardMovieSection} component.

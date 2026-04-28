@@ -5,7 +5,6 @@
  */
 
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import formatMovieData from "@/domains/movies/utility/formatMovieData.ts";
 import HeaderSubtitle from "@/common/components/page/headers/HeaderSubtitle.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import MovieDetailsDropdown from "@/views/admin/movies/details-page/dropdown.tsx";
@@ -13,6 +12,7 @@ import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {Ellipsis} from "lucide-react";
 import {MovieDetailsBreadcrumb} from "@/views/admin/movies/details-page/breadcrumbs.tsx";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
+import {formatMovieData} from "@/domains/movies/_feat/formatters";
 
 type HeaderProps = {
     movie: MovieDetails

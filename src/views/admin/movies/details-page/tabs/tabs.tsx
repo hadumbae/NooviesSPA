@@ -8,8 +8,8 @@ import {Tabs, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {
     MOVIE_DETAILS_PAGE_TABS,
-    MovieDetailsSearchParams,
-} from "@/domains/movies/schema/admin/search-params/MovieDetailsSearchParams.ts";
+    MovieDetailsPageSearchParamsSchema,
+} from "@/views/admin/movies/details-page/searchParamSchema.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MovieDetailsPageShowingsTab} from "@/views/admin/movies/details-page/tabs/showingsTab.tsx";
 import {MovieDetailsPageCastCreditTab} from "@/views/admin/movies/details-page/tabs/creditTab.tsx";
@@ -29,7 +29,7 @@ export function MovieDetailsPageTabs(
     {movie: {_id: movieID, slug: movieSlug}, className}: PageTabContent
 ): ReactElement {
     const {searchParams, setSearchParams} = useParsedSearchParams({
-        schema: MovieDetailsSearchParams
+        schema: MovieDetailsPageSearchParamsSchema
     });
 
     const {activeTab = "credits"} = searchParams;

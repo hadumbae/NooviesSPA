@@ -10,7 +10,7 @@ import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {getFetchReviewsByMovie} from "@/domains/movies/repositories/movie-reviews/ReviewsByMovieRepository.ts";
+import {getFetchReviewsByMovie} from "@/domains/review/_feat/fetch-by-movie/ReviewsByMovieRepository.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 
 /**

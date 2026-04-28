@@ -2,11 +2,11 @@
 
 import {cn} from "@/common/lib/utils.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import buildMovieContext from "@/domains/movies/utility/navigation/buildMovieContext.ts";
 import {ReactElement, useState} from "react";
 import {BrokenPosterImagePlaceholder} from "@/views/admin/movies/_comp/poster-image/BrokenPosterImagePlaceholder.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {HasNoMoviePosterPlaceholder} from "@/views/admin/movies/_comp/poster-image/HasNoMoviePosterPlaceholder.tsx";
+import {buildMovieContext} from "@/domains/movies/_feat/navigation";
 
 /** Props for the MoviePosterLink component. */
 type PosterProps = {

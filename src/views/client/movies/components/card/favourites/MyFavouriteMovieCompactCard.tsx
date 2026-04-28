@@ -3,7 +3,6 @@
  * MyFavouriteMovieCompactCard.tsx
  */
 
-import formatMovieData from "@/domains/movies/utility/formatMovieData.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
@@ -17,6 +16,7 @@ import BrowseMovieSummaryDialog
     from "@/views/client/movies/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialog.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
+import {formatMovieData} from "@/domains/movies/_feat/formatters";
 
 /** Props for MyFavouriteMovieCompactCard. */
 type CardProps = {

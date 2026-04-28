@@ -5,7 +5,6 @@
  */
 
 import {ReactElement} from 'react';
-import simplifyMovieDetails from "@/domains/movies/utility/simplifyMovieDetails.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import MovieSubmitFormPanel from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormPanel.tsx";
@@ -21,6 +20,7 @@ import {MovieDetailsPageTabs} from "@/views/admin/movies/details-page/tabs/tabs.
 import {MovieDeleteWarningDialog} from "@/views/admin/movies/_feat/delete-movie";
 import {MovieDetailsCard} from "@/views/admin/movies/_comp/details-display";
 import {MovieDetailsUIContext} from "@/domains/movies/context/details-ui";
+import {simplifyMovieDetails} from "@/domains/movies/_feat/formatters";
 
 export type MovieDetailsPageContentProps = {
     movie: MovieDetails;

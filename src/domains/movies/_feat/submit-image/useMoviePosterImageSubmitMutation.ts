@@ -4,7 +4,7 @@ import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { toast } from "react-toastify";
 import { useMutation, UseMutationResult, useQueryClient } from "@tanstack/react-query";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
-import MovieImageRepository from "@/domains/movies/repositories/image-repository/MovieImageRepository.ts";
+import MovieImageRepository from "@/domains/movies/_feat/submit-image/MovieImageRepository.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";

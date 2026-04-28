@@ -16,11 +16,11 @@ import {Search} from "lucide-react";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import LabelContent from "@/common/components/card-content/LabelContent.tsx";
-import formatMovieData from "@/domains/movies/utility/formatMovieData.ts";
 import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
+import {formatMovieData} from "@/domains/movies/_feat/formatters";
 
 /** Props for the MovieIndexDetailsDialog component. */
 export type DetailsDialogProps = {
