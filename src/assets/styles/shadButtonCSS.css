@@ -7,6 +7,12 @@
         dark:border-neutral-500 dark:hover:border dark:hover:border-neutral-100;
     }
 
+    .shadcn-default-button {
+        @apply
+        bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90
+        dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90
+    }
+
     .shadcn-primary-button {
         @apply
         bg-purple-700 hover:bg-purple-500
@@ -19,6 +25,19 @@
         shadow-sm
         text-neutral-900 bg-neutral-200 hover:bg-neutral-400/80 hover:text-neutral-200
         dark:text-neutral-50 dark:hover:text-black dark:bg-neutral-600 dark:hover:bg-neutral-500
+    }
+
+    .shadcn-ghost-button {
+        @apply
+        hover:bg-neutral-100 hover:text-neutral-900
+        dark:hover:bg-neutral-800 dark:hover:text-neutral-50
+    }
+
+    .shadcn-link-button {
+        @apply
+        text-neutral-500 hover:text-black
+        dark:text-neutral-400 dark:hover:text-white
+        underline-offset-4 hover:underline
     }
 
     .shadcn-destructive-button {

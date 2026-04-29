@@ -4,7 +4,6 @@
 
 import {forwardRef, ReactElement} from "react";
 import {Button, ButtonProps} from "@/common/components/ui/button.tsx";
-import {cn} from "@/common/lib/utils.ts";
 
 /**
  * Renders a button with link-style aesthetics while maintaining submit functionality.
@@ -14,7 +13,7 @@ export const LinkButton = forwardRef<HTMLButtonElement, ButtonProps>(
         <Button
             ref={ref}
             variant={variant}
-            className={cn("link-button", className)}
+            className={className}
             {...props}
         />
     ),
