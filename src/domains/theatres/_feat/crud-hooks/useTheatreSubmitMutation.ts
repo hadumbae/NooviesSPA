@@ -1,125 +1,62 @@
 /**
- * @file useTheatreSubmitMutation.ts
- *
- * React Query mutation hook for creating or updating `Theatre` entities.
- *
- * Responsibilities:
- * - Submit form data via {@link TheatreRepository}
- * - Validate responses with {@link TheatreSchema}
- * - Surface toast notifications
- * - Map API errors back to React Hook Form
- * - Invalidate related theatre query caches
+ * @fileoverview React Query mutation hook for theatre entity creation and updates.
  */
 
-import {UseFormReturn} from "react-hook-form";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
+import {UseFormReturn} from "react-hook-form";
 import {toast} from "react-toastify";
 
-import TheatreRepository from "@/domains/theatres/repositories/TheatreRepository.ts";
-import {TheatreForm, TheatreFormValues} from "@/domains/theatres/_feat/submit-data/TheatreForm.types.ts";
-
-import {ParseError} from "@/common/errors/ParseError.ts";
-import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-
-import {
-    MutationEditByIDParams,
-    MutationOnSubmitParams,
-} from "@/common/type/form/MutationSubmitParams.ts";
-
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/features/submit-data";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {TheatreQueryKeys} from "@/domains/theatres/utilities/query/TheatreQueryKeys.ts";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {create, update} from "@/domains/theatres/_feat/crud";
+import {TheatreFormStarterValues} from "@/domains/theatres/_feat/submit-data";
+import {TheatreFormData} from "@/domains/theatres/_feat/submit-data/TheatreForm.schema.ts";
 import {Theatre, TheatreSchema} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
+import {TheatreQueryKeys} from "@/domains/theatres/utilities/query/TheatreQueryKeys.ts";
 
-/**
- * Parameters for {@link useTheatreSubmitMutation}.
- *
- * Combines:
- * - Submit lifecycle callbacks and messaging
- * - Optional edit mode and entity ID
- * - React Hook Form instance
- */
-export type TheatreSubmitMutationParams =
-    MutationOnSubmitParams<Theatre> &
-    MutationEditByIDParams & {
-    /**
-     * Bound React Hook Form instance.
-     */
-    form: UseFormReturn<TheatreFormValues>;
+/** Props for the useTheatreSubmitMutation hook. */
+export type TheatreSubmitMutationParams = MutationFormResetConfig & MutationResponseConfig<Theatre> & {
+    form: UseFormReturn<TheatreFormStarterValues, unknown, TheatreFormData>;
 };
 
 /**
- * Mutation hook for submitting theatre form data.
- *
- * Automatically switches between create and update modes
- * based on `isEditing`, validates responses, and keeps the
- * React Query cache in sync.
- *
- * @param params Mutation configuration and form handlers
- * @returns React Query mutation result
- *
- * @example
- * ```ts
- * const form = useForm<TheatreFormValues>();
- *
- * const mutation = useTheatreSubmitMutation({
- *   form,
- *   isEditing: false,
- *   successMessage: "Theatre created!",
- * });
- *
- * mutation.mutate(form.getValues());
- * ```
+ * Manages theatre form submissions with automatic create/update switching.
+ * Handles validation, cache invalidation, and form error mapping.
  */
-export default function useTheatreSubmitMutation(
-    params: TheatreSubmitMutationParams
-): UseMutationResult<Theatre, unknown, TheatreForm> {
+export function useTheatreSubmitMutation(
+    params: TheatreSubmitMutationParams,
+): UseMutationResult<Theatre, unknown, TheatreFormData> {
     const {
+        form,
         successMessage,
         onSubmitSuccess,
         errorMessage,
         onSubmitError,
-        isEditing,
-        _id,
-        form,
+        resetOnSubmit,
+        resetOnSuccess,
+        resetOnError,
     } = params;
 
-    /**
-     * Invalidates theatre-related query caches after mutation.
-     */
     const invalidateQueries = useInvalidateQueryKeys();
 
-    /**
-     * Executes the create or update request and validates the response.
-     *
-     * @throws {@link ParseError} When schema validation fails
-     */
-    const submitTheatreData = async (values: TheatreForm): Promise<Theatre> => {
-        const action = isEditing
-            ? () => TheatreRepository.update({_id, data: values})
-            : () => TheatreRepository.create({data: values});
+    const submitTheatreData = async ({_id, ...values}: TheatreFormData): Promise<Theatre> => {
+        const action = _id
+            ? () => update({_id, data: values})
+            : () => create({data: values});
 
-        const returnData = await handleMutationResponse({
-            action,
-            errorMessage: "Failed to submit data. Please try again.",
+        const {result} = await action();
+        const {success, data, error} = validateData({
+            data: result,
+            schema: TheatreSchema,
         });
 
-        const {success, data, error} = TheatreSchema.safeParse(returnData);
-
-        if (!success) {
-            toast.error("Invalid data returned. Please try again.");
-            throw new ParseError({
-                errors: error?.errors,
-                message: "Invalid Theatre Data.",
-            });
-        }
-
+        if (!success) throw error;
+        resetOnSubmit && form.reset();
         return data;
     };
 
-    /**
-     * Handles successful submission.
-     */
     const onSuccess = (theatre: Theatre): void => {
         invalidateQueries(
             [
@@ -131,26 +68,19 @@ export default function useTheatreSubmitMutation(
             {exact: false},
         );
 
-        toast.success(
-            successMessage ??
-            (isEditing ? "Theatre updated." : "Theatre created.")
-        );
-
+        successMessage && toast.success(successMessage);
+        resetOnSuccess && form.reset();
         onSubmitSuccess?.(theatre);
     };
 
-    /**
-     * Handles submission errors.
-     */
     const onError = (error: unknown): void => {
         toast.error(errorMessage || "Oops. Something went wrong.");
         handleMutationFormError({form, error});
+
+        resetOnError && form.reset();
         onSubmitError?.(error);
     };
 
-    /**
-     * Registers the mutation.
-     */
     return useMutation({
         mutationKey: ["submit_theatre_data"],
         mutationFn: submitTheatreData,

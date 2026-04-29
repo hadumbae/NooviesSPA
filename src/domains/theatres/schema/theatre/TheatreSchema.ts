@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import {LocationSchema} from "@/common/schema/models/location/Location.schema.ts";
+import {LocationSchema} from "@/common/_models/location/LocationSchema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 
 /**

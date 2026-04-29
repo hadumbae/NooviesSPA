@@ -48,8 +48,8 @@ export function PersonSubmitForm(
         form,
         onSubmit: onSubmitParams,
         resetForm: {
-            onSuccess: resetOnSuccess,
-            onError: resetOnError,
+            resetOnSuccess: resetOnSuccess,
+            resetOnError: resetOnError,
         },
     });
 

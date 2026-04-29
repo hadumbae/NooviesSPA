@@ -24,7 +24,8 @@ export function MovieCreditForm(
 
     const mutation = useMovieCreditSubmitMutation({
         form,
-        resetOptions: {onSuccess: resetOnSuccess, onError: resetOnError},
+        resetOnSuccess,
+        resetOnError,
         ...mutationProps,
     });
 

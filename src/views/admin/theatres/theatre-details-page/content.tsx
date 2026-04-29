@@ -9,8 +9,6 @@ import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {TheatreDetailsUIContext} from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContext.ts";
 import {TheatreDetailsPageTabs} from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsPageTabs.tsx";
-import TheatreSubmitFormPanel
-    from "@/views/admin/theatres/_feat/submit-data/TheatreSubmitFormPanel.tsx";
 import {TheatreDetailsCard} from "@/views/admin/theatres/_comp/display-cards/TheatreDetailsCard.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
@@ -20,6 +18,7 @@ import {TheatreDeleteWarningDialog} from "@/views/admin/theatres/_feat/model-opt
 import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
 import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
 import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {TheatreSubmitForm, TheatreSubmitFormPanel} from "@/views/admin/theatres/_feat/submit-data";
 
 /** Props for the TheatreDetailsPageContent component. */
 type TheatreDetailsPageContentProps = {
@@ -82,13 +81,10 @@ export function TheatreDetailsPageContent(
             </div>
 
             <div className="hidden">
-                <TheatreSubmitFormPanel
-                    isEditing={true}
-                    entity={theatre}
-                    presetOpen={isEditing}
-                    setPresetOpen={setIsEditing}
-                    onSubmitSuccess={replaceOnUpdate}
-                />
+                <TheatreSubmitForm editEntity={theatre} onSubmitSuccess={replaceOnUpdate}>
+                    <TheatreSubmitFormPanel isEditing={true} isOpen={isEditing} setIsOpen={setIsEditing}/>
+                </TheatreSubmitForm>
+
                 <TheatreDeleteWarningDialog
                     theatreID={theatre._id}
                     onDeleteSuccess={navigateOnDelete}

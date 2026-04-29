@@ -10,7 +10,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import { findBySlug } from "@/domains/theatres/_feat/crud";
 import { ZodType, ZodTypeDef } from "zod";
 import { buildQueryFn } from "@/common/features/validate-fetch-data";
-import { TheatreCRUDQueryKeys } from "@/domains/theatres/_feat/crud-hooks/TheatreCRUDQueryKeys.ts";
+import { TheatreCRUDQueryKeys } from "@/domains/theatres/_feat/crud-hooks/queryKeys.ts";
 
 /** Props for the useFetchTheatreBySlug hook. */
 type FetchParams<TData = unknown> = {

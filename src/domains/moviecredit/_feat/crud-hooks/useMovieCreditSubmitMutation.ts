@@ -1,8 +1,4 @@
-/**
- * @file useMovieCreditSubmitMutation.ts
- *
- * React Query mutation hook for creating or updating movie credits.
- */
+/** @fileoverview React Query mutation hook for movie credit creation and updates. */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
@@ -19,27 +15,28 @@ import {MovieCreditFormData} from "@/domains/moviecredit/_feat/submit-data/schem
 import {create, MovieCreditCRUDMutationKeys, MovieCreditCRUDQueryKeys, update} from "@/domains/moviecredit/_feat/crud";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/features/submit-data";
 
-type SubmitParams = MutationResponseConfig<MovieCreditDetails> & {
-    /** React Hook Form instance */
+/** Props for the useMovieCreditSubmitMutation hook. */
+type SubmitParams = MutationFormResetConfig & MutationResponseConfig<MovieCreditDetails> & {
     form: UseFormReturn<MovieCreditFormValues, unknown, MovieCreditFormData>;
-    resetOptions: MutationFormResetConfig;
 };
 
 /**
- * Handles movie credit submission.
- *
- * Responsibilities:
- * - Create vs update resolution
- * - Response validation
- * - Toast notifications
- * - Form error hydration
- * - Query cache invalidation
- *
- * @returns React Query mutation instance
+ * Manages movie credit form submissions including validation and cache synchronization.
  */
 export function useMovieCreditSubmitMutation(
-    {form, onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitParams
+    params: SubmitParams
 ): UseMutationResult<MovieCreditDetails, unknown, MovieCreditFormData> {
+    const {
+        form,
+        onSubmitSuccess,
+        onSubmitError,
+        successMessage,
+        errorMessage,
+        resetOnSubmit,
+        resetOnSuccess,
+        resetOnError
+    } = params;
+
     const invalidateQueries = useInvalidateQueryKeys();
     const config = {populate: true, virtuals: true};
 
@@ -54,17 +51,21 @@ export function useMovieCreditSubmitMutation(
         });
 
         if (!success) throw error;
+        resetOnSubmit && form.reset();
         return parsed;
     };
 
     const onSuccess = (credit: MovieCreditDetails) => {
         invalidateQueries([MovieCreditCRUDQueryKeys.all], {exact: false});
         successMessage && toast.success(successMessage);
+
+        resetOnSuccess && form.reset();
         onSubmitSuccess?.(credit);
     };
 
     const onError = (error: unknown) => {
         handleMutationFormError({form, error, displayMessage: errorMessage});
+        resetOnError && form.reset();
         onSubmitError?.(error);
     };
 

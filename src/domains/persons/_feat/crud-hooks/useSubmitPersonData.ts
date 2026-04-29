@@ -60,7 +60,7 @@ export function useSubmitPersonData(
     const onSuccess = (person: Person) => {
         invalidateQueries([PersonCRUDQueryKeys.all], {exact: false});
 
-        resetForm?.onSuccess && form.reset({...person, dob: person?.dob ? person.dob.toISODate() : ""});
+        resetForm?.resetOnSuccess && form.reset({...person, dob: person?.dob ? person.dob.toISODate() : ""});
         successMessage && toast.success(successMessage);
         onSubmitSuccess?.(person);
     };
@@ -72,7 +72,7 @@ export function useSubmitPersonData(
             displayMessage: errorMessage ?? "An error occurred.",
         });
 
-        resetForm?.onError && form.reset();
+        resetForm?.resetOnError && form.reset();
         onSubmitError?.(error);
     };
 

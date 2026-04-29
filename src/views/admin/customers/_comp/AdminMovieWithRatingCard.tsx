@@ -6,7 +6,6 @@
 import {MovieWithRating} from "@/domains/movies/schema/movie/MovieWithRatingSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import MoviePosterImage from "@/views/admin/movies/_comp/poster-image/MoviePosterImage.tsx";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
 import {AdminMovieWithRatingCardStat} from "@/views/admin/customers/_comp/AdminMovieWithRatingCardStat.tsx";
@@ -14,6 +13,7 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import {VerticalDivider} from "@/views/common/_comp/VerticalDivider.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {MovieRatingBadge} from "@/views/admin/reviews/_comp";
+import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 
 /**
  * Props for the AdminMovieWithRatingCard component.
@@ -54,7 +54,7 @@ export const AdminMovieWithRatingCard = (
             <CardContent className={cn("p-3 space-y-2", className)}>
                 <div className="flex items-stretch space-x-2">
                     <LoggedLink to={`/admin/movies/get/${slug}`}>
-                        <MoviePosterImage
+                        <MoviePosterImageDialog
                             className="h-32 rounded-sm"
                             src={posterImage?.secure_url}
                             alt={`${title} Poster Image`}

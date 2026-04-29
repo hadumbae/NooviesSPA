@@ -1,25 +1,22 @@
 /**
  * @fileoverview Header section for the Cinema Management dashboard.
- * * This component serves as the primary navigation and action hub for the
- * Theatres list. It provides users with clear context about the current
- * view and a direct way to register new physical cinema locations.
  */
 
-import { ReactElement } from 'react';
+import {ReactElement, useState} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import { Plus } from "lucide-react";
-import { Button } from "@/common/components/ui/button.tsx";
-import { HoverLinkCSS } from "@/common/constants/css/ButtonCSS.ts";
-import TheatreSubmitFormPanel from "@/views/admin/theatres/_feat/submit-data/TheatreSubmitFormPanel.tsx";
+import {Plus} from "lucide-react";
 import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
 
 import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
+import {TheatreSubmitForm, TheatreSubmitFormPanel} from "@/views/admin/theatres/_feat/submit-data";
+import {LinkButton} from "@/views/common/_comp/submit-form";
 
 /**
- * Header component that introduces the "Theatres" section of the admin portal.
+ * Header component for the Theatre index view.
  */
 export function TheatreIndexHeader(): ReactElement {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const navigateToTheatre = useNavigateToTheatre();
 
     const onSubmitSuccess = (theatre: Theatre) => {
@@ -39,17 +36,13 @@ export function TheatreIndexHeader(): ReactElement {
                 </HeaderDescription>
             </section>
 
-            <TheatreSubmitFormPanel onSubmitSuccess={onSubmitSuccess}>
-                <Button
-                    variant="link"
-                    size="sm"
-                    className={HoverLinkCSS}
-                    aria-label="Add a new theatre"
-                >
-                    <Plus className="mr-2 h-4 w-4" />
-                    Create Theatre
-                </Button>
-            </TheatreSubmitFormPanel>
+            <TheatreSubmitForm onSubmitSuccess={onSubmitSuccess}>
+                <TheatreSubmitFormPanel isOpen={isOpen} setIsOpen={setIsOpen}>
+                    <LinkButton size="sm" aria-label="Add a new theatre">
+                        <Plus/> Theatre
+                    </LinkButton>
+                </TheatreSubmitFormPanel>
+            </TheatreSubmitForm>
         </header>
     );
 }

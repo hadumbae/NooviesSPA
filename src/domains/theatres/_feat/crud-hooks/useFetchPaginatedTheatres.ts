@@ -13,7 +13,7 @@ import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {query} from "@/domains/theatres/_feat/crud";
 import {ZodType, ZodTypeDef} from "zod";
-import {TheatreCRUDQueryKeys} from "@/domains/theatres/_feat/crud-hooks/TheatreCRUDQueryKeys.ts";
+import {TheatreCRUDQueryKeys} from "@/domains/theatres/_feat/crud-hooks/queryKeys.ts";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";
 
 /**

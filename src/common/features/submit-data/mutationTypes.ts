@@ -14,9 +14,9 @@ export type MutationResponseConfig<TReturn = void> = {
 
 /** Form reset triggers. */
 export type MutationFormResetConfig = {
-    onSubmit?: boolean;
-    onSuccess?: boolean;
-    onError?: boolean;
+    resetOnSubmit?: boolean;
+    resetOnSuccess?: boolean;
+    resetOnError?: boolean;
 };
 
 /** Form-based mutation integration. */

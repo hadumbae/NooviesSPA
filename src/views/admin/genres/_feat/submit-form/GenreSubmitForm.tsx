@@ -42,7 +42,7 @@ export function GenreSubmitForm(
 
     const {mutate, isPending} = useGenreDataSubmit({
         form,
-        resetForm: {onSuccess: resetOnSuccess, onError: resetOnError},
+        resetForm: {resetOnSuccess: resetOnSuccess, resetOnError: resetOnError},
         ...mutationParams,
     });
 

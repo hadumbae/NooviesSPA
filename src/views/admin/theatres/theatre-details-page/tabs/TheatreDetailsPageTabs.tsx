@@ -13,7 +13,7 @@ import {PaginatedItems} from "@/common/types";
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
-import {TheatreDetailsSearchParamSchema} from "src/domains/theatres/_feat/handle-admin-search-params";
+import {TheatreDetailsSearchParamSchema} from "@/domains/theatres/_feat/handle-admin-search-params";
 
 /** Props for the TheatreDetailsPageTabs component. */
 export type TabProps = {

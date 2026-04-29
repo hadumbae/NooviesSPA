@@ -1,94 +1,42 @@
-import { FC, ReactNode } from 'react';
-import { TheatreFormValues } from "@/domains/theatres/_feat/submit-data/TheatreForm.types.ts";
+/**
+ * @fileoverview Slide-over panel (Sheet) for creating or updating a Theatre.
+ */
 
-import {
-    Sheet
-} from "@/common/components/ui/Sheet/Sheet.tsx";
-import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
-import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
-import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
-import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
+import {ReactElement} from 'react';
+import {Sheet} from "@/common/components/ui/Sheet/Sheet.tsx";
+import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import {SheetContent} from "@/common/components/ui/Sheet/SheetContent.tsx";
 import {SheetHeader} from "@/common/components/ui/Sheet/SheetHeader.tsx";
 import {SheetTitle} from "@/common/components/ui/Sheet/SheetTitle.tsx";
 import {SheetDescription} from "@/common/components/ui/Sheet/SheetDescription.tsx";
 import {SheetTrigger} from "@/common/components/ui/Sheet/SheetTrigger.tsx";
-import TheatreSubmitForm
-    from "@/views/admin/theatres/_feat/submit-data/TheatreSubmitForm.tsx";
+import {TheatreFormStarterValues} from "@/domains/theatres/_feat/submit-data";
+import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {UIOpenStateProps} from "@/common/types";
+import {TheatreSubmitFormView} from "@/views/admin/theatres/_feat/submit-data/views/TheatreSubmitFormView.tsx";
+import {useBaseFormContext} from "@/common/features/generic-form-context";
+import {PrimaryButton} from "@/views/common/_comp/submit-form";
 
-import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
-
-/**
- * Props for {@link TheatreSubmitFormPanel}.
- *
- * Extends {@link FormContainerProps} for theatre forms and {@link PresetOpenState}
- * for optional controlled open-state behavior.
- *
- * @property children - Optional trigger element used to open the slide-over panel.
- * @property className - Optional CSS class applied to the trigger wrapper.
- */
-type FormPanelProps = FormContainerProps<Theatre, Theatre, TheatreFormValues> & PresetOpenState & {
-    children?: ReactNode;
-    className?: string;
+/** Props for the TheatreSubmitFormPanel component. */
+type FormPanelProps = FormViewProps<TheatreFormStarterValues> & UIOpenStateProps & {
+    isEditing?: boolean;
 };
 
 /**
- * **TheatreSubmitFormPanel**
- *
- * A slide-over (sheet) panel that renders a {@link TheatreSubmitForm} to
- * create or update a theatre entity.
- *
- * ### Features
- * - Can operate as **controlled** or **uncontrolled** depending on `presetOpen` / `setPresetOpen`.
- * - Triggered by a custom child element (`children`), or defaults to a simple `"Open"` string.
- * - Displays appropriate title/description depending on `isEditing`.
- * - Wraps the form content in a scrollable container for long forms.
- * - Automatically closes the panel after a successful submission and triggers `onSubmitSuccess`.
- *
- * ### Controlled vs Uncontrolled Behavior
- * - **Controlled:** Provide both `presetOpen` and `setPresetOpen` to externally manage open state.
- * - **Uncontrolled:** Omit both; the component manages its own internal `isOpen` state.
- *
- * @param params - Props that determine form behavior, edit mode, preset values, and UI interactions.
- *
- * @example
- * ```tsx
- * <TheatreSubmitFormPanel
- *   isEditing
- *   entity={theatre}
- *   disableFields={["location"]}
- *   onSubmitSuccess={(updated) => console.log(updated)}
- * >
- *   <Button>Edit Theatre</Button>
- * </TheatreSubmitFormPanel>
- * ```
+ * Slide-over container that houses the Theatre submission form.
  */
-const TheatreSubmitFormPanel: FC<FormPanelProps> = (params) => {
-    // ⚡ Props ⚡
+export function TheatreSubmitFormPanel(
+    params: FormPanelProps
+): ReactElement {
+    const {children, disableFields, className, isEditing, isOpen, setIsOpen} = params;
 
-    const { children, onSubmitSuccess, presetOpen, setPresetOpen, ...formParams } = params;
-    const { isEditing } = formParams;
-
-    // ⚡ State: Controlled vs Uncontrolled ⚡
-
-    const {activeOpen, setActiveOpen} = usePresetActiveOpen({presetOpen, setPresetOpen});
-
-    // ⚡ Header Text ⚡
+    const {formID, isPending} = useBaseFormContext();
 
     const sheetTitle = `${isEditing ? "Update" : "Create"} Theatre`;
     const sheetDescription = `${isEditing ? "Update" : "Create"} theatres by submitting data.`;
 
-    // ⚡ Success Handler ⚡
-
-    const closeOnSuccess = (theatre: Theatre) => {
-        setActiveOpen(false);
-        onSubmitSuccess?.(theatre);
-    }
-
-    // ⚡ Render ⚡
-
     return (
-        <Sheet open={activeOpen} onOpenChange={setActiveOpen}>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>{children ? children : "Open"}</SheetTrigger>
             <SheetContent className="flex flex-col">
                 <SheetHeader>
@@ -97,15 +45,12 @@ const TheatreSubmitFormPanel: FC<FormPanelProps> = (params) => {
                 </SheetHeader>
 
                 <ScrollArea className="flex-grow px-1">
-                    <TheatreSubmitForm
-                        {...formParams}
-                        onSubmitSuccess={closeOnSuccess}
-                        isPanel={true}
-                    />
+                    <div className="space-y-4">
+                        <TheatreSubmitFormView disableFields={disableFields} className={className}/>
+                        <PrimaryButton form={formID} type="submit" disabled={isPending}>Submit</PrimaryButton>
+                    </div>
                 </ScrollArea>
             </SheetContent>
         </Sheet>
     );
-};
-
-export default TheatreSubmitFormPanel;
+}
