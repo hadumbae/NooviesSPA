@@ -5,13 +5,10 @@
 import {forwardRef, ReactElement} from "react";
 import {Button, ButtonProps} from "@/common/components/ui/button.tsx";
 
-/** Props for the PrimaryButton component. */
-type PrimaryProps = ButtonProps;
-
 /**
  * Standardized submission button with a full-width layout and primary styling.
  */
-export const PrimaryButton = forwardRef<HTMLButtonElement, PrimaryProps>(
+export const PrimaryButton = forwardRef<HTMLButtonElement, ButtonProps>(
     ({variant = "primary", className, ...props}, ref): ReactElement => (
         <Button
             ref={ref}
