@@ -15,6 +15,7 @@ import {TheatreDetailsScreenListCard} from "@/views/admin/theatre-screens/_comp/
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {TheatreScreenSubmitForm, TheatreScreenSubmitFormPanel} from "@/views/admin/theatre-screens/_feat/submit-data";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
 const panelInfo = {
     title: "Add Screen",
@@ -59,18 +60,27 @@ export function TheatreDetailsScreensTab(
                 </TheatreScreenSubmitForm>
             </section>
 
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <SROnly text="Screen List"/>
-                {
-                    screens.map((screen) => (
-                        <TheatreDetailsScreenListCard
-                            key={screen._id}
-                            screen={screen}
-                            theatreSlug={theatreSlug}
-                        />
-                    ))
-                }
-            </section>
+            {
+                screens.length > 0 ? (
+                    <section className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <SROnly text="Screen List"/>
+                        {
+                            screens.map((screen) => (
+                                <TheatreDetailsScreenListCard
+                                    key={screen._id}
+                                    screen={screen}
+                                    theatreSlug={theatreSlug}
+                                />
+                            ))
+                        }
+                    </section>
+                ) : (
+                    <EmptyArrayContainer
+                        text="There Are No Screens"
+                        className="border rounded-xl h-32"
+                    />
+                )
+            }
 
             <PaginationRangeButtons
                 page={page}

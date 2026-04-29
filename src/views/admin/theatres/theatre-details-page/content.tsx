@@ -32,7 +32,6 @@ type TheatreDetailsPageContentProps = {
 
 /**
  * Renders the layout for theatre management, including details cards and related data tabs.
- * Requires TheatreDetailsUIContext.
  */
 export function TheatreDetailsPageContent(
     {theatre, ...tabProps}: TheatreDetailsPageContentProps
@@ -50,6 +49,8 @@ export function TheatreDetailsPageContent(
             slug: updatedTheatre.slug,
             options: {replace: true},
         });
+
+        setIsEditing(false);
     }
 
     const navigateOnDelete = () =>
@@ -81,7 +82,7 @@ export function TheatreDetailsPageContent(
             </div>
 
             <div className="hidden">
-                <TheatreSubmitForm editEntity={theatre} onSubmitSuccess={replaceOnUpdate}>
+                <TheatreSubmitForm editEntity={theatre} onSubmitSuccess={replaceOnUpdate} successMessage="Updated.">
                     <TheatreSubmitFormPanel isEditing={true} isOpen={isEditing} setIsOpen={setIsEditing}/>
                 </TheatreSubmitForm>
 

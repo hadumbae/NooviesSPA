@@ -45,9 +45,11 @@ export function TheatreSubmitFormPanel(
                 </SheetHeader>
 
                 <ScrollArea className="flex-grow px-1">
-                    <div className="space-y-4">
+                    <div className="space-y-4 px-1">
                         <TheatreSubmitFormView disableFields={disableFields} className={className}/>
-                        <PrimaryButton form={formID} type="submit" disabled={isPending}>Submit</PrimaryButton>
+                        <PrimaryButton form={formID} type="submit" disabled={isPending} className="w-full">
+                            Submit
+                        </PrimaryButton>
                     </div>
                 </ScrollArea>
             </SheetContent>

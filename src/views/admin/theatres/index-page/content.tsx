@@ -1,7 +1,5 @@
 /**
- * @fileoverview Presentation component for the Theatre Index page.
- * Orchestrates the administrative interface for theater management, including
- * responsive grid layouts, search/filter dialogs, and pagination.
+ * @fileoverview Presentation component for the Theatre Index page content.
  */
 
 import TheatreIndexCard from "@/views/admin/theatres/_comp/index-page/TheatreIndexCard.tsx";
@@ -19,6 +17,7 @@ import {ReactElement} from "react";
 
 import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
+/** Props for the TheatreIndexPageContent component. */
 type ContentProps = {
     theatres: TheatreDetails[];
     totalItems: number;
@@ -28,7 +27,7 @@ type ContentProps = {
 };
 
 /**
- * Renders the main theatre management listing.
+ * Renders the primary grid layout and controls for managing theatres.
  */
 export function TheatreIndexPageContent(
     {theatres, page, perPage, setPage, totalItems}: ContentProps

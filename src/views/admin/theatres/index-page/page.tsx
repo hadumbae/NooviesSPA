@@ -1,8 +1,5 @@
 /**
  * @fileoverview Main administrative directory for cinema locations.
- * * This page acts as the central hub for the theatre management module. It
- * coordinates between the browser's URL (for saving search and page state),
- * the database (to fetch theatre records), and the user interface.
  */
 
 import { ReactElement } from "react";
@@ -20,16 +17,11 @@ import {
     PaginatedTheatreDetailsSchema
 } from "@/domains/theatres/schema/theatre/PaginatedTheatreDetailsSchema.ts";
 
-/**
- * Defines how many theatres are shown in the list at once.
- */
+/** Default number of theatre records displayed per pagination page. */
 const THEATRES_PER_PAGE = 20;
 
 /**
- * **Theatre Management Index**
- * ---
- * This is the primary "list view" for administrators to browse and search
- * for theatres.
+ * Root page component for the Theatre Management index view.
  */
 export function TheatreIndexPage(): ReactElement {
     useTitle("Admin | Theatre Management");
