@@ -14,17 +14,16 @@
  * - Delegate rendering to {@link BrowseTheatreListPageContent}
  */
 
-import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+import useParsedPaginationValue
+    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import BrowseTheatreListPageContent from "@/views/client/theatres/browse-theatre-page/BrowseTheatreListPageContent.tsx";
+import {BrowseTheatreListPageContent} from "@/views/client/theatres/browse-theatre-page/BrowseTheatreListPageContent.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import {BrowseTheatreParamSchema} from "@/domains/theatres/_feat/submit-location";
-import {useFetchTheatresByLocation} from "@/domains/theatres/_feat/browse/useFetchTheatresByLocation.ts";
-import {
-    PaginatedTheatresWithRecentShowings,
-    PaginatedTheatresWithRecentShowingsSchema
-} from "@/domains/theatres/schema/theatre/PaginatedTheatresWithRecentShowingsSchema.ts";
+import {PaginatedTheatresWithRecentShowings} from "@/domains/theatres/schema/theatre";
+import {useFetchTheatresByLocation} from "@/domains/theatres/_feat/search-theatres";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {ReactElement} from "react";
 
 /** Number of theatres displayed per page */
 const THEATRES_PER_PAGE = 20;
@@ -39,7 +38,7 @@ const THEATRES_PER_PAGE = 20;
  * - Filtering to theatres with recent or upcoming showings
  * - Schema-validated data rendering
  */
-const BrowseTheatreListPage = () => {
+export function BrowseTheatreListPage(): ReactElement {
     useTitle("Browse Theatres");
 
     const {searchParams: {target}} = useParsedSearchParams({
@@ -55,7 +54,7 @@ const BrowseTheatreListPage = () => {
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={PaginatedTheatresWithRecentShowingsSchema}>
+        <QueryDataLoader query={query}>
             {({totalItems, items}: PaginatedTheatresWithRecentShowings) => (
                 <BrowseTheatreListPageContent
                     page={page}
@@ -65,8 +64,6 @@ const BrowseTheatreListPage = () => {
                     theatres={items}
                 />
             )}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
-};
-
-export default BrowseTheatreListPage;
+}

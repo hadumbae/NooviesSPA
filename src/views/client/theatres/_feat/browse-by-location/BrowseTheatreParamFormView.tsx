@@ -11,14 +11,15 @@ import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {Form} from "@/common/components/ui/form.tsx";
 import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAutoSubmit.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {BrowseTheatreParamFormValues} from "@/domains/theatres/_feat/submit-location";
+import {BrowseTheatreParamFormStarterValues} from "@/domains/theatres/_feat/submit-location";
+
 
 /**
  * Props for the browse theatre parameter form view.
  */
 type FormProps = {
-    form: UseFormReturn<BrowseTheatreParamFormValues>;
-    submitHandler: SubmitHandler<BrowseTheatreParamFormValues>;
+    form: UseFormReturn<BrowseTheatreParamFormStarterValues>;
+    submitHandler: SubmitHandler<BrowseTheatreParamFormStarterValues>;
     className?: string;
 };
 

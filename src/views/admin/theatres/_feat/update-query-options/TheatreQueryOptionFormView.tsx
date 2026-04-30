@@ -6,10 +6,10 @@
 
 import { FC } from 'react';
 import { Form } from "@/common/components/ui/form.tsx";
-import { TheatreQueryOptionFormValues } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionFormSchema.ts";
+import { TheatreQueryOptionFormStarterValues } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionFormStarterValues.ts";
 import { SearchParamFormViewProps } from "@/common/type/form/SearchParamFormProps.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import { TheatreQueryOptionSchema } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.schema.ts";
+import { TheatreQueryOptionSchema } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionSchema.ts";
 import { cn } from "@/common/lib/utils.ts";
 import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAutoSubmit.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
@@ -20,7 +20,7 @@ import TheatreQueryOptionFormFilterFieldset from "@/views/admin/theatres/_feat/u
 /**
  * Props for {@link TheatreQueryOptionFormView}.
  */
-type FormProps = SearchParamFormViewProps<TheatreQueryOptionFormValues>;
+type FormProps = SearchParamFormViewProps<TheatreQueryOptionFormStarterValues>;
 
 /**
  * `TheatreQueryOptionFormView` renders a form for theatre query options,

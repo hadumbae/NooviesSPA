@@ -5,8 +5,9 @@
 import {ReactElement} from 'react';
 import {PageLoader} from "@/views/common/_comp/page";
 import {TheatreDetailsPageContent} from "@/views/admin/theatres/theatre-details-page/content.tsx";
-import TheatreDetailsUIContextProvider
-    from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContextProvider.tsx";
+import {
+    TheatreDetailsUIContextProvider
+} from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContextProvider.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";

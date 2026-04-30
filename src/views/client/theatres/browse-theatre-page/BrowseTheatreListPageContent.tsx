@@ -26,6 +26,7 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
 import {TheatreWithRecentShowings} from "@/domains/theatres/schema/theatre/TheatreWithRecentShowingsSchema.ts";
+import {ReactElement} from "react";
 
 /**
  * Props for {@link BrowseTheatreListPageContent}.
@@ -60,9 +61,9 @@ type ContentProps = PaginationValues & {
  * filtering and validation have already been handled
  * by the parent page.
  */
-const BrowseTheatreListPageContent = (
+export function BrowseTheatreListPageContent(
     {page, perPage, setPage, totalTheatres, theatres}: ContentProps,
-) => {
+): ReactElement {
     const theatreSection = (
         <section className="space-y-4">
             <SectionHeader srOnly={true}>Theatres</SectionHeader>
@@ -104,6 +105,4 @@ const BrowseTheatreListPageContent = (
             }
         </PageFlexWrapper>
     );
-};
-
-export default BrowseTheatreListPageContent;
+}

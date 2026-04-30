@@ -1,29 +1,22 @@
-import {FC, PropsWithChildren, useState} from 'react';
-import {TheatreDetailsUIContext, TheatreDetailsUIStates} from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContext.ts";
-
 /**
- * Provider component for theatre details UI state.
- *
- * Manages flags and setters for editing, deleting, adding screens,
- * and adding showings. Wraps child components with the context so
- * they can access and update the theatre UI state.
- *
- * @example
- * <TheatreDetailsUIContextProvider>
- *   <TheatreDetailsComponent />
- * </TheatreDetailsUIContextProvider>
+ * @fileoverview Provider component for theatre details UI state.
  */
-const TheatreDetailsUIContextProvider: FC<PropsWithChildren> = ({children}) => {
-    // Tracks whether the theatre details are in edit mode
+
+import {ReactElement, ReactNode, useState} from 'react';
+import {
+    TheatreDetailsUIContext,
+    TheatreDetailsUIStates
+} from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContext.ts";
+
+type ProviderProps = {
+    children: ReactNode;
+}
+
+/** Provider component for theatre details UI state. */
+export function TheatreDetailsUIContextProvider({children}: ProviderProps): ReactElement {
     const [isEditing, setIsEditing] = useState<boolean>(false);
-
-    // Tracks whether a delete action is in progress
     const [isDeleting, setIsDeleting] = useState<boolean>(false);
-
-    // Tracks whether a new screen is being added
     const [isAddingScreen, setIsAddingScreen] = useState<boolean>(false);
-
-    // Tracks whether a new showing is being added
     const [isAddingShowing, setIsAddingShowing] = useState<boolean>(false);
 
     const context: TheatreDetailsUIStates = {
@@ -42,6 +35,4 @@ const TheatreDetailsUIContextProvider: FC<PropsWithChildren> = ({children}) => {
             {children}
         </TheatreDetailsUIContext.Provider>
     );
-};
-
-export default TheatreDetailsUIContextProvider;
+}

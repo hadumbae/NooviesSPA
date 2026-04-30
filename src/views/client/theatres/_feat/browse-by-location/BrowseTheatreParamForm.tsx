@@ -13,8 +13,8 @@ import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {useBrowseTheatreParamForm} from "@/domains/theatres/_feat/submit-location/useBrowseTheatreParamForm.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import BrowseTheatreParamFormView from "@/views/client/theatres/_feat/browse-by-location/BrowseTheatreParamFormView.tsx";
+import {BrowseTheatreParamFormStarterValues} from "@/domains/theatres/_feat/submit-location";
 import {
-    BrowseTheatreParamFormValues,
     BrowseTheatreParams,
     BrowseTheatreParamSchema
 } from "@/domains/theatres/_feat/submit-location";
@@ -24,7 +24,7 @@ import {
  * Props for the browse theatre parameter form container.
  */
 type FormProps =
-    Pick<FormOptions<BrowseTheatreParamFormValues, BrowseTheatreParams>, "presetValues">
+    Pick<FormOptions<BrowseTheatreParamFormStarterValues, BrowseTheatreParams>, "presetValues">
     & { className?: string };
 
 /**
@@ -38,7 +38,7 @@ const BrowseTheatreParamForm = (
         schema: BrowseTheatreParamSchema,
     });
 
-    const updateParams = (values: BrowseTheatreParamFormValues) => {
+    const updateParams = (values: BrowseTheatreParamFormStarterValues) => {
         setSearchParams(values as BrowseTheatreParams);
     };
 

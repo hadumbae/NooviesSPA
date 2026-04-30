@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Hook for initializing the theatre submission form with validated default values.
+ */
+
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {TheatreFormData, TheatreFormSchema} from "@/domains/theatres/_feat/submit-data/TheatreForm.schema.ts";
@@ -12,6 +16,9 @@ type FormParams = {
     presetValues?: Partial<TheatreFormStarterValues>;
 }
 
+/**
+ * Initializes and returns the theatre submission form controller with Zod validation.
+ */
 export function useTheatreSubmitForm(
     params: FormParams = {}
 ): UseFormReturn<TheatreFormStarterValues, unknown, TheatreFormData> {

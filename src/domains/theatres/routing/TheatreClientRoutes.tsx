@@ -1,8 +1,13 @@
+/**
+ * @fileoverview Route definitions for the client theatre module.
+ */
+
 import {RouteObject} from "react-router-dom";
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
-import TheatreInfoPage from "@/views/client/theatres/theatre-info/TheatreInfoPage.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
-import BrowseTheatreListPage from "@/views/client/theatres/browse-theatre-page/BrowseTheatreListPage.tsx";
+
+import {TheatreInfoPage} from "@/views/client/theatres/theatre-info";
+import {BrowseTheatreListPage} from "@/views/client/theatres/browse-theatre-page";
 
 const routes: RouteObject[] = [
     {
@@ -10,12 +15,12 @@ const routes: RouteObject[] = [
         element: <BaseLayout/>,
         children: [
             {
-                path: "/browse/theatres",
+                index: true,
                 element: <BrowseTheatreListPage/>,
                 errorElement: <ComponentErrorHandler/>,
             },
             {
-                path: "/browse/theatres/:slug",
+                path: ":slug",
                 element: <TheatreInfoPage/>,
                 errorElement: <ComponentErrorHandler/>,
             }
@@ -23,4 +28,6 @@ const routes: RouteObject[] = [
     }
 ];
 
-export default routes;
+export {
+    routes as TheatreClientRoutes
+}

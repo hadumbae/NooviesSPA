@@ -1,14 +1,10 @@
+/**
+ * @fileoverview React context and types for theatre details UI state flags.
+ */
+
 import {createContext, Dispatch, SetStateAction} from "react";
 
-/**
- * Represents the UI state flags for theatre details,
- * along with their corresponding setters.
- *
- * - `isEditing` / `setIsEditing`: Tracks whether the theatre details are in edit mode.
- * - `isDeleting` / `setIsDeleting`: Tracks whether a delete action is in progress.
- * - `isAddingScreen` / `setIsAddingScreen`: Tracks whether a screen is being added.
- * - `isAddingShowing` / `setIsAddingShowing`: Tracks whether a showing is being added.
- */
+/** Represents the UI state flags for theatre details, along with their corresponding setters. */
 export type TheatreDetailsUIStates = {
     /** Whether the theatre is currently being edited */
     isEditing: boolean;
@@ -35,11 +31,5 @@ export type TheatreDetailsUIStates = {
     setIsAddingShowing: Dispatch<SetStateAction<boolean>>;
 }
 
-/**
- * React context for theatre details UI state.
- *
- * Provides state flags and setters for editing, deleting, adding screens,
- * and adding showings. The default value is `undefined` and should be
- * provided by a context provider.
- */
+/** React context for theatre details UI state. */
 export const TheatreDetailsUIContext = createContext<TheatreDetailsUIStates | undefined>(undefined);

@@ -9,21 +9,23 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import IANATimezoneHookFormSelect from "@/common/components/forms/values/IANATimezoneHookFormSelect.tsx";
 import { UseFormReturn } from "react-hook-form";
-import { TheatreQueryOptionFormValues } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionFormSchema.ts";
-import { TheatreQueryFilters } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.types.ts";
+import { TheatreQueryOptionFormStarterValues } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionFormStarterValues.ts";
+
+
+import {TheatreQueryMatchFilters} from "@/domains/theatres/_feat/handle-query-options/TheatreQueryMatchFilterSchema.ts";
 
 /**
  * Props for {@link TheatreQueryOptionFormFilterFieldset}.
  */
 type FieldsetProps = {
     /** The form instance from `react-hook-form`. */
-    form: UseFormReturn<TheatreQueryOptionFormValues>;
+    form: UseFormReturn<TheatreQueryOptionFormStarterValues>;
 
     /**
      * A record of active filter fields derived from the schema.
      * Determines which input controls should be displayed.
      */
-    activeFields: Record<keyof TheatreQueryFilters, boolean>;
+    activeFields: Record<keyof TheatreQueryMatchFilters, boolean>;
 };
 
 /**

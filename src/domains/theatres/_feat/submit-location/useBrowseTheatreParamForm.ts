@@ -15,9 +15,10 @@ import {
     useBrowseTheatreParamFormDefaultValues,
 } from "@/domains/theatres/_feat/submit-location/useBrowseTheatreParamFormDefaultValues.ts";
 import {
-    BrowseTheatreParamFormValues, BrowseTheatreParams,
+    BrowseTheatreParams,
     BrowseTheatreParamSchema
 } from "@/domains/theatres/_feat/submit-location/BrowseTheatreParamSchema.ts";
+import {BrowseTheatreParamFormStarterValues} from "./BrowseTheatreParamFormStarterValues";
 
 /**
  * Initialization options for the browse theatre form.
@@ -34,10 +35,10 @@ type FormParams = {
  */
 export function useBrowseTheatreParamForm(
     params?: FormParams,
-): UseFormReturn<BrowseTheatreParamFormValues> {
+): UseFormReturn<BrowseTheatreParamFormStarterValues> {
     const defaultValues = useBrowseTheatreParamFormDefaultValues(params);
 
-    return useForm<BrowseTheatreParamFormValues>({
+    return useForm<BrowseTheatreParamFormStarterValues>({
         resolver: zodResolver(BrowseTheatreParamSchema),
         defaultValues,
     });

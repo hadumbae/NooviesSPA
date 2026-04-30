@@ -10,7 +10,7 @@ import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import TheatreQueryOptionFormContainer
     from "@/views/admin/theatres/_feat/update-query-options/TheatreQueryOptionFormContainer.tsx";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {TheatreQueryOptionSchema} from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.schema.ts";
+import {TheatreQueryOptionSchema} from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionSchema.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {ReactElement} from "react";

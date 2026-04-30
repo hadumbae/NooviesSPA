@@ -13,9 +13,9 @@
 import {useRef} from "react";
 import {isEqual} from "lodash";
 import {
-    BrowseTheatreParamFormValues,
     BrowseTheatreParams
 } from "@/domains/theatres/_feat/submit-location/BrowseTheatreParamSchema.ts";
+import {BrowseTheatreParamFormStarterValues} from "./BrowseTheatreParamFormStarterValues";
 
 /**
  * Options for generating browse theatre form defaults.
@@ -33,10 +33,10 @@ type ValueParams = {
  */
 export function useBrowseTheatreParamFormDefaultValues(
     {presetValues}: ValueParams = {},
-): BrowseTheatreParamFormValues {
-    const initialValues = useRef<BrowseTheatreParamFormValues | null>(null);
+): BrowseTheatreParamFormStarterValues {
+    const initialValues = useRef<BrowseTheatreParamFormStarterValues | null>(null);
 
-    const defaultValues: BrowseTheatreParamFormValues = {
+    const defaultValues: BrowseTheatreParamFormStarterValues = {
         target: "",
         ...presetValues,
     };

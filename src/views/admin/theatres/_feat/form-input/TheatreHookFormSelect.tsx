@@ -9,10 +9,10 @@ import {Loader} from "lucide-react";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
-import {TheatreQueryOptions} from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.types.ts";
 import {useFetchTheatres} from "@/domains/theatres/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {TheatreArray, TheatreArraySchema} from "@/domains/theatres/schema/theatre/TheatreArraySchema.ts";
+import {TheatreQueryOptions} from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionSchema.ts";
 
 /**
  * Props for {@link TheatreHookFormSelect}.

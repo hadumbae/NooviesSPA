@@ -6,11 +6,15 @@
 
 import { FC } from 'react';
 import { SearchParamFormContainerProps } from "@/common/type/form/SearchParamFormProps.ts";
-import { TheatreQueryOptionFormValues } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionFormSchema.ts";
-import useTheatreQueryOptionForm from "@/domains/theatres/_feat/handle-query-options/useTheatreQueryOptionForm.ts";
+import { TheatreQueryOptionFormStarterValues } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionFormStarterValues.ts";
+import {
+    useTheatreQueryOptionForm
+} from "@/domains/theatres/_feat/handle-query-options/useTheatreQueryOptionForm.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import { TheatreQueryOptionSchema } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.schema.ts";
-import { TheatreQueryOptions } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.types.ts";
+import {
+    TheatreQueryOptions,
+    TheatreQueryOptionSchema
+} from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionSchema.ts";
 import TheatreQueryOptionFormView from "@/views/admin/theatres/_feat/update-query-options/TheatreQueryOptionFormView.tsx";
 
 /**
@@ -48,7 +52,7 @@ const TheatreQueryOptionFormContainer: FC<FormProps> = (props) => {
     const form = useTheatreQueryOptionForm({ presetValues });
 
     // ⚡ Handler ⚡
-    const onSubmit = (values: TheatreQueryOptionFormValues) => {
+    const onSubmit = (values: TheatreQueryOptionFormStarterValues) => {
         setSearchParams(values as TheatreQueryOptions);
     };
 

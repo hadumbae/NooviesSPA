@@ -6,22 +6,23 @@
 
 import { FC } from 'react';
 import { UseFormReturn } from "react-hook-form";
-import { TheatreQueryOptionFormValues } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionFormSchema.ts";
-import { TheatreQuerySorts } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOption.types.ts";
+import { TheatreQueryOptionFormStarterValues } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionFormStarterValues.ts";
 import HookFormSortToggle from "@/common/components/forms/HookFormSortToggle.tsx";
+
+import {TheatreQueryMatchSorts} from "@/domains/theatres/_feat/handle-query-options/TheatreQueryMatchSortSchema.ts";
 
 /**
  * Props for {@link TheatreQueryOptionFormSortFieldset}.
  */
 type FieldsetProps = {
     /** The form instance from `react-hook-form`. */
-    form: UseFormReturn<TheatreQueryOptionFormValues>;
+    form: UseFormReturn<TheatreQueryOptionFormStarterValues>;
 
     /**
      * A record of active sort fields derived from the schema.
      * Determines which sort toggles should be displayed.
      */
-    activeFields: Record<keyof TheatreQuerySorts, boolean>;
+    activeFields: Record<keyof TheatreQueryMatchSorts, boolean>;
 };
 
 /**

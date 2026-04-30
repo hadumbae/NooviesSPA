@@ -28,6 +28,7 @@ import {QueryDefinition}
 import {ScreenWithShowingsArraySchema} from "@/domains/theatre-screens/schema/model/ScreenWithShowingsArraySchema.ts";
 import {useFetchTheatreBySlug} from "@/domains/theatres/_feat/crud-hooks";
 import {TheatreDetails, TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {ReactElement} from "react";
 
 /**
  * Combined query payload for {@link TheatreInfoPage}.
@@ -45,7 +46,7 @@ type QueryData = {
  * Orchestrates route validation, data fetching, and loading states
  * before rendering the theatre overview and screen selection UI.
  */
-const TheatreInfoPage = () => {
+export function TheatreInfoPage(): ReactElement {
     // --- SLUG ---
     const {slug: theatreSlug} = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
@@ -90,6 +91,4 @@ const TheatreInfoPage = () => {
             }}
         </MultiQueryDataLoader>
     );
-};
-
-export default TheatreInfoPage;
+}

@@ -3,7 +3,6 @@ import AuthRoutes from "@/domains/auth/routing/AuthRoutes.tsx";
 import GenreRoutes from "@/domains/genres/routing/AdminGenreRoutes.tsx";
 import PersonRoutes from "@/domains/persons/routing/PersonRoutes.tsx";
 import SeatRoutes from "@/domains/seats/routing/SeatRoutes.tsx";
-import TheatreRoutes from "@/domains/theatres/routing/TheatreRoutes.tsx";
 import ShowingRoutes from "@/domains/showings/routing/ShowingRoutes.tsx";
 import AdminMovieRoutes from "@/domains/movies/routing/AdminMovieRoutes.tsx";
 import SystemRoutes from "@/common/routing/SystemRoutes.tsx";
@@ -14,9 +13,9 @@ import RoleTypeRoutes from "@/domains/roletype/routing/RoleTypeRoutes.tsx";
 import AdminDashboardRoutes from "@/domains/dashboard/routing/AdminDashboardRoutes.tsx";
 import ClientGenreRoutes from "@/domains/genres/routing/ClientGenreRoutes.tsx";
 import BrowseShowingRoutes from "@/domains/showings/routing/BrowseShowingRoutes.tsx";
-import BrowseTheatreRoutes from "@/domains/theatres/routing/BrowseTheatreRoutes.tsx";
 import {AdminReservationRoutes} from "@/domains/reservation/views/admin";
 import {AdminCustomerRoutes} from "@/domains/customers";
+import {TheatreRoutes} from "@/domains/theatres/routing";
 
 // --- ADMIN ROUTES ---
 
@@ -30,7 +29,6 @@ const adminRoutes = [
     ...AdminCustomerRoutes,
 
     ...SeatRoutes,
-    ...TheatreRoutes,
     ...ShowingRoutes,
     ...AdminReservationRoutes,
 ];
@@ -42,7 +40,6 @@ const clientRoutes: RouteObject[] = [
     ...ClientGenreRoutes,
     ...BrowseMovieRoutes,
     ...BrowseShowingRoutes,
-    ...BrowseTheatreRoutes,
 ];
 
 // --- AGGREGATE ---
@@ -55,4 +52,7 @@ export default [
 
     ...adminRoutes,
     ...clientRoutes,
+
+    ...TheatreRoutes
 ];
+
