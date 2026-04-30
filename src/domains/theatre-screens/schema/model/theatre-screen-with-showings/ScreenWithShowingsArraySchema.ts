@@ -3,8 +3,8 @@
  * @filename ScreenWithShowingsArraySchema.ts
  */
 
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
-import {ScreenWithShowingsSchema} from "@/domains/theatre-screens/schema/model/ScreenWithShowingsSchema.ts";
+import generateArraySchema from "src/common/utility/schemas/generateArraySchema.ts";
+import {ScreenWithShowingsSchema} from "src/domains/theatre-screens/schema/model/theatre-screen-with-showings/ScreenWithShowingsSchema.ts";
 import {z} from "zod";
 
 /**

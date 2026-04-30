@@ -10,7 +10,7 @@ import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiS
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import {
     TheatreScreenArraySchema
-} from "@/domains/theatre-screens/schema/model/TheatreScreenArraySchema.ts";
+} from "@/domains/theatre-screens/schema/model";
 import {useFetchScreens} from "@/domains/theatre-screens/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {TheatreScreen} from "@/domains/theatre-screens/schema/model";
@@ -18,7 +18,6 @@ import {ReactElement} from "react";
 
 /**
  * Props for the ScreenHookFormSelect component.
- * @template TSubmit - The type of form values managed by react-hook-form.
  */
 type SelectProps<TSubmit extends FieldValues> = {
     name: Path<TSubmit>;

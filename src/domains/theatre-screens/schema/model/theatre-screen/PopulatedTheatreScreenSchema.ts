@@ -3,10 +3,10 @@
  * @filename PopulatedTheatreScreenSchema.ts
  */
 
-import {TheatreScreenSchema} from "@/domains/theatre-screens/schema/model/TheatreScreenSchema.ts";
+import {TheatreScreenSchema} from "./TheatreScreenSchema.ts";
 import {z} from "zod";
 
-import {TheatreSchema} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
+import {TheatreSchema} from "src/domains/theatres/schema/theatre/TheatreSchema.ts";
 
 /**
  * Zod schema for a Theatre Screen that includes the full Theatre object instead of just an ID.

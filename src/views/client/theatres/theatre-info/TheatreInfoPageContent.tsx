@@ -1,61 +1,36 @@
 /**
- * @file TheatreInfoPageContent.tsx
- *
- * Presentational component for rendering theatre details and screen listings.
- *
- * Displays:
- * - Theatre name and location
- * - Available screens with showings
- * - Empty-state messaging when no screens exist
+ * @fileoverview Presentational component for rendering theatre details and screen listings.
  */
 
-import {ScreenWithShowings}
-    from "@/domains/theatre-screens/schema/model/ScreenWithShowingsSchema.ts";
-import buildString
-    from "@/common/utility/buildString.ts";
-import HeaderTitle
-    from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription
-    from "@/common/components/page/headers/HeaderDescription.tsx";
-import {cn}
-    from "@/common/lib/utils.ts";
-import {SecondaryTextBaseCSS}
-    from "@/common/constants/css/TextCSS.ts";
-import SectionHeader
-    from "@/common/components/page/SectionHeader.tsx";
+import {ScreenWithShowings} from "@/domains/theatre-screens/schema/model";
+import buildString from "@/common/utility/buildString.ts";
+import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
+import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
+import {cn} from "@/common/lib/utils.ts";
+import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {TheatreScreenShowingSelectCard} from "@/views/client/theatre-screens/_feat/showing-selector";
 
 import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {TheatreScreenShowingSelectCard} from "@/views/client/theatre-screens/_feat/showing-selector";
+import {ReactElement} from "react";
 
-/**
- * Props for {@link TheatreInfoPageContent}.
- */
+/** Props for the TheatreInfoPageContent component. */
 type ContentProps = {
-    /** Theatre metadata */
     theatre: TheatreDetails;
-    /** Screens with associated showings */
     screens: ScreenWithShowings[];
 };
 
 /**
- * Theatre info page content.
- *
- * Renders theatre metadata and a responsive grid of screens,
- * falling back to an empty state when no screens are available.
- *
- * @param theatre - Theatre details
- * @param screens - Screens with showings
+ * Presentational component for rendering theatre details and screen listings.
  */
-const TheatreInfoPageContent = (
+export function TheatreInfoPageContent(
     {theatre, screens}: ContentProps
-) => {
-    // --- THEATRE ---
+): ReactElement {
     const {name: theatreName, location} = theatre;
     const {street, city, state} = location;
     const locationString = buildString([street, city, state], ", ");
 
-    // --- SCREEN ---
     const emptySection = (
         <div className="flex-1 flex justify-center items-center">
             <span className={cn(SecondaryTextBaseCSS, "select-none uppercase")}>
@@ -80,7 +55,6 @@ const TheatreInfoPageContent = (
         </section>
     );
 
-    // --- RENDER ---
     return (
         <PageFlexWrapper>
             <header>
@@ -91,6 +65,5 @@ const TheatreInfoPageContent = (
             {screens.length > 0 ? screenSection : emptySection}
         </PageFlexWrapper>
     );
-};
+}
 
-export default TheatreInfoPageContent;

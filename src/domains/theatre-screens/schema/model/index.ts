@@ -1,41 +1,41 @@
-import {TheatreScreen, TheatreScreenSchema} from "@/domains/theatre-screens/schema/model/TheatreScreenSchema.ts";
+import {TheatreScreen, TheatreScreenSchema} from "./theatre-screen/TheatreScreenSchema.ts";
 import {
     PopulatedTheatreScreen,
     PopulatedTheatreScreenSchema
-} from "@/domains/theatre-screens/schema/model/PopulatedTheatreScreenSchema.ts";
+} from "./theatre-screen/PopulatedTheatreScreenSchema.ts";
 import {
     TheatreScreenDetails,
     TheatreScreenDetailsSchema
-} from "@/domains/theatre-screens/schema/model/TheatreScreenDetailsSchema.ts";
+} from "./theatre-screen-details/TheatreScreenDetailsSchema.ts";
 import {
     TheatreScreenArray,
     TheatreScreenArraySchema
-} from "@/domains/theatre-screens/schema/model/TheatreScreenArraySchema.ts";
+} from "./theatre-screen/TheatreScreenArraySchema.ts";
 import {
     PaginatedTheatreScreens,
     PaginatedTheatreScreenSchema
-} from "@/domains/theatre-screens/schema/model/PaginatedTheatreScreenSchema.ts";
+} from "./theatre-screen/PaginatedTheatreScreenSchema.ts";
 import {
     PaginatedTheatreScreenDetails,
     PaginatedTheatreScreenDetailsSchema
-} from "@/domains/theatre-screens/schema/model/PaginatedTheatreScreenDetailsSchema.ts";
+} from "./theatre-screen-details/PaginatedTheatreScreenDetailsSchema.ts";
 import {
     ScreenWithShowings,
     ScreenWithShowingsSchema
-} from "@/domains/theatre-screens/schema/model/ScreenWithShowingsSchema.ts";
+} from "./theatre-screen-with-showings/ScreenWithShowingsSchema.ts";
 import {
     ScreenWithShowingsArray,
     ScreenWithShowingsArraySchema
-} from "@/domains/theatre-screens/schema/model/ScreenWithShowingsArraySchema.ts";
+} from "./theatre-screen-with-showings/ScreenWithShowingsArraySchema.ts";
 import {ScreenType, ScreenTypeSchema} from "@/domains/theatre-screens/schema/model/ScreenTypeSchema.ts";
 import {
     TheatreScreenWithVirtuals,
     TheatreScreenWithVirtualsSchema
-} from "@/domains/theatre-screens/schema/model/TheatreScreenWithVirtualsSchema.ts";
+} from "./theatre-screen-with-virtuals/TheatreScreenWithVirtualsSchema.ts";
 import {
     TheatreScreenVirtuals,
     TheatreScreenVirtualsSchema
-} from "@/domains/theatre-screens/schema/model/TheatreScreenVirtualsSchema.ts";
+} from "./theatre-screen-with-virtuals/TheatreScreenVirtualsSchema.ts";
 
 
 export {

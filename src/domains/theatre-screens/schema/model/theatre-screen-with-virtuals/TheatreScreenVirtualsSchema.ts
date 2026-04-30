@@ -2,7 +2,7 @@
  * @fileoverview Zod schema and type definitions for virtual theatre screen properties.
  */
 
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import {NonNegativeNumberSchema} from "src/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {z} from "zod";
 
 /**

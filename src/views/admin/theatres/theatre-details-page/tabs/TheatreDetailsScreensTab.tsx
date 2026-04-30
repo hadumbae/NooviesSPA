@@ -13,7 +13,7 @@ import {SROnly} from "@/views/common/_comp/screen-readers";
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
 import {TheatreDetailsScreenListCard} from "@/views/admin/theatre-screens/_comp/theatre-details";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
-import {TheatreScreenSubmitForm, TheatreScreenSubmitFormPanel} from "@/views/admin/theatre-screens/_feat/submit-data";
+import {TheatreScreenForm, TheatreScreenFormPanel} from "@/views/admin/theatre-screens/_feat/submit-data";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
@@ -46,8 +46,8 @@ export function TheatreDetailsScreensTab(
         <TabsContent value="screens" className="h-full space-y-5">
             <section className="flex justify-between items-center">
                 <PageSectionHeader text="Screens"/>
-                <TheatreScreenSubmitForm presetValues={{theatre: theatreID}}>
-                    <TheatreScreenSubmitFormPanel
+                <TheatreScreenForm presetValues={{theatre: theatreID}}>
+                    <TheatreScreenFormPanel
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                         disableFields={{theatre: true}}
@@ -56,8 +56,8 @@ export function TheatreDetailsScreensTab(
                         <Button size="sm" variant="link" className={HoverLinkCSS}>
                             <Plus/> Add Screens
                         </Button>
-                    </TheatreScreenSubmitFormPanel>
-                </TheatreScreenSubmitForm>
+                    </TheatreScreenFormPanel>
+                </TheatreScreenForm>
             </section>
 
             {

@@ -4,7 +4,7 @@
  */
 
 import {z} from "zod";
-import {TheatreScreenSchema} from "@/domains/theatre-screens/schema/model/TheatreScreenSchema.ts";
+import {TheatreScreenSchema} from "src/domains/theatre-screens/schema/model/theatre-screen/TheatreScreenSchema.ts";
 
 /**
  * Zod schema for validating an array of base Theatre Screen records.

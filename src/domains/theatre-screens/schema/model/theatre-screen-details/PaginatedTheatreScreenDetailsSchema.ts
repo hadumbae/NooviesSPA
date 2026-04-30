@@ -3,8 +3,8 @@
  * @filename PaginatedTheatreScreenDetailsSchema.ts
  */
 
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
-import {TheatreScreenDetailsSchema} from "@/domains/theatre-screens/schema/model/TheatreScreenDetailsSchema.ts";
+import {generatePaginationSchema} from "src/common/utility/schemas/generatePaginationSchema.ts";
+import {TheatreScreenDetailsSchema} from "src/domains/theatre-screens/schema/model/theatre-screen-details/TheatreScreenDetailsSchema.ts";
 import {z} from "zod";
 
 /**

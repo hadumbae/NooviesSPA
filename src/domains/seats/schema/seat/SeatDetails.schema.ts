@@ -5,7 +5,7 @@ import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/Non
 import { SeatTypeEnum } from "@/domains/seats/schema/SeatTypeEnumSchema.ts";
 import { CoercedBooleanValueSchema } from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 import { CoercedNumberValueSchema } from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
-import {TheatreScreenSchema} from "@/domains/theatre-screens/schema/model/TheatreScreenSchema.ts";
+import {TheatreScreenSchema} from "@/domains/theatre-screens/schema/model";
 import {TheatreSchema} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
 
 /**

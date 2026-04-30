@@ -2,13 +2,13 @@
  * @fileoverview Utility for normalizing populated theatre screen entities into a flat schema.
  */
 
-import {ParseError} from "@/common/errors/ParseError.ts";
+import {ParseError} from "src/common/errors/ParseError.ts";
 import {
     PopulatedTheatreScreen,
     TheatreScreen,
     TheatreScreenDetails,
     TheatreScreenSchema, TheatreScreenWithVirtuals
-} from "@/domains/theatre-screens/schema/model";
+} from "src/domains/theatre-screens/schema/model";
 
 /**
  * Normalizes complex screen objects into a flat structure by extracting the theatre ID.

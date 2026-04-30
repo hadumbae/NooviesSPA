@@ -14,16 +14,15 @@ import useFetchByIdentifierRouteParams
     from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
-import TheatreInfoPageContent
-    from "@/views/client/theatres/theatre-info/TheatreInfoPageContent.tsx";
+import {TheatreInfoPageContent} from "@/views/client/theatres/theatre-info/TheatreInfoPageContent.tsx";
 import {
     ScreenWithShowings
-} from "@/domains/theatre-screens/schema/model/ScreenWithShowingsSchema.ts";
+} from "@/domains/theatre-screens/schema/model";
 import MultiQueryDataLoader
     from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import {QueryDefinition}
     from "@/common/type/query/loader/MultiQuery.types.ts";
-import {ScreenWithShowingsArraySchema} from "@/domains/theatre-screens/schema/model/ScreenWithShowingsArraySchema.ts";
+import {ScreenWithShowingsArraySchema} from "@/domains/theatre-screens/schema/model";
 import {useFetchTheatreBySlug} from "@/domains/theatres/_feat/crud-hooks";
 import {TheatreDetails, TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 import {ReactElement} from "react";

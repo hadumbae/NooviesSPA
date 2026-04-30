@@ -1,6 +1,6 @@
 /**
  * @fileoverview Hook Form select component for theatre screen types.
- * Provides a standardized way to select from predefined screen type constants.
+ * Provides a standardised way to select from predefined screen type constants.
  */
 
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";

@@ -15,7 +15,7 @@ import ScreenSummaryCard from "@/domains/showings/components/admin/card/showing-
 import {
     TheatreScreenDetails,
     TheatreScreenDetailsSchema
-} from "@/domains/theatre-screens/schema/model/TheatreScreenDetailsSchema.ts";
+} from "@/domains/theatre-screens/schema/model";
 import {TheatreDetails, TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 import {useFetchTheatre} from "@/domains/theatres/_feat/crud-hooks";
 

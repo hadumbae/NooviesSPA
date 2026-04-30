@@ -1,9 +1,18 @@
-import {TheatreScreenSubmitForm} from "@/views/admin/theatre-screens/_feat/submit-data/TheatreScreenSubmitForm.tsx";
+import {TheatreScreenForm} from "./TheatreScreenForm.tsx";
 import {
-    TheatreScreenSubmitFormPanel
-} from "@/views/admin/theatre-screens/_feat/submit-data/TheatreScreenSubmitFormPanel.tsx";
+    TheatreScreenFormPanel
+} from "./TheatreScreenFormPanel.tsx";
+import {TheatreScreenFormDisableFields} from "@/views/admin/theatre-screens/_feat/submit-data/types.ts";
+import {
+    TheatreScreenFormView
+} from "./TheatreScreenFormView.tsx";
 
 export {
-    TheatreScreenSubmitForm,
-    TheatreScreenSubmitFormPanel,
+    TheatreScreenForm,
+    TheatreScreenFormPanel,
+    TheatreScreenFormView,
+}
+
+export type {
+    TheatreScreenFormDisableFields,
 }

@@ -3,10 +3,10 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import {CoercedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {ScreenTypeSchema} from "@/domains/theatre-screens/schema/model/ScreenTypeSchema.ts";
+import {IDStringSchema} from "src/common/schema/strings/object-id/IDStringSchema.ts";
+import {NonEmptyStringSchema} from "src/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {CoercedPositiveNumberSchema} from "src/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {ScreenTypeSchema} from "src/domains/theatre-screens/schema/model/ScreenTypeSchema.ts";
 
 /**
  * Schema for validating a Theatre Screen record.

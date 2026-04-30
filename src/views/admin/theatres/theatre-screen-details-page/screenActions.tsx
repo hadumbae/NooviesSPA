@@ -4,17 +4,17 @@
  */
 
 import {ReactElement} from "react";
-import {TheatreScreenSubmitForm, TheatreScreenSubmitFormPanel} from "@/views/admin/theatre-screens/_feat/submit-data";
+import {TheatreScreenForm, TheatreScreenFormPanel} from "@/views/admin/theatre-screens/_feat/submit-data";
 import {TheatreScreenDetails, TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
 import {useLocation} from "react-router-dom";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ScreenDetailsUIContext} from "@/domains/theatre-screens/contexts/screen-details/ScreenDetailsUIContext.ts";
-import {simplifyScreenDetails} from "@/domains/theatre-screens/utilities/simplifyScreenDetails.ts";
-import {ScreenDeleteWarningDialog} from "@/views/admin/theatre-screens/_feat/model-options";
 import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
 
 import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {simplifyScreenDetails} from "@/domains/theatre-screens/_feat/formatters";
+import {ScreenDeleteWarningDialog} from "@/views/admin/theatre-screens/_feat/model-options";
 
 /**
  * Props for the TheatreScreenDetailsPageScreenActions component.
@@ -62,25 +62,25 @@ export function TheatreScreenDetailsPageScreenActions(
 
     return (
         <div className={className}>
-            <TheatreScreenSubmitForm
+            <TheatreScreenForm
                 presetValues={{theatre: theatre._id}}
                 onSubmitSuccess={onUpdateSuccess}
                 editEntity={simplifiedScreen}
             >
-                <TheatreScreenSubmitFormPanel
+                <TheatreScreenFormPanel
                     isOpen={isEditing}
                     setIsOpen={setIsEditing}
                     disableFields={{theatre: true}}
                     title="Update Screen Details"
                     description={`Editing ${screen.name}.`}
                 />
-            </TheatreScreenSubmitForm>
+            </TheatreScreenForm>
 
             <ScreenDeleteWarningDialog
                 screenID={screen._id}
                 screenName={screen.name}
-                presetOpen={showDeleteWarning}
-                setPresetOpen={setShowDeleteWarning}
+                isOpen={showDeleteWarning}
+                setIsOpen={setShowDeleteWarning}
                 onSubmitSuccess={onDeleteSuccess}
             />
         </div>

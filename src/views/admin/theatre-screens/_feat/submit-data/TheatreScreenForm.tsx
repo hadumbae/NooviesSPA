@@ -14,7 +14,7 @@ import {useTheatreScreenSubmitMutation} from "@/domains/theatre-screens/_feat/cr
 import {BaseFormContextProvider} from "@/common/features/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 import {FormConfigProps} from "@/common/features/submit-data";
-import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model/TheatreScreenDetailsSchema.ts";
+import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
 
 /**
  * Props for the ScreenSubmitForm component.
@@ -24,7 +24,7 @@ type ContainerProps = FormConfigProps<TheatreScreenFormValues, TheatreScreen, Th
 /**
  * Orchestrates the Theatre Screen form submission lifecycle.
  */
-export function TheatreScreenSubmitForm(
+export function TheatreScreenForm(
     {children, presetValues, editEntity, uniqueKey, ...mutationOptions}: ContainerProps
 ): ReactElement {
     const form = useTheatreScreenSubmitForm({presetValues, screen: editEntity});

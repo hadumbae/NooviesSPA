@@ -4,8 +4,8 @@
  */
 
 import {z} from "zod";
-import {ShowingDetailsArraySchema} from "@/domains/showings/schema/showing/ShowingArraySchemas.ts";
-import {PopulatedTheatreScreenSchema} from "@/domains/theatre-screens/schema/model/PopulatedTheatreScreenSchema.ts";
+import {ShowingDetailsArraySchema} from "src/domains/showings/schema/showing/ShowingArraySchemas.ts";
+import {PopulatedTheatreScreenSchema} from "@/domains/theatre-screens/schema/model";
 
 /**
  * Zod schema representing a Theatre Screen that includes both its parent Theatre and its scheduled Showings.
