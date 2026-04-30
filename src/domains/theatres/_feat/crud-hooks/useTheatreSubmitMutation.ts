@@ -14,7 +14,8 @@ import {create, update} from "@/domains/theatres/_feat/crud";
 import {TheatreFormStarterValues} from "@/domains/theatres/_feat/submit-data";
 import {TheatreFormData} from "@/domains/theatres/_feat/submit-data/TheatreForm.schema.ts";
 import {Theatre, TheatreSchema} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
-import {TheatreQueryKeys} from "@/domains/theatres/utilities/query/TheatreQueryKeys.ts";
+import {TheatreCRUDMutationKeys} from "@/domains/theatres/_feat/crud-hooks/mutationKeys.ts";
+import {TheatreCRUDQueryKeys} from "@/domains/theatres/_feat/crud-hooks/queryKeys.ts";
 
 /** Props for the useTheatreSubmitMutation hook. */
 export type TheatreSubmitMutationParams = MutationFormResetConfig & MutationResponseConfig<Theatre> & {
@@ -42,15 +43,10 @@ export function useTheatreSubmitMutation(
     const invalidateQueries = useInvalidateQueryKeys();
 
     const submitTheatreData = async ({_id, ...values}: TheatreFormData): Promise<Theatre> => {
-        const action = _id
-            ? () => update({_id, data: values})
-            : () => create({data: values});
-
+        const action = _id ? () => update({_id, data: values}) : () => create({data: values});
         const {result} = await action();
-        const {success, data, error} = validateData({
-            data: result,
-            schema: TheatreSchema,
-        });
+
+        const {success, data, error} = validateData({data: result, schema: TheatreSchema});
 
         if (!success) throw error;
         resetOnSubmit && form.reset();
@@ -58,23 +54,15 @@ export function useTheatreSubmitMutation(
     };
 
     const onSuccess = (theatre: Theatre): void => {
-        invalidateQueries(
-            [
-                TheatreQueryKeys.ids({_id: theatre._id}),
-                TheatreQueryKeys.slugs({slug: theatre.slug}),
-                TheatreQueryKeys.paginated(),
-                TheatreQueryKeys.query(),
-            ],
-            {exact: false},
-        );
-
+        invalidateQueries([TheatreCRUDQueryKeys.all], {exact: false});
         successMessage && toast.success(successMessage);
+
         resetOnSuccess && form.reset();
         onSubmitSuccess?.(theatre);
     };
 
     const onError = (error: unknown): void => {
-        toast.error(errorMessage || "Oops. Something went wrong.");
+        errorMessage && toast.error(errorMessage);
         handleMutationFormError({form, error});
 
         resetOnError && form.reset();
@@ -82,7 +70,7 @@ export function useTheatreSubmitMutation(
     };
 
     return useMutation({
-        mutationKey: ["submit_theatre_data"],
+        mutationKey: TheatreCRUDMutationKeys.submit(),
         mutationFn: submitTheatreData,
         onSuccess,
         onError,

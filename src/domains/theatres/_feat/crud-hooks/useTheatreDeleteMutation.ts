@@ -1,102 +1,50 @@
 /**
- * @file useTheatreDeleteMutation.ts
- *
- * React Query mutation hook for deleting `Theatre` entities.
- *
- * Handles:
- * - Delete requests via {@link TheatreRepository}
- * - Toast-based user feedback
- * - Cache invalidation for theatre list queries
- * - Optional lifecycle callbacks
+ * @fileoverview Hook for deleting theatre entities using a mutation.
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 
-import TheatreRepository from "@/domains/theatres/repositories/TheatreRepository.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-
-import {ParseError} from "@/common/errors/ParseError.ts";
-import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
-
-import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {TheatreQueryKeys} from "@/domains/theatres/utilities/query/TheatreQueryKeys.ts";
+import {destroy} from "@/domains/theatres/_feat/crud";
+import {TheatreCRUDMutationKeys} from "@/domains/theatres/_feat/crud-hooks/mutationKeys.ts";
+import {MutationResponseConfig} from "@/common/features/submit-data";
+import {TheatreCRUDQueryKeys} from "@/domains/theatres/_feat/crud-hooks/queryKeys.ts";
+
+type DeleteIdentifier = {
+    _id: ObjectId;
+};
 
 /**
  * Mutation hook for deleting a single theatre by ID.
- *
- * Intended for administrative or management workflows
- * where theatre entities can be permanently removed.
- *
- * @param options Delete mutation configuration
- * @returns React Query mutation result
- *
- * @example
- * ```ts
- * const { mutate: deleteTheatre } = useTheatreDeleteMutation({
- *   successMessage: "Theatre deleted successfully!",
- * });
- *
- * deleteTheatre({ _id: "66b9d1b8c35f2a0012cd90f0" });
- * ```
  */
-export default function useTheatreDeleteMutation(
-    options: OnDeleteMutationParams
-): UseMutationResult<void, unknown, { _id: ObjectId }> {
-    const {
-        successMessage,
-        onDeleteSuccess,
-        errorMessage,
-        onDeleteError,
-    } = options;
-
-    /**
-     * Invalidates theatre list queries after deletion.
-     */
+export function useTheatreDeleteMutation(
+    {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: MutationResponseConfig
+): UseMutationResult<void, unknown, DeleteIdentifier> {
     const invalidateQueries = useInvalidateQueryKeys();
 
-    /**
-     * Executes the delete request.
-     */
-    const deleteTheatre = async ({_id}: { _id: ObjectId }): Promise<void> => {
-        await handleMutationResponse({
-            action: () => TheatreRepository.delete({_id}),
-            errorMessage: "Failed to delete theatre data. Please try again.",
-        });
+    const deleteTheatre = async ({_id}: DeleteIdentifier): Promise<void> => {
+        await destroy({_id});
     };
 
-    /**
-     * Handles successful deletion.
-     */
     const onSuccess = (): void => {
         invalidateQueries(
-            [TheatreQueryKeys.paginated(), TheatreQueryKeys.query()],
+            [TheatreCRUDQueryKeys.list()],
             {exact: false},
         );
 
-        toast.success(successMessage ?? "Theatre deleted.");
-        onDeleteSuccess?.();
+        successMessage && toast.success(successMessage);
+        onSubmitSuccess?.();
     };
 
-    /**
-     * Handles deletion errors.
-     */
-    const onError = (error: Error | ParseError): void => {
-        toast.error(
-            errorMessage ??
-            error.message ??
-            "Oops. Something went wrong. Please try again."
-        );
-
-        onDeleteError?.(error);
+    const onError = (error: unknown): void => {
+        errorMessage && toast.error(errorMessage);
+        onSubmitError?.(error);
     };
 
-    /**
-     * Registers the mutation.
-     */
     return useMutation({
-        mutationKey: ["delete_single_theatre"],
+        mutationKey: TheatreCRUDMutationKeys.deleteSingle(),
         mutationFn: deleteTheatre,
         onSuccess,
         onError,

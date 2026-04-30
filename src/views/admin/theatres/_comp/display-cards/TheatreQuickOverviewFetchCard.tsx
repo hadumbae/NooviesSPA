@@ -6,11 +6,11 @@ import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Loader} from "lucide-react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useFetchTheatre from "@/domains/theatres/_feat/crud-hooks/useFetchTheatre.ts";
 import {cn} from "@/common/lib/utils.ts";
 import formatTheatreDetails from "@/domains/theatres/utilities/formatTheatreDetails.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {TheatreDetails, TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {useFetchTheatre} from "@/domains/theatres/_feat/crud-hooks";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /** Props for the TheatreQuickOverviewFetchCard component. */
 export type FetchCardProps = {
@@ -24,10 +24,14 @@ export type FetchCardProps = {
 export function TheatreQuickOverviewFetchCard(
     {theatreID, className}: FetchCardProps
 ): ReactElement {
-    const query = useFetchTheatre({_id: theatreID, config: {populate: true, virtuals: true}});
+    const query = useFetchTheatre({
+        schema: TheatreDetailsSchema,
+        _id: theatreID,
+        config: {populate: true, virtuals: true}
+    });
 
     return (
-        <ValidatedDataLoader query={query} schema={TheatreDetailsSchema} loaderComponent={Loader}>
+        <QueryDataLoader query={query} loaderComponent={Loader}>
             {(theatre: TheatreDetails) => {
                 const {name} = theatre;
                 const {address, details} = formatTheatreDetails(theatre);
@@ -46,6 +50,6 @@ export function TheatreQuickOverviewFetchCard(
                     </Card>
                 );
             }}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 }

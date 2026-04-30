@@ -4,7 +4,6 @@
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useFetchTheatre from "@/domains/theatres/_feat/crud-hooks/useFetchTheatre.ts";
 import {useFetchScreen} from "@/domains/theatre-screens/_feat/crud-hooks";
 import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
@@ -18,6 +17,7 @@ import {
     TheatreScreenDetailsSchema
 } from "@/domains/theatre-screens/schema/model/TheatreScreenDetailsSchema.ts";
 import {TheatreDetails, TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {useFetchTheatre} from "@/domains/theatres/_feat/crud-hooks";
 
 /** Props for the ShowingDetailsPageReferenceTab component. */
 type TabProps = {
@@ -36,6 +36,7 @@ type QueryData = {
  */
 const ShowingDetailsPageReferenceTab = ({screenID, theatreID}: TabProps) => {
     const theatreQuery = useFetchTheatre({
+        schema: TheatreDetailsSchema,
         _id: theatreID,
         config: {populate: true, virtuals: true},
     });
