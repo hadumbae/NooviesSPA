@@ -3,9 +3,9 @@
  */
 
 import {ReactElement} from "react";
-import {ScreenType} from "@/domains/theatre-screens/schema/model";
 import {Badge} from "@/common/components/ui/badge.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {ScreenType} from "@/domains/theatre-screens/schema/fields";
 
 /** Props for the TheatreScreenTypeBadge component. */
 type BadgeProps = {

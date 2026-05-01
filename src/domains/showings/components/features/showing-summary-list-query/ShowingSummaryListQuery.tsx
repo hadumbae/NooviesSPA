@@ -6,12 +6,14 @@
  */
 
 import useFetchShowings from "@/domains/showings/hooks/queries/useFetchShowings.ts";
-import {ShowingQueryOptions} from "@/domains/showings/schema/queries/ShowingQueryOption.types.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import ShowingSummaryCardList
     from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCardList.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {ShowingDetailsArray, ShowingDetailsArraySchema} from "@/domains/showings/schema/showing/ShowingArraySchemas.ts";
+
+import {ShowingQueryOptions} from "../../../schema/queries/ShowingQueryOptionSchema";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing";
+import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 
 /**
  * Props for {@link ShowingSummaryListQuery}.
@@ -38,8 +40,8 @@ const ShowingSummaryListQuery = (props: ListProps) => {
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={ShowingDetailsArraySchema}>
-            {(showings: ShowingDetailsArray) => (
+        <ValidatedDataLoader query={query} schema={generateArraySchema(ShowingDetailsSchema)}>
+            {(showings: ShowingDetails[]) => (
                 <ShowingSummaryCardList showings={showings}/>
             )}
         </ValidatedDataLoader>

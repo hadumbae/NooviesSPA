@@ -1,17 +1,18 @@
 /**
- * @fileoverview Utility for normalizing populated theatre screen entities into a flat schema.
+ * @fileoverview Utility for normalising populated theatre screen entities into a flat schema.
  */
 
-import {ParseError} from "src/common/errors/ParseError.ts";
+
+import {ParseError} from "@/common/errors/ParseError.ts";
 import {
     PopulatedTheatreScreen,
     TheatreScreen,
     TheatreScreenDetails,
     TheatreScreenSchema, TheatreScreenWithVirtuals
-} from "src/domains/theatre-screens/schema/model";
+} from "@/domains/theatre-screens/schema/model";
 
 /**
- * Normalizes complex screen objects into a flat structure by extracting the theatre ID.
+ * Normalises complex screen objects into a flat structure by extracting the theatre ID.
  */
 export function simplifyScreenDetails(
     {theatre, ...rem}: TheatreScreen | PopulatedTheatreScreen | TheatreScreenWithVirtuals | TheatreScreenDetails

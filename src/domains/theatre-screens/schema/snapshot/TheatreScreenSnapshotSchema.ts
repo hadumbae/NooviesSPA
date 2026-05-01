@@ -6,7 +6,7 @@
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import {ScreenTypeSchema} from "@/domains/theatre-screens/schema/model";
+import {ScreenTypeSchema} from "@/domains/theatre-screens/schema/fields";
 
 /**
  * Represents the finalized state of a theatre screen at the moment of a transaction.

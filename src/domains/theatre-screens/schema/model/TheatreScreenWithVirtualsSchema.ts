@@ -2,9 +2,9 @@
  * @fileoverview Zod schema and type definitions for a theatre screen combined with its virtual properties.
  */
 
-import {TheatreScreenSchema} from "../theatre-screen/TheatreScreenSchema.ts";
-import {TheatreScreenVirtualsSchema} from "src/domains/theatre-screens/schema/model/theatre-screen-with-virtuals/TheatreScreenVirtualsSchema.ts";
+import {TheatreScreenSchema} from "./TheatreScreenSchema.ts";
 import {z} from "zod";
+import {TheatreScreenVirtualsSchema} from "@/domains/theatre-screens/schema/model/TheatreScreenVirtualsSchema.ts";
 
 /**
  * Merged schema of the base theatre screen and its calculated virtual fields.

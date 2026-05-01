@@ -8,13 +8,13 @@ import {FC, ReactElement} from "react";
 import ShowingIndexPageContent from "@/domains/showings/pages/index-page/ShowingIndexPageContent.tsx";
 import useFetchPaginatedShowings from "@/domains/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {ShowingQueryOptionSchema} from "@/domains/showings/schema/queries/ShowingQueryOption.schema.ts";
 import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {
     PaginatedShowingDetails,
     PaginatedShowingDetailsSchema
 } from "@/domains/showings/schema/showing/PaginatedShowingSchemas.ts";
+import {ShowingQueryOptionSchema} from "../../schema/queries/ShowingQueryOptionSchema";
 
 const SHOWINGS_PER_PAGE = 10;
 

@@ -3,21 +3,22 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {FetchQueryOptions} from "src/common/type/query/FetchQueryOptions.ts";
-import {ObjectId} from "src/common/schema/strings/object-id/IDStringSchema.ts";
-import {DateOnlyString} from "src/common/schema/dates/DateOnlyStringSchema.ts";
 import {fetchScreensWithShowings} from "./repository/repository.ts";
-import useQueryOptionDefaults from "src/common/utility/query/useQueryOptionDefaults.ts";
-import HttpResponseError from "src/common/errors/HttpResponseError.ts";
-import {SlugString} from "src/common/schema/strings/simple-strings/SlugString.ts";
-import {ScreenWithShowings, ScreenWithShowingsArraySchema} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenSchedule, TheatreScreenScheduleSchema} from "@/domains/theatre-screens/schema/model";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";
 import {TheatreScreenClientViewQueryKeys} from "@/domains/theatre-screens/_feat/client-view-data/queryKeys.ts";
+import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {DateOnlyString} from "@/common/schema/dates/DateOnlyStringSchema.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import { FetchQueryOptions } from "@/common/type/query/FetchQueryOptions.ts";
 
 type FetchParams = {
     theatreID: ObjectId | SlugString;
     dateString: DateOnlyString;
-    options?: FetchQueryOptions<ScreenWithShowings[]>;
+    options?: FetchQueryOptions<TheatreScreenSchedule[]>;
 };
 
 /**
@@ -25,10 +26,10 @@ type FetchParams = {
  */
 export function useFetchScreensWithShowings(
     {theatreID, dateString, options}: FetchParams
-): UseQueryResult<ScreenWithShowings[], HttpResponseError> {
-    const fetchScreens = buildQueryFn<ScreenWithShowings[]>({
+): UseQueryResult<TheatreScreenSchedule[], HttpResponseError> {
+    const fetchScreens = buildQueryFn<TheatreScreenSchedule[]>({
         action: () => fetchScreensWithShowings({theatreID, localDate: dateString}),
-        schema: ScreenWithShowingsArraySchema,
+        schema: generateArraySchema(TheatreScreenScheduleSchema),
     });
 
     return useQuery({

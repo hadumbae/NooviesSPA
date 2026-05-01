@@ -18,9 +18,9 @@ import CombinedValidatedQueryBoundary from "@/common/components/query/combined/C
 import ShowingMovieCard from "@/domains/showings/components/admin/card/showing-movie-card/ShowingMovieCard.tsx";
 import ShowingSummaryCardList from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCardList.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {ShowingDetailsArraySchema} from "@/domains/showings/schema/showing/ShowingArraySchemas.ts";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 
 /**
  * Combined query result shape for {@link ShowingMovieTab}.
@@ -60,7 +60,7 @@ const ShowingMovieTab = ({ movieID }: TabProps) => {
 
     const queryValidation: CombinedSchemaQuery[] = [
         { query: movieQuery, schema: MovieDetailsSchema, key: "movie" },
-        { query: showingQuery, schema: ShowingDetailsArraySchema, key: "showings" },
+        { query: showingQuery, schema: generateArraySchema(ShowingDetailsSchema), key: "showings" },
     ];
 
     return (

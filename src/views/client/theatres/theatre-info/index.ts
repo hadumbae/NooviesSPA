@@ -1,7 +1,7 @@
-import {TheatreInfoPage} from "@/views/client/theatres/theatre-info/TheatreInfoPage.tsx";
+import {TheatreInfoPage} from "./page.tsx";
 import {
     TheatreInfoPageContent
-} from "@/views/client/theatres/theatre-info/TheatreInfoPageContent.tsx";
+} from "./content.tsx";
 
 export {
     TheatreInfoPage,

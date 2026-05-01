@@ -1,12 +1,13 @@
 /** @fileoverview Zod schema and type definitions for a theatre with its associated showing details. */
 
 import {TheatreSchema} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
-import {ShowingDetailsArraySchema} from "@/domains/showings/schema/showing/ShowingArraySchemas.ts";
 import {z} from "zod";
+import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {ShowingDetailsSchema} from "@/domains/showings/schema/showing";
 
 /** Zod schema for a theatre object extended with a list of detailed showings. */
 export const TheatreWithRecentShowingsSchema = TheatreSchema.extend({
-    showings: ShowingDetailsArraySchema,
+    showings: z.lazy(() => generateArraySchema(ShowingDetailsSchema)),
 });
 
 /** Type representing a theatre along with its recent showing details. */

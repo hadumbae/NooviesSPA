@@ -1,51 +1,35 @@
 /**
- * @file TheatreInfoPage.tsx
- *
- * Client page for displaying theatre details and available screens with showings.
- *
- * Responsibilities:
- * - Validate theatre slug from route params
- * - Fetch theatre details and screens-with-showings
- * - Coordinate multi-query loading and schema validation
- * - Delegate rendering to {@link TheatreInfoPageContent}
+ * @fileoverview Client page for displaying theatre details and available screens with showings.
  */
 
 import useFetchByIdentifierRouteParams
     from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
-import {TheatreInfoPageContent} from "@/views/client/theatres/theatre-info/TheatreInfoPageContent.tsx";
+import {TheatreInfoPageContent} from "./content.tsx";
 import {
-    ScreenWithShowings
+    TheatreScreenSchedule, TheatreScreenScheduleSchema
 } from "@/domains/theatre-screens/schema/model";
 import MultiQueryDataLoader
     from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import {QueryDefinition}
     from "@/common/type/query/loader/MultiQuery.types.ts";
-import {ScreenWithShowingsArraySchema} from "@/domains/theatre-screens/schema/model";
 import {useFetchTheatreBySlug} from "@/domains/theatres/_feat/crud-hooks";
 import {TheatreDetails, TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 import {ReactElement} from "react";
 import {useFetchScreensWithShowings} from "@/domains/theatre-screens/_feat/client-view-data";
+import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 
-/**
- * Combined query payload for {@link TheatreInfoPage}.
- */
+/** Props for the TheatreInfoPage component. */
 type QueryData = {
-    /** Populated theatre details */
     theatre: TheatreDetails;
-    /** Screens with associated showings */
-    screens: ScreenWithShowings[];
+    screens: TheatreScreenSchedule[];
 };
 
 /**
  * Theatre information page.
- *
- * Orchestrates route validation, data fetching, and loading states
- * before rendering the theatre overview and screen selection UI.
  */
 export function TheatreInfoPage(): ReactElement {
-    // --- SLUG ---
     const {slug: theatreSlug} = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/browse/theatres",
@@ -57,7 +41,6 @@ export function TheatreInfoPage(): ReactElement {
         return <PageLoader/>;
     }
 
-    // --- QUERIES ---
     const theatreQuery = useFetchTheatreBySlug({
         schema: TheatreDetailsSchema,
         slug: theatreSlug,
@@ -71,10 +54,9 @@ export function TheatreInfoPage(): ReactElement {
 
     const queries: QueryDefinition[] = [
         {key: "theatre", query: theatreQuery, schema: TheatreDetailsSchema},
-        {key: "screens", query: screenQuery, schema: ScreenWithShowingsArraySchema},
+        {key: "screens", query: screenQuery, schema: generateArraySchema(TheatreScreenScheduleSchema)},
     ];
 
-    // --- RENDER ---
     return (
         <MultiQueryDataLoader queries={queries}>
             {(data) => {

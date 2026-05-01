@@ -1,6 +1,5 @@
 /**
- * @fileoverview Hook Form select component for theatre screen types.
- * Provides a standardised way to select from predefined screen type constants.
+ * @fileoverview Hook form select component for theatre screen types.
  */
 
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
@@ -10,9 +9,7 @@ import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import ScreenTypeConstant from "@/domains/theatre-screens/constants/ScreenTypeConstant.ts";
 import {ReactElement} from "react";
 
-/**
- * Props for the ScreenTypeHookFormSelect component.
- */
+/** Props for the ScreenTypeHookFormSelect component. */
 type Props<TSubmit extends FieldValues> = {
     name: Path<TSubmit>;
     label: string;
@@ -23,9 +20,7 @@ type Props<TSubmit extends FieldValues> = {
     disabled?: boolean;
 };
 
-/**
- * A form select component that populates options from the `ScreenTypeConstant`.
- */
+/** Form select component that populates options from the ScreenTypeConstant. */
 export function ScreenTypeHookFormSelect<TSubmit extends FieldValues>(
     props: Props<TSubmit>
 ): ReactElement {

@@ -1,53 +1,31 @@
-import {TheatreScreen, TheatreScreenSchema} from "./theatre-screen/TheatreScreenSchema.ts";
+import {TheatreScreen, TheatreScreenSchema} from "./TheatreScreenSchema.ts";
 import {
     PopulatedTheatreScreen,
     PopulatedTheatreScreenSchema
-} from "./theatre-screen/PopulatedTheatreScreenSchema.ts";
+} from "./PopulatedTheatreScreenSchema.ts";
 import {
     TheatreScreenDetails,
     TheatreScreenDetailsSchema
-} from "./theatre-screen-details/TheatreScreenDetailsSchema.ts";
+} from "./TheatreScreenDetailsSchema.ts";
 import {
-    TheatreScreenArray,
-    TheatreScreenArraySchema
-} from "./theatre-screen/TheatreScreenArraySchema.ts";
-import {
-    PaginatedTheatreScreens,
-    PaginatedTheatreScreenSchema
-} from "./theatre-screen/PaginatedTheatreScreenSchema.ts";
-import {
-    PaginatedTheatreScreenDetails,
-    PaginatedTheatreScreenDetailsSchema
-} from "./theatre-screen-details/PaginatedTheatreScreenDetailsSchema.ts";
-import {
-    ScreenWithShowings,
-    ScreenWithShowingsSchema
-} from "./theatre-screen-with-showings/ScreenWithShowingsSchema.ts";
-import {
-    ScreenWithShowingsArray,
-    ScreenWithShowingsArraySchema
-} from "./theatre-screen-with-showings/ScreenWithShowingsArraySchema.ts";
-import {ScreenType, ScreenTypeSchema} from "@/domains/theatre-screens/schema/model/ScreenTypeSchema.ts";
+    TheatreScreenSchedule,
+    TheatreScreenScheduleSchema
+} from "./TheatreScreenScheduleSchema.ts";
 import {
     TheatreScreenWithVirtuals,
     TheatreScreenWithVirtualsSchema
-} from "./theatre-screen-with-virtuals/TheatreScreenWithVirtualsSchema.ts";
+} from "./TheatreScreenWithVirtualsSchema.ts";
 import {
     TheatreScreenVirtuals,
     TheatreScreenVirtualsSchema
-} from "./theatre-screen-with-virtuals/TheatreScreenVirtualsSchema.ts";
+} from "./TheatreScreenVirtualsSchema.ts";
 
 
 export {
     TheatreScreenSchema,
     PopulatedTheatreScreenSchema,
     TheatreScreenDetailsSchema,
-    TheatreScreenArraySchema,
-    PaginatedTheatreScreenSchema,
-    PaginatedTheatreScreenDetailsSchema,
-    ScreenWithShowingsSchema,
-    ScreenWithShowingsArraySchema,
-    ScreenTypeSchema,
+    TheatreScreenScheduleSchema,
     TheatreScreenWithVirtualsSchema,
     TheatreScreenVirtualsSchema,
 }
@@ -56,12 +34,7 @@ export type {
     TheatreScreen,
     PopulatedTheatreScreen,
     TheatreScreenDetails,
-    TheatreScreenArray,
-    PaginatedTheatreScreens,
-    PaginatedTheatreScreenDetails,
-    ScreenWithShowings,
-    ScreenWithShowingsArray,
-    ScreenType,
+    TheatreScreenSchedule,
     TheatreScreenWithVirtuals,
     TheatreScreenVirtuals,
 }

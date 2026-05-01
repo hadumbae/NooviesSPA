@@ -8,13 +8,11 @@ import {Loader} from "lucide-react";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
-import {
-    TheatreScreenArraySchema
-} from "@/domains/theatre-screens/schema/model";
 import {useFetchScreens} from "@/domains/theatre-screens/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {TheatreScreen} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreen, TheatreScreenSchema} from "@/domains/theatre-screens/schema/model";
 import {ReactElement} from "react";
+import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 
 /**
  * Props for the ScreenHookFormSelect component.
@@ -39,7 +37,7 @@ export function ScreenHookFormSelect<TSubmit extends FieldValues>(
 
     const query = useFetchScreens({
         queries: filters,
-        schema: TheatreScreenArraySchema
+        schema: generateArraySchema(TheatreScreenSchema)
     });
 
     return (
