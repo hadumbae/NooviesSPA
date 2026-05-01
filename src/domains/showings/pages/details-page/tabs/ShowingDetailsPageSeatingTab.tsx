@@ -2,8 +2,9 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatMapDetailsPanelContext} from "@/domains/seatmap/context/details-panel-context/SeatMapDetailsPanelContext.ts";
 import simplifySeatMapDetails from "@/domains/seatmap/utilities/simplifySeatMapDetails.ts";
 import SeatMapFormContextProvider from "@/domains/seatmap/context/seat-map-form-context/SeatMapFormContextProvider.tsx";
-import ShowingDetailsPageSeatingTabContent
-    from "@/domains/showings/pages/details-page/tabs/ShowingDetailsPageSeatingTabContent.tsx";
+import {
+    ShowingDetailsPageSeatingTabContent
+} from "@/domains/showings/pages/details-page/tabs/ShowingDetailsPageSeatingTabContent.tsx";
 
 /**
  * @type TabProps

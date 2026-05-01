@@ -1,61 +1,31 @@
 /**
- * @file ReservationSeatMapSelector.tsx
- *
- * Seat map selection grid used during client-side reservations.
- *
- * Responsibilities:
- * - Organize raw seat map data into layout-ready rows
- * - Render seat elements in their visual positions
- * - Manage seat selection toggling
- *
- * @remarks
- * This component is stateless.
- * Selection state is fully controlled by the parent.
+ * @fileoverview Seat map selection grid used during client-side reservations.
  */
 
 import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import {cn} from "@/common/lib/utils.ts";
-import useOrganisedSeatingForLayout
-    from "@/domains/seats/_feat/handle-seat-layout/useOrganisedSeatingForLayout.ts";
 import ReservationSeatMapElement from "@/views/client/reservations/components/seating-input/ReservationSeatMapElement.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {useOrganisedSeatingForLayout} from "@/domains/seats/_feat/handle-seat-layout";
+import {ReactElement} from "react";
 
-/**
- * Props for {@link ReservationSeatMapSelector}.
- */
+/** Props for the ReservationSeatMapSelector component. */
 type SelectorProps = {
-    /** Optional wrapper class overrides */
     className?: string;
-
-    /** Flat seat map details used to construct the layout */
     seating: SeatMapDetails[];
-
-    /** Currently selected seat IDs */
     value: ObjectId[];
-
-    /** Updates the selected seat IDs */
     updateValue: (selection: ObjectId[]) => void;
 };
 
-/**
- * Renders a selectable seat map grid.
- *
- * @param seating - Seat map data
- * @param className - Optional wrapper styles
- * @param value - Selected seat IDs
- * @param updateValue - Selection update callback
- */
-const ReservationSeatMapSelector = (
+/** Renders a selectable seat map grid. */
+export function ReservationSeatMapSelector(
     {seating, className, value: selectedSeating, updateValue: updateSelection}: SelectorProps
-) => {
+): ReactElement {
     const {seatRowEntries} = useOrganisedSeatingForLayout({
         seating,
         includeLabels: false,
     });
 
-    /**
-     * Toggles a seat ID in the current selection.
-     */
     const toggleSeat = (_id: ObjectId) => {
         selectedSeating.includes(_id)
             ? updateSelection(selectedSeating.filter(v => v !== _id))
@@ -85,6 +55,5 @@ const ReservationSeatMapSelector = (
             ))}
         </div>
     );
-};
+}
 
-export default ReservationSeatMapSelector;

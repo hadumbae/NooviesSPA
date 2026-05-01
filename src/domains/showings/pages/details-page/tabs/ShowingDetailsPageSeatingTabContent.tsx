@@ -1,24 +1,14 @@
 /**
- * @file ShowingDetailsPageSeatingTabContent.tsx
- *
- * @summary
- * Seating tab content for the Showing Details admin page.
- *
- * @description
- * Renders the seating overview for a showing, including:
- * - The full seat map layout for the selected showing
- * - An optional seat map details panel when a seat map is selected
- *
- * This component consumes data from:
- * - {@link ShowingDetailsPageContext} for showing and seating data
- * - {@link SeatMapFormContext} for seat-map form and panel configuration
+ * @fileoverview Seating tab content for the Showing Details admin page.
  */
 
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {CardCSS} from "@/common/constants/css/ContainerCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import ShowingSeatMapLayout from "@/domains/seatmap/components/features/admin/seat-map-layout/ShowingSeatMapLayout.tsx";
+import {
+    ShowingSeatMapLayout
+} from "@/domains/seatmap/components/features/admin/seat-map-layout/ShowingSeatMapLayout.tsx";
 import {
     SeatMapDetailsPanel
 } from "@/domains/seatmap/components/features/admin/seat-map-deatils-panel/SeatMapDetailsPanel.tsx";
@@ -29,43 +19,20 @@ import {SeatMapFormContext} from "@/domains/seatmap/context/seat-map-form-contex
 import {
     ShowingDetailsPageContext
 } from "@/domains/showings/context/showing-details-page-context/ShowingDetailsPageContext.ts";
+import {ReactElement} from "react";
 
-/**
- * Props for {@link ShowingDetailsPageSeatingTabContent}.
- */
+/** Props for the ShowingDetailsPageSeatingTabContent component. */
 type ContentProps = {
-    /**
-     * Optional class name applied to the tab container.
-     */
     className?: string;
-
-    /**
-     * The currently selected seat map, if any.
-     *
-     * When provided, the seat map details panel is rendered.
-     */
     selectedSeatMap?: SeatMapDetails | null;
 };
 
-/**
- * Renders the seating tab content for a showing.
- *
- * @remarks
- * - Always displays the seat map layout for the showing
- * - Conditionally displays {@link SeatMapDetailsPanel} when a seat map is selected
- * - Relies on required page- and form-level contexts for data and configuration
- *
- * @returns
- * The seating tab content wrapped in a {@link TabsContent} container.
- */
-const ShowingDetailsPageSeatingTabContent = (props: ContentProps) => {
+/** Renders the seating tab content for a showing. */
+export function ShowingDetailsPageSeatingTabContent(props: ContentProps): ReactElement {
     const {className, selectedSeatMap} = props;
 
-    // --- Access Page Context ---
     const {showing, seating} = useRequiredContext({context: ShowingDetailsPageContext});
-
-    // --- Access Form Context ---
-    const {options = {}} = useRequiredContext({context: SeatMapFormContext});
+    useRequiredContext({context: SeatMapFormContext});
 
     return (
         <TabsContent value="seating-tab" className={className}>
@@ -77,10 +44,9 @@ const ShowingDetailsPageSeatingTabContent = (props: ContentProps) => {
             </section>
 
             {selectedSeatMap && (
-                <SeatMapDetailsPanel {...options} showing={showing}/>
+                <SeatMapDetailsPanel showing={showing}/>
             )}
         </TabsContent>
     );
-};
+}
 
-export default ShowingDetailsPageSeatingTabContent;

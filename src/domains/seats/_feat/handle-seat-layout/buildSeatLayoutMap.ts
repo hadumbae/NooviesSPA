@@ -2,7 +2,7 @@
  * @fileoverview Logic for transforming a flat array of seats into a structured 2D grid for layout rendering.
  */
 
-import {GridPositionedSeat} from "@/domains/seats/types/GridPositionedSeat.ts";
+import {GridPositionedSeat} from "./GridPositionedSeat.ts";
 
 /** Parameters for organizing seats into a grid layout. */
 type SortParams<TSeat extends GridPositionedSeat> = {
@@ -20,7 +20,7 @@ type SortReturns<TSeat extends GridPositionedSeat> = {
 /**
  * Organizes seats into a normalized 2D grid by coordinate mapping and placeholder insertion.
  */
-export function organiseSeatsForLayout<TSeat extends GridPositionedSeat>(
+export function buildSeatLayoutMap<TSeat extends GridPositionedSeat>(
     {seats, includeLabels = true}: SortParams<TSeat>
 ): SortReturns<TSeat> {
     if (!seats.length) {
@@ -64,4 +64,3 @@ export function organiseSeatsForLayout<TSeat extends GridPositionedSeat>(
     };
 }
 
-export default organiseSeatsForLayout;

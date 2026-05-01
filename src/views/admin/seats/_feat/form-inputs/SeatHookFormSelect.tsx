@@ -8,12 +8,12 @@ import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiS
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import buildString from "@/common/utility/buildString.ts";
-import {SeatQueryFilters} from "@/domains/seats/_feat/handle-query-options/SeatQueryMatchFilters.ts";
 import {ReactElement} from "react";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {useFetchSeats} from "@/domains/seats/_feat/crud-hooks";
 import {Seat, SeatSchema} from "@/domains/seats/schema/model";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {SeatQueryFilters} from "@/domains/seats/_feat/handle-query-options";
 
 /** Props for the SeatHookFormSelect component. */
 type SelectProps<TValues extends FieldValues> = {

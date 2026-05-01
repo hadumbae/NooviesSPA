@@ -9,8 +9,9 @@ import {cn} from "@/common/lib/utils.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import SeatMapFormPriceFields from "@/domains/seatmap/components/forms/seat-map-form/fieldset/SeatMapFormPriceFields.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import SeatMapFormDetailsFields
-    from "@/domains/seatmap/components/forms/seat-map-form/fieldset/SeatMapFormDetailsFields.tsx";
+import {
+    SeatMapFormDetailsFields
+} from "@/domains/seatmap/components/forms/seat-map-form/fieldset/SeatMapFormDetailsFields.tsx";
 import {HookFormFieldGroup} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import {cloneElement} from "react";
 

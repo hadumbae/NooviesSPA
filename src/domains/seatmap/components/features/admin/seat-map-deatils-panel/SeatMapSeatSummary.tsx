@@ -6,10 +6,10 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import { cn } from "@/common/lib/utils.ts";
 import { SeatTypeLabelMap } from "@/domains/seats/schema/fields";
-import getSeatIdentifier from "@/domains/seats/utilities/formatters/get-seat-identifier/getSeatIdentifier.ts";
 import { RoundedBorderCSS } from "@/common/constants/css/ContainerCSS.ts";
 import { SeatDetails } from "@/domains/seats/schema/model";
 import { ReactElement } from "react";
+import {formatSeatLabel} from "@/domains/seats/_feat/formatters";
 
 /** Props for the SeatMapSeatSummary component. */
 type SectionProps = {
@@ -20,7 +20,7 @@ type SectionProps = {
 export const SeatMapSeatSummary = ({ seat }: SectionProps): ReactElement => {
     const { x, y, seatType } = seat;
 
-    const seatIdentifier = getSeatIdentifier(seat);
+    const seatIdentifier = formatSeatLabel(seat);
     const formattedXY = `X${x}, Y${y}`;
     const formattedSeatType = SeatTypeLabelMap[seatType];
 

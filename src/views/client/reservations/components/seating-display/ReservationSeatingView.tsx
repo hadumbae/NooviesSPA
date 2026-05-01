@@ -3,13 +3,12 @@
  * Renders reservation seating arranged into display rows.
  */
 
-import useOrganisedSeatingForLayout
-    from "@/domains/seats/_feat/handle-seat-layout/useOrganisedSeatingForLayout.ts";
 import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import ReservationSeatingElement
     from "@/views/client/reservations/components/seating-display/ReservationSeatingElement.tsx";
+import {useOrganisedSeatingForLayout} from "@/domains/seats/_feat/handle-seat-layout";
 
 /**
  * Props for the ReservationSeatingView component.

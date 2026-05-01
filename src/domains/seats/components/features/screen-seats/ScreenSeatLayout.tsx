@@ -3,9 +3,9 @@
  */
 
 import { memo, ReactElement, useMemo } from "react";
-import organiseSeatsForLayout from "@/domains/seats/_feat/handle-seat-layout/organiseSeatsForLayout.ts";
+import {buildSeatLayoutMap} from "@/domains/seats/_feat/handle-seat-layout";
 import ScreenSeatLayoutElement from "@/domains/seats/components/features/screen-seats/ScreenSeatLayoutElement.tsx";
-import keyForSeatElement from "@/domains/seats/utilities/screen-seats/keyForSeatElement.ts";
+import {generateSeatElementRenderKey} from "@/domains/seats/_feat/handle-seat-layout";
 
 import {Seat} from "@/domains/seats/schema/model";
 
@@ -18,7 +18,7 @@ type GridProps = {
  * Displays a dynamic seating map organized by row and column coordinates.
  */
 const ScreenSeatLayout = ({ seats }: GridProps): ReactElement => {
-    const { sortedSeats, maxX } = organiseSeatsForLayout({ seats });
+    const { sortedSeats, maxX } = buildSeatLayoutMap({ seats });
     const seatEntries = useMemo(() => Array.from(sortedSeats), [sortedSeats]);
 
     const gridStyle = useMemo(
@@ -38,7 +38,7 @@ const ScreenSeatLayout = ({ seats }: GridProps): ReactElement => {
 
                     {rowSeats.map((element, index) => (
                         <ScreenSeatLayoutElement
-                            key={keyForSeatElement(element, index)}
+                            key={generateSeatElementRenderKey(element, index)}
                             element={element}
                         />
                     ))}

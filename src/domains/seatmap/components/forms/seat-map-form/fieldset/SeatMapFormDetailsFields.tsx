@@ -19,7 +19,7 @@ import {UseFormReturn} from "react-hook-form";
 import {SeatMapFormValues} from "@/domains/seatmap/schema/form/SeatMapForm.types.ts";
 import SeatMapStatusRadioGroup from "@/domains/seatmap/components/forms/input/SeatMapStatusRadioGroup.tsx";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
-import {cloneElement} from "react";
+import {cloneElement, ReactElement} from "react";
 import {SeatQueryOptions} from "@/domains/seats/_feat/handle-query-options/SeatQueryOptions.ts";
 import {SeatHookFormSelect} from "@/views/admin/seats/_feat/form-inputs";
 
@@ -57,7 +57,7 @@ type FieldProps = {
  * />
  * ```
  */
-const SeatMapFormDetailsFields = (props: FieldProps) => {
+export function SeatMapFormDetailsFields(props: FieldProps): ReactElement {
     const {form, activeFields, seatMapScreen} = props;
 
     // --- Seat Filters ---
@@ -108,6 +108,6 @@ const SeatMapFormDetailsFields = (props: FieldProps) => {
             </div>
         </fieldset>
     );
-};
+}
 
-export default SeatMapFormDetailsFields;
+

@@ -2,9 +2,11 @@
  * @fileoverview React hook for transforming flat seating arrays into memoized 2D grid structures and CSS styles.
  */
 
-import organiseSeatsForLayout from "@/domains/seats/_feat/handle-seat-layout/organiseSeatsForLayout.ts";
+import {
+    buildSeatLayoutMap
+} from "./buildSeatLayoutMap.ts";
 import {useMemo} from "react";
-import {GridPositionedSeat} from "@/domains/seats/types/GridPositionedSeat.ts";
+import {GridPositionedSeat} from "./GridPositionedSeat.ts";
 
 /** Parameters for the useOrganisedSeatingForLayout hook. */
 type SeatProps<TSeat extends GridPositionedSeat> = {
@@ -19,7 +21,7 @@ export function useOrganisedSeatingForLayout<TSeat extends GridPositionedSeat>(
     {seating, includeLabels = true}: SeatProps<TSeat>
 ) {
     const {sortedSeats, maxX, maxY} = useMemo(
-        () => organiseSeatsForLayout({seats: seating, includeLabels}),
+        () => buildSeatLayoutMap({seats: seating, includeLabels}),
         [seating, includeLabels],
     );
 
@@ -46,4 +48,3 @@ export function useOrganisedSeatingForLayout<TSeat extends GridPositionedSeat>(
     };
 }
 
-export default useOrganisedSeatingForLayout;

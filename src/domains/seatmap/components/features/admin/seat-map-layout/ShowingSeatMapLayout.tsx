@@ -1,42 +1,24 @@
+/**
+ * @fileoverview Renders the seat-map layout for a single movie showing.
+ */
+
 import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
-import useOrganisedSeatingForLayout
-    from "@/domains/seats/_feat/handle-seat-layout/useOrganisedSeatingForLayout.ts";
-import keyForSeatElement
-    from "@/domains/seats/utilities/screen-seats/keyForSeatElement.ts";
+import {useOrganisedSeatingForLayout} from "@/domains/seats/_feat/handle-seat-layout/useOrganisedSeatingForLayout.ts";
+import {generateSeatElementRenderKey} from "@/domains/seats/_feat/handle-seat-layout";
 import {
     ShowingSeatMapElement
 } from "@/domains/seatmap/components/features/admin/seat-map-layout/ShowingSeatMapElement.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {ReactElement} from "react";
 
-/**
- * @type LayoutProps
- * @description
- * Props for {@link ShowingSeatMapLayout}.
- */
+/** Props for the ShowingSeatMapLayout component. */
 type LayoutProps = {
-    /**
-     * Seat-map entries for a single movie showing.
-     */
     seating: SeatMapDetails[];
-
-    /**
-     * Optional class name applied to the root container.
-     */
     className?: string;
 };
 
-/**
- * @component ShowingSeatMapLayout
- * @description
- * Renders the seat-map layout for a single movie showing.
- *
- * Organizes seat data into a normalized grid using
- * {@link useOrganisedSeatingForLayout}, then renders row labels
- * and seat elements using a CSS Grid layout.
- *
- * Intended for admin-facing showing management and seat-map inspection.
- */
-const ShowingSeatMapLayout = ({seating, className}: LayoutProps) => {
+/** Renders the seat-map layout for a single movie showing. */
+export function ShowingSeatMapLayout({seating, className}: LayoutProps): ReactElement {
     const {seatRowEntries, layoutGridStyle} = useOrganisedSeatingForLayout({seating});
 
     return (
@@ -47,7 +29,7 @@ const ShowingSeatMapLayout = ({seating, className}: LayoutProps) => {
 
                     {rowSeats.map((element, index) => (
                         <ShowingSeatMapElement
-                            key={keyForSeatElement(element, index)}
+                            key={generateSeatElementRenderKey(element, index)}
                             element={element}
                         />
                     ))}
@@ -57,6 +39,5 @@ const ShowingSeatMapLayout = ({seating, className}: LayoutProps) => {
             ))}
         </div>
     );
-};
+}
 
-export default ShowingSeatMapLayout;

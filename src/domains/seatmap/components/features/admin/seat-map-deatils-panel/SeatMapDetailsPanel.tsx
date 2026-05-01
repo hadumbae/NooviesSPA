@@ -11,7 +11,7 @@ import {
     SheetHeader,
     SheetTitle,
 } from "@/common/components/ui/Sheet";
-import getSeatIdentifier from "@/domains/seats/utilities/formatters/get-seat-identifier/getSeatIdentifier.ts";
+import {formatSeatLabel} from "@/domains/seats/_feat/formatters";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {SeatTypeLabelMap} from "@/domains/seats/schema/fields";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
@@ -68,7 +68,7 @@ export function SeatMapDetailsPanel({showing}: PanelProps): ReactElement {
     const formattedSeatType = SeatTypeLabelMap[seatType];
 
     // --- Sheet Metadata ---
-    const sheetTitle = getSeatIdentifier(seat);
+    const sheetTitle = formatSeatLabel(seat);
     const sheetDescription = `${formattedSeatType} • ${formattedStatus}`;
 
     // --- Form Context ---
