@@ -12,6 +12,7 @@ export const SeatCRUDQueryKeys = buildQueryKey(
     {
             _id: ["_id"],
             slug: ["slug"],
+            list: ["list"],
             query: ["list", "query"],
             paginated: ["list", "paginated"],
             queryPaginated: ["list", "query", "paginated"],

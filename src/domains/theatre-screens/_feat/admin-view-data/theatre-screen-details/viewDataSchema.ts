@@ -6,7 +6,7 @@
 import {z} from "zod";
 import {TheatreScreenWithVirtualsSchema} from "@/domains/theatre-screens/schema/model";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
-import {SeatSchema} from "@/domains/seats/schema/model";
+import {SeatDetailsSchema} from "@/domains/seats/schema/model";
 import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /**
@@ -15,7 +15,7 @@ import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDet
 export const TheatreScreenDetailsViewDataSchema = z.object({
     theatre: TheatreDetailsSchema,
     screen: TheatreScreenWithVirtualsSchema,
-    seats: generateArraySchema(SeatSchema),
+    seats: generateArraySchema(SeatDetailsSchema),
 });
 
 /**

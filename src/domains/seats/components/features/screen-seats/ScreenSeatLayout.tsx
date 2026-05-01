@@ -7,11 +7,11 @@ import {buildSeatLayoutMap} from "@/domains/seats/_feat/handle-seat-layout";
 import ScreenSeatLayoutElement from "@/domains/seats/components/features/screen-seats/ScreenSeatLayoutElement.tsx";
 import {generateSeatElementRenderKey} from "@/domains/seats/_feat/handle-seat-layout";
 
-import {Seat} from "@/domains/seats/schema/model";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the ScreenSeatLayout component. */
 type GridProps = {
-    seats: Seat[];
+    seats: SeatDetails[];
 };
 
 /**

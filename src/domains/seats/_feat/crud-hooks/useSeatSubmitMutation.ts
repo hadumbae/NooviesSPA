@@ -9,11 +9,11 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {UseFormReturn} from "react-hook-form";
-import {SeatQueryKeys} from "@/domains/seats/utilities/query/SeatQueryKeys.ts";
 import {SeatFormData, SeatFormValues} from "@/domains/seats/_feat/submit-data";
 import {MutationResponseConfig} from "@/common/features/submit-data";
 import {create, update} from "@/domains/seats/_feat/crud";
 import {SeatCRUDMutationKeys} from "@/domains/seats/_feat/crud-hooks/mutationKeys.ts";
+import {SeatCRUDQueryKeys} from "@/domains/seats/_feat/crud-hooks/queryKeys.ts";
 
 /** Props for the useSeatSubmitMutation hook. */
 type SubmitProps = MutationResponseConfig<SeatDetails> & {
@@ -46,15 +46,7 @@ export function useSeatSubmitMutation(
     };
 
     const onSuccess = (seat: SeatDetails) => {
-        invalidateQueries(
-            [
-                SeatQueryKeys.ids({_id: seat._id}),
-                SeatQueryKeys.slugs({slug: seat.slug}),
-                SeatQueryKeys.query(),
-                SeatQueryKeys.paginated(),
-            ],
-            {exact: false}
-        );
+        invalidateQueries([SeatCRUDQueryKeys.all], {exact: false});
 
         successMessage && toast.success(successMessage);
         onSubmitSuccess?.(seat);

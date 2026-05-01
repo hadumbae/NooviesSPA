@@ -1,0 +1,5 @@
+@layer components {
+    .structural-element {
+        @apply secondary-text flex justify-center items-center select-none
+    }
+}

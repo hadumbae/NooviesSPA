@@ -14,13 +14,13 @@ import {TheatreScreenDetailsPageTabs} from "@/views/admin/theatres/theatre-scree
 
 
 import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
-import {Seat} from "@/domains/seats/schema/model";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the TheatreScreenDetailsPageContent component. */
 type ContentProps = {
     theatre: TheatreDetails;
     screen: TheatreScreenWithVirtuals;
-    seats: Seat[];
+    seats: SeatDetails[];
 };
 
 /**

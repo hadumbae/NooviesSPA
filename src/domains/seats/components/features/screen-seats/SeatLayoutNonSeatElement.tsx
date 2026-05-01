@@ -1,6 +1,4 @@
 import {ReactNode} from "react";
-import {NON_SEAT_ELEMENT_CSS}
-    from "@/domains/seats/style/SeatLayoutCSS.ts";
 import {cn} from "@/common/lib/utils.ts";
 
 /**
@@ -30,7 +28,7 @@ type SeatLayoutNonSeatElementProps = {
  */
 const SeatLayoutNonSeatElement = ({children, className}: SeatLayoutNonSeatElementProps) => {
     return (
-        <div className={cn(NON_SEAT_ELEMENT_CSS, className)}>
+        <div className={cn("structural-element", className)}>
             {children}
         </div>
     );

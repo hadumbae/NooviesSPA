@@ -9,11 +9,11 @@ import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatDetailsPanelContext} from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
 import {SeatLayoutIconConstant} from "@/domains/seats/schema/fields";
-import {Seat} from "@/domains/seats/schema/model";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the ScreenSeatLayoutElement component. */
 type ElementProps = {
-    element: Seat | number | null;
+    element: SeatDetails | number | null;
 };
 
 const NON_SEAT_CSS = cn(

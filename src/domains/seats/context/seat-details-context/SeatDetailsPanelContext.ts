@@ -4,12 +4,12 @@
 
 import { createContext, Dispatch, SetStateAction } from "react";
 
-import {Seat} from "@/domains/seats/schema/model";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Context values for managing seat selection, panel visibility, and mutation states. */
 export type SeatDetailsPanelContextValues = {
-    seat: Seat | null;
-    setSeat: Dispatch<SetStateAction<Seat | null>>;
+    seat: SeatDetails | null;
+    setSeat: Dispatch<SetStateAction<SeatDetails | null>>;
     isPanelOpen: boolean;
     setIsPanelOpen: Dispatch<SetStateAction<boolean>>;
     isEditing: boolean;

@@ -22,14 +22,13 @@ import {
     TheatreScreenDetailsSearchParamSchema
 } from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsSearchParamSchema.ts";
 import {SeatSubmitForm} from "@/views/admin/seats/_feat/submit-data";
-import {Seat} from "@/domains/seats/schema/model";
 import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the TheatreScreenDetailsPageTabs component. */
 type TabsProps = {
     theatreID: ObjectId;
     screenID: ObjectId;
-    seats: Seat[];
+    seats: SeatDetails[];
 };
 
 /**

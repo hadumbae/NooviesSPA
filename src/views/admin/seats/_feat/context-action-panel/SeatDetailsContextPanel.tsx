@@ -7,8 +7,9 @@ import {ReactElement} from "react";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatDetailsPanelContext} from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
 import {Sheet, SheetContent} from "@/common/components/ui/Sheet";
-import SeatDetailsPanelSeatOnlySection
-    from "@/views/admin/seats/_feat/context-action-panel/SeatDetailsPanelSeatOnlySection.tsx";
+import {
+    SeatDetailsPanelSeatOnlySection
+} from "@/views/admin/seats/_feat/context-action-panel/SeatDetailsPanelSeatOnlySection.tsx";
 import SeatDetailsContextPanelHeader
     from "@/views/admin/seats/_feat/context-action-panel/SeatDetailsContextPanelHeader.tsx";
 import SeatDetailsPanelRelatedSection
