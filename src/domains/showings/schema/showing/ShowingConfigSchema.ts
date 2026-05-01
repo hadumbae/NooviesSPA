@@ -1,6 +1,5 @@
 /**
- * @file Showing configuration schema.
- * @filename ShowingConfigSchema.ts
+ * @fileoverview Zod schema and type definition for showing configuration flags.
  */
 
 import {z} from "zod";
@@ -14,7 +13,6 @@ export const ShowingConfigSchema = z.object({
     isActive: CoercedBooleanValueSchema,
     canReserveSeats: BooleanValueSchema.optional(),
     isSpecialEvent: CoercedBooleanValueSchema.optional(),
-
 });
 
 /**

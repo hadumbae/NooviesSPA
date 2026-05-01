@@ -1,55 +1,32 @@
 /**
- * @file Core showing schema and type.
- * @filename ShowingSchema.ts
+ * @fileoverview Core showing schema and type definition.
  */
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {DateTimeInstanceSchema} from "@/common/schema/date-time/DateTimeInstanceSchema.ts";
-import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
-import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
-import {ShowingStatusEnumSchema} from "@/domains/showings/schema/ShowingStatus.enum.ts";
+import {ShowingStatusSchema} from "../fields/ShowingStatusSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 
 import {ShowingConfigSchema} from "@/domains/showings/schema/showing/ShowingConfigSchema.ts";
+import {ShowingTimeSchema} from "@/domains/showings/schema/fields";
+import {TicketPriceSchema} from "@/domains/showings/schema/fields/TicketPriceSchema.ts";
 
 /**
  * Core showing schema.
- *
- * Accepts both ISO date strings and `DateTime` instances for temporal fields.
  */
 export const ShowingSchema = z.object({
     _id: IDStringSchema.readonly(),
-
-    /** Accepts ISO string or DateTime instance. */
-    startTime: z.union([DateTimeInstanceSchema, UTCISO8601DateTimeSchema]),
-
-    /** Accepts ISO string or DateTime instance. */
-    endTime: z
-        .union([DateTimeInstanceSchema, UTCISO8601DateTimeSchema])
-        .optional()
-        .nullable(),
-
-    ticketPrice: CleanedPositiveNumberSchema,
-
+    startTime: ShowingTimeSchema,
+    endTime: ShowingTimeSchema.optional().nullable(),
+    ticketPrice: TicketPriceSchema,
     language: ISO6391LanguageCodeEnum,
-
-    /** Must contain at least one language. */
-    subtitleLanguages: z
-        .array(ISO6391LanguageCodeEnum)
-        .nonempty({message: "Must not be empty."}),
-
+    subtitleLanguages: z.array(ISO6391LanguageCodeEnum).nonempty({message: "Must not be empty."}),
     movie: IDStringSchema,
-
     theatre: IDStringSchema,
-
     screen: IDStringSchema,
-
-    status: ShowingStatusEnumSchema,
-
+    status: ShowingStatusSchema,
     config: ShowingConfigSchema,
-
     slug: NonEmptyStringSchema,
 });
 

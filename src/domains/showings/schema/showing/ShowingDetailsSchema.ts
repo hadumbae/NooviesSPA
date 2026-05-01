@@ -1,6 +1,5 @@
 /**
- * @file Showing details schema with seat statistics.
- * @filename ShowingDetailsSchema.ts
+ * @fileoverview Zod schema and type definition for showing details including seat availability metrics.
  */
 
 import {PopulatedShowingSchema} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";

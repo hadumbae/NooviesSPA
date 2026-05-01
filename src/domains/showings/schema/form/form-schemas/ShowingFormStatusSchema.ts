@@ -5,7 +5,7 @@
 
 import {z} from "zod";
 import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {ShowingStatusEnumSchema} from "@/domains/showings/schema/ShowingStatus.enum.ts";
+import {ShowingStatusSchema} from "../../fields/ShowingStatusSchema.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 
 /**
@@ -13,7 +13,7 @@ import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanV
  */
 export const ShowingFormStatusSchema = z.object({
     ticketPrice: CleanedPositiveNumberSchema,
-    status: ShowingStatusEnumSchema,
+    status: ShowingStatusSchema,
 
     /** Mapped directly to showing configuration. */
     config: z.object({

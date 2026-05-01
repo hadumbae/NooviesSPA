@@ -11,7 +11,7 @@
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {ShowingStatusEnumSchema} from "@/domains/showings/schema/ShowingStatus.enum.ts";
+import {ShowingStatusSchema} from "@/domains/showings/schema/fields";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {SeatTypeEnum} from "@/domains/seats/schema/SeatTypeEnumSchema.ts";
@@ -22,7 +22,7 @@ import {SeatTypeEnum} from "@/domains/seats/schema/SeatTypeEnumSchema.ts";
 export const SeatMapReferenceFilterSchema = z.object({
     movie: IDStringSchema.optional(),
     showingSlug: NonEmptyStringSchema.optional(),
-    showingStatus: ShowingStatusEnumSchema.optional(),
+    showingStatus: ShowingStatusSchema.optional(),
     seatRow: NonEmptyStringSchema.max(10, "Must be 10 characters or less.").optional(),
     seatNumber: PositiveNumberSchema.optional(),
     seatType: SeatTypeEnum.optional(),

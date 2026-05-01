@@ -1,6 +1,5 @@
 /**
- * @file Showing schema with populated relations.
- * @filename PopulatedShowingSchema.ts
+ * @fileoverview Zod schema and type definition for showings with populated relations.
  */
 
 import {ShowingSchema} from "@/domains/showings/schema/showing/ShowingSchema.ts";

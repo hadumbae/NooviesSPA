@@ -18,7 +18,7 @@ import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/Posi
 import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
 import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
-import {ShowingStatusEnumSchema} from "@/domains/showings/schema/ShowingStatus.enum.ts";
+import {ShowingStatusSchema} from "../fields/ShowingStatusSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
 import {SlugStringSchema} from "@/common/schema/strings/simple-strings/SlugString.ts";
@@ -54,7 +54,7 @@ export const ShowingQueryMatchFilterSchema = z.object({
     isActive: CoercedBooleanValueSchema.optional(),
 
     /** Showing lifecycle status */
-    status: ShowingStatusEnumSchema.optional(),
+    status: ShowingStatusSchema.optional(),
 });
 
 /**

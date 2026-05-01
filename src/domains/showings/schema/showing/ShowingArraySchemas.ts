@@ -1,6 +1,5 @@
 /**
- * @file Array schemas for showing variants.
- * @filename ShowingArraySchemas.ts
+ * @fileoverview Array schemas and type definitions for showing variants.
  */
 
 import {z} from "zod";
