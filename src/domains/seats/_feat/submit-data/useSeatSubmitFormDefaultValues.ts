@@ -4,8 +4,8 @@
 
 import {useEffect, useMemo, useRef} from "react";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import {isEqual} from "lodash";
+import {Seat} from "@/domains/seats/schema/model";
 
 /** Props for the useSeatSubmitFormDefaultValues hook. */
 type ValuesParams = {

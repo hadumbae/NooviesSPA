@@ -7,7 +7,8 @@ import {
     SeatDetailsPanelContext,
     SeatDetailsPanelContextValues,
 } from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
+
+import {Seat} from "@/domains/seats/schema/model";
 
 /** Props for the SeatDetailsPanelContextProvider component. */
 type ProviderProps = {

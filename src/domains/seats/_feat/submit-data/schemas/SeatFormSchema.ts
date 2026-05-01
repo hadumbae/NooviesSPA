@@ -3,13 +3,13 @@
  */
 
 import {z} from "zod";
-import {SeatTypeEnum} from "@/domains/seats/schema/SeatTypeEnumSchema.ts";
+import {SeatTypeSchema} from "@/domains/seats/schema/fields";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {CleanedPositiveNumberSchema,} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
-import {SeatLayoutTypeEnumSchema} from "@/domains/seats/schema/SeatLayoutTypeEnumSchema.ts";
+import {SeatLayoutTypeSchema} from "@/domains/seats/schema/fields";
 
 /**
  * Base schema containing shared geometric and relational data for all layout elements.
@@ -21,7 +21,7 @@ export const SeatFormBaseSchema = z.object({
     row: NonEmptyStringSchema.max(10, "Must be 10 characters or less."),
     x: CleanedPositiveNumberSchema,
     y: CleanedPositiveNumberSchema,
-    layoutType: SeatLayoutTypeEnumSchema,
+    layoutType: SeatLayoutTypeSchema,
 });
 
 /**
@@ -33,7 +33,7 @@ const SeatingSchema = SeatFormBaseSchema.extend({
     seatLabel: preprocessEmptyStringToUndefined(
         NonEmptyStringSchema.max(50, {message: "Must be 50 characters or less."}).optional(),
     ).optional(),
-    seatType: SeatTypeEnum,
+    seatType: SeatTypeSchema,
     isAvailable: CoercedBooleanValueSchema,
     priceMultiplier: CleanedPositiveNumberSchema,
 });

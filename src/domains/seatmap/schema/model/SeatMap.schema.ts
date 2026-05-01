@@ -10,8 +10,8 @@ import {SeatMapStatusEnum} from "@/domains/seatmap/schema/enum/SeatMapStatusEnum
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import {SeatDetailsSchema} from "@/domains/seats/schema/seat/SeatDetails.schema.ts";
-import {SeatingStructureSchema} from "@/domains/seats/schema/seat/Seat.schema.ts";
+import {SeatDetailsSchema} from "@/domains/seats/schema/model";
+import {SeatingStructureSchema} from "../../../seats/schema/model/SeatSchema.ts";
 import {ShowingSchema} from "@/domains/showings/schema/showing/ShowingSchema.ts";
 import {PopulatedShowingSchema} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 

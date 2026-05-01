@@ -23,8 +23,10 @@
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatDetailsPanelContext} from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
 import {SheetDescription, SheetHeader, SheetTitle} from "@/common/components/ui/Sheet";
-import SeatLayoutTypeLabelMap from "@/domains/seats/constants/SeatLayoutTypeLabelMap.ts";
-import SeatTypeLabelMap from "@/domains/seats/constants/SeatTypeLabelMap.ts";
+import {
+    SeatLayoutTypeLabelMap
+} from "@/domains/seats/schema/fields";
+import {SeatTypeLabelMap} from "@/domains/seats/schema/fields";
 import buildString from "@/common/utility/buildString.ts";
 
 /**

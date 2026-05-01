@@ -7,13 +7,13 @@ import {Loader} from "lucide-react";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
-import {SeatArraySchema} from "@/domains/seats/schema/seat/SeatRelated.schema.ts";
 import buildString from "@/common/utility/buildString.ts";
 import {SeatQueryFilters} from "@/domains/seats/_feat/handle-query-options/SeatQueryMatchFilters.ts";
 import {ReactElement} from "react";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import {useFetchSeats} from "@/domains/seats/_feat/crud-hooks";
+import {Seat, SeatSchema} from "@/domains/seats/schema/model";
+import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 
 /** Props for the SeatHookFormSelect component. */
 type SelectProps<TValues extends FieldValues> = {
@@ -33,7 +33,7 @@ export function SeatHookFormSelect<TValues extends FieldValues>(
     props: SelectProps<TValues>
 ): ReactElement {
     const {isMulti = false, filters = {layoutType: "SEAT"}} = props;
-    const query = useFetchSeats({queries: filters, schema: SeatArraySchema});
+    const query = useFetchSeats({queries: filters, schema: generateArraySchema(SeatSchema)});
 
     return (
         <QueryDataLoader query={query} loaderComponent={Loader}>

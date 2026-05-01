@@ -12,7 +12,6 @@ import {TheatreScreenDetailsCreateSeatTab}
 import {TheatreScreenDetailsShowingsTab}
     from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsShowingsTab.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import {
     TheatreScreenDetailsActiveTab
 } from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsActiveTabEnumSchema.ts";
@@ -23,7 +22,8 @@ import {
     TheatreScreenDetailsSearchParamSchema
 } from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsSearchParamSchema.ts";
 import {SeatSubmitForm} from "@/views/admin/seats/_feat/submit-data";
-import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
+import {Seat} from "@/domains/seats/schema/model";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the TheatreScreenDetailsPageTabs component. */
 type TabsProps = {

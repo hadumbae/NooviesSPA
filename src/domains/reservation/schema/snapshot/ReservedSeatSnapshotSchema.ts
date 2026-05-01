@@ -5,7 +5,7 @@
 
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import {SeatTypeEnum} from "@/domains/seats/schema/SeatTypeEnumSchema.ts";
+import {SeatTypeSchema} from "@/domains/seats/schema/fields";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {z} from "zod";
 
@@ -20,7 +20,7 @@ export const ReservedSeatSnapshotSchema = z.object({
     seatIdentifier: NonEmptyStringSchema.max(20, "Must be 20 characters or less."),
 
     /** The tier or category of the seat at the time of reservation. */
-    seatType: SeatTypeEnum,
+    seatType: SeatTypeSchema,
 
     /** The validated cost attributed specifically to this seat. */
     pricePaid: PositiveNumberSchema,

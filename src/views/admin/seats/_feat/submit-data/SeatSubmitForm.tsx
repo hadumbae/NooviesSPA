@@ -3,14 +3,14 @@
  */
 
 import {ReactElement} from "react";
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
-import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import {SeatFormData, SeatFormValues} from "@/domains/seats/_feat/submit-data";
 import {useSeatSubmitForm} from "@/domains/seats/_feat/submit-data/useSeatSubmitForm.ts";
 import {FormConfigProps} from "@/common/features/submit-data";
 import {BaseFormContextProvider} from "@/common/features/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 import {useSeatSubmitMutation} from "@/domains/seats/_feat/crud-hooks";
+import {Seat} from "@/domains/seats/schema/model";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the SeatSubmitForm component. */
 type FormProps = FormConfigProps<SeatFormValues, Seat, SeatDetails>;

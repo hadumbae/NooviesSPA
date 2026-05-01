@@ -3,13 +3,13 @@
  */
 
 import {FC, ReactNode} from 'react';
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
-import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import buildString from "@/common/utility/buildString.ts";
-import SeatLayoutTypeLabelMap from "@/domains/seats/constants/SeatLayoutTypeLabelMap.ts";
+import {SeatLayoutTypeLabelMap} from "@/domains/seats/schema/fields";
 import {useSeatDeleteMutation} from "@/domains/seats/_feat/crud-hooks";
+import {Seat} from "@/domains/seats/schema/model";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the SeatDeleteWarningDialog component. */
 type WarningProps = OnDeleteMutationParams & {

@@ -6,7 +6,7 @@
 import {z} from "zod";
 import {TheatreScreenWithVirtualsSchema} from "@/domains/theatre-screens/schema/model";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
-import {SeatSchema} from "@/domains/seats/schema/seat/Seat.schema.ts";
+import {SeatSchema} from "@/domains/seats/schema/model";
 import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /**

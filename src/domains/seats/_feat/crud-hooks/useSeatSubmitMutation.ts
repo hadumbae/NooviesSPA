@@ -4,8 +4,7 @@
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
-import {SeatDetailsSchema} from "@/domains/seats/schema/seat/SeatDetails.schema.ts";
+import {SeatDetails, SeatDetailsSchema} from "@/domains/seats/schema/model";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";

@@ -3,8 +3,9 @@ import useOrganisedSeatingForLayout
     from "@/domains/seats/_feat/handle-seat-layout/useOrganisedSeatingForLayout.ts";
 import keyForSeatElement
     from "@/domains/seats/utilities/screen-seats/keyForSeatElement.ts";
-import ShowingSeatMapElement
-    from "@/domains/seatmap/components/features/admin/seat-map-layout/ShowingSeatMapElement.tsx";
+import {
+    ShowingSeatMapElement
+} from "@/domains/seatmap/components/features/admin/seat-map-layout/ShowingSeatMapElement.tsx";
 import {cn} from "@/common/lib/utils.ts";
 
 /**

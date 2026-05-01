@@ -5,11 +5,11 @@
 
 import {Dispatch, ReactElement, SetStateAction} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import {SeatFormSubmitSeatCard}
     from "@/views/admin/seats/_comp/returned-seat-list/SeatFormSubmitSeatCard.tsx";
 import {SeatFormSubmitStructureCard}
     from "@/views/admin/seats/_comp/returned-seat-list/SeatFormSubmitStructureCard.tsx";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the SeatFormSubmitList component. */
 type ListProps = {

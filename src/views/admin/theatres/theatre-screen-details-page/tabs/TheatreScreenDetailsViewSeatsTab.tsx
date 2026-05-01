@@ -12,9 +12,9 @@ import {ReactElement} from "react";
 import {cn} from "@/common/lib/utils.ts";
 import {CardCSS, RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import {SeatSubmitForm} from "@/views/admin/seats/_feat/submit-data";
 import {SeatDetailsContextPanel} from "@/views/admin/seats/_feat/context-action-panel";
+import {Seat} from "@/domains/seats/schema/model";
 
 /** Props for the TheatreScreenDetailsViewSeatsTab component. */
 type TabProps = {

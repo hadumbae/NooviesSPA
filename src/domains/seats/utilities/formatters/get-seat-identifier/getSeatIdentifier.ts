@@ -1,5 +1,5 @@
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
-import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
+import {Seat} from "@/domains/seats/schema/model";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /**
  * ⚡ Returns a human-readable identifier for a seat or seat-like layout element.

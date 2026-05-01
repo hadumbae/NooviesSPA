@@ -12,10 +12,9 @@
  * - Throws a `ParseError` when validation fails
  */
 
-import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
-import {SeatSchema} from "@/domains/seats/schema/seat/Seat.schema.ts";
+import {Seat, SeatSchema} from "@/domains/seats/schema/model";
 import {ParseError} from "@/common/errors/ParseError.ts";
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /**
  * Converts a populated `SeatDetails` object into a simplified `Seat` structure.

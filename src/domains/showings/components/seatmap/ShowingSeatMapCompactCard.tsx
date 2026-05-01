@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import {SeatMap} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
+import {Seat} from "@/domains/seats/schema/model";
 
 interface Props {
     seatMap: SeatMap;

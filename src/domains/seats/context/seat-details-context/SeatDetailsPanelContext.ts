@@ -3,7 +3,8 @@
  */
 
 import { createContext, Dispatch, SetStateAction } from "react";
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
+
+import {Seat} from "@/domains/seats/schema/model";
 
 /** Context values for managing seat selection, panel visibility, and mutation states. */
 export type SeatDetailsPanelContextValues = {

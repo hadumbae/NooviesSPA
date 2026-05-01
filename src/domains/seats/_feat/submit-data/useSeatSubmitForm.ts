@@ -4,10 +4,10 @@
 
 import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Seat } from "@/domains/seats/schema/seat/Seat.types.ts";
 import {useSeatSubmitFormDefaultValues}
     from "@/domains/seats/_feat/submit-data/useSeatSubmitFormDefaultValues.ts";
 import {SeatFormData, SeatFormSchema, SeatFormValues} from "@/domains/seats/_feat/submit-data/index.ts";
+import {Seat} from "@/domains/seats/schema/model";
 
 /** Props for the useSeatSubmitForm hook. */
 export type SeatFormParams = {

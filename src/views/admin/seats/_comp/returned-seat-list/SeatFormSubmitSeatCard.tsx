@@ -3,7 +3,6 @@
  * metadata including availability, type, custom labels, and pricing modifiers.
  */
 
-import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {HeaderTextCSS, IconTextCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {cn} from "@/common/lib/utils.ts";
@@ -11,6 +10,7 @@ import {Armchair, BadgeCheck, DollarSign, Tag, X} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ReactElement} from "react";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the SeatFormSubmitSeatCard component. */
 type CardProps = {

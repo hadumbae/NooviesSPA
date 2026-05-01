@@ -19,8 +19,9 @@ import {cn} from "@/common/lib/utils.ts";
 import {CardCSS} from "@/common/constants/css/ContainerCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import ShowingSeatMapLayout from "@/domains/seatmap/components/features/admin/seat-map-layout/ShowingSeatMapLayout.tsx";
-import SeatMapDetailsPanel
-    from "@/domains/seatmap/components/features/admin/seat-map-deatils-panel/SeatMapDetailsPanel.tsx";
+import {
+    SeatMapDetailsPanel
+} from "@/domains/seatmap/components/features/admin/seat-map-deatils-panel/SeatMapDetailsPanel.tsx";
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";

@@ -14,7 +14,7 @@ import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.t
 import {ShowingStatusSchema} from "@/domains/showings/schema/fields";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {SeatTypeEnum} from "@/domains/seats/schema/SeatTypeEnumSchema.ts";
+import {SeatTypeSchema} from "@/domains/seats/schema/fields";
 
 /**
  * SeatMap reference filter schema.
@@ -25,7 +25,7 @@ export const SeatMapReferenceFilterSchema = z.object({
     showingStatus: ShowingStatusSchema.optional(),
     seatRow: NonEmptyStringSchema.max(10, "Must be 10 characters or less.").optional(),
     seatNumber: PositiveNumberSchema.optional(),
-    seatType: SeatTypeEnum.optional(),
+    seatType: SeatTypeSchema.optional(),
 });
 
 /**

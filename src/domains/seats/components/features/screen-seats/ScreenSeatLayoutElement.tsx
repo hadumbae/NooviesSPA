@@ -8,8 +8,8 @@ import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatDetailsPanelContext} from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
-import SeatLayoutIconConstant from "@/domains/seats/constants/SeatLayoutIconConstant.ts";
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
+import {SeatLayoutIconConstant} from "@/domains/seats/schema/fields";
+import {Seat} from "@/domains/seats/schema/model";
 
 /** Props for the ScreenSeatLayoutElement component. */
 type ElementProps = {

@@ -9,12 +9,12 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {
     TheatreScreenDetailsPageScreenActions
 } from "@/views/admin/theatres/theatre-screen-details-page/screenActions.tsx";
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
 import {ReactElement} from "react";
 import {TheatreScreenDetailsPageTabs} from "@/views/admin/theatres/theatre-screen-details-page/tabs.tsx";
 
 
 import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {Seat} from "@/domains/seats/schema/model";
 
 /** Props for the TheatreScreenDetailsPageContent component. */
 type ContentProps = {

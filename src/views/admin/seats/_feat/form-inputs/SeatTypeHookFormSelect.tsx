@@ -3,9 +3,9 @@
  */
 
 import {Control, FieldValues, Path} from "react-hook-form";
-import SeatTypeConstant from "@/domains/seats/constants/SeatTypeConstant.ts";
+import {SeatTypeConstant} from "@/domains/seats/schema/fields";
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
-import SeatTypeLabelMap from "@/domains/seats/constants/SeatTypeLabelMap.ts";
+import {SeatTypeLabelMap} from "@/domains/seats/schema/fields";
 import {ReactElement} from "react";
 
 /** Props for the SeatTypeHookFormSelect component. */

@@ -5,13 +5,15 @@
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {HeaderTextCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import SeatLayoutTypeLabelMap from "@/domains/seats/constants/SeatLayoutTypeLabelMap.ts";
+import {
+    SeatLayoutTypeLabelMap
+} from "@/domains/seats/schema/fields";
 import {cn} from "@/common/lib/utils.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {X} from "lucide-react";
-import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ReactElement} from "react";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the SeatFormSubmitStructureCard component. */
 type CardProps = {

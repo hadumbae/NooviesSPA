@@ -6,7 +6,8 @@ import { memo, ReactElement, useMemo } from "react";
 import organiseSeatsForLayout from "@/domains/seats/_feat/handle-seat-layout/organiseSeatsForLayout.ts";
 import ScreenSeatLayoutElement from "@/domains/seats/components/features/screen-seats/ScreenSeatLayoutElement.tsx";
 import keyForSeatElement from "@/domains/seats/utilities/screen-seats/keyForSeatElement.ts";
-import {Seat} from "@/domains/seats/schema/seat/Seat.types.ts";
+
+import {Seat} from "@/domains/seats/schema/model";
 
 /** Props for the ScreenSeatLayout component. */
 type GridProps = {

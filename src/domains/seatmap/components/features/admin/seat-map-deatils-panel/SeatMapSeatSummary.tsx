@@ -1,40 +1,23 @@
+/**
+ * @fileoverview Renders a summary section for a single physical seat within the SeatMap details context panel.
+ */
+
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import { SeatDetails } from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import { cn } from "@/common/lib/utils.ts";
-import SeatTypeLabelMap from "@/domains/seats/constants/SeatTypeLabelMap.ts";
+import { SeatTypeLabelMap } from "@/domains/seats/schema/fields";
 import getSeatIdentifier from "@/domains/seats/utilities/formatters/get-seat-identifier/getSeatIdentifier.ts";
 import { RoundedBorderCSS } from "@/common/constants/css/ContainerCSS.ts";
+import { SeatDetails } from "@/domains/seats/schema/model";
+import { ReactElement } from "react";
 
-/**
- * @summary
- * Props for {@link SeatMapSeatSummary}.
- */
+/** Props for the SeatMapSeatSummary component. */
 type SectionProps = {
-    /**
-     * The seat details object for a seat with `layoutType: "SEAT"`.
-     */
     seat: Extract<SeatDetails, { layoutType: "SEAT" }>;
 };
 
-/**
- * @component SeatMapSeatSummary
- *
- * @description
- * Renders a summary section for a single physical seat within
- * the SeatMap details context panel.
- *
- * Displays:
- * - Human-readable seat identifier (row and number)
- * - Seat type label (e.g., Regular, VIP)
- * - Absolute X/Y coordinates within the screen layout
- *
- * @remarks
- * - Intended for admin-facing inspection and management views.
- * - Relies on `getSeatIdentifier` for consistent seat labeling.
- * - Uses `RoundedBorderCSS` to visually group seat metadata.
- */
-const SeatMapSeatSummary = ({ seat }: SectionProps) => {
+/** Renders a summary section for a single physical seat within the SeatMap details context panel. */
+export const SeatMapSeatSummary = ({ seat }: SectionProps): ReactElement => {
     const { x, y, seatType } = seat;
 
     const seatIdentifier = getSeatIdentifier(seat);
@@ -58,5 +41,3 @@ const SeatMapSeatSummary = ({ seat }: SectionProps) => {
         </section>
     );
 };
-
-export default SeatMapSeatSummary;

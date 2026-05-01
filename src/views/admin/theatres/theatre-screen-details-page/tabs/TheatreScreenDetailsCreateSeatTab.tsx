@@ -8,8 +8,8 @@ import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import {Dispatch, ReactElement, SetStateAction} from "react";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data";
 import {SeatSubmitFormView} from "@/views/admin/seats/_feat/submit-data";
-import {SeatDetails} from "@/domains/seats/schema/seat/SeatDetails.types.ts";
 import {SeatFormSubmitList} from "@/views/admin/seats/_comp/returned-seat-list";
+import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the TheatreScreenDetailsCreateSeatTab component. */
 type TabProps = {

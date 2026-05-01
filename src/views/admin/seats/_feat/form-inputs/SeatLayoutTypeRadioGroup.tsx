@@ -3,8 +3,12 @@
  */
 
 import {Control, FieldValues, Path} from "react-hook-form";
-import SeatLayoutTypeConstant from "@/domains/seats/constants/SeatLayoutTypeConstant.ts";
-import SeatLayoutTypeLabelMap from "@/domains/seats/constants/SeatLayoutTypeLabelMap.ts";
+import {
+    SeatLayoutTypeConstant
+} from "@/domains/seats/schema/fields";
+import {
+    SeatLayoutTypeLabelMap
+} from "@/domains/seats/schema/fields";
 import HookFormRadioGroup from "@/common/components/forms/radio-group/HookFormRadioGroup.tsx";
 import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
 import {ReactElement} from "react";

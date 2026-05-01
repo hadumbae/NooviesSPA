@@ -5,8 +5,8 @@
 import { z } from "zod";
 import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import { SeatTypeEnum } from "@/domains/seats/schema/SeatTypeEnumSchema.ts";
-import { SeatLayoutTypeEnumSchema } from "@/domains/seats/schema/SeatLayoutTypeEnumSchema.ts";
+import { SeatTypeSchema } from "@/domains/seats/schema/fields";
+import { SeatLayoutTypeSchema } from "@/domains/seats/schema/fields";
 import { CoercedBooleanValueSchema } from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 
@@ -17,8 +17,8 @@ export const SeatQueryFiltersSchema = z.object({
     _id: IDStringSchema.optional(),
     row: NonEmptyStringSchema.optional(),
     seatNumber: NonEmptyStringSchema.optional(),
-    seatType: SeatTypeEnum.optional(),
-    layoutType: SeatLayoutTypeEnumSchema.optional(),
+    seatType: SeatTypeSchema.optional(),
+    layoutType: SeatLayoutTypeSchema.optional(),
     isAvailable: CoercedBooleanValueSchema.optional(),
     priceMultiplier: PositiveNumberSchema.optional(),
     theatre: IDStringSchema.optional(),

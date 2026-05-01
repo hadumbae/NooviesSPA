@@ -1,50 +1,26 @@
-import { SeatMapDetails } from "@/domains/seatmap/schema/model/SeatMap.types.ts";
-import SeatLayoutNonSeatElement
-    from "@/domains/seats/components/features/screen-seats/SeatLayoutNonSeatElement.tsx";
-import SeatLayoutIconConstant
-    from "@/domains/seats/constants/SeatLayoutIconConstant.ts";
-import { Button } from "@/common/components/ui/button.tsx";
-import { useCallback } from "react";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import { SeatMapDetailsPanelContext }
-    from "@/domains/seatmap/context/details-panel-context/SeatMapDetailsPanelContext.ts";
-
 /**
- * @type ShowingSeatMapElementProps
- * @description
- * Props for {@link ShowingSeatMapElement}.
+ * @fileoverview Renders a single element within a showing's seat map layout.
  */
+
+import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
+import SeatLayoutNonSeatElement from "@/domains/seats/components/features/screen-seats/SeatLayoutNonSeatElement.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
+import {ReactElement, useCallback} from "react";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {SeatLayoutIconConstant} from "@/domains/seats/schema/fields";
+import {
+    SeatMapDetailsPanelContext
+} from "@/domains/seatmap/context/details-panel-context/SeatMapDetailsPanelContext.ts";
+
+/** Props for the ShowingSeatMapElement component. */
 type ShowingSeatMapElementProps = {
-    /**
-     * The element to render in the seat layout.
-     *
-     * Can be:
-     * - A `SeatMapDetails` object representing a real seat
-     * - A `number` used for row or column labels
-     * - `null` for empty spacing elements
-     */
     element: SeatMapDetails | number | null;
 };
 
-/**
- * @component ShowingSeatMapElement
- * @description
- * Renders a single element within a showing's seat map layout.
- *
- * Behavior based on `element` type:
- * - `null`: Renders a placeholder dot (`•`) for empty spaces.
- * - `number`: Renders a label for row/column numbering.
- * - `SeatMapDetails`: Renders an interactive seat button using the
- *   correct icon from {@link SeatLayoutIconConstant}. Clicking a seat
- *   opens the seat details panel via {@link SeatMapDetailsPanelContext}.
- */
-const ShowingSeatMapElement = ({ element }: ShowingSeatMapElementProps) => {
-    // --- Access Context ---
-    const { setSeatMap, setIsPanelOpen } = useRequiredContext({
-        context: SeatMapDetailsPanelContext,
-    });
+/** Renders a single interactive seat or a non-interactive element inside the seating grid. */
+export function ShowingSeatMapElement({element}: ShowingSeatMapElementProps): ReactElement {
+    const {setSeatMap, setIsPanelOpen} = useRequiredContext({context: SeatMapDetailsPanelContext});
 
-    // --- Empty Element ---
     if (!element) {
         return (
             <SeatLayoutNonSeatElement>
@@ -53,7 +29,6 @@ const ShowingSeatMapElement = ({ element }: ShowingSeatMapElementProps) => {
         );
     }
 
-    // --- Number Legend ---
     if (typeof element === "number") {
         return (
             <SeatLayoutNonSeatElement>
@@ -62,8 +37,7 @@ const ShowingSeatMapElement = ({ element }: ShowingSeatMapElementProps) => {
         );
     }
 
-    // --- Seat Map ---
-    const { seat: { layoutType } } = element;
+    const {seat: {layoutType}} = element;
     const Icon = SeatLayoutIconConstant[layoutType];
 
     const onClick = useCallback(
@@ -75,14 +49,9 @@ const ShowingSeatMapElement = ({ element }: ShowingSeatMapElementProps) => {
     );
 
     return (
-        <Button
-            variant="link"
-            className="p-1 hover:border hover:shadow"
-            onClick={onClick}
-        >
-            <Icon size={20} />
+        <Button variant="link" className="p-1 hover:border hover:shadow" onClick={onClick}>
+            <Icon size={20}/>
         </Button>
     );
-};
+}
 
-export default ShowingSeatMapElement;

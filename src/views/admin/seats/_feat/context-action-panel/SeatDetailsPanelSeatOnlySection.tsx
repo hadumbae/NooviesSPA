@@ -25,7 +25,7 @@
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {SeatDetailsPanelContext} from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
-import SeatTypeLabelMap from "@/domains/seats/constants/SeatTypeLabelMap.ts";
+import {SeatTypeLabelMap} from "@/domains/seats/schema/fields";
 
 /**
  * Seat information section for the seat-details panel.
