@@ -5,8 +5,7 @@
 
 import {Dispatch, ReactElement, SetStateAction, useState} from "react";
 import {Sheet, SheetContent} from "@/common/components/ui/Sheet";
-import SeatDetailsContextPanelHeader
-    from "@/views/admin/seats/_feat/context-action-panel/SeatDetailsContextPanelHeader.tsx";
+import {SeatContextPanelHeader} from "./SeatContextPanelHeader.tsx";
 import {SeatContextPanelOptionButtonsSection} from "./SeatContextPanelOptionButtonsSection.tsx";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import {SeatDeleteWarning} from "@/domains/seats/components/features/delete-seats/SeatDeleteWarning.tsx";
@@ -28,7 +27,7 @@ type PanelProps = UIOpenStateProps & {
  * Displays and manages the lifecycle of seat information within a slide-over panel.
  * Toggles between read-only metadata sections and an active SeatSubmitForm for updates.
  */
-export function SeatDetailsContextPanel(
+export function SeatContextPanel(
     {isOpen, setIsOpen, seat, setSeat}: PanelProps): ReactElement {
 
     const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -44,7 +43,7 @@ export function SeatDetailsContextPanel(
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetContent className="flex flex-col">
-                <SeatDetailsContextPanelHeader/>
+                <SeatContextPanelHeader/>
 
                 <ScrollArea className="flex-1 pt-5">
                     <div className="space-y-5">

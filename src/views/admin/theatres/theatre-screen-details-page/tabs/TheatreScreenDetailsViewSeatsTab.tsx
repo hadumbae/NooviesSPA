@@ -10,7 +10,7 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ReactElement} from "react";
 import {cn} from "@/common/lib/utils.ts";
 import {CardCSS} from "@/common/constants/css/ContainerCSS.ts";
-import {SeatDetailsContextPanel} from "@/views/admin/seats/_feat/context-action-panel";
+import {SeatContextPanel} from "@/views/admin/seats/_feat/context-action-panel";
 import {SeatDetails} from "@/domains/seats/schema/model";
 import {SeatPanelContext} from "@/domains/seats/context/seat-details-context";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
@@ -50,7 +50,7 @@ export function TheatreScreenDetailsViewSeatsTab(
 
             {
                 seat && (
-                    <SeatDetailsContextPanel
+                    <SeatContextPanel
                         seat={seat}
                         setSeat={setSeat}
                         isOpen={isPanelOpen}

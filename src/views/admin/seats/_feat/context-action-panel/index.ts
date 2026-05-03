@@ -1,5 +1,5 @@
-import {SeatDetailsContextPanel} from "@/views/admin/seats/_feat/context-action-panel/SeatDetailsContextPanel.tsx";
+import {SeatContextPanel} from "./SeatContextPanel.tsx";
 
 export {
-    SeatDetailsContextPanel,
+    SeatContextPanel,
 }
