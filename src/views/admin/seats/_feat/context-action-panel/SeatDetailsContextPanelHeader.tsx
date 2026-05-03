@@ -3,7 +3,7 @@
  * @description
  * Renders the header section of the seat-details side panel.
  *
- * This component consumes {@link SeatDetailsPanelContext} to display
+ * This component consumes {@link SeatPanelContext} to display
  * information about the currently selected seat or layout element.
  *
  * Features:
@@ -21,7 +21,7 @@
  */
 
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {SeatDetailsPanelContext} from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
+import {SeatPanelContext} from "@/domains/seats/context/seat-details-context";
 import {SheetDescription, SheetHeader, SheetTitle} from "@/common/components/ui/Sheet";
 import {
     SeatLayoutTypeLabelMap
@@ -32,7 +32,7 @@ import buildString from "@/common/utility/buildString.ts";
 /**
  * Header component for the seat-details panel.
  *
- * Extracts the currently selected seat from {@link SeatDetailsPanelContext} and
+ * Extracts the currently selected seat from {@link SeatPanelContext} and
  * renders an appropriate header. Differentiates between standard seats
  * (`layoutType === "SEAT"`) and non-seat layout elements.
  *
@@ -45,7 +45,7 @@ const SeatDetailsContextPanelHeader = () => {
     // ⚡ Access Context ⚡
 
     const {seat} = useRequiredContext({
-        context: SeatDetailsPanelContext,
+        context: SeatPanelContext,
         message: "Must be used within provider for `SeatDetailsPanelContext`.",
     });
 

@@ -9,13 +9,11 @@ import ScreenSeatLayout from "@/domains/seats/components/features/screen-seats/S
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {ReactElement} from "react";
 import {cn} from "@/common/lib/utils.ts";
-import {CardCSS, RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
-import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import {SeatSubmitForm} from "@/views/admin/seats/_feat/submit-data";
+import {CardCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {SeatDetailsContextPanel} from "@/views/admin/seats/_feat/context-action-panel";
 import {SeatDetails} from "@/domains/seats/schema/model";
-import {SeatDetailsPanelContext} from "@/domains/seats/context/seat-details-context";
-import {simplifySeatDetails} from "@/domains/seats/_feat/formatters";
+import {SeatPanelContext} from "@/domains/seats/context/seat-details-context";
+import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
 /** Props for the TheatreScreenDetailsViewSeatsTab component. */
 type TabProps = {
@@ -28,35 +26,37 @@ type TabProps = {
 export function TheatreScreenDetailsViewSeatsTab(
     {seats}: TabProps
 ): ReactElement {
-    const {seat} = useRequiredContext({context: SeatDetailsPanelContext});
-
-    const contentSection = seats.length > 0 ? (
-        <section className="space-y-2">
-            <SectionHeader>Seat Layout</SectionHeader>
-
-            <ScrollArea className={cn(CardCSS, "w-full p-3")}>
-                <ScreenSeatLayout seats={seats}/>
-                <ScrollBar orientation="horizontal"/>
-            </ScrollArea>
-        </section>
-    ) : (
-        <section className={RoundedBorderCSS}>
-            <div className="flex justify-center items-center h-56">
-                <span className={cn(SecondaryTextBaseCSS, "select-none capitalize")}>
-                    There Are No Seats
-                </span>
-            </div>
-        </section>
-    );
+    const {seat, setSeat, isPanelOpen, setIsPanelOpen} = useRequiredContext({context: SeatPanelContext});
 
     return (
         <TabsContent value="view-seats">
-            {contentSection}
+            {
+                seats.length > 0 ? (
+                    <section className="space-y-2">
+                        <SectionHeader>Seat Layout</SectionHeader>
+
+                        <ScrollArea className={cn(CardCSS, "w-full p-3")}>
+                            <ScreenSeatLayout seats={seats}/>
+                            <ScrollBar orientation="horizontal"/>
+                        </ScrollArea>
+                    </section>
+                ) : (
+                    <EmptyArrayContainer
+                        className="rounded-container-border h-56"
+                        text="There Are No Seats"
+                    />
+                )
+            }
 
             {
-                seat && <SeatSubmitForm editEntity={simplifySeatDetails(seat)}>
-                    <SeatDetailsContextPanel/>
-                </SeatSubmitForm>
+                seat && (
+                    <SeatDetailsContextPanel
+                        seat={seat}
+                        setSeat={setSeat}
+                        isOpen={isPanelOpen}
+                        setIsOpen={setIsPanelOpen}
+                    />
+                )
             }
         </TabsContent>
     );

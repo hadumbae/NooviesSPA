@@ -17,7 +17,6 @@ export function ZodEnumParamHandler(
 ): z.RawCreateParams {
     return (
         {
-            required_error: "Required.",
             errorMap: (issue, ctx) => {
                 if (issue.code === z.ZodIssueCode.invalid_enum_value) {
                     return {message: invalidValue ?? "Invalid value."};

@@ -1,0 +1,5 @@
+@layer components {
+    .rounded-container-border {
+        @apply border border-neutral-200 dark:border-neutral-600 rounded-xl
+    }
+}

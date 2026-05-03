@@ -2,8 +2,9 @@
  * @fileoverview Utility function to convert a fully populated seat details object into a simplified seat object.
  */
 
-import {Seat, SeatDetails, SeatSchema} from "src/domains/seats/schema/model";
-import {ParseError} from "src/common/errors/ParseError.ts";
+
+import {Seat, SeatDetails, SeatSchema} from "@/domains/seats/schema/model";
+import {ParseError} from "@/common/errors/ParseError.ts";
 
 /** Converts a fully populated seat details object into a simplified seat object. */
 export function simplifySeatDetails(seat: Seat | SeatDetails): Seat {

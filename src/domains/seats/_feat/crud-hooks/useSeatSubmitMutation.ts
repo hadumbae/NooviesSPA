@@ -14,6 +14,7 @@ import {MutationResponseConfig} from "@/common/features/submit-data";
 import {create, update} from "@/domains/seats/_feat/crud";
 import {SeatCRUDMutationKeys} from "@/domains/seats/_feat/crud-hooks/mutationKeys.ts";
 import {SeatCRUDQueryKeys} from "@/domains/seats/_feat/crud-hooks/queryKeys.ts";
+import {TheatreScreenAdminViewDataQueryKeys} from "@/domains/theatre-screens/_feat/admin-view-data/queryKeys.ts";
 
 /** Props for the useSeatSubmitMutation hook. */
 type SubmitProps = MutationResponseConfig<SeatDetails> & {
@@ -46,7 +47,10 @@ export function useSeatSubmitMutation(
     };
 
     const onSuccess = (seat: SeatDetails) => {
-        invalidateQueries([SeatCRUDQueryKeys.all], {exact: false});
+        invalidateQueries([
+            SeatCRUDQueryKeys.all,
+            TheatreScreenAdminViewDataQueryKeys.details(),
+        ], {exact: false});
 
         successMessage && toast.success(successMessage);
         onSubmitSuccess?.(seat);

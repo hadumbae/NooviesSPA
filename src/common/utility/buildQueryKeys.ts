@@ -30,14 +30,14 @@ export type QueryKeyReturns<TKeys extends string> = {
  * Constructs a standardized query key factory for a specific domain or feature.
  */
 export function buildQueryKey<TKeys extends string>(
-    baseKey: string[], meta: QueryKeyMeta<TKeys>
+    allKey: string[], meta: QueryKeyMeta<TKeys>
 ): QueryKeyReturns<TKeys> {
-    const keyRecords = (Object.entries(meta) as [TKeys, string[]][]).map(
-        ([fnName, queryKey]) => [fnName as TKeys, (...args: any[]) => [...baseKey, ...queryKey, ...args]]
+    const keyRecords: [TKeys, QueryKeyFunction][] = (Object.entries(meta) as [TKeys, string[]][]).map(
+        ([fnName, queryKey]) => [fnName as TKeys, (...args: any[]) => [...allKey, ...queryKey, ...args]]
     );
 
     return Object.fromEntries([
-        ["all", ...baseKey],
+        ["all", allKey],
         ...keyRecords,
-    ]);
+    ]) as QueryKeyReturns<TKeys>;
 }

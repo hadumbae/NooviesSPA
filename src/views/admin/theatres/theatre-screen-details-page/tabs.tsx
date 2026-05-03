@@ -15,7 +15,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     TheatreScreenDetailsActiveTab
 } from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsActiveTabEnumSchema.ts";
-import {SeatDetailsPanelContextProvider} from "@/domains/seats/context/seat-details-context";
+import {SeatPanelContextProvider} from "@/domains/seats/context/seat-details-context";
 import {SeatFormData} from "@/domains/seats/_feat/submit-data";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {
@@ -66,9 +66,9 @@ export function TheatreScreenDetailsPageTabs(
                 </TabsList>
             </div>
 
-            <SeatDetailsPanelContextProvider>
+            <SeatPanelContextProvider>
                 <TheatreScreenDetailsViewSeatsTab seats={seats}/>
-            </SeatDetailsPanelContextProvider>
+            </SeatPanelContextProvider>
 
             <SeatSubmitForm presetValues={presetValues} onSubmitSuccess={onSeatCreation}>
                 <TheatreScreenDetailsCreateSeatTab

@@ -34,6 +34,7 @@ export type FormViewProps<TFormValues extends FieldValues> = {
 
 /** Props for form fieldset components. */
 export type FormFieldsetProps<TFormValues extends FieldValues> = {
+    isNestedView?: boolean;
     disableFields?: Partial<Record<keyof TFormValues, boolean>>;
     className?: string;
 };

@@ -10,30 +10,24 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
 import {SeatTypeHookFormSelect} from "@/views/admin/seats/_feat/form-inputs";
 
-/** Props for the SeatSubmitFormSeatFieldset component. */
-type FieldsetProps = Pick<FormViewProps<SeatFormValues>, "disableFields"> & {
-    isPanel?: boolean;
-};
 
-/**
- * Renders seat metadata fields such as type, price modifier, and availability status.
- */
+/** Renders seat metadata fields such as type, price modifier, and availability status. */
 export function SeatSubmitFormSeatFieldset(
-    {disableFields, isPanel}: FieldsetProps
+    {disableFields, isNestedView, className}: FormFieldsetProps<SeatFormValues>,
 ): ReactElement {
     const {control} = useFormContext();
 
     return (
-        <fieldset className="space-y-4">
+        <fieldset className={cn("space-y-4", className)}>
             <div>
                 <PrimaryHeaderText>Seat</PrimaryHeaderText>
                 <Separator/>
             </div>
 
-            <div className={cn("grid gap-2", isPanel ? "grid-cols-1" : "grid-cols-2")}>
+            <div className={cn("grid gap-2", isNestedView ? "grid-cols-1" : "grid-cols-2")}>
                 {
                     !disableFields?.seatType &&
                     <SeatTypeHookFormSelect
@@ -60,7 +54,7 @@ export function SeatSubmitFormSeatFieldset(
                     <HookFormCheckbox
                         name="isAvailable"
                         label="Is Available?"
-                        className={cn(!isPanel && "col-span-2")}
+                        className={cn(!isNestedView && "col-span-2")}
                         control={control}
                     />
                 }

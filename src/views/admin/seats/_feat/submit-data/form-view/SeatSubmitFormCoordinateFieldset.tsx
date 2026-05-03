@@ -9,23 +9,20 @@ import {useFormContext} from "react-hook-form";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
-
-/** Props for the SeatSubmitFormCoordinateFieldset component. */
-type FieldsetProps = Pick<FormViewProps<SeatFormValues>, "disableFields">;
+import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
 
 /**
  * Renders coordinate inputs for seat positioning, adjusting the grid layout based on field visibility.
  */
 export function SeatSubmitFormCoordinateFieldset(
-    {disableFields}: FieldsetProps
+    {disableFields, className}: Omit<FormFieldsetProps<SeatFormValues>, "isNestedView">
 ): ReactElement {
     const {control} = useFormContext();
 
     const hasActiveField = !disableFields?.x && !disableFields?.y;
 
     return (
-        <fieldset className="space-y-4">
+        <fieldset className={cn("space-y-4", className)}>
             <div>
                 <PrimaryHeaderText>Coordinates</PrimaryHeaderText>
                 <Separator/>
@@ -36,7 +33,7 @@ export function SeatSubmitFormCoordinateFieldset(
                     !disableFields?.x &&
                     <HookFormInput
                         name="x"
-                        label="X Coordinate"
+                        label="X Coord."
                         type="number"
                         min={1}
                         step={1}
@@ -48,7 +45,7 @@ export function SeatSubmitFormCoordinateFieldset(
                     !disableFields?.y &&
                     <HookFormInput
                         name="y"
-                        label="Y Coordinate"
+                        label="Y Coord."
                         type="number"
                         min={1}
                         step={1}

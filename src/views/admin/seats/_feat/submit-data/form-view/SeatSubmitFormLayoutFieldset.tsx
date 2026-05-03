@@ -6,23 +6,19 @@ import {ReactElement} from 'react';
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {SeatLayoutTypeRadioGroup} from "@/views/admin/seats/_feat/form-inputs";
+import {cn} from "@/common/lib/utils.ts";
 
-/** Props for the SeatSubmitFormLayoutFieldset component. */
-type FieldsetProps = Pick<FormViewProps<SeatFormValues>, "disableFields">;
-
-/**
- * Renders a radio group for layout type selection, allowing users to define if a grid unit is a seat or a structural element.
- */
+/** Renders the layout type fieldset containing the radio group selection. */
 export function SeatSubmitFormLayoutFieldset(
-    {disableFields}: FieldsetProps
+    {disableFields, className}: FormFieldsetProps<SeatFormValues>
 ): ReactElement {
     const {control} = useFormContext();
 
     return (
-        <fieldset className="space-y-4">
+        <fieldset className={cn("space-y-4", className)}>
             <div>
                 <PrimaryHeaderText>Layout Type</PrimaryHeaderText>
                 <Separator/>

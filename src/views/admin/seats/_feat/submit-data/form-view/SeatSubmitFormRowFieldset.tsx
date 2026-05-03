@@ -11,27 +11,20 @@ import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatForm
 import {cn} from "@/common/lib/utils.ts";
 import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
 
-/** Props for the SeatSubmitFormRowFieldset component. */
-type FieldsetProps = Pick<FormViewProps<SeatFormValues>, "disableFields"> & {
-    isPanel?: boolean;
-};
-
-/**
- * Renders inputs for Row, Seat Number, and Seat Label, adapting the grid layout based on the display context.
- */
+/** Renders inputs for Row, Seat Number, and Seat Label, adapting the grid layout based on the display context. */
 export function SeatSubmitFormRowFieldset(
-    {disableFields, isPanel}: FieldsetProps
+    {disableFields, isNestedView, className}: FormViewProps<SeatFormValues>
 ): ReactElement {
     const {control} = useFormContext();
 
     return (
-        <fieldset className="space-y-2">
+        <fieldset className={cn("space-y-2", className)}>
             <div>
                 <PrimaryHeaderText>Row</PrimaryHeaderText>
                 <Separator/>
             </div>
 
-            <div className={cn("grid gap-2", isPanel ? "grid-cols-2" : "grid-cols-3")}>
+            <div className={cn("grid gap-2", isNestedView ? "grid-cols-2" : "grid-cols-3")}>
                 {
                     !disableFields?.row &&
                     <HookFormInput
@@ -59,7 +52,7 @@ export function SeatSubmitFormRowFieldset(
                         name="seatLabel"
                         label="Label"
                         control={control}
-                        className={cn(isPanel && "col-span-2")}
+                        className={isNestedView ? "col-span-2" : "col-span-1"}
                     />
                 }
             </div>

@@ -1,15 +1,15 @@
 import {
-    SeatDetailsPanelContext,
+    SeatPanelContext,
     SeatDetailsPanelContextValues
-} from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
+} from "./SeatPanelContext.ts";
 import {
-    SeatDetailsPanelContextProvider
-} from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContextProvider.tsx";
+    SeatPanelContextProvider
+} from "./SeatPanelContextProvider.tsx";
 
 
 export {
-    SeatDetailsPanelContext,
-    SeatDetailsPanelContextProvider,
+    SeatPanelContext,
+    SeatPanelContextProvider,
 }
 
 export type {

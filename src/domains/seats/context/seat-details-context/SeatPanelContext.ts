@@ -12,14 +12,7 @@ export type SeatDetailsPanelContextValues = {
     setSeat: Dispatch<SetStateAction<SeatDetails | null>>;
     isPanelOpen: boolean;
     setIsPanelOpen: Dispatch<SetStateAction<boolean>>;
-    isEditing: boolean;
-    setIsEditing: Dispatch<SetStateAction<boolean>>;
-    showDeleteWarning: boolean;
-    setShowDeleteWarning: Dispatch<SetStateAction<boolean>>;
 };
 
-/**
- * Provides state and control functions for the seat details side panel and associated dialogs.
- */
-export const SeatDetailsPanelContext =
-    createContext<SeatDetailsPanelContextValues | undefined>(undefined);
+/** Provides state and control functions for the seat details side panel and associated dialogs. */
+export const SeatPanelContext = createContext<SeatDetailsPanelContextValues | undefined>(undefined);

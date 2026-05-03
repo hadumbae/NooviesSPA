@@ -6,7 +6,9 @@
 import {useFormContext} from "react-hook-form";
 import {HookFormFieldGroup} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
-import {SeatSubmitFormLayoutFieldset} from "@/views/admin/seats/_feat/submit-data/form-view/SeatSubmitFormLayoutFieldset.tsx";
+import {
+    SeatSubmitFormLayoutFieldset
+} from "@/views/admin/seats/_feat/submit-data/form-view/SeatSubmitFormLayoutFieldset.tsx";
 import {
     SeatSubmitFormDetailsFieldset
 } from "@/views/admin/seats/_feat/submit-data/form-view/SeatSubmitFormDetailsFieldset.tsx";
@@ -17,48 +19,50 @@ import {SeatSubmitFormRowFieldset} from "@/views/admin/seats/_feat/submit-data/f
 import {
     SeatSubmitFormCoordinateFieldset
 } from "@/views/admin/seats/_feat/submit-data/form-view/SeatSubmitFormCoordinateFieldset.tsx";
-import {SeatSubmitFormSeatFieldset} from "@/views/admin/seats/_feat/submit-data/form-view/SeatSubmitFormSeatFieldset.tsx";
+import {
+    SeatSubmitFormSeatFieldset
+} from "@/views/admin/seats/_feat/submit-data/form-view/SeatSubmitFormSeatFieldset.tsx";
 import {cloneElement, ReactElement} from "react";
+import {FormViewProps} from "@/common/features/submit-data/formTypes";
 
 /** Props for filtering and disabling specific form fields. */
-export type FieldsProps = {
-    disableFields?: Partial<Record<keyof SeatFormValues, boolean>>;
-}
+export type FieldsProps = Pick<FormViewProps<SeatFormValues>, "disableFields" | "isNestedView">
 
 /**
  * Constructs an array of React elements representing the active fieldsets for a seat form.
  */
 export function useBuildSeatFormRenderFields(
-    {disableFields}: FieldsProps
+    {disableFields, isNestedView}: FieldsProps
 ): (ReactElement | null)[] {
     const {watch} = useFormContext();
+
     const layoutType = watch("layoutType");
     const isSeat = layoutType === "SEAT";
 
     const fieldGroups: HookFormFieldGroup<SeatFormValues>[] = [
         {
             render: true,
-            key: "seat-layout-field-set",
+            key: "layout-1",
             fields: ["layoutType"],
-            element: <SeatSubmitFormLayoutFieldset disableFields={disableFields} key="layout-1"/>
+            element: <SeatSubmitFormLayoutFieldset disableFields={disableFields}/>
         },
         {
             render: true,
             key: "details-2",
             fields: ["theatre", "screen"],
-            element: <SeatSubmitFormDetailsFieldset disableFields={disableFields}/>
+            element: <SeatSubmitFormDetailsFieldset disableFields={disableFields} isNestedView={isNestedView}/>
         },
         {
             render: !isSeat,
             key: "non-seat-3",
             fields: ["row", "x", "y"],
-            element: <SeatSubmitFormNonSeatFieldset disableFields={disableFields}/>
+            element: <SeatSubmitFormNonSeatFieldset disableFields={disableFields} isNestedView={isNestedView}/>
         },
         {
             render: isSeat,
             key: "row-3",
             fields: ["row", "seatNumber", "seatLabel"],
-            element: <SeatSubmitFormRowFieldset disableFields={disableFields} isPanel/>
+            element: <SeatSubmitFormRowFieldset disableFields={disableFields} isNestedView={isNestedView}/>
         },
         {
             render: isSeat,
@@ -70,7 +74,7 @@ export function useBuildSeatFormRenderFields(
             render: isSeat,
             key: "seat-5",
             fields: ["seatType", "priceMultiplier", "isAvailable"],
-            element: <SeatSubmitFormSeatFieldset disableFields={disableFields} isPanel/>
+            element: <SeatSubmitFormSeatFieldset disableFields={disableFields} isNestedView={isNestedView}/>
         },
     ];
 

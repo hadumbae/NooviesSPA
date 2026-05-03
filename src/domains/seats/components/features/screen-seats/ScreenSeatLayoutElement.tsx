@@ -7,7 +7,7 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {SeatDetailsPanelContext} from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
+import {SeatPanelContext} from "@/domains/seats/context/seat-details-context";
 import {SeatLayoutIconConstant} from "@/domains/seats/schema/fields";
 import {SeatDetails} from "@/domains/seats/schema/model";
 
@@ -29,7 +29,7 @@ export function ScreenSeatLayoutElement(
     {element}: ElementProps
 ): ReactElement {
     const {setSeat, setIsPanelOpen} = useRequiredContext({
-        context: SeatDetailsPanelContext,
+        context: SeatPanelContext,
         message: "Must be used within the SeatDetailsPanelContext.",
     });
 

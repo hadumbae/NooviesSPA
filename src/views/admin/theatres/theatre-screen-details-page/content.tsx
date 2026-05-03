@@ -29,8 +29,11 @@ type ContentProps = {
 export function TheatreScreenDetailsPageContent(
     {theatre, screen, seats}: ContentProps
 ): ReactElement {
+
     const {_id: screenID, name: screenName} = screen;
     const {_id: theatreID, name: theatreName, slug: theatreSlug,} = theatre;
+
+    console.log("Content Seats: ", seats);
 
     return (
         <PageFlexWrapper>

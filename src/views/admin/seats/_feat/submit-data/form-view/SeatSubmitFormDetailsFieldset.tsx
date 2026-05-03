@@ -10,19 +10,11 @@ import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatForm
 import {cn} from "@/common/lib/utils.ts";
 import TheatreHookFormSelect from "@/views/admin/theatres/_feat/form-input/TheatreHookFormSelect.tsx";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
 
-/** Props for the SeatSubmitFormDetailsFieldset component. */
-type FieldsetProps = Pick<FormViewProps<SeatFormValues>, "disableFields"> & {
-    isPanel?: boolean;
-};
-
-/**
- * Renders the theatre and screen selection fields, ensuring the screen resets when theatre changes.
- * Requires wrapping in a SeatFormContext provider.
- */
+/** Renders the theatre and screen selection fields, ensuring the screen resets when the theatre changes. */
 export function SeatSubmitFormDetailsFieldset(
-    {disableFields, isPanel}: FieldsetProps
+    {className, disableFields, isNestedView}: FormFieldsetProps<SeatFormValues>
 ): ReactElement {
     const {control, watch, resetField} = useFormContext();
 
@@ -31,10 +23,10 @@ export function SeatSubmitFormDetailsFieldset(
 
     useEffect(() => {
         resetField("screen");
-    }, [theatre]);
+    }, [theatre, resetField]);
 
     return (
-        <fieldset className="space-y-4">
+        <fieldset className={cn("space-y-4", className)}>
             <div>
                 <PrimaryHeaderText>Details</PrimaryHeaderText>
                 <Separator/>
@@ -42,7 +34,7 @@ export function SeatSubmitFormDetailsFieldset(
 
             <div className={cn(
                 "grid grid-cols-1 gap-2",
-                !isPanel && "lg:grid-cols-2",
+                !isNestedView && "lg:grid-cols-2",
             )}>
                 {
                     !disableFields?.theatre &&

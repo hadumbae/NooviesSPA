@@ -9,8 +9,7 @@ import {FormConfigProps} from "@/common/features/submit-data";
 import {BaseFormContextProvider} from "@/common/features/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 import {useSeatSubmitMutation} from "@/domains/seats/_feat/crud-hooks";
-import {Seat} from "@/domains/seats/schema/model";
-import {SeatDetails} from "@/domains/seats/schema/model";
+import {Seat, SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the SeatSubmitForm component. */
 type FormProps = FormConfigProps<SeatFormValues, Seat, SeatDetails>;
@@ -21,7 +20,7 @@ type FormProps = FormConfigProps<SeatFormValues, Seat, SeatDetails>;
 export function SeatSubmitForm(
     {children, editEntity, presetValues, uniqueKey, ...formOptions}: FormProps
 ): ReactElement {
-    const formKey = `theatre-seat-submit-${uniqueKey ?? "form"}`;
+    const formKey = `theatre-seat-submit-${editEntity?._id ?? "create"}-${uniqueKey ?? "form"}`;
 
     const form = useSeatSubmitForm({seat: editEntity, presetValues});
     const mutation = useSeatSubmitMutation({form, ...formOptions});

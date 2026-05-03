@@ -3,89 +3,84 @@
  * and deletion workflows using shared context.
  */
 
-import {ReactElement} from "react";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {SeatDetailsPanelContext} from "@/domains/seats/context/seat-details-context/SeatDetailsPanelContext.ts";
+import {Dispatch, ReactElement, SetStateAction, useState} from "react";
 import {Sheet, SheetContent} from "@/common/components/ui/Sheet";
-import {
-    SeatDetailsPanelSeatOnlySection
-} from "@/views/admin/seats/_feat/context-action-panel/SeatDetailsPanelSeatOnlySection.tsx";
 import SeatDetailsContextPanelHeader
     from "@/views/admin/seats/_feat/context-action-panel/SeatDetailsContextPanelHeader.tsx";
-import SeatDetailsPanelRelatedSection
-    from "@/views/admin/seats/_feat/context-action-panel/SeatDetailsPanelRelatedSection.tsx";
-import SeatDetailsPanelOptionButtonsSection
-    from "@/views/admin/seats/_feat/context-action-panel/SeatDetailsPanelOptionButtonsSection.tsx";
+import {SeatContextPanelOptionButtonsSection} from "./SeatContextPanelOptionButtonsSection.tsx";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
-import SeatDeleteWarning from "@/domains/seats/components/features/delete-seats/SeatDeleteWarning.tsx";
+import {SeatDeleteWarning} from "@/domains/seats/components/features/delete-seats/SeatDeleteWarning.tsx";
+import {UIOpenStateProps} from "@/common/types";
+import {SeatDetails} from "@/domains/seats/schema/model";
+import {
+    SeatContextPanelDetailsSection
+} from "@/views/admin/seats/_feat/context-action-panel/SeatContextPanelDetailsSection.tsx";
+import {simplifySeatDetails} from "@/domains/seats/_feat/formatters";
+import {SeatSubmitForm} from "@/views/admin/seats/_feat/submit-data";
+import {SeatContextPanelFormView} from "@/views/admin/seats/_feat/context-action-panel/SeatContextPanelFormView.tsx";
+
+type PanelProps = UIOpenStateProps & {
+    seat: SeatDetails
+    setSeat: Dispatch<SetStateAction<SeatDetails | null>>;
+}
 
 /**
  * Displays and manages the lifecycle of seat information within a slide-over panel.
  * Toggles between read-only metadata sections and an active SeatSubmitForm for updates.
  */
-export function SeatDetailsContextPanel(): ReactElement {
-    const {
-        seat,
-        isPanelOpen,
-        setIsPanelOpen,
-        isEditing,
-        setIsEditing,
-        showDeleteWarning,
-        setShowDeleteWarning,
-    } = useRequiredContext({
-        context: SeatDetailsPanelContext,
-        message: "Must be used within provider for `SeatDetailsPanelContext`."
-    });
+export function SeatDetailsContextPanel(
+    {isOpen, setIsOpen, seat, setSeat}: PanelProps): ReactElement {
 
-    if (!seat) {
-        throw new Error("Seat is required but undefined. Please ensure seat exists before rendering.");
-    }
+    const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [showDeleteWarning, setShowDeleteWarning] = useState<boolean>(false);
 
-    const {layoutType} = seat;
-    const isSeat = layoutType === "SEAT";
-
-    // const disableFields: Partial<Record<keyof SeatFormValues, boolean>> = {theatre: true, screen: true};
-    //
-    // const handleUpdateSuccess = (updatedSeat: SeatDetails) => {
-    //     setIsEditing(false);
-    //
-    //     const simplifiedSeat = simplifySeatDetails(updatedSeat);
-    //     setSeat(simplifiedSeat);
-    // };
-
-    const handleDeleteSuccess = () => {
-        setIsPanelOpen(false);
+    const handleUpdateSuccess = (updatedSeat: SeatDetails) => {
         setIsEditing(false);
-        setShowDeleteWarning(false);
+        setSeat(updatedSeat);
     };
 
+    const closePanel = () => setIsOpen(false);
+
     return (
-        <Sheet open={isPanelOpen} onOpenChange={setIsPanelOpen}>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetContent className="flex flex-col">
                 <SeatDetailsContextPanelHeader/>
 
                 <ScrollArea className="flex-1 pt-5">
                     <div className="space-y-5">
-                        {!isEditing && (
-                            <>
-                                <SeatDetailsPanelRelatedSection/>
-                                {isSeat && <SeatDetailsPanelSeatOnlySection/>}
-                            </>
-                        )}
+                        {
+                            !isEditing && (
+                                <SeatContextPanelDetailsSection
+                                    seat={seat}
+                                    closePanel={closePanel}
+                                />
+                            )
+                        }
 
-                        {/*{isEditing && (*/}
-                        {/*    // Form*/}
-                        {/*)}*/}
+                        {isEditing && (
+                            <SeatSubmitForm
+                                editEntity={simplifySeatDetails(seat)}
+                                onSubmitSuccess={handleUpdateSuccess}
+                                successMessage="Updated."
+                            >
+                                <SeatContextPanelFormView/>
+                            </SeatSubmitForm>
+                        )}
 
                         {showDeleteWarning && (
                             <SeatDeleteWarning
                                 seatID={seat._id}
                                 className="border p-4 rounded-xl bg-destructive/5"
-                                onDeleteSuccess={handleDeleteSuccess}
+                                onSubmitSuccess={closePanel}
                             />
                         )}
 
-                        <SeatDetailsPanelOptionButtonsSection/>
+                        <SeatContextPanelOptionButtonsSection
+                            isEditing={isEditing}
+                            setIsEditing={setIsEditing}
+                            showDeleteWarning={showDeleteWarning}
+                            setShowDeleteWarning={setShowDeleteWarning}
+                        />
                     </div>
                 </ScrollArea>
             </SheetContent>

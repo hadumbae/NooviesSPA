@@ -37,6 +37,7 @@ export function useFetchTheatreScreenDetailsViewData(
     return useQuery({
         queryKey: TheatreScreenAdminViewDataQueryKeys.details(slugs),
         queryFn: fetchViewData,
-        ...useQueryOptionDefaults(options)
+        ...useQueryOptionDefaults(options),
+        structuralSharing: false,
     });
 }

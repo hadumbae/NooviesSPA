@@ -8,11 +8,12 @@ import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
-import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import {useSeatDeleteMutation} from "@/domains/seats/_feat/crud-hooks";
+import {ReactElement} from "react";
+import {MutationResponseConfig} from "@/common/features/submit-data";
 
 /** Props for the SeatDeleteWarning component. */
-type WarningProps = OnDeleteMutationParams & {
+type WarningProps = MutationResponseConfig & {
     icon?: LucideIcon;
     seatID: ObjectId;
     seatName?: string;
@@ -22,26 +23,20 @@ type WarningProps = OnDeleteMutationParams & {
 /**
  * Renders an inline warning message and a delete button that triggers the seat deletion mutation.
  */
-const SeatDeleteWarning = (props: WarningProps) => {
-    const {
-        icon: Icon = AlertTriangle,
-        seatName = "This Seat",
-        seatID,
-        className,
-        ...mutationParams
-    } = props;
-
+export function SeatDeleteWarning(
+    {icon: Icon = AlertTriangle, seatName = "This Seat", seatID, className, ...mutationParams}: WarningProps
+): ReactElement {
     const title = `Delete ${seatName}?`;
     const description =
         "This action will remove all related data such as seat maps and reservations. This action is irreversible.";
 
     const {mutate, isPending} = useSeatDeleteMutation(mutationParams);
-    const deleteIcon = isPending ? <Loader className="animate-spin" /> : <Trash />;
+    const deleteIcon = isPending ? <Loader className="animate-spin"/> : <Trash/>;
     const deleteSeat = () => mutate({_id: seatID});
 
     return (
         <div className={cn("flex flex-col items-center space-y-3", className)}>
-            <Icon className="text-red-500" />
+            <Icon className="text-red-500"/>
 
             <h2 className={cn(PrimaryHeaderText, "uppercase font-bold select-none")}>
                 {title}
@@ -56,6 +51,5 @@ const SeatDeleteWarning = (props: WarningProps) => {
             </IconButton>
         </div>
     );
-};
+}
 
-export default SeatDeleteWarning;
