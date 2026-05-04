@@ -7,15 +7,16 @@ import {Tabs, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import {
     TheatreScreenDetailsViewSeatsTab
 } from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsViewSeatsTab.tsx";
-import {TheatreScreenDetailsCreateSeatTab}
-    from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsCreateSeatTab.tsx";
-import {TheatreScreenDetailsShowingsTab}
-    from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsShowingsTab.tsx";
+import {
+    TheatreScreenDetailsCreateSeatTab
+} from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsCreateSeatTab.tsx";
+import {
+    TheatreScreenDetailsShowingsTab
+} from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsShowingsTab.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     TheatreScreenDetailsActiveTab
 } from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsActiveTabEnumSchema.ts";
-import {SeatPanelContextProvider} from "@/domains/seats/context/seat-details-context";
 import {SeatFormData} from "@/domains/seats/_feat/submit-data";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {
@@ -66,9 +67,7 @@ export function TheatreScreenDetailsPageTabs(
                 </TabsList>
             </div>
 
-            <SeatPanelContextProvider>
-                <TheatreScreenDetailsViewSeatsTab seats={seats}/>
-            </SeatPanelContextProvider>
+            <TheatreScreenDetailsViewSeatsTab seats={seats}/>
 
             <SeatSubmitForm presetValues={presetValues} onSubmitSuccess={onSeatCreation}>
                 <TheatreScreenDetailsCreateSeatTab

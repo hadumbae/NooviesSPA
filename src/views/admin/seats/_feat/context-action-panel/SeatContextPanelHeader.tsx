@@ -2,8 +2,7 @@
  * @fileoverview Header component for the seat-details panel.
  */
 
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {SeatPanelContext} from "@/domains/seats/context/seat-details-context";
+import {useSeatPanelStateContext} from "@/domains/seats/_feat/seat-details-context";
 import {SheetDescription, SheetHeader, SheetTitle} from "@/common/components/ui/Sheet";
 import {SeatLayoutTypeLabelMap, SeatTypeLabelMap} from "@/domains/seats/schema/fields";
 import buildString from "@/common/utility/buildString.ts";
@@ -11,10 +10,7 @@ import {ReactElement} from "react";
 
 /** Header component for the seat-details panel. */
 export function SeatContextPanelHeader(): ReactElement {
-    const {seat} = useRequiredContext({
-        context: SeatPanelContext,
-        message: "Must be used within provider for `SeatDetailsPanelContext`.",
-    });
+    const {seat} = useSeatPanelStateContext();
 
     if (!seat) throw new Error("Seat missing in component.");
 
