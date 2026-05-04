@@ -1,57 +1,39 @@
 /**
- * @file ScreenDetailsUIContextProvider.tsx
- * @summary
- * React context provider for managing UI state in the Screen Details page.
- *
- * @description
- * Centralizes UI state for screen detail management workflows:
- * - `isEditing`: whether the screen details page is in edit mode
- * - `showDeleteWarning`: whether the delete confirmation modal is visible
- *
- * Components wrapped by this provider can access the shared UI state
- * through {@link ScreenDetailsUIContext}.
+ * @fileoverview Provider component for the screen details UI state and setter contexts.
  */
 
-import { ReactNode, useState } from "react";
-import { ScreenDetailsUIContext, ScreenDetailsUIContextValues } from "@/domains/theatre-screens/contexts/screen-details/ScreenDetailsUIContext.ts";
+import {ReactElement, ReactNode, useState} from "react";
+import {ScreenDetailsUIStateContext, ScreenDetailsUIStateContextValues} from "./ScreenDetailsUIStateContext.ts";
+import {
+    ScreenDetailsUISetterContext,
+    ScreenDetailsUISetterContextValues
+} from "@/domains/theatre-screens/contexts/screen-details/ScreenDetailsUISetterContext.ts";
 
+/** Props for the ScreenDetailsUIContextProvider component. */
 type ProviderProps = {
-    /** React children to render inside the provider */
     children: ReactNode;
 };
 
-/**
- * Provides {@link ScreenDetailsUIContext} to child components.
- *
- * @param props - Contains React children.
- * @returns A context provider exposing UI state for the screen details page.
- *
- * @example
- * ```tsx
- * <ScreenDetailsUIContextProvider>
- *   <ScreenDetailsPanel />
- * </ScreenDetailsUIContextProvider>
- * ```
- */
-const ScreenDetailsUIContextProvider = ({ children }: ProviderProps) => {
-    // --- State ---
+/** Provides the screen details UI state and setter functions to child components. */
+export function ScreenDetailsUIContextProvider({children}: ProviderProps): ReactElement {
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [showDeleteWarning, setShowDeleteWarning] = useState<boolean>(false);
 
-    // --- Aggregated Context Value ---
-    const values: ScreenDetailsUIContextValues = {
+    const stateValues: ScreenDetailsUIStateContextValues = {
         isEditing,
-        setIsEditing,
         showDeleteWarning,
+    };
+
+    const setterValues: ScreenDetailsUISetterContextValues = {
+        setIsEditing,
         setShowDeleteWarning,
     };
 
-    // --- Render ---
     return (
-        <ScreenDetailsUIContext.Provider value={values}>
-            {children}
-        </ScreenDetailsUIContext.Provider>
+        <ScreenDetailsUIStateContext.Provider value={stateValues}>
+            <ScreenDetailsUISetterContext.Provider value={setterValues}>
+                {children}
+            </ScreenDetailsUISetterContext.Provider>
+        </ScreenDetailsUIStateContext.Provider>
     );
-};
-
-export default ScreenDetailsUIContextProvider;
+}

@@ -20,7 +20,6 @@ import {useSeatPanelSetterContext, useSeatPanelStateContext} from "@/domains/sea
 
 /**
  * Displays and manages the lifecycle of seat information within a slide-over panel.
- * Toggles between read-only metadata sections and an active SeatSubmitForm for updates.
  */
 export function SeatContextPanel(): ReactElement | null {
     const {isPanelOpen, seat} = useSeatPanelStateContext();

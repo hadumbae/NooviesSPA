@@ -2,23 +2,22 @@
  * @fileoverview Renders a structured grid of theatre seats with axis labels.
  */
 
-import { memo, ReactElement, useMemo } from "react";
-import {buildSeatLayoutMap} from "@/domains/seats/_feat/handle-seat-layout";
+import {memo, ReactElement, useMemo} from "react";
+import {buildSeatLayoutMap, generateSeatElementRenderKey} from "@/domains/seats/_feat/handle-seat-layout";
 import ScreenSeatLayoutElement from "@/domains/seats/components/features/screen-seats/ScreenSeatLayoutElement.tsx";
-import {generateSeatElementRenderKey} from "@/domains/seats/_feat/handle-seat-layout";
 
 import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the ScreenSeatLayout component. */
 type GridProps = {
-    seats: SeatDetails[];
+    seating: SeatDetails[];
 };
 
 /**
  * Displays a dynamic seating map organized by row and column coordinates.
  */
-const ScreenSeatLayout = ({ seats }: GridProps): ReactElement => {
-    const { sortedSeats, maxX } = buildSeatLayoutMap({ seats });
+const ScreenSeatLayout = ({seating}: GridProps): ReactElement => {
+    const {sortedSeats, maxX} = buildSeatLayoutMap({seating});
     const seatEntries = useMemo(() => Array.from(sortedSeats), [sortedSeats]);
 
     const gridStyle = useMemo(
@@ -34,7 +33,7 @@ const ScreenSeatLayout = ({ seats }: GridProps): ReactElement => {
         <div className="space-y-2">
             {seatEntries.map(([y, rowSeats]) => (
                 <div style={gridStyle} key={y}>
-                    <ScreenSeatLayoutElement element={y} />
+                    <ScreenSeatLayoutElement element={y}/>
 
                     {rowSeats.map((element, index) => (
                         <ScreenSeatLayoutElement
@@ -43,7 +42,7 @@ const ScreenSeatLayout = ({ seats }: GridProps): ReactElement => {
                         />
                     ))}
 
-                    <ScreenSeatLayoutElement element={y} />
+                    <ScreenSeatLayoutElement element={y}/>
                 </div>
             ))}
         </div>

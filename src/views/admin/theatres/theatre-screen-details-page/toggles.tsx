@@ -11,14 +11,14 @@ import {
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {Ellipsis} from "lucide-react";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {ScreenDetailsUIContext} from "@/domains/theatre-screens/contexts/screen-details/ScreenDetailsUIContext.ts";
 import {Dispatch, ReactElement, SetStateAction, useState} from "react";
+import {ScreenDetailsUISetterContext} from "@/domains/theatre-screens/contexts/screen-details";
 
 /**
  * Renders an action menu for screen management that updates UI state via ScreenDetailsUIContext.
  */
 export function TheatreScreenDetailsToggles(): ReactElement {
-    const {setIsEditing, setShowDeleteWarning} = useRequiredContext({context: ScreenDetailsUIContext});
+    const {setIsEditing, setShowDeleteWarning} = useRequiredContext({context: ScreenDetailsUISetterContext});
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const closeOnClick = (action: Dispatch<SetStateAction<boolean>>) => {

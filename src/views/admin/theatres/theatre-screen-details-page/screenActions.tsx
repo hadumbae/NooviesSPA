@@ -9,12 +9,15 @@ import {TheatreScreenDetails, TheatreScreenWithVirtuals} from "@/domains/theatre
 import {useLocation} from "react-router-dom";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {ScreenDetailsUIContext} from "@/domains/theatre-screens/contexts/screen-details/ScreenDetailsUIContext.ts";
 import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
 
 import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 import {simplifyScreenDetails} from "@/domains/theatre-screens/_feat/formatters";
 import {ScreenDeleteWarningDialog} from "@/views/admin/theatre-screens/_feat/model-options";
+import {
+    ScreenDetailsUISetterContext,
+    ScreenDetailsUIStateContext
+} from "@/domains/theatre-screens/contexts/screen-details";
 
 /**
  * Props for the TheatreScreenDetailsPageScreenActions component.
@@ -37,9 +40,8 @@ export function TheatreScreenDetailsPageScreenActions(
 
     const simplifiedScreen = simplifyScreenDetails(screen);
 
-    const {isEditing, setIsEditing, showDeleteWarning, setShowDeleteWarning} = useRequiredContext({
-        context: ScreenDetailsUIContext,
-    });
+    const {isEditing, showDeleteWarning} = useRequiredContext({context: ScreenDetailsUIStateContext});
+    const {setIsEditing, setShowDeleteWarning} = useRequiredContext({context: ScreenDetailsUISetterContext});
 
     const onUpdateSuccess = (updatedScreen: TheatreScreenDetails) => {
         const {theatre: {slug: theatreSlug}, slug: screenSlug} = updatedScreen;

@@ -21,7 +21,7 @@ export function useOrganisedSeatingForLayout<TSeat extends GridPositionedSeat>(
     {seating, includeLabels = true}: SeatProps<TSeat>
 ) {
     const {sortedSeats, maxX, maxY} = useMemo(
-        () => buildSeatLayoutMap({seats: seating, includeLabels}),
+        () => buildSeatLayoutMap({seating: seating, includeLabels}),
         [seating, includeLabels],
     );
 

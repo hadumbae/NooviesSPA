@@ -33,8 +33,6 @@ export function TheatreScreenDetailsPageContent(
     const {_id: screenID, name: screenName} = screen;
     const {_id: theatreID, name: theatreName, slug: theatreSlug,} = theatre;
 
-    console.log("Content Seats: ", seats);
-
     return (
         <PageFlexWrapper>
             <TheatreScreenDetailsHeader

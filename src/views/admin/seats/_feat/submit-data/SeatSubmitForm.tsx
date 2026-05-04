@@ -21,6 +21,7 @@ export function SeatSubmitForm(
     {children, editEntity, presetValues, uniqueKey, ...formOptions}: FormProps
 ): ReactElement {
     const formKey = `theatre-seat-submit-${editEntity?._id ?? "create"}-${uniqueKey ?? "form"}`;
+    console.log("formKey", formKey);
 
     const form = useSeatSubmitForm({seat: editEntity, presetValues});
     const mutation = useSeatSubmitMutation({form, ...formOptions});

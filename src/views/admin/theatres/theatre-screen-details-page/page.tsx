@@ -5,14 +5,13 @@
 import {PageLoader} from "@/views/common/_comp/page";
 import {TheatreScreenDetailsPageContent} from "@/views/admin/theatres/theatre-screen-details-page/content.tsx";
 import {ReactElement} from "react";
-import ScreenDetailsUIContextProvider
-    from "@/domains/theatre-screens/contexts/screen-details/ScreenDetailsUIContextProvider.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {
     TheatreScreenDetailsRouteParamSchema, TheatreScreenDetailsViewData,
     useFetchTheatreScreenDetailsViewData
 } from "@/domains/theatre-screens/_feat/admin-view-data";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {ScreenDetailsUIContextProvider} from "@/domains/theatre-screens/contexts/screen-details";
 
 /**
  * Orchestrates route parameter validation and data fetching for the screen details view.

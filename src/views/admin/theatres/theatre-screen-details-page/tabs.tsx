@@ -8,21 +8,14 @@ import {
     TheatreScreenDetailsViewSeatsTab
 } from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsViewSeatsTab.tsx";
 import {
-    TheatreScreenDetailsCreateSeatTab
-} from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsCreateSeatTab.tsx";
-import {
     TheatreScreenDetailsShowingsTab
 } from "@/views/admin/theatres/theatre-screen-details-page/tabs/TheatreScreenDetailsShowingsTab.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
-    TheatreScreenDetailsActiveTab
-} from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsActiveTabEnumSchema.ts";
-import {SeatFormData} from "@/domains/seats/_feat/submit-data";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {
+    TheatreScreenDetailsActiveTab,
     TheatreScreenDetailsSearchParamSchema
-} from "@/domains/theatre-screens/schema/search-params/TheatreScreenDetailsSearchParamSchema.ts";
-import {SeatSubmitForm} from "@/views/admin/seats/_feat/submit-data";
+} from "@/domains/theatre-screens/_feat/page-search-params";
+import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {SeatDetails} from "@/domains/seats/schema/model";
 
 /** Props for the TheatreScreenDetailsPageTabs component. */
@@ -42,15 +35,6 @@ export function TheatreScreenDetailsPageTabs(
     const {searchParams, setSearchParams} = useParsedSearchParams({schema: TheatreScreenDetailsSearchParamSchema});
     const {activeTab} = searchParams;
 
-    const presetValues: Partial<SeatFormData> = {
-        screen: screenID,
-        theatre: theatreID
-    };
-
-    const onSeatCreation = (seat: SeatDetails) => {
-        setReturnedSeating((prev: SeatDetails[]) => [...prev, seat]);
-    }
-
     return (
         <Tabs
             defaultValue={activeTab}
@@ -61,22 +45,22 @@ export function TheatreScreenDetailsPageTabs(
         >
             <div className="flex justify-center">
                 <TabsList>
-                    <TabsTrigger value="view-seats">Seats</TabsTrigger>
-                    <TabsTrigger value="create-seats">Create Seats</TabsTrigger>
+                    <TabsTrigger value="seating">Seats</TabsTrigger>
                     <TabsTrigger value="showings">Showings</TabsTrigger>
                 </TabsList>
             </div>
 
-            <TheatreScreenDetailsViewSeatsTab seats={seats}/>
+            <TheatreScreenDetailsViewSeatsTab
+                screenID={screenID}
+                theatreID={theatreID}
+                seating={seats}
+                returnedSeating={returnedSeating}
+                setReturnedSeating={setReturnedSeating}
+            />
 
-            <SeatSubmitForm presetValues={presetValues} onSubmitSuccess={onSeatCreation}>
-                <TheatreScreenDetailsCreateSeatTab
-                    returnedSeating={returnedSeating}
-                    setReturnedSeating={setReturnedSeating}
-                />
-            </SeatSubmitForm>
-
-            <TheatreScreenDetailsShowingsTab screenID={screenID}/>
+            <TheatreScreenDetailsShowingsTab
+                screenID={screenID}
+            />
         </Tabs>
     );
 }

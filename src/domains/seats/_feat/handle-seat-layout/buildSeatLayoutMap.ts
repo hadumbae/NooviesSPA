@@ -6,7 +6,7 @@ import {GridPositionedSeat} from "./GridPositionedSeat.ts";
 
 /** Parameters for organizing seats into a grid layout. */
 type SortParams<TSeat extends GridPositionedSeat> = {
-    seats: TSeat[];
+    seating: TSeat[];
     includeLabels?: boolean;
 };
 
@@ -21,9 +21,9 @@ type SortReturns<TSeat extends GridPositionedSeat> = {
  * Organizes seats into a normalized 2D grid by coordinate mapping and placeholder insertion.
  */
 export function buildSeatLayoutMap<TSeat extends GridPositionedSeat>(
-    {seats, includeLabels = true}: SortParams<TSeat>
+    {seating, includeLabels = true}: SortParams<TSeat>
 ): SortReturns<TSeat> {
-    if (!seats.length) {
+    if (!seating.length) {
         return {
             sortedSeats: new Map<number, (TSeat | number | null)[]>(),
             maxX: 0,
@@ -35,7 +35,7 @@ export function buildSeatLayoutMap<TSeat extends GridPositionedSeat>(
     const seatMapLookup: Record<string, TSeat> = {};
     const rows = new Map<number, (TSeat | number | null)[]>();
 
-    for (const seat of seats) {
+    for (const seat of seating) {
         const {x, y} = seat;
 
         if (x > maxCount.x) maxCount.x = x;
