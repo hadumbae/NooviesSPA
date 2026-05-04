@@ -16,7 +16,9 @@ import useFetchShowings from "@/domains/showings/hooks/queries/useFetchShowings.
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
 import ShowingMovieCard from "@/domains/showings/components/admin/card/showing-movie-card/ShowingMovieCard.tsx";
-import ShowingSummaryCardList from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCardList.tsx";
+import {
+    ShowingSummaryCardList
+} from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCardList.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";

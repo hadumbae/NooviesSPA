@@ -4,14 +4,19 @@
  */
 
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {List} from "lucide-react";
-import ShowingSummaryListQuery
-    from "@/domains/showings/components/features/showing-summary-list-query/ShowingSummaryListQuery.tsx";
 import {ReactElement} from "react";
+import {PageSectionHeader} from "@/views/common/_comp/page";
+import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing";
+import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {cn} from "@/common/lib/utils.ts";
+import {ShowingSummaryCard} from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCard.tsx";
+import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import useFetchShowings from "@/domains/showings/hooks/queries/useFetchShowings.ts";
 
 /** Props for the TheatreScreenDetailsShowingsTab component. */
 type TabProps = {
@@ -26,21 +31,41 @@ export function TheatreScreenDetailsShowingsTab(
 ): ReactElement {
     const showingIndexURL = `/admin/showings?screen=${screenID}`;
 
+    const query = useFetchShowings({
+        queries: {screen: screenID, sortByStartTime: 1},
+        config: {virtuals: true, populate: true, limit: 10},
+    });
+
     return (
         <TabsContent value="showings" className="space-y-4">
             <div className="flex justify-between items-center">
-                <PrimaryHeaderText>Recent Showings</PrimaryHeaderText>
+                <PageSectionHeader>Recent Showings</PageSectionHeader>
 
                 <LoggedLink to={showingIndexURL}>
                     <IconButton icon={List}/>
                 </LoggedLink>
             </div>
 
-            <ShowingSummaryListQuery
-                sortByStartTime={1}
-                screen={screenID}
-                limit={10}
-            />
+            <ValidatedDataLoader query={query} schema={generateArraySchema(ShowingDetailsSchema)}>
+                {(showings: ShowingDetails[]) => {
+                    if (showings.length === 0) {
+                        return (
+                            <EmptyArrayContainer
+                                className="h-28"
+                                text="There Are No Showings"
+                            />
+                        );
+                    }
+
+                    return (
+                        <div className={cn("grid grid-cols-1 gap-2")}>
+                            {showings.map((showing) => (
+                                <ShowingSummaryCard key={showing._id} showing={showing}/>
+                            ))}
+                        </div>
+                    );
+                }}
+            </ValidatedDataLoader>
         </TabsContent>
     );
 }

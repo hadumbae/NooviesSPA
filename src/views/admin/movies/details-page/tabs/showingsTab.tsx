@@ -9,8 +9,9 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {List} from "lucide-react";
-import ShowingSummaryListQuery
-    from "@/domains/showings/components/features/showing-summary-list-query/ShowingSummaryListQuery.tsx";
+import {
+    ShowingSummaryListQuery
+} from "@/domains/showings/components/features/showing-summary-list-query/ShowingSummaryListQuery.tsx";
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 

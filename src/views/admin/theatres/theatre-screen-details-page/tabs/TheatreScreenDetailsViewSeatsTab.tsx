@@ -52,7 +52,7 @@ export function TheatreScreenDetailsViewSeatsTab(
     }
 
     return (
-        <TabsContent value="seating" className="space-y-4" forceMount={true}>
+        <TabsContent value="seating" className="space-y-4">
             <SeatPanelContextProvider>
                 <section className="space-y-4">
                     <PageSectionHeader>Seat Layout</PageSectionHeader>
@@ -60,7 +60,11 @@ export function TheatreScreenDetailsViewSeatsTab(
                     <ScrollArea>
                         {
                             seating.length > 0 ? (
-                                <ScreenSeatLayout seating={seating}/>
+                                <Card>
+                                    <CardContent className="p-4">
+                                        <ScreenSeatLayout seating={seating}/>
+                                    </CardContent>
+                                </Card>
                             ) : (
                                 <EmptyArrayContainer
                                     className="rounded-container-border h-56"

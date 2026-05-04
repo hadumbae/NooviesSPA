@@ -1,23 +1,21 @@
+/**
+ * @fileoverview Renders a vertical list of showing summary cards.
+ */
+
 import { cn } from "@/common/lib/utils.ts";
 import { SecondaryTextBaseCSS } from "@/common/constants/css/TextCSS.ts";
 import {ShowingSummaryCard} from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCard.tsx";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ReactElement} from "react";
 
+/** Props for the ShowingSummaryCardList component. */
 type ListProps = {
-    /** List of fully populated showings to render */
     showings: ShowingDetails[];
-    /** Optional wrapper class overrides */
     className?: string;
 };
 
-/**
- * Renders a vertical list of {@link ShowingSummaryCard} components.
- *
- * @remarks
- * - Displays a centered empty-state message when no showings are available.
- * - Optimized for admin overview and management pages.
- */
-const ShowingSummaryCardList = ({ showings, className }: ListProps) => {
+/** Renders a vertical list of showing summary cards. */
+export function ShowingSummaryCardList({ showings, className }: ListProps): ReactElement {
     if (showings.length === 0) {
         return (
             <div className={cn("flex justify-center items-center h-28", className)}>
@@ -35,6 +33,4 @@ const ShowingSummaryCardList = ({ showings, className }: ListProps) => {
             ))}
         </div>
     );
-};
-
-export default ShowingSummaryCardList;
+}

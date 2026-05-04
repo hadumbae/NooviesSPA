@@ -51,8 +51,8 @@ export function ShowingSummaryCard({showing}: CardProps): ReactElement {
     } = showing;
 
     const {runtime} = movie;
-    const {_id: theatreID, name: theatreName, slug: theatreSlug} = theatre;
-    const {_id: screenID, name: screenName, screenType} = screen;
+    const {name: theatreName, slug: theatreSlug} = theatre;
+    const {name: screenName, screenType, slug: screenSlug} = screen;
 
     const formattedStatus = convertToTitleCase(status);
     const formattedRuntime = formatMovieRuntime(runtime);
@@ -108,7 +108,7 @@ export function ShowingSummaryCard({showing}: CardProps): ReactElement {
                     </LoggedHoverLink>
 
                     <LoggedHoverLink
-                        to={`/admin/theatres/get/${theatreID}/screen/${screenID}`}
+                        to={`/admin/theatres/get/${theatreSlug}/screen/${screenSlug}`}
                         className="text-xs"
                     >
                         <TvMinimal/> {screenName} ({screenType})
