@@ -14,6 +14,7 @@ export const TheatreScreenCRUDQueryKeys = buildQueryKey(
         _id: ["_id"],
         slug: ["slug"],
         find: ["list", "find"],
+        list: ["list"],
         paginated: ["list", "paginated"],
         query: ["list", "query"],
         queryPaginated: ["list", "query", "paginated"],

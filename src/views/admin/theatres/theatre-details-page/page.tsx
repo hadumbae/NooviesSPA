@@ -21,7 +21,6 @@ const SHOWINGS_LIMIT = 10;
 
 /**
  * Entry point for the Theatre Details view that handles route parameter validation and data fetching.
- * Requires a slug route parameter and provides TheatreDetailsUIContextProvider to its children.
  */
 export function TheatreDetailsPage(): ReactElement {
     const routeParams = useFetchByIdentifierRouteParams({
@@ -46,11 +45,9 @@ export function TheatreDetailsPage(): ReactElement {
         <QueryErrorBoundary statusTextOverride={TheatreHttpStatusOverrideText}>
             <TheatreDetailsUIContextProvider>
                 <QueryDataLoader query={query}>
-                    {({theatre, screens, showings}: TheatreDetailsViewData) => (
+                    {(data: TheatreDetailsViewData) => (
                         <TheatreDetailsPageContent
-                            theatre={theatre}
-                            screens={screens}
-                            showings={showings}
+                            pageData={data}
                             screenPage={page}
                             screenPerPage={SCREENS_PER_PAGE}
                             setScreenPage={setPage}

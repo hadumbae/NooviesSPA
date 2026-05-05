@@ -5,9 +5,9 @@
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {buildURL} from "@/common/features/fetch-api";
 
 /**
  * Parameters required to delete a specific document.
@@ -23,7 +23,7 @@ export function handleDelete(baseURL: string) {
     return async <TReturns = unknown>(
         {_id}: DeleteDocumentConfig
     ): Promise<RequestReturns<TReturns>> => {
-        const url = buildQueryURL({
+        const url = buildURL({
             baseURL,
             path: `/item/${_id}`,
         });

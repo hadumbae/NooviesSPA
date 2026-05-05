@@ -21,7 +21,6 @@ export function ScreenDeleteWarningDialog(
     {children, screenID, screenName, isOpen, setIsOpen, ...mutationParams}: DialogProps
 ): ReactElement {
     const dialogTitle = `Proceed to delete ${screenName ?? "screen"}?`;
-
     const {mutate} = useScreenDeleteMutation(mutationParams);
 
     const deleteScreen = () => {

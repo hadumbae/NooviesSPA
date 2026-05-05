@@ -27,38 +27,45 @@ export function TheatreDetailsCard({theatre}: CardProps): ReactElement {
 
     return (
         <Card>
-            <CardContent className="p-4 flex flex-col gap-7">
-                <section>
-                    <h1 className="font-extrabold uppercase">General Details</h1>
-                    <Separator/>
-                </section>
+            <CardContent className="p-4 grid grid-cols-1 lg:grid-cols-2 gap-7">
+                <section className="space-y-2">
+                    <div>
 
-                <section className="space-y-4">
-                    <DetailsCardSpan label="Name" text={name}/>
+                        <h1 className="font-extrabold uppercase">General Details</h1>
+                        <Separator/>
+                    </div>
 
-                    <div className={cn("grid grid-cols-2 gap-4", "2xl:grid-cols-4")}>
-                        <DetailsCardSpan label="Seats" text={`${seatCount} seats`}/>
-                        <DetailsCardSpan label="Seat Capacity" text={`${seatCapacity} seats`}/>
-                        <DetailsCardSpan label="Screens" text={`${screenCount} screens`}/>
-                        <DetailsCardSpan label="Upcoming Showings" text={`${futureShowingCount} showings`}/>
+                    <div className="space-y-4">
+                        <DetailsCardSpan label="Name" text={name}/>
+
+                        <div className={cn("grid grid-cols-2 gap-4", "2xl:grid-cols-4")}>
+                            <DetailsCardSpan label="Seats" text={`${seatCount} seats`}/>
+                            <DetailsCardSpan label="Seat Capacity" text={`${seatCapacity} seats`}/>
+                            <DetailsCardSpan label="Screens" text={`${screenCount} screens`}/>
+                            <DetailsCardSpan label="Upcoming Showings" text={`${futureShowingCount} showings`}/>
+                        </div>
                     </div>
                 </section>
 
-                <section>
-                    <h1 className="font-extrabold uppercase">Location</h1>
-                    <Separator/>
-                </section>
 
-                <section className="space-y-4">
-                    <DetailsCardSpan label="Address" text={address}/>
+                <section className="space-y-2">
+                    <div>
+                        <h1 className="font-extrabold uppercase">Location</h1>
+                        <Separator/>
+                    </div>
 
-                    <div className={cn("grid grid-cols-2 gap-4", "2xl:grid-cols-4")}>
-                        <DetailsCardSpan label="Timezone" text={timezone}/>
-                        <DetailsCardSpan label="Postal Code" text={postalCode ?? "-"}/>
-                        <DetailsCardSpan label="Longitude" text={coordinates?.coordinates[0] ?? "-"}/>
-                        <DetailsCardSpan label="Latitude" text={coordinates?.coordinates[1] ?? "-"}/>
+                    <div className="space-y-4">
+                        <DetailsCardSpan label="Address" text={address}/>
+
+                        <div className={cn("grid grid-cols-2 gap-4", "2xl:grid-cols-4")}>
+                            <DetailsCardSpan label="Timezone" text={timezone}/>
+                            <DetailsCardSpan label="Postal Code" text={postalCode ?? "-"}/>
+                            <DetailsCardSpan label="Longitude" text={coordinates?.coordinates[0] ?? "-"}/>
+                            <DetailsCardSpan label="Latitude" text={coordinates?.coordinates[1] ?? "-"}/>
+                        </div>
                     </div>
                 </section>
+
             </CardContent>
         </Card>
     );

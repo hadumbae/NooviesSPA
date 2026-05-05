@@ -84,6 +84,7 @@ export function TheatreScreenDetailsPageScreenActions(
                 isOpen={showDeleteWarning}
                 setIsOpen={setShowDeleteWarning}
                 onSubmitSuccess={onDeleteSuccess}
+                successMessage="Theatre Screen Deleted."
             />
         </div>
     );

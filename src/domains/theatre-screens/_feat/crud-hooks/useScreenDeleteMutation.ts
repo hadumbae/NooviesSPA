@@ -12,6 +12,7 @@ import {MutationResponseConfig} from "@/common/features/submit-data";
 import {destroy} from "@/domains/theatre-screens/_feat/crud";
 import {TheatreScreenCRUDQueryKeys} from "@/domains/theatre-screens/_feat/crud-hooks/queryKeys.ts";
 import {TheatreScreenCRUDMutationKeys} from "@/domains/theatre-screens/_feat/crud-hooks/mutationKeys.ts";
+import {TheatreAdminViewDataQueryKeys} from "@/domains/theatres/_feat/admin-view-data";
 
 /**
  * Custom hook to handle the deletion of a single Theatre Screen entity.
@@ -34,28 +35,22 @@ export function useScreenDeleteMutation(
      * Post-deletion success handler for cache cleanup and notification.
      */
     const onSuccess = async () => {
-        // Broadly invalidate screen-related lists to ensure data consistency
         invalidateQueries(
-            [
-                TheatreScreenCRUDQueryKeys.find({}),
-                TheatreScreenCRUDQueryKeys.paginated({}),
-                TheatreScreenCRUDQueryKeys.query({}),
-                TheatreScreenCRUDQueryKeys.queryPaginated({}),
-            ],
+            [TheatreScreenCRUDQueryKeys.list(), TheatreAdminViewDataQueryKeys.details()],
             {exact: false},
         );
 
-        toast.success(successMessage ?? "Screen deleted.");
+        successMessage && toast.success(successMessage);
         onSubmitSuccess?.();
     };
 
     /**
-     * Standardized error handler for mutation failures.
+     * Standardised error handler for mutation failures.
      */
     const onError = (error: unknown) => {
-        const displayMessage = errorMessage ?? "Something went wrong. Please try again.";
-        handleMutationResponseError({error, displayMessage});
+        handleMutationResponseError({error, displayMessage: errorMessage});
         onSubmitError?.(error);
+        console.log(error);
     };
 
     return useMutation({

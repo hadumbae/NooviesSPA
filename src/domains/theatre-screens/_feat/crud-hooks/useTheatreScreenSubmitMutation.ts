@@ -15,6 +15,7 @@ import {create, update} from "@/domains/theatre-screens/_feat/crud";
 import {UseFormReturn} from "react-hook-form";
 import {TheatreScreenCRUDMutationKeys} from "@/domains/theatre-screens/_feat/crud-hooks/mutationKeys.ts";
 import {TheatreScreenCRUDQueryKeys} from "@/domains/theatre-screens/_feat/crud-hooks/queryKeys.ts";
+import {TheatreAdminViewDataQueryKeys} from "@/domains/theatres/_feat/admin-view-data";
 
 /**
  * Configuration parameters for the useTheatreScreenSubmitMutation hook.
@@ -58,12 +59,12 @@ export function useTheatreScreenSubmitMutation(
      * Clears the cache and notifies the user on successful persistence.
      */
     const onSuccess = (screen: TheatreScreenDetails) => {
-        invalidateQueries([TheatreScreenCRUDQueryKeys.all], {exact: false});
+        invalidateQueries(
+            [TheatreScreenCRUDQueryKeys.all, TheatreAdminViewDataQueryKeys.details()],
+            {exact: false},
+        );
 
-        if (successMessage) {
-            toast.success(successMessage);
-        }
-
+        successMessage && toast.success(successMessage);
         onSubmitSuccess?.(screen);
     };
 

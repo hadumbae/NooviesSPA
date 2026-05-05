@@ -5,26 +5,20 @@
 import {ReactElement} from 'react';
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {TheatreDetailsHeader} from "@/views/admin/theatres/theatre-details-page/header.tsx";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {TheatreDetailsUIContext} from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContext.ts";
-import {TheatreDetailsPageTabs} from "@/views/admin/theatres/theatre-details-page/tabs/TheatreDetailsPageTabs.tsx";
 import {TheatreDetailsCard} from "@/views/admin/theatres/_comp/display-cards/TheatreDetailsCard.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
-import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {PaginatedItems} from "@/common/types";
-import {TheatreDeleteWarningDialog} from "@/views/admin/theatres/_feat/model-options";
-import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
-import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
-import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
-import {TheatreSubmitForm, TheatreSubmitFormPanel} from "@/views/admin/theatres/_feat/submit-data";
+import {TheatreDetailsPageActions} from "./actions.tsx";
+import {
+    TheatreDetailsPageScreenSection
+} from "@/views/admin/theatres/theatre-details-page/sections/TheatreDetailsPageScreenSection.tsx";
+import {
+    TheatreDetailsPageShowingSection
+} from "@/views/admin/theatres/theatre-details-page/sections/TheatreDetailsPageShowingSection.tsx";
+import {TheatreDetailsViewData} from "@/domains/theatres/_feat/admin-view-data";
 
 /** Props for the TheatreDetailsPageContent component. */
 type TheatreDetailsPageContentProps = {
-    theatre: TheatreDetails;
-    screens: PaginatedItems<TheatreScreenWithVirtuals>;
-    showings: ShowingDetails[];
+    pageData: TheatreDetailsViewData
     screenPage: number;
     screenPerPage: number;
     setScreenPage: (page: number) => void;
@@ -34,65 +28,38 @@ type TheatreDetailsPageContentProps = {
  * Renders the layout for theatre management, including details cards and related data tabs.
  */
 export function TheatreDetailsPageContent(
-    {theatre, ...tabProps}: TheatreDetailsPageContentProps
+    {pageData, screenPage, screenPerPage, setScreenPage}: TheatreDetailsPageContentProps
 ): ReactElement {
-    const navigate = useLoggedNavigate();
-    const updateSlugURL = useNavigateToTheatre();
-
-    const {isEditing, setIsEditing, isDeleting, setIsDeleting} = useRequiredContext({
-        context: TheatreDetailsUIContext,
-        message: "Must be used within a provider for `TheatreDetailsUIContext`."
-    });
-
-    const replaceOnUpdate = (updatedTheatre: Theatre) => {
-        updateSlugURL({
-            slug: updatedTheatre.slug,
-            options: {replace: true},
-        });
-
-        setIsEditing(false);
-    }
-
-    const navigateOnDelete = () =>
-        navigate({
-            level: "log",
-            to: "/admin/theatres",
-            component: TheatreDetailsPageContent.name,
-            message: "Navigating after deleting theatre.",
-        });
+    const {theatre, screens, showings} = pageData;
+    const {_id: theatreID, slug: theatreSlug, name: theatreName} = theatre;
 
     return (
         <PageFlexWrapper>
-            <TheatreDetailsHeader theatreName={theatre.name}/>
+            <TheatreDetailsHeader theatreName={theatreName}/>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
-                <section>
-                    <SROnly text="Theatre Details Card"/>
-                    <TheatreDetailsCard theatre={theatre}/>
-                </section>
+            <section>
+                <SROnly text="Theatre Details Card"/>
+                <TheatreDetailsCard theatre={theatre}/>
+            </section>
 
-                <section className="h-full">
-                    <SROnly text="Theatre Screens And Movie Showings"/>
-                    <TheatreDetailsPageTabs
-                        theatreID={theatre._id}
-                        theatreSlug={theatre.slug}
-                        {...tabProps}
-                    />
-                </section>
-            </div>
+            <TheatreDetailsPageScreenSection
+                theatreID={theatreID}
+                theatreSlug={theatreSlug}
+                screens={screens.items}
+                totalScreens={screens.totalItems}
+                page={screenPage}
+                perPage={screenPerPage}
+                setPage={setScreenPage}
+            />
 
-            <div className="hidden">
-                <TheatreSubmitForm editEntity={theatre} onSubmitSuccess={replaceOnUpdate} successMessage="Updated.">
-                    <TheatreSubmitFormPanel isEditing={true} isOpen={isEditing} setIsOpen={setIsEditing}/>
-                </TheatreSubmitForm>
+            <TheatreDetailsPageShowingSection
+                theatreSlug={theatreSlug}
+                showings={showings}
+            />
 
-                <TheatreDeleteWarningDialog
-                    theatreID={theatre._id}
-                    onDeleteSuccess={navigateOnDelete}
-                    presetOpen={isDeleting}
-                    setPresetOpen={setIsDeleting}
-                />
-            </div>
+            <TheatreDetailsPageActions
+                theatre={theatre}
+            />
         </PageFlexWrapper>
     );
 }
