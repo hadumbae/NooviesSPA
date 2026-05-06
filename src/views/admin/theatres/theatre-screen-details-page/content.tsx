@@ -15,6 +15,7 @@ import {TheatreScreenDetailsPageTabs} from "@/views/admin/theatres/theatre-scree
 
 import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 import {SeatDetails} from "@/domains/seats/schema/model";
+import {useSetAdminPageTitle} from "@/common/features/handle-pages";
 
 /** Props for the TheatreScreenDetailsPageContent component. */
 type ContentProps = {
@@ -29,9 +30,10 @@ type ContentProps = {
 export function TheatreScreenDetailsPageContent(
     {theatre, screen, seats}: ContentProps
 ): ReactElement {
-
     const {_id: screenID, name: screenName} = screen;
     const {_id: theatreID, name: theatreName, slug: theatreSlug,} = theatre;
+
+    useSetAdminPageTitle({presetTitle: `Screen | ${screenName}`})
 
     return (
         <PageFlexWrapper>

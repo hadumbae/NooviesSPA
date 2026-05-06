@@ -22,7 +22,7 @@ export function TheatreDetailsPageShowingSection(
     {theatreSlug, showings, className}: SectionProps
 ): ReactElement {
     return (
-        <section>
+        <section className='space-y-4'>
             <TheatreDetailsPageShowingsSectionHeader theatreSlug={theatreSlug}/>
 
             {

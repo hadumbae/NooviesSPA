@@ -15,6 +15,7 @@ import {
     TheatreDetailsPageShowingSection
 } from "@/views/admin/theatres/theatre-details-page/sections/TheatreDetailsPageShowingSection.tsx";
 import {TheatreDetailsViewData} from "@/domains/theatres/_feat/admin-view-data";
+import {useSetAdminPageTitle} from "@/common/features/handle-pages";
 
 /** Props for the TheatreDetailsPageContent component. */
 type TheatreDetailsPageContentProps = {
@@ -32,6 +33,8 @@ export function TheatreDetailsPageContent(
 ): ReactElement {
     const {theatre, screens, showings} = pageData;
     const {_id: theatreID, slug: theatreSlug, name: theatreName} = theatre;
+
+    useSetAdminPageTitle({presetTitle: `Theatre | ${theatreName}`})
 
     return (
         <PageFlexWrapper>

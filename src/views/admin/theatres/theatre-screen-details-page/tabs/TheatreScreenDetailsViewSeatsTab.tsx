@@ -82,13 +82,12 @@ export function TheatreScreenDetailsViewSeatsTab(
             <section className="space-y-4">
                 <PageSectionHeader>Create Seats</PageSectionHeader>
                 <Card>
-                    <CardContent className="p-4 space-y-4">
-                        <SeatSubmitForm presetValues={presetValues} onSubmitSuccess={onSeatCreation}>
+                    <SeatSubmitForm presetValues={presetValues} onSubmitSuccess={onSeatCreation}>
+                        <CardContent className="p-4 space-y-4">
                             <SeatSubmitFormView disableFields={disableFields}/>
                             <SeatSubmitFormButtons/>
-                        </SeatSubmitForm>
-
-                    </CardContent>
+                        </CardContent>
+                    </SeatSubmitForm>
                 </Card>
             </section>
 

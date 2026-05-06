@@ -40,7 +40,7 @@ export function TheatreDetailsPageScreenSection(
     const onScreenCreate = () => setIsOpen(false);
 
     return (
-        <section>
+        <section className='space-y-4'>
             <SROnly text="Theatre Screens"/>
 
             <div className="flex justify-between items-center">

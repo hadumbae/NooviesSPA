@@ -16,6 +16,7 @@ import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.ts
 import {ReactElement} from "react";
 
 import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {useSetAdminPageTitle} from "@/common/features/handle-pages";
 
 /** Props for the TheatreIndexPageContent component. */
 type ContentProps = {
@@ -32,6 +33,8 @@ type ContentProps = {
 export function TheatreIndexPageContent(
     {theatres, page, perPage, setPage, totalItems}: ContentProps
 ): ReactElement {
+    useSetAdminPageTitle({presetTitle: "Theatre Index"})
+
     const {searchParams} = useParsedSearchParams({schema: TheatreQueryOptionSchema});
 
     return (
