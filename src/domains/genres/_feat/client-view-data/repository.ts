@@ -4,12 +4,12 @@
  * aggregated content for specific UI layouts.
  */
 
-import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {GenreClientViewDataBaseURL} from "@/domains/genres/_feat/client-view-data/baseURL.ts";
 import {FetchGenreWithMoviesConfig} from "@/domains/genres/_feat/client-view-data/repository.types.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {BrowseGenreWithMoviesViewData} from "@/domains/genres/_feat/client-view-data/schemas.ts";
+import {buildURL} from "@/common/features/fetch-api";
 
 /**
  * Fetches a specific genre's metadata along with a paginated list of associated movies.
@@ -17,9 +17,9 @@ import {BrowseGenreWithMoviesViewData} from "@/domains/genres/_feat/client-view-
 export function getFetchGenreWithMovies(
     {slug, moviePagination}: FetchGenreWithMoviesConfig
 ): Promise<RequestReturns<BrowseGenreWithMoviesViewData>> {
-    const url = buildQueryURL({
+    const url = buildURL({
         baseURL: GenreClientViewDataBaseURL,
-        path: `item/${slug}/with-movies`,
+        path: `/item/${slug}/with-movies`,
         queries: moviePagination,
     });
 

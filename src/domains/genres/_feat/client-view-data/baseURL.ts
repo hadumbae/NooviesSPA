@@ -7,4 +7,4 @@
 /**
  * The base URL for fetching genre-related view data specifically for the client application.
  */
-export const GenreClientViewDataBaseURL = `${import.meta.env.VITE_API_URL}/api/v1/views/${import.meta.env.VITE_DEV_CLIENT_NAME}/client/genres`;
+export const GenreClientViewDataBaseURL = `/api/v1/views/${import.meta.env.VITE_DEV_CLIENT_NAME}/client/genres`;
