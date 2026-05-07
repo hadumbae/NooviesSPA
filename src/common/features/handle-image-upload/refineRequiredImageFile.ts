@@ -3,7 +3,7 @@
  */
 
 import {RefinementCtx, z} from "zod";
-import ACCEPTED_IMAGE_TYPES from "src/common/constants/AcceptedImageTypeConstant.ts";
+import ACCEPTED_IMAGE_TYPES from "@/common/constants/AcceptedImageTypeConstant.ts";
 
 /** Props configuration for the refineRequireImageFile function. */
 type RefinementConfig = {
