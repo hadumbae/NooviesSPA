@@ -1,47 +1,47 @@
-import { FC, PropsWithChildren, useState } from 'react';
-import { GenreDetailsUIContext, GenreDetailsUIStates } from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContext.ts";
+/**
+ * @fileoverview Provider for the Genre Details UI state context.
+ */
+
+import {ReactElement, ReactNode, useState} from 'react';
+import {GenreDetailsUIStateContext, GenreDetailsUIStateContextValues} from "./GenreDetailsUIStateContext.ts";
+import {
+    GenreDetailsUISetterContext,
+    GenreDetailsUISetterContextValues
+} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUISetterContext.ts";
+
+/** Props for the GenreDetailsUIContextProvider component. */
+type ProviderProps = {
+    children?: ReactNode;
+}
 
 /**
- * Provides UI state context for the Genre Details section.
- *
- * @remarks
- * This provider wraps child components and supplies shared state
- * for edit and delete modes within a genre details view.
- *
- * It initializes the context defined in {@link GenreDetailsUIContext}
- * and exposes two boolean states — `isEditing` and `isDeleting` —
- * along with their corresponding setter functions.
- *
- * Components within this provider's tree can consume these values
- * using `useContext(GenreDetailsUIContext)`.
- *
- * @example
- * ```tsx
- * <GenreDetailsUIContextProvider>
- *   <GenreDetailsPanel />
- * </GenreDetailsUIContextProvider>
- * ```
+ * Provides shared UI state for editing, deleting, and image management within the genre details view.
  */
-const GenreDetailsUIContextProvider: FC<PropsWithChildren> = ({ children }) => {
-    /** Tracks whether the genre is currently being edited. */
+export function GenreDetailsUIContextProvider({children}: ProviderProps): ReactElement {
     const [isEditing, setIsEditing] = useState<boolean>(false);
-
-    /** Tracks whether the genre delete confirmation UI is active. */
     const [isDeleting, setIsDeleting] = useState<boolean>(false);
+    const [isUpdatingImage, setIsUpdatingImage] = useState<boolean>(false);
+    const [isRemovingImage, setIsRemovingImage] = useState<boolean>(false);
 
-    /** Aggregated context state and update handlers. */
-    const context: GenreDetailsUIStates = {
+    const stateValues: GenreDetailsUIStateContextValues = {
         isEditing,
-        setIsEditing,
         isDeleting,
+        isUpdatingImage,
+        isRemovingImage,
+    };
+
+    const setterValues: GenreDetailsUISetterContextValues = {
+        setIsEditing,
         setIsDeleting,
+        setIsUpdatingImage,
+        setIsRemovingImage,
     };
 
     return (
-        <GenreDetailsUIContext.Provider value={context}>
-            {children}
-        </GenreDetailsUIContext.Provider>
+        <GenreDetailsUIStateContext.Provider value={stateValues}>
+            <GenreDetailsUISetterContext.Provider value={setterValues}>
+                {children}
+            </GenreDetailsUISetterContext.Provider>
+        </GenreDetailsUIStateContext.Provider>
     );
-};
-
-export default GenreDetailsUIContextProvider;
+}

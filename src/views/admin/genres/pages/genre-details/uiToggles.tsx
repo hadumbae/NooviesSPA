@@ -11,7 +11,7 @@ import {
     DropdownMenuTrigger
 } from "@/common/components/ui/dropdown-menu.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {GenreDetailsUIContext} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContext.ts";
+import {GenreDetailsUISetterContext,} from "@/domains/genres/context/genre-details-ui-context";
 
 /** Props for the {@link GenreDetailsUIToggles} component. */
 type ToggleProps = {
@@ -20,11 +20,10 @@ type ToggleProps = {
 
 /**
  * Renders a dropdown menu containing management actions for a specific genre.
- * Interacts with GenreDetailsUIContext to signal when the user intends to edit or delete.
  */
 export function GenreDetailsUIToggles({children}: ToggleProps): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const {setIsEditing, setIsDeleting} = useRequiredContext({context: GenreDetailsUIContext});
+    const {setIsEditing, setIsDeleting} = useRequiredContext({context: GenreDetailsUISetterContext});
 
     const closeOnAction = (action: Dispatch<SetStateAction<boolean>>) => {
         action(true);
