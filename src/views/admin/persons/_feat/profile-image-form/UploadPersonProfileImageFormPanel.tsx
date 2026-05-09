@@ -12,7 +12,7 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui/Sheet";
-import HookFormFileInput from "@/common/components/forms/HookFormFileInput.tsx";
+import {HookFormFileInput} from "@/common/components/forms/HookFormFileInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {useFormContext} from "react-hook-form";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";

@@ -6,7 +6,7 @@ import {useFormContext} from "react-hook-form";
 import {useBaseFormContext} from "@/common/features/generic-form-context";
 import ACCEPTED_IMAGE_TYPES from "@/common/constants/AcceptedImageTypeConstant.ts";
 import {cn} from "@/common/lib/utils.ts";
-import HookFormFileInput from "@/common/components/forms/HookFormFileInput.tsx";
+import {HookFormFileInput} from "@/common/components/forms/HookFormFileInput.tsx";
 
 /** Props for the GenreImageUploadFormView component. */
 type ViewProps = {

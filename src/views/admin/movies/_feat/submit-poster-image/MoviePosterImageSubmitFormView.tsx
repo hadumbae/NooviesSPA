@@ -4,7 +4,7 @@ import { SubmitHandler, UseFormReturn } from "react-hook-form";
 import { MoviePosterImageForm, MoviePosterImageFormValues } from "@/domains/movies/schema/form/MoviePosterImage.types.ts";
 import { UseMutationResult } from "@tanstack/react-query";
 import { cn } from "@/common/lib/utils.ts";
-import HookFormFileInput from "@/common/components/forms/HookFormFileInput.tsx";
+import {HookFormFileInput} from "@/common/components/forms/HookFormFileInput.tsx";
 import { Button } from "@/common/components/ui/button.tsx";
 import { ImageUp, Loader } from "lucide-react";
 import ACCEPTED_IMAGE_TYPES from "@/common/constants/AcceptedImageTypeConstant.ts";
