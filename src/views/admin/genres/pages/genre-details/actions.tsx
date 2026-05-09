@@ -13,6 +13,8 @@ import {Genre} from "@/domains/genres/schema";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {GenreSubmitForm, GenreSubmitFormPanel} from "@/views/admin/genres/_feat/submit-form";
 import {GenreDeleteWarningDialog} from "@/views/admin/genres/_feat/delete-genre";
+import {GenreImageUploadForm, GenreImageUploadPanel} from "@/views/admin/genres/_feat/image-upload-form";
+import {RemoveGenreImageWarningDialog} from "@/views/admin/genres/_feat/remove-image";
 
 /** Props for the GenreDetailsPageActions component. */
 type ActionProps = {
@@ -28,8 +30,19 @@ export function GenreDetailsPageActions(
 ): ReactElement {
     const navigate = useLoggedNavigate();
 
-    const {isEditing, isDeleting} = useRequiredContext({context: GenreDetailsUIStateContext});
-    const {setIsEditing, setIsDeleting} = useRequiredContext({context: GenreDetailsUISetterContext});
+    const {
+        isEditing,
+        isDeleting,
+        isUpdatingImage,
+        isRemovingImage
+    } = useRequiredContext({context: GenreDetailsUIStateContext});
+
+    const {
+        setIsEditing,
+        setIsDeleting,
+        setIsUpdatingImage,
+        setIsRemovingImage
+    } = useRequiredContext({context: GenreDetailsUISetterContext});
 
     const replaceSlugOnUpdate = ({slug}: Genre) => {
         navigate({to: `/admin/genres/get/${slug}`, options: {replace: true}});
@@ -44,6 +57,8 @@ export function GenreDetailsPageActions(
     return (
         <div className={className}>
             <SROnly text="Genre Option Dialogs"/>
+
+            {/* Genre */}
 
             <GenreSubmitForm
                 editEntity={genre}
@@ -63,6 +78,22 @@ export function GenreDetailsPageActions(
                 _id={genre._id}
                 name={genre.name}
                 onSubmitSuccess={navigateOnDelete}
+            />
+
+            {/* Genre Image */}
+
+            <GenreImageUploadForm _id={genre._id} resetOnSuccess={true}>
+                <GenreImageUploadPanel
+                    isOpen={isUpdatingImage}
+                    setIsOpen={setIsUpdatingImage}
+                />
+            </GenreImageUploadForm>
+
+            <RemoveGenreImageWarningDialog
+                isOpen={isRemovingImage}
+                setIsOpen={setIsRemovingImage}
+                _id={genre._id}
+                name={genre.name}
             />
         </div>
     );

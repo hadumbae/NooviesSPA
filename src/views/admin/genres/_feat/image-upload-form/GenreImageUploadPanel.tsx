@@ -43,7 +43,7 @@ export function GenreImageUploadPanel(
                     </SheetDescription>
                 </SheetHeader>
 
-                <GenreImageUploadFormView/>
+                <GenreImageUploadFormView className="pb-4"/>
 
                 <SheetFooter>
                     <Button variant="default" type="submit" form={formID}>
