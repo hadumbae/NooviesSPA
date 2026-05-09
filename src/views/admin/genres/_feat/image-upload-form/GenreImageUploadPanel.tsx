@@ -5,7 +5,6 @@
 import {ReactElement, ReactNode} from "react";
 import {
     Sheet,
-    SheetClose,
     SheetContent,
     SheetDescription,
     SheetFooter,
@@ -17,6 +16,7 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {UIOpenStateProps} from "@/common/types";
 import {GenreImageUploadFormView} from "@/views/admin/genres/_feat/image-upload-form/GenreImageUploadFormView.tsx";
 import {useBaseFormContext} from "@/common/features/generic-form-context";
+import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 
 /** Props for the GenreImageUploadPanel component. */
 type PanelProps = UIOpenStateProps & {
@@ -29,7 +29,7 @@ type PanelProps = UIOpenStateProps & {
 export function GenreImageUploadPanel(
     {children, isOpen, setIsOpen}: PanelProps
 ): ReactElement {
-    const {formID} = useBaseFormContext();
+    const {formID, isPending} = useBaseFormContext();
 
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -46,12 +46,9 @@ export function GenreImageUploadPanel(
                 <GenreImageUploadFormView className="pb-4"/>
 
                 <SheetFooter>
-                    <Button variant="default" type="submit" form={formID}>
-                        Upload
+                    <Button variant="default" type="submit" form={formID} disabled={isPending}>
+                        {isPending ? <AnimatedLoader/> : "Upload"}
                     </Button>
-                    <SheetClose asChild>
-                        <Button variant="outline">Close</Button>
-                    </SheetClose>
                 </SheetFooter>
             </SheetContent>
         </Sheet>

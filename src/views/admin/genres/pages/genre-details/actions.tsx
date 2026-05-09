@@ -82,7 +82,12 @@ export function GenreDetailsPageActions(
 
             {/* Genre Image */}
 
-            <GenreImageUploadForm _id={genre._id} resetOnSuccess={true}>
+            <GenreImageUploadForm
+                _id={genre._id}
+                resetOnSuccess={true}
+                successMessage="Updated."
+                onSubmitSuccess={() => setIsUpdatingImage(false)}
+            >
                 <GenreImageUploadPanel
                     isOpen={isUpdatingImage}
                     setIsOpen={setIsUpdatingImage}
@@ -94,6 +99,7 @@ export function GenreDetailsPageActions(
                 setIsOpen={setIsRemovingImage}
                 _id={genre._id}
                 name={genre.name}
+                onSubmitSuccess={() => setIsRemovingImage(false)}
             />
         </div>
     );
