@@ -5,7 +5,9 @@
 import {FieldValues, UseFormReturn} from "react-hook-form";
 
 /** UI feedback and lifecycle callbacks. */
-export type MutationResponseConfig<TReturn = void> = {
+export type MutationResponseConfig<TReturn = void, TSubmit = void> = {
+    submitMessage?: string;
+    onSubmit?: (data: TSubmit) => void;
     successMessage?: string;
     onSubmitSuccess?: (data: TReturn) => void;
     errorMessage?: string;
