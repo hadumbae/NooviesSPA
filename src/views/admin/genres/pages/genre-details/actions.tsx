@@ -6,6 +6,7 @@ import {ReactElement} from "react";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {
+    GenreDetailsUIPendingSetterContext,
     GenreDetailsUISetterContext,
     GenreDetailsUIStateContext
 } from "@/domains/genres/context/genre-details-ui-context";
@@ -44,6 +45,11 @@ export function GenreDetailsPageActions(
         setIsRemovingImage
     } = useRequiredContext({context: GenreDetailsUISetterContext});
 
+    const {
+        setIsImageUpdatePending,
+        setIsImageRemovalPending
+    } = useRequiredContext({context: GenreDetailsUIPendingSetterContext})
+
     const replaceSlugOnUpdate = ({slug}: Genre) => {
         navigate({to: `/admin/genres/get/${slug}`, options: {replace: true}});
         setIsEditing(false);
@@ -53,6 +59,11 @@ export function GenreDetailsPageActions(
         to: `/admin/genres`,
         message: "Navigation to index after successful genre deletion."
     });
+
+    const onImageRemoval = () => {
+        setIsRemovingImage(false);
+        setIsImageRemovalPending(false);
+    }
 
     return (
         <div className={className}>
@@ -85,6 +96,8 @@ export function GenreDetailsPageActions(
             <GenreImageUploadForm
                 _id={genre._id}
                 resetOnSuccess={true}
+                submitMessage="Updating..."
+                onSubmit={() => setIsImageUpdatePending(true)}
                 successMessage="Updated."
                 onSubmitSuccess={() => setIsUpdatingImage(false)}
             >
@@ -99,7 +112,9 @@ export function GenreDetailsPageActions(
                 setIsOpen={setIsRemovingImage}
                 _id={genre._id}
                 name={genre.name}
-                onSubmitSuccess={() => setIsRemovingImage(false)}
+                onSubmit={() => setIsImageRemovalPending(true)}
+                submitMessage="Removing..."
+                onSubmitSuccess={onImageRemoval}
             />
         </div>
     );

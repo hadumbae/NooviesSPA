@@ -7,9 +7,7 @@ import {Dispatch, ReactElement, ReactNode, SetStateAction, useState} from "react
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuTrigger
 } from "@/common/components/ui/dropdown-menu.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
@@ -29,8 +27,6 @@ export function GenreDetailsUIToggles({children}: ToggleProps): ReactElement {
     const {
         setIsEditing,
         setIsDeleting,
-        setIsUpdatingImage,
-        setIsRemovingImage,
     } = useRequiredContext({context: GenreDetailsUISetterContext});
 
     const closeOnAction = (action: Dispatch<SetStateAction<boolean>>) => {
@@ -45,30 +41,13 @@ export function GenreDetailsUIToggles({children}: ToggleProps): ReactElement {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent align="end">
-                <DropdownMenuGroup>
-                    <DropdownMenuLabel>Genre</DropdownMenuLabel>
+                <DropdownMenuItem onClick={() => closeOnAction(setIsEditing)}>
+                    Edit
+                </DropdownMenuItem>
 
-                    <DropdownMenuItem onClick={() => closeOnAction(setIsEditing)}>
-                        Edit
-                    </DropdownMenuItem>
-
-                    <DropdownMenuItem onClick={() => closeOnAction(setIsDeleting)}>
-                        Delete
-                    </DropdownMenuItem>
-                </DropdownMenuGroup>
-
-                <DropdownMenuGroup>
-                    <DropdownMenuLabel>Images</DropdownMenuLabel>
-
-                    <DropdownMenuItem onClick={() => closeOnAction(setIsUpdatingImage)}>
-                        Update
-                    </DropdownMenuItem>
-
-                    <DropdownMenuItem onClick={() => closeOnAction(setIsRemovingImage)}>
-                        Remove
-                    </DropdownMenuItem>
-                </DropdownMenuGroup>
-
+                <DropdownMenuItem onClick={() => closeOnAction(setIsDeleting)}>
+                    Delete
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );

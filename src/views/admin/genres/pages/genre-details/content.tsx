@@ -11,6 +11,9 @@ import {GenreDetailsCard} from "@/views/admin/genres/pages/genre-details/details
 import {MovieIndexCard} from "@/views/admin/movies/_comp/index-list-display";
 import {useSetAdminPageTitle} from "@/common/features/handle-pages";
 import {GenreDetailsPageActions} from "@/views/admin/genres/pages/genre-details/actions.tsx";
+import {
+    GenreDetailsPageImageSection
+} from "@/views/admin/genres/pages/genre-details/sections/GenreDetailsPageImageSection.tsx";
 
 /** Props for the GenreDetailsPageContent component. */
 type ContentProps = {
@@ -36,34 +39,26 @@ export function GenreDetailsPageContent(
 
             <GenreDetailsCard genre={genre}/>
 
-            {movies.length > 0 ? (
-                <section className="space-y-4">
-                    <PageSectionHeader text="Movies"/>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        {movies.map((movie: MovieDetails) => (
-                            <MovieIndexCard key={movie._id} className="w-16" movie={movie}/>
-                        ))}
-                    </div>
-                </section>
-            ) : (
-                <EmptyArrayContainer
-                    className="flex-1"
-                    text="There Are No Movies"
-                />
-            )}
+            <GenreDetailsPageImageSection genre={genre}/>
 
-            <PaginationRangeButtons
-                page={page}
-                perPage={perPage}
-                totalItems={totalItems}
-                setPage={setPage}
-            />
+            <section className="space-y-4">
+                <PageSectionHeader text="Movies"/>
 
-            <GenreDetailsPageActions
-                className="hidden"
-                genre={genre}
-            />
+                {
+                    movies.length > 0 ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {movies.map((movie: MovieDetails) => (
+                                <MovieIndexCard key={movie._id} className="w-16" movie={movie}/>
+                            ))}
+                        </div>
+                    ) : (
+                        <EmptyArrayContainer className="border rounded-xl h-52" text="There Are No Movies"/>
+                    )
+                }
+            </section>
 
+            <PaginationRangeButtons page={page} perPage={perPage} totalItems={totalItems} setPage={setPage}/>
+            <GenreDetailsPageActions className="hidden" genre={genre}/>
         </PageFlexWrapper>
     );
 }

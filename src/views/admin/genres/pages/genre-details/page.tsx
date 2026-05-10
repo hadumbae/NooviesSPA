@@ -14,7 +14,10 @@ import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamS
 import {GenreDetailsViewData, useFetchGenreDetailsViewData} from "@/domains/genres/_feat/admin-view-data";
 import {GenreDetailsPageContent} from "@/views/admin/genres/pages/genre-details/content.tsx";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {GenreDetailsUIContextProvider} from "@/domains/genres/context/genre-details-ui-context";
+import {
+    GenreDetailsUIContextProvider,
+    GenreDetailsUIPendingContextProvider
+} from "@/domains/genres/context/genre-details-ui-context";
 
 /** Default limit for the paginated movie sub-collection. */
 const MOVIES_PER_PAGE = 12;
@@ -46,20 +49,22 @@ export function GenreDetailsPage(): ReactElement {
 
     return (
         <GenreDetailsUIContextProvider>
-            <QueryDataLoader query={query}>
-                {
-                    ({genre, details: {movies: {totalItems, items: movies}}}: GenreDetailsViewData) => (
-                        <GenreDetailsPageContent
-                            genre={genre}
-                            movies={movies}
-                            totalItems={totalItems}
-                            page={page}
-                            perPage={MOVIES_PER_PAGE}
-                            setPage={setPage}
-                        />
-                    )
-                }
-            </QueryDataLoader>
+            <GenreDetailsUIPendingContextProvider>
+                <QueryDataLoader query={query}>
+                    {
+                        ({genre, details: {movies: {totalItems, items: movies}}}: GenreDetailsViewData) => (
+                            <GenreDetailsPageContent
+                                genre={genre}
+                                movies={movies}
+                                totalItems={totalItems}
+                                page={page}
+                                perPage={MOVIES_PER_PAGE}
+                                setPage={setPage}
+                            />
+                        )
+                    }
+                </QueryDataLoader>
+            </GenreDetailsUIPendingContextProvider>
         </GenreDetailsUIContextProvider>
     );
 }
