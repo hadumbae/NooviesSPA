@@ -10,6 +10,7 @@ import {ManageGenreImageMutationKeys, patchRemoveGenreImage} from "@/domains/gen
 import {type Genre, GenreSchema} from "@/domains/genres/schema";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 
 /** Configuration for the useRemoveGenreImage hook. */
 type RemoveGenreImageConfig = MutationResponseConfig<Genre>;
@@ -23,9 +24,14 @@ type RemovePayload = {
  * Removes the image associated with a specific Genre.
  */
 export function useRemoveGenreImage(
-    {successMessage, errorMessage, onSubmitSuccess, onSubmitError}: RemoveGenreImageConfig
+    {onSubmit, submitMessage, successMessage, errorMessage, onSubmitSuccess, onSubmitError}: RemoveGenreImageConfig
 ): UseMutationResult<Genre, unknown, RemovePayload> {
+    const invalidateQueries = useInvalidateQueryKeys();
+
     const removeImage = async ({_id}: RemovePayload) => {
+        submitMessage && toast.info(submitMessage);
+        onSubmit?.();
+
         const {result} = await patchRemoveGenreImage({_id});
 
         const {success, error, data: parsed} = validateData({
@@ -40,6 +46,10 @@ export function useRemoveGenreImage(
     };
 
     const onSuccess = (result: Genre) => {
+        invalidateQueries([
+            ['genres']
+        ], {exact: false});
+
         successMessage && toast.success(successMessage);
         onSubmitSuccess?.(result);
     };

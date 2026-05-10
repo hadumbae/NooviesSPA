@@ -17,6 +17,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 
 /** Configuration for the genre image upload mutation. */
 type UploadConfig =
@@ -32,7 +33,11 @@ type UploadData = {
 export function useUploadGenreImage(
     {form, resetForm, ...onSubmit}: UploadConfig
 ): UseMutationResult<Genre, unknown, UploadData> {
+    const invalidateQueries = useInvalidateQueryKeys();
+
     const uploadImage = async ({_id, formData}: UploadData) => {
+        onSubmit.onSubmit?.();
+
         const {result} = await patchUpdateGenreImage({_id, formData});
         const {data: parsed, success, error} = validateData({
             data: result,
@@ -46,8 +51,12 @@ export function useUploadGenreImage(
     }
 
     const onSuccess = (genre: Genre) => {
-        onSubmit.onSubmitSuccess?.(genre);
+        invalidateQueries([
+            ['genres']
+        ], {exact: false});
+
         onSubmit.successMessage && toast.success(onSubmit.successMessage);
+        onSubmit.onSubmitSuccess?.(genre);
         resetForm?.resetOnSuccess && form.reset();
     }
 
