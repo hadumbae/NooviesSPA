@@ -66,7 +66,7 @@ export function GenreDetailsPageImageSection(
 
             {
                 image
-                    ? <GenreImageBanner genreName={name} image={image}/>
+                    ? <GenreImageBanner genreName={name} image={image} className="w-full h-72"/>
                     : <EmptyArrayContainer text="No Image" className="border rounded-xl h-28"/>
             }
         </section>

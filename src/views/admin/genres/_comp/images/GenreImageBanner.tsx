@@ -23,7 +23,7 @@ export function GenreImageBanner(
 
     if (!image) {
         return (
-            <div className={cn("invalid-image-container w-full h-72", className)}>
+            <div className={cn("invalid-image-container", className)}>
                 <ImageOff/> {hasError && <span>Failed To Fetch Image</span>}
             </div>
         )
@@ -36,7 +36,7 @@ export function GenreImageBanner(
             loading="lazy"
             onError={() => setHasError(true)}
             className={cn(
-                "w-full h-72 object-cover object-center rounded-md",
+                "object-cover object-center rounded-md",
                 className
             )}
         />

@@ -5,12 +5,12 @@
 
 import { ReactElement } from "react";
 import { PageFlexWrapper } from "@/views/common/_comp/page";
-import GenreInfoBanner from "@/views/client/genres/_comp/GenreInfoBanner.tsx";
 import BrowseMovieOverviewCard from "@/views/client/movies/browse-movies/browse-movie-overview/BrowseMovieOverviewCard.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import { Genre } from "@/domains/genres/schema";
 import { BrowseGenreInfoPageHeader } from "@/views/client/genres/browse-genre-info/header.tsx";
 import { MovieWithGenres } from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
+import {GenreInfoBanner} from "@/views/client/genres/_comp";
 
 /**
  * Props for the {@link BrowseGenreInfoPageContent} component.

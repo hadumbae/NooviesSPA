@@ -1,37 +1,23 @@
 /**
- * @file GenreImageListCard.tsx
- * @description
- * Clickable genre card that navigates to the genre browse page
- * with logged navigation context.
+ * @fileoverview Clickable genre card that navigates to the genre browse page.
  */
 
 import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
-import {Image} from "lucide-react";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {Genre} from "@/domains/genres/schema";
+import {GenreImageBanner} from "@/views/admin/genres/_comp";
+import {ReactElement} from "react";
 
-/**
- * Props for {@link GenreImageListCard}.
- */
+/** Props for the GenreImageListCard component. */
 type SummaryProps = {
-    /**
-     * Genre data used for display and navigation.
-     */
     genre: Genre;
 };
 
 /**
- * Renders a compact genre card with:
- * - An image placeholder
- * - Genre name label
- *
- * Clicking the card navigates to the genre detail page
- * and logs the navigation event with genre context.
- *
- * @param props Component props
+ * Renders a compact genre card that navigates to the genre detail page on click.
  */
-const GenreImageListCard = ({genre}: SummaryProps) => {
-    const {_id, name, slug} = genre;
+export function GenreImageListCard({genre}: SummaryProps): ReactElement {
+    const {_id, name, slug, image} = genre;
     const navigate = useLoggedNavigate();
 
     const onClick = () => {
@@ -45,8 +31,12 @@ const GenreImageListCard = ({genre}: SummaryProps) => {
 
     return (
         <Card className="cursor-pointer" onClick={onClick}>
-            <CardHeader className="flex justify-center items-center h-32">
-                <Image />
+            <CardHeader className="rounded-t-xl p-0">
+                <GenreImageBanner
+                    className="rounded-b-none w-full h-52"
+                    image={image}
+                    genreName={name}
+                />
             </CardHeader>
 
             <CardContent className="py-3 hover:underline">
@@ -54,6 +44,4 @@ const GenreImageListCard = ({genre}: SummaryProps) => {
             </CardContent>
         </Card>
     );
-};
-
-export default GenreImageListCard;
+}
