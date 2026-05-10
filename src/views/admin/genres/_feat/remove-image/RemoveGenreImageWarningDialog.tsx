@@ -32,11 +32,11 @@ type DialogProps = MutationResponseConfig<Genre> & UIOpenStateProps & {
 export function RemoveGenreImageWarningDialog(
     {children, _id, name, isOpen, setIsOpen, ...onSubmit}: DialogProps
 ): ReactElement {
-    const {mutate} = useRemoveGenreImage(onSubmit);
+    const {mutate, isPending} = useRemoveGenreImage(onSubmit);
 
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-            <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
+            <AlertDialogTrigger disabled={isPending} asChild>{children}</AlertDialogTrigger>
             <AlertDialogContent className={ContainerCSS}>
                 <AlertDialogHeader>
                     <AlertDialogTitle className="primary-text">Remove image?</AlertDialogTitle>
@@ -51,8 +51,9 @@ export function RemoveGenreImageWarningDialog(
                     <AlertDialogAction
                         onClick={() => mutate({_id})}
                         className="shadcn-primary-button"
+                        disabled={isPending}
                     >
-                        Remove Image
+                        Removing
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
