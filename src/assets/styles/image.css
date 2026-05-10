@@ -1,0 +1,5 @@
+@layer components {
+    .invalid-image-container {
+        @apply bg-gray-600 rounded-md flex flex-col items-center justify-center space-y-2
+    }
+}
