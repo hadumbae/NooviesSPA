@@ -2,22 +2,32 @@
 
 import {ReactElement} from 'react';
 import {cn} from "@/common/lib/utils.ts";
-import {Film} from "lucide-react";
+import {ImageOff} from "lucide-react";
 
 /** Props for the HasNoMoviePosterPlaceholder component. */
 type PlaceholderProps = {
     className?: string;
+    hasError?: boolean;
 };
 
-/** Renders a styled gray box with a film icon to indicate the absence of a movie poster. */
-export function HasNoMoviePosterPlaceholder({className}: PlaceholderProps): ReactElement {
+/** Renders a styled grey box with a film icon to indicate the absence of a movie poster. */
+export function HasNoMoviePosterPlaceholder(
+    {className, hasError}: PlaceholderProps
+): ReactElement {
     return (
         <div className={cn(
-            "bg-gray-600 aspect-[2/3] rounded-md",
-            "flex items-center justify-center",
+            "flex flex-col items-center justify-center bg-gray-600 rounded-md",
             className
         )}>
-            <Film className="text-gray-400"/>
+            <ImageOff className="text-gray-400"/>
+
+            {
+                hasError && (
+                    <span className="primary-text italic text-sm">
+                        Failed To Fetch Image
+                    </span>
+                )
+            }
         </div>
     );
 }

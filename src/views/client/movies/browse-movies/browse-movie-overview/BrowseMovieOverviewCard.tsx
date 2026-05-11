@@ -5,11 +5,13 @@
  * poster navigation and summary metadata.
  */
 
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import BrowseMovieSummaryMeta
-    from "@/views/client/movies/browse-movies/browse-movie-summary/BrowseMovieSummaryMeta.tsx";
+import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
+import {
+    BrowseMovieSummaryMeta
+} from "@/views/client/movies/browse-movies/browse-movie-summary/BrowseMovieSummaryMeta.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MoviePosterLink} from "@/views/admin/movies/_comp/poster-image";
+import {ReactElement} from "react";
 
 /**
  * Props for {@link BrowseMovieOverviewCard}.
@@ -33,23 +35,28 @@ type CardProps = {
  *
  * @param props Component props
  */
-const BrowseMovieOverviewCard = ({movie}: CardProps) => {
+export function BrowseMovieOverviewCard({movie}: CardProps): ReactElement {
+    const {title, slug, posterImage} = movie;
+
     return (
         <Card>
-            <CardContent className="px-5 py-5 flex space-x-4 items-stretch">
-                <div>
-                    <MoviePosterLink className="h-24" movie={movie}/>
-                </div>
+            <CardHeader className="p-0">
+                <MoviePosterLink
+                    className="w-full h-72 rounded-b-none"
+                    slug={slug}
+                    image={posterImage}
+                    alt={title}
+                />
+            </CardHeader>
 
-                <div className="flex-1">
-                    <BrowseMovieSummaryMeta
-                        className="h-full justify-between"
-                        movie={movie}
-                    />
-                </div>
+            <CardContent className="px-3 py-3">
+                <BrowseMovieSummaryMeta
+                    className="h-full justify-between"
+                    movie={movie}
+                />
             </CardContent>
         </Card>
     );
-};
+}
 
-export default BrowseMovieOverviewCard;
+

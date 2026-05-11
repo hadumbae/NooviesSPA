@@ -12,8 +12,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/common/components/ui/dialog.tsx";
-import BrowseMovieMetaRow
-    from "@/views/client/movies/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
+import {BrowseMovieMetaRow} from "@/views/client/movies/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import BrowseMovieCreditSummaryLinkList
     from "@/views/admin/movie-credits/_comp/clients/browse-movie-clients/BrowseMovieCreditSummaryLinkList.tsx";

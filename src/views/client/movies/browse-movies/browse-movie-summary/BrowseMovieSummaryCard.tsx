@@ -1,44 +1,24 @@
 /**
- * @file BrowseMovieSummaryCard.tsx
- * @description
- * Card component that displays a compact movie summary with an
- * interactive dialog trigger for additional details.
+ * @fileoverview Card component that displays a compact movie summary with an interactive dialog trigger.
  */
-
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {Info} from "lucide-react";
 import BrowseMovieSummaryDialog from "@/views/client/movies/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialog.tsx";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
-import BrowseMovieMetaRow
-    from "@/views/client/movies/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
+import {BrowseMovieMetaRow} from "@/views/client/movies/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {ReactElement} from "react";
 
-/**
- * Props for {@link BrowseMovieSummaryCard}.
- */
+/** Props for the BrowseMovieSummaryCard component. */
 type CardProps = {
-    /**
-     * Movie data used to populate the summary card.
-     */
     movie: MovieDetails;
 };
 
 /**
- * Renders a movie summary card with:
- * - A compact summary span showing key movie information
- * - An info icon that opens a dialog with extended details
- *
- * The dialog is lazily loaded and triggered via the info icon.
- *
- * @param props - Component props.
- *
- * @example
- * ```tsx
- * <BrowseMovieSummaryCard movie={movie} />
- * ```
+ * Renders a movie summary card with metadata and an info icon to trigger a detailed dialog.
  */
-const BrowseMovieSummaryCard = ({movie}: CardProps) => {
+export function BrowseMovieSummaryCard({movie}: CardProps): ReactElement {
     return (
         <Card>
             <CardContent className="px-5 py-5 flex justify-between items-center">
@@ -56,6 +36,4 @@ const BrowseMovieSummaryCard = ({movie}: CardProps) => {
             </CardContent>
         </Card>
     );
-};
-
-export default BrowseMovieSummaryCard;
+}

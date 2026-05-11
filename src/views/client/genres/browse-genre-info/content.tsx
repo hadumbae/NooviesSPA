@@ -3,13 +3,15 @@
  * Responsibly maps genre metadata and movie collections into a structured UI.
  */
 
-import { ReactElement } from "react";
-import { PageFlexWrapper } from "@/views/common/_comp/page";
-import BrowseMovieOverviewCard from "@/views/client/movies/browse-movies/browse-movie-overview/BrowseMovieOverviewCard.tsx";
+import {ReactElement} from "react";
+import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
+import {
+    BrowseMovieOverviewCard
+} from "@/views/client/movies/browse-movies/browse-movie-overview/BrowseMovieOverviewCard.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import { Genre } from "@/domains/genres/schema";
-import { BrowseGenreInfoPageHeader } from "@/views/client/genres/browse-genre-info/header.tsx";
-import { MovieWithGenres } from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
+import {Genre} from "@/domains/genres/schema";
+import {BrowseGenreInfoPageHeader} from "@/views/client/genres/browse-genre-info/header.tsx";
+import {MovieWithGenres} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
 import {GenreInfoBanner} from "@/views/client/genres/_comp";
 
 /**
@@ -28,26 +30,31 @@ type ContentProps = {
  * Renders the primary layout for the Genre Detail view.
  */
 export function BrowseGenreInfoPageContent(
-    { genre, movies, totalMovies, page, perPage, setPage }: ContentProps
+    {genre, movies, totalMovies, page, perPage, setPage}: ContentProps
 ): ReactElement {
     return (
         <PageFlexWrapper>
-            <BrowseGenreInfoPageHeader name={genre.name} />
+            <BrowseGenreInfoPageHeader name={genre.name}/>
 
-            <GenreInfoBanner genre={genre} />
+            <GenreInfoBanner genre={genre}/>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                {movies.map(movie => (
-                    <BrowseMovieOverviewCard key={movie._id} movie={movie} />
-                ))}
-            </div>
+            <section className="space-y-4">
+                <PageSectionHeader text="Movies" />
 
-            <PaginationRangeButtons
-                page={page}
-                perPage={perPage}
-                totalItems={totalMovies}
-                setPage={setPage}
-            />
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                    {movies.map(movie => (
+                        <BrowseMovieOverviewCard key={movie._id} movie={movie}/>
+                    ))}
+                </div>
+
+                <PaginationRangeButtons
+                    page={page}
+                    perPage={perPage}
+                    totalItems={totalMovies}
+                    setPage={setPage}
+                />
+            </section>
+
         </PageFlexWrapper>
     );
 }
