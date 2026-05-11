@@ -1,18 +1,17 @@
-/**
- * @fileoverview Zod schemas and inferred types for theatre browse query parameters and form values.
- */
+/** @fileoverview Zod schema for validating theatre browsing search parameters. */
 
 import {z} from "zod";
 import {LocationTargetSchema} from "@/common/schema/strings/LocationTargetSchema.ts";
+import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 
 /**
- * Validates URL query parameters used to filter theatre browse results by location target.
+ * Schema for validating the theatre location search target.
  */
 export const BrowseTheatreParamSchema = z.object({
-    target: LocationTargetSchema.optional(),
+    target: preprocessEmptyStringToUndefined(
+        LocationTargetSchema.optional(),
+    ).optional(),
 });
 
-/**
- * Type representing the validated query parameters for browsing theatres.
- */
+/** Type definition for theatre browsing parameters. */
 export type BrowseTheatreParams = z.infer<typeof BrowseTheatreParamSchema>;

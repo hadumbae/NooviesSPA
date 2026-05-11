@@ -1,54 +1,45 @@
 /**
- * @file BrowseTheatreParamFormContainer.tsx
- *
- * Container component for the theatre browse parameter form.
- *
- * Responsibilities:
- * - Initializes React Hook Form state
- * - Synchronizes form values with URL search params
- * - Wires submit handling to the presentation layer
+ * @fileoverview Form component for managing and synchronizing theatre search parameters with the URL.
  */
-
-import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {useBrowseTheatreParamForm} from "@/domains/theatres/_feat/submit-location/useBrowseTheatreParamForm.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import BrowseTheatreParamFormView from "@/views/client/theatres/_feat/browse-by-location/BrowseTheatreParamFormView.tsx";
-import {BrowseTheatreParamFormStarterValues} from "@/domains/theatres/_feat/submit-location";
 import {
+    BrowseTheatreParamFormStarterValues,
     BrowseTheatreParams,
     BrowseTheatreParamSchema
 } from "@/domains/theatres/_feat/submit-location";
+import {ReactNode} from "react";
+import {BaseFormContextProvider} from "@/common/features/generic-form-context";
+import {Form} from "@/common/components/ui/form.tsx";
 
 
-/**
- * Props for the browse theatre parameter form container.
- */
-type FormProps =
-    Pick<FormOptions<BrowseTheatreParamFormStarterValues, BrowseTheatreParams>, "presetValues">
-    & { className?: string };
+/** Props for the BrowseTheatreParamForm component. */
+type FormProps = {
+    presetValues?: Partial<BrowseTheatreParamFormStarterValues>;
+    children: ReactNode;
+    uniqueKey?: string;
+};
 
-/**
- * State-aware container for the browse theatre parameter form.
- */
-const BrowseTheatreParamForm = (
-    {presetValues, className}: FormProps,
+/** Form wrapper that synchronises theatre location filters with search parameters. */
+export const BrowseTheatreParamForm = (
+    {children, presetValues, uniqueKey}: FormProps,
 ) => {
-    const form = useBrowseTheatreParamForm({presetValues});
-    const {setSearchParams} = useParsedSearchParams({
-        schema: BrowseTheatreParamSchema,
-    });
+    const formKey = `update-browse-theatre-params-${uniqueKey ?? "form"}`;
 
-    const updateParams = (values: BrowseTheatreParamFormStarterValues) => {
-        setSearchParams(values as BrowseTheatreParams);
+    const form = useBrowseTheatreParamForm({presetValues});
+    const {setSearchParams} = useParsedSearchParams({schema: BrowseTheatreParamSchema});
+
+    const updateParams = (values: BrowseTheatreParams) => {
+        setSearchParams(values);
     };
 
     return (
-        <BrowseTheatreParamFormView
-            form={form}
-            submitHandler={updateParams}
-            className={className}
-        />
+        <BaseFormContextProvider formID={formKey} submitHandler={updateParams}>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(updateParams)}>
+                    {children}
+                </form>
+            </Form>
+        </BaseFormContextProvider>
     );
 };
-
-export default BrowseTheatreParamForm;

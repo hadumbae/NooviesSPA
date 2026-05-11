@@ -1,12 +1,5 @@
 /**
- * @file useBrowseTheatreParamForm.ts
- *
- * React Hook Form initializer for theatre browse parameters.
- *
- * Integrates:
- * - Zod-based validation
- * - React Hook Form state management
- * - Stable default values
+ * @fileoverview React Hook Form initializer for theatre browse parameters.
  */
 
 import {useForm, UseFormReturn} from "react-hook-form";
@@ -20,25 +13,20 @@ import {
 } from "@/domains/theatres/_feat/submit-location/BrowseTheatreParamSchema.ts";
 import {BrowseTheatreParamFormStarterValues} from "./BrowseTheatreParamFormStarterValues";
 
-/**
- * Initialization options for the browse theatre form.
- */
-type FormParams = {
-    /** Optional preset values used to prefill the form */
-    presetValues?: Partial<BrowseTheatreParams>;
+/** Initialisation options for the browse theatre form. */
+export type FormParams = {
+    presetValues?: Partial<BrowseTheatreParamFormStarterValues>;
 };
 
 /**
- * Creates a React Hook Form instance for theatre browse parameters.
- *
- * @param params - Optional initialization options
+ * Creates a React Hook Form instance for theatre browse parameters using Zod validation.
  */
 export function useBrowseTheatreParamForm(
     params?: FormParams,
-): UseFormReturn<BrowseTheatreParamFormStarterValues> {
+): UseFormReturn<BrowseTheatreParamFormStarterValues, unknown, BrowseTheatreParams> {
     const defaultValues = useBrowseTheatreParamFormDefaultValues(params);
 
-    return useForm<BrowseTheatreParamFormStarterValues>({
+    return useForm<BrowseTheatreParamFormStarterValues, unknown, BrowseTheatreParams>({
         resolver: zodResolver(BrowseTheatreParamSchema),
         defaultValues,
     });

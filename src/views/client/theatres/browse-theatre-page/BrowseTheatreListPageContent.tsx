@@ -1,22 +1,10 @@
 /**
- * @file BrowseTheatreListPageContent.tsx
- *
- * Presentational layout for the theatre browse page.
- *
- * Assumes all provided theatres already have
- * recent or upcoming showings available.
- *
- * Handles:
- * - Browse parameter form rendering
- * - Theatre result grid
- * - Empty state messaging
- * - Pagination controls
+ * @fileoverview Presentational layout for the theatre browsing page.
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import BrowseTheatreParamForm
-    from "@/views/client/theatres/_feat/browse-by-location/BrowseTheatreParamForm.tsx";
+import {BrowseTheatreParamForm} from "@/views/client/theatres/_feat/browse-by-location/BrowseTheatreParamForm.tsx";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
@@ -27,64 +15,21 @@ import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.ts
 
 import {TheatreWithRecentShowings} from "@/domains/theatres/schema/theatre/TheatreWithRecentShowingsSchema.ts";
 import {ReactElement} from "react";
+import {BrowseTheatreParamFormView} from "@/views/client/theatres/_feat/browse-by-location";
 
-/**
- * Props for {@link BrowseTheatreListPageContent}.
- */
+/** Props for the BrowseTheatreListPageContent component. */
 type ContentProps = PaginationValues & {
-    /** Updates the current page number */
     setPage: (page: number) => void;
-
-    /** Total number of matching theatres */
     totalTheatres: number;
-
-    /**
-     * Paginated theatre results.
-     *
-     * All theatres are guaranteed to have
-     * recent or upcoming showings.
-     */
     theatres: TheatreWithRecentShowings[];
 };
 
 /**
- * Renders the theatre browse page layout.
- *
- * Displays:
- * - Location-based browse parameter form
- * - Theatre cards with recent showings
- * - Empty state when no theatres match the criteria
- * - Pagination controls when applicable
- *
- * @remarks
- * This component is purely presentational and assumes
- * filtering and validation have already been handled
- * by the parent page.
+ * Renders the theatre browse page layout including location filters and results grid.
  */
 export function BrowseTheatreListPageContent(
     {page, perPage, setPage, totalTheatres, theatres}: ContentProps,
 ): ReactElement {
-    const theatreSection = (
-        <section className="space-y-4">
-            <SectionHeader srOnly={true}>Theatres</SectionHeader>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {theatres.map((theatre) => (
-                    <TheatreBrowseListCard key={theatre.slug} theatre={theatre}/>
-                ))}
-            </div>
-
-            {totalTheatres > perPage && (
-                <PaginationRangeButtons
-                    page={page}
-                    perPage={perPage}
-                    totalItems={totalTheatres}
-                    setPage={setPage}
-                />
-            )}
-        </section>
-    );
-
     return (
         <PageFlexWrapper className="space-y-4">
             <header>
@@ -92,16 +37,35 @@ export function BrowseTheatreListPageContent(
                 <HeaderDescription>Theatres Near You</HeaderDescription>
             </header>
 
-            <Card>
-                <CardContent className="p-4">
-                    <BrowseTheatreParamForm/>
-                </CardContent>
-            </Card>
+            <BrowseTheatreParamForm>
+                <Card>
+                    <CardContent className="p-4">
+                        <BrowseTheatreParamFormView/>
+                    </CardContent>
+                </Card>
+            </BrowseTheatreParamForm>
 
             {
-                theatres.length > 0
-                    ? theatreSection
-                    : <EmptyArrayContainer text="No Theatres" className="flex-1"/>
+                theatres.length > 0 ? (
+                    <section className="space-y-4">
+                        <SectionHeader srOnly={true}>Theatres</SectionHeader>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            {theatres.map((theatre) => (
+                                <TheatreBrowseListCard key={theatre.slug} theatre={theatre}/>
+                            ))}
+                        </div>
+
+                        {totalTheatres > perPage && (
+                            <PaginationRangeButtons
+                                page={page}
+                                perPage={perPage}
+                                totalItems={totalTheatres}
+                                setPage={setPage}
+                            />
+                        )}
+                    </section>
+                ) : <EmptyArrayContainer text="No Theatres" className="flex-1"/>
             }
         </PageFlexWrapper>
     );

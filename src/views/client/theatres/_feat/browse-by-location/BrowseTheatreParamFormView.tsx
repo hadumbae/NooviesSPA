@@ -1,55 +1,38 @@
 /**
- * @file BrowseTheatreParamFormView.tsx
- *
- * Presentational form component for theatre browse parameters.
- *
- * Renders the input UI and delegates submission
- * behavior to the parent container.
+ * @fileoverview Form view for browsing theatres by location parameters.
  */
-
-import {SubmitHandler, UseFormReturn} from "react-hook-form";
-import {Form} from "@/common/components/ui/form.tsx";
-import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAutoSubmit.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {BrowseTheatreParamFormStarterValues} from "@/domains/theatres/_feat/submit-location";
+import {ReactElement} from "react";
+import {useBaseFormContext} from "@/common/features/generic-form-context";
+import {useAutoFormSubmit} from "@/common/features/submit-data";
+import {useFormContext} from "react-hook-form";
 
-
-/**
- * Props for the browse theatre parameter form view.
- */
+/** Props for the BrowseTheatreParamFormView component. */
 type FormProps = {
-    form: UseFormReturn<BrowseTheatreParamFormStarterValues>;
-    submitHandler: SubmitHandler<BrowseTheatreParamFormStarterValues>;
     className?: string;
 };
 
 /**
- * Stateless browse theatre parameter form view.
+ * Input field for location-based theatre searches.
  */
-const BrowseTheatreParamFormView = (
-    {form, submitHandler, className}: FormProps,
-) => {
-    useDebouncedFormAutoSubmit({
-        form,
-        submitHandler,
-        timeout: 450,
-    });
+export function BrowseTheatreParamFormView({className}: FormProps): ReactElement {
+    const {control} = useFormContext();
+    const {submitHandler} = useBaseFormContext();
+
+    if (!submitHandler) {
+        throw new Error("`BrowseTheatreParamFormView` requires a submitHandler");
+    }
+
+    useAutoFormSubmit({submitHandler})
 
     return (
-        <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(submitHandler)}
-                className={className}
-            >
-                <HookFormInput
-                    name="target"
-                    label="City, State, or Post Code"
-                    hasLabel={false}
-                    control={form.control}
-                />
-            </form>
-        </Form>
+        <div className={className}>
+            <HookFormInput
+                name="target"
+                label="Location"
+                placeholder="City, State, or Post Code"
+                control={control}
+            />
+        </div>
     );
-};
-
-export default BrowseTheatreParamFormView;
+}
