@@ -1,16 +1,11 @@
 /**
- * @file Compact selectable summary for a single theatre showing.
- * @filename TheatreShowingSelectSummary.tsx
+ * @fileoverview Compact selectable summary component for a single theatre showing.
  */
 
 import {cn} from "@/common/lib/utils.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {formatShowingInfo} from "@/domains/showings/utilities/formatShowingInfo.ts";
-import {
-    IconTextCSS,
-    PrimaryTextBaseCSS,
-    SecondaryTextBaseCSS,
-} from "@/common/constants/css/TextCSS.ts";
+import {IconTextCSS} from "@/common/constants/css/TextCSS.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import buildString from "@/common/utility/buildString.ts";
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
@@ -19,27 +14,23 @@ import {Captions, Volume2} from "lucide-react";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
+import {SROnly} from "@/views/common/_comp/screen-readers";
+import {ReactElement} from "react";
 
-/**
- * Props for {@link TheatreShowingSelectSummary}.
- */
+const ICON_CSS = cn(IconTextCSS, "max-md:text-xs font-bold select-none");
+
+/** Props for the TheatreShowingSelectSummary component. */
 type SummaryProps = {
-    /** {@link PopulatedShowing} | {@link ShowingDetails} */
     showing: PopulatedShowing | ShowingDetails;
-
-    /** Container style overrides. */
     className?: string;
 };
 
-/** Derived from {@link IconTextCSS}. */
-const ICON_CSS = cn(IconTextCSS, "max-md:text-sm select-none");
-
 /**
- * Selection card using {@link formatShowingInfo} for data normalization.
+ * Displays a summary of a movie showing including poster, metadata, and language options.
  */
-const TheatreShowingSelectSummary = (
+export function TheatreShowingSelectSummary(
     {showing, className}: SummaryProps,
-) => {
+): ReactElement {
     const {
         movieSlug,
         showingSlug,
@@ -58,21 +49,26 @@ const TheatreShowingSelectSummary = (
     );
 
     return (
-        <div className={cn("flex space-x-3", className)}>
+        <div className={cn("flex", className)}>
             <section>
                 <SectionHeader srOnly>Poster Image</SectionHeader>
-                <MoviePosterImage src={posterImage?.secure_url} className="h-44"/>
+                <MoviePosterImage
+                    src={posterImage?.secure_url}
+                    className="h-44 rounded-r-none"
+                />
             </section>
 
-            <div className="flex-1 flex flex-col justify-between space-y-2">
+            <div className="flex-1 flex flex-col justify-between space-y-2 py-2 px-4">
                 <section>
-                    <SectionHeader srOnly>Movie Meta</SectionHeader>
+                    <SROnly text="Movie Meta"/>
 
-                    <LoggedLink to={`/browse/movies/${movieSlug}`} className={cn(
-                        PrimaryTextBaseCSS,
-                        "font-bold hover:underline underline-offset-4",
-                        "max-md:text-sm",
-                    )}>
+                    <LoggedLink
+                        to={`/browse/movies/${movieSlug}`}
+                        className={cn(
+                            "primary-text font-bold max-md:text-sm",
+                            "hover:underline underline-offset-4 line-clamp-2",
+                        )}
+                    >
                         {formattedMovieTitle}
                     </LoggedLink>
 
@@ -92,7 +88,7 @@ const TheatreShowingSelectSummary = (
                 </section>
 
                 <section className="flex justify-between items-center">
-                    <span className={cn(SecondaryTextBaseCSS, "text-sm")}>
+                    <span className="secondary-text text-sm">
                         {formattedStartTime}
                     </span>
 
@@ -109,6 +105,5 @@ const TheatreShowingSelectSummary = (
             </div>
         </div>
     );
-};
+}
 
-export default TheatreShowingSelectSummary;

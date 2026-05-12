@@ -7,8 +7,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import { IconTextCSS } from "@/common/constants/css/TextCSS.ts";
 import { TvMinimal } from "lucide-react";
-import TheatreShowingSelectSummary
-    from "@/views/client/theatres/_comp/browse-theatres/TheatreShowingSelectSummary.tsx";
+import {
+    TheatreShowingSelectSummary
+} from "@/views/client/theatres/_comp/browse-theatres/TheatreShowingSelectSummary.tsx";
 import { ShowingDetails } from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import { PopulatedShowing } from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 

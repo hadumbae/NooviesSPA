@@ -7,8 +7,9 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/commo
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
-import TheatreShowingSelectSummary
-    from "@/views/client/theatres/_comp/browse-theatres/TheatreShowingSelectSummary.tsx";
+import {
+    TheatreShowingSelectSummary
+} from "@/views/client/theatres/_comp/browse-theatres/TheatreShowingSelectSummary.tsx";
 import {ReactElement} from "react";
 
 /** Props for the TheatreScreenShowingSelectCard component. */
