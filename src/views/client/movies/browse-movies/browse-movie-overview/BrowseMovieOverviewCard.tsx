@@ -43,8 +43,8 @@ export function BrowseMovieOverviewCard({movie}: CardProps): ReactElement {
             <CardHeader className="p-0">
                 <MoviePosterLink
                     className="w-full h-72 rounded-b-none"
+                    url={posterImage?.secure_url}
                     slug={slug}
-                    image={posterImage}
                     alt={title}
                 />
             </CardHeader>

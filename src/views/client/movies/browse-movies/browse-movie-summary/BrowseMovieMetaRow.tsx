@@ -27,7 +27,7 @@ export function BrowseMovieMetaRow({movie, className}: SpanProps): ReactElement 
             <MoviePosterLink
                 className="h-32 aspect-[2/3]"
                 slug={slug}
-                image={posterImage}
+                url={posterImage?.secure_url}
                 alt={`'${title}' Poster Image`}
             />
 

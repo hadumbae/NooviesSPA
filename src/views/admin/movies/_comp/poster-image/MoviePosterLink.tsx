@@ -5,20 +5,20 @@ import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.ts
 import {ReactElement, useState} from "react";
 import {HasNoMoviePosterPlaceholder} from "@/views/admin/movies/_comp/poster-image/HasNoMoviePosterPlaceholder.tsx";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
-import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import {URLString} from "@/common/schema/strings/URLStringSchema.ts";
 
 /** Props for the MoviePosterLink component. */
 type PosterProps = {
     alt?: string;
     className?: string;
     slug: SlugString;
-    image?: CloudinaryImage | null;
+    url?: URLString | null;
 };
 
 /**
  * Renders a movie poster wrapped in a navigation link that logs user interaction.
  */
-export function MoviePosterLink({className, alt, slug, image}: PosterProps): ReactElement {
+export function MoviePosterLink({className, alt, slug, url}: PosterProps): ReactElement {
     const [hasError, setHasError] = useState<boolean>(false);
 
     const navObject = {
@@ -28,7 +28,7 @@ export function MoviePosterLink({className, alt, slug, image}: PosterProps): Rea
         context: {system: "CLIENT", slug},
     };
 
-    if (!image || hasError) {
+    if (!url || hasError) {
         return (
             <LoggedLink {...navObject}>
                 <HasNoMoviePosterPlaceholder
@@ -42,7 +42,7 @@ export function MoviePosterLink({className, alt, slug, image}: PosterProps): Rea
     return (
         <LoggedLink {...navObject}>
             <img
-                src={image.secure_url}
+                src={url}
                 alt={alt}
                 loading="lazy"
                 onError={() => setHasError(true)}
