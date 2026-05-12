@@ -29,8 +29,8 @@ type CardProps = {
 const MyFavouriteMovieCompactCard = (
     {movie}: CardProps
 ) => {
-    const {slug, title, tagline, formatted} = formatMovieData(movie);
-    const {posterURL, releaseYear, duration, genreList} = formatted;
+    const {slug, title, tagline, posterImage, formatted} = formatMovieData(movie);
+    const {releaseYear, duration, genreList} = formatted;
 
     const movieMeta = buildString([releaseYear, duration, genreList], " • ");
 
@@ -51,7 +51,7 @@ const MyFavouriteMovieCompactCard = (
             <CardContent className="p-4 space-y-5">
                 <div className="flex items-stretch space-x-4">
                     <section>
-                        <MoviePosterImage src={posterURL} className="h-40"/>
+                        <MoviePosterImage url={posterImage?.secure_url} className="h-40"/>
                     </section>
 
                     <div className="flex-1 flex flex-col justify-between">

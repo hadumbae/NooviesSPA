@@ -31,7 +31,7 @@ const PersonDetailsCreditList: FC<AccordionListProps> = ({personName, department
 
             return (
                 <section key={`${role}-${department}`} className="space-y-2">
-                    <SROnly>Grouped by Role Type : {role}</SROnly>
+                    <SROnly text={`Grouped by Role Type : ${role}`} />
 
                     <h1 className="primary-text subsection-title">{role}</h1>
 

@@ -44,7 +44,7 @@ export const MovieReviewIndexCardMovieSection = (
 
             <LoggedLink to={`/browse/movies/${slug}`}>
                 <MoviePosterImage
-                    src={posterImage?.secure_url}
+                    url={posterImage?.secure_url}
                     className="h-24"
                 />
             </LoggedLink>

@@ -59,7 +59,7 @@ export const CustomerReservationCard = (
             >
                 <MoviePosterImage
                     className="h-28 md:h-40"
-                    src={posterURL}
+                    url={posterURL}
                     alt={`${title} Poster Image`}
                 />
 

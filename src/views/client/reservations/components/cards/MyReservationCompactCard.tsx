@@ -63,7 +63,7 @@ const MyReservationCompactCard = ({reservation}: CardProps) => {
             <CardContent className="p-4 space-x-3 flex items-center">
                 <section>
                     <MoviePosterImage
-                        src={posterImage?.secure_url}
+                        url={posterImage?.secure_url}
                         alt={`${movieTitle} Poster`}
                         className="h-52 lg:h-60"
                     />

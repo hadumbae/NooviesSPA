@@ -69,12 +69,12 @@ export const ReservationByCodeDetailsSection = (
 
             <div className="flex space-x-3">
                 <div>
-                    <MoviePosterImage className="h-36 md:h-48" src={posterURL}/>
+                    <MoviePosterImage className="h-36 md:h-48" url={posterURL}/>
                 </div>
 
                 <Card className="flex-1">
                     <CardContent className="p-3 space-y-2">
-                        {/** Movie Title and Categorization */}
+                        {/** Movie Title and Categorisation */}
                         <div className="space-y-1">
                             <PrimaryHeaderText as="h2">{title}</PrimaryHeaderText>
                             <div className="flex max-md:flex-col max-md:space-y-1 md:space-x-5">

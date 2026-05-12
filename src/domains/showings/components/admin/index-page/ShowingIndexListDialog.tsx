@@ -176,7 +176,7 @@ const ShowingIndexListDialog = ({showing}: ShowingIndexListDialogProps) => {
                         <LucideIconText
                             className={cn(PrimaryTextBaseCSS)}
                             icon={Ticket}
-                            text={`$${ticketPrice.toString()} per ticket`}
+                            text={`$${ticketPrice ? ticketPrice.toString() : "0"} per ticket`}
                         />
 
                         <LucideIconText

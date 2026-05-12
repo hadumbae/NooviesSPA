@@ -56,7 +56,7 @@ const MyReservationPageHeader = (
         <header className="flex items-center space-x-3">
             <section>
                 <SectionHeader srOnly={true}>Poster Image</SectionHeader>
-                <MoviePosterImage src={posterImage?.secure_url} className="h-24"/>
+                <MoviePosterImage url={posterImage?.secure_url} className="h-24"/>
             </section>
 
             <section className="flex-1 flex flex-col gap-2">

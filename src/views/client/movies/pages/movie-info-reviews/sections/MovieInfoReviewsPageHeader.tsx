@@ -40,7 +40,7 @@ const MovieInfoReviewsPageHeader = (
     return (
         <header className="flex space-x-4 items-end">
             <LoggedLink to={`/browse/movies/${movieSlug}`}>
-                <MoviePosterImage src={posterURL} className="h-28"/>
+                <MoviePosterImage url={posterURL} className="h-28"/>
             </LoggedLink>
 
             <div className="space-y-1 py-3">

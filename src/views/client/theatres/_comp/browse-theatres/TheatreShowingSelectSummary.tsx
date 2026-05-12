@@ -53,7 +53,7 @@ export function TheatreShowingSelectSummary(
             <section>
                 <SectionHeader srOnly>Poster Image</SectionHeader>
                 <MoviePosterImage
-                    src={posterImage?.secure_url}
+                    url={posterImage?.secure_url}
                     className="h-44 rounded-r-none"
                 />
             </section>

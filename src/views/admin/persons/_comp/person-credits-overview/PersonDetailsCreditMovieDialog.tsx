@@ -10,6 +10,7 @@ import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {PersonCredit} from "@/domains/moviecredit/_feat/person-credit/schemas/PersonCreditSchema.ts";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
+import {SROnly} from "@/views/common/_comp/screen-readers";
 
 type MovieDialogProps = {
     /** The trigger content to open the dialog, e.g., an icon or button. */
@@ -65,7 +66,7 @@ const PersonDetailsCreditMovieDialog: FC<MovieDialogProps> = ({children, personN
                 {/* Basic Movie Details */}
 
                 <section className="flex items-center space-x-2">
-                    <SectionHeader srOnly={true}>Movie Basic Details : {title}</SectionHeader>
+                    <SROnly text={`Movie Basic Details : ${title}`} />
 
                     {/* Poster */}
 
