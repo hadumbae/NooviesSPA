@@ -12,8 +12,9 @@ import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.ts
 import {Info} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
-import BrowseMovieSummaryDialog
-    from "@/views/client/movies/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialog.tsx";
+import {
+    BrowseMovieSummaryDialog
+} from "@/views/client/movies/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialog.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {formatMovieData} from "@/domains/movies/_feat/formatters";

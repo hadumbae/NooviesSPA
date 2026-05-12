@@ -1,0 +1,30 @@
+/**
+ * @fileoverview A data loader component for lazy loading movie credits using
+ * the `useFetchMovieCredits` hook, useful for lazy loading movie credits.
+ */
+
+import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks/useFetchMovieCredits.ts";
+import {z, ZodTypeAny} from "zod";
+import {ReactElement, ReactNode} from "react";
+import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/query-options/MovieCreditQueryOptionsSchema.ts";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+
+/** Props for the MovieCreditDataLazyLoader component. */
+type LoaderProps<TSchema extends ZodTypeAny = ZodTypeAny> = {
+    schema: TSchema;
+    children: (data: z.infer<TSchema>) => ReactNode;
+    config?: RequestOptions;
+    queries?: MovieCreditQueryOptions;
+};
+
+/** Fetches movie credits and provides the validated data to its children via a render prop. */
+export function MovieCreditDataLazyLoader({children, schema, queries, config}: LoaderProps): ReactElement {
+    const query = useFetchMovieCredits({config, queries, schema});
+
+    return (
+        <QueryDataLoader query={query}>
+            {children}
+        </QueryDataLoader>
+    );
+}
