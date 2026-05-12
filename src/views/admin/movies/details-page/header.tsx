@@ -45,6 +45,7 @@ export function MovieDetailsHeader({movie}: HeaderProps) {
                     <MoviePosterImageDialog
                         url={posterImage?.secure_url}
                         alt="Poster Image"
+                        className="aspect-[2/3] h-36"
                     />
                 </div>
 

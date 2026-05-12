@@ -17,7 +17,6 @@ import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import LabelContent from "@/common/components/card-content/LabelContent.tsx";
 import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
-import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {formatMovieData} from "@/domains/movies/_feat/formatters";
@@ -58,15 +57,16 @@ export function MovieIndexDetailsDialog({children, movie}: DetailsDialogProps): 
                 <section className="flex items-center space-x-2">
                     <SectionHeader srOnly={true}>Basic Movie Details</SectionHeader>
 
-                    <section>
-                        <SectionHeader srOnly={true}>Poster Image</SectionHeader>
-                        <MoviePosterImageDialog url={posterURL} disableDialog={true}/>
-                    </section>
+                    <MoviePosterImageDialog
+                        url={posterURL}
+                        disableDialog={true}
+                        className="aspect-[2/3] w-16"
+                    />
 
                     <div className="flex-grow space-y-1">
-                        <h2 className={cn("font-bold", PrimaryTextBaseCSS)}>{title}</h2>
-                        <h3 className={cn("text-sm", SecondaryTextBaseCSS)}>{yearAndDuration}</h3>
-                        <h4 className={cn("text-xs", SecondaryTextBaseCSS)}>{genreList}</h4>
+                        <h2 className="primary-text font-bold">{title}</h2>
+                        <h3 className="secondary-text text-sm">{yearAndDuration}</h3>
+                        <h4 className="secondary-text text-xs">{genreList}</h4>
                     </div>
                 </section>
 
@@ -79,7 +79,7 @@ export function MovieIndexDetailsDialog({children, movie}: DetailsDialogProps): 
                     <LabelContent
                         orientation="horizontal"
                         label="Languages"
-                        classNames={{content: cn("text-sm", SecondaryTextBaseCSS)}}
+                        classNames={{content: "secondary-text text-sm"}}
                     >
                         <span>{languageList}</span>
                     </LabelContent>
@@ -87,7 +87,7 @@ export function MovieIndexDetailsDialog({children, movie}: DetailsDialogProps): 
                     <LabelContent
                         orientation="horizontal"
                         label="Subtitles"
-                        classNames={{content: cn("text-sm", SecondaryTextBaseCSS)}}
+                        classNames={{content: "secondary-text text-sm"}}
                     >
                         <span>{subtitleList}</span>
                     </LabelContent>
