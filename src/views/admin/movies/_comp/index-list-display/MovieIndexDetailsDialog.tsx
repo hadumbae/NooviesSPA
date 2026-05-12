@@ -60,7 +60,7 @@ export function MovieIndexDetailsDialog({children, movie}: DetailsDialogProps): 
 
                     <section>
                         <SectionHeader srOnly={true}>Poster Image</SectionHeader>
-                        <MoviePosterImageDialog src={posterURL} disableDialog={true}/>
+                        <MoviePosterImageDialog url={posterURL} disableDialog={true}/>
                     </section>
 
                     <div className="flex-grow space-y-1">

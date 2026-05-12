@@ -43,7 +43,7 @@ export function MovieDetailsHeader({movie}: HeaderProps) {
             <div className="flex space-x-3">
                 <div>
                     <MoviePosterImageDialog
-                        src={posterImage?.secure_url}
+                        url={posterImage?.secure_url}
                         alt="Poster Image"
                     />
                 </div>

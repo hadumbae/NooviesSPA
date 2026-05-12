@@ -135,7 +135,7 @@ const ShowingIndexListDialog = ({showing}: ShowingIndexListDialogProps) => {
 
                     <MoviePosterImageDialog
                         className="w-14 xl:w-14"
-                        src={posterImage?.secure_url}
+                        url={posterImage?.secure_url}
                         disableDialog={true}
                     />
 

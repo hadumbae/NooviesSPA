@@ -55,7 +55,7 @@ const ShowingMovieCard = ({movie}: CardProps) => {
                     {/*Poster Image*/}
                     <section>
                         <SectionHeader srOnly={true}>Movie Poster</SectionHeader>
-                        <MoviePosterImageDialog src={posterImage?.secure_url} className="h-full"/>
+                        <MoviePosterImageDialog url={posterImage?.secure_url} className="h-full"/>
                     </section>
                     <div className="flex-1 space-y-4">
                         <section className="space-y-2">

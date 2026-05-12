@@ -44,7 +44,7 @@ export function MovieQuickOverviewFetchCard(
                         <CardContent className={cn("p-3 flex space-x-2", className)}>
                             <section>
                                 <MoviePosterImageDialog
-                                    src={posterURL}
+                                    url={posterURL}
                                     className="w-16"
                                 />
                             </section>

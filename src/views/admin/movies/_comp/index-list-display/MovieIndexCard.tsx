@@ -32,7 +32,7 @@ export function MovieIndexCard({movie, className}: IndexCardProps): ReactElement
             <CardContent className="p-4 flex items-center space-x-2">
                 <section>
                     <MoviePosterImageDialog
-                        src={posterURL}
+                        url={posterURL}
                         className={className}
                     />
                 </section>

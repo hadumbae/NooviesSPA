@@ -51,7 +51,7 @@ const PersonDetailsCreditList: FC<AccordionListProps> = ({personName, department
                                     <CardContent className="py-4 px-3 flex items-center space-x-2">
 
                                         <div>
-                                            <MoviePosterImageDialog src={posterImage?.secure_url}/>
+                                            <MoviePosterImageDialog url={posterImage?.secure_url}/>
                                         </div>
 
                                         <div className="flex-1 min-w-0 flex flex-col space-y-2 justify-center">

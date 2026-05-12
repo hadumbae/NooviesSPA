@@ -56,7 +56,7 @@ export const AdminMovieWithRatingCard = (
                     <LoggedLink to={`/admin/movies/get/${slug}`}>
                         <MoviePosterImageDialog
                             className="h-32 rounded-sm"
-                            src={posterImage?.secure_url}
+                            url={posterImage?.secure_url}
                             alt={`${title} Poster Image`}
                         />
                     </LoggedLink>

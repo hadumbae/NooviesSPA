@@ -71,7 +71,7 @@ const PersonDetailsCreditMovieDialog: FC<MovieDialogProps> = ({children, personN
                     {/* Poster */}
 
                     <div>
-                        <MoviePosterImageDialog src={posterImage?.secure_url}/>
+                        <MoviePosterImageDialog url={posterImage?.secure_url}/>
                     </div>
 
                     {/* Title, Runtime, Release Date */}
