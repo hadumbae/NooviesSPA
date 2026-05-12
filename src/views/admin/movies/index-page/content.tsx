@@ -4,7 +4,6 @@
  * based on administrative movie data.
  */
 
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import MovieIndexPageHeader from "@/views/admin/movies/index-page/header.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
@@ -17,6 +16,7 @@ import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts"
 import {ReactElement} from "react";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {MovieIndexCard} from "@/views/admin/movies/_comp/index-list-display";
+import {SROnly} from "@/views/common/_comp/screen-readers";
 
 type ContentProps = {
     page: number;
@@ -37,21 +37,24 @@ export function MovieIndexPageContent(
 
     return (
         <PageFlexWrapper>
-            <MovieIndexPageHeader />
+            <MovieIndexPageHeader/>
 
             <PresetFilterDialog
                 title="Movie Filters"
                 description="Filter and sort movies here."
             >
-                <MovieQueryOptionFormContainer presetValues={searchParams} />
+                <MovieQueryOptionFormContainer presetValues={searchParams}/>
             </PresetFilterDialog>
 
             {movies.length > 0 ? (
-                <section className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-                    <SectionHeader srOnly={true}>List Of Movies</SectionHeader>
+                <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+                    <SROnly text="List Of Movies"/>
 
                     {movies.map((movie: MovieDetails) => (
-                        <MovieIndexCard className="w-16" movie={movie} key={movie._id} />
+                        <MovieIndexCard
+                            key={movie._id}
+                            movie={movie}
+                        />
                     ))}
                 </section>
             ) : (
