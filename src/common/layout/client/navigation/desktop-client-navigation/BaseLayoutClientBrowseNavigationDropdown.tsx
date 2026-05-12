@@ -1,9 +1,8 @@
 /**
- * @file Desktop navigation dropdown for browsing movies, genres, and theatres.
- * @filename BaseLayoutClientBrowseNavigationDropdown.tsx
+ * @fileoverview Desktop navigation dropdown for browsing movies, genres, and theatres.
  */
 
-import {FC} from 'react';
+import {ReactElement} from 'react';
 import {DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from "@/common/components/ui/dropdown-menu.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ChevronDown} from "lucide-react";
@@ -15,9 +14,9 @@ import BaseLayoutDesktopClientNavigation
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
- * Renders a "Browse" dropdown menu with links to major catalog sections.
+ * A dropdown menu providing navigation links to major catalogue sections like movies, genres, and theatres.
  */
-const BaseLayoutClientBrowseNavigationDropdown: FC = () => {
+export function BaseLayoutClientBrowseNavigationDropdown(): ReactElement {
     const pathNames = [
         "/browse/movies",
         "/browse/genres",
@@ -44,25 +43,23 @@ const BaseLayoutClientBrowseNavigationDropdown: FC = () => {
                     component={BaseLayoutDesktopClientNavigation.name}
                     to="/browse/movies"
                 >
-                    Movie
+                    Browse Movies
                 </DropdownMenuLink>
 
                 <DropdownMenuLink
                     component={BaseLayoutDesktopClientNavigation.name}
                     to="/browse/genres"
                 >
-                    Genres
+                    Browse Genres
                 </DropdownMenuLink>
 
                 <DropdownMenuLink
                     component={BaseLayoutDesktopClientNavigation.name}
                     to="/browse/theatres"
                 >
-                    Theatres
+                    Browse Theatres
                 </DropdownMenuLink>
             </DropdownMenuContent>
         </DropdownMenu>
     );
-};
-
-export default BaseLayoutClientBrowseNavigationDropdown;
+}

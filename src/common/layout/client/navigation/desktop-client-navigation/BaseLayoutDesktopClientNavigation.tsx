@@ -11,8 +11,9 @@ import useAuthLogoutSubmitMutation from "@/domains/auth/hooks/useAuthLogoutSubmi
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import BaseLayoutClientProfileNavigationDropdown
     from "@/common/layout/client/navigation/desktop-client-navigation/BaseLayoutClientProfileNavigationDropdown.tsx";
-import BaseLayoutClientBrowseNavigationDropdown
-    from "@/common/layout/client/navigation/desktop-client-navigation/BaseLayoutClientBrowseNavigationDropdown.tsx";
+import {
+    BaseLayoutClientBrowseNavigationDropdown
+} from "@/common/layout/client/navigation/desktop-client-navigation/BaseLayoutClientBrowseNavigationDropdown.tsx";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 import BaseLayoutDesktopThemeDropdown
     from "@/common/layout/common-layout/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";

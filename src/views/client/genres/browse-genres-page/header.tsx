@@ -14,7 +14,7 @@ export function BrowseGenresPageHeader(): ReactElement {
     return (
         <header>
             <HeaderTitle>Genres</HeaderTitle>
-            <HeaderDescription>Browse</HeaderDescription>
+            <HeaderDescription>Browse all the genres available!</HeaderDescription>
         </header>
     );
 }
