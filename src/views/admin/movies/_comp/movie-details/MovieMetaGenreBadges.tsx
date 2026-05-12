@@ -1,0 +1,30 @@
+/**
+ * @fileoverview Component for displaying a list of movie genres as styled badges.
+ */
+import {ReactElement} from "react";
+import {Genre} from "@/domains/genres/schema";
+import {Badge} from "@/common/components/ui/badge.tsx";
+import {cn} from "@/common/lib/utils.ts";
+
+/** Props for the MovieMetaGenreBadges component. */
+type BadgeProps = {
+    genres: Genre[];
+    className?: string;
+};
+
+/**
+ * Renders a horizontal list of genre badges for movie metadata displays.
+ */
+export function MovieMetaGenreBadges(
+    {genres, className}: BadgeProps
+): ReactElement {
+    return (
+        <div className={cn("space-x-2", className)}>
+            {genres.map((genre) => (
+                <Badge key={genre._id} variant="outline" className="text-xs">
+                    {genre.name}
+                </Badge>
+            ))}
+        </div>
+    );
+}
