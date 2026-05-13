@@ -1,32 +1,35 @@
-/** @fileoverview Hook for computing and memoizing default values for the movie submission form. */
+/**
+ * @fileoverview Hook for computing and stabilizing default values for the movie submission form.
+ */
 
-import {MovieFormValues} from "@/domains/movies/schema/form/MovieForm.types.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
-import {useMemo, useRef} from "react";
 import {isEqual} from "lodash";
 
-/** Configuration parameters for determining initial form state. */
+import {useRef} from "react";
+
+import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data/MovieFormSchema.ts";
+
+/** Configuration options for movie form default values. */
 type DefaultConfig = {
-    /** Optional partial overrides for the form. */
-    presetValues?: Partial<MovieFormValues>;
-    /** Optional existing movie document for editing. */
+    presetValues?: Partial<MovieFormStarterValues>;
     movie?: Movie;
 }
 
 /**
- * Computes the default values for the movie form based on existing movie data and presets.
+ * Computes initial form values by merging base defaults, existing movie data, and optional presets.
  */
 export function useMovieSubmitFormDefaultValues(
     {presetValues, movie}: DefaultConfig = {}
-): MovieFormValues {
-    const heldValues = useRef<MovieFormValues | null>(null);
+): MovieFormStarterValues {
+    const cleanedMovie = movie && {...movie, releaseDate: movie.releaseDate?.toFormat("yyyy-MM-dd")};
 
-    const defaultValues = useMemo(() => ({
+    const defaultValues: MovieFormStarterValues = {
         title: "",
         originalTitle: "",
         tagline: "",
         country: "",
         synopsis: "",
+        releaseDate: "",
         isReleased: false,
         runtime: "",
         originalLanguage: "",
@@ -35,14 +38,15 @@ export function useMovieSubmitFormDefaultValues(
         subtitles: [],
         genres: [],
         isAvailable: true,
-        ...movie,
+        ...cleanedMovie,
         ...presetValues,
-        releaseDate: presetValues?.releaseDate ?? movie?.releaseDate?.toFormat("yyyy-MM-dd") ?? "",
-    }), [presetValues, movie]);
+    };
+
+    const heldValues = useRef<MovieFormStarterValues>(defaultValues);
 
     if (!isEqual(heldValues.current, defaultValues)) {
         heldValues.current = defaultValues;
     }
 
-    return heldValues.current ?? defaultValues;
+    return heldValues.current;
 }

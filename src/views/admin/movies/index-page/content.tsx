@@ -10,7 +10,7 @@ import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.ts
 import MovieQueryOptionFormContainer
     from "@/views/admin/movies/_feat/submit-query-options/MovieQueryOptionFormContainer.tsx";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries/MovieQueryOption.schema.ts";
+import {MovieQueryOptionSchema} from "../../../../domains/movies/schema/queries/MovieQueryOptionSchema.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {ReactElement} from "react";

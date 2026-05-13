@@ -28,7 +28,7 @@
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import HookFormSortToggle from "@/common/components/forms/HookFormSortToggle.tsx";
 import {UseFormReturn} from "react-hook-form";
-import {MovieQueryOptionFormValues} from "@/domains/movies/schema/queries/MovieQueryOptionFormValueSchema.ts";
+import {MovieQueryOptionFormValues} from "../../../../../domains/movies/_feat/submit-queries/MovieQueryOptionFormValueSchema.ts";
 
 /**
  * @typedef FieldsetProps

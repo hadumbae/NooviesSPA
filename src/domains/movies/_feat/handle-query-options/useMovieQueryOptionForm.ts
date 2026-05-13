@@ -1,8 +1,7 @@
-import { MovieQueryOptions } from "@/domains/movies/schema/queries/MovieQueryOption.types.ts";
 import { useForm, UseFormReturn } from "react-hook-form";
-import { MovieQueryOptionFormValues } from "@/domains/movies/schema/queries/MovieQueryOptionFormValueSchema.ts";
+import { MovieQueryOptionFormValues } from "../submit-queries/MovieQueryOptionFormValueSchema.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { MovieQueryOptionSchema } from "@/domains/movies/schema/queries/MovieQueryOption.schema.ts";
+import {MovieQueryOptions, MovieQueryOptionSchema} from "../../schema/queries/MovieQueryOptionSchema.ts";
 
 /**
  * Parameters for initializing the movie query option form.

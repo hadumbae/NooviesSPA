@@ -1,6 +1,6 @@
 /**
- * @file Validated movie schema including populated genres and calculated rating metrics.
- * @filename MovieWithRatingSchema.ts
+ * @fileoverview Validated movie schema including populated genres and calculated rating metrics.
+ *
  */
 
 import {ExtendedMovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
@@ -9,19 +9,18 @@ import {MovieReleaseDateRefinement} from "@/domains/movies/schema/movie/MovieSch
 import {z} from "zod";
 
 /**
- * Extended movie schema that adds an 'averageRating' field to the populated movie model.
+ * Movie schema that adds an average rating field to the populated movie model.
  */
 export const ExtendedMovieWithRatingSchema = ExtendedMovieWithGenresSchema.extend({
-    /** The arithmetic mean of all user reviews for this movie. Defaults to 0 if unrated. */
     averageRating: NonNegativeNumberSchema,
 });
 
 /**
- * Validated Movie schema with populated genres, rating metrics, and lifecycle refinements.
+ * Validated movie schema with populated genres, rating metrics, and release date refinements.
  */
 export const MovieWithRatingSchema = ExtendedMovieWithRatingSchema.superRefine(MovieReleaseDateRefinement);
 
 /**
- * TypeScript type inferred from {@link MovieWithRatingSchema}.
+ * TypeScript type for a movie including genres and rating metrics.
  */
 export type MovieWithRating = z.infer<typeof MovieWithRatingSchema>;

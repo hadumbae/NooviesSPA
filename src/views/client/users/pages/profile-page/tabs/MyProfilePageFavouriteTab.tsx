@@ -20,10 +20,9 @@ import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import MyFavouriteMovieCompactCard from "@/views/client/movies/components/card/favourites/MyFavouriteMovieCompactCard.tsx";
 import {ChevronRight} from "lucide-react";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import {
-    PaginatedMovieDetails,
-    PaginatedMovieDetailsSchema
-} from "@/domains/movies/schema/movie/PaginatedMovieDetailsSchema.ts";
+import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie";
+import {PaginatedItems} from "@/common/types";
 
 type TabProps = {
     /**
@@ -71,8 +70,8 @@ const MyProfilePageFavouriteTab = (
                 </LoggedHoverLink>
             </div>
 
-            <ValidatedDataLoader query={query} schema={PaginatedMovieDetailsSchema}>
-                {({totalItems, items: movies}: PaginatedMovieDetails) => {
+            <ValidatedDataLoader query={query} schema={generatePaginationSchema(MovieDetailsSchema)}>
+                {({totalItems, items: movies}: PaginatedItems<MovieDetails>) => {
                     if (totalItems === 0) {
                         return (
                             <EmptyArrayContainer

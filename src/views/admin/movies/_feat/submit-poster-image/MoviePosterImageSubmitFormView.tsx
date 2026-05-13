@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { Form } from "@/common/components/ui/form.tsx";
 import { SubmitHandler, UseFormReturn } from "react-hook-form";
-import { MoviePosterImageForm, MoviePosterImageFormValues } from "@/domains/movies/schema/form/MoviePosterImage.types.ts";
 import { UseMutationResult } from "@tanstack/react-query";
 import { cn } from "@/common/lib/utils.ts";
 import {HookFormFileInput} from "@/common/components/forms/HookFormFileInput.tsx";
@@ -10,6 +9,10 @@ import { ImageUp, Loader } from "lucide-react";
 import ACCEPTED_IMAGE_TYPES from "@/common/constants/AcceptedImageTypeConstant.ts";
 import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
+import {
+    MoviePosterImageFormData,
+    MoviePosterImageFormValues
+} from "../../../../../domains/movies/_feat/submit-image/MoviePosterImageFormSchema.ts";
 
 /**
  * Props for the `MoviePosterImageSubmitFormView` component.
@@ -19,7 +22,7 @@ type ViewProps = {
     form: UseFormReturn<MoviePosterImageFormValues>;
 
     /** Mutation object from `react-query` to handle form submission */
-    mutation: UseMutationResult<Movie, unknown, MoviePosterImageForm>;
+    mutation: UseMutationResult<Movie, unknown, MoviePosterImageFormData>;
 
     /** Handler function called on form submission */
     submitHandler: SubmitHandler<MoviePosterImageFormValues>;

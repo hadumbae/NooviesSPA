@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react';
-import { MovieFormValues } from "@/domains/movies/schema/form/MovieForm.types.ts";
 import MovieSubmitFormContainer from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormContainer.tsx";
 import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
 import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
@@ -15,6 +14,9 @@ import {
 } from "@/common/components/ui/Sheet";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
+
+import {MovieFormStarterValues} from "../../../../../domains/movies/_feat/submit-data";
+
 /**
  * Props for `MovieSubmitFormPanel`.
  *
@@ -22,7 +24,7 @@ import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
  * @template TReturn - The type returned by the mutation (here `Movie`).
  * @template TFormValues - The type of the form values (here `MovieFormValues`).
  */
-type FormPanelProps = FormContainerProps<Movie, Movie, MovieFormValues> &
+type FormPanelProps = FormContainerProps<Movie, Movie, MovieFormStarterValues> &
     PresetOpenState & {
     /** Optional trigger element (e.g., button or icon) that opens the panel. */
     children?: ReactNode;

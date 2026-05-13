@@ -10,8 +10,9 @@ import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx"
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import useFetchMovies from "@/domains/movies/_feat/crud-hooks/useFetchMovies.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {MovieArray, MovieArraySchema} from "@/domains/movies/schema/movie/MovieArraySchema.ts";
 import {ReactElement} from "react";
+import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {Movie, MovieSchema} from "@/domains/movies/schema/movie";
 
 /** Props for the MovieHookFormSelect component. */
 type SelectProps<TSubmit extends FieldValues> = {
@@ -32,8 +33,12 @@ export function MovieHookFormSelect<TSubmit extends FieldValues>(props: SelectPr
     const query = useFetchMovies({queries: filters});
 
     return (
-        <ValidatedDataLoader query={query} schema={MovieArraySchema} loaderComponent={Loader}>
-            {(movies: MovieArray) => {
+        <ValidatedDataLoader
+            query={query}
+            schema={generateArraySchema(MovieSchema)}
+            loaderComponent={Loader}
+        >
+            {(movies: Movie[]) => {
                 /** Transforms movie documents into standardized ReactSelect options. */
                 const options: ReactSelectOption[] = movies.map((movie): ReactSelectOption => ({
                     label: movie.title,

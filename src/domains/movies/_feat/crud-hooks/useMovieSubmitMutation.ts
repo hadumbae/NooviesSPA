@@ -1,5 +1,4 @@
 import {UseFormReturn} from "react-hook-form";
-import {MovieForm, MovieFormValues} from "@/domains/movies/schema/form/MovieForm.types.ts";
 import MovieRepository from "@/domains/movies/_feat/crud/remove/MovieRepository.ts";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
@@ -13,6 +12,9 @@ import {
     MutationOnSubmitParams
 } from "@/common/type/form/MutationSubmitParams.ts";
 import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
+import {MovieFormData} from "../submit-data/MovieFormSchema.ts";
+
+import {MovieFormStarterValues} from "../submit-data";
 
 /**
  * Parameters used for submitting or editing a movie entry.
@@ -21,7 +23,7 @@ import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
  */
 export type MovieSubmitParams = MutationOnSubmitParams<Movie> & MutationEditByIDParams & {
     /** React Hook Form instance for the movie form. */
-    form: UseFormReturn<MovieFormValues>;
+    form: UseFormReturn<MovieFormStarterValues>;
 };
 
 /**
@@ -50,7 +52,7 @@ export type MovieSubmitParams = MutationOnSubmitParams<Movie> & MutationEditByID
  */
 export default function useMovieSubmitMutation(
     params: MovieSubmitParams
-): UseMutationResult<Movie, unknown, MovieForm> {
+): UseMutationResult<Movie, unknown, MovieFormData> {
     const {
         form,
         onSubmitSuccess,
@@ -72,7 +74,7 @@ export default function useMovieSubmitMutation(
      * @throws Will throw an error if the response fails schema validation.
      * @returns The validated `Movie` object from the backend.
      */
-    const submitMovieData = async (data: MovieForm) => {
+    const submitMovieData = async (data: MovieFormData) => {
         const action = isEditing
             ? () => MovieRepository.update({_id, data})
             : () => MovieRepository.create({data});

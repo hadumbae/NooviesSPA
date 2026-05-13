@@ -3,12 +3,15 @@ import useMoviePosterImageSubmitMutation
     from "@/domains/movies/_feat/submit-image/useMoviePosterImageSubmitMutation.ts";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useMoviePosterImageSubmitForm from "@/domains/movies/_feat/submit-image/useMoviePosterImageSubmitForm.ts";
-import { MoviePosterImageForm, MoviePosterImageFormValues } from "@/domains/movies/schema/form/MoviePosterImage.types.ts";
 import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
 import MoviePosterImageSubmitFormView
     from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormView.tsx";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
+import {
+    MoviePosterImageFormData,
+    MoviePosterImageFormValues
+} from "../../../../../domains/movies/_feat/submit-image/MoviePosterImageFormSchema.ts";
 
 /**
  * Props for `MoviePosterImageSubmitFormContainer`.
@@ -55,7 +58,7 @@ const MoviePosterImageSubmitFormContainer: FC<FormProps> = (props) => {
         });
 
         // Safe cast because Zod resolver ensures correct type
-        mutation.mutate(values as MoviePosterImageForm);
+        mutation.mutate(values as MoviePosterImageFormData);
     };
 
     return (

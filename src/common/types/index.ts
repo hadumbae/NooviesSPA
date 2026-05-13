@@ -1,12 +1,13 @@
 import {PaginatedItems} from "@/common/types/PaginatedItems.ts";
 import {UIOpenStateProps} from "@/common/types/UIOpenStateProps.ts";
 import {
-    QueryConfig,
+    IDQueryConfig,
     ListQueryConfig,
     PaginatedQueryConfig,
-    IDQueryConfig,
+    QueryConfig,
     SlugQueryConfig
 } from "@/common/types/QueryTypes.ts";
+import {AnyValues} from "@/common/types/AnyValues.ts";
 
 export type {
     PaginatedItems,
@@ -16,4 +17,5 @@ export type {
     PaginatedQueryConfig,
     IDQueryConfig,
     SlugQueryConfig,
+    AnyValues,
 }

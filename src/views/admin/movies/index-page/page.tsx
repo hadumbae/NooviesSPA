@@ -9,13 +9,12 @@ import useFetchPaginatedMovies from "@/domains/movies/_feat/crud-hooks/useFetchP
 import useParsedPaginationValue
     from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries/MovieQueryOption.schema.ts";
+import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {
-    PaginatedMovieDetails,
-    PaginatedMovieDetailsSchema
-} from "@/domains/movies/schema/movie/PaginatedMovieDetailsSchema.ts";
 import {MovieIndexPageContent} from "@/views/admin/movies/index-page/content.tsx";
+import {PaginatedItems} from "@/common/types";
+import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie";
+import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 
 const MOVIES_PER_PAGE = 20;
 
@@ -36,8 +35,8 @@ export function MovieIndexPage() {
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={PaginatedMovieDetailsSchema}>
-            {(paginatedMovies: PaginatedMovieDetails) => {
+        <ValidatedDataLoader query={query} schema={generatePaginationSchema(MovieDetailsSchema)}>
+            {(paginatedMovies: PaginatedItems<MovieDetails>) => {
                 const {totalItems, items: movies} = paginatedMovies;
 
                 return (

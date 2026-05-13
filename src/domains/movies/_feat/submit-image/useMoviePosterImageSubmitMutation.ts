@@ -1,5 +1,4 @@
 import { UseFormReturn } from "react-hook-form";
-import { MoviePosterImageForm, MoviePosterImageFormValues } from "@/domains/movies/schema/form/MoviePosterImage.types.ts";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import { toast } from "react-toastify";
 import { useMutation, UseMutationResult, useQueryClient } from "@tanstack/react-query";
@@ -9,6 +8,10 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
+import {
+    MoviePosterImageFormData,
+    MoviePosterImageFormValues
+} from "./MoviePosterImageFormSchema.ts";
 
 /**
  * Parameters for submitting a movie poster image via mutation.
@@ -50,7 +53,7 @@ type ImageSubmitParams = MutationOnSubmitParams<Movie> & {
  */
 export default function useMoviePosterImageSubmitMutation(
     params: ImageSubmitParams
-): UseMutationResult<Movie, unknown, MoviePosterImageForm> {
+): UseMutationResult<Movie, unknown, MoviePosterImageFormData> {
     const queryClient = useQueryClient();
     const { movieID, form, onSubmitSuccess, onSubmitError, successMessage, errorMessage } = params;
 
@@ -64,7 +67,7 @@ export default function useMoviePosterImageSubmitMutation(
      * @returns The parsed and validated movie returned from the server.
      * @throws If the upload or validation fails.
      */
-    const submitMoviePosterImage = async (values: MoviePosterImageForm) => {
+    const submitMoviePosterImage = async (values: MoviePosterImageFormData) => {
         const { posterImage } = values;
 
         const formData = new FormData();

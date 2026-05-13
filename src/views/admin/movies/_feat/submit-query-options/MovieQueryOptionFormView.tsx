@@ -4,10 +4,10 @@
 
 import {ReactElement} from 'react';
 import {SearchParamFormViewProps} from "@/common/type/form/SearchParamFormProps.ts";
-import {MovieQueryOptionFormValues} from "@/domains/movies/schema/queries/MovieQueryOptionFormValueSchema.ts";
+import {MovieQueryOptionFormValues} from "../../../../../domains/movies/_feat/submit-queries/MovieQueryOptionFormValueSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries/MovieQueryOption.schema.ts";
+import {MovieQueryOptionSchema} from "../../../../../domains/movies/schema/queries/MovieQueryOptionSchema.ts";
 import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAutoSubmit.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";

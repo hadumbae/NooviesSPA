@@ -10,19 +10,24 @@ import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import LanguageHookFormSelect from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
-import {MovieForm, MovieFormValues} from "@/domains/movies/schema/form/MovieForm.types.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import {MovieFormValuesSchema} from "@/domains/movies/schema/form/MovieForm.schema.ts";
+import {
+    MovieFormData
+} from "../../../../../domains/movies/_feat/submit-data/MovieFormSchema.ts";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {GenreHookFormSelect} from "@/views/admin/genres/_feat/form-input/GenreHookFormSelect.tsx";
+import {
+    MovieFormValuesSchema
+} from "../../../../../domains/movies/_feat/submit-data/MovieFormValuesSchema";
+import {MovieFormStarterValues} from "../../../../../domains/movies/_feat/submit-data";
 
 /** Props for the {@link MovieSubmitFormView} component. */
-type ViewProps = FormViewProps<Movie, MovieForm, MovieFormValues> & {
+type ViewProps = FormViewProps<Movie, MovieFormData, MovieFormStarterValues> & {
     className?: string;
     isPanel?: boolean;
 };
