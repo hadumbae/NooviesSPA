@@ -3,7 +3,7 @@ import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWa
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import useMoviePosterImageDeleteMutation
-    from "@/domains/movies/_feat/delete-image/useMoviePosterImageDeleteMutation.ts";
+    from "../../../../../domains/movies/_feat/manage-images/mutations/useMoviePosterImageDeleteMutation.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";

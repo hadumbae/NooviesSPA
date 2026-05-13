@@ -1,63 +1,49 @@
-import { FC } from 'react';
+/**
+ * @fileoverview Container component for managing the submission of movie poster images.
+ */
+
+import {ReactElement} from 'react';
 import useMoviePosterImageSubmitMutation
-    from "@/domains/movies/_feat/submit-image/useMoviePosterImageSubmitMutation.ts";
-import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useMoviePosterImageSubmitForm from "@/domains/movies/_feat/submit-image/useMoviePosterImageSubmitForm.ts";
+    from "../../../../../domains/movies/_feat/manage-images/mutations/useMoviePosterImageSubmitMutation.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {
+    useMoviePosterImageSubmitForm
+} from "@/domains/movies/_feat/manage-images";
 import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
-import MoviePosterImageSubmitFormView
-    from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormView.tsx";
+import {
+    MoviePosterImageSubmitFormView
+} from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormView.tsx";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {
     MoviePosterImageFormData,
     MoviePosterImageFormValues
-} from "../../../../../domains/movies/_feat/submit-image/MoviePosterImageFormSchema.ts";
+} from "@/domains/movies/_feat/manage-images";
 
-/**
- * Props for `MoviePosterImageSubmitFormContainer`.
- */
-type FormProps = MutationOnSubmitParams<Movie> & {
+/** Props for the MoviePosterImageSubmitFormContainer component. */
+export type FormProps = MutationOnSubmitParams<Movie> & {
     /** The ID of the movie to attach the poster image to */
     movieID: ObjectId;
-
     /** Optional additional CSS class names for the container */
     className?: string;
 };
 
 /**
- * Container component for submitting a movie poster image.
- *
- * Responsibilities:
- * - Initialize the React Hook Form instance for poster image submission.
- * - Set up the mutation via `useMoviePosterImageSubmitMutation` to handle API submission.
- * - Log the submission with `buildStandardLog`.
- * - Pass the form, mutation, and submit handler down to the presentational form view.
- *
- * @param props - FormProps
+ * Orchestrates the form state and mutation logic for uploading a movie poster.
  */
-const MoviePosterImageSubmitFormContainer: FC<FormProps> = (props) => {
-    const { movieID, className, ...mutationProps } = props;
-
-    // Initialize the form instance
+export function MoviePosterImageSubmitFormContainer(
+    {movieID, className, ...mutationProps}: FormProps
+): ReactElement {
     const form = useMoviePosterImageSubmitForm();
+    const mutation = useMoviePosterImageSubmitMutation({form, movieID, ...mutationProps});
 
-    // Create the mutation for submitting the poster image
-    const mutation = useMoviePosterImageSubmitMutation({ form, movieID, ...mutationProps });
-
-    /**
-     * Handles form submission.
-     * Logs the submission and triggers the mutation.
-     *
-     * @param values - Form values from React Hook Form
-     */
     const submitPosterImage = (values: MoviePosterImageFormValues) => {
         buildStandardLog({
             msg: "Submit Movie Poster Image Form",
             component: MoviePosterImageSubmitFormContainer.name,
-            context: { movie: movieID, values },
+            context: {movie: movieID, values},
         });
 
-        // Safe cast because Zod resolver ensures correct type
         mutation.mutate(values as MoviePosterImageFormData);
     };
 
@@ -69,6 +55,4 @@ const MoviePosterImageSubmitFormContainer: FC<FormProps> = (props) => {
             className={className}
         />
     );
-};
-
-export default MoviePosterImageSubmitFormContainer;
+}

@@ -4,7 +4,7 @@
 
 import {AnyValues} from "@/common/types";
 
-import {MovieQueryOptions} from "../../schema/queries/MovieQueryOptionSchema.ts";
+import {MovieQueryOptions} from "@/domains/movies/schema/queries";
 
 /** Form values derived from movie query options. */
 export type MovieQueryOptionFormValues = AnyValues<MovieQueryOptions>;

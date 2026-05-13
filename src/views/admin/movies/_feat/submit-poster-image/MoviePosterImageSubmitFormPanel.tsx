@@ -1,8 +1,9 @@
 import { FC, ReactNode, useState } from 'react';
 import { PresetOpenState } from "@/common/type/ui/OpenStateProps.ts";
 import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
-import MoviePosterImageSubmitFormContainer
-    from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormContainer.tsx";
+import {
+    MoviePosterImageSubmitFormContainer
+} from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormContainer.tsx";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {

@@ -8,12 +8,9 @@ import {
     MoviePosterImageFormData,
     MoviePosterImageFormSchema,
     MoviePosterImageFormValues
-} from "./MoviePosterImageFormSchema.ts";
+} from "../schema/MoviePosterImageFormSchema.ts";
 
-/**
- * Initializes and manages the form state for uploading movie poster images.
- */
-export default function useMoviePosterImageSubmitForm(): UseFormReturn<MoviePosterImageFormValues, unknown, MoviePosterImageFormData> {
+export function useMoviePosterImageSubmitForm(): UseFormReturn<MoviePosterImageFormValues, unknown, MoviePosterImageFormData> {
     const defaultValues: MoviePosterImageFormValues = {
         posterImage: "",
     };

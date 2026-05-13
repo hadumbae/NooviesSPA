@@ -1,60 +1,37 @@
-import { FC } from 'react';
-import { Form } from "@/common/components/ui/form.tsx";
-import { SubmitHandler, UseFormReturn } from "react-hook-form";
-import { UseMutationResult } from "@tanstack/react-query";
-import { cn } from "@/common/lib/utils.ts";
+/**
+ * @fileoverview Form view for uploading and submitting movie poster images.
+ */
+
+import {ReactElement} from 'react';
+import {Form} from "@/common/components/ui/form.tsx";
+import {SubmitHandler, UseFormReturn} from "react-hook-form";
+import {UseMutationResult} from "@tanstack/react-query";
+import {cn} from "@/common/lib/utils.ts";
 import {HookFormFileInput} from "@/common/components/forms/HookFormFileInput.tsx";
-import { Button } from "@/common/components/ui/button.tsx";
-import { ImageUp, Loader } from "lucide-react";
+import {Button} from "@/common/components/ui/button.tsx";
+import {ImageUp, Loader} from "lucide-react";
 import ACCEPTED_IMAGE_TYPES from "@/common/constants/AcceptedImageTypeConstant.ts";
 import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {
     MoviePosterImageFormData,
     MoviePosterImageFormValues
-} from "../../../../../domains/movies/_feat/submit-image/MoviePosterImageFormSchema.ts";
+} from "@/domains/movies/_feat/manage-images";
 
-/**
- * Props for the `MoviePosterImageSubmitFormView` component.
- */
+/** Props for the MoviePosterImageSubmitFormView component. */
 type ViewProps = {
-    /** The React Hook Form instance controlling this form */
-    form: UseFormReturn<MoviePosterImageFormValues>;
-
-    /** Mutation object from `react-query` to handle form submission */
+    form: UseFormReturn<MoviePosterImageFormValues, unknown, MoviePosterImageFormData>;
     mutation: UseMutationResult<Movie, unknown, MoviePosterImageFormData>;
-
-    /** Handler function called on form submission */
     submitHandler: SubmitHandler<MoviePosterImageFormValues>;
-
-    /** Optional additional CSS class names for styling the form container */
     className?: string;
 };
 
-/**
- * A form view component for submitting a movie poster image.
- *
- * This component renders:
- * - A file input for uploading the poster image, with accepted file type info.
- * - A submit button that shows a spinner while submission is in progress.
- *
- * The file input and button are disabled while the mutation is pending to prevent
- * duplicate submissions or changes mid-upload.
- *
- * Accessibility:
- * - The button includes `aria-busy` to indicate submission state to assistive technologies.
- *
- * @param props - ViewProps
- * @returns A JSX element rendering the poster image submission form
- */
-const MoviePosterImageSubmitFormView: FC<ViewProps> = (props) => {
-    const { form, mutation, submitHandler, className } = props;
-    const { isPending } = mutation;
+/** Form component for movie poster image uploads. */
+export function MoviePosterImageSubmitFormView(
+    {form, mutation, submitHandler, className}: ViewProps
+): ReactElement {
+    const {isPending} = mutation;
 
-    /**
-     * JSX for the submit button.
-     * Shows a loader icon when submitting, otherwise shows the default icon and text.
-     */
     const uploadButton = (
         <Button
             variant="default"
@@ -62,14 +39,10 @@ const MoviePosterImageSubmitFormView: FC<ViewProps> = (props) => {
             className={cn("w-full bg-primary", PrimaryButtonCSS)}
             aria-busy={isPending}
         >
-            {isPending ? <Loader className="animate-spin" /> : <> <ImageUp /> Upload </>}
+            {isPending ? <Loader className="animate-spin"/> : <> <ImageUp/> Upload </>}
         </Button>
     );
 
-    /**
-     * Human-readable description of accepted image file types for the file input.
-     * Converts MIME types like "image/png" → "PNG".
-     */
     const acceptedFileTypes = ACCEPTED_IMAGE_TYPES
         .map((t) => t.replace("image/", "").toUpperCase())
         .join(", ");
@@ -94,6 +67,4 @@ const MoviePosterImageSubmitFormView: FC<ViewProps> = (props) => {
             </form>
         </Form>
     );
-};
-
-export default MoviePosterImageSubmitFormView;
+}

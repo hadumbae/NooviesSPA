@@ -1,0 +1,16 @@
+/**
+ * @fileoverview Type definitions for the movie image repository operations.
+ */
+
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+
+/** Configuration for uploading a movie poster image. */
+export type UploadPosterImageConfig = {
+    movieID: ObjectId;
+    data: FormData;
+}
+
+/** Configuration for removing a movie poster image. */
+export type RemovePosterImageConfig = {
+    movieID: ObjectId;
+}

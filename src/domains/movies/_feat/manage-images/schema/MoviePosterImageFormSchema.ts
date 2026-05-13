@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {refineRequireImageFile} from "src/common/features/handle-image-upload";
+import {refineRequireImageFile} from "@/common/features/handle-image-upload";
 import {AnyValues} from "@/common/types";
 
 /** Schema for validating the uploaded movie poster file and ensuring it is not empty. */
