@@ -1,7 +1,5 @@
 /**
- * @fileoverview Defines the breadcrumb navigation for a movie's personnel listing.
- * Provides a hierarchical path from the movie library to the specific movie profile,
- * ending at the filtered department view (Cast or Crew).
+ * @fileoverview Breadcrumb navigation for the movie personnel administration page.
  */
 
 import {ReactElement} from 'react';
@@ -18,18 +16,19 @@ import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEn
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
+/** Props for the MoviePersonListBreadcrumb component. */
 type PersonListBreadcrumbProps = {
     movie: Movie;
     department: RoleTypeDepartment;
 };
 
 /**
- * Renders a breadcrumb trail for administrative movie personnel lists.
+ * Renders a breadcrumb trail for navigating between movie lists, movie details, and specific department personnel.
  */
 export function MoviePersonListBreadcrumb(
     {movie, department}: PersonListBreadcrumbProps
 ): ReactElement {
-    const {_id, title, releaseDate} = movie;
+    const {slug, title, releaseDate} = movie;
 
     const parsedDepartment = convertToTitleCase(department);
     const parsedReleaseYear = releaseDate ? `(${releaseDate.toFormat("yyyy")})` : "";
@@ -39,10 +38,7 @@ export function MoviePersonListBreadcrumb(
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink
-                            to="/admin/movies"
-                            component={MoviePersonListBreadcrumb.name}
-                        >
+                        <LoggedHoverLink to="/admin/movies">
                             All Movies
                         </LoggedHoverLink>
                     </BreadcrumbLink>
@@ -52,10 +48,7 @@ export function MoviePersonListBreadcrumb(
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink
-                            to={`/admin/movies/get/${_id}`}
-                            component={MoviePersonListBreadcrumb.name}
-                        >
+                        <LoggedHoverLink to={`/admin/movies/get/${slug}`}>
                             {`${title} ${parsedReleaseYear}`}
                         </LoggedHoverLink>
                     </BreadcrumbLink>

@@ -1,7 +1,5 @@
 /**
- * @fileoverview Defines the header for the Movie People listing page.
- * Provides breadcrumb navigation and a toggle mechanism to switch between
- * Cast and Crew views for a specific movie.
+ * @fileoverview Header component for the movie personnel administration page.
  */
 
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
@@ -15,13 +13,14 @@ import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MoviePersonListBreadcrumb} from "@/views/admin/movies/people-page/breadcrumb.tsx";
 
+/** Props for the MoviePeopleHeader component. */
 type HeaderProps = {
     movie: Movie;
     department: RoleTypeDepartment;
 };
 
 /**
- * Renders the administrative header for movie personnel lists.
+ * Administrative header for movie personnel lists providing navigation between cast and crew.
  */
 export function MoviePeopleHeader({movie, department}: HeaderProps) {
     const {slug, title} = movie;
