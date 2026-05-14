@@ -2,10 +2,10 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useMovieDeleteMutation from "@/domains/movies/_feat/crud-hooks/useMovieDeleteMutation.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import {MutationResponseConfig} from "@/common/features/submit-data";
 import {UIOpenStateProps} from "@/common/types";
+import {useMovieDeleteMutation} from "@/domains/movies/_feat/crud-hooks";
 
 /** Props for the MovieDeleteWarningDialog component, supporting controlled UI states and deletion callbacks. */
 type WarningDialogProps = MutationResponseConfig & UIOpenStateProps & {

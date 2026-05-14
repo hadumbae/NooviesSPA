@@ -25,7 +25,7 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {
     ShowingDetailsPageContext
 } from "@/domains/showings/context/showing-details-page-context/ShowingDetailsPageContext.ts";
-import ShowingMovieTab from "@/domains/showings/pages/details-page/tabs/ShowingMovieTab.tsx";
+import {ShowingMovieTab} from "@/domains/showings/pages/details-page/tabs/ShowingMovieTab.tsx";
 import ShowingDetailsPageReferenceTab
     from "@/domains/showings/pages/details-page/tabs/ShowingDetailsPageReferenceTab.tsx";
 

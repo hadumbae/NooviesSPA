@@ -1,9 +1,7 @@
 /**
- * @file Query definitions for the movie info showings page.
- * @filename useMovieInfoShowingsPageQueries.ts
+ * @fileoverview Query definitions for the movie info showings page.
  */
 
-import useFetchMovieBySlug from "@/domains/movies/_feat/crud-hooks/useFetchMovieBySlug.ts";
 import useFetchPaginatedShowings from "@/domains/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import { QueryDefinition } from "@/common/type/query/loader/MultiQuery.types.ts";
 import {
@@ -12,11 +10,10 @@ import {
 import { SlugString } from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {PaginatedShowingDetailsSchema} from "@/domains/showings/schema/showing/PaginatedShowingSchemas.ts";
 import {MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {useFetchMovieBySlug} from "@/domains/movies/_feat/crud-hooks";
 
-/**
- * Parameters for {@link useMovieInfoShowingsPageQueries}.
- */
-type QueryParams = {
+/** Parameters for the useMovieInfoShowingsPageQueries function. */
+export type QueryParams = {
     /**
      * Slug identifying the movie to fetch.
      */
@@ -39,20 +36,14 @@ type QueryParams = {
 };
 
 /**
- * Builds query definitions required by the movie showings page.
- *
- * Returns the queries for:
- * - the movie details
- * - paginated showings for that movie
- *
- * The showings query is constrained to active, scheduled showings
- * and sorted by start time (descending).
+ * Builds query definitions for movie details and their associated paginated showings.
  */
 export function useMovieInfoShowingsPageQueries(
     { movieSlug, queryOptions, showingsPage, showingsPerPage }: QueryParams
 ): QueryDefinition[] {
     const movieQuery = useFetchMovieBySlug({
         slug: movieSlug,
+        schema: MovieDetailsSchema,
         config: { populate: true, virtuals: true },
     });
 

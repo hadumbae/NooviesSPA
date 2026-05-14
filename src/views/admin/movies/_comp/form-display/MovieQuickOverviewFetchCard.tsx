@@ -1,38 +1,35 @@
 /**
- * @file Compact fetch card for basic movie overview.
- * MovieQuickOverviewFetchCard.tsx
+ * @fileoverview Compact fetch card for displaying a basic movie overview.
  */
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useFetchMovie from "@/domains/movies/_feat/crud-hooks/useFetchMovie.ts";
 import {cn} from "@/common/lib/utils.ts";
-import {Loader} from "lucide-react";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {ReactElement} from "react";
 import {formatMovieData} from "@/domains/movies/_feat/formatters";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {useFetchMovie} from "@/domains/movies/_feat/crud-hooks";
 
-/** Props for MovieQuickOverviewFetchCard. */
+/** Props for the MovieQuickOverviewFetchCard component. */
 type FetchCardProps = {
-    /** Target movie identifier. */
     movieID: ObjectId;
-    /** Additional class names for layout overrides. */
     className?: string;
 };
 
-/** Fetches and renders a compact movie overview. */
+/** Fetches and renders a compact card containing movie details and a poster. */
 export function MovieQuickOverviewFetchCard(
     {movieID, className}: FetchCardProps
 ): ReactElement {
     const query = useFetchMovie({
         _id: movieID,
         config: {virtuals: true, populate: true},
+        schema: MovieDetailsSchema
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={MovieDetailsSchema} loaderComponent={Loader}>
+        <QueryDataLoader query={query}>
             {(movie: MovieDetails) => {
                 const {
                     title,
@@ -58,6 +55,6 @@ export function MovieQuickOverviewFetchCard(
                     </Card>
                 );
             }}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 }

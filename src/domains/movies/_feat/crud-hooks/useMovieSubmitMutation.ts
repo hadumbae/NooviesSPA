@@ -1,88 +1,38 @@
-import {UseFormReturn} from "react-hook-form";
-import MovieRepository from "@/domains/movies/_feat/crud/remove/MovieRepository.ts";
-import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
+/**
+ * @fileoverview Hook for handling movie creation and update mutations with form integration.
+ */
+
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {toast} from "react-toastify";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
-import {
-    MutationEditByIDParams,
-    MutationOnSubmitParams
-} from "@/common/type/form/MutationSubmitParams.ts";
 import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
-import {MovieFormData} from "../submit-data/MovieFormSchema.ts";
+import {MovieFormData, MovieFormStarterValues} from "../submit-data/MovieFormSchema.ts";
+import {MutationFormConfig, MutationResponseConfig} from "@/common/features/submit-data";
+import {create, update} from "@/domains/movies/_feat/crud";
+import {MovieCRUDMutationKeys} from "@/domains/movies/_feat/crud-hooks/mutationKeys.ts";
 
-import {MovieFormStarterValues} from "../submit-data";
-
-/**
- * Parameters used for submitting or editing a movie entry.
- *
- * Extends the base mutation parameters with form context and editing options.
- */
-export type MovieSubmitParams = MutationOnSubmitParams<Movie> & MutationEditByIDParams & {
-    /** React Hook Form instance for the movie form. */
-    form: UseFormReturn<MovieFormStarterValues>;
-};
+/** Configuration for movie submission including form state and callback handlers. */
+export type MovieSubmitParams =
+    MutationResponseConfig<Movie> & MutationFormConfig<MovieFormStarterValues, MovieFormData>;
 
 /**
- * React Query mutation hook for creating or updating a movie entry.
- *
- * This hook:
- * - Validates form data and sends it to the backend.
- * - Handles both creation and update operations transparently.
- * - Displays user-friendly success/error toasts.
- * - Invalidates relevant movie queries upon completion.
- *
- * @param params - Mutation configuration and form context.
- * @returns A `UseMutationResult` object exposing mutation methods and state.
- *
- * @example
- * ```ts
- * const mutation = useMovieSubmitMutation({
- *   form,
- *   isEditing: !!movieId,
- *   _id: movieId,
- *   onSubmitSuccess: (movie) => console.log("Saved:", movie),
- * });
- *
- * form.handleSubmit((data) => mutation.mutate(data));
- * ```
+ * Manages the movie submission lifecycle including validation, API calls, and cache invalidation.
  */
-export default function useMovieSubmitMutation(
+export function useMovieSubmitMutation(
     params: MovieSubmitParams
 ): UseMutationResult<Movie, unknown, MovieFormData> {
-    const {
-        form,
-        onSubmitSuccess,
-        onSubmitError,
-        successMessage,
-        errorMessage,
-        isEditing,
-        _id,
-    } = params;
+    const {form, resetForm, ...onSubmitConfig} = params;
 
     const queryClient = useQueryClient();
 
-    /**
-     * Executes the actual mutation — either creates or updates a movie record.
-     *
-     * Validates the server response against the `MovieSchema` before returning.
-     *
-     * @param data - Form data to be submitted.
-     * @throws Will throw an error if the response fails schema validation.
-     * @returns The validated `Movie` object from the backend.
-     */
-    const submitMovieData = async (data: MovieFormData) => {
-        const action = isEditing
-            ? () => MovieRepository.update({_id, data})
-            : () => MovieRepository.create({data});
+    const submitMovieData = async ({_id, ...values}: MovieFormData): Promise<Movie> => {
+        const action = _id
+            ? () => update({_id, data: values})
+            : () => create({data: values});
 
-        const result = await handleMutationResponse({
-            action,
-            errorMessage: "Failed to submit data. Please try again.",
-        });
+        const {result} = await action();
 
         const {success, error, data: movie} = validateData({
             data: result,
@@ -91,67 +41,43 @@ export default function useMovieSubmitMutation(
         });
 
         if (!success) throw error;
+
+        resetForm?.resetOnSubmit && form.reset();
+        onSubmitConfig.submitMessage && toast.info(onSubmitConfig.submitMessage);
+        onSubmitConfig.onSubmit?.();
+
         return movie;
     };
 
-    /**
-     * Handles a successful submission.
-     *
-     * Displays a toast message, logs the event, and triggers any success callback.
-     *
-     * @param movie - The successfully submitted `Movie` entity.
-     */
     const onSuccess = async (movie: Movie) => {
-        const context = filterNullishAttributes({
-            isEditing: true,
-            movie: _id,
-        });
-
         buildStandardLog({
             level: "log",
             msg: "Submitted movie data.",
             type: "INFO",
-            context,
+            context: {
+                isEditing: true,
+                movie: movie._id,
+            },
         });
 
-        toast.success(successMessage ?? "Movie submitted successfully.");
-        onSubmitSuccess?.(movie);
+        resetForm?.resetOnSuccess && form.reset();
+        queryClient.invalidateQueries({queryKey: ["movies"], exact: false});
+
+        onSubmitConfig.successMessage && toast.success(onSubmitConfig.successMessage);
+        onSubmitConfig.onSubmitSuccess?.(movie);
     };
 
-    /**
-     * Handles submission errors.
-     *
-     * Maps server validation errors back to the form fields where possible,
-     * and shows a fallback error toast if the cause is unknown.
-     *
-     * @param error - The caught error instance.
-     */
     const onError = (error: unknown) => {
-        const fallbackMessage = errorMessage ?? "Failed to submit movie data. Please try again.";
+        resetForm?.resetOnError && form.reset();
+        const fallbackMessage = onSubmitConfig.errorMessage ?? "Failed to submit movie data. Please try again.";
         handleMutationFormError({error, form, displayMessage: fallbackMessage});
-        onSubmitError?.(error);
-    };
-
-    /**
-     * Invalidates related queries after mutation completion to refresh movie data.
-     */
-    const onSettled = async () => {
-        const queryKeys = [
-            "fetch_single_movie",
-            "fetch_movie_by_slug",
-            "fetch_movies_by_query",
-            "fetch_movies",
-            "fetch_paginated_movies",
-        ];
-
-        await Promise.all(queryKeys.map(queryKey => queryClient.invalidateQueries({queryKey, exact: false})));
+        onSubmitConfig.onSubmitError?.(error);
     };
 
     return useMutation({
-        mutationKey: ["submit_movie_data"],
+        mutationKey: MovieCRUDMutationKeys.submitSingle(),
         mutationFn: submitMovieData,
         onSuccess,
         onError,
-        onSettled,
     });
 }

@@ -1,44 +1,26 @@
+/**
+ * @fileoverview Hook for fetching and validating a single movie by its slug.
+ */
+
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import MovieRepository from "@/domains/movies/_feat/crud/remove/MovieRepository.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {SlugQueryConfig} from "@/common/types";
+import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks/queryKeys.ts";
+import {findBySlug} from "@/domains/movies/_feat/crud";
 
-/**
- * Parameters for fetching a movie by slug.
- */
-type FetchParams = {
-    /** Unique movie slug */
-    slug: string;
-    /** Optional request configuration */
-    config?: RequestOptions;
-    /** Optional React Query overrides */
-    options?: FetchQueryOptions<unknown>;
-};
-
-/**
- * React Query hook for fetching a movie by slug.
- *
- * @remarks
- * - Wraps {@link MovieRepository.getBySlug}
- * - Applies default query options
- * - Normalizes error handling
- *
- * @param params - Fetch parameters
- * @returns React Query result
- */
-export default function useFetchMovieBySlug(
-    {slug, config, options}: FetchParams,
-): UseQueryResult<unknown, HttpResponseError> {
-    const fetchMovie = useQueryFnHandler({
-        action: () => MovieRepository.getBySlug({slug, config}),
-        errorMessage: "Failed to fetch movie. Please try again.",
+/** Fetches a movie by slug and validates the response against a schema. */
+export function useFetchMovieBySlug<TData = unknown>(
+    {schema, slug, config, options}: SlugQueryConfig<TData>,
+): UseQueryResult<TData, HttpResponseError> {
+    const fetchMovie = buildQueryFn<TData>({
+        action: () => findBySlug({slug, config}),
+        schema,
     });
 
     return useQuery({
-        queryKey: ["movies", "slug", {slug, ...config}],
+        queryKey: MovieCRUDQueryKeys.slug({slug, ...config}),
         queryFn: fetchMovie,
         ...useQueryOptionDefaults(options),
     });

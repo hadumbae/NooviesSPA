@@ -1,17 +1,10 @@
 /**
- * @file ShowingMovieTab.tsx
+ * @fileoverview Admin tab displaying a movie overview with its recent Showings.
  *
- * Admin tab displaying a movie overview with its recent Showings.
- *
- * Combines:
- * - Movie detail fetching
- * - Recent Showing queries scoped to the movie
- * - Schema validation and aggregated query boundaries
  */
 
-import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useFetchMovie from "@/domains/movies/_feat/crud-hooks/useFetchMovie.ts";
-import { CombinedSchemaQuery } from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
 import useFetchShowings from "@/domains/showings/hooks/queries/useFetchShowings.ts";
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
@@ -23,64 +16,58 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {ReactElement} from "react";
+import {useFetchMovie} from "@/domains/movies/_feat/crud-hooks";
 
-/**
- * Combined query result shape for {@link ShowingMovieTab}.
- */
+/** Combined query result shape for the ShowingMovieTab component. */
 type QueryParams = {
     movie: MovieDetails;
     showings: ShowingDetails[];
 };
 
-/**
- * Props for {@link ShowingMovieTab}.
- */
+/** Props for the ShowingMovieTab component. */
 type TabProps = {
-    /** Target movie ID used to resolve details and related showings */
     movieID: ObjectId;
 };
 
 /**
  * Renders an admin tab showing a movie summary and its latest Showings.
- *
- * - Fetches movie details and showings in parallel
- * - Limits showings to the 10 most recent entries
- * - Validates all query results via schema boundaries
  */
-const ShowingMovieTab = ({ movieID }: TabProps) => {
+export function ShowingMovieTab({movieID}: TabProps): ReactElement {
     const movieQuery = useFetchMovie({
         _id: movieID,
-        config: { populate: true, virtuals: true },
+        config: {populate: true, virtuals: true},
+        schema: MovieDetailsSchema,
     });
 
     const showingQuery = useFetchShowings({
-        queries: { movie: movieID, sortByStartTime: -1 },
-        config: { populate: true, virtuals: true, limit: 10 },
+        queries: {movie: movieID, sortByStartTime: -1},
+        config: {populate: true, virtuals: true, limit: 10},
     });
 
     const queries = [movieQuery, showingQuery];
 
     const queryValidation: CombinedSchemaQuery[] = [
-        { query: movieQuery, schema: MovieDetailsSchema, key: "movie" },
-        { query: showingQuery, schema: generateArraySchema(ShowingDetailsSchema), key: "showings" },
+        {query: movieQuery, schema: MovieDetailsSchema, key: "movie"},
+        {query: showingQuery, schema: generateArraySchema(ShowingDetailsSchema), key: "showings"},
     ];
 
     return (
         <CombinedQueryBoundary queries={queries}>
             <CombinedValidatedQueryBoundary queries={queryValidation}>
                 {(data: unknown) => {
-                    const { movie, showings } = data as QueryParams;
+                    const {movie, showings} = data as QueryParams;
 
                     return (
                         <div className="flex flex-col space-y-4">
                             <section className="space-y-2">
                                 <SectionHeader>Movie</SectionHeader>
-                                <ShowingMovieCard movie={movie} />
+                                <ShowingMovieCard movie={movie}/>
                             </section>
 
                             <section className="space-y-2">
                                 <SectionHeader>Recent Showings</SectionHeader>
-                                <ShowingSummaryCardList showings={showings} />
+                                <ShowingSummaryCardList showings={showings}/>
                             </section>
                         </div>
                     );
@@ -88,6 +75,6 @@ const ShowingMovieTab = ({ movieID }: TabProps) => {
             </CombinedValidatedQueryBoundary>
         </CombinedQueryBoundary>
     );
-};
+}
 
-export default ShowingMovieTab;
+

@@ -16,15 +16,15 @@ import {cn} from "@/common/lib/utils.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
 import {
     MovieFormData
-} from "../../../../../domains/movies/_feat/submit-data/MovieFormSchema.ts";
+} from "@/domains/movies/_feat/submit-data";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
 import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {GenreHookFormSelect} from "@/views/admin/genres/_feat/form-input/GenreHookFormSelect.tsx";
 import {
     MovieFormValuesSchema
-} from "../../../../../domains/movies/_feat/submit-data/MovieFormValuesSchema";
-import {MovieFormStarterValues} from "../../../../../domains/movies/_feat/submit-data";
+} from "@/domains/movies/_feat/submit-data/MovieFormValuesSchema.ts";
+import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
 
 /** Props for the {@link MovieSubmitFormView} component. */
 type ViewProps = FormViewProps<Movie, MovieFormData, MovieFormStarterValues> & {

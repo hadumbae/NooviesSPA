@@ -6,74 +6,24 @@
  * with consistent error handling and shared query defaults.
  */
 
-import MovieRepository from "@/domains/movies/_feat/crud/remove/MovieRepository.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {IDQueryConfig} from "@/common/types";
+import {findByID} from "@/domains/movies/_feat/crud";
+import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks/queryKeys.ts";
 
-/**
- * Parameters for {@link useFetchMovie}.
- *
- * @template TData
- * Optional transformed response type.
- */
-export type FetchParams<TData = unknown> = {
-    /**
-     * Movie identifier.
-     */
-    _id: ObjectId;
-
-    /**
-     * Request-level configuration (excluding pagination limit).
-     */
-    config?: Omit<RequestOptions, "limit">;
-
-    /**
-     * React Query configuration overrides.
-     */
-    options?: FetchQueryOptions<TData>;
-};
-
-/**
- * # useFetchMovie Hook
- *
- * Fetches a single movie by its unique identifier.
- *
- * Integrates:
- * - **MovieRepository** for API access
- * - **useQueryFnHandler** for consistent error handling
- * - **useQueryOptionDefaults** for shared React Query defaults
- *
- * @template TData
- * Optional transformed response type.
- *
- * @param params
- * Movie ID, request configuration, and React Query options.
- *
- * @returns
- * React Query result containing movie data or an {@link HttpResponseError}.
- *
- * @example
- * ```ts
- * const { data, isLoading, error } = useFetchMovie({
- *   _id: movieId,
- * });
- * ```
- */
-export default function useFetchMovie<TData = unknown>(
-    {_id, config, options}: FetchParams<TData>
+export function useFetchMovie<TData = unknown>(
+    {_id, config, options, schema}: IDQueryConfig<TData>
 ): UseQueryResult<TData, HttpResponseError> {
-    const fetchMovie = useQueryFnHandler({
-        action: () => MovieRepository.get({_id, config}),
-        errorMessage: "Failed to fetch movie data. Please try again.",
+    const fetchMovie = buildQueryFn<TData>({
+        action: () => findByID({_id, config}),
+        schema,
     });
 
     return useQuery({
-        queryKey: ["movies", "_id", {_id, ...config}],
+        queryKey: MovieCRUDQueryKeys._id({_id, ...config}),
         queryFn: fetchMovie,
         ...useQueryOptionDefaults(options),
     });

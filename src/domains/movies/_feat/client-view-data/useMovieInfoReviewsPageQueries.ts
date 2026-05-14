@@ -1,9 +1,8 @@
 /**
- * @file Composes data queries for the movie reviews page.
- * @filename useMovieInfoReviewsPageQueries.ts
+ * @fileoverview Composes data queries for the movie reviews page.
+ *
  */
 
-import useFetchMovieBySlug from "@/domains/movies/_feat/crud-hooks/useFetchMovieBySlug.ts";
 import {useFetchReviewDetailsByMovie} from "@/domains/review/_feat/fetch-by-movie/useFetchReviewDetailsByMovie.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {
@@ -11,39 +10,30 @@ import {
     MovieReviewViewDataSchema
 } from "@/domains/review/schemas/models/MovieReviewViewDataSchema.ts";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {useFetchMovieBySlug} from "@/domains/movies/_feat/crud-hooks";
 
-/**
- * Parameters for useMovieInfoReviewsPageQueries.
- */
+/** Parameters for the useMovieInfoReviewsPageQueries hook. */
 type HookParams = {
-    /** Movie slug identifier */
     movieSlug: string;
-
-    /** Active review page */
     page: number;
-
-    /** Reviews per page */
     perPage: number;
 };
 
-/**
- * Schema-validated data for the Movie Reviews page.
- */
+/** Schema-validated data for the Movie Reviews page. */
 export type MovieInfoReviewsPageData = {
-    /** Movie metadata */
     movie: MovieDetails;
-
-    /** Paginated review data with aggregates */
     reviewDetails: MovieReviewViewData;
 };
 
 /**
  * Builds the query set required for the Movie Reviews page.
+ * Fetches movie metadata and paginated review details based on a slug.
  */
 export function useMovieInfoReviewsPageQueries(
     {movieSlug, page, perPage}: HookParams
 ): QueryDefinition[] {
     const movieQuery = useFetchMovieBySlug({
+        schema: MovieDetailsSchema,
         slug: movieSlug,
         config: {populate: true, virtuals: true}
     });
