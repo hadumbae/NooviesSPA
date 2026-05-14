@@ -1,8 +1,7 @@
 /**
- * @fileoverview Main controller component for the Movie Index page.
- * Manages URL-driven state for pagination and filtering while fetching
- * movie data through TanStack Query.
+ * @fileoverview Controller component for the administrative movie library index page.
  */
+
 
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import useParsedPaginationValue
@@ -19,37 +18,32 @@ import {useFetchPaginatedMovies} from "@/domains/movies/_feat/crud-hooks";
 const MOVIES_PER_PAGE = 20;
 
 /**
- * Higher-order page component that orchestrates data fetching and state management
- * for the administrative movie library index.
+ * Orchestrates data fetching and state management for the movie library index.
  */
 export function MovieIndexPage() {
     const {data: paginationState} = usePaginationLocationState();
-    const {value: page, setValue: setPage} = useParsedPaginationValue("page", paginationState?.page);
+    const {value: page, setValue: setPage} = useParsedPaginationValue("page", paginationState?.page ?? 1);
     const {searchParams} = useParsedSearchParams({schema: MovieQueryOptionSchema});
 
     const query = useFetchPaginatedMovies({
-        schema: generatePaginationSchema(MovieDetailsSchema),
         page,
         perPage: MOVIES_PER_PAGE,
         queries: searchParams,
         config: {populate: true, virtuals: true},
+        schema: generatePaginationSchema(MovieDetailsSchema),
     });
 
     return (
         <QueryDataLoader query={query}>
-            {(paginatedMovies: PaginatedItems<MovieDetails>) => {
-                const {totalItems, items: movies} = paginatedMovies;
-
-                return (
-                    <MovieIndexPageContent
-                        page={page}
-                        perPage={MOVIES_PER_PAGE}
-                        setPage={setPage}
-                        movies={movies}
-                        totalItems={totalItems}
-                    />
-                );
-            }}
+            {({totalItems, items}: PaginatedItems<MovieDetails>) => (
+                <MovieIndexPageContent
+                    page={page}
+                    perPage={MOVIES_PER_PAGE}
+                    setPage={setPage}
+                    movies={items}
+                    totalItems={totalItems}
+                />
+            )}
         </QueryDataLoader>
     );
 }

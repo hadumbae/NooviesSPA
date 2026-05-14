@@ -1,16 +1,15 @@
 /**
  * @fileoverview Presentation component for the Movie Index page.
- * Handles the layout for the movie grid, filter dialog, and pagination
- * based on administrative movie data.
+ *
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import MovieIndexPageHeader from "@/views/admin/movies/index-page/header.tsx";
+import {MovieIndexPageHeader} from "@/views/admin/movies/index-page/header.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import MovieQueryOptionFormContainer
     from "@/views/admin/movies/_feat/submit-query-options/MovieQueryOptionFormContainer.tsx";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {MovieQueryOptionSchema} from "../../../../domains/movies/schema/queries/MovieQueryOptionSchema.ts";
+import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {ReactElement} from "react";
@@ -18,6 +17,7 @@ import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.ts
 import {MovieIndexCard} from "@/views/admin/movies/_comp/index-list-display";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 
+/** Props for the MovieIndexPageContent component. */
 type ContentProps = {
     page: number;
     perPage: number;
@@ -27,8 +27,7 @@ type ContentProps = {
 };
 
 /**
- * Renders the main movie listing interface, including search/filter logic
- * and responsive grid displays for movie details.
+ * Renders the main movie listing interface with search filters and pagination.
  */
 export function MovieIndexPageContent(
     {page, perPage, setPage, movies, totalItems}: ContentProps
@@ -37,12 +36,9 @@ export function MovieIndexPageContent(
 
     return (
         <PageFlexWrapper>
-            <MovieIndexPageHeader/>
+            <MovieIndexPageHeader paginationState={{page, perPage}}/>
 
-            <PresetFilterDialog
-                title="Movie Filters"
-                description="Filter and sort movies here."
-            >
+            <PresetFilterDialog title="Movie Filters" description="Filter and sort movies here.">
                 <MovieQueryOptionFormContainer presetValues={searchParams}/>
             </PresetFilterDialog>
 

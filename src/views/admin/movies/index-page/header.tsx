@@ -1,31 +1,26 @@
 /**
- * @fileoverview Defines the header for the Movie Index page.
- * Provides a titled descriptive section and a contextual creation link
- * that preserves current pagination state via location state.
+ * @fileoverview Header for the Movie Index page providing navigation to movie creation.
+ *
  */
 
-import {FC} from 'react';
+import {ReactElement} from 'react';
 import {Plus} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import usePaginationSearchParams from "@/common/features/fetch-pagination-search-params/hooks/usePaginationSearchParams.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {HeaderDescription, HeaderTitle} from "@/common/components/page/headers";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+
+/** Props for the MovieIndexPageHeader component. */
+type HeaderProps = {
+    paginationState: PaginationValues;
+}
 
 /**
- * Renders the administrative movie index header.
+ * Administrative header for the movie index that preserves pagination state during navigation.
  */
-const MovieIndexPageHeader: FC = () => {
-    const {page, perPage, hasPaginationValues} = usePaginationSearchParams();
-
-    const state = hasPaginationValues ? {page, perPage} : {};
-
-    const createNavigationObject = {
-        to: "/admin/movies/create",
-        options: {state},
-        component: MovieIndexPageHeader.name,
-        message: "Navigate to movie creation form.",
-    };
-
+export function MovieIndexPageHeader(
+    {paginationState}: HeaderProps
+): ReactElement {
     return (
         <header className={cn("flex justify-between items-center")}>
             <section>
@@ -34,12 +29,15 @@ const MovieIndexPageHeader: FC = () => {
             </section>
 
             <section className="flex justify-end items-center">
-                <LoggedHoverLink {...createNavigationObject}>
-                    <Plus /> Create
+                <LoggedHoverLink
+                    to="/admin/movies/create"
+                    component={MovieIndexPageHeader.name}
+                    message="Navigate to movie creation form."
+                    options={{state: paginationState}}
+                >
+                    <Plus/> Create
                 </LoggedHoverLink>
             </section>
         </header>
     );
-};
-
-export default MovieIndexPageHeader;
+}
