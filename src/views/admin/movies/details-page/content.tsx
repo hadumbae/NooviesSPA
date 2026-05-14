@@ -7,7 +7,9 @@
 import {ReactElement} from 'react';
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import MovieSubmitFormPanel from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormPanel.tsx";
+import {
+    MovieSubmitFormPanel
+} from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormPanel.tsx";
 import MoviePosterImageSubmitFormPanel
     from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormPanel.tsx";
 import MoviePosterImageDeleteDialog

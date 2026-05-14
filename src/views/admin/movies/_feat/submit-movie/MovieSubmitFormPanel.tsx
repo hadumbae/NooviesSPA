@@ -1,9 +1,9 @@
-import { FC, ReactNode } from 'react';
-import MovieSubmitFormContainer from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormContainer.tsx";
-import { ScrollArea } from "@/common/components/ui/scroll-area.tsx";
-import { FormContainerProps } from "@/common/type/form/HookFormProps.ts";
-import { PresetOpenState } from "@/common/type/ui/OpenStateProps.ts";
-import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
+/**
+ * @fileoverview Slide-over panel component for creating or editing movie records.
+ */
+
+import {ReactElement} from 'react';
+import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import {
     Sheet,
     SheetContent,
@@ -12,77 +12,31 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui/Sheet";
-import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 
-import {MovieFormStarterValues} from "../../../../../domains/movies/_feat/submit-data";
+import {UIOpenStateProps} from "@/common/types";
+import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
+import {MovieSubmitFormView} from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormView.tsx";
+import {MovieSubmitFormActions} from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormActions.tsx";
 
-/**
- * Props for `MovieSubmitFormPanel`.
- *
- * @template TEntity - The type of entity being managed (here `Movie`).
- * @template TReturn - The type returned by the mutation (here `Movie`).
- * @template TFormValues - The type of the form values (here `MovieFormValues`).
- */
-type FormPanelProps = FormContainerProps<Movie, Movie, MovieFormStarterValues> &
-    PresetOpenState & {
-    /** Optional trigger element (e.g., button or icon) that opens the panel. */
-    children?: ReactNode;
+/** Props for the MovieSubmitFormPanel component. */
+type FormPanelProps = Omit<FormViewProps<MovieFormStarterValues>, "isNestedView"> & UIOpenStateProps & {
+    isEditing?: boolean;
 };
 
 /**
- * `MovieSubmitFormPanel` is a slide-over panel component for creating or editing movies.
- *
- * It wraps `MovieSubmitFormContainer` inside a `Sheet` (slide-over UI component)
- * and handles open/close state automatically. The panel:
- *
- * - Displays a dynamic sheet title and description based on whether creating or editing a movie.
- * - Supports controlled or uncontrolled open state via `presetOpen` and `setPresetOpen`.
- * - Automatically closes the sheet on successful form submission.
- * - Forwards the submission success callback to parent components.
- * - Wraps the form in a scrollable area to handle large forms.
- *
- * @param props - Configuration and form props.
- * @param props.children - Optional trigger element (button/icon) that opens the panel.
- * @param props.presetOpen - Optional controlled open state.
- * @param props.setPresetOpen - Optional setter for controlled open state.
- * @param props.isEditing - Whether the form is editing an existing movie.
- * @param props.onSubmitSuccess - Callback invoked after successful form submission.
- * @param props.* - Additional props are forwarded to `MovieSubmitFormContainer`.
- *
- * @example
- * ```tsx
- * <MovieSubmitFormPanel
- *   isEditing={false}
- *   onSubmitSuccess={(movie) => console.log("Created movie:", movie)}
- * >
- *   <Button>Create Movie</Button>
- * </MovieSubmitFormPanel>
- * ```
+ * Slide-over panel that wraps the movie submission form and its associated actions.
  */
-const MovieSubmitFormPanel: FC<FormPanelProps> = (props) => {
-    const { children, presetOpen, setPresetOpen, onSubmitSuccess, ...formProps } = props;
-    const { isEditing } = formProps;
-
-    // ⚡ Open State ⚡
-
-    const { activeOpen, setActiveOpen } = usePresetActiveOpen({ presetOpen, setPresetOpen });
-
-    // ⚡ Sheet Configuration ⚡
-
+export function MovieSubmitFormPanel(
+    {children, isEditing, isOpen, setIsOpen, ...viewProps}: FormPanelProps
+): ReactElement {
     const action = isEditing ? "Update" : "Create";
     const sheetTitle = `${action} Movie`;
     const sheetDescription = `${action} your movie here by submitting data with the form.`;
 
-    // ⚡ Handler ⚡
-
-    const closeOnSuccess = (movie: Movie) => {
-        setActiveOpen(false);
-        onSubmitSuccess?.(movie);
-    };
-
     return (
-        <Sheet open={activeOpen} onOpenChange={setActiveOpen}>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>{children}</SheetTrigger>
             <SheetContent className="flex flex-col">
                 <SheetHeader>
@@ -91,15 +45,12 @@ const MovieSubmitFormPanel: FC<FormPanelProps> = (props) => {
                 </SheetHeader>
 
                 <ScrollArea className="flex-grow px-1">
-                    <MovieSubmitFormContainer
-                        {...formProps}
-                        onSubmitSuccess={closeOnSuccess}
-                        isPanel={true}
-                    />
+                    <div className="space-y-5">
+                        <MovieSubmitFormView {...viewProps}/>
+                        <MovieSubmitFormActions/>
+                    </div>
                 </ScrollArea>
             </SheetContent>
         </Sheet>
     );
-};
-
-export default MovieSubmitFormPanel;
+}

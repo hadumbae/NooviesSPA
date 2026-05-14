@@ -4,18 +4,19 @@
  * redirection logic.
  */
 
-import {FC} from 'react';
+import {ReactElement} from 'react';
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import MovieSubmitFormContainer from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormContainer.tsx";
+import {MovieSubmitForm} from "../_feat/submit-movie/MovieSubmitForm.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieCreatePageHeader} from "@/views/admin/movies/create-page/header.tsx";
+import {MovieSubmitFormActions, MovieSubmitFormView} from "@/views/admin/movies/_feat/submit-movie";
 
 /**
  * Administrative page for registering new movies.
  */
-const MovieCreatePage: FC = () => {
+export function MovieCreatePage(): ReactElement {
     const navigate = useLoggedNavigate();
 
     const onSuccess = ({slug}: Movie) => {
@@ -35,15 +36,19 @@ const MovieCreatePage: FC = () => {
 
             <Card>
                 <CardContent className="p-4">
-                    <MovieSubmitFormContainer
+                    <MovieSubmitForm
                         onSubmitSuccess={onSuccess}
                         successMessage={successMessage}
                         errorMessage={errorMessage}
-                    />
+                    >
+                        <div className="space-y-5">
+                            <MovieSubmitFormView/>
+                            <MovieSubmitFormActions/>
+                        </div>
+                    </MovieSubmitForm>
+
                 </CardContent>
             </Card>
         </PageFlexWrapper>
     );
-};
-
-export default MovieCreatePage;
+}
