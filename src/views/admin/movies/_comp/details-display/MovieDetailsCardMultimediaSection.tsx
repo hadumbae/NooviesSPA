@@ -20,7 +20,7 @@ export function MovieDetailsCardMultimediaSection(
     {movie: {trailerURL}}: SectionProps
 ): ReactElement {
     return (
-        <section>
+        <section className="space-y-3">
             <section>
                 <h2 className="primary-text text-lg font-bold">Multimedia</h2>
                 <Separator/>

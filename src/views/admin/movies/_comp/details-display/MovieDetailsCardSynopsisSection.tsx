@@ -19,7 +19,7 @@ export function MovieDetailsCardSynopsisSection(
     {movie: {synopsis}}: SectionProps
 ): ReactElement {
     return (
-        <section>
+        <section className="space-y-3">
             <div>
                 <h2 className="primary-text text-lg font-bold">Synopsis</h2>
                 <Separator/>
