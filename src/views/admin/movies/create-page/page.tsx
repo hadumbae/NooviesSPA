@@ -27,8 +27,8 @@ export function MovieCreatePage(): ReactElement {
         });
     };
 
-    const successMessage = "Movie created successfully.";
-    const errorMessage = "Failed to submit movie data. Please try again.";
+    const successMessage = "Movie created.";
+    const errorMessage = "Failed to create. Please try again.";
 
     return (
         <PageFlexWrapper>
@@ -46,7 +46,6 @@ export function MovieCreatePage(): ReactElement {
                             <MovieSubmitFormActions/>
                         </div>
                     </MovieSubmitForm>
-
                 </CardContent>
             </Card>
         </PageFlexWrapper>

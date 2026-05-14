@@ -16,7 +16,9 @@ import {
 } from "@/domains/movies/schema/fields";
 import {AnyValues} from "@/common/types";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {
+    CoercedPositiveNumberSchema,
+} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
 import refineToRequire from "@/common/utility/schemas/refineToRequire.ts";
 import {EmptyStringSchema} from "@/common/schema/strings/simple-strings/EmptyStringSchema.ts";
@@ -24,7 +26,7 @@ import {NonFutureDateStringSchema} from "@/common/schema/dates/NonFutureDateStri
 
 /** Zod schema for validating movie creation and update forms. */
 export const MovieFormSchema = z.object({
-    _id: IDStringSchema.readonly(),
+    _id: IDStringSchema.readonly().optional(),
 
     title: MovieTitleSchema,
     originalTitle: preprocessEmptyStringToUndefined(MovieTitleSchema.optional()).optional(),
@@ -33,7 +35,7 @@ export const MovieFormSchema = z.object({
     genres: MovieGenreIDsSchema,
     country: ISO3166Alpha2CountryCodeEnum,
     synopsis: MovieSynopsisSchema,
-    runtime: preprocessEmptyStringToUndefined(PositiveNumberSchema),
+    runtime: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema),
     posterImage: CloudinaryImageSchema.optional().nullable(),
     trailerURL: preprocessEmptyStringToUndefined(MovieTrailerURLSchema),
 
