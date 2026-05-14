@@ -3,11 +3,6 @@
  */
 
 import {z} from "zod";
-import {ISO6391LanguageCodeEnum} from "src/common/schema/enums/ISO6391LanguageCodeEnum.ts";
-import {PositiveNumberSchema} from "src/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {NonFutureDateStringSchema} from "src/common/schema/dates/NonFutureDateStringSchema.ts";
-import refineToRequire from "src/common/utility/schemas/refineToRequire.ts";
-import {EmptyStringSchema} from "src/common/schema/strings/simple-strings/EmptyStringSchema.ts";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
@@ -21,6 +16,11 @@ import {
 } from "@/domains/movies/schema/fields";
 import {AnyValues} from "@/common/types";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
+import refineToRequire from "@/common/utility/schemas/refineToRequire.ts";
+import {EmptyStringSchema} from "@/common/schema/strings/simple-strings/EmptyStringSchema.ts";
+import {NonFutureDateStringSchema} from "@/common/schema/dates/NonFutureDateStringSchema.ts";
 
 /** Zod schema for validating movie creation and update forms. */
 export const MovieFormSchema = z.object({

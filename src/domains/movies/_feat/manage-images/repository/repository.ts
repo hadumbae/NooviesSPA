@@ -2,11 +2,11 @@
  * @fileoverview Repository for managing movie poster image upload and removal operations.
  */
 
-import RequestReturns from "src/common/type/request/RequestReturns.ts";
-import useFetchAPI from "src/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {RemovePosterImageConfig, UploadPosterImageConfig} from "./repository.types.ts";
 import {ManageMovieImagesBaseURL} from "@/domains/movies/_feat/manage-images/repository/baseURL.ts";
 import {buildURL} from "@/common/features/fetch-api";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 
 /** Updates the poster image for a specific movie. */
 export function patchUploadPosterImage(params: UploadPosterImageConfig): Promise<RequestReturns> {
