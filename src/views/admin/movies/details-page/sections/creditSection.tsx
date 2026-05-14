@@ -1,0 +1,51 @@
+/** @fileoverview Section component for displaying a preview of movie cast credits. */
+
+
+import {ObjectId} from "src/common/schema/strings/object-id/IDStringSchema.ts";
+import {ReactElement} from "react";
+import {PageSectionHeaderLink} from "@/views/common/_comp/page";
+import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks";
+import {
+    MovieCreditDetails,
+    MovieCreditDetailsArray,
+    MovieCreditDetailsArraySchema
+} from "@/domains/moviecredit/schemas";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {MovieDetailsCreditCastOverview} from "@/views/admin/movie-credits/_comp/cast-overview";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+
+/** Cast-specific movie credit details filtered by department. */
+type CastCredits = (Extract<MovieCreditDetails, { department: "CAST" }>)[];
+
+/** Props for the MovieDetailsPageCastCreditTab component. */
+type TabProps = {
+    _id: ObjectId;
+    slug: SlugString;
+};
+
+/** Renders the top-billed cast members within a section using validated query data. */
+export function MovieDetailsPageCreditSection({_id, slug}: TabProps): ReactElement {
+    const query = useFetchMovieCredits({
+        schema: MovieCreditDetailsArraySchema,
+        queries: {movie: _id, department: "CAST", sortByBillingOrder: 1},
+        config: {populate: true, virtuals: true, limit: 6},
+    });
+
+    return (
+        <section>
+            <PageSectionHeaderLink
+                to={`/admin/movies/get/${slug}/people/cast`}
+                text="Cast Overview"
+            />
+
+            <QueryDataLoader query={query}>
+                {(credits: MovieCreditDetailsArray) => (
+                    <MovieDetailsCreditCastOverview
+                        slug={slug}
+                        credits={credits as CastCredits}
+                    />
+                )}
+            </QueryDataLoader>
+        </section>
+    );
+}

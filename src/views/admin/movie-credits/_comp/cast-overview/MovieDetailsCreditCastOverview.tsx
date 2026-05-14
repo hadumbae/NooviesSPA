@@ -1,14 +1,15 @@
-/** @fileoverview Compact, card-based overview of a movie's cast credits. */
+/**
+ * @fileoverview Compact, card-based overview of a movie's cast credits.
+ */
 
 import {ReactElement} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {
-    MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
-import {PageSectionHeaderLink} from "@/views/common/_comp/page";
+import {MovieCreditDetails} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
-import {MovieCreditCastOverviewCard} from "@/views/admin/movie-credits/_comp/cast-overview/MovieCreditCastOverviewCard.tsx";
+import {
+    MovieCreditCastOverviewCard
+} from "@/views/admin/movie-credits/_comp/cast-overview/MovieCreditCastOverviewCard.tsx";
 
 /** Props for the MovieDetailsCreditOverview component. */
 export type OverviewProps = {
@@ -16,29 +17,31 @@ export type OverviewProps = {
     credits: (Extract<MovieCreditDetails, { department: "CAST" }>)[];
 };
 
-/** Displays a summarized grid of cast member cards with navigation to full credit lists. */
+/** Displays a summarised grid of cast member cards with navigation to full credit lists. */
 export function MovieDetailsCreditCastOverview(
-    {slug, credits}: OverviewProps
+    {credits}: OverviewProps
 ): ReactElement {
+    if (credits.length === 0) {
+        return (
+            <EmptyArrayContainer
+                text="There Are No Credits"
+                className="h-40"
+            />
+        );
+    }
+
     return (
-        <section className="space-y-4">
-            <PageSectionHeaderLink to={`/admin/movies/get/${slug}/people/cast`}>
-                Cast Overview
-            </PageSectionHeaderLink>
+        <div className="space-y-4">
+            <SROnly text="Movie Cast Overview List"/>
 
-            {
-                credits.length > 0 ? (
-                    <section className="space-y-4">
-                        <SROnly text="Movie Cast Overview List"/>
-
-                        <div className="grid grid-cols-2 gap-2">
-                            {credits.map((credit) => <MovieCreditCastOverviewCard key={credit._id} credit={credit}/>)}
-                        </div>
-                    </section>
-                ) : (
-                    <EmptyArrayContainer text="There Are No Credits" className="h-40"/>
-                )
-            }
-        </section>
+            <div className="grid grid-cols-2 gap-2">
+                {credits.map((credit) => (
+                    <MovieCreditCastOverviewCard
+                        credit={credit}
+                        key={credit._id}
+                    />
+                ))}
+            </div>
+        </div>
     );
 }

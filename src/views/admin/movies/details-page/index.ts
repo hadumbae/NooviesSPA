@@ -3,8 +3,8 @@ import {MovieDetailsPage} from "@/views/admin/movies/details-page/page.tsx";
 import {MovieDetailsHeader} from "@/views/admin/movies/details-page/header.tsx";
 import {MovieDetailsBreadcrumb} from "@/views/admin/movies/details-page/breadcrumbs.tsx";
 import {MovieDetailsPageTabs} from "@/views/admin/movies/details-page/tabs/tabs.tsx";
-import {MovieDetailsPageCastCreditTab} from "@/views/admin/movies/details-page/tabs/creditTab.tsx";
-import {MovieDetailsPageShowingsTab} from "@/views/admin/movies/details-page/tabs/showingsTab.tsx";
+import {MovieDetailsPageCreditSection} from "./sections/creditSection.tsx";
+import {MovieDetailsPageShowingSection} from "./sections/showingSection.tsx";
 
 export {
     MovieDetailsPage,
@@ -12,6 +12,6 @@ export {
     MovieDetailsHeader,
     MovieDetailsBreadcrumb,
     MovieDetailsPageTabs,
-    MovieDetailsPageCastCreditTab,
-    MovieDetailsPageShowingsTab,
+    MovieDetailsPageCreditSection,
+    MovieDetailsPageShowingSection,
 }

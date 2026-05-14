@@ -31,22 +31,13 @@ export function MovieDetailsPage() {
     });
 
     if (!slug) {
-        return <PageLoader />;
+        return <PageLoader/>;
     }
 
     return (
         <MovieDetailsUIContextProvider>
             <QueryDataLoader query={query}>
-                {(movie: MovieDetails) => {
-                    const {refetch} = query;
-
-                    return (
-                        <MovieDetailsPageContent
-                            movie={movie}
-                            refetchMovie={refetch}
-                        />
-                    );
-                }}
+                {(movie: MovieDetails) => <MovieDetailsPageContent movie={movie}/>}
             </QueryDataLoader>
         </MovieDetailsUIContextProvider>
     );
