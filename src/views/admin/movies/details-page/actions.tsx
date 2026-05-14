@@ -11,6 +11,7 @@ import MoviePosterImageDeleteDialog
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {MovieDetailsUIContext} from "@/domains/movies/context/details-ui";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /** Props for the MovieDetailsPageActions component. */
 type ActionProps = {
@@ -33,6 +34,21 @@ export function MovieDetailsPageActions(
         setIsDeletingPoster,
     } = useRequiredContext({context: MovieDetailsUIContext});
 
+    const navigate = useLoggedNavigate();
+
+    const onMovieDelete = () => {
+        setIsDeleting(false);
+
+        navigate({
+            to: "/admin/movies",
+            message: "Navigate to index after movie delete.",
+            level: "log",
+            context: {removeID: movieID},
+        });
+    }
+
+    const onPosterRemove = () => setIsDeletingPoster(false);
+
     return (
         <div className={className}>
             <MoviePosterImageSubmitFormPanel
@@ -45,12 +61,14 @@ export function MovieDetailsPageActions(
                 movieID={movieID}
                 isOpen={isDeleting}
                 setIsOpen={setIsDeleting}
+                onSubmitSuccess={onMovieDelete}
             />
 
             <MoviePosterImageDeleteDialog
                 movieID={movieID}
                 presetOpen={isDeletingPoster}
                 setPresetOpen={setIsDeletingPoster}
+                onDeleteSuccess={onPosterRemove}
             />
         </div>
     );
