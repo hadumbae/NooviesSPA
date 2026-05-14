@@ -38,7 +38,7 @@ export function MovieSubmitForm(
     return (
         <BaseFormContextProvider formID={formKey} isPending={isPending} submitHandler={submitMovieData}>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(submitMovieData)}>
+                <form id={formKey} onSubmit={form.handleSubmit(submitMovieData)}>
                     {children}
                 </form>
             </Form>
