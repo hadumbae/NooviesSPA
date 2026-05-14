@@ -1,5 +1,6 @@
 /**
- * @fileoverview Main page component for the movie editing interface.
+ * @fileoverview Main page component for the movie editing interface in the admin dashboard.
+ *
  */
 
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
@@ -12,7 +13,7 @@ import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader
 import {useFetchMovieBySlug} from "@/domains/movies/_feat/crud-hooks";
 
 /**
- * Controller component for the movie edit view.
+ * Controller component that fetches movie data by slug for the edit view.
  */
 export function MovieEditPage(): ReactElement {
     const {slug} = useFetchByIdentifierRouteParams({

@@ -1,7 +1,5 @@
 /**
  * @fileoverview Presentation component for the Movie Edit page.
- * Provides the layout for the movie editing form, passing existing movie
- * data to the form container and handling post-update redirection.
  */
 
 import {ReactElement} from 'react';
@@ -14,25 +12,26 @@ import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieEditHeader} from "@/views/admin/movies/edit-page/header.tsx";
 import {MovieSubmitFormActions, MovieSubmitFormView} from "@/views/admin/movies/_feat/submit-movie";
 
+/** Props for the MovieEditPageContent component. */
 type ContentProps = {
     movie: Movie;
 };
 
 /**
- * Renders the primary content area for editing a movie.
+ * Renders the primary layout and form for editing an existing movie.
  */
 export function MovieEditPageContent(
     {movie}: ContentProps
 ): ReactElement {
     const navigate = useLoggedNavigate();
-    const {_id, title} = movie;
+    const {slug, title} = movie;
 
     const successMessage = "Movie updated successfully.";
     const errorMessage = "Failed to submit movie data. Please try again.";
 
-    const onSuccess = ({slug}: Movie) => {
+    const onSuccess = (updatedMovie: Movie) => {
         navigate({
-            to: `/admin/movies/get/${slug}`,
+            to: `/admin/movies/get/${updatedMovie.slug}`,
             component: MovieEditPageContent.name,
             message: "Navigation to profile after successful movie update."
         });
@@ -40,7 +39,7 @@ export function MovieEditPageContent(
 
     return (
         <PageFlexWrapper>
-            <MovieEditHeader movieID={_id} movieTitle={title}/>
+            <MovieEditHeader movieSlug={slug} movieTitle={title}/>
 
             <section>
                 <SectionHeader srOnly={true}>Movie Edit Form</SectionHeader>

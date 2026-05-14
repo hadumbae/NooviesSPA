@@ -1,7 +1,5 @@
 /**
- * @fileoverview Defines the breadcrumb navigation for the Movie Edit page.
- * Provides a hierarchical path from the movie index to the specific movie
- * profile, ending at the current edit view.
+ * @fileoverview Breadcrumb navigation component for the movie editing administrative view.
  */
 
 import {
@@ -13,17 +11,18 @@ import {
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 
+/** Props for the MovieEditBreadcrumbs component. */
 type BreadcrumbProps = {
-    movieID: ObjectId;
+    movieSlug: SlugString;
     movieTitle: string;
 };
 
 /**
  * Renders the breadcrumb trail for the administrative movie editing interface.
  */
-export function MovieEditBreadcrumbs({movieID, movieTitle}: BreadcrumbProps) {
+export function MovieEditBreadcrumbs({movieSlug, movieTitle}: BreadcrumbProps) {
     return (
         <Breadcrumb>
             <BreadcrumbList>
@@ -43,7 +42,7 @@ export function MovieEditBreadcrumbs({movieID, movieTitle}: BreadcrumbProps) {
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                         <LoggedHoverLink
-                            to={`/admin/movies/get/${movieID}`}
+                            to={`/admin/movies/get/${movieSlug}`}
                             component={MovieEditBreadcrumbs.name}
                         >
                             {movieTitle}
