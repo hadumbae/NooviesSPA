@@ -2,7 +2,7 @@
  * @fileoverview Main content layout for the movie browsing page.
  */
 import {ReactElement} from "react";
-import BrowseMoviesHeader from "@/views/client/movies/browse-movies/BrowseMoviesHeader.tsx";
+import {BrowseMoviesPageHeader} from "src/views/client/movies/pages/browse-movies/header.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {SROnly} from "@/views/common/_comp/screen-readers";
@@ -24,23 +24,17 @@ export function BrowseMoviesPageContent(
 ): ReactElement {
     return (
         <PageFlexWrapper>
-            <BrowseMoviesHeader/>
+            <BrowseMoviesPageHeader/>
 
-            <section>
+            <section className="space-y-4">
                 <SROnly text="Browse | Movie List"/>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                    {movies.map((movie) =>
-                        <BrowseMovieIndexCard key={movie._id} movie={movie}/>
-                    )}
+                    {movies.map((movie) => <BrowseMovieIndexCard key={movie._id} movie={movie}/>)}
                 </div>
 
-                <PaginationRangeButtons
-                    totalItems={totalMovies}
-                    {...paginationProps}
-                />
+                <PaginationRangeButtons totalItems={totalMovies}{...paginationProps} />
             </section>
-
         </PageFlexWrapper>
     );
 }
