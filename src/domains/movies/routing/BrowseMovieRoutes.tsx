@@ -14,7 +14,6 @@
 
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
-import {BrowseMoviesPage} from "src/views/client/movies/pages/browse-movies/page.tsx";
 import MovieInfoPage from "@/views/client/movies/pages/movie-info/MovieInfoPage.tsx";
 import MovieInfoCreditsPage
     from "@/views/client/movies/pages/movie-info-credits/MovieInfoCreditsPage.tsx";
@@ -22,6 +21,7 @@ import MovieInfoShowingsPage
     from "@/views/client/movies/pages/movie-info-showings/MovieInfoShowingsPage.tsx";
 import MovieInfoReviewsPage
     from "@/views/client/movies/pages/movie-info-reviews/MovieInfoReviewsPage.tsx";
+import {BrowseMoviesPage} from "@/views/client/movies/pages/browse-movies";
 
 /**
  * Route definitions for movie browsing and movie information pages.

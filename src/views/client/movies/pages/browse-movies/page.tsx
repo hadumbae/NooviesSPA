@@ -5,12 +5,12 @@
 
 import {ReactElement} from 'react';
 import {useParsedPaginationValue} from "@/common/features/fetch-pagination-search-params";
-import {BrowseMoviesPageContent} from "src/views/client/movies/pages/browse-movies/content.tsx";
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie";
 import {PaginatedItems} from "@/common/types";
 import {useFetchPaginatedMovies} from "@/domains/movies/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {BrowseMoviesPageContent} from "@/views/client/movies/pages/browse-movies/content.tsx";
 
 /** The number of movie items displayed per page. */
 const MOVIES_PER_PAGE = 25;

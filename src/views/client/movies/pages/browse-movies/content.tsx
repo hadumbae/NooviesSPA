@@ -2,12 +2,12 @@
  * @fileoverview Main content layout for the movie browsing page.
  */
 import {ReactElement} from "react";
-import {BrowseMoviesPageHeader} from "src/views/client/movies/pages/browse-movies/header.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {BrowseMovieIndexCard} from "@/views/client/movies/_comp/browse-movie-index";
+import {BrowseMoviesPageHeader} from "@/views/client/movies/pages/browse-movies/header.tsx";
 
 /** Props for the BrowseMoviesPageContent component. */
 type ContentProps = {
