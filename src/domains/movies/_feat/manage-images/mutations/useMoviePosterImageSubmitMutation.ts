@@ -3,7 +3,7 @@
  */
 
 import {toast} from "react-toastify";
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {MutationFormConfig, MutationResponseConfig} from "@/common/features/submit-data";
 import {
     ManageMovieImageMutationKeys,
@@ -29,7 +29,12 @@ type ImageSubmitParams =
 export default function useMoviePosterImageSubmitMutation(
     {movieID, form, resetForm, ...onSubmitConfig}: ImageSubmitParams
 ): UseMutationResult<Movie, unknown, MoviePosterImageFormData> {
+    const queryClient = useQueryClient();
+
     const submitMoviePosterImage = async ({posterImage}: MoviePosterImageFormData) => {
+        onSubmitConfig.submitMessage && toast.info(onSubmitConfig.submitMessage);
+        onSubmitConfig.onSubmit?.();
+
         const formData = new FormData();
         formData.append("posterImage", posterImage);
 
@@ -44,14 +49,11 @@ export default function useMoviePosterImageSubmitMutation(
         if (!success) throw error;
 
         resetForm?.resetOnSubmit && form.reset();
-
-        onSubmitConfig.submitMessage && toast.info(onSubmitConfig.submitMessage);
-        onSubmitConfig.onSubmit?.();
-
         return parsedData;
     };
 
     const onSuccess = (movie: Movie) => {
+        queryClient.invalidateQueries({queryKey: ['movies'], exact: false});
         resetForm?.resetOnSuccess && form.reset();
 
         onSubmitConfig.successMessage && toast.success(onSubmitConfig.successMessage);

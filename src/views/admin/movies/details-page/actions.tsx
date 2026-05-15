@@ -6,12 +6,11 @@ import {ReactElement} from "react";
 import MoviePosterImageSubmitFormPanel
     from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormPanel.tsx";
 import {MovieDeleteWarningDialog} from "@/views/admin/movies/_feat/delete-movie";
-import MoviePosterImageDeleteDialog
-    from "@/views/admin/movies/_feat/delete-poster-image/MoviePosterImageDeleteDialog.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {MovieDetailsUIContext} from "@/domains/movies/context/details-ui";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {MoviePosterImageDeleteDialog} from "@/views/admin/movies/_feat/delete-poster-image";
 
 /** Props for the MovieDetailsPageActions component. */
 type ActionProps = {
@@ -55,6 +54,7 @@ export function MovieDetailsPageActions(
                 movieID={movieID}
                 presetOpen={isUpdatingPoster}
                 setPresetOpen={setIsUpdatingPoster}
+                successMessage="Updated."
             />
 
             <MovieDeleteWarningDialog
@@ -66,9 +66,11 @@ export function MovieDetailsPageActions(
 
             <MoviePosterImageDeleteDialog
                 movieID={movieID}
-                presetOpen={isDeletingPoster}
-                setPresetOpen={setIsDeletingPoster}
-                onDeleteSuccess={onPosterRemove}
+                isOpen={isDeletingPoster}
+                setIsOpen={setIsDeletingPoster}
+                onSubmitSuccess={onPosterRemove}
+                submitMessage="Removing..."
+                successMessage="Poster Image Removed."
             />
         </div>
     );

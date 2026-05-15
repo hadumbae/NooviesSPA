@@ -115,7 +115,7 @@ const MovieDetailsDropdown: FC<OptionProps> = (props) => {
 
                     {hasPoster && (
                         <DropdownMenuItem onClick={() => closeOnAction(setIsDeletingPoster)}>
-                            Delete
+                            Remove
                         </DropdownMenuItem>
                     )}
                 </DropdownMenuGroup>

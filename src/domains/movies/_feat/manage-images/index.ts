@@ -10,8 +10,7 @@ import {
 import {useMoviePosterImageSubmitForm} from "./form/useMoviePosterImageSubmitForm.ts";
 import useMoviePosterImageSubmitMutation
     from "./mutations/useMoviePosterImageSubmitMutation.ts";
-import useMoviePosterImageDeleteMutation
-    from "./mutations/useMoviePosterImageDeleteMutation.ts";
+import {useMoviePosterImageDeleteMutation} from "./mutations/useMoviePosterImageDeleteMutation.ts";
 
 
 export {

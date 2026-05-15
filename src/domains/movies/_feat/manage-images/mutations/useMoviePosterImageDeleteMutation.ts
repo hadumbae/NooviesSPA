@@ -4,7 +4,7 @@
 
 
 import {toast} from "react-toastify";
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MutationResponseConfig} from "@/common/features/submit-data";
 import {Movie, MovieSchema} from "@/domains/movies/schema/movie";
@@ -17,14 +17,15 @@ type OnDeleteValues = {
     movieID: ObjectId;
 };
 
-/**
- * React Query mutation hook for deleting a movie's poster image.
- */
-export default function useMoviePosterImageDeleteMutation(
+export function useMoviePosterImageDeleteMutation(
     onSubmitConfig: MutationResponseConfig<Movie> = {}
 ): UseMutationResult<Movie, unknown, OnDeleteValues> {
+    const queryClient = useQueryClient();
 
     const deleteMoviePosterImage = async ({movieID}: OnDeleteValues) => {
+        onSubmitConfig.submitMessage && toast.info(onSubmitConfig.submitMessage);
+        onSubmitConfig.onSubmit?.();
+
         const {result} = await deleteRemovePosterImage({movieID})
 
         const {data: parsedData, error, success} = validateData({
@@ -34,15 +35,13 @@ export default function useMoviePosterImageDeleteMutation(
         });
 
         if (!success) throw error;
-
-        onSubmitConfig.submitMessage && toast.info(onSubmitConfig.submitMessage);
-        onSubmitConfig.onSubmit?.();
-
         return parsedData;
     };
 
     const onSuccess = (movie: Movie) => {
-        onSubmitConfig.successMessage && toast.info(onSubmitConfig.successMessage);
+        queryClient.invalidateQueries({queryKey: ['movies'], exact: false});
+
+        onSubmitConfig.successMessage && toast.success(onSubmitConfig.successMessage);
         onSubmitConfig.onSubmitSuccess?.(movie);
     };
 

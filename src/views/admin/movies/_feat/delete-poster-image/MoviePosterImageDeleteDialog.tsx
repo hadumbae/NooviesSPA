@@ -1,37 +1,37 @@
-import {FC} from 'react';
+/**
+ * @fileoverview A confirmation dialog for deleting a movie's poster image.
+ */
+
+import {ReactElement} from 'react';
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
-import useMoviePosterImageDeleteMutation
-    from "../../../../../domains/movies/_feat/manage-images/mutations/useMoviePosterImageDeleteMutation.ts";
-import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
-import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
+import {useMoviePosterImageDeleteMutation} from "@/domains/movies/_feat/manage-images";
+import {MutationResponseConfig} from "@/common/features/submit-data";
+import {UIOpenStateProps} from "@/common/types";
+import {Movie} from "@/domains/movies/schema/movie";
 
-type DialogProps = Omit<OnDeleteMutationParams, "onDeleteSuccess"> & PresetOpenState & {
-    onDeleteSuccess?: (movie: Movie) => void;
+/** Props for the MoviePosterImageDeleteDialog component. */
+type DialogProps = MutationResponseConfig<Movie> & UIOpenStateProps & {
     movieID: ObjectId;
 }
 
-const MoviePosterImageDeleteDialog: FC<DialogProps> = (props) => {
-    const {movieID, presetOpen, setPresetOpen, ...mutationParams} = props;
+/** Confirmation dialog that triggers the movie poster image deletion process. */
+export function MoviePosterImageDeleteDialog(props: DialogProps): ReactElement {
+    const {movieID, isOpen, setIsOpen, ...mutationParams} = props;
 
     const {mutate} = useMoviePosterImageDeleteMutation(mutationParams);
     const deletePosterImage = () => mutate({movieID});
 
-    const title = "Delete Movie Poster Image?";
-    const description = "Delete movie's poster image? This is an irreversible action.";
-
-    const presetProps: PresetOpenState = filterNullishAttributes({presetOpen, setPresetOpen});
+    const title = "Remove Movie Poster Image?";
+    const description = "Remove the movie's poster image? This is an irreversible action.";
 
     return (
         <EntityDeleteWarningDialog
             title={title}
             description={description}
             deleteResource={deletePosterImage}
-            {...presetProps}
+            presetOpen={isOpen}
+            setPresetOpen={setIsOpen}
         />
     );
-};
-
-export default MoviePosterImageDeleteDialog;
+}
