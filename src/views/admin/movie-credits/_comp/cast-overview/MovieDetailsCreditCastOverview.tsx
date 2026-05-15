@@ -25,7 +25,7 @@ export function MovieDetailsCreditCastOverview(
         return (
             <EmptyArrayContainer
                 text="There Are No Credits"
-                className="h-40"
+                className="h-40 border rounded-xl"
             />
         );
     }

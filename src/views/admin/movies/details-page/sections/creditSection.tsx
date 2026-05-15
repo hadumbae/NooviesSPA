@@ -32,7 +32,7 @@ export function MovieDetailsPageCreditSection({_id, slug}: TabProps): ReactEleme
     });
 
     return (
-        <section>
+        <section className="space-y-4">
             <PageSectionHeaderLink
                 to={`/admin/movies/get/${slug}/people/cast`}
                 text="Cast Overview"

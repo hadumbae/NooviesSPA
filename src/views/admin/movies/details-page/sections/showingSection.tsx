@@ -41,7 +41,7 @@ export function MovieDetailsPageShowingSection(
                     if (showings.length === 0) {
                         return (
                             <EmptyArrayContainer
-                                className="h-28"
+                                className="h-28 border rounded-xl"
                                 text="There Are No Showings"
                             />
                         );
