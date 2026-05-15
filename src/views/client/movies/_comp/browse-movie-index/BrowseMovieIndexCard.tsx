@@ -1,19 +1,18 @@
 /**
  * @fileoverview Card component that displays a compact movie summary with an interactive dialog trigger.
+ *
  */
 
-import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
 import {Info} from "lucide-react";
+import {ReactElement} from "react";
+import {MovieDetails} from "@/domains/movies/schema/movie";
+import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
+import {MoviePosterLink} from "@/views/admin/movies/_comp/poster-image";
 import {
     BrowseMovieSummaryDialog
 } from "@/views/client/movies/browse-movies/browse-movie-summary-dialog/BrowseMovieSummaryDialog.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import {ReactElement} from "react";
-import {MoviePosterLink} from "@/views/admin/movies/_comp/poster-image";
-import {
-    BrowseMovieSummaryMeta
-} from "@/views/client/movies/browse-movies/browse-movie-summary/BrowseMovieSummaryMeta.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {BrowseMovieSummary} from "@/views/client/movies/_comp/browse-movie-info";
 
 /** Props for the BrowseMovieSummaryCard component. */
 type CardProps = {
@@ -23,7 +22,7 @@ type CardProps = {
 /**
  * Renders a movie summary card with metadata and an info icon to trigger a detailed dialog.
  */
-export function BrowseMovieSummaryCard({movie}: CardProps): ReactElement {
+export function BrowseMovieIndexCard({movie}: CardProps): ReactElement {
     const {slug, title, posterImage} = movie;
 
     return (
@@ -38,12 +37,10 @@ export function BrowseMovieSummaryCard({movie}: CardProps): ReactElement {
             </CardHeader>
 
             <CardContent className="px-5 py-5 flex justify-between items-center">
-                <BrowseMovieSummaryMeta
-                    movie={movie}
-                />
+                <BrowseMovieSummary movie={movie} />
 
                 <BrowseMovieSummaryDialog movie={movie}>
-                    <IconButton variant="link" size="sm" icon={Info} />
+                    <IconButton variant="link" size="sm" icon={Info}/>
                 </BrowseMovieSummaryDialog>
             </CardContent>
         </Card>

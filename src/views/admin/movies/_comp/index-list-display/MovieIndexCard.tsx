@@ -8,7 +8,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {ReactElement} from "react";
-import {MovieMetaGenreBadges, MovieMetaRow} from "@/views/admin/movies/_comp/movie-details";
+import {BrowseMovieSummary} from "@/views/client/movies/_comp/browse-movie-info";
 
 /** Props for the MovieIndexCard component. */
 type IndexCardProps = {
@@ -20,7 +20,7 @@ type IndexCardProps = {
  * Renders a concise movie overview including a poster, title link, and metadata.
  */
 export function MovieIndexCard({movie, className}: IndexCardProps): ReactElement {
-    const {genres, posterImage} = movie;
+    const {posterImage} = movie;
 
     return (
         <Card>
@@ -31,10 +31,7 @@ export function MovieIndexCard({movie, className}: IndexCardProps): ReactElement
                 />
             </CardHeader>
             <CardContent className={cn("p-5 flex items-center justify-between", className)}>
-                <section className="space-y-2">
-                    <MovieMetaRow movie={movie}/>
-                    <MovieMetaGenreBadges genres={genres} />
-                </section>
+                <BrowseMovieSummary movie={movie} />
 
                 <MovieIndexDetailsDialog movie={movie}>
                     <TooltipButton

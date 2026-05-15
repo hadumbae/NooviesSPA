@@ -16,7 +16,6 @@ import {
 } from "../../../../admin/movie-credits/_comp/movie-credit-loaders/MovieCreditDataLazyLoader.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MovieCreditDetailsArraySchema} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsArraySchema.ts";
-import {BrowseMovieMetaRow} from "@/views/client/movies/browse-movies/browse-movie-summary/BrowseMovieMetaRow.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import BrowseMovieCreditSummaryLinkList
@@ -24,6 +23,8 @@ import BrowseMovieCreditSummaryLinkList
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {Search} from "lucide-react";
+import {MoviePosterLink} from "@/views/admin/movies/_comp/poster-image";
+import {BrowseMovieSummary} from "@/views/client/movies/_comp/browse-movie-info";
 
 /** Props for the BrowseMovieSummaryDialog component. */
 type DialogProps = {
@@ -36,7 +37,7 @@ type DialogProps = {
  */
 export function BrowseMovieSummaryDialog({children, movie}: DialogProps): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const {_id, title, tagline, synopsis, slug} = movie;
+    const {_id, title, tagline, synopsis, slug, posterImage} = movie;
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -50,7 +51,16 @@ export function BrowseMovieSummaryDialog({children, movie}: DialogProps): ReactE
                     <DialogDescription>{tagline}</DialogDescription>
                 </DialogHeader>
 
-                <BrowseMovieMetaRow movie={movie}/>
+                <div className="flex items-center space-x-4">
+                    <MoviePosterLink
+                        className="h-32 aspect-[2/3]"
+                        slug={slug}
+                        url={posterImage?.secure_url}
+                        alt={`'${title}' Poster Image`}
+                    />
+
+                    <BrowseMovieSummary movie={movie} />
+                </div>
 
                 <p className={cn(PrimaryTextBaseCSS, "max-md:text-sm")}>
                     {synopsis}
