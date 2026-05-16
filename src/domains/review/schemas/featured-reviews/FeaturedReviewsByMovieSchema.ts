@@ -5,7 +5,7 @@
 
 import { z } from "zod";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
-import {MovieReviewDetailsSchema} from "@/domains/review/schemas/models/MovieReviewDetailsSchema.ts";
+import {MovieReviewDetailsSchema} from "@/domains/review/schemas/models";
 
 /**
  * Response schema for featured reviews of a movie.

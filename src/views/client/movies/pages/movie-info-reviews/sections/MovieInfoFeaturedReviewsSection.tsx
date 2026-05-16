@@ -8,11 +8,8 @@ import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {useFetchFeaturedReviewsByMovie} from "@/domains/review/_feat/fetch-by-movie/useFetchFeaturedReviewsByMovie.ts";
-import {
-    FeaturedReviewsByMovie,
-    FeaturedReviewsByMovieSchema
-} from "@/domains/review/schemas/models/FeaturedReviewsByMovieSchema.ts";
 import MovieReviewDetailsCard from "@/views/client/movie-reviews/components/cards/review-card/MovieReviewDetailsCard.tsx";
+import {FeaturedReviewsByMovie, FeaturedReviewsByMovieSchema} from "@/domains/review/schemas/featured-reviews";
 
 /**
  * Props for MovieInfoFeaturedReviewsSection.
