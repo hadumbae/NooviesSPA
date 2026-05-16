@@ -4,7 +4,6 @@
  */
 
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {SetReviewRatingFormData} from "@/domains/review/features/admin-actions/forms";
 import {useState} from "react";
@@ -15,6 +14,8 @@ import {
     SetReviewRatingDialog
 } from "@/views/admin/customers/_feat/set-rating/SetReviewRatingDialog.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
+
+import {MovieReview} from "@/domains/review/schemas/models";
 
 /**
  * Props for the SetReviewRatingAction component.

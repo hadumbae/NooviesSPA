@@ -10,11 +10,12 @@ import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
-import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {simplifyMovieReview} from "@/domains/review/utilities/formatters/simplifyMovieReview.ts";
 import {
     MovieReviewPopupForm
 } from "@/views/client/movie-reviews/components/forms/review-form-popup/MovieReviewPopupForm.tsx";
+
+import {MovieReviewDetails} from "src/domains/review/schemas/models/MovieReviewDetailsSchema";
 
 /**
  * Data required to render the review action section for a movie.

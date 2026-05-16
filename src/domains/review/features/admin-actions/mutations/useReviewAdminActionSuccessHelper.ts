@@ -3,7 +3,6 @@
  * @filename useReviewAdminActionSuccessHelper.ts
  */
 
-import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {toast} from "react-toastify";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
@@ -11,6 +10,8 @@ import {CustomerProfileOverviewViewQueryKeys} from "@/domains/customers/features
 import {CustomerReviewsViewQueryKeys} from "@/domains/customers/features/movie-reviews";
 import {CustomerReviewLogsQueryKeys} from "@/domains/customers/features/movie-review-logs/queryKeys.ts";
 import {CustomerReviewViewQueryKeys} from "@/domains/customers/features/movie-review";
+
+import {MovieReview} from "@/domains/review/schemas/models";
 
 /**
  * Parameters extracted from the standard mutation submission interface.

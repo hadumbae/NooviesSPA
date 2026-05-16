@@ -3,11 +3,12 @@
  * useMovieReviewSubmitFormDefaultValues.ts
  */
 
-import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {MovieReviewFormValues} from "@/domains/review/schemas/forms/MovieReviewForm.types.ts";
 import {useContext, useMemo, useRef} from "react";
 import {isEqual} from "lodash";
 import {AuthContext} from "@/domains/auth/context/AuthContext.ts";
+
+import {MovieReview} from "@/domains/review/schemas/models";
 
 /**
  * Parameters for initializing movie review form defaults.

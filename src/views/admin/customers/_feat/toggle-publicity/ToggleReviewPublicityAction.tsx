@@ -4,7 +4,6 @@
  */
 
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ModerationMessageFormData} from "@/common/features/moderation/forms";
 import {useState} from "react";
@@ -15,6 +14,8 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {
     ToggleReviewPublicityForm
 } from "@/views/admin/customers/_feat/toggle-publicity/ToggleReviewPublicityForm.tsx";
+
+import {MovieReview} from "@/domains/review/schemas/models";
 
 /**
  * Props for the ToggleReviewPublicityAction component.

@@ -5,12 +5,10 @@
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {UseFormReturn} from "react-hook-form";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {patchResetReviewDisplayName} from "@/domains/review/features/admin-actions/repositories";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import {MovieReviewSchema} from "@/domains/review/schemas/models/MovieReview.schema.ts";
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {
@@ -20,6 +18,7 @@ import {ResetReviewDisplayNameFormData} from "@/domains/review/features/admin-ac
 import {
     useReviewAdminActionSuccessHelper
 } from "@/domains/review/features/admin-actions/mutations/useReviewAdminActionSuccessHelper.ts";
+import {MovieReview, MovieReviewSchema} from "@/domains/review/schemas/models";
 
 /**
  * Configuration parameters for the Reset Display Name mutation.

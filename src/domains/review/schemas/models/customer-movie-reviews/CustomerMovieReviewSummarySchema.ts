@@ -5,8 +5,8 @@
 
 import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {MovieReviewSchema} from "@/domains/review/schemas/models/MovieReview.schema.ts";
 import {z} from "zod";
+import {MovieReviewSchema} from "@/domains/review/schemas/models";
 
 /**
  * Simplified review schema designed for administrative and profile overviews.

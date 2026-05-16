@@ -4,7 +4,6 @@
  */
 
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
-import {MovieReview, PopulatedMovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {MovieReviewForm, MovieReviewFormValues} from "@/domains/review/schemas/forms/MovieReviewForm.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -17,6 +16,7 @@ import {ReactNode} from "react";
 import MovieReviewSubmitFormViewContextProvider
     from "@/domains/review/context/submit-form-view-context/MovieReviewSubmitFormViewContextProvider.tsx";
 import Logger from "@/common/utility/features/logger/Logger.ts";
+import {MovieReview} from "@/domains/review/schemas/models";
 
 /**
  * Combined properties for {@link MovieReviewSubmitFormContainer}.
@@ -24,7 +24,7 @@ import Logger from "@/common/utility/features/logger/Logger.ts";
  * * **Form Options:** Inherits configuration for field disabling and initial values via {@link FormOptions}.
  */
 type FormProps =
-    MutationOnSubmitParams<PopulatedMovieReview> &
+    MutationOnSubmitParams<MovieReview> &
     FormOptions<MovieReviewFormValues, MovieReviewForm, MovieReview> &
     {
         /** Form fields and UI elements rendered within the form context. */

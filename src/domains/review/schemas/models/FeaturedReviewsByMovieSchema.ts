@@ -4,17 +4,14 @@
  */
 
 import { z } from "zod";
-import { MovieReviewDetailsSchema } from "@/domains/review/schemas/models/MovieReview.schema.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {MovieReviewDetailsSchema} from "@/domains/review/schemas/models/MovieReviewDetailsSchema.ts";
 
 /**
  * Response schema for featured reviews of a movie.
  */
 export const FeaturedReviewsByMovieSchema = z.object({
-    /** Review authored by the requesting user, if present. */
     userReview: MovieReviewDetailsSchema.nullable(),
-
-    /** Featured reviews for the movie. */
     reviews: generateArraySchema(MovieReviewDetailsSchema),
 });
 

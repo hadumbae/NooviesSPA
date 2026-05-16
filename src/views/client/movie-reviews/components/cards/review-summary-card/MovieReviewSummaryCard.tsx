@@ -4,13 +4,14 @@
  * MovieReviewSummaryCard.tsx
  */
 
-import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import MovieReviewRatingStars from "@/views/client/movie-reviews/components/MovieReviewRatingStars.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import MovieReviewText from "@/views/client/movie-reviews/components/text/MovieReviewText.tsx";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
+
+import {MovieReviewDetails} from "src/domains/review/schemas/models/MovieReviewDetailsSchema";
 
 /**
  * Props for MovieReviewSummaryCard.

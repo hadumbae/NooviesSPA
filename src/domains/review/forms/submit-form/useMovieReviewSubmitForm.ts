@@ -4,13 +4,14 @@
  */
 
 import {MovieReviewFormValues} from "@/domains/review/schemas/forms/MovieReviewForm.types.ts";
-import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {
     useMovieReviewSubmitFormDefaultValues
 } from "@/domains/review/forms/submit-form/useMovieReviewSubmitFormDefaultValues.ts";
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {MovieReviewFormSchema} from "@/domains/review/schemas/forms/MovieReviewForm.schema.ts";
+
+import {MovieReview} from "@/domains/review/schemas/models";
 
 /**
  * Parameters for configuring the movie review submit form.

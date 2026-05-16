@@ -4,21 +4,19 @@
  */
 
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {PopulatedMovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {UseFormReturn} from "react-hook-form";
 import {MovieReviewForm, MovieReviewFormValues} from "@/domains/review/schemas/forms/MovieReviewForm.types.ts";
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import {
     patchUpdateMovieReviewForCurrentUser, postCreateMovieReviewForCurrentUser
 } from "@/domains/review/repositories/my-movie-review/MyMovieReviewRepository.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import {PopulatedMovieReviewSchema} from "@/domains/review/schemas/models/MovieReview.schema.ts";
 import {toast} from "react-toastify";
-import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {MovieReviewQueryKeys} from "@/domains/review/utilities/query/MovieReviewQueryKeys.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {MovieReview, MovieReviewSchema} from "@/domains/review/schemas/models";
 
 /**
  * Parameters for invoking the submit MovieReview mutation.
@@ -27,7 +25,7 @@ import handleMutationFormError from "@/common/utility/handlers/handleMutationFor
  */
 type SubmitMutation = {
     editID?: ObjectId;
-    onSubmit?: MutationOnSubmitParams<PopulatedMovieReview>;
+    onSubmit?: MutationOnSubmitParams<MovieReview>;
     form: UseFormReturn<MovieReviewFormValues>;
 }
 
@@ -40,11 +38,11 @@ type SubmitMutation = {
  */
 export function useSubmitUserMovieReviewMutation(
     params: SubmitMutation,
-): UseMutationResult<PopulatedMovieReview, unknown, MovieReviewForm> {
+): UseMutationResult<MovieReview, unknown, MovieReviewForm> {
     const {editID, form, onSubmit} = params;
     const {successMessage, onSubmitSuccess, errorMessage, onSubmitError} = onSubmit ?? {};
 
-    const invalidateQueries = useInvalidateQueryKeys();
+    const queryClient = useQueryClient();
 
     const submitReviewData = async (values: MovieReviewForm) => {
         const payload = {
@@ -64,24 +62,19 @@ export function useSubmitUserMovieReviewMutation(
 
         const {success, data: parsedData, error} = validateData({
             data: returnData,
-            schema: PopulatedMovieReviewSchema,
+            schema: MovieReviewSchema,
         });
 
         if (!success) throw error;
         return parsedData;
     }
 
-    const onSuccess = (review: PopulatedMovieReview) => {
-        const {movie: {_id: movieID}} = review;
+    const onSuccess = (review: MovieReview) => {
 
-        invalidateQueries([
-            MovieReviewQueryKeys.query(),
-            MovieReviewQueryKeys.paginated(),
-            MovieReviewQueryKeys.userList(),
-            MovieReviewQueryKeys.movieList(movieID),
-            MovieReviewQueryKeys.movieDetails(movieID),
-            MovieReviewQueryKeys.featuredReviews(movieID),
-        ]);
+        queryClient.invalidateQueries({
+            queryKey: MovieReviewQueryKeys.all,
+            exact: false,
+        });
 
         successMessage && toast.success(successMessage);
         onSubmitSuccess?.(review);

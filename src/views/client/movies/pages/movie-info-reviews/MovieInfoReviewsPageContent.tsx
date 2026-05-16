@@ -4,7 +4,6 @@
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import MovieInfoReviewsPageHeader
     from "@/views/client/movies/pages/movie-info-reviews/sections/MovieInfoReviewsPageHeader.tsx";
 import MovieInfoReviewAction
@@ -14,6 +13,8 @@ import MovieInfoFeaturedReviewsSection
 import MovieInfoReviewListSection
     from "@/views/client/movies/pages/movie-info-reviews/sections/MovieInfoReviewListSection.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+
+import {MovieReviewDetails} from "src/domains/review/schemas/models/MovieReviewDetailsSchema";
 
 /**
  * Props for MovieInfoReviewsPageContent.

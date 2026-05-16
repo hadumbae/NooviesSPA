@@ -5,13 +5,13 @@
 
 import {UseMutationResult} from "@tanstack/react-query";
 import {MovieReviewForm, MovieReviewFormValues} from "@/domains/review/schemas/forms/MovieReviewForm.types.ts";
-import {PopulatedMovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {ReactNode} from "react";
 import {FormViewOptions} from "@/common/type/form/form-view/FormViewProps.ts";
 import {
     MovieReviewSubmitFormViewContext,
     MovieReviewSubmitFormContextValues
 } from "@/domains/review/context/submit-form-view-context/MovieReviewSubmitFormViewContext.ts";
+import {MovieReview} from "@/domains/review/schemas/models";
 
 /**
  * Props for MovieReviewSubmitFormViewContextProvider.
@@ -20,7 +20,7 @@ type ProviderProps = FormViewOptions<MovieReviewFormValues> & {
     children: ReactNode;
     formID: string;
     isEditing?: boolean;
-    mutation: UseMutationResult<PopulatedMovieReview, unknown, MovieReviewForm>;
+    mutation: UseMutationResult<MovieReview, unknown, MovieReviewForm>;
 };
 
 /**

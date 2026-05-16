@@ -11,9 +11,10 @@ import {Form} from "@/common/components/ui/form.tsx";
 import {useResetReviewDisplayNameMutation} from "@/domains/review/features/admin-actions/mutations";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {ReactNode} from "react";
 import {AdminReviewActionFormContextProvider} from "@/domains/review/features/admin-actions/context";
+
+import {MovieReview} from "@/domains/review/schemas/models";
 
 /**
  * Props for the ResetReviewDisplayNameForm component.

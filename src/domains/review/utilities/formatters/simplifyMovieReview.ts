@@ -4,13 +4,9 @@
  * simplifyMovieReview.ts
  */
 
-import {
-    MovieReview,
-    MovieReviewDetails,
-    PopulatedMovieReview
-} from "@/domains/review/schemas/models/MovieReview.types.ts";
-import {MovieReviewSchema} from "@/domains/review/schemas/models/MovieReview.schema.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {MovieReview, MovieReviewSchema} from "@/domains/review/schemas/models";
+import {MovieReviewDetails} from "src/domains/review/schemas/models/MovieReviewDetailsSchema";
 
 /**
  * Simplifies a populated movie review into its base schema shape.
@@ -19,7 +15,7 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
  *         does not conform to `MovieReviewSchema`
  */
 export function simplifyMovieReview(
-    review: PopulatedMovieReview | MovieReviewDetails
+    review: MovieReviewDetails
 ): MovieReview {
     const {
         user: {_id: user},

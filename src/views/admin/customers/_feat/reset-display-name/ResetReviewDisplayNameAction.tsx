@@ -8,13 +8,13 @@ import {ResetReviewDisplayNameFormData} from "@/domains/review/features/admin-ac
 import {useState} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {
     ResetReviewDisplayNameDialog
 } from "@/views/admin/customers/_feat/reset-display-name/ResetReviewDisplayNameDialog.tsx";
 import {
     ResetReviewDisplayNameForm
 } from "@/views/admin/customers/_feat/reset-display-name/ResetReviewDisplayNameForm.tsx";
+import {MovieReview} from "@/domains/review/schemas/models";
 
 /**
  * Props for the ResetReviewDisplayNameAction component.

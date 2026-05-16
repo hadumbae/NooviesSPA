@@ -5,12 +5,9 @@
 
 import {useFetchReviewDetailsByMovie} from "@/domains/review/_feat/fetch-by-movie/useFetchReviewDetailsByMovie.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
-import {
-    MovieReviewSummaryData,
-    MovieReviewSummarySchema
-} from "src/domains/review/schemas/models/MovieReviewSummarySchema.ts";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {useFetchMovieBySlug} from "@/domains/movies/_feat/crud-hooks";
+import {MovieReviewSummaryData, MovieReviewSummarySchema} from "@/domains/review/schemas/models";
 
 /** Parameters for the useMovieInfoReviewsPageQueries hook. */
 type HookParams = {

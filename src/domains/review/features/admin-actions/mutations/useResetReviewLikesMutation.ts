@@ -6,10 +6,8 @@
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ModerationMessageFormData} from "@/common/features/moderation/forms";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {patchResetReviewLikes} from "@/domains/review/features/admin-actions/repositories";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import {MovieReviewSchema} from "@/domains/review/schemas/models/MovieReview.schema.ts";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {
     CustomerReviewActionMutationKeys
@@ -20,6 +18,7 @@ import {UseFormReturn} from "react-hook-form";
 import {
     useReviewAdminActionSuccessHelper
 } from "@/domains/review/features/admin-actions/mutations/useReviewAdminActionSuccessHelper.ts";
+import {MovieReview, MovieReviewSchema} from "@/domains/review/schemas/models";
 
 /**
  * Configuration parameters for the Reset Likes mutation.

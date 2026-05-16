@@ -4,7 +4,6 @@
  */
 
 import {useState} from "react";
-import {MovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ModerationMessageFormData} from "@/common/features/moderation/forms";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -15,6 +14,8 @@ import {
     ResetReviewLikesDialog
 } from "@/views/admin/customers/_feat/reset-likes/ResetReviewLikesDialog.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
+
+import {MovieReview} from "@/domains/review/schemas/models";
 
 /**
  * Props for the ResetReviewLikesAction component.

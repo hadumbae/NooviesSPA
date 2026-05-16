@@ -3,7 +3,6 @@
  * @filename MovieReviewDetailsCard.tsx
  */
 
-import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import DeleteMovieReviewButton from "@/views/client/movie-reviews/components/buttons/DeleteMovieReviewButton.tsx";
 import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
@@ -15,6 +14,8 @@ import MovieReviewHelpfulButton from "@/views/client/movie-reviews/components/bu
 import {cn} from "@/common/lib/utils.ts";
 import IsRecommendedBadge from "@/views/client/movie-reviews/components/badges/IsRecommendedBadge.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
+
+import {MovieReviewDetails} from "src/domains/review/schemas/models/MovieReviewDetailsSchema";
 
 /**
  * Props for MovieReviewDetailsCard.

@@ -9,23 +9,17 @@ import MovieReviewSubmitFormContainer
     from "@/views/client/movie-reviews/components/forms/submit-form/MovieReviewSubmitFormContainer.tsx";
 import {ReactNode} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {MovieReview, PopulatedMovieReview} from "@/domains/review/schemas/models/MovieReview.types.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
+import {MovieReview} from "@/domains/review/schemas/models";
 
 /**
  * Props for the {@link MovieReviewPopupForm} component.
  */
-type FormProps = MutationOnSubmitParams<PopulatedMovieReview> & PresetOpenState & {
-    /** The trigger element (e.g., a "Write Review" button) that opens the popup. */
+type FormProps = MutationOnSubmitParams<MovieReview> & PresetOpenState & {
     children?: ReactNode;
-    /** The unique identifier of the movie being reviewed. */
     movieID: ObjectId;
-    /**
-     * Optional existing review document.
-     * If provided, the form initializes in "Edit" mode; otherwise, it defaults to "Create".
-     */
     reviewToEdit?: MovieReview;
 };
 
@@ -36,15 +30,9 @@ type FormProps = MutationOnSubmitParams<PopulatedMovieReview> & PresetOpenState 
 export const MovieReviewPopupForm = (
     {children, movieID, reviewToEdit, presetOpen, setPresetOpen, ...onSubmitProps}: FormProps
 ) => {
-    /** Manages the open/closed state of the modal/popup. */
     const {activeOpen, setActiveOpen} = usePresetActiveOpen({presetOpen, setPresetOpen});
 
-    /**
-     * Handles post-submission cleanup.
-     * * Closes the popup and propagates the successful result to the parent caller.
-     * @param review - The newly processed {@link PopulatedMovieReview}.
-     */
-    const closeOnSubmit = (review: PopulatedMovieReview) => {
+    const closeOnSubmit = (review: MovieReview) => {
         setActiveOpen(false);
         onSubmitProps.onSubmitSuccess?.(review);
     }
