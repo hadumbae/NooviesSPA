@@ -1,32 +1,24 @@
 /**
- * @file Main content layout for the administrative Customer Review detail page.
- * @filename CustomerReviewPageContent.tsx
+ * @fileoverview Main content layout for the administrative Customer Review detail page.
+ *
  */
 
 import {LeanUserWithEmail} from "@/domains/users/schemas/user";
 import {PageFlexWrapper, PageSectionHeaderLink} from "@/views/common/_comp/page";
 import {CustomerReviewPageHeader} from "@/views/admin/customers/customer-review-page/header.tsx";
-import {CustomerMovieReview} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSchema.ts";
+import {CustomerMovieReview} from "@/domains/review/schemas/customer-reviews";
 import {CustomerReviewPageActionSection} from "@/views/admin/customers/customer-review-page/sections/CustomerReviewPageActionSection.tsx";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {CustomerMovieReviewCard} from "@/views/admin/customers/_comp";
 import {AdminMovieWithRatingCard, CustomerDetailsCard} from "@/views/admin/customers/_comp";
 
-/**
- * Props for the CustomerReviewPageContent component.
- * ---
- */
+/** Props for the CustomerReviewPageContent component. */
 type ContentProps = {
-    /** The hydrated user object representing the author of the review. */
     customer: LeanUserWithEmail;
-    /** The specific movie review data, including nested movie metadata. */
     review: CustomerMovieReview;
 };
 
-/**
- * Orchestrates the full view for administrative review moderation.
- * ---
- */
+/** Main content component for displaying a specific customer movie review and associated details. */
 export const CustomerReviewPageContent = (
     {customer, review}: ContentProps
 ) => {

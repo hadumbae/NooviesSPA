@@ -5,7 +5,7 @@
 
 import {z} from "zod";
 import {LeanUserWithEmailSchema} from "@/domains/users/schemas/user";
-import {CustomerMovieReviewSchema} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSchema.ts";
+import {CustomerMovieReviewSchema} from "@/domains/review/schemas/customer-reviews";
 
 /**
  * Zod validation schema for the customer-review pair used in moderation views.

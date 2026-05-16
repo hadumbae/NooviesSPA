@@ -7,7 +7,7 @@ import {z} from "zod";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {ReservationSchema} from "@/domains/reservation/schema/model";
 import {LeanUserWithEmailSchema} from "@/domains/users/schemas/user";
-import {CustomerMovieReviewSummarySchema} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
+import {CustomerMovieReviewSummarySchema} from "@/domains/review/schemas/customer-reviews";
 
 /**
  * Schema for the reservation subset of the profile view.

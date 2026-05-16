@@ -7,7 +7,7 @@ import {LeanUserWithEmailSchema} from "@/domains/users/schemas/user";
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 import {
     CustomerMovieReviewSummarySchema
-} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
+} from "@/domains/review/schemas/customer-reviews";
 import {z} from "zod";
 
 /**

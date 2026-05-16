@@ -6,7 +6,7 @@
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {
     CustomerMovieReviewSummary
-} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
+} from "@/domains/review/schemas/customer-reviews";
 import MovieReviewRatingStars from "@/views/client/movie-reviews/components/MovieReviewRatingStars.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";

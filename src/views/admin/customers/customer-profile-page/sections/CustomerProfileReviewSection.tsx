@@ -1,31 +1,20 @@
 /**
- * @file Specialized UI section for displaying a customer's movie review history.
- * @filename CustomerProfileReviewSection.tsx
+ * @fileoverview Specialized UI section for displaying a customer's movie review history.
  */
 
 import {PageSectionHeader} from "@/views/common/_comp/page";
-import {
-    CustomerMovieReviewSummary
-} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
+import {CustomerMovieReviewSummary} from "@/domains/review/schemas/customer-reviews";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/_comp";
 
-/**
- * Props for {@link CustomerProfileReviewSection}.
- */
+/** Props for the CustomerProfileReviewSection component. */
 type SectionProps = {
-    /** The unique identification code of the customer owning these reviews. */
     code: UserUniqueCode;
-    /** Total count of reviews authored by the user (for header display). */
     itemCount: number;
-    /** List of summarized review data for rendering. */
     reviews: CustomerMovieReviewSummary[];
 };
 
-/**
- * Renders a grid of movie reviews within the Customer Profile administrative view.
- * ---
- */
+/** Renders a grid of movie reviews within the Customer Profile administrative view. */
 export const CustomerProfileReviewSection = (
     {code, itemCount, reviews}: SectionProps
 ) => {

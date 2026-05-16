@@ -15,10 +15,8 @@ import {
 import {
     CustomerProfilePageHeader
 } from "@/views/admin/customers/customer-profile-page/header.tsx";
-import {
-    CustomerMovieReviewSummary
-} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
 import {CustomerDetailsCard} from "@/views/admin/customers/_comp/CustomerDetailsCard.tsx";
+import {CustomerMovieReviewSummary} from "@/domains/review/schemas/customer-reviews";
 
 /**
  * Properties for the CustomerProfilePageContent component.

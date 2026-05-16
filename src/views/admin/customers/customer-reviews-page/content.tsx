@@ -2,10 +2,9 @@
  * @fileoverview Defines the content layout for the Customer Reviews page.
  */
 
-import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {PageSectionHeader} from "@/views/common/_comp/page";
+import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import {CustomerMovieReviewSummary} from "@/domains/review/schemas/models/customer-movie-reviews/CustomerMovieReviewSummarySchema.ts";
+import {CustomerMovieReviewSummary} from "@/domains/review/schemas/customer-reviews";
 import {LeanUserWithEmail} from "@/domains/users/schemas/user";
 import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/_comp";
 import {CustomerReviewsPageHeader} from "@/views/admin/customers/customer-reviews-page/header.tsx";
@@ -13,17 +12,11 @@ import {ReactElement} from "react";
 
 /** Properties for the CustomerReviewsPageContent component. */
 type ContentProps = {
-    /** The customer object containing profile and identification data. */
     customer: LeanUserWithEmail;
-    /** The list of movie review summaries to display. */
     reviews: CustomerMovieReviewSummary[];
-    /** The current active page number. */
     page: number;
-    /** The number of items to display per page. */
     perPage: number;
-    /** Callback function to update the current page. */
     setPage: (value: number) => void;
-    /** The total number of items available across all pages. */
     totalItems: number;
 };
 
