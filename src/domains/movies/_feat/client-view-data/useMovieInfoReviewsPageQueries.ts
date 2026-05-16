@@ -6,9 +6,9 @@
 import {useFetchReviewDetailsByMovie} from "@/domains/review/_feat/fetch-by-movie/useFetchReviewDetailsByMovie.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {
-    MovieReviewViewData,
-    MovieReviewViewDataSchema
-} from "@/domains/review/schemas/models/MovieReviewViewDataSchema.ts";
+    MovieReviewSummaryData,
+    MovieReviewSummarySchema
+} from "src/domains/review/schemas/models/MovieReviewSummarySchema.ts";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {useFetchMovieBySlug} from "@/domains/movies/_feat/crud-hooks";
 
@@ -22,7 +22,7 @@ type HookParams = {
 /** Schema-validated data for the Movie Reviews page. */
 export type MovieInfoReviewsPageData = {
     movie: MovieDetails;
-    reviewDetails: MovieReviewViewData;
+    reviewDetails: MovieReviewSummaryData;
 };
 
 /**
@@ -51,6 +51,6 @@ export function useMovieInfoReviewsPageQueries(
 
     return [
         {query: movieQuery, key: "movie", schema: MovieDetailsSchema},
-        {query: reviewQuery, key: "reviewDetails", schema: MovieReviewViewDataSchema},
+        {query: reviewQuery, key: "reviewDetails", schema: MovieReviewSummarySchema},
     ];
 }

@@ -9,7 +9,7 @@ import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetc
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
-import {MovieReviewViewData} from "@/domains/review/schemas/models/MovieReviewViewDataSchema.ts";
+import {MovieReviewSummaryData} from "src/domains/review/schemas/models/MovieReviewSummarySchema.ts";
 import {
     useMovieInfoOverviewPageQueries
 } from "@/domains/movies/_feat/client-view-data/useMovieInfoOverviewPageQueries.ts";
@@ -22,7 +22,7 @@ import {MovieInfoPageContent} from "@/views/client/movies/pages/movie-info/conte
 type QueryData = {
     movie: MovieDetails;
     credits: MovieCreditDetails[];
-    reviewDetails: MovieReviewViewData;
+    reviewDetails: MovieReviewSummaryData;
 };
 
 /** Loads data and renders the movie overview page. */

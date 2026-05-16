@@ -12,7 +12,7 @@ import MovieOverviewFavouriteToggle
     from "@/views/client/movies/pages/movie-info/rows/MovieOverviewFavouriteToggle.tsx";
 import MovieOverviewReviews
     from "@/views/client/movies/pages/movie-info/rows/MovieOverviewReviews.tsx";
-import {MovieReviewViewData} from "@/domains/review/schemas/models/MovieReviewViewDataSchema.ts";
+import {MovieReviewSummaryData} from "src/domains/review/schemas/models/MovieReviewSummarySchema.ts";
 import MovieOverviewShowings from "@/views/client/movies/pages/movie-info/rows/MovieOverviewShowings.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {
@@ -25,7 +25,7 @@ import {MovieOverviewHeader} from "@/views/client/movies/pages/movie-info/header
 type ContentProps = {
     movie: MovieDetails;
     credits: MovieCreditDetails[];
-    reviewDetails: MovieReviewViewData;
+    reviewDetails: MovieReviewSummaryData;
 };
 
 /**

@@ -7,7 +7,7 @@ import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks/useFe
 import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {useFetchReviewDetailsByMovie} from "@/domains/review/_feat/fetch-by-movie/useFetchReviewDetailsByMovie.ts";
-import {MovieReviewViewDataSchema} from "@/domains/review/schemas/models/MovieReviewViewDataSchema.ts";
+import {MovieReviewSummarySchema} from "src/domains/review/schemas/models/MovieReviewSummarySchema.ts";
 import {MovieDetailsSchema} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {
     MovieCreditDetailsArraySchema
@@ -54,6 +54,6 @@ export function useMovieInfoOverviewPageQueries(
     return [
         {query: movieQuery, key: "movie", schema: MovieDetailsSchema},
         {query: creditQuery, key: "credits", schema: MovieCreditDetailsArraySchema},
-        {query: reviewQuery, key: "reviewDetails", schema: MovieReviewViewDataSchema},
+        {query: reviewQuery, key: "reviewDetails", schema: MovieReviewSummarySchema},
     ];
 }
