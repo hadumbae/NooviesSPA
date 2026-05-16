@@ -1,12 +1,9 @@
 /**
- * @file Layout composition for the movie overview page.
+ * @fileoverview Layout composition for the movie overview page.
  *
- * MovieInfoPageContent.tsx
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import MovieOverviewHeader
-    from "@/views/client/movies/pages/movie-info/rows/MovieOverviewHeader.tsx";
 import MovieOverviewEditorialInfo
     from "@/views/client/movies/pages/movie-info/rows/MovieOverviewEditorialInfo.tsx";
 import MovieOverviewCredits
@@ -21,33 +18,22 @@ import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts"
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {ReactElement} from "react";
+import {MovieOverviewHeader} from "@/views/client/movies/pages/movie-info/header.tsx";
 
-/**
- * Props for MovieInfoPageContent.
- */
+/** Props for the MovieInfoPageContent component. */
 type ContentProps = {
-    /**
-     * Movie details.
-     */
     movie: MovieDetails;
-
-    /**
-     * Associated credits.
-     */
     credits: MovieCreditDetails[];
-
-    /**
-     * Review summary data.
-     */
     reviewDetails: MovieReviewViewData;
 };
 
 /**
- * Renders the movie overview page sections.
+ * Renders the movie overview page sections including header, credits, and reviews.
  */
-const MovieInfoPageContent = (
+export function MovieInfoPageContent(
     {movie, credits, reviewDetails}: ContentProps
-) => {
+): ReactElement {
     const {slug} = movie;
     const {
         averageRating,
@@ -87,6 +73,4 @@ const MovieInfoPageContent = (
             />
         </PageFlexWrapper>
     );
-};
-
-export default MovieInfoPageContent;
+}

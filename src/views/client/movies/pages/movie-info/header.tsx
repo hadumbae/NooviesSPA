@@ -1,38 +1,28 @@
 /**
- * @file Overview header section combining headline, poster, metadata, and credit links.
- *
- * MovieOverviewHeader.tsx
+ * @fileoverview Movie overview header section combining headline, poster, metadata, and credit links.
  */
 
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {ReactElement} from "react";
 import MovieOverviewHeadline
     from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewHeadline.tsx";
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import MovieOverviewMeta from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewMeta.tsx";
 import MovieOverviewCreditLinks
     from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewCreditLinks.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import {MovieCreditDetails} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
-import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
+import {MovieDetails} from "@/domains/movies/schema/movie";
+import {MovieCreditDetails} from "@/domains/moviecredit/schemas";
 
-/**
- * Props for MovieOverviewHeader.
- */
+/** Props for the MovieOverviewHeader component. */
 type OverviewProps = {
-    /**
-     * Movie details used throughout the overview.
-     */
     movie: MovieDetails;
-
-    /**
-     * Credit entries associated with the movie.
-     */
     credits: MovieCreditDetails[];
 };
 
 /**
- * Renders the movie overview header layout.
+ * Renders the movie overview header layout including the poster and metadata.
  */
-const MovieOverviewHeader = ({movie, credits}: OverviewProps) => {
+export function MovieOverviewHeader({movie, credits}: OverviewProps): ReactElement {
     const {posterImage} = movie;
 
     return (
@@ -58,6 +48,5 @@ const MovieOverviewHeader = ({movie, credits}: OverviewProps) => {
             </Card>
         </div>
     );
-};
+}
 
-export default MovieOverviewHeader;
