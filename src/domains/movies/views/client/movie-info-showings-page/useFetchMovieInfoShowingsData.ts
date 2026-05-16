@@ -7,12 +7,12 @@ import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {getShowingsForMovieView} from "@/domains/movies/views/client/repositories/MovieClientViewRepository.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {
     GetShowingsForMovieViewQueryStrings
-} from "@/domains/movies/views/client/repositories/MovieClientViewRepository.types.ts";
+} from "src/domains/movies/_feat/client-view-data/repositories/repository.types.ts";
+import {getShowingsForMovieView} from "@/domains/movies/_feat/client-view-data/repositories/repository.ts";
 
 /**
  * Props for {@link useFetchMovieInfoShowingsData}.

@@ -1,29 +1,22 @@
 /**
- * @file React Query hook for fetching movie credits view data.
- * @filename useFetchMovieInfoCreditsData.ts
+ * @fileoverview React Query hook for fetching movie credits view data.
  */
-
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
-import {getCreditsForMovieView} from "@/domains/movies/views/client/repositories/MovieClientViewRepository.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {getCreditsForMovieView} from "@/domains/movies/_feat/client-view-data/repositories/repository.ts";
 
-/**
- * Parameters for fetching movie credits view data.
- */
-type FetchParams = {
-    /** Movie identifier used for query scoping */
+/** Parameters for fetching movie credits view data. */
+export type FetchParams = {
     slug: SlugString;
-
-    /** Optional React Query configuration */
     options?: FetchQueryOptions<unknown>;
 }
 
 /**
- * Fetches grouped movie credits for the movie info view.
+ * Fetches and groups movie credits for the movie info view.
  */
 export function useFetchMovieInfoCreditsData(
     {slug, options}: FetchParams,

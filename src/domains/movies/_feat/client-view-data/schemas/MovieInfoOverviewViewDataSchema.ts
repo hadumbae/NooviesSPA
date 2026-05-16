@@ -1,0 +1,19 @@
+/**
+ * @fileoverview Zod schema and type definition for the movie info overview view data.
+ */
+
+import {z} from "zod";
+import {MovieDetailsSchema} from "@/domains/movies/schema/movie";
+import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {MovieCreditDetailsSchema} from "@/domains/moviecredit/schemas";
+import {MovieReviewSummarySchema} from "@/domains/review/schemas/models";
+
+/** Zod schema for validating the composite movie overview data. */
+export const MovieInfoOverviewViewDataSchema = z.object({
+    movie: MovieDetailsSchema,
+    credits: generateArraySchema(MovieCreditDetailsSchema),
+    reviews: MovieReviewSummarySchema,
+});
+
+/** Type definition inferred from the MovieInfoOverviewViewDataSchema. */
+export type MovieInfoOverviewViewData = z.infer<typeof MovieInfoOverviewViewDataSchema>;
