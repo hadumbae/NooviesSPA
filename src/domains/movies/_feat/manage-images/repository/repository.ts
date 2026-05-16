@@ -14,7 +14,7 @@ export function patchUploadPosterImage(params: UploadPosterImageConfig): Promise
 
     const url = buildURL({
         baseURL: ManageMovieImagesBaseURL,
-        path: `/update/${movieID}/poster_image`
+        path: `/item/${movieID}/poster_image/update`
     });
 
     return useFetchAPI({url, method: "PATCH", data});
@@ -26,7 +26,7 @@ export function deleteRemovePosterImage(params: RemovePosterImageConfig): Promis
 
     const url = buildURL({
         baseURL: ManageMovieImagesBaseURL,
-        path: `/delete/${movieID}/poster_image`
+        path: `/item/${movieID}/poster_image/remove`
     });
 
     return useFetchAPI({url, method: "DELETE"});

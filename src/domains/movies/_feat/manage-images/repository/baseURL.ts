@@ -3,4 +3,4 @@
  */
 
 /** Base API path for administrative movie image operations. */
-export const ManageMovieImagesBaseURL = "/api/v1/admin/movies";
+export const ManageMovieImagesBaseURL = "/api/v1/admin/movies/feat/manage-images";
