@@ -1,21 +1,17 @@
 /**
- * @file Utility for normalizing populated movie review objects.
- *
- * simplifyMovieReview.ts
+ * @fileoverview Utility for normalising populated movie review objects.
  */
 
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {MovieReview, MovieReviewSchema} from "@/domains/review/schemas/models";
 import {MovieReviewDetails} from "src/domains/review/schemas/models/MovieReviewDetailsSchema";
+import {MyMovieReview} from "@/domains/review/schemas/my-reviews";
 
 /**
- * Simplifies a populated movie review into its base schema shape.
- *
- * @throws Zod validation error if the transformed data
- *         does not conform to `MovieReviewSchema`
+ * Transforms a populated movie review into its base schema shape and validates it.
  */
 export function simplifyMovieReview(
-    review: MovieReviewDetails
+    review: MyMovieReview | MovieReviewDetails
 ): MovieReview {
     const {
         user: {_id: user},
