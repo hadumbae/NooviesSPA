@@ -12,7 +12,7 @@ import MovieOverviewFavouriteToggle
     from "@/views/client/movies/pages/movie-info/rows/MovieOverviewFavouriteToggle.tsx";
 import MovieOverviewReviews
     from "@/views/client/movies/pages/movie-info/rows/MovieOverviewReviews.tsx";
-import {MovieReviewSummaryData} from "src/domains/review/schemas/models/MovieReviewSummarySchema.ts";
+import {MovieReviewSummaryData} from "@/domains/review/schemas/models";
 import MovieOverviewShowings from "@/views/client/movies/pages/movie-info/rows/MovieOverviewShowings.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {
