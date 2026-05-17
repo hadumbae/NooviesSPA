@@ -4,13 +4,12 @@
 
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
-import MovieInfoShowingsPage
-    from "@/views/client/movies/pages/movie-info-showings/MovieInfoShowingsPage.tsx";
 import MovieInfoReviewsPage
     from "@/views/client/movies/pages/movie-info-reviews/MovieInfoReviewsPage.tsx";
 import {BrowseMoviesPage} from "@/views/client/movies/pages/browse-movies";
 import {MovieInfoPage} from "@/views/client/movies/pages/movie-info";
 import {MovieInfoCreditsPage} from "@/views/client/movies/pages/movie-info-credits";
+import {MovieInfoShowingsPage} from "@/views/client/movies/pages/movie-info-showings";
 
 /** Route definitions for the movie browsing domain. */
 export default [
