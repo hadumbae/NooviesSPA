@@ -9,23 +9,21 @@ import {PageLoader} from "@/views/common/_comp/page";
 import MovieInfoShowingsPageContent
     from "@/views/client/movies/pages/movie-info-showings/MovieInfoShowingsPageContent.tsx";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {
-    ShowingsPageQueryStringSchema
-} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";
-import {
-    useFetchMovieInfoShowingsData
-} from "@/domains/movies/views/client/movie-info-showings-page/useFetchMovieInfoShowingsData.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {
-    MovieInfoShowingsViewData,
-    MovieInfoShowingsViewSchema
-} from "@/domains/movies/views/client/movie-info-showings-page/schemas/MovieInfoShowingsViewSchema.ts";
+    useFetchMovieInfoShowingsData
+} from "@/domains/movies/_feat/client-view-data/hooks/useFetchMovieInfoShowingsData.ts";
+import {
+    MovieInfoShowingViewData,
+    MovieInfoShowingViewSchema,
+    ShowingsPageQueryStringSchema
+} from "@/domains/movies/_feat/client-view-data";
 
 /** Pagination limit for showing queries. */
 const SHOWINGS_PER_PAGE = 20;
 
 /**
- * Resolves search and route params to render a validated {@link MovieInfoShowingsViewSchema}.
+ * Resolves search and route params to render a validated {@link MovieInfoShowingViewSchema}.
  */
 const MovieInfoShowingsPage = () => {
     const routeParams = useFetchByIdentifierRouteParams({
@@ -58,8 +56,8 @@ const MovieInfoShowingsPage = () => {
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={MovieInfoShowingsViewSchema}>
-            {({ movie, showingDetails: { totalItems, items } }: MovieInfoShowingsViewData) => {
+        <ValidatedDataLoader query={query} schema={MovieInfoShowingViewSchema}>
+            {({ movie, showingDetails: { totalItems, items } }: MovieInfoShowingViewData) => {
                 return (
                     <MovieInfoShowingsPageContent
                         movie={movie}

@@ -6,11 +6,8 @@ import MovieInfoCreditsPageContent
     from "@/views/client/movies/pages/movie-info-credits/MovieInfoCreditsPageContent.tsx";
 import {
     useFetchMovieInfoCreditsData
-} from "@/domains/movies/views/client/movie-info-credits-page/useFetchMovieInfoCreditsData.ts";
-import {
-    MovieInfoCreditViewData,
-    MovieInfoCreditViewSchema
-} from "@/domains/movies/views/client/movie-info-credits-page/MovieInfoCreditViewSchema.ts";
+} from "@/domains/movies/_feat/client-view-data/hooks/useFetchMovieInfoCreditsData.ts";
+import {MovieInfoCreditViewData, MovieInfoCreditViewSchema} from "@/domains/movies/_feat/client-view-data";
 
 const MovieInfoCreditsPage = () => {
     const routeParams = useFetchByIdentifierRouteParams({

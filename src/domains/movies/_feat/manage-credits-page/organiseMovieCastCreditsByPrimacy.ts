@@ -5,7 +5,7 @@
 
 import {
     CastCreditExceptMovie
-} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
+} from "src/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
 
 /**
  * Parameters for organising cast credits.

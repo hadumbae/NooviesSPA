@@ -10,9 +10,6 @@ import {
 import MovieInfoHeader from "@/views/client/movies/components/headers/MovieInfoHeader.tsx";
 import MovieInfoCastCreditsSection
     from "@/views/client/movies/pages/movie-info-credits/sections/MovieInfoCastCreditsSection.tsx";
-import {
-    buildFullCreditListByCategoryOrder
-} from "@/domains/movies/views/client/movie-info-credits-page/buildFullCreditListByCategoryOrder.ts";
 import MovieInfoCreditListSection
     from "@/views/client/movies/pages/movie-info-credits/sections/MovieInfoCreditListSection.tsx";
 import {useMemo} from "react";
@@ -20,6 +17,9 @@ import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts"
 import {
     GroupedCrewCreditsExceptMovie
 } from "@/domains/moviecredit/schemas/model/GroupedCrewCreditsExceptMovieSchema.ts";
+import {
+    buildFullCreditListByCategoryOrder
+} from "@/domains/movies/_feat/manage-credits-page/buildFullCreditListByCategoryOrder.ts";
 
 /**
  * Props for {@link MovieInfoCreditsPageContent}.

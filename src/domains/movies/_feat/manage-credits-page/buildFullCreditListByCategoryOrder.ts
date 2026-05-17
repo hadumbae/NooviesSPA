@@ -3,16 +3,16 @@
  * @filename buildFullCreditListByCategoryOrder.ts
  */
 
-import {
-    CastCreditExceptMovie, CreditExceptMovie
-} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
+
 import {
     CreditCategoryDisplayOrderConstant,
     CreditDisplayOrderCategory
 } from "@/domains/moviecredit/constants/CreditCategoryDisplayOrderConstant.ts";
 import {
-    GroupedCrewCreditsExceptMovie
-} from "@/domains/moviecredit/schemas/model/GroupedCrewCreditsExceptMovieSchema.ts";
+    CastCreditExceptMovie,
+    CreditExceptMovie
+} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
+import {GroupedCrewCreditsExceptMovie} from "@/domains/moviecredit/schemas";
 
 /** Pair representing a category and its associated credits. */
 type DisplayOrderCategoryPair = [CreditDisplayOrderCategory, CreditExceptMovie[]];

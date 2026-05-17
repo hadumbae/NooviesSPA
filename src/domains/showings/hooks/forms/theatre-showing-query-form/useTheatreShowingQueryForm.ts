@@ -12,16 +12,13 @@
 
 import {useForm, UseFormReturn} from "react-hook-form";
 import {
-    ShowingsPageQueryFormValues,
-    ShowingsPageQueryStrings
-} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.types.ts";
-import {
     useTheatreShowingQueryFormDefaultValues
 } from "@/domains/showings/hooks/forms/theatre-showing-query-form/useTheatreShowingQueryFormDefaultValues.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
+    ShowingsPageQueryFormStarterValues, ShowingsPageQueryStrings,
     ShowingsPageQueryStringSchema
-} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";
+} from "@/domains/movies/_feat/client-view-data";
 
 /**
  * Parameters for {@link useTheatreShowingQueryForm}.
@@ -48,10 +45,10 @@ type FormParams = {
  */
 export function useTheatreShowingQueryForm(
     {presetValues}: FormParams
-): UseFormReturn<ShowingsPageQueryFormValues> {
+): UseFormReturn<ShowingsPageQueryFormStarterValues> {
     const defaultValues = useTheatreShowingQueryFormDefaultValues({presetValues});
 
-    return useForm<ShowingsPageQueryFormValues>({
+    return useForm<ShowingsPageQueryFormStarterValues>({
         resolver: zodResolver(ShowingsPageQueryStringSchema),
         defaultValues,
     });

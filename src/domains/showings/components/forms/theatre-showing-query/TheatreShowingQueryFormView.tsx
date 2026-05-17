@@ -4,28 +4,26 @@
  */
 
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
-import {
-    ShowingsPageQueryFormValues
-} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.types.ts";
 import {SubmitHandler, UseFormReturn} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import {
-    ShowingsPageQueryFormValuesSchema
-} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAutoSubmit.ts";
+import {
+    ShowingsPageQueryFormStarterValues,
+    ShowingsPageQueryFormValuesSchema
+} from "@/domains/movies/_feat/manage-showing-page";
 
 /**
  * Props for {@link TheatreShowingQueryFormView}.
  */
 type FormProps =
-    Pick<FormOptions<ShowingsPageQueryFormValues>, "disableFields"> & {
+    Pick<FormOptions<ShowingsPageQueryFormStarterValues>, "disableFields"> & {
     /** React Hook Form instance. */
-    form: UseFormReturn<ShowingsPageQueryFormValues>;
+    form: UseFormReturn<ShowingsPageQueryFormStarterValues>;
     /** Invoked when the form auto-submits. */
-    submitHandler: SubmitHandler<ShowingsPageQueryFormValues>;
+    submitHandler: SubmitHandler<ShowingsPageQueryFormStarterValues>;
     /** Optional wrapper class name. */
     className?: string;
 };

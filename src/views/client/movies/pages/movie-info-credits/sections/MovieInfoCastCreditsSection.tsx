@@ -7,13 +7,13 @@ import {useMemo} from "react";
 import {
     CastCreditExceptMovie
 } from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
-import {
-    organiseMovieCastCreditsByPrimacy
-} from "@/domains/movies/views/client/movie-info-credits-page/organiseMovieCastCreditsByPrimacy.ts";
 import MovieCreditInfoList from "@/views/client/movie-credits/components/lists/MovieCreditInfoList.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
+import {
+    organiseMovieCastCreditsByPrimacy
+} from "@/domains/movies/_feat/manage-credits-page/organiseMovieCastCreditsByPrimacy.ts";
 
 /**
  * Props for {@link MovieInfoCastCreditsSection}.

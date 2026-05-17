@@ -12,7 +12,11 @@ import {
 } from "src/domains/movies/_feat/client-view-data/repositories/repository.types.ts";
 import {buildURL} from "@/common/features/fetch-api";
 import {MovieClientViewBaseURL} from "@/domains/movies/_feat/client-view-data/repositories/baseURL.ts";
-import {MovieInfoOverviewViewData} from "@/domains/movies/_feat/client-view-data";
+import {
+    MovieInfoCreditViewData,
+    MovieInfoOverviewViewData,
+    MovieInfoShowingViewData
+} from "@/domains/movies/_feat/client-view-data";
 
 /** Fetches high-level overview data for a specific movie including reviews. */
 export function getFetchMovieInfoOverviewViewData(
@@ -28,12 +32,12 @@ export function getFetchMovieInfoOverviewViewData(
 }
 
 /** Retrieves the cast and crew credits for a specific movie. */
-export function getCreditsForMovieView(
+export function getFetchMovieInfoCreditsViewData(
     {slug}: GetCreditsForMovieViewParams
-): Promise<RequestReturns> {
+): Promise<RequestReturns<MovieInfoCreditViewData>> {
     const url = buildURL({
         baseURL: MovieClientViewBaseURL,
-        path: `/item/${slug}/credits`
+        path: `/item/${slug}/info-credits`,
     });
 
     return useFetchAPI({url, method: "GET"});
@@ -42,10 +46,10 @@ export function getCreditsForMovieView(
 /** Fetches scheduled showings and cinema information for a specific movie. */
 export function getShowingsForMovieView(
     {slug, queries}: GetShowingsForMovieViewParams
-): Promise<RequestReturns> {
+): Promise<RequestReturns<MovieInfoShowingViewData>> {
     const url = buildURL({
         baseURL: MovieClientViewBaseURL,
-        path: `/item/${slug}/showings`,
+        path: `/item/${slug}/info-showings`,
         queries
     });
 

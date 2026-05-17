@@ -7,13 +7,7 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import TheatreShowingQueryFormContainer
     from "@/domains/showings/components/forms/theatre-showing-query/TheatreShowingQueryFormContainer.tsx";
 import {DisableKeys} from "@/common/type/form/HookFormFieldTypes.ts";
-import {
-    ShowingsPageQueryStrings
-} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.types.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {
-    ShowingsPageQueryStringSchema
-} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import ShowingInfoCompactListCard
     from "@/domains/showings/components/client/showing-list/ShowingInfoCompactListCard.tsx";
@@ -22,6 +16,7 @@ import PaginationRangeButtons from "@/common/components/pagination/PaginationRan
 import MovieInfoHeader from "@/views/client/movies/components/headers/MovieInfoHeader.tsx";
 import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {ShowingsPageQueryStrings, ShowingsPageQueryStringSchema} from "@/domains/movies/_feat/client-view-data";
 
 /**
  * Props for {@link MovieInfoShowingsPageContent}.

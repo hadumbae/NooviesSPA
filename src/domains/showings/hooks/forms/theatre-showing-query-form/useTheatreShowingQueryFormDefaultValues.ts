@@ -7,12 +7,9 @@
  * default values using deep equality checks.
  */
 
-import {
-    ShowingsPageQueryFormValues,
-    ShowingsPageQueryStrings
-} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.types.ts";
 import {useRef} from "react";
 import {isEqual} from "lodash";
+import {ShowingsPageQueryFormStarterValues, ShowingsPageQueryStrings} from "@/domains/movies/_feat/client-view-data";
 
 /**
  * Parameters for {@link useTheatreShowingQueryFormDefaultValues}.
@@ -39,10 +36,10 @@ type FormParams = {
  */
 export function useTheatreShowingQueryFormDefaultValues(
     {presetValues}: FormParams
-): ShowingsPageQueryFormValues {
-    const initialValues = useRef<ShowingsPageQueryFormValues | null>(null);
+): ShowingsPageQueryFormStarterValues {
+    const initialValues = useRef<ShowingsPageQueryFormStarterValues | null>(null);
 
-    const defaultValues: ShowingsPageQueryFormValues = {
+    const defaultValues: ShowingsPageQueryFormStarterValues = {
         page: 1,
         near: "",
         ...presetValues,

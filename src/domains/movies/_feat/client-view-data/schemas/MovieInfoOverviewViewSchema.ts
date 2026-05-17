@@ -9,11 +9,11 @@ import {MovieCreditDetailsSchema} from "@/domains/moviecredit/schemas";
 import {MovieReviewSummarySchema} from "@/domains/review/schemas/models";
 
 /** Zod schema for validating the composite movie overview data. */
-export const MovieInfoOverviewViewDataSchema = z.object({
+export const MovieInfoOverviewViewSchema = z.object({
     movie: MovieDetailsSchema,
     credits: generateArraySchema(MovieCreditDetailsSchema),
     reviews: MovieReviewSummarySchema,
 });
 
 /** Type definition inferred from the MovieInfoOverviewViewDataSchema. */
-export type MovieInfoOverviewViewData = z.infer<typeof MovieInfoOverviewViewDataSchema>;
+export type MovieInfoOverviewViewData = z.infer<typeof MovieInfoOverviewViewSchema>;

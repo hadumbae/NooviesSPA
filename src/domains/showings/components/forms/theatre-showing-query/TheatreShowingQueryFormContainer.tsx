@@ -13,14 +13,15 @@
  */
 
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {
-    ShowingsPageQueryStringSchema
-} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.schema.ts";
-import {ShowingsPageQueryFormValues, ShowingsPageQueryStrings} from "@/domains/movies/views/client/movie-info-showings-page/schemas/QueryStrings.types.ts";
 import {useTheatreShowingQueryForm} from "@/domains/showings/hooks/forms/theatre-showing-query-form/useTheatreShowingQueryForm.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import TheatreShowingQueryFormView
     from "@/domains/showings/components/forms/theatre-showing-query/TheatreShowingQueryFormView.tsx";
+import {
+    ShowingsPageQueryFormStarterValues,
+    ShowingsPageQueryStrings,
+    ShowingsPageQueryStringSchema
+} from "@/domains/movies/_feat/client-view-data";
 
 /**
  * Props for {@link TheatreShowingQueryFormContainer}.
@@ -30,7 +31,7 @@ import TheatreShowingQueryFormView
  * - `presetValues` to initialize query state
  */
 type FormParams = Pick<
-    FormOptions<ShowingsPageQueryFormValues, ShowingsPageQueryStrings>,
+    FormOptions<ShowingsPageQueryFormStarterValues, ShowingsPageQueryStrings>,
     "disableFields" | "presetValues"
 >;
 
@@ -48,7 +49,7 @@ const TheatreShowingQueryFormContainer = ({disableFields, presetValues}: FormPar
     /**
      * Update URL search parameters when the form submits.
      */
-    const updateParams = (values: ShowingsPageQueryFormValues) => {
+    const updateParams = (values: ShowingsPageQueryFormStarterValues) => {
         setSearchParams(values as ShowingsPageQueryStrings);
     };
 
