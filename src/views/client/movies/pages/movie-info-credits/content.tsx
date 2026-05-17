@@ -1,18 +1,17 @@
 /**
- * @file Page content component for the movie credits view.
- * @filename MovieInfoCreditsPageContent.tsx
+ * @fileoverview Content component for the movie credits page displaying organized cast and crew lists.
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {
-    CastCreditExceptMovie
-} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
+import {CastCreditExceptMovie} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
 import MovieInfoHeader from "@/views/client/movies/components/headers/MovieInfoHeader.tsx";
-import MovieInfoCastCreditsSection
-    from "@/views/client/movies/pages/movie-info-credits/sections/MovieInfoCastCreditsSection.tsx";
-import MovieInfoCreditListSection
-    from "@/views/client/movies/pages/movie-info-credits/sections/MovieInfoCreditListSection.tsx";
-import {useMemo} from "react";
+import {
+    MovieInfoCastCreditsSection
+} from "@/views/client/movies/pages/movie-info-credits/sections/MovieInfoCastCreditsSection.tsx";
+import {
+    MovieInfoCreditListSection
+} from "@/views/client/movies/pages/movie-info-credits/sections/MovieInfoCreditListSection.tsx";
+import {ReactElement, useMemo} from "react";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {
     GroupedCrewCreditsExceptMovie
@@ -21,26 +20,17 @@ import {
     buildFullCreditListByCategoryOrder
 } from "@/domains/movies/_feat/manage-credits-page/buildFullCreditListByCategoryOrder.ts";
 
-/**
- * Props for {@link MovieInfoCreditsPageContent}.
- */
+/** Props for the MovieInfoCreditsPageContent component. */
 type ContentProps = {
-    /** Movie details displayed in the header */
     movie: MovieDetails;
-
-    /** Cast credits for the movie */
     castCredits: CastCreditExceptMovie[];
-
-    /** Crew credits grouped by category */
     crewCredits: GroupedCrewCreditsExceptMovie[];
 }
 
-/**
- * Renders the movie credits page content.
- */
-const MovieInfoCreditsPageContent = (
+/** Renders the full list of cast and crew credits for a specific movie. */
+export function MovieInfoCreditsPageContent(
     {movie, castCredits, crewCredits}: ContentProps
-) => {
+): ReactElement {
     const {title, slug, posterImage} = movie;
 
     const organisedList = useMemo(
@@ -77,9 +67,6 @@ const MovieInfoCreditsPageContent = (
                     );
                 })
             }
-
         </PageFlexWrapper>
     );
-};
-
-export default MovieInfoCreditsPageContent;
+}

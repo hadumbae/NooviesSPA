@@ -1,9 +1,8 @@
 /**
- * @file Section component displaying cast credits for a movie.
- * @filename MovieInfoCastCreditsSection.tsx
+ * @fileoverview Section component that displays movie cast credits organized by primacy.
  */
 
-import {useMemo} from "react";
+import {ReactElement, useMemo} from "react";
 import {
     CastCreditExceptMovie
 } from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
@@ -15,18 +14,15 @@ import {
     organiseMovieCastCreditsByPrimacy
 } from "@/domains/movies/_feat/manage-credits-page/organiseMovieCastCreditsByPrimacy.ts";
 
-/**
- * Props for {@link MovieInfoCastCreditsSection}.
- */
+/** Props for the MovieInfoCastCreditsSection component. */
 type SectionProps = {
-    /** Cast credits for the movie */
     cast: CastCreditExceptMovie[];
 };
 
-/**
- * Renders primary and supporting cast credit lists.
- */
-const MovieInfoCastCreditsSection = ({cast}: SectionProps) => {
+/** Displays the primary and support cast members for a specific movie. */
+export function MovieInfoCastCreditsSection(
+    {cast}: SectionProps
+): ReactElement {
     const organisedCast = useMemo(
         () => organiseMovieCastCreditsByPrimacy({credits: cast}),
         [cast]
@@ -49,6 +45,4 @@ const MovieInfoCastCreditsSection = ({cast}: SectionProps) => {
             <MovieCreditInfoList credits={supportCast} />
         </section>
     );
-};
-
-export default MovieInfoCastCreditsSection;
+}

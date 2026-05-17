@@ -1,36 +1,18 @@
 /**
- * @file browseMovies.routes.tsx
- * @description
- * Client-side route configuration for movie browsing and movie detail pages.
- *
- * This module defines all `/browse/movies` routes, including:
- * - Movie listing
- * - Movie detail overview
- * - Credits, showings, and reviews sub-pages
- *
- * All routes are wrapped by {@link BaseLayout} and use
- * {@link ComponentErrorHandler} for localized error handling.
+ * @fileoverview Defines the routing configuration for browsing movies and viewing movie details.
  */
 
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
-import MovieInfoCreditsPage
-    from "@/views/client/movies/pages/movie-info-credits/MovieInfoCreditsPage.tsx";
 import MovieInfoShowingsPage
     from "@/views/client/movies/pages/movie-info-showings/MovieInfoShowingsPage.tsx";
 import MovieInfoReviewsPage
     from "@/views/client/movies/pages/movie-info-reviews/MovieInfoReviewsPage.tsx";
 import {BrowseMoviesPage} from "@/views/client/movies/pages/browse-movies";
 import {MovieInfoPage} from "@/views/client/movies/pages/movie-info";
+import {MovieInfoCreditsPage} from "@/views/client/movies/pages/movie-info-credits";
 
-/**
- * Route definitions for movie browsing and movie information pages.
- *
- * @remarks
- * Routes are nested under `/browse` and rendered within {@link BaseLayout}.
- * Each route defines its own {@link ComponentErrorHandler} to ensure
- * isolated error boundaries per page.
- */
+/** Route definitions for the movie browsing domain. */
 export default [
     {
         path: "/browse",

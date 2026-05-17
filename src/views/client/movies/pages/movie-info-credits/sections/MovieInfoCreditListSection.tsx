@@ -1,6 +1,5 @@
 /**
- * @file Section component for rendering a grouped movie credit category.
- * @filename MovieInfoCreditListSection.tsx
+ * @fileoverview Section component that displays a list of movie credits categorized by their role.
  */
 
 import {
@@ -12,30 +11,18 @@ import MovieCreditInfoList from "@/views/client/movie-credits/components/lists/M
 import {
     CreditDisplayOrderCategory
 } from "@/domains/moviecredit/constants/CreditCategoryDisplayOrderConstant.ts";
+import { ReactElement } from "react";
 
-/**
- * Props for {@link MovieInfoCreditListSection}.
- */
+/** Props for the MovieInfoCreditListSection component. */
 type SectionProps = {
-    /**
-     * Credit category label displayed as the section header.
-     */
     category: CreditDisplayOrderCategory;
-
-    /**
-     * Credits belonging to the section category.
-     */
     credits: CreditExceptMovie[];
 };
 
-/**
- * Renders a movie credit section grouped by category.
- *
- * Displays a header and the corresponding list of credits.
- */
-const MovieInfoCreditListSection = (
+/** Renders a titled section containing a list of credits for a specific category. */
+export function MovieInfoCreditListSection(
     { category, credits }: SectionProps
-) => {
+): ReactElement {
     return (
         <section className="space-y-4">
             <SectionHeader className={SectionHeaderCSS}>
@@ -48,6 +35,4 @@ const MovieInfoCreditListSection = (
             />
         </section>
     );
-};
-
-export default MovieInfoCreditListSection;
+}
