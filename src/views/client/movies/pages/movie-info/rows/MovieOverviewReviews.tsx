@@ -1,7 +1,6 @@
 /**
- * @file Review overview section with submission controls.
+ * @fileoverview Review overview section for a movie including user and recent reviews.
  *
- * MovieOverviewReviews.tsx
  */
 
 import {cn} from "@/common/lib/utils.ts";
@@ -10,61 +9,38 @@ import {ChevronRight, MessageCirclePlus} from "lucide-react";
 import MovieReviewSubmitFormContainer
     from "@/views/client/movie-reviews/components/forms/submit-form/MovieReviewSubmitFormContainer.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import {useState} from "react";
+import {ReactElement, useState} from "react";
 import MovieReviewSummaryCard
     from "@/views/client/movie-reviews/components/cards/review-summary-card/MovieReviewSummaryCard.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import SectionHeaderLink from "@/common/components/page/SectionHeaderLink.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
 import {MovieReviewDetails} from "src/domains/review/schemas/models/MovieReviewDetailsSchema";
+import {PageSectionHeaderLink} from "@/views/common/_comp/page";
 
-/**
- * Props for MovieOverviewReviews.
- */
+/** Props for the MovieOverviewReviews component. */
 type RowProps = {
-    /**
-     * Movie associated with the reviews.
-     */
     movie: MovieDetails;
-
-    /**
-     * Review authored by the current user, if present.
-     */
     userReview: MovieReviewDetails | null;
-
-    /**
-     * Recent reviews to display.
-     */
     reviews: MovieReviewDetails[];
-
-    /**
-     * Average rating for the movie.
-     */
     averageRating: number | null;
-
-    /**
-     * Additional classes applied to the section.
-     */
     className?: string;
 };
 
-/**
- * Renders the movie review overview section.
- */
-const MovieOverviewReviews = (
+/** Renders a summary of movie reviews and a submission trigger. */
+export function MovieOverviewReviews(
     {movie, userReview, reviews, className}: RowProps
-) => {
+): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const onSubmit = () => setIsOpen(false);
 
     return (
         <section className={cn("space-y-4", className)}>
             <div className="flex justify-between items-center">
-                <SectionHeaderLink to={`/browse/movies/${movie.slug}/reviews`}>
+                <PageSectionHeaderLink to={`/browse/movies/${movie.slug}/reviews`}>
                     Movie Reviews
-                </SectionHeaderLink>
+                </PageSectionHeaderLink>
 
                 <MovieReviewSubmitFormContainer movieID={movie._id} onSubmitSuccess={onSubmit}>
                     <SubmitMovieReviewPopup isHidden={!!userReview} presetOpen={isOpen} setPresetOpen={setIsOpen}>
@@ -102,6 +78,4 @@ const MovieOverviewReviews = (
             )}
         </section>
     );
-};
-
-export default MovieOverviewReviews;
+}

@@ -1,8 +1,8 @@
 /**
- * @file Displays a summarized cast and crew section on the movie details page.
- * @filename MovieOverviewCredits.tsx
+ * @fileoverview Displays a summarized cast and crew section on the movie details page.
  */
 
+import {ReactElement} from "react";
 import generateMovieCreditLinkConfigs from "@/domains/moviecredit/_feat/navigation/generateMovieCreditLinkConfigs.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
@@ -11,28 +11,18 @@ import NoneSpan from "@/common/components/NoneSpan.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {ChevronRight} from "lucide-react";
 import ActorCreditAvatar from "@/views/admin/movie-credits/_comp/clients/ActorCreditAvatar.tsx";
-import SectionHeaderLink from "@/common/components/page/SectionHeaderLink.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import {
-    MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {MovieCreditDetails} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {PageSectionHeaderLink} from "@/views/common/_comp/page";
 
-/**
- * Component props.
- */
+/** Props for the MovieOverviewCredits component. */
 type MovieOverviewCreditsProps = {
-    /** Movie used for credit page routing */
     movie: MovieDetails;
-
-    /** Credit records associated with the movie */
     credits: MovieCreditDetails[];
 };
 
-/**
- * Renders a compact preview of primary cast and key crew groups
- * with navigation to the full credits page.
- */
-const MovieOverviewCredits = ({movie, credits}: MovieOverviewCreditsProps) => {
+/** Displays a preview of the cast and key crew members for a specific movie. */
+export function MovieOverviewCredits({movie, credits}: MovieOverviewCreditsProps): ReactElement {
     const {slug: movieSlug} = movie;
 
     const {directors: directorLinks, writers: writerLinks} = generateMovieCreditLinkConfigs({
@@ -42,9 +32,10 @@ const MovieOverviewCredits = ({movie, credits}: MovieOverviewCreditsProps) => {
 
     return (
         <section className="space-y-6">
-            <SectionHeaderLink to={`/browse/movies/${movieSlug}/credits`}>
-                Cast & Crew
-            </SectionHeaderLink>
+            <PageSectionHeaderLink
+                to={`/browse/movies/${movieSlug}/credits`}
+                text="Cast & Crew"
+            />
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 2xl:grid-cols-3 gap-2">
                 {
@@ -56,29 +47,17 @@ const MovieOverviewCredits = ({movie, credits}: MovieOverviewCreditsProps) => {
             </div>
 
             <div className="space-y-2">
-                {/* DIRECTORS */}
-
                 <LabeledGroup label="Directors">
-                    {directorLinks.length > 0
-                        ? <LinkGroup links={directorLinks}/>
-                        : <NoneSpan/>
-                    }
+                    {directorLinks.length > 0 ? <LinkGroup links={directorLinks}/> : <NoneSpan/>}
                 </LabeledGroup>
 
                 <Separator/>
-
-                {/* WRITERS */}
 
                 <LabeledGroup label="Writers">
-                    {writerLinks.length > 0
-                        ? <LinkGroup links={writerLinks}/>
-                        : <NoneSpan/>
-                    }
+                    {writerLinks.length > 0 ? <LinkGroup links={writerLinks}/> : <NoneSpan/>}
                 </LabeledGroup>
 
                 <Separator/>
-
-                {/* FULL CAST & CREW */}
 
                 <LoggedHoverLink
                     to={`/browse/movies/${movieSlug}/credits`}
@@ -90,6 +69,4 @@ const MovieOverviewCredits = ({movie, credits}: MovieOverviewCreditsProps) => {
             </div>
         </section>
     );
-};
-
-export default MovieOverviewCredits;
+}

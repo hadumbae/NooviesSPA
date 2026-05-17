@@ -1,52 +1,33 @@
 /**
- * @file Editorial information section for a movie detail page.
+ * @fileoverview Editorial information section for a movie detail page.
  *
- * MovieOverviewEditorialInfo.tsx
  */
 
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import {ReactElement} from "react";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import {PrimaryTextBaseCSS, SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
+import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {generateGenreLinkConfigs} from "@/domains/genres/_feat/navigation";
+import {PageSectionHeader} from "@/views/common/_comp/page";
 
-/**
- * Props for MovieOverviewEditorialInfo.
- */
+/** Props for the MovieOverviewEditorialInfo component. */
 type RowProps = {
-    /**
-     * Movie details used to render editorial information.
-     */
     movie: MovieDetails;
 };
 
-/**
- * Renders a labeled breakdown of editorial movie details.
- */
-const MovieOverviewEditorialInfo = ({movie}: RowProps) => {
-    const {
-        title,
-        originalTitle,
-        synopsis,
-        tagline,
-        genres
-    } = movie;
-
+/** Displays the title, synopsis, tagline, and genres for a specific movie. */
+export function MovieOverviewEditorialInfo(
+    {movie: {title, originalTitle, synopsis, tagline, genres}}: RowProps
+): ReactElement {
     const genreLinks = generateGenreLinkConfigs(genres);
-
-    const textualCSS = cn(
-        PrimaryTextBaseCSS,
-        "text-sm",
-    );
+    const textualCSS = cn(PrimaryTextBaseCSS, "text-sm");
 
     return (
         <section className="space-y-4">
-            <SectionHeader className={SectionHeaderCSS}>
-                Movie Story And Details
-            </SectionHeader>
+            <PageSectionHeader text="Movie Story And Details"/>
 
             <div className="space-y-2">
                 <LabeledGroup label="Title">
@@ -55,19 +36,23 @@ const MovieOverviewEditorialInfo = ({movie}: RowProps) => {
 
                 <Separator/>
 
-                {originalTitle && (<>
-                    <LabeledGroup label="Also Known As">
-                        <span className={textualCSS}>{originalTitle}</span>
-                    </LabeledGroup>
-                    <Separator/>
-                </>)}
+                {
+                    originalTitle && <>
+                        <LabeledGroup label="Also Known As">
+                            <span className={textualCSS}>{originalTitle}</span>
+                        </LabeledGroup>
+                        <Separator/>
+                    </>
+                }
 
-                {tagline && (<>
-                    <LabeledGroup label="Tagline">
-                        <span className={textualCSS}>{tagline}</span>
-                    </LabeledGroup>
-                    <Separator/>
-                </>)}
+                {
+                    tagline && <>
+                        <LabeledGroup label="Tagline">
+                            <span className={textualCSS}>{tagline}</span>
+                        </LabeledGroup>
+                        <Separator/>
+                    </>
+                }
 
                 <LabeledGroup label="Genres">
                     <LinkGroup links={genreLinks} className="px-2"/>
@@ -81,6 +66,4 @@ const MovieOverviewEditorialInfo = ({movie}: RowProps) => {
             </div>
         </section>
     );
-};
-
-export default MovieOverviewEditorialInfo;
+}

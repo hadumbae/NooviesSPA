@@ -1,39 +1,27 @@
 /**
- * @file Grouped credit navigation links for a movie overview.
+ * @fileoverview Component that renders categorized navigation links for movie directors, writers, and actors.
  *
- * MovieOverviewCreditLinks.tsx
  */
 
 import generateMovieCreditLinkConfigs from "@/domains/moviecredit/_feat/navigation/generateMovieCreditLinkConfigs.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import {useMemo} from "react";
+import {ReactElement, useMemo} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
 
 import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
-/**
- * Props for MovieOverviewCreditLinks.
- */
+/** Props for the MovieOverviewCreditLinks component. */
 type LinkProps = {
-    /**
-     * Optional wrapper classes.
-     */
     className?: string;
-
-    /**
-     * Credit entries used to generate links.
-     */
     credits: MovieCreditDetails[];
 };
 
-/**
- * Renders grouped credit links.
- */
-const MovieOverviewCreditLinks = ({className, credits}: LinkProps) => {
+/** Displays a vertical list of movie credits grouped by their production roles. */
+export function MovieOverviewCreditLinks({className, credits}: LinkProps): ReactElement {
     const links = useMemo(() => {
         return generateMovieCreditLinkConfigs({
             sourceComponent: MovieOverviewCreditLinks.name,
@@ -66,6 +54,4 @@ const MovieOverviewCreditLinks = ({className, credits}: LinkProps) => {
             </LabeledGroup>
         </div>
     );
-};
-
-export default MovieOverviewCreditLinks;
+}

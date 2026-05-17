@@ -1,5 +1,5 @@
 /**
- * @file Metadata section for the movie overview layout.
+ * @fileoverview Metadata section for the movie overview layout.
  *
  * MovieOverviewMeta.tsx
  */
@@ -8,31 +8,19 @@ import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
 import {PillCSS} from "@/common/constants/css/ContainerCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {generateGenreLinkConfigs} from "@/domains/genres/_feat/navigation";
+import {ReactElement} from "react";
+import {SROnly} from "@/views/common/_comp/screen-readers";
 
-/**
- * Props for MovieOverviewMeta.
- */
+/** Props for the MovieOverviewMeta component. */
 type OverviewProps = {
-    /**
-     * Optional wrapper classes.
-     */
     className?: string;
-
-    /**
-     * Movie used to derive metadata.
-     */
     movie: MovieDetails;
 };
 
-/**
- * Renders movie overview metadata.
- */
-const MovieOverviewMeta = ({className, movie}: OverviewProps) => {
+/** Renders movie overview metadata including genres, tagline, and synopsis. */
+export function MovieOverviewMeta({className, movie}: OverviewProps): ReactElement {
     const {originalTitle, tagline, genres, synopsis} = movie;
     const genreLinks = generateGenreLinkConfigs(genres);
 
@@ -46,7 +34,7 @@ const MovieOverviewMeta = ({className, movie}: OverviewProps) => {
             </nav>
 
             <section className="max-md:hidden space-y-1">
-                <SectionHeader srOnly={true}>Technical Details</SectionHeader>
+                <SROnly text="Technical Details"/>
 
                 {
                     originalTitle &&
@@ -62,11 +50,9 @@ const MovieOverviewMeta = ({className, movie}: OverviewProps) => {
                 </LabeledGroup>
             </section>
 
-            <p className={cn(PrimaryTextBaseCSS, "text-sm")}>
+            <p className="primary-text text-sm">
                 {synopsis}
             </p>
         </div>
     );
-};
-
-export default MovieOverviewMeta;
+}

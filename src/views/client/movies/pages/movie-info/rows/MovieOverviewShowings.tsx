@@ -1,30 +1,23 @@
 /**
- * @file Displays a compact showings navigation section on the movie details page.
- * @filename MovieOverviewShowings.tsx
+ * @fileoverview Component for displaying a summary of movie showings on the movie overview page.
  */
 
-import SectionHeaderLink from "@/common/components/page/SectionHeaderLink.tsx";
+import {PageSectionHeaderLink} from "@/views/common/_comp/page";
+import {ReactElement} from "react";
 
-/**
- * Component props.
- */
+/** Props for the MovieOverviewShowings component. */
 type MovieOverviewShowingsProps = {
-    /** Movie slug used for showings page routing */
     movieSlug: string;
 };
 
-/**
- * Renders a lightweight navigation section linking to the
- * movie's full showings page.
- */
-const MovieOverviewShowings = ({movieSlug}: MovieOverviewShowingsProps) => {
+/** A section displaying a preview of available showings for a specific movie. */
+export function MovieOverviewShowings({movieSlug}: MovieOverviewShowingsProps): ReactElement {
     return (
         <section className="space-y-4">
-            <SectionHeaderLink to={`/browse/movies/${movieSlug}/showings`}>
-                Showings
-            </SectionHeaderLink>
+            <PageSectionHeaderLink
+                to={`/browse/movies/${movieSlug}/showings`}
+                text="Showings"
+            />
         </section>
     );
-};
-
-export default MovieOverviewShowings;
+}

@@ -3,13 +3,17 @@
  */
 
 import {ReactElement} from "react";
-import MovieOverviewHeadline
-    from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewHeadline.tsx";
+import {
+    MovieOverviewHeadline
+} from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewHeadline.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
-import MovieOverviewMeta from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewMeta.tsx";
-import MovieOverviewCreditLinks
-    from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewCreditLinks.tsx";
+import {
+    MovieOverviewMeta
+} from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewMeta.tsx";
+import {
+    MovieOverviewCreditLinks
+} from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewCreditLinks.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie";
 import {MovieCreditDetails} from "@/domains/moviecredit/schemas";
 

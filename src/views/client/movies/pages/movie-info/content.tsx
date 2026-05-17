@@ -4,16 +4,16 @@
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import MovieOverviewEditorialInfo
-    from "@/views/client/movies/pages/movie-info/rows/MovieOverviewEditorialInfo.tsx";
-import MovieOverviewCredits
-    from "@/views/client/movies/pages/movie-info/rows/MovieOverviewCredits.tsx";
-import MovieOverviewFavouriteToggle
-    from "@/views/client/movies/pages/movie-info/rows/MovieOverviewFavouriteToggle.tsx";
-import MovieOverviewReviews
-    from "@/views/client/movies/pages/movie-info/rows/MovieOverviewReviews.tsx";
+import {MovieOverviewEditorialInfo} from "@/views/client/movies/pages/movie-info/rows/MovieOverviewEditorialInfo.tsx";
+import {MovieOverviewCredits} from "@/views/client/movies/pages/movie-info/rows/MovieOverviewCredits.tsx";
+import {
+    MovieOverviewFavouriteToggle
+} from "@/views/client/movies/pages/movie-info/rows/MovieOverviewFavouriteToggle.tsx";
+import {MovieOverviewReviews} from "@/views/client/movies/pages/movie-info/rows/MovieOverviewReviews.tsx";
 import {MovieReviewSummaryData} from "@/domains/review/schemas/models";
-import MovieOverviewShowings from "@/views/client/movies/pages/movie-info/rows/MovieOverviewShowings.tsx";
+import {
+    MovieOverviewShowings
+} from "@/views/client/movies/pages/movie-info/rows/MovieOverviewShowings.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {
     MovieCreditDetails

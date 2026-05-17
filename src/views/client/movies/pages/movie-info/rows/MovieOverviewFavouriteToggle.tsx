@@ -1,32 +1,27 @@
 /**
- * @file Favourite selector component for a movie.
- *
- * MovieOverviewFavouriteToggle.tsx
+ * @fileoverview Component for toggling a movie's favorite status within the movie overview page.
  */
 
+import {ReactElement} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useCheckIsFavouriteMovie} from "@/domains/movies/_feat/favourite-movies/useCheckIsFavouriteMovie.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {
-    IsFavouriteMovieMetadata,
-    IsFavouriteMovieSchema
-} from "@/domains/users/schemas/favourites/IsFavouriteMovieSchema.ts";
+import {IsFavouriteMovieMetadata, IsFavouriteMovieSchema} from "@/domains/users/schemas/favourites/IsFavouriteMovieSchema.ts";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import FavouriteMovieHeartButton from "@/views/client/movies/components/buttons/FavouriteMovieHeartButton.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {useToggleUserFavouriteMovie} from "@/domains/users/mutations/useToggleUserFavouriteMovie.ts";
 
-/** Props for MovieOverviewFavouriteToggle. */
+/** Props for the MovieOverviewFavouriteToggle component. */
 type SelectorProps = {
-    /** Target movie identifier. */
     movieID: ObjectId;
 }
 
-/** Displays and manages the current user's favourite state for a movie. */
-const MovieOverviewFavouriteToggle = (
+/** Displays a card allowing the user to view and toggle the favorite status of a specific movie. */
+export function MovieOverviewFavouriteToggle(
     {movieID}: SelectorProps
-) => {
+): ReactElement {
     const query = useCheckIsFavouriteMovie({_id: movieID});
     const {mutate, isPending} = useToggleUserFavouriteMovie();
 
@@ -53,6 +48,4 @@ const MovieOverviewFavouriteToggle = (
             }}
         </ValidatedDataLoader>
     );
-};
-
-export default MovieOverviewFavouriteToggle;
+}
