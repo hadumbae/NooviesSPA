@@ -7,23 +7,10 @@ import {ReactElement} from "react";
 
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import {QueryDefinition} from "@/common/type/query/loader/MultiQuery.types.ts";
-import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
-import {
-    useMovieInfoOverviewPageQueries
-} from "@/domains/movies/_feat/client-view-data/useMovieInfoOverviewPageQueries.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
-import {MovieCreditDetails} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 import {MovieInfoPageContent} from "@/views/client/movies/pages/movie-info/content.tsx";
-import {MovieReviewSummaryData} from "@/domains/review/schemas/models";
-
-/** Aggregated query result shape for the overview page. */
-type QueryData = {
-    movie: MovieDetails;
-    credits: MovieCreditDetails[];
-    reviewDetails: MovieReviewSummaryData;
-};
+import {MovieInfoOverviewViewData, useFetchMovieInfoOverviewViewData} from "@/domains/movies/_feat/client-view-data";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /** Loads data and renders the movie overview page. */
 export function MovieInfoPage(): ReactElement {
@@ -32,19 +19,19 @@ export function MovieInfoPage(): ReactElement {
         errorTo: "/browse/movies",
     }) ?? {};
 
+    const query = useFetchMovieInfoOverviewViewData({
+        slug: slug!,
+        queries: {reviewPage: 1, reviewPerPage: 3},
+        options: {enabled: !!slug},
+    });
+
     if (!slug) {
         return <PageLoader/>;
     }
 
-    const queryDefinitions: QueryDefinition[] =
-        useMovieInfoOverviewPageQueries({slug});
-
     return (
-        <MultiQueryDataLoader queries={queryDefinitions}>
-            {(data) => {
-                const {movie, credits, reviewDetails} =
-                    data as QueryData;
-
+        <QueryDataLoader query={query}>
+            {({movie, credits, reviewDetails}: MovieInfoOverviewViewData) => {
                 return (
                     <MovieInfoPageContent
                         movie={movie}
@@ -53,7 +40,7 @@ export function MovieInfoPage(): ReactElement {
                     />
                 );
             }}
-        </MultiQueryDataLoader>
+        </QueryDataLoader>
     );
 }
 

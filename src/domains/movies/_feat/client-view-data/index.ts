@@ -19,6 +19,9 @@ import {
     ShowingsPageQueryFormStarterValues,
     ShowingsPageQueryFormValuesSchema
 } from "@/domains/movies/_feat/manage-showing-page/ShowingsPageQueryFormValuesSchema.ts";
+import {
+    useFetchMovieInfoOverviewViewData
+} from "@/domains/movies/_feat/client-view-data/hooks/useFetchMovieInfoOverviewViewData.ts";
 
 export {
     MovieClientViewBaseURL,
@@ -27,7 +30,9 @@ export {
     MovieInfoShowingViewSchema,
     ShowingsPageQueryStringSchema,
     ShowingsPageQueryFormValuesSchema,
+    useFetchMovieInfoOverviewViewData,
 }
+
 
 export type {
     MovieInfoOverviewViewData,

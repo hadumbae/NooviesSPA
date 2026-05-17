@@ -12,7 +12,7 @@ import {MovieReviewSummarySchema} from "@/domains/review/schemas/models";
 export const MovieInfoOverviewViewSchema = z.object({
     movie: MovieDetailsSchema,
     credits: generateArraySchema(MovieCreditDetailsSchema),
-    reviews: MovieReviewSummarySchema,
+    reviewDetails: MovieReviewSummarySchema,
 });
 
 /** Type definition inferred from the MovieInfoOverviewViewDataSchema. */

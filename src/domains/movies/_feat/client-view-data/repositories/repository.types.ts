@@ -10,8 +10,8 @@ import {PaginationValues} from "src/common/features/fetch-pagination-search-para
 export type FetchInfoOverviewConfig = {
     slug: SlugString;
     queries?: {
-        revPage: number;
-        revPerPage: number;
+        reviewPage: number;
+        reviewPerPage: number;
     };
 };
 

@@ -20,7 +20,7 @@ import {
 
 /** Fetches high-level overview data for a specific movie including reviews. */
 export function getFetchMovieInfoOverviewViewData(
-    {slug, queries = {revPage: 1, revPerPage: 3}}: FetchInfoOverviewConfig
+    {slug, queries = {reviewPage: 1, reviewPerPage: 3}}: FetchInfoOverviewConfig
 ): Promise<RequestReturns<MovieInfoOverviewViewData>> {
     const url = buildURL({
         baseURL: MovieClientViewBaseURL,
