@@ -6,15 +6,11 @@
 import {
     FetchPaginatedReviewsByMovieParams,
     FetchReviewsByMovieParams
-} from "@/domains/review/_feat/fetch-by-movie/ReviewsByMovieRepository.types.ts";
-import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
+} from "src/domains/review/_feat/fetch-by-movie/repository.types.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-
-/**
- * Base endpoint for movie browse requests.
- */
-const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/browse/movies`;
+import {buildURL} from "@/common/features/fetch-api";
+import {ReviewsByMovieBaseURL} from "@/domains/review/_feat/fetch-by-movie/baseURL.ts";
 
 /**
  * Requests paginated reviews for a movie.
@@ -22,9 +18,9 @@ const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/browse/movies`;
 export const getFetchReviewsByMovie = (
     {movieID, page, perPage, config}: FetchPaginatedReviewsByMovieParams
 ): Promise<RequestReturns<unknown>> => {
-    const url = buildQueryURL({
-        baseURL,
-        path: `item/${movieID}/reviews`,
+    const url = buildURL({
+        baseURL: ReviewsByMovieBaseURL,
+        path: `/item/${movieID}/reviews`,
         queries: {page, perPage, ...config},
     });
 
@@ -37,9 +33,9 @@ export const getFetchReviewsByMovie = (
 export const getFetchReviewDetailsByMovie = (
     {movieID, page, perPage, config}: FetchPaginatedReviewsByMovieParams
 ): Promise<RequestReturns<unknown>> => {
-    const url = buildQueryURL({
-        baseURL,
-        path: `item/${movieID}/reviews/details`,
+    const url = buildURL({
+        baseURL: ReviewsByMovieBaseURL,
+        path: `/item/${movieID}/reviews/details`,
         queries: {page, perPage, ...config},
     });
 
@@ -52,9 +48,9 @@ export const getFetchReviewDetailsByMovie = (
 export const getFetchFeaturedReviewsByMovie = (
     {movieID, config}: FetchReviewsByMovieParams
 ): Promise<RequestReturns<unknown>> => {
-    const url = buildQueryURL({
-        baseURL,
-        path: `item/${movieID}/reviews/featured`,
+    const url = buildURL({
+        baseURL: ReviewsByMovieBaseURL,
+        path: `/item/${movieID}/reviews/featured`,
         queries: config,
     });
 
