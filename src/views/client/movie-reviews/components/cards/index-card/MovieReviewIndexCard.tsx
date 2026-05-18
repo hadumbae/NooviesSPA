@@ -16,7 +16,7 @@ import MovieReviewRatingStars from "@/views/client/movie-reviews/components/Movi
 import {
     MovieReviewIndexCardActions
 } from "@/views/client/movie-reviews/components/cards/index-card/MovieReviewIndexCardActions.tsx";
-import {MyMovieReview} from "src/domains/review/schemas/my-reviews";
+import {MyMovieReview} from "@/domains/review/schemas/my-reviews";
 import {
     MovieReviewPopupForm
 } from "@/views/client/movie-reviews/components/forms/review-form-popup/MovieReviewPopupForm.tsx";

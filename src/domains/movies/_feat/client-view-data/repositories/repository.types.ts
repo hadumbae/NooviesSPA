@@ -2,9 +2,9 @@
  * @fileoverview Type definitions for the movie client view data repository.
  */
 
-import {SlugString} from "src/common/schema/strings/simple-strings/SlugString.ts";
-import {ISO3166Alpha2CountryCode} from "src/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import {PaginationValues} from "src/common/features/fetch-pagination-search-params";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {ISO3166Alpha2CountryCode} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
+import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
 
 /** Configuration for fetching movie overview information. */
 export type FetchInfoOverviewConfig = {

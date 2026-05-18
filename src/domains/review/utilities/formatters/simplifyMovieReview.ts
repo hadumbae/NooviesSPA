@@ -4,7 +4,7 @@
 
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {MovieReview, MovieReviewSchema} from "@/domains/review/schemas/models";
-import {MovieReviewDetails} from "src/domains/review/schemas/models/MovieReviewDetailsSchema";
+import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReviewDetailsSchema";
 import {MyMovieReview} from "@/domains/review/schemas/my-reviews";
 
 /**

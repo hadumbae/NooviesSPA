@@ -6,7 +6,7 @@
 import {
     FetchPaginatedReviewsByMovieParams,
     FetchReviewsByMovieParams
-} from "src/domains/review/_feat/fetch-by-movie/repository.types.ts";
+} from "@/domains/review/_feat/fetch-by-movie/repository.types.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {buildURL} from "@/common/features/fetch-api";

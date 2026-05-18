@@ -9,7 +9,7 @@ import {
     FetchInfoOverviewConfig,
     GetCreditsForMovieViewParams,
     GetShowingsForMovieViewParams
-} from "src/domains/movies/_feat/client-view-data/repositories/repository.types.ts";
+} from "@/domains/movies/_feat/client-view-data/repositories/repository.types.ts";
 import {buildURL} from "@/common/features/fetch-api";
 import {MovieClientViewBaseURL} from "@/domains/movies/_feat/client-view-data/repositories/baseURL.ts";
 import {

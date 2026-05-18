@@ -15,7 +15,7 @@ import {cn} from "@/common/lib/utils.ts";
 import IsRecommendedBadge from "@/views/client/movie-reviews/components/badges/IsRecommendedBadge.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 
-import {MovieReviewDetails} from "src/domains/review/schemas/models/MovieReviewDetailsSchema";
+import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReviewDetailsSchema";
 
 /**
  * Props for MovieReviewDetailsCard.

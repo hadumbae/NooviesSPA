@@ -8,7 +8,7 @@ import PaginationRangeButtons from "@/common/components/pagination/PaginationRan
 import MyReviewsPageHeader from "@/views/client/users/pages/reviews-page/header/MyReviewsPageHeader.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {MovieReviewIndexCard} from "@/views/client/movie-reviews/components/cards/index-card";
-import {MyMovieReview} from "src/domains/review/schemas/my-reviews";
+import {MyMovieReview} from "@/domains/review/schemas/my-reviews";
 
 /**
  * Props for the {@link MyReviewsPageContent} component.

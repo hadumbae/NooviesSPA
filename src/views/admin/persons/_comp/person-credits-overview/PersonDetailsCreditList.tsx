@@ -8,7 +8,7 @@ import {Info} from "lucide-react";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import PersonDetailsCreditMovieDialog
     from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditMovieDialog.tsx";
-import {PersonFilmography} from "src/domains/moviecredit/_feat/person-credit";
+import {PersonFilmography} from "@/domains/moviecredit/_feat/person-credit";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 

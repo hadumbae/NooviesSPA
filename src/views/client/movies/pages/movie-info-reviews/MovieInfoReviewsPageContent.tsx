@@ -14,7 +14,7 @@ import MovieInfoReviewListSection
     from "@/views/client/movies/pages/movie-info-reviews/sections/MovieInfoReviewListSection.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
-import {MovieReviewDetails} from "src/domains/review/schemas/models/MovieReviewDetailsSchema";
+import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReviewDetailsSchema";
 
 /**
  * Props for MovieInfoReviewsPageContent.

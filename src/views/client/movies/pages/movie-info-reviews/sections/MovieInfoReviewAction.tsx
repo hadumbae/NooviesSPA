@@ -15,7 +15,7 @@ import {
     MovieReviewPopupForm
 } from "@/views/client/movie-reviews/components/forms/review-form-popup/MovieReviewPopupForm.tsx";
 
-import {MovieReviewDetails} from "src/domains/review/schemas/models/MovieReviewDetailsSchema";
+import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReviewDetailsSchema";
 
 /**
  * Data required to render the review action section for a movie.

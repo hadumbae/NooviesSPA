@@ -1,7 +1,7 @@
 /** @fileoverview Section component for displaying a preview of movie cast credits. */
 
 
-import {ObjectId} from "src/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ReactElement} from "react";
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
 import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks";

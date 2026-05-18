@@ -3,7 +3,7 @@ import PersonDetailsCreditList
     from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditList.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
-import {PersonFilmography} from "src/domains/moviecredit/_feat/person-credit";
+import {PersonFilmography} from "@/domains/moviecredit/_feat/person-credit";
 
 type OverviewProps = {
     /** The full name of the person whose credits are being displayed. */
