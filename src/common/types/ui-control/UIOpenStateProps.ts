@@ -9,6 +9,5 @@ import {Dispatch, SetStateAction} from "react";
  */
 export type UIOpenStateProps = {
     isOpen: boolean;
-
     setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
