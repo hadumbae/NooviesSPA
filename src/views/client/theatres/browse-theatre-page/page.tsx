@@ -8,7 +8,7 @@ import useParsedPaginationValue
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {
     BrowseTheatreListPageContent
-} from "src/views/client/theatres/browse-theatre-page/content.tsx";
+} from "@/views/client/theatres/browse-theatre-page/content.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import {BrowseTheatreParamSchema} from "@/domains/theatres/_feat/submit-location";
 import {PaginatedTheatresWithRecentShowings} from "@/domains/theatres/schema/theatre";
