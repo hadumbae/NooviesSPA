@@ -6,18 +6,14 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {BrowseTheatreParamForm} from "@/views/client/theatres/_feat/browse-by-location/BrowseTheatreParamForm.tsx";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import {
-    TheatreBrowseListCard
-} from "@/views/client/theatres/_comp/browse-theatres/TheatreBrowseListCard.tsx";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
+import {TheatreBrowseListCard} from "@/views/client/theatres/_comp/browse-theatres/TheatreBrowseListCard.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
 import {TheatreWithRecentShowings} from "@/domains/theatres/schema/theatre/TheatreWithRecentShowingsSchema.ts";
 import {ReactElement} from "react";
 import {BrowseTheatreParamFormView} from "@/views/client/theatres/_feat/browse-by-location";
+import {BrowseTheatreListPageHeader} from "@/views/client/theatres/browse-theatre-page/header.tsx";
 
 /** Props for the BrowseTheatreListPageContent component. */
 type ContentProps = PaginationValues & {
@@ -34,10 +30,7 @@ export function BrowseTheatreListPageContent(
 ): ReactElement {
     return (
         <PageFlexWrapper className="space-y-4">
-            <header>
-                <HeaderTitle>Theatres</HeaderTitle>
-                <HeaderDescription>Theatres Near You</HeaderDescription>
-            </header>
+            <BrowseTheatreListPageHeader/>
 
             <BrowseTheatreParamForm>
                 <Card>
@@ -50,24 +43,25 @@ export function BrowseTheatreListPageContent(
             {
                 theatres.length > 0 ? (
                     <section className="space-y-4">
-                        <SectionHeader srOnly={true}>Theatres</SectionHeader>
-
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             {theatres.map((theatre) => (
                                 <TheatreBrowseListCard key={theatre.slug} theatre={theatre}/>
                             ))}
                         </div>
 
-                        {totalTheatres > perPage && (
-                            <PaginationRangeButtons
-                                page={page}
-                                perPage={perPage}
-                                totalItems={totalTheatres}
-                                setPage={setPage}
-                            />
-                        )}
+                        <PaginationRangeButtons
+                            page={page}
+                            perPage={perPage}
+                            totalItems={totalTheatres}
+                            setPage={setPage}
+                        />
                     </section>
-                ) : <EmptyArrayContainer text="No Theatres" className="flex-1"/>
+                ) : (
+                    <EmptyArrayContainer
+                        text="No Theatres"
+                        className="flex-1"
+                    />
+                )
             }
         </PageFlexWrapper>
     );

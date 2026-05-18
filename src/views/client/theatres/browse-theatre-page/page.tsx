@@ -8,7 +8,7 @@ import useParsedPaginationValue
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {
     BrowseTheatreListPageContent
-} from "@/views/client/theatres/browse-theatre-page/BrowseTheatreListPageContent.tsx";
+} from "src/views/client/theatres/browse-theatre-page/content.tsx";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import {BrowseTheatreParamSchema} from "@/domains/theatres/_feat/submit-location";
 import {PaginatedTheatresWithRecentShowings} from "@/domains/theatres/schema/theatre";
@@ -23,10 +23,7 @@ const THEATRES_PER_PAGE = 20;
 export function BrowseTheatreListPage(): ReactElement {
     useTitle("Browse Theatres");
 
-    const {searchParams} = useParsedSearchParams({
-        schema: BrowseTheatreParamSchema,
-    });
-
+    const {searchParams} = useParsedSearchParams({schema: BrowseTheatreParamSchema});
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
 
     const query = useFetchTheatresByLocation({
