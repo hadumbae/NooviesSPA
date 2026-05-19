@@ -5,7 +5,7 @@
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-import useFetchShowings from "@/domains/showings/hooks/queries/useFetchShowings.ts";
+import {useFetchShowings} from "@/domains/showings/hooks/queries/useFetchShowings.ts";
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
 import ShowingMovieCard from "@/domains/showings/components/admin/card/showing-movie-card/ShowingMovieCard.tsx";

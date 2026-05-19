@@ -1,13 +1,6 @@
 /**
- * @file useFetchPaginatedShowings.ts
+ * @fileoverview Hook for fetching paginated showing records with filtering options.
  *
- * React Query hook for fetching paginated `Showing` entities.
- *
- * Handles:
- * - Pagination via `page` and `perPage`
- * - Query filter and request config merging
- * - Nullish query sanitization
- * - Standardized query error handling
  */
 
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
@@ -18,40 +11,16 @@ import ShowingRepository from "@/domains/showings/repositories/ShowingRepository
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {ShowingQueryOptions} from "@/domains/showings/schema/queries";
 
-import {ShowingQueryOptions} from "../../schema/queries/ShowingQueryOptionSchema";
-
-/**
- * Parameters for fetching paginated Showings.
- */
+/** Parameters for fetching paginated showings. */
 type FetchParams<TData = unknown> = PaginationValues & {
-    /** Optional query filters */
     queries?: ShowingQueryOptions;
-
-    /** Optional request configuration */
     config?: RequestOptions;
-
-    /** Optional React Query options */
     options?: FetchQueryOptions<TData>;
 };
 
-/**
- * Fetches paginated Showings using query filters.
- *
- * @param params - Pagination values, filters, request configuration, and query options.
- *
- * @returns
- * A React Query result containing paginated Showings data or an error state.
- *
- * @example
- * ```ts
- * const { data, isLoading } = useFetchPaginatedShowings({
- *   page: 1,
- *   perPage: 10,
- *   queries: { title: "Hamlet" },
- * });
- * ```
- */
+/** Fetches a paginated list of showings based on provided search and pagination parameters. */
 export default function useFetchPaginatedShowings(
     {page, perPage, queries, config, options}: FetchParams
 ): UseQueryResult<unknown, HttpResponseError> {
@@ -61,7 +30,7 @@ export default function useFetchPaginatedShowings(
     });
 
     return useQuery({
-        queryKey: ["showings", "lists", "paginated",{...queries, ...config}],
+        queryKey: ["showings", "lists", "paginated", {...queries, ...config}],
         queryFn: fetchShowings,
         ...useQueryOptionDefaults(options),
     });

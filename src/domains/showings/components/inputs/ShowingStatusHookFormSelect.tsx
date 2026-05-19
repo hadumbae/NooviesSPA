@@ -15,7 +15,8 @@ import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import ShowingStatusConstant from "@/domains/showings/constants/ShowingStatusConstant.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 
-import {ShowingFormValues} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
+
+import {ShowingFormValues} from "@/domains/showings/schema/form";
 
 /**
  * Props for `ShowingStatusHookFormSelect`.

@@ -16,11 +16,11 @@ import {Plus, X} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {MultiStepFormContext} from "@/common/context/multi-step-form/MultiStepFormContext.ts";
 import TheatreHookFormSelect from "@/views/admin/theatres/_feat/form-input/TheatreHookFormSelect.tsx";
-import {ShowingFormValues} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
 import {TheatreQuickOverviewFetchCard} from "@/views/admin/theatres/_comp/display-cards";
 import {MovieHookFormSelect} from "@/views/admin/movies/_feat/form-inputs";
 import {MovieQuickOverviewFetchCard} from "@/views/admin/movies/_comp/form-display";
+import {ShowingFormValues} from "@/domains/showings/schema/form";
 
 /** Props for the ShowingSubmitFormDetailsFieldset component. */
 type FieldsetProps = {

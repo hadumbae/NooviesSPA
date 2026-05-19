@@ -1,38 +1,28 @@
 /**
- * @file ShowingIndexPage.tsx
- *
- * Admin index page for managing showings.
+ * @fileoverview Page component for displaying a paginated list of movie showings with filtering options.
  */
 
-import {FC, ReactElement} from "react";
+import {ReactElement} from "react";
 import ShowingIndexPageContent from "@/domains/showings/pages/index-page/ShowingIndexPageContent.tsx";
 import useFetchPaginatedShowings from "@/domains/showings/hooks/queries/useFetchPaginatedShowings.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+import useParsedPaginationValue
+    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {
-    PaginatedShowingDetails,
-    PaginatedShowingDetailsSchema
-} from "@/domains/showings/schema/showing/PaginatedShowingSchemas.ts";
-import {ShowingQueryOptionSchema} from "../../schema/queries/ShowingQueryOptionSchema";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing";
+import {PaginatedItems} from "@/common/types";
+import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {ShowingQueryOptionSchema} from "@/domains/showings/schema/queries";
 
 const SHOWINGS_PER_PAGE = 10;
 
 /**
- * Showings admin index page.
- *
- * Fetches and displays a paginated list of showings with
- * query-based filtering and schema validation.
+ * Orchestrates data fetching and pagination state for the showings index view.
  */
-const ShowingIndexPage: FC = (): ReactElement => {
-    // --- Pagination ---
-    const {value: page, setValue: setPage} =
-        useParsedPaginationValue("page", 1);
+export function ShowingIndexPage(): ReactElement {
+    const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
+    const {searchParams} = useParsedSearchParams({schema: ShowingQueryOptionSchema});
 
-    const {searchParams} =
-        useParsedSearchParams({schema: ShowingQueryOptionSchema});
-
-    // --- Query ---
     const query = useFetchPaginatedShowings({
         page,
         perPage: SHOWINGS_PER_PAGE,
@@ -40,10 +30,9 @@ const ShowingIndexPage: FC = (): ReactElement => {
         queries: searchParams,
     });
 
-    // --- Render ---
     return (
-        <ValidatedDataLoader query={query} schema={PaginatedShowingDetailsSchema}>
-            {({items: showings, totalItems}: PaginatedShowingDetails) => (
+        <ValidatedDataLoader query={query} schema={generatePaginationSchema(ShowingDetailsSchema)}>
+            {({items: showings, totalItems}: PaginatedItems<ShowingDetails>) => (
                 <ShowingIndexPageContent
                     showings={showings}
                     totalItems={totalItems}
@@ -54,6 +43,4 @@ const ShowingIndexPage: FC = (): ReactElement => {
             )}
         </ValidatedDataLoader>
     );
-};
-
-export default ShowingIndexPage;
+}

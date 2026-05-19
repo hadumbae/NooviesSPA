@@ -1,9 +1,8 @@
 /**
- * @fileoverview Container component for creating or editing movie showings.
- * Manages multi-step form state, persistence, and server mutations.
+ * @fileoverview Container component for the showing submission multi-step form.
  */
 
-import {FC} from "react";
+import {ReactElement} from "react";
 import useShowingSubmitForm from "@/domains/showings/hooks/forms/useShowingSubmitForm.ts";
 import useShowingSubmitMutation from "@/domains/showings/hooks/mutations/useShowingSubmitMutation.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
@@ -12,8 +11,9 @@ import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts
 import {FormStep} from "@/common/type/form/SteppedFormTypes.ts";
 import {ChevronRight, Clock, Languages, ListCollapse} from "lucide-react";
 import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import {ShowingSubmitFormDetailsFieldset}
-    from "@/domains/showings/components/forms/fieldsets/ShowingSubmitFormDetailsFieldset.tsx";
+import {
+    ShowingSubmitFormDetailsFieldset
+} from "@/domains/showings/components/forms/fieldsets/ShowingSubmitFormDetailsFieldset.tsx";
 import ShowingSubmitFormLanguagesFieldset
     from "@/domains/showings/components/forms/fieldsets/ShowingSubmitFormLanguagesFieldset.tsx";
 import MultiStepForm from "@/common/components/forms/multi-step-form/MultiStepForm.tsx";
@@ -26,34 +26,21 @@ import buildFormSubmitLog from "@/common/utility/features/logger/buildFormSubmit
 import useFormInitialValues from "@/common/hooks/forms/useFormInitialValues.tsx";
 import {Showing} from "@/domains/showings/schema/showing/ShowingSchema.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {ShowingForm} from "@/domains/showings/schema/form/form-schemas/ShowingFormSchema.ts";
+import {ShowingFormValues} from "@/domains/showings/schema/form/form-values/ShowingFormValues.ts";
+import {ShowingFormValuesSchema} from "@/domains/showings/schema/form/form-values/ShowingFormValuesSchema.ts";
 import {
-    ShowingFormLanguageValuesSchema
-} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormLanguageValuesSchema.ts";
-import {
-    ShowingFormDateTimeValuesSchema
-} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormDateTimeValuesSchema.ts";
-import {
-    ShowingFormDetailValuesSchema
-} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormDetailValuesSchema.ts";
-import {
-    ShowingFormStatusValuesSchema
-} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormStatusValuesSchema.ts";
-import {
-    ShowingFormValues,
-    ShowingFormValuesSchema
-} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
+    ShowingFormData,
+    ShowingFormDateTimeSchema,
+    ShowingFormDetailSchema,
+    ShowingFormLanguageSchema, ShowingFormStatusSchema
+} from "@/domains/showings/schema/form";
 
-/**
- * Union type for editing vs. creation mode props.
- */
+/** Type definition for showing editing state props. */
 type ShowingEditingProps =
     | { entity: Showing; theatreTimezone: IANATimezone }
     | { entity?: never; theatreTimezone?: never };
 
-/**
- * Combined props for the ShowingSubmitFormContainer.
- */
+/** Props for the ShowingSubmitFormContainer component. */
 type SubmitContainerProps =
     MutationOnSubmitParams<ShowingDetails>
     & FormOptions<ShowingFormValues>
@@ -61,10 +48,10 @@ type SubmitContainerProps =
     & { className?: string };
 
 /**
- * Orchestrates the multi-step lifecycle for showing submissions.
- * Includes local storage persistence and logic for dynamic field toggling.
+ * Orchestrates the multi-step form for creating or updating movie showings.
+ * Manages form state, validation schemas, and submission mutations.
  */
-const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
+export function ShowingSubmitFormContainer(props: SubmitContainerProps): ReactElement {
     const {entity: showing, theatreTimezone, disableFields, presetValues, ...onSubmitProps} = props;
     const {onSubmitSuccess} = onSubmitProps;
 
@@ -87,29 +74,29 @@ const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
             title: "Details",
             stepCount: 1,
             icon: ListCollapse,
-            fields: getSchemaFieldKeys(ShowingFormDetailValuesSchema),
-            component: <ShowingSubmitFormDetailsFieldset activeFields={activeFields} form={form} />,
+            fields: getSchemaFieldKeys(ShowingFormDetailSchema),
+            component: <ShowingSubmitFormDetailsFieldset activeFields={activeFields} form={form}/>,
         },
         {
             title: "Languages",
             stepCount: 2,
             icon: Languages,
-            fields: getSchemaFieldKeys(ShowingFormLanguageValuesSchema),
-            component: <ShowingSubmitFormLanguagesFieldset activeFields={activeFields} form={form} />,
+            fields: getSchemaFieldKeys(ShowingFormLanguageSchema),
+            component: <ShowingSubmitFormLanguagesFieldset activeFields={activeFields} form={form}/>,
         },
         {
             title: "Date & Time",
             stepCount: 3,
             icon: Clock,
-            fields: getSchemaFieldKeys(ShowingFormDateTimeValuesSchema),
-            component: <ShowingSubmitFormDateTimeFieldset activeFields={activeFields} form={form} />,
+            fields: getSchemaFieldKeys(ShowingFormDateTimeSchema),
+            component: <ShowingSubmitFormDateTimeFieldset activeFields={activeFields} form={form}/>,
         },
         {
             title: "Status",
             stepCount: 4,
             icon: ChevronRight,
-            fields: getSchemaFieldKeys(ShowingFormStatusValuesSchema),
-            component: <ShowingSubmitFormStatusFieldset activeFields={activeFields} form={form} />,
+            fields: getSchemaFieldKeys(ShowingFormStatusSchema),
+            component: <ShowingSubmitFormStatusFieldset activeFields={activeFields} form={form}/>,
         },
     ];
 
@@ -138,7 +125,8 @@ const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
             msg: "Showing Submit",
             component: ShowingSubmitFormContainer.name,
         });
-        mutation.mutate(values as ShowingForm);
+
+        mutation.mutate(values as ShowingFormData);
     };
 
     return (
@@ -149,6 +137,4 @@ const ShowingSubmitFormContainer: FC<SubmitContainerProps> = (props) => {
             steps={steps}
         />
     );
-};
-
-export default ShowingSubmitFormContainer;
+}

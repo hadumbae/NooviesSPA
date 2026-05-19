@@ -23,7 +23,8 @@ import {UseFormReturn} from "react-hook-form";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {ShowingFormValues} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
+
+import {ShowingFormValues} from "@/domains/showings/schema/form";
 
 /**
  * Props for `ShowingSubmitFormDateTimeFieldset`.

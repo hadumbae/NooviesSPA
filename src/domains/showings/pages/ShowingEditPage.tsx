@@ -14,7 +14,9 @@ import {FC} from 'react';
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import ShowingEditHeader from "@/domains/showings/components/headers/ShowingEditHeader.tsx";
 import {PageLoader} from "@/views/common/_comp/page";
-import ShowingSubmitFormContainer from "@/domains/showings/components/forms/ShowingSubmitFormContainer.tsx";
+import {
+    ShowingSubmitFormContainer
+} from "@/domains/showings/components/forms/ShowingSubmitFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import simplifyShowingDetails from "@/domains/showings/utilities/simplifyShowingDetails.ts";
 import ShowingEditBreadcrumbs from "@/domains/showings/components/features/showing-edit-page/ShowingEditBreadcrumbs.tsx";

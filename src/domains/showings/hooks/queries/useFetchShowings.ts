@@ -1,12 +1,5 @@
 /**
- * @file useFetchShowings.ts
- *
- * React Query hook for fetching `Showing` entities via query filters.
- *
- * Handles:
- * - Query and request config merging
- * - Default React Query option application
- * - Standardized repository error handling
+ * @fileoverview Hook for fetching movie showings based on query parameters.
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
@@ -16,39 +9,17 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import ShowingRepository from "@/domains/showings/repositories/ShowingRepository.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {ShowingQueryOptions} from "@/domains/showings/schema/queries";
 
-import {ShowingQueryOptions} from "../../schema/queries/ShowingQueryOptionSchema";
-
-/**
- * Parameters for querying Showings.
- */
+/** Parameters for the useFetchShowings hook. */
 type FetchParams = {
-    /** Optional query filters */
     queries?: ShowingQueryOptions;
-
-    /** Optional request configuration */
     config?: RequestOptions;
-
-    /** Optional React Query options */
     options?: FetchQueryOptions<unknown>;
 };
 
-/**
- * Fetches Showings using query-based filters.
- *
- * @param params - Query filters, request configuration, and query options.
- *
- * @returns
- * A React Query result containing the Showings data or error state.
- *
- * @example
- * ```tsx
- * const { data, isLoading } = useFetchShowings({
- *   queries: { theatre: theatreId },
- * });
- * ```
- */
-export default function useFetchShowings(
+/** Fetches a list of showings filtered by the provided query options. */
+export function useFetchShowings(
     {queries, config, options}: FetchParams = {}
 ): UseQueryResult<unknown, HttpResponseError> {
     const fetchShowingsByQuery = useQueryFnHandler({

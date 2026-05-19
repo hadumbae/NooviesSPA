@@ -40,4 +40,4 @@ export const ShowingFormSchema = ShowingFormDetailSchema
 /**
  * Inferred type for showing form values.
  */
-export type ShowingForm = z.infer<typeof ShowingFormSchema>;
+export type ShowingFormData = z.infer<typeof ShowingFormSchema>;

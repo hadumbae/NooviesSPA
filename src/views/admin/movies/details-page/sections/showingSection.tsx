@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
-import useFetchShowings from "@/domains/showings/hooks/queries/useFetchShowings.ts";
+import {useFetchShowings} from "@/domains/showings/hooks/queries/useFetchShowings.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";

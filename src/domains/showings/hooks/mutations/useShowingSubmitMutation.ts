@@ -19,9 +19,9 @@ import handleMutationFormError from "@/common/utility/handlers/handleMutationFor
 import {SubmitMutationParams} from "@/common/type/form/MutationSubmitParams.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {ShowingQueryKeys} from "@/domains/showings/utilities/query/ShowingQueryKeys.ts";
-import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {ShowingForm} from "@/domains/showings/schema/form/form-schemas/ShowingFormSchema.ts";
-import {ShowingFormValues} from "@/domains/showings/schema/form/form-values-schemas/ShowingFormValuesSchema.ts";
+import {ShowingFormValues} from "@/domains/showings/schema/form/form-values/ShowingFormValues.ts";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing";
+import {ShowingFormData} from "@/domains/showings/schema/form";
 
 /**
  * Mutation parameters for submitting a Showing form.
@@ -45,7 +45,7 @@ type SubmitParams = SubmitMutationParams<ShowingFormValues, ShowingDetails>;
  */
 export default function useShowingSubmitMutation(
     params: SubmitParams
-): UseMutationResult<ShowingDetails, unknown, ShowingForm> {
+): UseMutationResult<ShowingDetails, unknown, ShowingFormData> {
     const {
         form,
         editID,
@@ -61,7 +61,7 @@ export default function useShowingSubmitMutation(
     /**
      * Executes a create or update request for a Showing.
      */
-    const submitShowings = async (values: ShowingForm) => {
+    const submitShowings = async (values: ShowingFormData) => {
         const action = editID
             ? () => ShowingRepository.update({_id: editID, data: values, config})
             : () => ShowingRepository.create({data: values, config});

@@ -16,7 +16,7 @@ import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.ts
 import {cn} from "@/common/lib/utils.ts";
 import {ShowingSummaryCard} from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCard.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import useFetchShowings from "@/domains/showings/hooks/queries/useFetchShowings.ts";
+import {useFetchShowings} from "@/domains/showings/hooks/queries/useFetchShowings.ts";
 
 /** Props for the TheatreScreenDetailsShowingsTab component. */
 type TabProps = {

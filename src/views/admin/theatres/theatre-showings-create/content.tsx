@@ -7,7 +7,9 @@ import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {TheatreShowingCreateHeader}
     from "@/views/admin/theatres/theatre-showings-create/header.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import ShowingSubmitFormContainer from "@/domains/showings/components/forms/ShowingSubmitFormContainer.tsx";
+import {
+    ShowingSubmitFormContainer
+} from "@/domains/showings/components/forms/ShowingSubmitFormContainer.tsx";
 import {ReactElement} from "react";
 
 import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
