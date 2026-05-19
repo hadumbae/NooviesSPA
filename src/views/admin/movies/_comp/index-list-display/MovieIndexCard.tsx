@@ -8,7 +8,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {ReactElement} from "react";
-import {MovieMetaRow} from "@/views/admin/movies/_comp/movie-details";
+import {AdminMovieMeta} from "@/views/admin/movies/_comp/movie-details";
 
 /** Props for the MovieIndexCard component. */
 type IndexCardProps = {
@@ -31,7 +31,7 @@ export function MovieIndexCard({movie, className}: IndexCardProps): ReactElement
                 />
             </CardHeader>
             <CardContent className={cn("p-5 flex items-center justify-between", className)}>
-                <MovieMetaRow movie={movie}/>
+                <AdminMovieMeta movie={movie}/>
 
                 <MovieIndexDetailsDialog movie={movie}>
                     <TooltipButton

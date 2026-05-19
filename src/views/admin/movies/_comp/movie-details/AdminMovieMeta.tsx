@@ -19,14 +19,14 @@ type MetaProps = {
 /**
  * Renders a movie title link and a subtitle containing release year and runtime.
  */
-export function MovieMetaRow(
+export function AdminMovieMeta(
     {movie}: MetaProps
 ): ReactElement {
     const {_id, slug, title, releaseDate, runtime} = movie;
 
     const navObject = {
         to: `/admin/movies/get/${slug}`,
-        component: MovieMetaRow.name,
+        component: AdminMovieMeta.name,
         message: "Navigate to movie details view.",
         context: {system: "ADMIN", _id, slug, title},
     };
