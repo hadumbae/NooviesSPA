@@ -46,13 +46,16 @@ export function GenreDetailsPageContent(
 
                 {
                     movies.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
                             {movies.map((movie: MovieDetails) => (
-                                <MovieIndexCard key={movie._id} className="w-16" movie={movie}/>
+                                <MovieIndexCard key={movie._id} movie={movie}/>
                             ))}
                         </div>
                     ) : (
-                        <EmptyArrayContainer className="border rounded-xl h-52" text="There Are No Movies"/>
+                        <EmptyArrayContainer
+                            className="border rounded-xl h-52"
+                            text="There Are No Movies"
+                        />
                     )
                 }
             </section>
