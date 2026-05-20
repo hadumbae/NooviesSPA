@@ -2,9 +2,9 @@
  * @fileoverview Formatter that transforms a detailed showing object into a simplified showing structure.
  */
 
-import {ParseError} from "src/common/errors/ParseError.ts";
-import {Showing, ShowingSchema} from "src/domains/showings/schema/showing/ShowingSchema.ts";
-import {ShowingDetails} from "src/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ParseError} from "@/common/errors/ParseError.ts";
+import {Showing, ShowingSchema} from "@/domains/showings/schema/showing/ShowingSchema.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /** Extracts IDs from nested entities to create a flat showing object and validates it against the schema. */
 export function simplifyShowingDetails(data: ShowingDetails): Showing {

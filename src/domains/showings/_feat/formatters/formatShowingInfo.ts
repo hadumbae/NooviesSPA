@@ -3,13 +3,13 @@
  *
  */
 
-import ISO6391LanguageConstant from "src/common/constants/languages/ISO6391LanguageConstant.ts";
-import buildString from "src/common/utility/buildString.ts";
-import formatMovieRuntime from "src/common/utility/date-and-time/formatMovieRuntime.ts";
-import {CloudinaryImage} from "src/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
-import {ReservationType} from "src/domains/reservation/schema/model/fields/ReservationTypeEnumSchema.ts";
-import {ShowingDetails} from "src/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {PopulatedShowing} from "src/domains/showings/schema/showing/PopulatedShowingSchema.ts";
+import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
+import buildString from "@/common/utility/buildString.ts";
+import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
+import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import {ReservationType} from "@/domains/reservation/schema/model/fields/ReservationTypeEnumSchema.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 
 /** UI-ready representation of a theatre showing. */
 export type FormattedShowingInfo = {

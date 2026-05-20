@@ -9,7 +9,7 @@ import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts
 import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import {ShowingSummaryCard} from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCard.tsx";
+import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card/ShowingSummaryCard.tsx";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {useFetchShowings} from "@/domains/showings/_feat/crud-hooks";
 

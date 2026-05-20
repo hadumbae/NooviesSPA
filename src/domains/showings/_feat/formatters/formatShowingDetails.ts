@@ -2,14 +2,14 @@
  * @fileoverview Formatter for converting showing details into display-ready strings.
  */
 
-import formatLocationDetails from "src/common/utility/features/location/formatLocationDetails.ts";
-import ISO6391LanguageConstant from "src/common/constants/languages/ISO6391LanguageConstant.ts";
-import convertToTitleCase from "src/common/utility/formatters/convertToTitleCase.ts";
+import formatLocationDetails from "@/common/utility/features/location/formatLocationDetails.ts";
+import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
+import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {
     buildShowingDateString
-} from "src/domains/showings/_feat/formatters/buildShowingDateString.ts";
-import formatMovieRuntime from "src/common/utility/date-and-time/formatMovieRuntime.ts";
-import {ShowingDetails} from "src/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+} from "@/domains/showings/_feat/formatters/buildShowingDateString.ts";
+import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 
 /**
  * Transforms raw showing data into a flat object of formatted strings for UI display.

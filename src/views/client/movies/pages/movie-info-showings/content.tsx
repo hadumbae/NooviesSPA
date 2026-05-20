@@ -4,7 +4,7 @@
 
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import ShowingInfoCompactListCard
-    from "@/domains/showings/components/client/showing-list/ShowingInfoCompactListCard.tsx";
+    from "@/views/client/showings/_comp/showing-list/ShowingInfoCompactListCard.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import MovieInfoHeader from "@/views/client/movies/components/headers/MovieInfoHeader.tsx";
 import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";

@@ -6,7 +6,7 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {TheatreShowingListHeader}
     from "@/views/admin/theatres/theatre-showings-list/header.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import {ShowingSummaryCard} from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCard.tsx";
+import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card/ShowingSummaryCard.tsx";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {ReactElement} from "react";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";

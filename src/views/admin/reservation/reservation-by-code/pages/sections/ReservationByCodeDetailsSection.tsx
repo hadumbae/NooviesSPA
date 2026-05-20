@@ -14,7 +14,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     buildShowingDateString
-} from "src/domains/showings/_feat/formatters/buildShowingDateString.ts";
+} from "@/domains/showings/_feat/formatters/buildShowingDateString.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";

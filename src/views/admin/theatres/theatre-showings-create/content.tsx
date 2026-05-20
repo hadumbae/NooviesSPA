@@ -9,7 +9,7 @@ import {TheatreShowingCreateHeader}
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {
     ShowingSubmitFormContainer
-} from "@/domains/showings/components/forms/ShowingSubmitFormContainer.tsx";
+} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitFormContainer.tsx";
 import {ReactElement} from "react";
 
 import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";

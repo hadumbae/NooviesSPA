@@ -7,7 +7,7 @@ import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing";
 import {TheatreDetailsPageShowingsSectionHeader} from "@/views/admin/theatres/theatre-details-page";
 import {cn} from "@/common/lib/utils.ts";
-import {ShowingSummaryCard} from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCard.tsx";
+import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card/ShowingSummaryCard.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
 /** Props for the TheatreDetailsPageShowingSection component. */
