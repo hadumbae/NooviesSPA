@@ -5,13 +5,13 @@
 import {ReactElement} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
-import {useFetchShowings} from "@/domains/showings/hooks/queries/useFetchShowings.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ShowingSummaryCard} from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCard.tsx";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {useFetchShowings} from "@/domains/showings/_feat/crud-hooks";
 
 /** Props for the MovieDetailsPageShowingSection component. */
 type TabProps = {
@@ -27,6 +27,7 @@ export function MovieDetailsPageShowingSection(
     const query = useFetchShowings({
         queries: {movie: _id, sortByStartTime: 1},
         config: {virtuals: true, populate: true, limit: 10},
+        schema: generateArraySchema(ShowingDetailsSchema),
     });
 
     return (
@@ -36,7 +37,7 @@ export function MovieDetailsPageShowingSection(
                 text="Showings"
             />
 
-            <ValidatedDataLoader query={query} schema={generateArraySchema(ShowingDetailsSchema)}>
+            <QueryDataLoader query={query}>
                 {(showings: ShowingDetails[]) => {
                     if (showings.length === 0) {
                         return (
@@ -55,7 +56,7 @@ export function MovieDetailsPageShowingSection(
                         </div>
                     );
                 }}
-            </ValidatedDataLoader>
+            </QueryDataLoader>
         </div>
     );
 }

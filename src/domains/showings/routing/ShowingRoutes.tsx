@@ -17,7 +17,7 @@
 
 import {ShowingIndexPage} from "@/domains/showings/pages/index-page/ShowingIndexPage.tsx";
 import ShowingCreatePage from "@/domains/showings/pages/ShowingCreatePage.tsx";
-import ShowingEditPage from "@/domains/showings/pages/ShowingEditPage.tsx";
+import {ShowingEditPage} from "@/domains/showings/pages/ShowingEditPage.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import {RouteObject} from "react-router-dom";
 import ShowingDetailsPage from "@/domains/showings/pages/details-page/page/ShowingDetailsPage.tsx";

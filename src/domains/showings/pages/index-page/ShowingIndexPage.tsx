@@ -4,15 +4,14 @@
 
 import {ReactElement} from "react";
 import ShowingIndexPageContent from "@/domains/showings/pages/index-page/ShowingIndexPageContent.tsx";
-import useFetchPaginatedShowings from "@/domains/showings/hooks/queries/useFetchPaginatedShowings.ts";
+import {useFetchPaginatedShowings} from "@/domains/showings/_feat/crud-hooks/useFetchPaginatedShowings.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import useParsedPaginationValue
     from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing";
-import {PaginatedItems} from "@/common/types";
+import {ShowingDetailsSchema} from "@/domains/showings/schema/showing";
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 import {ShowingQueryOptionSchema} from "@/domains/showings/schema/queries";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 const SHOWINGS_PER_PAGE = 10;
 
@@ -26,13 +25,14 @@ export function ShowingIndexPage(): ReactElement {
     const query = useFetchPaginatedShowings({
         page,
         perPage: SHOWINGS_PER_PAGE,
+        schema: generatePaginationSchema(ShowingDetailsSchema),
         config: {populate: true, virtuals: true},
         queries: searchParams,
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={generatePaginationSchema(ShowingDetailsSchema)}>
-            {({items: showings, totalItems}: PaginatedItems<ShowingDetails>) => (
+        <QueryDataLoader query={query}>
+            {({items: showings, totalItems}) => (
                 <ShowingIndexPageContent
                     showings={showings}
                     totalItems={totalItems}
@@ -41,6 +41,6 @@ export function ShowingIndexPage(): ReactElement {
                     setPage={setPage}
                 />
             )}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 }

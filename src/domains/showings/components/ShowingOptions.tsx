@@ -1,56 +1,30 @@
 /**
- * @file ShowingOptions.tsx
- *
- * Action menu component for a single `Showing`.
- *
- * Provides contextual actions:
- * - Navigate to edit view
- * - Delete the showing with mutation feedback
+ * @fileoverview Popover menu providing administrative actions for a specific showing.
  */
 
 import {Popover, PopoverContent, PopoverTrigger} from '@/common/components/ui/popover';
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {Ellipsis, Loader} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import useShowingDeleteMutation from "@/domains/showings/hooks/mutations/useShowingDeleteMutation.ts";
-import {Link} from "react-router-dom";
+import {useShowingDeleteMutation} from "@/domains/showings/_feat/crud-hooks/useShowingDeleteMutation.ts";
 import ButtonVariant from "@/common/type/ui/shad-cn-button/ButtonVariant.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ReactElement} from "react";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 
-/**
- * Props for {@link ShowingOptions}.
- */
+/** Props for the ShowingOptions component. */
 type OptionProps = {
-    /** Showing entity used for routing and deletion */
     showing: ShowingDetails;
-
-    /** Button variant for the trigger */
     variant?: ButtonVariant;
-
-    /** Callback invoked after successful deletion */
     onDeleteSuccess: () => void;
-
-    /** Optional className for the trigger button */
     className?: string;
 };
 
-/**
- * Renders a popover-based action menu for a Showing.
- *
- * @example
- * ```tsx
- * <ShowingOptions
- *   showing={showing}
- *   onDeleteSuccess={refetch}
- * />
- * ```
- */
-const ShowingOptions = (props: OptionProps) => {
-    const {showing: {_id, slug}, variant, className, onDeleteSuccess} = props;
-
-    const {mutate, isPending, isSuccess} = useShowingDeleteMutation({
-        onDeleteSuccess,
-    });
+/** Renders a popover with edit and delete actions for a movie showing. */
+export function ShowingOptions(
+    {showing: {_id, slug}, variant, className, onDeleteSuccess}: OptionProps
+): ReactElement {
+    const {mutate, isPending, isSuccess} = useShowingDeleteMutation({onSubmitSuccess: onDeleteSuccess});
 
     return (
         <Popover>
@@ -65,12 +39,9 @@ const ShowingOptions = (props: OptionProps) => {
             </PopoverTrigger>
 
             <PopoverContent className="w-40 flex flex-col p-0">
-                <Link
-                    className={buttonVariants({variant: "link"})}
-                    to={`/admin/showings/edit/${slug}`}
-                >
+                <LoggedLink className={buttonVariants({variant: "link"})} to={`/admin/showings/edit/${slug}`}>
                     Edit
-                </Link>
+                </LoggedLink>
 
                 <Button
                     variant="link"
@@ -78,13 +49,13 @@ const ShowingOptions = (props: OptionProps) => {
                     disabled={isPending || isSuccess}
                     className="disabled:text-neutral-400"
                 >
-                    {isPending || isSuccess
-                        ? <Loader className="animate-spin"/>
-                        : "Delete"}
+                    {
+                        isPending || isSuccess
+                            ? <Loader className="animate-spin"/>
+                            : "Delete"
+                    }
                 </Button>
             </PopoverContent>
         </Popover>
     );
-};
-
-export default ShowingOptions;
+}

@@ -2,7 +2,7 @@ import {FC} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {TableOfContents} from "lucide-react";
-import ShowingOptions from "@/domains/showings/components/ShowingOptions.tsx";
+import {ShowingOptions} from "@/domains/showings/components/ShowingOptions.tsx";
 import {useNavigate} from "react-router-dom";
 import {Button} from "@/common/components/ui/button.tsx";
 

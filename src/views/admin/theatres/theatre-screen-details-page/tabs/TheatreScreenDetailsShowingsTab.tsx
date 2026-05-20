@@ -15,8 +15,8 @@ import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/sh
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ShowingSummaryCard} from "@/domains/showings/components/admin/card/showing-summary-card/ShowingSummaryCard.tsx";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {useFetchShowings} from "@/domains/showings/hooks/queries/useFetchShowings.ts";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {useFetchShowings} from "@/domains/showings/_feat/crud-hooks";
 
 /** Props for the TheatreScreenDetailsShowingsTab component. */
 type TabProps = {
@@ -34,6 +34,7 @@ export function TheatreScreenDetailsShowingsTab(
     const query = useFetchShowings({
         queries: {screen: screenID, sortByStartTime: 1},
         config: {virtuals: true, populate: true, limit: 10},
+        schema: generateArraySchema(ShowingDetailsSchema),
     });
 
     return (
@@ -46,7 +47,7 @@ export function TheatreScreenDetailsShowingsTab(
                 </LoggedLink>
             </div>
 
-            <ValidatedDataLoader query={query} schema={generateArraySchema(ShowingDetailsSchema)}>
+            <QueryDataLoader query={query}>
                 {(showings: ShowingDetails[]) => {
                     if (showings.length === 0) {
                         return (
@@ -65,7 +66,7 @@ export function TheatreScreenDetailsShowingsTab(
                         </div>
                     );
                 }}
-            </ValidatedDataLoader>
+            </QueryDataLoader>
         </TabsContent>
     );
 }

@@ -31,6 +31,7 @@ const stateSchema = preprocessEmptyStringToUndefined(
  * Core identifiers with optional theatre location context.
  */
 export const ShowingFormDetailSchema = z.object({
+    _id: IDStringSchema.optional().readonly(),
     movie: IDStringSchema,
     screen: IDStringSchema,
     theatre: IDStringSchema,

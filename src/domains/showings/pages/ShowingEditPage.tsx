@@ -1,13 +1,5 @@
 /**
- * @file ShowingEditPage.tsx
- *
- * Admin page for editing an existing `Showing`.
- *
- * Handles:
- * - Route parameter validation via slug
- * - Showing data fetching and schema validation
- * - Transformation of API data into form-ready values
- * - Submission success navigation
+ * @fileoverview Admin page for editing an existing Showing.
  */
 
 import {FC} from 'react';
@@ -22,15 +14,15 @@ import simplifyShowingDetails from "@/domains/showings/utilities/simplifyShowing
 import ShowingEditBreadcrumbs from "@/domains/showings/components/features/showing-edit-page/ShowingEditBreadcrumbs.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import useFetchShowingBySlug from "@/domains/showings/hooks/queries/useFetchShowingBySlug.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {useFetchShowingBySlug} from "@/domains/showings/_feat/crud-hooks";
 
 /**
  * Page component for editing a Showing.
  */
-const ShowingEditPage: FC = () => {
+export const ShowingEditPage: FC = () => {
     const {slug} = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         sourceComponent: ShowingEditPage.name,
@@ -45,10 +37,11 @@ const ShowingEditPage: FC = () => {
     const query = useFetchShowingBySlug({
         slug,
         config: {populate: true, virtuals: true},
+        schema: ShowingDetailsSchema,
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={ShowingDetailsSchema}>
+        <QueryDataLoader query={query}>
             {(showing: ShowingDetails) => {
                 const navigate = useLoggedNavigate();
 
@@ -81,8 +74,8 @@ const ShowingEditPage: FC = () => {
                     </PageFlexWrapper>
                 );
             }}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 };
 
-export default ShowingEditPage;
+

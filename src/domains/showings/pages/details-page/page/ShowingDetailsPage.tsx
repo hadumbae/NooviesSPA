@@ -1,19 +1,5 @@
 /**
- * @file ShowingDetailsPage.tsx
- *
- * @description
- * Admin page responsible for fetching, validating, and rendering
- * the Showing Details view.
- *
- * This page:
- * - Reads the showing ID from the route parameters
- * - Fetches the showing and its associated seat maps
- * - Combines multiple queries into a single loading and error boundary
- * - Validates query results against Zod schemas
- * - Provides validated data via {@link ShowingDetailsPageContextProvider}
- *
- * The actual UI rendering is delegated to
- * {@link ShowingDetailsPageContent}.
+ * @fileoverview Admin page for fetching and rendering showing details and associated seat maps.
  */
 
 import {FC} from "react";
@@ -27,35 +13,20 @@ import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import ShowingDetailsPageContent from "@/domains/showings/pages/details-page/page/ShowingDetailsPageContent.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import useFetchShowingBySlug from "@/domains/showings/hooks/queries/useFetchShowingBySlug.ts";
 import ShowingDetailsPageContextProvider
     from "@/domains/showings/context/showing-details-page-context/ShowingDetailsPageContextProvider.tsx";
 import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {useFetchShowingBySlug} from "@/domains/showings/_feat/crud-hooks";
 
-/**
- * Shape of validated query data passed to the page context.
- */
+/** Validated query data provided to the page context. */
 type QueryData = {
     showing: ShowingDetails;
     seating: SeatMapDetails[];
 };
 
 /**
- * @component ShowingDetailsPage
- *
- * @description
  * Entry point for the Showing Details admin page.
- *
- * Handles:
- * - Route parameter validation
- * - Parallel data fetching
- * - Query loading and error boundaries
- * - Schema validation of API responses
- * - Context provisioning for child components
- *
- * @remarks
- * If route parameters are not yet available or invalid,
- * a {@link PageLoader} is rendered until resolution.
+ * Validates route parameters and orchestrates parallel data fetching for showings and seating.
  */
 const ShowingDetailsPage: FC = () => {
     const {slug} = useFetchByIdentifierRouteParams({
@@ -72,6 +43,7 @@ const ShowingDetailsPage: FC = () => {
     const showingQuery = useFetchShowingBySlug({
         slug,
         config: {populate: true, virtuals: true},
+        schema: ShowingDetailsSchema,
     });
 
     const seatingQuery = useFetchSeatMaps({

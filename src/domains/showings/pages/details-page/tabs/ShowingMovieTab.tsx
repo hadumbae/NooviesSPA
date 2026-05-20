@@ -5,7 +5,6 @@
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {CombinedSchemaQuery} from "@/common/components/query/combined/CombinedValidatedQueryBoundary.types.ts";
-import {useFetchShowings} from "@/domains/showings/hooks/queries/useFetchShowings.ts";
 import CombinedQueryBoundary from "@/common/components/query/combined/CombinedQueryBoundary.tsx";
 import CombinedValidatedQueryBoundary from "@/common/components/query/combined/CombinedValidatedQueryBoundary.tsx";
 import ShowingMovieCard from "@/domains/showings/components/admin/card/showing-movie-card/ShowingMovieCard.tsx";
@@ -18,6 +17,7 @@ import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie/Mo
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {ReactElement} from "react";
 import {useFetchMovie} from "@/domains/movies/_feat/crud-hooks";
+import {useFetchShowings} from "@/domains/showings/_feat/crud-hooks";
 
 /** Combined query result shape for the ShowingMovieTab component. */
 type QueryParams = {
@@ -43,6 +43,7 @@ export function ShowingMovieTab({movieID}: TabProps): ReactElement {
     const showingQuery = useFetchShowings({
         queries: {movie: movieID, sortByStartTime: -1},
         config: {populate: true, virtuals: true, limit: 10},
+        schema: generateArraySchema(ShowingDetailsSchema),
     });
 
     const queries = [movieQuery, showingQuery];
