@@ -1,4 +1,8 @@
-import {UseShowingFormParams} from "@/domains/showings/hooks/forms/useShowingSubmitForm.types.ts";
+/**
+ * @fileoverview Hook for calculating and synchronizing default form values for showing submissions.
+ */
+
+import {ShowingFormValuesConfig} from "@/domains/showings/_feat/submit-data/useShowingSubmitForm.types.ts";
 import {useMemo, useRef} from "react";
 import getShowingDateAndTimeFormValues from "@/common/utility/date-and-time/getShowingDateAndTimeFormValues.ts";
 import {isEqual} from "lodash";
@@ -7,29 +11,16 @@ import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 import {ShowingFormValues} from "@/domains/showings/schema/form";
 
 /**
- * Computes and returns the default values for the showing submit form.
- *
- * The resulting values are derived from:
- * - An existing showing (edit mode)
- * - Timezone-aware date and time formatting
- * - Optional preset value overrides
- *
- * To avoid unnecessary form resets, the hook preserves referential
- * equality by caching the previously resolved values and only updating
- * them when a deep comparison detects a change.
- *
- * @param params - Parameters used to resolve the form's default values
- * @returns Default values for the showing submit form
+ * Computes the initial and synchronized state for the showing submission form.
  */
-export default function useShowingSubmitFormDefaultValues(
-    params: UseShowingFormParams
+export function useShowingSubmitFormDefaultValues(
+    params: ShowingFormValuesConfig
 ): ShowingFormValues {
     const {showing, theatreTimezone, presetValues} = params;
     const {config, startTime, endTime, ...remShowing} = showing ? showing : {};
 
     const formValues = useRef<ShowingFormValues | null>(null);
 
-    // --- DATE AND TIME ---
     const showingDateAndTime = useMemo(
         () => getShowingDateAndTimeFormValues({
             startTime: showing?.startTime,
@@ -39,7 +30,6 @@ export default function useShowingSubmitFormDefaultValues(
         [showing, theatreTimezone]
     );
 
-    // --- CONFIG ---
     const formattedConfig = {
         canReserveSeats: getDefaultValue(
             presetValues?.config?.canReserveSeats,
@@ -48,7 +38,6 @@ export default function useShowingSubmitFormDefaultValues(
         )
     };
 
-    // --- DEFAULT VALUES ---
     const defaultValues: ShowingFormValues = useMemo(
         () => ({
             ticketPrice: "",
@@ -75,7 +64,6 @@ export default function useShowingSubmitFormDefaultValues(
         [showing, presetValues, showingDateAndTime, formattedConfig]
     );
 
-    // --- SYNC VALUES ---
     if (!isEqual(formValues.current, defaultValues)) {
         formValues.current = defaultValues;
     }

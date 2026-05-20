@@ -3,7 +3,7 @@
  */
 
 import { z } from "zod";
-import ShowingStatusConstant from "../../constants/ShowingStatusConstant.js";
+import {ShowingStatusConstant} from "@/domains/showings/schema/fields/ShowingStatusConstant";
 
 /**
  * Zod schema for validating a showing's status.

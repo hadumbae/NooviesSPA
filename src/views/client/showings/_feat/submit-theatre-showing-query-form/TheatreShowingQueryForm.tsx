@@ -5,8 +5,8 @@
 
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import {
-    useTheatreShowingQueryForm
-} from "@/domains/showings/hooks/forms/theatre-showing-query-form/useTheatreShowingQueryForm.ts";
+    useTheatreScheduleQueryForm
+} from "@/domains/showings/_feat/submit-theatre-schedule-query/useTheatreScheduleQueryForm.ts";
 import {
     ShowingsPageQueryFormStarterValues,
     ShowingsPageQueryStrings,
@@ -29,7 +29,7 @@ export function TheatreShowingQueryForm(
     const id = useId();
     const formID = `theatre-showing-query-form-${id}`;
 
-    const form = useTheatreShowingQueryForm({presetValues});
+    const form = useTheatreScheduleQueryForm({presetValues});
     const {setSearchParams} = useParsedSearchParams({schema: ShowingsPageQueryStringSchema});
 
     const updateParams = (values: ShowingsPageQueryFormStarterValues) => {

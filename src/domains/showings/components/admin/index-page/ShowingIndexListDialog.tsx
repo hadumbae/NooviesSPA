@@ -7,7 +7,9 @@ import {
     DialogTrigger,
 } from "@/common/components/ui/dialog.tsx";
 import ShowingIndexListCard from "@/domains/showings/components/admin/index-page/ShowingIndexListCard.tsx";
-import formatShowingDetails from "@/domains/showings/utilities/formatShowingDetails.ts";
+import {
+    formatShowingDetails
+} from "src/domains/showings/_feat/formatters/formatShowingDetails.ts";
 import LucideIconText from "@/common/components/card-content/LucideIconText.tsx";
 import {
     BadgeAlert,

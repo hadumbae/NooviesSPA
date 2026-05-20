@@ -4,7 +4,7 @@
 
 import {cn} from "@/common/lib/utils.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {formatShowingInfo} from "@/domains/showings/utilities/formatShowingInfo.ts";
+import {formatShowingInfo} from "src/domains/showings/_feat/formatters/formatShowingInfo.ts";
 import {IconTextCSS} from "@/common/constants/css/TextCSS.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import buildString from "@/common/utility/buildString.ts";

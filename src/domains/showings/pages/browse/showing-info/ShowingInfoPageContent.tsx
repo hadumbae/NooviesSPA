@@ -5,7 +5,7 @@
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import {formatShowingInfo} from "@/domains/showings/utilities/formatShowingInfo.ts";
+import {formatShowingInfo} from "src/domains/showings/_feat/formatters/formatShowingInfo.ts";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import buildString from "@/common/utility/buildString.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";

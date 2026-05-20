@@ -5,7 +5,9 @@
 
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import buildString from "@/common/utility/buildString.ts";
-import buildShowingDateString from "@/domains/showings/utilities/buildShowingDateString.ts";
+import {
+    buildShowingDateString
+} from "src/domains/showings/_feat/formatters/buildShowingDateString.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PopulatedReservation} from "@/domains/reservation/schema/model/PopulatedReservationSchema.ts";

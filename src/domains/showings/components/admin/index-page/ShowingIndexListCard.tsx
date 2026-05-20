@@ -1,6 +1,8 @@
 import {FC} from "react";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import formatShowingDetails from "@/domains/showings/utilities/formatShowingDetails.ts";
+import {
+    formatShowingDetails
+} from "src/domains/showings/_feat/formatters/formatShowingDetails.ts";
 import {Circle, Cog, DollarSign, Star} from "lucide-react";
 import LucideIconText from "@/common/components/card-content/LucideIconText.tsx";
 import {cn} from "@/common/lib/utils.ts";

@@ -3,7 +3,6 @@
  */
 
 import {ReactElement} from "react";
-import useShowingSubmitForm from "@/domains/showings/hooks/forms/useShowingSubmitForm.ts";
 import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
@@ -34,6 +33,7 @@ import {
     ShowingFormLanguageSchema, ShowingFormStatusSchema
 } from "@/domains/showings/schema/form";
 import {useShowingSubmitMutation} from "@/domains/showings/_feat/crud-hooks";
+import {useShowingSubmitForm} from "@/domains/showings/_feat/submit-data";
 
 /** Type definition for showing editing state props. */
 type ShowingEditingProps =

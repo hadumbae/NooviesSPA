@@ -10,7 +10,9 @@ import {
     ShowingSubmitFormContainer
 } from "@/domains/showings/components/forms/ShowingSubmitFormContainer.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import simplifyShowingDetails from "@/domains/showings/utilities/simplifyShowingDetails.ts";
+import {
+    simplifyShowingDetails
+} from "src/domains/showings/_feat/formatters/simplifyShowingDetails.ts";
 import ShowingEditBreadcrumbs from "@/domains/showings/components/features/showing-edit-page/ShowingEditBreadcrumbs.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";

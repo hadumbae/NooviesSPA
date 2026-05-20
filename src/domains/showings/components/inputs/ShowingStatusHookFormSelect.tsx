@@ -12,7 +12,7 @@
 import HookFormSelect, {SelectProps} from "@/common/components/forms/select/HookFormSelect.tsx";
 import {FieldValues} from "react-hook-form";
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
-import ShowingStatusConstant from "@/domains/showings/constants/ShowingStatusConstant.ts";
+import {ShowingStatusConstant} from "@/domains/showings/schema/fields/ShowingStatusConstant.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 
 
