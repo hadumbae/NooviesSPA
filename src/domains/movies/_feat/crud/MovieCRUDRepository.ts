@@ -4,7 +4,7 @@
 
 import {
     handleCreate,
-    handleDelete,
+    handleDelete, handleFind,
     handleFindByID,
     handleFindBySlug,
     handlePaginated,
@@ -13,6 +13,8 @@ import {
 } from "@/common/features/crud-handlers";
 import {MovieCRUDBaseURL} from "@/domains/movies/_feat/crud/MovieCRUDBaseURL.ts";
 
+/** Retrieves all movie records. */
+export const find = handleFind(MovieCRUDBaseURL);
 /** Finds a movie by its unique identifier. */
 export const findByID = handleFindByID(MovieCRUDBaseURL);
 /** Finds a movie by its URL-friendly slug. */

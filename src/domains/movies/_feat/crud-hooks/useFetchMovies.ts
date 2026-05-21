@@ -7,7 +7,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {MovieQueryOptions} from "@/domains/movies/schema/queries";
 import {ListQueryConfig} from "@/common/types";
-import {find} from "@/domains/moviecredit/_feat/crud";
+import {find} from "@/domains/movies/_feat/crud";
 import {buildQueryFn} from "@/common/features/validate-fetch-data";
 import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks/queryKeys.ts";
 
