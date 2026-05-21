@@ -1,71 +1,28 @@
 /**
- * @file MultiStepFormProgressIndicatorStep.tsx
- * @description
- * Represents a single step within the multi-step form progress indicator.
- *
- * This component:
- * - Receives step metadata (`title`, `stepCount`, and an optional `icon`)
- * - Determines whether the step is active or completed using
- *   `currentStepIndex` from `useMultiStepFormContext`
- * - Applies visual styling to reflect progress state
- *
- * Rendering is purely presentational. It does not control navigation.
- *
- * @example
- * ```tsx
- * <MultiStepFormProgressIndicatorStep
- *     stepIndex={0}
- *     step={steps[0]}
- *     isLastStep={false}
- * />
- * ```
+ * @fileoverview Progress indicator step component for multi-step forms.
  */
 
-import { FormStep } from "@/common/type/form/SteppedFormTypes.ts";
-import { FieldValues } from "react-hook-form";
+import {FormStepMeta} from "@/common/features/multi-step-form/types.ts";
+import {FieldValues} from "react-hook-form";
 import useMultiStepFormContext from "@/common/hooks/context/useMultiStepFormContext.ts";
-import { cn } from "@/common/lib/utils.ts";
+import {cn} from "@/common/lib/utils.ts";
+import {ReactElement} from "react";
 
-/**
- * Props for the `MultiStepFormProgressIndicatorStep` component.
- *
- * @template TValues - The shape of form values used in the multi-step form.
- *
- * @property stepIndex - The index of this step within the list of steps.
- * @property step - Metadata describing the step (title, icon, step count, etc.).
- * @property isLastStep - Optional flag indicating whether this is the final step.
- */
+/** Props for the MultiStepFormProgressIndicatorStep component. */
 type StepProps<TValues extends FieldValues> = {
     stepIndex: number;
-    step: FormStep<TValues>;
+    step: FormStepMeta<TValues>;
     isLastStep?: boolean;
 };
 
 /**
- * Renders an individual step inside the multi-step form progress indicator.
- *
- * The component automatically determines whether the step is:
- * - **Active**: `currentStepIndex >= stepIndex`
- * - **Inactive**: not yet reached
- *
- * Active steps display highlighted colors, while inactive ones appear neutral.
- *
- * @template TValues - The type of form values for this multi-step form.
- *
- * @example
- * ```tsx
- * <MultiStepFormProgressIndicatorStep
- *     stepIndex={1}
- *     step={formSteps[1]}
- * />
- * ```
+ * Renders an individual step within the progress indicator.
+ * - Requires MultiStepFormContext to determine the active state.
  */
-const MultiStepFormProgressIndicatorStep = <TValues extends FieldValues>(
-    props: StepProps<TValues>
-) => {
-    const { stepIndex, step: { title, stepCount, icon: Icon } } = props;
-    const { currentStepIndex } = useMultiStepFormContext();
-
+export function MultiStepFormProgressIndicatorStep<TValues extends FieldValues>(
+    {stepIndex, step: {title, stepCount, icon: Icon}}: StepProps<TValues>
+): ReactElement {
+    const {currentStepIndex} = useMultiStepFormContext();
     const isActiveStep = currentStepIndex >= stepIndex;
 
     return (
@@ -92,7 +49,7 @@ const MultiStepFormProgressIndicatorStep = <TValues extends FieldValues>(
                         "text-xs font-medium lg:text-base"
                     )}
                 >
-                    <Icon />
+                    <Icon/>
                 </span>
 
                 <h4 className="max-lg:hidden text-sm lg:text-lg select-none truncate">
@@ -105,6 +62,4 @@ const MultiStepFormProgressIndicatorStep = <TValues extends FieldValues>(
             </div>
         </li>
     );
-};
-
-export default MultiStepFormProgressIndicatorStep;
+}

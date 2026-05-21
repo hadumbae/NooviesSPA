@@ -7,8 +7,8 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import ShowingEditHeader from "@/views/admin/showings/edit-page/ShowingEditHeader.tsx";
 import {PageLoader} from "@/views/common/_comp/page";
 import {
-    ShowingSubmitFormContainer
-} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitFormContainer.tsx";
+    ShowingSubmitForm
+} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitForm.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {
     simplifyShowingDetails
@@ -66,8 +66,8 @@ export const ShowingEditPage: FC = () => {
 
                         <Card>
                             <CardContent className="p-3">
-                                <ShowingSubmitFormContainer
-                                    entity={simplifiedShowing}
+                                <ShowingSubmitForm
+                                    showing={simplifiedShowing}
                                     theatreTimezone={timezone}
                                     onSubmitSuccess={onSuccess}
                                 />

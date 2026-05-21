@@ -17,9 +17,9 @@
 import {useContext} from "react";
 import {FieldValues} from "react-hook-form";
 import {
-    MultiStepFormContext,
-    MultiStepFormContextValues
-} from "@/common/context/multi-step-form/MultiStepFormContext.ts";
+    MultiStepFormStateContext,
+    MultiStepFormStateContextValues
+} from "@/common/features/multi-step-form/contexts/stateContext.ts";
 
 /**
  * Hook to access the multi-step form context.
@@ -37,7 +37,7 @@ import {
  * ```
  */
 export default function useMultiStepFormContext<TValues extends FieldValues>() {
-    const ctx = useContext(MultiStepFormContext) as MultiStepFormContextValues<TValues> | undefined;
+    const ctx = useContext(MultiStepFormStateContext) as MultiStepFormStateContextValues<TValues> | undefined;
 
     if (ctx === undefined) {
         throw new Error("Multi-Step Form Context missing. Please use within provider.");

@@ -20,13 +20,14 @@ import { FC } from 'react';
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import ShowingCreateHeader from "@/views/admin/showings/create-page/ShowingCreateHeader.tsx";
 import {
-    ShowingSubmitFormContainer
-} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitFormContainer.tsx";
+    ShowingSubmitForm
+} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitForm.tsx";
 import { Card, CardContent } from "@/common/components/ui/card.tsx";
 import ShowingCreateBreadcrumbs
     from "@/views/admin/showings/create-page/ShowingCreateBreadcrumbs.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ShowingSubmitFormView} from "@/views/admin/showings/_feat/submit-form";
 
 /**
  * `ShowingCreatePage` renders the full page for creating a new showing.
@@ -50,7 +51,7 @@ const ShowingCreatePage: FC = () => {
      *
      * @param showing - The newly created `Showing` object.
      */
-    const onSubmit = (showing: ShowingDetails) => {
+    const onSuccess = (showing: ShowingDetails) => {
         navigate({
             level: "log",
             to: `/admin/showings/get/${showing.slug}`,
@@ -68,9 +69,9 @@ const ShowingCreatePage: FC = () => {
 
             <Card>
                 <CardContent className="p-3">
-                    <ShowingSubmitFormContainer
-                        onSubmitSuccess={onSubmit}
-                    />
+                    <ShowingSubmitForm onSubmitConfig={{onSubmitSuccess: onSuccess}}>
+                        <ShowingSubmitFormView />
+                    </ShowingSubmitForm>
                 </CardContent>
             </Card>
         </PageFlexWrapper>

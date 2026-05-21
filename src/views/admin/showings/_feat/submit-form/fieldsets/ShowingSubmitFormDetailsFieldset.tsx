@@ -1,11 +1,9 @@
 /**
- * @fileoverview Fieldset component for the Showing submission form.
- * Manages the selection and validation of movie, theatre, and screen entities.
+ * @fileoverview Fieldset for managing movie, theatre, and screen selection in a showing submission form.
  */
 
 import {ReactElement, useContext, useEffect, useState} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {UseFormReturn} from "react-hook-form";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import filterFalsyAttributes from "@/common/utility/collections/filterFalsyAttributes.ts";
@@ -14,82 +12,81 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui/collapsible.tsx";
 import {Plus, X} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
-import {MultiStepFormContext} from "@/common/context/multi-step-form/MultiStepFormContext.ts";
+import {MultiStepFormStateContext} from "@/common/features/multi-step-form/contexts/stateContext.ts";
 import TheatreHookFormSelect from "@/views/admin/theatres/_feat/form-input/TheatreHookFormSelect.tsx";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
 import {TheatreQuickOverviewFetchCard} from "@/views/admin/theatres/_comp/display-cards";
 import {MovieHookFormSelect} from "@/views/admin/movies/_feat/form-inputs";
 import {MovieQuickOverviewFetchCard} from "@/views/admin/movies/_comp/form-display";
 import {ShowingFormValues} from "@/domains/showings/schema/form";
-
-/** Props for the ShowingSubmitFormDetailsFieldset component. */
-type FieldsetProps = {
-    form: UseFormReturn<ShowingFormValues>;
-    activeFields: Record<keyof ShowingFormValues, boolean>;
-};
+import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
+import {useFormContext} from "react-hook-form";
+import {cn} from "@/common/lib/utils.ts";
 
 /**
- * A fieldset component handling movie, theatre, and screen selection with dynamic filtering.
+ * Form fieldset for selecting the movie and location details for a showing.
  */
 export function ShowingSubmitFormDetailsFieldset(
-    {form, activeFields}: FieldsetProps
+    {disableFields, className}: Omit<FormFieldsetProps<ShowingFormValues>, "isNestedView">
 ): ReactElement {
-    const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
-    const {isHydrated = true} = useContext(MultiStepFormContext) ?? {};
+    const {control, watch, setValue, resetField} = useFormContext();
 
-    const movie = form.watch("movie");
-    const theatre = form.watch("theatre");
-    const city = form.watch("theatreCity");
-    const state = form.watch("theatreState");
-    const country = form.watch("theatreCountry");
+    const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+    const {isHydrated = true} = useContext(MultiStepFormStateContext) ?? {};
+
+    const movie = watch("movie");
+    const theatre = watch("theatre");
+    const city = watch("theatreCity");
+    const state = watch("theatreState");
+    const country = watch("theatreCountry");
 
     /** Effect: Reset location filters when the filter panel is closed. */
     useEffect(() => {
         if (!isFilterOpen) {
-            form.setValue("theatreCity", "");
-            form.setValue("theatreState", "");
-            form.setValue("theatreCountry", undefined);
+            setValue("theatreCity", "");
+            setValue("theatreState", "");
+            setValue("theatreCountry", undefined);
         }
     }, [isFilterOpen]);
 
     /** Effect: Clear selection when location filters are modified. */
     useEffect(() => {
         if (isFilterOpen) {
-            form.setValue("theatre", undefined);
-            form.setValue("screen", undefined);
+            setValue("theatre", undefined);
+            setValue("screen", undefined);
         }
     }, [city, state, country]);
 
     /** Effect: Reset screen selection whenever the selected theatre changes. */
     useEffect(() => {
         if (isHydrated) {
-            form.resetField("screen");
+            resetField("screen");
         }
     }, [theatre]);
 
     const theatreFilters = filterFalsyAttributes({city, state, country});
 
     return (
-        <fieldset className="space-y-2">
+        <fieldset className={cn("space-y-2", className)}>
             <div>
                 <PrimaryHeaderText>Details</PrimaryHeaderText>
                 <Separator/>
             </div>
 
-            {/* Movie Selection */}
-            {activeFields.movie && (
-                <div className="space-y-1">
-                    <MovieHookFormSelect
-                        control={form.control}
-                        name="movie"
-                        label="Movie"
-                        description="The movie to be shown."
-                    />
-                    {movie && <MovieQuickOverviewFetchCard movieID={movie as ObjectId}/>}
-                </div>
-            )}
+            {
+                !disableFields?.movie && (
+                    <div className="space-y-1">
+                        <MovieHookFormSelect
+                            control={control}
+                            name="movie"
+                            label="Movie"
+                            description="The movie to be shown."
+                        />
+                        {movie && <MovieQuickOverviewFetchCard movieID={movie as ObjectId}/>}
+                    </div>
+                )
+            }
 
-            {/* Theatre Filters (Collapsible) */}
             <Collapsible open={isFilterOpen} onOpenChange={setIsFilterOpen}>
                 <CollapsibleTrigger asChild>
                     <Button variant="link" size="sm">
@@ -100,61 +97,69 @@ export function ShowingSubmitFormDetailsFieldset(
 
                 <CollapsibleContent className="p-3 rounded-2xl border border-neutral-800 dark:border-neutral-500">
                     <div className="grid grid-cols-2 gap-1">
-                        {activeFields["theatreCountry"] && (
-                            <CountryHookFormSelect
-                                name="theatreCountry"
-                                label="Country"
-                                control={form.control}
-                                className="col-span-2"
-                            />
-                        )}
+                        {
+                            !disableFields?.theatreCountry && (
+                                <CountryHookFormSelect
+                                    name="theatreCountry"
+                                    label="Country"
+                                    control={control}
+                                    className="col-span-2"
+                                />
+                            )
+                        }
 
-                        {activeFields["theatreCity"] && (
-                            <HookFormInput
-                                name="theatreCity"
-                                label="City"
-                                control={form.control}
-                            />
-                        )}
+                        {
+                            !disableFields?.theatreCity && (
+                                <HookFormInput
+                                    name="theatreCity"
+                                    label="City"
+                                    control={control}
+                                />
+                            )
+                        }
 
-                        {activeFields["theatreState"] && (
-                            <HookFormInput
-                                name="theatreState"
-                                label="State"
-                                control={form.control}
-                            />
-                        )}
+                        {
+                            !disableFields?.theatreState && (
+                                <HookFormInput
+                                    name="theatreState"
+                                    label="State"
+                                    control={control}
+                                />
+                            )
+                        }
                     </div>
                 </CollapsibleContent>
             </Collapsible>
 
-            {/* Theatre Selection */}
-            {activeFields.theatre && (
-                <div>
-                    <TheatreHookFormSelect
-                        control={form.control}
-                        name="theatre"
-                        label="Theatre"
-                        description="The theatre at which the showing will be."
-                        filters={theatreFilters}
+            {
+                !disableFields?.theatre && (
+                    <div>
+                        <TheatreHookFormSelect
+                            control={control}
+                            name="theatre"
+                            label="Theatre"
+                            description="The theatre at which the showing will be."
+                            filters={theatreFilters}
+                        />
+
+                        {theatre && (
+                            <TheatreQuickOverviewFetchCard theatreID={theatre as ObjectId}/>
+                        )}
+                    </div>
+                )
+            }
+
+            {
+                !disableFields?.screen && theatre && (
+                    <ScreenHookFormSelect
+                        control={control}
+                        name="screen"
+                        label="Screen"
+                        filters={{theatre}}
+                        description="The screen on which the movie will be shown."
                     />
-
-                    {theatre && (
-                        <TheatreQuickOverviewFetchCard theatreID={theatre as ObjectId}/>
-                    )}
-                </div>
-            )}
-
-            {/* Screen Selection (Conditional on Theatre) */}
-            {activeFields.screen && theatre && (
-                <ScreenHookFormSelect
-                    control={form.control}
-                    name="screen"
-                    label="Screen"
-                    filters={{theatre}}
-                    description="The screen on which the movie will be shown."
-                />
-            )}
+                )
+            }
         </fieldset>
     );
 }

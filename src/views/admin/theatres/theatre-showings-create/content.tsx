@@ -8,8 +8,8 @@ import {TheatreShowingCreateHeader}
     from "@/views/admin/theatres/theatre-showings-create/header.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {
-    ShowingSubmitFormContainer
-} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitFormContainer.tsx";
+    ShowingSubmitForm
+} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitForm.tsx";
 import {ReactElement} from "react";
 
 import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
@@ -46,7 +46,7 @@ export function TheatreShowingCreatePageContent(
 
             <Card>
                 <CardContent className="p-3">
-                    <ShowingSubmitFormContainer
+                    <ShowingSubmitForm
                         onSubmitSuccess={onSubmit}
                         presetValues={{theatre: theatreID}}
                         disableFields={["theatre"]}
