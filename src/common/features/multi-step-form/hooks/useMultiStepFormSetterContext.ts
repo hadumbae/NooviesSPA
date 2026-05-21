@@ -3,7 +3,6 @@
  */
 
 import {useContext} from "react";
-import {FieldValues} from "react-hook-form";
 import {
     MultiStepFormSetterContext,
     MultiStepFormSetterContextValues
@@ -13,7 +12,7 @@ import {
  * Accesses the multi-step form setter context.
  * - Must be used within a MultiStepFormSetterContext provider.
  */
-export function useMultiStepFormSetterContext<TValues extends FieldValues, TForm extends FieldValues = TValues>(): MultiStepFormSetterContextValues<TValues, TForm> {
+export function useMultiStepFormSetterContext(): MultiStepFormSetterContextValues {
     const ctx = useContext(MultiStepFormSetterContext);
 
     if (ctx === undefined) {

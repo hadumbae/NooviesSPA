@@ -7,8 +7,7 @@ import { createContext } from "react";
 import {FormStepMeta} from "@/common/features/multi-step-form";
 
 /** Values provided by the multi-step form state context. */
-export type MultiStepFormStateContextValues<TValues extends FieldValues> = {
-  initialValues:  TValues | null;
+export type MultiStepFormStateContextValues<TValues extends FieldValues = any> = {
   isHydrated: boolean;
   currentStepIndex: number;
   stepMeta: FormStepMeta<TValues>[];
@@ -16,5 +15,5 @@ export type MultiStepFormStateContextValues<TValues extends FieldValues> = {
 
 /** Context for accessing the current state and configuration of a multi-step form. */
 export const MultiStepFormStateContext = createContext<
-  MultiStepFormStateContextValues<any> | undefined
+  MultiStepFormStateContextValues | undefined
 >(undefined);

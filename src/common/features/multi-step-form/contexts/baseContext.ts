@@ -8,8 +8,8 @@ import {FieldValues, SubmitHandler} from "react-hook-form";
 /** Core values for the multi-step form context. */
 export type BaseMultiStepFormContextValues<TForm extends FieldValues = any> = {
     formID: string;
-    isPending?: boolean;
     localStorageKey: string;
+    isPending?: boolean;
     submitHandler?: SubmitHandler<TForm>;
 };
 

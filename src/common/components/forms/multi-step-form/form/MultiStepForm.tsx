@@ -2,19 +2,20 @@
  * @fileoverview Multi-step form component for managing complex form flows with persistence.
  */
 
-import {ReactElement, ReactNode, useEffect, useState} from "react";
+import {ReactElement, ReactNode, useEffect, useRef, useState} from "react";
 import {FormStepMeta} from "@/common/features/multi-step-form/types.ts";
-import {DeepPartial, FieldValues, useFormContext} from "react-hook-form";
+import {DeepPartial, FieldValues, Path, useFormContext} from "react-hook-form";
 import {
     MultiStepFormStateContext,
     MultiStepFormStateContextValues
 } from "@/common/features/multi-step-form/contexts/stateContext.ts";
-import useDebouncedCallback from "@/common/hooks/useDebouncedCallback.tsx";
+import {useDebouncedCallback} from "@/common/hooks/useDebouncedCallback.tsx";
 import {useBaseMultiStepFormContext} from "@/common/features/multi-step-form";
 import {
     MultiStepFormSetterContext,
     MultiStepFormSetterContextValues
 } from "@/common/features/multi-step-form/contexts/setterContext.ts";
+import {toast} from "react-toastify";
 
 /** Props for the MultiStepForm component. */
 type FormProps<TValues extends FieldValues> = {
@@ -28,16 +29,16 @@ type FormProps<TValues extends FieldValues> = {
 export function MultiStepForm<TValues extends FieldValues, TForm extends FieldValues = TValues>(
     {children, stepMeta}: FormProps<TValues>
 ): ReactElement {
-    const {localStorageKey} = useBaseMultiStepFormContext<TForm>();
-    const {trigger, reset, watch, formState} = useFormContext<TValues>();
+    const {localStorageKey} = useBaseMultiStepFormContext<TValues, TForm>();
+    const {trigger, reset, watch, formState, setValue} = useFormContext<TValues>();
 
     // --- State ---
 
     const [isHydrated, setIsHydrated] = useState<boolean>(false);
     const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
 
+    const initialValues = useRef<TValues>(formState.defaultValues as TValues);
     const currentStep = stepMeta[currentStepIndex];
-    const initialValues = formState.defaultValues as TValues;
 
     // --- Hydrate From Local Storage ---
 
@@ -46,20 +47,21 @@ export function MultiStepForm<TValues extends FieldValues, TForm extends FieldVa
             const saved = localStorage.getItem(localStorageKey);
 
             if (saved) {
-                const parsed = JSON.parse(saved);
-                reset(parsed);
+                const parsed = JSON.parse(saved) as DeepPartial<TValues>;
+                Object.entries(parsed).forEach(([key, value]) => setValue(key as Path<TValues>, value));
             }
-
-            setIsHydrated(true);
         } catch (error: unknown) {
-            reset();
+            toast.warning("Invalid Form Values");
+            reset(initialValues.current);
+        } finally {
+            setIsHydrated(true);
         }
-    }, [reset, currentStepIndex]);
+    }, []);
 
     // --- Persist Values On Change ---
 
     const debouncedWatch = useDebouncedCallback((values: DeepPartial<TValues>) => {
-        localStorage.setItem(localStorageKey, JSON.stringify(values[0]));
+        localStorage.setItem(localStorageKey, JSON.stringify(values));
     });
 
     useEffect(() => {
@@ -84,7 +86,8 @@ export function MultiStepForm<TValues extends FieldValues, TForm extends FieldVa
     }
 
     const resetForm = () => {
-        reset(initialValues);
+        reset(initialValues.current);
+        localStorage.removeItem(localStorageKey);
         setCurrentStepIndex(0);
     }
 
@@ -92,12 +95,11 @@ export function MultiStepForm<TValues extends FieldValues, TForm extends FieldVa
 
     const stateValues: MultiStepFormStateContextValues<TValues> = {
         stepMeta,
-        initialValues,
         isHydrated,
         currentStepIndex,
     };
 
-    const setterValues: MultiStepFormSetterContextValues<TValues> = {
+    const setterValues: MultiStepFormSetterContextValues = {
         isFirstStep,
         isLastStep,
         changeStep,

@@ -11,7 +11,7 @@
 import {Context, useContext, useEffect} from "react";
 import {FormContextValues} from "@/common/type/context/FormContextValues.ts";
 import {FieldValues, UseFormReturn} from "react-hook-form";
-import useDebouncedCallback from "@/common/hooks/useDebouncedCallback.tsx";
+import {useDebouncedCallback} from "@/common/hooks/useDebouncedCallback.tsx";
 
 /**
  * Parameters for {@link useSyncFormContextCurrentValues}.
