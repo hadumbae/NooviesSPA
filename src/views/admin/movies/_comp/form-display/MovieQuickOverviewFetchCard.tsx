@@ -42,7 +42,7 @@ export function MovieQuickOverviewFetchCard(
                             <section>
                                 <MoviePosterImageDialog
                                     url={posterURL}
-                                    className="w-16"
+                                    className="w-16 aspect-[2/3]"
                                 />
                             </section>
 
