@@ -31,12 +31,10 @@ export function ShowingIndexListCard(
     } = showing;
 
     const {
-        movieTitle,
-        screenName,
-        theatreName,
-        releaseYear,
-        dateString,
-        languageString,
+        movie: {title: movieTitle},
+        screen: {name: screenName},
+        theatre: {name: theatreName},
+        formatted: {releaseYear, dateString, languageString},
     } = formatShowingDetails(showing);
 
     return (
@@ -66,8 +64,8 @@ export function ShowingIndexListCard(
 
                 <div className="flex justify-between items-center">
                     <div className="space-x-2">
-                        <ShowingStatusBadge status={status} />
-                        <ShowingIsActiveBadge isActive={isActive} />
+                        <ShowingStatusBadge status={status}/>
+                        <ShowingIsActiveBadge isActive={isActive}/>
                     </div>
 
                     <LucideIconText

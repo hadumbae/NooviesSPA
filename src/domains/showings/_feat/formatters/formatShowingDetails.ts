@@ -16,7 +16,6 @@ import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSc
  */
 export function formatShowingDetails(showing: ShowingDetails) {
     const {
-        screen,
         movie,
         startTime,
         endTime,
@@ -26,46 +25,34 @@ export function formatShowingDetails(showing: ShowingDetails) {
         status,
     } = showing;
 
-    // --- Movie details ---
-    const {title: movieTitle, releaseDate, genres, runtime} = movie;
+    const {releaseDate, genres, runtime} = movie;
     const releaseYear = releaseDate?.toFormat("yyyy") ?? "Unreleased";
     const runtimeString = formatMovieRuntime(runtime);
     const genreString = genres.map(({name}) => name).join(" • ");
 
-    // --- Theatre details ---
-    const {name: theatreName, location} = theatre;
+    const {location} = theatre;
     const {address, timezone} = formatLocationDetails(location);
 
-    // --- Screen details ---
-    const {name: screenName, screenType} = screen;
-
-    // --- Showing-specific formatting ---
     const audioLanguageString = ISO6391LanguageConstant[language];
-    const subtitleString = subtitleLanguages.length
-        ? subtitleLanguages.join(", ").toUpperCase()
-        : "None";
+    const subtitleString = subtitleLanguages.length ? subtitleLanguages.join(", ").toUpperCase() : "None";
     const languageString = `${audioLanguageString} · SUB : ${subtitleString}`;
 
     const formattedStatus = convertToTitleCase(status);
     const dateString = buildShowingDateString({start: startTime, end: endTime, timezone});
 
     return {
-        dateString,
-        timezone,
-        audioLanguageString,
-        subtitleString,
-        languageString,
-        formattedStatus,
-
-        movieTitle,
-        releaseYear,
-        genreString,
-        runtimeString,
-
-        theatreName,
-        address,
-
-        screenName,
-        screenType,
+        ...showing,
+        formatted: {
+            dateString,
+            audioLanguageString,
+            subtitleString,
+            languageString,
+            formattedStatus,
+            releaseYear,
+            genreString,
+            runtimeString,
+            timezone,
+            address,
+        }
     };
 }

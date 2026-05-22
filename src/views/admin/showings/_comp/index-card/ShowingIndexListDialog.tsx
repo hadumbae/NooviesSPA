@@ -43,14 +43,15 @@ export function ShowingIndexListDialog(
     const {location: {country}} = theatre;
 
     const {
-        movieTitle,
-        theatreName,
-        screenName,
-        screenType,
-        dateString,
-        releaseYear,
-        audioLanguageString,
-        subtitleString,
+        movie: {title: movieTitle},
+        theatre: {name: theatreName},
+        screen: {name: screenName, screenType},
+        formatted: {
+            dateString,
+            releaseYear,
+            audioLanguageString,
+            subtitleString,
+        }
     } = formatShowingDetails(showing);
 
     return (
@@ -63,7 +64,7 @@ export function ShowingIndexListDialog(
                 <DialogHeader>
                     <DialogTitle className={PrimaryTextBaseCSS}>{movieTitle} ({releaseYear})</DialogTitle>
                     <DialogDescription className="hidden">Data</DialogDescription>
-                    <ShowingStateBadges status={status} isActive={isActive} isSpecialEvent={isSpecialEvent} />
+                    <ShowingStateBadges status={status} isActive={isActive} isSpecialEvent={isSpecialEvent}/>
                 </DialogHeader>
 
                 <ShowingMovieSummary
