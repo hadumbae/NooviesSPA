@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Modal dialog for viewing expanded movie showing details in the admin dashboard.
+ */
+
 import {
     Dialog,
     DialogContent,
@@ -6,23 +10,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/common/components/ui/dialog.tsx";
-import ShowingIndexListCard from "@/views/admin/showings/_comp/index-card/ShowingIndexListCard.tsx";
-import {
-    formatShowingDetails
-} from "@/domains/showings/_feat/formatters/formatShowingDetails.ts";
-import LucideIconText from "@/common/components/card-content/LucideIconText.tsx";
-import {
-    BadgeAlert,
-    Captions,
-    Circle,
-    Clock,
-    Cog,
-    Headphones,
-    Landmark,
-    Presentation,
-    Search,
-    Ticket,
-} from "lucide-react";
+import {ShowingIndexListCard} from "@/views/admin/showings/_comp/index-card/ShowingIndexListCard.tsx";
+import {formatShowingDetails} from "@/domains/showings/_feat/formatters/formatShowingDetails.ts";
+import {LucideIconText} from "@/common/components/card-content/LucideIconText.tsx";
+import {Captions, Clock, Headphones, Landmark, Presentation, Search, Ticket,} from "lucide-react";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
@@ -30,54 +21,26 @@ import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import CollapsibleTextblock from "@/common/components/text/CollapsibleTextblock.tsx";
 import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
-import {
-    HeaderTextCSS,
-    PrimaryTextBaseCSS,
-    SecondaryTextBaseCSS,
-    SubheaderTextCSS
-} from "@/common/constants/css/TextCSS.ts";
+import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
+import {ReactElement} from "react";
+import {ShowingMovieSummary} from "@/views/admin/movies/_comp/showing-movie-summary";
+import {ShowingStateBadges} from "@/views/admin/showings/_comp/showing-state-badges";
 
-/**
- * Props for the {@link ShowingIndexListDialog} component.
- *
- * @property showing - The full showing details object containing movie, theatre,
- * and scheduling information.
- */
+/** Props for the ShowingIndexListDialog component. */
 type ShowingIndexListDialogProps = {
     showing: ShowingDetails;
 };
 
 /**
- * **ShowingIndexListDialog**
- *
- * Displays a modal dialog containing expanded details for a single movie showing.
- * Triggered by clicking a {@link ShowingIndexListCard}, this dialog provides
- * movie metadata, theatre details, runtime, audio/subtitle info, and ticket pricing.
- *
- * @description
- * This component enhances the admin showings index by allowing quick inspection
- * of a showing’s details without leaving the page.
- *
- * **Displayed sections include:**
- * - **Movie Summary:** Poster, title, year, genre, runtime
- * - **Showing Details:** Theatre, screen, schedule, and type
- * - **Audio/Subtitles:** Language and caption information
- * - **Synopsis:** Expandable textblock for the movie description
- * - **Navigation:** A button to view the full admin detail page
- *
- * @example
- * ```tsx
- * <ShowingIndexListDialog showing={showingData} />
- * ```
+ * Displays a modal containing metadata, scheduling, and pricing for a specific movie showing.
  */
-const ShowingIndexListDialog = ({showing}: ShowingIndexListDialogProps) => {
-    const {movie, theatre, ticketPrice, slug, config: {isSpecialEvent, isActive}} = showing;
-    const {posterImage, synopsis} = movie;
-    const {
-        location: {country},
-    } = theatre;
+export function ShowingIndexListDialog(
+    {showing}: ShowingIndexListDialogProps
+): ReactElement {
+    const {status, movie, theatre, ticketPrice, slug, config: {isSpecialEvent, isActive}} = showing;
+    const {synopsis, slug: movieSlug} = movie;
+    const {location: {country}} = theatre;
 
     const {
         movieTitle,
@@ -85,38 +48,10 @@ const ShowingIndexListDialog = ({showing}: ShowingIndexListDialogProps) => {
         screenName,
         screenType,
         dateString,
-        runtimeString,
         releaseYear,
-        formattedStatus,
-        genreString,
         audioLanguageString,
         subtitleString,
     } = formatShowingDetails(showing);
-
-    /** Renders the showing status section under the dialog title. */
-    const descSection = (
-        <section className={cn(
-            SecondaryTextBaseCSS,
-            "flex max-sm:justify-center items-center space-x-3",
-        )}>
-            <LucideIconText
-                icon={Cog}
-                text={formattedStatus}
-            />
-
-            <LucideIconText
-                icon={Circle}
-                className={isActive ? "text-green-500" : "text-red-500"}
-                text={isActive ? "Active" : "Inactive"}
-            />
-
-            <LucideIconText
-                icon={BadgeAlert}
-                className={isSpecialEvent ? "text-green-500" : ""}
-                text={isSpecialEvent ? "Special Event" : "Regular Event"}
-            />
-        </section>
-    );
 
     return (
         <Dialog>
@@ -128,33 +63,20 @@ const ShowingIndexListDialog = ({showing}: ShowingIndexListDialogProps) => {
                 <DialogHeader>
                     <DialogTitle className={PrimaryTextBaseCSS}>{movieTitle} ({releaseYear})</DialogTitle>
                     <DialogDescription className="hidden">Data</DialogDescription>
-                    {descSection}
+                    <ShowingStateBadges status={status} isActive={isActive} isSpecialEvent={isSpecialEvent} />
                 </DialogHeader>
 
-                {/* Movie header section */}
-                <section className="flex items-center gap-4">
-                    <SectionHeader srOnly={true}>Movie Details</SectionHeader>
-
-                    <MoviePosterImageDialog
-                        className="w-14 xl:w-14"
-                        url={posterImage?.secure_url}
-                        disableDialog={true}
-                    />
-
-                    <div className="flex flex-col gap-1">
-                        <h1 className={cn(HeaderTextCSS)}>{movieTitle}</h1>
-                        <h2 className={cn(SubheaderTextCSS, "text-sm")}>{releaseYear} • {runtimeString}</h2>
-                        <h3 className={cn(SubheaderTextCSS, "text-xs")}>{genreString}</h3>
-                    </div>
-                </section>
+                <ShowingMovieSummary
+                    movie={movie}
+                    to={`/admin/movies/get/${movieSlug}`}
+                />
 
                 <Separator/>
 
-                {/* Showing details */}
                 <section className="grid grid-cols-1 gap-4">
                     <SectionHeader srOnly={true}>Showing Details</SectionHeader>
 
-                    <div className="grid grid-cols-2 gap-1">
+                    <div className="grid grid-cols-2 gap-2">
                         <LucideIconText
                             className={cn(PrimaryTextBaseCSS, "col-span-2")}
                             icon={Clock}
@@ -197,17 +119,13 @@ const ShowingIndexListDialog = ({showing}: ShowingIndexListDialogProps) => {
 
                 <Separator/>
 
-                {/* Movie synopsis */}
-                <section>
-                    <CollapsibleTextblock
-                        text={synopsis}
-                        className="text-neutral-400 text-sm"
-                        openText="About The Movie"
-                        closeText="Close Movie Synopsis"
-                    />
-                </section>
+                <CollapsibleTextblock
+                    text={synopsis}
+                    className="text-neutral-400 text-sm"
+                    openText="About The Movie"
+                    closeText="Close Movie Synopsis"
+                />
 
-                {/* Navigation link */}
                 <LoggedAnchor
                     href={`/admin/showings/get/${slug}`}
                     target="_blank"
@@ -218,6 +136,4 @@ const ShowingIndexListDialog = ({showing}: ShowingIndexListDialogProps) => {
             </DialogContent>
         </Dialog>
     );
-};
-
-export default ShowingIndexListDialog;
+}

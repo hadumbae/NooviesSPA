@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import ShowingIndexPageContent from "@/views/admin/showings/index-page/ShowingIndexPageContent.tsx";
+import {ShowingIndexPageContent} from "@/views/admin/showings/index-page/content.tsx";
 import {useFetchPaginatedShowings} from "@/domains/showings/_feat/crud-hooks/useFetchPaginatedShowings.ts";
 import {useParsedSearchParams} from "@/common/features/fetch-search-params";
 import useParsedPaginationValue

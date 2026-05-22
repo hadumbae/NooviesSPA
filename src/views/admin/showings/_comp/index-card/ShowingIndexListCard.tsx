@@ -1,43 +1,34 @@
-import {FC} from "react";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {
-    formatShowingDetails
-} from "@/domains/showings/_feat/formatters/formatShowingDetails.ts";
-import {Circle, Cog, DollarSign, Star} from "lucide-react";
-import LucideIconText from "@/common/components/card-content/LucideIconText.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-
 /**
- * Props for the {@link ShowingIndexListCard} component.
- *
- * @property showing - The full showing details to display, including movie, theatre, and timing info.
+ * @fileoverview Card component for displaying movie showing summaries in the admin dashboard.
  */
+
+import {ReactElement} from "react";
+import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
+import {formatShowingDetails} from "@/domains/showings/_feat/formatters/formatShowingDetails.ts";
+import {DollarSign, Star} from "lucide-react";
+import {LucideIconText} from "@/common/components/card-content/LucideIconText.tsx";
+import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
+import {ShowingIsActiveBadge, ShowingStatusBadge} from "@/views/admin/showings/_comp/badges";
+
+/** Props for the ShowingIndexListCard component. */
 type ShowingIndexListCardProps = {
     showing: ShowingDetails;
 };
 
 /**
- * **ShowingIndexListCard**
- *
- * Displays a summary card for a movie showing in the admin Showings index page.
- *
- * @description
- * The card presents concise showing details such as:
- * - Movie title and release year
- * - Theatre and screen names
- * - Showing schedule and language information
- * - Ticket price and operational status
- *
- * Special events are indicated by a green star icon.
- *
- * @example
- * ```tsx
- * <ShowingIndexListCard showing={showingData} />
- * ```
+ * Displays a summary card for a movie showing including theatre, timing, and status information.
  */
-const ShowingIndexListCard: FC<ShowingIndexListCardProps> = ({showing}) => {
-    const {ticketPrice, config: {isSpecialEvent, isActive}} = showing;
+export function ShowingIndexListCard(
+    {showing}: ShowingIndexListCardProps
+): ReactElement {
+    const {
+        status,
+        ticketPrice,
+        config: {isSpecialEvent, isActive},
+        movie: {posterImage},
+        theatre: {location: {country}},
+    } = showing;
 
     const {
         movieTitle,
@@ -46,58 +37,46 @@ const ShowingIndexListCard: FC<ShowingIndexListCardProps> = ({showing}) => {
         releaseYear,
         dateString,
         languageString,
-        formattedStatus,
     } = formatShowingDetails(showing);
 
     return (
         <Card>
+            <CardHeader className='p-0'>
+                <MoviePosterImage
+                    url={posterImage?.secure_url}
+                    className="rounded-b-none h-52"
+                />
+            </CardHeader>
             <CardContent className="p-4 flex flex-col space-y-4">
-                {/* Header: Movie title and theatre info */}
-                <section className="space-y-1 justify-start">
+                <div className="space-y-1 justify-start">
                     <div className="flex justify-between items-center">
-                        <h1 className="font-extrabold">
-                            {movieTitle} ({releaseYear})
-                        </h1>
+                        <h1 className="text-xl font-extrabold">{movieTitle} ({releaseYear})</h1>
                         {isSpecialEvent && <Star className="text-green-500" size={20}/>}
                     </div>
 
-                    <h2 className="text-sm text-neutral-600 text-left">
-                        {screenName} | {theatreName}
+                    <h2 className="text-sm font-bold text-neutral-600 text-left">
+                        {screenName} • {theatreName} • {country}
                     </h2>
-                </section>
+                </div>
 
-                {/* Schedule and language */}
-                <section className="flex justify-between items-center">
-                    <h3 className="text-xs text-neutral-400">{dateString}</h3>
-                    <h3 className="text-xs text-neutral-400">{languageString}</h3>
-                </section>
+                <div className="flex justify-between items-center">
+                    <h3 className="text-sm font-bold text-neutral-400">{dateString}</h3>
+                    <h3 className="text-sm font-bold text-neutral-400">{languageString}</h3>
+                </div>
 
-                {/* Status and meta info */}
-                <section className="flex justify-center space-x-5">
+                <div className="flex justify-between items-center">
+                    <div className="space-x-2">
+                        <ShowingStatusBadge status={status} />
+                        <ShowingIsActiveBadge isActive={isActive} />
+                    </div>
+
                     <LucideIconText
                         icon={DollarSign}
-                        text={ticketPrice.toString()}
+                        text={ticketPrice?.toString() ?? "Unpriced"}
                         className="text-neutral-400 text-sm"
                     />
-
-                    <LucideIconText
-                        icon={Cog}
-                        text={formattedStatus}
-                        className="text-neutral-400 text-sm"
-                    />
-
-                    <LucideIconText
-                        icon={Circle}
-                        text={isActive ? "Active" : "Inactive"}
-                        className={cn(
-                            "text-neutral-400 text-sm",
-                            isActive ? "text-green-500" : "text-red-500"
-                        )}
-                    />
-                </section>
+                </div>
             </CardContent>
         </Card>
     );
-};
-
-export default ShowingIndexListCard;
+}

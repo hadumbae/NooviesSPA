@@ -15,7 +15,7 @@
  * {@link ComponentErrorHandler} for route-level error handling.
  */
 
-import {ShowingIndexPage} from "@/views/admin/showings/index-page/ShowingIndexPage.tsx";
+import {ShowingIndexPage} from "@/views/admin/showings/index-page/page.tsx";
 import ShowingCreatePage from "@/views/admin/showings/create-page/ShowingCreatePage.tsx";
 import {ShowingEditPage} from "@/views/admin/showings/edit-page/ShowingEditPage.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
