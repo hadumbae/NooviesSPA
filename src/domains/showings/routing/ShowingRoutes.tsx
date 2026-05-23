@@ -20,7 +20,7 @@ import ShowingCreatePage from "@/views/admin/showings/create-page/ShowingCreateP
 import {ShowingEditPage} from "@/views/admin/showings/edit-page/ShowingEditPage.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import {RouteObject} from "react-router-dom";
-import ShowingDetailsPage from "@/views/admin/showings/details-page/page/ShowingDetailsPage.tsx";
+import {ShowingDetailsPage} from "@/views/admin/showings/details-page/page.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
 
 /**

@@ -3,7 +3,9 @@
  */
 
 import formatLocationDetails from "@/common/utility/features/location/formatLocationDetails.ts";
-import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
+import {
+    ISO6391LanguageLabels as ISO6391LanguageConstant
+} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {
     buildShowingDateString

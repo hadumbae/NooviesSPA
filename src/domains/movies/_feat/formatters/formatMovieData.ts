@@ -1,7 +1,9 @@
 /** @fileoverview Utility for deriving UI-ready display strings and formatted fields from Movie models. */
 
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
-import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
+import {
+    ISO6391LanguageLabels as ISO6391LanguageConstant
+} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MovieWithGenres} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
 import {MovieWithRating} from "@/domains/movies/schema/movie/MovieWithRatingSchema.ts";

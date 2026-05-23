@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Admin summary card component for displaying high-level theatre information.
+ */
+
 import { Card, CardContent } from "@/common/components/ui/card.tsx";
 import buildString from "@/common/utility/buildString.ts";
 import ISO3166Alpha2ShortCountryConstant from "@/common/constants/country/ISO3166Alpha2ShortCountryConstant.ts";
@@ -12,22 +16,17 @@ import { SecondaryTextBaseCSS } from "@/common/constants/css/TextCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {ReactElement} from "react";
 
+/** Props for the TheatreSummaryCard component. */
 type CardProps = {
-    /** Fully populated theatre details */
     theatre: TheatreDetails;
 };
 
 /**
- * Admin summary card displaying high-level theatre information.
- *
- * @remarks
- * - Shows theatre name and formatted address.
- * - Displays derived counts (screens, seats, future showings).
- * - Provides a quick navigation action to the theatre detail page.
+ * Admin summary card displaying high-level theatre information and navigation to details.
  */
-const TheatreSummaryCard = ({ theatre }: CardProps) => {
-    // --- Theatre ---
+export function TheatreSummaryCard({ theatre }: CardProps): ReactElement {
     const {
         name,
         seatCount,
@@ -37,7 +36,6 @@ const TheatreSummaryCard = ({ theatre }: CardProps) => {
         slug,
     } = theatre;
 
-    // --- Navigation ---
     const navigate = useLoggedNavigate();
 
     const navigateToTheatre = () => {
@@ -49,13 +47,11 @@ const TheatreSummaryCard = ({ theatre }: CardProps) => {
         });
     };
 
-    // --- Formatted Strings ---
     const formattedAddress = buildString(
         [street, city, ISO3166Alpha2ShortCountryConstant[country]],
         ", "
     );
 
-    // --- Render ---
     return (
         <Card>
             <CardContent className="px-5 py-3 space-y-4">
@@ -99,6 +95,4 @@ const TheatreSummaryCard = ({ theatre }: CardProps) => {
             </CardContent>
         </Card>
     );
-};
-
-export default TheatreSummaryCard;
+}

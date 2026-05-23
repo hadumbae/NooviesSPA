@@ -26,7 +26,9 @@
 import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
 import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
 import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
-import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
+import {
+    ISO6391LanguageLabels as ISO6391LanguageConstant
+} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
 import ISO6391CodeConstant from "@/common/constants/languages/ISO6391CodeConstant.ts";
 import {FieldValues} from "react-hook-form";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";

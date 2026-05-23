@@ -1,0 +1,24 @@
+/**
+ * @fileoverview Repository for fetching composite view data for the showing administration interface.
+ */
+
+import {
+    GetFetchShowingDetailsViewDataConfig
+} from "@/views/admin/showings/_feat/admin-view-data/repository/repository.types.ts";
+import {ShowingDetailsViewData} from "@/views/admin/showings/_feat/admin-view-data/schema";
+import {buildURL} from "@/common/features/fetch-api";
+import {ShowingAdminViewDataBaseURL} from "@/views/admin/showings/_feat/admin-view-data/repository/baseURL.ts";
+import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+
+/** Fetches detailed view data for a specific showing by its slug. */
+export async function getFetchShowingDetailsViewData(
+    {slug}: GetFetchShowingDetailsViewDataConfig
+): Promise<RequestReturns<ShowingDetailsViewData>> {
+    const url = buildURL({
+        baseURL: ShowingAdminViewDataBaseURL,
+        path: `/item/${slug}/details`,
+    });
+
+    return useFetchAPI({url, method: "GET"});
+}

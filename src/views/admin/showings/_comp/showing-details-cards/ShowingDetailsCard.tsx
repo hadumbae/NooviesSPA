@@ -17,10 +17,14 @@
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
-import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
+import {
+    ISO6391LanguageLabels as ISO6391LanguageConstant
+} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
 import {ISO6391LanguageCode} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {Showing} from "@/domains/showings/schema/showing";
+import {ReactElement} from "react";
 
 /**
  * Props for {@link ShowingDetailsCard}.
@@ -29,7 +33,7 @@ type CardProps = {
     /**
      * Fully-resolved showing details to display.
      */
-    showing: ShowingDetails;
+    showing: Showing;
 };
 
 /**
@@ -45,12 +49,8 @@ type CardProps = {
  * @returns
  * A card displaying formatted showing information.
  */
-const ShowingDetailsCard = ({showing}: CardProps) => {
-    // --- Showing Details ---
+export function ShowingDetailsCard({showing}: CardProps): ReactElement {
     const {
-        movie,
-        screen,
-        theatre,
         startTime,
         endTime,
         ticketPrice,
@@ -59,40 +59,20 @@ const ShowingDetailsCard = ({showing}: CardProps) => {
         config: {isActive, isSpecialEvent}
     } = showing;
 
-    // --- Date And Time ---
     const formattedStartTime = startTime.toFormat("dd MMM, yyyy hh:mm");
     const formattedEndTime = endTime
         ? endTime.toFormat("dd MMM, yyyy hh:mm")
         : "Unspecified";
 
-    // --- Languages ---
     const formattedLanguage = ISO6391LanguageConstant[language];
     const formattedSubtitles =
         subtitleLanguages
             .map((sub: ISO6391LanguageCode) => ISO6391LanguageConstant[sub])
             .join(", ") || "None";
 
-    // --- References ---
-    const {_id: movieID, title: movieTitle} = movie;
-    const {_id: screenID, name: screenName} = screen;
-    const {name: theatreName, slug: theatreSlug} = theatre;
-
     return (
         <Card>
             <CardContent className="p-4 flex flex-col space-y-6">
-                <section className="flex justify-between items-center flex-wrap">
-                    <SectionHeader srOnly>Showing Movie Details</SectionHeader>
-                    <DetailsCardSpan label="Movie" text={movieTitle} to={`/admin/movies/get/${movieID}`}/>
-                </section>
-
-                <section>
-                    <SectionHeader srOnly>Showing Theatre Details</SectionHeader>
-                    <div className="flex space-x-5 items-center">
-                        <DetailsCardSpan label="Screen" text={screenName} to={`/admin/screens/get/${screenID}`}/>
-                        <DetailsCardSpan label="Theatre" text={theatreName} to={`/admin/theatres/get/${theatreSlug}`}/>
-                    </div>
-                </section>
-
                 <section className="grid grid-cols-2 gap-2">
                     <SectionHeader srOnly>Showing Date & Time</SectionHeader>
                     <DetailsCardSpan label="Start Time" text={formattedStartTime}/>
@@ -116,6 +96,4 @@ const ShowingDetailsCard = ({showing}: CardProps) => {
             </CardContent>
         </Card>
     );
-};
-
-export default ShowingDetailsCard;
+}

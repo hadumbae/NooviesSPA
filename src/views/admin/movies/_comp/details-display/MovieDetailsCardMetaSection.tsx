@@ -7,7 +7,9 @@ import LabelContent from "@/common/components/card-content/LabelContent.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie";
 import BadgeListLabel from "@/common/components/card-content/BadgeListLabel.tsx";
-import ISO6391LanguageConstant from "@/common/constants/languages/ISO6391LanguageConstant.ts";
+import {
+    ISO6391LanguageLabels as ISO6391LanguageConstant
+} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
 import {Genre} from "@/domains/genres/schema";

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Admin summary card displaying high-level screen information.
+ */
+
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
@@ -10,22 +14,17 @@ import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {ReactElement} from "react";
 
+/** Props for the ScreenSummaryCard component. */
 type CardProps = {
-    /** Fully populated screen details */
     screen: TheatreScreenDetails;
 };
 
 /**
  * Admin summary card displaying high-level screen information.
- *
- * @remarks
- * - Shows screen name and type.
- * - Displays capacity, seat usage, and upcoming showings.
- * - Provides a quick navigation action to the screen detail page.
- * - Includes screen-reader-only section headers for accessibility.
  */
-const ScreenSummaryCard = ({screen}: CardProps) => {
+export function ScreenSummaryCard({screen}: CardProps): ReactElement {
     const {
         name,
         screenType,
@@ -36,7 +35,6 @@ const ScreenSummaryCard = ({screen}: CardProps) => {
         theatre: {slug: theatreSlug, name: theatreName},
     } = screen;
 
-    // --- Navigation ---
     const navigate = useLoggedNavigate();
 
     const navigateToScreen = () => {
@@ -48,10 +46,8 @@ const ScreenSummaryCard = ({screen}: CardProps) => {
         });
     };
 
-    // --- Formatted Strings ---
     const formattedCapacity = buildString([seatCount, capacity], "/");
 
-    // --- Render ---
     return (
         <Card>
             <CardContent className="px-5 py-3 space-y-4">
@@ -101,6 +97,4 @@ const ScreenSummaryCard = ({screen}: CardProps) => {
             </CardContent>
         </Card>
     );
-};
-
-export default ScreenSummaryCard;
+}

@@ -9,7 +9,7 @@ import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 type DateParams = {
     start: DateTime;
     end: DateTime | undefined | null;
-    timezone: IANATimezone;
+    timezone?: IANATimezone;
 };
 
 /**
