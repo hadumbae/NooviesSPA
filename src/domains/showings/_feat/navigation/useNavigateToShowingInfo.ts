@@ -9,7 +9,7 @@ import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 /** Configuration for the showing navigation action. */
 type NavConfig = LoggingMessageParams & {
     slug: SlugString;
-    options: NavigateOptions,
+    options?: NavigateOptions,
 }
 
 /** Returns a function to navigate to a specific showing's client-side view. */

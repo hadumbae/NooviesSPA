@@ -9,7 +9,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 /** Configuration for the showing details navigation hook. */
 type NavConfig = LoggingMessageParams & {
     slug: ObjectId;
-    options: NavigateOptions,
+    options?: NavigateOptions,
 }
 
 /**
