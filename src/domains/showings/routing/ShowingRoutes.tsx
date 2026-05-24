@@ -1,37 +1,17 @@
 /**
- * @file showings.routes.tsx
- *
- * @summary
- * Admin routing configuration for Showing management.
- *
- * @description
- * Defines all admin-facing routes related to showings, including:
- * - Listing all showings
- * - Creating a new showing
- * - Viewing showing details
- * - Editing an existing showing
- *
- * All routes are nested under {@link BaseLayout} and use a shared
- * {@link ComponentErrorHandler} for route-level error handling.
+ * @fileoverview Defines the admin routing configuration for showing management.
  */
 
 import {ShowingIndexPage} from "@/views/admin/showings/index-page/page.tsx";
 import ShowingCreatePage from "@/views/admin/showings/create-page/ShowingCreatePage.tsx";
-import {ShowingEditPage} from "@/views/admin/showings/edit-page/ShowingEditPage.tsx";
+import {ShowingEditPage} from "@/views/admin/showings/edit-page/page.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import {RouteObject} from "react-router-dom";
 import {ShowingDetailsPage} from "@/views/admin/showings/details-page/page.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
 
-/**
- * Route definitions for admin showings.
- *
- * @remarks
- * - All routes are prefixed with `/admin/showings`
- * - Child routes inherit layout and navigation from {@link BaseLayout}
- * - Each route defines its own `errorElement` boundary
- */
-const routes: RouteObject[] = [
+/** Route definitions for showing administration pages. */
+export const ShowingRoutes: RouteObject[] = [
     {
         path: "/admin/showings",
         element: <AdminLayout/>,
@@ -60,4 +40,3 @@ const routes: RouteObject[] = [
     },
 ];
 
-export default routes;

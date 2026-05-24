@@ -62,7 +62,12 @@ export function ShowingSubmitForm(
     };
 
     return (
-        <BaseMultiStepFormContextProvider formID={formID} localStorageKey={localStorageKey}>
+        <BaseMultiStepFormContextProvider
+            formID={formID}
+            localStorageKey={localStorageKey}
+            storageType="session"
+            useStorage={!showing}
+        >
             <Form {...form}>
                 <form id={formID} onSubmit={form.handleSubmit(onFormSubmit)}>
                     {children}

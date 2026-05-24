@@ -1,9 +1,5 @@
 /**
- * Showing Edit Breadcrumbs
- *
- * Renders breadcrumb navigation for the “Edit Showing” admin view.
- * Includes navigation back to all showings, the selected showing’s
- * details page, and the current edit state.
+ * @fileoverview Breadcrumb navigation for the showing edit administrative view.
  */
 
 import {
@@ -17,20 +13,16 @@ import {
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import buildString from "@/common/utility/buildString.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ReactElement} from "react";
 
+/** Props for the ShowingEditBreadcrumbs component. */
 type BreadcrumbProps = {
-    /** Fully populated showing used to build breadcrumb labels and links */
     showing: ShowingDetails;
 };
 
-/**
- * Breadcrumb navigation component for editing a showing.
- *
- * @param props - Component props
- * @param props.showing - Populated showing details
- */
-const ShowingEditBreadcrumbs = ({showing}: BreadcrumbProps) => {
-    const {_id, startTime, movie: {title: movieTitle}} = showing;
+/** Breadcrumb navigation component for editing a showing. */
+export function ShowingEditBreadcrumbs({showing}: BreadcrumbProps): ReactElement {
+    const {slug, startTime, movie: {title: movieTitle}} = showing;
 
     const detailsLabel = buildString([
         movieTitle,
@@ -56,7 +48,7 @@ const ShowingEditBreadcrumbs = ({showing}: BreadcrumbProps) => {
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                         <LoggedHoverLink
-                            to={`/admin/showings/get/${_id}`}
+                            to={`/admin/showings/get/${slug}`}
                             component={ShowingEditBreadcrumbs.name}
                         >
                             {detailsLabel}
@@ -74,6 +66,4 @@ const ShowingEditBreadcrumbs = ({showing}: BreadcrumbProps) => {
             </BreadcrumbList>
         </Breadcrumb>
     );
-};
-
-export default ShowingEditBreadcrumbs;
+}

@@ -3,7 +3,7 @@ import AuthRoutes from "@/domains/auth/routing/AuthRoutes.tsx";
 import GenreRoutes from "@/domains/genres/routing/AdminGenreRoutes.tsx";
 import PersonRoutes from "@/domains/persons/routing/PersonRoutes.tsx";
 import SeatRoutes from "@/domains/seats/routing/SeatRoutes.tsx";
-import ShowingRoutes from "@/domains/showings/routing/ShowingRoutes.tsx";
+import {ShowingRoutes} from "@/domains/showings/routing/ShowingRoutes.tsx";
 import AdminMovieRoutes from "@/domains/movies/routing/AdminMovieRoutes.tsx";
 import SystemRoutes from "@/common/routing/SystemRoutes.tsx";
 import {RouteObject} from "react-router-dom";

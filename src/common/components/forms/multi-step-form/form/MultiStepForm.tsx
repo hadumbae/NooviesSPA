@@ -29,13 +29,18 @@ type FormProps<TValues extends FieldValues> = {
 export function MultiStepForm<TValues extends FieldValues, TForm extends FieldValues = TValues>(
     {children, stepMeta}: FormProps<TValues>
 ): ReactElement {
-    const {localStorageKey} = useBaseMultiStepFormContext<TValues, TForm>();
+    const {localStorageKey, useStorage = true, storageType = "local"} = useBaseMultiStepFormContext<TForm>();
     const {trigger, reset, watch, formState, setValue} = useFormContext<TValues>();
+
+    const storage = storageType === "session" ? sessionStorage : localStorage;
 
     // --- State ---
 
     const [isHydrated, setIsHydrated] = useState<boolean>(false);
     const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
+
+    const editKey = formState.defaultValues?._id ?? "new";
+    const activeKey = `${localStorageKey}-${editKey}`
 
     const initialValues = useRef<TValues>(formState.defaultValues as TValues);
     const currentStep = stepMeta[currentStepIndex];
@@ -44,9 +49,9 @@ export function MultiStepForm<TValues extends FieldValues, TForm extends FieldVa
 
     useEffect(() => {
         try {
-            const saved = localStorage.getItem(localStorageKey);
+            const saved = storage.getItem(activeKey);
 
-            if (saved) {
+            if (useStorage && saved) {
                 const parsed = JSON.parse(saved) as DeepPartial<TValues>;
                 Object.entries(parsed).forEach(([key, value]) => setValue(key as Path<TValues>, value));
             }
@@ -56,20 +61,20 @@ export function MultiStepForm<TValues extends FieldValues, TForm extends FieldVa
         } finally {
             setIsHydrated(true);
         }
-    }, []);
+    }, [storage]);
 
     // --- Persist Values On Change ---
 
     const debouncedWatch = useDebouncedCallback((values: DeepPartial<TValues>) => {
-        localStorage.setItem(localStorageKey, JSON.stringify(values));
+        storage.setItem(activeKey, JSON.stringify(values));
     });
 
     useEffect(() => {
-        if (!isHydrated) return;
+        if (!isHydrated || !useStorage) return;
 
         const subscription = watch((newValues) => debouncedWatch(newValues));
         return () => subscription.unsubscribe();
-    }, [watch, isHydrated, localStorageKey]);
+    }, [watch, isHydrated, activeKey]);
 
     // --- Helpers ---
 
@@ -87,7 +92,7 @@ export function MultiStepForm<TValues extends FieldValues, TForm extends FieldVa
 
     const resetForm = () => {
         reset(initialValues.current);
-        localStorage.removeItem(localStorageKey);
+        storage.removeItem(activeKey);
         setCurrentStepIndex(0);
     }
 
