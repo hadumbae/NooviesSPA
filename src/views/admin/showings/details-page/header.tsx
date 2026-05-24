@@ -5,14 +5,20 @@
 import {ReactElement} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {TableOfContents} from "lucide-react";
-import {useNavigate} from "react-router-dom";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Ellipsis} from "lucide-react";
 import {MovieTitle} from "@/domains/movies/schema/fields";
 import {DateTime} from "luxon";
+import {ShowingDetailsPageToggles} from "@/views/admin/showings/details-page/toggles.tsx";
+import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {ShowingDetailsUISetterContext} from "@/domains/showings/context";
+import {ShowingDetailsPageBreadcrumbs} from "@/views/admin/showings/details-page/breadcrumbs.tsx";
 
 /** Props for the ShowingDetailsHeader component. */
 type HeaderProps = {
+    showingSlug: SlugString;
+    showingStartTime: DateTime;
     movieTitle: MovieTitle;
     releaseDate?: DateTime | null;
     screenName: string;
@@ -23,26 +29,29 @@ type HeaderProps = {
  * Displays the movie title, release year, and location details for a specific showing.
  */
 export function ShowingDetailsHeader(
-    {movieTitle, releaseDate, screenName, theatreName}: HeaderProps
+    {showingSlug, showingStartTime, movieTitle, releaseDate, screenName, theatreName}: HeaderProps
 ): ReactElement {
-    const navigate = useNavigate();
-
     const formattedReleaseDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
-
-    const navigateToIndex = () => {
-        navigate("/admin/showings");
-    }
+    const {setIsDeleting} = useRequiredContext({context: ShowingDetailsUISetterContext});
 
     return (
-        <header className="flex justify-between items-center">
-            <div>
-                <HeaderTitle>{movieTitle} ({formattedReleaseDate})</HeaderTitle>
-                <HeaderDescription>Showing on {screenName} at {theatreName}.</HeaderDescription>
-            </div>
+        <header className="space-y-3">
+            <ShowingDetailsPageBreadcrumbs
+                movieTitle={movieTitle}
+                startTime={showingStartTime}
+            />
 
-            <Button variant="outline" className="p-2" onClick={navigateToIndex}>
-                <TableOfContents/>
-            </Button>
+            <div className="flex justify-between items-center">
+
+                <div>
+                    <HeaderTitle>{movieTitle} ({formattedReleaseDate})</HeaderTitle>
+                    <HeaderDescription>Showing on {screenName} at {theatreName}.</HeaderDescription>
+                </div>
+
+                <ShowingDetailsPageToggles showingSlug={showingSlug} setIsDeleting={setIsDeleting}>
+                    <IconButton icon={Ellipsis}/>
+                </ShowingDetailsPageToggles>
+            </div>
         </header>
     );
 }

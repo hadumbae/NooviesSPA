@@ -13,28 +13,28 @@ import {ShowingBaseQueryKeys} from "@/domains/showings/_feat/base-query-keys";
 import {destroy} from "@/domains/showings/_feat/crud";
 
 /** Custom mutation hook to delete a showing and invalidate related cache keys. */
-export function useShowingDeleteMutation(onSubmitConfig: MutationResponseConfig) {
+export function useShowingDeleteMutation(onSubmitConfig?: MutationResponseConfig) {
     const queryClient = useQueryClient();
 
     const deleteShowing = async ({_id}: { _id: ObjectId }) => {
-        onSubmitConfig.submitMessage && toast.success(onSubmitConfig.submitMessage);
-        onSubmitConfig.onSubmit?.();
+        onSubmitConfig?.submitMessage && toast.success(onSubmitConfig?.submitMessage);
+        onSubmitConfig?.onSubmit?.();
 
         const fetchQueryFn = () => destroy({_id});
         await useFetchErrorHandler({fetchQueryFn});
     };
 
     const onSuccess = () => {
-        onSubmitConfig.successMessage && toast.error(onSubmitConfig.successMessage);
-        onSubmitConfig.onSubmitSuccess?.();
+        onSubmitConfig?.successMessage && toast.error(onSubmitConfig?.successMessage);
+        onSubmitConfig?.onSubmitSuccess?.();
 
         queryClient.invalidateQueries({queryKey: ShowingBaseQueryKeys.views, exact: false});
         queryClient.invalidateQueries({queryKey: ShowingBaseQueryKeys.crudList, exact: false});
     };
 
     const onError = (error: unknown) => {
-        handleMutationResponseError({error, displayMessage: onSubmitConfig.errorMessage});
-        onSubmitConfig.onSubmitError?.(error);
+        handleMutationResponseError({error, displayMessage: onSubmitConfig?.errorMessage});
+        onSubmitConfig?.onSubmitError?.(error);
     };
 
     return useMutation({

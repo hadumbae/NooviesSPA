@@ -12,6 +12,7 @@ import {
     ShowingDetailsViewDataSchema,
     useFetchShowingDetailsViewData
 } from "@/views/admin/showings/_feat/admin-view-data";
+import {ShowingDetailsUIContextProvider} from "@/domains/showings/context/showing-details-ui-context/provider.tsx";
 
 /**
  * Entry point for the Showing Details admin page.
@@ -38,13 +39,15 @@ export const ShowingDetailsPage: FC = () => {
     return (
         <QueryDataLoader query={query}>
             {({showing, seating, theatre, screen, movie}) => (
-                <ShowingDetailsPageContent
-                    showing={showing}
-                    seating={seating}
-                    theatre={theatre}
-                    screen={screen}
-                    movie={movie}
-                />
+                <ShowingDetailsUIContextProvider>
+                    <ShowingDetailsPageContent
+                        showing={showing}
+                        seating={seating}
+                        theatre={theatre}
+                        screen={screen}
+                        movie={movie}
+                    />
+                </ShowingDetailsUIContextProvider>
             )}
         </QueryDataLoader>
     );

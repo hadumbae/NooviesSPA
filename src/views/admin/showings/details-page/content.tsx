@@ -21,18 +21,23 @@ import {
     ShowingMovieCard,
     TheatreSummaryCard
 } from "@/views/admin/showings/_comp/showing-reference-cards";
+import {ShowingDetailsPageActions} from "@/views/admin/showings/details-page/actions.tsx";
 
 /** Renders the core content of the Showing Details page. */
 export function ShowingDetailsPageContent(
     {showing, seating, theatre, screen, movie}: ShowingDetailsViewData
 ): ReactElement {
+    const {_id: showingID, slug: showingSlug, startTime} = showing;
     const {name: theatreName, location: {timezone: localTimezone}} = theatre;
     const {name: screenName} = screen;
     const {title: movieTitle, releaseDate} = movie;
 
+
     return (
         <PageFlexWrapper>
             <ShowingDetailsHeader
+                showingSlug={showingSlug}
+                showingStartTime={startTime}
                 movieTitle={movieTitle}
                 releaseDate={releaseDate}
                 screenName={screenName}
@@ -71,6 +76,11 @@ export function ShowingDetailsPageContent(
                     </section>
                 </div>
             </div>
+
+            <ShowingDetailsPageActions
+                showingID={showingID}
+                className="hidden"
+            />
         </PageFlexWrapper>
     );
 }
