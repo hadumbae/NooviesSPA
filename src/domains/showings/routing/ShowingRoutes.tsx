@@ -2,13 +2,13 @@
  * @fileoverview Defines the admin routing configuration for showing management.
  */
 
-import {ShowingIndexPage} from "@/views/admin/showings/index-page/page.tsx";
-import ShowingCreatePage from "@/views/admin/showings/create-page/ShowingCreatePage.tsx";
-import {ShowingEditPage} from "@/views/admin/showings/edit-page/page.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import {RouteObject} from "react-router-dom";
-import {ShowingDetailsPage} from "@/views/admin/showings/details-page/page.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
+import {ShowingIndexPage} from "@/views/admin/showings/index-page";
+import {ShowingCreatePage} from "@/views/admin/showings/create-page/page.tsx";
+import {ShowingEditPage} from "@/views/admin/showings/edit-page";
+import {ShowingDetailsPage} from "@/views/admin/showings/details-page";
 
 /** Route definitions for showing administration pages. */
 export const ShowingRoutes: RouteObject[] = [

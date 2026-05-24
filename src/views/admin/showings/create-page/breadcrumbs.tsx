@@ -1,21 +1,8 @@
 /**
- * @file ShowingCreateBreadcrumbs.tsx
- * @description
- * Renders breadcrumb navigation for the "Create Showings" page in the admin panel.
- *
- * This breadcrumb provides context for users by showing:
- * 1. A link back to "All Showings"
- * 2. The current page "Create Showings"
- *
- * Uses `LoggedLink` for the navigation link and the reusable `Breadcrumb` UI components.
- *
- * @example
- * ```tsx
- * <ShowingCreateBreadcrumbs />
- * ```
+ * @fileoverview Breadcrumb navigation for the showing creation page in the admin panel.
  */
 
-import { FC } from "react";
+import {ReactElement} from "react";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -27,18 +14,9 @@ import {
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 
 /**
- * `ShowingCreateBreadcrumbs` displays the breadcrumb trail for the
- * "Create Showings" admin page.
- *
- * - First item links back to the "All Showings" page.
- * - Second item displays the current page as "Create Showings".
- *
- * @example
- * ```tsx
- * <ShowingCreateBreadcrumbs />
- * ```
+ * Renders the breadcrumb trail linking back to the showings index from the creation view.
  */
-const ShowingCreateBreadcrumbs: FC = () => {
+export function ShowingCreateBreadcrumbs(): ReactElement {
     return (
         <Breadcrumb>
             <BreadcrumbList>
@@ -56,6 +34,4 @@ const ShowingCreateBreadcrumbs: FC = () => {
             </BreadcrumbList>
         </Breadcrumb>
     );
-};
-
-export default ShowingCreateBreadcrumbs;
+}
