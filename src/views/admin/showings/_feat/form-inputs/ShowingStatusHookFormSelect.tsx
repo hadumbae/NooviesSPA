@@ -17,6 +17,7 @@ import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.t
 
 
 import {ShowingFormValues} from "@/domains/showings/schema/form";
+import {ReactElement} from "react";
 
 /**
  * Props for `ShowingStatusHookFormSelect`.
@@ -50,17 +51,15 @@ type StatusProps<TValues extends FieldValues> = Omit<SelectProps<TValues>, "opti
  * />
  * ```
  */
-const ShowingStatusHookFormSelect = <TValues extends FieldValues = ShowingFormValues>(
+export function ShowingStatusHookFormSelect<TValues extends FieldValues = ShowingFormValues>(
     props: StatusProps<TValues>
-) => {
+): ReactElement {
     const options: ReactSelectOption[] = ShowingStatusConstant.map(
         status => {
             const formattedStatus = convertToTitleCase(status.replace("_", " "));
-            return { label: formattedStatus, value: status };
+            return {label: formattedStatus, value: status};
         }
     );
 
-    return <HookFormSelect {...props} options={options} />;
-};
-
-export default ShowingStatusHookFormSelect;
+    return <HookFormSelect {...props} options={options}/>;
+}

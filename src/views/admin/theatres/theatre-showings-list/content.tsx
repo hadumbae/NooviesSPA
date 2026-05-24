@@ -3,15 +3,13 @@
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {TheatreShowingListHeader}
-    from "@/views/admin/theatres/theatre-showings-list/header.tsx";
+import {TheatreShowingListHeader} from "@/views/admin/theatres/theatre-showings-list/header.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card/ShowingSummaryCard.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {ReactElement} from "react";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
-import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card";
+import {Theatre, TheatreDetails} from "@/domains/theatres/schema/theatre";
+import {ShowingDetails} from "@/domains/showings/schema/showing";
 
 /** Props for the TheatreShowingListPageContent component. */
 type ContentProps = {
