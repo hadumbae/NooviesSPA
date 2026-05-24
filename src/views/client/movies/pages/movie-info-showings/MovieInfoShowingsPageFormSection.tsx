@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {ShowingsPageQueryStrings, ShowingsPageQueryStringSchema} from "@/domains/movies/_feat/client-view-data";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {

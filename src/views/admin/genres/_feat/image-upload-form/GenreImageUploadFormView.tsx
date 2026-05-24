@@ -3,7 +3,7 @@
  */
 import {ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
-import {useBaseFormContext} from "@/common/features/generic-form-context";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import ACCEPTED_IMAGE_TYPES from "@/common/constants/AcceptedImageTypeConstant.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormFileInput} from "@/common/components/forms/HookFormFileInput.tsx";

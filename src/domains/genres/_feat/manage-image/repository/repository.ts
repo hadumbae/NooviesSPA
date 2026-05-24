@@ -8,7 +8,7 @@ import {
     RemoveGenreImageConfig,
     UpdateGenreImageConfig
 } from "@/domains/genres/_feat/manage-image/repository/repository.types.ts";
-import {buildURL} from "@/common/features/fetch-api";
+import {buildURL} from "@/common/_feat/fetch-api";
 import {ManageGenreImageBaseURL} from "@/domains/genres/_feat/manage-image/repository/baseURL.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 

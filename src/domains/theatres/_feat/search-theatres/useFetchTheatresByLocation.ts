@@ -8,7 +8,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {theatresByLocation} from "@/domains/theatres/_feat/search-theatres/repository.ts";
 import {BrowseTheatreByLocationConfig} from "@/domains/theatres/_feat/search-theatres/repository.types.ts";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {
     PaginatedTheatresWithRecentShowings,
     PaginatedTheatresWithRecentShowingsSchema

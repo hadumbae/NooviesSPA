@@ -1,7 +1,7 @@
 /** @fileoverview Zod schemas and types for the genre image upload form. */
 
 import {z} from "zod";
-import {refineRequireImageFile} from "@/common/features/handle-image-upload";
+import {refineRequireImageFile} from "@/common/_feat/handle-image-upload";
 import {FileInstanceSchema} from "@/common/_schemas/file-uploads";
 
 /** Base schema for genre image upload containing the raw file field. */

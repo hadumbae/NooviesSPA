@@ -9,7 +9,7 @@ import {useFormContext} from "react-hook-form";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
-import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 
 /**
  * Renders coordinate inputs for seat positioning, adjusting the grid layout based on field visibility.

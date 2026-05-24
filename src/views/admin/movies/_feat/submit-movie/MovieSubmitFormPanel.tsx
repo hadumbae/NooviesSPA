@@ -15,7 +15,7 @@ import {
 
 
 import {UIOpenStateProps} from "@/common/types";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
 import {MovieSubmitFormView} from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormView.tsx";
 import {MovieSubmitFormActions} from "@/views/admin/movies/_feat/submit-movie/MovieSubmitFormActions.tsx";

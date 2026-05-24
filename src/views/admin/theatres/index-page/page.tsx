@@ -4,10 +4,10 @@
 
 import { ReactElement } from "react";
 import useTitle from "@/common/hooks/document/useTitle.ts";
-import { useParsedSearchParams } from "@/common/features/fetch-search-params";
+import { useParsedSearchParams } from "@/common/_feat/fetch-search-params";
 import { TheatreQueryOptionSchema } from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionSchema.ts";
 import { TheatreIndexPageContent } from "@/views/admin/theatres/index-page/content.tsx";
-import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
 import { TheatreHttpStatusOverrideText } from "@/domains/theatres/constants/TheatreHttpStatusOverrideText.ts";
 import { useFetchPaginatedTheatres } from "@/domains/theatres/_feat/crud-hooks";

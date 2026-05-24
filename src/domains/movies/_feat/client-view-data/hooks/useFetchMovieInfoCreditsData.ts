@@ -9,7 +9,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {getFetchMovieInfoCreditsViewData} from "@/domains/movies/_feat/client-view-data/repositories/repository.ts";
 import {MovieInfoCreditViewData, MovieInfoCreditViewSchema} from "@/domains/movies/_feat/client-view-data";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {MovieClientViewDataQueryKeys} from "@/domains/movies/_feat/client-view-data/hooks/queryKeys.ts";
 
 /** Parameters for fetching movie info credits data. */

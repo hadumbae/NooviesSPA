@@ -6,7 +6,7 @@
 import {
     ReservationByCodePageContent
 } from "@/views/admin/reservation/reservation-by-code/pages/ReservationByCodePageContent.tsx";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {
     FetchByCodeSearchParamsSchema,
     FetchByCodeData

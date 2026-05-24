@@ -9,7 +9,7 @@ import {
 } from "@/domains/review/_feat/fetch-by-movie/repository.types.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import {buildURL} from "@/common/features/fetch-api";
+import {buildURL} from "@/common/_feat/fetch-api";
 import {ReviewsByMovieBaseURL} from "@/domains/review/_feat/fetch-by-movie/baseURL.ts";
 
 /**

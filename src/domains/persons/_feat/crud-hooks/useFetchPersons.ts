@@ -12,7 +12,7 @@ import {PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks/PersonCRUD
 import {PersonQueryOptions} from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 

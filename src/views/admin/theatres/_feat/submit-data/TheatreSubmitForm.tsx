@@ -4,9 +4,9 @@ import {ReactElement} from 'react';
 import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
 import {TheatreFormStarterValues, useTheatreSubmitForm} from "@/domains/theatres/_feat/submit-data";
 import {TheatreFormData} from "@/domains/theatres/_feat/submit-data/TheatreForm.schema.ts";
-import {FormConfigProps} from "@/common/features/submit-data";
+import {FormConfigProps} from "@/common/_feat/submit-data";
 import {useTheatreSubmitMutation} from "@/domains/theatres/_feat/crud-hooks";
-import {BaseFormContextProvider} from "@/common/features/generic-form-context";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from '@/common/components/ui/form';
 
 /** Props for the TheatreSubmitForm component. */

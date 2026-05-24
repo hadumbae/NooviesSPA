@@ -11,7 +11,7 @@ import {
     handleFindBySlug,
     handlePaginated,
     handleQuery, handleUpdate
-} from "@/common/features/crud-handlers";
+} from "@/common/_feat/crud-handlers";
 
 /** Retrieves all theatre screen records. */
 export const find = handleFind(TheatreScreenCRUDBaseURL);

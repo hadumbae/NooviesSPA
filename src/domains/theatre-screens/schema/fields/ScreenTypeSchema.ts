@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {ZodEnumParamHandler} from "@/common/features/validation-handlers";
+import {ZodEnumParamHandler} from "@/common/_feat/validation-handlers";
 import ScreenTypeConstant from "@/domains/theatre-screens/constants/ScreenTypeConstant.ts";
 
 /** Zod schema for validating and restricting string values to known theatre screen types. */

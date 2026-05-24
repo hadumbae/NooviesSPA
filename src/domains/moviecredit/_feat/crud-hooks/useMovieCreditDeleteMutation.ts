@@ -6,7 +6,7 @@ import {toast} from "react-toastify";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {destroy, MovieCreditCRUDMutationKeys, MovieCreditCRUDQueryKeys} from "@/domains/moviecredit/_feat/crud";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /** The payload required to identify the credit for deletion. */
 type DeleteValue = {

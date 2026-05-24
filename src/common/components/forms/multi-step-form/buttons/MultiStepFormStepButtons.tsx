@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ChevronLeft, ChevronRight, RefreshCw} from "lucide-react";
-import {useMultiStepFormSetterContext} from "@/common/features/multi-step-form/hooks/useMultiStepFormSetterContext.ts";
+import {useMultiStepFormSetterContext} from "@/common/_feat/multi-step-form/hooks/useMultiStepFormSetterContext.ts";
 
 /**
  * Renders navigation and submission buttons for a wizard-style form.

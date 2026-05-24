@@ -9,7 +9,7 @@ import handleMutationFormError from "@/common/utility/handlers/handleMutationFor
 import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
 import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieFormData, MovieFormStarterValues} from "../submit-data/MovieFormSchema.ts";
-import {MutationFormConfig, MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationFormConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {create, update} from "@/domains/movies/_feat/crud";
 import {MovieCRUDMutationKeys} from "@/domains/movies/_feat/crud-hooks/mutationKeys.ts";
 

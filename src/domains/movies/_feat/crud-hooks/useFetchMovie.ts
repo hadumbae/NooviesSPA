@@ -11,7 +11,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {IDQueryConfig} from "@/common/types";
 import {findByID} from "@/domains/movies/_feat/crud";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks/queryKeys.ts";
 
 export function useFetchMovie<TData = unknown>(

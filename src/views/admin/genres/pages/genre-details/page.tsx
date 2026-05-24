@@ -6,7 +6,7 @@
 import {ReactElement} from 'react';
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import useParsedPaginationValue
-    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+    from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {PageLoader} from "@/views/common/_comp/page";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";

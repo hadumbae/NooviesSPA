@@ -10,7 +10,7 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {useSeatDeleteMutation} from "@/domains/seats/_feat/crud-hooks";
 import {ReactElement} from "react";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /** Props for the SeatDeleteWarning component. */
 type WarningProps = MutationResponseConfig & {

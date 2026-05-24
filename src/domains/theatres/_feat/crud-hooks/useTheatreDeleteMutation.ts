@@ -9,7 +9,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {destroy} from "@/domains/theatres/_feat/crud";
 import {TheatreCRUDMutationKeys} from "@/domains/theatres/_feat/crud-hooks/mutationKeys.ts";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {TheatreCRUDQueryKeys} from "@/domains/theatres/_feat/crud-hooks/queryKeys.ts";
 
 type DeleteIdentifier = {

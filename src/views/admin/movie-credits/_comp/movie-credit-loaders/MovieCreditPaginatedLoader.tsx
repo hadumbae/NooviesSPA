@@ -1,6 +1,6 @@
 /** @fileoverview Data-fetching component that manages a paginated list of movie credits. */
 
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/query-options/MovieCreditQueryOptionsSchema.ts";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {

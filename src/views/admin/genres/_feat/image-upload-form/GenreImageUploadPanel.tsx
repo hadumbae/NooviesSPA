@@ -15,7 +15,7 @@ import {
 import {Button} from "@/common/components/ui/button.tsx";
 import {UIOpenStateProps} from "@/common/types";
 import {GenreImageUploadFormView} from "@/views/admin/genres/_feat/image-upload-form/GenreImageUploadFormView.tsx";
-import {useBaseFormContext} from "@/common/features/generic-form-context";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 
 /** Props for the GenreImageUploadPanel component. */

@@ -6,7 +6,7 @@
 import {toast} from "react-toastify";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {Movie, MovieSchema} from "@/domains/movies/schema/movie";
 import {deleteRemovePosterImage, ManageMovieImageMutationKeys} from "@/domains/movies/_feat/manage-images";
 import validateData from "@/common/hooks/validation/validate-data/validateData";

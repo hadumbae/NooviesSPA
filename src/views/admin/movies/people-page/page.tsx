@@ -8,7 +8,7 @@ import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEn
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useParsedPaginationValue
-    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+    from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MoviePeoplePageContent} from "@/views/admin/movies/people-page/content.tsx";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";

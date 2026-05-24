@@ -5,7 +5,7 @@
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {ModerationMessageFormData} from "@/common/features/moderation/forms";
+import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
 import {UseFormReturn} from "react-hook-form";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {patchToggleReviewPublicity} from "@/domains/review/features/admin-actions/repositories";

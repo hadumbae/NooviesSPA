@@ -10,7 +10,7 @@ import {
     handleFindBySlug,
     handlePaginated,
     handleQuery, handleUpdate
-} from "@/common/features/crud-handlers";
+} from "@/common/_feat/crud-handlers";
 
 /** Standard CRUD methods bound to the Seat administrative API. */
 export const find = handleFind(SeatCRUDBaseURL);

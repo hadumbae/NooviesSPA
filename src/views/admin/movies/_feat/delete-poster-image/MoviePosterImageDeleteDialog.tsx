@@ -6,7 +6,7 @@ import {ReactElement} from 'react';
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useMoviePosterImageDeleteMutation} from "@/domains/movies/_feat/manage-images";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {UIOpenStateProps} from "@/common/types";
 import {Movie} from "@/domains/movies/schema/movie";
 

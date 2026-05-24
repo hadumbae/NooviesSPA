@@ -5,7 +5,7 @@
 
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {ModerationMessageFormData} from "@/common/features/moderation/forms";
+import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
 import {useState} from "react";
 import {
     ToggleReviewPublicityDialog

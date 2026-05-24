@@ -16,9 +16,9 @@ import {
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import {useFormContext} from "react-hook-form";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {BaseFormContext} from "@/common/features/generic-form-context";
+import {BaseFormContext} from "@/common/_feat/generic-form-context";
 import {UIOpenStateProps} from "@/common/types";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {RotateCcw} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";

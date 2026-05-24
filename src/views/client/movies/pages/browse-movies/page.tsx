@@ -4,7 +4,7 @@
  */
 
 import {ReactElement} from 'react';
-import {useParsedPaginationValue} from "@/common/features/fetch-pagination-search-params";
+import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie";
 import {PaginatedItems} from "@/common/types";

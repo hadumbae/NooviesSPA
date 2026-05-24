@@ -9,9 +9,9 @@ import {PaginatedRoleTypes} from "@/domains/roletype/schema/model/RoleType.types
 import RoleTypeListPageContent from "@/domains/roletype/pages/list-page/RoleTypeListPageContent.tsx";
 import {useFetchPaginatedRoleTypes} from "@/domains/roletype/hooks/fetch/useFetchPaginatedRoleTypes.ts";
 import useParsedPaginationValue
-    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+    from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {RoleTypeQueryOptionsSchema} from "@/domains/roletype/schema/query-options/RoleTypeQueryOptions.schema.ts";
 
 /**

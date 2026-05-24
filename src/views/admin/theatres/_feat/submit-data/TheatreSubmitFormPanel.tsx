@@ -11,10 +11,10 @@ import {SheetTitle} from "@/common/components/ui/Sheet/SheetTitle.tsx";
 import {SheetDescription} from "@/common/components/ui/Sheet/SheetDescription.tsx";
 import {SheetTrigger} from "@/common/components/ui/Sheet/SheetTrigger.tsx";
 import {TheatreFormStarterValues} from "@/domains/theatres/_feat/submit-data";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {UIOpenStateProps} from "@/common/types";
 import {TheatreSubmitFormView} from "@/views/admin/theatres/_feat/submit-data/views/TheatreSubmitFormView.tsx";
-import {useBaseFormContext} from "@/common/features/generic-form-context";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {PrimaryButton} from "@/views/common/_comp/submit-form";
 
 /** Props for the TheatreSubmitFormPanel component. */

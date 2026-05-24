@@ -8,7 +8,7 @@ import {MovieIndexPageHeader} from "@/views/admin/movies/index-page/header.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import MovieQueryOptionFormContainer
     from "@/views/admin/movies/_feat/submit-query-options/MovieQueryOptionFormContainer.tsx";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";

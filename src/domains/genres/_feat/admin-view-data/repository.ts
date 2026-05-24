@@ -7,7 +7,7 @@
 import {FetchGenreDetailsConfig} from "@/domains/genres/_feat/admin-view-data/repository.types.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {GenreAdminViewDataBaseURL} from "@/domains/genres/_feat/admin-view-data/baseURL.ts";
-import {buildURL} from "@/common/features/fetch-api";
+import {buildURL} from "@/common/_feat/fetch-api";
 
 /**
  * Fetches aggregated genre details and associated movie data from the administrative API.

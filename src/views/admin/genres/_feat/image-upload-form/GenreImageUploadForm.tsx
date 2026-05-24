@@ -8,9 +8,9 @@ import {
     useGenreImageUploadForm,
     useUploadGenreImage
 } from "@/domains/genres/_feat/manage-image";
-import {BaseFormContextProvider} from "@/common/features/generic-form-context";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {Genre} from "@/domains/genres/schema";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 

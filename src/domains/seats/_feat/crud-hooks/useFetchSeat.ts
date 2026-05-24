@@ -7,7 +7,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {QueryConfig} from "@/common/types";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {findByID} from "@/domains/seats/_feat/crud";
 import {SeatCRUDQueryKeys} from "@/domains/seats/_feat/crud-hooks/queryKeys.ts";
 

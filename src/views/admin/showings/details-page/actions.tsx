@@ -8,7 +8,7 @@ import {ShowingDetailsUISetterContext, ShowingDetailsUIStateContext} from "@/dom
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ShowingDeleteWarningDialog} from "@/views/admin/showings/_feat/showing-delete-warning";
 import {useNavigateToShowingIndex} from "@/domains/showings/_feat/navigation";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /** Props for the ShowingDetailsPageActions component. */
 type ActionProps = {

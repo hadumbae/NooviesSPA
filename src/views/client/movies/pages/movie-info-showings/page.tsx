@@ -6,7 +6,7 @@ import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetc
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
 import {MovieInfoShowingsPageContent} from "@/views/client/movies/pages/movie-info-showings/content.tsx";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {
     useFetchMovieInfoShowingsData
 } from "@/domains/movies/_feat/client-view-data/hooks/useFetchMovieInfoShowingsData.ts";

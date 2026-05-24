@@ -3,7 +3,7 @@
  * Defines the request structures for public genre-related data operations.
  */
 
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 
 /**

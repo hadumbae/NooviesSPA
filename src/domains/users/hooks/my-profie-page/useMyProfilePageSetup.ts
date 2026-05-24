@@ -9,7 +9,7 @@
  * - Convenience setters for tab and pagination state
  */
 
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {
     MyProfilePageSearchParams,
     MyProfilePageSearchParamsSchema

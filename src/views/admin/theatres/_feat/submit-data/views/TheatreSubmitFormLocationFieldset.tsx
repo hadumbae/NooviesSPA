@@ -10,7 +10,7 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import IANATimezoneHookFormSelect from "@/common/components/forms/values/IANATimezoneHookFormSelect.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {LocationFormStarterValues} from "@/common/_models/location-form";
 import {useFormContext} from "react-hook-form";
 

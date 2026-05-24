@@ -3,7 +3,7 @@
  * @filename repository.types.ts
  */
 
-import {ModerationMessageFormData} from "@/common/features/moderation/forms";
+import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     ResetReviewDisplayNameFormData,

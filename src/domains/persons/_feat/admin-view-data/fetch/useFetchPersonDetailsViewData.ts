@@ -11,7 +11,7 @@ import {
 } from "@/domains/persons/_feat/admin-view-data";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {PersonAdminViewQueryKeys} from "@/domains/persons/_feat/admin-view-data/fetch/querykeys.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 

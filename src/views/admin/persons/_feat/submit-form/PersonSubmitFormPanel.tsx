@@ -20,7 +20,7 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {useFormContext} from "react-hook-form";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {BaseFormContext} from "@/common/features/generic-form-context";
+import {BaseFormContext} from "@/common/_feat/generic-form-context";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 
 /**

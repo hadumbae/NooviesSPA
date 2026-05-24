@@ -8,7 +8,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {TheatreCRUDQueryKeys} from "@/domains/theatres/_feat/crud-hooks/queryKeys.ts";
 import {findByID} from "@/domains/theatres/_feat/crud";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {IDQueryConfig} from "@/common/types";
 
 /** Fetches a single theatre and validates the response against a schema. */

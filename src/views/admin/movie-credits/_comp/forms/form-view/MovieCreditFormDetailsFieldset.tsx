@@ -7,7 +7,7 @@ import {MovieCreditFormDisableFields} from "@/domains/moviecredit/_feat/submit-d
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
-import {renderFields} from "@/common/features/submit-data";
+import {renderFields} from "@/common/_feat/submit-data";
 
 type FieldsetProps = {
     className?: string;

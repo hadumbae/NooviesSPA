@@ -10,7 +10,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {ZodType, ZodTypeDef} from "zod";
 import {findByID} from "@/domains/theatre-screens/_feat/crud";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {TheatreScreenCRUDQueryKeys} from "@/domains/theatre-screens/_feat/crud-hooks/queryKeys.ts";
 
 /** Parameters for the useFetchScreen hook. */

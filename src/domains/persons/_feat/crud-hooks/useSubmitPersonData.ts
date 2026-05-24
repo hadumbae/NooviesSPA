@@ -12,7 +12,7 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {PersonFormData, PersonFormValues} from "@/domains/persons/_feat/submit-form/PersonFormSchema.ts";
-import {MutationFormConfig, MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationFormConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks/index.ts";
 import {PersonCRUDMutationKeys} from "@/domains/persons/_feat/crud-hooks/PersonCRUDMutationKeys.ts";
 import {create, update} from "@/domains/persons/_feat/crud";

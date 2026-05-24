@@ -3,8 +3,8 @@
  */
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {ReactElement} from "react";
-import {useBaseFormContext} from "@/common/features/generic-form-context";
-import {useAutoFormSubmit} from "@/common/features/submit-data";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {useFormContext} from "react-hook-form";
 
 /** Props for the BrowseTheatreParamFormView component. */

@@ -8,7 +8,7 @@ import {Plus} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {HeaderDescription, HeaderTitle} from "@/common/components/page/headers";
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 
 /** Props for the MovieIndexPageHeader component. */
 type HeaderProps = {

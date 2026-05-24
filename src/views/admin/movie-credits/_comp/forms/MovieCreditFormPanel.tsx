@@ -11,7 +11,7 @@ import {
 } from "@/common/components/ui/Sheet";
 
 import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValues.ts";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {UIOpenStateProps} from "@/common/types";
 import {MovieCreditFormView} from "@/views/admin/movie-credits/_comp/forms/form-view/MovieCreditFormView.tsx";
 import {ReactElement} from "react";

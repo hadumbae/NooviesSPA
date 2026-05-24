@@ -5,7 +5,7 @@
 import {ReactElement, ReactNode} from "react";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import {useShowingDeleteMutation} from "@/domains/showings/_feat/crud-hooks";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {UIOpenStateProps} from "@/common/types";
 

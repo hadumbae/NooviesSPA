@@ -4,7 +4,7 @@
 
 import {PersonProfileImageBaseURL} from "@/domains/persons/_feat/submit-profile-image";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import {buildURL} from "@/common/features/fetch-api";
+import {buildURL} from "@/common/_feat/fetch-api";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {RemoveProfileImageConfig} from "@/domains/persons/_feat/remove-profile-image";
 

@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {SeatFormValues, useBuildSeatFormRenderFields} from "@/domains/seats/_feat/submit-data";
 import {cn} from "@/common/lib/utils.ts";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 
 /**
  * Renders the structural layout of the seat form, including conditional fieldsets and submission controls.

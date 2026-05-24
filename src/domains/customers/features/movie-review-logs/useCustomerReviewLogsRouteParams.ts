@@ -5,7 +5,7 @@
 
 import {useParams} from "react-router-dom"
 import {CustomerReviewLogsRouteParamsSchema} from "@/domains/customers/features/movie-review-logs/routeParamsSchema.ts"
-import {useThrowRouteParamError} from "@/common/features/fetch-route-params/useThrowRouteParamError.ts"
+import {useThrowRouteParamError} from "@/common/_feat/fetch-route-params/useThrowRouteParamError.ts"
 
 /**
  * Custom hook that extracts and validates the

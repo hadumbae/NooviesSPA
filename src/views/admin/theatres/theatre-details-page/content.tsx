@@ -15,7 +15,7 @@ import {
     TheatreDetailsPageShowingSection
 } from "@/views/admin/theatres/theatre-details-page/sections/TheatreDetailsPageShowingSection.tsx";
 import {TheatreDetailsViewData} from "@/domains/theatres/_feat/admin-view-data";
-import {useSetAdminPageTitle} from "@/common/features/handle-pages";
+import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 
 /** Props for the TheatreDetailsPageContent component. */
 type TheatreDetailsPageContentProps = {

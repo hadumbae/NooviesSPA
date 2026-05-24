@@ -6,7 +6,7 @@ import {useFormContext} from "react-hook-form";
 import {MovieCreditFormDisableFields} from "@/domains/moviecredit/_feat/submit-data";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
-import {renderFields} from "@/common/features/submit-data";
+import {renderFields} from "@/common/_feat/submit-data";
 import {cn} from "@/common/lib/utils.ts";
 
 /** Props for the MovieCreditFormCastFlagFieldset component. */

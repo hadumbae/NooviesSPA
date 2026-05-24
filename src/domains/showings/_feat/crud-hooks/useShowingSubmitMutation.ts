@@ -10,7 +10,7 @@ import handleMutationFormError from "@/common/utility/handlers/handleMutationFor
 import {ShowingFormValues} from "@/domains/showings/schema/form/form-values/ShowingFormValues.ts";
 import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing";
 import {ShowingFormData} from "@/domains/showings/schema/form";
-import {MutationFormConfig, MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationFormConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {create, update} from "@/domains/showings/_feat/crud";
 import {ShowingCRUDMutationKeys} from "@/domains/showings/_feat/crud-hooks/mutationKeys.ts";
 

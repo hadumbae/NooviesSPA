@@ -5,8 +5,8 @@
 import {ReactElement} from "react";
 import {SeatFormData, SeatFormValues} from "@/domains/seats/_feat/submit-data";
 import {useSeatSubmitForm} from "@/domains/seats/_feat/submit-data/useSeatSubmitForm.ts";
-import {FormConfigProps} from "@/common/features/submit-data";
-import {BaseFormContextProvider} from "@/common/features/generic-form-context";
+import {FormConfigProps} from "@/common/_feat/submit-data";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 import {useSeatSubmitMutation} from "@/domains/seats/_feat/crud-hooks";
 import {Seat, SeatDetails} from "@/domains/seats/schema/model";

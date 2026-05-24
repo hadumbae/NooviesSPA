@@ -2,7 +2,7 @@ import {useLocation} from "react-router-dom";
 import {
     PaginationValues,
     PaginationValuesSchema
-} from "@/common/features/fetch-pagination-search-params/schemas/PaginationValuesSchema.ts";
+} from "@/common/_feat/fetch-pagination-search-params/schemas/PaginationValuesSchema.ts";
 
 /**
  * Represents the outcome of parsing pagination values from `location.state`.

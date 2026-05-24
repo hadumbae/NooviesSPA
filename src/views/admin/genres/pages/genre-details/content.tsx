@@ -9,7 +9,7 @@ import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.ts
 import {GenreDetailsPageHeader} from "@/views/admin/genres/pages/genre-details/header.tsx";
 import {GenreDetailsCard} from "@/views/admin/genres/pages/genre-details/detailsCard.tsx";
 import {MovieIndexCard} from "@/views/admin/movies/_comp/index-list-display";
-import {useSetAdminPageTitle} from "@/common/features/handle-pages";
+import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 import {GenreDetailsPageActions} from "@/views/admin/genres/pages/genre-details/actions.tsx";
 import {
     GenreDetailsPageImageSection

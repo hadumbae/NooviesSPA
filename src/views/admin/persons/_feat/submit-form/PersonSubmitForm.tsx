@@ -12,8 +12,8 @@ import {
     usePersonSubmitForm,
 } from "@/domains/persons/_feat/submit-form";
 import {useSubmitPersonData} from "@/domains/persons/_feat/crud-hooks";
-import {BaseFormContextProvider} from "@/common/features/generic-form-context";
-import {FormOptions, MutationResponseConfig} from "@/common/features/submit-data";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
+import {FormOptions, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {Form} from "@/common/components/ui/form.tsx";
 
 /**

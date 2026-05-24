@@ -3,7 +3,7 @@
  * @filename repository.ts
  */
 
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";

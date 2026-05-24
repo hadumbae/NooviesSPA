@@ -10,7 +10,7 @@ import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatForm
 import {cn} from "@/common/lib/utils.ts";
 import TheatreHookFormSelect from "@/views/admin/theatres/_feat/form-input/TheatreHookFormSelect.tsx";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
-import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 
 /** Renders the theatre and screen selection fields, ensuring the screen resets when the theatre changes. */
 export function SeatSubmitFormDetailsFieldset(

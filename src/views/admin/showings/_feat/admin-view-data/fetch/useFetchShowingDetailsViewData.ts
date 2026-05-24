@@ -4,7 +4,7 @@ import {ShowingDetailsViewData} from "@/views/admin/showings/_feat/admin-view-da
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {ZodType, ZodTypeDef} from "zod";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {getFetchShowingDetailsViewData} from "@/views/admin/showings/_feat/admin-view-data/repository";
 import {ShowingAdminViewDataQueryKeys} from "@/views/admin/showings/_feat/admin-view-data/fetch/queryKeys.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";

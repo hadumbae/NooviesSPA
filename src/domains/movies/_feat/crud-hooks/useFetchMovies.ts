@@ -8,7 +8,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {MovieQueryOptions} from "@/domains/movies/schema/queries";
 import {ListQueryConfig} from "@/common/types";
 import {find} from "@/domains/movies/_feat/crud";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks/queryKeys.ts";
 
 /**

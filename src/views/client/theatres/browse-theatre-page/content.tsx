@@ -5,7 +5,7 @@
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {BrowseTheatreParamForm} from "@/views/client/theatres/_feat/browse-by-location/BrowseTheatreParamForm.tsx";
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {TheatreBrowseListCard} from "@/views/client/theatres/_comp/browse-theatres/TheatreBrowseListCard.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";

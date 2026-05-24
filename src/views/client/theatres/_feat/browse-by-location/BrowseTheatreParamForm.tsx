@@ -2,14 +2,14 @@
  * @fileoverview Form component for managing and synchronizing theatre search parameters with the URL.
  */
 import {useBrowseTheatreParamForm} from "@/domains/theatres/_feat/submit-location/useBrowseTheatreParamForm.ts";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {
     BrowseTheatreParamFormStarterValues,
     BrowseTheatreParams,
     BrowseTheatreParamSchema
 } from "@/domains/theatres/_feat/submit-location";
 import {ReactNode} from "react";
-import {BaseFormContextProvider} from "@/common/features/generic-form-context";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 
 

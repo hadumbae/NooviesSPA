@@ -5,10 +5,10 @@
 
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {
     CustomerReviewsViewData,

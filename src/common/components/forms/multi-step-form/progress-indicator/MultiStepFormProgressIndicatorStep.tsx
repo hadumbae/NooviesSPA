@@ -2,7 +2,7 @@
  * @fileoverview Progress indicator step component for multi-step forms.
  */
 
-import {FormStepMeta} from "@/common/features/multi-step-form/types.ts";
+import {FormStepMeta} from "@/common/_feat/multi-step-form/types.ts";
 import {FieldValues} from "react-hook-form";
 import useMultiStepFormContext from "@/common/hooks/context/useMultiStepFormContext.ts";
 import {cn} from "@/common/lib/utils.ts";

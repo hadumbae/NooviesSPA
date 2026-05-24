@@ -14,7 +14,7 @@ import QueryErrorBoundary from "@/common/components/boundary/query-error-fallbac
 import {TheatreHttpStatusOverrideText} from "@/domains/theatres/constants/TheatreHttpStatusOverrideText.ts";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {TheatreDetailsViewData, useFetchTheatreDetailsViewData} from "@/domains/theatres/_feat/admin-view-data";
-import {useParsedPaginationValue} from "@/common/features/fetch-pagination-search-params";
+import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 
 const SCREENS_PER_PAGE = 25;
 const SHOWINGS_LIMIT = 10;

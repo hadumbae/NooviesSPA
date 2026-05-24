@@ -6,7 +6,7 @@
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ReactNode} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {ModerationMessageFormData, useModerationMessageForm} from "@/common/features/moderation/forms";
+import {ModerationMessageFormData, useModerationMessageForm} from "@/common/_feat/moderation/forms";
 import {useResetReviewLikesMutation} from "@/domains/review/features/admin-actions/mutations";
 import {AdminReviewActionFormContextProvider} from "@/domains/review/features/admin-actions/context";
 import {Form} from "@/common/components/ui/form.tsx";

@@ -4,7 +4,7 @@
 
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {ISO3166Alpha2CountryCode} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 
 /** Configuration for fetching movie overview information. */
 export type FetchInfoOverviewConfig = {

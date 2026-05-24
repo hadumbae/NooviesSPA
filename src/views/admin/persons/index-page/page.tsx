@@ -8,10 +8,10 @@ import {ReactElement} from 'react';
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import {PaginatedPersonDetailsSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import {PaginatedPersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {PersonQueryOptionsSchema} from "@/domains/persons/schema/query-options/PersonQueryOption.schema.ts";
 import useParsedPaginationValue
-    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+    from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {useFetchPaginatedPersons} from "@/domains/persons/_feat/crud-hooks";
 import {PersonIndexPageContent} from "@/views/admin/persons/index-page/content.tsx";

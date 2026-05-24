@@ -10,7 +10,7 @@
  * - Request configuration overrides
  */
 
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";

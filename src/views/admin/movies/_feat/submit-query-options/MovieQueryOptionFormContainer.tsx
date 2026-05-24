@@ -1,12 +1,12 @@
 import {FC} from 'react';
 import {SearchParamFormContainerProps} from "@/common/type/form/SearchParamFormProps.ts";
-import {MovieQueryOptionFormValues} from "../../../../../domains/movies/_feat/submit-queries/MovieQueryOptionFormValueSchema.ts";
+import {MovieQueryOptionFormValues} from "@/domains/movies/_feat/submit-queries";
 import useMovieQueryOptionForm
     from "@/domains/movies/_feat/handle-query-options/useMovieQueryOptionForm.ts";
 import MovieQueryOptionFormView
     from "@/views/admin/movies/_feat/submit-query-options/MovieQueryOptionFormView.tsx";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
-import {MovieQueryOptions, MovieQueryOptionSchema} from "../../../../../domains/movies/schema/queries/MovieQueryOptionSchema.ts";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
+import {MovieQueryOptions, MovieQueryOptionSchema} from "@/domains/movies/schema/queries";
 import filterFalsyAttributes from "@/common/utility/collections/filterFalsyAttributes.ts";
 
 /**

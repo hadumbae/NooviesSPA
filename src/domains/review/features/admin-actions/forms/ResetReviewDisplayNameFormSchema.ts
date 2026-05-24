@@ -3,7 +3,7 @@
  * @filename ResetReviewDisplayNameFormSchema.ts
  */
 
-import {ModerationMessageFormSchema} from "@/common/features/moderation/forms";
+import {ModerationMessageFormSchema} from "@/common/_feat/moderation/forms";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {z} from "zod";

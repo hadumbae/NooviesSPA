@@ -6,7 +6,7 @@ import {Dispatch, ReactElement, ReactNode, SetStateAction} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import {useRemovePersonData} from "@/domains/persons/_feat/crud-hooks";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /**
  * Props for the {@link PersonDeleteWarningDialog} component.

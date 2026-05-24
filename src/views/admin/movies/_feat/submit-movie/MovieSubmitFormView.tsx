@@ -6,7 +6,7 @@
 import {ReactElement} from 'react';
 import {cn} from "@/common/lib/utils.ts";
 import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {
     MovieSubmitFormDetailsFieldset
 } from "@/views/admin/movies/_feat/submit-movie/fieldsets/MovieSubmitFormDetailsFieldset.tsx";

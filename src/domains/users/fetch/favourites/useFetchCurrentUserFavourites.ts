@@ -8,7 +8,7 @@ import {useQuery} from "@tanstack/react-query";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import * as UserFavouriteRepository from "@/domains/users/repositories/favourites/UserFavouriteRepository.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 
 /** Pagination params with optional query options. */
 type FetchParams = Partial<PaginationValues> & {

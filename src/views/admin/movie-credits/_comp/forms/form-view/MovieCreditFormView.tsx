@@ -21,8 +21,8 @@ import {
     MovieCreditFormDetailsFieldset
 } from "@/views/admin/movie-credits/_comp/forms/form-view/MovieCreditFormDetailsFieldset.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {BaseFormContext} from "@/common/features/generic-form-context";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {BaseFormContext} from "@/common/_feat/generic-form-context";
+import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 
 /** Props for the MovieCreditFormView component. */
 type ViewProps = FormViewProps<MovieCreditFormValues>;

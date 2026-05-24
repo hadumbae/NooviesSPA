@@ -19,7 +19,7 @@ import {FieldValues} from "react-hook-form";
 import {
     MultiStepFormStateContext,
     MultiStepFormStateContextValues
-} from "@/common/features/multi-step-form/contexts/stateContext.ts";
+} from "@/common/_feat/multi-step-form/contexts/stateContext.ts";
 
 /**
  * Hook to access the multi-step form context.

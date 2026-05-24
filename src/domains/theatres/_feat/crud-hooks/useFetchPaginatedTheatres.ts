@@ -6,14 +6,14 @@
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {query} from "@/domains/theatres/_feat/crud";
 import {ZodType, ZodTypeDef} from "zod";
 import {TheatreCRUDQueryKeys} from "@/domains/theatres/_feat/crud-hooks/queryKeys.ts";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {TheatreQueryOptions} from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionSchema.ts";
 
 /**

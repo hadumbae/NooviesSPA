@@ -10,7 +10,7 @@ import handleMutationFormError from "@/common/utility/handlers/handleMutationFor
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {UseFormReturn} from "react-hook-form";
 import {SeatFormData, SeatFormValues} from "@/domains/seats/_feat/submit-data";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {create, update} from "@/domains/seats/_feat/crud";
 import {SeatCRUDMutationKeys} from "@/domains/seats/_feat/crud-hooks/mutationKeys.ts";
 import {SeatCRUDQueryKeys} from "@/domains/seats/_feat/crud-hooks/queryKeys.ts";

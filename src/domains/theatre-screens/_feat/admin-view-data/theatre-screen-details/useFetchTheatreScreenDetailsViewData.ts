@@ -10,7 +10,7 @@ import {
 } from "@/domains/theatre-screens/_feat/admin-view-data";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {TheatreScreenAdminViewDataQueryKeys} from "@/domains/theatre-screens/_feat/admin-view-data/queryKeys.ts";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 

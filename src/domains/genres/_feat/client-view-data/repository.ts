@@ -9,7 +9,7 @@ import {GenreClientViewDataBaseURL} from "@/domains/genres/_feat/client-view-dat
 import {FetchGenreWithMoviesConfig} from "@/domains/genres/_feat/client-view-data/repository.types.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {BrowseGenreWithMoviesViewData} from "@/domains/genres/_feat/client-view-data/schemas.ts";
-import {buildURL} from "@/common/features/fetch-api";
+import {buildURL} from "@/common/_feat/fetch-api";
 
 /**
  * Fetches a specific genre's metadata along with a paginated list of associated movies.

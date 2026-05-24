@@ -7,7 +7,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {ListQueryConfig} from "@/common/types";
 import {find} from "@/domains/showings/_feat/crud";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {ShowingCRUDQueryKeys} from "@/domains/showings/_feat/crud-hooks/queryKeys.ts";
 
 /** Fetches a list of showings based on provided query parameters and validates the response against a schema. */

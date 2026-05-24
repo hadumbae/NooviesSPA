@@ -5,9 +5,9 @@
 import {ReactElement} from "react";
 import {ShowingIndexPageContent} from "@/views/admin/showings/index-page/content.tsx";
 import {useFetchPaginatedShowings} from "@/domains/showings/_feat/crud-hooks/useFetchPaginatedShowings.ts";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import useParsedPaginationValue
-    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+    from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {ShowingDetailsSchema} from "@/domains/showings/schema/showing";
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 import {ShowingQueryOptionSchema} from "@/domains/showings/schema/queries";

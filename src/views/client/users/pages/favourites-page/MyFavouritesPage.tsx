@@ -6,7 +6,7 @@ import {ReactElement} from 'react';
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import {useFetchCurrentUserFavourites} from "@/domains/users/fetch/favourites/useFetchCurrentUserFavourites.ts";
 import useParsedPaginationValue
-    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+    from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import MyFavouritesPageContent from "@/views/client/users/pages/favourites-page/MyFavouritesPageContent.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";

@@ -14,7 +14,7 @@ import {
     useMovieInfoReviewsPageQueries
 } from "@/domains/movies/_feat/client-view-data/useMovieInfoReviewsPageQueries.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
-import useParsedPaginationValue from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 
 /** Number of reviews displayed per page */
 const REVIEWS_PER_PAGE = 20;

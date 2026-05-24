@@ -4,7 +4,7 @@
 
 import {toast} from "react-toastify";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {MutationFormConfig, MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationFormConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {
     ManageMovieImageMutationKeys,
     MoviePosterImageFormData,

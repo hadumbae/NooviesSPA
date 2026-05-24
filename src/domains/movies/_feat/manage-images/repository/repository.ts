@@ -4,7 +4,7 @@
 
 import {RemovePosterImageConfig, UploadPosterImageConfig} from "./repository.types.ts";
 import {ManageMovieImagesBaseURL} from "@/domains/movies/_feat/manage-images/repository/baseURL.ts";
-import {buildURL} from "@/common/features/fetch-api";
+import {buildURL} from "@/common/_feat/fetch-api";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 

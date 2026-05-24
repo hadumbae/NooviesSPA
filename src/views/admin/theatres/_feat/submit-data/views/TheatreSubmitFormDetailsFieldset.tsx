@@ -7,7 +7,7 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import {Separator} from "@/common/components/ui/separator.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {useFormContext} from "react-hook-form";
-import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {TheatreFormStarterValues} from "@/domains/theatres/_feat/submit-data";
 import {cn} from "@/common/lib/utils.ts";
 

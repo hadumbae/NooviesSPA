@@ -11,7 +11,7 @@ import {
     useFetchCustomerReviewLogsViewData
 } from "@/domains/customers/features/movie-review-logs";
 import {PageLoader} from "@/views/common/_comp/page";
-import {useParsedPaginationValue} from "@/common/features/fetch-pagination-search-params";
+import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 const LOGS_PER_PAGE = 20;

@@ -3,7 +3,7 @@
  * @filename SetReviewRatingFormSchema.ts
  */
 
-import {ModerationMessageFormSchema} from "@/common/features/moderation/forms";
+import {ModerationMessageFormSchema} from "@/common/_feat/moderation/forms";
 import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 import {z} from "zod";
 import {CoercedNumberValueSchema} from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";

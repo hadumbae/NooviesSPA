@@ -9,7 +9,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {ZodType, ZodTypeDef} from "zod";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {findBySlug} from "@/domains/persons/_feat/crud";
 import {PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks/PersonCRUDQueryKeys.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";

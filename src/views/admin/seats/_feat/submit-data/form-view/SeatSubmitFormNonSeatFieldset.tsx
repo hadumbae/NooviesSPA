@@ -7,7 +7,7 @@ import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatForm
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 

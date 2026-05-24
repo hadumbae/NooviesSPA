@@ -7,7 +7,7 @@ import {toast} from "react-toastify";
 import useFetchErrorHandler from "@/common/handlers/query/handleFetchError.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {ShowingCRUDMutationKeys} from "@/domains/showings/_feat/crud-hooks/mutationKeys.ts";
 import {ShowingBaseQueryKeys} from "@/domains/showings/_feat/base-query-keys";
 import {destroy} from "@/domains/showings/_feat/crud";

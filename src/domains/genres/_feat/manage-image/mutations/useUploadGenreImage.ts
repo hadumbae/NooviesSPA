@@ -8,7 +8,7 @@ import {
     ManageGenreImageMutationKeys,
     patchUpdateGenreImage
 } from "@/domains/genres/_feat/manage-image";
-import {MutationFormConfig, MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationFormConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {Genre, GenreSchema} from "@/domains/genres/schema";
 import {
     GenreImageUploadFormStarterValues

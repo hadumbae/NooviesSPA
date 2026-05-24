@@ -12,7 +12,7 @@ import {
     handlePaginated,
     handleQuery,
     handleUpdate
-} from "@/common/features/crud-handlers";
+} from "@/common/_feat/crud-handlers";
 
 /** Retrieves all showing records. */
 export const find = handleFind(ShowingCRUDBaseURL);

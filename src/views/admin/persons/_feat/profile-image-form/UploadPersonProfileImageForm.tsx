@@ -10,8 +10,8 @@ import {
     usePersonProfileImageSubmitForm,
     usePersonProfileImageSubmitMutation
 } from "@/domains/persons/_feat/submit-profile-image";
-import {MutationResponseConfig} from "@/common/features/submit-data";
-import {BaseFormContextProvider} from "@/common/features/generic-form-context";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 
 /**

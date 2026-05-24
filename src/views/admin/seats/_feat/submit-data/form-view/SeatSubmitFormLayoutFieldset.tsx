@@ -6,7 +6,7 @@ import {ReactElement} from 'react';
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {SeatLayoutTypeRadioGroup} from "@/views/admin/seats/_feat/form-inputs";
 import {cn} from "@/common/lib/utils.ts";

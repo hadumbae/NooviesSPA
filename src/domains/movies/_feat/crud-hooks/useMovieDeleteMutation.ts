@@ -7,7 +7,7 @@ import {toast} from "react-toastify";
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {MovieCRUDMutationKeys} from "@/domains/movies/_feat/crud-hooks/mutationKeys.ts";
 import {destroy} from "@/domains/movies/_feat/crud";
 import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks/queryKeys.ts";

@@ -4,8 +4,8 @@
 
 import {ReactElement} from "react";
 import useParsedPaginationValue
-    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+    from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {
     BrowseTheatreListPageContent
 } from "@/views/client/theatres/browse-theatre-page/content.tsx";

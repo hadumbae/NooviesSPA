@@ -8,7 +8,7 @@ import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {find} from "@/domains/theatre-screens/_feat/crud";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {ZodType, ZodTypeDef} from "zod";
 import {TheatreScreenCRUDQueryKeys} from "@/domains/theatre-screens/_feat/crud-hooks/queryKeys.ts";
 import {TheatreScreenQueryOptions} from "@/domains/theatre-screens/schema/queries/TheatreScreenQueryOptionsSchema.ts";

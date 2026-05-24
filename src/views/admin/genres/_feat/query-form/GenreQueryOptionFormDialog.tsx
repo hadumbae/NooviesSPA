@@ -19,7 +19,7 @@ import {
     DialogTrigger
 } from "@/common/components/ui/dialog";
 import {Button} from "@/common/components/ui/button.tsx";
-import {useAutoFormSubmit} from "@/common/features/submit-data";
+import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {GenreQueryOptionFormContext} from "@/domains/genres/_feat/query-form";
 import {cn} from "@/common/lib/utils.ts";

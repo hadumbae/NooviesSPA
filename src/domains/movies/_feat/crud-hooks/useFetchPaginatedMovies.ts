@@ -8,7 +8,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks/queryKeys.ts";
 import {paginated} from "@/domains/movies/_feat/crud";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {PaginatedQueryConfig} from "@/common/types";
 
 /** Fetches a paginated list of movies and validates the response against a schema. */

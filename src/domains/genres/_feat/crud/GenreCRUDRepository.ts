@@ -11,9 +11,9 @@ import {
     handleFindByID,
     handleFindBySlug,
     handleUpdate
-} from "@/common/features/crud-handlers";
-import {handlePaginated} from "@/common/features/crud-handlers/handlePaginated.ts";
-import {handleQuery} from "@/common/features/crud-handlers/handleQuery.ts";
+} from "@/common/_feat/crud-handlers";
+import {handlePaginated} from "@/common/_feat/crud-handlers/handlePaginated.ts";
+import {handleQuery} from "@/common/_feat/crud-handlers/handleQuery.ts";
 import {GenreCRUDBaseURL} from "@/domains/genres/_feat/crud/baseURL.ts";
 
 /** Standard bulk retrieval of Genre documents. */

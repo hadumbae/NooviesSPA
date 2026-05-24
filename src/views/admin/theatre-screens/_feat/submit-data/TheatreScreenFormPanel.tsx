@@ -17,8 +17,8 @@ import {TheatreScreenFormValues} from "@/domains/theatre-screens/_feat/submit-da
 import {Button} from "@/common/components/ui/button.tsx";
 import {UIOpenStateProps} from "@/common/types";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {BaseFormContext} from "@/common/features/generic-form-context";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {BaseFormContext} from "@/common/_feat/generic-form-context";
+import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {
     TheatreScreenFormView
 } from "./TheatreScreenFormView.tsx";

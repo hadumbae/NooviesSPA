@@ -10,7 +10,7 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {TheatreScreenDetails, TheatreScreenDetailsSchema} from "@/domains/theatre-screens/schema/model";
 import {TheatreScreenFormData, TheatreScreenFormValues} from "@/domains/theatre-screens/_feat/submit-data";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {create, update} from "@/domains/theatre-screens/_feat/crud";
 import {UseFormReturn} from "react-hook-form";
 import {TheatreScreenCRUDMutationKeys} from "@/domains/theatre-screens/_feat/crud-hooks/mutationKeys.ts";

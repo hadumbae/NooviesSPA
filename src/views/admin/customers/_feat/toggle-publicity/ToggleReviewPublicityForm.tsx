@@ -9,7 +9,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useToggleReviewPublicityMutation} from "@/domains/review/features/admin-actions/mutations";
 import {AdminReviewActionFormContextProvider} from "@/domains/review/features/admin-actions/context";
 import {Form} from "@/common/components/ui/form.tsx";
-import {ModerationMessageFormData, useModerationMessageForm} from "@/common/features/moderation/forms";
+import {ModerationMessageFormData, useModerationMessageForm} from "@/common/_feat/moderation/forms";
 
 import {MovieReview} from "@/domains/review/schemas/models";
 

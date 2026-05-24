@@ -3,7 +3,7 @@
  * moderation logs for a specific customer review.
  */
 
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params"
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params"
 import RequestReturns from "@/common/type/request/RequestReturns.ts"
 import {MovieReviewUniqueCode} from "@/domains/review/features/codes"
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts"

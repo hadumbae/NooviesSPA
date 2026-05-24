@@ -9,7 +9,7 @@ import {SeatQueryOptions} from "@/domains/seats/_feat/handle-query-options/SeatQ
 import {paginated} from "@/domains/seats/_feat/crud";
 import {SeatCRUDQueryKeys} from "@/domains/seats/_feat/crud-hooks/queryKeys.ts";
 import {PaginatedQueryConfig} from "@/common/types";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 
 /** Props for the useFetchPaginatedSeats hook. */
 type FetchParams<TData = unknown> = PaginatedQueryConfig<TData, SeatQueryOptions>

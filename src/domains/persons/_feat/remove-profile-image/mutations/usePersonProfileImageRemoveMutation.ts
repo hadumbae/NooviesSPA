@@ -9,7 +9,7 @@ import {deleteRemoveProfileImage} from "@/domains/persons/_feat/remove-profile-i
 import {
     PersonRemoveProfileImageMutationKeys
 } from "@/domains/persons/_feat/remove-profile-image/mutations/mutationKeys.ts";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 
 /**

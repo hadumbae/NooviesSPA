@@ -13,7 +13,7 @@ import {
 import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValues.ts";
 import {MovieCreditFormData} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
 import {create, MovieCreditCRUDMutationKeys, MovieCreditCRUDQueryKeys, update} from "@/domains/moviecredit/_feat/crud";
-import {MutationFormResetConfig, MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /** Props for the useMovieCreditSubmitMutation hook. */
 type SubmitParams = MutationFormResetConfig & MutationResponseConfig<MovieCreditDetails> & {

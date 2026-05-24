@@ -4,7 +4,7 @@
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {ModerationMessageFormData} from "@/common/features/moderation/forms";
+import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {patchResetReviewLikes} from "@/domains/review/features/admin-actions/repositories";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";

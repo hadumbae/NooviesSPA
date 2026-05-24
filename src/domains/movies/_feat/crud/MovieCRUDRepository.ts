@@ -10,7 +10,7 @@ import {
     handlePaginated,
     handleQuery,
     handleUpdate
-} from "@/common/features/crud-handlers";
+} from "@/common/_feat/crud-handlers";
 import {MovieCRUDBaseURL} from "@/domains/movies/_feat/crud/MovieCRUDBaseURL.ts";
 
 /** Retrieves all movie records. */

@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {ZodEnumParamHandler} from "@/common/features/validation-handlers";
+import {ZodEnumParamHandler} from "@/common/_feat/validation-handlers";
 
 /** Allowed Screen Details tab identifiers. */
 export const TheatreScreenDetailsActiveTabSchema = z.enum(["showings", "seating"], ZodEnumParamHandler());

@@ -8,7 +8,7 @@
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 
 /**
  * Route contract for reservation utility APIs.

@@ -4,7 +4,7 @@
 
 import {useMutation, type UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import {type MutationResponseConfig} from "@/common/features/submit-data";
+import {type MutationResponseConfig} from "@/common/_feat/submit-data";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import {ManageGenreImageMutationKeys, patchRemoveGenreImage} from "@/domains/genres/_feat/manage-image";
 import {type Genre, GenreSchema} from "@/domains/genres/schema";

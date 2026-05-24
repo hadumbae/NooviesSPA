@@ -15,7 +15,7 @@ import {TheatreScreenDetailsPageTabs} from "@/views/admin/theatres/theatre-scree
 
 import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 import {SeatDetails} from "@/domains/seats/schema/model";
-import {useSetAdminPageTitle} from "@/common/features/handle-pages";
+import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 
 /** Props for the TheatreScreenDetailsPageContent component. */
 type ContentProps = {

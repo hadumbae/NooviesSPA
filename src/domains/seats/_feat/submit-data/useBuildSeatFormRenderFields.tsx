@@ -23,7 +23,7 @@ import {
     SeatSubmitFormSeatFieldset
 } from "@/views/admin/seats/_feat/submit-data/form-view/SeatSubmitFormSeatFieldset.tsx";
 import {cloneElement, ReactElement} from "react";
-import {FormViewProps} from "@/common/features/submit-data/formTypes";
+import {FormViewProps} from "@/common/_feat/submit-data/formTypes";
 
 /** Props for filtering and disabling specific form fields. */
 export type FieldsProps = Pick<FormViewProps<SeatFormValues>, "disableFields" | "isNestedView">

@@ -8,7 +8,7 @@ import {toast} from "react-toastify";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {destroy} from "@/domains/genres/_feat/crud";
 import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDQueryKeys.ts";
 import {GenreCRUDMutationKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDMutationKeys.ts";

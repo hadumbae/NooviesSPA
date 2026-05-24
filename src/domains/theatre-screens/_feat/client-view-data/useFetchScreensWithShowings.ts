@@ -5,7 +5,7 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {fetchScreensWithShowings} from "./repository/repository.ts";
 import {TheatreScreenSchedule, TheatreScreenScheduleSchema} from "@/domains/theatre-screens/schema/model";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {TheatreScreenClientViewQueryKeys} from "@/domains/theatre-screens/_feat/client-view-data/queryKeys.ts";
 import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";

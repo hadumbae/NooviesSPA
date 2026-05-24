@@ -3,7 +3,7 @@ import {SearchParamFormContainerProps} from "@/common/type/form/SearchParamFormP
 import {PersonQueryOptions} from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
 import usePersonQueryOptionForm from "@/domains/persons/_feat/submit-query-options/usePersonQueryOptionForm.ts";
 import {PersonQueryOptionFormValues} from "@/domains/persons/_feat/submit-query-options/PersonQueryOptionFormValueSchema.ts";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {PersonQueryOptionsSchema} from "@/domains/persons/schema/query-options/PersonQueryOption.schema.ts";
 import PersonQueryOptionFormView
     from "@/views/admin/persons/_feat/query-option-form/PersonQueryOptionFormView.tsx";

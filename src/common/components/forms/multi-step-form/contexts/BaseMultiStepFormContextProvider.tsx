@@ -6,7 +6,7 @@ import {ReactElement, ReactNode} from "react";
 import {
     BaseMultiStepFormContext,
     BaseMultiStepFormContextValues
-} from "@/common/features/multi-step-form/contexts/baseContext.ts";
+} from "@/common/_feat/multi-step-form/contexts/baseContext.ts";
 
 /** Props for the BaseMultiStepFormContextProvider component. */
 type ProviderProps = BaseMultiStepFormContextValues & {

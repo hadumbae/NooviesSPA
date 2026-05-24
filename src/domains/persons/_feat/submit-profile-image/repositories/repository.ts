@@ -4,7 +4,7 @@
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
-import {buildURL} from "@/common/features/fetch-api";
+import {buildURL} from "@/common/_feat/fetch-api";
 import {PersonProfileImageBaseURL} from "@/domains/persons/_feat/submit-profile-image/repositories/baseURL.ts";
 import {UploadProfileImageConfig} from "@/domains/persons/_feat/submit-profile-image/repositories/repository.types.ts";
 

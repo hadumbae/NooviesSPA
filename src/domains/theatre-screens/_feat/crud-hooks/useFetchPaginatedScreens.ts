@@ -7,10 +7,10 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {TheatreScreenCRUDQueryKeys} from "@/domains/theatre-screens/_feat/crud-hooks/queryKeys.ts";
 import {ZodType, ZodTypeDef} from "zod";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {paginated} from "@/domains/theatre-screens/_feat/crud";
 import {TheatreScreenQueryOptions} from "@/domains/theatre-screens/schema/queries/TheatreScreenQueryOptionsSchema.ts";
 

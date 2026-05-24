@@ -3,7 +3,7 @@
  *
  */
 
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {
     useTheatreScheduleQueryForm
 } from "@/domains/showings/_feat/submit-theatre-schedule-query/useTheatreScheduleQueryForm.ts";
@@ -13,7 +13,7 @@ import {
     ShowingsPageQueryStringSchema
 } from "@/domains/movies/_feat/client-view-data";
 import {ReactElement, ReactNode, useId} from "react";
-import {BaseFormContextProvider} from "@/common/features/generic-form-context";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 
 /** Props for the TheatreShowingQueryForm component. */

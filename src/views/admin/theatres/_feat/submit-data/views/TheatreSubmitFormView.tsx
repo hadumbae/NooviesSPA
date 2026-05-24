@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {cn} from "@/common/lib/utils.ts";
 import {TheatreFormStarterValues} from "@/domains/theatres/_feat/submit-data";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {
     TheatreSubmitFormLocationFieldset
 } from "@/views/admin/theatres/_feat/submit-data/views/TheatreSubmitFormLocationFieldset.tsx";

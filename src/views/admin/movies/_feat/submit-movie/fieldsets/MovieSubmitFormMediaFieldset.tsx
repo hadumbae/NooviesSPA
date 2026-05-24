@@ -8,7 +8,7 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import LanguageHookFormSelect from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
 import {GenreHookFormSelect} from "@/views/admin/genres/_feat/form-input";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
-import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";

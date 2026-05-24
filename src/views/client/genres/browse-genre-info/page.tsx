@@ -10,7 +10,7 @@ import { PageLoader } from "@/views/common/_comp/page";
 import { BrowseGenreInfoPageContent } from "@/views/client/genres/browse-genre-info/content.tsx";
 import { QueryDataLoader } from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import { useFetchGenreWithMoviesViewData } from "@/domains/genres/_feat/client-view-data";
-import { useParsedPaginationValue } from "@/common/features/fetch-pagination-search-params";
+import { useParsedPaginationValue } from "@/common/_feat/fetch-pagination-search-params";
 
 /** Global constant defining the number of movie results per page. */
 const MOVIES_PER_PAGE = 10;

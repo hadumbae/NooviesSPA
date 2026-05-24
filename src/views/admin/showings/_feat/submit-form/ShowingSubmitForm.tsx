@@ -12,7 +12,7 @@ import {ShowingFormData} from "@/domains/showings/schema/form";
 import {useShowingSubmitMutation} from "@/domains/showings/_feat/crud-hooks";
 import {useShowingSubmitForm} from "@/domains/showings/_feat/submit-data";
 import {Form} from "@/common/components/ui/form.tsx";
-import {MutationFormResetConfig, MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {BaseMultiStepFormContextProvider} from "@/common/components/forms/multi-step-form";
 
 /** Props for the ShowingSubmitForm component when editing or creating. */

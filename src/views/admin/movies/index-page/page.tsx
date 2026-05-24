@@ -5,8 +5,8 @@
 
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import useParsedPaginationValue
-    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+    from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries";
 import {MovieIndexPageContent} from "@/views/admin/movies/index-page/content.tsx";
 import {PaginatedItems} from "@/common/types";

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";

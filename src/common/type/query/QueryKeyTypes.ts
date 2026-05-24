@@ -9,7 +9,7 @@
 
 import { RequestOptions } from "@/common/type/request/RequestOptions.ts";
 import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import { PaginationValues } from "@/common/features/fetch-pagination-search-params/schemas/PaginationValuesSchema.ts";
+import { PaginationValues } from "@/common/_feat/fetch-pagination-search-params/schemas/PaginationValuesSchema.ts";
 
 /**
  * Parameters for building a query key targeting a single document by `_id`.

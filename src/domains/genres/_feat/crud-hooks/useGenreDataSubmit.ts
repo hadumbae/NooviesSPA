@@ -9,7 +9,7 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {Genre, GenreSchema} from "@/domains/genres/schema/genre/GenreSchema.ts";
-import {MutationFormConfig, MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationFormConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDQueryKeys.ts";
 import {create, update} from "@/domains/genres/_feat/crud";
 import {GenreFormData} from "@/domains/genres/_feat/submit-form/GenreFormSchema.ts";

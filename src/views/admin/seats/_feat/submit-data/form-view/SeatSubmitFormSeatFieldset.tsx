@@ -10,7 +10,7 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
-import {FormFieldsetProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {SeatTypeHookFormSelect} from "@/views/admin/seats/_feat/form-inputs";
 
 

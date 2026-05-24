@@ -3,18 +3,18 @@
  */
 
 import {ReactElement, ReactNode, useEffect, useRef, useState} from "react";
-import {FormStepMeta} from "@/common/features/multi-step-form/types.ts";
+import {FormStepMeta} from "@/common/_feat/multi-step-form/types.ts";
 import {DeepPartial, FieldValues, Path, useFormContext} from "react-hook-form";
 import {
     MultiStepFormStateContext,
     MultiStepFormStateContextValues
-} from "@/common/features/multi-step-form/contexts/stateContext.ts";
+} from "@/common/_feat/multi-step-form/contexts/stateContext.ts";
 import {useDebouncedCallback} from "@/common/hooks/useDebouncedCallback.tsx";
-import {useBaseMultiStepFormContext} from "@/common/features/multi-step-form";
+import {useBaseMultiStepFormContext} from "@/common/_feat/multi-step-form";
 import {
     MultiStepFormSetterContext,
     MultiStepFormSetterContextValues
-} from "@/common/features/multi-step-form/contexts/setterContext.ts";
+} from "@/common/_feat/multi-step-form/contexts/setterContext.ts";
 import {toast} from "react-toastify";
 
 /** Props for the MultiStepForm component. */

@@ -11,7 +11,7 @@ import {
 } from "@/domains/theatres/_feat/admin-view-data";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 
 /** Configuration for the useFetchTheatreDetailsViewData hook. */

@@ -6,7 +6,7 @@ import {
     MultiStepFormProgressIndicatorStep
 } from "@/common/components/forms/multi-step-form/progress-indicator/MultiStepFormProgressIndicatorStep.tsx";
 import {ReactElement} from "react";
-import {useMultiStepFormStateContext} from "@/common/features/multi-step-form";
+import {useMultiStepFormStateContext} from "@/common/_feat/multi-step-form";
 
 /**
  * Displays a sequence of indicators representing each step of a multi-step form.

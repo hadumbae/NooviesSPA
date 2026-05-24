@@ -3,7 +3,7 @@
  * data fetching and pagination state for displaying a customer's movie reviews.
  */
 
-import {useParsedPaginationValue} from "@/common/features/fetch-pagination-search-params";
+import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {useFetchCustomerCode} from "@/domains/users/utils/fetch-customer-code/useFetchCustomerCode.ts";
 import {

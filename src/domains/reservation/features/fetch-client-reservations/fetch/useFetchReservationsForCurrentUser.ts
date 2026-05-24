@@ -3,7 +3,7 @@
  * @filename useFetchReservationsForCurrentUser.ts
  */
 
-import {PaginationValues} from "@/common/features/fetch-pagination-search-params";
+import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {useQuery} from "@tanstack/react-query";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";

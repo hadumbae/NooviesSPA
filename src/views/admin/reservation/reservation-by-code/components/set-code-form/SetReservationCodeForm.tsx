@@ -8,7 +8,7 @@ import {
     FetchByCodeSearchParams,
     FetchByCodeSearchParamsSchema, SetReservationCodeFormSubmit, SetReservationCodeFormValues
 } from "@/domains/reservation/views/admin/reservation-by-code/schemas";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {Form} from "@/common/components/ui/form.tsx";
 import {FormViewOptions} from "@/common/type/form/form-view/FormViewProps.ts";
 import {

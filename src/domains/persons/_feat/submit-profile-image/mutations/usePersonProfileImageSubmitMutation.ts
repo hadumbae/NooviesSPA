@@ -8,7 +8,7 @@ import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-qu
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {UseFormReturn} from "react-hook-form";
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {PersonProfileImageMutationKeys} from "@/domains/persons/_feat/submit-profile-image/mutations/mutationKeys.ts";
 import {
     patchUploadProfileImage,

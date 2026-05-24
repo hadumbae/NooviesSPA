@@ -7,7 +7,7 @@ import {PageLoader} from "@/views/common/_comp/page";
 import {TheatreShowingListPageContent} from "@/views/admin/theatres/theatre-showings-list/content.tsx";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useParsedPaginationValue
-    from "@/common/features/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+    from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {TheatreShowingListViewData, useFetchTheatreShowingListViewData} from "@/domains/theatres/_feat/admin-view-data";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {ReactElement} from "react";

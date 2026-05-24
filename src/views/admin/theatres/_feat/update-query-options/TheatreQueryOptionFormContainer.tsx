@@ -10,7 +10,7 @@ import { TheatreQueryOptionFormStarterValues } from "@/domains/theatres/_feat/ha
 import {
     useTheatreQueryOptionForm
 } from "@/domains/theatres/_feat/handle-query-options/useTheatreQueryOptionForm.ts";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {
     TheatreQueryOptions,
     TheatreQueryOptionSchema

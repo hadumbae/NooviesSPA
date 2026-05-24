@@ -5,11 +5,11 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {Form} from "@/common/components/ui/form.tsx";
-import {FormOptions} from "@/common/features/submit-data";
+import {FormOptions} from "@/common/_feat/submit-data";
 import {GenreQueryOptionFormStarter} from "@/domains/genres/_feat/query-form/schema.ts";
 import {useGenreQueryOptionForm} from "@/domains/genres/_feat/query-form/useGenreQueryOptionForm.ts";
 import {GenreQueryOptionFormContextProvider} from "@/domains/genres/_feat/query-form";
-import {useParsedSearchParams} from "@/common/features/fetch-search-params";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {GenreQueryOptions, GenreQueryOptionSchema} from "@/domains/genres/schema";
 
 /** Props for the {@link GenreQueryOptionForm} component. */

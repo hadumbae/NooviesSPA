@@ -5,7 +5,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/query-options/MovieCreditQueryOptionsSchema.ts";
 import {ListQueryConfig} from "@/common/types";
-import {buildQueryFn} from "@/common/features/validate-fetch-data";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {find, MovieCreditCRUDQueryKeys} from "@/domains/moviecredit/_feat/crud";
 
 /** Configuration for movie credit queries including filters and validation schema. */

@@ -9,7 +9,7 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {useFormContext} from "react-hook-form";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
-import {FormViewProps} from "@/common/features/submit-data/formTypes.ts";
+import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 
 /** Renders inputs for Row, Seat Number, and Seat Label, adapting the grid layout based on the display context. */
 export function SeatSubmitFormRowFieldset(

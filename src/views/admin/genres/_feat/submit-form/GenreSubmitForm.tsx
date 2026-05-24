@@ -5,8 +5,8 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
-import {FormOptions} from '@/common/features/submit-data/formTypes';
-import {MutationResponseConfig} from "@/common/features/submit-data";
+import {FormOptions} from 'src/common/_feat/submit-data/formTypes';
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {Form} from "@/common/components/ui/form.tsx";
 import {GenreFormContextProvider, GenreFormData, useGenreSubmitForm} from "@/domains/genres/_feat/submit-form";
 import {useGenreDataSubmit} from "@/domains/genres/_feat/crud-hooks";

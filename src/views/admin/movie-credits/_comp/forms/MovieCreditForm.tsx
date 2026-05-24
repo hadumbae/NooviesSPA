@@ -7,9 +7,9 @@ import {
 import {MovieCreditFormData} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
 import {useMovieCreditSubmitForm} from "@/domains/moviecredit/_feat/submit-data";
 import {useMovieCreditSubmitMutation} from "@/domains/moviecredit/_feat/crud-hooks";
-import {FormConfigProps} from "@/common/features/submit-data";
+import {FormConfigProps} from "@/common/_feat/submit-data";
 import {ReactElement} from "react";
-import {BaseFormContextProvider} from "@/common/features/generic-form-context";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form";
 
 /** Props for the MovieCreditSubmitForm component. */

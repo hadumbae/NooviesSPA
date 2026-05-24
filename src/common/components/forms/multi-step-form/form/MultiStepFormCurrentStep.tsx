@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
-import {FormStep, useMultiStepFormStateContext} from "@/common/features/multi-step-form";
+import {FormStep, useMultiStepFormStateContext} from "@/common/_feat/multi-step-form";
 
 /** Props for the MultiStepFormCurrentStep component. */
 type FormProps<TValues extends FieldValues> = {
