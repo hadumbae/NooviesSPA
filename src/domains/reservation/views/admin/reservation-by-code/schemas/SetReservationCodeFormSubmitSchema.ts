@@ -4,7 +4,9 @@
  */
 
 import {z} from "zod";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 import {ReservationUniqueCodeSchema} from "@/domains/reservation/schema/model";
 
 /**

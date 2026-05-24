@@ -4,7 +4,7 @@
  */
 
 import {LeanUserWithEmailSchema} from "@/domains/users/schemas/user";
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {
     CustomerMovieReviewSummarySchema
 } from "@/domains/review/schemas/customer-reviews";

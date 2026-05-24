@@ -19,8 +19,10 @@ import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.t
 import {CoercedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {ISO4217CurrencyCodeEnumSchema} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
 import {ReservationTypeConstant} from "@/domains/reservation/constants/ReservationTypeConstant.ts";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 
 /**
  * Base schema for ticket reservation form submissions.

@@ -6,7 +6,9 @@
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {RoleTypeDepartmentEnumSchema} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";

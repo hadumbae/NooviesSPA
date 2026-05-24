@@ -3,7 +3,9 @@ import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2C
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema.ts";
 
 /**

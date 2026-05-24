@@ -12,7 +12,7 @@ import {useFetchScreens} from "@/domains/theatre-screens/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {TheatreScreen, TheatreScreenSchema} from "@/domains/theatre-screens/schema/model";
 import {ReactElement} from "react";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
 
 /**
  * Props for the ScreenHookFormSelect component.

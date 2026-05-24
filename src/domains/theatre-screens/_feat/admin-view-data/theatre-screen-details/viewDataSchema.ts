@@ -5,7 +5,7 @@
 
 import {z} from "zod";
 import {TheatreScreenWithVirtualsSchema} from "@/domains/theatre-screens/schema/model";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {SeatDetailsSchema} from "@/domains/seats/schema/model";
 import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 

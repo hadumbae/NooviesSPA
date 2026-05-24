@@ -6,7 +6,7 @@ import {
     RoleTypeCastCategoryEnumSchema,
     RoleTypeCrewCategoryEnumSchema,
 } from "@/domains/roletype/schema/enums/RoleTypeCategory.enum.ts";
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 
 /**
  * Base schema defining shared fields for all role types.

@@ -9,7 +9,7 @@ import useParsedPaginationValue
     from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import MyFavouritesPageContent from "@/views/client/users/pages/favourites-page/MyFavouritesPageContent.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie";
 import {PaginatedItems} from "@/common/types";
 

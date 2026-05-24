@@ -17,7 +17,9 @@ import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema
 import { CoercedPositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import { SeatMapStatusEnum } from "@/domains/seatmap/schema/enum/SeatMapStatusEnum.ts";
 import generateFormValueSchema from "@/common/utility/schemas/generateFormValueSchema.ts";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 
 /**
  * @summary Base schema for validating raw SeatMap form input.

@@ -6,7 +6,7 @@
 
 import {z} from "zod";
 import {GenreSchema} from "@/domains/genres/schema";
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
 
 /**

@@ -1,6 +1,6 @@
 /** @fileoverview Zod schema and type definitions for paginated detailed theatre data. */
 
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 import {z} from "zod";
 

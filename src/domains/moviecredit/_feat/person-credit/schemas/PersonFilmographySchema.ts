@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {
     PersonCreditRoleGroupSchema
 } from "@/domains/moviecredit/_feat/person-credit/schemas/PersonCreditRoleGroupSchema.ts";

@@ -9,7 +9,7 @@ import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import useParsedPaginationValue
     from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {ShowingDetailsSchema} from "@/domains/showings/schema/showing";
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {ShowingQueryOptionSchema} from "@/domains/showings/schema/queries";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 

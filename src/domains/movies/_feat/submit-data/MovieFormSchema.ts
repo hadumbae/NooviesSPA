@@ -3,7 +3,9 @@
  */
 
 import {z} from "zod";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 import {CloudinaryImageSchema} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
@@ -20,8 +22,6 @@ import {
     CoercedPositiveNumberSchema,
 } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
-import refineToRequire from "@/common/utility/schemas/refineToRequire.ts";
-import {EmptyStringSchema} from "@/common/schema/strings/simple-strings/EmptyStringSchema.ts";
 import {NonFutureDateStringSchema} from "@/common/schema/dates/NonFutureDateStringSchema.ts";
 
 /** Zod schema for validating movie creation and update forms. */
@@ -45,10 +45,7 @@ export const MovieFormSchema = z.object({
 
     isReleased: CoercedBooleanValueSchema,
     isAvailable: CoercedBooleanValueSchema,
-    releaseDate: z.union(
-        [refineToRequire(EmptyStringSchema), NonFutureDateStringSchema],
-        {message: "Must be a non-future date or empty."},
-    ),
+    releaseDate: preprocessEmptyStringToUndefined(NonFutureDateStringSchema.optional()).optional()
 }).superRefine((values, ctx) => {
     const {releaseDate, isReleased} = values;
 

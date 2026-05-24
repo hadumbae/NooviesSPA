@@ -4,8 +4,8 @@
  */
 
 import {z} from "zod";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
 import {StringValueSchema} from "@/common/schema/strings/simple-strings/StringValueSchema.ts";
+import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 
 /**
  * Schema representing valid filter parameters for a genre query.

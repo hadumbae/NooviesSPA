@@ -8,7 +8,9 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEm
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {CleanedPositiveNumberSchema,} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 import {SeatLayoutTypeSchema} from "@/domains/seats/schema/fields";
 
 /**

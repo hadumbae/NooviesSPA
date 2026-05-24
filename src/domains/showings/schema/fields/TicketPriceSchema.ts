@@ -2,7 +2,9 @@
  * @fileoverview Zod schema and type definition for ticket price validation with empty string preprocessing.
  */
 
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {z} from "zod";
 

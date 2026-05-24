@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {MovieDetailsSchema} from "@/domains/movies/schema/movie";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {MovieCreditDetailsSchema} from "@/domains/moviecredit/schemas";
 import {MovieReviewSummarySchema} from "@/domains/review/schemas/models";
 

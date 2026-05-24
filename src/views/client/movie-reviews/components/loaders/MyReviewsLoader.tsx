@@ -6,7 +6,7 @@
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {useFetchMyMovieReviews} from "@/domains/review/fetch/my-reviews/useFetchMyMovieReviews.ts";
 import {ReactElement, ReactNode} from "react";
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {MyMovieReview, MyMovieReviewSchema} from "@/domains/review/schemas/my-reviews";
 import {PaginatedItems} from "@/common/types";
 

@@ -7,7 +7,7 @@ import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/Non
 import { URLStringSchema } from "@/common/schema/strings/URLStringSchema.ts";
 import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import { ISO3166Alpha2CountryCodeEnum } from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
 import { z } from "zod";
 import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
 

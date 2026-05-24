@@ -3,7 +3,7 @@
  * @filename ReservationPaginatedSchemas.ts
  */
 
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {PopulatedReservationSchema} from "@/domains/reservation/schema/model/PopulatedReservationSchema.ts";
 import {z} from "zod";
 

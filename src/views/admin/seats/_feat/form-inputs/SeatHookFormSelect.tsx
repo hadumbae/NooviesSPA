@@ -12,7 +12,7 @@ import {ReactElement} from "react";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {useFetchSeats} from "@/domains/seats/_feat/crud-hooks";
 import {Seat, SeatSchema} from "@/domains/seats/schema/model";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {SeatQueryFilters} from "@/domains/seats/_feat/handle-query-options";
 
 /** Props for the SeatHookFormSelect component. */

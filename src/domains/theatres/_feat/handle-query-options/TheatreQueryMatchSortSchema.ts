@@ -1,6 +1,8 @@
 import {z} from "zod";
 import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 
 /**
  * Zod schema defining sorting parameters for theatre queries.

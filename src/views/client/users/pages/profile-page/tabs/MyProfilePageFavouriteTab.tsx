@@ -20,7 +20,7 @@ import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import MyFavouriteMovieCompactCard from "@/views/client/movies/components/card/favourites/MyFavouriteMovieCompactCard.tsx";
 import {ChevronRight} from "lucide-react";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie";
 import {PaginatedItems} from "@/common/types";
 

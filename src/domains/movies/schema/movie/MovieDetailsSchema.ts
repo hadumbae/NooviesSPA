@@ -7,7 +7,7 @@ import {MovieReleaseDateRefinement} from "@/domains/movies/schema/movie/MovieSch
 import {z} from "zod";
 
 import {GenreSchema} from "@/domains/genres/schema/genre/GenreSchema.ts";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {MovieBaseSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**

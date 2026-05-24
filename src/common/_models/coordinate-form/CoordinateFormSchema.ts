@@ -1,7 +1,9 @@
 /** @fileoverview Zod schemas for coordinate form initialization and validation. */
 
 import {z} from "zod";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 import {LongitudeSchema} from "@/common/_models/coordinate/LongitudeSchema.ts";
 import {LatitudeSchema} from "@/common/_models/coordinate/LatitudeSchema.ts";
 

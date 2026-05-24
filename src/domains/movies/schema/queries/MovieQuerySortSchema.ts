@@ -4,7 +4,9 @@
 
 import {z} from "zod";
 import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 
 /** Zod schema defining available sorting parameters for movie queries. */
 export const MovieQuerySortSchema = z.object({

@@ -7,7 +7,7 @@ import {z} from "zod";
 import {MovieSnapshotSchema} from "@/domains/movies/schema/snapshot/MovieSnapshotSchema.ts";
 import {TheatreSnapshotSchema} from "@/domains/theatres/schema/snapshot/TheatreSnapshotSchema.ts";
 import {TheatreScreenSnapshotSchema} from "@/domains/theatre-screens/schema/snapshot/TheatreScreenSnapshotSchema.ts";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {ReservedSeatSnapshotSchema} from "@/domains/reservation/schema/snapshot/ReservedSeatSnapshotSchema.ts";
 import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";

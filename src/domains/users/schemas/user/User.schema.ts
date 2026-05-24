@@ -8,7 +8,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEm
 import {EmailStringSchema} from "@/common/schema/strings/EmailStringSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {UserRoleEnumSchema} from "@/domains/users/schemas/enums/UserRoleEnum.ts";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {UserUniqueCodeSchema} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 
 /**

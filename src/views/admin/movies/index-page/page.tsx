@@ -11,7 +11,7 @@ import {MovieQueryOptionSchema} from "@/domains/movies/schema/queries";
 import {MovieIndexPageContent} from "@/views/admin/movies/index-page/content.tsx";
 import {PaginatedItems} from "@/common/types";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie";
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {useFetchPaginatedMovies} from "@/domains/movies/_feat/crud-hooks";
 

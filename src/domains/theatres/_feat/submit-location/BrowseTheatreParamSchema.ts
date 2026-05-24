@@ -2,7 +2,9 @@
 
 import {z} from "zod";
 import {LocationTargetSchema} from "@/common/schema/strings/LocationTargetSchema.ts";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 
 /**
  * Schema for validating the theatre location search target.

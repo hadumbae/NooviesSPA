@@ -5,9 +5,9 @@
  */
 
 import {z} from "zod";
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
 import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
 import {GenreSchema} from "@/domains/genres/schema";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 
 /**
  * Internal schema representing the detail-specific aggregates for a genre.

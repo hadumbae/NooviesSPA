@@ -11,7 +11,7 @@ import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2C
 import {CloudinaryImageSchema} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
 import {UTCDayOnlyDateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCDayOnlyDateTimeSchema.ts";
 
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 
 /**
  * Base person schema.

@@ -4,7 +4,9 @@
  */
 
 import {ModerationMessageFormSchema} from "@/common/_feat/moderation/forms";
-import preprocessEmptyStringToUndefined from "@/common/utility/schemas/preprocessEmptyStringToUndefined.ts";
+import {
+    preprocessEmptyStringToUndefined
+} from "@/common/_feat/validation-preprocessors";
 import {z} from "zod";
 import {CoercedNumberValueSchema} from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
 

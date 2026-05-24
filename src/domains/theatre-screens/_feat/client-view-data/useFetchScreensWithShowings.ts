@@ -7,7 +7,7 @@ import {fetchScreensWithShowings} from "./repository/repository.ts";
 import {TheatreScreenSchedule, TheatreScreenScheduleSchema} from "@/domains/theatre-screens/schema/model";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {TheatreScreenClientViewQueryKeys} from "@/domains/theatre-screens/_feat/client-view-data/queryKeys.ts";
-import generateArraySchema from "@/common/utility/schemas/generateArraySchema.ts";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {DateOnlyString} from "@/common/schema/dates/DateOnlyStringSchema.ts";

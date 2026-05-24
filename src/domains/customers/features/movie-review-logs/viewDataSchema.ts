@@ -4,7 +4,7 @@
  */
 
 import {z} from "zod"
-import {generatePaginationSchema} from "@/common/utility/schemas/generatePaginationSchema.ts"
+import {generatePaginationSchema} from "@/common/_feat/validation-builders"
 import {MovieReviewModerationLogSchema} from "@/domains/review/features/moderation/schema"
 
 /**
