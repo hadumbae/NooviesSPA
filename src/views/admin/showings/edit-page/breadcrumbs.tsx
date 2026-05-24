@@ -11,7 +11,6 @@ import {
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import buildString from "@/common/utility/buildString.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
 import {ReactElement} from "react";
 
@@ -24,10 +23,7 @@ type BreadcrumbProps = {
 export function ShowingEditBreadcrumbs({showing}: BreadcrumbProps): ReactElement {
     const {slug, startTime, movie: {title: movieTitle}} = showing;
 
-    const detailsLabel = buildString([
-        movieTitle,
-        startTime.toFormat("(MMM dd, YY hh:mm)"),
-    ]);
+    const formattedStarTime = startTime.toFormat("LLL dd, yyyy | hh:mm");
 
     return (
         <Breadcrumb>
@@ -51,7 +47,7 @@ export function ShowingEditBreadcrumbs({showing}: BreadcrumbProps): ReactElement
                             to={`/admin/showings/get/${slug}`}
                             component={ShowingEditBreadcrumbs.name}
                         >
-                            {detailsLabel}
+                            {movieTitle} • {formattedStarTime}
                         </LoggedHoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>

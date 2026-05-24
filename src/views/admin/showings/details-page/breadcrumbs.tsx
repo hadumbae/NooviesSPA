@@ -10,8 +10,8 @@ import {
     BreadcrumbList, BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import {Link} from "react-router-dom";
 import {DateTime} from "luxon";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 
 /** Props for the ShowingDetailsPageBreadcrumbs component. */
 type BreadcrumbProps = {
@@ -25,16 +25,16 @@ type BreadcrumbProps = {
 export function ShowingDetailsPageBreadcrumbs(
     {movieTitle, startTime}: BreadcrumbProps
 ): ReactElement {
-    const formattedStartTime = startTime.toFormat("LLL dd, yyyy");
+    const formattedStartTime = startTime.toFormat("LLL dd, yyyy | hh:mm");
 
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <Link to="/admin/showings">
-                            Index
-                        </Link>
+                        <LoggedLink to="/admin/showings">
+                            All Showings
+                        </LoggedLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -42,7 +42,7 @@ export function ShowingDetailsPageBreadcrumbs(
 
                 <BreadcrumbItem>
                     <BreadcrumbPage>
-                        Showing | {movieTitle} ({formattedStartTime})
+                        {movieTitle} • {formattedStartTime}
                     </BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>
