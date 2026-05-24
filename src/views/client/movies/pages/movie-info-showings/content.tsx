@@ -3,8 +3,7 @@
  */
 
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
-import ShowingInfoCompactListCard
-    from "@/views/client/showings/_comp/showing-list/ShowingInfoCompactListCard.tsx";
+import {BrowseMovieShowingIndexCard} from "@/views/client/showings/_comp/info-index-card/BrowseMovieShowingIndexCard.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import MovieInfoHeader from "@/views/client/movies/components/headers/MovieInfoHeader.tsx";
 import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
@@ -50,7 +49,7 @@ export function MovieInfoShowingsPageContent(
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {showings.map(showing => (
-                        <ShowingInfoCompactListCard key={showing._id} showing={showing}/>
+                        <BrowseMovieShowingIndexCard key={showing._id} showing={showing}/>
                     ))}
                 </div>
 

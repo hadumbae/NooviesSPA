@@ -6,8 +6,8 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/commo
 import buildString from "@/common/utility/buildString.ts";
 import ISO3166Alpha2ShortCountryConstant from "@/common/constants/country/ISO3166Alpha2ShortCountryConstant.ts";
 import {
-    TheatreShowingSelectSummary
-} from "@/views/client/theatres/_comp/browse-theatres/TheatreShowingSelectSummary.tsx";
+    BrowseShowingSelector
+} from "@/views/client/showings/_comp/browse-showing-selector/BrowseShowingSelector.tsx";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {HoverUnderlineCSS} from "@/common/constants/css/TextCSS.ts";
@@ -42,7 +42,7 @@ export const TheatreBrowseListCard = ({theatre}: BrowseProps) => {
             <CardContent>
                 <section className="grid grid-cols-1 gap-2">
                     {showings.map((showing) => (
-                        <TheatreShowingSelectSummary
+                        <BrowseShowingSelector
                             key={showing._id}
                             className={RoundedBorderCSS}
                             showing={showing}
