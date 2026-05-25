@@ -5,7 +5,7 @@
 import {ReactElement, useContext, useEffect, useState} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
+import {CountryHookFormSelect} from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import filterFalsyAttributes from "@/common/utility/collections/filterFalsyAttributes.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
@@ -13,7 +13,7 @@ import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/comp
 import {Plus, X} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {MultiStepFormStateContext} from "@/common/_feat/multi-step-form/contexts/stateContext.ts";
-import TheatreHookFormSelect from "@/views/admin/theatres/_feat/form-input/TheatreHookFormSelect.tsx";
+import {TheatreHookFormSelect} from "@/views/admin/theatres/_feat/form-input/selects/TheatreHookFormSelect.tsx";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
 import {TheatreQuickOverviewFetchCard} from "@/views/admin/theatres/_comp/display-cards";
 import {MovieHookFormSelect} from "@/views/admin/movies/_feat/form-inputs";
@@ -22,6 +22,7 @@ import {ShowingFormValues} from "@/domains/showings/schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
+import {Theatre} from "@/domains/theatres/schema/theatre";
 
 /**
  * Form fieldset for selecting the movie and location details for a showing.
@@ -34,11 +35,18 @@ export function ShowingSubmitFormDetailsFieldset(
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
     const {isHydrated = true} = useContext(MultiStepFormStateContext) ?? {};
 
+    // --- WATCH ---
+
     const movie = watch("movie");
     const theatre = watch("theatre");
     const city = watch("theatreCity");
     const state = watch("theatreState");
     const country = watch("theatreCountry");
+
+    const theatreFilters = filterFalsyAttributes({city, state, country});
+    const onTheatreChange = (val: Theatre | null) => setValue("localTimezone", val?.location.timezone ?? "");
+
+    // --- HOOKS ---
 
     /** Effect: Reset location filters when the filter panel is closed. */
     useEffect(() => {
@@ -54,6 +62,7 @@ export function ShowingSubmitFormDetailsFieldset(
         if (isFilterOpen) {
             setValue("theatre", undefined);
             setValue("screen", undefined);
+            setValue("localTimezone", "");
         }
     }, [city, state, country]);
 
@@ -64,7 +73,7 @@ export function ShowingSubmitFormDetailsFieldset(
         }
     }, [theatre]);
 
-    const theatreFilters = filterFalsyAttributes({city, state, country});
+    // --- RENDER ---
 
     return (
         <fieldset className={cn("space-y-2", className)}>
@@ -140,6 +149,7 @@ export function ShowingSubmitFormDetailsFieldset(
                             label="Theatre"
                             description="The theatre at which the showing will be."
                             filters={theatreFilters}
+                            onValueChange={onTheatreChange}
                         />
 
                         {theatre && (

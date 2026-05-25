@@ -2,7 +2,7 @@
  * @fileoverview Defines a type for handling change events in select input forms.
  */
 
-import {FormOnChangeHandler} from "src/common/types/form/on-change/FormOnChangeHandler.ts";
+import {FormOnChangeHandler} from "@/common/types/form/on-change/FormOnChangeHandler.ts";
 import {SingleValue} from "react-select";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {FieldValues} from "react-hook-form";
