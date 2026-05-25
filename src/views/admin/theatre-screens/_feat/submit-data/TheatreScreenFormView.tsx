@@ -6,7 +6,9 @@ import {cloneElement, ReactElement} from "react";
 import {ScreenTypeHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
 import {useFormContext} from "react-hook-form";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
-import TheatreHookFormSelect from "@/views/admin/theatres/_feat/form-input/TheatreHookFormSelect.tsx";
+import {
+    TheatreHookFormSelect
+} from "@/views/admin/theatres/_feat/form-input/selects/TheatreHookFormSelect.tsx";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {TheatreScreenFormDisableFields} from "@/views/admin/theatre-screens/_feat/submit-data/types.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";

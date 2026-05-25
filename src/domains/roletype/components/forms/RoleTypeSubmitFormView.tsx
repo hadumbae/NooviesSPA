@@ -1,57 +1,39 @@
-import {FC} from 'react';
+/**
+ * @fileoverview Form view component for creating and updating RoleType entities.
+ */
+
+import {ReactElement} from 'react';
 import {Form} from "@/common/components/ui/form.tsx";
 import {RoleTypeForm, RoleTypeFormValues} from "@/domains/roletype/schema/submit-form/RoleTypeForm.types.ts";
 import {RoleType} from "@/domains/roletype/schema/model/RoleType.types.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
-import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
+import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
+import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import RoleTypeDepartmentConstant from "@/domains/roletype/constant/RoleTypeDepartmentConstant.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import {FormViewProps} from "@/common/type/form/HookFormProps.ts";
-import RoleTypeCategorySelect from "@/domains/roletype/components/inputs/RoleTypeCategorySelect.tsx";
+import {
+    RoleTypeCategorySelect
+} from "@/domains/roletype/components/inputs/RoleTypeCategorySelect.tsx";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
 import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
 
-/**
- * Props for {@link RoleTypeSubmitFormView}.
- *
- * Specializes {@link FormViewProps} for the `RoleType` domain, with its form schema and values.
- *
- * @property className - Optional CSS class for styling the form container.
- */
+/** Props for the RoleTypeSubmitFormView component. */
 type SubmitViewProps = FormViewProps<RoleType, RoleTypeForm, RoleTypeFormValues> & {
     className?: string;
 }
 
 /**
  * A form component for creating or editing a RoleType entity.
- *
- * Integrates with React Hook Form for form state management and React Query for async mutations.
- * Fields can be dynamically enabled or disabled via the `disableFields` prop.
- *
- * @param props - Props for the form view, including the `form` object from React Hook Form,
- *                the `submitHandler` function, the `mutation` object, and optional UI settings.
- * @returns JSX element rendering a fully controlled form with Role Name, Department, and Description fields.
- *
- * @example
- * ```tsx
- * <RoleTypeSubmitFormView
- *   form={roleTypeForm}
- *   submitHandler={handleRoleTypeSubmit}
- *   mutation={createRoleTypeMutation}
- *   disableFields={['description']}
- *   submitButtonText="Save Role"
- * />
- * ```
  */
-const RoleTypeSubmitFormView: FC<SubmitViewProps> = (props) => {
-    const { className, form, submitHandler, mutation, disableFields, submitButtonText } = props;
-    const { isPending } = mutation;
+export function RoleTypeSubmitFormView(
+    {className, form, submitHandler, mutation, disableFields, submitButtonText}: SubmitViewProps
+): ReactElement {
+    const {isPending} = mutation;
 
-    /** Determines which fields are active (enabled) based on the disableFields prop */
     const activeFields = {
         roleName: !disableFields?.includes("roleName"),
         department: !disableFields?.includes("department"),
@@ -59,7 +41,6 @@ const RoleTypeSubmitFormView: FC<SubmitViewProps> = (props) => {
         category: !disableFields?.includes("category"),
     };
 
-    /** Options for the Department select field, converted to Title Case */
     const departmentOptions: ReactSelectOption[] = RoleTypeDepartmentConstant.map((val) => ({
         label: convertToTitleCase(val),
         value: val
@@ -83,7 +64,6 @@ const RoleTypeSubmitFormView: FC<SubmitViewProps> = (props) => {
                     <HookFormSelect
                         name="department"
                         label="Department"
-                        control={form.control}
                         options={departmentOptions}
                     />
                 )}
@@ -115,6 +95,4 @@ const RoleTypeSubmitFormView: FC<SubmitViewProps> = (props) => {
             </form>
         </Form>
     );
-};
-
-export default RoleTypeSubmitFormView;
+}

@@ -1,49 +1,22 @@
-import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
-import {Control, FieldValues, Path} from "react-hook-form";
-import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
+/**
+ * @fileoverview Form select component for choosing a role type department.
+ */
+
+import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {FieldValues} from "react-hook-form";
+import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import RoleTypeDepartmentConstant from "@/domains/roletype/constant/RoleTypeDepartmentConstant.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {ReactElement} from "react";
+
 
 /**
- * Props for {@link RoleTypeDepartmentSelect}.
- *
- * @template TSubmit - The type of the form values object used by `react-hook-form`.
- * @property name - The field name in the form corresponding to this select input.
- * @property label - The label to display above the select input.
- * @property control - The `react-hook-form` control object to manage form state.
+ * A controlled select input for choosing a role type department using react-hook-form.
  */
-type SelectProps<TSubmit extends FieldValues> = {
-    name: Path<TSubmit>;
-    label: string;
-    control: Control<TSubmit>;
-};
-
-/**
- * **RoleTypeDepartmentSelect**
- *
- * A form select input for choosing a role type department.
- *
- * Features:
- * - Uses `react-hook-form` for state management and validation.
- * - Populates options from {@link RoleTypeDepartmentConstant}.
- * - Automatically converts constant values to title case for display.
- *
- * @template TSubmit - The type of the form values object for this select.
- *
- * @param props - Props including `name`, `label`, and `control` from `react-hook-form`.
- *
- * @example
- * ```tsx
- * <RoleTypeDepartmentSelect<MyFormValues>
- *   name="department"
- *   label="Department"
- *   control={form.control}
- * />
- * ```
- *
- * @returns JSX element rendering a controlled select input for role type departments.
- */
-const RoleTypeDepartmentSelect = <TSubmit extends FieldValues>(props: SelectProps<TSubmit>) => {
+export function RoleTypeDepartmentSelect<TSubmit extends FieldValues>(
+    props: HookFormInputControlProps<TSubmit>
+): ReactElement {
     const options: ReactSelectOption[] = RoleTypeDepartmentConstant.map(
         value => ({value, label: convertToTitleCase(value)})
     );
@@ -51,6 +24,4 @@ const RoleTypeDepartmentSelect = <TSubmit extends FieldValues>(props: SelectProp
     return (
         <HookFormSelect options={options} {...props} />
     );
-};
-
-export default RoleTypeDepartmentSelect;
+}

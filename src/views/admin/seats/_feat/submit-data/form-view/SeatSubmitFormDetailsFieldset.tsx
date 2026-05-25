@@ -8,7 +8,9 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import {useFormContext} from "react-hook-form";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
-import TheatreHookFormSelect from "@/views/admin/theatres/_feat/form-input/TheatreHookFormSelect.tsx";
+import {
+    TheatreHookFormSelect
+} from "@/views/admin/theatres/_feat/form-input/selects/TheatreHookFormSelect.tsx";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 

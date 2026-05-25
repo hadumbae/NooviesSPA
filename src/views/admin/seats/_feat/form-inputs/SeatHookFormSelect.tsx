@@ -2,11 +2,11 @@
  * @fileoverview Hook Form select component for choosing seats, supporting filtering and single/multi-selection.
  */
 
-import {Control, FieldValues, Path} from "react-hook-form";
+import {FieldValues} from "react-hook-form";
 import {Loader} from "lucide-react";
-import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
-import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
-import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
+import {HookFormMultiSelect} from "@/views/common/_comp/form-select/HookFormMultiSelect.tsx";
+import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
+import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import buildString from "@/common/utility/buildString.ts";
 import {ReactElement} from "react";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
@@ -14,14 +14,10 @@ import {useFetchSeats} from "@/domains/seats/_feat/crud-hooks";
 import {Seat, SeatSchema} from "@/domains/seats/schema/model";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {SeatQueryFilters} from "@/domains/seats/_feat/handle-query-options";
+import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 
 /** Props for the SeatHookFormSelect component. */
-type SelectProps<TValues extends FieldValues> = {
-    name: Path<TValues>;
-    label: string;
-    description?: string;
-    placeholder?: string;
-    control: Control<TValues>;
+type SelectProps<TValues extends FieldValues> = HookFormInputControlProps<TValues> & {
     filters?: SeatQueryFilters;
     isMulti?: boolean;
 };
@@ -30,9 +26,8 @@ type SelectProps<TValues extends FieldValues> = {
  * Renders a validated selection input for seats that maps query results to form options.
  */
 export function SeatHookFormSelect<TValues extends FieldValues>(
-    props: SelectProps<TValues>
+    {isMulti = false, filters = {layoutType: "SEAT"}, ...rest}: SelectProps<TValues>
 ): ReactElement {
-    const {isMulti = false, filters = {layoutType: "SEAT"}} = props;
     const query = useFetchSeats({queries: filters, schema: generateArraySchema(SeatSchema)});
 
     return (
@@ -51,8 +46,8 @@ export function SeatHookFormSelect<TValues extends FieldValues>(
                 );
 
                 return isMulti
-                    ? <HookFormMultiSelect options={options} {...props} />
-                    : <HookFormSelect options={options} {...props} />;
+                    ? <HookFormMultiSelect options={options} {...rest} />
+                    : <HookFormSelect options={options} {...rest} />;
             }}
         </QueryDataLoader>
     );

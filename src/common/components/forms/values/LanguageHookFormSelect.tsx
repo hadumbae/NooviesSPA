@@ -1,64 +1,25 @@
 /**
- * @file LanguageHookFormSelect.tsx
- * @description
- * A reusable language selector integrated with React Hook Form.
- * Supports single-select and multi-select modes using ISO 639-1 language codes.
- *
- * Works with generic form types (`TValues extends FieldValues`) from `react-hook-form`.
- *
- * @example
- * // Single select
- * <LanguageHookFormSelect
- *    name="preferredLanguage"
- *    label="Preferred Language"
- *    control={control}
- * />
- *
- * // Multi-select
- * <LanguageHookFormSelect
- *    name="knownLanguages"
- *    label="Known Languages"
- *    control={control}
- *    isMulti
- * />
+ * @fileoverview A reusable language selector integrated with React Hook Form using ISO 639-1 codes.
  */
 
-import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
-import HookFormMultiSelect from "@/common/components/forms/select/HookFormMultiSelect.tsx";
-import HookFormSelect from "@/common/components/forms/select/HookFormSelect.tsx";
-import {
-    ISO6391LanguageLabels as ISO6391LanguageConstant
-} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
+import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {HookFormMultiSelect} from "@/views/common/_comp/form-select/HookFormMultiSelect.tsx";
+import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
+import {ISO6391LanguageLabels as ISO6391LanguageConstant} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
 import ISO6391CodeConstant from "@/common/constants/languages/ISO6391CodeConstant.ts";
 import {FieldValues} from "react-hook-form";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {ReactElement} from "react";
 
-/**
- * Props for the {@link LanguageHookFormSelect} component.
- *
- * @template TValues - The type of the form values from `react-hook-form`.
- */
+/** Props for the LanguageHookFormSelect component. */
 type HookSelectProps<TValues extends FieldValues> = HookFormInputControlProps<TValues> & {
-    /** Whether the select should allow multiple selections */
     isMulti?: boolean;
 };
 
-/**
- * `LanguageHookFormSelect` provides a type-safe language selection input integrated with React Hook Form.
- *
- * Features:
- * - Supports both single-select and multi-select modes
- * - Uses ISO 639-1 language codes for options
- * - Works with generic form types (`TValues extends FieldValues`)
- *
- * @template TValues - The type of the form values.
- *
- * @param {HookSelectProps<TValues>} props - Props to configure the language select input.
- * @returns {JSX.Element} A form-connected language select input.
- */
-const LanguageHookFormSelect = <TValues extends FieldValues>(
+/** A form-connected language select input supporting single and multi-select modes. */
+export function LanguageHookFormSelect<TValues extends FieldValues>(
     props: HookSelectProps<TValues>
-) => {
+): ReactElement {
     const {isMulti = false, ...rest} = props;
 
     const options = ISO6391CodeConstant.map((code): ReactSelectOption => ({
@@ -71,6 +32,4 @@ const LanguageHookFormSelect = <TValues extends FieldValues>(
             ? <HookFormMultiSelect options={options} {...rest} />
             : <HookFormSelect options={options} {...rest} />
     );
-};
-
-export default LanguageHookFormSelect;
+}

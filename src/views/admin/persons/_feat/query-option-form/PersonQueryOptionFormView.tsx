@@ -8,7 +8,7 @@ import { PersonQueryOptionsSchema } from "@/domains/persons/schema/query-options
 import { Separator } from "@/common/components/ui/separator.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
+import {CountryHookFormSelect} from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import { cn } from "@/common/lib/utils.ts";
 import HookFormSortToggle from "@/common/components/forms/HookFormSortToggle.tsx";
 

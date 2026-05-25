@@ -5,10 +5,10 @@
 
 import {ReactElement} from 'react';
 import {UseFormReturn} from "react-hook-form";
-import {MovieQueryOptionFormValues} from "../../../../../domains/movies/_feat/submit-queries/MovieQueryOptionFormValueSchema.ts";
+import {MovieQueryOptionFormValues} from "@/domains/movies/_feat/submit-queries";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
+import {CountryHookFormSelect} from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {GenreHookFormSelect} from "@/views/admin/genres/_feat/form-input";
 

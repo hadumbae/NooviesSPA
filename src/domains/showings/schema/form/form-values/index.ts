@@ -1,10 +1,10 @@
 import {
+    ShowingFormValues,
     ShowingFormDateTimeValues,
     ShowingFormDetailValues,
     ShowingFormLanguageValues,
     ShowingFormStatusValues
 } from "@/domains/showings/schema/form/form-values/ShowingFormValues.ts";
-import {ShowingFormValues} from "@/domains/showings/schema/form";
 
 export type {
     ShowingFormStatusValues,
@@ -13,3 +13,4 @@ export type {
     ShowingFormDateTimeValues,
     ShowingFormValues,
 }
+

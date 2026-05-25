@@ -47,6 +47,7 @@ export function useShowingSubmitFormDefaultValues(
             theatre: "",
             screen: "",
             status: "SCHEDULED",
+            localTimezone: theatreTimezone ?? "",
             theatreCity: "",
             theatreState: "",
             theatreCountry: undefined,

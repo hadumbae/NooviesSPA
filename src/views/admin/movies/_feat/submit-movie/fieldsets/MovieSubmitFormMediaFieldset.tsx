@@ -5,7 +5,9 @@
 import {ReactElement} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import LanguageHookFormSelect from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
+import {
+    LanguageHookFormSelect
+} from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
 import {GenreHookFormSelect} from "@/views/admin/genres/_feat/form-input";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";

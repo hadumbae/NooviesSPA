@@ -11,7 +11,9 @@ import {
     RoleTypeQueryOptionsFormValuesSchema
 } from "@/domains/roletype/schema/query-options/RoleTypeQueryOptions.schema.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import RoleTypeDepartmentSelect from "@/domains/roletype/components/inputs/RoleTypeDepartmentSelect.tsx";
+import {
+    RoleTypeDepartmentSelect
+} from "@/domains/roletype/components/inputs/RoleTypeDepartmentSelect.tsx";
 
 /**
  * Props for {@link RoleTypeQueryOptionFormView}.

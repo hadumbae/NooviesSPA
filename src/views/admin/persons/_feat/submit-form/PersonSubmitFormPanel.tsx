@@ -15,7 +15,7 @@ import {
 import {PersonFormValues} from "@/domains/persons/_feat/submit-form/PersonFormSchema.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
-import CountryHookFormSelect from "@/common/components/forms/values/CountryHookFormSelect.tsx";
+import {CountryHookFormSelect} from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {useFormContext} from "react-hook-form";

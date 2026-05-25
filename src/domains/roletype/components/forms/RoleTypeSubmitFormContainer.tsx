@@ -3,7 +3,9 @@ import useRoleTypeSubmitForm from "@/domains/roletype/hooks/forms/useRoleTypeSub
 import {RoleType} from "@/domains/roletype/schema/model/RoleType.types.ts";
 import {RoleTypeForm, RoleTypeFormValues} from "@/domains/roletype/schema/submit-form/RoleTypeForm.types.ts";
 import useRoleTypeSubmitMutation from "@/domains/roletype/hooks/mutations/useRoleTypeSubmitMutation.ts";
-import RoleTypeSubmitFormView from "@/domains/roletype/components/forms/RoleTypeSubmitFormView.tsx";
+import {
+    RoleTypeSubmitFormView
+} from "@/domains/roletype/components/forms/RoleTypeSubmitFormView.tsx";
 
 import {FormContainerProps} from "@/common/type/form/HookFormProps.ts";
 import {MutationEditByIDParams} from "@/common/type/form/MutationSubmitParams.ts";

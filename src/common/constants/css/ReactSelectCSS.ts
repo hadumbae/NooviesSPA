@@ -1,45 +1,13 @@
 /**
- * @file ReactSelectCSS.ts
- * @description
- * Provides reusable `react-select` style configurations for both single-select
- * and multi-select components used across the application.
- *
- * These configs use:
- * - Tailwind classes
- * - The internal `cn()` class-merge utility
- * - `HookFormInputCSS` for consistent input styling
- * - Dark mode support
- *
- * Exported styles:
- * - `ReactSelectStyleConfig` — single-select styling
- * - `ReactSelectMultiStyleConfig` — multi-select styling, including tag chips
- *
- * Designed for use with `react-select`’s `classNames` property in **unstyled mode**.
+ * @fileoverview Reusable react-select style configurations for single and multi-select components.
  */
 
 import {ClassNamesConfig, GroupBase} from "react-select";
-import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormInputCSS} from "@/common/constants/css/HookFormInputCSS.ts";
 
-/**
- * Style configuration for **single-select** `react-select` components.
- *
- * Applies consistent:
- * - Input styling (via `HookFormInputCSS`)
- * - Focus borders
- * - Dropdown menu styling
- * - Option hover/selected styling
- *
- * Should be passed to the `classNames` prop of a single-select component.
- *
- * @example
- * <Select
- *    options={options}
- *    classNames={ReactSelectStyleConfig}
- *    unstyled={true}
- * />
- */
+/** Style configuration for single-select components used with the unstyled prop. */
 export const ReactSelectStyleConfig: ClassNamesConfig<
     ReactSelectOption,
     false,
@@ -68,25 +36,7 @@ export const ReactSelectStyleConfig: ClassNamesConfig<
         ),
 };
 
-/**
- * Style configuration for **multi-select** `react-select` components.
- *
- * Extends the single-select config with:
- * - Tag (`multiValue`) styling
- * - Tag removal button styling
- * - Adjusted control height
- * - Value container spacing
- *
- * Should be passed to the `classNames` prop of a multi-select component.
- *
- * @example
- * <Select
- *    isMulti
- *    options={options}
- *    classNames={ReactSelectMultiStyleConfig}
- *    unstyled={true}
- * />
- */
+/** Style configuration for multi-select components including tag and chip styling. */
 export const ReactSelectMultiStyleConfig: ClassNamesConfig<
     ReactSelectOption,
     true,

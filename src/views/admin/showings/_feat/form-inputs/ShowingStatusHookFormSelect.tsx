@@ -1,58 +1,21 @@
 /**
- * @file ShowingStatusHookFormSelect.tsx
- * @description
- * A reusable React Hook Form select component specifically for selecting a showing status.
- * This component maps all statuses from `ShowingStatusConstant` to a `ReactSelectOption[]` and
- * renders a `HookFormSelect` with those options. It ensures the select is properly typed for
- * the `ShowingFormValues` form schema by default, while allowing generic form value types.
- *
- * @module ShowingStatusHookFormSelect
+ * @fileoverview A form select component for choosing a showing status.
  */
 
-import HookFormSelect, {SelectProps} from "@/common/components/forms/select/HookFormSelect.tsx";
+import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {FieldValues} from "react-hook-form";
-import ReactSelectOption from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {ShowingStatusConstant} from "@/domains/showings/schema/fields/ShowingStatusConstant.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 
 
 import {ShowingFormValues} from "@/domains/showings/schema/form";
 import {ReactElement} from "react";
+import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 
-/**
- * Props for `ShowingStatusHookFormSelect`.
- *
- * Extends `SelectProps` from `HookFormSelect`, but removes the `options` prop
- * to enforce the component’s internal use of `ShowingStatusConstant`.
- *
- * @template TValues - The form values type, defaults to `ShowingFormValues`.
- */
-type StatusProps<TValues extends FieldValues> = Omit<SelectProps<TValues>, "options"> & {
-    /** `options` is never allowed; this component generates options automatically. */
-    options?: never;
-};
-
-/**
- * A Hook Form select component for showing statuses.
- *
- * This component automatically generates the `options` from `ShowingStatusConstant`,
- * converting each status to title case with spaces for display.
- *
- * @template TValues - The form values type, defaults to `ShowingFormValues`.
- * @param {StatusProps<TValues>} props - Props to pass to the underlying `HookFormSelect`.
- * @returns {JSX.Element} A `HookFormSelect` component with predefined showing status options.
- *
- * @example
- * ```tsx
- * <ShowingStatusHookFormSelect
- *   name="status"
- *   control={control}
- *   placeholder="Select a showing status"
- * />
- * ```
- */
+/** A controlled select input for showing statuses integrated with react-hook-form. */
 export function ShowingStatusHookFormSelect<TValues extends FieldValues = ShowingFormValues>(
-    props: StatusProps<TValues>
+    props: HookFormInputControlProps<TValues>
 ): ReactElement {
     const options: ReactSelectOption[] = ShowingStatusConstant.map(
         status => {
