@@ -41,6 +41,8 @@ export function ShowingSubmitForm(
 
     const resetOnSuccess = (data: ShowingDetails) => {
         localStorage.removeItem(localStorageKey);
+        sessionStorage.removeItem(localStorageKey);
+
         onSubmitConfig?.onSubmitSuccess?.(data);
     };
 

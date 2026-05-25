@@ -39,9 +39,6 @@ export function MultiStepForm<TValues extends FieldValues, TForm extends FieldVa
     const [isHydrated, setIsHydrated] = useState<boolean>(false);
     const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
 
-    const editKey = formState.defaultValues?._id ?? "new";
-    const activeKey = `${localStorageKey}-${editKey}`
-
     const initialValues = useRef<TValues>(formState.defaultValues as TValues);
     const currentStep = stepMeta[currentStepIndex];
 
@@ -49,7 +46,7 @@ export function MultiStepForm<TValues extends FieldValues, TForm extends FieldVa
 
     useEffect(() => {
         try {
-            const saved = storage.getItem(activeKey);
+            const saved = storage.getItem(localStorageKey);
 
             if (useStorage && saved) {
                 const parsed = JSON.parse(saved) as DeepPartial<TValues>;
@@ -66,7 +63,7 @@ export function MultiStepForm<TValues extends FieldValues, TForm extends FieldVa
     // --- Persist Values On Change ---
 
     const debouncedWatch = useDebouncedCallback((values: DeepPartial<TValues>) => {
-        storage.setItem(activeKey, JSON.stringify(values));
+        storage.setItem(localStorageKey, JSON.stringify(values));
     });
 
     useEffect(() => {
@@ -74,7 +71,7 @@ export function MultiStepForm<TValues extends FieldValues, TForm extends FieldVa
 
         const subscription = watch((newValues) => debouncedWatch(newValues));
         return () => subscription.unsubscribe();
-    }, [watch, isHydrated, activeKey]);
+    }, [watch, isHydrated, localStorageKey]);
 
     // --- Helpers ---
 
@@ -92,7 +89,7 @@ export function MultiStepForm<TValues extends FieldValues, TForm extends FieldVa
 
     const resetForm = () => {
         reset(initialValues.current);
-        storage.removeItem(activeKey);
+        storage.removeItem(localStorageKey);
         setCurrentStepIndex(0);
     }
 
