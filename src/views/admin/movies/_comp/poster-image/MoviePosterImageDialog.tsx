@@ -2,7 +2,14 @@
 
 import {ReactElement, useState} from 'react';
 import {cn} from "@/common/lib/utils.ts";
-import {Dialog, DialogContent, DialogTrigger} from "@/common/components/ui/dialog.tsx";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger
+} from "@/common/components/ui/dialog.tsx";
 import {HasNoMoviePosterPlaceholder} from "@/views/admin/movies/_comp/poster-image/HasNoMoviePosterPlaceholder.tsx";
 
 /** Props for the MoviePosterImageDialog component. */
@@ -54,6 +61,11 @@ export function MoviePosterImageDialog(
             </DialogTrigger>
 
             <DialogContent className="p-0 bg-transparent border-0">
+                <DialogHeader className="hidden">
+                    <DialogTitle>Poster Image</DialogTitle>
+                    <DialogDescription>{alt}</DialogDescription>
+                </DialogHeader>
+
                 <img
                     src={url}
                     alt={alt}

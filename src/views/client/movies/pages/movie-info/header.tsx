@@ -7,7 +7,7 @@ import {
     MovieOverviewHeadline
 } from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewHeadline.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
+import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {
     MovieOverviewMeta
 } from "@/views/client/movies/pages/movie-info/rows/movie-info-overview/MovieOverviewMeta.tsx";
@@ -37,7 +37,7 @@ export function MovieOverviewHeader({movie, credits}: OverviewProps): ReactEleme
                 <CardContent className="p-0">
                     <div className="grid lg:grid-rows-[2fr_1fr] grid-cols-3 lg:max-h-[400px]">
                         <section className="lg:row-span-2 flex justify-center items-center p-2">
-                            <MoviePosterImage url={posterImage?.secure_url} className="max-lg:w-full lg:h-[350px]"/>
+                            <MoviePosterImageDialog url={posterImage?.secure_url} className="max-lg:w-full lg:h-[350px]"/>
                         </section>
 
                         <section className="col-span-2 px-3 py-3">
