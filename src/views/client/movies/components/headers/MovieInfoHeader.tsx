@@ -35,7 +35,7 @@ const MovieInfoHeader = (
     return (
         <header className="flex space-x-4 items-end">
             <LoggedLink to={`/browse/movies/${movieSlug}`}>
-                <MoviePosterImage url={posterURL} className="h-28"/>
+                <MoviePosterImage url={posterURL} className="h-28 aspect-[2/3]"/>
             </LoggedLink>
 
             <div className="space-y-1 py-3">
