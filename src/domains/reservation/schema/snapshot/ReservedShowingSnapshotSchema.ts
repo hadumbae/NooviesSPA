@@ -28,7 +28,7 @@ export const ReservedShowingSnapshotSchema = z.object({
     screen: TheatreScreenSnapshotSchema,
 
     /** List of specific seats allocated to this reservation. */
-    selectedSeats: generateArraySchema(ReservedSeatSnapshotSchema),
+    selectedSeats: generateArraySchema(ReservedSeatSnapshotSchema).nullable(),
 
     /** The exact scheduled start time (UTC). */
     startTime: UTCISO8601DateTimeSchema,
