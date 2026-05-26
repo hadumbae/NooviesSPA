@@ -42,7 +42,7 @@ export function BrowseShowingSelector(
             />
 
             <div className="flex justify-between items-center">
-                <span className="secondary-text text-sm">
+                <span className="secondary-text text-sm font-semibold">
                     {formattedStartTime}
                 </span>
 

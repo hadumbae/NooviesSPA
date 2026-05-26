@@ -47,7 +47,7 @@ export function ShowingInfoMovieMeta(
                 {formattedMovieTitle}
             </LoggedLink>
 
-            <SecondaryHeaderText className="max-md:text-sm">
+            <SecondaryHeaderText className="max-md:text-sm font-semibold">
                 {metaString}
             </SecondaryHeaderText>
         </div>
