@@ -14,7 +14,7 @@ import {z} from "zod";
  * ---
  */
 export const UTCISO8601DateTimeSchema = UTCISO8601StringSchema
-    .transform((dateString) => DateTime.fromISO(dateString) as DateTime<true>)
+    .transform((dateString) => DateTime.fromISO(dateString, {zone: "UTC"}) as DateTime<true>)
     .refine((date) => date.isValid, { message: "Invalid Luxon DateTime produced." });
 
 /**
