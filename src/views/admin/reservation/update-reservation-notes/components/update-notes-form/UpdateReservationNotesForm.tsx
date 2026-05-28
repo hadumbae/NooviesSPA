@@ -1,45 +1,30 @@
 /**
- * @file Logical container for updating administrative reservation notes with context integration.
- * @filename UpdateReservationNotesForm.tsx
+ * @fileoverview Logical container for updating administrative reservation notes with context integration.
  */
 
 import {
     useUpdateReservationNotesForm, useUpdateReservationNotesMutation,
-} from "@/domains/reservation/features/update-reservations/hooks";
+} from "@/domains/reservation/_feat/update-reservations/hooks";
 import {
     UpdateReservationNotesFormSubmit,
-} from "@/domains/reservation/features/update-reservations/schemas";
+} from "@/domains/reservation/_feat/update-reservations/schemas";
 import {Form} from "@/common/components/ui/form.tsx";
 import {ReactNode} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {AdminReservation} from "@/domains/reservation/schema/model";
-import {
-    UpdateReservationNotesFormContextProvider
-} from "@/views/admin/reservation/update-reservation-notes/components/providers";
+import {UpdateReservationNotesFormContextProvider} from "@/domains/reservation/_feat/update-reservations/contexts";
 
-/**
- * Properties for the {@link UpdateReservationNotesForm} component.
- */
+/** Props for the UpdateReservationNotesForm component. */
 type FormProps = MutationOnSubmitParams<AdminReservation> & {
-    /** The UI components, inputs, and actions to be rendered within the form. */
     children: ReactNode;
-
-    /** The unique MongoDB ObjectId of the target reservation record. */
     reservationID: ObjectId;
-
-    /**
-     * An optional identifier suffix.
-     * Ensures HTML `id` uniqueness when multiple note forms exist on a single page.
-     */
     uniqueKey?: string;
-
-    /** Initial values used to populate the form fields upon mounting. */
     presetValues?: Partial<UpdateReservationNotesFormSubmit>;
 };
 
 /**
- * An administrative form controller that manages the lifecycle of reservation note updates.
+ * Administrative form controller that manages the lifecycle of reservation note updates.
  */
 export const UpdateReservationNotesForm = (
     {children, reservationID, uniqueKey, presetValues, ...onSubmitProps}: FormProps

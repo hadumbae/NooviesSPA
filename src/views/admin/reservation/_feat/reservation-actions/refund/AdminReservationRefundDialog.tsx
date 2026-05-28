@@ -1,48 +1,36 @@
 /**
- * @file Interactive dialog popup for editing administrative reservation notes.
- * @filename UpdateReservationNotesFormPopup.tsx
+ * @fileoverview Confirmation dialog for the administrative refund process.
+ *
+ * Requires wrapping in a Form provider and UpdateReservationNotesFormContext.
  */
-
-import {ReactNode} from "react";
 import {
-    Dialog,
-    DialogTrigger,
+    Dialog, DialogClose,
     DialogContent,
+    DialogDescription, DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogDescription,
-    DialogFooter, DialogClose
+    DialogTrigger
 } from "@/common/components/ui/dialog.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
-import {useFormContext} from "react-hook-form";
+import {Button} from "@/common/components/ui/button.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {UpdateReservationNotesFormContext} from "@/domains/reservation/_feat/update-reservations/contexts";
+import {ReactElement, ReactNode} from "react";
+import {useFormContext} from "react-hook-form";
+import {ReservationUniqueCode} from "@/domains/reservation/schema/model";
 
-/**
- * Properties for the {@link UpdateReservationNotesFormPopup} component.
- */
-type PopupProps = {
-    /** Controlled state for the dialog visibility. */
+/** Props for the AdminReservationRefundDialog component. */
+type DialogProps = {
+    children: ReactNode;
     isOpen: boolean;
-    /** Callback to update the visibility state. */
-    setIsOpen: (open: boolean) => void
-    /** The trigger element (e.g., an Edit button) rendered as the dialog initiator. */
-    children?: ReactNode;
-    /** Custom title for the dialog header. Defaults to "Update Notes". */
-    title?: string
-    /** Custom description text. Defaults to "Update Admin Notes For Reservation". */
-    description?: string
-    /** Custom text for the primary action button. Defaults to "Update". */
-    buttonText?: string
+    setIsOpen: (open: boolean) => void;
+    uniqueCode: ReservationUniqueCode;
 };
 
-/**
- * A modal presentation layer that integrates with the reservation notes form context.
- */
-export const UpdateReservationNotesFormPopup = (
-    {children, isOpen, setIsOpen, title, description, buttonText}: PopupProps
-) => {
+/** Modal interface that captures refund reasons and confirms the financial action. */
+export function AdminReservationRefundDialog(
+    {children, uniqueCode, isOpen, setIsOpen}: DialogProps
+): ReactElement {
     const {control} = useFormContext();
     const {formID} = useRequiredContext({context: UpdateReservationNotesFormContext});
 
@@ -51,20 +39,22 @@ export const UpdateReservationNotesFormPopup = (
             <DialogTrigger asChild>
                 {children}
             </DialogTrigger>
+
             <DialogContent className="sm:max-w-sm">
                 <DialogHeader>
                     <DialogTitle className="primary-text">
-                        {title ?? "Update Notes"}
+                        Refund Reservation
                     </DialogTitle>
                     <DialogDescription className="secondary-text">
-                        {description ?? "Update Admin Notes For Reservation"}
+                        Are you sure you want to refund Reservation <span className="font-bold">{uniqueCode}</span>?
                     </DialogDescription>
                 </DialogHeader>
 
                 <HookFormTextArea
-                    label="Admin Notes"
+                    label="Refund Reason / Admin Notes"
                     name="notes"
                     control={control}
+                    placeholder="Enter reason for refund..."
                 />
 
                 <DialogFooter className="max-md:gap-2">
@@ -73,10 +63,10 @@ export const UpdateReservationNotesFormPopup = (
                     </DialogClose>
 
                     <Button form={formID} variant="primary" type="submit">
-                        {buttonText ?? "Update"}
+                        Confirm Refund
                     </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
     );
-};
+}

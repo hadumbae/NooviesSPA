@@ -5,7 +5,7 @@
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {ReservationFormContainer} from "@/views/client/reservations/components/reserve-ticket-form";
+import {ReservationForm} from "@/views/client/reservations/_feat/reserve-ticket-form";
 import {ShowingInfoPageHeader} from "@/views/client/showings/showing-info/header.tsx";
 import {ReactElement} from "react";
 import {ReservationType} from "@/domains/reservation/schema/model";
@@ -51,7 +51,7 @@ export function ShowingInfoPageContent(
                 <PageSectionHeader text="Ticket Selection" />
 
                 {/* Form orchestrator handling both GA and Reserved Seating logic */}
-                <ReservationFormContainer
+                <ReservationForm
                     showingID={showing._id}
                     reservationType={reservationType}
                     currency="USD"
