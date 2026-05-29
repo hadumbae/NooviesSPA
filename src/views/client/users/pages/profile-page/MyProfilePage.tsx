@@ -1,13 +1,5 @@
 /**
- * @file MyProfilePage.tsx
- *
- * Page container for the authenticated user's profile.
- *
- * @remarks
- * - Sets the browser document title.
- * - Ensures an authenticated user is present before rendering content.
- * - Coordinates responsive tab navigation behaviour.
- * - Composes header and tab sections within a flexible page layout.
+ * @fileoverview Page container for the authenticated user's profile.
  */
 
 import {PageLoader} from "@/views/common/_comp/page";
@@ -22,15 +14,7 @@ import {useMyProfilePageSetup} from "@/domains/users/hooks/my-profie-page/useMyP
 import {cn} from "@/common/lib/utils.ts";
 
 /**
- * Renders the "My Profile" page for the current authenticated user.
- *
- * @remarks
- * - Displays a loading state while resolving authentication.
- * - Switches tab selector placement depending on viewport size.
- * - Delegates profile sections to {@link MyProfilePageTabs}.
- *
- * @returns The fully composed profile page layout, or a loading state
- *          while authentication is being resolved.
+ * Renders the profile page for the current authenticated user.
  */
 const MyProfilePage = () => {
     useTitle("My Profile");

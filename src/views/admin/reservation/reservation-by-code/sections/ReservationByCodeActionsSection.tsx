@@ -11,7 +11,7 @@ import {
 } from "@/views/admin/reservation/_feat";
 import {
     ReservationStatusBadge
-} from "@/views/client/reservations/components/reservation-status/ReservationStatusBadge.tsx";
+} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";
 

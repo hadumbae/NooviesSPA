@@ -16,7 +16,7 @@ import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {
     ReservationStatusBadge
-} from "@/views/client/reservations/components/reservation-status/ReservationStatusBadge.tsx";
+} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
 import {ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";

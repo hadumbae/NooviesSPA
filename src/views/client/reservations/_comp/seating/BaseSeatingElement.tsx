@@ -1,18 +1,17 @@
 /**
- * @file BaseSeatingElement.tsx
- * Styled base unit for rendering seat map elements.
+ * @fileoverview Styled base unit for rendering seat map elements.
  */
 
 import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
+import {ReactElement} from "react";
 
-type ElementType = "SELECTED" | "SEAT" | "STRUCTURE";
+/** Category of seating element determining its visual style. */
+export type ElementType = "SELECTED" | "SEAT" | "STRUCTURE";
 
-/**
- * Props for the BaseSeatingElement component.
- */
-type ElementProps = {
+/** Props for the BaseSeatingElement component. */
+export type ElementProps = {
     type: ElementType;
     label?: string;
     elementCSS?: string;
@@ -26,18 +25,16 @@ const SIZE_CSS = "h-8 w-8";
 const CONTAINER_CSS = cn(RoundedBorderCSS, SIZE_CSS);
 
 /** Variant-specific element and label colour tokens. */
-const COLOUR_CSS: Record<ElementType, {element: string, label: string}> = {
+const COLOUR_CSS: Record<ElementType, { element: string, label: string }> = {
     "SELECTED": {element: "bg-blue-600 dark:bg-blue-600", label: "text-white dark:text-white"},
     "SEAT": {element: "bg-gray-400 dark:bg-gray-600", label: "text-white dark:text-gray-300"},
     "STRUCTURE": {element: "bg-gray-200 dark:bg-gray-700", label: "text-black dark:text-gray-500"},
 };
 
-/**
- * Renders a styled seating element with optional label.
- */
-const BaseSeatingElement = (
+/** Renders a styled seating element with an optional label. */
+export function BaseSeatingElement(
     {label, type, elementCSS, labelCSS}: ElementProps
-) => {
+): ReactElement {
     return (
         <div className={cn(
             CONTAINER_CSS,
@@ -54,6 +51,6 @@ const BaseSeatingElement = (
             }
         </div>
     );
-};
+}
 
-export default BaseSeatingElement;
+

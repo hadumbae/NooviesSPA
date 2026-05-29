@@ -1,37 +1,28 @@
 /**
- * @file Main content layout for the user's personal reservations list.
- * @filename MyReservationsPageContent.tsx
+ * @fileoverview Main content layout for the user's personal reservations list.
+ *
  */
 
 import {PopulatedReservation} from "@/domains/reservation/schema/model/PopulatedReservationSchema.ts";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import MyReservationCompactCard from "@/views/client/reservations/components/cards/MyReservationCompactCard.tsx";
 import MyReservationsPageHeader
     from "@/views/client/users/pages/my-reservations-page/header/MyReservationsPageHeader.tsx";
+import {MyReservationCompactCard} from "@/views/client/reservations/_comp";
 
 /**
- * Props for {@link MyReservationsPageContent}.
- */
+ * Props for the MyReservationsPageContent component. */
 type ContentProps = {
-    /** Current active page index. */
     page: number;
-    /** Number of records displayed per page. */
     perPage: number;
-    /** Callback to update the current page state. */
     setPage: (page: number) => void;
-    /** Array of validated {@link PopulatedReservation} records. */
     reservations: PopulatedReservation[];
-    /** Total count of reservations for the authenticated user. */
     totalReservations: number;
 }
 
-/**
- * Renders the paginated list of reservations or an empty state.
- * @param props - {@link ContentProps}
- */
-const MyReservationsPageContent = (
+/** Renders the paginated list of user reservations or an empty state message. */
+export const MyReservationsPageContent = (
     {page, perPage, setPage, reservations, totalReservations}: ContentProps
 ) => {
     return (

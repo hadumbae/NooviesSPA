@@ -8,7 +8,7 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
 import {
     ReservationStatusBadge
-} from "@/views/client/reservations/components/reservation-status/ReservationStatusBadge.tsx";
+} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
 import {ReactElement} from "react";
 
 /** Props for the ReservationByCodeMetadataSection component. */

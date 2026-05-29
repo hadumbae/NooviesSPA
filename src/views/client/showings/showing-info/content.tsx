@@ -5,7 +5,7 @@
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {ReservationForm} from "@/views/client/reservations/_feat/reserve-ticket-form";
+import {ReservationForm} from "@/views/client/reservations/_feat";
 import {ShowingInfoPageHeader} from "@/views/client/showings/showing-info/header.tsx";
 import {ReactElement} from "react";
 import {ReservationType} from "@/domains/reservation/schema/model";

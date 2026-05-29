@@ -8,7 +8,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     ReservationStatusBadge
-} from "@/views/client/reservations/components/reservation-status/ReservationStatusBadge.tsx";
+} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
 import {CustomerReservationDialog} from "@/views/admin/customers/_comp/CustomerReservationDialog.tsx";
 import {useState} from "react";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";

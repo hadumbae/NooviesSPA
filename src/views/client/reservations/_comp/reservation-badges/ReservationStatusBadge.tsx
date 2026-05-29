@@ -1,27 +1,21 @@
 /**
- * @file Visual badge component for displaying reservation lifecycle statuses.
- * @filename ReservationStatusBadge.tsx
+ * @fileoverview Visual badge component for displaying reservation lifecycle statuses.
  */
 
 import {Badge} from "@/common/components/ui/badge.tsx";
 import {ReservationStatus} from "@/domains/reservation/schema/model";
 import {cn} from "@/common/lib/utils.ts";
+import {ReactElement} from "react";
 
-/**
- * Props for the {@link ReservationStatusBadge} component.
- */
+/** Props for the ReservationStatusBadge component. */
 type BadgeProps = {
-    /** The current transactional or lifecycle state of the reservation. */
     status: ReservationStatus;
 };
 
-/**
- * A color-coded status indicator for Reservations.
- * @param props - Component properties containing the status string.
- */
-export const ReservationStatusBadge = (
+/** A color-coded status indicator for Reservations. */
+export function ReservationStatusBadge(
     {status}: BadgeProps
-) => {
+): ReactElement {
     return (
         <Badge
             variant="default"
@@ -37,4 +31,4 @@ export const ReservationStatusBadge = (
             {status}
         </Badge>
     );
-};
+}

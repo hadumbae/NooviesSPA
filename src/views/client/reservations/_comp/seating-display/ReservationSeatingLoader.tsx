@@ -1,28 +1,27 @@
 /**
- * @file ReservationSeatingLoader.tsx
- * Loads seating data for a showing into a reservation-scoped seating view.
+ * @fileoverview Loads seating data for a showing into a reservation-scoped seating view.
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import SeatMapDetailsLoader from "@/views/admin/seatmaps/_comp/loaders/SeatMapDetailsLoader.tsx";
 import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
-import ReservationSeatingView
-    from "@/views/client/reservations/components/seating-display/ReservationSeatingView.tsx";
+import {
+    ReservationSeatingView
+} from "@/views/client/reservations/_comp/seating-display/ReservationSeatingView.tsx";
+import {ReactElement} from "react";
 
-/**
- * Props for the loader.
- */
+/** Props for the ReservationSeatingLoader component. */
 type LoaderProps = {
     selectedSeating: ObjectId[];
     showingID: ObjectId;
 };
 
 /**
- * Binds loaded seating data to a reservation-specific seating display.
+ * Fetches seating data for a specific showing and renders the reservation seating view.
  */
-const ReservationSeatingLoader = (
+export function ReservationSeatingLoader(
     {selectedSeating, showingID}: LoaderProps
-) => {
+): ReactElement {
     return (
         <SeatMapDetailsLoader showingID={showingID}>
             {(seating: SeatMapDetails[]) => (
@@ -33,6 +32,4 @@ const ReservationSeatingLoader = (
             )}
         </SeatMapDetailsLoader>
     );
-};
-
-export default ReservationSeatingLoader;
+}

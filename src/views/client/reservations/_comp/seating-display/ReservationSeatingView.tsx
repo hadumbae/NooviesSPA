@@ -1,30 +1,27 @@
 /**
- * @file ReservationSeatingView.tsx
- * Renders reservation seating arranged into display rows.
+ * @fileoverview Renders reservation seating arranged into display rows.
  */
 
 import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
-import ReservationSeatingElement
-    from "@/views/client/reservations/components/seating-display/ReservationSeatingElement.tsx";
+import {
+    ReservationSeatingElement
+} from "@/views/client/reservations/_comp/seating-display/ReservationSeatingElement.tsx";
 import {useOrganisedSeatingForLayout} from "@/domains/seats/_feat/handle-seat-layout";
+import {ReactElement} from "react";
 
-/**
- * Props for the ReservationSeatingView component.
- */
+/** Props for the ReservationSeatingView component. */
 type DisplayProps = {
     selectedSeating: ObjectId[];
     seating: SeatMapDetails[];
     className?: string;
 }
 
-/**
- * Displays seating elements grouped by layout row.
- */
-const ReservationSeatingView = (
+/** Displays seating elements grouped by layout row. */
+export function ReservationSeatingView(
     {selectedSeating, seating, className}: DisplayProps
-) => {
+): ReactElement {
     const {seatRowEntries} = useOrganisedSeatingForLayout({
         seating,
         includeLabels: false,
@@ -54,6 +51,4 @@ const ReservationSeatingView = (
             ))}
         </div>
     );
-};
-
-export default ReservationSeatingView;
+}

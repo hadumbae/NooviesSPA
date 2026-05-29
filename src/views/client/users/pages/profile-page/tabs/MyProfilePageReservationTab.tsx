@@ -1,53 +1,29 @@
 /**
- * @file MyProfilePageReservationTab.tsx
- *
- * Profile tab displaying a paginated preview of the current user's reservations.
- *
- * @remarks
- * - Renders a limited subset of reservations with pagination.
- * - Pagination controls are only shown when the total exceeds the page size.
- * - Intended as a lightweight overview, not a full reservations management view.
- * - **INCOMPLETE**: requires UI/UX refinement and a clear navigation path
- *   to the full client reservations page.
- *
- * @todo
- * - Add a CTA/link to the user's full reservations page.
- * - Improve compact card visual hierarchy.
- * - Revisit pagination behaviour for small result sets.
+ * @fileoverview Profile tab displaying a paginated preview of the current user's reservations.
  */
 
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import CurrentUserReservationLoader from "@/domains/reservation/components/loaders/CurrentUserReservationLoader.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import MyReservationCompactCard from "@/views/client/reservations/components/cards/MyReservationCompactCard.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {PaginatedPopulatedReservations, PopulatedReservation} from "@/domains/reservation/schema/model";
+import {MyReservationCompactCard} from "@/views/client/reservations/_comp";
+import { CurrentUserReservationLoader } from "@/views/client/reservations/_feat";
 
 /** Number of reservations displayed per page */
 const RESERVATIONS_PER_PAGE = 20;
 
 type TabProps = {
-    /** Tab identifier used by the parent Tabs component */
     tabValue: string;
-
-    /** Optional container styling overrides */
     className?: string;
-
-    /** Current pagination page */
     page: number;
-
-    /** Updates the current pagination page */
     setPage: (page: number) => void;
 };
 
 /**
  * Renders the reservations tab for the My Profile page.
- *
- * Displays a paginated list of compact reservation cards
- * and handles empty and small-result states gracefully.
  */
 const MyProfilePageReservationTab = ({page, setPage, tabValue, className}: TabProps) => {
     return (

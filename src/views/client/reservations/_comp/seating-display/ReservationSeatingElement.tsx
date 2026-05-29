@@ -4,8 +4,9 @@
  */
 
 import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
-import BaseSeatingElement from "@/views/client/reservations/components/seating/BaseSeatingElement.tsx";
+import {BaseSeatingElement} from "@/views/client/reservations/_comp/seating/BaseSeatingElement.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
+import {ReactElement} from "react";
 
 /**
  * Props for the ReservationSeatingElement component.
@@ -18,9 +19,9 @@ type ElementProps = {
 /**
  * Renders a seating element with details exposed when selected.
  */
-const ReservationSeatingElement = (
+export function ReservationSeatingElement(
     {isSelected, element}: ElementProps
-) => {
+): ReactElement {
     if (element === null) {
         return (
             <BaseSeatingElement type="STRUCTURE"/>
@@ -46,6 +47,4 @@ const ReservationSeatingElement = (
             </TooltipContent>
         </Tooltip>
     );
-};
-
-export default ReservationSeatingElement;
+}

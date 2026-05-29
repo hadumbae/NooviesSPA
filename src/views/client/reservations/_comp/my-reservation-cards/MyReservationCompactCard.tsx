@@ -1,5 +1,6 @@
 /**
- * @file Compact summary card for user reservations.
+ * @fileoverview Compact summary card for user reservations.
+ *
  * @filename MyReservationCompactCard.tsx
  */
 
@@ -16,12 +17,11 @@ import {PopulatedReservation} from "@/domains/reservation/schema/model";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     ReservationStatusBadge
-} from "@/views/client/reservations/components/reservation-status/ReservationStatusBadge.tsx";
+} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
+import {ReactElement} from "react";
 
-/**
- * Props for the {@link MyReservationCompactCard} component.
- */
+/** Props for the MyReservationCompactCard component. */
 type CardProps = {
     /** The fully populated reservation entity to be displayed. */
     reservation: PopulatedReservation;
@@ -29,9 +29,10 @@ type CardProps = {
 
 /**
  * A clickable UI card that presents a high-level overview of a specific reservation.
- * @param props - Component properties containing the reservation data.
  */
-const MyReservationCompactCard = ({reservation}: CardProps) => {
+export function MyReservationCompactCard(
+    {reservation}: CardProps
+): ReactElement {
     const navigate = useLoggedNavigate();
 
     const {
@@ -109,6 +110,4 @@ const MyReservationCompactCard = ({reservation}: CardProps) => {
             </CardContent>
         </Card>
     );
-};
-
-export default MyReservationCompactCard;
+}
