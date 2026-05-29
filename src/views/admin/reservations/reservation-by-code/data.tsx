@@ -13,7 +13,7 @@ import {
     ReservationByCodeNotesSection,
     ReservationByCodeTheatreSection,
     ReservationByCodeUserSection,
-} from "@/views/admin/reservation/reservation-by-code/sections";
+} from "@/views/admin/reservations/reservation-by-code/sections";
 
 /** Props for the ReservationByCodeDataContent component. */
 type ContentProps = {

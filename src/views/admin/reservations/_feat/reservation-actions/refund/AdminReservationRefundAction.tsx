@@ -5,10 +5,10 @@
 import {AdminReservation} from "@/domains/reservation/schema/model";
 import {
     AdminReservationRefundForm
-} from "@/views/admin/reservation/_feat/reservation-actions/refund/AdminReservationRefundForm.tsx";
+} from "@/views/admin/reservations/_feat/reservation-actions/refund/AdminReservationRefundForm.tsx";
 import {
     AdminReservationRefundDialog
-} from "@/views/admin/reservation/_feat/reservation-actions/refund/AdminReservationRefundDialog.tsx";
+} from "@/views/admin/reservations/_feat/reservation-actions/refund/AdminReservationRefundDialog.tsx";
 import {ReactElement, useState} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";

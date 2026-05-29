@@ -4,7 +4,7 @@
 
 import {
     ReservationByCodePageContent
-} from "@/views/admin/reservation/reservation-by-code/content.tsx";
+} from "@/views/admin/reservations/reservation-by-code/content.tsx";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {
     FetchByCodeData,

@@ -5,11 +5,11 @@
 
 import {
     AdminReservationCancelForm
-} from "@/views/admin/reservation/_feat/reservation-actions/cancel/AdminReservationCancelForm.tsx";
+} from "@/views/admin/reservations/_feat/reservation-actions/cancel/AdminReservationCancelForm.tsx";
 import {AdminReservation} from "@/domains/reservation/schema/model";
 import {
     AdminReservationCancelDialog
-} from "@/views/admin/reservation/_feat/reservation-actions/cancel/AdminReservationCancelDialog.tsx";
+} from "@/views/admin/reservations/_feat/reservation-actions/cancel/AdminReservationCancelDialog.tsx";
 import {ReactElement, useState} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";

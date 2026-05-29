@@ -12,7 +12,7 @@ import {Form} from "@/common/components/ui/form.tsx";
 import {FormViewOptions} from "@/common/type/form/form-view/FormViewProps.ts";
 import {
     SetReservationCodeFormContextProvider
-} from "@/views/admin/reservation/_feat/set-code-form/SetReservationCodeFormContextProvider.tsx";
+} from "@/views/admin/reservations/_feat/set-code-form/SetReservationCodeFormContextProvider.tsx";
 import {ReactElement, ReactNode} from "react";
 
 /** Props for the SetReservationCodeForm component. */

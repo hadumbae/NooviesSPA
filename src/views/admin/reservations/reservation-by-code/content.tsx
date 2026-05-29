@@ -6,13 +6,13 @@ import {AdminReservation, ReservationUniqueCode} from "@/domains/reservation/sch
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {
     ReservationByCodePageHeader
-} from "@/views/admin/reservation/reservation-by-code/headers/ReservationByCodePageHeader.tsx";
+} from "@/views/admin/reservations/reservation-by-code/headers/ReservationByCodePageHeader.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     ReservationByCodeDataContent
-} from "@/views/admin/reservation/reservation-by-code/data.tsx";
+} from "@/views/admin/reservations/reservation-by-code/data.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {SetReservationCodeForm, SetReservationCodeFormCard} from "@/views/admin/reservation/_feat";
+import {SetReservationCodeForm, SetReservationCodeFormCard} from "@/views/admin/reservations/_feat";
 import {ReactElement} from "react";
 
 /** Props for the ReservationByCodePageContent component. */

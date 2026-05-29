@@ -4,7 +4,7 @@
 
 import {
     AdminReservationResetExpiryDialog
-} from "@/views/admin/reservation/_feat/reservation-actions/reset-expiry/AdminReservationResetExpiryDialog.tsx";
+} from "@/views/admin/reservations/_feat/reservation-actions/reset-expiry/AdminReservationResetExpiryDialog.tsx";
 import {ReactElement, useState} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {useResetReservationExpiryMutation} from "@/domains/reservation/_feat/update-reservations/hooks";

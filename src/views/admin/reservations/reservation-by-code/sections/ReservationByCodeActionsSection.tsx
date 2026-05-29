@@ -8,7 +8,7 @@ import {
     AdminReservationCancelAction,
     AdminReservationRefundAction,
     AdminReservationResetExpiryAction
-} from "@/views/admin/reservation/_feat";
+} from "@/views/admin/reservations/_feat";
 import {
     ReservationStatusBadge
 } from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
