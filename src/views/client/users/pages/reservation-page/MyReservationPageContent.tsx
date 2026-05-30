@@ -13,6 +13,7 @@ import MyReservationStatusActions
     from "@/views/client/users/pages/reservation-page/mutations/MyReservationStatusActions.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {PopulatedReservation} from "@/domains/reservation/schema/model";
+import {ReactElement} from "react";
 
 /**
  * Props for MyReservationPageContent
@@ -24,7 +25,9 @@ type ContentProps = {
 /**
  * Renders reservation details with conditional seating and actions.
  */
-const MyReservationPageContent = ({reservation}: ContentProps) => {
+export function MyReservationPageContent(
+    {reservation}: ContentProps
+): ReactElement {
     const navigate = useLoggedNavigate();
 
     const {
@@ -77,6 +80,4 @@ const MyReservationPageContent = ({reservation}: ContentProps) => {
             }
         </PageFlexWrapper>
     );
-};
-
-export default MyReservationPageContent;
+}

@@ -1,28 +1,15 @@
 /**
- * @file Base schema for reservations with populated relational data.
- * @filename PopulatedReservationBaseSchema.ts
+ * @fileoverview Base schema for reservations with populated relational data.
  */
 
 import {ReservationBaseSchema} from "@/domains/reservation/schema/model/reservations/ReservationBaseSchema.ts";
 import {PopulatedShowingSchema} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 import {z} from "zod";
 
-/**
- * Base populated reservation schema.
- * * @remarks
- * Inherits core fields from {@link ReservationBaseSchema} and transforms the `showing`
- * field from a simple identifier into a fully resolved {@link PopulatedShowingSchema}.
- * This serves as the foundation for {@link PopulatedReservationSchema}.
- */
+/** Base populated reservation schema that transforms the showing field into a fully resolved object. */
 export const PopulatedReservationBaseSchema = ReservationBaseSchema.extend({
-    /** Resolved showing details including movie, theatre, and screen metadata. */
     showing: PopulatedShowingSchema,
 });
 
-/**
- * TypeScript type inferred from {@link PopulatedReservationBaseSchema}.
- * * @remarks
- * Represents the raw populated structure. Note that this type does not yet
- * include the status-based refinements applied in the final union.
- */
+/** TypeScript type representing the raw populated reservation structure. */
 export type PopulatedReservationBase = z.infer<typeof PopulatedReservationBaseSchema>;
