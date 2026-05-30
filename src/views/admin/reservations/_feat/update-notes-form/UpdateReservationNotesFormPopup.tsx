@@ -1,48 +1,40 @@
 /**
- * @file Interactive dialog popup for editing administrative reservation notes.
- * @filename UpdateReservationNotesFormPopup.tsx
+ * @fileoverview Interactive dialog popup for editing administrative reservation notes.
  */
 
-import {ReactNode} from "react";
+import {ReactElement, ReactNode} from "react";
 import {
     Dialog,
-    DialogTrigger,
+    DialogClose,
     DialogContent,
+    DialogDescription,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogDescription,
-    DialogFooter, DialogClose
-} from "@/common/components/ui/dialog.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
-import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
+    DialogTrigger
+} from "src/common/components/ui/dialog.tsx";
+import {Button} from "src/common/components/ui/button.tsx";
+import HookFormTextArea from "src/common/components/forms/HookFormTextArea.tsx";
 import {useFormContext} from "react-hook-form";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {UpdateReservationNotesFormContext} from "@/domains/reservation/_feat/update-reservations/contexts";
+import useRequiredContext from "src/common/hooks/context/useRequiredContext.ts";
+import {UpdateReservationNotesFormContext} from "src/domains/reservation/_feat/update-reservations/contexts";
 
-/**
- * Properties for the {@link UpdateReservationNotesFormPopup} component.
- */
+/** Props for the UpdateReservationNotesFormPopup component. */
 type PopupProps = {
-    /** Controlled state for the dialog visibility. */
     isOpen: boolean;
-    /** Callback to update the visibility state. */
     setIsOpen: (open: boolean) => void
-    /** The trigger element (e.g., an Edit button) rendered as the dialog initiator. */
     children?: ReactNode;
-    /** Custom title for the dialog header. Defaults to "Update Notes". */
     title?: string
-    /** Custom description text. Defaults to "Update Admin Notes For Reservation". */
     description?: string
-    /** Custom text for the primary action button. Defaults to "Update". */
     buttonText?: string
 };
 
 /**
- * A modal presentation layer that integrates with the reservation notes form context.
+ * A modal dialog for updating reservation notes.
  */
-export const UpdateReservationNotesFormPopup = (
+export function UpdateReservationNotesFormPopup(
     {children, isOpen, setIsOpen, title, description, buttonText}: PopupProps
-) => {
+): ReactElement {
     const {control} = useFormContext();
     const {formID} = useRequiredContext({context: UpdateReservationNotesFormContext});
 
@@ -79,4 +71,4 @@ export const UpdateReservationNotesFormPopup = (
             </DialogContent>
         </Dialog>
     );
-};
+}

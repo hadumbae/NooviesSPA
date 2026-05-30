@@ -3,13 +3,11 @@
  */
 
 import {AdminReservation, ReservationStatus} from "@/domains/reservation/schema/model";
-import {
-    ReservationActiveDateCard
-} from "@/views/admin/reservations/_comp/active-date-card/ReservationActiveDateCard.tsx";
 import {Check, Coins, Cross, Receipt, Timer} from "lucide-react";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import {ReactElement} from "react";
+import {ReservationActiveDateCard} from "@/views/admin/reservations/_comp";
 
 /** Props for the ReservationByCodeDateSection component. */
 type SectionProps = {
