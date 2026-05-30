@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode} from "react";
-import {cn} from "src/common/lib/utils.ts";
+import {cn} from "@/common/lib/utils.ts";
 
 /** Props for the ReservationNotesText component. */
 type TextProps = {

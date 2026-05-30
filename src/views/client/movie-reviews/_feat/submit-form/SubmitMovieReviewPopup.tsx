@@ -1,0 +1,106 @@
+/**
+ * @fileoverview Movie review submission dialog for creating or editing reviews.
+ *
+ * @file Movie review submission dialog.
+ * SubmitMovieReviewPopup.tsx
+ */
+
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {
+    MovieReviewSubmitFormViewContext
+} from "@/domains/review/context/submit-form-view-context/MovieReviewSubmitFormViewContext.ts";
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger
+} from "@/common/components/ui/dialog.tsx";
+import {ReactElement, ReactNode} from "react";
+import {Button} from "@/common/components/ui/button.tsx";
+import {useFormContext} from "react-hook-form";
+import StarRatingSelector from "@/common/components/forms/radio-group/StarRatingSelector.tsx";
+import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
+import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
+import {Separator} from "@/common/components/ui/separator.tsx";
+import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
+import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
+import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {useLockForFormUI} from "@/common/hooks/forms/useLockForFormUI.ts";
+
+/** Props for the SubmitMovieReviewPopup component. */
+type PopupProps = PresetOpenState & {
+    isHidden?: boolean;
+    children: ReactNode;
+    isEditing?: boolean;
+};
+
+/**
+ * Dialog for creating or editing a movie review.
+ */
+export function SubmitMovieReviewPopup(
+    {children, isHidden, ...presetState}: PopupProps
+): ReactElement | null {
+    if (isHidden) return null;
+
+    const {activeOpen, setActiveOpen} = usePresetActiveOpen(presetState);
+
+    const {control} = useFormContext();
+    const {formID, mutationState: {isPending, isError} = {}, options: {isEditing} = {}} = useRequiredContext({
+        context: MovieReviewSubmitFormViewContext,
+        message: "Must be used within a provider for the form context."
+    });
+
+    const {isUILocked} = useLockForFormUI({
+        isContentOpen: activeOpen,
+        isMutationPending: !!isPending,
+        isMutationError: !!isError,
+    });
+
+    const actionButtonText = isEditing
+        ? "Edit Review"
+        : "Submit";
+
+    return (
+        <Dialog open={activeOpen} onOpenChange={setActiveOpen}>
+            <DialogTrigger asChild>
+                {children}
+            </DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>{isEditing ? "Edit Your Review" : "Write Your Review"}</DialogTitle>
+                    <DialogDescription>Movie Reviews</DialogDescription>
+                </DialogHeader>
+
+                <section className="space-y-4">
+                    <div className="flex justify-between items-start">
+                        <PrimaryHeaderText>Review The Movie!</PrimaryHeaderText>
+                        <StarRatingSelector name="rating" control={control}/>
+                    </div>
+
+                    <Separator/>
+
+                    <HookFormInput label="Display Name" name="displayName" control={control}/>
+                    <HookFormInput label="Summary" name="summary" control={control}/>
+                    <HookFormTextArea label="Review" name="reviewText" control={control}/>
+                    <HookFormCheckbox label="Recommend Movie?" name="isRecommended" control={control}/>
+                </section>
+
+                <DialogFooter className="max-sm:gap-2">
+                    <DialogClose asChild>
+                        <Button type="button" variant="secondary">Close</Button>
+                    </DialogClose>
+
+                    <Button form={formID} type="submit" variant="primary" disabled={isUILocked}>
+                        {isPending ? <AnimatedLoader/> : actionButtonText}
+                    </Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+    );
+}

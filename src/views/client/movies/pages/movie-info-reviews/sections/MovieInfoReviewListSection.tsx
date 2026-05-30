@@ -1,7 +1,9 @@
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import MovieReviewDetailsCard from "@/views/client/movie-reviews/components/cards/review-card/MovieReviewDetailsCard.tsx";
+import {
+    MovieReviewDetailsCard
+} from "@/views/client/movie-reviews/_comp/review-card/MovieReviewDetailsCard.tsx";
 
 import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReviewDetailsSchema";
 

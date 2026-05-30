@@ -12,12 +12,12 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "src/common/components/ui/dialog.tsx";
-import {Button} from "src/common/components/ui/button.tsx";
-import HookFormTextArea from "src/common/components/forms/HookFormTextArea.tsx";
+} from "@/common/components/ui/dialog.tsx";
+import {Button} from "@/common/components/ui/button.tsx";
+import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import {useFormContext} from "react-hook-form";
-import useRequiredContext from "src/common/hooks/context/useRequiredContext.ts";
-import {UpdateReservationNotesFormContext} from "src/domains/reservation/_feat/update-reservations/contexts";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {UpdateReservationNotesFormContext} from "@/domains/reservation/_feat/update-reservations/contexts";
 
 /** Props for the UpdateReservationNotesFormPopup component. */
 type PopupProps = {

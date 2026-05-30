@@ -3,8 +3,8 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import HttpResponseError from "src/common/errors/HttpResponseError.ts";
-import useQueryOptionDefaults from "src/common/utility/query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {IDQueryConfig} from "@/common/types";
 import {findByID} from "@/domains/reservation/_feat/crud";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";

@@ -4,14 +4,16 @@
  */
 
 import {cn} from "@/common/lib/utils.ts";
-import SubmitMovieReviewPopup from "@/views/client/movie-reviews/components/forms/submit-form/SubmitMovieReviewPopup.tsx";
+import {
+    SubmitMovieReviewPopup
+} from "@/views/client/movie-reviews/_feat/submit-form/SubmitMovieReviewPopup.tsx";
 import {ChevronRight, MessageCirclePlus} from "lucide-react";
-import MovieReviewSubmitFormContainer
-    from "@/views/client/movie-reviews/components/forms/submit-form/MovieReviewSubmitFormContainer.tsx";
+import {
+    MovieReviewSubmitFormContainer
+} from "@/views/client/movie-reviews/_feat/submit-form/MovieReviewSubmitFormContainer.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ReactElement, useState} from "react";
-import MovieReviewSummaryCard
-    from "@/views/client/movie-reviews/components/cards/review-summary-card/MovieReviewSummaryCard.tsx";
+import {MovieReviewSummaryCard} from "@/views/client/movie-reviews/_comp/review-summary-card/MovieReviewSummaryCard.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";

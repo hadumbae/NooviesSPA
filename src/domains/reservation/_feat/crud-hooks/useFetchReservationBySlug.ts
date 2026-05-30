@@ -3,8 +3,8 @@
  */
 
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import HttpResponseError from "src/common/errors/HttpResponseError.ts";
-import useQueryOptionDefaults from "src/common/utility/query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {SlugQueryConfig} from "@/common/types";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {ReservationCRUDQueryKeys} from "@/domains/reservation/_feat/crud-hooks/queryKeys.ts";

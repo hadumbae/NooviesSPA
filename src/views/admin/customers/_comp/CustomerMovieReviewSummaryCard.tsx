@@ -7,12 +7,14 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {
     CustomerMovieReviewSummary
 } from "@/domains/review/schemas/customer-reviews";
-import MovieReviewRatingStars from "@/views/client/movie-reviews/components/MovieReviewRatingStars.tsx";
+import {
+    MovieReviewRatingStars
+} from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {Button} from "@/common/components/ui/button.tsx";
-import {IsRecommendedCheck} from "@/views/client/movie-reviews/components/badges/IsRecommendedCheck.tsx";
+import {IsRecommendedCheck} from "@/views/client/movie-reviews/_comp/badges/IsRecommendedCheck.tsx";
 
 /**
  * Properties for the CustomerMovieReviewSummaryCard component.

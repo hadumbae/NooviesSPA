@@ -13,7 +13,7 @@ import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {simplifyMovieReview} from "@/domains/review/utilities/formatters/simplifyMovieReview.ts";
 import {
     MovieReviewPopupForm
-} from "@/views/client/movie-reviews/components/forms/review-form-popup/MovieReviewPopupForm.tsx";
+} from "@/views/client/movie-reviews/_feat/review-form-popup/MovieReviewPopupForm.tsx";
 
 import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReviewDetailsSchema";
 

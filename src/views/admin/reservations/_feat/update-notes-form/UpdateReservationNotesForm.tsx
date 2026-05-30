@@ -6,13 +6,13 @@ import {
     UpdateReservationNotesFormSubmit,
     useUpdateReservationNotesForm,
     useUpdateReservationNotesMutation,
-} from "src/domains/reservation/_feat/update-reservations/hooks";
-import {Form} from "src/common/components/ui/form.tsx";
+} from "@/domains/reservation/_feat/update-reservations/hooks";
+import {Form} from "@/common/components/ui/form.tsx";
 import {ReactElement, ReactNode} from "react";
-import {ObjectId} from "src/common/schema/strings/object-id/IDStringSchema.ts";
-import {MutationOnSubmitParams} from "src/common/type/form/MutationSubmitParams.ts";
-import {AdminReservation} from "src/domains/reservation/schema/model";
-import {UpdateReservationNotesFormContextProvider} from "src/domains/reservation/_feat/update-reservations/contexts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {AdminReservation} from "@/domains/reservation/schema/model";
+import {UpdateReservationNotesFormContextProvider} from "@/domains/reservation/_feat/update-reservations/contexts";
 
 /** Props for the UpdateReservationNotesForm component. */
 type FormProps = MutationOnSubmitParams<AdminReservation> & {

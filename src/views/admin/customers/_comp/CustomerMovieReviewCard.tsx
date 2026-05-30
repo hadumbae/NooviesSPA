@@ -5,11 +5,13 @@
 
 import {CustomerMovieReview} from "@/domains/review/schemas/customer-reviews";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {UniqueReviewCodeBadge} from "@/views/admin/reviews/_comp/UniqueReviewCodeBadge.tsx";
-import IsRecommendedBadge from "@/views/client/movie-reviews/components/badges/IsRecommendedBadge.tsx";
+import {UniqueReviewCodeBadge} from "@/views/admin/movie-reviews/_comp/badges/UniqueReviewCodeBadge.tsx";
+import {
+    IsRecommendedBadge
+} from "@/views/client/movie-reviews/_comp/badges/IsRecommendedBadge.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import MovieReviewText from "@/views/client/movie-reviews/components/text/MovieReviewText.tsx";
-import {DisplayNameBadge, IsReviewPublicBadge, MovieRatingBadge} from "@/views/admin/reviews/_comp";
+import {MovieReviewText} from "@/views/client/movie-reviews/_comp/display/MovieReviewText.tsx";
+import {DisplayNameBadge, IsReviewPublicBadge, MovieRatingBadge} from "@/views/admin/movie-reviews/_comp";
 
 /**
  * Props for the CustomerMovieReviewCard component.
