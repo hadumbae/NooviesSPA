@@ -1,6 +1,5 @@
 /**
  * @fileoverview Provider component for the Reservation Notes form context.
- *
  */
 
 import {ReactNode} from "react";
@@ -19,7 +18,7 @@ type ProviderProps = FormViewOptions<UpdateReservationNotesFormSubmit> & {
     formID: string;
 };
 
-/** Context Provider that encapsulates configuration for the Reservation Notes form. */
+/** Context provider that encapsulates configuration for the Reservation Notes form. */
 export const UpdateReservationNotesFormContextProvider = ({
     children, formID, ...options}: ProviderProps) => {
     const values: UpdateReservationNotesFormContextValues = {

@@ -6,8 +6,8 @@ import {FormViewOptions} from "@/common/type/form/form-view/FormViewProps.ts";
 import {
     SetReservationCodeFormContext,
     SetReservationCodeFormContextValues
-} from "@/domains/reservation/views/admin/reservation-by-code/context/SetReservationCodeFormContext.ts";
-import {SetReservationCodeFormValues} from "@/domains/reservation/views/admin/reservation-by-code/schemas";
+} from "@/domains/reservation/_feat/fetch-reservation-by-code/context/SetReservationCodeFormContext.ts";
+import {SetReservationCodeFormValues} from "@/domains/reservation/_feat/fetch-reservation-by-code/schemas";
 import {ReactElement, ReactNode} from "react";
 
 /** Props for the SetReservationCodeFormContextProvider component. */

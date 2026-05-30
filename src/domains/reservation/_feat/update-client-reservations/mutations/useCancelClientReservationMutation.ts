@@ -1,28 +1,35 @@
 /**
- * @file React Query mutation hook for cancelling an existing reservation ticket.
+ * @fileoverview Mutation hook for cancelling an existing reservation ticket.
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {toast} from "react-toastify";
 import {patchCancelReservation} from "@/domains/reservation/_feat/update-client-reservations/repositories";
-
-type SubmitProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
-    /** Optional callback invoked after a successful cancellation. */
-    onSubmitSuccess?: () => void;
-};
+import {
+    UpdateClientReservationMutationKeys
+} from "@/domains/reservation/_feat/update-client-reservations/mutations/mutationKeys.ts";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /**
- * Provides a mutation for cancelling a reservation by its ID.
- *
- * @param props - Submission lifecycle handlers and optional toast messages.
- * @returns React Query mutation result for reservation cancellation.
+ * Hook providing a mutation to cancel a reservation by its unique identifier.
  */
 export function useCancelClientReservationMutation(
-    {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitProps = {}
+    params: MutationResponseConfig<void, ObjectId> = {}
 ): UseMutationResult<void, unknown, ObjectId> {
+    const {
+        onSubmit,
+        submitMessage,
+        onSubmitSuccess,
+        onSubmitError,
+        successMessage,
+        errorMessage
+    } = params;
+
     const cancel = async (_id: ObjectId) => {
+        submitMessage && toast.success(submitMessage);
+        onSubmit?.(_id);
+
         await patchCancelReservation(_id);
     }
 
@@ -37,7 +44,7 @@ export function useCancelClientReservationMutation(
     }
 
     return useMutation({
-        mutationKey: ["reservations", "tickets", "cancel"],
+        mutationKey: UpdateClientReservationMutationKeys.cancel(),
         mutationFn: cancel,
         onSuccess,
         onError,

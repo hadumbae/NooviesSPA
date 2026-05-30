@@ -9,7 +9,6 @@ import {cn} from "@/common/lib/utils.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {SelectedSeatButtonCSS, UnselectedSeatButtonCSS,} from "@/domains/reservation/constants/ReservationButtonCSS.ts";
 import {ReactElement} from "react";
 
 /** Props for the ReservationSeatMapElement component. */
@@ -46,10 +45,9 @@ export function ReservationSeatMapElement(
                     variant="default"
                     onClick={() => toggleSeat(_id)}
                     className={cn(
-                        SIZE_CSS,
-                        isSelected
-                            ? SelectedSeatButtonCSS
-                            : UnselectedSeatButtonCSS,
+                        SIZE_CSS, isSelected
+                        ? "reservation-selected-seat"
+                        : "reservation-unselected-seat",
                     )}
                 >
                     {isSelected ? <Check/> : <Plus/>}

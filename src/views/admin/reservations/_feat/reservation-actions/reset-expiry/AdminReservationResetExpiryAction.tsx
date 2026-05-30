@@ -36,7 +36,7 @@ export function AdminReservationResetExpiryAction(
 
     const mutation = useResetReservationExpiryMutation({
         reservationID: _id,
-        onSubmit: {
+        onSubmitConfig: {
             successMessage: "Expiry Date Reset!",
             onSubmitSuccess: onSuccess,
         },

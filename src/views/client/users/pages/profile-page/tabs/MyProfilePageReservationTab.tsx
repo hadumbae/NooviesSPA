@@ -8,9 +8,10 @@ import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.ts
 import {cn} from "@/common/lib/utils.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import {PaginatedPopulatedReservations, PopulatedReservation} from "@/domains/reservation/schema/model";
 import {MyReservationCompactCard} from "@/views/client/reservations/_comp";
 import { CurrentUserReservationLoader } from "@/views/client/reservations/_feat";
+import {PaginatedItems} from "@/common/types";
+import {PopulatedReservation} from "@/domains/reservation/schema/model";
 
 /** Number of reservations displayed per page */
 const RESERVATIONS_PER_PAGE = 20;
@@ -31,7 +32,7 @@ const MyProfilePageReservationTab = ({page, setPage, tabValue, className}: TabPr
             <PrimaryHeaderText>My Reservations</PrimaryHeaderText>
 
             <CurrentUserReservationLoader page={page} perPage={RESERVATIONS_PER_PAGE}>
-                {({totalItems, items: reservations}: PaginatedPopulatedReservations) => {
+                {({totalItems, items: reservations}: PaginatedItems<PopulatedReservation>) => {
                     if (reservations.length === 0) {
                         return (
                             <EmptyArrayContainer

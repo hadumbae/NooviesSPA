@@ -1,20 +1,14 @@
 /**
- * @file ReservationStatusEnumSchema.ts
- *
- * @description
- * Zod enum schema for validating reservation status values.
- *
- * Constrains reservation status fields to the supported lifecycle states
- * defined in `ReservationStatusConstant`, ensuring consistent validation and
- * error messaging across reservation and payment flows.
+ * @fileoverview Zod enum schema for validating reservation status values.
  */
 
-
-import ReservationStatusConstant from "@/domains/reservation/constants/ReservationStatusConstant.ts";
+import {
+    ReservationStatusConstant
+} from "@/domains/reservation/schema/model/fields/ReservationStatusConstant.ts";
 import {z} from "zod";
 
 /**
- * Reservation status validation schema.
+ * Zod schema for validating reservation status strings against allowed constants.
  */
 export const ReservationStatusEnumSchema = z.enum(
     ReservationStatusConstant,
@@ -25,7 +19,7 @@ export const ReservationStatusEnumSchema = z.enum(
 );
 
 /**
- * Inferred reservation status type.
+ * Type inferred from the ReservationStatusEnumSchema.
  */
 export type ReservationStatus =
     z.infer<typeof ReservationStatusEnumSchema>;

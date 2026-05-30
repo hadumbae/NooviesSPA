@@ -11,7 +11,9 @@ type FormParams = {
     presetValues?: Partial<ReserveTicketFormValues>;
 };
 
-/** Generates stable default values for the reservation form to prevent unintended resets. */
+/**
+ * Generates stable default values for the reservation form to prevent unintended resets.
+ */
 export function useReserveTicketFormDefaultValues(
     {presetValues}: FormParams = {},
 ): ReserveTicketFormValues {

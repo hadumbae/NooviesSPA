@@ -1,7 +1,13 @@
-import {patchCancelReservation} from "@/domains/reservation/_feat/update-client-reservations/repositories/repository.ts";
-import {patchCheckoutTicket} from "@/domains/reservation/_feat/update-client-reservations/repositories/repository.ts";
+import {
+    patchCancelReservation,
+    patchCheckoutTicket
+} from "@/domains/reservation/_feat/update-client-reservations/repositories/repository.ts";
+import {
+    UpdateClientReservationBaseURL
+} from "@/domains/reservation/_feat/update-client-reservations/repositories/baseURL.ts";
 
 export {
+    UpdateClientReservationBaseURL,
     patchCheckoutTicket,
     patchCancelReservation,
 }

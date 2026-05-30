@@ -4,7 +4,7 @@
 
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {AdminReservation} from "@/domains/reservation/schema/model";
-import {FetchByCodeQueryKeys} from "@/domains/reservation/views/admin/reservation-by-code/fetch";
+import {FetchByCodeQueryKeys} from "@/domains/reservation/_feat/fetch-reservation-by-code/fetch";
 import {toast} from "react-toastify";
 
 /** Configuration parameters for the reservation success handler. */

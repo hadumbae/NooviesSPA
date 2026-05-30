@@ -5,36 +5,41 @@ import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {
     ReservationUpdateMutationKeys
 } from "@/domains/reservation/_feat/update-reservations/hooks/mutations/mutationKeys.ts";
-import {UpdateReservationNotesFormSubmit} from "@/domains/reservation/_feat/update-reservations/schemas";
 import {patchUpdateReservationNotes} from "@/domains/reservation/_feat/update-reservations/repositories";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {AdminReservation, AdminReservationSchema} from "@/domains/reservation/schema/model";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {UseFormReturn} from "react-hook-form";
+import {AdminReservation, AdminReservationSchema} from "@/domains/reservation/schema";
 import {
-    useUpdateAdminReservationSuccessHandler
-} from "@/domains/reservation/_feat/update-reservations/hooks/mutation-helpers/useUpdateAdminReservationSuccessHandler.ts";
+    UpdateReservationNotesFormSubmit,
+    UpdateReservationNotesFormValues
+} from "@/domains/reservation/_feat/update-reservations/hooks/forms";
 import {
+    useUpdateAdminReservationSuccessHandler,
     useUpdateAdminReservationErrorHandler
-} from "@/domains/reservation/_feat/update-reservations/hooks/mutation-helpers/useUpdateAdminReservationErrorHandler.ts";
+} from "@/domains/reservation/_feat/update-reservations/hooks/mutation-helpers";
+import {toast} from "react-toastify";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /** Props for the useUpdateReservationNotesMutation hook. */
 type MutationProps = {
     reservationID: ObjectId;
-    form: UseFormReturn<UpdateReservationNotesFormSubmit>;
-    onSubmit: MutationOnSubmitParams<AdminReservation>;
+    form: UseFormReturn<UpdateReservationNotesFormValues, unknown, UpdateReservationNotesFormSubmit>;
+    onSubmitConfig: MutationResponseConfig<AdminReservation, UpdateReservationNotesFormSubmit>;
 }
 
 /**
  * Provides a mutation for updating reservation notes with integrated validation and error handling.
  */
 export function useUpdateReservationNotesMutation(
-    {reservationID, form, onSubmit}: MutationProps
+    {reservationID, form, onSubmitConfig}: MutationProps
 ): UseMutationResult<AdminReservation, unknown, UpdateReservationNotesFormSubmit> {
-    const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = onSubmit;
+    const {onSubmit, submitMessage, onSubmitSuccess, onSubmitError, successMessage, errorMessage} = onSubmitConfig;
 
     const submitNotes = async (values: UpdateReservationNotesFormSubmit) => {
+        submitMessage && toast.info(submitMessage);
+        onSubmit?.(values);
+
         const {result} = await patchUpdateReservationNotes({
             _id: reservationID,
             data: values,

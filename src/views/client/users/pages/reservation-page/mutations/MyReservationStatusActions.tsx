@@ -8,7 +8,7 @@ import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts
 import {Button} from "@/common/components/ui/button.tsx";
 import {Loader} from "lucide-react";
 import {ReservationStatus} from "@/domains/reservation/schema/model/fields/ReservationStatusEnumSchema.ts";
-import {useReservationStateMutations} from "@/domains/reservation/hooks/useReservationStateMutations.ts";
+import {useReservationStateMutations} from "@/domains/reservation/_feat/update-client-reservations/mutations/useReservationStateMutations.ts";
 
 /**
  * @prop reservationID Target reservation identifier.

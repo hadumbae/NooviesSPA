@@ -3,7 +3,7 @@
  *
  */
 
-import {PopulatedReservation} from "@/domains/reservation/schema/model/PopulatedReservationSchema.ts";
+import {PopulatedReservation} from "@/domains/reservation/schema/model/populated-reservations/PopulatedReservationSchema.ts";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";

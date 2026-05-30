@@ -32,7 +32,7 @@ export function AdminReservationCancelForm(
     const formKey = `res-cancel-reservation-${uniqueKey ?? "form"}`;
     const form = useUpdateReservationNotesForm({presetValues});
 
-    const {mutate} = useCancelReservationMutation({reservationID, form, onSubmit});
+    const {mutate} = useCancelReservationMutation({reservationID, form, onSubmitConfig: onSubmit});
 
     const cancelReservation = (values: UpdateReservationNotesFormSubmit) => {
         mutate(values);

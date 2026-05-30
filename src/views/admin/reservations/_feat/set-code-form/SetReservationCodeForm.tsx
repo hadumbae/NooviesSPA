@@ -2,11 +2,11 @@
  * @fileoverview Main container component for the reservation code search form logic.
  */
 
-import {useSetReservationCodeForm} from "@/domains/reservation/views/admin/reservation-by-code/forms";
+import {useSetReservationCodeForm} from "@/domains/reservation/_feat/fetch-reservation-by-code/forms";
 import {
     FetchByCodeSearchParams,
-    FetchByCodeSearchParamsSchema, SetReservationCodeFormSubmit, SetReservationCodeFormValues
-} from "@/domains/reservation/views/admin/reservation-by-code/schemas";
+    FetchByCodeSearchParamsSchema, SetReservationCodeFormData, SetReservationCodeFormValues
+} from "@/domains/reservation/_feat/fetch-reservation-by-code/schemas";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {Form} from "@/common/components/ui/form.tsx";
 import {FormViewOptions} from "@/common/type/form/form-view/FormViewProps.ts";
@@ -38,7 +38,7 @@ export function SetReservationCodeForm(
     });
 
     const updateCode = (values: SetReservationCodeFormValues) => {
-        const {code} = values as SetReservationCodeFormSubmit;
+        const {code} = values as SetReservationCodeFormData;
         setSearchParams({...searchParams, code});
     }
 

@@ -18,36 +18,17 @@ import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/Posi
  * Captures the complete state of a showing at the moment a reservation is finalized.
  */
 export const ReservedShowingSnapshotSchema = z.object({
-    /** Point-in-time details of the film being screened. */
     movie: MovieSnapshotSchema,
-
-    /** Point-in-time details of the venue. */
     theatre: TheatreSnapshotSchema,
-
-    /** Point-in-time details of the specific auditorium/screen. */
     screen: TheatreScreenSnapshotSchema,
-
-    /** List of specific seats allocated to this reservation. */
     selectedSeats: generateArraySchema(ReservedSeatSnapshotSchema).nullable(),
-
-    /** The exact scheduled start time (UTC). */
     startTime: UTCISO8601DateTimeSchema,
-
-    /** The estimated conclusion time (UTC). */
     endTime: UTCISO8601DateTimeSchema.nullable().optional(),
-
-    /** The audio language of the showing. */
     language: NonEmptyStringSchema,
-
-    /** Available on-screen text languages; must contain at least one entry. */
     subtitleLanguages: z
         .array(NonEmptyStringSchema)
         .nonempty({message: "Must not be empty."}),
-
-    /** Flag for promotional or restricted engagement screenings. */
     isSpecialEvent: BooleanValueSchema.optional(),
-
-    /** The final calculated cost for the selected seats at the time of booking. */
     pricePaid: PositiveNumberSchema,
 });
 

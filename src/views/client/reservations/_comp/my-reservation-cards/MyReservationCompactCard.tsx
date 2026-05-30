@@ -5,7 +5,7 @@
  */
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
+import {formatReservationDetails} from "@/domains/reservation/_feat/formatters/formatReservationDetails.ts";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {cn} from "@/common/lib/utils.ts";

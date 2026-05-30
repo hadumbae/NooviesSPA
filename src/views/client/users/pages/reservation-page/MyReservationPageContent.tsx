@@ -3,7 +3,7 @@
  * Composes reservation detail, seating, and action sections.
  */
 
-import {formatReservationDetails} from "@/domains/reservation/formatters/formatReservationDetails.ts";
+import {formatReservationDetails} from "@/domains/reservation/_feat/formatters/formatReservationDetails.ts";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import MyReservationPageHeader
     from "@/views/client/users/pages/reservation-page/headers/MyReservationPageHeader.tsx";

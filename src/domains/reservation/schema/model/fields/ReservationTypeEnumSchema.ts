@@ -1,24 +1,12 @@
 /**
- * @file ReservationTypeEnumSchema.ts
- *
- * Zod enum schema for reservation types.
- *
- * Provides runtime validation and type inference
- * for reservation mode values used across
- * checkout, reservation, and seating workflows.
+ * @fileoverview Zod enum schema and type definition for reservation types.
  */
 
 import {z} from "zod";
-import {ReservationTypeConstant} from "@/domains/reservation/constants/ReservationTypeConstant.ts";
+import {ReservationTypeConstant} from "@/domains/reservation/schema/model/fields/ReservationTypeConstant.ts";
 
 /**
- * Reservation type enum schema.
- *
- * @remarks
- * - Backed by {@link ReservationTypeConstant} as the
- *   single source of truth
- * - Produces user-friendly validation errors
- * - Intended for request validation and domain safety
+ * Zod schema for validating reservation type strings against allowed constants.
  */
 export const ReservationTypeEnumSchema = z.enum(
     ReservationTypeConstant,
@@ -31,10 +19,5 @@ export const ReservationTypeEnumSchema = z.enum(
     }
 );
 
-/**
- * Reservation type literal union.
- *
- * Derived from {@link ReservationTypeEnumSchema}
- * to ensure compile-time and runtime consistency.
- */
+/** TypeScript type inferred from the reservation type enum schema. */
 export type ReservationType = z.infer<typeof ReservationTypeEnumSchema>;

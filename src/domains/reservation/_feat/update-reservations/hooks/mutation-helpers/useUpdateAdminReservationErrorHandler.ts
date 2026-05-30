@@ -8,7 +8,7 @@ import {UseFormReturn} from "react-hook-form";
 import {
     UpdateReservationNotesFormSubmit,
     UpdateReservationNotesFormValues
-} from "@/domains/reservation/_feat/update-reservations/schemas";
+} from "@/domains/reservation/_feat/update-reservations/hooks/forms";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {parseErrorReturns} from "@/common/utility/parseErrorReturns.ts";
 

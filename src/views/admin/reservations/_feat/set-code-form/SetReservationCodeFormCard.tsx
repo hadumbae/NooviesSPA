@@ -6,7 +6,7 @@ import {useFormContext} from "react-hook-form";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {
     SetReservationCodeFormContext
-} from "@/domains/reservation/views/admin/reservation-by-code/context/SetReservationCodeFormContext.ts";
+} from "@/domains/reservation/_feat/fetch-reservation-by-code/context/SetReservationCodeFormContext.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Button} from "@/common/components/ui/button.tsx";

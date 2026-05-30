@@ -13,7 +13,7 @@ import RoleTypeRoutes from "@/domains/roletype/routing/RoleTypeRoutes.tsx";
 import AdminDashboardRoutes from "@/domains/dashboard/routing/AdminDashboardRoutes.tsx";
 import ClientGenreRoutes from "@/domains/genres/routing/ClientGenreRoutes.tsx";
 import BrowseShowingRoutes from "@/domains/showings/routing/BrowseShowingRoutes.tsx";
-import {AdminReservationRoutes} from "@/domains/reservation/views/admin";
+import {AdminReservationRoutes} from "@/domains/reservation/_feat/fetch-reservation-by-code";
 import {AdminCustomerRoutes} from "@/domains/customers";
 import {TheatreRoutes} from "@/domains/theatres/routing";
 

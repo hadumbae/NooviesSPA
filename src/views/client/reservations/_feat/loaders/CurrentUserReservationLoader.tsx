@@ -1,18 +1,18 @@
 /**
  * @fileoverview Data loader component for the current user's reservations.
  */
+
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {ReactElement, ReactNode} from "react";
-import {
-    PaginatedPopulatedReservations,
-    PaginatedPopulatedReservationSchema
-} from "@/domains/reservation/schema/model/ReservationPaginatedSchemas.ts";
 import {useFetchReservationsForCurrentUser} from "@/domains/reservation/_feat/fetch-client-reservations/fetch";
+import {PaginatedItems} from "@/common/types";
+import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservation/schema/model";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 
 /**
  * Props for the CurrentUserReservationLoader component. */
 type LoaderProps = {
-    children: (data: PaginatedPopulatedReservations) => ReactNode;
+    children: (data: PaginatedItems<PopulatedReservation>) => ReactNode;
     page?: number;
     perPage?: number;
 };
@@ -27,7 +27,7 @@ export function CurrentUserReservationLoader(
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={PaginatedPopulatedReservationSchema}>
+        <ValidatedDataLoader query={query} schema={generatePaginationSchema(PopulatedReservationSchema)}>
             {children}
         </ValidatedDataLoader>
     );

@@ -1,29 +1,35 @@
 /**
- * @file useCheckoutTicketMutation.ts
- * React Query mutation hook for checking out a reservation ticket.
+ * @fileoverview Mutation hook for checking out client reservation tickets.
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {toast} from "react-toastify";
 import {patchCheckoutTicket} from "@/domains/reservation/_feat/update-client-reservations/repositories";
-
-type SubmitProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
-    /** Optional callback invoked after a successful checkout. */
-    onSubmitSuccess?: () => void;
-};
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
+import {
+    UpdateClientReservationMutationKeys
+} from "@/domains/reservation/_feat/update-client-reservations/mutations/mutationKeys.ts";
 
 /**
  * Provides a mutation for checking out a ticket by its ID.
- *
- * @param props - Submission lifecycle handlers and optional toast messages.
- * @returns React Query mutation result for ticket checkout.
  */
 export function useCheckoutClientReservationMutation(
-    {onSubmitSuccess, onSubmitError, successMessage, errorMessage}: SubmitProps = {}
+    params: MutationResponseConfig<void, ObjectId> = {}
 ): UseMutationResult<void, unknown, ObjectId> {
+    const {
+        onSubmit,
+        submitMessage,
+        onSubmitSuccess,
+        onSubmitError,
+        successMessage,
+        errorMessage
+    } = params;
+
     const checkout = async (_id: ObjectId) => {
+        submitMessage && toast.info(submitMessage);
+        onSubmit?.(_id);
+
         await patchCheckoutTicket(_id);
     }
 
@@ -38,7 +44,7 @@ export function useCheckoutClientReservationMutation(
     }
 
     return useMutation({
-        mutationKey: ["reservations", "tickets", "checkout"],
+        mutationKey: UpdateClientReservationMutationKeys.checkout(),
         mutationFn: checkout,
         onSuccess,
         onError,

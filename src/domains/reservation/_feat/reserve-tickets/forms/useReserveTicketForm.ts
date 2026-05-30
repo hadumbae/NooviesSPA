@@ -1,7 +1,6 @@
 /**
- * @fileoverview Composed form hook for ticket reservation workflows.
+ * @fileoverview Form hook for managing ticket reservation state and validation.
  *
- * Provides a React Hook Form instance bound to the reservation schema.
  */
 
 import {useReserveTicketFormDefaultValues} from "@/domains/reservation/_feat/reserve-tickets/forms/useReserveTicketFormDefaultValues.ts";
@@ -18,7 +17,7 @@ type FormProps = {
     presetValues?: Partial<ReserveTicketFormValues>;
 };
 
-/** Creates a fully configured reservation form instance. */
+/** Initializes a React Hook Form instance for ticket reservations using Zod validation. */
 export function useReserveTicketForm(
     {presetValues}: FormProps = {}
 ): UseFormReturn<ReserveTicketFormValues, unknown, ReserveTicketFormData> {

@@ -10,9 +10,9 @@ import {
     FetchByCodeData,
     FetchByCodeDataSchema,
     FetchByCodeSearchParamsSchema
-} from "@/domains/reservation/views/admin/reservation-by-code/schemas";
+} from "@/domains/reservation/_feat/fetch-reservation-by-code/schemas";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {useFetchReservationByCode} from "@/domains/reservation/views/admin/reservation-by-code/fetch";
+import {useFetchReservationByCode} from "@/domains/reservation/_feat/fetch-reservation-by-code/fetch";
 import {ReactElement} from "react";
 
 /**

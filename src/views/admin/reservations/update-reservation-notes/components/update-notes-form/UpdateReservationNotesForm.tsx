@@ -35,7 +35,7 @@ export const UpdateReservationNotesForm = (
     const mutation = useUpdateReservationNotesMutation({
         form,
         reservationID,
-        onSubmit: onSubmitProps,
+        onSubmitConfig: onSubmitProps,
     });
 
     const updateNotes = (values: UpdateReservationNotesFormSubmit) => {

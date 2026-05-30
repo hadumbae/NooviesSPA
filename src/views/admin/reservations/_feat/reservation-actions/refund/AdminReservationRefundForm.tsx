@@ -26,7 +26,7 @@ export function AdminReservationRefundForm(
     const formKey = `res-status-refund-${uniqueKey ?? "form"}`;
     const form = useUpdateReservationNotesForm({presetValues});
 
-    const {mutate} = useRefundReservationMutation({form, reservationID, onSubmit});
+    const {mutate} = useRefundReservationMutation({form, reservationID, onSubmitConfig: onSubmit});
 
     const refundReservation = (values: UpdateReservationNotesFormSubmit) => {
         mutate(values);
