@@ -11,7 +11,7 @@ import {
     getFetchByCode
 } from "@/domains/reservation/_feat/fetch-reservation-by-code/repositories/repository.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {FetchByCodeQueryKeys} from "@/domains/reservation/_feat/admin-view-data";
+import {FetchByCodeQueryKeys} from "@/domains/reservation/_feat/fetch-reservation-by-code";
 
 /** Props for the useFetchReservationByCode hook. */
 type FetchCodeParams = {
