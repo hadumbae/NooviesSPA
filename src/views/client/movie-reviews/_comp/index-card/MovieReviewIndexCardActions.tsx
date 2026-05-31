@@ -7,7 +7,7 @@ import {Ellipsis} from "lucide-react";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {
     useDeleteCurrentUserMovieReviewMutation
-} from "@/domains/review/mutations/delete-user-movie-submit/useDeleteCurrentUserMovieReviewMutation.ts";
+} from "@/domains/review/_feat/my-reviews/hooks/useDeleteCurrentUserMovieReviewMutation.ts";
 import {ReactElement, useState} from "react";
 import {toast} from "react-toastify";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";

@@ -12,6 +12,7 @@ import {AnyValues} from "@/common/types";
 
 /** Validation schema for movie review form submission. */
 export const MovieReviewFormSchema = z.object({
+    _id: IDStringSchema.optional().nullable(),
     movie: IDStringSchema,
     rating: CleanedPositiveNumberSchema,
     isRecommended: BooleanValueSchema.optional(),

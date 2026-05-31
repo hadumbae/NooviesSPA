@@ -6,7 +6,7 @@ import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     useSubmitUserMovieReviewMutation
-} from "@/domains/review/mutations/user-movie-review-submit/useSubmitUserMovieReviewMutation.ts";
+} from "@/domains/review/_feat/my-reviews/hooks/useSubmitUserMovieReviewMutation.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {ReactElement, ReactNode} from "react";
 import Logger from "@/common/utility/features/logger/Logger.ts";

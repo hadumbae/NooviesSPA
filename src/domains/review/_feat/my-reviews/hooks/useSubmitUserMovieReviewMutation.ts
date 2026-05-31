@@ -1,67 +1,53 @@
 /**
- * @file React Query mutation for creating or updating a current-user MovieReview.
- * useSubmitUserMovieReviewMutation.ts
+ * @fileoverview React Query mutation hook for creating or updating a MovieReview for the current user.
  */
-
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {UseFormReturn} from "react-hook-form";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import {
-    patchUpdateMovieReviewForCurrentUser, postCreateMovieReviewForCurrentUser
-} from "@/domains/review/repositories/my-movie-review/MyMovieReviewRepository.ts";
+    patchUpdateMovieReviewForCurrentUser,
+    postCreateMovieReviewForCurrentUser
+} from "@/domains/review/_feat/my-reviews/repository/repository.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {toast} from "react-toastify";
-import {MovieReviewQueryKeys} from "@/domains/review/utilities/query/MovieReviewQueryKeys.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {MovieReview, MovieReviewSchema} from "@/domains/review/schemas/model";
-import {MovieReviewForm, MovieReviewFormValues} from "@/domains/review/_feat/submit-form/schema/MovieReviewFormSchema.ts";
+import {
+    MovieReviewForm,
+    MovieReviewFormValues
+} from "@/domains/review/_feat/submit-form/schema/MovieReviewFormSchema.ts";
+import {MyReviewsMutationKeys} from "@/domains/review/_feat";
 
-/**
- * Parameters for invoking the submit MovieReview mutation.
- *
- * Enables create or update behaviour based on editID.
- */
-type SubmitMutation = {
+/** Parameters for invoking the submit MovieReview mutation. */
+export type SubmitMutation = {
     editID?: ObjectId;
     onSubmit?: MutationOnSubmitParams<MovieReview>;
-    form: UseFormReturn<MovieReviewFormValues>;
+    form: UseFormReturn<MovieReviewFormValues, unknown, MovieReviewForm>;
 }
 
-/**
- * Mutation hook for creating or updating a MovieReview
- * owned by the current user.
- *
- * Automatically validates response data and invalidates
- * related MovieReview query caches on success.
- */
+/** Mutation hook for creating or updating a MovieReview owned by the current user. */
 export function useSubmitUserMovieReviewMutation(
-    params: SubmitMutation,
+    {form, onSubmit = {}}: SubmitMutation,
 ): UseMutationResult<MovieReview, unknown, MovieReviewForm> {
-    const {editID, form, onSubmit} = params;
-    const {successMessage, onSubmitSuccess, errorMessage, onSubmitError} = onSubmit ?? {};
+    const {successMessage, onSubmitSuccess, errorMessage, onSubmitError} = onSubmit;
 
     const queryClient = useQueryClient();
 
-    const submitReviewData = async (values: MovieReviewForm) => {
+    const submitReviewData = async ({_id, ...values}: MovieReviewForm) => {
         const payload = {
             data: values,
             config: {populate: true, virtuals: true}
         };
 
-        const action = editID
-            ? () => patchUpdateMovieReviewForCurrentUser({reviewID: editID, ...payload})
+        const action = _id
+            ? () => patchUpdateMovieReviewForCurrentUser({reviewID: _id, ...payload})
             : () => postCreateMovieReviewForCurrentUser(payload);
 
-        const returnData = await handleMutationResponse({
-            action,
-            errorMessage: "Failed to submit movie review data. Please try again.",
-            rawData: values,
-        });
+        const {result} = await action();
 
         const {success, data: parsedData, error} = validateData({
-            data: returnData,
+            data: result,
             schema: MovieReviewSchema,
         });
 
@@ -70,9 +56,8 @@ export function useSubmitUserMovieReviewMutation(
     }
 
     const onSuccess = (review: MovieReview) => {
-
         queryClient.invalidateQueries({
-            queryKey: MovieReviewQueryKeys.all,
+            queryKey: MyReviewsMutationKeys.all,
             exact: false,
         });
 
@@ -87,7 +72,7 @@ export function useSubmitUserMovieReviewMutation(
     }
 
     return useMutation({
-        mutationKey: ["movie_reviews", "user", "submit"],
+        mutationKey: MyReviewsMutationKeys.submit(),
         mutationFn: submitReviewData,
         onSuccess,
         onError,

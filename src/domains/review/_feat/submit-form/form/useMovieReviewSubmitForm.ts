@@ -9,6 +9,7 @@ import {
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
+    MovieReviewForm,
     MovieReviewFormSchema,
     MovieReviewFormValues
 } from "@/domains/review/_feat/submit-form/schema/MovieReviewFormSchema.ts";
@@ -28,10 +29,10 @@ type FormParams = {
  */
 export function useMovieReviewSubmitForm(
     params: FormParams
-): UseFormReturn<MovieReviewFormValues> {
+): UseFormReturn<MovieReviewFormValues, unknown, MovieReviewForm> {
     const defaultValues = useMovieReviewSubmitFormDefaultValues(params);
 
-    return useForm<MovieReviewFormValues>({
+    return useForm<MovieReviewFormValues, unknown, MovieReviewForm>({
         resolver: zodResolver(MovieReviewFormSchema),
         defaultValues,
     });

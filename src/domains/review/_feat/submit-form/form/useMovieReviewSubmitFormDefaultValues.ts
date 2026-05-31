@@ -1,33 +1,28 @@
 /**
- * @file Hook for resolving default values in the movie review submit form.
- * useMovieReviewSubmitFormDefaultValues.ts
+ * @fileoverview Hook for resolving default values in the movie review submit form.
+ *
  */
 
-import {useContext, useMemo, useRef} from "react";
+import {useContext, useRef} from "react";
 import {isEqual} from "lodash";
 import {AuthContext} from "@/domains/auth/context/AuthContext.ts";
 
 import {MovieReview} from "@/domains/review/schemas/model";
 import {MovieReviewFormValues} from "@/domains/review/_feat/submit-form/schema/MovieReviewFormSchema.ts";
 
-/**
- * Parameters for initializing movie review form defaults.
- */
+/** Parameters for initializing movie review form defaults. */
 type FormParams = {
     presetValues?: Partial<MovieReviewFormValues>;
     movieReview?: MovieReview;
 }
 
-/**
- * Provides stable default values for the movie review form.
- */
+/** Provides stable default values for the movie review form. */
 export function useMovieReviewSubmitFormDefaultValues(
     {presetValues, movieReview}: FormParams
 ): MovieReviewFormValues {
-    const defaultValues = useRef<MovieReviewFormValues | null>(null);
     const userContext = useContext(AuthContext);
 
-    const initialValues = useMemo(() => ({
+    const heldValues = {
         movie: undefined,
         displayName: userContext?.user?.name ?? "",
         summary: "",
@@ -36,11 +31,13 @@ export function useMovieReviewSubmitFormDefaultValues(
         rating: "",
         ...movieReview,
         ...presetValues,
-    }), [movieReview, presetValues]);
+    };
 
-    if (isEqual(initialValues, defaultValues.current)) {
-        defaultValues.current = initialValues;
+    const defaultValues = useRef<MovieReviewFormValues>(heldValues);
+
+    if (isEqual(heldValues, defaultValues.current)) {
+        defaultValues.current = heldValues;
     }
 
-    return defaultValues.current ?? initialValues;
+    return defaultValues.current;
 }
