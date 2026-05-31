@@ -3,7 +3,7 @@
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {MyFavouritesPageHeader} from "src/views/client/users/favourites-page/headers/header.tsx";
+import {MyFavouritesPageHeader} from "@/views/client/users/favourites-page/headers/header.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import MyFavouriteMovieCompactCard
     from "@/views/client/movies/components/card/favourites/MyFavouriteMovieCompactCard.tsx";

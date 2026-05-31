@@ -1,4 +1,4 @@
-import {MyReservationsPageHeader} from "src/views/client/users/my-reservations-page/header/header.tsx";
+import {MyReservationsPageHeader} from "@/views/client/users/my-reservations-page/header/header.tsx";
 
 export {
     MyReservationsPageHeader,

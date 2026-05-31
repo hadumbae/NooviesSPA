@@ -4,7 +4,7 @@
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import MyReviewsPageHeader from "src/views/client/users/reviews-page/header/header.tsx";
+import MyReviewsPageHeader from "@/views/client/users/reviews-page/header/header.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {MovieReviewIndexCard} from "@/views/client/movie-reviews/_comp/index-card";
 import {MyMovieReview} from "@/domains/review/schemas/my-reviews";

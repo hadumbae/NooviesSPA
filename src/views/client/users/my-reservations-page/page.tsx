@@ -3,7 +3,7 @@
  */
 
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import {MyReservationsPageContent} from "src/views/client/users/my-reservations-page/content.tsx";
+import {MyReservationsPageContent} from "@/views/client/users/my-reservations-page/content.tsx";
 import {CurrentUserReservationLoader} from "@/views/client/reservations/_feat";
 import {ReactElement} from "react";
 

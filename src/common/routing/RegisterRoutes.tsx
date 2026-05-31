@@ -7,7 +7,7 @@ import {ShowingRoutes} from "@/domains/showings/routing/ShowingRoutes.tsx";
 import AdminMovieRoutes from "@/domains/movies/routing/AdminMovieRoutes.tsx";
 import SystemRoutes from "@/common/routing/SystemRoutes.tsx";
 import {RouteObject} from "react-router-dom";
-import UserProfileRoutes from "@/domains/users/routing/UserProfileRoutes.tsx";
+import {routes as UserProfileRoutes} from "@/domains/users/routing/UserProfileRoutes.tsx";
 import BrowseMovieRoutes from "@/domains/movies/routing/BrowseMovieRoutes.tsx";
 import RoleTypeRoutes from "@/domains/roletype/routing/RoleTypeRoutes.tsx";
 import AdminDashboardRoutes from "@/domains/dashboard/routing/AdminDashboardRoutes.tsx";

@@ -1,4 +1,4 @@
-import {MyProfilePage} from "src/views/client/users/profile-page/page.tsx";
+import {MyProfilePage} from "@/views/client/users/profile-page/page.tsx";
 
 export * from "./tabs";
 

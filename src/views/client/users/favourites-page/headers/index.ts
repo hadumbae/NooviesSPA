@@ -1,4 +1,4 @@
-import {MyFavouritesPageHeader} from "src/views/client/users/favourites-page/headers/header.tsx";
+import {MyFavouritesPageHeader} from "@/views/client/users/favourites-page/headers/header.tsx";
 
 export {
     MyFavouritesPageHeader,
