@@ -4,10 +4,10 @@
 
 import {ReactElement, ReactNode} from "react";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {MyMovieReview, MyMovieReviewSchema} from "@/domains/review/schemas";
+import {MyMovieReview, MyMovieReviewSchema} from "@/domains/movieReviews/schemas";
 import {PaginatedItems} from "@/common/types";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {useFetchMyMovieReviews} from "@/domains/review/_feat";
+import {useFetchMyMovieReviews} from "@/domains/movieReviews/_feat";
 
 /** Props for the MyReviewsLoader component. */
 type LoaderProps = {

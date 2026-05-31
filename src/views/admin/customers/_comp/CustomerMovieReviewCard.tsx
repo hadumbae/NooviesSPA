@@ -3,7 +3,7 @@
  * @filename CustomerMovieReviewCard.tsx
  */
 
-import {CustomerMovieReview} from "@/domains/review/schemas/customer-reviews";
+import {CustomerMovieReview} from "@/domains/movieReviews/schemas/customer-reviews";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {UniqueReviewCodeBadge} from "@/views/admin/movie-reviews/_comp/badges/UniqueReviewCodeBadge.tsx";
 import {

@@ -6,7 +6,7 @@
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {
     CustomerMovieReviewSummary
-} from "@/domains/review/schemas/customer-reviews";
+} from "@/domains/movieReviews/schemas/customer-reviews";
 import {
     MovieReviewRatingStars
 } from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";

@@ -16,7 +16,7 @@ import {
 import {ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {AdminReviewActionFormContext} from "@/domains/review/_feat/admin-actions/context";
+import {AdminReviewActionFormContext} from "@/domains/movieReviews/_feat/admin-actions/context";
 import {useFormContext} from "react-hook-form";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 

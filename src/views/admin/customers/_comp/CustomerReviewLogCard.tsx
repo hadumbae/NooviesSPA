@@ -5,7 +5,7 @@
  */
 
 import {ReactElement} from "react";
-import {MovieReviewModerationLog} from "@/domains/review/_feat/moderation/schema";
+import {MovieReviewModerationLog} from "@/domains/movieReviews/_feat/moderation/schema";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {

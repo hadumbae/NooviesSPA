@@ -10,7 +10,7 @@ import {ReactElement, ReactNode} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
-import {MovieReview} from "@/domains/review/schemas/model";
+import {MovieReview} from "@/domains/movieReviews/schemas/model";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /** Props for the MovieReviewPopupForm component. */

@@ -5,7 +5,7 @@
 import { LeanUserWithEmailSchema } from "@/domains/users/schemas/user";
 import { generatePaginationSchema } from "@/common/_feat/validation-builders";
 import { z } from "zod";
-import { CustomerMovieReviewSummarySchema } from "@/domains/review/schemas";
+import { CustomerMovieReviewSummarySchema } from "@/domains/movieReviews/schemas";
 
 /** Validates the aggregated response for a customer's full review history. */
 export const CustomerReviewsViewDataSchema = z.object({

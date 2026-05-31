@@ -4,11 +4,11 @@
  */
 
 import {ReactElement} from "react";
-import {MovieReviewModerationLog} from "@/domains/review/_feat/moderation/schema";
+import {MovieReviewModerationLog} from "@/domains/movieReviews/_feat/moderation/schema";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
-import {MovieReviewUniqueCode} from "@/domains/review/schemas/fields";
+import {MovieReviewUniqueCode} from "@/domains/movieReviews/schemas/fields";
 import {CustomerReviewLogsPageHeader} from "@/views/admin/customers/customer-review-logs-page/header.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {CustomerReviewLogCard} from "@/views/admin/customers/_comp/CustomerReviewLogCard.tsx";

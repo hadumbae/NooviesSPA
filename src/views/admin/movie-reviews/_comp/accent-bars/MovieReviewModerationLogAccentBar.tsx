@@ -4,7 +4,7 @@
  */
 
 import {ReactElement} from "react";
-import {MovieReviewModerationAction} from "@/domains/review/_feat/moderation/schema";
+import {MovieReviewModerationAction} from "@/domains/movieReviews/_feat/moderation/schema";
 import {cn} from "@/common/lib/utils.ts";
 
 type BarProps = {

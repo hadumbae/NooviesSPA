@@ -10,7 +10,7 @@ import {
     MovieReviewSummaryData,
     MovieReviewSummarySchema,
     useFetchReviewDetailsByMovie
-} from "@/domains/review/_feat/fetch-by-movie";
+} from "@/domains/movieReviews/_feat/fetch-by-movie";
 
 /** Parameters for the useMovieInfoReviewsPageQueries hook. */
 type HookParams = {

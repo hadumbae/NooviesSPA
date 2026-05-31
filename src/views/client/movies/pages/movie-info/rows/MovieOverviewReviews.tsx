@@ -18,7 +18,7 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
-import {MovieReviewDetails} from "@/domains/review/schemas/model/MovieReviewDetailsSchema";
+import {MovieReviewDetails} from "@/domains/movieReviews/schemas/model/MovieReviewDetailsSchema";
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
 
 /** Props for the MovieOverviewReviews component. */

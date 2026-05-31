@@ -5,7 +5,7 @@
 
 import {z} from "zod"
 import {generatePaginationSchema} from "@/common/_feat/validation-builders"
-import {MovieReviewModerationLogSchema} from "@/domains/review/_feat/moderation/schema"
+import {MovieReviewModerationLogSchema} from "@/domains/movieReviews/_feat/moderation/schema"
 
 /**
  * Validation schema for a paginated collection of movie review moderation

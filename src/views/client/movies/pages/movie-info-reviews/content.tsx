@@ -5,7 +5,7 @@
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {ReactElement} from "react";
 import {MovieDetails} from "@/domains/movies/schema/movie";
-import {MovieReviewDetails} from "@/domains/review/schemas";
+import {MovieReviewDetails} from "@/domains/movieReviews/schemas";
 import {MovieInfoReviewsPageHeader} from "@/views/client/movies/pages/movie-info-reviews/header";
 import {
     MovieInfoFeaturedReviewsSection,

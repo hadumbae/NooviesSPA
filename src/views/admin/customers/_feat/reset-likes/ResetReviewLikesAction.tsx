@@ -15,7 +15,7 @@ import {
 } from "@/views/admin/customers/_feat/reset-likes/ResetReviewLikesDialog.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 
-import {MovieReview} from "@/domains/review/schemas/model";
+import {MovieReview} from "@/domains/movieReviews/schemas/model";
 
 /**
  * Props for the ResetReviewLikesAction component.

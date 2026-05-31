@@ -12,7 +12,7 @@ import {
     FeaturedReviewsByMovie,
     FeaturedReviewsByMovieSchema,
     useFetchFeaturedReviewsByMovie
-} from "@/domains/review/_feat";
+} from "@/domains/movieReviews/_feat";
 
 /** Props for the MovieInfoFeaturedReviewsSection component. */
 type SectionProps = {

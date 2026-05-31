@@ -13,8 +13,8 @@ import {
     MovieReviewPopupForm
 } from "@/views/client/movie-reviews/_feat/review-form-popup/MovieReviewPopupForm.tsx";
 
-import {simplifyMovieReview} from "@/domains/review/_feat/formatters";
-import {MovieReviewDetails} from "@/domains/review/schemas";
+import {simplifyMovieReview} from "@/domains/movieReviews/_feat/formatters";
+import {MovieReviewDetails} from "@/domains/movieReviews/schemas";
 import {ReactElement} from "react";
 
 /** Props for the MovieInfoReviewAction component. */

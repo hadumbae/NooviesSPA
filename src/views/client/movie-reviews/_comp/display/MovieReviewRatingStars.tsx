@@ -4,7 +4,7 @@
 
 import {Star} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import {ACTIVE_STAR_CSS, INACTIVE_STAR_CSS} from "@/domains/review/constants/RatingStarCSS.ts";
+import {ACTIVE_STAR_CSS, INACTIVE_STAR_CSS} from "@/domains/movieReviews/constants/RatingStarCSS.ts";
 import {ReactElement} from "react";
 
 /** Props for the MovieReviewRatingStars component. */

@@ -6,7 +6,7 @@ import {z} from "zod";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {ReservationSchema} from "@/domains/reservation/schema/model";
 import {LeanUserWithEmailSchema} from "@/domains/users/schemas/user";
-import {CustomerMovieReviewSummarySchema} from "@/domains/review/schemas";
+import {CustomerMovieReviewSummarySchema} from "@/domains/movieReviews/schemas";
 
 const ResSchema = z.object({
     total: NonNegativeNumberSchema,

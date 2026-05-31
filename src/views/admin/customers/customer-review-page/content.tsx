@@ -6,7 +6,7 @@
 import {LeanUserWithEmail} from "@/domains/users/schemas/user";
 import {PageFlexWrapper, PageSectionHeaderLink} from "@/views/common/_comp/page";
 import {CustomerReviewPageHeader} from "@/views/admin/customers/customer-review-page/header.tsx";
-import {CustomerMovieReview} from "@/domains/review/schemas/customer-reviews";
+import {CustomerMovieReview} from "@/domains/movieReviews/schemas/customer-reviews";
 import {CustomerReviewPageActionSection} from "@/views/admin/customers/customer-review-page/sections/CustomerReviewPageActionSection.tsx";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {CustomerMovieReviewCard} from "@/views/admin/customers/_comp";

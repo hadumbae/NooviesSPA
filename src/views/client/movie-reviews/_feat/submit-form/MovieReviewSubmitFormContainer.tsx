@@ -6,14 +6,14 @@ import {FormOptions} from "@/common/type/form/HookFormProps.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     useSubmitUserMovieReviewMutation
-} from "@/domains/review/_feat/my-reviews/hooks/useSubmitUserMovieReviewMutation.ts";
+} from "@/domains/movieReviews/_feat/my-reviews/hooks/useSubmitUserMovieReviewMutation.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {ReactElement, ReactNode} from "react";
 import Logger from "@/common/utility/features/logger/Logger.ts";
-import {MovieReview} from "@/domains/review/schemas/model";
+import {MovieReview} from "@/domains/movieReviews/schemas/model";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {MovieReviewForm, MovieReviewFormValues} from "@/domains/review/_feat/submit-form/schema/MovieReviewFormSchema.ts";
-import {MovieReviewSubmitFormViewContextProvider, useMovieReviewSubmitForm} from "@/domains/review/_feat/submit-form";
+import {MovieReviewForm, MovieReviewFormValues} from "@/domains/movieReviews/_feat/submit-form/schema/MovieReviewFormSchema.ts";
+import {MovieReviewSubmitFormViewContextProvider, useMovieReviewSubmitForm} from "@/domains/movieReviews/_feat/submit-form";
 
 /** Props for the MovieReviewSubmitFormContainer component. */
 type FormProps = MutationResponseConfig<MovieReview> & FormOptions<MovieReviewFormValues, MovieReviewForm, MovieReview> &

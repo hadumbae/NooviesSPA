@@ -3,7 +3,7 @@
  */
 
 import {PageSectionHeader} from "@/views/common/_comp/page";
-import {CustomerMovieReviewSummary} from "@/domains/review/schemas/customer-reviews";
+import {CustomerMovieReviewSummary} from "@/domains/movieReviews/schemas/customer-reviews";
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
 import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/_comp";
 

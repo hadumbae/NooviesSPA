@@ -11,8 +11,8 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import {ReactElement, useState} from "react";
-import {simplifyMovieReview} from "@/domains/review/_feat/formatters";
-import {type MyMovieReview} from "@/domains/review/schemas";
+import {simplifyMovieReview} from "@/domains/movieReviews/_feat/formatters";
+import {type MyMovieReview} from "@/domains/movieReviews/schemas";
 import {MovieReviewPopupForm} from "@/views/client/movie-reviews/_feat";
 import {
     IsRecommendedBadge,

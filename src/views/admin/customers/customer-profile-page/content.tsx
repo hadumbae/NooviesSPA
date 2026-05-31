@@ -16,7 +16,7 @@ import {
     CustomerProfilePageHeader
 } from "@/views/admin/customers/customer-profile-page/header.tsx";
 import {CustomerDetailsCard} from "@/views/admin/customers/_comp/CustomerDetailsCard.tsx";
-import {CustomerMovieReviewSummary} from "@/domains/review/schemas/customer-reviews";
+import {CustomerMovieReviewSummary} from "@/domains/movieReviews/schemas/customer-reviews";
 
 /**
  * Properties for the CustomerProfilePageContent component.
