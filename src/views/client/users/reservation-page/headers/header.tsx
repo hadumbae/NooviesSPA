@@ -1,0 +1,74 @@
+/**
+ * @fileoverview Header component for the reservation page displaying movie metadata and navigation.
+ */
+
+import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
+import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
+import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {Redo} from "lucide-react";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import buildString from "@/common/utility/buildString.ts";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
+import {ReactElement} from "react";
+
+/** Props for the MyReservationPageHeader component. */
+type HeaderProps = {
+    movieTitle: string;
+    releaseYear: string;
+    genreNames: string;
+    posterImage?: CloudinaryImage | null;
+    isSpecialEvent?: boolean;
+};
+
+/**
+ * Renders the reservation page header including the movie poster, title, and metadata.
+ */
+export function MyReservationPageHeader(
+    {
+        movieTitle,
+        posterImage,
+        releaseYear,
+        genreNames,
+        isSpecialEvent,
+    }: HeaderProps
+): ReactElement {
+    const navigate = useLoggedNavigate();
+
+    const navigateToProfile = () => {
+        navigate({
+            level: "log",
+            to: "/account/reservations",
+            component: MyReservationPageHeader.name,
+            message: "Navigate back to reservations.",
+        });
+    };
+
+    const metaString = buildString(
+        [releaseYear, isSpecialEvent && "Special Event", genreNames],
+        " | ",
+    );
+
+    return (
+        <header className="flex items-center space-x-3">
+            <section>
+                <SectionHeader srOnly={true}>Poster Image</SectionHeader>
+                <MoviePosterImage url={posterImage?.secure_url} className="h-24"/>
+            </section>
+
+            <section className="flex-1 flex flex-col gap-2">
+                <SectionHeader srOnly={true}>Reservation Meta</SectionHeader>
+                <HeaderTitle>{movieTitle}</HeaderTitle>
+                <HeaderDescription>{metaString}</HeaderDescription>
+            </section>
+
+            <section>
+                <SectionHeader srOnly={true}>My Profile Button</SectionHeader>
+                <IconButton onClick={navigateToProfile}>
+                    <Redo/>
+                </IconButton>
+            </section>
+        </header>
+    );
+}

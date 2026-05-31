@@ -6,11 +6,11 @@
 import {RouteObject} from "react-router-dom";
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
-import MyProfilePage from "@/views/client/users/pages/profile-page/MyProfilePage.tsx";
-import {MyFavouritesPage} from "@/views/client/users/pages/favourites-page/MyFavouritesPage.tsx";
-import MyReviewsPage from "@/views/client/users/pages/reviews-page/MyReviewsPage.tsx";
-import {MyReservationPage} from "@/views/client/users/pages/reservation-page/MyReservationPage.tsx";
-import MyReservationsPage from "@/views/client/users/pages/my-reservations-page/MyReservationsPage.tsx";
+import {MyProfilePage} from "src/views/client/users/profile-page/page.tsx";
+import {MyFavouritesPage} from "src/views/client/users/favourites-page/page.tsx";
+import {MyReviewsPage} from "src/views/client/users/reviews-page/page.tsx";
+import {MyReservationPage} from "@/views/client/users/reservation-page/MyReservationPage.tsx";
+import {MyReservationsPage} from "src/views/client/users/my-reservations-page/page.tsx";
 
 /**
  * Defines the `/account` route hierarchy for authenticated users.
