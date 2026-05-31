@@ -7,9 +7,6 @@
 
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {
-    MovieReviewSubmitFormViewContext
-} from "@/domains/review/context/submit-form-view-context/MovieReviewSubmitFormViewContext.ts";
-import {
     Dialog,
     DialogClose,
     DialogContent,
@@ -32,6 +29,7 @@ import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {useLockForFormUI} from "@/common/hooks/forms/useLockForFormUI.ts";
+import {MovieReviewSubmitFormViewContext} from "@/domains/review/_feat/submit-form";
 
 /** Props for the SubmitMovieReviewPopup component. */
 type PopupProps = PresetOpenState & {

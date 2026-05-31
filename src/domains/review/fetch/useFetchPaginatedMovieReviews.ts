@@ -5,7 +5,7 @@
 
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {MovieReviewQueryOptions} from "@/domains/review/schemas/options/MovieReviewQueryOptionsSchema.ts";
+import {MovieReviewQueryOptions} from "@/domains/review/schemas/query-options/MovieReviewQueryOptionsSchema.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";

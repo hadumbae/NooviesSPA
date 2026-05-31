@@ -6,7 +6,7 @@
 
 import {ReactElement} from "react"
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts"
-import {MovieReviewUniqueCode} from "@/domains/review/features/codes"
+import {MovieReviewUniqueCode} from "@/domains/review/schemas/fields"
 import {
     Breadcrumb,
     BreadcrumbItem,

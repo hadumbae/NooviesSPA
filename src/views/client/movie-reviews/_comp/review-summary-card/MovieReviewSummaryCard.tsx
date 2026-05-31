@@ -1,7 +1,5 @@
 /**
- * @file Displays a condensed movie review inside a styled card.
- *
- * MovieReviewSummaryCard.tsx
+ * @fileoverview Displays a condensed movie review inside a styled card.
  */
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
@@ -13,21 +11,17 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import {MovieReviewText} from "@/views/client/movie-reviews/_comp/display/MovieReviewText.tsx";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 
-import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReviewDetailsSchema";
+import {MovieReviewDetails} from "@/domains/review/schemas/model/MovieReviewDetailsSchema";
 import {ReactElement} from "react";
 
-/**
- * Props for MovieReviewSummaryCard.
- */
+/** Props for the MovieReviewSummaryCard component. */
 type CardProps = {
     review: MovieReviewDetails;
     isUser?: boolean;
     className?: string;
 };
 
-/**
- * Renders a compact movie review summary.
- */
+/** Renders a compact movie review summary. */
 export function MovieReviewSummaryCard(
     {review, isUser, className}: CardProps
 ): ReactElement{

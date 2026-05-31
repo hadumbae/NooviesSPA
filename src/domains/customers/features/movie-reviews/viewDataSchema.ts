@@ -1,28 +1,19 @@
 /**
- * @file Zod schema and type definition for the Customer Reviews paginated view.
- * @filename viewDataSchema.ts
+ * @fileoverview Zod schema and type definition for the Customer Reviews paginated view.
  */
 
-import {LeanUserWithEmailSchema} from "@/domains/users/schemas/user";
-import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {
-    CustomerMovieReviewSummarySchema
-} from "@/domains/review/schemas/customer-reviews";
-import {z} from "zod";
+import { LeanUserWithEmailSchema } from "@/domains/users/schemas/user";
+import { generatePaginationSchema } from "@/common/_feat/validation-builders";
+import { z } from "zod";
+import { CustomerMovieReviewSummarySchema } from "@/domains/review/schemas";
 
-/**
- * Validates the aggregated response for a customer's full review history.
- * ---
- */
+/** Validates the aggregated response for a customer's full review history. */
 export const CustomerReviewsViewDataSchema = z.object({
-    /** The validated profile information of the review author. */
-    customer: LeanUserWithEmailSchema,
-
-    /** A paginated collection of review summaries with hydrated movie details. */
-    reviews: generatePaginationSchema(CustomerMovieReviewSummarySchema),
+  customer: LeanUserWithEmailSchema,
+  reviews: generatePaginationSchema(CustomerMovieReviewSummarySchema),
 });
 
-/**
- * TypeScript type inferred from the CustomerReviewsViewDataSchema.
- */
-export type CustomerReviewsViewData = z.infer<typeof CustomerReviewsViewDataSchema>;
+/** TypeScript type inferred from the CustomerReviewsViewDataSchema. */
+export type CustomerReviewsViewData = z.infer<
+  typeof CustomerReviewsViewDataSchema
+>;

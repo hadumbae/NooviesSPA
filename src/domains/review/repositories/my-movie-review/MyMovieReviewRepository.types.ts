@@ -5,8 +5,8 @@
 
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {MovieReviewForm} from "@/domains/review/schemas/forms/MovieReviewForm.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {MovieReviewForm} from "@/domains/review/_feat/submit-form/schema/MovieReviewFormSchema.ts";
 
 /**
  * Query parameters for fetching the current user's movie reviews.

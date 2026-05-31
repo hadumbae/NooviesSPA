@@ -5,7 +5,7 @@
 
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params"
 import RequestReturns from "@/common/type/request/RequestReturns.ts"
-import {MovieReviewUniqueCode} from "@/domains/review/features/codes"
+import {MovieReviewUniqueCode} from "@/domains/review/schemas/fields"
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts"
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts"
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts"

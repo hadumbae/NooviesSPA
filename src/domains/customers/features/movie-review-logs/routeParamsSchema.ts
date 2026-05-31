@@ -5,7 +5,7 @@
 
 import {z} from "zod"
 import {UserUniqueCodeSchema} from "@/domains/users/schemas/UserUniqueCodeSchema.ts"
-import {MovieReviewUniqueCodeSchema} from "@/domains/review/features/codes"
+import {MovieReviewUniqueCodeSchema} from "@/domains/review/schemas/fields"
 
 /**
  * Validation schema for URL parameters required to identify a specific

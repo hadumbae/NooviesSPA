@@ -1,6 +1,5 @@
 /**
- * @file Sub-component for displaying movie identity and core metadata within a review card.
- * @filename MovieReviewIndexCardMovieSection.tsx
+ * @fileoverview Sub-component for displaying movie identity and core metadata within a review card.
  */
 
 import {MovieWithRating} from "@/domains/movies/schema/movie/MovieWithRatingSchema.ts";
@@ -8,27 +7,22 @@ import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.ts
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {
-    MovieReviewRatingStars
-} from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";
+import {MovieReviewRatingStars} from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {formatMovieData} from "@/domains/movies/_feat/formatters";
+import {ReactElement} from "react";
 
-/**
- * Props for the {@link MovieReviewIndexCardMovieSection} component.
- */
+/** Props for the MovieReviewIndexCardMovieSection component. */
 type SectionProps = {
-    /** The movie object, containing populated genres and calculated average rating. */
     movie: MovieWithRating;
 };
 
 /**
- * Renders a horizontal layout representing the movie's "identity" in a review context.
- * @param props - Component {@link SectionProps}.
+ * Renders a horizontal layout representing the movie identity and metadata in a review context.
  */
-export const MovieReviewIndexCardMovieSection = (
+export function MovieReviewIndexCardMovieSection(
     {movie}: SectionProps
-) => {
+): ReactElement {
     const {averageRating} = movie;
 
     const {
@@ -66,4 +60,4 @@ export const MovieReviewIndexCardMovieSection = (
             </div>
         </section>
     );
-};
+}

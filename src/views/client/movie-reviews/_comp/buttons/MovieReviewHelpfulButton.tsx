@@ -1,39 +1,28 @@
 /**
- * @file Displays helpful count with optional like interaction.
- * @filename MovieReviewHelpfulButton.tsx
+ * @fileoverview Component for displaying and interacting with movie review helpful counts.
  */
 
 import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
 import {ThumbsUp} from "lucide-react";
 import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {ReactElement} from "react";
 
-/**
- * Props for MovieReviewHelpfulButton.
- */
+/** Props for the MovieReviewHelpfulButton component. */
 type HelpfulProps = {
-    /** Icon size in pixels */
     buttonSize?: string | number;
-
-    /** Indicates the review is liked by the current user */
     isLikedByUser?: boolean;
-
-    /** Total helpful votes */
     likeCount: number;
-
-    /** Prevents like interaction */
     disabled?: boolean;
-
-    /** Renders static indicator without button interaction */
     textOnly?: boolean;
 };
 
 /**
- * Renders helpful engagement indicator with optional action control.
+ * Renders a helpfulness indicator that allows users to like a review.
  */
-const MovieReviewHelpfulButton = (
+export function MovieReviewHelpfulButton(
     {likeCount, isLikedByUser, disabled, textOnly, buttonSize = 20}: HelpfulProps
-) => {
+): ReactElement {
     return (
         <div className="flex items-center space-x-1">
             {
@@ -62,6 +51,4 @@ const MovieReviewHelpfulButton = (
             </PrimarySpan>
         </div>
     );
-};
-
-export default MovieReviewHelpfulButton;
+}

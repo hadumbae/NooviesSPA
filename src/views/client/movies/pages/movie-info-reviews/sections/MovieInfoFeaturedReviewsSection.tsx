@@ -1,32 +1,30 @@
 /**
- * @file Displays featured and user reviews for a movie.
- * @filename MovieInfoUserReviewSection.tsx
+ * @fileoverview Displays featured and user reviews for a movie.
  */
 
+import {ReactElement} from "react";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {useFetchFeaturedReviewsByMovie} from "@/domains/review/_feat/fetch-by-movie/useFetchFeaturedReviewsByMovie.ts";
+import {MovieReviewDetailsCard} from "@/views/client/movie-reviews/_feat";
 import {
-    MovieReviewDetailsCard
-} from "@/views/client/movie-reviews/_comp/review-card/MovieReviewDetailsCard.tsx";
-import {FeaturedReviewsByMovie, FeaturedReviewsByMovieSchema} from "@/domains/review/schemas/featured-reviews";
+    FeaturedReviewsByMovie,
+    FeaturedReviewsByMovieSchema,
+    useFetchFeaturedReviewsByMovie
+} from "@/domains/review/_feat";
 
-/**
- * Props for MovieInfoFeaturedReviewsSection.
- */
+/** Props for the MovieInfoFeaturedReviewsSection component. */
 type SectionProps = {
-    /** Movie identifier used to fetch reviews */
     movieID: ObjectId;
 };
 
 /**
- * Renders featured reviews and prioritizes the current user's review.
+ * Renders a list of featured reviews and prioritizes the current user's review if it exists.
  */
-const MovieInfoFeaturedReviewsSection = (
+export function MovieInfoFeaturedReviewsSection(
     {movieID}: SectionProps
-) => {
+): ReactElement {
     const query = useFetchFeaturedReviewsByMovie({
         movieID,
         config: {populate: true, virtuals: true, limit: 3},
@@ -63,6 +61,4 @@ const MovieInfoFeaturedReviewsSection = (
             )}
         </ValidatedDataLoader>
     );
-};
-
-export default MovieInfoFeaturedReviewsSection;
+}

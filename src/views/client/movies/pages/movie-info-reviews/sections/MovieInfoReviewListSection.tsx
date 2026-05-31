@@ -1,12 +1,15 @@
+/**
+ * @fileoverview Section component that displays a paginated list of movie reviews.
+ */
+
+import {ReactElement} from "react";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import {
-    MovieReviewDetailsCard
-} from "@/views/client/movie-reviews/_comp/review-card/MovieReviewDetailsCard.tsx";
+import {MovieReviewDetailsCard} from "@/views/client/movie-reviews/_feat";
+import {MovieReviewDetails} from "@/domains/review/schemas";
 
-import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReviewDetailsSchema";
-
+/** Props for the MovieInfoReviewListSection component. */
 type SectionProps = {
     reviews: MovieReviewDetails[];
     page: number;
@@ -15,9 +18,10 @@ type SectionProps = {
     setPage: (page: number) => void;
 }
 
-const MovieInfoReviewListSection = (
+/** Displays a grid of movie review cards with integrated pagination controls. */
+export function MovieInfoReviewListSection(
     {reviews, ...paginationProps}: SectionProps
-) => {
+): ReactElement {
     return (
         <section className="space-y-4">
             <SectionHeader className={SectionHeaderCSS}>
@@ -40,6 +44,4 @@ const MovieInfoReviewListSection = (
             />
         </section>
     );
-};
-
-export default MovieInfoReviewListSection;
+}

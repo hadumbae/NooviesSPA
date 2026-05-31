@@ -1,6 +1,5 @@
 /**
  * @fileoverview Data loader component for fetching and validating the current user's movie reviews.
- *
  */
 
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";

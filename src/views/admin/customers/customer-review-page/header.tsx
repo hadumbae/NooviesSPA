@@ -4,7 +4,7 @@
  */
 
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
-import {MovieReviewUniqueCode} from "@/domains/review/features/codes";
+import {MovieReviewUniqueCode} from "@/domains/review/schemas/fields";
 import {
     CustomerReviewPageBreadcrumbs
 } from "@/views/admin/customers/customer-review-page/breadcrumbs.tsx";

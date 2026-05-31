@@ -1,6 +1,5 @@
 /**
  * @fileoverview Zod schema for a customer-specific movie review view with rating metadata.
- *
  */
 
 import {z} from "zod";

@@ -7,25 +7,19 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import {
     MovieReviewIndexCardMovieSection
 } from "@/views/client/movie-reviews/_comp/index-card/MovieReviewIndexCardMovieSection.tsx";
-import {MovieReviewText} from "@/views/client/movie-reviews/_comp/display/MovieReviewText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
-import {
-    IsRecommendedBadge
-} from "@/views/client/movie-reviews/_comp/badges/IsRecommendedBadge.tsx";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
-import {
-    MovieReviewRatingStars
-} from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";
-import {
-    MovieReviewIndexCardActions
-} from "@/views/client/movie-reviews/_comp/index-card/MovieReviewIndexCardActions.tsx";
-import {MyMovieReview} from "@/domains/review/schemas/my-reviews";
-import {
-    MovieReviewPopupForm
-} from "@/views/client/movie-reviews/_feat/review-form-popup/MovieReviewPopupForm.tsx";
-import {simplifyMovieReview} from "@/domains/review/utilities/formatters/simplifyMovieReview.ts";
 import {ReactElement, useState} from "react";
+import {simplifyMovieReview} from "@/domains/review/_feat/formatters";
+import {type MyMovieReview} from "@/domains/review/schemas";
+import {MovieReviewPopupForm} from "@/views/client/movie-reviews/_feat";
+import {
+    IsRecommendedBadge,
+    MovieReviewIndexCardActions,
+    MovieReviewRatingStars,
+    MovieReviewText
+} from "@/views/client/movie-reviews/_comp";
 
 /** Props for the MovieReviewIndexCard component. */
 type CardProps = {

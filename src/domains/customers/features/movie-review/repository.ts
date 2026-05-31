@@ -4,7 +4,7 @@
  */
 
 import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts"
-import {MovieReviewUniqueCode} from "@/domains/review/features/codes"
+import {MovieReviewUniqueCode} from "@/domains/review/schemas/fields"
 import RequestReturns from "@/common/type/request/RequestReturns.ts"
 import {CustomerReviewViewData} from "@/domains/customers/features/movie-review/viewDataSchema.ts"
 import buildQueryURL from "@/common/utility/query/buildQueryURL.ts"

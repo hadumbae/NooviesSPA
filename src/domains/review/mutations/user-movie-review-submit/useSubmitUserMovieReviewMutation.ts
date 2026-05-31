@@ -6,7 +6,6 @@
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {UseFormReturn} from "react-hook-form";
-import {MovieReviewForm, MovieReviewFormValues} from "@/domains/review/schemas/forms/MovieReviewForm.types.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import handleMutationResponse from "@/common/handlers/mutation/handleMutationResponse.ts";
 import {
@@ -16,7 +15,8 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import {toast} from "react-toastify";
 import {MovieReviewQueryKeys} from "@/domains/review/utilities/query/MovieReviewQueryKeys.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import {MovieReview, MovieReviewSchema} from "@/domains/review/schemas/models";
+import {MovieReview, MovieReviewSchema} from "@/domains/review/schemas/model";
+import {MovieReviewForm, MovieReviewFormValues} from "@/domains/review/_feat/submit-form/schema/MovieReviewFormSchema.ts";
 
 /**
  * Parameters for invoking the submit MovieReview mutation.

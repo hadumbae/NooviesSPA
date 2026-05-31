@@ -1,6 +1,5 @@
 /**
  * @fileoverview Renders a 5-star rating display for movie reviews.
- *
  */
 
 import {Star} from "lucide-react";

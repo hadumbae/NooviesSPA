@@ -7,11 +7,11 @@ import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts
 import {ReactNode} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ModerationMessageFormData, useModerationMessageForm} from "@/common/_feat/moderation/forms";
-import {useResetReviewLikesMutation} from "@/domains/review/features/admin-actions/mutations";
-import {AdminReviewActionFormContextProvider} from "@/domains/review/features/admin-actions/context";
+import {useResetReviewLikesMutation} from "@/domains/review/_feat/admin-actions/mutations";
+import {AdminReviewActionFormContextProvider} from "@/domains/review/_feat/admin-actions/context";
 import {Form} from "@/common/components/ui/form.tsx";
 
-import {MovieReview} from "@/domains/review/schemas/models";
+import {MovieReview} from "@/domains/review/schemas/model";
 
 /**
  * Props for the ResetReviewLikesForm component.

@@ -1,6 +1,5 @@
 /**
- * @file Inline action menu for managing individual movie reviews.
- * @filename MovieReviewIndexCardActions.tsx
+ * @fileoverview Inline action menu for managing individual movie reviews.
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -9,38 +8,23 @@ import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {
     useDeleteCurrentUserMovieReviewMutation
 } from "@/domains/review/mutations/delete-user-movie-submit/useDeleteCurrentUserMovieReviewMutation.ts";
-import {useState} from "react";
+import {ReactElement, useState} from "react";
 import {toast} from "react-toastify";
 import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 
-/**
- * Props for the {@link MovieReviewIndexCardActions} component.
- */
+/** Props for the MovieReviewIndexCardActions component. */
 type ActionProps = {
-    /**
-     * The unique identifier of the review to be managed.
-     */
     reviewID: ObjectId;
-    /**
-     * Optional ID of the associated movie.
-     * Used for cache invalidation or related data updates upon deletion.
-     */
     movieID?: ObjectId;
-    /**
-     * Callback function to trigger the "Edit" state in the parent component.
-     * Typically opens a modal or switches to an inline form.
-     */
     toggleEdit: (openState: boolean) => void;
 };
 
 /**
- * Renders a dropdown menu containing management actions (Edit, Delete) for a review.
- * @param props - Component {@link ActionProps}.
- */
-export const MovieReviewIndexCardActions = (
+ * Renders a popover menu containing management actions for a specific movie review. */
+export function MovieReviewIndexCardActions(
     {reviewID, movieID, toggleEdit}: ActionProps
-) => {
+): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -50,10 +34,6 @@ export const MovieReviewIndexCardActions = (
         onDeleteError: () => setIsLoading(false),
     });
 
-    /**
-     * Internal handler to initiate the deletion process.
-     * Prevents re-entry via `isLoading` check.
-     */
     const onClickDelete = () => {
         if (!isLoading) {
             setIsLoading(true);
@@ -89,4 +69,4 @@ export const MovieReviewIndexCardActions = (
             </PopoverContent>
         </Popover>
     );
-};
+}

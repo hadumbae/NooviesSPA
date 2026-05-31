@@ -1,6 +1,5 @@
 /**
- * @filename MovieInfoReviewAction.tsx
- * @file Displays review count and provides an action for creating or editing a user review.
+ * @fileoverview Displays review count and provides an action for creating or editing a user review.
  */
 
 import {Button} from "@/common/components/ui/button.tsx";
@@ -10,16 +9,15 @@ import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
-import {simplifyMovieReview} from "@/domains/review/utilities/formatters/simplifyMovieReview.ts";
 import {
     MovieReviewPopupForm
 } from "@/views/client/movie-reviews/_feat/review-form-popup/MovieReviewPopupForm.tsx";
 
-import {MovieReviewDetails} from "@/domains/review/schemas/models/MovieReviewDetailsSchema";
+import {simplifyMovieReview} from "@/domains/review/_feat/formatters";
+import {MovieReviewDetails} from "@/domains/review/schemas";
+import {ReactElement} from "react";
 
-/**
- * Data required to render the review action section for a movie.
- */
+/** Props for the MovieInfoReviewAction component. */
 type ActionProps = {
     movieID: ObjectId;
     totalReviews: number;
@@ -28,13 +26,11 @@ type ActionProps = {
 };
 
 /**
- * Displays the total review count and a button that opens the
- * review submission popup. If the user already has a review,
- * the form is preloaded for editing.
+ * Displays the total review count and a button that opens the review submission popup.
  */
-const MovieInfoReviewAction = (
+export function MovieInfoReviewAction(
     {movieID, totalReviews, userReview, className}: ActionProps
-) => {
+): ReactElement {
     const isEditing = !!userReview;
     const reviewToEdit = isEditing ? simplifyMovieReview(userReview) : undefined;
     const successMessage = isEditing ? "Updated." : undefined;
@@ -61,6 +57,4 @@ const MovieInfoReviewAction = (
             </MovieReviewPopupForm>
         </div>
     );
-};
-
-export default MovieInfoReviewAction;
+}

@@ -6,15 +6,15 @@
 import {
     ResetReviewDisplayNameFormData,
     useResetReviewDisplayNameForm
-} from "@/domains/review/features/admin-actions/forms";
+} from "@/domains/review/_feat/admin-actions/forms";
 import {Form} from "@/common/components/ui/form.tsx";
-import {useResetReviewDisplayNameMutation} from "@/domains/review/features/admin-actions/mutations";
+import {useResetReviewDisplayNameMutation} from "@/domains/review/_feat/admin-actions/mutations";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ReactNode} from "react";
-import {AdminReviewActionFormContextProvider} from "@/domains/review/features/admin-actions/context";
+import {AdminReviewActionFormContextProvider} from "@/domains/review/_feat/admin-actions/context";
 
-import {MovieReview} from "@/domains/review/schemas/models";
+import {MovieReview} from "@/domains/review/schemas/model";
 
 /**
  * Props for the ResetReviewDisplayNameForm component.
