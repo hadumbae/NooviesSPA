@@ -11,7 +11,7 @@ import {
     CustomerReviewViewData,
     useCustomerReviewRouteParams,
     useFetchCustomerReviewViewData
-} from "@/domains/customers/features/movie-review";
+} from "@/domains/customers/_feat/movie-review";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /**

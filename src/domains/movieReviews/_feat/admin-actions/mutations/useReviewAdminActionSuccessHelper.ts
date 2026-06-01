@@ -5,9 +5,9 @@
 import {toast} from "react-toastify";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {CustomerProfileOverviewViewQueryKeys} from "@/domains/customers/features/profile-overview";
-import {CustomerReviewsViewQueryKeys} from "@/domains/customers/features/movie-reviews";
-import {CustomerReviewLogsQueryKeys} from "@/domains/customers/features/movie-review-logs/queryKeys.ts";
+import {CustomerProfileOverviewViewQueryKeys} from "@/domains/customers/_feat/profile-overview";
+import {CustomerReviewsViewQueryKeys} from "@/domains/customers/_feat/movie-reviews";
+import {CustomerReviewLogsQueryKeys} from "@/domains/customers/_feat/movie-review-logs/fetch/queryKeys.ts";
 
 import {MovieReview} from "@/domains/movieReviews/schemas/model";
 

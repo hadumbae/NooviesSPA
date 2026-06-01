@@ -9,7 +9,7 @@ import {CustomerReviewLogsPageContent} from "@/views/admin/customers/customer-re
 import {
     useCustomerReviewLogsRouteParams,
     useFetchCustomerReviewLogsViewData
-} from "@/domains/customers/features/movie-review-logs";
+} from "@/domains/customers/_feat/movie-review-logs";
 import {PageLoader} from "@/views/common/_comp/page";
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";

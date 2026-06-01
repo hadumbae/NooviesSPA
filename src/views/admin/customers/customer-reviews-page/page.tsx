@@ -10,7 +10,7 @@ import {
     CustomerReviewsPageContent
 } from "@/views/admin/customers/customer-reviews-page/content.tsx";
 import {Loader} from "lucide-react";
-import {useFetchCustomerReviewsViewData} from "@/domains/customers/features/movie-reviews";
+import {useFetchCustomerReviewsViewData} from "@/domains/customers/_feat/movie-reviews";
 
 /** Number of reviews to display per page. */
 const REVIEWS_PER_PAGE = 10;

@@ -8,7 +8,7 @@ import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.t
 import {
     CustomerProfileViewData,
     CustomerProfileViewDataSchema, useFetchCustomerProfileViewData
-} from "@/domains/customers/features/profile-overview";
+} from "@/domains/customers/_feat/profile-overview";
 import {
     CustomerProfilePageContent
 } from "@/views/admin/customers/customer-profile-page/content.tsx";
