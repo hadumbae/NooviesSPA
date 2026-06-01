@@ -1,45 +1,30 @@
 /**
- * @file Orchestrator component for the "Set Review Rating" administrative action.
- * @filename SetReviewRatingAction.tsx
+ * @fileoverview Orchestrator component for the Set Review Rating administrative action.
  */
 
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {SetReviewRatingFormData} from "@/domains/movieReviews/_feat/admin-actions/forms";
-import {useState} from "react";
-import {
-    SetReviewRatingForm
-} from "@/views/admin/customers/_feat/set-rating/SetReviewRatingForm.tsx";
-import {
-    SetReviewRatingDialog
-} from "@/views/admin/customers/_feat/set-rating/SetReviewRatingDialog.tsx";
+import {ReactElement, useState} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
+import {MovieReview} from "@/domains/movieReviews/schemas";
+import {SetReviewRatingDialog, SetReviewRatingForm} from "@/views/admin/customers/_feat";
 
-import {MovieReview} from "@/domains/movieReviews/schemas/model";
 
-/**
- * Props for the SetReviewRatingAction component.
- */
-type ActionProps = MutationOnSubmitParams<MovieReview> & {
-    /** The internal database ID of the review whose rating is being overridden. */
+/** Props for the SetReviewRatingAction component. */
+type ActionProps = MutationResponseConfig<MovieReview> & {
     reviewID: ObjectId;
-    /** Optional initial values for the rating and moderation justification. */
     presetValues?: Partial<SetReviewRatingFormData>;
 };
 
 /**
- * A composite component that encapsulates the state, form logic, and dialog for rating overrides.
- * ---
+ * Encapsulates the state, form logic, and dialog for administrative rating overrides.
  */
-export const SetReviewRatingAction = (
+export function SetReviewRatingAction(
     {reviewID, presetValues, onSubmitSuccess, ...onSubmitProps}: ActionProps
-) => {
+): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    /**
-     * Resets the dialog state and propagates the success event once the rating is updated.
-     * @param review - The updated movie review returned by the server.
-     */
     const closeOnSuccess = (review: MovieReview) => {
         setIsOpen(false);
         onSubmitSuccess?.(review);
@@ -59,4 +44,4 @@ export const SetReviewRatingAction = (
             </SetReviewRatingDialog>
         </SetReviewRatingForm>
     );
-};
+}

@@ -1,21 +1,17 @@
 /**
- * @file Higher-order success handler for administrative movie review mutations.
- * @filename useReviewAdminActionSuccessHelper.ts
+ * @fileoverview Higher-order success handler for administrative movie review mutations.
+ *
  */
-
 import {toast} from "react-toastify";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {CustomerProfileOverviewViewQueryKeys} from "@/domains/customers/features/profile-overview";
 import {CustomerReviewsViewQueryKeys} from "@/domains/customers/features/movie-reviews";
 import {CustomerReviewLogsQueryKeys} from "@/domains/customers/features/movie-review-logs/queryKeys.ts";
-import {CustomerReviewViewQueryKeys} from "@/domains/customers/features/movie-review";
 
 import {MovieReview} from "@/domains/movieReviews/schemas/model";
 
-/**
- * Parameters extracted from the standard mutation submission interface.
- */
+/** Parameters extracted from the standard mutation submission interface. */
 type SuccessParams = Pick<
     MutationOnSubmitParams<MovieReview>,
     "onSubmitSuccess" | "successMessage"
@@ -23,9 +19,6 @@ type SuccessParams = Pick<
 
 /**
  * Generates a standardized callback for successful administrative review actions.
- * ---
- * @param params - Configuration including the success message and custom success logic.
- * @returns {Function} A specialized handler that consumes the updated {@link MovieReview}.
  */
 export const useReviewAdminActionSuccessHelper = (
     {successMessage, onSubmitSuccess}: SuccessParams = {}
@@ -33,13 +26,10 @@ export const useReviewAdminActionSuccessHelper = (
     const invalidateQueries = useInvalidateQueryKeys();
 
     return (review: MovieReview) => {
-        const {uniqueCode} = review;
-
         invalidateQueries([
-            CustomerProfileOverviewViewQueryKeys.profile({}),
-            CustomerReviewsViewQueryKeys.reviews({}),
-            CustomerReviewLogsQueryKeys.reviewLogs({}),
-            CustomerReviewViewQueryKeys.review({reviewCode: uniqueCode}),
+            CustomerReviewsViewQueryKeys.all,
+            CustomerReviewLogsQueryKeys.all,
+            CustomerProfileOverviewViewQueryKeys.profile(),
         ], {exact: false});
 
         if (successMessage) {

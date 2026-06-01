@@ -1,6 +1,5 @@
 /**
- * @file Type definitions for administrative movie review repository actions.
- * @filename repository.types.ts
+ * @fileoverview Type definitions for administrative movie review repository actions.
  */
 
 import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
@@ -14,9 +13,7 @@ import {
  * Configuration for the API request to toggle a review's visibility.
  */
 export type PatchToggleReviewPublicityConfig = {
-    /** The hex-string identifier of the review being moderated. */
     reviewID: ObjectId;
-    /** Standardized moderation justification from the form. */
     data: ModerationMessageFormData;
 };
 
@@ -25,16 +22,14 @@ export type PatchToggleReviewPublicityConfig = {
  */
 export type PatchResetReviewDisplayNameConfig = {
     reviewID: ObjectId;
-    /** Object containing the new display name and mandatory audit message. */
     data: ResetReviewDisplayNameFormData;
 };
 
 /**
- * Configuration for the API request to clear engagement metrics (likes).
+ * Configuration for the API request to clear engagement metrics.
  */
 export type PatchResetReviewLikesConfig = {
     reviewID: ObjectId;
-    /** Standardized moderation justification from the form. */
     data: ModerationMessageFormData;
 };
 
@@ -43,6 +38,5 @@ export type PatchResetReviewLikesConfig = {
  */
 export type PatchSetReviewRatingConfig = {
     reviewID: ObjectId;
-    /** Object containing the new numeric rating and mandatory audit message. */
     data: SetReviewRatingFormData;
 };

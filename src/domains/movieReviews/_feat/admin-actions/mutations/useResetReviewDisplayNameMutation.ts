@@ -1,6 +1,5 @@
 /**
- * @file TanStack Query mutation hook for resetting or correcting a reviewer's display name.
- * @filename useResetReviewDisplayNameMutation.ts
+ * @fileoverview TanStack Query mutation hook for resetting or correcting a reviewer's display name.
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -14,34 +13,28 @@ import handleMutationFormError from "@/common/utility/handlers/handleMutationFor
 import {
     CustomerReviewActionMutationKeys
 } from "@/domains/movieReviews/_feat/admin-actions/mutations/CustomerReviewActionMutationKeys.ts";
-import {ResetReviewDisplayNameFormData} from "@/domains/movieReviews/_feat/admin-actions/forms";
+import {
+    ResetReviewDisplayNameFormData,
+    ResetReviewDisplayNameFormValues
+} from "@/domains/movieReviews/_feat/admin-actions/forms";
 import {
     useReviewAdminActionSuccessHelper
 } from "@/domains/movieReviews/_feat/admin-actions/mutations/useReviewAdminActionSuccessHelper.ts";
 import {MovieReview, MovieReviewSchema} from "@/domains/movieReviews/schemas/model";
 
-/**
- * Configuration parameters for the Reset Display Name mutation.
- */
+/** Configuration parameters for the Reset Display Name mutation. */
 type MutationParams = {
-    /** The hex-string ID of the movie review being modified. */
     reviewID: ObjectId;
-    /** The React Hook Form instance for managing the reset name form state. */
-    form: UseFormReturn<ResetReviewDisplayNameFormData>;
-    /** Optional callbacks for post-submission logic and UI notifications. */
-    onSubmit: MutationOnSubmitParams<MovieReview>;
+    form: UseFormReturn<ResetReviewDisplayNameFormValues, unknown, ResetReviewDisplayNameFormData>;
+    onSubmit?: MutationOnSubmitParams<MovieReview>;
 }
 
 /**
- * Hook to handle administrative display name corrections on movie reviews.
- * ---
- * @param params - Configuration including review context and form instance.
- * @returns {UseMutationResult} The TanStack mutation object for the name-reset action.
+ * Hook to handle administrative display name corrections on movie reviews via a patch request.
  */
 export function useResetReviewDisplayNameMutation(
-    params: MutationParams
+    {reviewID, form, onSubmit = {}}: MutationParams
 ): UseMutationResult<MovieReview, unknown, ResetReviewDisplayNameFormData> {
-    const {reviewID, form, onSubmit} = params;
     const {successMessage, onSubmitSuccess, onSubmitError, errorMessage} = onSubmit;
 
     const resetDisplayName = async (values: ResetReviewDisplayNameFormData) => {

@@ -1,10 +1,12 @@
 import {
     SetReviewRatingFormData,
-    SetReviewRatingFormSchema
+    SetReviewRatingFormSchema,
+    SetReviewRatingFormValues
 } from "@/domains/movieReviews/_feat/admin-actions/forms/SetReviewRatingFormSchema.ts";
 import {
     ResetReviewDisplayNameFormData,
-    ResetReviewDisplayNameFormSchema
+    ResetReviewDisplayNameFormSchema,
+    ResetReviewDisplayNameFormValues
 } from "@/domains/movieReviews/_feat/admin-actions/forms/ResetReviewDisplayNameFormSchema.ts";
 import {
     useResetReviewDisplayNameForm
@@ -20,5 +22,8 @@ export {
 
 export type {
     SetReviewRatingFormData,
+    SetReviewRatingFormValues,
     ResetReviewDisplayNameFormData,
+    ResetReviewDisplayNameFormValues,
 }
+

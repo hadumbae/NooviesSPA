@@ -1,34 +1,26 @@
 /**
- * @file Provider component for administrative movie review moderation form metadata.
- * @filename AdminReviewActionFormContextProvider.tsx
+ * @fileoverview Provider component for administrative movie review moderation form metadata.
  */
 
+import {ReactElement, ReactNode, useMemo} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     AdminReviewActionFormContext,
     AdminReviewActionFormContextValues
 } from "@/domains/movieReviews/_feat/admin-actions/context/AdminReviewActionFormContext.ts";
-import {ReactNode, useMemo} from "react";
 
-/**
- * Props for the AdminReviewActionFormContextProvider.
- */
+/** Props for the AdminReviewActionFormContextProvider component. */
 type ProviderProps = {
-    /** The form content, typically a layout component or modal body. */
     children: ReactNode;
-    /** The HTML 'id' attribute to synchronize the form with its submission buttons. */
     formID: string;
-    /** The unique identifier of the movie review targeted for moderation. */
     reviewID: ObjectId;
 };
 
 /**
- * Context Provider to facilitate communication between moderation forms and their controls.
- * ---
- */
-export const AdminReviewActionFormContextProvider = (
+ * Context Provider to facilitate communication between moderation forms and their controls. */
+export function AdminReviewActionFormContextProvider(
     {children, formID, reviewID}: ProviderProps
-) => {
+): ReactElement {
     const values: AdminReviewActionFormContextValues = useMemo(() => ({
         formID,
         reviewID,
@@ -39,4 +31,4 @@ export const AdminReviewActionFormContextProvider = (
             {children}
         </AdminReviewActionFormContext.Provider>
     );
-};
+}

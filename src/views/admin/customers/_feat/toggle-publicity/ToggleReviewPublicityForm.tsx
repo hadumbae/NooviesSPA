@@ -1,39 +1,30 @@
 /**
- * @file Form wrapper for administrative operations that toggle the visibility of a movie review.
- * @filename ToggleReviewPublicityForm.tsx
+ * @fileoverview Form wrapper for administrative operations that toggle the visibility of a movie review.
  */
 
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {ReactNode} from "react";
+import {ReactElement, ReactNode} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {useToggleReviewPublicityMutation} from "@/domains/movieReviews/_feat/admin-actions/mutations";
-import {AdminReviewActionFormContextProvider} from "@/domains/movieReviews/_feat/admin-actions/context";
 import {Form} from "@/common/components/ui/form.tsx";
 import {ModerationMessageFormData, useModerationMessageForm} from "@/common/_feat/moderation/forms";
 
 import {MovieReview} from "@/domains/movieReviews/schemas/model";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
+import {AdminReviewActionFormContextProvider, useToggleReviewPublicityMutation} from "@/domains/movieReviews/_feat";
 
-/**
- * Props for the ToggleReviewPublicityForm component.
- */
-type FormProps = MutationOnSubmitParams<MovieReview> & {
-    /** The nested UI components, typically including the dialog trigger and audit fields. */
+/** Props for the ToggleReviewPublicityForm component. */
+type FormProps = MutationResponseConfig<MovieReview> & {
     children: ReactNode;
-    /** Unique identifier suffix to ensure DOM ID uniqueness in views containing multiple actions. */
     uniqueKey?: string;
-    /** The target review's database ID. */
     reviewID: ObjectId;
-    /** Optional initial state for the moderation message field. */
     presetValues?: Partial<ModerationMessageFormData>;
 };
 
 /**
  * Orchestrates the data flow and submission logic for toggling review visibility.
- * ---
  */
-export const ToggleReviewPublicityForm = (
+export function ToggleReviewPublicityForm(
     {children, uniqueKey, reviewID, presetValues, ...onSubmitParams}: FormProps
-) => {
+): ReactElement {
     const formKey = `toggle-review-publicity-${uniqueKey ?? "form"}`;
     const form = useModerationMessageForm({presetValues});
     const {mutate} = useToggleReviewPublicityMutation({
@@ -58,4 +49,4 @@ export const ToggleReviewPublicityForm = (
             </Form>
         </AdminReviewActionFormContextProvider>
     );
-};
+}

@@ -1,6 +1,5 @@
 /**
- * @file Dialog component for the administrative "Set Review Rating" override.
- * @filename SetReviewRatingDialog.tsx
+ * @fileoverview Dialog component for the administrative "Set Review Rating" override.
  */
 
 import {
@@ -15,43 +14,32 @@ import {
 } from "@/common/components/ui/dialog.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {useFormContext} from "react-hook-form";
-import {ReactNode} from "react";
+import {ReactElement, ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {AdminReviewActionFormContext} from "@/domains/movieReviews/_feat/admin-actions/context";
 import {cn} from "@/common/lib/utils.ts";
+import {AdminReviewActionFormContext} from "@/domains/movieReviews/_feat";
 import StarRatingSelector from "@/common/components/forms/radio-group/StarRatingSelector.tsx";
 
-/**
- * Props for the SetReviewRatingDialog component.
- */
-type DialogProps = {
-    /** The trigger element (usually an "Edit" or "Override" button). */
+/** Props for the SetReviewRatingDialog component. */
+export type DialogProps = {
     children?: ReactNode;
-    /** Controlled visibility state. */
     isOpen: boolean;
-    /** Callback to toggle visibility. */
     setIsOpen: (open: boolean) => void;
-    /** Optional styling classes for the input container. */
     className?: string;
 };
 
 /**
- * Provides an interface for administrators to manually adjust a review's star rating.
- * ---
+ * Interface for administrators to manually adjust a review's star rating.
+ * Requires AdminReviewActionFormContext and a parent Form provider.
  */
-export const SetReviewRatingDialog = (
+export function SetReviewRatingDialog(
     {children, isOpen, setIsOpen, className}: DialogProps
-) => {
-    /** * Retrieve the parent form's identity from context. */
+): ReactElement {
     const {formID} = useRequiredContext({context: AdminReviewActionFormContext});
-
-    /** * Connect to the RHF state established in the parent Form wrapper. */
     const {control} = useFormContext();
-
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            {/* Component trigger */}
             <DialogTrigger asChild>
                 {children}
             </DialogTrigger>
@@ -65,13 +53,11 @@ export const SetReviewRatingDialog = (
                 </DialogHeader>
 
                 <div className={cn("space-y-2", className)}>
-                    {/* Visual rating selector for the numerical 'rating' field */}
                     <StarRatingSelector
                         name="rating"
                         control={control}
                     />
 
-                    {/* Requirement for audit trail documentation */}
                     <HookFormInput
                         type="text"
                         label="Moderation Message"
@@ -86,7 +72,6 @@ export const SetReviewRatingDialog = (
                         <Button variant="secondary">Cancel</Button>
                     </DialogClose>
 
-                    {/* Submits the form identified by the context's formID */}
                     <Button
                         form={formID}
                         variant="primary"
@@ -98,4 +83,4 @@ export const SetReviewRatingDialog = (
             </DialogContent>
         </Dialog>
     );
-};
+}

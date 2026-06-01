@@ -1,10 +1,9 @@
 /**
- * @file TanStack Query mutation hook for clearing 'helpful' likes from a movie review.
- * @filename useResetReviewLikesMutation.ts
+ * @fileoverview TanStack Query mutation hook for clearing helpful likes from a movie review.
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
+import {ModerationMessageFormData, ModerationMessageFormValues} from "@/common/_feat/moderation/forms";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {patchResetReviewLikes} from "@/domains/movieReviews/_feat/admin-actions/repositories";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
@@ -20,28 +19,17 @@ import {
 } from "@/domains/movieReviews/_feat/admin-actions/mutations/useReviewAdminActionSuccessHelper.ts";
 import {MovieReview, MovieReviewSchema} from "@/domains/movieReviews/schemas/model";
 
-/**
- * Configuration parameters for the Reset Likes mutation.
- */
-type MutationParams = {
-    /** The ID of the review whose likes are being cleared. */
+/** Configuration parameters for the Reset Likes mutation. */
+export type MutationParams = {
     reviewID: ObjectId;
-    /** The React Hook Form instance for error mapping and state management. */
-    form: UseFormReturn<ModerationMessageFormData>;
-    /** Optional callbacks and custom messaging for the mutation lifecycle. */
-    onSubmit: MutationOnSubmitParams<MovieReview>;
+    form: UseFormReturn<ModerationMessageFormValues, unknown, ModerationMessageFormData>;
+    onSubmit?: MutationOnSubmitParams<MovieReview>;
 }
 
-/**
- * Hook to handle the administrative action of resetting a review's engagement metrics.
- * ---
- * @param params - Configuration including review context and form instance.
- * @returns {UseMutationResult} The TanStack mutation object.
- */
+/** Hook to handle the administrative action of resetting a review's engagement metrics. */
 export function useResetReviewLikesMutation(
-    params: MutationParams
+    {reviewID, form, onSubmit = {}}: MutationParams
 ): UseMutationResult<MovieReview, unknown, ModerationMessageFormData> {
-    const {reviewID, form, onSubmit} = params;
     const {successMessage, onSubmitSuccess, onSubmitError, errorMessage} = onSubmit;
 
     const resetLikes = async (values: ModerationMessageFormData) => {

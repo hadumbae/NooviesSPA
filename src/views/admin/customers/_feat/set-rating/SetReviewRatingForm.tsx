@@ -1,39 +1,34 @@
 /**
- * @file Form wrapper for administrative operations that manually set or correct a movie review's rating.
- * @filename SetReviewRatingForm.tsx
+ * @fileoverview Form wrapper for administrative operations that manually set or correct a movie review's rating.
  */
 
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {ReactNode} from "react";
+import {ReactElement, ReactNode} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {useSetReviewRatingMutation} from "@/domains/movieReviews/_feat/admin-actions/mutations";
-import {AdminReviewActionFormContextProvider} from "@/domains/movieReviews/_feat/admin-actions/context";
 import {Form} from "@/common/components/ui/form.tsx";
-import {SetReviewRatingFormData, useSetReviewRatingForm} from "@/domains/movieReviews/_feat/admin-actions/forms";
 
 import {MovieReview} from "@/domains/movieReviews/schemas/model";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
+import {
+    AdminReviewActionFormContextProvider,
+    SetReviewRatingFormData,
+    useSetReviewRatingForm,
+    useSetReviewRatingMutation
+} from "@/domains/movieReviews/_feat";
 
-/**
- * Props for the SetReviewRatingForm component.
- */
-type FormProps = MutationOnSubmitParams<MovieReview> & {
-    /** The nested UI components, typically rating inputs, moderation fields, and triggers. */
+/** Props for the SetReviewRatingForm component. */
+type FormProps = MutationResponseConfig<MovieReview> & {
     children: ReactNode;
-    /** Unique identifier suffix to ensure DOM ID uniqueness when multiple actions are present. */
     uniqueKey?: string;
-    /** The internal database ID of the review to be modified. */
     reviewID: ObjectId;
-    /** Optional initial state for the rating and moderation message fields. */
     presetValues?: Partial<SetReviewRatingFormData>;
 };
 
 /**
  * Orchestrates the data flow and submission logic for administrative rating overrides.
- * ---
  */
-export const SetReviewRatingForm = (
+export function SetReviewRatingForm(
     {children, uniqueKey, reviewID, presetValues, ...onSubmitParams}: FormProps
-) => {
+): ReactElement {
     const formKey = `set-review-rating-${uniqueKey ?? "form"}`;
     const form = useSetReviewRatingForm({presetValues});
     const {mutate} = useSetReviewRatingMutation({
@@ -58,4 +53,4 @@ export const SetReviewRatingForm = (
             </Form>
         </AdminReviewActionFormContextProvider>
     );
-};
+}

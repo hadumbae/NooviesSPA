@@ -1,39 +1,30 @@
 /**
- * @file Form wrapper for administrative operations that reset movie review likes.
- * @filename ResetReviewLikesForm.tsx
+ * @fileoverview Form wrapper for administrative operations that reset movie review likes.
  */
 
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {ReactNode} from "react";
+import {ReactElement, ReactNode} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ModerationMessageFormData, useModerationMessageForm} from "@/common/_feat/moderation/forms";
-import {useResetReviewLikesMutation} from "@/domains/movieReviews/_feat/admin-actions/mutations";
-import {AdminReviewActionFormContextProvider} from "@/domains/movieReviews/_feat/admin-actions/context";
 import {Form} from "@/common/components/ui/form.tsx";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
+import {MovieReview} from "@/domains/movieReviews/schemas";
+import {AdminReviewActionFormContextProvider, useResetReviewLikesMutation} from "@/domains/movieReviews/_feat";
 
-import {MovieReview} from "@/domains/movieReviews/schemas/model";
 
-/**
- * Props for the ResetReviewLikesForm component.
- */
-type FormProps = MutationOnSubmitParams<MovieReview> & {
-    /** The nested UI components, typically including the dialog trigger and fields. */
+/** Props for the ResetReviewLikesForm component. */
+type FormProps = MutationResponseConfig<MovieReview> & {
     children: ReactNode;
-    /** Unique identifier suffix to ensure form ID uniqueness in multi-form views. */
     uniqueKey?: string;
-    /** The target review's database ID. */
     reviewID: ObjectId;
-    /** Optional initial state for the moderation message field. */
     presetValues?: Partial<ModerationMessageFormData>;
 };
 
 /**
  * Orchestrates the data flow and submission logic for resetting review like counts.
- * ---
  */
-export const ResetReviewLikesForm = (
+export function ResetReviewLikesForm(
     {children, uniqueKey, reviewID, presetValues, ...onSubmitParams}: FormProps
-) => {
+): ReactElement {
     const formKey = `reset-review-likes-${uniqueKey ?? "form"}`;
     const form = useModerationMessageForm({presetValues});
     const {mutate} = useResetReviewLikesMutation({
@@ -58,4 +49,4 @@ export const ResetReviewLikesForm = (
             </Form>
         </AdminReviewActionFormContextProvider>
     );
-};
+}

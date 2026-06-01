@@ -1,6 +1,5 @@
 /**
- * @file Form component for resetting a review author's display name to system defaults.
- * @filename ResetReviewDisplayNameForm.tsx
+ * @fileoverview Form component for resetting a review author's display name to system defaults.
  */
 
 import {
@@ -16,23 +15,16 @@ import {AdminReviewActionFormContextProvider} from "@/domains/movieReviews/_feat
 
 import {MovieReview} from "@/domains/movieReviews/schemas/model";
 
-/**
- * Props for the ResetReviewDisplayNameForm component.
- */
+/** Props for the ResetReviewDisplayNameForm component. */
 type FormProps = MutationOnSubmitParams<MovieReview> & {
-    /** The UI elements (inputs, buttons) to be rendered within the form context. */
     children: ReactNode;
-    /** The internal database ID of the review being targeted. */
     reviewID: ObjectId;
-    /** Optional unique identifier to prevent ID collisions when multiple forms exist on one page. */
     uniqueKey?: string;
-    /** Initial values to populate the form fields. */
     presetValues?: Partial<ResetReviewDisplayNameFormData>;
 };
 
 /**
- * Administrative form wrapper for reverting review display names.
- * ---
+ * Administrative form wrapper for reverting review display names to system defaults.
  */
 export const ResetReviewDisplayNameForm = (
     {children, reviewID, uniqueKey, presetValues, ...onSubmitProps}: FormProps

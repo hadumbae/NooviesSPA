@@ -1,40 +1,31 @@
 /**
- * @file Custom React Hook for managing the "Reset Display Name" moderation form state.
- * @filename useResetReviewDisplayNameForm.ts
+ * @fileoverview Custom React Hook for managing the Reset Display Name moderation form state.
  */
 
 import {
     ResetReviewDisplayNameFormData,
-    ResetReviewDisplayNameFormSchema
+    ResetReviewDisplayNameFormSchema, ResetReviewDisplayNameFormValues
 } from "@/domains/movieReviews/_feat/admin-actions/forms/ResetReviewDisplayNameFormSchema.ts";
 import {useMemo} from "react";
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 
-/**
- * Configuration options for initializing the Reset Display Name form.
- */
+/** Props for the useResetReviewDisplayNameForm hook. */
 type FormProps = {
-    /** Optional initial data to populate the form fields (e.g., current name). */
     presetValues?: Partial<ResetReviewDisplayNameFormData>;
 }
 
-/**
- * A specialized hook for handling validation and state for name-reset moderation.
- * ---
- * @param props - Form configuration including optional presets.
- * @returns {UseFormReturn<ResetReviewDisplayNameFormData>} Standard hook-form methods and state.
- */
+/** Specialized hook for handling validation and state for name-reset moderation. */
 export function useResetReviewDisplayNameForm(
     {presetValues}: FormProps = {}
-): UseFormReturn<ResetReviewDisplayNameFormData> {
+): UseFormReturn<ResetReviewDisplayNameFormValues, unknown, ResetReviewDisplayNameFormData> {
     const defaultValues: ResetReviewDisplayNameFormData = useMemo(() => ({
         displayName: "",
         message: "",
         ...presetValues,
     }), [presetValues]);
 
-    return useForm<ResetReviewDisplayNameFormData>({
+    return useForm<ResetReviewDisplayNameFormValues, unknown, ResetReviewDisplayNameFormData>({
         resolver: zodResolver(ResetReviewDisplayNameFormSchema),
         defaultValues,
         mode: "onSubmit",

@@ -1,18 +1,13 @@
 /**
- * @file Zod validation schema for moderation forms requiring a justification message.
- * @filename ModerationMessageFormSchema.ts
+ * @fileoverview Zod validation schema for moderation forms requiring a justification message.
  */
 
 import {z} from "zod";
-import {
-    preprocessEmptyStringToUndefined
-} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {AnyValues} from "@/common/types";
 
-/**
- * Validates the justification message provided in administrative moderation forms.
- * ---
- */
+/** Validates the justification message provided in administrative moderation forms. */
 export const ModerationMessageFormSchema = z.object({
     /** The mandatory explanation for the administrative action being taken. */
     message: preprocessEmptyStringToUndefined(
@@ -20,8 +15,8 @@ export const ModerationMessageFormSchema = z.object({
     ),
 });
 
-/**
- * TypeScript type inferred from {@link ModerationMessageFormSchema}.
- * Used for typing the local state of moderation modal forms.
- */
+/** TypeScript type inferred from ModerationMessageFormSchema. */
 export type ModerationMessageFormData = z.infer<typeof ModerationMessageFormSchema>;
+
+/** Type representing raw input values for the moderation message form. */
+export type ModerationMessageFormValues = AnyValues<ModerationMessageFormData>;

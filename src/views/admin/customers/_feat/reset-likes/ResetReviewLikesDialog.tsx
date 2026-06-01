@@ -1,6 +1,6 @@
 /**
- * @file Dialog component for the administrative "Reset Review Likes" action.
- * @filename ResetReviewLikesDialog.tsx
+ * @fileoverview Dialog component for the administrative action to reset review likes.
+ *
  */
 
 import {
@@ -13,32 +13,26 @@ import {
     DialogFooter,
     DialogClose,
 } from "@/common/components/ui/dialog.tsx";
-import {ReactNode} from "react";
+import {ReactElement, ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {AdminReviewActionFormContext} from "@/domains/movieReviews/_feat/admin-actions/context";
+import {AdminReviewActionFormContext} from "@/domains/movieReviews/_feat";
 import {useFormContext} from "react-hook-form";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 
-/**
- * Props for the ResetReviewLikesDialog component.
- */
+/** Props for the ResetReviewLikesDialog component. */
 type DialogProps = {
-    /** The trigger element used to initiate the reset workflow. */
     children?: ReactNode;
-    /** Controlled visibility state of the dialog. */
     isOpen: boolean;
-    /** Function to update the visibility state. */
     setIsOpen: (open: boolean) => void;
 };
 
 /**
- * Provides a confirmation interface for resetting a review's like count to zero.
- * ---
+ * Confirmation interface for resetting a review's like count to zero.
  */
-export const ResetReviewLikesDialog = (
+export function ResetReviewLikesDialog(
     {children, isOpen, setIsOpen}: DialogProps
-) => {
+): ReactElement {
     const {formID} = useRequiredContext({context: AdminReviewActionFormContext});
     const {control} = useFormContext();
 
@@ -78,4 +72,4 @@ export const ResetReviewLikesDialog = (
             </DialogContent>
         </Dialog>
     );
-};
+}

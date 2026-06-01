@@ -1,6 +1,5 @@
 /**
- * @file TanStack Query mutation hook for manually overriding a movie review's star rating.
- * @filename useSetReviewRatingMutation.ts
+ * @fileoverview TanStack Query mutation hook for manually overriding a movie review's star rating.
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -14,34 +13,24 @@ import handleMutationFormError from "@/common/utility/handlers/handleMutationFor
 import {
     CustomerReviewActionMutationKeys
 } from "@/domains/movieReviews/_feat/admin-actions/mutations/CustomerReviewActionMutationKeys.ts";
-import {SetReviewRatingFormData} from "@/domains/movieReviews/_feat/admin-actions/forms";
+import {SetReviewRatingFormData, SetReviewRatingFormValues} from "@/domains/movieReviews/_feat/admin-actions/forms";
 import {
     useReviewAdminActionSuccessHelper
 } from "@/domains/movieReviews/_feat/admin-actions/mutations/useReviewAdminActionSuccessHelper.ts";
 import {MovieReview, MovieReviewSchema} from "@/domains/movieReviews/schemas/model";
 
 /**
- * Configuration parameters for the Set Review Rating mutation.
- */
+ * Configuration parameters for the Set Review Rating mutation. */
 type MutationParams = {
-    /** The hex-string ID of the movie review to be updated. */
     reviewID: ObjectId;
-    /** The React Hook Form instance for managing the rating-adjustment form state. */
-    form: UseFormReturn<SetReviewRatingFormData>;
-    /** Optional callbacks for post-submission logic and UI notifications. */
-    onSubmit: MutationOnSubmitParams<MovieReview>;
+    form: UseFormReturn<SetReviewRatingFormValues, unknown, SetReviewRatingFormData>;
+    onSubmit?: MutationOnSubmitParams<MovieReview>;
 }
 
-/**
- * Hook to handle administrative star-rating overrides on movie reviews.
- * ---
- * @param params - Configuration including review context and form instance.
- * @returns {UseMutationResult} The TanStack mutation object for the rating-set action.
- */
+/** Hook to handle administrative star-rating overrides on movie reviews. */
 export function useSetReviewRatingMutation(
-    params: MutationParams
+    {reviewID, form, onSubmit = {}}: MutationParams
 ): UseMutationResult<MovieReview, unknown, SetReviewRatingFormData> {
-    const {reviewID, form, onSubmit} = params;
     const {successMessage, onSubmitSuccess, onSubmitError, errorMessage} = onSubmit;
 
     const setRatings = async (values: SetReviewRatingFormData) => {

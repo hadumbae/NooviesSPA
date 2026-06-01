@@ -1,29 +1,20 @@
 /**
- * @file Zod validation schema for forms that manually set a movie review rating.
- * @filename SetReviewRatingFormSchema.ts
+ * @fileoverview Zod validation schema for forms that manually set a movie review rating.
  */
 
-import {ModerationMessageFormSchema} from "@/common/_feat/moderation/forms";
-import {
-    preprocessEmptyStringToUndefined
-} from "@/common/_feat/validation-preprocessors";
 import {z} from "zod";
-import {CoercedNumberValueSchema} from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
+import {ModerationMessageFormSchema} from "@/common/_feat/moderation/forms";
+import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {AnyValues} from "@/common/types";
+import {MovieReviewRatingSchema} from "@/domains/movieReviews/schemas";
 
-/**
- * Validates the administrative form data for overriding a review's star rating.
- * ---
- */
+/** Validates the administrative form data for overriding a review's star rating. */
 export const SetReviewRatingFormSchema = ModerationMessageFormSchema.extend({
-    /** The new numeric rating value (0-5) assigned to the review. */
-    rating: preprocessEmptyStringToUndefined(
-        CoercedNumberValueSchema
-            .gte(0, "Must be 0 or more.")
-            .lte(5, "Must be 5 or less.")
-    ),
+    rating: preprocessEmptyStringToUndefined(MovieReviewRatingSchema),
 });
 
-/** * TypeScript type inferred from {@link SetReviewRatingFormSchema}.
- * Used for typed form handling in the rating moderation dialog.
- */
+/** Form data type inferred from SetReviewRatingFormSchema. */
 export type SetReviewRatingFormData = z.infer<typeof SetReviewRatingFormSchema>;
+
+/** Form values type for the rating moderation form. */
+export type SetReviewRatingFormValues = AnyValues<SetReviewRatingFormData>;

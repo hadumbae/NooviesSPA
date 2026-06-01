@@ -1,44 +1,37 @@
 /**
- * @file Dialog component for the administrative "Toggle Review Publicity" action.
- * @filename ToggleReviewPublicityDialog.tsx
+ * @fileoverview Dialog component for the administrative Toggle Review Publicity action.
  */
 
 import {
     Dialog,
-    DialogTrigger,
+    DialogClose,
     DialogContent,
-    DialogHeader,
-    DialogTitle,
     DialogDescription,
     DialogFooter,
-    DialogClose,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from "@/common/components/ui/dialog.tsx";
-import {ReactNode} from "react";
+import {ReactElement, ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {AdminReviewActionFormContext} from "@/domains/movieReviews/_feat/admin-actions/context";
 import {useFormContext} from "react-hook-form";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 
-/**
- * Props for the ToggleReviewPublicityDialog component.
- */
+/** Props for the ToggleReviewPublicityDialog component. */
 type DialogProps = {
-    /** The trigger element (e.g., a "Hide" or "Show" button). */
     children?: ReactNode;
-    /** Controlled visibility state of the dialog. */
     isOpen: boolean;
-    /** Callback to update the visibility state. */
     setIsOpen: (open: boolean) => void;
 };
 
 /**
- * Provides an administrative interface for toggling a movie review's public visibility.
- * ---
+ * Administrative interface for toggling a movie review's public visibility.
  */
-export const ToggleReviewPublicityDialog = (
+export function ToggleReviewPublicityDialog(
     {children, isOpen, setIsOpen}: DialogProps
-) => {
+): ReactElement {
     const {formID} = useRequiredContext({context: AdminReviewActionFormContext});
     const {control} = useFormContext();
 
@@ -83,4 +76,4 @@ export const ToggleReviewPublicityDialog = (
             </DialogContent>
         </Dialog>
     );
-};
+}

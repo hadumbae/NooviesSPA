@@ -1,6 +1,5 @@
 /**
- * @file Dialog component for the administrative "Reset Display Name" action.
- * @filename ResetReviewDisplayNameDialog.tsx
+ * @fileoverview Dialog component for the administrative Reset Display Name action.
  */
 
 import {
@@ -15,39 +14,31 @@ import {
 } from "@/common/components/ui/dialog.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {useFormContext} from "react-hook-form";
-import {ReactNode} from "react";
+import {ReactElement, ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {AdminReviewActionFormContext} from "@/domains/movieReviews/_feat/admin-actions/context";
+import {AdminReviewActionFormContext} from "@/domains/movieReviews/_feat";
 import {cn} from "@/common/lib/utils.ts";
 
-/**
- * Props for the ResetReviewDisplayNameDialog component.
- */
-type DialogProps = {
-    /** The trigger element (usually an Edit button) used to open the dialog. */
+/** Props for the ResetReviewDisplayNameDialog component. */
+export type DialogProps = {
     children?: ReactNode;
-    /** Controlled state indicating if the dialog is visible. */
     isOpen: boolean;
-    /** Callback function to update the visibility state. */
     setIsOpen: (open: boolean) => void;
-    /** Optional CSS classes for the input container. */
     className?: string;
 };
 
 /**
- * Provides an interface for administrators to modify a review author's display name.
- * ---
+ * Interface for administrators to modify a review author's display name.
  */
-export const ResetReviewDisplayNameDialog = (
+export function ResetReviewDisplayNameDialog(
     {children, isOpen, setIsOpen, className}: DialogProps
-) => {
+): ReactElement {
     const {formID} = useRequiredContext({context: AdminReviewActionFormContext});
     const {control} = useFormContext();
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            {/* The element that triggers the dialog opening */}
             <DialogTrigger asChild>
                 {children}
             </DialogTrigger>
@@ -95,4 +86,4 @@ export const ResetReviewDisplayNameDialog = (
             </DialogContent>
         </Dialog>
     );
-};
+}
