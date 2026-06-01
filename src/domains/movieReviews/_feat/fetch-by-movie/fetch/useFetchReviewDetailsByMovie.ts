@@ -10,6 +10,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {getFetchReviewDetailsByMovie} from "@/domains/movieReviews/_feat/fetch-by-movie/repository";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {FetchByMovieQueryKeys} from "@/domains/movieReviews/_feat";
 
 /** Parameters for detailed movie review queries. */
 type FetchParams = PaginationValues & {
@@ -28,7 +29,7 @@ export function useFetchReviewDetailsByMovie(
     });
 
     return useQuery({
-        queryKey: ["movie_reviews", "lists", "movie", "details", {...config, page, perPage, movieID}],
+        queryKey: FetchByMovieQueryKeys.details({...config, page, perPage, movieID}),
         queryFn: fetchReviews,
         ...useQueryOptionDefaults(options),
     });

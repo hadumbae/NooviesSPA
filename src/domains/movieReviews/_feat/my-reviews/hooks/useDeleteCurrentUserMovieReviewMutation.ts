@@ -11,7 +11,7 @@ import {
 import {toast} from "react-toastify";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {MovieReviewCRUDQueryKeys, MyReviewsMutationKeys} from "@/domains/movieReviews/_feat";
+import {FetchByMovieQueryKeys, MovieReviewCRUDQueryKeys, MyReviewsMutationKeys} from "@/domains/movieReviews/_feat";
 
 /** Parameters for the movie review deletion mutation. */
 type MutateParams = {
@@ -32,6 +32,7 @@ export function useDeleteCurrentUserMovieReviewMutation(
     const onSuccess = () => {
         invalidateQueries([
             MovieReviewCRUDQueryKeys.list(),
+            FetchByMovieQueryKeys.all,
         ], {exact: false});
 
         successMessage && toast.success(successMessage);

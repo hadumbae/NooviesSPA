@@ -9,6 +9,7 @@ import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {getFetchFeaturedReviewsByMovie} from "@/domains/movieReviews/_feat/fetch-by-movie/repository";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {FetchByMovieQueryKeys} from "@/domains/movieReviews/_feat";
 
 /** Parameters for fetching featured movie reviews. */
 export type FetchParams = {
@@ -29,7 +30,7 @@ export function useFetchFeaturedReviewsByMovie(
     });
 
     return useQuery({
-        queryKey: ["movie_reviews", "lists", "movie", "featured", {...config, movieID}],
+        queryKey: FetchByMovieQueryKeys.featured({...config, movieID}),
         queryFn: fetchReviews,
         ...useQueryOptionDefaults(options),
     });
