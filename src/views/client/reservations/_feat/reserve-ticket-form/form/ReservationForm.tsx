@@ -1,9 +1,8 @@
 /**
- * @file Orchestration container for the Ticket Reservation form.
- * @filename ShowingTicketSelectorFormContainer.tsx
+ * @fileoverview Orchestration container for the ticket reservation form.
+ *
  */
 
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {useReserveTicketForm} from "@/domains/reservation/_feat/reserve-tickets/forms/useReserveTicketForm.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
@@ -12,29 +11,33 @@ import {
 } from "@/domains/reservation/_feat/reserve-tickets/schema/ReserveTicketFormSchema.ts";
 import Logger from "@/common/utility/features/logger/Logger.ts";
 import {ISO4217CurrencyCode} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
-import {
-    ReservationFormView
-} from "@/views/client/reservations/_feat/reserve-ticket-form/form/ReservationFormView.tsx";
 
 import {PopulatedReservation, ReservationType} from "@/domains/reservation/schema/model";
 import {useReserveTicketSubmitMutation} from "@/domains/reservation/_feat/reserve-tickets";
-import {ReactElement} from "react";
+import {ReactElement, ReactNode, useId} from "react";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
+import {MutationResponseConfig} from "@/common/_feat/submit-data";
+import {Form} from "@/common/components/ui/form.tsx";
 
-/**
- * Props for {@link ReservationForm}.
- */
-type ContainerProps = MutationOnSubmitParams<PopulatedReservation> & {
+/** Props for the ReservationForm component. */
+type ContainerProps = {
+    children: ReactNode;
     showingID: ObjectId;
     reservationType: ReservationType;
     currency?: ISO4217CurrencyCode;
+    onSubmitConfig?: MutationResponseConfig<PopulatedReservation, ReserveTicketFormData>;
 };
 
 /**
- * A container component that abstracts the business logic for booking tickets.
+ * Container component that abstracts the business logic for booking tickets.
+ * Requires a showing ID and reservation type to initialize the form state.
  */
 export function ReservationForm(
-    {showingID, reservationType, currency = "USD", ...mutationProps}: ContainerProps
+    {children, showingID, reservationType, currency = "USD", onSubmitConfig}: ContainerProps
 ): ReactElement {
+    const id = useId();
+    const formID = `reserve-ticket-form-${id}`;
+
     const presetValues: Partial<ReserveTicketFormValues> = {
         currency,
         reservationType,
@@ -43,26 +46,25 @@ export function ReservationForm(
     };
 
     const form = useReserveTicketForm({presetValues});
-    const mutation = useReserveTicketSubmitMutation({
-        form,
-        ...mutationProps,
-    });
+    const mutation = useReserveTicketSubmitMutation({form, ...onSubmitConfig});
 
-    const submitData = (values: ReserveTicketFormValues) => {
+    const submitData = (values: ReserveTicketFormData) => {
         Logger.log({
             type: "DATA",
             msg: "Initiating ticket reservation submission.",
             context: {values},
         });
 
-        mutation.mutate(values as ReserveTicketFormData);
+        mutation.mutate(values);
     };
 
     return (
-        <ReservationFormView
-            reservationType={reservationType}
-            submitHandler={submitData}
-            form={form}
-        />
+        <BaseFormContextProvider formID={formID}>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(submitData)}>
+                    {children}
+                </form>
+            </Form>
+        </BaseFormContextProvider>
     );
 }

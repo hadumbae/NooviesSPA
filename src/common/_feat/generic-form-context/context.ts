@@ -8,8 +8,9 @@ import {SubmitHandler} from "react-hook-form";
 /** Shared values for form synchronization across nested components. */
 export type BaseFormContextValues = {
     formID: string;
-    isPending?: boolean;
     submitHandler?: SubmitHandler<any>;
+    isPending?: boolean;
+    isError?: boolean;
 };
 
 /**

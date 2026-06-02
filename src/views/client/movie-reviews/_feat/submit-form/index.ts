@@ -1,9 +1,11 @@
+import {MovieReviewSubmitForm} from "@/views/client/movie-reviews/_feat/submit-form/MovieReviewSubmitForm.tsx";
 import {
-    MovieReviewSubmitFormContainer
-} from "@/views/client/movie-reviews/_feat/submit-form/MovieReviewSubmitFormContainer.tsx";
-import {SubmitMovieReviewPopup} from "@/views/client/movie-reviews/_feat/submit-form/SubmitMovieReviewPopup.tsx";
+    SubmitMovieReviewPopupView
+} from "@/views/client/movie-reviews/_feat/submit-form/SubmitMovieReviewPopupView.tsx";
+import {MovieReviewSubmitFormView} from "@/views/client/movie-reviews/_feat/submit-form/MovieReviewSubmitFormView.tsx";
 
 export {
-    MovieReviewSubmitFormContainer,
-    SubmitMovieReviewPopup,
+    MovieReviewSubmitForm,
+    MovieReviewSubmitFormView,
+    SubmitMovieReviewPopupView,
 }

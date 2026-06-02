@@ -22,15 +22,15 @@ import {MyReviewsMutationKeys} from "@/domains/movieReviews/_feat";
 /** Parameters for invoking the submit MovieReview mutation. */
 export type SubmitMutation = {
     editID?: ObjectId;
-    onSubmit?: MutationOnSubmitParams<MovieReview>;
+    onSubmitConfig?: MutationOnSubmitParams<MovieReview>;
     form: UseFormReturn<MovieReviewFormValues, unknown, MovieReviewForm>;
 }
 
 /** Mutation hook for creating or updating a MovieReview owned by the current user. */
 export function useSubmitUserMovieReviewMutation(
-    {form, onSubmit = {}}: SubmitMutation,
+    {form, onSubmitConfig = {}}: SubmitMutation,
 ): UseMutationResult<MovieReview, unknown, MovieReviewForm> {
-    const {successMessage, onSubmitSuccess, errorMessage, onSubmitError} = onSubmit;
+    const {successMessage, onSubmitSuccess, errorMessage, onSubmitError} = onSubmitConfig;
 
     const queryClient = useQueryClient();
 

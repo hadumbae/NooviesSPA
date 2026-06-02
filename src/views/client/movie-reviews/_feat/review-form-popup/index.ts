@@ -1,5 +1,5 @@
-import {MovieReviewPopupForm} from "@/views/client/movie-reviews/_feat/review-form-popup/MovieReviewPopupForm.tsx";
+import {MovieReviewFormPopup} from "@/views/client/movie-reviews/_feat/review-form-popup/MovieReviewFormPopup.tsx";
 
 export {
-    MovieReviewPopupForm,
+    MovieReviewFormPopup,
 }

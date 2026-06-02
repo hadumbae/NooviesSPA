@@ -4,22 +4,19 @@
  */
 
 import {cn} from "@/common/lib/utils.ts";
-import {
-    SubmitMovieReviewPopup
-} from "@/views/client/movie-reviews/_feat/submit-form/SubmitMovieReviewPopup.tsx";
 import {ChevronRight, MessageCirclePlus} from "lucide-react";
-import {
-    MovieReviewSubmitFormContainer
-} from "@/views/client/movie-reviews/_feat/submit-form/MovieReviewSubmitFormContainer.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ReactElement, useState} from "react";
-import {MovieReviewSummaryCard} from "@/views/client/movie-reviews/_comp/review-summary-card/MovieReviewSummaryCard.tsx";
+import {
+    MovieReviewSummaryCard
+} from "@/views/client/movie-reviews/_comp/review-summary-card/MovieReviewSummaryCard.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
-import {MovieReviewDetails} from "@/domains/movieReviews/schemas/model/MovieReviewDetailsSchema";
+import {MovieReviewDetails} from "@/domains/movieReviews/schemas";
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
+import {MovieReviewFormPopup} from "@/views/client/movie-reviews/_feat";
 
 /** Props for the MovieOverviewReviews component. */
 type RowProps = {
@@ -35,7 +32,6 @@ export function MovieOverviewReviews(
     {movie, userReview, reviews, className}: RowProps
 ): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const onSubmit = () => setIsOpen(false);
 
     return (
         <section className={cn("space-y-4", className)}>
@@ -44,13 +40,16 @@ export function MovieOverviewReviews(
                     Movie Reviews
                 </PageSectionHeaderLink>
 
-                <MovieReviewSubmitFormContainer movieID={movie._id} onSubmitSuccess={onSubmit}>
-                    <SubmitMovieReviewPopup isHidden={!!userReview} presetOpen={isOpen} setPresetOpen={setIsOpen}>
-                        <Button variant="primary" size="icon" type="button">
-                            <MessageCirclePlus/>
-                        </Button>
-                    </SubmitMovieReviewPopup>
-                </MovieReviewSubmitFormContainer>
+                {
+                    !userReview && (
+                        <MovieReviewFormPopup isOpen={isOpen} setIsOpen={setIsOpen} movieID={movie._id}>
+                            <Button variant="primary" size="icon" type="button">
+                                <MessageCirclePlus/>
+                            </Button>
+                        </MovieReviewFormPopup>
+                    )
+                }
+
             </div>
 
             {userReview && (

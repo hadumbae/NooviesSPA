@@ -9,13 +9,10 @@ import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
-import {
-    MovieReviewPopupForm
-} from "@/views/client/movie-reviews/_feat/review-form-popup/MovieReviewPopupForm.tsx";
-
-import {simplifyMovieReview} from "@/domains/movieReviews/_feat/formatters";
+import {MovieReviewFormPopup} from "@/views/client/movie-reviews/_feat";
+import {simplifyMovieReview} from "@/domains/movieReviews/_feat";
 import {MovieReviewDetails} from "@/domains/movieReviews/schemas";
-import {ReactElement} from "react";
+import {ReactElement, useState} from "react";
 
 /** Props for the MovieInfoReviewAction component. */
 type ActionProps = {
@@ -34,6 +31,7 @@ export function MovieInfoReviewAction(
     const isEditing = !!userReview;
     const reviewToEdit = isEditing ? simplifyMovieReview(userReview) : undefined;
     const successMessage = isEditing ? "Updated." : undefined;
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
         <div className={cn(
@@ -45,16 +43,18 @@ export function MovieInfoReviewAction(
                 <PrimarySpan>{totalReviews}</PrimarySpan>
             </LabeledGroup>
 
-            <MovieReviewPopupForm
+            <MovieReviewFormPopup
                 movieID={movieID}
                 reviewToEdit={reviewToEdit}
-                successMessage={successMessage}
+                onSubmitConfig={{successMessage}}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
             >
                 <Button variant="primary" size="sm" type="button">
                     <MessageCirclePlus/>{" "}
                     {isEditing ? "Edit Your Review" : "Write A Review"}
                 </Button>
-            </MovieReviewPopupForm>
+            </MovieReviewFormPopup>
         </div>
     );
 }

@@ -1,6 +1,5 @@
 /**
  * @fileoverview Profile tab component that displays a paginated list of the current user's reservations.
- *
  */
 
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
@@ -12,7 +11,7 @@ import PaginationRangeButtons from "@/common/components/pagination/PaginationRan
 import {MyReservationCompactCard} from "@/views/client/reservations/_comp";
 import {CurrentUserReservationLoader} from "@/views/client/reservations/_feat";
 import {PaginatedItems} from "@/common/types";
-import {PopulatedReservation} from "@/domains/reservation/schema/model";
+import {PopulatedReservation} from "@/domains/reservation/schema";
 import {ReactElement} from "react";
 
 /** Number of reservations displayed per page */

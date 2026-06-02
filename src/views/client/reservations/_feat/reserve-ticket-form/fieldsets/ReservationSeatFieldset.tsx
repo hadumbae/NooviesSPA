@@ -2,38 +2,34 @@
  * @fileoverview Interactive fieldset for visual seat selection within the reservation flow.
  */
 
-import {UseFormReturn} from "react-hook-form";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import SeatMapDetailsLoader from "@/views/admin/seatmaps/_comp/loaders/SeatMapDetailsLoader.tsx";
-import {
-    ReservationSeatMapInput
-} from "@/views/client/reservations/_comp/seating-input/ReservationSeatMapInput.tsx";
+import {ReservationSeatMapInput} from "@/views/client/reservations/_comp/seating-input/ReservationSeatMapInput.tsx";
 import {ReactElement, useEffect} from "react";
-import {
-    ReserveTicketFormData,
-    ReserveTicketFormValues
-} from "@/domains/reservation/_feat/reserve-tickets/schema/ReserveTicketFormSchema.ts";
+import {useFormContext} from "react-hook-form";
 
 /** Props for the ReservationSeatFieldset component. */
 export type FieldsetProps = {
-    form: UseFormReturn<ReserveTicketFormValues, unknown, ReserveTicketFormData>;
     proceedToCount: () => void;
-    ticketCount: number;
 };
 
 /**
- * Renders a visual seat map and synchronizes selection with the reservation form state.
+ * Renders a visual seat map and synchronises selection with the reservation form state.
  */
 export function ReservationSeatFieldset(
-    {form, ticketCount, proceedToCount}: FieldsetProps
+    {proceedToCount}: FieldsetProps
 ): ReactElement {
-    const showingID = form.watch("showing") as ObjectId;
-    const selectedSeating = (form.watch("selectedSeating") || []) as ObjectId[];
+    const {control, watch, setValue} = useFormContext();
+
+    const showingID = watch("showing") as ObjectId;
+    const selectedSeating = (watch("selectedSeating") || []) as ObjectId[];
 
     useEffect(() => {
-        form.setValue("ticketCount", selectedSeating.length, { shouldValidate: true });
-    }, [selectedSeating, form]);
+        setValue("ticketCount", selectedSeating.length, {shouldValidate: true});
+    }, [selectedSeating, setValue]);
+
+    const ticketCount = watch("ticketCount");
 
     return (
         <fieldset className="space-y-4">
@@ -41,7 +37,7 @@ export function ReservationSeatFieldset(
                 {(seating) => (
                     <ReservationSeatMapInput
                         name="selectedSeating"
-                        control={form.control}
+                        control={control}
                         seating={seating}
                     />
                 )}

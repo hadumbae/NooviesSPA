@@ -13,7 +13,7 @@ import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import {ReactElement, useState} from "react";
 import {simplifyMovieReview} from "@/domains/movieReviews/_feat/formatters";
 import {type MyMovieReview} from "@/domains/movieReviews/schemas";
-import {MovieReviewPopupForm} from "@/views/client/movie-reviews/_feat";
+import {MovieReviewFormPopup} from "@/views/client/movie-reviews/_feat";
 import {
     IsRecommendedBadge,
     MovieReviewIndexCardActions,
@@ -77,12 +77,12 @@ export function MovieReviewIndexCard({review}: CardProps): ReactElement {
                 </section>
             </CardContent>
 
-            <MovieReviewPopupForm
+            <MovieReviewFormPopup
                 movieID={movie._id}
                 reviewToEdit={simplifiedReview}
-                successMessage="Review Updated"
-                presetOpen={isEditOpen}
-                setPresetOpen={setIsEditOpen}
+                onSubmitConfig={{successMessage: "Review Updated"}}
+                isOpen={isEditOpen}
+                setIsOpen={setIsEditOpen}
             />
         </Card>
     );
