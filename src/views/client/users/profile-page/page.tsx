@@ -3,7 +3,7 @@
  */
 
 import {PageFlexWrapper, PageLoader} from "@/views/common/_comp/page";
-import {useGetAuthUser} from "@/domains/auth/hooks/authUser/useGetAuthUser.ts";
+import {useGetAuthUser} from "@/domains/auth/_feat/manage-auth-user-data/hooks/useGetAuthUser.ts";
 import useTitle from "@/common/hooks/document/useTitle.ts";
 import MyProfileHeader from "@/domains/users/components/headers/MyProfileHeader.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";

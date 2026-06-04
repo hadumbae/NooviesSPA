@@ -16,7 +16,9 @@ import {
 } from "@/common/components/ui/sidebar.tsx";
 import { Link } from "react-router-dom";
 import { User } from "lucide-react";
-import useAuthLogoutSubmitMutation from "@/domains/auth/hooks/useAuthLogoutSubmitMutation.ts";
+import {
+    useAuthLogoutSubmitMutation
+} from "@/domains/auth/_feat/auth-logout/useAuthLogoutSubmitMutation.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 
 /**

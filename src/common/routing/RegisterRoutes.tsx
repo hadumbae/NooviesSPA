@@ -1,5 +1,5 @@
 import HomeRoutes from "@/domains/client/routing/ClientRoutes.tsx";
-import AuthRoutes from "@/domains/auth/routing/AuthRoutes.tsx";
+import {AuthRoutes} from "@/domains/auth/routing/AuthRoutes.tsx";
 import GenreRoutes from "@/domains/genres/routing/AdminGenreRoutes.tsx";
 import PersonRoutes from "@/domains/persons/routing/PersonRoutes.tsx";
 import SeatRoutes from "@/domains/seats/routing/SeatRoutes.tsx";

@@ -8,7 +8,7 @@
  */
 
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {AuthContext} from "@/domains/auth/context/AuthContext.ts";
+import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
 import NotAdminWarning from "@/common/layout/admin-layout/warnings/NotAdminWarning.tsx";
 import {ReactNode} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";

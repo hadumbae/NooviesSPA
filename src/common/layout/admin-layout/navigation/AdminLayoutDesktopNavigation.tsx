@@ -10,7 +10,9 @@ import AdminLayoutShowingNavigationDropdown
     from "@/common/layout/admin-layout/navigation/AdminLayoutShowingNavigationDropdown.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import useAuthLogoutSubmitMutation from "@/domains/auth/hooks/useAuthLogoutSubmitMutation.ts";
+import {
+    useAuthLogoutSubmitMutation
+} from "@/domains/auth/_feat/auth-logout/useAuthLogoutSubmitMutation.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import BaseLayoutDesktopThemeDropdown
     from "@/common/layout/common-layout/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";

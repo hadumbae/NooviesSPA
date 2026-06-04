@@ -1,10 +1,15 @@
-import AuthLoginPage from "@/domains/auth/pages/AuthLoginPage.tsx";
+/**
+ * @fileoverview Defines the routing configuration for authentication-related pages.
+ */
+
+import {AuthLoginPage} from "@/views/common/_pages/auth/login/page.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
-import AuthRegisterPage from "@/domains/auth/pages/AuthRegisterPage.tsx";
-import AuthLogoutPage from "@/domains/auth/pages/AuthLogoutPage.tsx";
+import {AuthRegisterPage} from "@/views/common/_pages/auth/register/page.tsx";
+import {AuthLogoutPage} from "@/views/common/_pages/auth/logout/page.tsx";
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 
-export default [
+/** Route definitions for registration, login, and logout views. */
+export const AuthRoutes = [
     {
         path: "/auth",
         element: <BaseLayout />,

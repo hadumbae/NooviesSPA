@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {AuthContext} from "@/domains/auth/context/AuthContext.ts";
+import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
 
 /**
  * React hook that provides a function to log out the authenticated user.
