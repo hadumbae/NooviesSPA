@@ -2,18 +2,11 @@
  * @fileoverview Page component for administrative reservation lookup by unique code.
  */
 
-import {
-    ReservationByCodePageContent
-} from "@/views/admin/reservations/reservation-by-code/content.tsx";
-import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
-import {
-    FetchByCodeData,
-    FetchByCodeDataSchema,
-    FetchByCodeSearchParamsSchema
-} from "@/domains/reservation/_feat/fetch-reservation-by-code/schemas";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {useFetchReservationByCode} from "@/domains/reservation/_feat/fetch-reservation-by-code/fetch";
 import {ReactElement} from "react";
+import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
+import {ReservationByCodePageContent} from "@/views/admin/reservations/reservation-by-code/content.tsx";
+import {FetchByCodeData, FetchByCodeSearchParamsSchema, useFetchReservationByCode,} from "@/domains/reservation/_feat";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /**
  * Coordinates search parameter parsing and data fetching for the reservation lookup view.
@@ -38,13 +31,10 @@ export function ReservationByCodePage(): ReactElement {
     }
 
     return (
-        <ValidatedDataLoader query={query} schema={FetchByCodeDataSchema}>
+        <QueryDataLoader query={query}>
             {({reservation}: FetchByCodeData) => (
-                <ReservationByCodePageContent
-                    code={code}
-                    reservation={reservation}
-                />
+                <ReservationByCodePageContent code={code} reservation={reservation}/>
             )}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 }

@@ -1,28 +1,24 @@
 /**
- * @file API repository for retrieving paginated reservation history for the current client.
- * @filename repository.ts
+ * @fileoverview Repository for retrieving paginated reservation history for the current client.
+ *
  */
 
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
-import buildQueryURL from "@/common/utility/query/buildQueryURL.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
-
-/**
- * Root endpoint for the client-facing reservation retrieval feature.
- */
-const baseURL = `${import.meta.env.VITE_API_URL}/api/v1/feat/fetch-client-reservations`;
+import {PaginatedItems} from "@/common/types";
+import {PopulatedReservation} from "@/domains/reservation/schema";
+import {buildURL} from "@/common/_feat/fetch-api";
+import {FetchClientReservationsBaseURL} from "@/domains/reservation/_feat";
 
 /**
  * Fetches a paginated collection of reservations belonging to the authenticated user.
- * @param pagination - Configuration for data windowing, including `page` and `perPage` limits.
- * @returns A promise resolving to a standardized {@link RequestReturns} object containing the items and metadata.
  */
 export const getFetchUserReservations = async (
     {page, perPage}: PaginationValues = {page: 1, perPage: 20}
-): Promise<RequestReturns> => {
-    const url = buildQueryURL({
-        baseURL,
+): Promise<RequestReturns<PaginatedItems<PopulatedReservation>>> => {
+    const url = buildURL({
+        baseURL: FetchClientReservationsBaseURL,
         path: "user/paginated",
         queries: {page, perPage},
     });

@@ -5,7 +5,7 @@
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {toast} from "react-toastify";
-import {patchCancelReservation} from "@/domains/reservation/_feat/update-client-reservations/repositories";
+import {patchCancelClientReservation} from "@/domains/reservation/_feat/update-client-reservations/repositories";
 import {
     UpdateClientReservationMutationKeys
 } from "@/domains/reservation/_feat/update-client-reservations/mutations/mutationKeys.ts";
@@ -30,7 +30,7 @@ export function useCancelClientReservationMutation(
         submitMessage && toast.success(submitMessage);
         onSubmit?.(_id);
 
-        await patchCancelReservation(_id);
+        await patchCancelClientReservation(_id);
     }
 
     const onSuccess = () => {

@@ -1,39 +1,33 @@
 /**
- * @file React Query hook for fetching paginated reservations for the authenticated user.
- * @filename useFetchReservationsForCurrentUser.ts
+ * @fileoverview Hook for fetching paginated reservations for the authenticated user.
+ *
  */
-
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {useQuery} from "@tanstack/react-query";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
 import {getFetchUserReservations} from "@/domains/reservation/_feat/fetch-client-reservations/repositories";
+import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservation/schema";
+import {PaginatedItems} from "@/common/types";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 
-/**
- * Input parameters for {@link useFetchReservationsForCurrentUser}.
- */
+type CurrentUserReservations = PaginatedItems<PopulatedReservation>;
+
+/** Parameters for the useFetchReservationsForCurrentUser hook. */
 type FetchParams = {
-    /** {@link PaginationValues} specifying page and record limit. */
     pagination: PaginationValues;
-
-    /**
-     * Optional React Query configuration overrides.
-     */
-    options?: FetchQueryOptions<unknown>;
+    options?: FetchQueryOptions<CurrentUserReservations>;
 };
 
-/**
- * Custom hook to retrieve a paginated list of reservations belonging to the current user.
- * @param params - Object containing {@link pagination} and optional {@link options}.
- * @returns Standard TanStack {@link useQuery} result.
- */
+/** Fetches a paginated list of reservations belonging to the authenticated user. */
 export function useFetchReservationsForCurrentUser(
     {pagination: {page, perPage}, options}: FetchParams
-) {
-    const fetchReservations = useQueryFnHandler({
+): UseQueryResult<CurrentUserReservations, HttpResponseError> {
+    const fetchReservations = buildQueryFn<CurrentUserReservations>({
         action: () => getFetchUserReservations({page, perPage}),
-        errorMessage: "Failed to fetch current authenticated user's reservations.",
+        schema: generatePaginationSchema(PopulatedReservationSchema),
     });
 
     return useQuery({

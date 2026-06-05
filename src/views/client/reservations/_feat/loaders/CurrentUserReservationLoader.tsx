@@ -2,12 +2,11 @@
  * @fileoverview Data loader component for the current user's reservations.
  */
 
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {ReactElement, ReactNode} from "react";
-import {useFetchReservationsForCurrentUser} from "@/domains/reservation/_feat/fetch-client-reservations/fetch";
+import {useFetchReservationsForCurrentUser} from "@/domains/reservation/_feat";
 import {PaginatedItems} from "@/common/types";
-import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservation/schema/model";
-import {generatePaginationSchema} from "@/common/_feat/validation-builders";
+import {PopulatedReservation} from "@/domains/reservation/schema";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /**
  * Props for the CurrentUserReservationLoader component. */
@@ -22,13 +21,11 @@ type LoaderProps = {
 export function CurrentUserReservationLoader(
     {page = 1, perPage = 20, children}: LoaderProps
 ): ReactElement {
-    const query = useFetchReservationsForCurrentUser({
-        pagination: {page, perPage},
-    });
+    const query = useFetchReservationsForCurrentUser({pagination: {page, perPage}});
 
     return (
-        <ValidatedDataLoader query={query} schema={generatePaginationSchema(PopulatedReservationSchema)}>
+        <QueryDataLoader query={query}>
             {children}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 }

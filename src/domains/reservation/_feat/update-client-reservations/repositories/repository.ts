@@ -23,7 +23,7 @@ export const patchCheckoutTicket = (
 };
 
 /** Manually voids a reservation and releases any associated seat holds. */
-export const patchCancelReservation = (
+export const patchCancelClientReservation = (
     _id: ObjectId
 ): Promise<RequestReturns<void>> => {
     const url = buildURL({

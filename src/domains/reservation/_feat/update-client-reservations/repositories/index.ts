@@ -1,5 +1,5 @@
 import {
-    patchCancelReservation,
+    patchCancelClientReservation,
     patchCheckoutTicket
 } from "@/domains/reservation/_feat/update-client-reservations/repositories/repository.ts";
 import {
@@ -9,5 +9,5 @@ import {
 export {
     UpdateClientReservationBaseURL,
     patchCheckoutTicket,
-    patchCancelReservation,
+    patchCancelClientReservation,
 }
