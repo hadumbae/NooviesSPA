@@ -1,42 +1,38 @@
-import {FC} from 'react';
-import PersonDetailsCreditList
-    from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditList.tsx";
+/**
+ * @fileoverview Component for displaying a categorized overview of a person's movie credits.
+ */
+
+import {ReactElement} from 'react';
+import {
+    PersonDetailsCreditList
+} from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditList.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
 import {PersonFilmography} from "@/domains/moviecredit/_feat/person-credit";
+import {SROnly} from "@/views/common/_comp/screen-readers";
+import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
+/** Props for the PersonDetailsCreditOverview component. */
 type OverviewProps = {
-    /** The full name of the person whose credits are being displayed. */
     personName: string;
-
-    /**
-     * An array of the person's movie credits grouped by role type and department.
-     * Typically, includes both 'CAST' and 'CREW' roles.
-     */
     creditsByRole: PersonFilmography;
 }
 
 /**
- * Component for displaying an overview of a person's movie credits.
- *
- * Organizes credits into two sections: CAST and CREW. If no credits exist, it
- * renders a placeholder message. Each section internally uses
- * `PersonDetailsCreditList` to render the detailed list of credits.
- *
- * @example
- * <PersonDetailsCreditOverview
- *   personName="John Doe"
- *   creditsByRole={[{ department: "CAST", credits: [...] }, { department: "CREW", credits: [...] }]}
- * />
+ * Displays a person's movie credits organised into cast and crew sections.
  */
-const PersonDetailsCreditOverview: FC<OverviewProps> = ({personName, creditsByRole}) => {
+export function PersonDetailsCreditOverview(
+    {personName, creditsByRole}: OverviewProps
+): ReactElement {
     const hasNoCredits = creditsByRole.length === 0;
 
     if (hasNoCredits) {
-        return <section className="h-32 flex justify-center items-center">
-            <h1 className="sr-only">"Person : No Credits"</h1>
-            <span className="text-neutral-400 select-none">There Are No Credits</span>
-        </section>
+        return (
+            <section className="h-32 border rounded-xl flex justify-center items-center">
+                <SROnly text="Person : No Credits" />
+                <EmptyArrayContainer text="There Are No Credits" />
+            </section>
+        )
     }
 
     const crewCredits = creditsByRole.filter(role => role.department === "CREW");
@@ -71,6 +67,4 @@ const PersonDetailsCreditOverview: FC<OverviewProps> = ({personName, creditsByRo
             }
         </div>
     );
-};
-
-export default PersonDetailsCreditOverview;
+}

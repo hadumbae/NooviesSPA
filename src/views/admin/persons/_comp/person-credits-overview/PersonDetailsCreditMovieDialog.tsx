@@ -1,61 +1,39 @@
-import {FC, ReactNode} from 'react';
+/**
+ * @fileoverview Dialog component for displaying detailed movie credit information for a specific person.
+ */
+
+import {ReactElement, ReactNode} from 'react';
 import {Dialog, DialogContent, DialogTrigger} from "@/common/components/ui/dialog.tsx";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {PersonCredit} from "@/domains/moviecredit/_feat/person-credit/schemas/PersonCreditSchema.ts";
-import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 
+/** Props for the PersonDetailsCreditMovieDialog component. */
 type MovieDialogProps = {
-    /** The trigger content to open the dialog, e.g., an icon or button. */
     children: ReactNode;
-
-    /** Full name of the person whose credit is being displayed. */
     personName: string;
-
-    /** The movie or movie details associated with this credit. */
     movie: Movie | MovieDetails;
-
-    /** The specific credit of the person in the movie. */
     credit: PersonCredit;
 }
 
 /**
- * Displays a dialog showing detailed information about a person's credit in a movie.
- *
- * Features included in the dialog:
- * - Movie title, release year, poster, and runtime
- * - Movie synopsis
- * - Person's credit display (character name for CAST, role name for CREW)
- * - Link to the full movie page
- *
- * The dialog is triggered via the `children` element and uses `Dialog` from the shared UI library.
- *
- * @example
- * <PersonDetailsCreditMovieDialog
- *   personName="John Doe"
- *   movie={movieData}
- *   credit={creditData}
- * >
- *   <InfoIcon />
- * </PersonDetailsCreditMovieDialog>
+ * Displays a dialog containing movie metadata and specific credit details for a person.
  */
-const PersonDetailsCreditMovieDialog: FC<MovieDialogProps> = ({children, personName, movie, credit}) => {
-    const {_id, title, originalTitle, releaseDate, runtime, synopsis, posterImage} = movie;
+export function PersonDetailsCreditMovieDialog(
+    {children, personName, movie, credit}: MovieDialogProps
+): ReactElement {
+    const {title, originalTitle, releaseDate, runtime, synopsis, posterImage, slug} = movie;
     const {department, characterName, roleType: {roleName}} = credit;
 
-    /** Formatted release year or fallback if unreleased */
     const formattedDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
-
-    /** Display text for the person's credit, depending on department */
     const creditDisplay = department === "CREW" ? roleName : characterName;
-
     const notOriginalTitle = title !== originalTitle;
 
     return (
@@ -63,59 +41,42 @@ const PersonDetailsCreditMovieDialog: FC<MovieDialogProps> = ({children, personN
             <DialogTrigger>{children ?? "Open"}</DialogTrigger>
             <DialogContent className="space-y-5">
 
-                {/* Basic Movie Details */}
-
                 <section className="flex items-center space-x-2">
-                    <SROnly text={`Movie Basic Details : ${title}`} />
+                    <SROnly text={`Movie Basic Details : ${title}`}/>
 
-                    {/* Poster */}
-
-                    <div>
-                        <MoviePosterImageDialog url={posterImage?.secure_url}/>
-                    </div>
-
-                    {/* Title, Runtime, Release Date */}
+                    <MoviePosterImage
+                        url={posterImage?.secure_url}
+                        className="h-36 aspect-[2/3]"
+                    />
 
                     <div className="flex-grow flex flex-col space-y-1">
-                        <h2 className="font-bold text-lg">{title}</h2>
+                        <h2 className="primary-text font-bold text-lg">
+                            {title}
+                            <SROnly text={`Movie Basic Details : ${title}`}/>
+                        </h2>
+
                         {notOriginalTitle && <span className="text-sm text-neutral-400">{originalTitle}</span>}
                         <span className="text-xs text-neutral-400">{formattedDate} | {runtime} mins</span>
                     </div>
                 </section>
 
-                {/* Movie Synopsis */}
-
                 <section>
-                    <SectionHeader srOnly={true}>Movie Synopsis</SectionHeader>
-
+                    <SROnly text="Movie Synopsis"/>
                     <TextQuote>{synopsis}</TextQuote>
                 </section>
 
-                {/* Movie Credit */}
-
                 <section>
-                    <SectionHeader srOnly={true}>Person Credit</SectionHeader>
-
                     <h2 className="text-yellow-500 font-bold">{personName}'s Credit</h2>
-                    <p>{creditDisplay}</p>
+                    <p className="secondary-text">{creditDisplay}</p>
                 </section>
 
-                {/* Link To Movie */}
-
-                <div>
-                    <LoggedHoverLink
-                        to={`/admin/movies/get/${_id}`}
-                        className={cn(
-                            buttonVariants({variant: "default"}),
-                            "w-full bg-primary"
-                        )}
-                    >
-                        <Search size={12}/> <span>Movie</span>
-                    </LoggedHoverLink>
-                </div>
+                <LoggedHoverLink to={`/admin/movies/get/${slug}`} className={cn(
+                    buttonVariants({variant: "primary"}),
+                    "w-full bg-primary"
+                )}>
+                    <Search size={12}/> <span>Movie</span>
+                </LoggedHoverLink>
             </DialogContent>
         </Dialog>
     );
-};
-
-export default PersonDetailsCreditMovieDialog;
+}

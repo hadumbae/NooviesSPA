@@ -1,6 +1,5 @@
 /**
- * @fileoverview Route-level page for displaying detailed information about a single Person.
- * Orchestrates data fetching for biographical details and grouped movie credits.
+ * @fileoverview Page component for displaying detailed information about a person in the admin dashboard.
  */
 
 import {ReactElement} from 'react';
@@ -13,23 +12,23 @@ import {PersonDetailsPageContent} from "@/views/admin/persons/details-page/conte
 import {PersonDetailsViewData, useFetchPersonDetailsViewData} from "@/domains/persons/_feat/admin-view-data";
 
 /**
- * Page component for rendering a person's detailed profile.
+ * Renders the person's detailed profile page using route parameters to fetch biographical and filmography data.
  */
 export function PersonDetailsPage(): ReactElement {
-    const {slug} = useFetchByIdentifierRouteParams({
+    const routeParams = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         sourceComponent: PersonDetailsPage.name,
         errorTo: "/admin/persons",
         errorMessage: "Invalid Person Identifier."
-    }) ?? {};
-
-    const query = useFetchPersonDetailsViewData({
-        slug: slug!,
-        limit: 5,
-        options: {enabled: !!slug},
     });
 
-    if (!slug) {
+    const query = useFetchPersonDetailsViewData({
+        slug: routeParams!.slug,
+        limit: 5,
+        options: {enabled: !!routeParams?.slug},
+    });
+
+    if (!routeParams?.slug) {
         return <PageLoader/>;
     }
 
