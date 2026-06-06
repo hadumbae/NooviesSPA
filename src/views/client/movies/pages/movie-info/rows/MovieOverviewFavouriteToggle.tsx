@@ -5,13 +5,13 @@
 import {ReactElement} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useCheckIsFavouriteMovie} from "@/domains/movies/_feat/favourite-movies/useCheckIsFavouriteMovie.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {IsFavouriteMovieMetadata, IsFavouriteMovieSchema} from "@/domains/users/schemas/favourites/IsFavouriteMovieSchema.ts";
+import {IsFavouriteMovieMetadata} from "@/domains/users/schemas/favourites/IsFavouriteMovieSchema.ts";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import FavouriteMovieHeartButton from "@/views/client/movies/components/buttons/FavouriteMovieHeartButton.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {useToggleUserFavouriteMovie} from "@/domains/users/mutations/useToggleUserFavouriteMovie.ts";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /** Props for the MovieOverviewFavouriteToggle component. */
 type SelectorProps = {
@@ -26,7 +26,7 @@ export function MovieOverviewFavouriteToggle(
     const {mutate, isPending} = useToggleUserFavouriteMovie();
 
     return (
-        <ValidatedDataLoader query={query} schema={IsFavouriteMovieSchema} loaderComponent={AnimatedLoader}>
+        <QueryDataLoader query={query} loaderComponent={AnimatedLoader}>
             {({isFavourite}: IsFavouriteMovieMetadata) => {
                 return (
                     <Card className={isFavourite ? "border-pink-500" : ""}>
@@ -46,6 +46,6 @@ export function MovieOverviewFavouriteToggle(
                     </Card>
                 );
             }}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 }

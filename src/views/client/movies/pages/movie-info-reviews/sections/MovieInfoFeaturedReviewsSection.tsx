@@ -6,13 +6,13 @@ import {ReactElement} from "react";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {MovieReviewDetailsCard} from "@/views/client/movie-reviews/_feat";
 import {
     FeaturedReviewsByMovie,
     FeaturedReviewsByMovieSchema,
     useFetchFeaturedReviewsByMovie
 } from "@/domains/movieReviews/_feat";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /** Props for the MovieInfoFeaturedReviewsSection component. */
 type SectionProps = {
@@ -20,18 +20,19 @@ type SectionProps = {
 };
 
 /**
- * Renders a list of featured reviews and prioritizes the current user's review if it exists.
+ * Renders a list of featured reviews and prioritises the current user's review if it exists.
  */
 export function MovieInfoFeaturedReviewsSection(
     {movieID}: SectionProps
 ): ReactElement {
     const query = useFetchFeaturedReviewsByMovie({
         movieID,
+        schema: FeaturedReviewsByMovieSchema,
         config: {populate: true, virtuals: true, limit: 3},
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={FeaturedReviewsByMovieSchema}>
+        <QueryDataLoader query={query}>
             {({reviews, userReview}: FeaturedReviewsByMovie) => (
                 <section className="space-y-4">
                     <SectionHeader className={SectionHeaderCSS}>
@@ -59,6 +60,6 @@ export function MovieInfoFeaturedReviewsSection(
                     </div>
                 </section>
             )}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 }
