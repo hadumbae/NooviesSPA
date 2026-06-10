@@ -4,7 +4,7 @@
  */
 
 import {ReactElement, useState} from "react";
-import {Sheet, SheetContent} from "@/common/components/ui/Sheet";
+import {Sheet, SheetContent} from "@/common/components/ui/sheet";
 import {SeatContextPanelHeader} from "./SeatContextPanelHeader.tsx";
 import {SeatContextPanelOptionButtonsSection} from "./SeatContextPanelOptionButtonsSection.tsx";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";

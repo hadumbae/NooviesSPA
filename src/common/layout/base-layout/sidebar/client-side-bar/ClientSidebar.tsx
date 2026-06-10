@@ -4,7 +4,7 @@
  */
 
 import {FC} from 'react';
-import {Sidebar, SidebarContent, SidebarHeader} from "@/common/components/ui/sidebar.tsx";
+import {Sidebar, SidebarContent, SidebarHeader} from "@/common/components/ui/sidebar/sidebar.tsx";
 import ClientProfileSidebarGroup
     from "@/common/layout/base-layout/sidebar/client-side-bar/ClientProfileSidebarGroup.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";

@@ -3,11 +3,11 @@
  * @filename AdminLayout.tsx
  */
 
-import {SidebarProvider} from "@/common/components/ui/sidebar.tsx";
+import {SidebarProvider} from "@/common/components/ui/sidebar/sidebar.tsx";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import AdminSidebar from "@/common/layout/admin-layout/sidebar/AdminSidebar.tsx";
-import AdminLayoutHeader from "@/common/layout/admin-layout/layout/AdminLayoutHeader.tsx";
+import {AdminLayoutHeader} from "@/common/layout/admin-layout/layout/AdminLayoutHeader.tsx";
 import AdminLayoutContent from "@/common/layout/admin-layout/layout/AdminLayoutContent.tsx";
 import AdminLayoutFooter from "@/common/layout/admin-layout/layout/AdminLayoutFooter.tsx";
 import AdminBoundary from "@/common/layout/admin-layout/AdminBoundary.tsx";

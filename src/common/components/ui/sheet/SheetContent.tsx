@@ -4,8 +4,8 @@ import * as SheetPrimitive from "@radix-ui/react-dialog";
 import {cn} from "@/common/lib/utils.ts";
 import {SheetCSS} from "@/common/constants/css/SheetCSS.ts";
 import {X} from "lucide-react";
-import {SheetOverlay} from "@/common/components/ui/Sheet/SheetOverlay.tsx";
-import {SheetPortal} from "@/common/components/ui/Sheet/SheetPortal.tsx";
+import {SheetOverlay} from "@/common/components/ui/sheet/SheetOverlay.tsx";
+import {SheetPortal} from "@/common/components/ui/sheet/SheetPortal.tsx";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 const sheetVariants = cva(

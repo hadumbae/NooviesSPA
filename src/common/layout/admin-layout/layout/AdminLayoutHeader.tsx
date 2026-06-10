@@ -1,23 +1,18 @@
-import {FC} from 'react';
+/**
+ * @fileoverview Header component for the admin layout section.
+ */
+
+import {ReactElement} from 'react';
 import LayoutTitle from "@/common/components/layout/LayoutTitle.tsx";
 import LayoutBreakpointIndicator from "@/common/components/layout/LayoutBreakpointIndicator.tsx";
-import {SidebarTrigger} from "@/common/components/ui/sidebar.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {SidebarContext} from "@/common/components/ui/sidebar/SidebarContext.ts";
-import AdminLayoutDesktopNavigation
-    from "@/common/layout/admin-layout/navigation/AdminLayoutDesktopNavigation.tsx";
+import {SidebarContext, SidebarTrigger} from "@/common/components/ui";
+import AdminLayoutDesktopNavigation from "@/common/layout/admin-layout/navigation/AdminLayoutDesktopNavigation.tsx";
 
 /**
- * Admin layout header.
- *
- * @remarks
- * Rendering:
- * - Desktop → {@link AdminLayoutDesktopNavigation}
- * - Mobile → {@link SidebarTrigger}
- *
- * Uses {@link SidebarContext} to determine viewport state.
+ * Header for the admin dashboard that toggles between desktop navigation and a mobile sidebar trigger.
  */
-const AdminLayoutHeader: FC = () => {
+export function AdminLayoutHeader(): ReactElement {
     const {isMobile} = useRequiredContext({context: SidebarContext});
 
     return (
@@ -28,11 +23,9 @@ const AdminLayoutHeader: FC = () => {
                 <LayoutBreakpointIndicator/>
             </div>
 
-            {!isMobile && <AdminLayoutDesktopNavigation />}
+            {!isMobile && <AdminLayoutDesktopNavigation/>}
 
             {isMobile && <SidebarTrigger className="dark:text-white"/>}
         </header>
     );
-};
-
-export default AdminLayoutHeader;
+}

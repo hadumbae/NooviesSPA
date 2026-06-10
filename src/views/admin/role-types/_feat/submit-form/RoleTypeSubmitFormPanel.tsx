@@ -3,18 +3,18 @@
  */
 
 import {ReactElement, ReactNode, useState} from 'react';
-import {Sheet} from "@/common/components/ui/Sheet/Sheet.tsx";
+import {Sheet} from "@/common/components/ui/sheet/Sheet.tsx";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {RoleTypeSubmitForm} from "@/views/admin/role-types/_feat/submit-form/RoleTypeSubmitForm.tsx";
 import {RoleType} from "@/domains/roletype/schema";
 import {ScrollAreaScrollbar} from "@radix-ui/react-scroll-area";
 import {CreatedRoleTypeList} from "@/views/admin/role-types/_comp";
-import {SheetContent} from "@/common/components/ui/Sheet/SheetContent.tsx";
-import {SheetHeader} from "@/common/components/ui/Sheet/SheetHeader.tsx";
-import {SheetTitle} from "@/common/components/ui/Sheet/SheetTitle.tsx";
-import {SheetDescription} from "@/common/components/ui/Sheet/SheetDescription.tsx";
-import {SheetTrigger} from "@/common/components/ui/Sheet/SheetTrigger.tsx";
+import {SheetContent} from "@/common/components/ui/sheet/SheetContent.tsx";
+import {SheetHeader} from "@/common/components/ui/sheet/SheetHeader.tsx";
+import {SheetTitle} from "@/common/components/ui/sheet/SheetTitle.tsx";
+import {SheetDescription} from "@/common/components/ui/sheet/SheetDescription.tsx";
+import {SheetTrigger} from "@/common/components/ui/sheet/SheetTrigger.tsx";
 import {FormContainerConfigProps} from "@/common/_feat/submit-data";
 import {cn} from "@/common/lib/utils.ts";
 import {RoleTypeFormData, RoleTypeFormValues} from "@/domains/roletype/_feat";

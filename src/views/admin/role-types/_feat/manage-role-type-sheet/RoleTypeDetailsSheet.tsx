@@ -3,17 +3,17 @@
  */
 
 import {ReactElement, useState} from 'react';
-import {Sheet} from "@/common/components/ui/Sheet/Sheet.tsx";
+import {Sheet} from "@/common/components/ui/sheet/Sheet.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import {ScrollAreaScrollbar} from "@radix-ui/react-scroll-area";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {SheetContent} from "@/common/components/ui/Sheet/SheetContent.tsx";
-import {SheetHeader} from "@/common/components/ui/Sheet/SheetHeader.tsx";
-import {SheetTitle} from "@/common/components/ui/Sheet/SheetTitle.tsx";
-import {SheetDescription} from "@/common/components/ui/Sheet/SheetDescription.tsx";
-import {SheetTrigger} from "@/common/components/ui/Sheet/SheetTrigger.tsx";
+import {SheetContent} from "@/common/components/ui/sheet/SheetContent.tsx";
+import {SheetHeader} from "@/common/components/ui/sheet/SheetHeader.tsx";
+import {SheetTitle} from "@/common/components/ui/sheet/SheetTitle.tsx";
+import {SheetDescription} from "@/common/components/ui/sheet/SheetDescription.tsx";
+import {SheetTrigger} from "@/common/components/ui/sheet/SheetTrigger.tsx";
 import {
     RoleTypeDeleteCollapsible
 } from "@/views/admin/role-types/_feat/manage-role-type-sheet/RoleTypeDeleteCollapsible.tsx";

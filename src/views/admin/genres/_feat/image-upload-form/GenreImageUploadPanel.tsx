@@ -11,7 +11,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/Sheet";
+} from "@/common/components/ui/sheet";
 import {Button} from "@/common/components/ui/button.tsx";
 import {UIOpenStateProps} from "@/common/types";
 import {GenreImageUploadFormView} from "@/views/admin/genres/_feat/image-upload-form/GenreImageUploadFormView.tsx";

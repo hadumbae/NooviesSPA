@@ -3,7 +3,7 @@
  */
 
 import {useSeatPanelStateContext} from "@/domains/seats/_feat/seat-details-context";
-import {SheetDescription, SheetHeader, SheetTitle} from "@/common/components/ui/Sheet";
+import {SheetDescription, SheetHeader, SheetTitle} from "@/common/components/ui/sheet";
 import {SeatLayoutTypeLabelMap, SeatTypeLabelMap} from "@/domains/seats/schema/fields";
 import buildString from "@/common/utility/buildString.ts";
 import {ReactElement} from "react";

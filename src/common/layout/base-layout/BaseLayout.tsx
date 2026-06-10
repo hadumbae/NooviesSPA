@@ -4,7 +4,7 @@
  */
 
 import {FC} from 'react';
-import {SidebarProvider} from "@/common/components/ui/sidebar.tsx";
+import {SidebarProvider} from "@/common/components/ui/sidebar/sidebar.tsx";
 import BaseSidebar from "@/common/layout/base-layout/sidebar/BaseSidebar.tsx";
 import BaseLayoutContent from "@/common/layout/base-layout/layout/BaseLayoutContent.tsx";
 import BaseLayoutHeader from "@/common/layout/base-layout/layout/BaseLayoutHeader.tsx";

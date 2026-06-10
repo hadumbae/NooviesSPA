@@ -8,7 +8,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/Sheet";
+} from "@/common/components/ui/sheet";
 
 import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValues.ts";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";

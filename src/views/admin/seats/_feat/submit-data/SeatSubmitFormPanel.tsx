@@ -12,7 +12,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-} from "@/common/components/ui/Sheet";
+} from "@/common/components/ui/sheet";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schemas/SeatFormValuesSchema.ts";
 import {useFormContext} from "react-hook-form";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";

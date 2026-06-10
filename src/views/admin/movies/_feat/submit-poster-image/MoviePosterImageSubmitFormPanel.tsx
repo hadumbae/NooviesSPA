@@ -13,7 +13,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/Sheet";
+} from "@/common/components/ui/sheet";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 
 /**

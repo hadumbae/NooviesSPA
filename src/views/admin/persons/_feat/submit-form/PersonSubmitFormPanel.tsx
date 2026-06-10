@@ -11,7 +11,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/Sheet";
+} from "@/common/components/ui/sheet";
 import {PersonFormValues} from "@/domains/persons/_feat/submit-form/PersonFormSchema.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";

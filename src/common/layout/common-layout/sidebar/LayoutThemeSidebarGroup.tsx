@@ -8,7 +8,7 @@ import {
     SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuItem
-} from "@/common/components/ui/sidebar.tsx";
+} from "@/common/components/ui/sidebar/sidebar.tsx";
 import {ThemeButtonSelectors} from "@/views/common/_comp/ui-theme/ThemeButtonSelectors.tsx";
 
 /**

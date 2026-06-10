@@ -11,7 +11,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/Sheet";
+} from "@/common/components/ui/sheet";
 import {HookFormFileInput} from "@/common/components/forms/HookFormFileInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {useFormContext} from "react-hook-form";

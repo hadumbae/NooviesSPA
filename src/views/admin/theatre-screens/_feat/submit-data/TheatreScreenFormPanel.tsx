@@ -12,7 +12,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/Sheet";
+} from "@/common/components/ui/sheet";
 import {TheatreScreenFormValues} from "@/domains/theatre-screens/_feat/submit-data";
 import {Button} from "@/common/components/ui/button.tsx";
 import {UIOpenStateProps} from "@/common/types";

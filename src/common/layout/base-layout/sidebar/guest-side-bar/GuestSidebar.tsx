@@ -3,7 +3,7 @@ import {
     Sidebar,
     SidebarContent,
     SidebarHeader,
-} from "@/common/components/ui/sidebar.tsx";
+} from "@/common/components/ui/sidebar/sidebar.tsx";
 import GuestAuthSidebarGroup from "@/common/layout/base-layout/sidebar/guest-side-bar/GuestAuthSidebarGroup.tsx";
 
 /**

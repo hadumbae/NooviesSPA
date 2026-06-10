@@ -9,7 +9,7 @@ import {cn} from "@/common/lib/utils"
 import {Button} from "@/common/components/ui/button"
 import {Input} from "@/common/components/ui/input"
 import {Separator} from "@/common/components/ui/separator"
-import {Sheet} from "@/common/components/ui/Sheet/Sheet.tsx"
+import {Sheet} from "@/common/components/ui/sheet/Sheet.tsx"
 import {Skeleton} from "@/common/components/ui/skeleton"
 import {
     Tooltip,
@@ -17,10 +17,10 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/common/components/ui/tooltip"
-import {SidebarContext} from "@/common/components/ui/sidebar/SidebarContext.ts";
-import {SheetContent} from "@/common/components/ui/Sheet/SheetContent.tsx";
-import {SheetHeader} from "@/common/components/ui/Sheet/SheetHeader.tsx";
-import {SheetTitle} from "@/common/components/ui/Sheet/SheetTitle.tsx";
+import {SidebarContext, SidebarContextValues} from "@/common/components/ui/sidebar/SidebarContext.ts";
+import {SheetContent} from "@/common/components/ui/sheet/SheetContent.tsx";
+import {SheetHeader} from "@/common/components/ui/sheet/SheetHeader.tsx";
+import {SheetTitle} from "@/common/components/ui/sheet/SheetTitle.tsx";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -107,7 +107,7 @@ const SidebarProvider = React.forwardRef<
         // This makes it easier to style the sidebar with Tailwind classes.
         const state = open ? "expanded" : "collapsed"
 
-        const contextValue = React.useMemo<SidebarContext>(
+        const contextValue = React.useMemo<SidebarContextValues>(
             () => ({
                 state,
                 open,

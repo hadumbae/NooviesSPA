@@ -1,9 +1,9 @@
 import {FC} from 'react';
 import LayoutTitle from "@/common/components/layout/LayoutTitle.tsx";
 import LayoutBreakpointIndicator from "@/common/components/layout/LayoutBreakpointIndicator.tsx";
-import {SidebarTrigger} from "@/common/components/ui/sidebar.tsx";
+import {SidebarTrigger} from "@/common/components/ui/sidebar/sidebar.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {SidebarContext} from "@/common/components/ui/sidebar/SidebarContext.ts";
+import {SidebarContextValues} from "@/common/components/ui/sidebar/SidebarContext.ts";
 import BaseLayoutDesktopNavigation from "@/common/layout/client/navigation/BaseLayoutDesktopNavigation.tsx";
 
 /**
@@ -22,7 +22,7 @@ import BaseLayoutDesktopNavigation from "@/common/layout/client/navigation/BaseL
  * ```
  *
  * @remarks
- * - Uses {@link useRequiredContext} to access `isMobile` from {@link SidebarContext}.
+ * - Uses {@link useRequiredContext} to access `isMobile` from {@link SidebarContextValues}.
  * - The header ensures responsive behavior and consistent structure across layouts.
  *
  * @dependencies

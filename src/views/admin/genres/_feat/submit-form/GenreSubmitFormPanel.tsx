@@ -12,7 +12,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/Sheet";
+} from "@/common/components/ui/sheet";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import {Button} from "@/common/components/ui/button.tsx";

@@ -10,7 +10,7 @@ import {
     SheetDescription,
     SheetHeader,
     SheetTitle,
-} from "@/common/components/ui/Sheet";
+} from "@/common/components/ui/sheet";
 import {formatSeatLabel} from "@/domains/seats/_feat/formatters";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {SeatTypeLabelMap} from "@/domains/seats/schema/fields";

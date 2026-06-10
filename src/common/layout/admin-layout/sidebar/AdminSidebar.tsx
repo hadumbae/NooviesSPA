@@ -8,7 +8,7 @@ import {
     Sidebar,
     SidebarContent,
     SidebarHeader,
-} from "@/common/components/ui/sidebar.tsx";
+} from "@/common/components/ui/sidebar/sidebar.tsx";
 import AdminAuthSidebarGroup
     from "@/common/layout/admin-layout/sidebar/admin-side-bar-groups/AdminAuthSidebarGroup.tsx";
 import AdminSetupSidebarGroup
