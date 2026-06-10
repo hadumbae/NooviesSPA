@@ -5,7 +5,7 @@
  */
 
 import {z} from "zod";
-import {RoleTypeCrewCategoryEnumSchema} from "@/domains/roletype/schema/enums/RoleTypeCategory.enum.ts";
+import {RoleTypeCrewCategorySchema} from "@/domains/roletype/schema/fields/RoleTypeCategorySchema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {CrewCreditExceptMovieSchema} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.schema.ts";
@@ -14,7 +14,7 @@ import {CrewCreditExceptMovieSchema} from "@/domains/moviecredit/_feat/movie-inf
  * Schema representing crew credits grouped by role category.
  */
 export const GroupedCrewCreditsExceptMovieSchema = z.object({
-    category: RoleTypeCrewCategoryEnumSchema,
+    category: RoleTypeCrewCategorySchema,
     totalCredits: NonNegativeNumberSchema,
     credits: generateArraySchema(CrewCreditExceptMovieSchema),
 });

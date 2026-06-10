@@ -1,10 +1,11 @@
 /**
  * @fileoverview Fieldset component for movie credit basic details within a form.
+ *
  */
 
 import {ReactElement} from "react";
 import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
-import {RoleTypeDepartmentRadioGroup} from "@/domains/roletype/components/inputs/RoleTypeDepartmentRadioGroup.tsx";
+import {RoleTypeDepartmentRadioGroup} from "@/views/admin/role-types";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {MovieCreditFormDisableFields} from "@/domains/moviecredit/_feat/submit-data";
@@ -19,7 +20,10 @@ type FieldsetProps = {
     disableFields?: MovieCreditFormDisableFields;
 };
 
-/** Fieldset containing inputs for person, role type, and credit display names. */
+/**
+ * Fieldset containing inputs for person, role type, and credit display names.
+ * Requires wrapping in a React Hook Form provider.
+ */
 export function MovieCreditFormDetailsFieldset(
     {className, disableFields}: FieldsetProps
 ): ReactElement {

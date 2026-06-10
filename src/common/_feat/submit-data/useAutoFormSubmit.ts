@@ -1,21 +1,19 @@
 /**
  * @fileoverview Hook for automatically submitting a form on value changes with debouncing.
- * Synchronizes form state with external handlers (e.g., URL filters) without manual submission.
  */
 
 import {useEffect, useRef} from "react";
 import {FieldValues, SubmitHandler, useFormContext} from "react-hook-form";
 
-/** Configuration for the {@link useAutoFormSubmit} hook. */
+/** Configuration for the useAutoFormSubmit hook. */
 type DebouncedParams<TForm extends FieldValues> = {
-    /** The handler to be executed when the form is automatically submitted. */
     submitHandler: SubmitHandler<TForm>;
-    /** The delay in milliseconds to wait after the last change before submitting. Defaults to 450. */
     timeout?: number;
 };
 
 /**
- * Monitors form values and triggers a debounced submission when changes are detected.
+ * Triggers a debounced form submission when field values change.
+ * Requires wrapping in a FormProvider.
  */
 export function useAutoFormSubmit<TForm extends FieldValues>(
     {submitHandler, timeout = 450}: DebouncedParams<TForm>

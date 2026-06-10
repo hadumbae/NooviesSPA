@@ -8,7 +8,7 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import {Link} from "react-router-dom";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MoviePersonListBreadcrumb} from "@/views/admin/movies/people-page/breadcrumb.tsx";

@@ -3,7 +3,7 @@
  */
 import {z} from "zod";
 import {PersonSchema} from "@/domains/persons/schema/person/Person.schema.ts";
-import {RoleTypeSchema} from "@/domains/roletype/schema/model/RoleType.schema.ts";
+import {RoleTypeSchema} from "@/domains/roletype/schema/model/RoleTypeSchema.ts";
 import {MovieCreditCastSchema, MovieCreditCrewSchema} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
 import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
 

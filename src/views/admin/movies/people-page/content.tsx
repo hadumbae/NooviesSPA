@@ -2,7 +2,7 @@
 
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MoviePeopleHeader} from "@/views/admin/movies/people-page/header.tsx";
 import {MoviePeoplePageFormSection} from "@/views/admin/movies/people-page/sections/MoviePeoplePageFormSection.tsx";

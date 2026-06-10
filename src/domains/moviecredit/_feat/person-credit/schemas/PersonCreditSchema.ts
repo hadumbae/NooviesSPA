@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {RoleTypeSchema} from "@/domains/roletype/schema/model/RoleType.schema.ts";
+import {RoleTypeSchema} from "@/domains/roletype/schema/model/RoleTypeSchema.ts";
 import {MovieCreditCastSchema, MovieCreditCrewSchema} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
 import {MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
 

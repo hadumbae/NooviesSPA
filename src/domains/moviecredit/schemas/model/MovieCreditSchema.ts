@@ -5,7 +5,7 @@
 
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import {RoleTypeDepartmentEnumSchema} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {RoleTypeDepartmentSchema} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
 import {
     preprocessEmptyStringToUndefined
 } from "@/common/_feat/validation-preprocessors";
@@ -22,7 +22,7 @@ import {
 export const MovieCreditBaseSchema = z.object({
     _id: IDStringSchema.readonly(),
     slug: NonEmptyStringSchema.max(75, "Must be 75 characters or less."),
-    department: RoleTypeDepartmentEnumSchema,
+    department: RoleTypeDepartmentSchema,
     displayRoleName: preprocessEmptyStringToUndefined(
         NonEmptyStringSchema.max(150, "Must be 150 characters or less.").optional()
     ).optional(),

@@ -6,7 +6,7 @@
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {RoleTypeDepartmentEnumSchema} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {RoleTypeDepartmentSchema} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
@@ -19,7 +19,7 @@ export const MovieCreditQueryMatchFiltersSchema = z.object({
     movie: IDStringSchema.optional(),
     person: IDStringSchema.optional(),
     roleType: IDStringSchema.optional(),
-    department: RoleTypeDepartmentEnumSchema.optional(),
+    department: RoleTypeDepartmentSchema.optional(),
     characterName: NonEmptyStringSchema.optional(),
     billingOrder: PositiveNumberSchema.optional(),
     uncredited: CoercedBooleanValueSchema.optional(),

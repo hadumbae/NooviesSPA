@@ -10,7 +10,7 @@ import {MovieCreditForm, MovieCreditFormView} from "@/views/admin/movie-credits/
 import {MovieCreditFormDisableFields, MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
 
 /** Props for the MoviePeoplePageFormSection component. */
 type SectionProps = {

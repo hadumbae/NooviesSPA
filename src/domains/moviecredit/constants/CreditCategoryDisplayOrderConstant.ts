@@ -3,7 +3,8 @@
  * @filename CreditCategoryDisplayOrderConstant.ts
  */
 
-import { RoleTypeCategory } from "@/domains/roletype/schema/enums/RoleTypeCategory.types.ts";
+
+import {RoleTypeCategory} from "@/domains/roletype/schema/fields/RoleTypeCategorySchema.ts";
 
 /**
  * Canonical ordering used when rendering grouped credit sections in the UI.

@@ -10,7 +10,7 @@ import {
     DropdownMenuTrigger,
 } from "@/common/components/ui/dropdown-menu.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
 import {MovieDetailsUIContext} from "@/domains/movies/context/details-ui";
 
 /**

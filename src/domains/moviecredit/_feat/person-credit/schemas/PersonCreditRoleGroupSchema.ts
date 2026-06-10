@@ -4,10 +4,10 @@
 
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
-import {RoleTypeDepartmentEnumSchema} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {RoleTypeDepartmentSchema} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
 import {PersonCreditSchema} from "@/domains/moviecredit/_feat/person-credit/schemas/PersonCreditSchema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {RoleTypeSchema} from "@/domains/roletype/schema/model/RoleType.schema.ts";
+import {RoleTypeSchema} from "@/domains/roletype/schema/model/RoleTypeSchema.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 
 /**
@@ -15,7 +15,7 @@ import {generateArraySchema} from "@/common/_feat/validation-builders";
  */
 export const PersonCreditRoleGroupSchema = z.object({
     role: NonEmptyStringSchema.max(150, "Must be 150 characters or less."),
-    department: RoleTypeDepartmentEnumSchema,
+    department: RoleTypeDepartmentSchema,
     totalCredits: NonNegativeNumberSchema,
     topCredits: generateArraySchema(PersonCreditSchema),
     roleType: RoleTypeSchema,

@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {useFetchPaginatedMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks";
 import {MovieCreditDetails, PaginatedMovieCreditDetailsSchema} from "@/domains/moviecredit/schemas";
-import {RoleTypeDepartment} from "@/domains/roletype/schema/RoleTypeDepartmentEnumSchema.ts";
+import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {PaginatedItems} from "@/common/types";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";

@@ -1,6 +1,6 @@
 import {redirect, RouteObject} from "react-router-dom";
 import AuthLoader from "@/common/routing/loaders/AuthLoader.ts";
-import RoleTypeListPage from "@/domains/roletype/pages/RoleTypeListPage.tsx";
+import {RoleTypeListPage} from "@/views/admin/role-types/list-page/page.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
 
@@ -31,4 +31,6 @@ const routes: RouteObject[] = [
     }
 ];
 
-export default routes;
+export {
+    routes as RoleTypeRoutes
+}
