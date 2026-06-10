@@ -17,10 +17,7 @@ import {SheetDescription} from "@/common/components/ui/Sheet/SheetDescription.ts
 import {SheetTrigger} from "@/common/components/ui/Sheet/SheetTrigger.tsx";
 import {FormContainerConfigProps} from "@/common/_feat/submit-data";
 import {cn} from "@/common/lib/utils.ts";
-import {
-    RoleTypeFormData,
-    RoleTypeFormValues
-} from "@/domains/roletype/_feat";
+import {RoleTypeFormData, RoleTypeFormValues} from "@/domains/roletype/_feat";
 import {RoleTypeSubmitFormActions, RoleTypeSubmitFormView} from "@/views/admin/role-types";
 
 /** Props for the RoleTypeSubmitFormPanel component. */
@@ -40,6 +37,8 @@ export function RoleTypeSubmitFormPanel(
     const [roleTypes, setRoleTypes] = useState<RoleType[]>([]);
 
     const action = isEditing ? "Update" : "Create";
+    const buttonText = isEditing ? "Edit" : "Create";
+
     const sheetTitle = `${action} Role Types`;
     const sheetDescription = `${action} role types by submitting data.`;
 
@@ -75,7 +74,7 @@ export function RoleTypeSubmitFormPanel(
                         >
                             <div className="space-y-3">
                                 <RoleTypeSubmitFormView/>
-                                <RoleTypeSubmitFormActions submitButtonText="Edit"/>
+                                <RoleTypeSubmitFormActions submitButtonText={buttonText}/>
                             </div>
                         </RoleTypeSubmitForm>
 
