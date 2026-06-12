@@ -1,63 +1,59 @@
+/**
+ * @fileoverview Form view for updating a user's password.
+ */
+
 import {ReactElement} from 'react';
-import {SubmitHandler, UseFormReturn} from "react-hook-form";
-import {UserPasswordUpdateFormData} from "@/domains/users/_feat/update-password/schema/UserPasswordUpdateFormSchema.ts";
-import {UseMutationResult} from "@tanstack/react-query";
-import {Form} from "@/common/components/ui/form.tsx";
+import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Loader} from "lucide-react";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
+/** Props for the UpdateUserPasswordFormView component. */
 type FormProps = {
-    form: UseFormReturn<UserPasswordUpdateFormData>;
-    mutation: UseMutationResult<void, Error, UserPasswordUpdateFormData>;
-    submitHandler: SubmitHandler<UserPasswordUpdateFormData>;
     className?: string;
 }
 
-export function UpdateUserPasswordFormView(params: FormProps): ReactElement {
-    const {form, submitHandler, className, mutation: {isPending}} = params;
+/**
+ * Renders the password update form fields.
+ */
+export function UpdateUserPasswordFormView(
+    {className}: FormProps
+): ReactElement {
+    const {control} = useFormContext();
+    const {formID, isPending} = useBaseFormContext();
 
     return (
-        <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(submitHandler)}
-                className={cn("space-y-4", className)}
-            >
-                <section className="grid grid-cols-3">
-                    <span className="pt-2">Password</span>
+        <div className={cn("space-y-4", className)}>
+            <fieldset className="grid grid-cols-3">
+                <span className="pt-2">Password</span>
 
-                    <HookFormInput
-                        name="password"
-                        label="Password"
-                        type="password"
-                        control={form.control}
-                        hasLabel={false}
-                        className="col-span-2"
-                    />
-                </section>
+                <HookFormInput
+                    name="password"
+                    type="password"
+                    control={control}
+                    className="col-span-2"
+                />
+            </fieldset>
 
-                <section className="grid grid-cols-3">
-                    <span className="pt-2">Confirm</span>
+            <fieldset className="grid grid-cols-3">
+                <span className="pt-2">Confirm</span>
 
-                    <HookFormInput
-                        name="confirm"
-                        label="Confirm"
-                        type="password"
-                        control={form.control}
-                        hasLabel={false}
-                        className="col-span-2"
-                    />
-                </section>
+                <HookFormInput
+                    name="confirm"
+                    type="password"
+                    control={control}
+                    className="col-span-2"
+                />
+            </fieldset>
 
 
-                <section className="flex justify-end">
-                    <Button type="submit" variant="default" className="w-full bg-primary" disabled={isPending}>
-                        {isPending ? <Loader className="animate-spin" /> : "Update"}
-                    </Button>
-                </section>
-
-            </form>
-        </Form>
+            <div className="flex justify-end">
+                <Button form={formID} type="submit" variant="primary" className="w-full" disabled={isPending}>
+                    {isPending ? <Loader className="animate-spin"/> : "Update"}
+                </Button>
+            </div>
+        </div>
     );
 }

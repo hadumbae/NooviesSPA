@@ -1,48 +1,54 @@
-import {ReactElement} from 'react';
-import {
-    useUpdateUserPasswordForm
-} from "@/domains/users/_feat/update-password/hooks/useUpdateUserPasswordForm.ts";
-import {
-    useUpdateUserPasswordSubmitMutation
-} from "@/domains/users/_feat/update-password/hooks/useUpdateUserPasswordSubmitMutation.ts";
-import {UserPasswordUpdateFormData} from "@/domains/users/_feat/update-password/schema/UserPasswordUpdateFormSchema.ts";
-import {UpdateUserPasswordFormView} from "@/views/client/users/_feat/update-user-password/form/UpdateUserPasswordFormView.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+/**
+ * @fileoverview Form component for updating a user's password.
+ */
 
+import {ReactElement, useId} from 'react';
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
+import {Form} from "@/common/components/ui";
+import {
+    UserPasswordUpdateFormData,
+    UserPasswordUpdateFormValues,
+    useUpdateUserPasswordForm,
+    useUpdateUserPasswordSubmitMutation
+} from "@/domains/users";
+
+/** Props for the UpdateUserPasswordForm component. */
 type FormProps = {
+    children: ReactElement;
     userID: ObjectId;
-    onSubmit?: () => void;
-    className?: string;
+    onSubmitConfig?: MutationResponseConfig<void, UserPasswordUpdateFormValues>;
+    resetConfig?: MutationFormResetConfig;
 }
 
+/** Form wrapper that manages the state and submission for updating user passwords. */
 export function UpdateUserPasswordForm(
-    {userID, onSubmit, className}: FormProps
+    {children, userID, onSubmitConfig, resetConfig}: FormProps
 ): ReactElement {
+    const id = useId();
+    const formID = `update-user-password-form-${id}`;
+
     const form = useUpdateUserPasswordForm();
-
-    const onFormSubmit = () => {
-        onSubmit && onSubmit();
-        form.reset();
-    }
-
-    const mutation = useUpdateUserPasswordSubmitMutation({
+    const {mutate, isPending, isError} = useUpdateUserPasswordSubmitMutation({
+        form,
         userID,
-        onSubmit: onFormSubmit
+        ...onSubmitConfig,
+        ...resetConfig,
     });
 
     const submitHandler = (values: UserPasswordUpdateFormData) => {
         console.log("[UpdateUserPasswordForm] Values: ", values);
-        mutation.mutate(values);
+        mutate(values);
     }
 
     return (
-        <UpdateUserPasswordFormView
-            form={form}
-            mutation={mutation}
-            submitHandler={submitHandler}
-            className={className}
-        />
+        <BaseFormContextProvider formID={formID} submitHandler={submitHandler} isPending={isPending} isError={isError}>
+            <Form {...form}>
+                <form id={formID} onSubmit={form.handleSubmit(submitHandler)}>
+                    {children}
+                </form>
+            </Form>
+        </BaseFormContextProvider>
     );
 }
-
-
