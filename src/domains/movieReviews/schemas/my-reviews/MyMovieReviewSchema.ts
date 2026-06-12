@@ -4,11 +4,11 @@
  */
 
 import {z} from "zod";
-import {LeanUserSchema} from "@/domains/users/schemas/user/User.schema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 
 import {MovieReviewSchema} from "@/domains/movieReviews/schemas/model";
 import { MovieWithRatingSchema } from "@/domains/movies/schema/movie";
+import {LeanUserSchema} from "@/domains/users/schema/user/LeanUserSchema";
 
 /** Schema for a movie review enriched with user and movie details for the author's view. */
 export const MyMovieReviewSchema = MovieReviewSchema.extend({

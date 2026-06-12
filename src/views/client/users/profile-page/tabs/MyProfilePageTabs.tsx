@@ -3,20 +3,20 @@
  */
 
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
-import {MyProfilePageActiveTab} from "@/domains/users/schemas/tabs/my-profile-page/MyProfilePageActiveTabSchema.ts";
-import {MyProfilePageTabKeysConstant} from "@/domains/users/schemas/tabs/my-profile-page/MyProfilePageTabConstants.ts";
-import {User} from "@/domains/users/schemas/user/User.types.ts";
-import ClientRecentReviewsListContainer from "@/domains/users/components/profile/ClientRecentReviewsListContainer.tsx";
+import {MyProfilePageActiveTab} from "@/domains/users/_feat/my-profile-page/schema/MyProfilePageActiveTabSchema.ts";
+import {MyProfilePageTabKeysConstant} from "@/domains/users/_feat/my-profile-page/schema/MyProfilePageTabConstants.ts";
 import {MyProfilePageReservationTab} from "@/views/client/users/profile-page/tabs/MyProfilePageReservationTab.tsx";
 import {
     MyProfilePagePasswordTab
 } from "@/views/client/users/profile-page/tabs/MyProfilePagePasswordTab.tsx";
-import {useMyProfilePageSetup} from "@/domains/users/hooks/my-profie-page/useMyProfilePageSetup.ts";
+import {useMyProfilePageSetup} from "@/domains/users/_feat/my-profile-page/hooks/useMyProfilePageSetup.ts";
 import {
     MyProfilePageFavouriteTab
 } from "@/views/client/users/profile-page/tabs/MyProfilePageFavouriteTab.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";
+
+import {User} from "@/domains/users/schema/user/UserSchema";
 
 /** Props for the MyProfilePageTabs component. */
 type TabProps = {
@@ -27,7 +27,6 @@ type TabProps = {
 
 /**
  * Renders tab navigation and associated profile content panels.
- * Synchronizes active tab state with URL parameters via useMyProfilePageSetup.
  */
 export function MyProfilePageTabs(
     {user, className, showTabSelector = true}: TabProps
@@ -72,7 +71,7 @@ export function MyProfilePageTabs(
             />
 
             <TabsContent value="reviews">
-                <ClientRecentReviewsListContainer recentReviews={[]}/>
+                My Reviews - Remove
             </TabsContent>
 
             <MyProfilePageFavouriteTab

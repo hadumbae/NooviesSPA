@@ -3,7 +3,7 @@
  * @filename CustomerProfileReservationSection.tsx
  */
 
-import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {Reservation} from "@/domains/reservation/schema/model";
 
 import {CustomerReservationCard} from "@/views/admin/customers/_comp";

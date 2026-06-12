@@ -3,12 +3,13 @@
  */
 
 import {ReactElement, ReactNode, useId} from 'react';
-import {User} from "@/domains/users/schemas/user/User.types.ts";
 import {AuthLoginFormData} from "@/domains/auth/_feat";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useAuthLoginForm, useAuthLoginSubmitMutation} from "@/domains/auth/_feat/auth-login-fom/hooks";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
+
+import {User} from "@/domains/users/schema/user/UserSchema";
 
 /** Props for the AuthLoginForm component. */
 type FormProps = {

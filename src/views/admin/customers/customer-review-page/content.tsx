@@ -3,7 +3,7 @@
  *
  */
 
-import {LeanUserWithEmail} from "@/domains/users/schemas/user";
+import {LeanUserWithEmail} from "@/domains/users/schema/user";
 import {PageFlexWrapper, PageSectionHeaderLink} from "@/views/common/_comp/page";
 import {CustomerReviewPageHeader} from "@/views/admin/customers/customer-review-page/header.tsx";
 import {CustomerMovieReview} from "@/domains/movieReviews/schemas/customer-reviews";

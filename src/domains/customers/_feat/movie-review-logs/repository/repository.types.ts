@@ -2,7 +2,7 @@
  * @fileoverview Type definitions for the customer review moderation logs repository.
  */
 
-import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {MovieReviewUniqueCode} from "@/domains/movieReviews/schemas";
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 

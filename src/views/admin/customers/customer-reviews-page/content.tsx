@@ -5,7 +5,7 @@
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {CustomerMovieReviewSummary} from "@/domains/movieReviews/schemas/customer-reviews";
-import {LeanUserWithEmail} from "@/domains/users/schemas/user";
+import {LeanUserWithEmail} from "@/domains/users/schema/user";
 import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/_comp";
 import {CustomerReviewsPageHeader} from "@/views/admin/customers/customer-reviews-page/header.tsx";
 import {ReactElement} from "react";

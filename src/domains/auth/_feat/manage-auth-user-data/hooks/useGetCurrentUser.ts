@@ -3,11 +3,12 @@
  *
  */
 
-import {User} from "@/domains/users/schemas/user/User.types.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
 import useCurrentURLPath from "@/common/hooks/router/useCurrentURLPath.ts";
 import {UnauthorisedError} from "@/common/errors/UnauthorisedError.ts";
+
+import {User} from "@/domains/users/schema/user/UserSchema";
 
 /** Props for the useGetCurrentUser hook. */
 type GetProps = {

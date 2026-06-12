@@ -3,7 +3,7 @@
  * @filename CustomerReviewPageBreadcrumbs.tsx
  */
 
-import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {MovieReviewUniqueCode} from "@/domains/movieReviews/schemas/fields";
 import {
     Breadcrumb,

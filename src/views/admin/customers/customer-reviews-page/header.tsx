@@ -3,7 +3,7 @@
  * including breadcrumbs and titles.
  */
 
-import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {CustomerReviewsPageBreadcrumbs} from "@/views/admin/customers/customer-reviews-page/breadcrumbs.tsx";
 import {ReactElement} from "react";
 

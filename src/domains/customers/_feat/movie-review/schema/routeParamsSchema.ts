@@ -4,7 +4,7 @@
  */
 
 import {z} from "zod";
-import {UserUniqueCodeSchema} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {UserUniqueCodeSchema} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {MovieReviewUniqueCodeSchema} from "@/domains/movieReviews/schemas/fields";
 
 /** Validation schema for identifying a specific review within a customer's scope via URL. */

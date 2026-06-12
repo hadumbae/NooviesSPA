@@ -21,7 +21,7 @@ import {ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 
 /**
  * Properties for the CustomerReservationDialog component.

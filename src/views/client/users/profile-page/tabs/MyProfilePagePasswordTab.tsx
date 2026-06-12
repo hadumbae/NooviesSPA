@@ -4,7 +4,9 @@
 
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
-import UpdateUserPasswordFormContainer from "@/domains/users/components/forms/UpdateUserPasswordFormContainer.tsx";
+import {
+    UpdateUserPasswordForm
+} from "@/views/client/users/_feat/update-user-password/form/UpdateUserPasswordForm.tsx";
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ReactElement} from "react";
@@ -29,7 +31,7 @@ export function MyProfilePagePasswordTab(
                 </CardHeader>
 
                 <CardContent>
-                    <UpdateUserPasswordFormContainer userID={userID}/>
+                    <UpdateUserPasswordForm userID={userID}/>
                 </CardContent>
             </Card>
         </TabsContent>

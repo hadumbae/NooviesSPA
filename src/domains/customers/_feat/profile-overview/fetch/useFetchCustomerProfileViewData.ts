@@ -1,7 +1,7 @@
 /**
  * @fileoverview Custom React hook for fetching aggregated customer profile data using TanStack Query.
  */
-import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {useQuery} from "@tanstack/react-query";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";

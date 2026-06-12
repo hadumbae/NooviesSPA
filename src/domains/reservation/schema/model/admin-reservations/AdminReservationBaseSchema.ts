@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {ReservationBaseSchema} from "@/domains/reservation/schema/model/reservations/ReservationBaseSchema.ts";
-import {LeanUserWithEmailSchema} from "@/domains/users/schemas/user";
+import {LeanUserWithEmailSchema} from "@/domains/users/schema/user";
 
 /** Zod schema that extends the base reservation with a lean user object. */
 export const AdminReservationBaseSchema = ReservationBaseSchema.extend({

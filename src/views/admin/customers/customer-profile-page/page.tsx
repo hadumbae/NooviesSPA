@@ -12,7 +12,7 @@ import {
 import {
     CustomerProfilePageContent
 } from "@/views/admin/customers/customer-profile-page/content.tsx";
-import {useFetchCustomerCode} from "@/domains/users/utils/fetch-customer-code/useFetchCustomerCode.ts";
+import {useFetchCustomerCode} from "@/domains/users";
 
 /**
  * Orchestrates data fetching and validation for the Customer Profile view.

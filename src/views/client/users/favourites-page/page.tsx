@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import useTitle from "@/common/hooks/document/useTitle.ts";
-import {useFetchCurrentUserFavourites} from "@/domains/users/fetch/favourites/useFetchCurrentUserFavourites.ts";
+import {useFetchCurrentUserFavourites} from "@/domains/users/_feat/manage-user-favourites/hooks/useFetchCurrentUserFavourites.ts";
 import useParsedPaginationValue
     from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {MyFavouritesPageContent} from "@/views/client/users/favourites-page/content.tsx";

@@ -4,7 +4,7 @@
  */
 
 import {Reservation} from "@/domains/reservation/schema/model";
-import {LeanUserWithEmail} from "@/domains/users/schemas/user";
+import {LeanUserWithEmail} from "@/domains/users/schema/user";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {
     CustomerProfileReviewSection

@@ -4,7 +4,7 @@
 
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {CustomerMovieReviewSummary} from "@/domains/movieReviews/schemas/customer-reviews";
-import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/_comp";
 
 /** Props for the CustomerProfileReviewSection component. */

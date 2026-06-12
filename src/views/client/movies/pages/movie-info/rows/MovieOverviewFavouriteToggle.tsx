@@ -4,14 +4,12 @@
 
 import {ReactElement} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {useCheckIsFavouriteMovie} from "@/domains/movies/_feat/favourite-movies/useCheckIsFavouriteMovie.ts";
-import {IsFavouriteMovieMetadata} from "@/domains/users/schemas/favourites/IsFavouriteMovieSchema.ts";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import FavouriteMovieHeartButton from "@/views/client/movies/components/buttons/FavouriteMovieHeartButton.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import {useToggleUserFavouriteMovie} from "@/domains/users/mutations/useToggleUserFavouriteMovie.ts";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {IsFavouriteMovieMetadata, useCheckIsFavouriteMovie, useToggleUserFavouriteMovie} from "@/domains/users";
 
 /** Props for the MovieOverviewFavouriteToggle component. */
 type SelectorProps = {

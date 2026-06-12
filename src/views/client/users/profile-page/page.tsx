@@ -5,11 +5,11 @@
 import {PageFlexWrapper, PageLoader} from "@/views/common/_comp/page";
 import {useGetAuthUser} from "@/domains/auth/_feat/manage-auth-user-data/hooks/useGetAuthUser.ts";
 import useTitle from "@/common/hooks/document/useTitle.ts";
-import MyProfileHeader from "@/domains/users/components/headers/MyProfileHeader.tsx";
+import MyProfileHeader from "@/views/client/users/profile-page/MyProfileHeader.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {MyProfilePageTabs} from "@/views/client/users/profile-page/tabs/MyProfilePageTabs.tsx";
-import {useMyProfilePageSetup} from "@/domains/users/hooks/my-profie-page/useMyProfilePageSetup.ts";
+import {useMyProfilePageSetup} from "@/domains/users/_feat/my-profile-page/hooks/useMyProfilePageSetup.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";
 

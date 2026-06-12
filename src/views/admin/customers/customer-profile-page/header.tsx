@@ -3,7 +3,7 @@
  * @filename CustomerProfilePageHeader.tsx
  */
 
-import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 
 /**
  * Properties for the CustomerProfilePageHeader component.

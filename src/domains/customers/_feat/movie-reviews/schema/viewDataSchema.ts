@@ -2,7 +2,7 @@
  * @fileoverview Zod schema and type definition for the Customer Reviews paginated view.
  */
 
-import { LeanUserWithEmailSchema } from "@/domains/users/schemas/user";
+import { LeanUserWithEmailSchema } from "@/domains/users/schema/user";
 import { generatePaginationSchema } from "@/common/_feat/validation-builders";
 import { z } from "zod";
 import { CustomerMovieReviewSummarySchema } from "@/domains/movieReviews/schemas";

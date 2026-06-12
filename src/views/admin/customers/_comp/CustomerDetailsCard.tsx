@@ -3,7 +3,7 @@
  * @filename CustomerDetailsCard.tsx
  */
 
-import {LeanUserWithEmail} from "@/domains/users/schemas/user";
+import {LeanUserWithEmail} from "@/domains/users/schema/user";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";

@@ -2,16 +2,9 @@
  * @fileoverview Dropdown-based tab selector for the My Profile page.
  */
 
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger
-} from "@/common/components/ui/dropdown-menu.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
-import {MyProfilePageActiveTab} from "@/domains/users/schemas/tabs/my-profile-page/MyProfilePageActiveTabSchema.ts";
-import {MyProfilePageTabKeysConstant} from "@/domains/users/schemas/tabs/my-profile-page/MyProfilePageTabConstants.ts";
 import {ReactElement} from "react";
+import {MyProfilePageActiveTab, MyProfilePageTabKeysConstant} from "@/domains/users";
+import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/common/components/ui";
 
 /** Props for the MyProfilePageTabDropdown component. */
 type DropdownProps = {

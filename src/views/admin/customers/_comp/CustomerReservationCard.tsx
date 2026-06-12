@@ -11,7 +11,7 @@ import {
 } from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
 import {CustomerReservationDialog} from "@/views/admin/customers/_comp/CustomerReservationDialog.tsx";
 import {useState} from "react";
-import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 
 /**

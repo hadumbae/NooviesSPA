@@ -8,14 +8,13 @@ import {UseFormReturn} from "react-hook-form";
 import {useSetAuthUser} from "@/domains/auth/_feat/manage-auth-user-data";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import {UserSchema} from "@/domains/users/schemas/user/User.schema.ts";
-import {User} from "@/domains/users/schemas/user/User.types.ts";
 import {
     AuthLoginFormData,
     AuthLoginFormValues
 } from "@/domains/auth/_feat/auth-login-fom/schema";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {loginUser} from "@/domains/auth/_feat/access-auth-backend";
+import {User, UserSchema} from "@/domains/users/schema/user/UserSchema";
 
 /**
  * Configuration parameters for the login submission mutation.

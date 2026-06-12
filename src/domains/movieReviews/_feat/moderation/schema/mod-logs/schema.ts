@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod"
-import {LeanUserWithEmailSchema} from "@/domains/users/schemas/user"
+import {LeanUserWithEmailSchema} from "@/domains/users/schema/user"
 import {MovieReviewModerationLogReferenceSchema} from "@/domains/movieReviews/_feat/moderation/schema/mod-logs/refSchema.ts"
 
 /** Hydrated version of a moderation log entry containing full administrator details. */

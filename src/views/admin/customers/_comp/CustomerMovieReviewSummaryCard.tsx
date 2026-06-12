@@ -12,7 +12,7 @@ import {
 } from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {UserUniqueCode} from "@/domains/users/schemas/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {IsRecommendedCheck} from "@/views/client/movie-reviews/_comp/badges/IsRecommendedCheck.tsx";
 

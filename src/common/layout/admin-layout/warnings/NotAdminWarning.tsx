@@ -10,12 +10,13 @@
  * Persists the current route for post-auth redirection.
  */
 
-import {User} from "@/domains/users/schemas/user/User.types.ts";
 import {AlertTriangle} from "lucide-react";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import HoverLink from "@/common/components/navigation/HoverLink.tsx";
 import {useLocation} from "react-router-dom";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
+
+import {User} from "@/domains/users/schema/user/UserSchema";
 
 /**
  * Props for {@link NotAdminWarning}.

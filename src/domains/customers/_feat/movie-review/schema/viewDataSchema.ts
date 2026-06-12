@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {LeanUserWithEmailSchema} from "@/domains/users/schemas/user";
+import {LeanUserWithEmailSchema} from "@/domains/users/schema/user";
 import {CustomerMovieReviewSchema} from "@/domains/movieReviews/schemas/customer-reviews";
 
 /** Zod validation schema for the customer-review pair used in moderation views. */
