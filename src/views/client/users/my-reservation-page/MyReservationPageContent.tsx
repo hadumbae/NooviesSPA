@@ -5,16 +5,16 @@
 
 import {formatReservationDetails} from "@/domains/reservation/_feat/formatters/formatReservationDetails.ts";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {MyReservationPageHeader} from "@/views/client/users/reservation-page/headers/header.tsx";
+import {MyReservationPageHeader} from "@/views/client/users/my-reservation-page/headers/header.tsx";
 import {
     MyReservationInfoCard
-} from "@/views/client/users/reservation-page/card/MyReservationInfoCard.tsx";
+} from "@/views/client/users/my-reservation-page/card/MyReservationInfoCard.tsx";
 import {
     MyReservationSeatingCard
-} from "@/views/client/users/reservation-page/card/MyReservationSeatingCard.tsx";
+} from "@/views/client/users/my-reservation-page/card/MyReservationSeatingCard.tsx";
 import {
     MyReservationStatusActions
-} from "@/views/client/users/reservation-page/mutations/MyReservationStatusActions.tsx";
+} from "@/views/client/users/my-reservation-page/mutations/MyReservationStatusActions.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {PopulatedReservation} from "@/domains/reservation/schema/model";
 import {ReactElement} from "react";

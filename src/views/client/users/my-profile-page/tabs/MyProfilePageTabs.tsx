@@ -5,22 +5,16 @@
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/common/components/ui/tabs.tsx";
 import {MyProfilePageActiveTab} from "@/domains/users/_feat/my-profile-page/schema/MyProfilePageActiveTabSchema.ts";
 import {MyProfilePageTabKeysConstant} from "@/domains/users/_feat/my-profile-page/schema/MyProfilePageTabConstants.ts";
-import {MyProfilePageReservationTab} from "@/views/client/users/profile-page/tabs/MyProfilePageReservationTab.tsx";
-import {
-    MyProfilePagePasswordTab
-} from "@/views/client/users/profile-page/tabs/MyProfilePagePasswordTab.tsx";
+import {MyProfilePageReservationTab} from "@/views/client/users/my-profile-page/tabs/MyProfilePageReservationTab.tsx";
 import {useMyProfilePageSetup} from "@/domains/users/_feat/my-profile-page/hooks/useMyProfilePageSetup.ts";
 import {
     MyProfilePageFavouriteTab
-} from "@/views/client/users/profile-page/tabs/MyProfilePageFavouriteTab.tsx";
+} from "@/views/client/users/my-profile-page/tabs/MyProfilePageFavouriteTab.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";
 
-import {User} from "@/domains/users/schema/user/UserSchema";
-
 /** Props for the MyProfilePageTabs component. */
 type TabProps = {
-    user: User;
     showTabSelector?: boolean;
     className?: string;
 };
@@ -29,7 +23,7 @@ type TabProps = {
  * Renders tab navigation and associated profile content panels.
  */
 export function MyProfilePageTabs(
-    {user, className, showTabSelector = true}: TabProps
+    {className, showTabSelector = true}: TabProps
 ): ReactElement {
     const {searchParams, setters} = useMyProfilePageSetup();
     const {activeTab, resPage} = searchParams;
@@ -57,11 +51,6 @@ export function MyProfilePageTabs(
                 showTabSelector &&
                 <section>{tabList}</section>
             }
-
-            <MyProfilePagePasswordTab
-                tabValue="password"
-                userID={user._id}
-            />
 
             <MyProfilePageReservationTab
                 page={resPage}

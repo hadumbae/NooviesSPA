@@ -6,10 +6,10 @@
 import {RouteObject} from "react-router-dom";
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
-import {MyProfilePage} from "@/views/client/users/profile-page/page.tsx";
-import {MyFavouritesPage} from "@/views/client/users/favourites-page/page.tsx";
+import {MyProfilePage} from "@/views/client/users/my-profile-page/page.tsx";
+import {MyFavouritesPage} from "@/views/client/users/my-favourites-page/page.tsx";
 import {MyReviewsPage} from "@/views/client/users/reviews-page/page.tsx";
-import {MyReservationPage} from "@/views/client/users/reservation-page/MyReservationPage.tsx";
+import {MyReservationPage} from "@/views/client/users/my-reservation-page/MyReservationPage.tsx";
 import {MyReservationsPage} from "@/views/client/users/my-reservations-page/page.tsx";
 
 /**

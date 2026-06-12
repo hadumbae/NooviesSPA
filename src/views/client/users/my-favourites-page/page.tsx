@@ -7,7 +7,7 @@ import useTitle from "@/common/hooks/document/useTitle.ts";
 import {useFetchCurrentUserFavourites} from "@/domains/users/_feat/manage-user-favourites/hooks/useFetchCurrentUserFavourites.ts";
 import useParsedPaginationValue
     from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import {MyFavouritesPageContent} from "@/views/client/users/favourites-page/content.tsx";
+import {MyFavouritesPageContent} from "@/views/client/users/my-favourites-page/content.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie";
