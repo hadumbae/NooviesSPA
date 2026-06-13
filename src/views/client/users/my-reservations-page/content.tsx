@@ -9,7 +9,7 @@ import {PopulatedReservation} from "@/domains/reservation/schema";
 import {MyReservationCompactCard} from "@/views/client/reservations/_comp";
 import {ReactElement} from "react";
 import {PageHeader} from "@/views/common/_comp";
-import {MyProfileNavigationDropdown} from "@/views/client/users";
+import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users";
 import {Separator} from "@/common/components/ui";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 
@@ -37,6 +37,11 @@ export function MyReservationsPageContent(
             />
 
             <Separator />
+
+            {
+                !isMobile &&
+                <MyProfileNavigation/>
+            }
 
             {
                 reservations.length > 0 ? (
