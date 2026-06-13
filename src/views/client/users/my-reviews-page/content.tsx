@@ -4,11 +4,14 @@
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import MyReviewsPageHeader from "@/views/client/users/reviews-page/header/header.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {MovieReviewIndexCard} from "@/views/client/movie-reviews/_comp/index-card";
 import {MyMovieReview} from "@/domains/movieReviews/schemas/my-reviews";
 import {ReactElement} from "react";
+import {PageHeader} from "@/views/common/_comp";
+import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users";
+import {Separator} from "@/common/components/ui";
+import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 
 /** Props for the MyReviewsPageContent component. */
 type ContentProps = {
@@ -25,9 +28,22 @@ type ContentProps = {
 export function MyReviewsPageContent(
     {reviews, ...paginationProps}: ContentProps
 ): ReactElement {
+    const isMobile = useIsMobile();
+
     return (
         <PageFlexWrapper>
-            <MyReviewsPageHeader/>
+            <PageHeader
+                title="My Reviews"
+                description="An Index Of All Your Reviews"
+                actions={isMobile && <MyProfileNavigationDropdown />}
+            />
+
+            <Separator />
+
+            {
+                !isMobile &&
+                <MyProfileNavigation/>
+            }
 
             {
                 reviews.length > 0 ? (

@@ -6,9 +6,12 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {PopulatedReservation} from "@/domains/reservation/schema";
-import {MyReservationsPageHeader} from "@/views/client/users/my-reservations-page/header";
 import {MyReservationCompactCard} from "@/views/client/reservations/_comp";
 import {ReactElement} from "react";
+import {PageHeader} from "@/views/common/_comp";
+import {MyProfileNavigationDropdown} from "@/views/client/users";
+import {Separator} from "@/common/components/ui";
+import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 
 /** Props for the MyReservationsPageContent component. */
 type ContentProps = {
@@ -23,9 +26,17 @@ type ContentProps = {
 export function MyReservationsPageContent(
     {page, perPage, setPage, reservations, totalReservations}: ContentProps
 ): ReactElement {
+    const isMobile = useIsMobile();
+
     return (
         <PageFlexWrapper>
-            <MyReservationsPageHeader/>
+            <PageHeader
+                title="My Reservations"
+                description="An Index Of All Your Reservations"
+                actions={isMobile && <MyProfileNavigationDropdown />}
+            />
+
+            <Separator />
 
             {
                 reservations.length > 0 ? (

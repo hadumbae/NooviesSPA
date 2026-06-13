@@ -1,7 +1,7 @@
 import {MyProfilePage} from "@/views/client/users/my-profile-page/page.tsx";
-
-export * from "./tabs";
+import {MyProfilePageContent} from "@/views/client/users/my-profile-page/content.tsx";
 
 export {
     MyProfilePage,
+    MyProfilePageContent,
 }

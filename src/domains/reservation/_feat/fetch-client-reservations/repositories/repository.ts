@@ -19,7 +19,7 @@ export const getFetchUserReservations = async (
 ): Promise<RequestReturns<PaginatedItems<PopulatedReservation>>> => {
     const url = buildURL({
         baseURL: FetchClientReservationsBaseURL,
-        path: "user/paginated",
+        path: "/user/paginated",
         queries: {page, perPage},
     });
 

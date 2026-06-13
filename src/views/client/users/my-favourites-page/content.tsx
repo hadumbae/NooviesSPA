@@ -3,7 +3,6 @@
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {MyFavouritesPageHeader} from "@/views/client/users/my-favourites-page/headers/header.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import MyFavouriteMovieCompactCard
     from "@/views/client/movies/components/card/favourites/MyFavouriteMovieCompactCard.tsx";
@@ -11,6 +10,10 @@ import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.ts
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {ReactElement} from "react";
 import {SROnly} from "@/views/common/_comp/screen-readers";
+import {PageHeader} from "@/views/common/_comp";
+import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users";
+import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+import {Separator} from "@/common/components/ui";
 
 /** Props for the MyFavouritesPageContent component. */
 type ContentProps = {
@@ -25,9 +28,22 @@ type ContentProps = {
 export function MyFavouritesPageContent(
     {page, perPage, totalItems, setPage, movies}: ContentProps
 ): ReactElement {
+    const isMobile = useIsMobile();
+
     return (
         <PageFlexWrapper>
-            <MyFavouritesPageHeader/>
+            <PageHeader
+                title="My Favourites"
+                description="All Your Favourites In One Place"
+                actions={isMobile && <MyProfileNavigationDropdown />}
+            />
+
+            <Separator />
+
+            {
+                !isMobile &&
+                <MyProfileNavigation/>
+            }
 
             {
                 movies.length > 0 ? (
