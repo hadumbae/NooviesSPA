@@ -4,8 +4,8 @@
  */
 
 import {ReactElement} from "react";
-import useFetchGenres from "@/domains/genres/_feat/crud-hooks/useFetchGenres.ts";
-import {GenreArraySchema} from "@/domains/genres/schema/genre/GenreArraySchema.ts";
+import {useFetchGenres} from "@/domains/genres/_feat/crud-hooks/useFetchGenres.ts";
+import {GenreArraySchema} from "@/domains/genres";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {Genre} from "@/domains/genres/schema";
 import {BrowseGenresPageContent} from "@/views/client/genres/browse-genres-page/content.tsx";

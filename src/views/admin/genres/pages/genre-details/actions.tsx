@@ -5,17 +5,21 @@
 import {ReactElement} from "react";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {SROnly} from "@/views/common/_comp/screen-readers";
 import {
+    Genre,
     GenreDetailsUIPendingSetterContext,
     GenreDetailsUISetterContext,
     GenreDetailsUIStateContext
-} from "@/domains/genres/context/genre-details-ui-context";
-import {Genre} from "@/domains/genres/schema";
-import {SROnly} from "@/views/common/_comp/screen-readers";
-import {GenreSubmitForm, GenreSubmitFormPanel} from "@/views/admin/genres/_feat/submit-form";
-import {GenreDeleteWarningDialog} from "@/views/admin/genres/_feat/delete-genre";
-import {GenreImageUploadForm, GenreImageUploadPanel} from "@/views/admin/genres/_feat/image-upload-form";
-import {RemoveGenreImageWarningDialog} from "@/views/admin/genres/_feat/remove-image";
+} from "@/domains/genres";
+import {
+    GenreDeleteWarningDialog,
+    GenreImageUploadForm,
+    GenreImageUploadPanel,
+    GenreSubmitForm,
+    GenreSubmitFormPanel,
+    RemoveGenreImageWarningDialog,
+} from "@/views/admin/genres/_feat";
 
 /** Props for the GenreDetailsPageActions component. */
 type ActionProps = {
@@ -69,18 +73,11 @@ export function GenreDetailsPageActions(
         <div className={className}>
             <SROnly text="Genre Option Dialogs"/>
 
-            {/* Genre */}
-
-            <GenreSubmitForm
-                editEntity={genre}
-                onSubmitSuccess={replaceSlugOnUpdate}
-                successMessage="Updated"
-            >
-                <GenreSubmitFormPanel
-                    isEditing={true}
-                    isOpen={isEditing}
-                    setIsOpen={setIsEditing}
-                />
+            <GenreSubmitForm formConfig={{editEntity: genre}} onSubmitConfig={{
+                onSubmitSuccess: replaceSlugOnUpdate,
+                successMessage: "Updated"
+            }}>
+                <GenreSubmitFormPanel isOpen={isEditing} setIsOpen={setIsEditing}/>
             </GenreSubmitForm>
 
             <GenreDeleteWarningDialog
@@ -88,23 +85,16 @@ export function GenreDetailsPageActions(
                 setIsOpen={setIsDeleting}
                 _id={genre._id}
                 name={genre.name}
-                onSubmitSuccess={navigateOnDelete}
+                onSubmitConfig={{onSubmitSuccess: navigateOnDelete}}
             />
 
-            {/* Genre Image */}
-
-            <GenreImageUploadForm
-                _id={genre._id}
-                resetOnSuccess={true}
-                submitMessage="Updating..."
-                onSubmit={() => setIsImageUpdatePending(true)}
-                successMessage="Updated."
-                onSubmitSuccess={() => setIsUpdatingImage(false)}
-            >
-                <GenreImageUploadPanel
-                    isOpen={isUpdatingImage}
-                    setIsOpen={setIsUpdatingImage}
-                />
+            <GenreImageUploadForm _id={genre._id} resetConfig={{resetOnSuccess: true}} onSubmitConfig={{
+                submitMessage: "Updating...",
+                successMessage: "Updated.",
+                onSubmit: () => setIsImageUpdatePending(true),
+                onSubmitSuccess: () => setIsUpdatingImage(false),
+            }}>
+                <GenreImageUploadPanel isOpen={isUpdatingImage} setIsOpen={setIsUpdatingImage}/>
             </GenreImageUploadForm>
 
             <RemoveGenreImageWarningDialog
@@ -112,9 +102,11 @@ export function GenreDetailsPageActions(
                 setIsOpen={setIsRemovingImage}
                 _id={genre._id}
                 name={genre.name}
-                onSubmit={() => setIsImageRemovalPending(true)}
-                submitMessage="Removing..."
-                onSubmitSuccess={onImageRemoval}
+                onSubmitConfig={{
+                    onSubmit: () => setIsImageRemovalPending(true),
+                    submitMessage: "Removing...",
+                    onSubmitSuccess: onImageRemoval,
+                }}
             />
         </div>
     );

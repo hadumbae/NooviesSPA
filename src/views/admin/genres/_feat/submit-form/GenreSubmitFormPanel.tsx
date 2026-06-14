@@ -1,53 +1,48 @@
 /**
- * @fileoverview Slide-over panel (Sheet) for managing the Genre submission lifecycle.
+ * @fileoverview Slide-over panel for managing the Genre submission lifecycle.
  */
 
 import {ReactElement, ReactNode} from 'react';
 import {useFormContext} from "react-hook-form";
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import {
+    Button,
+    ScrollArea,
     Sheet,
     SheetContent,
     SheetDescription,
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet";
+} from "@/common/components/ui";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {PrimaryButtonCSS} from "@/common/constants/css/ButtonCSS.ts";
-import {GenreFormContext, GenreFormData, GenreFormSchema} from "@/domains/genres/_feat/submit-form";
-import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {GenreFormData} from "@/domains/genres/_feat/submit-form";
+import {DisableFields, UIOpenStateProps} from "@/common/types";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+import {useLockForFormUI} from "@/common/hooks/forms/useLockForFormUI.ts";
 
 /** Props for the GenreSubmitFormPanel component. */
-interface PanelProps {
+type PanelProps = UIOpenStateProps & {
     children?: ReactNode;
     className?: string;
-    isEditing?: boolean;
-    isOpen: boolean;
-    setIsOpen: (open: boolean) => void;
-    disableFields?: Array<keyof GenreFormData>;
+    disableFields?: DisableFields<GenreFormData>;
 }
 
 /**
  * A slide-over panel that renders fields for creating or updating Genres.
- * Requires being wrapped in a Form provider and GenreFormContext.
  */
 export function GenreSubmitFormPanel(
-    {children, isOpen, setIsOpen, disableFields, isEditing = false}: PanelProps
+    {children, isOpen, setIsOpen, disableFields}: PanelProps
 ): ReactElement {
     const {control} = useFormContext();
-    const {formID, isPending} = useRequiredContext({context: GenreFormContext});
-
-    const activeFields = getActiveSchemaInputFields({
-        schema: GenreFormSchema,
-        disableFields,
-    });
+    const {formID, isPending, isError, isEditing} = useBaseFormContext();
 
     const actionLabel = isEditing ? "Update" : "Create";
+    const {isUILocked} = useLockForFormUI({
+        isContentOpen: isOpen,
+        isMutationPending: isPending,
+        isMutationError: isError,
+    });
 
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -55,41 +50,42 @@ export function GenreSubmitFormPanel(
                 {children}
             </SheetTrigger>
 
-            <SheetContent className="flex flex-col">
+            <SheetContent className="flex flex-col space-y-2">
                 <SheetHeader>
                     <SheetTitle>{actionLabel} Genre</SheetTitle>
-                    <SheetDescription>
-                        {actionLabel} genres by submitting the form below.
-                    </SheetDescription>
+                    <SheetDescription>{actionLabel} genres by submitting the form below.</SheetDescription>
                 </SheetHeader>
 
-                <ScrollArea className="flex-1 mt-4">
-                    <div className="space-y-4">
-                        {activeFields.name && (
+                <ScrollArea className="flex-1">
+                    <div className="space-y-5">
+                        {
+                            !disableFields?.name &&
                             <HookFormInput
                                 name="name"
                                 label="Name"
                                 description="The name of the genre."
                                 control={control}
                             />
-                        )}
+                        }
 
-                        {activeFields.description && (
+                        {
+                            !disableFields?.description &&
                             <HookFormTextArea
                                 name="description"
                                 label="Description"
                                 control={control}
                                 description="A brief description of the genre."
                             />
-                        )}
+                        }
 
                         <Button
                             form={formID}
+                            variant="primary"
                             type="submit"
-                            className={cn(PrimaryButtonCSS, "w-full")}
-                            disabled={isPending}
+                            className="w-full"
+                            disabled={isUILocked}
                         >
-                            {isPending ? "Submitting..." : "Submit"}
+                            {isPending ? "Submitting..." : actionLabel}
                         </Button>
                     </div>
                 </ScrollArea>

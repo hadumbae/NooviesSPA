@@ -1,6 +1,5 @@
 /**
  * @fileoverview Dropdown menu for Genre-specific management actions.
- * Orchestrates the transition between viewing, editing, and deletion states.
  */
 
 import {Dispatch, ReactElement, ReactNode, SetStateAction, useState} from "react";
@@ -9,9 +8,9 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger
-} from "@/common/components/ui/dropdown-menu.tsx";
+} from "@/common/components/ui";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {GenreDetailsUISetterContext,} from "@/domains/genres/context/genre-details-ui-context";
+import {GenreDetailsUISetterContext} from "@/domains/genres/context";
 
 /** Props for the {@link GenreDetailsUIToggles} component. */
 type ToggleProps = {

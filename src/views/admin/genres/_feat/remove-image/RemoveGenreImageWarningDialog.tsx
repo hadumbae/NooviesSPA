@@ -6,8 +6,7 @@ import {ReactElement, ReactNode} from "react";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {UIOpenStateProps} from "@/common/types";
-import {useRemoveGenreImage} from "@/domains/genres/_feat/manage-image";
-import {Genre} from "@/domains/genres/schema";
+import {Genre, useRemoveGenreImage} from "@/domains/genres";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -17,27 +16,27 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger
-} from "@/common/components/ui/alert-dialog.tsx";
-import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
+    AlertDialogTrigger,
+} from "@/common/components/ui";
 
 /** Props for the RemoveGenreImageWarningDialog component. */
-type DialogProps = MutationResponseConfig<Genre> & UIOpenStateProps & {
+type DialogProps =  UIOpenStateProps & {
     children?: ReactNode;
     _id: ObjectId;
     name: string;
+    onSubmitConfig?: MutationResponseConfig<Genre, { _id: ObjectId }>;
 };
 
 /** Warning dialog to confirm the deletion of a genre image. */
 export function RemoveGenreImageWarningDialog(
-    {children, _id, name, isOpen, setIsOpen, ...onSubmit}: DialogProps
+    {children, _id, name, isOpen, setIsOpen, onSubmitConfig}: DialogProps
 ): ReactElement {
-    const {mutate, isPending} = useRemoveGenreImage(onSubmit);
+    const {mutate, isPending} = useRemoveGenreImage(onSubmitConfig);
 
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
             <AlertDialogTrigger disabled={isPending} asChild>{children}</AlertDialogTrigger>
-            <AlertDialogContent className={ContainerCSS}>
+            <AlertDialogContent className="default-container">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="primary-text">Remove image?</AlertDialogTitle>
                     <AlertDialogDescription>

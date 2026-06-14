@@ -5,11 +5,11 @@ import {ReactElement, ReactNode, useState} from 'react';
 import {
     GenreDetailsUIPendingStateContext,
     GenreDetailsUIPendingStateContextValues
-} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIPendingStateContext.ts";
+} from "@/domains/genres/context/genre-details-ui-pending-context/GenreDetailsUIPendingStateContext.ts";
 import {
     GenreDetailsUIPendingSetterContext,
     GenreDetailsUIPendingSetterContextValues
-} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIPendingSetterContext.ts";
+} from "@/domains/genres/context/genre-details-ui-pending-context/GenreDetailsUIPendingSetterContext.ts";
 
 /** Props for the GenreDetailsUIPendingContextProvider component. */
 type ProviderProps = {

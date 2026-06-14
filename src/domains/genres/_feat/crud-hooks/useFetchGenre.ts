@@ -28,7 +28,7 @@ export type FetchParams<TData = unknown> = {
 /**
  * Custom hook for retrieving a single genre via the Genre repository.
  */
-export default function useFetchGenre<TData = unknown>(
+export function useFetchGenre<TData = unknown>(
     {_id, schema, config, options}: FetchParams<TData>
 ): UseQueryResult<TData, HttpResponseError> {
     const fetchGenre = buildQueryFn<TData>({

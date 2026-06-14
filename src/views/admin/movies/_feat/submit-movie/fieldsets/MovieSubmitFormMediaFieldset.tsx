@@ -5,16 +5,13 @@
 import {ReactElement} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {
-    LanguageHookFormSelect
-} from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
-import {GenreHookFormSelect} from "@/views/admin/genres/_feat/form-input";
+import {LanguageHookFormSelect} from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
+import {GenreMultiSelect} from "@/views/admin/genres";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
-
 
 /**
  * Renders form fields for trailer URLs, languages, subtitles, and availability.
@@ -62,12 +59,7 @@ export function MovieSubmitFormMediaFieldset(
 
             {
                 !disableFields?.genres &&
-                <GenreHookFormSelect
-                    name="genres"
-                    label="Genres"
-                    control={control}
-                    isMulti
-                />
+                <GenreMultiSelect name="genres" label="Genres"/>
             }
 
             {

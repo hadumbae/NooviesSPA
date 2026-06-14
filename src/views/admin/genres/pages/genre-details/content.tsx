@@ -6,7 +6,6 @@ import PaginationRangeButtons from "@/common/components/pagination/PaginationRan
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {GenreDetailsPageHeader} from "@/views/admin/genres/pages/genre-details/header.tsx";
 import {GenreDetailsCard} from "@/views/admin/genres/pages/genre-details/detailsCard.tsx";
 import {MovieIndexCard} from "@/views/admin/movies/_comp/index-list-display";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
@@ -14,6 +13,10 @@ import {GenreDetailsPageActions} from "@/views/admin/genres/pages/genre-details/
 import {
     GenreDetailsPageImageSection
 } from "@/views/admin/genres/pages/genre-details/sections/GenreDetailsPageImageSection.tsx";
+import {PageHeader} from "@/views/common/_comp";
+import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {Ellipsis} from "lucide-react";
+import {GenreDetailsPageBreadcrumbs, GenreDetailsUIToggles} from "@/views/admin/genres";
 
 /** Props for the GenreDetailsPageContent component. */
 type ContentProps = {
@@ -31,11 +34,21 @@ type ContentProps = {
 export function GenreDetailsPageContent(
     {page, perPage, setPage, movies, genre, totalItems}: ContentProps
 ): ReactElement {
-    useSetAdminPageTitle({presetTitle: genre.name});
+    const {name: genreName} = genre;
+    useSetAdminPageTitle({presetTitle: genreName});
 
     return (
         <PageFlexWrapper>
-            <GenreDetailsPageHeader genre={genre}/>
+            <PageHeader
+                title={genreName}
+                description="Genre"
+                breadcrumbs={<GenreDetailsPageBreadcrumbs genreName={genreName}/>}
+                actions={
+                    <GenreDetailsUIToggles>
+                        <IconButton icon={Ellipsis} aria-label="Genre UI Toggles"/>
+                    </GenreDetailsUIToggles>
+                }
+            />
 
             <GenreDetailsCard genre={genre}/>
 

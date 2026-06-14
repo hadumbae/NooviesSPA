@@ -10,7 +10,7 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {CountryHookFormSelect} from "@/common/components/forms/values/CountryHookFormSelect.tsx";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
-import {GenreHookFormSelect} from "@/views/admin/genres/_feat/form-input";
+import {GenreMultiSelect} from "@/views/admin/genres";
 
 /**
  * Props for MovieQueryOptionFormFilterFieldset.
@@ -48,15 +48,10 @@ export function MovieQueryOptionFormFilterFieldset(
                 />
             )}
 
-            {activeFields.genres && (
-                <GenreHookFormSelect
-                    name="genres"
-                    label="Genres"
-                    isMulti={true}
-                    control={form.control}
-                    className="col-span-2"
-                />
-            )}
+            {
+                activeFields.genres &&
+                <GenreMultiSelect name="genres" label="Genres" className="col-span-2"/>
+            }
 
             {activeFields.releaseDate && (
                 <HookFormInput

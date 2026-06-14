@@ -1,8 +1,10 @@
 /** @fileoverview Zod schemas and types for the genre image upload form. */
 
+
 import {z} from "zod";
 import {refineRequireImageFile} from "@/common/_feat/handle-image-upload";
 import {FileInstanceSchema} from "@/common/_schemas/file-uploads";
+import {AnyValues} from "@/common/types";
 
 /** Base schema for genre image upload containing the raw file field. */
 export const GenreImageUploadBaseFormSchema = z.object({
@@ -20,3 +22,6 @@ export const GenreImageUploadFormSchema = GenreImageUploadBaseFormSchema
 
 /** Type definition for the validated genre image upload form. */
 export type GenreImageUploadFormData = z.infer<typeof GenreImageUploadFormSchema>;
+
+/** Type definition for the raw genre image upload form values. */
+export type GenreImageUploadFormValues = AnyValues<GenreImageUploadFormData>;

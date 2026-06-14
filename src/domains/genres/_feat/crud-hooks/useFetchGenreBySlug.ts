@@ -1,7 +1,6 @@
 /**
  * @fileoverview React Query hook for fetching a single Genre by its slug.
- * Orchestrates slug-based retrieval with standardized error handling and
- * consistent query key management.
+ *
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
@@ -14,9 +13,7 @@ import {ZodType, ZodTypeDef} from "zod";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {findBySlug} from "@/domains/genres/_feat/crud/GenreCRUDRepository.ts";
 
-/**
- * Parameters for the useFetchGenreBySlug hook.
- */
+/** Parameters for the useFetchGenreBySlug hook. */
 type FetchParams<TData = unknown> = {
     slug: string;
     schema: ZodType<TData, ZodTypeDef, unknown>;
@@ -25,9 +22,9 @@ type FetchParams<TData = unknown> = {
 };
 
 /**
- * Custom hook for retrieving a single genre via the Genre repository using its slug.
+ * Fetches and validates a single genre based on its unique slug.
  */
-export default function useFetchGenreBySlug<TData = unknown>(
+export function useFetchGenreBySlug<TData = unknown>(
     {slug, schema, config, options}: FetchParams<TData>
 ): UseQueryResult<TData, HttpResponseError> {
     const fetchGenre = buildQueryFn<TData>({

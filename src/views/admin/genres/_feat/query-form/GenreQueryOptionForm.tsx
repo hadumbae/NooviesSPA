@@ -3,19 +3,18 @@
  * Synchronizes form state with URL search parameters for persistent filtering.
  */
 
-import {ReactElement, ReactNode} from 'react';
+import {ReactElement, ReactNode, useId} from 'react';
 import {Form} from "@/common/components/ui/form.tsx";
 import {FormOptions} from "@/common/_feat/submit-data";
 import {GenreQueryOptionFormStarter} from "@/domains/genres/_feat/query-form/schema.ts";
 import {useGenreQueryOptionForm} from "@/domains/genres/_feat/query-form/useGenreQueryOptionForm.ts";
-import {GenreQueryOptionFormContextProvider} from "@/domains/genres/_feat/query-form";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {GenreQueryOptions, GenreQueryOptionSchema} from "@/domains/genres/schema";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 
 /** Props for the {@link GenreQueryOptionForm} component. */
 type ContainerProps = FormOptions<GenreQueryOptionFormStarter> & {
     children: ReactNode;
-    uniqueKey?: string;
     className?: string;
 };
 
@@ -23,9 +22,10 @@ type ContainerProps = FormOptions<GenreQueryOptionFormStarter> & {
  * Orchestrates the Genre filter form logic.
  */
 export function GenreQueryOptionForm(
-    {children, uniqueKey, presetValues, className}: ContainerProps
+    {children, presetValues, className}: ContainerProps
 ): ReactElement {
-    const formKey = `set-genre-query-option-${uniqueKey ?? "form"}`;
+    const id = useId();
+    const formKey = `set-genre-query-option-form-${id}`;
 
     const form = useGenreQueryOptionForm({presetValues});
     const {setSearchParams} = useParsedSearchParams({schema: GenreQueryOptionSchema});
@@ -35,14 +35,13 @@ export function GenreQueryOptionForm(
     };
 
     return (
-        <GenreQueryOptionFormContextProvider formID={formKey} submitHandler={onSubmit}>
+        <BaseFormContextProvider formID={formKey} submitHandler={onSubmit}>
             <Form {...form}>
                 <form id={formKey} className={className} onSubmit={form.handleSubmit(onSubmit)}>
                     {children}
                 </form>
             </Form>
-        </GenreQueryOptionFormContextProvider>
+        </BaseFormContextProvider>
     );
 }
 
-export default GenreQueryOptionForm;

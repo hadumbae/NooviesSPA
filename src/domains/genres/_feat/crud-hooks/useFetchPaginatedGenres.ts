@@ -27,7 +27,7 @@ type FetchQueries<TData = unknown> = PaginationValues & {
 /**
  * Custom hook for retrieving validated paginated genres.
  */
-export default function useFetchPaginatedGenres<TData = unknown>(
+export function useFetchPaginatedGenres<TData = unknown>(
     {schema, page, perPage, queries, config, options}: FetchQueries<TData>
 ): UseQueryResult<TData, HttpResponseError> {
     const fetchGenres = buildQueryFn<TData>({

@@ -1,4 +1,6 @@
-import {GenreDetailsUIStateContext, GenreDetailsUIStateContextValues} from "./GenreDetailsUIStateContext.ts";
+import {
+    GenreDetailsUIStateContext, GenreDetailsUIStateContextValues
+} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIStateContext.ts";
 import {
     GenreDetailsUIContextProvider
 } from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIContextProvider.tsx";
@@ -7,16 +9,8 @@ import {
     GenreDetailsUISetterContextValues
 } from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUISetterContext.ts";
 import {
-    GenreDetailsUIPendingStateContext,
-    GenreDetailsUIPendingStateContextValues
-} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIPendingStateContext.ts";
-import {
-    GenreDetailsUIPendingSetterContext,
-    GenreDetailsUIPendingSetterContextValues
-} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIPendingSetterContext.ts";
-import {
     GenreDetailsUIPendingContextProvider
-} from "@/domains/genres/context/genre-details-ui-context/GenreDetailsUIPendingContextProvider.tsx";
+} from "@/domains/genres/context/genre-details-ui-pending-context/GenreDetailsUIPendingContextProvider.tsx";
 
 export {
     GenreDetailsUIContextProvider,
@@ -26,13 +20,9 @@ export {
 export {
     GenreDetailsUIStateContext,
     GenreDetailsUISetterContext,
-    GenreDetailsUIPendingStateContext,
-    GenreDetailsUIPendingSetterContext,
 }
 
 export type {
     GenreDetailsUIStateContextValues,
     GenreDetailsUISetterContextValues,
-    GenreDetailsUIPendingStateContextValues,
-    GenreDetailsUIPendingSetterContextValues,
 }

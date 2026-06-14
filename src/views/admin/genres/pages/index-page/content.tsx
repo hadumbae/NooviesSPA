@@ -1,21 +1,23 @@
 /**
- * @fileoverview Presentation component for the Genre Index page.
- * Orchestrates the administrative grid view for genres, including
- * search/filter dialogs, responsive card layouts, and pagination.
+ * @fileoverview Presentation component for the administrative genre index page.
  */
 
-import {ReactElement} from 'react';
+import {ReactElement, useState} from 'react';
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {GenreIndexHeader} from "@/views/admin/genres/pages/index-page/header.tsx";
-import {SROnly} from "@/views/common/_comp/screen-readers";
 import {GenreIndexCard} from "@/views/admin/genres/_comp";
 import {GenreQueryOptionForm, GenreQueryOptionFormDialog} from "@/views/admin/genres/_feat/query-form";
-import {Genre, GenreQueryOptionSchema} from "@/domains/genres/schema";
+import {Genre, GenreQueryOptionSchema, useNavigateToGenreDetails} from "@/domains/genres";
+import {PageHeader} from "@/views/common/_comp";
+import {GenreSubmitForm, GenreSubmitFormPanel} from "@/views/admin/genres";
+import {Button} from "@/common/components/ui";
+import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
+import {Plus} from "lucide-react";
 
+/** Props for the GenreIndexPageContent component. */
 type GenreIndexPageContentProps = {
     page: number;
     perPage: number;
@@ -25,25 +27,41 @@ type GenreIndexPageContentProps = {
 };
 
 /**
- * Renders the primary genre management interface.
+ * Renders the administrative grid view for genres including search filters and pagination.
  */
 export function GenreIndexPageContent(
     {totalItems, genres, page, perPage, setPage}: GenreIndexPageContentProps
 ): ReactElement {
+    const [isCreating, setIsCreating] = useState<boolean>(false);
+
     const isMobile = useIsMobile();
+    const navigate = useNavigateToGenreDetails();
     const {searchParams} = useParsedSearchParams({schema: GenreQueryOptionSchema});
+
+    const onSuccess = (genre: Genre) => {
+        setIsCreating(false);
+        navigate({slug: genre.slug, message: "Navigate after creation."});
+    }
 
     return (
         <PageFlexWrapper>
-            <GenreIndexHeader/>
+            <PageHeader title="Genres" description="Manage the categorization of movies." actions={
+                <GenreSubmitForm
+                    resetConfig={{resetOnSuccess: true}}
+                    onSubmitConfig={{onSubmitSuccess: onSuccess, successMessage: "Created."}}
+                >
+                    <GenreSubmitFormPanel isOpen={isCreating} setIsOpen={setIsCreating}>
+                        <Button variant="link" className={HoverLinkCSS} onClick={() => setIsCreating(true)}>
+                            <Plus className="mr-2 h-4 w-4"/> Create
+                        </Button>
+                    </GenreSubmitFormPanel>
+                </GenreSubmitForm>
+            }/>
 
-            <section>
-                <SROnly text="Filter Genres"/>
+            <GenreQueryOptionForm presetValues={searchParams}>
+                <GenreQueryOptionFormDialog/>
+            </GenreQueryOptionForm>
 
-                <GenreQueryOptionForm presetValues={searchParams}>
-                    <GenreQueryOptionFormDialog />
-                </GenreQueryOptionForm>
-            </section>
 
             {genres.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2">

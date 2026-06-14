@@ -1,52 +1,47 @@
 /**
  * @fileoverview React Query mutation hook for deleting a Genre.
- * Handles cache invalidation, toast notifications, and lifecycle callbacks.
+ *
  */
 
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
-import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {destroy} from "@/domains/genres/_feat/crud";
 import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDQueryKeys.ts";
 import {GenreCRUDMutationKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDMutationKeys.ts";
 
+/** Parameters for identifying the genre to be deleted. */
 type DeleteByID = {
     _id: ObjectId;
 };
 
 /**
- * Mutation hook for deleting a genre by its unique identifier.
+ * Hook for deleting a genre by its unique identifier.
  */
-export default function useDeleteGenre(
-    params: MutationResponseConfig
+export function useDeleteGenre(
+    onSubmitConfig: MutationResponseConfig<void, DeleteByID> = {}
 ): UseMutationResult<void, unknown, DeleteByID> {
-    const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
-    const invalidateData = useInvalidateQueryKeys();
+    const queryClient = useQueryClient();
 
     const deleteGenre = async ({_id}: DeleteByID) => {
+        onSubmitConfig.submitMessage && toast.success(onSubmitConfig.submitMessage);
+        onSubmitConfig.onSubmit?.({_id});
+
         await destroy({_id})
     };
 
     const onSuccess = () => {
-        invalidateData(
-            [
-                GenreCRUDQueryKeys.paginated({}),
-                GenreCRUDQueryKeys.query({}),
-                GenreCRUDQueryKeys.queryPaginated({}),
-            ],
-            {exact: false}
-        );
+        queryClient.invalidateQueries({queryKey: GenreCRUDQueryKeys.list(), exact: false});
 
-        if (successMessage) toast.success(successMessage);
-        onSubmitSuccess?.();
+        if (onSubmitConfig.successMessage) toast.success(onSubmitConfig.successMessage);
+        onSubmitConfig.onSubmitSuccess?.();
     };
 
     const onError = (error: unknown) => {
-        handleMutationResponseError({error, displayMessage: errorMessage});
-        onSubmitError?.(error);
+        handleMutationResponseError({error, displayMessage: onSubmitConfig.errorMessage});
+        onSubmitConfig.onSubmitError?.(error);
     };
 
     return useMutation({

@@ -1,7 +1,5 @@
 /**
- * @fileoverview Presentation component for the Genre Query Option form.
- * Renders form inputs for genre name and sort options within a dialog.
- * Integrates with {@link useAutoFormSubmit} to persist changes to URL search params.
+ * @fileoverview A dialog component containing the search and sort options for querying genres.
  */
 
 import {ReactElement} from "react";
@@ -13,28 +11,32 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {
     Dialog,
-    DialogContent, DialogDescription,
+    DialogContent,
+    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger
 } from "@/common/components/ui/dialog";
 import {Button} from "@/common/components/ui/button.tsx";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {GenreQueryOptionFormContext} from "@/domains/genres/_feat/query-form";
 import {cn} from "@/common/lib/utils.ts";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
-/** Props for the {@link GenreQueryOptionFormDialog} component. */
+/** Props for the GenreQueryOptionFormDialog component. */
 type FormViewProps = {
     className?: string;
 };
 
 /**
- * A dialog-based interface for filtering and sorting the Genre list.
+ * Renders a dialog with form inputs for filtering and sorting genres.
  */
 export function GenreQueryOptionFormDialog({className}: FormViewProps): ReactElement {
     const {control} = useFormContext();
-    const {submitHandler} = useRequiredContext({context: GenreQueryOptionFormContext});
+    const {submitHandler} = useBaseFormContext();
+
+    if (!submitHandler) {
+        throw new Error(`'${GenreQueryOptionFormDialog.name}' requires a 'submitHandler'.`);
+    }
 
     useAutoFormSubmit({submitHandler});
 
@@ -42,7 +44,7 @@ export function GenreQueryOptionFormDialog({className}: FormViewProps): ReactEle
         <Dialog>
             <DialogTrigger asChild>
                 <Button size="sm" variant="link" className="gap-2">
-                    <ListFilter size={16} />
+                    <ListFilter size={16}/>
                     <span>Filters</span>
                 </Button>
             </DialogTrigger>
@@ -56,7 +58,7 @@ export function GenreQueryOptionFormDialog({className}: FormViewProps): ReactEle
                 <fieldset className="space-y-4">
                     <header>
                         <SectionHeader>Search</SectionHeader>
-                        <Separator className="mt-1" />
+                        <Separator className="mt-1"/>
                     </header>
 
                     <HookFormInput
@@ -70,7 +72,7 @@ export function GenreQueryOptionFormDialog({className}: FormViewProps): ReactEle
                 <fieldset className="space-y-4">
                     <header>
                         <SectionHeader>Ordering</SectionHeader>
-                        <Separator className="mt-1" />
+                        <Separator className="mt-1"/>
                     </header>
 
                     <HookFormSortToggle
@@ -83,5 +85,3 @@ export function GenreQueryOptionFormDialog({className}: FormViewProps): ReactEle
         </Dialog>
     );
 }
-
-export default GenreQueryOptionFormDialog;

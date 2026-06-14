@@ -2,35 +2,40 @@
  * @fileoverview Form component for uploading and updating genre images.
  */
 
-import {ReactElement, ReactNode} from "react";
+import {ReactElement, ReactNode, useId} from "react";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
+import {Form} from "@/common/components/ui/form.tsx";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {
+    Genre,
     GenreImageUploadFormData,
     useGenreImageUploadForm,
     useUploadGenreImage
-} from "@/domains/genres/_feat/manage-image";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/common/components/ui/form.tsx";
-import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {Genre} from "@/domains/genres/schema";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+} from "@/domains/genres";
 
 /** Props for the GenreImageUploadForm component. */
-type FormProps = MutationResponseConfig<Genre> & {
+type FormProps = {
     children: ReactNode;
     _id: ObjectId;
-    uniqueKey?: string;
-    resetOnSuccess?: boolean;
-    resetOnError?: boolean;
+    onSubmitConfig?: MutationResponseConfig<Genre, FormData>;
+    resetConfig?: MutationFormResetConfig,
 };
 
 /** Form component that handles multipart/form-data submission for genre images. */
 export function GenreImageUploadForm(
-    {children, _id, uniqueKey, resetOnSuccess, resetOnError, ...onSubmit}: FormProps
+    {children, _id, onSubmitConfig, resetConfig}: FormProps
 ): ReactElement {
-    const formKey = `genre-image-upload-${uniqueKey ?? "form"}`
+    const id = useId();
+    const formID = `genre-image-upload-form-${id}`
+
     const form = useGenreImageUploadForm();
 
-    const {mutate, isPending} = useUploadGenreImage({form, resetForm: {resetOnSuccess, resetOnError}, ...onSubmit});
+    const {mutate, isPending, isError} = useUploadGenreImage({
+        form,
+        ...onSubmitConfig,
+        ...resetConfig,
+    });
 
     const submitImage = ({image}: GenreImageUploadFormData) => {
         const formData = new FormData();
@@ -40,9 +45,9 @@ export function GenreImageUploadForm(
     }
 
     return (
-        <BaseFormContextProvider formID={formKey} isPending={isPending}>
+        <BaseFormContextProvider formID={formID} isPending={isPending} isError={isError}>
             <Form {...form}>
-                <form id={formKey} onSubmit={form.handleSubmit(submitImage)}>
+                <form id={formID} onSubmit={form.handleSubmit(submitImage)}>
                     {children}
                 </form>
             </Form>

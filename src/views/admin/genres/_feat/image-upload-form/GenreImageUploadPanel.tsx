@@ -17,6 +17,7 @@ import {UIOpenStateProps} from "@/common/types";
 import {GenreImageUploadFormView} from "@/views/admin/genres/_feat/image-upload-form/GenreImageUploadFormView.tsx";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import {useLockForFormUI} from "@/common/hooks/forms/useLockForFormUI.ts";
 
 /** Props for the GenreImageUploadPanel component. */
 type PanelProps = UIOpenStateProps & {
@@ -29,7 +30,13 @@ type PanelProps = UIOpenStateProps & {
 export function GenreImageUploadPanel(
     {children, isOpen, setIsOpen}: PanelProps
 ): ReactElement {
-    const {formID, isPending} = useBaseFormContext();
+    const {formID, isPending, isError} = useBaseFormContext();
+
+    const {isUILocked} = useLockForFormUI({
+        isContentOpen: isOpen,
+        isMutationPending: isPending,
+        isMutationError: isError,
+    });
 
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -46,7 +53,7 @@ export function GenreImageUploadPanel(
                 <GenreImageUploadFormView className="pb-4"/>
 
                 <SheetFooter>
-                    <Button variant="default" type="submit" form={formID} disabled={isPending}>
+                    <Button variant="default" type="submit" form={formID} disabled={isUILocked}>
                         {isPending ? <AnimatedLoader/> : "Upload"}
                     </Button>
                 </SheetFooter>

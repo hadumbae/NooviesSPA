@@ -1,36 +1,37 @@
 /**
- * @fileoverview React Query mutation hook for creating and updating Genres.
- * Handles validation, submission logic, and wide-scale cache invalidation.
+ * @fileoverview React Query mutation hook for creating and updating Genre entities.
  */
-
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {Genre, GenreSchema} from "@/domains/genres/schema/genre/GenreSchema.ts";
-import {MutationFormConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDQueryKeys.ts";
 import {create, update} from "@/domains/genres/_feat/crud";
 import {GenreFormData} from "@/domains/genres/_feat/submit-form/GenreFormSchema.ts";
+import {GenreCRUDMutationKeys} from "@/domains/genres/_feat/crud-hooks/GenreCRUDMutationKeys.ts";
+import {UseFormReturn} from "react-hook-form";
+
+/** Configuration for genre mutation lifecycle and form integration. */
+type UseGenreDataSubmitConfig = MutationResponseConfig<Genre, GenreFormData> & MutationFormResetConfig & {
+    form: UseFormReturn<GenreFormData, unknown, GenreFormData>;
+};
 
 /**
- * Combined configuration for genre mutations.
- */
-export type UseGenreDataSubmitConfig = MutationResponseConfig<Genre> & MutationFormConfig<GenreFormData, GenreFormData>;
-
-/**
- * Manages Genre persistence lifecycle with automated cache cleanup and form error mapping.
+ * Manages Genre persistence including validation, cache invalidation, and form error mapping.
  */
 export function useGenreDataSubmit(
-    params: UseGenreDataSubmitConfig
+    {form, resetOnSubmit, resetOnSuccess, resetOnError, ...onSubmitConfig}: UseGenreDataSubmitConfig
 ): UseMutationResult<Genre, unknown, GenreFormData> {
-    const {form, onSubmitSuccess, onSubmitError, successMessage, errorMessage} = params;
-    const invalidateQueries = useInvalidateQueryKeys();
+    const queryClient = useQueryClient();
 
     const config = {populate: true, virtuals: true};
 
     const submitGenre = async ({_id, ...values}: GenreFormData): Promise<Genre> => {
+        if (onSubmitConfig.submitMessage) toast.success(onSubmitConfig.submitMessage);
+        onSubmitConfig.onSubmit?.({_id, ...values});
+
         const action = _id
             ? () => update({_id, data: values, config})
             : () => create({data: values, config});
@@ -44,32 +45,27 @@ export function useGenreDataSubmit(
         });
 
         if (!success) throw error;
+        if (resetOnSubmit) form.reset();
+
         return data;
     };
 
     const onSuccess = async (genre: Genre) => {
-        await invalidateQueries(
-            [
-                GenreCRUDQueryKeys._id({}),
-                GenreCRUDQueryKeys.slug({}),
-                GenreCRUDQueryKeys.query({}),
-                GenreCRUDQueryKeys.paginated({}),
-                GenreCRUDQueryKeys.queryPaginated({}),
-            ],
-            {exact: false},
-        );
+        queryClient.invalidateQueries({queryKey: GenreCRUDQueryKeys.all, exact: false});
 
-        if (successMessage) toast.success(successMessage);
-        onSubmitSuccess?.(genre);
+        if (resetOnSuccess) form.reset();
+        if (onSubmitConfig.successMessage) toast.success(onSubmitConfig.successMessage);
+        onSubmitConfig.onSubmitSuccess?.(genre);
     };
 
     const onError = (error: unknown) => {
-        if (form) handleMutationFormError({form, error, displayMessage: errorMessage});
-        onSubmitError?.(error);
+        if (resetOnError) form.reset();
+        if (form) handleMutationFormError({form, error, displayMessage: onSubmitConfig.errorMessage});
+        onSubmitConfig.onSubmitError?.(error);
     };
 
     return useMutation({
-        mutationKey: ["submit_genre"],
+        mutationKey: GenreCRUDMutationKeys.submit(),
         mutationFn: submitGenre,
         onSuccess,
         onError,

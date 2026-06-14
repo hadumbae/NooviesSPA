@@ -8,24 +8,20 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 import {useMemo} from "react";
 import {GenreFormData, GenreFormSchema} from "@/domains/genres/_feat/submit-form/GenreFormSchema.ts";
-
-type UseGenreSubmitFormParams = {
-    genre?: Genre;
-    presetValues?: Partial<GenreFormData>;
-};
+import {FormValuesConfig} from "@/common/_feat/submit-data";
 
 /**
  * Initializes a Genre form with validation and memoized default values.
  */
 export default function useGenreSubmitForm(
-    {genre, presetValues}: UseGenreSubmitFormParams = {}
+    {editEntity, presetValues}: FormValuesConfig<GenreFormData, Genre> = {}
 ): UseFormReturn<GenreFormData, unknown, GenreFormData> {
     const defaultValues = useMemo<GenreFormData>(() => ({
         name: "",
         description: "",
-        ...genre,
+        ...editEntity,
         ...presetValues,
-    }), [genre, presetValues]);
+    }), [editEntity, presetValues]);
 
     return useForm<GenreFormData, unknown, GenreFormData>({
         resolver: zodResolver(GenreFormSchema),

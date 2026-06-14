@@ -17,7 +17,7 @@ import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader
 import {
     GenreDetailsUIContextProvider,
     GenreDetailsUIPendingContextProvider
-} from "@/domains/genres/context/genre-details-ui-context";
+} from "@/domains/genres/context";
 
 /** Default limit for the paginated movie sub-collection. */
 const MOVIES_PER_PAGE = 12;

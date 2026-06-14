@@ -9,6 +9,7 @@ import {SubmitHandler} from "react-hook-form";
 export type BaseFormContextValues = {
     formID: string;
     submitHandler?: SubmitHandler<any>;
+    isEditing?: boolean;
     isPending?: boolean;
     isError?: boolean;
 };

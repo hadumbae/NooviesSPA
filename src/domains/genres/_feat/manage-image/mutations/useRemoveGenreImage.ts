@@ -2,18 +2,15 @@
  * @fileoverview Mutation hook for removing an image from a Genre.
  */
 
-import {useMutation, type UseMutationResult} from "@tanstack/react-query";
+import {useMutation, type UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import {type MutationResponseConfig} from "@/common/_feat/submit-data";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
-import {ManageGenreImageMutationKeys, patchRemoveGenreImage} from "@/domains/genres/_feat/manage-image";
+import {patchRemoveGenreImage} from "@/domains/genres/_feat/manage-image/repository";
+import {ManageGenreImageMutationKeys} from "@/domains/genres/_feat/manage-image/mutations/mutationKeys.ts";
 import {type Genre, GenreSchema} from "@/domains/genres/schema";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-
-/** Configuration for the useRemoveGenreImage hook. */
-type RemoveGenreImageConfig = MutationResponseConfig<Genre>;
 
 /** Payload for the remove genre image mutation. */
 type RemovePayload = {
@@ -24,13 +21,13 @@ type RemovePayload = {
  * Removes the image associated with a specific Genre.
  */
 export function useRemoveGenreImage(
-    {onSubmit, submitMessage, successMessage, errorMessage, onSubmitSuccess, onSubmitError}: RemoveGenreImageConfig
+    onSubmitConfig: MutationResponseConfig<Genre, RemovePayload> = {}
 ): UseMutationResult<Genre, unknown, RemovePayload> {
-    const invalidateQueries = useInvalidateQueryKeys();
+    const queryClient = useQueryClient();
 
     const removeImage = async ({_id}: RemovePayload) => {
-        submitMessage && toast.info(submitMessage);
-        onSubmit?.();
+        onSubmitConfig.submitMessage && toast.info(onSubmitConfig.submitMessage);
+        onSubmitConfig.onSubmit?.({_id});
 
         const {result} = await patchRemoveGenreImage({_id});
 
@@ -46,18 +43,16 @@ export function useRemoveGenreImage(
     };
 
     const onSuccess = (result: Genre) => {
-        invalidateQueries([
-            ['genres']
-        ], {exact: false});
+        queryClient.invalidateQueries({queryKey: ['genres'], exact: false});
 
-        successMessage && toast.success(successMessage);
-        onSubmitSuccess?.(result);
+        onSubmitConfig.successMessage && toast.success(onSubmitConfig.successMessage);
+        onSubmitConfig.onSubmitSuccess?.(result);
     };
 
     const onError = (error: unknown) => {
-        errorMessage && toast.error(errorMessage);
+        onSubmitConfig.errorMessage && toast.error(onSubmitConfig.errorMessage);
         handleMutationResponseError({error});
-        onSubmitError?.(error);
+        onSubmitConfig.onSubmitError?.(error);
     };
 
     return useMutation({

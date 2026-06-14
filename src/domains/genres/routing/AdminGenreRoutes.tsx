@@ -1,19 +1,14 @@
 /**
- * @fileoverview Admin genre route configurations.
- * Defines the routing structure for genre management, protected by authentication.
+ * @fileoverview Route configurations for the genre management administration area.
  */
 
 import AuthLoader from "@/common/routing/loaders/AuthLoader.ts";
+import {RouteObject} from "react-router-dom";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
-import {GenreIndexPage} from "@/views/admin/genres/pages/index-page";
-import {GenreDetailsPage} from "@/views/admin/genres/pages/genre-details";
+import {GenreDetailsPage, GenreIndexPage} from "@/views/admin/genres";
 
-/**
- * Route definitions for the Genre administration module.
- * * These routes are nested under a layout and protected by an AuthLoader
- * to ensure only authorized administrators can access them.
- */
-export default [
+/** Route definitions for genre administration, including index and detail views. */
+export const AdminGenreRoutes: RouteObject[] = [
     {
         path: "/admin/genres",
         element: <AdminLayout/>,

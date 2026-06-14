@@ -1,62 +1,48 @@
 /**
  * @fileoverview Container component for the Genre submission form.
- * Orchestrates form state, validation, and data mutation logic.
  */
 
-import {ReactElement, ReactNode} from 'react';
+import {ReactElement, ReactNode, useId} from 'react';
 import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
-import {FormOptions} from 'src/common/_feat/submit-data/formTypes';
-import {MutationResponseConfig} from "@/common/_feat/submit-data";
+import {FormContainerConfigProps} from 'src/common/_feat/submit-data/formTypes';
 import {Form} from "@/common/components/ui/form.tsx";
-import {GenreFormContextProvider, GenreFormData, useGenreSubmitForm} from "@/domains/genres/_feat/submit-form";
+import {GenreFormData, useGenreSubmitForm} from "@/domains/genres/_feat/submit-form";
 import {useGenreDataSubmit} from "@/domains/genres/_feat/crud-hooks";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 
-/**
- * Props for the {@link GenreSubmitForm} component.
- */
-type SubmitFormProps = FormOptions<GenreFormData, Genre> & MutationResponseConfig<Genre> & {
-    children: ReactNode;
-    uniqueKey?: string;
+/** Props for the GenreSubmitForm component. */
+type SubmitFormProps = FormContainerConfigProps<GenreFormData, Genre, GenreFormData, Genre> & {
+    children?: ReactNode
 };
 
 /**
- * A wrapper component that initializes React Hook Form and TanStack Mutation
- * for Genre data, providing context to nested child inputs.
+ * A wrapper component that initialises React Hook Form and TanStack Mutation for Genre data.
  */
 export function GenreSubmitForm(
-    params: SubmitFormProps
+    {children, onSubmitConfig, formConfig, resetConfig}: SubmitFormProps
 ): ReactElement {
-    const {
-        children,
-        uniqueKey,
-        presetValues,
-        editEntity,
-        resetOnSuccess,
-        resetOnError,
-        ...mutationParams
-    } = params;
+    const id = useId();
+    const formID = `submit-genre-data-form-${id}`;
 
-    const formKey = `submit-genre-data-${uniqueKey ?? "form"}`;
-
-    const form = useGenreSubmitForm({genre: editEntity, presetValues});
-
-    const {mutate, isPending} = useGenreDataSubmit({
-        form,
-        resetForm: {resetOnSuccess: resetOnSuccess, resetOnError: resetOnError},
-        ...mutationParams,
-    });
+    const form = useGenreSubmitForm(formConfig);
+    const {mutate, isPending, isError} = useGenreDataSubmit({form, ...onSubmitConfig, ...resetConfig});
 
     const onSubmit = (values: GenreFormData) => {
         mutate(values);
     };
 
     return (
-        <GenreFormContextProvider formID={formKey} isPending={isPending}>
+        <BaseFormContextProvider
+            formID={formID}
+            isPending={isPending}
+            isError={isError}
+            isEditing={!!formConfig?.editEntity}
+        >
             <Form {...form}>
-                <form id={formKey} onSubmit={form.handleSubmit(onSubmit)}>
+                <form id={formID} onSubmit={form.handleSubmit(onSubmit)}>
                     {children}
                 </form>
             </Form>
-        </GenreFormContextProvider>
+        </BaseFormContextProvider>
     );
 }

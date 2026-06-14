@@ -2,26 +2,22 @@
  * @fileoverview Mutation hook for uploading and updating genre images.
  */
 
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {
-    GenreImageUploadFormData,
-    ManageGenreImageMutationKeys,
-    patchUpdateGenreImage
-} from "@/domains/genres/_feat/manage-image";
-import {MutationFormConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {Genre, GenreSchema} from "@/domains/genres/schema";
-import {
-    GenreImageUploadFormStarterValues
-} from "@/domains/genres/_feat/manage-image/form/GenreImageUploadFormStarterValues.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
+import {UseFormReturn} from "react-hook-form";
+import {patchUpdateGenreImage} from "@/domains/genres/_feat/manage-image/repository";
+import {GenreImageUploadFormData, GenreImageUploadFormValues} from "@/domains/genres/_feat/manage-image/form";
+import {ManageGenreImageMutationKeys} from "@/domains/genres/_feat/manage-image/mutations/mutationKeys.ts";
 
 /** Configuration for the genre image upload mutation. */
-type UploadConfig =
-    MutationResponseConfig<Genre> & MutationFormConfig<GenreImageUploadFormStarterValues, GenreImageUploadFormData>;
+type UploadConfig = MutationResponseConfig<Genre, FormData> & MutationFormResetConfig & {
+    form: UseFormReturn<GenreImageUploadFormValues, unknown, GenreImageUploadFormData>;
+};
 
 /** Data required to execute the image upload. */
 type UploadData = {
@@ -31,12 +27,12 @@ type UploadData = {
 
 /** Hook to handle the genre image upload process and form state synchronisation. */
 export function useUploadGenreImage(
-    {form, resetForm, ...onSubmit}: UploadConfig
+    {form, resetOnSuccess, resetOnSubmit, resetOnError, ...onSubmitConfig}: UploadConfig
 ): UseMutationResult<Genre, unknown, UploadData> {
-    const invalidateQueries = useInvalidateQueryKeys();
+    const queryClient = useQueryClient();
 
     const uploadImage = async ({_id, formData}: UploadData) => {
-        onSubmit.onSubmit?.();
+        onSubmitConfig.onSubmit?.(formData);
 
         const {result} = await patchUpdateGenreImage({_id, formData});
         const {data: parsed, success, error} = validateData({
@@ -46,24 +42,21 @@ export function useUploadGenreImage(
         });
 
         if (!success) throw error;
-        resetForm?.resetOnSubmit && form.reset();
+        resetOnSubmit && form.reset();
         return parsed;
     }
 
     const onSuccess = (genre: Genre) => {
-        invalidateQueries([
-            ['genres']
-        ], {exact: false});
+        queryClient.invalidateQueries({queryKey: ['genres'], exact: false});
 
-        onSubmit.successMessage && toast.success(onSubmit.successMessage);
-        onSubmit.onSubmitSuccess?.(genre);
-        resetForm?.resetOnSuccess && form.reset();
+        onSubmitConfig.successMessage && toast.success(onSubmitConfig.successMessage);
+        onSubmitConfig.onSubmitSuccess?.(genre);
+        resetOnSuccess && form.reset();
     }
 
     const onError = (error: unknown) => {
-        onSubmit.errorMessage && toast.error(onSubmit.errorMessage);
-        handleMutationFormError({form, error});
-        onSubmit.onSubmitError?.(error);
+        handleMutationFormError({form, error, displayMessage: onSubmitConfig.errorMessage});
+        onSubmitConfig.onSubmitError?.(error);
     }
 
     return useMutation({

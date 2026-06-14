@@ -10,9 +10,9 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
  * Used to determine when the UI should be locked or released.
  */
 type UIProps = {
-    isContentOpen: boolean;
-    isMutationPending: boolean;
-    isMutationError: boolean;
+    isContentOpen?: boolean;
+    isMutationPending?: boolean;
+    isMutationError?: boolean;
 };
 
 /**
