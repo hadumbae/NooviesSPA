@@ -4,11 +4,11 @@
 
 import {ReactElement} from 'react';
 import {Clapperboard} from "lucide-react";
-import {Card, CardContent} from "src/common/components/ui/card.tsx";
-import {cn} from "src/common/lib/utils.ts";
-import usePaginationSearchParams from "src/common/_feat/fetch-pagination-search-params/hooks/usePaginationSearchParams.ts";
-import useLoggedNavigate from "src/common/hooks/logging/useLoggedNavigate.ts";
-import {Genre} from "src/domains/genres/schema/genre/GenreSchema.ts";
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {cn} from "@/common/lib/utils.ts";
+import usePaginationSearchParams from "@/common/_feat/fetch-pagination-search-params/hooks/usePaginationSearchParams.ts";
+import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
 
 /** Props for the {@link GenreIndexCard} component. */
 type IndexProps = {
