@@ -8,7 +8,9 @@
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
-import generateMovieCreditLinkConfigs from "@/domains/moviecredit/_feat/navigation/generateMovieCreditLinkConfigs.ts";
+import {
+    generateMovieCreditLinkConfigs
+} from "@/domains/moviecredit/_feat/navigation/generateMovieCreditLinkConfigs.ts";
 import {cn} from "@/common/lib/utils.ts";
 
 import {

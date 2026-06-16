@@ -10,11 +10,11 @@ import {
     SheetTrigger
 } from "@/common/components/ui/sheet";
 
-import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValues.ts";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {UIOpenStateProps} from "@/common/types";
 import {MovieCreditFormView} from "@/views/admin/movie-credits/_comp/forms/form-view/MovieCreditFormView.tsx";
 import {ReactElement} from "react";
+import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
 
 /** Props for the MovieCreditFormPanel component, extending form and UI state definitions. */
 type FormPanelProps = FormViewProps<MovieCreditFormValues> & UIOpenStateProps & {

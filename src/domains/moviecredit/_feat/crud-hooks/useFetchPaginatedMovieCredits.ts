@@ -7,7 +7,7 @@ import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/query-optio
 import {PaginatedQueryConfig} from "@/common/types";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {paginated} from "@/domains/moviecredit/_feat/crud/repository.ts";
-import {MovieCreditCRUDQueryKeys} from "@/domains/moviecredit/_feat/crud/queryKeys.ts";
+import {MovieCreditCRUDQueryKeys} from "@/domains/moviecredit/_feat/crud-hooks/queryKeys.ts";
 
 /** Configuration for paginated movie credit requests including pagination state and filters. */
 type FetchParams<TData = unknown> = PaginatedQueryConfig<TData, MovieCreditQueryOptions>;

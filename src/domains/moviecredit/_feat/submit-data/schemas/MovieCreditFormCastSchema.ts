@@ -1,4 +1,6 @@
-/** @fileoverview Zod schema and type definitions for cast member credit forms. */
+/**
+ * @fileoverview Zod schema and type definitions for cast member credit forms.
+ */
 
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";

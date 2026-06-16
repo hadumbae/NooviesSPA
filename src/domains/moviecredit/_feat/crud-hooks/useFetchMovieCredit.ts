@@ -5,7 +5,7 @@ import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {QueryConfig} from "@/common/types";
-import {MovieCreditCRUDQueryKeys} from "@/domains/moviecredit/_feat/crud/queryKeys.ts";
+import {MovieCreditCRUDQueryKeys} from "@/domains/moviecredit/_feat/crud-hooks/queryKeys.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {findByID} from "@/domains/moviecredit/_feat/crud/repository.ts";
 

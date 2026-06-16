@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {useFetchPaginatedMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks";
-import {MovieCreditDetails, PaginatedMovieCreditDetailsSchema} from "@/domains/moviecredit/schemas";
+import {MovieCreditDetails, MovieCreditDetailsSchema} from "@/domains/moviecredit/schemas";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {PaginatedItems} from "@/common/types";
@@ -13,6 +13,7 @@ import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.ts
 import {MoviePersonDetailsCard} from "@/views/admin/movie-credits/_feat/movie-person-card";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 
 /** Props for the MoviePeoplePageCreditSection component. */
 type SectionProps = {
@@ -28,7 +29,7 @@ export function MoviePeoplePageCreditSection(
     {className, department, page, perPage, setPage}: SectionProps
 ): ReactElement {
     const query = useFetchPaginatedMovieCredits({
-        schema: PaginatedMovieCreditDetailsSchema,
+        schema: generatePaginationSchema(MovieCreditDetailsSchema),
         page,
         perPage,
         queries: {department, sortByBillingOrder: 1},

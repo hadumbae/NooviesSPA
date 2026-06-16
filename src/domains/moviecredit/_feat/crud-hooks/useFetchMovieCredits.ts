@@ -6,7 +6,8 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import {MovieCreditQueryOptions} from "@/domains/moviecredit/schemas/query-options/MovieCreditQueryOptionsSchema.ts";
 import {ListQueryConfig} from "@/common/types";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
-import {find, MovieCreditCRUDQueryKeys} from "@/domains/moviecredit/_feat/crud";
+import {find} from "@/domains/moviecredit/_feat/crud";
+import {MovieCreditCRUDQueryKeys} from "@/domains/moviecredit/_feat/crud-hooks/queryKeys.ts";
 
 /** Configuration for movie credit queries including filters and validation schema. */
 type FetchQueries<TData = unknown> = ListQueryConfig<TData, MovieCreditQueryOptions>;

@@ -1,4 +1,6 @@
-/** @fileoverview Zod schema and type definitions for base movie credit form fields. */
+/**
+ * @fileoverview Zod schema and type definitions for base movie credit form fields.
+ */
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";

@@ -5,7 +5,9 @@ import {CardDescription, CardHeader, CardTitle} from "@/common/components/ui/car
 import {MoviePersonDetailsCardHeaderToggles}
     from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardHeaderToggles.tsx";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
-import simplifyMovieCreditDetails from "@/domains/moviecredit/_feat/formatters/simplifyMovieCreditDetails.ts";
+import {
+    simplifyMovieCreditDetails
+} from "@/domains/moviecredit/_feat/formatters/simplifyMovieCreditDetails.ts";
 
 import {
     MovieCreditDetails

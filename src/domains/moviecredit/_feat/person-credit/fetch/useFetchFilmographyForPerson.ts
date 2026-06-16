@@ -1,8 +1,5 @@
 /**
- * @fileoverview React Query hook for fetching a person's filmography.
- * * This hook manages the state and caching for retrieving a grouped list of
- * MovieCredit documents associated with a specific Person. It automates the
- * validation of the response data against the PersonFilmographySchema.
+ * @fileoverview React Query hook for fetching and validating a person's filmography.
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
@@ -16,12 +13,10 @@ import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {
     PersonFilmography,
     PersonFilmographySchema
-} from "@/domains/moviecredit/_feat/person-credit/schemas/PersonFilmographySchema.ts";
+} from "@/domains/moviecredit/_feat/person-credit/schema/PersonFilmographySchema.ts";
 import {PersonCreditQueryKeys} from "@/domains/moviecredit/_feat/person-credit/fetch/PersonCreditQueryKeys.ts";
 
-/**
- * Parameters for the useFetchFilmographyForPerson hook.
- */
+/** Parameters for the useFetchFilmographyForPerson hook. */
 type FetchParams = {
     _id: ObjectId;
     config?: RequestOptions;
@@ -29,7 +24,7 @@ type FetchParams = {
 };
 
 /**
- * Custom hook to fetch and validate a person's grouped filmography.
+ * Fetches and validates a person's grouped filmography.
  */
 export function useFetchFilmographyForPerson(
     {_id, options, config}: FetchParams

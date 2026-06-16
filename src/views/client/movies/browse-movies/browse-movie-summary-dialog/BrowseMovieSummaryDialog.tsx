@@ -10,12 +10,8 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui/dialog.tsx";
-import {
-    MovieCreditDataLazyLoader
-} from "../../../../admin/movie-credits/_comp/movie-credit-loaders/MovieCreditDataLazyLoader.tsx";
+} from "@/common/components/ui";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import {MovieCreditDetailsArraySchema} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsArraySchema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import BrowseMovieCreditSummaryLinkList
@@ -25,6 +21,11 @@ import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {Search} from "lucide-react";
 import {MoviePosterLink} from "@/views/admin/movies/_comp/poster-image";
 import {BrowseMovieSummary} from "@/views/client/movies/_comp/browse-movie-info";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
+import { MovieCreditDetailsSchema } from "@/domains/moviecredit/index.ts";
+import {
+    MovieCreditDataLazyLoader
+} from "@/views/admin/movie-credits/_comp/movie-credit-loaders/MovieCreditDataLazyLoader.tsx";
 
 /** Props for the BrowseMovieSummaryDialog component. */
 type DialogProps = {
@@ -67,7 +68,7 @@ export function BrowseMovieSummaryDialog({children, movie}: DialogProps): ReactE
                 </p>
 
                 <MovieCreditDataLazyLoader
-                    schema={MovieCreditDetailsArraySchema}
+                    schema={generateArraySchema(MovieCreditDetailsSchema)}
                     config={{populate: true, virtuals: true}}
                     queries={{movie: _id}}
                 >

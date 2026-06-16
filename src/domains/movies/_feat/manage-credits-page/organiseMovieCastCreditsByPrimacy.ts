@@ -3,9 +3,8 @@
  * @filename organiseMovieCastCreditsByPrimacy.ts
  */
 
-import {
-    CastCreditExceptMovie
-} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
+
+import {CastCreditExceptMovie} from "@/domains/moviecredit";
 
 /**
  * Parameters for organising cast credits.

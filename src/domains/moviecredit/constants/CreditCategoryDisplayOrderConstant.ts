@@ -38,5 +38,4 @@ export const CreditCategoryDisplayOrderConstant: readonly (RoleTypeCategory | "C
  * Union type representing all categories that can appear in the
  * credit display ordering.
  */
-export type CreditDisplayOrderCategory =
-    typeof CreditCategoryDisplayOrderConstant[number];
+export type CreditDisplayOrderCategory = typeof CreditCategoryDisplayOrderConstant[number];

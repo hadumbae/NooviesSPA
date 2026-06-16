@@ -6,13 +6,12 @@ import {ReactElement} from "react";
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
 import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks";
 import {
-    MovieCreditDetails,
-    MovieCreditDetailsArray,
-    MovieCreditDetailsArraySchema
+    MovieCreditDetails, MovieCreditDetailsSchema,
 } from "@/domains/moviecredit/schemas";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {MovieDetailsCreditCastOverview} from "@/views/admin/movie-credits/_comp/cast-overview";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
 
 /** Cast-specific movie credit details filtered by department. */
 type CastCredits = (Extract<MovieCreditDetails, { department: "CAST" }>)[];
@@ -26,7 +25,7 @@ type TabProps = {
 /** Renders the top-billed cast members within a section using validated query data. */
 export function MovieDetailsPageCreditSection({_id, slug}: TabProps): ReactElement {
     const query = useFetchMovieCredits({
-        schema: MovieCreditDetailsArraySchema,
+        schema: generateArraySchema(MovieCreditDetailsSchema),
         queries: {movie: _id, department: "CAST", sortByBillingOrder: 1},
         config: {populate: true, virtuals: true, limit: 6},
     });
@@ -39,7 +38,7 @@ export function MovieDetailsPageCreditSection({_id, slug}: TabProps): ReactEleme
             />
 
             <QueryDataLoader query={query}>
-                {(credits: MovieCreditDetailsArray) => (
+                {(credits: MovieCreditDetails[]) => (
                     <MovieDetailsCreditCastOverview
                         slug={slug}
                         credits={credits as CastCredits}

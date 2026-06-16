@@ -39,5 +39,4 @@ export const MovieCreditQueryMatchFiltersSchema = z.object({
 /**
  * Validated match-level filter parameters.
  */
-export type MovieCreditQueryMatchFilters =
-    z.infer<typeof MovieCreditQueryMatchFiltersSchema>;
+export type MovieCreditQueryMatchFilters = z.infer<typeof MovieCreditQueryMatchFiltersSchema>;

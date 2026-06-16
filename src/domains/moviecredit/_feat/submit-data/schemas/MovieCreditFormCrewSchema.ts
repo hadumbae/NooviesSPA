@@ -17,5 +17,5 @@ export const MovieCreditFormCrewSchema = MovieCreditFormBaseSchema.extend({
     archiveFootage: UndefinedForCrewFieldSchema,
 });
 
-/** Type representing a full crew credit form inferred from MovieCreditSubmitCrewSchema. */
+/** Form values for a crew credit submission inferred from MovieCreditFormCrewSchema. */
 export type MovieCreditFormCrewValues = z.infer<typeof MovieCreditFormCrewSchema>;

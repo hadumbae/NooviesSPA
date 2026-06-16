@@ -4,8 +4,10 @@ import {ReactElement, ReactNode} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {useMovieCreditDeleteMutation} from "@/domains/moviecredit/_feat/crud-hooks";
 import {UIOpenStateProps} from "@/common/types";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
+import {useMovieCreditDeleteMutation} from "@/domains/moviecredit";
 
 /** Props for the MovieCreditDeleteWarningDialog component. */
 type WarningDialogProps = MutationResponseConfig & UIOpenStateProps & {
@@ -19,13 +21,29 @@ type WarningDialogProps = MutationResponseConfig & UIOpenStateProps & {
 export function MovieCreditDeleteWarningDialog(
     props: WarningDialogProps
 ): ReactElement {
-    const {children, _id, displayText, displayDescription, isOpen, setIsOpen, ...deleteParams} = props;
+    const {children, _id, displayText, displayDescription, isOpen, setIsOpen, ...mutationConfig} = props;
 
     const dialogTitle = `Proceed to delete ${displayText ?? "credit"}?`;
-    const {mutate} = useMovieCreditDeleteMutation(deleteParams);
+    const {mutateAsync} = useMovieCreditDeleteMutation();
 
-    const deleteCredit = () => {
-        mutate({_id});
+    const deleteCredit = async () => {
+        try {
+            handleMutationCallback({
+                message: mutationConfig.submitMessage,
+                cb: () => mutationConfig.onSubmit?.(),
+            });
+
+            await mutateAsync({_id});
+
+            handleMutationCallback({
+                message: mutationConfig.submitMessage,
+                messageType: "success",
+                cb: () => mutationConfig.onSubmit?.(),
+            });
+        } catch (error: unknown) {
+            handleMutationResponseError({error, displayMessage: mutationConfig.errorMessage});
+            mutationConfig.onSubmitError?.(error);
+        }
     }
 
     return (

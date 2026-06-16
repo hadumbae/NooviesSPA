@@ -11,7 +11,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import {PersonCredit} from "@/domains/moviecredit/_feat/person-credit/schemas/PersonCreditSchema.ts";
+import {PersonCredit} from "@/domains/moviecredit/_feat/person-credit/schema/PersonCreditSchema.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 

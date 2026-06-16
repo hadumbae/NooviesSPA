@@ -1,43 +1,18 @@
-/** @fileoverview React Query mutation hook for movie credit creation and updates. */
-
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {toast} from "react-toastify";
-import {UseFormReturn} from "react-hook-form";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
-import {
-    MovieCreditDetails,
-    MovieCreditDetailsSchema
-} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
-import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormValues.ts";
-import {MovieCreditFormData} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
-import {create, MovieCreditCRUDMutationKeys, MovieCreditCRUDQueryKeys, update} from "@/domains/moviecredit/_feat/crud";
-import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-
-/** Props for the useMovieCreditSubmitMutation hook. */
-type SubmitParams = MutationFormResetConfig & MutationResponseConfig<MovieCreditDetails> & {
-    form: UseFormReturn<MovieCreditFormValues, unknown, MovieCreditFormData>;
-};
-
 /**
- * Manages movie credit form submissions including validation and cache synchronization.
+ * @fileoverview React Query mutation hook for movie credit creation and updates.
  */
-export function useMovieCreditSubmitMutation(
-    params: SubmitParams
-): UseMutationResult<MovieCreditDetails, unknown, MovieCreditFormData> {
-    const {
-        form,
-        onSubmitSuccess,
-        onSubmitError,
-        successMessage,
-        errorMessage,
-        resetOnSubmit,
-        resetOnSuccess,
-        resetOnError
-    } = params;
 
-    const invalidateQueries = useInvalidateQueryKeys();
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {MovieCreditDetails, MovieCreditDetailsSchema} from "@/domains/moviecredit/schemas";
+import {MovieCreditFormData} from "@/domains/moviecredit/_feat/submit-data";
+import {create, update} from "@/domains/moviecredit/_feat/crud";
+import {MovieCreditCRUDQueryKeys} from "@/domains/moviecredit/_feat/crud-hooks/queryKeys.ts";
+import {MovieCreditCRUDMutationKeys} from "@/domains/moviecredit/_feat/crud-hooks/mutationKeys.ts";
+
+/** Manages movie credit form submissions including validation and cache synchronization. */
+export function useMovieCreditSubmitMutation(): UseMutationResult<MovieCreditDetails, unknown, MovieCreditFormData> {
+    const queryClient = useQueryClient();
     const config = {populate: true, virtuals: true};
 
     const submitMovieCreditData = async ({_id, ...data}: MovieCreditFormData) => {
@@ -51,28 +26,16 @@ export function useMovieCreditSubmitMutation(
         });
 
         if (!success) throw error;
-        resetOnSubmit && form.reset();
         return parsed;
     };
 
-    const onSuccess = (credit: MovieCreditDetails) => {
-        invalidateQueries([MovieCreditCRUDQueryKeys.all], {exact: false});
-        successMessage && toast.success(successMessage);
-
-        resetOnSuccess && form.reset();
-        onSubmitSuccess?.(credit);
-    };
-
-    const onError = (error: unknown) => {
-        handleMutationFormError({form, error, displayMessage: errorMessage});
-        resetOnError && form.reset();
-        onSubmitError?.(error);
+    const onSuccess = () => {
+        queryClient.invalidateQueries({queryKey: MovieCreditCRUDQueryKeys.all, exact: false});
     };
 
     return useMutation({
         mutationKey: MovieCreditCRUDMutationKeys.submit(),
         mutationFn: submitMovieCreditData,
         onSuccess,
-        onError,
     });
 }

@@ -1,51 +1,27 @@
 /**
- * @file generateMovieCreditLinkConfigs.ts
- * @description
- * Generates grouped {@link LinkConfig} objects from movie credit data,
- * categorized by role and enriched with structured logging context.
+ * @fileoverview Generates grouped navigation link configurations from movie credit data.
  */
+
 import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
-import mapCreditToPersonLinkConfig from "@/domains/moviecredit/_feat/navigation/mapCreditToPersonLinkConfig.ts";
+import {mapCreditToPersonLinkConfig} from "@/domains/moviecredit/_feat/navigation/mapCreditToPersonLinkConfig.ts";
 
-import {
-    MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {MovieCreditDetails} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
-/**
- * Parameters for {@link generateMovieCreditLinkConfigs}.
- */
+/** Parameters for the movie credit link configuration generator. */
 type ConfigParams = {
-    /** Optional source component identifier for analytics context */
     sourceComponent?: string;
-
-    /** Movie credit records to transform into link configs */
     credits: MovieCreditDetails[];
 };
 
-/**
- * Grouped link configurations by credit role.
- */
+/** Link configurations grouped by actor, director, and writer roles. */
 type ConfigReturns = {
     actors: LinkConfig[];
     directors: LinkConfig[];
     writers: LinkConfig[];
 };
 
-/**
- * Transforms movie credits into grouped navigation link configs.
- *
- * Grouping rules:
- * - **actors**: CAST credits with category `"Actor"` and `isPrimary === true`
- * - **directors**: CREW credits with category `"Director"`
- * - **writers**: CREW credits with category `"Writer"`
- *
- * Each link is generated via {@link mapCreditToPersonLinkConfig}
- * and includes filtered contextual metadata for logging.
- *
- * @param params - Credit records and optional source component
- * @returns Link configurations grouped by role
- */
-export default function generateMovieCreditLinkConfigs(
+/** Transforms movie credits into grouped navigation link configs based on role and priority. */
+export function generateMovieCreditLinkConfigs(
     params: ConfigParams,
 ): ConfigReturns {
     const {sourceComponent, credits} = params;

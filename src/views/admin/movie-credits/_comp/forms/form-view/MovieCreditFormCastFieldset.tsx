@@ -3,16 +3,17 @@
 import {ReactElement} from "react";
 import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {MovieCreditFormDisableFields} from "@/domains/moviecredit/_feat/submit-data";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {renderFields} from "@/common/_feat/submit-data";
 import {cn} from "@/common/lib/utils.ts";
+import {DisableFields} from "@/common/types";
+import {MovieCreditFormValues} from "@/domains/moviecredit";
 
 /** Props for the MovieCreditFormCastFieldset component. */
 type FieldsetProps = {
     className?: string;
-    disableFields?: MovieCreditFormDisableFields;
+    disableFields?: DisableFields<MovieCreditFormValues>;
 };
 
 /** Renders input fields for billing order and character name. Requires wrapping in a Form provider. */

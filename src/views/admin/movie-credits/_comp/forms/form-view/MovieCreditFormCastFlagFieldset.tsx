@@ -3,16 +3,17 @@
 import {ReactElement} from "react";
 import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {useFormContext} from "react-hook-form";
-import {MovieCreditFormDisableFields} from "@/domains/moviecredit/_feat/submit-data";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
 import {renderFields} from "@/common/_feat/submit-data";
 import {cn} from "@/common/lib/utils.ts";
+import {DisableFields} from "@/common/types";
+import {MovieCreditFormValues} from "@/domains/moviecredit";
 
 /** Props for the MovieCreditFormCastFlagFieldset component. */
 type FieldsetProps = {
     className?: string;
-    disableFields?: MovieCreditFormDisableFields;
+    disableFields?: DisableFields<MovieCreditFormValues>;
 };
 
 /** Renders a grid of checkbox inputs for cast attributes like primary, uncredited, or voice roles. */

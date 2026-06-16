@@ -6,7 +6,9 @@
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
 import getInitials from "@/common/utility/formatters/getInitials.ts";
 import {cn} from "@/common/lib/utils.ts";
-import mapCreditToPersonLinkConfig from "@/domains/moviecredit/_feat/navigation/mapCreditToPersonLinkConfig.ts";
+import {
+    mapCreditToPersonLinkConfig
+} from "@/domains/moviecredit/_feat/navigation/mapCreditToPersonLinkConfig.ts";
 import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 

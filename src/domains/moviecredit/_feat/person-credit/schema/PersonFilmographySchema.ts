@@ -6,7 +6,7 @@ import {z} from "zod";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {
     PersonCreditRoleGroupSchema
-} from "@/domains/moviecredit/_feat/person-credit/schemas/PersonCreditRoleGroupSchema.ts";
+} from "@/domains/moviecredit/_feat/person-credit/schema/PersonCreditRoleGroupSchema.ts";
 
 /**
  * Schema representing an array of role-grouped movie credits.

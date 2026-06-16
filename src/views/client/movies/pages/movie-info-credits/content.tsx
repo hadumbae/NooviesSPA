@@ -3,7 +3,6 @@
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {CastCreditExceptMovie} from "@/domains/moviecredit/_feat/movie-info-credits/CreditExceptMovie.types.ts";
 import MovieInfoHeader from "@/views/client/movies/components/headers/MovieInfoHeader.tsx";
 import {
     MovieInfoCastCreditsSection
@@ -19,6 +18,7 @@ import {
 import {
     buildFullCreditListByCategoryOrder
 } from "@/domains/movies/_feat/manage-credits-page/buildFullCreditListByCategoryOrder.ts";
+import {CastCreditExceptMovie} from "@/domains/moviecredit";
 
 /** Props for the MovieInfoCreditsPageContent component. */
 type ContentProps = {

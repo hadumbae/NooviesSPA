@@ -1,10 +1,6 @@
 /**
- * @file mapCreditToPersonLinkConfigs.ts
- * @description
- * Maps a {@link MovieCreditDetails} record to a {@link LinkConfig}
- * for navigating to the associated person detail page.
+ * @fileoverview Maps movie credit records to link configurations for person navigation.
  *
- * Additional contextual metadata is attached for logging and analytics.
  */
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
@@ -13,23 +9,14 @@ import {
     MovieCreditDetails
 } from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 
-/**
- * Parameters for {@link mapCreditToPersonLinkConfig}.
- */
+/** Parameters for the mapCreditToPersonLinkConfig function. */
 type LinkParams = {
-    /** Movie credit used to derive the link */
     credit: MovieCreditDetails;
-    /** Optional source component identifier for analytics context */
     sourceComponent?: string;
 };
 
-/**
- * Creates a person navigation link from a movie credit.
- *
- * @param params - {@link LinkParams}
- * @returns A configured {@link LinkConfig} for person navigation
- */
-export default function mapCreditToPersonLinkConfig(
+/** Transforms a movie credit into a standardised link configuration for person navigation. */
+export function mapCreditToPersonLinkConfig(
     {credit, sourceComponent}: LinkParams
 ): LinkConfig {
     const {
