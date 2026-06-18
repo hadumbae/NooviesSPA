@@ -1,17 +1,12 @@
 /**
- * @fileoverview Defines a card component for displaying individual moderation
- * log entries, featuring action-specific accents, administrative details,
- * and formatted timestamps.
+ * @fileoverview Card component for displaying individual moderation log entries for a customer.
  */
 
 import {ReactElement} from "react";
 import {MovieReviewModerationLog} from "@/domains/movieReviews/_feat/moderation/schema";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {
-    MovieReviewModerationActionBadge,
-    MovieReviewModerationLogAccentBar
-} from "@/views/admin/movie-reviews/_comp";
+import {MovieReviewModerationActionBadge, MovieReviewModerationLogAccentBar} from "@/views/admin/movie-reviews/_comp";
 
 /** Props for the CustomerReviewLogCard component. */
 type CardProps = {
@@ -19,20 +14,10 @@ type CardProps = {
     className?: string;
 };
 
-/**
- * Renders a visual summary of a moderation event, including the action taken,
- * the timestamp, the administrator's rationale, and their identity.
- */
+/** Renders a visual summary of a moderation event including the action, timestamp, and administrator details. */
 export function CustomerReviewLogCard(
-    {log}: CardProps
+    {log: {modDate, action, admin: {name, email}, message}}: CardProps
 ): ReactElement {
-    const {
-        modDate,
-        action,
-        admin: {name, email},
-        message
-    } = log;
-
     const actionDate = modDate.toFormat("dd MMM yyyy, HH:mm");
 
     return (

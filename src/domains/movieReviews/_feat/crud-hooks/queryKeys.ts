@@ -8,8 +8,6 @@ import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
 export const MovieReviewCRUDQueryKeys = buildQueryKey(
     ["movie_reviews", "crud"],
     {
-        _id: ["_id"],
-        slug: ["slug"],
         list: ["list"],
         find: ["list", "find"],
         paginated: ["list", "paginated"],

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Defines the content layout for the Customer Reviews page.
+ * @fileoverview Main content layout for the customer reviews administration page.
  */
 
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
@@ -7,10 +7,10 @@ import PaginationRangeButtons from "@/common/components/pagination/PaginationRan
 import {CustomerMovieReviewSummary} from "@/domains/movieReviews/schemas/customer-reviews";
 import {LeanUserWithEmail} from "@/domains/users/schema/user";
 import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/_comp";
-import {CustomerReviewsPageHeader} from "@/views/admin/customers/customer-reviews-page/header.tsx";
+import {CustomerReviewsPageHeader} from "@/views/admin/customers/customer-reviews-page/sections/header.tsx";
 import {ReactElement} from "react";
 
-/** Properties for the CustomerReviewsPageContent component. */
+/** Props for the CustomerReviewsPageContent component. */
 type ContentProps = {
     customer: LeanUserWithEmail;
     reviews: CustomerMovieReviewSummary[];
@@ -20,10 +20,7 @@ type ContentProps = {
     totalItems: number;
 };
 
-/**
- * Renders the primary UI structure for the customer reviews view, including
- * a header, a responsive grid of reviews, and pagination navigation.
- */
+/** Renders the list of movie reviews for a specific customer with pagination controls. */
 export function CustomerReviewsPageContent(
     {customer, reviews, page, perPage, setPage, totalItems}: ContentProps
 ): ReactElement {

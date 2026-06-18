@@ -1,52 +1,42 @@
 /**
- * @file Modal component providing an expanded administrative view of a customer reservation.
- * @filename CustomerReservationDialog.tsx
+ * @fileoverview Modal component providing an expanded administrative view of a customer reservation.
  */
 
 import {Reservation} from "@/domains/reservation/schema/model";
 import {
     Dialog,
-    DialogTrigger,
     DialogContent,
+    DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogDescription
+    DialogTrigger
 } from "@/common/components/ui/dialog.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {
     ReservationStatusBadge
 } from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
-import {ReactNode} from "react";
+import {ReactElement, ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 
-/**
- * Properties for the CustomerReservationDialog component.
- * ---
- */
+/** Props for the CustomerReservationDialog component. */
 type DialogProps = {
-    /** Optional trigger element (e.g., a button or card). */
     children?: ReactNode;
-    /** The unique identifier of the customer who the reservation belong to. */
     code: UserUniqueCode;
-    /** Controlled state for visibility. */
     isOpen: boolean;
-    /** Callback to update visibility state. */
     setIsOpen: (open: boolean) => void;
-    /** The reservation document to display. */
     reservation: Reservation;
 };
 
 /**
  * Detailed overlay for auditing specific reservation metrics and metadata.
- * ---
  */
-export const CustomerReservationDialog = (
+export function CustomerReservationDialog(
     {children, code, reservation, isOpen, setIsOpen}: DialogProps
-) => {
+): ReactElement {
     const {
         uniqueCode,
         dateReserved,
@@ -146,4 +136,4 @@ export const CustomerReservationDialog = (
             </DialogContent>
         </Dialog>
     );
-};
+}

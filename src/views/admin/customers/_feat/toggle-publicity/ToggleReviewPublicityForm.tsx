@@ -2,19 +2,20 @@
  * @fileoverview Form wrapper for administrative operations that toggle the visibility of a movie review.
  */
 
-import {ReactElement, ReactNode} from "react";
+import {ReactElement, ReactNode, useId} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {ModerationMessageFormData, useModerationMessageForm} from "@/common/_feat/moderation/forms";
 
 import {MovieReview} from "@/domains/movieReviews/schemas/model";
-import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {AdminReviewActionFormContextProvider, useToggleReviewPublicityMutation} from "@/domains/movieReviews/_feat";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
+import {useToggleReviewPublicityMutation} from "@/domains/movieReviews/_feat";
+import {handleCustomerReviewFormSubmit} from "@/domains/customers";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 
 /** Props for the ToggleReviewPublicityForm component. */
-type FormProps = MutationResponseConfig<MovieReview> & {
+type FormProps = MutationResponseConfig<MovieReview, ModerationMessageFormData> & MutationFormResetConfig & {
     children: ReactNode;
-    uniqueKey?: string;
     reviewID: ObjectId;
     presetValues?: Partial<ModerationMessageFormData>;
 };
@@ -23,30 +24,35 @@ type FormProps = MutationResponseConfig<MovieReview> & {
  * Orchestrates the data flow and submission logic for toggling review visibility.
  */
 export function ToggleReviewPublicityForm(
-    {children, uniqueKey, reviewID, presetValues, ...onSubmitParams}: FormProps
+    {children, reviewID, presetValues, ...onSubmitConfig}: FormProps
 ): ReactElement {
-    const formKey = `toggle-review-publicity-${uniqueKey ?? "form"}`;
-    const form = useModerationMessageForm({presetValues});
-    const {mutate} = useToggleReviewPublicityMutation({
-        reviewID,
-        form,
-        onSubmit: onSubmitParams
-    });
+    const id = useId();
+    const formKey = `toggle-review-publicity-form-${id}`;
 
-    const togglePublicity = (values: ModerationMessageFormData) => {
-        mutate(values);
+    const form = useModerationMessageForm({presetValues});
+    const {mutateAsync, isPending, isError} = useToggleReviewPublicityMutation({reviewID});
+
+    const togglePublicity = async (values: ModerationMessageFormData) => {
+        await handleCustomerReviewFormSubmit({
+            form,
+            data: values,
+            submitData: mutateAsync,
+            ...onSubmitConfig,
+        });
     };
 
     return (
-        <AdminReviewActionFormContextProvider reviewID={reviewID} formID={formKey}>
+        <BaseFormContextProvider
+            formID={formKey}
+            isPending={isPending}
+            isError={isError}
+            submitHandler={togglePublicity}
+        >
             <Form {...form}>
-                <form
-                    id={formKey}
-                    onSubmit={form.handleSubmit(togglePublicity)}
-                >
+                <form id={formKey} onSubmit={form.handleSubmit(togglePublicity)}>
                     {children}
                 </form>
             </Form>
-        </AdminReviewActionFormContextProvider>
+        </BaseFormContextProvider>
     );
 }

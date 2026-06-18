@@ -1,58 +1,39 @@
 /**
- * @file Main content layout for the Customer Profile administrative page.
- * @filename CustomerProfilePageContent.tsx
+ * @fileoverview Main content layout for the Customer Profile administrative page.
  */
 
+import {ReactElement} from "react";
 import {Reservation} from "@/domains/reservation/schema/model";
-import {LeanUserWithEmail} from "@/domains/users/schema/user";
+import {LeanUserWithEmail} from "@/domains/users";
+import {CustomerMovieReviewSummary} from "@/domains/movieReviews";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
+import {CustomerDetailsCard} from "@/views/admin/customers/_comp";
 import {
-    CustomerProfileReviewSection
-} from "@/views/admin/customers/customer-profile-page/sections/CustomerProfileReviewSection.tsx";
-import {
-    CustomerProfileReservationSection
-} from "@/views/admin/customers/customer-profile-page/sections/CustomerProfileReservationSection.tsx";
-import {
-    CustomerProfilePageHeader
-} from "@/views/admin/customers/customer-profile-page/header.tsx";
-import {CustomerDetailsCard} from "@/views/admin/customers/_comp/CustomerDetailsCard.tsx";
-import {CustomerMovieReviewSummary} from "@/domains/movieReviews/schemas/customer-reviews";
+    CustomerProfilePageHeader,
+    CustomerProfileReservationSection,
+    CustomerProfileReviewSection,
+} from "@/views/admin/customers/customer-profile-page/sections";
 
-/**
- * Properties for the CustomerProfilePageContent component.
- */
+/** Props for the CustomerProfilePageContent component. */
 type ContentProps = {
-    /** The hydrated user data for the customer being viewed. */
     customer: LeanUserWithEmail;
-
-    /** List of reservation records associated with this customer. */
     reservations: Reservation[];
-
-    /** List of summarized movie reviews authored by this customer. */
     reviews: CustomerMovieReviewSummary[];
-
-    /** Total aggregate count of reservations for the header display. */
     reservationCount: number;
-
-    /** Total aggregate count of reviews for the header display. */
     reviewCount: number;
 };
 
-/**
- * Orchestrates the display of customer-specific data within the Admin dashboard.
- * ---
- */
-export const CustomerProfilePageContent = (
+/** Orchestrates the display of customer-specific data within the Admin dashboard. */
+export function CustomerProfilePageContent(
     {customer, reservations, reservationCount, reviewCount, reviews}: ContentProps
-) => {
-    /** Unique alphanumeric identifier for routing (e.g., USR-XXXXX) */
-    const {uniqueCode: code} = customer;
+): ReactElement {
+    const {name, uniqueCode} = customer;
 
     return (
         <PageFlexWrapper>
             <CustomerProfilePageHeader
-                name={customer.name}
-                code={customer.uniqueCode}
+                name={name}
+                code={uniqueCode}
             />
 
             <CustomerDetailsCard
@@ -60,16 +41,16 @@ export const CustomerProfilePageContent = (
             />
 
             <CustomerProfileReservationSection
-                code={code}
+                code={uniqueCode}
                 itemCount={reservationCount}
                 reservations={reservations}
             />
 
             <CustomerProfileReviewSection
-                code={code}
+                code={uniqueCode}
                 itemCount={reviewCount}
                 reviews={reviews}
             />
         </PageFlexWrapper>
     );
-};
+}

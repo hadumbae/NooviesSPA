@@ -1,33 +1,26 @@
 /**
- * @file Summary card component for displaying customer movie reviews in an administrative context.
- * @filename CustomerMovieReviewCard.tsx
+ * @fileoverview Summary card component for displaying customer movie reviews in an administrative context.
+ *
  */
 
 import {CustomerMovieReview} from "@/domains/movieReviews/schemas/customer-reviews";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {UniqueReviewCodeBadge} from "@/views/admin/movie-reviews/_comp/badges/UniqueReviewCodeBadge.tsx";
-import {
-    IsRecommendedBadge
-} from "@/views/client/movie-reviews/_comp/badges/IsRecommendedBadge.tsx";
+import {IsRecommendedBadge} from "@/views/client/movie-reviews/_comp/badges/IsRecommendedBadge.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {MovieReviewText} from "@/views/client/movie-reviews/_comp/display/MovieReviewText.tsx";
 import {DisplayNameBadge, IsReviewPublicBadge, MovieRatingBadge} from "@/views/admin/movie-reviews/_comp";
+import {ReactElement} from "react";
 
-/**
- * Props for the CustomerMovieReviewCard component.
- */
+/** Props for the CustomerMovieReviewCard component. */
 type CardProps = {
-    /** The review data object containing content, metadata, and author info. */
     review: CustomerMovieReview;
 };
 
-/**
- * Renders a comprehensive preview of a customer's review for administrative moderation.
- * ---
- */
-export const CustomerMovieReviewCard = (
+/** Renders a comprehensive preview of a customer's review for administrative moderation. */
+export function CustomerMovieReviewCard(
     {review}: CardProps
-) => {
+): ReactElement {
     const {
         uniqueCode,
         isPublic,
@@ -62,7 +55,7 @@ export const CustomerMovieReviewCard = (
 
                 {reviewText && (
                     <>
-                        <Separator />
+                        <Separator/>
                         <MovieReviewText text={reviewText}/>
                     </>
                 )}
@@ -70,13 +63,14 @@ export const CustomerMovieReviewCard = (
                 <Separator/>
 
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                    <DisplayNameBadge displayName={displayName} />
+                    <DisplayNameBadge displayName={displayName}/>
 
-                    <span className="secondary-text inline-flex items-center gap-2 text-sm font-medium max-lg:font-bold">
+                    <span
+                        className="secondary-text inline-flex items-center gap-2 text-sm font-medium max-lg:font-bold">
                         Likes • {helpfulCount} | {dateWritten}
                     </span>
                 </div>
             </CardContent>
         </Card>
     );
-};
+}

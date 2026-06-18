@@ -1,11 +1,9 @@
 /**
- * @file Main entry point for the Administrative Customer Review Moderation page.
- * @filename CustomerReviewPage.tsx
+ * @fileoverview Main entry point for the Administrative Customer Review Moderation page.
+ *
  */
 
-import {
-    CustomerReviewPageContent
-} from "@/views/admin/customers/customer-review-page/content.tsx";
+import {CustomerReviewPageContent} from "@/views/admin/customers/customer-review-page/content.tsx";
 import {PageLoader} from "@/views/common/_comp/page";
 import {
     CustomerReviewViewData,
@@ -13,14 +11,14 @@ import {
     useFetchCustomerReviewViewData
 } from "@/domains/customers/_feat/movie-review";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {ReactElement} from "react";
 
 /**
- * Orchestrates the data fetching and validation lifecycle for the Review Moderation view.
- * ---
+ * Orchestrates the data fetching and validation lifecycle for the Customer Review Moderation view.
  */
-export const CustomerReviewPage = () => {
+export function CustomerReviewPage(): ReactElement {
     const routeParams = useCustomerReviewRouteParams();
-    if (!routeParams) return <PageLoader />;
+    if (!routeParams) return <PageLoader/>;
 
     const {reviewCode, uniqueCode} = routeParams;
 
@@ -39,4 +37,4 @@ export const CustomerReviewPage = () => {
             )}
         </QueryDataLoader>
     );
-};
+}

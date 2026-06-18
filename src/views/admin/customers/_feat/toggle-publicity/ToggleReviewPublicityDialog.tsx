@@ -11,13 +11,12 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/common/components/ui/dialog.tsx";
+} from "@/common/components/ui";
 import {ReactElement, ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {AdminReviewActionFormContext} from "@/domains/movieReviews/_feat/admin-actions/context";
 import {useFormContext} from "react-hook-form";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
 /** Props for the ToggleReviewPublicityDialog component. */
 type DialogProps = {
@@ -32,7 +31,7 @@ type DialogProps = {
 export function ToggleReviewPublicityDialog(
     {children, isOpen, setIsOpen}: DialogProps
 ): ReactElement {
-    const {formID} = useRequiredContext({context: AdminReviewActionFormContext});
+    const {formID} = useBaseFormContext();
     const {control} = useFormContext();
 
     return (

@@ -1,51 +1,40 @@
 /**
- * @file Orchestrator component for the "Reset Review Likes" administrative action.
- * @filename ResetReviewLikesAction.tsx
+ * @fileoverview Orchestrator component for the Reset Review Likes administrative action.
  */
 
-import {useState} from "react";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {ReactElement, useState} from "react";
 import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {
-    ResetReviewLikesForm
-} from "@/views/admin/customers/_feat/reset-likes/ResetReviewLikesForm.tsx";
-import {
-    ResetReviewLikesDialog
-} from "@/views/admin/customers/_feat/reset-likes/ResetReviewLikesDialog.tsx";
+import {ResetReviewLikesForm} from "@/views/admin/customers/_feat/reset-likes/ResetReviewLikesForm.tsx";
+import {ResetReviewLikesDialog} from "@/views/admin/customers/_feat/reset-likes/ResetReviewLikesDialog.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 
 import {MovieReview} from "@/domains/movieReviews/schemas/model";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 
-/**
- * Props for the ResetReviewLikesAction component.
- */
-type ActionProps = MutationOnSubmitParams<MovieReview> & {
-    /** The internal database ID of the review targeting for a like reset. */
+/** Props for the ResetReviewLikesAction component. */
+type ActionProps = {
     reviewID: ObjectId;
-    /** Optional initial values for the moderation message. */
     presetValues?: Partial<ModerationMessageFormData>;
+    submitConfig?: MutationResponseConfig<MovieReview, ModerationMessageFormData> & MutationFormResetConfig;
 };
 
-/**
- * A composite component that encapsulates the state, form logic, and dialog for resetting review likes.
- * ---
- */
-export const ResetReviewLikesAction = (
-    {reviewID, presetValues, onSubmitSuccess, ...onSubmitProps}: ActionProps
-) => {
+/** Composite component that encapsulates the state, form logic, and dialog for resetting review likes. */
+export function ResetReviewLikesAction(
+    {reviewID, presetValues, submitConfig}: ActionProps
+): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const closeOnSuccess = (review: MovieReview) => {
         setIsOpen(false);
-        onSubmitSuccess?.(review);
+        submitConfig?.onSubmitSuccess?.(review);
     };
 
     return (
         <ResetReviewLikesForm
             reviewID={reviewID}
             presetValues={presetValues}
-            {...onSubmitProps}
+            {...submitConfig}
             onSubmitSuccess={closeOnSuccess}
         >
             <ResetReviewLikesDialog isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -53,4 +42,4 @@ export const ResetReviewLikesAction = (
             </ResetReviewLikesDialog>
         </ResetReviewLikesForm>
     );
-};
+}

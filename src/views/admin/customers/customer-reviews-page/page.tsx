@@ -1,6 +1,5 @@
 /**
- * @fileoverview Defines the CustomerReviewsPage component which manages the
- * data fetching and pagination state for displaying a customer's movie reviews.
+ * @fileoverview Manages data fetching and pagination state for displaying a customer's movie reviews.
  */
 
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
@@ -16,8 +15,7 @@ import {useFetchCustomerCode} from "@/domains/users";
 const REVIEWS_PER_PAGE = 10;
 
 /**
- * Renders the customer reviews page by fetching customer details and reviews
- * based on the current URL pagination parameters and customer code.
+ * Renders the customer reviews page using URL pagination parameters and the customer code.
  */
 export function CustomerReviewsPage() {
     const customerCode = useFetchCustomerCode();

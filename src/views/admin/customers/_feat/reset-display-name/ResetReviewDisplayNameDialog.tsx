@@ -16,9 +16,8 @@ import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {useFormContext} from "react-hook-form";
 import {ReactElement, ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {AdminReviewActionFormContext} from "@/domains/movieReviews/_feat";
 import {cn} from "@/common/lib/utils.ts";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
 /** Props for the ResetReviewDisplayNameDialog component. */
 export type DialogProps = {
@@ -34,7 +33,7 @@ export type DialogProps = {
 export function ResetReviewDisplayNameDialog(
     {children, isOpen, setIsOpen, className}: DialogProps
 ): ReactElement {
-    const {formID} = useRequiredContext({context: AdminReviewActionFormContext});
+    const {formID} = useBaseFormContext();
     const {control} = useFormContext();
 
     return (

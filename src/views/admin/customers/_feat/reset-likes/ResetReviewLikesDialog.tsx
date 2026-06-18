@@ -3,22 +3,21 @@
  *
  */
 
+import {ReactElement, ReactNode} from "react";
+import {useFormContext} from "react-hook-form";
 import {
+    Button,
     Dialog,
-    DialogTrigger,
+    DialogClose,
     DialogContent,
-    DialogHeader,
-    DialogTitle,
     DialogDescription,
     DialogFooter,
-    DialogClose,
-} from "@/common/components/ui/dialog.tsx";
-import {ReactElement, ReactNode} from "react";
-import {Button} from "@/common/components/ui/button.tsx";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {AdminReviewActionFormContext} from "@/domains/movieReviews/_feat";
-import {useFormContext} from "react-hook-form";
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/common/components/ui";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
 /** Props for the ResetReviewLikesDialog component. */
 type DialogProps = {
@@ -33,7 +32,7 @@ type DialogProps = {
 export function ResetReviewLikesDialog(
     {children, isOpen, setIsOpen}: DialogProps
 ): ReactElement {
-    const {formID} = useRequiredContext({context: AdminReviewActionFormContext});
+    const {formID} = useBaseFormContext();
     const {control} = useFormContext();
 
     return (

@@ -1,6 +1,5 @@
 /**
- * @file Specialized card component for displaying movie details and average ratings within admin views.
- * @filename AdminMovieWithRatingCard.tsx
+ * @fileoverview A card component displaying movie details and ratings for administrative views.
  */
 
 import {MovieWithRating} from "@/domains/movies/schema/movie/MovieWithRatingSchema.ts";
@@ -10,31 +9,26 @@ import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntim
 import {
     ISO6391LanguageLabels as ISO6391LanguageConstant
 } from "@/common/constants/languages/ISO6391LanguageLabels.ts";
-import {AdminMovieWithRatingCardStat} from "@/views/admin/customers/_comp/AdminMovieWithRatingCardStat.tsx";
+import {
+    AdminMovieWithRatingCardStat
+} from "@/views/admin/customers/_comp/movie-with-rating-card/AdminMovieWithRatingCardStat.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {VerticalDivider} from "@/views/common/_comp/VerticalDivider.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {MovieRatingBadge} from "@/views/admin/movie-reviews/_comp";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
+import {ReactElement} from "react";
 
-/**
- * Props for the AdminMovieWithRatingCard component.
- */
+/** Props for the AdminMovieWithRatingCard component. */
 type CardProps = {
-    /** The movie data object including metadata and aggregated rating scores. */
     movie: MovieWithRating;
-    /** Optional CSS classes for container overrides. */
     className?: string;
 };
 
-/**
- * Renders a data-dense card used in administrative contexts to provide a quick
- * overview of a movie's status and core attributes.
- * ---
- */
-export const AdminMovieWithRatingCard = (
+/** Renders a data-dense card providing a quick overview of a movie's status and rating. */
+export function AdminMovieWithRatingCard(
     {movie, className}: CardProps
-) => {
+): ReactElement {
     const {
         genres,
         title,
@@ -65,10 +59,7 @@ export const AdminMovieWithRatingCard = (
 
                     <div className="flex-1 flex flex-col space-y-2">
                         <div className="flex-1">
-                            <LoggedLink
-                                className="hover-underline inline-block"
-                                to={`/admin/movies/get/${slug}`}
-                            >
+                            <LoggedLink className="hover-underline inline-block" to={`/admin/movies/get/${slug}`}>
                                 <h3 className="subsection-title line-clamp-1 pb-1">
                                     {title} ({releaseYear})
                                 </h3>
@@ -79,7 +70,6 @@ export const AdminMovieWithRatingCard = (
                             </h4>
                         </div>
 
-                        {/* Visual rating indicator */}
                         <MovieRatingBadge rating={averageRating}/>
                     </div>
                 </div>
@@ -112,4 +102,4 @@ export const AdminMovieWithRatingCard = (
             </CardContent>
         </Card>
     );
-};
+}

@@ -1,40 +1,28 @@
 /**
- * @file Header component for the Administrative Customer Review detail page.
- * @filename CustomerReviewPageHeader.tsx
+ * @fileoverview Header component for the administrative customer review detail page.
  */
 
 import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {MovieReviewUniqueCode} from "@/domains/movieReviews/schemas/fields";
-import {
-    CustomerReviewPageBreadcrumbs
-} from "@/views/admin/customers/customer-review-page/breadcrumbs.tsx";
+import {CustomerReviewPageBreadcrumbs} from "@/views/admin/customers/customer-review-page/sections/breadcrumbs.tsx";
+import {ReactElement} from "react";
 
-/**
- * Props for the CustomerReviewPageHeader component.
- */
+/** Props for the CustomerReviewPageHeader component. */
 type HeaderProps = {
-    /** The validated unique code of the customer (author). */
     customerCode: UserUniqueCode;
-    /** The validated unique code of the movie review. */
     reviewCode: MovieReviewUniqueCode;
 };
 
-/**
- * Renders the top-level identity and navigation for the Review Moderation view.
- * ---
- */
-export const CustomerReviewPageHeader = (
+/** Renders the top-level identity and navigation for the review moderation view. */
+export function CustomerReviewPageHeader(
     {customerCode, reviewCode}: HeaderProps
-) => {
+): ReactElement {
     return (
         <header className="space-y-2">
-            {/* Contextual navigation trail */}
             <CustomerReviewPageBreadcrumbs
                 customerCode={customerCode}
                 reviewCode={reviewCode}
             />
-
-            {/* Entity Identification */}
             <div>
                 <h1 className="page-title text-2xl font-bold tracking-tight">
                     Customer Review
@@ -45,4 +33,4 @@ export const CustomerReviewPageHeader = (
             </div>
         </header>
     );
-};
+}

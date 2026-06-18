@@ -1,9 +1,8 @@
 /**
- * @file Orchestrator component for the "Toggle Review Publicity" administrative action.
- * @filename ToggleReviewPublicityAction.tsx
+ * @fileoverview Orchestrator component for the Toggle Review Publicity administrative action.
+ *
  */
 
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
 import {useState} from "react";
@@ -16,40 +15,33 @@ import {
 } from "@/views/admin/customers/_feat/toggle-publicity/ToggleReviewPublicityForm.tsx";
 
 import {MovieReview} from "@/domains/movieReviews/schemas/model";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 
-/**
- * Props for the ToggleReviewPublicityAction component.
- */
-type ActionProps = MutationOnSubmitParams<MovieReview> & {
-    /** The internal database ID of the review to toggle. */
+/** Props for the ToggleReviewPublicityAction component. */
+type ActionProps = {
     reviewID: ObjectId;
-    /** Optional initial values for the moderation message. */
     presetValues?: Partial<ModerationMessageFormData>;
+    submitConfig?: MutationResponseConfig<MovieReview, ModerationMessageFormData> & MutationFormResetConfig;
 };
 
 /**
- * A composite component that encapsulates the state, form logic, and dialog for toggling review visibility.
- * ---
+ * Encapsulates the state, form logic, and dialog for toggling review visibility.
  */
 export const ToggleReviewPublicityAction = (
-    {reviewID, presetValues, onSubmitSuccess, ...onSubmitProps}: ActionProps
+    {reviewID, presetValues, submitConfig}: ActionProps
 ) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    /**
-     * Closes the dialog and executes the success callback upon a confirmed API update.
-     * @param review - The updated movie review returned by the server.
-     */
     const closeOnSuccess = (review: MovieReview) => {
         setIsOpen(false);
-        onSubmitSuccess?.(review);
+        submitConfig?.onSubmitSuccess?.(review);
     };
 
     return (
         <ToggleReviewPublicityForm
             reviewID={reviewID}
             presetValues={presetValues}
-            {...onSubmitProps}
+            {...submitConfig}
             onSubmitSuccess={closeOnSuccess}
         >
             <ToggleReviewPublicityDialog isOpen={isOpen} setIsOpen={setIsOpen}>

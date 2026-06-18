@@ -11,15 +11,14 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui/dialog.tsx";
+} from "@/common/components/ui";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {useFormContext} from "react-hook-form";
 import {ReactElement, ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {cn} from "@/common/lib/utils.ts";
-import {AdminReviewActionFormContext} from "@/domains/movieReviews/_feat";
 import StarRatingSelector from "@/common/components/forms/radio-group/StarRatingSelector.tsx";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
 /** Props for the SetReviewRatingDialog component. */
 export type DialogProps = {
@@ -36,7 +35,7 @@ export type DialogProps = {
 export function SetReviewRatingDialog(
     {children, isOpen, setIsOpen, className}: DialogProps
 ): ReactElement {
-    const {formID} = useRequiredContext({context: AdminReviewActionFormContext});
+    const {formID} = useBaseFormContext();
     const {control} = useFormContext();
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>

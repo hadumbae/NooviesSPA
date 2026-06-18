@@ -1,13 +1,11 @@
 /**
- * @fileoverview Defines the header component for the Customer Review Logs page.
- * Includes breadcrumb navigation and descriptive titles to provide context
- * for the specific review being audited.
+ * @fileoverview Header component for the customer review logs administration page.
  */
 
 import {ReactElement} from "react"
 import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts"
 import {MovieReviewUniqueCode} from "@/domains/movieReviews/schemas/fields"
-import {CustomerReviewLogsPageBreadcrumbs} from "@/views/admin/customers/customer-review-logs-page/breadcrumbs.tsx"
+import {CustomerReviewLogsPageBreadcrumbs} from "@/views/admin/customers/customer-review-logs-page/sections/breadcrumbs.tsx"
 
 /** Props for the CustomerReviewLogsPageHeader component. */
 type HeaderProps = {
@@ -15,10 +13,7 @@ type HeaderProps = {
     reviewCode: MovieReviewUniqueCode
 }
 
-/**
- * Renders the page header containing hierarchical navigation and the
- * primary page titles.
- */
+/** Renders the page header containing hierarchical navigation and the primary page titles. */
 export function CustomerReviewLogsPageHeader(
     {customerCode, reviewCode}: HeaderProps
 ): ReactElement {

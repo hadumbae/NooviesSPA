@@ -1,36 +1,23 @@
 /**
- * @file Navigation breadcrumbs for the administrative Customer Review detail page.
- * @filename CustomerReviewPageBreadcrumbs.tsx
+ * @fileoverview Navigation breadcrumbs for the administrative Customer Review detail page.
  */
 
-import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
-import {MovieReviewUniqueCode} from "@/domains/movieReviews/schemas/fields";
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator
-} from "@/common/components/ui/breadcrumb.tsx";
+import {ReactElement} from "react";
+import {UserUniqueCode} from "@/domains/users";
+import {MovieReviewUniqueCode} from "@/domains/movieReviews";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator} from "@/common/components/ui";
 
-/**
- * Props for the CustomerReviewPageBreadcrumbs component.
- */
+/** Props for the CustomerReviewPageBreadcrumbs component. */
 type BreadcrumbProps = {
-    /** The validated unique code of the customer to link back to their profile. */
     customerCode: UserUniqueCode;
-    /** The validated unique code of the specific review for display in the current page label. */
     reviewCode: MovieReviewUniqueCode;
 };
 
-/**
- * Provides hierarchical navigation trails for administrative review moderation.
- * ---
- */
-export const CustomerReviewPageBreadcrumbs = (
+/** Provides hierarchical navigation trails for administrative review moderation. */
+export function CustomerReviewPageBreadcrumbs(
     {customerCode, reviewCode}: BreadcrumbProps
-) => {
+): ReactElement {
     return (
         <nav aria-label="Breadcrumb">
             <Breadcrumb>
@@ -44,7 +31,7 @@ export const CustomerReviewPageBreadcrumbs = (
                         </LoggedLink>
                     </BreadcrumbItem>
 
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
 
                     <BreadcrumbItem>
                         <LoggedLink
@@ -55,7 +42,7 @@ export const CustomerReviewPageBreadcrumbs = (
                         </LoggedLink>
                     </BreadcrumbItem>
 
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
 
                     <BreadcrumbItem>
                         <BreadcrumbPage>
@@ -66,4 +53,4 @@ export const CustomerReviewPageBreadcrumbs = (
             </Breadcrumb>
         </nav>
     );
-};
+}

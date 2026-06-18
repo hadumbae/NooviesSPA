@@ -1,17 +1,15 @@
 /**
- * @fileoverview Defines the layout and presentation logic for the Customer
- * Review Logs page, including the grid of log cards and pagination controls.
+ * @fileoverview Layout and presentation logic for the Customer Review Logs page.
  */
 
 import {ReactElement} from "react";
-import {MovieReviewModerationLog} from "@/domains/movieReviews/_feat/moderation/schema";
+import {UserUniqueCode} from "@/domains/users";
+import {MovieReviewModerationLog, MovieReviewUniqueCode} from "@/domains/movieReviews";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
-import {MovieReviewUniqueCode} from "@/domains/movieReviews/schemas/fields";
-import {CustomerReviewLogsPageHeader} from "@/views/admin/customers/customer-review-logs-page/header.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {CustomerReviewLogCard} from "@/views/admin/customers/_comp/CustomerReviewLogCard.tsx";
+import {CustomerReviewLogCard} from "@/views/admin/customers/_comp";
+import {CustomerReviewLogsPageHeader} from "@/views/admin/customers/customer-review-logs-page/sections";
 
 /** Props for the CustomerReviewLogsPageContent component. */
 type ContentProps = {
@@ -25,8 +23,7 @@ type ContentProps = {
 };
 
 /**
- * Renders the primary content area for review logs, handling the empty state
- * and the responsive grid layout for log cards.
+ * Primary content area for review logs that displays a grid of log cards and pagination.
  */
 export function CustomerReviewLogsPageContent(
     {logs, reviewCode, customerCode, ...paginationProps}: ContentProps
@@ -41,7 +38,7 @@ export function CustomerReviewLogsPageContent(
             {logs.length > 0 ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {logs.map((log) => (
-                        <CustomerReviewLogCard key={log._id} log={log} />
+                        <CustomerReviewLogCard key={log._id} log={log}/>
                     ))}
                 </div>
             ) : (

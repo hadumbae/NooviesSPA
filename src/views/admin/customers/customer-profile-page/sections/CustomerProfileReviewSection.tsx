@@ -6,6 +6,7 @@ import {PageSectionHeader} from "@/views/common/_comp/page";
 import {CustomerMovieReviewSummary} from "@/domains/movieReviews/schemas/customer-reviews";
 import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/_comp";
+import {ReactElement} from "react";
 
 /** Props for the CustomerProfileReviewSection component. */
 type SectionProps = {
@@ -15,12 +16,12 @@ type SectionProps = {
 };
 
 /** Renders a grid of movie reviews within the Customer Profile administrative view. */
-export const CustomerProfileReviewSection = (
+export function CustomerProfileReviewSection(
     {code, itemCount, reviews}: SectionProps
-) => {
+): ReactElement {
     return (
         <section className="space-y-4">
-            <PageSectionHeader text={`Reviews (${itemCount})`} />
+            <PageSectionHeader text={`Reviews (${itemCount})`}/>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {reviews.map((review) => (
@@ -33,4 +34,4 @@ export const CustomerProfileReviewSection = (
             </div>
         </section>
     );
-};
+}

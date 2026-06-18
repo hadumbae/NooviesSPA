@@ -1,20 +1,17 @@
 /**
- * @fileoverview Defines the header component for the Customer Reviews page,
- * including breadcrumbs and titles.
+ * @fileoverview Header component for the Customer Reviews page.
  */
 
 import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
-import {CustomerReviewsPageBreadcrumbs} from "@/views/admin/customers/customer-reviews-page/breadcrumbs.tsx";
+import {CustomerReviewsPageBreadcrumbs} from "@/views/admin/customers/customer-reviews-page/sections/breadcrumbs.tsx";
 import {ReactElement} from "react";
 
+/** Props for the CustomerReviewsPageHeader component. */
 type HeaderProps = {
     customerCode: UserUniqueCode;
 };
 
-/**
- * Renders the header section of the Customer Reviews page, displaying the
- * navigation breadcrumbs and the page title with the customer's code.
- */
+/** Header section for the Customer Reviews page displaying breadcrumbs and the customer identity. */
 export function CustomerReviewsPageHeader(
     {customerCode}: HeaderProps
 ): ReactElement {

@@ -2,23 +2,23 @@
  * @fileoverview Form wrapper for administrative operations that manually set or correct a movie review's rating.
  */
 
-import {ReactElement, ReactNode} from "react";
+import {ReactElement, ReactNode, useId} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 
 import {MovieReview} from "@/domains/movieReviews/schemas/model";
-import {MutationResponseConfig} from "@/common/_feat/submit-data";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {
-    AdminReviewActionFormContextProvider,
     SetReviewRatingFormData,
     useSetReviewRatingForm,
     useSetReviewRatingMutation
 } from "@/domains/movieReviews/_feat";
+import {handleCustomerReviewFormSubmit} from "@/domains/customers";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 
 /** Props for the SetReviewRatingForm component. */
-type FormProps = MutationResponseConfig<MovieReview> & {
+type FormProps = MutationResponseConfig<MovieReview, SetReviewRatingFormData> & MutationFormResetConfig & {
     children: ReactNode;
-    uniqueKey?: string;
     reviewID: ObjectId;
     presetValues?: Partial<SetReviewRatingFormData>;
 };
@@ -27,30 +27,30 @@ type FormProps = MutationResponseConfig<MovieReview> & {
  * Orchestrates the data flow and submission logic for administrative rating overrides.
  */
 export function SetReviewRatingForm(
-    {children, uniqueKey, reviewID, presetValues, ...onSubmitParams}: FormProps
+    {children, reviewID, presetValues, ...onSubmitConfig}: FormProps
 ): ReactElement {
-    const formKey = `set-review-rating-${uniqueKey ?? "form"}`;
-    const form = useSetReviewRatingForm({presetValues});
-    const {mutate} = useSetReviewRatingMutation({
-        reviewID,
-        form,
-        onSubmit: onSubmitParams
-    });
+    const id = useId();
+    const formID = `set-review-rating-form-${id}`;
 
-    const setRating = (values: SetReviewRatingFormData) => {
-        mutate(values);
+    const form = useSetReviewRatingForm({presetValues});
+    const {mutateAsync, isPending, isError} = useSetReviewRatingMutation({reviewID});
+
+    const setRating = async (values: SetReviewRatingFormData) => {
+        await handleCustomerReviewFormSubmit({
+            form,
+            data: values,
+            submitData: mutateAsync,
+            ...onSubmitConfig,
+        });
     };
 
     return (
-        <AdminReviewActionFormContextProvider reviewID={reviewID} formID={formKey}>
+        <BaseFormContextProvider formID={formID} isPending={isPending} isError={isError} submitHandler={setRating}>
             <Form {...form}>
-                <form
-                    id={formKey}
-                    onSubmit={form.handleSubmit(setRating)}
-                >
+                <form id={formID} onSubmit={form.handleSubmit(setRating)}>
                     {children}
                 </form>
             </Form>
-        </AdminReviewActionFormContextProvider>
+        </BaseFormContextProvider>
     );
 }

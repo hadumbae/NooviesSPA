@@ -1,6 +1,5 @@
 /**
- * @file Administrative data card displaying primary customer account details.
- * @filename CustomerDetailsCard.tsx
+ * @fileoverview Administrative data card displaying primary customer account details.
  */
 
 import {LeanUserWithEmail} from "@/domains/users/schema/user";
@@ -9,22 +8,17 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {ReactElement} from "react";
 
-/**
- * Properties for the CustomerDetailsCard component.
- */
+/** Props for the CustomerDetailsCard component. */
 type CardProps = {
-    /** The hydrated user object containing core identification and contact data. */
     customer: LeanUserWithEmail;
 };
 
-/**
- * Renders a structured overview of a customer's account information.
- * ---
- */
-export const CustomerDetailsCard = (
+/** Renders a structured overview of a customer's account information. */
+export function CustomerDetailsCard(
     {customer}: CardProps
-) => {
+): ReactElement {
     const {
         _id,
         name,
@@ -35,7 +29,6 @@ export const CustomerDetailsCard = (
     return (
         <Card className="shadow-sm">
             <CardContent className="p-4 space-y-4">
-                {/* Primary Data Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                     <LabeledGroup
                         className="max-md:col-span-2"
@@ -75,4 +68,4 @@ export const CustomerDetailsCard = (
             </CardContent>
         </Card>
     );
-};
+}

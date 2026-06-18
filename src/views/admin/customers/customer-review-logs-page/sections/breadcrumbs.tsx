@@ -1,10 +1,8 @@
 /**
- * @fileoverview Defines the breadcrumb navigation component for the Customer
- * Review Logs page, facilitating hierarchical navigation from the profile
- * down to specific review audit trails.
+ * @fileoverview Breadcrumb navigation component for the Customer Review Logs page.
  */
 
-import {ReactElement} from "react"
+import { ReactElement } from "react"
 import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts"
 import {MovieReviewUniqueCode} from "@/domains/movieReviews/schemas/fields"
 import {
@@ -22,10 +20,7 @@ type BreadcrumbsProps = {
     reviewCode: MovieReviewUniqueCode
 }
 
-/**
- * Renders a breadcrumb trail allowing administrators to navigate back to the
- * customer profile, the review index, or the specific review context.
- */
+/** Breadcrumb trail for navigating from a customer profile to specific review logs. */
 export function CustomerReviewLogsPageBreadcrumbs(
     {customerCode, reviewCode}: BreadcrumbsProps
 ): ReactElement {

@@ -1,38 +1,27 @@
 /**
- * @file Individual summary card for a customer's movie review, used in admin dashboards.
- * @filename CustomerMovieReviewSummaryCard.tsx
+ * @fileoverview Individual summary card for a customer's movie review, used in admin dashboards.
  */
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {
-    CustomerMovieReviewSummary
-} from "@/domains/movieReviews/schemas/customer-reviews";
-import {
-    MovieReviewRatingStars
-} from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";
+import {CustomerMovieReviewSummary} from "@/domains/movieReviews/schemas/customer-reviews";
+import {MovieReviewRatingStars} from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {IsRecommendedCheck} from "@/views/client/movie-reviews/_comp/badges/IsRecommendedCheck.tsx";
+import {ReactElement} from "react";
 
-/**
- * Properties for the CustomerMovieReviewSummaryCard component.
- */
+/** Props for the CustomerMovieReviewSummaryCard component. */
 type CardProps = {
-    /** The unique identification code of the customer for deep-linking. */
     code: UserUniqueCode;
-    /** The summarized review data object. */
     review: CustomerMovieReviewSummary;
 };
 
-/**
- * A compact card component that displays a high-level overview of a specific movie review.
- * ---
- */
-export const CustomerMovieReviewSummaryCard = (
+/** A compact card component that displays a high-level overview of a specific movie review. */
+export function CustomerMovieReviewSummaryCard(
     {code, review}: CardProps
-) => {
+): ReactElement {
     const {
         rating,
         summary,
@@ -50,7 +39,6 @@ export const CustomerMovieReviewSummaryCard = (
     return (
         <Card>
             <CardContent className="h-full flex flex-col p-3 space-y-2">
-                {/* Header: Title and Rating */}
                 <div className='flex justify-between items-start'>
                     <div className="space-y-1">
                         <h3 className="primary-text subsection-subtitle line-clamp-1">
@@ -59,13 +47,11 @@ export const CustomerMovieReviewSummaryCard = (
                         <MovieReviewRatingStars size={15} rating={rating}/>
                     </div>
 
-                    {/* Badge: Recommendation status */}
                     {isRecommended && <IsRecommendedCheck size={15}/>}
                 </div>
 
                 <Separator/>
 
-                {/* Body: Summary and Snippet */}
                 <div className="primary-text flex-1">
                     <h2 className="font-extrabold line-clamp-1">{summary}</h2>
                     <p className="text-sm text-muted-foreground line-clamp-3">
@@ -75,7 +61,6 @@ export const CustomerMovieReviewSummaryCard = (
 
                 <Separator/>
 
-                {/* Footer: Metadata and Actions */}
                 <div className="flex justify-between items-center text-xs secondary-text">
                     <span className="inline-flex items-center gap-2">
                         Likes • {helpfulCount} | {dateWritten}
@@ -89,4 +74,4 @@ export const CustomerMovieReviewSummaryCard = (
             </CardContent>
         </Card>
     );
-};
+}

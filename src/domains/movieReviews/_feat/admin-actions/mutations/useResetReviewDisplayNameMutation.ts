@@ -3,39 +3,27 @@
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {UseFormReturn} from "react-hook-form";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {patchResetReviewDisplayName} from "@/domains/movieReviews/_feat/admin-actions/repositories";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import {toast} from "react-toastify";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {ResetReviewDisplayNameFormData} from "@/domains/movieReviews/_feat/admin-actions/forms";
+import {MovieReview, MovieReviewSchema} from "@/domains/movieReviews/schemas/model";
 import {
     CustomerReviewActionMutationKeys
 } from "@/domains/movieReviews/_feat/admin-actions/mutations/CustomerReviewActionMutationKeys.ts";
-import {
-    ResetReviewDisplayNameFormData,
-    ResetReviewDisplayNameFormValues
-} from "@/domains/movieReviews/_feat/admin-actions/forms";
-import {
-    useReviewAdminActionSuccessHelper
-} from "@/domains/movieReviews/_feat/admin-actions/mutations/useReviewAdminActionSuccessHelper.ts";
-import {MovieReview, MovieReviewSchema} from "@/domains/movieReviews/schemas/model";
 
 /** Configuration parameters for the Reset Display Name mutation. */
 type MutationParams = {
     reviewID: ObjectId;
-    form: UseFormReturn<ResetReviewDisplayNameFormValues, unknown, ResetReviewDisplayNameFormData>;
-    onSubmit?: MutationOnSubmitParams<MovieReview>;
 }
 
 /**
  * Hook to handle administrative display name corrections on movie reviews via a patch request.
  */
 export function useResetReviewDisplayNameMutation(
-    {reviewID, form, onSubmit = {}}: MutationParams
+    {reviewID}: MutationParams
 ): UseMutationResult<MovieReview, unknown, ResetReviewDisplayNameFormData> {
-    const {successMessage, onSubmitSuccess, onSubmitError, errorMessage} = onSubmit;
+    const queryClient = useQueryClient();
 
     const resetDisplayName = async (values: ResetReviewDisplayNameFormData) => {
         const {result} = await patchResetReviewDisplayName({reviewID, data: values});
@@ -50,21 +38,14 @@ export function useResetReviewDisplayNameMutation(
         return data;
     };
 
-    const onSuccess = useReviewAdminActionSuccessHelper({
-        onSubmitSuccess,
-        successMessage,
-    });
-
-    const onError = (error: unknown) => {
-        if (errorMessage) toast.error(errorMessage);
-        handleMutationFormError({error, form});
-        onSubmitError?.(error);
-    };
+    const onSuccess = () => {
+        queryClient.invalidateQueries({queryKey: ["customer"], exact: false});
+        queryClient.invalidateQueries({queryKey: ["movie_reviews"], exact: false});
+    }
 
     return useMutation({
         mutationKey: CustomerReviewActionMutationKeys.displayName({reviewID}),
         mutationFn: resetDisplayName,
         onSuccess,
-        onError,
     });
 }

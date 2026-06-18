@@ -3,14 +3,15 @@
  *
  */
 
-import {LeanUserWithEmail} from "@/domains/users/schema/user";
-import {PageFlexWrapper, PageSectionHeaderLink} from "@/views/common/_comp/page";
-import {CustomerReviewPageHeader} from "@/views/admin/customers/customer-review-page/header.tsx";
-import {CustomerMovieReview} from "@/domains/movieReviews/schemas/customer-reviews";
-import {CustomerReviewPageActionSection} from "@/views/admin/customers/customer-review-page/sections/CustomerReviewPageActionSection.tsx";
-import {PageSectionHeader} from "@/views/common/_comp/page";
-import {CustomerMovieReviewCard} from "@/views/admin/customers/_comp";
-import {AdminMovieWithRatingCard, CustomerDetailsCard} from "@/views/admin/customers/_comp";
+import {LeanUserWithEmail} from "@/domains/users";
+import {CustomerMovieReview} from "@/domains/movieReviews";
+import {AdminMovieWithRatingCard, CustomerDetailsCard, CustomerMovieReviewCard} from "@/views/admin/customers/_comp";
+import {PageFlexWrapper, PageSectionHeader, PageSectionHeaderLink} from "@/views/common/_comp/page";
+import {ReactElement} from "react";
+import {
+    CustomerReviewPageActionSection,
+    CustomerReviewPageHeader
+} from "@/views/admin/customers/customer-review-page/sections";
 
 /** Props for the CustomerReviewPageContent component. */
 type ContentProps = {
@@ -19,9 +20,9 @@ type ContentProps = {
 };
 
 /** Main content component for displaying a specific customer movie review and associated details. */
-export const CustomerReviewPageContent = (
+export function CustomerReviewPageContent(
     {customer, review}: ContentProps
-) => {
+): ReactElement {
     const {uniqueCode: customerCode} = customer;
     const {
         _id: reviewID,
@@ -59,11 +60,11 @@ export const CustomerReviewPageContent = (
                 displayName={displayName}
                 rating={rating}
             />
-            
+
             <PageSectionHeaderLink
                 text="Logs"
                 to={`/admin/customers/${customerCode}/reviews/${reviewCode}/logs`}
             />
         </PageFlexWrapper>
     );
-};
+}

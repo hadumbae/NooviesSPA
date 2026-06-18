@@ -1,5 +1,6 @@
 /**
- * @fileoverview Defines the breadcrumb navigation for the Customer Reviews page.
+ * @fileoverview Breadcrumb navigation for the Customer Reviews page.
+ *
  */
 
 import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
@@ -13,13 +14,13 @@ import {
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {ReactElement} from "react";
 
+/** Props for the CustomerReviewsPageBreadcrumbs component. */
 type NavProps = {
     customerCode: UserUniqueCode;
 };
 
 /**
- * Renders a breadcrumb navigation bar allowing users to navigate back to the
- * customer profile from the reviews view.
+ * Renders a breadcrumb navigation bar for navigating back to the customer profile.
  */
 export function CustomerReviewsPageBreadcrumbs(
     {customerCode}: NavProps

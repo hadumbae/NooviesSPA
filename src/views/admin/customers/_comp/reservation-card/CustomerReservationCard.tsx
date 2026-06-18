@@ -1,6 +1,5 @@
 /**
- * @file Interactive card component for displaying and accessing customer reservation details.
- * @filename CustomerReservationCard.tsx
+ * @fileoverview Interactive card component for displaying and accessing customer reservation details.
  */
 
 import {Reservation} from "@/domains/reservation/schema/model";
@@ -9,29 +8,25 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     ReservationStatusBadge
 } from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
-import {CustomerReservationDialog} from "@/views/admin/customers/_comp/CustomerReservationDialog.tsx";
-import {useState} from "react";
+import {
+    CustomerReservationDialog
+} from "@/views/admin/customers/_comp/reservation-card/CustomerReservationDialog.tsx";
+import {ReactElement, useState} from "react";
 import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 
-/**
- * Properties for the CustomerReservationCard component.
- * ---
- */
+/** Props for the CustomerReservationCard component. */
 type CardProps = {
-    /** The unique identifier of the customer owner. */
     code: UserUniqueCode;
-    /** The specific reservation data to render. */
     reservation: Reservation;
 };
 
 /**
- * An interactive summary card that triggers a detailed administrative dialog on click.
- * ---
+ * Summary card that triggers a detailed administrative dialog on click.
  */
-export const CustomerReservationCard = (
+export function CustomerReservationCard(
     {code, reservation}: CardProps
-) => {
+): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const {
@@ -96,4 +91,4 @@ export const CustomerReservationCard = (
             />
         </Card>
     );
-};
+}
