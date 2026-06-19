@@ -3,16 +3,11 @@
  */
 
 import {ReactElement, ReactNode, useId} from "react";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {
-    Genre,
-    GenreImageUploadFormData,
-    useGenreImageUploadForm,
-    useUploadGenreImage
-} from "@/domains/genres";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
+import {Genre, GenreImageUploadFormData, useGenreImageUploadForm, useUploadGenreImage} from "@/domains/genres";
 
 /** Props for the GenreImageUploadForm component. */
 type FormProps = {

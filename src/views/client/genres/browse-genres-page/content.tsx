@@ -1,6 +1,6 @@
 /**
  * @fileoverview Presentation component for the Browse Genres page content.
- * Responsible for the layout and responsive grid mapping of genre data.
+ *
  */
 
 import {ReactElement} from "react";
@@ -9,15 +9,13 @@ import {Genre} from "@/domains/genres/schema";
 import {BrowseGenresPageHeader} from "@/views/client/genres/browse-genres-page/header.tsx";
 import {GenreImageListCard} from "@/views/client/genres/_comp";
 
-/**
- * Props for the {@link BrowseGenresPageContent} component.
- */
+/** Props for the BrowseGenresPageContent component. */
 type ContentProps = {
     genres: Genre[];
 };
 
 /**
- * Renders the actual content of the genres page once data is successfully loaded.
+ * Renders the responsive grid of genre cards for the browse page.
  */
 export function BrowseGenresPageContent(
     {genres}: ContentProps

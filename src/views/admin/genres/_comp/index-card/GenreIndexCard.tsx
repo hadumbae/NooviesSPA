@@ -6,9 +6,10 @@ import {ReactElement} from 'react';
 import {Clapperboard} from "lucide-react";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import usePaginationSearchParams from "@/common/_feat/fetch-pagination-search-params/hooks/usePaginationSearchParams.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {Genre} from "@/domains/genres";
+import usePaginationSearchParams
+    from "@/common/_feat/fetch-pagination-search-params/hooks/usePaginationSearchParams.ts";
 
 /** Props for the {@link GenreIndexCard} component. */
 type IndexProps = {
@@ -55,7 +56,7 @@ export function GenreIndexCard(
 
                 <section className="flex items-center gap-2 text-muted-foreground">
                     <span className="text-sm font-medium">{movieCount}</span>
-                    <Clapperboard size={15} aria-hidden="true" />
+                    <Clapperboard size={15} aria-hidden="true"/>
                 </section>
             </CardContent>
         </Card>

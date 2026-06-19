@@ -2,16 +2,15 @@
  * @fileoverview Form select component for genres integrated with React Hook Form.
  */
 
+import {ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
-import {useFetchGenres} from "@/domains/genres/_feat/crud-hooks/useFetchGenres.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
-import {ReactElement} from "react";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {Genre, GenreQueryOptions, GenreSchema} from "@/domains/genres/schema";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
+import {Genre, GenreQueryOptions, GenreSchema, useFetchGenres} from "@/domains/genres";
 
 /** Props for the GenreMultiSelect component. */
 type SelectProps<TValues extends FieldValues> = Omit<HookFormInputControlProps<TValues>, "control"> & {

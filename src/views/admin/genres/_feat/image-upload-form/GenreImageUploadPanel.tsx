@@ -4,6 +4,7 @@
 
 import {ReactElement, ReactNode} from "react";
 import {
+    Button,
     Sheet,
     SheetContent,
     SheetDescription,
@@ -11,13 +12,12 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet";
-import {Button} from "@/common/components/ui/button.tsx";
+} from "@/common/components/ui";
 import {UIOpenStateProps} from "@/common/types";
-import {GenreImageUploadFormView} from "@/views/admin/genres/_feat/image-upload-form/GenreImageUploadFormView.tsx";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import {useLockForFormUI} from "@/common/hooks/forms/useLockForFormUI.ts";
+import {GenreImageUploadFormView} from "@/views/admin/genres/_feat/image-upload-form/GenreImageUploadFormView.tsx";
 
 /** Props for the GenreImageUploadPanel component. */
 type PanelProps = UIOpenStateProps & {

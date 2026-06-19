@@ -3,20 +3,20 @@
 import {ReactElement} from "react";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {MovieDetails} from "@/domains/movies";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {GenreDetailsCard} from "@/views/admin/genres/pages/genre-details/detailsCard.tsx";
 import {MovieIndexCard} from "@/views/admin/movies/_comp/index-list-display";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
-import {GenreDetailsPageActions} from "@/views/admin/genres/pages/genre-details/actions.tsx";
-import {
-    GenreDetailsPageImageSection
-} from "@/views/admin/genres/pages/genre-details/sections/GenreDetailsPageImageSection.tsx";
 import {PageHeader} from "@/views/common/_comp";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {Ellipsis} from "lucide-react";
-import {GenreDetailsPageBreadcrumbs, GenreDetailsUIToggles} from "@/views/admin/genres";
+import {Genre} from "@/domains/genres";
+import {
+    GenreDetailsPageActions,
+    GenreDetailsPageBreadcrumbs,
+    GenreDetailsPageImageSection
+} from "@/views/admin/genres/pages/genre-details/sections";
+import {GenreDetailsCard, GenreDetailsUIToggles} from "@/views/admin/genres/pages/genre-details/elements";
 
 /** Props for the GenreDetailsPageContent component. */
 type ContentProps = {
@@ -73,8 +73,17 @@ export function GenreDetailsPageContent(
                 }
             </section>
 
-            <PaginationRangeButtons page={page} perPage={perPage} totalItems={totalItems} setPage={setPage}/>
-            <GenreDetailsPageActions className="hidden" genre={genre}/>
+            <PaginationRangeButtons
+                page={page}
+                perPage={perPage}
+                totalItems={totalItems}
+                setPage={setPage}
+            />
+
+            <GenreDetailsPageActions
+                className="hidden"
+                genre={genre}
+            />
         </PageFlexWrapper>
     );
 }

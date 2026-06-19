@@ -1,6 +1,6 @@
 /**
- * @fileoverview Administrative page for managing Genres.
- * Handles pagination, search param parsing, and validated data fetching.
+ * @fileoverview Administrative page for managing and listing movie genres.
+ *
  */
 
 import {ReactElement} from 'react';
@@ -11,13 +11,14 @@ import {useFetchPaginatedGenres} from "@/domains/genres/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {GenreIndexPageContent} from "@/views/admin/genres/pages/index-page/content.tsx";
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
-import {GenreQueryOptionSchema, PaginatedGenres, PaginatedGenresSchema} from "@/domains/genres/schema";
+import {Genre, GenreQueryOptionSchema, GenreSchema} from "@/domains/genres/schema";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
+import {PaginatedItems} from "@/common/types";
 
 const GENRES_PER_PAGE = 20;
 
 /**
- * The Genre Index Page entry point.
- * Orchestrates data fetching for the genre management table including pagination and filters.
+ * Entry point for the Genre management index page.
  */
 export function GenreIndexPage(): ReactElement {
     useTitle("Genres");
@@ -30,13 +31,13 @@ export function GenreIndexPage(): ReactElement {
         page,
         perPage: GENRES_PER_PAGE,
         queries: searchParams,
-        schema: PaginatedGenresSchema,
+        schema: generatePaginationSchema(GenreSchema),
         config: {virtuals: true, populate: true},
     });
 
     return (
         <QueryDataLoader query={query}>
-            {({totalItems, items}: PaginatedGenres) => (
+            {({totalItems, items}: PaginatedItems<Genre>) => (
                 <GenreIndexPageContent
                     genres={items}
                     totalItems={totalItems}

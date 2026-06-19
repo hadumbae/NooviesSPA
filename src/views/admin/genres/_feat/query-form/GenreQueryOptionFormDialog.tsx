@@ -4,23 +4,23 @@
 
 import {ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
+import {cn} from "@/common/lib/utils.ts";
 import {ListFilter} from "lucide-react";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormSortToggle from "@/common/components/forms/HookFormSortToggle.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import {useAutoFormSubmit} from "@/common/_feat/submit-data";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {
+    Button,
     Dialog,
     DialogContent,
     DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui/dialog";
-import {Button} from "@/common/components/ui/button.tsx";
-import {useAutoFormSubmit} from "@/common/_feat/submit-data";
-import {cn} from "@/common/lib/utils.ts";
-import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+} from "@/common/components/ui";
 
 /** Props for the GenreQueryOptionFormDialog component. */
 type FormViewProps = {

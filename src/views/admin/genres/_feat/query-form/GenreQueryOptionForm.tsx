@@ -1,16 +1,14 @@
 /**
- * @fileoverview Container component for managing Genre query filters.
- * Synchronizes form state with URL search parameters for persistent filtering.
+ * @fileoverview Container component for managing Genre query filters and URL synchronization.
  */
 
 import {ReactElement, ReactNode, useId} from 'react';
-import {Form} from "@/common/components/ui/form.tsx";
 import {FormOptions} from "@/common/_feat/submit-data";
-import {GenreQueryOptionFormStarter} from "@/domains/genres/_feat/query-form/schema.ts";
-import {useGenreQueryOptionForm} from "@/domains/genres/_feat/query-form/useGenreQueryOptionForm.ts";
+import {useGenreQueryOptionForm} from "@/domains/genres/_feat/query-form/form/useGenreQueryOptionForm.ts";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
-import {GenreQueryOptions, GenreQueryOptionSchema} from "@/domains/genres/schema";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
+import {GenreQueryOptionFormStarter, GenreQueryOptions, GenreQueryOptionSchema} from "@/domains/genres";
+import {Form} from "@/common/components/ui";
 
 /** Props for the {@link GenreQueryOptionForm} component. */
 type ContainerProps = FormOptions<GenreQueryOptionFormStarter> & {
@@ -19,7 +17,7 @@ type ContainerProps = FormOptions<GenreQueryOptionFormStarter> & {
 };
 
 /**
- * Orchestrates the Genre filter form logic.
+ * Orchestrates the Genre filter form logic and synchronizes state with search parameters.
  */
 export function GenreQueryOptionForm(
     {children, presetValues, className}: ContainerProps
@@ -44,4 +42,3 @@ export function GenreQueryOptionForm(
         </BaseFormContextProvider>
     );
 }
-

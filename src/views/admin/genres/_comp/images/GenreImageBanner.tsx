@@ -1,10 +1,11 @@
 /**
  * @fileoverview Component for displaying a genre banner image with fallback states.
  */
+
 import {ReactElement, useState} from "react";
-import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
-import {cn} from "@/common/lib/utils.ts";
 import {ImageOff} from "lucide-react";
+import {cn} from "@/common/lib/utils.ts";
+import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
 
 /** Props for the GenreImageBanner component. */
 type BannerProps = {

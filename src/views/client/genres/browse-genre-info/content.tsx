@@ -1,6 +1,5 @@
 /**
  * @fileoverview Presentational content for the client-facing Genre Detail page.
- * Responsibly maps genre metadata and movie collections into a structured UI.
  */
 
 import {ReactElement} from "react";
@@ -9,14 +8,12 @@ import {
     BrowseMovieOverviewCard
 } from "@/views/client/movies/browse-movies/browse-movie-overview/BrowseMovieOverviewCard.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import {Genre} from "@/domains/genres/schema";
 import {BrowseGenreInfoPageHeader} from "@/views/client/genres/browse-genre-info/header.tsx";
-import {MovieWithGenres} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
+import {Genre} from "@/domains/genres";
+import {MovieWithGenres} from "@/domains/movies";
 import {GenreInfoBanner} from "@/views/client/genres/_comp";
 
-/**
- * Props for the {@link BrowseGenreInfoPageContent} component.
- */
+/** Props for the BrowseGenreInfoPageContent component. */
 type ContentProps = {
     genre: Genre;
     movies: MovieWithGenres[];
@@ -26,9 +23,7 @@ type ContentProps = {
     setPage: (page: number) => void;
 };
 
-/**
- * Renders the primary layout for the Genre Detail view.
- */
+/** Renders the primary layout for the Genre Detail view. */
 export function BrowseGenreInfoPageContent(
     {genre, movies, totalMovies, page, perPage, setPage}: ContentProps
 ): ReactElement {
@@ -39,7 +34,7 @@ export function BrowseGenreInfoPageContent(
             <GenreInfoBanner genre={genre}/>
 
             <section className="space-y-4">
-                <PageSectionHeader text="Movies" />
+                <PageSectionHeader text="Movies"/>
 
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                     {movies.map(movie => (

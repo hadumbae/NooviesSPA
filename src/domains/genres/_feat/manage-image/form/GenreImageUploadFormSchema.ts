@@ -1,5 +1,6 @@
-/** @fileoverview Zod schemas and types for the genre image upload form. */
-
+/**
+ * @fileoverview Zod schemas and types for the genre image upload form.
+ */
 
 import {z} from "zod";
 import {refineRequireImageFile} from "@/common/_feat/handle-image-upload";
@@ -14,14 +15,12 @@ export const GenreImageUploadBaseFormSchema = z.object({
 /** Type definition for the base genre image upload form. */
 export type GenreImageUploadBaseForm = z.infer<typeof GenreImageUploadBaseFormSchema>;
 
-/**
- * Form schema for genre image upload with file validation refinements.
- */
+/** Form schema for genre image upload with file validation refinements. */
 export const GenreImageUploadFormSchema = GenreImageUploadBaseFormSchema
     .superRefine(refineRequireImageFile({field: "image"}));
 
-/** Type definition for the validated genre image upload form. */
+/** Validated data for the genre image upload form. */
 export type GenreImageUploadFormData = z.infer<typeof GenreImageUploadFormSchema>;
 
-/** Type definition for the raw genre image upload form values. */
+/** Raw input values for the genre image upload form. */
 export type GenreImageUploadFormValues = AnyValues<GenreImageUploadFormData>;

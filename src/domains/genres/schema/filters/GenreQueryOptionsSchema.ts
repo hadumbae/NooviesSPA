@@ -1,18 +1,13 @@
 /**
- * @fileoverview Zod schemas for validating genre query parameters.
- * These schemas define the shape and validation rules for both filtering
- * and sorting options used in genre-related queries.
+ * @fileoverview Zod schemas for validating genre query parameters including filtering and sorting options.
  */
 
 import {z} from "zod";
-import {GenreQueryFilterSchema, GenreQuerySortSchema} from "@/domains/genres/schema";
+import {GenreQueryFilterSchema} from "@/domains/genres/schema/filters/GenreQueryFilterSchema";
+import {GenreQuerySortSchema} from "@/domains/genres/schema/filters/GenreQuerySortSchema";
 
-/**
- * Combined schema including both filter and sorting options for genre queries.
- */
+/** Combined schema including both filter and sorting options for genre queries. */
 export const GenreQueryOptionSchema = GenreQueryFilterSchema.merge(GenreQuerySortSchema);
 
-/**
- * Combined type representing all valid query parameters (both filtering and sorting).
- */
+/** Combined type representing all valid query parameters for genres. */
 export type GenreQueryOptions = z.infer<typeof GenreQueryOptionSchema>;

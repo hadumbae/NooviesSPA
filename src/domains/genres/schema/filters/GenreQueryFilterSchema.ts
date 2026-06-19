@@ -1,24 +1,15 @@
 /**
- * @fileoverview Zod schema and type definitions for Genre filtering options.
- * Handles validation for search criteria used in genre collection queries.
+ * @fileoverview Zod schema and type definitions for genre filtering options.
  */
 
 import {z} from "zod";
-import {StringValueSchema} from "@/common/schema/strings/simple-strings/StringValueSchema.ts";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {GenreNameSchema} from "@/domains/genres/schema/fields";
 
-/**
- * Schema representing valid filter parameters for a genre query.
- */
+/** Zod schema for validating genre query filter parameters. */
 export const GenreQueryFilterSchema = z.object({
-    name: preprocessEmptyStringToUndefined(
-        StringValueSchema
-            .max(50, "Must be 255 characters or less.")
-            .optional()
-    ),
+    name: preprocessEmptyStringToUndefined(GenreNameSchema.optional()).optional(),
 });
 
-/**
- * Type representing valid filter parameters for genre queries.
- */
+/** Type representing valid filter parameters for genre queries. */
 export type GenreQueryFilters = z.infer<typeof GenreQueryFilterSchema>;

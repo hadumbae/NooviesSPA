@@ -1,17 +1,20 @@
 import {
-    create, destroy,
+    create,
+    destroy,
     find,
     findByID,
+    findBySlug,
     paginated,
-    query, update
-} from "@/domains/genres/_feat/crud/GenreCRUDRepository.ts";
+    query,
+    update
+} from "@/domains/genres/_feat/crud/repository.ts";
 import {GenreCRUDBaseURL} from "@/domains/genres/_feat/crud/baseURL.ts";
-
 
 export {
     GenreCRUDBaseURL,
     find,
     findByID,
+    findBySlug,
     paginated,
     query,
     create,

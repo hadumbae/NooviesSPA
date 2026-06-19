@@ -5,9 +5,9 @@
 import {ReactElement, ReactNode} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
-import {useDeleteGenre} from "@/domains/genres/_feat/crud-hooks/useDeleteGenre.ts";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {UIOpenStateProps} from "@/common/types";
+import {useDeleteGenre} from "@/domains/genres";
 
 /** Props for the {@link GenreDeleteWarningDialog} component. */
 type DialogProps = UIOpenStateProps & {

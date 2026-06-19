@@ -15,19 +15,19 @@ export const AdminCustomerRoutes: RouteObject[] = [
         element: <AdminLayout/>,
         children: [
             {
-                path: '/:uniqueCode/profile',
+                path: ':uniqueCode/profile',
                 element: <CustomerProfilePage/>
             },
             {
-                path: '/:uniqueCode/reviews',
+                path: ':uniqueCode/reviews',
                 element: <CustomerReviewsPage/>
             },
             {
-                path: '/:uniqueCode/reviews/:reviewCode',
+                path: ':uniqueCode/reviews/:reviewCode',
                 element: <CustomerReviewPage/>
             },
             {
-                path: '/:uniqueCode/reviews/:reviewCode/logs',
+                path: ':uniqueCode/reviews/:reviewCode/logs',
                 element: <CustomerReviewLogsPage/>
             },
         ]

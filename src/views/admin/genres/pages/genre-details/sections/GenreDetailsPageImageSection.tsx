@@ -12,7 +12,7 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {Plus, Trash} from "lucide-react";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {GenreDetailsUIPendingStateContext, GenreDetailsUISetterContext} from "@/domains/genres/context";
+import {GenreDetailsUIPendingStateContext, GenreDetailsUISetterContext} from "@/domains/genres/_feat/page-context";
 
 /** Props for the GenreDetailsPageImageSection component. */
 type SectionProps = {
