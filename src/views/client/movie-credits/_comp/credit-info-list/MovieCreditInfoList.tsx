@@ -1,38 +1,29 @@
 /**
- * @file List component for displaying movie credits.
- * @filename MovieCreditInfoList.tsx
+ * @fileoverview List component for displaying movie credits.
  */
 
-import MovieCreditInfoListItem from "@/views/client/movie-credits/components/lists/MovieCreditInfoListItem.tsx";
+import {
+    MovieCreditInfoListItem
+} from "@/views/client/movie-credits/_comp/credit-info-list/MovieCreditInfoListItem.tsx";
 import {cn} from "@/common/lib/utils.ts";
-
 import {CreditExceptMovie} from "@/domains/moviecredit";
+import {ReactElement} from "react";
 
-/**
- * Props for {@link MovieCreditInfoList}.
- */
+/** Props for the MovieCreditInfoList component. */
 type ListProps = {
-    /** Whether avatars should be hidden in list items */
     hideAvatar?: boolean;
-
-    /** Credits rendered in the list */
     credits: CreditExceptMovie[];
-
-    /** Optional CSS classes applied to the list container */
     className?: string;
 }
 
 /**
  * Renders a list of movie credits.
  */
-const MovieCreditInfoList = (
+export function MovieCreditInfoList(
     {credits, hideAvatar, className}: ListProps
-) => {
+): ReactElement {
     return (
-        <ul className={cn(
-            "list-none border shadow-md",
-            className
-        )}>
+        <ul className={cn("list-none border shadow-md", className)}>
             {
                 credits.map((credit, index) => (
                     <MovieCreditInfoListItem
@@ -47,6 +38,5 @@ const MovieCreditInfoList = (
             }
         </ul>
     );
-};
+}
 
-export default MovieCreditInfoList;

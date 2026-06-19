@@ -4,7 +4,9 @@
 
 import { SectionHeaderCSS } from "@/common/constants/css/TextCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import MovieCreditInfoList from "@/views/client/movie-credits/components/lists/MovieCreditInfoList.tsx";
+import {
+    MovieCreditInfoList
+} from "@/views/client/movie-credits/_comp/credit-info-list/MovieCreditInfoList.tsx";
 import {
     CreditDisplayOrderCategory
 } from "@/domains/moviecredit/constants/CreditCategoryDisplayOrderConstant.ts";
