@@ -1,16 +1,12 @@
 /**
- * @file Defines the canonical UI display order for movie credit categories.
- * @filename CreditCategoryDisplayOrderConstant.ts
+ * @fileoverview Defines the canonical UI display order for movie credit categories.
+ *
  */
 
-
-import {RoleTypeCategory} from "@/domains/roletype/schema/fields/RoleTypeCategorySchema.ts";
+import { RoleTypeCategory } from "@/domains/roletype/schema";
 
 /**
  * Canonical ordering used when rendering grouped credit sections in the UI.
- *
- * Includes the synthetic `"Cast"` category which is not part of
- * {@link RoleTypeCategory} but is displayed alongside crew categories.
  */
 export const CreditCategoryDisplayOrderConstant: readonly (RoleTypeCategory | "Cast")[] = [
     "Writer",
@@ -35,7 +31,6 @@ export const CreditCategoryDisplayOrderConstant: readonly (RoleTypeCategory | "C
 ] as const;
 
 /**
- * Union type representing all categories that can appear in the
- * credit display ordering.
+ * Union type of categories available in the credit display ordering.
  */
 export type CreditDisplayOrderCategory = typeof CreditCategoryDisplayOrderConstant[number];

@@ -3,17 +3,20 @@
  */
 
 import {ReactElement} from "react";
-import {PageSectionHeader} from "@/views/common/_comp/page";
-import {useFetchPaginatedMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks";
-import {MovieCreditDetails, MovieCreditDetailsSchema} from "@/domains/moviecredit/schemas";
-import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {PaginatedItems} from "@/common/types";
-import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {MoviePersonDetailsCard} from "@/views/admin/movie-credits/_feat/movie-person-card";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
+import {RoleTypeDepartment} from "@/domains/roletype";
+import {
+    MovieCreditDetails,
+    MovieCreditDetailsSchema,
+    useFetchPaginatedMovieCredits,
+} from "@/domains/moviecredit/schemas";
+import {PageSectionHeader} from "@/views/common/_comp/page";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {MovieCastCreditCard} from "@/views/admin/movie-credits/_feat";
 
 /** Props for the MoviePeoplePageCreditSection component. */
 type SectionProps = {
@@ -38,7 +41,7 @@ export function MoviePeoplePageCreditSection(
 
     return (
         <section className={cn("space-y-4", className)}>
-            <PageSectionHeader text="Credits" />
+            <PageSectionHeader text="Credits"/>
 
             <QueryDataLoader query={query}>
                 {({totalItems, items: credits}: PaginatedItems<MovieCreditDetails>) => {
@@ -55,10 +58,9 @@ export function MoviePeoplePageCreditSection(
                         <div className="space-y-5">
                             <div className="grid grid-cols-1 gap-2">
                                 {credits.map((credit) => (
-                                    <MoviePersonDetailsCard
-                                        key={credit._id}
-                                        credit={credit}
-                                    />
+                                    credit.department === "CREW"
+                                        ? <MovieCrewCreditCard key={credit._id} credit={credit}/>
+                                        : <MovieCastCreditCard key={credit._id} credit={credit}/>
                                 ))}
                             </div>
 
