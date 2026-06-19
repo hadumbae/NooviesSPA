@@ -28,7 +28,7 @@ export function MovieCreditInfoListItem(
         : displayRoleName ?? roleType.roleName;
 
     return (
-        <li className={cn(className, "flex items-center space-x-5 px-4 py-2")}>
+        <li className={cn(className, "primary-text flex items-center space-x-5 px-4 py-2")}>
             {!hideAvatar && (
                 <LoggedLink to={`/browse/persons/${personSlug}`}>
                     <PersonProfileAvatar name={personName} imageLink={profileImage?.secure_url}/>
@@ -36,13 +36,13 @@ export function MovieCreditInfoListItem(
             )}
 
             <LoggedLink className="w-48 md:w-64" to={`/browse/persons/${personSlug}`}>
-                <span className="primary-text text-sm md:text-base font-bold hover:underline underline-offset-4">
+                <span className="text-sm md:text-base font-bold hover:underline underline-offset-4">
                     {creditedAs ?? personName}
                 </span>
             </LoggedLink>
 
             <div className="flex-1">
-                <span className="primary-text text-sm md:text-base">
+                <span className="text-sm md:text-base">
                     {displayText}
                 </span>
             </div>

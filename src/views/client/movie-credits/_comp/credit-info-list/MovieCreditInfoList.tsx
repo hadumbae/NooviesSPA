@@ -31,7 +31,7 @@ export function MovieCreditInfoList(
                         credit={credit}
                         hideAvatar={hideAvatar}
                         className={cn(
-                            !(index % 2) && "bg-gray-100"
+                            !(index % 2) && "bg-gray-100 secondary-text"
                         )}
                     />
                 ))
