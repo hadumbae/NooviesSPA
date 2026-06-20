@@ -2,18 +2,15 @@
  * @fileoverview Data fetching hook for the administrative person profile view.
  */
 
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {
-    getFetchPersonDetailsViewData,
-    PersonDetailsViewData,
-    PersonDetailsViewSchema
-} from "@/domains/persons/_feat/admin-view-data";
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
-import {PersonAdminViewQueryKeys} from "@/domains/persons/_feat/admin-view-data/fetch/querykeys.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {PersonAdminViewQueryKeys} from "@/domains/persons/_feat/admin-view-data/fetch/querykeys.ts";
+import {getFetchPersonDetailsViewData} from "@/domains/persons/_feat/admin-view-data/repository";
+import {PersonDetailsViewData, PersonDetailsViewSchema} from "@/domains/persons/_feat/admin-view-data/schema";
 
 /**
  * Configuration for fetching person detail view data.

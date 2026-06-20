@@ -1,53 +1,37 @@
 /**
  * @fileoverview Mutation hook for removing a person's profile image.
+ *
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {toast} from "react-toastify";
-import {deleteRemoveProfileImage} from "@/domains/persons/_feat/remove-profile-image/repositories/repository.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {deleteRemoveProfileImage} from "@/domains/persons/_feat/remove-profile-image/repository";
 import {
     PersonRemoveProfileImageMutationKeys
 } from "@/domains/persons/_feat/remove-profile-image/mutations/mutationKeys.ts";
-import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 
-/**
- * Parameters for the profile image removal mutation.
- */
-type ImageSubmitParams = {
+/** Parameters for the profile image removal mutation. */
+type DeleteValue = {
     _id: ObjectId;
-    onDelete: MutationResponseConfig;
 };
 
 /**
- * Custom hook to handle the deletion of a person's profile image.
+ * Hook to handle the deletion of a person's profile image.
  */
-export function usePersonProfileImageRemoveMutation({_id, onDelete}: ImageSubmitParams) {
-    const {onSubmitSuccess, onSubmitError, successMessage, errorMessage} = onDelete;
+export function usePersonProfileImageRemoveMutation() {
     const queryClient = useQueryClient();
 
-    const removeImage = async () => {
+    const removeImage = async ({_id}: DeleteValue) => {
         await deleteRemoveProfileImage({_id});
     }
 
     const onSuccess = async () => {
         queryClient.invalidateQueries({queryKey: ["fetch_single_person"], exact: false})
-
-        successMessage && toast.success(successMessage);
-        onSubmitSuccess?.();
-    }
-
-    const onError = (error: unknown) => {
-        errorMessage && toast.error(errorMessage);
-        handleMutationResponseError({error, displayMessage: "Failed to remove profile image."});
-        onSubmitError?.(error);
     }
 
     return useMutation({
-        mutationKey: PersonRemoveProfileImageMutationKeys.remove({_id}),
+        mutationKey: PersonRemoveProfileImageMutationKeys.remove(),
         mutationFn: removeImage,
         onSuccess,
-        onError,
     });
 }

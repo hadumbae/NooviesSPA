@@ -2,10 +2,10 @@
  * @fileoverview Avatar component for displaying a person's profile image with initials fallback.
  */
 
-import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
+import {ReactElement} from "react";
+import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui";
 import {URLString} from "@/common/schema/strings/URLStringSchema.ts";
 import getInitials from "@/common/utility/formatters/getInitials.ts";
-import {ReactElement} from "react";
 
 /**
  * Props for the PersonProfileAvatar component.

@@ -3,17 +3,15 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import {Dialog, DialogContent, DialogTrigger} from "@/common/components/ui/dialog.tsx";
+import {buttonVariants, Dialog, DialogContent, DialogTrigger} from "@/common/components/ui";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import {buttonVariants} from "@/common/components/ui/button.tsx";
-import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import {PersonCredit} from "@/domains/moviecredit/_feat/person-credit/schema/PersonCreditSchema.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {SROnly} from "@/views/common/_comp/screen-readers";
+import {Movie, MovieDetails} from "@/domains/movies/schema/movie";
+import {PersonCredit} from "@/domains/moviecredit";
 
 /** Props for the PersonDetailsCreditMovieDialog component. */
 type MovieDialogProps = {
@@ -44,10 +42,7 @@ export function PersonDetailsCreditMovieDialog(
                 <section className="flex items-center space-x-2">
                     <SROnly text={`Movie Basic Details : ${title}`}/>
 
-                    <MoviePosterImage
-                        url={posterImage?.secure_url}
-                        className="h-36 aspect-[2/3]"
-                    />
+                    <MoviePosterImage url={posterImage?.secure_url} className="h-36 aspect-[2/3]"/>
 
                     <div className="flex-grow flex flex-col space-y-1">
                         <h2 className="primary-text font-bold text-lg">
@@ -70,10 +65,10 @@ export function PersonDetailsCreditMovieDialog(
                     <p className="secondary-text">{creditDisplay}</p>
                 </section>
 
-                <LoggedHoverLink to={`/admin/movies/get/${slug}`} className={cn(
-                    buttonVariants({variant: "primary"}),
-                    "w-full bg-primary"
-                )}>
+                <LoggedHoverLink
+                    to={`/admin/movies/get/${slug}`}
+                    className={cn(buttonVariants({variant: "primary"}), "w-full")}
+                >
                     <Search size={12}/> <span>Movie</span>
                 </LoggedHoverLink>
             </DialogContent>

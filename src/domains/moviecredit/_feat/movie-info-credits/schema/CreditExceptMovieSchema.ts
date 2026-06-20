@@ -6,7 +6,8 @@ import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {RoleTypeSchema} from "@/domains/roletype/schema/model/RoleTypeSchema.ts";
 import {MovieCreditCastSchema, MovieCreditCrewSchema} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
-import {PersonSchema} from "@/domains/persons/schema/person/Person.schema.ts";
+
+import {PersonSchema} from "@/domains/persons/schema/person/PersonSchema";
 
 /**
  * Relation fields populated while preserving movie as an identifier.

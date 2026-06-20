@@ -3,14 +3,14 @@
  */
 
 import {ReactElement} from "react";
-import {PersonCredit} from "@/domains/moviecredit/_feat/person-credit";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {PersonCredit} from "@/domains/moviecredit";
+import {Card, CardContent} from "@/common/components/ui";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
+import {Info} from "lucide-react";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink";
 import {
     PersonDetailsCreditMovieDialog
 } from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditMovieDialog.tsx";
-import {Info} from "lucide-react";
 
 /** Props for the PersonDetailsCreditCard component. */
 type CardProps = {
@@ -34,10 +34,7 @@ export function PersonDetailsCreditCard(
     return (
         <Card key={_id}>
             <CardContent className="flex items-center p-0">
-                <MoviePosterImageDialog
-                    className="h-36 rounded-r-none"
-                    url={posterImage?.secure_url}
-                />
+                <MoviePosterImageDialog className="h-36 rounded-r-none" url={posterImage?.secure_url}/>
 
                 <div className="flex-1 flex items-center space-x-2 py-3 px-5">
                     <div className="flex-1 space-y-2">

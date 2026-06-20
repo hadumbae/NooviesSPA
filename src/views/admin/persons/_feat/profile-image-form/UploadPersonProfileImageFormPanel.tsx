@@ -1,28 +1,26 @@
 /**
- * @fileoverview Slide-over panel containing the profile image upload form.
+ * @fileoverview Slide-over panel containing the profile image upload form for a person.
  */
 
 import {ReactElement, ReactNode} from 'react';
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import {useFormContext} from "react-hook-form";
+import {HookFormFileInput} from "@/common/components/forms/HookFormFileInput.tsx";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {BaseFormContext} from "@/common/_feat/generic-form-context";
+import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import {cn} from "@/common/lib/utils.ts";
 import {
+    Button,
+    ScrollArea,
     Sheet,
     SheetContent,
     SheetDescription,
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet";
-import {HookFormFileInput} from "@/common/components/forms/HookFormFileInput.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
-import {useFormContext} from "react-hook-form";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {BaseFormContext} from "@/common/_feat/generic-form-context";
-import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
-import {cn} from "@/common/lib/utils.ts";
+} from "@/common/components/ui";
 
-/**
- * Props for the UploadPersonProfileImageFormPanel component.
- */
+/** Props for the UploadPersonProfileImageFormPanel component. */
 type FormPanelProps = {
     children?: ReactNode;
     className?: string;
@@ -31,7 +29,7 @@ type FormPanelProps = {
 };
 
 /**
- * A side-drawer component for submitting a person's profile image.
+ * A side-drawer component for submitting a person's profile image. Requires BaseFormContext.
  */
 export function UploadPersonProfileImageFormPanel(
     {children, className, isOpen, setIsOpen}: FormPanelProps
@@ -55,18 +53,9 @@ export function UploadPersonProfileImageFormPanel(
 
                 <ScrollArea className="flex-grow px-1 mt-6">
                     <div className={cn("space-y-4", className)}>
-                        <HookFormFileInput
-                            name="profileImage"
-                            label="Profile Image"
-                            control={control}
-                        />
+                        <HookFormFileInput name="profileImage" label="Profile Image" control={control}/>
 
-                        <Button
-                            form={formID}
-                            className="w-full"
-                            variant="default"
-                            type="submit"
-                        >
+                        <Button form={formID} className="w-full" variant="primary" type="submit">
                             {isPending ? <AnimatedLoader/> : "Submit"}
                         </Button>
                     </div>

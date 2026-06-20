@@ -1,26 +1,14 @@
 /**
- * @file SlugString.ts
- *
- * Zod schema and inferred type for slug strings.
- *
- * Slugs are human-readable, URL-safe identifiers typically derived
- * from entity names and constrained to a reasonable length.
+ * @fileoverview Zod schema and inferred type for URL-safe slug strings.
  */
 
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {z} from "zod";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+
+/** Schema for non-empty strings with a maximum length of 75 characters. */
+export const SlugStringSchema = NonEmptyStringSchema.max(75, "Max. 75 Chars");
 
 /**
- * Schema for slug strings.
- *
- * Constraints:
- * - Non-empty string
- * - Maximum length of 75 characters
- */
-export const SlugStringSchema =
-    NonEmptyStringSchema.max(75, "Slugs must be no more than 75 characters.");
-
-/**
- * Inferred TypeScript type for {@link SlugStringSchema}.
+ * Inferred TypeScript type for SlugStringSchema.
  */
 export type SlugString = z.infer<typeof SlugStringSchema>;

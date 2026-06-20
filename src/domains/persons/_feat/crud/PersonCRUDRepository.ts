@@ -1,8 +1,7 @@
 /**
- * @fileoverview Administrative repository for Person CRUD operations.
- * Leverages standardized higher-order CRUD handlers to provide a consistent
- * interface for managing Person entities in the admin dashboard.
+ * @fileoverview Repository for Person CRUD operations using standardized handlers.
  */
+
 
 import {
     handleCreate,
@@ -19,16 +18,16 @@ import {PersonCRUDBaseURL} from "@/domains/persons/_feat/crud/baseURL.ts";
 /** Retrieves all Person records without pagination (use with caution for large datasets). */
 export const find = handleFind(PersonCRUDBaseURL);
 
-/** Retrieves a single Person record by its unique database ID. */
+/** Retrieves a single Person record by its unique database identifier. */
 export const findByID = handleFindByID(PersonCRUDBaseURL);
 
-/** Retrieves a single Person record by its SEO-friendly URL slug. */
+/** Retrieves a single Person record by its URL slug. */
 export const findBySlug = handleFindBySlug(PersonCRUDBaseURL);
 
-/** Retrieves a paginated list of Person records, typically used for administrative tables. */
+/** Retrieves a paginated list of Person records for administrative tables. */
 export const paginated = handlePaginated(PersonCRUDBaseURL);
 
-/** Executes a filtered search or complex query against the Person collection. */
+/** Executes a filtered search against the Person collection. */
 export const query = handleQuery(PersonCRUDBaseURL);
 
 /** persists a new Person entity to the database. */

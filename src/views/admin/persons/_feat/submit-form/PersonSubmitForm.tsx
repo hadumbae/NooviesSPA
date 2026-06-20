@@ -5,7 +5,6 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import {
     PersonFormData,
     PersonFormValues,
@@ -15,6 +14,8 @@ import {useSubmitPersonData} from "@/domains/persons/_feat/crud-hooks";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {FormOptions, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {Form} from "@/common/components/ui/form.tsx";
+
+import {Person} from "@/domains/persons/schema/person/PersonSchema";
 
 /**
  * Props for the PersonSubmitForm component.

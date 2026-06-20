@@ -1,32 +1,23 @@
 /**
- * @fileoverview Validation schemas for uploading a person's profile image.
+ * @fileoverview Validation schemas and types for the person profile image upload form.
  */
 
 import {z} from "zod";
-import generateFormValueSchema from "@/common/utility/schemas/generateFormValueSchema.ts";
+import {AnyValues} from "@/common/types";
 
-/** Allowed MIME types for profile images. */
+/** List of MIME types allowed for profile image uploads. */
 const ACCEPTED_PROFILE_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
-/** Base schema defining the raw file field. */
-const PersonProfileImageFormBaseSchema = z.object({
-    /** The image file selected via the file input. */
+/** Base Zod schema for the profile image form. */
+export const PersonProfileImageFormBaseSchema = z.object({
     profileImage: z.instanceof(File, {message: "Required."}),
 });
 
-/** Extended schema for initial form state management. */
-export const PersonProfileImageFormValuesSchema = generateFormValueSchema(PersonProfileImageFormBaseSchema);
-
-/** Validated type for initial profile image form values. */
-export type PersonProfileImageFormValues = z.infer<typeof PersonProfileImageFormValuesSchema>;
-
-/** Comprehensive form schema with specific file validation. */
+/** Zod schema for validating profile image file constraints and types. */
 export const PersonProfileImageFormSchema = PersonProfileImageFormBaseSchema.superRefine((values, ctx) => {
     const {profileImage} = values;
     const code = "custom";
     const path = ["profileImage"];
-
-    console.log("Here!");
 
     if (!(profileImage instanceof File)) {
         ctx.addIssue({code, path, message: "Must be a File instance."});
@@ -41,5 +32,8 @@ export const PersonProfileImageFormSchema = PersonProfileImageFormBaseSchema.sup
     }
 });
 
-/** Validated type for the profile image upload form. */
+/** Type representing the validated data for the profile image form. */
 export type PersonProfileImageFormData = z.infer<typeof PersonProfileImageFormSchema>;
+
+/** Type representing the raw input values for the profile image form. */
+export type PersonProfileImageFormValues = AnyValues<PersonProfileImageFormData>;

@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {PageLoader} from "@/views/common/_comp/page";
-import PersonDetailsUIProvider from "@/domains/persons/context/PersonDetailsUIProvider.tsx";
+import {PersonDetailsUIProvider} from "@/domains/persons/context/PersonDetailsUIProvider.tsx";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";

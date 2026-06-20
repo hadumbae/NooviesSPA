@@ -1,30 +1,24 @@
 /**
- * @fileoverview Card component for the administrative Person Index.
- * Displays a concise summary of a person's identity and metadata, serving as
- * a navigational entry point to their full profile.
+ * @fileoverview Card component for displaying a summary of a person in the admin index list.
  */
 
-import { ReactElement } from 'react';
-import { Card, CardContent } from "@/common/components/ui/card.tsx";
+import {ReactElement} from 'react';
+import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
-import { Person } from "@/domains/persons/schema/person/Person.types.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {Person} from "@/domains/persons";
 
-/**
- * Props for the {@link PersonIndexCard} component.
- */
+/** Props for the PersonIndexCard component. */
 type IndexProps = {
     person: Person;
 };
 
-/**
- * Renders a summary card for a Person record.
- */
+/** Displays a person's avatar, name, and basic metadata within a clickable card link. */
 export function PersonIndexCard(
-    { person }: IndexProps
+    {person}: IndexProps
 ): ReactElement {
-    const { name, dob, nationality, profileImage, slug } = person;
+    const {name, dob, nationality, profileImage, slug} = person;
     const formattedDOB = dob.toFormat("dd MMM, yyyy");
     const formattedNationality = ISO3166Alpha2CountryConstant[nationality];
 

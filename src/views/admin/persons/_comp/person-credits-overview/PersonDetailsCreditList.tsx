@@ -3,8 +3,8 @@
  */
 
 import {ReactElement} from 'react';
-import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
-import {PersonFilmography} from "@/domains/moviecredit/_feat/person-credit";
+import {RoleTypeDepartment} from "@/domains/roletype";
+import {PersonFilmography} from "@/domains/moviecredit";
 import {PersonDetailsCreditCard} from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditCard.tsx";
 
 /**

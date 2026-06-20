@@ -8,20 +8,21 @@ import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
-import PersonQueryOptionFormContainer
-    from "@/views/admin/persons/_feat/query-option-form/PersonQueryOptionFormContainer.tsx";
+import {PersonQueryOptionForm} from "@/views/admin/persons/_feat/query-option-form/PersonQueryOptionForm.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import {PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
-import {PersonQueryOptions} from "@/domains/persons/schema/query-options/PersonQueryOption.types.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {PersonIndexHeader} from "@/views/admin/persons/index-page/header.tsx";
-import {PersonIndexCard} from "@/views/admin/persons/_comp/person-index";
+import {PersonIndexCard} from "@/views/admin/persons/_comp";
+
+import {PersonQueryOptions} from "@/domains/persons/schema/query-options/PersonQueryOptionsSchema";
+import {PersonQueryOptionFormView} from "@/views/admin/persons/_feat";
+import {Person} from "@/domains/persons";
 
 /**
  * Props for the {@link PersonIndexPageContent} component.
  */
 type ContentProps = {
-    persons: PersonDetails[];
+    persons: Person[];
     queryOptions: PersonQueryOptions;
     page: number;
     perPage: number;
@@ -42,7 +43,9 @@ export function PersonIndexPageContent(
             <PresetFilterDialog title="Person Filters" description="Filter and sort persons.">
                 <ScrollArea className="max-h-[80vh]">
                     <ScrollBar/>
-                    <PersonQueryOptionFormContainer presetValues={queryOptions}/>
+                    <PersonQueryOptionForm presetValues={queryOptions}>
+                        <PersonQueryOptionFormView/>
+                    </PersonQueryOptionForm>
                 </ScrollArea>
             </PresetFilterDialog>
 

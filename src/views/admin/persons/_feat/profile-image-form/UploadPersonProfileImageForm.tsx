@@ -1,6 +1,5 @@
 /**
  * @fileoverview Form container for handling person profile image submissions.
- * Orchestrates the form state, validation, and mutation lifecycle.
  */
 
 import {ReactElement, ReactNode} from 'react';
@@ -13,11 +12,13 @@ import {
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 
 /**
  * Props for the UploadPersonProfileImageForm component.
  */
-type ContainerProps = MutationResponseConfig & {
+type ContainerProps = MutationResponseConfig<void, PersonProfileImageFormData> & {
     personID: ObjectId;
     className?: string;
     uniqueKey?: string;
@@ -28,30 +29,37 @@ type ContainerProps = MutationResponseConfig & {
  * Orchestrator for the profile image upload process.
  */
 export function UploadPersonProfileImageForm(
-    {children, personID, className, uniqueKey, ...mutationProps}: ContainerProps
+    {children, personID, className, uniqueKey, ...mutationConfig}: ContainerProps
 ): ReactElement {
     const formKey = `upload-person-profile-image-${uniqueKey ?? "form"}`;
 
     const form = usePersonProfileImageSubmitForm();
+    const {mutateAsync, isPending, isError} = usePersonProfileImageSubmitMutation({_id: personID});
 
-    const mutation = usePersonProfileImageSubmitMutation({
-        _id: personID,
-        form,
-        onSubmit: mutationProps,
-    });
+    const submitImage = async (values: PersonProfileImageFormData) => {
+        try {
+            handleMutationCallback({
+                message: mutationConfig.submitMessage,
+                cb: () => mutationConfig.onSubmit?.(values),
+            });
 
-    const submitImage = (values: PersonProfileImageFormData) => {
-        mutation.mutate(values);
+            await mutateAsync(values);
+
+            handleMutationCallback({
+                message: mutationConfig.successMessage,
+                cb: () => mutationConfig.onSubmitSuccess?.(),
+                messageType: "success",
+            });
+        } catch (error: unknown) {
+            handleMutationResponseError({error, displayMessage: mutationConfig.errorMessage});
+            mutationConfig.onSubmitError?.(error);
+        }
     };
 
     return (
-        <BaseFormContextProvider formID={formKey} isPending={mutation.isPending}>
+        <BaseFormContextProvider formID={formKey} isPending={isPending} isError={isError} submitHandler={submitImage}>
             <Form {...form}>
-                <form
-                    id={formKey}
-                    className={className}
-                    onSubmit={form.handleSubmit(submitImage)}
-                >
+                <form id={formKey} className={className} onSubmit={form.handleSubmit(submitImage)}>
                     {children}
                 </form>
             </Form>

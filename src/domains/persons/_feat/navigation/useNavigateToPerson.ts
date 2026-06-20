@@ -1,7 +1,5 @@
 /**
- * @fileoverview Specialized navigation hook for routing to the Person Details view.
- * Integrates with the logging system to provide audit trails for administrative
- * navigation actions.
+ * @fileoverview Hook for navigating to the person details administration page.
  */
 
 import useLoggedNavigate, {
@@ -10,13 +8,14 @@ import useLoggedNavigate, {
 import {NavigateOptions} from "react-router-dom";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 
+/** Parameters for the person navigation hook. */
 type NavigateParams = LoggingMessageParams & {
     slug: SlugString;
     options?: NavigateOptions;
 };
 
 /**
- * Hook that returns a function to navigate to a specific person's administrative page.
+ * Returns a function to navigate to a specific person's detail page with logging.
  */
 export function useNavigateToPerson(): (params: NavigateParams) => void {
     const navigate = useLoggedNavigate();

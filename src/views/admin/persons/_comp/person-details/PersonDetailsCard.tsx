@@ -3,18 +3,17 @@
  */
 
 import {ReactElement} from 'react';
-import {PersonDetails} from "@/domains/persons/schema/person/Person.types.ts";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {Separator} from "@/common/components/ui/separator.tsx";
+import {Separator, Card, CardContent} from "@/common/components/ui";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
+import {Person} from "@/domains/persons";
 
 /**
  * Props for the PersonDetailsCard component.
  */
 type DetailCardProps = {
-    person: PersonDetails;
+    person: Person;
     creditCount: number;
     movieCount: number;
 }

@@ -1,19 +1,20 @@
 /**
  * @fileoverview Header component for the administrative Person Index page.
- * Provides section context and the primary entry point for creating new records.
+ *
  */
 
 import {ReactElement, useState} from 'react';
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {Plus} from "lucide-react";
-import {Person} from "@/domains/persons/schema/person/Person.types.ts";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {useNavigateToPerson} from "@/domains/persons/_feat/navigation";
 import {PersonSubmitForm, PersonSubmitFormPanel} from "@/views/admin/persons/_feat/submit-form";
 
+import {Person} from "@/domains/persons/schema/person/PersonSchema";
+
 /**
- * Renders the header for the Persons administrative list.
+ * Header for the Persons administrative list that provides the trigger for creating new records.
  */
 export function PersonIndexHeader(): ReactElement {
     const navigate = useNavigateToPerson();

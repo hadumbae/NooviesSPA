@@ -2,10 +2,10 @@
  * @fileoverview Extended schemas for movie credits with populated relation details.
  */
 import {z} from "zod";
-import {PersonSchema} from "@/domains/persons/schema/person/Person.schema.ts";
 import {RoleTypeSchema} from "@/domains/roletype/schema/model/RoleTypeSchema.ts";
 import {MovieCreditCastSchema, MovieCreditCrewSchema} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
 import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
+import {PersonSchema} from "@/domains/persons/schema/person/PersonSchema";
 
 /**
  * Zod shape for populated movie credit relations.

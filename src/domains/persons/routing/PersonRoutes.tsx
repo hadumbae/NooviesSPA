@@ -10,7 +10,7 @@ import {PersonDetailsPage} from "@/views/admin/persons/details-page";
 /**
  * Admin "Persons" route definitions.
  */
-export default [
+export const PersonRoutes = [
     {
         path: '/admin/persons',
         element: <AdminLayout/>,
@@ -28,3 +28,4 @@ export default [
         ],
     }
 ];
+

@@ -1,49 +1,37 @@
 /**
- * @fileoverview Hook for initializing the Person form state with standardized
- * default values and Zod resolver integration.
+ * @fileoverview Hook for initialising the Person form state with standardised default values and Zod resolver integration.
+ *
  */
 
+import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm, UseFormReturn} from "react-hook-form";
+import {Person} from "@/domains/persons/schema";
+import {FormValuesConfig} from "@/common/_feat/submit-data";
 import {
     PersonFormData,
-    PersonFormResolverSchema,
+    PersonFormSchema,
     PersonFormValues
 } from "@/domains/persons/_feat/submit-form/PersonFormSchema.ts";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {Person} from "@/domains/persons/schema/person/Person.types.ts";
-import {useMemo} from "react";
 
-/**
- * Parameters for initializing the Person form state.
- */
-type PersonSubmitParams = {
-    presetValues?: Partial<PersonFormValues>;
-    person?: Person;
-};
-
-/**
- * Hook to initialize and manage the Person submission form state.
- */
+/** Hook to initialize and manage the Person submission form state. */
 export function usePersonSubmitForm(
-    {presetValues, person}: PersonSubmitParams = {}
+    {presetValues, editEntity}: FormValuesConfig<PersonFormValues, Person> = {}
 ): UseFormReturn<PersonFormValues, unknown, PersonFormData> {
-    const defaultValues: PersonFormValues = useMemo(() => {
-        const dob = presetValues?.dob
-            ? presetValues.dob
-            : person?.dob ? person.dob.toISODate() : "";
+    const dob = presetValues?.dob
+        ? presetValues.dob
+        : editEntity?.dob ? editEntity.dob.toISODate() : "";
 
-        return {
-            name: "",
-            biography: "",
-            nationality: undefined,
-            ...person,
-            ...presetValues,
-            dob,
-        };
-    }, [presetValues, person]);
+    const defaultValues: PersonFormValues = {
+        name: "",
+        biography: "",
+        nationality: undefined,
+        ...editEntity,
+        ...presetValues,
+        dob,
+    };
 
     return useForm<PersonFormValues, unknown, PersonFormData>({
-        resolver: zodResolver(PersonFormResolverSchema),
+        resolver: zodResolver(PersonFormSchema),
         defaultValues,
     });
 }

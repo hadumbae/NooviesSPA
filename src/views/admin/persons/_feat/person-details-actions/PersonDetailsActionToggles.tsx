@@ -1,26 +1,19 @@
 /**
- * @fileoverview Action menu for managing state toggles in the Person detail view.
+ * @fileoverview Dropdown menu for managing state toggles in the Person detail view.
  */
 
 import {Dispatch, ReactElement, ReactNode, SetStateAction, useState} from 'react';
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {PersonDetailsUIContext} from "@/domains/persons/context/PersonDetailsUIContext.ts";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger
-} from "@/common/components/ui/dropdown-menu.tsx";
+import {PersonDetailsUISettersContext} from "@/domains/persons";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/common/components/ui";
 
-/**
- * Props for the PersonDetailsActionToggles component.
- */
+/** Props for the PersonDetailsActionToggles component. */
 type ToggleProps = {
     children?: ReactNode;
 }
 
 /**
- * Provides a dropdown menu to trigger administrative actions for a person.
+ * Dropdown menu to trigger administrative actions for a person.
  */
 export function PersonDetailsActionToggles(
     {children}: ToggleProps
@@ -31,7 +24,7 @@ export function PersonDetailsActionToggles(
         setIsEditing,
         setIsUpdatingProfileImage,
         setIsDeletingPerson,
-    } = useRequiredContext({context: PersonDetailsUIContext});
+    } = useRequiredContext({context: PersonDetailsUISettersContext});
 
     const onClickClose = (func: Dispatch<SetStateAction<boolean>>) => {
         setOpen(false);
@@ -48,9 +41,7 @@ export function PersonDetailsActionToggles(
             <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={editPerson}>Edit</DropdownMenuItem>
                 <DropdownMenuItem onClick={updateProfileImage}>Upload Avatar</DropdownMenuItem>
-                <DropdownMenuItem onClick={deletePerson} className="text-red-500 focus:text-red-500">
-                    Delete
-                </DropdownMenuItem>
+                <DropdownMenuItem onClick={deletePerson}>Delete</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );
