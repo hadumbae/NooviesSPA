@@ -1,6 +1,5 @@
 /**
- * @file Badge indicating a movie is recommended.
- * @filename IsRecommendedBadge.tsx
+ * @fileoverview Badge indicating a movie is recommended.
  */
 
 import {Badge} from "@/common/components/ui/badge.tsx";
@@ -8,14 +7,13 @@ import {cn} from "@/common/lib/utils.ts";
 import {Check} from "lucide-react";
 import {ReactElement} from "react";
 
+/** Props for the IsRecommendedCheck component. */
 type CheckProps = {
     className?: string;
     size?: number;
 }
 
-/**
- * Displays a highlighted recommendation badge.
- */
+/** Displays a highlighted recommendation badge. */
 export function IsRecommendedCheck(
     {className, size}: CheckProps
 ): ReactElement {
