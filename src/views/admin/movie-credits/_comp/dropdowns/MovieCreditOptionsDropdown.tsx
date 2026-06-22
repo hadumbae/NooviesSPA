@@ -1,34 +1,33 @@
-import {FC} from 'react';
-import {
-    DropdownMenu,
-    DropdownMenuContent, DropdownMenuItem,
-    DropdownMenuTrigger
-} from "@/common/components/ui/dropdown-menu.tsx";
-import {EllipsisIcon} from "lucide-react";
+/**
+ * @fileoverview Dropdown menu providing management actions for a movie credit entry.
+ */
 
-interface OptionsProps {
+import {ReactElement} from 'react';
+import {EllipsisIcon} from "lucide-react";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/common/components/ui";
+
+/** Props for the MovieCreditOptionsDropdown component. */
+type OptionsProps = {
     onEdit: () => void;
     onDelete: () => void;
 }
 
-const MovieCreditOptionsDropdown: FC<OptionsProps> = ({onEdit, onDelete}) => {
+/**
+ * Renders an ellipsis dropdown menu with edit and delete actions for movie credits.
+ */
+export function MovieCreditOptionsDropdown(
+    {onEdit, onDelete}: OptionsProps
+): ReactElement {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="text-neutral-400 hover:text-black">
-                <EllipsisIcon />
+                <EllipsisIcon/>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent>
-                <DropdownMenuItem onClick={onEdit}>
-                    Edit
-                </DropdownMenuItem>
-
-                <DropdownMenuItem onClick={onDelete}>
-                    Delete
-                </DropdownMenuItem>
+                <DropdownMenuItem onClick={onEdit}>Edit</DropdownMenuItem>
+                <DropdownMenuItem onClick={onDelete}>Delete</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );
-};
-
-export default MovieCreditOptionsDropdown;
+}

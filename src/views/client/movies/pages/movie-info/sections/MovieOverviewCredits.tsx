@@ -9,7 +9,9 @@ import LinkGroup from "@/common/components/LinkGroup.tsx";
 import {Separator} from "@/common/components/ui";
 import NoneSpan from "@/common/components/NoneSpan.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import ActorCreditAvatar from "@/views/admin/movie-credits/_comp/clients/ActorCreditAvatar.tsx";
+import {
+    ActorCreditAvatar
+} from "@/views/admin/movie-credits/_comp/actor-credit-avatar/ActorCreditAvatar.tsx";
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
 
 import {MovieDetails} from "@/domains/movies";

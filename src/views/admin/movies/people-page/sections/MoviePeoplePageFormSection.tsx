@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import TextCollapsible from "@/common/components/TextCollapsible.tsx";
 import {Card, CardContent} from "@/common/components/ui";
-import {MovieCreditForm, MovieCreditFormView} from "@/views/admin/movie-credits/_comp/forms";
+import {MovieCreditForm, MovieCreditFormView} from "@/views/admin/movie-credits/_comp/submit-form";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {RoleTypeDepartment} from "@/domains/roletype";

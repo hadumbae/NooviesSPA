@@ -16,10 +16,10 @@ import {
 import {cn} from "@/common/lib/utils.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {BrowseMoviePosterLink} from "@/views/admin/movies/_comp/poster-image";
-import {BrowseMovieSummary} from "@/views/client/movies/_comp/browse-movie-info";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import BrowseMovieCreditSummaryLinkList from "@/views/admin/movie-credits/_comp/clients/browse-movie-clients/BrowseMovieCreditSummaryLinkList.tsx";
 import {MovieCreditDataLazyLoader} from "@/views/admin/movie-credits/_comp/movie-credit-loaders/MovieCreditDataLazyLoader.tsx";
+import {BrowseMovieSummary} from "@/views/client/movies/_comp/browse-movie-info/BrowseMovieSummary";
+import {BrowseMovieSummaryCredits} from "@/views/client/movies/_comp/browse-movie-info/BrowseMovieSummaryCredits";
 
 import {MovieDetails} from "@/domains/movies";
 import {MovieCreditDetailsSchema} from "@/domains/moviecredit";
@@ -70,7 +70,7 @@ export function BrowseMovieSummaryDialog({children, movie}: DialogProps): ReactE
                     config={{populate: true, virtuals: true}}
                     queries={{movie: _id}}
                 >
-                    {(credits) => <BrowseMovieCreditSummaryLinkList credits={credits}/>}
+                    {(credits) => <BrowseMovieSummaryCredits credits={credits}/>}
                 </MovieCreditDataLazyLoader>
 
                 <LoggedLink to={`/browse/movies/${slug}`} className={cn(buttonVariants({variant: "primary"}))}>

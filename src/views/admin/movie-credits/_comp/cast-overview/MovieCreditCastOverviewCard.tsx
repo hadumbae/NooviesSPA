@@ -1,4 +1,6 @@
-/** @fileoverview Card component for displaying cast-specific movie credit details. */
+/**
+ * @fileoverview Card component for displaying cast-specific movie credit details.
+ */
 
 import {ReactElement} from "react";
 import getInitials from "@/common/utility/formatters/getInitials.ts";
@@ -6,22 +8,17 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
 import {MovieCreditDetails} from "@/domains/moviecredit/schemas";
+import {SROnly} from "@/views/common/_comp/screen-readers";
 
 /** Props for the MovieCreditOverviewCard component. */
 type CardProps = {
     credit: Extract<MovieCreditDetails, { department: "CAST" }>;
 };
 
-/** Renders a card displaying character names and person details for cast members. */
+/** Card component that displays character names and person details for cast members. */
 export function MovieCreditCastOverviewCard(
-    {credit}: CardProps
+    {credit: {_id, characterName, person: {name: personName, slug: personSlug, profileImage}}}: CardProps
 ): ReactElement {
-    const {
-        _id,
-        characterName,
-        person: {name: personName, slug: personSlug, profileImage},
-    } = credit;
-
     const initials = getInitials(personName);
     const profileImageLink = profileImage?.secure_url;
 
@@ -29,9 +26,8 @@ export function MovieCreditCastOverviewCard(
         <Card key={_id}>
             <CardContent className="p-4 flex items-center">
                 <section>
-                    <h1 className="sr-only">
-                        Person Profile Image: {personName}
-                    </h1>
+                    <SROnly text={`Person Profile Image: ${personName}`}/>
+
                     <Avatar>
                         <AvatarImage src={profileImageLink}/>
                         <AvatarFallback>{initials}</AvatarFallback>
@@ -50,7 +46,7 @@ export function MovieCreditCastOverviewCard(
                     <LoggedAnchor
                         target="_blank"
                         href={`/admin/persons/get/${personSlug}`}
-                        className="text-sm hover:underline hover:underline-offset-4"
+                        className="text-sm hover-underline"
                         message="Navigate to person's detail page."
                     >
                         {personName}

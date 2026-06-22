@@ -12,7 +12,7 @@ type OptionsProps = {
 };
 
 /** Renders a popover containing action buttons to toggle edit or delete states. */
-export function MoviePersonDetailsCardHeaderToggles(
+export function MoviePersonDetailsCardToggles(
     {children, setEdit, setDelete}: OptionsProps
 ): ReactElement {
     return (

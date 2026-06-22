@@ -10,5 +10,6 @@
         @apply
         text-neutral-400 hover:text-black
         dark:text-neutral-500 dark:hover:text-white
+        hover:underline hover:underline-offset-8
     }
 }

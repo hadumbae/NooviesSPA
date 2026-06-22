@@ -1,24 +1,27 @@
 /** @fileoverview Side-panel wrapper for the movie credit form, managing its visibility and lifecycle. */
 
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import {ReactElement, ReactNode} from "react";
+import {DisableFields, UIOpenStateProps} from "@/common/types";
+import {MovieCreditFormView} from "@/views/admin/movie-credits/_comp/submit-form/views/MovieCreditFormView.tsx";
 import {
+    ScrollArea,
     Sheet,
     SheetContent,
     SheetDescription,
     SheetHeader,
     SheetTitle,
-    SheetTrigger
-} from "@/common/components/ui/sheet";
+    SheetTrigger,
+} from "@/common/components/ui";
 
-import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {UIOpenStateProps} from "@/common/types";
-import {MovieCreditFormView} from "@/views/admin/movie-credits/_comp/forms/form-view/MovieCreditFormView.tsx";
-import {ReactElement} from "react";
-import {MovieCreditFormValues} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
+import {MovieCreditFormValues} from "@/domains/moviecredit";
+import {MovieCreditFormActions} from "@/views/admin/movie-credits";
 
 /** Props for the MovieCreditFormPanel component, extending form and UI state definitions. */
-type FormPanelProps = FormViewProps<MovieCreditFormValues> & UIOpenStateProps & {
+type FormPanelProps = UIOpenStateProps & {
+    children?: ReactNode;
     isEditing?: boolean;
+    className?: string;
+    disableFields?: DisableFields<MovieCreditFormValues>
 };
 
 /**
@@ -42,10 +45,10 @@ export function MovieCreditFormPanel(
                 </SheetHeader>
 
                 <ScrollArea className="flex-1">
-                    <MovieCreditFormView
-                        className={className}
-                        disableFields={disableFields}
-                    />
+                    <div className="space-y-4">
+                        <MovieCreditFormView className={className} disableFields={disableFields}/>
+                        <MovieCreditFormActions/>
+                    </div>
                 </ScrollArea>
             </SheetContent>
         </Sheet>

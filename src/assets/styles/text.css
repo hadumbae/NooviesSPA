@@ -1,0 +1,17 @@
+@layer components {
+    .primary-text {
+        @apply text-black dark:text-gray-50
+    }
+
+    .secondary-text {
+        @apply text-neutral-400 dark:text-gray-500
+    }
+
+    .text-with-icon {
+        @apply inline-flex items-center gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0
+    }
+
+    .hover-underline {
+        @apply hover:underline hover:underline-offset-8;
+    }
+}
