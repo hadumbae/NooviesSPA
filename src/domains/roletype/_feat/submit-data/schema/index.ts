@@ -2,7 +2,7 @@ import {
     RoleTypeFormData,
     RoleTypeFormSchema,
     RoleTypeFormValues
-} from "@/domains/roletype/_feat/submit-role-type-data/schema/RoleTypeFormSchema.ts";
+} from "src/domains/roletype/_feat/submit-data/schema/RoleTypeFormSchema.ts";
 
 
 export {

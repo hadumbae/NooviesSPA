@@ -27,7 +27,7 @@ export function RoleTypeQueryOptionFormView(
     const {control} = useFormContext();
 
     if (!submitHandler) {
-        throw new Error("`RoleTypeQueryOptionFormView` requires a submitHandler.");
+        throw new Error(`'${RoleTypeQueryOptionFormView.name}' requires a submitHandler.`);
     }
 
     useAutoFormSubmit({submitHandler, timeout: 450});
@@ -36,54 +36,38 @@ export function RoleTypeQueryOptionFormView(
         <div className={cn("space-y-4", className)}>
             <fieldset className="space-y-3">
                 <div>
-                    <h1 className="text-lg font-bold">Filters</h1>
+                    <h2 className="text-lg font-bold">Filters</h2>
                     <Separator/>
                 </div>
 
                 <div className="grid grid-cols-1 gap-4">
                     {
                         !disableFields?.roleName &&
-                        <HookFormInput
-                            name="roleName"
-                            label="Role Name"
-                            control={control}
-                        />
+                        <HookFormInput name="roleName" label="Role Name" control={control}/>
                     }
 
                     {
                         !disableFields?.department &&
-                        <RoleTypeDepartmentSelect
-                            name="department"
-                            label="Department"
-                            control={control}
-                        />
+                        <RoleTypeDepartmentSelect name="department" label="Department"/>
                     }
                 </div>
             </fieldset>
 
             <fieldset className="space-y-3">
                 <div>
-                    <h1 className="text-lg font-bold">Sort</h1>
+                    <h2 className="text-lg font-bold">Sort</h2>
                     <Separator/>
                 </div>
 
                 <div className="flex flex-wrap items-center space-x-3">
                     {
                         !disableFields?.sortByRoleName &&
-                        <HookFormStateToggleButton
-                            name="sortByRoleName"
-                            label="Role Name"
-                            control={control}
-                        />
+                        <HookFormStateToggleButton name="sortByRoleName" label="Role Name"/>
                     }
 
                     {
                         !disableFields?.sortByDepartment &&
-                        <HookFormStateToggleButton
-                            name="sortByDepartment"
-                            label="Department"
-                            control={control}
-                        />
+                        <HookFormStateToggleButton name="sortByDepartment" label="Department"/>
                     }
                 </div>
             </fieldset>

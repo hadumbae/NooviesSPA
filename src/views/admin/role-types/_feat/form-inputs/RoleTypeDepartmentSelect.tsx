@@ -14,7 +14,7 @@ import {RoleTypeDepartmentConstant} from "@/domains/roletype";
  * Controlled select input for choosing a role type department using react-hook-form.
  */
 export function RoleTypeDepartmentSelect<TSubmit extends FieldValues>(
-    props: HookFormInputControlProps<TSubmit>
+    props: Omit<HookFormInputControlProps<TSubmit>, "control">
 ): ReactElement {
     const options: ReactSelectOption[] = RoleTypeDepartmentConstant.map(
         value => ({value, label: convertToTitleCase(value)})

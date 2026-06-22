@@ -2,11 +2,12 @@
  * @fileoverview Form container for managing and synchronizing Role Type query options with URL search parameters.
  */
 
-import {ReactElement, ReactNode, useId} from 'react';
+import {ReactElement, ReactNode} from 'react';
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 import {RoleTypeQueryOptions, RoleTypeQueryOptionsSchema, useRoleTypeQueryOptionForm} from "@/domains/roletype";
+import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 
 /** Props for the RoleTypeQueryOptionForm component. */
 type FormProps = {
@@ -20,8 +21,7 @@ type FormProps = {
 export function RoleTypeQueryOptionForm(
     {children, presetValues}: FormProps
 ): ReactElement {
-    const id = useId();
-    const formID = `role-type-query-option-form-${id}`;
+    const formID = useGenerateFormID("role-type-query-option-form");
 
     const {searchParams, setSearchParams} = useParsedSearchParams({
         schema: RoleTypeQueryOptionsSchema,

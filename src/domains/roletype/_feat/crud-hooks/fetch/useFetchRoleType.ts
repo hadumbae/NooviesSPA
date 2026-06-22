@@ -1,14 +1,14 @@
 /**
  * @fileoverview React Query hook for fetching a single RoleType by its unique ID.
- *
  */
 
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {IDQueryConfig} from "@/common/types";
-import {findByID, RoleTypeCRUDQueryKeys} from "@/domains/roletype/_feat";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
+import {findByID} from "@/domains/roletype/_feat/crud";
+import {RoleTypeCRUDQueryKeys} from "@/domains/roletype/_feat/crud-hooks/keys";
 
 /** Fetches a RoleType document and validates it against a provided schema. */
 export function useFetchRoleType<TData = unknown>(

@@ -4,7 +4,7 @@ import {ReactElement, useState} from 'react';
 import {CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import {
     MoviePersonDetailsCardToggles
-} from "src/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardToggles.tsx";
+} from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardToggles.tsx";
 import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
 import {simplifyMovieCreditDetails} from "@/domains/moviecredit/_feat/formatters/simplifyMovieCreditDetails.ts";
 

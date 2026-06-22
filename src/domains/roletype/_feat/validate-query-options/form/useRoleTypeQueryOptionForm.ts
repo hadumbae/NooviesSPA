@@ -12,7 +12,7 @@ import {
 
 /** Configuration parameters for the useRoleTypeQueryOptionForm hook. */
 export type FormParams = {
-    presetValues?: Partial<RoleTypeQueryOptions>;
+    presetValues?: Partial<RoleTypeQueryOptionsFormValues>;
 };
 
 /** Initialises a React Hook Form for RoleType query options with Zod validation. */

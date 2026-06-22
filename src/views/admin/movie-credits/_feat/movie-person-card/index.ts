@@ -3,7 +3,7 @@ import {
 } from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardHeader.tsx";
 import {
     MoviePersonDetailsCardToggles
-} from "src/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardToggles.tsx";
+} from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardToggles.tsx";
 import {MovieCastCreditCard} from "@/views/admin/movie-credits/_feat/movie-person-card/MovieCastCreditCard.tsx";
 import {MovieCrewCreditCard} from "@/views/admin/movie-credits/_feat/movie-person-card/MovieCrewCreditCard.tsx";
 import {

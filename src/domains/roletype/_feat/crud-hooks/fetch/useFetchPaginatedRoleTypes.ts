@@ -4,10 +4,11 @@
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {PaginatedQueryConfig} from "@/common/types";
+import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
-import {paginated, RoleTypeCRUDQueryKeys} from "@/domains/roletype/_feat";
+import {paginated} from "@/domains/roletype/_feat/crud";
+import {RoleTypeCRUDQueryKeys} from "@/domains/roletype/_feat/crud-hooks/keys";
 
 /** Fetches paginated RoleType records using React Query. */
 export function useFetchPaginatedRoleTypes<TData = unknown>(

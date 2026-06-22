@@ -4,7 +4,7 @@
  */
 
 import {ReactElement} from "react";
-import {FieldValues} from "react-hook-form";
+import {FieldValues, useFormContext} from "react-hook-form";
 import {ArrowDownUp, ArrowDownWideNarrow, ArrowUpNarrowWide} from "lucide-react";
 import {
     FormControl,
@@ -20,8 +20,10 @@ import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.
  * Renders a button that toggles between sorting states.
  */
 export function HookFormSortToggle<TValues extends FieldValues>(
-    {name, label, control, className, disabled}: HookFormInputControlProps<TValues>
+    {name, label, className, disabled}: Omit<HookFormInputControlProps<TValues>, "control">
 ): ReactElement {
+    const {control} = useFormContext<TValues>();
+
     const options = [
         {label: "None", value: "", color: "text-muted-foreground", icon: ArrowDownUp},
         {label: "Asc", value: "1", color: "text-success dark:text-success", icon: ArrowUpNarrowWide},

@@ -1,6 +1,5 @@
 /**
  * @fileoverview Form input component for selecting role categories based on department.
- *
  */
 
 import {RoleTypeCrewCategoryConstant} from "@/domains/roletype/schema/fields/RoleTypeCrewCategoryConstant.ts";

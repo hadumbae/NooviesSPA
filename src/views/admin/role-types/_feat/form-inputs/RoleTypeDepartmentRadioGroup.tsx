@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Control, FieldValues, Path} from "react-hook-form";
+import {FieldValues, Path, useFormContext} from "react-hook-form";
 import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
 import HookFormRadioGroup from "@/common/components/forms/radio-group/HookFormRadioGroup.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
@@ -11,7 +11,6 @@ import {RoleTypeDepartmentConstant} from "@/domains/roletype";
 
 /** Props for the RoleTypeDepartmentRadioGroup component. */
 export type RoleTypeProps<TForm extends FieldValues> = {
-    control: Control<TForm>;
     name: Path<TForm>;
     label: string;
     className?: string;
@@ -19,8 +18,10 @@ export type RoleTypeProps<TForm extends FieldValues> = {
 
 /** Radio group populated with department options from RoleTypeDepartmentConstant. */
 export function RoleTypeDepartmentRadioGroup<TForm extends FieldValues>(
-    {control, name, label, className}: RoleTypeProps<TForm>
+    {name, label, className}: RoleTypeProps<TForm>
 ): ReactElement {
+    const {control} = useFormContext();
+
     const items: HookRadioOption[] = RoleTypeDepartmentConstant.map(
         val => ({label: convertToTitleCase(val), value: val})
     );
