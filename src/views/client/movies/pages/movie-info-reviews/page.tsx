@@ -11,7 +11,7 @@ import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetc
 import {
     MovieInfoReviewsPageData,
     useMovieInfoReviewsPageQueries
-} from "@/domains/movies/_feat/client-view-data/useMovieInfoReviewsPageQueries.ts";
+} from "@/domains/movies/_feat/client-view-data/hooks/useMovieInfoReviewsPageQueries.ts";
 import MultiQueryDataLoader from "@/common/components/query/loaders/MultiQueryDataLoader.tsx";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {ReactElement} from "react";

@@ -3,12 +3,12 @@
  */
 
 import {ReactElement} from "react";
-import {MovieDetails} from "@/domains/movies/schema/movie";
-import {buildMovieContext} from "@/domains/movies/_feat/navigation";
-import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
-import buildString from "@/common/utility/buildString.ts";
 import {cn} from "@/common/lib/utils.ts";
+import buildString from "@/common/utility/buildString.ts";
+import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+
+import {buildMovieContext, MovieDetails} from "@/domains/movies";
 
 /** Props for the BrowseMovieSummaryMeta component. */
 type SummaryProps = {

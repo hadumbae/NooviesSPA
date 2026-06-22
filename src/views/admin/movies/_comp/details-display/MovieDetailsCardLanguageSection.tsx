@@ -4,12 +4,10 @@
 
 import {ReactElement} from "react";
 import {MovieDetails} from "@/domains/movies/schema/movie";
-import {Separator} from "@/common/components/ui/separator.tsx";
+import {Separator} from "@/common/components/ui";
 import BadgeListLabel from "@/common/components/card-content/BadgeListLabel.tsx";
 import {ISO6391LanguageCode} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
-import {
-    ISO6391LanguageLabels as ISO6391LanguageConstant
-} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
+import {ISO6391LanguageLabels} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
 
 /** Props for the MovieDetailsCardLanguageSection component. */
 type SectionProps = {
@@ -21,7 +19,7 @@ export function MovieDetailsCardLanguageSection(
     {movie: {languages, subtitles}}: SectionProps
 ): ReactElement {
     const renderLanguage = (lan: ISO6391LanguageCode) =>
-        ISO6391LanguageConstant[lan] ??
+        ISO6391LanguageLabels[lan] ??
         lan?.toUpperCase() ??
         "Unknown";
 

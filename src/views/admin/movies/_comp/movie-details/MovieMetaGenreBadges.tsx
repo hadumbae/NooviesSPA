@@ -1,6 +1,7 @@
 /**
  * @fileoverview Component for displaying a list of movie genres as styled badges.
  */
+
 import {ReactElement} from "react";
 import {Genre} from "@/domains/genres/schema";
 import {Badge} from "@/common/components/ui/badge.tsx";

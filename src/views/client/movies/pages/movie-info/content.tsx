@@ -1,25 +1,21 @@
 /**
  * @fileoverview Layout composition for the movie overview page.
- *
  */
 
-import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {MovieOverviewEditorialInfo} from "@/views/client/movies/pages/movie-info/rows/MovieOverviewEditorialInfo.tsx";
-import {MovieOverviewCredits} from "@/views/client/movies/pages/movie-info/rows/MovieOverviewCredits.tsx";
-import {
-    MovieOverviewFavouriteToggle
-} from "@/views/client/movies/pages/movie-info/rows/MovieOverviewFavouriteToggle.tsx";
-import {MovieOverviewReviews} from "@/views/client/movies/pages/movie-info/rows/MovieOverviewReviews.tsx";
-import {MovieReviewSummaryData} from "@/domains/movieReviews/schemas/model";
-import {
-    MovieOverviewShowings
-} from "@/views/client/movies/pages/movie-info/rows/MovieOverviewShowings.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import {
-    MovieCreditDetails
-} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
 import {ReactElement} from "react";
-import {MovieOverviewHeader} from "@/views/client/movies/pages/movie-info/header.tsx";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
+import {
+    MovieOverviewCredits,
+    MovieOverviewEditorialInfo,
+    MovieOverviewFavouriteToggle,
+    MovieOverviewHeader,
+    MovieOverviewReviews,
+    MovieOverviewShowings
+} from "@/views/client/movies/pages/movie-info/sections";
+
+import {MovieReviewSummaryData} from "@/domains/movieReviews";
+import {MovieDetails} from "@/domains/movies";
+import {MovieCreditDetails} from "@/domains/moviecredit";
 
 /** Props for the MovieInfoPageContent component. */
 type ContentProps = {
@@ -32,15 +28,8 @@ type ContentProps = {
  * Renders the movie overview page sections including header, credits, and reviews.
  */
 export function MovieInfoPageContent(
-    {movie, credits, reviewDetails}: ContentProps
+    {movie, credits, reviewDetails: {averageRating, userReview, items: reviews}}: ContentProps
 ): ReactElement {
-    const {slug} = movie;
-    const {
-        averageRating,
-        userReview,
-        items: reviews
-    } = reviewDetails;
-
     return (
         <PageFlexWrapper className="space-y-10">
             <MovieOverviewHeader
@@ -69,7 +58,7 @@ export function MovieInfoPageContent(
             />
 
             <MovieOverviewShowings
-                movieSlug={slug}
+                movieSlug={movie.slug}
             />
         </PageFlexWrapper>
     );

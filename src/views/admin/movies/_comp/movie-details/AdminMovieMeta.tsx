@@ -3,13 +3,11 @@
  */
 
 import {ReactElement} from "react";
-import {MovieWithGenres} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import buildString from "@/common/utility/buildString.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import {Movie, MovieDetails, MovieWithGenres} from "@/domains/movies";
 
 /** Props for the MovieMetaRow component. */
 type MetaProps = {
@@ -37,7 +35,7 @@ export function AdminMovieMeta(
 
     return (
         <div>
-            <LoggedLink{...navObject} className={cn(
+            <LoggedLink {...navObject} className={cn(
                 "primary-text font-extrabold text-base",
                 "hover:underline hover:underline-offset-4",
             )}>

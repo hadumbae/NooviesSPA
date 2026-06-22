@@ -1,13 +1,12 @@
-/** @fileoverview Utility for simplifying complex MovieDetails objects into storage-ready Movie objects. */
+/**
+ * @fileoverview Utility for simplifying complex MovieDetails objects into storage-ready Movie objects.
+ */
 
 import { ParseError } from "@/common/errors/ParseError.ts";
 import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 
-/**
- * Simplifies a MovieDetails object into a Movie object suitable for storage or API submission.
- * Throws a ParseError if the resulting object fails validation against MovieSchema.
- */
+/** Transforms a MovieDetails object into a Movie object and validates it against MovieSchema. */
 export function simplifyMovieDetails(movieDetails: MovieDetails): Movie {
     const { genres, releaseDate, ...rem } = movieDetails;
 

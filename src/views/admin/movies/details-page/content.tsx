@@ -1,15 +1,13 @@
 /**
  * @fileoverview Presentation component for the Movie Details page.
- * Orchestrates movie metadata display, tabbed content, and administrative
- * overlays for editing, poster management, and deletion.
  */
 
 import {ReactElement} from 'react';
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import {MovieDetailsHeader} from "@/views/admin/movies/details-page/header.tsx";
+import {MovieDetailsHeader} from "@/views/admin/movies/details-page/sections/header.tsx";
 import {MovieDetailsCard} from "@/views/admin/movies/_comp/details-display";
-import {MovieDetailsPageActions} from "@/views/admin/movies/details-page/actions.tsx";
+import {MovieDetailsPageActions} from "@/views/admin/movies/details-page/sections/actions.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {MovieDetailsPageCreditSection} from "@/views/admin/movies/details-page/sections/creditSection.tsx";
 import {MovieDetailsPageShowingSection} from "@/views/admin/movies/details-page/sections/showingSection.tsx";

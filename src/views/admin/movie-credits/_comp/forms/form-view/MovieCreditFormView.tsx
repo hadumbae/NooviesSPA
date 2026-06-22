@@ -38,22 +38,19 @@ export function MovieCreditFormView(
     return (
         <div className={cn("space-y-4", className)}>
             <MovieCreditFormDetailsFieldset disableFields={disableFields}/>
+
             <Separator/>
 
-            {
-                department === "CAST" && <>
-                    <MovieCreditFormCastFieldset disableFields={disableFields}/>
-                    <Separator/>
-                </>
-            }
+            {department === "CAST" && <>
+                <MovieCreditFormCastFieldset disableFields={disableFields}/>
+                <Separator/>
+            </>}
 
 
-            {
-                department === "CAST" && <>
-                    <MovieCreditFormCastFlagFieldset disableFields={disableFields}/>
-                    <Separator/>
-                </>
-            }
+            {department === "CAST" && <>
+                <MovieCreditFormCastFlagFieldset disableFields={disableFields}/>
+                <Separator/>
+            </>}
 
             <section className="grid grid-cols-4 gap-2">
                 <Button

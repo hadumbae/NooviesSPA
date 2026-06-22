@@ -2,9 +2,9 @@
 
 import {ReactElement, ReactNode, useState} from 'react';
 import {
-    MovieDetailsUIContext,
+    MovieDetailsUIStatesContext,
     MovieDetailsUIStates
-} from "@/domains/movies/context/details-ui/MovieDetailsUIContext.ts";
+} from "@/domains/movies/context/details-ui/MovieDetailsUIStatesContext.ts";
 
 /** Props for the MovieDetailsUIContextProvider component. */
 type ProviderProps = {
@@ -35,8 +35,8 @@ export function MovieDetailsUIContextProvider({children}: ProviderProps): ReactE
     };
 
     return (
-        <MovieDetailsUIContext.Provider value={values}>
+        <MovieDetailsUIStatesContext.Provider value={values}>
             {children}
-        </MovieDetailsUIContext.Provider>
+        </MovieDetailsUIStatesContext.Provider>
     );
 }

@@ -1,98 +1,49 @@
-import { FC, ReactNode, useState } from 'react';
-import { PresetOpenState } from "@/common/type/ui/OpenStateProps.ts";
+/**
+ * @fileoverview A reusable dialog component for filtering content with support for controlled and uncontrolled states.
+ *
+ */
+
+import {ReactElement, ReactNode, useState} from 'react';
 import {
+    Button,
     Dialog,
     DialogContent,
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger
-} from "@/common/components/ui/dialog.tsx";
-import { ListFilter } from "lucide-react";
-import { Button } from "@/common/components/ui/button.tsx";
-import { cn } from "@/common/lib/utils.ts";
+    DialogTrigger,
+} from "@/common/components/ui";
+import {cn} from "@/common/lib/utils.ts";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
+import {ListFilter} from "lucide-react";
 import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
-/**
- * Props for the PresetFilterDialog component.
- * Extends {@link PresetOpenState} to support both controlled and uncontrolled
- * open state management while rendering a filter-themed dialog.
- */
-type PresetFilterDialogProps = PresetOpenState & {
-    /** Main content of the dialog, typically filter form fields. */
+/** Props for the PresetFilterDialog component. */
+type DialogProps = PresetOpenState & {
     children: ReactNode;
-
-    /** Optional custom class for styling the trigger button. */
     className?: string;
-
-    /** Dialog title displayed in the header. */
     title: string;
-
-    /** Dialog description displayed below the title. */
     description: string;
 };
 
 /**
- * **PresetFilterDialog** — a reusable dialog component tailored for filter UIs.
- *
- * It features a filter icon trigger (`ListFilter`) and supports both controlled
- * and uncontrolled open states through {@link PresetOpenState}.
- *
- * The dialog includes:
- * - A header with `title` and `description`
- * - Custom content via `children`
- * - A “See Results” button that closes the dialog
- *
- * ### Controlled vs Uncontrolled Usage
- * - **Controlled:** Pass both `presetOpen` and `setPresetOpen` props.
- * - **Uncontrolled:** Omit both props and rely on internal state.
- *
- * ### Example
- * ```tsx
- * <PresetFilterDialog
- *   title="Filter Movies"
- *   description="Narrow down your movie selection by genre and rating."
- * >
- *   <GenreFilter />
- *   <RatingFilter />
- * </PresetFilterDialog>
- * ```
+ * A dialog component tailored for filter UIs that supports both controlled and uncontrolled open states.
  */
-const PresetFilterDialog: FC<PresetFilterDialogProps> = (props) => {
-    const {
-        className,
-        presetOpen,
-        setPresetOpen,
-        title,
-        description,
-        children,
-    } = props;
+function PresetFilterDialog(
+    {children, className, presetOpen, setPresetOpen, title, description}: DialogProps
+): ReactElement {
 
-    /** Internal fallback open state (used if uncontrolled). */
     const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    /** Whether the component is being controlled via props. */
     const isControlled = presetOpen !== undefined && setPresetOpen !== undefined;
 
-    /** Active open state (from props if controlled, otherwise internal). */
     const activeOpen = isControlled ? presetOpen : isOpen;
-
-    /** Setter for the active open state (external or internal). */
     const setActiveOpen = isControlled ? setPresetOpen : setIsOpen;
 
     return (
         <Dialog open={activeOpen} onOpenChange={setActiveOpen}>
             <DialogTrigger asChild>
-                <Button
-                    size="sm"
-                    variant="link"
-                    className={cn(
-                        HoverLinkCSS,
-                        "w-fit",
-                        className
-                    )}
-                >
-                    <ListFilter /> Filters
+                <Button size="sm" variant="link" className={cn(HoverLinkCSS, "w-fit", className)}>
+                    <ListFilter/> Filters
                 </Button>
             </DialogTrigger>
 
@@ -104,15 +55,12 @@ const PresetFilterDialog: FC<PresetFilterDialogProps> = (props) => {
 
                 {children}
 
-                <Button
-                    className="bg-primary hover:bg-purple-800"
-                    onClick={() => setActiveOpen(false)}
-                >
-                    See Results
+                <Button className="bg-primary hover:bg-purple-800" onClick={() => setActiveOpen(false)}>
+                    Apply
                 </Button>
             </DialogContent>
         </Dialog>
     );
-};
+}
 
 export default PresetFilterDialog;

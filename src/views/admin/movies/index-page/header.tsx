@@ -1,6 +1,5 @@
 /**
  * @fileoverview Header for the Movie Index page providing navigation to movie creation.
- *
  */
 
 import {ReactElement} from 'react';

@@ -1,33 +1,21 @@
 /**
- * @file Groups cast credits into primary and supporting collections.
- * @filename organiseMovieCastCreditsByPrimacy.ts
+ * @fileoverview Groups movie cast credits into primary and supporting collections based on billing priority.
  */
-
 
 import {CastCreditExceptMovie} from "@/domains/moviecredit";
 
-/**
- * Parameters for organising cast credits.
- */
+/** Parameters for organising cast credits. */
 type PrimacyParams = {
-    /** Cast credits to group */
     credits: CastCreditExceptMovie[];
 }
 
-/**
- * Result of cast credit grouping.
- */
+/** Result of cast credit grouping. */
 type PrimacyReturns = {
-    /** Primary cast ordered by billing priority */
     primaryCast: CastCreditExceptMovie[];
-
-    /** Supporting cast ordered alphabetically */
     supportCast: CastCreditExceptMovie[];
 }
 
-/**
- * Organises cast credits by primacy and applies ordering rules.
- */
+/** Organises cast credits by primacy and applies ordering rules. */
 export function organiseMovieCastCreditsByPrimacy(
     {credits}: PrimacyParams
 ): PrimacyReturns {

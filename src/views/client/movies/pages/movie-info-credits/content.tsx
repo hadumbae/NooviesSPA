@@ -2,23 +2,16 @@
  * @fileoverview Content component for the movie credits page displaying organized cast and crew lists.
  */
 
-import {PageFlexWrapper} from "@/views/common/_comp/page";
-import MovieInfoHeader from "@/views/client/movies/components/headers/MovieInfoHeader.tsx";
-import {
-    MovieInfoCastCreditsSection
-} from "@/views/client/movies/pages/movie-info-credits/sections/MovieInfoCastCreditsSection.tsx";
-import {
-    MovieInfoCreditListSection
-} from "@/views/client/movies/pages/movie-info-credits/sections/MovieInfoCreditListSection.tsx";
 import {ReactElement, useMemo} from "react";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {PageFlexWrapper} from "@/views/common/_comp/page";
+import {MovieInfoHeader} from "@/views/client/movies/_comp";
 import {
-    GroupedCrewCreditsExceptMovie
-} from "@/domains/moviecredit/schemas/model/GroupedCrewCreditsExceptMovieSchema.ts";
-import {
-    buildFullCreditListByCategoryOrder
-} from "@/domains/movies/_feat/manage-credits-page/buildFullCreditListByCategoryOrder.ts";
-import {CastCreditExceptMovie} from "@/domains/moviecredit";
+    MovieInfoCastCreditsSection,
+    MovieInfoCreditListSection,
+} from "@/views/client/movies/pages/movie-info-credits/sections";
+
+import {buildFullCreditListByCategoryOrder, MovieDetails} from "@/domains/movies";
+import {CastCreditExceptMovie, GroupedCrewCreditsExceptMovie} from "@/domains/moviecredit";
 
 /** Props for the MovieInfoCreditsPageContent component. */
 type ContentProps = {
@@ -47,26 +40,24 @@ export function MovieInfoCreditsPageContent(
                 pageText="Cast & Crew"
             />
 
-            {
-                organisedList.map(([category, credits]) => {
-                    if (category === "Cast") {
-                        return (
-                            <MovieInfoCastCreditsSection
-                                key={`${category}-${credits.length}`}
-                                cast={credits as CastCreditExceptMovie[]}
-                            />
-                        );
-                    }
-
+            {organisedList.map(([category, credits]) => {
+                if (category === "Cast") {
                     return (
-                        <MovieInfoCreditListSection
+                        <MovieInfoCastCreditsSection
                             key={`${category}-${credits.length}`}
-                            category={category}
-                            credits={credits}
+                            cast={credits as CastCreditExceptMovie[]}
                         />
                     );
-                })
-            }
+                }
+
+                return (
+                    <MovieInfoCreditListSection
+                        key={`${category}-${credits.length}`}
+                        category={category}
+                        credits={credits}
+                    />
+                );
+            })}
         </PageFlexWrapper>
     );
 }

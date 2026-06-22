@@ -3,47 +3,56 @@
  */
 
 import {ReactElement} from 'react';
-import {SearchParamFormViewProps} from "@/common/type/form/SearchParamFormProps.ts";
-import {MovieQueryOptionFormValues} from "../../../../../domains/movies/_feat/submit-queries/MovieQueryOptionFormValueSchema.ts";
-import {Form} from "@/common/components/ui/form.tsx";
-import getActiveSchemaInputFields from "@/common/utility/forms/getActiveSchemaInputFields.ts";
-import {MovieQueryOptionSchema} from "../../../../../domains/movies/schema/queries/MovieQueryOptionSchema.ts";
-import useDebouncedFormAutoSubmit from "@/common/hooks/forms/useDebouncedFormAutoSubmit.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import MovieQueryOptionFormSortFieldset
-    from "@/views/admin/movies/_feat/submit-query-options/MovieQueryOptionFormSortFieldset.tsx";
+import {
+    MovieQueryOptionFormSortFieldset
+} from "@/views/admin/movies/_feat/submit-query-options/MovieQueryOptionFormSortFieldset.tsx";
 import {
     MovieQueryOptionFormFilterFieldset
 } from "@/views/admin/movies/_feat/submit-query-options/MovieQueryOptionFormFilterFieldset.tsx";
+import {MovieQueryOptionFormValues} from "@/domains/movies";
+import {DisableFields} from "@/common/types";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 
-type FormViewProps = SearchParamFormViewProps<MovieQueryOptionFormValues>;
+type FormProps = {
+    disableFields?: DisableFields<MovieQueryOptionFormValues>;
+    classNames?: {
+        container?: string;
+        filters?: string;
+        sorts?: string;
+    };
+};
 
 /**
  * Renders filter and sort fieldsets for movie queries with a 450ms debounce auto-submit.
  */
-function MovieQueryOptionFormView(
-    {form, className, disableFields, submitHandler}: FormViewProps
+export function MovieQueryOptionFormView(
+    {classNames, disableFields}: FormProps
 ): ReactElement {
-    useDebouncedFormAutoSubmit({form, submitHandler, timeout: 450});
+    const {submitHandler} = useBaseFormContext();
 
-    const activeFields = getActiveSchemaInputFields({
-        disableFields,
-        schema: MovieQueryOptionSchema
-    });
+    if (!submitHandler) {
+        throw new Error(`'${MovieQueryOptionFormView.name}' requires a 'submitHandler'.`);
+    }
+
+    useAutoFormSubmit({submitHandler, timeout: 450});
 
     return (
-        <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(submitHandler)}
-                className={cn(className, "space-y-4")}
-            >
-                <MovieQueryOptionFormFilterFieldset form={form} activeFields={activeFields}/>
-                <Separator/>
-                <MovieQueryOptionFormSortFieldset form={form} activeFields={activeFields}/>
-            </form>
-        </Form>
+        <div className={cn("space-y-4", classNames?.container)}>
+            <MovieQueryOptionFormFilterFieldset
+                className={classNames?.filters}
+                disableFields={disableFields}
+            />
+
+            <Separator/>
+
+            <MovieQueryOptionFormSortFieldset
+                className={classNames?.sorts}
+                disableFields={disableFields}
+            />
+        </div>
     );
 }
 
-export default MovieQueryOptionFormView;

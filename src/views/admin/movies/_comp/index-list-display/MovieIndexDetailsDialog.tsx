@@ -2,24 +2,21 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {
+    buttonVariants,
     Dialog,
     DialogContent,
     DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui/dialog.tsx";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+} from "@/common/components/ui";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
 import {Search} from "lucide-react";
-import {buttonVariants} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import LabelContent from "@/common/components/card-content/LabelContent.tsx";
-import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
-import {formatMovieData} from "@/domains/movies/_feat/formatters";
+import {formatMovieData, MovieDetails} from "@/domains/movies";
 
 /** Props for the MovieIndexDetailsDialog component. */
 export type DetailsDialogProps = {
@@ -48,15 +45,13 @@ export function MovieIndexDetailsDialog({children, movie}: DetailsDialogProps): 
         <Dialog>
             <DialogTrigger asChild>{children ?? "Open"}</DialogTrigger>
 
-            <DialogContent className={ContainerCSS}>
+            <DialogContent className="default-container">
                 <DialogHeader className="sr-only">
                     <DialogTitle>Movie: {title}</DialogTitle>
                     <DialogDescription>Movie information. Condensed.</DialogDescription>
                 </DialogHeader>
 
-                <section className="flex items-center space-x-2">
-                    <SectionHeader srOnly={true}>Basic Movie Details</SectionHeader>
-
+                <div className="flex items-center space-x-2">
                     <MoviePosterImageDialog
                         url={posterURL}
                         disableDialog={true}
@@ -68,44 +63,37 @@ export function MovieIndexDetailsDialog({children, movie}: DetailsDialogProps): 
                         <h3 className="secondary-text text-sm">{yearAndDuration}</h3>
                         <h4 className="secondary-text text-xs">{genreList}</h4>
                     </div>
-                </section>
+                </div>
 
-                <section>
-                    <SectionHeader srOnly={true}>Movie Synopsis</SectionHeader>
-                    <TextQuote>{synopsis}</TextQuote>
-                </section>
+                <TextQuote>{synopsis}</TextQuote>
 
-                <section>
-                    <LabelContent
-                        orientation="horizontal"
-                        label="Languages"
-                        classNames={{content: "secondary-text text-sm"}}
-                    >
-                        <span>{languageList}</span>
-                    </LabelContent>
+                <LabelContent
+                    orientation="horizontal"
+                    label="Languages"
+                    classNames={{content: "secondary-text text-sm"}}
+                >
+                    <span>{languageList}</span>
+                </LabelContent>
 
-                    <LabelContent
-                        orientation="horizontal"
-                        label="Subtitles"
-                        classNames={{content: "secondary-text text-sm"}}
-                    >
-                        <span>{subtitleList}</span>
-                    </LabelContent>
-                </section>
+                <LabelContent
+                    orientation="horizontal"
+                    label="Subtitles"
+                    classNames={{content: "secondary-text text-sm"}}
+                >
+                    <span>{subtitleList}</span>
+                </LabelContent>
 
-                <section>
-                    <LoggedAnchor
-                        target="_blank"
-                        href={`/admin/movies/get/${slug}`}
-                        className={cn(
-                            buttonVariants({variant: "default"}),
-                            "w-full bg-primary"
-                        )}
-                    >
-                        <Search/>
-                        <span>Details</span>
-                    </LoggedAnchor>
-                </section>
+                <LoggedAnchor
+                    target="_blank"
+                    href={`/admin/movies/get/${slug}`}
+                    className={cn(
+                        buttonVariants({variant: "default"}),
+                        "w-full bg-primary"
+                    )}
+                >
+                    <Search/>
+                    <span>Details</span>
+                </LoggedAnchor>
             </DialogContent>
         </Dialog>
     );

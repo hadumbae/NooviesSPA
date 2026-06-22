@@ -1,8 +1,7 @@
 /**
- * @file Builds an ordered list of movie credits grouped by category.
- * @filename buildFullCreditListByCategoryOrder.ts
+ * @fileoverview Utility for building an ordered list of movie credits grouped by category.
+ *
  */
-
 
 import {
     CreditCategoryDisplayOrderConstant,
@@ -11,25 +10,19 @@ import {
 import {GroupedCrewCreditsExceptMovie} from "@/domains/moviecredit/schemas";
 import {CastCreditExceptMovie, CreditExceptMovie} from "@/domains/moviecredit";
 
-/** Pair representing a category and its associated credits. */
-type DisplayOrderCategoryPair = [CreditDisplayOrderCategory, CreditExceptMovie[]];
+/** A tuple representing a credit category and its associated list of credits. */
+export type DisplayOrderCategoryPair = [CreditDisplayOrderCategory, CreditExceptMovie[]];
+/** A list of category-credit pairs ordered for display. */
+export type DisplayOrderCategoryList = DisplayOrderCategoryPair[];
 
-/** Ordered list of credit category pairs. */
-type DisplayOrderCategoryList = DisplayOrderCategoryPair[];
-
-/**
- * Parameters for building the ordered credit list.
- */
+/** Parameters for building the ordered credit list. */
 type OrderParams = {
-    /** Cast credits for the movie */
     castCredits: CastCreditExceptMovie[];
-
-    /** Crew credits grouped by category */
     crewDetails: GroupedCrewCreditsExceptMovie[];
 }
 
 /**
- * Builds a category-ordered list of movie credits for display.
+ * Builds a category-ordered list of movie credits for display based on a predefined constant.
  */
 export function buildFullCreditListByCategoryOrder(
     {castCredits, crewDetails}: OrderParams

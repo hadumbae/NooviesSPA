@@ -3,16 +3,12 @@
  */
 
 import {ReactElement, useMemo} from "react";
-import {
-    MovieCreditInfoList
-} from "@/views/client/movie-credits/_comp/credit-info-list/MovieCreditInfoList.tsx";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
+import {MovieCreditInfoList} from "@/views/client/movie-credits/_comp";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import {
-    organiseMovieCastCreditsByPrimacy
-} from "@/domains/movies/_feat/manage-credits-page/organiseMovieCastCreditsByPrimacy.ts";
+
+import {organiseMovieCastCreditsByPrimacy} from "@/domains/movies";
 import {CastCreditExceptMovie} from "@/domains/moviecredit";
+import {PageSectionHeader} from "@/views/common/_comp/page";
 
 /** Props for the MovieInfoCastCreditsSection component. */
 type SectionProps = {
@@ -23,26 +19,18 @@ type SectionProps = {
 export function MovieInfoCastCreditsSection(
     {cast}: SectionProps
 ): ReactElement {
-    const organisedCast = useMemo(
+    const {primaryCast, supportCast} = useMemo(
         () => organiseMovieCastCreditsByPrimacy({credits: cast}),
         [cast]
     );
 
-    const {primaryCast, supportCast} = organisedCast;
-
     return (
         <section className="space-y-4">
-            <SectionHeader className={SectionHeaderCSS}>
-                Cast
-            </SectionHeader>
-
-            <PrimaryHeaderText className="hidden" as="h3">Support Cast</PrimaryHeaderText>
-
-            <MovieCreditInfoList credits={primaryCast} />
+            <PageSectionHeader text="Cast"/>
+            <MovieCreditInfoList credits={primaryCast}/>
 
             <PrimaryHeaderText className="text-base" as="h3">Support Cast</PrimaryHeaderText>
-
-            <MovieCreditInfoList credits={supportCast} />
+            <MovieCreditInfoList credits={supportCast}/>
         </section>
     );
 }

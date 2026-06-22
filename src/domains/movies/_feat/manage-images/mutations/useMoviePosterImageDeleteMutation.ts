@@ -1,31 +1,26 @@
 /**
- * @fileoverview Mutation hook for deleting a movie's poster image and updating the movie record.
+ * @fileoverview Mutation hook for deleting a movie's poster image and updating the cache.
  */
 
-
-import {toast} from "react-toastify";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {Movie, MovieSchema} from "@/domains/movies/schema/movie";
-import {deleteRemovePosterImage, ManageMovieImageMutationKeys} from "@/domains/movies/_feat/manage-images";
 import validateData from "@/common/hooks/validation/validate-data/validateData";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import Logger from "@/common/utility/features/logger/Logger.ts";
+import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks";
+import {deleteRemovePosterImage} from "@/domains/movies/_feat/manage-images/repository";
+import {ManageMovieImageMutationKeys} from "@/domains/movies/_feat/manage-images/mutations/mutationKeys.ts";
 
-/** Input values required to delete a movie poster image. */
+/** Input parameters for the movie poster deletion mutation. */
 type OnDeleteValues = {
     movieID: ObjectId;
 };
 
-export function useMoviePosterImageDeleteMutation(
-    onSubmitConfig: MutationResponseConfig<Movie> = {}
-): UseMutationResult<Movie, unknown, OnDeleteValues> {
+/** Hook that provides a mutation to remove a movie poster and invalidates related movie queries. */
+export function useMoviePosterImageDeleteMutation(): UseMutationResult<Movie, unknown, OnDeleteValues> {
     const queryClient = useQueryClient();
 
     const deleteMoviePosterImage = async ({movieID}: OnDeleteValues) => {
-        onSubmitConfig.submitMessage && toast.info(onSubmitConfig.submitMessage);
-        onSubmitConfig.onSubmit?.();
-
         const {result} = await deleteRemovePosterImage({movieID})
 
         const {data: parsedData, error, success} = validateData({
@@ -39,23 +34,13 @@ export function useMoviePosterImageDeleteMutation(
     };
 
     const onSuccess = (movie: Movie) => {
-        queryClient.invalidateQueries({queryKey: ['movies'], exact: false});
-
-        onSubmitConfig.successMessage && toast.success(onSubmitConfig.successMessage);
-        onSubmitConfig.onSubmitSuccess?.(movie);
+        Logger.log({type: "INFO", msg: "Movie Poster Removed.", context: {movie: movie._id}});
+        queryClient.invalidateQueries({queryKey: MovieCRUDQueryKeys.all, exact: false});
     };
-
-    const onError = (error: unknown) => {
-        const displayMessage = onSubmitConfig.errorMessage ?? "Failed to remove poster image. Please try again.";
-        handleMutationResponseError({error, displayMessage});
-        onSubmitConfig.onSubmitError?.(error);
-    };
-
 
     return useMutation({
         mutationKey: ManageMovieImageMutationKeys.removePoster(),
         mutationFn: deleteMoviePosterImage,
         onSuccess,
-        onError,
     });
 }

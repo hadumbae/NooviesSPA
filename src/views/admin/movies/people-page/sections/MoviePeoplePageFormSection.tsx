@@ -30,7 +30,7 @@ export function MoviePeoplePageFormSection(
             <TextCollapsible triggerText="Form" defaultOpen={isDesktop} className="py-2">
                 <Card>
                     <CardContent className="p-4">
-                        <MovieCreditForm presetValues={{department, movie: movieID}}>
+                        <MovieCreditForm formConfig={{presetValues: {department, movie: movieID}}}>
                             <MovieCreditFormView disableFields={{department: true, movie: true}}/>
                         </MovieCreditForm>
                     </CardContent>

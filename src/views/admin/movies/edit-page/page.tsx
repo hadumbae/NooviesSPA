@@ -1,6 +1,5 @@
 /**
  * @fileoverview Main page component for the movie editing interface in the admin dashboard.
- *
  */
 
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";

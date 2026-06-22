@@ -1,15 +1,20 @@
 import {MovieDetailsUIContextProvider} from "@/domains/movies/context/details-ui/MovieDetailsUIContextProvider.tsx";
 import {
-    MovieDetailsUIContext,
-    MovieDetailsUIStates
-} from "@/domains/movies/context/details-ui/MovieDetailsUIContext.ts";
-
+    MovieDetailsUIStates,
+    MovieDetailsUIStatesContext
+} from "@/domains/movies/context/details-ui/MovieDetailsUIStatesContext.ts";
+import {
+    MovieDetailsUISetters,
+    MovieDetailsUISettersContext
+} from "@/domains/movies/context/details-ui/MovieDetailsUISettersContext.ts";
 
 export {
-    MovieDetailsUIContext,
+    MovieDetailsUIStatesContext,
+    MovieDetailsUISettersContext,
     MovieDetailsUIContextProvider,
 }
 
 export type {
+    MovieDetailsUISetters,
     MovieDetailsUIStates,
 }

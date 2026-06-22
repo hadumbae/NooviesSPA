@@ -5,7 +5,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEm
 import {z} from "zod";
 
 /** Zod schema for validating a movie title string. */
-export const MovieTitleSchema = NonEmptyStringSchema.max(250, "Must be 250 characters or less.");
+export const MovieTitleSchema = NonEmptyStringSchema.max(250, "Max. 250 Chars");
 
 /** Type definition for a valid movie title. */
 export type MovieTitle = z.infer<typeof MovieTitleSchema>;

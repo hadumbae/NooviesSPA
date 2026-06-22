@@ -2,43 +2,71 @@
  * @fileoverview Container component for handling movie submission logic and form state.
  */
 
-import {ReactElement} from 'react';
-import buildFormSubmitLog from "@/common/utility/features/logger/buildFormSubmitLog.ts";
+import {ReactElement, ReactNode} from 'react';
 import {MovieFormData, MovieFormStarterValues, useMovieSubmitForm} from "@/domains/movies/_feat/submit-data";
 import {useMovieSubmitMutation} from "@/domains/movies/_feat/crud-hooks";
-import {FormConfigProps} from "@/common/_feat/submit-data";
+import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {Movie} from "@/domains/movies/schema/movie";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
+import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
+import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
+import Logger from "@/common/utility/features/logger/Logger.ts";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+
+type ContainerProps =
+    MutationResponseConfig<Movie, MovieFormData>
+    & MutationFormResetConfig
+    & FormValuesConfig<MovieFormStarterValues, Movie>
+    & { children: ReactNode };
 
 /**
  * Orchestrates movie data submission by providing form context and handling mutation triggers.
- * Requires a uniqueKey for form identification.
  */
 export function MovieSubmitForm(
-    props: FormConfigProps<MovieFormStarterValues, Movie, Movie>
+    {children, presetValues, editEntity, ...submitConfig}: ContainerProps
 ): ReactElement {
-    const {children, uniqueKey, presetValues, resetOnSuccess, resetOnError, editEntity, ...onSubmitProps} = props;
 
-    const formKey = `form-submit-movie-data-${uniqueKey ?? "1"}`;
+    const formID = useGenerateFormID("form-submit-movie-data");
 
     const form = useMovieSubmitForm({movie: editEntity, presetValues});
-    const {mutate, isPending} = useMovieSubmitMutation({form, ...onSubmitProps});
+    const {mutateAsync, isPending, isError} = useMovieSubmitMutation();
 
-    const submitMovieData = (values: MovieFormData) => {
-        buildFormSubmitLog({
-            values,
-            msg: "Movie Submit Values",
-            component: MovieSubmitForm.name
-        });
+    const submitMovieData = async (values: MovieFormData) => {
+        try {
+            handleMutationCallback({
+                message: submitConfig.submitMessage,
+                cb: () => submitConfig.onSubmit?.(values),
+            });
 
-        mutate(values);
+            const movie = await mutateAsync(values);
+
+            Logger.log({
+                msg: "Movie Created/Updated.",
+                type: "INFO",
+                context: {movie: movie._id},
+            });
+
+            handleMutationCallback({
+                message: submitConfig.successMessage,
+                cb: () => submitConfig.onSubmitSuccess?.(movie),
+                messageType: "success",
+            });
+        } catch (error: unknown) {
+            handleMutationFormError({form, error, displayMessage: submitConfig.errorMessage});
+            submitConfig.onSubmitError?.(error);
+        }
     };
 
     return (
-        <BaseFormContextProvider formID={formKey} isPending={isPending} submitHandler={submitMovieData}>
+        <BaseFormContextProvider
+            formID={formID}
+            isPending={isPending}
+            isError={isError}
+            submitHandler={submitMovieData}
+        >
             <Form {...form}>
-                <form id={formKey} onSubmit={form.handleSubmit(submitMovieData)}>
+                <form id={formID} onSubmit={form.handleSubmit(submitMovieData)}>
                     {children}
                 </form>
             </Form>

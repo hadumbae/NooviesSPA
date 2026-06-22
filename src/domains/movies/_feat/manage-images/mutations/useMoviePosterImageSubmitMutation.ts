@@ -1,40 +1,29 @@
 /**
- * @fileoverview Mutation hook for uploading and updating movie poster images via multipart form data.
+ * @fileoverview Mutation hook for uploading and updating movie poster images.
  */
 
-import {toast} from "react-toastify";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {MutationFormConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {
-    ManageMovieImageMutationKeys,
-    MoviePosterImageFormData,
-    MoviePosterImageFormValues,
-    patchUploadPosterImage
-} from "@/domains/movies/_feat/manage-images";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {type Movie, MovieSchema} from "@/domains/movies/schema/movie";
+import {Movie, MovieSchema} from "@/domains/movies/schema";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks";
+import Logger from "@/common/utility/features/logger/Logger.ts";
+import {ManageMovieImageMutationKeys} from "@/domains/movies/_feat/manage-images/mutations/mutationKeys.ts";
+import {patchUploadPosterImage} from "@/domains/movies/_feat/manage-images/repository";
+import {MoviePosterImageFormData} from "@/domains/movies/_feat/manage-images/form";
 
 /** Configuration parameters for the movie poster image submission mutation. */
-type ImageSubmitParams =
-    MutationResponseConfig<Movie> &
-    MutationFormConfig<MoviePosterImageFormValues, MoviePosterImageFormData> & {
+type ImageSubmitParams = {
     movieID: ObjectId;
 };
 
-/**
- * Hook for submitting a movie's poster image and updating the movie record.
- */
-export default function useMoviePosterImageSubmitMutation(
-    {movieID, form, resetForm, ...onSubmitConfig}: ImageSubmitParams
+/** Hook that provides a mutation for uploading a movie poster image using multipart form data. */
+export function useMoviePosterImageSubmitMutation(
+    {movieID}: ImageSubmitParams
 ): UseMutationResult<Movie, unknown, MoviePosterImageFormData> {
     const queryClient = useQueryClient();
 
     const submitMoviePosterImage = async ({posterImage}: MoviePosterImageFormData) => {
-        onSubmitConfig.submitMessage && toast.info(onSubmitConfig.submitMessage);
-        onSubmitConfig.onSubmit?.();
-
         const formData = new FormData();
         formData.append("posterImage", posterImage);
 
@@ -47,31 +36,17 @@ export default function useMoviePosterImageSubmitMutation(
         });
 
         if (!success) throw error;
-
-        resetForm?.resetOnSubmit && form.reset();
         return parsedData;
     };
 
     const onSuccess = (movie: Movie) => {
-        queryClient.invalidateQueries({queryKey: ['movies'], exact: false});
-        resetForm?.resetOnSuccess && form.reset();
-
-        onSubmitConfig.successMessage && toast.success(onSubmitConfig.successMessage);
-        onSubmitConfig.onSubmitSuccess?.(movie);
-    };
-
-    const onError = (error: unknown) => {
-        resetForm?.resetOnError && form.reset();
-
-        onSubmitConfig.errorMessage && toast.error(onSubmitConfig.errorMessage);
-        handleMutationFormError({form, error});
-        onSubmitConfig.onSubmitError?.(error);
+        Logger.log({type: "INFO", msg: "Movie Poster Updated.", context: {movie: movie._id}});
+        queryClient.invalidateQueries({queryKey: MovieCRUDQueryKeys.all, exact: false});
     };
 
     return useMutation({
         mutationKey: ManageMovieImageMutationKeys.submitPoster(),
         mutationFn: submitMoviePosterImage,
         onSuccess,
-        onError,
     });
 }

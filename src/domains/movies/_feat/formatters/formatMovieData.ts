@@ -1,4 +1,6 @@
-/** @fileoverview Utility for deriving UI-ready display strings and formatted fields from Movie models. */
+/**
+ * @fileoverview Utility for deriving UI-ready display strings and formatted fields from Movie models.
+ */
 
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import {

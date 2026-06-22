@@ -9,9 +9,10 @@ import {BrowseMoviesPage} from "@/views/client/movies/pages/browse-movies";
 import {MovieInfoPage} from "@/views/client/movies/pages/movie-info";
 import {MovieInfoCreditsPage} from "@/views/client/movies/pages/movie-info-credits";
 import {MovieInfoShowingsPage} from "@/views/client/movies/pages/movie-info-showings";
+import {RouteObject} from "react-router-dom";
 
 /** Route definitions for the movie browsing domain. */
-export default [
+export const BrowseMovieRoutes: RouteObject[] = [
     {
         path: "/browse",
         element: <BaseLayout/>,
@@ -44,3 +45,4 @@ export default [
         ],
     },
 ];
+

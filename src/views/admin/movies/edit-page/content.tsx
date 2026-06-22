@@ -5,12 +5,11 @@
 import {ReactElement} from 'react';
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {MovieSubmitForm} from "../_feat/submit-movie/MovieSubmitForm.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
 import {MovieEditHeader} from "@/views/admin/movies/edit-page/header.tsx";
-import {MovieSubmitFormActions, MovieSubmitFormView} from "@/views/admin/movies/_feat/submit-movie";
 import {SROnly} from "@/views/common/_comp/screen-readers";
+import {MovieSubmitForm, MovieSubmitFormActions, MovieSubmitFormView} from "@/views/admin/movies/_feat/submit-movie";
 
 /** Props for the MovieEditPageContent component. */
 type ContentProps = {
@@ -42,7 +41,7 @@ export function MovieEditPageContent(
             <MovieEditHeader movieSlug={slug} movieTitle={title}/>
 
             <section>
-                <SROnly text="Movie Edit Form" />
+                <SROnly text="Movie Edit Form"/>
 
                 <Card>
                     <CardContent className="p-4">

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Defines the routing configuration for movie management within the admin dashboard.
+ */
+
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
 import {RouteObject} from "react-router-dom";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
@@ -7,13 +11,12 @@ import {MovieIndexPage} from "@/views/admin/movies/index-page";
 import {MovieEditPage} from "@/views/admin/movies/edit-page";
 import {MovieDetailsPage} from "@/views/admin/movies/details-page";
 
-const routes: RouteObject[] = [
+/** Route configuration for movie-related administrative pages. */
+export const AdminMovieRoutes: RouteObject[] = [
     {
         path: '/admin/movies',
         element: <AdminLayout />,
         children: [
-            // CRUD Routes
-
             {
                 path: "/admin/movies",
                 element: <MovieIndexPage />,
@@ -34,9 +37,6 @@ const routes: RouteObject[] = [
                 element: <MovieEditPage />,
                 errorElement: <ComponentErrorHandler />,
             },
-
-            // People
-
             {
                 path: "/admin/movies/get/:slug/people/cast",
                 element: <MoviePeoplePage department="CAST" />,
@@ -50,5 +50,3 @@ const routes: RouteObject[] = [
         ],
     }
 ];
-
-export default routes;

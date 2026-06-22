@@ -3,11 +3,12 @@
  */
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import {BrowseMovieIndexCard} from "@/views/client/movies/_comp/browse-movie-index";
-import {BrowseMoviesPageHeader} from "@/views/client/movies/pages/browse-movies/header.tsx";
+import {PageHeader} from "@/views/common/_comp";
+import {BrowseMovieIndexCard} from "@/views/client/movies/_comp";
+
+import {MovieDetails} from "@/domains/movies";
 
 /** Props for the BrowseMoviesPageContent component. */
 type ContentProps = {
@@ -24,7 +25,10 @@ export function BrowseMoviesPageContent(
 ): ReactElement {
     return (
         <PageFlexWrapper>
-            <BrowseMoviesPageHeader/>
+            <PageHeader
+                title="Browse The Movies!"
+                description="From timeless classics to the latest releases — find them all here."
+            />
 
             <section className="space-y-4">
                 <SROnly text="Browse | Movie List"/>
@@ -33,7 +37,10 @@ export function BrowseMoviesPageContent(
                     {movies.map((movie) => <BrowseMovieIndexCard key={movie._id} movie={movie}/>)}
                 </div>
 
-                <PaginationRangeButtons totalItems={totalMovies}{...paginationProps} />
+                <PaginationRangeButtons
+                    totalItems={totalMovies}
+                    {...paginationProps}
+                />
             </section>
         </PageFlexWrapper>
     );

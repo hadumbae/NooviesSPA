@@ -1,6 +1,5 @@
 /**
  * @fileoverview Container coordinating data loading for the movie overview page.
- *
  */
 
 import {ReactElement} from "react";

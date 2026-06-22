@@ -1,15 +1,10 @@
-import {MovieDetailsPageContent} from "@/views/admin/movies/details-page/content.tsx";
 import {MovieDetailsPage} from "@/views/admin/movies/details-page/page.tsx";
-import {MovieDetailsHeader} from "@/views/admin/movies/details-page/header.tsx";
-import {MovieDetailsBreadcrumb} from "@/views/admin/movies/details-page/breadcrumbs.tsx";
-import {MovieDetailsPageCreditSection} from "./sections/creditSection.tsx";
-import {MovieDetailsPageShowingSection} from "./sections/showingSection.tsx";
+import {MovieDetailsPageContent} from "@/views/admin/movies/details-page/content.tsx";
+
+export * from "./sections";
+export * from "./elements";
 
 export {
     MovieDetailsPage,
     MovieDetailsPageContent,
-    MovieDetailsHeader,
-    MovieDetailsBreadcrumb,
-    MovieDetailsPageCreditSection,
-    MovieDetailsPageShowingSection,
 }

@@ -3,16 +3,17 @@
  */
 
 import {ReactElement} from "react";
-import {PaginatedItems} from "@/common/types";
 import {cn} from "@/common/lib/utils.ts";
+import {PaginatedItems} from "@/common/types";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {RoleTypeDepartment} from "@/domains/roletype";
-import {MovieCreditDetails, MovieCreditDetailsSchema, useFetchPaginatedMovieCredits} from "@/domains/moviecredit";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
-import {MovieCastCreditCard} from "@/views/admin/movie-credits/_feat";
+import {MovieCastCreditCard, MovieCrewCreditCard} from "@/views/admin/movie-credits/_feat";
+
+import {RoleTypeDepartment} from "@/domains/roletype";
+import {MovieCreditDetails, MovieCreditDetailsSchema, useFetchPaginatedMovieCredits} from "@/domains/moviecredit";
 
 /** Props for the MoviePeoplePageCreditSection component. */
 type SectionProps = {

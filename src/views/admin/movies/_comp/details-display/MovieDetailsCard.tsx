@@ -1,6 +1,5 @@
 /** @fileoverview Card component for displaying comprehensive movie details including metadata, synopsis, and localization. */
 
-
 import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";

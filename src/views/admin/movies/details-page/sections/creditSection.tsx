@@ -1,4 +1,6 @@
-/** @fileoverview Section component for displaying a preview of movie cast credits. */
+/**
+ * @fileoverview Section component for displaying a preview of movie cast credits.
+ */
 
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
@@ -16,7 +18,7 @@ import {generateArraySchema} from "@/common/_feat/validation-builders";
 /** Cast-specific movie credit details filtered by department. */
 type CastCredits = (Extract<MovieCreditDetails, { department: "CAST" }>)[];
 
-/** Props for the MovieDetailsPageCastCreditTab component. */
+/** Props for the MovieDetailsPageCreditSection component. */
 type TabProps = {
     _id: ObjectId;
     slug: SlugString;

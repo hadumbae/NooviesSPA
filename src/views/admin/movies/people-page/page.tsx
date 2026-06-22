@@ -4,15 +4,14 @@
 
 import {ReactElement} from "react";
 import {PageLoader} from "@/views/common/_comp/page";
-import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import useParsedPaginationValue
-    from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
-import {MoviePeoplePageContent} from "@/views/admin/movies/people-page/content.tsx";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {useFetchMovieBySlug} from "@/domains/movies/_feat/crud-hooks";
+import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
+import {MoviePeoplePageContent} from "@/views/admin/movies/people-page/content.tsx";
+
+import {RoleTypeDepartment} from "@/domains/roletype";
+import {Movie, MovieSchema, useFetchMovieBySlug} from "@/domains/movies";
 
 /** Props for the MoviePeoplePage component. */
 type PeoplePageProps = {

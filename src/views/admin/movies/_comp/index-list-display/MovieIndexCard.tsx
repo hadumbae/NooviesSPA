@@ -1,14 +1,14 @@
 /** @fileoverview Compact movie index card component for administrative listings. */
 
-import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
-import {Info} from "lucide-react";
-import TooltipButton from "@/common/components/buttons/TooltipButton.tsx";
-import {MovieIndexDetailsDialog} from "@/views/admin/movies/_comp/index-list-display/MovieIndexDetailsDialog.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {ReactElement} from "react";
+import {Info} from "lucide-react";
+import {cn} from "@/common/lib/utils.ts";
 import {AdminMovieMeta} from "@/views/admin/movies/_comp/movie-details";
+import {Card, CardContent, CardHeader} from "@/common/components/ui";
+import {MovieDetails} from "@/domains/movies";
+import TooltipButton from "@/common/components/buttons/TooltipButton.tsx";
+import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
+import {MovieIndexDetailsDialog} from "@/views/admin/movies/_comp/index-list-display/MovieIndexDetailsDialog.tsx";
 
 /** Props for the MovieIndexCard component. */
 type IndexCardProps = {

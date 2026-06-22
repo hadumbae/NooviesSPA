@@ -2,11 +2,12 @@
 
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
-import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
-import {MoviePeopleHeader} from "@/views/admin/movies/people-page/header.tsx";
+import {MoviePeopleHeader} from "@/views/admin/movies/people-page/sections";
 import {MoviePeoplePageFormSection} from "@/views/admin/movies/people-page/sections/MoviePeoplePageFormSection.tsx";
 import {MoviePeoplePageCreditSection} from "@/views/admin/movies/people-page/sections/MoviePeoplePageCreditSection.tsx";
+
+import {Movie} from "@/domains/movies";
+import {RoleTypeDepartment} from "@/domains/roletype";
 
 /** Props for the MoviePeoplePageContent component. */
 type ContentProps = {
@@ -22,7 +23,6 @@ export function MoviePeoplePageContent(
     {movie, department, page, perPage, setPage}: ContentProps
 ): ReactElement {
     const {_id: movieID} = movie;
-
 
     return (
         <PageFlexWrapper className="space-y-6">
