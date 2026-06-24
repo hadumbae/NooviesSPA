@@ -13,7 +13,7 @@ import IconTextSpan from "@/common/components/card-content/IconTextSpan.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenDetails} from "@/domains/theatre-screens/_schema/model";
 import {ReactElement} from "react";
 
 /** Props for the ScreenSummaryCard component. */

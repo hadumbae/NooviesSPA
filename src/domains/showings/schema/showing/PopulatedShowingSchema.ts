@@ -6,7 +6,7 @@ import {ShowingSchema} from "@/domains/showings/schema/showing/ShowingSchema.ts"
 import {z} from "zod";
 
 import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
-import {TheatreScreenSchema} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenSchema} from "@/domains/theatre-screens/_schema/model";
 import {TheatreSchema} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
 
 /**

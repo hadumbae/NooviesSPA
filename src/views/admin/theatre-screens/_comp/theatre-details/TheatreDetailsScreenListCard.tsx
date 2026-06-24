@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/_schema/model";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {TheatreScreenTypeBadge} from "@/views/admin/theatre-screens/_comp/badges";
 import {

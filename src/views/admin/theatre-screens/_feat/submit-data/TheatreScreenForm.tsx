@@ -4,7 +4,7 @@
  */
 
 import {ReactElement} from 'react';
-import {TheatreScreen} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreen} from "@/domains/theatre-screens/_schema/model";
 import {
     TheatreScreenFormData,
     TheatreScreenFormValues,
@@ -14,7 +14,7 @@ import {useTheatreScreenSubmitMutation} from "@/domains/theatre-screens/_feat/cr
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 import {FormConfigProps} from "@/common/_feat/submit-data";
-import {TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenDetails} from "@/domains/theatre-screens/_schema/model";
 
 /**
  * Props for the ScreenSubmitForm component.

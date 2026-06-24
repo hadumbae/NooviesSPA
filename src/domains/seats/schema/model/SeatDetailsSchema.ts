@@ -9,7 +9,7 @@ import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEm
 import {SeatTypeSchema} from "../fields/SeatTypeSchema.ts";
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 import {CoercedNumberValueSchema} from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
-import {TheatreScreenSchema} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenSchema} from "@/domains/theatre-screens/_schema/model";
 import {TheatreSchema} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
 
 /** Schema for seating positions with full theatre and screen references. */

@@ -6,7 +6,7 @@ import {z} from "zod";
 import {ShowingDetailsSchema} from "@/domains/showings/schema/showing";
 import {MovieWithGenresSchema} from "@/domains/movies/schema/movie";
 import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre";
-import {TheatreScreenDetailsSchema} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenDetailsSchema} from "@/domains/theatre-screens/_schema/model";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {SeatMapDetailsSchema} from "@/domains/seatmap/schema/model/SeatMap.schema.ts";
 

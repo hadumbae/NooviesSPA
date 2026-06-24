@@ -1,15 +1,9 @@
-/**
- * @fileoverview Zod schema for validating React Router parameters on the Screen Details page.
- * Ensures that the theatre and screen slugs are present and correctly formatted.
- */
+/** @fileoverview Zod schema and type for theatre screen route parameters. */
 
 import {z} from "zod";
-import {NonEmptyStringSchema}
-    from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 
-/**
- * Route parameters required to identify a specific screen within a theatre hierarchy.
- */
+/** Zod schema for validating route parameters identifying a specific theatre screen. */
 export const TheatreScreenDetailsRouteParamSchema = z.object(
     {
         theatreSlug: NonEmptyStringSchema,
@@ -21,8 +15,6 @@ export const TheatreScreenDetailsRouteParamSchema = z.object(
     }
 );
 
-/**
- * TypeScript type inferred from {@link TheatreScreenDetailsRouteParamSchema}.
- */
+/** TypeScript type for theatre screen route parameters. */
 export type TheatreScreenDetailsRouteParams =
     z.infer<typeof TheatreScreenDetailsRouteParamSchema>;

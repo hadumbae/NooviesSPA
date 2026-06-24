@@ -2,7 +2,7 @@
  * @fileoverview Card component for displaying screen metadata alongside a selectable list of its associated showings.
  */
 
-import {TheatreScreenSchedule} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenSchedule} from "@/domains/theatre-screens/_schema/model";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";

@@ -9,7 +9,7 @@ import {
     TheatreScreen,
     TheatreScreenDetails,
     TheatreScreenSchema, TheatreScreenWithVirtuals
-} from "@/domains/theatre-screens/schema/model";
+} from "@/domains/theatre-screens/_schema/model";
 
 /**
  * Normalises complex screen objects into a flat structure by extracting the theatre ID.

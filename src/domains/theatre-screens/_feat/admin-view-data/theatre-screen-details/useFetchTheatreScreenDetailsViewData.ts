@@ -2,17 +2,19 @@
  * @fileoverview Hook for fetching validated administrative theatre screen details.
  */
 
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {
-    getFetchTheatreScreenAdminViewData,
-    TheatreScreenDetailsViewData, TheatreScreenDetailsViewDataSchema
-} from "@/domains/theatre-screens/_feat/admin-view-data";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {TheatreScreenAdminViewDataQueryKeys} from "@/domains/theatre-screens/_feat/admin-view-data/queryKeys.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+
+import {TheatreScreenAdminViewDataQueryKeys} from "@/domains/theatre-screens/_feat/admin-view-data/keys";
+import {getFetchTheatreScreenAdminViewData,} from "@/domains/theatre-screens/_feat/admin-view-data/repository";
+import {
+    TheatreScreenDetailsViewData,
+    TheatreScreenDetailsViewDataSchema
+} from "@/domains/theatre-screens/_feat/admin-view-data/theatre-screen-details/viewDataSchema.ts";
 
 /** Props for the useFetchTheatreScreenDetailsViewData hook. */
 type FetchConfig = {

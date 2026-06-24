@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Theatre, TheatreDetails} from "@/domains/theatres/schema/theatre";
-import {TheatreScreen, TheatreScreenDetails} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreen, TheatreScreenDetails} from "@/domains/theatre-screens/_schema/model";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {IconTextCSS} from "@/common/constants/css/TextCSS.ts";
 import {TvMinimal} from "lucide-react";

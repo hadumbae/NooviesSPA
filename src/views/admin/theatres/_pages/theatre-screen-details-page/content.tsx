@@ -10,7 +10,7 @@ import {
     TheatreScreenDetailsPageScreenActions
 } from "@/views/admin/theatres/_pages/theatre-screen-details-page/elements";
 
-import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/_schema/model";
 import {TheatreDetails} from "@/domains/theatres";
 import {SeatDetails} from "@/domains/seats/schema/model";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";

@@ -1,10 +1,9 @@
 /**
  * @fileoverview Zod schema for validating the aggregated data used in the Screen Details admin view.
- * Ensures strict typing for the combined payload of theatre, screen, and seat metadata.
  */
 
 import {z} from "zod";
-import {TheatreScreenWithVirtualsSchema} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenWithVirtualsSchema} from "@/domains/theatre-screens/_schema/model";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {SeatDetailsSchema} from "@/domains/seats/schema/model";
 import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";

@@ -10,7 +10,7 @@ import {
     useFetchTheatreScreenDetailsViewData
 } from "@/domains/theatre-screens/_feat/admin-view-data";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {ScreenDetailsUIContextProvider} from "@/domains/theatre-screens/contexts/screen-details";
+import {ScreenDetailsUIContextProvider} from "@/domains/theatre-screens/_ctx/screen-details";
 import {TheatreScreenDetailsPageContent} from "@/views/admin/theatres/_pages/theatre-screen-details-page/content.tsx";
 
 /**

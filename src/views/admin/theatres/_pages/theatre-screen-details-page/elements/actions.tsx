@@ -5,7 +5,7 @@
 
 import {ReactElement} from "react";
 import {TheatreScreenForm, TheatreScreenFormPanel} from "@/views/admin/theatre-screens/_feat/submit-data";
-import {TheatreScreenDetails, TheatreScreenWithVirtuals} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenDetails, TheatreScreenWithVirtuals} from "@/domains/theatre-screens/_schema/model";
 import {useLocation} from "react-router-dom";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
@@ -17,7 +17,7 @@ import {TheatreDetails} from "@/domains/theatres";
 import {
     ScreenDetailsUISetterContext,
     ScreenDetailsUIStateContext
-} from "@/domains/theatre-screens/contexts/screen-details";
+} from "@/domains/theatre-screens/_ctx/screen-details";
 
 /**
  * Props for the TheatreScreenDetailsPageScreenActions component.

@@ -12,7 +12,7 @@ import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {Ellipsis} from "lucide-react";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {Dispatch, ReactElement, SetStateAction, useState} from "react";
-import {ScreenDetailsUISetterContext} from "@/domains/theatre-screens/contexts/screen-details";
+import {ScreenDetailsUISetterContext} from "@/domains/theatre-screens/_ctx/screen-details";
 
 /**
  * Renders an action menu for screen management that updates UI state via ScreenDetailsUIContext.

@@ -2,7 +2,7 @@
  * @fileoverview Presentational component for rendering theatre details and screen listings.
  */
 
-import {TheatreScreenSchedule} from "@/domains/theatre-screens/schema/model";
+import {TheatreScreenSchedule} from "@/domains/theatre-screens/_schema/model";
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
