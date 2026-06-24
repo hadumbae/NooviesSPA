@@ -1,24 +1,24 @@
-import {TheatreScreen, TheatreScreenSchema} from "./TheatreScreenSchema.ts";
+import {TheatreScreen, TheatreScreenSchema} from "@/domains/theatre-screens/_schema/model/TheatreScreenSchema.ts";
 import {
     PopulatedTheatreScreen,
     PopulatedTheatreScreenSchema
-} from "./PopulatedTheatreScreenSchema.ts";
+} from "@/domains/theatre-screens/_schema/model/PopulatedTheatreScreenSchema.ts";
 import {
     TheatreScreenDetails,
     TheatreScreenDetailsSchema
-} from "./TheatreScreenDetailsSchema.ts";
+} from "@/domains/theatre-screens/_schema/model/TheatreScreenDetailsSchema.ts";
 import {
     TheatreScreenSchedule,
     TheatreScreenScheduleSchema
-} from "./TheatreScreenScheduleSchema.ts";
+} from "@/domains/theatre-screens/_schema/model/TheatreScreenScheduleSchema.ts";
 import {
     TheatreScreenWithVirtuals,
     TheatreScreenWithVirtualsSchema
-} from "./TheatreScreenWithVirtualsSchema.ts";
+} from "@/domains/theatre-screens/_schema/model/TheatreScreenWithVirtualsSchema.ts";
 import {
     TheatreScreenVirtuals,
     TheatreScreenVirtualsSchema
-} from "./TheatreScreenVirtualsSchema.ts";
+} from "@/domains/theatre-screens/_schema/model/TheatreScreenVirtualsSchema.ts";
 
 
 export {
