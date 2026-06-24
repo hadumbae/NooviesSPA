@@ -8,7 +8,7 @@ import {
     MovieCreditFormCastFieldset,
     MovieCreditFormCastFlagFieldset,
     MovieCreditFormDetailsFieldset,
-} from "@/views/admin/movie-credits/_comp/submit-form/fieldsets";
+} from "@/views/admin/movie-credits/_feat/submit-form/fieldsets";
 
 import {DisableFields} from "@/common/types";
 import {MovieCreditFormValues} from "@/domains/moviecredit";

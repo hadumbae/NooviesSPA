@@ -4,15 +4,13 @@
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import {TheatreShowingCreateHeader}
-    from "@/views/admin/theatres/_pages/theatre-showings-create/header.tsx";
+import {TheatreShowingCreateHeader} from "@/views/admin/theatres/_pages/theatre-showings-create/elements/header.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {
-    ShowingSubmitForm
-} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitForm.tsx";
+import {ShowingSubmitForm} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitForm.tsx";
 import {ReactElement} from "react";
 
 import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
+import {ShowingSubmitFormView} from "@/views/admin/showings/_feat/submit-form";
 
 /** Props for the TheatreShowingCreatePageContent component. */
 type ContentProps = {
@@ -46,11 +44,9 @@ export function TheatreShowingCreatePageContent(
 
             <Card>
                 <CardContent className="p-3">
-                    <ShowingSubmitForm
-                        onSubmitSuccess={onSubmit}
-                        presetValues={{theatre: theatreID}}
-                        disableFields={["theatre"]}
-                    />
+                    <ShowingSubmitForm onSubmitConfig={{onSubmitSuccess: onSubmit}} presetValues={{theatre: theatreID}}>
+                        <ShowingSubmitFormView disableFields={{theatre: true}}/>
+                    </ShowingSubmitForm>
                 </CardContent>
             </Card>
         </PageFlexWrapper>

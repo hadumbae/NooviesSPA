@@ -3,13 +3,17 @@
  */
 
 import {ReactElement, ReactNode, useEffect, useId} from 'react';
-import {useRoleTypeSubmitForm} from "@/domains/roletype/_feat/submit-data/form/useRoleTypeSubmitForm.ts";
-import {useRoleTypeSubmitMutation} from "@/domains/roletype/_feat/crud-hooks/useRoleTypeSubmitMutation.ts";
-import {RoleType} from "@/domains/roletype/schema/model/RoleTypeSchema.ts";
-import {RoleTypeFormData, RoleTypeFormValues} from "@/domains/roletype/_feat";
+import {Form} from "@/common/components/ui";
 import {FormContainerConfigProps} from "@/common/_feat/submit-data";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/common/components/ui/form.tsx";
+
+import {
+    RoleType,
+    RoleTypeFormData,
+    RoleTypeFormValues,
+    useRoleTypeSubmitForm,
+    useRoleTypeSubmitMutation
+} from "@/domains/roletype";
 
 /** Props for the RoleTypeSubmitFormContainer component. */
 type SubmitFormProps = FormContainerConfigProps<RoleTypeFormValues, RoleType, RoleTypeFormData, RoleType> & {
@@ -20,17 +24,13 @@ type SubmitFormProps = FormContainerConfigProps<RoleTypeFormValues, RoleType, Ro
  * Orchestrates form state and mutation logic for creating or updating RoleType entities.
  */
 export function RoleTypeSubmitForm(
-    {children, formConfig, onSubmitConfig, resetConfig}: SubmitFormProps
+    {children, formConfig}: SubmitFormProps
 ): ReactElement {
     const id = useId();
     const formID = `role-type-submit-form-${id}`;
 
     const form = useRoleTypeSubmitForm(formConfig);
-    const {mutate, isPending, isError} = useRoleTypeSubmitMutation({
-        form,
-        ...onSubmitConfig,
-        ...resetConfig,
-    });
+    const {mutate, isPending, isError} = useRoleTypeSubmitMutation();
 
     const department = form.watch("department");
 

@@ -5,9 +5,7 @@
 import {RouteObject} from "react-router-dom";
 import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
 import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
-
-import {TheatreInfoPage} from "@/views/client/theatres/theatre-info";
-import {BrowseTheatreListPage} from "@/views/client/theatres/browse-theatre-page";
+import {BrowseTheatreListPage, TheatreInfoPage} from "@/views/client/theatres";
 
 const routes: RouteObject[] = [
     {

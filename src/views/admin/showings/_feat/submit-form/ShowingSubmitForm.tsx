@@ -8,7 +8,7 @@ import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 import buildFormSubmitLog from "@/common/utility/features/logger/buildFormSubmitLog.ts";
 import {Showing} from "@/domains/showings/schema/showing/ShowingSchema.ts";
 import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {ShowingFormData} from "@/domains/showings/schema/form";
+import {ShowingFormData, ShowingFormValues} from "@/domains/showings/schema/form";
 import {useShowingSubmitMutation} from "@/domains/showings/_feat/crud-hooks";
 import {useShowingSubmitForm} from "@/domains/showings/_feat/submit-data";
 import {Form} from "@/common/components/ui/form.tsx";
@@ -22,7 +22,7 @@ type ShowingEditingProps =
 
 /** Props for the ShowingSubmitForm component. */
 type SubmitContainerProps = ShowingEditingProps & {
-    presetValues?: Partial<ShowingDetails>;
+    presetValues?: Partial<ShowingFormValues>;
     onSubmitConfig?: MutationResponseConfig<ShowingDetails, ShowingFormData>;
     resetForm?: MutationFormResetConfig;
     children: ReactNode;

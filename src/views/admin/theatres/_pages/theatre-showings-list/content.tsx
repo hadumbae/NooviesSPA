@@ -10,7 +10,7 @@ import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-c
 
 import {Theatre, TheatreDetails} from "@/domains/theatres";
 import {ShowingDetails} from "@/domains/showings/schema/showing";
-import {TheatreShowingListHeader} from "@/views/admin/theatres/_pages/theatre-showings-list/header.tsx";
+import {TheatreShowingListHeader} from "@/views/admin/theatres/_pages/theatre-showings-list//elements/header.tsx";
 
 /** Props for the TheatreShowingListPageContent component. */
 type ContentProps = {

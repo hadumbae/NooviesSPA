@@ -2,7 +2,7 @@
 
 import {ReactElement, ReactNode} from "react";
 import {DisableFields, UIOpenStateProps} from "@/common/types";
-import {MovieCreditFormView} from "@/views/admin/movie-credits/_comp/submit-form/views/MovieCreditFormView.tsx";
+import {MovieCreditFormView} from "@/views/admin/movie-credits/_feat/submit-form/views/MovieCreditFormView.tsx";
 import {
     ScrollArea,
     Sheet,
