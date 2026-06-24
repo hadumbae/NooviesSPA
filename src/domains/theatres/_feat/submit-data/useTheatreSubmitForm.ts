@@ -4,27 +4,25 @@
 
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {TheatreFormData, TheatreFormSchema} from "@/domains/theatres/_feat/submit-data/TheatreForm.schema.ts";
+import {TheatreFormData, TheatreFormSchema, TheatreFormValues} from "@/domains/theatres/_feat/submit-data/schema.ts";
 import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
-import {TheatreFormStarterValues} from "./TheatreFormStarterValues";
 import {
     useTheatreSubmitFormDefaultValues
 } from "@/domains/theatres/_feat/submit-data/useTheatreSubmitFormDefaultValues.ts";
-
-type FormParams = {
-    theatre?: Theatre;
-    presetValues?: Partial<TheatreFormStarterValues>;
-}
+import {FormValuesConfig} from "@/common/_feat/submit-data";
 
 /**
  * Initializes and returns the theatre submission form controller with Zod validation.
  */
 export function useTheatreSubmitForm(
-    params: FormParams = {}
-): UseFormReturn<TheatreFormStarterValues, unknown, TheatreFormData> {
-    const defaultValues = useTheatreSubmitFormDefaultValues(params);
+    {presetValues, editEntity}: FormValuesConfig<TheatreFormValues, Theatre> = {}
+): UseFormReturn<TheatreFormValues, unknown, TheatreFormData> {
+    const defaultValues = useTheatreSubmitFormDefaultValues({
+        theatre: editEntity,
+        presetValues,
+    });
 
-    return useForm<TheatreFormStarterValues, unknown, TheatreFormData>({
+    return useForm<TheatreFormValues, unknown, TheatreFormData>({
         resolver: zodResolver(TheatreFormSchema),
         defaultValues,
     });

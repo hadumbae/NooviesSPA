@@ -3,13 +3,12 @@
  */
 
 import {ReactElement} from 'react';
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {Card, CardContent, Separator} from "@/common/components/ui";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import generateLocationAddressString from "@/common/utility/features/location/generateLocationAddressString.ts";
-import {Separator} from "@/common/components/ui/separator.tsx";
 import {cn} from "@/common/lib/utils.ts";
 
-import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {TheatreDetails} from "@/domains/theatres/schema";
 
 /** Props for the TheatreDetailsCard component. */
 type CardProps = {
@@ -65,7 +64,6 @@ export function TheatreDetailsCard({theatre}: CardProps): ReactElement {
                         </div>
                     </div>
                 </section>
-
             </CardContent>
         </Card>
     );

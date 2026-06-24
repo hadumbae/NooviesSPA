@@ -4,10 +4,10 @@
 
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
 import {TheatreIndexPage} from "@/views/admin/theatres/index-page";
-import {TheatreDetailsPage} from "@/views/admin/theatres/theatre-details-page";
-import {TheatreShowingCreatePage} from "@/views/admin/theatres/theatre-showings-create";
-import {TheatreShowingListPage} from "@/views/admin/theatres/theatre-showings-list";
-import {TheatreScreenDetailsPage} from "@/views/admin/theatres/theatre-screen-details-page";
+import {TheatreDetailsPage} from "@/views/admin/theatres/_pages/theatre-details-page";
+import {TheatreShowingCreatePage} from "@/views/admin/theatres/_pages/theatre-showings-create";
+import {TheatreShowingListPage} from "@/views/admin/theatres/_pages/theatre-showings-list";
+import {TheatreScreenDetailsPage} from "@/views/admin/theatres/_pages/theatre-screen-details-page";
 
 /**
  * Defines the routing hierarchy for theatre management.

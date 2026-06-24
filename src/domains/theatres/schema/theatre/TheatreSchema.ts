@@ -4,19 +4,19 @@
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {LocationSchema} from "@/common/_models/location/LocationSchema.ts";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import {SlugStringSchema} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {TheatreNameSchema, TheatreSeatCapacitySchema} from "@/domains/theatres/schema/fields";
 
 /**
  * Validates the core theatre model including identification, naming, location, and capacity metrics.
  */
 export const TheatreSchema = z.object({
     _id: IDStringSchema.readonly(),
-    name: NonEmptyStringSchema.max(255, "Must be 255 characters or less."),
+    name: TheatreNameSchema,
     location: LocationSchema,
-    seatCapacity: NonNegativeNumberSchema,
-    slug: NonEmptyStringSchema.readonly(),
+    seatCapacity: TheatreSeatCapacitySchema,
+    slug: SlugStringSchema.readonly(),
 });
 
 /**

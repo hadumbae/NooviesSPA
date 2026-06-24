@@ -4,7 +4,8 @@
 
 import {useRef} from "react";
 import {isEqual} from "lodash";
-import {BrowseTheatreParamFormStarterValues} from "./BrowseTheatreParamFormStarterValues";
+
+import {BrowseTheatreParamFormStarterValues} from "@/domains/theatres";
 
 /** Options for generating browse theatre form default values. */
 type ValueParams = {
@@ -15,16 +16,16 @@ type ValueParams = {
 export function useBrowseTheatreParamFormDefaultValues(
     {presetValues}: ValueParams = {},
 ): BrowseTheatreParamFormStarterValues {
-    const initialValues = useRef<BrowseTheatreParamFormStarterValues | null>(null);
-
     const defaultValues: BrowseTheatreParamFormStarterValues = {
         target: "",
         ...presetValues,
     };
 
-    if (!isEqual(defaultValues, initialValues.current)) {
-        initialValues.current = defaultValues;
+    const heldValues = useRef<BrowseTheatreParamFormStarterValues>(defaultValues);
+
+    if (!isEqual(defaultValues, heldValues.current)) {
+        heldValues.current = defaultValues;
     }
 
-    return initialValues.current ?? defaultValues;
+    return heldValues.current;
 }

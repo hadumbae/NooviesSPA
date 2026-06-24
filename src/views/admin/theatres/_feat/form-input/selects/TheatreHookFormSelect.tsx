@@ -2,22 +2,21 @@
  * @fileoverview A form select component that fetches and displays theatre options.
  */
 
+import {ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
 import {Loader} from "lucide-react";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
-import {useFetchTheatres} from "@/domains/theatres/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {TheatreArray, TheatreArraySchema} from "@/domains/theatres/schema/theatre/TheatreArraySchema.ts";
-import {TheatreQueryOptions} from "@/domains/theatres/_feat/handle-query-options/TheatreQueryOptionSchema.ts";
-import {ReactElement} from "react";
-import {Theatre} from "@/domains/theatres/schema/theatre";
 import {FormSelectOnChangeHandler} from "@/common/types";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 import {FormSelectValueHandler} from "@/common/types/form/value";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
+
+import {useFetchTheatres, Theatre, TheatreSchema, TheatreQueryOptions} from "@/domains/theatres";
 
 /** Props for the TheatreHookFormSelect component. */
-type HookProps<TSubmit extends FieldValues> = HookFormInputControlProps<TSubmit> & {
+type HookProps<TSubmit extends FieldValues> = Omit<HookFormInputControlProps<TSubmit>, "control"> & {
     filters?: TheatreQueryOptions;
     onValueChange?: (theatre: Theatre | null) => void;
 };
@@ -27,13 +26,13 @@ export function TheatreHookFormSelect<TSubmit extends FieldValues>(
     {onValueChange, filters, ...rest}: HookProps<TSubmit>
 ): ReactElement {
     const query = useFetchTheatres({
-        schema: TheatreArraySchema,
+        schema: generateArraySchema(TheatreSchema),
         queries: filters,
     });
 
     return (
         <QueryDataLoader query={query} loaderComponent={Loader}>
-            {(theatres: TheatreArray) => {
+            {(theatres: Theatre[]) => {
                 const options: ReactSelectOption<Theatre>[] = theatres.map(
                     (theatre): ReactSelectOption<Theatre> => ({label: theatre.name, value: theatre}),
                 );
@@ -46,7 +45,6 @@ export function TheatreHookFormSelect<TSubmit extends FieldValues>(
                 const handleValue: FormSelectValueHandler<TSubmit, Theatre> = (options, field) => {
                     return options.find(o => o.value._id === field.value) ?? null;
                 };
-
 
                 return (
                     <HookFormSelect<TSubmit, Theatre>

@@ -12,7 +12,7 @@ import {TheatreAdminViewDataBaseURL} from "@/domains/theatres/_feat/admin-view-d
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {
     TheatreShowingListViewData
-} from "@/domains/theatres/_feat/admin-view-data/schemas/TheatreShowingListViewDataSchema.ts";
+} from "@/domains/theatres/_feat/admin-view-data/schema/TheatreShowingListViewDataSchema.ts";
 
 /**
  * Fetches the complete dataset required for the Theatre Details admin dashboard.

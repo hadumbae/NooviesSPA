@@ -2,15 +2,15 @@
 
 import {Theatre} from "@/domains/theatres/schema/theatre";
 import {LocationFormStarterValues} from "@/common/_models/location-form/LocationFormStarterValues.ts";
-import {TheatreFormStarterValues} from "@/domains/theatres/_feat/submit-data/TheatreFormStarterValues.ts";
 import {CoordinateFormStarterValues} from "@/common/_models/coordinate-form";
 import {useRef} from "react";
 import {isEqual} from "lodash";
+import {TheatreFormValues} from "@/domains/theatres";
 
 /** Configuration options for calculating form default values. */
 type ValueConfig = {
     theatre?: Theatre;
-    presetValues?: Partial<TheatreFormStarterValues>;
+    presetValues?: Partial<TheatreFormValues>;
 }
 
 /**
@@ -18,7 +18,7 @@ type ValueConfig = {
  */
 export function useTheatreSubmitFormDefaultValues(
     {theatre, presetValues}: ValueConfig = {},
-): TheatreFormStarterValues {
+): TheatreFormValues {
     const coordinates: CoordinateFormStarterValues = {
         type: "Point",
         coordinates: [
@@ -46,7 +46,7 @@ export function useTheatreSubmitFormDefaultValues(
         coordinates,
     };
 
-    const defaultValues: TheatreFormStarterValues = {
+    const defaultValues: TheatreFormValues = {
         name: "",
         seatCapacity: "",
 
@@ -56,7 +56,7 @@ export function useTheatreSubmitFormDefaultValues(
         location,
     };
 
-    const heldValues = useRef<TheatreFormStarterValues>(defaultValues);
+    const heldValues = useRef<TheatreFormValues>(defaultValues);
 
     if (!isEqual(heldValues.current, defaultValues)) {
         heldValues.current = defaultValues;

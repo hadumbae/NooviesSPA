@@ -8,8 +8,10 @@ import ISO3166Alpha2ShortCountryConstant from "@/common/constants/country/ISO316
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {HoverUnderlineCSS} from "@/common/constants/css/TextCSS.ts";
-import {TheatreWithRecentShowings} from "@/domains/theatres/schema/theatre/TheatreWithRecentShowingsSchema.ts";
+
+import {TheatreWithRecentShowings} from "@/domains/theatres";
 import {BrowseTheatreShowingSelector} from "@/views/client/showings/_comp/browse-showing-selector";
+import {ReactElement} from "react";
 
 /** Props for the TheatreBrowseListCard component. */
 type BrowseProps = {
@@ -17,7 +19,7 @@ type BrowseProps = {
 };
 
 /** Renders a theatre card with location metadata and a list of selectable showings. */
-export const TheatreBrowseListCard = ({theatre}: BrowseProps) => {
+export function TheatreBrowseListCard({theatre}: BrowseProps): ReactElement {
     const {name, location, slug, showings} = theatre;
     const {city, state, country} = location;
 

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode, useEffect, useId} from 'react';
-import {useRoleTypeSubmitForm} from "src/domains/roletype/_feat/submit-data/form/useRoleTypeSubmitForm.ts";
+import {useRoleTypeSubmitForm} from "@/domains/roletype/_feat/submit-data/form/useRoleTypeSubmitForm.ts";
 import {useRoleTypeSubmitMutation} from "@/domains/roletype/_feat/crud-hooks/useRoleTypeSubmitMutation.ts";
 import {RoleType} from "@/domains/roletype/schema/model/RoleTypeSchema.ts";
 import {RoleTypeFormData, RoleTypeFormValues} from "@/domains/roletype/_feat";

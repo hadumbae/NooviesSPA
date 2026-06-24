@@ -4,9 +4,13 @@
 
 import {ReactElement, ReactNode, useState} from 'react';
 import {
-    TheatreDetailsUIContext,
-    TheatreDetailsUIStates
-} from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIContext.ts";
+    TheatreDetailsUIStateContext,
+    TheatreDetailsUIStateValues
+} from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIStateContext.ts";
+import {
+    TheatreDetailsUISetterContext,
+    TheatreDetailsUISetterValues
+} from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUISetterContext.ts";
 
 type ProviderProps = {
     children: ReactNode;
@@ -19,20 +23,25 @@ export function TheatreDetailsUIContextProvider({children}: ProviderProps): Reac
     const [isAddingScreen, setIsAddingScreen] = useState<boolean>(false);
     const [isAddingShowing, setIsAddingShowing] = useState<boolean>(false);
 
-    const context: TheatreDetailsUIStates = {
+    const stateValues: TheatreDetailsUIStateValues = {
         isEditing,
-        setIsEditing,
         isDeleting,
-        setIsDeleting,
         isAddingScreen,
-        setIsAddingScreen,
         isAddingShowing,
+    };
+
+    const setterValues: TheatreDetailsUISetterValues = {
+        setIsEditing,
+        setIsDeleting,
+        setIsAddingScreen,
         setIsAddingShowing,
     };
 
     return (
-        <TheatreDetailsUIContext.Provider value={context}>
-            {children}
-        </TheatreDetailsUIContext.Provider>
+        <TheatreDetailsUIStateContext.Provider value={stateValues}>
+            <TheatreDetailsUISetterContext.Provider value={setterValues}>
+                {children}
+            </TheatreDetailsUISetterContext.Provider>
+        </TheatreDetailsUIStateContext.Provider>
     );
 }

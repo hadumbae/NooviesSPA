@@ -8,25 +8,24 @@ import {
     BrowseTheatreParams,
     BrowseTheatreParamSchema
 } from "@/domains/theatres/_feat/submit-location";
-import {ReactNode} from "react";
+import {ReactElement, ReactNode} from "react";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
+import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 
 
 /** Props for the BrowseTheatreParamForm component. */
 type FormProps = {
     presetValues?: Partial<BrowseTheatreParamFormStarterValues>;
     children: ReactNode;
-    uniqueKey?: string;
 };
 
 /** Form wrapper that synchronises theatre location filters with search parameters. */
-export const BrowseTheatreParamForm = (
-    {children, presetValues, uniqueKey}: FormProps,
-) => {
-    const formKey = `update-browse-theatre-params-${uniqueKey ?? "form"}`;
-
+export function BrowseTheatreParamForm(
+    {children, presetValues}: FormProps,
+): ReactElement {
     const form = useBrowseTheatreParamForm({presetValues});
+    const formID = useGenerateFormID("update-browse-theatre-params-form");
     const {setSearchParams} = useParsedSearchParams({schema: BrowseTheatreParamSchema});
 
     const updateParams = (values: BrowseTheatreParams) => {
@@ -34,7 +33,7 @@ export const BrowseTheatreParamForm = (
     };
 
     return (
-        <BaseFormContextProvider formID={formKey} submitHandler={updateParams}>
+        <BaseFormContextProvider formID={formID} submitHandler={updateParams}>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(updateParams)}>
                     {children}
@@ -42,4 +41,4 @@ export const BrowseTheatreParamForm = (
             </Form>
         </BaseFormContextProvider>
     );
-};
+}

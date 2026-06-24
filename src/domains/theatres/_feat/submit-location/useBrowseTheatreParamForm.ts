@@ -8,10 +8,10 @@ import {
     useBrowseTheatreParamFormDefaultValues,
 } from "@/domains/theatres/_feat/submit-location/useBrowseTheatreParamFormDefaultValues.ts";
 import {
+    BrowseTheatreParamFormStarterValues,
     BrowseTheatreParams,
     BrowseTheatreParamSchema
-} from "@/domains/theatres/_feat/submit-location/BrowseTheatreParamSchema.ts";
-import {BrowseTheatreParamFormStarterValues} from "./BrowseTheatreParamFormStarterValues";
+} from "@/domains/theatres/_feat/submit-location/schema.ts";
 
 /** Initialisation options for the browse theatre form. */
 export type FormParams = {
