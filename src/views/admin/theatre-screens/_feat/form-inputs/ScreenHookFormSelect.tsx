@@ -2,18 +2,18 @@
  * @fileoverview Hook Form select component for theatre screens with integrated data fetching.
  */
 
+import {ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
 import RequestQueryParams from "@/common/type/request/RequestQueryParams.ts";
 import {Loader} from "lucide-react";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {HookFormMultiSelect} from "@/views/common/_comp/form-select/HookFormMultiSelect.tsx";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
-import {useFetchScreens} from "@/domains/theatre-screens/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {TheatreScreen, TheatreScreenSchema} from "@/domains/theatre-screens/_schema/model";
-import {ReactElement} from "react";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {useFetchScreens} from "@/domains/theatre-screens";
 
 /**
  * Props for the ScreenHookFormSelect component.

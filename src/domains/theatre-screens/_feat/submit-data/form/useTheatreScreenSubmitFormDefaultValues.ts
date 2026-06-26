@@ -1,42 +1,33 @@
 /**
- * @fileoverview Dependency hook for generating and synchronizing Theatre Screen form default values.
+ * @fileoverview Dependency hook for generating and synchronising Theatre Screen form default values.
  */
 
-import {useEffect, useMemo, useRef} from "react";
+import {useRef} from "react";
 import {isEqual} from "lodash";
 import {TheatreScreen} from "@/domains/theatre-screens/_schema";
 import {TheatreScreenFormValues} from "@/domains/theatre-screens/_feat/submit-data/schema";
-
-/**
- * Parameters for computing the hierarchical default values of the form.
- */
-type ValuesParams = {
-    presetValues?: Partial<TheatreScreenFormValues>;
-    screen?: TheatreScreen;
-};
+import {FormValuesConfig} from "@/common/_feat/submit-data";
 
 /**
  * Computes a prioritized set of default values and manages synchronization.
  */
-export function useTheatreScreenSubmitFormDefaultValues(params: ValuesParams): TheatreScreenFormValues {
-    const {presetValues, screen} = params;
-
-    const heldValues = useRef<TheatreScreenFormValues | null>(null);
-
-    const defaultValues: TheatreScreenFormValues = useMemo(() => ({
+export function useTheatreScreenSubmitFormDefaultValues(
+    {presetValues, editEntity}: FormValuesConfig<TheatreScreenFormValues, TheatreScreen>
+): TheatreScreenFormValues {
+    const defaultValues: TheatreScreenFormValues = {
         name: "",
         capacity: "",
         screenType: undefined,
         theatre: undefined,
-        ...screen,
+        ...editEntity,
         ...presetValues,
-    }), [screen, presetValues]);
+    };
 
-    useEffect(() => {
-        if (!isEqual(heldValues.current, defaultValues)) {
-            heldValues.current = defaultValues;
-        }
-    }, [defaultValues]);
+    const heldValues = useRef<TheatreScreenFormValues>(defaultValues);
+
+    if (!isEqual(heldValues.current, defaultValues)) {
+        heldValues.current = defaultValues;
+    }
 
     return heldValues.current ?? defaultValues;
 }

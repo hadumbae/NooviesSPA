@@ -4,19 +4,19 @@
  */
 
 import {ReactElement, useState} from "react";
-import {Sheet, SheetContent} from "@/common/components/ui/sheet";
-import {SeatContextPanelHeader} from "./SeatContextPanelHeader.tsx";
-import {SeatContextPanelOptionButtonsSection} from "./SeatContextPanelOptionButtonsSection.tsx";
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
-import {SeatDeleteWarning} from "@/domains/seats/components/features/delete-seats/SeatDeleteWarning.tsx";
-import {SeatDetails} from "@/domains/seats/schema/model";
+import {ScrollArea, Sheet, SheetContent} from "@/common/components/ui";
+
+import {SeatDetails, simplifySeatDetails, useSeatPanelSetterContext, useSeatPanelStateContext} from "@/domains/seats";
+import {SeatSubmitForm} from "@/views/admin/seats/_feat/submit-data";
+import {SeatDeleteWarning} from "@/views/admin/seats/_feat/delete-seats";
+import {SeatContextPanelFormView} from "@/views/admin/seats/_feat/context-action-panel/SeatContextPanelFormView.tsx";
+import {SeatContextPanelHeader} from "@/views/admin/seats/_feat/context-action-panel/SeatContextPanelHeader.tsx";
+import {
+    SeatContextPanelOptionButtonsSection
+} from "@/views/admin/seats/_feat/context-action-panel/SeatContextPanelOptionButtonsSection.tsx";
 import {
     SeatContextPanelDetailsSection
 } from "@/views/admin/seats/_feat/context-action-panel/SeatContextPanelDetailsSection.tsx";
-import {simplifySeatDetails} from "@/domains/seats/_feat/formatters";
-import {SeatSubmitForm} from "@/views/admin/seats/_feat/submit-data";
-import {SeatContextPanelFormView} from "@/views/admin/seats/_feat/context-action-panel/SeatContextPanelFormView.tsx";
-import {useSeatPanelSetterContext, useSeatPanelStateContext} from "@/domains/seats/_feat/seat-details-context";
 
 /**
  * Displays and manages the lifecycle of seat information within a slide-over panel.
@@ -28,12 +28,12 @@ export function SeatContextPanel(): ReactElement | null {
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [showDeleteWarning, setShowDeleteWarning] = useState<boolean>(false);
 
+    const closePanel = () => setIsPanelOpen(false);
     const handleUpdateSuccess = (updatedSeat: SeatDetails) => {
         setIsEditing(false);
         setSeat(updatedSeat);
     };
 
-    const closePanel = () => setIsPanelOpen(false);
 
     if (!seat) return null;
 
@@ -65,7 +65,7 @@ export function SeatContextPanel(): ReactElement | null {
 
                         {showDeleteWarning && (
                             <SeatDeleteWarning
-                                seatID={seat._id}
+                                _id={seat._id}
                                 className="border p-4 rounded-xl bg-destructive/5"
                                 onSubmitSuccess={closePanel}
                             />

@@ -2,20 +2,18 @@
  * @fileoverview Form view component for submitting and editing a theatre screen.
  */
 
-import {cloneElement, ReactElement} from "react";
+import {ReactElement} from "react";
 import {ScreenTypeHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
 import {useFormContext} from "react-hook-form";
-import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
-import {
-    TheatreHookFormSelect
-} from "@/views/admin/theatres/_feat/form-input/selects/TheatreHookFormSelect.tsx";
+import {TheatreHookFormSelect} from "@/views/admin/theatres/_feat/form-input/selects/TheatreHookFormSelect.tsx";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-import {TheatreScreenFormDisableFields} from "@/views/admin/theatre-screens/_feat/submit-data/types.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {DisableFields} from "@/common/types";
+import {TheatreScreenFormValues} from "@/domains/theatre-screens";
 
 /** Props for the TheatreScreenSubmitFormView component. */
 type FormViewProps = {
-    disableFields?: TheatreScreenFormDisableFields;
+    disableFields?: DisableFields<TheatreScreenFormValues>;
 };
 
 /**
@@ -27,35 +25,29 @@ export function TheatreScreenFormView(
     const {control} = useFormContext();
     const {isPending} = useBaseFormContext()
 
-    const fieldGroup: HookFormField[] = [
-        {
-            key: "theatre-select",
-            render: !disableFields?.theatre,
-            element: (
+    return (
+        <div className="space-y-4 mb-6">
+            {
+                !disableFields?.theatre &&
                 <TheatreHookFormSelect
-                    control={control}
                     disabled={isPending}
                     name="theatre"
                     label="Theatre"
                 />
-            )
-        },
-        {
-            key: "name-input",
-            render: !disableFields?.name,
-            element: (
+            }
+
+            {
+                !disableFields?.name &&
                 <HookFormInput
                     name="name"
                     label="Name"
                     control={control}
                     disabled={isPending}
                 />
-            ),
-        },
-        {
-            key: "capacity-input",
-            render: !disableFields?.capacity,
-            element: (
+            }
+
+            {
+                !disableFields?.capacity &&
                 <HookFormInput
                     name="capacity"
                     label="Capacity"
@@ -64,28 +56,16 @@ export function TheatreScreenFormView(
                     type="number"
                     min={0}
                 />
-            ),
-        },
-        {
-            key: "screen-type-select",
-            render: !disableFields?.screenType,
-            element: (
+            }
+
+            {
+                !disableFields?.screenType &&
                 <ScreenTypeHookFormSelect
                     control={control}
                     disabled={isPending}
                     name="screenType"
                     label="Screen Type"
                 />
-            ),
-        },
-    ];
-
-    return (
-        <div className="space-y-4 mb-6">
-            {
-                fieldGroup.map(({render, key, element}) =>
-                    render ? cloneElement(element, {key}) : null
-                )
             }
         </div>
     );

@@ -3,41 +3,67 @@
  * Provides context and handles the orchestration of form state and persistence.
  */
 
-import {ReactElement} from 'react';
-import {TheatreScreen} from "@/domains/theatre-screens/_schema/model";
+import {ReactElement, ReactNode} from 'react';
 import {
+    TheatreScreen,
+    TheatreScreenDetails,
     TheatreScreenFormData,
     TheatreScreenFormValues,
-    useTheatreScreenSubmitForm
-} from "@/domains/theatre-screens/_feat/submit-data";
-import {useTheatreScreenSubmitMutation} from "@/domains/theatre-screens/_feat/crud-hooks";
+    useTheatreScreenSubmitForm,
+    useTheatreScreenSubmitMutation
+} from "@/domains/theatre-screens";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
-import {FormConfigProps} from "@/common/_feat/submit-data";
-import {TheatreScreenDetails} from "@/domains/theatre-screens/_schema/model";
+import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 
 /**
  * Props for the ScreenSubmitForm component.
  */
-type ContainerProps = FormConfigProps<TheatreScreenFormValues, TheatreScreen, TheatreScreenDetails>;
+type FormProps = MutationResponseConfig<TheatreScreenDetails, TheatreScreenFormValues> & MutationFormResetConfig & {
+    formConfig?: FormValuesConfig<TheatreScreenFormValues, TheatreScreen>;
+    children: ReactNode;
+}
 
 /**
  * Orchestrates the Theatre Screen form submission lifecycle.
  */
 export function TheatreScreenForm(
-    {children, presetValues, editEntity, uniqueKey, ...mutationOptions}: ContainerProps
+    {children, formConfig, ...submitConfig}: FormProps
 ): ReactElement {
-    const form = useTheatreScreenSubmitForm({presetValues, screen: editEntity});
-    const formKey = `theatre-screen-submit-${uniqueKey ?? "form"}`;
+    const form = useTheatreScreenSubmitForm(formConfig);
+    const formKey = `theatre-screen-submit-form`;
 
-    const mutation = useTheatreScreenSubmitMutation({form, ...mutationOptions});
+    const {mutateAsync, isPending, isError} = useTheatreScreenSubmitMutation();
 
-    const submitScreenData = (values: TheatreScreenFormData) => {
-        mutation.mutate(values);
+    const submitScreenData = async (values: TheatreScreenFormData) => {
+        try {
+            handleMutationCallback({
+                cb: () => submitConfig.onSubmit?.(values),
+                message: submitConfig.submitMessage,
+            });
+
+            const screen = await mutateAsync(values);
+
+            handleMutationCallback({
+                cb: () => submitConfig.onSubmitSuccess?.(screen),
+                message: submitConfig.successMessage,
+                messageType: "success"
+            });
+        } catch (error: unknown) {
+            handleMutationFormError({form, error, displayMessage: submitConfig.errorMessage});
+            submitConfig.onSubmitError?.(error);
+        }
     };
 
     return (
-        <BaseFormContextProvider formID={formKey} isPending={mutation.isPending}>
+        <BaseFormContextProvider
+            formID={formKey}
+            isPending={isPending}
+            isError={isError}
+            submitHandler={submitScreenData}
+        >
             <Form {...form}>
                 <form id={formKey} onSubmit={form.handleSubmit(submitScreenData)}>
                     {children}

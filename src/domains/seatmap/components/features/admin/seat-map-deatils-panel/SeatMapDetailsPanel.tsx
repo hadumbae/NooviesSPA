@@ -13,7 +13,6 @@ import {
 } from "@/common/components/ui/sheet";
 import {formatSeatLabel} from "@/domains/seats/_feat/formatters";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import {SeatTypeLabelMap} from "@/domains/seats/schema/fields";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import SeatMapDetailsReferenceLinks
     from "@/domains/seatmap/components/features/admin/seat-map-deatils-panel/SeatMapDetailsReferenceLinks.tsx";
@@ -31,6 +30,8 @@ import {
     SeatMapSeatSummary
 } from "@/domains/seatmap/components/features/admin/seat-map-deatils-panel/SeatMapSeatSummary.tsx";
 import {ReactElement} from "react";
+import {SeatTypeLabelMap} from "@/domains/seats";
+
 
 /** Props for the SeatMapDetailsPanel component. */
 type PanelProps = {

@@ -3,16 +3,16 @@
  */
 
 import {cn} from "@/common/lib/utils.ts";
-import {formatShowingInfo} from "@/domains/showings/_feat/formatters/formatShowingInfo.ts";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 import {ReactElement} from "react";
 import {ShowingInfoLanguages, ShowingInfoMovieMeta} from "@/views/client/showings/_comp/showing-info-details";
+import {ShowingWithMovie} from "@/domains/showings/schema/showing";
+import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 
 /** Props for the TheatreShowingSelectSummary component. */
 type SummaryProps = {
-    showing: PopulatedShowing | ShowingDetails;
+    showing: ShowingWithMovie;
+    timezone: IANATimezone
     className?: string;
 };
 
@@ -20,20 +20,21 @@ type SummaryProps = {
  * Displays a summary of a movie showing including poster, metadata, and language options.
  */
 export function BrowseShowingSelector(
-    {showing, className}: SummaryProps,
+    {showing, timezone, className}: SummaryProps,
 ): ReactElement {
-    const {movie, config, language, subtitleLanguages} = showing;
-    const {showingSlug, formattedStartTime} = formatShowingInfo(showing);
+    const {movie, config, language, subtitleLanguages, slug, startTime} = showing;
+    const {isSpecialEvent, canReserveSeats} = config;
+
+    const formattedStartTime = startTime
+        .setZone(timezone)
+        .toFormat("hh:mma • dd MMM yy");
 
     return (
-        <div className={cn(
-            "flex flex-col justify-between space-y-3",
-            className
-        )}>
+        <div className={cn("flex flex-col justify-between space-y-3", className)}>
             <ShowingInfoMovieMeta
                 movie={movie}
-                isSpecialEvent={config.isSpecialEvent}
-                canReserveSeats={config.canReserveSeats}
+                isSpecialEvent={isSpecialEvent}
+                canReserveSeats={canReserveSeats}
             />
 
             <ShowingInfoLanguages
@@ -47,7 +48,7 @@ export function BrowseShowingSelector(
                 </span>
 
                 <ButtonLink
-                    to={`/browse/showings/${showingSlug}`}
+                    to={`/browse/showings/${slug}`}
                     type="button"
                     variant="primary"
                     size="sm"

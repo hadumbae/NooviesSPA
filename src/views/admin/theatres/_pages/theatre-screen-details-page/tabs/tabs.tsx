@@ -16,7 +16,7 @@ import {
     TheatreScreenDetailsSearchParamSchema
 } from "@/domains/theatre-screens/_feat/page-search-params";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
-import {SeatDetails} from "@/domains/seats/schema/model";
+import {SeatDetails} from "@/domains/seats/_schema/model";
 
 /** Props for the TheatreScreenDetailsPageTabs component. */
 type TabsProps = {

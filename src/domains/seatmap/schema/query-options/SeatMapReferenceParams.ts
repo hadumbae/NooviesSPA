@@ -14,7 +14,7 @@ import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.t
 import {ShowingStatusSchema} from "@/domains/showings/schema/fields";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {SeatTypeSchema} from "@/domains/seats/schema/fields";
+import {SeatTypeSchema} from "@/domains/seats/_schema/fields";
 
 /**
  * SeatMap reference filter schema.

@@ -12,7 +12,7 @@ import {
 
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/_schema/model";
 import {TheatreDetails} from "@/domains/theatres";
-import {SeatDetails} from "@/domains/seats/schema/model";
+import {SeatDetails} from "@/domains/seats/_schema/model";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 
 /** Props for the TheatreScreenDetailsPageContent component. */

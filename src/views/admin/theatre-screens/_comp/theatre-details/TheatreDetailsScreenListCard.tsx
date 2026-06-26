@@ -3,16 +3,14 @@
  */
 
 import {ReactElement} from "react";
-import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/_schema/model";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {Card, CardContent, Progress, Separator} from "@/common/components/ui";
 import {TheatreScreenTypeBadge} from "@/views/admin/theatre-screens/_comp/badges";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens";
 import {
     TheatreDetailsScreenStatsMetric
 } from "@/views/admin/theatre-screens/_comp/theatre-details/TheatreDetailsScreenStatsMetric.tsx";
-import {Separator} from "@/common/components/ui/separator.tsx";
-import {Progress} from "@/common/components/ui/progress.tsx";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 
 /** Props for the TheatreDetailsScreenListCard component. */
 type CardProps = {
@@ -26,15 +24,7 @@ type CardProps = {
 export function TheatreDetailsScreenListCard(
     {theatreSlug, screen}: CardProps
 ): ReactElement {
-    const {
-        name,
-        screenType,
-        slug,
-        capacity,
-        seatCount,
-        futureShowingCount,
-    } = screen;
-
+    const {name, screenType, slug, capacity, seatCount, futureShowingCount,} = screen;
     const registeredCapacity = Math.floor((seatCount / capacity) * 100);
 
     return (

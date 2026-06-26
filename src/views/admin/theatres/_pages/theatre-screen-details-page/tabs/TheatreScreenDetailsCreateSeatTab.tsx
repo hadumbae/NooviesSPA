@@ -9,7 +9,7 @@ import {Dispatch, ReactElement, SetStateAction} from "react";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data";
 import {SeatSubmitFormView} from "@/views/admin/seats/_feat/submit-data";
 import {SeatFormSubmitList} from "@/views/admin/seats/_comp/returned-seat-list";
-import {SeatDetails} from "@/domains/seats/schema/model";
+import {SeatDetails} from "@/domains/seats/_schema/model";
 
 /** Props for the TheatreScreenDetailsCreateSeatTab component. */
 type TabProps = {

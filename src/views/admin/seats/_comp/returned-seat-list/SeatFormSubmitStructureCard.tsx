@@ -3,17 +3,13 @@
  * displaying coordinates and type metadata without seat-specific properties.
  */
 
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {HeaderTextCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import {
-    SeatLayoutTypeLabelMap
-} from "@/domains/seats/schema/fields";
-import {cn} from "@/common/lib/utils.ts";
-import {Button} from "@/common/components/ui/button.tsx";
+import {ReactElement} from "react";
 import {X} from "lucide-react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {ReactElement} from "react";
-import {SeatDetails} from "@/domains/seats/schema/model";
+import {Button, Card, CardContent} from "@/common/components/ui";
+
+import {SeatDetails, SeatLayoutTypeLabelMap} from "@/domains/seats";
+import {PageSectionHeader} from "@/views/common/_comp/page";
 
 /** Props for the SeatFormSubmitStructureCard component. */
 type CardProps = {
@@ -31,12 +27,10 @@ export function SeatFormSubmitStructureCard({seat, removeSeat}: CardProps): Reac
         <Card key={_id}>
             <CardContent className="px-5 py-2 space-y-2">
                 <section className="flex justify-between items-center">
-                    <h1 className={HeaderTextCSS}>
-                        {row} • {SeatLayoutTypeLabelMap[layoutType]}
-                    </h1>
+                    <PageSectionHeader as="h2" text={`${row} • ${SeatLayoutTypeLabelMap[layoutType]}`}/>
 
                     <div className="flex items-center space-x-2">
-                        <span className={cn(SecondaryTextBaseCSS, "select-none text-sm")}>
+                        <span className="secondary-text select-none text-sm">
                             X{x}, Y{y}
                         </span>
 

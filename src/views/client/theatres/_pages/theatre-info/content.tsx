@@ -26,7 +26,7 @@ type ContentProps = {
 export function TheatreInfoPageContent(
     {theatre, screens}: ContentProps
 ): ReactElement {
-    const {name, formatted: {address}} = formatTheatreDetails(theatre);
+    const {name, location: {timezone}, formatted: {address}} = formatTheatreDetails(theatre);
 
     return (
         <PageFlexWrapper>
@@ -45,6 +45,7 @@ export function TheatreInfoPageContent(
                                     <TheatreScreenShowingSelectCard
                                         key={screen._id}
                                         screen={screen}
+                                        timezone={timezone}
                                     />
                                 ))}
                             </div>

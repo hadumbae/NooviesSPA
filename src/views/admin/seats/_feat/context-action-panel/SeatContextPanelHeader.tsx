@@ -2,11 +2,10 @@
  * @fileoverview Header component for the seat-details panel.
  */
 
-import {useSeatPanelStateContext} from "@/domains/seats/_feat/seat-details-context";
-import {SheetDescription, SheetHeader, SheetTitle} from "@/common/components/ui/sheet";
-import {SeatLayoutTypeLabelMap, SeatTypeLabelMap} from "@/domains/seats/schema/fields";
-import buildString from "@/common/utility/buildString.ts";
 import {ReactElement} from "react";
+import {SheetDescription, SheetHeader, SheetTitle} from "@/common/components/ui/sheet";
+import buildString from "@/common/utility/buildString.ts";
+import {SeatLayoutTypeLabelMap, SeatTypeLabelMap, useSeatPanelStateContext} from "@/domains/seats";
 
 /** Header component for the seat-details panel. */
 export function SeatContextPanelHeader(): ReactElement {

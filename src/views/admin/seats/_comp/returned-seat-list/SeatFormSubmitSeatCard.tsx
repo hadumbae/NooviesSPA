@@ -4,13 +4,12 @@
  */
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {HeaderTextCSS, IconTextCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import {cn} from "@/common/lib/utils.ts";
 import {Armchair, BadgeCheck, DollarSign, Tag, X} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ReactElement} from "react";
-import {SeatDetails} from "@/domains/seats/schema/model";
+import {PageSectionHeader} from "@/views/common/_comp/page";
+import {SeatDetails} from "@/domains/seats";
 
 /** Props for the SeatFormSubmitSeatCard component. */
 type CardProps = {
@@ -24,28 +23,16 @@ type CardProps = {
 export function SeatFormSubmitSeatCard(
     {seat, removeSeat}: CardProps
 ): ReactElement {
-    const {
-        _id,
-        row,
-        seatNumber,
-        isAvailable,
-        seatType,
-        seatLabel,
-        priceMultiplier,
-        x,
-        y,
-    } = seat;
+    const {_id, row, seatNumber, isAvailable, seatType, seatLabel, priceMultiplier, x, y} = seat;
 
     return (
         <Card>
             <CardContent className="px-5 py-3 space-y-3">
                 <section className="flex justify-between items-center">
-                    <h2 className={HeaderTextCSS}>
-                        Row {row} • Seat {seatNumber}
-                    </h2>
+                    <PageSectionHeader as="h2" text={`Row ${row} • Seat ${seatNumber}`}/>
 
                     <div className="flex items-center space-x-2">
-                        <span className={cn(SecondaryTextBaseCSS, "select-none text-xs font-mono")}>
+                        <span className="secondary-text select-none text-xs font-mono">
                             ({x}, {y})
                         </span>
 
@@ -66,20 +53,20 @@ export function SeatFormSubmitSeatCard(
                     </div>
                 </section>
 
-                <section className={cn(SecondaryTextBaseCSS, "flex justify-between items-center text-xs")}>
+                <section className="secondary-text flex justify-between items-center text-xs">
                     <div className="flex items-center gap-4">
-                        <span className={cn(IconTextCSS, "gap-1")}>
+                        <span className="text-with-icon gap-1">
                             <Armchair size={14}/> {seatType}
                         </span>
 
                         {seatLabel && (
-                            <span className={cn(IconTextCSS, "gap-1")}>
+                            <span className="text-with-icon gap-1">
                                 <Tag size={14}/> {seatLabel}
                             </span>
                         )}
                     </div>
 
-                    <span className={cn(IconTextCSS, "gap-1 font-medium text-primary")}>
+                    <span className="text-with-icon gap-1 font-medium text-primary">
                         <DollarSign size={14}/> {priceMultiplier.toFixed(2)}
                     </span>
                 </section>

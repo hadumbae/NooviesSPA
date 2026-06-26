@@ -1,15 +1,15 @@
 /**
- * @fileoverview Renders a list of seats recently created or updated, dispatching them to
- * specific card components based on their layout type (Seat vs. Structure).
+ * @fileoverview Renders a list of recently modified seats using specific card components based on layout type.
  */
 
 import {Dispatch, ReactElement, SetStateAction} from 'react';
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {SeatFormSubmitSeatCard}
-    from "@/views/admin/seats/_comp/returned-seat-list/SeatFormSubmitSeatCard.tsx";
-import {SeatFormSubmitStructureCard}
-    from "@/views/admin/seats/_comp/returned-seat-list/SeatFormSubmitStructureCard.tsx";
-import {SeatDetails} from "@/domains/seats/schema/model";
+
+import {SeatDetails} from "@/domains/seats/_schema";
+import {SeatFormSubmitSeatCard} from "@/views/admin/seats/_comp/returned-seat-list/SeatFormSubmitSeatCard.tsx";
+import {
+    SeatFormSubmitStructureCard
+} from "@/views/admin/seats/_comp/returned-seat-list/SeatFormSubmitStructureCard.tsx";
 
 /** Props for the SeatFormSubmitList component. */
 type ListProps = {
@@ -23,8 +23,6 @@ type ListProps = {
 export function SeatFormSubmitList(
     {returnedSeating, setReturnedSeating}: ListProps
 ): ReactElement {
-
-    /** Removes a seat from the local list state. */
     const removeSeat = (_id: ObjectId) => {
         setReturnedSeating(prev => prev.filter(s => s._id !== _id));
     };
@@ -34,23 +32,9 @@ export function SeatFormSubmitList(
             {returnedSeating.map((seat: SeatDetails) => {
                 const {layoutType, _id} = seat;
 
-                if (layoutType === "SEAT") {
-                    return (
-                        <SeatFormSubmitSeatCard
-                            key={_id}
-                            seat={seat}
-                            removeSeat={removeSeat}
-                        />
-                    );
-                }
-
-                return (
-                    <SeatFormSubmitStructureCard
-                        key={_id}
-                        seat={seat}
-                        removeSeat={removeSeat}
-                    />
-                );
+                return layoutType === "SEAT"
+                    ? <SeatFormSubmitSeatCard key={_id} seat={seat} removeSeat={removeSeat}/>
+                    : <SeatFormSubmitStructureCard key={_id} seat={seat} removeSeat={removeSeat}/>;
             })}
         </div>
     );

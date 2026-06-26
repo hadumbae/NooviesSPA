@@ -4,12 +4,14 @@
 
 import {SeatCRUDBaseURL} from "@/domains/seats/_feat/crud/baseURL.ts";
 import {
-    handleCreate, handleDelete,
+    handleCreate,
+    handleDelete,
     handleFind,
     handleFindByID,
     handleFindBySlug,
     handlePaginated,
-    handleQuery, handleUpdate
+    handleQuery,
+    handleUpdate
 } from "@/common/_feat/crud-handlers";
 
 /** Standard CRUD methods bound to the Seat administrative API. */

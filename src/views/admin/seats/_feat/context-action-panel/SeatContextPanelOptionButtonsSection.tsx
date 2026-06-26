@@ -20,11 +20,7 @@ export function SeatContextPanelOptionButtonsSection(
 ): ReactElement {
     if (isEditing) {
         return (
-            <Button
-                variant="secondary"
-                className="select-none w-full"
-                onClick={() => setIsEditing(false)}
-            >
+            <Button variant="secondary" className="select-none w-full" onClick={() => setIsEditing(false)}>
                 <X/> Close
             </Button>
         );
@@ -32,11 +28,7 @@ export function SeatContextPanelOptionButtonsSection(
 
     if (showDeleteWarning) {
         return (
-            <Button
-                variant="secondary"
-                className="select-none w-full"
-                onClick={() => setShowDeleteWarning(false)}
-            >
+            <Button variant="secondary" className="select-none w-full" onClick={() => setShowDeleteWarning(false)}>
                 <X/> Cancel
             </Button>
         );

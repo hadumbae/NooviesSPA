@@ -3,21 +3,22 @@
  */
 
 import {cn} from "@/common/lib/utils.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 import {ReactElement} from "react";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {BrowseShowingSelector} from "@/views/client/showings/_comp/browse-showing-selector/BrowseShowingSelector.tsx";
+import {ShowingWithMovie} from "@/domains/showings/schema/showing";
+import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 
 /** Props for the BrowseTheatreShowingSelector component. */
 type SummaryProps = {
-    showing: PopulatedShowing | ShowingDetails;
+    timezone: IANATimezone;
+    showing: ShowingWithMovie;
     className?: string;
 };
 
 /** Displays a movie poster alongside a selector of a specific showtime. */
 export function BrowseTheatreShowingSelector(
-    {showing, className}: SummaryProps,
+    {showing, timezone, className}: SummaryProps,
 ): ReactElement {
     const {movie: {posterImage}} = showing;
 
@@ -30,6 +31,7 @@ export function BrowseTheatreShowingSelector(
 
             <BrowseShowingSelector
                 showing={showing}
+                timezone={timezone}
                 className="flex-1 p-3"
             />
         </div>

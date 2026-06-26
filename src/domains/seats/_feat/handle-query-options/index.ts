@@ -5,7 +5,6 @@ import {
 import {SeatQuerySorts, SeatQuerySortsSchema} from "@/domains/seats/_feat/handle-query-options/SeatQueryMatchSorts.ts";
 import {SeatQueryOptions, SeatQueryOptionsSchema} from "@/domains/seats/_feat/handle-query-options/SeatQueryOptions.ts";
 
-
 export {
     SeatQueryFiltersSchema,
     SeatQuerySortsSchema,

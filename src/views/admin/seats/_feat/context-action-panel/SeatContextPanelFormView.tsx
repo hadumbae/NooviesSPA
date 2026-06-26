@@ -3,11 +3,13 @@
  */
 
 import {ReactElement} from "react";
-import {SeatFormDisableFields, SeatSubmitFormButtons, SeatSubmitFormView} from "@/views/admin/seats/_feat/submit-data";
+import {SeatSubmitFormActions, SeatSubmitFormView} from "@/views/admin/seats/_feat/submit-data";
+import {DisableFields} from "@/common/types";
+import {SeatFormValues} from "@/domains/seats";
 
 /** Renders the seat context panel form view containing the "submit" and "reset" buttons. */
 export function SeatContextPanelFormView(): ReactElement {
-    const disableFields: SeatFormDisableFields = {
+    const disableFields: DisableFields<SeatFormValues> = {
         theatre: true,
         screen: true,
     };
@@ -15,7 +17,7 @@ export function SeatContextPanelFormView(): ReactElement {
     return (
         <div className="space-y-5">
             <SeatSubmitFormView disableFields={disableFields} isNestedView={true}/>
-            <SeatSubmitFormButtons/>
+            <SeatSubmitFormActions/>
         </div>
     );
 }

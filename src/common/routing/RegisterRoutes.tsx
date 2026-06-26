@@ -1,7 +1,6 @@
 import HomeRoutes from "@/domains/client/routing/ClientRoutes.tsx";
 import {AuthRoutes} from "@/domains/auth/routing/AuthRoutes.tsx";
 import {PersonRoutes} from "@/domains/persons/routing/PersonRoutes.tsx";
-import SeatRoutes from "@/domains/seats/routing/SeatRoutes.tsx";
 import {ShowingRoutes} from "@/domains/showings/routing/ShowingRoutes.tsx";
 import SystemRoutes from "@/common/routing/SystemRoutes.tsx";
 import {RouteObject} from "react-router-dom";
@@ -26,7 +25,6 @@ const adminRoutes = [
     ...AdminMovieRoutes,
     ...AdminCustomerRoutes,
 
-    ...SeatRoutes,
     ...ShowingRoutes,
     ...AdminReservationRoutes,
 ];

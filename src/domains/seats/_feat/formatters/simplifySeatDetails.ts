@@ -3,7 +3,7 @@
  */
 
 
-import {Seat, SeatDetails, SeatSchema} from "@/domains/seats/schema/model";
+import {Seat, SeatDetails, SeatSchema} from "@/domains/seats/_schema/model";
 import {ParseError} from "@/common/errors/ParseError.ts";
 
 /** Converts a fully populated seat details object into a simplified seat object. */

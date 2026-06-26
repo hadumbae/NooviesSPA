@@ -2,38 +2,70 @@
  * @fileoverview Orchestrator for seat creation and updates, handling form initialization and mutation logic.
  */
 
-import {ReactElement} from "react";
-import {SeatFormData, SeatFormValues} from "@/domains/seats/_feat/submit-data";
-import {useSeatSubmitForm} from "@/domains/seats/_feat/submit-data/useSeatSubmitForm.ts";
-import {FormConfigProps} from "@/common/_feat/submit-data";
+import {ReactElement, ReactNode} from "react";
+import {Form} from "@/common/components/ui";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/common/components/ui/form.tsx";
-import {useSeatSubmitMutation} from "@/domains/seats/_feat/crud-hooks";
-import {Seat, SeatDetails} from "@/domains/seats/schema/model";
+import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
+import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
+import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+
+import {
+    Seat,
+    SeatDetails,
+    SeatFormData,
+    SeatFormValues,
+    useSeatSubmitForm,
+    useSeatSubmitMutation
+} from "@/domains/seats";
 
 /** Props for the SeatSubmitForm component. */
-type FormProps = FormConfigProps<SeatFormValues, Seat, SeatDetails>;
+type FormProps = MutationResponseConfig<SeatDetails, SeatFormValues> & MutationFormResetConfig & {
+    formConfig?: FormValuesConfig<SeatFormValues, Seat>;
+    children: ReactNode;
+}
 
 /**
  * Manages the submission lifecycle for seat data, integrating mutation hooks with a unified form provider.
  */
 export function SeatSubmitForm(
-    {children, editEntity, presetValues, uniqueKey, ...formOptions}: FormProps
+    {children, formConfig, ...submitConfig}: FormProps
 ): ReactElement {
-    const formKey = `theatre-seat-submit-${editEntity?._id ?? "create"}-${uniqueKey ?? "form"}`;
-    console.log("formKey", formKey);
+    const formID = useGenerateFormID("theatre-seat-submit-form");
 
-    const form = useSeatSubmitForm({seat: editEntity, presetValues});
-    const mutation = useSeatSubmitMutation({form, ...formOptions});
+    const form = useSeatSubmitForm(formConfig);
+    const {mutateAsync, isPending, isError} = useSeatSubmitMutation();
 
-    const submitSeatData = (values: SeatFormData) => {
-        mutation.mutate(values);
-    };
+    const submitSeatData = async (values: SeatFormData) => {
+        try {
+            handleMutationCallback({
+                cb: () => submitConfig.onSubmit?.(values),
+                message: submitConfig.submitMessage,
+            });
+
+            const seat = await mutateAsync(values);
+
+            handleMutationCallback({
+                cb: () => submitConfig.onSubmitSuccess?.(seat),
+                message: submitConfig.successMessage,
+                messageType: "success",
+            });
+        } catch (error: unknown) {
+            handleMutationFormError({form, error, displayMessage: submitConfig.errorMessage})
+            submitConfig.onSubmitError?.(error);
+        }
+    }
 
     return (
-        <BaseFormContextProvider formID={formKey} isPending={mutation.isPending}>
+        <BaseFormContextProvider
+            formID={formID}
+            isPending={isPending}
+            isError={isError}
+            submitHandler={handleMutationResponseError}
+        >
             <Form {...form}>
-                <form id={formKey} onSubmit={form.handleSubmit(submitSeatData)}>
+                <form id={formID} onSubmit={form.handleSubmit(submitSeatData)}>
                     {children}
                 </form>
             </Form>

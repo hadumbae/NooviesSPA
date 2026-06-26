@@ -2,12 +2,11 @@
  * @fileoverview Renders the related navigation section inside the Seat Details Context Panel.
  */
 
-import {Theater, TvMinimal} from "lucide-react";
-import StackedIconCardLink from "@/common/components/navigation/logged-link/StackedIconCardLink.tsx";
 import {ReactElement} from "react";
-import {SeatDetails} from "@/domains/seats/schema/model";
+import {Theater, TvMinimal} from "lucide-react";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
-import {SeatTypeLabelMap} from "@/domains/seats/schema/fields";
+import StackedIconCardLink from "@/common/components/navigation/logged-link/StackedIconCardLink.tsx";
+import {SeatDetails, SeatTypeLabelMap} from "@/domains/seats";
 
 /** Props for the SeatContextPanelDetailsSection component. */
 type SectionProps = {

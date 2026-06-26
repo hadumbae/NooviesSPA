@@ -4,16 +4,13 @@
 
 import {TheatreScreenSchedule} from "@/domains/theatre-screens/_schema/model";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
-import {
-    BrowseShowingSelector
-} from "@/views/client/showings/_comp/browse-showing-selector/BrowseShowingSelector.tsx";
+import {BrowseShowingSelector} from "@/views/client/showings/_comp/browse-showing-selector/BrowseShowingSelector.tsx";
 import {ReactElement} from "react";
+import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 
 /** Props for the TheatreScreenShowingSelectCard component. */
 type CardProps = {
+    timezone: IANATimezone;
     screen: TheatreScreenSchedule;
 };
 
@@ -21,13 +18,13 @@ type CardProps = {
  * Renders screen information and iterates through available showings, providing an empty state if none exist.
  */
 export function TheatreScreenShowingSelectCard(
-    {screen}: CardProps
+    {screen, timezone}: CardProps
 ): ReactElement {
     const {name, screenType, showings} = screen;
 
     const emptySection = (
-        <div className={cn(RoundedBorderCSS, "h-full min-h-28 flex justify-center items-center")}>
-            <span className={cn(SecondaryTextBaseCSS, "select-none uppercase")}>
+        <div className="rounded-container-border h-full min-h-28 flex justify-center items-center">
+            <span className="secondary-text select-none uppercase">
                 No Showings
             </span>
         </div>
@@ -39,7 +36,8 @@ export function TheatreScreenShowingSelectCard(
                 <BrowseShowingSelector
                     key={showing._id}
                     showing={showing}
-                    className={cn(RoundedBorderCSS, "p-3")}
+                    timezone={timezone}
+                    className="rounded-container-border p-3"
                 />
             )}
         </section>

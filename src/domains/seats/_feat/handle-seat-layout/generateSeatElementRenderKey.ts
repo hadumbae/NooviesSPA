@@ -2,7 +2,7 @@
  * @fileoverview Utility function for generating stable React key values for elements rendered in the seat layout grid.
  */
 
-import {GridPositionedSeat} from "./GridPositionedSeat.ts";
+import {GridPositionedSeat} from "@/domains/seats/_feat/handle-seat-layout/GridPositionedSeat.ts";
 
 /** Generates a stable and unique React key for an element in the seat layout grid. */
 export function generateSeatElementRenderKey<TElement extends GridPositionedSeat>(

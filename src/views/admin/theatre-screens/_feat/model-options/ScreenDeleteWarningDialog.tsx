@@ -8,9 +8,11 @@ import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWa
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useScreenDeleteMutation} from "@/domains/theatre-screens/_feat/crud-hooks";
 import {UIOpenStateProps} from "@/common/types";
+import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 
 /** Props for the ScreenDeleteWarningDialog component. */
-type DialogProps = MutationResponseConfig & UIOpenStateProps & {
+type DialogProps = MutationResponseConfig<void, { _id: ObjectId }> & UIOpenStateProps & {
     children?: ReactNode;
     screenID: ObjectId;
     screenName?: string;
@@ -18,13 +20,29 @@ type DialogProps = MutationResponseConfig & UIOpenStateProps & {
 
 /** A domain-specific warning dialog that confirms a user's intent to delete a Theatre Screen. */
 export function ScreenDeleteWarningDialog(
-    {children, screenID, screenName, isOpen, setIsOpen, ...mutationParams}: DialogProps
+    {children, screenID, screenName, isOpen, setIsOpen, ...submitConfig}: DialogProps
 ): ReactElement {
     const dialogTitle = `Proceed to delete ${screenName ?? "screen"}?`;
-    const {mutate} = useScreenDeleteMutation(mutationParams);
+    const {mutateAsync} = useScreenDeleteMutation();
 
-    const deleteScreen = () => {
-        mutate({_id: screenID});
+    const deleteScreen = async () => {
+        try {
+            handleMutationCallback({
+                cb: () => submitConfig.onSubmit?.({_id: screenID}),
+                message: submitConfig.submitMessage,
+            });
+
+            await mutateAsync({_id: screenID});
+
+            handleMutationCallback({
+                cb: () => submitConfig.onSubmitSuccess?.(),
+                message: submitConfig.successMessage,
+                messageType: "success"
+            });
+        } catch (error: unknown) {
+            handleMutationResponseError({error, displayMessage: submitConfig.errorMessage});
+            submitConfig.onSubmitError?.(error);
+        }
     };
 
     return (

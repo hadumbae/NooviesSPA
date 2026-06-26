@@ -2,11 +2,9 @@
  * @fileoverview React hook for transforming flat seating arrays into memoized 2D grid structures and CSS styles.
  */
 
-import {
-    buildSeatLayoutMap
-} from "./buildSeatLayoutMap.ts";
 import {useMemo} from "react";
-import {GridPositionedSeat} from "./GridPositionedSeat.ts";
+import {buildSeatLayoutMap} from "@/domains/seats/_feat/handle-seat-layout/buildSeatLayoutMap.ts";
+import {GridPositionedSeat} from "@/domains/seats/_feat/handle-seat-layout/GridPositionedSeat.ts";
 
 /** Parameters for the useOrganisedSeatingForLayout hook. */
 type SeatProps<TSeat extends GridPositionedSeat> = {

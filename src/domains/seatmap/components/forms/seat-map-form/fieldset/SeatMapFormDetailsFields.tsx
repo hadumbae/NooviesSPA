@@ -1,15 +1,5 @@
 /**
- * @file SeatMapFormReferenceFields.tsx
- *
- * @summary Form fields component for managing Seat references in a Seat Map form.
- *
- * @description
- * Renders reference-based input fields for a Seat Map form, including:
- * - Seat selection filtered by layout type and screen
- * - Dynamic activation of fields based on the `activeFields` configuration
- *
- * The component integrates with React Hook Form via `UseFormReturn`
- * and uses {@link SeatHookFormSelect} for selecting seat references.
+ * @fileoverview Form fieldset for managing seat map details.
  */
 
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
@@ -18,49 +8,21 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {UseFormReturn} from "react-hook-form";
 import {SeatMapFormValues} from "@/domains/seatmap/schema/form/SeatMapForm.types.ts";
 import SeatMapStatusRadioGroup from "@/domains/seatmap/components/forms/input/SeatMapStatusRadioGroup.tsx";
-import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
-import {cloneElement, ReactElement} from "react";
+import {ReactElement} from "react";
 import {SeatQueryOptions} from "@/domains/seats/_feat/handle-query-options/SeatQueryOptions.ts";
 import {SeatHookFormSelect} from "@/views/admin/seats/_feat/form-inputs";
 
-/**
- * Props for {@link SeatMapFormDetailsFields}.
- */
+/** Props for the SeatMapFormDetailsFields component. */
 type FieldProps = {
-    /** React Hook Form instance controlling the Seat Map form. */
     form: UseFormReturn<SeatMapFormValues>;
-
-    /** Record of which fields are currently active (true = visible/enabled). */
     activeFields: Record<keyof SeatMapFormValues, boolean>;
-
-    /** ID of the screen associated with the Seat Map, used for filtering seats. */
     seatMapScreen: ObjectId;
 };
 
-/**
- * Renders Seat reference fields for the Seat Map form.
- *
- * - Filters available seats by `layoutType: "SEAT"` and the current `screen`
- * - Applies sorting by row and seat number
- * - Conditionally renders fields based on `activeFields`
- *
- * @param props - {@link FieldProps} including form, activeFields, and seatMapScreen
- *
- * @returns JSX element containing reference input fields
- *
- * @example
- * ```tsx
- * <SeatMapFormReferenceFields
- *   form={form}
- *   activeFields={{ seat: true }}
- *   seatMapScreen="abc123"
- * />
- * ```
- */
+/** Renders seat selection and status fields for the seat map form. */
 export function SeatMapFormDetailsFields(props: FieldProps): ReactElement {
     const {form, activeFields, seatMapScreen} = props;
 
-    // --- Seat Filters ---
     const seatFilters: SeatQueryOptions = {
         layoutType: "SEAT",
         screen: seatMapScreen,
@@ -68,34 +30,6 @@ export function SeatMapFormDetailsFields(props: FieldProps): ReactElement {
         sortBySeatNumber: 1,
     };
 
-    // --- Fields ---
-    const fieldGroup: HookFormField[] = [
-        {
-            key: "seat-map-seat",
-            render: activeFields["seat"],
-            element: <SeatHookFormSelect
-                name="seat"
-                label="Seat"
-                control={form.control}
-                filters={seatFilters}
-            />
-        },
-        {
-            key: "seat-map-status",
-            render: activeFields["status"],
-            element: <SeatMapStatusRadioGroup
-                name="status"
-                label="Status"
-                control={form.control}
-                className="grid grid-cols-2 gap-4"
-            />
-        },
-
-    ];
-
-    const fields = fieldGroup.map(({render, key, element}) => render ? cloneElement(element, {key}) : null);
-
-    // --- Render ---
     return (
         <fieldset className="space-y-4">
             <div>
@@ -104,10 +38,25 @@ export function SeatMapFormDetailsFields(props: FieldProps): ReactElement {
             </div>
 
             <div className="grid grid-cols-1 gap-4">
-                {fields}
+                {
+                    activeFields.seat &&
+                    <SeatHookFormSelect
+                        name="seat"
+                        label="Seat"
+                        filters={seatFilters}
+                    />
+                }
+
+                {
+                    activeFields.status &&
+                    <SeatMapStatusRadioGroup
+                        name="status"
+                        label="Status"
+                        control={form.control}
+                        className="grid grid-cols-2 gap-4"
+                    />
+                }
             </div>
         </fieldset>
     );
 }
-
-

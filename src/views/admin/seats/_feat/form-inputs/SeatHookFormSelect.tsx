@@ -2,31 +2,28 @@
  * @fileoverview Hook Form select component for choosing seats, supporting filtering and single/multi-selection.
  */
 
+import {ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
 import {Loader} from "lucide-react";
-import {HookFormMultiSelect} from "@/views/common/_comp/form-select/HookFormMultiSelect.tsx";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import buildString from "@/common/utility/buildString.ts";
-import {ReactElement} from "react";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {useFetchSeats} from "@/domains/seats/_feat/crud-hooks";
-import {Seat, SeatSchema} from "@/domains/seats/schema/model";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {SeatQueryFilters} from "@/domains/seats/_feat/handle-query-options";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 
+import {Seat, SeatQueryFilters, SeatSchema, useFetchSeats} from "@/domains/seats";
+
 /** Props for the SeatHookFormSelect component. */
-type SelectProps<TValues extends FieldValues> = HookFormInputControlProps<TValues> & {
+type SelectProps<TValues extends FieldValues> = Omit<HookFormInputControlProps<TValues>, "control"> & {
     filters?: SeatQueryFilters;
-    isMulti?: boolean;
 };
 
 /**
  * Renders a validated selection input for seats that maps query results to form options.
  */
 export function SeatHookFormSelect<TValues extends FieldValues>(
-    {isMulti = false, filters = {layoutType: "SEAT"}, ...rest}: SelectProps<TValues>
+    {filters = {layoutType: "SEAT"}, ...rest}: SelectProps<TValues>
 ): ReactElement {
     const query = useFetchSeats({queries: filters, schema: generateArraySchema(SeatSchema)});
 
@@ -45,9 +42,9 @@ export function SeatHookFormSelect<TValues extends FieldValues>(
                     })
                 );
 
-                return isMulti
-                    ? <HookFormMultiSelect options={options} {...rest} />
-                    : <HookFormSelect options={options} {...rest} />;
+                return (
+                    <HookFormSelect options={options} {...rest} />
+                );
             }}
         </QueryDataLoader>
     );

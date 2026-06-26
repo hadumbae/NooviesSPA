@@ -2,12 +2,12 @@
  * @fileoverview Hook form select component for theatre screen types.
  */
 
+import {ReactElement} from "react";
+import {Control, FieldValues, Path} from "react-hook-form";
 import {HookFormMultiSelect} from "@/views/common/_comp/form-select/HookFormMultiSelect.tsx";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
-import {Control, FieldValues, Path} from "react-hook-form";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
-import ScreenTypeConstant from "@/domains/theatre-screens/constants/ScreenTypeConstant.ts";
-import {ReactElement} from "react";
+import {ScreenTypeConstant} from "@/domains/theatre-screens";
 
 /** Props for the ScreenTypeHookFormSelect component. */
 type Props<TSubmit extends FieldValues> = {

@@ -2,15 +2,16 @@
  * @fileoverview Renders a single element within a showing's seat map layout.
  */
 
-import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
-import SeatLayoutNonSeatElement from "@/domains/seats/components/features/screen-seats/SeatLayoutNonSeatElement.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
 import {ReactElement, useCallback} from "react";
+import {Button} from "@/common/components/ui";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {SeatLayoutIconConstant} from "@/domains/seats/schema/fields";
+
+import {SeatLayoutIconConstant} from "@/domains/seats";
+import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import {
     SeatMapDetailsPanelContext
 } from "@/domains/seatmap/context/details-panel-context/SeatMapDetailsPanelContext.ts";
+import {SeatLayoutNonSeatElement} from "@/views/admin/seats";
 
 /** Props for the ShowingSeatMapElement component. */
 type ShowingSeatMapElementProps = {
