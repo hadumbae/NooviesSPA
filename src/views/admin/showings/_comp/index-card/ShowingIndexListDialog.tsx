@@ -22,7 +22,7 @@ import {cn} from "@/common/lib/utils.ts";
 import CollapsibleTextblock from "@/common/components/text/CollapsibleTextblock.tsx";
 import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {ReactElement} from "react";
 import {ShowingMovieSummary} from "@/views/admin/movies/_comp/showing-movie-summary";
 import {ShowingStateBadges} from "@/views/admin/showings/_comp/showing-state-badges";

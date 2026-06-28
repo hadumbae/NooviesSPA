@@ -3,12 +3,12 @@
  */
 
 import {ReactElement} from "react";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
-import {Movie, MovieDetails, MovieWithGenres} from "@/domains/movies/schema/movie";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import buildString from "@/common/utility/buildString.ts";
+import {Movie, MovieDetails, MovieWithGenres} from "@/domains/movies";
 
 /** Props for the ShowingInfoMovieMeta component. */
 type MetaProps = {

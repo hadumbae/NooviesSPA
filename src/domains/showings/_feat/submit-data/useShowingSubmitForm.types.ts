@@ -3,9 +3,9 @@
  */
 
 import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
-import {Showing} from "@/domains/showings/schema/showing/ShowingSchema.ts";
+import {Showing} from "@/domains/showings/_schema/showing/ShowingSchema.ts";
 
-import {ShowingFormValues} from "@/domains/showings/schema/form";
+import {ShowingFormValues} from "@/domains/showings/_schema/form";
 
 /** Parameters for initializing the form in edit mode with existing data and timezone context. */
 export type ShowingEditConfig = | {

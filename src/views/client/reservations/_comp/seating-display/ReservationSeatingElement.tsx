@@ -3,10 +3,11 @@
  * Selection-aware wrapper for rendering seat map elements with optional tooltip.
  */
 
-import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import {BaseSeatingElement} from "@/views/client/reservations/_comp/seating/BaseSeatingElement.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
 import {ReactElement} from "react";
+
+import {SeatMapDetails} from "@/domains/seatmap/_schema/model/SeatMapDetailsSchema";
 
 /**
  * Props for the ReservationSeatingElement component.

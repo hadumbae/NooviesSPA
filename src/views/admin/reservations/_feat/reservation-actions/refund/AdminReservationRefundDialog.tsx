@@ -3,21 +3,23 @@
  *
  * Requires wrapping in a Form provider and UpdateReservationNotesFormContext.
  */
+import {ReactElement, ReactNode} from "react";
+import {useFormContext} from "react-hook-form";
 import {
-    Dialog, DialogClose,
+    Button,
+    Dialog,
+    DialogClose,
     DialogContent,
-    DialogDescription, DialogFooter,
+    DialogDescription,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui/dialog.tsx";
+} from "@/common/components/ui";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {UpdateReservationNotesFormContext} from "@/domains/reservation/_feat/update-reservations/contexts";
-import {ReactElement, ReactNode} from "react";
-import {useFormContext} from "react-hook-form";
-import {ReservationUniqueCode} from "@/domains/reservation/schema/model";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import {ReservationUniqueCode} from "@/domains/reservation";
 
 /** Props for the AdminReservationRefundDialog component. */
 type DialogProps = {
@@ -32,7 +34,7 @@ export function AdminReservationRefundDialog(
     {children, uniqueCode, isOpen, setIsOpen}: DialogProps
 ): ReactElement {
     const {control} = useFormContext();
-    const {formID} = useRequiredContext({context: UpdateReservationNotesFormContext});
+    const {formID, isPending} = useBaseFormContext();
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -63,7 +65,7 @@ export function AdminReservationRefundDialog(
                     </DialogClose>
 
                     <Button form={formID} variant="primary" type="submit">
-                        Confirm Refund
+                        {isPending ? <AnimatedLoader/> : "Confirm Refund"}
                     </Button>
                 </DialogFooter>
             </DialogContent>

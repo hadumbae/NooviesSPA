@@ -8,7 +8,7 @@ import buildString from "@/common/utility/buildString.ts";
 import {buildShowingDateString} from "@/domains/showings/_feat/formatters/buildShowingDateString.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {PopulatedReservation} from "@/domains/reservation/schema/model/populated-reservations/PopulatedReservationSchema.ts";
+import {PopulatedReservation} from "@/domains/reservation/_schema/model/populated-reservations/PopulatedReservationSchema.ts";
 
 /**
  * Reservation object enriched with human-readable strings and flattened identifiers for UI components.

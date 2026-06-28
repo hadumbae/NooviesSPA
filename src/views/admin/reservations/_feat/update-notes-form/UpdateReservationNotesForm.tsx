@@ -2,52 +2,57 @@
  * @fileoverview Logical container for updating administrative reservation notes with context integration.
  */
 
+import {ReactElement, ReactNode} from "react";
+import {Form} from "@/common/components/ui/form.tsx";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
+
 import {
-    UpdateReservationNotesFormSubmit,
+    AdminReservation,
+    UpdateReservationNotesFormData,
     useUpdateReservationNotesForm,
     useUpdateReservationNotesMutation,
-} from "@/domains/reservation/_feat/update-reservations/hooks";
-import {Form} from "@/common/components/ui/form.tsx";
-import {ReactElement, ReactNode} from "react";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {AdminReservation} from "@/domains/reservation/schema/model";
-import {UpdateReservationNotesFormContextProvider} from "@/domains/reservation/_feat/update-reservations/contexts";
+    useUpdateReservationSubmitHandler
+} from "@/domains/reservation";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /** Props for the UpdateReservationNotesForm component. */
-type FormProps = MutationOnSubmitParams<AdminReservation> & {
+type FormProps = MutationResponseConfig<AdminReservation, UpdateReservationNotesFormData> & MutationFormResetConfig & {
     children: ReactNode;
     reservationID: ObjectId;
-    uniqueKey?: string;
-    presetValues?: Partial<UpdateReservationNotesFormSubmit>;
+    presetValues?: Partial<UpdateReservationNotesFormData>;
 };
 
 /**
  * Administrative form controller that manages the lifecycle of reservation note updates.
  */
 export function UpdateReservationNotesForm(
-    {children, reservationID, uniqueKey, presetValues, ...onSubmitProps}: FormProps
+    {children, reservationID, presetValues, ...submitConfig}: FormProps
 ): ReactElement {
-    const formKey = `update-reservation-admin-notes-${uniqueKey ?? "form"}`;
+    const formID = useGenerateFormID("update-reservation-admin-notes-form");
     const form = useUpdateReservationNotesForm({presetValues});
 
-    const mutation = useUpdateReservationNotesMutation({
+    const {mutateAsync, isPending, isError} = useUpdateReservationNotesMutation({reservationID});
+
+    const updateNotes = useUpdateReservationSubmitHandler({
         form,
-        reservationID,
-        onSubmitConfig: onSubmitProps,
+        submitData: (data: UpdateReservationNotesFormData) => mutateAsync(data),
+        ...submitConfig,
     });
 
-    const updateNotes = (values: UpdateReservationNotesFormSubmit) => {
-        mutation.mutate(values);
-    }
-
     return (
-        <UpdateReservationNotesFormContextProvider formID={formKey}>
+        <BaseFormContextProvider
+            formID={formID}
+            isPending={isPending}
+            isError={isError}
+            submitHandler={updateNotes}
+        >
             <Form {...form}>
-                <form id={formKey} onSubmit={form.handleSubmit(updateNotes)}>
+                <form id={formID} onSubmit={form.handleSubmit(updateNotes)}>
                     {children}
                 </form>
             </Form>
-        </UpdateReservationNotesFormContextProvider>
+        </BaseFormContextProvider>
     );
 }

@@ -5,7 +5,7 @@
 
 import {cn} from "@/common/lib/utils.ts";
 import {ReactElement, useState} from "react";
-import {ReservationType} from "@/domains/reservation/schema";
+import {ReservationType} from "@/domains/reservation/_schema";
 import {
     ReservationCountFieldset,
     ReservationSeatFieldset,

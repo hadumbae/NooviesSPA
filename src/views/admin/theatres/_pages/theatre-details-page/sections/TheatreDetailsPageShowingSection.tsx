@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing";
+import {ShowingDetails} from "@/domains/showings/_schema/showing";
 import {cn} from "@/common/lib/utils.ts";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card";

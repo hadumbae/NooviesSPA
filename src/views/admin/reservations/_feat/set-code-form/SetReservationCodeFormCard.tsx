@@ -2,16 +2,13 @@
  * @fileoverview Card-based UI component for the reservation code lookup form.
  */
 
+import {ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {
-    SetReservationCodeFormContext
-} from "@/domains/reservation/_feat/fetch-reservation-by-code/context/SetReservationCodeFormContext.ts";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import {ReactElement} from "react";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
 /** Props for the SetReservationCodeFormCard component. */
 type ViewProps = {
@@ -25,18 +22,12 @@ type ViewProps = {
 export function SetReservationCodeFormCard(
     {className, containerClassName}: ViewProps
 ): ReactElement {
+    const {formID} = useBaseFormContext();
     const {control} = useFormContext();
-
-    const {formID} = useRequiredContext({
-        context: SetReservationCodeFormContext,
-    });
 
     return (
         <Card className={containerClassName}>
-            <CardContent className={cn(
-                "p-3 flex flex-col space-y-2",
-                className,
-            )}>
+            <CardContent className={cn("p-3 flex flex-col space-y-2", className)}>
                 <HookFormInput
                     placeholder="Code"
                     name="code"

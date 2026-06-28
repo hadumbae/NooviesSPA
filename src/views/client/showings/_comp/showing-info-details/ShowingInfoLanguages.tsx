@@ -4,13 +4,11 @@
  */
 
 import {ReactElement} from "react";
-import {ISO6391LanguageCode} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
 import {Captions, Volume2} from "lucide-react";
+import {ISO6391LanguageCode} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
 import {ISO6391LanguageLabels} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
-import {cn} from "@/common/lib/utils.ts";
-import {IconTextCSS} from "@/common/constants/css/TextCSS.ts";
 
-const ICON_CSS = cn(IconTextCSS, "max-md:text-xs font-bold select-none");
+const ICON_CSS = "text-with-icon max-md:text-xs font-bold select-none";
 
 /** Props for the ShowingInfoLanguages component. */
 type InfoProps = {

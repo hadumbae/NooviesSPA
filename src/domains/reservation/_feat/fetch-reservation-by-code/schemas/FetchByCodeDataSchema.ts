@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {AdminReservationSchema, ReservationUniqueCodeSchema} from "@/domains/reservation/schema/model";
+import {AdminReservationSchema, ReservationUniqueCodeSchema} from "@/domains/reservation/_schema/model";
 import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
 
 /** Validates the data envelope returned by the administrative code lookup endpoint. */

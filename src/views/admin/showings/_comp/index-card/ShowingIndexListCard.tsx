@@ -7,7 +7,7 @@ import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
 import {formatShowingDetails} from "@/domains/showings/_feat/formatters/formatShowingDetails.ts";
 import {DollarSign, Star} from "lucide-react";
 import {LucideIconText} from "@/common/components/card-content/LucideIconText.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {ShowingIsActiveBadge, ShowingStatusBadge} from "@/views/admin/showings/_comp/badges";
 

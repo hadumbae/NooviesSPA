@@ -2,14 +2,12 @@
  * @fileoverview Individual card displaying a timestamped event in the reservation lifecycle.
  *
  */
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {DateTime} from "luxon";
-import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
-import {LucideIcon} from "lucide-react";
-import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
-import {ReservationStatus} from "@/domains/reservation/schema/model";
-import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";
+import {DateTime} from "luxon";
+import {cn} from "@/common/lib/utils.ts";
+import {LucideIcon} from "lucide-react";
+import {Card, CardContent} from "@/common/components/ui";
+import {ReservationStatus} from "@/domains/reservation";
 
 /** Props for the ReservationActiveDateCard component. */
 type CardProps = {
@@ -38,24 +36,20 @@ export function ReservationActiveDateCard(
 
     return (
         <Card>
-            <CardContent className={cn(
-                "p-4",
-                "flex justify-center items-center space-x-10",
-            )}>
+            <CardContent className="p-4 flex justify-center items-center space-x-10">
                 <div className={cn("rounded-[30px] text-white p-2", COLOUR_CSS[status])}>
                     <Icon/>
                 </div>
 
                 <div className="flex flex-col space-y-0">
-                    <PrimarySpan className="font-extrabold uppercase line-clamp-1">
+                    <span className="primary-text font-extrabold uppercase line-clamp-1">
                         {text}
-                    </PrimarySpan>
+                    </span>
 
-                    <SecondarySpan className="text-sm font-extralight line-clamp-1">
+                    <span className="secondary-text text-sm font-extralight line-clamp-1">
                         {dateString}
-                    </SecondarySpan>
+                    </span>
                 </div>
-
             </CardContent>
         </Card>
     );

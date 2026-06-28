@@ -2,12 +2,12 @@
  * @fileoverview Compact selectable summary component for a single theatre showing.
  */
 
+import {ReactElement} from "react";
 import {cn} from "@/common/lib/utils.ts";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
-import {ReactElement} from "react";
-import {ShowingInfoLanguages, ShowingInfoMovieMeta} from "@/views/client/showings/_comp/showing-info-details";
-import {ShowingWithMovie} from "@/domains/showings/schema/showing";
 import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
+import {ShowingWithMovie} from "@/domains/showings";
+import {ShowingInfoLanguages, ShowingInfoMovieMeta} from "@/views/client/showings/_comp/showing-info-details";
 
 /** Props for the TheatreShowingSelectSummary component. */
 type SummaryProps = {

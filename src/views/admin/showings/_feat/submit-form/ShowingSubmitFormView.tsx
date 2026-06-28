@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {DisableFields} from "@/common/types";
-import {ShowingFormValues} from "@/domains/showings/schema/form/form-values/ShowingFormValues.ts";
+import {ShowingFormValues} from "@/domains/showings/_schema/form/form-values/ShowingFormValues.ts";
 import {FormStep, FormStepMeta} from "@/common/_feat/multi-step-form/types.ts";
 import {ChevronRight, Clock, Languages, ListCollapse} from "lucide-react";
 import getSchemaFieldKeys from "@/common/utility/features/zod/getSchemaFieldKeys.ts";
@@ -16,7 +16,7 @@ import {
     ShowingFormDetailSchema,
     ShowingFormLanguageSchema,
     ShowingFormStatusSchema
-} from "@/domains/showings/schema/form";
+} from "@/domains/showings/_schema/form";
 import {
     ShowingSubmitFormLanguagesFieldset
 } from "@/views/admin/showings/_feat/submit-form/fieldsets/ShowingSubmitFormLanguagesFieldset.tsx";

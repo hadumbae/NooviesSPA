@@ -2,7 +2,7 @@
  * @fileoverview TanStack Query hook for administrative reservation lookups by unique code.
  */
 
-import {ReservationUniqueCode} from "@/domains/reservation/schema";
+import {ReservationUniqueCode} from "@/domains/reservation/_schema";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";

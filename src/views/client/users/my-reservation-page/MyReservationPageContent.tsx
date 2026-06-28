@@ -16,7 +16,7 @@ import {
     MyReservationStatusActions
 } from "@/views/client/users/my-reservation-page/mutations/MyReservationStatusActions.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import {PopulatedReservation} from "@/domains/reservation/schema/model";
+import {PopulatedReservation} from "@/domains/reservation/_schema/model";
 import {ReactElement} from "react";
 
 /** Props for the MyReservationPageContent component. */

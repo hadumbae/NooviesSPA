@@ -8,7 +8,7 @@ import {
 } from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {ShowingFormValues} from "@/domains/showings/schema/form";
+import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";

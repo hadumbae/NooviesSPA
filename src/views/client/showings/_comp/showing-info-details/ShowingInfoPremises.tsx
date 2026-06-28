@@ -3,12 +3,11 @@
  */
 
 import {ReactElement} from "react";
-import {Theatre, TheatreDetails} from "@/domains/theatres/schema/theatre";
-import {TheatreScreen, TheatreScreenDetails} from "@/domains/theatre-screens/_schema/model";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {IconTextCSS} from "@/common/constants/css/TextCSS.ts";
 import {TvMinimal} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {Theatre, TheatreDetails} from "@/domains/theatres";
+import {TheatreScreen, TheatreScreenDetails} from "@/domains/theatre-screens";
 
 /** Style overrides for the premises container and its labels. */
 type PremisesClassNames = {
@@ -53,8 +52,7 @@ export function ShowingInfoPremises(
             </div>
 
             <div className={cn(
-                IconTextCSS,
-                "text-sm font-bold secondary-text",
+                "text-with-icon text-sm font-bold secondary-text",
                 classNames?.screen
             )}>
                 <TvMinimal/> {screenName}

@@ -2,10 +2,9 @@
  * @fileoverview Zod validation schema for the Theatre Details administrative view.
  */
 
-import { z } from "zod";
-import {generateArraySchema} from "@/common/_feat/validation-builders";
-import { ShowingDetailsSchema } from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import { generatePaginationSchema } from "@/common/_feat/validation-builders";
+import {z} from "zod";
+import {generateArraySchema, generatePaginationSchema} from "@/common/_feat/validation-builders";
+import {ShowingDetailsSchema} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {TheatreScreenWithVirtualsSchema} from "@/domains/theatre-screens/_schema/model";
 import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
@@ -15,7 +14,7 @@ import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDet
 export const TheatreDetailsViewDataSchema = z.object({
     theatre: TheatreDetailsSchema,
     screens: generatePaginationSchema(TheatreScreenWithVirtualsSchema),
-    showings: generateArraySchema(ShowingDetailsSchema),
+    showings: z.lazy(() => generateArraySchema(ShowingDetailsSchema)),
 });
 
 /**

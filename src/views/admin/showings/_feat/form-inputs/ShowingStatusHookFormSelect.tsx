@@ -5,11 +5,11 @@
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {FieldValues} from "react-hook-form";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
-import {ShowingStatusConstant} from "@/domains/showings/schema/fields/ShowingStatusConstant.ts";
+import {ShowingStatusConstant} from "@/domains/showings/_schema/fields/ShowingStatusConstant.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 
 
-import {ShowingFormValues} from "@/domains/showings/schema/form";
+import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {ReactElement} from "react";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 

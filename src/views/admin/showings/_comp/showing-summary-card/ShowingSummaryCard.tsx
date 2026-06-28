@@ -23,7 +23,7 @@ import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.t
 import IconTextSpan from "@/common/components/card-content/IconTextSpan.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {ReactElement} from "react";
 
 /** Props for the ShowingSummaryCard component. */

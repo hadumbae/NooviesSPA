@@ -1,52 +1,31 @@
 /**
- * @file SeatMapDetailsLoader.tsx
- *
- * Data loader component for fetching and validating populated seat map details
- * for a specific showing.
- *
- * Wraps the seat map query with schema validation and exposes the resolved
- * `SeatMapDetails[]` via a render prop.
+ * @fileoverview Data loader for fetching and validating populated seat map details for a specific showing.
  */
 
-import {SeatMapQueryOptions} from "@/domains/seatmap/schema/query-options/SeatMapQueryOptions.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useFetchSeatMaps from "@/domains/seatmap/hooks/queries/useFetchSeatMaps.ts";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {SeatMapDetailsArraySchema} from "@/domains/seatmap/schema/model/SeatMap.schema.ts";
-import {ReactNode} from "react";
-import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
+import {ReactElement, ReactNode} from "react";
+import {generateArraySchema} from "@/common/_feat/validation-builders";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {SeatMapDetails, SeatMapDetailsSchema, SeatMapQueryOptions, useFetchSeatMaps} from "@/domains/seatmap";
 
-type LoaderProps = Omit<SeatMapQueryOptions, "showing"> & {
-    /**
-     * Render prop invoked with validated seat map details.
-     */
+/** Props for the SeatMapDetailsLoader component. */
+type LoaderProps = {
     children: (data: SeatMapDetails[]) => ReactNode;
-
-    /**
-     * Showing ID used to scope seat map results.
-     */
-    showingID: ObjectId;
+    queries?: SeatMapQueryOptions;
 };
 
-/**
- * Loads populated seat map details for a given showing and validates
- * the response against `SeatMapDetailsArraySchema`.
- *
- * @param props Loader configuration and render function
- */
-const SeatMapDetailsLoader = (
-    {children, showingID, ...queryOptions}: LoaderProps
-) => {
+/** Loads populated seat map details for a given showing and validates the response. */
+export function SeatMapDetailsLoader(
+    {children, queries}: LoaderProps
+): ReactElement {
     const query = useFetchSeatMaps({
-        queries: {...queryOptions, showing: showingID},
+        queries,
         config: {populate: true, virtuals: true},
+        schema: generateArraySchema(SeatMapDetailsSchema),
     });
 
     return (
-        <ValidatedDataLoader query={query} schema={SeatMapDetailsArraySchema}>
+        <QueryDataLoader query={query}>
             {children}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
-};
-
-export default SeatMapDetailsLoader;
+}

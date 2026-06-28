@@ -2,7 +2,7 @@
  * @fileoverview Interactive card component for displaying and accessing customer reservation details.
  */
 
-import {Reservation} from "@/domains/reservation/schema/model";
+import {Reservation} from "@/domains/reservation/_schema/model";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {

@@ -2,11 +2,10 @@
  * @fileoverview Component for selecting a specific movie showing from a list during the browsing flow.
  */
 
+import {ReactElement} from "react";
 import {cn} from "@/common/lib/utils.ts";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
-import {ReactElement} from "react";
+import {PopulatedShowing, ShowingDetails} from "@/domains/showings";
 import {ShowingInfoLanguages} from "@/views/client/showings/_comp/showing-info-details";
 
 /** Props for the BrowseMovieShowingSelector component. */

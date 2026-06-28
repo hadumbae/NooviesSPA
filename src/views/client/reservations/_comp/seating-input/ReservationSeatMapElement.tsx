@@ -2,7 +2,6 @@
  * @fileoverview Single seat cell used within the reservation seat map.
  */
 
-import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import {Check, Plus} from "lucide-react";
 import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {cn} from "@/common/lib/utils.ts";
@@ -10,6 +9,8 @@ import {Button} from "@/common/components/ui/button.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ReactElement} from "react";
+
+import {SeatMapDetails} from "@/domains/seatmap/_schema/model/SeatMapDetailsSchema";
 
 /** Props for the ReservationSeatMapElement component. */
 type ElementProps = {

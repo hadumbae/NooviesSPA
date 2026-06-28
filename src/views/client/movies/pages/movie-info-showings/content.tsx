@@ -12,7 +12,7 @@ import {MovieInfoHeader} from "@/views/client/movies/_comp";
 import {MovieInfoShowingsPageFormSection} from "@/views/client/movies/pages/movie-info-showings/sections";
 
 import {MovieDetails} from "@/domains/movies";
-import {PopulatedShowing} from "@/domains/showings/schema/showing";
+import {PopulatedShowing} from "@/domains/showings/_schema/showing";
 
 /** Props for the MovieInfoShowingsPageContent component. */
 type ContentProps = {

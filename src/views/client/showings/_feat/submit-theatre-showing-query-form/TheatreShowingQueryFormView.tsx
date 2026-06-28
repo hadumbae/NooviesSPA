@@ -1,27 +1,24 @@
 /**
- * @file Showings page query form view component.
- * @filename TheatreShowingQueryFormView.tsx
+ * @fileoverview View component for the showings page query form.
  */
 
+import {ReactElement} from "react";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-import {ShowingsPageQueryStrings} from "@/domains/movies/_feat/client-view-data";
-import {ReactElement} from "react";
 import {DisableFields} from "@/common/types";
+import {ShowingsPageQueryStrings} from "@/domains/movies";
 
-/**
- * Props for {@link TheatreShowingQueryFormView}.
- */
-type FormProps = {
+/** Props for the TheatreShowingQueryFormView component. */
+export type FormProps = {
     disableFields?: DisableFields<ShowingsPageQueryStrings>;
     className?: string;
 };
 
 /**
- * View component for showings query inputs.
+ * Renders input fields for filtering movie showings by location and page.
  */
 export function TheatreShowingQueryFormView(
     {disableFields, className}: FormProps
@@ -30,7 +27,7 @@ export function TheatreShowingQueryFormView(
     const {control} = useFormContext();
 
     if (!submitHandler) {
-        throw new Error("`TheatreShowingQueryFormView` requires a submitHandler.");
+        throw new Error(`'${TheatreShowingQueryFormView.name}' requires a submitHandler.`);
     }
 
     useAutoFormSubmit({submitHandler});

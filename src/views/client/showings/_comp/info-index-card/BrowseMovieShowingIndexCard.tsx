@@ -2,12 +2,10 @@
  * @fileoverview A card component that displays location information and time selection for a movie showing.
  */
 
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {PopulatedShowing} from "@/domains/showings/schema/showing/PopulatedShowingSchema.ts";
 import {ReactElement} from "react";
-import {ShowingInfoPremises} from "@/views/client/showings/_comp/showing-info-details";
-import {BrowseMovieShowingSelector} from "@/views/client/showings/_comp/browse-showing-selector";
+import {Card, CardContent} from "@/common/components/ui";
+import {BrowseMovieShowingSelector, ShowingInfoPremises} from "@/views/client/showings/_comp";
+import {PopulatedShowing, ShowingDetails} from "@/domains/showings";
 
 /** Props for the BrowseMovieShowingIndexCard component. */
 type CardProps = {

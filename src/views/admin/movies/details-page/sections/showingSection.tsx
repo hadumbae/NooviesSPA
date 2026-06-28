@@ -11,7 +11,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card";
 import {useFetchShowings} from "@/domains/showings/_feat/crud-hooks";
-import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/_schema/showing";
 
 /** Props for the MovieDetailsPageShowingSection component. */
 type TabProps = {

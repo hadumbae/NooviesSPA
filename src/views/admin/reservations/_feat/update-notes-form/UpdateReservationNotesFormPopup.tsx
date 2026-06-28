@@ -16,8 +16,7 @@ import {
 import {Button} from "@/common/components/ui/button.tsx";
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import {useFormContext} from "react-hook-form";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {UpdateReservationNotesFormContext} from "@/domains/reservation/_feat/update-reservations/contexts";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
 /** Props for the UpdateReservationNotesFormPopup component. */
 type PopupProps = {
@@ -36,7 +35,7 @@ export function UpdateReservationNotesFormPopup(
     {children, isOpen, setIsOpen, title, description, buttonText}: PopupProps
 ): ReactElement {
     const {control} = useFormContext();
-    const {formID} = useRequiredContext({context: UpdateReservationNotesFormContext});
+    const {formID} = useBaseFormContext();
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>

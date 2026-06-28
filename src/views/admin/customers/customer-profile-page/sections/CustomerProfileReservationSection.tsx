@@ -3,7 +3,7 @@
  */
 
 import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
-import {Reservation} from "@/domains/reservation/schema/model";
+import {Reservation} from "@/domains/reservation/_schema/model";
 import {CustomerReservationCard} from "@/views/admin/customers/_comp";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {ReactElement} from "react";

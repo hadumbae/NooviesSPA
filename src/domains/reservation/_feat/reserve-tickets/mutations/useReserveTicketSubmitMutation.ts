@@ -13,7 +13,7 @@ import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {ReserveTicketFormData, ReserveTicketFormValues} from "@/domains/reservation/_feat/reserve-tickets/schema";
 import {
     PopulatedReservation, PopulatedReservationSchema
-} from "@/domains/reservation/schema/model/populated-reservations/PopulatedReservationSchema.ts";
+} from "@/domains/reservation/_schema/model/populated-reservations/PopulatedReservationSchema.ts";
 import { ReserveTicketMutationKeys } from "./mutationKeys";
 
 /** Configuration parameters for the ticket reservation mutation. */

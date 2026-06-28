@@ -3,13 +3,13 @@
  */
 
 import {ReactElement} from "react";
-import {ShowingDetails} from "@/domains/showings/schema/showing";
-import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
-import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
-import {ShowingSpecialEventBadge, ShowingTypeBadge} from "@/views/admin/showings/_comp/badges";
+import {Card, CardContent, CardHeader, Separator} from "@/common/components/ui";
 import {ISO6391LanguageLabels} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
+
+import {ShowingDetails} from "@/domains/showings";
+import {MoviePosterImageDialog} from "@/views/admin/movies/_comp";
+import {ShowingSpecialEventBadge, ShowingTypeBadge} from "@/views/admin/showings";
 import {ShowingInfoMovieMeta, ShowingInfoPremises} from "@/views/client/showings/_comp/showing-info-details";
-import {Separator} from "@/common/components/ui/separator.tsx";
 
 /** Props for the ShowingSelectorInfoCard component. */
 type CardProps = {

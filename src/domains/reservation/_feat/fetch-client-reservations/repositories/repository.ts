@@ -7,7 +7,7 @@ import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
 import {PaginatedItems} from "@/common/types";
-import {PopulatedReservation} from "@/domains/reservation/schema";
+import {PopulatedReservation} from "@/domains/reservation/_schema";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {FetchClientReservationsBaseURL} from "@/domains/reservation/_feat";
 

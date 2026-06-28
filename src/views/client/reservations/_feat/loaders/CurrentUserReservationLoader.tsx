@@ -5,7 +5,7 @@
 import {ReactElement, ReactNode} from "react";
 import {useFetchReservationsForCurrentUser} from "@/domains/reservation/_feat";
 import {PaginatedItems} from "@/common/types";
-import {PopulatedReservation} from "@/domains/reservation/schema";
+import {PopulatedReservation} from "@/domains/reservation/_schema";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /**

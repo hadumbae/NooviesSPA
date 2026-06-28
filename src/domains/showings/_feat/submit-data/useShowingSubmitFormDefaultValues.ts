@@ -2,13 +2,13 @@
  * @fileoverview Hook for calculating and synchronizing default form values for showing submissions.
  */
 
-import {ShowingFormValuesConfig} from "@/domains/showings/_feat/submit-data/useShowingSubmitForm.types.ts";
 import {useMemo, useRef} from "react";
-import getShowingDateAndTimeFormValues from "@/common/utility/date-and-time/getShowingDateAndTimeFormValues.ts";
 import {isEqual} from "lodash";
 import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
+import getShowingDateAndTimeFormValues from "@/common/utility/date-and-time/getShowingDateAndTimeFormValues.ts";
+import {ShowingFormValuesConfig} from "@/domains/showings/_feat/submit-data/useShowingSubmitForm.types.ts";
 
-import {ShowingFormValues} from "@/domains/showings/schema/form";
+import {ShowingFormValues} from "@/domains/showings/_schema";
 
 /**
  * Computes the initial and synchronized state for the showing submission form.

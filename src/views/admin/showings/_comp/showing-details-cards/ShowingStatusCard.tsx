@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {Showing, ShowingDetails} from "@/domains/showings/schema/showing";
+import {Showing, ShowingDetails} from "@/domains/showings/_schema/showing";
 import {ShowingIsActiveBadge, ShowingSpecialEventBadge, ShowingStatusBadge} from "@/views/admin/showings/_comp/badges";
 import {CardClassNames} from "@/common/types/card";
 import {cn} from "@/common/lib/utils.ts";

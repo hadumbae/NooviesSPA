@@ -11,7 +11,7 @@ import {List} from "lucide-react";
 import {ReactElement} from "react";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/schema/showing";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/_schema/showing";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";

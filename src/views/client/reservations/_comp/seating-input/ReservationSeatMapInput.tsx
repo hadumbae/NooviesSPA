@@ -7,9 +7,10 @@ import {Control, FieldValues, Path} from "react-hook-form";
 import {
     ReservationSeatMapSelector
 } from "@/views/client/reservations/_comp/seating-input/ReservationSeatMapSelector.tsx";
-import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ReactElement} from "react";
+
+import {SeatMapDetails} from "@/domains/seatmap/_schema/model/SeatMapDetailsSchema";
 
 /** Props for the ReservationSeatMapInput component. */
 type InputProps<TValues extends FieldValues> = {

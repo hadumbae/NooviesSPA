@@ -9,7 +9,7 @@ import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
-import {PopulatedReservation} from "@/domains/reservation/schema/model";
+import {PopulatedReservation} from "@/domains/reservation/_schema/model";
 import {ReactElement} from "react";
 
 /** Props for the MyReservationInfoCard component. */

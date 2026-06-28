@@ -18,7 +18,7 @@ import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inp
 import {TheatreQuickOverviewFetchCard} from "@/views/admin/theatres/_comp/display-cards";
 import {MovieHookFormSelect} from "@/views/admin/movies/_feat/form-inputs";
 import {MovieQuickOverviewFetchCard} from "@/views/admin/movies/_comp/form-display";
-import {ShowingFormValues} from "@/domains/showings/schema/form";
+import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";

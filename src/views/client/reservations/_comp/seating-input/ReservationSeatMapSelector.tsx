@@ -2,7 +2,6 @@
  * @fileoverview Seat map selection grid used during client-side reservations.
  */
 
-import {SeatMapDetails} from "@/domains/seatmap/schema/model/SeatMap.types.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {
     ReservationSeatMapElement
@@ -10,6 +9,8 @@ import {
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useOrganisedSeatingForLayout} from "@/domains/seats/_feat/handle-seat-layout";
 import {ReactElement} from "react";
+
+import {SeatMapDetails} from "@/domains/seatmap/_schema/model/SeatMapDetailsSchema";
 
 /** Props for the ReservationSeatMapSelector component. */
 type SelectorProps = {

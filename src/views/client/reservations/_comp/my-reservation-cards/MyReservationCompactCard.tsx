@@ -13,7 +13,7 @@ import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
-import {PopulatedReservation} from "@/domains/reservation/schema/model";
+import {PopulatedReservation} from "@/domains/reservation/_schema/model";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     ReservationStatusBadge

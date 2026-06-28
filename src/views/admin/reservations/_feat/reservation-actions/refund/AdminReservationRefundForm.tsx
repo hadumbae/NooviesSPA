@@ -3,42 +3,54 @@
  */
 
 import {ReactElement, ReactNode} from "react";
-import {Form} from "@/common/components/ui/form.tsx";
-import {useRefundReservationMutation, useUpdateReservationNotesForm} from "@/domains/reservation/_feat/update-reservations/hooks";
-import {UpdateReservationNotesFormSubmit} from "@/domains/reservation/_feat/update-reservations/schemas";
+import {Form} from "@/common/components/ui";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {AdminReservation} from "@/domains/reservation/schema/model";
-import {UpdateReservationNotesFormContextProvider} from "@/domains/reservation/_feat/update-reservations/contexts";
+import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
+import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
+import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
+
+import {
+    AdminReservation,
+    UpdateReservationNotesFormData,
+    useRefundReservationMutation,
+    useUpdateReservationNotesForm,
+    useUpdateReservationSubmitHandler
+} from "@/domains/reservation";
 
 /** Props for the AdminReservationRefundForm component. */
-type FormProps = MutationOnSubmitParams<AdminReservation> & {
+type FormProps = MutationResponseConfig<AdminReservation, UpdateReservationNotesFormData> & MutationFormResetConfig & {
     children: ReactNode;
     reservationID: ObjectId;
-    uniqueKey?: string;
-    presetValues?: Partial<UpdateReservationNotesFormSubmit>;
+    presetValues?: Partial<UpdateReservationNotesFormData>;
 };
 
 /** Controller component that manages the state and logic for refunding a reservation. */
 export function AdminReservationRefundForm(
-    {children, reservationID, uniqueKey, presetValues, ...onSubmit}: FormProps
+    {children, reservationID, presetValues, ...submitConfig}: FormProps
 ): ReactElement {
-    const formKey = `res-status-refund-${uniqueKey ?? "form"}`;
+    const formID = useGenerateFormID("res-status-refund-form");
     const form = useUpdateReservationNotesForm({presetValues});
 
-    const {mutate} = useRefundReservationMutation({form, reservationID, onSubmitConfig: onSubmit});
+    const {mutateAsync, isPending, isError} = useRefundReservationMutation({reservationID});
 
-    const refundReservation = (values: UpdateReservationNotesFormSubmit) => {
-        mutate(values);
-    };
+    const refundReservation = useUpdateReservationSubmitHandler({
+        form,
+        submitData: (data: UpdateReservationNotesFormData) => mutateAsync(data),
+        ...submitConfig,
+    });
 
     return (
-        <UpdateReservationNotesFormContextProvider formID={formKey}>
+        <BaseFormContextProvider
+            formID={formID}
+            isPending={isPending}
+            isError={isError}
+            submitHandler={refundReservation}
+        >
             <Form {...form}>
-                <form id={formKey} onSubmit={form.handleSubmit(refundReservation)}>
+                <form id={formID} onSubmit={form.handleSubmit(refundReservation)}>
                     {children}
                 </form>
             </Form>
-        </UpdateReservationNotesFormContextProvider>
+        </BaseFormContextProvider>
     );
 }

@@ -7,7 +7,7 @@ import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {getFetchUserReservations} from "@/domains/reservation/_feat/fetch-client-reservations/repositories";
-import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservation/schema";
+import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservation/_schema";
 import {PaginatedItems} from "@/common/types";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";

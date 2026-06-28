@@ -3,7 +3,7 @@
  */
 
 import {Badge} from "@/common/components/ui/badge.tsx";
-import {ReservationStatus} from "@/domains/reservation/schema/model";
+import {ReservationStatus} from "@/domains/reservation/_schema/model";
 import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";
 

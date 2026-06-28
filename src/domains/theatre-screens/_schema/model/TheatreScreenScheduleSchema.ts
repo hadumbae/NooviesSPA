@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {ShowingWithMovieSchema} from "@/domains/showings/schema/showing";
+import {ShowingWithMovieSchema} from "@/domains/showings/_schema/showing";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {TheatreScreenSchema} from "@/domains/theatre-screens/_schema/model/TheatreScreenSchema.ts";
 

@@ -3,15 +3,11 @@
  */
 
 import formatLocationDetails from "@/common/utility/features/location/formatLocationDetails.ts";
-import {
-    ISO6391LanguageLabels as ISO6391LanguageConstant
-} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
+import {ISO6391LanguageLabels as ISO6391LanguageConstant} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import {
-    buildShowingDateString
-} from "@/domains/showings/_feat/formatters/buildShowingDateString.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ShowingDetails} from "@/domains/showings/_schema";
+import {buildShowingDateString} from "@/domains/showings/_feat/formatters/buildShowingDateString.ts";
 
 /**
  * Transforms raw showing data into a flat object of formatted strings for UI display.

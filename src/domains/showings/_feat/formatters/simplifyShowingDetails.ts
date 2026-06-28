@@ -3,8 +3,7 @@
  */
 
 import {ParseError} from "@/common/errors/ParseError.ts";
-import {Showing, ShowingSchema} from "@/domains/showings/schema/showing/ShowingSchema.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {Showing, ShowingDetails, ShowingSchema} from "@/domains/showings/_schema";
 
 /** Extracts IDs from nested entities to create a flat showing object and validates it against the schema. */
 export function simplifyShowingDetails(data: ShowingDetails): Showing {

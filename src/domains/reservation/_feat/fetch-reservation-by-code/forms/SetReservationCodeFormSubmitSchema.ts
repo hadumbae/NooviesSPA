@@ -7,7 +7,7 @@ import {z} from "zod";
 import {
     preprocessEmptyStringToUndefined
 } from "@/common/_feat/validation-preprocessors";
-import {ReservationUniqueCodeSchema} from "@/domains/reservation/schema/model";
+import {ReservationUniqueCodeSchema} from "@/domains/reservation/_schema/model";
 import {AnyValues} from "@/common/types";
 
 /**

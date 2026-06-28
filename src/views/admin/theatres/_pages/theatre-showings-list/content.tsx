@@ -9,7 +9,7 @@ import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.ts
 import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card";
 
 import {Theatre, TheatreDetails} from "@/domains/theatres";
-import {ShowingDetails} from "@/domains/showings/schema/showing";
+import {ShowingDetails} from "@/domains/showings/_schema/showing";
 import {TheatreShowingListHeader} from "@/views/admin/theatres/_pages/theatre-showings-list//elements/header.tsx";
 
 /** Props for the TheatreShowingListPageContent component. */

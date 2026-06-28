@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Reservation} from "@/domains/reservation/schema/model";
+import {Reservation} from "@/domains/reservation/_schema/model";
 import {LeanUserWithEmail} from "@/domains/users";
 import {CustomerMovieReviewSummary} from "@/domains/movieReviews";
 import {PageFlexWrapper} from "@/views/common/_comp/page";

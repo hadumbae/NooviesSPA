@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {ShowingDetailsSchema} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
+import {ShowingDetailsSchema} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
 
 /**
@@ -12,7 +12,7 @@ import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDet
  */
 export const TheatreShowingListViewDataSchema = z.object({
     theatre: TheatreDetailsSchema,
-    showings: generatePaginationSchema(ShowingDetailsSchema),
+    showings: z.lazy(() => generatePaginationSchema(ShowingDetailsSchema)),
 });
 
 /** Aggregated theatre and paginated showing data for administrative views. */

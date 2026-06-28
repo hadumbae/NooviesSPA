@@ -5,7 +5,7 @@
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import {useFormContext} from "react-hook-form";
-import {ReservationType} from "@/domains/reservation/schema/model/fields/ReservationTypeEnumSchema.ts";
+import {ReservationType} from "@/domains/reservation/_schema/model/fields/ReservationTypeEnumSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";
 

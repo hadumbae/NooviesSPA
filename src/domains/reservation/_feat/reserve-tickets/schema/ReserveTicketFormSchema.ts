@@ -6,7 +6,7 @@ import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {CoercedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {ISO4217CurrencyCodeEnumSchema} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
-import {ReservationTypeConstant} from "@/domains/reservation/schema/model/fields/ReservationTypeConstant.ts";
+import {ReservationTypeConstant} from "@/domains/reservation/_schema/model/fields/ReservationTypeConstant.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 import {AnyValues} from "@/common/types";

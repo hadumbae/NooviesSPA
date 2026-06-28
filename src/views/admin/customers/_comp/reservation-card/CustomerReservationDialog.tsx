@@ -2,7 +2,7 @@
  * @fileoverview Modal component providing an expanded administrative view of a customer reservation.
  */
 
-import {Reservation} from "@/domains/reservation/schema/model";
+import {Reservation} from "@/domains/reservation/_schema/model";
 import {
     Dialog,
     DialogContent,

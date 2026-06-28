@@ -12,7 +12,7 @@ import {
 import Logger from "@/common/utility/features/logger/Logger.ts";
 import {ISO4217CurrencyCode} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
 
-import {PopulatedReservation, ReservationType} from "@/domains/reservation/schema/model";
+import {PopulatedReservation, ReservationType} from "@/domains/reservation/_schema/model";
 import {useReserveTicketSubmitMutation} from "@/domains/reservation/_feat/reserve-tickets";
 import {ReactElement, ReactNode, useId} from "react";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";

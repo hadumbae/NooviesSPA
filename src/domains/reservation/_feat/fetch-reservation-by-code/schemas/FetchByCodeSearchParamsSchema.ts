@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {ReservationUniqueCodeSchema} from "@/domains/reservation/schema/model";
+import {ReservationUniqueCodeSchema} from "@/domains/reservation/_schema/model";
 
 /** Validates the search criteria used to locate a reservation by its unique code. */
 export const FetchByCodeSearchParamsSchema = z.object({

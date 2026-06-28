@@ -4,7 +4,9 @@
 
 import {Button} from "@/common/components/ui/button.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import SeatMapDetailsLoader from "@/views/admin/seatmaps/_comp/loaders/SeatMapDetailsLoader.tsx";
+import {
+    SeatMapDetailsLoader
+} from "@/views/admin/seatmaps/_comp/loaders/SeatMapDetailsLoader.tsx";
 import {ReservationSeatMapInput} from "@/views/client/reservations/_comp/seating-input/ReservationSeatMapInput.tsx";
 import {ReactElement, useEffect} from "react";
 import {useFormContext} from "react-hook-form";

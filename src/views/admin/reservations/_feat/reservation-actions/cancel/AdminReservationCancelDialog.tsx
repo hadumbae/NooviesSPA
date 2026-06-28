@@ -2,10 +2,13 @@
  * @fileoverview Confirmation dialog for administrative reservation cancellation.
  */
 
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {UpdateReservationNotesFormContext} from "@/domains/reservation/_feat/update-reservations/contexts";
+import {ReactElement, ReactNode} from "react";
 import {useFormContext} from "react-hook-form";
+import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+
 import {
+    Button,
     Dialog,
     DialogClose,
     DialogContent,
@@ -14,10 +17,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui/dialog.tsx";
-import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
-import {ReactElement, ReactNode} from "react";
+} from "@/common/components/ui";
 
 /** Props for the AdminReservationCancelDialog component. */
 type DialogProps = {
@@ -33,7 +33,7 @@ type DialogProps = {
 export function AdminReservationCancelDialog(
     {children, isOpen, setIsOpen, uniqueCode}: DialogProps
 ): ReactElement {
-    const {formID} = useRequiredContext({context: UpdateReservationNotesFormContext});
+    const {formID} = useBaseFormContext();
     const {control} = useFormContext();
 
     return (

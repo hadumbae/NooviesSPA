@@ -6,9 +6,9 @@
 import {ReactElement, ReactNode, useId} from "react";
 import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
 import buildFormSubmitLog from "@/common/utility/features/logger/buildFormSubmitLog.ts";
-import {Showing} from "@/domains/showings/schema/showing/ShowingSchema.ts";
-import {ShowingDetails} from "@/domains/showings/schema/showing/ShowingDetailsSchema.ts";
-import {ShowingFormData, ShowingFormValues} from "@/domains/showings/schema/form";
+import {Showing} from "@/domains/showings/_schema/showing/ShowingSchema.ts";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
+import {ShowingFormData, ShowingFormValues} from "@/domains/showings/_schema/form";
 import {useShowingSubmitMutation} from "@/domains/showings/_feat/crud-hooks";
 import {useShowingSubmitForm} from "@/domains/showings/_feat/submit-data";
 import {Form} from "@/common/components/ui/form.tsx";

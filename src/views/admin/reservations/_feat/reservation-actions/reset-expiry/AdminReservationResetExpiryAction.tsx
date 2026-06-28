@@ -2,15 +2,16 @@
  * @fileoverview Action component for resetting the expiration (TTL) of an administrative reservation.
  */
 
+import {ReactElement, useState} from "react";
+import {Button} from "@/common/components/ui";
+import {toast} from "react-toastify";
+import {cn} from "@/common/lib/utils.ts";
+import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+
+import {AdminReservation, useResetReservationExpiryMutation} from "@/domains/reservation";
 import {
     AdminReservationResetExpiryDialog
 } from "@/views/admin/reservations/_feat/reservation-actions/reset-expiry/AdminReservationResetExpiryDialog.tsx";
-import {ReactElement, useState} from "react";
-import {Button} from "@/common/components/ui/button.tsx";
-import {useResetReservationExpiryMutation} from "@/domains/reservation/_feat/update-reservations/hooks";
-import {AdminReservation} from "@/domains/reservation/schema/model";
-import {toast} from "react-toastify";
-import {cn} from "@/common/lib/utils.ts";
 
 /** Props for the AdminReservationResetExpiryAction component. */
 type ActionProps = {
@@ -19,34 +20,33 @@ type ActionProps = {
 
 /** A controller component that manages the "Reset Expiry" interaction flow. */
 export function AdminReservationResetExpiryAction(
-    {reservation}: ActionProps
+    {reservation: {_id, expiresAt, uniqueCode, status}}: ActionProps
 ): ReactElement {
     const [isOpen, setIsOpen] = useState(false);
-    const {_id, expiresAt, uniqueCode, status} = reservation;
 
     const isDisabled = status !== "RESERVED";
     const subtext = isDisabled ? "Must Be A RESERVED Reservation" : expiresAt.toFormat("HH:mm:ss dd MMM, yyyy");
 
-    const onSuccess = (res: AdminReservation) => {
-        setIsOpen(false);
+    const {mutateAsync, isPending} = useResetReservationExpiryMutation({reservationID: _id});
 
-        const expiryDate = res.expiresAt.toFormat("HH:mm:ss dd MMM, yyyy");
-        toast.success(`Expiration successfully extended. Now expires at: ${expiryDate}.`);
+    const submitReset = async () => {
+        try {
+            const reservation = await mutateAsync();
+            setIsOpen(false);
+
+            const expiryDate = reservation.expiresAt.toFormat("HH:mm:ss dd MMM, yyyy");
+            toast.success(`Expiration successfully extended. Now expires at: ${expiryDate}.`);
+        } catch (error: unknown) {
+            handleMutationResponseError({error, displayMessage: "Failed reset expiry."})
+        }
     }
-
-    const mutation = useResetReservationExpiryMutation({
-        reservationID: _id,
-        onSubmitConfig: {
-            successMessage: "Expiry Date Reset!",
-            onSubmitSuccess: onSuccess,
-        },
-    });
 
     return (
         <AdminReservationResetExpiryDialog
-            mutation={mutation}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
+            submit={submitReset}
+            isSubmitting={isPending}
             expiresAt={expiresAt}
             uniqueCode={uniqueCode}
         >
