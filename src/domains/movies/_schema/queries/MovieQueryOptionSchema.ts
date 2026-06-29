@@ -3,8 +3,8 @@
  */
 
 import {z} from 'zod';
-import {MovieQueryFilterSchema} from "./MovieQueryFilterSchema";
-import {MovieQuerySortSchema} from "./MovieQuerySortSchema";
+import {MovieQueryFilterSchema} from "@/domains/movies/_schema/queries/MovieQueryFilterSchema";
+import {MovieQuerySortSchema} from "@/domains/movies/_schema/queries/MovieQuerySortSchema";
 
 /** Zod schema merging movie filter and sort parameters for query validation. */
 export const MovieQueryOptionSchema = MovieQuerySortSchema.merge(MovieQueryFilterSchema);
