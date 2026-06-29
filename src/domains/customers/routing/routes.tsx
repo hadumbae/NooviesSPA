@@ -4,10 +4,10 @@
 
 import {RouteObject} from "react-router-dom";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
-import {CustomerReviewPage} from "@/views/admin/customers/customer-review-page";
-import {CustomerProfilePage} from "@/views/admin/customers/customer-profile-page";
-import {CustomerReviewsPage} from "@/views/admin/customers/customer-reviews-page";
-import {CustomerReviewLogsPage} from "@/views/admin/customers/customer-review-logs-page";
+import {CustomerReviewPage} from "@/views/admin/customers/_pages/customer-review-page";
+import {CustomerProfilePage} from "@/views/admin/customers/_pages/customer-profile-page";
+import {CustomerReviewsPage} from "@/views/admin/customers/_pages/customer-reviews-page";
+import {CustomerReviewLogsPage} from "@/views/admin/customers/_pages/customer-review-logs-page";
 
 export const AdminCustomerRoutes: RouteObject[] = [
     {

@@ -22,7 +22,7 @@ export function PageHeader(
 ): ReactElement {
     return (
         <header className={cn("flex justify-between items-center", className)}>
-            <div className="space-y-2">
+            <div className="flex-1 space-y-2">
                 {breadcrumbs}
                 <HeaderTitle>{title}</HeaderTitle>
                 {description && <HeaderDescription>{description}</HeaderDescription>}

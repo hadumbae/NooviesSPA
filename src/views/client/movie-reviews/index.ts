@@ -1,2 +1,2 @@
 export * from "./_comp";
-export * from "./_pages";
+export * from "./_feat";
