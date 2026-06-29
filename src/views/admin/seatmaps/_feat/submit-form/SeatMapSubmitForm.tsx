@@ -17,7 +17,7 @@ import {
     SeatMapFormValues,
     useSeatMapForm,
     useSeatMapSubmitMutation
-} from "@/domains/seatmap";
+} from "@/domains/seatmaps";
 
 /** Props for the SeatMapSubmitForm component. */
 type FormProps = MutationResponseConfig<SeatMapDetails, SeatMapFormData> & MutationFormResetConfig & {

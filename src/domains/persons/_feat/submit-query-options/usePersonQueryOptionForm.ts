@@ -4,7 +4,7 @@
 
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm, UseFormReturn} from "react-hook-form";
-import {PersonQueryOptions, PersonQueryOptionsSchema} from "@/domains/persons/schema";
+import {PersonQueryOptions, PersonQueryOptionsSchema} from "@/domains/persons/_schema";
 import {PersonQueryOptionFormValues} from "@/domains/persons/_feat/submit-query-options/schema.ts";
 
 /** Configuration parameters for the person query option form hook. */

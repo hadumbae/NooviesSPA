@@ -6,10 +6,10 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Loader} from "lucide-react";
-import {ReservationStatus} from "@/domains/reservation/_schema/model/fields/ReservationStatusEnumSchema.ts";
+import {ReservationStatus} from "@/domains/reservations/_schema/model/fields/ReservationStatusEnumSchema.ts";
 import {
     useReservationStateMutations
-} from "@/domains/reservation/_feat/update-client-reservations/mutations/useReservationStateMutations.ts";
+} from "@/domains/reservations/_feat/update-client-reservations/mutations/useReservationStateMutations.ts";
 import {ReactElement} from "react";
 
 /** Props for the MyReservationStatusActions component. */

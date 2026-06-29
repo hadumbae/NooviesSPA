@@ -10,7 +10,7 @@ import {buildURL} from "@/common/_feat/fetch-api";
 import {IsFavouriteMovieMetadata} from "@/domains/users/_feat/manage-user-favourites/schema";
 import {ManageUserFavouritesBaseURL} from "@/domains/users/_feat/manage-user-favourites/repository/baseURL";
 import {PaginatedItems} from "@/common/types";
-import {MovieDetails} from "@/domains/movies/schema/movie";
+import {MovieDetails} from "@/domains/movies/_schema/movie";
 
 /** Checks if a specific movie is in the current user's favourites list. */
 export async function getCheckIsFavouriteMovie(

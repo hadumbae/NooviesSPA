@@ -4,8 +4,8 @@
 
 import {ReactElement} from "react";
 import {Badge} from "@/common/components/ui/badge.tsx";
-import {MovieReviewModerationAction} from "@/domains/movieReviews/_feat/moderation/schema";
-import {MovieReviewModerationActionLabels} from "@/domains/movieReviews/_feat/moderation/schema/actions/labels.ts";
+import {MovieReviewModerationAction} from "@/domains/movie-reviews/_feat/moderation/schema";
+import {MovieReviewModerationActionLabels} from "@/domains/movie-reviews/_feat/moderation/schema/actions/labels.ts";
 import {cn} from "@/common/lib/utils.ts";
 
 /** Props for the MovieReviewModerationActionBadge component. */

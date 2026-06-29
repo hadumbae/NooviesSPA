@@ -2,7 +2,7 @@
  * @fileoverview Interactive card component for displaying and accessing customer reservation details.
  */
 
-import {Reservation} from "@/domains/reservation/_schema/model";
+import {Reservation} from "@/domains/reservations/_schema/model";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {
@@ -12,7 +12,7 @@ import {
     CustomerReservationDialog
 } from "@/views/admin/customers/_comp/reservation-card/CustomerReservationDialog.tsx";
 import {ReactElement, useState} from "react";
-import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 
 /** Props for the CustomerReservationCard component. */

@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MovieDetailsHeader} from "@/views/admin/movies/_pages/details-page/elements/header.tsx";
 import {MovieDetailsCard} from "@/views/admin/movies/_comp/details-display";
 import {MovieDetailsPageActions} from "@/views/admin/movies/_pages/details-page/sections/actions.tsx";

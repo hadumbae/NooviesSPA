@@ -5,7 +5,7 @@
 import {createContext, Dispatch, SetStateAction} from "react";
 
 
-import {User} from "@/domains/users/schema/user/UserSchema";
+import {User} from "@/domains/users/_schema/user/UserSchema";
 
 /**
  * Value exposed by the AuthContext.

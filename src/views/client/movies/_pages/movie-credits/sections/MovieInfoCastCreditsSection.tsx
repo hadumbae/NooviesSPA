@@ -7,7 +7,7 @@ import {MovieCreditInfoList} from "@/views/client/movie-credits/_comp";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 
 import {organiseMovieCastCreditsByPrimacy} from "@/domains/movies";
-import {CastCreditExceptMovie} from "@/domains/moviecredit";
+import {CastCreditExceptMovie} from "@/domains/movie-credits";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 
 /** Props for the MovieInfoCastCreditsSection component. */

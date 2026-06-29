@@ -8,7 +8,7 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 
 import {SeatLayoutIconConstant} from "@/domains/seats";
 import {SeatLayoutNonSeatElement} from "@/views/admin/seats";
-import {SeatMapDetails, SeatMapDetailsPanelSetterContext} from "@/domains/seatmap";
+import {SeatMapDetails, SeatMapDetailsPanelSetterContext} from "@/domains/seatmaps";
 
 /** Props for the ShowingSeatMapElement component. */
 type ShowingSeatMapElementProps = {

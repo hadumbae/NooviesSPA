@@ -8,7 +8,7 @@ import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
 import {renderFields} from "@/common/_feat/submit-data";
 import {cn} from "@/common/lib/utils.ts";
 import {DisableFields} from "@/common/types";
-import {MovieCreditFormValues} from "@/domains/moviecredit";
+import {MovieCreditFormValues} from "@/domains/movie-credits";
 
 /** Props for the MovieCreditFormCastFlagFieldset component. */
 type FieldsetProps = {

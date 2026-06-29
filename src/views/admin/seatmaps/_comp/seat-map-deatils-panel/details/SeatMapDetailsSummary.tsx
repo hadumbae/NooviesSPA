@@ -7,7 +7,7 @@ import { RoundedBorderCSS } from "@/common/constants/css/ContainerCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import {SeatMapDetails} from "@/domains/seatmap/_schema/model/SeatMapDetailsSchema";
+import {SeatMapDetails} from "@/domains/seatmaps/_schema/model/SeatMapDetailsSchema";
 import {ReactElement} from "react";
 
 /** Props for the SeatMapDetailsSummary component. */

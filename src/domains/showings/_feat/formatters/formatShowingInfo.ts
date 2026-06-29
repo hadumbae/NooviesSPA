@@ -7,7 +7,7 @@ import buildString from "@/common/utility/buildString.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
 import {PopulatedShowing, ShowingDetails} from "@/domains/showings/_schema";
-import {ReservationType} from "@/domains/reservation/_schema/model/fields/ReservationTypeEnumSchema.ts";
+import {ReservationType} from "@/domains/reservations/_schema/model/fields/ReservationTypeEnumSchema.ts";
 
 /** UI-ready representation of a theatre showing. */
 export type FormattedShowingInfo = {

@@ -1,3 +1,3 @@
 export * from "./_feat";
-export * from "./routing";
-export * from "./schema";
+export * from "./_routes";
+export * from "./_schema";

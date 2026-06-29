@@ -1,16 +1,16 @@
 /** @fileoverview Data container for the movie credit submission form. */
 
-import {MovieCredit} from "@/domains/moviecredit/schemas/model/MovieCreditSchema.ts";
-import {MovieCreditFormData} from "@/domains/moviecredit/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
-import {MovieCreditFormValues, useMovieCreditSubmitForm} from "@/domains/moviecredit/_feat/submit-data";
-import {useMovieCreditSubmitMutation} from "@/domains/moviecredit/_feat/crud-hooks";
+import {MovieCredit} from "@/domains/movie-credits/_schemas/model/MovieCreditSchema.ts";
+import {MovieCreditFormData} from "@/domains/movie-credits/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
+import {MovieCreditFormValues, useMovieCreditSubmitForm} from "@/domains/movie-credits/_feat/submit-data";
+import {useMovieCreditSubmitMutation} from "@/domains/movie-credits/_feat/crud-hooks";
 import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {ReactElement, ReactNode, useId} from "react";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import {MovieCreditDetails} from "@/domains/moviecredit";
+import {MovieCreditDetails} from "@/domains/movie-credits";
 
 /** Props for the MovieCreditSubmitForm component. */
 type ContainerProps = MutationResponseConfig<MovieCreditDetails, MovieCreditFormData> & MutationFormResetConfig & {

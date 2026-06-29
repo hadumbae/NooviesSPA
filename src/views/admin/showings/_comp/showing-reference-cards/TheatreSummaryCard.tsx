@@ -15,7 +15,7 @@ import { cn } from "@/common/lib/utils.ts";
 import { SecondaryTextBaseCSS } from "@/common/constants/css/TextCSS.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 
-import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {TheatreDetails} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 import {ReactElement} from "react";
 
 /** Props for the TheatreSummaryCard component. */

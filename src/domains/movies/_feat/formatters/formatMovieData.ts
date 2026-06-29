@@ -6,9 +6,9 @@ import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntim
 import {
     ISO6391LanguageLabels as ISO6391LanguageConstant
 } from "@/common/constants/languages/ISO6391LanguageLabels.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
-import {MovieWithGenres} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
-import {MovieWithRating} from "@/domains/movies/schema/movie/MovieWithRatingSchema.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
+import {MovieWithGenres} from "@/domains/movies/_schema/movie/MovieWithGenresSchema.ts";
+import {MovieWithRating} from "@/domains/movies/_schema/movie/MovieWithRatingSchema.ts";
 
 /** Union of Movie types that include populated genre objects. */
 type MovieWithData = MovieDetails | MovieWithGenres | MovieWithRating;

@@ -3,7 +3,7 @@
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {MovieFormData, MovieFormSchema, MovieFormStarterValues} from "@/domains/movies/_feat/submit-data/schema/MovieFormSchema.ts";
-import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
+import {Movie} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 import {useMovieSubmitFormDefaultValues} from "@/domains/movies/_feat/submit-data/hooks/useMovieSubmitFormDefaultValues.ts";
 
 /** Parameters for configuring the movie form initialization. */

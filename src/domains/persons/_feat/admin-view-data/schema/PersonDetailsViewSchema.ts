@@ -10,8 +10,8 @@ import {z} from "zod";
 import {
     PersonCreditStatsSchema,
     PersonFilmographySchema
-} from "@/domains/moviecredit/_feat/person-credit";
-import {PersonSchema} from "@/domains/persons/schema/person/PersonSchema";
+} from "@/domains/movie-credits/_feat/person-credit";
+import {PersonSchema} from "@/domains/persons/_schema/person/PersonSchema";
 
 /**
  * Schema representing the comprehensive data required for a Person's detailed view.

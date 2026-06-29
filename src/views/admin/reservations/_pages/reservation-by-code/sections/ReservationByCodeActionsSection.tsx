@@ -3,7 +3,7 @@
  */
 
 import {PageSectionHeader} from "@/views/common/_comp/page";
-import {AdminReservation} from "@/domains/reservation/_schema/model";
+import {AdminReservation} from "@/domains/reservations/_schema/model";
 import {
     AdminReservationCancelAction,
     AdminReservationRefundAction,

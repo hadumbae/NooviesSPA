@@ -11,7 +11,7 @@ import {CoercedNumberValueSchema} from "@/common/schema/numbers/number-value/Coe
 
 import {SeatTypeSchema} from "@/domains/seats/_schema/fields";
 import {TheatreScreenSchema} from "@/domains/theatre-screens/_schema";
-import {TheatreSchema} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
+import {TheatreSchema} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
 
 /** Schema for seating positions with full theatre and screen references. */
 const SeatDetailsReferenceSchema = SeatBaseSchema.extend({

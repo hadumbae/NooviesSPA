@@ -5,7 +5,7 @@
 import {ReactElement, ReactNode} from "react";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {SeatMapDetails, SeatMapDetailsSchema, SeatMapQueryOptions, useFetchSeatMaps} from "@/domains/seatmap";
+import {SeatMapDetails, SeatMapDetailsSchema, SeatMapQueryOptions, useFetchSeatMaps} from "@/domains/seatmaps";
 
 /** Props for the SeatMapDetailsLoader component. */
 type LoaderProps = {

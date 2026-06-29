@@ -4,7 +4,7 @@
 
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
-import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
+import {Movie, MovieSchema} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 import {MovieEditPageContent} from "@/views/admin/movies/_pages/edit-page/content.tsx";
 import {PageLoader} from "@/views/common/_comp/page";
 import {ReactElement} from "react";

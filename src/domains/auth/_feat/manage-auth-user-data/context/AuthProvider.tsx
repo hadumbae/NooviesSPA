@@ -6,7 +6,7 @@ import {ReactElement, ReactNode, useEffect, useState} from "react";
 import {AuthContext, AuthUserContextValue} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
 import Cookies from "js-cookie";
 import {isAdminUser} from "@/domains/auth/_feat/manage-auth-user-data/utils";
-import {User, UserSchema} from "@/domains/users/schema/user/UserSchema";
+import {User, UserSchema} from "@/domains/users/_schema/user/UserSchema";
 
 /** Props for the AuthProvider component. */
 type ProviderProps = {

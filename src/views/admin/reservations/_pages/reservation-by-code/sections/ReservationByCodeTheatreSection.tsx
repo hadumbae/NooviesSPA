@@ -2,7 +2,7 @@
  * @fileoverview Physical venue and auditorium details section for a reservation.
  */
 
-import {AdminReservation} from "@/domains/reservation/_schema/model";
+import {AdminReservation} from "@/domains/reservations/_schema/model";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";

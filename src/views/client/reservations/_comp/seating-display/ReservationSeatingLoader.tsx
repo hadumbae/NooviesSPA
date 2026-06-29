@@ -11,7 +11,7 @@ import {
 } from "@/views/client/reservations/_comp/seating-display/ReservationSeatingView.tsx";
 import {ReactElement} from "react";
 
-import {SeatMapDetails} from "@/domains/seatmap/_schema/model/SeatMapDetailsSchema";
+import {SeatMapDetails} from "@/domains/seatmaps/_schema/model/SeatMapDetailsSchema";
 
 /** Props for the ReservationSeatingLoader component. */
 type LoaderProps = {

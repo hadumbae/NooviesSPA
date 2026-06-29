@@ -4,9 +4,9 @@
  */
 
 import {z} from "zod";
-import {GenreSchema} from "@/domains/genres/schema";
+import {GenreSchema} from "@/domains/genres/_schema";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
+import {MovieWithGenresSchema} from "@/domains/movies/_schema/movie/MovieWithGenresSchema.ts";
 
 /** Validation schema for the consolidated Browse Genre view data. */
 export const BrowseGenreWithMoviesViewSchema = z.object({

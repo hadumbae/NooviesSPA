@@ -7,7 +7,7 @@ import validateData from "@/common/hooks/validation/validate-data/validateData.t
 import {PersonCRUDMutationKeys, PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks/keys";
 import {create, update} from "@/domains/persons/_feat/crud";
 import {PersonFormData} from "@/domains/persons/_feat/submit-form";
-import {Person, PersonSchema} from "@/domains/persons/schema";
+import {Person, PersonSchema} from "@/domains/persons/_schema";
 
 /**
  * Hook to handle the creation or update of Person records and manage form state.

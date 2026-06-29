@@ -23,7 +23,7 @@ import {
 import {
     RoleTypeDetailsCollapsible
 } from "@/views/admin/role-types/_feat/manage-role-type-sheet/RoleTypeDetailsCollapsible.tsx";
-import {RoleType} from "@/domains/roletype/schema/model/RoleTypeSchema.ts";
+import {RoleType} from "@/domains/roletypes/_schema/model/RoleTypeSchema.ts";
 
 /** Props for the RoleTypeListSheet component. */
 type SheetProps = {

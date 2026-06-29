@@ -3,11 +3,11 @@
  */
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {SetReviewRatingFormData} from "@/domains/movieReviews/_feat/admin-actions/forms";
+import {SetReviewRatingFormData} from "@/domains/movie-reviews/_feat/admin-actions/forms";
 import {ReactElement, useState} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {MovieReview} from "@/domains/movieReviews/schemas";
+import {MovieReview} from "@/domains/movie-reviews/_schema";
 import {SetReviewRatingDialog, SetReviewRatingForm} from "@/views/admin/customers/_feat";
 
 

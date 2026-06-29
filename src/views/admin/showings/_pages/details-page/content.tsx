@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import {ShowingDetailsViewData} from "@/views/admin/showings/_feat";
 import {ShowingDetailsPageSeatingSection} from "@/views/admin/showings/_pages/details-page/sections";
-import {SeatMapDetailsPanelContextProvider} from "@/domains/seatmap";
+import {SeatMapDetailsPanelContextProvider} from "@/domains/seatmaps";
 import {ShowingDetailsHeader, ShowingDetailsPageActions} from "@/views/admin/showings/_pages/details-page/elements";
 import {
     ScreenSummaryCard,

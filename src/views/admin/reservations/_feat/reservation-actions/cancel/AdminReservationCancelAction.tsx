@@ -6,7 +6,7 @@ import {ReactElement, useState} from "react";
 import {cn} from "@/common/lib/utils.ts";
 import {Button} from "@/common/components/ui";
 
-import {AdminReservation} from "@/domains/reservation";
+import {AdminReservation} from "@/domains/reservations";
 import {
     AdminReservationCancelForm
 } from "@/views/admin/reservations/_feat/reservation-actions/cancel/AdminReservationCancelForm.tsx";

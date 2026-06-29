@@ -15,7 +15,7 @@ import {
 } from "@/views/client/movie-reviews/_comp/buttons/MovieReviewHelpfulButton.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {MovieReviewDetails} from "@/domains/movieReviews/schemas/model/MovieReviewDetailsSchema";
+import {MovieReviewDetails} from "@/domains/movie-reviews/_schema/model/MovieReviewDetailsSchema";
 import {ReactElement} from "react";
 import {IsRecommendedBadge} from "@/views/client/movie-reviews/_comp";
 import {DeleteMovieReviewButton} from "@/views/client/movie-reviews/_feat/delete-button";

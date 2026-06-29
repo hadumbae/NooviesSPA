@@ -10,7 +10,7 @@ import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {PaginatedItems} from "@/common/types";
-import {RoleType, RoleTypeQueryOptionsSchema, RoleTypeSchema, useFetchPaginatedRoleTypes} from "@/domains/roletype";
+import {RoleType, RoleTypeQueryOptionsSchema, RoleTypeSchema, useFetchPaginatedRoleTypes} from "@/domains/roletypes";
 
 /**
  * Standardised pagination limit for the Role Type catalogue.

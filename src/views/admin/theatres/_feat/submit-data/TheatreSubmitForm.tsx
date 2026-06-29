@@ -1,7 +1,7 @@
 /** @fileoverview Container component for the theatre creation and update form. */
 
 import {ReactElement, ReactNode} from 'react';
-import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
+import {Theatre} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
 import {TheatreFormValues, useTheatreSubmitForm} from "@/domains/theatres/_feat/submit-data";
 import {TheatreFormData} from "@/domains/theatres/_feat/submit-data/schema.ts";
 import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";

@@ -8,7 +8,7 @@ import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
 import {PillCSS} from "@/common/constants/css/ContainerCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {generateGenreLinkConfigs} from "@/domains/genres/_feat/navigation";
 import {ReactElement} from "react";
 import {SROnly} from "@/views/common/_comp/screen-readers";

@@ -3,8 +3,8 @@
  */
 
 import {z} from "zod";
-import {LeanUserWithEmailSchema} from "@/domains/users/schema/user";
-import {CustomerMovieReviewSchema} from "@/domains/movieReviews/schemas/customer-reviews";
+import {LeanUserWithEmailSchema} from "@/domains/users/_schema/user";
+import {CustomerMovieReviewSchema} from "@/domains/movie-reviews/_schema/customer-reviews";
 
 /** Zod validation schema for the customer-review pair used in moderation views. */
 export const CustomerReviewViewSchema = z.object({

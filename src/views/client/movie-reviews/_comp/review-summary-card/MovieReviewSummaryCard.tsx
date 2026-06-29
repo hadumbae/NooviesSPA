@@ -11,7 +11,7 @@ import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText
 import {MovieReviewText} from "@/views/client/movie-reviews/_comp/display/MovieReviewText.tsx";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 
-import {MovieReviewDetails} from "@/domains/movieReviews/schemas/model/MovieReviewDetailsSchema";
+import {MovieReviewDetails} from "@/domains/movie-reviews/_schema/model/MovieReviewDetailsSchema";
 import {ReactElement} from "react";
 
 /** Props for the MovieReviewSummaryCard component. */

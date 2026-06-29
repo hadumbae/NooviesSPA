@@ -7,7 +7,7 @@ import {ReservationSeatingLoader} from "@/views/client/reservations/_comp/seatin
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ReactElement} from "react";
 
-import {SeatMapWithSeat} from "@/domains/seatmap/_schema/model/SeatMapWithSeatSchema";
+import {SeatMapWithSeat} from "@/domains/seatmaps/_schema/model/SeatMapWithSeatSchema";
 
 /** Props for the MyReservationSeatingCard component. */
 type CardProps = {

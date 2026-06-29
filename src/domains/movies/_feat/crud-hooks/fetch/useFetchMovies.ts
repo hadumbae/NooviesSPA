@@ -5,7 +5,7 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {MovieQueryOptions} from "@/domains/movies/schema/queries";
+import {MovieQueryOptions} from "@/domains/movies/_schema/queries";
 import {ListQueryConfig} from "@/common/types";
 import {find} from "@/domains/movies/_feat/crud";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";

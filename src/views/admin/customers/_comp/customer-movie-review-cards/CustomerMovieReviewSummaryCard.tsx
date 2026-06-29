@@ -3,11 +3,11 @@
  */
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {CustomerMovieReviewSummary} from "@/domains/movieReviews/schemas/customer-reviews";
+import {CustomerMovieReviewSummary} from "@/domains/movie-reviews/_schema/customer-reviews";
 import {MovieReviewRatingStars} from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {IsRecommendedCheck} from "@/views/client/movie-reviews/_comp/badges/IsRecommendedCheck.tsx";
 import {ReactElement} from "react";

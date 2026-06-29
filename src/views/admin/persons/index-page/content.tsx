@@ -14,7 +14,7 @@ import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.ts
 import {PersonIndexHeader} from "@/views/admin/persons/index-page/header.tsx";
 import {PersonIndexCard} from "@/views/admin/persons/_comp";
 
-import {PersonQueryOptions} from "@/domains/persons/schema/query-options/PersonQueryOptionsSchema";
+import {PersonQueryOptions} from "@/domains/persons/_schema/query-options/PersonQueryOptionsSchema";
 import {PersonQueryOptionFormView} from "@/views/admin/persons/_feat";
 import {Person} from "@/domains/persons";
 

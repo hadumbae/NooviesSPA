@@ -3,7 +3,7 @@
  */
 
 import {useLocation, useParams} from "react-router-dom";
-import {UserUniqueCode, UserUniqueCodeSchema} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
+import {UserUniqueCode, UserUniqueCodeSchema} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
 import {RouteError} from "@/common/errors/RouteError.ts";
 import Logger from "@/common/utility/features/logger/Logger.ts";

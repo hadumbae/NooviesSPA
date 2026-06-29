@@ -11,7 +11,7 @@ import {useFetchPaginatedGenres} from "@/domains/genres/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {GenreIndexPageContent} from "@/views/admin/genres/pages/index-page/content.tsx";
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
-import {Genre, GenreQueryOptionSchema, GenreSchema} from "@/domains/genres/schema";
+import {Genre, GenreQueryOptionSchema, GenreSchema} from "@/domains/genres/_schema";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {PaginatedItems} from "@/common/types";
 

@@ -13,7 +13,7 @@ import {
     SheetTrigger,
 } from "@/common/components/ui";
 
-import {MovieCreditFormValues} from "@/domains/moviecredit";
+import {MovieCreditFormValues} from "@/domains/movie-credits";
 import {MovieCreditFormActions} from "@/views/admin/movie-credits";
 
 /** Props for the MovieCreditFormPanel component, extending form and UI state definitions. */

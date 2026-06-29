@@ -8,7 +8,7 @@ import {type MutationResponseConfig} from "@/common/_feat/submit-data";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import {patchRemoveGenreImage} from "@/domains/genres/_feat/manage-image/repository";
 import {ManageGenreImageMutationKeys} from "@/domains/genres/_feat/manage-image/mutations/mutationKeys.ts";
-import {type Genre, GenreSchema} from "@/domains/genres/schema";
+import {type Genre, GenreSchema} from "@/domains/genres/_schema";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 

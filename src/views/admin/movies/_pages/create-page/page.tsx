@@ -9,7 +9,7 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {MovieSubmitForm} from "@/views/admin/movies/_feat/submit-movie/MovieSubmitForm.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
+import {Movie} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 import {MovieSubmitFormActions, MovieSubmitFormView} from "@/views/admin/movies/_feat/submit-movie";
 import {PageHeader} from "@/views/common/_comp";
 import {MovieCreatePageBreadcrumbs} from "@/views/admin/movies";

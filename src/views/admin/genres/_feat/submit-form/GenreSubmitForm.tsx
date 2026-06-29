@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode, useId} from 'react';
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 import {FormContainerConfigProps} from '@/common/_feat/submit-data/formTypes';
 import {Form} from "@/common/components/ui/form.tsx";
 import {GenreFormData, useGenreSubmitForm} from "@/domains/genres/_feat/submit-form";

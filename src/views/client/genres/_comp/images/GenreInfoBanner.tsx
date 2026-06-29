@@ -7,7 +7,7 @@ import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeader
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {Badge} from "@/common/components/ui/badge.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {Genre} from "@/domains/genres/schema";
+import {Genre} from "@/domains/genres/_schema";
 import {GenreImageBanner} from "@/views/admin/genres/_comp";
 import {ReactElement} from "react";
 

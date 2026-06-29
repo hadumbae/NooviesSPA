@@ -4,7 +4,7 @@
 
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import buildString from "@/common/utility/buildString.ts"
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {ReactElement} from "react";
 
 /** Props for the MovieOverviewHeadline component. */

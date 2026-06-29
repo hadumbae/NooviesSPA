@@ -5,7 +5,7 @@
  */
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {formatReservationDetails} from "@/domains/reservation/_feat/formatters/formatReservationDetails.ts";
+import {formatReservationDetails} from "@/domains/reservations/_feat/formatters/formatReservationDetails.ts";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {cn} from "@/common/lib/utils.ts";
@@ -13,7 +13,7 @@ import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
-import {PopulatedReservation} from "@/domains/reservation/_schema/model";
+import {PopulatedReservation} from "@/domains/reservations/_schema/model";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     ReservationStatusBadge

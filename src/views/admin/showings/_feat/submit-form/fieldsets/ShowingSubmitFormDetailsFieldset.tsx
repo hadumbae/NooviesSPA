@@ -22,7 +22,7 @@ import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
-import {Theatre} from "@/domains/theatres/schema/theatre";
+import {Theatre} from "@/domains/theatres/_schema/theatre";
 
 /**
  * Form fieldset for selecting the movie and location details for a showing.

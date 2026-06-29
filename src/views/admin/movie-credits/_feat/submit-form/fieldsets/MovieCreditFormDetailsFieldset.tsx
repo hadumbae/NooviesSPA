@@ -12,7 +12,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import {renderFields} from "@/common/_feat/submit-data";
 import {DisableFields} from "@/common/types";
-import {MovieCreditFormValues} from "@/domains/moviecredit";
+import {MovieCreditFormValues} from "@/domains/movie-credits";
 
 /** Props for the MovieCreditFormD  etailsFieldset component. */
 type FieldsetProps = {

@@ -2,7 +2,7 @@
 
 import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MovieDetailsCardMetaSection} from "@/views/admin/movies/_comp/details-display/MovieDetailsCardMetaSection.tsx";
 import {
     MovieDetailsCardMultimediaSection

@@ -6,7 +6,7 @@ import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-par
 import {MyReservationsPageContent} from "@/views/client/users/my-reservations-page/content.tsx";
 import {ReactElement} from "react";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {useFetchReservationsForCurrentUser} from "@/domains/reservation/_feat";
+import {useFetchReservationsForCurrentUser} from "@/domains/reservations/_feat";
 
 const RESERVATIONS_PER_PAGE = 20;
 

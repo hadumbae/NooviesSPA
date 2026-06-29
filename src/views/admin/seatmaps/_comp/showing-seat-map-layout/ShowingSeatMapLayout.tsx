@@ -5,7 +5,7 @@
 import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";
 
-import {SeatMapDetails} from "@/domains/seatmap";
+import {SeatMapDetails} from "@/domains/seatmaps";
 import {generateSeatElementRenderKey, useOrganisedSeatingForLayout} from "@/domains/seats";
 import {ShowingSeatMapElement} from "@/views/admin/seatmaps/_comp/showing-seat-map-layout/ShowingSeatMapElement.tsx";
 

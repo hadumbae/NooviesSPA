@@ -6,9 +6,9 @@
 import {
     CreditCategoryDisplayOrderConstant,
     CreditDisplayOrderCategory
-} from "@/domains/moviecredit/constants/CreditCategoryDisplayOrderConstant.ts";
-import {GroupedCrewCreditsExceptMovie} from "@/domains/moviecredit/schemas";
-import {CastCreditExceptMovie, CreditExceptMovie} from "@/domains/moviecredit";
+} from "@/domains/movie-credits/_const/CreditCategoryDisplayOrderConstant.ts";
+import {GroupedCrewCreditsExceptMovie} from "@/domains/movie-credits/_schemas";
+import {CastCreditExceptMovie, CreditExceptMovie} from "@/domains/movie-credits";
 
 /** A tuple representing a credit category and its associated list of credits. */
 export type DisplayOrderCategoryPair = [CreditDisplayOrderCategory, CreditExceptMovie[]];

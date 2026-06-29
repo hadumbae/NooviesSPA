@@ -6,8 +6,8 @@ import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 
 import {MovieDetails} from "@/domains/movies";
-import {MovieReviewSummaryData} from "@/domains/movieReviews";
-import {MovieCreditDetails} from "@/domains/moviecredit";
+import {MovieReviewSummaryData} from "@/domains/movie-reviews";
+import {MovieCreditDetails} from "@/domains/movie-credits";
 import {MovieOverviewFavouriteToggle, MovieOverviewHeader} from "@/views/client/movies/_pages/movie-overview/elements";
 import {
     MovieOverviewCredits,

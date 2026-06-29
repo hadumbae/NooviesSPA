@@ -11,7 +11,7 @@ import {
 } from "@/views/admin/movie-credits/_feat/submit-form/fieldsets";
 
 import {DisableFields} from "@/common/types";
-import {MovieCreditFormValues} from "@/domains/moviecredit";
+import {MovieCreditFormValues} from "@/domains/movie-credits";
 
 /** Props for the MovieCreditFormView component. */
 type ViewProps = {

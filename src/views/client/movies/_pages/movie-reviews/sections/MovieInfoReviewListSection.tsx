@@ -7,7 +7,7 @@ import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {MovieReviewDetailsCard} from "@/views/client/movie-reviews/_feat";
-import {MovieReviewDetails} from "@/domains/movieReviews/schemas";
+import {MovieReviewDetails} from "@/domains/movie-reviews/_schema";
 
 /** Props for the MovieInfoReviewListSection component. */
 type SectionProps = {

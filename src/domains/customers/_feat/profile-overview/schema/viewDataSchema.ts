@@ -4,9 +4,9 @@
 
 import {z} from "zod";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {ReservationSchema} from "@/domains/reservation/_schema/model";
-import {LeanUserWithEmailSchema} from "@/domains/users/schema/user";
-import {CustomerMovieReviewSummarySchema} from "@/domains/movieReviews/schemas";
+import {ReservationSchema} from "@/domains/reservations/_schema/model";
+import {LeanUserWithEmailSchema} from "@/domains/users/_schema/user";
+import {CustomerMovieReviewSummarySchema} from "@/domains/movie-reviews/_schema";
 
 const ResSchema = z.object({
     total: NonNegativeNumberSchema,

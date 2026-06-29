@@ -9,7 +9,7 @@ import {useAuthLoginForm, useAuthLoginSubmitMutation} from "@/domains/auth/_feat
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 
-import {User} from "@/domains/users/schema/user/UserSchema";
+import {User} from "@/domains/users/_schema/user/UserSchema";
 
 /** Props for the AuthLoginForm component. */
 type FormProps = {

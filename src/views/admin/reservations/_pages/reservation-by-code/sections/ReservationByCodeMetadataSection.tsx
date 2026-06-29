@@ -3,7 +3,7 @@
  *
  */
 
-import {AdminReservation} from "@/domains/reservation/_schema/model";
+import {AdminReservation} from "@/domains/reservations/_schema/model";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
 import {

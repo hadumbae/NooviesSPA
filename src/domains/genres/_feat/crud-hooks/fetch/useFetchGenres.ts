@@ -12,7 +12,7 @@ import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/keys/GenreCR
 import {ZodType, ZodTypeDef} from "zod";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {query} from "@/domains/genres/_feat/crud";
-import {GenreQueryOptions} from "@/domains/genres/schema";
+import {GenreQueryOptions} from "@/domains/genres/_schema";
 
 /** Parameters for the useFetchGenres hook. */
 type FetchQueries<TData = unknown> = {

@@ -11,7 +11,7 @@ import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {useNavigateToPerson} from "@/domains/persons/_feat/navigation";
 import {PersonSubmitForm, PersonSubmitFormPanel} from "@/views/admin/persons/_feat/submit-form";
 
-import {Person} from "@/domains/persons/schema/person/PersonSchema";
+import {Person} from "@/domains/persons/_schema/person/PersonSchema";
 
 /**
  * Header for the Persons administrative list that provides the trigger for creating new records.

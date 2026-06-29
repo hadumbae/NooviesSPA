@@ -11,7 +11,7 @@ import {
     FeaturedReviewsByMovie,
     FeaturedReviewsByMovieSchema,
     useFetchFeaturedReviewsByMovie
-} from "@/domains/movieReviews/_feat";
+} from "@/domains/movie-reviews/_feat";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /** Props for the MovieInfoFeaturedReviewsSection component. */

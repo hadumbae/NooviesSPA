@@ -5,17 +5,17 @@
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     useSubmitUserMovieReviewMutation
-} from "@/domains/movieReviews/_feat/my-reviews/hooks/useSubmitUserMovieReviewMutation.ts";
+} from "@/domains/movie-reviews/_feat/my-reviews/hooks/useSubmitUserMovieReviewMutation.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {ReactElement, ReactNode, useId} from "react";
 import Logger from "@/common/utility/features/logger/Logger.ts";
-import {MovieReview} from "@/domains/movieReviews/schemas/model";
+import {MovieReview} from "@/domains/movie-reviews/_schema/model";
 import {FormOptions, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {
     MovieReviewForm,
     MovieReviewFormValues
-} from "@/domains/movieReviews/_feat/submit-form/schema/MovieReviewFormSchema.ts";
-import {useMovieReviewSubmitForm} from "@/domains/movieReviews/_feat/submit-form";
+} from "@/domains/movie-reviews/_feat/submit-form/schema/MovieReviewFormSchema.ts";
+import {useMovieReviewSubmitForm} from "@/domains/movie-reviews/_feat/submit-form";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 
 /** Props for the MovieReviewSubmitForm component. */

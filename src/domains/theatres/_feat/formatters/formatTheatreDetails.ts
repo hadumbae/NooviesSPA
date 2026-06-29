@@ -3,7 +3,7 @@
  */
 
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
-import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {TheatreDetails} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 import buildString from "@/common/utility/buildString.ts";
 
 /**

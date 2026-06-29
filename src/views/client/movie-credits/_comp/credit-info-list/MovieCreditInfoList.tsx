@@ -6,7 +6,7 @@ import {
     MovieCreditInfoListItem
 } from "@/views/client/movie-credits/_comp/credit-info-list/MovieCreditInfoListItem.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import {CreditExceptMovie} from "@/domains/moviecredit";
+import {CreditExceptMovie} from "@/domains/movie-credits";
 import {ReactElement} from "react";
 
 /** Props for the MovieCreditInfoList component. */

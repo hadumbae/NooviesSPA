@@ -6,7 +6,7 @@
 import {undefined} from "zod";
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {MovieQueryOptions, MovieQueryOptionSchema} from "@/domains/movies/schema";
+import {MovieQueryOptions, MovieQueryOptionSchema} from "@/domains/movies/_schema";
 
 import {MovieQueryOptionFormValues} from "@/domains/movies/_feat/submit-queries/MovieQueryOptionFormValues";
 

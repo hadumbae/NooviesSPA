@@ -10,7 +10,7 @@ import {RoleTypeListHeader} from "@/views/admin/role-types/list-page/header.tsx"
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {RoleTypeQueryOptionForm, RoleTypeQueryOptionFormView} from "@/views/admin/role-types/_feat";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {RoleType} from "@/domains/roletype";
+import {RoleType} from "@/domains/roletypes";
 import {ReactElement} from "react";
 
 /** Props for the RoleTypeListPageContent component. */

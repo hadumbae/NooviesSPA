@@ -3,8 +3,8 @@
  */
 
 import { ParseError } from "@/common/errors/ParseError.ts";
-import {Movie, MovieSchema} from "@/domains/movies/schema/movie/MovieSchema.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {Movie, MovieSchema} from "@/domains/movies/_schema/movie/MovieSchema.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 
 /** Transforms a MovieDetails object into a Movie object and validates it against MovieSchema. */
 export function simplifyMovieDetails(movieDetails: MovieDetails): Movie {

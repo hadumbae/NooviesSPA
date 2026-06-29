@@ -19,7 +19,7 @@ import {
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
-import {ReservationUniqueCode} from "@/domains/reservation";
+import {ReservationUniqueCode} from "@/domains/reservations";
 
 /** Props for the AdminReservationRefundDialog component. */
 type DialogProps = {

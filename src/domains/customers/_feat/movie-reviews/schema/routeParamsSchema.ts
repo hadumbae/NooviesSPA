@@ -4,7 +4,7 @@
  */
 
 import {z} from "zod"
-import {UserUniqueCodeSchema} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts"
+import {UserUniqueCodeSchema} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts"
 
 /** Validation schema for URL parameters required to identify a specific customer. */
 export const CustomerReviewsRouteParamsSchema = z.object({

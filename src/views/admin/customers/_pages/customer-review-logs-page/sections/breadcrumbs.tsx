@@ -3,8 +3,8 @@
  */
 
 import { ReactElement } from "react"
-import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts"
-import {MovieReviewUniqueCode} from "@/domains/movieReviews/schemas/fields"
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts"
+import {MovieReviewUniqueCode} from "@/domains/movie-reviews/_schema/fields"
 import {
     Breadcrumb,
     BreadcrumbItem,

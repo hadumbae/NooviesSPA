@@ -3,10 +3,10 @@
  */
 
 import {z} from "zod";
-import {MovieDetailsSchema} from "@/domains/movies/schema/movie";
+import {MovieDetailsSchema} from "@/domains/movies/_schema/movie";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {MovieCreditDetailsSchema} from "@/domains/moviecredit/schemas";
-import {MovieReviewSummarySchema} from "@/domains/movieReviews/_feat/fetch-by-movie";
+import {MovieCreditDetailsSchema} from "@/domains/movie-credits/_schemas";
+import {MovieReviewSummarySchema} from "@/domains/movie-reviews/_feat/fetch-by-movie";
 
 /** Zod schema for validating the composite movie overview data. */
 export const MovieInfoOverviewViewSchema = z.object({

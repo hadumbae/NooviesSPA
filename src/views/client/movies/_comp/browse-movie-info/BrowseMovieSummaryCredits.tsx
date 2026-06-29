@@ -4,9 +4,9 @@
 
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
-import {generateMovieCreditLinkConfigs} from "@/domains/moviecredit/_feat/navigation/generateMovieCreditLinkConfigs.ts";
+import {generateMovieCreditLinkConfigs} from "@/domains/movie-credits/_feat/navigation/generateMovieCreditLinkConfigs.ts";
 
-import {MovieCreditDetails} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
 import {ReactElement} from "react";
 
 /** Props for the BrowseMovieSummaryCredits component. */

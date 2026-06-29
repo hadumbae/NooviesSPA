@@ -10,7 +10,7 @@ import {SROnly} from "@/views/common/_comp/screen-readers";
 import {PersonDetailsCard} from "@/views/admin/persons/_comp/person-details";
 import {PersonDetailsCreditOverview} from "@/views/admin/persons/_comp";
 import {Person} from "@/domains/persons";
-import {PersonFilmography} from "@/domains/moviecredit";
+import {PersonFilmography} from "@/domains/movie-credits";
 
 
 /** Props for the PersonDetailsPageContent component. */

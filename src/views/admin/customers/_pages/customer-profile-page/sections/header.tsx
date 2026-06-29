@@ -2,7 +2,7 @@
  * @fileoverview Header component for the Customer Profile administrative view.
  */
 
-import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {ReactElement} from "react";
 
 /** Props for the CustomerProfilePageHeader component. */

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {MovieDetails, MovieWithGenres} from "@/domains/movies/schema/movie";
+import {MovieDetails, MovieWithGenres} from "@/domains/movies/_schema/movie";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import {MovieMetaGenreBadges} from "@/views/admin/movies/_comp/movie-details";
 import {To} from "react-router-dom";

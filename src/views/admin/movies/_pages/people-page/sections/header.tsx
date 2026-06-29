@@ -9,7 +9,7 @@ import {buttonVariants} from "@/common/components/ui";
 import {cn} from "@/common/lib/utils.ts";
 import {MoviePersonListBreadcrumb} from "@/views/admin/movies/_pages/people-page/sections/breadcrumb.tsx";
 
-import {RoleTypeDepartment} from "@/domains/roletype";
+import {RoleTypeDepartment} from "@/domains/roletypes";
 import {Movie} from "@/domains/movies";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 

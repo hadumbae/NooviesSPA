@@ -13,7 +13,7 @@ import {
     RoleTypeFormValues,
     useRoleTypeSubmitForm,
     useRoleTypeSubmitMutation
-} from "@/domains/roletype";
+} from "@/domains/roletypes";
 
 /** Props for the RoleTypeSubmitFormContainer component. */
 type SubmitFormProps = FormContainerConfigProps<RoleTypeFormValues, RoleType, RoleTypeFormData, RoleType> & {

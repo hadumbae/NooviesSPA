@@ -7,9 +7,9 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {ModerationMessageFormData, useModerationMessageForm} from "@/common/_feat/moderation/forms";
 
-import {MovieReview} from "@/domains/movieReviews/schemas/model";
+import {MovieReview} from "@/domains/movie-reviews/_schema/model";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {useToggleReviewPublicityMutation} from "@/domains/movieReviews/_feat";
+import {useToggleReviewPublicityMutation} from "@/domains/movie-reviews/_feat";
 import {handleCustomerReviewFormSubmit} from "@/domains/customers";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 

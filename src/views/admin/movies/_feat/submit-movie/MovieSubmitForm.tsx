@@ -6,7 +6,7 @@ import {ReactElement, ReactNode} from 'react';
 import {MovieFormData, MovieFormStarterValues, useMovieSubmitForm} from "@/domains/movies/_feat/submit-data";
 import {useMovieSubmitMutation} from "@/domains/movies/_feat/crud-hooks";
 import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {Movie} from "@/domains/movies/schema/movie";
+import {Movie} from "@/domains/movies/_schema/movie";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";

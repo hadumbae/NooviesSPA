@@ -2,7 +2,7 @@
  * @fileoverview Sub-component for displaying movie identity and core metadata within a review card.
  */
 
-import {MovieWithRating} from "@/domains/movies/schema/movie/MovieWithRatingSchema.ts";
+import {MovieWithRating} from "@/domains/movies/_schema/movie/MovieWithRatingSchema.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";

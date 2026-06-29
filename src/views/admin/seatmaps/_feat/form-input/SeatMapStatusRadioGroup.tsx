@@ -7,7 +7,7 @@ import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import HookFormRadioGroup from "@/common/components/forms/radio-group/HookFormRadioGroup.tsx";
 import {FieldValues, Path, useFormContext} from "react-hook-form";
-import {SeatMapStatusConstant} from "@/domains/seatmap";
+import {SeatMapStatusConstant} from "@/domains/seatmaps";
 
 /** Props for the SeatMapStatusRadioGroup component. */
 type RadioGroupProps<TValues extends FieldValues> = {

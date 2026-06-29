@@ -8,7 +8,7 @@ import HeaderDescription from "@/common/components/page/headers/HeaderDescriptio
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 
-import {TheatreDetails} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {TheatreDetails} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 import {TheatreScreenShowingSelectCard} from "@/views/client/theatre-screens/_feat/showing-selector";
 import {ReactElement} from "react";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";

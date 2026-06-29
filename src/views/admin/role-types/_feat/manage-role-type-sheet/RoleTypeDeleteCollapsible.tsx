@@ -8,7 +8,7 @@ import {ChevronDown, ChevronRight, TriangleAlert} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {useRoleTypeDeleteMutation} from "@/domains/roletype";
+import {useRoleTypeDeleteMutation} from "@/domains/roletypes";
 
 /** Props for the RoleTypeListSheetDeleteCollapsible component. */
 export type CollapsibleProps = {

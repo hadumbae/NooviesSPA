@@ -10,7 +10,7 @@ import {
     MoviePersonDetailsCardHeader
 } from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardHeader.tsx";
 
-import {MovieCreditDetails} from "@/domains/moviecredit";
+import {MovieCreditDetails} from "@/domains/movie-credits";
 
 /** Props for the MoviePersonDetailsCard component. */
 type DetailsProp = {

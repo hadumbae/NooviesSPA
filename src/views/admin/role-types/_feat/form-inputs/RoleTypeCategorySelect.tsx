@@ -2,9 +2,9 @@
  * @fileoverview Form input component for selecting role categories based on department.
  */
 
-import {RoleTypeCrewCategoryConstant} from "@/domains/roletype/schema/fields/RoleTypeCrewCategoryConstant.ts";
-import {RoleTypeCastCategoryConstant} from "@/domains/roletype/schema/fields/RoleTypeCastCategoryConstant.ts";
-import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
+import {RoleTypeCrewCategoryConstant} from "@/domains/roletypes/_schema/fields/RoleTypeCrewCategoryConstant.ts";
+import {RoleTypeCastCategoryConstant} from "@/domains/roletypes/_schema/fields/RoleTypeCastCategoryConstant.ts";
+import {RoleTypeDepartment} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {FieldValues} from "react-hook-form";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";

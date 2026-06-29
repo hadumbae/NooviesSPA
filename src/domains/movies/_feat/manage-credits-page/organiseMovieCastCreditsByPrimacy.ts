@@ -2,7 +2,7 @@
  * @fileoverview Groups movie cast credits into primary and supporting collections based on billing priority.
  */
 
-import {CastCreditExceptMovie} from "@/domains/moviecredit";
+import {CastCreditExceptMovie} from "@/domains/movie-credits";
 
 /** Parameters for organising cast credits. */
 type PrimacyParams = {

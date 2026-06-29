@@ -14,7 +14,7 @@ import {
 } from "@/common/components/ui";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import {RoleTypeDepartment} from "@/domains/roletype";
+import {RoleTypeDepartment} from "@/domains/roletypes";
 import {MovieDetailsUISettersContext} from "@/domains/movies";
 
 /** Props for the MovieDetailsDropdown component. */

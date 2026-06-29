@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod"
-import {UserUniqueCodeSchema} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts"
+import {UserUniqueCodeSchema} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts"
 
 /** Validation schema for customer profile overview route parameters. */
 export const CustomerProfileOverviewRouteParamsSchema = z.object({

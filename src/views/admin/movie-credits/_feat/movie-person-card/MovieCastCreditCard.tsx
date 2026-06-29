@@ -11,7 +11,7 @@ import {
 import LabelContent from "@/common/components/card-content/LabelContent.tsx";
 import TextQuote from "@/common/components/text/TextQuote.tsx";
 
-import {MovieCreditDetails} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
 
 /** Props for the MovieCastCreditCard component. */
 type DetailsProp = {

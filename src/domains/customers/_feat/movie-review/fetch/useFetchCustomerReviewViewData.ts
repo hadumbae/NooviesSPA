@@ -4,9 +4,9 @@
  */
 
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {MovieReviewUniqueCode} from "@/domains/movieReviews/schemas/fields";
+import {MovieReviewUniqueCode} from "@/domains/movie-reviews/_schema/fields";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";

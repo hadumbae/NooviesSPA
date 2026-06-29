@@ -5,10 +5,10 @@ import {CardDescription, CardHeader, CardTitle} from "@/common/components/ui/car
 import {
     MoviePersonDetailsCardToggles
 } from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardToggles.tsx";
-import {RoleTypeDepartment} from "@/domains/roletype/schema/fields/RoleTypeDepartmentSchema.ts";
-import {simplifyMovieCreditDetails} from "@/domains/moviecredit/_feat/formatters/simplifyMovieCreditDetails.ts";
+import {RoleTypeDepartment} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
+import {simplifyMovieCreditDetails} from "@/domains/movie-credits/_feat/formatters/simplifyMovieCreditDetails.ts";
 
-import {MovieCreditDetails} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
 import {Ellipsis} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {

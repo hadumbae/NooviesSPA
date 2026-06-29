@@ -4,7 +4,7 @@
  */
 
 import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 
 /**
  * Maps a collection of genre entities to standardized {@link LinkConfig} objects.

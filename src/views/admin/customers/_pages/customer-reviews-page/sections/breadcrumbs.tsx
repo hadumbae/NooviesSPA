@@ -3,7 +3,7 @@
  *
  */
 
-import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {
     Breadcrumb,
     BreadcrumbItem,

@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
 
-import {SeatMapFormValues} from "@/domains/seatmap";
+import {SeatMapFormValues} from "@/domains/seatmaps";
 import {SeatQueryOptions} from "@/domains/seats";
 import {SeatHookFormSelect} from "@/views/admin/seats";
 import {SeatMapStatusRadioGroup} from "@/views/admin/seatmaps/_feat/form-input";

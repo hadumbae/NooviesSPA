@@ -22,7 +22,7 @@ import {BrowseMovieSummary} from "@/views/client/movies/_comp/browse-movie-info/
 import {BrowseMovieSummaryCredits} from "@/views/client/movies/_comp/browse-movie-info/BrowseMovieSummaryCredits";
 
 import {MovieDetails} from "@/domains/movies";
-import {MovieCreditDetailsSchema} from "@/domains/moviecredit";
+import {MovieCreditDetailsSchema} from "@/domains/movie-credits";
 
 
 /** Props for the BrowseMovieSummaryDialog component. */

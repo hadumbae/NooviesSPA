@@ -4,8 +4,8 @@
  */
 
 import {z} from "zod";
-import {MovieWithGenresSchema} from "@/domains/movies/schema/movie/MovieWithGenresSchema.ts";
-import {GenreSchema} from "@/domains/genres/schema";
+import {MovieWithGenresSchema} from "@/domains/movies/_schema/movie/MovieWithGenresSchema.ts";
+import {GenreSchema} from "@/domains/genres/_schema";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 
 /**

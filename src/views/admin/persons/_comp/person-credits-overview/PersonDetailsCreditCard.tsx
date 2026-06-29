@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {PersonCredit} from "@/domains/moviecredit";
+import {PersonCredit} from "@/domains/movie-credits";
 import {Card, CardContent} from "@/common/components/ui";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {Info} from "lucide-react";

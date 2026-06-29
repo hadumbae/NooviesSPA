@@ -4,8 +4,8 @@
  */
 
 import {z} from "zod";
-import {UserUniqueCodeSchema} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
-import {MovieReviewUniqueCodeSchema} from "@/domains/movieReviews/schemas/fields";
+import {UserUniqueCodeSchema} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
+import {MovieReviewUniqueCodeSchema} from "@/domains/movie-reviews/_schema/fields";
 
 /** Validation schema for identifying a specific review within a customer's scope via URL. */
 export const CustomerReviewRouteParamsSchema = z.object({

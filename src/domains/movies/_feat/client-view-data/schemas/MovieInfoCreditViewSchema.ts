@@ -4,9 +4,9 @@
 
 import {z} from "zod";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {GroupedCrewCreditsExceptMovieSchema} from "@/domains/moviecredit/schemas";
-import {CastCreditExceptMovieSchema} from "@/domains/moviecredit/_feat/movie-info-credits/schema/CreditExceptMovieSchema.ts";
-import { MovieDetailsSchema } from "@/domains/movies/schema/movie";
+import {GroupedCrewCreditsExceptMovieSchema} from "@/domains/movie-credits/_schemas";
+import {CastCreditExceptMovieSchema} from "@/domains/movie-credits/_feat/movie-info-credits/schema/CreditExceptMovieSchema.ts";
+import { MovieDetailsSchema } from "@/domains/movies/_schema/movie";
 
 /** Zod schema for validating the composite movie and credits view data. */
 export const MovieInfoCreditViewSchema = z.object({

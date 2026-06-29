@@ -11,12 +11,12 @@ import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsS
 import {ReactElement} from "react";
 import {SeatTypeLabelMap} from "@/domains/seats";
 
-import {SeatMapDetails} from "@/domains/seatmap/_schema/model/SeatMapDetailsSchema";
+import {SeatMapDetails} from "@/domains/seatmaps/_schema/model/SeatMapDetailsSchema";
 import {
     SeatMapDetailsPanelSetterContext,
     SeatMapDetailsPanelStateContext,
     simplifySeatMapDetails
-} from "@/domains/seatmap";
+} from "@/domains/seatmaps";
 import {SeatMapEditFormSelector,} from "@/views/admin/seatmaps/_comp/seat-map-deatils-panel/form";
 import {
     SeatMapDetailsReferenceLinks,

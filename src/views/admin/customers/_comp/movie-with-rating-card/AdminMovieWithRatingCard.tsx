@@ -2,7 +2,7 @@
  * @fileoverview A card component displaying movie details and ratings for administrative views.
  */
 
-import {MovieWithRating} from "@/domains/movies/schema/movie/MovieWithRatingSchema.ts";
+import {MovieWithRating} from "@/domains/movies/_schema/movie/MovieWithRatingSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";

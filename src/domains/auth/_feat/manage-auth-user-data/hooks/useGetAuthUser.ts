@@ -6,7 +6,7 @@ import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context";
 
 
-import {User} from "@/domains/users/schema/user/UserSchema";
+import {User} from "@/domains/users/_schema/user/UserSchema";
 
 /**
  * Returns the currently authenticated user.

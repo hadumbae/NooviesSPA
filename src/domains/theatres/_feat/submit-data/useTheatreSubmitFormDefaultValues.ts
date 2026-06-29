@@ -1,6 +1,6 @@
 /** @fileoverview Provides a hook to generate memoized default values for the theatre submission form. */
 
-import {Theatre} from "@/domains/theatres/schema/theatre";
+import {Theatre} from "@/domains/theatres/_schema/theatre";
 import {LocationFormStarterValues} from "@/common/_models/location-form/LocationFormStarterValues.ts";
 import {CoordinateFormStarterValues} from "@/common/_models/coordinate-form";
 import {useRef} from "react";

@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {UserUniqueCode} from "@/domains/users";
-import {MovieReviewUniqueCode} from "@/domains/movieReviews";
+import {MovieReviewUniqueCode} from "@/domains/movie-reviews";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator} from "@/common/components/ui";
 

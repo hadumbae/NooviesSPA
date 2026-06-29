@@ -12,9 +12,9 @@ import {
 } from "@/views/client/movie-reviews/_comp/review-summary-card/MovieReviewSummaryCard.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 
-import {MovieReviewDetails} from "@/domains/movieReviews/schemas";
+import {MovieReviewDetails} from "@/domains/movie-reviews/_schema";
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
 import {MovieReviewFormPopup} from "@/views/client/movie-reviews/_feat";
 

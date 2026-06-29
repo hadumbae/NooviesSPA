@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {MovieDetails} from "@/domains/movies/schema/movie";
+import {MovieDetails} from "@/domains/movies/_schema/movie";
 import {Separator} from "@/common/components/ui";
 import BadgeListLabel from "@/common/components/card-content/BadgeListLabel.tsx";
 import {ISO6391LanguageCode} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";

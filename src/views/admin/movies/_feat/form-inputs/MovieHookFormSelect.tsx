@@ -9,7 +9,7 @@ import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {ReactElement} from "react";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {Movie, MovieSchema} from "@/domains/movies/schema/movie";
+import {Movie, MovieSchema} from "@/domains/movies/_schema/movie";
 import {useFetchMovies} from "@/domains/movies/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";

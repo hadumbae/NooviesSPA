@@ -10,8 +10,8 @@ import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {SROnly} from "@/views/common/_comp/screen-readers";
-import {Movie, MovieDetails} from "@/domains/movies/schema/movie";
-import {PersonCredit} from "@/domains/moviecredit";
+import {Movie, MovieDetails} from "@/domains/movies/_schema/movie";
+import {PersonCredit} from "@/domains/movie-credits";
 
 /** Props for the PersonDetailsCreditMovieDialog component. */
 type MovieDialogProps = {

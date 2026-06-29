@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Genre} from "@/domains/genres/schema";
+import {Genre} from "@/domains/genres/_schema";
 import {Badge} from "@/common/components/ui/badge.tsx";
 import {cn} from "@/common/lib/utils.ts";
 

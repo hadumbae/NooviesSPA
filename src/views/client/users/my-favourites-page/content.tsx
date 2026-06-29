@@ -6,7 +6,7 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {MyFavouriteMovieCompactCard} from "@/views/client/movies/_comp";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {ReactElement} from "react";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {PageHeader} from "@/views/common/_comp";

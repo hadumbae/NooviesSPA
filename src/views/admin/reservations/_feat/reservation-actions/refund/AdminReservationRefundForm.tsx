@@ -15,7 +15,7 @@ import {
     useRefundReservationMutation,
     useUpdateReservationNotesForm,
     useUpdateReservationSubmitHandler
-} from "@/domains/reservation";
+} from "@/domains/reservations";
 
 /** Props for the AdminReservationRefundForm component. */
 type FormProps = MutationResponseConfig<AdminReservation, UpdateReservationNotesFormData> & MutationFormResetConfig & {

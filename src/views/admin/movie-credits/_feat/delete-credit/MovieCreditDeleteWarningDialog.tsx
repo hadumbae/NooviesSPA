@@ -7,7 +7,7 @@ import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {UIOpenStateProps} from "@/common/types";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import {useMovieCreditDeleteMutation} from "@/domains/moviecredit";
+import {useMovieCreditDeleteMutation} from "@/domains/movie-credits";
 
 /** Props for the MovieCreditDeleteWarningDialog component. */
 type WarningDialogProps = MutationResponseConfig & UIOpenStateProps & {

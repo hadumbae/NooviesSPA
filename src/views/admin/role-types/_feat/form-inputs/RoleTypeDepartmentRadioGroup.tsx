@@ -7,7 +7,7 @@ import {FieldValues, Path, useFormContext} from "react-hook-form";
 import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
 import HookFormRadioGroup from "@/common/components/forms/radio-group/HookFormRadioGroup.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import {RoleTypeDepartmentConstant} from "@/domains/roletype";
+import {RoleTypeDepartmentConstant} from "@/domains/roletypes";
 
 /** Props for the RoleTypeDepartmentRadioGroup component. */
 export type RoleTypeProps<TForm extends FieldValues> = {

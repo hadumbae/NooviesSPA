@@ -10,7 +10,7 @@ import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {cn} from "@/common/lib/utils.ts";
 
 import {MovieReviewFormPopup} from "@/views/client/movie-reviews";
-import {MovieReviewDetails, simplifyMovieReview} from "@/domains/movieReviews";
+import {MovieReviewDetails, simplifyMovieReview} from "@/domains/movie-reviews";
 
 /** Props for the MovieInfoReviewAction component. */
 type ActionProps = {

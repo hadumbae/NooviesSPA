@@ -10,7 +10,7 @@ import useParsedPaginationValue
 import {MyFavouritesPageContent} from "@/views/client/users/my-favourites-page/content.tsx";
 import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/schema/movie";
+import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie";
 import {PaginatedItems} from "@/common/types";
 
 /** Number of favourite movies displayed per page. */

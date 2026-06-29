@@ -7,7 +7,7 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
-import {AdminReservation, ReservationUniqueCode} from "@/domains/reservation";
+import {AdminReservation, ReservationUniqueCode} from "@/domains/reservations";
 import {SetReservationCodeForm, SetReservationCodeFormCard} from "@/views/admin/reservations/_feat";
 import {ReservationByCodePageHeader} from "@/views/admin/reservations/_pages/reservation-by-code/headers";
 import {ReservationByCodeDataContent} from "@/views/admin/reservations/_pages/reservation-by-code/data.tsx";

@@ -11,7 +11,7 @@ import {
 import {
     AdminReservationRefundDialog
 } from "@/views/admin/reservations/_feat/reservation-actions/refund/AdminReservationRefundDialog.tsx";
-import {AdminReservation} from "@/domains/reservation";
+import {AdminReservation} from "@/domains/reservations";
 
 /** Props for the AdminReservationRefundAction component. */
 type ActionProps = {

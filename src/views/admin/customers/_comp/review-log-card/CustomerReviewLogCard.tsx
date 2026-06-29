@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {MovieReviewModerationLog} from "@/domains/movieReviews/_feat/moderation/schema";
+import {MovieReviewModerationLog} from "@/domains/movie-reviews/_feat/moderation/schema";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {MovieReviewModerationActionBadge, MovieReviewModerationLogAccentBar} from "@/views/admin/movie-reviews/_comp";

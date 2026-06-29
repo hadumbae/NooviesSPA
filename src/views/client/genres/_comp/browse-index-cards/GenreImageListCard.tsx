@@ -4,7 +4,7 @@
 
 import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import {Genre} from "@/domains/genres/schema";
+import {Genre} from "@/domains/genres/_schema";
 import {GenreImageBanner} from "@/views/admin/genres/_comp";
 import {ReactElement} from "react";
 

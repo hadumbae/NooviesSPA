@@ -10,7 +10,7 @@ import {
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ReactElement} from "react";
 
-import {SeatMapDetails} from "@/domains/seatmap/_schema/model/SeatMapDetailsSchema";
+import {SeatMapDetails} from "@/domains/seatmaps/_schema/model/SeatMapDetailsSchema";
 
 /** Props for the ReservationSeatMapInput component. */
 type InputProps<TValues extends FieldValues> = {

@@ -14,7 +14,7 @@ import {
     ToggleReviewPublicityForm
 } from "@/views/admin/customers/_feat/toggle-publicity/ToggleReviewPublicityForm.tsx";
 
-import {MovieReview} from "@/domains/movieReviews/schemas/model";
+import {MovieReview} from "@/domains/movie-reviews/_schema/model";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /** Props for the ToggleReviewPublicityAction component. */

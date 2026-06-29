@@ -2,8 +2,8 @@
  * @fileoverview Layout section for displaying a grid of customer reservation cards in the admin profile.
  */
 
-import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
-import {Reservation} from "@/domains/reservation/_schema/model";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
+import {Reservation} from "@/domains/reservations/_schema/model";
 import {CustomerReservationCard} from "@/views/admin/customers/_comp";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {ReactElement} from "react";

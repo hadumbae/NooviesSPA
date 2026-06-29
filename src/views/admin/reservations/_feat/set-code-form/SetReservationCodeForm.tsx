@@ -12,7 +12,7 @@ import {
     SetReservationCodeFormData,
     SetReservationCodeFormValues,
     useSetReservationCodeForm
-} from "@/domains/reservation";
+} from "@/domains/reservations";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 
 /** Props for the SetReservationCodeForm component. */

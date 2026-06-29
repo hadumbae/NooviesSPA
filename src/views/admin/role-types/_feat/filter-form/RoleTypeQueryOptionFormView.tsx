@@ -12,7 +12,7 @@ import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {useFormContext} from "react-hook-form";
 import {RoleTypeDepartmentSelect} from "@/views/admin/role-types/_feat/form-inputs";
-import {RoleTypeQueryOptionsFormValues} from "@/domains/roletype";
+import {RoleTypeQueryOptionsFormValues} from "@/domains/roletypes";
 
 /** Props for the RoleTypeQueryOptionFormView component. */
 type ViewProps = Pick<FormViewProps<RoleTypeQueryOptionsFormValues>, "className" | "disableFields">;

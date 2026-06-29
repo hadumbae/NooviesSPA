@@ -13,7 +13,7 @@ import {
     useUpdateReservationNotesForm,
     useUpdateReservationNotesMutation,
     useUpdateReservationSubmitHandler
-} from "@/domains/reservation";
+} from "@/domains/reservations";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 

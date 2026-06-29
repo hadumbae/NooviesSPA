@@ -14,7 +14,7 @@ import {
 } from "@/domains/auth/_feat/auth-login-fom/schema";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {loginUser} from "@/domains/auth/_feat/access-auth-backend";
-import {User, UserSchema} from "@/domains/users/schema/user/UserSchema";
+import {User, UserSchema} from "@/domains/users/_schema/user/UserSchema";
 
 /**
  * Configuration parameters for the login submission mutation.

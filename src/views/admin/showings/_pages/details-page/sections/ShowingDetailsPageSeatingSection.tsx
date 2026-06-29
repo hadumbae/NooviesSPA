@@ -7,10 +7,10 @@ import {PageSectionHeader} from "@/views/common/_comp/page";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {
     SeatMapDetailsPanelStateContext
-} from "@/domains/seatmap/_ctx/details-panel-context/SeatMapDetailsPanelStateContext.ts";
+} from "@/domains/seatmaps/_ctx/details-panel-context/SeatMapDetailsPanelStateContext.ts";
 
 import {ShowingDetails} from "@/domains/showings";
-import {SeatMapDetails} from "@/domains/seatmap";
+import {SeatMapDetails} from "@/domains/seatmaps";
 import {SeatMapDetailsPanel, ShowingSeatMapLayout} from "@/views/admin/seatmaps";
 
 /** Props for the ShowingDetailsPageSeatingSection component. */

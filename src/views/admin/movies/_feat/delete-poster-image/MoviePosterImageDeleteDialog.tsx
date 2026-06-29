@@ -8,7 +8,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {useMoviePosterImageDeleteMutation} from "@/domains/movies/_feat/manage-images";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {UIOpenStateProps} from "@/common/types";
-import {Movie} from "@/domains/movies/schema/movie";
+import {Movie} from "@/domains/movies/_schema/movie";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 

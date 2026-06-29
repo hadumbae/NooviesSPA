@@ -4,7 +4,7 @@
  */
 
 import {LeanUserWithEmail} from "@/domains/users";
-import {CustomerMovieReview} from "@/domains/movieReviews";
+import {CustomerMovieReview} from "@/domains/movie-reviews";
 import {AdminMovieWithRatingCard, CustomerDetailsCard, CustomerMovieReviewCard} from "@/views/admin/customers/_comp";
 import {PageFlexWrapper, PageSectionHeader, PageSectionHeaderLink} from "@/views/common/_comp/page";
 import {ReactElement} from "react";

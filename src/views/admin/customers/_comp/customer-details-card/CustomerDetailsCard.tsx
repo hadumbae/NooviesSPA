@@ -2,7 +2,7 @@
  * @fileoverview Administrative data card displaying primary customer account details.
  */
 
-import {LeanUserWithEmail} from "@/domains/users/schema/user";
+import {LeanUserWithEmail} from "@/domains/users/_schema/user";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";

@@ -10,7 +10,7 @@ import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {PaginatedItems} from "@/common/types";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 
-import {TheatreWithRecentShowings, TheatreWithRecentShowingsSchema} from "@/domains/theatres/schema";
+import {TheatreWithRecentShowings, TheatreWithRecentShowingsSchema} from "@/domains/theatres/_schema";
 import {SearchTheatreQueryKeys} from "@/domains/theatres/_feat/search-theatres/fetch/queryKeys.ts"
 import {BrowseTheatreByLocationConfig, theatresByLocation} from "@/domains/theatres/_feat/search-theatres/repository";
 

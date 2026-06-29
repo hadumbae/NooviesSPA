@@ -10,8 +10,8 @@ import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {
     TheatreDetailsUIStateContext
-} from "@/domains/theatres/context/theatre-details-ui/TheatreDetailsUIStateContext.ts";
-import {Theatre, TheatreDetails} from "@/domains/theatres/schema/theatre";
+} from "@/domains/theatres/_ctx/theatre-details-ui/TheatreDetailsUIStateContext.ts";
+import {Theatre, TheatreDetails} from "@/domains/theatres/_schema/theatre";
 import {TheatreDetailsUISetterContext} from "@/domains/theatres";
 
 /** Props for the TheatreDetailsPageActions component. */

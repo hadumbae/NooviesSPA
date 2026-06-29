@@ -8,7 +8,7 @@ import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/Au
 import useCurrentURLPath from "@/common/hooks/router/useCurrentURLPath.ts";
 import {UnauthorisedError} from "@/common/errors/UnauthorisedError.ts";
 
-import {User} from "@/domains/users/schema/user/UserSchema";
+import {User} from "@/domains/users/_schema/user/UserSchema";
 
 /** Props for the useGetCurrentUser hook. */
 type GetProps = {

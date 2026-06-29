@@ -9,7 +9,7 @@ import {ResetReviewLikesForm} from "@/views/admin/customers/_feat/reset-likes/Re
 import {ResetReviewLikesDialog} from "@/views/admin/customers/_feat/reset-likes/ResetReviewLikesDialog.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 
-import {MovieReview} from "@/domains/movieReviews/schemas/model";
+import {MovieReview} from "@/domains/movie-reviews/_schema/model";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /** Props for the ResetReviewLikesAction component. */

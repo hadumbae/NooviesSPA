@@ -18,7 +18,7 @@ import {
     MovieTaglineSchema,
     MovieTitleSchema,
     MovieTrailerURLSchema
-} from "@/domains/movies/schema";
+} from "@/domains/movies/_schema";
 
 /** Zod schema for validating movie creation and update forms including conditional release date logic. */
 export const MovieFormSchema = z.object({

@@ -2,7 +2,7 @@
  * @fileoverview Chronological date overview section for a reservation's lifecycle.
  */
 
-import {AdminReservation, ReservationStatus} from "@/domains/reservation/_schema/model";
+import {AdminReservation, ReservationStatus} from "@/domains/reservations/_schema/model";
 import {Check, Coins, Cross, Receipt, Timer} from "lucide-react";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";

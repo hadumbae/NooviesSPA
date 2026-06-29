@@ -6,7 +6,7 @@ import {cn} from "@/common/lib/utils.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import buildString from "@/common/utility/buildString.ts";
 import {PersonProfileAvatar} from "@/views/admin/persons/_comp/person-details";
-import {CreditExceptMovie} from "@/domains/moviecredit";
+import {CreditExceptMovie} from "@/domains/movie-credits";
 import {ReactElement} from "react";
 
 /** Props for the MovieCreditInfoListItem component. */

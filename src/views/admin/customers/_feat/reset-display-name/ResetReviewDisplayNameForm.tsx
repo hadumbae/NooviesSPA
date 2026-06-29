@@ -5,13 +5,13 @@
 import {
     ResetReviewDisplayNameFormData,
     useResetReviewDisplayNameForm
-} from "@/domains/movieReviews/_feat/admin-actions/forms";
+} from "@/domains/movie-reviews/_feat/admin-actions/forms";
 import {Form} from "@/common/components/ui/form.tsx";
-import {useResetReviewDisplayNameMutation} from "@/domains/movieReviews/_feat/admin-actions/mutations";
+import {useResetReviewDisplayNameMutation} from "@/domains/movie-reviews/_feat/admin-actions/mutations";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ReactElement, ReactNode, useId} from "react";
 
-import {MovieReview} from "@/domains/movieReviews/schemas/model";
+import {MovieReview} from "@/domains/movie-reviews/_schema/model";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {handleCustomerReviewFormSubmit} from "@/domains/customers";

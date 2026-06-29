@@ -3,7 +3,7 @@
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import {Genre} from "@/domains/genres/schema";
+import {Genre} from "@/domains/genres/_schema";
 import {
     RemoveGenreImageConfig,
     UpdateGenreImageConfig

@@ -6,7 +6,7 @@ import {FieldValues, UseFormReturn} from "react-hook-form";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {MovieReview} from "@/domains/movieReviews/schemas";
+import {MovieReview} from "@/domains/movie-reviews/_schema";
 
 /** Configuration for the customer review form submission handler. */
 type SubmitConfig<TValues extends FieldValues, TSubmit extends FieldValues = TValues> =

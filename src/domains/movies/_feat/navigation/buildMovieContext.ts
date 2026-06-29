@@ -1,7 +1,7 @@
 /** @fileoverview Utility for constructing a standardized logging context from a MovieDetails object. */
 
 import {LogContext} from "@/common/utility/features/logger/Logger.types.ts";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 
 /**
  * Builds a logging context object for a movie using identifying and descriptive fields.

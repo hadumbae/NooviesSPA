@@ -7,7 +7,7 @@ import getInitials from "@/common/utility/formatters/getInitials.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
-import {MovieCreditDetails} from "@/domains/moviecredit/schemas";
+import {MovieCreditDetails} from "@/domains/movie-credits/_schemas";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 
 /** Props for the MovieCreditOverviewCard component. */

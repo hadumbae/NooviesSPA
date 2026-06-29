@@ -6,7 +6,7 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {MovieReviewIndexCard} from "@/views/client/movie-reviews/_comp/index-card";
-import {MyMovieReview} from "@/domains/movieReviews/schemas/my-reviews";
+import {MyMovieReview} from "@/domains/movie-reviews/_schema/my-reviews";
 import {ReactElement} from "react";
 import {PageHeader} from "@/views/common/_comp";
 import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users";

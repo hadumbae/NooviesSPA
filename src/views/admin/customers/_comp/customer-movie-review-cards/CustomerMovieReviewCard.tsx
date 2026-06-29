@@ -3,7 +3,7 @@
  *
  */
 
-import {CustomerMovieReview} from "@/domains/movieReviews/schemas/customer-reviews";
+import {CustomerMovieReview} from "@/domains/movie-reviews/_schema/customer-reviews";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {UniqueReviewCodeBadge} from "@/views/admin/movie-reviews/_comp/badges/UniqueReviewCodeBadge.tsx";
 import {IsRecommendedBadge} from "@/views/client/movie-reviews/_comp/badges/IsRecommendedBadge.tsx";

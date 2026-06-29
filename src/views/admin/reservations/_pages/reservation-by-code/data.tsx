@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {cn} from "@/common/lib/utils.ts";
-import {AdminReservation} from "@/domains/reservation";
+import {AdminReservation} from "@/domains/reservations";
 import {
     ReservationByCodeActionsSection,
     ReservationByCodeDateSection,

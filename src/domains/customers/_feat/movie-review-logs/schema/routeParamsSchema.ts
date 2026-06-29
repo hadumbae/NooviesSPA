@@ -3,8 +3,8 @@
  */
 
 import {z} from "zod"
-import {UserUniqueCodeSchema} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts"
-import {MovieReviewUniqueCodeSchema} from "@/domains/movieReviews/schemas/fields"
+import {UserUniqueCodeSchema} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts"
+import {MovieReviewUniqueCodeSchema} from "@/domains/movie-reviews/_schema/fields"
 
 /** Validation schema for URL parameters identifying a specific customer and their movie review. */
 export const CustomerReviewLogsRouteParamsSchema = z.object({

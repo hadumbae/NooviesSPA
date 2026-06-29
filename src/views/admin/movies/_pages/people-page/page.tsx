@@ -10,7 +10,7 @@ import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {MoviePeoplePageContent} from "@/views/admin/movies/_pages/people-page/content.tsx";
 
-import {RoleTypeDepartment} from "@/domains/roletype";
+import {RoleTypeDepartment} from "@/domains/roletypes";
 import {Movie, MovieSchema, useFetchMovieBySlug} from "@/domains/movies";
 
 /** Props for the MoviePeoplePage component. */

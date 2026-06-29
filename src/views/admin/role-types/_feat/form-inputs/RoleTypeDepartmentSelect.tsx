@@ -8,7 +8,7 @@ import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.ts
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
-import {RoleTypeDepartmentConstant} from "@/domains/roletype";
+import {RoleTypeDepartmentConstant} from "@/domains/roletypes";
 
 /**
  * Controlled select input for choosing a role type department using react-hook-form.

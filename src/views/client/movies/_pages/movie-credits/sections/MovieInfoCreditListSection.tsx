@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {MovieCreditInfoList} from "@/views/client/movie-credits/_comp";
-import {CreditDisplayOrderCategory, CreditExceptMovie} from "@/domains/moviecredit";
+import {CreditDisplayOrderCategory, CreditExceptMovie} from "@/domains/movie-credits";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 
 /** Props for the MovieInfoCreditListSection component. */

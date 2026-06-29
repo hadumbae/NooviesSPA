@@ -8,7 +8,7 @@ import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
 import generateLocationAddressString from "@/common/utility/features/location/generateLocationAddressString.ts";
 import {cn} from "@/common/lib/utils.ts";
 
-import {TheatreDetails} from "@/domains/theatres/schema";
+import {TheatreDetails} from "@/domains/theatres/_schema";
 
 /** Props for the TheatreDetailsCard component. */
 type CardProps = {

@@ -7,9 +7,9 @@ import WidePanelButton from "@/common/components/buttons/WidePanelButton.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {
     SeatMapDetailsPanelStateContext
-} from "@/domains/seatmap/_ctx/details-panel-context/SeatMapDetailsPanelStateContext.ts";
+} from "@/domains/seatmaps/_ctx/details-panel-context/SeatMapDetailsPanelStateContext.ts";
 import {Pencil, X} from "lucide-react";
-import {SeatMapDetailsPanelSetterContext} from "@/domains/seatmap";
+import {SeatMapDetailsPanelSetterContext} from "@/domains/seatmaps";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {ReactElement} from "react";
 

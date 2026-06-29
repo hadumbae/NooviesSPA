@@ -8,9 +8,9 @@ import {Loader} from "lucide-react";
 import {
     MyReservationPageContent
 } from "@/views/client/users/my-reservation-page/MyReservationPageContent.tsx";
-import {useFetchReservationBySlug} from "@/domains/reservation/_feat/crud-hooks";
+import {useFetchReservationBySlug} from "@/domains/reservations/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservation/_schema/model";
+import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservations/_schema/model";
 import {ReactElement} from "react";
 
 /**

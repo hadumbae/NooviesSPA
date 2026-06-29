@@ -8,7 +8,7 @@ import {toast} from "react-toastify";
 import {cn} from "@/common/lib/utils.ts";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 
-import {AdminReservation, useResetReservationExpiryMutation} from "@/domains/reservation";
+import {AdminReservation, useResetReservationExpiryMutation} from "@/domains/reservations";
 import {
     AdminReservationResetExpiryDialog
 } from "@/views/admin/reservations/_feat/reservation-actions/reset-expiry/AdminReservationResetExpiryDialog.tsx";

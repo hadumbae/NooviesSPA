@@ -5,7 +5,7 @@
 import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 
-import {User} from "@/domains/users/schema/user/UserSchema";
+import {User} from "@/domains/users/_schema/user/UserSchema";
 
 /**
  * Returns a function to update the authenticated user in local storage and AuthContext.

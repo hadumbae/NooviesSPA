@@ -2,7 +2,7 @@
  * @fileoverview High-visibility badge component for displaying unique review identification codes.
  */
 
-import {MovieReviewUniqueCode} from "@/domains/movieReviews/schemas/fields";
+import {MovieReviewUniqueCode} from "@/domains/movie-reviews/_schema/fields";
 import {Badge} from "@/common/components/ui/badge.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";

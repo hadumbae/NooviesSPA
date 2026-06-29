@@ -9,7 +9,7 @@ import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/comp
 import {ChevronDown, ChevronRight} from "lucide-react";
 import {RoleTypeSubmitForm} from "@/views/admin/role-types/_feat/submit-form";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {RoleType} from "@/domains/roletype/schema/model/RoleTypeSchema.ts";
+import {RoleType} from "@/domains/roletypes/_schema/model/RoleTypeSchema.ts";
 
 /** Props for the RoleTypeListSheetEditCollapsible component. */
 type CollapsibleProps ={

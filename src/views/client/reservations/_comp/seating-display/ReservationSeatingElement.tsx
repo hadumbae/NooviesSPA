@@ -7,7 +7,7 @@ import {BaseSeatingElement} from "@/views/client/reservations/_comp/seating/Base
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
 import {ReactElement} from "react";
 
-import {SeatMapDetails} from "@/domains/seatmap/_schema/model/SeatMapDetailsSchema";
+import {SeatMapDetails} from "@/domains/seatmaps/_schema/model/SeatMapDetailsSchema";
 
 /**
  * Props for the ReservationSeatingElement component.

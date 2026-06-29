@@ -15,7 +15,7 @@ import {
     useCancelReservationMutation,
     useUpdateReservationNotesForm,
     useUpdateReservationSubmitHandler,
-} from "@/domains/reservation";
+} from "@/domains/reservations";
 
 /** Props for the AdminReservationCancelForm component. */
 type FormProps = MutationResponseConfig<AdminReservation, UpdateReservationNotesFormData> & {

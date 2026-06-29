@@ -9,7 +9,7 @@ import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {ShowingSubmitForm} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitForm.tsx";
 import {ReactElement} from "react";
 
-import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
+import {Theatre} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
 import {ShowingSubmitFormView} from "@/views/admin/showings/_feat/submit-form";
 
 /** Props for the TheatreShowingCreatePageContent component. */

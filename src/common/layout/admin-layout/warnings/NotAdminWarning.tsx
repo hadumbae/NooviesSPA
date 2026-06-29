@@ -16,7 +16,7 @@ import HoverLink from "@/common/components/navigation/HoverLink.tsx";
 import {useLocation} from "react-router-dom";
 import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
-import {User} from "@/domains/users/schema/user/UserSchema";
+import {User} from "@/domains/users/_schema/user/UserSchema";
 
 /**
  * Props for {@link NotAdminWarning}.

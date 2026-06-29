@@ -8,7 +8,7 @@ import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {TheatreIndexPageContent} from "@/views/admin/theatres/_pages/index-page/content.tsx";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
-import {TheatreHttpStatusOverrideText} from "@/domains/theatres/constants/TheatreHttpStatusOverrideText.ts";
+import {TheatreHttpStatusOverrideText} from "@/domains/theatres/_const/TheatreHttpStatusOverrideText.ts";
 import {useFetchPaginatedTheatres} from "@/domains/theatres/_feat/crud-hooks";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";

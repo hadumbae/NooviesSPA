@@ -4,7 +4,7 @@
 
 import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
 import HeaderSubtitle from "@/common/components/page/headers/HeaderSubtitle.tsx";
-import {ReservationUniqueCode} from "@/domains/reservation/_schema/model";
+import {ReservationUniqueCode} from "@/domains/reservations/_schema/model";
 import {ReactElement} from "react";
 
 /** Props for the ReservationByCodePageHeader component. */

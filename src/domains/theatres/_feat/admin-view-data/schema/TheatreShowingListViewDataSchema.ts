@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {ShowingDetailsSchema} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
-import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre/TheatreDetailsSchema.ts";
+import {TheatreDetailsSchema} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 
 /**
  * Schema for validating the aggregated data used in the theatre showing list view.

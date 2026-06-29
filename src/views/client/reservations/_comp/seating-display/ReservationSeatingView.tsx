@@ -10,7 +10,7 @@ import {
 import {useOrganisedSeatingForLayout} from "@/domains/seats/_feat/handle-seat-layout";
 import {ReactElement} from "react";
 
-import {SeatMapDetails} from "@/domains/seatmap/_schema/model/SeatMapDetailsSchema";
+import {SeatMapDetails} from "@/domains/seatmaps/_schema/model/SeatMapDetailsSchema";
 
 /** Props for the ReservationSeatingView component. */
 type DisplayProps = {

@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {TheatreDetailsSchema} from "@/domains/theatres/schema/theatre";
+import {TheatreDetailsSchema} from "@/domains/theatres/_schema/theatre";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {TheatreScreenScheduleSchema} from "@/domains/theatre-screens/_schema/model";
 

@@ -8,7 +8,7 @@ import {Separator} from "@/common/components/ui/separator.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {SeatMapFormValues} from "@/domains/seatmap";
+import {SeatMapFormValues} from "@/domains/seatmaps";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 
 /** Props for the SeatMapFormPriceFields component. */

@@ -2,7 +2,7 @@
  * @fileoverview Header component for the Customer Reviews page.
  */
 
-import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {CustomerReviewsPageBreadcrumbs} from "@/views/admin/customers/_pages/customer-reviews-page/sections/breadcrumbs.tsx";
 import {ReactElement} from "react";
 

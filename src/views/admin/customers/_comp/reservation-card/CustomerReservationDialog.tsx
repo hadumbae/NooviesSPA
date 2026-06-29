@@ -2,7 +2,7 @@
  * @fileoverview Modal component providing an expanded administrative view of a customer reservation.
  */
 
-import {Reservation} from "@/domains/reservation/_schema/model";
+import {Reservation} from "@/domains/reservations/_schema/model";
 import {
     Dialog,
     DialogContent,
@@ -20,7 +20,7 @@ import {ReactElement, ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 
 /** Props for the CustomerReservationDialog component. */
 type DialogProps = {

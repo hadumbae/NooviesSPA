@@ -4,7 +4,7 @@
 
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Genre} from "@/domains/genres/schema/genre/GenreSchema.ts";
+import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 import {GenreFormData, GenreFormSchema} from "@/domains/genres/_feat/submit-form/schema/GenreFormSchema.ts";
 import {FormValuesConfig} from "@/common/_feat/submit-data";
 

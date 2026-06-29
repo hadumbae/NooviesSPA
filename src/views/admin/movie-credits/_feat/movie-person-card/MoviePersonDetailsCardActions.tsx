@@ -8,7 +8,7 @@ import {
     MovieCreditDeleteWarningDialog
 } from "@/views/admin/movie-credits/_feat/delete-credit/MovieCreditDeleteWarningDialog.tsx";
 
-import {MovieCredit} from "@/domains/moviecredit";
+import {MovieCredit} from "@/domains/movie-credits";
 
 /** Props for the MoviePersonDetailsCardActions component. */
 type ActionProps = {

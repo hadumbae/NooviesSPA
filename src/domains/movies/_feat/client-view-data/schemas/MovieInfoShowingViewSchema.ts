@@ -3,7 +3,7 @@
  */
 
 import { z } from "zod";
-import {MovieDetailsSchema} from "@/domains/movies/schema/movie";
+import {MovieDetailsSchema} from "@/domains/movies/_schema/movie";
 import {PopulatedShowingSchema} from "@/domains/showings/_schema/showing";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 

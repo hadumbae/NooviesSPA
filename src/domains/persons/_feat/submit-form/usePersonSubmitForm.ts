@@ -5,7 +5,7 @@
 
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm, UseFormReturn} from "react-hook-form";
-import {Person} from "@/domains/persons/schema";
+import {Person} from "@/domains/persons/_schema";
 import {FormValuesConfig} from "@/common/_feat/submit-data";
 import {
     PersonFormData,

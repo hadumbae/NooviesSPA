@@ -10,7 +10,7 @@ import {Button} from "@/common/components/ui";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 
-import {SeatMapFormValues} from "@/domains/seatmap";
+import {SeatMapFormValues} from "@/domains/seatmaps";
 import {SeatMapSubmitFormDetailsFields, SeatMapSubmitFormPriceFields} from "@/views/admin/seatmaps/_feat/submit-form/fieldsets";
 
 /** Props for the SeatMapFormView component. */

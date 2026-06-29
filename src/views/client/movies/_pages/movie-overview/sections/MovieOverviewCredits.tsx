@@ -15,7 +15,7 @@ import {
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
 
 import {MovieDetails} from "@/domains/movies";
-import {generateMovieCreditLinkConfigs, MovieCreditDetails} from "@/domains/moviecredit";
+import {generateMovieCreditLinkConfigs, MovieCreditDetails} from "@/domains/movie-credits";
 
 /** Props for the MovieOverviewCredits component. */
 type MovieOverviewCreditsProps = {

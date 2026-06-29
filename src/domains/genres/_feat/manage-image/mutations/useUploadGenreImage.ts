@@ -4,7 +4,7 @@
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {Genre, GenreSchema} from "@/domains/genres/schema";
+import {Genre, GenreSchema} from "@/domains/genres/_schema";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {toast} from "react-toastify";

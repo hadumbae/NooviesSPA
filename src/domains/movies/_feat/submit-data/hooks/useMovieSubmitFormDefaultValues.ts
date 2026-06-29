@@ -2,7 +2,7 @@
  * @fileoverview Hook for computing and stabilizing default values for the movie submission form.
  */
 
-import {Movie} from "@/domains/movies/schema/movie/MovieSchema.ts";
+import {Movie} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 import {isEqual} from "lodash";
 
 import {useRef} from "react";

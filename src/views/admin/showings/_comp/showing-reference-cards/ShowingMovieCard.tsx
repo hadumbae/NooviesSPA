@@ -3,11 +3,11 @@
  */
 
 import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
-import {MovieDetails} from "@/domains/movies/schema/movie/MovieDetailsSchema.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {AdminMovieMeta, MovieMetaGenreBadges} from "@/views/admin/movies/_comp/movie-details";
 import {ReactElement} from "react";
-import {MovieWithGenres} from "@/domains/movies/schema/movie";
+import {MovieWithGenres} from "@/domains/movies/_schema/movie";
 
 /** Props for the ShowingMovieCard component. */
 type CardProps = {

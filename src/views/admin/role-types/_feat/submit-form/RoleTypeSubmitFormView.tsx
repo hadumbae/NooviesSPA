@@ -12,7 +12,7 @@ import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.t
 import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {RoleTypeCategorySelect} from "@/views/admin/role-types/_feat/form-inputs";
-import {RoleTypeDepartment, RoleTypeFormValues, RoleTypeDepartmentConstant} from "@/domains/roletype";
+import {RoleTypeDepartment, RoleTypeFormValues, RoleTypeDepartmentConstant} from "@/domains/roletypes";
 
 /** Props for the RoleTypeSubmitFormView component. */
 type SubmitViewProps = Pick<FormViewProps<RoleTypeFormValues>, "disableFields" | "className">

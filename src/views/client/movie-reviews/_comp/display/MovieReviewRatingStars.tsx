@@ -4,7 +4,6 @@
 
 import {Star} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import {ACTIVE_STAR_CSS, INACTIVE_STAR_CSS} from "@/domains/movieReviews/constants/RatingStarCSS.ts";
 import {ReactElement} from "react";
 
 /** Props for the MovieReviewRatingStars component. */
@@ -22,14 +21,10 @@ export function MovieReviewRatingStars(
     return (
         <div className={cn("flex items-center space-x-1")}>
             {[1, 2, 3, 4, 5].map((val) => (
-                <Star
-                    key={`movie-review-star-${val}`}
-                    size={size}
-                    className={cn(
-                        INACTIVE_STAR_CSS,
-                        (rating && val <= rating) && ACTIVE_STAR_CSS,
-                    )}
-                />
+                <Star key={`movie-review-star-${val}`} size={size} className={cn(
+                    "inactive-rating-star",
+                    (rating && val <= rating) && "active-rating-star",
+                )}/>
             ))}
         </div>
     );

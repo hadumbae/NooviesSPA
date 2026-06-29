@@ -1,2 +1,3 @@
 export * from "./_feat";
-export * from "./schema";
+export * from "./_schema";
+export * from "./_routes";

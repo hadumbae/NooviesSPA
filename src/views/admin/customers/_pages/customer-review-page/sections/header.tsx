@@ -2,8 +2,8 @@
  * @fileoverview Header component for the administrative customer review detail page.
  */
 
-import {UserUniqueCode} from "@/domains/users/schema/fields/UserUniqueCodeSchema.ts";
-import {MovieReviewUniqueCode} from "@/domains/movieReviews/schemas/fields";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
+import {MovieReviewUniqueCode} from "@/domains/movie-reviews/_schema/fields";
 import {CustomerReviewPageBreadcrumbs} from "@/views/admin/customers/_pages/customer-review-page/sections/breadcrumbs.tsx";
 import {ReactElement} from "react";
 

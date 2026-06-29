@@ -10,7 +10,7 @@ import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/to
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ReactElement} from "react";
 
-import {SeatMapDetails} from "@/domains/seatmap/_schema/model/SeatMapDetailsSchema";
+import {SeatMapDetails} from "@/domains/seatmaps/_schema/model/SeatMapDetailsSchema";
 
 /** Props for the ReservationSeatMapElement component. */
 type ElementProps = {

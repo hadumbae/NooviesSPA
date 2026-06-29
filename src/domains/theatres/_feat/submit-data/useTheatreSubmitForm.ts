@@ -5,7 +5,7 @@
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {TheatreFormData, TheatreFormSchema, TheatreFormValues} from "@/domains/theatres/_feat/submit-data/schema.ts";
-import {Theatre} from "@/domains/theatres/schema/theatre/TheatreSchema.ts";
+import {Theatre} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
 import {
     useTheatreSubmitFormDefaultValues
 } from "@/domains/theatres/_feat/submit-data/useTheatreSubmitFormDefaultValues.ts";

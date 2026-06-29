@@ -3,13 +3,13 @@
  */
 
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {formatReservationDetails} from "@/domains/reservation/_feat/formatters/formatReservationDetails.ts";
+import {formatReservationDetails} from "@/domains/reservations/_feat/formatters/formatReservationDetails.ts";
 import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
-import {PopulatedReservation} from "@/domains/reservation/_schema/model";
+import {PopulatedReservation} from "@/domains/reservations/_schema/model";
 import {ReactElement} from "react";
 
 /** Props for the MyReservationInfoCard component. */

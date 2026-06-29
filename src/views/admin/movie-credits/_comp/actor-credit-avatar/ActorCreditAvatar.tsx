@@ -5,10 +5,10 @@
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
 import getInitials from "@/common/utility/formatters/getInitials.ts";
 import {cn} from "@/common/lib/utils.ts";
-import {mapCreditToPersonLinkConfig} from "@/domains/moviecredit/_feat/navigation/mapCreditToPersonLinkConfig.ts";
+import {mapCreditToPersonLinkConfig} from "@/domains/movie-credits/_feat/navigation/mapCreditToPersonLinkConfig.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 
-import {MovieCreditDetails} from "@/domains/moviecredit/schemas/model/MovieCreditDetailsSchema.ts";
+import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {ReactElement} from "react";
 

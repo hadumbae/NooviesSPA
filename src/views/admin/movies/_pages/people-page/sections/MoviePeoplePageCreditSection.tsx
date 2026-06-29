@@ -12,8 +12,8 @@ import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.ts
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import {MovieCastCreditCard, MovieCrewCreditCard} from "@/views/admin/movie-credits/_feat";
 
-import {RoleTypeDepartment} from "@/domains/roletype";
-import {MovieCreditDetails, MovieCreditDetailsSchema, useFetchPaginatedMovieCredits} from "@/domains/moviecredit";
+import {RoleTypeDepartment} from "@/domains/roletypes";
+import {MovieCreditDetails, MovieCreditDetailsSchema, useFetchPaginatedMovieCredits} from "@/domains/movie-credits";
 
 /** Props for the MoviePeoplePageCreditSection component. */
 type SectionProps = {

@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {UserUniqueCode} from "@/domains/users";
-import {MovieReviewModerationLog, MovieReviewUniqueCode} from "@/domains/movieReviews";
+import {MovieReviewModerationLog, MovieReviewUniqueCode} from "@/domains/movie-reviews";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";

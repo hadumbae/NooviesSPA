@@ -6,10 +6,10 @@
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ReactElement} from "react";
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
-import {useFetchMovieCredits} from "@/domains/moviecredit/_feat/crud-hooks";
+import {useFetchMovieCredits} from "@/domains/movie-credits/_feat/crud-hooks";
 import {
     MovieCreditDetails, MovieCreditDetailsSchema,
-} from "@/domains/moviecredit/schemas";
+} from "@/domains/movie-credits/_schemas";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {MovieDetailsCreditCastOverview} from "@/views/admin/movie-credits/_comp/cast-overview";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";

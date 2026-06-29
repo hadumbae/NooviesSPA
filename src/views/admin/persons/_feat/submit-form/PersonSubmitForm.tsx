@@ -15,7 +15,7 @@ import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {FormOptions, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {Form} from "@/common/components/ui/form.tsx";
 
-import {Person} from "@/domains/persons/schema/person/PersonSchema";
+import {Person} from "@/domains/persons/_schema/person/PersonSchema";
 
 /**
  * Props for the PersonSubmitForm component.

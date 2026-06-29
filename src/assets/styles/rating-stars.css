@@ -1,0 +1,9 @@
+@layer components {
+    .active-rating-star {
+        @apply fill-yellow-500 stroke-yellow-500
+    }
+
+    .inactive-rating-star {
+        @apply fill-gray-300 stroke-gray-300
+    }
+}

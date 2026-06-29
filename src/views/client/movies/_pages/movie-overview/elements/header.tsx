@@ -8,7 +8,7 @@ import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {MovieOverviewCreditLinks, MovieOverviewHeadline, MovieOverviewMeta} from "@/views/client/movies/_comp";
 
 import {MovieDetails} from "@/domains/movies";
-import {MovieCreditDetails} from "@/domains/moviecredit";
+import {MovieCreditDetails} from "@/domains/movie-credits";
 
 /** Props for the MovieOverviewHeader component. */
 type OverviewProps = {

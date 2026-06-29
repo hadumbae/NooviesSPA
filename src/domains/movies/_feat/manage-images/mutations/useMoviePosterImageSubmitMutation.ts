@@ -4,7 +4,7 @@
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {Movie, MovieSchema} from "@/domains/movies/schema";
+import {Movie, MovieSchema} from "@/domains/movies/_schema";
 import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
 import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks";
 import Logger from "@/common/utility/features/logger/Logger.ts";

@@ -7,7 +7,7 @@ import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts"
 import {buildURL} from "@/common/_feat/fetch-api";
 import {PaginatedItems} from "@/common/types";
 
-import {TheatreWithRecentShowings} from "@/domains/theatres/schema";
+import {TheatreWithRecentShowings} from "@/domains/theatres/_schema";
 import {SearchTheatreBaseURL} from "@/domains/theatres/_feat/search-theatres/repository/baseURL.ts";
 import {BrowseTheatreByLocationConfig} from "@/domains/theatres/_feat/search-theatres/repository/repository.types.ts";
 
