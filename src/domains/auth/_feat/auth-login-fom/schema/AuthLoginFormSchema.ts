@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {EmailStringSchema} from "@/common/schema/strings/EmailStringSchema.ts";
 import {AnyValues} from "@/common/types";
-import {StringValueSchema} from "@/common/schema/strings/simple-strings/StringValueSchema.ts";
+import {StringValueSchema} from "@/common/_schemas";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 
 /** Zod schema for validating user login credentials. */

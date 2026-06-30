@@ -2,7 +2,7 @@
  * @fileoverview Zod validation schema and type definition for genre names.
  */
 
-import {StringValueSchema} from "@/common/schema/strings/simple-strings/StringValueSchema.ts";
+import {StringValueSchema} from "@/common/_schemas";
 import {z} from "zod";
 
 /** Validation schema for a genre name string. */

@@ -3,7 +3,7 @@
  */
 
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";

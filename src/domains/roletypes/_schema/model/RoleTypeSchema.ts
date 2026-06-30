@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {RoleTypeDepartmentSchema} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     RoleTypeCastCategorySchema,

@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors/preprocessEmptyStringToUndefined";
 import {RoleTypeDepartmentSchema} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema";
-import {StringValueSchema} from "@/common/schema/strings/simple-strings/StringValueSchema";
+import {StringValueSchema} from "@/common/_schemas/strings/StringValueSchema";
 
 /** Zod schema for validating RoleType query filter parameters. */
 export const RoleTypeQueryFiltersSchema = z.object({

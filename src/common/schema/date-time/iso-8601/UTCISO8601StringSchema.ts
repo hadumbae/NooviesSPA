@@ -4,7 +4,7 @@
  */
 
 import {z} from "zod";
-import {StringValueSchema} from "@/common/schema/strings/simple-strings/StringValueSchema.ts";
+import {StringValueSchema} from "@/common/_schemas";
 
 /**
  * Zod schema that validates strings formatted as strict UTC ISO 8601 timestamps.

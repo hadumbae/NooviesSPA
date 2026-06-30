@@ -6,7 +6,7 @@
 import { z } from "zod";
 import { IpSchema } from "@/common/schema/strings/IpSchema.ts";
 import { ISO3166Alpha2CountryCodeEnum } from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import { NonEmptyStringSchema } from "@/common/_schemas/strings/NonEmptyStringSchema.ts";
 import { TimezoneOffsetSchema } from "@/common/schema/strings/TimezoneOffsetSchema.ts";
 import { BooleanValueSchema } from "@/common/schema/boolean/BooleanValueSchema.ts";
 

@@ -12,7 +12,7 @@ import {
 } from "@/domains/movie-credits/_schemas";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {MovieDetailsCreditCastOverview} from "@/views/admin/movie-credits/_comp/cast-overview";
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 
 /** Cast-specific movie credit details filtered by department. */

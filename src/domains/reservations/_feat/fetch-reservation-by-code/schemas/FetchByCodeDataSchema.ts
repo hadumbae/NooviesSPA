@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {AdminReservationSchema, ReservationUniqueCodeSchema} from "@/domains/reservations/_schema/model";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 
 /** Validates the data envelope returned by the administrative code lookup endpoint. */
 export const FetchByCodeDataSchema = z.object({

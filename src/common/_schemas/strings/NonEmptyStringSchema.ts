@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {TrimmedStringSchema} from "@/common/schema/strings/simple-strings/TrimmedStringSchema.ts";
+import {TrimmedStringSchema} from "@/common/_schemas/strings/TrimmedStringSchema.ts";
 
 /**
  * Schema that trims whitespace and ensures the string has at least one character.

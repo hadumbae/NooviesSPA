@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 import {
     TheatreScreenDetailsBreadcrumbs,

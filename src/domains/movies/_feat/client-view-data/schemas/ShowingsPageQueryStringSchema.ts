@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {StringValueSchema} from "@/common/schema/strings/simple-strings/StringValueSchema.ts";
+import {StringValueSchema} from "@/common/_schemas";
 
 /** Zod schema for validating and parsing showings page query strings. */
 export const ShowingsPageQueryStringSchema = z.object({

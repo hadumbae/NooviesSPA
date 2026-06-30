@@ -2,7 +2,7 @@
  * @fileoverview Zod schema and type definition for a user's personal name field.
  */
 
-import {StringValueSchema} from "@/common/schema/strings/simple-strings/StringValueSchema.ts";
+import {StringValueSchema} from "@/common/_schemas";
 import {z} from "zod";
 
 /** Validation schema for a user's personal name requiring a specific length range. */

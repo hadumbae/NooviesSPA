@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {AnyValues} from "@/common/types";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 
 /** Validation schema for submitting administrative updates to reservation notes. */

@@ -4,7 +4,7 @@
  */
 
 import {z} from "zod";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 
 /**
  * Validates a simple error response envelope containing a descriptive message.

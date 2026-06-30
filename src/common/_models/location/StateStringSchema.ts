@@ -2,7 +2,7 @@
  * @fileoverview Zod schema and TypeScript type for validating state or province names.
  */
 
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 import {z} from "zod";
 
 /** Zod schema for validating a state or province name. */

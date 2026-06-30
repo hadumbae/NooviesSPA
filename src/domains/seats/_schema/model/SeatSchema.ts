@@ -8,7 +8,7 @@ import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/Posi
 import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {SlugStringSchema} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugStringSchema} from "@/common/_schemas/strings/SlugString.ts";
 import {SeatLabelSchema, SeatLayoutTypeSchema, SeatRowSchema, SeatTypeSchema} from "@/domains/seats/_schema/fields";
 
 /** Base layout entry shared across all structure types. */

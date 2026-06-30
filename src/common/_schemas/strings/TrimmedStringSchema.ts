@@ -3,11 +3,10 @@
  */
 
 import { z } from "zod";
+import {StringValueSchema} from "@/common/_schemas/strings/StringValueSchema.ts";
 
 /** Zod schema that validates a string and trims leading and trailing whitespace. */
-export const TrimmedStringSchema = z
-    .string({ required_error: "Required", invalid_type_error: "Must be a string." })
-    .trim();
+export const TrimmedStringSchema = StringValueSchema.trim();
 
 /** TypeScript type inferred from TrimmedStringSchema. */
 export type TrimmedString = z.infer<typeof TrimmedStringSchema>;

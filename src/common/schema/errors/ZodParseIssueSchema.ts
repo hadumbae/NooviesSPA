@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import { NonEmptyStringSchema } from "@/common/_schemas/strings/NonEmptyStringSchema.ts";
 
 /**
  * A Zod schema describing the structure of a single Zod validation issue.

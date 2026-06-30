@@ -4,7 +4,7 @@
 
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {ReactElement} from "react";
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 import {URLString} from "@/common/schema/strings/URLStringSchema.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp";
 

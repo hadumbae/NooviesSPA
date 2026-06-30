@@ -3,7 +3,7 @@
  * @filename TimezoneOffsetSchema.ts
  */
 
-import { StringValueSchema } from "@/common/schema/strings/simple-strings/StringValueSchema.ts";
+import { StringValueSchema } from "@/common/_schemas/strings/StringValueSchema.ts";
 import { z } from "zod";
 
 /**

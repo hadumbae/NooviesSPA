@@ -3,8 +3,8 @@
  */
 
 import {z} from "zod";
-import {SlugStringSchema} from "@/common/schema/strings/simple-strings/SlugString.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {SlugStringSchema} from "@/common/_schemas/strings/SlugString.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
 
 /** Zod schema for validating reference-based filter criteria for Showings. */

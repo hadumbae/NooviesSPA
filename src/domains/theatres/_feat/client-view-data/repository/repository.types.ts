@@ -2,7 +2,7 @@
  * @fileoverview Type definitions for the theatre client view data repository.
  */
 
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 import {DateOnlyString} from "@/common/schema/dates/DateOnlyStringSchema.ts";
 
 /** Parameters for fetching theatre information view data. */

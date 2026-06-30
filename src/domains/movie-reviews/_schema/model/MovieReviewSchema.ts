@@ -6,10 +6,10 @@
 import {z} from "zod";
 import {ModelTimestampsSchema} from "@/common/schema/models/ModelTimestampsSchema.ts";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
-import {SlugStringSchema} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugStringSchema} from "@/common/_schemas/strings/SlugString.ts";
 import {MovieReviewUniqueCodeSchema} from "@/domains/movie-reviews/_schema/fields";
 
 /** Zod validation schema for a movie review document. */

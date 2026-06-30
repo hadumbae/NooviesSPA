@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {ScreenTypeSchema} from "@/domains/theatre-screens/_schema/fields";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 import {CoercedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 
 /**

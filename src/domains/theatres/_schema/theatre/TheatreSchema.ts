@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {LocationSchema} from "@/common/_models/location/LocationSchema.ts";
-import {SlugStringSchema} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugStringSchema} from "@/common/_schemas/strings/SlugString.ts";
 import {TheatreNameSchema, TheatreSeatCapacitySchema} from "@/domains/theatres/_schema/fields";
 
 /**

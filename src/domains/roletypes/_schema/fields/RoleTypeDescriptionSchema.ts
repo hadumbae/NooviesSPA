@@ -2,7 +2,7 @@
  * @fileoverview Defines the validation schema and type for role type descriptions.
  */
 
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 import {z} from "zod";
 
 /** Zod schema for validating an optional role type description string. */

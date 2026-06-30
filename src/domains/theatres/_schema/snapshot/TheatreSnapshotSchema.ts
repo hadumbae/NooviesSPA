@@ -1,7 +1,7 @@
 /** @fileoverview Zod schema and type definitions for immutable theatre snapshots. */
 
 import {z} from "zod";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
 import {IANATimezoneSchema} from "@/common/schema/date-time/IANATimezone.schema.ts";
 

@@ -2,7 +2,7 @@
  * @fileoverview Type definitions for the Theatre Admin View repository configuration.
  */
 
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 
 /**
  * Configuration parameters for retrieving theatre-specific dashboard data.

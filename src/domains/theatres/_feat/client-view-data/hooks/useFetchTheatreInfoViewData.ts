@@ -3,7 +3,7 @@
  */
 
 import {DateOnlyString} from "@/common/schema/dates/DateOnlyStringSchema.ts";
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {
     getFetchTheatreInfoViewData,

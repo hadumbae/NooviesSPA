@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { BooleanValueSchema } from "@/common/schema/boolean/BooleanValueSchema.ts";
 import { NumberValueSchema } from "@/common/schema/numbers/number-value/NumberValueSchema.ts";
-import { StringValueSchema } from "@/common/schema/strings/simple-strings/StringValueSchema.ts";
+import { StringValueSchema } from "@/common/_schemas/strings/StringValueSchema.ts";
 import { IANATimezoneSchema } from "@/common/schema/date-time/IANATimezone.schema.ts";
 
 /**

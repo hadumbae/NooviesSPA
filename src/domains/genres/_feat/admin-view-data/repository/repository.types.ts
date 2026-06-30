@@ -3,7 +3,7 @@
  */
 
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 
 /** Parameters for fetching detailed genre administrative view data. */
 export type FetchGenreDetailsConfig = {

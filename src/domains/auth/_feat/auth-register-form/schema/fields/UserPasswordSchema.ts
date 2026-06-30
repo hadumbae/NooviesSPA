@@ -2,7 +2,7 @@
  * @fileoverview Defines the validation schema and type for user passwords.
  */
 
-import {StringValueSchema} from "@/common/schema/strings/simple-strings/StringValueSchema.ts";
+import {StringValueSchema} from "@/common/_schemas";
 import {z} from "zod";
 
 /** Zod schema for validating user password strength and length requirements. */

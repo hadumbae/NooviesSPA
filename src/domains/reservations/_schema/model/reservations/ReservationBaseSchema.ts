@@ -5,13 +5,13 @@
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {SlugStringSchema} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugStringSchema} from "@/common/_schemas/strings/SlugString.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {ISO4217CurrencyCodeEnumSchema} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
 import {ReservationTypeEnumSchema} from "@/domains/reservations/_schema/model/fields/ReservationTypeEnumSchema.ts";
 import {ReservationStatusEnumSchema} from "@/domains/reservations/_schema/model/fields/ReservationStatusEnumSchema.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 import {
     ReservationUniqueCodeSchema
 } from "@/domains/reservations/_schema/model/fields/ReservationUniqueCodeSchema.ts";

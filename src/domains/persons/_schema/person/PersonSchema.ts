@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema";
-import {SlugStringSchema} from "@/common/schema/strings/simple-strings/SlugString";
+import {SlugStringSchema} from "@/common/_schemas";
 import {PersonNameSchema} from "@/domains/persons/_schema/fields/PersonNameSchema";
 import {PersonBiographySchema} from "@/domains/persons/_schema/fields/PersonBiographySchema";
 import {UTCDayOnlyDateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCDayOnlyDateTimeSchema";

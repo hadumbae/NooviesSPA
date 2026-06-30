@@ -7,7 +7,7 @@ import {List, Plus} from "lucide-react";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 
 /** Props for the TheatreDetailsShowingsTabHeader component. */
 type HeaderProps = {

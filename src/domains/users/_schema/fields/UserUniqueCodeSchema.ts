@@ -2,7 +2,7 @@
  * @fileoverview Zod schema and type for standardized user identification codes.
  */
 
-import {StringValueSchema} from "@/common/schema/strings/simple-strings/StringValueSchema.ts";
+import {StringValueSchema} from "@/common/_schemas";
 import {z} from "zod";
 
 /** Validation schema for unique user identification codes. */

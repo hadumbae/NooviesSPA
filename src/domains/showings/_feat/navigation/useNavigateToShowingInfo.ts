@@ -4,7 +4,7 @@
 
 import useLoggedNavigate, {LoggingMessageParams} from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {NavigateOptions} from "react-router-dom";
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 
 /** Configuration for the showing navigation action. */
 type NavConfig = LoggingMessageParams & {

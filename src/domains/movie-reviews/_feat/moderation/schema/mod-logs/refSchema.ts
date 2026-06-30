@@ -6,7 +6,7 @@
 import {z} from "zod"
 import {MovieReviewModerationActionSchema} from "@/domains/movie-reviews/_feat/moderation/schema/actions"
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts"
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts"
+import {NonEmptyStringSchema} from "@/common/_schemas/strings/NonEmptyStringSchema.ts"
 import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts"
 
 /**

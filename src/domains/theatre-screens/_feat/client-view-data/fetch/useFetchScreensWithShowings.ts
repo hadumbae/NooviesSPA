@@ -5,7 +5,7 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {DateOnlyString} from "@/common/schema/dates/DateOnlyStringSchema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";

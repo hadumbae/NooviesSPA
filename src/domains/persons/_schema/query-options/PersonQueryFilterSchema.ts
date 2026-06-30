@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema";
+import {NonEmptyStringSchema} from "@/common/_schemas/strings/NonEmptyStringSchema";
 import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema";
 import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum";
 import {

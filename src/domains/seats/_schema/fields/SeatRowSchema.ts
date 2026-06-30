@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 
 /** Zod schema for validating a seat row string. */
 export const SeatRowSchema = NonEmptyStringSchema.max(10, "Must be 10 characters or less.");

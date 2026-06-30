@@ -3,7 +3,7 @@
  * @filename IpSchema.ts
  */
 
-import { TrimmedStringSchema } from "@/common/schema/strings/simple-strings/TrimmedStringSchema.ts";
+import { TrimmedStringSchema } from "@/common/_schemas/strings/TrimmedStringSchema.ts";
 import { z } from "zod";
 
 /**

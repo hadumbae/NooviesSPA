@@ -4,7 +4,7 @@
 
 import { z } from "zod";
 import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import { NonEmptyStringSchema } from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import { NonEmptyStringSchema } from "@/common/_schemas/strings/NonEmptyStringSchema.ts";
 import { SeatTypeSchema } from "@/domains/seats/_schema/fields";
 import { SeatLayoutTypeSchema } from "@/domains/seats/_schema/fields";
 import { CoercedBooleanValueSchema } from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";

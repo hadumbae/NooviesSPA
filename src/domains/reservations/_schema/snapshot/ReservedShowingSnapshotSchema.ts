@@ -9,7 +9,7 @@ import {TheatreScreenSnapshotSchema} from "@/domains/theatre-screens/_schema/sna
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {ReservedSeatSnapshotSchema} from "@/domains/reservations/_schema/snapshot/ReservedSeatSnapshotSchema.ts";
 import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
-import {NonEmptyStringSchema} from "@/common/schema/strings/simple-strings/NonEmptyStringSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas";
 import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
 import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 
