@@ -1,5 +1,5 @@
 import HomePage from "@/domains/client/pages/HomePage.tsx";
-import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
+import {BaseLayout} from "@/common/layout/base-layout/BaseLayout.tsx";
 
 /**
  * Client routes.

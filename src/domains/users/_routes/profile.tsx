@@ -4,7 +4,7 @@
  */
 
 import {RouteObject} from "react-router-dom";
-import BaseLayout from "@/common/layout/base-layout/BaseLayout.tsx";
+import {BaseLayout} from "@/common/layout/base-layout/BaseLayout.tsx";
 import ErrorPage from "@/common/pages/ErrorPage.tsx";
 import {
     MyFavouritesPage,

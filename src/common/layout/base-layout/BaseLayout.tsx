@@ -3,7 +3,7 @@
  * @filename BaseLayout.tsx
  */
 
-import {FC} from 'react';
+import {ReactElement} from 'react';
 import {SidebarProvider} from "@/common/components/ui/sidebar/sidebar.tsx";
 import BaseSidebar from "@/common/layout/base-layout/sidebar/BaseSidebar.tsx";
 import BaseLayoutContent from "@/common/layout/base-layout/layout/BaseLayoutContent.tsx";
@@ -15,7 +15,7 @@ import {cn} from "@/common/lib/utils.ts";
 /**
  * The client-side layout wrapper for the application.
  */
-const BaseLayout: FC = () => {
+export function BaseLayout(): ReactElement {
     const isMobile = useIsMobile();
 
     return (
@@ -32,6 +32,4 @@ const BaseLayout: FC = () => {
             </main>
         </SidebarProvider>
     );
-};
-
-export default BaseLayout;
+}
