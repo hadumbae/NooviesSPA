@@ -2,14 +2,12 @@
  * @fileoverview Administrative tab for creating seats and viewing a session-based list of submitted seat data.
  */
 
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import {Dispatch, ReactElement, SetStateAction} from "react";
-import {SeatFormValues} from "@/domains/seats/_feat/submit-data";
-import {SeatSubmitFormView} from "@/views/admin/seats/_feat/submit-data";
-import {SeatFormSubmitList} from "@/views/admin/seats/_comp/returned-seat-list";
-import {SeatDetails} from "@/domains/seats/_schema/model";
+import {Card, CardContent, TabsContent} from "@/common/components/ui";
+import {SectionTitle} from "@/views/common/_comp";
+import {SeatDetails} from "@/domains/seats";
+import {SeatSubmitFormView} from "@/views/admin/seats/_feat";
+import {SeatFormSubmitList} from "@/views/admin/seats/_comp";
 
 /** Props for the TheatreScreenDetailsCreateSeatTab component. */
 type TabProps = {
@@ -23,25 +21,20 @@ type TabProps = {
 export function TheatreScreenDetailsCreateSeatTab(
     {returnedSeating, setReturnedSeating}: TabProps,
 ): ReactElement {
-    const disableFields: Partial<Record<keyof SeatFormValues, boolean>> = {
-        screen: true,
-        theatre: true,
-    };
-
     return (
         <TabsContent value="create-seats" className="space-y-4">
             <section className="space-y-2">
-                <SectionHeader>Create Seats</SectionHeader>
+                <SectionTitle>Create Seats</SectionTitle>
                 <Card>
                     <CardContent className="p-4">
-                        <SeatSubmitFormView disableFields={disableFields}/>
+                        <SeatSubmitFormView disableFields={{screen: true, theatre: true}}/>
                     </CardContent>
                 </Card>
             </section>
 
             {returnedSeating.length > 0 && (
                 <section className="space-y-2">
-                    <SectionHeader>Seats</SectionHeader>
+                    <SectionTitle>Seats</SectionTitle>
                     <SeatFormSubmitList
                         returnedSeating={returnedSeating}
                         setReturnedSeating={setReturnedSeating}

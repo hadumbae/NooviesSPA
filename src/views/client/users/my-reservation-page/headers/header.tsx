@@ -2,16 +2,14 @@
  * @fileoverview Header component for the reservation page displaying movie metadata and navigation.
  */
 
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {ReactElement} from "react";
 import {Redo} from "lucide-react";
+import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import IconButton from "@/common/components/buttons/IconButton.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import buildString from "@/common/utility/buildString.ts";
-import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
-import {ReactElement} from "react";
+import {MoviePosterImage} from "@/views/admin/movies/_comp";
+import {HeaderDescription, HeaderTitle, SROnly} from "@/views/common/_comp";
 
 /** Props for the MyReservationPageHeader component. */
 type HeaderProps = {
@@ -26,13 +24,7 @@ type HeaderProps = {
  * Renders the reservation page header including the movie poster, title, and metadata.
  */
 export function MyReservationPageHeader(
-    {
-        movieTitle,
-        posterImage,
-        releaseYear,
-        genreNames,
-        isSpecialEvent,
-    }: HeaderProps
+    {movieTitle, posterImage, releaseYear, genreNames, isSpecialEvent}: HeaderProps
 ): ReactElement {
     const navigate = useLoggedNavigate();
 
@@ -53,18 +45,18 @@ export function MyReservationPageHeader(
     return (
         <header className="flex items-center space-x-3">
             <section>
-                <SectionHeader srOnly={true}>Poster Image</SectionHeader>
+                <SROnly text="Poster Image"/>
                 <MoviePosterImage url={posterImage?.secure_url} className="h-24"/>
             </section>
 
             <section className="flex-1 flex flex-col gap-2">
-                <SectionHeader srOnly={true}>Reservation Meta</SectionHeader>
+                <SROnly text="Reservation Meta"/>
                 <HeaderTitle>{movieTitle}</HeaderTitle>
                 <HeaderDescription>{metaString}</HeaderDescription>
             </section>
 
             <section>
-                <SectionHeader srOnly={true}>My Profile Button</SectionHeader>
+                <SROnly text="My Profile Button"/>
                 <IconButton onClick={navigateToProfile}>
                     <Redo/>
                 </IconButton>

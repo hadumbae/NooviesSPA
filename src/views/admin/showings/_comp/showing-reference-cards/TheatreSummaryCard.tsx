@@ -2,21 +2,15 @@
  * @fileoverview Admin summary card component for displaying high-level theatre information.
  */
 
-import { Card, CardContent } from "@/common/components/ui/card.tsx";
+import {ReactElement} from "react";
+import {Card, CardContent} from "@/common/components/ui";
+import {Film, Search, Sofa, TvMinimal} from "lucide-react";
 import buildString from "@/common/utility/buildString.ts";
 import ISO3166Alpha2ShortCountryConstant from "@/common/constants/country/ISO3166Alpha2ShortCountryConstant.ts";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
-import { Film, Search, Sofa, TvMinimal } from "lucide-react";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import IconTextSpan from "@/common/components/card-content/IconTextSpan.tsx";
-import { cn } from "@/common/lib/utils.ts";
-import { SecondaryTextBaseCSS } from "@/common/constants/css/TextCSS.ts";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-
-import {TheatreDetails} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
-import {ReactElement} from "react";
+import {TheatreDetails} from "@/domains/theatres";
+import {SROnly, SubsectionSubtitle, SubsectionTitle} from "@/views/common/_comp";
 
 /** Props for the TheatreSummaryCard component. */
 type CardProps = {
@@ -26,13 +20,13 @@ type CardProps = {
 /**
  * Admin summary card displaying high-level theatre information and navigation to details.
  */
-export function TheatreSummaryCard({ theatre }: CardProps): ReactElement {
+export function TheatreSummaryCard({theatre}: CardProps): ReactElement {
     const {
         name,
         seatCount,
         futureShowingCount,
         screenCount,
-        location: { street, city, country },
+        location: {street, city, country},
         slug,
     } = theatre;
 
@@ -57,40 +51,28 @@ export function TheatreSummaryCard({ theatre }: CardProps): ReactElement {
             <CardContent className="px-5 py-3 space-y-4">
                 <div className="flex justify-between items-center">
                     <section>
-                        <SectionHeader srOnly={true}>Theatre Details Header</SectionHeader>
-
-                        <PrimaryHeaderText as="h2">
-                            {name}
-                        </PrimaryHeaderText>
-
-                        <SecondaryHeaderText as="h3" className="text-xs">
-                            {formattedAddress}
-                        </SecondaryHeaderText>
+                        <SROnly text="Theatre Details Header"/>
+                        <SubsectionTitle as="h2">{name}</SubsectionTitle>
+                        <SubsectionSubtitle as="h3" className="text-xs">{formattedAddress}</SubsectionSubtitle>
                     </section>
 
                     <IconButton onClick={navigateToTheatre}>
-                        <Search />
+                        <Search/>
                     </IconButton>
                 </div>
 
-                <div
-                    className={cn(
-                        SecondaryTextBaseCSS,
-                        "flex justify-between items-center",
-                        "text-xs",
-                    )}
-                >
-                    <IconTextSpan aria-description="Number Of Screens">
-                        <TvMinimal /> {screenCount} Screens
-                    </IconTextSpan>
+                <div className="secondary-text flex justify-between items-center text-xs">
+                    <span className="text-with-icon" aria-description="Number Of Screens">
+                        <TvMinimal/> {screenCount} Screens
+                    </span>
 
-                    <IconTextSpan aria-description="Number Of Seats">
-                        <Sofa /> {seatCount} Seats
-                    </IconTextSpan>
+                    <span className="text-with-icon" aria-description="Number Of Seats">
+                        <Sofa/> {seatCount} Seats
+                    </span>
 
-                    <IconTextSpan aria-description="Number Of Upcoming Showings">
-                        <Film /> {futureShowingCount} Showings
-                    </IconTextSpan>
+                    <span className="text-with-icon" aria-description="Number Of Upcoming Showings">
+                        <Film/> {futureShowingCount} Showings
+                    </span>
                 </div>
             </CardContent>
         </Card>

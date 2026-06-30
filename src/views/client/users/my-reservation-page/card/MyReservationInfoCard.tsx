@@ -2,15 +2,11 @@
  * @fileoverview Card component that displays formatted reservation summary details.
  */
 
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {formatReservationDetails} from "@/domains/reservations/_feat/formatters/formatReservationDetails.ts";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
-import {PopulatedReservation} from "@/domains/reservations/_schema/model";
 import {ReactElement} from "react";
+import {Card, CardContent} from "@/common/components/ui";
+import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
+import {SROnly} from "@/views/common/_comp/screen-readers";
+import {formatReservationDetails, PopulatedReservation} from "@/domains/reservations";
 
 /** Props for the MyReservationInfoCard component. */
 export type CardProps = {
@@ -33,44 +29,29 @@ export function MyReservationInfoCard(
         <Card>
             <CardContent className="p-4 space-y-4">
                 <section className="flex justify-between items-center">
-                    <SectionHeader srOnly>
-                        Reservation Meta
-                    </SectionHeader>
+                    <SROnly text="Reservation Meta"/>
 
-                    <PrimaryHeaderText>
-                        {showtime}
-                    </PrimaryHeaderText>
-
-                    <SecondarySpan>
-                        {reservationType}
-                    </SecondarySpan>
+                    <h2 className="subsection-title">{showtime}</h2>
+                    <span className="secondary-text">{reservationType}</span>
                 </section>
 
                 <section className="flex justify-between items-center">
                     <LabeledGroup label="Price">
-                        <PrimarySpan>
-                            ${pricePaid}
-                        </PrimarySpan>
+                        <span className="primary-text">${pricePaid}</span>
                     </LabeledGroup>
 
                     <LabeledGroup label="Tickets">
-                        <PrimarySpan>
-                            {ticketCount} u.
-                        </PrimarySpan>
+                        <span className="primary-text">{ticketCount} u.</span>
                     </LabeledGroup>
 
                     <LabeledGroup label="Status">
-                        <PrimarySpan>
-                            {status}
-                        </PrimarySpan>
+                        <span className="primary-text">{status}</span>
                     </LabeledGroup>
                 </section>
 
                 <section className="flex justify-between items-center">
                     <LabeledGroup label="Code">
-                        <PrimarySpan>
-                            {uniqueCode}
-                        </PrimarySpan>
+                        <span className="primary-text">{uniqueCode}</span>
                     </LabeledGroup>
                 </section>
             </CardContent>

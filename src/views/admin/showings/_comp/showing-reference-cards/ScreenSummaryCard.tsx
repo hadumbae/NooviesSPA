@@ -2,19 +2,14 @@
  * @fileoverview Admin summary card displaying high-level screen information.
  */
 
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
+import {ReactElement} from "react";
+import {Film, Search, Sofa, Theater} from "lucide-react";
+import {Card, CardContent} from "@/common/components/ui";
 import buildString from "@/common/utility/buildString.ts";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
-import {Film, Search, Sofa, Theater} from "lucide-react";
-import IconTextSpan from "@/common/components/card-content/IconTextSpan.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {TheatreScreenDetails} from "@/domains/theatre-screens/_schema/model";
-import {ReactElement} from "react";
+import {TheatreScreenDetails} from "@/domains/theatre-screens";
+import {SROnly, SubsectionSubtitle, SubsectionTitle} from "@/views/common/_comp";
 
 /** Props for the ScreenSummaryCard component. */
 type CardProps = {
@@ -53,17 +48,9 @@ export function ScreenSummaryCard({screen}: CardProps): ReactElement {
             <CardContent className="px-5 py-3 space-y-4">
                 <div className="flex justify-between items-center">
                     <section>
-                        <SectionHeader srOnly>
-                            Screen Details Header
-                        </SectionHeader>
-
-                        <PrimaryHeaderText as="h2">
-                            {name}
-                        </PrimaryHeaderText>
-
-                        <SecondaryHeaderText as="h2" className="text-xs">
-                            {screenType}
-                        </SecondaryHeaderText>
+                        <SROnly text="Screen Details Header"/>
+                        <SubsectionTitle as="h2">{name}</SubsectionTitle>
+                        <SubsectionSubtitle as="h2" className="text-xs">{screenType}</SubsectionSubtitle>
                     </section>
 
                     <IconButton onClick={navigateToScreen}>
@@ -71,28 +58,20 @@ export function ScreenSummaryCard({screen}: CardProps): ReactElement {
                     </IconButton>
                 </div>
 
-                <section
-                    className={cn(
-                        SecondaryTextBaseCSS,
-                        "flex justify-between items-center",
-                        "text-xs",
-                    )}
-                >
-                    <SectionHeader srOnly>
-                        Screen Metadata
-                    </SectionHeader>
+                <section className="secondary-text flex justify-between items-center text-xs">
+                    <SROnly text="Screen Metadata" />
 
-                    <IconTextSpan aria-description="Name Of Theatre">
+                    <span className="text-with-icon" aria-description="Name Of Theatre">
                         <Theater/> {theatreName}
-                    </IconTextSpan>
+                    </span>
 
-                    <IconTextSpan aria-description="Number Of Seats By Capacity">
+                    <span className="text-with-icon" aria-description="Number Of Seats By Capacity">
                         <Sofa/> {formattedCapacity} Seats
-                    </IconTextSpan>
+                    </span>
 
-                    <IconTextSpan aria-description="Upcoming Showings">
+                    <span className="text-with-icon" aria-description="Upcoming Showings">
                         <Film/> {futureShowingCount} Showings
-                    </IconTextSpan>
+                    </span>
                 </section>
             </CardContent>
         </Card>

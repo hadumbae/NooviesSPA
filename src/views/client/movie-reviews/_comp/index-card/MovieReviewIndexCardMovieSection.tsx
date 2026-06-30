@@ -4,13 +4,12 @@
 
 import {MovieWithRating} from "@/domains/movies/_schema/movie/MovieWithRatingSchema.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {MovieReviewRatingStars} from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {formatMovieData} from "@/domains/movies/_feat/formatters";
 import {ReactElement} from "react";
+import {SROnly} from "@/views/common/_comp/screen-readers";
+import {SubsectionTitle} from "@/views/common/_comp";
 
 /** Props for the MovieReviewIndexCardMovieSection component. */
 type SectionProps = {
@@ -34,9 +33,7 @@ export function MovieReviewIndexCardMovieSection(
 
     return (
         <section className="flex items-center gap-4">
-            <SectionHeader srOnly={true}>
-                Movie Review - Movie Metadata
-            </SectionHeader>
+            <SROnly text="Movie Review - Movie Metadata" />
 
             <LoggedLink to={`/browse/movies/${slug}`}>
                 <MoviePosterImage
@@ -47,14 +44,14 @@ export function MovieReviewIndexCardMovieSection(
 
             <div className="space-y-2">
                 <LoggedLink to={`/browse/movies/${slug}`}>
-                    <PrimaryHeaderText className="hover:underline underline-offset-4">
+                    <SubsectionTitle className="hover:underline underline-offset-4">
                         {title}
-                    </PrimaryHeaderText>
+                    </SubsectionTitle>
                 </LoggedLink>
 
-                <SecondarySpan>
+                <span className="secondary-tex">
                     {releaseYear} • {duration} • {genreList}
-                </SecondarySpan>
+                </span>
 
                 <MovieReviewRatingStars rating={averageRating} size={12}/>
             </div>

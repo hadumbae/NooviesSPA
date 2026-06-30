@@ -2,30 +2,28 @@
  * @fileoverview Modal dialog for viewing expanded movie showing details in the admin dashboard.
  */
 
+import {ReactElement} from "react";
+import {LucideIconText} from "@/common/components/card-content/LucideIconText.tsx";
+import {Captions, Clock, Headphones, Landmark, Presentation, Search, Ticket} from "lucide-react";
+import {cn} from "@/common/lib/utils.ts";
+import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
+import CollapsibleTextblock from "@/common/components/text/CollapsibleTextblock.tsx";
 import {
+    buttonVariants,
     Dialog,
     DialogContent,
     DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/common/components/ui/dialog.tsx";
-import {ShowingIndexListCard} from "@/views/admin/showings/_comp/index-card/ShowingIndexListCard.tsx";
-import {formatShowingDetails} from "@/domains/showings/_feat/formatters/formatShowingDetails.ts";
-import {LucideIconText} from "@/common/components/card-content/LucideIconText.tsx";
-import {Captions, Clock, Headphones, Landmark, Presentation, Search, Ticket,} from "lucide-react";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {Separator} from "@/common/components/ui/separator.tsx";
-import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
-import {buttonVariants} from "@/common/components/ui/button.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import CollapsibleTextblock from "@/common/components/text/CollapsibleTextblock.tsx";
-import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
-import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
-import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
-import {ReactElement} from "react";
+    Separator,
+} from "@/common/components/ui";
+
+import {formatShowingDetails, ShowingDetails} from "@/domains/showings";
 import {ShowingMovieSummary} from "@/views/admin/movies/_comp/showing-movie-summary";
 import {ShowingStateBadges} from "@/views/admin/showings/_comp/showing-state-badges";
+import {ShowingIndexListCard} from "@/views/admin/showings/_comp/index-card/ShowingIndexListCard.tsx";
+import {SROnly} from "@/views/common/_comp";
 
 /** Props for the ShowingIndexListDialog component. */
 type ShowingIndexListDialogProps = {
@@ -60,38 +58,35 @@ export function ShowingIndexListDialog(
                 <ShowingIndexListCard showing={showing}/>
             </DialogTrigger>
 
-            <DialogContent className={cn(ContainerCSS, "bg-white space-y-2")}>
+            <DialogContent className="default-container bg-white space-y-2">
                 <DialogHeader>
-                    <DialogTitle className={PrimaryTextBaseCSS}>{movieTitle} ({releaseYear})</DialogTitle>
+                    <DialogTitle className="primary-text">{movieTitle} ({releaseYear})</DialogTitle>
                     <DialogDescription className="hidden">Data</DialogDescription>
                     <ShowingStateBadges status={status} isActive={isActive} isSpecialEvent={isSpecialEvent}/>
                 </DialogHeader>
 
-                <ShowingMovieSummary
-                    movie={movie}
-                    to={`/admin/movies/get/${movieSlug}`}
-                />
+                <ShowingMovieSummary movie={movie} to={`/admin/movies/get/${movieSlug}`}/>
 
                 <Separator/>
 
                 <section className="grid grid-cols-1 gap-4">
-                    <SectionHeader srOnly={true}>Showing Details</SectionHeader>
+                    <SROnly text="Showing Details"/>
 
                     <div className="grid grid-cols-2 gap-2">
                         <LucideIconText
-                            className={cn(PrimaryTextBaseCSS, "col-span-2")}
+                            className="primary-text col-span-2"
                             icon={Clock}
                             text={dateString}
                         />
 
                         <LucideIconText
-                            className={cn(SecondaryTextBaseCSS, "text-xs")}
+                            className="secondary-text text-xs"
                             icon={Landmark}
                             text={`${theatreName} (${country})`}
                         />
 
                         <LucideIconText
-                            className={cn(SecondaryTextBaseCSS, "text-xs")}
+                            className="secondary-text text-xs"
                             icon={Presentation}
                             text={`${screenName} • ${screenType}`}
                         />
@@ -99,19 +94,19 @@ export function ShowingIndexListDialog(
 
                     <div className="flex items-center justify-between">
                         <LucideIconText
-                            className={cn(PrimaryTextBaseCSS)}
+                            className="primary-text"
                             icon={Ticket}
                             text={`$${ticketPrice ? ticketPrice.toString() : "0"} per ticket`}
                         />
 
                         <LucideIconText
-                            className={cn(SecondaryTextBaseCSS, "text-xs")}
+                            className="secondary-text text-xs"
                             icon={Headphones}
                             text={audioLanguageString}
                         />
 
                         <LucideIconText
-                            className={cn(SecondaryTextBaseCSS, "text-xs")}
+                            className="secondary-text text-xs"
                             icon={Captions}
                             text={subtitleString}
                         />

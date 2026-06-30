@@ -2,10 +2,9 @@
  * @fileoverview Header component for the administrative reservation lookup page.
  */
 
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderSubtitle from "@/common/components/page/headers/HeaderSubtitle.tsx";
-import {ReservationUniqueCode} from "@/domains/reservations/_schema/model";
 import {ReactElement} from "react";
+import {ReservationUniqueCode} from "@/domains/reservations";
+import {HeaderSubtitle, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 /** Props for the ReservationByCodePageHeader component. */
 type HeaderProps = {

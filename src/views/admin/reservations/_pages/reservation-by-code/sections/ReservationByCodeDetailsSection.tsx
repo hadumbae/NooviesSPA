@@ -2,25 +2,19 @@
  * @fileoverview Detailed data section displaying movie, showtime, and transactional metadata for a reservation.
  */
 
-import {AdminReservation} from "@/domains/reservations/_schema/model";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
-import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
+import {ReactElement} from "react";
+import {Card, CardContent, Separator} from "@/common/components/ui";
+import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+import {cn} from "@/common/lib/utils.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {Separator} from "@/common/components/ui/separator.tsx";
-import {
-    buildShowingDateString
-} from "@/domains/showings/_feat/formatters/buildShowingDateString.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
 import {OrientationValues} from "@/common/schema/enums/OrientationEnumSchema.ts";
-import {cn} from "@/common/lib/utils.ts";
-import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
-import {ReactElement} from "react";
+import {PageSectionHeader} from "@/views/common/_comp/page";
+
+import {buildShowingDateString} from "@/domains/showings";
+import {AdminReservation} from "@/domains/reservations";
+import {MoviePosterImage} from "@/views/admin/movies";
 
 /** Props for the ReservationByCodeDetailsSection component. */
 type SectionProps = {
@@ -60,46 +54,34 @@ export function ReservationByCodeDetailsSection(
 
     return (
         <section className="space-y-4">
-            <SectionHeader className={SectionHeaderCSS}>
-                Related Data
-            </SectionHeader>
+            <PageSectionHeader text="Related Data"/>
 
             <div className="flex space-x-3">
-                <div>
-                    <MoviePosterImage className="h-36 md:h-48" url={posterURL}/>
-                </div>
+                <MoviePosterImage className="h-36 md:h-48" url={posterURL}/>
 
                 <Card className="flex-1">
                     <CardContent className="p-3 space-y-2">
                         <div className="space-y-1">
-                            <PrimaryHeaderText as="h2">{title}</PrimaryHeaderText>
+                            <h2 className="subsection-title">{title}</h2>
                             <div className="flex max-md:flex-col max-md:space-y-1 md:space-x-5">
-                                <SecondaryHeaderText as="h3">
-                                    {movieReleaseYear} • {movieRuntime}
-                                </SecondaryHeaderText>
-                                <SecondaryHeaderText as="h3">
-                                    {movieGenres}
-                                </SecondaryHeaderText>
+                                <h3 className="subsection-subtitle">{movieReleaseYear} • {movieRuntime}</h3>
+                                <h3 className="subsection-subtitle">{movieGenres}</h3>
                             </div>
                         </div>
 
                         <Separator/>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <LabeledGroup
-                                className="md:col-span-2"
-                                label="Showtime"
-                                orientation={labelOrientation}
-                            >
-                                <PrimarySpan>{showtime}</PrimarySpan>
+                            <LabeledGroup className="md:col-span-2" label="Showtime" orientation={labelOrientation}>
+                                <span className="primary-text">{showtime}</span>
                             </LabeledGroup>
 
                             <LabeledGroup label="Price" orientation={labelOrientation}>
-                                <PrimarySpan>{pricePaid} {currency} for {ticketCount} Tickets</PrimarySpan>
+                                <span className="primary-text">{pricePaid} {currency} for {ticketCount} Tickets</span>
                             </LabeledGroup>
 
                             <LabeledGroup label="Type" orientation={labelOrientation}>
-                                <PrimarySpan>{resType}</PrimarySpan>
+                                <span className="primary-text">{resType}</span>
                             </LabeledGroup>
 
                             <LabeledGroup
@@ -107,9 +89,9 @@ export function ReservationByCodeDetailsSection(
                                 label={isExpired ? "Expired" : "Expires At"}
                                 orientation={labelOrientation}
                             >
-                                <PrimarySpan className={cn(isExpired && "text-red-500")}>
+                                <span className={cn("primary-text", isExpired && "text-red-500")}>
                                     {expiryDate}
-                                </PrimarySpan>
+                                </span>
                             </LabeledGroup>
                         </div>
                     </CardContent>

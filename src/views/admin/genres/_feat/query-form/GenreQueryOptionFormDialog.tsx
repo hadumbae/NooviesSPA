@@ -9,9 +9,9 @@ import {ListFilter} from "lucide-react";
 import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
 import HookFormSortToggle from "@/common/components/forms/HookFormSortToggle.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+import {SectionTitle} from "@/views/common/_comp";
 import {
     Button,
     Dialog,
@@ -57,7 +57,7 @@ export function GenreQueryOptionFormDialog({className}: FormViewProps): ReactEle
 
                 <fieldset className="space-y-4">
                     <header>
-                        <SectionHeader>Search</SectionHeader>
+                        <SectionTitle>Search</SectionTitle>
                         <Separator className="mt-1"/>
                     </header>
 
@@ -71,14 +71,13 @@ export function GenreQueryOptionFormDialog({className}: FormViewProps): ReactEle
 
                 <fieldset className="space-y-4">
                     <header>
-                        <SectionHeader>Ordering</SectionHeader>
+                        <SectionTitle>Ordering</SectionTitle>
                         <Separator className="mt-1"/>
                     </header>
 
                     <HookFormSortToggle
                         name="sortByName"
                         label="Sort by Name"
-                        control={control}
                     />
                 </fieldset>
             </DialogContent>

@@ -3,10 +3,9 @@
  */
 
 import {ReactElement, useState} from 'react';
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {LinkButton} from "@/views/common/_comp/submit-form";
 import {Plus} from "lucide-react";
+import {LinkButton} from "@/views/common/_comp/submit-form";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 import {Theatre, useNavigateToTheatre} from "@/domains/theatres";
 import {TheatreSubmitForm, TheatreSubmitFormPanel} from "@/views/admin/theatres/_feat";

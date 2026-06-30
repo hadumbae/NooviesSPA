@@ -3,8 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 import {ShowingDetails} from "@/domains/showings";
 import {ShowingEditBreadcrumbs} from "@/views/admin/showings/_pages/edit-page/breadcrumbs.tsx";

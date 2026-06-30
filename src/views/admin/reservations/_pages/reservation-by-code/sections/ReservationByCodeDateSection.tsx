@@ -2,12 +2,11 @@
  * @fileoverview Chronological date overview section for a reservation's lifecycle.
  */
 
-import {AdminReservation, ReservationStatus} from "@/domains/reservations/_schema/model";
-import {Check, Coins, Cross, Receipt, Timer} from "lucide-react";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import {ReactElement} from "react";
+import {Check, Coins, Cross, Receipt, Timer} from "lucide-react";
+import {PageSectionHeader} from "@/views/common/_comp";
 import {ReservationActiveDateCard} from "@/views/admin/reservations/_comp";
+import {AdminReservation, ReservationStatus} from "@/domains/reservations";
 
 /** Props for the ReservationByCodeDateSection component. */
 type SectionProps = {
@@ -40,9 +39,7 @@ export function ReservationByCodeDateSection(
 
     return (
         <section className="space-y-3">
-            <SectionHeader className={SectionHeaderCSS}>
-                Dates
-            </SectionHeader>
+            <PageSectionHeader text="Dates"/>
 
             <div className="flex justify-center">
                 <div className="w-full grid grid-cols-1 gap-2">

@@ -2,16 +2,15 @@
  * @fileoverview Header component for the movie personnel administration page.
  */
 
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {buttonVariants} from "@/common/components/ui";
 import {cn} from "@/common/lib/utils.ts";
-import {MoviePersonListBreadcrumb} from "@/views/admin/movies/_pages/people-page/sections/breadcrumb.tsx";
+import {buttonVariants} from "@/common/components/ui";
+import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
-import {RoleTypeDepartment} from "@/domains/roletypes";
 import {Movie} from "@/domains/movies";
+import {RoleTypeDepartment} from "@/domains/roletypes";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {MoviePersonListBreadcrumb} from "@/views/admin/movies/_pages/people-page/sections/breadcrumb.tsx";
 
 /** Props for the MoviePeopleHeader component. */
 type HeaderProps = {
@@ -33,28 +32,22 @@ export function MoviePeopleHeader({movie, department}: HeaderProps) {
         <header className="space-y-2">
             <MoviePersonListBreadcrumb movie={movie} department={department}/>
 
-            <div className={cn(
-                "flex",
-                "max-md:flex-col max-md:space-y-5",
-                "md:justify-between md:items-center"
-            )}>
-                <section>
+            <div className="flex max-md:flex-col max-md:space-y-5 md:justify-between md:items-center">
+                <div>
                     <HeaderTitle>{title}</HeaderTitle>
                     <HeaderDescription>{parsedType}</HeaderDescription>
-                </section>
+                </div>
 
                 <nav className="flex space-x-2 items-center max-md:justify-center md:justify-end">
                     <LoggedLink to={`/admin/movies/get/${slug}/people/crew`} className={cn(
-                        "text-primary",
-                        buttonVariants({variant: isCrew ? "outline" : "link"}),
+                        "text-primary", buttonVariants({variant: isCrew ? "outline" : "link"}),
                         !isCrew && "text-neutral-400"
                     )}>
                         Crew
                     </LoggedLink>
 
                     <LoggedLink to={`/admin/movies/get/${slug}/people/cast`} className={cn(
-                        "text-primary",
-                        buttonVariants({variant: isCast ? "outline" : "link"}),
+                        "text-primary", buttonVariants({variant: isCast ? "outline" : "link"}),
                         !isCast && "text-neutral-400"
                     )}>
                         Cast

@@ -1,28 +1,21 @@
 /**
- * @file Specialized dropdown trigger button for administrative navigation menus.
- * @filename NavigationDropdownButton.tsx
+ * @fileoverview Specialized dropdown trigger button for administrative navigation menus.
  */
 
 import {cn} from "@/common/lib/utils.ts";
-import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
-import {ChevronDown} from "lucide-react";
-import {Button, ButtonProps} from "@/common/components/ui/button.tsx";
 import {forwardRef} from "react";
+import {ChevronDown} from "lucide-react";
+import {Button, ButtonProps} from "@/common/components/ui";
 
 /**
- * Props for {@link NavigationDropdownButton}.
- */
+ * Props for the NavigationDropdownButton component. */
 type LinkProps = ButtonProps & {
-    /** The display label for the navigation category. */
     text: string;
-    /** Highlighting flag; true if a child route of this dropdown is currently active. */
     isActive?: boolean;
 };
 
 /**
- * A ref-forwarding trigger for `DropdownMenu` components within a Navigation Bar.
- * @param `params` - Component properties including text and active state.
- * @param `ref` - Forwarded reference to the button element.
+ * A ref-forwarding trigger for DropdownMenu components within a Navigation Bar.
  */
 export const NavigationDropdownButton = forwardRef<HTMLButtonElement, LinkProps>((params, ref) => {
     const {
@@ -39,11 +32,7 @@ export const NavigationDropdownButton = forwardRef<HTMLButtonElement, LinkProps>
             ref={ref}
             variant={variant}
             size={size}
-            className={cn(
-                /** Apply hover transition only if not currently on an active route. */
-                !isActive && HoverLinkCSS,
-                className
-            )}
+            className={cn(!isActive && "link-button", className)}
             {...rest}
         >
             {text} <ChevronDown/>

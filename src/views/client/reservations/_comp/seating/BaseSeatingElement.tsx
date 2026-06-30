@@ -3,8 +3,6 @@
  */
 
 import {cn} from "@/common/lib/utils.ts";
-import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
-import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import {ReactElement} from "react";
 
 /** Category of seating element determining its visual style. */
@@ -17,12 +15,6 @@ export type ElementProps = {
     elementCSS?: string;
     labelCSS?: string;
 }
-
-/** Fixed seating element dimensions. */
-const SIZE_CSS = "h-8 w-8";
-
-/** Shared container styling for all seating elements. */
-const CONTAINER_CSS = cn(RoundedBorderCSS, SIZE_CSS);
 
 /** Variant-specific element and label colour tokens. */
 const COLOUR_CSS: Record<ElementType, { element: string, label: string }> = {
@@ -37,16 +29,15 @@ export function BaseSeatingElement(
 ): ReactElement {
     return (
         <div className={cn(
-            CONTAINER_CSS,
             COLOUR_CSS[type].element,
-            "flex items-center justify-center",
+            "flex items-center justify-center rounded-container-border h-8 w-8",
             elementCSS,
         )}>
             {
                 label && (
-                    <SecondarySpan className={cn(COLOUR_CSS[type].label, labelCSS)}>
+                    <span className={cn("secondary-text", COLOUR_CSS[type].label, labelCSS)}>
                         {label}
-                    </SecondarySpan>
+                    </span>
                 )
             }
         </div>

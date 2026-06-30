@@ -3,16 +3,15 @@
  */
 
 import {ReactElement} from "react";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
+import {PageSectionHeader} from "@/views/common/_comp";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 import {MovieReviewDetailsCard} from "@/views/client/movie-reviews/_feat";
 import {
     FeaturedReviewsByMovie,
     FeaturedReviewsByMovieSchema,
     useFetchFeaturedReviewsByMovie
 } from "@/domains/movie-reviews/_feat";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
 
 /** Props for the MovieInfoFeaturedReviewsSection component. */
 type SectionProps = {
@@ -35,28 +34,11 @@ export function MovieInfoFeaturedReviewsSection(
         <QueryDataLoader query={query}>
             {({reviews, userReview}: FeaturedReviewsByMovie) => (
                 <section className="space-y-4">
-                    <SectionHeader className={SectionHeaderCSS}>
-                        Featured Reviews
-                    </SectionHeader>
+                    <PageSectionHeader>Featured Reviews</PageSectionHeader>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        {
-                            userReview &&
-                            <MovieReviewDetailsCard
-                                isUser={true}
-                                review={userReview}
-                                canDelete={true}
-                            />
-                        }
-
-                        {
-                            reviews.map((review) => (
-                                <MovieReviewDetailsCard
-                                    key={review._id}
-                                    review={review}
-                                />
-                            ))
-                        }
+                        {userReview && <MovieReviewDetailsCard isUser={true} review={userReview} canDelete={true}/>}
+                        {reviews.map((review) => (<MovieReviewDetailsCard key={review._id} review={review}/>))}
                     </div>
                 </section>
             )}

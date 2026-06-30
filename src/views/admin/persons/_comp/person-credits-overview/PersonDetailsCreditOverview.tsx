@@ -4,10 +4,9 @@
 
 import {ReactElement} from 'react';
 import {SROnly} from "@/views/common/_comp/screen-readers";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {PersonFilmography} from "@/domains/movie-credits";
-import {PersonDetailsCreditList} from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditList.tsx";
+import {PersonDetailsCreditList} from "@/views/admin/persons/_comp";
 
 /** Props for the PersonDetailsCreditOverview component. */
 type OverviewProps = {
@@ -39,14 +38,14 @@ export function PersonDetailsCreditOverview(
         <div className="space-y-4">
             {castCredits.length > 0 && (
                 <section className="space-y-4">
-                    <SectionHeader srOnly={true}>{personName} : CAST Credits</SectionHeader>
+                    <SROnly text={`${personName} : CAST Credits`} />
                     <PersonDetailsCreditList department="CAST" personName={personName} roleTypeList={castCredits}/>
                 </section>
             )}
 
             {crewCredits.length > 0 && (
                 <section className="space-y-4">
-                    <SectionHeader srOnly={true}>{personName} : CREW Credits</SectionHeader>
+                    <SROnly text={`${personName} : CREW Credits`} />
                     <PersonDetailsCreditList department="CREW" personName={personName} roleTypeList={crewCredits}/>
                 </section>
             )}

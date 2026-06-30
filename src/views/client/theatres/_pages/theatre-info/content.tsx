@@ -2,17 +2,14 @@
  * @fileoverview Presentational component for rendering theatre details and screen listings.
  */
 
-import {TheatreScreenSchedule} from "@/domains/theatre-screens/_schema/model";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {PageFlexWrapper} from "@/views/common/_comp/page";
-
-import {TheatreDetails} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
-import {TheatreScreenShowingSelectCard} from "@/views/client/theatre-screens/_feat/showing-selector";
 import {ReactElement} from "react";
+import {PageFlexWrapper, SectionTitle} from "@/views/common/_comp";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
-import {formatTheatreDetails} from "@/domains/theatres/_feat/formatters";
+
+import {TheatreScreenSchedule} from "@/domains/theatre-screens";
+import {formatTheatreDetails, TheatreDetails} from "@/domains/theatres";
+import {TheatreScreenShowingSelectCard} from "@/views/client/theatre-screens/_feat";
 
 /** Props for the TheatreInfoPageContent component. */
 type ContentProps = {
@@ -36,10 +33,9 @@ export function TheatreInfoPageContent(
             </header>
 
             {
-                screens.length > 0
-                    ? (
+                screens.length > 0 ? (
                         <section className="flex-1 space-y-2">
-                            <SectionHeader>Screens</SectionHeader>
+                            <SectionTitle>Screens</SectionTitle>
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                                 {screens.map((screen) => (
                                     <TheatreScreenShowingSelectCard
@@ -51,12 +47,7 @@ export function TheatreInfoPageContent(
                             </div>
                         </section>
                     )
-                    : (
-                        <EmptyArrayContainer
-                            text="There Are No Screens"
-                            className="flex-1"
-                        />
-                    )
+                    : <EmptyArrayContainer text="There Are No Screens" className="flex-1"/>
             }
         </PageFlexWrapper>
     );

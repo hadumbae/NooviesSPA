@@ -3,11 +3,10 @@
  */
 
 import {ReactElement} from "react";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import {URLString} from "@/common/schema/strings/URLStringSchema.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {MoviePosterImage} from "@/views/admin/movies/_comp";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 /** Props for the MovieInfoReviewsPageHeader component. */
 type HeaderProps = {

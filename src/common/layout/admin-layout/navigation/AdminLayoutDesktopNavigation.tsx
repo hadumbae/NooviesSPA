@@ -10,14 +10,12 @@ import AdminLayoutShowingNavigationDropdown
     from "@/common/layout/admin-layout/navigation/AdminLayoutShowingNavigationDropdown.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import {
-    useAuthLogoutSubmitMutation
-} from "@/domains/auth/_feat/auth-logout/useAuthLogoutSubmitMutation.ts";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import {useAuthLogoutSubmitMutation} from "@/domains/auth/_feat/auth-logout/useAuthLogoutSubmitMutation.ts";
 import BaseLayoutDesktopThemeDropdown
     from "@/common/layout/common-layout/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";
 import AdminLayoutDashboardNavigationDropdown
     from "@/common/layout/admin-layout/navigation/AdminLayoutDashboardNavigationDropdown.tsx";
+import {SROnly} from "@/views/common/_comp";
 
 /**
  * Orchestrates the horizontal navigation suite for administrative users on desktop.
@@ -30,7 +28,7 @@ const AdminLayoutDesktopNavigation: FC = () => {
 
     return (
         <section className="flex items-center space-x-0 font-spaceGrotesk">
-            <SectionHeader srOnly={true}>Desktop Navigation</SectionHeader>
+            <SROnly text="Desktop Navigation"/>
 
             {/** Category-based navigation dropdowns */}
             <AdminLayoutDashboardNavigationDropdown/>

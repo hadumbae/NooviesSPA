@@ -1,31 +1,26 @@
 /**
- * @file A specialized paragraph component for subsection descriptions.
- * @filename SubsectionDescription.tsx
+ * @fileoverview Renders a standardised description paragraph for subsection headers.
  */
 
+import {ReactElement, ReactNode} from "react";
 import {cn} from "@/common/lib/utils.ts";
-import {ReactNode} from "react";
 
-/**
- * Props for the {@link SubsectionDescription} component.
- */
+/** Props for the SubsectionDescription component. */
 type DescProps = {
-    /** The descriptive text or elements. */
     children?: ReactNode;
-
-    /** Optional additional CSS classes for layout or typography adjustments. */
     className?: string;
+    text?: string;
 };
 
 /**
- * Renders a standardized description paragraph meant to accompany subsection titles.
+ * Renders a standardised description paragraph meant to accompany subsection titles.
  */
-export const SubsectionDescription = (
-    {children, className}: DescProps
-) => {
+export function SubsectionDescription(
+    {children, className, text}: DescProps
+): ReactElement {
     return (
         <p className={cn("subsection-description", className)}>
-            {children}
+            {children ?? text}
         </p>
     );
-};
+}

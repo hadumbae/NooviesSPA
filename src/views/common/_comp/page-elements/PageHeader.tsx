@@ -4,8 +4,8 @@
 
 import {ReactElement, ReactNode} from "react";
 import {cn} from "@/common/lib/utils.ts";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
+import {HeaderTitle} from "@/views/common/_comp/page-headers/HeaderTitle.tsx";
+import {HeaderDescription} from "@/views/common/_comp/page-headers/HeaderDescription.tsx";
 
 /** Props for the PageHeader component. */
 export type HeaderProps = {

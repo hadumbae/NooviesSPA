@@ -1,7 +1,6 @@
 import {ReactElement} from "react";
 import {Plus} from "lucide-react";
-import {HeaderDescription} from "@/common/components/page/headers";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 
 /**

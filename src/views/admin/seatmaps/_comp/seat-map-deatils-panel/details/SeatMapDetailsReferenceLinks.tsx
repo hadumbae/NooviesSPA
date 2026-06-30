@@ -2,12 +2,12 @@
  * @fileoverview Navigation links for the seat map details panel.
  */
 
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
+import {ReactElement} from "react";
 import {Clapperboard, Theater, TvMinimal} from "lucide-react";
 import StackedIconCardLink from "@/common/components/navigation/logged-link/StackedIconCardLink.tsx";
 import buildString from "@/common/utility/buildString.ts";
-import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
-import {ReactElement} from "react";
+import {ShowingDetails} from "@/domains/showings";
+import {SROnly} from "@/views/common/_comp";
 
 /** Props for the SeatMapDetailsReferenceLinks component. */
 type SectionProps = {
@@ -29,7 +29,7 @@ export function SeatMapDetailsReferenceLinks({showing}: SectionProps): ReactElem
 
     return (
         <section>
-            <SectionHeader srOnly={true}>Showing Links</SectionHeader>
+            <SROnly text="Showing Links"/>
 
             <div className="space-y-2">
                 <div className="grid grid-cols-2 gap-2">

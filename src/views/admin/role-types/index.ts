@@ -1,3 +1,3 @@
 export * from "./_feat";
 export * from "./_comp";
-export * from "./list-page";
+export * from "./_pages";

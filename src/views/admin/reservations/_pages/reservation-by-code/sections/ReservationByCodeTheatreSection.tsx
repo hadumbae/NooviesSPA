@@ -2,17 +2,14 @@
  * @fileoverview Physical venue and auditorium details section for a reservation.
  */
 
-import {AdminReservation} from "@/domains/reservations/_schema/model";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
+import {ReactElement} from "react";
+import {Card, CardContent, Separator} from "@/common/components/ui";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {OrientationValues} from "@/common/schema/enums/OrientationEnumSchema.ts";
 import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
 import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
-import {Separator} from "@/common/components/ui/separator.tsx";
-import {ReactElement} from "react";
+import {PageSectionHeader, SubsectionTitle} from "@/views/common/_comp";
+import {AdminReservation} from "@/domains/reservations";
 
 /** Props for the ReservationByCodeTheatreSection component. */
 type SectionProps = {
@@ -33,14 +30,12 @@ export function ReservationByCodeTheatreSection(
 
     return (
         <section className="space-y-4">
-            <SectionHeader className={SectionHeaderCSS}>
-                Theatre
-            </SectionHeader>
+            <PageSectionHeader text="Theatre"/>
 
             <Card>
                 <CardContent className="p-3 space-y-3">
                     <div>
-                        <PrimaryHeaderText as="h2">{theatreName}</PrimaryHeaderText>
+                        <SubsectionTitle as="h2">{theatreName}</SubsectionTitle>
                         <SecondaryHeaderText as="h3">Theatre</SecondaryHeaderText>
                     </div>
 

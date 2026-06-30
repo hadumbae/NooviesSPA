@@ -3,11 +3,10 @@
  */
 
 import {ReactElement} from "react";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {SectionHeaderCSS} from "@/common/constants/css/TextCSS.ts";
 import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PageSectionHeader} from "@/views/common/_comp";
+import {MovieReviewDetails} from "@/domains/movie-reviews";
 import {MovieReviewDetailsCard} from "@/views/client/movie-reviews/_feat";
-import {MovieReviewDetails} from "@/domains/movie-reviews/_schema";
 
 /** Props for the MovieInfoReviewListSection component. */
 type SectionProps = {
@@ -24,9 +23,7 @@ export function MovieInfoReviewListSection(
 ): ReactElement {
     return (
         <section className="space-y-4">
-            <SectionHeader className={SectionHeaderCSS}>
-                Reviews
-            </SectionHeader>
+            <PageSectionHeader>Reviews</PageSectionHeader>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {reviews.map(review => (

@@ -2,24 +2,21 @@
  * @fileoverview Card component for displaying a detailed summary of a user's movie review.
  */
 
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import {
-    MovieReviewIndexCardMovieSection
-} from "@/views/client/movie-reviews/_comp/index-card/MovieReviewIndexCardMovieSection.tsx";
-import {Separator} from "@/common/components/ui/separator.tsx";
-import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
-import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import {ReactElement, useState} from "react";
+import {Card, CardContent, Separator} from "@/common/components/ui";
 import {simplifyMovieReview} from "@/domains/movie-reviews/_feat/formatters";
 import {type MyMovieReview} from "@/domains/movie-reviews/_schema";
 import {MovieReviewFormPopup} from "@/views/client/movie-reviews/_feat";
+import {SubsectionTitle} from "@/views/common/_comp";
+import {IsRecommendedBadge} from "@/views/client/movie-reviews/_comp/badges";
+import {MovieReviewRatingStars, MovieReviewText} from "@/views/client/movie-reviews/_comp/display";
 import {
-    IsRecommendedBadge,
-    MovieReviewIndexCardActions,
-    MovieReviewRatingStars,
-    MovieReviewText
-} from "@/views/client/movie-reviews/_comp";
+    MovieReviewIndexCardMovieSection
+} from "@/views/client/movie-reviews/_comp/index-card/MovieReviewIndexCardMovieSection.tsx";
+import {
+    MovieReviewIndexCardActions
+} from "@/views/client/movie-reviews/_comp/index-card/MovieReviewIndexCardActions.tsx";
+
 
 /** Props for the MovieReviewIndexCard component. */
 type CardProps = {
@@ -47,8 +44,8 @@ export function MovieReviewIndexCard({review}: CardProps): ReactElement {
 
                 <section className="flex-1 space-y-5">
                     <div>
-                        <PrimaryHeaderText as="h2">{summary}</PrimaryHeaderText>
-                        <SecondarySpan className="italic">{dateWritten}</SecondarySpan>
+                        <SubsectionTitle as="h2">{summary}</SubsectionTitle>
+                        <span className="secondary-text italic">{dateWritten}</span>
                     </div>
 
                     {reviewText && <MovieReviewText>{reviewText}</MovieReviewText>}
@@ -59,7 +56,7 @@ export function MovieReviewIndexCard({review}: CardProps): ReactElement {
                 <section className="flex items-center justify-between">
                     <div className="flex space-x-3 items-center">
                         <MovieReviewRatingStars size={15} rating={rating}/>
-                        <SecondarySpan>{rating}/5</SecondarySpan>
+                        <span className="secondary-text">{rating}/5</span>
                     </div>
 
                     <div>
@@ -67,7 +64,7 @@ export function MovieReviewIndexCard({review}: CardProps): ReactElement {
                     </div>
 
                     <div className="space-x-2">
-                        <PrimarySpan>Helpful • {helpfulCount}</PrimarySpan>
+                        <span className="primary-text">Helpful • {helpfulCount}</span>
 
                         <MovieReviewIndexCardActions
                             reviewID={_id}

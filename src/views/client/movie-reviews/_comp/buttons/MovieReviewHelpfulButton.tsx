@@ -2,11 +2,10 @@
  * @fileoverview Component for displaying and interacting with movie review helpful counts.
  */
 
-import {Button, buttonVariants} from "@/common/components/ui/button.tsx";
-import {ThumbsUp} from "lucide-react";
-import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
-import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";
+import {ThumbsUp} from "lucide-react";
+import {Button, buttonVariants} from "@/common/components/ui";
+import {cn} from "@/common/lib/utils.ts";
 
 /** Props for the MovieReviewHelpfulButton component. */
 type HelpfulProps = {
@@ -38,17 +37,15 @@ export function MovieReviewHelpfulButton(
                         >
                             <ThumbsUp
                                 size={buttonSize}
-                                className={cn(
-                                    isLikedByUser && "stroke-yellow-500 fill-yellow-500"
-                                )}
+                                className={cn(isLikedByUser && "stroke-yellow-500 fill-yellow-500")}
                             />
                         </Button>
                     )
             }
 
-            <PrimarySpan>
+            <span className="primary-text">
                 Helpful • {likeCount}
-            </PrimarySpan>
+            </span>
         </div>
     );
 }

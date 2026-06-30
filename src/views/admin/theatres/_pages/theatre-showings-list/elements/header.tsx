@@ -4,12 +4,13 @@
 
 import {ReactElement} from "react";
 import {Plus} from "lucide-react";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
-import {TheatreShowingListBreadcrumbs} from "@/views/admin/theatres/_pages/theatre-showings-list/elements/breadcrumbs.tsx";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
+import {
+    TheatreShowingListBreadcrumbs
+} from "@/views/admin/theatres/_pages/theatre-showings-list/elements/breadcrumbs.tsx";
 
 /** Props for the TheatreShowingListHeader component. */
 type HeaderProps = {

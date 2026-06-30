@@ -1,35 +1,22 @@
 /**
- * @fileoverview Compact summary card for user reservations.
- *
- * @filename MyReservationCompactCard.tsx
+ * @fileoverview Compact summary card for displaying user reservation details.
  */
 
+import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {formatReservationDetails} from "@/domains/reservations/_feat/formatters/formatReservationDetails.ts";
-import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
-import {PopulatedReservation} from "@/domains/reservations/_schema/model";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {
-    ReservationStatusBadge
-} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
+import {ReservationStatusBadge} from "@/views/client/reservations/_comp/reservation-badges";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
-import {ReactElement} from "react";
+import {formatReservationDetails, PopulatedReservation} from "@/domains/reservations";
+import {SROnly} from "@/views/common/_comp/screen-readers";
 
-/** Props for the MyReservationCompactCard component. */
 type CardProps = {
-    /** The fully populated reservation entity to be displayed. */
     reservation: PopulatedReservation;
 };
 
-/**
- * A clickable UI card that presents a high-level overview of a specific reservation.
- */
+/** Clickable UI card that presents a high-level overview of a specific reservation. */
 export function MyReservationCompactCard(
     {reservation}: CardProps
 ): ReactElement {
@@ -71,28 +58,22 @@ export function MyReservationCompactCard(
                 </section>
                 <div className="flex-1 space-y-3">
                     <section className="flex-1 flex flex-col items-center gap-2 lg:gap-3">
-                        <SectionHeader srOnly={true}>
-                            Reservation : Showing Metadata
-                        </SectionHeader>
+                        <SROnly text="Reservation : Showing Metadata"/>
 
-                        <h2 className={cn(
-                            PrimaryTextBaseCSS,
-                            "font-oswald font-extrabold line-clamp-1",
-                            "text-lg"
-                        )}>
+                        <h2 className="primary-text font-oswald font-extrabold line-clamp-1 text-lg">
                             {movieTitle}
                         </h2>
 
-                        <SecondarySpan>{showtime}</SecondarySpan>
-                        <SecondarySpan>{runtime} • {reservationType}</SecondarySpan>
+                        <span className="secondary-text">{showtime}</span>
+                        <span className="secondary-text">{runtime} • {reservationType}</span>
 
                         <div className="flex items-center gap-10">
                             <LabeledGroup label="Tickets">
-                                <PrimarySpan>{ticketCount} tickets</PrimarySpan>
+                                <span className="primary-text">{ticketCount} tickets</span>
                             </LabeledGroup>
 
                             <LabeledGroup label="Price">
-                                <PrimarySpan>${pricePaid} Total</PrimarySpan>
+                                <span className="primary-text">${pricePaid} Total</span>
                             </LabeledGroup>
                         </div>
                     </section>
@@ -100,9 +81,9 @@ export function MyReservationCompactCard(
                     <Separator/>
 
                     <section className="flex flex-col items-center space-y-3">
-                        <PrimarySpan className="font-bold text-lg lg:text-xl">
+                        <span className="primary-text font-bold text-lg lg:text-xl">
                             ||| {uniqueCode} |||
-                        </PrimarySpan>
+                        </span>
                         <ReservationStatusBadge status={status}/>
                     </section>
                 </div>

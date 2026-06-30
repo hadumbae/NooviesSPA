@@ -3,12 +3,13 @@
  */
 
 import {ReactElement} from "react";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {Ellipsis} from "lucide-react";
-import {TheatreDetailsToggles} from "@/views/admin/theatres/_pages/theatre-details-page/elements/toggles.tsx";
-import {TheatreDetailsBreadcrumbs} from "@/views/admin/theatres/_pages/theatre-details-page/elements/breadcrumbs.tsx";
+import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
+import {
+    TheatreDetailsBreadcrumbs,
+    TheatreDetailsToggles
+} from "@/views/admin/theatres/_pages/theatre-details-page/elements";
 
 /** Props for the TheatreDetailsHeader component. */
 export type HeaderProps = {

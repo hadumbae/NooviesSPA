@@ -3,8 +3,7 @@
  */
 
 import {Ellipsis} from "lucide-react";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderSubtitle from "@/common/components/page/headers/HeaderSubtitle.tsx";
+import {HeaderSubtitle, HeaderTitle} from "@/views/common/_comp";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 
 import {formatMovieData, MovieDetails} from "@/domains/movies";

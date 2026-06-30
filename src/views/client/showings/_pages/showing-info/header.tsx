@@ -3,9 +3,8 @@
  */
 
 import {ReactElement} from "react";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {ShowingDetails} from "@/domains/showings/_schema/showing";
+import {ShowingDetails} from "@/domains/showings";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 /** Props for the ShowingInfoPageHeader component. */
 type HeaderProps = {

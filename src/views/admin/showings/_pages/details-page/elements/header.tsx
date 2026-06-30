@@ -5,14 +5,13 @@
 import {ReactElement} from 'react';
 import {DateTime} from "luxon";
 import {Ellipsis} from "lucide-react";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
 import IconButton from "@/common/components/buttons/IconButton.tsx";
 import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 import {MovieTitle} from "@/domains/movies";
-import {ShowingDetailsUISetterContext} from "@/domains/showings/_ctx";
+import {ShowingDetailsUISetterContext} from "@/domains/showings";
 import {ShowingDetailsPageBreadcrumbs} from "@/views/admin/showings/_pages/details-page/elements/breadcrumbs.tsx";
 import {ShowingDetailsPageToggles} from "@/views/admin/showings/_pages/details-page/elements/toggles.tsx";
 

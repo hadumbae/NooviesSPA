@@ -2,16 +2,13 @@
  * @fileoverview Header section for the Theatre Screen details administration page.
  */
 
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
-import {
-    TheatreScreenDetailsToggles
-} from "@/views/admin/theatres/_pages/theatre-screen-details-page/elements/toggles.tsx";
-import {
-    TheatreScreenDetailsBreadcrumbs
-} from "@/views/admin/theatres/_pages/theatre-screen-details-page/elements/breadcrumbs.tsx";
-import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
 import {ReactElement} from "react";
+import {SlugString} from "@/common/schema/strings/simple-strings/SlugString.ts";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
+import {
+    TheatreScreenDetailsBreadcrumbs,
+    TheatreScreenDetailsToggles
+} from "@/views/admin/theatres/_pages/theatre-screen-details-page/elements";
 
 /** Props for the TheatreScreenDetailsHeader component. */
 type DetailsHeader = {

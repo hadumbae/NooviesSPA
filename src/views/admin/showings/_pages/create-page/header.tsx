@@ -3,8 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "@/common/components/page/headers/HeaderDescription.tsx";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp";
 
 /** Header for the Create Showings page that displays the title and submission instructions. */
 export function ShowingCreateHeader(): ReactElement {

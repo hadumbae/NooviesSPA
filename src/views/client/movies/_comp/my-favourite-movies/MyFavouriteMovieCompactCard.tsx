@@ -5,17 +5,13 @@
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui";
 import {Info} from "lucide-react";
-import {cn} from "@/common/lib/utils.ts";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import SecondarySpan from "@/views/common/_comp/text/SecondarySpan.tsx";
 import buildString from "@/common/utility/buildString.ts";
-import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
-import {BrowseMovieSummaryDialog} from "@/views/client/movies/_comp/browse-movie-info";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
+import {BrowseMovieSummaryDialog} from "@/views/client/movies/_comp/browse-movie-info";
 
 import {formatMovieData, MovieDetails} from "@/domains/movies";
+import {SubsectionTitle} from "@/views/common/_comp";
 
 /** Props for the MyFavouriteMovieCompactCard component. */
 type CardProps = {
@@ -44,20 +40,20 @@ export function MyFavouriteMovieCompactCard(
                                     to={`/browse/movies/${slug}`}
                                     className="hover:underline underline-offset-4"
                                 >
-                                    <PrimaryHeaderText as="h2">{title}</PrimaryHeaderText>
+                                    <SubsectionTitle>{title}</SubsectionTitle>
                                 </LoggedLink>
 
-                                <SecondarySpan>{movieMeta}</SecondarySpan>
+                                <span className="secondary-text">{movieMeta}</span>
                             </section>
 
                             <BrowseMovieSummaryDialog movie={movie}>
-                                <Info size={20} className={cn(HoverLinkCSS, "cursor-pointer")}/>
+                                <Info size={20} className="hover-button cursor-pointer"/>
                             </BrowseMovieSummaryDialog>
                         </div>
 
-                        <PrimarySpan className="italic">
+                        <span className="primary-text italic">
                             "{tagline}"
-                        </PrimarySpan>
+                        </span>
                     </div>
                 </div>
             </CardContent>

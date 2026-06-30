@@ -4,8 +4,7 @@
  */
 
 import {ReactElement} from "react";
-import HeaderTitle from "../../../../common/components/page/headers/HeaderTitle.tsx";
-import HeaderDescription from "../../../../common/components/page/headers/HeaderDescription.tsx";
+import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 /**
  * Props for the {@link BrowseGenreInfoPageHeader} component.

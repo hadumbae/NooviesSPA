@@ -1,15 +1,15 @@
 /**
  * @fileoverview Hero banner for the public-facing Genre detail page.
  */
-import {ChevronLeft} from "lucide-react";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import {Badge} from "@/common/components/ui/badge.tsx";
-import SectionHeader from "@/common/components/page/SectionHeader.tsx";
-import {Genre} from "@/domains/genres/_schema";
-import {GenreImageBanner} from "@/views/admin/genres/_comp";
+
 import {ReactElement} from "react";
+import {ChevronLeft} from "lucide-react";
+import {Badge} from "@/common/components/ui";
+import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {SROnly, SubsectionSubtitle, SubsectionTitle} from "@/views/common/_comp";
+
+import {Genre} from "@/domains/genres";
+import {GenreImageBanner} from "@/views/admin/genres/_comp";
 
 /** Props for the GenreInfoBanner component. */
 type BannerProps = {
@@ -34,14 +34,13 @@ export function GenreInfoBanner({genre}: BannerProps): ReactElement {
                 </LoggedHoverLink>
 
                 <section>
-                    <SectionHeader srOnly={true}>Genre Details</SectionHeader>
-                    <PrimaryHeaderText as="h2" className="text-primary">{name}</PrimaryHeaderText>
-                    <SecondaryHeaderText as="h3">Genre</SecondaryHeaderText>
+                    <SROnly text="Genre Details"/>
+                    <SubsectionTitle as="h2" className="text-primary">{name}</SubsectionTitle>
+                    <SubsectionSubtitle as="h3">Genre</SubsectionSubtitle>
                 </section>
 
                 <section>
-                    <SectionHeader srOnly={true}>Genre Description</SectionHeader>
-
+                    <SROnly text="Genre Description"/>
                     <p className="primary-text text-xs lg:text-sm md:line-clamp-6 italic text-neutral-600">
                         {description}
                     </p>

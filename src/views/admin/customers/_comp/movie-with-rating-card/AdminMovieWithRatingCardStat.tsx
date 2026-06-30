@@ -2,10 +2,9 @@
  * @fileoverview Reusable stat component for displaying labeled data points within an admin card.
  */
 
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import PrimarySpan from "@/views/common/_comp/text/PrimarySpan.tsx";
-import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";
+import {cn} from "@/common/lib/utils.ts";
+import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 
 /** Props for the AdminMovieWithRatingCardStat component. */
 type StatProps = {
@@ -20,13 +19,10 @@ export function AdminMovieWithRatingCardStat(
 ): ReactElement {
     return (
         <div className={cn("px-2", className)}>
-            <LabeledGroup
-                label={label}
-                orientation="vertical"
-            >
-                <PrimarySpan className="line-clamp-1 font-semibold text-sm md:text-base">
+            <LabeledGroup label={label} orientation="vertical">
+                <span className="primary-text line-clamp-1 font-semibold text-sm md:text-base">
                     {text}
-                </PrimarySpan>
+                </span>
             </LabeledGroup>
         </div>
     );

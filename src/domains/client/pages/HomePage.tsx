@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import HeaderTitle from "@/common/components/page/headers/HeaderTitle.tsx";
+import {HeaderTitle} from "@/views/common/_comp/page-headers";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 
 const HomePage: FC = () => {
