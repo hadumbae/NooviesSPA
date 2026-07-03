@@ -7,7 +7,7 @@ import {ISO3166Alpha2CountryCode} from "@/common/schema/enums/ISO3166Alpha2Count
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 
 /** Configuration for fetching movie overview information. */
-export type FetchInfoOverviewConfig = {
+export type GetOverviewDataForMovieInfoViewConfig = {
     slug: SlugString;
     queries?: {
         reviewPage: number;
@@ -15,8 +15,17 @@ export type FetchInfoOverviewConfig = {
     };
 };
 
+/** Configuration for fetching movie review data. */
+export type GetReviewsForMovieInfoViewConfig = {
+    slug: SlugString;
+    queries?: {
+        reviewPage?: number;
+        reviewPerPage?: number;
+    };
+};
+
 /** Parameters for retrieving movie credits. */
-export type GetCreditsForMovieViewConfig = {
+export type GetCreditsForMovieInfoViewConfig = {
     slug: SlugString;
 };
 
@@ -27,7 +36,7 @@ export type GetShowingsForMovieViewQueryStrings = PaginationValues & {
 };
 
 /** Parameters for retrieving movie showings including the slug and query filters. */
-export type GetShowingsForMovieViewConfig = {
+export type GetShowingsForMovieInfoViewConfig = {
     slug: SlugString;
     queries: GetShowingsForMovieViewQueryStrings;
 };

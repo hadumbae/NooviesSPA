@@ -8,7 +8,7 @@ import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
-import {getFetchMovieInfoCreditsViewData} from "@/domains/movies/_feat/client-view-data/repository";
+import {getCreditForMovieInfoView} from "@/domains/movies/_feat/client-view-data/repository";
 import {MovieClientViewDataQueryKeys} from "@/domains/movies/_feat/client-view-data/hooks/queryKeys.ts";
 import {MovieInfoCreditViewData, MovieInfoCreditViewSchema} from "@/domains/movies/_feat/client-view-data/schemas";
 
@@ -23,7 +23,7 @@ export function useFetchMovieInfoCreditsData(
     {slug, options}: FetchParams,
 ): UseQueryResult<MovieInfoCreditViewData, HttpResponseError> {
     const fetchData = buildQueryFn<MovieInfoCreditViewData>({
-        action: () => getFetchMovieInfoCreditsViewData({slug: slug}),
+        action: () => getCreditForMovieInfoView({slug: slug}),
         schema: MovieInfoCreditViewSchema,
     });
 

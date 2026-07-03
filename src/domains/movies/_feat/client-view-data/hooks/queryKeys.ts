@@ -9,6 +9,7 @@ export const MovieClientViewDataQueryKeys = buildQueryKey(
     ["movies", "views", "client"],
     {
         infoOverview: ["info", "overview"],
+        infoReviews: ["info", "reviews"],
         infoCredits: ["info", "credits"],
         infoShowings: ["info", "showings"],
     }

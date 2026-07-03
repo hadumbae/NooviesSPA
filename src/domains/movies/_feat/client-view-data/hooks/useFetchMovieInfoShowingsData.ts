@@ -11,7 +11,7 @@ import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefault
 import {MovieClientViewDataQueryKeys} from "@/domains/movies/_feat/client-view-data/hooks/queryKeys.ts";
 import {MovieInfoShowingViewData, MovieInfoShowingViewSchema} from "@/domains/movies/_feat/client-view-data/schemas";
 import {
-    getShowingsForMovieView,
+    getShowingsForMovieInfoView,
     GetShowingsForMovieViewQueryStrings
 } from "@/domains/movies/_feat/client-view-data/repository";
 
@@ -27,7 +27,7 @@ export function useFetchMovieInfoShowingsData(
     {slug, queries, options}: FetchParams
 ): UseQueryResult<MovieInfoShowingViewData, HttpResponseError> {
     const fetchData = buildQueryFn<MovieInfoShowingViewData>({
-        action: () => getShowingsForMovieView({slug, queries}),
+        action: () => getShowingsForMovieInfoView({slug, queries}),
         schema: MovieInfoShowingViewSchema,
     });
 

@@ -1,27 +1,31 @@
 import {MovieClientViewBaseURL} from "@/domains/movies/_feat/client-view-data/repository/baseURL.ts";
 import {
-    getFetchMovieInfoCreditsViewData,
-    getFetchMovieInfoOverviewViewData,
-    getShowingsForMovieView
+    getCreditForMovieInfoView,
+    getOverviewDataForMovieInfoView,
+    getReviewsForMovieInfoView,
+    getShowingsForMovieInfoView
 } from "@/domains/movies/_feat/client-view-data/repository/repository.ts";
 import {
-    FetchInfoOverviewConfig,
-    GetCreditsForMovieViewConfig,
-    GetShowingsForMovieViewConfig,
+    GetOverviewDataForMovieInfoViewConfig,
+    GetReviewsForMovieInfoViewConfig,
+    GetCreditsForMovieInfoViewConfig,
+    GetShowingsForMovieInfoViewConfig,
     GetShowingsForMovieViewQueryStrings
 } from "@/domains/movies/_feat/client-view-data/repository/repository.types.ts";
 
 export {
     MovieClientViewBaseURL,
-    getFetchMovieInfoOverviewViewData,
-    getFetchMovieInfoCreditsViewData,
-    getShowingsForMovieView,
+    getOverviewDataForMovieInfoView,
+    getCreditForMovieInfoView,
+    getReviewsForMovieInfoView,
+    getShowingsForMovieInfoView,
 }
 
 export type {
-    FetchInfoOverviewConfig,
-    GetCreditsForMovieViewConfig,
+    GetOverviewDataForMovieInfoViewConfig,
+    GetReviewsForMovieInfoViewConfig,
+    GetCreditsForMovieInfoViewConfig,
     GetShowingsForMovieViewQueryStrings,
-    GetShowingsForMovieViewConfig,
+    GetShowingsForMovieInfoViewConfig,
 }
 
