@@ -1,6 +1,8 @@
 import {
+    PersonCastCreditRoleGroup,
     PersonCreditRoleGroup,
-    PersonCreditRoleGroupSchema
+    PersonCreditRoleGroupSchema,
+    PersonCrewCreditRoleGroup
 } from "@/domains/movie-credits/_feat/person-credit/schema/PersonCreditRoleGroupSchema.ts";
 import {
     PersonCreditStats,
@@ -30,9 +32,12 @@ export {
 
 export type {
     PersonCreditRoleGroup,
+    PersonCastCreditRoleGroup,
+    PersonCrewCreditRoleGroup,
     PersonCreditStats,
     PersonFilmography,
     PersonCrewCredit,
     PersonCastCredit,
     PersonCredit,
 }
+

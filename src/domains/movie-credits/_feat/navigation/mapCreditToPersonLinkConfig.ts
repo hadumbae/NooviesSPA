@@ -5,9 +5,7 @@
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
 import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
 
-import {
-    MovieCreditDetails
-} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
+import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
 
 /** Parameters for the mapCreditToPersonLinkConfig function. */
 type LinkParams = {
@@ -21,14 +19,14 @@ export function mapCreditToPersonLinkConfig(
 ): LinkConfig {
     const {
         _id: creditID,
-        person: {_id: personID, name},
+        person: {_id: personID, name, slug: personSlug},
         movie: {_id: movieID},
         roleType: {category, roleName},
         department,
     } = credit;
 
     return {
-        to: `/browse/persons/${personID}`,
+        to: `/browse/persons/${personSlug}`,
         label: name,
         message: "Navigate to person's details from credits.",
         context: filterNullishAttributes({

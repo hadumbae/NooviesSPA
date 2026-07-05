@@ -12,6 +12,7 @@ import {TheatreRoutes} from "@/domains/theatres";
 import {AdminMovieRoutes, BrowseMovieRoutes} from "@/domains/movies";
 import {AdminGenreRoutes, ClientGenreRoutes} from "@/domains/genres";
 import {BrowseShowingRoutes, ShowingRoutes} from "@/domains/showings";
+import {BrowsePersonRoutes} from "@/domains/persons";
 
 // --- ADMIN ROUTES ---
 
@@ -35,6 +36,7 @@ const clientRoutes: RouteObject[] = [
     ...ClientGenreRoutes,
     ...BrowseMovieRoutes,
     ...BrowseShowingRoutes,
+    ...BrowsePersonRoutes,
 ];
 
 // --- AGGREGATE ---

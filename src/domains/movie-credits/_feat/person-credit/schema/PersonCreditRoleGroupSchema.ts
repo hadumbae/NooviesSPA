@@ -5,7 +5,11 @@
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/_schemas";
 import {RoleTypeDepartmentSchema} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
-import {PersonCreditSchema} from "@/domains/movie-credits/_feat/person-credit/schema/PersonCreditSchema.ts";
+import {
+    PersonCastCredit,
+    PersonCreditSchema,
+    PersonCrewCredit
+} from "@/domains/movie-credits/_feat/person-credit/schema/PersonCreditSchema.ts";
 import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {RoleTypeSchema} from "@/domains/roletypes/_schema/model/RoleTypeSchema.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
@@ -21,8 +25,11 @@ export const PersonCreditRoleGroupSchema = z.object({
     roleType: RoleTypeSchema,
 });
 
-/**
- * Validated type for a single group of a person's movie credits organized by role.
- */
+/** Validated type for a single group of a person's movie credits organized by role. */
 export type PersonCreditRoleGroup = z.infer<typeof PersonCreditRoleGroupSchema>;
 
+/** Represents a group of movie credits where the person acted in a specific role. */
+export type PersonCastCreditRoleGroup = Omit<PersonCreditRoleGroup, "topCredits"> & { topCredits: PersonCastCredit[] };
+
+/** Represents a group of movie credits where the person worked in a specific crew role. */
+export type PersonCrewCreditRoleGroup = Omit<PersonCreditRoleGroup, "topCredits"> & { topCredits: PersonCrewCredit[] };
