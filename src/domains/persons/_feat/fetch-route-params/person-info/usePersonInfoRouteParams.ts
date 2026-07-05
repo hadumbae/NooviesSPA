@@ -3,7 +3,7 @@
  */
 
 import {useParams} from "react-router-dom";
-import {PersonInfoURLParamsSchema} from "src/domains/persons/_feat/fetch-route-params/person-info/urlSchema.ts";
+import {PersonInfoURLParamsSchema} from "@/domains/persons/_feat/fetch-route-params/person-info/urlSchema.ts";
 import {useThrowRouteParamError} from "@/common/_feat/fetch-route-params";
 import {SlugString} from "@/common/_schemas";
 
