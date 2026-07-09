@@ -62,9 +62,9 @@ export function PersonQueryOptionFormView(
                 <PageSectionHeader as="h2" text="Sorts"/>
 
                 <div className="flex flex-wrap space-x-3">
-                    <HookFormSortToggle name="sortByName" label="Name" control={control}/>
-                    <HookFormSortToggle name="sortByDOB" label="Date Of Birth" control={control}/>
-                    <HookFormSortToggle name="sortByNationality" label="Nationality" control={control}/>
+                    <HookFormSortToggle name="sortByName" label="Name"/>
+                    <HookFormSortToggle name="sortByDOB" label="Date Of Birth"/>
+                    <HookFormSortToggle name="sortByNationality" label="Nationality"/>
                 </div>
             </fieldset>
         </div>

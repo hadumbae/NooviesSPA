@@ -32,8 +32,7 @@ export function SetReservationCodeFormCard(
                     placeholder="Code"
                     name="code"
                     control={control}
-                    className="flex-1"
-                    inputClassName="text-center"
+                    classNames={{container: "flex-1", input: "text-center"}}
                 />
 
                 <Button type="submit" variant="primary" form={formID}>

@@ -1,6 +1,5 @@
 /**
- * @fileoverview Reusable sort toggle component integrated with React Hook Form.
- * Cycles through three states: "None" (unsorted), "Asc" (ascending), and "Desc" (descending).
+ * @fileoverview Sort toggle component integrated with React Hook Form.
  */
 
 import {ReactElement} from "react";
@@ -18,6 +17,7 @@ import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.
 
 /**
  * Renders a button that toggles between sorting states.
+ * Requires wrapping in a React Hook Form provider.
  */
 export function HookFormSortToggle<TValues extends FieldValues>(
     {name, label, className, disabled}: Omit<HookFormInputControlProps<TValues>, "control">
@@ -37,8 +37,8 @@ export function HookFormSortToggle<TValues extends FieldValues>(
             const current = options[currentIndex] ?? options[0];
 
             return (
-                <FormItem className={cn("flex items-center justify-between space-y-0", className)}>
-                    {label && <FormLabel className="text-sm font-medium">{label}</FormLabel>}
+                <FormItem className={cn("flex items-center space-y-0", className)}>
+                    {label && <FormLabel className="text-sm font-bold">{label}</FormLabel>}
 
                     <FormControl>
                         <Button

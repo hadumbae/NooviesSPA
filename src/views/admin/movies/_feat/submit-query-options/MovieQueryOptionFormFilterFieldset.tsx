@@ -34,7 +34,7 @@ export function MovieQueryOptionFormFilterFieldset(
                         name="title"
                         label="Title"
                         control={control}
-                        className="col-span-2"
+                        classNames={{container: "col-span-2"}}
                     />
                 )}
 
@@ -43,7 +43,7 @@ export function MovieQueryOptionFormFilterFieldset(
                         name="originalTitle"
                         label="Original Title"
                         control={control}
-                        className="col-span-2"
+                        classNames={{container: "col-span-2"}}
                     />
                 )}
 

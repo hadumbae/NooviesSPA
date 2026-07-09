@@ -31,7 +31,7 @@ export function SeatSubmitFormNonSeatFieldset(
                         name="row"
                         label="Row"
                         control={control}
-                        className={cn(isNestedView && "max-lg:col-span-2")}
+                        classNames={{container: cn(isNestedView && "max-lg:col-span-2")}}
                     />
                 }
 

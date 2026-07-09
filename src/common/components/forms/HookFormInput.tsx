@@ -1,65 +1,35 @@
 /**
- * @file Reusable, typed input component integrated with react-hook-form and shadcn/ui.
- * @filename HookFormInput.tsx
+ * @fileoverview Generic form input component integrated with react-hook-form and shadcn/ui.
  */
 
-import {
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage
-} from "@/common/components/ui/form.tsx";
-import {Input} from "@/common/components/ui/input.tsx";
+import {ReactElement} from "react";
+import {ControllerProps, FieldValues} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormInputCSS} from "@/common/constants/css/HookFormInputCSS.ts";
-import {FieldValues} from "react-hook-form";
 import {HookFormInputProps} from "@/common/type/input/HookFormInputProps.ts";
+import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input} from "@/common/components/ui";
 
-/**
- * A generic form input wrapper that synchronizes Shadcn UI primitives with RHF control.
- */
-const HookFormInput = <TValues extends FieldValues>(props: HookFormInputProps<TValues>) => {
-    const {
-        name,
-        label,
-        description,
-        placeholder,
-        control,
-        className,
-        inputClassName,
-        labelClassName,
-        ...inputProps
-    } = props;
+/** A generic form input component that synchronizes Shadcn UI primitives with react-hook-form control. Requires a Form provider context. */
+export default function HookFormInput<TValues extends FieldValues>(
+    {name, control, label, description, placeholder, classNames, ...inputProps}: HookFormInputProps<TValues>
+): ReactElement {
+    const renderField: ControllerProps<TValues>["render"] = ({field}) => (
+        <FormItem className={cn(classNames?.container, "dark:text-white")}>
+            {label && <FormLabel className={classNames?.label}>{label}</FormLabel>}
 
-    return (
-        <FormField
-            control={control}
-            name={name}
-            render={({field}) => (
-                <FormItem className={cn(className, "dark:text-white")}>
-                    {
-                        label &&
-                        <FormLabel className={labelClassName}>{label}</FormLabel>
-                    }
+            <FormControl>
+                <Input
+                    placeholder={placeholder || label}
+                    className={cn(HookFormInputCSS, classNames?.input)}
+                    {...inputProps}
+                    {...field}
+                />
+            </FormControl>
 
-                    <FormControl>
-                        <Input
-                            placeholder={placeholder || label}
-                            className={cn(HookFormInputCSS, inputClassName)}
-                            {...inputProps}
-                            {...field}
-                        />
-                    </FormControl>
-
-                    {description && <FormDescription>{description}</FormDescription>}
-
-                    <FormMessage/>
-                </FormItem>
-            )}
-        />
+            {description && <FormDescription>{description}</FormDescription>}
+            <FormMessage/>
+        </FormItem>
     );
-};
 
-export default HookFormInput;
+    return <FormField control={control} name={name} render={renderField}/>;
+}

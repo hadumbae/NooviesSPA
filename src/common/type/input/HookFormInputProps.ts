@@ -17,6 +17,11 @@ export type HookFormInputControlProps<TValues extends FieldValues> = {
     className?: string;
     inputClassName?: string;
     labelClassName?: string;
+    classNames?: {
+        container?: string;
+        input?: string;
+        label?: string;
+    };
 };
 
 /** Props for standard text-based input fields. */

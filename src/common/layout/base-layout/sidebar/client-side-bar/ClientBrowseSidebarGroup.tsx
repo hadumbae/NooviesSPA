@@ -1,10 +1,10 @@
 /**
- * @file ClientMovieSidebarGroup.tsx
- * @description Sidebar group for client-facing movie navigation. Provides access
- * to the main movie browsing section for regular users.
+ * @fileoverview Sidebar group for client-facing navigation across movies, persons, genres, and theatres.
  */
 
-import { FC } from 'react';
+import {ReactElement} from 'react';
+import {Link} from "react-router-dom";
+import {TableOfContents} from "lucide-react";
 import {
     SidebarGroup,
     SidebarGroupContent,
@@ -12,55 +12,48 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem
-} from "@/common/components/ui/sidebar/sidebar.tsx";
-import { Link } from "react-router-dom";
-import { TableOfContents } from "lucide-react";
+} from "@/common/components/ui/sidebar";
 
 /**
- * `ClientMovieSidebarGroup` renders a sidebar section for movie-related
- * navigation in the client interface.
- *
- * - Contains a single link to the **Movies** browsing page.
- * - Designed for use in the client user’s sidebar layout.
- *
- * @component
- * @example
- * ```tsx
- * <ClientMovieSidebarGroup />
- * ```
+ * Renders a sidebar section containing navigation links for the public browsing area.
  */
-const ClientBrowseSidebarGroup: FC = () => {
+export function ClientBrowseSidebarGroup(): ReactElement {
     return (
         <SidebarGroup>
-            <SidebarGroupLabel>Movies</SidebarGroupLabel>
+            <SidebarGroupLabel>Browse</SidebarGroupLabel>
             <SidebarGroupContent>
                 <SidebarMenu>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                            <Link to="/browse/persons">
+                                <TableOfContents/>
+                                <span>Persons</span>
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
 
-                    {/* Movies Page */}
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/browse/movies">
-                                <TableOfContents />
+                                <TableOfContents/>
                                 <span>Movies</span>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
 
-                    {/* Movies Page */}
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/browse/genres">
-                                <TableOfContents />
+                                <TableOfContents/>
                                 <span>Genres</span>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
 
-                    {/* Theatres Page */}
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/browse/theatres">
-                                <TableOfContents />
+                                <TableOfContents/>
                                 <span>Theatres</span>
                             </Link>
                         </SidebarMenuButton>
@@ -69,6 +62,4 @@ const ClientBrowseSidebarGroup: FC = () => {
             </SidebarGroupContent>
         </SidebarGroup>
     );
-};
-
-export default ClientBrowseSidebarGroup;
+}

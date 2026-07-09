@@ -53,7 +53,7 @@ export function SeatSubmitFormSeatFieldset(
                     <HookFormCheckbox
                         name="isAvailable"
                         label="Is Available?"
-                        className={cn(!isNestedView && "col-span-2")}
+                        classNames={{container: cn(!isNestedView && "col-span-2")}}
                         control={control}
                     />
                 }

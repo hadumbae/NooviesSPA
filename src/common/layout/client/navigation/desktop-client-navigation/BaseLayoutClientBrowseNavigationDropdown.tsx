@@ -19,6 +19,7 @@ import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
  */
 export function BaseLayoutClientBrowseNavigationDropdown(): ReactElement {
     const pathNames = [
+        "/browse/persons",
         "/browse/movies",
         "/browse/genres",
         "/browse/theatres",
@@ -40,6 +41,12 @@ export function BaseLayoutClientBrowseNavigationDropdown(): ReactElement {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent>
+                <DropdownMenuLink
+                    component={BaseLayoutDesktopClientNavigation.name}
+                    to="/browse/persons"
+                >
+                    Browse Persons
+                </DropdownMenuLink>
                 <DropdownMenuLink
                     component={BaseLayoutDesktopClientNavigation.name}
                     to="/browse/movies"

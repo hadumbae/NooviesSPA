@@ -8,9 +8,9 @@ import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSc
 
 /** Zod schema for defining sort order on Person fields. */
 export const PersonQuerySortSchema = z.object({
-    sortByName: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()),
-    sortByDOB: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()),
-    sortByNationality: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()),
+    sortByName: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()).optional(),
+    sortByDOB: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()).optional(),
+    sortByNationality: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()).optional(),
 });
 
 /** Type for Person query sorting options. */

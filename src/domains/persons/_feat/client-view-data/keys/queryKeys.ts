@@ -8,6 +8,7 @@ import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
 export const PersonClientViewQueryKeys = buildQueryKey(
     ["persons", "views", "client"],
     {
+        browse: ["browse"],
         info: ["info"],
     },
 );

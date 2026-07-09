@@ -14,7 +14,7 @@ import {
 /** Zod schema for filtering Person documents by ID, name, birth date, or nationality. */
 export const PersonQueryFilterSchema = z.object({
     _id: IDStringSchema.optional(),
-    name: preprocessEmptyStringToUndefined(NonEmptyStringSchema.optional()),
+    name: preprocessEmptyStringToUndefined(NonEmptyStringSchema.optional()).optional(),
     dob: DateOnlyStringSchema.optional(),
     nationality: ISO3166Alpha2CountryCodeEnum.optional(),
 });
