@@ -1,6 +1,6 @@
 export * from "./crud";
 export * from "./crud-hooks";
-export * from "./fetch-client-reservations";
+export * from "./fetch-current-user-reservations";
 export * from "./fetch-reservation-by-code";
 export * from "./formatters";
 export * from "./reserve-tickets";
