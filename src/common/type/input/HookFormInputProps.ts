@@ -15,12 +15,11 @@ export type HookFormInputControlProps<TValues extends FieldValues> = {
     disabled?: boolean;
     hasLabel?: boolean;
     className?: string;
-    inputClassName?: string;
-    labelClassName?: string;
     classNames?: {
         container?: string;
         input?: string;
         label?: string;
+        text?: string;
     };
 };
 

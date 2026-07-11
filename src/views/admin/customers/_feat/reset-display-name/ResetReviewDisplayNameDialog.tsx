@@ -2,7 +2,13 @@
  * @fileoverview Dialog component for the administrative Reset Display Name action.
  */
 
+import {useFormContext} from "react-hook-form";
+import {ReactElement, ReactNode} from "react";
+import {cn} from "@/common/lib/utils.ts";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+import {HookFormInput} from "@/views/common/_feat";
 import {
+    Button,
     Dialog,
     DialogClose,
     DialogContent,
@@ -11,13 +17,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui/dialog.tsx";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {useFormContext} from "react-hook-form";
-import {ReactElement, ReactNode} from "react";
-import {Button} from "@/common/components/ui/button.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+} from "@/common/components/ui";
 
 /** Props for the ResetReviewDisplayNameDialog component. */
 export type DialogProps = {

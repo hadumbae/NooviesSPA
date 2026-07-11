@@ -3,8 +3,10 @@
  */
 
 import {ReactElement} from 'react';
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import HookFormStateToggleButton from "@/common/components/forms/HookFormSortToggle.tsx";
+import {HookFormInput} from "@/views/common/_feat";
+import {
+    HookFormSortToggle as HookFormStateToggleButton
+} from "@/views/common/_feat";
 import {cn} from "@/common/lib/utils.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";

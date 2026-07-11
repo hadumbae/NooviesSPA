@@ -5,14 +5,14 @@
 import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {HookFormInput} from "@/views/common/_feat";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
+import {HookFormTextArea} from "@/views/common/_feat/form-inputs/HookFormTextArea.tsx";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {RoleTypeCategorySelect} from "@/views/admin/role-types/_feat/form-inputs";
-import {RoleTypeDepartment, RoleTypeFormValues, RoleTypeDepartmentConstant} from "@/domains/roletypes";
+import {RoleTypeDepartment, RoleTypeDepartmentConstant, RoleTypeFormValues} from "@/domains/roletypes";
 
 /** Props for the RoleTypeSubmitFormView component. */
 type SubmitViewProps = Pick<FormViewProps<RoleTypeFormValues>, "disableFields" | "className">
@@ -35,36 +35,19 @@ export function RoleTypeSubmitFormView(
     return (
         <div className={cn('space-y-5', className)}>
             {!disableFields?.roleName && (
-                <HookFormInput
-                    name="roleName"
-                    label="Role Name"
-                    control={control}
-                />
+                <HookFormInput name="roleName" label="Role Name" control={control}/>
             )}
 
             {!disableFields?.department && (
-                <HookFormSelect
-                    name="department"
-                    label="Department"
-                    options={departmentOptions}
-                />
+                <HookFormSelect name="department" label="Department" options={departmentOptions}/>
             )}
 
             {!disableFields?.category && (
-                <RoleTypeCategorySelect
-                    department={department}
-                    name="category"
-                    label="Category"
-                    control={control}
-                />
+                <RoleTypeCategorySelect department={department} name="category" label="Category"/>
             )}
 
             {!disableFields?.description && (
-                <HookFormTextArea
-                    name="description"
-                    label="Description"
-                    control={control}
-                />
+                <HookFormTextArea name="description" label="Description"/>
             )}
         </div>
     );

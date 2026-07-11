@@ -2,7 +2,7 @@
  * @fileoverview Registration form view component for user account creation.
  */
 
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {HookFormInput} from "@/views/common/_feat";
 import {Button} from "@/common/components/ui/button.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {cn} from "@/common/lib/utils.ts";

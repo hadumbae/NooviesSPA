@@ -3,36 +3,24 @@
  */
 
 import {ReactElement} from "react";
+import {FieldValues} from "react-hook-form";
+import {HookFormRadioGroup} from "@/views/common/_feat";
 import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import HookFormRadioGroup from "@/common/components/forms/radio-group/HookFormRadioGroup.tsx";
-import {FieldValues, Path, useFormContext} from "react-hook-form";
 import {SeatMapStatusConstant} from "@/domains/seatmaps";
-
-/** Props for the SeatMapStatusRadioGroup component. */
-type RadioGroupProps<TValues extends FieldValues> = {
-    name: Path<TValues>;
-    label: string;
-    className?: string;
-};
+import {HookFormInputProps} from "@/common/type/input/HookFormInputProps.ts";
 
 /**
  * Form-integrated radio group for seat map statuses. Requires a wrapping FormProvider.
  */
 export function SeatMapStatusRadioGroup<TValues extends FieldValues>(
-    props: RadioGroupProps<TValues>
+    props: Omit<HookFormInputProps<TValues>, "control">
 ): ReactElement {
-    const {control} = useFormContext<TValues>();
-
     const items: HookRadioOption[] = SeatMapStatusConstant.map(
         (status): HookRadioOption => ({value: status, label: convertToTitleCase(status)}),
     );
 
     return (
-        <HookFormRadioGroup
-            {...props}
-            items={items}
-            control={control}
-        />
+        <HookFormRadioGroup {...props} items={items}/>
     );
 }

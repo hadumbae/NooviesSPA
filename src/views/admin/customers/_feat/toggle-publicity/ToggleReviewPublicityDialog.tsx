@@ -15,7 +15,7 @@ import {
 import {ReactElement, ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {useFormContext} from "react-hook-form";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {HookFormInput} from "@/views/common/_feat";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
 /** Props for the ToggleReviewPublicityDialog component. */

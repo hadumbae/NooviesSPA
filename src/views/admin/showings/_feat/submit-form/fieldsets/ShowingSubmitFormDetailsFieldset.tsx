@@ -3,26 +3,25 @@
  */
 
 import {ReactElement, useContext, useEffect, useState} from 'react';
+import {useFormContext} from "react-hook-form";
+import {Plus, X} from "lucide-react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {CountryHookFormSelect} from "@/common/components/forms/values/CountryHookFormSelect.tsx";
+import {cn} from "@/common/lib/utils.ts";
 import filterFalsyAttributes from "@/common/utility/collections/filterFalsyAttributes.ts";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import {Separator} from "@/common/components/ui/separator.tsx";
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui/collapsible.tsx";
-import {Plus, X} from "lucide-react";
-import {Button} from "@/common/components/ui/button.tsx";
 import {MultiStepFormStateContext} from "@/common/_feat/multi-step-form/contexts/stateContext.ts";
-import {TheatreHookFormSelect} from "@/views/admin/theatres/_feat/form-input/selects/TheatreHookFormSelect.tsx";
-import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
-import {TheatreQuickOverviewFetchCard} from "@/views/admin/theatres/_comp/display-cards";
-import {MovieHookFormSelect} from "@/views/admin/movies/_feat/form-inputs";
-import {MovieQuickOverviewFetchCard} from "@/views/admin/movies/_comp/form-display";
-import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/lib/utils.ts";
-import {Theatre} from "@/domains/theatres/_schema/theatre";
+
+import {HookFormInput} from "@/views/common/_feat";
+import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger, Separator} from "@/common/components/ui";
+import {MovieHookFormSelect, MovieQuickOverviewFetchCard} from "@/views/admin/movies";
+import {TheatreHookFormSelect, TheatreQuickOverviewFetchCard} from "@/views/admin/theatres";
+import {ScreenHookFormSelect} from "@/views/admin/theatre-screens";
+
+import {Theatre} from "@/domains/theatres";
+import {ShowingFormValues} from "@/domains/showings";
+import {HookFormSelect} from "@/views/common/_comp";
+import {ISO3166Alpha2CountryOptions} from "@/common/_const";
 
 /**
  * Form fieldset for selecting the movie and location details for a showing.
@@ -85,12 +84,7 @@ export function ShowingSubmitFormDetailsFieldset(
             {
                 !disableFields?.movie && (
                     <div className="space-y-1">
-                        <MovieHookFormSelect
-                            control={control}
-                            name="movie"
-                            label="Movie"
-                            description="The movie to be shown."
-                        />
+                        <MovieHookFormSelect name="movie" label="Movie" description="The movie to be shown."/>
                         {movie && <MovieQuickOverviewFetchCard movieID={movie as ObjectId}/>}
                     </div>
                 )
@@ -108,11 +102,11 @@ export function ShowingSubmitFormDetailsFieldset(
                     <div className="grid grid-cols-2 gap-1">
                         {
                             !disableFields?.theatreCountry && (
-                                <CountryHookFormSelect
+                                <HookFormSelect
                                     name="theatreCountry"
                                     label="Country"
-                                    control={control}
-                                    className="col-span-2"
+                                    classNames={{container: "col-span-2"}}
+                                    options={ISO3166Alpha2CountryOptions}
                                 />
                             )
                         }
@@ -144,7 +138,6 @@ export function ShowingSubmitFormDetailsFieldset(
                 !disableFields?.theatre && (
                     <div>
                         <TheatreHookFormSelect
-                            control={control}
                             name="theatre"
                             label="Theatre"
                             description="The theatre at which the showing will be."

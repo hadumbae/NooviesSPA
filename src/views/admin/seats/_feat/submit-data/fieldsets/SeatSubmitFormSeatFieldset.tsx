@@ -6,9 +6,8 @@ import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {Separator} from "@/common/components/ui";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
+import {HookFormInput} from "@/views/common/_feat";
+import {HookFormCheckbox} from "@/views/common/_feat";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {SeatTypeHookFormSelect} from "@/views/admin/seats/_feat/form-inputs";
 import {SeatFormValues} from "@/domains/seats";
@@ -23,7 +22,7 @@ export function SeatSubmitFormSeatFieldset(
     return (
         <fieldset className={cn("space-y-4", className)}>
             <div>
-                <PrimaryHeaderText>Seat</PrimaryHeaderText>
+                <h3 className="subsection-title">Seat</h3>
                 <Separator/>
             </div>
 
@@ -54,7 +53,6 @@ export function SeatSubmitFormSeatFieldset(
                         name="isAvailable"
                         label="Is Available?"
                         classNames={{container: cn(!isNestedView && "col-span-2")}}
-                        control={control}
                     />
                 }
             </div>

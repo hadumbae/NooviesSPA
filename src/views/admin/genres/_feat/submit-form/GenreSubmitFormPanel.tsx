@@ -4,6 +4,11 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {useFormContext} from "react-hook-form";
+import {GenreFormData} from "@/domains/genres";
+import {DisableFields, UIOpenStateProps} from "@/common/types";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+import {useLockForFormUI} from "@/common/hooks/forms/useLockForFormUI.ts";
+import {HookFormInput, HookFormTextArea} from "@/views/common/_feat";
 import {
     Button,
     ScrollArea,
@@ -14,12 +19,6 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
-import {GenreFormData} from "@/domains/genres/_feat/submit-form";
-import {DisableFields, UIOpenStateProps} from "@/common/types";
-import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-import {useLockForFormUI} from "@/common/hooks/forms/useLockForFormUI.ts";
 
 /** Props for the GenreSubmitFormPanel component. */
 type PanelProps = UIOpenStateProps & {
@@ -73,7 +72,6 @@ export function GenreSubmitFormPanel(
                             <HookFormTextArea
                                 name="description"
                                 label="Description"
-                                control={control}
                                 description="A brief description of the genre."
                             />
                         }

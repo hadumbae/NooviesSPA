@@ -2,7 +2,13 @@
  * @fileoverview Dialog component for the administrative "Set Review Rating" override.
  */
 
+import {ReactElement, ReactNode} from "react";
+import {useFormContext} from "react-hook-form";
+import {cn} from "@/common/lib/utils.ts";
+import {HookFormInput, StarRatingSelector} from "@/views/common/_feat";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {
+    Button,
     Dialog,
     DialogClose,
     DialogContent,
@@ -12,13 +18,6 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/common/components/ui";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {useFormContext} from "react-hook-form";
-import {ReactElement, ReactNode} from "react";
-import {Button} from "@/common/components/ui/button.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import StarRatingSelector from "@/common/components/forms/radio-group/StarRatingSelector.tsx";
-import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
 /** Props for the SetReviewRatingDialog component. */
 export type DialogProps = {
@@ -30,13 +29,13 @@ export type DialogProps = {
 
 /**
  * Interface for administrators to manually adjust a review's star rating.
- * Requires AdminReviewActionFormContext and a parent Form provider.
  */
 export function SetReviewRatingDialog(
     {children, isOpen, setIsOpen, className}: DialogProps
 ): ReactElement {
-    const {formID} = useBaseFormContext();
     const {control} = useFormContext();
+    const {formID} = useBaseFormContext();
+
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
@@ -46,16 +45,11 @@ export function SetReviewRatingDialog(
             <DialogContent className="space-y-2">
                 <DialogHeader>
                     <DialogTitle>Set Review's Rating</DialogTitle>
-                    <DialogDescription>
-                        Modify the review's rating. This action cannot be reversed.
-                    </DialogDescription>
+                    <DialogDescription>Modify the review's rating. This action cannot be reversed.</DialogDescription>
                 </DialogHeader>
 
                 <div className={cn("space-y-2", className)}>
-                    <StarRatingSelector
-                        name="rating"
-                        control={control}
-                    />
+                    <StarRatingSelector name="rating" control={control}/>
 
                     <HookFormInput
                         type="text"
@@ -71,11 +65,7 @@ export function SetReviewRatingDialog(
                         <Button variant="secondary">Cancel</Button>
                     </DialogClose>
 
-                    <Button
-                        form={formID}
-                        variant="primary"
-                        type="submit"
-                    >
+                    <Button form={formID} variant="primary" type="submit">
                         Set
                     </Button>
                 </DialogFooter>

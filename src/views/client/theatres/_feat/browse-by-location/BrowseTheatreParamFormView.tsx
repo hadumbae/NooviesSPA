@@ -1,7 +1,7 @@
 /**
  * @fileoverview Form view for browsing theatres by location parameters.
  */
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {HookFormInput} from "@/views/common/_feat";
 import {ReactElement} from "react";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";

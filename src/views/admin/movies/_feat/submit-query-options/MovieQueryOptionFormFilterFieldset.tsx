@@ -3,15 +3,15 @@
  */
 
 import {ReactElement} from 'react';
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {CountryHookFormSelect} from "@/common/components/forms/values/CountryHookFormSelect.tsx";
-import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
-import {GenreMultiSelect} from "@/views/admin/genres";
-import {MovieQueryOptionFormValues} from "@/domains/movies/_feat/submit-queries/MovieQueryOptionFormValues";
-import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
-import {PageSectionHeader} from "@/views/common/_comp/page";
 import {cn} from "@/common/lib/utils.ts";
+import {GenreMultiSelect} from "@/views/admin/genres";
+import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
+import {PageSectionHeader} from "@/views/common/_comp/page";
+import {MovieQueryOptionFormValues} from "@/domains/movies";
+import {HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
+import {HookFormSelect} from "@/views/common/_comp";
+import {ISO3166Alpha2CountryOptions} from "@/common/_const";
 
 /** Props for the MovieQueryOptionFormFilterFieldset component. */
 type FieldsetProps = Omit<FormFieldsetProps<MovieQueryOptionFormValues>, "isNestedView">;
@@ -65,27 +65,15 @@ export function MovieQueryOptionFormFilterFieldset(
                 )}
 
                 {!disableFields?.country && (
-                    <CountryHookFormSelect
-                        name="country"
-                        label="Country"
-                        control={control}
-                    />
+                    <HookFormSelect name="country" label="Country" options={ISO3166Alpha2CountryOptions}/>
                 )}
 
                 {!disableFields?.isReleased && (
-                    <HookFormCheckbox
-                        name="isReleased"
-                        label="Is Released"
-                        control={control}
-                    />
+                    <HookFormCheckbox name="isReleased" label="Is Released"/>
                 )}
 
                 {!disableFields?.isAvailable && (
-                    <HookFormCheckbox
-                        name="isAvailable"
-                        label="Is Available"
-                        control={control}
-                    />
+                    <HookFormCheckbox name="isAvailable" label="Is Available"/>
                 )}
             </div>
         </fieldset>

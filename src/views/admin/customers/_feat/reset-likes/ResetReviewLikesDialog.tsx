@@ -16,7 +16,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/common/components/ui";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {HookFormInput} from "@/views/common/_feat";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
 /** Props for the ResetReviewLikesDialog component. */

@@ -1,12 +1,12 @@
 /**
  * @fileoverview Form view for uploading or updating a genre image.
  */
+
 import {ReactElement} from "react";
-import {useFormContext} from "react-hook-form";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import ACCEPTED_IMAGE_TYPES from "@/common/constants/AcceptedImageTypeConstant.ts";
 import {cn} from "@/common/lib/utils.ts";
-import {HookFormFileInput} from "@/common/components/forms/HookFormFileInput.tsx";
+import {HookFormFileInput} from "@/views/common/_feat";
 
 /** Props for the GenreImageUploadFormView component. */
 type ViewProps = {
@@ -19,7 +19,6 @@ type ViewProps = {
 export function GenreImageUploadFormView(
     {className}: ViewProps
 ): ReactElement {
-    const {control} = useFormContext();
     const {isPending} = useBaseFormContext();
 
     const acceptedFileTypes = ACCEPTED_IMAGE_TYPES
@@ -30,13 +29,7 @@ export function GenreImageUploadFormView(
 
     return (
         <div className={cn("space-y-4", className)}>
-            <HookFormFileInput
-                name="image"
-                label="Image"
-                control={control}
-                description={fileInputDescription}
-                disabled={isPending}
-            />
+            <HookFormFileInput name="image" label="Image" description={fileInputDescription} disabled={isPending}/>
         </div>
     );
 }

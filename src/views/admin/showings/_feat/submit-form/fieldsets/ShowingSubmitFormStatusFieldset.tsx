@@ -3,9 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
+import {HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
@@ -24,7 +22,7 @@ export function ShowingSubmitFormStatusFieldset(
     return (
         <fieldset className={cn("space-y-3", className)}>
             <div>
-                <PrimaryHeaderText>Status</PrimaryHeaderText>
+                <h3 className="fieldset-header">Status</h3>
                 <Separator/>
             </div>
 
@@ -46,23 +44,9 @@ export function ShowingSubmitFormStatusFieldset(
 
                 {
                     !disableFields?.config && (<>
-                        <HookFormCheckbox
-                            name="config.isActive"
-                            label="Is Active?"
-                            control={control}
-                        />
-
-                        <HookFormCheckbox
-                            name="config.isSpecialEvent"
-                            label="Is Special Event?"
-                            control={control}
-                        />
-
-                        <HookFormCheckbox
-                            name="config.canReserveSeats"
-                            label="Can Reserve Seats?"
-                            control={control}
-                        />
+                        <HookFormCheckbox name="config.isActive" label="Is Active?"/>
+                        <HookFormCheckbox name="config.isSpecialEvent" label="Is Special Event?"/>
+                        <HookFormCheckbox name="config.canReserveSeats" label="Can Reserve Seats?"/>
                     </>)
                 }
 

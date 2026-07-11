@@ -2,7 +2,7 @@
 
 import {ReactElement} from "react";
 import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {HookFormInput} from "@/views/common/_feat";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {renderFields} from "@/common/_feat/submit-data";

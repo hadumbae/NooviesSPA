@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {HookFormInput} from "@/views/common/_feat";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";

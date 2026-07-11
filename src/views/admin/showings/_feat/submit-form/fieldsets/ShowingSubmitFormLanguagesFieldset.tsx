@@ -3,15 +3,13 @@
  */
 
 import {ReactElement} from 'react';
-import {
-    LanguageHookFormSelect
-} from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
+import {HookFormMultiSelect, HookFormSelect} from "@/views/common/_comp";
+import {ISO6391LanguageOptions} from "@/common/_const";
 
 /**
  * Form section for language configuration.
@@ -19,8 +17,6 @@ import {cn} from "@/common/lib/utils.ts";
 export function ShowingSubmitFormLanguagesFieldset(
     {disableFields, className}: Omit<FormFieldsetProps<ShowingFormValues>, "isNestedView">
 ): ReactElement {
-    const {control} = useFormContext();
-
     return (
         <fieldset className={cn("space-y-3", className)}>
             <div>
@@ -30,24 +26,22 @@ export function ShowingSubmitFormLanguagesFieldset(
 
             {
                 !disableFields?.language && (
-                    <LanguageHookFormSelect
+                    <HookFormSelect
                         name="language"
                         label="Language"
-                        control={control}
-                        isMulti={false}
                         description="The language in which the showing is available."
+                        options={ISO6391LanguageOptions}
                     />
                 )
             }
 
             {
                 !disableFields?.subtitleLanguages && (
-                    <LanguageHookFormSelect
+                    <HookFormMultiSelect
                         name="subtitleLanguages"
                         label="Subtitles"
-                        control={control}
-                        isMulti={true}
                         description="Available subtitle languages."
+                        options={ISO6391LanguageOptions}
                     />
                 )
             }

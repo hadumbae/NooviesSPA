@@ -9,8 +9,10 @@ import {HookFormInputCSS} from "@/common/constants/css/HookFormInputCSS.ts";
 import {HookFormInputProps} from "@/common/type/input/HookFormInputProps.ts";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input} from "@/common/components/ui";
 
-/** A generic form input component that synchronizes Shadcn UI primitives with react-hook-form control. Requires a Form provider context. */
-export default function HookFormInput<TValues extends FieldValues>(
+/**
+ * Generic form input component integrated with react-hook-form and shadcn/ui.
+ */
+export function HookFormInput<TValues extends FieldValues>(
     {name, control, label, description, placeholder, classNames, ...inputProps}: HookFormInputProps<TValues>
 ): ReactElement {
     const renderField: ControllerProps<TValues>["render"] = ({field}) => (

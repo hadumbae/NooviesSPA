@@ -4,7 +4,10 @@
  * Requires wrapping in a Form provider and UpdateReservationNotesFormContext.
  */
 import {ReactElement, ReactNode} from "react";
-import {useFormContext} from "react-hook-form";
+import {HookFormTextArea} from "@/views/common/_feat";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import {ReservationUniqueCode} from "@/domains/reservations";
 import {
     Button,
     Dialog,
@@ -16,10 +19,6 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/common/components/ui";
-import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
-import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
-import {ReservationUniqueCode} from "@/domains/reservations";
 
 /** Props for the AdminReservationRefundDialog component. */
 type DialogProps = {
@@ -33,7 +32,6 @@ type DialogProps = {
 export function AdminReservationRefundDialog(
     {children, uniqueCode, isOpen, setIsOpen}: DialogProps
 ): ReactElement {
-    const {control} = useFormContext();
     const {formID, isPending} = useBaseFormContext();
 
     return (
@@ -55,7 +53,6 @@ export function AdminReservationRefundDialog(
                 <HookFormTextArea
                     label="Refund Reason / Admin Notes"
                     name="notes"
-                    control={control}
                     placeholder="Enter reason for refund..."
                 />
 

@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
 import {RoleTypeDepartmentRadioGroup} from "@/views/admin/role-types";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {HookFormInput} from "@/views/common/_feat";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
@@ -33,7 +33,6 @@ export function MovieCreditFormDetailsFieldset(
             render: !disableFields?.department,
             key: "department",
             element: <RoleTypeDepartmentRadioGroup
-                control={control}
                 name="department"
                 label="Department"
                 className="flex flex-row justify-start space-x-5"

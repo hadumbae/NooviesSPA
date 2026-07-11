@@ -3,7 +3,7 @@
  */
 
 import {useFormContext} from "react-hook-form";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {HookFormInput} from "@/views/common/_feat";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";

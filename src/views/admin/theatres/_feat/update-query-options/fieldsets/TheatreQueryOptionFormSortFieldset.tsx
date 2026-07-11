@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import HookFormSortToggle from "@/common/components/forms/HookFormSortToggle.tsx";
+import {HookFormSortToggle} from "@/views/common/_feat";
 
 import {TheatreQueryOptionFormStarterValues} from "@/domains/theatres";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";

@@ -3,17 +3,17 @@
  */
 
 import {ReactElement} from 'react';
-import {PersonQueryOptionFormValues} from "@/domains/persons/_feat/submit-query-options/schema.ts";
-import {Separator} from "@/common/components/ui/separator.tsx";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {CountryHookFormSelect} from "@/common/components/forms/values/CountryHookFormSelect.tsx";
+import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
-import HookFormSortToggle from "@/common/components/forms/HookFormSortToggle.tsx";
+import {Separator} from "@/common/components/ui";
+import {HookFormInput, HookFormSortToggle} from "@/views/common/_feat";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {useFormContext} from "react-hook-form";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {PageSectionHeader} from "@/views/common/_comp/page";
+import {PersonQueryOptionFormValues} from "@/domains/persons";
+import {HookFormSelect} from "@/views/common/_comp";
+import {ISO3166Alpha2CountryOptions} from "@/common/_const";
 
 /** Props for the PersonQueryOptionFormView component. */
 type ViewProps = FormViewProps<PersonQueryOptionFormValues>;
@@ -51,7 +51,7 @@ export function PersonQueryOptionFormView(
 
                     {
                         !disableFields?.nationality &&
-                        <CountryHookFormSelect name="nationality" label="Nationality" control={control}/>
+                        <HookFormSelect name="nationality" label="Nationality" options={ISO3166Alpha2CountryOptions}/>
                     }
                 </div>
             </fieldset>

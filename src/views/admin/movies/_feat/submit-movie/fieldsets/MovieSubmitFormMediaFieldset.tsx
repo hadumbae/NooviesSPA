@@ -4,14 +4,14 @@
 
 import {ReactElement} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {LanguageHookFormSelect} from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
+import {HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
 import {GenreMultiSelect} from "@/views/admin/genres";
-import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
+import {HookFormMultiSelect} from "@/views/common/_comp";
+import {ISO6391LanguageOptions} from "@/common/_const";
 
 /**
  * Renders form fields for trailer URLs, languages, subtitles, and availability.
@@ -30,31 +30,17 @@ export function MovieSubmitFormMediaFieldset(
 
             {
                 !disableFields?.trailerURL &&
-                <HookFormInput
-                    name="trailerURL"
-                    label="Trailer URL"
-                    control={control}
-                />
+                <HookFormInput name="trailerURL" label="Trailer URL" control={control}/>
             }
 
             {
                 !disableFields?.languages &&
-                <LanguageHookFormSelect
-                    name="languages"
-                    label="Available Languages"
-                    control={control}
-                    isMulti
-                />
+                <HookFormMultiSelect name="languages" label="Available Languages" options={ISO6391LanguageOptions}/>
             }
 
             {
                 !disableFields?.subtitles &&
-                <LanguageHookFormSelect
-                    name="subtitles"
-                    label="Subtitles"
-                    control={control}
-                    isMulti
-                />
+                <HookFormMultiSelect name="subtitles" label="Subtitles" options={ISO6391LanguageOptions}/>
             }
 
             {
@@ -64,11 +50,7 @@ export function MovieSubmitFormMediaFieldset(
 
             {
                 !disableFields?.isAvailable &&
-                <HookFormCheckbox
-                    name="isAvailable"
-                    label="Is Publicly Available?"
-                    control={control}
-                />
+                <HookFormCheckbox name="isAvailable" label="Is Publicly Available?"/>
             }
         </fieldset>
     );

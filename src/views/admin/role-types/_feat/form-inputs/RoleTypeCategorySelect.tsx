@@ -2,17 +2,15 @@
  * @fileoverview Form input component for selecting role categories based on department.
  */
 
-import {RoleTypeCrewCategoryConstant} from "@/domains/roletypes/_schema/fields/RoleTypeCrewCategoryConstant.ts";
-import {RoleTypeCastCategoryConstant} from "@/domains/roletypes/_schema/fields/RoleTypeCastCategoryConstant.ts";
-import {RoleTypeDepartment} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
-import {FieldValues} from "react-hook-form";
-import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {ReactElement} from "react";
+import {FieldValues} from "react-hook-form";
+import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
+import {RoleTypeCastCategoryConstant, RoleTypeCrewCategoryConstant, RoleTypeDepartment} from "@/domains/roletypes";
 
 /** Props for the RoleTypeCategorySelect component. */
-type SelectProps<TSubmit extends FieldValues> = HookFormInputControlProps<TSubmit> & {
+type SelectProps<TSubmit extends FieldValues> = Omit<HookFormInputControlProps<TSubmit>, "control"> & {
     department: RoleTypeDepartment | undefined | null;
 };
 
@@ -31,9 +29,6 @@ export function RoleTypeCategorySelect<TSubmit extends FieldValues>(
     const options: ReactSelectOption[] = values.map(value => ({value, label: value}));
 
     return (
-        <HookFormSelect
-            options={options}
-            {...rest}
-        />
+        <HookFormSelect options={options} {...rest}/>
     );
 }

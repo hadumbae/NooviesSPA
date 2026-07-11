@@ -3,7 +3,7 @@
  */
 
 import {cn} from "@/common/lib/utils.ts";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {HookFormInput} from "@/views/common/_feat";
 import {Button} from "@/common/components/ui/button.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {ReactElement} from "react";
@@ -38,7 +38,7 @@ export function AuthLoginFormView(
                 label="Email"
                 type="email"
                 control={control}
-                labelClassName="uppercase"
+                classNames={{label: "uppercase"}}
             />
 
             <HookFormInput
@@ -46,7 +46,7 @@ export function AuthLoginFormView(
                 label="Password"
                 type="password"
                 control={control}
-                labelClassName="uppercase"
+                classNames={{label: "uppercase"}}
             />
 
             <div className="space-y-1">

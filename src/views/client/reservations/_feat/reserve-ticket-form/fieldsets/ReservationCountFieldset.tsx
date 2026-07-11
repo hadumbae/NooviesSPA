@@ -2,7 +2,7 @@
  * @fileoverview Fieldset for final ticket quantity verification and reservation submission.
  *
  */
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {HookFormInput} from "@/views/common/_feat";
 import {Button} from "@/common/components/ui/button.tsx";
 import {useFormContext} from "react-hook-form";
 import {ReservationType} from "@/domains/reservations/_schema/model/fields/ReservationTypeEnumSchema.ts";

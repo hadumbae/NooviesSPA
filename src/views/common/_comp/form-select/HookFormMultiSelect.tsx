@@ -6,7 +6,7 @@ import Select from "react-select";
 import {Controller, FieldValues, useFormContext} from "react-hook-form";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {FormControl, FormDescription, FormItem, FormLabel,} from "@/common/components/ui/form.tsx";
-import HookFormErrorMessage from "@/common/components/forms/HookFormErrorMessage.tsx";
+import {HookFormErrorMessage} from "@/views/common/_feat/form-inputs/HookFormErrorMessage.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {ReactSelectMultiStyleConfig} from "@/common/constants/css/ReactSelectCSS.ts";
 import {FormMultiSelectOnChangeHandler, FormSelectValueHandler} from "@/common/types";

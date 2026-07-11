@@ -3,10 +3,9 @@
  */
 
 import {ReactElement, ReactNode} from "react";
-import {useFormContext} from "react-hook-form";
-import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
+import {HookFormTextArea} from "@/views/common/_feat";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-
+import {UIOpenStateProps} from "@/common/types";
 import {
     Button,
     Dialog,
@@ -20,11 +19,9 @@ import {
 } from "@/common/components/ui";
 
 /** Props for the AdminReservationCancelDialog component. */
-type DialogProps = {
+type DialogProps = UIOpenStateProps & {
     children: ReactNode;
     uniqueCode: string;
-    isOpen: boolean;
-    setIsOpen: (open: boolean) => void;
 };
 
 /**
@@ -34,7 +31,6 @@ export function AdminReservationCancelDialog(
     {children, isOpen, setIsOpen, uniqueCode}: DialogProps
 ): ReactElement {
     const {formID} = useBaseFormContext();
-    const {control} = useFormContext();
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -56,7 +52,6 @@ export function AdminReservationCancelDialog(
                 <HookFormTextArea
                     label="Cancellation Reason / Admin Notes"
                     name="notes"
-                    control={control}
                     placeholder="Enter reason for cancelling..."
                 />
 

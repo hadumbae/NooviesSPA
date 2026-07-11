@@ -3,13 +3,12 @@
  */
 
 import {ReactElement} from "react";
-import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
-import {Separator} from "@/common/components/ui/separator.tsx";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
-import {cn} from "@/common/lib/utils.ts";
 import {useFormContext} from "react-hook-form";
+import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
+import {MovieFormStarterValues} from "@/domains/movies";
+import {cn} from "@/common/lib/utils.ts";
+import {Separator} from "@/common/components/ui";
+import {HookFormInput, HookFormTextArea} from "@/views/common/_feat";
 
 /**
  * Renders form fields for basic movie information like title, tagline, and synopsis.
@@ -43,7 +42,7 @@ export function MovieSubmitFormDetailsFieldset(
 
             {
                 !disableFields?.synopsis &&
-                <HookFormTextArea name="synopsis" label="Synopsis" control={control}/>
+                <HookFormTextArea name="synopsis" label="Synopsis"/>
             }
         </fieldset>
     );

@@ -3,17 +3,14 @@
  */
 
 import {ReactElement} from "react";
-import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
-import {Separator} from "@/common/components/ui/separator.tsx";
-import {CountryHookFormSelect} from "@/common/components/forms/values/CountryHookFormSelect.tsx";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {
-    LanguageHookFormSelect
-} from "@/common/components/forms/values/LanguageHookFormSelect.tsx";
-import HookFormCheckbox from "@/common/components/forms/checkbox/HookFormCheckbox.tsx";
-import {cn} from "@/common/lib/utils.ts";
 import {useFormContext} from "react-hook-form";
+import {MovieFormStarterValues} from "@/domains/movies";
+import {Separator} from "@/common/components/ui";
+import {cn} from "@/common/lib/utils.ts";
+import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
+import {CountryHookFormSelect, HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
+import {HookFormMultiSelect, HookFormSelect} from "@/views/common/_comp";
+import {ISO3166Alpha2CountryOptions, ISO6391LanguageOptions} from "@/common/_const";
 
 /**
  * Renders form fields for country, runtime, language, and release status.
@@ -32,49 +29,31 @@ export function MovieSubmitFormProductionFieldset(
 
             {
                 !disableFields?.country &&
-                <CountryHookFormSelect
-                    name="country"
-                    label="Country"
-                    control={control}
-                />
+                <HookFormSelect name="country" label="Country" options={ISO3166Alpha2CountryOptions}/>
             }
 
             {
                 !disableFields?.runtime &&
-                <HookFormInput
-                    name="runtime"
-                    label="Duration (Min)"
-                    control={control}
-                    type="number"
-                />
+                <HookFormInput name="runtime" label="Duration (Min)" control={control} type="number"/>
             }
 
             {
                 !disableFields?.originalLanguage &&
-                <LanguageHookFormSelect
+                <HookFormMultiSelect
                     name="originalLanguage"
                     label="Original Language"
-                    control={control}
+                    options={ISO6391LanguageOptions}
                 />
             }
 
             {
                 !disableFields?.isReleased &&
-                <HookFormCheckbox
-                    name="isReleased"
-                    label="Is Released?"
-                    control={control}
-                />
+                <HookFormCheckbox name="isReleased" label="Is Released?"/>
             }
 
             {
                 !disableFields?.releaseDate &&
-                <HookFormInput
-                    name="releaseDate"
-                    label="Release Date"
-                    control={control}
-                    type="date"
-                />
+                <HookFormInput name="releaseDate" label="Release Date" control={control} type="date"/>
             }
         </fieldset>
     );

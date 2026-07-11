@@ -3,35 +3,23 @@
  */
 
 import {ReactElement} from "react";
-import {FieldValues, Path, useFormContext} from "react-hook-form";
-import HookFormRadioGroup from "@/common/components/forms/radio-group/HookFormRadioGroup.tsx";
+import {FieldValues} from "react-hook-form";
+import {HookFormRadioGroup} from "@/views/common/_feat";
 import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
 import {SeatLayoutTypeConstant, SeatLayoutTypeLabelMap} from "@/domains/seats";
-
-/** Props for the SeatLayoutTypeRadioGroup component. */
-type RadioGroupProps<TValues extends FieldValues> = {
-    name: Path<TValues>;
-    label: string;
-    className?: string;
-};
+import {HookFormInputProps} from "@/common/type/input/HookFormInputProps.ts";
 
 /**
  * Renders a controlled radio group for choosing a layout type, mapped via SeatLayoutTypeLabelMap.
  */
 export function SeatLayoutTypeRadioGroup<TValues extends FieldValues>(
-    props: RadioGroupProps<TValues>
+    props: Omit<HookFormInputProps<TValues>, "control">
 ): ReactElement {
-    const {control} = useFormContext();
-
     const items: HookRadioOption[] = SeatLayoutTypeConstant.map(
         (type): HookRadioOption => ({value: type, label: SeatLayoutTypeLabelMap[type]})
     );
 
     return (
-        <HookFormRadioGroup
-            {...props}
-            items={items}
-            control={control}
-        />
+        <HookFormRadioGroup {...props} items={items}/>
     );
 }

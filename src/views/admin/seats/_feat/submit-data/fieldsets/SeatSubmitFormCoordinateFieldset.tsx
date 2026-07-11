@@ -6,7 +6,7 @@ import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
 import {Separator} from "@/common/components/ui";
 import {cn} from "@/common/lib/utils.ts";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
+import {HookFormInput} from "@/views/common/_feat";
 import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {SeatFormValues} from "@/domains/seats";

@@ -3,7 +3,10 @@
  */
 
 import {ReactElement, ReactNode} from "react";
+import {HookFormTextArea} from "@/views/common/_feat";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {
+    Button,
     Dialog,
     DialogClose,
     DialogContent,
@@ -12,11 +15,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui/dialog.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
-import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
-import {useFormContext} from "react-hook-form";
-import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+} from "@/common/components/ui";
 
 /** Props for the UpdateReservationNotesFormPopup component. */
 type PopupProps = {
@@ -34,7 +33,6 @@ type PopupProps = {
 export function UpdateReservationNotesFormPopup(
     {children, isOpen, setIsOpen, title, description, buttonText}: PopupProps
 ): ReactElement {
-    const {control} = useFormContext();
     const {formID} = useBaseFormContext();
 
     return (
@@ -52,11 +50,7 @@ export function UpdateReservationNotesFormPopup(
                     </DialogDescription>
                 </DialogHeader>
 
-                <HookFormTextArea
-                    label="Admin Notes"
-                    name="notes"
-                    control={control}
-                />
+                <HookFormTextArea label="Admin Notes" name="notes"/>
 
                 <DialogFooter className="max-md:gap-2">
                     <DialogClose asChild>

@@ -3,10 +3,8 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import {useFormContext} from "react-hook-form";
-import {HookFormFileInput} from "@/common/components/forms/HookFormFileInput.tsx";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {BaseFormContext} from "@/common/_feat/generic-form-context";
+import {HookFormFileInput} from "@/views/common/_feat/form-inputs/HookFormFileInput.tsx";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import {
@@ -34,8 +32,7 @@ type FormPanelProps = {
 export function UploadPersonProfileImageFormPanel(
     {children, className, isOpen, setIsOpen}: FormPanelProps
 ): ReactElement {
-    const {control} = useFormContext();
-    const {formID, isPending} = useRequiredContext({context: BaseFormContext});
+    const {formID, isPending} = useBaseFormContext();
 
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -53,7 +50,7 @@ export function UploadPersonProfileImageFormPanel(
 
                 <ScrollArea className="flex-grow px-1 mt-6">
                     <div className={cn("space-y-4", className)}>
-                        <HookFormFileInput name="profileImage" label="Profile Image" control={control}/>
+                        <HookFormFileInput name="profileImage" label="Profile Image"/>
 
                         <Button form={formID} className="w-full" variant="primary" type="submit">
                             {isPending ? <AnimatedLoader/> : "Submit"}

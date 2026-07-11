@@ -1,16 +1,16 @@
 /**
  * @fileoverview Fieldset component for rendering dynamic filter inputs within the theatre query option form.
- *
  */
+
 import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import {CountryHookFormSelect} from "@/common/components/forms/values/CountryHookFormSelect.tsx";
-import {IANATimezoneHookFormSelect} from "@/common/components/forms/values/IANATimezoneHookFormSelect.tsx";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
+import {HookFormInput} from "@/views/common/_feat";
 
 import {TheatreQueryOptionFormStarterValues} from "@/domains/theatres";
+import {HookFormSelect} from "@/views/common/_comp";
+import {IANATimezoneOptions, ISO3166Alpha2CountryOptions} from "@/common/_const";
 
 /**
  * Renders a responsive set of filter input controls for theatre query options based on active schema fields.
@@ -28,7 +28,7 @@ export function TheatreQueryOptionFormFilterFieldset(
                         name="name"
                         label="Name"
                         control={control}
-                        className="col-span-2"
+                        classNames={{container: "col-span-2"}}
                     />
                 )}
 
@@ -37,59 +37,33 @@ export function TheatreQueryOptionFormFilterFieldset(
                         name="street"
                         label="Street"
                         control={control}
-                        className="col-span-2"
+                        classNames={{container: "col-span-2"}}
                     />
                 )}
 
                 {!disableFields?.city && (
-                    <HookFormInput
-                        name="city"
-                        label="City"
-                        control={control}
-                    />
+                    <HookFormInput name="city" label="City" control={control}/>
                 )}
 
                 {!disableFields?.state && (
-                    <HookFormInput
-                        name="state"
-                        label="State"
-                        control={control}
-                    />
+                    <HookFormInput name="state" label="State" control={control}/>
                 )}
 
                 {!disableFields?.postalCode && (
-                    <HookFormInput
-                        name="postalCode"
-                        label="Postal Code"
-                        control={control}
-                    />
+                    <HookFormInput name="postalCode" label="Postal Code" control={control}/>
                 )}
 
                 {!disableFields?.seatCapacity && (
-                    <HookFormInput
-                        name="seatCapacity"
-                        label="Seat Capacity"
-                        type="number"
-                        min={0}
-                        control={control}
-                    />
+                    <HookFormInput name="seatCapacity" label="Seat Capacity" type="number" min={0} control={control}/>
                 )}
             </section>
 
             {!disableFields?.country && (
-                <CountryHookFormSelect
-                    name="country"
-                    label="Country"
-                    control={control}
-                />
+                <HookFormSelect name="country" label="Country" options={ISO3166Alpha2CountryOptions}/>
             )}
 
             {!disableFields?.timezone && (
-                <IANATimezoneHookFormSelect
-                    name="timezone"
-                    label="Timezone"
-                    control={control}
-                />
+                <HookFormSelect name="timezone" label="Timezone" options={IANATimezoneOptions}/>
             )}
         </fieldset>
     );

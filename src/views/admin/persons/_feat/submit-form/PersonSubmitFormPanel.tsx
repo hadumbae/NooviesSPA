@@ -3,36 +3,35 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import {useFormContext} from "react-hook-form";
+import {cn} from "@/common/lib/utils.ts";
+import {HookFormInput, HookFormTextArea} from "@/views/common/_feat";
+import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import {BaseFormContext} from "@/common/_feat/generic-form-context";
+import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import {UIOpenStateProps} from "@/common/types";
+import {PersonFormValues} from "@/domains/persons";
+import {HookFormSelect} from "@/views/common/_comp";
+import {ISO3166Alpha2CountryOptions} from "@/common/_const";
 import {
+    Button,
+    ScrollArea,
     Sheet,
     SheetContent,
     SheetDescription,
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet";
-import {PersonFormValues} from "@/domains/persons/_feat/submit-form/PersonFormSchema.ts";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import HookFormTextArea from "@/common/components/forms/HookFormTextArea.tsx";
-import {CountryHookFormSelect} from "@/common/components/forms/values/CountryHookFormSelect.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {useFormContext} from "react-hook-form";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {BaseFormContext} from "@/common/_feat/generic-form-context";
-import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+} from "@/common/components/ui";
 
 /**
  * Props for the PersonSubmitFormPanel component.
  */
-type FormPanelProps = {
+type FormPanelProps = UIOpenStateProps & {
     children?: ReactNode;
     className?: string;
     isEditing?: boolean;
     disableFields?: (keyof PersonFormValues)[];
-    isOpen: boolean;
-    setIsOpen: (open: boolean) => void;
 };
 
 /**
@@ -77,7 +76,6 @@ export function PersonSubmitFormPanel(
                             <HookFormTextArea
                                 name="biography"
                                 label="Biography"
-                                control={control}
                                 description="Brief professional history."
                                 disabled={isPending}
                             />
@@ -94,11 +92,10 @@ export function PersonSubmitFormPanel(
                         )}
 
                         {isVisible("nationality") && (
-                            <CountryHookFormSelect
+                            <HookFormSelect
                                 name="nationality"
                                 label="Nationality"
-                                control={control}
-                                isMulti={false}
+                                options={ISO3166Alpha2CountryOptions}
                                 disabled={isPending}
                             />
                         )}
@@ -110,7 +107,7 @@ export function PersonSubmitFormPanel(
                             className="w-full font-semibold"
                             disabled={isPending}
                         >
-                            {isPending ? <AnimatedLoader /> : "Save Changes"}
+                            {isPending ? <AnimatedLoader/> : "Save Changes"}
                         </Button>
                     </div>
                 </ScrollArea>

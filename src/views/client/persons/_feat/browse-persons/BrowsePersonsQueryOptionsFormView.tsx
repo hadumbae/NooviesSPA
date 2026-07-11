@@ -7,8 +7,8 @@ import {useFormContext} from "react-hook-form";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {cn} from "@/common/lib/utils.ts";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
-import HookFormInput from "@/common/components/forms/HookFormInput.tsx";
-import HookFormSortToggle from "@/common/components/forms/HookFormSortToggle.tsx";
+import {HookFormInput} from "@/views/common/_feat";
+import {HookFormSortToggle} from "@/views/common/_feat";
 import {Button} from "@/common/components/ui";
 import {X} from "lucide-react";
 
