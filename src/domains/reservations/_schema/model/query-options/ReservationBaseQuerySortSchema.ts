@@ -4,15 +4,16 @@
 
 import {z} from "zod";
 import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
+import {preprocessOptionalField} from "@/common/_feat/validation-preprocessors";
 
 /** Zod schema for reservation sorting parameters. */
 export const ReservationBaseQuerySortSchema = z.object({
-    sortByStatus: MongooseSortOrderSchema.optional(),
-    sortByDateReserved: MongooseSortOrderSchema.optional(),
-    sortByDatePaid: MongooseSortOrderSchema.optional(),
-    sortByDateCancelled: MongooseSortOrderSchema.optional(),
-    sortByDateRefunded: MongooseSortOrderSchema.optional(),
-    sortByDateExpired: MongooseSortOrderSchema.optional(),
+    sortByStatus: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByDateReserved: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByDatePaid: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByDateCancelled: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByDateRefunded: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByDateExpired: preprocessOptionalField(MongooseSortOrderSchema),
 });
 
 /** Type definition for reservation sorting options. */
