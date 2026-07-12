@@ -26,8 +26,7 @@ import {
 import {
     ShowingSubmitFormStatusFieldset
 } from "@/views/admin/showings/_feat/submit-form/fieldsets/ShowingSubmitFormStatusFieldset.tsx";
-import {MultiStepForm, MultiStepFormView} from "@/common/components/forms/multi-step-form";
-import {MultiStepFormCurrentStep} from "@/common/components/forms/multi-step-form/form/MultiStepFormCurrentStep.tsx";
+import {MultiStepForm, MultiStepFormCurrentStep, MultiStepFormView} from "@/views/common/_feat";
 
 /** Props for the ShowingSubmitFormView component. */
 type ViewProps = {

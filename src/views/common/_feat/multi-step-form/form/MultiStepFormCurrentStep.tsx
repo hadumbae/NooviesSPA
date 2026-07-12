@@ -13,7 +13,6 @@ type FormProps<TValues extends FieldValues> = {
 
 /**
  * Renders the component associated with the current step index.
- * - Requires wrapping in a MultiStepFormStateContext provider.
  */
 export function MultiStepFormCurrentStep<TValues extends FieldValues>(
     {steps}: FormProps<TValues>

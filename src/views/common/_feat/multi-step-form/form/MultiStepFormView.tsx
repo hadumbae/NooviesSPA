@@ -5,11 +5,11 @@
 import {ReactElement, ReactNode} from "react";
 import {
     MultiStepFormProgressIndicator
-} from "@/common/components/forms/multi-step-form/progress-indicator/MultiStepFormProgressIndicator.tsx";
+} from "@/views/common/_feat/multi-step-form/progress-indicator/MultiStepFormProgressIndicator.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import {
     MultiStepFormStepButtons
-} from "@/common/components/forms/multi-step-form/buttons/MultiStepFormStepButtons.tsx";
+} from "@/views/common/_feat/multi-step-form/buttons/MultiStepFormStepButtons.tsx";
 
 /** Props for the MultiStepFormView component. */
 type FormProps = {

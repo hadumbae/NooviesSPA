@@ -21,16 +21,11 @@ export function MultiStepFormStepButtons(): ReactElement {
                         <ChevronLeft/>
                     </Button>
                 ) : (
-                    <div/>
+                    <div></div>
                 )
             }
 
-            <Button
-                variant="outline"
-                type="button"
-                onClick={() => resetForm()}
-                aria-label="Reset form"
-            >
+            <Button variant="outline" type="button" onClick={() => resetForm()} aria-label="Reset form">
                 <RefreshCw className="hover:animate-spin"/>
             </Button>
 
