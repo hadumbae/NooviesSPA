@@ -22,7 +22,7 @@ export function useCurrentUserReservationsQueryOptionFormDefaultValues(
 
     const defaultValues: CurrentUserReservationsQueryOptionFormValues = {
         status: "",
-        type: "",
+        reservationType: "",
         uniqueCode: "",
         sortByStatus: "",
         sortByDateReserved: "",

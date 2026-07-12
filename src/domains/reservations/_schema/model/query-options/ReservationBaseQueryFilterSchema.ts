@@ -14,7 +14,7 @@ export const ReservationBaseQueryFilterSchema = z.object({
     showingID: preprocessOptionalField(IDStringSchema),
     uniqueCode: preprocessOptionalField(StringValueSchema),
     status: preprocessOptionalField(ReservationStatusEnumSchema),
-    type: preprocessOptionalField(ReservationTypeEnumSchema),
+    reservationType: preprocessOptionalField(ReservationTypeEnumSchema),
 });
 
 /** Type representing the base reservation query filter parameters. */

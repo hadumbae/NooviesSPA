@@ -12,6 +12,11 @@ import {PageHeader} from "@/views/common/_comp";
 import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users";
 import {Separator} from "@/common/components/ui";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+import {
+    MyReservationsQueryOptionForm,
+    MyReservationsQueryOptionFormCollapsible,
+    MyReservationsQueryOptionFormView
+} from "@/views/client/reservations/_feat/my-reservations-query-option-form";
 
 /** Props for the MyReservationsPageContent component. */
 type ContentProps = {
@@ -33,15 +38,18 @@ export function MyReservationsPageContent(
             <PageHeader
                 title="My Reservations"
                 description="An Index Of All Your Reservations"
-                actions={isMobile && <MyProfileNavigationDropdown />}
+                actions={isMobile && <MyProfileNavigationDropdown/>}
             />
 
-            <Separator />
+            <Separator/>
 
-            {
-                !isMobile &&
-                <MyProfileNavigation/>
-            }
+            {!isMobile && <MyProfileNavigation/>}
+
+            <MyReservationsQueryOptionForm>
+                <MyReservationsQueryOptionFormCollapsible>
+                    <MyReservationsQueryOptionFormView/>
+                </MyReservationsQueryOptionFormCollapsible>
+            </MyReservationsQueryOptionForm>
 
             {
                 reservations.length > 0 ? (

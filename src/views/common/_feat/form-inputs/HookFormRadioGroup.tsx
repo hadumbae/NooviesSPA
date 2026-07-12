@@ -32,7 +32,7 @@ export function HookFormRadioGroup<TValues extends FieldValues>(
 
     const renderField: ControllerProps<TValues>["render"] = ({field}) => (
         <FormItem className="space-y-3">
-            <FormLabel className={cn("primary-text", classNames?.label)}>{label}</FormLabel>
+            {label && <FormLabel className={cn("primary-text", classNames?.label)}>{label}</FormLabel>}
             <FormControl>
                 <RadioGroup
                     onValueChange={field.onChange}

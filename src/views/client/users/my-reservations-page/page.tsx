@@ -6,7 +6,11 @@ import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-par
 import {MyReservationsPageContent} from "@/views/client/users/my-reservations-page/content.tsx";
 import {ReactElement} from "react";
 import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
-import {useFetchReservationsForCurrentUser} from "@/domains/reservations/_feat";
+import {
+    CurrentUserReservationsQueryOptionSchema,
+    useFetchReservationsForCurrentUser
+} from "@/domains/reservations/_feat";
+import {useParsedSearchParams} from "@/common/_feat";
 
 const RESERVATIONS_PER_PAGE = 20;
 
@@ -15,8 +19,11 @@ const RESERVATIONS_PER_PAGE = 20;
  */
 export function MyReservationsPage(): ReactElement {
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
+    const {searchParams} = useParsedSearchParams({schema: CurrentUserReservationsQueryOptionSchema});
+
     const query = useFetchReservationsForCurrentUser({
         pagination: {page, perPage: RESERVATIONS_PER_PAGE},
+        queries: searchParams,
     });
 
     return (

@@ -7,7 +7,7 @@ import {ReservationBaseQueryOptionSchema} from "@/domains/reservations/_schema";
 export const CurrentUserReservationsQueryOptionSchema = ReservationBaseQueryOptionSchema.pick({
     uniqueCode: true,
     status: true,
-    type: true,
+    reservationType: true,
     sortByStatus: true,
     sortByDateReserved: true,
 });
