@@ -7,7 +7,7 @@ import {Card, CardContent} from "@/common/components/ui";
 import {Film, Search, Sofa, TvMinimal} from "lucide-react";
 import buildString from "@/common/utility/buildString.ts";
 import ISO3166Alpha2ShortCountryConstant from "@/common/constants/country/ISO3166Alpha2ShortCountryConstant.ts";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {IconButton} from "@/views/common/_comp";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {TheatreDetails} from "@/domains/theatres";
 import {SROnly, SubsectionSubtitle, SubsectionTitle} from "@/views/common/_comp";

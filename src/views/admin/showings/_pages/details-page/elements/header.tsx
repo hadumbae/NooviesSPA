@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {DateTime} from "luxon";
 import {Ellipsis} from "lucide-react";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {IconButton} from "@/views/common/_comp";
 import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";

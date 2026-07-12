@@ -12,7 +12,7 @@ import {TheatreDetailsScreenListCard} from "@/views/admin/theatre-screens/_comp/
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Plus} from "lucide-react";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PaginationRangeButtons} from "@/views/common/_comp";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 
 const panelInfo = {

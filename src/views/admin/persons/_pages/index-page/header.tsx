@@ -5,7 +5,7 @@
 
 import {ReactElement, useState} from 'react';
 import {Plus} from "lucide-react";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {IconButton} from "@/views/common/_comp";
 import {useNavigateToPerson} from "@/domains/persons/_feat/navigation";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 

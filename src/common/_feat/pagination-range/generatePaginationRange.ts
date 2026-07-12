@@ -1,35 +1,19 @@
 /**
- * @file Generates condensed pagination ranges with ellipsis markers.
- * @filename generatePaginationRange.ts
+ * @fileoverview Utility for generating condensed pagination ranges with ellipsis markers.
  */
 
-/**
- * Pagination items consisting of page numbers and ellipses.
- */
 type PaginationRange = (number | "...")[];
 
-/**
- * Parameters for generatePaginationRange.
- */
 type PaginationRangeParams = {
-    /** Active page (1-based) */
     activePage: number;
-
-    /** Total available pages */
     totalPages: number;
-
-    /** Visible sibling pages on each side of the active page */
     siblingCount: number;
 };
 
-/**
- * Produces a compact sequence of page numbers for pagination controls.
- */
-export default function generatePaginationRange(
-    params: PaginationRangeParams
+/** Generates a sequence of page numbers and ellipsis markers for pagination navigation. */
+export function generatePaginationRange(
+    {activePage, totalPages, siblingCount = 1}: PaginationRangeParams
 ): PaginationRange {
-    const {activePage, totalPages, siblingCount = 1} = params;
-
     const pagesToShow = (siblingCount * 2) + 5;
 
     if (pagesToShow >= totalPages) {
@@ -50,17 +34,13 @@ export default function generatePaginationRange(
 
         paginationRange.push("...");
         paginationRange.push(totalPages);
-    }
-
-    else if (showLeftEllipsis && !showRightEllipsis) {
+    } else if (showLeftEllipsis && !showRightEllipsis) {
         paginationRange.push(1);
         paginationRange.push("...");
 
         const visibleRightPages = 2 + 2 * siblingCount;
         for (let i = totalPages - visibleRightPages + 1; i <= totalPages; i++) paginationRange.push(i);
-    }
-
-    else if (showLeftEllipsis && showRightEllipsis) {
+    } else if (showLeftEllipsis && showRightEllipsis) {
         paginationRange.push(1);
         paginationRange.push("...");
 

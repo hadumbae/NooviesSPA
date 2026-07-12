@@ -8,7 +8,7 @@ import {Movie, MovieSchema} from "@/domains/movies/_schema/movie/MovieSchema.ts"
 import {MovieEditPageContent} from "@/views/admin/movies/_pages/edit-page/content.tsx";
 import {PageLoader} from "@/views/common/_comp/page";
 import {ReactElement} from "react";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {useFetchMovieBySlug} from "@/domains/movies/_feat/crud-hooks";
 
 /**

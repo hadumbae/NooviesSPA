@@ -5,7 +5,7 @@
 import {Info} from "lucide-react";
 import {ReactElement} from "react";
 import {Card, CardContent, CardHeader} from "@/common/components/ui";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {IconButton} from "@/views/common/_comp";
 import {BrowseMoviePosterLink} from "@/views/admin/movies/_comp/poster-image";
 import {BrowseMovieSummary, BrowseMovieSummaryDialog} from "@/views/client/movies/_comp/browse-movie-info";
 

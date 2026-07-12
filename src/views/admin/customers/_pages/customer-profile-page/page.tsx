@@ -1,17 +1,14 @@
 /**
  * @fileoverview Smart container for the Customer Profile page in the Admin dashboard.
  */
+
+import {ReactElement} from "react";
 import {Loader} from "lucide-react";
-import ValidatedDataLoader from "@/common/components/query/ValidatedDataLoader.tsx";
-import {
-    CustomerProfileViewData,
-    CustomerProfileViewDataSchema,
-    useFetchCustomerProfileViewData
-} from "@/domains/customers/_feat/profile-overview";
+import {CustomerProfileViewData, useFetchCustomerProfileViewData} from "@/domains/customers/_feat/profile-overview";
 import {CustomerProfilePageContent} from "@/views/admin/customers/_pages/customer-profile-page/content.tsx";
 import {useFetchCustomerCode} from "@/domains/users";
-import {ReactElement} from "react";
 import {PageCenter} from "@/views/common/_comp/page";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 
 /**
  * Orchestrates data fetching and validation for the Customer Profile view.
@@ -32,7 +29,7 @@ export function CustomerProfilePage(): ReactElement {
     }
 
     return (
-        <ValidatedDataLoader query={query} schema={CustomerProfileViewDataSchema}>
+        <QueryDataLoader query={query}>
             {({customer, reservation, review}: CustomerProfileViewData) => (
                 <CustomerProfilePageContent
                     customer={customer}
@@ -42,6 +39,6 @@ export function CustomerProfilePage(): ReactElement {
                     reviewCount={review.total}
                 />
             )}
-        </ValidatedDataLoader>
+        </QueryDataLoader>
     );
 }

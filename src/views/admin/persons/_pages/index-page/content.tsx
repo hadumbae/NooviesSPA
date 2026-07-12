@@ -9,7 +9,7 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import {PersonQueryOptionForm} from "@/views/admin/persons/_feat/query-option-form/PersonQueryOptionForm.tsx";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PaginationRangeButtons} from "@/views/common/_comp";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {PersonIndexHeader} from "@/views/admin/persons/_pages/index-page/header.tsx";
 import {PersonIndexCard} from "@/views/admin/persons/_comp";

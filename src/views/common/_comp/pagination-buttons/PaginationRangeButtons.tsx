@@ -1,40 +1,30 @@
 /**
- * @file Compact pagination controls with range-based page buttons.
- * @filename PaginationRangeButtons.tsx
+ * @fileoverview Component for rendering a range of pagination buttons with next and previous controls.
  */
 
-import {FC} from 'react';
+import {ReactElement} from 'react';
+import {generatePaginationRange} from "@/common/_feat";
+import {PaginationPageButton} from "@/views/common/_comp/pagination-buttons/PaginationPageButton.tsx";
 import {
     Pagination,
     PaginationContent,
     PaginationItem,
     PaginationNext,
     PaginationPrevious
-} from "@/common/components/ui/pagination.tsx";
-import generatePaginationRange from "@/common/utility/features/pagination-buttons/generatePaginationRange.ts";
-import PaginationPageButton from "@/common/components/pagination/PaginationPageButton.tsx";
+} from "@/common/components/ui";
 
-/**
- * Props for PaginationRangeButtons.
- */
+/** Props for the PaginationRangeButtons component. */
 export type PaginationRangeButtonsProps = {
-    /** Active page (1-based) */
     page: number;
-
-    /** Items per page */
     perPage: number;
-
-    /** Total items across all pages */
     totalItems: number;
-
-    /** Updates the active page */
     setPage: (page: number) => void;
 };
 
-/**
- * Renders navigable pagination with condensed page ranges.
- */
-const PaginationRangeButtons: FC<PaginationRangeButtonsProps> = ({page, perPage, totalItems, setPage}) => {
+/** Renders a pagination control bar with dynamic page number buttons and directional navigation. */
+export function PaginationRangeButtons(
+    {page, perPage, totalItems, setPage}: PaginationRangeButtonsProps
+): ReactElement | null {
     if (perPage >= totalItems) return null;
 
     const totalPages = Math.ceil(totalItems / perPage);
@@ -79,6 +69,4 @@ const PaginationRangeButtons: FC<PaginationRangeButtonsProps> = ({page, perPage,
             </PaginationContent>
         </Pagination>
     );
-};
-
-export default PaginationRangeButtons;
+}

@@ -6,3 +6,4 @@ export * from "./page-elements";
 export * from "./page-headers";
 export * from "./screen-readers";
 export * from "./images";
+export * from "./pagination-buttons";

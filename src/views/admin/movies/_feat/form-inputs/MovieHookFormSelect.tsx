@@ -11,7 +11,7 @@ import {ReactElement} from "react";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {Movie, MovieSchema} from "@/domains/movies/_schema/movie";
 import {useFetchMovies} from "@/domains/movies/_feat/crud-hooks";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 
 /** Props for the MovieHookFormSelect component. */

@@ -7,7 +7,7 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PaginationRangeButtons} from "@/views/common/_comp";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 

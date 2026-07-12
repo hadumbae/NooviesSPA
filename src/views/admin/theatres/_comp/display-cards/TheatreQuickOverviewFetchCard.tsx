@@ -9,7 +9,7 @@ import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {TheatreDetails, TheatreDetailsSchema} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 import {useFetchTheatre} from "@/domains/theatres/_feat/crud-hooks";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {formatTheatreDetails} from "@/domains/theatres/_feat/formatters";
 
 /** Props for the TheatreQuickOverviewFetchCard component. */

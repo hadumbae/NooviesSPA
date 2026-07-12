@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, useState} from 'react';
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PaginationRangeButtons} from "@/views/common/_comp";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";

@@ -2,7 +2,7 @@
 
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {MovieCreditQueryOptions} from "@/domains/movie-credits/_schemas/query-options/MovieCreditQueryOptionsSchema.ts";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {ReactElement, ReactNode} from "react";
 import {useFetchPaginatedMovieCredits} from "@/domains/movie-credits/_feat/crud-hooks";
 import {PaginatedItems} from "@/common/types";

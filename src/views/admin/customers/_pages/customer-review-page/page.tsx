@@ -10,7 +10,7 @@ import {
     useCustomerReviewRouteParams,
     useFetchCustomerReviewViewData
 } from "@/domains/customers/_feat/movie-review";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {ReactElement} from "react";
 
 /**

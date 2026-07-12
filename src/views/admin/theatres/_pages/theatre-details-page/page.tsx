@@ -7,7 +7,7 @@ import {PageLoader} from "@/views/common/_comp/page";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 
 import {TheatreDetailsPageContent} from "@/views/admin/theatres/_pages/theatre-details-page/content.tsx";

@@ -8,7 +8,7 @@ import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetc
 import { SlugRouteParamSchema } from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import { PageLoader } from "@/views/common/_comp/page";
 import { BrowseGenreInfoPageContent } from "@/views/client/genres/browse-genre-info/content.tsx";
-import { QueryDataLoader } from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import { QueryDataLoader } from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import { useFetchGenreWithMoviesViewData } from "@/domains/genres/_feat/client-view-data";
 import { useParsedPaginationValue } from "@/common/_feat/fetch-pagination-search-params";
 

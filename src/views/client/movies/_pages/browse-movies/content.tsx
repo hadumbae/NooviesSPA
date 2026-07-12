@@ -4,7 +4,7 @@
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {SROnly} from "@/views/common/_comp/screen-readers";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PaginationRangeButtons} from "@/views/common/_comp";
 import {PageHeader} from "@/views/common/_comp";
 import {BrowseMovieIndexCard} from "@/views/client/movies/_comp";
 

@@ -6,7 +6,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {AdminMovieMeta} from "@/views/admin/movies/_comp/movie-details";
 import {Card, CardContent, CardHeader} from "@/common/components/ui";
 import {MovieDetails} from "@/domains/movies";
-import TooltipButton from "@/common/components/buttons/TooltipButton.tsx";
+import {TooltipButton} from "@/views/common/_comp";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {MovieIndexDetailsDialog} from "@/views/admin/movies/_comp/index-list-display/MovieIndexDetailsDialog.tsx";
 

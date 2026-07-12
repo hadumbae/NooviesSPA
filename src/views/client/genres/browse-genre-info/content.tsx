@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import {BrowseMovieOverviewCard} from "@/views/client/movies/_comp";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PaginationRangeButtons} from "@/views/common/_comp";
 import {BrowseGenreInfoPageHeader} from "@/views/client/genres/browse-genre-info/header.tsx";
 import {Genre} from "@/domains/genres";
 import {MovieWithGenres} from "@/domains/movies";

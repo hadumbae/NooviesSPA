@@ -9,7 +9,7 @@ import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetc
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 
 import {MovieInfoReviewsPageContent} from "@/views/client/movies/_pages/movie-reviews/content.tsx";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {useFetchMovieInfoReviewsData} from "@/domains/movies";
 
 /** Number of reviews displayed per page */

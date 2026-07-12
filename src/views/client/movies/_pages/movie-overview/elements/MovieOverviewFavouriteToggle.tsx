@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import {Card, CardContent} from "@/common/components/ui";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {FavouriteMovieHeartButton} from "@/views/client/movies/_comp";
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";

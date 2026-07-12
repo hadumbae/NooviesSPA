@@ -8,7 +8,7 @@ import useTitle from "@/common/hooks/document/useTitle.ts";
 import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {useFetchPaginatedGenres} from "@/domains/genres/_feat/crud-hooks";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {GenreIndexPageContent} from "@/views/admin/genres/_pages/index-page/content.tsx";
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {Genre, GenreQueryOptionSchema, GenreSchema} from "@/domains/genres/_schema";

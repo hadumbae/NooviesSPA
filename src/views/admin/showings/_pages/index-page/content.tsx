@@ -5,8 +5,8 @@
 
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {PaginationRangeButtons} from "@/views/common/_comp";
 
 import {ShowingIndexListDialog} from "@/views/admin/showings/_comp";
 import {ShowingDetails} from "@/domains/showings";

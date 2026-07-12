@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {List} from "lucide-react";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {IconButton} from "@/views/common/_comp";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {
     TheatreShowingCreateBreadcrumbs

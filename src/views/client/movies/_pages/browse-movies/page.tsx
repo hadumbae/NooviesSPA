@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {PaginatedItems} from "@/common/types";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 

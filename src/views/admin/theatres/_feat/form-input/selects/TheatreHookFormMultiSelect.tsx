@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
 import {Loader} from "lucide-react";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {HookFormMultiSelect} from "@/views/common/_comp/form-select/HookFormMultiSelect.tsx";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";

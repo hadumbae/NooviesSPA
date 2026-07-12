@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
 import {PageLoader} from "@/views/common/_comp/page";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 
 import {ShowingInfoPageContent} from "@/views/client/showings/_pages/showing-info/content.tsx";
 import {ShowingDetails, ShowingDetailsSchema, useFetchShowingBySlug} from "@/domains/showings";

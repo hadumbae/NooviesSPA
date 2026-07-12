@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {AlertTriangle, Loader, LucideIcon, Trash} from "lucide-react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {IconButton} from "@/views/common/_comp";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useDeleteSeatSubmitHandler} from "@/domains/seats";
 

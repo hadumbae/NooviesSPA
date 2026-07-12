@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PaginationRangeButtons} from "@/views/common/_comp";
 import {RoleTypeListHeader} from "@/views/admin/role-types/_pages/list-page/header.tsx";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";

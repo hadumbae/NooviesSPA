@@ -3,7 +3,7 @@
  */
 
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {
     CustomerReviewsPageContent
 } from "@/views/admin/customers/_pages/customer-reviews-page/content.tsx";

@@ -7,7 +7,7 @@ import {FieldValues} from "react-hook-form";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {Genre, GenreQueryOptions, GenreSchema, useFetchGenres} from "@/domains/genres";

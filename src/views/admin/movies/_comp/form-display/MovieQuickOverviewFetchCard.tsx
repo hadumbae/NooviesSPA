@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {Card, CardContent} from "@/common/components/ui";
 import {formatMovieData, MovieDetails, MovieDetailsSchema, useFetchMovie} from "@/domains/movies";
 

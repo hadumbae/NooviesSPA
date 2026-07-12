@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PaginationRangeButtons} from "@/views/common/_comp";
 import {PageSectionHeader} from "@/views/common/_comp";
 import {MovieReviewDetails} from "@/domains/movie-reviews";
 import {MovieReviewDetailsCard} from "@/views/client/movie-reviews/_feat";

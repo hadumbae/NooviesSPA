@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {UserUniqueCode} from "@/domains/users";
 import {MovieReviewModerationLog, MovieReviewUniqueCode} from "@/domains/movie-reviews";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PaginationRangeButtons} from "@/views/common/_comp";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {CustomerReviewLogCard} from "@/views/admin/customers/_comp";
 import {CustomerReviewLogsPageHeader} from "@/views/admin/customers/_pages/customer-review-logs-page/sections";

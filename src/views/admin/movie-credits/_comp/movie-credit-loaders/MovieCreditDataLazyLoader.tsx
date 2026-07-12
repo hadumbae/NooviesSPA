@@ -8,7 +8,7 @@ import {useFetchMovieCredits} from "@/domains/movie-credits/_feat/crud-hooks/use
 import {z, ZodTypeAny} from "zod";
 import {ReactElement, ReactNode} from "react";
 import {MovieCreditQueryOptions} from "@/domains/movie-credits/_schemas/query-options/MovieCreditQueryOptionsSchema.ts";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 
 /** Props for the MovieCreditDataLazyLoader component. */
 type LoaderProps<TSchema extends ZodTypeAny = ZodTypeAny> = {

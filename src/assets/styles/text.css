@@ -11,7 +11,11 @@
         @apply inline-flex items-center gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0
     }
 
+    .hover-text-colour {
+        @apply text-neutral-400 hover:text-black dark:text-neutral-500 dark:hover:text-white
+    }
+
     .hover-underline {
-        @apply hover:underline hover:underline-offset-8;
+        @apply hover:underline hover:underline-offset-8
     }
 }

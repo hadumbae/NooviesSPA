@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PaginationRangeButtons} from "@/views/common/_comp";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {PageHeader} from "@/views/common/_comp";
 

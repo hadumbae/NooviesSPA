@@ -8,7 +8,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from "@/common/components/ui/dropdown-menu.tsx";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {IconButton} from "@/views/common/_comp";
 import {Ellipsis} from "lucide-react";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {Dispatch, ReactElement, SetStateAction, useState} from "react";

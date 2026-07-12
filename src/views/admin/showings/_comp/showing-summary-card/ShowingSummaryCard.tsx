@@ -18,7 +18,7 @@ import {
     TvMinimal,
 } from "lucide-react";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {IconButton} from "@/views/common/_comp";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
 import IconTextSpan from "@/common/components/card-content/IconTextSpan.tsx";
 import {cn} from "@/common/lib/utils.ts";

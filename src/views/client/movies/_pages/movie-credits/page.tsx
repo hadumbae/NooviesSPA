@@ -9,7 +9,7 @@ import {MovieInfoCreditsPageContent} from "@/views/client/movies/_pages/movie-cr
 import {useFetchMovieInfoCreditsData} from "@/domains/movies/_feat/client-view-data/hooks/useFetchMovieInfoCreditsData.ts";
 import {MovieInfoCreditViewData} from "@/domains/movies/_feat/client-view-data";
 import { ReactElement } from "react";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 
 /**
  * Fetches and renders the movie credits page based on the URL slug.

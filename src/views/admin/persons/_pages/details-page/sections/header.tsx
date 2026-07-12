@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {EllipsisIcon} from "lucide-react";
 import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {IconButton} from "@/views/common/_comp";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 import {Person} from "@/domains/persons";

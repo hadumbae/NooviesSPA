@@ -9,7 +9,7 @@ import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamS
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MovieDetailsPageContent} from "@/views/admin/movies/_pages/details-page/content.tsx";
 import {MovieDetailsUIContextProvider} from "@/domains/movies/_ctx/details-ui/MovieDetailsUIContextProvider.tsx";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {useFetchMovieBySlug} from "@/domains/movies/_feat/crud-hooks";
 
 /**

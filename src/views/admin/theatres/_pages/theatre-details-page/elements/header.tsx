@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Ellipsis} from "lucide-react";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {IconButton} from "@/views/common/_comp";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 import {
     TheatreDetailsBreadcrumbs,

@@ -4,7 +4,7 @@
 
 import {Ellipsis} from "lucide-react";
 import {HeaderSubtitle, HeaderTitle} from "@/views/common/_comp";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {IconButton} from "@/views/common/_comp";
 
 import {formatMovieData, MovieDetails} from "@/domains/movies";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp";

@@ -4,7 +4,7 @@
 
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {Ellipsis} from "lucide-react";
-import IconButton from "@/common/components/buttons/IconButton.tsx";
+import {IconButton} from "@/views/common/_comp";
 import {
     useDeleteCurrentUserMovieReviewMutation
 } from "@/domains/movie-reviews/_feat/my-reviews/hooks/useDeleteCurrentUserMovieReviewMutation.ts";

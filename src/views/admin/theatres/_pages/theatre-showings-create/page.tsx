@@ -8,7 +8,7 @@ import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetc
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
 import {useFetchTheatreBySlug} from "@/domains/theatres/_feat/crud-hooks";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 
 import {Theatre, TheatreHttpStatusOverrideText, TheatreSchema} from "@/domains/theatres";
 import {TheatreShowingCreatePageContent} from "@/views/admin/theatres/_pages/theatre-showings-create/content.tsx";

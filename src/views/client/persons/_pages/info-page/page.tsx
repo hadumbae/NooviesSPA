@@ -9,7 +9,7 @@ import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {PageLoader} from "@/views/common/_comp";
 import {toast} from "react-toastify";
 import {useFetchPersonInfoViewData} from "@/domains/persons/_feat/client-view-data";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 
 /**
  * Entry point for the person details view.

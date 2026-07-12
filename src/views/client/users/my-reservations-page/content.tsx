@@ -3,7 +3,7 @@
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import PaginationRangeButtons from "@/common/components/pagination/PaginationRangeButtons.tsx";
+import {PaginationRangeButtons} from "@/views/common/_comp";
 import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
 import {PopulatedReservation} from "@/domains/reservations/_schema";
 import {MyReservationCompactCard} from "@/views/client/reservations/_comp";

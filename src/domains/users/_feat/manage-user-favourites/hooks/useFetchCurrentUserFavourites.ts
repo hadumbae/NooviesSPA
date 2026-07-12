@@ -4,16 +4,20 @@
  */
 
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {useQuery} from "@tanstack/react-query";
-import useQueryFnHandler from "@/common/utility/query/useQueryFnHandler.ts";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {getUserFavourites} from "@/domains/users/_feat/manage-user-favourites/repository";
 import {ManageUserFavouritesQueryKeys} from "@/domains/users/_feat/manage-user-favourites/hooks";
+import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
+import {generatePaginationSchema} from "@/common/_feat/validation-builders";
+import {MovieDetails, MovieDetailsSchema} from "@/domains/movies";
+import {PaginatedItems} from "@/common/types";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 
 /** Pagination params with optional query options. */
 type FetchParams = Partial<PaginationValues> & {
-    options?: FetchQueryOptions<unknown>
+    options?: FetchQueryOptions<PaginatedItems<MovieDetails>>
 }
 
 /**
@@ -21,10 +25,10 @@ type FetchParams = Partial<PaginationValues> & {
  */
 export function useFetchCurrentUserFavourites(
     {page = 1, perPage = 10, options}: FetchParams
-) {
-    const fetchUserFavourites = useQueryFnHandler({
+): UseQueryResult<PaginatedItems<MovieDetails>, HttpResponseError> {
+    const fetchUserFavourites = buildQueryFn({
         action: () => getUserFavourites({page, perPage}),
-        errorMessage: "Failed to fetch user's favourites.",
+        schema: generatePaginationSchema(MovieDetailsSchema),
     });
 
     return useQuery({

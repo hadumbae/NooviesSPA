@@ -9,7 +9,7 @@ import {Loader} from "lucide-react";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {HookFormMultiSelect} from "@/views/common/_comp/form-select/HookFormMultiSelect.tsx";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {TheatreScreen, TheatreScreenSchema} from "@/domains/theatre-screens/_schema/model";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";

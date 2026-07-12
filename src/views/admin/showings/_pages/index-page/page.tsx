@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {QueryDataLoader} from "@/common/components/query/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 
 import {ShowingIndexPageContent} from "@/views/admin/showings/_pages/index-page/content.tsx";
 import {ShowingDetailsSchema, ShowingQueryOptionSchema, useFetchPaginatedShowings} from "@/domains/showings";
