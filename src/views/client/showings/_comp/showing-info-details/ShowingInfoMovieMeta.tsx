@@ -3,9 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/lib/utils.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import buildString from "@/common/utility/buildString.ts";
 import {Movie, MovieDetails, MovieWithGenres} from "@/domains/movies";
@@ -38,18 +36,16 @@ export function ShowingInfoMovieMeta(
     return (
         <div>
             <LoggedLink
+                className="primary-text font-bold max-md:text-sm hover:underline underline-offset-4 line-clamp-2"
                 to={`/browse/movies/${slug}`}
-                className={cn(
-                    "primary-text font-bold max-md:text-sm",
-                    "hover:underline underline-offset-4 line-clamp-2",
-                )}
             >
                 {formattedMovieTitle}
             </LoggedLink>
 
-            <SecondaryHeaderText className="max-md:text-sm font-semibold">
+            <h3 className="max-md:text-sm font-semibold fieldset-header">
                 {metaString}
-            </SecondaryHeaderText>
+            </h3>
         </div>
-    );
+    )
+        ;
 }

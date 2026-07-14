@@ -7,7 +7,7 @@ import {ChevronRight} from "lucide-react";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
 import {Separator} from "@/common/components/ui";
-import NoneSpan from "@/common/components/NoneSpan.tsx";
+import {NoneSpan} from "@/common/components/NoneSpan.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {
     ActorCreditAvatar

@@ -1,7 +1,7 @@
 /** @fileoverview Presentational component for displaying an empty-state message. */
 
 import {cn} from "@/common/lib/utils.ts";
-import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
+import {ReactElement} from "react";
 
 /** Props for the EmptyArrayContainer component. */
 type ContainerProps = {
@@ -10,19 +10,14 @@ type ContainerProps = {
 };
 
 /** Renders a centered, stylized message indicating an empty collection state. */
-const EmptyArrayContainer = ({text, className}: ContainerProps) => {
+export function EmptyArrayContainer(
+    {text, className}: ContainerProps
+): ReactElement {
     return (
         <div className={cn("flex justify-center items-center", className)}>
-            <span
-                className={cn(
-                    "uppercase italic select-none text-sm",
-                    SecondaryTextBaseCSS
-                )}
-            >
+            <span className="secondary-text uppercase italic select-none text-sm">
                 {text ?? "There Are No Items"}
             </span>
         </div>
     );
-};
-
-export default EmptyArrayContainer;
+}

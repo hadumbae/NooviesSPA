@@ -2,29 +2,16 @@
  * @fileoverview Administrative card displaying a summary of a movie showing.
  */
 
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
+import {ReactElement} from "react";
+import {Card, CardContent} from "@/common/components/ui";
 import buildString from "@/common/utility/buildString.ts";
-import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {
-    BadgeAlert,
-    Circle,
-    Cog,
-    DollarSign,
-    Search,
-    Theater,
-    TvMinimal,
-} from "lucide-react";
+import {BadgeAlert, Circle, Cog, DollarSign, Search, Theater, TvMinimal,} from "lucide-react";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {IconButton} from "@/views/common/_comp";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import IconTextSpan from "@/common/components/card-content/IconTextSpan.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
-import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
-import {ReactElement} from "react";
+import {ShowingDetails} from "@/domains/showings";
 
 /** Props for the ShowingSummaryCard component. */
 type CardProps = {
@@ -64,12 +51,8 @@ export function ShowingSummaryCard({showing}: CardProps): ReactElement {
             <CardContent className="px-5 py-3 space-y-3">
                 <div className="flex justify-between items-center">
                     <section>
-                        <PrimaryHeaderText as="h2">
-                            {formattedStartTime}
-                        </PrimaryHeaderText>
-                        <SecondaryHeaderText as="h3" className="text-xs">
-                            {formattedTimeMetadata}
-                        </SecondaryHeaderText>
+                        <h2 className="subsection-title">{formattedStartTime}</h2>
+                        <h3 className="subsection-subtitle text-xs">{formattedTimeMetadata}</h3>
                     </section>
 
                     <div>
@@ -81,22 +64,22 @@ export function ShowingSummaryCard({showing}: CardProps): ReactElement {
                     </div>
                 </div>
 
-                <div className={cn(RoundedBorderCSS, "grid grid-cols-2 gap-1 p-2 select-none")}>
-                    <IconTextSpan className={cn(RoundedBorderCSS, "px-2")}>
+                <div className="rounded-container-border grid grid-cols-2 gap-1 p-2 select-none">
+                    <span className="rounded-container-border text-with-icon px-2">
                         <DollarSign/> {ticketPrice}
-                    </IconTextSpan>
+                    </span>
 
-                    <IconTextSpan className={cn(RoundedBorderCSS, "px-2")}>
+                    <span className="rounded-container-border text-with-icon px-2">
                         <Cog/> {formattedStatus}
-                    </IconTextSpan>
+                    </span>
 
-                    <IconTextSpan className={cn(RoundedBorderCSS, "px-2")}>
+                    <span className="rounded-container-border text-with-icon px-2">
                         <BadgeAlert/> {isSpecialEvent ? "Special" : "Normal"} Event
-                    </IconTextSpan>
+                    </span>
 
-                    <IconTextSpan className={cn(RoundedBorderCSS, "px-2")}>
+                    <span className="rounded-container-border text-with-icon px-2">
                         <Circle/> {isActive ? "Active" : "Inactive"}
-                    </IconTextSpan>
+                    </span>
                 </div>
 
                 <div className="flex justify-between">

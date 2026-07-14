@@ -26,7 +26,7 @@ export function MovieQueryOptionFormFilterFieldset(
 
     return (
         <fieldset className="space-y-4">
-            <PageSectionHeader as="h2" text="Filters"/>
+            <PageSectionHeader as="h3" text="Filters" className="text-base"/>
 
             <div className={cn("grid grid-cols-2 gap-4", className)}>
                 {!disableFields?.title && (

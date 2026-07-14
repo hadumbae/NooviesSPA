@@ -7,7 +7,7 @@ import {LucideIconText} from "@/common/components/card-content/LucideIconText.ts
 import {Captions, Clock, Headphones, Landmark, Presentation, Search, Ticket} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
-import CollapsibleTextblock from "@/common/components/text/CollapsibleTextblock.tsx";
+import {CollapsibleTextblock} from "@/common/components/text/CollapsibleTextblock.tsx";
 import {
     buttonVariants,
     Dialog,

@@ -6,13 +6,15 @@ import {ReactElement} from 'react';
 import NavLink from "@/common/components/navigation/NavLink.tsx";
 import {Button} from "@/common/components/ui";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import BaseLayoutClientProfileNavigationDropdown
-    from "@/common/layout/client/navigation/desktop-client-navigation/BaseLayoutClientProfileNavigationDropdown.tsx";
+import {
+    BaseLayoutClientProfileNavigationDropdown
+} from "@/common/layout/client/navigation/desktop-client-navigation/BaseLayoutClientProfileNavigationDropdown.tsx";
 import {
     BaseLayoutClientBrowseNavigationDropdown
 } from "@/common/layout/client/navigation/desktop-client-navigation/BaseLayoutClientBrowseNavigationDropdown.tsx";
-import BaseLayoutDesktopThemeDropdown
-    from "@/common/layout/common-layout/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";
+import {
+    BaseLayoutDesktopThemeDropdown
+} from "@/common/layout/common-layout/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";
 import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
 import {AuthContext, useAuthLogoutSubmitMutation} from "@/domains/auth";
 import {SROnly} from "@/views/common/_comp";

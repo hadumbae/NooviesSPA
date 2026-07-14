@@ -1,7 +1,6 @@
 /** @fileoverview Fieldset component for cast-specific movie credit form fields. */
 
 import {ReactElement} from "react";
-import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
 import {HookFormInput} from "@/views/common/_feat";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import {useFormContext} from "react-hook-form";
@@ -51,7 +50,7 @@ export function MovieCreditFormCastFieldset(
 
     return (
         <fieldset className={cn("space-y-3", className)}>
-            <h1 className={HeaderTextCSS}>Credits Info</h1>
+            <h3 className="fieldset-header">Credits Info</h3>
             {renderFields({fields})}
         </fieldset>
     );

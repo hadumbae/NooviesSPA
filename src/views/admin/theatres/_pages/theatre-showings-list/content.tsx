@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {PaginationRangeButtons} from "@/views/common/_comp";
-import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
 import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card";
 
 import {Theatre, TheatreDetails} from "@/domains/theatres";

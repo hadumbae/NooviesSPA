@@ -3,16 +3,14 @@
  */
 
 import {ReactElement} from 'react';
-import {DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from "@/common/components/ui/dropdown-menu.tsx";
+import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from "@/common/components/ui";
 import {cn} from "@/common/lib/utils.ts";
 import {ChevronDown} from "lucide-react";
-import {Button} from "@/common/components/ui/button.tsx";
 import useCurrentURLPath from "@/common/hooks/router/useCurrentURLPath.ts";
 import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.tsx";
 import {
     BaseLayoutDesktopClientNavigation
 } from "@/common/layout/client/navigation/desktop-client-navigation/BaseLayoutDesktopClientNavigation.tsx";
-import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /**
  * A dropdown menu providing navigation links to major catalogue sections like movies, genres, and theatres.
@@ -34,7 +32,7 @@ export function BaseLayoutClientBrowseNavigationDropdown(): ReactElement {
                 <Button
                     variant="link"
                     size="sm"
-                    className={cn(!isActive && HoverLinkCSS)}
+                    className={cn(!isActive && "hover-button")}
                 >
                     Browse <ChevronDown/>
                 </Button>

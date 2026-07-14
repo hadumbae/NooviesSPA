@@ -1,4 +1,9 @@
-export default {
+/**
+ * @fileoverview ISO 3166-1 alpha-2 country code mapping constant.
+ */
+
+/** Mapping of ISO 3166-1 alpha-2 codes to short country names. */
+export const ISO3166Alpha2ShortCountryConstant = {
     AF: "Afghanistan",
     AX: "Åland",
     AL: "Albania",
@@ -226,7 +231,7 @@ export default {
     TO: "Tonga",
     TT: "Trinidad & Tobago",
     TN: "Tunisia",
-    TR: "Turkey",
+    TR: "Türkiye",
     TM: "Turkmenistan",
     TC: "Turks & Caicos",
     TV: "Tuvalu",

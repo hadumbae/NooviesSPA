@@ -6,7 +6,6 @@ import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {Separator} from "@/common/components/ui";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {HookFormInput} from "@/views/common/_feat";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {SeatFormValues} from "@/domains/seats";
@@ -20,7 +19,7 @@ export function SeatSubmitFormNonSeatFieldset(
     return (
         <fieldset className={cn("space-y-4", className)}>
             <div>
-                <PrimaryHeaderText>Seat</PrimaryHeaderText>
+                <h3 className="fieldset-header">Seat</h3>
                 <Separator/>
             </div>
 

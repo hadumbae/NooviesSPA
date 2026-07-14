@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {Card, CardContent, Separator} from "@/common/components/ui";
-import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
+import {DetailsCardSpan} from "@/common/components/text/DetailsCardSpan.tsx";
 import generateLocationAddressString from "@/common/utility/features/location/generateLocationAddressString.ts";
 import {cn} from "@/common/lib/utils.ts";
 

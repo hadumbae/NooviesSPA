@@ -4,7 +4,7 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {buttonVariants, Dialog, DialogContent, DialogTrigger} from "@/common/components/ui";
-import TextQuote from "@/common/components/text/TextQuote.tsx";
+import {TextQuote} from "@/common/components/text/TextQuote.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";

@@ -1,46 +1,44 @@
-import {FC, PropsWithChildren} from 'react';
+/**
+ * @fileoverview Layout component for rendering labeled content sections within cards.
+ */
+
+import {ReactElement, ReactNode} from 'react';
 import {cn} from "@/common/lib/utils.ts";
-import {SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
-interface StylingProps {
-    label?: string;
-    container?: string;
-    content?: string;
-}
-
-interface LabelProps {
+type LabelProps = {
+    children: ReactNode;
     orientation?: "horizontal" | "vertical";
-    classNames?: StylingProps;
     label: string;
+    classNames?: {
+        label?: string;
+        container?: string;
+        content?: string;
+    };
 }
 
-const LabelContent: FC<PropsWithChildren<LabelProps>> = (props) => {
-    const {children, orientation = "vertical", classNames = {}, label} = props;
-    const {label: labelClassName, container: containerClassName, content: contentClassName} = classNames;
-
-    const containerCSS = orientation === "horizontal" ? "grid grid-cols-3 gap-2 items-center" : "flex flex-col space-y-3";
-    const contentCSS = orientation === "horizontal" && "col-span-2";
-
+/**
+ * Displays a labeled section with configurable orientation and custom styling.
+ */
+export function LabelContent(
+    {children, orientation = "vertical", classNames = {}, label}: LabelProps
+): ReactElement {
     return (
-        <div className={cn(containerCSS, containerClassName)}>
+        <div className={cn(
+            orientation === "horizontal" ? "grid grid-cols-3 gap-2 items-center" : "flex flex-col space-y-3",
+            classNames?.container,
+        )}>
             {
                 label &&
                 <div>
-                    <span className={cn(
-                        "uppercase text-[12px] select-none",
-                        SecondaryTextBaseCSS,
-                        labelClassName,
-                    )}>
+                    <span className={cn("uppercase text-[12px] select-none", classNames?.label)}>
                         {label}
                     </span>
                 </div>
             }
 
-            <div className={cn(contentCSS, contentClassName)}>
+            <div className={cn(orientation === "horizontal" && "col-span-2", classNames?.content)}>
                 {children}
             </div>
         </div>
     );
-};
-
-export default LabelContent;
+}

@@ -5,7 +5,7 @@
 
 import {useEffect, useState} from "react";
 import {ScreenBreakpoint} from "@/common/type/ScreenBreakpoint.ts";
-import {ScreenBreakpointConstant} from "@/common/constants/ScreenBreakpointConstant.ts";
+import {ScreenBreakpointConstant} from "@/common/_const/ScreenBreakpointConstant.ts";
 
 /**
  * Props for the {@link useIsBreakpoint} hook.

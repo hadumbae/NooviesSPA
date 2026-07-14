@@ -3,7 +3,6 @@
  */
 
 import {HookFormInput} from "@/views/common/_feat";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
@@ -22,7 +21,7 @@ export function ShowingSubmitFormDateTimeFieldset(
     return (
         <fieldset className={cn("space-y-3", className)}>
             <div>
-                <PrimaryHeaderText>Date & Time</PrimaryHeaderText>
+                <h3 className="fieldset-header">Date & Time</h3>
                 <Separator/>
             </div>
 

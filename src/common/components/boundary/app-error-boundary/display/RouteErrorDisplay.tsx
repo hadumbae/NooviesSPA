@@ -1,6 +1,5 @@
 /**
- * @file Visual component for rendering standardized application routing errors.
- * @filename RouteErrorDisplay.tsx
+ * @fileoverview Display component for rendering errors encountered during routing.
  */
 
 import {ErrorHandlerDisplayProps} from "@/common/type/ErrorHandlerProps.ts";
@@ -8,13 +7,9 @@ import Logger from "@/common/utility/features/logger/Logger.ts";
 import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {TriangleAlert} from "lucide-react";
-import {HeaderTextCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {RouteError} from "@/common/errors/RouteError.ts";
 
-/**
- * Standardized UI for displaying RouteError states with integrated logging.
- * ---
- */
+/** Renders a visual representation of a RouteError with a header and description. */
 export const RouteErrorDisplay = ({error, className}: ErrorHandlerDisplayProps<RouteError>) => {
     const {message, description, headerText} = error;
 
@@ -34,8 +29,8 @@ export const RouteErrorDisplay = ({error, className}: ErrorHandlerDisplayProps<R
             <TriangleAlert size={30}/>
 
             <div className="space-y-2 text-center">
-                <h2 className={cn(HeaderTextCSS, "uppercase italic")}>{headerText}</h2>
-                <span className={cn(SecondaryTextBaseCSS, "text-sm")}>{message}</span>
+                <h2 className="section-title italic">{headerText}</h2>
+                <span className="secondary-text text-sm">{message}</span>
             </div>
 
             {

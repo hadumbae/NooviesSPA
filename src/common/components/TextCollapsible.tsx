@@ -1,18 +1,25 @@
-import {FC, ReactNode, useEffect, useState} from 'react';
+/**
+ * @fileoverview A component that provides a collapsible container for text content.
+ */
+
+import {ReactElement, ReactNode, useEffect, useState} from 'react';
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui/collapsible.tsx";
 import {ChevronDown, ChevronRight} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 type TextProps = {
     children: ReactNode;
     defaultOpen?: boolean;
     triggerText?: string;
-    className?:string;
+    className?: string;
 }
 
-const TextCollapsible: FC<TextProps> = (props) => {
-    const {children, defaultOpen = false, triggerText, className} = props;
+/**
+ * A component that displays a collapsible section of text with an expandable trigger.
+ */
+export function TextCollapsible(
+    {children, defaultOpen = false, triggerText, className}: TextProps
+): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
 
     useEffect(() => {
@@ -24,7 +31,7 @@ const TextCollapsible: FC<TextProps> = (props) => {
 
     return (
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-            <CollapsibleTrigger className={cn(PrimaryTextBaseCSS, "flex items-center space-x-2")}>
+            <CollapsibleTrigger className="primary-text flex items-center space-x-2">
                 {triggerIcon}
                 <h1 className="text-md font-bold">{triggerDisplay}</h1>
             </CollapsibleTrigger>
@@ -33,6 +40,4 @@ const TextCollapsible: FC<TextProps> = (props) => {
             </CollapsibleContent>
         </Collapsible>
     );
-};
-
-export default TextCollapsible;
+}

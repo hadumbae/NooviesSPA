@@ -1,56 +1,32 @@
 /**
- * @file NotAdminWarning.tsx
- *
- * Guard component for admin-only routes.
- *
- * Displays a contextual warning when:
- * - The user is not authenticated
- * - The user is authenticated but lacks admin privileges
- *
- * Persists the current route for post-auth redirection.
+ * @fileoverview Warning component displayed when a user lacks administrative privileges or is not logged in.
  */
 
+import {ReactElement} from "react";
 import {AlertTriangle} from "lucide-react";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import HoverLink from "@/common/components/navigation/HoverLink.tsx";
 import {useLocation} from "react-router-dom";
-import {PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
+import {cn} from "@/common/lib/utils.ts";
+import {User} from "@/domains/users";
 
-import {User} from "@/domains/users/_schema/user/UserSchema";
+/** Config for the NotAdminWarning component. */
+const alertConfig = {
+    icon: 75,
+    section: "flex flex-col items-center space-y-1",
+    text: "pt-5 uppercase select-none",
+    link: "uppercase",
+}
 
-/**
- * Props for {@link NotAdminWarning}.
- */
+/** Props for the NotAdminWarning component. */
 type WarningProps = {
-    /** Current authenticated user (or null if unauthenticated). */
     user: User | null;
-
-    /** Whether the user has admin privileges. */
     isAdmin: boolean;
 };
 
-/** Warning icon size in pixels */
-const ICON_SIZE = 75;
-
-/** Layout wrapper for warning content */
-const SECTION_CSS = "flex flex-col items-center space-y-1";
-
-/** Header text styling */
-const TEXT_CSS = "pt-5 uppercase select-none";
-
-/** Link text styling */
-const LINK_CSS = "uppercase";
-
-/**
- * Admin access warning component.
- *
- * - Redirects unauthenticated users to login
- * - Prevents non-admin users from accessing restricted routes
- * - Stores the attempted route for post-login redirect
- *
- * @component
- */
-const NotAdminWarning = ({user, isAdmin}: WarningProps) => {
+/** Displays a warning message and navigation links for unauthorised users or guests. */
+export function NotAdminWarning(
+    {user, isAdmin}: WarningProps
+): ReactElement | null {
     const {pathname, search, hash} = useLocation();
     const path = `${pathname}${search}${hash}`;
 
@@ -58,39 +34,23 @@ const NotAdminWarning = ({user, isAdmin}: WarningProps) => {
 
     if (!user) {
         return (
-            <section className={SECTION_CSS}>
-                <AlertTriangle
-                    size={ICON_SIZE}
-                    className={PrimaryTextBaseCSS}
-                />
-                <PrimaryHeaderText className={TEXT_CSS}>
-                    You Must Be Logged In
-                </PrimaryHeaderText>
-                <HoverLink to="/auth/login" className={LINK_CSS}>
-                    Log In
-                </HoverLink>
+            <section className={alertConfig.section}>
+                <AlertTriangle size={alertConfig.icon} className="primary-text"/>
+                <h2 className={cn("section-title", alertConfig.text)}>You Must Be Logged In</h2>
+                <HoverLink to="/auth/login" className={alertConfig.link}>Log In</HoverLink>
             </section>
         );
     }
 
     if (!isAdmin) {
         return (
-            <section className={SECTION_CSS}>
-                <AlertTriangle
-                    size={ICON_SIZE}
-                    className={PrimaryTextBaseCSS}
-                />
-                <PrimaryHeaderText className={TEXT_CSS}>
-                    Restricted To Admins
-                </PrimaryHeaderText>
-                <HoverLink to="/" className={LINK_CSS}>
-                    Home
-                </HoverLink>
+            <section className={alertConfig.section}>
+                <AlertTriangle size={alertConfig.icon} className="primary-text"/>
+                <h2 className={cn("section-title", alertConfig.text)}>Restricted To Admins</h2>
+                <HoverLink to="/" className={alertConfig.link}>Home</HoverLink>
             </section>
         );
     }
 
     return null;
-};
-
-export default NotAdminWarning;
+}

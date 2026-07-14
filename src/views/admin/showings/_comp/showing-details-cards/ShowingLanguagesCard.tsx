@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Showing, ShowingDetails} from "@/domains/showings/_schema/showing";
-import LabelContent from "@/common/components/card-content/LabelContent.tsx";
+import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
 import {ShowingLanguageBadges} from "@/views/admin/showings/_comp/badges";
 import {cn} from "@/common/lib/utils.ts";
 import {CardClassNames} from "@/common/types/card";

@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-import ACCEPTED_IMAGE_TYPES from "@/common/constants/AcceptedImageTypeConstant.ts";
+import {AcceptedImageTypeConstant} from "@/common/_const/images/AcceptedImageTypeConstant.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormFileInput} from "@/views/common/_feat";
 
@@ -21,7 +21,7 @@ export function GenreImageUploadFormView(
 ): ReactElement {
     const {isPending} = useBaseFormContext();
 
-    const acceptedFileTypes = ACCEPTED_IMAGE_TYPES
+    const acceptedFileTypes = AcceptedImageTypeConstant
         .map((t) => t.replace("image/", "").toUpperCase())
         .join(", ");
 

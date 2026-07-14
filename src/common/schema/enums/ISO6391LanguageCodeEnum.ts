@@ -1,5 +1,5 @@
 import {z} from "zod";
-import ISO6391CodeConstant from "@/common/constants/languages/ISO6391CodeConstant.ts";
+import {ISO6391CodeConstant} from "@/common/_const/languages/ISO6391CodeConstant.ts";
 
 /**
  * Zod enum schema representing valid ISO 639-1 language codes.

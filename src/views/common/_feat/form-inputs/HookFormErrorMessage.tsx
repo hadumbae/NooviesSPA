@@ -5,8 +5,8 @@
 import {forwardRef} from 'react';
 import {cn} from "@/common/lib/utils.ts";
 import {FieldError} from "react-hook-form";
-import {ErrorMessageCSS} from "@/common/constants/css/TextCSS.ts";
 
+/** Props for the HookFormErrorMessage component. */
 type ErrorProps = {
     className?: string;
     error?: FieldError;
@@ -17,7 +17,7 @@ export const HookFormErrorMessage = forwardRef<HTMLParagraphElement, ErrorProps>
     if (!error) return null;
 
     return (
-        <p ref={ref} className={cn(ErrorMessageCSS, className)}>
+        <p ref={ref} className={cn("text-[0.8rem] font-medium text-red-500 dark:text-red-700", className)}>
             {error.message}
         </p>
     );

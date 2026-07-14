@@ -1,4 +1,9 @@
-export default {
+/**
+ * @fileoverview Constant mapping of ISO 3166-1 alpha-2 country codes to their full names.
+ */
+
+/** Constant mapping ISO 3166-1 alpha-2 country codes to their English names. */
+export const ISO3166Alpha2CountryConstant = {
     "AF": "Afghanistan",
     "AX": "Åland Islands",
     "AL": "Albania",

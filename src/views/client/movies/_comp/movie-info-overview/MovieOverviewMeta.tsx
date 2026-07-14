@@ -6,7 +6,6 @@
 
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
-import {PillCSS} from "@/common/constants/css/ContainerCSS.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {generateGenreLinkConfigs} from "@/domains/genres/_feat/navigation";
@@ -28,7 +27,7 @@ export function MovieOverviewMeta({className, movie}: OverviewProps): ReactEleme
         <div className={className}>
             <nav>
                 <ScrollArea>
-                    <LinkGroup links={genreLinks} className={PillCSS}/>
+                    <LinkGroup links={genreLinks} className="default-pill"/>
                     <ScrollBar orientation="horizontal"/>
                 </ScrollArea>
             </nav>

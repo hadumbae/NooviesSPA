@@ -9,11 +9,16 @@
  */
 
 import {NetworkError} from "@/common/errors/NetworkError.ts";
-import NetworkErrorDisplay from "@/common/components/boundary/query-error-fallback/display/NetworkErrorDisplay.tsx";
+import {
+    NetworkErrorDisplay
+} from "@/common/components/boundary/query-error-fallback/display/NetworkErrorDisplay.tsx";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import HttpResponseErrorDisplay
-    from "@/common/components/boundary/query-error-fallback/display/HttpResponseErrorDisplay.tsx";
-import AppErrorDisplay from "@/common/components/boundary/app-error-boundary/display/AppErrorDisplay.tsx";
+import {
+    HttpResponseErrorDisplay
+} from "@/common/components/boundary/query-error-fallback/display/HttpResponseErrorDisplay.tsx";
+import {
+    AppErrorDisplay
+} from "@/common/components/boundary/app-error-boundary/display/AppErrorDisplay.tsx";
 import {ErrorHandlerProps} from "@/common/type/ErrorHandlerProps.ts";
 import {HttpStatusOverrideText} from "@/common/type/error/HttpErrorTypes.ts";
 

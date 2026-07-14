@@ -1,14 +1,9 @@
 /**
  * @fileoverview Summary metadata section for a specific reservation record.
- *
  */
 
 import {AdminReservation} from "@/domains/reservations/_schema/model";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
-import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
-import {
-    ReservationStatusBadge
-} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
+import {ReservationStatusBadge} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
 import {ReactElement} from "react";
 
 /** Props for the ReservationByCodeMetadataSection component. */
@@ -18,20 +13,13 @@ type SectionProps = {
 
 /** Displays key identifying information for a reservation in a horizontal layout. */
 export function ReservationByCodeMetadataSection(
-    {reservation}: SectionProps
+    {reservation: {uniqueCode, slug, status}}: SectionProps
 ): ReactElement {
-    const {uniqueCode, slug, status} = reservation;
-
     return (
         <section className="flex justify-between items-center">
             <div className="space-y-1">
-                <PrimaryHeaderText as="h2" className="text-2xl">
-                    {uniqueCode}
-                </PrimaryHeaderText>
-
-                <SecondaryHeaderText as="h3" className="text-xs italic">
-                    {slug}
-                </SecondaryHeaderText>
+                <h2 className="section-title text-2xl">{uniqueCode}</h2>
+                <h3 className="section-subtitle text-xs italic">{slug}</h3>
             </div>
 
             <div>

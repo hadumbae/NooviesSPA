@@ -4,7 +4,6 @@
 
 import {ReactElement, useEffect} from 'react';
 import {useFormContext} from "react-hook-form";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui";
 import {cn} from "@/common/lib/utils.ts";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
@@ -28,7 +27,7 @@ export function SeatSubmitFormDetailsFieldset(
     return (
         <fieldset className={cn("space-y-4", className)}>
             <div>
-                <PrimaryHeaderText>Details</PrimaryHeaderText>
+                <h3 className="fieldset-header">Details</h3>
                 <Separator/>
             </div>
 

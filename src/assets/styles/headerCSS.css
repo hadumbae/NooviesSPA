@@ -15,6 +15,10 @@
         @apply primary-text text-lg uppercase
     }
 
+    .error-title {
+        @apply primary-text text-lg uppercase
+    }
+
     .section-subtitle {
         @apply secondary-text text-base font-semibold italic
     }

@@ -10,7 +10,6 @@ import {ReactElement, useState} from "react";
 import {
     MovieReviewSummaryCard
 } from "@/views/client/movie-reviews/_comp/review-summary-card/MovieReviewSummaryCard.tsx";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 
@@ -54,7 +53,7 @@ export function MovieOverviewReviews(
 
             {userReview && (
                 <div className="space-y-4">
-                    <PrimaryHeaderText>User Review</PrimaryHeaderText>
+                    <h3 className="fieldset-header">User Review</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <MovieReviewSummaryCard isUser={true} review={userReview}/>
@@ -64,7 +63,7 @@ export function MovieOverviewReviews(
 
             {reviews.length > 0 && (
                 <div className="space-y-4">
-                    <PrimaryHeaderText>Most Recent Reviews</PrimaryHeaderText>
+                    <h3 className="fieldset-header">Most Recent Reviews</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {reviews.map((review) => <MovieReviewSummaryCard key={review._id} review={review}/>)}

@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {ISO6391LanguageCode} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
 import {Badge} from "@/common/components/ui/badge.tsx";
-import {ISO6391LanguageLabels,} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
+import {ISO6391LanguageLabels,} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 import {cn} from "@/common/lib/utils.ts";
 
 /** Props for the ShowingLanguageBadges component. */

@@ -6,7 +6,6 @@ import {ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {Separator} from "@/common/components/ui";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {HookFormInput} from "@/views/common/_feat";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {TheatreFormValues} from "@/domains/theatres/_feat/submit-data";
@@ -25,7 +24,7 @@ export function TheatreSubmitFormDetailsFieldset(
     return (
         <fieldset className="space-y-4">
             <div>
-                <PrimaryHeaderText>Theatre</PrimaryHeaderText>
+                <h3 className="fieldset-header">Theatre</h3>
                 <Separator/>
             </div>
 

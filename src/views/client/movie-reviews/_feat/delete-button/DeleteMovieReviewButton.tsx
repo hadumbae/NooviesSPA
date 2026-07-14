@@ -2,16 +2,13 @@
  * @fileoverview A button component that triggers the deletion of a specific movie review.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {Button, ButtonProps} from "@/common/components/ui/button.tsx";
-import {Trash} from "lucide-react";
-import {
-    useDeleteCurrentUserMovieReviewMutation
-} from "@/domains/movie-reviews/_feat/my-reviews/hooks/useDeleteCurrentUserMovieReviewMutation.ts";
-import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 import {ReactElement} from "react";
+import {Button, ButtonProps} from "@/common/components/ui";
+import {cn} from "@/common/lib/utils.ts";
+import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {Trash} from "lucide-react";
+import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import {useDeleteCurrentUserMovieReviewMutation} from "@/domains/movie-reviews";
 
 /** Props for the DeleteMovieReviewButton component. */
 type DeleteProps = Omit<ButtonProps, "onClick"> & {
@@ -38,7 +35,7 @@ export function DeleteMovieReviewButton(
             {...buttonProps}
             variant={variant}
             disabled={disabled || isPending || isSuccess}
-            className={cn(HoverLinkCSS, className)}
+            className={cn("hover-button", className)}
             onClick={onDeleteClick}
         >
             {isPending ? <AnimatedLoader/> : <Trash/>}

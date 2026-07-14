@@ -8,7 +8,7 @@ import {cn} from "@/common/lib/utils.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import {
     ISO6391LanguageLabels as ISO6391LanguageConstant
-} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
+} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 import {
     AdminMovieWithRatingCardStat
 } from "@/views/admin/customers/_comp/movie-with-rating-card/AdminMovieWithRatingCardStat.tsx";

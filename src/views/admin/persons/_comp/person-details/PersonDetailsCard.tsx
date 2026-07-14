@@ -3,10 +3,10 @@
  */
 
 import {ReactElement} from 'react';
-import {Separator, Card, CardContent} from "@/common/components/ui";
-import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
-import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
-import TextQuote from "@/common/components/text/TextQuote.tsx";
+import {Card, CardContent, Separator} from "@/common/components/ui";
+import {DetailsCardSpan} from "@/common/components/text/DetailsCardSpan.tsx";
+import {ISO3166Alpha2CountryConstant} from "@/common/_const";
+import {TextQuote} from "@/common/components/text/TextQuote.tsx";
 import {Person} from "@/domains/persons";
 
 /**

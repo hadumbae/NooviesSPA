@@ -1,5 +1,5 @@
 import {Location} from "@/common/_models/location/LocationSchema.ts";
-import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
+import {ISO3166Alpha2CountryConstant} from "@/common/_const";
 
 /**
  * **formatLocationDetails**

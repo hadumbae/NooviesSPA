@@ -2,8 +2,8 @@
  * @fileoverview Formats theatre details into display-ready structures.
  */
 
-import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
-import {TheatreDetails} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
+import {ISO3166Alpha2CountryConstant} from "@/common/_const";
+import {TheatreDetails} from "@/domains/theatres";
 import buildString from "@/common/utility/buildString.ts";
 
 /**

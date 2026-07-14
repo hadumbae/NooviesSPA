@@ -10,7 +10,7 @@ import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.ts
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import {PersonQueryOptionForm} from "@/views/admin/persons/_feat/query-option-form/PersonQueryOptionForm.tsx";
 import {PaginationRangeButtons} from "@/views/common/_comp";
-import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
 import {PersonIndexHeader} from "@/views/admin/persons/_pages/index-page/header.tsx";
 import {PersonIndexCard} from "@/views/admin/persons/_comp";
 

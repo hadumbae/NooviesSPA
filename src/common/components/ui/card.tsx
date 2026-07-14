@@ -1,7 +1,6 @@
 import * as React from "react"
 
 import {cn} from "@/common/lib/utils"
-import {ContainerCSS} from "@/common/constants/css/ContainerCSS.ts";
 
 const Card = React.forwardRef<
     HTMLDivElement,
@@ -10,8 +9,7 @@ const Card = React.forwardRef<
     <div
         ref={ref}
         className={cn(
-            ContainerCSS,
-            "text-neutral-950 dark:text-neutral-50",
+            "default-container text-neutral-950 dark:text-neutral-50",
             "border border-neutral-200 dark:border-neutral-800",
             "rounded-xl bg-white shadow",
             className

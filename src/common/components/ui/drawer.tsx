@@ -2,7 +2,6 @@ import * as React from "react"
 import { Drawer as DrawerPrimitive } from "vaul"
 
 import { cn } from "@/common/lib/utils"
-import {PrimaryTextBaseCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 const Drawer = ({
   shouldScaleBackground = true,
@@ -83,8 +82,7 @@ const DrawerTitle = React.forwardRef<
   <DrawerPrimitive.Title
     ref={ref}
     className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
-      PrimaryTextBaseCSS,
+      "primary-text text-lg font-semibold leading-none tracking-tight",
       className
     )}
     {...props}
@@ -98,7 +96,7 @@ const DrawerDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Description
     ref={ref}
-    className={cn("text-sm", SecondaryTextBaseCSS, className)}
+    className={cn("text-sm secondary-text", className)}
     {...props}
   />
 ))

@@ -1,34 +1,24 @@
 /**
- * @file HttpResponseErrorDisplay.tsx
- *
- * Display component for HTTP response–level query failures.
- *
- * Used when a request completes successfully at the network
- * level but returns a non-OK HTTP status code.
+ * @fileoverview Display component for HTTP response errors within the query error boundary fallback.
  */
 
 import Logger from "@/common/utility/features/logger/Logger.ts";
 import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
 import {Network} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import {HeaderTextCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {ErrorHandlerDisplayProps} from "@/common/type/ErrorHandlerProps.ts";
 import {HttpStatusOverrideText} from "@/common/type/error/HttpErrorTypes.ts";
+import {ReactElement} from "react";
 
 type DisplayProps = ErrorHandlerDisplayProps<HttpResponseError> & {
-    /** Optional HTTP status → message overrides */
     statusTextOverride?: HttpStatusOverrideText;
 };
 
-/**
- * Renders HTTP response errors and logs structured
- * request/response context for diagnostics.
- *
- * Supports optional status text overrides for
- * domain-specific or user-friendly messaging.
- */
-const HttpResponseErrorDisplay = ({error, className, statusTextOverride}: DisplayProps) => {
+/** Renders a visual representation of an HTTP error including status code and optional message overrides. */
+export function HttpResponseErrorDisplay(
+    {error, className, statusTextOverride}: DisplayProps
+): ReactElement {
     const {message, status, statusText, url, model, payload} = error;
 
     const errorMessage = message ? message : undefined;
@@ -53,13 +43,9 @@ const HttpResponseErrorDisplay = ({error, className, statusTextOverride}: Displa
             <Network size={30}/>
 
             <div className="space-y-2 text-center">
-                <h2 className={cn(HeaderTextCSS, "uppercase italic")}>HTTP {status}</h2>
-                <span className={cn(SecondaryTextBaseCSS, "text-sm")}>
-                    {errorMessage ?? statusMessage}
-                </span>
+                <h2 className="section-title italic">HTTP {status}</h2>
+                <span className="secondary-text text-sm">{errorMessage ?? statusMessage}</span>
             </div>
         </div>
     );
-};
-
-export default HttpResponseErrorDisplay;
+}

@@ -3,7 +3,6 @@
  */
 
 import {ReactElement} from "react";
-import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
 import {RoleTypeDepartmentRadioGroup} from "@/views/admin/role-types";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {HookFormInput} from "@/views/common/_feat";
@@ -82,7 +81,7 @@ export function MovieCreditFormDetailsFieldset(
 
     return (
         <fieldset className={cn("space-y-3", className)}>
-            <h1 className={HeaderTextCSS}>Basic Details</h1>
+            <h3 className="fieldset-header">Basic Details</h3>
             {renderFields({fields})}
         </fieldset>
     );

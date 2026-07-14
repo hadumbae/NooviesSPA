@@ -3,7 +3,7 @@
  * @filename getIpifyPayloadData.ts
  */
 
-import { LocalStorageKeys } from "@/common/constants/LocalStorageKeys.ts";
+import { LocalStorageKeys } from "@/common/_const/storage/LocalStorageKeys.ts";
 import parseJSON from "@/common/utility/features/use-fetch-api/parseJSON.ts";
 import { IpifyLocalStorageSchema } from "@/common/schema/api/ipify/IpifyPayload.schema.ts";
 import { ParseError } from "@/common/errors/ParseError.ts";

@@ -8,7 +8,6 @@ import {Separator} from "@/common/components/ui";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormInput} from "@/views/common/_feat";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {SeatFormValues} from "@/domains/seats";
 
 /** Renders inputs for Row, Seat Number, and Seat Label, adapting the grid layout based on the display context. */
@@ -20,7 +19,7 @@ export function SeatSubmitFormRowFieldset(
     return (
         <fieldset className={cn("space-y-2", className)}>
             <div>
-                <PrimaryHeaderText>Row</PrimaryHeaderText>
+                <h3 className="fieldset-header">Row</h3>
                 <Separator/>
             </div>
 

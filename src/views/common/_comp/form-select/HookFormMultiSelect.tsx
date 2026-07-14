@@ -8,7 +8,7 @@ import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {FormControl, FormDescription, FormItem, FormLabel,} from "@/common/components/ui/form.tsx";
 import {HookFormErrorMessage} from "@/views/common/_feat/form-inputs/HookFormErrorMessage.tsx";
 import {cn} from "@/common/lib/utils.ts";
-import {ReactSelectMultiStyleConfig} from "@/common/constants/css/ReactSelectCSS.ts";
+import {ReactSelectMultiStyleConfig} from "@/common/_const/css/ReactSelectCSS.ts";
 import {FormMultiSelectOnChangeHandler, FormSelectValueHandler} from "@/common/types";
 import {ReactElement} from "react";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";

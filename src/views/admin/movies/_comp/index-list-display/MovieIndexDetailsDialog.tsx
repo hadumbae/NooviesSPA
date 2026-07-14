@@ -10,11 +10,11 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/common/components/ui";
-import TextQuote from "@/common/components/text/TextQuote.tsx";
+import {TextQuote} from "@/common/components/text/TextQuote.tsx";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
 import {Search} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import LabelContent from "@/common/components/card-content/LabelContent.tsx";
+import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {formatMovieData, MovieDetails} from "@/domains/movies";
 

@@ -8,7 +8,6 @@ import {Plus, X} from "lucide-react";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {cn} from "@/common/lib/utils.ts";
 import filterFalsyAttributes from "@/common/utility/collections/filterFalsyAttributes.ts";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {MultiStepFormStateContext} from "@/common/_feat/multi-step-form/contexts/stateContext.ts";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 
@@ -77,7 +76,7 @@ export function ShowingSubmitFormDetailsFieldset(
     return (
         <fieldset className={cn("space-y-2", className)}>
             <div>
-                <PrimaryHeaderText>Details</PrimaryHeaderText>
+                <h3 className="fieldset-header">Details</h3>
                 <Separator/>
             </div>
 

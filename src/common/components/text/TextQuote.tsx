@@ -1,23 +1,26 @@
-import {FC, PropsWithChildren} from 'react';
-import {cn} from "@/common/lib/utils.ts";
-import {QuoteTextCSS} from "@/common/constants/css/TextCSS.ts";
+/**
+ * @fileoverview Styled blockquote component for displaying quoted text.
+ */
 
-interface Props {
+import {ReactElement, ReactNode} from 'react';
+import {cn} from "@/common/lib/utils.ts";
+
+/** Props for the TextQuote component. */
+type QuoteProps = {
+    children: ReactNode;
     className?: string;
 }
 
-const TextQuote: FC<PropsWithChildren<Props>> = ({children, className}) => {
+/** A styled blockquote component with a left border and justified text. */
+export function TextQuote(
+    {children, className}: QuoteProps
+): ReactElement {
     return (
         <blockquote className={cn(
-            QuoteTextCSS,
-            "border-l-4",
-            "px-4",
-            "text-justify",
+            "text-neutral-500 dark:text-gray-500 text-sm border-l-4 px-4 text-justify",
             className,
         )}>
             {children}
         </blockquote>
     );
-};
-
-export default TextQuote;
+}

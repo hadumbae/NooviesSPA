@@ -4,8 +4,10 @@
 
 import {ReactElement} from "react";
 import {Theater, TvMinimal} from "lucide-react";
-import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
-import StackedIconCardLink from "@/common/components/navigation/logged-link/StackedIconCardLink.tsx";
+import {DetailsCardSpan} from "@/common/components/text/DetailsCardSpan.tsx";
+import {
+    StackedIconCardLink
+} from "@/common/components/navigation/logged-link/StackedIconCardLink.tsx";
 import {SeatDetails, SeatTypeLabelMap} from "@/domains/seats";
 
 /** Props for the SeatContextPanelDetailsSection component. */

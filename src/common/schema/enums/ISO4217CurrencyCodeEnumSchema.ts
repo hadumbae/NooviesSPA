@@ -9,7 +9,7 @@
  */
 
 import { z } from "zod";
-import ISO4217CurrencyCodesConstant from "@/common/constants/currency/ISO4217CurrencyCodesConstant.ts";
+import ISO4217CurrencyCodesConstant from "@/common/_const/currency/ISO4217CurrencyCodesConstant.ts";
 
 /**
  * ISO 4217 currency code validation schema.

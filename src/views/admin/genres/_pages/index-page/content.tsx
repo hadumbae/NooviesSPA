@@ -3,19 +3,21 @@
  */
 
 import {ReactElement, useState} from 'react';
-import {PaginationRangeButtons} from "@/views/common/_comp";
+import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
-import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
 import {GenreIndexCard} from "@/views/admin/genres/_comp";
-import {GenreQueryOptionForm, GenreQueryOptionFormDialog} from "@/views/admin/genres/_feat/query-form";
-import {Genre, GenreQueryOptionSchema, useNavigateToGenreDetails} from "@/domains/genres";
-import {PageHeader} from "@/views/common/_comp";
-import {GenreSubmitForm, GenreSubmitFormPanel} from "@/views/admin/genres";
 import {Button} from "@/common/components/ui";
-import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 import {Plus} from "lucide-react";
+import {Genre, GenreQueryOptionSchema, useNavigateToGenreDetails} from "@/domains/genres";
+import {
+    GenreQueryOptionForm,
+    GenreQueryOptionFormDialog,
+    GenreSubmitForm,
+    GenreSubmitFormPanel
+} from "@/views/admin/genres/_feat";
 
 /** Props for the GenreIndexPageContent component. */
 type GenreIndexPageContentProps = {
@@ -51,7 +53,7 @@ export function GenreIndexPageContent(
                     onSubmitConfig={{onSubmitSuccess: onSuccess, successMessage: "Created."}}
                 >
                     <GenreSubmitFormPanel isOpen={isCreating} setIsOpen={setIsCreating}>
-                        <Button variant="link" className={HoverLinkCSS} onClick={() => setIsCreating(true)}>
+                        <Button variant="link" className="hover-link" onClick={() => setIsCreating(true)}>
                             <Plus className="mr-2 h-4 w-4"/> Create
                         </Button>
                     </GenreSubmitFormPanel>

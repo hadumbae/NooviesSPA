@@ -3,7 +3,7 @@
  */
 
 import {RefinementCtx, z} from "zod";
-import ACCEPTED_IMAGE_TYPES from "@/common/constants/AcceptedImageTypeConstant.ts";
+import {AcceptedImageTypeConstant} from "@/common/_const/images/AcceptedImageTypeConstant.ts";
 
 /** Props configuration for the refineRequireImageFile function. */
 type RefinementConfig = {
@@ -33,8 +33,8 @@ export function refineRequireImageFile<TObject extends Record<string, unknown>>(
             return z.NEVER;
         }
 
-        if (!ACCEPTED_IMAGE_TYPES.includes(image.type)) {
-            const acceptedTypes = ACCEPTED_IMAGE_TYPES
+        if (!AcceptedImageTypeConstant.includes(image.type)) {
+            const acceptedTypes = AcceptedImageTypeConstant
                 .map(type => type.replace("image/", ""))
                 .join(", ")
                 .toUpperCase();

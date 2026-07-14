@@ -8,7 +8,7 @@ import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.ts
 import {ScrollArea, ScrollBar} from "@/common/components/ui";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {PaginationRangeButtons} from "@/views/common/_comp";
-import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 
 import {TheatreDetails, TheatreQueryOptionSchema} from "@/domains/theatres";

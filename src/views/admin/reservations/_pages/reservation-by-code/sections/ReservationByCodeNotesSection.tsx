@@ -2,7 +2,7 @@
  * @fileoverview UI section for displaying and managing administrative reservation notes.
  */
 
-import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
 import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {Button} from "@/common/components/ui/button.tsx";

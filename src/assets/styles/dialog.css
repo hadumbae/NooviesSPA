@@ -1,0 +1,9 @@
+@layer components {
+    .dialog-action-btn {
+        @apply dark:bg-purple-800 dark:hover:bg-purple-400 dark:text-white dark:hover:text-black
+    }
+
+    .dialog-close-btn {
+        @apply dark:border dark:border-black dark:bg-transparent dark:hover:bg-black dark:text-neutral-500
+    }
+}

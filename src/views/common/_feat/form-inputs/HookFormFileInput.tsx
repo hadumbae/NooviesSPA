@@ -4,7 +4,6 @@
 import {ReactElement, useEffect, useRef} from "react";
 import {ControllerProps, FieldValues, useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
-import {HookFormInputCSS} from "@/common/constants/css/HookFormInputCSS.ts";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input} from "@/common/components/ui";
 import {HookFormFileInputProps, HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 
@@ -36,7 +35,7 @@ export function HookFormFileInput<TValues extends FieldValues>(
 
                 <FormControl>
                     <Input
-                        className={cn(HookFormInputCSS, classNames?.input)}
+                        className={cn("default-form-input", classNames?.input)}
                         type="file"
                         disabled={disabled}
                         multiple={multiple}

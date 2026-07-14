@@ -8,7 +8,7 @@ import {Dot, LucideIcon} from "lucide-react";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {ReactElement} from "react";
 import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
-import NoneSpan from "@/common/components/NoneSpan.tsx";
+import {NoneSpan} from "@/common/components/NoneSpan.tsx";
 
 /**
  * Props for {@link LinkGroup}.

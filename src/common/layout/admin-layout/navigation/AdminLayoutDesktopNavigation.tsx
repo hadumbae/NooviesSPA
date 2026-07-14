@@ -11,8 +11,9 @@ import AdminLayoutShowingNavigationDropdown
 import {Button} from "@/common/components/ui/button.tsx";
 import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
 import {useAuthLogoutSubmitMutation} from "@/domains/auth/_feat/auth-logout/useAuthLogoutSubmitMutation.ts";
-import BaseLayoutDesktopThemeDropdown
-    from "@/common/layout/common-layout/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";
+import {
+    BaseLayoutDesktopThemeDropdown
+} from "@/common/layout/common-layout/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";
 import AdminLayoutDashboardNavigationDropdown
     from "@/common/layout/admin-layout/navigation/AdminLayoutDashboardNavigationDropdown.tsx";
 import {SROnly} from "@/views/common/_comp";

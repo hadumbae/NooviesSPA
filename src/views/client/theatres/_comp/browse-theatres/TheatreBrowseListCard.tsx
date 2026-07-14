@@ -2,16 +2,13 @@
  * @fileoverview Card component for displaying a theatre and its recent movie showings in the browse list.
  */
 
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
-import buildString from "@/common/utility/buildString.ts";
-import ISO3166Alpha2ShortCountryConstant from "@/common/constants/country/ISO3166Alpha2ShortCountryConstant.ts";
-import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {HoverUnderlineCSS} from "@/common/constants/css/TextCSS.ts";
-
-import {TheatreWithRecentShowings} from "@/domains/theatres";
-import {BrowseTheatreShowingSelector} from "@/views/client/showings/_comp/browse-showing-selector";
 import {ReactElement} from "react";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui";
+import buildString from "@/common/utility/buildString.ts";
+import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";
+import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {TheatreWithRecentShowings} from "@/domains/theatres";
+import {BrowseTheatreShowingSelector} from "@/views/client/showings/_comp";
 
 /** Props for the TheatreBrowseListCard component. */
 type BrowseProps = {
@@ -32,7 +29,7 @@ export function TheatreBrowseListCard({theatre}: BrowseProps): ReactElement {
         <Card>
             <CardHeader>
                 <CardTitle>
-                    <LoggedLink to={`/browse/theatres/${slug}`} className={HoverUnderlineCSS}>
+                    <LoggedLink to={`/browse/theatres/${slug}`} className="hover-underline">
                         {name}
                     </LoggedLink>
                 </CardTitle>
@@ -44,8 +41,9 @@ export function TheatreBrowseListCard({theatre}: BrowseProps): ReactElement {
                     {showings.map((showing) => (
                         <BrowseTheatreShowingSelector
                             key={showing._id}
-                            className={RoundedBorderCSS}
+                            className="rounded-container-border"
                             showing={showing}
+                            timezone={theatre.location.timezone}
                         />
                     ))}
                 </section>

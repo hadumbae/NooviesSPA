@@ -5,7 +5,6 @@
 import {ReactElement} from "react";
 import {ControllerProps, FieldValues} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
-import {HookFormInputCSS} from "@/common/constants/css/HookFormInputCSS.ts";
 import {HookFormInputProps} from "@/common/type/input/HookFormInputProps.ts";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input} from "@/common/components/ui";
 
@@ -22,7 +21,7 @@ export function HookFormInput<TValues extends FieldValues>(
             <FormControl>
                 <Input
                     placeholder={placeholder || label}
-                    className={cn(HookFormInputCSS, classNames?.input)}
+                    className={cn("default-form-input", classNames?.input)}
                     {...inputProps}
                     {...field}
                 />

@@ -7,7 +7,7 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {PaginationRangeButtons} from "@/views/common/_comp";
-import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 
 import {MovieDetails, MovieQueryOptionSchema} from "@/domains/movies";

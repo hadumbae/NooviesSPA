@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import DetailsCardSpan from "@/common/components/text/DetailsCardSpan.tsx";
+import {DetailsCardSpan} from "@/common/components/text/DetailsCardSpan.tsx";
 import {SectionTitle} from "@/views/common/_comp";
 import {formatSeatLabel, SeatDetails, SeatTypeLabelMap} from "@/domains/seats";
 

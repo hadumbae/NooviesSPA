@@ -4,6 +4,9 @@
  */
 
 import {ReactElement, ReactNode, useState} from 'react';
+import {cn} from "@/common/lib/utils.ts";
+import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
+import {ListFilter} from "lucide-react";
 import {
     Button,
     Dialog,
@@ -13,10 +16,6 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/common/components/ui";
-import {cn} from "@/common/lib/utils.ts";
-import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
-import {ListFilter} from "lucide-react";
-import {HoverLinkCSS} from "@/common/constants/css/ButtonCSS.ts";
 
 /** Props for the PresetFilterDialog component. */
 type DialogProps = PresetOpenState & {
@@ -42,7 +41,7 @@ function PresetFilterDialog(
     return (
         <Dialog open={activeOpen} onOpenChange={setActiveOpen}>
             <DialogTrigger asChild>
-                <Button size="sm" variant="link" className={cn(HoverLinkCSS, "w-fit", className)}>
+                <Button size="sm" variant="link" className={cn("hover-button w-fit", className)}>
                     <ListFilter/> Filters
                 </Button>
             </DialogTrigger>

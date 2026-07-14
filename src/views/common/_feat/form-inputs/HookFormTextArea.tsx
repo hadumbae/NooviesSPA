@@ -6,7 +6,6 @@ import {ReactElement} from "react";
 import {ControllerProps, FieldValues, useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
-import {HookFormInputCSS} from "@/common/constants/css/HookFormInputCSS.ts";
 import {
     FormControl,
     FormDescription,
@@ -32,7 +31,7 @@ export function HookFormTextArea<TValues extends FieldValues>(
             <FormControl>
                 <Textarea
                     placeholder={placeholder || label}
-                    className={cn(HookFormInputCSS, "resize-none h-28", classNames?.input)}
+                    className={cn("default-form-input resize-none h-28", classNames?.input)}
                     {...field}
                 />
             </FormControl>

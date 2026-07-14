@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import LabelContent from "@/common/components/card-content/LabelContent.tsx";
+import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
 import {MovieDetails} from "@/domains/movies/_schema/movie";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
 

@@ -5,14 +5,14 @@
 import {ReactElement} from "react";
 import {cn} from "@/common/lib/utils.ts";
 import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
-import {ShowingWithMovie} from "@/domains/showings";
+import {ShowingDetails} from "@/domains/showings";
 import {BrowseShowingSelector} from "@/views/client/showings/_comp";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp";
 
 /** Props for the BrowseTheatreShowingSelector component. */
 type SummaryProps = {
     timezone: IANATimezone;
-    showing: ShowingWithMovie;
+    showing: ShowingDetails;
     className?: string;
 };
 

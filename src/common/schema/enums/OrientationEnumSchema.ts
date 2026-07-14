@@ -4,7 +4,7 @@
  */
 
 import {z} from "zod";
-import {OrientationConstant} from "@/common/constants/OrientationConstant.ts";
+import {OrientationConstant} from "@/common/_const/OrientationConstant.ts";
 
 /**
  * Runtime validation schema for layout orientation values.

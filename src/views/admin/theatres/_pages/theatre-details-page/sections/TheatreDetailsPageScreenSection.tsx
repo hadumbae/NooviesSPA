@@ -13,7 +13,7 @@ import {SROnly} from "@/views/common/_comp/screen-readers";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Plus} from "lucide-react";
 import {PaginationRangeButtons} from "@/views/common/_comp";
-import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
 
 const panelInfo = {
     title: "Add Screen",

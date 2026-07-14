@@ -4,7 +4,6 @@
 
 import {ReactElement, useMemo} from "react";
 import {MovieCreditInfoList} from "@/views/client/movie-credits/_comp";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 
 import {organiseMovieCastCreditsByPrimacy} from "@/domains/movies";
 import {CastCreditExceptMovie} from "@/domains/movie-credits";
@@ -29,7 +28,7 @@ export function MovieInfoCastCreditsSection(
             <PageSectionHeader text="Cast"/>
             <MovieCreditInfoList credits={primaryCast}/>
 
-            <PrimaryHeaderText className="text-base" as="h3">Support Cast</PrimaryHeaderText>
+            <h3 className="subsection-title text-base">Support Cast</h3>
             <MovieCreditInfoList credits={supportCast}/>
         </section>
     );

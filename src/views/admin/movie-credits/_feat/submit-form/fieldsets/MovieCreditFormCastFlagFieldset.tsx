@@ -3,7 +3,6 @@
 import {ReactElement} from "react";
 import {HookFormCheckbox} from "@/views/common/_feat";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
-import {HeaderTextCSS} from "@/common/constants/css/TextCSS.ts";
 import {renderFields} from "@/common/_feat/submit-data";
 import {cn} from "@/common/lib/utils.ts";
 import {DisableFields} from "@/common/types";
@@ -60,7 +59,7 @@ export function MovieCreditFormCastFlagFieldset(
 
     return (
         <fieldset className={cn("space-y-3", className)}>
-            <h1 className={HeaderTextCSS}>Flags</h1>
+            <h3 className="fieldset-header">Flags</h3>
 
             <div className="grid grid-cols-2 gap-2">
                 {renderFields({fields})}

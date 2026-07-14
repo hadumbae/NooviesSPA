@@ -6,8 +6,7 @@ import {ReactElement} from "react";
 import {Card, CardContent, Separator} from "@/common/components/ui";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {OrientationValues} from "@/common/schema/enums/OrientationEnumSchema.ts";
-import SecondaryHeaderText from "@/common/components/text/header/SecondaryHeaderText.tsx";
-import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
+import {ISO3166Alpha2CountryConstant} from "@/common/_const";
 import {PageSectionHeader, SubsectionTitle} from "@/views/common/_comp";
 import {AdminReservation} from "@/domains/reservations";
 
@@ -36,7 +35,7 @@ export function ReservationByCodeTheatreSection(
                 <CardContent className="p-3 space-y-3">
                     <div>
                         <SubsectionTitle as="h2">{theatreName}</SubsectionTitle>
-                        <SecondaryHeaderText as="h3">Theatre</SecondaryHeaderText>
+                        <h3 className="secondary-text text-sm font-bold">Theatre</h3>
                     </div>
 
                     <Separator/>

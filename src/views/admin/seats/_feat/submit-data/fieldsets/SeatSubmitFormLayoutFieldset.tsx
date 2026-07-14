@@ -5,7 +5,6 @@
 import {ReactElement} from 'react';
 import {Separator} from "@/common/components/ui";
 import {cn} from "@/common/lib/utils.ts";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {SeatLayoutTypeRadioGroup} from "@/views/admin/seats/_feat/form-inputs";
 import {SeatFormValues} from "@/domains/seats";
@@ -17,7 +16,7 @@ export function SeatSubmitFormLayoutFieldset(
     return (
         <fieldset className={cn("space-y-4", className)}>
             <div>
-                <PrimaryHeaderText>Layout Type</PrimaryHeaderText>
+                <h3 className="fieldset-header">Layout Type</h3>
                 <Separator/>
             </div>
 

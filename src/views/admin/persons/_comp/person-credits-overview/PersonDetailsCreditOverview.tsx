@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {SROnly} from "@/views/common/_comp/screen-readers";
-import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
 import {PersonFilmography} from "@/domains/movie-credits";
 import {PersonDetailsCreditList} from "@/views/admin/persons/_comp";
 

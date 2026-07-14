@@ -1,26 +1,20 @@
 /**
- * @file AppErrorDisplay.tsx
- *
- * Generic UI for rendering non-query application errors.
- *
- * Logs the error context and presents a user-facing
- * fallback message when no specialized handler applies.
+ * @fileoverview Display component for rendering general application errors.
  */
 
+import {ReactElement} from "react";
 import Logger from "@/common/utility/features/logger/Logger.ts";
 import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {TriangleAlert} from "lucide-react";
-import {HeaderTextCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {ErrorHandlerDisplayProps} from "@/common/type/ErrorHandlerProps.ts";
 
 /**
- * Displays a generic application error state.
- *
- * @param error - Error value to display
- * @param className - Optional wrapper class name
+ * Renders a fallback UI with an error message when the application encounters an unhandled error.
  */
-const AppErrorDisplay = ({error, className}: ErrorHandlerDisplayProps) => {
+export function AppErrorDisplay(
+    {error, className}: ErrorHandlerDisplayProps
+): ReactElement {
     const errorMessage = error instanceof Error
         ? error.message
         : "An Error Occurred. Please Try Again.";
@@ -39,11 +33,9 @@ const AppErrorDisplay = ({error, className}: ErrorHandlerDisplayProps) => {
             <TriangleAlert size={30}/>
 
             <div className="space-y-2 text-center">
-                <h2 className={cn(HeaderTextCSS, "uppercase italic")}>Query Error</h2>
-                <span className={cn(SecondaryTextBaseCSS, "text-sm")}>{errorMessage}</span>
+                <h2 className="section-title italic">Query Error</h2>
+                <span className="secondary-text text-sm">{errorMessage}</span>
             </div>
         </div>
     );
-};
-
-export default AppErrorDisplay;
+}

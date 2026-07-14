@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
 import {ShowingDetails} from "@/domains/showings/_schema/showing";
 import {cn} from "@/common/lib/utils.ts";
-import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
 import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card";
 import {
     TheatreDetailsPageShowingsSectionHeader

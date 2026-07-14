@@ -9,7 +9,9 @@
  */
 
 import {FallbackProps} from "react-error-boundary";
-import AppErrorDisplay from "@/common/components/boundary/app-error-boundary/display/AppErrorDisplay.tsx";
+import {
+    AppErrorDisplay
+} from "@/common/components/boundary/app-error-boundary/display/AppErrorDisplay.tsx";
 import {isQueryError} from "@/common/utility/errors/checkErrorType.ts";
 import QueryErrorHandler from "@/common/components/boundary/query-error-fallback/QueryErrorHandler.tsx";
 import {RouteError} from "@/common/errors/RouteError.ts";

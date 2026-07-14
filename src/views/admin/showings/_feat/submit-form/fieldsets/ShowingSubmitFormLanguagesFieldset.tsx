@@ -3,7 +3,6 @@
  */
 
 import {ReactElement} from 'react';
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
@@ -20,7 +19,7 @@ export function ShowingSubmitFormLanguagesFieldset(
     return (
         <fieldset className={cn("space-y-3", className)}>
             <div>
-                <PrimaryHeaderText>Languages</PrimaryHeaderText>
+                <h3 className="fieldset-header">Languages</h3>
                 <Separator/>
             </div>
 

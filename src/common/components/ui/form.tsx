@@ -12,7 +12,6 @@ import {
 
 import { cn } from "@/common/lib/utils.ts"
 import { Label } from "@/common/components/ui/label.tsx"
-import {ErrorLabelCSS, ErrorMessageCSS, PrimaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 
 const Form = FormProvider
 
@@ -94,7 +93,7 @@ const FormLabel = React.forwardRef<
   return (
     <Label
       ref={ref}
-      className={cn(PrimaryTextBaseCSS, error && ErrorLabelCSS, className)}
+      className={cn("primary-text", error && "text-red-500 dark:text-red-700", className)}
       htmlFor={formItemId}
       {...props}
     />
@@ -156,7 +155,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn(ErrorMessageCSS, className)}
+      className={cn("text-[0.8rem] font-medium text-red-500 dark:text-red-700", className)}
       {...props}
     >
       {body}

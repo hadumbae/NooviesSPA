@@ -3,9 +3,9 @@
  */
 
 import {ReactElement} from 'react';
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import CloudinaryAvatarImage from "@/common/components/images/CloudinaryAvatarImage.tsx";
-import ISO3166Alpha2CountryConstant from "@/common/constants/country/ISO3166Alpha2CountryConstant.ts";
+import {Card, CardContent} from "@/common/components/ui";
+import {CloudinaryAvatarImage} from "@/views/common/_comp";
+import {ISO3166Alpha2CountryConstant} from "@/common/_const";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {Person} from "@/domains/persons";
 

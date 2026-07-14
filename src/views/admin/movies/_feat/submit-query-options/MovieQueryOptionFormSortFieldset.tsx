@@ -5,9 +5,9 @@
 import {ReactElement} from "react";
 import {cn} from "@/common/lib/utils.ts";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
-import PrimaryHeaderText from "@/common/components/text/header/PrimaryHeaderText.tsx";
 import {HookFormSortToggle} from "@/views/common/_feat";
 import {MovieQueryOptionFormValues} from "@/domains/movies";
+import {PageSectionHeader} from "@/views/common/_comp";
 
 /** Props for the MovieQueryOptionFormSortFieldset component. */
 type FieldsetProps = Omit<FormFieldsetProps<MovieQueryOptionFormValues>, "isNestedView">;
@@ -20,7 +20,7 @@ export function MovieQueryOptionFormSortFieldset(
 ): ReactElement {
     return (
         <fieldset className="space-y-4">
-            <PrimaryHeaderText>Sorts</PrimaryHeaderText>
+            <PageSectionHeader as="h3" text="Sorts" className="text-base"/>
 
             <div className={cn("flex flex-wrap", className)}>
                 {!disableFields?.sortByReleaseDate && (

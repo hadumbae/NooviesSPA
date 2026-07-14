@@ -3,7 +3,6 @@
  */
 
 import {Check, Plus} from "lucide-react";
-import {RoundedBorderCSS} from "@/common/constants/css/ContainerCSS.ts";
 import {cn} from "@/common/lib/utils.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
@@ -20,7 +19,7 @@ type ElementProps = {
 };
 
 const SIZE_CSS = "h-8 w-8";
-const CONTAINER_CSS = cn(RoundedBorderCSS, SIZE_CSS);
+const CONTAINER_CSS = cn("rounded-container-border", SIZE_CSS);
 
 /**
  * Renders a selectable seat button or an inert placeholder for unavailable cells.
@@ -47,8 +46,8 @@ export function ReservationSeatMapElement(
                     onClick={() => toggleSeat(_id)}
                     className={cn(
                         SIZE_CSS, isSelected
-                        ? "reservation-selected-seat"
-                        : "reservation-unselected-seat",
+                            ? "reservation-selected-seat"
+                            : "reservation-unselected-seat",
                     )}
                 >
                     {isSelected ? <Check/> : <Plus/>}

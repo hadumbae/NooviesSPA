@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Card, CardContent, CardHeader, Separator} from "@/common/components/ui";
-import {ISO6391LanguageLabels} from "@/common/constants/languages/ISO6391LanguageLabels.ts";
+import {ISO6391LanguageLabels} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 
 import {ShowingDetails} from "@/domains/showings";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp";

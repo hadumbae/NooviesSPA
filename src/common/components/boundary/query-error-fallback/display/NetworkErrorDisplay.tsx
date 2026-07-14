@@ -1,9 +1,5 @@
 /**
- * @file NetworkErrorDisplay.tsx
- *
- * Display component for network-level query failures.
- *
- * Used when a request fails before receiving a valid HTTP response.
+ * @fileoverview Component for displaying and logging network-related errors within a query error boundary.
  */
 
 import {NetworkError} from "@/common/errors/NetworkError.ts";
@@ -11,16 +7,15 @@ import Logger from "@/common/utility/features/logger/Logger.ts";
 import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
 import {Network} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import {HeaderTextCSS, SecondaryTextBaseCSS} from "@/common/constants/css/TextCSS.ts";
 import {ErrorHandlerDisplayProps} from "@/common/type/ErrorHandlerProps.ts";
+import { ReactElement } from "react";
 
 /**
- * Renders network failure details and emits structured diagnostics.
- *
- * Intended for transport-level failures such as connectivity issues,
- * timeouts, or aborted requests.
+ * Renders a visual representation of a network error and logs the error details to the logger.
  */
-const NetworkErrorDisplay = ({error, className}: ErrorHandlerDisplayProps<NetworkError>) => {
+export function NetworkErrorDisplay(
+    {error, className}: ErrorHandlerDisplayProps<NetworkError>
+): ReactElement {
     const {method, url, message: errorMessage, cause: {message: causeMessage} = {}} = error;
 
     Logger.error({
@@ -40,13 +35,9 @@ const NetworkErrorDisplay = ({error, className}: ErrorHandlerDisplayProps<Networ
             <Network size={30}/>
 
             <div className="space-y-2 text-center">
-                <h2 className={cn(HeaderTextCSS, "uppercase italic")}>Network Error</h2>
-                <span className={cn(SecondaryTextBaseCSS, "text-sm")}>
-                    {errorMessage ?? causeMessage}
-                </span>
+                <h2 className="section-title italic">Network Error</h2>
+                <span className="secondary-title text-sm">{errorMessage ?? causeMessage}</span>
             </div>
         </div>
     );
-};
-
-export default NetworkErrorDisplay;
+}

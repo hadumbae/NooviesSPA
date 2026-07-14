@@ -3,10 +3,10 @@
  */
 
 import {ReactElement} from "react";
+import {cn} from "@/common/lib/utils.ts";
 import {Person} from "@/domains/persons";
 import {Card, CardContent, Separator} from "@/common/components/ui";
-import {cn} from "@/common/lib/utils.ts";
-import ISO3166Alpha2ShortCountryConstant from "@/common/constants/country/ISO3166Alpha2ShortCountryConstant.ts";
+import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";
 import {PersonProfileAvatar} from "@/views/admin/persons";
 
 /** Props for the PersonInfoDetailsCard component. */

@@ -4,7 +4,7 @@ import {ReactElement} from "react";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import {PaginationRangeButtons} from "@/views/common/_comp";
 import {MovieDetails} from "@/domains/movies";
-import EmptyArrayContainer from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
 import {MovieIndexCard} from "@/views/admin/movies/_comp/index-list-display";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 import {PageHeader} from "@/views/common/_comp";
