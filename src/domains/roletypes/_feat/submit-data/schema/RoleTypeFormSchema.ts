@@ -12,7 +12,7 @@ import {
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 import {AnyValues} from "@/common/types";
 import {RoleTypeDescriptionSchema, RoleTypeNameSchema} from "@/domains/roletypes/_schema";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 
 /** Base validation schema containing shared fields for all role type forms. */
 const RoleTypeFormBaseSchema = z.object({

@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 
 import {ShowingDetails} from "@/domains/showings";
 import {ReservationType} from "@/domains/reservations";

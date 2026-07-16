@@ -7,8 +7,10 @@ import RegisterRoutes from "./common/routing/RegisterRoutes.tsx";
 import {QueryClientProvider} from "@tanstack/react-query";
 import {AuthProvider} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthProvider.tsx";
 import ReactQueryClient from "@/config/ReactQueryClient.ts";
-import ThemeProvider from "@/common/context/theme/ThemeProvider.tsx";
-import IPGeolocationContextProvider from "@/common/context/ip-geolocation-context/IPGeolocationContextProvider.tsx";
+import {ThemeProvider} from "@/common/_feat/theme/ctx/ThemeProvider.tsx";
+import {
+    IPGeolocationContextProvider
+} from "@/common/_feat/external/ipify-country/ctx/IPGeolocationContextProvider.tsx";
 
 const router = createBrowserRouter(RegisterRoutes);
 

@@ -2,7 +2,7 @@
  * @fileoverview Hook for accessing the authenticated user from the Auth context.
  */
 
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context";
 
 

@@ -1,4 +1,4 @@
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {FieldValues, UseFormReturn} from "react-hook-form";
 
 /**

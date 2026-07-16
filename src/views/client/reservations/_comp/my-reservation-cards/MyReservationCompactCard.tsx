@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {ReservationStatusBadge} from "@/views/client/reservations/_comp/reservation-badges";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";

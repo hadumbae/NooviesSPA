@@ -2,7 +2,7 @@
  * @fileoverview Mutation hook for deleting RoleType entities.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {destroy, RoleTypeCRUDMutationKeys, RoleTypeCRUDQueryKeys} from "@/domains/roletypes/_feat";
 

@@ -3,9 +3,9 @@
  */
 
 import {z} from "zod";
-import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import {NonFutureDateStringSchema} from "@/common/schema/dates/NonFutureDateStringSchema.ts";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
+import {NonFutureDateStringSchema} from "@/common/_schemas/dates/NonFutureDateStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {AnyValues} from "@/common/types";
 import {PersonBiographySchema, PersonNameSchema} from "@/domains/persons";
 
@@ -15,7 +15,7 @@ export const PersonFormSchema = z.object({
     name: PersonNameSchema,
     biography: PersonBiographySchema,
     dob: NonFutureDateStringSchema,
-    nationality: ISO3166Alpha2CountryCodeEnum,
+    nationality: ISO3166Alpha2CountryCodeSchema,
 });
 
 /** Validated data structure for person forms. */

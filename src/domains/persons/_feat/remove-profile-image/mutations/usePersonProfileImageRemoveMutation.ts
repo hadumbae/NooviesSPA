@@ -4,7 +4,7 @@
  */
 
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {deleteRemoveProfileImage} from "@/domains/persons/_feat/remove-profile-image/repository";
 import {
     PersonRemoveProfileImageMutationKeys

@@ -3,8 +3,8 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
+import {IDStringSchema} from "@/common/_schemas";
+import {ISO6391LanguageCodeSchema} from "@/common/_schemas/enums/ISO6391LanguageCodeSchema.ts";
 import {NonEmptyStringSchema} from "@/common/_schemas";
 import {ShowingConfigSchema} from "@/domains/showings/_schema/showing/ShowingConfigSchema.ts";
 import {ShowingStatusSchema, ShowingTimeSchema, TicketPriceSchema} from "@/domains/showings/_schema/fields";
@@ -17,8 +17,8 @@ export const ShowingSchema = z.object({
     startTime: ShowingTimeSchema,
     endTime: ShowingTimeSchema.optional().nullable(),
     ticketPrice: TicketPriceSchema,
-    language: ISO6391LanguageCodeEnum,
-    subtitleLanguages: z.array(ISO6391LanguageCodeEnum).nonempty({message: "Must not be empty."}),
+    language: ISO6391LanguageCodeSchema,
+    subtitleLanguages: z.array(ISO6391LanguageCodeSchema).nonempty({message: "Must not be empty."}),
     movie: IDStringSchema,
     theatre: IDStringSchema,
     screen: IDStringSchema,

@@ -3,14 +3,11 @@
  *
  */
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {
-    deleteRemoveMovieReviewForCurrentUser
-} from "@/domains/movie-reviews/_feat/my-reviews/repository/repository.ts";
+import {ObjectId} from "@/common/_schemas";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import {deleteRemoveMovieReviewForCurrentUser} from "@/domains/movie-reviews/_feat/my-reviews/repository/repository.ts";
 import {toast} from "react-toastify";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
-import useInvalidateQueryKeys from "@/common/hooks/query/useInvalidateQueryKeys.ts";
 import {FetchByMovieQueryKeys, MovieReviewCRUDQueryKeys, MyReviewsMutationKeys} from "@/domains/movie-reviews/_feat";
 
 /** Parameters for the movie review deletion mutation. */
@@ -23,17 +20,15 @@ type MutateParams = {
 export function useDeleteCurrentUserMovieReviewMutation(
     {onDeleteSuccess, successMessage, onDeleteError, errorMessage}: OnDeleteMutationParams = {}
 ): UseMutationResult<void, unknown, MutateParams> {
-    const invalidateQueries = useInvalidateQueryKeys();
+    const queryClient = useQueryClient();
 
     const deleteMovieReview = async (params: MutateParams) => {
         await deleteRemoveMovieReviewForCurrentUser(params.reviewID);
     }
 
     const onSuccess = () => {
-        invalidateQueries([
-            MovieReviewCRUDQueryKeys.list(),
-            FetchByMovieQueryKeys.all,
-        ], {exact: false});
+        queryClient.invalidateQueries({queryKey: MovieReviewCRUDQueryKeys.list(), exact: true});
+        queryClient.invalidateQueries({queryKey: FetchByMovieQueryKeys.all, exact: true});
 
         successMessage && toast.success(successMessage);
         onDeleteSuccess?.();

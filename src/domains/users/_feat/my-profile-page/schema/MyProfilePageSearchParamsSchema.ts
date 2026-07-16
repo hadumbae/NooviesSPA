@@ -1,37 +1,19 @@
 /**
- * @file MyProfilePageSearchParamsSchema.ts
- *
- * Zod schema for validating My Profile page search parameters.
- * Used to parse and normalize URL query state.
+ * @fileoverview Zod schema for validating and parsing search parameters on the user profile page.
  */
 
 import {z} from "zod";
-import {MyProfilePageActiveTabSchema} from "@/domains/users/_feat/my-profile-page/schema/MyProfilePageActiveTabSchema.ts";
-import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {MyProfilePageActiveTabSchema} from "@/domains/users/_feat";
+import {preprocessOptionalField} from "@/common/_feat/validation-preprocessors";
+import {CoercedPositiveNumberSchema} from "@/common/_schemas";
 
-/**
- * Runtime schema for My Profile page query parameters.
- *
- * - Validates the active tab
- * - Normalizes pagination values
- * - Applies default page numbers when missing
- */
+/** Schema defining the valid search parameters for the profile page including tab selection and pagination. */
 export const MyProfilePageSearchParamsSchema = z.object({
-    /** Currently active profile page tab */
     activeTab: MyProfilePageActiveTabSchema.optional().default("password"),
-
-    /** Reservations pagination page */
-    resPage: CleanedPositiveNumberSchema.optional().default(1),
-
-    /** Reviews pagination page */
-    rvwPage: CleanedPositiveNumberSchema.optional().default(1),
-
-    /** Favourites pagination page */
-    favPage: CleanedPositiveNumberSchema.optional().default(1),
+    resPage: preprocessOptionalField(CoercedPositiveNumberSchema).default(1),
+    rvwPage: preprocessOptionalField(CoercedPositiveNumberSchema).default(1),
+    favPage: preprocessOptionalField(CoercedPositiveNumberSchema).default(1),
 });
 
-/**
- * Normalized and type-safe profile page search parameters.
- */
-export type MyProfilePageSearchParams =
-    z.infer<typeof MyProfilePageSearchParamsSchema>;
+/** Type representing the validated search parameters for the profile page. */
+export type MyProfilePageSearchParams = z.infer<typeof MyProfilePageSearchParamsSchema>;

@@ -4,14 +4,10 @@
 
 import {ReactElement} from "react";
 import {PageSectionHeader} from "@/views/common/_comp";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {MovieReviewDetailsCard} from "@/views/client/movie-reviews/_feat";
-import {
-    FeaturedReviewsByMovie,
-    FeaturedReviewsByMovieSchema,
-    useFetchFeaturedReviewsByMovie
-} from "@/domains/movie-reviews/_feat";
+import {FeaturedReviewsByMovie, useFetchFeaturedReviewsByMovie} from "@/domains/movie-reviews/_feat";
 
 /** Props for the MovieInfoFeaturedReviewsSection component. */
 type SectionProps = {
@@ -26,8 +22,7 @@ export function MovieInfoFeaturedReviewsSection(
 ): ReactElement {
     const query = useFetchFeaturedReviewsByMovie({
         movieID,
-        schema: FeaturedReviewsByMovieSchema,
-        config: {populate: true, virtuals: true, limit: 3},
+        config: {limit: 3},
     });
 
     return (

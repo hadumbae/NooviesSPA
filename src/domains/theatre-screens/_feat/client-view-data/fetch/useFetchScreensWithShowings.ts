@@ -5,9 +5,9 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {DateOnlyString} from "@/common/schema/dates/DateOnlyStringSchema.ts";
+import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
+import {ObjectId} from "@/common/_schemas";
+import {DateOnlyString} from "@/common/_schemas/dates/DateOnlyStringSchema.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";

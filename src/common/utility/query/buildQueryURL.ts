@@ -1,4 +1,6 @@
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
+import {
+    filterNullishAttributes
+} from "@/common/_feat/filter-object-attributes/filterNullishAttributes.ts";
 
 type URLParams = {
     /**

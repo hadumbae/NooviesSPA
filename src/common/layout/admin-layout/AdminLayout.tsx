@@ -4,7 +4,7 @@
  */
 
 import {SidebarProvider} from "@/common/components/ui/sidebar/sidebar.tsx";
-import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import AdminSidebar from "@/common/layout/admin-layout/sidebar/AdminSidebar.tsx";
 import {AdminLayoutHeader} from "@/common/layout/admin-layout/layout/AdminLayoutHeader.tsx";

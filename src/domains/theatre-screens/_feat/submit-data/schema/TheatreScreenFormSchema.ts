@@ -4,10 +4,12 @@
 
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/_schemas";
-import {CoercedNonNegativeNumberSchema,} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 import {ScreenTypeSchema} from "@/domains/theatre-screens/_schema";
+import {
+    CoercedNonNegativeNumberSchema
+} from "@/common/_schemas/numbers/non-negative-number/CoercedNonNegativeNumberSchema";
 
 /**
  * Zod schema for validating theatre screen creation and update submissions.

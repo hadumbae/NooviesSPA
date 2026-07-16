@@ -2,7 +2,7 @@
  * @fileoverview Hook for navigating to the Genre index page with logging.
  */
 
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 
 /** Configuration for the hook initialization. */
 type HookConfig = {

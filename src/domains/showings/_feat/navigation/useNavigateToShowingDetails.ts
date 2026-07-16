@@ -2,9 +2,12 @@
  * @fileoverview Hook for navigating to the showing details administration page.
  */
 
-import useLoggedNavigate, {LoggingMessageParams} from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {
+    LoggingMessageParams,
+    useLoggedNavigate
+} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {NavigateOptions} from "react-router-dom";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 
 /** Configuration for the showing details navigation hook. */
 type NavConfig = LoggingMessageParams & {

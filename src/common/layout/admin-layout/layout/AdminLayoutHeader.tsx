@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import LayoutTitle from "@/common/components/layout/LayoutTitle.tsx";
 import LayoutBreakpointIndicator from "@/common/components/layout/LayoutBreakpointIndicator.tsx";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {SidebarContext, SidebarTrigger} from "@/common/components/ui";
 import AdminLayoutDesktopNavigation from "@/common/layout/admin-layout/navigation/AdminLayoutDesktopNavigation.tsx";
 

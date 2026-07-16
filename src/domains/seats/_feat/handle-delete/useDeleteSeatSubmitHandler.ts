@@ -6,7 +6,7 @@ import {useSeatDeleteMutation} from "@/domains/seats";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 
 type HandlerConfig = MutationResponseConfig<void, { _id: ObjectId }> & {
     _id: ObjectId;

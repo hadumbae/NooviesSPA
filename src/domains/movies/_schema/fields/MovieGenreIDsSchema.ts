@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 
 /** Zod schema for an array of genre ID strings. */
 export const MovieGenreIDsSchema = z.array(IDStringSchema, {message: "Must be an array of genre IDs."});

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
 import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";

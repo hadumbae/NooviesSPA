@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {MyReviewsPageContent} from "@/views/client/users/my-reviews-page/content.tsx";
-import useTitle from "@/common/hooks/document/useTitle.ts";
+import {useTitle} from "@/common/_feat";
 import {MyReviewsLoader} from "@/views/client/movie-reviews/_feat";
 
 const REVIEWS_PER_PAGE = 10;

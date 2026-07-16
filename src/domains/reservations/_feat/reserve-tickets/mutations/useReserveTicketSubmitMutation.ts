@@ -7,7 +7,7 @@ import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {UseFormReturn} from "react-hook-form";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {reserveTicket} from "@/domains/reservations/_feat/reserve-tickets/repository";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {ReserveTicketFormData, ReserveTicketFormValues} from "@/domains/reservations/_feat/reserve-tickets/schema";

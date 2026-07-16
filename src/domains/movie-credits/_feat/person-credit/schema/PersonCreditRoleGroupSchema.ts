@@ -10,9 +10,9 @@ import {
     PersonCreditSchema,
     PersonCrewCredit
 } from "@/domains/movie-credits/_feat/person-credit/schema/PersonCreditSchema.ts";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {RoleTypeSchema} from "@/domains/roletypes/_schema/model/RoleTypeSchema.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
+import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-number/NonNegativeNumberSchema";
 
 /**
  * Schema representing a collection of movie credits associated with a single role name.

@@ -3,7 +3,7 @@
  */
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {TheatreShowingCreateHeader} from "@/views/admin/theatres/_pages/theatre-showings-create/elements/header.tsx";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {ShowingSubmitForm} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitForm.tsx";

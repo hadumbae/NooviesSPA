@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui";
-import {URLString} from "@/common/schema/strings/URLStringSchema.ts";
+import {URLString} from "@/common/_schemas/strings/simple-strings/URLStringSchema.ts";
 import getInitials from "@/common/utility/formatters/getInitials.ts";
 
 /**

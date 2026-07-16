@@ -3,7 +3,7 @@
  */
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {PersonCRUDMutationKeys, PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks/keys";
 import {create, update} from "@/domains/persons/_feat/crud";
 import {PersonFormData} from "@/domains/persons/_feat/submit-form";

@@ -4,9 +4,9 @@
 
 import {z} from "zod";
 import {RoleTypeCrewCategorySchema} from "@/domains/roletypes/_schema/fields/RoleTypeCategorySchema.ts";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {CrewCreditExceptMovieSchema} from "@/domains/movie-credits/_feat/movie-info-credits/schema/CreditExceptMovieSchema.ts";
+import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-number/NonNegativeNumberSchema";
 
 /** Zod schema for crew credits grouped by role category. */
 export const GroupedCrewCreditsExceptMovieSchema = z.object({

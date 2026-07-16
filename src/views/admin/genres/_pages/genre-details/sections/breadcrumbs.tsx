@@ -12,7 +12,9 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
+import {
+    usePaginationLocationState
+} from "@/common/_feat/navigation/usePaginationLocationState.ts";
 import convertToQueryParams from "@/common/utility/query/convertToQueryParams.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 

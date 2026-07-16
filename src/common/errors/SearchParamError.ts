@@ -1,6 +1,6 @@
 import { ZodIssue } from "zod";
-import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
-import logger from "@/common/utility/features/logger/Logger.ts";
+import {buildContext} from "@/common/_feat/logger-builders/buildLoggerContext.ts";
+import {Logger as logger} from "@/common/_feat/logger/Logger.ts";
 
 type ConstructorParams<TRaw = unknown> = {
     /** Optional error message. Defaults to a generic search params error message. */

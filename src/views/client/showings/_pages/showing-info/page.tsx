@@ -3,7 +3,9 @@
  */
 
 import {ReactElement} from "react";
-import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
+import {
+    useFetchByIdentifierRouteParams
+} from "@/common/_feat";
 import {PageLoader} from "@/views/common/_comp/page";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";

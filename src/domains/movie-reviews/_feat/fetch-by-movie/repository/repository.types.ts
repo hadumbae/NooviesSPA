@@ -4,7 +4,7 @@
 
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params/schemas/PaginationValuesSchema.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 
 /** Parameters for retrieving reviews for a movie. */
 export type FetchReviewsByMovieConfig = {

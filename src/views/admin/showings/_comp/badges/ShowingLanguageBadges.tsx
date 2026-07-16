@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {ISO6391LanguageCode} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
+import {ISO6391LanguageCode} from "@/common/_schemas/enums/ISO6391LanguageCodeSchema.ts";
 import {Badge} from "@/common/components/ui/badge.tsx";
 import {ISO6391LanguageLabels,} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 import {cn} from "@/common/lib/utils.ts";

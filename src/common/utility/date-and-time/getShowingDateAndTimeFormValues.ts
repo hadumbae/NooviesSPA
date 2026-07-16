@@ -1,5 +1,5 @@
-import { IANATimezone } from "@/common/schema/date-time/IANATimezone.schema.ts";
-import { UTCISO8601DateTime } from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
+import { IANATimezone } from "@/common/_schemas/time/IANATimezoneSchema.ts";
+import { ISO8601DateTime } from "@/common/_schemas/iso-8601/ISO8601DateTimeSchema.ts";
 
 /**
  * Parameters for {@link getShowingDateAndTimeFormValues}.
@@ -11,7 +11,7 @@ export type ShowingDateTimeParams = {
      * @remarks
      * Typically stored internally as a UTC Luxon `DateTime`.
      */
-    startTime?: UTCISO8601DateTime | null;
+    startTime?: ISO8601DateTime | null;
 
     /**
      * Showing end time in UTC.
@@ -19,7 +19,7 @@ export type ShowingDateTimeParams = {
      * @remarks
      * Optional; may be `null` when the showing has no defined end time.
      */
-    endTime?: UTCISO8601DateTime | null;
+    endTime?: ISO8601DateTime | null;
 
     /**
      * Theatre IANA timezone identifier used for localization.

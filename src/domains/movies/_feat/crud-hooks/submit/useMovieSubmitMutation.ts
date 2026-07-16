@@ -2,9 +2,9 @@
  * @fileoverview Hook for handling movie creation and update mutations with form integration.
  */
 
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
+import {buildStandardLog} from "@/common/_feat/logger-builders/buildStandardLog.ts";
 import {Movie, MovieSchema} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 import {MovieFormData} from "@/domains/movies/_feat/submit-data/schema/MovieFormSchema.ts";
 import {create, update} from "@/domains/movies/_feat/crud";

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {
     PersonProfileImageFormData,
     usePersonProfileImageSubmitForm,

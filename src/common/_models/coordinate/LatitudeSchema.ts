@@ -1,6 +1,6 @@
 /** @fileoverview Zod schema and type definition for geographic latitude values. */
 
-import {CoercedNumberValueSchema} from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
+import {CoercedNumberValueSchema} from "@/common/_schemas/numbers/number-value/CoercedNumberValueSchema.ts";
 import {z} from "zod";
 
 /** Schema for validating latitude values between -90 and 90. */

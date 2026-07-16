@@ -11,7 +11,7 @@ import {ReactElement} from "react";
 import {PageHeader} from "@/views/common/_comp";
 import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users";
 import {Separator} from "@/common/components/ui";
-import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 
 /** Props for the MyReviewsPageContent component. */
 type ContentProps = {

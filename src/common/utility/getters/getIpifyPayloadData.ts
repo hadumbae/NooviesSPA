@@ -4,7 +4,7 @@
  */
 
 import { LocalStorageKeys } from "@/common/_const/storage/LocalStorageKeys.ts";
-import parseJSON from "@/common/utility/features/use-fetch-api/parseJSON.ts";
+import {parseJSON} from "@/common/_feat/use-fetch-api/json/parseJSON.ts";
 import { IpifyLocalStorageSchema } from "@/common/schema/api/ipify/IpifyPayload.schema.ts";
 import { ParseError } from "@/common/errors/ParseError.ts";
 

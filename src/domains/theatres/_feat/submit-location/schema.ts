@@ -1,7 +1,7 @@
 /** @fileoverview Zod schema for validating theatre browsing search parameters. */
 
 import {z} from "zod";
-import {LocationTargetSchema} from "@/common/schema/strings/LocationTargetSchema.ts";
+import {LocationTargetSchema} from "@/common/_schemas/strings/location-strings/LocationTargetSchema.ts";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 import {AnyValues} from "@/common/types";
 

@@ -4,9 +4,10 @@
 
 import {z} from "zod";
 import {ScreenTypeSchema} from "@/domains/theatre-screens/_schema/fields";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {NonEmptyStringSchema} from "@/common/_schemas";
-import {CoercedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+
+import {CoercedPositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/CoercedPositiveNumberSchema";
 
 /**
  * Schema for validating a Theatre Screen record.

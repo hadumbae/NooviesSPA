@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Button, ButtonProps} from "@/common/components/ui";
 import {cn} from "@/common/lib/utils.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {Trash} from "lucide-react";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import {useDeleteCurrentUserMovieReviewMutation} from "@/domains/movie-reviews";

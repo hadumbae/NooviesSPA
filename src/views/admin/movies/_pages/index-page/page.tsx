@@ -2,7 +2,9 @@
  * @fileoverview Controller component for the administrative movie library index page.
  */
 
-import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
+import {
+    usePaginationLocationState
+} from "@/common/_feat/navigation/usePaginationLocationState.ts";
 import useParsedPaginationValue
     from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";

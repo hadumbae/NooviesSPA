@@ -4,7 +4,7 @@
  */
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 
 import {create, update} from "@/domains/theatre-screens/_feat/crud";
 import {TheatreScreenDetails, TheatreScreenDetailsSchema} from "@/domains/theatre-screens/_schema";

@@ -2,7 +2,7 @@
  * @fileoverview Type definitions for the showing submission form hook.
  */
 
-import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
+import {IANATimezone} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 import {Showing} from "@/domains/showings/_schema/showing/ShowingSchema.ts";
 
 import {ShowingFormValues} from "@/domains/showings/_schema/form";

@@ -1,54 +1,38 @@
 /**
- * @file AppErrorFallback.tsx
- *
- * Root fallback component for application-level error boundaries.
- *
- * Delegates query-related errors to the query error handler,
- * while rendering a generic application error display for
- * all other error types.
+ * @fileoverview Error fallback component that dispatches errors to specific display handlers based on error type.
  */
 
 import {FallbackProps} from "react-error-boundary";
-import {
-    AppErrorDisplay
-} from "@/common/components/boundary/app-error-boundary/display/AppErrorDisplay.tsx";
-import {isQueryError} from "@/common/utility/errors/checkErrorType.ts";
+import {AppErrorDisplay} from "@/common/components/boundary/app-error-boundary/display/AppErrorDisplay.tsx";
 import QueryErrorHandler from "@/common/components/boundary/query-error-fallback/QueryErrorHandler.tsx";
 import {RouteError} from "@/common/errors/RouteError.ts";
 import {RouteErrorDisplay} from "@/common/components/boundary/app-error-boundary/display/RouteErrorDisplay.tsx";
+import {NetworkError} from "@/common/errors/NetworkError.ts";
+import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {ReactElement} from "react";
 
+/** Props for the AppErrorFallback component. */
 type HandlerProps = FallbackProps & { className?: string };
 
 /**
- * Error boundary fallback renderer for the application.
- *
- * @param props - Error boundary fallback props
+ * Determines the appropriate error UI to render based on whether the error is a network, route, or generic application error.
  */
-const AppErrorFallback = ({error, className}: HandlerProps) => {
-    if (isQueryError(error)) {
+export function AppErrorFallback(
+    {error, className}: HandlerProps
+): ReactElement {
+    if (error instanceof NetworkError || error instanceof HttpResponseError) {
         return (
-            <QueryErrorHandler
-                error={error}
-                className={className}
-            />
+            <QueryErrorHandler error={error} className={className}/>
         );
     }
 
     if (error instanceof RouteError) {
         return (
-            <RouteErrorDisplay
-                error={error}
-                className={className}
-            />
+            <RouteErrorDisplay error={error} className={className}/>
         );
     }
 
     return (
-        <AppErrorDisplay
-            error={error}
-            className={className}
-        />
+        <AppErrorDisplay error={error} className={className}/>
     );
-};
-
-export default AppErrorFallback;
+}

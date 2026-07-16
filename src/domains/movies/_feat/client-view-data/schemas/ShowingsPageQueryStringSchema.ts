@@ -3,12 +3,12 @@
  */
 
 import {z} from "zod";
-import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {StringValueSchema} from "@/common/_schemas";
+import {PositiveIntegerSchema, StringValueSchema} from "@/common/_schemas";
+import {preprocessOptionalField} from "@/common/_feat/validation-preprocessors";
 
 /** Zod schema for validating and parsing showings page query strings. */
 export const ShowingsPageQueryStringSchema = z.object({
-    page: CleanedPositiveNumberSchema.optional(),
+    page: preprocessOptionalField(PositiveIntegerSchema),
     near: StringValueSchema.optional(),
 });
 

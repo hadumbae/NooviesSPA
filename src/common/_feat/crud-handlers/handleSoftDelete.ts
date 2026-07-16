@@ -4,8 +4,8 @@
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
+import {ObjectId} from "@/common/_schemas";
 import {buildURL} from "@/common/_feat/fetch-api";
 
 /**

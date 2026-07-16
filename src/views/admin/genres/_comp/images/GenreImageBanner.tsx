@@ -5,7 +5,7 @@
 import {ReactElement, useState} from "react";
 import {ImageOff} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
-import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import {CloudinaryImage} from "@/common/_schemas/cloudinary-image/CloudinaryImageSchema.ts";
 
 /** Props for the GenreImageBanner component. */
 type BannerProps = {

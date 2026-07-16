@@ -3,8 +3,12 @@
  */
 
 import {z} from "zod";
-import {TheatreScreenDetailsActiveTabSchema} from "./TheatreScreenDetailsActiveTabSchema.ts";
-import {CoercedNonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+import {
+    TheatreScreenDetailsActiveTabSchema
+} from "@/domains/theatre-screens/_feat/page-search-params/TheatreScreenDetailsActiveTabSchema.ts";
+import {
+    CoercedNonNegativeNumberSchema
+} from "@/common/_schemas/numbers/non-negative-number/CoercedNonNegativeNumberSchema";
 
 /** Schema for query parameters used when searching or paginating through a theatre screen's data. */
 export const TheatreScreenDetailsSearchParamSchema = z.object({

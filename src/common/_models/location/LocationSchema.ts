@@ -2,8 +2,8 @@
 
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/_schemas";
-import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import {IANATimezoneSchema} from "@/common/schema/date-time/IANATimezone.schema.ts";
+import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
+import {IANATimezoneSchema} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 import {CoordinateSchema} from "@/common/_models/coordinate/CoordinateSchema.ts";
 import {StreetStringSchema} from "@/common/_models/location/StreetStringSchema.ts";
 import {CityStringSchema} from "@/common/_models/location/CityStringSchema.ts";
@@ -14,7 +14,7 @@ export const LocationSchema = z.object({
     street: StreetStringSchema.optional(),
     city: CityStringSchema,
     state: StateStringSchema.optional(),
-    country: ISO3166Alpha2CountryCodeEnum,
+    country: ISO3166Alpha2CountryCodeSchema,
     postalCode: NonEmptyStringSchema.optional(),
     timezone: IANATimezoneSchema,
     coordinates: CoordinateSchema.optional(),

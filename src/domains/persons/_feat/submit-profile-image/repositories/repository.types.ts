@@ -2,7 +2,7 @@
  * @fileoverview Type definitions for profile image repository operations.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 
 /**

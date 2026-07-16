@@ -3,12 +3,10 @@
  */
 
 import {z} from "zod";
-import {SeatLayoutTypeSchema, SeatTypeSchema} from "@/domains/seats/_schema/fields";
-import {NonEmptyStringSchema} from "@/common/_schemas";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {CleanedPositiveNumberSchema,} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {SeatLabelSchema, SeatLayoutTypeSchema, SeatRowSchema, SeatTypeSchema} from "@/domains/seats/_schema/fields";
+import {IDStringSchema} from "@/common/_schemas";
+import {CoercedBooleanValueSchema, NonNegativeNumberSchema, PositiveIntegerSchema,} from "@/common/_schemas";
+import {preprocessOptionalField, preprocessToNumber} from "@/common/_feat/validation-preprocessors";
 import {AnyUnionValues} from "@/common/types";
 
 /** Base Zod schema containing shared geometric and relational fields for all seat layout elements. */
@@ -16,21 +14,19 @@ export const SeatFormBaseSchema = z.object({
     _id: IDStringSchema.readonly().optional(),
     theatre: IDStringSchema,
     screen: IDStringSchema,
-    row: NonEmptyStringSchema.max(10, "Must be 10 characters or less."),
-    x: CleanedPositiveNumberSchema,
-    y: CleanedPositiveNumberSchema,
+    row: SeatRowSchema,
+    x: preprocessToNumber(PositiveIntegerSchema),
+    y: preprocessToNumber(PositiveIntegerSchema),
     layoutType: SeatLayoutTypeSchema,
 });
 
 const SeatingSchema = SeatFormBaseSchema.extend({
     layoutType: z.literal("SEAT"),
-    seatNumber: CleanedPositiveNumberSchema,
-    seatLabel: preprocessEmptyStringToUndefined(
-        NonEmptyStringSchema.max(50, {message: "Must be 50 characters or less."}).optional(),
-    ).optional(),
+    seatNumber: preprocessToNumber(PositiveIntegerSchema),
+    seatLabel: preprocessOptionalField(SeatLabelSchema),
     seatType: SeatTypeSchema,
     isAvailable: CoercedBooleanValueSchema,
-    priceMultiplier: CleanedPositiveNumberSchema,
+    priceMultiplier: preprocessToNumber(NonNegativeNumberSchema),
 });
 
 const AisleSchema = SeatFormBaseSchema.extend({

@@ -7,7 +7,7 @@ import {DisableFields} from "@/common/types";
 import {ShowingFormValues} from "@/domains/showings/_schema/form/form-values/ShowingFormValues.ts";
 import {FormStep, FormStepMeta} from "@/common/_feat/multi-step-form/types.ts";
 import {ChevronRight, Clock, Languages, ListCollapse} from "lucide-react";
-import getSchemaFieldKeys from "@/common/utility/features/zod/getSchemaFieldKeys.ts";
+import {getSchemaFieldKeys} from "@/common/_feat/zod-utils/getSchemaFieldKeys.ts";
 import {
     ShowingSubmitFormDetailsFieldset
 } from "@/views/admin/showings/_feat/submit-form/fieldsets/ShowingSubmitFormDetailsFieldset.tsx";

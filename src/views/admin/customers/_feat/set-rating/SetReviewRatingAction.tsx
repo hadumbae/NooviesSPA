@@ -2,7 +2,7 @@
  * @fileoverview Orchestrator component for the Set Review Rating administrative action.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {SetReviewRatingFormData} from "@/domains/movie-reviews/_feat/admin-actions/forms";
 import {ReactElement, useState} from "react";
 import {Button} from "@/common/components/ui/button.tsx";

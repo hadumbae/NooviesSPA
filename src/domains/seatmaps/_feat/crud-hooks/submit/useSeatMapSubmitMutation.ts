@@ -3,7 +3,7 @@
  */
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {SeatMapDetails, SeatMapDetailsSchema} from "@/domains/seatmaps/_schema/model/SeatMapDetailsSchema";
 import {SeatMapCRUDMutationKeys, SeatMapCRUDQueryKeys} from "@/domains/seatmaps/_feat/crud-hooks/keys";
 import {create, update} from "@/domains/seatmaps/_feat/crud";

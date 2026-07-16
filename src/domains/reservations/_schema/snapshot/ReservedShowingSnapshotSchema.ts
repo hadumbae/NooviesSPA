@@ -8,10 +8,11 @@ import {TheatreSnapshotSchema} from "@/domains/theatres/_schema/snapshot/Theatre
 import {TheatreScreenSnapshotSchema} from "@/domains/theatre-screens/_schema/snapshot/TheatreScreenSnapshotSchema.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {ReservedSeatSnapshotSchema} from "@/domains/reservations/_schema/snapshot/ReservedSeatSnapshotSchema.ts";
-import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts";
+import {ISO8601DateTimeSchema} from "@/common/_schemas/iso-8601/ISO8601DateTimeSchema.ts";
 import {NonEmptyStringSchema} from "@/common/_schemas";
-import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {BooleanValueSchema} from "@/common/_schemas/boolean/BooleanValueSchema.ts";
+
+import {PositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/PositiveNumberSchema";
 
 /** Zod schema for capturing the complete state of a showing at the moment a reservation is finalized. */
 export const ReservedShowingSnapshotSchema = z.object({
@@ -19,8 +20,8 @@ export const ReservedShowingSnapshotSchema = z.object({
     theatre: TheatreSnapshotSchema,
     screen: TheatreScreenSnapshotSchema,
     selectedSeats: generateArraySchema(ReservedSeatSnapshotSchema).nullable(),
-    startTime: UTCISO8601DateTimeSchema,
-    endTime: UTCISO8601DateTimeSchema.nullable().optional(),
+    startTime: ISO8601DateTimeSchema,
+    endTime: ISO8601DateTimeSchema.nullable().optional(),
     language: NonEmptyStringSchema,
     subtitleLanguages: z.array(NonEmptyStringSchema).nonempty({message: "Must not be empty."}),
     isSpecialEvent: BooleanValueSchema.optional(),

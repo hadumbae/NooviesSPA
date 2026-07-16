@@ -3,8 +3,8 @@
  */
 
 import {ReactElement} from "react";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {ObjectId} from "@/common/_schemas";
 import {ShowingDeleteWarningDialog} from "@/views/admin/showings/_feat/showing-delete-warning";
 import {useNavigateToShowingIndex} from "@/domains/showings/_feat/navigation";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";

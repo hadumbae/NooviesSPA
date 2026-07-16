@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react';
 import { cn } from "@/common/lib/utils.ts";
 import { DropdownMenuItem } from "@/common/components/ui/dropdown-menu.tsx";
-import useCurrentURLPath from "@/common/hooks/router/useCurrentURLPath.ts";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {useCurrentURLPath} from "@/common/_feat/navigation/useCurrentURLPath.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 
 /**
  * Props for the {@link DropdownMenuLink} component.

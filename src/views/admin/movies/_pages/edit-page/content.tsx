@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {Movie} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {MovieSubmitForm, MovieSubmitFormActions, MovieSubmitFormView} from "@/views/admin/movies/_feat/submit-movie";

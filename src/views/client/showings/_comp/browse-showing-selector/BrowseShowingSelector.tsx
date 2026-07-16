@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {cn} from "@/common/lib/utils.ts";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
-import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
+import {IANATimezone} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 import {ShowingDetails} from "@/domains/showings";
 import {ShowingInfoLanguages, ShowingInfoMovieMeta} from "@/views/client/showings/_comp/showing-info-details";
 

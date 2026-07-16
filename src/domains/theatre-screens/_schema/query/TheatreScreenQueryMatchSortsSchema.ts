@@ -4,7 +4,7 @@
  */
 
 import {z} from "zod";
-import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
+import {MongooseSortOrderSchema} from "@/common/_schemas/enums/MongooseSortOrderSchema.ts";
 
 /**
  * Zod schema for validating theatre screen sort configurations.

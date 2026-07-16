@@ -3,7 +3,7 @@
  * FavouriteMovieHeartButton.tsx
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {forwardRef, useState} from "react";
 import {Heart, HeartMinus, HeartPlus} from "lucide-react";
 import {Button, ButtonProps} from "@/common/components/ui/button.tsx";

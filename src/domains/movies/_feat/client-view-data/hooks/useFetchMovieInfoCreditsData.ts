@@ -6,7 +6,7 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {getCreditForMovieInfoView} from "@/domains/movies/_feat/client-view-data/repository";
 import {MovieClientViewDataQueryKeys} from "@/domains/movies/_feat/client-view-data/hooks/queryKeys.ts";

@@ -2,7 +2,7 @@
  * @fileoverview Type definitions for the movie image repository operations.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 
 /** Configuration for uploading a movie poster image. */
 export type UploadPosterImageConfig = {

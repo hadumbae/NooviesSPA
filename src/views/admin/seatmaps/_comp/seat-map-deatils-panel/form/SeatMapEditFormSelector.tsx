@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {WidePanelButton} from "@/views/common/_comp";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {
     SeatMapDetailsPanelStateContext
 } from "@/domains/seatmaps/_ctx/details-panel-context/SeatMapDetailsPanelStateContext.ts";

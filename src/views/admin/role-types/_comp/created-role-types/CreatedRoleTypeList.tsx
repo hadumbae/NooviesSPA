@@ -3,7 +3,7 @@
  */
 
 import {Dispatch, ReactElement, SetStateAction} from 'react';
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {RoleType} from "@/domains/roletypes/_schema/model/RoleTypeSchema.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {X} from "lucide-react";

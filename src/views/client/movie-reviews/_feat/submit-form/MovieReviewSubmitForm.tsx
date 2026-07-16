@@ -2,13 +2,13 @@
  * @fileoverview Container for managing movie review form state and submission mutations.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {
     useSubmitUserMovieReviewMutation
 } from "@/domains/movie-reviews/_feat/my-reviews/hooks/useSubmitUserMovieReviewMutation.ts";
 import {Form} from "@/common/components/ui/form.tsx";
 import {ReactElement, ReactNode, useId} from "react";
-import Logger from "@/common/utility/features/logger/Logger.ts";
+import {Logger} from "@/common/_feat/logger/Logger.ts";
 import {MovieReview} from "@/domains/movie-reviews/_schema/model";
 import {FormOptions, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {

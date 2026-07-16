@@ -4,8 +4,10 @@
  */
 
 import {ReactElement} from 'react';
-import useTitle from "@/common/hooks/document/useTitle.ts";
-import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
+import {useTitle} from "@/common/_feat";
+import {
+    usePaginationLocationState
+} from "@/common/_feat/navigation/usePaginationLocationState.ts";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {useFetchPaginatedGenres} from "@/domains/genres/_feat/crud-hooks";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";

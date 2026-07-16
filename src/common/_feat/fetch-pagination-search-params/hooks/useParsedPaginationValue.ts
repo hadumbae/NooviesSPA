@@ -5,7 +5,7 @@
 
 import {useSearchParams} from "react-router-dom";
 import {updateSearchParams} from "@/common/_feat/fetch-search-params";
-import Logger from "@/common/utility/features/logger/Logger.ts";
+import {Logger} from "@/common/_feat/logger/Logger.ts";
 import {PaginationValueSchema} from "@/common/_feat/fetch-pagination-search-params/schemas/PaginationValueSchema.ts";
 import {getPaginationDefaultValue} from "@/common/_feat/fetch-pagination-search-params";
 

@@ -8,7 +8,7 @@ import parseSearchParams from "@/common/_feat/fetch-search-params/parseSearchPar
 import {updateSearchParams} from "@/common/_feat/fetch-search-params/index";
 import {z, ZodObject, ZodRawShape} from "zod";
 import stringifySearchParamValues from "@/common/_feat/fetch-search-params/stringifySearchParamValues.ts";
-import getTopLevelArrayKeys from "@/common/utility/features/zod/getTopLevelArrayKeys.ts";
+import {getTopLevelArrayKeys} from "@/common/_feat/zod-utils/getTopLevelArrayKeys.ts";
 
 /** Configuration parameters for the useParsedSearchParams hook. */
 export type ParsedSearchParamHookParams<

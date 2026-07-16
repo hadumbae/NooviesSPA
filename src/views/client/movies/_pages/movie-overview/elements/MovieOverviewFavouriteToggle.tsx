@@ -8,7 +8,7 @@ import {Card, CardContent} from "@/common/components/ui";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {FavouriteMovieHeartButton} from "@/views/client/movies/_comp";
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {IsFavouriteMovieMetadata, useCheckIsFavouriteMovie, useToggleUserFavouriteMovie} from "@/domains/users";
 import {cn} from "@/common/lib/utils.ts";
 

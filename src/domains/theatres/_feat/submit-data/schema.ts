@@ -3,7 +3,7 @@
 
 import {z} from "zod";
 import {LocationFormSchema} from "@/common/_models/location-form/LocationFormSchema.ts";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {AnyValues} from "@/common/types";
 import {TheatreNameSchema, TheatreSeatCapacitySchema} from "@/domains/theatres";
 

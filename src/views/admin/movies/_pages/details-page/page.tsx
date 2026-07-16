@@ -3,8 +3,10 @@
  *
  */
 import {PageLoader} from "@/views/common/_comp/page";
-import useTitle from "@/common/hooks/document/useTitle.ts";
-import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
+import {useTitle} from "@/common/_feat";
+import {
+    useFetchByIdentifierRouteParams
+} from "@/common/_feat";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MovieDetailsPageContent} from "@/views/admin/movies/_pages/details-page/content.tsx";

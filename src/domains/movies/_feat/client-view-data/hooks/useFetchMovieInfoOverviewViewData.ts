@@ -3,7 +3,7 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";

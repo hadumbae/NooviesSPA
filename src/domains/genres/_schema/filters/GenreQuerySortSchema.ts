@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
-import {MongooseNumericSortOrderSchema} from "@/common/schema/enums/MongooseNumericSortOrderSchema.ts";
+import {MongooseNumericSortOrderSchema} from "@/common/_schemas/enums/MongooseNumericSortOrderSchema.ts";
 
 /**
  * Zod schema for validating genre query sorting parameters.

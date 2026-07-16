@@ -8,7 +8,7 @@ import {Film, Search, Sofa, TvMinimal} from "lucide-react";
 import buildString from "@/common/utility/buildString.ts";
 import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";
 import {IconButton, SROnly, SubsectionSubtitle, SubsectionTitle} from "@/views/common/_comp";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {TheatreDetails} from "@/domains/theatres";
 
 /** Props for the TheatreSummaryCard component. */

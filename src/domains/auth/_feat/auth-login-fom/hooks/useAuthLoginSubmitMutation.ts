@@ -6,7 +6,7 @@ import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import {UseFormReturn} from "react-hook-form";
 import {useSetAuthUser} from "@/domains/auth/_feat/manage-auth-user-data";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {
     AuthLoginFormData,

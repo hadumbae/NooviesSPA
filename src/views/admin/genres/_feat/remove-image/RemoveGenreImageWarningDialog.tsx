@@ -4,7 +4,7 @@
 
 import {ReactElement, ReactNode} from "react";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {UIOpenStateProps} from "@/common/types";
 import {Genre, useRemoveGenreImage} from "@/domains/genres";
 import {

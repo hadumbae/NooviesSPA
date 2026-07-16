@@ -11,7 +11,7 @@ import {
     BreadcrumbSeparator
 } from "@/common/components/ui";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 
 /** Props for the MovieEditBreadcrumbs component. */
 type BreadcrumbProps = {

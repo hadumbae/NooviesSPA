@@ -3,11 +3,11 @@
  */
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {Movie, MovieSchema} from "@/domains/movies/_schema";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks";
-import Logger from "@/common/utility/features/logger/Logger.ts";
+import {Logger} from "@/common/_feat/logger/Logger.ts";
 import {ManageMovieImageMutationKeys} from "@/domains/movies/_feat/manage-images/mutations/mutationKeys.ts";
 import {patchUploadPosterImage} from "@/domains/movies/_feat/manage-images/repository";
 import {MoviePosterImageFormData} from "@/domains/movies/_feat/manage-images/form";

@@ -11,7 +11,7 @@ import {ReactElement} from "react";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {PageHeader} from "@/views/common/_comp";
 import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users";
-import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 import {Separator} from "@/common/components/ui";
 
 /** Props for the MyFavouritesPageContent component. */

@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Loader} from "lucide-react";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {cn} from "@/common/lib/utils.ts";
 import {TheatreDetails, TheatreDetailsSchema} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 import {useFetchTheatre} from "@/domains/theatres/_feat/crud-hooks";

@@ -2,16 +2,13 @@
  * @fileoverview Inline action menu for managing individual movie reviews.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {Ellipsis} from "lucide-react";
 import {IconButton} from "@/views/common/_comp";
-import {
-    useDeleteCurrentUserMovieReviewMutation
-} from "@/domains/movie-reviews/_feat/my-reviews/hooks/useDeleteCurrentUserMovieReviewMutation.ts";
 import {ReactElement, useState} from "react";
 import {toast} from "react-toastify";
-import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button, Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui";
+import {useDeleteCurrentUserMovieReviewMutation} from "@/domains/movie-reviews";
 
 /** Props for the MovieReviewIndexCardActions component. */
 type ActionProps = {

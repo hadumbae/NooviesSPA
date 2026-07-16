@@ -6,7 +6,7 @@ import {cn} from "@/common/lib/utils.ts";
 import {
     ReservationSeatMapElement
 } from "@/views/client/reservations/_comp/seating-input/ReservationSeatMapElement.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {useOrganisedSeatingForLayout} from "@/domains/seats/_feat/handle-seat-layout";
 import {ReactElement} from "react";
 

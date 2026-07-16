@@ -9,8 +9,8 @@ import handleMutationResponseError from "@/common/utility/handlers/handleMutatio
 import {patchRemoveGenreImage} from "@/domains/genres/_feat/manage-image/repository";
 import {ManageGenreImageMutationKeys} from "@/domains/genres/_feat/manage-image/mutations/mutationKeys.ts";
 import {type Genre, GenreSchema} from "@/domains/genres/_schema";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
+import {ObjectId} from "@/common/_schemas";
 
 /** Payload for the remove genre image mutation. */
 type RemovePayload = {

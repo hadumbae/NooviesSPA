@@ -7,7 +7,7 @@ import {Control, FieldValues, Path} from "react-hook-form";
 import {
     ReservationSeatMapSelector
 } from "@/views/client/reservations/_comp/seating-input/ReservationSeatMapSelector.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {ReactElement} from "react";
 
 import {SeatMapDetails} from "@/domains/seatmaps/_schema/model/SeatMapDetailsSchema";

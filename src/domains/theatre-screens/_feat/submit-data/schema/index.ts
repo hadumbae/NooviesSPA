@@ -4,12 +4,10 @@ import {
 } from "@/domains/theatre-screens/_feat/submit-data/schema/TheatreScreenFormSchema.ts";
 import {
     TheatreScreenFormValues,
-    TheatreScreenFormValuesSchema
-} from "@/domains/theatre-screens/_feat/submit-data/schema/TheatreScreenFormValuesSchema.ts";
+} from "@/domains/theatre-screens/_feat/submit-data/schema/TheatreScreenFormValues.ts";
 
 export {
     TheatreScreenFormSchema,
-    TheatreScreenFormValuesSchema,
 }
 
 export type {

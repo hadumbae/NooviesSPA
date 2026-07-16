@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode, useMemo} from "react";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {
     AdminReviewActionFormContext,
     AdminReviewActionFormContextValues

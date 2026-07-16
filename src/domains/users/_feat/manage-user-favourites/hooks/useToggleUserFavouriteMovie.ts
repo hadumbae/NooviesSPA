@@ -5,7 +5,7 @@
 
 import {toast} from "react-toastify";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {patchToggleUserFavouriteMovie} from "@/domains/users/_feat/manage-user-favourites/repository";
 import {ManageUserFavouritesMutationKeys} from "@/domains/users/_feat/manage-user-favourites/hooks";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";

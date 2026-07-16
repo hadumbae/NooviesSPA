@@ -3,7 +3,7 @@
  */
 
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 
 import {destroy} from "@/domains/showings/_feat/crud";
 import {ShowingBaseQueryKeys} from "@/domains/showings/_feat/base-query-keys";

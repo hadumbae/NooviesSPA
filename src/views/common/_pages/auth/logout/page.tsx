@@ -4,7 +4,7 @@
 
 import {ReactElement, useEffect} from 'react';
 import {useAuthLogoutSubmitMutation} from "@/domains/auth/_feat/auth-logout/useAuthLogoutSubmitMutation.ts";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {PageLoader} from "@/views/common/_comp/page";
 
 /**

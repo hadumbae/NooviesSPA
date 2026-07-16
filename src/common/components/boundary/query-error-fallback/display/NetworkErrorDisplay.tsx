@@ -3,8 +3,8 @@
  */
 
 import {NetworkError} from "@/common/errors/NetworkError.ts";
-import Logger from "@/common/utility/features/logger/Logger.ts";
-import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
+import {Logger} from "@/common/_feat/logger/Logger.ts";
+import {buildContext} from "@/common/_feat/logger-builders/buildLoggerContext.ts";
 import {Network} from "lucide-react";
 import {cn} from "@/common/lib/utils.ts";
 import {ErrorHandlerDisplayProps} from "@/common/type/ErrorHandlerProps.ts";

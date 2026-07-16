@@ -4,9 +4,10 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {IDStringSchema} from "@/common/_schemas";
+import {BooleanValueSchema} from "@/common/_schemas/boolean/BooleanValueSchema.ts";
+
+import {PositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/PositiveNumberSchema";
 
 /**
  * Filter criteria for movie review queries.

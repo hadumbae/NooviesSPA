@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { BooleanValueSchema } from "@/common/schema/boolean/BooleanValueSchema.ts";
-import { NumberValueSchema } from "@/common/schema/numbers/number-value/NumberValueSchema.ts";
-import { StringValueSchema } from "@/common/_schemas/strings/StringValueSchema.ts";
-import { IANATimezoneSchema } from "@/common/schema/date-time/IANATimezone.schema.ts";
+import { BooleanValueSchema } from "@/common/_schemas/boolean/BooleanValueSchema.ts";
+import { NumberValueSchema } from "@/common/_schemas/numbers/number-value/NumberValueSchema.ts";
+import { StringValueSchema } from "@/common/_schemas/strings/simple-strings/StringValueSchema.ts";
+import { IANATimezoneSchema } from "@/common/_schemas/time/IANATimezoneSchema.ts";
 
 /**
  * @file IpAPISchema.ts

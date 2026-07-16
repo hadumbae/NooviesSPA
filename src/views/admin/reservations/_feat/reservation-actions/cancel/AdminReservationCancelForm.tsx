@@ -4,7 +4,7 @@
 
 import {ReactElement, ReactNode} from "react";
 import {Form} from "@/common/components/ui";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";

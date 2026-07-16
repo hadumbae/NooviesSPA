@@ -3,7 +3,7 @@
  */
 
 import {RouteObject} from "react-router-dom";
-import ComponentErrorHandler from "@/common/components/errors/ComponentErrorHandler.tsx";
+import {ComponentErrorHandler} from "@/common/components/errors/ComponentErrorHandler.tsx";
 import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
 import {MovieCreatePage, MovieDetailsPage, MovieEditPage, MovieIndexPage, MoviePeoplePage} from "@/views/admin/movies";
 

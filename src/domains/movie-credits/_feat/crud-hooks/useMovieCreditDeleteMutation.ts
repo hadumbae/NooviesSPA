@@ -2,7 +2,7 @@
  * @fileoverview Mutation hook for deleting movie credits with cache invalidation and notifications.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {destroy} from "@/domains/movie-credits/_feat/crud";
 import {MovieCreditCRUDMutationKeys} from "@/domains/movie-credits/_feat/crud-hooks/mutationKeys.ts";

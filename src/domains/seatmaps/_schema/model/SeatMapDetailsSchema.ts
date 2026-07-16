@@ -6,8 +6,8 @@ import {z} from "zod";
 import {SeatDetailsSchema} from "@/domains/seats";
 import {PopulatedShowingSchema} from "@/domains/showings";
 import {SeatMapSchema} from "@/domains/seatmaps/_schema/model/SeatMapSchema.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {NonEmptyStringSchema} from "@/common/_schemas";
+import {PositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/PositiveNumberSchema";
 
 /** Zod schema for a seat map entry including positional data and related entity details. */
 export const SeatMapDetailsSchema = SeatMapSchema.extend({

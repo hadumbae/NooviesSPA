@@ -7,10 +7,10 @@ import {
     MoviePosterImageSubmitFormPanel
 } from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormPanel.tsx";
 import {MovieDeleteWarningDialog} from "@/views/admin/movies/_feat/delete-movie";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {MovieDetailsUISettersContext, MovieDetailsUIStatesContext} from "@/domains/movies/_ctx/details-ui";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {ObjectId} from "@/common/_schemas";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {MoviePosterImageDeleteDialog} from "@/views/admin/movies/_feat/delete-poster-image";
 import {MoviePosterImageSubmitForm} from "@/views/admin/movies/_feat";
 

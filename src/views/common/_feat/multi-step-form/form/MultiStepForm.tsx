@@ -9,7 +9,7 @@ import {
     MultiStepFormStateContext,
     MultiStepFormStateContextValues
 } from "@/common/_feat/multi-step-form/contexts/stateContext.ts";
-import {useDebouncedCallback} from "@/common/hooks/useDebouncedCallback.tsx";
+import {useDebouncedCallback} from "@/common/_feat/multi-step-form/hooks/useDebouncedCallback.ts";
 import {useBaseMultiStepFormContext} from "@/common/_feat/multi-step-form";
 import {
     MultiStepFormSetterContext,

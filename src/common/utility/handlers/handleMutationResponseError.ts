@@ -1,7 +1,7 @@
 import {ParseError} from "@/common/errors/ParseError.ts";
 import {toast} from "react-toastify";
-import Logger from "@/common/utility/features/logger/Logger.ts";
-import buildContext from "@/common/utility/features/logger/buildLoggerContext.ts";
+import {Logger} from "@/common/_feat/logger/Logger.ts";
+import {buildContext} from "@/common/_feat/logger-builders/buildLoggerContext.ts";
 
 /**
  * Parameters for {@link handleMutationResponseError}.

@@ -4,8 +4,8 @@
  */
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {ObjectId} from "@/common/_schemas";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 
 import {AdminReservation, AdminReservationSchema} from "@/domains/reservations/_schema";
 import {FetchByCodeQueryKeys} from "@/domains/reservations/_feat/fetch-reservation-by-code";

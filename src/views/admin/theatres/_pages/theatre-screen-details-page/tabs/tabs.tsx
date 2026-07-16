@@ -4,7 +4,7 @@
 
 import {ReactElement, useState} from "react";
 import {Tabs, TabsList, TabsTrigger} from "@/common/components/ui";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {
     TheatreScreenDetailsViewSeatsTab
 } from "@/views/admin/theatres/_pages/theatre-screen-details-page/tabs/TheatreScreenDetailsViewSeatsTab.tsx";

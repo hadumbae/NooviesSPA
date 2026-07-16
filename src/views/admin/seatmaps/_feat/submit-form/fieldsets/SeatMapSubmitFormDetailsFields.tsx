@@ -12,7 +12,7 @@ import {SeatMapStatusRadioGroup} from "@/views/admin/seatmaps/_feat/form-input";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {cn} from "@/common/lib/utils.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 
 type ViewProps = FormFieldsetProps<SeatMapFormValues> & {
     screen: ObjectId;

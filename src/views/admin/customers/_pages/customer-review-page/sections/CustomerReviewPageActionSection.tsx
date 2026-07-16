@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {PageSectionHeader} from "@/views/common/_comp/page";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {
     ResetReviewDisplayNameAction,
     ResetReviewLikesAction,

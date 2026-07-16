@@ -3,7 +3,7 @@
  */
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {create, update,} from "@/domains/roletypes/_feat/crud";
 import {RoleTypeFormData} from "@/domains/roletypes/_feat/submit-data";
 import {RoleType, RoleTypeSchema} from "@/domains/roletypes/_schema";

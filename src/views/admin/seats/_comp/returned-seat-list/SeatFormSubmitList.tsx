@@ -3,7 +3,7 @@
  */
 
 import {Dispatch, ReactElement, SetStateAction} from 'react';
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 
 import {SeatDetails} from "@/domains/seats/_schema";
 import {SeatFormSubmitSeatCard} from "@/views/admin/seats/_comp/returned-seat-list/SeatFormSubmitSeatCard.tsx";

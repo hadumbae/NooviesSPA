@@ -6,7 +6,7 @@ import {ReactElement, ReactNode} from 'react';
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/lib/utils.ts";
 import {HookFormInput, HookFormTextArea} from "@/views/common/_feat";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {BaseFormContext} from "@/common/_feat/generic-form-context";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import {UIOpenStateProps} from "@/common/types";

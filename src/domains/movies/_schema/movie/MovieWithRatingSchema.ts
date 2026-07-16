@@ -4,9 +4,9 @@
  */
 
 import {ExtendedMovieWithGenresSchema} from "@/domains/movies/_schema/movie/MovieWithGenresSchema.ts";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {MovieReleaseDateRefinement} from "@/domains/movies/_schema/movie/MovieSchemaUtilities.ts";
 import {z} from "zod";
+import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-number/NonNegativeNumberSchema";
 
 /**
  * Movie schema that adds an average rating field to the populated movie model.

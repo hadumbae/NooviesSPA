@@ -5,7 +5,7 @@
 
 import {ReactNode} from "react";
 import {cn} from "@/common/lib/utils.ts";
-import {OrientationValues} from "@/common/schema/enums/OrientationEnumSchema.ts";
+import {OrientationValues} from "@/common/_schemas/enums/OrientationEnumSchema.ts";
 
 /**
  * Props for the {@link LabeledGroup} component.

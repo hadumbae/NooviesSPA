@@ -3,11 +3,11 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {ShowingStatusSchema} from "@/domains/showings/_schema/fields";
 import {NonEmptyStringSchema} from "@/common/_schemas";
-import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {SeatTypeSchema} from "@/domains/seats/_schema/fields";
+import {PositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/PositiveNumberSchema";
 
 /** Zod schema for validating seat map reference filter parameters. */
 export const SeatMapReferenceFilterSchema = z.object({

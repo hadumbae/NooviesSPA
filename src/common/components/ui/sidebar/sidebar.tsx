@@ -4,7 +4,7 @@ import {VisuallyHidden} from "@radix-ui/react-visually-hidden"
 import {VariantProps, cva} from "class-variance-authority"
 import {PanelLeft} from "lucide-react"
 
-import {useIsMobile} from "@/common/hooks/use-mobile"
+import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile"
 import {cn} from "@/common/lib/utils"
 import {Button} from "@/common/components/ui/button"
 import {Input} from "@/common/components/ui/input"

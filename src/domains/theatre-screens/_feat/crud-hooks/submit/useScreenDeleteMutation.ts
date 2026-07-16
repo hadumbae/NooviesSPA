@@ -3,7 +3,7 @@
  */
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 
 import {destroy} from "@/domains/theatre-screens/_feat/crud";
 import {TheatreAdminViewDataQueryKeys} from "@/domains/theatres/_feat/admin-view-data";

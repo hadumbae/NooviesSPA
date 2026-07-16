@@ -4,10 +4,10 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {NonEmptyStringSchema} from "@/common/_schemas";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {ScreenTypeSchema} from "@/domains/theatre-screens/_schema/fields";
+import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-number/NonNegativeNumberSchema";
 
 /**
  * Zod schema for validating screen query filters.

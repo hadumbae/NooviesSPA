@@ -3,17 +3,13 @@
  */
 
 
-import {MovieReviewSchema} from "@/domains/movie-reviews/_schema/model";
 import {z} from "zod";
-import {MovieWithGenresSchema} from "@/domains/movies/_schema/movie";
-import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
-import {LeanUserSchema} from "@/domains/users/_schema/user/LeanUserSchema";
+import {PopulatedMovieReviewSchema} from "@/domains/movie-reviews/_schema/model/PopulatedMovieReviewSchema.ts";
+import {BooleanValueSchema} from "@/common/_schemas/boolean/BooleanValueSchema.ts";
+import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-number/NonNegativeNumberSchema";
 
 /** Zod schema for a movie review with expanded relational data and interaction states. */
-export const MovieReviewDetailsSchema = MovieReviewSchema.extend({
-    user: LeanUserSchema,
-    movie: MovieWithGenresSchema,
+export const MovieReviewDetailsSchema = PopulatedMovieReviewSchema.extend({
     isLikedByUser: BooleanValueSchema,
     isUserReview: BooleanValueSchema,
     helpfulCount: NonNegativeNumberSchema,

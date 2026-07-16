@@ -4,7 +4,7 @@
  */
 
 import {z} from "zod";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/_schemas/boolean/CoercedBooleanValueSchema.ts";
 import {StringValueSchema} from "@/common/_schemas";
 
 /** Response shape for favourite status checks. */

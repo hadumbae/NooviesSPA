@@ -9,7 +9,7 @@ import {
     PaginationValues,
     PaginationValuesSchema
 } from "@/common/_feat/fetch-pagination-search-params/schemas/PaginationValuesSchema.ts";
-import Logger from "@/common/utility/features/logger/Logger.ts";
+import {Logger} from "@/common/_feat/logger/Logger.ts";
 import {getPaginationDefaultValue} from "@/common/_feat/fetch-pagination-search-params/getPaginationDefaultValue.ts";
 
 /**

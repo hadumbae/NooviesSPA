@@ -2,8 +2,8 @@
  * @fileoverview Hook for navigating to the Genre details page with logging.
  */
 
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
+import {ObjectId} from "@/common/_schemas";
 
 /** Configuration for the hook initialization. */
 type HookConfig = {

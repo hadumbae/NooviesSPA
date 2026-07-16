@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode, useId} from "react";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {Form} from "@/common/components/ui/form.tsx";
 import {ModerationMessageFormData, useModerationMessageForm} from "@/common/_feat/moderation/forms";
 

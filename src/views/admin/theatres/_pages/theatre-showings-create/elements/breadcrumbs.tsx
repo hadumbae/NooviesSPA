@@ -11,7 +11,7 @@ import {
     BreadcrumbSeparator,
 } from "@/common/components/ui/breadcrumb.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {ReactElement} from "react";
 
 /** Props for the TheatreShowingCreateBreadcrumbs component. */

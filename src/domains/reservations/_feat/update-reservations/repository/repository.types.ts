@@ -2,7 +2,7 @@
  * @fileoverview Parameter type definitions for administrative reservation update repository functions.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {UpdateReservationNotesFormData} from "@/domains/reservations/_feat/update-reservations/hooks";
 
 /** Parameters for updating administrative notes on a reservation. */

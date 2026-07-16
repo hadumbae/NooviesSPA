@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {RoleType} from "@/domains/roletypes";
 import {Button} from "@/common/components/ui/button.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {X} from "lucide-react";
 
 /** Props for the CreatedRoleTypeCard component. */

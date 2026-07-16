@@ -2,7 +2,7 @@
  * @fileoverview Type definitions for profile image removal operations.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 
 /**
  * Configuration for removing a person's profile image.

@@ -5,7 +5,9 @@
 import {ReactElement} from 'react';
 import {PageLoader} from "@/views/common/_comp/page";
 import {PersonDetailsUIProvider} from "@/domains/persons/_ctx/PersonDetailsUIProvider.tsx";
-import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
+import {
+    useFetchByIdentifierRouteParams
+} from "@/common/_feat";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {PersonDetailsPageContent} from "@/views/admin/persons/_pages/details-page/content.tsx";

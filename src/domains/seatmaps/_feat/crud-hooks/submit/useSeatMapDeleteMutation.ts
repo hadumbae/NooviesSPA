@@ -4,7 +4,7 @@
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {SeatMapCRUDMutationKeys, SeatMapCRUDQueryKeys} from "@/domains/seatmaps/_feat/crud-hooks/keys";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {destroy} from "@/domains/seatmaps/_feat/crud";
 
 type DeleteValue = {

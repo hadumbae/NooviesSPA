@@ -3,8 +3,8 @@
  */
 
 import {z} from "zod";
-import {BooleanValueSchema} from "@/common/schema/boolean/BooleanValueSchema.ts";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import {BooleanValueSchema} from "@/common/_schemas/boolean/BooleanValueSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/_schemas/boolean/CoercedBooleanValueSchema.ts";
 
 /**
  * Optional configuration flags for a showing.

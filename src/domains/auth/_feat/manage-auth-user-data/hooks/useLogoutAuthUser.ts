@@ -3,7 +3,7 @@
  */
 
 import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 
 /**
  * Returns a function to clear local storage and update the AuthContext for logout.

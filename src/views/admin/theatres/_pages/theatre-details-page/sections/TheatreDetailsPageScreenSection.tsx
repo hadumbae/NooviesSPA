@@ -5,8 +5,8 @@
 import {ReactElement, useState} from "react";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {TheatreScreenForm, TheatreScreenFormPanel} from "@/views/admin/theatre-screens/_feat/submit-data";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
+import {ObjectId} from "@/common/_schemas";
+import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/_schema/model";
 import {TheatreDetailsScreenListCard} from "@/views/admin/theatre-screens/_comp/theatre-details";
 import {SROnly} from "@/views/common/_comp/screen-readers";

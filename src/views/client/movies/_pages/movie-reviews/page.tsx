@@ -5,7 +5,9 @@
 import {ReactElement} from "react";
 import {PageLoader} from "@/views/common/_comp/page";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
-import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
+import {
+    useFetchByIdentifierRouteParams
+} from "@/common/_feat";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 
 import {MovieInfoReviewsPageContent} from "@/views/client/movies/_pages/movie-reviews/content.tsx";
@@ -24,12 +26,6 @@ export function MovieInfoReviewsPage(): ReactElement {
     });
 
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
-
-    // const queries = useMovieInfoReviewsPageQueries({
-    //     page,
-    //     perPage: REVIEWS_PER_PAGE,
-    //     movieSlug: params.slug,
-    // });
 
     const query = useFetchMovieInfoReviewsData({
         slug: params!.slug!,

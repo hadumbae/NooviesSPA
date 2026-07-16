@@ -1,5 +1,4 @@
-import {ReactElement, ReactNode} from 'react';
-import usePresetActiveOpen from "@/common/hooks/usePresetActiveOpen.ts";
+import {ReactElement, ReactNode, useState} from 'react';
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import {
     AlertDialog,
@@ -23,7 +22,11 @@ type DialogProps = PresetOpenState & {
 export default function EntityDeleteWarningDialog(
     {children, title, description, deleteResource, presetOpen, setPresetOpen}: DialogProps
 ): ReactElement {
-    const {activeOpen, setActiveOpen} = usePresetActiveOpen({presetOpen, setPresetOpen});
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const isControlled = presetOpen !== undefined && setPresetOpen !== undefined;
+    const activeOpen = isControlled ? presetOpen : isOpen;
+    const setActiveOpen = isControlled ? setPresetOpen : setIsOpen;
 
     const dialogTitle = title ?? "Proceed to delete resource?";
     const dialogDescription = description ?? "This action cannot be reversed. Related data will also be removed. Do you want to proceed?";

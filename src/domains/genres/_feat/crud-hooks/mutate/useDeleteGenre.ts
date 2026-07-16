@@ -5,7 +5,7 @@
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {destroy} from "@/domains/genres/_feat/crud";

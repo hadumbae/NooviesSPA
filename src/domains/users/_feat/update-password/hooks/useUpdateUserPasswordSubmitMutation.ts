@@ -5,7 +5,7 @@
 import {UseFormReturn} from "react-hook-form";
 import {toast} from "react-toastify";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {updateUserPassword} from "@/domains/users/_feat/update-password/repository";

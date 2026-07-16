@@ -5,7 +5,7 @@
 import {ReactElement, useState} from "react";
 import {MessageCirclePlus} from "lucide-react";
 import {Button} from "@/common/components/ui";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {cn} from "@/common/lib/utils.ts";
 

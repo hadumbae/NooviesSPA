@@ -1,11 +1,6 @@
 import {
     ShowingsPageQueryFormStarterValues,
-    ShowingsPageQueryFormValuesSchema
-} from "@/domains/movies/_feat/manage-showing-page/ShowingsPageQueryFormValuesSchema.ts";
-
-export {
-    ShowingsPageQueryFormValuesSchema,
-}
+} from "@/domains/movies/_feat/manage-showing-page/ShowingsPageQueryFormStarterValues.ts";
 
 export type {
     ShowingsPageQueryFormStarterValues,

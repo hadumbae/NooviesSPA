@@ -3,10 +3,10 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema";
-import {NonEmptyStringSchema} from "@/common/_schemas/strings/NonEmptyStringSchema";
-import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema";
-import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum";
+import {IDStringSchema} from "@/common/_schemas/strings/id-strings/IDStringSchema";
+import {NonEmptyStringSchema} from "@/common/_schemas/strings/simple-strings/NonEmptyStringSchema";
+import {DateOnlyStringSchema} from "@/common/_schemas/dates/DateOnlyStringSchema";
+import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema";
 import {
     preprocessEmptyStringToUndefined
 } from "@/common/_feat/validation-preprocessors/preprocessEmptyStringToUndefined";
@@ -16,7 +16,7 @@ export const PersonQueryFilterSchema = z.object({
     _id: IDStringSchema.optional(),
     name: preprocessEmptyStringToUndefined(NonEmptyStringSchema.optional()).optional(),
     dob: DateOnlyStringSchema.optional(),
-    nationality: ISO3166Alpha2CountryCodeEnum.optional(),
+    nationality: ISO3166Alpha2CountryCodeSchema.optional(),
 });
 
 /** Type for Person query filter criteria. */

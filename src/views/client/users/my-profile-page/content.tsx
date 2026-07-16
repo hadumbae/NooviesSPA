@@ -13,7 +13,7 @@ import {
 } from "@/views/client/users";
 import {Card, CardContent, Separator} from "@/common/components/ui";
 import {User} from "@/domains/users";
-import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 
 /** Props for the MyProfilePageContent component. */
 type ContentProps = {

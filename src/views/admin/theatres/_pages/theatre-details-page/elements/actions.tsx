@@ -5,9 +5,9 @@
 import {ReactElement} from "react";
 import {TheatreSubmitForm, TheatreSubmitFormPanel} from "@/views/admin/theatres/_feat/submit-data";
 import {TheatreDeleteWarningDialog} from "@/views/admin/theatres/_feat/model-options";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {
     TheatreDetailsUIStateContext
 } from "@/domains/theatres/_ctx/theatre-details-ui/TheatreDetailsUIStateContext.ts";

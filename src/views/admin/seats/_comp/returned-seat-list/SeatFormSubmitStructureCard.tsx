@@ -5,7 +5,7 @@
 
 import {ReactElement} from "react";
 import {X} from "lucide-react";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {Button, Card, CardContent} from "@/common/components/ui";
 
 import {SeatDetails, SeatLayoutTypeLabelMap} from "@/domains/seats";

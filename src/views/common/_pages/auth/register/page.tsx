@@ -6,7 +6,7 @@ import {ReactElement} from 'react';
 import {PageCenter} from "@/views/common/_comp/page";
 import {AuthRegisterForm} from "@/views/common/_feat/auth-register-form/AuthRegisterForm.tsx";
 import {AuthRegisterPageHeader} from "@/views/common/_pages/auth/register/header.tsx";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {AuthRegisterFormView} from "@/views/common/_feat/auth-register-form";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 

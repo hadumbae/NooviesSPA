@@ -2,7 +2,7 @@
  * @fileoverview Sliding details panel for inspecting and editing an individual seat map entry.
  */
 
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle,} from "@/common/components/ui/sheet";
 import {formatSeatLabel} from "@/domains/seats/_feat/formatters";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";

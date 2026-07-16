@@ -2,11 +2,11 @@
  * @fileoverview Hook for navigating to the person details administration page.
  */
 
-import useLoggedNavigate, {
-    LoggingMessageParams
-} from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {
+    LoggingMessageParams, useLoggedNavigate
+} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {NavigateOptions} from "react-router-dom";
-import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 
 /** Parameters for the person navigation hook. */
 type NavigateParams = LoggingMessageParams & {

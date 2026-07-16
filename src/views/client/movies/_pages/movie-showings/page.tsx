@@ -2,7 +2,9 @@
  * @fileoverview Orchestrates route params and data fetching for movie showings.
  */
 
-import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
+import {
+    useFetchByIdentifierRouteParams
+} from "@/common/_feat";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";

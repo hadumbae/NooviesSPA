@@ -2,12 +2,11 @@
  * @fileoverview Defines the validation schema and type for movie review ratings.
  */
 
-import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {z} from "zod";
+import {CoercedPositiveIntegerSchema} from "@/common/_schemas";
 
 /** Zod schema validating that a rating is an integer between 0 and 5. */
-export const MovieReviewRatingSchema = PositiveNumberSchema
-    .int("Must be an integer.")
+export const MovieReviewRatingSchema = CoercedPositiveIntegerSchema
     .gte(0, "Must be 0 or more.")
     .lte(5, "Must be 5 or less.");
 

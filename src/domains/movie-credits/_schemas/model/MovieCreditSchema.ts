@@ -9,12 +9,12 @@ import {RoleTypeDepartmentSchema} from "@/domains/roletypes/_schema/fields/RoleT
 import {
     preprocessEmptyStringToUndefined
 } from "@/common/_feat/validation-preprocessors";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
+import {CoercedBooleanValueSchema} from "@/common/_schemas/boolean/CoercedBooleanValueSchema.ts";
 import {
     UndefinedForCrewFieldSchema
 } from "@/domains/movie-credits/_schemas/model/UndefinedForCrewFieldSchema.ts";
+import {PositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/PositiveNumberSchema";
 
 /**
  * Base schema shared by cast and crew credits.

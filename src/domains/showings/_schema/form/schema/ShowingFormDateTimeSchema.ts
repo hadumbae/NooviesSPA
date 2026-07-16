@@ -3,8 +3,8 @@
  */
 
 import {z} from "zod";
-import {TimeStringSchema} from "@/common/schema/date-time/TimeString.schema.ts";
-import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema.ts";
+import {TimeStringSchema} from "@/common/_schemas/time/TimeStringSchema.ts";
+import {DateOnlyStringSchema} from "@/common/_schemas/dates/DateOnlyStringSchema.ts";
 
 /**
  * Schema for showing date and time inputs that normalizes empty strings to undefined for optional end fields.

@@ -3,7 +3,7 @@
 import {ReactElement, useState} from 'react';
 import {cn} from "@/common/lib/utils.ts";
 import {HasNoMoviePosterPlaceholder} from "@/views/admin/movies/_comp/poster-image/HasNoMoviePosterPlaceholder.tsx";
-import {URLString} from "@/common/schema/strings/URLStringSchema.ts";
+import {URLString} from "@/common/_schemas/strings/simple-strings/URLStringSchema.ts";
 
 /** Props for the MoviePosterImage component. */
 type ImageProps = {

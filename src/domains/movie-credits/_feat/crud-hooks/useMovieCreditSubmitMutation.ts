@@ -3,7 +3,7 @@
  */
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {MovieCreditDetails, MovieCreditDetailsSchema} from "@/domains/movie-credits/_schemas";
 import {MovieCreditFormData} from "@/domains/movie-credits/_feat/submit-data";
 import {create, update} from "@/domains/movie-credits/_feat/crud";

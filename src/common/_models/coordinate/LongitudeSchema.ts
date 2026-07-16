@@ -1,6 +1,6 @@
 /** @fileoverview Zod schema and type definition for geographic longitude values. */
 
-import {CoercedNumberValueSchema} from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
+import {CoercedNumberValueSchema} from "@/common/_schemas/numbers/number-value/CoercedNumberValueSchema.ts";
 import {z} from "zod";
 
 /** Schema for validating longitude values between -180 and 180. */

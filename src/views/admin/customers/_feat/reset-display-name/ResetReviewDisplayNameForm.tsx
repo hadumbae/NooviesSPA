@@ -8,7 +8,7 @@ import {
 } from "@/domains/movie-reviews/_feat/admin-actions/forms";
 import {Form} from "@/common/components/ui/form.tsx";
 import {useResetReviewDisplayNameMutation} from "@/domains/movie-reviews/_feat/admin-actions/mutations";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {ReactElement, ReactNode, useId} from "react";
 
 import {MovieReview} from "@/domains/movie-reviews/_schema/model";

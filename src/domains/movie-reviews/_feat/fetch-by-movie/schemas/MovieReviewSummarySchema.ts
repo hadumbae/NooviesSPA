@@ -3,8 +3,8 @@
  */
 
 import {z} from "zod";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {MovieReviewDetailsSchema} from "@/domains/movie-reviews/_schema/model/MovieReviewDetailsSchema.ts";
+import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-number/NonNegativeNumberSchema";
 
 /** Zod schema for validating a summary of movie reviews including average rating and user-specific review. */
 export const MovieReviewSummarySchema = z.object({

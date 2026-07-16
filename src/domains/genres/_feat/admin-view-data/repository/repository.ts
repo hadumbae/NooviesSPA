@@ -5,7 +5,7 @@
 
 import {buildURL} from "@/common/_feat/fetch-api";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 import {GenreAdminViewDataBaseURL} from "@/domains/genres/_feat/admin-view-data/repository/baseURL.ts";
 import {FetchGenreDetailsConfig} from "@/domains/genres/_feat/admin-view-data/repository/repository.types.ts";
 import {GenreDetailsViewData} from "@/domains/genres/_feat/admin-view-data/schema";

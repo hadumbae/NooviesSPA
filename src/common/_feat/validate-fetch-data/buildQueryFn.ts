@@ -3,8 +3,8 @@
  * @filename buildQueryFn.ts
  */
 
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
-import {logZodErrors} from "@/common/hooks/validation/validate-data/logZodErrors.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
+import {logZodErrors} from "@/common/_feat/validate-data/logZodErrors.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {ZodType, ZodTypeDef} from "zod";
 

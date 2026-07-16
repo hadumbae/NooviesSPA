@@ -2,11 +2,10 @@
  * @fileoverview Progress indicator step component for multi-step forms.
  */
 
-import {FormStepMeta} from "@/common/_feat/multi-step-form/types.ts";
-import {FieldValues} from "react-hook-form";
-import useMultiStepFormContext from "@/common/hooks/context/useMultiStepFormContext.ts";
-import {cn} from "@/common/lib/utils.ts";
 import {ReactElement} from "react";
+import {FieldValues} from "react-hook-form";
+import {cn} from "@/common/lib/utils.ts";
+import {FormStepMeta, useMultiStepFormContext} from "@/common/_feat";
 
 /** Props for the MultiStepFormProgressIndicatorStep component. */
 type StepProps<TValues extends FieldValues> = {
@@ -17,7 +16,6 @@ type StepProps<TValues extends FieldValues> = {
 
 /**
  * Renders an individual step within the progress indicator.
- * - Requires MultiStepFormContext to determine the active state.
  */
 export function MultiStepFormProgressIndicatorStep<TValues extends FieldValues>(
     {stepIndex, step: {title, stepCount, icon: Icon}}: StepProps<TValues>

@@ -3,7 +3,8 @@
  */
 
 import {z} from "zod";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+
+import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-number/NonNegativeNumberSchema";
 
 /**
  * Statistics representing a person's professional footprint in the MovieCredit collection.

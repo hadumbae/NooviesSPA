@@ -2,7 +2,10 @@
  * @fileoverview Hook for standardized navigation to the administrative Person index.
  */
 
-import useLoggedNavigate, {LoggingMessageParams} from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {
+    LoggingMessageParams,
+    useLoggedNavigate
+} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {NavigateOptions} from "react-router-dom";
 
 /**

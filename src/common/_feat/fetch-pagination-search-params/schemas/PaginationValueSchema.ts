@@ -1,20 +1,15 @@
 /**
- * @file Zod validation schema and type definitions for individual pagination values.
- * @filename PaginationValueSchema.ts
+ * @fileoverview Zod schema for validating a single pagination value.
  */
 
 import {z} from "zod";
-import {CleanedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import {preprocessToNumber} from "@/common/_feat/validation-preprocessors";
+import {PositiveIntegerSchema} from "@/common/_schemas";
 
-/**
- * Zod schema for validating a single, standalone pagination number.
- */
+/** Zod schema for a pagination value object. */
 export const PaginationValueSchema = z.object({
-    /** A cleaned, positive integer representing a pagination metric. */
-    value: CleanedPositiveNumberSchema,
+    value: preprocessToNumber(PositiveIntegerSchema),
 });
 
-/**
- * Inferred TypeScript type representing a single validated pagination value.
- */
+/** Type representing a validated pagination value. */
 export type PaginationValue = z.infer<typeof PaginationValueSchema>;

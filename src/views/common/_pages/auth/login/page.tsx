@@ -7,10 +7,10 @@ import {ReactElement, useEffect} from "react";
 import {AuthLoginForm} from "@/views/common/_feat/auth-login-form/AuthLoginForm.tsx";
 import {useLocation} from "react-router-dom";
 import {toast} from "react-toastify";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {useLoggedNavigate} from "@/common/_feat";
 import {PageCenter} from "@/views/common/_comp/page";
 import {AuthLoginPageHeader} from "@/views/common/_pages";
-import {clearRedirectPath} from "@/common/_feat/manage-redirect-path/clearRedirectPath.ts";
+import {clearRedirectPath} from "@/common/_feat";
 import {AuthLoginFormView} from "@/views/common/_feat";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 
@@ -45,7 +45,7 @@ export function AuthLoginPage(): ReactElement {
             <AuthLoginPageHeader/>
 
             <section className="w-full md:w-2/3 2xl:w-1/3">
-                <SROnly text="Login Form" />
+                <SROnly text="Login Form"/>
 
                 <AuthLoginForm onSubmitConfig={{onSubmitSuccess, successMessage: "Logged in!"}}>
                     <AuthLoginFormView/>

@@ -4,7 +4,7 @@
 
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {UseMutationResult} from "@tanstack/react-query";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {
     useCheckoutClientReservationMutation
 } from "@/domains/reservations/_feat/update-client-reservations/mutations/useCheckoutClientReservationMutation.ts";

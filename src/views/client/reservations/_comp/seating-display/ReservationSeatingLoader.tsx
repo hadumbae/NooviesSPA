@@ -2,7 +2,7 @@
  * @fileoverview Loads seating data for a showing into a reservation-scoped seating view.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {
     SeatMapDetailsLoader
 } from "@/views/admin/seatmaps/_comp/loaders/SeatMapDetailsLoader.tsx";

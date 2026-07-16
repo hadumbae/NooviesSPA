@@ -4,7 +4,7 @@
  * Configuration object for defining navigational links with optional logging metadata.
  */
 
-import {LogContext} from "@/common/utility/features/logger/Logger.types.ts";
+import {LogContext} from "@/common/_feat/logger/Logger.types.ts";
 
 /**
  * Defines the configuration for a navigational link.

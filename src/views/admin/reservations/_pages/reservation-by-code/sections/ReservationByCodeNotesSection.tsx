@@ -3,7 +3,7 @@
  */
 
 import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Pencil} from "lucide-react";

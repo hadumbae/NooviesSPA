@@ -2,14 +2,14 @@
  * @fileoverview React Query mutation hook for creating or updating a MovieReview for the current user.
  */
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {UseFormReturn} from "react-hook-form";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {
     patchUpdateMovieReviewForCurrentUser,
     postCreateMovieReviewForCurrentUser
 } from "@/domains/movie-reviews/_feat/my-reviews/repository/repository.ts";
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {toast} from "react-toastify";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 import {MovieReview, MovieReviewSchema} from "@/domains/movie-reviews/_schema/model";

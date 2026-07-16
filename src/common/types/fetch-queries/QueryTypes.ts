@@ -6,8 +6,8 @@ import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {ZodType, ZodTypeDef} from "zod";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
+import {ObjectId} from "@/common/_schemas";
+import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 
 /** Base configuration for individual data queries requiring schema validation. */
 export type QueryConfig<TData = unknown> = {

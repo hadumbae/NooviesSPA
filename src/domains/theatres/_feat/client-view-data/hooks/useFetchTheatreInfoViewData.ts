@@ -2,8 +2,8 @@
  * @fileoverview Hook for fetching and validating theatre information and schedule data for the client view.
  */
 
-import {DateOnlyString} from "@/common/schema/dates/DateOnlyStringSchema.ts";
-import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
+import {DateOnlyString} from "@/common/_schemas/dates/DateOnlyStringSchema.ts";
+import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {
     getFetchTheatreInfoViewData,

@@ -11,7 +11,7 @@ import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import Logger from "@/common/utility/features/logger/Logger.ts";
+import {Logger} from "@/common/_feat/logger/Logger.ts";
 import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
 
 type ContainerProps =

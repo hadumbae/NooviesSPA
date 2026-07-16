@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";

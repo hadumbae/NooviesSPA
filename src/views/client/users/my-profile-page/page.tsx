@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {useGetCurrentUser} from "@/domains/auth/_feat";
-import useTitle from "@/common/hooks/document/useTitle.ts";
+import {useTitle} from "@/common/_feat";
 import {MyProfilePageContent} from "@/views/client/users/my-profile-page/content.tsx";
 
 /**

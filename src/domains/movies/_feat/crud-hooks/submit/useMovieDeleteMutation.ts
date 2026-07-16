@@ -3,11 +3,11 @@
  */
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {destroy} from "@/domains/movies/_feat/crud";
 import {MovieClientViewDataQueryKeys} from "@/domains/movies/_feat/client-view-data/hooks";
 import {MovieCRUDMutationKeys, MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks/keys";
-import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
+import {buildStandardLog} from "@/common/_feat/logger-builders/buildStandardLog.ts";
 
 /** Configuration for the movie deletion mutation. */
 type DeleteIDConfig = {

@@ -6,7 +6,7 @@ import {ReactElement} from 'react';
 import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from "@/common/components/ui";
 import {cn} from "@/common/lib/utils.ts";
 import {ChevronDown} from "lucide-react";
-import useCurrentURLPath from "@/common/hooks/router/useCurrentURLPath.ts";
+import {useCurrentURLPath} from "@/common/_feat/navigation/useCurrentURLPath.ts";
 import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.tsx";
 import {
     BaseLayoutDesktopClientNavigation

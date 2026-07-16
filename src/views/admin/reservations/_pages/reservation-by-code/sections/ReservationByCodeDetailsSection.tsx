@@ -4,12 +4,12 @@
 
 import {ReactElement} from "react";
 import {Card, CardContent, Separator} from "@/common/components/ui";
-import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 import {cn} from "@/common/lib/utils.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import {OrientationValues} from "@/common/schema/enums/OrientationEnumSchema.ts";
+import {OrientationValues} from "@/common/_schemas/enums/OrientationEnumSchema.ts";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 
 import {buildShowingDateString} from "@/domains/showings";

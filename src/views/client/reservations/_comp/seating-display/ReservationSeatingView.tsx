@@ -2,7 +2,7 @@
  * @fileoverview Renders reservation seating arranged into display rows.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {cn} from "@/common/lib/utils.ts";
 import {
     ReservationSeatingElement

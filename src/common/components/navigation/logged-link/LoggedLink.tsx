@@ -21,9 +21,11 @@
 
 import {forwardRef, MouseEventHandler} from 'react';
 import {Link, LinkProps, NavigateOptions} from "react-router-dom";
-import {LogContext, LoggerFunction} from "@/common/utility/features/logger/Logger.types.ts";
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {LogContext, LoggerFunction} from "@/common/_feat/logger/Logger.types.ts";
+import {
+    filterNullishAttributes
+} from "@/common/_feat/filter-object-attributes/filterNullishAttributes.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {ParamError} from "@/common/errors/ParamError.ts";
 
 /**

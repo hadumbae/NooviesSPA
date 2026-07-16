@@ -3,11 +3,11 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema.ts";
-import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
+import {DateOnlyStringSchema} from "@/common/_schemas/dates/DateOnlyStringSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/_schemas/boolean/CoercedBooleanValueSchema.ts";
 import {ShowingStatusSchema} from "@/domains/showings/_schema/fields/ShowingStatusSchema";
+import {PositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/PositiveNumberSchema";
 
 /** Zod schema for validating match-based filter criteria for Showings. */
 export const ShowingQueryMatchFilterSchema = z.object({

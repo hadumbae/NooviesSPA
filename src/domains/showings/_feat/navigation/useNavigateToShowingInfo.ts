@@ -2,9 +2,12 @@
  * @fileoverview Hook for navigating to the showing's client-side view with logging.
  */
 
-import useLoggedNavigate, {LoggingMessageParams} from "@/common/hooks/logging/useLoggedNavigate.ts";
+import {
+    LoggingMessageParams,
+    useLoggedNavigate
+} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {NavigateOptions} from "react-router-dom";
-import {SlugString} from "@/common/_schemas/strings/SlugString.ts";
+import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 
 /** Configuration for the showing navigation action. */
 type NavConfig = LoggingMessageParams & {

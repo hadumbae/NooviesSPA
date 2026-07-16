@@ -6,7 +6,9 @@ import {ReactElement, ReactNode} from 'react';
 import {useMovieQueryOptionForm} from "@/domains/movies/_feat/submit-queries/useMovieQueryOptionForm.ts";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {MovieQueryOptions, MovieQueryOptionSchema} from "@/domains/movies/_schema/queries";
-import filterFalsyAttributes from "@/common/utility/collections/filterFalsyAttributes.ts";
+import {
+    filterFalsyAttributes
+} from "@/common/_feat/filter-object-attributes/filterFalsyAttributes.ts";
 import {MovieQueryOptionFormValues} from "@/domains/movies/_feat/submit-queries/MovieQueryOptionFormValues";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui";

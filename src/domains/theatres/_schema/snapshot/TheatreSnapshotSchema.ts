@@ -2,8 +2,8 @@
 
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/_schemas";
-import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import {IANATimezoneSchema} from "@/common/schema/date-time/IANATimezone.schema.ts";
+import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
+import {IANATimezoneSchema} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 
 /** Zod schema for a finalized theatre state used in historical records. */
 export const TheatreSnapshotSchema = z.object({
@@ -16,7 +16,7 @@ export const TheatreSnapshotSchema = z.object({
     state: NonEmptyStringSchema
         .max(500, {message: "Must be 500 characters or less."})
         .optional(),
-    country: ISO3166Alpha2CountryCodeEnum,
+    country: ISO3166Alpha2CountryCodeSchema,
     postalCode: NonEmptyStringSchema.optional(),
     timezone: IANATimezoneSchema,
 });

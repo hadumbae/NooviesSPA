@@ -4,11 +4,10 @@
 
 import {z} from "zod";
 import {AnyValues} from "@/common/types";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {CoercedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import generateFormValueSchema from "@/common/utility/schemas/generateFormValueSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 import {SeatMapStatusSchema} from "@/domains/seatmaps/_schema/fields";
+import {CoercedPositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/CoercedPositiveNumberSchema";
 
 /**
  * Base schema for validating raw SeatMap form input including seat, showing, pricing, and status.
@@ -22,8 +21,6 @@ export const SeatMapFormSchema = z.object({
     overridePrice: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema.optional()).optional(),
     status: SeatMapStatusSchema,
 });
-
-export const SeatMapFormValuesSchema = generateFormValueSchema(SeatMapFormSchema);
 
 /** Fully validated seat map form data. */
 export type SeatMapFormData = z.infer<typeof SeatMapFormSchema>;

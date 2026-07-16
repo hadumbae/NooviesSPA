@@ -6,7 +6,7 @@ import {TheatreScreenSchedule} from "@/domains/theatre-screens/_schema/model";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import {BrowseShowingSelector} from "@/views/client/showings/_comp/browse-showing-selector/BrowseShowingSelector.tsx";
 import {ReactElement} from "react";
-import {IANATimezone} from "@/common/schema/date-time/IANATimezone.schema.ts";
+import {IANATimezone} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 
 /** Props for the TheatreScreenShowingSelectCard component. */
 type CardProps = {

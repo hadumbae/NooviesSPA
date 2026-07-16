@@ -4,7 +4,7 @@
 
 import {ReactElement, useState} from "react";
 import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {ResetReviewLikesForm} from "@/views/admin/customers/_feat/reset-likes/ResetReviewLikesForm.tsx";
 import {ResetReviewLikesDialog} from "@/views/admin/customers/_feat/reset-likes/ResetReviewLikesDialog.tsx";
 import {Button} from "@/common/components/ui/button.tsx";

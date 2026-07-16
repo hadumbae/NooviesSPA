@@ -1,7 +1,9 @@
 import {FC} from 'react';
 import {ParseError} from "@/common/errors/ParseError.ts";
 import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import useHttpResponseErrorHandler from "@/common/hooks/errors/useHttpResponseErrorHandler.ts";
+import {
+    useHttpResponseErrorHandler
+} from "@/common/_feat/error-handling/useHttpResponseErrorHandler.ts";
 import {PageCenter} from "@/views/common/_comp/page";
 import {Link, To} from "react-router-dom";
 import {buttonVariants} from "@/common/components/ui/button.tsx";

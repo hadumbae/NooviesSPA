@@ -2,7 +2,7 @@
  * @fileoverview Reservation status action buttons for checkout and cancellation.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Loader} from "lucide-react";

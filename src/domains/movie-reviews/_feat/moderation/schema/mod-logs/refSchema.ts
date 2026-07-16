@@ -5,9 +5,9 @@
 
 import {z} from "zod"
 import {MovieReviewModerationActionSchema} from "@/domains/movie-reviews/_feat/moderation/schema/actions"
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts"
-import {NonEmptyStringSchema} from "@/common/_schemas/strings/NonEmptyStringSchema.ts"
-import {UTCISO8601DateTimeSchema} from "@/common/schema/date-time/iso-8601/UTCISO8601DateTimeSchema.ts"
+import {IDStringSchema} from "@/common/_schemas"
+import {NonEmptyStringSchema} from "@/common/_schemas/strings/simple-strings/NonEmptyStringSchema.ts"
+import {ISO8601DateTimeSchema} from "@/common/_schemas/iso-8601/ISO8601DateTimeSchema.ts"
 
 /**
  * Zod validation schema for an individual moderation audit entry.
@@ -17,7 +17,7 @@ export const MovieReviewModerationLogReferenceSchema = z.object({
     review: IDStringSchema,
     action: MovieReviewModerationActionSchema,
     admin: IDStringSchema,
-    modDate: UTCISO8601DateTimeSchema,
+    modDate: ISO8601DateTimeSchema,
     message: NonEmptyStringSchema.max(500, "Must be 500 characters or less."),
 })
 

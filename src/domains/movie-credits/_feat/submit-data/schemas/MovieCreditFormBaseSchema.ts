@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {
     preprocessEmptyStringToUndefined
 } from "@/common/_feat/validation-preprocessors";

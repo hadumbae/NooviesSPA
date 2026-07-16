@@ -10,7 +10,7 @@ import {
 } from "@/domains/genres/_feat/manage-image/repository/repository.types.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {ManageGenreImageBaseURL} from "@/domains/genres/_feat/manage-image/repository/baseURL.ts";
-import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 
 /** Updates a genre's image using multipart form data. */
 export async function patchUpdateGenreImage(

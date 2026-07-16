@@ -6,7 +6,7 @@
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Armchair, BadgeCheck, DollarSign, Tag, X} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {ReactElement} from "react";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {SeatDetails} from "@/domains/seats";

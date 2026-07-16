@@ -3,11 +3,11 @@
  *
  */
 
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {NonEmptyStringSchema} from "@/common/_schemas";
 import {SeatTypeSchema} from "@/domains/seats/_schema/fields";
-import {PositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
 import {z} from "zod";
+import {PositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/PositiveNumberSchema";
 
 /**
  * Zod schema for the finalized state of a single seat at the moment of booking.

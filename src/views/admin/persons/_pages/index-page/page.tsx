@@ -5,7 +5,9 @@
  */
 
 import {ReactElement} from 'react';
-import usePaginationLocationState from "@/common/hooks/router/usePaginationLocationState.ts";
+import {
+    usePaginationLocationState
+} from "@/common/_feat/navigation/usePaginationLocationState.ts";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";

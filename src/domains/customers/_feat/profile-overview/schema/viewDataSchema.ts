@@ -3,10 +3,10 @@
  */
 
 import {z} from "zod";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {ReservationSchema} from "@/domains/reservations/_schema/model";
 import {LeanUserWithEmailSchema} from "@/domains/users/_schema/user";
 import {CustomerMovieReviewSummarySchema} from "@/domains/movie-reviews/_schema";
+import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-number/NonNegativeNumberSchema";
 
 const ResSchema = z.object({
     total: NonNegativeNumberSchema,

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import useTitle from "@/common/hooks/document/useTitle.ts";
+import {useTitle} from "@/common/_feat";
 import {
     useFetchCurrentUserFavourites
 } from "@/domains/users/_feat/manage-user-favourites/hooks/useFetchCurrentUserFavourites.ts";

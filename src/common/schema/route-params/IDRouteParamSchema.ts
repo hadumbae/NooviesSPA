@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { IDStringSchema } from "@/common/_schemas";
 
 /**
  * Schema for route parameters that require an `_id` field.

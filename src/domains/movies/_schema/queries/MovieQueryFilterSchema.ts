@@ -3,11 +3,11 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {NonEmptyStringSchema} from "@/common/_schemas";
-import {DateOnlyStringSchema} from "@/common/schema/dates/DateOnlyStringSchema.ts";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
-import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
+import {DateOnlyStringSchema} from "@/common/_schemas/dates/DateOnlyStringSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/_schemas/boolean/CoercedBooleanValueSchema.ts";
+import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
 
 /** Zod schema defining available filter parameters for querying movie documents. */
 export const MovieQueryFilterSchema = z.object({
@@ -18,7 +18,7 @@ export const MovieQueryFilterSchema = z.object({
     genres: z.array(IDStringSchema).optional(),
     isReleased: CoercedBooleanValueSchema.optional(),
     isAvailable: CoercedBooleanValueSchema.optional(),
-    country: ISO3166Alpha2CountryCodeEnum.optional(),
+    country: ISO3166Alpha2CountryCodeSchema.optional(),
 });
 
 /** Type representing movie query filter criteria. */

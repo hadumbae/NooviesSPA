@@ -9,7 +9,7 @@ import BaseSidebar from "@/common/layout/base-layout/sidebar/BaseSidebar.tsx";
 import BaseLayoutContent from "@/common/layout/base-layout/layout/BaseLayoutContent.tsx";
 import {BaseLayoutHeader} from "@/common/layout/base-layout/layout/BaseLayoutHeader.tsx";
 import BaseLayoutFooter from "@/common/layout/base-layout/layout/BaseLayoutFooter.tsx";
-import {useIsMobile} from "@/common/hooks/use-mobile.tsx";
+import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 import {cn} from "@/common/lib/utils.ts";
 
 /**

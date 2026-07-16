@@ -5,7 +5,7 @@
 
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {IconButton} from "@/views/common/_comp";
 import {List} from "lucide-react";
 import {ReactElement} from "react";

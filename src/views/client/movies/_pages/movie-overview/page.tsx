@@ -4,7 +4,9 @@
 
 import {ReactElement} from "react";
 
-import useFetchByIdentifierRouteParams from "@/common/hooks/route-params/useFetchByIdentifierRouteParams.ts";
+import {
+    useFetchByIdentifierRouteParams
+} from "@/common/_feat";
 import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
 import {MovieInfoPageContent} from "@/views/client/movies/_pages/movie-overview/content.tsx";

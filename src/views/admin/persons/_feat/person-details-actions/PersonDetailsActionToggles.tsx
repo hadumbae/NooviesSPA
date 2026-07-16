@@ -3,7 +3,7 @@
  */
 
 import {Dispatch, ReactElement, ReactNode, SetStateAction, useState} from 'react';
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
+import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {PersonDetailsUISettersContext} from "@/domains/persons";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/common/components/ui";
 

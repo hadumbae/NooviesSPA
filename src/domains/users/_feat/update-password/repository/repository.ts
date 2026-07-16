@@ -3,7 +3,7 @@
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 import type {PasswordUpdateData} from "@/domains/users/_feat/update-password/repository/repository.types.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {UpdateUserPasswordBaseURL} from "@/domains/users/_feat/update-password/repository/baseURL";

@@ -2,7 +2,9 @@
  * @fileoverview Maps movie credit records to link configurations for person navigation.
  *
  */
-import filterNullishAttributes from "@/common/utility/collections/filterNullishAttributes.ts";
+import {
+    filterNullishAttributes
+} from "@/common/_feat/filter-object-attributes/filterNullishAttributes.ts";
 import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
 
 import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";

@@ -3,11 +3,11 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {NonEmptyStringSchema} from "@/common/_schemas";
-import {CoercedNumberValueSchema} from "@/common/schema/numbers/number-value/CoercedNumberValueSchema.ts";
-import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import {IANATimezoneSchema} from "@/common/schema/date-time/IANATimezone.schema.ts";
+import {CoercedNumberValueSchema} from "@/common/_schemas/numbers/number-value/CoercedNumberValueSchema.ts";
+import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
+import {IANATimezoneSchema} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 
 /** Zod schema defining filter parameters for querying theatre data. */
 export const TheatreQueryMatchFilterSchema = z.object({
@@ -17,7 +17,7 @@ export const TheatreQueryMatchFilterSchema = z.object({
         street: NonEmptyStringSchema.max(2000, {message: "Max. 2000 Chars"}).optional(),
         city: NonEmptyStringSchema.max(500, {message: "Max. 500 Chars"}).optional(),
         state: NonEmptyStringSchema.max(500, {message: "Max. 500 Chars"}).optional(),
-        country: ISO3166Alpha2CountryCodeEnum.optional(),
+        country: ISO3166Alpha2CountryCodeSchema.optional(),
         postalCode: NonEmptyStringSchema.max(50, {message: "Max. 50 characters"}).optional(),
         timezone: IANATimezoneSchema.optional(),
     })

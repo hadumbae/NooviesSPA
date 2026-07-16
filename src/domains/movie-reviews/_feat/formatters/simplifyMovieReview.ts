@@ -3,7 +3,7 @@
  *
  */
 
-import validateData from "@/common/hooks/validation/validate-data/validateData.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {MovieReview, MovieReviewSchema} from "@/domains/movie-reviews/_schema/model";
 import {MovieReviewDetails} from "@/domains/movie-reviews/_schema/model/MovieReviewDetailsSchema";
 import {MyMovieReview} from "@/domains/movie-reviews/_schema/my-reviews";

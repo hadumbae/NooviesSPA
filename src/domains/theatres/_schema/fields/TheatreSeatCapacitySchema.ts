@@ -2,9 +2,11 @@
  * @fileoverview Defines the validation schema for a theatre's seat capacity.
  */
 
-import {CoercedNonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 import {z} from "zod";
+import {
+    CoercedNonNegativeNumberSchema
+} from "@/common/_schemas/numbers/non-negative-number/CoercedNonNegativeNumberSchema";
 
 /** Zod schema for validating and coercing theatre seat capacity values. */
 export const TheatreSeatCapacitySchema = preprocessEmptyStringToUndefined(

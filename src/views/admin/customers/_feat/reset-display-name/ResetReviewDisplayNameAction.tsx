@@ -2,7 +2,7 @@
  * @fileoverview Orchestrator component for the Reset Display Name administrative action.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {ResetReviewDisplayNameFormData} from "@/domains/movie-reviews/_feat/admin-actions/forms";
 import {ReactElement, useState} from "react";
 import {Button} from "@/common/components/ui/button.tsx";

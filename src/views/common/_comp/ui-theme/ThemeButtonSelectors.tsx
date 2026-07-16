@@ -5,9 +5,9 @@
 
 import {Button} from "@/common/components/ui/button.tsx";
 import {LucideIcon, Moon, Sun, SunMoon} from "lucide-react";
-import {ThemeVariant} from "@/common/schema/enums/ThemeVariantEnumSchema.ts";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import {ThemeContext} from "@/common/context/theme/ThemeContext.ts";
+import {ThemeVariant} from "@/common/_schemas/enums/ThemeVariantSchema.ts";
+import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {ThemeContext} from "@/common/_feat/theme/ctx/ThemeContext.ts";
 import {cn} from "@/common/lib/utils.ts";
 
 /**

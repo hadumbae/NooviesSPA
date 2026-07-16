@@ -3,8 +3,8 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema";
-import {NonEmptyStringSchema} from "@/common/_schemas/strings/NonEmptyStringSchema";
+import {IDStringSchema} from "@/common/_schemas/strings/id-strings/IDStringSchema";
+import {NonEmptyStringSchema} from "@/common/_schemas/strings/simple-strings/NonEmptyStringSchema";
 import {UserUniqueCodeSchema} from "@/domains/users/_schema/fields/UserUniqueCodeSchema";
 
 /** Zod schema for identifying a user with minimal metadata. */

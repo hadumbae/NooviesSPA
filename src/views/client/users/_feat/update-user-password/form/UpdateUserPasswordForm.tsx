@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, useId} from 'react';
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui";

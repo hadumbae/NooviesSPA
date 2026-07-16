@@ -4,7 +4,7 @@
  */
 
 import { z, ZodObject, ZodRawShape } from "zod";
-import buildStandardLog from "@/common/utility/features/logger/buildStandardLog.ts";
+import {buildStandardLog} from "@/common/_feat/logger-builders/buildStandardLog.ts";
 
 /**
  * Configuration parameters for the {@link parseSearchParams} utility.

@@ -4,7 +4,7 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {NonEmptyStringSchema} from "@/common/_schemas";
 import {ScreenTypeSchema} from "@/domains/theatre-screens/_schema/fields";
 

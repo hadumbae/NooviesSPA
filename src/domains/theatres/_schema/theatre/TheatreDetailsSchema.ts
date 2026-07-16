@@ -3,8 +3,8 @@
  */
 
 import {TheatreSchema} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
-import {NonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
 import {z} from "zod";
+import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-number/NonNegativeNumberSchema";
 
 /**
  * Validates a theatre object extended with calculated counts for screens, total seats, and upcoming showings.

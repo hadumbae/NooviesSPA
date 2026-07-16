@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import useTitle from "@/common/hooks/document/useTitle.ts";
+import {useTitle} from "@/common/_feat";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {TheatreIndexPageContent} from "@/views/admin/theatres/_pages/index-page/content.tsx";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";

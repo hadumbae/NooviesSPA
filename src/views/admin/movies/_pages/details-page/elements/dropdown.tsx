@@ -12,8 +12,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/common/components/ui";
-import useRequiredContext from "@/common/hooks/context/useRequiredContext.ts";
-import useLoggedNavigate from "@/common/hooks/logging/useLoggedNavigate.ts";
+import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {RoleTypeDepartment} from "@/domains/roletypes";
 import {MovieDetailsUISettersContext} from "@/domains/movies";
 

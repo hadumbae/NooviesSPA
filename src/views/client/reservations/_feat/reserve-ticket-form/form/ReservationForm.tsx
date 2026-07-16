@@ -4,13 +4,13 @@
  */
 
 import {useReserveTicketForm} from "@/domains/reservations/_feat/reserve-tickets/forms/useReserveTicketForm.ts";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {
     ReserveTicketFormData,
     ReserveTicketFormValues
 } from "@/domains/reservations/_feat/reserve-tickets/schema/ReserveTicketFormSchema.ts";
-import Logger from "@/common/utility/features/logger/Logger.ts";
-import {ISO4217CurrencyCode} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
+import {Logger} from "@/common/_feat/logger/Logger.ts";
+import {ISO4217CurrencyCode} from "@/common/_schemas/enums/ISO4217CurrencyCodeSchema.ts";
 
 import {PopulatedReservation, ReservationType} from "@/domains/reservations/_schema/model";
 import {useReserveTicketSubmitMutation} from "@/domains/reservations/_feat/reserve-tickets";

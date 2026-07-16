@@ -4,7 +4,7 @@
 
 import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
 import {ReservationSeatingLoader} from "@/views/client/reservations/_comp/seating-display/ReservationSeatingLoader.tsx";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {ReactElement} from "react";
 
 import {SeatMapWithSeat} from "@/domains/seatmaps/_schema/model/SeatMapWithSeatSchema";

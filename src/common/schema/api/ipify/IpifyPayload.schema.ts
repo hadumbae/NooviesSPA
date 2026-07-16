@@ -4,17 +4,17 @@
  */
 
 import { z } from "zod";
-import { IpSchema } from "@/common/schema/strings/IpSchema.ts";
-import { ISO3166Alpha2CountryCodeEnum } from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import { NonEmptyStringSchema } from "@/common/_schemas/strings/NonEmptyStringSchema.ts";
-import { TimezoneOffsetSchema } from "@/common/schema/strings/TimezoneOffsetSchema.ts";
-import { BooleanValueSchema } from "@/common/schema/boolean/BooleanValueSchema.ts";
+import { IpSchema } from "@/common/_schemas/strings/ip-string/IpSchema.ts";
+import { ISO3166Alpha2CountryCodeSchema } from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
+import { NonEmptyStringSchema } from "@/common/_schemas/strings/simple-strings/NonEmptyStringSchema.ts";
+import { TimezoneOffsetSchema } from "@/common/_schemas/strings/location-strings/TimezoneOffsetSchema.ts";
+import { BooleanValueSchema } from "@/common/_schemas/boolean/BooleanValueSchema.ts";
 
 /**
  * Schema describing the location information returned by Ipify.
  */
 export const IpifyLocationSchema = z.object({
-    country: ISO3166Alpha2CountryCodeEnum,
+    country: ISO3166Alpha2CountryCodeSchema,
     region: NonEmptyStringSchema,
     timezone: TimezoneOffsetSchema,
 });

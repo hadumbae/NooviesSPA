@@ -7,7 +7,7 @@ import {superRefineReservation} from "@/domains/reservations/_schema/model/reser
 import {z} from "zod";
 import {ReservationTypeConstant} from "@/domains/reservations/_schema/model/fields/ReservationTypeConstant.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
 import {AdminReservationBaseSchema} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationBaseSchema.ts";
 
 /**

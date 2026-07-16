@@ -7,7 +7,7 @@ import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {PersonDetailsViewData} from "@/domains/persons/_feat/admin-view-data";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {PersonAdminViewDataBaseURL} from "@/domains/persons/_feat/admin-view-data/repository/baseURL.ts";
-import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 
 /**
  * Retrieves the composite view data for a person's admin profile.

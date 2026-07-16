@@ -3,7 +3,10 @@
  */
 
 import {z} from "zod";
-import {CoercedNonNegativeNumberSchema} from "@/common/schema/numbers/non-negative-number/NonNegativeNumber.schema.ts";
+
+import {
+    CoercedNonNegativeNumberSchema
+} from "@/common/_schemas/numbers/non-negative-number/CoercedNonNegativeNumberSchema";
 
 /**
  * Validates query string parameters for the theatre details view, including active tab selection and list pagination.

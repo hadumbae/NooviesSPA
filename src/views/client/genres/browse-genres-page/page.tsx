@@ -9,7 +9,7 @@ import {GenreSchema} from "@/domains/genres";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {Genre} from "@/domains/genres/_schema";
 import {BrowseGenresPageContent} from "@/views/client/genres/browse-genres-page/content.tsx";
-import useTitle from "@/common/hooks/document/useTitle.ts";
+import {useTitle} from "@/common/_feat";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 
 /**

@@ -2,7 +2,7 @@
  * @fileoverview React Context for sharing movie review metadata across administrative moderation forms.
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {createContext} from "react";
 
 /** Shape of the context values provided to moderation form children. */

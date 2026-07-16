@@ -4,7 +4,6 @@
 
 import {useMemo, useRef} from "react";
 import {isEqual} from "lodash";
-import getDefaultValue from "@/common/utility/forms/getDefaultValue.ts";
 import getShowingDateAndTimeFormValues from "@/common/utility/date-and-time/getShowingDateAndTimeFormValues.ts";
 import {ShowingFormValuesConfig} from "@/domains/showings/_feat/submit-data/useShowingSubmitForm.types.ts";
 
@@ -31,11 +30,10 @@ export function useShowingSubmitFormDefaultValues(
     );
 
     const formattedConfig = {
-        canReserveSeats: getDefaultValue(
-            presetValues?.config?.canReserveSeats,
-            showing?.config?.canReserveSeats,
+        canReserveSeats:
+            presetValues?.config?.canReserveSeats ??
+            showing?.config?.canReserveSeats ??
             false
-        )
     };
 
     const defaultValues: ShowingFormValues = useMemo(

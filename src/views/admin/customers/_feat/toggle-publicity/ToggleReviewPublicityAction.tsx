@@ -3,7 +3,7 @@
  *
  */
 
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
 import {useState} from "react";
 import {

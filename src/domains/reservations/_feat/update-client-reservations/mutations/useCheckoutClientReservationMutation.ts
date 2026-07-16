@@ -3,7 +3,7 @@
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {toast} from "react-toastify";
 import {patchCheckoutTicket} from "@/domains/reservations/_feat/update-client-reservations/repositories";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";

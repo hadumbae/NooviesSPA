@@ -4,7 +4,7 @@
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
-import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 import RequestQueryParams from "@/common/type/request/RequestQueryParams.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {buildURL} from "@/common/_feat/fetch-api";

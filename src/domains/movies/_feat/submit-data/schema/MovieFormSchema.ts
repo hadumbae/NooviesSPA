@@ -4,14 +4,13 @@
 
 import {z} from "zod";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
-import {ISO3166Alpha2CountryCodeEnum} from "@/common/schema/enums/ISO3166Alpha2CountryCodeEnum.ts";
-import {CoercedBooleanValueSchema} from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
-import {CloudinaryImageSchema} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
+import {CoercedBooleanValueSchema} from "@/common/_schemas/boolean/CoercedBooleanValueSchema.ts";
+import {CloudinaryImageSchema} from "@/common/_schemas/cloudinary-image/CloudinaryImageSchema.ts";
 import {AnyValues} from "@/common/types";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {CoercedPositiveNumberSchema,} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {ISO6391LanguageCodeEnum} from "@/common/schema/enums/ISO6391LanguageCodeEnum.ts";
-import {NonFutureDateStringSchema} from "@/common/schema/dates/NonFutureDateStringSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
+import {ISO6391LanguageCodeSchema} from "@/common/_schemas/enums/ISO6391LanguageCodeSchema.ts";
+import {NonFutureDateStringSchema} from "@/common/_schemas/dates/NonFutureDateStringSchema.ts";
 import {
     MovieGenreIDsSchema,
     MovieSynopsisSchema,
@@ -19,6 +18,7 @@ import {
     MovieTitleSchema,
     MovieTrailerURLSchema
 } from "@/domains/movies/_schema";
+import {CoercedPositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/CoercedPositiveNumberSchema";
 
 /** Zod schema for validating movie creation and update forms including conditional release date logic. */
 export const MovieFormSchema = z.object({
@@ -29,15 +29,15 @@ export const MovieFormSchema = z.object({
     tagline: MovieTaglineSchema.optional(),
 
     genres: MovieGenreIDsSchema,
-    country: ISO3166Alpha2CountryCodeEnum,
+    country: ISO3166Alpha2CountryCodeSchema,
     synopsis: MovieSynopsisSchema,
     runtime: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema),
     posterImage: CloudinaryImageSchema.optional().nullable(),
     trailerURL: preprocessEmptyStringToUndefined(MovieTrailerURLSchema),
 
-    originalLanguage: ISO6391LanguageCodeEnum,
-    languages: z.array(ISO6391LanguageCodeEnum).optional(),
-    subtitles: z.array(ISO6391LanguageCodeEnum).optional(),
+    originalLanguage: ISO6391LanguageCodeSchema,
+    languages: z.array(ISO6391LanguageCodeSchema).optional(),
+    subtitles: z.array(ISO6391LanguageCodeSchema).optional(),
 
     isReleased: CoercedBooleanValueSchema,
     isAvailable: CoercedBooleanValueSchema,

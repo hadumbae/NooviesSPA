@@ -12,7 +12,7 @@
 
 import {ErrorBoundary} from "react-error-boundary";
 import {useQueryErrorResetBoundary} from "@tanstack/react-query";
-import AppErrorFallback from "@/common/components/boundary/app-error-boundary/AppErrorFallback.tsx";
+import {AppErrorFallback} from "@/common/components/boundary/app-error-boundary/AppErrorFallback.tsx";
 import {ReactNode} from "react";
 
 type BoundaryProps = {

@@ -3,12 +3,13 @@
  */
 
 import { z } from "zod";
-import { IDStringSchema } from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import { NonEmptyStringSchema } from "@/common/_schemas/strings/NonEmptyStringSchema.ts";
+import { IDStringSchema } from "@/common/_schemas";
+import { NonEmptyStringSchema } from "@/common/_schemas/strings/simple-strings/NonEmptyStringSchema.ts";
 import { SeatTypeSchema } from "@/domains/seats/_schema/fields";
 import { SeatLayoutTypeSchema } from "@/domains/seats/_schema/fields";
-import { CoercedBooleanValueSchema } from "@/common/schema/boolean/CoercedBooleanValueSchema.ts";
-import { PositiveNumberSchema } from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
+import { CoercedBooleanValueSchema } from "@/common/_schemas/boolean/CoercedBooleanValueSchema.ts";
+
+import {PositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/PositiveNumberSchema";
 
 /**
  * Zod schema for Seat-specific query filters used to build database match conditions.

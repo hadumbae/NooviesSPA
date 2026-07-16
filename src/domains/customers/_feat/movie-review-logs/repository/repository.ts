@@ -3,7 +3,7 @@
  */
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts"
-import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts"
+import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts"
 import {CustomerReviewLogsViewData} from "@/domains/customers/_feat/movie-review-logs/schema/viewDataSchema.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {GetFetchCustomerReviewLogsViewDataConfig} from "@/domains/customers/_feat/movie-review-logs/repository/repository.types";

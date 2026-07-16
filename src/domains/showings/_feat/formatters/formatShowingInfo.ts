@@ -5,7 +5,7 @@
 import {ISO6391LanguageLabels as ISO6391LanguageConstant} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 import buildString from "@/common/utility/buildString.ts";
 import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
-import {CloudinaryImage} from "@/common/schema/models/cloudinary-image/CloudinaryImageSchema.ts";
+import {CloudinaryImage} from "@/common/_schemas/cloudinary-image/CloudinaryImageSchema.ts";
 import {PopulatedShowing, ShowingDetails} from "@/domains/showings/_schema";
 import {ReservationType} from "@/domains/reservations/_schema/model/fields/ReservationTypeEnumSchema.ts";
 

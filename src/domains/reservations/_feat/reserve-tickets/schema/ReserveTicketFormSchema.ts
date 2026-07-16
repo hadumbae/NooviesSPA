@@ -3,19 +3,19 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/schema/strings/object-id/IDStringSchema.ts";
-import {CoercedPositiveNumberSchema} from "@/common/schema/numbers/positive-number/PositiveNumber.schema.ts";
-import {ISO4217CurrencyCodeEnumSchema} from "@/common/schema/enums/ISO4217CurrencyCodeEnumSchema.ts";
+import {IDStringSchema} from "@/common/_schemas";
+import {ISO4217CurrencyCodeSchema} from "@/common/_schemas/enums/ISO4217CurrencyCodeSchema.ts";
 import {ReservationTypeConstant} from "@/domains/reservations/_schema/model/fields/ReservationTypeConstant.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 import {AnyValues} from "@/common/types";
+import {CoercedPositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/CoercedPositiveNumberSchema";
 
 /** Base schema containing shared fields for all ticket reservation modes. */
 export const ReserveTicketFormBaseSchema = z.object({
     showing: IDStringSchema,
     ticketCount: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema),
-    currency: ISO4217CurrencyCodeEnumSchema,
+    currency: ISO4217CurrencyCodeSchema,
 });
 
 /** Form schema for general admission reservations where seat selection is prohibited. */

@@ -8,7 +8,7 @@ import {DisableFields} from "@/common/types";
 import {cn} from "@/common/lib/utils.ts";
 import {Button} from "@/common/components/ui";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 
 import {SeatMapFormValues} from "@/domains/seatmaps";
 import {SeatMapSubmitFormDetailsFields, SeatMapSubmitFormPriceFields} from "@/views/admin/seatmaps/_feat/submit-form/fieldsets";

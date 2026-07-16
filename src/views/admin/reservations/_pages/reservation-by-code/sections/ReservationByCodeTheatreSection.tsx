@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Card, CardContent, Separator} from "@/common/components/ui";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import {OrientationValues} from "@/common/schema/enums/OrientationEnumSchema.ts";
+import {OrientationValues} from "@/common/_schemas/enums/OrientationEnumSchema.ts";
 import {ISO3166Alpha2CountryConstant} from "@/common/_const";
 import {PageSectionHeader, SubsectionTitle} from "@/views/common/_comp";
 import {AdminReservation} from "@/domains/reservations";

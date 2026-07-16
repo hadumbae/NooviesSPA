@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {MongooseSortOrderSchema} from "@/common/schema/enums/MongooseSortOrderSchema.ts";
+import {MongooseSortOrderSchema} from "@/common/_schemas/enums/MongooseSortOrderSchema.ts";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 
 /**

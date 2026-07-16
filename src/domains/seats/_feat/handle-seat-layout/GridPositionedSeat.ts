@@ -2,7 +2,7 @@
  * @fileoverview Grid-based seat positioning data structure.
  */
 
-import { ObjectId } from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import { ObjectId } from "@/common/_schemas";
 
 /** Grid-based seat positioning data. */
 export type GridPositionedSeat = {

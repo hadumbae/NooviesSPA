@@ -10,7 +10,7 @@ import {
     PatchSetReviewRatingConfig,
     PatchToggleReviewPublicityConfig,
 } from "@/domains/movie-reviews/_feat/admin-actions/repositories/repository.types.ts";
-import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {MovieReviewAdminActionsBaseURL} from "@/domains/movie-reviews/_feat";
 

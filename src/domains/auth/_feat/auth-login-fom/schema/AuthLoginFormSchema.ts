@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {EmailStringSchema} from "@/common/schema/strings/EmailStringSchema.ts";
+import {EmailStringSchema} from "@/common/_schemas/strings/simple-strings/EmailStringSchema.ts";
 import {AnyValues} from "@/common/types";
 import {StringValueSchema} from "@/common/_schemas";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";

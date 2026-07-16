@@ -3,7 +3,7 @@
  */
 
 import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
-import {ObjectId} from "@/common/schema/strings/object-id/IDStringSchema.ts";
+import {ObjectId} from "@/common/_schemas";
 import {
     ResetReviewDisplayNameFormData,
     SetReviewRatingFormData

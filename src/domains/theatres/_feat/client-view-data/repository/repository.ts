@@ -6,7 +6,7 @@ import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {TheatreClientViewBaseURL, TheatreInfoViewData} from "@/domains/theatres/_feat/client-view-data";
 import {GetFetchTheatreInfoViewDataConfig} from "@/domains/theatres/_feat/client-view-data/repository/repository.types.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
-import useFetchAPI from "@/common/utility/features/use-fetch-api/useFetchAPI.ts";
+import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 
 /**
  * Retrieves theatre information along with screen data for a specific date.
