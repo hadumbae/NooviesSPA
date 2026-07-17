@@ -3,14 +3,14 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query"
-import HttpResponseError from "@/common/errors/HttpResponseError.ts"
+import HttpResponseError from "@/common/_err/HttpResponseError.ts"
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data"
 import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts"
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params"
 import {MovieReviewUniqueCode} from "@/domains/movie-reviews/_schema/fields"
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts"
 import {CustomerReviewLogsQueryKeys} from "@/domains/customers/_feat/movie-review-logs/fetch/queryKeys.ts"
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts"
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts"
 import {
     getFetchCustomerReviewLogsViewData
 } from "@/domains/customers/_feat/movie-review-logs/repository/repository.ts";

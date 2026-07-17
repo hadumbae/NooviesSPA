@@ -4,7 +4,7 @@
 
 import { ReactElement } from "react";
 import { LucideIcon } from "lucide-react";
-import { cn } from "@/common/lib/utils.ts";
+import { cn } from "@/common/_feat/handle-ui/cn.ts";
 
 /** Props for the LucideIconText component. */
 export type IconTextProps = {

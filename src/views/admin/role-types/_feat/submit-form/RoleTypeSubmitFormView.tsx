@@ -4,11 +4,11 @@
 
 import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {HookFormInput} from "@/views/common/_feat";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {HookFormTextArea} from "@/views/common/_feat/form-inputs/HookFormTextArea.tsx";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {RoleTypeCategorySelect} from "@/views/admin/role-types/_feat/form-inputs";

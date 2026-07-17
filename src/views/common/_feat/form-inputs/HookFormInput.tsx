@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {ControllerProps, FieldValues} from "react-hook-form";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {HookFormInputProps} from "@/common/type/input/HookFormInputProps.ts";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input} from "@/common/components/ui";
 

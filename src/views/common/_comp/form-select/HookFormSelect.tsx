@@ -9,7 +9,7 @@ import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {HookFormErrorMessage} from "@/views/common/_feat/form-inputs/HookFormErrorMessage.tsx";
 import {ReactSelectStyleConfig} from "@/common/_const/css/ReactSelectCSS.ts";
 import {ReactElement} from "react";
-import {FormSelectOnChangeHandler, FormSelectValueHandler} from "@/common/types";
+import {FormSelectOnChangeHandler, FormSelectValueHandler} from "@/common/_types";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 
 /** Props for the HookFormSelect component. */

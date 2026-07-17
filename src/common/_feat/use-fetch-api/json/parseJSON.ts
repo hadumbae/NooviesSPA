@@ -3,7 +3,7 @@
  */
 
 import {Logger} from "@/common/_feat/logger/Logger.ts";
-import JSONParseError from "@/common/errors/JSONParseError.ts";
+import JSONParseError from "@/common/_err/JSONParseError.ts";
 import {buildContext} from "@/common/_feat/logger-builders/buildLoggerContext.ts";
 
 type ParseOrThrowParams = {

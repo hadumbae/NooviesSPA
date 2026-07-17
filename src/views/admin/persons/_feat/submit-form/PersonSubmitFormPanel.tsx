@@ -4,12 +4,12 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {HookFormInput, HookFormTextArea} from "@/views/common/_feat";
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {BaseFormContext} from "@/common/_feat/generic-form-context";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
-import {UIOpenStateProps} from "@/common/types";
+import {UIOpenStateProps} from "@/common/_types";
 import {PersonFormValues} from "@/domains/persons";
 import {HookFormSelect} from "@/views/common/_comp";
 import {ISO3166Alpha2CountryOptions} from "@/common/_const";

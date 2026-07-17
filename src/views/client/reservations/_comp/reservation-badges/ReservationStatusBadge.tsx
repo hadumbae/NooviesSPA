@@ -4,7 +4,7 @@
 
 import {Badge} from "@/common/components/ui/badge.tsx";
 import {ReservationStatus} from "@/domains/reservations/_schema/model";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ReactElement} from "react";
 
 /** Props for the ReservationStatusBadge component. */

@@ -1,6 +1,6 @@
 /** @fileoverview Presentational form view for creating or editing movie credits. */
 
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {useFormContext} from "react-hook-form";
 import {Separator} from "@/common/components/ui";
 import {ReactElement} from "react";
@@ -10,7 +10,7 @@ import {
     MovieCreditFormDetailsFieldset,
 } from "@/views/admin/movie-credits/_feat/submit-form/fieldsets";
 
-import {DisableFields} from "@/common/types";
+import {DisableFields} from "@/common/_types";
 import {MovieCreditFormValues} from "@/domains/movie-credits";
 
 /** Props for the MovieCreditFormView component. */

@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 import {NonEmptyStringSchema} from "@/common/_schemas";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 
 /** Validates the justification message provided in administrative moderation forms. */
 export const ModerationMessageFormSchema = z.object({

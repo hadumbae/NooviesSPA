@@ -6,9 +6,9 @@ import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {getFetchReviewDetailsByMovie} from "@/domains/movie-reviews/_feat/fetch-by-movie/repository";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {FetchByMovieQueryKeys, MovieReviewSummaryData, MovieReviewSummarySchema} from "@/domains/movie-reviews/_feat";
 import {buildQueryFn} from "@/common/_feat";
 

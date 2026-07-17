@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {PaginationEllipsis, PaginationItem, PaginationLink,} from "@/common/components/ui";
 
 /** Props for the PaginationPageButton component. */

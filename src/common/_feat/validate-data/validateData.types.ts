@@ -3,7 +3,7 @@
  */
 
 import {ZodTypeAny} from "zod";
-import {ParseError} from "@/common/errors/ParseError.ts";
+import {ParseError} from "@/common/_err/ParseError.ts";
 
 /** Parameters for the validateData utility function. */
 export type ValidateDataParams<TData = unknown, TSchema extends ZodTypeAny = ZodTypeAny> = {

@@ -8,7 +8,7 @@ import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 /**
  * Form section for showing schedule inputs.

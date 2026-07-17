@@ -5,8 +5,8 @@
 import {ReactElement} from "react";
 import {Badge} from "@/common/components/ui/badge.tsx";
 import {ShowingStatus} from "@/domains/showings/_schema/fields";
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import {cn} from "@/common/lib/utils.ts";
+import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 /** Props for the ShowingStatusBadge component. */
 type BadgeProps = {

@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {ShowingIsActiveBadge, ShowingSpecialEventBadge, ShowingStatusBadge} from "@/views/admin/showings/_comp/badges";
 import {ShowingStatus} from "@/domains/showings/_schema/fields";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 /** Props for the ShowingStateBadges component. */
 export type BadgeListProps = {

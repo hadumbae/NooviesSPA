@@ -8,7 +8,7 @@ import {Genre, GenreSchema} from "@/domains/genres/_schema";
 import {ObjectId} from "@/common/_schemas";
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {toast} from "react-toastify";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {UseFormReturn} from "react-hook-form";
 import {patchUpdateGenreImage} from "@/domains/genres/_feat/manage-image/repository";
 import {GenreImageUploadFormData, GenreImageUploadFormValues} from "@/domains/genres/_feat/manage-image/form";
@@ -55,7 +55,7 @@ export function useUploadGenreImage(
     }
 
     const onError = (error: unknown) => {
-        handleMutationFormError({form, error, displayMessage: onSubmitConfig.errorMessage});
+        handleFormSubmitError({form, error, displayMessage: onSubmitConfig.errorMessage});
         onSubmitConfig.onSubmitError?.(error);
     }
 

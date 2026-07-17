@@ -5,8 +5,10 @@
 import {ReactElement, useState} from "react";
 import {Button} from "@/common/components/ui";
 import {toast} from "react-toastify";
-import {cn} from "@/common/lib/utils.ts";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 
 import {AdminReservation, useResetReservationExpiryMutation} from "@/domains/reservations";
 import {
@@ -37,7 +39,7 @@ export function AdminReservationResetExpiryAction(
             const expiryDate = reservation.expiresAt.toFormat("HH:mm:ss dd MMM, yyyy");
             toast.success(`Expiration successfully extended. Now expires at: ${expiryDate}.`);
         } catch (error: unknown) {
-            handleMutationResponseError({error, displayMessage: "Failed reset expiry."})
+            handleSubmitResponseError({error, displayMessage: "Failed reset expiry."})
         }
     }
 

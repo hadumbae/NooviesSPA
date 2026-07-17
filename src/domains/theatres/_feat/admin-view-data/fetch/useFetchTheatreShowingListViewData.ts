@@ -3,10 +3,10 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {getFetchTheatreShowingListViewData} from "@/domains/theatres/_feat/admin-view-data/repository";
 import {TheatreAdminViewDataQueryKeys,} from "@/domains/theatres/_feat/admin-view-data/fetch/queryKeys.ts";
 import {

@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {MovieCreditFormCrewSchema} from "@/domains/movie-credits/_feat/submit-data/schemas/MovieCreditFormCrewSchema.ts";
 import {MovieCreditFormCastSchema} from "@/domains/movie-credits/_feat/submit-data/schemas/MovieCreditFormCastSchema.ts";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 
 /** Discriminated union schema for validating movie credits as either cast or crew. */
 export const MovieCreditFormSchema = z.discriminatedUnion("department", [

@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/_schemas";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 import {GenreDescriptionSchema, GenreNameSchema} from "@/domains/genres";
 
 /** Zod schema for validating and transforming Genre form data. */

@@ -5,7 +5,9 @@
 
 import {useMutation} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 import {
     useLogoutAuthUser
 } from "@/domains/auth/_feat/manage-auth-user-data/hooks/useLogoutAuthUser.ts";
@@ -31,7 +33,7 @@ export function useAuthLogoutSubmitMutation(onSubmitConfig: MutationResponseConf
     };
 
     const onError = (error: unknown) => {
-        handleMutationResponseError({error, displayMessage: onSubmitConfig.errorMessage});
+        handleSubmitResponseError({error, displayMessage: onSubmitConfig.errorMessage});
         onSubmitConfig.onSubmitError?.(error);
     };
 

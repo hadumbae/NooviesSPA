@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Badge} from "@/common/components/ui/badge.tsx";
 import {BadgeCheckIcon} from "lucide-react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 interface FlagProps {
     label: string,

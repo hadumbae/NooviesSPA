@@ -3,7 +3,7 @@
  *
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /** Hierarchical collection of query keys for Person administrative operations. */
 export const PersonCRUDQueryKeys = buildQueryKey(

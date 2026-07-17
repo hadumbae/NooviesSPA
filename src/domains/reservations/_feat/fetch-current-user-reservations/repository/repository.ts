@@ -4,7 +4,7 @@
 
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 import {PopulatedReservation} from "@/domains/reservations/_schema";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {

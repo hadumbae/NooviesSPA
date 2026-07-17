@@ -12,7 +12,9 @@ import {
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 
 /**
@@ -51,7 +53,7 @@ export function UploadPersonProfileImageForm(
                 messageType: "success",
             });
         } catch (error: unknown) {
-            handleMutationResponseError({error, displayMessage: mutationConfig.errorMessage});
+            handleSubmitResponseError({error, displayMessage: mutationConfig.errorMessage});
             mutationConfig.onSubmitError?.(error);
         }
     };

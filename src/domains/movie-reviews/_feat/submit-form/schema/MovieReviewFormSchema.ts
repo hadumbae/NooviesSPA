@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 import {MovieReviewRatingSchema} from "@/domains/movie-reviews";
 import {IDStringSchema} from "@/common/_schemas";
 import {BooleanValueSchema, NonEmptyStringSchema, StringValueSchema} from "@/common/_schemas";

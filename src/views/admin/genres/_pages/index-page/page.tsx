@@ -15,7 +15,7 @@ import {GenreIndexPageContent} from "@/views/admin/genres/_pages/index-page/cont
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {Genre, GenreQueryOptionSchema, GenreSchema} from "@/domains/genres/_schema";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 
 const GENRES_PER_PAGE = 20;
 

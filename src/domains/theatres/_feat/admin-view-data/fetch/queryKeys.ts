@@ -2,7 +2,7 @@
  * @fileoverview React Query key factory for the Theatre Admin View domain.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /**
  * Standardized query keys for fetching administrative theatre view data.

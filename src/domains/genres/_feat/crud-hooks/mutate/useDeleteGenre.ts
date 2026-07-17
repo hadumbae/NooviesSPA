@@ -6,7 +6,9 @@
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import {ObjectId} from "@/common/_schemas";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {destroy} from "@/domains/genres/_feat/crud";
 import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/keys/GenreCRUDQueryKeys.ts";
@@ -40,7 +42,7 @@ export function useDeleteGenre(
     };
 
     const onError = (error: unknown) => {
-        handleMutationResponseError({error, displayMessage: onSubmitConfig.errorMessage});
+        handleSubmitResponseError({error, displayMessage: onSubmitConfig.errorMessage});
         onSubmitConfig.onSubmitError?.(error);
     };
 

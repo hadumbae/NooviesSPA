@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui";
-import buildString from "@/common/utility/buildString.ts";
+import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {TheatreWithRecentShowings} from "@/domains/theatres";

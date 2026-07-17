@@ -4,7 +4,9 @@
 
 import {useMemo, useRef} from "react";
 import {isEqual} from "lodash";
-import getShowingDateAndTimeFormValues from "@/common/utility/date-and-time/getShowingDateAndTimeFormValues.ts";
+import {
+    getShowingDateAndTimeFormValues
+} from "@/domains/showings/_feat/submit-data/getShowingDateAndTimeFormValues.ts";
 import {ShowingFormValuesConfig} from "@/domains/showings/_feat/submit-data/useShowingSubmitForm.types.ts";
 
 import {ShowingFormValues} from "@/domains/showings/_schema";

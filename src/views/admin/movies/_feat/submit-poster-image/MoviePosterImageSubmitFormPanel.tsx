@@ -3,8 +3,8 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import {UIOpenStateProps} from "@/common/types";
-import {cn} from "@/common/lib/utils.ts";
+import {UIOpenStateProps} from "@/common/_types";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {
     ScrollArea,
     Sheet,

@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 
 /** List of MIME types allowed for profile image uploads. */
 const ACCEPTED_PROFILE_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];

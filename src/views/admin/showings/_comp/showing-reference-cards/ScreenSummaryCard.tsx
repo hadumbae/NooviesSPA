@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Film, Search, Sofa, Theater} from "lucide-react";
 import {Card, CardContent} from "@/common/components/ui";
-import buildString from "@/common/utility/buildString.ts";
+import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {IconButton} from "@/views/common/_comp";
 import {TheatreScreenDetails} from "@/domains/theatre-screens";

@@ -7,7 +7,7 @@ import {ReactElement} from "react";
 import {
     useFetchByIdentifierRouteParams
 } from "@/common/_feat";
-import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
 import {MovieInfoPageContent} from "@/views/client/movies/_pages/movie-overview/content.tsx";
 import {MovieInfoOverviewViewData, useFetchMovieInfoOverviewViewData} from "@/domains/movies/_feat/client-view-data";

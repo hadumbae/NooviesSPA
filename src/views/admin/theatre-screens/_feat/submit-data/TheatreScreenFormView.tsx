@@ -8,7 +8,7 @@ import {useFormContext} from "react-hook-form";
 import {TheatreHookFormSelect} from "@/views/admin/theatres/_feat/form-input/selects/TheatreHookFormSelect.tsx";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {HookFormInput} from "@/views/common/_feat";
-import {DisableFields} from "@/common/types";
+import {DisableFields} from "@/common/_types";
 import {TheatreScreenFormValues} from "@/domains/theatre-screens";
 
 /** Props for the TheatreScreenSubmitFormView component. */

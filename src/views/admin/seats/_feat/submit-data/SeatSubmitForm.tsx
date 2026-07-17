@@ -6,10 +6,12 @@ import {ReactElement, ReactNode} from "react";
 import {Form} from "@/common/components/ui";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 
 import {
     Seat,
@@ -52,7 +54,7 @@ export function SeatSubmitForm(
                 messageType: "success",
             });
         } catch (error: unknown) {
-            handleMutationFormError({form, error, displayMessage: submitConfig.errorMessage})
+            handleFormSubmitError({form, error, displayMessage: submitConfig.errorMessage})
             submitConfig.onSubmitError?.(error);
         }
     }
@@ -62,7 +64,7 @@ export function SeatSubmitForm(
             formID={formID}
             isPending={isPending}
             isError={isError}
-            submitHandler={handleMutationResponseError}
+            submitHandler={handleSubmitResponseError}
         >
             <Form {...form}>
                 <form id={formID} onSubmit={form.handleSubmit(submitSeatData)}>

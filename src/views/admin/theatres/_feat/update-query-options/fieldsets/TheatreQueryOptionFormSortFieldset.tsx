@@ -7,7 +7,7 @@ import {HookFormSortToggle} from "@/views/common/_feat";
 
 import {TheatreQueryOptionFormStarterValues} from "@/domains/theatres";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 /**
  * Renders a responsive set of sorting toggle controls for theatre query options.

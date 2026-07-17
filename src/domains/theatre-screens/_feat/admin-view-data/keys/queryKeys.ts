@@ -2,7 +2,7 @@
  * @fileoverview Query key factory for the administrative theatre screen view data.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /**
  * Standardized query keys for fetching administrative theatre screen view data.

@@ -6,7 +6,7 @@
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
 import {useCurrentURLPath} from "@/common/_feat/navigation/useCurrentURLPath.ts";
-import {UnauthorisedError} from "@/common/errors/UnauthorisedError.ts";
+import {UnauthorisedError} from "@/common/_err/UnauthorisedError.ts";
 
 import {User} from "@/domains/users/_schema/user/UserSchema";
 

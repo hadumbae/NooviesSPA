@@ -2,7 +2,7 @@
  * @fileoverview Query key factory for showing CRUD operations.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 import {ShowingBaseQueryKeys} from "@/domains/showings/_feat/base-query-keys";
 
 /** Centralised query keys for fetching and invalidating showing data. */

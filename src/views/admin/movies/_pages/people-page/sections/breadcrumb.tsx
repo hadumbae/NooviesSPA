@@ -11,7 +11,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {RoleTypeDepartment} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {Movie} from "@/domains/movies/_schema/movie/MovieSchema.ts";

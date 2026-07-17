@@ -7,7 +7,7 @@ import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-prepro
 import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
 import {CoercedBooleanValueSchema} from "@/common/_schemas/boolean/CoercedBooleanValueSchema.ts";
 import {CloudinaryImageSchema} from "@/common/_schemas/cloudinary-image/CloudinaryImageSchema.ts";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 import {IDStringSchema} from "@/common/_schemas";
 import {ISO6391LanguageCodeSchema} from "@/common/_schemas/enums/ISO6391LanguageCodeSchema.ts";
 import {NonFutureDateStringSchema} from "@/common/_schemas/dates/NonFutureDateStringSchema.ts";

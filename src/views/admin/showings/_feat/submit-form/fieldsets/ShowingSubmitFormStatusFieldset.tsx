@@ -7,7 +7,7 @@ import {HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {useFormContext} from "react-hook-form";
 import {ShowingStatusHookFormSelect} from "@/views/admin/showings/_feat/form-inputs";
 

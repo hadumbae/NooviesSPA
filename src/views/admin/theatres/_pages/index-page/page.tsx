@@ -12,7 +12,7 @@ import {TheatreHttpStatusOverrideText} from "@/domains/theatres/_const/TheatreHt
 import {useFetchPaginatedTheatres} from "@/domains/theatres/_feat/crud-hooks";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 
 import {TheatreDetails, TheatreDetailsSchema, TheatreQueryOptionSchema} from "@/domains/theatres";
 

@@ -8,8 +8,10 @@ import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWa
 import {useRemovePersonData} from "@/domains/persons/_feat/crud-hooks";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
-import {UIOpenStateProps} from "@/common/types";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
+import {UIOpenStateProps} from "@/common/_types";
 
 /**
  * Props for the {@link PersonDeleteWarningDialog} component.
@@ -43,7 +45,7 @@ export function PersonDeleteWarningDialog(
                 messageType: "success",
             });
         } catch (error: unknown) {
-            handleMutationResponseError({error, displayMessage: mutationConfig.errorMessage});
+            handleSubmitResponseError({error, displayMessage: mutationConfig.errorMessage});
             mutationConfig.onSubmitError?.(error);
         }
     }

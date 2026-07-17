@@ -4,8 +4,8 @@
 
 import {ReactElement} from "react";
 import {Loader} from "lucide-react";
-import {DisableFields} from "@/common/types";
-import {cn} from "@/common/lib/utils.ts";
+import {DisableFields} from "@/common/_types";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {Button} from "@/common/components/ui";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {ObjectId} from "@/common/_schemas";

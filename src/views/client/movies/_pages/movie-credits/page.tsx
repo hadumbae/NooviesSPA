@@ -5,7 +5,7 @@
 import {
     useFetchByIdentifierRouteParams
 } from "@/common/_feat";
-import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
 import {MovieInfoCreditsPageContent} from "@/views/client/movies/_pages/movie-credits/content.tsx";
 import {useFetchMovieInfoCreditsData} from "@/domains/movies/_feat/client-view-data/hooks/useFetchMovieInfoCreditsData.ts";

@@ -2,7 +2,7 @@
  * @fileoverview Utility for deriving UI-ready display strings and formatted fields from Movie models.
  */
 
-import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
+import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {
     ISO6391LanguageLabels as ISO6391LanguageConstant
 } from "@/common/_const/languages/ISO6391LanguageLabels.ts";

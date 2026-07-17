@@ -6,7 +6,7 @@ import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.ts
 import {FieldValues} from "react-hook-form";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {ShowingStatusConstant} from "@/domains/showings/_schema/fields/ShowingStatusConstant.ts";
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 
 
 import {ShowingFormValues} from "@/domains/showings/_schema/form";

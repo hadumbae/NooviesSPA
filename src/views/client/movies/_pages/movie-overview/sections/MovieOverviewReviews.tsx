@@ -3,7 +3,7 @@
  *
  */
 
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ChevronRight, MessageCirclePlus} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ReactElement, useState} from "react";

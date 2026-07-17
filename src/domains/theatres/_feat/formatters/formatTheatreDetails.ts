@@ -4,7 +4,7 @@
 
 import {ISO3166Alpha2CountryConstant} from "@/common/_const";
 import {TheatreDetails} from "@/domains/theatres";
-import buildString from "@/common/utility/buildString.ts";
+import {buildString} from "@/common/_feat/formatters/buildString.ts";
 
 /**
  * Formats a theatre details object into a display-ready structure.

@@ -14,7 +14,7 @@ import {
 } from "@/common/components/ui/sheet";
 
 
-import {UIOpenStateProps} from "@/common/types";
+import {UIOpenStateProps} from "@/common/_types";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
 import {MovieSubmitFormView} from "@/views/admin/movies/_feat/submit-movie/view/MovieSubmitFormView.tsx";

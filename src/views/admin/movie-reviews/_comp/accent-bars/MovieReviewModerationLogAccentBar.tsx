@@ -5,7 +5,7 @@
 
 import {ReactElement} from "react";
 import {MovieReviewModerationAction} from "@/domains/movie-reviews/_feat/moderation/schema";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 type BarProps = {
     action: MovieReviewModerationAction;

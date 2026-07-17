@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { cn } from "@/common/lib/utils.ts";
+import { cn } from "@/common/_feat/handle-ui/cn.ts";
 import { DropdownMenuItem } from "@/common/components/ui/dropdown-menu.tsx";
 import {useCurrentURLPath} from "@/common/_feat/navigation/useCurrentURLPath.ts";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";

@@ -1,8 +1,8 @@
 import {redirect, RouteObject} from "react-router-dom";
-import AuthLoader from "@/common/routing/loaders/AuthLoader.ts";
+import {AuthLoader} from "@/common/_loaders";
 import {RoleTypeListPage} from "@/views/admin/role-types/_pages/list-page/page.tsx";
 import {ComponentErrorHandler} from "@/common/components/errors/ComponentErrorHandler.tsx";
-import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
+import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
 
 /**
  * Admin role type routes.

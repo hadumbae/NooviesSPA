@@ -6,10 +6,12 @@ import {
     ShowingEditConfig,
     ShowingFormValuesConfig
 } from "@/domains/showings/_feat/submit-data/useShowingSubmitForm.types.ts";
+import {getShowingDateAndTimeFormValues} from "@/domains/showings/_feat/submit-data/getShowingDateAndTimeFormValues.ts";
 
 export {
     useShowingSubmitForm,
     useShowingSubmitFormDefaultValues,
+    getShowingDateAndTimeFormValues,
 }
 
 export type {

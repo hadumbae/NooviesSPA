@@ -2,12 +2,12 @@
  * @fileoverview Hook for handling HTTP response errors and managing unauthorised redirection.
  */
 
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {toast} from "react-toastify";
 import {useEffect} from "react";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {useLocation} from "react-router-dom";
-import setRedirectPath from "@/common/utility/router/setRedirectPath.ts";
+import {setRedirectPath} from "@/common/_feat/navigation";
 
 /** Hook that monitors for HttpResponseErrors and redirects to login on 401 status. */
 export function useHttpResponseErrorHandler(error: unknown) {

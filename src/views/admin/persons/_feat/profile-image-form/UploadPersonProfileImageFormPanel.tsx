@@ -6,7 +6,7 @@ import {ReactElement, ReactNode} from 'react';
 import {HookFormFileInput} from "@/views/common/_feat/form-inputs/HookFormFileInput.tsx";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {
     Button,
     ScrollArea,

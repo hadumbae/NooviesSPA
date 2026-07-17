@@ -4,7 +4,7 @@
 
 import {forwardRef} from "react";
 import LoggedLink, {LoggedLinkProps} from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {LucideIcon} from "lucide-react";
 
 type StackedProps = Omit<LoggedLinkProps, "children"> & {

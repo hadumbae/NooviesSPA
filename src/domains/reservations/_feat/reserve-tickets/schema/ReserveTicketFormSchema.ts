@@ -8,7 +8,7 @@ import {ISO4217CurrencyCodeSchema} from "@/common/_schemas/enums/ISO4217Currency
 import {ReservationTypeConstant} from "@/domains/reservations/_schema/model/fields/ReservationTypeConstant.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 import {CoercedPositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/CoercedPositiveNumberSchema";
 
 /** Base schema containing shared fields for all ticket reservation modes. */

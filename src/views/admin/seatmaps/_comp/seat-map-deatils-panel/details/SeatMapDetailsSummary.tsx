@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {DetailsCardSpan} from "@/common/components/text/DetailsCardSpan.tsx";
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {SeatMapDetails} from "@/domains/seatmaps";
 import {SectionTitle} from "@/views/common/_comp";
 

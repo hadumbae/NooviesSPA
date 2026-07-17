@@ -10,7 +10,7 @@ import useParsedPaginationValue
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {MovieQueryOptionSchema} from "@/domains/movies/_schema/queries";
 import {MovieIndexPageContent} from "@/views/admin/movies/_pages/index-page/content.tsx";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";

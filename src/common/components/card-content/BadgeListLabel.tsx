@@ -2,7 +2,7 @@ import {Badge} from "@/common/components/ui/badge.tsx";
 import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
 import BadgeVariant from "@/common/type/ui/shad-cn-badge/BadgeVariant.ts";
 import {Key, ReactNode} from "react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 /**
  * Props for {@link BadgeListLabel}.

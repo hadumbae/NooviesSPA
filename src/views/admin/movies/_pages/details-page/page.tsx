@@ -7,7 +7,7 @@ import {useTitle} from "@/common/_feat";
 import {
     useFetchByIdentifierRouteParams
 } from "@/common/_feat";
-import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MovieDetailsPageContent} from "@/views/admin/movies/_pages/details-page/content.tsx";
 import {MovieDetailsUIContextProvider} from "@/domains/movies/_ctx/details-ui/MovieDetailsUIContextProvider.tsx";

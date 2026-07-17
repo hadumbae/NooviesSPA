@@ -9,7 +9,7 @@ import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-p
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 import {RoleType, RoleTypeQueryOptionsSchema, RoleTypeSchema, useFetchPaginatedRoleTypes} from "@/domains/roletypes";
 
 /**

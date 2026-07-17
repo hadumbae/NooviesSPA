@@ -5,7 +5,7 @@
 import {ReactElement, ReactNode} from "react";
 import {HookFormTextArea} from "@/views/common/_feat";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-import {UIOpenStateProps} from "@/common/types";
+import {UIOpenStateProps} from "@/common/_types";
 import {
     Button,
     Dialog,

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 export const SheetHeader = (
     {className, ...props}: React.HTMLAttributes<HTMLDivElement>

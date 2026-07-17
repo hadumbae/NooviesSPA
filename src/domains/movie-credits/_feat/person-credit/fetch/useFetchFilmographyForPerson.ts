@@ -5,10 +5,10 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/_schemas";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {getFetchFilmographyForPerson} from "@/domains/movie-credits/_feat/person-credit/repository";
 import {PersonFilmography, PersonFilmographySchema} from "@/domains/movie-credits/_feat/person-credit/schema";
 import {PersonCreditQueryKeys} from "@/domains/movie-credits/_feat/person-credit/fetch/PersonCreditQueryKeys.ts";

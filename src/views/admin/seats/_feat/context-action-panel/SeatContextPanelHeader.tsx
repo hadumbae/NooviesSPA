@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {SheetDescription, SheetHeader, SheetTitle} from "@/common/components/ui/sheet";
-import buildString from "@/common/utility/buildString.ts";
+import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {SeatLayoutTypeLabelMap, SeatTypeLabelMap, useSeatPanelStateContext} from "@/domains/seats";
 
 /** Header component for the seat-details panel. */

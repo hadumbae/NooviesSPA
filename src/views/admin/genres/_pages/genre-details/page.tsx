@@ -8,7 +8,7 @@ import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-par
 import {
     useFetchByIdentifierRouteParams
 } from "@/common/_feat";
-import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import {
     GenreDetailsUIContextProvider,
     GenreDetailsUIPendingContextProvider,

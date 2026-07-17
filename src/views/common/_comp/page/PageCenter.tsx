@@ -3,7 +3,7 @@
  * Ideal for empty states, 404 pages, or splash content within a page-level container.
  */
 
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ReactNode} from "react";
 
 type CentreProps = {

@@ -4,7 +4,7 @@
 
 import {createContext} from "react";
 import {FieldValues, SubmitHandler} from "react-hook-form";
-import {StorageType} from "@/common/types/browser-storage";
+import {StorageType} from "@/common/_types/browser-storage";
 
 /** Core values for the multi-step form context. */
 export type BaseMultiStepFormContextValues<TForm extends FieldValues = any> = {

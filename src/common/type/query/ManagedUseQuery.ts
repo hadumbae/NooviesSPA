@@ -1,5 +1,5 @@
 import {ZodTypeAny} from "zod";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {UseQueryResult} from "@tanstack/react-query";
 
 /**

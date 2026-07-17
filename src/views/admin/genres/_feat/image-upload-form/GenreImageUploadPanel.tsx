@@ -13,7 +13,7 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/common/components/ui";
-import {UIOpenStateProps} from "@/common/types";
+import {UIOpenStateProps} from "@/common/_types";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import {useLockForFormUI} from "@/common/_feat/handle-form/useLockForFormUI.ts";

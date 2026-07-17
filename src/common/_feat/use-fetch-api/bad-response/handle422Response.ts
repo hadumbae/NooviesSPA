@@ -5,9 +5,9 @@
 import {ValidationErrorResponsePayloadSchema} from "@/common/_schemas";
 import {buildContext} from "@/common/_feat/logger-builders/buildLoggerContext.ts";
 import {Logger} from "@/common/_feat/logger/Logger.ts";
-import {FormValidationError} from "@/common/errors/FormValidationError.ts";
+import {FormValidationError} from "@/common/_err/FormValidationError.ts";
 import {ZodIssue} from "zod";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 
 type HandleParams = {
     url: string;

@@ -3,8 +3,8 @@
  */
 
 import {RouteObject} from "react-router-dom";
-import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
-import AuthLoader from "@/common/routing/loaders/AuthLoader.ts";
+import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
+import {AuthLoader} from "@/common/_loaders";
 import {ReservationByCodePage} from "@/views/admin/reservations/_pages/reservation-by-code";
 import {ComponentErrorHandler} from "@/common/components/errors/ComponentErrorHandler.tsx";
 

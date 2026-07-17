@@ -5,11 +5,12 @@
 import {useFetchUserCountry} from "@/common/_feat/external/ipify-country/hooks/useFetchUserCountry.ts";
 import {ReactElement, ReactNode, useEffect, useState} from "react";
 import {IpString} from "@/common/_schemas/strings/ip-string/IpSchema.ts";
-import {IpifyLocation} from "@/common/schema/api/ipify/IpifyPayload.types.ts";
 import {
     IPGeolocationContext,
     IPGeolocationContextValues
 } from "@/common/_feat/external/ipify-country/ctx/IPGeolocationContext.ts";
+
+import {IpifyLocation} from "@/common/_feat/external/ipify-country/schema/IpifyLocationSchema";
 
 /** Props for the IPGeolocationContextProvider component. */
 type ProviderProps = {

@@ -11,9 +11,9 @@ import {
 } from "@/domains/persons/_feat/client-view-data";
 import {SlugString} from "@/common/_schemas";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 
 /** Configuration for fetching person information. */
 type FetchConfig = {

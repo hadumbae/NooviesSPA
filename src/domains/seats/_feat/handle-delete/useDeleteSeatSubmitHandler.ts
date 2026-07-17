@@ -4,7 +4,9 @@
 
 import {useSeatDeleteMutation} from "@/domains/seats";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {ObjectId} from "@/common/_schemas";
 
@@ -41,7 +43,7 @@ export function useDeleteSeatSubmitHandler(
                 messageType: "success",
             });
         } catch (error: unknown) {
-            handleMutationResponseError({error, displayMessage: submitConfig.errorMessage});
+            handleSubmitResponseError({error, displayMessage: submitConfig.errorMessage});
             submitConfig.onSubmitError?.(error);
         }
     }

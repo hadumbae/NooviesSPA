@@ -4,10 +4,10 @@
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 
 import {TheatreWithRecentShowings, TheatreWithRecentShowingsSchema} from "@/domains/theatres/_schema";

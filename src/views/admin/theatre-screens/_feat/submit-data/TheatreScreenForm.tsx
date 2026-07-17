@@ -15,7 +15,7 @@ import {
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form.tsx";
 import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 
 /**
@@ -52,7 +52,7 @@ export function TheatreScreenForm(
                 messageType: "success"
             });
         } catch (error: unknown) {
-            handleMutationFormError({form, error, displayMessage: submitConfig.errorMessage});
+            handleFormSubmitError({form, error, displayMessage: submitConfig.errorMessage});
             submitConfig.onSubmitError?.(error);
         }
     };

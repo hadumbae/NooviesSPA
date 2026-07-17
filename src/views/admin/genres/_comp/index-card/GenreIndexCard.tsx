@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {Clapperboard} from "lucide-react";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {Genre} from "@/domains/genres";
 import usePaginationSearchParams

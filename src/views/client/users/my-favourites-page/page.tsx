@@ -10,7 +10,7 @@ import {
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {MyFavouritesPageContent} from "@/views/client/users/my-favourites-page/content.tsx";
 import {MovieDetails} from "@/domains/movies/_schema/movie";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 
 /** Number of favourite movies displayed per page. */

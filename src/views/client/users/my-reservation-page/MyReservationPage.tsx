@@ -5,7 +5,7 @@
 import {
     useFetchByIdentifierRouteParams
 } from "@/common/_feat";
-import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import {Loader} from "lucide-react";
 import {
     MyReservationPageContent

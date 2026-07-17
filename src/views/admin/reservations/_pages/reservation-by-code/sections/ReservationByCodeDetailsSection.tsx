@@ -5,10 +5,10 @@
 import {ReactElement} from "react";
 import {Card, CardContent, Separator} from "@/common/components/ui";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {OrientationValues} from "@/common/_schemas/enums/OrientationEnumSchema.ts";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 

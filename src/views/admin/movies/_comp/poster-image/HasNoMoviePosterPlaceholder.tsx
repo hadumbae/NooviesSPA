@@ -1,7 +1,7 @@
 /** @fileoverview Fallback placeholder component for movie entities that do not have a poster image. */
 
 import {ReactElement} from 'react';
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ImageOff} from "lucide-react";
 
 /** Props for the HasNoMoviePosterPlaceholder component. */

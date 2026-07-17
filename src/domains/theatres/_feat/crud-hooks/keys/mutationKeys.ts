@@ -1,6 +1,6 @@
 /** @fileoverview Mutation keys for theatre CRUD operations. */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /** Mutation keys used for creating, updating, and deleting theatres. */
 export const TheatreCRUDMutationKeys = buildQueryKey(

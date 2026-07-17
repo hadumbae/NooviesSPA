@@ -4,9 +4,9 @@
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {ListQueryConfig} from "@/common/types";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
+import {ListQueryConfig} from "@/common/_types";
 import {query} from "@/domains/persons/_feat/crud";
 import {PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks/keys";
 

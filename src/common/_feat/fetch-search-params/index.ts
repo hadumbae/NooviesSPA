@@ -3,12 +3,14 @@ import stringifySearchParamValues from "@/common/_feat/fetch-search-params/strin
 import serializeQueryStrings from "@/common/_feat/fetch-search-params/serializeQueryStrings.ts";
 import updateSearchParamValue from "@/common/_feat/fetch-search-params/updateSearchParamValue.ts";
 import updateSearchParams from "@/common/_feat/fetch-search-params/updateSearchParams.ts";
+import {parseStateToSearchParams} from "@/common/_feat/fetch-search-params/parseStateToSearchParams.ts";
 
 export * from "./hooks";
 
 export {
     serializeQueryStrings,
     parseSearchParams,
+    parseStateToSearchParams,
     stringifySearchParamValues,
     updateSearchParams,
     updateSearchParamValue,

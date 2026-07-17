@@ -8,7 +8,7 @@ import {PersonDetailsUIProvider} from "@/domains/persons/_ctx/PersonDetailsUIPro
 import {
     useFetchByIdentifierRouteParams
 } from "@/common/_feat";
-import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {PersonDetailsPageContent} from "@/views/admin/persons/_pages/details-page/content.tsx";
 import {PersonDetailsViewData, useFetchPersonDetailsViewData} from "@/domains/persons/_feat/admin-view-data";

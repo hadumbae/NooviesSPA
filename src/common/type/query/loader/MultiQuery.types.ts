@@ -6,7 +6,7 @@
  */
 import {z, ZodTypeAny} from "zod";
 import {UseQueryResult} from "@tanstack/react-query";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 
 /**
  * Defines a single typed query with an associated Zod schema.

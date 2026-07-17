@@ -1,7 +1,7 @@
 /** @fileoverview Side-panel wrapper for the movie credit form, managing its visibility and lifecycle. */
 
 import {ReactElement, ReactNode} from "react";
-import {DisableFields, UIOpenStateProps} from "@/common/types";
+import {DisableFields, UIOpenStateProps} from "@/common/_types";
 import {MovieCreditFormView} from "@/views/admin/movie-credits/_feat/submit-form/views/MovieCreditFormView.tsx";
 import {
     ScrollArea,

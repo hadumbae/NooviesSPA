@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {ModerationMessageFormSchema} from "@/common/_feat/moderation/forms";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 import {MovieReviewRatingSchema} from "@/domains/movie-reviews/_schema";
 
 /** Validates the administrative form data for overriding a review's star rating. */

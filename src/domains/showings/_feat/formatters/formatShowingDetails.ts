@@ -2,10 +2,10 @@
  * @fileoverview Formatter for converting showing details into display-ready strings.
  */
 
-import formatLocationDetails from "@/common/utility/features/location/formatLocationDetails.ts";
+import {formatLocationDetails} from "@/common/_feat/formatters/formatLocationDetails.ts";
 import {ISO6391LanguageLabels as ISO6391LanguageConstant} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
-import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
+import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
+import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {ShowingDetails} from "@/domains/showings/_schema";
 import {buildShowingDateString} from "@/domains/showings/_feat/formatters/buildShowingDateString.ts";
 

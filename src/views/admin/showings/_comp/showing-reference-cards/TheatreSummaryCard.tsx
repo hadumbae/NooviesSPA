@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui";
 import {Film, Search, Sofa, TvMinimal} from "lucide-react";
-import buildString from "@/common/utility/buildString.ts";
+import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";
 import {IconButton, SROnly, SubsectionSubtitle, SubsectionTitle} from "@/views/common/_comp";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";

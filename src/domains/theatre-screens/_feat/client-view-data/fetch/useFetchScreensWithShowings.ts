@@ -8,8 +8,8 @@ import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 import {ObjectId} from "@/common/_schemas";
 import {DateOnlyString} from "@/common/_schemas/dates/DateOnlyStringSchema.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 
 import {TheatreScreenSchedule, TheatreScreenScheduleSchema} from "@/domains/theatre-screens/_schema";

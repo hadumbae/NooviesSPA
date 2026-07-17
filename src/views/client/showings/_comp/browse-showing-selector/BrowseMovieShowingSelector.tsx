@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
 import {PopulatedShowing, ShowingDetails} from "@/domains/showings";
 import {ShowingInfoLanguages} from "@/views/client/showings/_comp/showing-info-details";

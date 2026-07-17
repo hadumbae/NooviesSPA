@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {ObjectId} from "@/common/_schemas";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {Card, CardContent} from "@/common/components/ui";

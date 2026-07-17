@@ -3,7 +3,7 @@
  */
 
 
-import {ParseError} from "@/common/errors/ParseError.ts";
+import {ParseError} from "@/common/_err/ParseError.ts";
 import {
     PopulatedTheatreScreen,
     TheatreScreen,

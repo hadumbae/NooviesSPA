@@ -3,7 +3,7 @@
  */
 
 import {RouteObject} from "react-router-dom";
-import {BaseLayout} from "@/common/layout/base-layout/BaseLayout.tsx";
+import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
 import {PersonInfoPage} from "@/views/client/persons/_pages/info-page/page.tsx";
 import {ComponentErrorHandler} from "@/common/components/errors/ComponentErrorHandler.tsx";
 import {BrowsePersonsPage} from "@/views/client/persons/_pages/browse-page/page.tsx";

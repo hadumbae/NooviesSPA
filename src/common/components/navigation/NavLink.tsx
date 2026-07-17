@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {useLocation} from "react-router-dom";
 import {LoggedLinkProps} from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";

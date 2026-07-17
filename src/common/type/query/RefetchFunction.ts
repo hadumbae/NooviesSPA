@@ -1,5 +1,5 @@
 import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 
 /**
  * A function type representing a refetch operation for a `React Query` query.

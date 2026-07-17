@@ -8,7 +8,7 @@ import {LucideIcon, Moon, Sun, SunMoon} from "lucide-react";
 import {ThemeVariant} from "@/common/_schemas/enums/ThemeVariantSchema.ts";
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {ThemeContext} from "@/common/_feat/theme/ctx/ThemeContext.ts";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 /**
  * Internal metadata for rendering theme toggle buttons.

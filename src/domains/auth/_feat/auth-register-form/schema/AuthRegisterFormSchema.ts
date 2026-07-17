@@ -3,7 +3,7 @@
  *
  */
 import {z} from "zod";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 import {
     UserEmailSchema,
     UserPasswordSchema,

@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {PageCenter} from "@/views/common/_comp/page";
 import {TriangleAlert} from "lucide-react";
 import PageError from "@/common/components/page/errors/PageError.tsx";

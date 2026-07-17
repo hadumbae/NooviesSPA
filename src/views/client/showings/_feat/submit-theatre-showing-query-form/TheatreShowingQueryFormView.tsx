@@ -5,10 +5,10 @@
 import {ReactElement} from "react";
 import {HookFormInput} from "@/views/common/_feat";
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-import {DisableFields} from "@/common/types";
+import {DisableFields} from "@/common/_types";
 import {ShowingsPageQueryStrings} from "@/domains/movies";
 
 /** Props for the TheatreShowingQueryFormView component. */

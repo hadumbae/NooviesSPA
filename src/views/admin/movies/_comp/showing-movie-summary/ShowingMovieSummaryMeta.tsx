@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {MovieDetails, MovieWithGenres} from "@/domains/movies/_schema/movie";
-import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
+import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {MovieMetaGenreBadges} from "@/views/admin/movies/_comp/movie-details";
 import {To} from "react-router-dom";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";

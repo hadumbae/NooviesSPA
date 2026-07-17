@@ -2,7 +2,7 @@
  * @fileoverview Type definition for theatre query option form initialization values.
  */
 
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 import {TheatreQueryOptions} from "@/domains/theatres";
 
 /**

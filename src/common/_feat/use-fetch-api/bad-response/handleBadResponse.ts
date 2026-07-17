@@ -4,7 +4,7 @@
 
 import {Logger} from "@/common/_feat/logger/Logger.ts";
 import {buildContext} from "@/common/_feat/logger-builders/buildLoggerContext.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {handle422Response} from "@/common/_feat/use-fetch-api/bad-response/handle422Response.ts";
 import {parseJSON} from "@/common/_feat/use-fetch-api/json/parseJSON.ts";
 

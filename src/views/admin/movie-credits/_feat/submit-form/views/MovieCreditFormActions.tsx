@@ -5,7 +5,7 @@
 import {Button} from "@/common/components/ui";
 import {useFormContext} from "react-hook-form";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {RefreshCw} from "lucide-react";
 
 /** Props for the MovieCreditFormActions component. */

@@ -7,7 +7,7 @@ import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWa
 import {useShowingDeleteMutation} from "@/domains/showings/_feat/crud-hooks";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {ObjectId} from "@/common/_schemas";
-import {UIOpenStateProps} from "@/common/types";
+import {UIOpenStateProps} from "@/common/_types";
 
 /** Props for the ShowingDeleteWarningDialog component. */
 type DialogProps = UIOpenStateProps & {

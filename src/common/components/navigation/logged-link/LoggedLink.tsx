@@ -26,7 +26,7 @@ import {
     filterNullishAttributes
 } from "@/common/_feat/filter-object-attributes/filterNullishAttributes.ts";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
-import {ParamError} from "@/common/errors/ParamError.ts";
+import {ParamError} from "@/common/_err/ParamError.ts";
 
 /**
  * Props for {@link LoggedLink}.

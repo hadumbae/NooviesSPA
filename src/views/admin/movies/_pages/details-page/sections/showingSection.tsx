@@ -7,7 +7,7 @@ import {ObjectId} from "@/common/_schemas";
 import {PageSectionHeaderLink} from "@/views/common/_comp/page";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card";
 import {useFetchShowings} from "@/domains/showings/_feat/crud-hooks";

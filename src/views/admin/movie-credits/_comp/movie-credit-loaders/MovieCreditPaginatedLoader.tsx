@@ -5,7 +5,7 @@ import {MovieCreditQueryOptions} from "@/domains/movie-credits/_schemas/query-op
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {ReactElement, ReactNode} from "react";
 import {useFetchPaginatedMovieCredits} from "@/domains/movie-credits/_feat/crud-hooks";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 import {MovieCreditDetails, MovieCreditDetailsSchema} from "@/domains/movie-credits";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 

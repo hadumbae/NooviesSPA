@@ -3,7 +3,7 @@
  */
 
 import {ElementType, ReactElement} from 'react';
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {LoggerFunction} from "@/common/_feat/logger/Logger.types.ts";
 

@@ -5,7 +5,7 @@
 import {toast} from "react-toastify";
 import {UseFormReturn} from "react-hook-form";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {AuthUserMutationKeys, registerUser} from "@/domains/auth/_feat";
 import {AuthRegisterForm, AuthRegisterFormValues} from "@/domains/auth/_feat/auth-register-form/schema";
@@ -34,7 +34,7 @@ export function useAuthRegisterSubmitMutation(
     };
 
     const onError = (error: unknown) => {
-        handleMutationFormError({form, error, displayMessage: onSubmitConfig.errorMessage});
+        handleFormSubmitError({form, error, displayMessage: onSubmitConfig.errorMessage});
         onSubmitConfig.onSubmitError?.(error);
     };
 

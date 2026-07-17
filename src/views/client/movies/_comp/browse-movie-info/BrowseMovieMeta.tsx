@@ -3,9 +3,9 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/lib/utils.ts";
-import buildString from "@/common/utility/buildString.ts";
-import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {buildString} from "@/common/_feat/formatters/buildString.ts";
+import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 
 import {buildMovieContext, MovieDetails} from "@/domains/movies";

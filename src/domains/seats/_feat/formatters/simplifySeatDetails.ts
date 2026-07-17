@@ -4,7 +4,7 @@
 
 
 import {Seat, SeatDetails, SeatSchema} from "@/domains/seats/_schema/model";
-import {ParseError} from "@/common/errors/ParseError.ts";
+import {ParseError} from "@/common/_err/ParseError.ts";
 
 /** Converts a fully populated seat details object into a simplified seat object. */
 export function simplifySeatDetails(seat: Seat | SeatDetails): Seat {

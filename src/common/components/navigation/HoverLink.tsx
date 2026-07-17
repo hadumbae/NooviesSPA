@@ -1,5 +1,5 @@
 import {FC, PropsWithChildren} from 'react';
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {Link} from "react-router-dom";
 
 interface Props {

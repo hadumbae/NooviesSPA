@@ -2,7 +2,7 @@
  * @fileoverview Mutation keys for person profile image removal operations.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /**
  * Standardized mutation keys for profile image deletion.

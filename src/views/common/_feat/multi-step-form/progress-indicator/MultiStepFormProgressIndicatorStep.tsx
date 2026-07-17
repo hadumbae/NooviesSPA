@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {FormStepMeta, useMultiStepFormContext} from "@/common/_feat";
 
 /** Props for the MultiStepFormProgressIndicatorStep component. */

@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {refineRequireImageFile} from "@/common/_feat/handle-image-upload";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 
 /** Schema for validating the uploaded movie poster file and ensuring it is not empty. */
 export const MoviePosterImageFormSchema = z

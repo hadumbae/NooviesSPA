@@ -2,9 +2,9 @@
  * @fileoverview Header component for the movie personnel administration page.
  */
 
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {buttonVariants} from "@/common/components/ui";
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 import {Movie} from "@/domains/movies";

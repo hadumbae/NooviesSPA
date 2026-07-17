@@ -7,13 +7,13 @@ import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {getFetchReviewsByMovie} from "@/domains/movie-reviews/_feat/fetch-by-movie/repository";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {FetchByMovieQueryKeys} from "@/domains/movie-reviews/_feat";
 import {buildQueryFn, generatePaginationSchema} from "@/common/_feat";
 import {PopulatedMovieReview, PopulatedMovieReviewSchema} from "@/domains/movie-reviews";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 
 /** Parameters required to fetch paginated reviews for a specific movie. */
 type FetchParams = PaginationValues & {

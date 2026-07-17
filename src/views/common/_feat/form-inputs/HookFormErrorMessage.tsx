@@ -3,7 +3,7 @@
  */
 
 import {forwardRef} from 'react';
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {FieldError} from "react-hook-form";
 
 /** Props for the HookFormErrorMessage component. */

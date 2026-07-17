@@ -3,11 +3,11 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
-import {DisableFields} from "@/common/types";
+import {DisableFields} from "@/common/_types";
 
 import {TheatreQueryOptionFormStarterValues} from "@/domains/theatres";
 import {

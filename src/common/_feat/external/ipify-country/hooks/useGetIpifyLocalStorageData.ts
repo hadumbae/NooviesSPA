@@ -3,9 +3,10 @@
  */
 
 import {useEffect, useState} from "react";
-import {IpifyPayloadData} from "@/common/schema/api/ipify/IpifyPayload.types.ts";
-import {getIpifyPayloadData} from "@/common/utility/getters/getIpifyPayloadData.ts";
-import {setIpifyPayloadData} from "@/common/utility/setters/setIpifyPayloadData.ts";
+import {getIpifyPayloadData} from "@/common/_feat/external/ipify-country/utils/getIpifyPayloadData.ts";
+import {setIpifyPayloadData} from "@/common/_feat/external/ipify-country/utils/setIpifyPayloadData.ts";
+
+import {IpifyPayloadData} from "@/common/_feat/external/ipify-country/schema/IpifyPayloadSchema";
 
 /** Synchronizes Ipify payload state with local storage persistence. */
 export function useGetIpifyLocalStorageData() {

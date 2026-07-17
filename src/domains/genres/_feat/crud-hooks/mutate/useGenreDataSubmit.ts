@@ -5,7 +5,7 @@
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {Genre, GenreSchema} from "@/domains/genres/_schema";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {create, update} from "@/domains/genres/_feat/crud";
@@ -60,7 +60,7 @@ export function useGenreDataSubmit(
 
     const onError = (error: unknown) => {
         if (resetOnError) form.reset();
-        if (form) handleMutationFormError({form, error, displayMessage: onSubmitConfig.errorMessage});
+        if (form) handleFormSubmitError({form, error, displayMessage: onSubmitConfig.errorMessage});
         onSubmitConfig.onSubmitError?.(error);
     };
 

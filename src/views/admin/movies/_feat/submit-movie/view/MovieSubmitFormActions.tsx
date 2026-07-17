@@ -7,7 +7,7 @@ import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {Button} from "@/common/components/ui/button.tsx";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
 import {RotateCw} from "lucide-react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 /** Props for the MovieSubmitFormActions component. */
 type ActionProps = {

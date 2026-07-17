@@ -7,7 +7,7 @@ import {Clapperboard, Theater, TvMinimal} from "lucide-react";
 import {
     StackedIconCardLink
 } from "@/common/components/navigation/logged-link/StackedIconCardLink.tsx";
-import buildString from "@/common/utility/buildString.ts";
+import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {ShowingDetails} from "@/domains/showings";
 import {SROnly} from "@/views/common/_comp";
 

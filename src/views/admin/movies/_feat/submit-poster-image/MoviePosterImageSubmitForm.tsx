@@ -6,7 +6,7 @@ import {ReactElement, ReactNode} from 'react';
 import {ObjectId} from "@/common/_schemas";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui";
 import {
@@ -51,7 +51,7 @@ export function MoviePosterImageSubmitForm(
                 messageType: "success",
             });
         } catch (error: unknown) {
-            handleMutationFormError({form, error, displayMessage: submitConfig.errorMessage});
+            handleFormSubmitError({form, error, displayMessage: submitConfig.errorMessage});
             submitConfig.onSubmitError?.(error);
         }
     };

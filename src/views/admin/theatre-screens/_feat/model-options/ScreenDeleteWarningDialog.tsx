@@ -7,9 +7,11 @@ import {ObjectId} from "@/common/_schemas";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useScreenDeleteMutation} from "@/domains/theatre-screens/_feat/crud-hooks";
-import {UIOpenStateProps} from "@/common/types";
+import {UIOpenStateProps} from "@/common/_types";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 
 /** Props for the ScreenDeleteWarningDialog component. */
 type DialogProps = MutationResponseConfig<void, { _id: ObjectId }> & UIOpenStateProps & {
@@ -40,7 +42,7 @@ export function ScreenDeleteWarningDialog(
                 messageType: "success"
             });
         } catch (error: unknown) {
-            handleMutationResponseError({error, displayMessage: submitConfig.errorMessage});
+            handleSubmitResponseError({error, displayMessage: submitConfig.errorMessage});
             submitConfig.onSubmitError?.(error);
         }
     };

@@ -4,7 +4,7 @@
 
 import {ReactElement, useState} from 'react';
 import {Sheet} from "@/common/components/ui/sheet/Sheet.tsx";
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
 import {ScrollAreaScrollbar} from "@radix-ui/react-scroll-area";

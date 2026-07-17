@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {GenreMultiSelect} from "@/views/admin/genres";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {PageSectionHeader} from "@/views/common/_comp/page";

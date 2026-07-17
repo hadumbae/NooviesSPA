@@ -6,8 +6,8 @@ import {ObjectId} from "@/common/_schemas";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
 import {getFetchFeaturedReviewsByMovie} from "@/domains/movie-reviews/_feat/fetch-by-movie/repository";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {
     FeaturedReviewsByMovie,
     FeaturedReviewsByMovieSchema,

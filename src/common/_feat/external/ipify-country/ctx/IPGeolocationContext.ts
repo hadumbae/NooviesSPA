@@ -3,8 +3,8 @@
  */
 
 import {createContext, Dispatch, SetStateAction} from "react";
-import {IpifyLocation, IpifyPayloadData} from "@/common/schema/api/ipify/IpifyPayload.types.ts";
 import {IpString} from "@/common/_schemas/strings/ip-string/IpSchema.ts";
+import {IpifyLocation, IpifyPayloadData} from "@/common/_feat/external/ipify-country/schema";
 
 /** Values and state setters provided by the IP geolocation context. */
 export type IPGeolocationContextValues = Partial<IpifyPayloadData> & {

@@ -6,8 +6,8 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {getFetchGenreWithMovies} from "@/domains/genres/_feat/client-view-data/repository/repository.ts";
 import {

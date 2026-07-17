@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Button, ButtonProps} from "@/common/components/ui";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ObjectId} from "@/common/_schemas";
 import {Trash} from "lucide-react";
 import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";

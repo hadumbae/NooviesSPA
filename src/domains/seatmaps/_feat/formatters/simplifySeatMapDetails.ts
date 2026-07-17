@@ -1,4 +1,4 @@
-import {ParseError} from "@/common/errors/ParseError.ts";
+import {ParseError} from "@/common/_err/ParseError.ts";
 import {SeatMap, SeatMapDetails, SeatMapSchema} from "@/domains/seatmaps/_schema";
 
 export function simplifySeatMapDetails(seatMap: SeatMapDetails): SeatMap {

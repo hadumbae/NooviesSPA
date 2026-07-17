@@ -5,7 +5,7 @@
 import {ReactElement, ReactNode} from 'react';
 import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
-import buildString from "@/common/utility/buildString.ts";
+import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {SeatLayoutTypeLabelMap} from "@/domains/seats/_schema/constants";
 import {Seat, SeatDetails} from "@/domains/seats/_schema/model";
 import {useDeleteSeatSubmitHandler} from "@/domains/seats";

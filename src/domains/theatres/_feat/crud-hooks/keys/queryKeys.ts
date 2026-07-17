@@ -3,7 +3,7 @@
  *
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /** Query keys for Theatre administrative operations. */
 export const TheatreCRUDQueryKeys = buildQueryKey(

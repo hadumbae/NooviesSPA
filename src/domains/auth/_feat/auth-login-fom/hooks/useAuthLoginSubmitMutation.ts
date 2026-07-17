@@ -7,7 +7,7 @@ import {toast} from "react-toastify";
 import {UseFormReturn} from "react-hook-form";
 import {useSetAuthUser} from "@/domains/auth/_feat/manage-auth-user-data";
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {
     AuthLoginFormData,
     AuthLoginFormValues
@@ -54,7 +54,7 @@ export function useAuthLoginSubmitMutation(
     };
 
     const onError = (error: unknown) => {
-        handleMutationFormError({form, error, displayMessage: onSubmitConfig.errorMessage});
+        handleFormSubmitError({form, error, displayMessage: onSubmitConfig.errorMessage});
         onSubmitConfig.onSubmitError?.(error);
     };
 

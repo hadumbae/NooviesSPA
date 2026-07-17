@@ -2,7 +2,7 @@
  * @fileoverview Defines the query key factory for RoleType CRUD operations.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /** Query key configuration for RoleType CRUD hooks. */
 export const RoleTypeCRUDQueryKeys = buildQueryKey(

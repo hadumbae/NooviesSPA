@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 import {IDStringSchema} from "@/common/_schemas";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 import {SeatMapStatusSchema} from "@/domains/seatmaps/_schema/fields";

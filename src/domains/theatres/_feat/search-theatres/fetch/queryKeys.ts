@@ -2,7 +2,7 @@
  * @fileoverview React Query key definitions for theatre search operations.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /**
  * Query key definitions for the theatre search feature.

@@ -2,15 +2,14 @@
  * @fileoverview Hook for managing and persisting user country data from the Ipify API.
  */
 
+import {useEffect} from "react";
+import {Logger} from "@/common/_feat/logger/Logger.ts";
+import {ParseError} from "@/common/_err/ParseError.ts";
+import {UseQueryResult} from "@tanstack/react-query";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
+import {IpifyLocalStorageData, IpifyPayloadSchema} from "@/common/_feat/external/ipify-country/schema";
 import {useFetchIPGeolocationData} from "@/common/_feat/external/ipify-country/hooks/useFetchIPGeolocationData.ts";
 import {useGetIpifyLocalStorageData} from "@/common/_feat/external/ipify-country/hooks/useGetIpifyLocalStorageData.ts";
-import {useEffect} from "react";
-import {IpifyPayloadSchema} from "@/common/schema/api/ipify/IpifyPayload.schema.ts";
-import {Logger} from "@/common/_feat/logger/Logger.ts";
-import {ParseError} from "@/common/errors/ParseError.ts";
-import {UseQueryResult} from "@tanstack/react-query";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {IpifyLocalStorageData} from "@/common/schema/api/ipify/IpifyPayload.types.ts";
 
 /** Result object containing the stored country data and the active query state. */
 type CountryReturns = {

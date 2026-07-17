@@ -7,7 +7,7 @@ import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {SeatFormSubmitList} from "@/views/admin/seats/_comp/returned-seat-list";
 import {PageSectionHeader} from "@/views/common/_comp/page";
-import {DisableFields} from "@/common/types";
+import {DisableFields} from "@/common/_types";
 import {ScrollArea, ScrollBar, TabsContent} from "@/common/components/ui";
 
 import {SeatDetails, SeatFormData, SeatFormValues, SeatPanelContextProvider} from "@/domains/seats";

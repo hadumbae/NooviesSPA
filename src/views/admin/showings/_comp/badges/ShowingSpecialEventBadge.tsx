@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Badge} from "@/common/components/ui/badge.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 /** Props for the ShowingSpecialEventBadge component. */
 type BadgeProps = {

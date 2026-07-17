@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     MovieQueryOptionFormSortFieldset
@@ -12,7 +12,7 @@ import {
     MovieQueryOptionFormFilterFieldset
 } from "@/views/admin/movies/_feat/submit-query-options/MovieQueryOptionFormFilterFieldset.tsx";
 import {MovieQueryOptionFormValues} from "@/domains/movies";
-import {DisableFields} from "@/common/types";
+import {DisableFields} from "@/common/_types";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 

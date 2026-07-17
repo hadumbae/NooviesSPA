@@ -4,10 +4,12 @@ import {ReactElement, ReactNode} from 'react';
 import {ObjectId} from "@/common/_schemas";
 import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {UIOpenStateProps} from "@/common/types";
+import {UIOpenStateProps} from "@/common/_types";
 import {useMovieDeleteMutation} from "@/domains/movies/_feat/crud-hooks";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 
 /** Props for the MovieDeleteWarningDialog component, supporting controlled UI states and deletion callbacks. */
 type WarningDialogProps = MutationResponseConfig<void, { _id: ObjectId }> & UIOpenStateProps & {
@@ -40,7 +42,7 @@ export function MovieDeleteWarningDialog(
                 messageType: "success",
             });
         } catch (error: unknown) {
-            handleMutationResponseError({error, displayMessage: submitConfig.errorMessage});
+            handleSubmitResponseError({error, displayMessage: submitConfig.errorMessage});
             submitConfig.onSubmitError?.(error);
         }
     }

@@ -12,7 +12,7 @@ import {Form} from "@/common/components/ui/form.tsx";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 import {Logger} from "@/common/_feat/logger/Logger.ts";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 
 type ContainerProps =
     MutationResponseConfig<Movie, MovieFormData>
@@ -53,7 +53,7 @@ export function MovieSubmitForm(
                 messageType: "success",
             });
         } catch (error: unknown) {
-            handleMutationFormError({form, error, displayMessage: submitConfig.errorMessage});
+            handleFormSubmitError({form, error, displayMessage: submitConfig.errorMessage});
             submitConfig.onSubmitError?.(error);
         }
     };

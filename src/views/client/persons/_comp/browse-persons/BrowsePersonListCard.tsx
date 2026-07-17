@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {Card, CardContent, CardHeader} from "@/common/components/ui";
 import {PersonSummaryInfo} from "@/domains/persons/_feat/client-view-data";
 import {Image} from "@/views/common/_comp";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 
 /** Props for the BrowsePersonListCard component. */

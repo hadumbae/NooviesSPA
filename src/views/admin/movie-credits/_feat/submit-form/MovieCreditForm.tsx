@@ -8,7 +8,7 @@ import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from 
 import {ReactElement, ReactNode, useId} from "react";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/common/components/ui/form";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 import {MovieCreditDetails} from "@/domains/movie-credits";
 
@@ -45,7 +45,7 @@ export function MovieCreditForm(
                 cb: () => mutationConfig.onSubmitSuccess?.(result),
             });
         } catch (error: unknown) {
-            handleMutationFormError({form, error, displayMessage: mutationConfig.errorMessage})
+            handleFormSubmitError({form, error, displayMessage: mutationConfig.errorMessage})
             mutationConfig.onSubmitError?.(error);
         }
     };

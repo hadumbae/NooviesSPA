@@ -4,13 +4,13 @@
 
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui";
-import buildString from "@/common/utility/buildString.ts";
-import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
+import {buildString} from "@/common/_feat/formatters/buildString.ts";
+import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {BadgeAlert, Circle, Cog, DollarSign, Search, Theater, TvMinimal,} from "lucide-react";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {IconButton} from "@/views/common/_comp";
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {ShowingDetails} from "@/domains/showings";
 
 /** Props for the ShowingSummaryCard component. */

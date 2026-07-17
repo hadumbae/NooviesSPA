@@ -5,7 +5,7 @@
 import {FieldValues, UseFormReturn} from "react-hook-form";
 import {AdminReservation} from "@/domains/reservations/_schema";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /** Configuration for the reservation update submission handler. */
@@ -35,7 +35,7 @@ export function useUpdateReservationSubmitHandler<TFormValues extends FieldValue
                 cb: () => submitConfig.onSubmitSuccess?.(result),
             });
         } catch (error: unknown) {
-            handleMutationFormError({form, error, displayMessage: submitConfig.errorMessage})
+            handleFormSubmitError({form, error, displayMessage: submitConfig.errorMessage})
             submitConfig.onSubmitError?.(error);
         }
     };

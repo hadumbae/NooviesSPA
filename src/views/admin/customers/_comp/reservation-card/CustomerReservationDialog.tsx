@@ -12,14 +12,14 @@ import {
     DialogTrigger
 } from "@/common/components/ui/dialog.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {
     ReservationStatusBadge
 } from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
 import {ReactElement, ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 
 /** Props for the CustomerReservationDialog component. */

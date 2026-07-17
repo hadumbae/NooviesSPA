@@ -2,7 +2,7 @@
  * @fileoverview Hook for logging and throwing errors when route parameter validation fails.
  */
 
-import {RouteError, RouteErrorConfig} from "@/common/errors/RouteError.ts"
+import {RouteError, RouteErrorConfig} from "@/common/_err/RouteError.ts"
 import {buildContext} from "@/common/_feat/logger-builders/buildLoggerContext.ts"
 import {Logger} from "@/common/_feat/logger/Logger.ts"
 import {useLocation} from "react-router-dom"

@@ -2,7 +2,7 @@
  * @fileoverview Build query keys for seat-related data fetching operations used by React Query.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /**
  * Unique identifiers for seat queries, including single entity lookups and various list retrieval modes.

@@ -8,7 +8,7 @@ import {
     useFetchByIdentifierRouteParams
 } from "@/common/_feat";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
-import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 
 import {TheatreShowingListViewData, useFetchTheatreShowingListViewData} from "@/domains/theatres";

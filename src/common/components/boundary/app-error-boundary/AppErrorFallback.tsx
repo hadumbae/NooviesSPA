@@ -5,10 +5,10 @@
 import {FallbackProps} from "react-error-boundary";
 import {AppErrorDisplay} from "@/common/components/boundary/app-error-boundary/display/AppErrorDisplay.tsx";
 import QueryErrorHandler from "@/common/components/boundary/query-error-fallback/QueryErrorHandler.tsx";
-import {RouteError} from "@/common/errors/RouteError.ts";
+import {RouteError} from "@/common/_err/RouteError.ts";
 import {RouteErrorDisplay} from "@/common/components/boundary/app-error-boundary/display/RouteErrorDisplay.tsx";
-import {NetworkError} from "@/common/errors/NetworkError.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {NetworkError} from "@/common/_err/NetworkError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {ReactElement} from "react";
 
 /** Props for the AppErrorFallback component. */

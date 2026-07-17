@@ -5,10 +5,10 @@
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservations/_schema";
-import {PaginatedItems} from "@/common/types";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {PaginatedItems} from "@/common/_types";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {getFetchUserReservations} from "@/domains/reservations/_feat/fetch-current-user-reservations/repository";

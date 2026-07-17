@@ -5,7 +5,7 @@
 import {ReactElement, useEffect} from 'react';
 import {useFormContext} from "react-hook-form";
 import {Separator} from "@/common/components/ui";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens/_feat/form-inputs";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {TheatreHookFormSelect} from "@/views/admin/theatres/_feat";

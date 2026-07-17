@@ -5,7 +5,7 @@
 import {ReactElement, ReactNode} from "react";
 import {ObjectId} from "@/common/_schemas";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {UIOpenStateProps} from "@/common/types";
+import {UIOpenStateProps} from "@/common/_types";
 import {MovieReview} from "@/domains/movie-reviews/_schema";
 import {MovieReviewSubmitForm, SubmitMovieReviewPopupView} from "@/views/client/movie-reviews/_feat/submit-form";
 

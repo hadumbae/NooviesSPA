@@ -2,9 +2,9 @@
  * @fileoverview Route configurations for the genre management administration area.
  */
 
-import AuthLoader from "@/common/routing/loaders/AuthLoader.ts";
+import {AuthLoader} from "@/common/_loaders";
 import {RouteObject} from "react-router-dom";
-import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
+import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
 import {GenreDetailsPage, GenreIndexPage} from "@/views/admin/genres";
 
 /** Route definitions for genre administration, including index and detail views. */

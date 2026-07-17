@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {Person} from "@/domains/persons";
 import {Card, CardContent, Separator} from "@/common/components/ui";
 import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";

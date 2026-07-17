@@ -3,7 +3,7 @@
  *
  */
 
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ReactElement, useState} from "react";
 import {ReservationType} from "@/domains/reservations/_schema";
 import {

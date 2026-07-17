@@ -6,7 +6,7 @@
 
 import {ReactElement, ReactNode} from "react";
 import {HeaderTag} from "@/common/type/HeaderTag.ts";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 /**
  * Properties for the PageSectionHeader component.

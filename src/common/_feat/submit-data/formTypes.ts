@@ -6,7 +6,7 @@
 import {FieldValues} from "react-hook-form";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data/mutationTypes.ts";
 import {ReactNode} from "react";
-import {DisableFields} from "@/common/types";
+import {DisableFields} from "@/common/_types";
 
 
 /** Configuration for initial form values and entity data. */

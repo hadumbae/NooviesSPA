@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ImageOff, LucideIcon} from "lucide-react";
 
 /** Props for the NoImagePlaceholder component. */

@@ -8,11 +8,11 @@
  * unexpected or unclassified errors.
  */
 
-import {NetworkError} from "@/common/errors/NetworkError.ts";
+import {NetworkError} from "@/common/_err/NetworkError.ts";
 import {
     NetworkErrorDisplay
 } from "@/common/components/boundary/query-error-fallback/display/NetworkErrorDisplay.tsx";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {
     HttpResponseErrorDisplay
 } from "@/common/components/boundary/query-error-fallback/display/HttpResponseErrorDisplay.tsx";

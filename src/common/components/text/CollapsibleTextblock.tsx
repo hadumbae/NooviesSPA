@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, useState} from 'react';
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ChevronDown, ChevronUp} from "lucide-react";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui";
 

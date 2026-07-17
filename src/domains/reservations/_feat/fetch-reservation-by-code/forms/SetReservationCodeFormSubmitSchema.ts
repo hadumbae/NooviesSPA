@@ -8,7 +8,7 @@ import {
     preprocessEmptyStringToUndefined
 } from "@/common/_feat/validation-preprocessors";
 import {ReservationUniqueCodeSchema} from "@/domains/reservations/_schema/model";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 
 /**
  * Zod validation schema for the reservation lookup form.

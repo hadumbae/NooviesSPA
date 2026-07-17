@@ -1,10 +1,10 @@
 /** @fileoverview Hook for fetching a single movie credit by its unique identifier. */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {ObjectId} from "@/common/_schemas";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import {QueryConfig} from "@/common/types";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
+import {QueryConfig} from "@/common/_types";
 import {MovieCreditCRUDQueryKeys} from "@/domains/movie-credits/_feat/crud-hooks/queryKeys.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {findByID} from "@/domains/movie-credits/_feat/crud/repository.ts";

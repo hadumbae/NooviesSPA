@@ -4,7 +4,7 @@
 
 import {ReactElement, useState} from "react";
 import {Button} from "@/common/components/ui";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {
     AdminReservationRefundForm
 } from "@/views/admin/reservations/_feat/reservation-actions/refund/AdminReservationRefundForm.tsx";

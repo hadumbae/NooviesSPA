@@ -2,7 +2,7 @@
  * @fileoverview Query keys for the administrative person detail view.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /**
  * Standardized query keys for administrative view data.

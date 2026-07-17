@@ -5,7 +5,9 @@
 import {useMutation, type UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import {type MutationResponseConfig} from "@/common/_feat/submit-data";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 import {patchRemoveGenreImage} from "@/domains/genres/_feat/manage-image/repository";
 import {ManageGenreImageMutationKeys} from "@/domains/genres/_feat/manage-image/mutations/mutationKeys.ts";
 import {type Genre, GenreSchema} from "@/domains/genres/_schema";
@@ -51,7 +53,7 @@ export function useRemoveGenreImage(
 
     const onError = (error: unknown) => {
         onSubmitConfig.errorMessage && toast.error(onSubmitConfig.errorMessage);
-        handleMutationResponseError({error});
+        handleSubmitResponseError({error});
         onSubmitConfig.onSubmitError?.(error);
     };
 

@@ -1,7 +1,7 @@
 /** @fileoverview Movie poster image component with integrated loading and error state management. */
 
 import {ReactElement, useState} from 'react';
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {HasNoMoviePosterPlaceholder} from "@/views/admin/movies/_comp/poster-image/HasNoMoviePosterPlaceholder.tsx";
 import {URLString} from "@/common/_schemas/strings/simple-strings/URLStringSchema.ts";
 

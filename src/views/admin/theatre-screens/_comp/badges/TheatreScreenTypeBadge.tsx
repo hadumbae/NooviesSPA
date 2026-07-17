@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {Badge} from "@/common/components/ui";
 import {ScreenType} from "@/domains/theatre-screens";
 

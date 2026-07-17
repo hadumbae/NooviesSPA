@@ -7,9 +7,11 @@ import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWa
 import {ObjectId} from "@/common/_schemas";
 import {useMoviePosterImageDeleteMutation} from "@/domains/movies/_feat/manage-images";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {UIOpenStateProps} from "@/common/types";
+import {UIOpenStateProps} from "@/common/_types";
 import {Movie} from "@/domains/movies/_schema/movie";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 
 /** Props for the MoviePosterImageDeleteDialog component. */
@@ -37,7 +39,7 @@ export function MoviePosterImageDeleteDialog(
                 messageType: "success"
             });
         } catch (error: unknown) {
-            handleMutationResponseError({error, displayMessage: submitConfig.errorMessage});
+            handleSubmitResponseError({error, displayMessage: submitConfig.errorMessage});
             submitConfig.onSubmitError?.(error);
         }
     }

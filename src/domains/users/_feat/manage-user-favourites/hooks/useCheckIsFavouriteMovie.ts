@@ -5,8 +5,8 @@
 import { ObjectId } from "@/common/_schemas";
 import { FetchQueryOptions } from "@/common/type/query/FetchQueryOptions.ts";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {IsFavouriteMovieMetadata, IsFavouriteMovieSchema} from "@/domains/users/_feat/manage-user-favourites/schema";
 import {getCheckIsFavouriteMovie} from "@/domains/users/_feat/manage-user-favourites/repository";

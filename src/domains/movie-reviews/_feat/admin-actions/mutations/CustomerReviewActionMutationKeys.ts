@@ -2,7 +2,7 @@
  * @fileoverview Query key definitions for administrative movie review mutations.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /**
  * Standardized TanStack Query keys for review moderation actions.

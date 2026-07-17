@@ -3,7 +3,7 @@
  */
 
 import {z, ZodTypeAny} from "zod";
-import {ParseError} from "@/common/errors/ParseError.ts";
+import {ParseError} from "@/common/_err/ParseError.ts";
 import {DataValidationResults, ValidateDataParams} from "@/common/_feat/validate-data/validateData.types.ts";
 
 /** Validates input data against a provided Zod schema and returns a structured result or a ParseError. */

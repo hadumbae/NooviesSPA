@@ -3,7 +3,7 @@
  */
 
 import {MovieCredit, MovieCreditDetails, MovieCreditSchema} from "@/domains/movie-credits/_schemas";
-import {ParseError} from "@/common/errors/ParseError.ts";
+import {ParseError} from "@/common/_err/ParseError.ts";
 
 /** Converts nested movie credit details into a flat MovieCredit object and validates the result. */
 export function simplifyMovieCreditDetails(

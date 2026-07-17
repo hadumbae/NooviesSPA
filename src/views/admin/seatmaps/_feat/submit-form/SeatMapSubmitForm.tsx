@@ -7,7 +7,7 @@ import {Form} from "@/common/components/ui";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 
 import {
@@ -51,7 +51,7 @@ export function SeatMapSubmitForm(
                 messageType: "success",
             });
         } catch (error: unknown) {
-            handleMutationFormError({form, error, displayMessage: submitConfig.errorMessage})
+            handleFormSubmitError({form, error, displayMessage: submitConfig.errorMessage})
             submitConfig.onSubmitError?.(error);
         }
     }

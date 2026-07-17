@@ -2,11 +2,11 @@
  * @fileoverview Component for displaying and logging network-related errors within a query error boundary.
  */
 
-import {NetworkError} from "@/common/errors/NetworkError.ts";
+import {NetworkError} from "@/common/_err/NetworkError.ts";
 import {Logger} from "@/common/_feat/logger/Logger.ts";
 import {buildContext} from "@/common/_feat/logger-builders/buildLoggerContext.ts";
 import {Network} from "lucide-react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ErrorHandlerDisplayProps} from "@/common/type/ErrorHandlerProps.ts";
 import { ReactElement } from "react";
 

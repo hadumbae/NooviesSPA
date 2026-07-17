@@ -3,7 +3,7 @@
  */
 
 import {TheatreScreenFormData} from "@/domains/theatre-screens/_feat/submit-data/schema/TheatreScreenFormSchema.ts";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 
 /**
  * TypeScript type representing the initial or "in-progress" values of a Theatre Screen form.

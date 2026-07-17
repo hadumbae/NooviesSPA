@@ -2,7 +2,7 @@
  * @fileoverview Build query keys for seat-related mutation operations used by React Query.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /**
  * Unique identifiers for seat mutations, including submission and single entity deletion.

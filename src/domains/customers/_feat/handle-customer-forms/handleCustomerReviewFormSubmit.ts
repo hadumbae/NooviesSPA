@@ -4,7 +4,7 @@
 
 import {FieldValues, UseFormReturn} from "react-hook-form";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {MovieReview} from "@/domains/movie-reviews/_schema";
 
@@ -35,7 +35,7 @@ export async function handleCustomerReviewFormSubmit<TValues extends FieldValues
             messageType: "success",
         });
     } catch (error: unknown) {
-        handleMutationFormError({error, form, displayMessage: onSubmitConfig.errorMessage});
+        handleFormSubmitError({error, form, displayMessage: onSubmitConfig.errorMessage});
         onSubmitConfig.onSubmitError?.(error);
     }
 }

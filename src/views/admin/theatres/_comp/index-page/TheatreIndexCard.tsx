@@ -5,7 +5,9 @@
 import {ReactElement} from 'react';
 import {Clapperboard, Sofa, TvMinimal} from "lucide-react";
 import {Card, CardContent} from "@/common/components/ui";
-import generateLocationAddressString from "@/common/utility/features/location/generateLocationAddressString.ts";
+import {
+    generateLocationAddressString
+} from "@/common/_feat/formatters/generateLocationAddressString.ts";
 import TooltipStatItem from "@/common/components/stat-details/TooltipStatItem.tsx";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 

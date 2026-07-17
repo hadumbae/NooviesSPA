@@ -7,7 +7,7 @@ import {useFormContext} from "react-hook-form";
 import {HookFormInput} from "@/views/common/_feat";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Button} from "@/common/components/ui/button.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
 /** Props for the SetReservationCodeFormCard component. */

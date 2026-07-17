@@ -20,7 +20,7 @@
  */
 
 import { forwardRef } from "react";
-import { cn } from "@/common/lib/utils.ts";
+import { cn } from "@/common/_feat/handle-ui/cn.ts";
 import { buttonVariants } from "@/common/components/ui/button.tsx";
 import ButtonVariant from "@/common/type/ui/shad-cn-button/ButtonVariant.ts";
 import ButtonSize from "@/common/type/ui/shad-cn-button/ButtonSize.ts";

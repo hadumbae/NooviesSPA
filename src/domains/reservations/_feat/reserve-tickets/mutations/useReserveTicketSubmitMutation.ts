@@ -5,7 +5,7 @@
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {UseFormReturn} from "react-hook-form";
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {reserveTicket} from "@/domains/reservations/_feat/reserve-tickets/repository";
@@ -48,7 +48,7 @@ export function useReserveTicketSubmitMutation(
 
     const onError = (error: unknown) => {
         onSubmitConfig.errorMessage && toast.error(onSubmitConfig.errorMessage);
-        handleMutationFormError({form, error});
+        handleFormSubmitError({form, error});
         onSubmitConfig.onSubmitError?.(error);
     };
 

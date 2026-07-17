@@ -11,7 +11,7 @@ import {
 } from "@/domains/movie-reviews/_feat/my-reviews/repository/repository.ts";
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {toast} from "react-toastify";
-import handleMutationFormError from "@/common/utility/handlers/handleMutationFormError.ts";
+import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {MovieReview, MovieReviewSchema} from "@/domains/movie-reviews/_schema/model";
 import {
     MovieReviewForm,
@@ -67,7 +67,7 @@ export function useSubmitUserMovieReviewMutation(
 
     const onError = (error: unknown) => {
         errorMessage && toast.error(errorMessage);
-        handleMutationFormError({form, error});
+        handleFormSubmitError({form, error});
         onSubmitError?.(error);
     }
 

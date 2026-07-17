@@ -4,7 +4,7 @@
 import {z} from "zod";
 import {LocationFormSchema} from "@/common/_models/location-form/LocationFormSchema.ts";
 import {IDStringSchema} from "@/common/_schemas";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 import {TheatreNameSchema, TheatreSeatCapacitySchema} from "@/domains/theatres";
 
 /** Schema for validating and cleaning theatre form submissions. */

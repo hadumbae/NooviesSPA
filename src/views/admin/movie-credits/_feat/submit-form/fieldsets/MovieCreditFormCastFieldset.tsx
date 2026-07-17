@@ -5,8 +5,8 @@ import {HookFormInput} from "@/views/common/_feat";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {renderFields} from "@/common/_feat/submit-data";
-import {cn} from "@/common/lib/utils.ts";
-import {DisableFields} from "@/common/types";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {DisableFields} from "@/common/_types";
 import {MovieCreditFormValues} from "@/domains/movie-credits";
 
 /** Props for the MovieCreditFormCastFieldset component. */

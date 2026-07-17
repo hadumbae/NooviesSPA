@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {

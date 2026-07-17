@@ -7,7 +7,7 @@ import {PageLoader} from "@/views/common/_comp/page";
 import {
     useFetchByIdentifierRouteParams
 } from "@/common/_feat";
-import {SlugRouteParamSchema} from "@/common/schema/route-params/SlugRouteParamSchema.ts";
+import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
 import {useFetchTheatreBySlug} from "@/domains/theatres/_feat/crud-hooks";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";

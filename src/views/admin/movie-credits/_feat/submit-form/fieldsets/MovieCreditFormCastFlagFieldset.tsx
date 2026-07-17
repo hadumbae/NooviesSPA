@@ -4,8 +4,8 @@ import {ReactElement} from "react";
 import {HookFormCheckbox} from "@/views/common/_feat";
 import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
 import {renderFields} from "@/common/_feat/submit-data";
-import {cn} from "@/common/lib/utils.ts";
-import {DisableFields} from "@/common/types";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {DisableFields} from "@/common/_types";
 import {MovieCreditFormValues} from "@/domains/movie-credits";
 
 /** Props for the MovieCreditFormCastFlagFieldset component. */

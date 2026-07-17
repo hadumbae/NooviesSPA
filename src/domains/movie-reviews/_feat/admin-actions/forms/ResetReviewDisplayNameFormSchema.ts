@@ -6,7 +6,7 @@ import {ModerationMessageFormSchema} from "@/common/_feat/moderation/forms";
 import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
 import {NonEmptyStringSchema} from "@/common/_schemas";
 import {z} from "zod";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 
 /**
  * Zod schema for validating the administrative form data when changing a review's display name.

@@ -15,7 +15,7 @@ import {
 import {
     usePaginationLocationState
 } from "@/common/_feat/navigation/usePaginationLocationState.ts";
-import convertToQueryParams from "@/common/utility/query/convertToQueryParams.ts";
+import {parseStateToSearchParams} from "@/common/_feat/fetch-search-params/parseStateToSearchParams.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 
 /** Props for the {@link GenreDetailsPageBreadcrumbs} component. */
@@ -31,7 +31,7 @@ export function GenreDetailsPageBreadcrumbs(
     {genreName}: BreadcrumbProps
 ): ReactElement {
     const {data: state} = usePaginationLocationState();
-    const query = convertToQueryParams(state);
+    const query = parseStateToSearchParams(state);
 
     return (
         <Breadcrumb>

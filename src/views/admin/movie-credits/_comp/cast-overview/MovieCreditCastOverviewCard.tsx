@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import getInitials from "@/common/utility/formatters/getInitials.ts";
+import {getInitials} from "@/common/_feat/formatters/getInitials.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";

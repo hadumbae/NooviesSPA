@@ -3,14 +3,14 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 
 import {find} from "@/domains/theatre-screens/_feat/crud";
 import {TheatreScreenQueryOptions} from "@/domains/theatre-screens/_schema";
 import {TheatreScreenCRUDQueryKeys} from "@/domains/theatre-screens/_feat/crud-hooks/keys";
-import {ListQueryConfig} from "@/common/types";
+import {ListQueryConfig} from "@/common/_types";
 
 /**
  * Fetches and validates a list of theatre screens using standardized query filtering.

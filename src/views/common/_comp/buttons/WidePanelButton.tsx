@@ -5,7 +5,7 @@
 import {Button} from "@/common/components/ui/button.tsx";
 import ButtonVariant from "@/common/type/ui/shad-cn-button/ButtonVariant.ts";
 import {LucideIcon} from "lucide-react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {Dispatch, ReactElement, SetStateAction} from "react";
 
 /** Props for the WidePanelButton component. */

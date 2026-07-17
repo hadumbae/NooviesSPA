@@ -1,4 +1,4 @@
-import AdminLayout from "@/common/layout/admin-layout/AdminLayout.tsx";
+import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
 import AdminDashboard from "@/domains/dashboard/pages/AdminDashboard.tsx";
 import HomePage from "@/domains/client/pages/HomePage.tsx";
 

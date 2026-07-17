@@ -2,7 +2,7 @@
  * @fileoverview Mutation key factory for Person create, update, and delete operations.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /**
  * Centrally managed mutation keys for Person CRUD operations.

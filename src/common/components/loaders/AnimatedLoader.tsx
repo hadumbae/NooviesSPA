@@ -4,7 +4,7 @@
  */
 
 import {Loader, LucideIcon} from "lucide-react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 /** Props for AnimatedLoader. */
 type LoaderType = {

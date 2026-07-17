@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {SeatSubmitFormActions, SeatSubmitFormView} from "@/views/admin/seats/_feat/submit-data";
-import {DisableFields} from "@/common/types";
+import {DisableFields} from "@/common/_types";
 import {SeatFormValues} from "@/domains/seats";
 
 /** Renders the seat context panel form view containing the "submit" and "reset" buttons. */

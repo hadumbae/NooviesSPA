@@ -11,7 +11,7 @@ import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 import RequestReturns from "@/common/type/request/RequestReturns.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {ReviewsByMovieBaseURL} from "@/domains/movie-reviews/_feat/fetch-by-movie/repository/baseURL.ts";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 import {FeaturedReviewsByMovie, MovieReviewSummaryData, PopulatedMovieReview} from "@/domains/movie-reviews";
 
 /**

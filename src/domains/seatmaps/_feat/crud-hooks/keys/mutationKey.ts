@@ -2,7 +2,7 @@
  * @fileoverview Mutation keys for seat map CRUD operations.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /** Mutation key factory for creating, updating, and deleting seat maps. */
 export const SeatMapCRUDMutationKeys = buildQueryKey(

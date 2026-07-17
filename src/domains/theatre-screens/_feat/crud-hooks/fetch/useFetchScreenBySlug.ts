@@ -3,13 +3,13 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 
 import {findBySlug} from "@/domains/theatre-screens/_feat/crud";
 import {TheatreScreenCRUDQueryKeys} from "@/domains/theatre-screens/_feat/crud-hooks/keys";
-import {SlugQueryConfig} from "@/common/types";
+import {SlugQueryConfig} from "@/common/_types";
 
 /**
  * Fetches and validates a single theatre screen record using its slug.

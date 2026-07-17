@@ -4,7 +4,7 @@
  */
 
 import {ReactElement, ReactNode, useState} from 'react';
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {PresetOpenState} from "@/common/type/ui/OpenStateProps.ts";
 import {ListFilter} from "lucide-react";
 import {

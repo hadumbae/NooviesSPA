@@ -10,7 +10,9 @@ import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from '@/common/components/ui/form';
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 
 /** Props for the TheatreSubmitForm component. */
 type SubmitFormProps = MutationResponseConfig<Theatre, TheatreFormData> & MutationFormResetConfig & {
@@ -44,7 +46,7 @@ export function TheatreSubmitForm(props: SubmitFormProps): ReactElement {
                 messageType: "success",
             });
         } catch (error: unknown) {
-            handleMutationResponseError({error, displayMessage: submitConfig.errorMessage});
+            handleSubmitResponseError({error, displayMessage: submitConfig.errorMessage});
             submitConfig.onSubmitError?.(error);
         }
     }

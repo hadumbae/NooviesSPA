@@ -1,7 +1,7 @@
 /**
  * @fileoverview Mutation keys for genre image management operations.
  */
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /** Mutation keys for uploading and removing genre images. */
 export const ManageGenreImageMutationKeys = buildQueryKey(

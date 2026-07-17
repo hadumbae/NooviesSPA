@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {DisableFields} from "@/common/types";
+import {DisableFields} from "@/common/_types";
 import {ShowingFormValues} from "@/domains/showings/_schema/form/form-values/ShowingFormValues.ts";
 import {FormStep, FormStepMeta} from "@/common/_feat/multi-step-form/types.ts";
 import {ChevronRight, Clock, Languages, ListCollapse} from "lucide-react";

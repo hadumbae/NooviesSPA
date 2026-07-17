@@ -5,7 +5,7 @@
 import {ReactElement, ReactNode} from "react";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {MyMovieReview, MyMovieReviewSchema} from "@/domains/movie-reviews/_schema";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import {useFetchMyMovieReviews} from "@/domains/movie-reviews/_feat";
 

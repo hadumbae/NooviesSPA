@@ -4,8 +4,8 @@
 
 import {MovieWithRating} from "@/domains/movies/_schema/movie/MovieWithRatingSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {cn} from "@/common/lib/utils.ts";
-import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {
     ISO6391LanguageLabels as ISO6391LanguageConstant
 } from "@/common/_const/languages/ISO6391LanguageLabels.ts";

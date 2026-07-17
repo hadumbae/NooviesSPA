@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {UserPasswordSchema} from "@/domains/auth/_feat";
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 
 /** Zod schema for validating password update and confirmation fields. */
 export const UserPasswordUpdateFormSchema = z.object({

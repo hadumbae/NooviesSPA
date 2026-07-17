@@ -5,7 +5,7 @@
 import {ReactElement, ReactNode} from 'react';
 import {useFormContext} from "react-hook-form";
 import {GenreFormData} from "@/domains/genres";
-import {DisableFields, UIOpenStateProps} from "@/common/types";
+import {DisableFields, UIOpenStateProps} from "@/common/_types";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {useLockForFormUI} from "@/common/_feat/handle-form/useLockForFormUI.ts";
 import {HookFormInput, HookFormTextArea} from "@/views/common/_feat";

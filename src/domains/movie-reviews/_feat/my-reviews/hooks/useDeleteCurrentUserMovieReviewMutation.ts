@@ -7,7 +7,9 @@ import {ObjectId} from "@/common/_schemas";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {deleteRemoveMovieReviewForCurrentUser} from "@/domains/movie-reviews/_feat/my-reviews/repository/repository.ts";
 import {toast} from "react-toastify";
-import handleMutationResponseError from "@/common/utility/handlers/handleMutationResponseError.ts";
+import {
+    handleSubmitResponseError
+} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 import {FetchByMovieQueryKeys, MovieReviewCRUDQueryKeys, MyReviewsMutationKeys} from "@/domains/movie-reviews/_feat";
 
 /** Parameters for the movie review deletion mutation. */
@@ -36,7 +38,7 @@ export function useDeleteCurrentUserMovieReviewMutation(
 
     const onError = (error: unknown) => {
         errorMessage && toast.error(errorMessage);
-        handleMutationResponseError({error});
+        handleSubmitResponseError({error});
         onDeleteError?.(error);
     }
 

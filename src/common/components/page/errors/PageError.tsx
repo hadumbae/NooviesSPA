@@ -1,13 +1,13 @@
 import {FC} from 'react';
-import {ParseError} from "@/common/errors/ParseError.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {ParseError} from "@/common/_err/ParseError.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {
     useHttpResponseErrorHandler
 } from "@/common/_feat/error-handling/useHttpResponseErrorHandler.ts";
 import {PageCenter} from "@/views/common/_comp/page";
 import {Link, To} from "react-router-dom";
 import {buttonVariants} from "@/common/components/ui/button.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 interface Props {
     header?: string;

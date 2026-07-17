@@ -8,7 +8,7 @@ import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {useTitle} from "@/common/_feat";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 
 import {BrowseTheatreParamSchema, TheatreWithRecentShowings, useFetchTheatresByLocation} from "@/domains/theatres";
 import {BrowseTheatreListPageContent} from "@/views/client/theatres/_pages/browse-theatre-page/content.tsx";

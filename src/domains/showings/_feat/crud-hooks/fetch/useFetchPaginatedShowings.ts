@@ -2,10 +2,10 @@
  * @fileoverview Hook for fetching and validating paginated showing data.
  */
 
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {PaginatedQueryConfig} from "@/common/types";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
+import {PaginatedQueryConfig} from "@/common/_types";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {paginated} from "@/domains/showings/_feat/crud";
 import {ShowingCRUDQueryKeys} from "@/domains/showings/_feat/crud-hooks/keys";

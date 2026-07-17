@@ -5,9 +5,9 @@
 import {ErrorHandlerDisplayProps} from "@/common/type/ErrorHandlerProps.ts";
 import {Logger} from "@/common/_feat/logger/Logger.ts";
 import {buildContext} from "@/common/_feat/logger-builders/buildLoggerContext.ts";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {TriangleAlert} from "lucide-react";
-import {RouteError} from "@/common/errors/RouteError.ts";
+import {RouteError} from "@/common/_err/RouteError.ts";
 
 /** Renders a visual representation of a RouteError with a header and description. */
 export const RouteErrorDisplay = ({error, className}: ErrorHandlerDisplayProps<RouteError>) => {

@@ -4,7 +4,7 @@
 
 import {Button, ButtonProps} from "@/common/components/ui/button.tsx";
 import {forwardRef} from "react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {LucideIcon} from "lucide-react";
 
 export type IconButtonProps = ButtonProps & {

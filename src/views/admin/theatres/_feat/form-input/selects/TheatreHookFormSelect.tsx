@@ -8,9 +8,9 @@ import {Loader} from "lucide-react";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
-import {FormSelectOnChangeHandler} from "@/common/types";
+import {FormSelectOnChangeHandler} from "@/common/_types";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
-import {FormSelectValueHandler} from "@/common/types/form/value";
+import {FormSelectValueHandler} from "@/common/_types/form/value";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 
 import {useFetchTheatres, Theatre, TheatreSchema, TheatreQueryOptions} from "@/domains/theatres";

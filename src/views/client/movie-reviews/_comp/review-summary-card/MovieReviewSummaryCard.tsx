@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {MovieReviewRatingStars, MovieReviewText} from "@/views/client/movie-reviews/_comp/display";
 import {MovieReviewDetails} from "@/domains/movie-reviews";
 import {SubsectionTitle} from "@/views/common/_comp";

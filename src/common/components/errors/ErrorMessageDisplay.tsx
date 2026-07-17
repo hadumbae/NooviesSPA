@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import {TriangleAlert} from "lucide-react";
-import {cn} from "@/common/lib/utils.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
-import {ParseError} from "@/common/errors/ParseError.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
+import {ParseError} from "@/common/_err/ParseError.ts";
 
 /**
  * Props for the {@link ErrorMessageDisplay} component.

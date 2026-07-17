@@ -2,7 +2,7 @@
  * @fileoverview Specialized dropdown trigger button for administrative navigation menus.
  */
 
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {forwardRef} from "react";
 import {ChevronDown} from "lucide-react";
 import {Button, ButtonProps} from "@/common/components/ui";

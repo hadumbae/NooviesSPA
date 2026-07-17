@@ -8,7 +8,7 @@ import {
 } from "@/domains/movie-credits/_feat/navigation/generateMovieCreditLinkConfigs.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import LinkGroup from "@/common/components/LinkGroup.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ReactElement, useMemo} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
 

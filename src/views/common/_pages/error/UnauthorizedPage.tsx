@@ -1,0 +1,31 @@
+/**
+ * @fileoverview Error page displayed when a user attempts to access a protected route without authentication.
+ */
+
+import {ReactElement} from 'react';
+import {PageCenter} from "@/views/common/_comp/page";
+import HoverLink from "@/common/components/navigation/HoverLink.tsx";
+
+/** A full-screen error view indicating a 403 Unauthorized status with a link to the login page. */
+export function UnauthorizedPage(): ReactElement {
+    return (
+        <PageCenter className="space-y-5">
+            <h1 className="font-dotGothic16 text-[50px] lg:text-[100px]">
+                403
+            </h1>
+
+            <div className="flex flex-col items-center space-y-2">
+                <h2 className="text-neutral-500">
+                    You must be logged in to access this route.
+                </h2>
+
+                <HoverLink
+                    to="/auth/login"
+                    className="uppercase italic"
+                >
+                    Login
+                </HoverLink>
+            </div>
+        </PageCenter>
+    );
+}

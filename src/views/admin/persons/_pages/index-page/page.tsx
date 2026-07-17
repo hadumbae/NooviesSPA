@@ -14,7 +14,7 @@ import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx"
 import {useFetchPaginatedPersons} from "@/domains/persons/_feat/crud-hooks";
 import {PersonIndexPageContent} from "@/views/admin/persons/_pages/index-page/content.tsx";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {PaginatedItems} from "@/common/types";
+import {PaginatedItems} from "@/common/_types";
 import {PersonQueryOptionsSchema} from "@/domains/persons/_schema/query-options/PersonQueryOptionsSchema";
 import {Person, PersonSchema} from "@/domains/persons";
 

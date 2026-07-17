@@ -3,8 +3,8 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/lib/utils.ts";
-import {PaginatedItems} from "@/common/types";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {PaginatedItems} from "@/common/_types";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";

@@ -10,7 +10,7 @@ import {FavouriteMovieHeartButton} from "@/views/client/movies/_comp";
 
 import {ObjectId} from "@/common/_schemas";
 import {IsFavouriteMovieMetadata, useCheckIsFavouriteMovie, useToggleUserFavouriteMovie} from "@/domains/users";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 /** Props for the MovieOverviewFavouriteToggle component. */
 type SelectorProps = {

@@ -4,7 +4,7 @@
 
 import {ReactElement, ReactNode} from "react";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {buttonVariants} from "@/common/components/ui";
 import {useLocation} from "react-router-dom";
 

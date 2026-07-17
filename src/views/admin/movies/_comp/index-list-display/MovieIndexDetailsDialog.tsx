@@ -13,7 +13,7 @@ import {
 import {TextQuote} from "@/common/components/text/TextQuote.tsx";
 import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
 import {Search} from "lucide-react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {formatMovieData, MovieDetails} from "@/domains/movies";

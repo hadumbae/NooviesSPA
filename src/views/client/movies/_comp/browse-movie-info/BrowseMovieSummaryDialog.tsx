@@ -13,7 +13,7 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/common/components/ui";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
 import {BrowseMoviePosterLink} from "@/views/admin/movies/_comp/poster-image";
 import {generateArraySchema} from "@/common/_feat/validation-builders";

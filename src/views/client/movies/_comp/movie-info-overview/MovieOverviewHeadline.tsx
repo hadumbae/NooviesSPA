@@ -2,8 +2,8 @@
  * @fileoverview Displays the primary title, release year, and runtime for a movie.
  */
 
-import formatMovieRuntime from "@/common/utility/date-and-time/formatMovieRuntime.ts";
-import buildString from "@/common/utility/buildString.ts"
+import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
+import {buildString} from "@/common/_feat/formatters/buildString.ts"
 import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {ReactElement} from "react";
 

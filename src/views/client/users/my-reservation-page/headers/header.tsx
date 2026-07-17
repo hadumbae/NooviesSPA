@@ -7,7 +7,7 @@ import {Redo} from "lucide-react";
 import {CloudinaryImage} from "@/common/_schemas/cloudinary-image/CloudinaryImageSchema.ts";
 import {IconButton} from "@/views/common/_comp";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
-import buildString from "@/common/utility/buildString.ts";
+import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp";
 import {HeaderDescription, HeaderTitle, SROnly} from "@/views/common/_comp";
 

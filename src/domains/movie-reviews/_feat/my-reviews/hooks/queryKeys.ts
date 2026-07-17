@@ -2,7 +2,7 @@
  * @fileoverview Defines query keys for managing user-specific movie review data fetching and caching.
  */
 
-import {buildQueryKey} from "@/common/utility/buildQueryKeys.ts";
+import {buildQueryKey} from "@/common/_feat";
 
 /** Query key factory for the current user's movie reviews and lists. */
 export const MyReviewsQueryKeys = buildQueryKey(

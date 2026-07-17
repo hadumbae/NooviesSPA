@@ -2,7 +2,7 @@
  * @fileoverview Styled span component for displaying a placeholder "None" text.
  */
 
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ComponentPropsWithoutRef, ReactElement} from "react";
 
 /** A styled span component that displays the text "None" for empty or null values. */

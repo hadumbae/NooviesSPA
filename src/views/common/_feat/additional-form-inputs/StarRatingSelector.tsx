@@ -4,7 +4,7 @@
 
 import {ReactElement, useState} from "react";
 import {ControllerProps, FieldValues} from "react-hook-form";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {Star} from "lucide-react";
 import {HookFormInputProps} from "@/common/type/input/HookFormInputProps.ts";
 import {

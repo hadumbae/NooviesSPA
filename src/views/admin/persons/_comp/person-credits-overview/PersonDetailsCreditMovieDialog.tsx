@@ -7,7 +7,7 @@ import {buttonVariants, Dialog, DialogContent, DialogTrigger} from "@/common/com
 import {TextQuote} from "@/common/components/text/TextQuote.tsx";
 import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
 import {Search} from "lucide-react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {Movie, MovieDetails} from "@/domains/movies/_schema/movie";

@@ -3,10 +3,10 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import useQueryOptionDefaults from "@/common/utility/query/useQueryOptionDefaults.ts";
-import HttpResponseError from "@/common/errors/HttpResponseError.ts";
+import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
+import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
-import {IDQueryConfig} from "@/common/types";
+import {IDQueryConfig} from "@/common/_types";
 
 import {findByID} from "@/domains/theatres/_feat/crud";
 import {TheatreCRUDQueryKeys} from "@/domains/theatres/_feat/crud-hooks/keys";

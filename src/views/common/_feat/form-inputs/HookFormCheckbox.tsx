@@ -2,7 +2,7 @@
  * @fileoverview A checkbox input component integrated with react-hook-form.
  */
 
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {ControllerProps, FieldValues, useFormContext} from "react-hook-form";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 import {ReactElement} from "react";

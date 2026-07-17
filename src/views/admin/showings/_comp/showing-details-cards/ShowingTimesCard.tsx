@@ -8,8 +8,8 @@ import {Showing, ShowingDetails} from "@/domains/showings/_schema/showing";
 import {IANATimezone} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
 import {buildShowingDateString} from "@/domains/showings/_feat/formatters";
-import {cn} from "@/common/lib/utils.ts";
-import {CardClassNames} from "@/common/types/card";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {CardClassNames} from "@/common/_types/card";
 
 /** Props for the ShowingTimesCard component. */
 type CardProps = {

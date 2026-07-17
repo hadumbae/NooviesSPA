@@ -2,7 +2,7 @@
  * @fileoverview Utility for simplifying complex MovieDetails objects into storage-ready Movie objects.
  */
 
-import { ParseError } from "@/common/errors/ParseError.ts";
+import { ParseError } from "@/common/_err/ParseError.ts";
 import {Movie, MovieSchema} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 

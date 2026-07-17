@@ -2,7 +2,7 @@
  * @fileoverview Formatter for converting showing seat types into human-readable strings.
  */
 
-import convertToTitleCase from "@/common/utility/formatters/convertToTitleCase.ts";
+import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 
 /** Converts a seat reservation boolean into a title-cased display string. */
 export function parseShowingType(canReserveSeats?: boolean) {

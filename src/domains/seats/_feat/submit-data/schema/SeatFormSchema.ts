@@ -7,7 +7,7 @@ import {SeatLabelSchema, SeatLayoutTypeSchema, SeatRowSchema, SeatTypeSchema} fr
 import {IDStringSchema} from "@/common/_schemas";
 import {CoercedBooleanValueSchema, NonNegativeNumberSchema, PositiveIntegerSchema,} from "@/common/_schemas";
 import {preprocessOptionalField, preprocessToNumber} from "@/common/_feat/validation-preprocessors";
-import {AnyUnionValues} from "@/common/types";
+import {AnyUnionValues} from "@/common/_types";
 
 /** Base Zod schema containing shared geometric and relational fields for all seat layout elements. */
 export const SeatFormBaseSchema = z.object({

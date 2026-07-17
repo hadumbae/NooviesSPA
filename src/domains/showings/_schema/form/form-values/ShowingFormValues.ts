@@ -2,7 +2,7 @@
  * @fileoverview Defines the TypeScript types for showing form values derived from Zod schemas.
  */
 
-import {AnyValues} from "@/common/types";
+import {AnyValues} from "@/common/_types";
 import {ShowingFormData} from "@/domains/showings/_schema/form/schema/ShowingFormSchema.ts";
 import {ShowingFormStatuses} from "@/domains/showings/_schema/form/schema/ShowingFormStatusSchema.ts";
 import {ShowingFormLanguages} from "@/domains/showings/_schema/form/schema/ShowingFormLanguageSchema.ts";

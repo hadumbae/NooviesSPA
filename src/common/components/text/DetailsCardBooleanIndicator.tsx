@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Dot} from "lucide-react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 
 interface DetailsCardBooleanIndicatorProps {
     label: string;

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/lib/utils.ts";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
 import {ControllerProps, FieldValues, useFormContext} from "react-hook-form";
 import {ArrowDownUp, ArrowDownWideNarrow, ArrowUpNarrowWide} from "lucide-react";
