@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {PageSectionHeader} from "@/views/common/_comp/page";
-import {TextCollapsible} from "@/common/components/TextCollapsible.tsx";
+import {TextCollapsible} from "@/views/common/_comp/text-display/text-blocks/TextCollapsible.tsx";
 import {Card, CardContent} from "@/common/components/ui";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 import {ObjectId} from "@/common/_schemas";

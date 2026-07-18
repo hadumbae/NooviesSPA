@@ -4,7 +4,7 @@
  */
 import {ReactElement} from "react";
 import {DateTime} from "luxon";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {LucideIcon} from "lucide-react";
 import {Card, CardContent} from "@/common/components/ui";
 import {ReservationStatus} from "@/domains/reservations";

@@ -7,7 +7,7 @@ import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {GenreIndexCard} from "@/views/admin/genres/_comp";
 import {Button} from "@/common/components/ui";
 import {Plus} from "lucide-react";

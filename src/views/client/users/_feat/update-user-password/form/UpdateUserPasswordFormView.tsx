@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {HookFormInput} from "@/views/common/_feat";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Loader} from "lucide-react";

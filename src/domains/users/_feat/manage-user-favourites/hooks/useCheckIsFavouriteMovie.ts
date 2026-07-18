@@ -3,7 +3,7 @@
  */
 
 import { ObjectId } from "@/common/_schemas";
-import { FetchQueryOptions } from "@/common/type/query/FetchQueryOptions.ts";
+import { FetchQueryOptions } from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";

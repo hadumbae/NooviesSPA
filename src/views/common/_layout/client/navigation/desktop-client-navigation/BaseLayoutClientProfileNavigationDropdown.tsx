@@ -3,11 +3,11 @@
  */
 
 import {ReactElement} from 'react';
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {ChevronDown} from "lucide-react";
 import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, Separator} from "@/common/components/ui";
 import {useCurrentURLPath} from "@/common/_feat/navigation/useCurrentURLPath.ts";
-import DropdownMenuLink from "@/common/components/navigation/DropdownMenuLink.tsx";
+import {DropdownMenuLink} from "@/views/common/_feat/navigation/DropdownMenuLink.tsx";
 import {
     BaseLayoutDesktopClientNavigation
 } from "@/views/common/_layout/client/navigation/desktop-client-navigation/BaseLayoutDesktopClientNavigation.tsx";

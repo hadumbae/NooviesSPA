@@ -6,8 +6,8 @@ import {LeanUserWithEmail} from "@/domains/users/_schema/user";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
+import {cn} from "@/common/_feat";
 import {ReactElement} from "react";
 
 /** Props for the CustomerDetailsCard component. */

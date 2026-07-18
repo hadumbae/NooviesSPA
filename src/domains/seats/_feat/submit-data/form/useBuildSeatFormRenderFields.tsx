@@ -5,7 +5,7 @@
 
 import {cloneElement, ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
-import {HookFormFieldGroup} from "@/common/type/form/HookFormFieldGroupTypes.ts";
+import {HookFormFieldsetConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schema/SeatFormSchema.ts";
 import {
@@ -31,7 +31,7 @@ export function useBuildSeatFormRenderFields(
     const layoutType = watch("layoutType");
     const isSeat = layoutType === "SEAT";
 
-    const fieldGroups: HookFormFieldGroup<SeatFormValues>[] = [
+    const fieldGroups: HookFormFieldsetConfig<SeatFormValues>[] = [
         {
             render: true,
             key: "layout-1",

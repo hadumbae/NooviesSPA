@@ -3,16 +3,16 @@
  * Maps genre domain entities to link structures used by public-facing browsing components.
  */
 
-import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
+import {LinkItemConfig} from "@/common/_types/navigation/LinkItemConfig.ts";
 import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 
 /**
- * Maps a collection of genre entities to standardized {@link LinkConfig} objects.
+ * Maps a collection of genre entities to standardized {@link LinkItemConfig} objects.
  */
 export function generateGenreLinkConfigs(
     genres: Genre[]
-): LinkConfig[] {
-    return genres.map((genre): LinkConfig => {
+): LinkItemConfig[] {
+    return genres.map((genre): LinkItemConfig => {
         const {_id, slug, name} = genre;
 
         return {

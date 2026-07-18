@@ -5,7 +5,7 @@
 import {ReactElement, useState} from "react";
 import {Button} from "@/common/components/ui";
 import {toast} from "react-toastify";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {
     handleSubmitResponseError
 } from "@/common/_feat/error-handling/handleSubmitResponseError.ts";

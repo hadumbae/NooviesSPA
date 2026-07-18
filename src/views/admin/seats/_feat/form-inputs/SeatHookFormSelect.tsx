@@ -6,11 +6,11 @@ import {ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
 import {Loader} from "lucide-react";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
 import {buildString} from "@/common/_feat/formatters/buildString.ts";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
 
 import {Seat, SeatQueryFilters, SeatSchema, useFetchSeats} from "@/domains/seats";
 

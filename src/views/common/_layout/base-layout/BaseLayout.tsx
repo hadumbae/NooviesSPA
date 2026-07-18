@@ -10,7 +10,7 @@ import BaseLayoutContent from "@/views/common/_layout/base-layout/layout/BaseLay
 import {BaseLayoutHeader} from "@/views/common/_layout/base-layout/layout/BaseLayoutHeader.tsx";
 import BaseLayoutFooter from "@/views/common/_layout/base-layout/layout/BaseLayoutFooter.tsx";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 
 /**
  * The client-side layout wrapper for the application.

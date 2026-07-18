@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Card, CardContent, Separator} from "@/common/components/ui";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";

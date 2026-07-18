@@ -3,7 +3,7 @@
  *
  */
 
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {
     PatchResetReviewDisplayNameConfig,
     PatchResetReviewLikesConfig,
@@ -17,7 +17,7 @@ import {MovieReviewAdminActionsBaseURL} from "@/domains/movie-reviews/_feat";
 /** Toggles the public visibility status of a specific movie review. */
 export function patchToggleReviewPublicity<TData = unknown>(
     {reviewID, data}: PatchToggleReviewPublicityConfig
-): Promise<RequestReturns<TData>> {
+): Promise<FetchRequestReturns<TData>> {
     const url = buildURL({
         baseURL: MovieReviewAdminActionsBaseURL,
         path: `/rev/${reviewID}/publicity`,
@@ -29,7 +29,7 @@ export function patchToggleReviewPublicity<TData = unknown>(
 /** Updates or resets the display name associated with a movie review. */
 export function patchResetReviewDisplayName<TData = unknown>(
     {reviewID, data}: PatchResetReviewDisplayNameConfig
-): Promise<RequestReturns<TData>> {
+): Promise<FetchRequestReturns<TData>> {
     const url = buildURL({
         baseURL: MovieReviewAdminActionsBaseURL,
         path: `/rev/${reviewID}/display-name`,
@@ -41,7 +41,7 @@ export function patchResetReviewDisplayName<TData = unknown>(
 /** Clears all helpful votes and likes from a specific movie review. */
 export function patchResetReviewLikes<TData = unknown>(
     {reviewID, data}: PatchResetReviewLikesConfig
-): Promise<RequestReturns<TData>> {
+): Promise<FetchRequestReturns<TData>> {
     const url = buildURL({
         baseURL: MovieReviewAdminActionsBaseURL,
         path: `/rev/${reviewID}/likes`,
@@ -53,7 +53,7 @@ export function patchResetReviewLikes<TData = unknown>(
 /** Manually overrides the numeric star rating of a specific movie review. */
 export function patchSetReviewRating<TData = unknown>(
     {reviewID, data}: PatchSetReviewRatingConfig
-): Promise<RequestReturns<TData>> {
+): Promise<FetchRequestReturns<TData>> {
     const url = buildURL({
         baseURL: MovieReviewAdminActionsBaseURL,
         path: `/rev/${reviewID}/ratings`,

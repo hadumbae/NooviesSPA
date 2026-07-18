@@ -4,14 +4,14 @@
 
 import Select from "react-select";
 import {Controller, FieldValues, useFormContext} from "react-hook-form";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
 import {FormControl, FormDescription, FormItem, FormLabel,} from "@/common/components/ui/form.tsx";
 import {HookFormErrorMessage} from "@/views/common/_feat/form-inputs/HookFormErrorMessage.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {ReactSelectMultiStyleConfig} from "@/common/_const/css/ReactSelectCSS.ts";
 import {FormMultiSelectOnChangeHandler, FormSelectValueHandler} from "@/common/_types";
 import {ReactElement} from "react";
-import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
 
 /** Props for the HookFormMultiSelect component. */
 type MultiSelectProps<TSubmit extends FieldValues, TValue = any> =
@@ -51,13 +51,7 @@ export function HookFormMultiSelect<TSubmit extends FieldValues>(
 
                 return (
                     <FormItem className={cn(className)}>
-                        {
-                            hasLabel && (
-                                <FormLabel htmlFor={id} className="primary-text">
-                                    {label}
-                                </FormLabel>
-                            )
-                        }
+                        {hasLabel && <FormLabel htmlFor={id} className="primary-text">{label}</FormLabel>}
 
                         <FormControl>
                             <Select
@@ -84,9 +78,7 @@ export function HookFormMultiSelect<TSubmit extends FieldValues>(
                             />
                         </FormControl>
 
-                        {description && (
-                            <FormDescription>{description}</FormDescription>
-                        )}
+                        {description && <FormDescription>{description}</FormDescription>}
 
                         <HookFormErrorMessage error={error}/>
                     </FormItem>

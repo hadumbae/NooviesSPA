@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui";
 import {Info} from "lucide-react";
 import {buildString} from "@/common/_feat/formatters/buildString.ts";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {BrowseMovieSummaryDialog} from "@/views/client/movies/_comp/browse-movie-info";
 

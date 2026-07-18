@@ -10,7 +10,7 @@ import {
 import { SlugRouteParamSchema } from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import { PageLoader } from "@/views/common/_comp/page";
 import { BrowseGenreInfoPageContent } from "@/views/client/genres/browse-genre-info/content.tsx";
-import { QueryDataLoader } from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import { QueryDataLoader } from "@/views/common/_feat";
 import { useFetchGenreWithMoviesViewData } from "@/domains/genres/_feat/client-view-data";
 import { useParsedPaginationValue } from "@/common/_feat/fetch-pagination-search-params";
 

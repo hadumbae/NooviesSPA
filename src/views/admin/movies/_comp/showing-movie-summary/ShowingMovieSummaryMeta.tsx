@@ -7,7 +7,7 @@ import {MovieDetails, MovieWithGenres} from "@/domains/movies/_schema/movie";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {MovieMetaGenreBadges} from "@/views/admin/movies/_comp/movie-details";
 import {To} from "react-router-dom";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 
 /** Props for the ShowingMovieSummaryMeta component. */
 type MetaProps = {

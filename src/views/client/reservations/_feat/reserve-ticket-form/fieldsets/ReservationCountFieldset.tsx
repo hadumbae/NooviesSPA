@@ -6,7 +6,7 @@ import {HookFormInput} from "@/views/common/_feat";
 import {Button} from "@/common/components/ui/button.tsx";
 import {useFormContext} from "react-hook-form";
 import {ReservationType} from "@/domains/reservations/_schema/model/fields/ReservationTypeEnumSchema.ts";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {ReactElement} from "react";
 
 /** Props for the ReservationCountFieldset component. */

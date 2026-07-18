@@ -2,8 +2,8 @@
  * @fileoverview React Query hook for fetching validated paginated Genre collections.
  */
 
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {RequestOptions} from "@/common/_types/request/RequestOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params/schemas/PaginationValuesSchema.ts";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";

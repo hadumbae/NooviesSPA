@@ -4,9 +4,9 @@
 
 import {ReactElement} from "react";
 import {ObjectId} from "@/common/_schemas";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {Card, CardContent} from "@/common/components/ui";
 import {formatMovieData, MovieDetails, MovieDetailsSchema, useFetchMovie} from "@/domains/movies";
 

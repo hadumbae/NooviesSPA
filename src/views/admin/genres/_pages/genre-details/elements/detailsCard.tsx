@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {TextQuote} from "@/common/components/text/TextQuote.tsx";
+import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {Genre} from "@/domains/genres/_schema";
 

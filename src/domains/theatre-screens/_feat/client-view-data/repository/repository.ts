@@ -3,7 +3,7 @@
  */
 
 import {buildURL} from "@/common/_feat/fetch-api";
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 
 import {TheatreScreenSchedule} from "@/domains/theatre-screens/_schema";
@@ -17,7 +17,7 @@ import {
  */
 export function fetchScreensWithShowings(
     {theatreID, localDate}: FetchScreensWithShowingsConfig
-): Promise<RequestReturns<TheatreScreenSchedule[]>> {
+): Promise<FetchRequestReturns<TheatreScreenSchedule[]>> {
     const url = buildURL({
         baseURL: ScreenBrowseBaseURL,
         path: `/showings-by-screen/theatre/${theatreID}/date/${localDate}`,

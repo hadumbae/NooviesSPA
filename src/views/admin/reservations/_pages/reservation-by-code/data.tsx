@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {AdminReservation} from "@/domains/reservations";
 import {
     ReservationByCodeActionsSection,

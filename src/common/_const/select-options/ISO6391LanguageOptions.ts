@@ -3,7 +3,7 @@
  */
 
 import {ISO6391CodeConstant} from "@/common/_const/languages/ISO6391CodeConstant.ts";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
 import {ISO6391LanguageLabels as ISO6391LanguageConstant} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 
 /** List of language options formatted for React Select components. */

@@ -3,7 +3,7 @@
  */
 
 import {Badge} from "@/common/components/ui/badge.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {ReactElement} from "react";
 
 /** Props for the IsReviewPublicBadge component. */

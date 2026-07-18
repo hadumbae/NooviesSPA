@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui";
 import {PersonProfileAvatar} from "@/views/admin/persons";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 
 /** Props for the PersonInfoAvatarCard component. */
 type CardProps = {

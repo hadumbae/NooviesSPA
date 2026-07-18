@@ -7,7 +7,7 @@ import {MessageCirclePlus} from "lucide-react";
 import {Button} from "@/common/components/ui";
 import {ObjectId} from "@/common/_schemas";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 
 import {MovieReviewFormPopup} from "@/views/client/movie-reviews";
 import {MovieReviewDetails, simplifyMovieReview} from "@/domains/movie-reviews";

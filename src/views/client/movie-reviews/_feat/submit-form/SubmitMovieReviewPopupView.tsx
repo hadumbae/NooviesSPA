@@ -14,7 +14,7 @@ import {
 } from "@/common/components/ui/dialog.tsx";
 import {ReactElement, ReactNode} from "react";
 import {Button} from "@/common/components/ui/button.tsx";
-import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
 import {useLockForFormUI} from "@/common/_feat/handle-form/useLockForFormUI.ts";
 import {UIOpenStateProps} from "@/common/_types";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";

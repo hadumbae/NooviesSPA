@@ -5,10 +5,10 @@
 import {ReactElement} from "react";
 import {ChevronRight} from "lucide-react";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import LinkGroup from "@/common/components/LinkGroup.tsx";
+import {SeparatedLinks} from "@/views/common/_feat/navigation/SeparatedLinks.tsx";
 import {Separator} from "@/common/components/ui";
-import {NoneSpan} from "@/common/components/NoneSpan.tsx";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {NoneSpan} from "@/views/common/_comp/text-display/spans/NoneSpan.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {
     ActorCreditAvatar
 } from "@/views/admin/movie-credits/_comp/actor-credit-avatar/ActorCreditAvatar.tsx";
@@ -50,24 +50,24 @@ export function MovieOverviewCredits({movie, credits}: MovieOverviewCreditsProps
 
             <div className="space-y-2">
                 <LabeledGroup label="Directors">
-                    {directorLinks.length > 0 ? <LinkGroup links={directorLinks}/> : <NoneSpan/>}
+                    {directorLinks.length > 0 ? <SeparatedLinks links={directorLinks}/> : <NoneSpan/>}
                 </LabeledGroup>
 
                 <Separator/>
 
                 <LabeledGroup label="Writers">
-                    {writerLinks.length > 0 ? <LinkGroup links={writerLinks}/> : <NoneSpan/>}
+                    {writerLinks.length > 0 ? <SeparatedLinks links={writerLinks}/> : <NoneSpan/>}
                 </LabeledGroup>
 
                 <Separator/>
 
-                <LoggedHoverLink
+                <HoverLink
                     to={`/browse/movies/${movieSlug}/credits`}
                     className="flex justify-between items-center"
                 >
                     <span>Full Cast & Crew</span>
                     <ChevronRight/>
-                </LoggedHoverLink>
+                </HoverLink>
             </div>
         </section>
     );

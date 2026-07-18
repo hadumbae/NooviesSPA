@@ -4,13 +4,13 @@
 
 import {FieldValues} from "react-hook-form";
 import {HookFormMultiSelect} from "@/views/common/_comp/form-select/HookFormMultiSelect.tsx";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
 import {
     filterNullishAttributes
 } from "@/common/_feat/filter-object-attributes/filterNullishAttributes.ts";
 import {ReactElement} from "react";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
-import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {QueryDataLoader} from "@/views/common/_feat";
+import {HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
 import {useFetchGenres, GenreQueryOptions, GenreSchema, Genre} from "@/domains/genres";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 

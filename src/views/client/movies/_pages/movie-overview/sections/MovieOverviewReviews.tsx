@@ -3,14 +3,14 @@
  *
  */
 
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {ChevronRight, MessageCirclePlus} from "lucide-react";
 import {Button} from "@/common/components/ui/button.tsx";
 import {ReactElement, useState} from "react";
 import {
     MovieReviewSummaryCard
 } from "@/views/client/movie-reviews/_comp/review-summary-card/MovieReviewSummaryCard.tsx";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 
 import {MovieReviewDetails} from "@/domains/movie-reviews/_schema";
@@ -70,9 +70,9 @@ export function MovieOverviewReviews(
                     </div>
 
                     <div className="flex justify-end">
-                        <LoggedHoverLink to={`/browse/movies/${movie.slug}/reviews`}>
+                        <HoverLink to={`/browse/movies/${movie.slug}/reviews`}>
                             <ChevronRight/> More Reviews
-                        </LoggedHoverLink>
+                        </HoverLink>
                     </div>
                 </div>
             )}

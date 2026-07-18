@@ -7,8 +7,8 @@ import {
     generateMovieCreditLinkConfigs
 } from "@/domains/movie-credits/_feat/navigation/generateMovieCreditLinkConfigs.ts";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import LinkGroup from "@/common/components/LinkGroup.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {SeparatedLinks} from "@/views/common/_feat/navigation/SeparatedLinks.tsx";
+import {cn} from "@/common/_feat";
 import {ReactElement, useMemo} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
 
@@ -40,19 +40,19 @@ export function MovieOverviewCreditLinks({className, credits}: LinkProps): React
     return (
         <div className={cn("space-y-2", className)}>
             <LabeledGroup label="Directors">
-                <LinkGroup links={directorLinks}/>
+                <SeparatedLinks links={directorLinks}/>
             </LabeledGroup>
 
             <Separator/>
 
             <LabeledGroup label="Writers">
-                <LinkGroup links={writerLinks}/>
+                <SeparatedLinks links={writerLinks}/>
             </LabeledGroup>
 
             <Separator/>
 
             <LabeledGroup label="Actors">
-                <LinkGroup links={actorLinks}/>
+                <SeparatedLinks links={actorLinks}/>
             </LabeledGroup>
         </div>
     );

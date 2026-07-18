@@ -8,7 +8,7 @@ import {HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
 import {GenreMultiSelect} from "@/views/admin/genres";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
 import {HookFormMultiSelect} from "@/views/common/_comp";
 import {ISO6391LanguageOptions} from "@/common/_const";

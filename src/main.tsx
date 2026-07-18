@@ -3,14 +3,11 @@ import {createRoot} from 'react-dom/client'
 import './index.css'
 
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import RegisterRoutes from "@/common/_routes/RegisterRoutes.tsx";
 import {QueryClientProvider} from "@tanstack/react-query";
-import {AuthProvider} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthProvider.tsx";
-import ReactQueryClient from "@/config/ReactQueryClient.ts";
-import {ThemeProvider} from "@/common/_feat/theme/ctx/ThemeProvider.tsx";
-import {
-    IPGeolocationContextProvider
-} from "@/common/_feat/external/ipify-country/ctx/IPGeolocationContextProvider.tsx";
+import {AuthProvider} from "@/domains/auth/_feat";
+import {queryClient as ReactQueryClient} from "@/_config";
+import {RegisterRoutes} from "@/common/_routes";
+import {IPGeolocationContextProvider, ThemeProvider} from "@/common/_feat";
 
 const router = createBrowserRouter(RegisterRoutes);
 

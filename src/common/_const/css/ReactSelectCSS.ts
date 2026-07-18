@@ -3,8 +3,8 @@
  */
 
 import {ClassNamesConfig, GroupBase} from "react-select";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
+import {cn} from "@/common/_feat";
 
 /** Style configuration for single-select components used with the unstyled prop. */
 export const ReactSelectStyleConfig: ClassNamesConfig<ReactSelectOption, false, GroupBase<ReactSelectOption>> = {

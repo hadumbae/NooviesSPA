@@ -10,7 +10,7 @@ import {
 } from "@/common/_feat/navigation/usePaginationLocationState.ts";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {useFetchPaginatedPersons} from "@/domains/persons/_feat/crud-hooks";
 import {PersonIndexPageContent} from "@/views/admin/persons/_pages/index-page/content.tsx";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";

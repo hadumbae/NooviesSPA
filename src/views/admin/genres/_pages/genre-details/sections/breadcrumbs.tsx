@@ -16,7 +16,7 @@ import {
     usePaginationLocationState
 } from "@/common/_feat/navigation/usePaginationLocationState.ts";
 import {parseStateToSearchParams} from "@/common/_feat/fetch-search-params/parseStateToSearchParams.ts";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 
 /** Props for the {@link GenreDetailsPageBreadcrumbs} component. */
 type BreadcrumbProps = {

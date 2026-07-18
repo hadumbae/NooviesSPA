@@ -4,8 +4,9 @@
  */
 
 import {FC} from 'react';
-import AdminLayoutSetupNavigationDropdown
-    from "@/views/common/_layout/admin-layout/navigation/AdminLayoutSetupNavigationDropdown.tsx";
+import {
+    AdminLayoutSetupNavigationDropdown
+} from "@/views/common/_layout/admin-layout/navigation/AdminLayoutSetupNavigationDropdown.tsx";
 import AdminLayoutShowingNavigationDropdown
     from "@/views/common/_layout/admin-layout/navigation/AdminLayoutShowingNavigationDropdown.tsx";
 import {Button} from "@/common/components/ui/button.tsx";

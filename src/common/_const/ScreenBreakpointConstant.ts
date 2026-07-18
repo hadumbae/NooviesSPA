@@ -2,7 +2,7 @@
  * @fileoverview Defines screen width breakpoints for responsive design.
  */
 
-import {ScreenBreakpoint} from "@/common/type/ScreenBreakpoint.ts";
+import {ScreenBreakpoint} from "@/common/_types/ui/ScreenBreakpoint.ts";
 
 /** Mapping of breakpoint keys to their pixel values. */
 export const ScreenBreakpointConstant: Record<ScreenBreakpoint, number> = {

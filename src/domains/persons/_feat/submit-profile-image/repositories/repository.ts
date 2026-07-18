@@ -2,7 +2,7 @@
  * @fileoverview Repository for managing person profile image persistence.
  */
 
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {PersonProfileImageBaseURL} from "@/domains/persons/_feat/submit-profile-image/repositories/baseURL.ts";
@@ -13,7 +13,7 @@ import {UploadProfileImageConfig} from "@/domains/persons/_feat/submit-profile-i
  */
 export async function patchUploadProfileImage(
     {_id, data, config}: UploadProfileImageConfig
-): Promise<RequestReturns> {
+): Promise<FetchRequestReturns> {
     const url = buildURL({
         baseURL: PersonProfileImageBaseURL,
         path: `/image/${_id}/update`,

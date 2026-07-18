@@ -4,12 +4,12 @@
 
 import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import BooleanFlagLabelSpan from "@/common/components/BooleanFlagLabelSpan.tsx";
+import {BooleanFlagLabelSpan} from "@/views/common/_comp/text-display/spans/BooleanFlagLabelSpan.tsx";
 import {
     MoviePersonDetailsCardHeader
 } from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardHeader.tsx";
 import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
-import {TextQuote} from "@/common/components/text/TextQuote.tsx";
+import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
 
 import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
 

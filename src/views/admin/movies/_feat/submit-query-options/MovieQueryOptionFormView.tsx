@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {
     MovieQueryOptionFormSortFieldset

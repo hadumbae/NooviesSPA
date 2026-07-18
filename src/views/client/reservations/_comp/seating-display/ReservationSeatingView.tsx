@@ -3,7 +3,7 @@
  */
 
 import {ObjectId} from "@/common/_schemas";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {
     ReservationSeatingElement
 } from "@/views/client/reservations/_comp/seating-display/ReservationSeatingElement.tsx";

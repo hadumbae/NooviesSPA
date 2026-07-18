@@ -4,7 +4,7 @@
 
 import {FormOnChangeHandler} from "@/common/_types/form/on-change/FormOnChangeHandler.ts";
 import {SingleValue} from "react-select";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
 import {FieldValues} from "react-hook-form";
 
 /** Type definition for a form change handler specifically for single-select components. */

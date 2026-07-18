@@ -16,7 +16,7 @@ import {
     useFetchGenreDetailsViewData
 } from "@/domains/genres";
 import {GenreDetailsPageContent} from "@/views/admin/genres/_pages/genre-details/content.tsx";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {PageLoader} from "@/views/common/_comp/page";
 
 /** Default limit for the paginated movie sub-collection. */

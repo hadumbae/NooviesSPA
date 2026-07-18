@@ -4,7 +4,7 @@
 
 import {ManageMovieImagesBaseURL} from "@/domains/movies/_feat/manage-images/repository/baseURL.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 import {
     RemovePosterImageConfig,
@@ -12,7 +12,7 @@ import {
 } from "@/domains/movies/_feat/manage-images/repository/repository.types.ts";
 
 /** Updates the poster image for a specific movie. */
-export function patchUploadPosterImage(params: UploadPosterImageConfig): Promise<RequestReturns> {
+export function patchUploadPosterImage(params: UploadPosterImageConfig): Promise<FetchRequestReturns> {
     const {movieID, data} = params;
 
     const url = buildURL({
@@ -24,7 +24,7 @@ export function patchUploadPosterImage(params: UploadPosterImageConfig): Promise
 }
 
 /** Deletes the poster image associated with a specific movie. */
-export function deleteRemovePosterImage(params: RemovePosterImageConfig): Promise<RequestReturns> {
+export function deleteRemovePosterImage(params: RemovePosterImageConfig): Promise<FetchRequestReturns> {
     const {movieID} = params;
 
     const url = buildURL({

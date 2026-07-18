@@ -10,7 +10,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {ReactElement} from "react";
 
@@ -30,12 +30,12 @@ export function ShowingEditBreadcrumbs({showing}: BreadcrumbProps): ReactElement
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink
+                        <HoverLink
                             to="/admin/showings"
                             component={ShowingEditBreadcrumbs.name}
                         >
                             All Showings
-                        </LoggedHoverLink>
+                        </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -43,12 +43,12 @@ export function ShowingEditBreadcrumbs({showing}: BreadcrumbProps): ReactElement
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink
+                        <HoverLink
                             to={`/admin/showings/get/${slug}`}
                             component={ShowingEditBreadcrumbs.name}
                         >
                             {movieTitle} • {formattedStarTime}
-                        </LoggedHoverLink>
+                        </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

@@ -6,7 +6,7 @@ import {ReactElement} from 'react';
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {HookFormMultiSelect, HookFormSelect} from "@/views/common/_comp";
 import {ISO6391LanguageOptions} from "@/common/_const";
 

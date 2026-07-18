@@ -2,7 +2,7 @@
  * @fileoverview Styled base unit for rendering seat map elements.
  */
 
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {ReactElement} from "react";
 
 /** Category of seating element determining its visual style. */

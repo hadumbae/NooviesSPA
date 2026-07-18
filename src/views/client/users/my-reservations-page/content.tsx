@@ -4,7 +4,7 @@
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {PaginationRangeButtons} from "@/views/common/_comp";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {PopulatedReservation} from "@/domains/reservations/_schema";
 import {MyReservationCompactCard} from "@/views/client/reservations/_comp";
 import {ReactElement} from "react";

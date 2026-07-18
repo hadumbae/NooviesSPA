@@ -6,7 +6,7 @@ import {ReactElement, useContext, useEffect, useState} from 'react';
 import {useFormContext} from "react-hook-form";
 import {Plus, X} from "lucide-react";
 import {ObjectId} from "@/common/_schemas";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {
     filterFalsyAttributes
 } from "@/common/_feat/filter-object-attributes/filterFalsyAttributes.ts";

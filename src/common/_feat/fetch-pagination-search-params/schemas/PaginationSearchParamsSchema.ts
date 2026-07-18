@@ -8,8 +8,8 @@ import {CoercedPositiveIntegerSchema} from "@/common/_schemas";
 
 /** Zod schema for validating pagination search parameters. */
 export const PaginationSearchParamsSchema = z.object({
-    page: preprocessOptionalField(CoercedPositiveIntegerSchema),
-    perPage: preprocessOptionalField(CoercedPositiveIntegerSchema),
+    page: preprocessOptionalField(z.lazy(() => CoercedPositiveIntegerSchema)),
+    perPage: preprocessOptionalField(z.lazy(() => CoercedPositiveIntegerSchema)),
 });
 
 /** Type definition for pagination search parameters. */

@@ -6,9 +6,9 @@ import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui";
 import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {BadgeAlert, Circle, Cog, DollarSign, Search, Theater, TvMinimal,} from "lucide-react";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {IconButton} from "@/views/common/_comp";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {ShowingDetails} from "@/domains/showings";
@@ -83,19 +83,19 @@ export function ShowingSummaryCard({showing}: CardProps): ReactElement {
                 </div>
 
                 <div className="flex justify-between">
-                    <LoggedHoverLink
+                    <HoverLink
                         to={`/admin/theatres/get/${theatreSlug}`}
                         className="text-xs"
                     >
                         <Theater/> {theatreName}
-                    </LoggedHoverLink>
+                    </HoverLink>
 
-                    <LoggedHoverLink
+                    <HoverLink
                         to={`/admin/theatres/get/${theatreSlug}/screen/${screenSlug}`}
                         className="text-xs"
                     >
                         <TvMinimal/> {screenName} ({screenType})
-                    </LoggedHoverLink>
+                    </HoverLink>
                 </div>
             </CardContent>
         </Card>

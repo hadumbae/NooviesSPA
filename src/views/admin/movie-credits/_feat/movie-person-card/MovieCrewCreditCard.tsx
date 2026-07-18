@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui";
 import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
-import {TextQuote} from "@/common/components/text/TextQuote.tsx";
+import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
 import {
     MoviePersonDetailsCardHeader
 } from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardHeader.tsx";

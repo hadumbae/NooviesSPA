@@ -3,10 +3,11 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
-import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
+import {cn} from "@/common/_feat";
 import {PopulatedShowing, ShowingDetails} from "@/domains/showings";
 import {ShowingInfoLanguages} from "@/views/client/showings/_comp/showing-info-details";
+import {Link} from "react-router-dom";
+import {buttonVariants} from "@/common/components/ui";
 
 /** Props for the BrowseMovieShowingSelector component. */
 type SummaryProps = {
@@ -36,15 +37,12 @@ export function BrowseMovieShowingSelector(
                     {formattedStartTime}
                 </span>
 
-                <ButtonLink
-                    to={`/browse/showings/${slug}`}
-                    type="button"
-                    variant="primary"
-                    size="sm"
-                    className="uppercase"
-                >
+                <Link to={`/browse/showings/${slug}`} type="button" className={cn(
+                    "uppercase",
+                    buttonVariants({variant: "primary", size: "sm"})
+                )}>
                     Select
-                </ButtonLink>
+                </Link>
             </div>
         </div>
     );

@@ -6,7 +6,7 @@ import {ReactElement} from 'react';
 import type {CloudinaryImage} from "@/common/_schemas/cloudinary-image/CloudinaryImageSchema.ts";
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
 import {getInitials} from "@/common/_feat/formatters/getInitials.ts";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 
 /** Props for the CloudinaryAvatarImage component. */
 type AvatarProps = {

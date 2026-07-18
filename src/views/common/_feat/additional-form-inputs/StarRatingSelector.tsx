@@ -4,9 +4,9 @@
 
 import {ReactElement, useState} from "react";
 import {ControllerProps, FieldValues} from "react-hook-form";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {Star} from "lucide-react";
-import {HookFormInputProps} from "@/common/type/input/HookFormInputProps.ts";
+import {HookFormInputProps} from "@/common/_types/input/HookFormInputProps.ts";
 import {
     FormControl,
     FormField,

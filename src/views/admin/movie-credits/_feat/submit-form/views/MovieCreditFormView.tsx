@@ -1,6 +1,6 @@
 /** @fileoverview Presentational form view for creating or editing movie credits. */
 
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {useFormContext} from "react-hook-form";
 import {Separator} from "@/common/components/ui";
 import {ReactElement} from "react";

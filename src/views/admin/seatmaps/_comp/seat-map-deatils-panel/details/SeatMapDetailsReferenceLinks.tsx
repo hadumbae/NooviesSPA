@@ -4,10 +4,8 @@
 
 import {ReactElement} from "react";
 import {Clapperboard, Theater, TvMinimal} from "lucide-react";
-import {
-    StackedIconCardLink
-} from "@/common/components/navigation/logged-link/StackedIconCardLink.tsx";
-import {buildString} from "@/common/_feat/formatters/buildString.ts";
+import {PanelCardLink} from "@/views/common/_feat";
+import {buildString} from "@/common/_feat";
 import {ShowingDetails} from "@/domains/showings";
 import {SROnly} from "@/views/common/_comp";
 
@@ -35,20 +33,20 @@ export function SeatMapDetailsReferenceLinks({showing}: SectionProps): ReactElem
 
             <div className="space-y-2">
                 <div className="grid grid-cols-2 gap-2">
-                    <StackedIconCardLink
+                    <PanelCardLink
                         className="col-span-2"
                         to={`/admin/movies/get/${movieID}`}
                         icon={Clapperboard}
                         text={formattedMovieTitle}
                     />
 
-                    <StackedIconCardLink
+                    <PanelCardLink
                         to={`/admin/theatres/get/${theatreSlug}`}
                         icon={Theater}
                         text={theatreName}
                     />
 
-                    <StackedIconCardLink
+                    <PanelCardLink
                         to={`/admin/theatres/get/${theatreSlug}/screen/${screenSlug}`}
                         icon={TvMinimal}
                         text={screenName}

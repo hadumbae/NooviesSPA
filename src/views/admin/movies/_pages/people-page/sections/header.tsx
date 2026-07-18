@@ -2,14 +2,14 @@
  * @fileoverview Header component for the movie personnel administration page.
  */
 
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {buttonVariants} from "@/common/components/ui";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 import {Movie} from "@/domains/movies";
 import {RoleTypeDepartment} from "@/domains/roletypes";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {MoviePersonListBreadcrumb} from "@/views/admin/movies/_pages/people-page/sections/breadcrumb.tsx";
 
 /** Props for the MoviePeopleHeader component. */

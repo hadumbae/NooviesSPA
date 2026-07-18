@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {Separator} from "@/common/components/ui";
 import {HookFormInput} from "@/views/common/_feat";
 import {HookFormCheckbox} from "@/views/common/_feat";

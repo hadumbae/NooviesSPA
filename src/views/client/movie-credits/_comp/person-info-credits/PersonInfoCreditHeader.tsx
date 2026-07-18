@@ -3,9 +3,9 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {DateTime} from "luxon";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 
 /** Props for the PersonInfoCreditHeader component. */
 type HeaderProps = {

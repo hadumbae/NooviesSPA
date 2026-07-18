@@ -2,7 +2,7 @@
  * @fileoverview Provides a list of IANA timezone options for use in select inputs.
  */
 
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
 import {getTimeZones} from "@vvo/tzdb";
 
 const timeZones = getTimeZones();

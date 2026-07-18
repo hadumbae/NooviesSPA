@@ -5,7 +5,7 @@
 import {RouteObject} from "react-router-dom";
 import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
 import {PersonInfoPage} from "@/views/client/persons/_pages/info-page/page.tsx";
-import {ComponentErrorHandler} from "@/common/components/errors/ComponentErrorHandler.tsx";
+import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
 import {BrowsePersonsPage} from "@/views/client/persons/_pages/browse-page/page.tsx";
 
 /** Route configuration for person browsing and detail views. */

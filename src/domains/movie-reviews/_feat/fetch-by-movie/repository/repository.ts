@@ -8,7 +8,7 @@ import {
     FetchReviewsByMovieConfig
 } from "@/domains/movie-reviews/_feat/fetch-by-movie/repository/repository.types.ts";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {ReviewsByMovieBaseURL} from "@/domains/movie-reviews/_feat/fetch-by-movie/repository/baseURL.ts";
 import {PaginatedItems} from "@/common/_types";
@@ -19,7 +19,7 @@ import {FeaturedReviewsByMovie, MovieReviewSummaryData, PopulatedMovieReview} fr
  */
 export const getFetchReviewsByMovie = (
     {movieID, page, perPage, config}: FetchPaginatedReviewsByMovieConfig
-): Promise<RequestReturns<PaginatedItems<PopulatedMovieReview>>> => {
+): Promise<FetchRequestReturns<PaginatedItems<PopulatedMovieReview>>> => {
     const url = buildURL({
         baseURL: ReviewsByMovieBaseURL,
         path: `/item/${movieID}/reviews`,
@@ -34,7 +34,7 @@ export const getFetchReviewsByMovie = (
  */
 export const getFetchReviewDetailsByMovie = (
     {movieID, page, perPage, config}: FetchPaginatedReviewsByMovieConfig
-): Promise<RequestReturns<MovieReviewSummaryData>> => {
+): Promise<FetchRequestReturns<MovieReviewSummaryData>> => {
     const url = buildURL({
         baseURL: ReviewsByMovieBaseURL,
         path: `/item/${movieID}/reviews/details`,
@@ -49,7 +49,7 @@ export const getFetchReviewDetailsByMovie = (
  */
 export const getFetchFeaturedReviewsByMovie = (
     {movieID, config}: FetchReviewsByMovieConfig
-): Promise<RequestReturns<FeaturedReviewsByMovie>> => {
+): Promise<FetchRequestReturns<FeaturedReviewsByMovie>> => {
     const url = buildURL({
         baseURL: ReviewsByMovieBaseURL,
         path: `/item/${movieID}/reviews/featured`,

@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {UserUniqueCode} from "@/domains/users";
 import {MovieReviewUniqueCode} from "@/domains/movie-reviews";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator} from "@/common/components/ui";
 
 /** Props for the CustomerReviewPageBreadcrumbs component. */

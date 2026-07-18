@@ -4,13 +4,13 @@
  * and pagination, providing a high-level UI for person management.
  */
 
-import {ReactElement} from "react";
+import {ReactElement, useState} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
+import {QueryFilterDialog} from "@/views/common/_feat/dialog/QueryFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
 import {PersonQueryOptionForm} from "@/views/admin/persons/_feat/query-option-form/PersonQueryOptionForm.tsx";
 import {PaginationRangeButtons} from "@/views/common/_comp";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {PersonIndexHeader} from "@/views/admin/persons/_pages/index-page/header.tsx";
 import {PersonIndexCard} from "@/views/admin/persons/_comp";
 
@@ -36,18 +36,25 @@ type ContentProps = {
 export function PersonIndexPageContent(
     {persons, queryOptions, page, perPage, totalItems, setPage}: ContentProps
 ): ReactElement {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
     return (
         <PageFlexWrapper>
             <PersonIndexHeader/>
 
-            <PresetFilterDialog title="Person Filters" description="Filter and sort persons.">
+            <QueryFilterDialog
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                title="Person Filters"
+                description="Filter and sort persons."
+            >
                 <ScrollArea className="max-h-[80vh]">
                     <ScrollBar/>
                     <PersonQueryOptionForm presetValues={queryOptions}>
                         <PersonQueryOptionFormView/>
                     </PersonQueryOptionForm>
                 </ScrollArea>
-            </PresetFilterDialog>
+            </QueryFilterDialog>
 
             {persons.length > 0 ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

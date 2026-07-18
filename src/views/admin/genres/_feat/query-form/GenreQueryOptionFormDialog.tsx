@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {ListFilter} from "lucide-react";
 import {HookFormInput} from "@/views/common/_feat";
 import {HookFormSortToggle} from "@/views/common/_feat";

@@ -5,12 +5,12 @@
 import {FormControl, FormDescription, FormItem, FormLabel,} from "@/common/components/ui/form.tsx";
 import {Controller, FieldValues, useFormContext} from "react-hook-form";
 import Select from "react-select";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
 import {HookFormErrorMessage} from "@/views/common/_feat/form-inputs/HookFormErrorMessage.tsx";
 import {ReactSelectStyleConfig} from "@/common/_const/css/ReactSelectCSS.ts";
 import {ReactElement} from "react";
 import {FormSelectOnChangeHandler, FormSelectValueHandler} from "@/common/_types";
-import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
 
 /** Props for the HookFormSelect component. */
 type SelectProps<TSubmit extends FieldValues, TValue = any> =
@@ -47,13 +47,7 @@ export function HookFormSelect<TSubmit extends FieldValues, TValue = any>(
 
             return (
                 <FormItem className={className}>
-                    {
-                        hasLabel && (
-                            <FormLabel htmlFor={id} className="primary-text">
-                                {label}
-                            </FormLabel>
-                        )
-                    }
+                    {hasLabel && <FormLabel htmlFor={id} className="primary-text">{label}</FormLabel>}
 
                     <FormControl>
                         <Select
@@ -80,11 +74,7 @@ export function HookFormSelect<TSubmit extends FieldValues, TValue = any>(
                         />
                     </FormControl>
 
-                    {
-                        description &&
-                        <FormDescription>{description}</FormDescription>
-                    }
-
+                    {description && <FormDescription>{description}</FormDescription>}
                     <HookFormErrorMessage error={error}/>
                 </FormItem>
             );

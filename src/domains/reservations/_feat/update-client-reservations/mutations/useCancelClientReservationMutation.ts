@@ -5,10 +5,7 @@
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/_schemas";
 import {toast} from "react-toastify";
-import {patchCancelClientReservation} from "@/domains/reservations/_feat/update-client-reservations/repositories";
-import {
-    UpdateClientReservationMutationKeys
-} from "@/domains/reservations/_feat/update-client-reservations/mutations/mutationKeys.ts";
+import {patchCancelClientReservation, UpdateClientReservationMutationKeys} from "@/domains/reservations";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 
 /**

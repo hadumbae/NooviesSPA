@@ -5,7 +5,7 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {PersonClientViewQueryKeys} from "@/domains/persons/_feat/client-view-data/keys";
 import {getFetchBrowsePersonsViewData,} from "@/domains/persons/_feat/client-view-data/repository";

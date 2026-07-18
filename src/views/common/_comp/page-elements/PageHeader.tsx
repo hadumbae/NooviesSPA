@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode} from "react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {HeaderTitle} from "@/views/common/_comp/page-headers/HeaderTitle.tsx";
 import {HeaderDescription} from "@/views/common/_comp/page-headers/HeaderDescription.tsx";
 

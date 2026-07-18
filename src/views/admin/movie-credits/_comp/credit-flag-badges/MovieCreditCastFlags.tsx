@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {CastMovieCredit, MovieCreditDetailsCast, PersonCastCredit} from "@/domains/movie-credits";
 import {Badge} from "@/common/components/ui";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 
 /** Props for the MovieCreditCastFlags component. */
 type FlagProps = {

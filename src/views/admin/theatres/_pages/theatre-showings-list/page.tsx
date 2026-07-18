@@ -7,7 +7,7 @@ import {PageLoader} from "@/views/common/_comp/page";
 import {
     useFetchByIdentifierRouteParams
 } from "@/common/_feat";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 

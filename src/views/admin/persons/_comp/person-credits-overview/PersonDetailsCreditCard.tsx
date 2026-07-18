@@ -7,7 +7,7 @@ import {PersonCredit} from "@/domains/movie-credits";
 import {Card, CardContent} from "@/common/components/ui";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {Info} from "lucide-react";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink";
 import {
     PersonDetailsCreditMovieDialog
 } from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditMovieDialog.tsx";

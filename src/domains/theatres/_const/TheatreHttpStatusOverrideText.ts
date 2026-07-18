@@ -2,7 +2,7 @@
  * @fileoverview HTTP status text overrides for theatre-related requests.
  */
 
-import {HttpStatusOverrideText} from "@/common/type/error/HttpErrorTypes.ts";
+import {HttpStatusOverrideText} from "@/common/_types/error/HttpErrorTypes.ts";
 
 /**
  * Theatre-specific HTTP status text mappings.

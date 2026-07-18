@@ -6,9 +6,9 @@ import {ReactElement} from "react";
 import {getInitials} from "@/common/_feat/formatters/getInitials.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
-import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
 import {MovieCreditDetails} from "@/domains/movie-credits/_schemas";
 import {SROnly} from "@/views/common/_comp/screen-readers";
+import {Link} from "react-router-dom";
 
 /** Props for the MovieCreditOverviewCard component. */
 type CardProps = {
@@ -43,14 +43,13 @@ export function MovieCreditCastOverviewCard(
                         {characterName}
                     </span>
 
-                    <LoggedAnchor
+                    <Link
                         target="_blank"
-                        href={`/admin/persons/get/${personSlug}`}
+                        to={`/admin/persons/get/${personSlug}`}
                         className="text-sm hover-underline"
-                        message="Navigate to person's detail page."
                     >
                         {personName}
-                    </LoggedAnchor>
+                    </Link>
                 </section>
             </CardContent>
         </Card>

@@ -2,7 +2,7 @@
  * @fileoverview Styled paragraph wrapper for movie review content.
  */
 
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {ReactElement, ReactNode} from "react";
 
 /** Props for the MovieReviewText component. */

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {ScreenBreakpoint} from "@/common/type/ScreenBreakpoint.ts";
+import {ScreenBreakpoint} from "@/common/_types/ui/ScreenBreakpoint.ts";
 import {ScreenBreakpointConstant} from "@/common/_const/ScreenBreakpointConstant.ts";
 
 type BreakpointProps = {

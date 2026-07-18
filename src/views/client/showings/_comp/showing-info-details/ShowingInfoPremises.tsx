@@ -4,8 +4,8 @@
 
 import {ReactElement} from "react";
 import {TvMinimal} from "lucide-react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {cn} from "@/common/_feat";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {Theatre, TheatreDetails} from "@/domains/theatres";
 import {TheatreScreen, TheatreScreenDetails} from "@/domains/theatre-screens";
 

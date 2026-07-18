@@ -2,7 +2,7 @@
  * @fileoverview API repository for managing movie reviews belonging to the current user.
  */
 
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 import {ObjectId} from "@/common/_schemas";
 import {buildURL} from "@/common/_feat/fetch-api";
@@ -16,7 +16,7 @@ import type {
 /** Retrieves paginated movie reviews created by the authenticated user. */
 export function getFetchMovieReviewsByCurrentUser<TData = unknown>(
     {page, perPage, config}: CurrentUserMovieReviewsConfig
-): Promise<RequestReturns<TData>> {
+): Promise<FetchRequestReturns<TData>> {
     const url = buildURL({
         baseURL: ManageMyReviewsBaseURL,
         path: "/current/fetch",
@@ -29,7 +29,7 @@ export function getFetchMovieReviewsByCurrentUser<TData = unknown>(
 /** Creates a new movie review for the authenticated user. */
 export function postCreateMovieReviewForCurrentUser<TData = unknown>(
     {data, config}: CreateCurrentUserMovieReviewConfig
-): Promise<RequestReturns<TData>> {
+): Promise<FetchRequestReturns<TData>> {
     const url = buildURL({
         baseURL: ManageMyReviewsBaseURL,
         path: "/current/create",
@@ -42,7 +42,7 @@ export function postCreateMovieReviewForCurrentUser<TData = unknown>(
 /** Updates an existing movie review owned by the authenticated user. */
 export function patchUpdateMovieReviewForCurrentUser<TData = unknown>(
     {reviewID, data, config}: UpdateCurrentUserMovieReviewConfig
-): Promise<RequestReturns<TData>> {
+): Promise<FetchRequestReturns<TData>> {
     const url = buildURL({
         baseURL: ManageMyReviewsBaseURL,
         path: `/current/update/${reviewID}`,
@@ -55,7 +55,7 @@ export function patchUpdateMovieReviewForCurrentUser<TData = unknown>(
 /** Deletes a specific movie review owned by the authenticated user. */
 export function deleteRemoveMovieReviewForCurrentUser<TData = unknown>(
     reviewID: ObjectId,
-): Promise<RequestReturns<TData>> {
+): Promise<FetchRequestReturns<TData>> {
     const url = buildURL({
         baseURL: ManageMyReviewsBaseURL,
         path: `/current/delete/${reviewID}`,

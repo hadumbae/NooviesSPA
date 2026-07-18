@@ -3,7 +3,7 @@
  */
 
 import {ObjectId} from "@/common/_schemas";
-import {UpdateReservationNotesFormData} from "@/domains/reservations/_feat/update-reservations/hooks";
+import {UpdateReservationNotesFormData} from "@/domains/reservations/_feat/update-reservations/forms";
 
 /** Parameters for updating administrative notes on a reservation. */
 export type PatchUpdateReservationNotesParams = {

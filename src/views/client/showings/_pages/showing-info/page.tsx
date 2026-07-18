@@ -8,7 +8,7 @@ import {
 } from "@/common/_feat";
 import {PageLoader} from "@/views/common/_comp/page";
 import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 
 import {ShowingInfoPageContent} from "@/views/client/showings/_pages/showing-info/content.tsx";
 import {ShowingDetails, ShowingDetailsSchema, useFetchShowingBySlug} from "@/domains/showings";

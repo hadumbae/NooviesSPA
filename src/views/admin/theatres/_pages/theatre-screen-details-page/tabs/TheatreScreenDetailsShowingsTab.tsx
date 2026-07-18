@@ -4,7 +4,7 @@
  */
 
 import {TabsContent} from "@/common/components/ui/tabs.tsx";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {IconButton} from "@/views/common/_comp";
 import {List} from "lucide-react";
@@ -12,9 +12,9 @@ import {ReactElement} from "react";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/_schema/showing";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
+import {cn} from "@/common/_feat";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {useFetchShowings} from "@/domains/showings/_feat/crud-hooks";
 import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card";
 

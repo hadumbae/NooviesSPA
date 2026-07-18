@@ -5,9 +5,9 @@
 import {ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
-import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
 import {RoleTypeDepartmentConstant} from "@/domains/roletypes";
 
 /**

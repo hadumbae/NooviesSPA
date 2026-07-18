@@ -1,7 +1,7 @@
 /**
  * @fileoverview React Query hook for retrieving paginated movie reviews for a specific customer.
  */
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";

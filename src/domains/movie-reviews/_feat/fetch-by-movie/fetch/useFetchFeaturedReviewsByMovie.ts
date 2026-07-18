@@ -3,8 +3,8 @@
  */
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {ObjectId} from "@/common/_schemas";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
+import {RequestOptions} from "@/common/_types/request/RequestOptions.ts";
 import {getFetchFeaturedReviewsByMovie} from "@/domains/movie-reviews/_feat/fetch-by-movie/repository";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";

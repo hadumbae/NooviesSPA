@@ -4,7 +4,7 @@
 
 import {ReactElement, ReactNode} from "react";
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {HookFormInput, StarRatingSelector} from "@/views/common/_feat";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {

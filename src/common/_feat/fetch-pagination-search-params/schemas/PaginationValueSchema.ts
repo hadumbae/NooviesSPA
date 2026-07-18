@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {preprocessToNumber} from "@/common/_feat/validation-preprocessors";
-import {PositiveIntegerSchema} from "@/common/_schemas";
+import {PositiveIntegerSchema} from "@/common/_schemas/numbers";
 
 /** Zod schema for a pagination value object. */
 export const PaginationValueSchema = z.object({

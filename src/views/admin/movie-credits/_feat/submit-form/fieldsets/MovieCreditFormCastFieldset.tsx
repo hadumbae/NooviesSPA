@@ -2,10 +2,10 @@
 
 import {ReactElement} from "react";
 import {HookFormInput} from "@/views/common/_feat";
-import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
+import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {renderFields} from "@/common/_feat/submit-data";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {DisableFields} from "@/common/_types";
 import {MovieCreditFormValues} from "@/domains/movie-credits";
 
@@ -21,7 +21,7 @@ export function MovieCreditFormCastFieldset(
 ): ReactElement {
     const {control} = useFormContext();
 
-    const fields: HookFormField[] = [
+    const fields: ConditionalRenderConfig[] = [
         {
             render: !disableFields?.billingOrder,
             key: "billingOrder",

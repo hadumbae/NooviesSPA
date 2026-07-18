@@ -16,7 +16,7 @@ import {SheetTitle} from "@/common/components/ui/sheet/SheetTitle.tsx";
 import {SheetDescription} from "@/common/components/ui/sheet/SheetDescription.tsx";
 import {SheetTrigger} from "@/common/components/ui/sheet/SheetTrigger.tsx";
 import {FormContainerConfigProps} from "@/common/_feat/submit-data";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {RoleTypeFormData, RoleTypeFormValues} from "@/domains/roletypes/_feat";
 import {RoleTypeSubmitFormActions, RoleTypeSubmitFormView} from "@/views/admin/role-types";
 

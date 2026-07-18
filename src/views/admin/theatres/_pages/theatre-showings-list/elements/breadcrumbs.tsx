@@ -11,7 +11,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/common/components/ui";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 
 /** Props for the TheatreShowingListBreadcrumbs component. */
@@ -31,9 +31,9 @@ export function TheatreShowingListBreadcrumbs(
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink to="/admin/theatres">
+                        <HoverLink to="/admin/theatres">
                             All Theatres
-                        </LoggedHoverLink>
+                        </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -41,9 +41,9 @@ export function TheatreShowingListBreadcrumbs(
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink to={`/admin/theatres/get/${theatreSlug}`}>
+                        <HoverLink to={`/admin/theatres/get/${theatreSlug}`}>
                             {theatreName} | Details
-                        </LoggedHoverLink>
+                        </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

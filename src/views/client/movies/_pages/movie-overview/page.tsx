@@ -11,7 +11,7 @@ import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema
 import {PageLoader} from "@/views/common/_comp/page";
 import {MovieInfoPageContent} from "@/views/client/movies/_pages/movie-overview/content.tsx";
 import {MovieInfoOverviewViewData, useFetchMovieInfoOverviewViewData} from "@/domains/movies/_feat/client-view-data";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 
 /** Loads data and renders the movie overview page. */
 export function MovieInfoPage(): ReactElement {

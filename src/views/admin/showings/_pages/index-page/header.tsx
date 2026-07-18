@@ -1,7 +1,7 @@
 import {ReactElement} from "react";
 import {Plus} from "lucide-react";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 
 /**
  * @fileoverview Header section for the Showings index page.
@@ -18,9 +18,9 @@ export function ShowingIndexHeader(): ReactElement {
                 <HeaderDescription>The showings of movies at theatres.</HeaderDescription>
             </div>
 
-            <LoggedHoverLink to="/admin/showings/create" message="Navigate to Showing Create.">
+            <HoverLink to="/admin/showings/create" message="Navigate to Showing Create.">
                 <Plus/> Create
-            </LoggedHoverLink>
+            </HoverLink>
         </header>
     );
 }

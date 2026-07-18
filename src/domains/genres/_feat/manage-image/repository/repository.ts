@@ -2,7 +2,7 @@
  * @fileoverview Repository for managing genre image upload and removal operations.
  */
 
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {Genre} from "@/domains/genres/_schema";
 import {
     RemoveGenreImageConfig,
@@ -15,7 +15,7 @@ import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 /** Updates a genre's image using multipart form data. */
 export async function patchUpdateGenreImage(
     {_id, formData}: UpdateGenreImageConfig
-): Promise<RequestReturns<Genre>> {
+): Promise<FetchRequestReturns<Genre>> {
     const url = buildURL({
         baseURL: ManageGenreImageBaseURL,
         path: `/item/${_id}/image/update`,
@@ -27,7 +27,7 @@ export async function patchUpdateGenreImage(
 /** Removes the current image associated with a genre. */
 export async function patchRemoveGenreImage(
     {_id}: RemoveGenreImageConfig
-): Promise<RequestReturns<Genre>> {
+): Promise<FetchRequestReturns<Genre>> {
     const url = buildURL({
         baseURL: ManageGenreImageBaseURL,
         path: `/item/${_id}/image/remove`,

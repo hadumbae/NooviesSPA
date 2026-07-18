@@ -3,7 +3,7 @@
  *
  */
 
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {MovieReviewUniqueCode} from "@/domains/movie-reviews/_schema/fields";

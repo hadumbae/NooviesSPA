@@ -3,7 +3,7 @@
  */
 
 import {ReactNode} from 'react';
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 
 type DescriptionProps = {
     children?: ReactNode;

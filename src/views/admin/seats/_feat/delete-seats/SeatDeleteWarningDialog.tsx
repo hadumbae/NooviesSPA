@@ -3,15 +3,18 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import {OnDeleteMutationParams} from "@/common/type/form/MutationDeleteParams.ts";
-import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
-import {buildString} from "@/common/_feat/formatters/buildString.ts";
-import {SeatLayoutTypeLabelMap} from "@/domains/seats/_schema/constants";
-import {Seat, SeatDetails} from "@/domains/seats/_schema/model";
+import {
+    EntityDeleteWarningDialog
+} from "@/views/common/_feat/dialog/EntityDeleteWarningDialog.tsx";
+import {buildString, MutationResponseConfig} from "@/common/_feat";
+import {SeatLayoutTypeLabelMap} from "@/domains/seats";
+import {Seat, SeatDetails} from "@/domains/seats";
 import {useDeleteSeatSubmitHandler} from "@/domains/seats";
+import {UIOpenStateProps} from "@/common/_types";
+import {ObjectId} from "@/common/_schemas";
 
 /** Props for the SeatDeleteWarningDialog component. */
-type WarningProps = OnDeleteMutationParams & {
+type WarningProps = MutationResponseConfig<void, { _id: ObjectId }> & UIOpenStateProps & {
     children: ReactNode;
     seat: Seat | SeatDetails;
 };
@@ -20,7 +23,7 @@ type WarningProps = OnDeleteMutationParams & {
  * Renders a confirmation dialog that triggers a seat deletion mutation upon user approval.
  */
 export function SeatDeleteWarningDialog(
-    {children, seat, ...submitConfig}: WarningProps
+    {children, seat, isOpen, setIsOpen, ...submitConfig}: WarningProps
 ): ReactElement {
     const {_id, row, layoutType, x, y} = seat;
     const {deleteSeat} = useDeleteSeatSubmitHandler({_id, ...submitConfig});
@@ -38,7 +41,12 @@ export function SeatDeleteWarningDialog(
     const dialogTitle = `Proceed to delete ${label}?`;
 
     return (
-        <EntityDeleteWarningDialog title={dialogTitle} deleteResource={deleteSeat}>
+        <EntityDeleteWarningDialog
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            title={dialogTitle}
+            deleteResource={deleteSeat}
+        >
             {children}
         </EntityDeleteWarningDialog>
     );

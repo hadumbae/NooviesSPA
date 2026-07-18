@@ -12,7 +12,7 @@ import {
 import {SlugString} from "@/common/_schemas";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 
 /** Configuration for fetching person information. */

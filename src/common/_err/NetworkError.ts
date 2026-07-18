@@ -7,7 +7,7 @@
  * such as connection issues, timeouts, or low-level fetch errors.
  */
 
-import RequestMethod from "@/common/type/request/RequestMethod.ts";
+import {RequestMethod} from "@/common/_types/request/RequestMethod.ts";
 import {buildString} from "@/common/_feat/formatters/buildString.ts";
 
 type ErrorParams = {

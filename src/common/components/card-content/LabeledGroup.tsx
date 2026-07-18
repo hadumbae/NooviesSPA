@@ -4,7 +4,7 @@
  */
 
 import {ReactNode} from "react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {OrientationValues} from "@/common/_schemas/enums/OrientationEnumSchema.ts";
 
 /**

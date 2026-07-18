@@ -2,19 +2,15 @@
  * @fileoverview Reservation status action buttons for checkout and cancellation.
  */
 
-import {ObjectId} from "@/common/_schemas";
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
-import {Button} from "@/common/components/ui/button.tsx";
-import {Loader} from "lucide-react";
-import {ReservationStatus} from "@/domains/reservations/_schema/model/fields/ReservationStatusEnumSchema.ts";
-import {
-    useReservationStateMutations
-} from "@/domains/reservations/_feat/update-client-reservations/mutations/useReservationStateMutations.ts";
 import {ReactElement} from "react";
+import {ObjectId} from "@/common/_schemas";
+import {Button} from "@/common/components/ui";
+import {Loader} from "lucide-react";
+import {MutationResponseConfig} from "@/common/_feat";
+import {ReservationStatus, useReservationStateMutations} from "@/domains/reservations";
 
 /** Props for the MyReservationStatusActions component. */
-type ActionProps = Omit<MutationOnSubmitParams, "onSubmitSuccess"> & {
-    onSubmitSuccess?: () => void;
+type ActionProps = MutationResponseConfig<void, ObjectId> & {
     reservationID: ObjectId;
     status: ReservationStatus;
 };

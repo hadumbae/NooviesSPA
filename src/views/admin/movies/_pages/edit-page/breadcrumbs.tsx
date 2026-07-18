@@ -10,7 +10,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 
 /** Props for the MovieEditBreadcrumbs component. */
@@ -28,12 +28,9 @@ export function MovieEditBreadcrumbs({movieSlug, movieTitle}: BreadcrumbProps) {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink
-                            to="/admin/movies"
-                            component={MovieEditBreadcrumbs.name}
-                        >
+                        <HoverLink to="/admin/movies">
                             All Movies
-                        </LoggedHoverLink>
+                        </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -41,12 +38,9 @@ export function MovieEditBreadcrumbs({movieSlug, movieTitle}: BreadcrumbProps) {
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink
-                            to={`/admin/movies/get/${movieSlug}`}
-                            component={MovieEditBreadcrumbs.name}
-                        >
+                        <HoverLink to={`/admin/movies/get/${movieSlug}`}>
                             {movieTitle}
-                        </LoggedHoverLink>
+                        </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

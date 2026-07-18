@@ -3,7 +3,7 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";

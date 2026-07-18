@@ -3,7 +3,7 @@
  */
 
 import {ObjectId} from "@/common/_schemas";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {RequestOptions} from "@/common/_types/request/RequestOptions.ts";
 
 /**
  * Parameters for uploading a profile image.

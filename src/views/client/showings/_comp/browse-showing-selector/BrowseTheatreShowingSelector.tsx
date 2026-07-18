@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {IANATimezone} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 import {ShowingDetails} from "@/domains/showings";
 import {BrowseShowingSelector} from "@/views/client/showings/_comp";

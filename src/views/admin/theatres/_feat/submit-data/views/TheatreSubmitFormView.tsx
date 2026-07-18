@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {
     TheatreSubmitFormDetailsFieldset,

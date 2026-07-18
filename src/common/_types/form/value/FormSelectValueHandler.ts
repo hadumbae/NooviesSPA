@@ -2,7 +2,7 @@
  * @fileoverview Defines a handler type for processing React Select option values within a form field.
  */
 
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
 import {ControllerRenderProps, FieldValues, Path} from "react-hook-form";
 
 /** Function type that maps selected options to a specific form field value format. */

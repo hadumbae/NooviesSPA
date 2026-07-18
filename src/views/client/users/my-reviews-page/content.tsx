@@ -4,7 +4,7 @@
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {PaginationRangeButtons} from "@/views/common/_comp";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {MovieReviewIndexCard} from "@/views/client/movie-reviews/_comp/index-card";
 import {MyMovieReview} from "@/domains/movie-reviews/_schema/my-reviews";
 import {ReactElement} from "react";

@@ -4,7 +4,7 @@
 
 import {DateOnlyString} from "@/common/_schemas/dates/DateOnlyStringSchema.ts";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {
     getFetchTheatreInfoViewData,
     TheatreClientViewQueryKeys,

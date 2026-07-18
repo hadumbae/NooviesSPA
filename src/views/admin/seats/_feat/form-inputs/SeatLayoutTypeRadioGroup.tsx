@@ -5,9 +5,9 @@
 import {ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
 import {HookFormRadioGroup} from "@/views/common/_feat";
-import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
+import {HookRadioOption} from "@/common/_types/input/HookRadioOption.ts";
 import {SeatLayoutTypeConstant, SeatLayoutTypeLabelMap} from "@/domains/seats";
-import {HookFormInputProps} from "@/common/type/input/HookFormInputProps.ts";
+import {HookFormInputProps} from "@/common/_types/input/HookFormInputProps.ts";
 
 /**
  * Renders a controlled radio group for choosing a layout type, mapped via SeatLayoutTypeLabelMap.

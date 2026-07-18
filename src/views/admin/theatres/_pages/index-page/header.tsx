@@ -4,11 +4,11 @@
 
 import {ReactElement, useState} from 'react';
 import {Plus} from "lucide-react";
-import {LinkButton} from "@/views/common/_comp/submit-form";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 import {Theatre, useNavigateToTheatre} from "@/domains/theatres";
 import {TheatreSubmitForm, TheatreSubmitFormPanel} from "@/views/admin/theatres/_feat";
+import {Button} from "@/common/components/ui";
 
 /**
  * Header component for the Theatre index view.
@@ -36,9 +36,9 @@ export function TheatreIndexHeader(): ReactElement {
 
             <TheatreSubmitForm onSubmitSuccess={onSubmitSuccess}>
                 <TheatreSubmitFormPanel isOpen={isOpen} setIsOpen={setIsOpen}>
-                    <LinkButton size="sm" aria-label="Add a new theatre">
+                    <Button variant="link" size="sm" aria-label="Add a new theatre">
                         <Plus/> Theatre
-                    </LinkButton>
+                    </Button>
                 </TheatreSubmitFormPanel>
             </TheatreSubmitForm>
         </header>

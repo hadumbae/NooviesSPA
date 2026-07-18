@@ -7,7 +7,7 @@ import {PersonSummaryInfo} from "@/domains/persons/_feat/client-view-data";
 import {PageFlexWrapper, PageHeader} from "@/views/common/_comp";
 import {PaginationRangeButtons} from "@/views/common/_comp";
 import {BrowsePersonsPageListSection} from "@/views/client/persons/_pages/browse-page/sections";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {
     BrowsePersonsQueryOptionForm,
     BrowsePersonsQueryOptionsFormCollapsible,

@@ -4,9 +4,9 @@
 
 import {ReactElement} from "react";
 import {ControllerProps, FieldValues, useFormContext} from "react-hook-form";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
-import {HookFormInputProps} from "@/common/type/input/HookFormInputProps.ts";
-import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
+import {cn} from "@/common/_feat";
+import {HookFormInputProps} from "@/common/_types/input/HookFormInputProps.ts";
+import {HookRadioOption} from "@/common/_types/input/HookRadioOption.ts";
 import {
     FormControl,
     FormField,

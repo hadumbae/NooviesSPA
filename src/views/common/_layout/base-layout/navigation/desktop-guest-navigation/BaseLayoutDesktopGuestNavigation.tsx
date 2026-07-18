@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import NavLink from "@/common/components/navigation/NavLink.tsx";
+import {LayoutNavLink} from "@/views/common/_comp/layout/LayoutNavLink.tsx";
 import {SROnly} from "@/views/common/_comp";
 
 /**
@@ -13,9 +13,9 @@ export function BaseLayoutDesktopGuestNavigation(): ReactElement {
     return (
         <section className="flex items-center space-x-4 font-spaceGrotesk">
             <SROnly text="Desktop Navigation"/>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/auth/register">Register</NavLink>
-            <NavLink to="/auth/login">Login</NavLink>
+            <LayoutNavLink to="/">Home</LayoutNavLink>
+            <LayoutNavLink to="/auth/register">Register</LayoutNavLink>
+            <LayoutNavLink to="/auth/login">Login</LayoutNavLink>
         </section>
     );
 }

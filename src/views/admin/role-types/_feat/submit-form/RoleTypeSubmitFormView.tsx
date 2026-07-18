@@ -4,10 +4,10 @@
 
 import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {HookFormInput} from "@/views/common/_feat";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {HookFormTextArea} from "@/views/common/_feat/form-inputs/HookFormTextArea.tsx";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";

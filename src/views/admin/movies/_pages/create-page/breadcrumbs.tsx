@@ -10,7 +10,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/common/components/ui/breadcrumb.tsx";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 
 /** Breadcrumb component providing navigation back to the movie list from the creation view. */
 export function MovieCreatePageBreadcrumbs() {
@@ -19,12 +19,12 @@ export function MovieCreatePageBreadcrumbs() {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink
+                        <HoverLink
                             to="/admin/movies"
                             component={MovieCreatePageBreadcrumbs.name}
                         >
                             All Movies
-                        </LoggedHoverLink>
+                        </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {Control, FieldValues, Path} from "react-hook-form";
 import {HookFormMultiSelect} from "@/views/common/_comp/form-select/HookFormMultiSelect.tsx";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
 import {ScreenTypeConstant} from "@/domains/theatre-screens";
 
 /** Props for the ScreenTypeHookFormSelect component. */

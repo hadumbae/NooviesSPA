@@ -1,8 +1,10 @@
 import {FC} from 'react';
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {Outlet} from "react-router-dom";
 import {Bounce, ToastContainer} from "react-toastify";
-import AppErrorBoundary from "@/common/components/boundary/app-error-boundary/AppErrorBoundary.tsx";
+import {
+    AppErrorBoundary
+} from "@/views/common/_feat/error-boundary/app-error-boundary/boundary/AppErrorBoundary.tsx";
 
 /**
  * Admin layout content wrapper.

@@ -4,7 +4,7 @@
 
 import {RouteObject} from "react-router-dom";
 import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
-import {ComponentErrorHandler} from "@/common/components/errors/ComponentErrorHandler.tsx";
+import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
 import {ShowingInfoPage} from "@/views/client/showings";
 
 /** Route configuration for the public showing information and browsing views. */

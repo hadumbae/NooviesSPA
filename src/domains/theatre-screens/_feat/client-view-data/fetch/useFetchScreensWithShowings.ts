@@ -10,7 +10,7 @@ import {ObjectId} from "@/common/_schemas";
 import {DateOnlyString} from "@/common/_schemas/dates/DateOnlyStringSchema.ts";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 
 import {TheatreScreenSchedule, TheatreScreenScheduleSchema} from "@/domains/theatre-screens/_schema";
 import {fetchScreensWithShowings} from "@/domains/theatre-screens/_feat/client-view-data/repository";

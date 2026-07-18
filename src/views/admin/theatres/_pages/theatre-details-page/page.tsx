@@ -6,8 +6,10 @@ import {ReactElement} from 'react';
 import {PageLoader} from "@/views/common/_comp/page";
 import {useFetchByIdentifierRouteParams} from "@/common/_feat";
 import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
-import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {
+    QueryErrorBoundary
+} from "@/views/common/_feat/error-boundary/query-error-fallback/boundary/QueryErrorBoundary.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 
 import {TheatreDetailsPageContent} from "@/views/admin/theatres/_pages/theatre-details-page/content.tsx";

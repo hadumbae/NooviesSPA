@@ -1,7 +1,6 @@
 /**
  * @fileoverview React Query mutation hook for creating or updating a MovieReview for the current user.
  */
-import {MutationOnSubmitParams} from "@/common/type/form/MutationSubmitParams.ts";
 import {ObjectId} from "@/common/_schemas";
 import {UseFormReturn} from "react-hook-form";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
@@ -18,11 +17,12 @@ import {
     MovieReviewFormValues
 } from "@/domains/movie-reviews/_feat/submit-form/schema/MovieReviewFormSchema.ts";
 import {MyReviewsMutationKeys} from "@/domains/movie-reviews/_feat";
+import {MutationResponseConfig} from "@/common/_feat";
 
 /** Parameters for invoking the submit MovieReview mutation. */
 export type SubmitMutation = {
     editID?: ObjectId;
-    onSubmitConfig?: MutationOnSubmitParams<MovieReview>;
+    onSubmitConfig?: MutationResponseConfig<MovieReview>;
     form: UseFormReturn<MovieReviewFormValues, unknown, MovieReviewForm>;
 }
 

@@ -8,7 +8,7 @@ import {RoleTypeListPageContent} from "@/views/admin/role-types/_pages/list-page
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {PaginatedItems} from "@/common/_types";
 import {RoleType, RoleTypeQueryOptionsSchema, RoleTypeSchema, useFetchPaginatedRoleTypes} from "@/domains/roletypes";
 

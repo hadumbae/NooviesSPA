@@ -1,9 +1,14 @@
+/**
+ * @fileoverview Defines the routing configuration for system-level pages including errors and fallbacks.
+ */
+
 import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
 import {ErrorPage} from "@/views/common/_pages/error/ErrorPage.tsx";
 import {NotFoundPage} from "@/views/common/_pages/error/NotFoundPage.tsx";
 import {UnauthorizedPage} from "@/views/common/_pages/error/UnauthorizedPage.tsx";
 
-export default [
+/** Route definitions for error handling and wildcard path matching. */
+export const SystemRoutes = [
     {
         path: '*',
         element: <BaseLayout/>,

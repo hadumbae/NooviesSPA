@@ -7,8 +7,8 @@ import {RoleTypeDepartmentRadioGroup} from "@/views/admin/role-types";
 import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
 import {HookFormInput} from "@/views/common/_feat";
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
-import {HookFormField} from "@/common/type/form/HookFormFieldGroupTypes.ts";
+import {cn} from "@/common/_feat";
+import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
 import {renderFields} from "@/common/_feat/submit-data";
 import {DisableFields} from "@/common/_types";
 import {MovieCreditFormValues} from "@/domains/movie-credits";
@@ -27,7 +27,7 @@ export function MovieCreditFormDetailsFieldset(
 ): ReactElement {
     const {control} = useFormContext();
 
-    const fields: HookFormField[] = [
+    const fields: ConditionalRenderConfig[] = [
         {
             render: !disableFields?.department,
             key: "department",

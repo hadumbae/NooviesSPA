@@ -1,6 +1,5 @@
 /**
- * @file Interactive button group for switching between application theme variants.
- * @filename ThemeButtonSelectors.tsx
+ * @fileoverview Interactive button group for switching between application theme variants.
  */
 
 import {Button} from "@/common/components/ui/button.tsx";
@@ -8,34 +7,26 @@ import {LucideIcon, Moon, Sun, SunMoon} from "lucide-react";
 import {ThemeVariant} from "@/common/_schemas/enums/ThemeVariantSchema.ts";
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {ThemeContext} from "@/common/_feat/theme/ctx/ThemeContext.ts";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
+import {ReactElement} from "react";
 
-/**
- * Internal metadata for rendering theme toggle buttons.
- */
+/** Metadata for rendering individual theme selection buttons. */
 type ButtonMetadata = {
-    /** Whether the button represents the currently active theme. */
     isSelected: boolean;
-    /** The specific theme variant this button activates. */
     variant: ThemeVariant;
-    /** The Lucide icon associated with the theme variant. */
     icon: LucideIcon;
 }
 
 /**
- * Provides a row of icon buttons to control the global {@link ThemeContext}.
- * * * **State Awareness:** Consumes `themeVariant` to highlight the active selection with the primary brand color.
- * * **Reactivity:** Triggers `updateThemeVariant` on click to persist and apply new styles across the DOM.
- * * **Visuals:** Maps "system", "light", and "dark" variants to their respective semantic icons (SunMoon, Sun, Moon).
+ * Component for selecting the application theme variant.
+ * Must be used within a ThemeContext provider.
  */
-export const ThemeButtonSelectors = () => {
-    /** Accesses the mandatory theme context; throws an error if used outside of ThemeProvider. */
+export function ThemeButtonSelectors(): ReactElement {
     const {themeVariant, updateThemeVariant} = useRequiredContext({
         context: ThemeContext,
         message: "Must be used within a theme provider.",
     });
 
-    /** Configuration for the three supported theme modes. */
     const buttons: ButtonMetadata[] = [
         {isSelected: themeVariant === "system", variant: "system", icon: SunMoon},
         {isSelected: themeVariant === "light", variant: "light", icon: Sun},
@@ -60,4 +51,4 @@ export const ThemeButtonSelectors = () => {
             ))}
         </div>
     );
-};
+}

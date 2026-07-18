@@ -5,9 +5,9 @@
  */
 
 import {ReactElement, ReactNode} from "react";
-import {HeaderTag} from "@/common/type/HeaderTag.ts";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {HeaderTag} from "@/common/_types";
+import {cn} from "@/common/_feat";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {LinkProps} from "react-router-dom";
 import {ChevronRight} from "lucide-react";
 

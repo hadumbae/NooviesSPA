@@ -5,8 +5,8 @@
  */
 
 import {ReactElement} from 'react';
-import ThreeDotsLoader from "@/common/components/loaders/ThreeDotsLoader.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {ThreeDotsLoader} from "@/views/common/_comp/loaders/ThreeDotsLoader.tsx";
+import {cn} from "@/common/_feat";
 
 type LoaderProps = {
     className?: string;

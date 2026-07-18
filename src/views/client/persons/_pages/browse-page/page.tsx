@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {BrowsePersonsQueryOptionsSchema, useFetchBrowsePersonsViewData} from "@/domains/persons/_feat/client-view-data";
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {useParsedSearchParams} from "@/common/_feat";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {BrowsePersonsPageContent} from "@/views/client/persons/_pages/browse-page/content.tsx";
 
 const PERSONS_PER_PAGE = 20;

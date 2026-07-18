@@ -3,7 +3,7 @@
  */
 
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import LinkGroup from "@/common/components/LinkGroup.tsx";
+import {SeparatedLinks} from "@/views/common/_feat/navigation/SeparatedLinks.tsx";
 import {generateMovieCreditLinkConfigs} from "@/domains/movie-credits/_feat/navigation/generateMovieCreditLinkConfigs.ts";
 
 import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
@@ -31,11 +31,11 @@ export function BrowseMovieSummaryCredits(
     return (
         <div className="space-y-1">
             <LabeledGroup label="Directors">
-                {directors.length > 0 ? <LinkGroup links={directors}/> : noneSpan}
+                {directors.length > 0 ? <SeparatedLinks links={directors}/> : noneSpan}
             </LabeledGroup>
 
             <LabeledGroup label="Actors">
-                {actors.length > 0 ? <LinkGroup links={actors}/> : noneSpan}
+                {actors.length > 0 ? <SeparatedLinks links={actors}/> : noneSpan}
             </LabeledGroup>
         </div>
     );

@@ -3,7 +3,7 @@
  */
 
 import {buildURL} from "@/common/_feat/fetch-api";
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 
 import {
@@ -21,7 +21,7 @@ import {
  */
 export async function getFetchTheatreScreenAdminViewData(
     {theatreSlug, screenSlug}: FetchTheatreScreenAdminViewDataConfig
-): Promise<RequestReturns<TheatreScreenDetailsViewData>> {
+): Promise<FetchRequestReturns<TheatreScreenDetailsViewData>> {
     const url = buildURL({
         baseURL: TheatreScreenAdminViewDataBaseURL,
         path: `/theatre/${theatreSlug}/screen/${screenSlug}/details`,

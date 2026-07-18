@@ -4,7 +4,7 @@
 
 import {MovieWithRating} from "@/domains/movies/_schema/movie/MovieWithRatingSchema.ts";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {
     ISO6391LanguageLabels as ISO6391LanguageConstant
@@ -14,7 +14,7 @@ import {
 } from "@/views/admin/customers/_comp/movie-with-rating-card/AdminMovieWithRatingCardStat.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {VerticalDivider} from "@/views/common/_comp/VerticalDivider.tsx";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {MovieRatingBadge} from "@/views/admin/movie-reviews/_comp";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {ReactElement} from "react";

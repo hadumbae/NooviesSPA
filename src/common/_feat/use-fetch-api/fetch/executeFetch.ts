@@ -3,7 +3,7 @@
  */
 
 import {Logger} from "@/common/_feat/logger/Logger.ts";
-import RequestMethod from "@/common/type/request/RequestMethod.ts";
+import {RequestMethod} from "@/common/_types/request/RequestMethod.ts";
 
 type FetchParams = {
     url: string;

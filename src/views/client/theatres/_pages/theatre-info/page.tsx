@@ -8,7 +8,7 @@ import {
 } from "@/common/_feat";
 import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 
 import {useFetchTheatreInfoViewData} from "@/domains/theatres/_feat";
 import {TheatreInfoPageContent} from "@/views/client/theatres/_pages/theatre-info/content.tsx";

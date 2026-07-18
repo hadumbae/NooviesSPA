@@ -13,7 +13,7 @@ import {MovieIndexPageContent} from "@/views/admin/movies/_pages/index-page/cont
 import {PaginatedItems} from "@/common/_types";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {useFetchPaginatedMovies} from "@/domains/movies/_feat/crud-hooks";
 
 const MOVIES_PER_PAGE = 20;

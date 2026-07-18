@@ -8,8 +8,8 @@ import {Card, CardContent} from "@/common/components/ui";
 import {
     generateLocationAddressString
 } from "@/common/_feat/formatters/generateLocationAddressString.ts";
-import TooltipStatItem from "@/common/components/stat-details/TooltipStatItem.tsx";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {TooltipStatItem} from "@/views/common/_comp/text-display/TooltipStatItem.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 
 import {TheatreDetails} from "@/domains/theatres";
 

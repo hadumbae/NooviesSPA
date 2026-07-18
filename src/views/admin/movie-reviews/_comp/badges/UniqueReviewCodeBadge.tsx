@@ -4,7 +4,7 @@
 
 import {MovieReviewUniqueCode} from "@/domains/movie-reviews/_schema/fields";
 import {Badge} from "@/common/components/ui/badge.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {ReactElement} from "react";
 
 /** Props for the UniqueReviewCodeBadge component. */

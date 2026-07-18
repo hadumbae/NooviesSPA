@@ -4,9 +4,9 @@
 
 import {ReactElement} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
+import {Link} from "react-router-dom";
 import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
-import {MovieDetails} from "@/domains/movies/_schema/movie";
-import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
+import {MovieDetails} from "@/domains/movies";
 
 /** Props for the MovieDetailsCardMultimediaSection component. */
 type SectionProps = {
@@ -28,14 +28,14 @@ export function MovieDetailsCardMultimediaSection(
 
             <LabelContent label="Trailer" orientation="horizontal">
                 {trailerURL ? (
-                    <LoggedAnchor
-                        href={trailerURL}
+                    <Link
+                        to={trailerURL}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-neutral-500 hover:underline hover:text-black"
                     >
                         Link
-                    </LoggedAnchor>
+                    </Link>
                 ) : "None"}
             </LabelContent>
         </section>

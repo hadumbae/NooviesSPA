@@ -3,8 +3,10 @@
  */
 
 import {ReactElement} from 'react';
-import LayoutTitle from "@/common/components/layout/LayoutTitle.tsx";
-import LayoutBreakpointIndicator from "@/common/components/layout/LayoutBreakpointIndicator.tsx";
+import {LayoutTitle} from "@/views/common/_comp/layout/LayoutTitle.tsx";
+import {
+    LayoutBreakpointIndicator
+} from "@/views/common/_comp/layout/LayoutBreakpointIndicator.tsx";
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {SidebarContext, SidebarTrigger} from "@/common/components/ui";
 import AdminLayoutDesktopNavigation from "@/views/common/_layout/admin-layout/navigation/AdminLayoutDesktopNavigation.tsx";

@@ -27,8 +27,8 @@ export function MovieReviewIndexCardActions(
 
     const {mutate: deleteReview} = useDeleteCurrentUserMovieReviewMutation({
         successMessage: "Review Removed",
-        onDeleteSuccess: () => setIsLoading(false),
-        onDeleteError: () => setIsLoading(false),
+        onSubmitSuccess: () => setIsLoading(false),
+        onSubmitError: () => setIsLoading(false),
     });
 
     const onClickDelete = () => {

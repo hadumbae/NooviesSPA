@@ -11,7 +11,7 @@ import {SeatHookFormSelect} from "@/views/admin/seats";
 import {SeatMapStatusRadioGroup} from "@/views/admin/seatmaps/_feat/form-input";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {ObjectId} from "@/common/_schemas";
 
 type ViewProps = FormFieldsetProps<SeatMapFormValues> & {

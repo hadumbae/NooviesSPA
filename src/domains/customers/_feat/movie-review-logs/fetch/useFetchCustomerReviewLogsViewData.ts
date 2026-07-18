@@ -8,7 +8,7 @@ import {buildQueryFn} from "@/common/_feat/validate-fetch-data"
 import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts"
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params"
 import {MovieReviewUniqueCode} from "@/domains/movie-reviews/_schema/fields"
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts"
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts"
 import {CustomerReviewLogsQueryKeys} from "@/domains/customers/_feat/movie-review-logs/fetch/queryKeys.ts"
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts"
 import {

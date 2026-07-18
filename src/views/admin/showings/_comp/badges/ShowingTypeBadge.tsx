@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Badge} from "@/common/components/ui/badge.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {parseShowingType} from "@/domains/showings/_feat/formatters";
 
 /** Props for the ShowingTypeBadge component. */

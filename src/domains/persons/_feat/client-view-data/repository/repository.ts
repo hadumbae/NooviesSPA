@@ -2,7 +2,7 @@
  * @fileoverview Repository for fetching person-related view data for the client-side interface.
  */
 
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 import {PersonInfoViewData} from "@/domains/persons/_feat/client-view-data/person-info";
@@ -16,7 +16,7 @@ import {BrowsePersonsViewData} from "@/domains/persons/_feat/client-view-data";
 /** Fetches a paginated list of persons for the browse view. */
 export async function getFetchBrowsePersonsViewData(
     {page, perPage, queries}: GetFetchBrowsePersonsViewDataConfig
-): Promise<RequestReturns<BrowsePersonsViewData>> {
+): Promise<FetchRequestReturns<BrowsePersonsViewData>> {
     const url = buildURL({
         baseURL: PersonClientViewBaseURL,
         path: "/browse",
@@ -29,7 +29,7 @@ export async function getFetchBrowsePersonsViewData(
 /** Fetches detailed information for a specific person based on their slug. */
 export async function getFetchPersonInfoViewData(
     {slug, limit}: GetFetchPersonInfoViewDataConfig
-): Promise<RequestReturns<PersonInfoViewData>> {
+): Promise<FetchRequestReturns<PersonInfoViewData>> {
     const url = buildURL({
         baseURL: PersonClientViewBaseURL,
         path: `/person/${slug}/info`,

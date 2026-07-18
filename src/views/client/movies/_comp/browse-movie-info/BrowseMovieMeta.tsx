@@ -3,10 +3,10 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 
 import {buildMovieContext, MovieDetails} from "@/domains/movies";
 

@@ -4,12 +4,12 @@
 
 import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
 import {getInitials} from "@/common/_feat/formatters/getInitials.ts";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {mapCreditToPersonLinkConfig} from "@/domains/movie-credits/_feat/navigation/mapCreditToPersonLinkConfig.ts";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 
 import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {ReactElement} from "react";
 
 /** Props for the ActorCreditAvatar component. */
@@ -38,9 +38,9 @@ export function ActorCreditAvatar({credit, className}: ActorCreditAvatarProps): 
             </LoggedLink>
 
             <div className="flex flex-col max-lg:items-center space-y-1">
-                <LoggedHoverLink to={linkTo} context={linkCtx} className="font-bold max-md:text-sm">
+                <HoverLink to={linkTo} context={linkCtx} className="font-bold max-md:text-sm">
                     {displayName}
-                </LoggedHoverLink>
+                </HoverLink>
 
                 <span className="secondary-text text-sm">
                     {characterName}

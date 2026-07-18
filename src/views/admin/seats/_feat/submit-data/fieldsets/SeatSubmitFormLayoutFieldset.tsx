@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {Separator} from "@/common/components/ui";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {SeatLayoutTypeRadioGroup} from "@/views/admin/seats/_feat/form-inputs";
 import {SeatFormValues} from "@/domains/seats";

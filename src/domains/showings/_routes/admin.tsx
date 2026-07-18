@@ -3,7 +3,7 @@
  */
 
 import {RouteObject} from "react-router-dom";
-import {ComponentErrorHandler} from "@/common/components/errors/ComponentErrorHandler.tsx";
+import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
 import {ShowingCreatePage, ShowingDetailsPage, ShowingEditPage, ShowingIndexPage} from "@/views/admin/showings/_pages";
 

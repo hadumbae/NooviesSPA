@@ -2,13 +2,13 @@
  * @fileoverview Presentation component for the Theatre Index page content.
  */
 
-import {ReactElement} from "react";
+import {ReactElement, useState} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
+import {QueryFilterDialog} from "@/views/common/_feat/dialog/QueryFilterDialog.tsx";
 import {ScrollArea, ScrollBar} from "@/common/components/ui";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {PaginationRangeButtons} from "@/views/common/_comp";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 
 import {TheatreDetails, TheatreQueryOptionSchema} from "@/domains/theatres";
@@ -31,22 +31,28 @@ type ContentProps = {
 export function TheatreIndexPageContent(
     {theatres, page, perPage, setPage, totalItems}: ContentProps
 ): ReactElement {
-    useSetAdminPageTitle({presetTitle: "Theatre Index"})
+    useSetAdminPageTitle({presetTitle: "Theatre Index"});
 
     const {searchParams} = useParsedSearchParams({schema: TheatreQueryOptionSchema});
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
         <PageFlexWrapper>
             <TheatreIndexHeader/>
 
-            <PresetFilterDialog title="Theatre Filters" description="Filter and sort theatres.">
+            <QueryFilterDialog
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                title="Theatre Filters"
+                description="Filter and sort theatres."
+            >
                 <ScrollArea className="max-h-[80vh]">
                     <ScrollBar/>
                     <TheatreQueryOptionForm presetValues={searchParams}>
                         <TheatreQueryOptionFormView/>
                     </TheatreQueryOptionForm>
                 </ScrollArea>
-            </PresetFilterDialog>
+            </QueryFilterDialog>
 
             {theatres.length > 0 ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

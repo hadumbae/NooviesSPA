@@ -3,8 +3,8 @@
  */
 
 import {ReactElement, ReactNode} from "react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
-import {HeaderTag} from "@/common/type/HeaderTag.ts";
+import {cn} from "@/common/_feat";
+import {HeaderTag} from "@/common/_types";
 
 /** Props for the SectionSubtitle component. */
 type TitleProps = {

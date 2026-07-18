@@ -4,7 +4,7 @@
 
 import {FieldValues} from "react-hook-form";
 import { createContext } from "react";
-import {FormStepMeta} from "@/common/_feat/multi-step-form";
+import {FormStepMeta} from "@/common/_feat/multi-step-form/types.ts";
 
 /** Values provided by the multi-step form state context. */
 export type MultiStepFormStateContextValues<TValues extends FieldValues = any> = {

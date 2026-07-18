@@ -5,14 +5,15 @@
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";
-import {RequestOptions, RequestPaginationOptions} from "@/common/type/request/RequestOptions.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {RequestOptions} from "@/common/_types/request/RequestOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/keys/GenreCRUDQueryKeys.ts";
 import {ZodType, ZodTypeDef} from "zod";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {query} from "@/domains/genres/_feat/crud";
 import {GenreQueryOptions} from "@/domains/genres/_schema";
+import {RequestPaginationOptions} from "@/common/_types/request/RequestPaginationOptions";
 
 /** Parameters for the useFetchGenres hook. */
 type FetchQueries<TData = unknown> = {

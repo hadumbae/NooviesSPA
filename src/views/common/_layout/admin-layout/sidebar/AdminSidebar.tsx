@@ -17,9 +17,9 @@ import AdminMovieSidebarGroup
     from "@/views/common/_layout/admin-layout/sidebar/admin-side-bar-groups/AdminMovieSidebarGroup.tsx";
 import AdminDashboardSidebarGroup
     from "@/views/common/_layout/admin-layout/sidebar/admin-side-bar-groups/AdminDashboardSidebarGroup.tsx";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {LayoutThemeSidebarGroup} from "@/views/common/_layout/common/sidebar/LayoutThemeSidebarGroup.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {
     AdminReservationSidebarGroup
 } from "@/views/common/_layout/admin-layout/sidebar/admin-side-bar-groups/AdminReservationSidebarGroup.tsx";

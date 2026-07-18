@@ -4,7 +4,9 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {ObjectId} from "@/common/_schemas";
-import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
+import {
+    EntityDeleteWarningDialog
+} from "@/views/common/_feat/dialog/EntityDeleteWarningDialog.tsx";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useScreenDeleteMutation} from "@/domains/theatre-screens/_feat/crud-hooks";
 import {UIOpenStateProps} from "@/common/_types";

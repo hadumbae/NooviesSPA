@@ -13,7 +13,7 @@ import {
 } from "@/common/components/ui/breadcrumb.tsx";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {RoleTypeDepartment} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {Movie} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 
 /** Props for the MoviePersonListBreadcrumb component. */
@@ -38,9 +38,9 @@ export function MoviePersonListBreadcrumb(
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink to="/admin/movies">
+                        <HoverLink to="/admin/movies">
                             All Movies
-                        </LoggedHoverLink>
+                        </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -48,9 +48,9 @@ export function MoviePersonListBreadcrumb(
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink to={`/admin/movies/get/${slug}`}>
+                        <HoverLink to={`/admin/movies/get/${slug}`}>
                             {`${title} ${parsedReleaseYear}`}
-                        </LoggedHoverLink>
+                        </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

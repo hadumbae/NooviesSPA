@@ -3,12 +3,12 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {PaginatedItems} from "@/common/_types";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {PageSectionHeader} from "@/views/common/_comp/page";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {PaginationRangeButtons} from "@/views/common/_comp";
 import {MovieCastCreditCard, MovieCrewCreditCard} from "@/views/admin/movie-credits/_feat";
 

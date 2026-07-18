@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 
 import {AdminReservation, ReservationUniqueCode} from "@/domains/reservations";
 import {SetReservationCodeForm, SetReservationCodeFormCard} from "@/views/admin/reservations/_feat";

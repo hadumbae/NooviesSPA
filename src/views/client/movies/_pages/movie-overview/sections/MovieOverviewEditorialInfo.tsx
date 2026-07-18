@@ -6,7 +6,7 @@
 import {ReactElement} from "react";
 import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {Separator} from "@/common/components/ui";
-import LinkGroup from "@/common/components/LinkGroup.tsx";
+import {SeparatedLinks} from "@/views/common/_feat/navigation/SeparatedLinks.tsx";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 
 import {generateGenreLinkConfigs} from "@/domains/genres";
@@ -50,7 +50,7 @@ export function MovieOverviewEditorialInfo(
                 </>)}
 
                 <LabeledGroup label="Genres">
-                    <LinkGroup links={genreLinks} className="px-2"/>
+                    <SeparatedLinks links={genreLinks} className="px-2"/>
                 </LabeledGroup>
 
                 <Separator/>

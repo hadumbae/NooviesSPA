@@ -15,7 +15,7 @@ import {
 } from "@/common/components/ui";
 import {UIOpenStateProps} from "@/common/_types";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
 import {useLockForFormUI} from "@/common/_feat/handle-form/useLockForFormUI.ts";
 import {GenreImageUploadFormView} from "@/views/admin/genres/_feat/image-upload-form/GenreImageUploadFormView.tsx";
 

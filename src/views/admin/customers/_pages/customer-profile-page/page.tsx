@@ -4,11 +4,11 @@
 
 import {ReactElement} from "react";
 import {Loader} from "lucide-react";
-import {CustomerProfileViewData, useFetchCustomerProfileViewData} from "@/domains/customers/_feat/profile-overview";
-import {CustomerProfilePageContent} from "@/views/admin/customers/_pages/customer-profile-page/content.tsx";
+import {PageCenter} from "@/views/common/_comp";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {useFetchCustomerCode} from "@/domains/users";
-import {PageCenter} from "@/views/common/_comp/page";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {CustomerProfileViewData, useFetchCustomerProfileViewData} from "@/domains/customers";
+import {CustomerProfilePageContent} from "@/views/admin/customers/_pages/customer-profile-page/content.tsx";
 
 /**
  * Orchestrates data fetching and validation for the Customer Profile view.

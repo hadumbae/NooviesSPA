@@ -3,8 +3,8 @@
  */
 import {ObjectId} from "@/common/_schemas";
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {RequestOptions} from "@/common/_types/request/RequestOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {getFetchReviewDetailsByMovie} from "@/domains/movie-reviews/_feat/fetch-by-movie/repository";

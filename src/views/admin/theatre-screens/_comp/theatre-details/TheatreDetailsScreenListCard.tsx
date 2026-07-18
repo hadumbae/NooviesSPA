@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Card, CardContent, Progress, Separator} from "@/common/components/ui";
 import {TheatreScreenTypeBadge} from "@/views/admin/theatre-screens/_comp/badges";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens";
 import {

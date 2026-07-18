@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {ChevronLeft} from "lucide-react";
 import {Badge} from "@/common/components/ui";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {SROnly, SubsectionSubtitle, SubsectionTitle} from "@/views/common/_comp";
 
 import {Genre} from "@/domains/genres";
@@ -29,9 +29,9 @@ export function GenreInfoBanner({genre}: BannerProps): ReactElement {
             />
 
             <div className="flex flex-col justify-center space-y-3 p-1">
-                <LoggedHoverLink to="/browse/genres">
+                <HoverLink to="/browse/genres">
                     <ChevronLeft size={16}/> Genres
-                </LoggedHoverLink>
+                </HoverLink>
 
                 <section>
                     <SROnly text="Genre Details"/>

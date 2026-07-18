@@ -7,7 +7,7 @@ import {HookFormInput} from "@/views/common/_feat";
 import {
     HookFormSortToggle as HookFormStateToggleButton
 } from "@/views/common/_feat";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";

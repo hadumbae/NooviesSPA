@@ -2,7 +2,7 @@ import {RouteObject} from "react-router-dom";
 import HomeRoutes from "@/domains/client/routing/ClientRoutes.tsx";
 import {AuthRoutes} from "@/domains/auth/routing/AuthRoutes.tsx";
 import {PersonRoutes} from "@/domains/persons/_routes/PersonRoutes.tsx";
-import SystemRoutes from "@/common/_routes/SystemRoutes.tsx";
+import {SystemRoutes} from "@/common/_routes/SystemRoutes.tsx";
 import {UserProfileRoutes} from "@/domains/users";
 import {RoleTypeRoutes} from "@/domains/roletypes";
 import AdminDashboardRoutes from "@/domains/dashboard/routing/AdminDashboardRoutes.tsx";
@@ -41,7 +41,7 @@ const clientRoutes: RouteObject[] = [
 
 // --- AGGREGATE ---
 
-export default [
+export const RegisterRoutes = [
     ...SystemRoutes,
 
     ...HomeRoutes,
@@ -52,4 +52,5 @@ export default [
 
     ...TheatreRoutes
 ];
+
 

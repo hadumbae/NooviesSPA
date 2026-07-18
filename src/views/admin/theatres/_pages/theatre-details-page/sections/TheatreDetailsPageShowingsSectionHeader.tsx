@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {List, Plus} from "lucide-react";
 import {PageSectionHeader} from "@/views/common/_comp/page";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {IconButton} from "@/views/common/_comp";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 

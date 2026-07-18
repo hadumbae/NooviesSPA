@@ -2,7 +2,7 @@
  * @fileoverview Repository for retrieving paginated reservation history for the current client.
  */
 
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 import {PaginatedItems} from "@/common/_types";
 import {PopulatedReservation} from "@/domains/reservations/_schema";
@@ -19,7 +19,7 @@ import {
  */
 export const getFetchUserReservations = async (
     {page, perPage, queries}: GetFetchUserReservationsConfig = {page: 1, perPage: 20}
-): Promise<RequestReturns<PaginatedItems<PopulatedReservation>>> => {
+): Promise<FetchRequestReturns<PaginatedItems<PopulatedReservation>>> => {
     const url = buildURL({
         baseURL: FetchClientReservationsBaseURL,
         path: "/user/paginated",

@@ -1,7 +1,7 @@
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {ObjectId} from "@/common/_schemas";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {RequestOptions} from "@/common/_types/request/RequestOptions.ts";
 import {PersonCreditBaseURL} from "@/domains/movie-credits/_feat/person-credit/repository/baseURL.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {PersonFilmography} from "@/domains/movie-credits/_feat/person-credit/schema";
@@ -16,7 +16,7 @@ export type FilmographyForPersonConfig = {
 
 export async function getFetchFilmographyForPerson(
     {_id, config}: FilmographyForPersonConfig
-): Promise<RequestReturns<PersonFilmography>> {
+): Promise<FetchRequestReturns<PersonFilmography>> {
     const url = buildURL({
         baseURL: PersonCreditBaseURL,
         path: `/person/${_id}/filmography/recent`,

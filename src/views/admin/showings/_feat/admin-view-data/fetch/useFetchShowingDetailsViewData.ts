@@ -3,7 +3,7 @@ import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {ShowingDetailsViewData} from "@/views/admin/showings/_feat/admin-view-data/schema";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 import {ZodType, ZodTypeDef} from "zod";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {getFetchShowingDetailsViewData} from "@/views/admin/showings/_feat/admin-view-data/repository";
 import {ShowingAdminViewDataQueryKeys} from "@/views/admin/showings/_feat/admin-view-data/fetch/queryKeys.ts";

@@ -4,9 +4,9 @@
 
 import {ReactElement} from 'react';
 import {Card, CardContent, Separator} from "@/common/components/ui";
-import {DetailsCardSpan} from "@/common/components/text/DetailsCardSpan.tsx";
+import {DetailsCardSpan} from "@/views/common/_comp/text-display/spans/DetailsCardSpan.tsx";
 import {ISO3166Alpha2CountryConstant} from "@/common/_const";
-import {TextQuote} from "@/common/components/text/TextQuote.tsx";
+import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
 import {Person} from "@/domains/persons";
 
 /**

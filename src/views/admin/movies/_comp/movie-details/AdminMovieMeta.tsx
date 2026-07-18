@@ -5,8 +5,8 @@
 import {ReactElement} from "react";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {buildString} from "@/common/_feat/formatters/buildString.ts";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
+import {cn} from "@/common/_feat";
 import {Movie, MovieDetails, MovieWithGenres} from "@/domains/movies";
 
 /** Props for the MovieMetaRow component. */

@@ -3,8 +3,8 @@
  */
 
 import {ReactElement, ReactNode} from "react";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
+import {cn} from "@/common/_feat";
 import {buttonVariants} from "@/common/components/ui";
 import {useLocation} from "react-router-dom";
 

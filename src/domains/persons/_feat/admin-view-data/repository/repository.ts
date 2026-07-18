@@ -3,7 +3,7 @@
  */
 
 import {FetchPersonDetailsViewDataConfig} from "@/domains/persons/_feat/admin-view-data/repository/repository.types.ts";
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {PersonDetailsViewData} from "@/domains/persons/_feat/admin-view-data";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {PersonAdminViewDataBaseURL} from "@/domains/persons/_feat/admin-view-data/repository/baseURL.ts";
@@ -14,7 +14,7 @@ import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
  */
 export async function getFetchPersonDetailsViewData(
     {slug, limit}: FetchPersonDetailsViewDataConfig
-): Promise<RequestReturns<PersonDetailsViewData>> {
+): Promise<FetchRequestReturns<PersonDetailsViewData>> {
     const url = buildURL({
         baseURL: PersonAdminViewDataBaseURL,
         path: `/item/${slug}/person-details`,

@@ -10,13 +10,13 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/common/components/ui";
-import {TextQuote} from "@/common/components/text/TextQuote.tsx";
-import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
+import {TextQuote} from "@/views/common/_comp";
 import {Search} from "lucide-react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {formatMovieData, MovieDetails} from "@/domains/movies";
+import {Link} from "react-router-dom";
 
 /** Props for the MovieIndexDetailsDialog component. */
 export type DetailsDialogProps = {
@@ -83,9 +83,9 @@ export function MovieIndexDetailsDialog({children, movie}: DetailsDialogProps): 
                     <span>{subtitleList}</span>
                 </LabelContent>
 
-                <LoggedAnchor
+                <Link
                     target="_blank"
-                    href={`/admin/movies/get/${slug}`}
+                    to={`/admin/movies/get/${slug}`}
                     className={cn(
                         buttonVariants({variant: "default"}),
                         "w-full bg-primary"
@@ -93,7 +93,7 @@ export function MovieIndexDetailsDialog({children, movie}: DetailsDialogProps): 
                 >
                     <Search/>
                     <span>Details</span>
-                </LoggedAnchor>
+                </Link>
             </DialogContent>
         </Dialog>
     );

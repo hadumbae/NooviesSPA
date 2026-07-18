@@ -4,7 +4,7 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {UIOpenStateProps} from "@/common/_types";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {
     ScrollArea,
     Sheet,

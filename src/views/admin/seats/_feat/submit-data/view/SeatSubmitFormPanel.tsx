@@ -19,7 +19,7 @@ import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts
 import {BaseFormContext} from "@/common/_feat/generic-form-context";
 import {UIOpenStateProps} from "@/common/_types";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {SeatFormValues, useBuildSeatFormRenderFields} from "@/domains/seats";
 
 /** Props for the SeatSubmitFormPanel component. */

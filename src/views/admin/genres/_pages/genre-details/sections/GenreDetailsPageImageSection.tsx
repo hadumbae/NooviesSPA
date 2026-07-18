@@ -10,8 +10,8 @@ import {Genre} from "@/domains/genres/_schema";
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Plus, Trash} from "lucide-react";
-import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
+import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {GenreDetailsUIPendingStateContext, GenreDetailsUISetterContext} from "@/domains/genres/_feat/page-context";
 
 /** Props for the GenreDetailsPageImageSection component. */

@@ -3,14 +3,14 @@
  */
 
 import {ReactElement} from "react";
-import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
 import {Card, CardContent} from "@/common/components/ui";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {FavouriteMovieHeartButton} from "@/views/client/movies/_comp";
 
 import {ObjectId} from "@/common/_schemas";
 import {IsFavouriteMovieMetadata, useCheckIsFavouriteMovie, useToggleUserFavouriteMovie} from "@/domains/users";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 
 /** Props for the MovieOverviewFavouriteToggle component. */
 type SelectorProps = {

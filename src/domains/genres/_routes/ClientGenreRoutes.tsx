@@ -4,7 +4,7 @@
 
 import {RouteObject} from "react-router-dom";
 import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
-import {ComponentErrorHandler} from "@/common/components/errors/ComponentErrorHandler.tsx";
+import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
 import { BrowseGenresPage } from "@/views/client/genres/browse-genres-page";
 import { BrowseGenreInfoPage } from "@/views/client/genres/browse-genre-info";
 

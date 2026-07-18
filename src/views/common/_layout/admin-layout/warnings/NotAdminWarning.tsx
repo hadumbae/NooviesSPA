@@ -4,9 +4,8 @@
 
 import {ReactElement} from "react";
 import {AlertTriangle} from "lucide-react";
-import HoverLink from "@/common/components/navigation/HoverLink.tsx";
-import {useLocation} from "react-router-dom";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {Link, useLocation} from "react-router-dom";
+import {cn} from "@/common/_feat";
 import {User} from "@/domains/users";
 
 /** Config for the NotAdminWarning component. */
@@ -37,7 +36,8 @@ export function NotAdminWarning(
             <section className={alertConfig.section}>
                 <AlertTriangle size={alertConfig.icon} className="primary-text"/>
                 <h2 className={cn("section-title", alertConfig.text)}>You Must Be Logged In</h2>
-                <HoverLink to="/auth/login" className={alertConfig.link}>Log In</HoverLink>
+                <Link to="/auth/login"
+                      className={cn("px-2 py-1 hover-link-text hover-link-underline", alertConfig.link)}>Log In</Link>
             </section>
         );
     }
@@ -47,7 +47,8 @@ export function NotAdminWarning(
             <section className={alertConfig.section}>
                 <AlertTriangle size={alertConfig.icon} className="primary-text"/>
                 <h2 className={cn("section-title", alertConfig.text)}>Restricted To Admins</h2>
-                <HoverLink to="/" className={alertConfig.link}>Home</HoverLink>
+                <Link to="/"
+                      className={cn("px-2 py-1 hover-link-text hover-link-underline", alertConfig.link)}>Home</Link>
             </section>
         );
     }

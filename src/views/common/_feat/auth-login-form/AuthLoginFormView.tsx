@@ -2,7 +2,7 @@
  * @fileoverview Presentation component for the authentication login form.
  */
 
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {HookFormInput} from "@/views/common/_feat";
 import {Button} from "@/common/components/ui/button.tsx";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";

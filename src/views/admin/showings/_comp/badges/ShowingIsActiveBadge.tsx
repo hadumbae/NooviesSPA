@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Badge} from "@/common/components/ui/badge.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 
 /** Props for the ShowingIsActiveBadge component. */
 type BadgeProps = {

@@ -3,11 +3,9 @@
  */
 
 import {ReactElement} from "react";
-import {LucideIconText} from "@/common/components/card-content/LucideIconText.tsx";
 import {Captions, Clock, Headphones, Landmark, Presentation, Search, Ticket} from "lucide-react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
-import LoggedAnchor from "@/common/components/navigation/LoggedAnchor.tsx";
-import {CollapsibleTextblock} from "@/common/components/text/CollapsibleTextblock.tsx";
+import {cn} from "@/common/_feat";
+import {CollapsibleTextblock} from "@/views/common/_comp/text-display/text-blocks/CollapsibleTextblock.tsx";
 import {
     buttonVariants,
     Dialog,
@@ -24,6 +22,7 @@ import {ShowingMovieSummary} from "@/views/admin/movies/_comp/showing-movie-summ
 import {ShowingStateBadges} from "@/views/admin/showings/_comp/showing-state-badges";
 import {ShowingIndexListCard} from "@/views/admin/showings/_comp/index-card/ShowingIndexListCard.tsx";
 import {SROnly} from "@/views/common/_comp";
+import {Link} from "react-router-dom";
 
 /** Props for the ShowingIndexListDialog component. */
 type ShowingIndexListDialogProps = {
@@ -73,43 +72,37 @@ export function ShowingIndexListDialog(
                     <SROnly text="Showing Details"/>
 
                     <div className="grid grid-cols-2 gap-2">
-                        <LucideIconText
-                            className="primary-text col-span-2"
-                            icon={Clock}
-                            text={dateString}
-                        />
+                        <span className="text-with-icon primary-text col-span-2">
+                            <Clock/>
+                            {dateString}
+                        </span>
 
-                        <LucideIconText
-                            className="secondary-text text-xs"
-                            icon={Landmark}
-                            text={`${theatreName} (${country})`}
-                        />
+                        <span className="text-with-icon secondary-text text-xs">
+                            <Landmark/>
+                            {theatreName} ({country})
+                        </span>
 
-                        <LucideIconText
-                            className="secondary-text text-xs"
-                            icon={Presentation}
-                            text={`${screenName} • ${screenType}`}
-                        />
+                        <span className="text-with-icon secondary-text text-xs">
+                            <Presentation/>
+                            {screenName} • {screenType}
+                        </span>
                     </div>
 
                     <div className="flex items-center justify-between">
-                        <LucideIconText
-                            className="primary-text"
-                            icon={Ticket}
-                            text={`$${ticketPrice ? ticketPrice.toString() : "0"} per ticket`}
-                        />
+                        <span className="text-with-icon primary-text">
+                            <Ticket/>
+                            ${ticketPrice ? ticketPrice.toString() : "0"} per ticket
+                        </span>
 
-                        <LucideIconText
-                            className="secondary-text text-xs"
-                            icon={Headphones}
-                            text={audioLanguageString}
-                        />
+                        <span className="text-with-icon secondary-text text-xs">
+                            <Headphones/>
+                            {audioLanguageString}
+                        </span>
 
-                        <LucideIconText
-                            className="secondary-text text-xs"
-                            icon={Captions}
-                            text={subtitleString}
-                        />
+                        <span className="text-with-icon secondary-text text-xs">
+                            <Captions/>
+                            {subtitleString}
+                        </span>
                     </div>
                 </section>
 
@@ -122,13 +115,13 @@ export function ShowingIndexListDialog(
                     closeText="Close Movie Synopsis"
                 />
 
-                <LoggedAnchor
-                    href={`/admin/showings/get/${slug}`}
+                <Link
+                    to={`/admin/showings/get/${slug}`}
                     target="_blank"
                     className={cn(buttonVariants({variant: "primary"}), "w-full")}
                 >
                     <Search/> Details
-                </LoggedAnchor>
+                </Link>
             </DialogContent>
         </Dialog>
     );

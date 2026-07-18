@@ -3,7 +3,7 @@
  */
 
 import {Dispatch, ReactElement, ReactNode, SetStateAction} from "react";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 import {Button, buttonVariants, Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui";
 

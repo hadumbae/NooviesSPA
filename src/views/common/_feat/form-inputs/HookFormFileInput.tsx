@@ -3,9 +3,9 @@
  */
 import {ReactElement, useEffect, useRef} from "react";
 import {ControllerProps, FieldValues, useFormContext} from "react-hook-form";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input} from "@/common/components/ui";
-import {HookFormFileInputProps, HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {HookFormFileInputProps, HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
 
 /** Props for the HookFormFileInput component. */
 type FileInputProps<TValues extends FieldValues> =

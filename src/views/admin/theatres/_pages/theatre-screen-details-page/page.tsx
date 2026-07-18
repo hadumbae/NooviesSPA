@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {PageLoader} from "@/views/common/_comp/page";
 import {useFetchByIdentifierRouteParams} from "@/common/_feat";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {TheatreScreenDetailsPageContent} from "@/views/admin/theatres/_pages/theatre-screen-details-page/content.tsx";
 import {
     ScreenDetailsUIContextProvider,

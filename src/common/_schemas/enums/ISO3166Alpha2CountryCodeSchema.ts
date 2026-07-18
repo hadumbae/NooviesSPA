@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {ISO3166Alpha2CodeConstant} from "@/common/_const";
+import {ISO3166Alpha2CodeConstant} from "@/common/_const/country";
 
 /** Zod enum schema for validating ISO 3166-1 alpha-2 country codes. */
 export const ISO3166Alpha2CountryCodeSchema = z.enum(ISO3166Alpha2CodeConstant, {message: "Invalid Country."});

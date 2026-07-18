@@ -2,7 +2,7 @@
  * @fileoverview Repository for fetching granular movie review and author identity data.
  */
 
-import RequestReturns from "@/common/type/request/RequestReturns.ts"
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts"
 import {CustomerReviewViewData} from "@/domains/customers/_feat/movie-review/schema/viewDataSchema.ts"
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts"
 import {buildURL} from "@/common/_feat/fetch-api";
@@ -14,7 +14,7 @@ import {GetFetchCustomerReviewViewDataConfig} from "@/domains/customers/_feat/mo
  */
 export function getFetchCustomerReviewViewData(
     {customerCode, reviewCode}: GetFetchCustomerReviewViewDataConfig
-): Promise<RequestReturns<CustomerReviewViewData>> {
+): Promise<FetchRequestReturns<CustomerReviewViewData>> {
     const url = buildURL({
         baseURL: ManageCustomerMovieReviewBaseURL,
         path: `/profile-details/${customerCode}/review/${reviewCode}`,

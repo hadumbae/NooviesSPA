@@ -5,7 +5,7 @@
 
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {logZodErrors} from "@/common/_feat/validate-data/logZodErrors.ts";
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {ZodType, ZodTypeDef} from "zod";
 
 /**
@@ -14,7 +14,7 @@ import {ZodType, ZodTypeDef} from "zod";
  */
 type HandlerConfig<TData> = {
     /** The asynchronous repository action that performs the network request. */
-    action: () => Promise<RequestReturns<TData>>;
+    action: () => Promise<FetchRequestReturns<TData>>;
     /** The Zod schema used to enforce the data contract at runtime. */
     schema: ZodType<TData, ZodTypeDef, unknown>;
 };

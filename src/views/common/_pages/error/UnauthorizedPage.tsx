@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {PageCenter} from "@/views/common/_comp/page";
-import HoverLink from "@/common/components/navigation/HoverLink.tsx";
+import {Link} from "react-router-dom";
 
 /** A full-screen error view indicating a 403 Unauthorized status with a link to the login page. */
 export function UnauthorizedPage(): ReactElement {
@@ -19,12 +19,12 @@ export function UnauthorizedPage(): ReactElement {
                     You must be logged in to access this route.
                 </h2>
 
-                <HoverLink
+                <Link
                     to="/auth/login"
-                    className="uppercase italic"
+                    className="uppercase italic px-2 py-1 hover-link-text hover-link-underline"
                 >
                     Login
-                </HoverLink>
+                </Link>
             </div>
         </PageCenter>
     );

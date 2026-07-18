@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {
     Breadcrumb,
     BreadcrumbItem,

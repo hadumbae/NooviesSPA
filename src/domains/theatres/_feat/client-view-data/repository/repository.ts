@@ -2,7 +2,7 @@
  * @fileoverview Repository for fetching theatre information and screen data for the client view.
  */
 
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {TheatreClientViewBaseURL, TheatreInfoViewData} from "@/domains/theatres/_feat/client-view-data";
 import {GetFetchTheatreInfoViewDataConfig} from "@/domains/theatres/_feat/client-view-data/repository/repository.types.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
@@ -13,7 +13,7 @@ import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
  */
 export function getFetchTheatreInfoViewData(
     {theatreSlug, localDateString, queries}: GetFetchTheatreInfoViewDataConfig
-): Promise<RequestReturns<TheatreInfoViewData>> {
+): Promise<FetchRequestReturns<TheatreInfoViewData>> {
     const url = buildURL({
         baseURL: TheatreClientViewBaseURL,
         path: `/theatre/${theatreSlug}/info-with-screens/${localDateString}`,

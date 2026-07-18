@@ -2,8 +2,8 @@
  * @fileoverview Provides select options for ISO 3166-1 alpha-2 country codes.
  */
 
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
-import {ISO3166Alpha2CodeConstant, ISO3166Alpha2CountryConstant} from "@/common/_const";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
+import {ISO3166Alpha2CodeConstant, ISO3166Alpha2CountryConstant} from "@/common/_const/country";
 
 /** Array of select options mapping ISO 3166-1 alpha-2 codes to their country names. */
 export const ISO3166Alpha2CountryOptions = ISO3166Alpha2CodeConstant.map((code): ReactSelectOption => ({

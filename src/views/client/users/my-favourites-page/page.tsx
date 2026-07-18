@@ -11,7 +11,7 @@ import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-par
 import {MyFavouritesPageContent} from "@/views/client/users/my-favourites-page/content.tsx";
 import {MovieDetails} from "@/domains/movies/_schema/movie";
 import {PaginatedItems} from "@/common/_types";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 
 /** Number of favourite movies displayed per page. */
 const MOVIES_PER_PAGE = 20;

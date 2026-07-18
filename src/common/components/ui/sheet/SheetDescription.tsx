@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 
 export const SheetDescription = React.forwardRef<
     React.ElementRef<typeof SheetPrimitive.Description>,

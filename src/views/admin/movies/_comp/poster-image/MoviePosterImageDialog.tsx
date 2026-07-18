@@ -1,7 +1,7 @@
 /** @fileoverview Movie poster component with fallback states and a zoomable dialog view. */
 
 import {ReactElement, useState} from 'react';
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {
     Dialog,
     DialogContent,

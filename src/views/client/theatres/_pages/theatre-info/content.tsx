@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {PageFlexWrapper, SectionTitle} from "@/views/common/_comp";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 
 import {TheatreScreenSchedule} from "@/domains/theatre-screens";
 import {formatTheatreDetails, TheatreDetails} from "@/domains/theatres";

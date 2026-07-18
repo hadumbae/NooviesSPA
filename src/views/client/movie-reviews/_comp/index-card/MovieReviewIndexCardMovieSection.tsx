@@ -3,7 +3,7 @@
  */
 
 import {MovieWithRating} from "@/domains/movies/_schema/movie/MovieWithRatingSchema.ts";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {MovieReviewRatingStars} from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {formatMovieData} from "@/domains/movies/_feat/formatters";

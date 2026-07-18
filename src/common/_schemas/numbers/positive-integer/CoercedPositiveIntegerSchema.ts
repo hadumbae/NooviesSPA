@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {CoercedNumberValueSchema} from "@/common/_schemas/numbers/number-value";
+import {CoercedNumberValueSchema} from "@/common/_schemas/numbers/number-value/CoercedNumberValueSchema.ts";
 
 export const CoercedPositiveIntegerSchema = CoercedNumberValueSchema
     .int({message: "Must Be An Integer."})

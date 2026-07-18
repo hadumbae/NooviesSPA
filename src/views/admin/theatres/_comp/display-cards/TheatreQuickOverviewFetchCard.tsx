@@ -6,10 +6,10 @@ import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Loader} from "lucide-react";
 import {ObjectId} from "@/common/_schemas";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {TheatreDetails, TheatreDetailsSchema} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 import {useFetchTheatre} from "@/domains/theatres/_feat/crud-hooks";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {formatTheatreDetails} from "@/domains/theatres/_feat/formatters";
 
 /** Props for the TheatreQuickOverviewFetchCard component. */

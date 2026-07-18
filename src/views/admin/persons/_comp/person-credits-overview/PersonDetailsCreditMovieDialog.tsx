@@ -4,10 +4,10 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {buttonVariants, Dialog, DialogContent, DialogTrigger} from "@/common/components/ui";
-import {TextQuote} from "@/common/components/text/TextQuote.tsx";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {Search} from "lucide-react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {Movie, MovieDetails} from "@/domains/movies/_schema/movie";
@@ -65,12 +65,12 @@ export function PersonDetailsCreditMovieDialog(
                     <p className="secondary-text">{creditDisplay}</p>
                 </section>
 
-                <LoggedHoverLink
+                <HoverLink
                     to={`/admin/movies/get/${slug}`}
                     className={cn(buttonVariants({variant: "primary"}), "w-full")}
                 >
                     <Search size={12}/> <span>Movie</span>
-                </LoggedHoverLink>
+                </HoverLink>
             </DialogContent>
         </Dialog>
     );

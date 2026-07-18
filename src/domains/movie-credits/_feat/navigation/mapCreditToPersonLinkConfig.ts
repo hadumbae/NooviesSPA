@@ -5,7 +5,7 @@
 import {
     filterNullishAttributes
 } from "@/common/_feat/filter-object-attributes/filterNullishAttributes.ts";
-import {LinkConfig} from "@/common/type/components/LinkConfig.ts";
+import {LinkItemConfig} from "@/common/_types/navigation/LinkItemConfig.ts";
 
 import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
 
@@ -18,7 +18,7 @@ type LinkParams = {
 /** Transforms a movie credit into a standardised link configuration for person navigation. */
 export function mapCreditToPersonLinkConfig(
     {credit, sourceComponent}: LinkParams
-): LinkConfig {
+): LinkItemConfig {
     const {
         _id: creditID,
         person: {_id: personID, name, slug: personSlug},

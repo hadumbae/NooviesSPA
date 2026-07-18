@@ -4,11 +4,11 @@
 
 import {ReactElement} from 'react';
 import {Card, CardContent, Separator} from "@/common/components/ui";
-import {DetailsCardSpan} from "@/common/components/text/DetailsCardSpan.tsx";
+import {DetailsCardSpan} from "@/views/common/_comp/text-display/spans/DetailsCardSpan.tsx";
 import {
     generateLocationAddressString
 } from "@/common/_feat/formatters/generateLocationAddressString.ts";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 
 import {TheatreDetails} from "@/domains/theatres/_schema";
 

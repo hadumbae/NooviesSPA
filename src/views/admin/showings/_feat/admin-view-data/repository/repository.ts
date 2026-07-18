@@ -8,13 +8,13 @@ import {
 import {ShowingDetailsViewData} from "@/views/admin/showings/_feat/admin-view-data/schema";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {ShowingAdminViewDataBaseURL} from "@/views/admin/showings/_feat/admin-view-data/repository/baseURL.ts";
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 
 /** Fetches detailed view data for a specific showing by its slug. */
 export async function getFetchShowingDetailsViewData(
     {slug}: GetFetchShowingDetailsViewDataConfig
-): Promise<RequestReturns<ShowingDetailsViewData>> {
+): Promise<FetchRequestReturns<ShowingDetailsViewData>> {
     const url = buildURL({
         baseURL: ShowingAdminViewDataBaseURL,
         path: `/item/${slug}/details`,

@@ -15,7 +15,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/common/components/ui";
-import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
 import {ReservationUniqueCode} from "@/domains/reservations";
 
 /** Props for the AdminReservationResetExpiryDialog component. */

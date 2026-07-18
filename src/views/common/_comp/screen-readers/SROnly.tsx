@@ -4,7 +4,7 @@
  */
 
 import {ReactElement, ReactNode} from "react";
-import {HeaderTag} from "@/common/type/HeaderTag.ts";
+import {HeaderTag} from "@/common/_types";
 
 /** Props for the {@link SROnly} component. */
 type SRProps = {

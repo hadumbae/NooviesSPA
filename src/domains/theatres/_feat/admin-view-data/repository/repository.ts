@@ -5,7 +5,7 @@
 import {
     GetFetchTheatreDetailsViewDataConfig, GetFetchTheatreShowingListViewDataConfig
 } from "@/domains/theatres/_feat/admin-view-data/repository/repository.types.ts";
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {TheatreDetailsViewData} from "@/domains/theatres/_feat/admin-view-data";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {TheatreAdminViewDataBaseURL} from "@/domains/theatres/_feat/admin-view-data/repository/baseURL.ts";
@@ -19,7 +19,7 @@ import {
  */
 export function getFetchTheatreDetailsViewData(
     {slug, queries}: GetFetchTheatreDetailsViewDataConfig
-): Promise<RequestReturns<TheatreDetailsViewData>> {
+): Promise<FetchRequestReturns<TheatreDetailsViewData>> {
     const url = buildURL({
         baseURL: TheatreAdminViewDataBaseURL,
         path: `/item/${slug}/details`,
@@ -31,7 +31,7 @@ export function getFetchTheatreDetailsViewData(
 
 export function getFetchTheatreShowingListViewData(
     {slug, queries}: GetFetchTheatreShowingListViewDataConfig
-): Promise<RequestReturns<TheatreShowingListViewData>> {
+): Promise<FetchRequestReturns<TheatreShowingListViewData>> {
     const url = buildURL({
         baseURL: TheatreAdminViewDataBaseURL,
         path: `/item/${slug}/showings/list`,

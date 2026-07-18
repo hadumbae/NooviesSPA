@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, useState} from "react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {Button} from "@/common/components/ui";
 
 import {AdminReservation} from "@/domains/reservations";

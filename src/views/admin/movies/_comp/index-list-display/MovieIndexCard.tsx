@@ -2,7 +2,7 @@
 
 import {ReactElement} from "react";
 import {Info} from "lucide-react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {AdminMovieMeta} from "@/views/admin/movies/_comp/movie-details";
 import {Card, CardContent, CardHeader} from "@/common/components/ui";
 import {MovieDetails} from "@/domains/movies";

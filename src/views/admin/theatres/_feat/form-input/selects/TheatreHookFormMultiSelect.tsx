@@ -5,10 +5,10 @@
 import {ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
 import {Loader} from "lucide-react";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
+import {QueryDataLoader} from "@/views/common/_feat";
 import {HookFormMultiSelect} from "@/views/common/_comp/form-select/HookFormMultiSelect.tsx";
-import {HookFormInputControlProps} from "@/common/type/input/HookFormInputProps.ts";
+import {HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 
 import {Theatre, TheatreQueryOptions, TheatreSchema, useFetchTheatres} from "@/domains/theatres";

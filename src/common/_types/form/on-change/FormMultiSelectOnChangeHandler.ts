@@ -4,7 +4,7 @@
 
 import {FormOnChangeHandler} from "@/common/_types/form/on-change/FormOnChangeHandler.ts";
 import {MultiValue} from "react-select";
-import {ReactSelectOption} from "@/common/type/input/ReactSelectOption.ts";
+import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";
 import {FieldValues} from "react-hook-form";
 
 /** Function signature for handling change events in multi-select form fields. */

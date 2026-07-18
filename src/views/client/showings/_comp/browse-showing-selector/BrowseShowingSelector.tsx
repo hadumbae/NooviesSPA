@@ -3,11 +3,12 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
-import ButtonLink from "@/common/components/navigation/ButtonLink.tsx";
+import {cn} from "@/common/_feat";
 import {IANATimezone} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 import {ShowingDetails} from "@/domains/showings";
 import {ShowingInfoLanguages, ShowingInfoMovieMeta} from "@/views/client/showings/_comp/showing-info-details";
+import {buttonVariants} from "@/common/components/ui";
+import {Link} from "react-router-dom";
 
 /** Props for the TheatreShowingSelectSummary component. */
 type SummaryProps = {
@@ -47,15 +48,12 @@ export function BrowseShowingSelector(
                     {formattedStartTime}
                 </span>
 
-                <ButtonLink
-                    to={`/browse/showings/${slug}`}
-                    type="button"
-                    variant="primary"
-                    size="sm"
-                    className="uppercase"
-                >
+                <Link to={`/browse/showings/${slug}`} type="button" className={cn(
+                    "uppercase",
+                    buttonVariants({variant: "primary", size: "sm"}),
+                )}>
                     Select
-                </ButtonLink>
+                </Link>
             </div>
         </div>
     );

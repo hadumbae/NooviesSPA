@@ -5,10 +5,10 @@
 import {ReactElement} from "react";
 import {Button} from "@/common/components/ui";
 import {RotateCcw} from "lucide-react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {useFormContext} from "react-hook-form";
-import AnimatedLoader from "@/common/components/loaders/AnimatedLoader.tsx";
+import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
 
 /** Props for the SeatSubmitFormActions component. */
 type ButtonProps = {

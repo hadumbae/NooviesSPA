@@ -10,7 +10,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/common/components/ui/breadcrumb.tsx";
-import LoggedHoverLink from "@/common/components/navigation/logged-link/LoggedHoverLink.tsx";
+import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {ReactElement} from "react";
 
@@ -29,9 +29,9 @@ export function TheatreShowingCreateBreadcrumbs({theatreID, theatreName}: Breadc
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink to="/admin/theatres">
+                        <HoverLink to="/admin/theatres">
                             All Theatres
-                        </LoggedHoverLink>
+                        </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -39,9 +39,9 @@ export function TheatreShowingCreateBreadcrumbs({theatreID, theatreName}: Breadc
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedHoverLink to={`/admin/theatres/get/${theatreID}`}>
+                        <HoverLink to={`/admin/theatres/get/${theatreID}`}>
                             {theatreName} | Details
-                        </LoggedHoverLink>
+                        </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 

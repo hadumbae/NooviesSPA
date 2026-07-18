@@ -5,7 +5,7 @@
 import {ReactElement, useState} from "react";
 import {NoImagePlaceholder} from "@/views/common/_comp";
 import {URLString} from "@/common/_schemas/strings/simple-strings/URLStringSchema.ts";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 
 /** Props for the Image component. */
 type ImageProps = {

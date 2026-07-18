@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {MovieDetails, MovieWithGenres} from "@/domains/movies/_schema/movie";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {ShowingMovieSummaryMeta} from "@/views/admin/movies/_comp/showing-movie-summary/ShowingMovieSummaryMeta.tsx";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {To} from "react-router-dom";
 
 /** Props for the ShowingMovieSummary component. */

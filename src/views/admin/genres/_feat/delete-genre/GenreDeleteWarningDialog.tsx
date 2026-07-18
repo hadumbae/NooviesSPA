@@ -4,7 +4,9 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {ObjectId} from "@/common/_schemas";
-import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
+import {
+    EntityDeleteWarningDialog
+} from "@/views/common/_feat/dialog/EntityDeleteWarningDialog.tsx";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {UIOpenStateProps} from "@/common/_types";
 import {useDeleteGenre} from "@/domains/genres";
@@ -29,8 +31,8 @@ export function GenreDeleteWarningDialog(
         <EntityDeleteWarningDialog
             title={`Proceed to delete "${name}"?`}
             deleteResource={() => mutate({_id})}
-            presetOpen={isOpen}
-            setPresetOpen={setIsOpen}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
         >
             {children}
         </EntityDeleteWarningDialog>

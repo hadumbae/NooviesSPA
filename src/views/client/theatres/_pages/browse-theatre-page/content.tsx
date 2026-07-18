@@ -7,7 +7,7 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {PaginationRangeButtons} from "@/views/common/_comp";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {PageHeader} from "@/views/common/_comp";
 
 import {TheatreWithRecentShowings} from "@/domains/theatres";

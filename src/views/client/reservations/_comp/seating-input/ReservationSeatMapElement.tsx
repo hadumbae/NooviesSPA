@@ -3,7 +3,7 @@
  */
 
 import {Check, Plus} from "lucide-react";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {Button} from "@/common/components/ui/button.tsx";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
 import {ObjectId} from "@/common/_schemas";

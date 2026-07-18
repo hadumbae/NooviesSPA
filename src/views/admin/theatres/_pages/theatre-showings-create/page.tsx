@@ -8,9 +8,11 @@ import {
     useFetchByIdentifierRouteParams
 } from "@/common/_feat";
 import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
-import QueryErrorBoundary from "@/common/components/boundary/query-error-fallback/QueryErrorBoundary.tsx";
+import {
+    QueryErrorBoundary
+} from "@/views/common/_feat/error-boundary/query-error-fallback/boundary/QueryErrorBoundary.tsx";
 import {useFetchTheatreBySlug} from "@/domains/theatres/_feat/crud-hooks";
-import {QueryDataLoader} from "@/views/common/_feat/loaders/QueryDataLoader.tsx";
+import {QueryDataLoader} from "@/views/common/_feat";
 
 import {Theatre, TheatreHttpStatusOverrideText, TheatreSchema} from "@/domains/theatres";
 import {TheatreShowingCreatePageContent} from "@/views/admin/theatres/_pages/theatre-showings-create/content.tsx";

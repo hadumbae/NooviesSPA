@@ -3,7 +3,7 @@
  */
 
 import {buildURL} from "@/common/_feat/fetch-api";
-import RequestReturns from "@/common/type/request/RequestReturns.ts";
+import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 import {MovieClientViewBaseURL} from "@/domains/movies/_feat/client-view-data/repository/baseURL.ts";
 import {
@@ -22,7 +22,7 @@ import {
 /** Fetches high-level overview data for a specific movie including reviews. */
 export function getOverviewDataForMovieInfoView(
     {slug, queries = {reviewPage: 1, reviewPerPage: 3}}: GetOverviewDataForMovieInfoViewConfig
-): Promise<RequestReturns<MovieInfoOverviewViewData>> {
+): Promise<FetchRequestReturns<MovieInfoOverviewViewData>> {
     const url = buildURL({
         baseURL: MovieClientViewBaseURL,
         path: `/item/${slug}/info-overview`,
@@ -35,7 +35,7 @@ export function getOverviewDataForMovieInfoView(
 /** Fetches user reviews for a specific movie. */
 export function getReviewsForMovieInfoView(
     {slug, queries}: GetReviewsForMovieInfoViewConfig
-): Promise<RequestReturns<MovieInfoReviewsViewData>> {
+): Promise<FetchRequestReturns<MovieInfoReviewsViewData>> {
     const url = buildURL({
         baseURL: MovieClientViewBaseURL,
         path: `/item/${slug}/info-reviews`,
@@ -48,7 +48,7 @@ export function getReviewsForMovieInfoView(
 /** Retrieves the cast and crew credits for a specific movie. */
 export function getCreditForMovieInfoView(
     {slug}: GetCreditsForMovieInfoViewConfig
-): Promise<RequestReturns<MovieInfoCreditViewData>> {
+): Promise<FetchRequestReturns<MovieInfoCreditViewData>> {
     const url = buildURL({
         baseURL: MovieClientViewBaseURL,
         path: `/item/${slug}/info-credits`,
@@ -60,7 +60,7 @@ export function getCreditForMovieInfoView(
 /** Fetches scheduled showings and cinema information for a specific movie. */
 export function getShowingsForMovieInfoView(
     {slug, queries}: GetShowingsForMovieInfoViewConfig
-): Promise<RequestReturns<MovieInfoShowingViewData>> {
+): Promise<FetchRequestReturns<MovieInfoShowingViewData>> {
     const url = buildURL({
         baseURL: MovieClientViewBaseURL,
         path: `/item/${slug}/info-showings`,

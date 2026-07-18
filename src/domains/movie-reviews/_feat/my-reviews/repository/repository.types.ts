@@ -3,7 +3,7 @@
  */
 
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
+import {RequestOptions} from "@/common/_types/request/RequestOptions.ts";
 import {ObjectId} from "@/common/_schemas";
 import {MovieReviewForm} from "@/domains/movie-reviews/_feat/submit-form/schema/MovieReviewFormSchema.ts";
 

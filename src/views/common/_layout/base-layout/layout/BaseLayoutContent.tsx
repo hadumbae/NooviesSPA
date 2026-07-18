@@ -4,7 +4,7 @@
  */
 
 import {ReactElement} from 'react';
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {Outlet} from "react-router-dom";
 import {Bounce, ToastContainer} from "react-toastify";
 

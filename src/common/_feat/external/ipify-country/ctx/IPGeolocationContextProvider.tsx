@@ -2,8 +2,8 @@
  * @fileoverview Context provider for managing and distributing user IP geolocation data.
  */
 
-import {useFetchUserCountry} from "@/common/_feat/external/ipify-country/hooks/useFetchUserCountry.ts";
 import {ReactElement, ReactNode, useEffect, useState} from "react";
+import {useFetchUserCountry} from "@/common/_feat/external/ipify-country/hooks/useFetchUserCountry.ts";
 import {IpString} from "@/common/_schemas/strings/ip-string/IpSchema.ts";
 import {
     IPGeolocationContext,

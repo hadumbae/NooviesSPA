@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import NavLink from "@/common/components/navigation/NavLink.tsx";
+import {LayoutNavLink} from "@/views/common/_comp/layout/LayoutNavLink.tsx";
 import {Button} from "@/common/components/ui";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {
@@ -33,9 +33,9 @@ export function BaseLayoutDesktopClientNavigation(): ReactElement {
     return (
         <section className="flex items-center space-x-2 font-spaceGrotesk">
             <SROnly text="Desktop Navigation"/>
-            <NavLink to="/">Home</NavLink>
+            <LayoutNavLink to="/">Home</LayoutNavLink>
 
-            {isAdmin && <NavLink to="/admin/dashboard">Admin</NavLink>}
+            {isAdmin && <LayoutNavLink to="/admin/dashboard">Admin</LayoutNavLink>}
 
             <BaseLayoutClientBrowseNavigationDropdown/>
             <BaseLayoutClientProfileNavigationDropdown/>

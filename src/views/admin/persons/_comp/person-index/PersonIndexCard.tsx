@@ -6,7 +6,7 @@ import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui";
 import {CloudinaryAvatarImage} from "@/views/common/_comp";
 import {ISO3166Alpha2CountryConstant} from "@/common/_const";
-import LoggedLink from "@/common/components/navigation/logged-link/LoggedLink.tsx";
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {Person} from "@/domains/persons";
 
 /** Props for the PersonIndexCard component. */

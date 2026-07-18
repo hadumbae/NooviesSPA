@@ -5,10 +5,10 @@
 import {ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
 import {HookFormRadioGroup} from "@/views/common/_feat";
-import HookRadioOption from "@/common/type/input/HookRadioOption.ts";
+import {HookRadioOption} from "@/common/_types/input/HookRadioOption.ts";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {SeatMapStatusConstant} from "@/domains/seatmaps";
-import {HookFormInputProps} from "@/common/type/input/HookFormInputProps.ts";
+import {HookFormInputProps} from "@/common/_types/input/HookFormInputProps.ts";
 
 /**
  * Form-integrated radio group for seat map statuses. Requires a wrapping FormProvider.

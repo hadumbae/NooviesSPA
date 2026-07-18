@@ -3,7 +3,9 @@
  */
 
 import {ReactElement} from 'react';
-import EntityDeleteWarningDialog from "@/common/components/dialog/EntityDeleteWarningDialog.tsx";
+import {
+    EntityDeleteWarningDialog
+} from "@/views/common/_feat/dialog/EntityDeleteWarningDialog.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {useMoviePosterImageDeleteMutation} from "@/domains/movies/_feat/manage-images";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";

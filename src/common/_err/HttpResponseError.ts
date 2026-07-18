@@ -6,7 +6,7 @@
  * Wraps transport-level metadata (URL, headers, status)
  * along with optional payload and domain model context.
  */
-import {ResponseMeta} from "@/common/type/request/ResponseTypes.ts";
+import {ResponseMeta} from "@/common/_types/request/ResponseTypes.ts";
 
 type ErrorConstructor = ResponseMeta & {
     /** Optional domain or model identifier */

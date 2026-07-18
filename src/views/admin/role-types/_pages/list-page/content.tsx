@@ -2,19 +2,18 @@
  * @fileoverview Presentational component for the Role Type List Page UI.
  */
 
-import {ReactElement} from "react";
+import {ReactElement, useState} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {PaginationRangeButtons} from "@/views/common/_comp";
+import {PaginationRangeButtons, SROnly} from "@/views/common/_comp";
 import {RoleTypeListHeader} from "@/views/admin/role-types/_pages/list-page/header.tsx";
-import PresetFilterDialog from "@/common/components/dialog/PresetFilterDialog.tsx";
-import {EmptyArrayContainer} from "@/common/components/text/EmptyArrayContainer.tsx";
+import {QueryFilterDialog} from "@/views/common/_feat/dialog/QueryFilterDialog.tsx";
+import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {RoleType} from "@/domains/roletypes";
 import {
     RoleTypeDetailsSheet,
     RoleTypeQueryOptionForm,
     RoleTypeQueryOptionFormView
 } from "@/views/admin/role-types/_feat";
-import {SROnly} from "@/views/common/_comp";
 
 /** Props for the RoleTypeListPageContent component. */
 type ContentProps = {
@@ -31,20 +30,22 @@ type ContentProps = {
 export function RoleTypeListPageContent(
     {page, perPage, setPage, roleTypes, totalItems}: ContentProps
 ): ReactElement {
-    console.log("Role Types: ", roleTypes);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
         <PageFlexWrapper>
             <RoleTypeListHeader/>
 
-            <PresetFilterDialog
+            <QueryFilterDialog
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
                 title="Role Type Filters"
                 description="Filter and sort role types."
             >
                 <RoleTypeQueryOptionForm>
                     <RoleTypeQueryOptionFormView className="p-2"/>
                 </RoleTypeQueryOptionForm>
-            </PresetFilterDialog>
+            </QueryFilterDialog>
 
             {
                 roleTypes.length > 0 ? (

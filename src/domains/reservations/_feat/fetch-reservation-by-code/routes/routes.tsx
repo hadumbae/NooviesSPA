@@ -6,7 +6,7 @@ import {RouteObject} from "react-router-dom";
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
 import {AuthLoader} from "@/common/_loaders";
 import {ReservationByCodePage} from "@/views/admin/reservations/_pages/reservation-by-code";
-import {ComponentErrorHandler} from "@/common/components/errors/ComponentErrorHandler.tsx";
+import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
 
 /** Configuration for reservation-related administrative routes. */
 export const AdminReservationRoutes: RouteObject[] = [

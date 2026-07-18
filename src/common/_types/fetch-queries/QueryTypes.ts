@@ -4,8 +4,8 @@
 
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {ZodType, ZodTypeDef} from "zod";
-import {RequestOptions} from "@/common/type/request/RequestOptions.ts";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {RequestOptions} from "@/common/_types/request/RequestOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {ObjectId} from "@/common/_schemas";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 

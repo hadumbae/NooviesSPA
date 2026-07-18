@@ -12,7 +12,7 @@ import {
 import {
     ReservationStatusBadge
 } from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
-import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {cn} from "@/common/_feat";
 import {ReactElement} from "react";
 
 /** Props for the ReservationByCodeActionsSection component. */

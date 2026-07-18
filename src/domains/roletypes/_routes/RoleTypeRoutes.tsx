@@ -1,7 +1,7 @@
 import {redirect, RouteObject} from "react-router-dom";
 import {AuthLoader} from "@/common/_loaders";
 import {RoleTypeListPage} from "@/views/admin/role-types/_pages/list-page/page.tsx";
-import {ComponentErrorHandler} from "@/common/components/errors/ComponentErrorHandler.tsx";
+import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
 
 /**

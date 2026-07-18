@@ -3,7 +3,7 @@
  */
 
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
-import {FetchQueryOptions} from "@/common/type/query/FetchQueryOptions.ts";
+import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {PopulatedReservation, PopulatedReservationSchema} from "@/domains/reservations/_schema";
