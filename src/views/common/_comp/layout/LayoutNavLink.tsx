@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {cn, useCurrentURLPath} from "@/common/_feat";
 import {Link, LinkProps} from "react-router-dom";
-import {buttonVariants} from "@/common/components/ui";
+import {buttonVariants} from "@/views/common/_comp/ui";
 
 /**
  * A navigation link that applies active styling when its destination matches the current URL.

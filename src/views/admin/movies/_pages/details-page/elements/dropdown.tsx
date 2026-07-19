@@ -11,7 +11,7 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {RoleTypeDepartment} from "@/domains/roletypes";

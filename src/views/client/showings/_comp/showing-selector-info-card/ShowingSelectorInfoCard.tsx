@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent, CardHeader, Separator} from "@/common/components/ui";
+import {Card, CardContent, CardHeader, Separator} from "@/views/common/_comp/ui";
 import {ISO6391LanguageLabels} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 
 import {ShowingDetails} from "@/domains/showings";

@@ -11,7 +11,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 
 import {MovieCreditFormValues} from "@/domains/movie-credits";
 import {MovieCreditFormActions} from "@/views/admin/movie-credits";

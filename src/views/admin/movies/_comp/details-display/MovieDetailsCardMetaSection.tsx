@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Separator} from "@/common/components/ui";
+import {Separator} from "@/views/common/_comp/ui";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {ISO3166Alpha2CountryConstant, ISO6391LanguageLabels} from "@/common/_const";
 import {MovieDetails} from "@/domains/movies";

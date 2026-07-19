@@ -2,7 +2,7 @@
  * @fileoverview Displays selected reservation seating within a card layout.
  */
 
-import {Card, CardContent, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
+import {Card, CardContent, CardHeader, CardTitle} from "@/views/common/_comp/ui/card.tsx";
 import {ReservationSeatingLoader} from "@/views/client/reservations/_comp/seating-display/ReservationSeatingLoader.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {ReactElement} from "react";

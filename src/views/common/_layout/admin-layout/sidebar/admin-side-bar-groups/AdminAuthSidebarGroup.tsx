@@ -13,7 +13,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem
-} from "@/common/components/ui/sidebar/sidebar.tsx";
+} from "@/views/common/_comp/ui/sidebar/sidebar.tsx";
 import { Link } from "react-router-dom";
 import { User } from "lucide-react";
 import {

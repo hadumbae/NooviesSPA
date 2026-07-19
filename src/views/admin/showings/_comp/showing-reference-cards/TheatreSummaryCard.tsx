@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {Film, Search, Sofa, TvMinimal} from "lucide-react";
 import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";

@@ -7,7 +7,7 @@ import {Ellipsis} from "lucide-react";
 import {IconButton} from "@/views/common/_comp";
 import {ReactElement, useState} from "react";
 import {toast} from "react-toastify";
-import {Button, Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui";
+import {Button, Popover, PopoverContent, PopoverTrigger} from "@/views/common/_comp/ui";
 import {useDeleteCurrentUserMovieReviewMutation} from "@/domains/movie-reviews";
 
 /** Props for the MovieReviewIndexCardActions component. */

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, useState} from "react";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 import {toast} from "react-toastify";
 import {cn} from "@/common/_feat";
 import {

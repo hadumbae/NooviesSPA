@@ -7,7 +7,7 @@ import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
 import {ObjectId} from "@/common/_schemas";
 import {ResetReviewLikesForm} from "@/views/admin/customers/_feat/reset-likes/ResetReviewLikesForm.tsx";
 import {ResetReviewLikesDialog} from "@/views/admin/customers/_feat/reset-likes/ResetReviewLikesDialog.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 
 import {MovieReview} from "@/domains/movie-reviews/_schema/model";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";

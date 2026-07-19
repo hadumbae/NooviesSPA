@@ -3,9 +3,9 @@
  */
 
 import {ReactElement, useState} from 'react';
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui/collapsible.tsx";
+import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/views/common/_comp/ui/collapsible.tsx";
 import {ChevronDown, ChevronRight, TriangleAlert} from "lucide-react";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useRoleTypeDeleteMutation} from "@/domains/roletypes";

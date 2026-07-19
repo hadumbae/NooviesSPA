@@ -14,7 +14,7 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 
 /**
  * A checkbox form field component that requires a react-hook-form provider.

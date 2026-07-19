@@ -3,7 +3,7 @@
  * @filename AdminLayout.tsx
  */
 
-import {SidebarProvider} from "@/common/components/ui/sidebar/sidebar.tsx";
+import {SidebarProvider} from "@/views/common/_comp/ui/sidebar/sidebar.tsx";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 import {cn} from "@/common/_feat";
 import AdminSidebar from "@/views/common/_layout/admin-layout/sidebar/AdminSidebar.tsx";

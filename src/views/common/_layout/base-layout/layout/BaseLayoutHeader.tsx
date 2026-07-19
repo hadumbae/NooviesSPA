@@ -3,9 +3,9 @@ import {LayoutTitle} from "@/views/common/_comp/layout/LayoutTitle.tsx";
 import {
     LayoutBreakpointIndicator
 } from "@/views/common/_comp/layout/LayoutBreakpointIndicator.tsx";
-import {SidebarTrigger} from "@/common/components/ui/sidebar/sidebar.tsx";
+import {SidebarTrigger} from "@/views/common/_comp/ui/sidebar/sidebar.tsx";
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
-import {SidebarContext} from "@/common/components/ui/sidebar/SidebarContext.ts";
+import {SidebarContext} from "@/views/common/_comp/ui/sidebar/SidebarContext.ts";
 import BaseLayoutDesktopNavigation from "@/views/common/_layout/client/navigation/BaseLayoutDesktopNavigation.tsx";
 
 /**

@@ -10,7 +10,7 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 
 /** Props for the TheatreDetailsBreadcrumbs component. */

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {MovieCreditDetails} from "@/domains/movie-credits";
 import {BooleanFlagLabelSpan, LabelContentItem, LabelContentList, TextQuote} from "@/views/common/_comp";
 import {

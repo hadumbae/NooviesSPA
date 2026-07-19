@@ -11,7 +11,7 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 
 /** Props for the TheatreScreenDetailsBreadcrumbs component. */
 type BreadcrumbsProps = {

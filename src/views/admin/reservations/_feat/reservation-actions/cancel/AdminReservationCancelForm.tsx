@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode} from "react";
-import {Form} from "@/common/components/ui";
+import {Form} from "@/views/common/_comp/ui";
 import {ObjectId} from "@/common/_schemas";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";

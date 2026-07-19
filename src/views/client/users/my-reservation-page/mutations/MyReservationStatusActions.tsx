@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {ObjectId} from "@/common/_schemas";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 import {Loader} from "lucide-react";
 import {MutationResponseConfig} from "@/common/_feat";
 import {ReservationStatus, useReservationStateMutations} from "@/domains/reservations";

@@ -2,7 +2,7 @@
  * @fileoverview A reusable, type-safe single-select component integrated with React Hook Form and react-select.
  */
 
-import {FormControl, FormDescription, FormItem, FormLabel,} from "@/common/components/ui/form.tsx";
+import {FormControl, FormDescription, FormItem, FormLabel,} from "@/views/common/_comp/ui/form.tsx";
 import {Controller, FieldValues, useFormContext} from "react-hook-form";
 import Select from "react-select";
 import {ReactSelectOption} from "@/common/_types/input/ReactSelectOption.ts";

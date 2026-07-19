@@ -1,8 +1,8 @@
 /** @fileoverview Popover menu providing edit and delete actions for a movie credit card. */
 
 import {Dispatch, ReactElement, ReactNode, SetStateAction} from 'react';
-import {Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui/popover.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Popover, PopoverContent, PopoverTrigger} from "@/views/common/_comp/ui/popover.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 
 /** Props for the MoviePersonDetailsCardHeaderToggles component. */
 type OptionsProps = {

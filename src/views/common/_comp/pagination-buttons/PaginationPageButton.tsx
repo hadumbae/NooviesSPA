@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
-import {PaginationEllipsis, PaginationItem, PaginationLink,} from "@/common/components/ui";
+import {PaginationEllipsis, PaginationItem, PaginationLink,} from "@/views/common/_comp/ui";
 
 /** Props for the PaginationPageButton component. */
 export type ButtonProps = {

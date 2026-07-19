@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Separator} from "@/common/components/ui/separator.tsx";
+import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
 import {GenreMultiSelect} from "@/views/admin/genres";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";

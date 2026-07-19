@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode, useEffect, useId} from 'react';
-import {Form} from "@/common/components/ui";
+import {Form} from "@/views/common/_comp/ui";
 import {FormContainerConfigProps} from "@/common/_feat/submit-data";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 

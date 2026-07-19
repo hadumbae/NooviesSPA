@@ -13,7 +13,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import {
     MoviePosterImageSubmitFormView
 } from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormView.tsx";

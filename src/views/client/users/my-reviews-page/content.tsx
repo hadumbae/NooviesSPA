@@ -10,7 +10,7 @@ import {MyMovieReview} from "@/domains/movie-reviews/_schema/my-reviews";
 import {ReactElement} from "react";
 import {PageHeader} from "@/views/common/_comp";
 import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users";
-import {Separator} from "@/common/components/ui";
+import {Separator} from "@/views/common/_comp/ui";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 
 /** Props for the MyReviewsPageContent component. */

@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {PageHeader} from "@/views/common/_comp";
 
 import {ShowingDetails, simplifyShowingDetails, useNavigateToShowingDetails} from "@/domains/showings";

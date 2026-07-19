@@ -4,7 +4,7 @@
 
 import {ReactElement, ReactNode, useId} from "react";
 import {ObjectId} from "@/common/_schemas";
-import {Form} from "@/common/components/ui/form.tsx";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 import {ModerationMessageFormData, useModerationMessageForm} from "@/common/_feat/moderation/forms";
 
 import {MovieReview} from "@/domains/movie-reviews/_schema/model";

@@ -3,7 +3,7 @@
  */
 
 import {Dispatch, ReactElement, SetStateAction} from "react";
-import {Card, CardContent, TabsContent} from "@/common/components/ui";
+import {Card, CardContent, TabsContent} from "@/views/common/_comp/ui";
 import {SectionTitle} from "@/views/common/_comp";
 import {SeatDetails} from "@/domains/seats";
 import {SeatSubmitFormView} from "@/views/admin/seats/_feat";

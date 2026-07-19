@@ -4,7 +4,7 @@
 import {ReactElement} from 'react';
 import {PageHeader} from "@/views/common/_comp";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 
 import {ShowingDetails, useNavigateToShowingDetails} from "@/domains/showings";
 import {ShowingSubmitForm, ShowingSubmitFormView} from "@/views/admin/showings/_feat";

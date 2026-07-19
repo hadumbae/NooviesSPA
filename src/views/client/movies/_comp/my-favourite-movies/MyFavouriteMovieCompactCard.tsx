@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {Info} from "lucide-react";
 import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";

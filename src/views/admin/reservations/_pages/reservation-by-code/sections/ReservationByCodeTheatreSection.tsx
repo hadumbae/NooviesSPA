@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent, Separator} from "@/common/components/ui";
+import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {ISO3166Alpha2CountryConstant} from "@/common/_const";
 import {LabelContent, PageSectionHeader, SubsectionTitle} from "@/views/common/_comp";
 import {AdminReservation} from "@/domains/reservations";

@@ -4,11 +4,11 @@
 
 import {Dispatch, ReactElement, SetStateAction} from "react";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {SeatFormSubmitList} from "@/views/admin/seats/_comp/returned-seat-list";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {DisableFields} from "@/common/_types";
-import {ScrollArea, ScrollBar, TabsContent} from "@/common/components/ui";
+import {ScrollArea, ScrollBar, TabsContent} from "@/views/common/_comp/ui";
 
 import {SeatDetails, SeatFormData, SeatFormValues, SeatPanelContextProvider} from "@/domains/seats";
 import {SeatContextPanel} from "@/views/admin/seats/_feat/context-action-panel";

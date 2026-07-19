@@ -7,7 +7,7 @@ import {cn} from "@/common/_feat";
 import {HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
 import {ControllerProps, FieldValues, useFormContext} from "react-hook-form";
 import {ArrowDownUp, ArrowDownWideNarrow, ArrowUpNarrowWide} from "lucide-react";
-import {Button, FormControl, FormField, FormItem, FormLabel,} from "@/common/components/ui";
+import {Button, FormControl, FormField, FormItem, FormLabel,} from "@/views/common/_comp/ui";
 
 /**
  * Renders a button that toggles between sorting states.

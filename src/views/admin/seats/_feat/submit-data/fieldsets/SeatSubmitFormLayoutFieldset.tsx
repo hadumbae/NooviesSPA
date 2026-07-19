@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {Separator} from "@/common/components/ui";
+import {Separator} from "@/views/common/_comp/ui";
 import {cn} from "@/common/_feat";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {SeatLayoutTypeRadioGroup} from "@/views/admin/seats/_feat/form-inputs";

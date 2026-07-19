@@ -5,7 +5,7 @@
 
 import {ReactElement, useMemo} from "react";
 import {cn} from "@/common/_feat";
-import {Separator} from "@/common/components/ui";
+import {Separator} from "@/views/common/_comp/ui";
 import {LabelContent} from "@/views/common/_comp";
 import {SeparatedLinks} from "@/views/common/_feat";
 import {generateMovieCreditLinkConfigs, MovieCreditDetails} from "@/domains/movie-credits";

@@ -3,7 +3,7 @@
  */
 
 import {cn} from "@/common/_feat";
-import {buttonVariants} from "@/common/components/ui";
+import {buttonVariants} from "@/views/common/_comp/ui";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 

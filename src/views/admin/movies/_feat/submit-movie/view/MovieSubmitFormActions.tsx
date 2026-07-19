@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
 import {RotateCw} from "lucide-react";
 import {cn} from "@/common/_feat";

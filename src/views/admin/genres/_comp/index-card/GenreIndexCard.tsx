@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {Clapperboard} from "lucide-react";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {cn} from "@/common/_feat";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {Genre} from "@/domains/genres";

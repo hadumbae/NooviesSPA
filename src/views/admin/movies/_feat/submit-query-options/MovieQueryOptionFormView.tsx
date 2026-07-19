@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {cn} from "@/common/_feat";
-import {Separator} from "@/common/components/ui/separator.tsx";
+import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {
     MovieQueryOptionFormSortFieldset
 } from "@/views/admin/movies/_feat/submit-query-options/MovieQueryOptionFormSortFieldset.tsx";

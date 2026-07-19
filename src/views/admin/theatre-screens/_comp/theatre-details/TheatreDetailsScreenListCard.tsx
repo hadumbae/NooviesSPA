@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent, Progress, Separator} from "@/common/components/ui";
+import {Card, CardContent, Progress, Separator} from "@/views/common/_comp/ui";
 import {TheatreScreenTypeBadge} from "@/views/admin/theatre-screens/_comp/badges";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";

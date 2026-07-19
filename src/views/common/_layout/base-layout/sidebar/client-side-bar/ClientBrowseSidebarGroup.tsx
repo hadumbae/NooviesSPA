@@ -12,7 +12,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem
-} from "@/common/components/ui/sidebar";
+} from "@/views/common/_comp/ui/sidebar";
 
 /**
  * Renders a sidebar section containing navigation links for the public browsing area.

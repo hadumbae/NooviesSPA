@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {ChevronLeft} from "lucide-react";
-import {Badge} from "@/common/components/ui";
+import {Badge} from "@/views/common/_comp/ui";
 import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {SROnly, SubsectionSubtitle, SubsectionTitle} from "@/views/common/_comp";
 

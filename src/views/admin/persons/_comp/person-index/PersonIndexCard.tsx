@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {CloudinaryAvatarImage} from "@/views/common/_comp";
 import {ISO3166Alpha2CountryConstant} from "@/common/_const";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";

@@ -17,7 +17,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger,
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 
 /** Props for the RemoveGenreImageWarningDialog component. */
 type DialogProps =  UIOpenStateProps & {

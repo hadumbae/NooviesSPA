@@ -11,7 +11,7 @@ import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsS
 import {ShowingFormData, ShowingFormValues} from "@/domains/showings/_schema/form";
 import {useShowingSubmitMutation} from "@/domains/showings/_feat/crud-hooks";
 import {useShowingSubmitForm} from "@/domains/showings/_feat/submit-data";
-import {Form} from "@/common/components/ui/form.tsx";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {BaseMultiStepFormContextProvider} from "@/views/common/_feat/multi-step-form";
 

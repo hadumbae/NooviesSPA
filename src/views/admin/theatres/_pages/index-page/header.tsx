@@ -8,7 +8,7 @@ import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers"
 
 import {Theatre, useNavigateToTheatre} from "@/domains/theatres";
 import {TheatreSubmitForm, TheatreSubmitFormPanel} from "@/views/admin/theatres/_feat";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 
 /**
  * Header component for the Theatre index view.

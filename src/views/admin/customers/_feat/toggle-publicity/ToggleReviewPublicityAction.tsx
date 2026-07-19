@@ -9,7 +9,7 @@ import {useState} from "react";
 import {
     ToggleReviewPublicityDialog
 } from "@/views/admin/customers/_feat/toggle-publicity/ToggleReviewPublicityDialog.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {
     ToggleReviewPublicityForm
 } from "@/views/admin/customers/_feat/toggle-publicity/ToggleReviewPublicityForm.tsx";

@@ -11,7 +11,7 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator
-} from "@/common/components/ui/breadcrumb.tsx";
+} from "@/views/common/_comp/ui/breadcrumb.tsx";
 import {
     usePaginationLocationState
 } from "@/common/_feat/navigation/usePaginationLocationState.ts";

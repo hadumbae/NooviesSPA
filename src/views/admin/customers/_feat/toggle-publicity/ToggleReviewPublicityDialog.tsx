@@ -11,9 +11,9 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import {ReactElement, ReactNode} from "react";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {useFormContext} from "react-hook-form";
 import {HookFormInput} from "@/views/common/_feat";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";

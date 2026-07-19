@@ -3,10 +3,10 @@
  */
 
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
-import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle,} from "@/common/components/ui/sheet";
+import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle,} from "@/views/common/_comp/ui/sheet";
 import {formatSeatLabel} from "@/domains/seats/_feat/formatters";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import {ScrollArea} from "@/views/common/_comp/ui/scroll-area.tsx";
 import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {ReactElement} from "react";
 import {SeatTypeLabelMap} from "@/domains/seats";

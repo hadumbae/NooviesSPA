@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
 

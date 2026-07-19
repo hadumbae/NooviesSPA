@@ -3,7 +3,7 @@
  */
 
 import {Dispatch, ReactElement, ReactNode, SetStateAction, useState} from 'react';
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/common/components/ui";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/views/common/_comp/ui";
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {TheatreDetailsUISetterContext} from "@/domains/theatres";
 

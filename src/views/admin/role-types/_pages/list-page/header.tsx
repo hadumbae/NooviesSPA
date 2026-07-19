@@ -5,7 +5,7 @@
 
 import {ReactElement} from 'react';
 import {Plus} from "lucide-react";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 import {RoleTypeSubmitFormPanel} from "@/views/admin/role-types/_feat/submit-form/RoleTypeSubmitFormPanel.tsx";
 

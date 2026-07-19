@@ -4,8 +4,8 @@
 
 import {ReactElement} from "react";
 import {getInitials} from "@/common/_feat/formatters/getInitials.ts";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
+import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
+import {Avatar, AvatarFallback, AvatarImage} from "@/views/common/_comp/ui/avatar.tsx";
 import {MovieCreditDetails} from "@/domains/movie-credits/_schemas";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {Link} from "react-router-dom";

@@ -4,7 +4,7 @@
 
 import {ReactElement, ReactNode, useState} from "react";
 import {ChevronsUpDown} from "lucide-react";
-import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui";
+import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/views/common/_comp/ui";
 import {useParsedSearchParams} from "@/common/_feat";
 import {BrowsePersonsQueryOptionsSchema} from "@/domains/persons";
 

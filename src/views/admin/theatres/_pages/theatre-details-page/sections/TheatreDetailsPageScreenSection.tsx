@@ -10,7 +10,7 @@ import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/_schema/model";
 import {TheatreDetailsScreenListCard} from "@/views/admin/theatre-screens/_comp/theatre-details";
 import {SROnly} from "@/views/common/_comp/screen-readers";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {Plus} from "lucide-react";
 import {PaginationRangeButtons} from "@/views/common/_comp";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";

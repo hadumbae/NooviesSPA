@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
+import {Card, CardContent, CardHeader} from "@/views/common/_comp/ui/card.tsx";
 import {formatShowingDetails} from "@/domains/showings/_feat/formatters/formatShowingDetails.ts";
 import {DollarSign, Star} from "lucide-react";
 import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";

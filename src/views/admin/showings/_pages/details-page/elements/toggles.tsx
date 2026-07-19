@@ -5,7 +5,7 @@
 import {Dispatch, ReactElement, ReactNode, SetStateAction} from "react";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
-import {Button, buttonVariants, Popover, PopoverContent, PopoverTrigger} from "@/common/components/ui";
+import {Button, buttonVariants, Popover, PopoverContent, PopoverTrigger} from "@/views/common/_comp/ui";
 
 /** Props for the ShowingOptions component. */
 type OptionProps = {

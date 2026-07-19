@@ -2,7 +2,7 @@
  * @fileoverview A card component for displaying movie details within the admin showings view.
  */
 
-import {Card, CardContent, CardHeader} from "@/common/components/ui/card.tsx";
+import {Card, CardContent, CardHeader} from "@/views/common/_comp/ui/card.tsx";
 import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {AdminMovieMeta, MovieMetaGenreBadges} from "@/views/admin/movies/_comp/movie-details";

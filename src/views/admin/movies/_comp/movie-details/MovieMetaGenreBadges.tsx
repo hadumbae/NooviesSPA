@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Genre} from "@/domains/genres/_schema";
-import {Badge} from "@/common/components/ui/badge.tsx";
+import {Badge} from "@/views/common/_comp/ui/badge.tsx";
 import {cn} from "@/common/_feat";
 
 /** Props for the MovieMetaGenreBadges component. */

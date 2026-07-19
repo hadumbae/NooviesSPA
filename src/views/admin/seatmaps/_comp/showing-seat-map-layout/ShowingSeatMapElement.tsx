@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, useCallback} from "react";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 
 import {SeatLayoutIconConstant} from "@/domains/seats";

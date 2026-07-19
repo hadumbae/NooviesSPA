@@ -1,7 +1,7 @@
 /** @fileoverview Header component for a movie credit card, displaying person identity and role summary. */
 
 import {ReactElement, useState} from 'react';
-import {CardDescription, CardHeader, CardTitle} from "@/common/components/ui/card.tsx";
+import {CardDescription, CardHeader, CardTitle} from "@/views/common/_comp/ui/card.tsx";
 import {
     MoviePersonDetailsCardToggles
 } from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardToggles.tsx";
@@ -10,7 +10,7 @@ import {simplifyMovieCreditDetails} from "@/domains/movie-credits/_feat/formatte
 
 import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
 import {Ellipsis} from "lucide-react";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {
     MoviePersonDetailsCardActions
 } from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardActions.tsx";

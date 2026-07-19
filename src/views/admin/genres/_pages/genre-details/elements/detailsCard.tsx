@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {Genre} from "@/domains/genres/_schema";
 import {LabelContent} from "@/views/common/_comp";
-import {Card, CardContent, Separator} from "@/common/components/ui";
+import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
 
 /** Props for the {@link GenreDetailsCard} component. */

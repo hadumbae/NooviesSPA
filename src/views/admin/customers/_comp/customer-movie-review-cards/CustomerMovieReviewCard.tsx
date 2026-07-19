@@ -4,10 +4,10 @@
  */
 
 import {CustomerMovieReview} from "@/domains/movie-reviews/_schema/customer-reviews";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {UniqueReviewCodeBadge} from "@/views/admin/movie-reviews/_comp/badges/UniqueReviewCodeBadge.tsx";
 import {IsRecommendedBadge} from "@/views/client/movie-reviews/_comp/badges/IsRecommendedBadge.tsx";
-import {Separator} from "@/common/components/ui/separator.tsx";
+import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {MovieReviewText} from "@/views/client/movie-reviews/_comp/display/MovieReviewText.tsx";
 import {DisplayNameBadge, IsReviewPublicBadge, MovieRatingBadge} from "@/views/admin/movie-reviews/_comp";
 import {ReactElement} from "react";

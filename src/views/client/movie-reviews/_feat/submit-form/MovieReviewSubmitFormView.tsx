@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/_feat";
-import {Separator} from "@/common/components/ui";
+import {Separator} from "@/views/common/_comp/ui";
 import {HookFormCheckbox, HookFormInput, HookFormTextArea, StarRatingSelector} from "@/views/common/_feat";
 
 /** Props for the MovieReviewSubmitFormView component. */

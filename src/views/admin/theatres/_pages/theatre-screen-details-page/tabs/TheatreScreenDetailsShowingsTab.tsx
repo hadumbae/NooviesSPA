@@ -3,7 +3,7 @@
  * associated with a specific theatre screen.
  */
 
-import {TabsContent} from "@/common/components/ui/tabs.tsx";
+import {TabsContent} from "@/views/common/_comp/ui/tabs.tsx";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {IconButton} from "@/views/common/_comp";

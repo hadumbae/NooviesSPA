@@ -7,7 +7,7 @@ import {TheatreFormData} from "@/domains/theatres/_feat/submit-data/schema.ts";
 import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useTheatreSubmitMutation} from "@/domains/theatres/_feat/crud-hooks";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from '@/common/components/ui/form';
+import {Form} from "@/views/common/_comp/ui";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 import {

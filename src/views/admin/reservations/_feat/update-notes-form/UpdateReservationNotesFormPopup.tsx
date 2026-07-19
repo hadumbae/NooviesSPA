@@ -15,7 +15,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 
 /** Props for the UpdateReservationNotesFormPopup component. */
 type PopupProps = {

@@ -12,7 +12,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import {cn} from "@/common/_feat";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {BrowseMoviePosterLink} from "@/views/admin/movies/_comp/poster-image";

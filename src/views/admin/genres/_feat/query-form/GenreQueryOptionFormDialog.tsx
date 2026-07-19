@@ -8,7 +8,7 @@ import {cn} from "@/common/_feat";
 import {ListFilter} from "lucide-react";
 import {HookFormInput} from "@/views/common/_feat";
 import {HookFormSortToggle} from "@/views/common/_feat";
-import {Separator} from "@/common/components/ui/separator.tsx";
+import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {SectionTitle} from "@/views/common/_comp";
@@ -20,7 +20,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 
 /** Props for the GenreQueryOptionFormDialog component. */
 type FormViewProps = {

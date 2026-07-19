@@ -11,7 +11,7 @@ import {
 } from "@/domains/persons/_feat/submit-profile-image";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/common/components/ui/form.tsx";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 import {
     handleSubmitResponseError
 } from "@/common/_feat/error-handling/handleSubmitResponseError.ts";

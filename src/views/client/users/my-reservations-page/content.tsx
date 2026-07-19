@@ -10,7 +10,7 @@ import {MyReservationCompactCard} from "@/views/client/reservations/_comp";
 import {ReactElement} from "react";
 import {PageHeader} from "@/views/common/_comp";
 import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users";
-import {Separator} from "@/common/components/ui";
+import {Separator} from "@/views/common/_comp/ui";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 import {
     MyReservationsQueryOptionForm,

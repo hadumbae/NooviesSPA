@@ -2,7 +2,7 @@
  * @fileoverview Form input component that integrates seat map selection with React Hook Form.
  */
 
-import {FormField} from "@/common/components/ui/form.tsx";
+import {FormField} from "@/views/common/_comp/ui/form.tsx";
 import {Control, FieldValues, Path} from "react-hook-form";
 import {
     ReservationSeatMapSelector

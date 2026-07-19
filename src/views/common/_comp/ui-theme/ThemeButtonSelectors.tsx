@@ -2,7 +2,7 @@
  * @fileoverview Interactive button group for switching between application theme variants.
  */
 
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {LucideIcon, Moon, Sun, SunMoon} from "lucide-react";
 import {ThemeVariant} from "@/common/_schemas/enums/ThemeVariantSchema.ts";
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, useState} from "react";
-import {Tabs, TabsList, TabsTrigger} from "@/common/components/ui";
+import {Tabs, TabsList, TabsTrigger} from "@/views/common/_comp/ui";
 import {ObjectId} from "@/common/_schemas";
 import {
     TheatreScreenDetailsViewSeatsTab

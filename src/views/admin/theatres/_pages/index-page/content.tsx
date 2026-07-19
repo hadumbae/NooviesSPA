@@ -5,7 +5,7 @@
 import {ReactElement, useState} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {QueryFilterDialog} from "@/views/common/_feat/dialog/QueryFilterDialog.tsx";
-import {ScrollArea, ScrollBar} from "@/common/components/ui";
+import {ScrollArea, ScrollBar} from "@/views/common/_comp/ui";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {PaginationRangeButtons} from "@/views/common/_comp";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";

@@ -10,7 +10,7 @@ import {
 } from "@/domains/theatres/_feat/submit-location";
 import {ReactElement, ReactNode} from "react";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/common/components/ui/form.tsx";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 
 

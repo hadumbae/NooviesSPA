@@ -5,7 +5,7 @@
 import {ReactElement, ReactNode, useId} from 'react';
 import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 import {FormContainerConfigProps} from '@/common/_feat/submit-data/formTypes';
-import {Form} from "@/common/components/ui/form.tsx";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 import {GenreFormData, useGenreSubmitForm} from "@/domains/genres/_feat/submit-form";
 import {useGenreDataSubmit} from "@/domains/genres/_feat/crud-hooks";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";

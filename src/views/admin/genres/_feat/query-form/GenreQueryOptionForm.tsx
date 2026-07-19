@@ -8,7 +8,7 @@ import {useGenreQueryOptionForm} from "@/domains/genres/_feat/query-form/form/us
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {GenreQueryOptionFormStarter, GenreQueryOptions, GenreQueryOptionSchema} from "@/domains/genres";
-import {Form} from "@/common/components/ui";
+import {Form} from "@/views/common/_comp/ui";
 
 /** Props for the {@link GenreQueryOptionForm} component. */
 type ContainerProps = FormOptions<GenreQueryOptionFormStarter> & {

@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
-import {Badge} from "@/common/components/ui";
+import {Badge} from "@/views/common/_comp/ui";
 import {ScreenType} from "@/domains/theatre-screens";
 
 /** Props for the TheatreScreenTypeBadge component. */

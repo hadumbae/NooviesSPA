@@ -11,7 +11,7 @@ import {
 } from "react-hook-form"
 
 import { cn } from "@/common/_feat"
-import { Label } from "@/common/components/ui/label.tsx"
+import { Label } from "@/views/common/_comp/ui/label.tsx"
 
 const Form = FormProvider
 

@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {ThumbsUp} from "lucide-react";
-import {Button, buttonVariants} from "@/common/components/ui";
+import {Button, buttonVariants} from "@/views/common/_comp/ui";
 import {cn} from "@/common/_feat";
 
 /** Props for the MovieReviewHelpfulButton component. */

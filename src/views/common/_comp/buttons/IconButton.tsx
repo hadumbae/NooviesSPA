@@ -2,7 +2,7 @@
  * @fileoverview A specialized button component optimized for displaying icons.
  */
 
-import {Button, ButtonProps} from "@/common/components/ui/button.tsx";
+import {Button, ButtonProps} from "@/views/common/_comp/ui/button.tsx";
 import {forwardRef} from "react";
 import {cn} from "@/common/_feat";
 import {LucideIcon} from "lucide-react";

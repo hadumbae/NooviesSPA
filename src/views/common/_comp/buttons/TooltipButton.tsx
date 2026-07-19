@@ -3,8 +3,8 @@
  */
 
 import {forwardRef, ReactNode} from 'react';
-import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
-import {Button, ButtonProps} from "@/common/components/ui/button.tsx";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@/views/common/_comp/ui/tooltip.tsx";
+import {Button, ButtonProps} from "@/views/common/_comp/ui/button.tsx";
 
 /** Props for the TooltipButton component. */
 export type TooltipButtonProps = ButtonProps & {

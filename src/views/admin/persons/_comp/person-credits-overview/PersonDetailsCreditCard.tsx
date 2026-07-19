@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {PersonCredit} from "@/domains/movie-credits";
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {Info} from "lucide-react";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink";

@@ -1,6 +1,6 @@
 import {ReactElement} from "react";
 import {ImageUp, Loader} from "lucide-react";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
 type ActionProps = {

@@ -4,7 +4,7 @@
  */
 
 import {ReactElement, useState} from "react";
-import {ScrollArea, Sheet, SheetContent} from "@/common/components/ui";
+import {ScrollArea, Sheet, SheetContent} from "@/views/common/_comp/ui";
 
 import {SeatDetails, simplifySeatDetails, useSeatPanelSetterContext, useSeatPanelStateContext} from "@/domains/seats";
 import {SeatSubmitForm} from "@/views/admin/seats/_feat/submit-data";

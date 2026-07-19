@@ -4,7 +4,7 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {cn} from "@/common/_feat";
-import {DropdownMenuItem} from "@/common/components/ui/dropdown-menu.tsx";
+import {DropdownMenuItem} from "@/views/common/_comp/ui/dropdown-menu.tsx";
 import {useCurrentURLPath} from "@/common/_feat/navigation/useCurrentURLPath.ts";
 import {To, useNavigate} from "react-router-dom";
 

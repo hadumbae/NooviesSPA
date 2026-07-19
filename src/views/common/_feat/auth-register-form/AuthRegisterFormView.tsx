@@ -3,7 +3,7 @@
  */
 
 import {HookFormInput} from "@/views/common/_feat";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {cn} from "@/common/_feat";
 import {ReactElement} from "react";

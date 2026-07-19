@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {cn} from "@/common/_feat";
 import {ChevronDown} from "lucide-react";
-import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, Separator} from "@/common/components/ui";
+import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, Separator} from "@/views/common/_comp/ui";
 import {useCurrentURLPath} from "@/common/_feat/navigation/useCurrentURLPath.ts";
 import {DropdownMenuLink} from "@/views/common/_feat/navigation/DropdownMenuLink.tsx";
 import {

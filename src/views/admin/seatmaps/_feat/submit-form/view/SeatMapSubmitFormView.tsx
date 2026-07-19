@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {Loader} from "lucide-react";
 import {DisableFields} from "@/common/_types";
 import {cn} from "@/common/_feat";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {ObjectId} from "@/common/_schemas";
 

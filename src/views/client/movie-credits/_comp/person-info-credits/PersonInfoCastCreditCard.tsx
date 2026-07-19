@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {PersonCastCredit} from "@/domains/movie-credits";
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {BrowseMoviePosterLink} from "@/views/admin/movies";
 import {MovieCreditCastFlags} from "@/views/admin/movie-credits";
 import {PersonInfoCreditHeader} from "@/views/client/movie-credits";

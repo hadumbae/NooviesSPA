@@ -9,7 +9,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import {TextQuote} from "@/views/common/_comp";
 import {Search} from "lucide-react";
 import {cn} from "@/common/_feat";

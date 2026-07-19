@@ -9,7 +9,7 @@ import {
 } from "@/views/common/_layout/admin-layout/navigation/AdminLayoutSetupNavigationDropdown.tsx";
 import AdminLayoutShowingNavigationDropdown
     from "@/views/common/_layout/admin-layout/navigation/AdminLayoutShowingNavigationDropdown.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {useAuthLogoutSubmitMutation} from "@/domains/auth/_feat/auth-logout/useAuthLogoutSubmitMutation.ts";
 import {

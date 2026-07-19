@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Badge} from "@/common/components/ui/badge.tsx";
+import {Badge} from "@/views/common/_comp/ui/badge.tsx";
 import {cn} from "@/common/_feat";
 
 /** Props for the ShowingIsActiveBadge component. */

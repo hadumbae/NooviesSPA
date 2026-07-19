@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from "@/common/components/ui";
+import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from "@/views/common/_comp/ui";
 import {DropdownMenuLink} from "@/views/common/_feat/navigation/DropdownMenuLink.tsx";
 
 /**

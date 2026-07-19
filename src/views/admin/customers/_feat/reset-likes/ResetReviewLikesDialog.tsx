@@ -15,7 +15,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import {HookFormInput} from "@/views/common/_feat";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 

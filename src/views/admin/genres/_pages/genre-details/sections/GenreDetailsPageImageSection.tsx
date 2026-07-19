@@ -8,7 +8,7 @@ import {GenreImageBanner} from "@/views/admin/genres/_comp";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {Genre} from "@/domains/genres/_schema";
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {Plus, Trash} from "lucide-react";
 import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";

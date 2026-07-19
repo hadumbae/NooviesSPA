@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode} from "react";
-import {Form} from "@/common/components/ui/form.tsx";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 

@@ -14,7 +14,7 @@ import {MultiStepFormStateContext} from "@/common/_feat/multi-step-form/contexts
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 
 import {HookFormInput} from "@/views/common/_feat";
-import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger, Separator} from "@/common/components/ui";
+import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger, Separator} from "@/views/common/_comp/ui";
 import {MovieHookFormSelect, MovieQuickOverviewFetchCard} from "@/views/admin/movies";
 import {TheatreHookFormSelect, TheatreQuickOverviewFetchCard} from "@/views/admin/theatres";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens";

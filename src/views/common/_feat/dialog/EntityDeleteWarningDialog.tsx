@@ -13,7 +13,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import {UIOpenStateProps} from "@/common/_types";
 
 /** Props for the EntityDeleteWarningDialog component. */

@@ -11,7 +11,7 @@ import {
 } from "@/common/_feat/filter-object-attributes/filterFalsyAttributes.ts";
 import {MovieQueryOptionFormValues} from "@/domains/movies/_feat/submit-queries/MovieQueryOptionFormValues";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/common/components/ui";
+import {Form} from "@/views/common/_comp/ui";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 
 /** Props for the MovieQueryOptionFormContainer component. */

@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {LayoutNavLink} from "@/views/common/_comp/layout/LayoutNavLink.tsx";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {
     BaseLayoutClientProfileNavigationDropdown

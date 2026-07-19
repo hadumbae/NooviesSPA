@@ -6,7 +6,7 @@
 import {ObjectId} from "@/common/_schemas";
 import {forwardRef, useState} from "react";
 import {Heart, HeartMinus, HeartPlus} from "lucide-react";
-import {Button, ButtonProps} from "@/common/components/ui/button.tsx";
+import {Button, ButtonProps} from "@/views/common/_comp/ui/button.tsx";
 
 /** Props for FavouriteMovieHeartButton. */
 type HeartProps = ButtonProps & {

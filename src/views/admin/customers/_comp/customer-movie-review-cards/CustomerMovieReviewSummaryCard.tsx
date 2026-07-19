@@ -2,13 +2,13 @@
  * @fileoverview Individual summary card for a customer's movie review, used in admin dashboards.
  */
 
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {CustomerMovieReviewSummary} from "@/domains/movie-reviews/_schema/customer-reviews";
 import {MovieReviewRatingStars} from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";
-import {Separator} from "@/common/components/ui/separator.tsx";
+import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {IsRecommendedCheck} from "@/views/client/movie-reviews/_comp/badges/IsRecommendedCheck.tsx";
 import {ReactElement} from "react";
 

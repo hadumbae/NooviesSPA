@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/common/components/ui";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/views/common/_comp/ui";
 import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";

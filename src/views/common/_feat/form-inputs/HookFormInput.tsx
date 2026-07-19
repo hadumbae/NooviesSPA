@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {ControllerProps, FieldValues} from "react-hook-form";
 import {cn} from "@/common/_feat";
 import {HookFormInputProps} from "@/common/_types/input/HookFormInputProps.ts";
-import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input} from "@/common/components/ui";
+import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input} from "@/views/common/_comp/ui";
 
 /**
  * Generic form input component integrated with react-hook-form and shadcn/ui.

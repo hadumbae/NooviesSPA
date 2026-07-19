@@ -6,7 +6,7 @@ import {ReactElement, ReactNode} from 'react';
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
-import {Form} from "@/common/components/ui";
+import {Form} from "@/views/common/_comp/ui";
 
 import {
     TheatreQueryOptionFormStarterValues,

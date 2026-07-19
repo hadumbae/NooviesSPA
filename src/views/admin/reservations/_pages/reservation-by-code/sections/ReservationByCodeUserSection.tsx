@@ -3,8 +3,8 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {Separator} from "@/common/components/ui/separator.tsx";
+import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
+import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {LabelContent, SectionTitle, SubsectionSubtitle, SubsectionTitle} from "@/views/common/_comp";
 
 import {AdminReservation} from "@/domains/reservations";

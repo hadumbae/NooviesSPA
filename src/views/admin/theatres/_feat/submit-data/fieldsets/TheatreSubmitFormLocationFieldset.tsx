@@ -5,7 +5,7 @@
 import {ReactElement, useEffect} from "react";
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/_feat";
-import {Separator} from "@/common/components/ui";
+import {Separator} from "@/views/common/_comp/ui";
 import {HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
 import {HookFormSelect} from "@/views/common/_comp";
 import {IANATimezoneOptions, ISO3166Alpha2CountryOptions} from "@/common/_const";

@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
 import {Person} from "@/domains/persons";
-import {Card, CardContent, Separator} from "@/common/components/ui";
+import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";
 import {PersonProfileAvatar} from "@/views/admin/persons";
 import {LabelContentList} from "@/views/common/_comp";

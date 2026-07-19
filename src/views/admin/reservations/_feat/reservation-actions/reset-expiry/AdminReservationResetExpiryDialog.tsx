@@ -14,7 +14,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
 import {ReservationUniqueCode} from "@/domains/reservations";
 

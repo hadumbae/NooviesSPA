@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {ScrollArea} from "@/common/components/ui/scroll-area.tsx";
+import {ScrollArea} from "@/views/common/_comp/ui/scroll-area.tsx";
 import {
     Sheet,
     SheetContent,
@@ -11,7 +11,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui/sheet";
+} from "@/views/common/_comp/ui/sheet";
 
 
 import {UIOpenStateProps} from "@/common/_types";

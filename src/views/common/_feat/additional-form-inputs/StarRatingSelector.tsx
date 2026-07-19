@@ -15,7 +15,7 @@ import {
     FormMessage,
     RadioGroup,
     RadioGroupItem
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 
 /**
  * Props for the StarRatingSelector component.

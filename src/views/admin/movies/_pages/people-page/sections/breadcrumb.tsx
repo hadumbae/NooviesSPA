@@ -10,7 +10,7 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator
-} from "@/common/components/ui/breadcrumb.tsx";
+} from "@/views/common/_comp/ui/breadcrumb.tsx";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {RoleTypeDepartment} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
 import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";

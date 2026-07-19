@@ -11,7 +11,7 @@ import {
     UpdateUserPasswordForm,
     UpdateUserPasswordFormView
 } from "@/views/client/users";
-import {Card, CardContent, Separator} from "@/common/components/ui";
+import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {User} from "@/domains/users";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 

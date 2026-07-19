@@ -12,7 +12,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import {UIOpenStateProps} from "@/common/_types";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {TheatreSubmitFormView} from "@/views/admin/theatres/_feat/submit-data/views/TheatreSubmitFormView.tsx";

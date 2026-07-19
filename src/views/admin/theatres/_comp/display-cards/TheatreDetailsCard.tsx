@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {Card, CardContent, Separator} from "@/common/components/ui";
+import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {DetailsCardSpan} from "@/views/common/_comp/text-display/spans/DetailsCardSpan.tsx";
 import {
     generateLocationAddressString

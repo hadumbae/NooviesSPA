@@ -4,7 +4,7 @@
  */
 
 import {BaseSeatingElement} from "@/views/client/reservations/_comp/seating/BaseSeatingElement.tsx";
-import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@/views/common/_comp/ui/tooltip.tsx";
 import {ReactElement} from "react";
 
 import {SeatMapDetails} from "@/domains/seatmaps/_schema/model/SeatMapDetailsSchema";

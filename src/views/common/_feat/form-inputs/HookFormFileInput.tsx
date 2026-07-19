@@ -4,7 +4,7 @@
 import {ReactElement, useEffect, useRef} from "react";
 import {ControllerProps, FieldValues, useFormContext} from "react-hook-form";
 import {cn} from "@/common/_feat";
-import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input} from "@/common/components/ui";
+import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input} from "@/views/common/_comp/ui";
 import {HookFormFileInputProps, HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
 
 /** Props for the HookFormFileInput component. */

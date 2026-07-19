@@ -2,7 +2,7 @@
  * @fileoverview A full-width button component used for toggling panel states.
  */
 
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {ButtonVariant} from "@/common/_types/shadcn/ButtonVariant.ts";
 import {LucideIcon} from "lucide-react";
 import {cn} from "@/common/_feat";

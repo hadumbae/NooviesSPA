@@ -11,7 +11,7 @@ import {
     PaginationItem,
     PaginationNext,
     PaginationPrevious
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 
 /** Props for the PaginationRangeButtons component. */
 export type PaginationRangeButtonsProps = {

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {ChevronLeft, ChevronRight, RefreshCw} from "lucide-react";
 import {useMultiStepFormSetterContext} from "@/common/_feat/multi-step-form/hooks/useMultiStepFormSetterContext.ts";
 

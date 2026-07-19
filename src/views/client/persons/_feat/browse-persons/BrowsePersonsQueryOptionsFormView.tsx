@@ -9,7 +9,7 @@ import {cn} from "@/common/_feat";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {HookFormInput} from "@/views/common/_feat";
 import {HookFormSortToggle} from "@/views/common/_feat";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 import {X} from "lucide-react";
 
 /** Props for the BrowsePersonsQueryOptionsView component. */

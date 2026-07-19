@@ -6,7 +6,7 @@
 import {ReactElement} from "react";
 import {X} from "lucide-react";
 import {ObjectId} from "@/common/_schemas";
-import {Button, Card, CardContent} from "@/common/components/ui";
+import {Button, Card, CardContent} from "@/views/common/_comp/ui";
 
 import {SeatDetails, SeatLayoutTypeLabelMap} from "@/domains/seats";
 import {PageSectionHeader} from "@/views/common/_comp/page";

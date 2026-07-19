@@ -8,7 +8,7 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuTrigger
-} from "@/common/components/ui/dropdown-menu.tsx";
+} from "@/views/common/_comp/ui/dropdown-menu.tsx";
 import {useCurrentURLPath} from "@/common/_feat/navigation/useCurrentURLPath.ts";
 import {DropdownMenuLink} from "@/views/common/_feat/navigation/DropdownMenuLink.tsx";
 import {NavigationDropdownButton} from "@/views/common/_comp/buttons/NavigationDropdownButton.tsx";

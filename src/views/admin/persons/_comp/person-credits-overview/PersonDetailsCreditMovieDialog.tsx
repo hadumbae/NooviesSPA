@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import {buttonVariants, Dialog, DialogContent, DialogTrigger} from "@/common/components/ui";
+import {buttonVariants, Dialog, DialogContent, DialogTrigger} from "@/views/common/_comp/ui";
 import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
 import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {Search} from "lucide-react";

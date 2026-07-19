@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Badge, BadgeProps} from "@/common/components/ui";
+import {Badge, BadgeProps} from "@/views/common/_comp/ui";
 import {cn} from "@/common/_feat";
 
 /** Represents an individual entry in the badge list. */

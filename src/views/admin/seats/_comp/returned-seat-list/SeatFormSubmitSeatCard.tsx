@@ -3,9 +3,9 @@
  * metadata including availability, type, custom labels, and pricing modifiers.
  */
 
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {Armchair, BadgeCheck, DollarSign, Tag, X} from "lucide-react";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {ReactElement} from "react";
 import {PageSectionHeader} from "@/views/common/_comp/page";

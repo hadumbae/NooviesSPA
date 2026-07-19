@@ -12,7 +12,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import {UIOpenStateProps} from "@/common/_types";
 import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
 import {BaseFormContext} from "@/common/_feat/generic-form-context";

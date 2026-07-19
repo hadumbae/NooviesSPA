@@ -9,7 +9,7 @@ import {useFormContext} from "react-hook-form";
 import {ReservationStatusFilterRadioGroupOptions, ReservationTypeFilterRadioGroupOptions} from "@/domains/reservations";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 import {X} from "lucide-react";
 
 /** Props for the MyReservationsQueryOptionFormView component. */

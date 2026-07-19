@@ -6,7 +6,7 @@ import {
     ResetReviewDisplayNameFormData,
     useResetReviewDisplayNameForm
 } from "@/domains/movie-reviews/_feat/admin-actions/forms";
-import {Form} from "@/common/components/ui/form.tsx";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 import {useResetReviewDisplayNameMutation} from "@/domains/movie-reviews/_feat/admin-actions/mutations";
 import {ObjectId} from "@/common/_schemas";
 import {ReactElement, ReactNode, useId} from "react";

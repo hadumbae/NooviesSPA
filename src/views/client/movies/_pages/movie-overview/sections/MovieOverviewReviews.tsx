@@ -5,7 +5,7 @@
 
 import {cn} from "@/common/_feat";
 import {ChevronRight, MessageCirclePlus} from "lucide-react";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {ReactElement, useState} from "react";
 import {
     MovieReviewSummaryCard

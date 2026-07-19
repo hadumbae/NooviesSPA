@@ -8,7 +8,7 @@ import {useMovieSubmitMutation} from "@/domains/movies/_feat/crud-hooks";
 import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {Movie} from "@/domains/movies/_schema/movie";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/common/components/ui/form.tsx";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 import {Logger} from "@/common/_feat/logger/Logger.ts";

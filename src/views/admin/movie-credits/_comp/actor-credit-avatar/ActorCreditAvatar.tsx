@@ -2,7 +2,7 @@
  * @fileoverview Displays a cast member avatar with linked identity and role details.
  */
 
-import {Avatar, AvatarFallback, AvatarImage} from "@/common/components/ui/avatar.tsx";
+import {Avatar, AvatarFallback, AvatarImage} from "@/views/common/_comp/ui/avatar.tsx";
 import {getInitials} from "@/common/_feat/formatters/getInitials.ts";
 import {cn} from "@/common/_feat";
 import {mapCreditToPersonLinkConfig} from "@/domains/movie-credits/_feat/navigation/mapCreditToPersonLinkConfig.ts";

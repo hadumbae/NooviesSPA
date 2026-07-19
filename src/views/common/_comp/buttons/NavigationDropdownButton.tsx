@@ -5,7 +5,7 @@
 import {cn} from "@/common/_feat";
 import {forwardRef} from "react";
 import {ChevronDown} from "lucide-react";
-import {Button, ButtonProps} from "@/common/components/ui";
+import {Button, ButtonProps} from "@/views/common/_comp/ui";
 
 /**
  * Props for the NavigationDropdownButton component. */

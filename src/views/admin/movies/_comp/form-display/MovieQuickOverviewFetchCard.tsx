@@ -7,7 +7,7 @@ import {ObjectId} from "@/common/_schemas";
 import {cn} from "@/common/_feat";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {QueryDataLoader} from "@/views/common/_feat";
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {formatMovieData, MovieDetails, MovieDetailsSchema, useFetchMovie} from "@/domains/movies";
 
 /** Props for the MovieQuickOverviewFetchCard component. */

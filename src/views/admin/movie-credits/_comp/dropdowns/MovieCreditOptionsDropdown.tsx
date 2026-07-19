@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {EllipsisIcon} from "lucide-react";
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/common/components/ui";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/views/common/_comp/ui";
 
 /** Props for the MovieCreditOptionsDropdown component. */
 type OptionsProps = {

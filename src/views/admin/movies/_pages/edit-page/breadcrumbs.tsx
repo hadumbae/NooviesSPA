@@ -9,7 +9,7 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 

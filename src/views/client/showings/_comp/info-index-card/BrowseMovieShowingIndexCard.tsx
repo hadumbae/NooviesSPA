@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {BrowseMovieShowingSelector, ShowingInfoPremises} from "@/views/client/showings/_comp";
 import {PopulatedShowing, ShowingDetails} from "@/domains/showings";
 

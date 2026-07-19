@@ -12,7 +12,7 @@ import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {useParsedSearchParams} from "@/common/_feat";
 import {BrowsePersonsQueryOptionsSchema} from "@/domains/persons/_feat/client-view-data";
-import {Form} from "@/common/components/ui";
+import {Form} from "@/views/common/_comp/ui";
 
 type FormProps = {
     children: ReactNode;

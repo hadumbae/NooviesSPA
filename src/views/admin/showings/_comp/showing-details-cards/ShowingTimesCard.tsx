@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {Showing, ShowingDetails} from "@/domains/showings/_schema/showing";
 import {IANATimezone} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 import {LabelContent} from "@/views/common/_comp/label-content/LabelContent.tsx";

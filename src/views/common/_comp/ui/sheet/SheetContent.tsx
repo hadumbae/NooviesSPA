@@ -3,8 +3,8 @@ import * as React from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import {cn} from "@/common/_feat";
 import {X} from "lucide-react";
-import {SheetOverlay} from "@/common/components/ui/sheet/SheetOverlay.tsx";
-import {SheetPortal} from "@/common/components/ui/sheet/SheetPortal.tsx";
+import {SheetOverlay} from "@/views/common/_comp/ui/sheet/SheetOverlay.tsx";
+import {SheetPortal} from "@/views/common/_comp/ui/sheet/SheetPortal.tsx";
 
 const sheetVariants = cva(
     "fixed z-50 gap-4 bg-white p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out dark:bg-neutral-950",

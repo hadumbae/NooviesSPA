@@ -13,7 +13,7 @@ import {
 import {useSubmitPersonData} from "@/domains/persons/_feat/crud-hooks";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {FormOptions, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {Form} from "@/common/components/ui/form.tsx";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 
 import {Person} from "@/domains/persons/_schema/person/PersonSchema";
 

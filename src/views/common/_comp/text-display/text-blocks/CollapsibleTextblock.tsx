@@ -5,7 +5,7 @@
 import {ReactElement, useState} from 'react';
 import {cn} from "@/common/_feat";
 import {ChevronDown, ChevronUp} from "lucide-react";
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui";
+import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/views/common/_comp/ui";
 
 /** Props for the CollapsibleTextblock component. */
 type TextblockProps = {

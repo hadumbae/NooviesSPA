@@ -5,7 +5,7 @@
 import {ObjectId} from "@/common/_schemas";
 import {SetReviewRatingFormData} from "@/domains/movie-reviews/_feat/admin-actions/forms";
 import {ReactElement, useState} from "react";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {MovieReview} from "@/domains/movie-reviews/_schema";
 import {SetReviewRatingDialog, SetReviewRatingForm} from "@/views/admin/customers/_feat";

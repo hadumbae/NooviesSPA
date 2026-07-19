@@ -10,7 +10,7 @@ import {MovieDetails} from "@/domains/movies";
 import {generateGenreLinkConfigs} from "@/domains/genres";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {LabelContent} from "@/views/common/_comp";
-import {ScrollArea, ScrollBar} from "@/common/components/ui";
+import {ScrollArea, ScrollBar} from "@/views/common/_comp/ui";
 
 /** Props for the MovieOverviewMeta component. */
 type OverviewProps = {

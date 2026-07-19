@@ -4,7 +4,7 @@
 
 import {ReactElement, useState} from "react";
 import {cn} from "@/common/_feat";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 
 import {AdminReservation} from "@/domains/reservations";
 import {

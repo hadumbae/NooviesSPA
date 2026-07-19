@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {FavouriteMovieHeartButton} from "@/views/client/movies/_comp";
 

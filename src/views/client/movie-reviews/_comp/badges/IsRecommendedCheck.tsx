@@ -2,7 +2,7 @@
  * @fileoverview Badge indicating a movie is recommended.
  */
 
-import {Badge} from "@/common/components/ui/badge.tsx";
+import {Badge} from "@/views/common/_comp/ui/badge.tsx";
 import {cn} from "@/common/_feat";
 import {Check} from "lucide-react";
 import {ReactElement} from "react";

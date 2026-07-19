@@ -7,7 +7,7 @@ import {AuthLoginFormData} from "@/domains/auth/_feat";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useAuthLoginForm, useAuthLoginSubmitMutation} from "@/domains/auth/_feat/auth-login-fom/hooks";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/common/components/ui/form.tsx";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 
 import {User} from "@/domains/users/_schema/user/UserSchema";
 

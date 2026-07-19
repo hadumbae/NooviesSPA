@@ -9,7 +9,7 @@ import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {GenreIndexCard} from "@/views/admin/genres/_comp";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 import {Plus} from "lucide-react";
 import {Genre, GenreQueryOptionSchema, useNavigateToGenreDetails} from "@/domains/genres";
 import {

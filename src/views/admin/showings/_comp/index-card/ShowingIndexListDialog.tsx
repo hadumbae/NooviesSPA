@@ -15,7 +15,7 @@ import {
     DialogTitle,
     DialogTrigger,
     Separator,
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 
 import {formatShowingDetails, ShowingDetails} from "@/domains/showings";
 import {ShowingMovieSummary} from "@/views/admin/movies/_comp/showing-movie-summary";

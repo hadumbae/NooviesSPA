@@ -5,7 +5,7 @@
 import {ReactElement, ReactNode, useId} from "react";
 import {ObjectId} from "@/common/_schemas";
 import {ModerationMessageFormData, useModerationMessageForm} from "@/common/_feat/moderation/forms";
-import {Form} from "@/common/components/ui/form.tsx";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {MovieReview} from "@/domains/movie-reviews/_schema";
 import {useResetReviewLikesMutation} from "@/domains/movie-reviews/_feat";

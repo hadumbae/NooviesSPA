@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
-import {Card, CardContent, Separator} from "@/common/components/ui";
+import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {MovieReviewDetails} from "@/domains/movie-reviews";
 import {DeleteMovieReviewButton} from "@/views/client/movie-reviews/_feat/delete-button";
 import {

@@ -5,7 +5,7 @@
 
 import {RoleTypeSubmitFormActions, RoleTypeSubmitFormView} from "@/views/admin/role-types";
 import {ReactElement, useState} from 'react';
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/common/components/ui/collapsible.tsx";
+import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/views/common/_comp/ui/collapsible.tsx";
 import {ChevronDown, ChevronRight} from "lucide-react";
 import {RoleTypeSubmitForm} from "@/views/admin/role-types/_feat/submit-form";
 import {RoleType} from "@/domains/roletypes/_schema/model/RoleTypeSchema.ts";

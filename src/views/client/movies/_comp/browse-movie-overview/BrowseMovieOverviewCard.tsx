@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent, CardHeader} from "@/common/components/ui";
+import {Card, CardContent, CardHeader} from "@/views/common/_comp/ui";
 import {BrowseMoviePosterLink} from "@/views/admin/movies/_comp/poster-image";
 import {BrowseMovieSummary} from "@/views/client/movies/_comp/browse-movie-info";
 

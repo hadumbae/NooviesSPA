@@ -2,7 +2,7 @@
 
 import {cn} from "@/common/_feat";
 import {useFormContext} from "react-hook-form";
-import {Separator} from "@/common/components/ui";
+import {Separator} from "@/views/common/_comp/ui";
 import {ReactElement} from "react";
 import {
     MovieCreditFormCastFieldset,

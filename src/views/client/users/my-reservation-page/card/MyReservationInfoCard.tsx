@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {SROnly} from "@/views/common/_comp";
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {formatReservationDetails, PopulatedReservation} from "@/domains/reservations";
 import {LabelContent} from "@/views/common/_comp";
 

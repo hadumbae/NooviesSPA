@@ -2,7 +2,7 @@
  * @fileoverview Interactive fieldset for visual seat selection within the reservation flow.
  */
 
-import {Button} from "@/common/components/ui/button.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {
     SeatMapDetailsLoader

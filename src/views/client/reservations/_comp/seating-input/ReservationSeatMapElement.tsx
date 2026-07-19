@@ -4,8 +4,8 @@
 
 import {Check, Plus} from "lucide-react";
 import {cn} from "@/common/_feat";
-import {Button} from "@/common/components/ui/button.tsx";
-import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui/tooltip.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@/views/common/_comp/ui/tooltip.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {ReactElement} from "react";
 

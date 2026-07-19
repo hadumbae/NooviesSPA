@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {LucideIcon} from "lucide-react";
-import {Tooltip, TooltipContent, TooltipTrigger} from "@/common/components/ui";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@/views/common/_comp/ui";
 import {StatItem} from "@/views/common/_comp/text-display/StatItem.tsx";
 
 /** Props for the TooltipStatItem component. */

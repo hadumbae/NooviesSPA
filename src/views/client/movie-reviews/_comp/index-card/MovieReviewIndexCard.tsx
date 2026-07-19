@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, useState} from "react";
-import {Card, CardContent, Separator} from "@/common/components/ui";
+import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {simplifyMovieReview} from "@/domains/movie-reviews/_feat/formatters";
 import {type MyMovieReview} from "@/domains/movie-reviews/_schema";
 import {MovieReviewFormPopup} from "@/views/client/movie-reviews/_feat";

@@ -14,7 +14,7 @@ import {
     FormLabel,
     FormMessage,
     Textarea
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 
 /**
  * A form textarea component that uses react-hook-form's Controller for state management.

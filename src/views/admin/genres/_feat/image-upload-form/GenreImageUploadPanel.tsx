@@ -12,7 +12,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 import {UIOpenStateProps} from "@/common/_types";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";

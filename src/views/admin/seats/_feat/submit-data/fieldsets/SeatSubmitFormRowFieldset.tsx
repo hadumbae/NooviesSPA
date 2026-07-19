@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
-import {Separator} from "@/common/components/ui";
+import {Separator} from "@/views/common/_comp/ui";
 import {cn} from "@/common/_feat";
 import {HookFormInput} from "@/views/common/_feat";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";

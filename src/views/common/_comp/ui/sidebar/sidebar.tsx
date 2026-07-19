@@ -6,21 +6,21 @@ import {PanelLeft} from "lucide-react"
 
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile"
 import {cn} from "@/common/_feat/handle-ui/cn"
-import {Button} from "@/common/components/ui/button"
-import {Input} from "@/common/components/ui/input"
-import {Separator} from "@/common/components/ui/separator"
-import {Sheet} from "@/common/components/ui/sheet/Sheet.tsx"
-import {Skeleton} from "@/common/components/ui/skeleton"
+import {Button} from "@/views/common/_comp/ui/button"
+import {Input} from "@/views/common/_comp/ui/input"
+import {Separator} from "@/views/common/_comp/ui/separator"
+import {Sheet} from "@/views/common/_comp/ui/sheet/Sheet.tsx"
+import {Skeleton} from "@/views/common/_comp/ui/skeleton"
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-} from "@/common/components/ui/tooltip"
-import {SidebarContext, SidebarContextValues} from "@/common/components/ui/sidebar/SidebarContext.ts";
-import {SheetContent} from "@/common/components/ui/sheet/SheetContent.tsx";
-import {SheetHeader} from "@/common/components/ui/sheet/SheetHeader.tsx";
-import {SheetTitle} from "@/common/components/ui/sheet/SheetTitle.tsx";
+} from "@/views/common/_comp/ui/tooltip"
+import {SidebarContext, SidebarContextValues} from "@/views/common/_comp/ui/sidebar/SidebarContext.ts";
+import {SheetContent} from "@/views/common/_comp/ui/sheet/SheetContent.tsx";
+import {SheetHeader} from "@/views/common/_comp/ui/sheet/SheetHeader.tsx";
+import {SheetTitle} from "@/views/common/_comp/ui/sheet/SheetTitle.tsx";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
+import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {Loader} from "lucide-react";
 import {ObjectId} from "@/common/_schemas";
 import {cn} from "@/common/_feat";

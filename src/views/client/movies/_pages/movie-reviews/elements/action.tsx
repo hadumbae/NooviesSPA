@@ -4,7 +4,7 @@
 
 import {ReactElement, useState} from "react";
 import {MessageCirclePlus} from "lucide-react";
-import {Button} from "@/common/components/ui";
+import {Button} from "@/views/common/_comp/ui";
 import {ObjectId} from "@/common/_schemas";
 import {cn} from "@/common/_feat";
 

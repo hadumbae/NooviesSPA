@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {cn} from "@/common/_feat";
 import {MovieReviewRatingStars, MovieReviewText} from "@/views/client/movie-reviews/_comp/display";
 import {MovieReviewDetails} from "@/domains/movie-reviews";

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Separator} from "@/common/components/ui/separator.tsx";
+import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {Link} from "react-router-dom";
 import {LabelContent} from "@/views/common/_comp/label-content/LabelContent.tsx";
 import {MovieDetails} from "@/domains/movies";

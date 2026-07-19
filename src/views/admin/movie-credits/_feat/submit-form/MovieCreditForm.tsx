@@ -7,7 +7,7 @@ import {useMovieCreditSubmitMutation} from "@/domains/movie-credits/_feat/crud-h
 import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {ReactElement, ReactNode, useId} from "react";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/common/components/ui/form";
+import {Form} from "@/views/common/_comp/ui/form";
 import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 import {MovieCreditDetails} from "@/domains/movie-credits";

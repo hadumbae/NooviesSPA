@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Separator} from "@/common/components/ui/separator.tsx";
+import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 
 import {SeatMapFormValues} from "@/domains/seatmaps";
 import {SeatQueryOptions} from "@/domains/seats";

@@ -10,7 +10,7 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator
-} from "@/common/components/ui/breadcrumb.tsx";
+} from "@/views/common/_comp/ui/breadcrumb.tsx";
 import {Link} from "react-router-dom";
 
 /** Props for the PersonDetailsPageBreadcrumbs component. */

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Button, ButtonProps} from "@/common/components/ui";
+import {Button, ButtonProps} from "@/views/common/_comp/ui";
 import {cn} from "@/common/_feat";
 import {ObjectId} from "@/common/_schemas";
 import {Trash} from "lucide-react";

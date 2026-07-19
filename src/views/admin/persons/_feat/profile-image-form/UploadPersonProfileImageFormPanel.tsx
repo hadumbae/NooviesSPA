@@ -16,7 +16,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/common/components/ui";
+} from "@/views/common/_comp/ui";
 
 /** Props for the UploadPersonProfileImageFormPanel component. */
 type FormPanelProps = {

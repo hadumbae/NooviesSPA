@@ -10,7 +10,7 @@ import type {AuthRegisterForm} from "@/domains/auth/_feat/auth-register-form/sch
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {ReactElement, ReactNode, useId} from "react";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/common/components/ui/form.tsx";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 
 /** Props for the AuthRegisterForm component. */
 type ContainerProps = {

@@ -5,8 +5,8 @@
 import {ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
 import {HookFormInput} from "@/views/common/_feat";
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {Button} from "@/common/components/ui/button.tsx";
+import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
+import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {cn} from "@/common/_feat";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {Card, CardContent} from "@/common/components/ui";
+import {Card, CardContent} from "@/views/common/_comp/ui";
 import {PersonProfileAvatar} from "@/views/admin/persons";
 import {cn} from "@/common/_feat";
 

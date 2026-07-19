@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
-import {Separator} from "@/common/components/ui/separator.tsx";
+import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {cn} from "@/common/_feat";
