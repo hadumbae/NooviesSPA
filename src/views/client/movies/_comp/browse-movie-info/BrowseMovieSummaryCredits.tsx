@@ -2,12 +2,10 @@
  * @fileoverview Renders a concise list of movie credit links grouped by directors and primary actors.
  */
 
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import {SeparatedLinks} from "@/views/common/_feat/navigation/SeparatedLinks.tsx";
-import {generateMovieCreditLinkConfigs} from "@/domains/movie-credits/_feat/navigation/generateMovieCreditLinkConfigs.ts";
-
-import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
 import {ReactElement} from "react";
+import {SeparatedLinks} from "@/views/common/_feat";
+import {LabelContent} from "@/views/common/_comp";
+import {generateMovieCreditLinkConfigs, MovieCreditDetails} from "@/domains/movie-credits";
 
 /** Props for the BrowseMovieSummaryCredits component. */
 type LinkProps = {
@@ -30,13 +28,13 @@ export function BrowseMovieSummaryCredits(
 
     return (
         <div className="space-y-1">
-            <LabeledGroup label="Directors">
+            <LabelContent orientation="horizontal" label="Directors">
                 {directors.length > 0 ? <SeparatedLinks links={directors}/> : noneSpan}
-            </LabeledGroup>
+            </LabelContent>
 
-            <LabeledGroup label="Actors">
+            <LabelContent orientation="horizontal" label="Actors">
                 {actors.length > 0 ? <SeparatedLinks links={actors}/> : noneSpan}
-            </LabeledGroup>
+            </LabelContent>
         </div>
     );
 }

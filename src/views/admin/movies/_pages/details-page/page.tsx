@@ -1,7 +1,7 @@
 /**
  * @fileoverview Main page component for the Movie Details view.
- *
  */
+
 import {PageLoader} from "@/views/common/_comp/page";
 import {useTitle} from "@/common/_feat";
 import {

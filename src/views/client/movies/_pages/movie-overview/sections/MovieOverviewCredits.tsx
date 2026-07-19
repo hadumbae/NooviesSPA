@@ -4,15 +4,10 @@
 
 import {ReactElement} from "react";
 import {ChevronRight} from "lucide-react";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import {SeparatedLinks} from "@/views/common/_feat/navigation/SeparatedLinks.tsx";
 import {Separator} from "@/common/components/ui";
-import {NoneSpan} from "@/views/common/_comp/text-display/spans/NoneSpan.tsx";
-import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
-import {
-    ActorCreditAvatar
-} from "@/views/admin/movie-credits/_comp/actor-credit-avatar/ActorCreditAvatar.tsx";
-import {PageSectionHeaderLink} from "@/views/common/_comp/page";
+import {HoverLink, SeparatedLinks} from "@/views/common/_feat";
+import {LabelContent, NoneSpan, PageSectionHeaderLink} from "@/views/common/_comp";
+import {ActorCreditAvatar} from "@/views/admin/movie-credits/_comp/actor-credit-avatar/ActorCreditAvatar.tsx";
 
 import {MovieDetails} from "@/domains/movies";
 import {generateMovieCreditLinkConfigs, MovieCreditDetails} from "@/domains/movie-credits";
@@ -49,15 +44,15 @@ export function MovieOverviewCredits({movie, credits}: MovieOverviewCreditsProps
             </div>
 
             <div className="space-y-2">
-                <LabeledGroup label="Directors">
+                <LabelContent orientation="horizontal" label="Directors">
                     {directorLinks.length > 0 ? <SeparatedLinks links={directorLinks}/> : <NoneSpan/>}
-                </LabeledGroup>
+                </LabelContent>
 
                 <Separator/>
 
-                <LabeledGroup label="Writers">
+                <LabelContent orientation="horizontal" label="Writers">
                     {writerLinks.length > 0 ? <SeparatedLinks links={writerLinks}/> : <NoneSpan/>}
-                </LabeledGroup>
+                </LabelContent>
 
                 <Separator/>
 

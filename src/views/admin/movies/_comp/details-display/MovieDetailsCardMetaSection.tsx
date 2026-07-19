@@ -4,12 +4,11 @@
 
 import {ReactElement} from "react";
 import {Separator} from "@/common/components/ui";
-import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
-import BadgeListLabel from "@/common/components/card-content/BadgeListLabel.tsx";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {ISO3166Alpha2CountryConstant, ISO6391LanguageLabels} from "@/common/_const";
 import {MovieDetails} from "@/domains/movies";
-import {Genre} from "@/domains/genres";
+import {LabelContentList, NoneSpan} from "@/views/common/_comp";
+import {BadgeList} from "@/views/common/_comp/badges";
 
 /** Props for the MovieDetailsCardMetaSection component. */
 type SectionProps = {
@@ -24,6 +23,10 @@ export function MovieDetailsCardMetaSection(
     const countryName = ISO3166Alpha2CountryConstant[country] ?? country?.toUpperCase() ?? "Unknown";
     const originalLanguageName = ISO6391LanguageLabels[originalLanguage] ?? originalLanguage?.toUpperCase() ?? "Unknown";
 
+    const genreBadges = genres.length > 0
+        ? <BadgeList variant={"default"} entries={genres.map(({_id, name}) => ({key: _id, text: name}))}/>
+        : <NoneSpan/>;
+
     return (
         <section className="space-y-3">
             <div>
@@ -31,32 +34,14 @@ export function MovieDetailsCardMetaSection(
                 <Separator/>
             </div>
 
-            <div className="space-y-3">
-                <LabelContent label="Original Title" orientation="horizontal">
-                    {originalTitle ?? title}
-                </LabelContent>
-
-                <BadgeListLabel
-                    label="Genres"
-                    orientation="horizontal"
-                    items={genres}
-                    getKey={({_id}: Genre) => _id}
-                    renderText={({name}: Genre) => name}
-                    variant="default"
-                />
-
-                <LabelContent label="Runtime" orientation="horizontal">
-                    {movieDuration}
-                </LabelContent>
-
-                <LabelContent label="Country" orientation="horizontal">
-                    {countryName}
-                </LabelContent>
-
-                <LabelContent label="Original Language" orientation="horizontal">
-                    {originalLanguageName}
-                </LabelContent>
-            </div>
+            <LabelContentList classNames={{list: "gap-x-10", content: "truncate"}} items={[
+                {key: "origTitle", label: "Original Title", content: originalTitle ?? title},
+                {key: "genres", label: "Genres", content: genreBadges},
+                {key: "runtime", label: "Runtime", content: movieDuration},
+                {key: "country", label: "Country", content: countryName},
+                {key: "origLan", label: "Original Language", content: originalLanguageName},
+            ]}
+            />
         </section>
     );
 }

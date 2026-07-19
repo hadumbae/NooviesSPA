@@ -3,10 +3,10 @@
  */
 
 import {ReactElement} from "react";
+import {SROnly} from "@/views/common/_comp";
 import {Card, CardContent} from "@/common/components/ui";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import {SROnly} from "@/views/common/_comp/screen-readers";
 import {formatReservationDetails, PopulatedReservation} from "@/domains/reservations";
+import {LabelContent} from "@/views/common/_comp";
 
 /** Props for the MyReservationInfoCard component. */
 export type CardProps = {
@@ -36,23 +36,23 @@ export function MyReservationInfoCard(
                 </section>
 
                 <section className="flex justify-between items-center">
-                    <LabeledGroup label="Price">
+                    <LabelContent orientation="horizontal" label="Price">
                         <span className="primary-text">${pricePaid}</span>
-                    </LabeledGroup>
+                    </LabelContent>
 
-                    <LabeledGroup label="Tickets">
+                    <LabelContent orientation="horizontal" label="Tickets">
                         <span className="primary-text">{ticketCount} u.</span>
-                    </LabeledGroup>
+                    </LabelContent>
 
-                    <LabeledGroup label="Status">
+                    <LabelContent orientation="horizontal" label="Status">
                         <span className="primary-text">{status}</span>
-                    </LabeledGroup>
+                    </LabelContent>
                 </section>
 
                 <section className="flex justify-between items-center">
-                    <LabeledGroup label="Code">
+                    <LabelContent orientation="horizontal" label="Code">
                         <span className="primary-text">{uniqueCode}</span>
-                    </LabeledGroup>
+                    </LabelContent>
                 </section>
             </CardContent>
         </Card>

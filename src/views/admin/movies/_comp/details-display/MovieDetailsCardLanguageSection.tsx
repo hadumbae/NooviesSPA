@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {MovieDetails} from "@/domains/movies/_schema/movie";
 import {Separator} from "@/common/components/ui";
-import BadgeListLabel from "@/common/components/card-content/BadgeListLabel.tsx";
+import {BadgeLabelContent} from "@/views/common/_comp/badges/BadgeLabelContent.tsx";
 import {ISO6391LanguageCode} from "@/common/_schemas/enums/ISO6391LanguageCodeSchema.ts";
 import {ISO6391LanguageLabels} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 
@@ -18,10 +18,10 @@ type SectionProps = {
 export function MovieDetailsCardLanguageSection(
     {movie: {languages, subtitles}}: SectionProps
 ): ReactElement {
-    const renderLanguage = (lan: ISO6391LanguageCode) =>
-        ISO6391LanguageLabels[lan] ??
-        lan?.toUpperCase() ??
-        "Unknown";
+    const mapLanguages = (lanStrings: ISO6391LanguageCode[]) => lanStrings.map(lan => ({
+        key: lan,
+        text: ISO6391LanguageLabels[lan] ?? lan?.toUpperCase() ?? "Unknown"
+    }));
 
     return (
         <section className="space-y-3">
@@ -31,21 +31,8 @@ export function MovieDetailsCardLanguageSection(
             </div>
 
             <div className="space-y-5">
-                <BadgeListLabel
-                    label="Languages"
-                    orientation="horizontal"
-                    items={languages}
-                    getKey={(lan: string) => lan}
-                    renderText={renderLanguage}
-                />
-
-                <BadgeListLabel
-                    label="Subtitles"
-                    orientation="horizontal"
-                    items={subtitles}
-                    getKey={(lan: string) => lan}
-                    renderText={renderLanguage}
-                />
+                <BadgeLabelContent label="Languages" orientation="horizontal" items={mapLanguages(languages)}/>
+                <BadgeLabelContent label="Subtitles" orientation="horizontal" items={mapLanguages(subtitles)}/>
             </div>
         </section>
     );

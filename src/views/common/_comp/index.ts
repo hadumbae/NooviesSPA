@@ -2,6 +2,7 @@ export * from "./buttons";
 export * from "./form-select";
 export * from "./headers";
 export * from "./images";
+export * from "./label-content";
 export * from "./layout";
 export * from "./loaders";
 export * from "./page";

@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
+import {LabelContent} from "@/views/common/_comp";
 
 /** Props for the AdminMovieWithRatingCardStat component. */
 type StatProps = {
@@ -19,11 +19,11 @@ export function AdminMovieWithRatingCardStat(
 ): ReactElement {
     return (
         <div className={cn("px-2", className)}>
-            <LabeledGroup label={label} orientation="vertical">
+            <LabelContent label={label}>
                 <span className="primary-text line-clamp-1 font-semibold text-sm md:text-base">
                     {text}
                 </span>
-            </LabeledGroup>
+            </LabelContent>
         </div>
     );
 }

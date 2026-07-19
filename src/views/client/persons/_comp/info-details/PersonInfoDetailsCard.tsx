@@ -8,6 +8,7 @@ import {Person} from "@/domains/persons";
 import {Card, CardContent, Separator} from "@/common/components/ui";
 import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";
 import {PersonProfileAvatar} from "@/views/admin/persons";
+import {LabelContentList} from "@/views/common/_comp";
 
 /** Props for the PersonInfoDetailsCard component. */
 type CardProps = {
@@ -40,12 +41,10 @@ export function PersonInfoDetailsCard(
                             {name}
                         </h3>
 
-                        <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
-                            <dt className="secondary-text text-sm font-extrabold">Born</dt>
-                            <dd className="primary-text text-base font-semibold truncate">{formattedDOB}</dd>
-                            <dt className="secondary-text text-sm font-extrabold">Nationality</dt>
-                            <dd className="primary-text text-base font-semibold truncate">{formattedNationality}</dd>
-                        </dl>
+                        <LabelContentList items={[
+                            {key: "dob", label: "Born", content: formattedDOB},
+                            {key: "nationality", label: "Nationality", content: formattedNationality},
+                        ]}/>
                     </div>
                 </div>
 

@@ -3,18 +3,12 @@
  *
  */
 
-import {
-    generateMovieCreditLinkConfigs
-} from "@/domains/movie-credits/_feat/navigation/generateMovieCreditLinkConfigs.ts";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import {SeparatedLinks} from "@/views/common/_feat/navigation/SeparatedLinks.tsx";
-import {cn} from "@/common/_feat";
 import {ReactElement, useMemo} from "react";
-import {Separator} from "@/common/components/ui/separator.tsx";
-
-import {
-    MovieCreditDetails
-} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
+import {cn} from "@/common/_feat";
+import {Separator} from "@/common/components/ui";
+import {LabelContent} from "@/views/common/_comp";
+import {SeparatedLinks} from "@/views/common/_feat";
+import {generateMovieCreditLinkConfigs, MovieCreditDetails} from "@/domains/movie-credits";
 
 /** Props for the MovieOverviewCreditLinks component. */
 type LinkProps = {
@@ -39,21 +33,21 @@ export function MovieOverviewCreditLinks({className, credits}: LinkProps): React
 
     return (
         <div className={cn("space-y-2", className)}>
-            <LabeledGroup label="Directors">
+            <LabelContent orientation="horizontal" label="Directors">
                 <SeparatedLinks links={directorLinks}/>
-            </LabeledGroup>
+            </LabelContent>
 
             <Separator/>
 
-            <LabeledGroup label="Writers">
+            <LabelContent orientation="horizontal" label="Writers">
                 <SeparatedLinks links={writerLinks}/>
-            </LabeledGroup>
+            </LabelContent>
 
             <Separator/>
 
-            <LabeledGroup label="Actors">
+            <LabelContent orientation="horizontal" label="Actors">
                 <SeparatedLinks links={actorLinks}/>
-            </LabeledGroup>
+            </LabelContent>
         </div>
     );
 }

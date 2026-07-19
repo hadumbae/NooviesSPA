@@ -13,7 +13,7 @@ import {
 import {TextQuote} from "@/views/common/_comp";
 import {Search} from "lucide-react";
 import {cn} from "@/common/_feat";
-import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
+import {LabelContent} from "@/views/common/_comp/label-content/LabelContent.tsx";
 import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {formatMovieData, MovieDetails} from "@/domains/movies";
 import {Link} from "react-router-dom";
@@ -67,30 +67,18 @@ export function MovieIndexDetailsDialog({children, movie}: DetailsDialogProps): 
 
                 <TextQuote>{synopsis}</TextQuote>
 
-                <LabelContent
-                    orientation="horizontal"
-                    label="Languages"
-                    classNames={{content: "secondary-text text-sm"}}
-                >
+                <LabelContent orientation="horizontal" label="Languages">
                     <span>{languageList}</span>
                 </LabelContent>
 
-                <LabelContent
-                    orientation="horizontal"
-                    label="Subtitles"
-                    classNames={{content: "secondary-text text-sm"}}
-                >
+                <LabelContent orientation="horizontal" label="Subtitles">
                     <span>{subtitleList}</span>
                 </LabelContent>
 
-                <Link
-                    target="_blank"
-                    to={`/admin/movies/get/${slug}`}
-                    className={cn(
-                        buttonVariants({variant: "default"}),
-                        "w-full bg-primary"
-                    )}
-                >
+                <Link target="_blank" to={`/admin/movies/get/${slug}`} className={cn(
+                    buttonVariants({variant: "default"}),
+                    "w-full bg-primary"
+                )}>
                     <Search/>
                     <span>Details</span>
                 </Link>

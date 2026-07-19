@@ -4,9 +4,8 @@
 
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import {SectionTitle, SubsectionSubtitle, SubsectionTitle} from "@/views/common/_comp";
+import {LabelContent, SectionTitle, SubsectionSubtitle, SubsectionTitle} from "@/views/common/_comp";
 
 import {AdminReservation} from "@/domains/reservations";
 
@@ -33,17 +32,17 @@ export function ReservationByCodeUserSection(
                     <Separator/>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <LabeledGroup label="ID" orientation="vertical" className="col-span-2">
+                        <LabelContent label="ID" classNames={{container: "col-span-2"}}>
                             <span className="primary-text">{_id}</span>
-                        </LabeledGroup>
+                        </LabelContent>
 
-                        <LabeledGroup label="Name" orientation="vertical">
+                        <LabelContent label="Name">
                             <span className="primary-text">{name}</span>
-                        </LabeledGroup>
+                        </LabelContent>
 
-                        <LabeledGroup label="Email" orientation="vertical">
+                        <LabelContent label="Email">
                             <span className="primary-text">{email}</span>
-                        </LabeledGroup>
+                        </LabelContent>
                     </div>
 
                 </CardContent>

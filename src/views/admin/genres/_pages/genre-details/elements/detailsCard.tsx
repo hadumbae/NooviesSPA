@@ -3,21 +3,18 @@
  */
 
 import {ReactElement} from 'react';
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {Separator} from "@/common/components/ui/separator.tsx";
-import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {Genre} from "@/domains/genres/_schema";
+import {LabelContent} from "@/views/common/_comp";
+import {Card, CardContent, Separator} from "@/common/components/ui";
+import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
 
 /** Props for the {@link GenreDetailsCard} component. */
 type DetailsProps = {
-    /** The genre entity containing the metadata to display. */
     genre: Genre;
 };
 
 /**
  * Renders a structured informational card displaying a Genre's core details.
- * Organizes information into sections for general attributes and a long-form description.
  */
 export function GenreDetailsCard(
     {genre: {name, description, movieCount}}: DetailsProps
@@ -31,12 +28,13 @@ export function GenreDetailsCard(
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <LabeledGroup label="Name" orientation="vertical">
+                    <LabelContent label="Name">
                         <span className="primary-text font-bold">{name}</span>
-                    </LabeledGroup>
-                    <LabeledGroup label="Number Of Movies" orientation="vertical">
+                    </LabelContent>
+
+                    <LabelContent label="Number Of Movies">
                         <span className="primary-text font-bold">{`${movieCount} movies`}</span>
-                    </LabeledGroup>
+                    </LabelContent>
                 </div>
 
                 <div>

@@ -1,0 +1,13 @@
+@layer components {
+    .label-list {
+        @apply grid grid-cols-[auto_1fr] gap-x-5 gap-y-3
+    }
+
+    .label-term {
+        @apply primary-text text-sm font-thin uppercase tracking-tight
+    }
+
+    .label-desc {
+        @apply primary-text text-base font-semibold
+    }
+}

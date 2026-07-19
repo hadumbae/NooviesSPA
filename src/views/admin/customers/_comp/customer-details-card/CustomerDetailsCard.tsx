@@ -5,10 +5,10 @@
 import {LeanUserWithEmail} from "@/domains/users/_schema/user";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
 import {Separator} from "@/common/components/ui/separator.tsx";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {cn} from "@/common/_feat";
 import {ReactElement} from "react";
+import {LabelContent} from "@/views/common/_comp";
 
 /** Props for the CustomerDetailsCard component. */
 type CardProps = {
@@ -17,36 +17,25 @@ type CardProps = {
 
 /** Renders a structured overview of a customer's account information. */
 export function CustomerDetailsCard(
-    {customer}: CardProps
+    {customer: {_id, name, uniqueCode, email}}: CardProps
 ): ReactElement {
-    const {
-        _id,
-        name,
-        uniqueCode,
-        email,
-    } = customer;
-
     return (
         <Card className="shadow-sm">
             <CardContent className="p-4 space-y-4">
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                    <LabeledGroup
-                        className="max-md:col-span-2"
-                        orientation="vertical"
-                        label="Database ID"
-                    >
+                    <LabelContent classNames={{container: "max-md:col-span-2"}} label="Database ID">
                         <span className="text-sm font-mono break-all">{_id}</span>
-                    </LabeledGroup>
+                    </LabelContent>
 
-                    <LabeledGroup orientation="vertical" label="Full Name">
+                    <LabelContent label="Full Name">
                         <span className="text-sm font-semibold">{name}</span>
-                    </LabeledGroup>
+                    </LabelContent>
 
-                    <LabeledGroup orientation="vertical" label="Email Address">
+                    <LabelContent label="Email Address">
                         <span className="text-sm truncate" title={email}>
                             {email}
                         </span>
-                    </LabeledGroup>
+                    </LabelContent>
                 </div>
 
                 <Separator/>

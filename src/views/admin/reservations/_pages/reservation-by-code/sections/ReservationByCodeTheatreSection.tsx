@@ -4,10 +4,8 @@
 
 import {ReactElement} from "react";
 import {Card, CardContent, Separator} from "@/common/components/ui";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import {OrientationValues} from "@/common/_schemas/enums/OrientationEnumSchema.ts";
 import {ISO3166Alpha2CountryConstant} from "@/common/_const";
-import {PageSectionHeader, SubsectionTitle} from "@/views/common/_comp";
+import {LabelContent, PageSectionHeader, SubsectionTitle} from "@/views/common/_comp";
 import {AdminReservation} from "@/domains/reservations";
 
 /** Props for the ReservationByCodeTheatreSection component. */
@@ -25,7 +23,7 @@ export function ReservationByCodeTheatreSection(
     const {name: theatreName, country, street, city, state, postalCode, timezone} = theatre;
     const {name: screenName, screenType} = screen;
 
-    const orientation: OrientationValues = "vertical";
+    // const orientation: OrientationValues = "vertical";
 
     return (
         <section className="space-y-4">
@@ -41,41 +39,41 @@ export function ReservationByCodeTheatreSection(
                     <Separator/>
 
                     <div className="grid grid-cols-2 gap-2 lg:gap-3">
-                        <LabeledGroup label="Street" orientation={orientation} className="col-span-2">
+                        <LabelContent label="Street" classNames={{container: "col-span-2"}}>
                             {street}
-                        </LabeledGroup>
+                        </LabelContent>
 
-                        <LabeledGroup label="City" orientation={orientation}>
+                        <LabelContent label="City">
                             {city}
-                        </LabeledGroup>
+                        </LabelContent>
 
-                        <LabeledGroup label="State" orientation={orientation}>
+                        <LabelContent label="State">
                             {state ?? "-"}
-                        </LabeledGroup>
+                        </LabelContent>
 
-                        <LabeledGroup label="Country" orientation={orientation} className="col-span-2">
+                        <LabelContent label="Country" classNames={{container: "col-span-2"}}>
                             {ISO3166Alpha2CountryConstant[country]}
-                        </LabeledGroup>
+                        </LabelContent>
 
-                        <LabeledGroup label="Postal Code" orientation={orientation}>
+                        <LabelContent label="Postal Code">
                             {postalCode ?? "-"}
-                        </LabeledGroup>
+                        </LabelContent>
 
-                        <LabeledGroup label="Timezone" orientation={orientation}>
+                        <LabelContent label="Timezone">
                             {timezone}
-                        </LabeledGroup>
+                        </LabelContent>
                     </div>
 
                     <Separator/>
 
                     <div className="grid grid-cols-2 gap-2">
-                        <LabeledGroup label="Screen" orientation={orientation}>
+                        <LabelContent label="Screen">
                             {screenName}
-                        </LabeledGroup>
+                        </LabelContent>
 
-                        <LabeledGroup label="Screen Type" orientation={orientation}>
+                        <LabelContent label="Screen Type">
                             {screenType}
-                        </LabeledGroup>
+                        </LabelContent>
                     </div>
                 </CardContent>
             </Card>

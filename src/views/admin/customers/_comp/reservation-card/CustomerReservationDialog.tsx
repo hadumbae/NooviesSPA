@@ -2,25 +2,22 @@
  * @fileoverview Modal component providing an expanded administrative view of a customer reservation.
  */
 
-import {Reservation} from "@/domains/reservations/_schema/model";
+import {ReactElement, ReactNode} from "react";
+import {cn, convertToTitleCase} from "@/common/_feat";
+import {LoggedLink} from "@/views/common/_feat";
+import {LabelContent} from "@/views/common/_comp";
+import {UserUniqueCode} from "@/domains/users";
+import {Reservation} from "@/domains/reservations";
+import {ReservationStatusBadge} from "@/views/client/reservations/_comp";
 import {
+    Button,
     Dialog,
     DialogContent,
     DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger
-} from "@/common/components/ui/dialog.tsx";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
-import {
-    ReservationStatusBadge
-} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
-import {ReactElement, ReactNode} from "react";
-import {Button} from "@/common/components/ui/button.tsx";
-import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
-import {cn} from "@/common/_feat";
-import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
+} from "@/common/components/ui";
 
 /** Props for the CustomerReservationDialog component. */
 type DialogProps = {
@@ -69,59 +66,59 @@ export function CustomerReservationDialog(
 
                 <div className="flex items-start">
                     <div className="space-y-3 pr-4">
-                        <LabeledGroup orientation="vertical" label="Type">
+                        <LabelContent label="Type">
                             <span>{reservationType}</span>
-                        </LabeledGroup>
+                        </LabelContent>
 
                         {
                             isSpecialEvent &&
-                            <LabeledGroup orientation="vertical" label="Is Special Event?">
+                            <LabelContent label="Is Special Event?">
                                 <span>Special Event</span>
-                            </LabeledGroup>
+                            </LabelContent>
                         }
 
-                        <LabeledGroup orientation="vertical" label="Type">
+                        <LabelContent label="Type">
                             <LoggedLink to={`/admin/customers/${code}/profile`}>
                                 <span className="hover:underline hover:underline-offset-8">
                                     {code}
                                 </span>
                             </LoggedLink>
-                        </LabeledGroup>
+                        </LabelContent>
 
-                        <LabeledGroup orientation="vertical" label="Status">
+                        <LabelContent label="Status">
                             <ReservationStatusBadge status={status}/>
-                        </LabeledGroup>
+                        </LabelContent>
 
 
                     </div>
 
                     <div className="flex-1 border-l-2 pl-4 space-y-3">
-                        <LabeledGroup label="Showtime" orientation="vertical">
+                        <LabelContent label="Showtime">
                             <span>{showtime}</span>
-                        </LabeledGroup>
+                        </LabelContent>
 
                         <div className={cn(
                             "flex gap-4",
                             "max-md:flex-col",
                             "md:items-start"
                         )}>
-                            <LabeledGroup label="Screen" orientation="vertical">
+                            <LabelContent label="Screen">
                                 <span>{screenName}</span>
-                            </LabeledGroup>
+                            </LabelContent>
 
-                            <LabeledGroup label="Theatre" orientation="vertical">
+                            <LabelContent label="Theatre">
                                 <span>{theatreName}</span>
-                            </LabeledGroup>
+                            </LabelContent>
                         </div>
 
                         <div className="flex items-start gap-4">
-                            <LabeledGroup label="Tickets" orientation="vertical">
+                            <LabelContent label="Tickets">
                                 <span>{ticketCount} tickets</span>
-                            </LabeledGroup>
+                            </LabelContent>
 
-                            <LabeledGroup label="Total Price" orientation="vertical">
+                            <LabelContent label="Total Price">
                                 <span>{pricePaid} {currency}</span>
-                            </LabeledGroup>
+                            </LabelContent>
                         </div>
 
                         <div className="pt-2">

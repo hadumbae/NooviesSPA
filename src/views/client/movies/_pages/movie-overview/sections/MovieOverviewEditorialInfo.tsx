@@ -4,13 +4,12 @@
  */
 
 import {ReactElement} from "react";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {Separator} from "@/common/components/ui";
-import {SeparatedLinks} from "@/views/common/_feat/navigation/SeparatedLinks.tsx";
+import {SeparatedLinks} from "@/views/common/_feat";
 import {PageSectionHeader} from "@/views/common/_comp/page";
-
 import {generateGenreLinkConfigs} from "@/domains/genres";
 import {MovieDetails} from "@/domains/movies";
+import {LabelContent} from "@/views/common/_comp";
 
 /** Props for the MovieOverviewEditorialInfo component. */
 type RowProps = {
@@ -29,35 +28,35 @@ export function MovieOverviewEditorialInfo(
             <PageSectionHeader text="Movie Story And Details"/>
 
             <div className="space-y-2">
-                <LabeledGroup label="Title">
+                <LabelContent label="Title" orientation="horizontal">
                     <span className={textualCSS}>{title}</span>
-                </LabeledGroup>
+                </LabelContent>
 
                 <Separator/>
 
                 {originalTitle && (<>
-                    <LabeledGroup label="Also Known As">
+                    <LabelContent label="Also Known As" orientation="horizontal">
                         <span className={textualCSS}>{originalTitle}</span>
-                    </LabeledGroup>
+                    </LabelContent>
                     <Separator/>
                 </>)}
 
                 {tagline && (<>
-                    <LabeledGroup label="Tagline">
+                    <LabelContent label="Tagline" orientation="horizontal">
                         <span className={textualCSS}>{tagline}</span>
-                    </LabeledGroup>
+                    </LabelContent>
                     <Separator/>
                 </>)}
 
-                <LabeledGroup label="Genres">
+                <LabelContent label="Genres" orientation="horizontal">
                     <SeparatedLinks links={genreLinks} className="px-2"/>
-                </LabeledGroup>
+                </LabelContent>
 
                 <Separator/>
 
-                <LabeledGroup label="Synopsis" className="items-start">
+                <LabelContent label="Synopsis" orientation="horizontal" classNames={{container: "items-start"}}>
                     <p className={textualCSS}>{synopsis}</p>
-                </LabeledGroup>
+                </LabelContent>
             </div>
         </section>
     );

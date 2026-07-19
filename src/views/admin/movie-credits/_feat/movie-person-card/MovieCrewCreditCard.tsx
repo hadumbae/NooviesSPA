@@ -4,13 +4,12 @@
 
 import {ReactElement} from 'react';
 import {Card, CardContent} from "@/common/components/ui";
-import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
-import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
+import {LabelContentList, TextQuote} from "@/views/common/_comp";
+import {MovieCreditDetails} from "@/domains/movie-credits";
 import {
     MoviePersonDetailsCardHeader
 } from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardHeader.tsx";
 
-import {MovieCreditDetails} from "@/domains/movie-credits";
 
 /** Props for the MoviePersonDetailsCard component. */
 type DetailsProp = {
@@ -33,11 +32,11 @@ export function MovieCrewCreditCard(
             <MoviePersonDetailsCardHeader department={department} credit={credit}/>
 
             <CardContent className="space-y-5">
-                <section className="space-y-2">
-                    <LabelContent label="Role Type" orientation="horizontal">{roleName}</LabelContent>
-                    <LabelContent label="Role Displayed As" orientation="horizontal">{creditRole}</LabelContent>
-                    <LabelContent label="Credited As" orientation="horizontal">{creditName}</LabelContent>
-                </section>
+                <LabelContentList classNames={{list: "gap-x-5 md:gap-x-16 xl:gap-x-32"}} items={[
+                    {key: "roleType", label: "Role Type", content: roleName},
+                    {key: "displayAs", label: "Role Displayed As", content: creditRole},
+                    {key: "creditAs", label: "Credited As", content: creditName},
+                ]}/>
 
                 {notes && <TextQuote className="text-[10px]">{notes}</TextQuote>}
             </CardContent>

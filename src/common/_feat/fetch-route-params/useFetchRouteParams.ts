@@ -48,6 +48,6 @@ export function useFetchRouteParams<TSchema extends ZodTypeAny = ZodTypeAny>(
     }, [parseResults, onError, onErrorMessage, pathname, search, hash]);
 
     return !parseResults.success || !parseResults.data
-        ? parseResults.data
-        : null;
+        ? null
+        : parseResults.data;
 }

@@ -4,13 +4,13 @@
  * MovieOverviewMeta.tsx
  */
 
-import {ScrollArea, ScrollBar} from "@/common/components/ui/scroll-area.tsx";
-import {SeparatedLinks} from "@/views/common/_feat/navigation/SeparatedLinks.tsx";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
-import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
-import {generateGenreLinkConfigs} from "@/domains/genres/_feat/navigation";
 import {ReactElement} from "react";
+import {SeparatedLinks} from "@/views/common/_feat";
+import {MovieDetails} from "@/domains/movies";
+import {generateGenreLinkConfigs} from "@/domains/genres";
 import {SROnly} from "@/views/common/_comp/screen-readers";
+import {LabelContent} from "@/views/common/_comp";
+import {ScrollArea, ScrollBar} from "@/common/components/ui";
 
 /** Props for the MovieOverviewMeta component. */
 type OverviewProps = {
@@ -37,16 +37,14 @@ export function MovieOverviewMeta({className, movie}: OverviewProps): ReactEleme
 
                 {
                     originalTitle &&
-                    <LabeledGroup label="Original Title">
+                    <LabelContent orientation="horizontal" label="Original Title">
                         <span className="text-sm">{originalTitle}</span>
-                    </LabeledGroup>
+                    </LabelContent>
                 }
 
-                <LabeledGroup label="Tagline">
-                    <span className="text-sm">
-                        {tagline}
-                    </span>
-                </LabeledGroup>
+                <LabelContent orientation="horizontal" label="Tagline">
+                    <span className="text-sm">{tagline}</span>
+                </LabelContent>
             </section>
 
             <p className="primary-text text-sm">

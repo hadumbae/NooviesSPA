@@ -2,9 +2,10 @@
 
 import {ReactElement, ReactNode, useState} from 'react';
 import {
-    MovieDetailsUIStatesContext,
-    MovieDetailsUIStates
+    MovieDetailsUIStates,
+    MovieDetailsUIStatesContext
 } from "@/domains/movies/_ctx/details-ui/MovieDetailsUIStatesContext.ts";
+import {MovieDetailsUISetters, MovieDetailsUISettersContext} from "@/domains/movies";
 
 /** Props for the MovieDetailsUIContextProvider component. */
 type ProviderProps = {
@@ -23,20 +24,25 @@ export function MovieDetailsUIContextProvider({children}: ProviderProps): ReactE
     /**
      * Consolidated state values and setters provided to consumers.
      */
-    const values: MovieDetailsUIStates = {
+    const stateValues: MovieDetailsUIStates = {
         isEditing,
-        setIsEditing,
         isUpdatingPoster,
-        setIsUpdatingPoster,
         isDeletingPoster,
-        setIsDeletingPoster,
         isDeleting,
+    };
+
+    const setterValues: MovieDetailsUISetters = {
+        setIsEditing,
+        setIsUpdatingPoster,
+        setIsDeletingPoster,
         setIsDeleting,
     };
 
     return (
-        <MovieDetailsUIStatesContext.Provider value={values}>
-            {children}
+        <MovieDetailsUIStatesContext.Provider value={stateValues}>
+            <MovieDetailsUISettersContext.Provider value={setterValues}>
+                {children}
+            </MovieDetailsUISettersContext.Provider>
         </MovieDetailsUIStatesContext.Provider>
     );
 }

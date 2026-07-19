@@ -6,11 +6,11 @@ import {ReactElement, useState} from "react";
 import {MessageCirclePlus} from "lucide-react";
 import {Button} from "@/common/components/ui";
 import {ObjectId} from "@/common/_schemas";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {cn} from "@/common/_feat";
 
 import {MovieReviewFormPopup} from "@/views/client/movie-reviews";
 import {MovieReviewDetails, simplifyMovieReview} from "@/domains/movie-reviews";
+import {LabelContent} from "@/views/common/_comp";
 
 /** Props for the MovieInfoReviewAction component. */
 type ActionProps = {
@@ -36,9 +36,9 @@ export function MovieInfoReviewAction(
             "rounded-container-border flex justify-between items-center p-3",
             className
         )}>
-            <LabeledGroup label="Total Reviews">
+            <LabelContent label="Total Reviews" orientation="horizontal" classNames={{label: "secondary-text"}}>
                 <span className="primary-text">{totalReviews}</span>
-            </LabeledGroup>
+            </LabelContent>
 
             <MovieReviewFormPopup
                 movieID={movieID}

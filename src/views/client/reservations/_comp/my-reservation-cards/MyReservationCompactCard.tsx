@@ -4,13 +4,13 @@
 
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import LabeledGroup from "@/common/components/card-content/LabeledGroup.tsx";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {ReservationStatusBadge} from "@/views/client/reservations/_comp/reservation-badges";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {formatReservationDetails, PopulatedReservation} from "@/domains/reservations";
 import {SROnly} from "@/views/common/_comp/screen-readers";
+import {LabelContent} from "@/views/common/_comp";
 
 type CardProps = {
     reservation: PopulatedReservation;
@@ -68,13 +68,13 @@ export function MyReservationCompactCard(
                         <span className="secondary-text">{runtime} • {reservationType}</span>
 
                         <div className="flex items-center gap-10">
-                            <LabeledGroup label="Tickets">
+                            <LabelContent orientation="horizontal" label="Tickets">
                                 <span className="primary-text">{ticketCount} tickets</span>
-                            </LabeledGroup>
+                            </LabelContent>
 
-                            <LabeledGroup label="Price">
+                            <LabelContent orientation="horizontal" label="Price">
                                 <span className="primary-text">${pricePaid} Total</span>
-                            </LabeledGroup>
+                            </LabelContent>
                         </div>
                     </section>
 

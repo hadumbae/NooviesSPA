@@ -3,15 +3,13 @@
  */
 
 import {ReactElement} from 'react';
-import {Card, CardContent} from "@/common/components/ui/card.tsx";
-import {BooleanFlagLabelSpan} from "@/views/common/_comp/text-display/spans/BooleanFlagLabelSpan.tsx";
+import {Card, CardContent} from "@/common/components/ui";
+import {MovieCreditDetails} from "@/domains/movie-credits";
+import {BooleanFlagLabelSpan, LabelContentItem, LabelContentList, TextQuote} from "@/views/common/_comp";
 import {
     MoviePersonDetailsCardHeader
 } from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardHeader.tsx";
-import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
-import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
 
-import {MovieCreditDetails} from "@/domains/movie-credits/_schemas/model/MovieCreditDetailsSchema.ts";
 
 /** Props for the MovieCastCreditCard component. */
 type DetailsProp = {
@@ -42,18 +40,20 @@ export function MovieCastCreditCard(
     const creditRole = displayRoleName ?? roleName;
     const creditName = creditedAs ?? name;
 
+    const labelList: LabelContentItem[] = [
+        {key: "roleType", label: "Role Type", content: roleName},
+        {key: "displayAs", label: "Role Displayed As", content: creditRole},
+        {key: "creditAs", label: "Credited As", content: creditName},
+        {key: "character", label: "Character", content: characterName},
+        {key: "billingOrder", label: "Billing Order", content: billingOrder?.toString() ?? "None"},
+    ];
+
     return (
         <Card>
             <MoviePersonDetailsCardHeader department={department} credit={credit}/>
 
             <CardContent className="space-y-5">
-                <section className="space-y-2">
-                    <LabelContent label="Role Type" orientation="horizontal">{roleName}</LabelContent>
-                    <LabelContent label="Role Displayed As" orientation="horizontal">{creditRole}</LabelContent>
-                    <LabelContent label="Credited As" orientation="horizontal">{creditName}</LabelContent>
-                    <LabelContent label="Character" orientation="horizontal">{characterName}</LabelContent>
-                    <LabelContent label="Billing Order" orientation="horizontal">{billingOrder ?? "None"}</LabelContent>
-                </section>
+                <LabelContentList items={labelList} classNames={{list: "gap-x-5 md:gap-x-16 xl:gap-x-32"}}/>
 
                 <section className="grid grid-cols-2 gap-4">
                     <h1 className="sr-only">Cast Boolean Flags</h1>

@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Separator} from "@/common/components/ui/separator.tsx";
 import {Link} from "react-router-dom";
-import {LabelContent} from "@/common/components/card-content/LabelContent.tsx";
+import {LabelContent} from "@/views/common/_comp/label-content/LabelContent.tsx";
 import {MovieDetails} from "@/domains/movies";
 
 /** Props for the MovieDetailsCardMultimediaSection component. */
