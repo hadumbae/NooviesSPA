@@ -10,7 +10,7 @@ export type QueryOptionFormContextValues = {
     formID: string;
     submitHandler: SubmitHandler<any>;
     resetValues: () => void;
-    activeOptions?: number
+    activeOptions: number
 };
 
 /** Context for sharing react-hook-form state and submission logic across filter components. */

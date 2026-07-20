@@ -4,7 +4,7 @@
 
 import {z, ZodObject, ZodRawShape} from "zod";
 import {createContext, ReactElement, ReactNode, useContext} from "react";
-import {useParsedSearchParams} from "@/common/_feat";
+import {countActiveQueryOptions, useParsedSearchParams} from "@/common/_feat";
 import {InvalidContextError} from "@/common/_err";
 
 /** Configuration for the query options context factory. */
@@ -17,6 +17,7 @@ type ContextConfig<TShape extends ZodRawShape> = {
 type ContextValues<TValues = unknown> = {
     values: TValues;
     setValues: (values: TValues) => void;
+    activeOptions: number;
 }
 
 /** Props for the query options Provider component. */
@@ -43,7 +44,13 @@ export function createQueryOptionsContext<TShape extends ZodRawShape>(
 
     function Provider({children}: ProviderConfig): ReactElement {
         const {searchParams, setSearchParams} = useParsedSearchParams({schema});
-        const values: CtxValues = {values: searchParams, setValues: setSearchParams};
+
+        const values: CtxValues = {
+            values: searchParams,
+            setValues: setSearchParams,
+            activeOptions: countActiveQueryOptions(searchParams),
+        };
+
         return (<Context.Provider value={values}>{children}</Context.Provider>);
     }
 
