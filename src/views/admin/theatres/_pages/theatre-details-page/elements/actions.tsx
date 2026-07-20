@@ -7,7 +7,7 @@ import {TheatreSubmitForm, TheatreSubmitFormPanel} from "@/views/admin/theatres/
 import {TheatreDeleteWarningDialog} from "@/views/admin/theatres/_feat/model-options";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {
     TheatreDetailsUIStateContext
 } from "@/domains/theatres/_ctx/theatre-details-ui/TheatreDetailsUIStateContext.ts";

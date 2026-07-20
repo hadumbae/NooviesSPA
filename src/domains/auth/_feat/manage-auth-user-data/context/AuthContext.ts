@@ -1,5 +1,5 @@
 /**
- * @fileoverview Authentication context types and instance for managing shared user state.
+ * @fileoverview Defines the React context and types for managing authenticated user state.
  */
 
 import {createContext, Dispatch, SetStateAction} from "react";
@@ -7,10 +7,7 @@ import {createContext, Dispatch, SetStateAction} from "react";
 
 import {User} from "@/domains/users/_schema/user/UserSchema";
 
-/**
- * Value exposed by the AuthContext.
- *
- */
+/** Context value containing user data, authentication status, and state setters. */
 export type AuthUserContextValue = {
     user: User | null;
     setUser: Dispatch<SetStateAction<User | null>>;
@@ -19,8 +16,7 @@ export type AuthUserContextValue = {
     isAdmin: boolean;
 };
 
-/**
- * React context for authentication state.
- * Must be consumed within an AuthProvider.
- */
+/** React context for accessing and updating the current authentication state. */
 export const AuthContext = createContext<AuthUserContextValue | undefined>(undefined);
+
+AuthContext.displayName = "AuthContext";

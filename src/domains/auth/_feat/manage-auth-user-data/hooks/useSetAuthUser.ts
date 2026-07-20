@@ -2,16 +2,15 @@
  * @fileoverview Hook for persisting and synchronizing authenticated user data.
  */
 
-import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
-
 import {User} from "@/domains/users/_schema/user/UserSchema";
+import {useAuthContext} from "@/domains/auth/_feat/manage-auth-user-data/hooks/useAuthContext.ts";
+
 
 /**
  * Returns a function to update the authenticated user in local storage and AuthContext.
  */
 export function useSetAuthUser() {
-    const authContext = useRequiredContext({context: AuthContext});
+    const authContext = useAuthContext();
 
     return (authUser: User) => {
         localStorage.setItem("authUser", JSON.stringify(authUser));

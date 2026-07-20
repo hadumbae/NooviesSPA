@@ -2,14 +2,13 @@
  * @fileoverview Hook for managing the client-side logout process and clearing authentication state.
  */
 
-import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useAuthContext} from "@/domains/auth/_feat/manage-auth-user-data/hooks/useAuthContext.ts";
 
 /**
  * Returns a function to clear local storage and update the AuthContext for logout.
  */
 export function useLogoutAuthUser() {
-    const authContext = useRequiredContext({context: AuthContext});
+    const authContext = useAuthContext();
 
     return () => {
         localStorage.removeItem("authUser");

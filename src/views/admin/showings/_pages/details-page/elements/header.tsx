@@ -7,7 +7,7 @@ import {DateTime} from "luxon";
 import {Ellipsis} from "lucide-react";
 import {IconButton} from "@/views/common/_comp";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 import {MovieTitle} from "@/domains/movies";

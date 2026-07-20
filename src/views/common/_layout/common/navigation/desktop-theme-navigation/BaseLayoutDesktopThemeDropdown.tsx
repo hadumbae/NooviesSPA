@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {cn} from "@/common/_feat";
 import {ChevronDown} from "lucide-react";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {ThemeContext} from "@/common/_feat/theme/ctx/ThemeContext.ts";
 import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/views/common/_comp/ui";
 

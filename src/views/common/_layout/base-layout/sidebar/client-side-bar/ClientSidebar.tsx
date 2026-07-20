@@ -8,20 +8,20 @@ import {Sidebar, SidebarContent, SidebarHeader} from "@/views/common/_comp/ui/si
 import ClientProfileSidebarGroup
     from "@/views/common/_layout/base-layout/sidebar/client-side-bar/ClientProfileSidebarGroup.tsx";
 import {Separator} from "@/views/common/_comp/ui/separator.tsx";
-import AuthSidebarGroup from "@/views/common/_layout/admin-layout/sidebar/admin-side-bar-groups/AdminAuthSidebarGroup.tsx";
+import AuthSidebarGroup
+    from "@/views/common/_layout/admin-layout/sidebar/admin-side-bar-groups/AdminAuthSidebarGroup.tsx";
 import {
     ClientBrowseSidebarGroup
 } from "@/views/common/_layout/base-layout/sidebar/client-side-bar/ClientBrowseSidebarGroup.tsx";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
-import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
 import AdminLinksSidebarGroup from "@/views/common/_layout/common/navigation/side-bar-group/AdminLinksSidebarGroup.tsx";
 import {LayoutThemeSidebarGroup} from "@/views/common/_layout/common/sidebar/LayoutThemeSidebarGroup.tsx";
+import {useAuthContext} from "@/domains/auth";
 
 /**
  * Orchestrates the sidebar content for client users, with conditional administrative shortcuts.
  */
 const ClientSidebar: FC = () => {
-    const {isAdmin} = useRequiredContext({context: AuthContext});
+    const {isAdmin} = useAuthContext();
 
     return (
         <Sidebar>

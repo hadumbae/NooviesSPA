@@ -15,8 +15,7 @@ import {
 import {
     BaseLayoutDesktopThemeDropdown
 } from "@/views/common/_layout/common/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
-import {AuthContext, useAuthLogoutSubmitMutation} from "@/domains/auth";
+import {useAuthContext, useAuthLogoutSubmitMutation} from "@/domains/auth";
 import {SROnly} from "@/views/common/_comp";
 
 /**
@@ -25,7 +24,7 @@ import {SROnly} from "@/views/common/_comp";
  */
 export function BaseLayoutDesktopClientNavigation(): ReactElement {
     const navigate = useLoggedNavigate();
-    const {isAdmin} = useRequiredContext({context: AuthContext});
+    const {isAdmin} = useAuthContext();
 
     const onLogout = () => navigate({to: "/", component: BaseLayoutDesktopClientNavigation.name});
     const {mutate: logout} = useAuthLogoutSubmitMutation({onSubmitSuccess: onLogout});

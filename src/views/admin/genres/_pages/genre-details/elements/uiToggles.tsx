@@ -9,7 +9,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from "@/views/common/_comp/ui";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {GenreDetailsUISetterContext} from "@/domains/genres/_feat/page-context";
 
 /** Props for the {@link GenreDetailsUIToggles} component. */

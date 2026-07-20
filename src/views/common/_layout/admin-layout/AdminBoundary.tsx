@@ -7,11 +7,10 @@
  * current user is unauthenticated or lacks admin rights.
  */
 
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
-import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
 import {NotAdminWarning} from "@/views/common/_layout/admin-layout/warnings/NotAdminWarning.tsx";
 import {ReactNode} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
+import {useAuthContext} from "@/domains/auth";
 
 /**
  * Props for {@link AdminBoundary}.
@@ -31,12 +30,12 @@ type BoundaryProps = {
  * @component
  */
 const AdminBoundary = ({children}: BoundaryProps) => {
-    const {user, isAdmin} = useRequiredContext({context: AuthContext});
+    const {user, isAdmin} = useAuthContext();
 
     if (!user || !isAdmin) {
         return (
             <PageFlexWrapper className="justify-center items-center">
-                <NotAdminWarning user={user} isAdmin={isAdmin} />
+                <NotAdminWarning user={user} isAdmin={isAdmin}/>
             </PageFlexWrapper>
         );
     }

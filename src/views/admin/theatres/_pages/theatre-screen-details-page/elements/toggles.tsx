@@ -10,7 +10,7 @@ import {
 } from "@/views/common/_comp/ui/dropdown-menu.tsx";
 import {IconButton} from "@/views/common/_comp";
 import {Ellipsis} from "lucide-react";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {Dispatch, ReactElement, SetStateAction, useState} from "react";
 import {ScreenDetailsUISetterContext} from "@/domains/theatre-screens/_ctx/screen-details";
 

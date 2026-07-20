@@ -8,7 +8,7 @@ import {TheatreScreenForm, TheatreScreenFormPanel} from "@/views/admin/theatre-s
 import {TheatreScreenDetails, TheatreScreenWithVirtuals} from "@/domains/theatre-screens/_schema/model";
 import {useLocation} from "react-router-dom";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
 
 import {simplifyScreenDetails} from "@/domains/theatre-screens/_feat/formatters";

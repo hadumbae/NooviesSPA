@@ -1,4 +1,3 @@
-export * from "./auth";
 export * from "./crud-handlers";
 export * from "./document";
 export * from "./error-handling";

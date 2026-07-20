@@ -38,7 +38,7 @@ export function ActorCreditAvatar({credit, className}: ActorCreditAvatarProps): 
             </LoggedLink>
 
             <div className="flex flex-col max-lg:items-center space-y-1">
-                <HoverLink to={linkTo} context={linkCtx} className="font-bold max-md:text-sm">
+                <HoverLink to={linkTo} className="font-bold max-md:text-sm">
                     {displayName}
                 </HoverLink>
 

@@ -7,7 +7,7 @@ import {PageSectionHeader} from "@/views/common/_comp/page";
 import {GenreImageBanner} from "@/views/admin/genres/_comp";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {Genre} from "@/domains/genres/_schema";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {Plus, Trash} from "lucide-react";
 import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";

@@ -7,7 +7,7 @@ import {
     MoviePosterImageSubmitFormPanel
 } from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormPanel.tsx";
 import {MovieDeleteWarningDialog} from "@/views/admin/movies/_feat/delete-movie";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {MovieDetailsUISettersContext, MovieDetailsUIStatesContext} from "@/domains/movies/_ctx/details-ui";
 import {ObjectId} from "@/common/_schemas";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";

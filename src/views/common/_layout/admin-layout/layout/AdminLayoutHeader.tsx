@@ -7,7 +7,7 @@ import {LayoutTitle} from "@/views/common/_comp/layout/LayoutTitle.tsx";
 import {
     LayoutBreakpointIndicator
 } from "@/views/common/_comp/layout/LayoutBreakpointIndicator.tsx";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {SidebarContext, SidebarTrigger} from "@/views/common/_comp/ui";
 import AdminLayoutDesktopNavigation from "@/views/common/_layout/admin-layout/navigation/AdminLayoutDesktopNavigation.tsx";
 

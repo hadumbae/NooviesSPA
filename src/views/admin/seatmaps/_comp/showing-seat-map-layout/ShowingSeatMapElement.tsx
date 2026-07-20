@@ -4,7 +4,7 @@
 
 import {ReactElement, useCallback} from "react";
 import {Button} from "@/views/common/_comp/ui";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 
 import {SeatLayoutIconConstant} from "@/domains/seats";
 import {SeatLayoutNonSeatElement} from "@/views/admin/seats";

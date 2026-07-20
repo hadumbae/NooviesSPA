@@ -3,12 +3,11 @@
  *
  */
 
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
-import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
 import {useCurrentURLPath} from "@/common/_feat/navigation/useCurrentURLPath.ts";
 import {UnauthorisedError} from "@/common/_err/UnauthorisedError.ts";
-
 import {User} from "@/domains/users/_schema/user/UserSchema";
+import {useAuthContext} from "@/domains/auth/_feat/manage-auth-user-data/hooks/useAuthContext.ts";
+
 
 /** Props for the useGetCurrentUser hook. */
 type GetProps = {
@@ -22,14 +21,11 @@ export function useGetCurrentUser(
     {source}: GetProps = {}
 ): User {
     const currentURLPath = useCurrentURLPath();
-    const {user} = useRequiredContext({context: AuthContext});
+    const {user} = useAuthContext();
 
     if (!user) {
-        throw new UnauthorisedError({
-            message: "Unauthorised.",
-            redirectPath: currentURLPath,
-            source,
-        });
+        const message = "Unauthorised.";
+        throw new UnauthorisedError({message, redirectPath: currentURLPath, source});
     }
 
     return user;

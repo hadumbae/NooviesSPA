@@ -9,8 +9,7 @@ import {LogContext, LoggerFunction} from "@/common/_feat/logger/Logger.types.ts"
 import {filterNullishAttributes} from "@/common/_feat/filter-object-attributes/filterNullishAttributes.ts";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {ParamError} from "@/common/_err/ParamError.ts";
-import {AuthContext} from "@/domains/auth";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useAuthContext} from "@/domains/auth";
 
 /** Props for the LoggedLink component. */
 export type LoggedLinkProps = LinkProps & {
@@ -39,7 +38,7 @@ export const LoggedLink = forwardRef<HTMLAnchorElement, LoggedLinkProps>((props,
 
     const navigate = useLoggedNavigate();
     const {pathname, search, hash} = useLocation();
-    const {user} = useRequiredContext({context: AuthContext});
+    const {user} = useAuthContext();
 
     const options = filterNullishAttributes(navigateOptions);
     const from = `${pathname}${search}${hash}`;

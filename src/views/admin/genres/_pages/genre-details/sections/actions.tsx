@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
-import useRequiredContext from "@/common/_feat/use-context/useRequiredContext.ts";
+import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {
     Genre,
