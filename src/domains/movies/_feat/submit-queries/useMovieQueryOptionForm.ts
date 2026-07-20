@@ -1,9 +1,7 @@
 /**
  * @fileoverview Hook for managing movie query option form state and validation.
- *
  */
 
-import {undefined} from "zod";
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {MovieQueryOptions, MovieQueryOptionSchema} from "@/domains/movies/_schema";
@@ -24,16 +22,15 @@ export function useMovieQueryOptionForm(
         title: "",
         originalTitle: "",
         releaseDate: "",
-        genres: [],
-        isReleased: undefined,
-        isAvailable: undefined,
-        country: undefined,
-        sortByReleaseDate: undefined,
-        sortByTitle: undefined,
-        sortByOriginalTitle: undefined,
-        sortByIsReleased: undefined,
-        sortByIsAvailable: undefined,
-        sortByCountry: undefined,
+        isReleased: "",
+        isAvailable: "",
+        country: "",
+        sortByReleaseDate: "",
+        sortByTitle: "",
+        sortByOriginalTitle: "",
+        sortByIsReleased: "",
+        sortByIsAvailable: "",
+        sortByCountry: "",
         ...presetValues,
     };
 

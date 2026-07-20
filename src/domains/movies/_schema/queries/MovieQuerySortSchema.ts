@@ -4,18 +4,16 @@
 
 import {z} from "zod";
 import {MongooseSortOrderSchema} from "@/common/_schemas/enums/MongooseSortOrderSchema.ts";
-import {
-    preprocessEmptyStringToUndefined
-} from "@/common/_feat/validation-preprocessors";
+import {preprocessOptionalField} from "@/common/_feat/validation-preprocessors";
 
 /** Zod schema defining available sorting parameters for movie queries. */
 export const MovieQuerySortSchema = z.object({
-    sortByReleaseDate: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()),
-    sortByTitle: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()),
-    sortByOriginalTitle: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()),
-    sortByIsReleased: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()),
-    sortByIsAvailable: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()),
-    sortByCountry: preprocessEmptyStringToUndefined(MongooseSortOrderSchema.optional()),
+    sortByReleaseDate: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByTitle: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByOriginalTitle: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByIsReleased: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByIsAvailable: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByCountry: preprocessOptionalField(MongooseSortOrderSchema),
 });
 
 /** Type representing movie query sort preferences. */

@@ -38,7 +38,10 @@ export function MovieIndexPageContent(
         <PageFlexWrapper>
             <PageHeader title="Movies" description="Registered movies." actions={(
                 <section className="flex justify-end items-center">
-                    <HoverLink to="/admin/movies/create" options={{state: {page, perPage}}}>
+                    <HoverLink
+                        to="/admin/movies/create"
+                        // options={{state: {page, perPage}}}
+                    >
                         <Plus/> Create
                     </HoverLink>
                 </section>
