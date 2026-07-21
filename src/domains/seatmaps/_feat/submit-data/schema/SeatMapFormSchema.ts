@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {AnyValues} from "@/common/_types";
 import {IDStringSchema} from "@/common/_schemas";
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
 import {SeatMapStatusSchema} from "@/domains/seatmaps/_schema/fields";
 import {CoercedPositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/CoercedPositiveNumberSchema";
 
@@ -16,9 +16,9 @@ export const SeatMapFormSchema = z.object({
     _id: IDStringSchema.optional().readonly(),
     seat: IDStringSchema,
     showing: IDStringSchema,
-    basePrice: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema),
-    priceMultiplier: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema),
-    overridePrice: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema.optional()).optional(),
+    basePrice: preprocessEmptyToUndefined(CoercedPositiveNumberSchema),
+    priceMultiplier: preprocessEmptyToUndefined(CoercedPositiveNumberSchema),
+    overridePrice: preprocessEmptyToUndefined(CoercedPositiveNumberSchema.optional()).optional(),
     status: SeatMapStatusSchema,
 });
 

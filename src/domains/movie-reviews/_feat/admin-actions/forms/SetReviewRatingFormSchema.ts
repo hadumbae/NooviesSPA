@@ -4,13 +4,13 @@
 
 import {z} from "zod";
 import {ModerationMessageFormSchema} from "@/common/_feat/moderation/forms";
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
 import {AnyValues} from "@/common/_types";
 import {MovieReviewRatingSchema} from "@/domains/movie-reviews/_schema";
 
 /** Validates the administrative form data for overriding a review's star rating. */
 export const SetReviewRatingFormSchema = ModerationMessageFormSchema.extend({
-    rating: preprocessEmptyStringToUndefined(MovieReviewRatingSchema),
+    rating: preprocessEmptyToUndefined(MovieReviewRatingSchema),
 });
 
 /** Form data type inferred from SetReviewRatingFormSchema. */

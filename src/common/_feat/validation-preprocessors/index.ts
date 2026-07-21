@@ -1,11 +1,11 @@
 import {
-    preprocessEmptyStringToUndefined
-} from "@/common/_feat/validation-preprocessors/preprocessEmptyStringToUndefined.ts";
+    preprocessEmptyToUndefined
+} from "@/common/_feat/validation-preprocessors/preprocessEmptyToUndefined.ts";
 import {preprocessToNumber} from "@/common/_feat/validation-preprocessors/preprocessToNumber.ts";
 import {preprocessOptionalField} from "@/common/_feat/validation-preprocessors/preprocessOptionalField.ts";
 
 export {
-    preprocessEmptyStringToUndefined,
+    preprocessEmptyToUndefined,
     preprocessOptionalField,
     preprocessToNumber,
 }

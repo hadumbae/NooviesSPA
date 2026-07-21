@@ -4,16 +4,16 @@
 
 import {z} from "zod";
 import {MongooseSortOrderSchema} from "@/common/_schemas/enums/MongooseSortOrderSchema.ts";
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
 
 /**
  * Zod schema for validating RoleType sorting parameters.
  */
 export const RoleTypeQuerySortsSchema = z.object({
-    sortByRoleName: preprocessEmptyStringToUndefined(
+    sortByRoleName: preprocessEmptyToUndefined(
         MongooseSortOrderSchema.optional()
     ).optional(),
-    sortByDepartment: preprocessEmptyStringToUndefined(
+    sortByDepartment: preprocessEmptyToUndefined(
         MongooseSortOrderSchema.optional()
     ).optional(),
 });

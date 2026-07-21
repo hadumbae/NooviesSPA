@@ -2,14 +2,14 @@
 
 import {z} from "zod";
 import {LocationTargetSchema} from "@/common/_schemas/strings/location-strings/LocationTargetSchema.ts";
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
 import {AnyValues} from "@/common/_types";
 
 /**
  * Schema for validating the theatre location search target.
  */
 export const BrowseTheatreParamSchema = z.object({
-    target: preprocessEmptyStringToUndefined(
+    target: preprocessEmptyToUndefined(
         LocationTargetSchema.optional(),
     ).optional(),
 });

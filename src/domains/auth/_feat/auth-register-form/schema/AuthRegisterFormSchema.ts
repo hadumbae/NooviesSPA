@@ -9,14 +9,14 @@ import {
     UserPasswordSchema,
     UserPersonalNameSchema
 } from "@/domains/auth/_feat/auth-register-form/schema/fields";
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
 
 /** Base schema for registration input fields. */
 export const AuthRegisterFormBaseSchema = z.object({
-    name: preprocessEmptyStringToUndefined(UserPersonalNameSchema),
-    email: preprocessEmptyStringToUndefined(UserEmailSchema),
-    password: preprocessEmptyStringToUndefined(UserPasswordSchema),
-    confirm: preprocessEmptyStringToUndefined(UserPasswordSchema),
+    name: preprocessEmptyToUndefined(UserPersonalNameSchema),
+    email: preprocessEmptyToUndefined(UserEmailSchema),
+    password: preprocessEmptyToUndefined(UserPasswordSchema),
+    confirm: preprocessEmptyToUndefined(UserPasswordSchema),
 });
 
 /** Registration schema with cross-field validation for password confirmation. */

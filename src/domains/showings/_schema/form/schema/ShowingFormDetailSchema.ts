@@ -2,7 +2,7 @@
  * @fileoverview Zod validation schema for the showing details form.
  */
 
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
 import {NonEmptyStringSchema} from "@/common/_schemas";
 import {z} from "zod";
 import {IDStringSchema} from "@/common/_schemas";
@@ -12,7 +12,7 @@ import {IANATimezoneSchema} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 /**
  * Optional string field normalized from empty input.
  */
-const citySchema = preprocessEmptyStringToUndefined(
+const citySchema = preprocessEmptyToUndefined(
     NonEmptyStringSchema
         .max(500, {message: "Must be 500 characters or less."})
         .optional()
@@ -21,7 +21,7 @@ const citySchema = preprocessEmptyStringToUndefined(
 /**
  * Optional string field normalized from empty input.
  */
-const stateSchema = preprocessEmptyStringToUndefined(
+const stateSchema = preprocessEmptyToUndefined(
     NonEmptyStringSchema
         .max(500, {message: "Must be 500 characters or less."})
         .optional()
@@ -38,7 +38,7 @@ export const ShowingFormDetailSchema = z.object({
     theatreCity: citySchema,
     theatreState: stateSchema,
     theatreCountry: ISO3166Alpha2CountryCodeSchema.optional(),
-    localTimezone: preprocessEmptyStringToUndefined(IANATimezoneSchema),
+    localTimezone: preprocessEmptyToUndefined(IANATimezoneSchema),
 });
 
 /**

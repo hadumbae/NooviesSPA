@@ -3,7 +3,7 @@
  */
 
 import {
-    preprocessEmptyStringToUndefined
+    preprocessEmptyToUndefined
 } from "@/common/_feat/validation-preprocessors";
 import {z} from "zod";
 import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-number/NonNegativeNumberSchema";
@@ -11,7 +11,7 @@ import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-nu
 /**
  * Zod schema for validating ticket price, transforming empty strings to undefined.
  */
-export const TicketPriceSchema = preprocessEmptyStringToUndefined(
+export const TicketPriceSchema = preprocessEmptyToUndefined(
     NonNegativeNumberSchema,
 );
 

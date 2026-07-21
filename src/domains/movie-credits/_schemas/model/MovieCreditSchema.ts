@@ -7,7 +7,7 @@ import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/_schemas";
 import {RoleTypeDepartmentSchema} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
 import {
-    preprocessEmptyStringToUndefined
+    preprocessEmptyToUndefined
 } from "@/common/_feat/validation-preprocessors";
 import {IDStringSchema} from "@/common/_schemas";
 import {CoercedBooleanValueSchema} from "@/common/_schemas/boolean/CoercedBooleanValueSchema.ts";
@@ -23,10 +23,10 @@ export const MovieCreditBaseSchema = z.object({
     _id: IDStringSchema.readonly(),
     slug: NonEmptyStringSchema.max(75, "Must be 75 characters or less."),
     department: RoleTypeDepartmentSchema,
-    displayRoleName: preprocessEmptyStringToUndefined(
+    displayRoleName: preprocessEmptyToUndefined(
         NonEmptyStringSchema.max(150, "Must be 150 characters or less.").optional()
     ).optional(),
-    creditedAs: preprocessEmptyStringToUndefined(
+    creditedAs: preprocessEmptyToUndefined(
         NonEmptyStringSchema.max(150, "Must be 150 characters or less.").optional()
     ).optional(),
     uncredited: CoercedBooleanValueSchema.optional(),

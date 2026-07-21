@@ -2,7 +2,7 @@
 
 import {z} from "zod";
 import {
-    preprocessEmptyStringToUndefined
+    preprocessEmptyToUndefined
 } from "@/common/_feat/validation-preprocessors";
 import {LongitudeSchema} from "@/common/_models/coordinate/LongitudeSchema.ts";
 import {LatitudeSchema} from "@/common/_models/coordinate/LatitudeSchema.ts";
@@ -12,8 +12,8 @@ export const CoordinateFormSchema = z.object({
     type: z.literal("Point").default("Point"),
     coordinates: z.tuple(
         [
-            preprocessEmptyStringToUndefined(LongitudeSchema),
-            preprocessEmptyStringToUndefined(LatitudeSchema),
+            preprocessEmptyToUndefined(LongitudeSchema),
+            preprocessEmptyToUndefined(LatitudeSchema),
         ],
         {
             required_error: "Required!",

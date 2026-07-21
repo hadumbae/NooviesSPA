@@ -3,13 +3,13 @@
  */
 
 import {z} from "zod";
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors/preprocessEmptyStringToUndefined";
+import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors/preprocessEmptyToUndefined";
 import {RoleTypeDepartmentSchema} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema";
 import {StringValueSchema} from "@/common/_schemas/strings/simple-strings/StringValueSchema";
 
 /** Zod schema for validating RoleType query filter parameters. */
 export const RoleTypeQueryFiltersSchema = z.object({
-    department: preprocessEmptyStringToUndefined(RoleTypeDepartmentSchema.optional()).optional(),
+    department: preprocessEmptyToUndefined(RoleTypeDepartmentSchema.optional()).optional(),
     roleName: StringValueSchema.max(150, {message: "Must be 150 characters or less."}).optional()
 });
 /** Represents the optional filters that can be applied when querying RoleType records. */

@@ -5,11 +5,11 @@
 import {z} from "zod";
 import {AnyValues} from "@/common/_types";
 import {NonEmptyStringSchema} from "@/common/_schemas";
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
 
 /** Validation schema for submitting administrative updates to reservation notes. */
 export const UpdateReservationNotesFormDataSchema = z.object({
-    notes: preprocessEmptyStringToUndefined(
+    notes: preprocessEmptyToUndefined(
         NonEmptyStringSchema.optional().nullable()
     ),
 });

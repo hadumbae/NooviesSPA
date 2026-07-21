@@ -3,12 +3,12 @@
  */
 
 import {z} from "zod";
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
 import {GenreNameSchema} from "@/domains/genres/_schema/fields";
 
 /** Zod schema for validating genre query filter parameters. */
 export const GenreQueryFilterSchema = z.object({
-    name: preprocessEmptyStringToUndefined(GenreNameSchema.optional()).optional(),
+    name: preprocessEmptyToUndefined(GenreNameSchema.optional()).optional(),
 });
 
 /** Type representing valid filter parameters for genre queries. */

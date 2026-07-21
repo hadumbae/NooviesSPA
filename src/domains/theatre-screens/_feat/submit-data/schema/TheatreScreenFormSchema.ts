@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {NonEmptyStringSchema} from "@/common/_schemas";
 import {IDStringSchema} from "@/common/_schemas";
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
 import {ScreenTypeSchema} from "@/domains/theatre-screens/_schema";
 import {
     CoercedNonNegativeNumberSchema
@@ -17,7 +17,7 @@ import {
 export const TheatreScreenFormSchema = z.object({
     _id: IDStringSchema.readonly().optional(),
     name: NonEmptyStringSchema.max(255, "Must be 255 characters or less."),
-    capacity: preprocessEmptyStringToUndefined(CoercedNonNegativeNumberSchema),
+    capacity: preprocessEmptyToUndefined(CoercedNonNegativeNumberSchema),
     screenType: ScreenTypeSchema,
     theatre: IDStringSchema,
 });

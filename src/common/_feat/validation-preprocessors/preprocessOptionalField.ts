@@ -4,10 +4,10 @@
 
 import {ZodTypeAny} from "zod";
 import {
-    preprocessEmptyStringToUndefined
-} from "@/common/_feat/validation-preprocessors/preprocessEmptyStringToUndefined.ts";
+    preprocessEmptyToUndefined
+} from "@/common/_feat/validation-preprocessors/preprocessEmptyToUndefined.ts";
 
 /** Wraps a Zod schema to treat empty strings as undefined and marks the field as optional. */
 export function preprocessOptionalField<TSchema extends ZodTypeAny = ZodTypeAny>(schema: TSchema) {
-    return preprocessEmptyStringToUndefined(schema.optional()).optional();
+    return preprocessEmptyToUndefined(schema.optional()).optional();
 }

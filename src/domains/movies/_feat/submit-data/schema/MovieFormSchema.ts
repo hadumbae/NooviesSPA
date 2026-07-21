@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
 import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
 import {CoercedBooleanValueSchema} from "@/common/_schemas/boolean/CoercedBooleanValueSchema.ts";
 import {CloudinaryImageSchema} from "@/common/_schemas/cloudinary-image/CloudinaryImageSchema.ts";
@@ -25,15 +25,15 @@ export const MovieFormSchema = z.object({
     _id: IDStringSchema.readonly().optional(),
 
     title: MovieTitleSchema,
-    originalTitle: preprocessEmptyStringToUndefined(MovieTitleSchema.optional()).optional(),
+    originalTitle: preprocessEmptyToUndefined(MovieTitleSchema.optional()).optional(),
     tagline: MovieTaglineSchema.optional(),
 
     genres: MovieGenreIDsSchema,
     country: ISO3166Alpha2CountryCodeSchema,
     synopsis: MovieSynopsisSchema,
-    runtime: preprocessEmptyStringToUndefined(CoercedPositiveNumberSchema),
+    runtime: preprocessEmptyToUndefined(CoercedPositiveNumberSchema),
     posterImage: CloudinaryImageSchema.optional().nullable(),
-    trailerURL: preprocessEmptyStringToUndefined(MovieTrailerURLSchema),
+    trailerURL: preprocessEmptyToUndefined(MovieTrailerURLSchema),
 
     originalLanguage: ISO6391LanguageCodeSchema,
     languages: z.array(ISO6391LanguageCodeSchema).optional(),
@@ -41,7 +41,7 @@ export const MovieFormSchema = z.object({
 
     isReleased: CoercedBooleanValueSchema,
     isAvailable: CoercedBooleanValueSchema,
-    releaseDate: preprocessEmptyStringToUndefined(NonFutureDateStringSchema.optional()).optional()
+    releaseDate: preprocessEmptyToUndefined(NonFutureDateStringSchema.optional()).optional()
 }).superRefine((values, ctx) => {
     const {releaseDate, isReleased} = values;
 

@@ -9,7 +9,7 @@ import {
     RoleTypeCastCategorySchema,
     RoleTypeCrewCategorySchema,
 } from "@/domains/roletypes/_schema/fields/RoleTypeCategorySchema.ts";
-import {preprocessEmptyStringToUndefined} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
 import {AnyValues} from "@/common/_types";
 import {RoleTypeDescriptionSchema, RoleTypeNameSchema} from "@/domains/roletypes/_schema";
 import {IDStringSchema} from "@/common/_schemas";
@@ -18,8 +18,8 @@ import {IDStringSchema} from "@/common/_schemas";
 const RoleTypeFormBaseSchema = z.object({
     _id: IDStringSchema.readonly().optional(),
     roleName: RoleTypeNameSchema,
-    department: preprocessEmptyStringToUndefined(RoleTypeDepartmentSchema),
-    description: preprocessEmptyStringToUndefined(RoleTypeDescriptionSchema).optional(),
+    department: preprocessEmptyToUndefined(RoleTypeDepartmentSchema),
+    description: preprocessEmptyToUndefined(RoleTypeDescriptionSchema).optional(),
 });
 
 /** Validation schema specifically for crew role form submissions. */

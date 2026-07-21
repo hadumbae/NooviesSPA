@@ -5,7 +5,7 @@
 
 import {z} from "zod";
 import {
-    preprocessEmptyStringToUndefined
+    preprocessEmptyToUndefined
 } from "@/common/_feat/validation-preprocessors";
 import {ReservationUniqueCodeSchema} from "@/domains/reservations/_schema/model";
 import {AnyValues} from "@/common/_types";
@@ -14,7 +14,7 @@ import {AnyValues} from "@/common/_types";
  * Zod validation schema for the reservation lookup form.
  */
 export const SetReservationCodeFormSubmitSchema = z.object({
-    code: preprocessEmptyStringToUndefined(
+    code: preprocessEmptyToUndefined(
         ReservationUniqueCodeSchema.optional(),
     ).optional(),
 });

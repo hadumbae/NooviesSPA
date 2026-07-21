@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {IDStringSchema} from "@/common/_schemas";
 import {
-    preprocessEmptyStringToUndefined
+    preprocessEmptyToUndefined
 } from "@/common/_feat/validation-preprocessors";
 import {NonEmptyStringSchema} from "@/common/_schemas";
 
@@ -15,13 +15,13 @@ export const MovieCreditFormBaseSchema = z.object({
     movie: IDStringSchema,
     person: IDStringSchema,
     roleType: IDStringSchema,
-    displayRoleName: preprocessEmptyStringToUndefined(
+    displayRoleName: preprocessEmptyToUndefined(
         NonEmptyStringSchema.max(150, {message: "Must be 150 characters or less."}).optional()
     ),
-    creditedAs: preprocessEmptyStringToUndefined(
+    creditedAs: preprocessEmptyToUndefined(
         NonEmptyStringSchema.max(150, {message: "Must be 150 characters or less."}).optional()
     ),
-    notes: preprocessEmptyStringToUndefined(
+    notes: preprocessEmptyToUndefined(
         NonEmptyStringSchema.max(1000, {message: "Must be 1000 characters or less."}).optional()
     ),
 });

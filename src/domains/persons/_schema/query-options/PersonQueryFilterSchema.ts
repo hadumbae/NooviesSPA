@@ -8,13 +8,13 @@ import {NonEmptyStringSchema} from "@/common/_schemas/strings/simple-strings/Non
 import {DateOnlyStringSchema} from "@/common/_schemas/dates/DateOnlyStringSchema";
 import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema";
 import {
-    preprocessEmptyStringToUndefined
-} from "@/common/_feat/validation-preprocessors/preprocessEmptyStringToUndefined";
+    preprocessEmptyToUndefined
+} from "@/common/_feat/validation-preprocessors/preprocessEmptyToUndefined";
 
 /** Zod schema for filtering Person documents by ID, name, birth date, or nationality. */
 export const PersonQueryFilterSchema = z.object({
     _id: IDStringSchema.optional(),
-    name: preprocessEmptyStringToUndefined(NonEmptyStringSchema.optional()).optional(),
+    name: preprocessEmptyToUndefined(NonEmptyStringSchema.optional()).optional(),
     dob: DateOnlyStringSchema.optional(),
     nationality: ISO3166Alpha2CountryCodeSchema.optional(),
 });

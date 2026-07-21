@@ -8,7 +8,7 @@ import {z} from "zod";
 import {IDStringSchema} from "@/common/_schemas";
 import {NonEmptyStringSchema} from "@/common/_schemas";
 import {
-    preprocessEmptyStringToUndefined
+    preprocessEmptyToUndefined
 } from "@/common/_feat/validation-preprocessors";
 import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
 import {DateTimeInstanceSchema} from "@/common/_schemas/date-time/DateTimeInstanceSchema.ts";
@@ -31,7 +31,7 @@ export const MovieBaseSchema = z.object({
     slug: NonEmptyStringSchema.readonly(),
 
     title: MovieTitleSchema,
-    originalTitle: preprocessEmptyStringToUndefined(MovieTitleSchema.optional()).optional(),
+    originalTitle: preprocessEmptyToUndefined(MovieTitleSchema.optional()).optional(),
     tagline: MovieTaglineSchema.optional(),
 
     genres: MovieGenreIDsSchema,
