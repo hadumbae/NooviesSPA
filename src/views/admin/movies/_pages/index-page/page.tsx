@@ -2,19 +2,15 @@
  * @fileoverview Controller component for the administrative movie library index page.
  */
 
-import {
-    usePaginationLocationState
-} from "@/common/_feat/navigation/usePaginationLocationState.ts";
-import useParsedPaginationValue
-    from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
-import {MovieQueryOptionSchema} from "@/domains/movies/_schema/queries";
+import {usePaginationLocationState} from "@/common/_feat/navigation/usePaginationLocationState.ts";
+import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {MovieIndexPageContent} from "@/views/admin/movies/_pages/index-page/content.tsx";
 import {PaginatedItems} from "@/common/_types";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {useFetchPaginatedMovies} from "@/domains/movies/_feat/crud-hooks";
+import {useMovieIndexQueryOptionsContext} from "@/domains/movies/_ctx/index-query-options";
 
 const MOVIES_PER_PAGE = 20;
 
@@ -24,7 +20,7 @@ const MOVIES_PER_PAGE = 20;
 export function MovieIndexPage() {
     const {data: paginationState} = usePaginationLocationState();
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", paginationState?.page ?? 1);
-    const {searchParams} = useParsedSearchParams({schema: MovieQueryOptionSchema});
+    const {values: searchParams} = useMovieIndexQueryOptionsContext();
 
     const query = useFetchPaginatedMovies({
         page,

@@ -1,38 +1,21 @@
 /**
- * @fileoverview Hook for managing movie query option form state and validation.
+ * @fileoverview Hook for initializing and managing the movie query options form state.
  */
 
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {QueryOptionFormValues} from "@/common/_feat/query-options-form";
 import {MovieQueryOptions, MovieQueryOptionSchema} from "@/domains/movies/_schema";
-
 import {MovieQueryOptionFormValues} from "@/domains/movies/_feat/submit-queries/MovieQueryOptionFormValues";
+import {
+    useMovieQueryOptionFormDefaultValues
+} from "@/domains/movies/_feat/submit-queries/useMovieQueryOptionFormDefaultValues.ts";
 
-/** Parameters for initializing the movie query option form. */
-type FormParams = {
-    presetValues?: Partial<MovieQueryOptions>;
-};
-
-/** Initialises a react-hook-form instance for movie query options with Zod validation. */
+/** Initialises a React Hook Form instance for movie query filtering and sorting. */
 export function useMovieQueryOptionForm(
-    {presetValues}: FormParams = {}
+    params: QueryOptionFormValues<MovieQueryOptionFormValues, MovieQueryOptions>
 ): UseFormReturn<MovieQueryOptionFormValues, unknown, MovieQueryOptions> {
-    const defaultValues: MovieQueryOptionFormValues = {
-        _id: "",
-        title: "",
-        originalTitle: "",
-        releaseDate: "",
-        isReleased: "",
-        isAvailable: "",
-        country: "",
-        sortByReleaseDate: "",
-        sortByTitle: "",
-        sortByOriginalTitle: "",
-        sortByIsReleased: "",
-        sortByIsAvailable: "",
-        sortByCountry: "",
-        ...presetValues,
-    };
+    const defaultValues = useMovieQueryOptionFormDefaultValues(params);
 
     return useForm<MovieQueryOptionFormValues, unknown, MovieQueryOptions>({
         resolver: zodResolver(MovieQueryOptionSchema),

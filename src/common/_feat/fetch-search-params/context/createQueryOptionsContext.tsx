@@ -14,7 +14,7 @@ type ContextConfig<TShape extends ZodRawShape> = {
 }
 
 /** Values and setters provided by the query options context. */
-type ContextValues<TValues = unknown> = {
+export type QueryOptionsContextValues<TValues = unknown> = {
     values: TValues;
     setValues: (values: TValues) => void;
     activeOptions: number;
@@ -28,7 +28,7 @@ type ProviderConfig = {
 /** The provider component and hook returned by the factory. */
 type FactoryReturns<TValues = unknown> = {
     Provider: (config: ProviderConfig) => ReactElement;
-    useQueryOptionsContext: () => ContextValues<TValues>;
+    useQueryOptionsContext: () => QueryOptionsContextValues<TValues>;
 }
 
 /**
@@ -37,7 +37,7 @@ type FactoryReturns<TValues = unknown> = {
 export function createQueryOptionsContext<TShape extends ZodRawShape>(
     {name, schema}: ContextConfig<TShape>
 ): FactoryReturns<z.infer<ZodObject<TShape>>> {
-    type CtxValues = ContextValues<z.infer<typeof schema>>;
+    type CtxValues = QueryOptionsContextValues<z.infer<typeof schema>>;
     const Context = createContext<CtxValues | null>(null);
 
     Context.displayName = name;

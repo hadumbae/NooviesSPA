@@ -35,8 +35,8 @@ export function QueryOptionsFormCollapsible(
 
                 {
                     activeOptions > 0 && (
-                        <div>
-                            <Button variant="secondary" onClick={resetValues}>
+                        <div className="flex justify-end">
+                            <Button variant="secondary" onClick={resetValues} className="max-md:w-full">
                                 <X/> Clear
                             </Button>
                         </div>
