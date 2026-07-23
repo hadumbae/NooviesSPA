@@ -4,13 +4,13 @@
 
 import {z} from "zod";
 import {IDStringSchema} from "@/common/_schemas/strings/id-strings/IDStringSchema";
-import {NonEmptyStringSchema} from "@/common/_schemas/strings/simple-strings/NonEmptyStringSchema";
 import {UserUniqueCodeSchema} from "@/domains/users/_schema/fields/UserUniqueCodeSchema";
+import {UserPersonalNameSchema} from "@/domains/auth";
 
 /** Zod schema for identifying a user with minimal metadata. */
 export const LeanUserSchema = z.object({
     _id: IDStringSchema,
-    name: NonEmptyStringSchema,
+    name: UserPersonalNameSchema,
     uniqueCode: UserUniqueCodeSchema,
 });
 
