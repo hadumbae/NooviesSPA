@@ -3,12 +3,12 @@
  */
 
 import {z} from "zod";
-import {LeanUserSchema} from "@/domains/users/_schema/user/LeanUserSchema.ts";
 import {UserRoleEnumSchema} from "@/domains/users/_schema/fields/UserRoleEnum.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
+import {LeanUserWithEmailSchema} from "@/domains/users";
 
 /** Complete validation schema for the User entity including assigned roles. */
-export const UserSchema = LeanUserSchema.extend({
+export const UserSchema = LeanUserWithEmailSchema.extend({
     roles: generateArraySchema(UserRoleEnumSchema).min(1, {message: "User must be assigned at least one role."}),
 });
 

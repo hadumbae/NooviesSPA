@@ -3,4 +3,4 @@
  */
 
 /** The base API endpoint for updating user passwords. */
-export const UpdateUserPasswordBaseURL = "/api/v1/users";
+export const UpdateUserPasswordBaseURL = "/api/v1/auth";

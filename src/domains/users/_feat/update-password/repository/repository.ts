@@ -14,7 +14,7 @@ export function updateUserPassword(
 ): Promise<FetchRequestReturns> {
     const url = buildURL({
         baseURL: UpdateUserPasswordBaseURL,
-        path: `/update/${userID}/password`,
+        path: `/password/${userID}/update`,
     });
 
     return useFetchAPI({url, method: "PATCH", data});

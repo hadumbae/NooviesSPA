@@ -1,6 +1,6 @@
 @layer components {
     .primary-text {
-        @apply text-black dark:text-gray-50
+        @apply text-black dark:text-white
     }
 
     .secondary-text {

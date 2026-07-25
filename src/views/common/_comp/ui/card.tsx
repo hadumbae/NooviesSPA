@@ -11,7 +11,7 @@ const Card = React.forwardRef<
         className={cn(
             "default-container text-neutral-950 dark:text-neutral-50",
             "border border-neutral-200 dark:border-neutral-800",
-            "rounded-xl bg-white shadow",
+            "rounded-xl shadow",
             className
         )}
         {...props}

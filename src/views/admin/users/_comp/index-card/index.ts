@@ -1,0 +1,1 @@
+export * from "@/views/admin/users/_comp/index-card/UserIndexCard.tsx";

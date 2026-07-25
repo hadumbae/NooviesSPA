@@ -8,9 +8,9 @@ import {z} from "zod";
 
 /** Zod schema for validating user sort parameters. */
 export const UserQuerySortSchema = z.object({
-    name: preprocessOptionalField(MongooseSortOrderSchema),
-    email: preprocessOptionalField(MongooseSortOrderSchema),
-    uniqueCode: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByName: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByEmail: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByUniqueCode: preprocessOptionalField(MongooseSortOrderSchema),
 });
 
 /** Type definition for user query sort options. */

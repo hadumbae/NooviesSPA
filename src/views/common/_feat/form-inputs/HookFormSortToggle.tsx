@@ -19,8 +19,8 @@ export function HookFormSortToggle<TValues extends FieldValues>(
 
     const options = [
         {label: "None", value: "", color: "text-muted-foreground", icon: ArrowDownUp},
-        {label: "Asc", value: "1", color: "text-success dark:text-success", icon: ArrowUpNarrowWide},
-        {label: "Desc", value: "-1", color: "text-destructive dark:text-destructive", icon: ArrowDownWideNarrow},
+        {label: "Asc", value: "1", color: "text-green-600 dark:text-green-600", icon: ArrowUpNarrowWide},
+        {label: "Desc", value: "-1", color: "text-red-600 dark:text-red-600", icon: ArrowDownWideNarrow},
     ];
 
     const renderField: ControllerProps<TValues>["render"] = ({field}) => {

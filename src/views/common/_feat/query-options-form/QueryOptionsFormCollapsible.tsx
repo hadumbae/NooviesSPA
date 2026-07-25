@@ -11,6 +11,7 @@ import {useQueryOptionFormContext} from "@/common/_feat";
 /** Props for the QueryOptionsFormCollapsible component. */
 type CollapsibleProps = UIOpenStateProps & {
     children: ReactNode;
+    disableClear?: boolean;
 };
 
 /**
@@ -18,7 +19,7 @@ type CollapsibleProps = UIOpenStateProps & {
  * Requires QueryOptionFormContext to manage active option counts and reset functionality.
  */
 export function QueryOptionsFormCollapsible(
-    {children, isOpen, setIsOpen}: CollapsibleProps
+    {children, isOpen, setIsOpen, disableClear = false}: CollapsibleProps
 ): ReactElement {
     const {activeOptions, resetValues} = useQueryOptionFormContext();
 
@@ -34,7 +35,7 @@ export function QueryOptionsFormCollapsible(
                 {children}
 
                 {
-                    activeOptions > 0 && (
+                    !disableClear && activeOptions > 0 && (
                         <div className="flex justify-end">
                             <Button variant="secondary" onClick={resetValues} className="max-md:w-full">
                                 <X/> Clear
