@@ -4,10 +4,12 @@
 
 import serializeQueryStrings from "@/common/_feat/fetch-search-params/serializeQueryStrings.ts";
 import {useSearchParams} from "react-router-dom";
-import parseSearchParams from "@/common/_feat/fetch-search-params/parseSearchParams.ts";
+import {parseSearchParams} from "@/common/_feat/fetch-search-params/parseSearchParams.ts";
 import {updateSearchParams} from "@/common/_feat/fetch-search-params/index";
 import {z, ZodObject, ZodRawShape} from "zod";
-import stringifySearchParamValues from "@/common/_feat/fetch-search-params/stringifySearchParamValues.ts";
+import {
+    stringifySearchParamValues
+} from "@/common/_feat/fetch-search-params/stringifySearchParamValues.ts";
 import {getTopLevelArrayKeys} from "@/common/_feat/zod-utils/getTopLevelArrayKeys.ts";
 
 /** Configuration parameters for the useParsedSearchParams hook. */
@@ -17,6 +19,7 @@ export type ParsedSearchParamHookParams<
 > = {
     defaultValues?: TOptions;
     schema: ZodObject<TShape>;
+    arrayKeyOverride?: (keyof TShape)[];
 };
 
 /** The structured return object providing access to and manipulation of search parameters. */
@@ -35,12 +38,13 @@ export function useParsedSearchParams<
     TShape extends ZodRawShape,
     TOptions extends Partial<z.infer<ZodObject<TShape>>> = Partial<z.infer<ZodObject<TShape>>>
 >(
-    {defaultValues, schema}: ParsedSearchParamHookParams<TShape, TOptions>,
+    {defaultValues, schema, arrayKeyOverride}: ParsedSearchParamHookParams<TShape, TOptions>,
 ): ParsedSearchParamHookReturns<TShape, TOptions> {
     const defaultQueryStrings = serializeQueryStrings(defaultValues);
     const [searchParams, setSearchParams] = useSearchParams(defaultQueryStrings);
 
-    const arrayFieldKeys = getTopLevelArrayKeys(schema);
+    const arrayFieldKeys = (arrayKeyOverride ?? getTopLevelArrayKeys(schema)) as string[];
+
     const searchParamStrings = stringifySearchParamValues({searchParams, arrayFieldKeys});
     const parsedQueries = parseSearchParams({paramStrings: searchParamStrings, schema});
 

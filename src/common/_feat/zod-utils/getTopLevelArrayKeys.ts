@@ -8,7 +8,7 @@ import {unwrapZodSchema} from "@/common/_feat/zod-utils/unwrapZodSchema.ts";
 /** Identifies and returns the property names of a Zod object that map to Zod array schemas. */
 export function getTopLevelArrayKeys<TShape extends ZodRawShape>(
     {shape}: ZodObject<TShape>
-): string[] {
+): (keyof TShape)[] {
     return Object
         .entries(shape)
         .filter(([_, schema]) => unwrapZodSchema(schema) instanceof ZodArray)

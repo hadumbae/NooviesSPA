@@ -11,10 +11,9 @@ type ValueParams = {
 /**
  * Transforms URLSearchParams into a plain object while preserving multi-value keys and forced arrays.
  */
-export default function stringifySearchParamValues(
-    params: ValueParams
+export function stringifySearchParamValues(
+    {searchParams, arrayFieldKeys}: ValueParams
 ): Record<string, string | string[]> {
-    const {searchParams, arrayFieldKeys} = params;
     const queryStrings: Record<string, string | string[]> = {};
 
     for (const [key, value] of searchParams.entries()) {

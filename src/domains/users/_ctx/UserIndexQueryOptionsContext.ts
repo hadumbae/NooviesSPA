@@ -8,6 +8,7 @@ import {UserQueryOptionsSchema} from "@/domains/users/_schema/query-options";
 const {Provider, useQueryOptionsContext} = createQueryOptionsContext({
     name: "UserIndexQueryOptionsContext",
     schema: UserQueryOptionsSchema,
+    arrayKeyOverride: ["roles"],
 });
 
 export {

@@ -68,7 +68,7 @@ export function HookFormMultiSelect<TSubmit extends FieldValues>(
                                     if (handleOnChange) {
                                         handleOnChange(values, field)
                                     } else {
-                                        field.onChange()
+                                        field.onChange(values ?? null)
                                     }
                                 }}
                                 placeholder={placeholder}

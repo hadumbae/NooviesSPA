@@ -10,6 +10,7 @@ import {InvalidContextError} from "@/common/_err";
 /** Configuration for the query options context factory. */
 type ContextConfig<TShape extends ZodRawShape> = {
     name: string;
+    arrayKeyOverride?: (keyof TShape)[];
     schema: ZodObject<TShape>;
 }
 
@@ -35,7 +36,7 @@ type FactoryReturns<TValues = unknown> = {
  * Creates a specialised context and hook for managing search parameters validated against a Zod schema.
  */
 export function createQueryOptionsContext<TShape extends ZodRawShape>(
-    {name, schema}: ContextConfig<TShape>
+    {name, schema, arrayKeyOverride}: ContextConfig<TShape>
 ): FactoryReturns<z.infer<ZodObject<TShape>>> {
     type CtxValues = QueryOptionsContextValues<z.infer<typeof schema>>;
     const Context = createContext<CtxValues | null>(null);
@@ -43,7 +44,7 @@ export function createQueryOptionsContext<TShape extends ZodRawShape>(
     Context.displayName = name;
 
     function Provider({children}: ProviderConfig): ReactElement {
-        const {searchParams, setSearchParams} = useParsedSearchParams({schema});
+        const {searchParams, setSearchParams} = useParsedSearchParams({schema, arrayKeyOverride});
 
         const values: CtxValues = {
             values: searchParams,
