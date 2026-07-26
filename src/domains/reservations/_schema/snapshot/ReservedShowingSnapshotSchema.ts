@@ -3,14 +3,14 @@
  */
 
 import {z} from "zod";
-import {MovieSnapshotSchema} from "@/domains/movies/_schema/snapshot/MovieSnapshotSchema.ts";
-import {TheatreSnapshotSchema} from "@/domains/theatres/_schema/snapshot/TheatreSnapshotSchema.ts";
-import {TheatreScreenSnapshotSchema} from "@/domains/theatre-screens/_schema/snapshot/TheatreScreenSnapshotSchema.ts";
+import {MovieSnapshotSchema} from "@/domains/movies/_schema";
+import {TheatreSnapshotSchema} from "@/domains/theatres/_schema";
+import {TheatreScreenSnapshotSchema} from "@/domains/theatre-screens/_schema";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {ReservedSeatSnapshotSchema} from "@/domains/reservations/_schema/snapshot/ReservedSeatSnapshotSchema.ts";
 import {ISO8601DateTimeSchema} from "@/common/_schemas/iso-8601/ISO8601DateTimeSchema.ts";
-import {NonEmptyStringSchema} from "@/common/_schemas";
-import {BooleanValueSchema} from "@/common/_schemas/boolean/BooleanValueSchema.ts";
+import {NonEmptyStringSchema} from "@/common/_schemas/strings";
+import {BooleanValueSchema} from "@/common/_schemas/boolean";
+import {ReservedSeatSnapshotSchema} from "@/domains/reservations/_schema/snapshot/ReservedSeatSnapshotSchema.ts";
 
 import {PositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/PositiveNumberSchema";
 

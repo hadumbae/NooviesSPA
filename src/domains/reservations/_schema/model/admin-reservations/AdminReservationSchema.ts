@@ -3,12 +3,14 @@
  *
  */
 
-import {superRefineReservation} from "@/domains/reservations/_schema/model/reservations/ReservationSchemaUtilities.ts";
 import {z} from "zod";
-import {ReservationTypeConstant} from "@/domains/reservations/_schema/model/fields/ReservationTypeConstant.ts";
+import {IDStringSchema} from "@/common/_schemas/strings";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {IDStringSchema} from "@/common/_schemas";
-import {AdminReservationBaseSchema} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationBaseSchema.ts";
+import {ReservationTypeConstant} from "@/domains/reservations/_schema/model/fields";
+import {superRefineReservation} from "@/domains/reservations/_schema/model/reservations";
+import {
+    AdminReservationBaseSchema
+} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationBaseSchema.ts";
 
 /**
  * Variant for General Admission bookings where specific seats are not tracked.

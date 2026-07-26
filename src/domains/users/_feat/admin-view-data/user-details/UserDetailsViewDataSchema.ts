@@ -3,16 +3,19 @@
  */
 
 import {z} from "zod";
-import {UserSchema} from "@/domains/users";
 import {generateArraySchema} from "@/common/_feat";
-import {PopulatedMovieReviewSchema} from "@/domains/movie-reviews";
-import {PopulatedReservationSchema} from "@/domains/reservations";
+import {UserSchema} from "@/domains/users/_schema";
+import {PopulatedMovieReviewSchema} from "@/domains/movie-reviews/_schema";
+import {PopulatedReservationSchema} from "@/domains/reservations/_schema";
+import {NonNegativeIntegerSchema} from "@/common/_schemas";
 
 /** Zod schema for validating the composite user details view data. */
 export const UserDetailsViewDataSchema = z.object({
     user: UserSchema,
     reviews: generateArraySchema(PopulatedMovieReviewSchema),
     reservations: generateArraySchema(PopulatedReservationSchema),
+    totalReviews: NonNegativeIntegerSchema,
+    totalReservations: NonNegativeIntegerSchema,
 });
 
 /** Type definition inferred from UserDetailsViewDataSchema. */

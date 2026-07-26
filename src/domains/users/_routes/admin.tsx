@@ -8,6 +8,7 @@ import {ErrorPage} from "@/views/common/_pages";
 import {UserIndexPage} from "@/views/admin/users/pages/index-page/page.tsx";
 import {ComponentErrorHandler} from "@/views/common/_feat";
 import {UserIndexQueryOptionsContextProvider} from "@/domains/users";
+import {UserDetailsPage} from "@/views/admin/users/pages/details-page/page.tsx";
 
 /** Route definitions for the user administration module. */
 export const AdminUserRoutes: RouteObject[] = [
@@ -24,6 +25,11 @@ export const AdminUserRoutes: RouteObject[] = [
                         <UserIndexPage/>
                     </UserIndexQueryOptionsContextProvider>
                 ),
+            },
+            {
+                path: "/admin/users/:userID",
+                element: <UserDetailsPage/>,
+                errorElement: <ComponentErrorHandler/>,
             },
         ],
     }

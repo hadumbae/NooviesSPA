@@ -3,10 +3,9 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/_schemas";
+import {IDStringSchema, StringValueSchema} from "@/common/_schemas";
 import {preprocessOptionalField} from "@/common/_feat/validation-preprocessors";
-import {StringValueSchema} from "@/common/_schemas";
-import {ReservationStatusEnumSchema, ReservationTypeEnumSchema} from "@/domains/reservations";
+import {ReservationStatusEnumSchema, ReservationTypeEnumSchema} from "@/domains/reservations/_schema/model/fields";
 
 /** Zod schema for validating base reservation query filter parameters. */
 export const ReservationBaseQueryFilterSchema = z.object({

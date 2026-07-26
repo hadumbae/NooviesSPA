@@ -1,24 +1,20 @@
 /**
  * @fileoverview Foundational Zod schema and type for Reservation entity validation.
- *
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/_schemas";
-import {SlugStringSchema} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
+import {IDStringSchema, NonEmptyStringSchema, SlugStringSchema} from "@/common/_schemas/strings";
 import {ISO4217CurrencyCodeSchema} from "@/common/_schemas/enums/ISO4217CurrencyCodeSchema.ts";
-import {ReservationTypeEnumSchema} from "@/domains/reservations/_schema/model/fields/ReservationTypeEnumSchema.ts";
-import {ReservationStatusEnumSchema} from "@/domains/reservations/_schema/model/fields/ReservationStatusEnumSchema.ts";
-import {NonEmptyStringSchema} from "@/common/_schemas";
-import {
-    ReservationUniqueCodeSchema
-} from "@/domains/reservations/_schema/model/fields/ReservationUniqueCodeSchema.ts";
 import {ModelTimestampsSchema} from "@/common/_schemas/models/time-stamps/ModelTimestampsSchema.ts";
-import {ISO8601DateTimeSchema} from "@/common/_schemas/iso-8601/ISO8601DateTimeSchema.ts";
-import {ReservedShowingSnapshotSchema} from "@/domains/reservations/_schema/snapshot/ReservedShowingSnapshotSchema.ts";
+import {ReservedShowingSnapshotSchema} from "@/domains/reservations/_schema/snapshot";
 import {BooleanValueSchema} from "@/common/_schemas/boolean/BooleanValueSchema.ts";
-import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-number/NonNegativeNumberSchema";
-import {PositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/PositiveNumberSchema";
+import {ISO8601DateTimeSchema} from "@/common/_schemas/iso-8601/ISO8601DateTimeSchema.ts";
+import {NonNegativeNumberSchema, PositiveNumberSchema} from "@/common/_schemas/numbers";
+import {
+    ReservationStatusEnumSchema,
+    ReservationTypeEnumSchema,
+    ReservationUniqueCodeSchema
+} from "@/domains/reservations/_schema/model/fields";
 
 /** Zod schema for the temporal lifecycle and deadlines of a reservation. */
 const ReservationBaseDateSchema = z.object({

@@ -3,14 +3,14 @@
  */
 
 /** Populated schema for General Admission variants. */
-import {superRefineReservation} from "@/domains/reservations/_schema/model/reservations/ReservationSchemaUtilities.ts";
 import {z} from "zod";
-import {ReservationTypeConstant} from "@/domains/reservations/_schema/model/fields/ReservationTypeConstant.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
+import {ReservationTypeConstant} from "@/domains/reservations/_schema/model/fields";
+import {SeatMapWithSeatSchema} from "@/domains/seatmaps/_schema/model/SeatMapWithSeatSchema";
+import {superRefineReservation} from "@/domains/reservations/_schema/model/reservations/ReservationSchemaUtilities.ts";
 import {
     PopulatedReservationBaseSchema
 } from "@/domains/reservations/_schema/model/populated-reservations/PopulatedReservationBaseSchema.ts";
-import {SeatMapWithSeatSchema} from "@/domains/seatmaps/_schema/model/SeatMapWithSeatSchema";
 
 const GeneralSchemaOption = PopulatedReservationBaseSchema.extend({
     reservationType: z.literal(ReservationTypeConstant[0]),

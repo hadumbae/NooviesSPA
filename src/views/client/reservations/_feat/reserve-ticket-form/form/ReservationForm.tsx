@@ -3,21 +3,19 @@
  *
  */
 
-import {useReserveTicketForm} from "@/domains/reservations/_feat/reserve-tickets/forms/useReserveTicketForm.ts";
-import {ObjectId} from "@/common/_schemas";
-import {
-    ReserveTicketFormData,
-    ReserveTicketFormValues
-} from "@/domains/reservations/_feat/reserve-tickets/schema/ReserveTicketFormSchema.ts";
-import {Logger} from "@/common/_feat/logger/Logger.ts";
-import {ISO4217CurrencyCode} from "@/common/_schemas/enums/ISO4217CurrencyCodeSchema.ts";
-
-import {PopulatedReservation, ReservationType} from "@/domains/reservations/_schema/model";
-import {useReserveTicketSubmitMutation} from "@/domains/reservations/_feat/reserve-tickets";
 import {ReactElement, ReactNode, useId} from "react";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {Form} from "@/views/common/_comp/ui/form.tsx";
+import {ISO4217CurrencyCode, ObjectId} from "@/common/_schemas";
+import {BaseFormContextProvider, MutationResponseConfig} from "@/common/_feat";
+import {Form} from "@/views/common/_comp/ui";
+import {Logger} from "@/common/_feat/logger/Logger.ts";
+import {
+    PopulatedReservation,
+    ReservationType,
+    ReserveTicketFormData,
+    ReserveTicketFormValues,
+    useReserveTicketForm,
+    useReserveTicketSubmitMutation
+} from "@/domains/reservations";
 
 /** Props for the ReservationForm component. */
 type ContainerProps = {

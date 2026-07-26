@@ -1,20 +1,20 @@
 /**
  * @fileoverview Mutation hook for submitting ticket reservation data to the API.
- *
  */
 
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
 import {toast} from "react-toastify";
-import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {UseFormReturn} from "react-hook-form";
-import {validateData} from "@/common/_feat/validate-data/validateData.ts";
-import {reserveTicket} from "@/domains/reservations/_feat/reserve-tickets/repository";
+import {handleFormSubmitError, validateData} from "@/common/_feat";
+import {ReserveTicketMutationKeys} from "./mutationKeys";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {ReserveTicketFormData, ReserveTicketFormValues} from "@/domains/reservations/_feat/reserve-tickets/schema";
 import {
-    PopulatedReservation, PopulatedReservationSchema
-} from "@/domains/reservations/_schema/model/populated-reservations/PopulatedReservationSchema.ts";
-import { ReserveTicketMutationKeys } from "./mutationKeys";
+    PopulatedReservation,
+    PopulatedReservationSchema,
+    reserveTicket,
+    ReserveTicketFormData,
+    ReserveTicketFormValues
+} from "@/domains/reservations";
 
 /** Configuration parameters for the ticket reservation mutation. */
 type SubmitParams = MutationResponseConfig<PopulatedReservation, ReserveTicketFormData> & {

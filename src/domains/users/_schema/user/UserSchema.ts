@@ -3,9 +3,9 @@
  */
 
 import {z} from "zod";
-import {UserRoleEnumSchema} from "@/domains/users/_schema/fields/UserRoleEnum.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {LeanUserWithEmailSchema} from "@/domains/users";
+import {UserRoleEnumSchema} from "@/domains/users/_schema/fields/UserRoleEnum.ts";
+import {LeanUserWithEmailSchema} from "@/domains/users/_schema/user/LeanUserWithEmailSchema.ts";
 
 /** Complete validation schema for the User entity including assigned roles. */
 export const UserSchema = LeanUserWithEmailSchema.extend({
