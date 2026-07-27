@@ -31,7 +31,7 @@ export function useCustomerReviewRouteParams(): CustomerReviewRouteParams {
         const routeError = new RouteError({
             headerText: "Invalid Route Params",
             message: "Invalid Params, Codes Required For Customer And Review",
-            description: `Valid customer [uniqueCode] and review [reviewCode] required.`
+            description: `Valid customer [customerID] and review [reviewID] required.`
         });
 
         Logger.error({

@@ -9,18 +9,18 @@ import {useThrowRouteParamError} from "@/common/_feat/fetch-route-params/useThro
 
 /** Extracts and validates the customer and review codes from the current URL. */
 export function useCustomerReviewLogsRouteParams() {
-    const params = useParams()
+    const params = useParams();
 
-    const {data, success, error} = CustomerReviewLogsRouteParamsSchema.safeParse(params)
+    const {data, success, error} = CustomerReviewLogsRouteParamsSchema.safeParse(params);
 
     const throwError = useThrowRouteParamError({
         headerText: "Invalid Route Params",
-        message: "Invalid Params, Codes Required For Customer And Review",
-        description: "Valid customer [uniqueCode] and review [reviewCode] required."
-    })
+        message: "Invalid Params, IDs Required For Customer And Review",
+        description: "Valid customer [customerID] and review [reviewID] required."
+    });
 
     if (!success) {
-        throwError({raw: params, errors: error.errors})
+        throwError({raw: params, errors: error.errors});
     }
 
     return data

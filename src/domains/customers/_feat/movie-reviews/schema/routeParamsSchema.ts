@@ -1,16 +1,14 @@
 /**
- * @fileoverview Defines the Zod validation schema and TypeScript type for customer profile route parameters.
- *
+ * @fileoverview Defines the Zod validation schema and TypeScript type for customer movie review route parameters.
  */
 
 import {z} from "zod"
-import {UserUniqueCodeSchema} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts"
+import {IDStringSchema} from "@/common/_schemas";
 
-/** Validation schema for URL parameters required to identify a specific customer. */
+/** Zod schema for validating URL parameters required to identify a customer for their reviews. */
 export const CustomerReviewsRouteParamsSchema = z.object({
-    /** The unique identifier code for the customer. */
-    uniqueCode: UserUniqueCodeSchema,
+    customerID: IDStringSchema,
 })
 
-/** Represents the parsed and validated route parameters for customer-specific view endpoints. */
+/** Type definition for the validated customer review route parameters. */
 export type CustomerReviewsRouteParams = z.infer<typeof CustomerReviewsRouteParamsSchema>

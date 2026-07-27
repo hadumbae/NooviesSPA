@@ -9,8 +9,8 @@ import {MovieReviewUniqueCodeSchema} from "@/domains/movie-reviews/_schema/field
 
 /** Validation schema for identifying a specific review within a customer's scope via URL. */
 export const CustomerReviewRouteParamsSchema = z.object({
-    uniqueCode: UserUniqueCodeSchema,
-    reviewCode: MovieReviewUniqueCodeSchema,
+    customerID: UserUniqueCodeSchema,
+    reviewID: MovieReviewUniqueCodeSchema,
 });
 
 /** Type inferred from CustomerReviewRouteParamsSchema for use with useParams hooks. */

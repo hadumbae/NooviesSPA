@@ -3,10 +3,9 @@
  *
  */
 
+import {ObjectId} from "@/common/_schemas";
 import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
-import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {MovieReviewUniqueCode} from "@/domains/movie-reviews/_schema/fields";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
@@ -19,22 +18,22 @@ import {getFetchCustomerReviewViewData} from "@/domains/customers/_feat/movie-re
 
 /** Parameters for the customer review data fetch hook. */
 export type FetchParams = {
-    customerCode: UserUniqueCode;
-    reviewCode: MovieReviewUniqueCode;
+    customerID: ObjectId;
+    reviewID: ObjectId;
     options?: FetchQueryOptions<CustomerReviewViewData>;
 };
 
 /** Fetches and validates hydrated review and author data for administrative moderation. */
 export function useFetchCustomerReviewViewData(
-    {customerCode, reviewCode, options}: FetchParams
+    {customerID, reviewID, options}: FetchParams
 ): UseQueryResult<CustomerReviewViewData, HttpResponseError> {
     const fetchDetails = buildQueryFn({
-        action: () => getFetchCustomerReviewViewData({customerCode, reviewCode}),
+        action: () => getFetchCustomerReviewViewData({customerID, reviewID}),
         schema: CustomerReviewViewSchema,
     });
 
     return useQuery({
-        queryKey: CustomerReviewViewQueryKeys.review({customerCode, reviewCode}),
+        queryKey: CustomerReviewViewQueryKeys.review({customerID, reviewID}),
         queryFn: fetchDetails,
         ...useQueryOptionDefaults(options),
     });

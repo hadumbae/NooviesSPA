@@ -6,16 +6,18 @@ import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.t
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts"
 import {CustomerReviewLogsViewData} from "@/domains/customers/_feat/movie-review-logs/schema/viewDataSchema.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
-import {GetFetchCustomerReviewLogsViewDataConfig} from "@/domains/customers/_feat/movie-review-logs/repository/repository.types";
+import {
+    GetFetchCustomerReviewLogsViewDataConfig
+} from "@/domains/customers/_feat/movie-review-logs/repository/repository.types";
 import {CustomerReviewLogsBaseURL} from "@/domains/customers/_feat/movie-review-logs";
 
 /** Retrieves paginated moderation audit logs for a specific review from the administrative API. */
 export async function getFetchCustomerReviewLogsViewData(
-    {customerCode, reviewCode, pagination}: GetFetchCustomerReviewLogsViewDataConfig
+    {customerID, reviewID, pagination}: GetFetchCustomerReviewLogsViewDataConfig
 ): Promise<FetchRequestReturns<CustomerReviewLogsViewData>> {
     const url = buildURL({
         baseURL: CustomerReviewLogsBaseURL,
-        path: `/profile-details/${customerCode}/review/${reviewCode}/logs`,
+        path: `/profile-details/${customerID}/review/${reviewID}/logs`,
         queries: pagination
     })
 

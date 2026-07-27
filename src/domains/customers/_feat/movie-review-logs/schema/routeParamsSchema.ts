@@ -1,16 +1,15 @@
 /**
- * @fileoverview Defines the Zod validation schema and TypeScript type for customer review moderation log route parameters.
+ * @fileoverview Zod validation schema and TypeScript type for customer review moderation log route parameters.
  */
 
 import {z} from "zod"
-import {UserUniqueCodeSchema} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts"
-import {MovieReviewUniqueCodeSchema} from "@/domains/movie-reviews/_schema/fields"
+import {IDStringSchema} from "@/common/_schemas";
 
-/** Validation schema for URL parameters identifying a specific customer and their movie review. */
+/** Zod schema for validating customer review log route parameters. */
 export const CustomerReviewLogsRouteParamsSchema = z.object({
-    uniqueCode: UserUniqueCodeSchema,
-    reviewCode: MovieReviewUniqueCodeSchema,
+    customerID: IDStringSchema,
+    reviewID: IDStringSchema,
 })
 
-/** Represents the parsed and validated route parameters for customer review-related endpoints. */
+/** Type definition inferred from the customer review logs route parameters schema. */
 export type CustomerReviewLogsRouteParams = z.infer<typeof CustomerReviewLogsRouteParamsSchema>

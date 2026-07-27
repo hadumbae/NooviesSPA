@@ -13,11 +13,11 @@ import {GetFetchCustomerReviewViewDataConfig} from "@/domains/customers/_feat/mo
  * Fetches detailed review and author data for a specific movie review.
  */
 export function getFetchCustomerReviewViewData(
-    {customerCode, reviewCode}: GetFetchCustomerReviewViewDataConfig
+    {customerID, reviewID}: GetFetchCustomerReviewViewDataConfig
 ): Promise<FetchRequestReturns<CustomerReviewViewData>> {
     const url = buildURL({
         baseURL: ManageCustomerMovieReviewBaseURL,
-        path: `/profile-details/${customerCode}/review/${reviewCode}`,
+        path: `/profile-details/${customerID}/review/${reviewID}`,
     });
 
     return useFetchAPI<CustomerReviewViewData>({method: "GET", url});

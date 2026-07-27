@@ -15,11 +15,11 @@ import {
  * Fetches a paginated collection of reviews authored by a specific customer.
  */
 export function getFetchCustomerReviewsViewData(
-    {customerCode, pagination}: GetFetchCustomerReviewsViewDataConfig
+    {customerID, pagination}: GetFetchCustomerReviewsViewDataConfig
 ): Promise<FetchRequestReturns<CustomerReviewsViewData>> {
     const url = buildURL({
         baseURL: ManageCustomerMovieReviewsBaseURL,
-        path: `/profile-details/${customerCode}/reviews`,
+        path: `/profile-details/${customerID}/reviews`,
         queries: pagination
     });
 
