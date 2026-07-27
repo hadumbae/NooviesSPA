@@ -1,13 +1,17 @@
 @layer components {
+    .breadcrumb-link {
+        @apply transition-colors hover:text-neutral-950 dark:hover:text-neutral-50;
+    }
+
     .hover-link-text {
-        @apply transition-colors text-neutral-400 hover:text-black;
+        @apply transition-colors text-neutral-400 hover:text-black font-bold;
     }
 
     .hover-link-underline {
         @apply hover:underline hover:underline-offset-8;
     }
 
-    .breadcrumb-link {
-        @apply transition-colors hover:text-neutral-950 dark:hover:text-neutral-50;
+    .hover-link {
+        @apply hover-link-text hover-link-underline text-with-icon
     }
 }

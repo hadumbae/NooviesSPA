@@ -7,15 +7,17 @@ import {UserDetailsPageContent} from "@/views/admin/users/pages/details-page/con
 import {useFetchUserDetailsViewData, useUserDetailsRouteParams} from "@/domains/users";
 import {PageLoader} from "@/views/common/_comp";
 import {QueryDataLoader} from "@/views/common/_feat";
+import {useTitle} from "@/common/_feat";
 
 /** Admin page that fetches and displays a user's profile, reservations, and reviews. */
 export function UserDetailsPage(): ReactElement {
+    useTitle("User Details");
     const params = useUserDetailsRouteParams();
 
     const query = useFetchUserDetailsViewData({
         userID: params!.userID,
-        reservationCount: 4,
-        reviewCount: 10,
+        reservationCount: 5,
+        reviewCount: 5,
         options: {enabled: !!params?.userID}
     });
 

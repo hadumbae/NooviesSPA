@@ -21,10 +21,11 @@ export function MovieReviewRatingStars(
     return (
         <div className={cn("flex items-center space-x-1")}>
             {[1, 2, 3, 4, 5].map((val) => (
-                <Star key={`movie-review-star-${val}`} size={size} className={cn(
-                    "inactive-rating-star",
-                    (rating && val <= rating) && "active-rating-star",
-                )}/>
+                <Star
+                    key={`movie-review-star-${val}`}
+                    size={size}
+                    className={(rating && val <= rating) ? "active-rating-star" : "inactive-rating-star"}
+                />
             ))}
         </div>
     );
