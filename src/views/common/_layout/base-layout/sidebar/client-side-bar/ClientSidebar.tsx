@@ -8,8 +8,9 @@ import {Sidebar, SidebarContent, SidebarHeader} from "@/views/common/_comp/ui/si
 import ClientProfileSidebarGroup
     from "@/views/common/_layout/base-layout/sidebar/client-side-bar/ClientProfileSidebarGroup.tsx";
 import {Separator} from "@/views/common/_comp/ui/separator.tsx";
-import AuthSidebarGroup
-    from "@/views/common/_layout/admin-layout/sidebar/admin-side-bar-groups/AdminAuthSidebarGroup.tsx";
+import {
+    AdminAuthSidebarGroup
+} from "@/views/common/_layout/admin-layout/sidebar/admin-side-bar-groups/AdminAuthSidebarGroup.tsx";
 import {
     ClientBrowseSidebarGroup
 } from "@/views/common/_layout/base-layout/sidebar/client-side-bar/ClientBrowseSidebarGroup.tsx";
@@ -47,7 +48,7 @@ const ClientSidebar: FC = () => {
                 <LayoutThemeSidebarGroup/>
 
                 <Separator/>
-                <AuthSidebarGroup/>
+                <AdminAuthSidebarGroup/>
             </SidebarContent>
         </Sidebar>
     );

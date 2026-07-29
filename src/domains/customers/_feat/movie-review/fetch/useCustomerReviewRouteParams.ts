@@ -2,10 +2,8 @@
  * @fileoverview Hook for extracting and validating URL parameters in the Customer Review domain.
  */
 
-import {useLocation, useParams} from "react-router-dom";
-import {buildContext} from "@/common/_feat/logger-builders/buildLoggerContext.ts";
+import {useParams} from "react-router-dom";
 import {RouteError} from "@/common/_err/RouteError.ts";
-import {Logger} from "@/common/_feat/logger/Logger.ts";
 import {
     CustomerReviewRouteParams,
     CustomerReviewRouteParamsSchema
@@ -16,32 +14,14 @@ import {
  */
 export function useCustomerReviewRouteParams(): CustomerReviewRouteParams {
     const params = useParams();
-    const {pathname, search, hash} = useLocation();
-
-    const {data, success, error} = CustomerReviewRouteParamsSchema.safeParse(params);
+    const {data, success} = CustomerReviewRouteParamsSchema.safeParse(params);
 
     if (!success) {
-        const context = buildContext([
-            {key: "source", value: useCustomerReviewRouteParams.name},
-            {key: "url", value: `${pathname}${search}${hash}`},
-            {key: "raw", value: params},
-            {key: "errors", value: error.errors},
-        ]);
-
-        const routeError = new RouteError({
+        throw new RouteError({
             headerText: "Invalid Route Params",
             message: "Invalid Params, Codes Required For Customer And Review",
             description: `Valid customer [customerID] and review [reviewID] required.`
         });
-
-        Logger.error({
-            type: "ERROR",
-            error: routeError,
-            msg: "Failed to fetch route params.",
-            context,
-        });
-
-        throw routeError;
     }
 
     return data;

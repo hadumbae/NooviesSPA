@@ -4,34 +4,25 @@
 
 import {ReactElement} from "react";
 import {UserDetailsPageContent} from "@/views/admin/users/pages/details-page/content.tsx";
-import {useFetchUserDetailsViewData, useUserDetailsRouteParams} from "@/domains/users";
-import {PageLoader} from "@/views/common/_comp";
+import {useFetchUserDetailsViewData, UserDetailsRouteParamsSchema} from "@/domains/users";
 import {QueryDataLoader} from "@/views/common/_feat";
-import {useTitle} from "@/common/_feat";
+import {useRouteParams, useTitle} from "@/common/_feat";
 
 /** Admin page that fetches and displays a user's profile, reservations, and reviews. */
 export function UserDetailsPage(): ReactElement {
     useTitle("User Details");
-    const params = useUserDetailsRouteParams();
+    const {userID} = useRouteParams({
+        schema: UserDetailsRouteParamsSchema,
+        errorConfig: {description: "Valid User ID Is Required."},
+    })
 
-    const query = useFetchUserDetailsViewData({
-        userID: params!.userID,
-        reservationCount: 5,
-        reviewCount: 5,
-        options: {enabled: !!params?.userID}
-    });
-
-    if (!params) {
-        return <PageLoader/>;
-    }
+    const query = useFetchUserDetailsViewData({userID});
 
     return (
         <QueryDataLoader query={query}>
-            {({user, reviews, reservations, totalReviews, totalReservations}) => (
+            {({user, totalReviews, totalReservations}) => (
                 <UserDetailsPageContent
                     user={user}
-                    reviews={reviews}
-                    reservations={reservations}
                     totalReviews={totalReviews}
                     totalReservations={totalReservations}
                 />

@@ -20,7 +20,6 @@ export function MoviePosterImage({url, alt, className}: ImageProps): ReactElemen
         return (
             <HasNoMoviePosterPlaceholder
                 className={className}
-                hasError={hasError}
             />
         );
     }

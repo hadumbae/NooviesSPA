@@ -5,10 +5,9 @@
 import {LeanUserWithEmail} from "@/domains/users/_schema/user";
 import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {Separator} from "@/views/common/_comp/ui/separator.tsx";
-import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
-import {cn} from "@/common/_feat";
 import {ReactElement} from "react";
 import {LabelContent} from "@/views/common/_comp";
+import {CustomerUniqueCodeDisplay} from "@/views/admin/customers";
 
 /** Props for the CustomerDetailsCard component. */
 type CardProps = {
@@ -40,20 +39,10 @@ export function CustomerDetailsCard(
 
                 <Separator/>
 
-                <div className="flex flex-col items-center justify-center py-1">
-                    <span className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
-                        Customer Access Code
-                    </span>
-
-                    <LoggedLink to={`/admin/customers/${uniqueCode}/profile`}>
-                        <h4 className={cn(
-                            "text-xl font-extrabold font-oswald tracking-wider text-primary",
-                            "hover:underline hover:underline-offset-8"
-                        )}>
-                            {uniqueCode}
-                        </h4>
-                    </LoggedLink>
-                </div>
+                <CustomerUniqueCodeDisplay
+                    customerID={_id}
+                    uniqueCode={uniqueCode}
+                />
             </CardContent>
         </Card>
     );

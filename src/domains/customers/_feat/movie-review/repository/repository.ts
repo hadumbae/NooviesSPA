@@ -17,7 +17,7 @@ export function getFetchCustomerReviewViewData(
 ): Promise<FetchRequestReturns<CustomerReviewViewData>> {
     const url = buildURL({
         baseURL: ManageCustomerMovieReviewBaseURL,
-        path: `/profile-details/${customerID}/review/${reviewID}`,
+        path: `/customer/${customerID}/review/${reviewID}`,
     });
 
     return useFetchAPI<CustomerReviewViewData>({method: "GET", url});

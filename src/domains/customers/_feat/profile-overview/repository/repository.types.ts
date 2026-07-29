@@ -6,5 +6,5 @@ import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchem
 
 /** Configuration for fetching a customer profile view. */
 export type GetFetchCustomerProfileViewDataConfig = {
-    customerCode: UserUniqueCode
+    customerID: UserUniqueCode
 }

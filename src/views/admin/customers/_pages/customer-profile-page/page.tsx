@@ -3,30 +3,25 @@
  */
 
 import {ReactElement} from "react";
-import {Loader} from "lucide-react";
-import {PageCenter} from "@/views/common/_comp";
 import {QueryDataLoader} from "@/views/common/_feat";
-import {useFetchCustomerCode} from "@/domains/users";
-import {CustomerProfileViewData, useFetchCustomerProfileViewData} from "@/domains/customers";
+import {
+    CustomerProfileOverviewRouteParamsSchema,
+    CustomerProfileViewData,
+    useFetchCustomerProfileViewData
+} from "@/domains/customers";
 import {CustomerProfilePageContent} from "@/views/admin/customers/_pages/customer-profile-page/content.tsx";
+import {useRouteParams} from "@/common/_feat";
 
 /**
  * Orchestrates data fetching and validation for the Customer Profile view.
  */
 export function CustomerProfilePage(): ReactElement {
-    const customerCode = useFetchCustomerCode();
-    const query = useFetchCustomerProfileViewData({
-        customerCode,
-        options: {enabled: !!customerCode}
+    const {customerID} = useRouteParams({
+        schema: CustomerProfileOverviewRouteParamsSchema,
+        errorConfig: {description: "Valid Customer ID Is Required."},
     });
 
-    if (!customerCode) {
-        return (
-            <PageCenter>
-                <Loader className="animate-spin text-muted-foreground"/>
-            </PageCenter>
-        );
-    }
+    const query = useFetchCustomerProfileViewData({customerID});
 
     return (
         <QueryDataLoader query={query}>

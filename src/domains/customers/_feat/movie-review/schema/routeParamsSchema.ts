@@ -4,13 +4,12 @@
  */
 
 import {z} from "zod";
-import {UserUniqueCodeSchema} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
-import {MovieReviewUniqueCodeSchema} from "@/domains/movie-reviews/_schema/fields";
+import {IDStringSchema} from "@/common/_schemas";
+import {ManageCustomerRouteParamsSchema} from "@/domains/customers/_feat/manage-customers";
 
 /** Validation schema for identifying a specific review within a customer's scope via URL. */
-export const CustomerReviewRouteParamsSchema = z.object({
-    customerID: UserUniqueCodeSchema,
-    reviewID: MovieReviewUniqueCodeSchema,
+export const CustomerReviewRouteParamsSchema = ManageCustomerRouteParamsSchema.extend({
+    reviewID: IDStringSchema,
 });
 
 /** Type inferred from CustomerReviewRouteParamsSchema for use with useParams hooks. */

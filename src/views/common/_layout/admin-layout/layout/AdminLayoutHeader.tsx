@@ -9,7 +9,9 @@ import {
 } from "@/views/common/_comp/layout/LayoutBreakpointIndicator.tsx";
 import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {SidebarContext, SidebarTrigger} from "@/views/common/_comp/ui";
-import AdminLayoutDesktopNavigation from "@/views/common/_layout/admin-layout/navigation/AdminLayoutDesktopNavigation.tsx";
+import {
+    AdminLayoutDesktopNavigation
+} from "@/views/common/_layout/admin-layout/navigation/AdminLayoutDesktopNavigation.tsx";
 
 /**
  * Header for the admin dashboard that toggles between desktop navigation and a mobile sidebar trigger.

@@ -4,12 +4,12 @@
 
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {QueryDataLoader} from "@/views/common/_feat";
+import {CustomerReviewsPageContent} from "@/views/admin/customers/_pages/customer-reviews-page/content.tsx";
 import {
-    CustomerReviewsPageContent
-} from "@/views/admin/customers/_pages/customer-reviews-page/content.tsx";
-import {Loader} from "lucide-react";
-import {useFetchCustomerReviewsViewData} from "@/domains/customers/_feat/movie-reviews";
-import {useFetchCustomerCode} from "@/domains/users";
+    CustomerReviewsRouteParamsSchema,
+    useFetchCustomerReviewsViewData
+} from "@/domains/customers/_feat/movie-reviews";
+import {useRouteParams} from "@/common/_feat";
 
 /** Number of reviews to display per page. */
 const REVIEWS_PER_PAGE = 10;
@@ -18,19 +18,17 @@ const REVIEWS_PER_PAGE = 10;
  * Renders the customer reviews page using URL pagination parameters and the customer code.
  */
 export function CustomerReviewsPage() {
-    const customerCode = useFetchCustomerCode();
+    const {customerID} = useRouteParams({
+        schema: CustomerReviewsRouteParamsSchema,
+        errorConfig: {description: "Valid Customer ID Is Required."},
+    });
 
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
 
     const query = useFetchCustomerReviewsViewData({
-        customerCode: customerCode!,
         pagination: {page, perPage: REVIEWS_PER_PAGE},
-        options: {enabled: !!customerCode},
+        customerID,
     });
-
-    if (!customerCode) {
-        return <Loader/>;
-    }
 
     return (
         <QueryDataLoader query={query}>

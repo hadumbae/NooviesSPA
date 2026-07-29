@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {LucideIcon} from "lucide-react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/views/common/_comp/ui";
-import {StatItem} from "@/views/common/_comp/text-display/StatItem.tsx";
+import {StatIconItem} from "@/views/common/_comp/text-display/StatIconItem.tsx";
 
 /** Props for the TooltipStatItem component. */
 type TooltipStatItemProps = {
@@ -26,7 +26,7 @@ export function TooltipStatItem(
         <Tooltip>
             <TooltipContent>{tooltip}</TooltipContent>
             <TooltipTrigger>
-                <StatItem {...props} />
+                <StatIconItem {...props} />
             </TooltipTrigger>
         </Tooltip>
     );

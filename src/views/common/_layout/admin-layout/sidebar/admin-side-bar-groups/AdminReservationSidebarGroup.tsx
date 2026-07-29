@@ -1,6 +1,5 @@
 /**
- * @file Sidebar navigation group for administrative reservation management.
- * @filename AdminReservationSidebarGroup.tsx
+ * @fileoverview Sidebar group component for reservation-related navigation in the admin layout.
  */
 
 import {
@@ -12,11 +11,10 @@ import {
 } from "@/views/common/_comp/ui/sidebar/sidebar.tsx";
 import {Link} from "react-router-dom";
 import {TableOfContents} from "lucide-react";
+import {ReactElement} from "react";
 
-/**
- * A navigational component for the main admin sidebar.
- */
-export const AdminReservationSidebarGroup = () => {
+/** Sidebar group containing navigation links for managing reservations. */
+export function AdminReservationSidebarGroup(): ReactElement {
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Reservations</SidebarGroupLabel>
@@ -35,4 +33,4 @@ export const AdminReservationSidebarGroup = () => {
             </SidebarGroupContent>
         </SidebarGroup>
     );
-};
+}

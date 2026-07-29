@@ -8,6 +8,7 @@ import {User} from "@/domains/users";
 import {UserUniqueCodePill} from "@/views/admin/users/_comp/pills";
 import {UserRoleBadge} from "@/views/admin/users/_comp";
 import {cn} from "@/common/_feat";
+import {StatNumberItem} from "@/views/common/_comp";
 
 /** Card class names for styling the container and content. */
 type CardClassNames = {
@@ -48,15 +49,8 @@ export function AdminUserDetailsCard(
                 <Separator/>
 
                 <div className="flex justify-start items-center space-x-5">
-                    <dl className="space-y-1">
-                        <dt className="primary-text text-2xl font-extrabold">{totalReviews}</dt>
-                        <dd className="secondary-text text-sm font-bold">Reviews</dd>
-                    </dl>
-
-                    <dl className="space-y-1">
-                        <dt className="primary-text text-2xl font-extrabold">{totalReservations}</dt>
-                        <dd className="secondary-text text-sm font-bold">Reservations</dd>
-                    </dl>
+                    <StatNumberItem text="Reviews" count={totalReviews}/>
+                    <StatNumberItem text="Reservations" count={totalReservations}/>
                 </div>
             </CardContent>
         </Card>

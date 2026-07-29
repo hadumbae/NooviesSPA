@@ -1,11 +1,12 @@
 /**
- * @file GuestAuthSidebarGroup.tsx
- * @description Renders the sidebar section for guest authentication actions such as
- * logging in and logging out. This component is typically displayed when the user
- * is not authenticated.
+ * @fileoverview Sidebar group component for administrative authentication actions.
  */
 
-import { FC } from 'react';
+import {ReactElement} from 'react';
+import {Link} from "react-router-dom";
+import {User} from "lucide-react";
+import {useAuthLogoutSubmitMutation} from "@/domains/auth/_feat";
+import {useLoggedNavigate} from "@/common/_feat/navigation";
 import {
     SidebarGroup,
     SidebarGroupContent,
@@ -13,45 +14,26 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem
-} from "@/views/common/_comp/ui/sidebar/sidebar.tsx";
-import { Link } from "react-router-dom";
-import { User } from "lucide-react";
-import {
-    useAuthLogoutSubmitMutation
-} from "@/domains/auth/_feat/auth-logout/useAuthLogoutSubmitMutation.ts";
-import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
+} from "@/views/common/_comp/ui";
 
 /**
- * `GuestAuthSidebarGroup` displays a sidebar group containing guest authentication options.
- *
- * - Provides a link to the login page.
- * - Includes a logout button that triggers a logout mutation and redirects to the home page.
- * - Uses `useLoggedNavigate` for navigation tracking.
- * - Uses `useAuthLogoutSubmitMutation` to handle logout actions.
- *
- * @component
- * @example
- * ```tsx
- * <GuestAuthSidebarGroup />
- * ```
+ * Sidebar group containing authentication-related navigation and actions for the admin layout.
  */
-const AdminSetupSidebarGroup: FC = () => {
+export function AdminAuthSidebarGroup(): ReactElement {
     const navigate = useLoggedNavigate();
 
-    const onLogout = () => navigate({ to: "/", component: AdminSetupSidebarGroup.name });
-    const { mutate } = useAuthLogoutSubmitMutation({ onSubmitSuccess: onLogout });
+    const onLogout = () => navigate({to: "/", component: AdminAuthSidebarGroup.name});
+    const {mutate} = useAuthLogoutSubmitMutation({onSubmitSuccess: onLogout});
 
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Authentication</SidebarGroupLabel>
             <SidebarGroupContent>
                 <SidebarMenu>
-
-                    {/* Profile */}
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/auth/login">
-                                <User />
+                                <User/>
                                 <span>Profile</span>
                             </Link>
                         </SidebarMenuButton>
@@ -60,15 +42,12 @@ const AdminSetupSidebarGroup: FC = () => {
                     {/* Log Out */}
                     <SidebarMenuItem>
                         <SidebarMenuButton onClick={() => mutate()}>
-                            <User />
+                            <User/>
                             <span>Log Out</span>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
-
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>
     );
-};
-
-export default AdminSetupSidebarGroup;
+}

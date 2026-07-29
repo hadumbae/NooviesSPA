@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {ReservationSchema} from "@/domains/reservations/_schema/model";
 import {LeanUserWithEmailSchema} from "@/domains/users/_schema/user";
-import {CustomerMovieReviewSummarySchema} from "@/domains/movie-reviews/_schema";
+import {PopulatedMovieReviewSchema} from "@/domains/movie-reviews/_schema";
 import {NonNegativeNumberSchema} from "@/common/_schemas/numbers/non-negative-number/NonNegativeNumberSchema";
 
 const ResSchema = z.object({
@@ -15,7 +15,7 @@ const ResSchema = z.object({
 
 const RevSchema = z.object({
     total: NonNegativeNumberSchema,
-    items: z.array(CustomerMovieReviewSummarySchema),
+    items: z.array(PopulatedMovieReviewSchema),
 });
 
 /** Primary validation schema for the aggregated Customer Profile View. */

@@ -1,6 +1,5 @@
 /**
  * @fileoverview Main content layout for the administrative Customer Review detail page.
- *
  */
 
 import {LeanUserWithEmail} from "@/domains/users";
@@ -10,8 +9,9 @@ import {PageFlexWrapper, PageSectionHeader, PageSectionHeaderLink} from "@/views
 import {ReactElement} from "react";
 import {
     CustomerReviewPageActionSection,
-    CustomerReviewPageHeader
+    CustomerReviewPageBreadcrumbs,
 } from "@/views/admin/customers/_pages/customer-review-page/sections";
+import {PageHeader} from "@/views/common/_comp";
 
 /** Props for the CustomerReviewPageContent component. */
 type ContentProps = {
@@ -23,7 +23,7 @@ type ContentProps = {
 export function CustomerReviewPageContent(
     {customer, review}: ContentProps
 ): ReactElement {
-    const {uniqueCode: customerCode} = customer;
+    const {_id: customerID, name: customerName, uniqueCode: customerCode} = customer;
     const {
         _id: reviewID,
         uniqueCode: reviewCode,
@@ -34,9 +34,15 @@ export function CustomerReviewPageContent(
 
     return (
         <PageFlexWrapper>
-            <CustomerReviewPageHeader
-                reviewCode={reviewCode}
-                customerCode={customerCode}
+            <PageHeader
+                title="Customer Review"
+                subtitle={reviewCode}
+                breadcrumbs={<CustomerReviewPageBreadcrumbs
+                    customerID={customerID}
+                    customerName={customerName}
+                    customerCode={customerCode}
+                    reviewCode={reviewCode}
+                />}
             />
 
             <CustomerDetailsCard
@@ -63,7 +69,7 @@ export function CustomerReviewPageContent(
 
             <PageSectionHeaderLink
                 text="Logs"
-                to={`/admin/customers/${customerCode}/reviews/${reviewCode}/logs`}
+                to={`/admin/customers/${customerID}/reviews/${reviewID}/logs`}
             />
         </PageFlexWrapper>
     );

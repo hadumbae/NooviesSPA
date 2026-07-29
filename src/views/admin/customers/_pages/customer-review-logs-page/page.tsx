@@ -1,17 +1,14 @@
 /**
  * @fileoverview Page component for viewing customer movie review logs.
- *
  */
 
 import {ReactElement} from "react";
 import {CustomerReviewLogsPageContent} from "@/views/admin/customers/_pages/customer-review-logs-page/content.tsx";
-import {
-    useCustomerReviewLogsRouteParams,
-    useFetchCustomerReviewLogsViewData
-} from "@/domains/customers/_feat/movie-review-logs";
-import {PageLoader} from "@/views/common/_comp/page";
+import {useFetchCustomerReviewLogsViewData} from "@/domains/customers/_feat/movie-review-logs";
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {QueryDataLoader} from "@/views/common/_feat";
+import {useRouteParams} from "@/common/_feat";
+import {CustomerReviewRouteParamsSchema} from "@/domains/customers";
 
 const LOGS_PER_PAGE = 20;
 
@@ -19,33 +16,35 @@ const LOGS_PER_PAGE = 20;
  * Page controller that fetches and displays moderation audit logs for a specific review.
  */
 export function CustomerReviewLogsPage(): ReactElement {
-    const routeParams = useCustomerReviewLogsRouteParams();
-    const {reviewCode, uniqueCode} = routeParams ?? {};
+    const {customerID, reviewID} = useRouteParams({
+        schema: CustomerReviewRouteParamsSchema,
+        errorConfig: {
+            message: "Invalid Route Params for Customer Reviews",
+            description: "Valid Customer ID Is Required."
+        }
+    });
 
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
 
     const query = useFetchCustomerReviewLogsViewData({
-        customerCode: uniqueCode!,
-        reviewCode: reviewCode!,
         pagination: {page, perPage: LOGS_PER_PAGE},
-        options: {enabled: !!routeParams},
+        customerID,
+        reviewID,
     });
-
-    if (!routeParams) {
-        return <PageLoader/>;
-    }
 
     return (
         <QueryDataLoader query={query}>
-            {({items, totalItems}) => (
+            {({customer, review, logs: {items, totalItems}}) => (
                 <CustomerReviewLogsPageContent
-                    customerCode={uniqueCode!}
-                    reviewCode={reviewCode!}
-                    page={page}
-                    perPage={LOGS_PER_PAGE}
-                    setPage={setPage}
+                    customer={customer}
+                    review={review}
                     logs={items}
-                    totalItems={totalItems}
+                    pagination={{
+                        page,
+                        perPage: LOGS_PER_PAGE,
+                        totalItems,
+                        setPage
+                    }}
                 />
             )}
         </QueryDataLoader>

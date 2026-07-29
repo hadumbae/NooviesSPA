@@ -3,7 +3,6 @@
  *
  */
 
-import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -13,9 +12,13 @@ import {
 } from "@/views/common/_comp/ui/breadcrumb.tsx";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {ReactElement} from "react";
+import {ObjectId} from "@/common/_schemas";
+import {UserUniqueCode} from "@/domains/users";
 
 /** Props for the CustomerReviewsPageBreadcrumbs component. */
 type NavProps = {
+    customerID: ObjectId;
+    customerName: string;
     customerCode: UserUniqueCode;
 };
 
@@ -23,7 +26,7 @@ type NavProps = {
  * Renders a breadcrumb navigation bar for navigating back to the customer profile.
  */
 export function CustomerReviewsPageBreadcrumbs(
-    {customerCode}: NavProps
+    {customerID, customerName, customerCode}: NavProps
 ): ReactElement {
     return (
         <nav aria-label="Breadcrumbs">
@@ -32,9 +35,20 @@ export function CustomerReviewsPageBreadcrumbs(
                     <BreadcrumbItem>
                         <LoggedLink
                             className="breadcrumb-link"
-                            to={`/admin/customers/${customerCode}/profile`}
+                            to={`/admin/customers`}
                         >
-                            Customer Profile
+                            Customers
+                        </LoggedLink>
+                    </BreadcrumbItem>
+
+                    <BreadcrumbSeparator/>
+
+                    <BreadcrumbItem>
+                        <LoggedLink
+                            className="breadcrumb-link"
+                            to={`/admin/customers/${customerID}`}
+                        >
+                            {customerName} • {customerCode}
                         </LoggedLink>
                     </BreadcrumbItem>
 

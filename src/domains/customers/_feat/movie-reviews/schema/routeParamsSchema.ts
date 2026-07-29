@@ -3,12 +3,10 @@
  */
 
 import {z} from "zod"
-import {IDStringSchema} from "@/common/_schemas";
+import {ManageCustomerRouteParamsSchema} from "@/domains/customers/_feat/manage-customers";
 
 /** Zod schema for validating URL parameters required to identify a customer for their reviews. */
-export const CustomerReviewsRouteParamsSchema = z.object({
-    customerID: IDStringSchema,
-})
+export const CustomerReviewsRouteParamsSchema = ManageCustomerRouteParamsSchema.extend({});
 
 /** Type definition for the validated customer review route parameters. */
 export type CustomerReviewsRouteParams = z.infer<typeof CustomerReviewsRouteParamsSchema>

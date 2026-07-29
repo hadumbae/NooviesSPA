@@ -3,12 +3,12 @@
  */
 
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
-import {PaginationRangeButtons} from "@/views/common/_comp";
+import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {CustomerMovieReviewSummary} from "@/domains/movie-reviews/_schema/customer-reviews";
 import {LeanUserWithEmail} from "@/domains/users/_schema/user";
-import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/_comp";
-import {CustomerReviewsPageHeader} from "@/views/admin/customers/_pages/customer-reviews-page/sections/header.tsx";
+import {CustomerDetailsCard, CustomerMovieReviewSummaryCard} from "@/views/admin/customers/_comp";
 import {ReactElement} from "react";
+import {CustomerReviewsPageBreadcrumbs} from "@/views/admin/customers/_pages/customer-reviews-page/sections";
 
 /** Props for the CustomerReviewsPageContent component. */
 type ContentProps = {
@@ -24,12 +24,30 @@ type ContentProps = {
 export function CustomerReviewsPageContent(
     {customer, reviews, page, perPage, setPage, totalItems}: ContentProps
 ): ReactElement {
-    const {uniqueCode: customerCode} = customer;
+    const {
+        _id: customerID,
+        uniqueCode: customerCode,
+        name: customerName,
+    } = customer;
 
     return (
         <PageFlexWrapper>
-            <CustomerReviewsPageHeader
-                customerCode={customerCode}
+            <PageHeader
+                title="All Customer Reviews"
+                subtitle={<>
+                    {customerName} • <span className="font-medium">{customerCode}</span>
+                </>}
+                breadcrumbs={
+                    <CustomerReviewsPageBreadcrumbs
+                        customerID={customerID}
+                        customerName={customerName}
+                        customerCode={customerCode}
+                    />
+                }
+            />
+
+            <CustomerDetailsCard
+                customer={customer}
             />
 
             <section className="space-y-2">
@@ -40,7 +58,7 @@ export function CustomerReviewsPageContent(
                         reviews.map(review => (
                             <CustomerMovieReviewSummaryCard
                                 key={review._id}
-                                code={customerCode}
+                                customerID={customer._id}
                                 review={review}
                             />
                         ))

@@ -1,10 +1,10 @@
 /**
- * @file AdminSetupSidebarGroup.tsx
- * @description Sidebar group for setup and configuration sections in the admin panel.
- * Displays links for managing genres, persons, role types, and theatres.
+ * @fileoverview Sidebar group component for administrative setup navigation links.
  */
 
-import { FC } from 'react';
+import {ReactElement} from 'react';
+import {Link} from "react-router-dom";
+import {TableOfContents} from "lucide-react";
 import {
     SidebarGroup,
     SidebarGroupContent,
@@ -12,35 +12,21 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem
-} from "@/views/common/_comp/ui/sidebar/sidebar.tsx";
-import { Link } from "react-router-dom";
-import { TableOfContents } from "lucide-react";
+} from "@/views/common/_comp/ui";
 
 /**
- * `AdminSetupSidebarGroup` provides navigation links for setup and configuration sections
- * in the admin dashboard.
- *
- * - Links include **Genres**, **Persons**, **Role Types**, and **Theatres**.
- * - Intended to be used as part of the admin sidebar navigation.
- *
- * @component
- * @example
- * ```tsx
- * <AdminSetupSidebarGroup />
- * ```
+ * Sidebar group for administrative setup navigation.
  */
-const AdminSetupSidebarGroup: FC = () => {
+export function AdminSetupSidebarGroup(): ReactElement {
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Setup</SidebarGroupLabel>
             <SidebarGroupContent>
                 <SidebarMenu>
-
-                    {/* Genres */}
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/admin/genres">
-                                <TableOfContents />
+                                <TableOfContents/>
                                 <span>Genres</span>
                             </Link>
                         </SidebarMenuButton>
@@ -50,7 +36,7 @@ const AdminSetupSidebarGroup: FC = () => {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/admin/persons">
-                                <TableOfContents />
+                                <TableOfContents/>
                                 <span>Persons</span>
                             </Link>
                         </SidebarMenuButton>
@@ -60,7 +46,7 @@ const AdminSetupSidebarGroup: FC = () => {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/admin/roletypes/list">
-                                <TableOfContents />
+                                <TableOfContents/>
                                 <span>Role Types</span>
                             </Link>
                         </SidebarMenuButton>
@@ -70,7 +56,7 @@ const AdminSetupSidebarGroup: FC = () => {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/admin/theatres">
-                                <TableOfContents />
+                                <TableOfContents/>
                                 <span>Theatres</span>
                             </Link>
                         </SidebarMenuButton>
@@ -80,6 +66,4 @@ const AdminSetupSidebarGroup: FC = () => {
             </SidebarGroupContent>
         </SidebarGroup>
     );
-};
-
-export default AdminSetupSidebarGroup;
+}

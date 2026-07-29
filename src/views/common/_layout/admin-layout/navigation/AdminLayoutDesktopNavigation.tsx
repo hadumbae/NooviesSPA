@@ -1,28 +1,30 @@
 /**
- * @file Desktop-specific navigation bar for the administrative layout.
- * @filename AdminLayoutDesktopNavigation.tsx
+ * @fileoverview Desktop navigation layout for the admin section of the application.
  */
 
-import {FC} from 'react';
-import {
-    AdminLayoutSetupNavigationDropdown
-} from "@/views/common/_layout/admin-layout/navigation/AdminLayoutSetupNavigationDropdown.tsx";
-import AdminLayoutShowingNavigationDropdown
-    from "@/views/common/_layout/admin-layout/navigation/AdminLayoutShowingNavigationDropdown.tsx";
+import {ReactElement} from 'react';
+import {SROnly} from "@/views/common/_comp";
 import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {useAuthLogoutSubmitMutation} from "@/domains/auth/_feat/auth-logout/useAuthLogoutSubmitMutation.ts";
 import {
     BaseLayoutDesktopThemeDropdown
 } from "@/views/common/_layout/common/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";
-import AdminLayoutDashboardNavigationDropdown
-    from "@/views/common/_layout/admin-layout/navigation/AdminLayoutDashboardNavigationDropdown.tsx";
-import {SROnly} from "@/views/common/_comp";
+import {
+    AdminLayoutDashboardNavigationDropdown
+} from "@/views/common/_layout/admin-layout/navigation/AdminLayoutDashboardNavigationDropdown.tsx";
+import {
+    AdminLayoutSetupNavigationDropdown
+} from "@/views/common/_layout/admin-layout/navigation/AdminLayoutSetupNavigationDropdown.tsx";
+import {
+    AdminLayoutShowingNavigationDropdown
+} from "@/views/common/_layout/admin-layout/navigation/AdminLayoutShowingNavigationDropdown.tsx";
+import {
+    AdminLayoutAccountNavigationDropdown
+} from "@/views/common/_layout/admin-layout/navigation/AdminLayoutAccountNavigationDropdown.tsx";
 
-/**
- * Orchestrates the horizontal navigation suite for administrative users on desktop.
- */
-const AdminLayoutDesktopNavigation: FC = () => {
+/** Desktop navigation bar for the admin layout containing dropdowns for dashboard, setup, and showings. */
+export function AdminLayoutDesktopNavigation(): ReactElement {
     const navigate = useLoggedNavigate();
 
     const onLogout = () => navigate({to: "/", component: AdminLayoutDesktopNavigation.name});
@@ -32,12 +34,11 @@ const AdminLayoutDesktopNavigation: FC = () => {
         <section className="flex items-center space-x-0 font-spaceGrotesk">
             <SROnly text="Desktop Navigation"/>
 
-            {/** Category-based navigation dropdowns */}
             <AdminLayoutDashboardNavigationDropdown/>
             <AdminLayoutSetupNavigationDropdown/>
             <AdminLayoutShowingNavigationDropdown/>
+            <AdminLayoutAccountNavigationDropdown/>
 
-            {/** Global UI and Auth controls */}
             <BaseLayoutDesktopThemeDropdown/>
 
             <Button
@@ -50,6 +51,4 @@ const AdminLayoutDesktopNavigation: FC = () => {
             </Button>
         </section>
     );
-};
-
-export default AdminLayoutDesktopNavigation;
+}

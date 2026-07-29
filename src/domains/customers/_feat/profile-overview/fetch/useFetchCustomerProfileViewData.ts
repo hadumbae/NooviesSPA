@@ -1,7 +1,7 @@
 /**
  * @fileoverview Custom React hook for fetching aggregated customer profile data using TanStack Query.
  */
-import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
+
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
@@ -10,24 +10,25 @@ import {CustomerProfileOverviewViewQueryKeys} from "@/domains/customers/_feat/pr
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {CustomerProfileViewData, CustomerProfileViewDataSchema} from "@/domains/customers";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";
+import {ObjectId} from "@/common/_schemas";
 
 /** Parameters for the customer profile fetch hook. */
 export type FetchParams = {
-    customerCode: UserUniqueCode;
+    customerID: ObjectId;
     options?: FetchQueryOptions<CustomerProfileViewData>;
 }
 
 /** Hook to manage the server state and caching of a customer's profile overview. */
 export function useFetchCustomerProfileViewData(
-    {customerCode, options}: FetchParams
+    {customerID, options}: FetchParams
 ): UseQueryResult<CustomerProfileViewData, HttpResponseError> {
     const fetchDetails = buildQueryFn<CustomerProfileViewData>({
-        action: () => getFetchCustomerProfileViewData({customerCode}),
+        action: () => getFetchCustomerProfileViewData({customerID}),
         schema: CustomerProfileViewDataSchema,
     });
 
     return useQuery({
-        queryKey: CustomerProfileOverviewViewQueryKeys.profile({customerCode}),
+        queryKey: CustomerProfileOverviewViewQueryKeys.profile({customerID}),
         queryFn: fetchDetails,
         ...useQueryOptionDefaults(options),
     });

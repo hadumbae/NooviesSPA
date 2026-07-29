@@ -4,20 +4,20 @@
 
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {CustomerMovieReviewSummary} from "@/domains/movie-reviews/_schema/customer-reviews";
-import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {CustomerMovieReviewSummaryCard} from "@/views/admin/customers/_comp";
 import {ReactElement} from "react";
+import {ObjectId} from "@/common/_schemas";
 
 /** Props for the CustomerProfileReviewSection component. */
 type SectionProps = {
-    code: UserUniqueCode;
+    customerID: ObjectId;
     itemCount: number;
     reviews: CustomerMovieReviewSummary[];
 };
 
 /** Renders a grid of movie reviews within the Customer Profile administrative view. */
 export function CustomerProfileReviewSection(
-    {code, itemCount, reviews}: SectionProps
+    {customerID, itemCount, reviews}: SectionProps
 ): ReactElement {
     return (
         <section className="space-y-4">
@@ -26,7 +26,7 @@ export function CustomerProfileReviewSection(
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {reviews.map((review) => (
                     <CustomerMovieReviewSummaryCard
-                        code={code}
+                        customerID={customerID}
                         key={review._id}
                         review={review}
                     />

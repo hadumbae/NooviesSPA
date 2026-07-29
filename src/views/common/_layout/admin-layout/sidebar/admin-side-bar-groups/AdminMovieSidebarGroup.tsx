@@ -1,10 +1,10 @@
 /**
- * @file AdminMovieSidebarGroup.tsx
- * @description Sidebar group for movie-related administrative pages. Displays navigation
- * links for managing movies and showings within the admin panel.
+ * @fileoverview Sidebar group component for movie and showing administration navigation.
  */
 
-import { FC } from 'react';
+import {ReactElement} from 'react';
+import {Link} from "react-router-dom";
+import {TableOfContents} from "lucide-react";
 import {
     SidebarGroup,
     SidebarGroupContent,
@@ -12,35 +12,20 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem
-} from "@/views/common/_comp/ui/sidebar/sidebar.tsx";
-import { Link } from "react-router-dom";
-import { TableOfContents } from "lucide-react";
+} from "@/views/common/_comp/ui";
 
-/**
- * `AdminMovieSidebarGroup` renders a sidebar group dedicated to movie management sections
- * within the admin interface.
- *
- * - Provides quick access to **Movies** and **Showings** management pages.
- * - Designed for use inside the admin dashboard’s sidebar.
- *
- * @component
- * @example
- * ```tsx
- * <AdminMovieSidebarGroup />
- * ```
- */
-const AdminMovieSidebarGroup: FC = () => {
+/** Sidebar group containing navigation links for managing movies and showings in the admin dashboard. */
+export function AdminMovieSidebarGroup(): ReactElement {
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Movies</SidebarGroupLabel>
             <SidebarGroupContent>
                 <SidebarMenu>
 
-                    {/* Movies */}
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/admin/movies">
-                                <TableOfContents />
+                                <TableOfContents/>
                                 <span>Movies</span>
                             </Link>
                         </SidebarMenuButton>
@@ -50,7 +35,7 @@ const AdminMovieSidebarGroup: FC = () => {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/admin/showings">
-                                <TableOfContents />
+                                <TableOfContents/>
                                 <span>Showings</span>
                             </Link>
                         </SidebarMenuButton>
@@ -60,6 +45,4 @@ const AdminMovieSidebarGroup: FC = () => {
             </SidebarGroupContent>
         </SidebarGroup>
     );
-};
-
-export default AdminMovieSidebarGroup;
+}

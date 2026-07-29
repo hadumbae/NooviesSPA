@@ -25,7 +25,7 @@ type CardProps = {
 };
 
 /** A card layout that displays a header with a navigation link and a list of child elements. */
-export function AdminUserDetailsListCard(
+export function CustomerDetailsListCard(
     {children, classNames, headerText, viewLink, viewText = "View All"}: CardProps
 ): ReactElement {
     return (

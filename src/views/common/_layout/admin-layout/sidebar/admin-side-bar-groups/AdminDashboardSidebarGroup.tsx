@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Sidebar group component for the admin dashboard navigation.
+ */
+
+import {ReactElement} from "react";
+import {Link} from "react-router-dom";
+import {TableOfContents} from "lucide-react";
 import {
     SidebarGroup,
     SidebarGroupContent,
@@ -5,18 +12,12 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem
-} from "@/views/common/_comp/ui/sidebar/sidebar.tsx";
-import {Link} from "react-router-dom";
-import {TableOfContents} from "lucide-react";
+} from "@/views/common/_comp/ui";
 
 /**
- * Admin dashboard sidebar group.
- *
- * @remarks
- * - Provides navigation entry for the admin dashboard
- * - Intended for use within {@link AdminSidebar}
+ * Sidebar group containing links to the admin dashboard and client pages.
  */
-const AdminDashboardSidebarGroup = () => {
+export function AdminDashboardSidebarGroup(): ReactElement {
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
@@ -26,7 +27,7 @@ const AdminDashboardSidebarGroup = () => {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/admin/dashboard">
-                                <TableOfContents />
+                                <TableOfContents/>
                                 <span>Dashboard</span>
                             </Link>
                         </SidebarMenuButton>
@@ -35,7 +36,7 @@ const AdminDashboardSidebarGroup = () => {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             <Link to="/">
-                                <TableOfContents />
+                                <TableOfContents/>
                                 <span>Client Pages</span>
                             </Link>
                         </SidebarMenuButton>
@@ -44,6 +45,4 @@ const AdminDashboardSidebarGroup = () => {
             </SidebarGroupContent>
         </SidebarGroup>
     );
-};
-
-export default AdminDashboardSidebarGroup;
+}

@@ -17,7 +17,7 @@ export async function getFetchCustomerReviewLogsViewData(
 ): Promise<FetchRequestReturns<CustomerReviewLogsViewData>> {
     const url = buildURL({
         baseURL: CustomerReviewLogsBaseURL,
-        path: `/profile-details/${customerID}/review/${reviewID}/logs`,
+        path: `/customer/${customerID}/review/${reviewID}/logs`,
         queries: pagination
     })
 

@@ -15,11 +15,11 @@ import {CustomerProfileViewData} from "@/domains/customers";
  * Fetches the complete profile view for a specific customer.
  */
 export function getFetchCustomerProfileViewData(
-    {customerCode}: GetFetchCustomerProfileViewDataConfig
+    {customerID}: GetFetchCustomerProfileViewDataConfig
 ): Promise<FetchRequestReturns<CustomerProfileViewData>> {
     const url = buildURL({
         baseURL: CustomerProfileOverviewBaseURL,
-        path: `/profile-details/${customerCode}`,
+        path: `/customer/${customerID}`,
     })
 
     return useFetchAPI({method: "GET", url})

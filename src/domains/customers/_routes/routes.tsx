@@ -8,6 +8,8 @@ import {CustomerReviewPage} from "@/views/admin/customers/_pages/customer-review
 import {CustomerProfilePage} from "@/views/admin/customers/_pages/customer-profile-page";
 import {CustomerReviewsPage} from "@/views/admin/customers/_pages/customer-reviews-page";
 import {CustomerReviewLogsPage} from "@/views/admin/customers/_pages/customer-review-logs-page";
+import {CustomerIndexPage} from "@/views/admin/customers/_pages/customer-index-page/page.tsx";
+import {CustomerIndexQueryOptionsContextProvider} from "@/domains/customers";
 
 export const AdminCustomerRoutes: RouteObject[] = [
     {
@@ -15,19 +17,27 @@ export const AdminCustomerRoutes: RouteObject[] = [
         element: <AdminLayout/>,
         children: [
             {
-                path: ':uniqueCode/profile',
+                path: '/admin/customers',
+                element: (
+                    <CustomerIndexQueryOptionsContextProvider>
+                        <CustomerIndexPage/>
+                    </CustomerIndexQueryOptionsContextProvider>
+                ),
+            },
+            {
+                path: '/admin/customers/:customerID',
                 element: <CustomerProfilePage/>
             },
             {
-                path: ':uniqueCode/reviews',
+                path: '/admin/customers/:customerID/reviews',
                 element: <CustomerReviewsPage/>
             },
             {
-                path: ':uniqueCode/reviews/:reviewCode',
+                path: '/admin/customers/:customerID/reviews/:reviewID',
                 element: <CustomerReviewPage/>
             },
             {
-                path: ':uniqueCode/reviews/:reviewCode/logs',
+                path: '/admin/customers/:customerID/reviews/:reviewID/logs',
                 element: <CustomerReviewLogsPage/>
             },
         ]

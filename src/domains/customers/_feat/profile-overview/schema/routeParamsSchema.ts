@@ -3,12 +3,10 @@
  */
 
 import {z} from "zod"
-import {UserUniqueCodeSchema} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts"
+import {ManageCustomerRouteParamsSchema} from "@/domains/customers/_feat/manage-customers";
 
 /** Validation schema for customer profile overview route parameters. */
-export const CustomerProfileOverviewRouteParamsSchema = z.object({
-    uniqueCode: UserUniqueCodeSchema,
-})
+export const CustomerProfileOverviewRouteParamsSchema = ManageCustomerRouteParamsSchema.extend({});
 
 /** Route parameters for the customer profile overview. */
 export type CustomerProfileOverviewRouteParams = z.infer<typeof CustomerProfileOverviewRouteParamsSchema>

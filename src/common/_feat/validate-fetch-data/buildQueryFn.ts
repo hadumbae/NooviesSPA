@@ -29,6 +29,8 @@ export function buildQueryFn<TData>(
     return async (): Promise<TData> => {
         const {result} = await action();
 
+        console.log("Returned Data: ", result);
+
         const {data, success, error} = validateData({
             data: result,
             schema,

@@ -13,16 +13,20 @@ import {
     BreadcrumbSeparator
 } from "@/views/common/_comp/ui/breadcrumb.tsx"
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx"
+import {ObjectId} from "@/common/_schemas";
 
 /** Props for the CustomerReviewLogsPageBreadcrumbs component. */
 type BreadcrumbsProps = {
+    customerName: string;
+    customerID: ObjectId;
     customerCode: UserUniqueCode
+    reviewID: ObjectId;
     reviewCode: MovieReviewUniqueCode
 }
 
 /** Breadcrumb trail for navigating from a customer profile to specific review logs. */
 export function CustomerReviewLogsPageBreadcrumbs(
-    {customerCode, reviewCode}: BreadcrumbsProps
+    {customerID, customerName, customerCode, reviewID, reviewCode}: BreadcrumbsProps
 ): ReactElement {
     return (
         <nav aria-label="Breadcrumb">
@@ -31,18 +35,29 @@ export function CustomerReviewLogsPageBreadcrumbs(
                     <BreadcrumbItem>
                         <LoggedLink
                             className="breadcrumb-link"
-                            to={`/admin/customers/${customerCode}/profile`}
+                            to={`/admin/customers`}
                         >
-                            Customer Profile
+                            Customers
                         </LoggedLink>
                     </BreadcrumbItem>
 
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
 
                     <BreadcrumbItem>
                         <LoggedLink
                             className="breadcrumb-link"
-                            to={`/admin/customers/${customerCode}/reviews`}
+                            to={`/admin/customers/${customerID}`}
+                        >
+                            {customerName} • {customerCode}
+                        </LoggedLink>
+                    </BreadcrumbItem>
+
+                    <BreadcrumbSeparator/>
+
+                    <BreadcrumbItem>
+                        <LoggedLink
+                            className="breadcrumb-link"
+                            to={`/admin/customers/${customerID}/reviews`}
                         >
                             Reviews
                         </LoggedLink>
@@ -53,9 +68,9 @@ export function CustomerReviewLogsPageBreadcrumbs(
                     <BreadcrumbItem>
                         <LoggedLink
                             className="breadcrumb-link"
-                            to={`/admin/customers/${customerCode}/reviews/${reviewCode}`}
+                            to={`/admin/customers/${customerID}/reviews/${reviewID}`}
                         >
-                            Review {reviewCode}
+                            {reviewCode}
                         </LoggedLink>
                     </BreadcrumbItem>
 

@@ -1,14 +1,5 @@
-import {
-    CustomerProfileReservationSection
-} from "@/views/admin/customers/_pages/customer-profile-page/sections/CustomerProfileReservationSection.tsx";
-import {
-    CustomerProfileReviewSection
-} from "@/views/admin/customers/_pages/customer-profile-page/sections/CustomerProfileReviewSection.tsx";
-import {CustomerProfilePageHeader} from "@/views/admin/customers/_pages/customer-profile-page/sections/header.tsx";
-
-export {
-    CustomerProfileReservationSection,
-    CustomerProfileReviewSection,
-    CustomerProfilePageHeader,
-}
+export * from "@/views/admin/customers/_pages/customer-profile-page/sections/CustomerProfileReservationSection.tsx";
+export * from "@/views/admin/customers/_pages/customer-profile-page/sections/CustomerProfileReviewSection.tsx";
+export * from "@/views/admin/customers/_pages/customer-profile-page/sections/breadcrumbs.tsx";
+export * from "@/views/admin/customers/_pages/customer-profile-page/sections/details.tsx";
 

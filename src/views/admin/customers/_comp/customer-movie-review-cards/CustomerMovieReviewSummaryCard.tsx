@@ -7,20 +7,20 @@ import {CustomerMovieReviewSummary} from "@/domains/movie-reviews/_schema/custom
 import {MovieReviewRatingStars} from "@/views/client/movie-reviews/_comp/display/MovieReviewRatingStars.tsx";
 import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
-import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {IsRecommendedCheck} from "@/views/client/movie-reviews/_comp/badges/IsRecommendedCheck.tsx";
 import {ReactElement} from "react";
+import {ObjectId} from "@/common/_schemas";
 
 /** Props for the CustomerMovieReviewSummaryCard component. */
 type CardProps = {
-    code: UserUniqueCode;
+    customerID: ObjectId;
     review: CustomerMovieReviewSummary;
 };
 
 /** A compact card component that displays a high-level overview of a specific movie review. */
 export function CustomerMovieReviewSummaryCard(
-    {code, review}: CardProps
+    {customerID, review}: CardProps
 ): ReactElement {
     const {
         rating,
@@ -28,8 +28,8 @@ export function CustomerMovieReviewSummaryCard(
         reviewText,
         isRecommended,
         helpfulCount,
+        _id: reviewID,
         movie: {title, releaseDate},
-        uniqueCode: reviewCode,
         createdAt,
     } = review;
 
@@ -65,7 +65,7 @@ export function CustomerMovieReviewSummaryCard(
                     <span className="inline-flex items-center gap-2">
                         Likes • {helpfulCount} | {dateWritten}
                     </span>
-                    <LoggedLink to={`/admin/customers/${code}/reviews/${reviewCode}`}>
+                    <LoggedLink to={`/admin/customers/${customerID}/reviews/${reviewID}`}>
                         <Button size="sm" variant="outline" className="h-7 px-2 text-xs">
                             Go To Details
                         </Button>

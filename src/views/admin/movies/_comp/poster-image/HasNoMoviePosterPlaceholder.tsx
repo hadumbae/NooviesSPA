@@ -7,27 +7,18 @@ import {ImageOff} from "lucide-react";
 /** Props for the HasNoMoviePosterPlaceholder component. */
 type PlaceholderProps = {
     className?: string;
-    hasError?: boolean;
 };
 
 /** Renders a styled grey box with a film icon to indicate the absence of a movie poster. */
 export function HasNoMoviePosterPlaceholder(
-    {className, hasError}: PlaceholderProps
+    {className}: PlaceholderProps
 ): ReactElement {
     return (
         <div className={cn(
-            "flex flex-col items-center justify-center bg-gray-600 rounded-md",
+            "aspect-[2/3] flex justify-center items-center rounded-md bg-gray-600",
             className
         )}>
             <ImageOff className="text-gray-400"/>
-
-            {
-                hasError && (
-                    <span className="primary-text italic text-sm">
-                        Failed To Fetch Image
-                    </span>
-                )
-            }
         </div>
     );
 }

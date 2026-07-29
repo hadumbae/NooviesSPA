@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Dropdown navigation menu for administrative setup and movie management links.
+ */
+
 import {ReactElement} from 'react';
 import {
     DropdownMenu,
@@ -12,7 +16,7 @@ import {DropdownMenuLink} from "@/views/common/_feat/navigation/DropdownMenuLink
 import {NavigationDropdownButton} from "@/views/common/_comp/buttons/NavigationDropdownButton.tsx";
 
 /**
- * A navigational dropdown providing centralised access to core system entities and catalogs.
+ * Navigation dropdown component for the admin layout providing access to setup entities and movies.
  */
 export function AdminLayoutSetupNavigationDropdown(): ReactElement {
     const url = useCurrentURLPath();

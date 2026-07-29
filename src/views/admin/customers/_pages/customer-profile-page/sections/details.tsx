@@ -1,37 +1,37 @@
 /**
- * @fileoverview Section component for displaying customer-specific data in the user details page.
+ * @fileoverview Details section for the customer profile page displaying reviews and reservations.
  */
 
 import {ReactElement} from "react";
 import {PageSectionHeader} from "@/views/common/_comp";
-import {
-    AdminUserDetailsListCard,
-    AdminUserReservationListSummaryItem,
-    AdminUserReviewListSummaryItem
-} from "@/views/admin/users/_comp";
 import {PopulatedMovieReview} from "@/domains/movie-reviews";
-import {PopulatedReservation} from "@/domains/reservations";
+import {Reservation} from "@/domains/reservations";
 import {ObjectId} from "@/common/_schemas";
 import {Separator} from "@/views/common/_comp/ui";
 import {Link} from "react-router-dom";
+import {
+    CustomerDetailsListCard,
+    CustomerReservationListSummaryItem,
+    CustomerReviewListSummaryItem
+} from "@/views/admin/customers";
 
-/** Props for the UserDetailsPageCustomerSection component. */
+/** Props for the CustomerProfileDetailsSection component. */
 type SectionProps = {
-    userID: ObjectId;
+    customerID: ObjectId;
     reviews: PopulatedMovieReview[];
-    reservations: PopulatedReservation[];
+    reservations: Reservation[];
     totalReviews: number;
     totalReservations: number;
 };
 
-/** Displays a summary of a customer's reviews and reservations with links to detailed lists. */
-export function UserDetailsPageCustomerSection(
-    {userID, reservations, reviews, totalReviews, totalReservations}: SectionProps
+/** Displays summary lists of a customer's recent reviews and reservations. */
+export function CustomerProfileDetailsSection(
+    {customerID, reservations, reviews, totalReviews, totalReservations}: SectionProps
 ): ReactElement {
     const reviewItems = reviews.reduce((acc, cur, i) => {
         const element = (
-            <Link key={cur._id} to={`/admin/users/${userID}/reviews/${cur._id}`}>
-                <AdminUserReviewListSummaryItem
+            <Link key={cur._id} to={`/admin/users/${customerID}/reviews/${cur._id}`}>
+                <CustomerReviewListSummaryItem
                     classNames={{container: "rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-950"}}
                     review={cur}
                 />
@@ -44,8 +44,8 @@ export function UserDetailsPageCustomerSection(
 
     const reservationItems = reservations.reduce((acc, cur, i) => {
         const element = (
-            <Link key={cur._id} to={`/admin/users/${userID}/reservations/${cur._id}`}>
-                <AdminUserReservationListSummaryItem
+            <Link key={cur._id} to={`/admin/users/${customerID}/reservations/${cur._id}`}>
+                <CustomerReservationListSummaryItem
                     classNames={{container: "rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-950"}}
                     reservation={cur}
                 />
@@ -61,19 +61,19 @@ export function UserDetailsPageCustomerSection(
             <PageSectionHeader as="h2" text="Customer Details"/>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <AdminUserDetailsListCard
+                <CustomerDetailsListCard
                     headerText={`Reviews (${totalReviews})`}
-                    viewLink={`/admin/users/${userID}/reviews`}
+                    viewLink={`/admin/customers/${customerID}/reviews`}
                 >
                     {reviewItems}
-                </AdminUserDetailsListCard>
+                </CustomerDetailsListCard>
 
-                <AdminUserDetailsListCard
+                <CustomerDetailsListCard
                     headerText={`Reservations (${totalReservations})`}
-                    viewLink={`/admin/users/${userID}/reservations`}
+                    viewLink={`/admin/customers/${customerID}/reservations`}
                 >
                     {reservationItems}
-                </AdminUserDetailsListCard>
+                </CustomerDetailsListCard>
             </div>
         </section>
     );

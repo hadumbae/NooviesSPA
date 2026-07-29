@@ -15,7 +15,7 @@ type StatItemProps = {
 };
 
 /** Displays a label and an associated icon within a description list layout. */
-export function StatItem({text, icon: Icon, iconSize, srLabel}: StatItemProps): ReactElement {
+export function StatIconItem({text, icon: Icon, iconSize, srLabel}: StatItemProps): ReactElement {
     return (
         <dl className="flex items-center gap-2">
             {srLabel && <SROnly text={srLabel}/>}
