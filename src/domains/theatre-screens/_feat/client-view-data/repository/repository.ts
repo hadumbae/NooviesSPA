@@ -7,7 +7,7 @@ import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.t
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 
 import {TheatreScreenSchedule} from "@/domains/theatre-screens/_schema";
-import {ScreenBrowseBaseURL} from "@/domains/theatre-screens/_feat/client-view-data/repository/baseURL.ts";
+import {TheatreScreenClientViewBaseURL} from "@/domains/theatre-screens/_feat/client-view-data/repository/baseURL.ts";
 import {
     FetchScreensWithShowingsConfig
 } from "@/domains/theatre-screens/_feat/client-view-data/repository/repository.types.ts";
@@ -19,7 +19,7 @@ export function fetchScreensWithShowings(
     {theatreID, localDate}: FetchScreensWithShowingsConfig
 ): Promise<FetchRequestReturns<TheatreScreenSchedule[]>> {
     const url = buildURL({
-        baseURL: ScreenBrowseBaseURL,
+        baseURL: TheatreScreenClientViewBaseURL,
         path: `/showings-by-screen/theatre/${theatreID}/date/${localDate}`,
     });
 

@@ -3,4 +3,4 @@
  */
 
 /** The base API path for profile-related favorite operations. */
-export const ManageUserFavouritesBaseURL = "/api/v1/profile";
+export const ManageUserFavouritesBaseURL = "/api/v1/client/users/feat/my-favourites";

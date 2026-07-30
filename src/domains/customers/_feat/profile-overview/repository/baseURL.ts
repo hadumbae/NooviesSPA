@@ -3,4 +3,4 @@
  */
 
 /** The base API endpoint for fetching customer profile overview data. */
-export const CustomerProfileOverviewBaseURL = "/api/v1/admin/customers/view-data";
+export const CustomerProfileOverviewBaseURL = "/api/v1/views/desktop/admin/customers";

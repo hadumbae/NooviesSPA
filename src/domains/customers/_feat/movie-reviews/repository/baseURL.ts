@@ -3,4 +3,4 @@
  */
 
 /** The base API endpoint for managing customer movie review data. */
-export const ManageCustomerMovieReviewsBaseURL = "/api/v1/admin/customers/view-data";
+export const ManageCustomerMovieReviewsBaseURL = "/api/v1/views/desktop/admin/customers";

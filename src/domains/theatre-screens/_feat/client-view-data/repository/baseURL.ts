@@ -3,4 +3,4 @@
  */
 
 /** Base URL for the screen browse API endpoint. */
-export const ScreenBrowseBaseURL = "/api/v1/browse/screens";
+export const TheatreScreenClientViewBaseURL = "/api/v1/views/desktop/client/theatre-screens";

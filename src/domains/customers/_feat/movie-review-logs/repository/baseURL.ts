@@ -3,4 +3,4 @@
  */
 
 /** The base API path for fetching customer review log data. */
-export const CustomerReviewLogsBaseURL = `/api/v1/admin/customers/view-data`;
+export const CustomerReviewLogsBaseURL = `/api/v1/views/desktop/admin/customers`;

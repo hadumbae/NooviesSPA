@@ -3,4 +3,4 @@
  */
 
 /** The base endpoint for managing the current user's reviews. */
-export const ManageMyReviewsBaseURL = "/api/v1/user/reviews";
+export const ManageMyReviewsBaseURL = "/api/v1/client/users/feat/my-reviews";
