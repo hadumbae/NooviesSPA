@@ -3,15 +3,18 @@
  */
 
 import {ReactElement} from "react";
-import {cn} from "@/common/_feat";
-import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
+import {cn, FormFieldsetProps} from "@/common/_feat";
 import {SeatFormValues, useBuildSeatFormRenderFields} from "@/domains/seats";
+
+type ViewProps = FormFieldsetProps<SeatFormValues> & {
+    isNestedView?: boolean;
+}
 
 /**
  * Renders the structural layout of the seat form, including conditional fieldsets and submission controls.
  */
 export function SeatSubmitFormView(
-    {disableFields, className, isNestedView}: Omit<FormViewProps<SeatFormValues>, "children">
+    {disableFields, className, isNestedView}: ViewProps
 ): ReactElement {
     const renderedFields = useBuildSeatFormRenderFields({disableFields, isNestedView});
 

@@ -9,7 +9,7 @@ import {CustomerProfilePage} from "@/views/admin/customers/_pages/customer-profi
 import {CustomerReviewsPage} from "@/views/admin/customers/_pages/customer-reviews-page";
 import {CustomerReviewLogsPage} from "@/views/admin/customers/_pages/customer-review-logs-page";
 import {CustomerIndexPage} from "@/views/admin/customers/_pages/customer-index-page/page.tsx";
-import {CustomerIndexQueryOptionsContextProvider} from "@/domains/customers";
+import {CustomerIndexQueryOptionsContextProvider} from "@/domains/customers/_ctx/CustomerIndexQueryOptionsContext.ts";
 
 export const AdminCustomerRoutes: RouteObject[] = [
     {

@@ -16,6 +16,7 @@ export function useUserIndexQueryOptionFormDefaultValues(
         name: "",
         email: "",
         uniqueCode: "",
+        roles: [],
         sortByName: "",
         sortByEmail: "",
         sortByUniqueCode: "",

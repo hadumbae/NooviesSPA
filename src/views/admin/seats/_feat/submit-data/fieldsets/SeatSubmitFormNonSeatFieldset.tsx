@@ -10,9 +10,13 @@ import {HookFormInput} from "@/views/common/_feat";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {SeatFormValues} from "@/domains/seats";
 
+type ViewProps = FormFieldsetProps<SeatFormValues> & {
+    isNestedView?: boolean;
+}
+
 /** Renders the non-seat fieldset containing row and coordinate inputs. */
 export function SeatSubmitFormNonSeatFieldset(
-    {disableFields, isNestedView, className}: FormFieldsetProps<SeatFormValues>
+    {disableFields, isNestedView, className}: ViewProps
 ): ReactElement {
     const {control} = useFormContext();
 

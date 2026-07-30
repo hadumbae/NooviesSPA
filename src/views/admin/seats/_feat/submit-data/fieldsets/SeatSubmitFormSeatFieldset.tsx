@@ -6,16 +6,18 @@ import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
 import {cn} from "@/common/_feat";
 import {Separator} from "@/views/common/_comp/ui";
-import {HookFormInput} from "@/views/common/_feat";
-import {HookFormCheckbox} from "@/views/common/_feat";
+import {HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {SeatTypeHookFormSelect} from "@/views/admin/seats/_feat/form-inputs";
 import {SeatFormValues} from "@/domains/seats";
 
+type ViewProps = FormFieldsetProps<SeatFormValues> & {
+    isNestedView?: boolean;
+}
 
 /** Renders seat metadata fields such as type, price modifier, and availability status. */
 export function SeatSubmitFormSeatFieldset(
-    {disableFields, isNestedView, className}: FormFieldsetProps<SeatFormValues>,
+    {disableFields, isNestedView, className}: ViewProps,
 ): ReactElement {
     const {control} = useFormContext();
 

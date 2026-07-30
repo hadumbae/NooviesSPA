@@ -1,7 +1,2 @@
-import {
-    QueryOptionsFormCollapsible
-} from "@/views/common/_feat/query-options-form/QueryOptionsFormCollapsible.tsx";
-
-export {
-    QueryOptionsFormCollapsible,
-}
+export * from "@/views/common/_feat/query-options-form/QueryOptionsFormCollapsible.tsx";
+export * from "@/views/common/_feat/query-options-form/QueryOptionsFormLayout.tsx";

@@ -11,9 +11,13 @@ import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {TheatreHookFormSelect} from "@/views/admin/theatres/_feat";
 import {SeatFormValues} from "@/domains/seats";
 
+type ViewProps = FormFieldsetProps<SeatFormValues> & {
+    isNestedView?: boolean;
+}
+
 /** Renders the theatre and screen selection fields, ensuring the screen resets when the theatre changes. */
 export function SeatSubmitFormDetailsFieldset(
-    {className, disableFields, isNestedView}: FormFieldsetProps<SeatFormValues>
+    {className, disableFields, isNestedView}: ViewProps
 ): ReactElement {
     const {control, watch, resetField} = useFormContext();
 

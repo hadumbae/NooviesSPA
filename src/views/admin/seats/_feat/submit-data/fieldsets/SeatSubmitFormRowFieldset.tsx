@@ -10,9 +10,13 @@ import {HookFormInput} from "@/views/common/_feat";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {SeatFormValues} from "@/domains/seats";
 
+type ViewProps = FormViewProps<SeatFormValues> & {
+    isNestedView?: boolean;
+}
+
 /** Renders inputs for Row, Seat Number, and Seat Label, adapting the grid layout based on the display context. */
 export function SeatSubmitFormRowFieldset(
-    {disableFields, isNestedView, className}: FormViewProps<SeatFormValues>
+    {disableFields, isNestedView, className}: ViewProps
 ): ReactElement {
     const {control} = useFormContext();
 

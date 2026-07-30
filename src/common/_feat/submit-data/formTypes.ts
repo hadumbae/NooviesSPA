@@ -8,7 +8,6 @@ import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/su
 import {ReactNode} from "react";
 import {DisableFields} from "@/common/_types";
 
-
 /** Configuration for initial form values and entity data. */
 export type FormValuesConfig<TFormValues extends FieldValues, TEntity = unknown> = {
     presetValues?: Partial<TFormValues>;
@@ -46,7 +45,6 @@ export type FormViewProps<TFormValues extends FieldValues> = {
 
 /** Props for form fieldset components. */
 export type FormFieldsetProps<TFormValues extends FieldValues> = {
-    isNestedView?: boolean;
     disableFields?: DisableFields<TFormValues>;
     className?: string;
 };

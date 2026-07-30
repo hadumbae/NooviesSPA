@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Admin page component for displaying and managing a paginated list of users.
+ */
+
 import {ReactElement} from "react";
 import {generatePaginationSchema, useParsedPaginationValue, useTitle} from "@/common/_feat";
 import {useFetchPaginatedUsers, UserDetailsSchema} from "@/domains/users";
@@ -7,6 +11,10 @@ import {CustomerIndexPageContent} from "@/views/admin/customers/_pages/customer-
 
 const CUSTOMERS_PER_PAGE = 20;
 
+/**
+ * Main page component for the customer index view that handles data fetching and pagination state.
+ * Requires CustomerIndexQueryOptionsContext.
+ */
 export function CustomerIndexPage(): ReactElement {
     useTitle("User Index");
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
