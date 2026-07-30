@@ -37,6 +37,7 @@ const ReservationBasePaymentSchema = z.object({
 /** Zod schema for relational references and immutable data snapshots. */
 const ReservationBaseRelatedSchema = z.object({
     user: IDStringSchema,
+    movie: IDStringSchema,
     showing: IDStringSchema,
     snapshot: ReservedShowingSnapshotSchema,
 });
