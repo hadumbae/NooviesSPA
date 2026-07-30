@@ -4,7 +4,7 @@
     }
 
     .hover-link-text {
-        @apply transition-colors text-neutral-400 hover:text-black font-bold;
+        @apply transition-colors text-neutral-400 hover:text-black dark:hover:text-neutral-700 font-bold;
     }
 
     .hover-link-underline {

@@ -43,7 +43,9 @@ export function CustomerIndexCard(
                     <div className="flex flex-wrap items-center space-x-2">
                         <StatNumberItem text="Reviews" count={reviewCount}/>
                         <StatNumberItem text="Reservations" count={reservationCount}/>
-                        <StatNumberItem text="Active" count={activeReservationCount}/>
+                        <StatNumberItem text="Active" count={activeReservationCount} classNames={{
+                            number: "text-yellow-700 dark:text-yellow-500"
+                        }}/>
                     </div>
 
                     <Link
