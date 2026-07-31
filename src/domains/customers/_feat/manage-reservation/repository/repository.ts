@@ -19,7 +19,7 @@ export function getFetchCustomerReservationViewData(
 ): Promise<FetchRequestReturns<CustomerReservationViewData>> {
     const url = buildURL({
         baseURL: ManageCustomerReservationBaseURL,
-        path: `/customer/${customerID}/Reservation/${reservationID}`,
+        path: `/customer/${customerID}/reservations/${reservationID}`,
     });
 
     return useFetchAPI<CustomerReservationViewData>({method: "GET", url});

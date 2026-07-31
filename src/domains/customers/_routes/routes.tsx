@@ -10,6 +10,8 @@ import {CustomerReviewsPage} from "@/views/admin/customers/_pages/customer-revie
 import {CustomerReviewLogsPage} from "@/views/admin/customers/_pages/customer-review-logs-page";
 import {CustomerIndexPage} from "@/views/admin/customers/_pages/customer-index-page/page.tsx";
 import {CustomerIndexQueryOptionsContextProvider} from "@/domains/customers/_ctx/CustomerIndexQueryOptionsContext.ts";
+import {CustomerReservationsPage} from "@/views/admin/customers/_pages/customer-reservations-page/page.tsx";
+import {CustomerReservationPage} from "@/views/admin/customers";
 
 export const AdminCustomerRoutes: RouteObject[] = [
     {
@@ -39,6 +41,14 @@ export const AdminCustomerRoutes: RouteObject[] = [
             {
                 path: '/admin/customers/:customerID/reviews/:reviewID/logs',
                 element: <CustomerReviewLogsPage/>
+            },
+            {
+                path: '/admin/customers/:customerID/reservations',
+                element: <CustomerReservationsPage/>
+            },
+            {
+                path: '/admin/customers/:customerID/reservations/:reservationID',
+                element: <CustomerReservationPage/>
             },
         ]
     }

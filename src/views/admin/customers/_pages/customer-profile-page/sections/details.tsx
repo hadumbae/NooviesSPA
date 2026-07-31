@@ -30,7 +30,7 @@ export function CustomerProfileDetailsSection(
 ): ReactElement {
     const reviewItems = reviews.reduce((acc, cur, i) => {
         const element = (
-            <Link key={cur._id} to={`/admin/users/${customerID}/reviews/${cur._id}`}>
+            <Link key={cur._id} to={`/admin/customers/${customerID}/reviews/${cur._id}`}>
                 <CustomerReviewListSummaryItem
                     classNames={{container: "rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-950"}}
                     review={cur}
@@ -44,7 +44,7 @@ export function CustomerProfileDetailsSection(
 
     const reservationItems = reservations.reduce((acc, cur, i) => {
         const element = (
-            <Link key={cur._id} to={`/admin/users/${customerID}/reservations/${cur._id}`}>
+            <Link key={cur._id} to={`/admin/customers/${customerID}/reservations/${cur._id}`}>
                 <CustomerReservationListSummaryItem
                     classNames={{container: "rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-950"}}
                     reservation={cur}

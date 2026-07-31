@@ -27,10 +27,7 @@ export function ReservationByCodePageContent(
             <ReservationByCodePageHeader/>
 
             <section className="flex justify-center">
-                <SetReservationCodeForm
-                    presetValues={{code: code ?? ""}}
-                    className="max-md:flex-1 lg:w-1/2"
-                >
+                <SetReservationCodeForm presetValues={{code: code ?? ""}} className="max-md:flex-1 lg:w-1/2">
                     <SetReservationCodeFormCard/>
                 </SetReservationCodeForm>
             </section>
@@ -38,16 +35,9 @@ export function ReservationByCodePageContent(
             <Separator/>
 
             {
-                reservation ? (
-                    <ReservationByCodeDataContent
-                        reservation={reservation}
-                    />
-                ) : (
-                    <EmptyArrayContainer
-                        text="Enter A Valid Code To Look Up Reservations"
-                        className="flex-1"
-                    />
-                )
+                reservation
+                    ? <ReservationByCodeDataContent reservation={reservation}/>
+                    : <EmptyArrayContainer text="Enter A Valid Code To Look Up Reservations" className="flex-1"/>
             }
         </PageFlexWrapper>
     );

@@ -1,27 +1,29 @@
 /**
- * @fileoverview UI section for displaying and managing administrative reservation notes.
+ * @fileoverview Layout section for displaying and updating internal administrative notes on a customer reservation.
  */
 
-import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
-import {ObjectId} from "@/common/_schemas";
-import {PageSectionHeader} from "@/views/common/_comp/page";
-import {Button} from "@/views/common/_comp/ui/button.tsx";
-import {Pencil} from "lucide-react";
 import {ReactElement, useState} from "react";
-import {ReservationNotesText} from "@/views/admin/reservations/_comp";
-import {UpdateReservationNotesForm, UpdateReservationNotesFormPopup} from "@/views/admin/reservations/_feat";
+import {EmptyArrayContainer, PageSectionHeader} from "@/views/common/_comp";
+import {
+    ReservationNotesText,
+    UpdateReservationNotesForm,
+    UpdateReservationNotesFormPopup
+} from "@/views/admin/reservations";
+import {Button} from "@/views/common/_comp/ui";
+import {Pencil} from "lucide-react";
+import {ObjectId} from "@/common/_schemas";
 
-/** Props for the ReservationByCodeNotesSection component. */
+/** Props for the AdminReservationNotesSection component. */
 type SectionProps = {
-    resID: ObjectId
+    reservationID: ObjectId;
     notes?: string | null;
 };
 
 /**
- * Layout section that displays persistent admin notes and provides a trigger for editing.
+ * Renders the admin notes section, including the current text details and an interactive update form modal.
  */
-export function ReservationByCodeNotesSection(
-    {resID, notes}: SectionProps
+export function AdminReservationNotesSection(
+    {reservationID, notes}: SectionProps
 ): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const closeOnSuccess = () => setIsOpen(false);
@@ -32,7 +34,7 @@ export function ReservationByCodeNotesSection(
                 <PageSectionHeader text="Admin Notes"/>
 
                 <UpdateReservationNotesForm
-                    reservationID={resID}
+                    reservationID={reservationID}
                     presetValues={{notes: notes ?? ""}}
                     onSubmitSuccess={closeOnSuccess}
                 >
@@ -47,7 +49,7 @@ export function ReservationByCodeNotesSection(
             {
                 notes
                     ? <ReservationNotesText text={notes}/>
-                    : <EmptyArrayContainer className="min-h-28" text="There Are No Notes"/>
+                    : <EmptyArrayContainer className="min-h-28 rounded-container-border" text="There Are No Notes"/>
             }
         </section>
     );

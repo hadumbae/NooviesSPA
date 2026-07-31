@@ -1,31 +1,32 @@
 /**
- * @fileoverview Layout section containing administrative action triggers for a reservation.
+ * @fileoverview Layout section for administrative management controls and actions on a customer reservation.
  */
 
-import {PageSectionHeader} from "@/views/common/_comp/page";
-import {AdminReservation} from "@/domains/reservations/_schema/model";
+import {ReactElement} from "react";
+import {cn} from "@/common/_feat";
+import {AdminReservation} from "@/domains/reservations";
+import {PageSectionHeader} from "@/views/common/_comp";
+import {ReservationStatusBadge} from "@/views/client/reservations";
 import {
     AdminReservationCancelAction,
     AdminReservationRefundAction,
     AdminReservationResetExpiryAction
-} from "@/views/admin/reservations/_feat";
-import {
-    ReservationStatusBadge
-} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
-import {cn} from "@/common/_feat";
-import {ReactElement} from "react";
+} from "@/views/admin/reservations";
 
-/** Props for the ReservationByCodeActionsSection component. */
+/** Props for the AdminReservationActionsSection component. */
 type SectionProps = {
     reservation: AdminReservation;
 };
 
-/** A dedicated interface section for high-level reservation management tasks. */
-export function ReservationByCodeActionsSection(
+/**
+ * Renders a suite of workflow action triggers such as cancellation, refunds, and expiry adjustments for a reservation.
+ */
+export function AdminReservationActionsSection(
     {reservation}: SectionProps
 ): ReactElement {
     const {uniqueCode, isPaid, status} = reservation;
     const hasNoActions = status === "EXPIRED" || (status === "CANCELLED" && !isPaid) || status === "REFUNDED";
+
 
     return (
         <section className="space-y-4">

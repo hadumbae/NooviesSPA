@@ -6,8 +6,7 @@ import {ReactElement, ReactNode} from "react";
 import {cn, convertToTitleCase} from "@/common/_feat";
 import {LoggedLink} from "@/views/common/_feat";
 import {LabelContent} from "@/views/common/_comp";
-import {UserUniqueCode} from "@/domains/users";
-import {Reservation} from "@/domains/reservations";
+import {AdminReservation} from "@/domains/reservations";
 import {ReservationStatusBadge} from "@/views/client/reservations/_comp";
 import {
     Button,
@@ -22,25 +21,26 @@ import {
 /** Props for the CustomerReservationDialog component. */
 type DialogProps = {
     children?: ReactNode;
-    code: UserUniqueCode;
     isOpen: boolean;
     setIsOpen: (open: boolean) => void;
-    reservation: Reservation;
+    reservation: AdminReservation;
 };
 
 /**
  * Detailed overlay for auditing specific reservation metrics and metadata.
  */
 export function CustomerReservationDialog(
-    {children, code, reservation, isOpen, setIsOpen}: DialogProps
+    {children, reservation, isOpen, setIsOpen}: DialogProps
 ): ReactElement {
     const {
-        uniqueCode,
+        _id: reservationID,
         dateReserved,
         status,
         ticketCount,
         pricePaid,
         currency,
+        uniqueCode: reservationCode,
+        user: {_id: userID, uniqueCode: userCode},
         snapshot: {
             startTime,
             isSpecialEvent,
@@ -60,7 +60,7 @@ export function CustomerReservationDialog(
             </DialogTrigger>
             <DialogContent className="flex flex-col">
                 <DialogHeader>
-                    <DialogTitle className="primary-text">{uniqueCode}</DialogTitle>
+                    <DialogTitle className="primary-text">{reservationCode}</DialogTitle>
                     <DialogDescription>Reserved on {reservationDate} (UTC)</DialogDescription>
                 </DialogHeader>
 
@@ -78,9 +78,9 @@ export function CustomerReservationDialog(
                         }
 
                         <LabelContent label="Type">
-                            <LoggedLink to={`/admin/customers/${code}/profile`}>
+                            <LoggedLink to={`/admin/customers/${userCode}/profile`}>
                                 <span className="hover:underline hover:underline-offset-8">
-                                    {code}
+                                    {userCode}
                                 </span>
                             </LoggedLink>
                         </LabelContent>
@@ -122,7 +122,7 @@ export function CustomerReservationDialog(
                         </div>
 
                         <div className="pt-2">
-                            <LoggedLink to={`/admin/reservations/fetch/by-unique-code?code=${uniqueCode}`}>
+                            <LoggedLink to={`/admin/customers/${userID}/reservations/${reservationID}`}>
                                 <Button variant="outline" size="sm">
                                     Go To Reservation Details
                                 </Button>

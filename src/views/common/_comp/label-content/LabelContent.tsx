@@ -34,7 +34,7 @@ export function LabelContent(
                 {label}
             </span>
 
-            <div className={cn("flex-1", classNames?.content)}>
+            <div className={cn("primary-text flex-1", classNames?.content)}>
                 {children}
             </div>
         </div>
