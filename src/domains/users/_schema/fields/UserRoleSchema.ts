@@ -3,14 +3,14 @@
  */
 
 import {z} from "zod";
-import {UserRoleConstant} from "@/domains/users/_schema/fields/UserRoleConstant.ts";
 import {ZodEnumParamHandler} from "@/common/_feat";
+import {UserRoleConstant} from "src/domains/users/_const";
 
 /** Zod schema for validating user roles against predefined constants. */
-export const UserRoleEnumSchema = z.enum(UserRoleConstant, ZodEnumParamHandler({
+export const UserRoleSchema = z.enum(UserRoleConstant, ZodEnumParamHandler({
     invalidValue: "Must be a valid user role.",
     invalidType: "Must be a valid user role string.",
 }));
 
 /** Type representing a valid user role string. */
-export type UserRole = z.infer<typeof UserRoleEnumSchema>;
+export type UserRole = z.infer<typeof UserRoleSchema>;

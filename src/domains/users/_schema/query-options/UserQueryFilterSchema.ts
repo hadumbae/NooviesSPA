@@ -5,14 +5,14 @@
 import {z} from "zod";
 import {generateArraySchema, preprocessOptionalField} from "@/common/_feat";
 import {UserEmailSchema, UserPersonalNameSchema} from "@/domains/auth";
-import {UserRoleEnumSchema, UserUniqueCodeSchema} from "@/domains/users";
+import {UserRoleSchema, UserUniqueCodeSchema} from "@/domains/users";
 
 /** Zod schema for validating user search and filter parameters. */
 export const UserQueryFilterSchema = z.object({
     name: preprocessOptionalField(UserPersonalNameSchema),
     email: preprocessOptionalField(UserEmailSchema),
     uniqueCode: preprocessOptionalField(UserUniqueCodeSchema),
-    roles: preprocessOptionalField(generateArraySchema(UserRoleEnumSchema)),
+    roles: preprocessOptionalField(generateArraySchema(UserRoleSchema)),
 });
 
 /** Type definition for user query filters derived from the schema. */
