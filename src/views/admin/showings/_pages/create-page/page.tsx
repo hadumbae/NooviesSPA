@@ -29,7 +29,10 @@ export function ShowingCreatePage(): ReactElement {
 
             <Card>
                 <CardContent className="p-3">
-                    <ShowingSubmitForm onSubmitConfig={{onSubmitSuccess: onShowingCreated}}>
+                    <ShowingSubmitForm
+                        onSubmitSuccess={onShowingCreated}
+                        resetOnSuccess={true}
+                    >
                         <ShowingSubmitFormView/>
                     </ShowingSubmitForm>
                 </CardContent>

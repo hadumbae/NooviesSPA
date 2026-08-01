@@ -44,7 +44,11 @@ export function TheatreShowingCreatePageContent(
 
             <Card>
                 <CardContent className="p-3">
-                    <ShowingSubmitForm onSubmitConfig={{onSubmitSuccess: onSubmit}} presetValues={{theatre: theatreID}}>
+                    <ShowingSubmitForm
+                        presetValues={{theatre: theatreID}}
+                        onSubmitSuccess={onSubmit}
+                        resetOnSuccess={true}
+                    >
                         <ShowingSubmitFormView disableFields={{theatre: true}}/>
                     </ShowingSubmitForm>
                 </CardContent>

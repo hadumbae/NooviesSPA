@@ -27,11 +27,8 @@ export function ShowingEditPageContent(
         screen: {name: screenName},
         theatre: {name: theatreName, location: {timezone}},
     } = showing;
-    const simplifiedShowing = simplifyShowingDetails(showing);
 
-    const submitConfig = {
-        onSubmitSuccess: (updated: ShowingDetails) => navigate({slug: updated.slug}),
-    };
+    const simplifiedShowing = simplifyShowingDetails(showing);
 
     return (
         <PageFlexWrapper>
@@ -44,9 +41,9 @@ export function ShowingEditPageContent(
             <Card>
                 <CardContent className="p-3">
                     <ShowingSubmitForm
+                        onSubmitSuccess={(updated: ShowingDetails) => navigate({slug: updated.slug})}
                         showing={simplifiedShowing}
                         theatreTimezone={timezone}
-                        onSubmitConfig={submitConfig}
                     >
                         <ShowingSubmitFormView/>
                     </ShowingSubmitForm>
