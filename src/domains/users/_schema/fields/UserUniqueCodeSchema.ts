@@ -2,8 +2,8 @@
  * @fileoverview Zod schema and type for standardized user identification codes.
  */
 
-import {StringValueSchema} from "@/common/_schemas";
 import {z} from "zod";
+import {StringValueSchema} from "@/common/_schemas";
 
 /** Validation schema for unique user identification codes. */
 export const UserUniqueCodeSchema = StringValueSchema.regex(

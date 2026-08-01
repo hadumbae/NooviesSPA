@@ -1,5 +1,9 @@
+/**
+ * @fileoverview Card component for rendering a customer entry within the administrative index directory.
+ */
+
 import {ReactElement} from "react";
-import {UserDetails} from "@/domains/users";
+import {UserDetails} from "@/domains/users/_schema/user";
 import {cn} from "@/common/_feat";
 import {buttonVariants, Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {Link} from "react-router-dom";
@@ -7,16 +11,21 @@ import {Search} from "lucide-react";
 import {CustomerUniqueCodeDisplay} from "@/views/admin/customers";
 import {StatNumberItem} from "@/views/common/_comp";
 
+/** Defines the optional custom class names for the card components. */
 type CardClassNames = {
     card?: string;
     content?: string;
 };
 
+/** Props for the CustomerIndexCard component. */
 type CardProps = {
     customer: UserDetails;
     classNames?: CardClassNames;
 };
 
+/**
+ * Renders an administrative summary card displaying user metadata, identification metrics, and account statistic counts.
+ */
 export function CustomerIndexCard(
     {customer, classNames}: CardProps
 ): ReactElement {

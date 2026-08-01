@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {PageFlexWrapper, PageHeader} from "@/views/common/_comp";
-import {User} from "@/domains/users";
+import {User} from "@/domains/users/_schema/user";
 import {AdminUserDetailsCard} from "@/views/admin/users/_comp";
 import {useTitle} from "@/common/_feat";
 import {UserDetailsPageBreadcrumbs} from "@/views/admin/users/pages";

@@ -2,9 +2,9 @@
  * @fileoverview Defines the schema and type for user moderation log actions.
  */
 
-import {UserModerationLogActionConstant} from "@/domains/users";
-import {ZodEnumParamHandler} from "@/common/_feat";
 import {z} from "zod";
+import {ZodEnumParamHandler} from "@/common/_feat";
+import {UserModerationLogActionConstant} from "@/domains/users/_const";
 
 /** Zod schema for validating user moderation log action codes. */
 export const UserModerationLogActionSchema = z.enum(UserModerationLogActionConstant, ZodEnumParamHandler({

@@ -3,8 +3,8 @@
  */
 
 import {z} from "zod";
-import {UserStatusConstant} from "@/domains/users/_const";
 import {ZodEnumParamHandler} from "@/common/_feat";
+import {UserStatusConstant} from "@/domains/users/_const";
 
 /** Zod schema validating that a string matches a recognised user status with parameterised error custom handlers. */
 export const UserStatusSchema = z.enum(UserStatusConstant, ZodEnumParamHandler({

@@ -3,8 +3,9 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema, ISO8601DateTimeSchema, ModerationLogMessageSchema} from "@/common/_schemas";
+import {ISO8601DateTimeSchema} from "@/common/_schemas/iso-8601";
 import {UserModerationLogActionSchema} from "@/domains/users/_schema/fields";
+import {IDStringSchema, ModerationLogMessageSchema} from "@/common/_schemas/strings";
 
 /** Zod schema for validating a user moderation log entry reference. */
 export const UserModerationLogReferenceSchema = z.object({

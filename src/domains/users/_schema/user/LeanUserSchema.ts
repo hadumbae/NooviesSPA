@@ -6,7 +6,7 @@ import {z} from "zod";
 import {IDStringSchema} from "@/common/_schemas/strings/id-strings/IDStringSchema";
 import {UserUniqueCodeSchema} from "@/domains/users/_schema/fields/UserUniqueCodeSchema";
 import {UserPersonalNameSchema} from "@/domains/auth";
-import {UserStatusSchema} from "@/domains/users";
+import {UserStatusSchema} from "@/domains/users/_schema/fields";
 
 /** Zod schema for identifying a user with minimal metadata. */
 export const LeanUserSchema = z.object({

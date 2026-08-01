@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {ZodEnumParamHandler} from "@/common/_feat";
-import {UserRoleConstant} from "src/domains/users/_const";
+import {UserRoleConstant} from "@/domains/users/_const/UserRoleConstant.ts";
 
 /** Zod schema for validating user roles against predefined constants. */
 export const UserRoleSchema = z.enum(UserRoleConstant, ZodEnumParamHandler({

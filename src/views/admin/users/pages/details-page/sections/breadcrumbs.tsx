@@ -2,6 +2,9 @@
  * @fileoverview Breadcrumb navigation component for the user details administrative page.
  */
 
+import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
+import {ReactElement} from "react";
+import {UserUniqueCode} from "@/domains/users";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -9,9 +12,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/views/common/_comp/ui";
-import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
-import {ReactElement} from "react";
-import {UserUniqueCode} from "@/domains/users";
 
 /** Props for the UserDetailsPageBreadcrumbs component. */
 type NavProps = {

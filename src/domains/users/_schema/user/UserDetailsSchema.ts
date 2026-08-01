@@ -3,8 +3,8 @@
  */
 
 import {z} from "zod";
-import {UserSchema} from "@/domains/users/_schema/user/UserSchema.ts";
 import {NonNegativeIntegerSchema} from "@/common/_schemas";
+import {UserSchema} from "@/domains/users/_schema/user/UserSchema.ts";
 
 /** Complete validation schema for the User entity including assigned roles. */
 export const UserDetailsSchema = UserSchema.extend({

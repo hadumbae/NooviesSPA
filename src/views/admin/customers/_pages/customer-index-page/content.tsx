@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {UserDetails} from "@/domains/users";
+import {UserDetails} from "@/domains/users/_schema/user";
 import {EmptyArrayContainer, PageFlexWrapper, PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {CustomerIndexCard} from "@/views/admin/customers/_comp/customer-index";
 import {CustomerIndexQueryOptionFormSection} from "@/views/admin/customers/_feat/query-option-forms";
