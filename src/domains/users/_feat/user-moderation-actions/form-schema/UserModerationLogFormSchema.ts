@@ -16,4 +16,5 @@ export const UserModerationLogFormSchema = z.object({
 /** TypeScript type inferred from the UserModerationLogFormSchema. */
 export type UserModerationLogFormData = z.infer<typeof UserModerationLogFormSchema>;
 
+/** TypeScript type representing relaxed or partial form input values derived from the data schema. */
 export type UserModerationLogFormValues = AnyValues<UserModerationLogFormData>;

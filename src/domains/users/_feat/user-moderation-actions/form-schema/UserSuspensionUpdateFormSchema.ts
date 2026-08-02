@@ -19,4 +19,5 @@ export const UserSuspensionUpdateFormSchema = UserModerationLogFormSchema.omit({
 /** TypeScript type inferred from the UserSuspensionUpdateFormSchema. */
 export type UserSuspensionUpdateFormData = z.infer<typeof UserSuspensionUpdateFormSchema>;
 
+/** TypeScript type representing relaxed or partial form input values derived from the data schema. */
 export type UserSuspensionUpdateFormValues = AnyValues<UserSuspensionUpdateFormData>;

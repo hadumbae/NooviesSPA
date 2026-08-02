@@ -21,4 +21,5 @@ export const UserRoleUpdateFormSchema = UserModerationLogFormSchema.omit({action
 /** TypeScript type inferred from the UserRoleUpdateFormSchema. */
 export type UserRoleUpdateFormData = z.infer<typeof UserRoleUpdateFormSchema>;
 
+/** TypeScript type representing relaxed or partial form input values derived from the data schema. */
 export type UserRoleUpdateFormValues = AnyValues<UserRoleUpdateFormData>;
