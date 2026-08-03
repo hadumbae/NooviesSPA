@@ -7,7 +7,7 @@ import {isEqual} from "lodash";
 import {ZodObject, ZodRawShape} from "zod";
 import {DefaultValues, FieldValues, useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {FormValuesConfig} from "@/common/_feat";
+import { FormValuesConfig } from "@/common/_feat/submit-data";
 
 /** Configuration parameters required by the form hook factory. */
 type FactoryConfig<TShape extends ZodRawShape, TFormValues extends FieldValues> = {

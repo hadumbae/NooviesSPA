@@ -2,55 +2,38 @@
  * @fileoverview Higher-order form factory providing schema validation, mutation management, and contextual form wrapper components.
  */
 
-import {ReactElement, ReactNode} from "react";
+import {ReactElement} from "react";
 import {ZodObject, ZodRawShape} from "zod";
 import {FieldValues, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
-import {Form} from "@/views/common/_comp/ui";
-import {
-    BaseFormContextProvider,
-    FormValuesConfig,
-    handleFormSubmitError,
-    handleMutationCallback,
-    MutationFormResetConfig,
-    MutationResponseConfig,
-    useGenerateFormID
-} from "@/common/_feat";
+import {FormValuesConfig} from "@/common/_feat";
 import {createFormHook} from "@/common/_feat/forms/createFormHook.tsx";
+import {createFormContainer, FactoryFormContainerProps} from "@/common/_feat/forms/createFormContainer.tsx";
 
 /** Configuration options required to instantiate the form factory. */
 type FactoryConfig<
     TShape extends ZodRawShape,
     TFormValues extends FieldValues,
     TForm extends FieldValues = TFormValues,
-    TReturns = unknown,
+    TReturns = void,
+    TMutConfig = void,
 > = {
     formName: string;
     schema: ZodObject<TShape>;
     defaultValues: TFormValues;
-    mutation: () => UseMutationResult<TReturns, unknown, TForm>;
-};
-
-/** Props for the generated SubmitForm container component. */
-type FormContainerProps<
-    TFormValues extends FieldValues,
-    TEntity = unknown,
-    TInput = void,
-    TReturns = void,
-> = MutationResponseConfig<TReturns, TInput> & MutationFormResetConfig & {
-    children: ReactNode;
-    formConfig: FormValuesConfig<TFormValues, TEntity>
+    mutation: (params: TMutConfig) => UseMutationResult<TReturns, unknown, TForm>;
 };
 
 /** The generated hook and component returned by the form factory. */
 type FactoryReturns<
     TFormValues extends FieldValues,
     TForm extends FieldValues = TFormValues,
-    TEntity = unknown,
+    TEditEntity = unknown,
     TReturns = void,
+    TMutConfig = void,
 > = {
-    useSubmitForm: (config?: FormValuesConfig<TFormValues, TEntity>) => UseFormReturn<TFormValues, unknown, TForm>;
-    SubmitForm: (props: FormContainerProps<TFormValues, TEntity, TForm, TReturns>) => ReactElement;
+    useSubmitForm: (config?: FormValuesConfig<TFormValues, TEditEntity>) => UseFormReturn<TFormValues, unknown, TForm>;
+    SubmitForm: (props: FactoryFormContainerProps<TFormValues, TForm, TEditEntity, TReturns, TMutConfig>) => ReactElement;
 };
 
 /**
@@ -60,59 +43,18 @@ export function createForm<
     TShape extends ZodRawShape,
     TFormValues extends FieldValues,
     TForm extends FieldValues = TFormValues,
-    TEntity = unknown,
+    TEditEntity = unknown,
     TReturns = void,
+    TMutConfig = void,
 >(
-    {formName, schema, defaultValues, mutation}: FactoryConfig<TShape, TFormValues, TForm, TReturns>
-): FactoryReturns<TFormValues, TForm, TEntity, TReturns> {
-    const useSubmitForm = createFormHook<TShape, TFormValues, TForm, TEntity>({schema, defaultValues});
-
-    function SubmitForm(
-        {children, formConfig, ...submitConfig}: FormContainerProps<TFormValues, TEntity, TForm, TReturns>
-    ): ReactElement {
-        const formID = useGenerateFormID(formName);
-
-        const form = useSubmitForm(formConfig);
-        const {mutateAsync, isPending, isError} = mutation();
-
-        const submitData = async (values: TForm) => {
-            try {
-                handleMutationCallback({
-                    message: submitConfig.submitMessage,
-                    cb: () => submitConfig.onSubmit?.(values),
-                });
-
-                const data = await mutateAsync(values);
-
-                handleMutationCallback({
-                    message: submitConfig.successMessage,
-                    cb: () => submitConfig.onSubmitSuccess?.(data),
-                    messageType: "success",
-                });
-            } catch (error: unknown) {
-                handleFormSubmitError({form, error, displayMessage: submitConfig.errorMessage});
-                submitConfig.onSubmitError?.(error);
-            }
-        };
-
-        return (
-            <BaseFormContextProvider
-                formID={formID}
-                isPending={isPending}
-                isError={isError}
-                submitHandler={submitData}
-            >
-                <Form {...form}>
-                    <form
-                        id={formID}
-                        onSubmit={form.handleSubmit(submitData as Parameters<typeof form.handleSubmit>[0])}
-                    >
-                        {children}
-                    </form>
-                </Form>
-            </BaseFormContextProvider>
-        );
-    }
+    {formName, schema, defaultValues, mutation}: FactoryConfig<TShape, TFormValues, TForm, TReturns, TMutConfig>
+): FactoryReturns<TFormValues, TForm, TEditEntity, TReturns, TMutConfig> {
+    const useSubmitForm = createFormHook<TShape, TFormValues, TForm, TEditEntity>({schema, defaultValues});
+    const SubmitForm = createFormContainer<TFormValues, TForm, TEditEntity, TReturns, TMutConfig>({
+        useSubmitForm,
+        formName,
+        mutation,
+    });
 
     return {
         useSubmitForm,
