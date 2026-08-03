@@ -1,12 +1,10 @@
 /**
- * @fileoverview Form factory utility that abstracts React Hook Form initialization and TanStack Query mutation handling.
+ * @fileoverview Higher-order form factory providing schema validation, mutation management, and contextual form wrapper components.
  */
 
-import {ReactElement, ReactNode, useRef} from "react";
-import {isEqual} from "lodash";
+import {ReactElement, ReactNode} from "react";
 import {ZodObject, ZodRawShape} from "zod";
-import {DefaultValues, FieldValues, useForm, UseFormReturn} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
+import {FieldValues, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
 import {Form} from "@/views/common/_comp/ui";
 import {
@@ -16,12 +14,11 @@ import {
     handleMutationCallback,
     MutationFormResetConfig,
     MutationResponseConfig,
-    QueryOptionFormContainerProps,
-    QueryOptionFormValues,
     useGenerateFormID
 } from "@/common/_feat";
+import {createFormHook} from "@/common/_feat/forms/createFormHook.tsx";
 
-/** Configuration parameters required by the createForm factory function. */
+/** Configuration options required to instantiate the form factory. */
 type FactoryConfig<
     TShape extends ZodRawShape,
     TFormValues extends FieldValues,
@@ -34,60 +31,44 @@ type FactoryConfig<
     mutation: () => UseMutationResult<TReturns, unknown, TForm>;
 };
 
-/** The generated hook and component functions returned from the createForm factory. */
-type FactoryReturns<TFormValues extends FieldValues, TForm extends FieldValues = TFormValues> = {
-    useSubmitForm: (config: QueryOptionFormValues<TFormValues, TForm>) => UseFormReturn<TFormValues, unknown, TForm>;
-    SubmitForm: (props: QueryOptionFormContainerProps<TFormValues, TForm>) => ReactElement;
+/** Props for the generated SubmitForm container component. */
+type FormContainerProps<
+    TFormValues extends FieldValues,
+    TEntity = unknown,
+    TInput = void,
+    TReturns = void,
+> = MutationResponseConfig<TReturns, TInput> & MutationFormResetConfig & {
+    children: ReactNode;
+    formConfig: FormValuesConfig<TFormValues, TEntity>
+};
+
+/** The generated hook and component returned by the form factory. */
+type FactoryReturns<
+    TFormValues extends FieldValues,
+    TForm extends FieldValues = TFormValues,
+    TEntity = unknown,
+    TReturns = void,
+> = {
+    useSubmitForm: (config?: FormValuesConfig<TFormValues, TEntity>) => UseFormReturn<TFormValues, unknown, TForm>;
+    SubmitForm: (props: FormContainerProps<TFormValues, TEntity, TForm, TReturns>) => ReactElement;
 };
 
 /**
- * Creates a reusable form orchestrator supplying a custom setup hook and wrapper submission component.
+ * Creates a reactive form ecosystem comprising a validation state hook and an automated submission container component.
  */
 export function createForm<
     TShape extends ZodRawShape,
     TFormValues extends FieldValues,
     TForm extends FieldValues = TFormValues,
     TEntity = unknown,
-    TReturns = unknown,
+    TReturns = void,
 >(
     {formName, schema, defaultValues, mutation}: FactoryConfig<TShape, TFormValues, TForm, TReturns>
-): FactoryReturns<TFormValues, TForm> {
-    function useDefaultValues(
-        {presetValues, editEntity}: FormValuesConfig<TFormValues, TEntity> = {}
-    ): TFormValues {
-        const initialValues = {
-            ...defaultValues,
-            ...editEntity,
-            ...presetValues,
-        } as TFormValues;
-
-        const heldValues = useRef<TFormValues>(initialValues);
-
-        if (!isEqual(heldValues.current, initialValues)) {
-            heldValues.current = initialValues;
-        }
-
-        return heldValues.current;
-    }
-
-    function useSubmitForm(
-        config?: FormValuesConfig<TFormValues, TEntity>
-    ): UseFormReturn<TFormValues, unknown, TForm> {
-        const defaultValues = useDefaultValues(config);
-
-        return useForm<TFormValues, unknown, TForm>({
-            resolver: zodResolver(schema),
-            defaultValues: defaultValues as DefaultValues<TFormValues>,
-        });
-    }
-
-    type FormProps = MutationResponseConfig<TReturns, TForm> & MutationFormResetConfig & {
-        formConfig?: FormValuesConfig<TFormValues, TEntity>;
-        children?: ReactNode
-    };
+): FactoryReturns<TFormValues, TForm, TEntity, TReturns> {
+    const useSubmitForm = createFormHook<TShape, TFormValues, TForm, TEntity>({schema, defaultValues});
 
     function SubmitForm(
-        {children, formConfig, ...submitConfig}: FormProps
+        {children, formConfig, ...submitConfig}: FormContainerProps<TFormValues, TEntity, TForm, TReturns>
     ): ReactElement {
         const formID = useGenerateFormID(formName);
 

@@ -3,6 +3,8 @@ export * from "./crud";
 export * from "./crud-hooks";
 export * from "./fetch-search-params";
 export * from "./manage-user-favourites";
+export * from "./manage-user-roles";
+export * from "./manage-user-suspension";
 export * from "./my-profile-page";
 export * from "./submit-query-options";
 export * from "./update-password";

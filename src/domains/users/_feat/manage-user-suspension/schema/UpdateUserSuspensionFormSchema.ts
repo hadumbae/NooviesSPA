@@ -5,19 +5,19 @@
 import {z} from "zod";
 import {AnyValues} from "@/common/_types";
 import {BooleanValueSchema} from "@/common/_schemas";
-import {UserSuspensionUpdateActionSchema} from "@/domains/users/_schema/fields";
+import {UserModerationLogFormSchema} from "@/domains/users/_feat/user-moderation-actions";
 import {
-    UserModerationLogFormSchema
-} from "@/domains/users/_feat/user-moderation-actions/form-schema/UserModerationLogFormSchema.ts";
+    UserSuspensionUpdateActionSchema
+} from "@/domains/users/_feat/manage-user-suspension/schema/UserSuspensionUpdateActionSchema.ts";
 
 /** Zod schema validating form input data for updating a user's suspension status. */
-export const UserSuspensionUpdateFormSchema = UserModerationLogFormSchema.omit({action: true}).extend({
+export const UpdateUserSuspensionFormSchema = UserModerationLogFormSchema.omit({action: true}).extend({
     action: UserSuspensionUpdateActionSchema,
     suspend: BooleanValueSchema,
 });
 
 /** TypeScript type inferred from the UserSuspensionUpdateFormSchema. */
-export type UserSuspensionUpdateFormData = z.infer<typeof UserSuspensionUpdateFormSchema>;
+export type UpdateUserSuspensionFormData = z.infer<typeof UpdateUserSuspensionFormSchema>;
 
 /** TypeScript type representing relaxed or partial form input values derived from the data schema. */
-export type UserSuspensionUpdateFormValues = AnyValues<UserSuspensionUpdateFormData>;
+export type UpdateUserSuspensionFormValues = AnyValues<UpdateUserSuspensionFormData>;
