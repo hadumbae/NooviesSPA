@@ -12,7 +12,7 @@ import {
 } from "@/domains/users/_feat/manage-user-suspension/schema";
 
 /** Configuration parameters required for the user unsuspension mutation. */
-type MutationConfig = {
+export type UseUnsuspendUserConfig = {
     userId: ObjectId;
 };
 
@@ -20,7 +20,7 @@ type MutationConfig = {
  * Returns a React Query mutation object for unsuspending a user account by their unique identifier.
  */
 export function useUnsuspendUser(
-    {userId}: MutationConfig
+    {userId}: UseUnsuspendUserConfig
 ): UseMutationResult<UpdateUserSuspensionReturns, unknown, UpdateUserSuspensionFormData> {
     const suspendUser = async (data: UpdateUserSuspensionFormData) => {
         const {result} = await patchUnsuspendUser({userId, data});
