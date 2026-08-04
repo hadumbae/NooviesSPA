@@ -1,5 +1,5 @@
 /**
- * @fileoverview Custom React Hook for initializing and validating the user suspension status form.
+ * @fileoverview Exported form hook and container component generated for suspending user accounts.
  */
 
 import {createForm} from "@/common/_feat";
@@ -30,6 +30,8 @@ const {useSubmitForm, SubmitForm} = createForm<
 });
 
 export {
-    useSubmitForm as useSuspendUserForm,
-    SubmitForm as SuspendUserForm,
+    /** Form validation state hook generated for the user suspension form ecosystem. */
+        useSubmitForm as useSuspendUserForm,
+    /** Form container component for handling user suspension submission workflows. */
+        SubmitForm as SuspendUserForm,
 }
