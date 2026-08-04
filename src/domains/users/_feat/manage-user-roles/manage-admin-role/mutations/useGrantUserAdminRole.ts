@@ -12,7 +12,7 @@ import {
 } from "@/domains/users/_feat/manage-user-roles/manage-admin-role/schema";
 
 /** Configuration parameters required for the grant administrative role mutation. */
-type MutationConfig = {
+export type UseGrantUserAdminRoleMutationConfig = {
     userId: ObjectId;
 }
 
@@ -20,7 +20,7 @@ type MutationConfig = {
  * Returns a React Query mutation object for granting administrative privileges to a specific user.
  */
 export function useGrantUserAdminRole(
-    {userId}: MutationConfig
+    {userId}: UseGrantUserAdminRoleMutationConfig
 ): UseMutationResult<UpdateUserAdminRoleReturns, unknown, UpdateUserAdminRoleFormData> {
     const submitData = async (data: UpdateUserAdminRoleFormData) => {
         const {result} = await patchGrantUserAdminRole({userId, data});

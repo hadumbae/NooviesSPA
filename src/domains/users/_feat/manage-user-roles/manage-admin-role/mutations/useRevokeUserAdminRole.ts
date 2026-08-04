@@ -12,7 +12,7 @@ import {
 } from "@/domains/users/_feat/manage-user-roles/manage-admin-role/schema";
 
 /** Configuration parameters required for the revoke administrative role mutation. */
-type MutationConfig = {
+export type UseRevokeUserAdminRoleMutationConfig = {
     userId: ObjectId;
 }
 
@@ -20,7 +20,7 @@ type MutationConfig = {
  * Returns a React Query mutation object for revoking administrative privileges from a specific user.
  */
 export function useRevokeUserAdminRole(
-    {userId}: MutationConfig
+    {userId}: UseRevokeUserAdminRoleMutationConfig
 ): UseMutationResult<UpdateUserAdminRoleReturns, unknown, UpdateUserAdminRoleFormData> {
     const submitData = async (data: UpdateUserAdminRoleFormData) => {
         const {result} = await patchRevokeUserAdminRole({userId, data});

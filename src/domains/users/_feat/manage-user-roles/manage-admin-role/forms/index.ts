@@ -1,1 +1,2 @@
-export * from "@/domains/users/_feat/manage-user-roles/manage-admin-role/forms/useUpdateUserAdminRoleForm.ts";
+export * from "@/domains/users/_feat/manage-user-roles/manage-admin-role/forms/GrantUserAdminRoleForm.ts";
+export * from "@/domains/users/_feat/manage-user-roles/manage-admin-role/forms/RevokeUserAdminRoleForm.ts";
