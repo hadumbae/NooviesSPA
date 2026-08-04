@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Exported form hook and container component generated for revoking administrative roles from users.
+ */
+
 import {createForm} from "@/common/_feat";
 import {
     useRevokeUserAdminRole,
@@ -29,6 +33,8 @@ const {SubmitForm, useSubmitForm} = createForm<
 });
 
 export {
-    useSubmitForm as useRevokeUserAdminRoleForm,
-    SubmitForm as RevokeUserAdminRoleForm,
+    /** Form validation state hook generated for the revoke administrative role form ecosystem. */
+        useSubmitForm as useRevokeUserAdminRoleForm,
+    /** Form container component for handling administrative role revocation submission workflows. */
+        SubmitForm as RevokeUserAdminRoleForm,
 };

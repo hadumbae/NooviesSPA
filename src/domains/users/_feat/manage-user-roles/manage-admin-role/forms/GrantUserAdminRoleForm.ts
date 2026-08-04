@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Exported form hook and container component generated for granting administrative roles to users.
+ */
+
 import {createForm} from "@/common/_feat";
 import {
     useGrantUserAdminRole,
@@ -29,6 +33,8 @@ const {SubmitForm, useSubmitForm} = createForm<
 });
 
 export {
-    useSubmitForm as useGrantUserAdminRoleForm,
-    SubmitForm as GrantUserAdminRoleForm,
+    /** Form validation state hook generated for the grant administrative role form ecosystem. */
+        useSubmitForm as useGrantUserAdminRoleForm,
+    /** Form container component for handling administrative role grant submission workflows. */
+        SubmitForm as GrantUserAdminRoleForm,
 };
