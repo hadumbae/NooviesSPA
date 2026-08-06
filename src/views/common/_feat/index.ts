@@ -5,6 +5,7 @@ export * from "./dialog";
 export * from "./error";
 export * from "./error-boundary";
 export * from "./form-inputs";
+export * from "./forms";
 export * from "./loaders";
 export * from "./multi-step-form";
 export * from "./navigation";

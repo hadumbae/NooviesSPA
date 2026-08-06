@@ -7,7 +7,11 @@ import {PageFlexWrapper, PageHeader} from "@/views/common/_comp";
 import {User} from "@/domains/users/_schema/user";
 import {AdminUserDetailsCard} from "@/views/admin/users/_comp";
 import {useTitle} from "@/common/_feat";
-import {UserDetailsPageBreadcrumbs} from "@/views/admin/users/pages";
+import {
+    UserDetailsPageBreadcrumbs,
+    UserDetailsPageRoleManagementSection,
+    UserDetailsPageSuspensionSection
+} from "@/views/admin/users/pages";
 
 /** Props for the UserDetailsPageContent component. */
 type ContentProps = {
@@ -20,8 +24,9 @@ type ContentProps = {
 export function UserDetailsPageContent(
     {user, totalReviews, totalReservations}: ContentProps
 ): ReactElement {
-    const {name, uniqueCode} = user;
+    const {name, uniqueCode, status} = user;
     useTitle(`User • ${name}`);
+    useTitle(`User Status • ${status}`);
 
     return (
         <PageFlexWrapper>
@@ -36,6 +41,20 @@ export function UserDetailsPageContent(
                 totalReviews={totalReviews}
                 totalReservations={totalReservations}
             />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <UserDetailsPageSuspensionSection
+                    userId={user._id}
+                    userStatus={status}
+                />
+
+                <UserDetailsPageRoleManagementSection
+                    userId={user._id}
+                    roles={user.roles}
+                />
+            </div>
+
+
         </PageFlexWrapper>
     );
 }

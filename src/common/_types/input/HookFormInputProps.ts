@@ -1,11 +1,18 @@
 /**
  * @fileoverview Type definitions for a polymorphic input component integrated with React Hook Form.
- *
  */
 
 import {Control, FieldValues, Path} from "react-hook-form";
 
-/** Base configuration for form fields managed by React Hook Form. */
+/** Custom CSS class name overrides for sub-elements of the HookFormInput component. */
+export type HookFormInputClassNames = {
+    container?: string;
+    input?: string;
+    label?: string;
+    text?: string;
+};
+
+/** Base control properties for form fields integrated with React Hook Form. */
 export type HookFormInputControlProps<TValues extends FieldValues> = {
     name: Path<TValues>;
     label?: string;
@@ -15,15 +22,10 @@ export type HookFormInputControlProps<TValues extends FieldValues> = {
     disabled?: boolean;
     hasLabel?: boolean;
     className?: string;
-    classNames?: {
-        container?: string;
-        input?: string;
-        label?: string;
-        text?: string;
-    };
+    classNames?: HookFormInputClassNames;
 };
 
-/** Props for standard text-based input fields. */
+/** Props for text-based input types in the HookFormInput component. */
 export type HookFormTextInputProps = {
     type?: "text" | "password" | "email" | "search" | "url";
     min?: never;
@@ -31,7 +33,7 @@ export type HookFormTextInputProps = {
     step?: never;
 };
 
-/** Props for numeric input fields. */
+/** Props for number-based input types in the HookFormInput component. */
 export type HookFormNumberInputProps = {
     type: "number";
     min?: number;
@@ -39,7 +41,7 @@ export type HookFormNumberInputProps = {
     step?: number | string;
 };
 
-/** Props for date and time input fields. */
+/** Props for date and time input types in the HookFormInput component. */
 export type HookFormDateInputProps = {
     type: "date" | "datetime-local" | "month" | "week" | "time";
     min?: string;
@@ -47,7 +49,7 @@ export type HookFormDateInputProps = {
     step?: string | number;
 };
 
-/** Props for multi-line textarea fields. */
+/** Props for multi-line textarea inputs in the HookFormInput component. */
 export type HookFormTextareaInputProps = {
     type: "textarea";
     min?: never;
@@ -57,7 +59,7 @@ export type HookFormTextareaInputProps = {
     maxLength?: number;
 };
 
-/** Props for file upload fields. */
+/** Props for file input types in the HookFormInput component. */
 export type HookFormFileInputProps = {
     type: "file";
     min?: never;
@@ -68,7 +70,7 @@ export type HookFormFileInputProps = {
     accept?: string;
 };
 
-/** Discriminated union of props for the HookFormInput component. */
+/** Props for the polymorphic HookFormInput component. */
 export type HookFormInputProps<TValues extends FieldValues> =
     HookFormInputControlProps<TValues> & (
     | HookFormTextInputProps

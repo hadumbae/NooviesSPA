@@ -32,13 +32,12 @@ export type FactoryFormContainerProps<
     TEditEntity = unknown,
     TReturns = void,
     TMutConfig = void,
-> = MutationResponseConfig<TReturns, TForm> & MutationFormResetConfig & {
+> = MutationResponseConfig<TReturns, TForm> & MutationFormResetConfig & FormValuesConfig<TFormValues, TEditEntity> & {
     children: ReactNode;
-    formConfig: FormValuesConfig<TFormValues, TEditEntity>;
-} & (TMutConfig extends void ? {mutConfig?: never} : {mutConfig: TMutConfig});
+} & (TMutConfig extends void ? { mutConfig?: never } : { mutConfig: TMutConfig });
 
 /**
- * Creates a specialized form container component that encapsulates form provider setup, layout context, and async mutation handling.
+ * Creates a specialised form container component that encapsulates form provider setup, layout context, and async mutation handling.
  */
 export function createFormContainer<
     TFormValues extends FieldValues,
@@ -52,11 +51,11 @@ export function createFormContainer<
     function SubmitForm(
         props: FactoryFormContainerProps<TFormValues, TForm, TEditEntity, TReturns, TMutConfig>
     ): ReactElement {
-        const {children, formConfig, mutConfig, ...submitConfig} = props;
+        const {children, presetValues, editEntity, mutConfig, ...submitConfig} = props;
 
         const formID = useGenerateFormID(formName);
 
-        const form = useSubmitForm(formConfig);
+        const form = useSubmitForm({presetValues, editEntity});
         const {mutateAsync, isPending, isError} = mutation(mutConfig as TMutConfig);
 
         const submitData = async (values: TForm) => {

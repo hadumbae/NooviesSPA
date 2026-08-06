@@ -3,11 +3,12 @@
  */
 
 import {z} from "zod";
-import {LeanUserWithEmailSchema, UserModerationLogReferenceSchema} from "@/domains/users";
+import {UserSchema} from "@/domains/users/_schema/user";
+import {UserModerationLogReferenceSchema} from "@/domains/users/_schema/mod-log";
 
 /** Zod schema validating the response structure containing updated user data and its moderation log reference. */
 export const UpdateUserSuspensionReturnsSchema = z.object({
-    user: LeanUserWithEmailSchema,
+    user: UserSchema,
     log: UserModerationLogReferenceSchema,
 });
 

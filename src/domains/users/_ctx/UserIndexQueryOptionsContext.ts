@@ -3,7 +3,7 @@
  */
 
 import {createQueryOptionsContext} from "@/common/_feat";
-import {UserQueryOptionsSchema} from "@/domains/users/_schema/query-options";
+import {UserQueryOptionsSchema} from "@/domains/users/_schema/query-options/UserQueryOptionsSchema.ts";
 
 const {Provider, useQueryOptionsContext} = createQueryOptionsContext({
     name: "UserIndexQueryOptionsContext",

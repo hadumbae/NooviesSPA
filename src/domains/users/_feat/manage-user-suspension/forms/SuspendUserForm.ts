@@ -25,7 +25,7 @@ const {useSubmitForm, SubmitForm} = createForm<
     defaultValues: {
         action: "",
         message: "",
-        suspend: ""
+        suspend: true,
     },
 });
 

@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {User} from "@/domains/users/_schema/user";
 import {UserUniqueCodePill} from "@/views/admin/users/_comp/pills";
-import {UserRoleBadge} from "@/views/admin/users/_comp";
+import {UserRoleBadge, UserStatusBadge} from "@/views/admin/users/_comp";
 import {cn} from "@/common/_feat";
 import {StatNumberItem} from "@/views/common/_comp";
 
@@ -30,7 +30,7 @@ type CardProps = {
 export function AdminUserDetailsCard(
     {user, totalReviews, totalReservations, classNames}: CardProps
 ): ReactElement {
-    const {name, email, roles, uniqueCode} = user;
+    const {name, email, roles, uniqueCode, status} = user;
 
     return (
         <Card className={classNames?.card}>
@@ -48,9 +48,13 @@ export function AdminUserDetailsCard(
 
                 <Separator/>
 
-                <div className="flex justify-start items-center space-x-5">
-                    <StatNumberItem text="Reviews" count={totalReviews}/>
-                    <StatNumberItem text="Reservations" count={totalReservations}/>
+                <div className="flex justify-between items-end">
+                    <div className="flex justify-start items-center space-x-5">
+                        <StatNumberItem text="Reviews" count={totalReviews}/>
+                        <StatNumberItem text="Reservations" count={totalReservations}/>
+                    </div>
+
+                    <UserStatusBadge status={status}/>
                 </div>
             </CardContent>
         </Card>
