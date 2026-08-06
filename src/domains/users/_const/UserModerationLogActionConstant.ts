@@ -10,4 +10,6 @@ export const UserModerationLogActionConstant = [
     "user_registered",
     "user_suspended",
     "user_unsuspended",
+    "user_account_activated",
+    "user_account_deactivated",
 ] as const;
