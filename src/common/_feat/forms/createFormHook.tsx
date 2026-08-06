@@ -4,14 +4,14 @@
 
 import {useRef} from "react";
 import {isEqual} from "lodash";
-import {ZodObject, ZodRawShape} from "zod";
+import {ZodType, ZodTypeDef} from "zod";
 import {DefaultValues, FieldValues, useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import { FormValuesConfig } from "@/common/_feat/submit-data";
+import {FormValuesConfig} from "@/common/_feat/submit-data";
 
 /** Configuration parameters required by the form hook factory. */
-type FactoryConfig<TShape extends ZodRawShape, TFormValues extends FieldValues> = {
-    schema: ZodObject<TShape>;
+type FactoryConfig<TFormValues extends FieldValues, TForm extends FieldValues = TFormValues> = {
+    schema: ZodType<TForm, ZodTypeDef, unknown>;
     defaultValues: TFormValues;
 };
 
@@ -19,12 +19,11 @@ type FactoryConfig<TShape extends ZodRawShape, TFormValues extends FieldValues> 
  * Creates a custom React hook tailored for managing form state with Zod validation and dynamic initialization.
  */
 export function createFormHook<
-    TShape extends ZodRawShape,
     TFormValues extends FieldValues,
     TForm extends FieldValues = TFormValues,
     TEntity = unknown,
 >(
-    {schema, defaultValues}: FactoryConfig<TShape, TFormValues>
+    {schema, defaultValues}: FactoryConfig<TFormValues, TForm>
 ): (config?: FormValuesConfig<TFormValues, TEntity>) => UseFormReturn<TFormValues, unknown, TForm> {
     function useDefaultValues(
         {presetValues, editEntity}: FormValuesConfig<TFormValues, TEntity> = {}

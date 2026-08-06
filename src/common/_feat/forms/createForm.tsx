@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {ZodObject, ZodRawShape} from "zod";
+import {ZodType, ZodTypeDef} from "zod";
 import {FieldValues, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
 import {FormValuesConfig} from "@/common/_feat";
@@ -12,14 +12,13 @@ import {createFormContainer, FactoryFormContainerProps} from "@/common/_feat/for
 
 /** Configuration options required to instantiate the form factory. */
 type FactoryConfig<
-    TShape extends ZodRawShape,
     TFormValues extends FieldValues,
     TForm extends FieldValues = TFormValues,
     TReturns = void,
     TMutConfig = void,
 > = {
     formName: string;
-    schema: ZodObject<TShape>;
+    schema: ZodType<TForm, ZodTypeDef, unknown>;
     defaultValues: TFormValues;
     mutation: (params: TMutConfig) => UseMutationResult<TReturns, unknown, TForm>;
 };
@@ -40,16 +39,15 @@ type FactoryReturns<
  * Creates a reactive form ecosystem comprising a validation state hook and an automated submission container component.
  */
 export function createForm<
-    TShape extends ZodRawShape,
     TFormValues extends FieldValues,
     TForm extends FieldValues = TFormValues,
     TEditEntity = unknown,
     TReturns = void,
     TMutConfig = void,
 >(
-    {formName, schema, defaultValues, mutation}: FactoryConfig<TShape, TFormValues, TForm, TReturns, TMutConfig>
+    {formName, schema, defaultValues, mutation}: FactoryConfig<TFormValues, TForm, TReturns, TMutConfig>
 ): FactoryReturns<TFormValues, TForm, TEditEntity, TReturns, TMutConfig> {
-    const useSubmitForm = createFormHook<TShape, TFormValues, TForm, TEditEntity>({schema, defaultValues});
+    const useSubmitForm = createFormHook<TFormValues, TForm, TEditEntity>({schema, defaultValues});
     const SubmitForm = createFormContainer<TFormValues, TForm, TEditEntity, TReturns, TMutConfig>({
         useSubmitForm,
         formName,

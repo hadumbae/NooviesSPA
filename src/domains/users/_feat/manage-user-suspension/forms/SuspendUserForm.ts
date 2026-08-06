@@ -12,7 +12,6 @@ import {
 } from "@/domains/users/_feat/manage-user-suspension/schema";
 
 const {useSubmitForm, SubmitForm} = createForm<
-    typeof UpdateUserSuspensionFormSchema.shape,
     UpdateUserSuspensionFormValues,
     UpdateUserSuspensionFormData,
     unknown,

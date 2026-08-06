@@ -15,7 +15,6 @@ import {
 } from "@/domains/users/_feat/manage-user-roles/manage-admin-role/schema";
 
 const {SubmitForm, useSubmitForm} = createForm<
-    typeof UpdateUserAdminRoleFormSchema.shape,
     UpdateUserAdminRoleFormValues,
     UpdateUserAdminRoleFormData,
     unknown,
