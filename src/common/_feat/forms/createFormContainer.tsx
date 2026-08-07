@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode} from "react";
-import {FieldValues, UseFormReturn} from "react-hook-form";
+import {DefaultValues, FieldValues, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
 import {Form} from "@/views/common/_comp/ui";
 import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
@@ -33,6 +33,7 @@ export type FactoryFormContainerProps<
     TReturns = void,
     TMutConfig = void,
 > = MutationResponseConfig<TReturns, TForm> & MutationFormResetConfig & FormValuesConfig<TFormValues, TEditEntity> & {
+    resetValues?: DefaultValues<TFormValues>;
     children: ReactNode;
 } & (TMutConfig extends void ? { mutConfig?: never } : { mutConfig: TMutConfig });
 
@@ -51,7 +52,7 @@ export function createFormContainer<
     function SubmitForm(
         props: FactoryFormContainerProps<TFormValues, TForm, TEditEntity, TReturns, TMutConfig>
     ): ReactElement {
-        const {children, presetValues, editEntity, mutConfig, ...submitConfig} = props;
+        const {children, presetValues, editEntity, mutConfig, resetValues, ...submitConfig} = props;
 
         const formID = useGenerateFormID(formName);
 
@@ -60,12 +61,16 @@ export function createFormContainer<
 
         const submitData = async (values: TForm) => {
             try {
+                submitConfig.resetOnSubmit && form.reset(resetValues);
+
                 handleMutationCallback({
                     message: submitConfig.submitMessage,
                     cb: () => submitConfig.onSubmit?.(values),
                 });
 
                 const data = await mutateAsync(values);
+
+                submitConfig.resetOnSuccess && form.reset(resetValues);
 
                 handleMutationCallback({
                     message: submitConfig.successMessage,
@@ -74,6 +79,7 @@ export function createFormContainer<
                 });
             } catch (error: unknown) {
                 handleFormSubmitError({form, error, displayMessage: submitConfig.errorMessage});
+                submitConfig.resetOnError && form.reset(resetValues);
                 submitConfig.onSubmitError?.(error);
             }
         };

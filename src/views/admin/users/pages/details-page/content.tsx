@@ -9,7 +9,7 @@ import {AdminUserDetailsCard} from "@/views/admin/users/_comp";
 import {useTitle} from "@/common/_feat";
 import {
     UserDetailsPageBreadcrumbs,
-    UserDetailsPageRoleManagementSection,
+    UserDetailsPageRoleManagementSection, UserDetailsPageStatusManagementSection,
     UserDetailsPageSuspensionSection
 } from "@/views/admin/users/pages";
 
@@ -51,6 +51,11 @@ export function UserDetailsPageContent(
                 <UserDetailsPageRoleManagementSection
                     userId={user._id}
                     roles={user.roles}
+                />
+
+                <UserDetailsPageStatusManagementSection
+                    userId={user._id}
+                    userStatus={user.status}
                 />
             </div>
 

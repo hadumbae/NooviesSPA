@@ -4,6 +4,7 @@
 
 import {z} from "zod";
 import {AnyUnionValues} from "@/common/_types";
+import {preprocessEmptyToUndefined} from "@/common/_feat";
 import {UserStatusSchema} from "@/domains/users/_schema/fields";
 import {UserModerationLogFormSchema} from "@/domains/users/_feat/user-moderation-actions";
 import {
@@ -13,13 +14,13 @@ import {
 const BaseSchema = UserModerationLogFormSchema.pick({message: true});
 
 const ActivateSchema = BaseSchema.extend({
-    action: UserStatusUpdateActionSchema.extract(["user_account_activated"]),
-    status: UserStatusSchema.extract(["ACTIVE", "SUSPENDED"]),
+    action: preprocessEmptyToUndefined(UserStatusUpdateActionSchema.extract(["user_account_activated"])),
+    status: preprocessEmptyToUndefined(UserStatusSchema.extract(["ACTIVE", "SUSPENDED"])),
 });
 
 const DeactivateSchema = BaseSchema.extend({
-    action: UserStatusUpdateActionSchema.extract(["user_account_deactivated"]),
-    status: UserStatusSchema.extract(["INACTIVE"]),
+    action: preprocessEmptyToUndefined(UserStatusUpdateActionSchema.extract(["user_account_deactivated"])),
+    status: preprocessEmptyToUndefined(UserStatusSchema.extract(["INACTIVE"])),
 });
 
 /** Zod schema for validating user status update form submissions using a discriminated union. */
