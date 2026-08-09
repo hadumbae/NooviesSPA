@@ -20,7 +20,7 @@ import {
  * A checkbox form field component that requires a react-hook-form provider.
  */
 export function HookFormCheckbox<TValues extends FieldValues>(
-    {name, label, description, classNames}: Omit<HookFormInputControlProps<TValues>, "control">
+    {name, label, description, classNames, disabled}: Omit<HookFormInputControlProps<TValues>, "control">
 ): ReactElement {
     const {control} = useFormContext<TValues>();
 
@@ -38,6 +38,7 @@ export function HookFormCheckbox<TValues extends FieldValues>(
                     checked={field.value}
                     onCheckedChange={field.onChange}
                     className={classNames?.input}
+                    disabled={disabled}
                 />
             </FormControl>
 

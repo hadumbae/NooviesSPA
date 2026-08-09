@@ -70,7 +70,9 @@ export function UserDetailsPageSuspensionSection(
                         </Button>
                     )}
                 >
-                    <UpdateUserSuspensionFormView/>
+                    <UpdateUserSuspensionFormView
+                        disableFields={{action: true, suspend: true}}
+                    />
                 </GenericFormDialog>
             </UpdateUserSuspensionForm>
         </section>
