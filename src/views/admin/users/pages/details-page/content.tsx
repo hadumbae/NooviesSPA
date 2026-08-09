@@ -50,7 +50,8 @@ export function UserDetailsPageContent(
 
                 <UserDetailsPageRoleManagementSection
                     userId={user._id}
-                    roles={user.roles}
+                    userStatus={status}
+                    userRoles={user.roles}
                 />
 
                 <UserDetailsPageStatusManagementSection

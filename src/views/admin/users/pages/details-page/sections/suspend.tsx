@@ -62,11 +62,8 @@ export function UserDetailsPageSuspensionSection(
                     description={dialogDescription}
                     submitText={adminVerb}
                     trigger={(
-                        <Button
-                            variant={isUserSuspended ? "secondary" : "primary"}
-                            className="w-full py-12"
-                        >
-                            {adminVerb} User
+                        <Button variant="primary" className="w-full py-12" disabled={userStatus === "INACTIVE"}>
+                            {userStatus === "INACTIVE" ? "Inactive User" : `${adminVerb} User`}
                         </Button>
                     )}
                 >

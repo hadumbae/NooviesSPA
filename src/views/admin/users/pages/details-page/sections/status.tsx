@@ -64,7 +64,7 @@ export function UserDetailsPageStatusManagementSection(
                     submitText={dialogText}
                     trigger={(
                         <Button
-                            variant={userStatus === "INACTIVE" ? "secondary" : "primary"}
+                            variant="primary"
                             className="w-full py-12"
                         >
                             {dialogText} Account
