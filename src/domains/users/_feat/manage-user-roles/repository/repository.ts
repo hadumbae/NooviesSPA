@@ -1,5 +1,5 @@
 /**
- * @fileoverview API repository functions for executing administrative user role patches.
+ * @fileoverview Repository functions for sending HTTP requests to manage user administrative roles.
  */
 
 import {FetchRequestReturns} from "@/common/_types";
@@ -9,28 +9,14 @@ import {ManageUserRolesBaseURL} from "@/domains/users/_feat/manage-user-roles/re
 import {ManageUserAdminRoleConfig} from "@/domains/users/_feat/manage-user-roles/repository/repository.types.ts";
 
 /**
- * Sends a network request to grant administrative privileges to a specific user.
+ * Sends an HTTP PATCH request to update a user's administrative roles.
  */
-export async function patchGrantUserAdminRole(
+export async function patchUpdateUserAdminRole(
     {userId, data}: ManageUserAdminRoleConfig
 ): Promise<FetchRequestReturns<UpdateUserAdminRoleReturns>> {
     const url = buildURL({
         baseURL: ManageUserRolesBaseURL,
-        path: `/user/${userId}/role/admin/grant`,
-    });
-
-    return useFetchAPI({url, method: "PATCH", data});
-}
-
-/**
- * Sends a network request to revoke administrative privileges from a specific user.
- */
-export async function patchRevokeUserAdminRole(
-    {userId, data}: ManageUserAdminRoleConfig
-): Promise<FetchRequestReturns<UpdateUserAdminRoleReturns>> {
-    const url = buildURL({
-        baseURL: ManageUserRolesBaseURL,
-        path: `/user/${userId}/role/admin/revoke`,
+        path: `/user/${userId}/role/admin/update`,
     });
 
     return useFetchAPI({url, method: "PATCH", data});

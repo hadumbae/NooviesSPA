@@ -1,34 +1,34 @@
 /**
- * @fileoverview Custom React Hook providing a mutation for revoking administrative privileges from a user.
+ * @fileoverview React Hook for managing user admin role update mutations using React Query.
  */
 
 import {ObjectId} from "@/common/_schemas";
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import {patchRevokeUserAdminRole} from "@/domains/users/_feat/manage-user-roles/repository";
+import {patchUpdateUserAdminRole} from "@/domains/users/_feat/manage-user-roles/repository";
 import {UpdateAdminStatusMutationKeys} from "@/domains/users/_feat/manage-user-roles/manage-admin-role/keys";
 import {
     UpdateUserAdminRoleFormData,
     UpdateUserAdminRoleReturns
 } from "@/domains/users/_feat/manage-user-roles/manage-admin-role/schema";
 
-/** Configuration parameters required for the revoke administrative role mutation. */
-export type UseRevokeUserAdminRoleMutationConfig = {
+/** Configuration options for the useUpdateUserAdminRole mutation hook. */
+export type UseUpdateUserAdminRoleMutationConfig = {
     userId: ObjectId;
 }
 
 /**
- * Returns a React Query mutation object for revoking administrative privileges from a specific user.
+ * Custom React Query hook for executing the user admin role update mutation.
  */
-export function useRevokeUserAdminRole(
-    {userId}: UseRevokeUserAdminRoleMutationConfig
+export function useUpdateUserAdminRole(
+    {userId}: UseUpdateUserAdminRoleMutationConfig
 ): UseMutationResult<UpdateUserAdminRoleReturns, unknown, UpdateUserAdminRoleFormData> {
     const submitData = async (data: UpdateUserAdminRoleFormData) => {
-        const {result} = await patchRevokeUserAdminRole({userId, data});
+        const {result} = await patchUpdateUserAdminRole({userId, data});
         return result;
     }
 
     return useMutation({
-        mutationKey: UpdateAdminStatusMutationKeys.revoke(),
+        mutationKey: UpdateAdminStatusMutationKeys.update({userId}),
         mutationFn: submitData,
     });
 }

@@ -4,17 +4,17 @@
 
 import {ReactElement, useState} from "react";
 import {ObjectId} from "@/common/_schemas";
-import {PageSectionHeader} from "@/views/common/_comp";
-import {GenericFormDialog} from "@/views/common/_feat";
 import {Button} from "@/views/common/_comp/ui";
+import {PageSectionHeader} from "@/views/common/_comp";
 import {UserRole} from "@/domains/users/_schema/fields";
-import {UpdateUserAdminRoleReturns} from "@/domains/users/_feat/manage-user-roles/manage-admin-role/schema";
 import {useInvalidateUserQueriesOnModeration} from "@/domains/users/_feat/user-moderation-actions";
+import {UpdateUserAdminRoleForm} from "@/domains/users/_feat/manage-user-roles/manage-admin-role/forms";
+import {GenericFormDialog} from "@/views/common/_feat";
 import {UpdateUserAdminRoleFormView} from "@/views/admin/users/_feat/update-user-admin-role-form";
 import {
-    GrantUserAdminRoleForm,
-    RevokeUserAdminRoleForm,
-} from "@/domains/users/_feat/manage-user-roles/manage-admin-role/forms";
+    UpdateUserAdminRoleFormValues,
+    UpdateUserAdminRoleReturns
+} from "@/domains/users/_feat/manage-user-roles/manage-admin-role/schema";
 
 /** Props for the UserDetailsPageRoleManagementSection component. */
 type SectionProps = {
@@ -28,81 +28,58 @@ type SectionProps = {
 export function UserDetailsPageRoleManagementSection(
     {userId, roles}: SectionProps
 ): ReactElement {
-    const filteredRoles = roles.filter(r => r !== "ADMIN");
+    const [isUpdating, setIsUpdating] = useState<boolean>(false);
     const [isAdmin, setIsAdmin] = useState<boolean>(roles.includes("ADMIN"));
-
-    const [isRevoking, setIsRevoking] = useState<boolean>(false);
-    const [isGranting, setIsGranting] = useState<boolean>(false);
-
     const invalidateQueries = useInvalidateUserQueriesOnModeration();
 
+    const filteredRoles = roles.filter(r => r !== "ADMIN");
+    const [actionVerb, actionPrep] = !isAdmin
+        ? ["Grant", "to"]
+        : ["Revoke", "from"];
+
+    const grantValues: UpdateUserAdminRoleFormValues = {
+        action: "user_role_grant_admin",
+        roles: [...filteredRoles, "ADMIN"],
+    }
+
+    const revokeValues: UpdateUserAdminRoleFormValues = {
+        action: "user_role_revoke_admin",
+        roles: filteredRoles,
+    }
+
+    const onUpdateSubmit = () => setIsUpdating(false);
     const onUserRoleUpdate = ({user}: UpdateUserAdminRoleReturns) => {
         setIsAdmin(user.roles.includes("ADMIN"));
         invalidateQueries();
-    }
-
-    const onUpdateSubmit = () => {
-        setIsRevoking(false);
-        setIsGranting(false);
     }
 
     return (
         <section className="space-y-4">
             <PageSectionHeader text="Roles"/>
 
-            {
-                isAdmin ? (
-                    <RevokeUserAdminRoleForm
-                        mutConfig={{userId}}
-                        onSubmit={onUpdateSubmit}
-                        onSubmitSuccess={onUserRoleUpdate}
-                        presetValues={{
-                            roles: filteredRoles,
-                            action: "user_role_revoke_admin",
-                        }}
-                    >
-                        <GenericFormDialog
-                            isOpen={isRevoking}
-                            setIsOpen={setIsRevoking}
-                            title="Revoke Admin Role"
-                            description="Revoke the admin role of the specified user."
-                            submitText="Revoke Role"
-                            trigger={(
-                                <Button variant="secondary" className="w-full py-12">
-                                    Revoke Admin Role
-                                </Button>
-                            )}
-                        >
-                            <UpdateUserAdminRoleFormView/>
-                        </GenericFormDialog>
-                    </RevokeUserAdminRoleForm>
-                ) : (
-                    <GrantUserAdminRoleForm
-                        mutConfig={{userId}}
-                        onSubmit={onUpdateSubmit}
-                        onSubmitSuccess={onUserRoleUpdate}
-                        presetValues={{
-                            roles: [...filteredRoles, "ADMIN"],
-                            action: "user_role_grant_admin",
-                        }}
-                    >
-                        <GenericFormDialog
-                            isOpen={isGranting}
-                            setIsOpen={setIsGranting}
-                            title="Grant Admin Role"
-                            description="Grant the admin role to the specified user."
-                            submitText="Grant Role"
-                            trigger={(
-                                <Button variant="primary" className="w-full py-12">
-                                    Grant Admin Role
-                                </Button>
-                            )}
-                        >
-                            <UpdateUserAdminRoleFormView/>
-                        </GenericFormDialog>
-                    </GrantUserAdminRoleForm>
-                )
-            }
+            <UpdateUserAdminRoleForm
+                mutConfig={{userId}}
+                onSubmit={onUpdateSubmit}
+                onSubmitSuccess={onUserRoleUpdate}
+                presetValues={isAdmin ? revokeValues : grantValues}
+                resetValues={isAdmin ? grantValues : revokeValues}
+                resetOnSuccess={true}
+            >
+                <GenericFormDialog
+                    isOpen={isUpdating}
+                    setIsOpen={setIsUpdating}
+                    title={`${actionVerb} Admin Role`}
+                    description={`${actionVerb} the admin role ${actionPrep} the specified user.`}
+                    submitText={`${actionVerb} Role`}
+                    trigger={(
+                        <Button variant={isAdmin ? "secondary" : "primary"} className="w-full py-12">
+                            {actionVerb} Admin Role
+                        </Button>
+                    )}
+                >
+                    <UpdateUserAdminRoleFormView/>
+                </GenericFormDialog>
+            </UpdateUserAdminRoleForm>
         </section>
     );
 }
