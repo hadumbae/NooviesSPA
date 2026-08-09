@@ -10,7 +10,7 @@ import {Button} from "@/views/common/_comp/ui";
 import {UpdateUserSuspensionFormView} from "@/views/admin/users/_feat";
 import {UserStatus} from "@/domains/users/_schema/fields";
 import {useInvalidateUserQueriesOnModeration,} from "@/domains/users/_feat/user-moderation-actions";
-import {SuspendUserForm, UnsuspendUserForm,} from "@/domains/users/_feat/manage-user-suspension/forms";
+import {UpdateUserSuspensionForm,} from "@/domains/users/_feat/manage-user-suspension/forms";
 import {UpdateUserSuspensionReturns,} from "@/domains/users/_feat/manage-user-suspension";
 
 /** Props for the UserDetailsPageSuspensionSection component. */
@@ -26,79 +26,53 @@ export function UserDetailsPageSuspensionSection(
     {userId, userStatus}: SectionProps
 ): ReactElement {
     const [isUserSuspended, setIsUserSuspended] = useState<boolean>(userStatus === "SUSPENDED");
-
-    const [isSuspending, setIsSuspending] = useState<boolean>(false);
-    const [isUnsuspending, setIsUnsuspending] = useState<boolean>(false);
-
+    const [isUpdating, setIsUpdating] = useState<boolean>(false);
     const invalidateQueries = useInvalidateUserQueriesOnModeration();
 
+    const suspendValues = {action: "user_suspended", suspend: true, message: ""};
+    const unsuspendValues = {action: "user_unsuspended", suspend: false, message: ""};
+
+    const adminVerb = isUserSuspended ? "Unsuspend" : "Suspend";
+    const dialogDescription = isUserSuspended
+        ? "Lift the suspension on the specified user."
+        : "Suspend the specified user.";
+
+    const onStatusSubmit = () => setIsUpdating(false);
     const onUserStatusChange = ({user}: UpdateUserSuspensionReturns) => {
         setIsUserSuspended(user.status === "SUSPENDED");
         invalidateQueries();
-    }
-
-    const onStatusSubmit = () => {
-        setIsSuspending(false);
-        setIsUnsuspending(false);
     }
 
     return (
         <section className="space-y-4">
             <PageSectionHeader text="Suspension"/>
 
-            {
-                isUserSuspended ? (
-                    <UnsuspendUserForm
-                        mutConfig={{userId}}
-                        onSubmit={onStatusSubmit}
-                        onSubmitSuccess={onUserStatusChange}
-                        presetValues={{
-                            action: "user_unsuspended",
-                            suspend: false,
-                        }}
-                    >
-                        <GenericFormDialog
-                            isOpen={isUnsuspending}
-                            setIsOpen={setIsUnsuspending}
-                            title="Unsuspend User?"
-                            description="Lift the suspension on the specified user."
-                            submitText="Suspend"
-                            trigger={(
-                                <Button variant="secondary" className="w-full py-12">
-                                    Unsuspend User
-                                </Button>
-                            )}
+            <UpdateUserSuspensionForm
+                mutConfig={{userId}}
+                onSubmit={onStatusSubmit}
+                onSubmitSuccess={onUserStatusChange}
+                presetValues={isUserSuspended ? unsuspendValues : suspendValues}
+                resetValues={!isUserSuspended ? unsuspendValues : suspendValues}
+                resetOnSuccess={true}
+            >
+                <GenericFormDialog
+                    isOpen={isUpdating}
+                    setIsOpen={setIsUpdating}
+                    title={`${adminVerb} User?`}
+                    description={dialogDescription}
+                    submitText={adminVerb}
+                    trigger={(
+                        <Button
+                            variant={isUserSuspended ? "secondary" : "primary"}
+                            className="w-full py-12"
                         >
-                            <UpdateUserSuspensionFormView/>
-                        </GenericFormDialog>
-                    </UnsuspendUserForm>
-                ) : (
-                    <SuspendUserForm
-                        mutConfig={{userId}}
-                        onSubmit={onStatusSubmit}
-                        onSubmitSuccess={onUserStatusChange}
-                        presetValues={{
-                            action: "user_suspended",
-                            suspend: true,
-                        }}
-                    >
-                        <GenericFormDialog
-                            isOpen={isSuspending}
-                            setIsOpen={setIsSuspending}
-                            title="Suspend User?"
-                            description="Suspend the specified user."
-                            submitText="Suspend"
-                            trigger={(
-                                <Button variant="primary" className="w-full py-12">
-                                    Suspend User
-                                </Button>
-                            )}
-                        >
-                            <UpdateUserSuspensionFormView/>
-                        </GenericFormDialog>
-                    </SuspendUserForm>
-                )
-            }
+                            {adminVerb} User
+                        </Button>
+                    )}
+                >
+                    <UpdateUserSuspensionFormView/>
+                </GenericFormDialog>
+            </UpdateUserSuspensionForm>
         </section>
     );
 }
