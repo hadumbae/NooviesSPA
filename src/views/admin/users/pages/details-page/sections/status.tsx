@@ -5,10 +5,9 @@
 import {ReactElement, useState} from "react";
 import {ObjectId} from "@/common/_schemas";
 import {useInvalidateUserQueriesOnModeration, UserStatus} from "@/domains/users";
-import {PageSectionHeader} from "@/views/common/_comp";
+import {AdminActionButton, PageSectionHeader} from "@/views/common/_comp";
 import {UpdateUserStatusForm} from "@/domains/users/_feat/manage-user-status/forms";
 import {UpdateUserStatusFormValues} from "@/domains/users/_feat/manage-user-status/schema";
-import {Button} from "@/views/common/_comp/ui";
 import {GenericFormDialog} from "@/views/common/_feat";
 import {UpdateUserStatusFormView} from "@/views/admin/users/_feat";
 
@@ -62,14 +61,9 @@ export function UserDetailsPageStatusManagementSection(
                     title={`${dialogText} User Account`}
                     description={`${dialogText} the account of the specified user.`}
                     submitText={dialogText}
-                    trigger={(
-                        <Button
-                            variant="primary"
-                            className="w-full py-12"
-                        >
-                            {dialogText} Account
-                        </Button>
-                    )}
+                    trigger={
+                        <AdminActionButton text={`${dialogText} Account`}/>
+                    }
                 >
                     <UpdateUserStatusFormView disableFields={{
                         action: true,

@@ -4,8 +4,7 @@
 
 import {ReactElement, useState} from "react";
 import {ObjectId} from "@/common/_schemas";
-import {Button} from "@/views/common/_comp/ui";
-import {PageSectionHeader} from "@/views/common/_comp";
+import {AdminActionButton, PageSectionHeader} from "@/views/common/_comp";
 import {UserRole, UserStatus} from "@/domains/users/_schema/fields";
 import {useInvalidateUserQueriesOnModeration} from "@/domains/users/_feat/user-moderation-actions";
 import {UpdateUserAdminRoleForm} from "@/domains/users/_feat/manage-user-roles/manage-admin-role/forms";
@@ -75,9 +74,11 @@ export function UserDetailsPageRoleManagementSection(
                     description={`${actionVerb} the admin role ${actionPrep} the specified user.`}
                     submitText={`${actionVerb} Role`}
                     trigger={(
-                        <Button variant="primary" className="w-full py-12" disabled={userStatus === "INACTIVE"}>
-                            {userStatus === "INACTIVE" ? "Inactive User" : `${actionVerb} Admin Role`}
-                        </Button>
+                        <AdminActionButton
+                            text={`${actionVerb} Admin Role`}
+                            disabled={userStatus === "INACTIVE"}
+                            subtext={userStatus === "INACTIVE" ? "Inactive User" : undefined}
+                        />
                     )}
                 >
                     <UpdateUserAdminRoleFormView/>

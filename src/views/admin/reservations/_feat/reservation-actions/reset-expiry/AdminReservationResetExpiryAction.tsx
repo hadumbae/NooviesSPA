@@ -3,17 +3,14 @@
  */
 
 import {ReactElement, useState} from "react";
-import {Button} from "@/views/common/_comp/ui";
 import {toast} from "react-toastify";
-import {cn} from "@/common/_feat";
-import {
-    handleSubmitResponseError
-} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
+import {handleSubmitResponseError} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 
 import {AdminReservation, useResetReservationExpiryMutation} from "@/domains/reservations";
 import {
     AdminReservationResetExpiryDialog
 } from "@/views/admin/reservations/_feat/reservation-actions/reset-expiry/AdminReservationResetExpiryDialog.tsx";
+import {AdminActionButton} from "@/views/common/_comp";
 
 /** Props for the AdminReservationResetExpiryAction component. */
 type ActionProps = {
@@ -52,20 +49,12 @@ export function AdminReservationResetExpiryAction(
             expiresAt={expiresAt}
             uniqueCode={uniqueCode}
         >
-            <Button
-                variant="primary"
+            <AdminActionButton
+                text="Reset Expiry Date"
+                subtext={subtext}
+                variant="info"
                 disabled={isDisabled}
-                className={cn(
-                    "w-full h-32 text-white hover:text-white",
-                    "bg-blue-500 hover:bg-blue-800",
-                    "dark:bg-blue-600 dark:hover:bg-blue-500",
-                )}
-            >
-                <div className="flex flex-col space-y-1">
-                    <span className="font-bold uppercase tracking-tight">Reset Expiry Date</span>
-                    <span className="text-xs opacity-90">{subtext}</span>
-                </div>
-            </Button>
+            />
         </AdminReservationResetExpiryDialog>
     );
 }

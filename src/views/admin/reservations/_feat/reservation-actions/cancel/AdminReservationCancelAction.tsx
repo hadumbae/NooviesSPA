@@ -3,9 +3,6 @@
  */
 
 import {ReactElement, useState} from "react";
-import {cn} from "@/common/_feat";
-import {Button} from "@/views/common/_comp/ui";
-
 import {AdminReservation} from "@/domains/reservations";
 import {
     AdminReservationCancelForm
@@ -13,6 +10,7 @@ import {
 import {
     AdminReservationCancelDialog
 } from "@/views/admin/reservations/_feat/reservation-actions/cancel/AdminReservationCancelDialog.tsx";
+import {AdminActionButton} from "@/views/common/_comp";
 
 /** Props for the AdminReservationCancelAction component. */
 type ActionProps = {
@@ -33,16 +31,12 @@ export function AdminReservationCancelAction(
     return (
         <AdminReservationCancelForm reservationID={_id} presetValues={{notes: notes ?? ""}}>
             <AdminReservationCancelDialog uniqueCode={uniqueCode} isOpen={isOpen} setIsOpen={setIsOpen}>
-                <Button variant="ghost" disabled={isDisabled} className={cn(
-                    "w-full h-32 text-white hover:text-white",
-                    "bg-red-500 hover:bg-red-800",
-                    "dark:bg-red-600 dark:hover:bg-red-500",
-                )}>
-                    <div className="flex flex-col space-y-1">
-                        <span className="font-bold uppercase tracking-tight">Cancel Reservation</span>
-                        <span className="text-xs opacity-90">{subtext}</span>
-                    </div>
-                </Button>
+                <AdminActionButton
+                    text="Cancel Reservation"
+                    subtext={subtext}
+                    variant="error"
+                    disabled={isDisabled}
+                />
             </AdminReservationCancelDialog>
         </AdminReservationCancelForm>
     );

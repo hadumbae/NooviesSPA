@@ -4,9 +4,8 @@
 
 import {ReactElement, useState} from "react";
 import {ObjectId} from "@/common/_schemas";
-import {PageSectionHeader} from "@/views/common/_comp";
+import {AdminActionButton, PageSectionHeader} from "@/views/common/_comp";
 import {GenericFormDialog} from "@/views/common/_feat";
-import {Button} from "@/views/common/_comp/ui";
 import {UpdateUserSuspensionFormView} from "@/views/admin/users/_feat";
 import {UserStatus} from "@/domains/users/_schema/fields";
 import {useInvalidateUserQueriesOnModeration,} from "@/domains/users/_feat/user-moderation-actions";
@@ -62,9 +61,11 @@ export function UserDetailsPageSuspensionSection(
                     description={dialogDescription}
                     submitText={adminVerb}
                     trigger={(
-                        <Button variant="primary" className="w-full py-12" disabled={userStatus === "INACTIVE"}>
-                            {userStatus === "INACTIVE" ? "Inactive User" : `${adminVerb} User`}
-                        </Button>
+                        <AdminActionButton
+                            text={`${adminVerb} User`}
+                            disabled={userStatus === "INACTIVE"}
+                            subtext={userStatus === "INACTIVE" ? "Inactive User" : undefined}
+                        />
                     )}
                 >
                     <UpdateUserSuspensionFormView
