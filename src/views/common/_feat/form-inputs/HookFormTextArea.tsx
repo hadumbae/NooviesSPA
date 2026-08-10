@@ -31,7 +31,7 @@ export function HookFormTextArea<TValues extends FieldValues>(
             <FormControl>
                 <Textarea
                     placeholder={placeholder || label}
-                    className={cn("default-form-input resize-none h-28", classNames?.input)}
+                    className={cn("resize-none h-28", classNames?.input)}
                     {...field}
                 />
             </FormControl>

@@ -35,7 +35,7 @@ export function GenreDetailsPageContent(
     {page, perPage, setPage, movies, genre, totalItems}: ContentProps
 ): ReactElement {
     const {name: genreName} = genre;
-    useSetAdminPageTitle({presetTitle: genreName});
+    useSetAdminPageTitle({presetTitle: `Genre • ${genreName}`});
 
     return (
         <PageFlexWrapper>

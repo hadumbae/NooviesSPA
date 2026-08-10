@@ -21,7 +21,7 @@ export function HookFormInput<TValues extends FieldValues>(
             <FormControl>
                 <Input
                     placeholder={placeholder || label}
-                    className={cn("default-form-input", classNames?.input)}
+                    className={classNames?.input}
                     {...inputProps}
                     {...field}
                 />

@@ -35,7 +35,7 @@ export function HookFormFileInput<TValues extends FieldValues>(
 
                 <FormControl>
                     <Input
-                        className={cn("default-form-input", classNames?.input)}
+                        className={classNames?.input}
                         type="file"
                         disabled={disabled}
                         multiple={multiple}
