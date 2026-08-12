@@ -24,7 +24,7 @@ export function CloudinaryAvatarImage(
     return (
         <Avatar className={cn("h-24 w-24", className)}>
             <AvatarImage className="object-cover object-center" src={image?.secure_url}/>
-            <AvatarFallback>{getInitials(personName)}</AvatarFallback>
+            <AvatarFallback className="select-none">{getInitials(personName).toUpperCase()}</AvatarFallback>
         </Avatar>
     );
 }

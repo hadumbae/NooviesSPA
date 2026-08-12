@@ -4,16 +4,16 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {ObjectId} from "@/common/_schemas";
-import {
-    EntityDeleteWarningDialog
-} from "@/views/common/_feat/dialog/EntityDeleteWarningDialog.tsx";
+import {UIOpenStateProps} from "@/common/_types";
 import {useRemovePersonData} from "@/domains/persons/_feat/crud-hooks";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
 import {
     handleSubmitResponseError
 } from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
-import {UIOpenStateProps} from "@/common/_types";
+import {
+    EntityDeleteWarningDialog
+} from "@/views/common/_feat/dialog/EntityDeleteWarningDialog.tsx";
 
 /**
  * Props for the {@link PersonDeleteWarningDialog} component.

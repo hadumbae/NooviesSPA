@@ -55,6 +55,16 @@ export function PersonDetailsPageActions(
         });
     };
 
+    const nagivateOnDelete = () => {
+        closeDeleting();
+
+        navigate({
+            to: `/admin/persons`,
+            component: PersonDetailsPageActions.name,
+            message: "Navigating to index after deletion.",
+        });
+    };
+
     return (
         <div className={className}>
             <PersonSubmitForm onSubmitSuccess={replaceOnUpdate} successMessage="Updated!" editEntity={editEntity}>
@@ -76,7 +86,8 @@ export function PersonDetailsPageActions(
             <PersonDeleteWarningDialog
                 personName={name}
                 personID={_id}
-                onSubmitSuccess={() => closeDeleting()}
+                successMessage="Person Removed."
+                onSubmitSuccess={nagivateOnDelete}
                 isOpen={isDeleting}
                 setIsOpen={toggleDeleting}
             />
