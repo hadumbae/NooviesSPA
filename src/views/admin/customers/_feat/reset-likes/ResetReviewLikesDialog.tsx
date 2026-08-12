@@ -5,6 +5,9 @@
 
 import {ReactElement, ReactNode} from "react";
 import {useFormContext} from "react-hook-form";
+import {HookFormInput} from "@/views/common/_feat";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+import {UIOpenStateProps} from "@/common/_types";
 import {
     Button,
     Dialog,
@@ -16,14 +19,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/views/common/_comp/ui";
-import {HookFormInput} from "@/views/common/_feat";
-import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
 /** Props for the ResetReviewLikesDialog component. */
-type DialogProps = {
+type DialogProps = UIOpenStateProps & {
     children?: ReactNode;
-    isOpen: boolean;
-    setIsOpen: (open: boolean) => void;
 };
 
 /**

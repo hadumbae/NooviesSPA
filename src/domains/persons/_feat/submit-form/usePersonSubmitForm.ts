@@ -4,8 +4,8 @@
  */
 
 import {zodResolver} from "@hookform/resolvers/zod";
+import {PersonEditData} from "@/domains/persons/_feat/submit-form";
 import {useForm, UseFormReturn} from "react-hook-form";
-import {Person} from "@/domains/persons/_schema";
 import {FormValuesConfig} from "@/common/_feat/submit-data";
 import {
     PersonFormData,
@@ -15,7 +15,7 @@ import {
 
 /** Hook to initialize and manage the Person submission form state. */
 export function usePersonSubmitForm(
-    {presetValues, editEntity}: FormValuesConfig<PersonFormValues, Person> = {}
+    {presetValues, editEntity}: FormValuesConfig<PersonFormValues, PersonEditData> = {}
 ): UseFormReturn<PersonFormValues, unknown, PersonFormData> {
     const dob = presetValues?.dob
         ? presetValues.dob

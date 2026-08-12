@@ -6,24 +6,18 @@
 
 import {ReactElement, useState} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {QueryFilterDialog} from "@/views/common/_feat/dialog/QueryFilterDialog.tsx";
-import {ScrollArea, ScrollBar} from "@/views/common/_comp/ui/scroll-area.tsx";
-import {PersonQueryOptionForm} from "@/views/admin/persons/_feat/query-option-form/PersonQueryOptionForm.tsx";
-import {PaginationRangeButtons} from "@/views/common/_comp";
+import {IconButton, PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
-import {PersonIndexHeader} from "@/views/admin/persons/_pages/index-page/header.tsx";
 import {PersonIndexCard} from "@/views/admin/persons/_comp";
-
-import {PersonQueryOptions} from "@/domains/persons/_schema/query-options/PersonQueryOptionsSchema";
-import {PersonQueryOptionFormView} from "@/views/admin/persons/_feat";
-import {Person} from "@/domains/persons";
+import {PersonSubmitForm, PersonIndexQueryOptionFormSection, PersonSubmitFormPanel} from "@/views/admin/persons/_feat";
+import {Person, useNavigateToPerson} from "@/domains/persons";
+import {Plus} from "lucide-react";
 
 /**
  * Props for the {@link PersonIndexPageContent} component.
  */
 type ContentProps = {
     persons: Person[];
-    queryOptions: PersonQueryOptions;
     page: number;
     perPage: number;
     totalItems: number;
@@ -34,27 +28,31 @@ type ContentProps = {
  * Renders the structural layout for the administrative Person Index.
  */
 export function PersonIndexPageContent(
-    {persons, queryOptions, page, perPage, totalItems, setPage}: ContentProps
+    {persons, page, perPage, totalItems, setPage}: ContentProps
 ): ReactElement {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const navigate = useNavigateToPerson();
+    const [isCreating, setIsCreating] = useState<boolean>(false);
+
+    const onSubmit = ({slug}: Person) => navigate({
+        slug,
+        message: "Navigate to details after creating person.",
+    });
 
     return (
         <PageFlexWrapper>
-            <PersonIndexHeader/>
+            <PageHeader
+                title="Persons"
+                subtitle="The actors and crew behind movies."
+                actions={
+                    <PersonSubmitForm onSubmitSuccess={onSubmit}>
+                        <PersonSubmitFormPanel isOpen={isCreating} setIsOpen={setIsCreating}>
+                            <IconButton variant="link" icon={Plus}/>
+                        </PersonSubmitFormPanel>
+                    </PersonSubmitForm>
+                }
+            />
 
-            <QueryFilterDialog
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                title="Person Filters"
-                description="Filter and sort persons."
-            >
-                <ScrollArea className="max-h-[80vh]">
-                    <ScrollBar/>
-                    <PersonQueryOptionForm presetValues={queryOptions}>
-                        <PersonQueryOptionFormView/>
-                    </PersonQueryOptionForm>
-                </ScrollArea>
-            </QueryFilterDialog>
+            <PersonIndexQueryOptionFormSection/>
 
             {persons.length > 0 ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

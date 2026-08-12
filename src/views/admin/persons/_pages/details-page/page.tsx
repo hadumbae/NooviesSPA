@@ -4,7 +4,7 @@
 
 import {ReactElement} from 'react';
 import {PageLoader} from "@/views/common/_comp/page";
-import {PersonDetailsUIProvider} from "@/domains/persons/_ctx/PersonDetailsUIProvider.tsx";
+import {PersonDetailsUIProvider} from "@/domains/persons/_ctx/details-ui/PersonDetailsUIProvider.tsx";
 import {
     useFetchByIdentifierRouteParams
 } from "@/common/_feat";

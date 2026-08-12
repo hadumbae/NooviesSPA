@@ -1,18 +1,15 @@
 /**
  * @fileoverview Orchestrator component for the Toggle Review Publicity administrative action.
- *
  */
 
+import {ReactElement, useState} from "react";
 import {ObjectId} from "@/common/_schemas";
 import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
-import {useState} from "react";
+import {Button} from "@/views/common/_comp/ui";
+import {ToggleReviewPublicityForm} from "@/views/admin/customers/_feat/toggle-publicity/ToggleReviewPublicityForm.tsx";
 import {
     ToggleReviewPublicityDialog
 } from "@/views/admin/customers/_feat/toggle-publicity/ToggleReviewPublicityDialog.tsx";
-import {Button} from "@/views/common/_comp/ui/button.tsx";
-import {
-    ToggleReviewPublicityForm
-} from "@/views/admin/customers/_feat/toggle-publicity/ToggleReviewPublicityForm.tsx";
 
 import {MovieReview} from "@/domains/movie-reviews/_schema/model";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
@@ -27,9 +24,9 @@ type ActionProps = {
 /**
  * Encapsulates the state, form logic, and dialog for toggling review visibility.
  */
-export const ToggleReviewPublicityAction = (
+export function ToggleReviewPublicityAction(
     {reviewID, presetValues, submitConfig}: ActionProps
-) => {
+): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const closeOnSuccess = (review: MovieReview) => {
@@ -51,4 +48,4 @@ export const ToggleReviewPublicityAction = (
             </ToggleReviewPublicityDialog>
         </ToggleReviewPublicityForm>
     );
-};
+}

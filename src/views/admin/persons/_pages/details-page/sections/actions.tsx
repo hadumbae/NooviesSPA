@@ -6,6 +6,7 @@ import {ReactElement} from "react";
 import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {
+    buildPersonEditData,
     Person,
     PersonDetailsUISettersContext,
     PersonDetailsUIStatesContext,
@@ -32,6 +33,7 @@ export function PersonDetailsPageActions(
 ): ReactElement {
     const {_id, name} = person;
     const navigate = useLoggedNavigate();
+    const editEntity = buildPersonEditData(person);
 
     const {
         isEditing,
@@ -46,6 +48,8 @@ export function PersonDetailsPageActions(
     } = useRequiredContext({context: PersonDetailsUISettersContext});
 
     const replaceOnUpdate = (updatedPerson: Person) => {
+        setIsEditing(false);
+
         navigate({
             to: `/admin/persons/get/${updatedPerson.slug}`,
             component: PersonDetailsPageActions.name,
@@ -56,12 +60,13 @@ export function PersonDetailsPageActions(
 
     return (
         <div className={className}>
-            <PersonSubmitForm onSubmitSuccess={replaceOnUpdate} editEntity={person}>
+            <PersonSubmitForm onSubmitSuccess={replaceOnUpdate} editEntity={editEntity}>
                 <PersonSubmitFormPanel isEditing={true} isOpen={isEditing} setIsOpen={setIsEditing}/>
             </PersonSubmitForm>
 
 
             <UploadPersonProfileImageForm
+                submitMessage="Updated!"
                 onSubmitSuccess={() => setIsUpdatingProfileImage(false)}
                 successMessage="Profile Image Updated."
                 personID={_id}

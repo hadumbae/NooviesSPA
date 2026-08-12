@@ -1,8 +1,3 @@
-import {PersonIndexHeader} from "@/views/admin/persons/_pages/index-page/header.tsx";
-import {PersonIndexPageContent} from "@/views/admin/persons/_pages/index-page/content.tsx";
-
-export {
-    PersonIndexHeader,
-    PersonIndexPageContent,
-}
+export * from "@/views/admin/persons/_pages/index-page/page.tsx";
+export * from "@/views/admin/persons/_pages/index-page/content.tsx";
 

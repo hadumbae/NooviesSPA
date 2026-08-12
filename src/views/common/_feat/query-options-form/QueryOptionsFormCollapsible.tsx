@@ -31,7 +31,7 @@ export function QueryOptionsFormCollapsible(
                     <span>{activeOptions > 0 ? `Toggle Filters • ${activeOptions}` : "Toggle Filters"}</span>
                 </Button>
             </CollapsibleTrigger>
-            <CollapsibleContent className="border p-3 rounded-md w-fit space-y-5">
+            <CollapsibleContent className="border p-3 rounded-md w-fit space-y-2">
                 {children}
 
                 {

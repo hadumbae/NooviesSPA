@@ -5,18 +5,15 @@
  */
 
 import {ReactElement} from 'react';
-import {
-    usePaginationLocationState
-} from "@/common/_feat/navigation/usePaginationLocationState.ts";
-import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
+import {usePaginationLocationState} from "@/common/_feat/navigation/usePaginationLocationState.ts";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {useFetchPaginatedPersons} from "@/domains/persons/_feat/crud-hooks";
 import {PersonIndexPageContent} from "@/views/admin/persons/_pages/index-page/content.tsx";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {PaginatedItems} from "@/common/_types";
-import {PersonQueryOptionsSchema} from "@/domains/persons/_schema/query-options/PersonQueryOptionsSchema";
-import {Person, PersonSchema} from "@/domains/persons";
+import {Person, PersonSchema, usePersonIndexQueryOptionsContext} from "@/domains/persons";
+import {useSetAdminPageTitle} from "@/common/_feat";
 
 /** Default result set size for the person administrative grid. */
 const PERSONS_PER_PAGE = 20;
@@ -25,9 +22,11 @@ const PERSONS_PER_PAGE = 20;
  * Orchestrator component for the Persons Index view.
  */
 export function PersonIndexPage(): ReactElement {
+    useSetAdminPageTitle({presetTitle: "Persons"});
+
     const {data: paginationState} = usePaginationLocationState();
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", paginationState?.page);
-    const {searchParams} = useParsedSearchParams({schema: PersonQueryOptionsSchema});
+    const {values: searchParams} = usePersonIndexQueryOptionsContext();
 
     const query = useFetchPaginatedPersons({
         page,
@@ -42,7 +41,6 @@ export function PersonIndexPage(): ReactElement {
             {({totalItems, items: persons}: PaginatedItems<Person>) => (
                 <PersonIndexPageContent
                     persons={persons}
-                    queryOptions={searchParams}
                     page={page}
                     perPage={PERSONS_PER_PAGE}
                     totalItems={totalItems}

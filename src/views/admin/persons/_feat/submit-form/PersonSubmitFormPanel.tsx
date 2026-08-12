@@ -107,7 +107,7 @@ export function PersonSubmitFormPanel(
                             className="w-full font-semibold"
                             disabled={isPending}
                         >
-                            {isPending ? <AnimatedLoader/> : "Save Changes"}
+                            {isPending ? <AnimatedLoader/> : "Submit"}
                         </Button>
                     </div>
                 </ScrollArea>

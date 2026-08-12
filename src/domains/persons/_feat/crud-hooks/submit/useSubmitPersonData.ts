@@ -8,6 +8,7 @@ import {PersonCRUDMutationKeys, PersonCRUDQueryKeys} from "@/domains/persons/_fe
 import {create, update} from "@/domains/persons/_feat/crud";
 import {PersonFormData} from "@/domains/persons/_feat/submit-form";
 import {Person, PersonSchema} from "@/domains/persons/_schema";
+import {PersonAdminViewQueryKeys} from "@/domains/persons";
 
 /**
  * Hook to handle the creation or update of Person records and manage form state.
@@ -31,6 +32,7 @@ export function useSubmitPersonData(): UseMutationResult<Person, unknown, Person
 
     const onSuccess = () => {
         queryClient.invalidateQueries({queryKey: PersonCRUDQueryKeys.all, exact: false})
+        queryClient.invalidateQueries({queryKey: PersonAdminViewQueryKeys.all, exact: false})
     };
 
     return useMutation({

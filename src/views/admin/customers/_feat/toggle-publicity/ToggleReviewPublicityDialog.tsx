@@ -17,12 +17,11 @@ import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {useFormContext} from "react-hook-form";
 import {HookFormInput} from "@/views/common/_feat";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+import {UIOpenStateProps} from "@/common/_types";
 
 /** Props for the ToggleReviewPublicityDialog component. */
-type DialogProps = {
+type DialogProps = UIOpenStateProps & {
     children?: ReactNode;
-    isOpen: boolean;
-    setIsOpen: (open: boolean) => void;
 };
 
 /**

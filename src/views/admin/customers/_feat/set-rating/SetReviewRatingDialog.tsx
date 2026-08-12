@@ -18,12 +18,11 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/views/common/_comp/ui";
+import {UIOpenStateProps} from "@/common/_types";
 
 /** Props for the SetReviewRatingDialog component. */
-export type DialogProps = {
+type DialogProps = UIOpenStateProps & {
     children?: ReactNode;
-    isOpen: boolean;
-    setIsOpen: (open: boolean) => void;
     className?: string;
 };
 

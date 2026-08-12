@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {Card, CardContent} from "@/views/common/_comp/ui";
 import {CloudinaryAvatarImage} from "@/views/common/_comp";
-import {ISO3166Alpha2CountryConstant} from "@/common/_const";
+import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {Person} from "@/domains/persons";
 
@@ -20,7 +20,7 @@ export function PersonIndexCard(
 ): ReactElement {
     const {name, dob, nationality, profileImage, slug} = person;
     const formattedDOB = dob.toFormat("dd MMM, yyyy");
-    const formattedNationality = ISO3166Alpha2CountryConstant[nationality];
+    const formattedNationality = ISO3166Alpha2ShortCountryConstant[nationality];
 
     return (
         <LoggedLink to={`/admin/persons/get/${slug}`}>

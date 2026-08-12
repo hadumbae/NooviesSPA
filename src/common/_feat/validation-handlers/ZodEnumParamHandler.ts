@@ -23,6 +23,10 @@ export function ZodEnumParamHandler(
                 }
 
                 if (issue.code === z.ZodIssueCode.invalid_type) {
+                    if (issue.received === "undefined" || issue.received === "null") {
+                        return {message: "Required."};
+                    }
+
                     return {message: invalidType ?? "Must be a valid string value."};
                 }
 

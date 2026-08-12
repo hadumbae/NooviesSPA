@@ -8,14 +8,15 @@ import {NonFutureDateStringSchema} from "@/common/_schemas/dates/NonFutureDateSt
 import {IDStringSchema} from "@/common/_schemas";
 import {AnyValues} from "@/common/_types";
 import {PersonBiographySchema, PersonNameSchema} from "@/domains/persons";
+import {preprocessEmptyToUndefined} from "@/common/_feat";
 
 /** Zod schema for validating person form data. */
 export const PersonFormSchema = z.object({
     _id: IDStringSchema.optional(),
-    name: PersonNameSchema,
-    biography: PersonBiographySchema,
-    dob: NonFutureDateStringSchema,
-    nationality: ISO3166Alpha2CountryCodeSchema,
+    name: preprocessEmptyToUndefined(PersonNameSchema),
+    biography: preprocessEmptyToUndefined(PersonBiographySchema),
+    dob: preprocessEmptyToUndefined(NonFutureDateStringSchema),
+    nationality: preprocessEmptyToUndefined(ISO3166Alpha2CountryCodeSchema),
 });
 
 /** Validated data structure for person forms. */
