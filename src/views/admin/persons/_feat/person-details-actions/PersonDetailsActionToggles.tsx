@@ -2,10 +2,10 @@
  * @fileoverview Dropdown menu for managing state toggles in the Person detail view.
  */
 
-import {Dispatch, ReactElement, ReactNode, SetStateAction, useState} from 'react';
-import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
-import {PersonDetailsUISettersContext} from "@/domains/persons";
+import {ReactElement, ReactNode} from 'react';
+import {usePersonDeletingUIActions, usePersonFormUIActions, usePersonImageFormUIActions} from "@/domains/persons";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/views/common/_comp/ui";
+import {onUISelect} from "@/common/_feat";
 
 /** Props for the PersonDetailsActionToggles component. */
 type ToggleProps = {
@@ -18,30 +18,17 @@ type ToggleProps = {
 export function PersonDetailsActionToggles(
     {children}: ToggleProps
 ): ReactElement {
-    const [open, setOpen] = useState<boolean>(false);
-
-    const {
-        setIsEditing,
-        setIsUpdatingProfileImage,
-        setIsDeletingPerson,
-    } = useRequiredContext({context: PersonDetailsUISettersContext});
-
-    const onClickClose = (func: Dispatch<SetStateAction<boolean>>) => {
-        setOpen(false);
-        func(true);
-    };
-
-    const editPerson = () => onClickClose(setIsEditing);
-    const updateProfileImage = () => onClickClose(setIsUpdatingProfileImage);
-    const deletePerson = () => onClickClose(setIsDeletingPerson);
+    const {open: openForm} = usePersonFormUIActions();
+    const {open: openImage} = usePersonImageFormUIActions();
+    const {open: openDelete} = usePersonDeletingUIActions();
 
     return (
-        <DropdownMenu open={open} onOpenChange={setOpen}>
+        <DropdownMenu>
             <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={editPerson}>Edit</DropdownMenuItem>
-                <DropdownMenuItem onClick={updateProfileImage}>Upload Avatar</DropdownMenuItem>
-                <DropdownMenuItem onClick={deletePerson}>Delete</DropdownMenuItem>
+                <DropdownMenuItem onSelect={onUISelect(openForm)}>Edit</DropdownMenuItem>
+                <DropdownMenuItem onSelect={onUISelect(openImage)}>Upload Avatar</DropdownMenuItem>
+                <DropdownMenuItem onSelect={onUISelect(openDelete)}>Delete</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );

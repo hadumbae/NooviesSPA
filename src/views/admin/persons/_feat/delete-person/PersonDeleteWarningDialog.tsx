@@ -56,8 +56,8 @@ export function PersonDeleteWarningDialog(
         <EntityDeleteWarningDialog
             title={dialogTitle}
             deleteResource={deletePerson}
-            presetOpen={isOpen}
-            setPresetOpen={setIsOpen}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
         >
             {children}
         </EntityDeleteWarningDialog>

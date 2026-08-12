@@ -6,7 +6,12 @@ import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHa
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
 import {PersonIndexPage} from "@/views/admin/persons/_pages/index-page/page.tsx";
 import {PersonDetailsPage} from "@/views/admin/persons/_pages/details-page";
-import {PersonIndexQueryOptionsContextProvider} from "@/domains/persons";
+import {
+    PersonDeletingUIContextProvider,
+    PersonFormUIContextProvider,
+    PersonImageFormUIContextProvider,
+    PersonIndexQueryOptionsContextProvider
+} from "@/domains/persons";
 
 /**
  * Admin "Persons" route definitions.
@@ -28,7 +33,15 @@ export const PersonRoutes = [
             {
                 path: "/admin/persons/get/:slug",
                 errorElement: <ComponentErrorHandler/>,
-                element: <PersonDetailsPage/>,
+                element: (
+                    <PersonFormUIContextProvider>
+                        <PersonImageFormUIContextProvider>
+                            <PersonDeletingUIContextProvider>
+                                <PersonDetailsPage/>
+                            </PersonDeletingUIContextProvider>
+                        </PersonImageFormUIContextProvider>
+                    </PersonFormUIContextProvider>
+                ),
             }
         ],
     }

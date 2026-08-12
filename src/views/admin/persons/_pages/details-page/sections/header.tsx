@@ -31,11 +31,7 @@ export function PersonDetailsPageHeader(
 
             <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-4">
-                    <CloudinaryAvatarImage
-                        personName={name}
-                        image={profileImage}
-                        className="h-16 w-16"
-                    />
+                    <CloudinaryAvatarImage personName={name} image={profileImage} className="h-16 w-16"/>
 
                     <div>
                         <HeaderTitle className="leading-tight">{name}</HeaderTitle>

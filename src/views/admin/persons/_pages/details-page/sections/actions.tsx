@@ -3,21 +3,22 @@
  */
 
 import {ReactElement} from "react";
-import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
-import {
-    buildPersonEditData,
-    Person,
-    PersonDetailsUISettersContext,
-    PersonDetailsUIStatesContext,
-    useNavigateToPersonIndex
-} from "@/domains/persons";
 import {PersonSubmitForm, PersonSubmitFormPanel} from "@/views/admin/persons/_feat/submit-form";
 import {PersonDeleteWarningDialog} from "@/views/admin/persons/_feat/delete-person";
+import {buildPersonEditData, Person} from "@/domains/persons";
 import {
     UploadPersonProfileImageForm,
     UploadPersonProfileImageFormPanel
 } from "@/views/admin/persons/_feat/profile-image-form";
+import {
+    usePersonDeletingUIActions,
+    usePersonDeletingUIState,
+    usePersonFormUIActions,
+    usePersonFormUIState,
+    usePersonImageFormUIActions,
+    usePersonImageFormUIState
+} from "@/domains/persons/_ctx/ui";
 
 /** Props for the PersonDetailsPageActions component. */
 type ActionProps = {
@@ -35,20 +36,16 @@ export function PersonDetailsPageActions(
     const navigate = useLoggedNavigate();
     const editEntity = buildPersonEditData(person);
 
-    const {
-        isEditing,
-        isUpdatingProfileImage,
-        isDeletingPerson,
-    } = useRequiredContext({context: PersonDetailsUIStatesContext});
+    const {close: closeEditing, toggle: toggleEditing} = usePersonFormUIActions();
+    const {close: closeUpdatingAvatar, toggle: toggleUpdatingAvatar} = usePersonImageFormUIActions();
+    const {close: closeDeleting, toggle: toggleDeleting} = usePersonDeletingUIActions();
 
-    const {
-        setIsEditing,
-        setIsUpdatingProfileImage,
-        setIsDeletingPerson,
-    } = useRequiredContext({context: PersonDetailsUISettersContext});
+    const isEditing = usePersonFormUIState();
+    const isUpdatingAvatar = usePersonImageFormUIState();
+    const isDeleting = usePersonDeletingUIState();
 
     const replaceOnUpdate = (updatedPerson: Person) => {
-        setIsEditing(false);
+        closeEditing();
 
         navigate({
             to: `/admin/persons/get/${updatedPerson.slug}`,
@@ -60,29 +57,28 @@ export function PersonDetailsPageActions(
 
     return (
         <div className={className}>
-            <PersonSubmitForm onSubmitSuccess={replaceOnUpdate} editEntity={editEntity}>
-                <PersonSubmitFormPanel isEditing={true} isOpen={isEditing} setIsOpen={setIsEditing}/>
+            <PersonSubmitForm onSubmitSuccess={replaceOnUpdate} successMessage="Updated!" editEntity={editEntity}>
+                <PersonSubmitFormPanel isEditing={true} isOpen={isEditing} setIsOpen={toggleEditing}/>
             </PersonSubmitForm>
 
 
             <UploadPersonProfileImageForm
-                submitMessage="Updated!"
-                onSubmitSuccess={() => setIsUpdatingProfileImage(false)}
+                onSubmitSuccess={() => closeUpdatingAvatar()}
                 successMessage="Profile Image Updated."
                 personID={_id}
             >
                 <UploadPersonProfileImageFormPanel
-                    isOpen={isUpdatingProfileImage}
-                    setIsOpen={setIsUpdatingProfileImage}
+                    isOpen={isUpdatingAvatar}
+                    setIsOpen={toggleUpdatingAvatar}
                 />
             </UploadPersonProfileImageForm>
 
             <PersonDeleteWarningDialog
                 personName={name}
                 personID={_id}
-                onSubmitSuccess={() => useNavigateToPersonIndex()}
-                isOpen={isDeletingPerson}
-                setIsOpen={setIsDeletingPerson}
+                onSubmitSuccess={() => closeDeleting()}
+                isOpen={isDeleting}
+                setIsOpen={toggleDeleting}
             />
         </div>
     );
