@@ -7,7 +7,10 @@ import {
 } from "@/domains/persons/_feat/client-view-data/browse-persons/form/useBrowsePersonsQueryOptionFormDefaultValues.ts";
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {BrowsePersonsQueryOptions, BrowsePersonsQueryOptionsSchema} from "@/domains/persons/_feat/client-view-data";
+import {
+    BrowsePersonsQueryOptions,
+    BrowsePersonsQueryOptionsSchema
+} from "@/domains/persons/_feat/validate-query-options";
 import {
     BrowsePersonsQueryOptionFormValues
 } from "@/domains/persons/_feat/client-view-data/browse-persons/form/BrowsePersonsQueryOptionFormValues.ts";

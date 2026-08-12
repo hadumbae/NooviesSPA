@@ -1,16 +1,4 @@
-import {
-    BrowsePersonsQueryOptionsFormView
-} from "@/views/client/persons/_feat/browse-persons/BrowsePersonsQueryOptionsFormView.tsx";
-import {
-    BrowsePersonsQueryOptionForm
-} from "@/views/client/persons/_feat/browse-persons/BrowsePersonsQueryOptionForm.tsx";
-import {
-    BrowsePersonsQueryOptionsFormCollapsible
-} from "@/views/client/persons/_feat/browse-persons/BrowsePersonsQueryOptionsFormCollapsible.tsx";
-
-export {
-    BrowsePersonsQueryOptionForm,
-    BrowsePersonsQueryOptionsFormView,
-    BrowsePersonsQueryOptionsFormCollapsible,
-}
-
+export * from "@/views/client/persons/_feat/browse-persons/BrowsePersonsQueryOptionsFormView.tsx";
+export * from "@/views/client/persons/_feat/browse-persons/BrowsePersonsQueryOptionForm.tsx";
+export * from "@/views/client/persons/_feat/browse-persons/BrowsePersonsQueryOptionsFormCollapsible.tsx";
+export * from "@/views/client/persons/_feat/browse-persons/BrowsePersonsQueryOptionsFormSection.tsx";

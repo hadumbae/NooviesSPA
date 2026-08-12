@@ -3,7 +3,8 @@
  */
 
 import {ReactElement} from "react";
-import {BrowsePersonsQueryOptionsSchema, useFetchBrowsePersonsViewData} from "@/domains/persons/_feat/client-view-data";
+import {useFetchBrowsePersonsViewData} from "@/domains/persons/_feat/client-view-data";
+import {BrowsePersonsQueryOptionsSchema} from "@/domains/persons/_feat/validate-query-options";
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {useParsedSearchParams} from "@/common/_feat";
 import {QueryDataLoader} from "@/views/common/_feat";

@@ -33,10 +33,10 @@ export function BrowsePersonListCard(
                         alt={person.name}
                         errorText="Failed To Load Profile Image"
                         classNames={{
-                            error: classNames?.error,
+                            error: cn("h-80", classNames?.error),
                             image: cn(
                                 "aspect-square group-hover:scale-105 rounded-t-md",
-                                "transition-transform duration-700 ease-out",
+                                "transition-transform duration-700 ease-out h-80",
                                 classNames?.image
                             ),
                         }}

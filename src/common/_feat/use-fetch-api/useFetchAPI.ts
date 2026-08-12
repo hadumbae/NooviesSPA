@@ -21,8 +21,6 @@ export async function useFetchAPI<TReturns = unknown, TPayload = unknown>(
 ): Promise<FetchRequestReturns<TReturns>> {
     // --- SETUP ---
 
-    console.log("URL: ", url.toString());
-
     const funcName = useFetchAPI.name;
 
     const isFormData = typeof FormData !== "undefined" && data instanceof FormData;

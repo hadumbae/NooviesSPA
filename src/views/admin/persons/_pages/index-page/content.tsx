@@ -44,7 +44,7 @@ export function PersonIndexPageContent(
                 title="Persons"
                 subtitle="The actors and crew behind movies."
                 actions={
-                    <PersonSubmitForm onSubmitSuccess={onSubmit}>
+                    <PersonSubmitForm successMessage="Registered." onSubmitSuccess={onSubmit}>
                         <PersonSubmitFormPanel isOpen={isCreating} setIsOpen={setIsCreating}>
                             <IconButton variant="link" icon={Plus}/>
                         </PersonSubmitFormPanel>

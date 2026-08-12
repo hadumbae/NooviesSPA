@@ -4,7 +4,7 @@
 
 import {FieldValues} from "react-hook-form";
 import {ReactNode} from "react";
-import {DisableFields} from "@/common/_types";
+import {DisableFields, HideFields} from "@/common/_types";
 
 /** Represents the combined state of preset values and active query options. */
 export type QueryOptionFormValues<TPreset extends FieldValues, TOptions extends FieldValues = TPreset> = {
@@ -34,5 +34,6 @@ export type QueryOptionFormViewClassNames = {
 /** Props for the QueryOptionFormView component. */
 export type QueryOptionFormViewProps<TValues extends FieldValues> = {
     disableFields?: DisableFields<TValues>;
+    hideFields?: HideFields<TValues>;
     classNames?: QueryOptionFormViewClassNames;
 };

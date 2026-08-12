@@ -4,15 +4,10 @@
 
 import {ReactElement} from "react";
 import {PersonSummaryInfo} from "@/domains/persons/_feat/client-view-data";
-import {PageFlexWrapper, PageHeader} from "@/views/common/_comp";
-import {PaginationRangeButtons} from "@/views/common/_comp";
+import {PageFlexWrapper, PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {BrowsePersonsPageListSection} from "@/views/client/persons/_pages/browse-page/sections";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
-import {
-    BrowsePersonsQueryOptionForm,
-    BrowsePersonsQueryOptionsFormCollapsible,
-    BrowsePersonsQueryOptionsFormView
-} from "@/views/client/persons";
+import {BrowsePersonsQueryOptionsFormSection} from "@/views/client/persons";
 
 /** Props for the BrowsePersonsPageContent component. */
 type ContentProps = {
@@ -34,11 +29,7 @@ export function BrowsePersonsPageContent(
                 description="Explore the cast and crew behind your favorite movies."
             />
 
-            <BrowsePersonsQueryOptionForm>
-                <BrowsePersonsQueryOptionsFormCollapsible>
-                    <BrowsePersonsQueryOptionsFormView/>
-                </BrowsePersonsQueryOptionsFormCollapsible>
-            </BrowsePersonsQueryOptionForm>
+            <BrowsePersonsQueryOptionsFormSection disableClear={true}/>
 
             {
                 persons.length > 0

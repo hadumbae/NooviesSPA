@@ -4,52 +4,53 @@
 
 import {ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
-import {useBaseFormContext} from "@/common/_feat/generic-form-context";
-import {cn} from "@/common/_feat";
+import {cn, QueryOptionFormViewProps, useQueryOptionFormContext} from "@/common/_feat";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
-import {HookFormInput} from "@/views/common/_feat";
-import {HookFormSortToggle} from "@/views/common/_feat";
+import {HookFormInput, HookFormSortToggle} from "@/views/common/_feat";
 import {Button} from "@/views/common/_comp/ui";
 import {X} from "lucide-react";
-
-/** Props for the BrowsePersonsQueryOptionsView component. */
-type ViewProps = {
-    className?: string
-};
+import {BrowsePersonsQueryOptionFormValues} from "@/domains/persons";
+import {LabelledFormInput} from "@/views/admin/movies";
 
 /**
  * Form section for filtering and sorting persons.
  */
 export function BrowsePersonsQueryOptionsFormView(
-    {className}: ViewProps
+    {classNames, disableFields, hideFields}: QueryOptionFormViewProps<BrowsePersonsQueryOptionFormValues>
 ): ReactElement {
     const {control, watch, reset} = useFormContext();
-    const {submitHandler} = useBaseFormContext();
+    const {submitHandler} = useQueryOptionFormContext();
 
-    if (!submitHandler) throw new Error(`'${BrowsePersonsQueryOptionsFormView.name}' requires a 'submitHandler'.`);
-    useAutoFormSubmit({submitHandler});
+    useAutoFormSubmit({submitHandler, timeout: 450});
 
     const values = watch();
     const hasValues = Object.entries(values).filter(([_, value]) => value).length > 0;
 
-    const clearFilters = () => reset({name: "", sortByName: "1"});
+    const clearFilters = () => reset({name: "", sortByName: ""});
 
     return (
-        <div className={cn("flex max-md:flex-col max-md:space-y-2 md:items-center md:space-x-5", className)}>
-            <div className="space-x-2 flex items-center">
-                <span className="primary-text font-bold text-sm">Name</span>
-                <HookFormInput name="name" placeholder="Name" control={control}/>
-            </div>
+        <div className={cn(
+            "flex max-md:flex-col max-md:space-y-2 md:items-center md:space-x-5",
+            classNames?.container,
+        )}>
+            {!hideFields?.name && (
+                <LabelledFormInput label="Name" classNames={{container: classNames?.filters}}>
+                    <HookFormInput name="name" placeholder="Name" control={control} disabled={disableFields?.name}/>
+                </LabelledFormInput>
+            )}
 
-            <HookFormSortToggle label="Sort By Name" name="sortByName"/>
+            {!hideFields?.sortByName && (
+                <div className={classNames?.sorts}>
+                    <HookFormSortToggle label="Sort By Name" name="sortByName" disabled={disableFields?.sortByName}/>
+                </div>
+            )}
 
-            {
-                hasValues && (
-                    <Button variant="secondary" onClick={clearFilters}>
-                        <X/>
-                    </Button>
-                )
-            }
+
+            {hasValues && (
+                <Button variant="secondary" onClick={clearFilters}>
+                    <X/>
+                </Button>
+            )}
         </div>
     );
 }

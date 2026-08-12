@@ -7,6 +7,7 @@ import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
 import {PersonInfoPage} from "@/views/client/persons/_pages/info-page/page.tsx";
 import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
 import {BrowsePersonsPage} from "@/views/client/persons/_pages/browse-page/page.tsx";
+import {BrowsePersonsQueryOptionsContextProvider} from "@/domains/persons";
 
 /** Route configuration for person browsing and detail views. */
 export const BrowsePersonRoutes: RouteObject[] = [
@@ -16,8 +17,12 @@ export const BrowsePersonRoutes: RouteObject[] = [
         children: [
             {
                 path: "/browse/persons",
-                element: <BrowsePersonsPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                element: (
+                    <BrowsePersonsQueryOptionsContextProvider>
+                        <BrowsePersonsPage/>
+                    </BrowsePersonsQueryOptionsContextProvider>
+                ),
             },
             {
                 path: "/browse/persons/:slug",

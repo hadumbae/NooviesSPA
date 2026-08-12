@@ -6,7 +6,13 @@ import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp";
 import {Person} from "@/domains/persons";
 import {organisePersonFilmography, PersonCreditRoleGroup} from "@/domains/movie-credits";
-import {PersonInfoCastSection, PersonInfoCrewSection, PersonInfoDetailsCard} from "@/views/client/persons";
+import {
+    PersonInfoCastSection,
+    PersonInfoCrewSection,
+    PersonInfoDetailsCard,
+    PersonInfoPageBreadcrumbs
+} from "@/views/client/persons";
+import {useTitle} from "@/common/_feat";
 
 /** Props for the PersonInfoContent component. */
 type ContentProps = {
@@ -20,10 +26,13 @@ type ContentProps = {
 export function PersonInfoContent(
     {person, filmography}: ContentProps
 ): ReactElement {
+    useTitle(person.name);
     const {cast, crew} = organisePersonFilmography({filmography});
 
     return (
         <PageFlexWrapper>
+            <PersonInfoPageBreadcrumbs name={person.name} />
+
             <PersonInfoDetailsCard person={person} classNames={{card: "md:col-span-2"}}/>
 
             {cast.length > 0 && <PersonInfoCastSection credits={cast}/>}
