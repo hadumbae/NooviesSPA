@@ -3,10 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {HookFormInput} from "@/views/common/_feat";
-import {
-    HookFormSortToggle as HookFormStateToggleButton
-} from "@/views/common/_feat";
+import {HookFormInput, HookFormSortToggle as HookFormStateToggleButton} from "@/views/common/_feat";
 import {cn} from "@/common/_feat";
 import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
@@ -16,14 +13,11 @@ import {useFormContext} from "react-hook-form";
 import {RoleTypeDepartmentSelect} from "@/views/admin/role-types/_feat/form-inputs";
 import {RoleTypeQueryOptionsFormValues} from "@/domains/roletypes";
 
-/** Props for the RoleTypeQueryOptionFormView component. */
-type ViewProps = Pick<FormViewProps<RoleTypeQueryOptionsFormValues>, "className" | "disableFields">;
-
 /**
  * Form component for filtering and sorting Role Types.
  */
 export function RoleTypeQueryOptionFormView(
-    {disableFields, className}: ViewProps
+    {disableFields, className}: FormViewProps<RoleTypeQueryOptionsFormValues>
 ): ReactElement {
     const {submitHandler} = useBaseFormContext();
     const {control} = useFormContext();

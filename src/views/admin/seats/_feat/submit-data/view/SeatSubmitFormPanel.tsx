@@ -2,7 +2,7 @@
  * @fileoverview Slide-over panel (Sheet) component for creating or editing seat entities.
  */
 
-import {ReactElement} from "react";
+import {ReactElement, ReactNode} from "react";
 import {RotateCcw} from "lucide-react";
 import {
     Button,
@@ -24,6 +24,7 @@ import {SeatFormValues, useBuildSeatFormRenderFields} from "@/domains/seats";
 
 /** Props for the SeatSubmitFormPanel component. */
 type PanelProps = UIOpenStateProps & FormViewProps<SeatFormValues> & {
+    children?: ReactNode;
     isEditing?: boolean;
 };
 

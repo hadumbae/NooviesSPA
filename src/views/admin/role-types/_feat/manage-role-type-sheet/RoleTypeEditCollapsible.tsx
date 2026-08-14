@@ -1,6 +1,5 @@
 /**
  * @fileoverview Collapsible section providing an inline edit form for a RoleType.
- *
  */
 
 import {RoleTypeSubmitFormActions, RoleTypeSubmitFormView} from "@/views/admin/role-types";
@@ -40,10 +39,7 @@ export function RoleTypeEditCollapsible(
             </CollapsibleTrigger>
 
             <CollapsibleContent className="px-1">
-                <RoleTypeSubmitForm
-                    formConfig={{editEntity: roleType}}
-                    onSubmitConfig={{...onSubmitConfig, onSubmitSuccess: onEditSuccess}}
-                >
+                <RoleTypeSubmitForm editEntity={roleType} {...onSubmitConfig} onSubmitSuccess={onEditSuccess}>
                     <div className="space-y-3">
                         <RoleTypeSubmitFormView/>
                         <RoleTypeSubmitFormActions submitButtonText="Edit"/>

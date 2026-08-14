@@ -1,16 +1,16 @@
 import {
     RoleTypeQueryFilters,
     RoleTypeQueryFiltersSchema
-} from "@/domains/roletypes/_feat/validate-query-options/schema/RoleTypeQueryFiltersSchema.ts";
+} from "@/domains/roletypes/_feat/validate-query-options/query-options/RoleTypeQueryFiltersSchema.ts";
 import {
     RoleTypeQuerySorts,
     RoleTypeQuerySortsSchema
-} from "@/domains/roletypes/_feat/validate-query-options/schema/RoleTypeQuerySortsSchema.ts";
+} from "@/domains/roletypes/_feat/validate-query-options/query-options/RoleTypeQuerySortsSchema.ts";
 import {
     RoleTypeQueryOptions,
     RoleTypeQueryOptionsFormValues,
     RoleTypeQueryOptionsSchema
-} from "@/domains/roletypes/_feat/validate-query-options/schema/RoleTypeQueryOptionsSchema.ts";
+} from "@/domains/roletypes/_feat/validate-query-options/query-options/RoleTypeQueryOptionsSchema.ts";
 
 export {
     RoleTypeQueryFiltersSchema,

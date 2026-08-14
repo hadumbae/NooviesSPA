@@ -2,7 +2,7 @@
  * @fileoverview Slide-over panel (Sheet) component for Theatre Screen data submission.
  */
 
-import {ReactElement} from 'react';
+import {ReactElement, ReactNode} from 'react';
 import {
     Button,
     ScrollArea,
@@ -25,6 +25,7 @@ import {TheatreScreenFormView} from "@/views/admin/theatre-screens/_feat/submit-
  * Props for the ScreenSubmitFormPanel component.
  */
 type FormPanelProps = UIOpenStateProps & FormViewProps<TheatreScreenFormValues> & {
+    children?: ReactNode;
     title?: string;
     description?: string;
 };

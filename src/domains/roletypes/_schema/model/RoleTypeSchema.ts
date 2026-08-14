@@ -3,19 +3,20 @@
  */
 
 import {z} from "zod";
-import {RoleTypeDepartmentSchema} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
-import {NonEmptyStringSchema} from "@/common/_schemas";
 import {IDStringSchema} from "@/common/_schemas";
 import {
     RoleTypeCastCategorySchema,
     RoleTypeCrewCategorySchema,
 } from "@/domains/roletypes/_schema/fields/RoleTypeCategorySchema.ts";
+import {RoleTypeNameSchema} from "@/domains/roletypes/_schema/fields/RoleTypeNameSchema";
+import {RoleTypeDescriptionSchema} from "@/domains/roletypes/_schema/fields/RoleTypeDescriptionSchema";
+import {RoleTypeDepartmentSchema} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
 
 const RoleTypeBaseSchema = z.object({
     _id: IDStringSchema.readonly(),
-    roleName: NonEmptyStringSchema,
+    roleName: RoleTypeNameSchema,
     department: RoleTypeDepartmentSchema,
-    description: NonEmptyStringSchema.optional().nullable(),
+    description: RoleTypeDescriptionSchema,
 });
 
 const RoleTypeCrewSchema = RoleTypeBaseSchema.extend({

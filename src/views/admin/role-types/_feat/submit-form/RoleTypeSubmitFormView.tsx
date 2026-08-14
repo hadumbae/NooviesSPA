@@ -14,14 +14,11 @@ import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {RoleTypeCategorySelect} from "@/views/admin/role-types/_feat/form-inputs";
 import {RoleTypeDepartment, RoleTypeDepartmentConstant, RoleTypeFormValues} from "@/domains/roletypes";
 
-/** Props for the RoleTypeSubmitFormView component. */
-type SubmitViewProps = Pick<FormViewProps<RoleTypeFormValues>, "disableFields" | "className">
-
 /**
  * Form component for creating or editing a RoleType entity.
  */
 export function RoleTypeSubmitFormView(
-    {className, disableFields}: SubmitViewProps
+    {className, disableFields, hideFields}: FormViewProps<RoleTypeFormValues>
 ): ReactElement {
     const {control, watch} = useFormContext();
 
@@ -34,20 +31,39 @@ export function RoleTypeSubmitFormView(
 
     return (
         <div className={cn('space-y-5', className)}>
-            {!disableFields?.roleName && (
-                <HookFormInput name="roleName" label="Role Name" control={control}/>
+            {!hideFields?.roleName && (
+                <HookFormInput
+                    name="roleName"
+                    label="Role Name"
+                    control={control}
+                    disabled={disableFields?.roleName}
+                />
             )}
 
-            {!disableFields?.department && (
-                <HookFormSelect name="department" label="Department" options={departmentOptions}/>
+            {!hideFields?.department && (
+                <HookFormSelect
+                    name="department"
+                    label="Department"
+                    options={departmentOptions}
+                    disabled={disableFields?.department}
+                />
             )}
 
-            {!disableFields?.category && (
-                <RoleTypeCategorySelect department={department} name="category" label="Category"/>
+            {!hideFields?.category && (
+                <RoleTypeCategorySelect
+                    department={department}
+                    name="category"
+                    label="Category"
+                    disabled={disableFields?.category}
+                />
             )}
 
-            {!disableFields?.description && (
-                <HookFormTextArea name="description" label="Description"/>
+            {!hideFields?.description && (
+                <HookFormTextArea
+                    name="description"
+                    label="Description"
+                    disabled={disableFields?.description}
+                />
             )}
         </div>
     );

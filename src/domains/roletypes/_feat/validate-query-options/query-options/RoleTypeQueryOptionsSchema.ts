@@ -6,10 +6,10 @@ import {z} from "zod";
 import {AnyValues} from "@/common/_types";
 import {
     RoleTypeQueryFiltersSchema
-} from "@/domains/roletypes/_feat/validate-query-options/schema/RoleTypeQueryFiltersSchema";
+} from "@/domains/roletypes/_feat/validate-query-options/query-options/RoleTypeQueryFiltersSchema";
 import {
     RoleTypeQuerySortsSchema
-} from "@/domains/roletypes/_feat/validate-query-options/schema/RoleTypeQuerySortsSchema";
+} from "@/domains/roletypes/_feat/validate-query-options/query-options/RoleTypeQuerySortsSchema";
 
 /** Zod schema for full RoleType query options, combining filters and sort options. */
 export const RoleTypeQueryOptionsSchema = RoleTypeQueryFiltersSchema.merge(RoleTypeQuerySortsSchema);

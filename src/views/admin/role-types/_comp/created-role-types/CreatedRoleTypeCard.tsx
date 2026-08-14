@@ -23,8 +23,8 @@ export function CreatedRoleTypeCard(
     const {_id, roleName} = roleType;
 
     return (
-        <div className="border rounded-lg p-2 flex justify-between items-center">
-            <span>{roleName}</span>
+        <div className="border rounded-lg py-2 px-3 flex justify-between items-center">
+            <span className="secondary-text">{roleName}</span>
             <Button
                 className="text-neutral-400 hover:text-black"
                 variant="link"

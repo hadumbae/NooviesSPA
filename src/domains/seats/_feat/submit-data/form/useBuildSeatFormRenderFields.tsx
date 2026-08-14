@@ -6,8 +6,8 @@
 import {cloneElement, ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
 import {HookFormFieldsetConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
-import {FormViewProps} from "@/common/_feat/submit-data/formTypes";
 import {SeatFormValues} from "@/domains/seats/_feat/submit-data/schema/SeatFormSchema.ts";
+import {DisableFields} from "@/common/_types";
 import {
     SeatSubmitFormCoordinateFieldset,
     SeatSubmitFormDetailsFieldset,
@@ -18,7 +18,10 @@ import {
 } from "@/views/admin/seats";
 
 /** Props for filtering and disabling specific form fields. */
-export type FieldsProps = Pick<FormViewProps<SeatFormValues>, "disableFields" | "isNestedView">
+export type FieldsProps = {
+    disableFields?: DisableFields<SeatFormValues>
+    isNestedView?: boolean;
+}
 
 /**
  * Constructs an array of React elements representing the active fieldsets for a seat form.

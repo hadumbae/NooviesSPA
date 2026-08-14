@@ -1,7 +1,9 @@
 import {
     PersonIndexQueryOptionForm
 } from "@/views/admin/persons/_feat/query-option-form/person-index/PersonIndexQueryOptionForm.tsx";
-import {usePersonIndexQueryOptionsContext} from "@/domains/persons";
+import {
+    usePersonIndexQueryOptionsContext
+} from "@/domains/persons/_feat/validate-query-options/person-index/PersonIndexQueryOptionsContext.ts";
 import {createQueryOptionFormSection} from "@/common/_feat";
 import {
     PersonIndexQueryOptionsFormView

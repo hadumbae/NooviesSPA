@@ -11,12 +11,9 @@ import {
 } from "@/views/admin/theatres/_feat/submit-data/fieldsets";
 import {TheatreFormValues} from "@/domains/theatres";
 
-/** Props for the TheatreSubmitFormView component. */
-type TheatreSubmitFormViewProps = FormViewProps<TheatreFormValues>;
-
 /** Renders the UI layout for creating or updating a theatre. */
 export function TheatreSubmitFormView(
-    {className, disableFields}: TheatreSubmitFormViewProps
+    {className, disableFields}: FormViewProps<TheatreFormValues>
 ): ReactElement {
     return (
         <div className={cn("space-y-4", className)}>

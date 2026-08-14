@@ -1,54 +1,25 @@
 /**
- * @fileoverview Container component for managing the submission logic of RoleType forms.
+ * @fileoverview Defines the form component and hook for submitting role type data.
  */
 
-import {ReactElement, ReactNode, useEffect, useId} from 'react';
-import {Form} from "@/views/common/_comp/ui";
-import {FormContainerConfigProps} from "@/common/_feat/submit-data";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
+import {createForm} from "@/common/_feat";
+import {RoleTypeFormSchema, useRoleTypeSubmitMutation} from "@/domains/roletypes";
 
-import {
-    RoleType,
-    RoleTypeFormData,
-    RoleTypeFormValues,
-    useRoleTypeSubmitForm,
-    useRoleTypeSubmitMutation
-} from "@/domains/roletypes";
+const {SubmitForm, useSubmitForm} = createForm({
+    formName: "role-type-form-schema",
+    schema: RoleTypeFormSchema,
+    mutation: useRoleTypeSubmitMutation,
+    defaultValues: {
+        roleName: "",
+        department: "",
+        category: "",
+        description: "",
+    },
+});
 
-/** Props for the RoleTypeSubmitFormContainer component. */
-type SubmitFormProps = FormContainerConfigProps<RoleTypeFormValues, RoleType, RoleTypeFormData, RoleType> & {
-    children: ReactNode;
-};
-
-/**
- * Orchestrates form state and mutation logic for creating or updating RoleType entities.
- */
-export function RoleTypeSubmitForm(
-    {children, formConfig}: SubmitFormProps
-): ReactElement {
-    const id = useId();
-    const formID = `role-type-submit-form-${id}`;
-
-    const form = useRoleTypeSubmitForm(formConfig);
-    const {mutate, isPending, isError} = useRoleTypeSubmitMutation();
-
-    const department = form.watch("department");
-
-    useEffect(() => {
-        form.resetField("category");
-    }, [department]);
-
-    const submitHandler = (values: RoleTypeFormData) => {
-        mutate(values as RoleTypeFormData);
-    };
-
-    return (
-        <BaseFormContextProvider formID={formID} isPending={isPending} isError={isError} submitHandler={submitHandler}>
-            <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(submitHandler)}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for submitting role type creation and update forms. */
+        SubmitForm as RoleTypeSubmitForm,
+    /** Custom hook for managing the role type submit form state and mutation handler. */
+        useSubmitForm as useRoleTypeSubmitForm,
 }

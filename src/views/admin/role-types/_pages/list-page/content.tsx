@@ -4,48 +4,56 @@
 
 import {ReactElement, useState} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {PaginationRangeButtons, SROnly} from "@/views/common/_comp";
-import {RoleTypeListHeader} from "@/views/admin/role-types/_pages/list-page/header.tsx";
-import {QueryFilterDialog} from "@/views/common/_feat/dialog/QueryFilterDialog.tsx";
+import {PageHeader, SROnly} from "@/views/common/_comp";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {RoleType} from "@/domains/roletypes";
+import {RoleTypeDetailsSheet, RoleTypeSubmitForm, RoleTypeSubmitFormPanel} from "@/views/admin/role-types/_feat";
+import {Button} from "@/views/common/_comp/ui";
+import {Plus} from "lucide-react";
 import {
-    RoleTypeDetailsSheet,
-    RoleTypeQueryOptionForm,
-    RoleTypeQueryOptionFormView
-} from "@/views/admin/role-types/_feat";
+    RoleTypeIndexQueryOptionsFormSection
+} from "@/views/admin/role-types/_feat/validate-query-options/roletype-index";
 
 /** Props for the RoleTypeListPageContent component. */
 type ContentProps = {
     roleTypes: RoleType[];
-    totalItems: number;
-    page: number;
-    perPage: number;
-    setPage: (page: number) => void;
 };
 
 /**
  * Renders the layout and UI for the Role Type administrative list.
  */
 export function RoleTypeListPageContent(
-    {page, perPage, setPage, roleTypes, totalItems}: ContentProps
+    {roleTypes}: ContentProps
 ): ReactElement {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isCreating, setIsCreating] = useState<boolean>(false);
+    const [createdTypes, setCreatedTypes] = useState<RoleType[]>([]);
+
+    const onCreated = (roleType: RoleType) => {
+        setIsCreating(false);
+        setCreatedTypes((prev) => [...prev, roleType]);
+    }
 
     return (
         <PageFlexWrapper>
-            <RoleTypeListHeader/>
+            <PageHeader
+                title="Role Types"
+                subtitle="Create And Update Role Types Here."
+                actions={
+                    <RoleTypeSubmitForm successMessage="Created." resetOnSuccess={true} onSubmitSuccess={onCreated}>
+                        <RoleTypeSubmitFormPanel
+                            isOpen={isCreating}
+                            setIsOpen={setIsCreating}
+                            onSubmitConfig={{createdTypes, setCreatedTypes}}
+                        >
+                            <Button variant="link" size="sm" className="link-button">
+                                <Plus/> Create
+                            </Button>
+                        </RoleTypeSubmitFormPanel>
+                    </RoleTypeSubmitForm>
+                }
+            />
 
-            <QueryFilterDialog
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                title="Role Type Filters"
-                description="Filter and sort role types."
-            >
-                <RoleTypeQueryOptionForm>
-                    <RoleTypeQueryOptionFormView className="p-2"/>
-                </RoleTypeQueryOptionForm>
-            </QueryFilterDialog>
+            <RoleTypeIndexQueryOptionsFormSection/>
 
             {
                 roleTypes.length > 0 ? (
@@ -55,13 +63,6 @@ export function RoleTypeListPageContent(
                         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2">
                             {roleTypes.map(rt => <RoleTypeDetailsSheet key={rt._id} roleType={rt}/>)}
                         </div>
-
-                        <PaginationRangeButtons
-                            page={page}
-                            perPage={perPage}
-                            totalItems={totalItems}
-                            setPage={setPage}
-                        />
                     </section>
                 ) : (
                     <EmptyArrayContainer className="flex-1" text="There Are No Role Types"/>

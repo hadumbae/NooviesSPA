@@ -3,17 +3,8 @@
  */
 
 import {ReactElement, useState} from 'react';
-import {Sheet} from "@/views/common/_comp/ui/sheet/Sheet.tsx";
+import {RoleType} from "@/domains/roletypes";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
-import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
-import {ScrollArea} from "@/views/common/_comp/ui/scroll-area.tsx";
-import {ScrollAreaScrollbar} from "@radix-ui/react-scroll-area";
-import {Separator} from "@/views/common/_comp/ui/separator.tsx";
-import {SheetContent} from "@/views/common/_comp/ui/sheet/SheetContent.tsx";
-import {SheetHeader} from "@/views/common/_comp/ui/sheet/SheetHeader.tsx";
-import {SheetTitle} from "@/views/common/_comp/ui/sheet/SheetTitle.tsx";
-import {SheetDescription} from "@/views/common/_comp/ui/sheet/SheetDescription.tsx";
-import {SheetTrigger} from "@/views/common/_comp/ui/sheet/SheetTrigger.tsx";
 import {
     RoleTypeDeleteCollapsible
 } from "@/views/admin/role-types/_feat/manage-role-type-sheet/RoleTypeDeleteCollapsible.tsx";
@@ -23,7 +14,19 @@ import {
 import {
     RoleTypeDetailsCollapsible
 } from "@/views/admin/role-types/_feat/manage-role-type-sheet/RoleTypeDetailsCollapsible.tsx";
-import {RoleType} from "@/domains/roletypes/_schema/model/RoleTypeSchema.ts";
+import {
+    Card,
+    CardContent,
+    ScrollArea,
+    ScrollBar,
+    Separator,
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger
+} from "@/views/common/_comp/ui";
 
 /** Props for the RoleTypeListSheet component. */
 type SheetProps = {
@@ -64,9 +67,7 @@ export function RoleTypeDetailsSheet(
 
                 <ScrollArea className="flex-grow">
                     <section className="space-y-5">
-                        <RoleTypeDetailsCollapsible
-                            roleType={roleType}
-                        />
+                        <RoleTypeDetailsCollapsible roleType={roleType}/>
 
                         <Separator/>
 
@@ -86,7 +87,7 @@ export function RoleTypeDetailsSheet(
                         />
                     </section>
 
-                    <ScrollAreaScrollbar orientation="vertical"/>
+                    <ScrollBar orientation="vertical"/>
                 </ScrollArea>
             </SheetContent>
         </Sheet>

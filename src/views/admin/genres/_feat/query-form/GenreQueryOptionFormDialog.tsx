@@ -30,7 +30,9 @@ type FormViewProps = {
 /**
  * Renders a dialog with form inputs for filtering and sorting genres.
  */
-export function GenreQueryOptionFormDialog({className}: FormViewProps): ReactElement {
+export function GenreQueryOptionFormDialog(
+    {className}: FormViewProps
+): ReactElement {
     const {control} = useFormContext();
     const {submitHandler} = useBaseFormContext();
 

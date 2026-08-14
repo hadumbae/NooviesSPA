@@ -6,7 +6,7 @@
 import {FieldValues} from "react-hook-form";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data/mutationTypes.ts";
 import {ReactNode} from "react";
-import {DisableFields} from "@/common/_types";
+import {DisableFields, HideFields} from "@/common/_types";
 
 /** Configuration for initial form values and entity data. */
 export type FormValuesConfig<TFormValues extends FieldValues, TEntity = unknown> = {
@@ -37,14 +37,14 @@ export type FormContainerConfigProps<TFormValues extends FieldValues, TEntity, T
 
 /** Props for the FormView component. */
 export type FormViewProps<TFormValues extends FieldValues> = {
-    children?: ReactNode;
-    disableFields?: Partial<Record<keyof TFormValues, boolean>>;
     className?: string;
-    isNestedView?: boolean;
+    disableFields?: DisableFields<TFormValues>;
+    hideFields?: HideFields<TFormValues>;
 };
 
 /** Props for form fieldset components. */
 export type FormFieldsetProps<TFormValues extends FieldValues> = {
-    disableFields?: DisableFields<TFormValues>;
     className?: string;
+    disableFields?: DisableFields<TFormValues>;
+    hideFields?: HideFields<TFormValues>;
 };

@@ -2,11 +2,9 @@
  * @fileoverview Side-panel component that hosts the role type submission form within a sheet.
  */
 
-import {ReactElement, ReactNode, useState} from 'react';
+import {Dispatch, ReactElement, ReactNode, SetStateAction, useState} from 'react';
 import {Sheet} from "@/views/common/_comp/ui/sheet/Sheet.tsx";
 import {ScrollArea} from "@/views/common/_comp/ui/scroll-area.tsx";
-import {Button} from "@/views/common/_comp/ui/button.tsx";
-import {RoleTypeSubmitForm} from "@/views/admin/role-types/_feat/submit-form/RoleTypeSubmitForm.tsx";
 import {RoleType} from "@/domains/roletypes/_schema";
 import {ScrollAreaScrollbar} from "@radix-ui/react-scroll-area";
 import {CreatedRoleTypeList} from "@/views/admin/role-types/_comp";
@@ -15,26 +13,30 @@ import {SheetHeader} from "@/views/common/_comp/ui/sheet/SheetHeader.tsx";
 import {SheetTitle} from "@/views/common/_comp/ui/sheet/SheetTitle.tsx";
 import {SheetDescription} from "@/views/common/_comp/ui/sheet/SheetDescription.tsx";
 import {SheetTrigger} from "@/views/common/_comp/ui/sheet/SheetTrigger.tsx";
-import {FormContainerConfigProps} from "@/common/_feat/submit-data";
 import {cn} from "@/common/_feat";
-import {RoleTypeFormData, RoleTypeFormValues} from "@/domains/roletypes/_feat";
 import {RoleTypeSubmitFormActions, RoleTypeSubmitFormView} from "@/views/admin/role-types";
+import {UIOpenStateProps} from "@/common/_types";
+
+type CreatedRoleTypeConfig = {
+    createdTypes: RoleType[];
+    setCreatedTypes: Dispatch<SetStateAction<RoleType[]>>;
+};
 
 /** Props for the RoleTypeSubmitFormPanel component. */
-type FormPanelProps = FormContainerConfigProps<RoleTypeFormValues, RoleType, RoleTypeFormData, RoleType> & {
-    children?: ReactNode;
+type FormPanelProps = UIOpenStateProps & {
+    children: ReactNode;
     className?: string;
     isEditing?: boolean;
+    onSubmitConfig: CreatedRoleTypeConfig;
 }
 
 /**
  * Renders a sliding sheet containing the RoleTypeSubmitForm and a history of created items.
  */
 export function RoleTypeSubmitFormPanel(
-    {children, className, isEditing, onSubmitConfig, formConfig, resetConfig}: FormPanelProps
+    {children, className, isEditing, onSubmitConfig: {createdTypes, setCreatedTypes}}: FormPanelProps
 ): ReactElement {
     const [open, setOpen] = useState<boolean>(false);
-    const [roleTypes, setRoleTypes] = useState<RoleType[]>([]);
 
     const action = isEditing ? "Update" : "Create";
     const buttonText = isEditing ? "Edit" : "Create";
@@ -42,21 +44,10 @@ export function RoleTypeSubmitFormPanel(
     const sheetTitle = `${action} Role Types`;
     const sheetDescription = `${action} role types by submitting data.`;
 
-    const toggleSheet = (roleType: RoleType) => {
-        setOpen(false);
-        onSubmitConfig?.onSubmitSuccess?.(roleType);
-
-        setRoleTypes((prev) => [...prev, roleType]);
-    }
-
     return (
         <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-                {children ?? (
-                    <Button variant="link" className="text-neutral-400 hover:text-black">
-                        Open
-                    </Button>
-                )}
+                {children}
             </SheetTrigger>
 
             <SheetContent className="flex flex-col">
@@ -67,22 +58,13 @@ export function RoleTypeSubmitFormPanel(
 
                 <ScrollArea className="flex-grow px-2">
                     <div className={cn("space-y-5", className)}>
-                        <RoleTypeSubmitForm
-                            onSubmitConfig={{onSubmitSuccess: toggleSheet, ...onSubmitConfig}}
-                            formConfig={formConfig}
-                            resetConfig={resetConfig}
-                        >
-                            <div className="space-y-3">
-                                <RoleTypeSubmitFormView/>
-                                <RoleTypeSubmitFormActions submitButtonText={buttonText}/>
-                            </div>
-                        </RoleTypeSubmitForm>
+                        <div className="space-y-3">
+                            <RoleTypeSubmitFormView/>
+                            <RoleTypeSubmitFormActions submitButtonText={buttonText}/>
+                        </div>
 
-                        {roleTypes.length > 0 && (
-                            <CreatedRoleTypeList
-                                roleTypes={roleTypes}
-                                setRoleTypes={setRoleTypes}
-                            />
+                        {createdTypes.length > 0 && (
+                            <CreatedRoleTypeList roleTypes={createdTypes} setRoleTypes={setCreatedTypes}/>
                         )}
                     </div>
 

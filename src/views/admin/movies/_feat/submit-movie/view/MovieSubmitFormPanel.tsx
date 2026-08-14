@@ -2,7 +2,7 @@
  * @fileoverview Slide-over panel component for creating or editing movie records.
  */
 
-import {ReactElement} from 'react';
+import {ReactElement, ReactNode} from 'react';
 import {ScrollArea} from "@/views/common/_comp/ui/scroll-area.tsx";
 import {
     Sheet,
@@ -21,7 +21,8 @@ import {MovieSubmitFormView} from "@/views/admin/movies/_feat/submit-movie/view/
 import {MovieSubmitFormActions} from "@/views/admin/movies/_feat/submit-movie/view/MovieSubmitFormActions.tsx";
 
 /** Props for the MovieSubmitFormPanel component. */
-type FormPanelProps = Omit<FormViewProps<MovieFormStarterValues>, "isNestedView"> & UIOpenStateProps & {
+type FormPanelProps = FormViewProps<MovieFormStarterValues> & UIOpenStateProps & {
+    children?: ReactNode;
     isEditing?: boolean;
 };
 

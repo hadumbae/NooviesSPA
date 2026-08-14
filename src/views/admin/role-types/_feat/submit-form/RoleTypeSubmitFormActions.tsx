@@ -19,11 +19,11 @@ type ActionProps = {
 export function RoleTypeSubmitFormActions(
     {className, submitButtonText}: ActionProps
 ): ReactElement {
-    const {isPending} = useBaseFormContext();
+    const {formID, isPending} = useBaseFormContext();
 
     return (
         <div className={className}>
-            <Button variant="primary" className="w-full" disabled={isPending}>
+            <Button form={formID} variant="primary" className="w-full" disabled={isPending} type="submit">
                 {isPending ? <AnimatedLoader/> : submitButtonText ?? "Submit"}
             </Button>
         </div>

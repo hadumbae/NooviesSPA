@@ -2,7 +2,7 @@
  * @fileoverview Slide-over panel (Sheet) for creating or updating a Theatre.
  */
 
-import {ReactElement} from 'react';
+import {ReactElement, ReactNode} from 'react';
 import {
     Button,
     ScrollArea,
@@ -21,7 +21,8 @@ import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {TheatreFormValues} from "@/domains/theatres/_feat/submit-data";
 
 /** Props for the TheatreSubmitFormPanel component. */
-type FormPanelProps = Omit<FormViewProps<TheatreFormValues>, "isNestedView"> & UIOpenStateProps & {
+type FormPanelProps = FormViewProps<TheatreFormValues> & UIOpenStateProps & {
+    children?: ReactNode;
     isEditing?: boolean;
 };
 

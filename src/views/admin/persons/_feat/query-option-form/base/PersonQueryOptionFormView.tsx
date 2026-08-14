@@ -15,14 +15,11 @@ import {PersonQueryOptionFormValues} from "@/domains/persons";
 import {HookFormSelect} from "@/views/common/_comp";
 import {ISO3166Alpha2CountryOptions} from "@/common/_const";
 
-/** Props for the PersonQueryOptionFormView component. */
-type ViewProps = FormViewProps<PersonQueryOptionFormValues>;
-
 /**
  * Form component for filtering and sorting person entities with debounced auto-submission.
  */
 export function PersonQueryOptionFormView(
-    {disableFields, className}: ViewProps
+    {disableFields, className}: FormViewProps<PersonQueryOptionFormValues>
 ): ReactElement {
     const {control} = useFormContext();
     const {submitHandler} = useBaseFormContext();

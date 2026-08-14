@@ -8,7 +8,8 @@ import {z} from "zod";
 /** Zod schema for validating an optional role type description string. */
 export const RoleTypeDescriptionSchema = NonEmptyStringSchema
     .max(1000, {message: "Max. 1000 Characters"})
-    .optional();
+    .optional()
+    .nullable();
 
 /** Type definition for a role type description. */
 export type RoleTypeDescription = z.infer<typeof RoleTypeDescriptionSchema>;

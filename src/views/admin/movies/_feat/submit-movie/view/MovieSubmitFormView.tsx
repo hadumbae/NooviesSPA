@@ -12,14 +12,13 @@ import {
 import {
     MovieSubmitFormProductionFieldset
 } from "@/views/admin/movies/_feat/submit-movie/fieldsets/MovieSubmitFormProductionFieldset.tsx";
-import {MovieSubmitFormMediaFieldset} from "@/views/admin/movies/_feat/submit-movie/fieldsets/MovieSubmitFormMediaFieldset.tsx";
-
-/** Props for the MovieSubmitFormView component. */
-type ViewProps = Pick<FormViewProps<MovieFormStarterValues>, "className" | "disableFields">;
+import {
+    MovieSubmitFormMediaFieldset
+} from "@/views/admin/movies/_feat/submit-movie/fieldsets/MovieSubmitFormMediaFieldset.tsx";
 
 /** Form view component that organises movie data entry into logical fieldsets. */
 export function MovieSubmitFormView(
-    {className, disableFields}: ViewProps
+    {className, disableFields}: FormViewProps<MovieFormStarterValues>
 ): ReactElement {
     return (
         <div className={cn("space-y-5", className)}>

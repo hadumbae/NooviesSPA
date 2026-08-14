@@ -8,7 +8,7 @@ import {
     RoleTypeQueryOptions,
     RoleTypeQueryOptionsFormValues,
     RoleTypeQueryOptionsSchema,
-} from "@/domains/roletypes/_feat/validate-query-options/schema";
+} from "@/domains/roletypes/_feat/validate-query-options/query-options";
 
 /** Configuration parameters for the useRoleTypeQueryOptionForm hook. */
 export type FormParams = {

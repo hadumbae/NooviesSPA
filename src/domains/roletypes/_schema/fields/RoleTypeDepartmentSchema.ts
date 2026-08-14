@@ -3,19 +3,14 @@
  */
 
 import {z} from "zod";
-import {
-    RoleTypeDepartmentConstant
-} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentConstant.ts";
+import {ZodEnumParamHandler} from "@/common/_feat";
+import {RoleTypeDepartmentConstant} from "@/domains/roletypes/_const/RoleTypeDepartmentConstant.ts";
 
 /** Zod schema for validating role type department strings. */
-export const RoleTypeDepartmentSchema = z.enum(
-    RoleTypeDepartmentConstant,
-    {
-        required_error: "Required.",
-        message: "Invalid value. Must be `CAST` or `CREW`.",
-        invalid_type_error: "Must be a valid `Department` string."
-    },
-);
+export const RoleTypeDepartmentSchema = z.enum(RoleTypeDepartmentConstant, ZodEnumParamHandler({
+    invalidValue: "Must be `CAST` or `CREW`.",
+    invalidType: "Must be a valid `Department` string.",
+}));
 
 /** Union type of valid role type departments. */
 export type RoleTypeDepartment = z.infer<typeof RoleTypeDepartmentSchema>;
