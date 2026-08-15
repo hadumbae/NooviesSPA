@@ -17,6 +17,9 @@ export function QueryDataLoader<TData = unknown>(
     {children, query: {data, isPending, isError, error}, loaderComponent: Loader = PageLoader}: LoaderProps<TData>
 ): ReactElement {
 
+    console.log("Is Pending: ", isPending);
+    console.log("Data: ", data);
+
     if (isPending || !data) return <Loader/>;
     if (isError) throw error;
 

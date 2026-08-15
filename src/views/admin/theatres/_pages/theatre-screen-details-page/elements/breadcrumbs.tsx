@@ -32,7 +32,7 @@ export function TheatreScreenDetailsBreadcrumbs(
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                         <LoggedLink to="/admin/theatres">
-                            Index
+                            Theatres
                         </LoggedLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
@@ -42,7 +42,7 @@ export function TheatreScreenDetailsBreadcrumbs(
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                         <LoggedLink to={`/admin/theatres/get/${theatreSlug}`}>
-                            {theatreName} | Details
+                            {theatreName}
                         </LoggedLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
@@ -51,7 +51,7 @@ export function TheatreScreenDetailsBreadcrumbs(
 
                 <BreadcrumbItem>
                     <BreadcrumbPage>
-                        {screenName} | Screen
+                        Screen • {screenName}
                     </BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>

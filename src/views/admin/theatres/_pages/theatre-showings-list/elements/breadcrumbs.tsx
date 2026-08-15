@@ -32,7 +32,7 @@ export function TheatreShowingListBreadcrumbs(
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                         <HoverLink to="/admin/theatres">
-                            All Theatres
+                            Theatres
                         </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
@@ -42,7 +42,7 @@ export function TheatreShowingListBreadcrumbs(
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                         <HoverLink to={`/admin/theatres/get/${theatreSlug}`}>
-                            {theatreName} | Details
+                            {theatreName}
                         </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>

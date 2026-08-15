@@ -10,14 +10,11 @@ import {HookFormInput} from "@/views/common/_feat";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {TheatreFormValues} from "@/domains/theatres/_feat/submit-data";
 
-/** Props for the TheatreSubmitFormDetailsFieldset component. */
-type FieldProps = Omit<FormFieldsetProps<TheatreFormValues>, "isNestedView">;
-
 /**
  * Renders form fields for a theatre's name and seat capacity.
  */
 export function TheatreSubmitFormDetailsFieldset(
-    {disableFields, className}: FieldProps
+    {disableFields, hideFields, className}: FormFieldsetProps<TheatreFormValues>
 ): ReactElement {
     const {control} = useFormContext();
 
@@ -30,22 +27,24 @@ export function TheatreSubmitFormDetailsFieldset(
 
             <div className={cn("grid grid-cols-1 gap-4", className)}>
                 {
-                    !disableFields?.name &&
+                    !hideFields?.name &&
                     <HookFormInput
                         name="name"
                         label="Name"
                         control={control}
+                        disabled={disableFields?.name}
                     />
                 }
 
                 {
-                    !disableFields?.seatCapacity &&
+                    !hideFields?.seatCapacity &&
                     <HookFormInput
                         name="seatCapacity"
                         label="Number Of Seats (Capacity)"
                         type="number"
                         min={0}
                         control={control}
+                        disabled={disableFields?.seatCapacity}
                     />
                 }
             </div>

@@ -4,17 +4,19 @@
 
 import {ReactElement, useState} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {QueryFilterDialog} from "@/views/common/_feat/dialog/QueryFilterDialog.tsx";
-import {ScrollArea, ScrollBar} from "@/views/common/_comp/ui";
-import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
-import {PaginationRangeButtons} from "@/views/common/_comp";
+import {Button} from "@/views/common/_comp/ui";
+import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 
-import {TheatreDetails, TheatreQueryOptionSchema} from "@/domains/theatres";
+import {Theatre, TheatreDetails, useNavigateToTheatre} from "@/domains/theatres";
 import {TheatreIndexCard} from "@/views/admin/theatres/_comp";
-import {TheatreQueryOptionForm, TheatreQueryOptionFormView} from "@/views/admin/theatres/_feat";
-import {TheatreIndexHeader} from "@/views/admin/theatres/_pages/index-page/header.tsx";
+import {Plus} from "lucide-react";
+import {
+    TheatreIndexQueryOptionsFormSection,
+    TheatreSubmitForm,
+    TheatreSubmitFormPanel
+} from "@/views/admin/theatres/_feat";
 
 /** Props for the TheatreIndexPageContent component. */
 type ContentProps = {
@@ -33,26 +35,36 @@ export function TheatreIndexPageContent(
 ): ReactElement {
     useSetAdminPageTitle({presetTitle: "Theatre Index"});
 
-    const {searchParams} = useParsedSearchParams({schema: TheatreQueryOptionSchema});
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+    const navigateToTheatre = useNavigateToTheatre();
+
+    const navigateOnCreate = (theatre: Theatre) => {
+        navigateToTheatre({
+            slug: theatre.slug,
+            component: TheatreIndexPageContent.name,
+            message: "Successfully created theatre; moving to the theatre's detail view."
+        });
+    };
+
 
     return (
         <PageFlexWrapper>
-            <TheatreIndexHeader/>
+            <PageHeader
+                title="Theatres"
+                description="Manage physical cinema locations, total seating capacities, and regional address settings."
+                actions={
+                    <TheatreSubmitForm onSubmitSuccess={navigateOnCreate}>
+                        <TheatreSubmitFormPanel isOpen={isSubmitting} setIsOpen={setIsSubmitting}>
+                            <Button variant="link" size="sm" aria-label="Add a new theatre">
+                                <Plus/> Theatre
+                            </Button>
+                        </TheatreSubmitFormPanel>
+                    </TheatreSubmitForm>
+                }
+            />
 
-            <QueryFilterDialog
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                title="Theatre Filters"
-                description="Filter and sort theatres."
-            >
-                <ScrollArea className="max-h-[80vh]">
-                    <ScrollBar/>
-                    <TheatreQueryOptionForm presetValues={searchParams}>
-                        <TheatreQueryOptionFormView/>
-                    </TheatreQueryOptionForm>
-                </ScrollArea>
-            </QueryFilterDialog>
+            <TheatreIndexQueryOptionsFormSection/>
 
             {theatres.length > 0 ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

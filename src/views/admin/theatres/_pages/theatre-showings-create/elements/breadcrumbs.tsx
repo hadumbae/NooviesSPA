@@ -11,26 +11,26 @@ import {
     BreadcrumbSeparator,
 } from "@/views/common/_comp/ui/breadcrumb.tsx";
 import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
-import {ObjectId} from "@/common/_schemas";
+import {SlugString} from "@/common/_schemas";
 import {ReactElement} from "react";
 
 /** Props for the TheatreShowingCreateBreadcrumbs component. */
 type BreadcrumbProps = {
-    theatreID: ObjectId;
+    theatreSlug: SlugString;
     theatreName: string;
 };
 
 /**
  * Renders a breadcrumb trail linking back to the theatre list and theatre details views.
  */
-export function TheatreShowingCreateBreadcrumbs({theatreID, theatreName}: BreadcrumbProps): ReactElement {
+export function TheatreShowingCreateBreadcrumbs({theatreSlug, theatreName}: BreadcrumbProps): ReactElement {
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
                         <HoverLink to="/admin/theatres">
-                            All Theatres
+                            Theatres
                         </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
@@ -39,8 +39,8 @@ export function TheatreShowingCreateBreadcrumbs({theatreID, theatreName}: Breadc
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <HoverLink to={`/admin/theatres/get/${theatreID}`}>
-                            {theatreName} | Details
+                        <HoverLink to={`/admin/theatres/get/${theatreSlug}`}>
+                            {theatreName}
                         </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>

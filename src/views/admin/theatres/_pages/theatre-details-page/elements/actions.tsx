@@ -12,7 +12,7 @@ import {
     TheatreDetailsUIStateContext
 } from "@/domains/theatres/_ctx/theatre-details-ui/TheatreDetailsUIStateContext.ts";
 import {Theatre, TheatreDetails} from "@/domains/theatres/_schema/theatre";
-import {TheatreDetailsUISetterContext} from "@/domains/theatres";
+import {buildTheatreEditData, TheatreDetailsUISetterContext} from "@/domains/theatres";
 
 /** Props for the TheatreDetailsPageActions component. */
 type ActionProps = {
@@ -26,6 +26,7 @@ export function TheatreDetailsPageActions(
 ): ReactElement {
     const navigate = useLoggedNavigate();
     const updateSlugURL = useNavigateToTheatre();
+    const editEntity = buildTheatreEditData(theatre);
 
     const {isEditing, isDeleting} = useRequiredContext({context: TheatreDetailsUIStateContext});
     const {setIsEditing, setIsDeleting} = useRequiredContext({context: TheatreDetailsUISetterContext});
@@ -49,7 +50,7 @@ export function TheatreDetailsPageActions(
     return (
         <div className={className}>
             <TheatreSubmitForm
-                formConfig={{editEntity: theatre}}
+                editEntity={editEntity}
                 onSubmitSuccess={replaceOnUpdate}
                 successMessage="Updated."
             >

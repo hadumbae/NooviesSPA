@@ -2,12 +2,12 @@
  * @fileoverview Fieldset containing address, timezone, and coordinate inputs for a theatre.
  */
 
+import {cn} from "@/common/_feat";
 import {ReactElement, useEffect} from "react";
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/_feat";
 import {Separator} from "@/views/common/_comp/ui";
-import {HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
 import {HookFormSelect} from "@/views/common/_comp";
+import {HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
 import {IANATimezoneOptions, ISO3166Alpha2CountryOptions} from "@/common/_const";
 
 /** Props for the TheatreSubmitFormLocationFieldset component. */
@@ -39,51 +39,44 @@ export function TheatreSubmitFormLocationFieldset(
                 <Separator/>
             </div>
 
-            <div className={cn("grid grid-cols-2 gap-4", className)}>
+            <div className={cn("space-y-4", className)}>
                 <HookFormInput
-                    classNames={{container: "col-span-2"}}
                     name="location.street"
                     label="Street"
                     control={control}
                 />
 
                 <HookFormInput
-                    classNames={{container: "col-span-2"}}
                     name="location.city"
                     label="City"
                     control={control}
                 />
 
                 <HookFormInput
-                    classNames={{container: "col-span-2"}}
                     name="location.state"
                     label="State"
                     control={control}
                 />
 
                 <HookFormSelect
-                    classNames={{container: "col-span-2"}}
                     name="location.country"
                     label="Country"
                     options={ISO3166Alpha2CountryOptions}
                 />
 
                 <HookFormInput
-                    classNames={{container: "col-span-2"}}
                     name="location.postalCode"
                     label="Postal Code"
                     control={control}
                 />
 
                 <HookFormSelect
-                    classNames={{container: "col-span-2"}}
                     name="location.timezone"
                     label="Timezone"
                     options={IANATimezoneOptions}
                 />
 
                 <HookFormCheckbox
-                    classNames={{container: "col-span-2"}}
                     name="location.includeCoordinates"
                     label="Include Coordinates?"
                 />
@@ -95,6 +88,7 @@ export function TheatreSubmitFormLocationFieldset(
                             label="Longitude"
                             control={control}
                         />
+
                         <HookFormInput
                             name="location.coordinates.coordinates.1"
                             label="Latitude"

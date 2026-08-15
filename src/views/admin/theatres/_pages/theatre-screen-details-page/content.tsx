@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {TheatreScreenDetailsPageTabs} from "@/views/admin/theatres/_pages/theatre-screen-details-page/tabs";
 import {
-    TheatreScreenDetailsHeader,
+    TheatreScreenDetailsBreadcrumbs,
     TheatreScreenDetailsPageScreenActions
 } from "@/views/admin/theatres/_pages/theatre-screen-details-page/elements";
 
@@ -14,6 +14,7 @@ import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/_schema/model
 import {TheatreDetails} from "@/domains/theatres";
 import {SeatDetails} from "@/domains/seats/_schema/model";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
+import {PageHeader} from "@/views/common/_comp";
 
 /** Props for the TheatreScreenDetailsPageContent component. */
 type ContentProps = {
@@ -35,10 +36,16 @@ export function TheatreScreenDetailsPageContent(
 
     return (
         <PageFlexWrapper>
-            <TheatreScreenDetailsHeader
-                theatreSlug={theatreSlug}
-                theatreName={theatreName}
-                screenName={screenName}
+            <PageHeader
+                title={`${screenName} Details`}
+                description={`Screen at ${theatreName}. Handle seats and showings here.`}
+                breadcrumbs={
+                    <TheatreScreenDetailsBreadcrumbs
+                        theatreSlug={theatreSlug}
+                        theatreName={theatreName}
+                        screenName={screenName}
+                    />
+                }
             />
 
             <TheatreScreenDetailsPageTabs

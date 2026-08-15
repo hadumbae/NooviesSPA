@@ -29,7 +29,7 @@ export function TheatreDetailsBreadcrumbs(
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <LoggedLink to="/admin/theatres">Index</LoggedLink>
+                        <LoggedLink to="/admin/theatres">Theatres</LoggedLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -37,7 +37,7 @@ export function TheatreDetailsBreadcrumbs(
 
                 <BreadcrumbItem>
                     <BreadcrumbPage>
-                        {theatreName ?? "Theatre"} | Details
+                        {theatreName ?? "Theatre"}
                     </BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>

@@ -1,7 +1,2 @@
-import {TheatreSubmitFormPanel} from "@/views/admin/theatres/_feat/submit-data/views/TheatreSubmitFormPanel.tsx";
-import {TheatreSubmitFormView} from "@/views/admin/theatres/_feat/submit-data/views/TheatreSubmitFormView.tsx";
-
-export {
-    TheatreSubmitFormPanel,
-    TheatreSubmitFormView,
-}
+export * from "@/views/admin/theatres/_feat/submit-data/views/TheatreSubmitFormPanel.tsx";
+export * from "@/views/admin/theatres/_feat/submit-data/views/TheatreSubmitFormView.tsx";

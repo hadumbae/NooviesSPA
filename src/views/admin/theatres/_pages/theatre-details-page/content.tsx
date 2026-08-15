@@ -14,9 +14,12 @@ import {
     TheatreDetailsPageShowingSection
 } from "@/views/admin/theatres/_pages/theatre-details-page/sections";
 import {
-    TheatreDetailsHeader,
-    TheatreDetailsPageActions
+    TheatreDetailsBreadcrumbs,
+    TheatreDetailsPageActions,
+    TheatreDetailsToggles
 } from "@/views/admin/theatres/_pages/theatre-details-page/elements";
+import {IconButton, PageHeader} from "@/views/common/_comp";
+import {Ellipsis} from "lucide-react";
 
 /** Props for the TheatreDetailsPageContent component. */
 type TheatreDetailsPageContentProps = {
@@ -39,7 +42,18 @@ export function TheatreDetailsPageContent(
 
     return (
         <PageFlexWrapper>
-            <TheatreDetailsHeader theatreName={theatreName}/>
+            <PageHeader
+                title={theatreName}
+                description="Theatre"
+                breadcrumbs={
+                    <TheatreDetailsBreadcrumbs theatreName={theatreName}/>
+                }
+                actions={
+                    <TheatreDetailsToggles>
+                        <IconButton icon={Ellipsis}/>
+                    </TheatreDetailsToggles>
+                }
+            />
 
             <section>
                 <SROnly text="Theatre Details Card"/>

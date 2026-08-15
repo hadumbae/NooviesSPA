@@ -4,13 +4,14 @@
 
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
-import {TheatreShowingCreateHeader} from "@/views/admin/theatres/_pages/theatre-showings-create/elements/header.tsx";
 import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {ShowingSubmitForm} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitForm.tsx";
 import {ReactElement} from "react";
 
 import {Theatre} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
 import {ShowingSubmitFormView} from "@/views/admin/showings/_feat/submit-form";
+import {PageHeader} from "@/views/common/_comp";
+import {TheatreShowingCreateBreadcrumbs} from "@/views/admin/theatres";
 
 /** Props for the TheatreShowingCreatePageContent component. */
 type ContentProps = {
@@ -24,11 +25,11 @@ export function TheatreShowingCreatePageContent(
     {theatre}: ContentProps
 ): ReactElement {
     const navigate = useLoggedNavigate();
-    const {_id: theatreID, name: theatreName} = theatre;
+    const {_id: theatreID, name: theatreName, slug: theatreSlug} = theatre;
 
     const onSubmit = () => {
         navigate({
-            to: `/admin/theatres/get/${theatreID}/showings/list`,
+            to: `/admin/theatres/get/${theatreSlug}/showings/list`,
             level: "log",
             message: "Navigate To Theatre's List Of Showing.",
             component: TheatreShowingCreatePageContent.name,
@@ -37,9 +38,15 @@ export function TheatreShowingCreatePageContent(
 
     return (
         <PageFlexWrapper>
-            <TheatreShowingCreateHeader
-                theatreID={theatreID}
-                theatreName={theatreName}
+            <PageHeader
+                title={`${theatreName} | Showings`}
+                description="Create showings for theatre here."
+                breadcrumbs={
+                    <TheatreShowingCreateBreadcrumbs
+                        theatreSlug={theatreSlug}
+                        theatreName={theatreName}
+                    />
+                }
             />
 
             <Card>

@@ -28,7 +28,7 @@ export function TheatreShowingListPage(): ReactElement {
 
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
 
-    const queries = useFetchTheatreShowingListViewData({
+    const query = useFetchTheatreShowingListViewData({
         slug: slug!,
         queries: {page, perPage: SHOWINGS_PER_PAGE},
         options: {enabled: !!slug}
@@ -39,7 +39,7 @@ export function TheatreShowingListPage(): ReactElement {
     }
 
     return (
-        <QueryDataLoader query={queries}>
+        <QueryDataLoader query={query}>
             {({theatre, showings: {totalItems, items}}: TheatreShowingListViewData) => (
                 <TheatreShowingListPageContent
                     theatre={theatre}

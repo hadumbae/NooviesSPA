@@ -24,11 +24,14 @@ export function PageHeader(
 ): ReactElement {
     return (
         <header className={cn("flex justify-between items-center", className)}>
-            <div className="flex-1 space-y-2">
+            <div className="flex-1 space-y-3">
                 {breadcrumbs}
-                <HeaderTitle>{title}</HeaderTitle>
-                {subtitle && <HeaderSubtitle>{subtitle}</HeaderSubtitle>}
-                {description && <HeaderDescription>{description}</HeaderDescription>}
+
+                <div>
+                    <HeaderTitle>{title}</HeaderTitle>
+                    {subtitle && <HeaderSubtitle>{subtitle}</HeaderSubtitle>}
+                    {description && <HeaderDescription>{description}</HeaderDescription>}
+                </div>
             </div>
 
             {actions}

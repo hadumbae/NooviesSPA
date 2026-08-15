@@ -4,13 +4,15 @@
 
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {PaginationRangeButtons} from "@/views/common/_comp";
+import {IconButton, PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card";
 
 import {Theatre, TheatreDetails} from "@/domains/theatres";
 import {ShowingDetails} from "@/domains/showings/_schema/showing";
-import {TheatreShowingListHeader} from "@/views/admin/theatres/_pages/theatre-showings-list//elements/header.tsx";
+import {TheatreShowingListBreadcrumbs} from "@/views/admin/theatres";
+import {Plus} from "lucide-react";
+import {LoggedLink} from "@/views/common/_feat";
 
 /** Props for the TheatreShowingListPageContent component. */
 type ContentProps = {
@@ -32,10 +34,17 @@ export function TheatreShowingListPageContent(
 
     return (
         <PageFlexWrapper>
-            <TheatreShowingListHeader
-                theatreSlug={slug}
-                theatreName={name}
-                showingCount={totalShowings}
+            <PageHeader
+                title={name}
+                description={`Showings At Theatre • ${totalShowings} Showings`}
+                breadcrumbs={
+                    <TheatreShowingListBreadcrumbs theatreSlug={slug} theatreName={name}/>
+                }
+                actions={
+                    <LoggedLink to={`/admin/theatres/get/${slug}/showings/create`}>
+                        <IconButton aria-describedby="plus-link-button" icon={Plus}/>
+                    </LoggedLink>
+                }
             />
 
             {

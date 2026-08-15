@@ -4,6 +4,10 @@
     }
 
     .query-option-fieldset-grid {
-        @apply grid grid-cols-1 md:grid-cols-2 gap-4
+        @apply grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4
+    }
+
+    .query-option-fieldset-flex {
+        @apply flex flex-wrap space-x-4
     }
 }

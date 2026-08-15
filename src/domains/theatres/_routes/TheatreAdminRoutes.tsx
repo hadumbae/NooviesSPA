@@ -10,6 +10,7 @@ import {
     TheatreShowingCreatePage,
     TheatreShowingListPage,
 } from "@/views/admin/theatres/_pages";
+import {TheatreIndexQueryOptionsContextProvider} from "@/domains/theatres";
 
 /**
  * Defines the routing hierarchy for theatre management.
@@ -21,7 +22,11 @@ const routes = [
         children: [
             {
                 index: true,
-                element: <TheatreIndexPage/>,
+                element: (
+                    <TheatreIndexQueryOptionsContextProvider>
+                        <TheatreIndexPage/>
+                    </TheatreIndexQueryOptionsContextProvider>
+                ),
             },
             {
                 path: "get/:slug",

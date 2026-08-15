@@ -1,68 +1,51 @@
-/** @fileoverview Container component for the theatre creation and update form. */
-
-import {ReactElement, ReactNode} from 'react';
-import {Theatre} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
-import {TheatreFormValues, useTheatreSubmitForm} from "@/domains/theatres/_feat/submit-data";
-import {TheatreFormData} from "@/domains/theatres/_feat/submit-data/schema.ts";
-import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {useTheatreSubmitMutation} from "@/domains/theatres/_feat/crud-hooks";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/views/common/_comp/ui";
-import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
-import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import {
-    handleSubmitResponseError
-} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
-
-/** Props for the TheatreSubmitForm component. */
-type SubmitFormProps = MutationResponseConfig<Theatre, TheatreFormData> & MutationFormResetConfig & {
-    children: ReactNode;
-    formConfig?: FormValuesConfig<TheatreFormValues, Theatre>;
-}
-
 /**
- * Provides form logic and mutation handling for theatre data submission.
+ * @fileoverview Defines the form component and hook for submitting theatre data.
  */
-export function TheatreSubmitForm(props: SubmitFormProps): ReactElement {
-    const {children, formConfig, ...submitConfig} = props;
 
-    const formID = useGenerateFormID("submit-theatre-data-form");
+import {createForm} from "@/common/_feat";
+import {
+    Theatre,
+    TheatreEditData,
+    TheatreFormData,
+    TheatreFormValues,
+    useTheatreSubmitMutation
+} from "@/domains/theatres";
+import {TheatreFormSchema} from "@/domains/theatres/_feat/submit-data/schema.ts";
 
-    const form = useTheatreSubmitForm(formConfig);
-    const {mutateAsync, isPending, isError} = useTheatreSubmitMutation();
-
-    const submitTheatreData = async (values: TheatreFormData) => {
-        try {
-            handleMutationCallback({
-                cb: () => submitConfig.onSubmit?.(values),
-                message: submitConfig.submitMessage,
-            });
-
-            const theatre = await mutateAsync(values);
-
-            handleMutationCallback({
-                cb: () => submitConfig.onSubmitSuccess?.(theatre),
-                message: submitConfig.successMessage,
-                messageType: "success",
-            });
-        } catch (error: unknown) {
-            handleSubmitResponseError({error, displayMessage: submitConfig.errorMessage});
-            submitConfig.onSubmitError?.(error);
-        }
+const {SubmitForm, useSubmitForm} = createForm<
+    TheatreFormValues,
+    TheatreFormData,
+    TheatreEditData,
+    Theatre
+>({
+    formName: "theatre-submit-form",
+    mutation: useTheatreSubmitMutation,
+    schema: TheatreFormSchema,
+    defaultValues: {
+        name: "",
+        seatCapacity: "",
+        location: {
+            street: "",
+            city: "",
+            state: "",
+            country: "",
+            postalCode: "",
+            timezone: "",
+            includeCoordinates: false,
+            coordinates: {
+                type: "Point",
+                coordinates: [
+                    "",
+                    "",
+                ],
+            },
+        },
     }
+});
 
-    return (
-        <BaseFormContextProvider
-            formID={formID}
-            isPending={isPending}
-            isError={isError}
-            submitHandler={submitTheatreData}
-        >
-            <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(submitTheatreData)}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for submitting theatre creation and update forms. */
+        SubmitForm as TheatreSubmitForm,
+    /** Custom hook for managing the theatre submit form state and mutation handler. */
+        useSubmitForm as useTheatreSubmitForm,
 }

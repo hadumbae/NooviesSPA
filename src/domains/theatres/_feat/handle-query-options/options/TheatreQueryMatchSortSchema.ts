@@ -4,16 +4,17 @@
 
 import {z} from "zod";
 import {MongooseSortOrderSchema} from "@/common/_schemas/enums/MongooseSortOrderSchema.ts";
+import {preprocessOptionalField} from "@/common/_feat";
 
 /** Zod schema defining sorting parameters for theatre queries. */
 export const TheatreQueryMatchSortSchema = z.object({
-    sortByName: MongooseSortOrderSchema.optional(),
-    sortBySeatCapacity: MongooseSortOrderSchema.optional(),
-    sortByCity: MongooseSortOrderSchema.optional(),
-    sortByState: MongooseSortOrderSchema.optional(),
-    sortByCountry: MongooseSortOrderSchema.optional(),
-    sortByPostCode: MongooseSortOrderSchema.optional(),
-    sortByTimezone: MongooseSortOrderSchema.optional(),
+    sortByName: preprocessOptionalField(MongooseSortOrderSchema),
+    sortBySeatCapacity: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByCity: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByState: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByCountry: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByPostalCode: preprocessOptionalField(MongooseSortOrderSchema),
+    sortByTimezone: preprocessOptionalField(MongooseSortOrderSchema),
 });
 
 /** Inferred type for validated theatre match sort parameters. */
