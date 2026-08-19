@@ -5,6 +5,8 @@
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 
+import {FormValuesConfig} from "@/common/_feat/submit-data";
+import {TheatreScreen} from "@/domains/theatre-screens";
 import {
     useTheatreScreenSubmitFormDefaultValues
 } from "@/domains/theatre-screens/_feat/submit-data/form/useTheatreScreenSubmitFormDefaultValues.ts";
@@ -13,8 +15,6 @@ import {
     TheatreScreenFormSchema,
     TheatreScreenFormValues,
 } from "@/domains/theatre-screens/_feat/submit-data/schema";
-import {FormValuesConfig} from "@/common/_feat/submit-data";
-import {TheatreScreen} from "@/domains/theatre-screens";
 
 /**
  * A specialized hook that initializes `react-hook-form` for Theatre Screen operations.

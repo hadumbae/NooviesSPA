@@ -44,11 +44,11 @@ export function TheatreDetailsPageScreenSection(
 
             <div className="flex justify-between items-center">
                 <PageSectionHeader text="Screens"/>
-                <TheatreScreenForm formConfig={{presetValues: {theatre: theatreID}}} onSubmitSuccess={onScreenCreate}>
+                <TheatreScreenForm presetValues={{theatre: theatreID}} onSubmitSuccess={onScreenCreate}>
                     <TheatreScreenFormPanel
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
-                        disableFields={{theatre: true}}
+                        hideFields={{theatre: true}}
                         {...panelInfo}
                     >
                         <Button size="sm" variant="link" className="link-button">

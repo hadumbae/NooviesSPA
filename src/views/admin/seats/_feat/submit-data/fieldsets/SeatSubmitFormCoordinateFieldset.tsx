@@ -14,7 +14,7 @@ import {SeatFormValues} from "@/domains/seats";
  * Renders coordinate inputs for seat positioning, adjusting the grid layout based on field visibility.
  */
 export function SeatSubmitFormCoordinateFieldset(
-    {disableFields, className}: Omit<FormFieldsetProps<SeatFormValues>, "isNestedView">
+    {disableFields, hideFields, className}: FormFieldsetProps<SeatFormValues>
 ): ReactElement {
     const {control} = useFormContext();
 
@@ -29,7 +29,7 @@ export function SeatSubmitFormCoordinateFieldset(
 
             <div className={cn("grid gap-2", hasActiveField ? "grid-cols-2" : "grid-cols-1")}>
                 {
-                    !disableFields?.x &&
+                    !hideFields?.x &&
                     <HookFormInput
                         name="x"
                         label="X Coord."
@@ -37,11 +37,12 @@ export function SeatSubmitFormCoordinateFieldset(
                         min={1}
                         step={1}
                         control={control}
+                        disabled={disableFields?.x}
                     />
                 }
 
                 {
-                    !disableFields?.y &&
+                    !hideFields?.y &&
                     <HookFormInput
                         name="y"
                         label="Y Coord."
@@ -49,6 +50,7 @@ export function SeatSubmitFormCoordinateFieldset(
                         min={1}
                         step={1}
                         control={control}
+                        disabled={disableFields?.y}
                     />
                 }
             </div>

@@ -4,6 +4,13 @@
 
 import {ReactElement, ReactNode} from "react";
 import {RotateCcw} from "lucide-react";
+import {useFormContext} from "react-hook-form";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+import {UIOpenStateProps} from "@/common/_types";
+import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
+import {cn} from "@/common/_feat";
+import {SeatFormValues} from "@/domains/seats";
+import {SeatSubmitFormView} from "@/views/admin/seats";
 import {
     Button,
     ScrollArea,
@@ -14,13 +21,6 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/views/common/_comp/ui";
-import {useFormContext} from "react-hook-form";
-import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
-import {BaseFormContext} from "@/common/_feat/generic-form-context";
-import {UIOpenStateProps} from "@/common/_types";
-import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {cn} from "@/common/_feat";
-import {SeatFormValues, useBuildSeatFormRenderFields} from "@/domains/seats";
 
 /** Props for the SeatSubmitFormPanel component. */
 type PanelProps = UIOpenStateProps & FormViewProps<SeatFormValues> & {
@@ -32,13 +32,11 @@ type PanelProps = UIOpenStateProps & FormViewProps<SeatFormValues> & {
  * A side-sheet component that orchestrates the seat submission form.
  */
 export function SeatSubmitFormPanel(
-    {children, isOpen, setIsOpen, disableFields, isEditing, className}: PanelProps
+    {children, isOpen, setIsOpen, disableFields, hideFields, isEditing, className}: PanelProps
 ): ReactElement {
 
     const {reset} = useFormContext();
-    const {formID, isPending} = useRequiredContext({context: BaseFormContext});
-
-    const renderedFields = useBuildSeatFormRenderFields({disableFields});
+    const {formID, isPending} = useBaseFormContext();
 
     const action = isEditing ? "Update" : "Create";
     const sheetTitle = `${action} Seat`;
@@ -57,7 +55,10 @@ export function SeatSubmitFormPanel(
 
                 <ScrollArea className="flex-1 px-1">
                     <div className={cn("space-y-4 pt-4", className)}>
-                        {renderedFields}
+                        <SeatSubmitFormView
+                            disableFields={disableFields}
+                            hideFields={hideFields}
+                        />
 
                         <div className="flex items-center space-x-2 pt-4">
                             <Button

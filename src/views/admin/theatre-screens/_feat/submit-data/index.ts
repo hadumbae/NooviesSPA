@@ -1,9 +1,4 @@
-import {TheatreScreenForm} from "./TheatreScreenForm.tsx";
-import {TheatreScreenFormPanel} from "./TheatreScreenFormPanel.tsx";
-import {TheatreScreenFormView} from "./TheatreScreenFormView.tsx";
+export * from "./TheatreScreenForm.tsx";
+export * from "./TheatreScreenFormView.tsx";
+export * from "./TheatreScreenFormPanel.tsx";
 
-export {
-    TheatreScreenForm,
-    TheatreScreenFormPanel,
-    TheatreScreenFormView,
-}

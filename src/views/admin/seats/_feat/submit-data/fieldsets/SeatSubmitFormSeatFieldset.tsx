@@ -17,7 +17,7 @@ type ViewProps = FormFieldsetProps<SeatFormValues> & {
 
 /** Renders seat metadata fields such as type, price modifier, and availability status. */
 export function SeatSubmitFormSeatFieldset(
-    {disableFields, isNestedView, className}: ViewProps,
+    {disableFields, hideFields, isNestedView, className}: ViewProps,
 ): ReactElement {
     const {control} = useFormContext();
 
@@ -30,15 +30,16 @@ export function SeatSubmitFormSeatFieldset(
 
             <div className={cn("grid gap-2", isNestedView ? "grid-cols-1" : "grid-cols-2")}>
                 {
-                    !disableFields?.seatType &&
+                    !hideFields?.seatType &&
                     <SeatTypeHookFormSelect
                         name="seatType"
                         label="Seat Type"
+                        disabled={disableFields?.seatType}
                     />
                 }
 
                 {
-                    !disableFields?.priceMultiplier &&
+                    !hideFields?.priceMultiplier &&
                     <HookFormInput
                         name="priceMultiplier"
                         label="Price Multiplier"
@@ -46,15 +47,17 @@ export function SeatSubmitFormSeatFieldset(
                         min={0}
                         step={0.01}
                         control={control}
+                        disabled={disableFields?.priceMultiplier}
                     />
                 }
 
                 {
-                    !disableFields?.isAvailable &&
+                    !hideFields?.isAvailable &&
                     <HookFormCheckbox
                         name="isAvailable"
                         label="Is Available?"
                         classNames={{container: cn(!isNestedView && "col-span-2")}}
+                        disabled={disableFields?.isAvailable}
                     />
                 }
             </div>

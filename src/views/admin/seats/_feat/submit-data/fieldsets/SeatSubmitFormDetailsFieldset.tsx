@@ -17,7 +17,7 @@ type ViewProps = FormFieldsetProps<SeatFormValues> & {
 
 /** Renders the theatre and screen selection fields, ensuring the screen resets when the theatre changes. */
 export function SeatSubmitFormDetailsFieldset(
-    {className, disableFields, isNestedView}: ViewProps
+    {className, disableFields, hideFields, isNestedView}: ViewProps
 ): ReactElement {
     const {control, watch, resetField} = useFormContext();
 
@@ -40,20 +40,22 @@ export function SeatSubmitFormDetailsFieldset(
                 !isNestedView && "lg:grid-cols-2",
             )}>
                 {
-                    !disableFields?.theatre &&
+                    !hideFields?.theatre &&
                     <TheatreHookFormSelect
                         name="theatre"
                         label="Theatre"
+                        disabled={disableFields?.theatre}
                     />
                 }
 
                 {
-                    !disableFields?.screen && theatre &&
+                    !hideFields?.screen && theatre &&
                     <ScreenHookFormSelect
                         name="screen"
                         label="Screen"
                         filters={screenFilters}
                         control={control}
+                        disabled={disableFields?.screen}
                     />
                 }
             </div>

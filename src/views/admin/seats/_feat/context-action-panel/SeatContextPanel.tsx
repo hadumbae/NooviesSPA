@@ -34,7 +34,6 @@ export function SeatContextPanel(): ReactElement | null {
         setSeat(updatedSeat);
     };
 
-
     if (!seat) return null;
 
     return (

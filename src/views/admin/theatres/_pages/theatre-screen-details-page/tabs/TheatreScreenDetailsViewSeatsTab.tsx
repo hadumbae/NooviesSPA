@@ -7,7 +7,7 @@ import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayC
 import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {SeatFormSubmitList} from "@/views/admin/seats/_comp/returned-seat-list";
 import {PageSectionHeader} from "@/views/common/_comp/page";
-import {DisableFields} from "@/common/_types";
+import {HideFields} from "@/common/_types";
 import {ScrollArea, ScrollBar, TabsContent} from "@/views/common/_comp/ui";
 
 import {SeatDetails, SeatFormData, SeatFormValues, SeatPanelContextProvider} from "@/domains/seats";
@@ -31,35 +31,37 @@ export function TheatreScreenDetailsViewSeatsTab(
     {screenID, theatreID, seating, returnedSeating, setReturnedSeating}: TabProps
 ): ReactElement {
     const presetValues: Partial<SeatFormData> = {screen: screenID, theatre: theatreID};
-    const disableFields: DisableFields<SeatFormValues> = {screen: true, theatre: true};
+    const hideFields: HideFields<SeatFormValues> = {screen: true, theatre: true};
     const onSeatCreation = (seat: SeatDetails) => setReturnedSeating((prev: SeatDetails[]) => [...prev, seat]);
 
     return (
         <TabsContent value="seating" className="space-y-4">
             <SeatPanelContextProvider>
-                <section className="space-y-4">
-                    <PageSectionHeader>Seat Layout</PageSectionHeader>
+                <SeatSubmitForm>
+                    <section className="space-y-4">
+                        <PageSectionHeader>Seat Layout</PageSectionHeader>
 
-                    <ScrollArea>
-                        {
-                            seating.length > 0 ? (
-                                <Card>
-                                    <CardContent className="p-4">
-                                        <ScreenSeatLayout seating={seating}/>
-                                    </CardContent>
-                                </Card>
-                            ) : (
-                                <EmptyArrayContainer
-                                    className="rounded-container-border h-56"
-                                    text="There Are No Seats"
-                                />
-                            )
-                        }
+                        <ScrollArea>
+                            {
+                                seating.length > 0 ? (
+                                    <Card>
+                                        <CardContent className="p-4">
+                                            <ScreenSeatLayout seating={seating}/>
+                                        </CardContent>
+                                    </Card>
+                                ) : (
+                                    <EmptyArrayContainer
+                                        className="rounded-container-border h-56"
+                                        text="There Are No Seats"
+                                    />
+                                )
+                            }
 
-                        <ScrollBar orientation="horizontal"/>
-                        <SeatContextPanel/>
-                    </ScrollArea>
-                </section>
+                            <ScrollBar orientation="horizontal"/>
+                            <SeatContextPanel/>
+                        </ScrollArea>
+                    </section>
+                </SeatSubmitForm>
             </SeatPanelContextProvider>
 
             <section className="space-y-4">
@@ -68,7 +70,7 @@ export function TheatreScreenDetailsViewSeatsTab(
                 <Card>
                     <SeatSubmitForm presetValues={presetValues} onSubmitSuccess={onSeatCreation}>
                         <CardContent className="p-4 space-y-4">
-                            <SeatSubmitFormView disableFields={disableFields}/>
+                            <SeatSubmitFormView hideFields={hideFields}/>
                             <SeatSubmitFormActions/>
                         </CardContent>
                     </SeatSubmitForm>
@@ -78,7 +80,11 @@ export function TheatreScreenDetailsViewSeatsTab(
             {returnedSeating.length > 0 && (
                 <section className="space-y-2">
                     <PageSectionHeader as="h2" text="Seats"/>
-                    <SeatFormSubmitList returnedSeating={returnedSeating} setReturnedSeating={setReturnedSeating}/>
+
+                    <SeatFormSubmitList
+                        returnedSeating={returnedSeating}
+                        setReturnedSeating={setReturnedSeating}
+                    />
                 </section>
             )}
         </TabsContent>

@@ -16,7 +16,7 @@ type ViewProps = FormFieldsetProps<SeatFormValues> & {
 
 /** Renders the non-seat fieldset containing row and coordinate inputs. */
 export function SeatSubmitFormNonSeatFieldset(
-    {disableFields, isNestedView, className}: ViewProps
+    {disableFields, hideFields, isNestedView, className}: ViewProps
 ): ReactElement {
     const {control} = useFormContext();
 
@@ -29,17 +29,18 @@ export function SeatSubmitFormNonSeatFieldset(
 
             <div className={cn("grid gap-2 grid-cols-3", isNestedView && "max-lg:grid-cols-2")}>
                 {
-                    !disableFields?.row &&
+                    !hideFields?.row &&
                     <HookFormInput
                         name="row"
                         label="Row"
                         control={control}
                         classNames={{container: cn(isNestedView && "max-lg:col-span-2")}}
+                        disabled={disableFields?.row}
                     />
                 }
 
                 {
-                    !disableFields?.x &&
+                    !hideFields?.x &&
                     <HookFormInput
                         name="x"
                         label="X Coord."
@@ -47,11 +48,12 @@ export function SeatSubmitFormNonSeatFieldset(
                         min={1}
                         step={1}
                         control={control}
+                        disabled={disableFields?.x}
                     />
                 }
 
                 {
-                    !disableFields?.y &&
+                    !hideFields?.y &&
                     <HookFormInput
                         name="y"
                         label="Y Coord."
@@ -59,6 +61,7 @@ export function SeatSubmitFormNonSeatFieldset(
                         min={1}
                         step={1}
                         control={control}
+                        disabled={disableFields?.y}
                     />
                 }
             </div>

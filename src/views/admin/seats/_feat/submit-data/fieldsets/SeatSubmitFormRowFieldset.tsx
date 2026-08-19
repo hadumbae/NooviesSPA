@@ -16,7 +16,7 @@ type ViewProps = FormViewProps<SeatFormValues> & {
 
 /** Renders inputs for Row, Seat Number, and Seat Label, adapting the grid layout based on the display context. */
 export function SeatSubmitFormRowFieldset(
-    {disableFields, isNestedView, className}: ViewProps
+    {disableFields, hideFields, isNestedView, className}: ViewProps
 ): ReactElement {
     const {control} = useFormContext();
 
@@ -29,16 +29,17 @@ export function SeatSubmitFormRowFieldset(
 
             <div className={cn("grid gap-2", isNestedView ? "grid-cols-2" : "grid-cols-3")}>
                 {
-                    !disableFields?.row &&
+                    !hideFields?.row &&
                     <HookFormInput
                         name="row"
                         label="Row"
                         control={control}
+                        disabled={disableFields?.row}
                     />
                 }
 
                 {
-                    !disableFields?.seatNumber &&
+                    !hideFields?.seatNumber &&
                     <HookFormInput
                         name="seatNumber"
                         label="Number"
@@ -46,16 +47,18 @@ export function SeatSubmitFormRowFieldset(
                         min={1}
                         step={1}
                         control={control}
+                        disabled={disableFields?.seatNumber}
                     />
                 }
 
                 {
-                    !disableFields?.seatLabel &&
+                    !hideFields?.seatLabel &&
                     <HookFormInput
                         name="seatLabel"
                         label="Label"
                         control={control}
                         className={isNestedView ? "col-span-2" : "col-span-1"}
+                        disabled={disableFields?.seatLabel}
                     />
                 }
             </div>

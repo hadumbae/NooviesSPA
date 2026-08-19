@@ -27,7 +27,7 @@ export function TheatreScreenDetailsCreateSeatTab(
                 <SectionTitle>Create Seats</SectionTitle>
                 <Card>
                     <CardContent className="p-4">
-                        <SeatSubmitFormView disableFields={{screen: true, theatre: true}}/>
+                        <SeatSubmitFormView hideFields={{screen: true, theatre: true}}/>
                     </CardContent>
                 </Card>
             </section>

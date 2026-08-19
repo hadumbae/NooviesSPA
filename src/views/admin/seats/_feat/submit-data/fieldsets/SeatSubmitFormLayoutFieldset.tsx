@@ -11,7 +11,7 @@ import {SeatFormValues} from "@/domains/seats";
 
 /** Renders the layout type fieldset containing the radio group selection. */
 export function SeatSubmitFormLayoutFieldset(
-    {disableFields, className}: FormFieldsetProps<SeatFormValues>
+    {disableFields, hideFields, className}: FormFieldsetProps<SeatFormValues>
 ): ReactElement {
     return (
         <fieldset className={cn("space-y-4", className)}>
@@ -20,11 +20,12 @@ export function SeatSubmitFormLayoutFieldset(
                 <Separator/>
             </div>
 
-            {!disableFields?.layoutType && (
+            {!hideFields?.layoutType && (
                 <SeatLayoutTypeRadioGroup
                     name="layoutType"
                     label="Layout Type"
                     className="flex space-x-5"
+                    disabled={disableFields?.layoutType}
                 />
             )}
         </fieldset>

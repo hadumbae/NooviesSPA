@@ -34,7 +34,7 @@ type FormPanelProps = UIOpenStateProps & FormViewProps<TheatreScreenFormValues> 
  * A side-drawer panel that renders Theatre Screen form inputs.
  */
 export function TheatreScreenFormPanel(
-    {children, title, description, isOpen, setIsOpen, disableFields}: FormPanelProps
+    {children, title, description, isOpen, setIsOpen, disableFields, hideFields, className}: FormPanelProps
 ): ReactElement {
     const {formID, isPending} = useRequiredContext({context: BaseFormContext});
 
@@ -49,7 +49,11 @@ export function TheatreScreenFormPanel(
                 </SheetHeader>
 
                 <ScrollArea className="flex-grow px-1 mt-4">
-                    <TheatreScreenFormView disableFields={disableFields}/>
+                    <TheatreScreenFormView
+                        disableFields={disableFields}
+                        hideFields={hideFields}
+                        className={className}
+                    />
 
                     <Button
                         form={formID}
