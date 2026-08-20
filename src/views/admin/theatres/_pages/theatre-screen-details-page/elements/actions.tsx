@@ -8,16 +8,17 @@ import {TheatreScreenForm, TheatreScreenFormPanel} from "@/views/admin/theatre-s
 import {TheatreScreenDetails, TheatreScreenWithVirtuals} from "@/domains/theatre-screens/_schema/model";
 import {useLocation} from "react-router-dom";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
-import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
 
 import {simplifyScreenDetails} from "@/domains/theatre-screens/_feat/formatters";
 import {ScreenDeleteWarningDialog} from "@/views/admin/theatre-screens/_feat/model-options";
 import {TheatreDetails} from "@/domains/theatres";
 import {
-    ScreenDetailsUISetterContext,
-    ScreenDetailsUIStateContext
-} from "@/domains/theatre-screens/_ctx/screen-details";
+    useIsDeletingUIContext,
+    useIsDeletingUIContextActions,
+    useIsEditingUIContext,
+    useIsEditingUIContextActions
+} from "@/common/_ctx/ui";
 
 /**
  * Props for the TheatreScreenDetailsPageScreenActions component.
@@ -40,8 +41,13 @@ export function TheatreScreenDetailsPageScreenActions(
 
     const simplifiedScreen = simplifyScreenDetails(screen);
 
-    const {isEditing, showDeleteWarning} = useRequiredContext({context: ScreenDetailsUIStateContext});
-    const {setIsEditing, setShowDeleteWarning} = useRequiredContext({context: ScreenDetailsUISetterContext});
+    const isEditing = useIsEditingUIContext();
+    const {close: closeEditing, toggle: toggleEditing} = useIsEditingUIContextActions();
+
+    const isDeleting = useIsDeletingUIContext();
+    const {toggle: toggleDeleting} = useIsDeletingUIContextActions();
+
+    console.log("Is Deleting: ", isDeleting);
 
     const onUpdateSuccess = (updatedScreen: TheatreScreenDetails) => {
         const {theatre: {slug: theatreSlug}, slug: screenSlug} = updatedScreen;
@@ -52,7 +58,7 @@ export function TheatreScreenDetailsPageScreenActions(
             options: {replace: true},
         });
 
-        setIsEditing(false);
+        closeEditing();
     };
 
     const onDeleteSuccess = () => {
@@ -67,12 +73,13 @@ export function TheatreScreenDetailsPageScreenActions(
             <TheatreScreenForm
                 presetValues={{theatre: theatre._id}}
                 onSubmitSuccess={onUpdateSuccess}
+                successMessage="Updated."
                 editEntity={simplifiedScreen}
             >
                 <TheatreScreenFormPanel
                     isOpen={isEditing}
-                    setIsOpen={setIsEditing}
-                    disableFields={{theatre: true}}
+                    setIsOpen={toggleEditing}
+                    hideFields={{theatre: true}}
                     title="Update Screen Details"
                     description={`Editing ${screen.name}.`}
                 />
@@ -81,10 +88,10 @@ export function TheatreScreenDetailsPageScreenActions(
             <ScreenDeleteWarningDialog
                 screenID={screen._id}
                 screenName={screen.name}
-                isOpen={showDeleteWarning}
-                setIsOpen={setShowDeleteWarning}
+                isOpen={isDeleting}
+                setIsOpen={toggleDeleting}
                 onSubmitSuccess={onDeleteSuccess}
-                successMessage="Theatre Screen Deleted."
+                successMessage="Deleted."
             />
         </div>
     );

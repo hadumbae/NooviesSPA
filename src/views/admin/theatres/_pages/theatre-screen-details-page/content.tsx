@@ -6,7 +6,8 @@ import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {
     TheatreScreenDetailsBreadcrumbs,
-    TheatreScreenDetailsPageScreenActions
+    TheatreScreenDetailsPageScreenActions,
+    TheatreScreenDetailsToggles
 } from "@/views/admin/theatres/_pages/theatre-screen-details-page/elements";
 
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/_schema/model";
@@ -47,6 +48,7 @@ export function TheatreScreenDetailsPageContent(
             <PageHeader
                 title={`${screenName} Details`}
                 description={`Screen at ${theatreName}. Handle seats and showings here.`}
+                actions={<TheatreScreenDetailsToggles/>}
                 breadcrumbs={
                     <TheatreScreenDetailsBreadcrumbs
                         theatreSlug={theatreSlug}

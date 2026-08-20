@@ -46,9 +46,7 @@ const routes = [
             {
                 path: "get/:theatreSlug/screen/:screenSlug",
                 element: (
-                    <TheatreScreenDetailsQueryOptionsContextProvider
-                        defaultValues={{showingPage: 1, showingsPerPage: 10}}
-                    >
+                    <TheatreScreenDetailsQueryOptionsContextProvider defaultValues={{recentShowingsCount: 10}}>
                         <TheatreScreenDetailsPage/>
                     </TheatreScreenDetailsQueryOptionsContextProvider>
                 ),

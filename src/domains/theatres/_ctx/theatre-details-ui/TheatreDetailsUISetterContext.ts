@@ -9,7 +9,6 @@ export type TheatreDetailsUISetterValues = {
     setIsEditing: Dispatch<SetStateAction<boolean>>;
     setIsDeleting: Dispatch<SetStateAction<boolean>>;
     setIsAddingScreen: Dispatch<SetStateAction<boolean>>;
-    setIsAddingShowing: Dispatch<SetStateAction<boolean>>;
 }
 
 /** React context providing setters for theatre details UI state. */

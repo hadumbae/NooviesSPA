@@ -9,7 +9,6 @@ export type TheatreDetailsUIStateValues = {
     isEditing: boolean;
     isDeleting: boolean;
     isAddingScreen: boolean;
-    isAddingShowing: boolean;
 }
 
 /** React context for theatre details UI state. */

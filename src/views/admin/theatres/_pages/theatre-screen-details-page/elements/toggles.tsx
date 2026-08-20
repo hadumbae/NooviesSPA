@@ -2,24 +2,20 @@
  * @fileoverview Dropdown menu providing edit and delete actions for the screen details view.
  */
 
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger
-} from "@/views/common/_comp/ui/dropdown-menu.tsx";
+import {Dispatch, ReactElement, SetStateAction, useState} from "react";
 import {IconButton} from "@/views/common/_comp";
 import {Ellipsis} from "lucide-react";
-import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
-import {Dispatch, ReactElement, SetStateAction, useState} from "react";
-import {ScreenDetailsUISetterContext} from "@/domains/theatre-screens/_ctx/screen-details";
+import {useIsDeletingUIContextActions, useIsEditingUIContextActions} from "@/common/_ctx/ui";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/views/common/_comp/ui";
 
 /**
  * Renders an action menu for screen management that updates UI state via ScreenDetailsUIContext.
  */
 export function TheatreScreenDetailsToggles(): ReactElement {
-    const {setIsEditing, setShowDeleteWarning} = useRequiredContext({context: ScreenDetailsUISetterContext});
     const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const {open: openEditing} = useIsEditingUIContextActions();
+    const {open: openDeleting} = useIsDeletingUIContextActions();
 
     const closeOnClick = (action: Dispatch<SetStateAction<boolean>>) => {
         setIsOpen(false);
@@ -33,8 +29,8 @@ export function TheatreScreenDetailsToggles(): ReactElement {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => closeOnClick(setIsEditing)}>Edit</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => closeOnClick(setShowDeleteWarning)}>Delete</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => closeOnClick(openEditing)}>Edit</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => closeOnClick(openDeleting)}>Delete</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );

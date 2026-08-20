@@ -8,7 +8,6 @@ import {useFetchByIdentifierRouteParams} from "@/common/_feat";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {TheatreScreenDetailsPageContent} from "@/views/admin/theatres/_pages/theatre-screen-details-page/content.tsx";
 import {
-    ScreenDetailsUIContextProvider,
     TheatreScreenDetailsRouteParamSchema,
     TheatreScreenDetailsViewData,
     useFetchTheatreScreenDetailsViewData
@@ -16,6 +15,7 @@ import {
 import {
     useTheatreScreenDetailsQueryOptionsContext
 } from "@/domains/theatre-screens/_feat/validate-query-options/theatre-screen-details";
+import {IsDeletingUIContextProvider, IsEditingUIContextProvider} from "@/common/_ctx/ui";
 
 /**
  * Orchestrates route parameter validation and data fetching for the screen details view.
@@ -44,14 +44,16 @@ export function TheatreScreenDetailsPage(): ReactElement {
     return (
         <QueryDataLoader query={query}>
             {({theatre, screen, seats, recentShowings}: TheatreScreenDetailsViewData) => (
-                <ScreenDetailsUIContextProvider>
-                    <TheatreScreenDetailsPageContent
-                        theatre={theatre}
-                        screen={screen}
-                        seats={seats}
-                        recentShowings={recentShowings}
-                    />
-                </ScreenDetailsUIContextProvider>
+                <IsEditingUIContextProvider>
+                    <IsDeletingUIContextProvider>
+                        <TheatreScreenDetailsPageContent
+                            theatre={theatre}
+                            screen={screen}
+                            seats={seats}
+                            recentShowings={recentShowings}
+                        />
+                    </IsDeletingUIContextProvider>
+                </IsEditingUIContextProvider>
             )}
         </QueryDataLoader>
     );

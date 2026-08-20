@@ -21,20 +21,17 @@ export function TheatreDetailsUIContextProvider({children}: ProviderProps): Reac
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [isDeleting, setIsDeleting] = useState<boolean>(false);
     const [isAddingScreen, setIsAddingScreen] = useState<boolean>(false);
-    const [isAddingShowing, setIsAddingShowing] = useState<boolean>(false);
 
     const stateValues: TheatreDetailsUIStateValues = {
         isEditing,
         isDeleting,
         isAddingScreen,
-        isAddingShowing,
     };
 
     const setterValues: TheatreDetailsUISetterValues = {
         setIsEditing,
         setIsDeleting,
         setIsAddingScreen,
-        setIsAddingShowing,
     };
 
     return (

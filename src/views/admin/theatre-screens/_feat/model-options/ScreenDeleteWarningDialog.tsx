@@ -54,8 +54,8 @@ export function ScreenDeleteWarningDialog(
             deleteResource={deleteScreen}
             title={dialogTitle}
             description="This action is permanent and will remove all associated seat configurations."
-            presetOpen={isOpen}
-            setPresetOpen={setIsOpen}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
         >
             {children}
         </EntityDeleteWarningDialog>
