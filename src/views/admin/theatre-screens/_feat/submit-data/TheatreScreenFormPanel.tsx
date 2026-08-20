@@ -14,12 +14,12 @@ import {
     SheetTrigger
 } from "@/views/common/_comp/ui";
 import {UIOpenStateProps} from "@/common/_types";
-import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
-import {BaseFormContext} from "@/common/_feat/generic-form-context";
+import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 
 import {TheatreScreenFormValues} from "@/domains/theatre-screens";
 import {TheatreScreenFormView} from "@/views/admin/theatre-screens/_feat/submit-data/TheatreScreenFormView.tsx";
+import {useLockForFormUI} from "@/common/_feat";
 
 /**
  * Props for the ScreenSubmitFormPanel component.
@@ -36,7 +36,12 @@ type FormPanelProps = UIOpenStateProps & FormViewProps<TheatreScreenFormValues> 
 export function TheatreScreenFormPanel(
     {children, title, description, isOpen, setIsOpen, disableFields, hideFields, className}: FormPanelProps
 ): ReactElement {
-    const {formID, isPending} = useRequiredContext({context: BaseFormContext});
+    const {formID, isPending, isError} = useBaseFormContext();
+    const {isUILocked} = useLockForFormUI({
+        isContentOpen: isOpen,
+        isMutationError: isError,
+        isMutationPending: isPending
+    });
 
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -60,7 +65,7 @@ export function TheatreScreenFormPanel(
                         type="submit"
                         variant="default"
                         className="w-full bg-primary"
-                        disabled={isPending}
+                        disabled={isUILocked}
                     >
                         {isPending ? "Submitting..." : "Submit"}
                     </Button>
