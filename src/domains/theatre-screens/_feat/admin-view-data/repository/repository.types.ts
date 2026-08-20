@@ -8,4 +8,5 @@ import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 export type FetchTheatreScreenAdminViewDataConfig = {
     theatreSlug: SlugString;
     screenSlug: SlugString;
+    recentShowingsCount?: number;
 };

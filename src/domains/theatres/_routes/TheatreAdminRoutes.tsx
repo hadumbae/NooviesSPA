@@ -11,6 +11,9 @@ import {
     TheatreShowingListPage,
 } from "@/views/admin/theatres/_pages";
 import {TheatreIndexQueryOptionsContextProvider} from "@/domains/theatres";
+import {
+    TheatreScreenDetailsQueryOptionsContextProvider
+} from "@/domains/theatre-screens/_feat/validate-query-options/theatre-screen-details";
 
 /**
  * Defines the routing hierarchy for theatre management.
@@ -42,7 +45,13 @@ const routes = [
             },
             {
                 path: "get/:theatreSlug/screen/:screenSlug",
-                element: <TheatreScreenDetailsPage/>,
+                element: (
+                    <TheatreScreenDetailsQueryOptionsContextProvider
+                        defaultValues={{showingPage: 1, showingsPerPage: 10}}
+                    >
+                        <TheatreScreenDetailsPage/>
+                    </TheatreScreenDetailsQueryOptionsContextProvider>
+                ),
             },
         ],
     },

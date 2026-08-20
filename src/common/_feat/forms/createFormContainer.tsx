@@ -59,8 +59,6 @@ export function createFormContainer<
         const form = useSubmitForm({presetValues, editEntity});
         const {mutateAsync, isPending, isError} = mutation(mutConfig as TMutConfig);
 
-        console.log("SubmitForm Errors:", form.formState.errors);
-
         const submitData = async (values: TForm) => {
             try {
                 submitConfig.resetOnSubmit && form.reset(resetValues);

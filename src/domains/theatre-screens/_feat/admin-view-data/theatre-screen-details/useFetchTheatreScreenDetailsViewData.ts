@@ -18,10 +18,9 @@ import {
 
 /** Props for the useFetchTheatreScreenDetailsViewData hook. */
 type FetchConfig = {
-    slugs: {
-        theatreSlug: SlugString;
-        screenSlug: SlugString;
-    },
+    theatreSlug: SlugString;
+    screenSlug: SlugString;
+    recentShowingsCount?: number;
     options?: FetchQueryOptions<TheatreScreenDetailsViewData>;
 }
 
@@ -29,15 +28,17 @@ type FetchConfig = {
  * Fetches and validates aggregated theatre, screen, and seat data for the admin details view.
  */
 export function useFetchTheatreScreenDetailsViewData(
-    {slugs, options}: FetchConfig
+    {theatreSlug, screenSlug, recentShowingsCount, options}: FetchConfig
 ): UseQueryResult<TheatreScreenDetailsViewData, HttpResponseError> {
+    const payload = {theatreSlug, screenSlug, recentShowingsCount};
+
     const fetchViewData = buildQueryFn({
-        action: () => getFetchTheatreScreenAdminViewData(slugs),
+        action: () => getFetchTheatreScreenAdminViewData(payload),
         schema: TheatreScreenDetailsViewDataSchema,
     });
 
     return useQuery({
-        queryKey: TheatreScreenAdminViewDataQueryKeys.details(slugs),
+        queryKey: TheatreScreenAdminViewDataQueryKeys.details(payload),
         queryFn: fetchViewData,
         ...useQueryOptionDefaults(options),
         structuralSharing: false,

@@ -22,13 +22,14 @@ export type QueryOptionsContextValues<TValues = unknown> = {
 }
 
 /** Props for the query options Provider component. */
-type ProviderConfig = {
+type ProviderConfig<TValues extends Record<string, unknown>> = {
     children: ReactNode;
+    defaultValues?: Partial<TValues>;
 }
 
 /** The provider component and hook returned by the factory. */
-type FactoryReturns<TValues = unknown> = {
-    Provider: (config: ProviderConfig) => ReactElement;
+type FactoryReturns<TValues extends Record<string, unknown>> = {
+    Provider: (config: ProviderConfig<TValues>) => ReactElement;
     useQueryOptionsContext: () => QueryOptionsContextValues<TValues>;
 }
 
@@ -38,13 +39,18 @@ type FactoryReturns<TValues = unknown> = {
 export function createQueryOptionsContext<TShape extends ZodRawShape>(
     {name, schema, arrayKeyOverride}: ContextConfig<TShape>
 ): FactoryReturns<z.infer<ZodObject<TShape>>> {
-    type CtxValues = QueryOptionsContextValues<z.infer<typeof schema>>;
+    type SchemaValues = z.infer<typeof schema>;
+    type CtxValues = QueryOptionsContextValues<SchemaValues>;
     const Context = createContext<CtxValues | null>(null);
 
     Context.displayName = name;
 
-    function Provider({children}: ProviderConfig): ReactElement {
-        const {searchParams, setSearchParams} = useParsedSearchParams({schema, arrayKeyOverride});
+    function Provider({children, defaultValues}: ProviderConfig<SchemaValues>): ReactElement {
+        const {searchParams, setSearchParams} = useParsedSearchParams({
+            schema,
+            arrayKeyOverride,
+            defaultValues,
+        });
 
         const values: CtxValues = {
             values: searchParams,

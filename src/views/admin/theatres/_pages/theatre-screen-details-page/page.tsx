@@ -13,6 +13,9 @@ import {
     TheatreScreenDetailsViewData,
     useFetchTheatreScreenDetailsViewData
 } from "@/domains/theatre-screens";
+import {
+    useTheatreScreenDetailsQueryOptionsContext
+} from "@/domains/theatre-screens/_feat/validate-query-options/theatre-screen-details";
 
 /**
  * Orchestrates route parameter validation and data fetching for the screen details view.
@@ -25,8 +28,12 @@ export function TheatreScreenDetailsPage(): ReactElement {
         sourceComponent: TheatreScreenDetailsPage.name,
     });
 
+    const {values: {recentShowingsCount}} = useTheatreScreenDetailsQueryOptionsContext();
+
     const query = useFetchTheatreScreenDetailsViewData({
-        slugs: routeParams!,
+        screenSlug: routeParams!.screenSlug,
+        theatreSlug: routeParams!.theatreSlug,
+        recentShowingsCount,
         options: {enabled: !!routeParams},
     });
 
@@ -36,12 +43,13 @@ export function TheatreScreenDetailsPage(): ReactElement {
 
     return (
         <QueryDataLoader query={query}>
-            {({theatre, screen, seats}: TheatreScreenDetailsViewData) => (
+            {({theatre, screen, seats, recentShowings}: TheatreScreenDetailsViewData) => (
                 <ScreenDetailsUIContextProvider>
                     <TheatreScreenDetailsPageContent
                         theatre={theatre}
                         screen={screen}
                         seats={seats}
+                        recentShowings={recentShowings}
                     />
                 </ScreenDetailsUIContextProvider>
             )}

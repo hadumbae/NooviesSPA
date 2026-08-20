@@ -20,11 +20,12 @@ import {
  * Retrieves the aggregated theatre, screen, and seat data for a specific screen from the API.
  */
 export async function getFetchTheatreScreenAdminViewData(
-    {theatreSlug, screenSlug}: FetchTheatreScreenAdminViewDataConfig
+    {theatreSlug, screenSlug, recentShowingsCount}: FetchTheatreScreenAdminViewDataConfig
 ): Promise<FetchRequestReturns<TheatreScreenDetailsViewData>> {
     const url = buildURL({
         baseURL: TheatreScreenAdminViewDataBaseURL,
         path: `/theatre/${theatreSlug}/screen/${screenSlug}/details`,
+        queries: {recentShowingsCount}
     });
 
     return useFetchAPI({url, method: "GET"});

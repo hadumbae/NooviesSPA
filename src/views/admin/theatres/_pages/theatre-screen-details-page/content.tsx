@@ -4,7 +4,6 @@
 
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {TheatreScreenDetailsPageTabs} from "@/views/admin/theatres/_pages/theatre-screen-details-page/tabs";
 import {
     TheatreScreenDetailsBreadcrumbs,
     TheatreScreenDetailsPageScreenActions
@@ -15,19 +14,28 @@ import {TheatreDetails} from "@/domains/theatres";
 import {SeatDetails} from "@/domains/seats/_schema/model";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 import {PageHeader} from "@/views/common/_comp";
+import {
+    TheatreScreenDetailsFormSection,
+    TheatreScreenDetailsLayoutSection
+} from "@/views/admin/theatres/_pages/theatre-screen-details-page/sections";
+import {
+    TheatreScreenDetailsShowingsSection
+} from "@/views/admin/theatres/_pages/theatre-screen-details-page/sections/TheatreScreenDetailsShowingsSection.tsx";
+import {ShowingDetails} from "@/domains/showings";
 
 /** Props for the TheatreScreenDetailsPageContent component. */
 type ContentProps = {
     theatre: TheatreDetails;
     screen: TheatreScreenWithVirtuals;
     seats: SeatDetails[];
+    recentShowings: ShowingDetails[];
 };
 
 /**
  * Renders the breadcrumbs, header, and tabbed interface for the screen details view.
  */
 export function TheatreScreenDetailsPageContent(
-    {theatre, screen, seats}: ContentProps
+    {theatre, screen, seats, recentShowings}: ContentProps
 ): ReactElement {
     const {_id: screenID, name: screenName} = screen;
     const {_id: theatreID, name: theatreName, slug: theatreSlug,} = theatre;
@@ -48,10 +56,18 @@ export function TheatreScreenDetailsPageContent(
                 }
             />
 
-            <TheatreScreenDetailsPageTabs
-                theatreID={theatreID}
+            <TheatreScreenDetailsLayoutSection
+                seating={seats}
+            />
+
+            <TheatreScreenDetailsFormSection
                 screenID={screenID}
-                seats={seats}
+                theatreID={theatreID}
+            />
+
+            <TheatreScreenDetailsShowingsSection
+                screenID={screenID}
+                showings={recentShowings}
             />
 
             <TheatreScreenDetailsPageScreenActions

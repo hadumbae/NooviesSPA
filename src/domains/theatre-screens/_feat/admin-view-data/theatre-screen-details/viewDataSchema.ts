@@ -7,6 +7,7 @@ import {TheatreScreenWithVirtualsSchema} from "@/domains/theatre-screens/_schema
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {SeatDetailsSchema} from "@/domains/seats/_schema/model";
 import {TheatreDetailsSchema} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
+import {ShowingDetailsSchema} from "@/domains/showings";
 
 /**
  * Validates the full data package required to render the Theatre Screen management interface.
@@ -15,6 +16,7 @@ export const TheatreScreenDetailsViewDataSchema = z.object({
     theatre: TheatreDetailsSchema,
     screen: TheatreScreenWithVirtualsSchema,
     seats: generateArraySchema(SeatDetailsSchema),
+    recentShowings: generateArraySchema(ShowingDetailsSchema),
 });
 
 /**
