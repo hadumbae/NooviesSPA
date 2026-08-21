@@ -2,7 +2,7 @@
  * @fileoverview Dropdown menu for movie administration actions.
  */
 
-import {Dispatch, ReactElement, ReactNode, SetStateAction, useState} from 'react';
+import {ReactElement, ReactNode, useState} from 'react';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -12,10 +12,9 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/views/common/_comp/ui";
-import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {RoleTypeDepartment} from "@/domains/roletypes";
-import {MovieDetailsUISettersContext} from "@/domains/movies";
+import {useIsDeletingMoviePosterUIActions, useIsUpdatingMoviePosterUIActions} from "@/domains/movies";
 
 /** Props for the MovieDetailsDropdown component. */
 type OptionProps = {
@@ -33,14 +32,12 @@ export function MovieDetailsDropdown(
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const navigate = useLoggedNavigate();
 
-    const {
-        setIsUpdatingPoster,
-        setIsDeleting,
-        setIsDeletingPoster,
-    } = useRequiredContext({context: MovieDetailsUISettersContext});
+    const {open: openIsDeleting} = useIsDeletingMoviePosterUIActions();
+    const {open: openIsUpdatingPoster} = useIsUpdatingMoviePosterUIActions();
+    const {open: openIsDeletingPoster} = useIsDeletingMoviePosterUIActions();
 
-    const closeOnAction = (action: Dispatch<SetStateAction<boolean>>) => {
-        action(true);
+    const closeOnAction = (action: () => void) => {
+        action();
         setIsOpen(false);
     };
 
@@ -77,9 +74,11 @@ export function MovieDetailsDropdown(
 
                 <DropdownMenuGroup>
                     <DropdownMenuLabel className="select-none">Poster</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => closeOnAction(setIsUpdatingPoster)}>Update</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => closeOnAction(openIsUpdatingPoster)}>Update</DropdownMenuItem>
                     {hasPoster && (
-                        <DropdownMenuItem onClick={() => closeOnAction(setIsDeletingPoster)}>Remove</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => closeOnAction(openIsDeletingPoster)}>
+                            Remove
+                        </DropdownMenuItem>
                     )}
                 </DropdownMenuGroup>
 
@@ -88,7 +87,7 @@ export function MovieDetailsDropdown(
                 <DropdownMenuGroup>
                     <DropdownMenuLabel className="select-none">Movie</DropdownMenuLabel>
                     <DropdownMenuItem onClick={navigateToEdit}>Edit</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => closeOnAction(setIsDeleting)}>Delete</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => closeOnAction(openIsDeleting)}>Delete</DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>

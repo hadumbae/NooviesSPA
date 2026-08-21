@@ -11,6 +11,7 @@ import {MovieDetailsPageActions} from "@/views/admin/movies/_pages/details-page/
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {MovieDetailsPageCreditSection} from "@/views/admin/movies/_pages/details-page/sections/creditSection.tsx";
 import {MovieDetailsPageShowingSection} from "@/views/admin/movies/_pages/details-page/sections/showingSection.tsx";
+import {useSetAdminPageTitle} from "@/common/_feat";
 
 export type MovieDetailsPageContentProps = {
     movie: MovieDetails;
@@ -22,7 +23,8 @@ export type MovieDetailsPageContentProps = {
 export function MovieDetailsPageContent(
     {movie}: MovieDetailsPageContentProps
 ): ReactElement {
-    const {_id, slug} = movie;
+    const {_id, slug, title} = movie;
+    useSetAdminPageTitle({presetTitle: `Movie • ${title}`});
 
     return (
         <PageFlexWrapper>

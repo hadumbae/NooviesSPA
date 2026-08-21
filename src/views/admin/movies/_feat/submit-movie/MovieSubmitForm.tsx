@@ -1,75 +1,47 @@
 /**
- * @fileoverview Container component for handling movie submission logic and form state.
+ * @fileoverview Defines the form component and hook for submitting movie data.
  */
 
-import {ReactElement, ReactNode} from 'react';
-import {MovieFormData, MovieFormStarterValues, useMovieSubmitForm} from "@/domains/movies/_feat/submit-data";
-import {useMovieSubmitMutation} from "@/domains/movies/_feat/crud-hooks";
-import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {Movie} from "@/domains/movies/_schema/movie";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/views/common/_comp/ui/form.tsx";
-import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
-import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import {Logger} from "@/common/_feat/logger/Logger.ts";
-import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
+import {createForm} from "@/common/_feat";
+import {
+    Movie,
+    MovieEditData,
+    MovieFormData,
+    MovieFormSchema,
+    MovieFormStarterValues,
+    useMovieSubmitMutation
+} from "@/domains/movies";
 
-type ContainerProps =
-    MutationResponseConfig<Movie, MovieFormData>
-    & MutationFormResetConfig
-    & FormValuesConfig<MovieFormStarterValues, Movie>
-    & { children: ReactNode };
+const {SubmitForm, useSubmitForm} = createForm<
+    MovieFormStarterValues,
+    MovieFormData,
+    MovieEditData,
+    Movie
+>({
+    formName: "movie-submit-form",
+    schema: MovieFormSchema,
+    mutation: useMovieSubmitMutation,
+    defaultValues: {
+        title: "",
+        originalTitle: "",
+        tagline: "",
+        country: "",
+        synopsis: "",
+        releaseDate: "",
+        isReleased: false,
+        runtime: "",
+        originalLanguage: "",
+        trailerURL: "",
+        languages: [],
+        subtitles: [],
+        genres: [],
+        isAvailable: true,
+    }
+});
 
-/**
- * Orchestrates movie data submission by providing form context and handling mutation triggers.
- */
-export function MovieSubmitForm(
-    {children, presetValues, editEntity, ...submitConfig}: ContainerProps
-): ReactElement {
-
-    const formID = useGenerateFormID("form-submit-movie-data");
-
-    const form = useMovieSubmitForm({movie: editEntity, presetValues});
-    const {mutateAsync, isPending, isError} = useMovieSubmitMutation();
-
-    const submitMovieData = async (values: MovieFormData) => {
-        try {
-            handleMutationCallback({
-                message: submitConfig.submitMessage,
-                cb: () => submitConfig.onSubmit?.(values),
-            });
-
-            const movie = await mutateAsync(values);
-
-            Logger.log({
-                msg: "Movie Created/Updated.",
-                type: "INFO",
-                context: {movie: movie._id},
-            });
-
-            handleMutationCallback({
-                message: submitConfig.successMessage,
-                cb: () => submitConfig.onSubmitSuccess?.(movie),
-                messageType: "success",
-            });
-        } catch (error: unknown) {
-            handleFormSubmitError({form, error, displayMessage: submitConfig.errorMessage});
-            submitConfig.onSubmitError?.(error);
-        }
-    };
-
-    return (
-        <BaseFormContextProvider
-            formID={formID}
-            isPending={isPending}
-            isError={isError}
-            submitHandler={submitMovieData}
-        >
-            <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(submitMovieData)}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for submitting movie creation and update forms. */
+        SubmitForm as MovieSubmitForm,
+    /** Custom hook for managing the movie submit form state and mutation handler. */
+        useSubmitForm as useMovieSubmitForm,
 }

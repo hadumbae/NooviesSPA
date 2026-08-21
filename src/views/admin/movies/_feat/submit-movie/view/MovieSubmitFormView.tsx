@@ -7,14 +7,10 @@ import {cn} from "@/common/_feat";
 import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {
-    MovieSubmitFormDetailsFieldset
-} from "@/views/admin/movies/_feat/submit-movie/fieldsets/MovieSubmitFormDetailsFieldset.tsx";
-import {
+    MovieSubmitFormDetailsFieldset,
+    MovieSubmitFormMediaFieldset,
     MovieSubmitFormProductionFieldset
-} from "@/views/admin/movies/_feat/submit-movie/fieldsets/MovieSubmitFormProductionFieldset.tsx";
-import {
-    MovieSubmitFormMediaFieldset
-} from "@/views/admin/movies/_feat/submit-movie/fieldsets/MovieSubmitFormMediaFieldset.tsx";
+} from "@/views/admin/movies/_feat/submit-movie/fieldsets";
 
 /** Form view component that organises movie data entry into logical fieldsets. */
 export function MovieSubmitFormView(

@@ -1,5 +1,5 @@
 /**
- * @fileoverview A confirmation dialog for deleting a movie's poster image.
+ * @fileoverview A confirmation dialogue for deleting a movie's poster image.
  */
 
 import {ReactElement} from 'react';
@@ -21,7 +21,7 @@ type DialogProps = MutationResponseConfig<Movie, { _id: ObjectId }> & UIOpenStat
     movieID: ObjectId;
 }
 
-/** Confirmation dialog that triggers the movie poster image deletion process. */
+/** Confirmation dialogue that triggers the movie poster image deletion process. */
 export function MoviePosterImageDeleteDialog(
     {movieID, isOpen, setIsOpen, ...submitConfig}: DialogProps
 ): ReactElement {
@@ -54,8 +54,8 @@ export function MoviePosterImageDeleteDialog(
             title={title}
             description={description}
             deleteResource={deletePosterImage}
-            presetOpen={isOpen}
-            setPresetOpen={setIsOpen}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
         />
     );
 }

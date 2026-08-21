@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
+import {preprocessEmptyToUndefined, preprocessOptionalField} from "@/common/_feat/validation-preprocessors";
 import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
 import {CoercedBooleanValueSchema} from "@/common/_schemas/boolean/CoercedBooleanValueSchema.ts";
 import {CloudinaryImageSchema} from "@/common/_schemas/cloudinary-image/CloudinaryImageSchema.ts";
@@ -24,23 +24,23 @@ import {CoercedPositiveNumberSchema} from "@/common/_schemas/numbers/positive-nu
 export const MovieFormSchema = z.object({
     _id: IDStringSchema.readonly().optional(),
 
-    title: MovieTitleSchema,
+    title: preprocessEmptyToUndefined(MovieTitleSchema),
     originalTitle: preprocessEmptyToUndefined(MovieTitleSchema.optional()).optional(),
-    tagline: MovieTaglineSchema.optional(),
+    tagline: preprocessOptionalField(MovieTaglineSchema),
 
     genres: MovieGenreIDsSchema,
-    country: ISO3166Alpha2CountryCodeSchema,
-    synopsis: MovieSynopsisSchema,
+    country: preprocessEmptyToUndefined(ISO3166Alpha2CountryCodeSchema),
+    synopsis: preprocessEmptyToUndefined(MovieSynopsisSchema),
     runtime: preprocessEmptyToUndefined(CoercedPositiveNumberSchema),
-    posterImage: CloudinaryImageSchema.optional().nullable(),
+    posterImage: preprocessOptionalField(CloudinaryImageSchema).nullable(),
     trailerURL: preprocessEmptyToUndefined(MovieTrailerURLSchema),
 
-    originalLanguage: ISO6391LanguageCodeSchema,
+    originalLanguage: preprocessEmptyToUndefined(ISO6391LanguageCodeSchema),
     languages: z.array(ISO6391LanguageCodeSchema).optional(),
     subtitles: z.array(ISO6391LanguageCodeSchema).optional(),
 
-    isReleased: CoercedBooleanValueSchema,
-    isAvailable: CoercedBooleanValueSchema,
+    isReleased: preprocessEmptyToUndefined(CoercedBooleanValueSchema),
+    isAvailable: preprocessEmptyToUndefined(CoercedBooleanValueSchema),
     releaseDate: preprocessEmptyToUndefined(NonFutureDateStringSchema.optional()).optional()
 }).superRefine((values, ctx) => {
     const {releaseDate, isReleased} = values;

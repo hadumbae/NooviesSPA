@@ -8,6 +8,7 @@ import {ReactElement} from "react";
 /** Configuration for conditionally rendering a React element based on a boolean flag. */
 export type ConditionalRenderConfig = {
     render: boolean;
+    disabled?: boolean;
     key: string;
     element: ReactElement;
 };

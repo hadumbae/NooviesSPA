@@ -10,5 +10,9 @@ type RenderFieldsConfig = {
 
 /** Iterates through a collection of fields and clones the visible elements with an associated key. */
 export function renderFields({fields}: RenderFieldsConfig): (ReactElement | null)[] {
-    return fields.map(({key, render, element}) => render ? cloneElement(element, {key}) : null)
+    return fields.map(
+        ({key, render, disabled, element}) => render
+            ? cloneElement(element, {key, disabled})
+            : null
+    )
 }

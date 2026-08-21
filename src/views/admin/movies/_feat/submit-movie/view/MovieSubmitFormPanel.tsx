@@ -3,15 +3,15 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import {ScrollArea} from "@/views/common/_comp/ui/scroll-area.tsx";
 import {
+    ScrollArea,
     Sheet,
     SheetContent,
     SheetDescription,
     SheetHeader,
     SheetTitle,
     SheetTrigger
-} from "@/views/common/_comp/ui/sheet";
+} from "@/views/common/_comp/ui";
 
 
 import {UIOpenStateProps} from "@/common/_types";

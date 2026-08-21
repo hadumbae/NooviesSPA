@@ -1,4 +1,4 @@
-/** @fileoverview Confirmation dialog for deleting a movie entity with integrated mutation logic. */
+/** @fileoverview Confirmation dialogue for deleting a movie entity with integrated mutation logic. */
 
 import {ReactElement, ReactNode} from 'react';
 import {ObjectId} from "@/common/_schemas";
@@ -20,7 +20,7 @@ type WarningDialogProps = MutationResponseConfig<void, { _id: ObjectId }> & UIOp
     movieName?: string;
 };
 
-/** Renders a confirmation dialog that triggers a movie deletion mutation upon user confirmation. */
+/** Renders a confirmation dialogue that triggers a movie deletion mutation upon user confirmation. */
 export function MovieDeleteWarningDialog(
     {children, movieID, movieName, isOpen, setIsOpen, ...submitConfig}: WarningDialogProps
 ): ReactElement {
@@ -53,8 +53,8 @@ export function MovieDeleteWarningDialog(
         <EntityDeleteWarningDialog
             title={dialogTitle}
             deleteResource={deleteMovie}
-            presetOpen={isOpen}
-            setPresetOpen={setIsOpen}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
         >
             {children}
         </EntityDeleteWarningDialog>
