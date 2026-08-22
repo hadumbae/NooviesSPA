@@ -1,7 +1,7 @@
 /** @fileoverview Side-panel wrapper for the movie credit form, managing its visibility and lifecycle. */
 
 import {ReactElement, ReactNode} from "react";
-import {DisableFields, UIOpenStateProps} from "@/common/_types";
+import {UIOpenStateProps} from "@/common/_types";
 import {MovieCreditFormView} from "@/views/admin/movie-credits/_feat/submit-form/views/MovieCreditFormView.tsx";
 import {
     ScrollArea,
@@ -15,20 +15,19 @@ import {
 
 import {MovieCreditFormValues} from "@/domains/movie-credits";
 import {MovieCreditFormActions} from "@/views/admin/movie-credits";
+import {FormViewProps} from "@/common/_feat";
 
 /** Props for the MovieCreditFormPanel component, extending form and UI state definitions. */
-type FormPanelProps = UIOpenStateProps & {
+type FormPanelProps = UIOpenStateProps & FormViewProps<MovieCreditFormValues> & {
     children?: ReactNode;
     isEditing?: boolean;
-    className?: string;
-    disableFields?: DisableFields<MovieCreditFormValues>
 };
 
 /**
  * Renders a slide-out sheet containing the movie credit form.
  */
 export function MovieCreditFormPanel(
-    {children, isOpen, setIsOpen, isEditing, className, disableFields}: FormPanelProps
+    {children, isOpen, setIsOpen, isEditing, className, disableFields, hideFields}: FormPanelProps
 ): ReactElement {
     const action = isEditing ? "Update" : "Create";
     const sheetTitle = `${action} Movie Credits`;
@@ -46,7 +45,12 @@ export function MovieCreditFormPanel(
 
                 <ScrollArea className="flex-1">
                     <div className="space-y-4">
-                        <MovieCreditFormView className={className} disableFields={disableFields}/>
+                        <MovieCreditFormView
+                            className={className}
+                            disableFields={disableFields}
+                            hideFields={hideFields}
+                        />
+
                         <MovieCreditFormActions/>
                     </div>
                 </ScrollArea>

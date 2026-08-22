@@ -40,15 +40,15 @@ export function MoviePeopleHeader({movie, department}: HeaderProps) {
 
                 <nav className="flex space-x-2 items-center max-md:justify-center md:justify-end">
                     <LoggedLink to={`/admin/movies/get/${slug}/people/crew`} className={cn(
-                        "text-primary", buttonVariants({variant: isCrew ? "outline" : "link"}),
-                        !isCrew && "text-neutral-400"
+                        buttonVariants({variant: isCrew ? "outline" : "link"}),
+                        isCrew ? "text-purple-600 dark:text-purple-500" : "text-neutral-400"
                     )}>
                         Crew
                     </LoggedLink>
 
                     <LoggedLink to={`/admin/movies/get/${slug}/people/cast`} className={cn(
-                        "text-primary", buttonVariants({variant: isCast ? "outline" : "link"}),
-                        !isCast && "text-neutral-400"
+                        buttonVariants({variant: isCast ? "outline" : "link"}),
+                        isCast ? "text-purple-600 dark:text-purple-500" : "text-neutral-400"
                     )}>
                         Cast
                     </LoggedLink>

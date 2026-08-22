@@ -26,9 +26,13 @@ export function MoviePersonDetailsCardActions(
 ): ReactElement {
     return (
         <div className={className}>
-            <MovieCreditForm formConfig={{editEntity: credit}}>
+            <MovieCreditForm
+                onSubmitSuccess={() => setIsEditing(false)}
+                successMessage="Updated."
+                editEntity={credit}
+            >
                 <MovieCreditFormPanel
-                    disableFields={{person: true}}
+                    hideFields={{person: true, department: true}}
                     isOpen={isEditing}
                     setIsOpen={setIsEditing}
                 />

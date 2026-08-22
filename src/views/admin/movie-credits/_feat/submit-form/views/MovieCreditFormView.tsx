@@ -25,16 +25,16 @@ export function MovieCreditFormView(
                 hideFields={hideFields}
             />
 
-            <Separator/>
-
             {department === "CAST" && <>
+                <Separator/>
+
                 <MovieCreditFormCastFieldset
                     disableFields={disableFields}
                     hideFields={hideFields}
                 />
-            </>}
 
-            {department === "CAST" && <>
+                <Separator/>
+
                 <MovieCreditFormCastFlagFieldset
                     disableFields={disableFields}
                     hideFields={hideFields}
