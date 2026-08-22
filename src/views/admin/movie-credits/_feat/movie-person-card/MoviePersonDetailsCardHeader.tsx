@@ -14,6 +14,7 @@ import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {
     MoviePersonDetailsCardActions
 } from "@/views/admin/movie-credits/_feat/movie-person-card/MoviePersonDetailsCardActions.tsx";
+import {Link} from "react-router-dom";
 
 /** Props for the MoviePersonDetailsCardHeader component. */
 type HeaderProps = {
@@ -30,7 +31,7 @@ export function MoviePersonDetailsCardHeader(
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
-    const {characterName, person: {name: personName}, roleType: {roleName}} = credit;
+    const {characterName, person: {name: personName, slug: personSlug}, roleType: {roleName}} = credit;
     const simplifiedCredit = simplifyMovieCreditDetails(credit);
 
     const creditDesc = department === "CAST" ? characterName : roleName;
@@ -38,7 +39,9 @@ export function MoviePersonDetailsCardHeader(
     return (
         <CardHeader>
             <CardTitle className="flex justify-between items-center">
-                <span>{personName}</span>
+                <Link to={`/admin/persons/get/${personSlug}`} className="hover:underline hover:underline-offset-8">
+                    {personName}
+                </Link>
 
                 <MoviePersonDetailsCardToggles setEdit={setIsEditing} setDelete={setIsDeleting}>
                     <Button variant="outline" className="dark:hover:border dark:hover:border-gray-400">
