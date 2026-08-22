@@ -4,26 +4,21 @@ import {ReactElement} from "react";
 import {HookFormInput} from "@/views/common/_feat";
 import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
 import {useFormContext} from "react-hook-form";
-import {renderFields} from "@/common/_feat/submit-data";
-import {cn} from "@/common/_feat";
-import {DisableFields} from "@/common/_types";
+import {createFormFieldConfig, FormViewProps, renderFields} from "@/common/_feat/submit-data";
+import {cn, useBaseFormContext} from "@/common/_feat";
 import {MovieCreditFormValues} from "@/domains/movie-credits";
-
-/** Props for the MovieCreditFormCastFieldset component. */
-type FieldsetProps = {
-    className?: string;
-    disableFields?: DisableFields<MovieCreditFormValues>;
-};
 
 /** Renders input fields for billing order and character name. Requires wrapping in a Form provider. */
 export function MovieCreditFormCastFieldset(
-    {className, disableFields}: FieldsetProps
+    {className, disableFields, hideFields}: FormViewProps<MovieCreditFormValues>
 ): ReactElement {
     const {control} = useFormContext();
+    const {isPending} = useBaseFormContext();
+
+    const field = createFormFieldConfig({disableFields, hideFields, extraDisabled: isPending});
 
     const fields: ConditionalRenderConfig[] = [
-        {
-            render: !disableFields?.billingOrder,
+        field({
             key: "billingOrder",
             element: <HookFormInput
                 name="billingOrder"
@@ -34,9 +29,8 @@ export function MovieCreditFormCastFieldset(
                 step={1}
                 description="Order of credits."
             />
-        },
-        {
-            render: !disableFields?.characterName,
+        }),
+        field({
             key: "characterName",
             element: <HookFormInput
                 name="characterName"
@@ -45,8 +39,8 @@ export function MovieCreditFormCastFieldset(
                 type="text"
                 description="The name of the character played."
             />
-        }
-    ]
+        }),
+    ];
 
     return (
         <fieldset className={cn("space-y-3", className)}>

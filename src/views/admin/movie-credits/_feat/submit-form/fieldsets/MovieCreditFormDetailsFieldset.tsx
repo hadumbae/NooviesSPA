@@ -2,61 +2,64 @@
  * @fileoverview Fieldset component for movie credit basic details within a form.
  */
 
-import {ReactElement} from "react";
-import {RoleTypeDepartmentRadioGroup} from "@/views/admin/role-types";
-import {HookFormSelect} from "@/views/common/_comp/form-select/HookFormSelect.tsx";
+import {ReactElement, useEffect, useRef} from "react";
+import {RoleTypeDepartmentRadioGroup, RoleTypeFormSelect} from "@/views/admin/role-types";
 import {HookFormInput} from "@/views/common/_feat";
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/_feat";
+import {cn, createFormFieldConfig, FormViewProps, useBaseFormContext} from "@/common/_feat";
 import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
 import {renderFields} from "@/common/_feat/submit-data";
-import {DisableFields} from "@/common/_types";
 import {MovieCreditFormValues} from "@/domains/movie-credits";
-
-/** Props for the MovieCreditFormD  etailsFieldset component. */
-type FieldsetProps = {
-    className?: string;
-    disableFields?: DisableFields<MovieCreditFormValues>;
-};
+import {PersonFormSelect} from "@/views/admin/persons";
 
 /**
  * Fieldset containing inputs for person, role type, and credit display names.
  */
 export function MovieCreditFormDetailsFieldset(
-    {className, disableFields}: FieldsetProps
+    {className, disableFields, hideFields}: FormViewProps<MovieCreditFormValues>
 ): ReactElement {
-    const {control} = useFormContext();
+    const isHydrated = useRef<boolean>(false);
+    const {watch, control, resetField} = useFormContext();
+    const {isPending} = useBaseFormContext();
+
+    const department = watch("department");
+
+    useEffect(() => {
+        if (!isHydrated.current) {
+            isHydrated.current = true;
+            return;
+        }
+
+        resetField("roleType");
+    }, [department]);
+
+    const field = createFormFieldConfig({disableFields, hideFields, extraDisabled: isPending});
 
     const fields: ConditionalRenderConfig[] = [
-        {
-            render: !disableFields?.department,
+        field({
             key: "department",
             element: <RoleTypeDepartmentRadioGroup
                 name="department"
                 label="Department"
                 className="flex flex-row justify-start space-x-5"
             />
-        },
-        {
-            render: !disableFields?.person,
+        }),
+        field({
             key: "person",
-            element: <HookFormSelect
+            element: <PersonFormSelect
                 name="person"
                 label="Person"
-                options={[]}
             />
-        },
-        {
-            render: !disableFields?.roleType,
+        }),
+        field({
             key: "roleType",
-            element: <HookFormSelect
+            element: <RoleTypeFormSelect
                 name="roleType"
                 label="Role Type"
-                options={[]}
+                filters={{department}}
             />
-        },
-        {
-            render: !disableFields?.displayRoleName,
+        }),
+        field({
             key: "displayRoleName",
             element: <HookFormInput
                 name="displayRoleName"
@@ -65,9 +68,8 @@ export function MovieCreditFormDetailsFieldset(
                 type="text"
                 description="The name to display in lieu of the role's name."
             />
-        },
-        {
-            render: !disableFields?.creditedAs,
+        }),
+        field({
             key: "creditedAs",
             element: <HookFormInput
                 name="creditedAs"
@@ -76,7 +78,7 @@ export function MovieCreditFormDetailsFieldset(
                 type="text"
                 description="Name in credits."
             />
-        },
+        }),
     ]
 
     return (

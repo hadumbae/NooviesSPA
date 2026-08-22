@@ -1,62 +1,48 @@
-/** @fileoverview Data container for the movie credit submission form. */
+/**
+ * @fileoverview Defines the form component and hook for submitting movie credit data.
+ */
 
-import {MovieCredit} from "@/domains/movie-credits/_schemas/model/MovieCreditSchema.ts";
-import {MovieCreditFormData} from "@/domains/movie-credits/_feat/submit-data/schemas/MovieCreditFormSchema.ts";
-import {MovieCreditFormValues, useMovieCreditSubmitForm} from "@/domains/movie-credits/_feat/submit-data";
-import {useMovieCreditSubmitMutation} from "@/domains/movie-credits/_feat/crud-hooks";
-import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {ReactElement, ReactNode, useId} from "react";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/views/common/_comp/ui/form";
-import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
-import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import {MovieCreditDetails} from "@/domains/movie-credits";
+import {createForm} from "@/common/_feat";
+import {
+    MovieCredit,
+    MovieCreditDetails,
+    MovieCreditFormData,
+    MovieCreditFormSchema,
+    MovieCreditFormValues,
+    useMovieCreditSubmitMutation
+} from "@/domains/movie-credits";
 
-/** Props for the MovieCreditSubmitForm component. */
-type ContainerProps = MutationResponseConfig<MovieCreditDetails, MovieCreditFormData> & MutationFormResetConfig & {
-    formConfig?: FormValuesConfig<MovieCreditFormValues, MovieCredit>;
-    children?: ReactNode;
-}
+const {SubmitForm, useSubmitForm} = createForm<
+    MovieCreditFormValues,
+    MovieCreditFormData,
+    MovieCredit,
+    MovieCreditDetails
+>({
+    schema: MovieCreditFormSchema,
+    mutation: useMovieCreditSubmitMutation,
+    formName: "movie-credit-submit-form",
+    defaultValues: {
+        department: "",
+        movie: undefined,
+        person: undefined,
+        roleType: undefined,
+        displayRoleName: "",
+        notes: "",
+        creditedAs: "",
+        characterName: "",
+        billingOrder: "",
+        isPrimary: false,
+        uncredited: false,
+        voiceOnly: false,
+        cameo: false,
+        motionCapture: false,
+        archiveFootage: false,
+    },
+});
 
-/** Handles form orchestration and mutation lifecycle for movie credit submission. */
-export function MovieCreditForm(
-    {children, formConfig, ...mutationConfig}: ContainerProps
-): ReactElement {
-    const id = useId();
-    const formID = `movie-credit-submit-data-form-${id}`;
-
-    const form = useMovieCreditSubmitForm(formConfig);
-
-    const {mutateAsync, isPending} = useMovieCreditSubmitMutation();
-
-    const submitCreditData = async (values: MovieCreditFormData) => {
-        handleMutationCallback({
-            message: mutationConfig.submitMessage,
-            cb: () => mutationConfig.onSubmit?.(values),
-        });
-
-        try {
-            const result = await mutateAsync(values);
-            mutationConfig.resetOnSuccess && form.reset();
-
-            handleMutationCallback({
-                message: mutationConfig.successMessage,
-                messageType: "success",
-                cb: () => mutationConfig.onSubmitSuccess?.(result),
-            });
-        } catch (error: unknown) {
-            handleFormSubmitError({form, error, displayMessage: mutationConfig.errorMessage})
-            mutationConfig.onSubmitError?.(error);
-        }
-    };
-
-    return (
-        <BaseFormContextProvider formID={formID} isPending={isPending}>
-            <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(submitCreditData)}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for submitting movie credit creation and update forms. */
+        SubmitForm as MovieCreditForm,
+    /** Custom hook for managing the movie credit submit form state and mutation handler. */
+        useSubmitForm as useMovieCreditSubmitForm,
 }

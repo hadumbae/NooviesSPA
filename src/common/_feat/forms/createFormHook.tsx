@@ -2,7 +2,7 @@
  * @fileoverview React hook factory for generating specialised, schema-validated forms with reactive default values.
  */
 
-import {useRef} from "react";
+import {useEffect, useRef} from "react";
 import {isEqual} from "lodash";
 import {ZodType, ZodTypeDef} from "zod";
 import {DefaultValues, FieldValues, useForm, UseFormReturn} from "react-hook-form";
@@ -46,12 +46,24 @@ export function createFormHook<
     function useSubmitForm(
         {presetValues, editEntity}: FormValuesConfig<TFormValues, TEntity> = {}
     ): UseFormReturn<TFormValues, unknown, TForm> {
+        const isMounted = useRef<boolean>(false);
         const defaultValues = useDefaultValues({presetValues, editEntity});
 
-        return useForm<TFormValues, unknown, TForm>({
+        const form = useForm<TFormValues, unknown, TForm>({
             resolver: zodResolver(schema),
             defaultValues: defaultValues as DefaultValues<TFormValues>,
         });
+
+        useEffect(() => {
+            if (!isMounted.current) {
+                isMounted.current = true;
+                return;
+            }
+
+            form.reset(defaultValues);
+        }, [defaultValues])
+
+        return form;
     }
 
     return useSubmitForm;

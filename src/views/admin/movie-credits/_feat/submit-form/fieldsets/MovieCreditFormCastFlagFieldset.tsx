@@ -3,58 +3,42 @@
 import {ReactElement} from "react";
 import {HookFormCheckbox} from "@/views/common/_feat";
 import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
-import {renderFields} from "@/common/_feat/submit-data";
-import {cn} from "@/common/_feat";
-import {DisableFields} from "@/common/_types";
+import {createFormFieldConfig, FormViewProps, renderFields} from "@/common/_feat/submit-data";
+import {cn, useBaseFormContext} from "@/common/_feat";
 import {MovieCreditFormValues} from "@/domains/movie-credits";
-
-/** Props for the MovieCreditFormCastFlagFieldset component. */
-type FieldsetProps = {
-    className?: string;
-    disableFields?: DisableFields<MovieCreditFormValues>;
-};
 
 /** Renders a grid of checkbox inputs for cast attributes like primary, uncredited, or voice roles. */
 export function MovieCreditFormCastFlagFieldset(
-    {className, disableFields}: FieldsetProps
+    {className, disableFields, hideFields}: FormViewProps<MovieCreditFormValues>
 ): ReactElement {
+    const {isPending} = useBaseFormContext();
+    const field = createFormFieldConfig({disableFields, hideFields, extraDisabled: isPending});
+
     const fields: ConditionalRenderConfig[] = [
-        {
-            render: !disableFields?.isPrimary,
+        field({
             key: "isPrimary",
             element: <HookFormCheckbox name="isPrimary" label="Is Primary?"/>
-
-        },
-        {
-            render: !disableFields?.uncredited,
+        }),
+        field({
             key: "uncredited",
             element: <HookFormCheckbox name="uncredited" label="Is Uncredited?"/>
-
-        },
-        {
-            render: !disableFields?.cameo,
+        }),
+        field({
             key: "cameo",
             element: <HookFormCheckbox name="cameo" label="Is Cameo?"/>
-
-        },
-        {
-            render: !disableFields?.archiveFootage,
+        }),
+        field({
             key: "archiveFootage",
             element: <HookFormCheckbox name="archiveFootage" label="Is Archive Footage?"/>
-
-        },
-        {
-            render: !disableFields?.voiceOnly,
+        }),
+        field({
             key: "voiceOnly",
             element: <HookFormCheckbox name="voiceOnly" label="Is Voice Only?"/>
-
-        },
-        {
-            render: !disableFields?.motionCapture,
+        }),
+        field({
             key: "motionCapture",
             element: <HookFormCheckbox name="motionCapture" label="Is Motion Captured?"/>
-
-        },
+        }),
     ];
 
     return (
