@@ -2,15 +2,12 @@
  * @fileoverview Fieldset for managing movie, theatre, and screen selection in a showing submission form.
  */
 
-import {ReactElement, useContext, useEffect, useState} from 'react';
+import {ReactElement} from 'react';
 import {useFormContext} from "react-hook-form";
 import {Plus, X} from "lucide-react";
 import {ObjectId} from "@/common/_schemas";
-import {cn} from "@/common/_feat";
-import {
-    filterFalsyAttributes
-} from "@/common/_feat/filter-object-attributes/filterFalsyAttributes.ts";
-import {MultiStepFormStateContext} from "@/common/_feat/multi-step-form/contexts/stateContext.ts";
+import {cn, createFormFieldConfig, renderFields, useBaseMultiStepFormContext} from "@/common/_feat";
+import {filterFalsyAttributes} from "@/common/_feat/filter-object-attributes/filterFalsyAttributes.ts";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 
 import {HookFormInput} from "@/views/common/_feat";
@@ -20,22 +17,19 @@ import {TheatreHookFormSelect, TheatreQuickOverviewFetchCard} from "@/views/admi
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens";
 
 import {Theatre} from "@/domains/theatres";
-import {ShowingFormValues} from "@/domains/showings";
+import {ShowingFormValues, useHandleShowingFormFiltering} from "@/domains/showings";
 import {HookFormSelect} from "@/views/common/_comp";
 import {ISO3166Alpha2CountryOptions} from "@/common/_const";
+import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
 
 /**
  * Form fieldset for selecting the movie and location details for a showing.
  */
 export function ShowingSubmitFormDetailsFieldset(
-    {disableFields, className}: Omit<FormFieldsetProps<ShowingFormValues>, "isNestedView">
+    {disableFields, hideFields, className}: Omit<FormFieldsetProps<ShowingFormValues>, "isNestedView">
 ): ReactElement {
-    const {control, watch, setValue, resetField} = useFormContext();
-
-    const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
-    const {isHydrated = true} = useContext(MultiStepFormStateContext) ?? {};
-
-    // --- WATCH ---
+    const {control, watch, setValue} = useFormContext();
+    const {isPending} = useBaseMultiStepFormContext();
 
     const movie = watch("movie");
     const theatre = watch("theatre");
@@ -43,37 +37,75 @@ export function ShowingSubmitFormDetailsFieldset(
     const state = watch("theatreState");
     const country = watch("theatreCountry");
 
+    const {isFiltering, setIsFiltering} = useHandleShowingFormFiltering();
+    const field = createFormFieldConfig({disableFields, hideFields, extraDisabled: isPending});
+
     const theatreFilters = filterFalsyAttributes({city, state, country});
     const onTheatreChange = (val: Theatre | null) => setValue("localTimezone", val?.location.timezone ?? "");
 
-    // --- HOOKS ---
+    const filterFields: ConditionalRenderConfig[] = [
+        field({
+            key: "theatreCountry",
+            element: <HookFormSelect
+                name="theatreCountry"
+                label="Country"
+                classNames={{container: "col-span-2"}}
+                options={ISO3166Alpha2CountryOptions}
+            />
+        }),
+        field({
+            key: "theatreCity",
+            element: <HookFormInput
+                name="theatreCity"
+                label="City"
+                control={control}
+            />
+        }),
+        field({
+            key: "theatreState",
+            element: <HookFormInput
+                name="theatreState"
+                label="State"
+                control={control}
+            />
+        }),
+    ];
 
-    /** Effect: Reset location filters when the filter panel is closed. */
-    useEffect(() => {
-        if (!isFilterOpen) {
-            setValue("theatreCity", "");
-            setValue("theatreState", "");
-            setValue("theatreCountry", undefined);
-        }
-    }, [isFilterOpen]);
+    const detailsFields: ConditionalRenderConfig[] = [
+        field({
+            key: "movie",
+            element: <div className="space-y-1">
+                <MovieHookFormSelect name="movie" label="Movie" description="The movie to be shown."/>
+                {movie && <MovieQuickOverviewFetchCard movieID={movie as ObjectId}/>}
+            </div>
+        }),
+        field({
+            key: "theatre",
+            element: <div>
+                <TheatreHookFormSelect
+                    name="theatre"
+                    label="Theatre"
+                    description="The theatre at which the showing will be."
+                    filters={theatreFilters}
+                    onValueChange={onTheatreChange}
+                />
 
-    /** Effect: Clear selection when location filters are modified. */
-    useEffect(() => {
-        if (isFilterOpen) {
-            setValue("theatre", undefined);
-            setValue("screen", undefined);
-            setValue("localTimezone", "");
-        }
-    }, [city, state, country]);
-
-    /** Effect: Reset screen selection whenever the selected theatre changes. */
-    useEffect(() => {
-        if (isHydrated) {
-            resetField("screen");
-        }
-    }, [theatre]);
-
-    // --- RENDER ---
+                {theatre && <TheatreQuickOverviewFetchCard theatreID={theatre as ObjectId}/>}
+            </div>
+        }),
+        {
+            key: "screen",
+            render: !hideFields?.screen && theatre,
+            disabled: disableFields?.screen,
+            element: <ScreenHookFormSelect
+                control={control}
+                name="screen"
+                label="Screen"
+                filters={{theatre}}
+                description="The screen on which the movie will be shown."
+            />
+        },
+    ]
 
     return (
         <fieldset className={cn("space-y-2", className)}>
@@ -82,88 +114,24 @@ export function ShowingSubmitFormDetailsFieldset(
                 <Separator/>
             </div>
 
-            {
-                !disableFields?.movie && (
-                    <div className="space-y-1">
-                        <MovieHookFormSelect name="movie" label="Movie" description="The movie to be shown."/>
-                        {movie && <MovieQuickOverviewFetchCard movieID={movie as ObjectId}/>}
-                    </div>
-                )
-            }
+            {renderFields({fields: detailsFields.slice(0, 1)})}
 
-            <Collapsible open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+            <Collapsible open={isFiltering} onOpenChange={setIsFiltering}>
                 <CollapsibleTrigger asChild>
                     <Button variant="link" size="sm">
-                        {isFilterOpen ? <X/> : <Plus/>}
-                        {isFilterOpen ? "Clear Filters" : "Add Theatre Filters"}
+                        {isFiltering ? <X/> : <Plus/>}
+                        {isFiltering ? "Clear Filters" : "Add Theatre Filters"}
                     </Button>
                 </CollapsibleTrigger>
 
                 <CollapsibleContent className="p-3 rounded-2xl border border-neutral-800 dark:border-neutral-500">
                     <div className="grid grid-cols-2 gap-1">
-                        {
-                            !disableFields?.theatreCountry && (
-                                <HookFormSelect
-                                    name="theatreCountry"
-                                    label="Country"
-                                    classNames={{container: "col-span-2"}}
-                                    options={ISO3166Alpha2CountryOptions}
-                                />
-                            )
-                        }
-
-                        {
-                            !disableFields?.theatreCity && (
-                                <HookFormInput
-                                    name="theatreCity"
-                                    label="City"
-                                    control={control}
-                                />
-                            )
-                        }
-
-                        {
-                            !disableFields?.theatreState && (
-                                <HookFormInput
-                                    name="theatreState"
-                                    label="State"
-                                    control={control}
-                                />
-                            )
-                        }
+                        {renderFields({fields: filterFields})}
                     </div>
                 </CollapsibleContent>
             </Collapsible>
 
-            {
-                !disableFields?.theatre && (
-                    <div>
-                        <TheatreHookFormSelect
-                            name="theatre"
-                            label="Theatre"
-                            description="The theatre at which the showing will be."
-                            filters={theatreFilters}
-                            onValueChange={onTheatreChange}
-                        />
-
-                        {theatre && (
-                            <TheatreQuickOverviewFetchCard theatreID={theatre as ObjectId}/>
-                        )}
-                    </div>
-                )
-            }
-
-            {
-                !disableFields?.screen && theatre && (
-                    <ScreenHookFormSelect
-                        control={control}
-                        name="screen"
-                        label="Screen"
-                        filters={{theatre}}
-                        description="The screen on which the movie will be shown."
-                    />
-                )
-            }
+            {renderFields({fields: detailsFields.slice(1)})}
         </fieldset>
     );
 }

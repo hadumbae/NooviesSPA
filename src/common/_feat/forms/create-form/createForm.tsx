@@ -6,9 +6,9 @@ import {ReactElement} from "react";
 import {ZodType, ZodTypeDef} from "zod";
 import {FieldValues, UseFormReturn} from "react-hook-form";
 import {UseMutationResult} from "@tanstack/react-query";
-import {FormValuesConfig} from "@/common/_feat";
+import {FormValuesConfig} from "@/common/_feat/submit-data/formTypes.ts";
 import {createFormHook} from "@/common/_feat/forms/createFormHook.tsx";
-import {createFormContainer, FactoryFormContainerProps} from "@/common/_feat/forms/createFormContainer.tsx";
+import {createFormContainer, FactoryFormContainerProps} from "@/common/_feat/forms/create-form/createFormContainer.tsx";
 
 /** Configuration options required to instantiate the form factory. */
 type FactoryConfig<

@@ -7,7 +7,7 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Card, CardContent} from "@/views/common/_comp/ui";
 
 import {ShowingDetails, useNavigateToShowingDetails} from "@/domains/showings";
-import {ShowingSubmitForm, ShowingSubmitFormView} from "@/views/admin/showings/_feat";
+import {ShowingSubmitForm, ShowingSubmitFormView, ShowingSubmitStorageKey} from "@/views/admin/showings/_feat";
 import {ShowingCreateBreadcrumbs} from "@/views/admin/showings/_pages/create-page/breadcrumbs.tsx";
 
 /**
@@ -30,6 +30,7 @@ export function ShowingCreatePage(): ReactElement {
             <Card>
                 <CardContent className="p-3">
                     <ShowingSubmitForm
+                        localStorageKey={ShowingSubmitStorageKey}
                         onSubmitSuccess={onShowingCreated}
                         resetOnSuccess={true}
                     >

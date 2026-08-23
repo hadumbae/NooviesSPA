@@ -8,15 +8,62 @@ import {ShowingFormValues} from "@/domains/showings/_schema/form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
-import {cn} from "@/common/_feat";
+import {cn, createFormFieldConfig, renderFields, useBaseMultiStepFormContext} from "@/common/_feat";
+import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
 
 /**
  * Form section for showing schedule inputs.
  */
 export function ShowingSubmitFormDateTimeFieldset(
-    {disableFields, className}: Omit<FormFieldsetProps<ShowingFormValues>, "isNestedView">
+    {disableFields, hideFields, className}: Omit<FormFieldsetProps<ShowingFormValues>, "isNestedView">
 ): ReactElement {
     const {control} = useFormContext();
+    const {isPending} = useBaseMultiStepFormContext();
+
+    const field = createFormFieldConfig({disableFields, hideFields, extraDisabled: isPending});
+
+    const fields: ConditionalRenderConfig[] = [
+        field({
+            key: "startAtDate",
+            element: <HookFormInput
+                name="startAtDate"
+                label="Starting Date"
+                type="date"
+                control={control}
+                description="Date the showing starts."
+            />,
+        }),
+        field({
+            key: "startAtTime",
+            element: <HookFormInput
+                name="startAtTime"
+                label="Starting Time"
+                type="time"
+                control={control}
+                description="Time the showing starts."
+            />,
+        }),
+        field({
+            key: "endAtDate",
+            element: <HookFormInput
+                name="endAtDate"
+                label="Ending Date"
+                type="date"
+                control={control}
+                description="Date the showing ends."
+            />,
+        }),
+        field({
+            key: "endAtTime",
+            element: <HookFormInput
+                name="endAtTime"
+                label="Ending Time"
+                type="time"
+                control={control}
+                description="Time the showing ends."
+            />,
+        }),
+    ]
 
     return (
         <fieldset className={cn("space-y-3", className)}>
@@ -26,53 +73,7 @@ export function ShowingSubmitFormDateTimeFieldset(
             </div>
 
             <div className="grid grid-cols-2 gap-3">
-                {
-                    !disableFields?.startAtDate && (
-                        <HookFormInput
-                            name="startAtDate"
-                            label="Starting Date"
-                            type="date"
-                            control={control}
-                            description="Date the showing starts."
-                        />
-                    )
-                }
-
-                {
-                    !disableFields?.startAtTime && (
-                        <HookFormInput
-                            name="startAtTime"
-                            label="Starting Time"
-                            type="time"
-                            control={control}
-                            description="Time the showing starts."
-                        />
-                    )
-                }
-
-                {
-                    !disableFields?.endAtDate && (
-                        <HookFormInput
-                            name="endAtDate"
-                            label="Ending Date"
-                            type="date"
-                            control={control}
-                            description="Date the showing ends."
-                        />
-                    )
-                }
-
-                {
-                    !disableFields?.endAtTime && (
-                        <HookFormInput
-                            name="endAtTime"
-                            label="Ending Time"
-                            type="time"
-                            control={control}
-                            description="Time the showing ends."
-                        />
-                    )
-                }
+                {renderFields({fields})}
             </div>
         </fieldset>
     );

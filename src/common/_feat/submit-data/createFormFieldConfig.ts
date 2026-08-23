@@ -22,7 +22,7 @@ export function createFormFieldConfig<TValues extends FieldValues>(
 ) {
     return <TKeys extends keyof TValues & string>(
         {key, element}: { key: TKeys, element: ReactElement }
-    ): ConditionalRenderConfig<TValues> => ({
+    ): ConditionalRenderConfig => ({
         key,
         render: !hideFields?.[key],
         disabled: extraDisabled || disableFields?.[key],

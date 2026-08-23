@@ -1,81 +1,57 @@
 /**
- * @fileoverview Form container for creating and updating movie showings.
- *
+ * @fileoverview Defines the multi-step form component, hook, and storage key for submitting showing data.
  */
 
-import {ReactElement, ReactNode, useId} from "react";
-import {IANATimezone} from "@/common/_schemas/time/IANATimezoneSchema.ts";
-import {Showing} from "@/domains/showings/_schema/showing/ShowingSchema.ts";
-import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
-import {ShowingFormData, ShowingFormValues} from "@/domains/showings/_schema/form";
-import {useShowingSubmitMutation} from "@/domains/showings/_feat/crud-hooks";
-import {useShowingSubmitForm} from "@/domains/showings/_feat/submit-data";
-import {Form} from "@/views/common/_comp/ui/form.tsx";
-import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {BaseMultiStepFormContextProvider} from "@/views/common/_feat/multi-step-form";
-import {handleFormSubmitError, handleMutationCallback} from "@/common/_feat";
+import {createMultiStepForm} from "@/common/_feat/forms/create-multi-step-form/createMultiStepForm.tsx";
+import {
+    ShowingDetails,
+    ShowingEditData,
+    ShowingFormData,
+    ShowingFormSchema,
+    ShowingFormValues,
+    useShowingSubmitMutation
+} from "@/domains/showings";
 
-/** Props for the ShowingSubmitForm component when editing or creating. */
-type ShowingEditingProps =
-    | { showing: Showing; theatreTimezone: IANATimezone }
-    | { showing?: never; theatreTimezone?: never };
+const {SubmitForm, useSubmitForm} = createMultiStepForm<
+    ShowingFormValues,
+    ShowingFormData,
+    ShowingEditData,
+    ShowingDetails
+>({
+    formName: "showing-submit-form",
+    schema: ShowingFormSchema,
+    mutation: useShowingSubmitMutation,
+    defaultValues: {
+        startAtDate: "",
+        startAtTime: "",
+        endAtDate: "",
+        endAtTime: "",
+        ticketPrice: "",
+        language: "",
+        subtitleLanguages: [],
+        movie: "",
+        theatre: "",
+        screen: "",
+        status: "SCHEDULED",
+        localTimezone: "",
+        theatreCity: "",
+        theatreState: "",
+        theatreCountry: undefined,
+        config: {
+            isActive: true,
+            isSpecialEvent: false,
+            canReserveSeats: false
+        },
+    },
+});
 
-/** Props for the ShowingSubmitForm component. */
-type SubmitContainerProps =
-    ShowingEditingProps &
-    MutationResponseConfig<ShowingDetails, ShowingFormData> &
-    MutationFormResetConfig & {
-    presetValues?: Partial<ShowingFormValues>;
-    children: ReactNode;
-};
+/** Storage key for persisting showing form state. */
+const ShowingSubmitStorageKey = "showing-submit-form-data";
 
-/** Multi-step form container that manages showing submission logic and state persistence. */
-export function ShowingSubmitForm(
-    {children, showing, theatreTimezone, presetValues, ...onSubmitConfig}: SubmitContainerProps
-): ReactElement {
-    const id = useId();
-    const formID = `showing-submit-form-${id}`;
-    const localStorageKey = "showing-submit-form-data";
-
-    const formProps = showing ? {showing, theatreTimezone} : {};
-    const form = useShowingSubmitForm({presetValues, ...formProps});
-
-    const {mutateAsync} = useShowingSubmitMutation();
-
-    const onFormSubmit = async (values: ShowingFormData) => {
-        try {
-            handleMutationCallback({
-                message: onSubmitConfig?.submitMessage,
-                cb: () => onSubmitConfig?.onSubmit?.(values),
-            });
-
-            const showing = await mutateAsync(values);
-            onSubmitConfig?.resetOnSuccess && form.reset();
-
-            handleMutationCallback({
-                message: onSubmitConfig?.successMessage,
-                cb: () => onSubmitConfig?.onSubmitSuccess?.(showing),
-                messageType: "success",
-            });
-        } catch (error: unknown) {
-            onSubmitConfig?.resetOnError && form.reset();
-            handleFormSubmitError({form, error, displayMessage: onSubmitConfig?.errorMessage});
-            onSubmitConfig?.onSubmitError?.(error);
-        }
-    };
-
-    return (
-        <BaseMultiStepFormContextProvider
-            formID={formID}
-            localStorageKey={localStorageKey}
-            storageType="session"
-            useStorage={!showing}
-        >
-            <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(onFormSubmit)}>
-                    {children}
-                </form>
-            </Form>
-        </BaseMultiStepFormContextProvider>
-    );
+export {
+    ShowingSubmitStorageKey,
+    /** Multi-step form component for submitting showing creation and update forms. */
+        SubmitForm as ShowingSubmitForm,
+    /** Custom hook for managing the showing multi-step form state and mutation handler. */
+        useSubmitForm as useShowingSubmitForm,
 }

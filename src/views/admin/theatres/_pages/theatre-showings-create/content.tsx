@@ -5,7 +5,10 @@
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
-import {ShowingSubmitForm} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitForm.tsx";
+import {
+    ShowingSubmitForm,
+    ShowingSubmitStorageKey
+} from "@/views/admin/showings/_feat/submit-form/ShowingSubmitForm.tsx";
 import {ReactElement} from "react";
 
 import {Theatre} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
@@ -52,6 +55,7 @@ export function TheatreShowingCreatePageContent(
             <Card>
                 <CardContent className="p-3">
                     <ShowingSubmitForm
+                        localStorageKey={ShowingSubmitStorageKey}
                         presetValues={{theatre: theatreID}}
                         onSubmitSuccess={onSubmit}
                         resetOnSuccess={true}

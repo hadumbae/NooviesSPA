@@ -7,8 +7,8 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Card, CardContent} from "@/views/common/_comp/ui";
 import {PageHeader} from "@/views/common/_comp";
 
-import {ShowingDetails, simplifyShowingDetails, useNavigateToShowingDetails} from "@/domains/showings";
-import {ShowingSubmitForm, ShowingSubmitFormView} from "@/views/admin/showings/_feat";
+import {buildShowingEditData, ShowingDetails, useNavigateToShowingDetails} from "@/domains/showings";
+import {ShowingSubmitForm, ShowingSubmitFormView, ShowingSubmitStorageKey} from "@/views/admin/showings/_feat";
 import {ShowingEditBreadcrumbs} from "@/views/admin/showings/_pages/edit-page/breadcrumbs.tsx";
 
 /** Props for the ShowingEditPageContent component. */
@@ -28,7 +28,7 @@ export function ShowingEditPageContent(
         theatre: {name: theatreName, location: {timezone}},
     } = showing;
 
-    const simplifiedShowing = simplifyShowingDetails(showing);
+    const editEntity = buildShowingEditData({showing, theatreTimezone: timezone});
 
     return (
         <PageFlexWrapper>
@@ -41,9 +41,9 @@ export function ShowingEditPageContent(
             <Card>
                 <CardContent className="p-3">
                     <ShowingSubmitForm
+                        localStorageKey={ShowingSubmitStorageKey}
                         onSubmitSuccess={(updated: ShowingDetails) => navigate({slug: updated.slug})}
-                        showing={simplifiedShowing}
-                        theatreTimezone={timezone}
+                        editEntity={editEntity}
                     >
                         <ShowingSubmitFormView/>
                     </ShowingSubmitForm>

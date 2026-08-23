@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {DisableFields} from "@/common/_types";
+import {DisableFields, HideFields} from "@/common/_types";
 import {ShowingFormValues} from "@/domains/showings/_schema/form/form-values/ShowingFormValues.ts";
 import {FormStep, FormStepMeta} from "@/common/_feat/multi-step-form/types.ts";
 import {ChevronRight, Clock, Languages, ListCollapse} from "lucide-react";
@@ -31,13 +31,14 @@ import {MultiStepForm, MultiStepFormCurrentStep, MultiStepFormView} from "@/view
 /** Props for the ShowingSubmitFormView component. */
 type ViewProps = {
     disableFields?: DisableFields<ShowingFormValues>;
+    hideFields?: HideFields<ShowingFormValues>;
 };
 
 /**
  * Orchestrates the multi-step submission process for showings.
  */
 export function ShowingSubmitFormView(
-    {disableFields}: ViewProps
+    {disableFields, hideFields}: ViewProps
 ): ReactElement {
     const steps: FormStep<ShowingFormValues>[] = [
         {
@@ -45,28 +46,40 @@ export function ShowingSubmitFormView(
             stepCount: 1,
             icon: ListCollapse,
             fields: getSchemaFieldKeys(ShowingFormDetailSchema),
-            component: <ShowingSubmitFormDetailsFieldset disableFields={disableFields}/>,
+            component: <ShowingSubmitFormDetailsFieldset
+                hideFields={hideFields}
+                disableFields={disableFields}
+            />,
         },
         {
             title: "Languages",
             stepCount: 2,
             icon: Languages,
             fields: getSchemaFieldKeys(ShowingFormLanguageSchema),
-            component: <ShowingSubmitFormLanguagesFieldset disableFields={disableFields}/>,
+            component: <ShowingSubmitFormLanguagesFieldset
+                hideFields={hideFields}
+                disableFields={disableFields}
+            />,
         },
         {
             title: "Date & Time",
             stepCount: 3,
             icon: Clock,
             fields: getSchemaFieldKeys(ShowingFormDateTimeSchema),
-            component: <ShowingSubmitFormDateTimeFieldset disableFields={disableFields}/>,
+            component: <ShowingSubmitFormDateTimeFieldset
+                hideFields={hideFields}
+                disableFields={disableFields}
+            />,
         },
         {
             title: "Status",
             stepCount: 4,
             icon: ChevronRight,
             fields: getSchemaFieldKeys(ShowingFormStatusSchema),
-            component: <ShowingSubmitFormStatusFieldset disableFields={disableFields}/>,
+            component: <ShowingSubmitFormStatusFieldset
+                hideFields={hideFields}
+                disableFields={disableFields}
+            />,
         },
     ];
 
