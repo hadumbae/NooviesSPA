@@ -7,7 +7,11 @@ import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import {ShowingDetailsViewData} from "@/views/admin/showings/_feat";
 import {ShowingDetailsPageSeatingSection} from "@/views/admin/showings/_pages/details-page/sections";
 import {SeatMapDetailsPanelContextProvider} from "@/domains/seatmaps";
-import {ShowingDetailsHeader, ShowingDetailsPageActions} from "@/views/admin/showings/_pages/details-page/elements";
+import {
+    ShowingDetailsPageActions,
+    ShowingDetailsPageBreadcrumbs,
+    ShowingDetailsPageToggles
+} from "@/views/admin/showings/_pages/details-page/elements";
 import {
     ScreenSummaryCard,
     ShowingLanguagesCard,
@@ -16,6 +20,8 @@ import {
     ShowingTimesCard,
     TheatreSummaryCard
 } from "@/views/admin/showings/_comp";
+import {IconButton, PageHeader} from "@/views/common/_comp";
+import {Ellipsis} from "lucide-react";
 
 /** Renders the core content of the Showing Details page. */
 export function ShowingDetailsPageContent(
@@ -26,15 +32,24 @@ export function ShowingDetailsPageContent(
     const {name: screenName} = screen;
     const {title: movieTitle, releaseDate} = movie;
 
+    const formattedReleaseDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
+
     return (
         <PageFlexWrapper>
-            <ShowingDetailsHeader
-                showingSlug={showingSlug}
-                showingStartTime={startTime}
-                movieTitle={movieTitle}
-                releaseDate={releaseDate}
-                screenName={screenName}
-                theatreName={theatreName}
+            <PageHeader
+                title={`${movieTitle} (${formattedReleaseDate})`}
+                description={`Showing on ${screenName} at ${theatreName}.`}
+                breadcrumbs={
+                    <ShowingDetailsPageBreadcrumbs
+                        movieTitle={movieTitle}
+                        startTime={startTime}
+                    />
+                }
+                actions={
+                    <ShowingDetailsPageToggles showingSlug={showingSlug}>
+                        <IconButton icon={Ellipsis}/>
+                    </ShowingDetailsPageToggles>
+                }
             />
 
             <section className="space-y-3">
