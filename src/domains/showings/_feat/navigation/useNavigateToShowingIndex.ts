@@ -10,6 +10,8 @@ export function useNavigateToShowingIndex() {
     const navigate = useLoggedNavigate();
 
     return (options?: NavigateOptions) => {
+        console.log("Navigating to Showings Index");
+
         navigate({
             to: "/admin/showings",
             options,

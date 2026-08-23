@@ -15,6 +15,7 @@ import {
     useFetchShowingDetailsViewData
 } from "@/views/admin/showings/_feat/admin-view-data";
 import {ShowingDetailsUIContextProvider} from "@/domains/showings/_ctx/showing-details-ui-context/provider.tsx";
+import {IsDeletingUIContextProvider} from "@/common/_ctx/ui";
 
 /**
  * Entry point for the Showing Details admin page.
@@ -41,15 +42,17 @@ export const ShowingDetailsPage: FC = () => {
     return (
         <QueryDataLoader query={query}>
             {({showing, seating, theatre, screen, movie}) => (
-                <ShowingDetailsUIContextProvider>
-                    <ShowingDetailsPageContent
-                        showing={showing}
-                        seating={seating}
-                        theatre={theatre}
-                        screen={screen}
-                        movie={movie}
-                    />
-                </ShowingDetailsUIContextProvider>
+                <IsDeletingUIContextProvider>
+                    <ShowingDetailsUIContextProvider>
+                        <ShowingDetailsPageContent
+                            showing={showing}
+                            seating={seating}
+                            theatre={theatre}
+                            screen={screen}
+                            movie={movie}
+                        />
+                    </ShowingDetailsUIContextProvider>
+                </IsDeletingUIContextProvider>
             )}
         </QueryDataLoader>
     );

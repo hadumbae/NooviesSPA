@@ -32,16 +32,7 @@ export function ShowingSubmitFormStatusFieldset(
                 type="number"
                 min={1}
                 step={0.01}
-                className="col-span-2"
             />
-        }),
-        field({
-            key: "config",
-            element: <>
-                <HookFormCheckbox name="config.isActive" label="Is Active?"/>
-                <HookFormCheckbox name="config.isSpecialEvent" label="Is Special Event?"/>
-                <HookFormCheckbox name="config.canReserveSeats" label="Can Reserve Seats?"/>
-            </>
         }),
         field({
             key: "status",
@@ -50,8 +41,15 @@ export function ShowingSubmitFormStatusFieldset(
                 label="Status"
                 control={control}
                 description="The current status of the showing."
-                className="col-span-2"
             />
+        }),
+        field({
+            key: "config",
+            element: <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-2">
+                <HookFormCheckbox name="config.isActive" label="Is Active?"/>
+                <HookFormCheckbox name="config.isSpecialEvent" label="Is Special Event?"/>
+                <HookFormCheckbox name="config.canReserveSeats" label="Can Reserve Seats?"/>
+            </div>
         }),
     ];
 
@@ -62,7 +60,7 @@ export function ShowingSubmitFormStatusFieldset(
                 <Separator/>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {renderFields({fields})}
             </div>
         </fieldset>

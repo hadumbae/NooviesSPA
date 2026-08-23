@@ -8,7 +8,7 @@
     }
 
     .default-card {
-        @apply rounded-container-border bg-white shadow
+        @apply rounded-xl default-container shadow
     }
 
     .default-pill {

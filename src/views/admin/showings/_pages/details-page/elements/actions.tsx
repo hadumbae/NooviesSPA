@@ -3,12 +3,10 @@
  */
 
 import {ReactElement} from "react";
-import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {ObjectId} from "@/common/_schemas";
 import {ShowingDeleteWarningDialog} from "@/views/admin/showings/_feat/showing-delete-warning";
 import {useNavigateToShowingIndex} from "@/domains/showings/_feat/navigation";
-import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {ShowingDetailsUISetterContext, ShowingDetailsUIStateContext} from "@/domains/showings";
+import {useIsDeletingUIContext, useIsDeletingUIContextActions} from "@/common/_ctx/ui";
 
 /** Props for the ShowingDetailsPageActions component. */
 type ActionProps = {
@@ -22,22 +20,19 @@ type ActionProps = {
 export function ShowingDetailsPageActions(
     {className, showingID}: ActionProps
 ): ReactElement {
-    const {isDeleting} = useRequiredContext({context: ShowingDetailsUIStateContext});
-    const {setIsDeleting} = useRequiredContext({context: ShowingDetailsUISetterContext});
+    const isDeleting = useIsDeletingUIContext();
+    const {toggle: toggleDeleting} = useIsDeletingUIContextActions();
 
     const navigateToIndex = useNavigateToShowingIndex();
-
-    const responseConfig: MutationResponseConfig = {
-        onSubmitSuccess: () => navigateToIndex(),
-    }
 
     return (
         <div className={className}>
             <ShowingDeleteWarningDialog
                 _id={showingID}
                 isOpen={isDeleting}
-                setIsOpen={setIsDeleting}
-                onDeleteConfig={responseConfig}
+                setIsOpen={toggleDeleting}
+                onSubmitSuccess={() => navigateToIndex()}
+                successMessage="Removed."
             />
         </div>
     );

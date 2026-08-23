@@ -7,11 +7,9 @@ import {DateTime} from "luxon";
 import {Ellipsis} from "lucide-react";
 import {IconButton} from "@/views/common/_comp";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
-import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 import {MovieTitle} from "@/domains/movies";
-import {ShowingDetailsUISetterContext} from "@/domains/showings";
 import {ShowingDetailsPageBreadcrumbs} from "@/views/admin/showings/_pages/details-page/elements/breadcrumbs.tsx";
 import {ShowingDetailsPageToggles} from "@/views/admin/showings/_pages/details-page/elements/toggles.tsx";
 
@@ -32,7 +30,6 @@ export function ShowingDetailsHeader(
     {showingSlug, showingStartTime, movieTitle, releaseDate, screenName, theatreName}: HeaderProps
 ): ReactElement {
     const formattedReleaseDate = releaseDate?.toFormat("yyyy") ?? "Unreleased";
-    const {setIsDeleting} = useRequiredContext({context: ShowingDetailsUISetterContext});
 
     return (
         <header className="space-y-3">
@@ -48,7 +45,7 @@ export function ShowingDetailsHeader(
                     <HeaderDescription>Showing on {screenName} at {theatreName}.</HeaderDescription>
                 </div>
 
-                <ShowingDetailsPageToggles showingSlug={showingSlug} setIsDeleting={setIsDeleting}>
+                <ShowingDetailsPageToggles showingSlug={showingSlug}>
                     <IconButton icon={Ellipsis}/>
                 </ShowingDetailsPageToggles>
             </div>
