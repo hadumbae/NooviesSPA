@@ -7,6 +7,7 @@ import {ReactElement} from 'react';
 import {cn} from "@/common/_feat";
 import {Outlet} from "react-router-dom";
 import {Bounce, ToastContainer} from "react-toastify";
+import {AppErrorBoundary} from "@/views/common/_feat";
 
 /**
  * Manages the primary viewport for routed content and the global notification system.
@@ -19,7 +20,9 @@ const BaseLayoutContent = (): ReactElement => {
             "xl:mx-36",
         )}>
             {/* Contextual window for the currently matched route */}
-            <Outlet/>
+            <AppErrorBoundary>
+                <Outlet/>
+            </AppErrorBoundary>
 
             {/* Global toast configuration for consistent UI feedback */}
             <ToastContainer

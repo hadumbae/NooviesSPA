@@ -10,11 +10,14 @@ import {PageLoader} from "@/views/common/_comp";
 import {toast} from "react-toastify";
 import {useFetchPersonInfoViewData} from "@/domains/persons/_feat/client-view-data";
 import {QueryDataLoader} from "@/views/common/_feat";
+import {useTitle} from "@/common/_feat";
 
 /**
  * Entry point for the person details view.
  */
 export function PersonInfoPage(): ReactElement {
+    useTitle("Browse • Person");
+
     const navigate = useLoggedNavigate();
     const {slug} = usePersonInfoRouteParams();
 

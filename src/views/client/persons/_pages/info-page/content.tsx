@@ -26,13 +26,12 @@ type ContentProps = {
 export function PersonInfoContent(
     {person, filmography}: ContentProps
 ): ReactElement {
-    useTitle(person.name);
+    useTitle(`Browse • ${person.name}`);
     const {cast, crew} = organisePersonFilmography({filmography});
 
     return (
         <PageFlexWrapper>
             <PersonInfoPageBreadcrumbs name={person.name} />
-
             <PersonInfoDetailsCard person={person} classNames={{card: "md:col-span-2"}}/>
 
             {cast.length > 0 && <PersonInfoCastSection credits={cast}/>}
