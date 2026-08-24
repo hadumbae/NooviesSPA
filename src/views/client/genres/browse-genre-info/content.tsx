@@ -5,8 +5,7 @@
 import {ReactElement} from "react";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import {BrowseMovieOverviewCard} from "@/views/client/movies/_comp";
-import {PaginationRangeButtons} from "@/views/common/_comp";
-import {BrowseGenreInfoPageHeader} from "@/views/client/genres/browse-genre-info/header.tsx";
+import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {Genre} from "@/domains/genres";
 import {MovieWithGenres} from "@/domains/movies";
 import {GenreInfoBanner} from "@/views/client/genres/_comp";
@@ -27,7 +26,10 @@ export function BrowseGenreInfoPageContent(
 ): ReactElement {
     return (
         <PageFlexWrapper>
-            <BrowseGenreInfoPageHeader name={genre.name}/>
+            <PageHeader
+                title={genre.name}
+                description="Genre"
+            />
 
             <GenreInfoBanner genre={genre}/>
 
