@@ -27,6 +27,7 @@ export type QueryOptionFormContainerProps<TPreset extends FieldValues, TOptions 
 /** CSS class names for styling the query option form view. */
 export type QueryOptionFormViewClassNames = {
     container?: string;
+    content?: string;
     filters?: string;
     sorts?: string;
 }

@@ -15,7 +15,7 @@ import {BrowseTheatreByLocationConfig} from "@/domains/theatres/_feat/search-the
  * Fetches the paginated theatres corresponding to a specific location configuration.
  */
 export function theatresByLocation(
-    {page, perPage, target, showingsPerTheatre}: BrowseTheatreByLocationConfig,
+    {page, perPage, target, country, showingsPerTheatre}: BrowseTheatreByLocationConfig,
 ): Promise<FetchRequestReturns<PaginatedItems<TheatreWithRecentShowings>>> {
     const url = buildURL({
         baseURL: SearchTheatreBaseURL,
@@ -24,6 +24,7 @@ export function theatresByLocation(
             page,
             perPage,
             target,
+            country,
             showingsPerTheatre,
         },
     });

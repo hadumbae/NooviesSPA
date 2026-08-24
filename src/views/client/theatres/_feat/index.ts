@@ -1,1 +1,1 @@
-export * from "./browse-by-location";
+export * from "./theatre-location";

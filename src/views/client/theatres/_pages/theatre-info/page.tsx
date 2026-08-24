@@ -26,7 +26,7 @@ export function TheatreInfoPage(): ReactElement {
 
     const query = useFetchTheatreInfoViewData({
         theatreSlug: theatreSlug!,
-        localDateString: "2026-02-12",
+        localDateString: "2027-08-27",
         queries: {limit: 3},
         options: {enabled: !!theatreSlug}
     });

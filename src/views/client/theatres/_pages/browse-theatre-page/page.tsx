@@ -1,16 +1,18 @@
 /**
  * @fileoverview Public page for browsing theatres by location that have active showings.
- *
  */
 
 import {ReactElement} from "react";
-import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {useTitle} from "@/common/_feat";
 import {QueryDataLoader} from "@/views/common/_feat";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {PaginatedItems} from "@/common/_types";
 
-import {BrowseTheatreParamSchema, TheatreWithRecentShowings, useFetchTheatresByLocation} from "@/domains/theatres";
+import {
+    TheatreWithRecentShowings,
+    useFetchTheatresByLocation,
+    useTheatreLocationQueryOptionsContext
+} from "@/domains/theatres";
 import {BrowseTheatreListPageContent} from "@/views/client/theatres/_pages/browse-theatre-page/content.tsx";
 
 const THEATRES_PER_PAGE = 20;
@@ -21,13 +23,14 @@ const THEATRES_PER_PAGE = 20;
 export function BrowseTheatreListPage(): ReactElement {
     useTitle("Browse Theatres");
 
-    const {searchParams} = useParsedSearchParams({schema: BrowseTheatreParamSchema});
+    const {values: queryOptions} = useTheatreLocationQueryOptionsContext();
     const {value: page, setValue: setPage} = useParsedPaginationValue("page", 1);
 
     const query = useFetchTheatresByLocation({
         page,
         perPage: THEATRES_PER_PAGE,
-        target: searchParams.target,
+        target: queryOptions.target,
+        country: queryOptions.country,
     });
 
     return (

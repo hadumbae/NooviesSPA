@@ -15,6 +15,7 @@ type SectionConfig<TFormValues extends FieldValues, TOptions extends FieldValues
 
 type SectionProps<TFormValues extends FieldValues> = QueryOptionFormViewProps<TFormValues> & {
     disableClear?: boolean;
+    triggerText?: string;
 };
 
 /** Creates a component that integrates query options context with a collapsible form view. */
@@ -22,14 +23,19 @@ export function createQueryOptionFormSection<TFormValues extends FieldValues, TO
     {queryOptionForm: QueryOptionForm, useQueryOptionsContext, formView: FormView}: SectionConfig<TFormValues, TOptions>
 ): (props: SectionProps<TFormValues>) => ReactElement {
     return function QueryOptionFormSection(
-        {disableFields, classNames, disableClear = false}: SectionProps<TFormValues>
+        {disableFields, classNames, triggerText, disableClear = false}: SectionProps<TFormValues>
     ): ReactElement {
         const [isOpen, setIsOpen] = useState(false);
         const {values, setValues, activeOptions} = useQueryOptionsContext();
 
         return (
             <QueryOptionForm queryOptions={values} setQueryOptions={setValues} activeOptions={activeOptions}>
-                <QueryOptionsFormCollapsible isOpen={isOpen} setIsOpen={setIsOpen} disableClear={disableClear}>
+                <QueryOptionsFormCollapsible
+                    isOpen={isOpen}
+                    setIsOpen={setIsOpen}
+                    disableClear={disableClear}
+                    triggerText={triggerText}
+                >
                     <FormView disableFields={disableFields} classNames={classNames}/>
                 </QueryOptionsFormCollapsible>
             </QueryOptionForm>

@@ -25,6 +25,8 @@ export function TheatreInfoPageContent(
 ): ReactElement {
     const {name, location: {timezone}, formatted: {address}} = formatTheatreDetails(theatre);
 
+    console.log("Screens : ", screens);
+
     return (
         <PageFlexWrapper>
             <header>

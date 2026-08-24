@@ -23,15 +23,15 @@ type LocationParams = BrowseTheatreByLocationConfig & {
  * Fetches paginated theatres filtered by a location target.
  */
 export function useFetchTheatresByLocation(
-    {page, perPage, target, showingsPerTheatre, options}: LocationParams,
+    {page, perPage, target, country, showingsPerTheatre, options}: LocationParams,
 ): UseQueryResult<PaginatedItems<TheatreWithRecentShowings>, HttpResponseError> {
     const fetchByLocation = buildQueryFn<PaginatedItems<TheatreWithRecentShowings>>({
-        action: () => theatresByLocation({page, perPage, target, showingsPerTheatre}),
+        action: () => theatresByLocation({page, perPage, target, country, showingsPerTheatre}),
         schema: generatePaginationSchema(TheatreWithRecentShowingsSchema),
     });
 
     return useQuery({
-        queryKey: SearchTheatreQueryKeys.byLocation({page, perPage, target, showingsPerTheatre}),
+        queryKey: SearchTheatreQueryKeys.byLocation({page, perPage, target, country, showingsPerTheatre}),
         queryFn: fetchByLocation,
         ...useQueryOptionDefaults(options),
     });

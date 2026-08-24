@@ -4,15 +4,13 @@
 
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
-import {PaginationRangeButtons} from "@/views/common/_comp";
+import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
-import {PageHeader} from "@/views/common/_comp";
 
 import {TheatreWithRecentShowings} from "@/domains/theatres";
-import {BrowseTheatreParamForm, BrowseTheatreParamFormView} from "@/views/client/theatres/_feat";
 import {TheatreBrowseListCard} from "@/views/client/theatres/_comp";
+import {TheatreLocationQueryOptionsFormSection} from "@/views/client/theatres/_feat/theatre-location";
 
 /** Props for the BrowseTheatreListPageContent component. */
 type ContentProps = PaginationValues & {
@@ -34,13 +32,7 @@ export function BrowseTheatreListPageContent(
                 description="Theatres Near You"
             />
 
-            <BrowseTheatreParamForm>
-                <Card>
-                    <CardContent className="p-4">
-                        <BrowseTheatreParamFormView/>
-                    </CardContent>
-                </Card>
-            </BrowseTheatreParamForm>
+            <TheatreLocationQueryOptionsFormSection triggerText="Toggle Form"/>
 
             {
                 theatres.length > 0 ? (

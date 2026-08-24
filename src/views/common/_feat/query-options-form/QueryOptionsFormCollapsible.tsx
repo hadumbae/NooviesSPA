@@ -6,12 +6,14 @@ import {ReactElement, ReactNode} from "react";
 import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/views/common/_comp/ui";
 import {ChevronsUpDown, X} from "lucide-react";
 import {UIOpenStateProps} from "@/common/_types";
-import {useQueryOptionFormContext} from "@/common/_feat";
+import {cn, useQueryOptionFormContext} from "@/common/_feat";
 
 /** Props for the QueryOptionsFormCollapsible component. */
 type CollapsibleProps = UIOpenStateProps & {
     children: ReactNode;
+    className?: string;
     disableClear?: boolean;
+    triggerText?: string;
 };
 
 /**
@@ -19,19 +21,22 @@ type CollapsibleProps = UIOpenStateProps & {
  * Requires QueryOptionFormContext to manage active option counts and reset functionality.
  */
 export function QueryOptionsFormCollapsible(
-    {children, isOpen, setIsOpen, disableClear = false}: CollapsibleProps
+    {children, isOpen, setIsOpen, className, triggerText, disableClear = false}: CollapsibleProps
 ): ReactElement {
     const {activeOptions, resetValues} = useQueryOptionFormContext();
+    const triggerTextDisplay = !triggerText
+        ? activeOptions > 0 ? `Toggle Filters • ${activeOptions}` : "Toggle Filters"
+        : triggerText;
 
     return (
         <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
             <CollapsibleTrigger asChild>
                 <Button variant="ghost" className="secondary-text">
                     <ChevronsUpDown/>
-                    <span>{activeOptions > 0 ? `Toggle Filters • ${activeOptions}` : "Toggle Filters"}</span>
+                    <span>{triggerTextDisplay}</span>
                 </Button>
             </CollapsibleTrigger>
-            <CollapsibleContent className="border p-3 rounded-md w-fit space-y-2">
+            <CollapsibleContent className={cn("border p-3 rounded-md space-y-2", className)}>
                 {children}
 
                 {
