@@ -6,7 +6,7 @@ import {RouteObject} from "react-router-dom";
 import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
 import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
 import {BrowseTheatreListPage, TheatreInfoPage} from "@/views/client/theatres";
-import {TheatreLocationQueryOptionsContextProvider} from "@/domains/theatres";
+import {TheatreInfoQueryOptionsContextProvider, TheatreLocationQueryOptionsContextProvider} from "@/domains/theatres";
 
 const routes: RouteObject[] = [
     {
@@ -16,14 +16,20 @@ const routes: RouteObject[] = [
             {
                 index: true,
                 errorElement: <ComponentErrorHandler/>,
-                element: <TheatreLocationQueryOptionsContextProvider>
-                    <BrowseTheatreListPage/>
-                </TheatreLocationQueryOptionsContextProvider>,
+                element: (
+                    <TheatreLocationQueryOptionsContextProvider>
+                        <BrowseTheatreListPage/>
+                    </TheatreLocationQueryOptionsContextProvider>
+                ),
             },
             {
                 path: ":slug",
-                element: <TheatreInfoPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                element: (
+                    <TheatreInfoQueryOptionsContextProvider>
+                        <TheatreInfoPage/>
+                    </TheatreInfoQueryOptionsContextProvider>
+                ),
             }
         ],
     }

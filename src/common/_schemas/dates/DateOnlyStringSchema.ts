@@ -4,10 +4,10 @@
 
 import {z} from "zod";
 import {DateTime} from "luxon";
-import {NonEmptyStringSchema} from "@/common/_schemas/strings";
+import {StringValueSchema} from "@/common/_schemas/strings";
 
 /** Zod schema for validating non-empty strings against the yyyy-MM-dd format. */
-export const DateOnlyStringSchema = NonEmptyStringSchema
+export const DateOnlyStringSchema = StringValueSchema
     .regex(/^\d{4}-\d{2}-\d{2}$/, "Must be yyyy-MM-dd.")
     .refine(v => DateTime.fromFormat(v, "yyyy-MM-dd").isValid, "Must be a valid date.");
 

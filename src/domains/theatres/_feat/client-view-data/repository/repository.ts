@@ -20,5 +20,7 @@ export function getFetchTheatreInfoViewData(
         queries,
     });
 
+    console.log("URL:", url.toString());
+
     return useFetchAPI({method: "GET", url});
 }

@@ -11,6 +11,7 @@ export * from "./formatters";
 export * from "./forms";
 export * from "./generate-form-keys";
 export * from "./generic-form-context";
+export * from "./get-today-date-only";
 export * from "./handle-form";
 export * from "./handle-image-upload";
 export * from "./handle-mutation-callback";

@@ -3,13 +3,13 @@
  */
 
 import {z} from "zod";
-import {DateOnlyStringSchema} from "@/common/_schemas";
-import {preprocessOptionalField} from "@/common/_feat";
+import {getTodayDateOnly, preprocessOptionalField} from "@/common/_feat";
 import {AnyValues} from "@/common/_types";
+import {DateOnlyStringSchema} from "@/common/_schemas";
 
 /** Schema for validating theatre info query options context. */
 export const TheatreInfoQueryOptionsSchema = z.object({
-    date: preprocessOptionalField(DateOnlyStringSchema),
+    date: preprocessOptionalField(DateOnlyStringSchema).default(getTodayDateOnly()),
 });
 
 /** Parsed query options type derived from TheatreInfoQueryOptionsContext. */

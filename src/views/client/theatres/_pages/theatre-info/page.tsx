@@ -10,7 +10,7 @@ import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema
 import {PageLoader} from "@/views/common/_comp/page";
 import {QueryDataLoader} from "@/views/common/_feat";
 
-import {useFetchTheatreInfoViewData} from "@/domains/theatres/_feat";
+import {useFetchTheatreInfoViewData, useTheatreInfoQueryOptionsContext} from "@/domains/theatres/_feat";
 import {TheatreInfoPageContent} from "@/views/client/theatres/_pages/theatre-info/content.tsx";
 
 /**
@@ -24,9 +24,11 @@ export function TheatreInfoPage(): ReactElement {
         sourceComponent: TheatreInfoPage.name,
     }) ?? {};
 
+    const {values: {date}} = useTheatreInfoQueryOptionsContext();
+
     const query = useFetchTheatreInfoViewData({
         theatreSlug: theatreSlug!,
-        localDateString: "2027-08-27",
+        localDateString: date,
         queries: {limit: 3},
         options: {enabled: !!theatreSlug}
     });
@@ -38,7 +40,11 @@ export function TheatreInfoPage(): ReactElement {
     return (
         <QueryDataLoader query={query}>
             {({theatre, screens}) => (
-                <TheatreInfoPageContent theatre={theatre} screens={screens}/>
+                <TheatreInfoPageContent
+                    theatre={theatre}
+                    screens={screens}
+                    localDate={date}
+                />
             )}
         </QueryDataLoader>
     );
