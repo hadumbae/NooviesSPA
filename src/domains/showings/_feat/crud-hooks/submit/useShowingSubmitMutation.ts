@@ -18,6 +18,8 @@ export function useShowingSubmitMutation(): UseMutationResult<ShowingDetails, un
     const submitShowings = async (params: ShowingFormData) => {
         const {_id, ...data} = params;
 
+        console.log("Submitting Showing", data);
+
         const action = _id ? () => update({_id, data, config}) : () => create({data, config});
         const {result} = await action();
 

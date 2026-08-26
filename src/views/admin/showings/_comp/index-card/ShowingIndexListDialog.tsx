@@ -35,7 +35,7 @@ type ShowingIndexListDialogProps = {
 export function ShowingIndexListDialog(
     {showing}: ShowingIndexListDialogProps
 ): ReactElement {
-    const {status, movie, theatre, ticketPrice, slug, config: {isSpecialEvent, isActive}} = showing;
+    const {status, movie, theatre, ticketPrice, slug, config: {isSpecialEvent, isActive, canReserveSeats}} = showing;
     const {synopsis, slug: movieSlug} = movie;
     const {location: {country}} = theatre;
 
@@ -61,7 +61,12 @@ export function ShowingIndexListDialog(
                 <DialogHeader>
                     <DialogTitle className="primary-text">{movieTitle} ({releaseYear})</DialogTitle>
                     <DialogDescription className="hidden">Data</DialogDescription>
-                    <ShowingStateBadges status={status} isActive={isActive} isSpecialEvent={isSpecialEvent}/>
+                    <ShowingStateBadges
+                        status={status}
+                        isActive={isActive}
+                        isSpecialEvent={isSpecialEvent}
+                        canReserveSeats={canReserveSeats}
+                    />
                 </DialogHeader>
 
                 <ShowingMovieSummary movie={movie} to={`/admin/movies/get/${movieSlug}`}/>

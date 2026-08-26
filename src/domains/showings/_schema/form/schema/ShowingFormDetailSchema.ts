@@ -3,11 +3,9 @@
  */
 
 import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
-import {NonEmptyStringSchema} from "@/common/_schemas";
+import {IDStringSchema, NonEmptyStringSchema} from "@/common/_schemas";
 import {z} from "zod";
-import {IDStringSchema} from "@/common/_schemas";
 import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
-import {IANATimezoneSchema} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 
 /**
  * Optional string field normalized from empty input.
@@ -38,7 +36,6 @@ export const ShowingFormDetailSchema = z.object({
     theatreCity: citySchema,
     theatreState: stateSchema,
     theatreCountry: ISO3166Alpha2CountryCodeSchema.optional(),
-    localTimezone: preprocessEmptyToUndefined(IANATimezoneSchema),
 });
 
 /**

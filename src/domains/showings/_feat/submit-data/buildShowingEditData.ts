@@ -3,15 +3,9 @@
  */
 
 import {AnyValues} from "@/common/_types";
-import {
-    getShowingDateAndTimeFormValues,
-    PopulatedShowing,
-    Showing,
-    ShowingConfig,
-    ShowingDetails,
-    ShowingFormData
-} from "@/domains/showings";
-import {IANATimezone} from "@/common/_schemas";
+import {ShowingFormData} from "@/domains/showings/_schema/form";
+import {PopulatedShowing, Showing, ShowingConfig, ShowingDetails} from "@/domains/showings/_schema/showing";
+import {getLocalShowingSchedule,} from "@/domains/showings/_feat/submit-data/getLocalShowingSchedule.ts";
 
 /** Form values type for editing showing entity fields. */
 export type ShowingEditData = AnyValues<ShowingFormData>;
@@ -19,19 +13,18 @@ export type ShowingEditData = AnyValues<ShowingFormData>;
 /** Configuration options for building showing edit form data. */
 type BuilderConfig = {
     showing: Showing | PopulatedShowing | ShowingDetails;
-    theatreTimezone: IANATimezone;
 }
 
 /** Transforms a showing entity into a form-compatible payload for editing. */
 export function buildShowingEditData(
-    {showing, theatreTimezone}: BuilderConfig
+    {showing}: BuilderConfig
 ): ShowingEditData {
     const {config, startTime, endTime, screen, theatre, movie, ...remShowing} = showing;
 
-    const showingDateAndTime = getShowingDateAndTimeFormValues({
+    const showingDateAndTime = getLocalShowingSchedule({
         startTime: showing?.startTime,
         endTime: showing?.endTime,
-        theatreTimezone,
+        localTimezone: remShowing.timezone,
     });
 
     const showingConfig: ShowingConfig = {
@@ -48,7 +41,6 @@ export function buildShowingEditData(
     }
 
     return {
-        localTimezone: theatreTimezone ?? "",
         config: showingConfig,
         ...remShowing,
         ...showingDateAndTime,

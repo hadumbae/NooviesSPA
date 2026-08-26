@@ -49,6 +49,12 @@ export function ShowingTimesCard(
                         {localDateString}
                     </span>
                 </LabelContent>
+
+                <LabelContent label="Timezone" classNames={{container: "space-y-1"}}>
+                    <span className="primary-text font-bold">
+                        {localTimezone}
+                    </span>
+                </LabelContent>
             </CardContent>
         </Card>
     );

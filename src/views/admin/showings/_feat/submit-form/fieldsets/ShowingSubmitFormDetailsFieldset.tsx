@@ -41,7 +41,7 @@ export function ShowingSubmitFormDetailsFieldset(
     const field = createFormFieldConfig({disableFields, hideFields, extraDisabled: isPending});
 
     const theatreFilters = filterFalsyAttributes({city, state, country});
-    const onTheatreChange = (val: Theatre | null) => setValue("localTimezone", val?.location.timezone ?? "");
+    const onTheatreChange = (val: Theatre | null) => setValue("timezone", val?.location.timezone ?? "");
 
     const filterFields: ConditionalRenderConfig[] = [
         field({

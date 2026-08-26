@@ -41,7 +41,7 @@ export function useHandleShowingFormFiltering(): HookReturns {
         if (isFiltering) {
             setValue("theatre", undefined);
             setValue("screen", undefined);
-            setValue("localTimezone", "");
+            setValue("timezone", "");
         }
     }, [city, state, country]);
 

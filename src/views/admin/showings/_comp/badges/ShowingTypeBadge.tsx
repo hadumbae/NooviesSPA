@@ -5,7 +5,6 @@
 import {ReactElement} from "react";
 import {Badge} from "@/views/common/_comp/ui/badge.tsx";
 import {cn} from "@/common/_feat";
-import {parseShowingType} from "@/domains/showings/_feat/formatters";
 
 /** Props for the ShowingTypeBadge component. */
 type BadgeProps = {
@@ -19,7 +18,7 @@ type BadgeProps = {
 export function ShowingTypeBadge(
     {canReserveSeats, className}: BadgeProps
 ): ReactElement {
-    const showingType = parseShowingType(canReserveSeats);
+    const showingType = canReserveSeats ? "Reserved" : "General";
 
     return (
         <Badge className={cn(

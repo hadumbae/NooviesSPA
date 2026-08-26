@@ -10,6 +10,8 @@ import {ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
 import {cn, createFormFieldConfig, renderFields, useBaseMultiStepFormContext} from "@/common/_feat";
 import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
+import {HookFormSelect} from "@/views/common/_comp";
+import {IANATimezoneOptions} from "@/common/_const";
 
 /**
  * Form section for showing schedule inputs.
@@ -61,6 +63,16 @@ export function ShowingSubmitFormDateTimeFieldset(
                 type="time"
                 control={control}
                 description="Time the showing ends."
+            />,
+        }),
+        field({
+            key: "timezone",
+            element: <HookFormSelect
+                className="col-span-2"
+                name="timezone"
+                label="Timezone"
+                description="Local timezone of the showing."
+                options={IANATimezoneOptions}
             />,
         }),
     ]

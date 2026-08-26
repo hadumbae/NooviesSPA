@@ -9,7 +9,7 @@ import { ISO8601DateTime } from "@/common/_schemas/iso-8601/ISO8601DateTimeSchem
 type ShowingDateTimeParams = {
     startTime?: ISO8601DateTime | null;
     endTime?: ISO8601DateTime | null;
-    theatreTimezone?: IANATimezone;
+    localTimezone?: IANATimezone;
 };
 
 /** Formatted date and time strings for form initialization. */
@@ -21,8 +21,8 @@ type ShowingDateTimeReturns = {
 };
 
 /** Converts ISO timestamps into localised date and time strings based on the theatre timezone. */
-export function getShowingDateAndTimeFormValues(
-    {startTime, endTime, theatreTimezone}: ShowingDateTimeParams
+export function getLocalShowingSchedule(
+    {startTime, endTime, localTimezone}: ShowingDateTimeParams
 ): ShowingDateTimeReturns {
     const values = {
         startAtDate: "",
@@ -31,18 +31,18 @@ export function getShowingDateAndTimeFormValues(
         endAtTime: "",
     };
 
-    if (!theatreTimezone) {
+    if (!localTimezone) {
         return values;
     }
 
     if (startTime) {
-        const start = startTime.setZone(theatreTimezone);
+        const start = startTime.setZone(localTimezone);
         values.startAtDate = start.toFormat("yyyy-MM-dd");
         values.startAtTime = start.toFormat("HH:mm");
     }
 
     if (endTime) {
-        const end = endTime.setZone(theatreTimezone);
+        const end = endTime.setZone(localTimezone);
         values.endAtDate = end.toFormat("yyyy-MM-dd");
         values.endAtTime = end.toFormat("HH:mm");
     }

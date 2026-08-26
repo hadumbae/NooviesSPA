@@ -33,7 +33,7 @@ const {SubmitForm, useSubmitForm} = createMultiStepForm<
         theatre: "",
         screen: "",
         status: "SCHEDULED",
-        localTimezone: "",
+        timezone: "",
         theatreCity: "",
         theatreState: "",
         theatreCountry: undefined,

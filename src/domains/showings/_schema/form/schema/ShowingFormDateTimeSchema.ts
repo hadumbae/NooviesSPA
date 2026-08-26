@@ -5,28 +5,18 @@
 import {z} from "zod";
 import {TimeStringSchema} from "@/common/_schemas/time/TimeStringSchema.ts";
 import {DateOnlyStringSchema} from "@/common/_schemas/dates/DateOnlyStringSchema.ts";
+import {preprocessEmptyToUndefined, preprocessOptionalField} from "@/common/_feat";
+import {IANATimezoneSchema} from "@/common/_schemas";
 
 /**
  * Schema for showing date and time inputs that normalizes empty strings to undefined for optional end fields.
  */
 export const ShowingFormDateTimeSchema = z.object({
-    startAtTime: z
-        .union([z.literal(""), TimeStringSchema])
-        .refine((time) => time !== "", {message: "Required."}),
-
-    startAtDate: z
-        .union([z.literal(""), DateOnlyStringSchema])
-        .refine((date) => date !== "", {message: "Required."}),
-
-    endAtTime: z
-        .union([z.literal(""), TimeStringSchema])
-        .transform((time) => (time === "" ? undefined : time))
-        .optional(),
-
-    endAtDate: z
-        .union([z.literal(""), DateOnlyStringSchema])
-        .transform((date) => (date === "" ? undefined : date))
-        .optional(),
+    startAtTime: preprocessEmptyToUndefined(TimeStringSchema),
+    startAtDate: preprocessEmptyToUndefined(DateOnlyStringSchema),
+    endAtTime: preprocessOptionalField(TimeStringSchema),
+    endAtDate: preprocessOptionalField(DateOnlyStringSchema),
+    timezone: preprocessEmptyToUndefined(IANATimezoneSchema),
 });
 
 /**

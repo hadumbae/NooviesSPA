@@ -27,8 +27,8 @@ import {Ellipsis} from "lucide-react";
 export function ShowingDetailsPageContent(
     {showing, seating, theatre, screen, movie}: ShowingDetailsViewData
 ): ReactElement {
-    const {_id: showingID, slug: showingSlug, startTime} = showing;
-    const {name: theatreName, location: {timezone: localTimezone}} = theatre;
+    const {_id: showingID, slug: showingSlug, startTime, timezone} = showing;
+    const {name: theatreName} = theatre;
     const {name: screenName} = screen;
     const {title: movieTitle, releaseDate} = movie;
 
@@ -56,9 +56,9 @@ export function ShowingDetailsPageContent(
                 <PageSectionHeader text="Basic Details"/>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-                    <ShowingTimesCard showing={showing} localTimezone={localTimezone} classNames={{card: "h-fit"}}/>
-                    <ShowingLanguagesCard showing={showing} classNames={{card: "h-fit"}}/>
-                    <ShowingStatusCard showing={showing} classNames={{card: "max-xl:col-span-2"}}/>
+                    <ShowingTimesCard showing={showing} localTimezone={timezone} classNames={{card: "h-full"}}/>
+                    <ShowingLanguagesCard showing={showing} classNames={{card: "h-full"}}/>
+                    <ShowingStatusCard showing={showing} classNames={{card: "h-full md:col-span-2 xl:col-span-1"}}/>
                 </div>
             </section>
 
@@ -66,23 +66,21 @@ export function ShowingDetailsPageContent(
                 <ShowingDetailsPageSeatingSection showing={showing} seating={seating}/>
             </SeatMapDetailsPanelContextProvider>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="flex flex-col space-y-4 md:m-48 xl:m-64">
                 <section className="space-y-3">
                     <PageSectionHeader text="Movie"/>
                     <ShowingMovieCard movie={movie}/>
                 </section>
 
-                <div className="space-y-4">
-                    <section className="space-y-3">
-                        <PageSectionHeader text="Theatre"/>
-                        <TheatreSummaryCard theatre={theatre}/>
-                    </section>
+                <section className="space-y-3 lg:h-1/2">
+                    <PageSectionHeader text="Theatre"/>
+                    <TheatreSummaryCard theatre={theatre}/>
+                </section>
 
-                    <section className="space-y-3">
-                        <PageSectionHeader text="Screen"/>
-                        <ScreenSummaryCard screen={screen}/>
-                    </section>
-                </div>
+                <section className="space-y-3 lg:h-1/2">
+                    <PageSectionHeader text="Screen"/>
+                    <ScreenSummaryCard screen={screen}/>
+                </section>
             </div>
 
             <ShowingDetailsPageActions

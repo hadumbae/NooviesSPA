@@ -25,10 +25,10 @@ export function ShowingEditPageContent(
     const {
         movie: {title},
         screen: {name: screenName},
-        theatre: {name: theatreName, location: {timezone}},
+        theatre: {name: theatreName},
     } = showing;
 
-    const editEntity = buildShowingEditData({showing, theatreTimezone: timezone});
+    const editEntity = buildShowingEditData({showing});
 
     return (
         <PageFlexWrapper>
