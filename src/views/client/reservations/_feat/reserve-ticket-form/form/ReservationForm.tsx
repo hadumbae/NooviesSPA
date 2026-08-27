@@ -1,68 +1,39 @@
 /**
- * @fileoverview Orchestration container for the ticket reservation form.
- *
+ * @fileoverview Form component and custom hook exports for managing ticket reservation submissions.
  */
 
-import {ReactElement, ReactNode, useId} from "react";
-import {ISO4217CurrencyCode, ObjectId} from "@/common/_schemas";
-import {BaseFormContextProvider, MutationResponseConfig} from "@/common/_feat";
-import {Form} from "@/views/common/_comp/ui";
-import {Logger} from "@/common/_feat/logger/Logger.ts";
+import {createForm} from "@/common/_feat";
+import {PopulatedReservation,} from "@/domains/reservations/_schema/model";
+import {useReserveTicketSubmitMutation} from "@/domains/reservations/_feat/reserve-tickets/mutations";
 import {
-    PopulatedReservation,
-    ReservationType,
     ReserveTicketFormData,
+    ReserveTicketFormSchema,
     ReserveTicketFormValues,
-    useReserveTicketForm,
-    useReserveTicketSubmitMutation
-} from "@/domains/reservations";
+} from "@/domains/reservations/_feat/reserve-tickets/schema";
 
-/** Props for the ReservationForm component. */
-type ContainerProps = {
-    children: ReactNode;
-    showingID: ObjectId;
-    reservationType: ReservationType;
-    currency?: ISO4217CurrencyCode;
-    onSubmitConfig?: MutationResponseConfig<PopulatedReservation, ReserveTicketFormData>;
-};
 
-/**
- * Container component that abstracts the business logic for booking tickets.
- * Requires a showing ID and reservation type to initialize the form state.
- */
-export function ReservationForm(
-    {children, showingID, reservationType, currency = "USD", onSubmitConfig}: ContainerProps
-): ReactElement {
-    const id = useId();
-    const formID = `reserve-ticket-form-${id}`;
+const {SubmitForm, useSubmitForm} = createForm<
+    ReserveTicketFormValues,
+    ReserveTicketFormData,
+    unknown,
+    PopulatedReservation
+>({
+    formName: "reserve-ticket-form",
+    schema: ReserveTicketFormSchema,
+    mutation: useReserveTicketSubmitMutation,
+    defaultValues: {
+        showing: "",
+        movie: "",
+        ticketCount: 0,
+        currency: undefined,
+        reservationType: "GENERAL_ADMISSION",
+        selectedSeating: [],
+    },
+});
 
-    const presetValues: Partial<ReserveTicketFormValues> = {
-        currency,
-        reservationType,
-        showing: showingID,
-        selectedSeating: reservationType === "RESERVED_SEATS" ? [] : null,
-    };
-
-    const form = useReserveTicketForm({presetValues});
-    const mutation = useReserveTicketSubmitMutation({form, ...onSubmitConfig});
-
-    const submitData = (values: ReserveTicketFormData) => {
-        Logger.log({
-            type: "DATA",
-            msg: "Initiating ticket reservation submission.",
-            context: {values},
-        });
-
-        mutation.mutate(values);
-    };
-
-    return (
-        <BaseFormContextProvider formID={formID}>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(submitData)}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for submitting ticket reservations. */
+        SubmitForm as ReservationForm,
+    /** Hook for managing ticket reservation form state and submission logic. */
+        useSubmitForm as useReservationForm,
 }

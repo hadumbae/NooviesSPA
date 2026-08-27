@@ -5,14 +5,14 @@
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
 import {IANATimezone} from "@/common/_schemas/time/IANATimezoneSchema.ts";
-import {ShowingWithMovie} from "@/domains/showings";
+import {ShowingDetails, ShowingWithMovie} from "@/domains/showings";
 import {ShowingInfoLanguages, ShowingInfoMovieMeta} from "@/views/client/showings/_comp/showing-info-details";
 import {buttonVariants} from "@/views/common/_comp/ui";
 import {Link} from "react-router-dom";
 
 /** Props for the TheatreShowingSelectSummary component. */
 type SummaryProps = {
-    showing: ShowingWithMovie;
+    showing: ShowingWithMovie | ShowingDetails;
     timezone: IANATimezone
     className?: string;
 };
@@ -52,7 +52,7 @@ export function BrowseShowingSelector(
                     "uppercase",
                     buttonVariants({variant: "primary", size: "sm"}),
                 )}>
-                    Select
+                    {canReserveSeats ? "Select Seat" : "Reserve Ticket"}
                 </Link>
             </div>
         </div>

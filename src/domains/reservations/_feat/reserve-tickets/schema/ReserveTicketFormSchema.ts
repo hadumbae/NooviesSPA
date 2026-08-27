@@ -10,10 +10,12 @@ import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
 import {AnyValues} from "@/common/_types";
 import {CoercedPositiveNumberSchema} from "@/common/_schemas/numbers/positive-number/CoercedPositiveNumberSchema";
+import {preprocessToNull} from "@/common/_feat/validation-preprocessors/preprocessToNull.ts";
 
 /** Base schema containing shared fields for all ticket reservation modes. */
 export const ReserveTicketFormBaseSchema = z.object({
     showing: IDStringSchema,
+    movie: IDStringSchema,
     ticketCount: preprocessEmptyToUndefined(CoercedPositiveNumberSchema),
     currency: ISO4217CurrencyCodeSchema,
 });
@@ -21,11 +23,7 @@ export const ReserveTicketFormBaseSchema = z.object({
 /** Form schema for general admission reservations where seat selection is prohibited. */
 export const ReserveTicketGeneralAdmissionFormSchema = ReserveTicketFormBaseSchema.extend({
     reservationType: z.literal(ReservationTypeConstant[0]),
-    selectedSeating: z
-        .array(z.any())
-        .length(0, {message: "Must be empty."})
-        .nullable()
-        .optional(),
+    selectedSeating: preprocessToNull(z.null()),
 });
 
 /** Form schema for reserved seating reservations requiring at least one selected seat. */

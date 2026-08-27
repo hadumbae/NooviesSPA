@@ -24,7 +24,9 @@ export function ShowingInfoPageContent(
     {showing}: ContentProps
 ): ReactElement {
     const navigate = useLoggedNavigate();
-    const reservationType: ReservationType = showing.config.canReserveSeats
+
+    const {_id: showingID, movie: {_id: movieID}, config: {canReserveSeats}} = showing;
+    const reservationType: ReservationType = canReserveSeats
         ? "RESERVED_SEATS"
         : "GENERAL_ADMISSION";
 
@@ -53,10 +55,8 @@ export function ShowingInfoPageContent(
 
                 {/* Form orchestrator handling both GA and Reserved Seating logic */}
                 <ReservationForm
-                    showingID={showing._id}
-                    reservationType={reservationType}
-                    currency="USD"
-                    onSubmitConfig={{onSubmitSuccess: navigateToReservations}}
+                    presetValues={{showing: showingID, movie: movieID, reservationType, currency: "USD"}}
+                    onSubmitSuccess={navigateToReservations}
                 >
                     <ReservationFormView reservationType={reservationType}/>
                 </ReservationForm>
