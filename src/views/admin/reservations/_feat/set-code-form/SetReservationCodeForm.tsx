@@ -1,49 +1,18 @@
 /**
- * @fileoverview Main container component for the reservation code search form logic.
+ * @fileoverview Form component and hook exports for setting a reservation code query option.
  */
 
-import {ReactElement, ReactNode} from "react";
-import {Form} from "@/views/common/_comp/ui";
-import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {
-    FetchByCodeSearchParams,
-    FetchByCodeSearchParamsSchema,
-    SetReservationCodeFormData,
-    SetReservationCodeFormValues,
-    useSetReservationCodeForm
-} from "@/domains/reservations";
-import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
+import {createQueryOptionForm} from "@/common/_feat";
+import {FetchByCodeSearchParamsSchema} from "@/domains/reservations/_feat/fetch-reservation-by-code/reservation-query-options-form";
 
-/** Props for the SetReservationCodeForm component. */
-export type FormProps = {
-    children: ReactNode;
-    className?: string;
-    presetValues?: Partial<FetchByCodeSearchParams>
-};
+const {QueryOptionForm, useQueryOptionForm} = createQueryOptionForm({
+    schema: FetchByCodeSearchParamsSchema,
+    name: "set-reservation-code-form",
+});
 
-/**
- * Orchestrates the reservation code search form and synchronises state with URL parameters.
- */
-export function SetReservationCodeForm(
-    {children, presetValues, className}: FormProps
-): ReactElement {
-    const formID = useGenerateFormID("set-res-unique-code-form");
-    const form = useSetReservationCodeForm({presetValues});
-
-    const {searchParams, setSearchParams} = useParsedSearchParams({schema: FetchByCodeSearchParamsSchema});
-    const updateCode = (values: SetReservationCodeFormValues) => {
-        const {code} = values as SetReservationCodeFormData;
-        setSearchParams({...searchParams, code});
-    }
-
-    return (
-        <BaseFormContextProvider formID={formID}>
-            <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(updateCode)} className={className}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for setting the reservation code query option. */
+        QueryOptionForm as SetReservationCodeForm,
+    /** Hook for managing the reservation code query option form state. */
+        useQueryOptionForm as useSetReservationCodeForm,
 }

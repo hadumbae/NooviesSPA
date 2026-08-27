@@ -73,8 +73,6 @@ export function createQueryOptionForm<
         const formID = useGenerateFormID(name);
         const form = useQueryOptionForm({presetValues, queryOptions});
 
-        console.log("form: ", form.formState.errors);
-
         const resetForm = () => form.reset(formDefaults as DefaultValues<TFormValues>);
         const updateSearchParams = (values: TOptions) => setQueryOptions(values);
 

@@ -3,12 +3,12 @@
  */
 
 import {z} from "zod";
+import {preprocessOptionalField} from "@/common/_feat";
 import {ReservationUniqueCodeSchema} from "@/domains/reservations/_schema/model";
 
 /** Validates the search criteria used to locate a reservation by its unique code. */
 export const FetchByCodeSearchParamsSchema = z.object({
-    /** The unique ticket code entered by the administrator, or null if unentered. */
-    code: ReservationUniqueCodeSchema.optional().nullable().default(null),
+    code: preprocessOptionalField(ReservationUniqueCodeSchema),
 });
 
 /** TypeScript type inferred from FetchByCodeSearchParamsSchema. */
