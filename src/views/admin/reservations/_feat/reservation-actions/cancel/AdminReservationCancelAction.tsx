@@ -29,7 +29,7 @@ export function AdminReservationCancelAction(
     const subtext = isDisabled ? "Already Cancelled" : "(Must Be An Active Reservation)";
 
     return (
-        <AdminReservationCancelForm reservationID={_id} presetValues={{notes: notes ?? ""}}>
+        <AdminReservationCancelForm mutConfig={{reservationID: _id}} presetValues={{notes: notes ?? ""}}>
             <AdminReservationCancelDialog uniqueCode={uniqueCode} isOpen={isOpen} setIsOpen={setIsOpen}>
                 <AdminActionButton
                     text="Cancel Reservation"

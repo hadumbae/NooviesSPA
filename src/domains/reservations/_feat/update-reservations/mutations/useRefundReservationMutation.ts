@@ -15,13 +15,13 @@ import {
 } from "@/domains/reservations/_feat/update-reservations/forms";
 
 /** Props for the useRefundReservationMutation hook. */
-export type MutationProps = {
+export type UseRefundReservationMutationConfig = {
     reservationID: ObjectId;
 }
 
 /** Mutation hook that transitions a reservation to a refunded status and invalidates relevant queries. */
 export function useRefundReservationMutation(
-    {reservationID}: MutationProps
+    {reservationID}: UseRefundReservationMutationConfig
 ): UseMutationResult<AdminReservation, unknown, UpdateReservationNotesFormData> {
     const queryClient = useQueryClient();
 

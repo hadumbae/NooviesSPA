@@ -13,13 +13,13 @@ import {UpdateReservationNotesFormData} from "@/domains/reservations/_feat/updat
 import {ReservationUpdateMutationKeys} from "@/domains/reservations/_feat/update-reservations/mutations/mutationKeys.ts";
 
 /** Props for the useCancelReservationMutation hook. */
-type MutationProps = {
+export type UseCancelReservationMutationConfig = {
     reservationID: ObjectId;
 }
 
 /** Provides a mutation for cancelling a reservation with integrated success and error handling. */
 export function useCancelReservationMutation(
-    {reservationID}: MutationProps
+    {reservationID}: UseCancelReservationMutationConfig
 ): UseMutationResult<AdminReservation, unknown, UpdateReservationNotesFormData> {
     const queryClient = useQueryClient();
 

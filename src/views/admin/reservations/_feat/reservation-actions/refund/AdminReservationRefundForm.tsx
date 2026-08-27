@@ -1,56 +1,37 @@
 /**
- * @fileoverview Logical container for the administrative reservation refund process.
+ * @fileoverview Form component and hook exports for refunding an admin reservation.
  */
 
-import {ReactElement, ReactNode} from "react";
-import {Form} from "@/views/common/_comp/ui";
-import {ObjectId} from "@/common/_schemas";
-import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-
+import {createForm} from "@/common/_feat";
+import {AdminReservation} from "@/domains/reservations/_schema/model/admin-reservations";
 import {
-    AdminReservation,
     UpdateReservationNotesFormData,
+    UpdateReservationNotesFormDataSchema,
+    UpdateReservationNotesFormValues,
+} from "@/domains/reservations/_feat/update-reservations/forms";
+import {
     useRefundReservationMutation,
-    useUpdateReservationNotesForm,
-    useUpdateReservationSubmitHandler
-} from "@/domains/reservations";
+    UseRefundReservationMutationConfig
+} from "@/domains/reservations/_feat/update-reservations/mutations";
 
-/** Props for the AdminReservationRefundForm component. */
-type FormProps = MutationResponseConfig<AdminReservation, UpdateReservationNotesFormData> & MutationFormResetConfig & {
-    children: ReactNode;
-    reservationID: ObjectId;
-    presetValues?: Partial<UpdateReservationNotesFormData>;
-};
+const {SubmitForm, useSubmitForm} = createForm<
+    UpdateReservationNotesFormValues,
+    UpdateReservationNotesFormData,
+    unknown,
+    AdminReservation,
+    UseRefundReservationMutationConfig
+>({
+    schema: UpdateReservationNotesFormDataSchema,
+    formName: "admin-reservation-refund-form",
+    mutation: useRefundReservationMutation,
+    defaultValues: {
+        notes: "",
+    }
+});
 
-/** Controller component that manages the state and logic for refunding a reservation. */
-export function AdminReservationRefundForm(
-    {children, reservationID, presetValues, ...submitConfig}: FormProps
-): ReactElement {
-    const formID = useGenerateFormID("res-status-refund-form");
-    const form = useUpdateReservationNotesForm({presetValues});
-
-    const {mutateAsync, isPending, isError} = useRefundReservationMutation({reservationID});
-
-    const refundReservation = useUpdateReservationSubmitHandler({
-        form,
-        submitData: (data: UpdateReservationNotesFormData) => mutateAsync(data),
-        ...submitConfig,
-    });
-
-    return (
-        <BaseFormContextProvider
-            formID={formID}
-            isPending={isPending}
-            isError={isError}
-            submitHandler={refundReservation}
-        >
-            <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(refundReservation)}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for processing an admin reservation refund. */
+        SubmitForm as AdminReservationRefundForm,
+    /** Hook for managing admin reservation refund form state and submission. */
+        useSubmitForm as useAdminReservationRefundForm,
 }

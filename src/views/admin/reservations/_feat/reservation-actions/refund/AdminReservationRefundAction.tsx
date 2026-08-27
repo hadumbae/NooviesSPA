@@ -32,7 +32,7 @@ export function AdminReservationRefundAction(
 
     return (
         <AdminReservationRefundForm
-            reservationID={_id}
+            mutConfig={{reservationID: _id}}
             presetValues={{notes: notes ?? ""}}
             successMessage="Refunded."
             errorMessage="Failed to process refund. Please try again."

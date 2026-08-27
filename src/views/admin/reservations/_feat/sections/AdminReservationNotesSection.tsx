@@ -34,7 +34,7 @@ export function AdminReservationNotesSection(
                 <PageSectionHeader text="Admin Notes"/>
 
                 <UpdateReservationNotesForm
-                    reservationID={reservationID}
+                    mutConfig={{reservationID}}
                     presetValues={{notes: notes ?? ""}}
                     onSubmitSuccess={closeOnSuccess}
                 >

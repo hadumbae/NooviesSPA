@@ -10,10 +10,13 @@ import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {AdminReservation, AdminReservationSchema} from "@/domains/reservations/_schema";
 import {FetchByCodeQueryKeys} from "@/domains/reservations/_feat/fetch-reservation-by-code";
 import {patchResetReservationExpiry} from "@/domains/reservations/_feat/update-reservations/repository";
-import {ReservationUpdateMutationKeys} from "@/domains/reservations/_feat/update-reservations/mutations/mutationKeys.ts";
+import {
+    ReservationUpdateMutationKeys
+} from "@/domains/reservations/_feat/update-reservations/mutations/mutationKeys.ts";
+import {EmptyFormData} from "@/common/_feat";
 
 /** Props for the useResetReservationExpiryMutation hook. */
-export type MutationProps = {
+export type UseResetReservationExpiryMutationConfig = {
     reservationID: ObjectId;
 }
 
@@ -21,8 +24,8 @@ export type MutationProps = {
  * TanStack Query mutation hook that extends the Time-To-Live (TTL) of a reservation.
  */
 export function useResetReservationExpiryMutation(
-    {reservationID}: MutationProps
-): UseMutationResult<AdminReservation, unknown, void> {
+    {reservationID}: UseResetReservationExpiryMutationConfig
+): UseMutationResult<AdminReservation, unknown, EmptyFormData> {
     const queryClient = useQueryClient();
 
     const resetExpiry = async () => {

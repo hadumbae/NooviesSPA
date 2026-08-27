@@ -13,13 +13,13 @@ import {patchUpdateReservationNotes} from "@/domains/reservations/_feat/update-r
 import {ReservationUpdateMutationKeys} from "@/domains/reservations/_feat/update-reservations/mutations/mutationKeys.ts";
 
 /** Props for the useUpdateReservationNotesMutation hook. */
-type MutationProps = {
+export type UseUpdateReservationNotesMutationParams = {
     reservationID: ObjectId;
 }
 
 /** Provides a mutation for updating reservation notes with integrated validation and error handling. */
 export function useUpdateReservationNotesMutation(
-    {reservationID}: MutationProps
+    {reservationID}: UseUpdateReservationNotesMutationParams
 ): UseMutationResult<AdminReservation, unknown, UpdateReservationNotesFormData> {
     const queryClient = useQueryClient();
 

@@ -30,7 +30,7 @@ type DialogProps = UIOpenStateProps & {
 export function AdminReservationCancelDialog(
     {children, isOpen, setIsOpen, uniqueCode}: DialogProps
 ): ReactElement {
-    const {formID} = useBaseFormContext();
+    const {formID, isPending} = useBaseFormContext();
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -60,7 +60,7 @@ export function AdminReservationCancelDialog(
                         <Button variant="secondary">Close</Button>
                     </DialogClose>
 
-                    <Button form={formID} variant="primary" type="submit">
+                    <Button form={formID} variant="primary" type="submit" disabled={isPending}>
                         Confirm Cancellation
                     </Button>
                 </DialogFooter>

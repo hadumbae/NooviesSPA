@@ -1,59 +1,37 @@
 /**
- * @fileoverview Logical container for administrative reservation cancellation logic.
+ * @fileoverview Form component and hook exports for canceling an admin reservation.
  */
 
-import {ReactElement, ReactNode} from "react";
-import {Form} from "@/views/common/_comp/ui";
-import {ObjectId} from "@/common/_schemas";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
+import {createForm} from "@/common/_feat";
+import {AdminReservation} from "@/domains/reservations/_schema/model/admin-reservations";
 import {
-    AdminReservation,
     UpdateReservationNotesFormData,
+    UpdateReservationNotesFormDataSchema,
     UpdateReservationNotesFormValues,
+} from "@/domains/reservations/_feat/update-reservations/forms";
+import {
     useCancelReservationMutation,
-    useUpdateReservationNotesForm,
-    useUpdateReservationSubmitHandler,
-} from "@/domains/reservations";
+    UseCancelReservationMutationConfig
+} from "@/domains/reservations/_feat/update-reservations/mutations";
 
-/** Props for the AdminReservationCancelForm component. */
-type FormProps = MutationResponseConfig<AdminReservation, UpdateReservationNotesFormData> & {
-    children: ReactNode;
-    reservationID: ObjectId;
-    className?: string;
-    presetValues: Partial<UpdateReservationNotesFormValues>;
-};
+const {SubmitForm, useSubmitForm} = createForm<
+    UpdateReservationNotesFormValues,
+    UpdateReservationNotesFormData,
+    unknown,
+    AdminReservation,
+    UseCancelReservationMutationConfig
+>({
+    schema: UpdateReservationNotesFormDataSchema,
+    formName: "admin-reservation-cancel-form",
+    mutation: useCancelReservationMutation,
+    defaultValues: {
+        notes: "",
+    }
+});
 
-/**
- * Headless form controller that manages the state and submission of a reservation cancellation request.
- */
-export function AdminReservationCancelForm(
-    {children, reservationID, presetValues, className, ...submitConfig}: FormProps
-): ReactElement {
-    const formID = useGenerateFormID("res-cancel-reservation-form");
-    const form = useUpdateReservationNotesForm({presetValues});
-
-    const {mutateAsync, isPending, isError} = useCancelReservationMutation({reservationID});
-
-    const cancelReservation = useUpdateReservationSubmitHandler({
-        form,
-        submitData: async (data: UpdateReservationNotesFormData) => await mutateAsync(data),
-        ...submitConfig,
-    });
-
-    return (
-        <BaseFormContextProvider
-            formID={formID}
-            isPending={isPending}
-            isError={isError}
-            submitHandler={cancelReservation}
-        >
-            <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(cancelReservation)} className={className}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for canceling an admin reservation. */
+        SubmitForm as AdminReservationCancelForm,
+    /** Hook for managing admin reservation cancellation form state and submission. */
+        useSubmitForm as useAdminReservationCancelForm,
 }

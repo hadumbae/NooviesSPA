@@ -3,14 +3,13 @@
  */
 
 import {ReactElement, useState} from "react";
-import {toast} from "react-toastify";
-import {handleSubmitResponseError} from "@/common/_feat/error-handling/handleSubmitResponseError.ts";
 
-import {AdminReservation, useResetReservationExpiryMutation} from "@/domains/reservations";
+import {AdminReservation} from "@/domains/reservations";
 import {
     AdminReservationResetExpiryDialog
 } from "@/views/admin/reservations/_feat/reservation-actions/reset-expiry/AdminReservationResetExpiryDialog.tsx";
 import {AdminActionButton} from "@/views/common/_comp";
+import {AdminReservationResetExpiryForm} from "@/views/admin/reservations";
 
 /** Props for the AdminReservationResetExpiryAction component. */
 type ActionProps = {
@@ -26,35 +25,26 @@ export function AdminReservationResetExpiryAction(
     const isDisabled = status !== "RESERVED";
     const subtext = isDisabled ? "Must Be A RESERVED Reservation" : expiresAt.toFormat("HH:mm:ss dd MMM, yyyy");
 
-    const {mutateAsync, isPending} = useResetReservationExpiryMutation({reservationID: _id});
-
-    const submitReset = async () => {
-        try {
-            const reservation = await mutateAsync();
-            setIsOpen(false);
-
-            const expiryDate = reservation.expiresAt.toFormat("HH:mm:ss dd MMM, yyyy");
-            toast.success(`Expiration successfully extended. Now expires at: ${expiryDate}.`);
-        } catch (error: unknown) {
-            handleSubmitResponseError({error, displayMessage: "Failed reset expiry."})
-        }
-    }
-
     return (
-        <AdminReservationResetExpiryDialog
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            submit={submitReset}
-            isSubmitting={isPending}
-            expiresAt={expiresAt}
-            uniqueCode={uniqueCode}
+        <AdminReservationResetExpiryForm
+            mutConfig={{reservationID: _id}}
+            onSubmitSuccess={() => setIsOpen(false)}
+            successMessage="Expiry Reset."
+            errorMessage="Failed to reset expiry. Please try again."
         >
-            <AdminActionButton
-                text="Reset Expiry Date"
-                subtext={subtext}
-                variant="info"
-                disabled={isDisabled}
-            />
-        </AdminReservationResetExpiryDialog>
+            <AdminReservationResetExpiryDialog
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                expiresAt={expiresAt}
+                uniqueCode={uniqueCode}
+            >
+                <AdminActionButton
+                    text="Reset Expiry Date"
+                    subtext={subtext}
+                    variant="info"
+                    disabled={isDisabled}
+                />
+            </AdminReservationResetExpiryDialog>
+        </AdminReservationResetExpiryForm>
     );
 }

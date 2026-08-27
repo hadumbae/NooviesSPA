@@ -61,7 +61,7 @@ export function AdminReservationRefundDialog(
                         <Button variant="secondary">Cancel</Button>
                     </DialogClose>
 
-                    <Button form={formID} variant="primary" type="submit">
+                    <Button form={formID} variant="primary" type="submit" disabled={isPending}>
                         {isPending ? <AnimatedLoader/> : "Confirm Refund"}
                     </Button>
                 </DialogFooter>
