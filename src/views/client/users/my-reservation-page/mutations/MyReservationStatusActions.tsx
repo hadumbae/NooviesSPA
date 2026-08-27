@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {ObjectId} from "@/common/_schemas";
 import {Button} from "@/views/common/_comp/ui";
 import {Loader} from "lucide-react";
-import {MutationResponseConfig} from "@/common/_feat";
+import {handleMutateAsync, MutationResponseConfig} from "@/common/_feat";
 import {ReservationStatus, useReservationStateMutations} from "@/domains/reservations";
 
 /** Props for the MyReservationStatusActions component. */
@@ -23,19 +23,22 @@ export function MyReservationStatusActions(
 ): ReactElement {
     const {
         isPending,
-        checkoutMutation: {isPending: isCheckingOut, mutate: checkout},
-        cancelMutation: {isPending: isCancelling, mutate: cancel},
-    } = useReservationStateMutations({onCancel: mutationParams, onCheckout: mutationParams});
+        checkoutMutation: {isPending: isCheckingOut, mutateAsync: checkout},
+        cancelMutation: {isPending: isCancelling, mutateAsync: cancel},
+    } = useReservationStateMutations();
 
     const showLoader = (text: string, pending: boolean) => (
         pending ? <Loader className="animate-spin"/> : text
     );
 
+    const handleCheckout = handleMutateAsync({mutateAsync: checkout, ...mutationParams});
+    const handleCancel = handleMutateAsync({mutateAsync: cancel, ...mutationParams});
+
     const checkoutButton = (
         <Button
             type="button"
             variant="primary"
-            onClick={() => checkout(reservationID)}
+            onClick={() => handleCheckout(reservationID)}
             className={BUTTON_CSS}
             disabled={isPending}
         >
@@ -47,7 +50,7 @@ export function MyReservationStatusActions(
         <Button
             type="button"
             variant="secondary"
-            onClick={() => cancel(reservationID)}
+            onClick={() => handleCancel(reservationID)}
             className={BUTTON_CSS}
             disabled={isPending}
         >

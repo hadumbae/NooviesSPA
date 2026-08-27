@@ -14,6 +14,7 @@ export * from "./generic-form-context";
 export * from "./get-today-date-only";
 export * from "./handle-form";
 export * from "./handle-image-upload";
+export * from "./handle-mutate-async";
 export * from "./handle-mutation-callback";
 export * from "./handle-pages";
 export * from "./handle-query";
