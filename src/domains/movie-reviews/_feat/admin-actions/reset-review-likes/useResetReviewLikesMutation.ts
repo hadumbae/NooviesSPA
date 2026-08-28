@@ -2,24 +2,19 @@
  * @fileoverview TanStack Query mutation hook for clearing helpful likes from a movie review.
  */
 
-import {ObjectId} from "@/common/_schemas";
 import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
-import {patchResetReviewLikes} from "@/domains/movie-reviews/_feat/admin-actions/repositories";
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {
-    CustomerReviewActionMutationKeys
-} from "@/domains/movie-reviews/_feat/admin-actions/mutations/CustomerReviewActionMutationKeys.ts";
+import {CustomerReviewActionMutationKeys} from "@/domains/movie-reviews/_feat/admin-actions/mutationKeys.ts";
 import {MovieReview, MovieReviewSchema} from "@/domains/movie-reviews/_schema/model";
-
-/** Configuration parameters for the Reset Likes mutation. */
-export type MutationParams = {
-    reviewID: ObjectId;
-}
+import {
+    patchResetReviewLikes
+} from "@/domains/movie-reviews/_feat/admin-actions/reset-review-likes/patchResetReviewLikes.ts";
+import {MovieReviewMutationConfig} from "@/domains/movie-reviews/_types";
 
 /** Hook to handle the administrative action of resetting a review's engagement metrics. */
 export function useResetReviewLikesMutation(
-    {reviewID}: MutationParams
+    {reviewID}: MovieReviewMutationConfig
 ): UseMutationResult<MovieReview, unknown, ModerationMessageFormData> {
     const queryClient = useQueryClient();
 

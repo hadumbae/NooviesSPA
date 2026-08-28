@@ -1,61 +1,36 @@
 /**
- * @fileoverview Form component for resetting a review author's display name to system defaults.
+ * @fileoverview Form component and hook exports for resetting a movie review display name.
  */
 
+import {createForm} from "@/common/_feat";
+import {MovieReview} from "@/domains/movie-reviews";
+import {MovieReviewMutationConfig} from "@/domains/movie-reviews/_types";
 import {
     ResetReviewDisplayNameFormData,
-    useResetReviewDisplayNameForm
-} from "@/domains/movie-reviews/_feat/admin-actions/forms";
-import {Form} from "@/views/common/_comp/ui/form.tsx";
-import {useResetReviewDisplayNameMutation} from "@/domains/movie-reviews/_feat/admin-actions/mutations";
-import {ObjectId} from "@/common/_schemas";
-import {ReactElement, ReactNode, useId} from "react";
+    ResetReviewDisplayNameFormSchema,
+    ResetReviewDisplayNameFormValues,
+    useResetReviewDisplayNameMutation
+} from "@/domains/movie-reviews/_feat/admin-actions/reset-review-display-name";
 
-import {MovieReview} from "@/domains/movie-reviews/_schema/model";
-import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {handleCustomerReviewFormSubmit} from "@/domains/customers";
+const {SubmitForm, useSubmitForm} = createForm<
+    ResetReviewDisplayNameFormValues,
+    ResetReviewDisplayNameFormData,
+    unknown,
+    MovieReview,
+    MovieReviewMutationConfig
+>({
+    formName: "reset-review-display-name-form",
+    schema: ResetReviewDisplayNameFormSchema,
+    mutation: useResetReviewDisplayNameMutation,
+    defaultValues: {
+        displayName: "",
+        message: "",
+    }
+});
 
-/** Props for the ResetReviewDisplayNameForm component. */
-type FormProps = MutationResponseConfig<MovieReview, ResetReviewDisplayNameFormData> & MutationFormResetConfig & {
-    children: ReactNode;
-    reviewID: ObjectId;
-    presetValues?: Partial<ResetReviewDisplayNameFormData>;
-};
-
-/**
- * Administrative form wrapper for reverting review display names to system defaults.
- */
-export function ResetReviewDisplayNameForm(
-    {children, reviewID, presetValues, ...onSubmitConfig}: FormProps
-): ReactElement {
-    const id = useId();
-    const formID = `reset-review-display-name-form-${id}`;
-
-    const form = useResetReviewDisplayNameForm({presetValues});
-    const {mutateAsync, isPending, isError} = useResetReviewDisplayNameMutation({reviewID});
-
-    const resetDisplayName = async (values: ResetReviewDisplayNameFormData) => {
-        await handleCustomerReviewFormSubmit({
-            form,
-            data: values,
-            submitData: mutateAsync,
-            ...onSubmitConfig,
-        });
-    };
-
-    return (
-        <BaseFormContextProvider
-            formID={formID}
-            isPending={isPending}
-            isError={isError}
-            submitHandler={resetDisplayName}
-        >
-            <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(resetDisplayName)}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for resetting a review author's display name with a moderation message. */
+        SubmitForm as ResetReviewDisplayNameForm,
+    /** Hook for managing the display name reset form state and submission. */
+        useSubmitForm as useResetReviewDisplayNameForm,
 }

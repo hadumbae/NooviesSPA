@@ -36,7 +36,7 @@ export function ToggleReviewPublicityAction(
 
     return (
         <ToggleReviewPublicityForm
-            reviewID={reviewID}
+            mutConfig={{reviewID}}
             presetValues={presetValues}
             {...submitConfig}
             onSubmitSuccess={closeOnSuccess}

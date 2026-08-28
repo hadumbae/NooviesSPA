@@ -1,56 +1,36 @@
 /**
- * @fileoverview Form wrapper for administrative operations that manually set or correct a movie review's rating.
+ * @fileoverview Form component and hook exports for setting a movie review rating with an optional moderation message.
  */
 
-import {ReactElement, ReactNode, useId} from "react";
-import {ObjectId} from "@/common/_schemas";
-import {Form} from "@/views/common/_comp/ui/form.tsx";
-
-import {MovieReview} from "@/domains/movie-reviews/_schema/model";
-import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
+import {createForm} from "@/common/_feat";
+import {MovieReview} from "@/domains/movie-reviews";
 import {
     SetReviewRatingFormData,
-    useSetReviewRatingForm,
+    SetReviewRatingFormSchema,
+    SetReviewRatingFormValues,
     useSetReviewRatingMutation
-} from "@/domains/movie-reviews/_feat";
-import {handleCustomerReviewFormSubmit} from "@/domains/customers";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
+} from "@/domains/movie-reviews/_feat/admin-actions/set-review-rating";
+import {MovieReviewMutationConfig} from "@/domains/movie-reviews/_types";
 
-/** Props for the SetReviewRatingForm component. */
-type FormProps = MutationResponseConfig<MovieReview, SetReviewRatingFormData> & MutationFormResetConfig & {
-    children: ReactNode;
-    reviewID: ObjectId;
-    presetValues?: Partial<SetReviewRatingFormData>;
-};
+const {SubmitForm, useSubmitForm} = createForm<
+    SetReviewRatingFormValues,
+    SetReviewRatingFormData,
+    unknown,
+    MovieReview,
+    MovieReviewMutationConfig
+>({
+    formName: "set-review-rating-form",
+    schema: SetReviewRatingFormSchema,
+    mutation: useSetReviewRatingMutation,
+    defaultValues: {
+        rating: 0,
+        message: ""
+    }
+});
 
-/**
- * Orchestrates the data flow and submission logic for administrative rating overrides.
- */
-export function SetReviewRatingForm(
-    {children, reviewID, presetValues, ...onSubmitConfig}: FormProps
-): ReactElement {
-    const id = useId();
-    const formID = `set-review-rating-form-${id}`;
-
-    const form = useSetReviewRatingForm({presetValues});
-    const {mutateAsync, isPending, isError} = useSetReviewRatingMutation({reviewID});
-
-    const setRating = async (values: SetReviewRatingFormData) => {
-        await handleCustomerReviewFormSubmit({
-            form,
-            data: values,
-            submitData: mutateAsync,
-            ...onSubmitConfig,
-        });
-    };
-
-    return (
-        <BaseFormContextProvider formID={formID} isPending={isPending} isError={isError} submitHandler={setRating}>
-            <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(setRating)}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for setting a movie review rating. */
+        SubmitForm as SetReviewRatingForm,
+    /** Hook for managing review rating form state and submission. */
+        useSubmitForm as useSetReviewRatingForm,
 }

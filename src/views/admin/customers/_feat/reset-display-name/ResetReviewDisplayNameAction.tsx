@@ -3,7 +3,7 @@
  */
 
 import {ObjectId} from "@/common/_schemas";
-import {ResetReviewDisplayNameFormData} from "@/domains/movie-reviews/_feat/admin-actions/forms";
+import {ResetReviewDisplayNameFormData} from "@/domains/movie-reviews/_feat/admin-actions/reset-review-display-name";
 import {ReactElement, useState} from "react";
 import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {MovieReview} from "@/domains/movie-reviews/_schema/model";
@@ -31,7 +31,7 @@ export function ResetReviewDisplayNameAction(
 
     return (
         <ResetReviewDisplayNameForm
-            reviewID={reviewID}
+            mutConfig={{reviewID}}
             presetValues={presetValues}
             {...submitConfig}
             onSubmitSuccess={closeOnSuccess}

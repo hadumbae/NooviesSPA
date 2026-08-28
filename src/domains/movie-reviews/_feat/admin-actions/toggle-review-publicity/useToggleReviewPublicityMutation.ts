@@ -1,24 +1,19 @@
 /**
  * @fileoverview TanStack Query mutation hook for toggling the public visibility of a movie review.
  */
-import {ObjectId} from "@/common/_schemas";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {ModerationMessageFormData} from "@/common/_feat/moderation/forms";
-import {patchToggleReviewPublicity} from "@/domains/movie-reviews/_feat/admin-actions/repositories";
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
-import {
-    CustomerReviewActionMutationKeys
-} from "@/domains/movie-reviews/_feat/admin-actions/mutations/CustomerReviewActionMutationKeys.ts";
+import {CustomerReviewActionMutationKeys} from "@/domains/movie-reviews/_feat/admin-actions/mutationKeys.ts";
 import {MovieReview, MovieReviewSchema} from "@/domains/movie-reviews/_schema/model";
-
-/** Configuration parameters for the Toggle Review Publicity mutation. */
-type MutationParams = {
-    reviewID: ObjectId;
-}
+import {
+    patchToggleReviewPublicity
+} from "@/domains/movie-reviews/_feat/admin-actions/toggle-review-publicity/patchToggleReviewPublicity";
+import {MovieReviewMutationConfig} from "@/domains/movie-reviews/_types";
 
 /** Hook to handle the administrative action of flipping a review between Public and Private. */
 export function useToggleReviewPublicityMutation(
-    {reviewID}: MutationParams
+    {reviewID}: MovieReviewMutationConfig
 ): UseMutationResult<MovieReview, unknown, ModerationMessageFormData> {
     const queryClient = useQueryClient();
 

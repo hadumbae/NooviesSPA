@@ -2,25 +2,21 @@
  * @fileoverview TanStack Query mutation hook for manually overriding a movie review's star rating.
  */
 
-import {ObjectId} from "@/common/_schemas";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {patchSetReviewRating} from "@/domains/movie-reviews/_feat/admin-actions/repositories";
-import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {
-    CustomerReviewActionMutationKeys
-} from "@/domains/movie-reviews/_feat/admin-actions/mutations/CustomerReviewActionMutationKeys.ts";
-import {SetReviewRatingFormData} from "@/domains/movie-reviews/_feat/admin-actions/forms";
+    patchSetReviewRating
+} from "@/domains/movie-reviews/_feat/admin-actions/set-review-rating/patchSetReviewRating.ts";
+import {validateData} from "@/common/_feat/validate-data/validateData.ts";
+import {CustomerReviewActionMutationKeys} from "@/domains/movie-reviews/_feat/admin-actions/mutationKeys.ts";
+import {
+    SetReviewRatingFormData
+} from "@/domains/movie-reviews/_feat/admin-actions/set-review-rating/SetReviewRatingFormSchema.ts";
 import {MovieReview, MovieReviewSchema} from "@/domains/movie-reviews/_schema/model";
-
-/**
- * Configuration parameters for the Set Review Rating mutation. */
-type MutationParams = {
-    reviewID: ObjectId;
-}
+import {MovieReviewMutationConfig} from "@/domains/movie-reviews/_types";
 
 /** Hook to handle administrative star-rating overrides on movie reviews. */
 export function useSetReviewRatingMutation(
-    {reviewID}: MutationParams
+    {reviewID}: MovieReviewMutationConfig
 ): UseMutationResult<MovieReview, unknown, SetReviewRatingFormData> {
     const queryClient = useQueryClient();
 

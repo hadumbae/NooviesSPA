@@ -1,53 +1,35 @@
 /**
- * @fileoverview Form wrapper for administrative operations that reset movie review likes.
+ * @fileoverview Form component and hook exports for resetting likes on a movie review with a moderation message.
  */
 
-import {ReactElement, ReactNode, useId} from "react";
-import {ObjectId} from "@/common/_schemas";
-import {ModerationMessageFormData, useModerationMessageForm} from "@/common/_feat/moderation/forms";
-import {Form} from "@/views/common/_comp/ui/form.tsx";
-import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {MovieReview} from "@/domains/movie-reviews/_schema";
-import {useResetReviewLikesMutation} from "@/domains/movie-reviews/_feat";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {handleCustomerReviewFormSubmit} from "@/domains/customers";
+import {
+    createForm,
+    ModerationMessageFormData,
+    ModerationMessageFormSchema,
+    ModerationMessageFormValues
+} from "@/common/_feat";
+import {useResetReviewLikesMutation} from "@/domains/movie-reviews/_feat/admin-actions/reset-review-likes";
+import {MovieReviewMutationConfig} from "@/domains/movie-reviews/_types";
 
+const {SubmitForm, useSubmitForm} = createForm<
+    ModerationMessageFormValues,
+    ModerationMessageFormData,
+    unknown,
+    MovieReview,
+    MovieReviewMutationConfig
+>({
+    formName: "reset-review-likes-form",
+    schema: ModerationMessageFormSchema,
+    mutation: useResetReviewLikesMutation,
+    defaultValues: {
+        message: "",
+    }
+});
 
-/** Props for the ResetReviewLikesForm component. */
-type FormProps = MutationResponseConfig<MovieReview, ModerationMessageFormData> & MutationFormResetConfig & {
-    children: ReactNode;
-    reviewID: ObjectId;
-    presetValues?: Partial<ModerationMessageFormData>;
-};
-
-/**
- * Orchestrates the data flow and submission logic for resetting review like counts.
- */
-export function ResetReviewLikesForm(
-    {children, reviewID, presetValues, ...onSubmitConfig}: FormProps
-): ReactElement {
-    const id = useId();
-    const formID = `reset-review-likes-form-${id}`;
-
-    const form = useModerationMessageForm({presetValues});
-    const {mutateAsync, isPending, isError} = useResetReviewLikesMutation({reviewID});
-
-    const resetLikes = async (values: ModerationMessageFormData) => {
-        await handleCustomerReviewFormSubmit({
-            form,
-            data: values,
-            submitData: mutateAsync,
-            ...onSubmitConfig,
-        });
-    };
-
-    return (
-        <BaseFormContextProvider formID={formID} isPending={isPending} isError={isError} submitHandler={resetLikes}>
-            <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(resetLikes)}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for resetting movie review likes. */
+        SubmitForm as ResetReviewLikesForm,
+    /** Hook for managing review likes reset form state and submission. */
+        useSubmitForm as useResetReviewLikesForm,
 }

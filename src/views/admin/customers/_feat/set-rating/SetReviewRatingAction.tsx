@@ -3,7 +3,7 @@
  */
 
 import {ObjectId} from "@/common/_schemas";
-import {SetReviewRatingFormData} from "@/domains/movie-reviews/_feat/admin-actions/forms";
+import {SetReviewRatingFormData} from "@/domains/movie-reviews/_feat/admin-actions/set-review-rating";
 import {ReactElement, useState} from "react";
 import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
@@ -33,7 +33,7 @@ export function SetReviewRatingAction(
 
     return (
         <SetReviewRatingForm
-            reviewID={reviewID}
+            mutConfig={{reviewID}}
             presetValues={presetValues}
             {...submitConfig}
             onSubmitSuccess={closeOnSuccess}

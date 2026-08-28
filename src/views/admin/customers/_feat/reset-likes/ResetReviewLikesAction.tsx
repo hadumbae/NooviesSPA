@@ -32,7 +32,7 @@ export function ResetReviewLikesAction(
 
     return (
         <ResetReviewLikesForm
-            reviewID={reviewID}
+            mutConfig={{reviewID}}
             presetValues={presetValues}
             {...submitConfig}
             onSubmitSuccess={closeOnSuccess}

@@ -2,26 +2,23 @@
  * @fileoverview TanStack Query mutation hook for resetting or correcting a reviewer's display name.
  */
 
-import {ObjectId} from "@/common/_schemas";
-import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {patchResetReviewDisplayName} from "@/domains/movie-reviews/_feat/admin-actions/repositories";
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
-import {ResetReviewDisplayNameFormData} from "@/domains/movie-reviews/_feat/admin-actions/forms";
+import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {MovieReview, MovieReviewSchema} from "@/domains/movie-reviews/_schema/model";
+import {CustomerReviewActionMutationKeys} from "@/domains/movie-reviews/_feat/admin-actions/mutationKeys.ts";
 import {
-    CustomerReviewActionMutationKeys
-} from "@/domains/movie-reviews/_feat/admin-actions/mutations/CustomerReviewActionMutationKeys.ts";
-
-/** Configuration parameters for the Reset Display Name mutation. */
-type MutationParams = {
-    reviewID: ObjectId;
-}
+    patchResetReviewDisplayName
+} from "@/domains/movie-reviews/_feat/admin-actions/reset-review-display-name/patchResetReviewDisplayName.ts";
+import {
+    ResetReviewDisplayNameFormData
+} from "@/domains/movie-reviews/_feat/admin-actions/reset-review-display-name/ResetReviewDisplayNameFormSchema.ts";
+import {MovieReviewMutationConfig} from "@/domains/movie-reviews/_types";
 
 /**
  * Hook to handle administrative display name corrections on movie reviews via a patch request.
  */
 export function useResetReviewDisplayNameMutation(
-    {reviewID}: MutationParams
+    {reviewID}: MovieReviewMutationConfig
 ): UseMutationResult<MovieReview, unknown, ResetReviewDisplayNameFormData> {
     const queryClient = useQueryClient();
 
