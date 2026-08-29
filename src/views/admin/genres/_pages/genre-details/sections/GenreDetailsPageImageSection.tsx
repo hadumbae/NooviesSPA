@@ -7,12 +7,15 @@ import {PageSectionHeader} from "@/views/common/_comp/page";
 import {GenreImageBanner} from "@/views/admin/genres/_comp";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {Genre} from "@/domains/genres/_schema";
-import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
 import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {Plus, Trash} from "lucide-react";
 import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
-import {GenreDetailsUIPendingStateContext, GenreDetailsUISetterContext} from "@/domains/genres/_feat/page-context";
+import {
+    useDeletingGenreImageUIContextActions,
+    usePendingGenreImageDeleteUIContext,
+    useUpdatingGenreImageUIContextActions
+} from "@/domains/genres";
 
 /** Props for the GenreDetailsPageImageSection component. */
 type SectionProps = {
@@ -26,8 +29,10 @@ export function GenreDetailsPageImageSection(
     {genre}: SectionProps
 ): ReactElement {
     const {name, image} = genre;
-    const {setIsUpdatingImage, setIsRemovingImage} = useRequiredContext({context: GenreDetailsUISetterContext});
-    const {isImageRemovalPending} = useRequiredContext({context: GenreDetailsUIPendingStateContext});
+    const isImageRemovalPending = usePendingGenreImageDeleteUIContext();
+
+    const {open: openUpdatingImage} = useUpdatingGenreImageUIContextActions();
+    const {open: openDeletingImage} = useDeletingGenreImageUIContextActions();
 
     return (
         <section className="space-y-4">
@@ -37,7 +42,7 @@ export function GenreDetailsPageImageSection(
                 <PageSectionHeader text="Image"/>
 
                 <div className="space-x-2">
-                    <Button variant="outline" size="sm" onClick={() => setIsUpdatingImage(true)}>
+                    <Button variant="outline" size="sm" onClick={() => openUpdatingImage()}>
                         <Plus/> Update Image
                     </Button>
 
@@ -47,7 +52,7 @@ export function GenreDetailsPageImageSection(
                             variant="outline"
                             size="sm"
                             disabled={isImageRemovalPending}
-                            onClick={() => setIsRemovingImage(true)}
+                            onClick={() => openDeletingImage()}
                         >
                             {
                                 isImageRemovalPending ? (<AnimatedLoader/>) : (

@@ -2,6 +2,7 @@ export * from "./admin-view-data";
 export * from "./client-view-data";
 export * from "./crud";
 export * from "./crud-hooks";
+export * from "./handle-query-options";
 export * from "./manage-image";
 export * from "./navigation";
 export * from "./query-form";

@@ -7,36 +7,61 @@ import {Form} from "@/views/common/_comp/ui/form.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Genre, GenreImageUploadFormData, useGenreImageUploadForm, useUploadGenreImage} from "@/domains/genres";
+import {
+    Genre,
+    GenreImageUploadFormData,
+    GenreImageUploadFormValues,
+    useGenreImageUploadForm,
+    useUploadGenreImage
+} from "@/domains/genres";
+import {handleFormSubmitError, handleMutationCallback} from "@/common/_feat";
+import {DefaultValues} from "react-hook-form";
 
 /** Props for the GenreImageUploadForm component. */
-type FormProps = {
+type FormProps = MutationResponseConfig<Genre, FormData> & MutationFormResetConfig & {
+    resetValues?: DefaultValues<GenreImageUploadFormValues>;
     children: ReactNode;
     _id: ObjectId;
-    onSubmitConfig?: MutationResponseConfig<Genre, FormData>;
-    resetConfig?: MutationFormResetConfig,
 };
 
 /** Form component that handles multipart/form-data submission for genre images. */
 export function GenreImageUploadForm(
-    {children, _id, onSubmitConfig, resetConfig}: FormProps
+    {children, _id, resetValues, ...submitConfig}: FormProps
 ): ReactElement {
     const id = useId();
     const formID = `genre-image-upload-form-${id}`
 
     const form = useGenreImageUploadForm();
 
-    const {mutate, isPending, isError} = useUploadGenreImage({
-        form,
-        ...onSubmitConfig,
-        ...resetConfig,
-    });
+    const {mutateAsync, isPending, isError} = useUploadGenreImage();
 
-    const submitImage = ({image}: GenreImageUploadFormData) => {
+    const submitImage = async ({image}: GenreImageUploadFormData) => {
         const formData = new FormData();
         formData.append("image", image);
 
-        mutate({_id, formData});
+        try {
+            submitConfig.resetOnSubmit && form.reset(resetValues);
+
+            handleMutationCallback({
+                message: submitConfig.submitMessage,
+                cb: () => submitConfig.onSubmit?.(formData),
+            });
+
+            const data = await mutateAsync({_id, formData});
+            console.log("Mutation Response:", data);
+
+            submitConfig.resetOnSuccess && form.reset(resetValues);
+
+            handleMutationCallback({
+                message: submitConfig.successMessage,
+                cb: () => submitConfig.onSubmitSuccess?.(data),
+                messageType: "success",
+            });
+        } catch (error: unknown) {
+            handleFormSubmitError({form, error, displayMessage: submitConfig.errorMessage});
+            submitConfig.resetOnError && form.reset(resetValues);
+            submitConfig.onSubmitError?.(error);
+        }
     }
 
     return (

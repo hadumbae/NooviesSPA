@@ -1,0 +1,1 @@
+export * from "@/domains/genres/_feat/handle-query-options/genre-index";

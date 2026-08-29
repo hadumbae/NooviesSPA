@@ -35,6 +35,7 @@ export function createQueryOptionFormSection<TFormValues extends FieldValues, TO
                     setIsOpen={setIsOpen}
                     disableClear={disableClear}
                     triggerText={triggerText}
+                    className={classNames?.content}
                 >
                     <FormView disableFields={disableFields} classNames={classNames}/>
                 </QueryOptionsFormCollapsible>

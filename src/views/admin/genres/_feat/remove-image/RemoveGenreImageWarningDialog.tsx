@@ -18,20 +18,25 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/views/common/_comp/ui";
+import {handleMutateAsync} from "@/common/_feat";
 
 /** Props for the RemoveGenreImageWarningDialog component. */
-type DialogProps =  UIOpenStateProps & {
+type DialogProps = UIOpenStateProps & MutationResponseConfig<Genre, { _id: ObjectId }> & {
     children?: ReactNode;
     _id: ObjectId;
     name: string;
-    onSubmitConfig?: MutationResponseConfig<Genre, { _id: ObjectId }>;
 };
 
 /** Warning dialog to confirm the deletion of a genre image. */
 export function RemoveGenreImageWarningDialog(
-    {children, _id, name, isOpen, setIsOpen, onSubmitConfig}: DialogProps
+    {children, _id, name, isOpen, setIsOpen, ...onSubmitConfig}: DialogProps
 ): ReactElement {
-    const {mutate, isPending} = useRemoveGenreImage(onSubmitConfig);
+    const {mutateAsync, isPending} = useRemoveGenreImage(onSubmitConfig);
+
+    const removeImage = handleMutateAsync({
+        mutateAsync,
+        ...onSubmitConfig
+    })
 
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
@@ -48,7 +53,7 @@ export function RemoveGenreImageWarningDialog(
                         Cancel
                     </AlertDialogCancel>
                     <AlertDialogAction
-                        onClick={() => mutate({_id})}
+                        onClick={() => removeImage({_id})}
                         className="shadcn-primary-button"
                         disabled={isPending}
                     >

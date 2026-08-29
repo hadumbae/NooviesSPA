@@ -4,3 +4,4 @@ export * from "./image-upload-form";
 export * from "./query-form";
 export * from "./remove-image";
 export * from "./submit-form";
+export * from "./submit-genre-index-query-options";

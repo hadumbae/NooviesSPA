@@ -2,18 +2,17 @@
 
 import {ReactElement} from "react";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
-import {PaginationRangeButtons} from "@/views/common/_comp";
+import {IconButton, PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {MovieDetails} from "@/domains/movies";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {MovieIndexCard} from "@/views/admin/movies/_comp/index-list-display";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
-import {PageHeader} from "@/views/common/_comp";
-import {IconButton} from "@/views/common/_comp";
 import {Ellipsis} from "lucide-react";
 import {Genre} from "@/domains/genres";
 import {
-    GenreDetailsPageActions,
     GenreDetailsPageBreadcrumbs,
+    GenreDetailsPageGenreActions,
+    GenreDetailsPageImageActions,
     GenreDetailsPageImageSection
 } from "@/views/admin/genres/_pages/genre-details/sections";
 import {GenreDetailsCard, GenreDetailsUIToggles} from "@/views/admin/genres/_pages/genre-details/elements";
@@ -80,7 +79,12 @@ export function GenreDetailsPageContent(
                 setPage={setPage}
             />
 
-            <GenreDetailsPageActions
+            <GenreDetailsPageGenreActions
+                className="hidden"
+                genre={genre}
+            />
+
+            <GenreDetailsPageImageActions
                 className="hidden"
                 genre={genre}
             />

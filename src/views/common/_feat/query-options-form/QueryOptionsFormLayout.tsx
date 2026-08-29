@@ -6,18 +6,19 @@ import {ComponentType, ReactElement} from "react";
 import {FieldValues} from "react-hook-form";
 import {
     cn,
-    FormFieldsetProps,
+    FormViewProps,
     QueryOptionFormViewClassNames,
     useAutoFormSubmit,
     useQueryOptionFormContext
 } from "@/common/_feat";
-import {DisableFields} from "@/common/_types/form";
+import {DisableFields, HideFields} from "@/common/_types/form";
 import {Separator} from "@/views/common/_comp/ui";
 
 type QueryOptionFormLayoutProps<TValues extends FieldValues> = {
-    filterFieldset: ComponentType<FormFieldsetProps<TValues>>;
-    sortFieldset: ComponentType<FormFieldsetProps<TValues>>;
+    filterFieldset: ComponentType<FormViewProps<TValues>>;
+    sortFieldset: ComponentType<FormViewProps<TValues>>;
     disableFields?: DisableFields<TValues>;
+    hideFields?: HideFields<TValues>;
     classNames?: QueryOptionFormViewClassNames,
     autoSubmitTimeout?: number
 }
@@ -32,6 +33,7 @@ export function QueryOptionFormLayout<TValues extends FieldValues>(
         filterFieldset: FilterFieldset,
         sortFieldset: SortFieldset,
         disableFields,
+        hideFields,
         classNames,
         autoSubmitTimeout = 450
     } = params;
@@ -41,9 +43,9 @@ export function QueryOptionFormLayout<TValues extends FieldValues>(
 
     return (
         <div className={cn("space-y-4", classNames?.container)}>
-            <FilterFieldset disableFields={disableFields} className={classNames?.filters}/>
+            <FilterFieldset hideFields={hideFields} disableFields={disableFields} className={classNames?.filters}/>
             <Separator/>
-            <SortFieldset disableFields={disableFields} className={classNames?.sorts}/>
+            <SortFieldset hideFields={hideFields} disableFields={disableFields} className={classNames?.sorts}/>
         </div>
     );
 }

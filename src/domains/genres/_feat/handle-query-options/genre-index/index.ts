@@ -1,0 +1,2 @@
+export * from "@/domains/genres/_feat/handle-query-options/genre-index/GenreIndexQueryOptionsContext.ts";
+export * from "@/domains/genres/_feat/handle-query-options/genre-index/GenreIndexQueryOptionsSchema.ts";

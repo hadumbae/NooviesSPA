@@ -3,14 +3,8 @@
  */
 
 import {Dispatch, ReactElement, ReactNode, SetStateAction, useState} from "react";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger
-} from "@/views/common/_comp/ui";
-import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.ts";
-import {GenreDetailsUISetterContext} from "@/domains/genres/_feat/page-context";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/views/common/_comp/ui";
+import {useIsDeletingUIContextActions, useIsEditingUIContextActions} from "@/common/_ctx/ui";
 
 /** Props for the {@link GenreDetailsUIToggles} component. */
 type ToggleProps = {
@@ -23,10 +17,8 @@ type ToggleProps = {
 export function GenreDetailsUIToggles({children}: ToggleProps): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const {
-        setIsEditing,
-        setIsDeleting,
-    } = useRequiredContext({context: GenreDetailsUISetterContext});
+    const {open: openEditing} = useIsEditingUIContextActions();
+    const {open: openDeleting} = useIsDeletingUIContextActions();
 
     const closeOnAction = (action: Dispatch<SetStateAction<boolean>>) => {
         action(true);
@@ -40,11 +32,11 @@ export function GenreDetailsUIToggles({children}: ToggleProps): ReactElement {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => closeOnAction(setIsEditing)}>
+                <DropdownMenuItem onClick={() => closeOnAction(openEditing)}>
                     Edit
                 </DropdownMenuItem>
 
-                <DropdownMenuItem onClick={() => closeOnAction(setIsDeleting)}>
+                <DropdownMenuItem onClick={() => closeOnAction(openDeleting)}>
                     Delete
                 </DropdownMenuItem>
             </DropdownMenuContent>

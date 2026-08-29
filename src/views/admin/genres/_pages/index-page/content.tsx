@@ -5,19 +5,16 @@
 import {ReactElement, useState} from 'react';
 import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
-import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {GenreIndexCard} from "@/views/admin/genres/_comp";
 import {Button} from "@/views/common/_comp/ui";
 import {Plus} from "lucide-react";
-import {Genre, GenreQueryOptionSchema, useNavigateToGenreDetails} from "@/domains/genres";
+import {Genre, useNavigateToGenreDetails} from "@/domains/genres";
+import {GenreSubmitForm, GenreSubmitFormPanel} from "@/views/admin/genres/_feat";
 import {
-    GenreQueryOptionForm,
-    GenreQueryOptionFormDialog,
-    GenreSubmitForm,
-    GenreSubmitFormPanel
-} from "@/views/admin/genres/_feat";
+    GenreIndexQueryOptionsFormSection
+} from "@/views/admin/genres/_feat/submit-genre-index-query-options/GenreIndexQueryOptionsFormSection.tsx";
 
 /** Props for the GenreIndexPageContent component. */
 type GenreIndexPageContentProps = {
@@ -38,7 +35,6 @@ export function GenreIndexPageContent(
 
     const isMobile = useIsMobile();
     const navigate = useNavigateToGenreDetails();
-    const {searchParams} = useParsedSearchParams({schema: GenreQueryOptionSchema});
 
     const onSuccess = (genre: Genre) => {
         setIsCreating(false);
@@ -61,9 +57,7 @@ export function GenreIndexPageContent(
                 </GenreSubmitForm>
             }/>
 
-            <GenreQueryOptionForm presetValues={searchParams}>
-                <GenreQueryOptionFormDialog/>
-            </GenreQueryOptionForm>
+            <GenreIndexQueryOptionsFormSection classNames={{content: "md:w-fit"}}/>
 
 
             {genres.length > 0 ? (

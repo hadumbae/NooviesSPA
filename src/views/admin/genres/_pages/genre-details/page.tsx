@@ -3,11 +3,8 @@
  */
 
 import {ReactElement} from 'react';
-import {useTitle} from "@/common/_feat";
+import {useFetchByIdentifierRouteParams, useTitle} from "@/common/_feat";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
-import {
-    useFetchByIdentifierRouteParams
-} from "@/common/_feat";
 import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import {
     GenreDetailsUIContextProvider,
@@ -18,6 +15,7 @@ import {
 import {GenreDetailsPageContent} from "@/views/admin/genres/_pages/genre-details/content.tsx";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {PageLoader} from "@/views/common/_comp/page";
+import {GenreDetailsPageProviders} from "@/views/admin/genres/_pages/genre-details/providers.tsx";
 
 /** Default limit for the paginated movie sub-collection. */
 const MOVIES_PER_PAGE = 12;
@@ -53,14 +51,17 @@ export function GenreDetailsPage(): ReactElement {
                 <QueryDataLoader query={query}>
                     {
                         ({genre, details: {movies: {totalItems, items: movies}}}: GenreDetailsViewData) => (
-                            <GenreDetailsPageContent
-                                genre={genre}
-                                movies={movies}
-                                totalItems={totalItems}
-                                page={page}
-                                perPage={MOVIES_PER_PAGE}
-                                setPage={setPage}
-                            />
+                            <GenreDetailsPageProviders>
+                                <GenreDetailsPageContent
+                                    genre={genre}
+                                    movies={movies}
+                                    totalItems={totalItems}
+                                    page={page}
+                                    perPage={MOVIES_PER_PAGE}
+                                    setPage={setPage}
+                                />
+                            </GenreDetailsPageProviders>
+
                         )
                     }
                 </QueryDataLoader>
