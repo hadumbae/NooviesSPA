@@ -14,7 +14,7 @@ type DeleteValue = {
 /**
  * Hook for deleting a seat map by ID that handles cache invalidation and notifications.
  */
-export default function useSeatMapDeleteMutation(): UseMutationResult<void, unknown, DeleteValue> {
+export function useSeatMapDeleteMutation(): UseMutationResult<void, unknown, DeleteValue> {
     const queryClient = useQueryClient();
 
     const deleteSeatMap = async ({_id}: DeleteValue) => {

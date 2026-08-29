@@ -1,5 +1,1 @@
-import {GenreImageBanner} from "@/views/admin/genres/_comp/images/GenreImageBanner.tsx";
-
-export {
-    GenreImageBanner,
-}
+export * from "@/views/admin/genres/_comp/images/GenreImageBanner.tsx";

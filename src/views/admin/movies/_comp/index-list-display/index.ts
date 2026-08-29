@@ -1,8 +1,2 @@
-import {MovieIndexDetailsDialog} from "@/views/admin/movies/_comp/index-list-display/MovieIndexDetailsDialog.tsx";
-import {MovieIndexCard} from "@/views/admin/movies/_comp/index-list-display/MovieIndexCard.tsx";
-
-export {
-    MovieIndexCard,
-    MovieIndexDetailsDialog,
-}
-
+export * from "@/views/admin/movies/_comp/index-list-display/MovieIndexDetailsDialog.tsx";
+export * from "@/views/admin/movies/_comp/index-list-display/MovieIndexCard.tsx";

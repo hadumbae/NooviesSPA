@@ -1,7 +1,2 @@
-import {ShowingCRUDQueryKeys} from "@/domains/showings/_feat/crud-hooks/keys/queryKeys.ts";
-import {ShowingCRUDMutationKeys} from "@/domains/showings/_feat/crud-hooks/keys/mutationKeys.ts";
-
-export {
-    ShowingCRUDQueryKeys,
-    ShowingCRUDMutationKeys,
-}
+export * from "@/domains/showings/_feat/crud-hooks/keys/queryKeys.ts";
+export * from "@/domains/showings/_feat/crud-hooks/keys/mutationKeys.ts";

@@ -1,7 +1,1 @@
-import {
-    ReservationByCodePageHeader
-} from "@/views/admin/reservations/_pages/reservation-by-code/headers/ReservationByCodePageHeader.tsx";
-
-export {
-    ReservationByCodePageHeader,
-}
+export * from "@/views/admin/reservations/_pages/reservation-by-code/headers/ReservationByCodePageHeader.tsx";
