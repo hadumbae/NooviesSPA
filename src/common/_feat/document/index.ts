@@ -1,5 +1,1 @@
-import {useTitle} from "@/common/_feat/document/useTitle.ts";
-
-export {
-    useTitle,
-}
+export * from "@/common/_feat/document/useTitle.ts";

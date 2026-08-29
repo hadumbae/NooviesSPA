@@ -1,5 +1,1 @@
-import {AcceptedImageTypeConstant} from "@/common/_const/images/AcceptedImageTypeConstant.ts";
-
-export {
-    AcceptedImageTypeConstant,
-}
+export * from "@/common/_const/images/AcceptedImageTypeConstant.ts";

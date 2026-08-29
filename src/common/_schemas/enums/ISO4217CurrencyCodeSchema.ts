@@ -3,7 +3,9 @@
  */
 
 import { z } from "zod";
-import ISO4217CurrencyCodesConstant from "@/common/_const/currency/ISO4217CurrencyCodesConstant.ts";
+import {
+    ISO4217CurrencyCodesConstant
+} from "@/common/_const/currency/ISO4217CurrencyCodesConstant.ts";
 
 /** Zod enum schema for validating ISO 4217 currency codes. */
 export const ISO4217CurrencyCodeSchema = z.enum(

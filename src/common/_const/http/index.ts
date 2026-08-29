@@ -1,5 +1,1 @@
-import {HTTPStatusCodeConstant} from "@/common/_const/http/HTTPStatusCodeConstant.ts";
-
-export {
-    HTTPStatusCodeConstant,
-}
+export * from "@/common/_const/http/HTTPStatusCodeConstant.ts";

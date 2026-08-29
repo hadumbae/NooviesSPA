@@ -3,7 +3,7 @@
  */
 
 /** A read-only list of valid ISO 4217 currency codes. */
-const ISO4217CurrencyCodesConstant = [
+export const ISO4217CurrencyCodesConstant = [
     "AED",
     "AFN",
     "ALL",
@@ -186,4 +186,3 @@ const ISO4217CurrencyCodesConstant = [
     "ZWL",
 ] as const;
 
-export default ISO4217CurrencyCodesConstant;
