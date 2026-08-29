@@ -73,10 +73,11 @@ export function GenreDetailsPageActions(
         <div className={className}>
             <SROnly text="Genre Option Dialogs"/>
 
-            <GenreSubmitForm formConfig={{editEntity: genre}} onSubmitConfig={{
-                onSubmitSuccess: replaceSlugOnUpdate,
-                successMessage: "Updated"
-            }}>
+            <GenreSubmitForm
+                editEntity={genre}
+                onSubmitSuccess={replaceSlugOnUpdate}
+                successMessage="Updated"
+            >
                 <GenreSubmitFormPanel isOpen={isEditing} setIsOpen={setIsEditing}/>
             </GenreSubmitForm>
 

@@ -3,35 +3,21 @@
  */
 
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {toast} from "react-toastify";
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
-import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
 import {Genre, GenreSchema} from "@/domains/genres/_schema";
-import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {create, update} from "@/domains/genres/_feat/crud";
 import {GenreFormData} from "@/domains/genres/_feat/submit-form/schema/GenreFormSchema.ts";
-import {GenreCRUDQueryKeys, GenreCRUDMutationKeys} from "@/domains/genres/_feat/crud-hooks/keys";
-import {UseFormReturn} from "react-hook-form";
-
-/** Configuration for genre mutation lifecycle and form integration. */
-type UseGenreDataSubmitConfig = MutationResponseConfig<Genre, GenreFormData> & MutationFormResetConfig & {
-    form: UseFormReturn<GenreFormData, unknown, GenreFormData>;
-};
+import {GenreCRUDMutationKeys, GenreCRUDQueryKeys} from "@/domains/genres/_feat/crud-hooks/keys";
 
 /**
  * Manages Genre persistence including validation, cache invalidation, and form error mapping.
  */
-export function useGenreDataSubmit(
-    {form, resetOnSubmit, resetOnSuccess, resetOnError, ...onSubmitConfig}: UseGenreDataSubmitConfig
-): UseMutationResult<Genre, unknown, GenreFormData> {
+export function useGenreDataSubmit(): UseMutationResult<Genre, unknown, GenreFormData> {
     const queryClient = useQueryClient();
 
     const config = {populate: true, virtuals: true};
 
     const submitGenre = async ({_id, ...values}: GenreFormData): Promise<Genre> => {
-        if (onSubmitConfig.submitMessage) toast.success(onSubmitConfig.submitMessage);
-        onSubmitConfig.onSubmit?.({_id, ...values});
-
         const action = _id
             ? () => update({_id, data: values, config})
             : () => create({data: values, config});
@@ -45,29 +31,17 @@ export function useGenreDataSubmit(
         });
 
         if (!success) throw error;
-        if (resetOnSubmit) form.reset();
 
         return data;
     };
 
-    const onSuccess = async (genre: Genre) => {
+    const onSuccess = async () => {
         queryClient.invalidateQueries({queryKey: GenreCRUDQueryKeys.all, exact: false});
-
-        if (resetOnSuccess) form.reset();
-        if (onSubmitConfig.successMessage) toast.success(onSubmitConfig.successMessage);
-        onSubmitConfig.onSubmitSuccess?.(genre);
-    };
-
-    const onError = (error: unknown) => {
-        if (resetOnError) form.reset();
-        if (form) handleFormSubmitError({form, error, displayMessage: onSubmitConfig.errorMessage});
-        onSubmitConfig.onSubmitError?.(error);
     };
 
     return useMutation({
         mutationKey: GenreCRUDMutationKeys.submit(),
         mutationFn: submitGenre,
         onSuccess,
-        onError,
     });
 }

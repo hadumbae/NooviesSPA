@@ -8,13 +8,14 @@ import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {UIOpenStateProps} from "@/common/_types";
 import {MovieReview} from "@/domains/movie-reviews/_schema";
 import {MovieReviewSubmitForm, SubmitMovieReviewPopupView} from "@/views/client/movie-reviews/_feat/submit-form";
+import {MovieReviewForm} from "@/domains/movie-reviews";
 
 /** Props for the MovieReviewFormPopup component. */
 type FormProps = UIOpenStateProps & {
     children?: ReactNode;
     movieID: ObjectId;
     reviewToEdit?: MovieReview;
-    onSubmitConfig?: MutationResponseConfig<MovieReview>;
+    onSubmitConfig?: MutationResponseConfig<MovieReview, MovieReviewForm>;
 };
 
 /** Orchestrates the movie review submission and editing flow within a modal context. */
@@ -28,9 +29,10 @@ export function MovieReviewFormPopup(
 
     return (
         <MovieReviewSubmitForm
-            movieID={movieID}
             editEntity={reviewToEdit}
-            onSubmitConfig={{...onSubmitConfig, onSubmitSuccess: closeOnSubmit}}
+            presetValues={{movie: movieID}}
+            {...onSubmitConfig}
+            onSubmitSuccess={closeOnSubmit}
         >
             <SubmitMovieReviewPopupView
                 isEditing={!!reviewToEdit}

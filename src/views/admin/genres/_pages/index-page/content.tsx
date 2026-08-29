@@ -49,8 +49,9 @@ export function GenreIndexPageContent(
         <PageFlexWrapper>
             <PageHeader title="Genres" description="Manage the categorization of movies." actions={
                 <GenreSubmitForm
-                    resetConfig={{resetOnSuccess: true}}
-                    onSubmitConfig={{onSubmitSuccess: onSuccess, successMessage: "Created."}}
+                    resetOnSuccess={true}
+                    onSubmitSuccess={onSuccess}
+                    successMessage="Created."
                 >
                     <GenreSubmitFormPanel isOpen={isCreating} setIsOpen={setIsCreating}>
                         <Button variant="link" className="hover-link" onClick={() => setIsCreating(true)}>

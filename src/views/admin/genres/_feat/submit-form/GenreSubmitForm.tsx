@@ -1,48 +1,28 @@
 /**
- * @fileoverview Container component for the Genre submission form.
+ * @fileoverview Form component and hook exports for submitting genre data.
  */
 
-import {ReactElement, ReactNode, useId} from 'react';
-import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
-import {FormContainerConfigProps} from '@/common/_feat/submit-data/formTypes';
-import {Form} from "@/views/common/_comp/ui/form.tsx";
-import {GenreFormData, useGenreSubmitForm} from "@/domains/genres/_feat/submit-form";
-import {useGenreDataSubmit} from "@/domains/genres/_feat/crud-hooks";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
+import {createForm} from "@/common/_feat";
+import {Genre, GenreFormData, GenreFormSchema, GenreFormValues, useGenreDataSubmit} from "@/domains/genres";
 
-/** Props for the GenreSubmitForm component. */
-type SubmitFormProps = FormContainerConfigProps<GenreFormData, Genre, GenreFormData, Genre> & {
-    children?: ReactNode
-};
+const {SubmitForm, useSubmitForm} = createForm<
+    GenreFormValues,
+    GenreFormData,
+    Genre,
+    Genre
+>({
+    schema: GenreFormSchema,
+    mutation: useGenreDataSubmit,
+    formName: "genre-form",
+    defaultValues: {
+        name: "",
+        description: "",
+    },
+});
 
-/**
- * A wrapper component that initialises React Hook Form and TanStack Mutation for Genre data.
- */
-export function GenreSubmitForm(
-    {children, onSubmitConfig, formConfig, resetConfig}: SubmitFormProps
-): ReactElement {
-    const id = useId();
-    const formID = `submit-genre-data-form-${id}`;
-
-    const form = useGenreSubmitForm(formConfig);
-    const {mutate, isPending, isError} = useGenreDataSubmit({form, ...onSubmitConfig, ...resetConfig});
-
-    const onSubmit = (values: GenreFormData) => {
-        mutate(values);
-    };
-
-    return (
-        <BaseFormContextProvider
-            formID={formID}
-            isPending={isPending}
-            isError={isError}
-            isEditing={!!formConfig?.editEntity}
-        >
-            <Form {...form}>
-                <form id={formID} onSubmit={form.handleSubmit(onSubmit)}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for creating or updating genre data. */
+        SubmitForm as GenreSubmitForm,
+    /** Hook for managing genre submission form state and operations. */
+        useSubmitForm as useGenreSubmitForm,
 }

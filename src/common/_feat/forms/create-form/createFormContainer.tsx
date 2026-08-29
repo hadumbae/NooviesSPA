@@ -47,12 +47,6 @@ export function createFormContainer<
         const form = useSubmitForm({presetValues, editEntity});
         const {mutateAsync, isPending, isError} = mutation(mutConfig as TMutConfig);
 
-        const {formState: {errors}, getValues} = form
-        if (Object.keys(errors).length > 0) {
-            console.debug("Form Values:", getValues());
-            console.debug("Form Errors:", errors);
-        }
-
         const submitData = createFormSubmitHandler({
             form,
             mutateAsync,
@@ -65,6 +59,7 @@ export function createFormContainer<
                 formID={formID}
                 isPending={isPending}
                 isError={isError}
+                isEditing={!!editEntity}
                 submitHandler={submitData}
             >
                 <Form {...form}>
@@ -72,7 +67,8 @@ export function createFormContainer<
                         id={formID}
                         onSubmit={form.handleSubmit(
                             // Cast because TS can't verify proper type
-                            submitData as Parameters<typeof form.handleSubmit>[0]
+                            submitData as Parameters<typeof form.handleSubmit>[0],
+                            (errors) => console.error("Form Errors: ", {formID, errors})
                         )}
                     >
                         {children}

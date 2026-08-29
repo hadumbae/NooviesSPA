@@ -11,6 +11,7 @@ import {FetchByCodeQueryKeys} from "@/domains/reservations/_feat/fetch-reservati
 import {UpdateReservationNotesFormData} from "@/domains/reservations/_feat/update-reservations/forms";
 import {patchUpdateReservationNotes} from "@/domains/reservations/_feat/update-reservations/repository";
 import {ReservationUpdateMutationKeys} from "@/domains/reservations/_feat/update-reservations/mutations/mutationKeys.ts";
+import {CustomerReservationViewQueryKeys} from "@/domains/customers/_feat/manage-reservation";
 
 /** Props for the useUpdateReservationNotesMutation hook. */
 export type UseUpdateReservationNotesMutationParams = {
@@ -38,6 +39,7 @@ export function useUpdateReservationNotesMutation(
 
     const onSuccess = () => {
         queryClient.invalidateQueries({queryKey: FetchByCodeQueryKeys.fetchByCode(), exact: false});
+        queryClient.invalidateQueries({queryKey: CustomerReservationViewQueryKeys.all, exact: false});
     }
 
     return useMutation({
