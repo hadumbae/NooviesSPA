@@ -11,6 +11,7 @@ import {PersonDetailsCard} from "@/views/admin/persons/_comp/person-details";
 import {PersonDetailsCreditOverview} from "@/views/admin/persons/_comp";
 import {Person} from "@/domains/persons";
 import {PersonFilmography} from "@/domains/movie-credits";
+import {useSetAdminPageTitle} from "@/common/_feat";
 
 
 /** Props for the PersonDetailsPageContent component. */
@@ -23,10 +24,11 @@ export type PersonDetailsPageContentProps = {
 
 /** Renders the primary profile view for a person in the administrative interface. */
 export function PersonDetailsPageContent(
-    props: PersonDetailsPageContentProps
+    {person, filmography, creditCount, movieCount}: PersonDetailsPageContentProps
 ): ReactElement {
-    const {person, filmography, creditCount, movieCount} = props;
     const {name} = person;
+    useSetAdminPageTitle({presetTitle: `Person Details • ${name}`})
+
 
     return (
         <PageFlexWrapper>

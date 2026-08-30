@@ -75,7 +75,7 @@ export function PersonDetailsPageActions(
             <UploadPersonProfileImageForm
                 onSubmitSuccess={() => closeUpdatingAvatar()}
                 successMessage="Profile Image Updated."
-                personID={_id}
+                mutConfig={{_id}}
             >
                 <UploadPersonProfileImageFormPanel
                     isOpen={isUpdatingAvatar}

@@ -9,7 +9,7 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {IconButton, PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {PersonIndexCard} from "@/views/admin/persons/_comp";
-import {PersonSubmitForm, PersonIndexQueryOptionFormSection, PersonSubmitFormPanel} from "@/views/admin/persons/_feat";
+import {PersonIndexQueryOptionFormSection, PersonSubmitForm, PersonSubmitFormPanel} from "@/views/admin/persons/_feat";
 import {Person, useNavigateToPerson} from "@/domains/persons";
 import {Plus} from "lucide-react";
 

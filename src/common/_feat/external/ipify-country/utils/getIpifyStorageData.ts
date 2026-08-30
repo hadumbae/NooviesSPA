@@ -8,13 +8,13 @@ import {ParseError} from "@/common/_err/ParseError.ts";
 import {IpifyLocalStorageSchema} from "@/common/_feat/external/ipify-country/schema/IpifyLocalStorageSchema";
 
 /** Retrieves the Ipify payload from local storage and validates it against the expected schema. */
-export function getIpifyPayloadData() {
+export function getIpifyStorageData() {
     const itemString = localStorage.getItem(LocalStorageKeys.ipifyCountry);
     if (!itemString) return null;
 
     const itemValue = parseJSON({
         raw: itemString,
-        source: getIpifyPayloadData.name,
+        source: getIpifyStorageData.name,
         message: "Failed to parse Ipify payload. Malformed data."
     });
 

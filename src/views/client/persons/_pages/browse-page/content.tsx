@@ -29,7 +29,10 @@ export function BrowsePersonsPageContent(
                 description="Explore the cast and crew behind your favorite movies."
             />
 
-            <BrowsePersonsQueryOptionsFormSection disableClear={true}/>
+            <BrowsePersonsQueryOptionsFormSection
+                disableClear={true}
+                classNames={{content: "w-fit"}}
+            />
 
             {
                 persons.length > 0

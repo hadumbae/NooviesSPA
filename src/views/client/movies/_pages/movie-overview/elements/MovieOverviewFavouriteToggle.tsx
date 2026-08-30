@@ -22,7 +22,7 @@ export function MovieOverviewFavouriteToggle(
     {movieID}: SelectorProps
 ): ReactElement {
     const query = useCheckIsFavouriteMovie({_id: movieID});
-    const {mutate, isPending} = useToggleUserFavouriteMovie();
+    const {mutateAsync, isPending} = useToggleUserFavouriteMovie();
 
     return (
         <QueryDataLoader query={query} loaderComponent={AnimatedLoader}>
@@ -37,9 +37,10 @@ export function MovieOverviewFavouriteToggle(
                             <FavouriteMovieHeartButton
                                 className={isFavourite ? "border-pink-500" : ""}
                                 isFavourite={isFavourite}
+                                isPending={isPending}
                                 movieID={movieID}
                                 disabled={isPending}
-                                onClick={() => mutate(movieID)}
+                                onClick={() => mutateAsync(movieID)}
                             />
                         </CardContent>
                     </Card>

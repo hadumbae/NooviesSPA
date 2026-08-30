@@ -9,13 +9,13 @@ import {patchUploadProfileImage, PersonProfileImageFormData} from "@/domains/per
 import {PersonCRUDQueryKeys} from "@/domains/persons";
 
 /** Parameters for the profile image submission mutation. */
-export type ImageSubmitConfig = {
+export type ProfileImageSubmitConfig = {
     _id: ObjectId;
 };
 
 /** Hook to manage the lifecycle of a profile image upload. */
 export function usePersonProfileImageSubmitMutation(
-    {_id}: ImageSubmitConfig
+    {_id}: ProfileImageSubmitConfig
 ): UseMutationResult<void, unknown, PersonProfileImageFormData> {
     const queryClient = useQueryClient();
 

@@ -3,8 +3,8 @@
  */
 
 import {useEffect, useState} from "react";
-import {getIpifyPayloadData} from "@/common/_feat/external/ipify-country/utils/getIpifyPayloadData.ts";
-import {setIpifyPayloadData} from "@/common/_feat/external/ipify-country/utils/setIpifyPayloadData.ts";
+import {getIpifyStorageData} from "@/common/_feat/external/ipify-country/utils/getIpifyStorageData.ts";
+import {setIpifyStorageData} from "@/common/_feat/external/ipify-country/utils/setIpifyStorageData.ts";
 
 import {IpifyPayloadData} from "@/common/_feat/external/ipify-country/schema/IpifyPayloadSchema";
 
@@ -12,7 +12,7 @@ import {IpifyPayloadData} from "@/common/_feat/external/ipify-country/schema/Ipi
 export function useGetIpifyLocalStorageData() {
     const [fetched, setFetched] = useState<boolean>(() => {
         try {
-            return getIpifyPayloadData()?.fetched ?? false;
+            return getIpifyStorageData()?.fetched ?? false;
         } catch {
             return false;
         }
@@ -20,15 +20,15 @@ export function useGetIpifyLocalStorageData() {
 
     const [payload, setPayload] = useState<IpifyPayloadData | null>(() => {
         try {
-            return getIpifyPayloadData()?.payload ?? null;
+            return getIpifyStorageData()?.payload ?? null;
         } catch {
-            setIpifyPayloadData(null)
+            setIpifyStorageData(null)
             return null;
         }
     });
 
     useEffect(() => {
-        setIpifyPayloadData({fetched, payload});
+        setIpifyStorageData({fetched, payload});
     }, [fetched, payload]);
 
     return {

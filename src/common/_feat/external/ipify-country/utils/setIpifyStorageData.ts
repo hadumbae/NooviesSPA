@@ -10,7 +10,7 @@ import {
 } from "@/common/_feat/external/ipify-country/schema/IpifyLocalStorageSchema";
 
 /** Validates and saves Ipify payload data to local storage or removes it if null. */
-export function setIpifyPayloadData(value: IpifyLocalStorageData | null): void {
+export function setIpifyStorageData(value: IpifyLocalStorageData | null): void {
     if (!value) {
         localStorage.removeItem(LocalStorageKeys.ipifyCountry);
     }

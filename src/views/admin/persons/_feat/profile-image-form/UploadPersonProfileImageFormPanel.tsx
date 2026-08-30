@@ -17,13 +17,12 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/views/common/_comp/ui";
+import {UIOpenStateProps} from "@/common/_types";
 
 /** Props for the UploadPersonProfileImageFormPanel component. */
-type FormPanelProps = {
+type FormPanelProps = UIOpenStateProps & {
     children?: ReactNode;
     className?: string;
-    isOpen: boolean;
-    setIsOpen: (open: boolean) => void;
 };
 
 /**

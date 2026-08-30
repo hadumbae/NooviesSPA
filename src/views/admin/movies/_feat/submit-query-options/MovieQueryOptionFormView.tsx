@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {cn, QueryOptionFormContext, useQueryOptionFormContext} from "@/common/_feat";
+import {cn, QueryOptionFormContext, QueryOptionFormViewProps, useQueryOptionFormContext} from "@/common/_feat";
 import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {
     MovieQueryOptionFormSortFieldset
@@ -12,24 +12,14 @@ import {
     MovieQueryOptionFormFilterFieldset
 } from "@/views/admin/movies/_feat/submit-query-options/MovieQueryOptionFormFilterFieldset.tsx";
 import {MovieQueryOptionFormValues} from "@/domains/movies";
-import {DisableFields} from "@/common/_types";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {InvalidContextError} from "@/common/_err";
-
-type FormProps = {
-    disableFields?: DisableFields<MovieQueryOptionFormValues>;
-    classNames?: {
-        container?: string;
-        filters?: string;
-        sorts?: string;
-    };
-};
 
 /**
  * Renders filter and sort fieldsets for movie queries with a 450ms debounce auto-submit.
  */
 export function MovieQueryOptionFormView(
-    {classNames, disableFields}: FormProps
+    {classNames, disableFields}: QueryOptionFormViewProps<MovieQueryOptionFormValues>
 ): ReactElement {
     const {submitHandler} = useQueryOptionFormContext();
 

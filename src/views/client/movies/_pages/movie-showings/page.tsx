@@ -2,9 +2,7 @@
  * @fileoverview Orchestrates route params and data fetching for movie showings.
  */
 
-import {
-    useFetchByIdentifierRouteParams
-} from "@/common/_feat";
+import {getUserCountry, useFetchByIdentifierRouteParams} from "@/common/_feat";
 import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
@@ -19,6 +17,10 @@ const SHOWINGS_PER_PAGE = 20;
  * Resolves search and route params to render a validated movie showings view.
  */
 export const MovieInfoShowingsPage = () => {
+    const userCountry = getUserCountry({presetCountry: "NZ"});
+
+    console.log("User Country:", userCountry);
+
     const {slug} = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/browse/movies",
@@ -41,7 +43,7 @@ export const MovieInfoShowingsPage = () => {
             near,
             page: page ?? 1,
             perPage: SHOWINGS_PER_PAGE,
-            country: "NZ",
+            country: userCountry,
         },
     });
 

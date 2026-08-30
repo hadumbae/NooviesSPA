@@ -17,13 +17,14 @@ import {CustomerIndexQueryOptionFormValues} from "@/domains/customers";
  * Renders the filter and sort fieldsets for person index query options using the query option form layout.
  */
 export function PersonIndexQueryOptionsFormView(
-    {disableFields, classNames}: QueryOptionFormViewProps<CustomerIndexQueryOptionFormValues>
+    {disableFields, hideFields, classNames}: QueryOptionFormViewProps<CustomerIndexQueryOptionFormValues>
 ): ReactElement {
     return (
         <QueryOptionFormLayout
             filterFieldset={PersonIndexQueryOptionsFormFilterFieldset}
             sortFieldset={PersonIndexQueryOptionsFormSortFieldset}
             disableFields={disableFields}
+            hideFields={hideFields}
             classNames={classNames}
         />
     );

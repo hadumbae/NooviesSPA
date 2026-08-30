@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import {buttonVariants, Dialog, DialogContent, DialogTrigger} from "@/views/common/_comp/ui";
+import {buttonVariants, Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/views/common/_comp/ui";
 import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
 import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {Search} from "lucide-react";
@@ -38,6 +38,9 @@ export function PersonDetailsCreditMovieDialog(
         <Dialog>
             <DialogTrigger>{children ?? "Open"}</DialogTrigger>
             <DialogContent className="space-y-5">
+                <DialogHeader className="sr-only">
+                    <DialogTitle>Credit Details for {personName}</DialogTitle>
+                </DialogHeader>
 
                 <section className="flex items-center space-x-2">
                     <SROnly text={`Movie Basic Details : ${title}`}/>
@@ -45,9 +48,10 @@ export function PersonDetailsCreditMovieDialog(
                     <MoviePosterImage url={posterImage?.secure_url} className="h-36 aspect-[2/3]"/>
 
                     <div className="flex-grow flex flex-col space-y-1">
+                        <SROnly text={`Movie Basic Details : ${title}`}/>
+
                         <h2 className="primary-text font-bold text-lg">
                             {title}
-                            <SROnly text={`Movie Basic Details : ${title}`}/>
                         </h2>
 
                         {notOriginalTitle && <span className="text-sm text-neutral-400">{originalTitle}</span>}
