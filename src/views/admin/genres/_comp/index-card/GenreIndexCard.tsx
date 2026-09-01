@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from 'react';
-import {Clapperboard} from "lucide-react";
+import {Clapperboard, Star} from "lucide-react";
 import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {cn} from "@/common/_feat";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
@@ -25,7 +25,7 @@ export function GenreIndexCard(
     {genre, orientation = "horizontal", className}: IndexProps
 ): ReactElement {
     const navigate = useLoggedNavigate();
-    const {slug, name, movieCount} = genre;
+    const {slug, name, movieCount, isFeatured} = genre;
 
     const {page, perPage, hasPaginationValues} = usePaginationSearchParams();
 
@@ -57,6 +57,7 @@ export function GenreIndexCard(
                 <section className="flex items-center gap-2 text-muted-foreground">
                     <span className="text-sm font-medium">{movieCount}</span>
                     <Clapperboard size={15} aria-hidden="true"/>
+                    {isFeatured && <Star size={15} aria-hidden="true" className="text-green-500 fill-green-500"/>}
                 </section>
             </CardContent>
         </Card>

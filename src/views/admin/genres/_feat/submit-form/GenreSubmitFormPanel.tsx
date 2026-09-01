@@ -8,7 +8,7 @@ import {GenreFormData} from "@/domains/genres";
 import {DisableFields, UIOpenStateProps} from "@/common/_types";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {useLockForFormUI} from "@/common/_feat/handle-form/useLockForFormUI.ts";
-import {HookFormInput, HookFormTextArea} from "@/views/common/_feat";
+import {HookFormCheckbox, HookFormInput, HookFormTextArea} from "@/views/common/_feat";
 import {
     Button,
     ScrollArea,
@@ -73,6 +73,15 @@ export function GenreSubmitFormPanel(
                                 name="description"
                                 label="Description"
                                 description="A brief description of the genre."
+                            />
+                        }
+
+                        {
+                            !disableFields?.isFeatured &&
+                            <HookFormCheckbox
+                                name="isFeatured"
+                                label="Is Featured?"
+                                description="A check if the genre is featured."
                             />
                         }
 

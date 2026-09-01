@@ -17,6 +17,7 @@ const {SubmitForm, useSubmitForm} = createForm<
     defaultValues: {
         name: "",
         description: "",
+        isFeatured: false,
     },
 });
 

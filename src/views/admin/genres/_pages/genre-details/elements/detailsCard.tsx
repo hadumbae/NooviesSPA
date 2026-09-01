@@ -17,7 +17,7 @@ type DetailsProps = {
  * Renders a structured informational card displaying a Genre's core details.
  */
 export function GenreDetailsCard(
-    {genre: {name, description, movieCount}}: DetailsProps
+    {genre: {name, description, movieCount, isFeatured}}: DetailsProps
 ): ReactElement {
     return (
         <Card>
@@ -27,13 +27,17 @@ export function GenreDetailsCard(
                     <Separator className="mt-1"/>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     <LabelContent label="Name">
                         <span className="primary-text font-bold">{name}</span>
                     </LabelContent>
 
                     <LabelContent label="Number Of Movies">
                         <span className="primary-text font-bold">{`${movieCount} movies`}</span>
+                    </LabelContent>
+
+                    <LabelContent label="Is Featured?">
+                        <span className="primary-text font-bold">{isFeatured ? "Yes" : "No"}</span>
                     </LabelContent>
                 </div>
 

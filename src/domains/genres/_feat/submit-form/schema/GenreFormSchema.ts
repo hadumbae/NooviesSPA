@@ -3,15 +3,17 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/_schemas";
+import {CoercedBooleanValueSchema, IDStringSchema} from "@/common/_schemas";
 import {AnyValues} from "@/common/_types";
 import {GenreDescriptionSchema, GenreNameSchema} from "@/domains/genres";
+import {preprocessEmptyToUndefined} from "@/common/_feat";
 
 /** Zod schema for validating and transforming Genre form data. */
 export const GenreFormSchema = z.object({
     _id: IDStringSchema.optional(),
-    name: GenreNameSchema,
-    description: GenreDescriptionSchema,
+    name: preprocessEmptyToUndefined(GenreNameSchema),
+    description: preprocessEmptyToUndefined(GenreDescriptionSchema),
+    isFeatured: preprocessEmptyToUndefined(CoercedBooleanValueSchema),
 });
 
 /** Validated Genre data prepared for API submission. */

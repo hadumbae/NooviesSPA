@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {IDStringSchema} from "@/common/_schemas";
+import {BooleanValueSchema, IDStringSchema} from "@/common/_schemas";
 import {NonEmptyStringSchema} from "@/common/_schemas";
 import {CloudinaryImageSchema} from "@/common/_schemas/cloudinary-image/CloudinaryImageSchema.ts";
 import {GenreDescriptionSchema, GenreNameSchema} from "@/domains/genres/_schema/fields";
@@ -17,6 +17,7 @@ export const GenreSchema = z.object({
     image: CloudinaryImageSchema.nullable().readonly().optional(),
     slug: NonEmptyStringSchema.readonly(),
     movieCount: NonNegativeNumberSchema,
+    isFeatured: BooleanValueSchema.catch(false),
 });
 
 /** TypeScript type inferred from GenreSchema. */
