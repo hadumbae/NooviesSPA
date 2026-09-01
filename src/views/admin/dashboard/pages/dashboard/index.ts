@@ -1,0 +1,1 @@
+export * from "@/views/admin/dashboard/pages/dashboard/page.tsx";

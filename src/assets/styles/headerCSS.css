@@ -8,7 +8,7 @@
     }
 
     .page-description {
-        @apply primary-text text-sm sm:text-base
+        @apply secondary-text font-bold text-sm
     }
 
     .section-title {
