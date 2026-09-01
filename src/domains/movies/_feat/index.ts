@@ -2,6 +2,7 @@ export * from "./client-view-data";
 export * from "./crud";
 export * from "./crud-hooks";
 export * from "./formatters";
+export * from "./handle-query-options";
 export * from "./manage-credits-page";
 export * from "./manage-images";
 export * from "./manage-showing-page";

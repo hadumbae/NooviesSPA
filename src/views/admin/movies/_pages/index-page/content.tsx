@@ -2,19 +2,17 @@
  * @fileoverview Presentation component for the Movie Index page.
  */
 
-import {ReactElement, useState} from "react";
+import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 
 import {MovieDetails} from "@/domains/movies";
-import {MovieQueryOptionForm, MovieQueryOptionFormView} from "@/views/admin/movies/_feat";
 import {MovieIndexCard} from "@/views/admin/movies/_comp";
 import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {Plus} from "lucide-react";
-import {useMovieIndexQueryOptionsContext} from "@/domains/movies/_ctx/index-query-options";
-import {QueryOptionsFormCollapsible} from "@/views/common/_feat";
+import {MovieIndexQueryOptionFormSection} from "@/views/admin/movies/_feat/query-options-form";
 
 /** Props for the MovieIndexPageContent component. */
 type ContentProps = {
@@ -31,9 +29,6 @@ type ContentProps = {
 export function MovieIndexPageContent(
     {page, perPage, setPage, movies, totalItems}: ContentProps
 ): ReactElement {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-    const {activeOptions, values: searchParams, setValues: setSearchParams} = useMovieIndexQueryOptionsContext();
-
     return (
         <PageFlexWrapper>
             <PageHeader title="Movies" description="Registered movies." actions={(
@@ -44,15 +39,7 @@ export function MovieIndexPageContent(
                 </section>
             )}/>
 
-            <MovieQueryOptionForm
-                activeOptions={activeOptions}
-                queryOptions={searchParams}
-                setQueryOptions={setSearchParams}
-            >
-                <QueryOptionsFormCollapsible isOpen={isOpen} setIsOpen={setIsOpen}>
-                    <MovieQueryOptionFormView/>
-                </QueryOptionsFormCollapsible>
-            </MovieQueryOptionForm>
+            <MovieIndexQueryOptionFormSection/>
 
             {movies.length > 0 ? (
                 <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">

@@ -11,7 +11,10 @@ import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {ObjectId} from "@/common/_schemas";
 
 import {SeatMapFormValues} from "@/domains/seatmaps";
-import {SeatMapSubmitFormDetailsFields, SeatMapSubmitFormPriceFields} from "@/views/admin/seatmaps/_feat/submit-form/fieldsets";
+import {
+    SeatMapSubmitFormDetailsFields,
+    SeatMapSubmitFormPriceFields
+} from "@/views/admin/seatmaps/_feat/submit-form/fieldsets";
 
 /** Props for the SeatMapFormView component. */
 type ViewProps = {
@@ -35,7 +38,7 @@ export function SeatMapSubmitFormView(
             <SeatMapSubmitFormDetailsFields disableFields={disableFields} screen={screenForSeats}/>
             <SeatMapSubmitFormPriceFields disableFields={disableFields} isNestedView={isNestedView}/>
 
-            <Button variant="default" type="submit" className="w-full">
+            <Button variant="default" type="submit" className="w-full" disabled={isPending}>
                 {isPending ? <Loader className="animate-spin"/> : "Submit"}
             </Button>
         </div>

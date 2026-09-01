@@ -13,14 +13,15 @@ import {handleMutationCallback, handleSubmitResponseError} from "@/common/_feat"
 /** Props for the ShowingDeleteWarningDialog component. */
 type DialogProps = UIOpenStateProps & MutationResponseConfig & {
     children?: ReactNode;
-    _id: ObjectId
+    _id: ObjectId;
+    hardDelete?: boolean;
 };
 
 /** Modal dialog that triggers the showing deletion mutation upon user confirmation. */
 export function ShowingDeleteWarningDialog(
-    {children, _id, isOpen, setIsOpen, ...onDeleteConfig}: DialogProps
+    {children, _id, isOpen, setIsOpen, hardDelete = false, ...onDeleteConfig}: DialogProps
 ): ReactElement {
-    const {mutateAsync} = useShowingDeleteMutation();
+    const {mutateAsync} = useShowingDeleteMutation({hardDelete});
 
     const deleteShowing = async () => {
         try {

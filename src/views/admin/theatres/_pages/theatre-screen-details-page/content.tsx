@@ -20,8 +20,8 @@ import {
     TheatreScreenDetailsLayoutSection
 } from "@/views/admin/theatres/_pages/theatre-screen-details-page/sections";
 import {
-    TheatreScreenDetailsShowingsSection
-} from "@/views/admin/theatres/_pages/theatre-screen-details-page/sections/TheatreScreenDetailsShowingsSection.tsx";
+    TheatreScreenScheduleSection
+} from "@/views/admin/theatres/_pages/theatre-screen-details-page/sections/TheatreScreenScheduleSection.tsx";
 import {ShowingDetails} from "@/domains/showings";
 
 /** Props for the TheatreScreenDetailsPageContent component. */
@@ -67,7 +67,7 @@ export function TheatreScreenDetailsPageContent(
                 theatreID={theatreID}
             />
 
-            <TheatreScreenDetailsShowingsSection
+            <TheatreScreenScheduleSection
                 screenID={screenID}
                 showings={recentShowings}
             />

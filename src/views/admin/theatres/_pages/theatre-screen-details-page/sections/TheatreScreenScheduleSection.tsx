@@ -1,22 +1,27 @@
+/**
+ * @fileoverview Section component for rendering a list of recent showings assigned to a theatre screen.
+ */
+
 import {ReactElement} from "react";
 import {EmptyArrayContainer, IconButton, PageSectionHeader} from "@/views/common/_comp";
 import {LoggedLink} from "@/views/common/_feat";
 import {List} from "lucide-react";
 import {ShowingDetails} from "@/domains/showings";
-import {cn} from "@/common/_feat";
-import {ShowingSummaryCard} from "@/views/admin/showings";
 import {ObjectId} from "@/common/_schemas";
+import { TheatreScreenScheduleCard } from "@/views/admin/theatre-screens/_comp";
 
+/** Props for the TheatreScreenScheduleSection component. */
 type SectionProps = {
     screenID: ObjectId;
     showings: ShowingDetails[];
 };
 
-export function TheatreScreenDetailsShowingsSection(
+/** Displays a header and a grid of recent showings or an empty state for a specific theatre screen. */
+export function TheatreScreenScheduleSection(
     {screenID, showings}: SectionProps
 ): ReactElement {
     return (
-        <section>
+        <section className="flex flex-col gap-y-4">
             <div className="flex justify-between items-center">
                 <PageSectionHeader>Recent Showings</PageSectionHeader>
 
@@ -27,9 +32,9 @@ export function TheatreScreenDetailsShowingsSection(
 
             {
                 showings.length ? (
-                    <div className={cn("grid grid-cols-1 gap-2")}>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
                         {showings.map((showing) => (
-                            <ShowingSummaryCard key={showing._id} showing={showing}/>
+                            <TheatreScreenScheduleCard key={showing._id} showing={showing}/>
                         ))}
                     </div>
                 ) : (

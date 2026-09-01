@@ -7,6 +7,7 @@ import {ObjectId} from "@/common/_schemas";
 
 import {destroy} from "@/domains/seats/_feat/crud";
 import {SeatCRUDMutationKeys, SeatCRUDQueryKeys} from "@/domains/seats/_feat/crud-hooks/keys";
+import {TheatreScreenAdminViewDataQueryKeys} from "@/domains/theatre-screens";
 
 type DeleteValue = {
     _id: ObjectId;
@@ -24,6 +25,7 @@ export function useSeatDeleteMutation(): UseMutationResult<void, unknown, Delete
 
     const onSuccess = () => {
         queryClient.invalidateQueries({queryKey: SeatCRUDQueryKeys.list(), exact: false});
+        queryClient.invalidateQueries({queryKey: TheatreScreenAdminViewDataQueryKeys.all, exact: false});
     };
 
     return useMutation({

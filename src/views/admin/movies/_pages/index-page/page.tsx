@@ -10,7 +10,7 @@ import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {useFetchPaginatedMovies} from "@/domains/movies/_feat/crud-hooks";
-import {useMovieIndexQueryOptionsContext} from "@/domains/movies/_ctx/index-query-options";
+import {useMovieIndexQueryOptionsContext} from "@/domains/movies";
 
 const MOVIES_PER_PAGE = 20;
 

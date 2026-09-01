@@ -6,7 +6,7 @@ import {RouteObject} from "react-router-dom";
 import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
 import {MovieCreatePage, MovieDetailsPage, MovieEditPage, MovieIndexPage, MoviePeoplePage} from "@/views/admin/movies";
-import {MovieIndexQueryOptionsContextProvider} from "@/domains/movies/_ctx/index-query-options";
+import { MovieIndexQueryOptionsContextProvider } from "@/domains/movies/_feat/handle-query-options/movie-index";
 
 /** Route configuration for movie-related administrative pages. */
 export const AdminMovieRoutes: RouteObject[] = [

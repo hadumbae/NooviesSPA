@@ -47,8 +47,6 @@ export function TheatreScreenDetailsPageScreenActions(
     const isDeleting = useIsDeletingUIContext();
     const {toggle: toggleDeleting} = useIsDeletingUIContextActions();
 
-    console.log("Is Deleting: ", isDeleting);
-
     const onUpdateSuccess = (updatedScreen: TheatreScreenDetails) => {
         const {theatre: {slug: theatreSlug}, slug: screenSlug} = updatedScreen;
 

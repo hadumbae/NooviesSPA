@@ -52,6 +52,7 @@ export function createFormHook<
         const form = useForm<TFormValues, unknown, TForm>({
             resolver: zodResolver(schema),
             defaultValues: defaultValues as DefaultValues<TFormValues>,
+            reValidateMode: "onSubmit",
         });
 
         useEffect(() => {

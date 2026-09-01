@@ -31,7 +31,7 @@ export function ShowingLanguagesCard(
 
     return (
         <Card className={classNames?.card}>
-            <CardContent className={cn("p-4 space-y-4", classNames?.content)}>
+            <CardContent className={cn("p-4 h-full flex flex-col justify-center space-y-4", classNames?.content)}>
                 <LabelContent label="Spoken Languages" classNames={{container: "space-y-2"}}>
                     <BadgeList
                         classNames={{badge: "text-xs"}}

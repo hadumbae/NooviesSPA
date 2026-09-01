@@ -1,74 +1,34 @@
 /**
- * @fileoverview Form wrapper component for submitting seat map data to the API.
+ * @fileoverview Form component and hook exports for submitting seat map configuration data.
  */
 
-import {ReactElement, ReactNode} from "react";
-import {Form} from "@/views/common/_comp/ui";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
-import {handleMutationCallback} from "@/common/_feat/handle-mutation-callback";
-import {handleFormSubmitError} from "@/common/_feat/error-handling/handleFormSubmitError.ts";
-import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
+import {createForm} from "@/common/_feat";
+import {SeatMap, SeatMapDetails,} from "@/domains/seatmaps/_schema/model";
+import {SeatMapFormData, SeatMapFormSchema, SeatMapFormValues,} from "@/domains/seatmaps/_feat/submit-data/schema";
+import {useSeatMapSubmitMutation} from "@/domains/seatmaps/_feat/crud-hooks/submit";
 
-import {
-    SeatMap,
-    SeatMapDetails,
-    SeatMapFormData,
+const {SubmitForm, useSubmitForm} = createForm<
     SeatMapFormValues,
-    useSeatMapForm,
-    useSeatMapSubmitMutation
-} from "@/domains/seatmaps";
+    SeatMapFormData,
+    SeatMap,
+    SeatMapDetails
+>({
+    schema: SeatMapFormSchema,
+    mutation: useSeatMapSubmitMutation,
+    formName: "seat-map-form",
+    defaultValues: {
+        showing: undefined,
+        seat: undefined,
+        basePrice: "",
+        priceMultiplier: "",
+        overridePrice: "",
+        status: undefined,
+    },
+});
 
-/** Props for the SeatMapSubmitForm component. */
-type FormProps = MutationResponseConfig<SeatMapDetails, SeatMapFormData> & MutationFormResetConfig & {
-    formConfig?: FormValuesConfig<SeatMapFormValues, SeatMap>;
-    children: ReactNode;
-};
-
-/**
- * Handles the submission logic and state management for seat map creation and updates.
- */
-export function SeatMapSubmitForm(
-    {children, formConfig, ...submitConfig}: FormProps
-): ReactElement {
-    const formID = useGenerateFormID("seat-map-submti-form");
-
-    const form = useSeatMapForm(formConfig);
-    const {mutateAsync, isPending, isError} = useSeatMapSubmitMutation();
-
-    const submitSeatMap = async (values: SeatMapFormData) => {
-        try {
-            handleMutationCallback({
-                cb: () => submitConfig.onSubmit?.(values),
-                message: submitConfig.submitMessage,
-            });
-
-            const seatMap = await mutateAsync(values);
-
-            handleMutationCallback({
-                cb: () => submitConfig.onSubmitSuccess?.(seatMap),
-                message: submitConfig.successMessage,
-                messageType: "success",
-            });
-        } catch (error: unknown) {
-            handleFormSubmitError({form, error, displayMessage: submitConfig.errorMessage})
-            submitConfig.onSubmitError?.(error);
-        }
-    }
-
-    return (
-        <BaseFormContextProvider
-            formID={formID}
-            isPending={isPending}
-            isError={isError}
-            isEditing={!!formConfig?.editEntity}
-            submitHandler={submitSeatMap}
-        >
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(submitSeatMap)}>
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
+export {
+    /** Form component for submitting seat map configuration data. */
+        SubmitForm as SeatMapSubmitForm,
+    /** Hook for managing seat map submit form state. */
+        useSubmitForm as useSeatMapSubmitForm,
 }

@@ -11,6 +11,7 @@ import {
     handleFindBySlug,
     handlePaginated,
     handleQuery,
+    handleSoftDelete,
     handleUpdate
 } from "@/common/_feat/crud-handlers";
 
@@ -37,3 +38,6 @@ export const update = handleUpdate(ShowingCRUDBaseURL);
 
 /** Removes a showing record from the system. */
 export const destroy = handleDelete(ShowingCRUDBaseURL);
+
+/** Soft deletes a showing record. */
+export const softDelete = handleSoftDelete(ShowingCRUDBaseURL);

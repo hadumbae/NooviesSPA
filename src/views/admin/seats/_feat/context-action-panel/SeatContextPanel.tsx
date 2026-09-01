@@ -67,6 +67,7 @@ export function SeatContextPanel(): ReactElement | null {
                                 _id={seat._id}
                                 className="border p-4 rounded-xl bg-destructive/5"
                                 onSubmitSuccess={closePanel}
+                                successMessage="Removed."
                             />
                         )}
 

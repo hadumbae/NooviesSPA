@@ -73,8 +73,10 @@ export function SeatMapDetailsPanel({showing}: PanelProps): ReactElement {
                     <div className="space-y-5">
                         {isEditing && (
                             <SeatMapSubmitForm
-                                formConfig={{editEntity, presetValues: {showing: showingID}}}
+                                presetValues={{showing: showingID}}
+                                editEntity={editEntity}
                                 onSubmitSuccess={onSuccess}
+                                successMessage="Updated."
                             >
                                 <SeatMapSubmitFormView
                                     className="p-4 default-card"

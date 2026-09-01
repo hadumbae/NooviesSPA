@@ -6,15 +6,19 @@ import {z} from "zod";
 import {SeatLabelSchema, SeatLayoutTypeSchema, SeatRowSchema, SeatTypeSchema} from "@/domains/seats/_schema/fields";
 import {IDStringSchema} from "@/common/_schemas";
 import {CoercedBooleanValueSchema, NonNegativeNumberSchema, PositiveIntegerSchema,} from "@/common/_schemas";
-import {preprocessOptionalField, preprocessToNumber} from "@/common/_feat/validation-preprocessors";
+import {
+    preprocessEmptyToUndefined,
+    preprocessOptionalField,
+    preprocessToNumber
+} from "@/common/_feat/validation-preprocessors";
 import {AnyUnionValues} from "@/common/_types";
 
 /** Base Zod schema containing shared geometric and relational fields for all seat layout elements. */
 export const SeatFormBaseSchema = z.object({
     _id: IDStringSchema.readonly().optional(),
-    theatre: IDStringSchema,
-    screen: IDStringSchema,
-    row: SeatRowSchema,
+    theatre: preprocessEmptyToUndefined(IDStringSchema),
+    screen: preprocessEmptyToUndefined(IDStringSchema),
+    row: preprocessEmptyToUndefined(SeatRowSchema),
     x: preprocessToNumber(PositiveIntegerSchema),
     y: preprocessToNumber(PositiveIntegerSchema),
     layoutType: SeatLayoutTypeSchema,

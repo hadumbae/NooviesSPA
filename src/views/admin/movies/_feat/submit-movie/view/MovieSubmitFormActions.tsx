@@ -8,6 +8,7 @@ import {cn} from "@/common/_feat";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
+import {useFormContext} from "react-hook-form";
 
 /** Props for the MovieSubmitFormActions component. */
 type ActionProps = {
@@ -20,6 +21,7 @@ type ActionProps = {
 export function MovieSubmitFormActions(
     {className}: ActionProps
 ): ReactElement {
+    const {reset} = useFormContext();
     const {formID, isPending} = useBaseFormContext();
 
     return (
@@ -33,7 +35,7 @@ export function MovieSubmitFormActions(
             >
                 {isPending ? <AnimatedLoader/> : "Submit Movie"}
             </Button>
-            <Button variant="secondary">
+            <Button variant="secondary" type="button" onClick={() => reset()}>
                 <RotateCw/>
             </Button>
         </div>

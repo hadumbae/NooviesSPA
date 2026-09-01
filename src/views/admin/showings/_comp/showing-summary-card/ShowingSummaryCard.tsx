@@ -23,7 +23,6 @@ type CardProps = {
  */
 export function ShowingSummaryCard({showing}: CardProps): ReactElement {
     const {
-        _id,
         movie,
         theatre,
         screen,
@@ -31,6 +30,7 @@ export function ShowingSummaryCard({showing}: CardProps): ReactElement {
         endTime,
         ticketPrice,
         status,
+        slug,
         config: {
             isSpecialEvent,
             isActive,
@@ -56,7 +56,7 @@ export function ShowingSummaryCard({showing}: CardProps): ReactElement {
                     </section>
 
                     <div>
-                        <LoggedLink to={`/admin/showings/get/${_id}`}>
+                        <LoggedLink to={`/admin/showings/get/${slug}`}>
                             <IconButton>
                                 <Search/>
                             </IconButton>
