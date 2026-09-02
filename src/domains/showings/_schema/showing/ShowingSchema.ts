@@ -3,11 +3,11 @@
  */
 
 import {z} from "zod";
-import {IANATimezoneSchema, IDStringSchema} from "@/common/_schemas";
+import {IANATimezoneSchema, IDStringSchema, NonEmptyStringSchema} from "@/common/_schemas";
 import {ISO6391LanguageCodeSchema} from "@/common/_schemas/enums/ISO6391LanguageCodeSchema.ts";
-import {NonEmptyStringSchema} from "@/common/_schemas";
 import {ShowingConfigSchema} from "@/domains/showings/_schema/showing/ShowingConfigSchema.ts";
 import {ShowingStatusSchema, ShowingTimeSchema, TicketPriceSchema} from "@/domains/showings/_schema/fields";
+import {TheatreSnapshotSchema} from "@/domains/theatres/_schema/snapshot/TheatreSnapshotSchema.ts";
 
 /**
  * Core showing schema.
@@ -24,6 +24,7 @@ export const ShowingSchema = z.object({
     theatre: IDStringSchema,
     screen: IDStringSchema,
     status: ShowingStatusSchema,
+    theatreSnapshot: TheatreSnapshotSchema,
     config: ShowingConfigSchema,
     slug: NonEmptyStringSchema,
 });
