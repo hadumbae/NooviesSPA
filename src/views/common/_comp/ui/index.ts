@@ -8,6 +8,7 @@ export * from "@/views/common/_comp/ui/breadcrumb";
 export * from "@/views/common/_comp/ui/button";
 export * from "@/views/common/_comp/ui/calendar";
 export * from "@/views/common/_comp/ui/card";
+export * from "@/views/common/_comp/ui/carousel";
 export * from "@/views/common/_comp/ui/checkbox";
 export * from "@/views/common/_comp/ui/collapsible";
 export * from "@/views/common/_comp/ui/command";

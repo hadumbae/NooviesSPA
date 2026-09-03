@@ -4,6 +4,8 @@
 
 import {MovieBaseSchema} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 import {z} from "zod";
+import {generateArraySchema} from "@/common/_feat";
+import {GenreSchema} from "@/domains/genres";
 
 /** Zod schema for validating movie summary attributes. */
 export const MovieSummarySchema = MovieBaseSchema.pick({
@@ -11,10 +13,11 @@ export const MovieSummarySchema = MovieBaseSchema.pick({
     slug: true,
     title: true,
     tagline: true,
-    genres: true,
     runtime: true,
     posterImage: true,
     releaseDate: true,
+}).extend({
+    genres: generateArraySchema(GenreSchema)
 });
 
 /** Inferred type for a validated movie summary document. */

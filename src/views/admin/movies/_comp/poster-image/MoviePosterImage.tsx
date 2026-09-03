@@ -31,7 +31,7 @@ export function MoviePosterImage({url, alt, className}: ImageProps): ReactElemen
             loading="lazy"
             onError={() => setHasError(true)}
             className={cn(
-                "object-center object-cover rounded-md",
+                "aspect-[2/3] object-center object-cover",
                 className
             )}
         />

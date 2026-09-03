@@ -1,46 +1,46 @@
 @layer components {
     .page-title {
-        @apply primary-text text-xl font-bold uppercase tracking-tight
+        @apply primary-text text-xl font-semibold leading-snug
     }
 
     .page-subtitle {
-        @apply secondary-text text-lg font-semibold italic
+        @apply secondary-text text-lg font-normal italic leading-snug
     }
 
     .page-description {
-        @apply secondary-text font-bold text-sm
+        @apply secondary-text text-sm font-normal leading-relaxed
     }
 
     .section-title {
-        @apply primary-text text-lg uppercase
+        @apply primary-text text-lg font-medium leading-snug
     }
 
     .error-title {
-        @apply primary-text text-lg uppercase
+        @apply text-danger text-lg font-medium leading-snug
     }
 
     .section-subtitle {
-        @apply secondary-text text-base font-semibold italic
+        @apply secondary-text text-base font-normal leading-snug
     }
 
     .section-description {
-        @apply primary-text text-sm
+        @apply primary-text text-sm font-normal leading-relaxed
     }
 
     .subsection-title {
-        @apply primary-text text-base font-extrabold uppercase
+        @apply primary-text text-base font-medium leading-snug
     }
 
     .subsection-subtitle {
-        @apply secondary-text text-sm font-semibold italic
+        @apply secondary-text text-sm font-normal leading-relaxed
     }
 
     .subsection-description {
-        @apply secondary-text text-sm
+        @apply secondary-text text-sm font-normal leading-relaxed
     }
 
     .section-header-visual {
-        @apply primary-text text-lg font-bold border-l-4 border-primary px-2
+        @apply primary-text text-lg font-semibold border-l-4 border-primary px-2
     }
 
     .section-header-link {

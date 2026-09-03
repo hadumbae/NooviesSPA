@@ -15,7 +15,7 @@ export function HasNoMoviePosterPlaceholder(
 ): ReactElement {
     return (
         <div className={cn(
-            "aspect-[2/3] flex justify-center items-center rounded-md bg-gray-600",
+            "aspect-[2/3] flex justify-center items-center bg-gray-600",
             className
         )}>
             <ImageOff className="text-gray-400"/>
