@@ -5,16 +5,18 @@
 import {DateOnlyString} from "@/common/_schemas/dates/DateOnlyStringSchema.ts";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
-import {
-    getFetchTheatreInfoViewData,
-    TheatreClientViewQueryKeys,
-    TheatreInfoViewData,
-    TheatreInfoViewDataSchema
-} from "@/domains/theatres/_feat/client-view-data";
+import {TheatreClientViewQueryKeys,} from "@/domains/theatres/_feat/client-view-data/queryKeys.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";
+import {
+    TheatreInfoViewData,
+    TheatreInfoViewDataSchema
+} from "@/domains/theatres/_feat/client-view-data/theatre-info/TheatreInfoViewDataSchema.ts";
+import {
+    getFetchTheatreInfoViewData
+} from "@/domains/theatres/_feat/client-view-data/theatre-info/getFetchTheatreInfoViewData.ts";
 
 /** Configuration for fetching theatre information view data. */
 type FetchConfig = {

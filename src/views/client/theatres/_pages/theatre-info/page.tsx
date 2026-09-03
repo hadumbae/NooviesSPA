@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {
-    useFetchByIdentifierRouteParams
+    useFetchByIdentifierRouteParams, useSetPageTitle
 } from "@/common/_feat";
 import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import {PageLoader} from "@/views/common/_comp/page";
@@ -17,6 +17,8 @@ import {TheatreInfoPageContent} from "@/views/client/theatres/_pages/theatre-inf
  * Theatre information page.
  */
 export function TheatreInfoPage(): ReactElement {
+    const {setTitle} = useSetPageTitle({presetTitle: "Theatre Info"});
+
     const {slug: theatreSlug} = useFetchByIdentifierRouteParams({
         schema: SlugRouteParamSchema,
         errorTo: "/browse/theatres",
@@ -44,6 +46,7 @@ export function TheatreInfoPage(): ReactElement {
                     theatre={theatre}
                     screens={screens}
                     localDate={date}
+                    setPageTitle={setTitle}
                 />
             )}
         </QueryDataLoader>

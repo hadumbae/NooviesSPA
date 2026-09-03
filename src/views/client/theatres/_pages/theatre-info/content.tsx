@@ -16,6 +16,7 @@ import {getTodayDateOnly} from "@/common/_feat";
 
 /** Props for the TheatreInfoPageContent component. */
 type ContentProps = {
+    setPageTitle: (title: string) => void;
     theatre: TheatreDetails;
     screens: TheatreScreenSchedule[];
     localDate: string;
@@ -25,8 +26,10 @@ type ContentProps = {
  * Presentational component for rendering theatre details and screen listings.
  */
 export function TheatreInfoPageContent(
-    {theatre, screens, localDate}: ContentProps
+    {theatre, screens, localDate, setPageTitle}: ContentProps
 ): ReactElement {
+    setPageTitle(`Theatre | ${theatre.name}`);
+
     const {name, location: {timezone}, formatted: {address}} = formatTheatreDetails(theatre);
     const formattedDate = DateTime.fromISO(localDate).toFormat("dd LLLL, yyyy");
 
