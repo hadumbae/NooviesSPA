@@ -3,12 +3,10 @@
  */
 
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
-import {
-    ISO6391LanguageLabels as ISO6391LanguageConstant
-} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MovieWithGenres} from "@/domains/movies/_schema/movie/MovieWithGenresSchema.ts";
 import {MovieWithRating} from "@/domains/movies/_schema/movie/MovieWithRatingSchema.ts";
+import {ISO6391LanguageLabels} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 
 /** Union of Movie types that include populated genre objects. */
 type MovieWithData = MovieDetails | MovieWithGenres | MovieWithRating;
@@ -39,11 +37,11 @@ export function formatMovieData<TMovie extends MovieWithData>(
     const yearAndDuration = [releaseYear, duration].join(" | ");
 
     const languageList = languages.length > 0
-        ? languages.map(c => ISO6391LanguageConstant[c]).join(", ")
+        ? languages.map(c => ISO6391LanguageLabels[c]).join(", ")
         : "None";
 
     const subtitleList = subtitles.length > 0
-        ? subtitles.map(c => ISO6391LanguageConstant[c]).join(", ")
+        ? subtitles.map(c => ISO6391LanguageLabels[c]).join(", ")
         : "None";
 
     return {

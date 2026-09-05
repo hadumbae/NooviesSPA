@@ -2,17 +2,24 @@
  * @fileoverview Presentational component for rendering theatre details and screen listings.
  */
 
-import {ReactElement} from "react";
-import {PageFlexWrapper, PageHeader, SectionTitle} from "@/views/common/_comp";
-import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
+import {ReactElement, useEffect} from "react";
+import {PageFlexWrapper, PageHeader} from "@/views/common/_comp";
 
 import {TheatreScreenSchedule} from "@/domains/theatre-screens";
-import {formatTheatreDetails, TheatreDetails, useTheatreInfoQueryOptionsContext} from "@/domains/theatres";
-import {TheatreScreenShowingSelectCard} from "@/views/client/theatre-screens/_feat";
+import {
+    formatTheatreDetails,
+    TheatreDetails,
+    TheatreMovieRuntimes,
+    useTheatreInfoQueryOptionsContext
+} from "@/domains/theatres";
 import {DateTime} from "luxon";
 import {QueryOptionsCalendarInput} from "@/views/common/_feat";
 import {DateOnlyString} from "@/common/_schemas";
 import {getTodayDateOnly} from "@/common/_feat";
+import {TheatreInfoScreensSection} from "@/views/client/theatres/_pages/theatre-info/sections";
+import {
+    TheatreInfoUpcomingSection
+} from "@/views/client/theatres/_pages/theatre-info/sections/TheatreInfoUpcomingSection.tsx";
 
 /** Props for the TheatreInfoPageContent component. */
 type ContentProps = {
@@ -20,21 +27,23 @@ type ContentProps = {
     theatre: TheatreDetails;
     screens: TheatreScreenSchedule[];
     localDate: string;
+    upcoming: TheatreMovieRuntimes[];
 };
 
 /**
  * Presentational component for rendering theatre details and screen listings.
  */
 export function TheatreInfoPageContent(
-    {theatre, screens, localDate, setPageTitle}: ContentProps
+    {theatre, screens, localDate, upcoming, setPageTitle}: ContentProps
 ): ReactElement {
-    setPageTitle(`Theatre | ${theatre.name}`);
-
     const {name, location: {timezone}, formatted: {address}} = formatTheatreDetails(theatre);
-    const formattedDate = DateTime.fromISO(localDate).toFormat("dd LLLL, yyyy");
 
     const {values: {date}, setValues} = useTheatreInfoQueryOptionsContext();
     const setQueryValue = (value?: DateOnlyString) => setValues({date: value ?? getTodayDateOnly()});
+
+    useEffect(() => {
+        setPageTitle(`Theatre | ${theatre.name}`);
+    }, [setPageTitle, theatre.name]);
 
     return (
         <PageFlexWrapper>
@@ -49,23 +58,15 @@ export function TheatreInfoPageContent(
                 }
             />
 
-            {
-                screens.length > 0 ? (
-                        <section className="flex-1 space-y-2">
-                            <SectionTitle>Screens • {formattedDate}</SectionTitle>
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-                                {screens.map((screen) => (
-                                    <TheatreScreenShowingSelectCard
-                                        key={screen._id}
-                                        screen={screen}
-                                        timezone={timezone}
-                                    />
-                                ))}
-                            </div>
-                        </section>
-                    )
-                    : <EmptyArrayContainer text="There Are No Screens" className="flex-1"/>
-            }
+            <TheatreInfoScreensSection
+                screens={screens}
+                localDate={localDate}
+                timezone={timezone}
+            />
+
+            <TheatreInfoUpcomingSection
+                upcoming={upcoming}
+            />
         </PageFlexWrapper>
     );
 }

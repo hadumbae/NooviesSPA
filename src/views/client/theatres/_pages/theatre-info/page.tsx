@@ -41,12 +41,13 @@ export function TheatreInfoPage(): ReactElement {
 
     return (
         <QueryDataLoader query={query}>
-            {({theatre, screens}) => (
+            {({theatre, screens, upcoming}) => (
                 <TheatreInfoPageContent
                     theatre={theatre}
                     screens={screens}
                     localDate={date}
                     setPageTitle={setTitle}
+                    upcoming={upcoming}
                 />
             )}
         </QueryDataLoader>

@@ -9,8 +9,10 @@ import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {HookFormInput, HookFormSortToggle} from "@/views/common/_feat";
 import {Button} from "@/views/common/_comp/ui";
 import {X} from "lucide-react";
-import {BrowsePersonsQueryOptionFormValues} from "@/domains/persons";
 import {LabelledFormInput} from "@/views/admin/movies";
+import {
+    BrowsePersonsQueryOptionFormValues
+} from "@/domains/persons/_feat/client-view-data/browse-persons/form/BrowsePersonsQueryOptionFormValues.ts";
 
 /**
  * Form section for filtering and sorting persons.

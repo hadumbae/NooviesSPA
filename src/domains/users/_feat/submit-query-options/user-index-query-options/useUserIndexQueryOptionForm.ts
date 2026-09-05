@@ -3,7 +3,7 @@
  */
 
 import {QueryOptionFormValues} from "@/common/_feat";
-import {UserQueryOptions, UserQueryOptionsSchema} from "@/domains/users";
+import {UserQueryOptions, UserQueryOptionsSchema} from "@/domains/users/_schema/query-options";
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
