@@ -1,8 +1,12 @@
-import {ReactElement} from "react";
-import {ImageUp, Loader} from "lucide-react";
-import {Button} from "@/views/common/_comp/ui";
-import {useBaseFormContext} from "@/common/_feat/generic-form-context";
+/**
+ * @fileoverview Action buttons for submitting the movie poster image form.
+ */
 
+import {ReactElement} from "react";
+import {ImageUp} from "lucide-react";
+import {FormPendingSubmitButton} from "@/views/common/_feat";
+
+/** Props for the MoviePosterImageSubmitFormActions component. */
 type ActionProps = {
     classNames?: {
         container?: string;
@@ -10,21 +14,17 @@ type ActionProps = {
     };
 };
 
+/**
+ * Action controls for submitting a movie poster image form.
+ */
 export function MoviePosterImageSubmitFormActions(
     {classNames}: ActionProps
 ): ReactElement {
-    const {isPending} = useBaseFormContext();
-
     return (
         <div className={classNames?.container}>
-            <Button
-                variant="primary"
-                disabled={isPending}
-                className={classNames?.button}
-                aria-busy={isPending}
-            >
-                {isPending ? <Loader className="animate-spin"/> : <> <ImageUp/> Upload </>}
-            </Button>
+            <FormPendingSubmitButton className={classNames?.button}>
+                <ImageUp/> Upload
+            </FormPendingSubmitButton>
         </div>
     );
 }

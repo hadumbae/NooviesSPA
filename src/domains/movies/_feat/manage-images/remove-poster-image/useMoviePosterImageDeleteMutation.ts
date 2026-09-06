@@ -8,8 +8,8 @@ import {Movie, MovieSchema} from "@/domains/movies/_schema/movie";
 import {validateData} from "@/common/_feat/validate-data/validateData";
 import {Logger} from "@/common/_feat/logger/Logger.ts";
 import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks";
-import {deleteRemovePosterImage} from "@/domains/movies/_feat/manage-images/repository";
-import {ManageMovieImageMutationKeys} from "@/domains/movies/_feat/manage-images/mutations/mutationKeys.ts";
+import {ManageMovieImageMutationKeys} from "@/domains/movies/_feat/manage-images/mutationKeys.ts";
+import {deleteRemovePosterImage} from "@/domains/movies/_feat/manage-images/remove-poster-image/deleteRemovePosterImage";
 
 /** Input parameters for the movie poster deletion mutation. */
 type OnDeleteValues = {

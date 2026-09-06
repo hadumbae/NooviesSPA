@@ -57,7 +57,7 @@ export function MovieDetailsPageActions(
 
     return (
         <div className={className}>
-            <MoviePosterImageSubmitForm movieID={movieID} successMessage="Updated.">
+            <MoviePosterImageSubmitForm mutConfig={{movieID}} successMessage="Updated.">
                 <MoviePosterImageSubmitFormPanel
                     isOpen={isUpdatingPoster}
                     setIsOpen={toggleIsUpdatingPoster}

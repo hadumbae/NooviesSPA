@@ -6,6 +6,12 @@ import {ReactElement, ReactNode} from 'react';
 import {UIOpenStateProps} from "@/common/_types";
 import {cn} from "@/common/_feat";
 import {
+    MoviePosterImageSubmitFormView
+} from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormView.tsx";
+import {
+    MoviePosterImageSubmitFormActions
+} from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormActions.tsx";
+import {
     ScrollArea,
     Sheet,
     SheetContent,
@@ -14,12 +20,6 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/views/common/_comp/ui";
-import {
-    MoviePosterImageSubmitFormView
-} from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormView.tsx";
-import {
-    MoviePosterImageSubmitFormActions
-} from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormActions.tsx";
 
 /** Props for the MoviePosterImageSubmitFormPanel component. */
 type FormPanelProps = UIOpenStateProps & {

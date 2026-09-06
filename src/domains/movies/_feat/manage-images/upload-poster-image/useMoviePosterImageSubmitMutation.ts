@@ -7,19 +7,18 @@ import {ObjectId} from "@/common/_schemas";
 import {Movie, MovieSchema} from "@/domains/movies/_schema";
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks";
-import {Logger} from "@/common/_feat/logger/Logger.ts";
-import {ManageMovieImageMutationKeys} from "@/domains/movies/_feat/manage-images/mutations/mutationKeys.ts";
-import {patchUploadPosterImage} from "@/domains/movies/_feat/manage-images/repository";
-import {MoviePosterImageFormData} from "@/domains/movies/_feat/manage-images/form";
+import {ManageMovieImageMutationKeys} from "@/domains/movies/_feat/manage-images/mutationKeys.ts";
+import {MoviePosterImageFormData} from "@/domains/movies/_feat/manage-images/upload-poster-image/MoviePosterImageFormSchema.ts";
+import {patchUploadPosterImage} from "@/domains/movies/_feat/manage-images/upload-poster-image/patchUploadPosterImage";
 
 /** Configuration parameters for the movie poster image submission mutation. */
-type ImageSubmitParams = {
+export type UseSubmitMoviePosterImageConfig = {
     movieID: ObjectId;
 };
 
 /** Hook that provides a mutation for uploading a movie poster image using multipart form data. */
 export function useMoviePosterImageSubmitMutation(
-    {movieID}: ImageSubmitParams
+    {movieID}: UseSubmitMoviePosterImageConfig
 ): UseMutationResult<Movie, unknown, MoviePosterImageFormData> {
     const queryClient = useQueryClient();
 
@@ -39,8 +38,7 @@ export function useMoviePosterImageSubmitMutation(
         return parsedData;
     };
 
-    const onSuccess = (movie: Movie) => {
-        Logger.log({type: "INFO", msg: "Movie Poster Updated.", context: {movie: movie._id}});
+    const onSuccess = () => {
         queryClient.invalidateQueries({queryKey: MovieCRUDQueryKeys.all, exact: false});
     };
 
