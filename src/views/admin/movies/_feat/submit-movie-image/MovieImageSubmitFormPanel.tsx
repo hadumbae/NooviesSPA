@@ -6,11 +6,11 @@ import {ReactElement, ReactNode} from 'react';
 import {UIOpenStateProps} from "@/common/_types";
 import {cn} from "@/common/_feat";
 import {
-    MoviePosterImageSubmitFormView
-} from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormView.tsx";
+    MovieImageSubmitFormView
+} from "@/views/admin/movies/_feat/submit-movie-image/MovieImageSubmitFormView.tsx";
 import {
-    MoviePosterImageSubmitFormActions
-} from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormActions.tsx";
+    MovieImageSubmitFormActions
+} from "@/views/admin/movies/_feat/submit-movie-image/MovieImageSubmitFormActions.tsx";
 import {
     ScrollArea,
     Sheet,
@@ -25,18 +25,16 @@ import {
 type FormPanelProps = UIOpenStateProps & {
     children?: ReactNode;
     className?: string;
+    title: string;
+    description: string;
 };
 
 /**
  * Slide-over panel that provides a form for uploading a movie poster image.
  */
-export function MoviePosterImageSubmitFormPanel(
-    {children, isOpen, setIsOpen, className}: FormPanelProps
+export function MovieImageSubmitFormPanel(
+    {children, isOpen, setIsOpen, title, description, className}: FormPanelProps
 ): ReactElement {
-
-    const title = "Upload Poster Image";
-    const description = "Upload poster image here. Select image and upload.";
-
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>{children}</SheetTrigger>
@@ -48,8 +46,8 @@ export function MoviePosterImageSubmitFormPanel(
 
                 <ScrollArea className="flex flex-grow">
                     <div className={cn("space-y-3", className)}>
-                        <MoviePosterImageSubmitFormView/>
-                        <MoviePosterImageSubmitFormActions classNames={{button: "w-full"}}/>
+                        <MovieImageSubmitFormView/>
+                        <MovieImageSubmitFormActions classNames={{button: "w-full"}}/>
                     </div>
                 </ScrollArea>
             </SheetContent>

@@ -11,5 +11,7 @@ export const ManageMovieImageMutationKeys = buildQueryKey(
     {
         "submitPoster": ["poster-image", "submit"],
         "removePoster": ["poster-image", "remove"],
+        "submitBanner": ["banner-image", "submit"],
+        "removeBanner": ["banner-image", "remove"],
     },
 );

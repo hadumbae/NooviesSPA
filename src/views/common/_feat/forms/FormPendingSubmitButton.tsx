@@ -7,7 +7,7 @@ import {Loader} from "lucide-react";
 import {Button, ButtonProps} from "@/views/common/_comp/ui";
 import {useBaseFormContext} from "@/common/_feat";
 
-type FormButtonProps = Omit<ButtonProps, "type">;
+type FormButtonProps = Omit<ButtonProps, "type" | "form">;
 
 /**
  * Submit button that automatically disables itself and shows a spinner during pending form states.
@@ -16,7 +16,7 @@ type FormButtonProps = Omit<ButtonProps, "type">;
 export function FormPendingSubmitButton(
     {children, disabled, variant = "primary", ...props}: FormButtonProps
 ): ReactElement {
-    const {isPending} = useBaseFormContext();
+    const {isPending, formID} = useBaseFormContext();
 
     return (
         <Button
@@ -24,6 +24,7 @@ export function FormPendingSubmitButton(
             variant="primary"
             type="submit"
             disabled={disabled || isPending}
+            form={formID}
         >
             {isPending ? <Loader className="animate-spin"/> : children}
         </Button>

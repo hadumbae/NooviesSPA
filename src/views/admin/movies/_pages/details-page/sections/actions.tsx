@@ -4,8 +4,8 @@
 
 import {ReactElement} from "react";
 import {
-    MoviePosterImageSubmitFormPanel
-} from "@/views/admin/movies/_feat/submit-poster-image/MoviePosterImageSubmitFormPanel.tsx";
+    MovieImageSubmitFormPanel
+} from "@/views/admin/movies/_feat/submit-movie-image/MovieImageSubmitFormPanel.tsx";
 import {MovieDeleteWarningDialog} from "@/views/admin/movies/_feat/delete-movie";
 import {ObjectId} from "@/common/_schemas";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
@@ -58,9 +58,11 @@ export function MovieDetailsPageActions(
     return (
         <div className={className}>
             <MoviePosterImageSubmitForm mutConfig={{movieID}} successMessage="Updated.">
-                <MoviePosterImageSubmitFormPanel
+                <MovieImageSubmitFormPanel
                     isOpen={isUpdatingPoster}
                     setIsOpen={toggleIsUpdatingPoster}
+                    title="Upload Poster Image"
+                    description="Upload poster image here. Select image and upload."
                 />
             </MoviePosterImageSubmitForm>
 

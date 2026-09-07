@@ -1,6 +1,5 @@
 /**
- * @file Higher-order function for building validated TanStack Query fetch functions.
- * @filename buildQueryFn.ts
+ * @fileoverview Higher-order function for building validated TanStack Query fetch functions.
  */
 
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
@@ -8,27 +7,18 @@ import {logZodErrors} from "@/common/_feat/validate-data/logZodErrors.ts";
 import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {ZodType, ZodTypeDef} from "zod";
 
-/**
- * Configuration for the Query Function builder.
- * @template TData - The expected shape of the validated data.
- */
 type HandlerConfig<TData> = {
-    /** The asynchronous repository action that performs the network request. */
     action: () => Promise<FetchRequestReturns<TData>>;
-    /** The Zod schema used to enforce the data contract at runtime. */
     schema: ZodType<TData, ZodTypeDef, unknown>;
 };
 
-/**
- * Creates a reusable, type-safe query function with integrated Zod validation.
- * ---
- */
+/** Creates a reusable, type-safe query function with integrated Zod validation. */
 export function buildQueryFn<TData>(
     {action, schema}: HandlerConfig<TData>
 ): () => Promise<TData> {
     return async (): Promise<TData> => {
         const {result} = await action();
-        console.log("Result: ", result);
+        import.meta.env.VITE_LOG_FETCH_RESULT_TO_CONSOLE && console.debug("Fetch Result:", result);
 
         const {data, success, error} = validateData({
             data: result,

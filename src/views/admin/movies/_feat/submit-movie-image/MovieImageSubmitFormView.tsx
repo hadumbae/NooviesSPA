@@ -1,5 +1,5 @@
 /**
- * @fileoverview Form view for uploading and submitting movie poster images.
+ * @fileoverview Form view component for selecting and uploading movie image files.
  */
 
 import {ReactElement} from 'react';
@@ -8,15 +8,16 @@ import {HookFormFileInput} from "@/views/common/_feat";
 import {AcceptedImageTypeConstant} from "@/common/_const/images/AcceptedImageTypeConstant.ts";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 
-/** Props for the MoviePosterImageSubmitFormView component. */
+/** Props for the MovieImageSubmitFormView component. */
 type ViewProps = {
     className?: string;
 };
 
 /**
- * Form view component for movie poster image uploads.
+ * Form input section for choosing a movie image file, displaying supported image formats.
+ * Requires wrapping in a BaseFormContext provider.
  */
-export function MoviePosterImageSubmitFormView(
+export function MovieImageSubmitFormView(
     {className}: ViewProps
 ): ReactElement {
     const {isPending} = useBaseFormContext();
@@ -30,8 +31,8 @@ export function MoviePosterImageSubmitFormView(
     return (
         <div className={cn("space-y-4", className)}>
             <HookFormFileInput
-                name="posterImage"
-                label="Poster Image"
+                name="image"
+                label="Image"
                 disabled={isPending}
                 description={fileInputDescription}
             />

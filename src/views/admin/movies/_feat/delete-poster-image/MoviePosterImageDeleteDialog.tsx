@@ -7,7 +7,7 @@ import {
     EntityDeleteWarningDialog
 } from "@/views/common/_feat/dialog/EntityDeleteWarningDialog.tsx";
 import {ObjectId} from "@/common/_schemas";
-import {useMoviePosterImageDeleteMutation} from "@/domains/movies/_feat/manage-images";
+import {useDeleteMoviePosterImage} from "@/domains/movies/_feat/manage-images";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {UIOpenStateProps} from "@/common/_types";
 import {Movie} from "@/domains/movies/_schema/movie";
@@ -25,7 +25,7 @@ type DialogProps = MutationResponseConfig<Movie, { _id: ObjectId }> & UIOpenStat
 export function MoviePosterImageDeleteDialog(
     {movieID, isOpen, setIsOpen, ...submitConfig}: DialogProps
 ): ReactElement {
-    const {mutateAsync} = useMoviePosterImageDeleteMutation();
+    const {mutateAsync} = useDeleteMoviePosterImage();
     const deletePosterImage = async () => {
         try {
             handleMutationCallback({

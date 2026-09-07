@@ -4,26 +4,21 @@
 
 import {createForm} from "@/common/_feat";
 import {Movie} from "@/domains/movies/_schema/movie";
-import {
-    MoviePosterImageFormData,
-    MoviePosterImageFormSchema,
-    MoviePosterImageFormValues,
-    useMoviePosterImageSubmitMutation,
-    UseSubmitMoviePosterImageConfig
-} from "@/domains/movies/_feat/manage-images/upload-poster-image";
+import {MovieImageFormData, MovieImageFormSchema, MovieImageFormValues} from "@/domains/movies/_feat/manage-images";
+import {SubmitMovieImageConfig, useSubmitMoviePosterImage} from "@/domains/movies/_feat/manage-images/upload-image";
 
 const {SubmitForm, useSubmitForm} = createForm<
-    MoviePosterImageFormValues,
-    MoviePosterImageFormData,
+    MovieImageFormValues,
+    MovieImageFormData,
     unknown,
     Movie,
-    UseSubmitMoviePosterImageConfig
+    SubmitMovieImageConfig
 >({
-    schema: MoviePosterImageFormSchema,
+    schema: MovieImageFormSchema,
     formName: "movie-poster-image-submit-form",
-    mutation: useMoviePosterImageSubmitMutation,
+    mutation: useSubmitMoviePosterImage,
     defaultValues: {
-        posterImage: "",
+        image: "",
     }
 });
 
