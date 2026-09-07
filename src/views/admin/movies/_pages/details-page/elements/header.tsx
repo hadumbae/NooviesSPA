@@ -20,7 +20,7 @@ type HeaderProps = {
  * Primary administrative header for a movie profile displaying the poster, titles, and metadata.
  */
 export function MovieDetailsHeader({movie}: HeaderProps) {
-    const {title, tagline, posterImage, slug} = movie;
+    const {title, tagline, posterImage, bannerImage, slug} = movie;
     const {formatted: {genreList, yearAndDuration}} = formatMovieData(movie);
 
     return (
@@ -28,7 +28,7 @@ export function MovieDetailsHeader({movie}: HeaderProps) {
             <div className="flex justify-between items-center">
                 <MovieDetailsBreadcrumb/>
 
-                <MovieDetailsDropdown slug={slug} hasPoster={!!posterImage}>
+                <MovieDetailsDropdown slug={slug} hasPoster={!!posterImage} hasBanner={!!bannerImage}>
                     <IconButton icon={Ellipsis}/>
                 </MovieDetailsDropdown>
             </div>

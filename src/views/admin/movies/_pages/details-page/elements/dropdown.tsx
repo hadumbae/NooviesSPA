@@ -14,20 +14,26 @@ import {
 } from "@/views/common/_comp/ui";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {RoleTypeDepartment} from "@/domains/roletypes";
-import {useIsDeletingMoviePosterUIActions, useIsUpdatingMoviePosterUIActions} from "@/domains/movies";
+import {
+    useIsDeletingMovieBannerUIActions,
+    useIsDeletingMoviePosterUIActions,
+    useIsUpdatingMovieBannerUIActions,
+    useIsUpdatingMoviePosterUIActions
+} from "@/domains/movies";
 
 /** Props for the MovieDetailsDropdown component. */
 type OptionProps = {
     children: ReactNode;
-    hasPoster?: boolean;
     slug: string;
+    hasPoster?: boolean;
+    hasBanner?: boolean;
 };
 
 /**
  * Dropdown menu providing admin actions for a movie.
  */
 export function MovieDetailsDropdown(
-    {children, slug, hasPoster = false}: OptionProps
+    {children, slug, hasPoster = false, hasBanner = false}: OptionProps
 ): ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const navigate = useLoggedNavigate();
@@ -35,6 +41,8 @@ export function MovieDetailsDropdown(
     const {open: openIsDeleting} = useIsDeletingMoviePosterUIActions();
     const {open: openIsUpdatingPoster} = useIsUpdatingMoviePosterUIActions();
     const {open: openIsDeletingPoster} = useIsDeletingMoviePosterUIActions();
+    const {open: openIsUpdatingBanner} = useIsUpdatingMovieBannerUIActions();
+    const {open: openIsDeletingBanner} = useIsDeletingMovieBannerUIActions();
 
     const closeOnAction = (action: () => void) => {
         action();
@@ -73,11 +81,21 @@ export function MovieDetailsDropdown(
                 <DropdownMenuSeparator/>
 
                 <DropdownMenuGroup>
-                    <DropdownMenuLabel className="select-none">Poster</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => closeOnAction(openIsUpdatingPoster)}>Update</DropdownMenuItem>
+                    <DropdownMenuLabel className="select-none">Images</DropdownMenuLabel>
+                    <DropdownMenuItem onClick={() => closeOnAction(openIsUpdatingPoster)}>
+                        Update Poster
+                    </DropdownMenuItem>
                     {hasPoster && (
                         <DropdownMenuItem onClick={() => closeOnAction(openIsDeletingPoster)}>
-                            Remove
+                            Remove Poster
+                        </DropdownMenuItem>
+                    )}
+                    <DropdownMenuItem onClick={() => closeOnAction(openIsUpdatingBanner)}>
+                        Update Banner
+                    </DropdownMenuItem>
+                    {hasBanner && (
+                        <DropdownMenuItem onClick={() => closeOnAction(openIsDeletingBanner)}>
+                            Remove Banner
                         </DropdownMenuItem>
                     )}
                 </DropdownMenuGroup>

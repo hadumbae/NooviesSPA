@@ -39,6 +39,7 @@ export const MovieBaseSchema = z.object({
     synopsis: MovieSynopsisSchema,
     runtime: PositiveNumberSchema,
     posterImage: CloudinaryImageSchema.optional().nullable(),
+    bannerImage: CloudinaryImageSchema.optional().nullable(),
     trailerURL: MovieTrailerURLSchema,
 
     languages: z.array(ISO6391LanguageCodeSchema),

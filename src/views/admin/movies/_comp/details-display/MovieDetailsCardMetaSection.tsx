@@ -9,6 +9,7 @@ import {ISO3166Alpha2CountryConstant, ISO6391LanguageLabels} from "@/common/_con
 import {MovieDetails} from "@/domains/movies";
 import {LabelContentList, NoneSpan} from "@/views/common/_comp";
 import {BadgeList} from "@/views/common/_comp/badges";
+import {MovieBannerImageCollapsible} from "@/views/admin/movies/_comp/banner-image";
 
 /** Props for the MovieDetailsCardMetaSection component. */
 type SectionProps = {
@@ -17,7 +18,7 @@ type SectionProps = {
 
 /** Renders a section containing movie details such as title, genres, runtime, and origin. */
 export function MovieDetailsCardMetaSection(
-    {movie: {title, originalTitle, originalLanguage, country, runtime, genres}}: SectionProps
+    {movie: {title, originalTitle, originalLanguage, country, runtime, genres, bannerImage}}: SectionProps
 ): ReactElement {
     const movieDuration = formatMovieRuntime(runtime);
     const countryName = ISO3166Alpha2CountryConstant[country] ?? country?.toUpperCase() ?? "Unknown";
@@ -40,8 +41,13 @@ export function MovieDetailsCardMetaSection(
                 {key: "runtime", label: "Runtime", content: movieDuration},
                 {key: "country", label: "Country", content: countryName},
                 {key: "origLan", label: "Original Language", content: originalLanguageName},
-            ]}
-            />
+            ]}/>
+
+            {
+                bannerImage && (
+                    <MovieBannerImageCollapsible url={bannerImage?.secure_url}/>
+                )
+            }
         </section>
     );
 }

@@ -7,11 +7,15 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MovieDetailsHeader} from "@/views/admin/movies/_pages/details-page/elements/header.tsx";
 import {MovieDetailsCard} from "@/views/admin/movies/_comp/details-display";
-import {MovieDetailsPageActions} from "@/views/admin/movies/_pages/details-page/sections/actions.tsx";
+import {MovieDetailsPageItemActions} from "@/views/admin/movies/_pages/details-page/actions/itemActions.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {MovieDetailsPageCreditSection} from "@/views/admin/movies/_pages/details-page/sections/creditSection.tsx";
 import {MovieDetailsPageShowingSection} from "@/views/admin/movies/_pages/details-page/sections/showingSection.tsx";
 import {useSetAdminPageTitle} from "@/common/_feat";
+import {
+    MovieDetailsPageBannerActions,
+    MovieDetailsPagePosterActions
+} from "@/views/admin/movies/_pages/details-page/actions";
 
 export type MovieDetailsPageContentProps = {
     movie: MovieDetails;
@@ -42,10 +46,9 @@ export function MovieDetailsPageContent(
                 </div>
             </section>
 
-            <MovieDetailsPageActions
-                movieID={_id}
-                className="hidden"
-            />
+            <MovieDetailsPageItemActions movieID={_id} className="hidden"/>
+            <MovieDetailsPageBannerActions movieID={_id} className="hidden"/>
+            <MovieDetailsPagePosterActions movieID={_id} className="hidden"/>
         </PageFlexWrapper>
     );
 }

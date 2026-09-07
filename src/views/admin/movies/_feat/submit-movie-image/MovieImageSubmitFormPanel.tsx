@@ -4,7 +4,7 @@
 
 import {ReactElement, ReactNode} from 'react';
 import {UIOpenStateProps} from "@/common/_types";
-import {cn} from "@/common/_feat";
+import {cn, useBaseFormContext, useLockForFormUI} from "@/common/_feat";
 import {
     MovieImageSubmitFormView
 } from "@/views/admin/movies/_feat/submit-movie-image/MovieImageSubmitFormView.tsx";
@@ -35,6 +35,13 @@ type FormPanelProps = UIOpenStateProps & {
 export function MovieImageSubmitFormPanel(
     {children, isOpen, setIsOpen, title, description, className}: FormPanelProps
 ): ReactElement {
+    const {isPending, isError} = useBaseFormContext();
+    const {isUILocked} = useLockForFormUI({
+        isContentOpen: isOpen,
+        isMutationPending: isPending,
+        isMutationError: isError,
+    })
+
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>{children}</SheetTrigger>
@@ -47,7 +54,7 @@ export function MovieImageSubmitFormPanel(
                 <ScrollArea className="flex flex-grow">
                     <div className={cn("space-y-3", className)}>
                         <MovieImageSubmitFormView/>
-                        <MovieImageSubmitFormActions classNames={{button: "w-full"}}/>
+                        <MovieImageSubmitFormActions disabled={isUILocked} classNames={{button: "w-full"}}/>
                     </div>
                 </ScrollArea>
             </SheetContent>

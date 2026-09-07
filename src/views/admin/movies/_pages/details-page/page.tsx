@@ -9,7 +9,12 @@ import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie/M
 import {MovieDetailsPageContent} from "@/views/admin/movies/_pages/details-page/content.tsx";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {useFetchMovieBySlug} from "@/domains/movies/_feat/crud-hooks";
-import {IsDeletingMoviePosterUIContextProvider, IsUpdatingMoviePosterUIContextProvider} from "@/domains/movies/_ctx/ui";
+import {
+    IsDeletingMovieBannerUIContextProvider,
+    IsDeletingMoviePosterUIContextProvider,
+    IsUpdatingMovieBannerUIContextProvider,
+    IsUpdatingMoviePosterUIContextProvider
+} from "@/domains/movies/_ctx/ui";
 import {IsDeletingUIContextProvider} from "@/common/_ctx/ui";
 
 /**
@@ -40,7 +45,11 @@ export function MovieDetailsPage() {
                 <IsDeletingUIContextProvider>
                     <IsUpdatingMoviePosterUIContextProvider>
                         <IsDeletingMoviePosterUIContextProvider>
-                            <MovieDetailsPageContent movie={movie}/>
+                            <IsUpdatingMovieBannerUIContextProvider>
+                                <IsDeletingMovieBannerUIContextProvider>
+                                    <MovieDetailsPageContent movie={movie}/>
+                                </IsDeletingMovieBannerUIContextProvider>
+                            </IsUpdatingMovieBannerUIContextProvider>
                         </IsDeletingMoviePosterUIContextProvider>
                     </IsUpdatingMoviePosterUIContextProvider>
                 </IsDeletingUIContextProvider>

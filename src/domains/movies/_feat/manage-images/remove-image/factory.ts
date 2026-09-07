@@ -15,6 +15,9 @@ type FactoryConfig = {
     removeImage: (params: DeleteMovieImageRouteConfig) => Promise<FetchRequestReturns<Movie>>;
 };
 
+/** Function signature for a generated movie image removal mutation hook. */
+export type RemoveMovieImageMutation = () => UseMutationResult<Movie, unknown, DeleteMovieImageConfig>;
+
 /** Parameters required to delete a movie image asset. */
 export type DeleteMovieImageConfig = {
     movieID: ObjectId;
@@ -25,7 +28,7 @@ export type DeleteMovieImageConfig = {
  */
 export function createMovieImageDeleteMutations(
     {key, removeImage}: FactoryConfig
-): () => UseMutationResult<Movie, unknown, DeleteMovieImageConfig> {
+): RemoveMovieImageMutation {
     return (): UseMutationResult<Movie, unknown, DeleteMovieImageConfig> => {
         const queryClient = useQueryClient();
 
