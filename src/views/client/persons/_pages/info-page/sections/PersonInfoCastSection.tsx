@@ -20,12 +20,12 @@ export function PersonInfoCastSection(
 ): ReactElement {
     return (
         <section className="space-y-5">
-            <PageSectionHeader text="Cast"/>
+            <PageSectionHeader as="h3" text="Cast"/>
 
             {
                 credits.map(({topCredits, role}) => (
                     <div key={topCredits[0]._id} className="space-y-2">
-                        <h3 className="primary-text section-title">{role}</h3>
+                        <h4 className="primary-text section-title">{role}</h4>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {topCredits.map(credit => <PersonInfoCastCreditCard key={credit._id} credit={credit}/>)}

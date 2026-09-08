@@ -7,8 +7,8 @@ import {Card, CardContent, CardHeader} from "@/views/common/_comp/ui/card.tsx";
 import {formatShowingDetails} from "@/domains/showings/_feat/formatters/formatShowingDetails.ts";
 import {DollarSign, Star} from "lucide-react";
 import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
-import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {ShowingIsActiveBadge, ShowingStatusBadge, ShowingTypeBadge} from "@/views/admin/showings/_comp/badges";
+import {Image} from "@/views/common/_comp";
 
 /** Props for the ShowingIndexListCard component. */
 type ShowingIndexListCardProps = {
@@ -25,7 +25,7 @@ export function ShowingIndexListCard(
         status,
         ticketPrice,
         config: {isSpecialEvent, isActive, canReserveSeats},
-        movie: {posterImage},
+        movie: {bannerImage},
         theatre: {location: {country}},
     } = showing;
 
@@ -39,8 +39,8 @@ export function ShowingIndexListCard(
     return (
         <Card>
             <CardHeader className='p-0'>
-                <MoviePosterImage
-                    url={posterImage?.secure_url}
+                <Image
+                    src={bannerImage?.secure_url}
                     className="rounded-b-none h-52"
                 />
             </CardHeader>
@@ -65,7 +65,7 @@ export function ShowingIndexListCard(
                     <div className="space-x-2">
                         <ShowingStatusBadge status={status}/>
                         <ShowingIsActiveBadge isActive={isActive}/>
-                        <ShowingTypeBadge canReserveSeats={canReserveSeats} />
+                        <ShowingTypeBadge canReserveSeats={canReserveSeats}/>
                     </div>
 
                     <span className="text-with-icon secondary-text">

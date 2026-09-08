@@ -7,9 +7,9 @@ import {Card, CardContent, CardHeader, Separator} from "@/views/common/_comp/ui"
 import {ISO6391LanguageLabels} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 
 import {ShowingDetails} from "@/domains/showings";
-import {MoviePosterImageDialog} from "@/views/admin/movies/_comp";
 import {ShowingSpecialEventBadge, ShowingTypeBadge} from "@/views/admin/showings";
 import {ShowingInfoMovieMeta, ShowingInfoPremises} from "@/views/client/showings/_comp/showing-info-details";
+import {Image} from "@/views/common/_comp";
 
 /** Props for the ShowingSelectorInfoCard component. */
 type CardProps = {
@@ -31,16 +31,16 @@ export function ShowingSelectorInfoCard(
         config: {canReserveSeats, isSpecialEvent},
     } = showing;
 
-    const {posterImage} = movie;
+    const {bannerImage} = movie;
     const showtime = startTime.toFormat("hh:mm a • dd MMM yy");
     const languageString = `${ISO6391LanguageLabels[language]}, SUB: ${subtitleLanguages.join(", ").toUpperCase()}`;
 
     return (
         <Card className={className}>
             <CardHeader className="p-0">
-                <MoviePosterImageDialog
-                    url={posterImage?.secure_url}
-                    className="h-52 rounded-b-none"
+                <Image
+                    src={bannerImage?.secure_url}
+                    className="h-52 rounded-t-xl rounded-b-none"
                 />
             </CardHeader>
             <CardContent className="p-4 space-y-5">

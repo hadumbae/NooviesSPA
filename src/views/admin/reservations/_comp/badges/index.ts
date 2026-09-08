@@ -1,0 +1,1 @@
+export * from "@/views/admin/reservations/_comp/badges/ReservationTypeBadge.tsx";

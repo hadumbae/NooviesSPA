@@ -12,15 +12,12 @@ type ImageProps = {
     errorText?: string;
     src?: URLString | null;
     alt?: string;
-    classNames?: {
-        image?: string;
-        error?: string;
-    }
+    className?: string;
 };
 
 /** Renders an image with a fallback to a placeholder if the source is missing or fails to load. */
 export function Image(
-    {src, alt, errorText, classNames}: ImageProps
+    {src, alt, errorText, className}: ImageProps
 ): ReactElement {
     const [hasError, setHasError] = useState<boolean>(false);
 
@@ -29,7 +26,7 @@ export function Image(
             <NoImagePlaceholder
                 hasError={hasError}
                 errorText={errorText}
-                className={classNames?.error}
+                className={className}
             />
         );
     }
@@ -41,7 +38,7 @@ export function Image(
             onError={() => setHasError(true)}
             className={cn(
                 "object-center object-cover",
-                classNames?.image
+                className,
             )}
         />
     );

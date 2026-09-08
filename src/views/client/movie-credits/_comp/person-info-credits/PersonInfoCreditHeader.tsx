@@ -5,12 +5,10 @@
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
 import {DateTime} from "luxon";
-import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 
 /** Props for the PersonInfoCreditHeader component. */
 type HeaderProps = {
     movieTitle: string;
-    movieSlug: string;
     releaseDate?: DateTime | null;
     classNames?: {
         container?: string;
@@ -23,20 +21,20 @@ type HeaderProps = {
  * Displays the title and formatted release year of a movie credit.
  */
 export function PersonInfoCreditHeader(
-    {movieSlug, movieTitle, releaseDate, classNames}: HeaderProps
+    {movieTitle, releaseDate, classNames}: HeaderProps
 ): ReactElement {
     const formattedReleaseDate = releaseDate ? releaseDate.toFormat("yyyy") : "Unreleased";
 
     return (
         <div className={classNames?.container}>
-            <LoggedLink to={`/browse/movies/${movieSlug}`} className={cn(
+            <h5 className={cn(
                 "primary-text font-oswald hover:underline hover:underline-offset-4",
                 "max-md:font-semibold max-md:tracking-tight",
                 "md:font-extrabold md:text-xl",
                 classNames?.title
             )}>
                 {movieTitle}
-            </LoggedLink>
+            </h5>
 
             <p className={cn(
                 "secondary-text text-sm font-oswald font-bold",

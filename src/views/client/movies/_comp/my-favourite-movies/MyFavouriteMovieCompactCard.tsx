@@ -29,32 +29,33 @@ export function MyFavouriteMovieCompactCard(
 
     return (
         <Card>
-            <CardContent className="p-4 space-y-5">
-                <div className="flex items-stretch space-x-4">
-                    <MoviePosterImage url={posterImage?.secure_url} className="h-40"/>
+            <CardContent className="p-0 flex items-stretch space-x-4">
+                <MoviePosterImage
+                    url={posterImage?.secure_url}
+                    className="h-40 rounded-l-xl"
+                />
 
-                    <div className="flex-1 flex flex-col justify-between">
-                        <div className="flex items-center space-x-2">
-                            <section className="flex-1">
-                                <LoggedLink
-                                    to={`/browse/movies/${slug}`}
-                                    className="hover:underline underline-offset-4"
-                                >
-                                    <SubsectionTitle>{title}</SubsectionTitle>
-                                </LoggedLink>
+                <div className="flex-1 flex flex-col justify-between p-4">
+                    <div className="flex items-start space-x-2">
+                        <div className="flex-1">
+                            <LoggedLink
+                                to={`/browse/movies/${slug}`}
+                                className="hover:underline underline-offset-4 w-fit"
+                            >
+                                <SubsectionTitle>{title}</SubsectionTitle>
+                            </LoggedLink>
 
-                                <span className="secondary-text">{movieMeta}</span>
-                            </section>
-
-                            <BrowseMovieSummaryDialog movie={movie}>
-                                <Info size={20} className="hover-button cursor-pointer"/>
-                            </BrowseMovieSummaryDialog>
+                            <span className="secondary-text">{movieMeta}</span>
                         </div>
 
-                        <span className="primary-text italic">
-                            "{tagline}"
-                        </span>
+                        <BrowseMovieSummaryDialog movie={movie}>
+                            <Info size={20} className="hover-button cursor-pointer"/>
+                        </BrowseMovieSummaryDialog>
                     </div>
+
+                    <span className="primary-text italic">
+                        "{tagline}"
+                    </span>
                 </div>
             </CardContent>
         </Card>

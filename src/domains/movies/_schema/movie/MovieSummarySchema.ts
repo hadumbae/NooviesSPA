@@ -15,6 +15,7 @@ export const MovieSummarySchema = MovieBaseSchema.pick({
     tagline: true,
     runtime: true,
     posterImage: true,
+    bannerImage: true,
     releaseDate: true,
 }).extend({
     genres: generateArraySchema(GenreSchema)

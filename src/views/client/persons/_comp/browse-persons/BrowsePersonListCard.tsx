@@ -32,14 +32,11 @@ export function BrowsePersonListCard(
                         src={person.profileImage?.secure_url}
                         alt={person.name}
                         errorText="Failed To Load Profile Image"
-                        classNames={{
-                            error: cn("h-80", classNames?.error),
-                            image: cn(
-                                "aspect-square group-hover:scale-105 rounded-t-md",
-                                "transition-transform duration-700 ease-out h-80",
-                                classNames?.image
-                            ),
-                        }}
+                        className={cn(
+                            "aspect-square group-hover:scale-105 rounded-t-md",
+                            "transition-transform duration-700 ease-out h-80",
+                            classNames?.image
+                        )}
                     />
                 </CardHeader>
                 <CardContent className="flex-1 p-4 flex flex-col justify-center">

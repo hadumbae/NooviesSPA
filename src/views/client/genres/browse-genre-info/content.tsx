@@ -32,11 +32,10 @@ export function BrowseGenreInfoPageContent(
             />
 
             <GenreInfoBanner genre={genre}/>
-
             <section className="space-y-4">
                 <PageSectionHeader text="Movies"/>
 
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     {movies.map(movie => (
                         <BrowseMovieOverviewCard key={movie._id} movie={movie}/>
                     ))}

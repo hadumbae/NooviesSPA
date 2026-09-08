@@ -9,8 +9,8 @@ import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieR
 import {BadgeAlert, Circle, Cog, DollarSign,} from "lucide-react";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {ShowingDetails} from "@/domains/showings";
-import {MoviePosterImage} from "@/views/admin/movies";
 import {Link} from "react-router-dom";
+import {Image} from "@/views/common/_comp";
 
 /** Props for the TheatreScreenSchedule component. */
 type CardProps = {
@@ -26,7 +26,7 @@ export function TheatreScreenScheduleCard({showing}: CardProps): ReactElement {
         status,
         slug,
         config: {isSpecialEvent, isActive},
-        movie: {title, runtime, posterImage},
+        movie: {title, runtime, bannerImage},
     } = showing;
 
     const formattedStatus = convertToTitleCase(status);
@@ -38,8 +38,8 @@ export function TheatreScreenScheduleCard({showing}: CardProps): ReactElement {
         <Link to={`/admin/showings/get/${slug}`}>
             <Card>
                 <CardHeader className='p-0'>
-                    <MoviePosterImage
-                        url={posterImage?.secure_url}
+                    <Image
+                        src={bannerImage?.secure_url}
                         className="rounded-b-none h-52"
                     />
                 </CardHeader>

@@ -5,8 +5,9 @@
 import {ReactElement} from "react";
 import {PersonCrewCredit} from "@/domains/movie-credits";
 import {Card, CardContent} from "@/views/common/_comp/ui";
-import {BrowseMoviePosterLink} from "@/views/admin/movies";
+import {MoviePosterImage} from "@/views/admin/movies";
 import {PersonInfoCreditHeader} from "@/views/client/movie-credits";
+import {Link} from "react-router-dom";
 
 /** Props for the PersonInfoCrewCreditCard component. */
 type CardProps = {
@@ -27,27 +28,27 @@ export function PersonInfoCrewCreditCard(
     } = credit;
 
     return (
-        <Card>
-            <CardContent className="p-0 flex space-x-3">
-                <BrowseMoviePosterLink
-                    className="h-full w-16 rounded-r-none"
-                    url={moviePoster?.secure_url}
-                    slug={movieSlug}
-                />
-
-                <div className="flex-1 py-3 pr-4 flex flex-col space-y-3">
-                    <PersonInfoCreditHeader
-                        movieSlug={movieSlug}
-                        movieTitle={movieTitle}
-                        releaseDate={releaseDate}
-                        classNames={{container: "flex-1"}}
+        <Link to={`/browse/movies/${movieSlug}`}>
+            <Card>
+                <CardContent className="p-0 flex space-x-3">
+                    <MoviePosterImage
+                        className="h-32 rounded-r-none"
+                        url={moviePoster?.secure_url}
                     />
 
-                    <p className="primary-text font-medium text-sm">
-                        {displayRoleName || roleType.roleName} {creditedAs && `(credited as ${creditedAs})`}
-                    </p>
-                </div>
-            </CardContent>
-        </Card>
+                    <div className="flex-1 py-3 pr-4 flex flex-col space-y-3">
+                        <PersonInfoCreditHeader
+                            movieTitle={movieTitle}
+                            releaseDate={releaseDate}
+                            classNames={{container: "flex-1"}}
+                        />
+
+                        <p className="primary-text font-medium text-sm">
+                            {displayRoleName || roleType.roleName} {creditedAs && `(credited as ${creditedAs})`}
+                        </p>
+                    </div>
+                </CardContent>
+            </Card>
+        </Link>
     );
 }

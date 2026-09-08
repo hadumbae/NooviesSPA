@@ -5,12 +5,11 @@
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
-import {Separator} from "@/views/common/_comp/ui/separator.tsx";
-import {ReservationStatusBadge} from "@/views/client/reservations/_comp/reservation-badges";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
-import {formatReservationDetails, PopulatedReservation} from "@/domains/reservations";
-import {SROnly} from "@/views/common/_comp/screen-readers";
-import {LabelContent} from "@/views/common/_comp";
+import {PopulatedReservation} from "@/domains/reservations";
+import {formatMovieRuntime} from "@/domains/movies";
+import {Separator} from "@/views/common/_comp/ui";
+import {ReservationStatusBadge} from "@/views/client/reservations";
 
 type CardProps = {
     reservation: PopulatedReservation;
@@ -21,18 +20,18 @@ export function MyReservationCompactCard(
     {reservation}: CardProps
 ): ReactElement {
     const navigate = useLoggedNavigate();
-
     const {
-        slug,
-        uniqueCode,
-        formatted,
-        status,
         ticketCount,
         pricePaid,
-        showing: {movie: {posterImage}}
-    } = formatReservationDetails(reservation);
+        snapshot: {startTime, movie: {title: movieTitle, posterURL, releaseDate, runtime}},
+        slug: reservationSlug,
+        uniqueCode,
+        status,
+    } = reservation;
 
-    const {movieTitle, reservationType, showtime, runtime} = formatted;
+    const releaseYear = releaseDate?.toFormat("yyyy") ?? "Unreleased.";
+    const startingTime = startTime.toFormat("dd LLL, yyyy • hh:mm a");
+    const duration = formatMovieRuntime(runtime, true);
 
     /**
      * Navigates to the full reservation detail page.
@@ -40,7 +39,7 @@ export function MyReservationCompactCard(
     const navigateToReservation = () => {
         navigate({
             level: "log",
-            to: `/account/reservations/${slug}`,
+            to: `/account/reservations/${reservationSlug}`,
             message: "Navigate to user's reservation.",
             component: MyReservationCompactCard.name,
         });
@@ -48,46 +47,33 @@ export function MyReservationCompactCard(
 
     return (
         <Card className="hover:cursor-pointer transition-colors hover:bg-muted/50" onClick={navigateToReservation}>
-            <CardContent className="p-4 space-x-3 flex items-center">
-                <section>
-                    <MoviePosterImage
-                        url={posterImage?.secure_url}
-                        alt={`${movieTitle} Poster`}
-                        className="h-52 lg:h-60"
+            <CardContent className="p-0 space-x-1 flex items-stretch">
+                <div className="relative">
+                    <ReservationStatusBadge
+                        className="absolute left-2 top-2"
+                        status={status}
                     />
-                </section>
-                <div className="flex-1 space-y-3">
-                    <section className="flex-1 flex flex-col items-center gap-2 lg:gap-3">
-                        <SROnly text="Reservation : Showing Metadata"/>
 
-                        <h2 className="primary-text font-oswald font-extrabold line-clamp-1 text-lg">
-                            {movieTitle}
-                        </h2>
+                    <MoviePosterImage
+                        url={posterURL}
+                        alt={`${movieTitle} Poster`}
+                        className="h-52 rounded-l-xl"
+                    />
+                </div>
 
-                        <span className="secondary-text">{showtime}</span>
-                        <span className="secondary-text">{runtime} • {reservationType}</span>
-
-                        <div className="flex items-center gap-10">
-                            <LabelContent orientation="horizontal" label="Tickets">
-                                <span className="primary-text">{ticketCount} tickets</span>
-                            </LabelContent>
-
-                            <LabelContent orientation="horizontal" label="Price">
-                                <span className="primary-text">${pricePaid} Total</span>
-                            </LabelContent>
-                        </div>
-                    </section>
+                <div className="flex-1 flex flex-col p-4 space-y-3">
+                    <div className="flex-1">
+                        <h3 className="subsection-title truncate">{movieTitle} ({releaseYear})</h3>
+                        <h4 className="subsection-subtitle">{startingTime} • {duration}</h4>
+                        <p className="primary-text text-sm font-normal">{ticketCount} tickets • ${pricePaid}</p>
+                    </div>
 
                     <Separator/>
 
-                    <section className="flex flex-col items-center space-y-3">
-                        <span className="primary-text font-bold text-lg lg:text-xl">
-                            ||| {uniqueCode} |||
-                        </span>
-                        <ReservationStatusBadge status={status}/>
-                    </section>
+                    <span className="secondary-text text-sm font-bold">
+                        {uniqueCode}
+                    </span>
                 </div>
-
             </CardContent>
         </Card>
     );

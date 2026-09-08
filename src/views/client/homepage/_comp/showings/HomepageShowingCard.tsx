@@ -5,9 +5,9 @@
 import {ReactElement} from "react";
 import {ShowingSummary} from "@/domains/showings";
 import {Card, CardContent, CardHeader} from "@/views/common/_comp/ui";
-import {MoviePosterImage} from "@/views/admin/movies";
 import {Clock, MapPin} from "lucide-react";
 import {ShowingSpecialEventBadge, ShowingStatusBadge} from "@/views/admin/showings";
+import {Image} from "@/views/common/_comp";
 
 /** Props for the HomepageShowingCard component. */
 type CardProps = {
@@ -19,7 +19,7 @@ export function HomepageShowingCard(
     {showing}: CardProps
 ): ReactElement {
     const {movie, startTime, theatreSnapshot, ticketPrice, status} = showing;
-    const {title, tagline, posterImage} = movie;
+    const {title, tagline, bannerImage} = movie;
     const {name: theatreName, timezone, city, country} = theatreSnapshot;
 
     const formattedTime = startTime.setZone(timezone).toFormat("hh:mm a • dd LLL, yyyy");
@@ -33,8 +33,8 @@ export function HomepageShowingCard(
                         className="absolute w-fit left-4 top-4"
                     />
 
-                    <MoviePosterImage
-                        url={posterImage?.secure_url}
+                    <Image
+                        src={bannerImage?.secure_url}
                         className="rounded-t-xl rounded-0 h-32 w-full aspect-square"
                     />
                 </div>
