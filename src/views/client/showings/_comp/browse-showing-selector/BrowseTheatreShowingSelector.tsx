@@ -7,7 +7,7 @@ import {cn} from "@/common/_feat";
 import {IANATimezone} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 import {ShowingDetails} from "@/domains/showings";
 import {BrowseShowingSelector} from "@/views/client/showings/_comp";
-import {MoviePosterImageDialog} from "@/views/admin/movies/_comp";
+import {Image} from "@/views/common/_comp";
 
 /** Props for the BrowseTheatreShowingSelector component. */
 type SummaryProps = {
@@ -24,8 +24,8 @@ export function BrowseTheatreShowingSelector(
 
     return (
         <div className={cn("flex items-stretch space-x-2", className)}>
-            <MoviePosterImageDialog
-                url={posterImage?.secure_url}
+            <Image
+                src={posterImage?.secure_url}
                 className="h-52 rounded-r-none aspect-[2/3]"
             />
 

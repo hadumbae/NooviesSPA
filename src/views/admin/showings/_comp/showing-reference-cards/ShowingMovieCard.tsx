@@ -4,10 +4,10 @@
 
 import {Card, CardContent, CardHeader} from "@/views/common/_comp/ui/card.tsx";
 import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
-import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {AdminMovieMeta, MovieMetaGenreBadges} from "@/views/admin/movies/_comp/movie-details";
 import {ReactElement} from "react";
 import {MovieWithGenres} from "@/domains/movies/_schema/movie";
+import {Image} from "@/views/common/_comp";
 
 /** Props for the ShowingMovieCard component. */
 type CardProps = {
@@ -23,16 +23,16 @@ export function ShowingMovieCard({movie}: CardProps): ReactElement {
     return (
         <Card>
             <CardHeader className="p-0 h-72">
-                <MoviePosterImageDialog
-                    url={posterImage?.secure_url}
+                <Image
+                    src={posterImage?.secure_url}
                     className="h-full rounded-b-none aspect-[2/3]"
                 />
             </CardHeader>
             <CardContent className="p-4">
                 <div className="flex items-start space-x-2">
                     <div className="flex-1 space-y-4">
-                        <AdminMovieMeta movie={movie} />
-                        <MovieMetaGenreBadges genres={genres} />
+                        <AdminMovieMeta movie={movie}/>
+                        <MovieMetaGenreBadges genres={genres}/>
                     </div>
                 </div>
             </CardContent>

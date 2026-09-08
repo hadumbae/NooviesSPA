@@ -3,11 +3,9 @@
  */
 
 import {Ellipsis} from "lucide-react";
-import {HeaderSubtitle, HeaderTitle} from "@/views/common/_comp";
-import {IconButton} from "@/views/common/_comp";
+import {HeaderSubtitle, HeaderTitle, IconButton, Image} from "@/views/common/_comp";
 
 import {formatMovieData, MovieDetails} from "@/domains/movies";
-import {MoviePosterImageDialog} from "@/views/admin/movies/_comp";
 import {MovieDetailsDropdown} from "@/views/admin/movies/_pages/details-page/elements/dropdown.tsx";
 import {MovieDetailsBreadcrumb} from "@/views/admin/movies/_pages/details-page/elements/breadcrumbs.tsx";
 
@@ -34,8 +32,8 @@ export function MovieDetailsHeader({movie}: HeaderProps) {
             </div>
 
             <div className="flex space-x-3">
-                <MoviePosterImageDialog
-                    url={posterImage?.secure_url}
+                <Image
+                    src={posterImage?.secure_url}
                     alt="Poster Image"
                     className="aspect-[2/3] h-36"
                 />

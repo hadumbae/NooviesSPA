@@ -6,9 +6,7 @@ import {MovieWithRating} from "@/domains/movies/_schema/movie/MovieWithRatingSch
 import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {cn} from "@/common/_feat";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
-import {
-    ISO6391LanguageLabels as ISO6391LanguageConstant
-} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
+import {ISO6391LanguageLabels as ISO6391LanguageConstant} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 import {
     AdminMovieWithRatingCardStat
 } from "@/views/admin/customers/_comp/movie-with-rating-card/AdminMovieWithRatingCardStat.tsx";
@@ -16,8 +14,8 @@ import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {VerticalDivider} from "@/views/common/_comp/VerticalDivider.tsx";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {MovieRatingBadge} from "@/views/admin/movie-reviews/_comp";
-import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {ReactElement} from "react";
+import {Image} from "@/views/common/_comp";
 
 /** Props for the AdminMovieWithRatingCard component. */
 type CardProps = {
@@ -50,9 +48,9 @@ export function AdminMovieWithRatingCard(
             <CardContent className={cn("p-3 space-y-2", className)}>
                 <div className="flex items-stretch space-x-2">
                     <LoggedLink to={`/admin/movies/get/${slug}`}>
-                        <MoviePosterImageDialog
-                            className="h-32 rounded-sm"
-                            url={posterImage?.secure_url}
+                        <Image
+                            className="h-32 rounded-sm aspect-[2/3]"
+                            src={posterImage?.secure_url}
                             alt={`${title} Poster Image`}
                         />
                     </LoggedLink>

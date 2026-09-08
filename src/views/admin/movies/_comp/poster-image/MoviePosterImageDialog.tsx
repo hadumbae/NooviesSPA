@@ -2,78 +2,48 @@
 
 import {ReactElement, useState} from 'react';
 import {cn} from "@/common/_feat";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger
-} from "@/views/common/_comp/ui/dialog.tsx";
-import {HasNoMoviePosterPlaceholder} from "@/views/admin/movies/_comp/poster-image/HasNoMoviePosterPlaceholder.tsx";
+import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle} from "@/views/common/_comp/ui/dialog.tsx";
+import {Image} from "@/views/common/_comp";
 
 /** Props for the MoviePosterImageDialog component. */
 type PosterProps = {
-    url?: string | null;
+    src?: string | null;
     alt?: string;
     className?: string;
-    disableDialog?: boolean;
+    classNames?: {
+        base?: string;
+        dialog?: string;
+    };
 };
 
 /**
  * Renders a movie poster image that handles loading errors and missing sources.
  */
 export function MoviePosterImageDialog(
-    {url, alt, className, disableDialog}: PosterProps
+    {src, alt, classNames}: PosterProps
 ): ReactElement {
-    const [hasError, setHasError] = useState<boolean>(false);
-
-    if (!url || hasError) {
-        return (
-            <HasNoMoviePosterPlaceholder
-                className={className}
-                hasError={hasError}
-            />
-        );
-    }
-
-    const posterComponent = (
-        <img
-            src={url}
-            alt={alt}
-            loading="lazy"
-            onError={() => setHasError(true)}
-            className={cn(
-                "object-cover object-center rounded-md",
-                className
-            )}
-        />
-    );
-
-    if (disableDialog) {
-        return posterComponent;
-    }
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
-        <Dialog>
-            <DialogTrigger asChild className="hover:cursor-pointer object-cover">
-                {posterComponent}
-            </DialogTrigger>
+        <div>
+            <Image
+                src={src}
+                alt={alt}
+                className={cn("cursor-pointer", classNames?.base)}
+                onClick={() => setIsOpen(true)}
+            />
 
-            <DialogContent className="p-0 bg-transparent border-0">
-                <DialogHeader className="hidden">
-                    <DialogTitle>Poster Image</DialogTitle>
-                    <DialogDescription>{alt}</DialogDescription>
-                </DialogHeader>
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                <DialogContent className="p-0 bg-transparent border-0">
+                    <DialogHeader className="sr-only">
+                        <DialogTitle>Poster Image</DialogTitle>
+                        <DialogDescription>{alt}</DialogDescription>
+                    </DialogHeader>
 
-                <img
-                    src={url}
-                    alt={alt}
-                    loading="lazy"
-                    onError={() => setHasError(true)}
-                    className={cn("w-full")}
-                />
-            </DialogContent>
-        </Dialog>
+                    <Image src={src} alt={alt} className={classNames?.dialog}/>
+                </DialogContent>
+            </Dialog>
+        </div>
+
     );
 }

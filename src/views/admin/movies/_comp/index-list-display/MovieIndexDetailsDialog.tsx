@@ -14,7 +14,7 @@ import {TextQuote} from "@/views/common/_comp";
 import {Search} from "lucide-react";
 import {cn} from "@/common/_feat";
 import {LabelContent} from "@/views/common/_comp/label-content/LabelContent.tsx";
-import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {formatMovieData, MovieDetails} from "@/domains/movies";
 import {Link} from "react-router-dom";
 
@@ -52,11 +52,7 @@ export function MovieIndexDetailsDialog({children, movie}: DetailsDialogProps): 
                 </DialogHeader>
 
                 <div className="flex items-center space-x-2">
-                    <MoviePosterImageDialog
-                        url={posterURL}
-                        disableDialog={true}
-                        className="aspect-[2/3] w-16"
-                    />
+                    <MoviePosterImage url={posterURL} className=" w-16"/>
 
                     <div className="flex-grow space-y-1">
                         <h2 className="primary-text font-bold">{title}</h2>

@@ -5,10 +5,10 @@
 import {ReactElement} from "react";
 import {ObjectId} from "@/common/_schemas";
 import {cn} from "@/common/_feat";
-import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {Card, CardContent} from "@/views/common/_comp/ui";
 import {formatMovieData, MovieDetails, MovieDetailsSchema, useFetchMovie} from "@/domains/movies";
+import {Image} from "@/views/common/_comp";
 
 /** Props for the MovieQuickOverviewFetchCard component. */
 type FetchCardProps = {
@@ -34,7 +34,7 @@ export function MovieQuickOverviewFetchCard(
                 return (
                     <Card>
                         <CardContent className={cn("p-3 flex space-x-2", className)}>
-                            <MoviePosterImageDialog url={posterURL} className="w-16 aspect-[2/3]"/>
+                            <Image src={posterURL} className="w-16 aspect-[2/3]"/>
 
                             <div className="flex-grow flex flex-col justify-center space-y-2">
                                 <h1 className="text-sm font-bold">{title}</h1>

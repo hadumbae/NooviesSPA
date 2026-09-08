@@ -5,12 +5,12 @@
 import {ReactElement} from "react";
 import {PersonCredit} from "@/domains/movie-credits";
 import {Card, CardContent} from "@/views/common/_comp/ui";
-import {MoviePosterImageDialog} from "@/views/admin/movies/_comp/poster-image";
 import {Info} from "lucide-react";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink";
 import {
     PersonDetailsCreditMovieDialog
 } from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditMovieDialog.tsx";
+import {Image} from "@/views/common/_comp";
 
 /** Props for the PersonDetailsCreditCard component. */
 type CardProps = {
@@ -34,7 +34,10 @@ export function PersonDetailsCreditCard(
     return (
         <Card key={_id}>
             <CardContent className="flex items-center p-0">
-                <MoviePosterImageDialog className="h-36 rounded-r-none" url={posterImage?.secure_url}/>
+                <Image
+                    src={posterImage?.secure_url}
+                    className="h-36 rounded-r-none aspect-[2/3]"
+                />
 
                 <div className="flex-1 flex items-center space-x-2 py-3 px-5">
                     <div className="flex-1 space-y-2">
