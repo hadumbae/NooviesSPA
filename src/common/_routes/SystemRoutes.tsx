@@ -3,9 +3,6 @@
  */
 
 import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
-import {ErrorPage} from "@/views/common/_pages/error/ErrorPage.tsx";
-import {NotFoundPage} from "@/views/common/_pages/error/NotFoundPage.tsx";
-import {UnauthorizedPage} from "@/views/common/_pages/error/UnauthorizedPage.tsx";
 
 /** Route definitions for error handling and wildcard path matching. */
 export const SystemRoutes = [
@@ -13,16 +10,40 @@ export const SystemRoutes = [
         path: '*',
         element: <BaseLayout/>,
         children: [
-            {path: "*", element: <NotFoundPage />},
+            {
+                path: "*",
+                lazy: async () => {
+                    const {NotFoundPage} = await import("@/views/common/_pages/error/NotFoundPage.tsx");
+                    return {Component: NotFoundPage};
+                },
+            },
         ],
     },
     {
         path: '/error',
         element: <BaseLayout/>,
         children: [
-            {path: "/error", element: <ErrorPage/>},
-            {path: "/error/not-found", element: <NotFoundPage/>},
-            {path: "/error/unauthorized", element: <UnauthorizedPage/>},
+            {
+                path: "/error",
+                lazy: async () => {
+                    const {ErrorPage} = await import("@/views/common/_pages/error/ErrorPage.tsx");
+                    return {Component: ErrorPage};
+                },
+            },
+            {
+                path: "/error/not-found",
+                lazy: async () => {
+                    const {NotFoundPage} = await import("@/views/common/_pages/error/NotFoundPage.tsx");
+                    return {Component: NotFoundPage};
+                },
+            },
+            {
+                path: "/error/unauthorized",
+                lazy: async () => {
+                    const {UnauthorizedPage} = await import("@/views/common/_pages/error/UnauthorizedPage.tsx");
+                    return {Component: UnauthorizedPage};
+                },
+            },
         ],
     },
 ];

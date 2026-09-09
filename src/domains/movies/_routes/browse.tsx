@@ -5,13 +5,6 @@
 import {RouteObject} from "react-router-dom";
 import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
 import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
-import {
-    BrowseMoviesPage,
-    MovieInfoCreditsPage,
-    MovieInfoPage,
-    MovieInfoReviewsPage,
-    MovieInfoShowingsPage
-} from "@/views/client/movies";
 
 /** Route definitions for the movie browsing domain. */
 export const BrowseMovieRoutes: RouteObject[] = [
@@ -21,30 +14,44 @@ export const BrowseMovieRoutes: RouteObject[] = [
         children: [
             {
                 path: "/browse/movies",
-                element: <BrowseMoviesPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {BrowseMoviesPage} = await import("@/views/client/movies");
+                    return {Component: BrowseMoviesPage};
+                },
             },
             {
                 path: "/browse/movies/:slug",
-                element: <MovieInfoPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {MovieInfoPage} = await import("@/views/client/movies");
+                    return {Component: MovieInfoPage};
+                },
             },
             {
                 path: "/browse/movies/:slug/credits",
-                element: <MovieInfoCreditsPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {MovieInfoCreditsPage} = await import("@/views/client/movies");
+                    return {Component: MovieInfoCreditsPage};
+                },
             },
             {
                 path: "/browse/movies/:slug/showings",
-                element: <MovieInfoShowingsPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {MovieInfoShowingsPage} = await import("@/views/client/movies");
+                    return {Component: MovieInfoShowingsPage};
+                },
             },
             {
                 path: "/browse/movies/:slug/reviews",
-                element: <MovieInfoReviewsPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {MovieInfoReviewsPage} = await import("@/views/client/movies");
+                    return {Component: MovieInfoReviewsPage};
+                },
             },
         ],
     },
 ];
-

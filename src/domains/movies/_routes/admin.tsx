@@ -5,8 +5,6 @@
 import {RouteObject} from "react-router-dom";
 import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
-import {MovieCreatePage, MovieDetailsPage, MovieEditPage, MovieIndexPage, MoviePeoplePage} from "@/views/admin/movies";
-import { MovieIndexQueryOptionsContextProvider } from "@/domains/movies/_feat/handle-query-options/movie-index";
 
 /** Route configuration for movie-related administrative pages. */
 export const AdminMovieRoutes: RouteObject[] = [
@@ -17,36 +15,57 @@ export const AdminMovieRoutes: RouteObject[] = [
             {
                 path: "/admin/movies",
                 errorElement: <ComponentErrorHandler/>,
-                element: (
-                    <MovieIndexQueryOptionsContextProvider>
-                        <MovieIndexPage/>
-                    </MovieIndexQueryOptionsContextProvider>
-                ),
+                lazy: async () => {
+                    const {MovieIndexPage} = await import("@/views/admin/movies");
+                    const {MovieIndexQueryOptionsContextProvider} = await import("@/domains/movies/_feat/handle-query-options/movie-index");
+                    return {
+                        Component: () => (
+                            <MovieIndexQueryOptionsContextProvider>
+                                <MovieIndexPage/>
+                            </MovieIndexQueryOptionsContextProvider>
+                        ),
+                    };
+                },
             },
             {
                 path: "/admin/movies/create",
-                element: <MovieCreatePage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {MovieCreatePage} = await import("@/views/admin/movies");
+                    return {Component: MovieCreatePage};
+                },
             },
             {
                 path: "/admin/movies/get/:slug",
-                element: <MovieDetailsPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {MovieDetailsPage} = await import("@/views/admin/movies");
+                    return {Component: MovieDetailsPage};
+                },
             },
             {
                 path: "/admin/movies/edit/:slug",
-                element: <MovieEditPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {MovieEditPage} = await import("@/views/admin/movies");
+                    return {Component: MovieEditPage};
+                },
             },
             {
                 path: "/admin/movies/get/:slug/people/cast",
-                element: <MoviePeoplePage department="CAST"/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {MoviePeoplePage} = await import("@/views/admin/movies");
+                    return {Component: () => <MoviePeoplePage department="CAST"/>};
+                },
             },
             {
                 path: "/admin/movies/get/:slug/people/crew",
-                element: <MoviePeoplePage department="CREW"/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {MoviePeoplePage} = await import("@/views/admin/movies");
+                    return {Component: () => <MoviePeoplePage department="CREW"/>};
+                },
             }
         ],
     }

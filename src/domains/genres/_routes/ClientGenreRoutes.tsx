@@ -5,8 +5,6 @@
 import {RouteObject} from "react-router-dom";
 import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
 import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
-import { BrowseGenresPage } from "@/views/client/genres/browse-genres-page";
-import { BrowseGenreInfoPage } from "@/views/client/genres/browse-genre-info";
 
 /** Route configuration for genre-related pages within the client browse section. */
 export const ClientGenreRoutes: RouteObject[] = [
@@ -16,13 +14,19 @@ export const ClientGenreRoutes: RouteObject[] = [
         children: [
             {
                 path: "/browse/genres",
-                element: <BrowseGenresPage />,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {BrowseGenresPage} = await import("@/views/client/genres/browse-genres-page");
+                    return {Component: BrowseGenresPage};
+                },
             },
             {
                 path: "/browse/genres/:slug",
-                element: <BrowseGenreInfoPage />,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {BrowseGenreInfoPage} = await import("@/views/client/genres/browse-genre-info");
+                    return {Component: BrowseGenreInfoPage};
+                },
             }
         ],
     }

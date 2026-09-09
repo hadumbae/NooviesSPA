@@ -5,7 +5,6 @@
 import {RouteObject} from "react-router-dom";
 import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
 import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
-import {ShowingInfoPage} from "@/views/client/showings";
 
 /** Route configuration for the public showing information and browsing views. */
 export const BrowseShowingRoutes: RouteObject[] = [
@@ -15,8 +14,11 @@ export const BrowseShowingRoutes: RouteObject[] = [
         children: [
             {
                 path: "/browse/showings/:slug",
-                element: <ShowingInfoPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {ShowingInfoPage} = await import("@/views/client/showings");
+                    return {Component: ShowingInfoPage};
+                },
             },
         ],
     }

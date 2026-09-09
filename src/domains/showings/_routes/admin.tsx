@@ -5,7 +5,6 @@
 import {RouteObject} from "react-router-dom";
 import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
-import {ShowingCreatePage, ShowingDetailsPage, ShowingEditPage, ShowingIndexPage} from "@/views/admin/showings/_pages";
 
 /** Route definitions for showing administration pages. */
 export const ShowingRoutes: RouteObject[] = [
@@ -15,25 +14,36 @@ export const ShowingRoutes: RouteObject[] = [
         children: [
             {
                 path: "/admin/showings",
-                element: <ShowingIndexPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {ShowingIndexPage} = await import("@/views/admin/showings/_pages");
+                    return {Component: ShowingIndexPage};
+                },
             },
             {
                 path: "/admin/showings/create",
-                element: <ShowingCreatePage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {ShowingCreatePage} = await import("@/views/admin/showings/_pages");
+                    return {Component: ShowingCreatePage};
+                },
             },
             {
                 path: "/admin/showings/get/:slug",
-                element: <ShowingDetailsPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {ShowingDetailsPage} = await import("@/views/admin/showings/_pages");
+                    return {Component: ShowingDetailsPage};
+                },
             },
             {
                 path: "/admin/showings/edit/:slug",
-                element: <ShowingEditPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {ShowingEditPage} = await import("@/views/admin/showings/_pages");
+                    return {Component: ShowingEditPage};
+                },
             },
         ],
     },
 ];
-

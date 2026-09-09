@@ -4,10 +4,8 @@
 
 import {redirect, RouteObject} from "react-router-dom";
 import {AuthLoader} from "@/common/_loaders";
-import {RoleTypeListPage} from "@/views/admin/role-types/_pages/list-page/page.tsx";
 import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
-import {RoleTypeIndexQueryOptionsContextProvider} from "@/domains/roletypes";
 
 /** Route configurations for administrative role type pages. */
 const routes: RouteObject[] = [
@@ -23,11 +21,17 @@ const routes: RouteObject[] = [
             {
                 path: "/admin/roletypes/list",
                 errorElement: <ComponentErrorHandler />,
-                element: (
-                    <RoleTypeIndexQueryOptionsContextProvider>
-                        <RoleTypeListPage />
-                    </RoleTypeIndexQueryOptionsContextProvider>
-                ),
+                lazy: async () => {
+                    const {RoleTypeListPage} = await import("@/views/admin/role-types/_pages/list-page/page.tsx");
+                    const {RoleTypeIndexQueryOptionsContextProvider} = await import("@/domains/roletypes");
+                    return {
+                        Component: () => (
+                            <RoleTypeIndexQueryOptionsContextProvider>
+                                <RoleTypeListPage />
+                            </RoleTypeIndexQueryOptionsContextProvider>
+                        ),
+                    };
+                },
             }
         ]
     }

@@ -5,12 +5,7 @@
 import {RouteObject} from "react-router-dom";
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
 import {ErrorPage} from "@/views/common/_pages";
-import {UserIndexPage} from "@/views/admin/users/pages/index-page/page.tsx";
 import {ComponentErrorHandler} from "@/views/common/_feat";
-import {UserIndexQueryOptionsContextProvider} from "@/domains/users";
-import {UserDetailsPage} from "@/views/admin/users/pages/details-page/page.tsx";
-import {CustomerReviewPage} from "@/views/admin/customers/_pages/customer-review-page";
-import {CustomerReviewsPage} from "@/views/admin/customers/_pages/customer-reviews-page";
 
 /** Route definitions for the user administration module. */
 export const AdminUserRoutes: RouteObject[] = [
@@ -22,26 +17,41 @@ export const AdminUserRoutes: RouteObject[] = [
             {
                 path: "/admin/users",
                 errorElement: <ComponentErrorHandler/>,
-                element: (
-                    <UserIndexQueryOptionsContextProvider>
-                        <UserIndexPage/>
-                    </UserIndexQueryOptionsContextProvider>
-                ),
+                lazy: async () => {
+                    const {UserIndexPage} = await import("@/views/admin/users/pages/index-page/page.tsx");
+                    const {UserIndexQueryOptionsContextProvider} = await import("@/domains/users");
+                    return {
+                        Component: () => (
+                            <UserIndexQueryOptionsContextProvider>
+                                <UserIndexPage/>
+                            </UserIndexQueryOptionsContextProvider>
+                        ),
+                    };
+                },
             },
             {
                 path: "/admin/users/:userID",
-                element: <UserDetailsPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {UserDetailsPage} = await import("@/views/admin/users/pages/details-page/page.tsx");
+                    return {Component: UserDetailsPage};
+                },
             },
             {
                 path: "/admin/users/:customerID/reviews",
-                element: <CustomerReviewsPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {CustomerReviewsPage} = await import("@/views/admin/customers/_pages/customer-reviews-page");
+                    return {Component: CustomerReviewsPage};
+                },
             },
             {
                 path: "/admin/users/:customerID/reviews/:reviewID",
-                element: <CustomerReviewPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {CustomerReviewPage} = await import("@/views/admin/customers/_pages/customer-review-page");
+                    return {Component: CustomerReviewPage};
+                },
             },
         ],
     }

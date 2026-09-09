@@ -5,11 +5,7 @@
 import {RouteObject} from "react-router-dom";
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
 import {AuthLoader} from "@/common/_loaders";
-import {ReservationByCodePage} from "@/views/admin/reservations/_pages/reservation-by-code";
 import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
-import {
-    FetchReservationByCodeQueryOptionsContextProvider
-} from "@/domains/reservations/_feat/fetch-reservation-by-code/reservation-query-options-form";
 
 /** Configuration for reservation-related administrative routes. */
 export const AdminReservationRoutes: RouteObject[] = [
@@ -22,9 +18,19 @@ export const AdminReservationRoutes: RouteObject[] = [
                 /** Page for verifying individual reservation via their unique verification string. */
                 path: '/admin/reservations/fetch/by-unique-code',
                 errorElement: <ComponentErrorHandler/>,
-                element: <FetchReservationByCodeQueryOptionsContextProvider>
-                    <ReservationByCodePage/>
-                </FetchReservationByCodeQueryOptionsContextProvider>,
+                lazy: async () => {
+                    const {ReservationByCodePage} = await import("@/views/admin/reservations/_pages/reservation-by-code");
+                    const {
+                        FetchReservationByCodeQueryOptionsContextProvider
+                    } = await import("@/domains/reservations/_feat/fetch-reservation-by-code/reservation-query-options-form");
+                    return {
+                        Component: () => (
+                            <FetchReservationByCodeQueryOptionsContextProvider>
+                                <ReservationByCodePage/>
+                            </FetchReservationByCodeQueryOptionsContextProvider>
+                        ),
+                    };
+                },
             }
         ],
     }

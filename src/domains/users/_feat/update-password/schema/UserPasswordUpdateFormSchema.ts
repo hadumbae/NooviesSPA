@@ -3,15 +3,15 @@
  */
 
 import {z} from "zod";
-import {UserPasswordSchema} from "@/domains/auth/_feat";
 import {AnyValues} from "@/common/_types";
+import {UserPasswordSchema} from "@/domains/users/_schema/fields";
 
 /** Zod schema for validating password update and confirmation fields. */
 export const UserPasswordUpdateFormSchema = z.object({
     password: UserPasswordSchema,
     confirm: UserPasswordSchema,
 }).refine(
-    passwords => passwords.password === passwords.confirm,
+    ({password, confirm}) => password === confirm,
     {message: "Passwords don't match.", path: ["confirm"]},
 );
 

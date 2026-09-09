@@ -4,10 +4,7 @@
 
 import {RouteObject} from "react-router-dom";
 import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
-import {PersonInfoPage} from "@/views/client/persons/_pages/info-page/page.tsx";
 import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
-import {BrowsePersonsPage} from "@/views/client/persons/_pages/browse-page/page.tsx";
-import {BrowsePersonsQueryOptionsContextProvider} from "@/domains/persons";
 
 /** Route configuration for person browsing and detail views. */
 export const BrowsePersonRoutes: RouteObject[] = [
@@ -18,16 +15,25 @@ export const BrowsePersonRoutes: RouteObject[] = [
             {
                 path: "/browse/persons",
                 errorElement: <ComponentErrorHandler/>,
-                element: (
-                    <BrowsePersonsQueryOptionsContextProvider>
-                        <BrowsePersonsPage/>
-                    </BrowsePersonsQueryOptionsContextProvider>
-                ),
+                lazy: async () => {
+                    const {BrowsePersonsPage} = await import("@/views/client/persons/_pages/browse-page/page.tsx");
+                    const {BrowsePersonsQueryOptionsContextProvider} = await import("@/domains/persons");
+                    return {
+                        Component: () => (
+                            <BrowsePersonsQueryOptionsContextProvider>
+                                <BrowsePersonsPage/>
+                            </BrowsePersonsQueryOptionsContextProvider>
+                        ),
+                    };
+                },
             },
             {
                 path: "/browse/persons/:slug",
-                element: <PersonInfoPage/>,
                 errorElement: <ComponentErrorHandler/>,
+                lazy: async () => {
+                    const {PersonInfoPage} = await import("@/views/client/persons/_pages/info-page/page.tsx");
+                    return {Component: PersonInfoPage};
+                },
             },
         ],
     }

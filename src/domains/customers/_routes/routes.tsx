@@ -4,14 +4,6 @@
 
 import {RouteObject} from "react-router-dom";
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
-import {CustomerReviewPage} from "@/views/admin/customers/_pages/customer-review-page";
-import {CustomerProfilePage} from "@/views/admin/customers/_pages/customer-profile-page";
-import {CustomerReviewsPage} from "@/views/admin/customers/_pages/customer-reviews-page";
-import {CustomerReviewLogsPage} from "@/views/admin/customers/_pages/customer-review-logs-page";
-import {CustomerIndexPage} from "@/views/admin/customers/_pages/customer-index-page/page.tsx";
-import {CustomerIndexQueryOptionsContextProvider} from "@/domains/customers/_ctx/CustomerIndexQueryOptionsContext.ts";
-import {CustomerReservationsPage} from "@/views/admin/customers/_pages/customer-reservations-page/page.tsx";
-import {CustomerReservationPage} from "@/views/admin/customers";
 
 export const AdminCustomerRoutes: RouteObject[] = [
     {
@@ -20,35 +12,59 @@ export const AdminCustomerRoutes: RouteObject[] = [
         children: [
             {
                 path: '/admin/customers',
-                element: (
-                    <CustomerIndexQueryOptionsContextProvider>
-                        <CustomerIndexPage/>
-                    </CustomerIndexQueryOptionsContextProvider>
-                ),
+                lazy: async () => {
+                    const {CustomerIndexPage} = await import("@/views/admin/customers/_pages/customer-index-page/page.tsx");
+                    const {CustomerIndexQueryOptionsContextProvider} = await import("@/domains/customers/_ctx/CustomerIndexQueryOptionsContext.ts");
+                    return {
+                        Component: () => (
+                            <CustomerIndexQueryOptionsContextProvider>
+                                <CustomerIndexPage/>
+                            </CustomerIndexQueryOptionsContextProvider>
+                        ),
+                    };
+                },
             },
             {
                 path: '/admin/customers/:customerID',
-                element: <CustomerProfilePage/>
+                lazy: async () => {
+                    const {CustomerProfilePage} = await import("@/views/admin/customers/_pages/customer-profile-page");
+                    return {Component: CustomerProfilePage};
+                },
             },
             {
                 path: '/admin/customers/:customerID/reviews',
-                element: <CustomerReviewsPage/>
+                lazy: async () => {
+                    const {CustomerReviewsPage} = await import("@/views/admin/customers/_pages/customer-reviews-page");
+                    return {Component: CustomerReviewsPage};
+                },
             },
             {
                 path: '/admin/customers/:customerID/reviews/:reviewID',
-                element: <CustomerReviewPage/>
+                lazy: async () => {
+                    const {CustomerReviewPage} = await import("@/views/admin/customers/_pages/customer-review-page");
+                    return {Component: CustomerReviewPage};
+                },
             },
             {
                 path: '/admin/customers/:customerID/reviews/:reviewID/logs',
-                element: <CustomerReviewLogsPage/>
+                lazy: async () => {
+                    const {CustomerReviewLogsPage} = await import("@/views/admin/customers/_pages/customer-review-logs-page");
+                    return {Component: CustomerReviewLogsPage};
+                },
             },
             {
                 path: '/admin/customers/:customerID/reservations',
-                element: <CustomerReservationsPage/>
+                lazy: async () => {
+                    const {CustomerReservationsPage} = await import("@/views/admin/customers/_pages/customer-reservations-page/page.tsx");
+                    return {Component: CustomerReservationsPage};
+                },
             },
             {
                 path: '/admin/customers/:customerID/reservations/:reservationID',
-                element: <CustomerReservationPage/>
+                lazy: async () => {
+                    const {CustomerReservationPage} = await import("@/views/admin/customers/_pages/customer-reservation-page");
+                    return {Component: CustomerReservationPage};
+                },
             },
         ]
     }

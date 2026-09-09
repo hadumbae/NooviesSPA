@@ -5,8 +5,6 @@
 import {AuthLoader} from "@/common/_loaders";
 import {RouteObject} from "react-router-dom";
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
-import {GenreDetailsPage, GenreIndexPage} from "@/views/admin/genres";
-import {GenreIndexQueryOptionsContextProvider} from "@/domains/genres";
 
 /** Route definitions for genre administration, including index and detail views. */
 export const AdminGenreRoutes: RouteObject[] = [
@@ -17,13 +15,24 @@ export const AdminGenreRoutes: RouteObject[] = [
         children: [
             {
                 path: "/admin/genres",
-                element: <GenreIndexQueryOptionsContextProvider>
-                    <GenreIndexPage/>
-                </GenreIndexQueryOptionsContextProvider>,
+                lazy: async () => {
+                    const {GenreIndexPage} = await import("@/views/admin/genres");
+                    const {GenreIndexQueryOptionsContextProvider} = await import("@/domains/genres");
+                    return {
+                        Component: () => (
+                            <GenreIndexQueryOptionsContextProvider>
+                                <GenreIndexPage/>
+                            </GenreIndexQueryOptionsContextProvider>
+                        ),
+                    };
+                },
             },
             {
                 path: "/admin/genres/get/:slug",
-                element: <GenreDetailsPage/>,
+                lazy: async () => {
+                    const {GenreDetailsPage} = await import("@/views/admin/genres");
+                    return {Component: GenreDetailsPage};
+                },
             },
         ],
     },

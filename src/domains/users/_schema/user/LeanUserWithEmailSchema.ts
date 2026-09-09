@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {LeanUserSchema} from "@/domains/users/_schema/user/LeanUserSchema.ts";
-import {UserEmailSchema} from "@/domains/auth";
+import {UserEmailSchema} from "@/domains/users/_schema/fields";
 
 /** Zod schema for a lean user profile extended with an email address. */
 export const LeanUserWithEmailSchema = LeanUserSchema.extend({

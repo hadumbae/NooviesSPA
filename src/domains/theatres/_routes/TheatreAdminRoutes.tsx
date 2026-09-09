@@ -3,17 +3,6 @@
  */
 
 import AdminLayout from "@/views/common/_layout/admin-layout/AdminLayout.tsx";
-import {
-    TheatreDetailsPage,
-    TheatreIndexPage,
-    TheatreScreenDetailsPage,
-    TheatreShowingCreatePage,
-    TheatreShowingListPage,
-} from "@/views/admin/theatres/_pages";
-import {TheatreIndexQueryOptionsContextProvider} from "@/domains/theatres";
-import {
-    TheatreScreenDetailsQueryOptionsContextProvider
-} from "@/domains/theatre-screens/_feat/validate-query-options/theatre-screen-details";
 
 /**
  * Defines the routing hierarchy for theatre management.
@@ -25,31 +14,54 @@ const routes = [
         children: [
             {
                 index: true,
-                element: (
-                    <TheatreIndexQueryOptionsContextProvider>
-                        <TheatreIndexPage/>
-                    </TheatreIndexQueryOptionsContextProvider>
-                ),
+                lazy: async () => {
+                    const {TheatreIndexPage} = await import("@/views/admin/theatres/_pages");
+                    const {TheatreIndexQueryOptionsContextProvider} = await import("@/domains/theatres");
+                    return {
+                        Component: () => (
+                            <TheatreIndexQueryOptionsContextProvider>
+                                <TheatreIndexPage/>
+                            </TheatreIndexQueryOptionsContextProvider>
+                        ),
+                    };
+                },
             },
             {
                 path: "get/:slug",
-                element: <TheatreDetailsPage/>,
+                lazy: async () => {
+                    const {TheatreDetailsPage} = await import("@/views/admin/theatres/_pages");
+                    return {Component: TheatreDetailsPage};
+                },
             },
             {
                 path: "get/:slug/showings/create",
-                element: <TheatreShowingCreatePage/>,
+                lazy: async () => {
+                    const {TheatreShowingCreatePage} = await import("@/views/admin/theatres/_pages");
+                    return {Component: TheatreShowingCreatePage};
+                },
             },
             {
                 path: "get/:slug/showings/list",
-                element: <TheatreShowingListPage/>,
+                lazy: async () => {
+                    const {TheatreShowingListPage} = await import("@/views/admin/theatres/_pages");
+                    return {Component: TheatreShowingListPage};
+                },
             },
             {
                 path: "get/:theatreSlug/screen/:screenSlug",
-                element: (
-                    <TheatreScreenDetailsQueryOptionsContextProvider defaultValues={{recentShowingsCount: 10}}>
-                        <TheatreScreenDetailsPage/>
-                    </TheatreScreenDetailsQueryOptionsContextProvider>
-                ),
+                lazy: async () => {
+                    const {TheatreScreenDetailsPage} = await import("@/views/admin/theatres/_pages");
+                    const {
+                        TheatreScreenDetailsQueryOptionsContextProvider
+                    } = await import("@/domains/theatre-screens/_feat/validate-query-options/theatre-screen-details");
+                    return {
+                        Component: () => (
+                            <TheatreScreenDetailsQueryOptionsContextProvider defaultValues={{recentShowingsCount: 10}}>
+                                <TheatreScreenDetailsPage/>
+                            </TheatreScreenDetailsQueryOptionsContextProvider>
+                        ),
+                    };
+                },
             },
         ],
     },

@@ -5,8 +5,6 @@
 import {RouteObject} from "react-router-dom";
 import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
 import {ComponentErrorHandler} from "@/views/common/_feat/error/ComponentErrorHandler.tsx";
-import {BrowseTheatreListPage, TheatreInfoPage} from "@/views/client/theatres";
-import {TheatreInfoQueryOptionsContextProvider, TheatreLocationQueryOptionsContextProvider} from "@/domains/theatres";
 
 const routes: RouteObject[] = [
     {
@@ -16,20 +14,32 @@ const routes: RouteObject[] = [
             {
                 index: true,
                 errorElement: <ComponentErrorHandler/>,
-                element: (
-                    <TheatreLocationQueryOptionsContextProvider>
-                        <BrowseTheatreListPage/>
-                    </TheatreLocationQueryOptionsContextProvider>
-                ),
+                lazy: async () => {
+                    const {BrowseTheatreListPage} = await import("@/views/client/theatres");
+                    const {TheatreLocationQueryOptionsContextProvider} = await import("@/domains/theatres");
+                    return {
+                        Component: () => (
+                            <TheatreLocationQueryOptionsContextProvider>
+                                <BrowseTheatreListPage/>
+                            </TheatreLocationQueryOptionsContextProvider>
+                        ),
+                    };
+                },
             },
             {
                 path: ":slug",
                 errorElement: <ComponentErrorHandler/>,
-                element: (
-                    <TheatreInfoQueryOptionsContextProvider>
-                        <TheatreInfoPage/>
-                    </TheatreInfoQueryOptionsContextProvider>
-                ),
+                lazy: async () => {
+                    const {TheatreInfoPage} = await import("@/views/client/theatres");
+                    const {TheatreInfoQueryOptionsContextProvider} = await import("@/domains/theatres");
+                    return {
+                        Component: () => (
+                            <TheatreInfoQueryOptionsContextProvider>
+                                <TheatreInfoPage/>
+                            </TheatreInfoQueryOptionsContextProvider>
+                        ),
+                    };
+                },
             }
         ],
     }

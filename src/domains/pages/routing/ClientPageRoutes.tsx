@@ -3,7 +3,6 @@
  */
 
 import {BaseLayout} from "@/views/common/_layout/base-layout/BaseLayout.tsx";
-import {HomePage} from "@/views/client/homepage";
 
 /** Route definitions for public-facing client pages. */
 export const ClientPageRoutes = [
@@ -11,7 +10,13 @@ export const ClientPageRoutes = [
         path: "/",
         element: <BaseLayout/>,
         children: [
-            {path: "/", element: <HomePage/>},
+            {
+                path: "/",
+                lazy: async () => {
+                    const {HomePage} = await import("@/views/client/homepage");
+                    return {Component: HomePage};
+                },
+            },
         ]
     }
 ];
