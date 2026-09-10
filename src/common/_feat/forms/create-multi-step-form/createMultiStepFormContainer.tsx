@@ -4,7 +4,7 @@
 
 import {ReactElement, ReactNode} from "react";
 import {DefaultValues, FieldValues} from "react-hook-form";
-import {Form} from "@/views/common/_comp/ui";
+import {Form} from "@/views/common/_comp/ui/form.tsx";
 import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 import {createFormSubmitHandler} from "@/common/_feat/forms/createFormSubmitHandler.ts";

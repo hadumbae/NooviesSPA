@@ -1,7 +1,7 @@
 import {cva, type VariantProps} from "class-variance-authority";
 import * as React from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
-import {cn} from "@/common/_feat";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
 import {X} from "lucide-react";
 import {SheetOverlay} from "@/views/common/_comp/ui/sheet/SheetOverlay.tsx";
 import {SheetPortal} from "@/views/common/_comp/ui/sheet/SheetPortal.tsx";

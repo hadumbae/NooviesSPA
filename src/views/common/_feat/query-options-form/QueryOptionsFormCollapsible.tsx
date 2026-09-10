@@ -6,7 +6,8 @@ import {ReactElement, ReactNode} from "react";
 import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/views/common/_comp/ui";
 import {ChevronsUpDown, X} from "lucide-react";
 import {UIOpenStateProps} from "@/common/_types";
-import {cn, useQueryOptionFormContext} from "@/common/_feat";
+import {cn} from "@/common/_feat/handle-ui/cn.ts";
+import {useQueryOptionFormContext} from "@/common/_feat/query-option-form-context/useQueryOptionFormContext.ts";
 
 /** Props for the QueryOptionsFormCollapsible component. */
 type CollapsibleProps = UIOpenStateProps & {
