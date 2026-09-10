@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {RoleType} from "@/domains/roletypes";
+import {RoleType} from "@/domains/roletypes/_schema/model/RoleTypeSchema.ts";
 import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {X} from "lucide-react";

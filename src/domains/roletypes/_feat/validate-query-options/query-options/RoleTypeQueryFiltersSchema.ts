@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {RoleTypeDepartmentSchema} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema";
 import {preprocessOptionalField} from "@/common/_feat";
-import {RoleTypeNameSchema} from "@/domains/roletypes";
+import {RoleTypeNameSchema} from "@/domains/roletypes/_schema/fields/RoleTypeNameSchema.ts";
 
 /** Zod schema for validating RoleType query filter parameters. */
 export const RoleTypeQueryFiltersSchema = z.object({

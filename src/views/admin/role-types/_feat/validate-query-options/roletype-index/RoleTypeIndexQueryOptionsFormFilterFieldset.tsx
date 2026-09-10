@@ -11,7 +11,7 @@ import {HookFormInput} from "@/views/common/_feat";
 import {useFormContext} from "react-hook-form";
 import {LabelledFormInput} from "@/views/admin/movies";
 import {HookFormSelect} from "@/views/common/_comp";
-import {RoleTypeDepartmentSelectOptions} from "@/domains/roletypes";
+import {RoleTypeDepartmentSelectOptions} from "@/domains/roletypes/_const/RoleTypeDepartmentSelectOptions.ts";
 
 /**
  * Renders filter controls for role name and department within a role type index query options form.

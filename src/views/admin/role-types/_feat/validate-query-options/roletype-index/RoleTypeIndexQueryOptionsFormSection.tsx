@@ -9,7 +9,7 @@ import {
 import {
     RoleTypeIndexQueryOptionsFormView
 } from "@/views/admin/role-types/_feat/validate-query-options/roletype-index/RoleTypeIndexQueryOptionsFormView.tsx";
-import {useRoleTypeIndexQueryOptionsContext} from "@/domains/roletypes";
+import {useRoleTypeIndexQueryOptionsContext} from "@/domains/roletypes/_feat/validate-query-options/roletype-index/RoleTypeIndexQueryOptionsContext.ts";
 
 const section = createQueryOptionFormSection({
     queryOptionForm: RoleTypeIndexQueryOptionsForm,

@@ -11,7 +11,7 @@ import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {useFormContext} from "react-hook-form";
 import {RoleTypeDepartmentSelect} from "@/views/admin/role-types/_feat/form-inputs";
-import {RoleTypeQueryOptionsFormValues} from "@/domains/roletypes";
+import {RoleTypeQueryOptionsFormValues} from "@/domains/roletypes/_feat/validate-query-options/query-options/RoleTypeQueryOptionsSchema.ts";
 
 /**
  * Form component for filtering and sorting Role Types.

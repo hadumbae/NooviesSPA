@@ -4,7 +4,8 @@
 
 import {ObjectId} from "@/common/_schemas";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
-import {destroy, RoleTypeCRUDMutationKeys, RoleTypeCRUDQueryKeys} from "@/domains/roletypes/_feat";
+import {destroy} from "@/domains/roletypes/_feat/crud";
+import {RoleTypeCRUDMutationKeys, RoleTypeCRUDQueryKeys} from "@/domains/roletypes/_feat/crud-hooks/keys";
 
 /** Input parameters for the RoleType deletion mutation. */
 type DeletePrompt = {

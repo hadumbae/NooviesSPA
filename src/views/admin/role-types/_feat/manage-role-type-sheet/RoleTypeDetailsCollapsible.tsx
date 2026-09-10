@@ -6,7 +6,7 @@ import {ReactElement, useState} from 'react';
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/views/common/_comp/ui/collapsible.tsx";
 import {ChevronDown, ChevronRight} from "lucide-react";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
-import {RoleType} from "@/domains/roletypes";
+import {RoleType} from "@/domains/roletypes/_schema/model/RoleTypeSchema.ts";
 
 /** Props for the RoleTypeListSheetDetailsCollapsible component. */
 type CollapsibleProps = {

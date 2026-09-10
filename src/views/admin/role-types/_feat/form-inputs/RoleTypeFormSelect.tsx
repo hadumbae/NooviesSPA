@@ -8,7 +8,8 @@ import {generateArraySchema} from "@/common/_feat";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {AnimatedLoader, HookFormSelect} from "@/views/common/_comp";
 import {FieldValues} from "react-hook-form";
-import {RoleType, RoleTypeQueryFilters, RoleTypeSchema, useFetchRoleTypes} from "@/domains/roletypes";
+import {RoleType, RoleTypeSchema} from "@/domains/roletypes/_schema";
+import {RoleTypeQueryFilters, useFetchRoleTypes} from "@/domains/roletypes/_feat";
 
 type SelectProps<TFormValues extends FieldValues> = Omit<HookFormInputControlProps<TFormValues>, "control"> & {
     filters?: Partial<RoleTypeQueryFilters>;

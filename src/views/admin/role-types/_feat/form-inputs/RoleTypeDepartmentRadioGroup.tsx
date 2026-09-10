@@ -7,7 +7,7 @@ import {FieldValues} from "react-hook-form";
 import {HookRadioOption} from "@/common/_types/input/HookRadioOption.ts";
 import {HookFormRadioGroup} from "@/views/common/_feat";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
-import {RoleTypeDepartmentConstant} from "@/domains/roletypes";
+import {RoleTypeDepartmentConstant} from "@/domains/roletypes/_const/RoleTypeDepartmentConstant.ts";
 import {HookFormInputProps} from "@/common/_types/input/HookFormInputProps.ts";
 
 /** Radio group populated with department options from RoleTypeDepartmentConstant. */

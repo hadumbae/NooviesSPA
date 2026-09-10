@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, useState} from 'react';
-import {RoleType} from "@/domains/roletypes";
+import {RoleType} from "@/domains/roletypes/_schema/model/RoleTypeSchema.ts";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {
     RoleTypeDeleteCollapsible

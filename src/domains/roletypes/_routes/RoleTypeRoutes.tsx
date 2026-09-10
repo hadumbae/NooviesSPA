@@ -23,7 +23,7 @@ const routes: RouteObject[] = [
                 errorElement: <ComponentErrorHandler />,
                 lazy: async () => {
                     const {RoleTypeListPage} = await import("@/views/admin/role-types/_pages/list-page/page.tsx");
-                    const {RoleTypeIndexQueryOptionsContextProvider} = await import("@/domains/roletypes");
+                    const {RoleTypeIndexQueryOptionsContextProvider} = await import("@/domains/roletypes/_feat/validate-query-options/roletype-index/RoleTypeIndexQueryOptionsContext.ts");
                     return {
                         Component: () => (
                             <RoleTypeIndexQueryOptionsContextProvider>

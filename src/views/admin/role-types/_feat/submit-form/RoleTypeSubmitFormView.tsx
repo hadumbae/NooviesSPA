@@ -12,7 +12,9 @@ import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.t
 import {HookFormTextArea} from "@/views/common/_feat/form-inputs/HookFormTextArea.tsx";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {RoleTypeCategorySelect} from "@/views/admin/role-types/_feat/form-inputs";
-import {RoleTypeDepartment, RoleTypeDepartmentConstant, RoleTypeFormValues} from "@/domains/roletypes";
+import {RoleTypeDepartment} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
+import {RoleTypeDepartmentConstant} from "@/domains/roletypes/_const/RoleTypeDepartmentConstant.ts";
+import {RoleTypeFormValues} from "@/domains/roletypes/_feat/submit-data/schema/RoleTypeFormSchema.ts";
 
 /**
  * Form component for creating or editing a RoleType entity.

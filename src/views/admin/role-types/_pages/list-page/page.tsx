@@ -6,7 +6,8 @@ import {ReactElement} from 'react';
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 import {QueryDataLoader} from "@/views/common/_feat";
-import {RoleType, RoleTypeQueryOptionsSchema, RoleTypeSchema, useFetchRoleTypes} from "@/domains/roletypes";
+import {RoleType, RoleTypeSchema} from "@/domains/roletypes/_schema";
+import {RoleTypeQueryOptionsSchema, useFetchRoleTypes} from "@/domains/roletypes/_feat";
 import {RoleTypeListPageContent} from "@/views/admin/role-types/_pages/list-page/content.tsx";
 
 /** Primary entry point for the Role Type List administrative view. */
