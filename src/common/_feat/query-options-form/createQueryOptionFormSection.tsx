@@ -3,9 +3,10 @@
  */
 
 import {ReactElement, useState} from "react";
-import {QueryOptionFormContainerProps, QueryOptionFormViewProps, QueryOptionsContextValues} from "@/common/_feat";
-import {QueryOptionsFormCollapsible} from "@/views/common/_feat";
 import {FieldValues} from "react-hook-form";
+import {QueryOptionsContextValues} from "@/common/_feat/fetch-search-params/context";
+import {QueryOptionFormContainerProps, QueryOptionFormViewProps} from "@/common/_feat/query-options-form";
+import {QueryOptionsFormCollapsible} from "@/views/common/_feat/query-options-form/QueryOptionsFormCollapsible.tsx";
 
 type SectionConfig<TFormValues extends FieldValues, TOptions extends FieldValues> = {
     queryOptionForm: (props: QueryOptionFormContainerProps<TFormValues, TOptions>) => ReactElement;

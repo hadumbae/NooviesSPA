@@ -2,11 +2,11 @@
  * @fileoverview Authentication context provider that manages user state and periodic validation of persisted credentials.
  */
 
-import {ReactElement, ReactNode, useEffect, useState} from "react";
-import {AuthContext, AuthUserContextValue} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
 import Cookies from "js-cookie";
-import {isAdminUser} from "@/domains/auth/_feat/manage-auth-user-data/utils";
+import {ReactElement, ReactNode, useEffect, useState} from "react";
 import {User, UserSchema} from "@/domains/users/_schema/user/UserSchema";
+import {getAuthExpireBy} from "@/domains/auth/_feat/manage-auth-user-data/storage";
+import {AuthContext, AuthUserContextValue} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
 
 /** Props for the AuthProvider component. */
 type ProviderProps = {
@@ -17,6 +17,7 @@ type ProviderProps = {
 export function AuthProvider(
     {children}: ProviderProps
 ): ReactElement {
+    // --- STATE ---
 
     const [logout, setLogout] = useState<boolean>(false);
     const [user, setUser] = useState<User | null>(() => {
@@ -31,10 +32,19 @@ export function AuthProvider(
         }
     });
 
+
+    // --- HOOKS ---
+
     useEffect(() => {
         const interval = setInterval(() => {
             const hasToken = Cookies.get("hasAuthToken");
             const authUser = localStorage.getItem("authUser");
+
+            const expireBy = getAuthExpireBy();
+            const now = new Date();
+
+            console.log("Expire At : ", expireBy.toISO());
+            console.log("Refresh Expiry? : ", now.getTime() > expireBy.toJSDate().getTime());
 
             if (user !== null && (!hasToken || !authUser)) {
                 setUser(null);
@@ -45,14 +55,12 @@ export function AuthProvider(
         return () => clearInterval(interval);
     }, [user]);
 
-
-    const isAdmin = isAdminUser(user);
     const contextValue: AuthUserContextValue = {
+        isAdmin: user?.roles.includes("ADMIN") ?? false,
         user,
         setUser,
         logout,
         setLogout,
-        isAdmin,
     };
 
     return (

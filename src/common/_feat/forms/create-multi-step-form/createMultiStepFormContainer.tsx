@@ -8,7 +8,7 @@ import {Form} from "@/views/common/_comp/ui";
 import {FormValuesConfig, MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 import {createFormSubmitHandler} from "@/common/_feat/forms/createFormSubmitHandler.ts";
-import {BaseMultiStepFormContextProvider} from "@/views/common/_feat";
+import {BaseMultiStepFormContextProvider} from "@/views/common/_feat/multi-step-form/contexts/BaseMultiStepFormContextProvider.tsx";
 import {FormContainerFactoryConfig, FormMutationConfig} from "@/common/_feat/forms/FormFactoryTypes";
 import {MultiStepFormStorageConfig} from "@/common/_feat/multi-step-form/types.ts";
 

@@ -1,50 +1,34 @@
 /**
- * @fileoverview Container component for the authentication login form that integrates form logic with submission mutations.
+ * @fileoverview Form provider and hooks for handling user login form state and submission.
  */
 
-import {ReactElement, ReactNode, useId} from 'react';
-import {AuthLoginFormData} from "@/domains/auth/_feat";
-import {MutationResponseConfig} from "@/common/_feat/submit-data";
-import {useAuthLoginForm, useAuthLoginSubmitMutation} from "@/domains/auth/_feat/auth-login-fom/hooks";
-import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {Form} from "@/views/common/_comp/ui/form.tsx";
+import {createForm} from "@/common/_feat";
+import {User} from "@/domains/users/_schema/user/UserSchema.ts";
+import {useAuthLoginSubmitMutation} from "@/domains/auth/_feat/auth-login-fom/hooks/useAuthLoginSubmitMutation.ts";
+import {
+    AuthLoginFormData,
+    AuthLoginFormSchema,
+    AuthLoginFormValues
+} from "@/domains/auth/_feat/auth-login-fom/schema/AuthLoginFormSchema";
 
-import {User} from "@/domains/users/_schema/user/UserSchema";
+const {SubmitForm, useSubmitForm} = createForm<
+    AuthLoginFormValues,
+    AuthLoginFormData,
+    unknown,
+    User
+>({
+    formName: "auth-login-form",
+    schema: AuthLoginFormSchema,
+    mutation: useAuthLoginSubmitMutation,
+    defaultValues: {
+        email: "",
+        password: "",
+    },
+});
 
-/** Props for the AuthLoginForm component. */
-type FormProps = {
-    children: ReactNode;
-    onSubmitConfig?: MutationResponseConfig<User, AuthLoginFormData>;
+export {
+    /** Form component provider for authentication login. */
+        SubmitForm as AuthLoginForm,
+    /** Hook for accessing and managing the authentication login form state. */
+        useSubmitForm as useAuthLoginForm,
 }
-
-/**
- * Container component that manages the authentication login form state and submission mutation.
- */
-export function AuthLoginForm(
-    {children, onSubmitConfig}: FormProps
-): ReactElement {
-    const id = useId();
-    const formID = `auth-login-form-${id}`;
-
-    const form = useAuthLoginForm();
-    const {mutate, isPending, isError} = useAuthLoginSubmitMutation({form, ...onSubmitConfig});
-
-    const onSubmit = (values: AuthLoginFormData) => {
-        console.log("Logging In...");
-        mutate(values);
-    };
-
-    return (
-        <BaseFormContextProvider formID={formID} submitHandler={onSubmit} isPending={isPending} isError={isError}>
-            <Form {...form}>
-                <form
-                    id={formID}
-                    onSubmit={form.handleSubmit(onSubmit, (errors) => console.log("Auth Log In Errors: ", errors))}
-                >
-                    {children}
-                </form>
-            </Form>
-        </BaseFormContextProvider>
-    );
-}
-

@@ -3,10 +3,10 @@
  */
 
 import {z} from "zod";
-import {EmailStringSchema} from "@/common/_schemas/strings/simple-strings/EmailStringSchema.ts";
 import {AnyValues} from "@/common/_types";
 import {StringValueSchema} from "@/common/_schemas";
 import {preprocessEmptyToUndefined} from "@/common/_feat/validation-preprocessors";
+import {EmailStringSchema} from "@/common/_schemas/strings/simple-strings/EmailStringSchema.ts";
 
 /** Zod schema for validating user login credentials. */
 export const AuthLoginFormSchema = z.object({
