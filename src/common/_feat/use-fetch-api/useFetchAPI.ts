@@ -7,6 +7,9 @@ import {RequestMethod} from "@/common/_types/request/RequestMethod.ts";
 import {handleBadResponse} from "@/common/_feat/use-fetch-api/bad-response";
 import {parseJSON} from "@/common/_feat/use-fetch-api/json";
 import {executeFetch} from "@/common/_feat/use-fetch-api/fetch";
+import {clearLocalAuthUser} from "@/domains/auth/_feat/storage/clearLocalAuthUser.ts";
+import {isRefreshEligible} from "@/domains/auth/_feat/user-refresh/isRefreshEligible.ts";
+import {getUserAuthTokenRefreshPromise} from "@/domains/auth";
 
 type useFetchAPIParams<TPayload> = {
     url: string;
@@ -35,14 +38,23 @@ export async function useFetchAPI<TReturns = unknown, TPayload = unknown>(
 
     // --- EXECUTE ---
 
-    const response: Response = await executeFetch({
-        source: funcName,
-        url,
-        method,
-        headers,
-        body,
-        signal,
-    });
+    const fetchConfig = {url, method, headers, body, signal};
+    let response: Response = await executeFetch(fetchConfig);
+
+    if (response.status === 401 && isRefreshEligible(url)) {
+        let refreshed = false;
+
+        try {
+            await getUserAuthTokenRefreshPromise();
+            refreshed = true;
+        } catch (error: unknown) {
+            clearLocalAuthUser();
+        }
+
+        if (refreshed) {
+            response = await executeFetch(fetchConfig);
+        }
+    }
 
     const raw = await response.text();
 

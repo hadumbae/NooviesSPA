@@ -18,12 +18,6 @@ type FetchParams = {
 export async function executeFetch(
     {url, method, headers, body, signal, source}: FetchParams
 ): Promise<Response> {
-    Logger.log({
-        msg: "Fetching data:",
-        type: "FETCH",
-        context: {source, url, method, headers, body},
-    });
-
     try {
         return fetch(url, {credentials: "include", method, headers, body, signal});
     } catch (error: unknown) {
