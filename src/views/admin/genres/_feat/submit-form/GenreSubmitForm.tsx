@@ -3,7 +3,9 @@
  */
 
 import {createForm} from "@/common/_feat";
-import {Genre, GenreFormData, GenreFormSchema, GenreFormValues, useGenreDataSubmit} from "@/domains/genres";
+import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
+import {GenreFormData, GenreFormSchema, GenreFormValues} from "@/domains/genres/_feat/submit-form/schema/GenreFormSchema.ts";
+import {useGenreDataSubmit} from "@/domains/genres/_feat/crud-hooks/mutate/useGenreDataSubmit.ts";
 
 const {SubmitForm, useSubmitForm} = createForm<
     GenreFormValues,

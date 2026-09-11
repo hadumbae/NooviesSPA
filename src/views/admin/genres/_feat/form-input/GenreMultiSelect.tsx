@@ -11,7 +11,8 @@ import {
 import {ReactElement} from "react";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
-import {useFetchGenres, GenreQueryOptions, GenreSchema, Genre} from "@/domains/genres";
+import {useFetchGenres} from "@/domains/genres/_feat/crud-hooks/fetch/useFetchGenres.ts";
+import {GenreQueryOptions, GenreSchema, Genre} from "@/domains/genres/_schema";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 
 /** Props for the GenreMultiSelect component. */

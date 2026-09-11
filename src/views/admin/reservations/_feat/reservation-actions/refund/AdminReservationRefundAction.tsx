@@ -9,7 +9,7 @@ import {
 import {
     AdminReservationRefundDialog
 } from "@/views/admin/reservations/_feat/reservation-actions/refund/AdminReservationRefundDialog.tsx";
-import {AdminReservation} from "@/domains/reservations";
+import {AdminReservation} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationSchema.ts";
 import {AdminActionButton} from "@/views/common/_comp";
 
 /** Props for the AdminReservationRefundAction component. */

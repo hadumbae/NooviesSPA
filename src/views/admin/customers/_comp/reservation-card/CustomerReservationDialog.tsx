@@ -6,7 +6,7 @@ import {ReactElement, ReactNode} from "react";
 import {cn, convertToTitleCase} from "@/common/_feat";
 import {LoggedLink} from "@/views/common/_feat";
 import {LabelContent} from "@/views/common/_comp";
-import {AdminReservation} from "@/domains/reservations";
+import {AdminReservation} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationSchema.ts";
 import {ReservationStatusBadge} from "@/views/client/reservations/_comp";
 import {
     Button,

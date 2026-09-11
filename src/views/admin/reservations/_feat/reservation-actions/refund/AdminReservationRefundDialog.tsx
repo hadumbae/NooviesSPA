@@ -7,7 +7,7 @@ import {ReactElement, ReactNode} from "react";
 import {HookFormTextArea} from "@/views/common/_feat";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
-import {ReservationUniqueCode} from "@/domains/reservations";
+import {ReservationUniqueCode} from "@/domains/reservations/_schema/model/fields/ReservationUniqueCodeSchema.ts";
 import {
     Button,
     Dialog,

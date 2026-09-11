@@ -6,7 +6,10 @@ import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
 import {HookFormInput, HookFormRadioGroup, HookFormSortToggle} from "@/views/common/_feat";
 import {useFormContext} from "react-hook-form";
-import {ReservationStatusFilterRadioGroupOptions, ReservationTypeFilterRadioGroupOptions} from "@/domains/reservations";
+import {
+    ReservationStatusFilterRadioGroupOptions,
+    ReservationTypeFilterRadioGroupOptions
+} from "@/domains/reservations/_const/radio-group-options";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {Button} from "@/views/common/_comp/ui";

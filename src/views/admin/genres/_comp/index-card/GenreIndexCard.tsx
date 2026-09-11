@@ -7,7 +7,7 @@ import {Clapperboard, Star} from "lucide-react";
 import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {cn} from "@/common/_feat";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
-import {Genre} from "@/domains/genres";
+import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 import usePaginationSearchParams
     from "@/common/_feat/fetch-pagination-search-params/hooks/usePaginationSearchParams.ts";
 

@@ -10,7 +10,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {
     SetReservationCodeFormData, SetReservationCodeFormSubmitSchema,
     SetReservationCodeFormValues
-} from "@/domains/reservations/_feat/fetch-reservation-by-code";
+} from "@/domains/reservations/_feat/fetch-reservation-by-code/forms/SetReservationCodeFormSubmitSchema.ts";
 
 /** Props for the useSetReservationCodeForm hook. */
 type FormProps = {

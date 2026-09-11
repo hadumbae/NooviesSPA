@@ -6,10 +6,10 @@ import {ReactElement} from "react";
 import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
-import {PopulatedReservation} from "@/domains/reservations";
+import {PopulatedReservation} from "@/domains/reservations/_schema/model/populated-reservations/PopulatedReservationSchema.ts";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {Separator} from "@/views/common/_comp/ui";
-import {ReservationStatusBadge} from "@/views/client/reservations";
+import {ReservationStatusBadge} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
 
 type CardProps = {
     reservation: PopulatedReservation;

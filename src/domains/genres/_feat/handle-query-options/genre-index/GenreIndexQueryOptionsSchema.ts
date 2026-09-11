@@ -2,7 +2,7 @@
  * @fileoverview Zod schema and type definitions for filtering and sorting genres on the index page.
  */
 
-import {GenreQueryOptionSchema} from "@/domains/genres";
+import {GenreQueryOptionSchema} from "@/domains/genres/_schema/filters/GenreQueryOptionsSchema.ts";
 import {z} from "zod";
 import {AnyValues} from "@/common/_types";
 

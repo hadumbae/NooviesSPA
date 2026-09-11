@@ -3,9 +3,11 @@
  */
 
 import {ReactElement} from "react";
-import {ReservationActiveDateCard} from "@/views/admin/reservations";
+import {
+    ReservationActiveDateCard
+} from "@/views/admin/reservations/_comp/active-date-card/ReservationActiveDateCard.tsx";
 import {Check, Coins, Cross, Receipt, Timer} from "lucide-react";
-import {AdminReservation, Reservation, ReservationStatus} from "@/domains/reservations";
+import {AdminReservation, Reservation, ReservationStatus} from "@/domains/reservations/_schema";
 
 /** Props for the CustomerReservationDateList component. */
 type ListProps = {

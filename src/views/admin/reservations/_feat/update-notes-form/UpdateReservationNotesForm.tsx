@@ -12,7 +12,7 @@ import {
     useUpdateReservationNotesMutation,
     UseUpdateReservationNotesMutationParams
 } from "@/domains/reservations/_feat/update-reservations/mutations";
-import {AdminReservation} from "@/domains/reservations";
+import {AdminReservation} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationSchema.ts";
 
 const {SubmitForm, useSubmitForm} = createForm<
     UpdateReservationNotesFormValues,

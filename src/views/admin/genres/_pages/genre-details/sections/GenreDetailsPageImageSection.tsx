@@ -15,7 +15,7 @@ import {
     useDeletingGenreImageUIContextActions,
     usePendingGenreImageDeleteUIContext,
     useUpdatingGenreImageUIContextActions
-} from "@/domains/genres";
+} from "@/domains/genres/_ctx/ui";
 
 /** Props for the GenreDetailsPageImageSection component. */
 type SectionProps = {

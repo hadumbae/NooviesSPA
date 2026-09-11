@@ -16,7 +16,7 @@ import {
     DialogTrigger,
 } from "@/views/common/_comp/ui";
 import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
-import {ReservationUniqueCode} from "@/domains/reservations";
+import {ReservationUniqueCode} from "@/domains/reservations/_schema/model/fields/ReservationUniqueCodeSchema.ts";
 import {useBaseFormContext} from "@/common/_feat";
 import {UIOpenStateProps} from "@/common/_types";
 

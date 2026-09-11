@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {AdminReservation, Reservation} from "@/domains/reservations";
+import {AdminReservation, Reservation} from "@/domains/reservations/_schema";
 import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {LabelContent} from "@/views/common/_comp";
 import {cn, convertToTitleCase, useIsMobile} from "@/common/_feat";

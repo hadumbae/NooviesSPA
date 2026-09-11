@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {SROnly} from "@/views/common/_comp/screen-readers";
-import {Genre} from "@/domains/genres";
+import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 import {GenreDeleteWarningDialog, GenreSubmitForm, GenreSubmitFormPanel,} from "@/views/admin/genres/_feat";
 import {
     useIsDeletingUIContext,

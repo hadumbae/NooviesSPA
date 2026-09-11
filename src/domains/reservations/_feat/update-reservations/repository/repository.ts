@@ -6,7 +6,7 @@ import {buildURL} from "@/common/_feat/fetch-api";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
 import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 
-import {AdminReservation} from "@/domains/reservations";
+import {AdminReservation} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationSchema.ts";
 import {
     PatchCancelReservationParams,
     PatchRefundReservationParams,

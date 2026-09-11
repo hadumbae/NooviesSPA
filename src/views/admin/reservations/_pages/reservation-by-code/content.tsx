@@ -7,11 +7,10 @@ import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 
+import {AdminReservation, ReservationUniqueCode} from "@/domains/reservations/_schema";
 import {
-    AdminReservation,
-    ReservationUniqueCode,
     useFetchReservationByCodeQueryOptionsContext
-} from "@/domains/reservations";
+} from "@/domains/reservations/_feat/fetch-reservation-by-code/reservation-query-options-form/FetchReservationByCodeQueryOptionsContext.ts";
 import {SetReservationCodeForm, SetReservationCodeFormCard} from "@/views/admin/reservations/_feat";
 import {ReservationByCodePageHeader} from "@/views/admin/reservations/_pages/reservation-by-code/headers";
 import {ReservationByCodeDataContent} from "@/views/admin/reservations/_pages/reservation-by-code/data.tsx";

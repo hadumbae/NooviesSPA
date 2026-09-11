@@ -7,7 +7,7 @@ import {MovieSummarySchema} from "@/domains/movies/_schema/movie/MovieSummarySch
 import {GenreSummarySchema} from "@/domains/genres/_schema/genre/GenreSummarySchema.ts";
 import {TheatreDetailsSchema} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 import {ShowingSummarySchema} from "@/domains/showings";
-import {ReservationSummarySchema} from "@/domains/reservations";
+import {ReservationSummarySchema} from "@/domains/reservations/_schema/model/reservations/ReservationSummarySchema.ts";
 
 /** Zod schema for validating composite client homepage view data. */
 export const ClientHomepageViewDataSchema = z.object({

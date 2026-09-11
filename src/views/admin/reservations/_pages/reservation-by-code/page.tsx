@@ -6,7 +6,13 @@ import {ReactElement} from "react";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {ReservationByCodePageContent} from "@/views/admin/reservations/_pages/reservation-by-code/content.tsx";
 import {QueryDataLoader} from "@/views/common/_feat";
-import {FetchByCodeData, FetchByCodeSearchParamsSchema, useFetchReservationByCode,} from "@/domains/reservations";
+import {FetchByCodeData} from "@/domains/reservations/_feat/fetch-reservation-by-code/schemas/FetchByCodeDataSchema.ts";
+import {
+    FetchByCodeSearchParamsSchema
+} from "@/domains/reservations/_feat/fetch-reservation-by-code/reservation-query-options-form/FetchByCodeSearchParamsSchema.ts";
+import {
+    useFetchReservationByCode
+} from "@/domains/reservations/_feat/fetch-reservation-by-code/fetch/useFetchReservationByCode.ts";
 
 /**
  * Coordinates search parameter parsing and data fetching for the reservation lookup view.

@@ -4,7 +4,7 @@ import {PersonRoutes} from "@/domains/persons/_routes/PersonRoutes.tsx";
 import {SystemRoutes} from "@/common/_routes/SystemRoutes.tsx";
 import {AdminUserRoutes, UserProfileRoutes} from "@/domains/users";
 import {RoleTypeRoutes} from "@/domains/roletypes";
-import {AdminReservationRoutes} from "@/domains/reservations/_feat/fetch-reservation-by-code";
+import {AdminReservationRoutes} from "@/domains/reservations/_feat/fetch-reservation-by-code/routes/routes.tsx";
 import {AdminCustomerRoutes} from "@/domains/customers";
 import {TheatreRoutes} from "@/domains/theatres";
 import {AdminMovieRoutes, BrowseMovieRoutes} from "@/domains/movies";

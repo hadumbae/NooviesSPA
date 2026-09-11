@@ -3,10 +3,10 @@
  */
 
 import {ReactElement} from "react";
-import {Reservation} from "@/domains/reservations";
+import {Reservation} from "@/domains/reservations/_schema/model/reservations/ReservationSchema.ts";
 import {cn} from "@/common/_feat";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image/MoviePosterImage.tsx";
-import {ReservationStatusBadge} from "@/views/client/reservations";
+import {ReservationStatusBadge} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
 
 /** Custom class names for the summary item sub-components. */
 type ItemClassNames = {

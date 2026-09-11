@@ -7,13 +7,13 @@ import {Form} from "@/views/common/_comp/ui/form.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {MutationFormResetConfig, MutationResponseConfig} from "@/common/_feat/submit-data";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
+import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 import {
-    Genre,
     GenreImageUploadFormData,
     GenreImageUploadFormValues,
     useGenreImageUploadForm,
     useUploadGenreImage
-} from "@/domains/genres";
+} from "@/domains/genres/_feat/manage-image";
 import {handleFormSubmitError, handleMutationCallback} from "@/common/_feat";
 import {DefaultValues} from "react-hook-form";
 

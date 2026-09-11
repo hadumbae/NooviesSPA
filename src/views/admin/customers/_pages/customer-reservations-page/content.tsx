@@ -8,7 +8,7 @@ import {LeanUserWithEmail} from "@/domains/users/_schema/user";
 import {CustomerDetailsCard, CustomerReservationCard} from "@/views/admin/customers/_comp";
 import {ReactElement} from "react";
 import {CustomerReservationsPageBreadcrumbs} from "@/views/admin/customers/_pages/customer-reservations-page/sections";
-import {AdminReservation} from "@/domains/reservations";
+import {AdminReservation} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationSchema.ts";
 import {useTitle} from "@/common/_feat";
 
 /** Props for the CustomerReservationsPageContent component. */

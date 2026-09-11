@@ -13,7 +13,9 @@ import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-p
 import {Genre, GenreSchema} from "@/domains/genres/_schema";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {PaginatedItems} from "@/common/_types";
-import {useGenreIndexQueryOptionsContext} from "@/domains/genres";
+import {
+    useGenreIndexQueryOptionsContext
+} from "@/domains/genres/_feat/handle-query-options/genre-index/GenreIndexQueryOptionsContext.ts";
 
 const GENRES_PER_PAGE = 20;
 

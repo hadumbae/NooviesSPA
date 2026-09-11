@@ -7,7 +7,8 @@ import {FormOptions} from "@/common/_feat/submit-data";
 import {useGenreQueryOptionForm} from "@/domains/genres/_feat/query-form/form/useGenreQueryOptionForm.ts";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {GenreQueryOptionFormStarter, GenreQueryOptions, GenreQueryOptionSchema} from "@/domains/genres";
+import {GenreQueryOptionFormStarter} from "@/domains/genres/_feat/query-form/form/schema.ts";
+import {GenreQueryOptions, GenreQueryOptionSchema} from "@/domains/genres/_schema/filters/GenreQueryOptionsSchema.ts";
 import {Form} from "@/views/common/_comp/ui";
 
 /** Props for the {@link GenreQueryOptionForm} component. */

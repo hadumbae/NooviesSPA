@@ -4,7 +4,9 @@
 
 import {ReactElement} from "react";
 import {createFormFieldConfig, FormViewProps, renderFields} from "@/common/_feat";
-import {GenreIndexQueryOptionsFormValues} from "@/domains/genres";
+import {
+    GenreIndexQueryOptionsFormValues
+} from "@/domains/genres/_feat/handle-query-options/genre-index/GenreIndexQueryOptionsSchema.ts";
 import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
 import {HookFormInput} from "@/views/common/_feat";
 import {useFormContext} from "react-hook-form";

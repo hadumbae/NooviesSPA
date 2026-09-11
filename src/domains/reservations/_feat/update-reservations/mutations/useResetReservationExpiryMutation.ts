@@ -8,7 +8,7 @@ import {ObjectId} from "@/common/_schemas";
 import {validateData} from "@/common/_feat/validate-data/validateData.ts";
 
 import {AdminReservation, AdminReservationSchema} from "@/domains/reservations/_schema";
-import {FetchByCodeQueryKeys} from "@/domains/reservations/_feat/fetch-reservation-by-code";
+import {FetchByCodeQueryKeys} from "@/domains/reservations/_feat/fetch-reservation-by-code/fetch/queryKeys.ts";
 import {patchResetReservationExpiry} from "@/domains/reservations/_feat/update-reservations/repository";
 import {
     ReservationUpdateMutationKeys

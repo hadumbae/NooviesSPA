@@ -5,7 +5,8 @@
 import {ReactElement} from "react";
 import {SROnly} from "@/views/common/_comp";
 import {Card, CardContent} from "@/views/common/_comp/ui";
-import {formatReservationDetails, PopulatedReservation} from "@/domains/reservations";
+import {formatReservationDetails} from "@/domains/reservations/_feat/formatters/formatReservationDetails.ts";
+import {PopulatedReservation} from "@/domains/reservations/_schema/model/populated-reservations/PopulatedReservationSchema.ts";
 import {LabelContent} from "@/views/common/_comp";
 
 /** Props for the MyReservationInfoCard component. */

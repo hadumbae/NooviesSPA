@@ -7,7 +7,7 @@ import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {GenreImageListCard} from "@/views/client/genres/_comp";
 import {PageHeader} from "@/views/common/_comp";
-import {Genre} from "@/domains/genres";
+import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 
 /** Props for the BrowseGenresPageContent component. */
 type ContentProps = {

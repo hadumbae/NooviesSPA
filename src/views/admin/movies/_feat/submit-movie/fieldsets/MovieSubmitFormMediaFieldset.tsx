@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Separator} from "@/views/common/_comp/ui/separator.tsx";
 import {HookFormCheckbox, HookFormInput} from "@/views/common/_feat";
-import {GenreMultiSelect} from "@/views/admin/genres";
+import {GenreMultiSelect} from "@/views/admin/genres/_feat/form-input/GenreMultiSelect.tsx";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useFormContext} from "react-hook-form";
 import {cn, createFormFieldConfig, renderFields, useBaseFormContext} from "@/common/_feat";

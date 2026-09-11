@@ -9,7 +9,7 @@ import {
     PendingGenreImageDeleteUIContextProvider,
     PendingGenreImageUpdateUIContextProvider,
     UpdatingGenreImageUIContextProvider
-} from "@/domains/genres";
+} from "@/domains/genres/_ctx/ui";
 
 /** Props for the GenreDetailsPageProviders component. */
 type ProviderProps = {

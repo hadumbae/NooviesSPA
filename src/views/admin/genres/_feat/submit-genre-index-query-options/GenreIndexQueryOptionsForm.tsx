@@ -3,7 +3,9 @@
  */
 
 import {createQueryOptionForm} from "@/common/_feat";
-import {GenreIndexQueryOptionsSchema} from "@/domains/genres";
+import {
+    GenreIndexQueryOptionsSchema
+} from "@/domains/genres/_feat/handle-query-options/genre-index/GenreIndexQueryOptionsSchema.ts";
 
 const {QueryOptionForm, useQueryOptionForm} = createQueryOptionForm({
     schema: GenreIndexQueryOptionsSchema,

@@ -4,14 +4,18 @@
 
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
-import {AdminReservation} from "@/domains/reservations";
+import {AdminReservation} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationSchema.ts";
 import {PageSectionHeader} from "@/views/common/_comp";
-import {ReservationStatusBadge} from "@/views/client/reservations";
+import {ReservationStatusBadge} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
 import {
-    AdminReservationCancelAction,
-    AdminReservationRefundAction,
+    AdminReservationCancelAction
+} from "@/views/admin/reservations/_feat/reservation-actions/cancel/AdminReservationCancelAction.tsx";
+import {
+    AdminReservationRefundAction
+} from "@/views/admin/reservations/_feat/reservation-actions/refund/AdminReservationRefundAction.tsx";
+import {
     AdminReservationResetExpiryAction
-} from "@/views/admin/reservations";
+} from "@/views/admin/reservations/_feat/reservation-actions/reset-expiry/AdminReservationResetExpiryAction.tsx";
 
 /** Props for the AdminReservationActionsSection component. */
 type SectionProps = {

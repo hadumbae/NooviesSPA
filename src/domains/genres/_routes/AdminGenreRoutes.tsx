@@ -17,7 +17,7 @@ export const AdminGenreRoutes: RouteObject[] = [
                 path: "/admin/genres",
                 lazy: async () => {
                     const {GenreIndexPage} = await import("@/views/admin/genres");
-                    const {GenreIndexQueryOptionsContextProvider} = await import("@/domains/genres");
+                    const {GenreIndexQueryOptionsContextProvider} = await import("@/domains/genres/_feat/handle-query-options/genre-index/GenreIndexQueryOptionsContext.ts");
                     return {
                         Component: () => (
                             <GenreIndexQueryOptionsContextProvider>

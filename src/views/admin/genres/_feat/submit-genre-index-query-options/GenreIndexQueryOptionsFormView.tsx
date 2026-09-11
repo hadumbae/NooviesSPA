@@ -4,7 +4,9 @@
 
 import {ReactElement} from "react";
 import {QueryOptionFormViewProps} from "@/common/_feat";
-import {GenreIndexQueryOptionsFormValues} from "@/domains/genres";
+import {
+    GenreIndexQueryOptionsFormValues
+} from "@/domains/genres/_feat/handle-query-options/genre-index/GenreIndexQueryOptionsSchema.ts";
 import {
     GenreIndexQueryOptionsFormFilterFieldset
 } from "@/views/admin/genres/_feat/submit-genre-index-query-options/GenreIndexQueryOptionsFormFilterFieldset.tsx";

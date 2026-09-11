@@ -7,10 +7,12 @@ import {useParsedSearchParams} from "@/common/_feat";
 import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/views/common/_comp/ui";
 import {ChevronsUpDown} from "lucide-react";
 import {
-    CurrentUserReservationsQueryOptionSchema,
+    CurrentUserReservationsQueryOptionSchema
+} from "@/domains/reservations/_feat/fetch-current-user-reservations";
+import {
     ReservationStatusLabelMap,
     ReservationTypeLabelMap
-} from "@/domains/reservations";
+} from "@/domains/reservations/_const/label-maps";
 
 type CollapsibleProps = {
     children: ReactNode;

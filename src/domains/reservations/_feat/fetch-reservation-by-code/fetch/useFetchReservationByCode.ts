@@ -6,14 +6,16 @@ import {ReservationUniqueCode} from "@/domains/reservations/_schema";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
-import {getFetchByCode} from "@/domains/reservations/_feat/fetch-reservation-by-code/repositories";
+import {getFetchByCode} from "@/domains/reservations/_feat/fetch-reservation-by-code/repositories/repository.ts";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {
     FetchByCodeData,
     FetchByCodeDataSchema,
+} from "@/domains/reservations/_feat/fetch-reservation-by-code/schemas";
+import {
     FetchByCodeQueryKeys
-} from "@/domains/reservations/_feat/fetch-reservation-by-code";
+} from "@/domains/reservations/_feat/fetch-reservation-by-code/fetch/queryKeys.ts";
 
 /** Props for the useFetchReservationByCode hook. */
 type FetchCodeParams = {

@@ -7,7 +7,7 @@ import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchem
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator} from "@/views/common/_comp/ui";
 import {ObjectId} from "@/common/_schemas";
-import {ReservationUniqueCode} from "@/domains/reservations";
+import {ReservationUniqueCode} from "@/domains/reservations/_schema/model/fields/ReservationUniqueCodeSchema.ts";
 
 /** Props for the CustomerReservationPageBreadcrumbs component. */
 type BreadcrumbProps = {

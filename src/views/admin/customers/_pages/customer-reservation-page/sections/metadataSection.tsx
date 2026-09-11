@@ -3,10 +3,12 @@
  */
 
 import {ReactElement} from "react";
-import {ReservationStatusBadge} from "@/views/client/reservations";
-import {AdminReservation} from "@/domains/reservations";
+import {ReservationStatusBadge} from "@/views/client/reservations/_comp/reservation-badges/ReservationStatusBadge.tsx";
+import {AdminReservation} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationSchema.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image/MoviePosterImage.tsx";
-import {CustomerReservationSummaryCard} from "@/views/admin/reservations";
+import {
+    CustomerReservationSummaryCard
+} from "@/views/admin/reservations/_comp/customer-reservation-details/CustomerReservationSummaryCard.tsx";
 
 /** Props for the CustomerReservationMetadataSection component. */
 type SectionProps = {

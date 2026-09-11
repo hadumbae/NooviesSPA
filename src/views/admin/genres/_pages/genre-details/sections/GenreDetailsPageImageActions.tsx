@@ -4,15 +4,15 @@
 
 import {ReactElement} from "react";
 import {SROnly} from "@/views/common/_comp/screen-readers";
+import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 import {
-    Genre,
     useDeletingGenreImageUIContext,
     useDeletingGenreImageUIContextActions,
     usePendingGenreImageDeleteUIContextActions,
     usePendingGenreImageUpdateUIContextActions,
     useUpdatingGenreImageUIContext,
     useUpdatingGenreImageUIContextActions
-} from "@/domains/genres";
+} from "@/domains/genres/_ctx/ui";
 import {GenreImageUploadForm, GenreImageUploadPanel, RemoveGenreImageWarningDialog,} from "@/views/admin/genres/_feat";
 
 /** Props for the GenreDetailsPageImageActions component. */

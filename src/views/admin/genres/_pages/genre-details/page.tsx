@@ -8,10 +8,9 @@ import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-par
 import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import {
     GenreDetailsUIContextProvider,
-    GenreDetailsUIPendingContextProvider,
-    GenreDetailsViewData,
-    useFetchGenreDetailsViewData
-} from "@/domains/genres";
+    GenreDetailsUIPendingContextProvider
+} from "@/domains/genres/_feat/page-context";
+import {GenreDetailsViewData, useFetchGenreDetailsViewData} from "@/domains/genres/_feat/admin-view-data";
 import {GenreDetailsPageContent} from "@/views/admin/genres/_pages/genre-details/content.tsx";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {PageLoader} from "@/views/common/_comp/page";

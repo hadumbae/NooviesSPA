@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import {CustomerDetailsCard} from "@/views/admin/customers/_comp";
 import {PageHeader} from "@/views/common/_comp";
-import {AdminReservation} from "@/domains/reservations";
+import {AdminReservation} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationSchema.ts";
 import {LeanUserWithEmail} from "@/domains/users/_schema/user";
 import {
     CustomerReservationMetadataSection,
@@ -15,10 +15,17 @@ import {
 import {useTitle} from "@/common/_feat";
 import {Separator} from "@/views/common/_comp/ui";
 import {
-    AdminReservationActionsSection, AdminReservationNotesSection,
-    CustomerReservationDateList,
+    AdminReservationActionsSection
+} from "@/views/admin/reservations/_feat/sections/AdminReservationActionsSection.tsx";
+import {
+    AdminReservationNotesSection
+} from "@/views/admin/reservations/_feat/sections/AdminReservationNotesSection.tsx";
+import {
+    CustomerReservationDateList
+} from "@/views/admin/reservations/_comp/customer-reservation-details/CustomerReservationDateList.tsx";
+import {
     CustomerReservationTheatreSummaryCard
-} from "@/views/admin/reservations";
+} from "@/views/admin/reservations/_comp/customer-reservation-details/CustomerReservationTheatreSummaryCard.tsx";
 
 /** Props for the CustomerReservationPageContent component. */
 type ContentProps = {

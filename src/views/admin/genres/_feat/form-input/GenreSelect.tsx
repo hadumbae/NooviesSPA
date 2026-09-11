@@ -12,7 +12,8 @@ import {
 import {QueryDataLoader} from "@/views/common/_feat";
 import {HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
-import {Genre, GenreQueryOptions, GenreSchema, useFetchGenres} from "@/domains/genres";
+import {Genre, GenreQueryOptions, GenreSchema} from "@/domains/genres/_schema";
+import {useFetchGenres} from "@/domains/genres/_feat/crud-hooks/fetch/useFetchGenres.ts";
 
 /** Props for the GenreMultiSelect component. */
 type SelectProps<TValues extends FieldValues> = Omit<HookFormInputControlProps<TValues>, "control"> & {

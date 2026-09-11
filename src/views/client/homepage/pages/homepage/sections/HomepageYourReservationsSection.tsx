@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {ReservationSummary} from "@/domains/reservations";
+import {ReservationSummary} from "@/domains/reservations/_schema/model/reservations/ReservationSummarySchema.ts";
 import {PageSectionHeader} from "@/views/common/_comp";
 import {HomepageReservationCard} from "@/views/client/homepage/_comp";
 

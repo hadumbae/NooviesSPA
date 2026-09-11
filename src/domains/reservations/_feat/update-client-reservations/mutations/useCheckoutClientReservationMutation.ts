@@ -8,7 +8,10 @@ import {patchCheckoutTicket} from "@/domains/reservations/_feat/update-client-re
 import {
     UpdateClientReservationMutationKeys
 } from "@/domains/reservations/_feat/update-client-reservations/mutations/mutationKeys.ts";
-import {CurrentUserReservationQueryKeys, ReservationCRUDQueryKeys} from "@/domains/reservations";
+import {
+    CurrentUserReservationQueryKeys
+} from "@/domains/reservations/_feat/fetch-current-user-reservations/keys/CurrentUserReservationQueryKeys.ts";
+import {ReservationCRUDQueryKeys} from "@/domains/reservations/_feat/crud-hooks/queryKeys.ts";
 
 /**
  * Provides a mutation for checking out a ticket by its ID.

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {ReservationUniqueCode} from "@/domains/reservations";
+import {ReservationUniqueCode} from "@/domains/reservations/_schema/model/fields/ReservationUniqueCodeSchema.ts";
 import {HeaderSubtitle, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 /** Props for the ReservationByCodePageHeader component. */

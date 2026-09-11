@@ -4,12 +4,14 @@
 
 import {ReactElement, useState} from "react";
 
-import {AdminReservation} from "@/domains/reservations";
+import {AdminReservation} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationSchema.ts";
 import {
     AdminReservationResetExpiryDialog
 } from "@/views/admin/reservations/_feat/reservation-actions/reset-expiry/AdminReservationResetExpiryDialog.tsx";
 import {AdminActionButton} from "@/views/common/_comp";
-import {AdminReservationResetExpiryForm} from "@/views/admin/reservations";
+import {
+    AdminReservationResetExpiryForm
+} from "@/views/admin/reservations/_feat/reservation-actions/reset-expiry/AdminReservationResetExpiryForm.tsx";
 
 /** Props for the AdminReservationResetExpiryAction component. */
 type ActionProps = {

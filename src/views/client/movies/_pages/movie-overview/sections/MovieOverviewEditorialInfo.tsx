@@ -7,7 +7,7 @@ import {ReactElement} from "react";
 import {Separator} from "@/views/common/_comp/ui";
 import {SeparatedLinks} from "@/views/common/_feat";
 import {PageSectionHeader} from "@/views/common/_comp/page";
-import {generateGenreLinkConfigs} from "@/domains/genres";
+import {generateGenreLinkConfigs} from "@/domains/genres/_feat/navigation/generateGenreLinkConfigs.ts";
 import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {LabelContent} from "@/views/common/_comp";
 

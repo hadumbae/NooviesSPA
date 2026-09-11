@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, useState} from "react";
-import {AdminReservation} from "@/domains/reservations";
+import {AdminReservation} from "@/domains/reservations/_schema/model/admin-reservations/AdminReservationSchema.ts";
 import {
     AdminReservationCancelForm
 } from "@/views/admin/reservations/_feat/reservation-actions/cancel/AdminReservationCancelForm.tsx";

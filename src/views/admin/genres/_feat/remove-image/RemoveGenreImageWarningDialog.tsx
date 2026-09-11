@@ -6,7 +6,8 @@ import {ReactElement, ReactNode} from "react";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {ObjectId} from "@/common/_schemas";
 import {UIOpenStateProps} from "@/common/_types";
-import {Genre, useRemoveGenreImage} from "@/domains/genres";
+import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
+import {useRemoveGenreImage} from "@/domains/genres/_feat/manage-image/mutations/useRemoveGenreImage.ts";
 import {
     AlertDialog,
     AlertDialogAction,

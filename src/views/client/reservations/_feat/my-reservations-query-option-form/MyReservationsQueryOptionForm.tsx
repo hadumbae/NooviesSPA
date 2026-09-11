@@ -4,9 +4,11 @@
 
 import {ReactElement, ReactNode} from "react";
 import {
-    CurrentUserReservationsQueryOptionFormValues, CurrentUserReservationsQueryOptions,
-    CurrentUserReservationsQueryOptionSchema, useCurrentUserReservationsQueryOptionForm
-} from "@/domains/reservations";
+    CurrentUserReservationsQueryOptionFormValues,
+    CurrentUserReservationsQueryOptions,
+    CurrentUserReservationsQueryOptionSchema,
+    useCurrentUserReservationsQueryOptionForm
+} from "@/domains/reservations/_feat/fetch-current-user-reservations";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 import {useParsedSearchParams} from "@/common/_feat";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";

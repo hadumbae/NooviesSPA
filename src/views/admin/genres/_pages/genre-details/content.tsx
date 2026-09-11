@@ -8,7 +8,7 @@ import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayC
 import {MovieIndexCard} from "@/views/admin/movies/_comp/index-list-display";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 import {Ellipsis} from "lucide-react";
-import {Genre} from "@/domains/genres";
+import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 import {
     GenreDetailsPageBreadcrumbs,
     GenreDetailsPageGenreActions,

@@ -7,7 +7,7 @@ import {DateTime} from "luxon";
 import {cn} from "@/common/_feat";
 import {LucideIcon} from "lucide-react";
 import {Card, CardContent} from "@/views/common/_comp/ui";
-import {ReservationStatus} from "@/domains/reservations";
+import {ReservationStatus} from "@/domains/reservations/_schema/model/fields/ReservationStatusEnumSchema.ts";
 
 /** Props for the ReservationActiveDateCard component. */
 type CardProps = {

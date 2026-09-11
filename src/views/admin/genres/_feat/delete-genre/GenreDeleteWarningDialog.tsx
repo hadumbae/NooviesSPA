@@ -9,7 +9,7 @@ import {
 } from "@/views/common/_feat/dialog/EntityDeleteWarningDialog.tsx";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {UIOpenStateProps} from "@/common/_types";
-import {useDeleteGenre} from "@/domains/genres";
+import {useDeleteGenre} from "@/domains/genres/_feat/crud-hooks/mutate/useDeleteGenre.ts";
 
 /** Props for the {@link GenreDeleteWarningDialog} component. */
 type DialogProps = UIOpenStateProps & {

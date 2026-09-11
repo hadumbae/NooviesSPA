@@ -5,7 +5,7 @@
 
 import {ReactElement} from "react";
 import {useFetchGenres} from "@/domains/genres/_feat/crud-hooks/fetch/useFetchGenres.ts";
-import {GenreSchema} from "@/domains/genres";
+import {GenreSchema} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {Genre} from "@/domains/genres/_schema";
 import {BrowseGenresPageContent} from "@/views/client/genres/browse-genres-page/content.tsx";
