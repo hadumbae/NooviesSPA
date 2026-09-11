@@ -3,7 +3,7 @@
  */
 
 import {ReactElement, useEffect} from 'react';
-import {useAuthLogoutSubmitMutation} from "@/domains/auth/_feat/auth-logout/useAuthLogoutSubmitMutation.ts";
+import {useAuthLogoutUser} from "@/domains/auth/_feat/user-logout/useAuthLogoutUser.ts";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {PageLoader} from "@/views/common/_comp/page";
 
@@ -21,7 +21,7 @@ export function AuthLogoutPage(): ReactElement {
         });
     };
 
-    const {mutate: logout} = useAuthLogoutSubmitMutation({onSubmitSuccess: onLogout});
+    const {mutate: logout} = useAuthLogoutUser({onSubmitSuccess: onLogout});
 
     useEffect(() => {
         logout();

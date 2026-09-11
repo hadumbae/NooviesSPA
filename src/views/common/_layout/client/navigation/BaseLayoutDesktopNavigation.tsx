@@ -5,7 +5,7 @@ import {
 import {
     BaseLayoutDesktopClientNavigation
 } from "@/views/common/_layout/client/navigation/desktop-client-navigation/BaseLayoutDesktopClientNavigation.tsx";
-import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
+import {AuthContext} from "@/domains/auth/_feat/auth-context/AuthContext.ts";
 import {useAuthContext} from "@/domains/auth";
 
 /**

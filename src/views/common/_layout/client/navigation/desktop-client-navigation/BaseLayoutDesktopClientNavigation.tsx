@@ -6,6 +6,7 @@ import {ReactElement} from 'react';
 import {LayoutNavLink} from "@/views/common/_comp/layout/LayoutNavLink.tsx";
 import {Button} from "@/views/common/_comp/ui";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
+import {SROnly} from "@/views/common/_comp";
 import {
     BaseLayoutClientProfileNavigationDropdown
 } from "@/views/common/_layout/client/navigation/desktop-client-navigation/BaseLayoutClientProfileNavigationDropdown.tsx";
@@ -15,8 +16,8 @@ import {
 import {
     BaseLayoutDesktopThemeDropdown
 } from "@/views/common/_layout/common/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";
-import {useAuthContext, useAuthLogoutSubmitMutation} from "@/domains/auth";
-import {SROnly} from "@/views/common/_comp";
+import {useAuthContext} from "@/domains/auth";
+import {useAuthLogoutUser} from "@/domains/auth/_feat/user-logout/useAuthLogoutUser.ts";
 
 /**
  * Renders the primary horizontal navigation suite for desktop users.
@@ -27,7 +28,7 @@ export function BaseLayoutDesktopClientNavigation(): ReactElement {
     const {isAdmin} = useAuthContext();
 
     const onLogout = () => navigate({to: "/", component: BaseLayoutDesktopClientNavigation.name});
-    const {mutate: logout} = useAuthLogoutSubmitMutation({onSubmitSuccess: onLogout});
+    const {mutate: logout} = useAuthLogoutUser({onSubmitSuccess: onLogout});
 
     return (
         <section className="flex items-center space-x-2 font-spaceGrotesk">

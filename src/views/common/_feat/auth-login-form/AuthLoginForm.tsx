@@ -4,12 +4,12 @@
 
 import {createForm} from "@/common/_feat";
 import {User} from "@/domains/users/_schema/user/UserSchema.ts";
-import {useAuthLoginSubmitMutation} from "@/domains/auth/_feat/auth-login-fom/hooks/useAuthLoginSubmitMutation.ts";
+import {useAuthLoginUser} from "@/domains/auth/_feat/user-login/useAuthLoginUser.ts";
 import {
     AuthLoginFormData,
     AuthLoginFormSchema,
     AuthLoginFormValues
-} from "@/domains/auth/_feat/auth-login-fom/schema/AuthLoginFormSchema";
+} from "@/domains/auth/_feat/user-login/AuthLoginFormSchema";
 
 const {SubmitForm, useSubmitForm} = createForm<
     AuthLoginFormValues,
@@ -19,7 +19,7 @@ const {SubmitForm, useSubmitForm} = createForm<
 >({
     formName: "auth-login-form",
     schema: AuthLoginFormSchema,
-    mutation: useAuthLoginSubmitMutation,
+    mutation: useAuthLoginUser,
     defaultValues: {
         email: "",
         password: "",

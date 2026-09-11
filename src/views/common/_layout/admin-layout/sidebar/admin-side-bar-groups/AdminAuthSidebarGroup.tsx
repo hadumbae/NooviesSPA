@@ -5,7 +5,7 @@
 import {ReactElement} from 'react';
 import {Link} from "react-router-dom";
 import {User} from "lucide-react";
-import {useAuthLogoutSubmitMutation} from "@/domains/auth/_feat";
+import {useAuthLogoutUser} from "@/domains/auth/_feat/user-logout/useAuthLogoutUser.ts";
 import {useLoggedNavigate} from "@/common/_feat/navigation";
 import {
     SidebarGroup,
@@ -23,7 +23,7 @@ export function AdminAuthSidebarGroup(): ReactElement {
     const navigate = useLoggedNavigate();
 
     const onLogout = () => navigate({to: "/", component: AdminAuthSidebarGroup.name});
-    const {mutate} = useAuthLogoutSubmitMutation({onSubmitSuccess: onLogout});
+    const {mutate} = useAuthLogoutUser({onSubmitSuccess: onLogout});
 
     return (
         <SidebarGroup>

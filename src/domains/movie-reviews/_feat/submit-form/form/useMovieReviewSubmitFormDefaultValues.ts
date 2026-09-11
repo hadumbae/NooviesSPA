@@ -5,7 +5,7 @@
 
 import {useContext, useRef} from "react";
 import {isEqual} from "lodash";
-import {AuthContext} from "@/domains/auth/_feat/manage-auth-user-data/context/AuthContext.ts";
+import {AuthContext} from "@/domains/auth/_feat/auth-context/AuthContext.ts";
 
 import {MovieReview} from "@/domains/movie-reviews/_schema/model";
 import {MovieReviewFormValues} from "@/domains/movie-reviews/_feat/submit-form/schema/MovieReviewFormSchema.ts";

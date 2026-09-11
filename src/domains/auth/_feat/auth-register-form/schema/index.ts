@@ -1,1 +1,0 @@
-export * from "@/domains/auth/_feat/auth-register-form/schema/AuthRegisterFormSchema.ts";

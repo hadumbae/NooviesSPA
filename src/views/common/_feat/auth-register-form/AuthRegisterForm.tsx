@@ -2,11 +2,9 @@
  * @fileoverview Container component for the user registration form.
  */
 
-import {useAuthRegisterForm} from "@/domains/auth/_feat/auth-register-form/hooks/useAuthRegisterForm.ts";
-import {
-    useAuthRegisterSubmitMutation
-} from "@/domains/auth/_feat/auth-register-form/hooks/useAuthRegisterSubmitMutation.ts";
-import type {AuthRegisterForm} from "@/domains/auth/_feat/auth-register-form/schema";
+import {useAuthRegisterForm} from "@/domains/auth/_feat/user-register/useAuthRegisterForm.ts";
+import {useAuthRegisterUser} from "@/domains/auth/_feat/user-register/useAuthRegisterUser.ts";
+import type {AuthRegisterForm} from "@/domains/auth/_feat/user-register/AuthRegisterFormSchema.ts";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {ReactElement, ReactNode, useId} from "react";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
@@ -28,7 +26,7 @@ export function AuthRegisterForm(
     const formID = `auth-register-form-${id}`;
 
     const form = useAuthRegisterForm();
-    const {mutate, isPending, isError} = useAuthRegisterSubmitMutation({form, ...onSubmitConfig});
+    const {mutate, isPending, isError} = useAuthRegisterUser({form, ...onSubmitConfig});
 
     const onSubmit = (values: AuthRegisterForm) => {
         mutate(values);

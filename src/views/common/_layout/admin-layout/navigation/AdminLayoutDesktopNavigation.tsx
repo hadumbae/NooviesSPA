@@ -6,7 +6,7 @@ import {ReactElement} from 'react';
 import {SROnly} from "@/views/common/_comp";
 import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
-import {useAuthLogoutSubmitMutation} from "@/domains/auth/_feat/auth-logout/useAuthLogoutSubmitMutation.ts";
+import {useAuthLogoutUser} from "@/domains/auth/_feat/user-logout/useAuthLogoutUser.ts";
 import {
     BaseLayoutDesktopThemeDropdown
 } from "@/views/common/_layout/common/navigation/desktop-theme-navigation/BaseLayoutDesktopThemeDropdown.tsx";
@@ -28,7 +28,7 @@ export function AdminLayoutDesktopNavigation(): ReactElement {
     const navigate = useLoggedNavigate();
 
     const onLogout = () => navigate({to: "/", component: AdminLayoutDesktopNavigation.name});
-    const {mutate: logout} = useAuthLogoutSubmitMutation({onSubmitSuccess: onLogout});
+    const {mutate: logout} = useAuthLogoutUser({onSubmitSuccess: onLogout});
 
     return (
         <section className="flex items-center space-x-0 font-spaceGrotesk">

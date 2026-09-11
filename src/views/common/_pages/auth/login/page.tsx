@@ -14,7 +14,8 @@ import {AuthLoginPageHeader} from "@/views/common/_pages";
 import {AuthLoginFormView} from "@/views/common/_feat";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {User} from "@/domains/users/_schema/user/UserSchema.ts";
-import {setAuthExpireBy, useSetAuthUser} from "@/domains/auth/_feat/manage-auth-user-data/storage";
+import {setAuthExpireBy} from "@/domains/auth/_feat/storage";
+import {useSetAuthUser} from "@/domains/auth/_feat/manage-auth-user-data";
 import {AuthLoginForm} from "@/views/common/_feat/auth-login-form/AuthLoginForm.tsx";
 
 /**
