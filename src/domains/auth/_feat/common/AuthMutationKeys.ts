@@ -11,5 +11,6 @@ export const AuthMutationKeys = buildQueryKey(
         register: ["register"],
         login: ["login"],
         logout: ["logout"],
+        refresh: ["refresh"],
     },
 );
