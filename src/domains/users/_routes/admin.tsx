@@ -19,7 +19,7 @@ export const AdminUserRoutes: RouteObject[] = [
                 errorElement: <ComponentErrorHandler/>,
                 lazy: async () => {
                     const {UserIndexPage} = await import("@/views/admin/users/pages/index-page/page.tsx");
-                    const {UserIndexQueryOptionsContextProvider} = await import("@/domains/users");
+                    const {UserIndexQueryOptionsContextProvider} = await import("@/domains/users/_ctx/UserIndexQueryOptionsContext.ts");
                     return {
                         Component: () => (
                             <UserIndexQueryOptionsContextProvider>

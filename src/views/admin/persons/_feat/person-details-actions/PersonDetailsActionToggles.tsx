@@ -3,7 +3,11 @@
  */
 
 import {ReactElement, ReactNode} from 'react';
-import {usePersonDeletingUIActions, usePersonFormUIActions, usePersonImageFormUIActions} from "@/domains/persons";
+import {
+    usePersonDeletingUIActions,
+    usePersonFormUIActions,
+    usePersonImageFormUIActions
+} from "@/domains/persons/_ctx/ui";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/views/common/_comp/ui";
 import {onUISelect} from "@/common/_feat";
 

@@ -9,7 +9,7 @@ import {PersonDetailsPageHeader} from "@/views/admin/persons/_pages/details-page
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {PersonDetailsCard} from "@/views/admin/persons/_comp/person-details";
 import {PersonDetailsCreditOverview} from "@/views/admin/persons/_comp";
-import {Person} from "@/domains/persons";
+import {Person} from "@/domains/persons/_schema/person/PersonSchema.ts";
 import {PersonFilmography} from "@/domains/movie-credits";
 import {useSetAdminPageTitle} from "@/common/_feat";
 

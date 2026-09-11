@@ -8,7 +8,7 @@ import {CoercedNumberValueSchema} from "@/common/_schemas/numbers/number-value/C
 import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alpha2CountryCodeSchema.ts";
 import {IANATimezoneSchema} from "@/common/_schemas/time/IANATimezoneSchema.ts";
 import {preprocessOptionalField} from "@/common/_feat";
-import {TheatreNameSchema} from "@/domains/theatres";
+import {TheatreNameSchema} from "@/domains/theatres/_schema/fields/TheatreNameSchema.ts";
 import {CityStringSchema, PostalCodeSchema, StateStringSchema, StreetStringSchema} from "@/common/_models/location";
 
 /** Zod schema defining filter parameters for querying theatre data. */

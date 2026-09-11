@@ -16,7 +16,7 @@ const routes: RouteObject[] = [
                 errorElement: <ComponentErrorHandler/>,
                 lazy: async () => {
                     const {BrowseTheatreListPage} = await import("@/views/client/theatres");
-                    const {TheatreLocationQueryOptionsContextProvider} = await import("@/domains/theatres");
+                    const {TheatreLocationQueryOptionsContextProvider} = await import("@/domains/theatres/_feat/handle-query-options/theatre-location/TheatreLocationQueryOptionsContext.ts");
                     return {
                         Component: () => (
                             <TheatreLocationQueryOptionsContextProvider>
@@ -31,7 +31,7 @@ const routes: RouteObject[] = [
                 errorElement: <ComponentErrorHandler/>,
                 lazy: async () => {
                     const {TheatreInfoPage} = await import("@/views/client/theatres");
-                    const {TheatreInfoQueryOptionsContextProvider} = await import("@/domains/theatres");
+                    const {TheatreInfoQueryOptionsContextProvider} = await import("@/domains/theatres/_feat/handle-query-options/theatre-info/TheatreInfoQueryOptionsContext.ts");
                     return {
                         Component: () => (
                             <TheatreInfoQueryOptionsContextProvider>

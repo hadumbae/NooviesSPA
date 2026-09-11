@@ -1,5 +1,6 @@
 import {ReactElement, useState} from "react";
-import {User, useUserIndexQueryOptionsContext} from "@/domains/users";
+import {User} from "@/domains/users/_schema/user/UserSchema.ts";
+import {useUserIndexQueryOptionsContext} from "@/domains/users/_ctx/UserIndexQueryOptionsContext.ts";
 import {PageFlexWrapper, PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {UserIndexCard} from "@/views/admin/users/_comp/index-card";
 import {QueryOptionsFormCollapsible} from "@/views/common/_feat";

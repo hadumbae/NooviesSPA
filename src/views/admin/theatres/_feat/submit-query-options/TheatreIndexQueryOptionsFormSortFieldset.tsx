@@ -4,7 +4,9 @@
 
 import {ReactElement} from "react";
 import {cn, FormViewProps} from "@/common/_feat";
-import {TheatreIndexQueryOptionsFormValues} from "@/domains/theatres";
+import {
+    TheatreIndexQueryOptionsFormValues
+} from "@/domains/theatres/_feat/handle-query-options/theatre-index/TheatreIndexQueryOptionsSchema.ts";
 import {HookFormSortToggle} from "@/views/common/_feat";
 
 /**

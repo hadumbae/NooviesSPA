@@ -4,7 +4,9 @@
 
 import {FetchRequestReturns} from "@/common/_types";
 import {buildURL, useFetchAPI} from "@/common/_feat";
-import {UpdateUserAdminRoleReturns} from "@/domains/users/_feat/manage-user-roles/manage-admin-role";
+import {
+    UpdateUserAdminRoleReturns
+} from "@/domains/users/_feat/manage-user-roles/manage-admin-role/schema/UpdateUserAdminRoleReturnsSchema.ts";
 import {ManageUserRolesBaseURL} from "@/domains/users/_feat/manage-user-roles/repository/baseURL.ts";
 import {ManageUserAdminRoleConfig} from "@/domains/users/_feat/manage-user-roles/repository/repository.types.ts";
 

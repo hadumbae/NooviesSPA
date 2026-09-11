@@ -3,7 +3,9 @@
  */
 
 import {createQueryOptionForm} from "@/common/_feat";
-import {TheatreIndexQueryOptionsSchema} from "@/domains/theatres";
+import {
+    TheatreIndexQueryOptionsSchema
+} from "@/domains/theatres/_feat/handle-query-options/theatre-index/TheatreIndexQueryOptionsSchema.ts";
 
 const {QueryOptionForm, useQueryOptionForm} = createQueryOptionForm({
     name: "theatre-index-query-options-form",

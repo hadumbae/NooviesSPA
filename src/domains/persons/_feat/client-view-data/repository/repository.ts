@@ -5,13 +5,13 @@
 import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";
-import {PersonInfoViewData} from "@/domains/persons/_feat/client-view-data/person-info";
+import {PersonInfoViewData} from "@/domains/persons/_feat/client-view-data/person-info/dataSchema.ts";
 import {PersonClientViewBaseURL} from "@/domains/persons/_feat/client-view-data/repository/baseURL.ts";
 import {
     GetFetchBrowsePersonsViewDataConfig,
     GetFetchPersonInfoViewDataConfig,
 } from "@/domains/persons/_feat/client-view-data/repository/repository.types.ts";
-import {BrowsePersonsViewData} from "@/domains/persons/_feat/client-view-data";
+import {BrowsePersonsViewData} from "@/domains/persons/_feat/client-view-data/browse-persons/schema/dataSchema.ts";
 
 /** Fetches a paginated list of persons for the browse view. */
 export async function getFetchBrowsePersonsViewData(

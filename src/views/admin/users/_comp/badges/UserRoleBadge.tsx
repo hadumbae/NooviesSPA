@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {UserRole} from "@/domains/users";
+import {UserRole} from "@/domains/users/_schema/fields/UserRoleSchema.ts";
 import {Badge} from "@/views/common/_comp/ui";
 import {cn} from "@/common/_feat";
 

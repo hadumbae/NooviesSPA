@@ -8,11 +8,11 @@ import {QueryDataLoader} from "@/views/common/_feat";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {PaginatedItems} from "@/common/_types";
 
+import {TheatreWithRecentShowings} from "@/domains/theatres/_schema/theatre/TheatreWithRecentShowingsSchema.ts";
+import {useFetchTheatresByLocation} from "@/domains/theatres/_feat/search-theatres/fetch/useFetchTheatresByLocation.ts";
 import {
-    TheatreWithRecentShowings,
-    useFetchTheatresByLocation,
     useTheatreLocationQueryOptionsContext
-} from "@/domains/theatres";
+} from "@/domains/theatres/_feat/handle-query-options/theatre-location/TheatreLocationQueryOptionsContext.ts";
 import {BrowseTheatreListPageContent} from "@/views/client/theatres/_pages/browse-theatre-page/content.tsx";
 
 const THEATRES_PER_PAGE = 20;

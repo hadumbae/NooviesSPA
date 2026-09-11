@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {LoggedLink} from "@/views/common/_feat";
 import {cn} from "@/common/_feat";
 import {ObjectId} from "@/common/_schemas";
-import {UserUniqueCode} from "@/domains/users";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 
 /** Style overrides for the CustomerUniqueCodeDisplay component. */
 export type DisplayClassNames = {

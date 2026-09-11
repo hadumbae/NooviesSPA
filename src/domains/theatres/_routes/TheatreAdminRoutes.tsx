@@ -16,7 +16,7 @@ const routes = [
                 index: true,
                 lazy: async () => {
                     const {TheatreIndexPage} = await import("@/views/admin/theatres/_pages");
-                    const {TheatreIndexQueryOptionsContextProvider} = await import("@/domains/theatres");
+                    const {TheatreIndexQueryOptionsContextProvider} = await import("@/domains/theatres/_feat/handle-query-options/theatre-index/TheatreIndexQueryOptionsContext.ts");
                     return {
                         Component: () => (
                             <TheatreIndexQueryOptionsContextProvider>

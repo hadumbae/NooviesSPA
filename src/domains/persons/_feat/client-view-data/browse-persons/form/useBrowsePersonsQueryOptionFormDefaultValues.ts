@@ -7,7 +7,9 @@ import {isEqual} from "lodash";
 import {
     BrowsePersonsQueryOptionFormValues
 } from "@/domains/persons/_feat/client-view-data/browse-persons/form/BrowsePersonsQueryOptionFormValues.ts";
-import {BrowsePersonsQueryOptions} from "@/domains/persons";
+import {
+    BrowsePersonsQueryOptions
+} from "@/domains/persons/_feat/validate-query-options/person-browse/BrowsePersonsQueryOptionsSchema.ts";
 import {parseSearchParamFormValues} from "@/common/_feat";
 
 /** Configuration for initialising person query form values. */

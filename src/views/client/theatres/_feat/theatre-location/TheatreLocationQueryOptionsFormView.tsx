@@ -11,7 +11,7 @@ import {
     useAutoFormSubmit,
     useQueryOptionFormContext
 } from "@/common/_feat";
-import {TheatreLocationQueryOptionsFormValues} from "@/domains/theatres";
+import {TheatreLocationQueryOptionsFormValues} from "@/domains/theatres/_feat/handle-query-options/theatre-location/TheatreLocationQueryOptionsSchema.ts";
 import {HookFormInput} from "@/views/common/_feat";
 import {useFormContext} from "react-hook-form";
 import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";

@@ -3,7 +3,8 @@
  */
 
 import {z} from "zod";
-import {UserModerationLogReferenceSchema, UserSchema} from "@/domains/users";
+import {UserModerationLogReferenceSchema} from "@/domains/users/_schema/mod-log/refSchema.ts";
+import {UserSchema} from "@/domains/users/_schema/user/UserSchema.ts";
 
 /** Zod schema for validating the return payload of a user status update operation. */
 export const UpdateUserStatusReturnsSchema = z.object({

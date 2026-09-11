@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {PersonSummaryInfo} from "@/domains/persons/_feat/client-view-data";
 import {SROnly} from "@/views/common/_comp";
-import {BrowsePersonListCard} from "@/views/client/persons";
+import {BrowsePersonListCard} from "@/views/client/persons/_comp/browse-persons/BrowsePersonListCard.tsx";
 
 /** Props for the BrowsePersonsPageListSection component. */
 type SectionProps = {

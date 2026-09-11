@@ -6,7 +6,9 @@ import {ReactElement} from 'react';
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {PersonFilmography} from "@/domains/movie-credits";
-import {PersonDetailsCreditList} from "@/views/admin/persons/_comp";
+import {
+    PersonDetailsCreditList
+} from "@/views/admin/persons/_comp/person-credits-overview/PersonDetailsCreditList.tsx";
 
 /** Props for the PersonDetailsCreditOverview component. */
 type OverviewProps = {

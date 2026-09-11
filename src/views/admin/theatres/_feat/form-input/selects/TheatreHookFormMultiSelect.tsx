@@ -11,7 +11,9 @@ import {HookFormMultiSelect} from "@/views/common/_comp/form-select/HookFormMult
 import {HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
 import {generateArraySchema} from "@/common/_feat/validation-builders";
 
-import {Theatre, TheatreQueryOptions, TheatreSchema, useFetchTheatres} from "@/domains/theatres";
+import {Theatre, TheatreSchema} from "@/domains/theatres/_schema/theatre";
+import {TheatreQueryOptions} from "@/domains/theatres/_feat/handle-query-options/options/TheatreQueryOptionSchema.ts";
+import {useFetchTheatres} from "@/domains/theatres/_feat/crud-hooks/fetch/useFetchTheatres.ts";
 
 /** Props for the TheatreHookFormMultiSelect component. */
 type HookProps<TSubmit extends FieldValues> = HookFormInputControlProps<TSubmit> & {

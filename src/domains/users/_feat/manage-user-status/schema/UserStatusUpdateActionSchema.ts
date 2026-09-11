@@ -2,7 +2,7 @@
  * @fileoverview Zod schema and type definition for user status update action values.
  */
 
-import {UserModerationLogActionSchema} from "@/domains/users";
+import {UserModerationLogActionSchema} from "@/domains/users/_schema/fields/UserModerationLogActionSchema.ts";
 import {UserStatusUpdateActionConstant} from "@/domains/users/_feat/manage-user-status/const";
 import {z} from "zod";
 

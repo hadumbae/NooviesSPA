@@ -9,7 +9,7 @@ import {PopulatedReservation} from "@/domains/reservations/_schema";
 import {MyReservationCompactCard} from "@/views/client/reservations/_comp";
 import {ReactElement} from "react";
 import {PageHeader} from "@/views/common/_comp";
-import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users";
+import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users/_comp/my-profile-nav";
 import {Separator} from "@/views/common/_comp/ui";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 import {

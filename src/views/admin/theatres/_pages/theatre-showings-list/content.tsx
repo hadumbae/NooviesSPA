@@ -8,9 +8,11 @@ import {IconButton, PageHeader, PaginationRangeButtons} from "@/views/common/_co
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {ShowingSummaryCard} from "@/views/admin/showings/_comp/showing-summary-card";
 
-import {Theatre, TheatreDetails} from "@/domains/theatres";
+import {Theatre, TheatreDetails} from "@/domains/theatres/_schema/theatre";
 import {ShowingDetails} from "@/domains/showings/_schema/showing";
-import {TheatreShowingListBreadcrumbs} from "@/views/admin/theatres";
+import {
+    TheatreShowingListBreadcrumbs
+} from "@/views/admin/theatres/_pages/theatre-showings-list/elements/breadcrumbs.tsx";
 import {Plus} from "lucide-react";
 import {LoggedLink} from "@/views/common/_feat";
 

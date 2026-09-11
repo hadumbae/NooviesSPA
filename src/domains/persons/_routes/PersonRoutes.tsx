@@ -18,7 +18,7 @@ export const PersonRoutes = [
                 errorElement: <ComponentErrorHandler/>,
                 lazy: async () => {
                     const {PersonIndexPage} = await import("@/views/admin/persons/_pages/index-page/page.tsx");
-                    const {PersonIndexQueryOptionsContextProvider} = await import("@/domains/persons");
+                    const {PersonIndexQueryOptionsContextProvider} = await import("@/domains/persons/_feat/validate-query-options/person-index/PersonIndexQueryOptionsContext.ts");
                     return {
                         Component: () => (
                             <PersonIndexQueryOptionsContextProvider>
@@ -37,7 +37,7 @@ export const PersonRoutes = [
                         PersonDeletingUIContextProvider,
                         PersonFormUIContextProvider,
                         PersonImageFormUIContextProvider,
-                    } = await import("@/domains/persons");
+                    } = await import("@/domains/persons/_ctx/ui");
                     return {
                         Component: () => (
                             <PersonFormUIContextProvider>

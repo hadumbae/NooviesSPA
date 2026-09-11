@@ -8,7 +8,7 @@ import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 
-import {TheatreWithRecentShowings} from "@/domains/theatres";
+import {TheatreWithRecentShowings} from "@/domains/theatres/_schema/theatre/TheatreWithRecentShowingsSchema.ts";
 import {TheatreBrowseListCard} from "@/views/client/theatres/_comp";
 import {TheatreLocationQueryOptionsFormSection} from "@/views/client/theatres/_feat/theatre-location";
 

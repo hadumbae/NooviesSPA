@@ -3,7 +3,7 @@
  */
 
 import {ISO3166Alpha2CountryConstant} from "@/common/_const";
-import {TheatreDetails} from "@/domains/theatres";
+import {TheatreDetails} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 import {buildString} from "@/common/_feat/formatters/buildString.ts";
 
 /**

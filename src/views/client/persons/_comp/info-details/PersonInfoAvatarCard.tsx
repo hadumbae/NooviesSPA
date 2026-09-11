@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/views/common/_comp/ui";
-import {PersonProfileAvatar} from "@/views/admin/persons";
+import {PersonProfileAvatar} from "@/views/admin/persons/_comp/person-details/PersonProfileAvatar.tsx";
 import {cn} from "@/common/_feat";
 
 /** Props for the PersonInfoAvatarCard component. */

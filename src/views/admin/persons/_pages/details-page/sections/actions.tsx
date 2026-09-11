@@ -6,7 +6,8 @@ import {ReactElement} from "react";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {PersonSubmitForm, PersonSubmitFormPanel} from "@/views/admin/persons/_feat/submit-form";
 import {PersonDeleteWarningDialog} from "@/views/admin/persons/_feat/delete-person";
-import {buildPersonEditData, Person} from "@/domains/persons";
+import {buildPersonEditData} from "@/domains/persons/_feat/submit-form/buildPersonEditData.ts";
+import {Person} from "@/domains/persons/_schema/person/PersonSchema.ts";
 import {
     UploadPersonProfileImageForm,
     UploadPersonProfileImageFormPanel

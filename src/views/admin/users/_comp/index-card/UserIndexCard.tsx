@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {User} from "@/domains/users";
+import {User} from "@/domains/users/_schema/user/UserSchema.ts";
 import {cn} from "@/common/_feat";
 import {buttonVariants, Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {UserRoleBadge} from "@/views/admin/users/_comp/badges/UserRoleBadge.tsx";

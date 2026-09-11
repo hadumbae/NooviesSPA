@@ -9,7 +9,8 @@ import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 
-import {Theatre, TheatreDetails, useNavigateToTheatre} from "@/domains/theatres";
+import {Theatre, TheatreDetails} from "@/domains/theatres/_schema/theatre";
+import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation/useNavigateToTheatre.ts";
 import {TheatreIndexCard} from "@/views/admin/theatres/_comp";
 import {Plus} from "lucide-react";
 import {

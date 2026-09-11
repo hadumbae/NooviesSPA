@@ -7,7 +7,7 @@ import {ISO3166Alpha2CountryCodeSchema} from "@/common/_schemas/enums/ISO3166Alp
 import {NonFutureDateStringSchema} from "@/common/_schemas/dates/NonFutureDateStringSchema.ts";
 import {IDStringSchema} from "@/common/_schemas";
 import {AnyValues} from "@/common/_types";
-import {PersonBiographySchema, PersonNameSchema} from "@/domains/persons";
+import {PersonBiographySchema, PersonNameSchema} from "@/domains/persons/_schema/fields";
 import {preprocessEmptyToUndefined} from "@/common/_feat";
 
 /** Zod schema for validating person form data. */

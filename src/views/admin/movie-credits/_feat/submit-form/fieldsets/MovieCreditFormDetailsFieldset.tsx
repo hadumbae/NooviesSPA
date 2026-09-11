@@ -10,7 +10,7 @@ import {cn, createFormFieldConfig, FormViewProps, useBaseFormContext} from "@/co
 import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
 import {renderFields} from "@/common/_feat/submit-data";
 import {MovieCreditFormValues} from "@/domains/movie-credits";
-import {PersonFormSelect} from "@/views/admin/persons";
+import {PersonFormSelect} from "@/views/admin/persons/_feat/form-inputs/PersonFormSelect.tsx";
 
 /**
  * Fieldset containing inputs for person, role type, and credit display names.

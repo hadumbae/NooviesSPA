@@ -11,7 +11,10 @@ import {QueryDataLoader} from "@/views/common/_feat";
 import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 
-import {TheatreShowingListViewData, useFetchTheatreShowingListViewData} from "@/domains/theatres";
+import {
+    TheatreShowingListViewData,
+    useFetchTheatreShowingListViewData
+} from "@/domains/theatres/_feat/admin-view-data";
 import {TheatreShowingListPageContent} from "@/views/admin/theatres/_pages/theatre-showings-list/content.tsx";
 
 const SHOWINGS_PER_PAGE = 10;

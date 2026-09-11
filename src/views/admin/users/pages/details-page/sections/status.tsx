@@ -4,7 +4,10 @@
 
 import {ReactElement, useState} from "react";
 import {ObjectId} from "@/common/_schemas";
-import {useInvalidateUserQueriesOnModeration, UserStatus} from "@/domains/users";
+import {
+    useInvalidateUserQueriesOnModeration
+} from "@/domains/users/_feat/user-moderation-actions/keys/useInvalidateUserQueriesOnModeration.ts";
+import {UserStatus} from "@/domains/users/_schema/fields/UserStatusSchema.ts";
 import {AdminActionButton, PageSectionHeader} from "@/views/common/_comp";
 import {UpdateUserStatusForm} from "@/domains/users/_feat/manage-user-status/forms";
 import {UpdateUserStatusFormValues} from "@/domains/users/_feat/manage-user-status/schema";

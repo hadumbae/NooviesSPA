@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
-import {UserStatus} from "@/domains/users";
+import {UserStatus} from "@/domains/users/_schema/fields/UserStatusSchema.ts";
 import {Badge} from "@/views/common/_comp/ui";
 
 /** Props for the UserStatusBadge component. */

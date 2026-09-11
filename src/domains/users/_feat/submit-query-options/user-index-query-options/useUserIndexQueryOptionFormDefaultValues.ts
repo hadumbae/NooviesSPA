@@ -6,7 +6,7 @@ import {useRef} from "react";
 import {isEqual} from "lodash";
 import {QueryOptionFormValues} from "@/common/_feat";
 import {UserQueryOptions} from "@/domains/users/_schema/query-options";
-import {UserIndexQueryOptionFormValues} from "@/domains/users/_feat/submit-query-options";
+import {UserIndexQueryOptionFormValues} from "@/domains/users/_feat/submit-query-options/user-index-query-options/types.ts";
 
 /** Computes the initial form state by merging preset values and existing query options. */
 export function useUserIndexQueryOptionFormDefaultValues(

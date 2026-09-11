@@ -4,10 +4,10 @@
 
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
-import {Person} from "@/domains/persons";
+import {Person} from "@/domains/persons/_schema/person/PersonSchema.ts";
 import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";
-import {PersonProfileAvatar} from "@/views/admin/persons";
+import {PersonProfileAvatar} from "@/views/admin/persons/_comp/person-details/PersonProfileAvatar.tsx";
 import {LabelContentList} from "@/views/common/_comp";
 
 /** Props for the PersonInfoDetailsCard component. */

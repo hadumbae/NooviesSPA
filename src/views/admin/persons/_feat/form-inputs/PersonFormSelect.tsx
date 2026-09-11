@@ -4,7 +4,9 @@
 
 import {ReactElement} from "react";
 import {HookFormInputControlProps, ReactSelectOption, RequestOptions} from "@/common/_types";
-import {Person, PersonQueryFilters, PersonSchema, useFetchPersons} from "@/domains/persons";
+import {Person, PersonSchema} from "@/domains/persons/_schema/person";
+import {PersonQueryFilters} from "@/domains/persons/_schema/query-options";
+import {useFetchPersons} from "@/domains/persons/_feat/crud-hooks/fetch/useFetchPersons.ts";
 import {generateArraySchema} from "@/common/_feat";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {AnimatedLoader, HookFormSelect} from "@/views/common/_comp";

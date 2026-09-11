@@ -3,7 +3,9 @@
  */
 
 import {ObjectId} from "@/common/_schemas";
-import {UpdateUserAdminRoleFormData} from "@/domains/users/_feat/manage-user-roles/manage-admin-role";
+import {
+    UpdateUserAdminRoleFormData
+} from "@/domains/users/_feat/manage-user-roles/manage-admin-role/schema/UpdateUserAdminRoleFormSchema.ts";
 
 /** Configuration parameters required to update a user's administrative role status. */
 export type ManageUserAdminRoleConfig = {

@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {Reservation} from "@/domains/reservations/_schema/model";
-import {LeanUserWithEmail} from "@/domains/users";
+import {LeanUserWithEmail} from "@/domains/users/_schema/user/LeanUserWithEmailSchema.ts";
 import {PopulatedMovieReview} from "@/domains/movie-reviews";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {CustomerDetailsCard} from "@/views/admin/customers/_comp";

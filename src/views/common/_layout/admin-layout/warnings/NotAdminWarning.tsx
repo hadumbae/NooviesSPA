@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {AlertTriangle} from "lucide-react";
 import {Link, useLocation} from "react-router-dom";
 import {cn} from "@/common/_feat";
-import {User} from "@/domains/users";
+import {User} from "@/domains/users/_schema/user/UserSchema.ts";
 
 /** Config for the NotAdminWarning component. */
 const alertConfig = {

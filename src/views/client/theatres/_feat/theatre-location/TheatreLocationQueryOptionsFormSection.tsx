@@ -6,7 +6,9 @@ import {createQueryOptionFormSection} from "@/common/_feat";
 import {
     TheatreLocationQueryOptionForm
 } from "@/views/client/theatres/_feat/theatre-location/TheatreLocationQueryOptionsForm.tsx";
-import {useTheatreLocationQueryOptionsContext} from "@/domains/theatres";
+import {
+    useTheatreLocationQueryOptionsContext
+} from "@/domains/theatres/_feat/handle-query-options/theatre-location/TheatreLocationQueryOptionsContext.ts";
 import {
     TheatreLocationQueryOptionsFormView
 } from "@/views/client/theatres/_feat/theatre-location/TheatreLocationQueryOptionsFormView.tsx";

@@ -7,7 +7,7 @@ import {
     TheatreIndexQueryOptions,
     TheatreIndexQueryOptionsFormValues,
     useTheatreIndexQueryOptionsContext
-} from "@/domains/theatres";
+} from "@/domains/theatres/_feat/handle-query-options/theatre-index";
 import {
     TheatreIndexQueryOptionsFormView
 } from "@/views/admin/theatres/_feat/submit-query-options/TheatreIndexQueryOptionsFormView.tsx";

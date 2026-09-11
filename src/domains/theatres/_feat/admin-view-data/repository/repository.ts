@@ -6,7 +6,7 @@ import {
     GetFetchTheatreDetailsViewDataConfig, GetFetchTheatreShowingListViewDataConfig
 } from "@/domains/theatres/_feat/admin-view-data/repository/repository.types.ts";
 import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
-import {TheatreDetailsViewData} from "@/domains/theatres/_feat/admin-view-data";
+import {TheatreDetailsViewData} from "@/domains/theatres/_feat/admin-view-data/schema/TheatreDetailsViewDataSchema.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {TheatreAdminViewDataBaseURL} from "@/domains/theatres/_feat/admin-view-data/repository/baseURL.ts";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";

@@ -4,7 +4,10 @@
 
 import {ReactElement} from "react";
 import {UserDetailsPageContent} from "@/views/admin/users/pages/details-page/content.tsx";
-import {useFetchUserDetailsViewData, UserDetailsRouteParamsSchema} from "@/domains/users";
+import {
+    useFetchUserDetailsViewData,
+    UserDetailsRouteParamsSchema
+} from "@/domains/users/_feat/admin-view-data/user-details";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {useRouteParams, useTitle} from "@/common/_feat";
 

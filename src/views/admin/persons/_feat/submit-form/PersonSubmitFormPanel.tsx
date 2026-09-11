@@ -10,7 +10,7 @@ import {useRequiredContext} from "@/common/_feat/use-context/useRequiredContext.
 import {BaseFormContext} from "@/common/_feat/generic-form-context";
 import {AnimatedLoader} from "@/views/common/_comp/loaders/AnimatedLoader.tsx";
 import {UIOpenStateProps} from "@/common/_types";
-import {PersonFormValues} from "@/domains/persons";
+import {PersonFormValues} from "@/domains/persons/_feat/submit-form/PersonFormSchema.ts";
 import {HookFormSelect} from "@/views/common/_comp";
 import {ISO3166Alpha2CountryOptions} from "@/common/_const";
 import {

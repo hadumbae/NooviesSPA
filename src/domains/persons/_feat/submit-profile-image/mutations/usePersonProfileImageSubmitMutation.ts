@@ -5,8 +5,9 @@
 import {ObjectId} from "@/common/_schemas";
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {PersonProfileImageMutationKeys} from "@/domains/persons/_feat/submit-profile-image/mutations/mutationKeys.ts";
-import {patchUploadProfileImage, PersonProfileImageFormData} from "@/domains/persons/_feat/submit-profile-image";
-import {PersonCRUDQueryKeys} from "@/domains/persons";
+import {patchUploadProfileImage} from "@/domains/persons/_feat/submit-profile-image/repositories/repository.ts";
+import {PersonProfileImageFormData} from "@/domains/persons/_feat/submit-profile-image/form/PersonProfileImageFormSchema.ts";
+import {PersonCRUDQueryKeys} from "@/domains/persons/_feat/crud-hooks/keys/PersonCRUDQueryKeys.ts";
 
 /** Parameters for the profile image submission mutation. */
 export type ProfileImageSubmitConfig = {

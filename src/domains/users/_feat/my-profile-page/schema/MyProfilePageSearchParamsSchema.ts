@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {MyProfilePageActiveTabSchema} from "@/domains/users/_feat";
+import {MyProfilePageActiveTabSchema} from "@/domains/users/_feat/my-profile-page/schema/MyProfilePageActiveTabSchema.ts";
 import {preprocessOptionalField} from "@/common/_feat/validation-preprocessors";
 import {CoercedPositiveNumberSchema} from "@/common/_schemas";
 

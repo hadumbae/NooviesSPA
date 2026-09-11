@@ -3,7 +3,8 @@
  */
 
 import {AnyValues} from "@/common/_types";
-import {Person, PersonFormData} from "@/domains/persons";
+import {Person} from "@/domains/persons/_schema/person/PersonSchema.ts";
+import {PersonFormData} from "@/domains/persons/_feat/submit-form/PersonFormSchema.ts";
 
 /** Type representing editable form field values derived from PersonFormData. */
 export type PersonEditData = AnyValues<PersonFormData>;

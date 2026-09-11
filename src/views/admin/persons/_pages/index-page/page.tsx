@@ -12,7 +12,10 @@ import {useFetchPaginatedPersons} from "@/domains/persons/_feat/crud-hooks";
 import {PersonIndexPageContent} from "@/views/admin/persons/_pages/index-page/content.tsx";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {PaginatedItems} from "@/common/_types";
-import {Person, PersonSchema, usePersonIndexQueryOptionsContext} from "@/domains/persons";
+import {Person, PersonSchema} from "@/domains/persons/_schema/person";
+import {
+    usePersonIndexQueryOptionsContext
+} from "@/domains/persons/_feat/validate-query-options/person-index/PersonIndexQueryOptionsContext.ts";
 import {useSetAdminPageTitle} from "@/common/_feat";
 
 /** Default result set size for the person administrative grid. */

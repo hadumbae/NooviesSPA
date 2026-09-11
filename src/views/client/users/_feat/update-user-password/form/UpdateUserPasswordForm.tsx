@@ -12,7 +12,7 @@ import {
     UserPasswordUpdateFormValues,
     useUpdateUserPasswordForm,
     useUpdateUserPasswordSubmitMutation
-} from "@/domains/users";
+} from "@/domains/users/_feat/update-password";
 
 /** Props for the UpdateUserPasswordForm component. */
 type FormProps = {

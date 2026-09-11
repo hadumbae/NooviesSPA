@@ -12,7 +12,7 @@ import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation";
 
 import {simplifyScreenDetails} from "@/domains/theatre-screens/_feat/formatters";
 import {ScreenDeleteWarningDialog} from "@/views/admin/theatre-screens/_feat/model-options";
-import {TheatreDetails} from "@/domains/theatres";
+import {TheatreDetails} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 import {
     useIsDeletingUIContext,
     useIsDeletingUIContextActions,

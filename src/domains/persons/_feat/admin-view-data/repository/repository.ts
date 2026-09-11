@@ -4,7 +4,7 @@
 
 import {FetchPersonDetailsViewDataConfig} from "@/domains/persons/_feat/admin-view-data/repository/repository.types.ts";
 import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns.ts";
-import {PersonDetailsViewData} from "@/domains/persons/_feat/admin-view-data";
+import {PersonDetailsViewData} from "@/domains/persons/_feat/admin-view-data/schema/PersonDetailsViewSchema.ts";
 import {buildURL} from "@/common/_feat/fetch-api";
 import {PersonAdminViewDataBaseURL} from "@/domains/persons/_feat/admin-view-data/repository/baseURL.ts";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI.ts";

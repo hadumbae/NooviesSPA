@@ -13,12 +13,12 @@ import {QueryDataLoader} from "@/views/common/_feat";
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 
 import {TheatreDetailsPageContent} from "@/views/admin/theatres/_pages/theatre-details-page/content.tsx";
+import {TheatreDetailsUIContextProvider} from "@/domains/theatres/_ctx/theatre-details-ui";
+import {TheatreDetailsViewData} from "@/domains/theatres/_feat/admin-view-data/schema/TheatreDetailsViewDataSchema.ts";
+import {TheatreHttpStatusOverrideText} from "@/domains/theatres/_const/TheatreHttpStatusOverrideText.ts";
 import {
-    TheatreDetailsUIContextProvider,
-    TheatreDetailsViewData,
-    TheatreHttpStatusOverrideText,
     useFetchTheatreDetailsViewData
-} from "@/domains/theatres";
+} from "@/domains/theatres/_feat/admin-view-data/fetch/useFetchTheatreDetailsViewData.ts";
 
 /** Number of screens displayed per pagination page. */
 const SCREENS_PER_PAGE = 25;

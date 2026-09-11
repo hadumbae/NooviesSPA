@@ -8,7 +8,7 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {useQueryOptionDefaults} from "@/common/_feat/handle-query/useQueryOptionDefaults.ts";
 import {PaginationValues} from "@/common/_feat/fetch-pagination-search-params";
 import {getUserFavourites} from "@/domains/users/_feat/manage-user-favourites/repository";
-import {ManageUserFavouritesQueryKeys} from "@/domains/users/_feat/manage-user-favourites/hooks";
+import {ManageUserFavouritesQueryKeys} from "@/domains/users/_feat/manage-user-favourites/hooks/queryKeys.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";

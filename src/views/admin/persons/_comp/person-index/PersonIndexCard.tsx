@@ -7,7 +7,7 @@ import {Card, CardContent} from "@/views/common/_comp/ui";
 import {CloudinaryAvatarImage} from "@/views/common/_comp";
 import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
-import {Person} from "@/domains/persons";
+import {Person} from "@/domains/persons/_schema/person/PersonSchema.ts";
 
 /** Props for the PersonIndexCard component. */
 type IndexProps = {

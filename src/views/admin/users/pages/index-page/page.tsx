@@ -4,7 +4,8 @@
 
 import {ReactElement} from "react";
 import {generatePaginationSchema, useParsedPaginationValue, useTitle} from "@/common/_feat";
-import {useFetchPaginatedUsers, UserSchema} from "@/domains/users";
+import {useFetchPaginatedUsers} from "@/domains/users/_feat/crud-hooks/hooks/useFetchPaginatedUsers.ts";
+import {UserSchema} from "@/domains/users/_schema/user/UserSchema.ts";
 import {useUserIndexQueryOptionsContext} from "@/domains/users/_ctx";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {UserIndexPageContent} from "@/views/admin/users/pages/index-page/content.tsx";

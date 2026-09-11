@@ -7,9 +7,11 @@ import {UserQueryOptions, UserQueryOptionsSchema} from "@/domains/users/_schema/
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
-    UserIndexQueryOptionFormValues,
+    UserIndexQueryOptionFormValues
+} from "@/domains/users/_feat/submit-query-options/user-index-query-options/types.ts";
+import {
     useUserIndexQueryOptionFormDefaultValues
-} from "@/domains/users/_feat/submit-query-options";
+} from "@/domains/users/_feat/submit-query-options/user-index-query-options/useUserIndexQueryOptionFormDefaultValues.ts";
 
 /** Initializes a React Hook Form instance for user index query options using Zod validation. */
 export function useUserIndexQueryOptionForm(

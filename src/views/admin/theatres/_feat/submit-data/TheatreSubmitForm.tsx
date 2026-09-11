@@ -3,13 +3,10 @@
  */
 
 import {createForm} from "@/common/_feat";
-import {
-    Theatre,
-    TheatreEditData,
-    TheatreFormData,
-    TheatreFormValues,
-    useTheatreSubmitMutation
-} from "@/domains/theatres";
+import {Theatre} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
+import {TheatreEditData, TheatreFormValues} from "@/domains/theatres/_feat/submit-data";
+import {TheatreFormData} from "@/domains/theatres/_feat/submit-data/schema.ts";
+import {useTheatreSubmitMutation} from "@/domains/theatres/_feat/crud-hooks/submit/useTheatreSubmitMutation.ts";
 import {TheatreFormSchema} from "@/domains/theatres/_feat/submit-data/schema.ts";
 
 const {SubmitForm, useSubmitForm} = createForm<

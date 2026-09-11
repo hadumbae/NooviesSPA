@@ -4,14 +4,20 @@
 
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp";
-import {Person} from "@/domains/persons";
+import {Person} from "@/domains/persons/_schema/person/PersonSchema.ts";
 import {organisePersonFilmography, PersonCreditRoleGroup} from "@/domains/movie-credits";
 import {
-    PersonInfoCastSection,
-    PersonInfoCrewSection,
-    PersonInfoDetailsCard,
+    PersonInfoCastSection
+} from "@/views/client/persons/_pages/info-page/sections/PersonInfoCastSection.tsx";
+import {
+    PersonInfoCrewSection
+} from "@/views/client/persons/_pages/info-page/sections/PersonInfoCrewSection.tsx";
+import {
+    PersonInfoDetailsCard
+} from "@/views/client/persons/_comp/info-details/PersonInfoDetailsCard.tsx";
+import {
     PersonInfoPageBreadcrumbs
-} from "@/views/client/persons";
+} from "@/views/client/persons/_pages/info-page/sections/breadcrumbs.tsx";
 import {useTitle} from "@/common/_feat";
 
 /** Props for the PersonInfoContent component. */

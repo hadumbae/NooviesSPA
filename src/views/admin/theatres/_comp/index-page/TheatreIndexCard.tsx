@@ -11,7 +11,7 @@ import {
 import {TooltipStatItem} from "@/views/common/_comp/text-display/TooltipStatItem.tsx";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 
-import {TheatreDetails} from "@/domains/theatres";
+import {TheatreDetails} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 
 /** Props for the TheatreIndexCard component. */
 type TheatreIndexCardProps = {

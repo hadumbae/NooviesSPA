@@ -14,7 +14,9 @@ import {ReactElement} from "react";
 import {Theatre} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
 import {ShowingSubmitFormView} from "@/views/admin/showings/_feat/submit-form";
 import {PageHeader} from "@/views/common/_comp";
-import {TheatreShowingCreateBreadcrumbs} from "@/views/admin/theatres";
+import {
+    TheatreShowingCreateBreadcrumbs
+} from "@/views/admin/theatres/_pages/theatre-showings-create/elements/breadcrumbs.tsx";
 
 /** Props for the TheatreShowingCreatePageContent component. */
 type ContentProps = {

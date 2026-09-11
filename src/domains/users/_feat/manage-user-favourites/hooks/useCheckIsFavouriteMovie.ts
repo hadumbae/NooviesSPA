@@ -10,7 +10,7 @@ import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {IsFavouriteMovieMetadata, IsFavouriteMovieSchema} from "@/domains/users/_feat/manage-user-favourites/schema";
 import {getCheckIsFavouriteMovie} from "@/domains/users/_feat/manage-user-favourites/repository";
-import {ManageUserFavouritesQueryKeys} from "@/domains/users/_feat/manage-user-favourites/hooks";
+import {ManageUserFavouritesQueryKeys} from "@/domains/users/_feat/manage-user-favourites/hooks/queryKeys.ts";
 
 /** Parameters for the useCheckIsFavouriteMovie hook. */
 type FetchParams = {

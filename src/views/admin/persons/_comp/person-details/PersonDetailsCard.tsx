@@ -7,7 +7,7 @@ import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {DetailsCardSpan} from "@/views/common/_comp/text-display/spans/DetailsCardSpan.tsx";
 import {ISO3166Alpha2CountryConstant} from "@/common/_const";
 import {TextQuote} from "@/views/common/_comp/text-display/text-blocks/TextQuote.tsx";
-import {Person} from "@/domains/persons";
+import {Person} from "@/domains/persons/_schema/person/PersonSchema.ts";
 
 /**
  * Props for the PersonDetailsCard component.

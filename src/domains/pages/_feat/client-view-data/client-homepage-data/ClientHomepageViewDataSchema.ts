@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {MovieSummarySchema} from "@/domains/movies/_schema/movie/MovieSummarySchema.ts";
 import {GenreSummarySchema} from "@/domains/genres/_schema/genre/GenreSummarySchema.ts";
-import {TheatreDetailsSchema} from "@/domains/theatres";
+import {TheatreDetailsSchema} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 import {ShowingSummarySchema} from "@/domains/showings";
 import {ReservationSummarySchema} from "@/domains/reservations";
 

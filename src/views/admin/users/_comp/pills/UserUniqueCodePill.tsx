@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {UserUniqueCode} from "@/domains/users";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {cn} from "@/common/_feat";
 
 /** Custom class names for the UserUniqueCodePill sub-elements. */

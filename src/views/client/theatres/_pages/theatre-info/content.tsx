@@ -6,12 +6,12 @@ import {ReactElement, useEffect} from "react";
 import {PageFlexWrapper, PageHeader} from "@/views/common/_comp";
 
 import {TheatreScreenSchedule} from "@/domains/theatre-screens";
+import {formatTheatreDetails} from "@/domains/theatres/_feat/formatters/formatTheatreDetails.ts";
+import {TheatreDetails} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
+import {TheatreMovieRuntimes} from "@/domains/theatres/_feat/client-view-data/theatre-info/TheatreMovieRuntimesSchema.ts";
 import {
-    formatTheatreDetails,
-    TheatreDetails,
-    TheatreMovieRuntimes,
     useTheatreInfoQueryOptionsContext
-} from "@/domains/theatres";
+} from "@/domains/theatres/_feat/handle-query-options/theatre-info/TheatreInfoQueryOptionsContext.ts";
 import {DateTime} from "luxon";
 import {QueryOptionsCalendarInput} from "@/views/common/_feat";
 import {DateOnlyString} from "@/common/_schemas";

@@ -10,7 +10,7 @@ import {useFormContext} from "react-hook-form";
 import {LabelledFormInput} from "@/views/admin/movies/_comp/form-display/LabelledFormInput.tsx";
 import {cn} from "@/common/_feat";
 import {HookFormMultiSelect} from "@/views/common/_comp";
-import {UserRoleSelectOptions} from "@/domains/users";
+import {UserRoleSelectOptions} from "@/domains/users/_const/UserRoleSelectOptions.ts";
 
 /** Props for the UserIndexQueryOptionFormFilterFieldset component. */
 type FieldsetProps = Omit<FormFieldsetProps<UserIndexQueryOptionFormValues>, "isNestedView">;

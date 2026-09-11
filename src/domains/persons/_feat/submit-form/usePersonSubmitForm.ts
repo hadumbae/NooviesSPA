@@ -4,7 +4,7 @@
  */
 
 import {zodResolver} from "@hookform/resolvers/zod";
-import {PersonEditData} from "@/domains/persons/_feat/submit-form";
+import {PersonEditData} from "@/domains/persons/_feat/submit-form/buildPersonEditData.ts";
 import {useForm, UseFormReturn} from "react-hook-form";
 import {FormValuesConfig} from "@/common/_feat/submit-data";
 import {

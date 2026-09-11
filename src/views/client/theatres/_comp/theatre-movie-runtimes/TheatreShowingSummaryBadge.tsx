@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {TheatreShowing} from "@/domains/theatres";
+import {TheatreShowing} from "@/domains/theatres/_feat/client-view-data/theatre-info/TheatreShowingSchema.ts";
 import {Sofa, Ticket} from "lucide-react";
 import {Link} from "react-router-dom";
 

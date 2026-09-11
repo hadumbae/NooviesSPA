@@ -2,7 +2,7 @@
  * @fileoverview Select options array mapped from user role update action constants for dropdown UI components.
  */
 
-import {UserRoleUpdateActionConstant} from "@/domains/users";
+import {UserRoleUpdateActionConstant} from "@/domains/users/_feat/manage-user-roles/const/UserRoleUpdateActionConstant.ts";
 import {ReactSelectOption} from "@/common/_types";
 
 /** React Select dropdown options representing available user role update actions. */

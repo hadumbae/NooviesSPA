@@ -9,7 +9,11 @@ import {QueryDataLoader} from "@/views/common/_feat";
 import {FavouriteMovieHeartButton} from "@/views/client/movies/_comp";
 
 import {ObjectId} from "@/common/_schemas";
-import {IsFavouriteMovieMetadata, useCheckIsFavouriteMovie, useToggleUserFavouriteMovie} from "@/domains/users";
+import {
+    IsFavouriteMovieMetadata,
+    useCheckIsFavouriteMovie,
+    useToggleUserFavouriteMovie
+} from "@/domains/users/_feat/manage-user-favourites";
 import {cn} from "@/common/_feat";
 
 /** Props for the MovieOverviewFavouriteToggle component. */

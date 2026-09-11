@@ -12,7 +12,7 @@ import {
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {ReactElement} from "react";
 import {ObjectId} from "@/common/_schemas";
-import {UserUniqueCode} from "@/domains/users";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 
 /** Props for the CustomerReservationsPageBreadcrumbs component. */
 type NavProps = {

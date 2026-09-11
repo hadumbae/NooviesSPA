@@ -9,7 +9,7 @@ import {MovieReviewIndexCard} from "@/views/client/movie-reviews/_comp/index-car
 import {MyMovieReview} from "@/domains/movie-reviews/_schema/my-reviews";
 import {ReactElement} from "react";
 import {PageHeader} from "@/views/common/_comp";
-import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users";
+import {MyProfileNavigation, MyProfileNavigationDropdown} from "@/views/client/users/_comp/my-profile-nav";
 import {Separator} from "@/views/common/_comp/ui";
 import {useIsMobile} from "@/common/_feat/handle-ui/useIsMobile.tsx";
 

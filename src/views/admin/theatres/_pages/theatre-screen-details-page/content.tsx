@@ -11,7 +11,7 @@ import {
 } from "@/views/admin/theatres/_pages/theatre-screen-details-page/elements";
 
 import {TheatreScreenWithVirtuals} from "@/domains/theatre-screens/_schema/model";
-import {TheatreDetails} from "@/domains/theatres";
+import {TheatreDetails} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 import {SeatDetails} from "@/domains/seats/_schema/model";
 import {useSetAdminPageTitle} from "@/common/_feat/handle-pages";
 import {PageHeader} from "@/views/common/_comp";

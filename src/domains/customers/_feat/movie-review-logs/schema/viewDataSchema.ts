@@ -5,7 +5,7 @@
 import {z} from "zod"
 import {generatePaginationSchema} from "@/common/_feat/validation-builders"
 import {MovieReviewModerationLogSchema} from "@/domains/movie-reviews/_feat/moderation/schema"
-import {UserSchema} from "@/domains/users";
+import {UserSchema} from "@/domains/users/_schema/user/UserSchema.ts";
 import {PopulatedMovieReviewSchema} from "@/domains/movie-reviews";
 
 /** Validation schema for a paginated collection of movie review moderation log entries. */

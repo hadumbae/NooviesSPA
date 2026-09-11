@@ -7,7 +7,9 @@ import {PersonSummaryInfo} from "@/domains/persons/_feat/client-view-data";
 import {PageFlexWrapper, PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {BrowsePersonsPageListSection} from "@/views/client/persons/_pages/browse-page/sections";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
-import {BrowsePersonsQueryOptionsFormSection} from "@/views/client/persons";
+import {
+    BrowsePersonsQueryOptionsFormSection
+} from "@/views/client/persons/_feat/browse-persons/BrowsePersonsQueryOptionsFormSection.tsx";
 
 /** Props for the BrowsePersonsPageContent component. */
 type ContentProps = {

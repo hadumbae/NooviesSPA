@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {UserUniqueCode} from "@/domains/users";
+import {UserUniqueCode} from "@/domains/users/_schema/fields/UserUniqueCodeSchema.ts";
 import {MovieReviewUniqueCode} from "@/domains/movie-reviews";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator} from "@/views/common/_comp/ui";

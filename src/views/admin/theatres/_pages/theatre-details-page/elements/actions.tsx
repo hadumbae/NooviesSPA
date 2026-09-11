@@ -12,7 +12,8 @@ import {
     TheatreDetailsUIStateContext
 } from "@/domains/theatres/_ctx/theatre-details-ui/TheatreDetailsUIStateContext.ts";
 import {Theatre, TheatreDetails} from "@/domains/theatres/_schema/theatre";
-import {buildTheatreEditData, TheatreDetailsUISetterContext} from "@/domains/theatres";
+import {buildTheatreEditData} from "@/domains/theatres/_feat/submit-data/buildTheatreEditData.ts";
+import {TheatreDetailsUISetterContext} from "@/domains/theatres/_ctx/theatre-details-ui/TheatreDetailsUISetterContext.ts";
 
 /** Props for the TheatreDetailsPageActions component. */
 type ActionProps = {

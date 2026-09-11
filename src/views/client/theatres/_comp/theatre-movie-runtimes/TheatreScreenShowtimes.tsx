@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {TheatreScreenSummary} from "@/domains/theatre-screens";
-import {TheatreShowing} from "@/domains/theatres";
+import {TheatreShowing} from "@/domains/theatres/_feat/client-view-data/theatre-info/TheatreShowingSchema.ts";
 import {TheatreScreenTypeBadge} from "@/views/admin/theatre-screens";
 import {
     TheatreShowingSummaryBadge

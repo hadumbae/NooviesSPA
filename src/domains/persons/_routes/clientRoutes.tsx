@@ -17,7 +17,7 @@ export const BrowsePersonRoutes: RouteObject[] = [
                 errorElement: <ComponentErrorHandler/>,
                 lazy: async () => {
                     const {BrowsePersonsPage} = await import("@/views/client/persons/_pages/browse-page/page.tsx");
-                    const {BrowsePersonsQueryOptionsContextProvider} = await import("@/domains/persons");
+                    const {BrowsePersonsQueryOptionsContextProvider} = await import("@/domains/persons/_feat/validate-query-options/person-browse/BrowsePersonsQueryOptionsContext.ts");
                     return {
                         Component: () => (
                             <BrowsePersonsQueryOptionsContextProvider>

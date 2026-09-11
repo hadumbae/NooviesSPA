@@ -7,12 +7,12 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {buildQueryFn, useQueryOptionDefaults} from "@/common/_feat";
 import {FetchQueryOptions} from "@/common/_types";
+import {getFetchUserDetailsViewData} from "@/domains/users/_feat/admin-view-data/repository/repository.ts";
+import {UserAdminViewDataQueryKeys} from "@/domains/users/_feat/admin-view-data/queryKeys.ts";
 import {
-    getFetchUserDetailsViewData,
-    UserAdminViewDataQueryKeys,
     UserDetailsViewData,
     UserDetailsViewDataSchema
-} from "@/domains/users/_feat/admin-view-data";
+} from "@/domains/users/_feat/admin-view-data/user-details/UserDetailsViewDataSchema.ts";
 
 /** Configuration for fetching user details view data. */
 export type FetchConfig = {

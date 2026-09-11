@@ -16,7 +16,8 @@ import {QueryDataLoader} from "@/views/common/_feat";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {PaginatedItems} from "@/common/_types";
 
-import {TheatreDetails, TheatreDetailsSchema, TheatreQueryOptionSchema} from "@/domains/theatres";
+import {TheatreDetails, TheatreDetailsSchema} from "@/domains/theatres/_schema/theatre";
+import {TheatreQueryOptionSchema} from "@/domains/theatres/_feat/handle-query-options/options/TheatreQueryOptionSchema.ts";
 
 /** Default number of theatre records displayed per pagination page. */
 const THEATRES_PER_PAGE = 20;

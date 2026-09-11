@@ -3,12 +3,12 @@
  */
 
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
+import {getFetchPersonInfoViewData} from "@/domains/persons/_feat/client-view-data/repository/repository.ts";
+import {PersonClientViewQueryKeys} from "@/domains/persons/_feat/client-view-data/keys/queryKeys.ts";
 import {
-    getFetchPersonInfoViewData,
-    PersonClientViewQueryKeys,
     PersonInfoViewData,
     PersonInfoViewDataSchema
-} from "@/domains/persons/_feat/client-view-data";
+} from "@/domains/persons/_feat/client-view-data/person-info/dataSchema.ts";
 import {SlugString} from "@/common/_schemas";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";

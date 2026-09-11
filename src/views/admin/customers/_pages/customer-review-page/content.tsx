@@ -2,7 +2,7 @@
  * @fileoverview Main content layout for the administrative Customer Review detail page.
  */
 
-import {LeanUserWithEmail} from "@/domains/users";
+import {LeanUserWithEmail} from "@/domains/users/_schema/user/LeanUserWithEmailSchema.ts";
 import {CustomerMovieReview} from "@/domains/movie-reviews";
 import {AdminMovieWithRatingCard, CustomerDetailsCard, CustomerMovieReviewCard} from "@/views/admin/customers/_comp";
 import {PageFlexWrapper, PageSectionHeader, PageSectionHeaderLink} from "@/views/common/_comp/page";

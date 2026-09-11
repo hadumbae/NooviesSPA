@@ -6,7 +6,8 @@ import {ReactElement, useState} from 'react';
 import {Plus} from "lucide-react";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
-import {Theatre, useNavigateToTheatre} from "@/domains/theatres";
+import {Theatre} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
+import {useNavigateToTheatre} from "@/domains/theatres/_feat/navigation/useNavigateToTheatre.ts";
 import {TheatreSubmitForm, TheatreSubmitFormPanel} from "@/views/admin/theatres/_feat";
 import {Button} from "@/views/common/_comp/ui";
 

@@ -6,7 +6,8 @@ import {ReactElement} from "react";
 import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {User} from "@/domains/users/_schema/user";
 import {UserUniqueCodePill} from "@/views/admin/users/_comp/pills";
-import {UserRoleBadge, UserStatusBadge} from "@/views/admin/users/_comp";
+import {UserRoleBadge} from "@/views/admin/users/_comp/badges/UserRoleBadge.tsx";
+import {UserStatusBadge} from "@/views/admin/users/_comp/badges/UserStatusBadge.tsx";
 import {cn} from "@/common/_feat";
 import {StatNumberItem} from "@/views/common/_comp";
 

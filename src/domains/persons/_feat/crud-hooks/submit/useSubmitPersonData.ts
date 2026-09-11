@@ -8,7 +8,7 @@ import {PersonCRUDMutationKeys, PersonCRUDQueryKeys} from "@/domains/persons/_fe
 import {create, update} from "@/domains/persons/_feat/crud";
 import {PersonFormData} from "@/domains/persons/_feat/submit-form";
 import {Person, PersonSchema} from "@/domains/persons/_schema";
-import {PersonAdminViewQueryKeys} from "@/domains/persons";
+import {PersonAdminViewQueryKeys} from "@/domains/persons/_feat/admin-view-data/fetch/querykeys.ts";
 
 /**
  * Hook to handle the creation or update of Person records and manage form state.

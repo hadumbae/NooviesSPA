@@ -9,10 +9,9 @@ import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {Form} from "@/views/common/_comp/ui";
 import {
     PersonQueryOptionFormValues,
-    PersonQueryOptions,
-    PersonQueryOptionsSchema,
     usePersonQueryOptionForm
-} from "@/domains/persons";
+} from "@/domains/persons/_feat/submit-query-options";
+import {PersonQueryOptions, PersonQueryOptionsSchema} from "@/domains/persons/_schema/query-options";
 
 /** Props for the PersonQueryOptionFormContainer component. */
 type ContainerProps = {

@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {User} from "@/domains/users";
+import {User} from "@/domains/users/_schema/user/UserSchema.ts";
 import {MovieReviewModerationLog, PopulatedMovieReview} from "@/domains/movie-reviews";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";

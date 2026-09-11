@@ -3,7 +3,7 @@
  */
 
 import {useQueryClient} from "@tanstack/react-query";
-import {UserAdminViewDataQueryKeys} from "@/domains/users";
+import {UserAdminViewDataQueryKeys} from "@/domains/users/_feat/admin-view-data/queryKeys.ts";
 
 /**
  * Returns a function that invalidates all user admin view queries in TanStack Query context.

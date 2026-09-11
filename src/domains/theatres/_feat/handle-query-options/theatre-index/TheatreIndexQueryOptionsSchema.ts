@@ -2,7 +2,7 @@
  * @fileoverview Defines the validation schema and types for theatre index query options.
  */
 
-import {TheatreQueryOptionSchema} from "@/domains/theatres";
+import {TheatreQueryOptionSchema} from "@/domains/theatres/_feat/handle-query-options/options/TheatreQueryOptionSchema.ts";
 import {z} from "zod";
 import {AnyValues} from "@/common/_types";
 

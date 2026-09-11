@@ -11,7 +11,7 @@ import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {FormViewProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {PageSectionHeader} from "@/views/common/_comp/page";
-import {PersonQueryOptionFormValues} from "@/domains/persons";
+import {PersonQueryOptionFormValues} from "@/domains/persons/_feat/submit-query-options";
 import {HookFormSelect} from "@/views/common/_comp";
 import {ISO3166Alpha2CountryOptions} from "@/common/_const";
 

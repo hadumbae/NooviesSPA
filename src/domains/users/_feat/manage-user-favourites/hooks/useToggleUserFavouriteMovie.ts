@@ -7,10 +7,8 @@ import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-qu
 import {ObjectId} from "@/common/_schemas";
 import {patchToggleUserFavouriteMovie} from "@/domains/users/_feat/manage-user-favourites/repository";
 import {MovieClientViewDataQueryKeys} from "@/domains/movies/_feat/client-view-data/hooks/queryKeys.ts";
-import {
-    ManageUserFavouritesMutationKeys,
-    ManageUserFavouritesQueryKeys
-} from "@/domains/users/_feat/manage-user-favourites/hooks";
+import {ManageUserFavouritesMutationKeys} from "@/domains/users/_feat/manage-user-favourites/hooks/mutationKeys.ts";
+import {ManageUserFavouritesQueryKeys} from "@/domains/users/_feat/manage-user-favourites/hooks/queryKeys.ts";
 
 /** Performs a favourite toggle mutation for the current user. */
 export function useToggleUserFavouriteMovie(): UseMutationResult<ObjectId, unknown, ObjectId> {

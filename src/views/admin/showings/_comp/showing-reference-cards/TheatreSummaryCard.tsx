@@ -9,7 +9,7 @@ import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {ISO3166Alpha2ShortCountryConstant} from "@/common/_const";
 import {IconButton, SROnly, SubsectionSubtitle, SubsectionTitle} from "@/views/common/_comp";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
-import {TheatreDetails} from "@/domains/theatres";
+import {TheatreDetails} from "@/domains/theatres/_schema/theatre/TheatreDetailsSchema.ts";
 
 /** Props for the TheatreSummaryCard component. */
 type CardProps = {
