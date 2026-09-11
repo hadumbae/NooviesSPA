@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {Clapperboard, Theater, TvMinimal} from "lucide-react";
 import {PanelCardLink} from "@/views/common/_feat";
 import {buildString} from "@/common/_feat";
-import {ShowingDetails} from "@/domains/showings";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {SROnly} from "@/views/common/_comp";
 
 /** Props for the SeatMapDetailsReferenceLinks component. */

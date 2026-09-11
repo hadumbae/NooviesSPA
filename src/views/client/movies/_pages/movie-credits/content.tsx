@@ -10,7 +10,8 @@ import {
     MovieInfoCreditListSection,
 } from "@/views/client/movies/_pages/movie-credits/sections";
 
-import {buildFullCreditListByCategoryOrder, MovieDetails} from "@/domains/movies";
+import {buildFullCreditListByCategoryOrder} from "@/domains/movies/_feat/manage-credits-page/buildFullCreditListByCategoryOrder.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {CastCreditExceptMovie, GroupedCrewCreditsExceptMovie} from "@/domains/movie-credits";
 
 /** Props for the MovieInfoCreditsPageContent component. */

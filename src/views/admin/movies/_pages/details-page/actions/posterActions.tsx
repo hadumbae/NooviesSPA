@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {ObjectId} from "@/common/_schemas";
-import {MoviePosterImageSubmitForm} from "@/views/admin/movies/_feat";
+import {MoviePosterImageSubmitForm} from "@/views/admin/movies/_feat/submit-movie-image/MoviePosterImageSubmitForm.tsx";
 import {MoviePosterImageDeleteDialog} from "@/views/admin/movies/_feat/delete-movie-image";
 import {MovieImageSubmitFormPanel} from "@/views/admin/movies/_feat/submit-movie-image/MovieImageSubmitFormPanel.tsx";
 import {
@@ -12,7 +12,7 @@ import {
     useIsDeletingMoviePosterUIContext,
     useIsUpdatingMoviePosterUIActions,
     useIsUpdatingMoviePosterUIContext
-} from "@/domains/movies";
+} from "@/domains/movies/_ctx/ui";
 
 /** Props for the MovieDetailsPagePosterActions component. */
 type ActionProps = {

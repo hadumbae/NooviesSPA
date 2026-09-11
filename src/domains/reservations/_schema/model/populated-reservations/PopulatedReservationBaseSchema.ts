@@ -5,7 +5,7 @@
 import {z} from "zod";
 import {PopulatedShowingSchema} from "@/domains/showings/_schema/showing/PopulatedShowingSchema.ts";
 import {ReservationBaseSchema} from "@/domains/reservations/_schema/model/reservations/ReservationBaseSchema.ts";
-import {MovieWithGenresSchema} from "@/domains/movies";
+import {MovieWithGenresSchema} from "@/domains/movies/_schema/movie/MovieWithGenresSchema.ts";
 
 /** Base populated reservation schema that transforms the showing field into a fully resolved object. */
 export const PopulatedReservationBaseSchema = ReservationBaseSchema.omit({showing: true}).extend({

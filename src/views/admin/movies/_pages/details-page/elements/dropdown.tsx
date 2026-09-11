@@ -13,13 +13,13 @@ import {
     DropdownMenuTrigger,
 } from "@/views/common/_comp/ui";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
-import {RoleTypeDepartment} from "@/domains/roletypes";
+import {RoleTypeDepartment} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
 import {
     useIsDeletingMovieBannerUIActions,
     useIsDeletingMoviePosterUIActions,
     useIsUpdatingMovieBannerUIActions,
     useIsUpdatingMoviePosterUIActions
-} from "@/domains/movies";
+} from "@/domains/movies/_ctx/ui";
 
 /** Props for the MovieDetailsDropdown component. */
 type OptionProps = {

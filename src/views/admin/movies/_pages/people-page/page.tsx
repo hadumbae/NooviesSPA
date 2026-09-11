@@ -12,8 +12,9 @@ import {QueryDataLoader} from "@/views/common/_feat";
 import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-params/hooks/useParsedPaginationValue.ts";
 import {MoviePeoplePageContent} from "@/views/admin/movies/_pages/people-page/content.tsx";
 
-import {RoleTypeDepartment} from "@/domains/roletypes";
-import {Movie, MovieSchema, useFetchMovieBySlug} from "@/domains/movies";
+import {RoleTypeDepartment} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
+import {Movie, MovieSchema} from "@/domains/movies/_schema/movie/MovieSchema.ts";
+import {useFetchMovieBySlug} from "@/domains/movies/_feat/crud-hooks/fetch/useFetchMovieBySlug.ts";
 
 /** Props for the MoviePeoplePage component. */
 type PeoplePageProps = {

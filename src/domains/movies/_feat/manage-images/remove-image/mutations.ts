@@ -4,7 +4,7 @@
 
 import {createMovieImageDeleteMutations} from "@/domains/movies/_feat/manage-images/remove-image/factory.ts";
 import {ManageMovieImageMutationKeys} from "@/domains/movies/_feat/manage-images/mutationKeys.ts";
-import {patchRemoveBannerImage, patchRemovePosterImage} from "@/domains/movies/_feat/manage-images";
+import {patchRemoveBannerImage, patchRemovePosterImage} from "@/domains/movies/_feat/manage-images/remove-image/repository.ts";
 
 /** Custom React Query hook for removing a movie poster image. */
 export const useDeleteMoviePosterImage = createMovieImageDeleteMutations({

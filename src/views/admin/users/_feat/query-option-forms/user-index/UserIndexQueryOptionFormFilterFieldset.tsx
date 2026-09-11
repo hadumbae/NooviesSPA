@@ -7,7 +7,7 @@ import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 import {UserIndexQueryOptionFormValues} from "@/domains/users/_feat/submit-query-options";
 import {HookFormInput} from "@/views/common/_feat";
 import {useFormContext} from "react-hook-form";
-import {LabelledFormInput} from "@/views/admin/movies";
+import {LabelledFormInput} from "@/views/admin/movies/_comp/form-display/LabelledFormInput.tsx";
 import {cn} from "@/common/_feat";
 import {HookFormMultiSelect} from "@/views/common/_comp";
 import {UserRoleSelectOptions} from "@/domains/users";

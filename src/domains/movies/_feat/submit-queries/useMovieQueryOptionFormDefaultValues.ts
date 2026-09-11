@@ -3,7 +3,8 @@
  */
 
 import {QueryOptionFormValues} from "@/common/_feat";
-import {MovieQueryOptionFormValues, MovieQueryOptions} from "@/domains/movies";
+import {MovieQueryOptionFormValues} from "@/domains/movies/_feat/submit-queries/MovieQueryOptionFormValues.ts";
+import {MovieQueryOptions} from "@/domains/movies/_schema/queries/MovieQueryOptionSchema.ts";
 import {useRef} from "react";
 import {isEqual} from "lodash";
 

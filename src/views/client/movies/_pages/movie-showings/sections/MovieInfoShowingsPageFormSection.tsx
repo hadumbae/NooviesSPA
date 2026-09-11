@@ -7,8 +7,14 @@ import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {Card, CardContent} from "@/views/common/_comp/ui";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 
-import {ShowingsPageQueryStrings, ShowingsPageQueryStringSchema} from "@/domains/movies";
-import {TheatreShowingQueryForm, TheatreShowingQueryFormView} from "@/views/client/showings";
+import {
+    ShowingsPageQueryStrings,
+    ShowingsPageQueryStringSchema
+} from "@/domains/movies/_feat/client-view-data/schemas/ShowingsPageQueryStringSchema.ts";
+import {
+    TheatreShowingQueryForm,
+    TheatreShowingQueryFormView
+} from "@/views/client/showings/_feat/submit-theatre-showing-query-form";
 
 /** Props for the MovieInfoShowingsPageFormSection component. */
 type SectionProps = {

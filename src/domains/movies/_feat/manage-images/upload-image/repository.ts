@@ -7,7 +7,7 @@ import {FetchRequestReturns} from "@/common/_types/request/FetchRequestReturns";
 import {buildURL} from "@/common/_feat/fetch-api/buildURL";
 import {ManageMovieImagesBaseURL} from "@/domains/movies/_feat/manage-images/baseURL";
 import {useFetchAPI} from "@/common/_feat/use-fetch-api/useFetchAPI";
-import {Movie} from "@/domains/movies";
+import {Movie} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 
 /** Parameters required to upload a movie poster or banner image. */
 export type UploadMovieImageRouteConfig = {

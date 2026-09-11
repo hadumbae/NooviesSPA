@@ -8,7 +8,11 @@ import {PageLoader} from "@/views/common/_comp/page";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {MovieInfoShowingsPageContent} from "@/views/client/movies/_pages/movie-showings/content.tsx";
-import {MovieInfoShowingViewData, ShowingsPageQueryStringSchema, useFetchMovieInfoShowingsData} from "@/domains/movies";
+import {
+    MovieInfoShowingViewData,
+    ShowingsPageQueryStringSchema,
+    useFetchMovieInfoShowingsData
+} from "@/domains/movies/_feat/client-view-data";
 
 /** Pagination limit for showing queries. */
 const SHOWINGS_PER_PAGE = 20;

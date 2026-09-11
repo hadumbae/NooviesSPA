@@ -9,7 +9,7 @@ import {cn} from "@/common/_feat";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {useBaseFormContext} from "@/common/_feat/generic-form-context";
 import {DisableFields} from "@/common/_types";
-import {ShowingsPageQueryStrings} from "@/domains/movies";
+import {ShowingsPageQueryStrings} from "@/domains/movies/_feat/client-view-data/schemas/ShowingsPageQueryStringSchema.ts";
 
 /** Props for the TheatreShowingQueryFormView component. */
 export type FormProps = {

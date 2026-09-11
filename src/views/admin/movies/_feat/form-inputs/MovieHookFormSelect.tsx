@@ -12,7 +12,7 @@ import {Movie, MovieSchema} from "@/domains/movies/_schema/movie";
 import {useFetchMovies} from "@/domains/movies/_feat/crud-hooks";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {HookFormInputControlProps} from "@/common/_types/input/HookFormInputProps.ts";
-import {MovieQueryFilters} from "@/domains/movies";
+import {MovieQueryFilters} from "@/domains/movies/_schema/queries/MovieQueryFilterSchema.ts";
 
 /** Props for the MovieHookFormSelect component. */
 type SelectProps<TSubmit extends FieldValues> = Omit<HookFormInputControlProps<TSubmit>, "control"> & {

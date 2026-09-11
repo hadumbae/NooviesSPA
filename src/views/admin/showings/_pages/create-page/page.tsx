@@ -6,7 +6,8 @@ import {PageHeader} from "@/views/common/_comp";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 import {Card, CardContent} from "@/views/common/_comp/ui";
 
-import {ShowingDetails, useNavigateToShowingDetails} from "@/domains/showings";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
+import {useNavigateToShowingDetails} from "@/domains/showings/_feat/navigation/useNavigateToShowingDetails.ts";
 import {ShowingSubmitForm, ShowingSubmitFormView, ShowingSubmitStorageKey} from "@/views/admin/showings/_feat";
 import {ShowingCreateBreadcrumbs} from "@/views/admin/showings/_pages/create-page/breadcrumbs.tsx";
 

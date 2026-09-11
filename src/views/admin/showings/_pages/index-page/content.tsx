@@ -9,7 +9,7 @@ import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayC
 import {PaginationRangeButtons} from "@/views/common/_comp";
 
 import {ShowingIndexListDialog} from "@/views/admin/showings/_comp";
-import {ShowingDetails} from "@/domains/showings";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {ShowingIndexHeader} from "@/views/admin/showings/_pages/index-page/header.tsx";
 
 /** Props for the ShowingIndexPageContent component. */

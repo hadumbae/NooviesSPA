@@ -12,12 +12,15 @@ import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
 
 import {HookFormInput} from "@/views/common/_feat";
 import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger, Separator} from "@/views/common/_comp/ui";
-import {MovieHookFormSelect, MovieQuickOverviewFetchCard} from "@/views/admin/movies";
-import {TheatreHookFormSelect, TheatreQuickOverviewFetchCard} from "@/views/admin/theatres";
+import {MovieHookFormSelect} from "@/views/admin/movies/_feat/form-inputs/MovieHookFormSelect.tsx";
+import {MovieQuickOverviewFetchCard} from "@/views/admin/movies/_comp/form-display/MovieQuickOverviewFetchCard.tsx";
+import {TheatreHookFormSelect} from "@/views/admin/theatres/_feat/form-input/selects/TheatreHookFormSelect.tsx";
+import {TheatreQuickOverviewFetchCard} from "@/views/admin/theatres/_comp/display-cards/TheatreQuickOverviewFetchCard.tsx";
 import {ScreenHookFormSelect} from "@/views/admin/theatre-screens";
 
-import {Theatre} from "@/domains/theatres";
-import {ShowingFormValues, useHandleShowingFormFiltering} from "@/domains/showings";
+import {Theatre} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
+import {ShowingFormValues} from "@/domains/showings/_schema/form/form-values/ShowingFormValues.ts";
+import {useHandleShowingFormFiltering} from "@/domains/showings/_feat/submit-data/useHandleShowingFormFiltering.ts";
 import {HookFormSelect} from "@/views/common/_comp";
 import {ISO3166Alpha2CountryOptions} from "@/common/_const";
 import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";

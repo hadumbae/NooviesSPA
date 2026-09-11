@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {QueryOptionFormViewProps} from "@/common/_feat";
-import {MovieQueryOptionFormValues} from "@/domains/movies";
+import {MovieQueryOptionFormValues} from "@/domains/movies/_feat/submit-queries/MovieQueryOptionFormValues.ts";
 import {QueryOptionFormLayout} from "@/views/common/_feat";
 import {
     MovieIndexQueryOptionFormFilterFieldset

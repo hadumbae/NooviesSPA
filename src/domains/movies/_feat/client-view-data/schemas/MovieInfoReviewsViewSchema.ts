@@ -3,7 +3,7 @@
  */
 
 import {z} from "zod";
-import {MovieDetailsSchema} from "@/domains/movies";
+import {MovieDetailsSchema} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MovieReviewSummarySchema} from "@/domains/movie-reviews";
 
 /** Zod schema for validating the combined movie details and review summary data. */

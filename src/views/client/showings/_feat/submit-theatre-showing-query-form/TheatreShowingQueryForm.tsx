@@ -7,12 +7,12 @@ import {ReactElement, ReactNode} from "react";
 import {Form} from "@/views/common/_comp/ui";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
-import {useTheatreScheduleQueryForm} from "@/domains/showings";
+import {useTheatreScheduleQueryForm} from "@/domains/showings/_feat/submit-theatre-schedule-query/useTheatreScheduleQueryForm.ts";
+import {ShowingsPageQueryFormStarterValues} from "@/domains/movies";
 import {
-    ShowingsPageQueryFormStarterValues,
     ShowingsPageQueryStrings,
     ShowingsPageQueryStringSchema
-} from "@/domains/movies";
+} from "@/domains/movies/_feat/client-view-data/schemas/ShowingsPageQueryStringSchema.ts";
 import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 
 /** Props for the TheatreShowingQueryForm component. */

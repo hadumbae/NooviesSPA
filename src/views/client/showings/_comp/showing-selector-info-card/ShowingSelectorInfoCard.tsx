@@ -6,8 +6,9 @@ import {ReactElement} from "react";
 import {Card, CardContent, CardHeader, Separator} from "@/views/common/_comp/ui";
 import {ISO6391LanguageLabels} from "@/common/_const/languages/ISO6391LanguageLabels.ts";
 
-import {ShowingDetails} from "@/domains/showings";
-import {ShowingSpecialEventBadge, ShowingTypeBadge} from "@/views/admin/showings";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
+import {ShowingSpecialEventBadge} from "@/views/admin/showings/_comp/badges/ShowingSpecialEventBadge.tsx";
+import {ShowingTypeBadge} from "@/views/admin/showings/_comp/badges/ShowingTypeBadge.tsx";
 import {ShowingInfoMovieMeta, ShowingInfoPremises} from "@/views/client/showings/_comp/showing-info-details";
 import {Image} from "@/views/common/_comp";
 

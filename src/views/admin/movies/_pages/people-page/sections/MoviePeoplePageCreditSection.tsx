@@ -12,7 +12,7 @@ import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayC
 import {PaginationRangeButtons} from "@/views/common/_comp";
 import {MovieCastCreditCard, MovieCrewCreditCard} from "@/views/admin/movie-credits/_feat";
 
-import {RoleTypeDepartment} from "@/domains/roletypes";
+import {RoleTypeDepartment} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
 import {MovieCreditDetails, MovieCreditDetailsSchema, useFetchPaginatedMovieCredits} from "@/domains/movie-credits";
 
 /** Props for the MoviePeoplePageCreditSection component. */

@@ -8,7 +8,7 @@ import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
 import {EmptyArrayContainer} from "@/views/common/_comp/text-display/EmptyArrayContainer.tsx";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 
-import {MovieDetails} from "@/domains/movies";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MovieIndexCard} from "@/views/admin/movies/_comp";
 import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {Plus} from "lucide-react";

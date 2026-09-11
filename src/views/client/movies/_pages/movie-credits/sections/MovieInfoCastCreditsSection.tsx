@@ -5,7 +5,7 @@
 import {ReactElement, useMemo} from "react";
 import {MovieCreditInfoList} from "@/views/client/movie-credits/_comp";
 
-import {organiseMovieCastCreditsByPrimacy} from "@/domains/movies";
+import {organiseMovieCastCreditsByPrimacy} from "@/domains/movies/_feat/manage-credits-page/organiseMovieCastCreditsByPrimacy.ts";
 import {CastCreditExceptMovie} from "@/domains/movie-credits";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 

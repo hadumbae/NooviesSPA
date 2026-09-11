@@ -8,7 +8,7 @@ import {GenreIndexQueryOptionsFormValues} from "@/domains/genres";
 import {ConditionalRenderConfig} from "@/common/_types/form/HookFormFieldsetConfigTypes.ts";
 import {HookFormInput} from "@/views/common/_feat";
 import {useFormContext} from "react-hook-form";
-import {LabelledFormInput} from "@/views/admin/movies";
+import {LabelledFormInput} from "@/views/admin/movies/_comp/form-display/LabelledFormInput.tsx";
 
 /** Renders form fields for filtering genres by search criteria. Requires wrapping in a React Hook Form context. */
 export function GenreIndexQueryOptionsFormFilterFieldset(

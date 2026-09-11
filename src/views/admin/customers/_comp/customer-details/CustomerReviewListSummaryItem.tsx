@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {PopulatedMovieReview} from "@/domains/movie-reviews";
-import {MoviePosterImage} from "@/views/admin/movies";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image/MoviePosterImage.tsx";
 import {MovieReviewRatingStars} from "@/views/client/movie-reviews";
 import {cn} from "@/common/_feat";
 

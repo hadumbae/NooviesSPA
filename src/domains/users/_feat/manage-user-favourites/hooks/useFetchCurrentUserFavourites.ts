@@ -11,7 +11,7 @@ import {getUserFavourites} from "@/domains/users/_feat/manage-user-favourites/re
 import {ManageUserFavouritesQueryKeys} from "@/domains/users/_feat/manage-user-favourites/hooks";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
-import {MovieDetails, MovieDetailsSchema} from "@/domains/movies";
+import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {PaginatedItems} from "@/common/_types";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 

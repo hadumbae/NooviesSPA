@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {useFormContext} from "react-hook-form";
 import {FormFieldsetProps} from "@/common/_feat/submit-data/formTypes.ts";
-import {MovieFormStarterValues} from "@/domains/movies";
+import {MovieFormStarterValues} from "@/domains/movies/_feat/submit-data/schema/MovieFormSchema.ts";
 import {cn, createFormFieldConfig, renderFields, useBaseFormContext} from "@/common/_feat";
 import {Separator} from "@/views/common/_comp/ui";
 import {HookFormInput, HookFormTextArea} from "@/views/common/_feat";

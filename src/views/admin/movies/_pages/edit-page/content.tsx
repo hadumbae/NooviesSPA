@@ -10,7 +10,7 @@ import {Movie} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 import {SROnly} from "@/views/common/_comp/screen-readers";
 import {MovieSubmitForm, MovieSubmitFormActions, MovieSubmitFormView} from "@/views/admin/movies/_feat/submit-movie";
 import {PageHeader} from "@/views/common/_comp";
-import {MovieEditBreadcrumbs} from "@/views/admin/movies";
+import {MovieEditBreadcrumbs} from "@/views/admin/movies/_pages/edit-page/breadcrumbs.tsx";
 
 /** Props for the MovieEditPageContent component. */
 type ContentProps = {

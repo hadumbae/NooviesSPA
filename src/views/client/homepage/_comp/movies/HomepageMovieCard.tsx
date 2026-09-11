@@ -6,8 +6,8 @@ import {ReactElement} from "react";
 import {Link} from "react-router-dom";
 import {Card, CardContent, CardHeader} from "@/views/common/_comp/ui";
 import {MovieSummary} from "@/domains/movies/_schema/movie/MovieSummarySchema.ts";
-import {MovieMetaGenreBadges} from "@/views/admin/movies";
-import {formatMovieRuntime} from "@/domains/movies";
+import {MovieMetaGenreBadges} from "@/views/admin/movies/_comp/movie-details/MovieMetaGenreBadges.tsx";
+import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {cn} from "@/common/_feat";
 import {Image} from "@/views/common/_comp";
 

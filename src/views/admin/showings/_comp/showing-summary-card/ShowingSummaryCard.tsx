@@ -11,7 +11,7 @@ import {BadgeAlert, Circle, Cog, DollarSign, Search, Theater, TvMinimal,} from "
 import {HoverLink} from "@/views/common/_feat/navigation/HoverLink.tsx";
 import {IconButton} from "@/views/common/_comp";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
-import {ShowingDetails} from "@/domains/showings";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 
 /** Props for the ShowingSummaryCard component. */
 type CardProps = {

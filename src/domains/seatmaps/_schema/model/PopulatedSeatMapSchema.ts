@@ -4,7 +4,7 @@
 
 import {z} from "zod";
 import {SeatMapWithSeatSchema} from "@/domains/seatmaps/_schema/model/SeatMapWithSeatSchema.ts";
-import {ShowingSchema} from "@/domains/showings";
+import {ShowingSchema} from "@/domains/showings/_schema/showing/ShowingSchema.ts";
 
 /** Zod schema for a SeatMap with a populated showing field. */
 export const PopulatedSeatMapSchema = SeatMapWithSeatSchema.extend({

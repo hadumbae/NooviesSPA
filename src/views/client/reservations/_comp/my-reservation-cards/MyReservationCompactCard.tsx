@@ -7,7 +7,7 @@ import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {PopulatedReservation} from "@/domains/reservations";
-import {formatMovieRuntime} from "@/domains/movies";
+import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {Separator} from "@/views/common/_comp/ui";
 import {ReservationStatusBadge} from "@/views/client/reservations";
 

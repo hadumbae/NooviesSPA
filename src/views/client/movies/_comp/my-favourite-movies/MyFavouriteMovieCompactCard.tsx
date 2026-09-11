@@ -10,7 +10,8 @@ import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
 import {BrowseMovieSummaryDialog} from "@/views/client/movies/_comp/browse-movie-info";
 
-import {formatMovieData, MovieDetails} from "@/domains/movies";
+import {formatMovieData} from "@/domains/movies/_feat/formatters/formatMovieData.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {SubsectionTitle} from "@/views/common/_comp";
 
 /** Props for the MyFavouriteMovieCompactCard component. */

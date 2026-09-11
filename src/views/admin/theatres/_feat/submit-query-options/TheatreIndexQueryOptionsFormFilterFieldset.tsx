@@ -9,7 +9,7 @@ import {HookFormSelect} from "@/views/common/_comp";
 import {ISO3166Alpha2ShortCountryOptions} from "@/common/_const";
 import {useFormContext} from "react-hook-form";
 import {HookFormInput} from "@/views/common/_feat";
-import {LabelledFormInput} from "@/views/admin/movies";
+import {LabelledFormInput} from "@/views/admin/movies/_comp/form-display/LabelledFormInput.tsx";
 
 /**
  * Renders filter input fields for searching theatres by name, country, or postal code within a query options form.

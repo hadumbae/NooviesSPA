@@ -5,12 +5,11 @@
 import {createMultiStepForm} from "@/common/_feat/forms/create-multi-step-form/createMultiStepForm.tsx";
 import {
     ShowingDetails,
-    ShowingEditData,
     ShowingFormData,
     ShowingFormSchema,
     ShowingFormValues,
-    useShowingSubmitMutation
-} from "@/domains/showings";
+} from "@/domains/showings/_schema";
+import {ShowingEditData, useShowingSubmitMutation} from "@/domains/showings/_feat";
 
 const {SubmitForm, useSubmitForm} = createMultiStepForm<
     ShowingFormValues,

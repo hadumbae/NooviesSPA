@@ -9,7 +9,7 @@ import {IconButton} from "@/views/common/_comp";
 import {BrowseMoviePosterLink} from "@/views/admin/movies/_comp/poster-image";
 import {BrowseMovieSummary, BrowseMovieSummaryDialog} from "@/views/client/movies/_comp/browse-movie-info";
 
-import {MovieDetails} from "@/domains/movies";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 
 /** Props for the BrowseMovieSummaryCard component. */
 type CardProps = {

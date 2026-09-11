@@ -6,8 +6,8 @@ import {ReactElement} from "react";
 import {TvMinimal} from "lucide-react";
 import {cn} from "@/common/_feat";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
-import {Theatre, TheatreDetails} from "@/domains/theatres";
-import {TheatreScreen, TheatreScreenDetails} from "@/domains/theatre-screens";
+import {Theatre, TheatreDetails} from "@/domains/theatres/_schema/theatre";
+import {TheatreScreen, TheatreScreenDetails} from "@/domains/theatre-screens/_schema/model";
 
 /** Style overrides for the premises container and its labels. */
 type PremisesClassNames = {

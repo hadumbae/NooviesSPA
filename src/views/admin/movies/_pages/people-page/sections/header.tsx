@@ -7,8 +7,8 @@ import {buttonVariants} from "@/views/common/_comp/ui";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
-import {Movie} from "@/domains/movies";
-import {RoleTypeDepartment} from "@/domains/roletypes";
+import {Movie} from "@/domains/movies/_schema/movie/MovieSchema.ts";
+import {RoleTypeDepartment} from "@/domains/roletypes/_schema/fields/RoleTypeDepartmentSchema.ts";
 import {LoggedLink} from "@/views/common/_feat/navigation/LoggedLink.tsx";
 import {MoviePersonListBreadcrumb} from "@/views/admin/movies/_pages/people-page/sections/breadcrumb.tsx";
 

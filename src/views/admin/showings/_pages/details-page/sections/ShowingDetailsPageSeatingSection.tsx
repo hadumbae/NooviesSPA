@@ -9,7 +9,7 @@ import {
     SeatMapDetailsPanelStateContext
 } from "@/domains/seatmaps/_ctx/details-panel-context/SeatMapDetailsPanelStateContext.ts";
 
-import {ShowingDetails} from "@/domains/showings";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {SeatMapDetails} from "@/domains/seatmaps";
 import {SeatMapDetailsPanel, ShowingSeatMapLayout} from "@/views/admin/seatmaps";
 

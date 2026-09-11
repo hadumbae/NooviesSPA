@@ -6,10 +6,9 @@ import {ReactElement} from 'react';
 import {Form} from "@/views/common/_comp/ui";
 import {
     MovieQueryOptionFormValues,
-    MovieQueryOptions,
-    MovieQueryOptionSchema,
     useMovieQueryOptionForm
-} from "@/domains/movies";
+} from "@/domains/movies/_feat/submit-queries";
+import {MovieQueryOptions, MovieQueryOptionSchema} from "@/domains/movies/_schema/queries/MovieQueryOptionSchema.ts";
 import {
     filterFalsyAttributes,
     generateQueryFormDefaultValues,

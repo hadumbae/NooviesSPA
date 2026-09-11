@@ -5,7 +5,7 @@
 import {MovieBaseSchema} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 import {z} from "zod";
 import {generateArraySchema} from "@/common/_feat";
-import {GenreSchema} from "@/domains/genres";
+import {GenreSchema} from "@/domains/genres/_schema/genre/GenreSchema.ts";
 
 /** Zod schema for validating movie summary attributes. */
 export const MovieSummarySchema = MovieBaseSchema.pick({

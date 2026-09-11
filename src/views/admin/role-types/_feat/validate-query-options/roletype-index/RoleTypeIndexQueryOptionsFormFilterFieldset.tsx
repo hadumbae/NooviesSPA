@@ -9,7 +9,7 @@ import {
 } from "@/domains/roletypes/_feat/validate-query-options/roletype-index/RoleTypeIndexQueryOptionsSchema.ts";
 import {HookFormInput} from "@/views/common/_feat";
 import {useFormContext} from "react-hook-form";
-import {LabelledFormInput} from "@/views/admin/movies";
+import {LabelledFormInput} from "@/views/admin/movies/_comp/form-display/LabelledFormInput.tsx";
 import {HookFormSelect} from "@/views/common/_comp";
 import {RoleTypeDepartmentSelectOptions} from "@/domains/roletypes/_const/RoleTypeDepartmentSelectOptions.ts";
 

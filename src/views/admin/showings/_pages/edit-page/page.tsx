@@ -10,7 +10,8 @@ import {
 import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema.ts";
 import {QueryDataLoader} from "@/views/common/_feat";
 
-import {ShowingDetails, ShowingDetailsSchema, useFetchShowingBySlug} from "@/domains/showings";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
+import {useFetchShowingBySlug} from "@/domains/showings/_feat/crud-hooks/fetch/useFetchShowingBySlug.ts";
 import {ShowingEditPageContent} from "@/views/admin/showings/_pages/edit-page/content.tsx";
 
 /**

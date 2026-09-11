@@ -5,8 +5,8 @@
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
 import {IANATimezone} from "@/common/_schemas/time/IANATimezoneSchema.ts";
-import {ShowingDetails} from "@/domains/showings";
-import {BrowseShowingSelector} from "@/views/client/showings/_comp";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
+import {BrowseShowingSelector} from "@/views/client/showings/_comp/browse-showing-selector/BrowseShowingSelector.tsx";
 import {Image} from "@/views/common/_comp";
 
 /** Props for the BrowseTheatreShowingSelector component. */

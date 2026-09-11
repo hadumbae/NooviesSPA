@@ -12,7 +12,7 @@ import {useLoggedNavigate} from "@/common/_feat/navigation/useLoggedNavigate.ts"
 import {Movie} from "@/domains/movies/_schema/movie/MovieSchema.ts";
 import {MovieSubmitFormActions, MovieSubmitFormView} from "@/views/admin/movies/_feat/submit-movie";
 import {PageHeader} from "@/views/common/_comp";
-import {MovieCreatePageBreadcrumbs} from "@/views/admin/movies";
+import {MovieCreatePageBreadcrumbs} from "@/views/admin/movies/_pages/create-page/breadcrumbs.tsx";
 
 /**
  * Administrative page for registering new movies.

@@ -7,7 +7,7 @@ import {Card, CardContent} from "@/views/common/_comp/ui/card.tsx";
 import {MovieOverviewCreditLinks, MovieOverviewHeadline, MovieOverviewMeta} from "@/views/client/movies/_comp";
 
 import {Image} from "@/views/common/_comp";
-import {MovieDetails} from "@/domains/movies";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MovieCreditDetails} from "@/domains/movie-credits";
 
 /** Props for the MovieOverviewHeader component. */

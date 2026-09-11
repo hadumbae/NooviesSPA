@@ -9,7 +9,7 @@ import {Movie, MovieSchema} from "@/domains/movies/_schema/movie/MovieSchema.ts"
 import {MovieFormData} from "@/domains/movies/_feat/submit-data/schema/MovieFormSchema.ts";
 import {create, update} from "@/domains/movies/_feat/crud";
 import {MovieCRUDMutationKeys} from "@/domains/movies/_feat/crud-hooks/keys/mutationKeys.ts";
-import {MovieCRUDQueryKeys} from "@/domains/movies";
+import {MovieCRUDQueryKeys} from "@/domains/movies/_feat/crud-hooks/keys/queryKeys.ts";
 
 /**
  * Manages the movie submission lifecycle including validation, API calls, and cache invalidation.

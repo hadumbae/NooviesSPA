@@ -9,7 +9,8 @@ import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 import {QueryDataLoader} from "@/views/common/_feat";
 
 import {ShowingIndexPageContent} from "@/views/admin/showings/_pages/index-page/content.tsx";
-import {ShowingDetailsSchema, ShowingQueryOptionSchema, useFetchPaginatedShowings} from "@/domains/showings";
+import {ShowingDetailsSchema, ShowingQueryOptionSchema} from "@/domains/showings/_schema";
+import {useFetchPaginatedShowings} from "@/domains/showings/_feat";
 
 const SHOWINGS_PER_PAGE = 10;
 

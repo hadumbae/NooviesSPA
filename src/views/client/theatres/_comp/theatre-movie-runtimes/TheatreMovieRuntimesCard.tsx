@@ -4,7 +4,8 @@
 
 import {ReactElement} from "react";
 import {Card, CardContent, CardHeader, Separator} from "@/views/common/_comp/ui";
-import {MovieMetaGenreBadges, MoviePosterImage} from "@/views/admin/movies";
+import {MovieMetaGenreBadges} from "@/views/admin/movies/_comp/movie-details/MovieMetaGenreBadges.tsx";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image/MoviePosterImage.tsx";
 import {TheatreMovieRuntimes} from "@/domains/theatres";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters";
 import {TheatreScreenShowtimes} from "@/views/client/theatres/_comp/theatre-movie-runtimes/TheatreScreenShowtimes.tsx";

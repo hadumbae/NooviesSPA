@@ -15,7 +15,8 @@ import {Search} from "lucide-react";
 import {cn} from "@/common/_feat";
 import {LabelContent} from "@/views/common/_comp/label-content/LabelContent.tsx";
 import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image";
-import {formatMovieData, MovieDetails} from "@/domains/movies";
+import {formatMovieData} from "@/domains/movies/_feat/formatters/formatMovieData.ts";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {Link} from "react-router-dom";
 
 /** Props for the MovieIndexDetailsDialog component. */

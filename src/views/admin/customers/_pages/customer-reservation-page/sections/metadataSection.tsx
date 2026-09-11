@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {ReservationStatusBadge} from "@/views/client/reservations";
 import {AdminReservation} from "@/domains/reservations";
-import {MoviePosterImage} from "@/views/admin/movies";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image/MoviePosterImage.tsx";
 import {CustomerReservationSummaryCard} from "@/views/admin/reservations";
 
 /** Props for the CustomerReservationMetadataSection component. */

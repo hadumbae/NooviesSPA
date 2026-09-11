@@ -3,10 +3,11 @@
  */
 
 import {ReactElement} from "react";
-import {ShowingSummary} from "@/domains/showings";
+import {ShowingSummary} from "@/domains/showings/_schema/showing/ShowingSummarySchema.ts";
 import {Card, CardContent, CardHeader} from "@/views/common/_comp/ui";
 import {Clock, MapPin} from "lucide-react";
-import {ShowingSpecialEventBadge, ShowingStatusBadge} from "@/views/admin/showings";
+import {ShowingSpecialEventBadge} from "@/views/admin/showings/_comp/badges/ShowingSpecialEventBadge.tsx";
+import {ShowingStatusBadge} from "@/views/admin/showings/_comp/badges/ShowingStatusBadge.tsx";
 import {Image} from "@/views/common/_comp";
 
 /** Props for the HomepageShowingCard component. */

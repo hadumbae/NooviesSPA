@@ -6,7 +6,7 @@
 import {useMutation, UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import {ObjectId} from "@/common/_schemas";
 import {patchToggleUserFavouriteMovie} from "@/domains/users/_feat/manage-user-favourites/repository";
-import {MovieClientViewDataQueryKeys} from "@/domains/movies";
+import {MovieClientViewDataQueryKeys} from "@/domains/movies/_feat/client-view-data/hooks/queryKeys.ts";
 import {
     ManageUserFavouritesMutationKeys,
     ManageUserFavouritesQueryKeys

@@ -4,12 +4,12 @@
 
 import {SlugString} from "@/common/_schemas";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
+import {getReviewsForMovieInfoView} from "@/domains/movies/_feat/client-view-data/repository/repository.ts";
+import {MovieClientViewDataQueryKeys} from "@/domains/movies/_feat/client-view-data/hooks/queryKeys.ts";
 import {
-    getReviewsForMovieInfoView,
-    MovieClientViewDataQueryKeys,
     MovieInfoReviewsViewData,
     MovieInfoReviewsViewSchema
-} from "@/domains/movies";
+} from "@/domains/movies/_feat/client-view-data/schemas/MovieInfoReviewsViewSchema.ts";
 import HttpResponseError from "@/common/_err/HttpResponseError.ts";
 import {buildQueryFn} from "@/common/_feat/validate-fetch-data";
 import {FetchQueryOptions} from "@/common/_types/fetch-queries/FetchQueryOptions.ts";

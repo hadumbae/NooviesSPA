@@ -8,7 +8,7 @@ import {Separator} from "@/views/common/_comp/ui";
 import {SeparatedLinks} from "@/views/common/_feat";
 import {PageSectionHeader} from "@/views/common/_comp/page";
 import {generateGenreLinkConfigs} from "@/domains/genres";
-import {MovieDetails} from "@/domains/movies";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {LabelContent} from "@/views/common/_comp";
 
 /** Props for the MovieOverviewEditorialInfo component. */

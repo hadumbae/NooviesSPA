@@ -8,8 +8,8 @@ import {Card, CardContent, Separator} from "@/views/common/_comp/ui";
 import {LabelContent} from "@/views/common/_comp";
 import {cn, convertToTitleCase, useIsMobile} from "@/common/_feat";
 import {OrientationValues} from "@/common/_schemas";
-import {formatMovieRuntime} from "@/domains/movies";
-import {buildShowingDateString} from "@/domains/showings";
+import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
+import {buildShowingDateString} from "@/domains/showings/_feat/formatters/buildShowingDateString.ts";
 
 /** Props for the CustomerReservationSummaryCard component. */
 type CardProps = {

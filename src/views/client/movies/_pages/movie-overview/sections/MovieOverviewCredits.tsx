@@ -9,7 +9,7 @@ import {HoverLink, SeparatedLinks} from "@/views/common/_feat";
 import {LabelContent, NoneSpan, PageSectionHeaderLink} from "@/views/common/_comp";
 import {ActorCreditAvatar} from "@/views/admin/movie-credits/_comp/actor-credit-avatar/ActorCreditAvatar.tsx";
 
-import {MovieDetails} from "@/domains/movies";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {generateMovieCreditLinkConfigs, MovieCreditDetails} from "@/domains/movie-credits";
 
 /** Props for the MovieOverviewCredits component. */

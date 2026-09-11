@@ -8,7 +8,7 @@ import {PaginationRangeButtons} from "@/views/common/_comp";
 import {PageHeader} from "@/views/common/_comp";
 import {BrowseMovieIndexCard} from "@/views/client/movies/_comp";
 
-import {MovieDetails} from "@/domains/movies";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 
 /** Props for the BrowseMoviesPageContent component. */
 type ContentProps = {

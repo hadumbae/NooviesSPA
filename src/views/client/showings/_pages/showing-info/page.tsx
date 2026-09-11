@@ -11,7 +11,8 @@ import {SlugRouteParamSchema} from "@/common/_schemas/route/SlugRouteParamSchema
 import {QueryDataLoader} from "@/views/common/_feat";
 
 import {ShowingInfoPageContent} from "@/views/client/showings/_pages/showing-info/content.tsx";
-import {ShowingDetails, ShowingDetailsSchema, useFetchShowingBySlug} from "@/domains/showings";
+import {ShowingDetails, ShowingDetailsSchema} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
+import {useFetchShowingBySlug} from "@/domains/showings/_feat/crud-hooks/fetch/useFetchShowingBySlug.ts";
 
 /**
  * Entry point for the showing details view.

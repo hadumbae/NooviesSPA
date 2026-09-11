@@ -3,7 +3,7 @@
  */
 
 import {createQueryOptionForm} from "@/common/_feat";
-import {MovieIndexQueryOptionsSchema} from "@/domains/movies";
+import {MovieIndexQueryOptionsSchema} from "@/domains/movies/_feat/handle-query-options/movie-index/MovieIndexQueryOptionsSchema.ts";
 
 const {QueryOptionForm, useQueryOptionForm} = createQueryOptionForm({
     name: "movie-index-query-option-form",

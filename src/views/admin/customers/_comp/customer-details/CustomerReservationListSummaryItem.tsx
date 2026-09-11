@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Reservation} from "@/domains/reservations";
 import {cn} from "@/common/_feat";
-import {MoviePosterImage} from "@/views/admin/movies";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image/MoviePosterImage.tsx";
 import {ReservationStatusBadge} from "@/views/client/reservations";
 
 /** Custom class names for the summary item sub-components. */

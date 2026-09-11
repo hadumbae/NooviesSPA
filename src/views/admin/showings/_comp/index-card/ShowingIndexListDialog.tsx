@@ -17,7 +17,8 @@ import {
     Separator,
 } from "@/views/common/_comp/ui";
 
-import {formatShowingDetails, ShowingDetails} from "@/domains/showings";
+import {formatShowingDetails} from "@/domains/showings/_feat/formatters/formatShowingDetails.ts";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {ShowingMovieSummary} from "@/views/admin/movies/_comp/showing-movie-summary";
 import {ShowingStateBadges} from "@/views/admin/showings/_comp/showing-state-badges";
 import {ShowingIndexListCard} from "@/views/admin/showings/_comp/index-card/ShowingIndexListCard.tsx";

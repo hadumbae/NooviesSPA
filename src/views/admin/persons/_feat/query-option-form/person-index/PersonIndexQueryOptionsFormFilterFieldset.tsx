@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
-import {LabelledFormInput} from "@/views/admin/movies";
+import {LabelledFormInput} from "@/views/admin/movies/_comp/form-display/LabelledFormInput.tsx";
 import {HookFormInput} from "@/views/common/_feat";
 import {DisableFields, HideFields} from "@/common/_types";
 import {useFormContext} from "react-hook-form";

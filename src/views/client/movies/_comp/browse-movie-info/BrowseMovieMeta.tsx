@@ -7,7 +7,7 @@ import {cn} from "@/common/_feat";
 import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 
-import {MovieDetails} from "@/domains/movies";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 
 /** Props for the BrowseMovieSummaryMeta component. */
 type SummaryProps = {

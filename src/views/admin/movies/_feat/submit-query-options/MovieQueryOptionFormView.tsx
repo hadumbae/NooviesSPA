@@ -11,7 +11,7 @@ import {
 import {
     MovieIndexQueryOptionFormFilterFieldset
 } from "@/views/admin/movies/_feat/query-options-form/MovieIndexQueryOptionFormFilterFieldset.tsx";
-import {MovieQueryOptionFormValues} from "@/domains/movies";
+import {MovieQueryOptionFormValues} from "@/domains/movies/_feat/submit-queries/MovieQueryOptionFormValues.ts";
 import {useAutoFormSubmit} from "@/common/_feat/submit-data";
 import {InvalidContextError} from "@/common/_err";
 

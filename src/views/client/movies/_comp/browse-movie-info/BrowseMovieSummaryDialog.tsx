@@ -21,7 +21,7 @@ import {MovieCreditDataLazyLoader} from "@/views/admin/movie-credits/_comp/movie
 import {BrowseMovieSummary} from "@/views/client/movies/_comp/browse-movie-info/BrowseMovieSummary";
 import {BrowseMovieSummaryCredits} from "@/views/client/movies/_comp/browse-movie-info/BrowseMovieSummaryCredits";
 
-import {MovieDetails} from "@/domains/movies";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MovieCreditDetailsSchema} from "@/domains/movie-credits";
 
 

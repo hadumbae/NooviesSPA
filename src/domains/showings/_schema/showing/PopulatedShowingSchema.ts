@@ -4,8 +4,8 @@
 
 import {z} from "zod";
 import {MovieWithGenresSchema} from "@/domains/movies/_schema";
-import {TheatreScreenSchema} from "@/domains/theatre-screens/_schema";
-import {TheatreSchema} from "@/domains/theatres/_schema";
+import {TheatreScreenSchema} from "@/domains/theatre-screens/_schema/model/TheatreScreenSchema.ts";
+import {TheatreSchema} from "@/domains/theatres/_schema/theatre/TheatreSchema.ts";
 import {ShowingSchema} from "@/domains/showings/_schema/showing/ShowingSchema.ts";
 
 

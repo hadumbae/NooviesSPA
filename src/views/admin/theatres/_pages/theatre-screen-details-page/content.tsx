@@ -22,7 +22,7 @@ import {
 import {
     TheatreScreenScheduleSection
 } from "@/views/admin/theatres/_pages/theatre-screen-details-page/sections/TheatreScreenScheduleSection.tsx";
-import {ShowingDetails} from "@/domains/showings";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 
 /** Props for the TheatreScreenDetailsPageContent component. */
 type ContentProps = {

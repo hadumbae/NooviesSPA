@@ -6,10 +6,10 @@ import {ReactElement} from "react";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import {PaginationRangeButtons} from "@/views/common/_comp";
 
-import {MovieDetails} from "@/domains/movies";
-import {PopulatedShowing} from "@/domains/showings";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
+import {PopulatedShowing} from "@/domains/showings/_schema/showing/PopulatedShowingSchema.ts";
 import {MovieInfoHeader} from "@/views/client/movies/_comp";
-import {BrowseMovieShowingIndexCard} from "@/views/client/showings";
+import {BrowseMovieShowingIndexCard} from "@/views/client/showings/_comp/info-index-card/BrowseMovieShowingIndexCard.tsx";
 import {MovieInfoShowingsPageFormSection} from "@/views/client/movies/_pages/movie-showings/sections";
 
 /** Props for the MovieInfoShowingsPageContent component. */

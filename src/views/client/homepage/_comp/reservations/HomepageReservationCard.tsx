@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/views/common/_comp/ui";
 import {ReservationSummary} from "@/domains/reservations";
-import {MoviePosterImage} from "@/views/admin/movies";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image/MoviePosterImage.tsx";
 import {Clock, MapPin} from "lucide-react";
 import {TheatreScreenTypeBadge} from "@/views/admin/theatre-screens";
 

@@ -4,8 +4,9 @@
 
 import {ReactElement} from "react";
 import {Card, CardContent} from "@/views/common/_comp/ui";
-import {BrowseMovieShowingSelector, ShowingInfoPremises} from "@/views/client/showings/_comp";
-import {PopulatedShowing, ShowingDetails} from "@/domains/showings";
+import {BrowseMovieShowingSelector} from "@/views/client/showings/_comp/browse-showing-selector/BrowseMovieShowingSelector.tsx";
+import {ShowingInfoPremises} from "@/views/client/showings/_comp/showing-info-details/ShowingInfoPremises.tsx";
+import {PopulatedShowing, ShowingDetails} from "@/domains/showings/_schema/showing";
 
 /** Props for the BrowseMovieShowingIndexCard component. */
 type CardProps = {

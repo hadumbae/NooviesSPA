@@ -6,8 +6,8 @@ import {ReactElement} from "react";
 import {PageFlexWrapper, PageSectionHeader} from "@/views/common/_comp/page";
 import {BrowseMovieOverviewCard} from "@/views/client/movies/_comp";
 import {PageHeader, PaginationRangeButtons} from "@/views/common/_comp";
-import {Genre} from "@/domains/genres";
-import {MovieWithGenres} from "@/domains/movies";
+import {Genre} from "@/domains/genres/_schema/genre/GenreSchema.ts";
+import {MovieWithGenres} from "@/domains/movies/_schema/movie/MovieWithGenresSchema.ts";
 import {GenreInfoBanner} from "@/views/client/genres/_comp";
 
 /** Props for the BrowseGenreInfoPageContent component. */

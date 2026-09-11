@@ -8,7 +8,7 @@ import {buildString} from "@/common/_feat/formatters/buildString.ts";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {BadgeAlert, Circle, Cog, DollarSign,} from "lucide-react";
 import {convertToTitleCase} from "@/common/_feat/formatters/convertToTitleCase.ts";
-import {ShowingDetails} from "@/domains/showings";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {Link} from "react-router-dom";
 import {Image} from "@/views/common/_comp";
 

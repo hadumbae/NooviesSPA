@@ -9,7 +9,7 @@ import {IconButton} from "@/views/common/_comp";
 import {SlugString} from "@/common/_schemas/strings/slug-strings/SlugString.ts";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
-import {MovieTitle} from "@/domains/movies";
+import {MovieTitle} from "@/domains/movies/_schema/fields/MovieTitleSchema.ts";
 import {ShowingDetailsPageBreadcrumbs} from "@/views/admin/showings/_pages/details-page/elements/breadcrumbs.tsx";
 import {ShowingDetailsPageToggles} from "@/views/admin/showings/_pages/details-page/elements/toggles.tsx";
 

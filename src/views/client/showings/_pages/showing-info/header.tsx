@@ -3,7 +3,7 @@
  */
 
 import {ReactElement} from "react";
-import {ShowingDetails} from "@/domains/showings";
+import {ShowingDetails} from "@/domains/showings/_schema/showing/ShowingDetailsSchema.ts";
 import {HeaderDescription, HeaderTitle} from "@/views/common/_comp/page-headers";
 
 /** Props for the ShowingInfoPageHeader component. */

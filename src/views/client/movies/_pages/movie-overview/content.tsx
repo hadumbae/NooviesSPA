@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {PageFlexWrapper} from "@/views/common/_comp/page";
 
-import {MovieDetails} from "@/domains/movies";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {MovieReviewSummaryData} from "@/domains/movie-reviews";
 import {MovieCreditDetails} from "@/domains/movie-credits";
 import {MovieOverviewFavouriteToggle, MovieOverviewHeader} from "@/views/client/movies/_pages/movie-overview/elements";

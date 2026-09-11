@@ -12,7 +12,7 @@ import useParsedPaginationValue from "@/common/_feat/fetch-pagination-search-par
 
 import {MovieInfoReviewsPageContent} from "@/views/client/movies/_pages/movie-reviews/content.tsx";
 import {QueryDataLoader} from "@/views/common/_feat";
-import {useFetchMovieInfoReviewsData} from "@/domains/movies";
+import {useFetchMovieInfoReviewsData} from "@/domains/movies/_feat/client-view-data/hooks/useFetchMovieInfoReviewsData.ts";
 
 /** Number of reviews displayed per page */
 const REVIEWS_PER_PAGE = 20;

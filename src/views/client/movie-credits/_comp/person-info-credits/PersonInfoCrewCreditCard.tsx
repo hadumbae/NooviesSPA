@@ -5,7 +5,7 @@
 import {ReactElement} from "react";
 import {PersonCrewCredit} from "@/domains/movie-credits";
 import {Card, CardContent} from "@/views/common/_comp/ui";
-import {MoviePosterImage} from "@/views/admin/movies";
+import {MoviePosterImage} from "@/views/admin/movies/_comp/poster-image/MoviePosterImage.tsx";
 import {PersonInfoCreditHeader} from "@/views/client/movie-credits";
 import {Link} from "react-router-dom";
 

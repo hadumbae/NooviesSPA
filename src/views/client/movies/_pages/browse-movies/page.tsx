@@ -8,7 +8,8 @@ import {QueryDataLoader} from "@/views/common/_feat";
 import {useParsedPaginationValue} from "@/common/_feat/fetch-pagination-search-params";
 import {generatePaginationSchema} from "@/common/_feat/validation-builders";
 
-import {MovieDetails, MovieDetailsSchema, useFetchPaginatedMovies} from "@/domains/movies";
+import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
+import {useFetchPaginatedMovies} from "@/domains/movies/_feat/crud-hooks/fetch/useFetchPaginatedMovies.ts";
 import {BrowseMoviesPageContent} from "@/views/client/movies/_pages/browse-movies/content.tsx";
 
 /** The number of movie items displayed per page. */

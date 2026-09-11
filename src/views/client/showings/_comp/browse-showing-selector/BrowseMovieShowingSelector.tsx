@@ -4,7 +4,7 @@
 
 import {ReactElement} from "react";
 import {cn} from "@/common/_feat";
-import {PopulatedShowing, ShowingDetails} from "@/domains/showings";
+import {PopulatedShowing, ShowingDetails} from "@/domains/showings/_schema/showing";
 import {ShowingInfoLanguages} from "@/views/client/showings/_comp/showing-info-details";
 import {Link} from "react-router-dom";
 import {buttonVariants} from "@/views/common/_comp/ui";

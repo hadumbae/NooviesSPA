@@ -7,7 +7,9 @@ import {ObjectId} from "@/common/_schemas";
 import {cn} from "@/common/_feat";
 import {QueryDataLoader} from "@/views/common/_feat";
 import {Card, CardContent} from "@/views/common/_comp/ui";
-import {formatMovieData, MovieDetails, MovieDetailsSchema, useFetchMovie} from "@/domains/movies";
+import {formatMovieData} from "@/domains/movies/_feat/formatters/formatMovieData.ts";
+import {MovieDetails, MovieDetailsSchema} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
+import {useFetchMovie} from "@/domains/movies/_feat/crud-hooks/fetch/useFetchMovie.ts";
 import {Image} from "@/views/common/_comp";
 
 /** Props for the MovieQuickOverviewFetchCard component. */

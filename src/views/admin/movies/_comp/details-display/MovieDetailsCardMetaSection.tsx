@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 import {Separator} from "@/views/common/_comp/ui";
 import {formatMovieRuntime} from "@/domains/movies/_feat/formatters/formatMovieRuntime.ts";
 import {ISO3166Alpha2CountryConstant, ISO6391LanguageLabels} from "@/common/_const";
-import {MovieDetails} from "@/domains/movies";
+import {MovieDetails} from "@/domains/movies/_schema/movie/MovieDetailsSchema.ts";
 import {LabelContentList, NoneSpan} from "@/views/common/_comp";
 import {BadgeList} from "@/views/common/_comp/badges";
 import {MovieBannerImageCollapsible} from "@/views/admin/movies/_comp/banner-image";
