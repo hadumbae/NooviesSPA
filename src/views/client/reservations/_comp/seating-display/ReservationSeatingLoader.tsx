@@ -3,12 +3,8 @@
  */
 
 import {ObjectId} from "@/common/_schemas";
-import {
-    SeatMapDetailsLoader
-} from "@/views/admin/seatmaps/_comp/loaders/SeatMapDetailsLoader.tsx";
-import {
-    ReservationSeatingView
-} from "@/views/client/reservations/_comp/seating-display/ReservationSeatingView.tsx";
+import {SeatMapDetailsLoader} from "@/views/admin/seatmaps/_comp/loaders/SeatMapDetailsLoader.tsx";
+import {ReservationSeatingView} from "@/views/client/reservations/_comp/seating-display/ReservationSeatingView.tsx";
 import {ReactElement} from "react";
 
 import {SeatMapDetails} from "@/domains/seatmaps/_schema/model/SeatMapDetailsSchema";
@@ -26,7 +22,7 @@ export function ReservationSeatingLoader(
     {selectedSeating, showingID}: LoaderProps
 ): ReactElement {
     return (
-        <SeatMapDetailsLoader showingID={showingID}>
+        <SeatMapDetailsLoader queries={{showing: showingID}}>
             {(seating: SeatMapDetails[]) => (
                 <ReservationSeatingView
                     selectedSeating={selectedSeating}

@@ -9,18 +9,22 @@ import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {ObjectId} from "@/common/_schemas";
 import {MutationResponseConfig} from "@/common/_feat/submit-data";
 import {useRoleTypeDeleteMutation} from "@/domains/roletypes/_feat/crud-hooks/submit/useRoleTypeDeleteMutation.ts";
+import {handleMutateAsync} from "@/common/_feat";
+
+type DeleteByID = {
+    _id: ObjectId
+};
 
 /** Props for the RoleTypeListSheetDeleteCollapsible component. */
-export type CollapsibleProps = {
+export type CollapsibleProps = MutationResponseConfig<void, DeleteByID> & {
     _id: ObjectId;
-    onSubmitConfig?: MutationResponseConfig<void, { _id: ObjectId }>;
 };
 
 /**
  * A collapsible UI block that triggers a destructive delete mutation for a Role Type.
  */
 export function RoleTypeDeleteCollapsible(
-    {_id, onSubmitConfig = {}}: CollapsibleProps
+    {_id, ...onSubmitConfig}: CollapsibleProps
 ): ReactElement {
     const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
     const {onSubmitSuccess} = onSubmitConfig;
@@ -30,9 +34,12 @@ export function RoleTypeDeleteCollapsible(
         onSubmitSuccess?.();
     };
 
-    const {isPending, mutate} = useRoleTypeDeleteMutation({
+    const {isPending, mutateAsync} = useRoleTypeDeleteMutation();
+
+    const deleteRoleType = handleMutateAsync({
         ...onSubmitConfig,
         onSubmitSuccess: onSuccess,
+        mutateAsync,
     });
 
     return (
@@ -54,7 +61,7 @@ export function RoleTypeDeleteCollapsible(
                     <Button
                         variant="default"
                         className="secondary-text w-full"
-                        onClick={() => mutate({_id})}
+                        onClick={() => deleteRoleType({_id})}
                         disabled={isPending}
                     >
                         Delete

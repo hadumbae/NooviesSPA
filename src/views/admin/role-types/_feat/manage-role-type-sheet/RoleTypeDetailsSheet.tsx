@@ -80,10 +80,8 @@ export function RoleTypeDetailsSheet(
 
                         <RoleTypeDeleteCollapsible
                             _id={_id}
-                            onSubmitConfig={{
-                                onSubmitSuccess: onDeleteSuccess,
-                                successMessage: "Deleted.",
-                            }}
+                            onSubmitSuccess={onDeleteSuccess}
+                            successMessage="Deleted."
                         />
                     </section>
 

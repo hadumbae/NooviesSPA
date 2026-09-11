@@ -4,24 +4,24 @@
 
 import {useRef} from "react";
 import {isEqual} from "lodash";
-import {ShowingsPageQueryFormStarterValues} from "@/domains/movies/_feat/client-view-data";
+import {ShowingsPageQueryFormValues} from "@/domains/movies/_feat/manage-showing-page/ShowingsPageQueryFormValues.ts";
 
 /** Parameters for the useTheatreScheduleQueryFormDefaultValues hook. */
 type FormParams = {
-    presetValues?: Partial<ShowingsPageQueryFormStarterValues>;
+    presetValues?: Partial<ShowingsPageQueryFormValues>;
 };
 
 /** Returns stable default values for Theatre Showing query forms. */
 export function useTheatreScheduleQueryFormDefaultValues(
     {presetValues}: FormParams
-): ShowingsPageQueryFormStarterValues {
-    const defaultValues: ShowingsPageQueryFormStarterValues = {
+): ShowingsPageQueryFormValues {
+    const defaultValues: ShowingsPageQueryFormValues = {
         page: 1,
         near: "",
         ...presetValues,
     };
 
-    const heldValues = useRef<ShowingsPageQueryFormStarterValues>(defaultValues);
+    const heldValues = useRef<ShowingsPageQueryFormValues>(defaultValues);
 
     if (!isEqual(heldValues.current, defaultValues)) {
         heldValues.current = defaultValues;

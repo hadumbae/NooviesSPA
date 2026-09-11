@@ -8,10 +8,12 @@ import {
 } from "@/domains/showings/_feat/submit-theatre-schedule-query/useTheatreScheduleQueryFormDefaultValues.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
-    ShowingsPageQueryFormStarterValues,
     ShowingsPageQueryStrings,
     ShowingsPageQueryStringSchema
 } from "@/domains/movies/_feat/client-view-data";
+import {
+    ShowingsPageQueryFormValues,
+} from "@/domains/movies/_feat/manage-showing-page/ShowingsPageQueryFormValues.ts";
 
 /** Configuration parameters for the theatre schedule query form hook. */
 export type FormParams = {
@@ -21,10 +23,10 @@ export type FormParams = {
 /** Initializes a React Hook Form instance for theatre showings with Zod validation. */
 export function useTheatreScheduleQueryForm(
     {presetValues}: FormParams
-): UseFormReturn<ShowingsPageQueryFormStarterValues, unknown, ShowingsPageQueryStrings> {
+): UseFormReturn<ShowingsPageQueryFormValues, unknown, ShowingsPageQueryStrings> {
     const defaultValues = useTheatreScheduleQueryFormDefaultValues({presetValues});
 
-    return useForm<ShowingsPageQueryFormStarterValues, unknown, ShowingsPageQueryStrings>({
+    return useForm<ShowingsPageQueryFormValues, unknown, ShowingsPageQueryStrings>({
         resolver: zodResolver(ShowingsPageQueryStringSchema),
         defaultValues,
     });

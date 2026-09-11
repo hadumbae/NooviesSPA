@@ -8,9 +8,6 @@ import {cn} from "@/common/_feat";
 import {ChevronDown} from "lucide-react";
 import {useCurrentURLPath} from "@/common/_feat/navigation/useCurrentURLPath.ts";
 import {DropdownMenuLink} from "@/views/common/_feat/navigation/DropdownMenuLink.tsx";
-import {
-    BaseLayoutDesktopClientNavigation
-} from "@/views/common/_layout/client/navigation/desktop-client-navigation/BaseLayoutDesktopClientNavigation.tsx";
 
 /**
  * A dropdown menu providing navigation links to major catalogue sections like movies, genres, and theatres.
@@ -39,30 +36,18 @@ export function BaseLayoutClientBrowseNavigationDropdown(): ReactElement {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent>
-                <DropdownMenuLink
-                    component={BaseLayoutDesktopClientNavigation.name}
-                    to="/browse/persons"
-                >
+                <DropdownMenuLink to="/browse/persons">
                     Browse Persons
                 </DropdownMenuLink>
-                <DropdownMenuLink
-                    component={BaseLayoutDesktopClientNavigation.name}
-                    to="/browse/movies"
-                >
+                <DropdownMenuLink to="/browse/movies">
                     Browse Movies
                 </DropdownMenuLink>
 
-                <DropdownMenuLink
-                    component={BaseLayoutDesktopClientNavigation.name}
-                    to="/browse/genres"
-                >
+                <DropdownMenuLink to="/browse/genres">
                     Browse Genres
                 </DropdownMenuLink>
 
-                <DropdownMenuLink
-                    component={BaseLayoutDesktopClientNavigation.name}
-                    to="/browse/theatres"
-                >
+                <DropdownMenuLink to="/browse/theatres">
                     Browse Theatres
                 </DropdownMenuLink>
             </DropdownMenuContent>

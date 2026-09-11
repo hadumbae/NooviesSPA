@@ -30,10 +30,7 @@ export function ShowingEditBreadcrumbs({showing}: BreadcrumbProps): ReactElement
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <HoverLink
-                            to="/admin/showings"
-                            component={ShowingEditBreadcrumbs.name}
-                        >
+                        <HoverLink to="/admin/showings">
                             All Showings
                         </HoverLink>
                     </BreadcrumbLink>
@@ -43,10 +40,7 @@ export function ShowingEditBreadcrumbs({showing}: BreadcrumbProps): ReactElement
 
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <HoverLink
-                            to={`/admin/showings/get/${slug}`}
-                            component={ShowingEditBreadcrumbs.name}
-                        >
+                        <HoverLink to={`/admin/showings/get/${slug}`}>
                             {movieTitle} • {formattedStarTime}
                         </HoverLink>
                     </BreadcrumbLink>

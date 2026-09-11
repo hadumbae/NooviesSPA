@@ -2,13 +2,14 @@
  * @fileoverview Custom React Hook Form initialization for reservation code lookups.
  */
 
-import {
-    FetchByCodeSearchParams,
-} from "@/domains/reservations/_feat/fetch-reservation-by-code/schemas";
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {
-    SetReservationCodeFormData, SetReservationCodeFormSubmitSchema,
+    FetchByCodeSearchParams,
+} from "@/domains/reservations/_feat/fetch-reservation-by-code/reservation-query-options-form/FetchByCodeSearchParamsSchema.ts";
+import {
+    SetReservationCodeFormData,
+    SetReservationCodeFormSubmitSchema,
     SetReservationCodeFormValues
 } from "@/domains/reservations/_feat/fetch-reservation-by-code/forms/SetReservationCodeFormSubmitSchema.ts";
 

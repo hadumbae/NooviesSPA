@@ -11,6 +11,8 @@ import {PersonClientViewQueryKeys} from "@/domains/persons/_feat/client-view-dat
 import {getFetchBrowsePersonsViewData,} from "@/domains/persons/_feat/client-view-data/repository";
 import {
     BrowsePersonsQueryOptions,
+} from "@/domains/persons/_feat/validate-query-options/person-browse/BrowsePersonsQueryOptionsSchema.ts";
+import {
     BrowsePersonsViewData,
     BrowsePersonsViewDataSchema,
 } from "@/domains/persons/_feat/client-view-data/browse-persons/schema";

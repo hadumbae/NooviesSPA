@@ -18,7 +18,7 @@ export function ShowingIndexHeader(): ReactElement {
                 <HeaderDescription>The showings of movies at theatres.</HeaderDescription>
             </div>
 
-            <HoverLink to="/admin/showings/create" message="Navigate to Showing Create.">
+            <HoverLink to="/admin/showings/create">
                 <Plus/> Create
             </HoverLink>
         </header>

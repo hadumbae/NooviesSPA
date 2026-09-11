@@ -55,8 +55,8 @@ export function MovieCreditDeleteWarningDialog(
             title={dialogTitle}
             description={displayDescription}
             deleteResource={deleteCredit}
-            presetOpen={isOpen}
-            setPresetOpen={setIsOpen}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
         >
             {children}
         </EntityDeleteWarningDialog>

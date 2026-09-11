@@ -22,10 +22,7 @@ export function MovieDetailsBreadcrumb() {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <HoverLink
-                            to="/admin/movies"
-                            component={MovieDetailsBreadcrumb.name}
-                        >
+                        <HoverLink to="/admin/movies">
                             All Movies
                         </HoverLink>
                     </BreadcrumbLink>

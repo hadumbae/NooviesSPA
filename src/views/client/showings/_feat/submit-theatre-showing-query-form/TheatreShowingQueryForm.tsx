@@ -8,7 +8,7 @@ import {Form} from "@/views/common/_comp/ui";
 import {useParsedSearchParams} from "@/common/_feat/fetch-search-params";
 import {BaseFormContextProvider} from "@/common/_feat/generic-form-context";
 import {useTheatreScheduleQueryForm} from "@/domains/showings/_feat/submit-theatre-schedule-query/useTheatreScheduleQueryForm.ts";
-import {ShowingsPageQueryFormStarterValues} from "@/domains/movies";
+import {ShowingsPageQueryFormValues} from "@/domains/movies";
 import {
     ShowingsPageQueryStrings,
     ShowingsPageQueryStringSchema
@@ -18,7 +18,7 @@ import {useGenerateFormID} from "@/common/_feat/generate-form-keys";
 /** Props for the TheatreShowingQueryForm component. */
 type FormParams = {
     children: ReactNode;
-    presetValues?: Partial<ShowingsPageQueryFormStarterValues>;
+    presetValues?: Partial<ShowingsPageQueryFormValues>;
 }
 
 /** Form container that synchronises theatre showing filters with URL search parameters. */
@@ -30,7 +30,7 @@ export function TheatreShowingQueryForm(
     const form = useTheatreScheduleQueryForm({presetValues});
     const {setSearchParams} = useParsedSearchParams({schema: ShowingsPageQueryStringSchema});
 
-    const updateParams = (values: ShowingsPageQueryFormStarterValues) => {
+    const updateParams = (values: ShowingsPageQueryFormValues) => {
         setSearchParams(values as ShowingsPageQueryStrings);
     };
 

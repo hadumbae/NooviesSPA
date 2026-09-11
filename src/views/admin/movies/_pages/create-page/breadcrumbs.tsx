@@ -19,16 +19,13 @@ export function MovieCreatePageBreadcrumbs() {
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>
-                        <HoverLink
-                            to="/admin/movies"
-                            component={MovieCreatePageBreadcrumbs.name}
-                        >
+                        <HoverLink to="/admin/movies">
                             All Movies
                         </HoverLink>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator/>
 
                 <BreadcrumbItem>
                     <BreadcrumbPage>Create Movies</BreadcrumbPage>

@@ -4,9 +4,7 @@
 
 import {Button} from "@/views/common/_comp/ui/button.tsx";
 import {ObjectId} from "@/common/_schemas";
-import {
-    SeatMapDetailsLoader
-} from "@/views/admin/seatmaps/_comp/loaders/SeatMapDetailsLoader.tsx";
+import {SeatMapDetailsLoader} from "@/views/admin/seatmaps/_comp/loaders/SeatMapDetailsLoader.tsx";
 import {ReservationSeatMapInput} from "@/views/client/reservations/_comp/seating-input/ReservationSeatMapInput.tsx";
 import {ReactElement, useEffect} from "react";
 import {useFormContext} from "react-hook-form";
@@ -35,7 +33,7 @@ export function ReservationSeatFieldset(
 
     return (
         <fieldset className="space-y-4">
-            <SeatMapDetailsLoader showingID={showingID} status="AVAILABLE">
+            <SeatMapDetailsLoader queries={{showing: showingID, status: "AVAILABLE"}}>
                 {(seating) => (
                     <ReservationSeatMapInput
                         name="selectedSeating"

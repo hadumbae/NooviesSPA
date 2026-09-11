@@ -8,9 +8,6 @@ import {ChevronDown} from "lucide-react";
 import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, Separator} from "@/views/common/_comp/ui";
 import {useCurrentURLPath} from "@/common/_feat/navigation/useCurrentURLPath.ts";
 import {DropdownMenuLink} from "@/views/common/_feat/navigation/DropdownMenuLink.tsx";
-import {
-    BaseLayoutDesktopClientNavigation
-} from "@/views/common/_layout/client/navigation/desktop-client-navigation/BaseLayoutDesktopClientNavigation.tsx";
 
 /**
  * A dropdown menu providing navigation links to the user's profile, favorites, reviews, and reservations.
@@ -39,33 +36,21 @@ export function BaseLayoutClientProfileNavigationDropdown(): ReactElement {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent>
-                <DropdownMenuLink
-                    component={BaseLayoutDesktopClientNavigation.name}
-                    to="/account/profile"
-                >
+                <DropdownMenuLink to="/account/profile">
                     My Profile
                 </DropdownMenuLink>
 
                 <Separator/>
 
-                <DropdownMenuLink
-                    component={BaseLayoutDesktopClientNavigation.name}
-                    to="/account/favourites"
-                >
+                <DropdownMenuLink to="/account/favourites">
                     My Favourites
                 </DropdownMenuLink>
 
-                <DropdownMenuLink
-                    component={BaseLayoutDesktopClientNavigation.name}
-                    to="/account/reviews"
-                >
+                <DropdownMenuLink to="/account/reviews">
                     My Reviews
                 </DropdownMenuLink>
 
-                <DropdownMenuLink
-                    component={BaseLayoutDesktopClientNavigation.name}
-                    to="/account/reservations"
-                >
+                <DropdownMenuLink to="/account/reservations">
                     My Reservations
                 </DropdownMenuLink>
             </DropdownMenuContent>
