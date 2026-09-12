@@ -1,0 +1,16 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:8080}
+        VITE_DEV_MODE: ${VITE_DEV_MODE:-false}
+        VITE_DEV_LOG_TO_CONSOLE: ${VITE_DEV_LOG_TO_CONSOLE:-false}
+        VITE_DEV_CLIENT_NAME: ${VITE_DEV_CLIENT_NAME:-web}
+        VITE_IPIFY_KEY: ${VITE_IPIFY_KEY}
+        VITE_PAGINATION_PAGE_DEFAULT: ${VITE_PAGINATION_PAGE_DEFAULT:-1}
+        VITE_PAGINATION_PER_PAGE_DEFAULT: ${VITE_PAGINATION_PER_PAGE_DEFAULT:-10}
+        VITE_LOG_FETCH_RESULT_TO_CONSOLE: ${VITE_LOG_FETCH_RESULT_TO_CONSOLE:-false}
+    ports:
+      - "3000:80"
